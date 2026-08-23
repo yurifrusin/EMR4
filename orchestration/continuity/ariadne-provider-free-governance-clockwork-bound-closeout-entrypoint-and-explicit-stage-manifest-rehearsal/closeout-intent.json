@@ -31,7 +31,9 @@
     "additional_artifacts": [
       "orchestration/agent_inbox/codex/ariadne-clockwork-bound-closeout-entrypoint-explicit-stage-manifest-preplanning-continuation-intent.json",
       "orchestration/agent_inbox/codex/ariadne-clockwork-bound-closeout-entrypoint-explicit-stage-manifest-preplanning-receipt.json",
-      "orchestration/agent_inbox/codex/ariadne-clockwork-bound-closeout-entrypoint-explicit-stage-manifest-rehearsal-pre-verifier-continuation-intent.json"
+      "orchestration/agent_inbox/codex/ariadne-clockwork-bound-closeout-entrypoint-explicit-stage-manifest-rehearsal-pre-verifier-continuation-intent.json",
+      "orchestration/continuity/ariadne-provider-free-governance-clockwork-bound-closeout-entrypoint-and-explicit-stage-manifest-rehearsal/closeout-driver-result.json",
+      "orchestration/continuity/ariadne-provider-free-governance-clockwork-bound-closeout-entrypoint-and-explicit-stage-manifest-rehearsal/explicit-stage-manifest.json"
     ],
     "unresolved_gates": [
       "Live-driver adoption requires a separate exact efficacy review."

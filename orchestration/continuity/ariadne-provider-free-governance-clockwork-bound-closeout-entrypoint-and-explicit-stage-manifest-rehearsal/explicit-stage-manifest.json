@@ -1,0 +1,19 @@
+{
+  "schema_version": "ariadne.governance_explicit_stage_manifest.v1",
+  "status": "passed",
+  "source_head": "5517058d4924cf26939ca045ed7ddb24e2bd6558",
+  "derivation": "admitted_intent_clockwork_contract_intersect_git_inventory",
+  "paths": [
+    "orchestration/continuity/ariadne-provider-free-governance-clockwork-bound-closeout-entrypoint-and-explicit-stage-manifest-rehearsal/closeout-driver-result.json",
+    "orchestration/continuity/ariadne-provider-free-governance-clockwork-bound-closeout-entrypoint-and-explicit-stage-manifest-rehearsal/explicit-stage-manifest.json"
+  ],
+  "path_count": 2,
+  "allowlist_path_count": 37,
+  "tracked_path_count": 0,
+  "allowlisted_untracked_path_count": 1,
+  "excluded_untracked_path_count": 681,
+  "unexpected_tracked_paths": [],
+  "git_add_invocations": 0,
+  "git_index_mutations": 0,
+  "docs_branding_included": false
+}

@@ -1,7 +1,7 @@
 {
   "schema_version": "ariadne.tranche_efficacy_reading.v1",
   "operation_id": "ariadne-provider-free-governance-clockwork-bound-closeout-entrypoint-and-explicit-stage-manifest-rehearsal",
-  "result": "candidate_pending_occupied_rehearsal",
+  "result": "accepted_nonpublishing_rehearsal",
   "operator_choices_targeted": [
     "python_interpreter_selection",
     "git_head_length_and_transcription",
@@ -15,5 +15,14 @@
     "unexpected_tracked_path_rejection": true,
     "git_index_mutation_capability": false
   },
-  "decision": "run_one_clean_head_provider_free_nonpublishing_rehearsal"
+  "observed": {
+    "semantic_commands_passed": 3,
+    "semantic_tests_passed": 125,
+    "postpublication_tests_passed": 167,
+    "publication_surface_changes": 0,
+    "stage_paths_emitted": 2,
+    "unrelated_untracked_paths_excluded": 681,
+    "git_index_mutations": 0
+  },
+  "decision": "admit_one_separately_bounded_live_adoption_efficacy_review"
 }

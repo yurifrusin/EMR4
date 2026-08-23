@@ -1,8 +1,8 @@
 {
   "schema_version": "ariadne.bound_closeout_entrypoint_rehearsal_evidence.v1",
   "operation_id": "ariadne-provider-free-governance-clockwork-bound-closeout-entrypoint-and-explicit-stage-manifest-rehearsal",
-  "candidate_source_head": "cfdd49368b1fda31e9d433f0e24d87c63103b539",
-  "status": "candidate_pending_occupied_rehearsal",
+  "candidate_source_head": "5517058d4924cf26939ca045ed7ddb24e2bd6558",
+  "status": "accepted_pending_semantic_publication",
   "implementation": {
     "repository_interpreter_machine_selected": true,
     "caller_authored_git_object_ids": 0,
@@ -17,6 +17,24 @@
     "focused_test_count": 59,
     "focused_exit_code": 0,
     "diff_check_exit_code": 0
+  },
+  "occupied_rehearsal": {
+    "caller_python": "C:/Users/sarashera/AppData/Local/Microsoft/WindowsApps/python.exe",
+    "selected_interpreter": "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+    "interpreter_attestation": "exact_match",
+    "source_head": "5517058d4924cf26939ca045ed7ddb24e2bd6558",
+    "semantic_commands_executed": 3,
+    "semantic_commands_passed": 3,
+    "semantic_test_count": 125,
+    "postpublication_test_count": 167,
+    "postpublication_exit_code": 0,
+    "publication_surface_changed_file_count": 0,
+    "live_driver_publications": 0,
+    "stage_manifest_path_count": 2,
+    "excluded_untracked_path_count": 681,
+    "unexpected_tracked_path_count": 0,
+    "git_index_mutations": 0,
+    "docs_branding_included": false
   },
   "contained_observations": [
     {

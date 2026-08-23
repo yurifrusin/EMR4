@@ -4,9 +4,9 @@ Date: 2026-08-23
 
 Timestamp: 2026-08-23T21:18:20.9899474+10:00 (Australia/Brisbane)
 
-Result: `candidate_pending_occupied_rehearsal`
+Result: `accepted_pending_semantic_publication`
 
-## Provisional conclusion
+## Conclusion
 
 The driver now makes four formerly manual choices deterministic: it locates and
 attests the repository interpreter, resolves the full Git HEAD, owns the exact
@@ -25,9 +25,20 @@ runs after the tick result. The verification-only rehearsal mode must report
 zero publication and leave every canonical and clockwork metadata byte
 unchanged.
 
-## Evidence still required
+## Occupied result
 
-One clean-HEAD occupied rehearsal must execute both verification phases, prove
-the repository interpreter attestation, show zero canonical and index changes,
-and emit a stage manifest that agrees with Git status. Live use remains closed
-until that evidence is accepted.
+The clean-HEAD rehearsal was deliberately launched from Windows' generic
+Python shim. The driver selected and exactly attested the repository virtual
+environment, then passed all three semantic commands, 125 semantic governance
+tests and all 167 postpublication tests.
+
+No live publication occurred. Twelve unique canonical/metadata paths remained
+byte-identical, the index remained empty and the stage manifest contained only
+its two fixed generated outputs. It rejected no tracked path, excluded 681
+unrelated untracked paths and included no `docs/branding/` path.
+
+## Decision
+
+Accept the nonpublishing rehearsal. A separate narrow live-adoption efficacy
+review may exercise one exact live tick through the driver; automatic staging
+and test reduction remain closed.

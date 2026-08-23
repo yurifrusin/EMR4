@@ -8,22 +8,22 @@ Attention required: `no`
 
 ## Lay summary
 
-The new clock control is built provisionally. It chooses the correct Python,
-reads the full Git identity itself, runs the fixed safety sequence and writes a
-precise list of eligible files. It has no ability to stage those files.
+The new clock control passed its nonpublishing rehearsal. It chose the correct
+Python even though it was launched from Windows' generic Python, read the full
+Git identity itself, ran the fixed safety sequence and wrote a precise list of
+eligible files. It has no ability to stage those files.
 
-The next step is one clean, nonpublishing rehearsal. If it passes, the result
-will show whether we have converted the most error-prone closeout actions into
-readings without sacrificing the safety checks.
+This converted the most error-prone closeout actions into readings without
+sacrificing the safety checks. The next step is one separately bounded live
+adoption efficacy review.
 
 ## Technical summary
 
-The candidate adds a repository-interpreter-bound driver, a verification-only
-tick mode, exact committed-result capture, retained five-file postpublication
-verification and an admitted-intent/Git-intersection stage manifest. Focused
-tests and Ruff pass. The occupied rehearsal remains pending and is constrained
-to zero publication, zero Git-index mutation and zero provider or product
-access.
+The repository-interpreter-bound driver passed all three semantic commands,
+125 semantic tests and 167 postpublication tests at exact source
+`5517058d4924cf26939ca045ed7ddb24e2bd6558`. Twelve unique publication-surface
+paths remained byte-identical. The index stayed empty; the two-path manifest
+excluded 681 unrelated untracked paths and `docs/branding/`.
 
 ## Deliberately closed
 
@@ -39,5 +39,5 @@ rather than exact interpreter and file-name transcription.
 
 ## Planned next tranche
 
-After this rehearsal passes, perform a narrow provider-free live-adoption
-efficacy review of the bound entrypoint. Yuri's attention is not required.
+Perform a narrow provider-free live-adoption efficacy review of the bound
+entrypoint. Yuri's attention is not required.

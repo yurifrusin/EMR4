@@ -4,7 +4,7 @@ Date: 2026-08-23
 
 Timestamp: 2026-08-23T21:18:20.9899474+10:00 (Australia/Brisbane)
 
-Status: `candidate_pending_occupied_rehearsal`
+Status: `accepted_pending_semantic_publication`
 
 ## Lay outcome
 
@@ -25,8 +25,14 @@ itself.
 - the stage manifest rejects unexpected tracked paths and excludes unrelated
   untracked paths.
 
-## Pending gate
+## Accepted evidence
 
-The candidate requires one clean-HEAD occupied rehearsal and complete combined
-verification. No live-driver adoption, provider, worker, product/data,
-runtime, deployment, release, Pages or protected-ref surface opens yet.
+The clean-HEAD rehearsal passed from Windows' generic Python launcher. The
+driver selected the repository interpreter, passed all three semantic commands,
+125 semantic tests and 167 postpublication tests, changed no publication
+surface and left the index empty. Its two-path manifest excluded 681 unrelated
+untracked paths and `docs/branding/`.
+
+One separately bounded live-adoption efficacy review is now the next gate. No
+automatic staging, provider, worker, product/data, production runtime,
+deployment, release, Pages or protected-ref surface opens.
