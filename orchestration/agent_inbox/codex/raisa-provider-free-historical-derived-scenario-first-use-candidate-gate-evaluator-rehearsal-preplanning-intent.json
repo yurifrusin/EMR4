@@ -1,0 +1,22 @@
+{
+  "schema_version": "ariadne.serial_continuation_intent.v1",
+  "preset": "provider_free_serial_observed_empty_workers",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "freeze_the_narrowest_typed_provider_free_in_memory_first_use_candidate_evaluator_plan_then_implement_and_prove_it_on_authored_synthetic_candidates_without_archive_access_or_artifact_materialisation",
+  "assessed_stage": "preplanning_for_historical_derived_scenario_first_use_candidate_gate_evaluator",
+  "active_evidence_paths": [
+    "orchestration/continuity/raisa-local-only-historical-diary-leading-explicit-time-token-bounded-measurement-rehearsal/report.md",
+    "orchestration/continuity/raisa-local-only-historical-diary-leading-explicit-time-token-bounded-measurement-rehearsal/efficacy-reading.json",
+    "orchestration/continuity/raisa-local-only-historical-diary-leading-explicit-time-token-bounded-measurement-rehearsal/next-tranche-contract.json",
+    "orchestration/continuity/raisa-local-only-historical-diary-structural-time-axis-recovery-rehearsal/historical-derived-scenario-first-use-gate.json",
+    "docs/raisa-local-only-historical-diary-leading-explicit-time-token-bounded-measurement-rehearsal-closeout.md",
+    "orchestration/agent_inbox/codex/raisa-local-only-historical-diary-leading-explicit-time-token-bounded-measurement-rehearsal-sol-acceptance.md",
+    "orchestration/continuity/ariadne-active-operation-latch/current.json"
+  ],
+  "lane_decision_overrides": [
+    {
+      "lane_id": "gemini_verifier",
+      "decision_code": "not_applicable_neutral"
+    }
+  ]
+}
