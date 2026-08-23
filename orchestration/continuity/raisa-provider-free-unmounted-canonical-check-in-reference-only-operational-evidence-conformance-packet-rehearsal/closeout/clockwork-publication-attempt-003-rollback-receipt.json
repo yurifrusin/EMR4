@@ -1,0 +1,13 @@
+{
+  "schema_version": "ariadne.clockwork_publication_rollback_receipt.v1",
+  "recorded_at": "2026-08-23T15:46:00+10:00",
+  "status": "rolled_back_byte_exact",
+  "published_generation_id": "gen-b2ce71e410696d9d6491ee74fbe26c52ec9889f3eb9d4149d2c67320e8804be0",
+  "published_source_commit": "ff62978226341fadad13fe4a4b76281db796412e",
+  "postpublication_failure": "efficacy_reading_publication_attempt_count_excluded_the_accepted_attempt",
+  "selected_generation_id": "gen-f3adfd61281b9aecd52ae67baf9ecc3631dfa1d65c089a7e73778d8707a9bd03",
+  "rollback_lease_sequence": 210,
+  "byte_exact": true,
+  "canonical_result": "previous_generation_restored",
+  "correction": "Bind rollback lease 210 as source and freeze the convergent prospective total at four publication attempts and three byte-exact rollbacks before the final fresh attempt."
+}
