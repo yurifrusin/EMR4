@@ -19,9 +19,11 @@ pretending that every source has the same authority.
 The historical Diary archive also has a credible future role. Scores of
 timestamped states per day over several months should expose brief corrections,
 races and workflow rhythms that a once-daily export would miss. The safe aim is
-not to replay a real day with names removed. It is to derive typed, interval-
-censored changes locally, suppress rare trajectories and generate new
-synthetic days from privacy-reviewed aggregates.
+a measured, near-lossless local de-identified projection rather than an
+aggregate-only rule: replace names, strip contact details, identifiers and
+revealing notes, then retain the richest exact dynamics whose linkage risk is
+empirically very low in the restricted setting. Newly generated days remain
+appropriate for provider prompts or wider distribution.
 
 No historical file was opened or transmitted. Near-real-practice synthetic
 calibration remains conditional on a separate local-only privacy feasibility
@@ -62,8 +64,11 @@ private calibration reference.
 
 The separately named later successor is
 `raisa-local-only-historical-diary-snapshot-privacy-feasibility-review`. It
-must begin with authored-synthetic snapshot fixtures. Real archive access is
-not authorised by this closeout.
+must begin with authored-synthetic snapshot fixtures and then measure actual
+field/trajectory uniqueness under a defined adversary. It may admit controlled
+near-lossless local use if the risk is very low. GPT Sol will launch it
+immediately after the traceability envelope when that dependency is satisfied.
+Real archive access is not authorised by this closeout.
 
 No product behavior, ordinary-practice activation, patient or clinical data,
 provider execution, production runtime, deployment, release, Pages or

@@ -37,11 +37,15 @@ Near-real-practice synthetic scenarios derived from that archive are now a
 reasonable future aim, subject to a separate local-only privacy feasibility
 gate. Removing names alone would be unsafe because a high-frequency sequence
 can fingerprint a person, practitioner, community event or exact practice day.
-The proposed safe direction is to derive typed changes locally, suppress rare
-trajectories, estimate bounded aggregate motifs and generate new days. No raw
-historical file was opened, listed, parsed, hashed or transmitted in this
-orientation, and no promise of perfectly irreversible de-identification is
-made.
+Yuri has rejected an aggregate-only presumption. The revised safe direction is
+to test a near-lossless local de-identified projection first: random stand-ins
+for names, removal of contact details, identifiers and revealing notes, and
+preservation of the richest timing and lifecycle dynamics whose measured
+linkage risk is very low in the restricted local setting. Aggregate-derived new
+days remain the default for provider prompts or wider distribution, not a
+mandatory replacement for controlled local analysis. No raw historical file
+was opened, listed, parsed, hashed or transmitted in this orientation, and no
+promise of perfectly irreversible de-identification is made.
 
 ## Technical synthesis
 
@@ -84,11 +88,16 @@ It remains provider-free, unmounted and wholly synthetic.
 
 The separate successor
 `raisa-local-only-historical-diary-snapshot-privacy-feasibility-review` begins
-with authored-synthetic snapshot fixtures. Any opening of real snapshots needs
-its own accepted local-only gate, explicit field inventory, disclosure-subject
-model, attack suite, output controls and legal/privacy review. Raw and observed
-data must remain distinct from
-`synthetic_calibrated_from_private_aggregates`.
+with authored-synthetic snapshot fixtures. It must quantify equivalence-class
+and trajectory uniqueness and run defined linkage attacks against the actual
+field shape. If contextual re-identification risk is empirically very low, it
+may admit a near-lossless de-identified projection for restricted provider-free
+local development. Any opening of real snapshots still needs its own accepted
+local-only gate, explicit field inventory, disclosure-subject model, attack
+suite and output controls. Raw, locally de-identified observed and generated
+synthetic data remain distinct evidence classes. Yuri has delegated launch
+timing to GPT Sol; the gate follows immediately after the traceability envelope
+when that dependency is satisfied.
 
 ## Parallelism and effects
 

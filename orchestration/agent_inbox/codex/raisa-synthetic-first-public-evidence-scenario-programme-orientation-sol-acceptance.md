@@ -22,10 +22,13 @@ the two named non-protected matched pairs.
 
 The historical Diary archive remains unopened. Yuri's description makes
 interval-censored adjacent-state reconstruction plausible and supports a
-future near-real-practice synthetic calibration programme, but only through a
-separate local-only privacy feasibility gate. Exact observed days, lightly
-perturbed sequences and persistent pseudonymous trajectories remain forbidden;
-absolute de-identification is not claimed.
+future near-real-practice programme through a separate local-only privacy
+feasibility gate. Yuri has selected evaluation of a near-lossless de-identified
+local projection rather than aggregate-only internal use. The gate must replace
+direct identifiers and revealing notes and empirically measure record and
+trajectory linkage risk; provider prompts and external release remain separate.
+GPT Sol will launch the gate immediately after the traceability envelope when
+that dependency is satisfied. Absolute de-identification is not claimed.
 
 Focused tests and deterministic validation pass. No provider, product,
 historical-data, protected-evidence, deployment, release, Pages or protected-

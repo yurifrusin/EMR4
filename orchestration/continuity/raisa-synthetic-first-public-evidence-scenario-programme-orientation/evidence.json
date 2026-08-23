@@ -99,11 +99,12 @@
     "exact_event_time_proved": false,
     "required_time_representation": "interval_censored_observed_after_observed_by",
     "raw_data_opened": false,
-    "recommended_release_form": "new_synthetic_days_generated_from_privacy_reviewed_aggregate_transition_statistics",
+    "recommended_internal_analysis_candidate": "near_lossless_local_deidentified_projection_if_contextual_reidentification_risk_is_empirically_very_low",
+    "recommended_external_or_provider_release_form": "new_synthetic_days_generated_from_privacy_reviewed_statistics",
     "prohibited_release_forms": [
       "raw_snapshot",
       "direct_identifier_removed_snapshot",
-      "exact_observed_day_replay",
+      "externally_released_exact_observed_day",
       "lightly_perturbed_real_sequence",
       "persistent_pseudonymous_patient_or_staff_trajectory"
     ],
@@ -134,7 +135,11 @@
   "deliberately_separate_successor": {
     "operation_id": "raisa-local-only-historical-diary-snapshot-privacy-feasibility-review",
     "starts_with_authored_synthetic_snapshot_fixtures": true,
-    "real_snapshot_access_requires_separate_accepted_gate": true
+    "real_snapshot_access_requires_separate_accepted_gate": true,
+    "evaluates_near_lossless_local_deidentified_projection": true,
+    "aggregate_only_internal_use_preselected": false,
+    "launch_timing": "immediately_after_traceability_envelope_when_dependency_satisfied",
+    "user_direction": "orchestration/continuity/raisa-synthetic-first-public-evidence-scenario-programme-orientation/user-direction.json"
   },
   "zero_effects": {
     "historical_files_opened": 0,

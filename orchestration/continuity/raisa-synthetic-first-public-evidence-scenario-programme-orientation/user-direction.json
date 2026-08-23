@@ -1,0 +1,48 @@
+{
+  "schema_version": "raisa.historical_diary_deidentified_use_direction.v1",
+  "recorded_at": "2026-08-24T00:25:20.2673987+10:00",
+  "selected_direction": "evaluate_near_lossless_local_deidentified_diary_use",
+  "user_position": "After de-identification and stripping of private fields, use the historical Diary trove in its purest practicable form rather than assuming aggregate-only calibration.",
+  "risk_position": {
+    "appointment_diary_is_not_equated_with_longitudinal_clinical_records": true,
+    "archive_age_years_approximately": 10,
+    "local_restricted_use_materially_reduces_risk": true,
+    "absolute_zero_risk_required": false,
+    "contextual_very_low_risk_required": true,
+    "dataset_specific_measurement_required": true
+  },
+  "candidate_near_lossless_projection": {
+    "preserve": [
+      "within_day_state_sequence",
+      "observation_timestamps_or_lossless_relative_intervals",
+      "appointment_lifecycle_changes",
+      "concurrency_and_short_lived_corrections",
+      "longitudinal_recurrence_when_empirically_safe"
+    ],
+    "replace_or_remove": [
+      "patient_names",
+      "staff_names_when_not_required",
+      "phone_numbers",
+      "addresses",
+      "dates_of_birth",
+      "identifiers",
+      "revealing_free_text_and_booking_notes"
+    ],
+    "stand_ins": "random_nonsemantic_tokens_with_scope_and_persistence_selected_by_the_risk_review"
+  },
+  "measurement": [
+    "field_inventory_and_direct_identifier_scan",
+    "equivalence_class_and_uniqueness_analysis",
+    "defined_adversary_linkage_trials",
+    "record_and_trajectory_reidentification_success_rate",
+    "rare_sequence_and_outlier_review",
+    "multi_release_differencing_test"
+  ],
+  "use_boundary": {
+    "local_provider_free_development_use_may_be_admitted_if_risk_is_very_low": true,
+    "aggregate_only_internal_use_is_not_preselected": true,
+    "provider_prompt_or_external_release_remains_separate": true,
+    "raw_archive_access_authorized_by_current_orientation": false,
+    "separate_accepted_privacy_gate_required": true
+  }
+}

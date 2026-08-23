@@ -25,18 +25,18 @@
       },
       {
         "id": "separate-private-calibration-feasibility",
-        "source": "orchestration/continuity/raisa-synthetic-first-public-evidence-scenario-programme-orientation/report.md",
-        "summary": "Keep the historical archive unopened and require a later local-only privacy feasibility gate before any real snapshot access."
+        "source": "orchestration/continuity/raisa-synthetic-first-public-evidence-scenario-programme-orientation/user-direction.json",
+        "summary": "Keep the archive unopened now, then test a near-lossless local de-identified projection rather than imposing aggregate-only internal use."
       }
     ],
     "claim_scope": [
       "Seven read-only packages and twenty public sources support one traceable envelope around existing semantic and replay contracts.",
-      "Dense snapshots make interval-censored reconstruction plausible but no private data, provider, product or protected surface opened and no irreversible anonymity is claimed."
+      "Dense snapshots make interval-censored reconstruction plausible and near-lossless local de-identified use is eligible after measured risk review; no private data, provider, product or protected surface opened."
     ],
     "additional_receipts": [],
     "additional_artifacts": [],
     "unresolved_gates": [
-      "Historical Diary access, provider-live evaluation, product activation, production, deployment, Pages and protected refs remain separately closed."
+      "Historical Diary access and its near-lossless local de-identification gate, provider-live evaluation, product activation, production, deployment, Pages and protected refs remain separately closed."
     ],
     "journey": {
       "strategic_role": "Give Raisa a traceable synthetic practice laboratory spanning administrative and clinical-diagnostic architecture.",
@@ -47,7 +47,7 @@
       "why_now": "The research streams are complete and the existing semantic and replay engines need a shared provenance layer.",
       "outcome": "The next tranche can implement one strict envelope and two exact legacy bindings.",
       "unlocks": [
-        "Traceable scenario expansion and a future opaque interface for privacy-reviewed aggregate calibration."
+        "Traceable scenario expansion and a future controlled interface for privacy-reviewed near-lossless local calibration."
       ],
       "does_not_solve": [
         "It does not prove real-world efficacy, de-identify the historical archive or open provider/product runtime."

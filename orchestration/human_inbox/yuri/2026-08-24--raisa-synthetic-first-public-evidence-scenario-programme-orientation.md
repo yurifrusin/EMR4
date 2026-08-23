@@ -13,9 +13,12 @@ contribute human tensions without becoming clinical truth.
 
 Your Diary archive is more valuable than a simple historical export. Scores of
 timestamped states per day over months should expose rapid changes and races.
-We should use it later by deriving bounded change patterns locally and
-generating new synthetic days, not by replaying recognisable real days. No
-archive file has been opened yet, and no claim of perfect anonymity is being
+We will test using it as a near-lossless local de-identified projection: random
+stand-ins for names, removal of contact details and revealing notes, and
+retention of the richest timing/state dynamics that pass a realistic linkage-
+risk test. Aggregate-derived synthetic days remain useful for provider or
+wider-release material but are not imposed on restricted local development.
+No archive file has been opened yet, and no claim of perfect anonymity is being
 made.
 
 ## Technical summary
@@ -30,9 +33,10 @@ accesses or provider calls.
 The next tranche is
 `raisa-traceable-synthetic-scenario-envelope-and-legacy-binding-rehearsal`.
 It will create the small traceability and binding layer while remaining
-provider-free, unmounted and wholly synthetic. A later separate local-only
-privacy-feasibility review will begin with invented snapshot fixtures before
-any real archive access can be considered.
+provider-free, unmounted and wholly synthetic. GPT Sol will launch the separate
+local-only privacy-feasibility review immediately afterward when the envelope
+dependency is satisfied; it begins with invented snapshot fixtures before any
+real archive access can be considered.
 
 No product behavior, ordinary check-in activation, provider, patient or
 clinical data, production, deployment, release, Pages or protected ref
