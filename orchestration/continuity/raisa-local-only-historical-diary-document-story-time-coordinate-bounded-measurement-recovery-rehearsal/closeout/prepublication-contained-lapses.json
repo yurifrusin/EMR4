@@ -1,0 +1,29 @@
+{
+  "schema_version": "ariadne.prepublication_contained_lapses.v1",
+  "recorded_at": "2026-08-24T07:17:32.9431546+10:00",
+  "operation_id": "raisa-local-only-historical-diary-document-story-time-coordinate-bounded-measurement-recovery-rehearsal",
+  "incident_ids": [
+    "AER-1146",
+    "AER-1147"
+  ],
+  "incidents": [
+    {
+      "incident_id": "AER-1146",
+      "origin": "agent_behavior",
+      "code": "manual_abbreviation_expansion_used_for_full_git_binding",
+      "contained_before_commit_or_publication": true,
+      "affected_binding_count": 2,
+      "correction": "replace_every_binding_with_machine_resolved_git_rev_parse_output"
+    },
+    {
+      "incident_id": "AER-1147",
+      "origin": "repository",
+      "code": "count_only_progress_sidecar_survived_normal_cleanup",
+      "source_value_leakage": 0,
+      "historical_retry_used": false,
+      "correction": "remove_exact_sidecar_and_add_control_and_progress_paths_to_normal_cleanup"
+    }
+  ],
+  "provider_model_product_or_protected_ref_effects": 0,
+  "published_before_correction": false
+}

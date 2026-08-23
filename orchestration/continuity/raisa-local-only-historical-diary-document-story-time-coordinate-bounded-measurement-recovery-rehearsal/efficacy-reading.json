@@ -1,0 +1,38 @@
+{
+  "schema_version": "raisa.local_historical_diary_story_coordinate_bounded_measurement_recovery_efficacy.v1",
+  "recorded_at": "2026-08-24T07:14:21.5476552+10:00",
+  "reviewed_source": "5df44bd28ae60db773b6fd833d0d8cdecca45611",
+  "decision": "revision_required",
+  "operational_efficacy": {
+    "prior_opaque_900_second_timeout_replaced": true,
+    "completed_snapshots": 80,
+    "total_snapshots": 80,
+    "completed_inside_1800_second_terminal": true,
+    "count_only_progress_useful": true,
+    "exact_word_cleanup": true,
+    "preexisting_word_process_preserved": true
+  },
+  "mapping_efficacy": {
+    "main_story_anchor_hypothesis_supported": false,
+    "explicit_story_time_anchors": 0,
+    "mapped_time_observations": 0,
+    "stable_linkage_records_preserved": 199,
+    "adjacent_changes_preserved": 448,
+    "reusable_candidate_exists": false
+  },
+  "workflow_ergonomics": {
+    "postrun_residual_count_only_progress_detected": true,
+    "private_value_leakage_from_residual": false,
+    "exact_sidecar_removed": true,
+    "future_cleanup_guard_added": true,
+    "historical_retry_used": false,
+    "manually_expanded_git_object_bindings_rejected_before_publication": 2,
+    "machine_resolved_full_git_object_bindings_restored": true
+  },
+  "risk_interpretation": {
+    "nonzero_internal_uniqueness_diagnostics_observed": true,
+    "identity_reconstruction_probability_claimed": false,
+    "first_use_gate_remains_candidate_specific": true
+  },
+  "recommendation": "close_the_main_story_coordinate_hypothesis_and_recover_only_a_strict_leading_explicit_time_token_parser_on_authored_synthetic_table_cell_segments_before_any_new_historical_run"
+}

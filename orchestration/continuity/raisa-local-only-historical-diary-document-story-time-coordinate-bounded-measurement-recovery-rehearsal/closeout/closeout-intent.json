@@ -1,0 +1,153 @@
+{
+  "schema_version": "ariadne.governance_semantic_closeout_intent.v1",
+  "profile": "provider_free_governance_tooling_v1",
+  "artifact_slug": "raisa-local-only-historical-diary-document-story-time-coordinate-bounded-measurement-recovery-rehearsal",
+  "recorded_at": "2026-08-24T07:17:32.9431546+10:00",
+  "closeout": {
+    "operation_id": "raisa-local-only-historical-diary-document-story-time-coordinate-bounded-measurement-recovery-rehearsal",
+    "title": "Raisa local-only historical Diary document-story time-coordinate bounded measurement recovery rehearsal",
+    "builds_on": [
+      "raisa-provider-free-authored-synthetic-historical-diary-word-coordinate-timeout-containment-throughput-recovery"
+    ],
+    "authority_notes": [
+      "Yuri delegated gate timing and uninterrupted development; accept the sole completed local measurement without retry and continue provider-free with the narrow leading-token hypothesis."
+    ],
+    "decisions": [
+      {
+        "id": "accept-completed-main-story-coordinate-revision-result",
+        "source": "orchestration/continuity/raisa-local-only-historical-diary-document-story-time-coordinate-bounded-measurement-recovery-rehearsal/evidence.json",
+        "summary": "Accept exact empirical source 54eb390e0b0007c13cfb28615e4c9041db41696a and reviewed source 5df44bd28ae60db773b6fd833d0d8cdecca45611 as a contained revision-required result."
+      },
+      {
+        "id": "close-main-story-coordinate-hypothesis",
+        "source": "orchestration/continuity/raisa-local-only-historical-diary-document-story-time-coordinate-bounded-measurement-recovery-rehearsal/report.md",
+        "summary": "All 80 documents completed with zero main-story anchors, so the frozen hypothesis closes without retry."
+      },
+      {
+        "id": "continue-provider-free-to-leading-explicit-time-token-recovery",
+        "source": "orchestration/continuity/raisa-local-only-historical-diary-document-story-time-coordinate-bounded-measurement-recovery-rehearsal/next-tranche-contract.json",
+        "summary": "Prove only a strict segment-leading explicit time token on authored-synthetic inputs before any separately planned historical measurement."
+      }
+    ],
+    "claim_scope": [
+      "The sole run completed 80/80 snapshots with zero leakage, 199 stable records, 448 changes and zero main-story time anchors or mappings."
+    ],
+    "additional_receipts": [
+      "orchestration/continuity/raisa-local-only-historical-diary-document-story-time-coordinate-bounded-measurement-recovery-rehearsal/closeout/prepublication-contained-lapses.json",
+      "orchestration/continuity/raisa-local-only-historical-diary-document-story-time-coordinate-bounded-measurement-recovery-rehearsal/closeout/pushover-notification-receipt.json",
+      "orchestration/agent_inbox/codex/raisa-local-only-historical-diary-document-story-time-coordinate-bounded-measurement-recovery-rehearsal-pre-verifier-receipt.json"
+    ],
+    "additional_artifacts": [
+      "orchestration_harness/historical_diary_local_measured_privacy_probe.py",
+      "orchestration/continuity/raisa-local-only-historical-diary-document-story-time-coordinate-bounded-measurement-recovery-rehearsal/next-tranche-contract.json"
+    ],
+    "unresolved_gates": [
+      "Leading explicit segment-token recovery, any new historical measurement, first-use admission and every downstream product/provider/protected surface remain gated."
+    ],
+    "journey": {
+      "strategic_role": "Recover realistic local scheduling motion without releasing or reusing historical source values.",
+      "outcome": "The mechanism completed safely and closed the main-story coordinate hypothesis with a definite zero-anchor result."
+    },
+    "current_position": {
+      "strategic_role": "Test the narrowest remaining explicit-time representation without reopening private data.",
+      "why_now": "Committed whole-document counts show time-like substrings while strict cell-only and main-story complete-token measurements both found zero anchors.",
+      "outcome": "A strict leading segment-token parser can be proved or rejected on authored-synthetic inputs.",
+      "unlocks": [
+        "A separately planned fresh local measurement only if the strict parser passes."
+      ],
+      "does_not_solve": [
+        "No historical-derived first use, product, provider or production authority opens."
+      ],
+      "orientation_statement": "Recover explicit leading syntax; never treat free embedded substrings as the clock."
+    },
+    "next_operation": {
+      "operation_id": "raisa-provider-free-authored-synthetic-historical-diary-leading-explicit-time-token-recovery-rehearsal",
+      "active_tranche": "Raisa provider-free authored-synthetic historical Diary leading explicit time-token recovery rehearsal",
+      "objective": "Implement and prove a strict segment-leading explicit time-token parser without historical data access.",
+      "authority_source": "Yuri's historical Diary direction, delegated gate timing and uninterrupted-development authority within the frozen provider-free successor contract.",
+      "next_stage": "fresh_five_source_rehydration_then_freeze_authored_synthetic_leading_time_token_recovery_plan"
+    }
+  },
+  "verification_profile": "governance_clockwork_core_v1",
+  "baton_slot": "current_deepseek_native_harness_acceptance",
+  "next_operation_protected_boundaries": [
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only",
+    "no_product_patient_appointment_clinical_or_protected_data",
+    "no_historical_data_access",
+    "no_private_layout_coordinate_commit",
+    "first_use_scenario_gate_remains_closed"
+  ],
+  "agent_error_observations": [
+    {
+      "attempt_key": "historical-diary-bounded-measurement-git-binding-draft-001",
+      "observed_on": "2026-08-24",
+      "tranche": "historical-diary-bounded-measurement-recovery",
+      "role": "orchestrator",
+      "resource_id": "git-object-binding",
+      "model": "gpt-sol",
+      "reasoning_level": "extra_high",
+      "transport": "local_repository_clockwork",
+      "stage": "closeout",
+      "category": "evidence_misreport",
+      "process_severity": "low",
+      "expected_invariant": "Every Git-bearing closeout field uses the machine-resolved full 40-character object ID.",
+      "observed_error": "Two draft bindings used manually expanded strings derived from abbreviated planning and empirical IDs.",
+      "detection_method": "A prepublication git rev-parse comparison rejected both strings before staging or publication.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-local-only-historical-diary-document-story-time-coordinate-bounded-measurement-recovery-rehearsal/closeout/prepublication-contained-lapses.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.git_binding_requires_machine_resolved_full_object_id",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Replace every draft binding with exact git rev-parse output.",
+        "prevention_control": "Reject caller-constructed expansions before closeout staging and clockwork admission.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-658.md",
+          "orchestration/continuity/raisa-local-only-historical-diary-document-story-time-coordinate-bounded-measurement-recovery-rehearsal/evidence.json"
+        ]
+      },
+      "baton_summary": "records one contained prepublication full-Git-object binding lapse."
+    },
+    {
+      "attempt_key": "historical-diary-bounded-measurement-progress-cleanup-001",
+      "observed_on": "2026-08-24",
+      "tranche": "historical-diary-bounded-measurement-recovery",
+      "role": "implementer",
+      "resource_id": "count-only-progress-cleanup",
+      "model": "gpt-sol",
+      "reasoning_level": "extra_high",
+      "transport": "local_repository_clockwork",
+      "stage": "closeout",
+      "category": "repository_defect",
+      "process_severity": "low",
+      "expected_invariant": "Normal terminal cleanup removes the count-only progress and process-control sidecars.",
+      "observed_error": "Post-run verification found the count-only progress sidecar after private and Word cleanup completed.",
+      "detection_method": "Exact generic-filename absence checks failed closed after the sole content terminal.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-local-only-historical-diary-document-story-time-coordinate-bounded-measurement-recovery-rehearsal/closeout/prepublication-contained-lapses.json"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.local_measurement_cleanup_must_remove_control_and_progress_sidecars",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Remove the exact residual sidecar and include control and progress paths in normal cleanup.",
+        "prevention_control": "The cleanup unit test creates and requires removal of all four ephemeral artifact classes.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-658.md",
+          "orchestration/continuity/raisa-local-only-historical-diary-document-story-time-coordinate-bounded-measurement-recovery-rehearsal/evidence.json"
+        ]
+      },
+      "baton_summary": "records one contained count-only progress cleanup repository defect."
+    }
+  ]
+}

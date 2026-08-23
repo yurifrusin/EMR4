@@ -1,0 +1,12 @@
+{
+  "schema_version": "emr4.non_phi_pushover_closeout_receipt.v1",
+  "recorded_at": "2026-08-24T07:17:32.9431546+10:00",
+  "operation_id": "raisa-local-only-historical-diary-document-story-time-coordinate-bounded-measurement-recovery-rehearsal",
+  "status": "delivered",
+  "provider_status": 1,
+  "request_id": "ebb89d44-b181-40d1-bd26-f72a71a294bc",
+  "continuing_to": [
+    "raisa-provider-free-authored-synthetic-historical-diary-leading-explicit-time-token-recovery-rehearsal"
+  ],
+  "contains_phi": false
+}

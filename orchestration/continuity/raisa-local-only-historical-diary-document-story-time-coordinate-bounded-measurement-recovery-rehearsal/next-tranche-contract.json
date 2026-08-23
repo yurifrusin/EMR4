@@ -1,0 +1,50 @@
+{
+  "schema_version": "raisa.authored_synthetic_leading_explicit_time_token_recovery_contract.v1",
+  "status": "frozen_fail_closed_successor_contract",
+  "recorded_at": "2026-08-24T07:14:21.5476552+10:00",
+  "operation_id": "raisa-provider-free-authored-synthetic-historical-diary-leading-explicit-time-token-recovery-rehearsal",
+  "builds_on_reviewed_source": "5df44bd28ae60db773b6fd833d0d8cdecca45611",
+  "objective": "implement_and_prove_a_strict_segment_leading_explicit_time_token_parser_without_historical_data_access",
+  "input_boundary": {
+    "authored_synthetic_segments_only": true,
+    "historical_archive_enumeration_or_content_access": false,
+    "historical_attempt_reuse_or_retry": false,
+    "provider_network_or_model_use": false
+  },
+  "parser": {
+    "accepted_position": "segment_start_after_structural_control_trimming",
+    "accepted_token": "complete_24_hour_or_am_pm_time_token",
+    "required_following_boundary": "closed_whitespace_tab_or_dash_separator",
+    "attached_alphanumeric_or_digit_continuation": "rejected",
+    "nonleading_embedded_token": "rejected",
+    "phone_contact_or_date_like_shape": "rejected",
+    "row_column_ordinal_opening_hour_filename_or_interval_fallback": false
+  },
+  "mapping": {
+    "same_segment_payload_may_receive_leading_explicit_time": true,
+    "forward_fill_to_later_segments": false,
+    "token_removed_before_private_payload_hashing": true,
+    "raw_source_or_token_value_output": false
+  },
+  "acceptance": {
+    "positive_authored_synthetic_cases": "all_pass",
+    "hostile_embedded_phone_contact_date_and_attached_cases": "all_rejected",
+    "existing_190_historical_diary_provider_free_controls": "all_pass",
+    "source_value_leakage": 0,
+    "historical_data_access": 0,
+    "cleanup": "complete"
+  },
+  "first_use_gate": {
+    "status": "closed_pending_candidate_specific_evaluation",
+    "opened_by_this_recovery": false,
+    "reusable_artifact_created": false
+  },
+  "strongest_result": "provider_free_parser_recovery_candidate_for_a_separately_planned_fresh_local_measurement",
+  "authority_ceiling": {
+    "new_historical_content_run": false,
+    "historical_derived_fixture_scenario_replay_corpus_or_memory": false,
+    "product_runtime_database_client_or_configuration": false,
+    "ordinary_practice_activation": false,
+    "production_deployment_release_pages_or_protected_refs": false
+  }
+}

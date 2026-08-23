@@ -1,0 +1,108 @@
+{
+  "schema_version": "raisa.local_historical_diary_story_coordinate_bounded_measurement_recovery_evidence.v1",
+  "result": "raisa_local_only_historical_diary_story_coordinate_bounded_measurement_revision_required",
+  "recorded_at": "2026-08-24T07:14:21.5476552+10:00",
+  "planning_source": "b40e3f4c0f0d88b26a8fbd4567d91abb9ca6b6ab",
+  "empirical_source": "54eb390e0b0007c13cfb28615e4c9041db41696a",
+  "reviewed_source": "5df44bd28ae60db773b6fd833d0d8cdecca45611",
+  "five_source_rehydration": "passed",
+  "execution": {
+    "metadata_bind_attempts": 1,
+    "metadata_bind_result": "passed",
+    "selected_file_count": 80,
+    "selected_total_bytes": 8151040,
+    "archive_content_reads_before_admission": 0,
+    "content_runs": 1,
+    "content_retry_authorized": false,
+    "controller_timeout_seconds": 1800,
+    "terminal_status": "completed",
+    "terminal_decision": "revision_required"
+  },
+  "scope": {
+    "root_count": 1,
+    "dense_day_count": 1,
+    "opened_snapshot_count": 80,
+    "parsed_snapshot_count": 80,
+    "rejected_snapshot_count": 0
+  },
+  "utility": {
+    "source_table_cell_observations": 1120,
+    "source_structural_segment_observations": 12557,
+    "coordinate_attempts": 12557,
+    "explicit_story_time_anchor_observations": 0,
+    "distinct_story_time_minutes": 0,
+    "mapped_time_observations": 0,
+    "mapped_time_ratio_numerator": 0,
+    "mapped_time_ratio_denominator": 12557,
+    "same_page_anchor_unavailable": 12557,
+    "stable_linkage_records": 199,
+    "adjacent_transition_count": 79,
+    "total_changes": 448,
+    "positive_interval_mode_minutes": null,
+    "reason_codes": [
+      "insufficient_time_mapping",
+      "insufficient_story_time_anchors",
+      "insufficient_distinct_time_anchors",
+      "time_interval_mode_unavailable"
+    ]
+  },
+  "privacy": {
+    "source_value_leakage_count": 0,
+    "source_text_emitted": false,
+    "source_filename_path_or_timestamp_emitted": false,
+    "page_coordinate_or_distance_emitted": false,
+    "key_or_mapping_emitted": false,
+    "provider_network_model_calls": 0,
+    "universal_reidentification_probability_claimed": false,
+    "record_uniqueness_successes": 16,
+    "record_uniqueness_trials": 210,
+    "trajectory_uniqueness_successes": 55,
+    "trajectory_uniqueness_trials": 210
+  },
+  "cleanup": {
+    "word_cleanup_completed": true,
+    "preexisting_word_process_preserved": true,
+    "preexisting_word_process_id": 32120,
+    "private_manifest_retained": false,
+    "private_projection_retained": false,
+    "owned_word_process_control_retained": false,
+    "count_only_progress_retained": false,
+    "key_mapping_or_coordinate_retained": false,
+    "postrun_progress_cleanup_repair_required": true,
+    "postrun_progress_cleanup_repair_source": "5df44bd28ae60db773b6fd833d0d8cdecca45611"
+  },
+  "verification": {
+    "historical_diary_test_files": 22,
+    "provider_free_controls": 190,
+    "failures": 0,
+    "ruff": "passed",
+    "compileall": "passed",
+    "powershell_parse": "passed",
+    "source_boundary_scan": "passed",
+    "git_diff_check": "passed"
+  },
+  "contained_incidents": {
+    "register_revision": 658,
+    "incident_ids": [
+      "AER-1146",
+      "AER-1147"
+    ],
+    "published_before_correction": false
+  },
+  "parallelism": {
+    "deepseek": "declined_negative_private_historical_content_and_native_harness_paused",
+    "gemini": "not_applicable_neutral_provider_transmission_forbidden",
+    "native_subagents": "declined_negative_single_private_word_control_and_content_terminal",
+    "gpt_sol": "serial_plan_implementation_bind_content_cleanup_acceptance_git_and_closeout_owner"
+  },
+  "first_use_gate": {
+    "status": "closed_pending_candidate_specific_evaluation",
+    "reusable_historical_derived_artifacts": 0,
+    "opened_by_this_result": false
+  },
+  "authority": {
+    "strongest_meaning": "ignored_local_research_retention_only_no_downstream_authority",
+    "provider_model_product_runtime_database_or_publication_allowed": false,
+    "ordinary_practice_or_protected_ref_movement_allowed": false
+  }
+}
