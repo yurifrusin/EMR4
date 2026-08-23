@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.governance_live_pointer.v1",
   "phase": "clockwork_active",
-  "selected_generation_id": "gen-de2dbbd5af70fb2a2833447b4a5eb9b2d34fc0cc20253d0e88332a6b95d1e0b2",
-  "selected_bundle_sha256": "de2dbbd5af70fb2a2833447b4a5eb9b2d34fc0cc20253d0e88332a6b95d1e0b2",
-  "previous_generation_id": "gen-1de7df2391fd623f26841d7f74930331a59bcf22e8b433890e3166ec1fefcfef",
-  "previous_source_commit": "8f0e436730b3704ee7b3f94cb68df6d57d3e02da",
-  "lease_sequence": 213,
+  "selected_generation_id": "gen-200e022a02b7ea18c03734e2e386344fad8c0805304f2b0ed38899534a6dc792",
+  "selected_bundle_sha256": "200e022a02b7ea18c03734e2e386344fad8c0805304f2b0ed38899534a6dc792",
+  "previous_generation_id": "gen-de2dbbd5af70fb2a2833447b4a5eb9b2d34fc0cc20253d0e88332a6b95d1e0b2",
+  "previous_source_commit": "1aa4cf893ed0d5290be95912ed5018280ff9a9e5",
+  "lease_sequence": 214,
   "writer": "clockwork"
 }

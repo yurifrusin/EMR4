@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> Preserve the clock's safety escapement while replacing repository-known operator memory with prospective typed readings.
+> Compile mechanics; retain human and model judgment only for semantic meaning.
 
 ## North star
 
@@ -632,27 +632,27 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    Strong safety is retained while one high-yield zero-added-bureaucracy interface repair is selected. Lineage parent: `raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal`.
 308. **Turn the clockwork ergonomics review's highest-confidence recommendation into one existing-tick control repair. — Provider-free governance clockwork prospective current-node evidence and transaction-fact derivation repair**
    Complete prospective human-evidence errors and command-local transaction facts are machine readings rather than postpublication operator reconstruction. Lineage parent: `ariadne-provider-free-read-only-governance-clockwork-ergonomics-and-efficacy-review`.
+309. **Move repository-known clerical work from the orchestrator into the existing clock. — Provider-free governance clockwork typed semantic closeout builder and command registry rehearsal**
+   One compact semantic request expands to the complete legacy governance meaning. Lineage parent: `ariadne-provider-free-governance-clockwork-prospective-current-node-evidence-and-transaction-fact-derivation-repair`.
 
 ## Current position
 
-**Keep fail-closed governance safety while moving repository-known clerical work off the operator. — Provider-free governance clockwork prospective current-node evidence and transaction-fact derivation repair**
+**Retain fail-closed governance while reducing operator choices. — Provider-free governance clockwork typed semantic closeout builder and command registry rehearsal**
 
-**Why this proof came next:** The preceding packet measured three avoidable postpublication rollback shapes and the existing tick can derive all three without a new control layer.
+**Why this proof came next:** The matched first repair passed and a restored-session Git-object lapse exposed the next free-form trap.
 
-One preparation pass returns all human-evidence defects and every command reports its own exact transaction facts.
+Typed selectors, derived headers and exact commands replace repeated form filling.
 
 ### What this unlocks
 
-- A matched live closeout can use prospective validation before pointer movement.
-- Future efficacy readings can consume output-owned command facts instead of manual counters.
-- The next tranche can target remaining high-volume free-form fields after a passing first repair.
+- A matched operator-leaf efficacy review.
+- Future eligible tooling closeouts with fewer caller choices.
 
 ### What it does not solve
 
-- It does not make every future closeout error-free.
-- It does not reconstruct cumulative history absent retained machine outputs.
-- It does not qualify a DeepSeek transport or invoke a provider.
-- It does not open check-in operational choices, product runtime or protected integration.
+- It does not author semantic narrative.
+- It does not qualify a worker transport.
+- It does not open product or protected integration.
 
 ## Continuity and authority
 
@@ -1242,6 +1242,8 @@ Prerequisites:
 - `docs/ariadne-cf-d2-workflow-incident-diagnosis-and-fluidity-repair-closeout.md`
 - `docs/ariadne-cf-d2-workflow-incident-diagnosis-and-fluidity-repair-plan.md`
 - `docs/ariadne-cf-d2-workflow-incident-diagnosis.md`
+- `docs/ariadne-clockwork-typed-semantic-builder-closeout.md`
+- `docs/ariadne-clockwork-typed-semantic-builder-plan.md`
 - `docs/ariadne-compass-increment2-plan.md`
 - `docs/ariadne-continuity-engine-increment1-closeout.md`
 - `docs/ariadne-current-node-closeout-timestamp-guard-repair-closeout.md`
@@ -1262,7 +1264,6 @@ Prerequisites:
 - `docs/ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal-plan.md`
 - `docs/ariadne-provider-free-continuity-journal-and-refinement-promotion-closeout.md`
 - `docs/ariadne-provider-free-continuity-journal-and-refinement-promotion-plan.md`
-- `docs/ariadne-provider-free-governance-clockwork-prospective-current-node-evidence-and-transaction-fact-derivation-repair-closeout.md`
 - `docs/ariadne-provider-free-governance-clockwork-prospective-current-node-evidence-and-transaction-fact-derivation-repair-plan.md`
 - `docs/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture-closeout.md`
 - `docs/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture-plan.md`
@@ -2116,7 +2117,6 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/ariadne-clockwork-governance-projection-consolidation-repair-retry-pre-verifier-receipt.json`
 - `orchestration/agent_inbox/codex/ariadne-clockwork-governance-projection-consolidation-repair-retry-pre-verifier-runtime-state.json`
 - `orchestration/agent_inbox/codex/ariadne-clockwork-governance-projection-consolidation-repair-sol-acceptance.md`
-- `orchestration/agent_inbox/codex/ariadne-clockwork-prospective-evidence-transaction-fact-repair-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/ariadne-clockwork-single-owner-migration-retirement-rehearsal-corrected-pre-verifier-receipt.json`
 - `orchestration/agent_inbox/codex/ariadne-clockwork-single-owner-migration-retirement-rehearsal-corrected-pre-verifier-runtime-state.json`
 - `orchestration/agent_inbox/codex/ariadne-clockwork-single-owner-migration-retirement-rehearsal-gemini37-command-manifest.json`
@@ -2128,6 +2128,7 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/ariadne-clockwork-single-owner-migration-retirement-rehearsal-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/ariadne-clockwork-single-owner-migration-retirement-rehearsal-preplanning-runtime-state.json`
 - `orchestration/agent_inbox/codex/ariadne-clockwork-single-owner-migration-retirement-rehearsal-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/ariadne-clockwork-typed-semantic-builder-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/ariadne-deepseek-in-cell-generated-draft-sol-review.md`
 - `orchestration/agent_inbox/codex/ariadne-effectiveness-and-deepseek-harness-adaptation-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/ariadne-effectiveness-and-deepseek-harness-review-gemini37-fresh-command-manifest.json`
@@ -2774,6 +2775,8 @@ Prerequisites:
 - `orchestration/continuity/ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal/provider-free-migration-evidence.json`
 - `orchestration/continuity/ariadne-provider-free-governance-clockwork-prospective-current-node-evidence-and-transaction-fact-derivation-repair/evidence.json`
 - `orchestration/continuity/ariadne-provider-free-governance-clockwork-prospective-current-node-evidence-and-transaction-fact-derivation-repair/report.md`
+- `orchestration/continuity/ariadne-provider-free-governance-clockwork-typed-semantic-closeout-builder-and-command-registry-rehearsal/evidence.json`
+- `orchestration/continuity/ariadne-provider-free-governance-clockwork-typed-semantic-closeout-builder-and-command-registry-rehearsal/report.md`
 - `orchestration/continuity/ariadne-provider-free-no-database-manifest-runner-admission-repair/provider-free-no-database-admission-evidence.json`
 - `orchestration/continuity/ariadne-provider-free-no-database-manifest-runner-admission-repair/provider-free-no-database-admission-report.md`
 - `orchestration/continuity/ariadne-provider-free-read-only-governance-clockwork-ergonomics-and-efficacy-review/evidence.json`
@@ -3929,4 +3932,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 413; continuity graph revision 431._
+_Compass map revision 414; continuity graph revision 432._
