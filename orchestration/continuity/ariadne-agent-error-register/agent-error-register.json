@@ -1,9 +1,9 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 650,
+  "register_revision": 651,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
-    "source_cutoff_on": "2026-08-23",
+    "source_cutoff_on": "2026-08-24",
     "inclusion_rule": "Include only a specific invariant breach or transport failure supported by a preserved repository receipt or analysis and its recorded correction or containment.",
     "exclusions": [
       "Unpreserved anecdotes or reconstructed intent",
@@ -43654,6 +43654,78 @@
       },
       "incident_id": "AER-1134",
       "attempt_id": "clock-e85e0395e7de41ff132fbf2b",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-24",
+      "tranche": "synthetic-scenario-orientation",
+      "role": "orchestrator",
+      "resource_id": "clockwork-closeout-intent",
+      "model": "gpt-sol",
+      "reasoning_level": "extra_high",
+      "transport": "local_repository_clockwork",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every semantic closeout carries the exact mandatory next-operation protected-boundary floor.",
+      "observed_error": "The first rehearsal split the product and historical-data protections into narrower prose but omitted the exact required floor token, so admission returned tick_next_boundaries_floor.",
+      "detection_method": "The bound clockwork driver rejected the intent before command execution, mutation, publication or pointer movement.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-synthetic-first-public-evidence-scenario-programme-orientation/closeout/clockwork-rehearsal-attempt-001-rejected-receipt.json",
+        "orchestration_harness/governance_clockwork_tick.py"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.clockwork_required_boundary_floor_omission",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Add the exact mandatory product-patient-appointment-clinical-historical-protected-data floor token and retain the narrower controls.",
+        "prevention_control": "Use the bound driver's fail-closed admission as the canonical selector for mandatory boundary vocabulary.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-synthetic-first-public-evidence-scenario-programme-orientation/closeout/closeout-intent.json",
+          "orchestration_harness/governance_clockwork_tick.py"
+        ]
+      },
+      "incident_id": "AER-1135",
+      "attempt_id": "clock-35d93bd69c71c1b5f744da3e",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-24",
+      "tranche": "synthetic-scenario-orientation",
+      "role": "orchestrator",
+      "resource_id": "clockwork-prospective-projection",
+      "model": "gpt-sol",
+      "reasoning_level": "extra_high",
+      "transport": "local_repository_clockwork",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "The convention-derived semantic closeout evidence set exists before prospective projection.",
+      "observed_error": "The corrected rehearsal reached prospective projection but the convention-required pre-verifier receipt did not exist at its exact derived path.",
+      "detection_method": "The verifier returned tick_transaction_prepare with evidence_not_found before publication or pointer movement.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-synthetic-first-public-evidence-scenario-programme-orientation/closeout/clockwork-rehearsal-attempt-002-rejected-receipt.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.semantic_closeout_required_receipt_absent",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Generate the typed no-provider pre-verifier receipt at the exact convention-derived path.",
+        "prevention_control": "Treat the semantic path projection as the required closeout evidence inventory.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-synthetic-first-public-evidence-scenario-programme-orientation-pre-verifier-receipt.json"
+        ]
+      },
+      "incident_id": "AER-1136",
+      "attempt_id": "clock-55a090a7578e867b02f864a1",
       "origin": "agent_behavior",
       "related_incident_ids": [],
       "status": "corrected"

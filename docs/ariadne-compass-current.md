@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> Stop the clock where intent, not more repository mechanics, is required.
+> Bind provenance, authority and oracles before increasing scenario volume or realism.
 
 ## North star
 
@@ -652,22 +652,24 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    One exact dependency ranking identifies the smallest genuine user-attention fork. Lineage parent: `ariadne-provider-free-governance-clockwork-bound-closeout-entrypoint-live-adoption-efficacy-review`.
 318. **Turn the completed repository readiness line into one intelligible human-owned root choice. — Provider-free read-only canonical check-in operational-evidence root-decision brief**
    A concise brief replaces piecemeal future questions without selecting any answer. Lineage parent: `raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-blocker-priority-review`.
+319. **Give Raisa a traceable synthetic practice laboratory spanning administrative and clinical-diagnostic architecture. — Raisa synthetic-first public-evidence scenario programme orientation**
+   Public sources and existing EMR4 contracts now converge on one small reusable envelope boundary. Lineage parent: `raisa-provider-free-read-only-canonical-check-in-operational-evidence-root-decision-brief`.
 
 ## Current position
 
-**Wait at the boundary before a real target and practice scope are selected. — Provider-free read-only canonical check-in operational-evidence root-decision brief**
+**Build source and oracle traceability before scaling scenario generation or calibrating from private observations. — Raisa synthetic-first public-evidence scenario programme orientation**
 
-**Why this proof came next:** No repository prerequisite remains and all useful downstream evidence depends on the target.
+**Why this proof came next:** The research streams are complete and the existing semantic and replay engines need a shared provenance layer.
 
-Yuri can defer or commence for one named non-production environment and practice scope.
+The next tranche can implement one strict envelope and two exact legacy bindings.
 
 ### What this unlocks
 
-- A target-bound custody and rotation governance plan if Yuri selects commence.
+- Traceable scenario expansion and a future controlled interface for privacy-reviewed near-lossless local calibration.
 
 ### What it does not solve
 
-- It does not access an environment, provision evidence or activate ordinary check-in.
+- It does not prove real-world efficacy, de-identify the historical archive or open provider/product runtime.
 
 ## Continuity and authority
 
@@ -1682,7 +1684,6 @@ Prerequisites:
 - `docs/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review-closeout.md`
 - `docs/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review-plan.md`
 - `docs/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review.md`
-- `docs/raisa-provider-free-read-only-canonical-check-in-operational-evidence-root-decision-brief-closeout.md`
 - `docs/raisa-provider-free-read-only-canonical-check-in-operational-evidence-root-decision-brief-plan.md`
 - `docs/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-blocker-priority-review-plan.md`
 - `docs/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-convergence-review-closeout.md`
@@ -1861,6 +1862,8 @@ Prerequisites:
 - `docs/raisa-shared-application-auth-runtime-role-secure-transport-plan.md`
 - `docs/raisa-status-confirm-preflight-idempotency-expectation-repair-closeout.md`
 - `docs/raisa-status-confirm-preflight-idempotency-expectation-repair-plan.md`
+- `docs/raisa-synthetic-first-public-evidence-scenario-programme-orientation-closeout.md`
+- `docs/raisa-synthetic-first-public-evidence-scenario-programme-orientation-plan.md`
 - `docs/raisa-two-component-oidc-runtime-adapter-closeout.md`
 - `docs/raisa-two-component-oidc-runtime-adapter-design.md`
 - `docs/raisa-two-component-oidc-runtime-adapter-plan.md`
@@ -2500,7 +2503,6 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review-gemini37-review-worktree-preflight.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review-pre-verifier-acceptance-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review-sol-acceptance.md`
-- `orchestration/agent_inbox/codex/raisa-provider-free-read-only-canonical-check-in-operational-evidence-root-decision-brief-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review-preplanning-runtime-state.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-read-only-post-cancellation-programme-orientation-gemini37-review-packet.md`
@@ -2645,6 +2647,7 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-status-confirm-runtime-convergence-rehearsal-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-status-confirm-scaffold-parse-catalogue-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-status-transaction-kernel-protocol-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-synthetic-first-public-evidence-scenario-programme-orientation-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-two-projection-truth-parity-conformance-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-two-projection-truth-parity-conformance-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/reception-one-availability-reconciliation-sol-acceptance.md`
@@ -3153,7 +3156,6 @@ Prerequisites:
 - `orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/efficacy-reading.json`
 - `orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/evidence.json`
 - `orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/report.md`
-- `orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-operational-evidence-root-decision-brief/evidence.json`
 - `orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-operational-evidence-root-decision-brief/report.md`
 - `orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-blocker-priority-review/report.md`
 - `orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-convergence-review/evidence.json`
@@ -3305,6 +3307,8 @@ Prerequisites:
 - `orchestration/continuity/raisa-shared-application-auth-postgresql-persistence/live-local-backend-postgres-evidence.json`
 - `orchestration/continuity/raisa-shared-application-auth-runtime-foundation/provider-free-acceptance-evidence.json`
 - `orchestration/continuity/raisa-shared-application-auth-runtime-role-secure-transport/live-local-backend-postgres-transport-evidence.json`
+- `orchestration/continuity/raisa-synthetic-first-public-evidence-scenario-programme-orientation/evidence.json`
+- `orchestration/continuity/raisa-synthetic-first-public-evidence-scenario-programme-orientation/report.md`
 - `orchestration/continuity/raisa-two-component-oidc-runtime-adapter/provider-free-acceptance-evidence.json`
 - `orchestration/continuity/raisa-two-component-oidc-verifier-architecture-revision/dependency-review-evidence.json`
 - `orchestration/continuity/raisa-two-component-oidc-verifier-architecture-revision/provider-free-acceptance-evidence.json`
@@ -3965,4 +3969,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 423; continuity graph revision 441._
+_Compass map revision 424; continuity graph revision 442._

@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 441,
+  "graph_revision": 442,
   "harvests": [],
   "nodes": [
     {
@@ -35677,9 +35677,97 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "raisa-synthetic-first-public-evidence-scenario-programme-orientation",
+      "title": "Raisa synthetic-first public-evidence scenario programme orientation",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-read-only-canonical-check-in-operational-evidence-root-decision-brief",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri requested public research and research-directed workers; GPT Sol retains reconciliation, privacy, architecture, Git and acceptance; native workers completed seven read-only packages while DeepSeek and Gemini were not called and no private data opened."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "freeze-closed-source-authority-hierarchy",
+          "source": "orchestration/continuity/raisa-synthetic-first-public-evidence-scenario-programme-orientation/source-register.json",
+          "status": "accepted",
+          "summary": "Classify every influence before use and forbid vendor, fiction, model output and private observations from becoming authoritative outcome oracles."
+        },
+        {
+          "id": "reuse-two-existing-scenario-contracts",
+          "source": "orchestration/continuity/raisa-synthetic-first-public-evidence-scenario-programme-orientation/evidence.json",
+          "status": "accepted",
+          "summary": "Add one traceability envelope and legacy bindings rather than a third scenario engine."
+        },
+        {
+          "id": "separate-private-calibration-feasibility",
+          "source": "orchestration/continuity/raisa-synthetic-first-public-evidence-scenario-programme-orientation/user-direction.json",
+          "status": "accepted",
+          "summary": "Keep the archive unopened now, then test a near-lossless local de-identified projection rather than imposing aggregate-only internal use."
+        }
+      ],
+      "claim_scope": [
+        "Seven read-only packages and twenty public sources support one traceable envelope around existing semantic and replay contracts.",
+        "Dense snapshots make interval-censored reconstruction plausible and near-lossless local de-identified use is eligible after measured risk review; no private data, provider, product or protected surface opened."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-synthetic-first-public-evidence-scenario-programme-orientation-plan.md",
+          "docs/security/raisa-synthetic-first-public-evidence-scenario-programme-orientation-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-synthetic-first-public-evidence-scenario-programme-orientation/evidence.json",
+          "orchestration/continuity/raisa-synthetic-first-public-evidence-scenario-programme-orientation/report.md",
+          "orchestration/continuity/raisa-synthetic-first-public-evidence-scenario-programme-orientation/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/raisa-synthetic-first-public-evidence-scenario-programme-orientation-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-24--raisa-synthetic-first-public-evidence-scenario-programme-orientation.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-synthetic-first-public-evidence-scenario-programme-orientation-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-synthetic-first-public-evidence-scenario-programme-orientation-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-synthetic-first-public-evidence-scenario-programme-orientation-pre-verifier-receipt.json"
+        ],
+        "tests": [
+          "tests/test_current_baton_consistency.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_transactional_closeout.py"
+        ],
+        "artifacts": [
+          "orchestration_harness/governance_clockwork_tick.py",
+          "scripts/ariadne_governance_clockwork_closeout.py",
+          "scripts/ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_governance_clockwork_tick.py"
+        ]
+      },
+      "unresolved_gates": [
+        "Historical Diary access and its near-lossless local de-identification gate, provider-live evaluation, product activation, production, deployment, Pages and protected refs remain separately closed."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-24T00:02:55.6316545+10:00",
+      "updated_at": "2026-08-24T00:02:55.6316545+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "91a7730474c187a37e931c4b565b2b98ae5f6957",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-23T23:10:45.7060848+10:00"
+  "updated_at": "2026-08-24T00:02:55.6316545+10:00"
 }

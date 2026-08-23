@@ -1,14 +1,14 @@
 {
   "schema_version": "ariadne.agent-error-pattern-report.v1",
-  "register_revision": 650,
-  "source_cutoff_on": "2026-08-23",
+  "register_revision": 651,
+  "source_cutoff_on": "2026-08-24",
   "coverage": "bounded_known_preserved_incidents",
-  "canonical_register_sha256": "6f150cbe7b173e463f153abfdddc0aabc53fa3a81dee18b45065d4eb181a640a",
-  "incident_count": 1134,
+  "canonical_register_sha256": "46aced3e4615da0297cc4220028476ecc811666a2c3f772da4062b83a34602ad",
+  "incident_count": 1136,
   "open_incident_ids": [],
   "counts": {
     "by_origin": {
-      "agent_behavior": 601,
+      "agent_behavior": 603,
       "harness": 73,
       "operator": 291,
       "repository": 153,
@@ -19,7 +19,7 @@
       "evidence_misreport": 78,
       "harness_failure": 73,
       "operator_error": 291,
-      "output_contract_violation": 357,
+      "output_contract_violation": 359,
       "read_only_violation": 5,
       "reasoning_claim_error": 50,
       "repository_defect": 153,
@@ -28,17 +28,17 @@
     "by_role": {
       "implementer": 89,
       "integration_reviewer": 5,
-      "orchestrator": 977,
+      "orchestrator": 979,
       "verifier": 63
     },
     "by_process_severity": {
-      "low": 745,
+      "low": 747,
       "material": 135,
       "moderate": 254
     },
     "by_candidate_state": {
       "accepted_candidate_changed": 234,
-      "canonical_unchanged": 716,
+      "canonical_unchanged": 718,
       "untrusted_partial_worktree": 184
     },
     "by_resource_and_role": {
@@ -151,6 +151,7 @@
       "clockwork-closed-rolling-acceptance-label::orchestrator": 1,
       "clockwork-closed-tick-intent-path::orchestrator": 1,
       "clockwork-closeout-incident-observation::orchestrator": 1,
+      "clockwork-closeout-intent::orchestrator": 1,
       "clockwork-closeout-transaction-recorded-at::orchestrator": 1,
       "clockwork-command-manifest-module-invocation::orchestrator": 1,
       "clockwork-continuity-node-kind::orchestrator": 1,
@@ -176,6 +177,7 @@
       "clockwork-owned-error-register-projection::orchestrator": 1,
       "clockwork-prospective-graph::orchestrator": 1,
       "clockwork-prospective-incident-revision-artifact::orchestrator": 1,
+      "clockwork-prospective-projection::orchestrator": 1,
       "clockwork-prospective-register-revision-reading::orchestrator": 1,
       "clockwork-rollback-cli::orchestrator": 1,
       "clockwork-rollback-pointer-lease::orchestrator": 3,

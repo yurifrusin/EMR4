@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 423,
-  "updated_at": "2026-08-23T23:10:45.7060848+10:00",
-  "source_graph_revision": 441,
-  "orientation_statement": "Stop the clock where intent, not more repository mechanics, is required.",
+  "map_revision": 424,
+  "updated_at": "2026-08-24T00:02:55.6316545+10:00",
+  "source_graph_revision": 442,
+  "orientation_statement": "Bind provenance, authority and oracles before increasing scenario volume or realism.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -5367,24 +5367,34 @@
         "docs/raisa-provider-free-read-only-canonical-check-in-operational-evidence-root-decision-brief-plan.md",
         "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-operational-evidence-root-decision-brief/report.md"
       ]
+    },
+    {
+      "node_id": "raisa-synthetic-first-public-evidence-scenario-programme-orientation",
+      "lineage_parent": "raisa-provider-free-read-only-canonical-check-in-operational-evidence-root-decision-brief",
+      "strategic_role": "Give Raisa a traceable synthetic practice laboratory spanning administrative and clinical-diagnostic architecture.",
+      "outcome": "Public sources and existing EMR4 contracts now converge on one small reusable envelope boundary.",
+      "evidence": [
+        "docs/raisa-synthetic-first-public-evidence-scenario-programme-orientation-plan.md",
+        "orchestration/continuity/raisa-synthetic-first-public-evidence-scenario-programme-orientation/report.md"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "raisa-provider-free-read-only-canonical-check-in-operational-evidence-root-decision-brief",
-    "strategic_role": "Wait at the boundary before a real target and practice scope are selected.",
-    "why_now": "No repository prerequisite remains and all useful downstream evidence depends on the target.",
-    "outcome": "Yuri can defer or commence for one named non-production environment and practice scope.",
+    "node_id": "raisa-synthetic-first-public-evidence-scenario-programme-orientation",
+    "strategic_role": "Build source and oracle traceability before scaling scenario generation or calibrating from private observations.",
+    "why_now": "The research streams are complete and the existing semantic and replay engines need a shared provenance layer.",
+    "outcome": "The next tranche can implement one strict envelope and two exact legacy bindings.",
     "unlocks": [
-      "A target-bound custody and rotation governance plan if Yuri selects commence."
+      "Traceable scenario expansion and a future controlled interface for privacy-reviewed near-lossless local calibration."
     ],
     "does_not_solve": [
-      "It does not access an environment, provision evidence or activate ordinary check-in."
+      "It does not prove real-world efficacy, de-identify the historical archive or open provider/product runtime."
     ],
     "evidence": [
-      "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-operational-evidence-root-decision-brief/evidence.json",
-      "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-operational-evidence-root-decision-brief/report.md",
-      "docs/raisa-provider-free-read-only-canonical-check-in-operational-evidence-root-decision-brief-closeout.md",
-      "orchestration/agent_inbox/codex/raisa-provider-free-read-only-canonical-check-in-operational-evidence-root-decision-brief-sol-acceptance.md"
+      "orchestration/continuity/raisa-synthetic-first-public-evidence-scenario-programme-orientation/evidence.json",
+      "orchestration/continuity/raisa-synthetic-first-public-evidence-scenario-programme-orientation/report.md",
+      "docs/raisa-synthetic-first-public-evidence-scenario-programme-orientation-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-synthetic-first-public-evidence-scenario-programme-orientation-sol-acceptance.md"
     ]
   },
   "decision_horizon": [
