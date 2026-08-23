@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 448,
+  "graph_revision": 449,
   "harvests": [],
   "nodes": [
     {
@@ -36260,9 +36260,108 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "raisa-provider-free-authored-synthetic-historical-diary-word-coordinate-timeout-containment-throughput-recovery",
+      "title": "Raisa provider-free authored-synthetic historical Diary Word-coordinate timeout containment and throughput recovery",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "raisa-local-only-historical-diary-document-story-time-coordinate-recovery-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri delegated first-use gate timing and uninterrupted development; place the gate at promotion to any reusable historical-derived artifact and proceed to one separately bounded measurement."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-authored-synthetic-timeout-containment-and-throughput-recovery",
+          "source": "orchestration/continuity/raisa-provider-free-authored-synthetic-historical-diary-word-coordinate-timeout-containment-throughput-recovery/evidence.json",
+          "status": "accepted",
+          "summary": "Accept exact source 9cbc39cda3503216b27e81aca4f9199db8561b49 after exact timeout cleanup and useful authored-synthetic throughput passed."
+        },
+        {
+          "id": "place-first-use-gate-at-reusable-historical-derived-promotion",
+          "source": "orchestration/continuity/raisa-provider-free-authored-synthetic-historical-diary-word-coordinate-timeout-containment-throughput-recovery/next-tranche-contract.json",
+          "status": "accepted",
+          "summary": "Permit private local measurement while default-denying any reusable scenario, fixture, benchmark, corpus, memory or product input until candidate-specific evaluation."
+        }
+      ],
+      "claim_scope": [
+        "Exact parent cleanup and count-only progress passed; 12 authored-synthetic documents yielded 2,016 coordinate attempts and 288 explicit story anchors within the planned terminal."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-authored-synthetic-historical-diary-word-coordinate-timeout-containment-throughput-recovery-plan.md",
+          "docs/security/raisa-provider-free-authored-synthetic-historical-diary-word-coordinate-timeout-containment-throughput-recovery-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-provider-free-authored-synthetic-historical-diary-word-coordinate-timeout-containment-throughput-recovery/evidence.json",
+          "orchestration/continuity/raisa-provider-free-authored-synthetic-historical-diary-word-coordinate-timeout-containment-throughput-recovery/report.md",
+          "orchestration/continuity/raisa-provider-free-authored-synthetic-historical-diary-word-coordinate-timeout-containment-throughput-recovery/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-authored-synthetic-historical-diary-word-coordinate-timeout-containment-throughput-recovery-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-24--raisa-provider-free-authored-synthetic-historical-diary-word-coordinate-timeout-containment-throughput-recovery.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-authored-synthetic-historical-diary-word-coordinate-timeout-containment-throughput-recovery-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-authored-synthetic-historical-diary-word-coordinate-timeout-containment-throughput-recovery-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-authored-synthetic-historical-diary-word-coordinate-timeout-containment-throughput-recovery-pre-verifier-receipt.json",
+          "orchestration/continuity/raisa-provider-free-authored-synthetic-historical-diary-word-coordinate-timeout-containment-throughput-recovery/closeout/prepublication-clockwork-ergonomics-repair.json",
+          "orchestration/continuity/raisa-provider-free-authored-synthetic-historical-diary-word-coordinate-timeout-containment-throughput-recovery/closeout/pushover-notification-receipt.json"
+        ],
+        "tests": [
+          "tests/test_current_baton_consistency.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_transactional_closeout.py"
+        ],
+        "artifacts": [
+          "orchestration_harness/governance_clockwork_tick.py",
+          "scripts/ariadne_governance_clockwork_closeout.py",
+          "scripts/ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "docs/raisa-provider-free-authored-synthetic-historical-diary-word-coordinate-timeout-containment-throughput-recovery-plan.md",
+          "docs/security/raisa-provider-free-authored-synthetic-historical-diary-word-coordinate-timeout-containment-throughput-recovery-threat-model-delta.md",
+          "orchestration_harness/historical_diary_local_measured_privacy_probe.py",
+          "scripts/historical_diary_local_measured_privacy_probe.ps1",
+          "scripts/historical_diary_owned_word_cleanup.ps1",
+          "scripts/historical_diary_authored_synthetic_word_timeout_fixture.ps1",
+          "scripts/historical_diary_authored_synthetic_word_coordinate_recovery.py",
+          "tests/test_raisa_local_only_bounded_historical_diary_snapshot_measured_privacy_probe.py",
+          "tests/test_raisa_provider_free_authored_synthetic_historical_diary_word_coordinate_timeout_containment_throughput_recovery.py",
+          "orchestration/continuity/raisa-provider-free-authored-synthetic-historical-diary-word-coordinate-timeout-containment-throughput-recovery/evidence.json",
+          "orchestration/continuity/raisa-provider-free-authored-synthetic-historical-diary-word-coordinate-timeout-containment-throughput-recovery/efficacy-reading.json",
+          "orchestration/continuity/raisa-provider-free-authored-synthetic-historical-diary-word-coordinate-timeout-containment-throughput-recovery/report.md",
+          "orchestration/continuity/raisa-provider-free-authored-synthetic-historical-diary-word-coordinate-timeout-containment-throughput-recovery/next-tranche-contract.json",
+          "docs/raisa-provider-free-authored-synthetic-historical-diary-word-coordinate-timeout-containment-throughput-recovery-closeout.md",
+          "orchestration/agent_inbox/codex/raisa-provider-free-authored-synthetic-historical-diary-word-coordinate-timeout-containment-throughput-recovery-sol-acceptance.md",
+          "orchestration/human_inbox/yuri/2026-08-24--raisa-provider-free-authored-synthetic-historical-diary-word-coordinate-timeout-containment-throughput-recovery.md"
+        ]
+      },
+      "unresolved_gates": [
+        "Historical mapping utility, reusable historical-derived first use, downstream use and every product/provider/protected surface remain gated."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-24T06:09:21.0361409+10:00",
+      "updated_at": "2026-08-24T06:09:21.0361409+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "4cdc6e51f588be8192d7073c0acc5a4673365940",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-24T05:28:25.6834754+10:00"
+  "updated_at": "2026-08-24T06:09:21.0361409+10:00"
 }

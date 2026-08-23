@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> Repair the extraction clock without winding the private-data clock again.
+> Measure privately with the promotion gate closed.
 
 ## North star
 
@@ -666,22 +666,24 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    Table-cell paragraph motion passed; the time grid is outside table cells. Lineage parent: `raisa-local-only-bounded-historical-diary-snapshot-measured-privacy-probe`.
 325. **Recover realistic scheduling time while keeping historical-derived use default-deny. — Raisa local-only historical Diary document-story time-coordinate recovery rehearsal**
    The mapper passed synthetic controls but the sole private run exceeded its controller ceiling. Lineage parent: `raisa-local-only-historical-diary-structural-time-axis-recovery-rehearsal`.
+326. **Make local historical scheduling measurement observable and containable before returning to private data. — Raisa provider-free authored-synthetic historical Diary Word-coordinate timeout containment and throughput recovery**
+   Exact timeout cleanup and useful authored-synthetic coordinate throughput passed without historical access. Lineage parent: `raisa-local-only-historical-diary-document-story-time-coordinate-recovery-rehearsal`.
 
 ## Current position
 
-**Make Word coordinate extraction operationally bounded before another private measurement. — Raisa local-only historical Diary document-story time-coordinate recovery rehearsal**
+**Measure whether explicit document-story coordinates recover useful scheduling time from one fixed historical slice. — Raisa provider-free authored-synthetic historical Diary Word-coordinate timeout containment and throughput recovery**
 
-**Why this proof came next:** The fixed timeout prevented any coordinate utility reading and interrupted automatic child cleanup.
+**Why this proof came next:** The recovery provides exact interruption cleanup, count-only progress and evidence for a truthful 1,800-second ceiling.
 
-Provider-free authored-synthetic recovery can type the timeout, own exact cleanup and measure throughput.
+One fresh 80-snapshot measurement may produce an ignored local research reading only.
 
 ### What this unlocks
 
-- A separately planned new local measurement candidate only after recovery acceptance.
+- Candidate-specific first-use evaluation only if a useful privacy-safe measurement exists.
 
 ### What it does not solve
 
-- No historical archive access, reusable derived artifact, provider, product or production authority opens.
+- No reusable historical-derived artifact, provider, product or production authority opens.
 
 ## Continuity and authority
 
@@ -1556,7 +1558,6 @@ Prerequisites:
 - `docs/raisa-dual-host-foundation-plan.md`
 - `docs/raisa-local-only-bounded-historical-diary-snapshot-measured-privacy-probe-plan.md`
 - `docs/raisa-local-only-historical-diary-access-boundary-convergence-plan.md`
-- `docs/raisa-local-only-historical-diary-document-story-time-coordinate-recovery-rehearsal-closeout.md`
 - `docs/raisa-local-only-historical-diary-document-story-time-coordinate-recovery-rehearsal-plan.md`
 - `docs/raisa-local-only-historical-diary-snapshot-privacy-feasibility-review-plan.md`
 - `docs/raisa-local-only-historical-diary-structural-time-axis-recovery-rehearsal-plan.md`
@@ -1592,6 +1593,8 @@ Prerequisites:
 - `docs/raisa-postgresql-oidc-operational-connection-boundary-plan.md`
 - `docs/raisa-practice-context-fabric-direction.md`
 - `docs/raisa-projection-neutral-kernel-truth-architecture.md`
+- `docs/raisa-provider-free-authored-synthetic-historical-diary-word-coordinate-timeout-containment-throughput-recovery-closeout.md`
+- `docs/raisa-provider-free-authored-synthetic-historical-diary-word-coordinate-timeout-containment-throughput-recovery-plan.md`
 - `docs/raisa-provider-free-authored-synthetic-native-harness-structured-diagnostic-bounded-worker-controller-convergence-rehearsal-closeout.md`
 - `docs/raisa-provider-free-cf-d2-observability-first-event-cue-architecture.md`
 - `docs/raisa-provider-free-cf-d2-observability-first-event-cue-closeout.md`
@@ -2452,7 +2455,6 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-legacy-route-convergence-kernel-interface-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-legacy-route-convergence-kernel-interface-preplanning-v2-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-legacy-route-convergence-kernel-interface-sol-acceptance.md`
-- `orchestration/agent_inbox/codex/raisa-local-only-historical-diary-document-story-time-coordinate-recovery-rehearsal-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-gemini37-command-manifest.json`
 - `orchestration/agent_inbox/codex/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-gemini37-repair-review-command-manifest.json`
 - `orchestration/agent_inbox/codex/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-gemini37-repair-review-packet.md`
@@ -2480,6 +2482,7 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-post-combined-editor-compass-baton-orientation-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-post-status-action-compass-baton-orientation-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-post-status-action-compass-baton-orientation-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-provider-free-authored-synthetic-historical-diary-word-coordinate-timeout-containment-throughput-recovery-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review-precommit-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-default-off-live-source-observation-boundary-sol-acceptance.md`
@@ -3044,7 +3047,6 @@ Prerequisites:
 - `orchestration/continuity/raisa-dual-host-foundation/host-profile-matrix-evidence.json`
 - `orchestration/continuity/raisa-local-only-bounded-historical-diary-snapshot-measured-privacy-probe/report.md`
 - `orchestration/continuity/raisa-local-only-historical-diary-access-boundary-convergence/report.md`
-- `orchestration/continuity/raisa-local-only-historical-diary-document-story-time-coordinate-recovery-rehearsal/evidence.json`
 - `orchestration/continuity/raisa-local-only-historical-diary-document-story-time-coordinate-recovery-rehearsal/report.md`
 - `orchestration/continuity/raisa-local-only-historical-diary-snapshot-privacy-feasibility-review/report.md`
 - `orchestration/continuity/raisa-local-only-historical-diary-structural-time-axis-recovery-rehearsal/report.md`
@@ -3061,6 +3063,8 @@ Prerequisites:
 - `orchestration/continuity/raisa-ordinary-diary-cancellation-compatibility-consumer-convergence-review/ordinary-diary-cancellation-compatibility-consumer-convergence-review-evidence.schema.json`
 - `orchestration/continuity/raisa-postgresql-oidc-authorization-attempt-store/live-local-backend-postgres-evidence.json`
 - `orchestration/continuity/raisa-postgresql-oidc-operational-connection-boundary/live-local-backend-postgres-operational-evidence.json`
+- `orchestration/continuity/raisa-provider-free-authored-synthetic-historical-diary-word-coordinate-timeout-containment-throughput-recovery/evidence.json`
+- `orchestration/continuity/raisa-provider-free-authored-synthetic-historical-diary-word-coordinate-timeout-containment-throughput-recovery/report.md`
 - `orchestration/continuity/raisa-provider-free-authored-synthetic-native-harness-structured-diagnostic-bounded-worker-controller-convergence-rehearsal/deterministic-evidence.json`
 - `orchestration/continuity/raisa-provider-free-cf-d2-observability-first-event-cue/observability-contract.json`
 - `orchestration/continuity/raisa-provider-free-cf-d2-observability-first-event-cue/observability-contract.schema.json`
@@ -3993,4 +3997,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 430; continuity graph revision 448._
+_Compass map revision 431; continuity graph revision 449._
