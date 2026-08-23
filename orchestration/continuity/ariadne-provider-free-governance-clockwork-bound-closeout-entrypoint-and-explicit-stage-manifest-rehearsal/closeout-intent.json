@@ -1,0 +1,87 @@
+{
+  "schema_version": "ariadne.governance_semantic_closeout_intent.v1",
+  "profile": "provider_free_governance_tooling_v1",
+  "artifact_slug": "ariadne-clockwork-bound-closeout-entrypoint-explicit-stage-manifest-rehearsal",
+  "recorded_at": "2026-08-23T21:18:20.9899474+10:00",
+  "closeout": {
+    "operation_id": "ariadne-provider-free-governance-clockwork-bound-closeout-entrypoint-and-explicit-stage-manifest-rehearsal",
+    "title": "Provider-free governance clockwork bound closeout entrypoint and explicit-stage manifest rehearsal",
+    "builds_on": [
+      "ariadne-provider-free-governance-clockwork-postpublication-validation-cadence-mapping-review"
+    ],
+    "authority_notes": [
+      "GPT Sol owns one provider-free serial closeout-control rehearsal."
+    ],
+    "decisions": [
+      {
+        "id": "bind-interpreter-head-and-validation-sequence",
+        "source": "docs/ariadne-clockwork-bound-closeout-entrypoint-explicit-stage-manifest-rehearsal-plan.md",
+        "summary": "Machine-resolve the repository interpreter and full HEAD while retaining semantic and postpublication verification."
+      },
+      {
+        "id": "emit-inert-allowlisted-stage-manifest",
+        "source": "docs/security/ariadne-clockwork-bound-closeout-entrypoint-explicit-stage-manifest-rehearsal-threat-model-delta.md",
+        "summary": "Intersect admitted paths with Git inventories and emit JSON without staging or index mutation."
+      }
+    ],
+    "claim_scope": [
+      "One provider-free nonpublishing rehearsal may prove the bound driver and inert stage manifest."
+    ],
+    "additional_receipts": [],
+    "additional_artifacts": [
+      "orchestration/agent_inbox/codex/ariadne-clockwork-bound-closeout-entrypoint-explicit-stage-manifest-preplanning-continuation-intent.json",
+      "orchestration/agent_inbox/codex/ariadne-clockwork-bound-closeout-entrypoint-explicit-stage-manifest-preplanning-receipt.json",
+      "orchestration/agent_inbox/codex/ariadne-clockwork-bound-closeout-entrypoint-explicit-stage-manifest-rehearsal-pre-verifier-continuation-intent.json"
+    ],
+    "unresolved_gates": [
+      "Live-driver adoption requires a separate exact efficacy review."
+    ],
+    "journey": {
+      "strategic_role": "Move closeout mechanics from model memory into deterministic controls.",
+      "outcome": "Interpreter, Git identity, test order and stage-path selection become machine readings."
+    },
+    "current_position": {
+      "strategic_role": "Rehearse the deterministic closeout control without granting it live mutation authority.",
+      "why_now": "Live use exposed interpreter and exact-path transcription lapses while the safety suite remained valuable.",
+      "outcome": "A bounded driver candidate retains all checks and removes four operator choices.",
+      "unlocks": [
+        "Provider-free bound closeout entrypoint live-adoption efficacy review."
+      ],
+      "does_not_solve": [
+        "It does not reduce tests, stage files or qualify a worker Harness."
+      ],
+      "orientation_statement": "Let the model read the clock instead of assembling its gears by hand."
+    },
+    "next_operation": {
+      "operation_id": "ariadne-provider-free-governance-clockwork-bound-closeout-entrypoint-live-adoption-efficacy-review",
+      "active_tranche": "Provider-free governance clockwork bound closeout entrypoint live-adoption efficacy review",
+      "objective": "Use the accepted bound entrypoint for one provider-free live governance closeout and measure first-pass completion, operator choices, validation preservation and stage-manifest accuracy without automatic staging.",
+      "authority_source": "The accepted nonpublishing rehearsal may open one separately bounded live-adoption efficacy review.",
+      "next_stage": "fresh_five_source_rehydration_then_freeze_one_tick_live_adoption_contract"
+    }
+  },
+  "verification_profile": "governance_clockwork_core_v1",
+  "baton_slot": "current_deepseek_native_harness_acceptance",
+  "next_operation_protected_boundaries": [
+    "provider_free_governance_closeout_driver_live_adoption_efficacy_review_only",
+    "one_exact_semantic_governance_tick_only",
+    "bind_repository_virtual_environment_without_secret_or_environment_mutation",
+    "preserve_existing_semantic_commands_and_postpublication_test_selection",
+    "capture_existing_inline_live_validation_without_second_manual_readback",
+    "machine_derive_allowlisted_explicit_stage_manifest_without_git_index_mutation",
+    "no_automatic_git_staging_commit_or_push_by_driver",
+    "no_test_run_removal_skip_deselection_or_weakening",
+    "no_worker_dispatch_native_harness_provider_call_or_transport_qualification",
+    "no_silent_claude_code_or_other_transport_fallback",
+    "no_authority_allocation_or_worker_transport_policy_change",
+    "no_existing_product_source_route_api_client_configuration_or_runtime_change",
+    "no_environment_variable_secret_credential_network_database_or_infrastructure_access",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_product_patient_appointment_clinical_historical_or_protected_data",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only"
+  ]
+}

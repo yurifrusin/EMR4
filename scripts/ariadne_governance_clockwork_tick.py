@@ -583,6 +583,7 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser()
     mode = parser.add_mutually_exclusive_group(required=True)
     mode.add_argument("--check", action="store_true")
+    mode.add_argument("--verify", action="store_true")
     mode.add_argument("--publish", action="store_true")
     mode.add_argument("--rollback", action="store_true")
     mode.add_argument("--prepare-evidence", action="store_true")
@@ -605,6 +606,8 @@ def main(argv: list[str] | None = None) -> int:
             result = materialize_semantic_evidence_headers(ROOT, intent, contract)
             print(json.dumps(result, indent=2, ensure_ascii=False))
             return 0
+        if arguments.verify and not _is_semantic_intent(intent):
+            parser.error("--verify requires a semantic closeout intent")
         transaction = _load(ROOT / contract["clockwork_root"] / "transaction.json")
         operation_id, event_kind, intent_sha256 = _intent_identity(
             ROOT, intent, contract
@@ -639,7 +642,7 @@ def main(argv: list[str] | None = None) -> int:
                     prefix=_output_prefix(intent),
                 )
         else:
-            if semantic and arguments.publish:
+            if semantic and (arguments.publish or arguments.verify):
                 if admitted_semantic is None:
                     raise RuntimeError("semantic_intent_not_admitted")
                 verification_facts = _run_semantic_verification(
@@ -655,7 +658,7 @@ def main(argv: list[str] | None = None) -> int:
                 )
             else:
                 prepared = build_tick_generation(ROOT, contract, intent)
-            if arguments.check:
+            if arguments.check or arguments.verify:
                 result = _command_result(
                     {
                         "schema_version": "ariadne.governance_live_tick_dry_run.v1",

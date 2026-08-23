@@ -1,0 +1,43 @@
+{
+  "schema_version": "ariadne.bound_closeout_entrypoint_rehearsal_evidence.v1",
+  "operation_id": "ariadne-provider-free-governance-clockwork-bound-closeout-entrypoint-and-explicit-stage-manifest-rehearsal",
+  "candidate_source_head": "cfdd49368b1fda31e9d433f0e24d87c63103b539",
+  "status": "candidate_pending_occupied_rehearsal",
+  "implementation": {
+    "repository_interpreter_machine_selected": true,
+    "caller_authored_git_object_ids": 0,
+    "semantic_command_count": 3,
+    "postpublication_test_file_count": 5,
+    "automatic_stage_capability": false,
+    "git_add_code_paths": 0
+  },
+  "preliminary_verification": {
+    "ruff_exit_code": 0,
+    "focused_test_file_count": 1,
+    "focused_test_count": 59,
+    "focused_exit_code": 0,
+    "diff_check_exit_code": 0
+  },
+  "contained_observations": [
+    {
+      "observation": "The provider-free runner rejected one attempted free-form -k selector before test execution.",
+      "effect": "zero tests executed and zero repository mutation",
+      "control": "The driver owns an exact five-file selection and accepts no passthrough pytest selectors."
+    }
+  ],
+  "parallelism": {
+    "deepseek": "declined_native_profile_paused_and_serial_control_boundary",
+    "gemini": "declined_deterministic_local_invariants",
+    "native_subagents": "declined_developer_policy_and_serial_mutation_boundary",
+    "owner": "gpt_sol"
+  },
+  "boundaries": {
+    "provider_calls": 0,
+    "worker_dispatches": 0,
+    "live_driver_publications": 0,
+    "git_index_mutations": 0,
+    "product_or_data_reads": 0,
+    "protected_ref_movements": 0,
+    "docs_branding_preserved": true
+  }
+}

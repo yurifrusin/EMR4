@@ -425,6 +425,7 @@ def _semantic_paths(repo_root: Path, operation_id: str, artifact_slug: str, day:
 def _semantic_command_profile(repo_root: Path, evidence_path: str) -> dict[str, Any]:
     implementation_paths = [
         "orchestration_harness/governance_clockwork_tick.py",
+        "scripts/ariadne_governance_clockwork_closeout.py",
         "scripts/ariadne_governance_clockwork_tick.py",
         "tests/test_ariadne_governance_clockwork_tick.py",
     ]

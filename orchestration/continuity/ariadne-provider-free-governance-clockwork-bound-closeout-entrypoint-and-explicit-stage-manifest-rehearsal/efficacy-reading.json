@@ -1,0 +1,19 @@
+{
+  "schema_version": "ariadne.tranche_efficacy_reading.v1",
+  "operation_id": "ariadne-provider-free-governance-clockwork-bound-closeout-entrypoint-and-explicit-stage-manifest-rehearsal",
+  "result": "candidate_pending_occupied_rehearsal",
+  "operator_choices_targeted": [
+    "python_interpreter_selection",
+    "git_head_length_and_transcription",
+    "postpublication_test_selection",
+    "explicit_stage_path_transcription"
+  ],
+  "retained_safety": {
+    "semantic_command_rows": 3,
+    "postpublication_test_files": 5,
+    "inline_publication_validator_capture": true,
+    "unexpected_tracked_path_rejection": true,
+    "git_index_mutation_capability": false
+  },
+  "decision": "run_one_clean_head_provider_free_nonpublishing_rehearsal"
+}

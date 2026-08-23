@@ -70,6 +70,15 @@ from scripts.ariadne_governance_clockwork_tick import (
     _write_idempotent_readback,
     _write_outputs,
 )
+from scripts.ariadne_governance_clockwork_closeout import (
+    POSTPUBLICATION_TESTS,
+    CloseoutDriverRejection,
+    build_stage_manifest,
+    capture_tick_reading,
+    derive_allowlist,
+    resolve_full_head,
+    resolve_repository_interpreter,
+)
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -1117,6 +1126,221 @@ def test_semantic_verification_executes_exact_commands_and_fails_closed(
         assert drift_failure.value.facts["reason"] == "tracked_worktree_drift"
         assert drift_failure.value.facts["tracked_drift"] == 1
         assert drift_failure.value.facts["executed_command_count"] == 2
+
+
+def _driver_tick_result(*, published: bool) -> dict:
+    command_count = 3
+    return {
+        "status": "passed",
+        "source_commit": "a" * 40,
+        "generation_id": "gen-" + "b" * 64,
+        "lease_sequence": 220 if published else 219,
+        "live_publication_count": int(published),
+        "transaction_facts": {
+            "command_disposition": (
+                "publication_committed" if published else "dry_preparation"
+            ),
+            "published_generations": int(published),
+            "committed_lease_advance": int(published),
+        },
+        "verification_facts": {
+            "disposition": "verification_passed",
+            "command_count": command_count,
+            "executed_command_count": command_count,
+            "passed_command_count": command_count,
+            "tracked_drift": 0,
+        },
+    }
+
+
+def test_bound_closeout_captures_only_exact_tick_dispositions() -> None:
+    rehearsal = capture_tick_reading(
+        _driver_tick_result(published=False),
+        mode="rehearse",
+        semantic_command_count=3,
+    )
+    assert rehearsal["status"] == "not_executed_rehearsal"
+    assert rehearsal["source_commit"] == "a" * 40
+
+    publication = capture_tick_reading(
+        _driver_tick_result(published=True),
+        mode="publish",
+        semantic_command_count=3,
+    )
+    assert publication == {
+        "status": "passed",
+        "captured_from": "tick_publish_return_after_validate_tick_live_state",
+        "source_commit": "a" * 40,
+        "generation_id": "gen-" + "b" * 64,
+        "lease_sequence": 220,
+    }
+
+    idempotent = _driver_tick_result(published=True)
+    idempotent["transaction_facts"]["command_disposition"] = "idempotent_readback"
+    with pytest.raises(
+        CloseoutDriverRejection, match="committed_publication_result_required"
+    ):
+        capture_tick_reading(
+            idempotent,
+            mode="publish",
+            semantic_command_count=3,
+        )
+
+    short_source = _driver_tick_result(published=False)
+    short_source["source_commit"] = "abcdef0"
+    with pytest.raises(CloseoutDriverRejection, match="tick_source_not_full_git_id"):
+        capture_tick_reading(
+            short_source,
+            mode="rehearse",
+            semantic_command_count=3,
+        )
+
+
+def test_bound_closeout_resolves_full_head_and_repository_interpreter() -> None:
+    head = resolve_full_head(ROOT)
+    interpreter, attested = resolve_repository_interpreter(ROOT)
+
+    assert len(head) == 40
+    assert Path(attested).resolve() == interpreter
+    assert interpreter == (ROOT / ".venv/Scripts/python.exe").resolve()
+
+    def abbreviated_runner(
+        arguments: list[str], **_: object
+    ) -> subprocess.CompletedProcess:
+        return subprocess.CompletedProcess(arguments, 0, stdout="abcdef0\n", stderr="")
+
+    with pytest.raises(CloseoutDriverRejection, match="full_head_resolution_failed"):
+        resolve_full_head(ROOT, runner=abbreviated_runner)
+
+
+def test_bound_closeout_allowlist_derives_fixed_outputs_and_excludes_branding(
+    tmp_path: Path,
+) -> None:
+    with _worktree(tmp_path / "closeout-allowlist", source_ref="HEAD") as worktree:
+        contract = validate_contract(
+            _json(worktree / CONTRACT_PATH.relative_to(ROOT))
+        )
+        intent = _semantic_intent(worktree)
+        intent_path = (
+            worktree
+            / "orchestration/continuity/"
+            "ariadne-clockwork-typed-semantic-builder/closeout-intent.json"
+        )
+        intent_path.parent.mkdir(parents=True, exist_ok=True)
+        intent_path.write_text(json.dumps(intent), encoding="utf-8")
+        admitted = expand_semantic_tick_intent(worktree, intent, contract)
+
+        allowlist = derive_allowlist(
+            worktree,
+            intent_path=intent_path,
+            admitted=admitted,
+            contract=contract,
+        )
+
+        assert (
+            "orchestration/continuity/ariadne-clockwork-typed-semantic-builder/"
+            "closeout-driver-result.json"
+        ) in allowlist
+        assert (
+            "orchestration/continuity/ariadne-clockwork-typed-semantic-builder/"
+            "explicit-stage-manifest.json"
+        ) in allowlist
+        assert "AGENTS.md" in allowlist
+        assert not any(path.startswith("docs/branding/") for path in allowlist)
+
+
+def test_explicit_stage_manifest_intersects_git_inventory_without_index_mutation(
+    tmp_path: Path,
+) -> None:
+    repo = tmp_path / "stage-manifest"
+    repo.mkdir()
+    subprocess.run(["git", "init"], cwd=repo, check=True, capture_output=True)
+    subprocess.run(
+        ["git", "config", "user.email", "clockwork@example.invalid"],
+        cwd=repo,
+        check=True,
+    )
+    subprocess.run(
+        ["git", "config", "user.name", "Clockwork Test"], cwd=repo, check=True
+    )
+    (repo / "allowed.txt").write_text("before\n", encoding="utf-8")
+    (repo / "unexpected-tracked.txt").write_text("before\n", encoding="utf-8")
+    subprocess.run(
+        ["git", "add", "--", "allowed.txt", "unexpected-tracked.txt"],
+        cwd=repo,
+        check=True,
+    )
+    subprocess.run(
+        ["git", "commit", "-m", "fixture"], cwd=repo, check=True, capture_output=True
+    )
+    (repo / "allowed.txt").write_text("after\n", encoding="utf-8")
+    (repo / "allowed-untracked.txt").write_text("new\n", encoding="utf-8")
+    (repo / "other-untracked.txt").write_text("preserve\n", encoding="utf-8")
+    branding = repo / "docs/branding"
+    branding.mkdir(parents=True)
+    (branding / "logo.svg").write_text("preserve\n", encoding="utf-8")
+    topic = repo / "orchestration/continuity/topic"
+    topic.mkdir(parents=True)
+    result_path = topic / "closeout-driver-result.json"
+    manifest_path = topic / "explicit-stage-manifest.json"
+    allowlist = {
+        "allowed.txt",
+        "allowed-untracked.txt",
+        "orchestration/continuity/topic/closeout-driver-result.json",
+        "orchestration/continuity/topic/explicit-stage-manifest.json",
+    }
+
+    manifest = build_stage_manifest(
+        repo,
+        head="a" * 40,
+        allowlist=allowlist,
+        result_path=result_path,
+        manifest_path=manifest_path,
+    )
+
+    assert manifest["paths"] == [
+        "allowed-untracked.txt",
+        "allowed.txt",
+        "orchestration/continuity/topic/closeout-driver-result.json",
+        "orchestration/continuity/topic/explicit-stage-manifest.json",
+    ]
+    assert manifest["excluded_untracked_path_count"] == 2
+    assert manifest["git_add_invocations"] == 0
+    assert manifest["git_index_mutations"] == 0
+    assert not subprocess.run(
+        ["git", "diff", "--cached", "--name-only"],
+        cwd=repo,
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout
+
+    (repo / "unexpected-tracked.txt").write_text("after\n", encoding="utf-8")
+    with pytest.raises(
+        CloseoutDriverRejection, match="unexpected_tracked_stage_path"
+    ):
+        build_stage_manifest(
+            repo,
+            head="a" * 40,
+            allowlist=allowlist,
+            result_path=result_path,
+            manifest_path=manifest_path,
+        )
+
+
+def test_bound_closeout_retains_the_exact_postpublication_file_selection() -> None:
+    assert POSTPUBLICATION_TESTS == (
+        "tests/test_current_baton_consistency.py",
+        "tests/test_ariadne_active_operation_latch.py",
+        "tests/test_ariadne_governance_clockwork_tick.py",
+        "tests/test_ariadne_transactional_closeout.py",
+        "tests/test_ariadne_orchestrator_preflight.py",
+    )
+    source = (
+        ROOT / "scripts/ariadne_governance_clockwork_closeout.py"
+    ).read_text(encoding="utf-8")
+    assert "git add" not in source
+    assert "--cached" in source
 
 
 def test_plan_and_intent_freeze_the_unrepeated_successor() -> None:
