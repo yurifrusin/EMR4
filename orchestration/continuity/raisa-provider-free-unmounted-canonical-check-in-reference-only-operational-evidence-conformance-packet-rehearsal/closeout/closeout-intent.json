@@ -1,0 +1,397 @@
+{
+  "schema_version": "ariadne.governance_live_tick_intent.v2",
+  "transaction_manifest": {
+    "schema_version": "ariadne.transactional_closeout_manifest.v1",
+    "operation_id": "raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal",
+    "title": "Canonical check-in reference-only operational-evidence conformance packet closeout",
+    "source_anchor": "current_head",
+    "recorded_at": "2026-08-23T15:18:50.3859558+10:00",
+    "node": {
+      "id": "raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal",
+      "title": "Canonical check-in reference-only operational-evidence conformance packet rehearsal",
+      "kind": "rehearsal",
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority admitted the exact provider-free unmounted reference-only rehearsal.",
+          "GPT Sol held the serial implementation and acceptance lease.",
+          "DeepSeek, Gemini and native subagents were explicitly declined; no provider or Harness transport opened."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-reference-only-packet-conformance",
+          "source": "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal/evidence.json",
+          "status": "accepted",
+          "summary": "Accept the immutable authored-synthetic packet, canonical satisfied-gate path and twelve hostile fail-closed variants."
+        },
+        {
+          "id": "retain-default-off-ordinary-admission",
+          "source": "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal/report.md",
+          "status": "accepted",
+          "summary": "Retain ordinary_activation_closed with zero ordinary-practice release despite a satisfied synthetic evidence gate."
+        },
+        {
+          "id": "retain-eleven-zero-one-readiness",
+          "source": "docs/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal-closeout.md",
+          "status": "accepted",
+          "summary": "Repository prerequisites are complete while six external facts remain absent, five human choices remain unselected and the readiness verdict remains not ready."
+        },
+        {
+          "id": "select-bounded-clockwork-ergonomics-review",
+          "source": "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal/efficacy-reading.json",
+          "status": "accepted",
+          "summary": "Use the four contained reruns and the extended native-Harness gear period as measured input to a provider-free read-only clockwork ergonomics and efficacy review."
+        }
+      ],
+      "claim_scope": [
+        "One authored-synthetic opaque-reference-only packet passed the accepted normalizer, typed-input and evidence-gate chain.",
+        "The unchanged default-off admission kernel denied the canonical packet at ordinary_activation_closed.",
+        "All twelve frozen hostile variants failed closed with zero admission release and zero external fact.",
+        "Readiness remains exactly eleven satisfied, zero blocking and one operational-evidence gap with zero repository prerequisites remaining.",
+        "No product source, API, runtime, provider, deployment, Pages or protected ref changed."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal-plan.md",
+          "docs/security/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal/evidence.json",
+          "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal/report.md",
+          "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-23--canonical-check-in-reference-only-operational-evidence-conformance-packet.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-check-in-reference-only-conformance-packet-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-check-in-reference-only-conformance-packet-postrestart-corrected-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-check-in-reference-only-conformance-packet-pre-verifier-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_provider_free_unmounted_canonical_check_in_reference_only_operational_evidence_conformance_packet_rehearsal.py",
+          "tests/test_check_in_environment_evidence_admission.py",
+          "tests/test_api_spine_artifacts.py"
+        ],
+        "artifacts": [
+          "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal/contract.json",
+          "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal/reference-only-packet.json",
+          "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal/reference-only-packet.schema.json",
+          "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal/evidence.schema.json"
+        ]
+      },
+      "unresolved_gates": [
+        "All six real external operational facts remain absent and cannot be replaced by repository evidence.",
+        "All five target, custody, policy, provisioning and activation choices remain human-owned and unselected.",
+        "Ordinary-practice activation, admission-record activation and command mounting remain closed.",
+        "The pinned native rc.7 Harness profile remains paused after a pre-provider startup failure and Claude Code is not a silent fallback.",
+        "Any clockwork ergonomic change requires a separately frozen implementation tranche after the read-only review.",
+        "Product data, production, deployment, release, Pages and protected refs remain closed."
+      ]
+    },
+    "journey": {
+      "strategic_role": "Complete the last provider-free repository prerequisite for canonical check-in operational-evidence admission",
+      "outcome": "The complete reference-only chain is exact and fail-closed while ordinary-practice activation and every external fact remain closed.",
+      "evidence": [
+        "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal/evidence.json",
+        "docs/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal-closeout.md"
+      ]
+    },
+    "current_position": {
+      "strategic_role": "Measure whether the governance clockwork can retain its safety while asking less clerical work of the orchestrator",
+      "why_now": "The reference-only packet is complete and its four corrected interface reruns join the extended DeepSeek gear history as a bounded evidence set.",
+      "outcome": "A read-only review will distinguish safety controls from avoidable operator inputs and rank only simplifications with measurable removed work.",
+      "unlocks": [
+        "A narrow evidence-backed plan for the highest-yield clockwork ergonomic repair, if one is justified."
+      ],
+      "does_not_solve": [
+        "It does not change the live clockwork, qualify the native Harness, select check-in operational facts or authorize ordinary-practice activation."
+      ],
+      "evidence": [
+        "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal/efficacy-reading.json",
+        "docs/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal-closeout.md"
+      ],
+      "orientation_statement": "Take a measured provider-free read-only ergonomics reading, prefer deleting or deriving operator inputs, and stop before implementing any clockwork or Harness change."
+    },
+    "next_operation": {
+      "operation_id": "ariadne-provider-free-read-only-governance-clockwork-ergonomics-and-efficacy-review",
+      "active_tranche": "Provider-free read-only governance clockwork ergonomics and efficacy review",
+      "objective": "Review the current clockwork and the extended native-Harness gear period, quantify manual inputs, rejected ticks, rollbacks, elapsed friction, bespoke updater use and accepted development yield, then rank only changes that remove at least one manual decision, duplicate field or rerun sequence while preserving fail-closed safety.",
+      "authority_source": "Yuri explicitly requested this bounded review under standing uninterrupted-development authority; implementation, provider and protected surfaces remain closed.",
+      "next_stage": "fresh_five_source_rehydration_then_freeze_the_read_only_measurement_set_and_no_added_bureaucracy_acceptance_rule"
+    },
+    "incidents": [
+      {
+        "incident_id": "reference-packet-module-invocation",
+        "source_id": "reference-packet-local-001",
+        "peers": []
+      },
+      {
+        "incident_id": "reference-packet-manual-git-object",
+        "source_id": "reference-packet-local-002",
+        "peers": []
+      },
+      {
+        "incident_id": "reference-packet-schema-vocabulary",
+        "source_id": "reference-packet-local-003",
+        "peers": []
+      },
+      {
+        "incident_id": "reference-packet-guessed-test-path",
+        "source_id": "reference-packet-local-004",
+        "peers": []
+      }
+    ],
+    "broker": {
+      "enabled": false,
+      "posture": "provider_free_shadow"
+    }
+  },
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v1",
+    "commands": [
+      {
+        "command_id": "reference-packet-closeout-tick-check",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "scripts.ariadne_governance_clockwork_tick",
+          "--check",
+          "--intent",
+          "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal/closeout/closeout-intent.json"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "reference-packet-contract-schema",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "jsonschema",
+          "-i",
+          "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal/contract.json",
+          "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal/contract.schema.json"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "reference-packet-evidence-schema",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "jsonschema",
+          "-i",
+          "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal/evidence.json",
+          "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal/evidence.schema.json"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "reference-packet-focused-tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "--repo-root",
+          "C:/Users/sarashera/emr4",
+          "tests/test_raisa_provider_free_unmounted_canonical_check_in_reference_only_operational_evidence_conformance_packet_rehearsal.py",
+          "tests/test_check_in_environment_evidence_admission.py",
+          "tests/test_api_spine_artifacts.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "reference-packet-governance-tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "--repo-root",
+          "C:/Users/sarashera/emr4",
+          "tests/test_current_baton_consistency.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_transactional_closeout.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      }
+    ]
+  },
+  "baton_acceptance": {
+    "label": "Current DeepSeek native Harness acceptance",
+    "paths": [
+      "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal/efficacy-reading.json",
+      "docs/ariadne-agent-error-correction-register-revision-645.md",
+      "docs/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-check-in-reference-only-conformance-packet-sol-acceptance.md"
+    ]
+  },
+  "agent_error_observations": [
+    {
+      "attempt_key": "reference-packet-module-invocation-001",
+      "observed_on": "2026-08-23",
+      "tranche": "check-in-reference-packet",
+      "role": "orchestrator",
+      "resource_id": "active-operation-latch-cli",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_powershell",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Repository package scripts are invoked through their admitted module entry point.",
+      "observed_error": "The first help probe invoked the latch script by file path and failed import resolution before any state change.",
+      "detection_method": "Python returned ModuleNotFoundError; the module-form invocation then validated the latch successfully.",
+      "evidence_paths": [
+        "scripts/ariadne_active_operation_latch.py",
+        "orchestration/agent_inbox/codex/raisa-check-in-reference-only-conformance-packet-postrestart-corrected-receipt.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.direct_path_package_module_invocation",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Use python -m scripts.ariadne_active_operation_latch for repository package execution.",
+        "prevention_control": "The ergonomics review will test whether admitted invocations can be selected or emitted rather than recalled.",
+        "evidence_paths": [
+          "scripts/ariadne_active_operation_latch.py",
+          "orchestration/agent_inbox/codex/raisa-check-in-reference-only-conformance-packet-postrestart-corrected-receipt.json"
+        ]
+      },
+      "baton_summary": "records one contained direct-path module invocation lapse and the passing module-form correction."
+    },
+    {
+      "attempt_key": "reference-packet-manual-git-object-001",
+      "observed_on": "2026-08-23",
+      "tranche": "check-in-reference-packet",
+      "role": "orchestrator",
+      "resource_id": "postrestart-ariadne-receipt",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_preflight",
+      "stage": "acceptance",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Git reference evidence is supplied exclusively by the machine-owned snapshot.",
+      "observed_error": "The first post-restart receipt draft repeated the protected source object in prose and failed git_refs_evidence_manual_object_id_forbidden.",
+      "detection_method": "The Ariadne preflight rejected the draft before acceptance; the corrected receipt passed with zero manually supplied object IDs.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-check-in-reference-only-conformance-packet-postrestart-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-check-in-reference-only-conformance-packet-postrestart-corrected-receipt.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.manual_git_object_in_receipt_prose",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Remove every manually repeated Git object and retain only the machine-owned Git snapshot binding.",
+        "prevention_control": "The ergonomics review will test whether free-form Git evidence fields can be removed from operator input.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-check-in-reference-only-conformance-packet-postrestart-corrected-receipt.json"
+        ]
+      },
+      "baton_summary": "records one rejected manual Git-object repetition and its machine-snapshot-only correction."
+    },
+    {
+      "attempt_key": "reference-packet-schema-vocabulary-001",
+      "observed_on": "2026-08-23",
+      "tranche": "check-in-reference-packet",
+      "role": "orchestrator",
+      "resource_id": "reference-only-packet",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_script",
+      "stage": "implementation",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "The authored packet uses the exact admission schema vocabulary exported by the accepted product source.",
+      "observed_error": "The first packet draft copied a plausible but wrong admission schema version and the canonical path returned snapshot_invalid.",
+      "detection_method": "The pure rehearsal exposed the closed-vocabulary mismatch before acceptance; reading the exact product source and rerunning produced all passing cases.",
+      "evidence_paths": [
+        "scripts/raisa_provider_free_unmounted_canonical_check_in_reference_only_operational_evidence_conformance_packet_rehearsal.py",
+        "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal/evidence.json"
+      ],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.copied_schema_vocabulary_mismatch",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Bind the packet to the exact emr4.check-in-admission-kernel.v1 value exported by the accepted source.",
+        "prevention_control": "The ergonomics review will test whether closed vocabulary can be imported or selected instead of copied into free-form fields.",
+        "evidence_paths": [
+          "orchestration_harness/check_in_admission_control.py",
+          "tests/test_raisa_provider_free_unmounted_canonical_check_in_reference_only_operational_evidence_conformance_packet_rehearsal.py"
+        ]
+      },
+      "baton_summary": "records one contained copied schema-vocabulary mismatch and its exact-source correction."
+    },
+    {
+      "attempt_key": "reference-packet-guessed-test-path-001",
+      "observed_on": "2026-08-23",
+      "tranche": "check-in-reference-packet",
+      "role": "orchestrator",
+      "resource_id": "surrounding-test-suite",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every surrounding-suite path is selected from the current repository inventory.",
+      "observed_error": "The first combined suite guessed a nonexistent test_check_in_admission_control.py path and stopped at collection.",
+      "detection_method": "Pytest reported the missing path; repository search resolved the existing admission test and the complete suite passed.",
+      "evidence_paths": [
+        "tests/test_check_in_environment_evidence_admission.py",
+        "tests/test_raisa_provider_free_unmounted_default_off_ordinary_practice_check_in_admission_control_kernel_rehearsal.py"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.guessed_nonexistent_test_path",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Resolve surrounding test paths from the repository inventory before invoking the suite.",
+        "prevention_control": "The ergonomics review will test whether test selection can be derived from ownership or an explicit checked manifest.",
+        "evidence_paths": [
+          "tests/test_check_in_environment_evidence_admission.py",
+          "tests/test_raisa_provider_free_unmounted_default_off_ordinary_practice_check_in_admission_control_kernel_rehearsal.py"
+        ]
+      },
+      "baton_summary": "records one contained guessed test-path lapse and the passing repository-resolved suite."
+    }
+  ],
+  "next_operation_protected_boundaries": [
+    "provider_free_read_only_clockwork_ergonomics_and_efficacy_review_only",
+    "measure_existing_artifacts_incidents_ticks_rollbacks_and_elapsed_friction_only",
+    "proposals_must_remove_at_least_one_manual_decision_duplicate_field_or_rerun_sequence",
+    "no_new_control_layer_or_clockwork_implementation_during_the_review",
+    "no_native_harness_worker_provider_call_or_transport_qualification",
+    "no_silent_claude_code_or_other_transport_fallback",
+    "no_check_in_external_fact_target_custody_policy_provisioning_or_activation_selection",
+    "no_existing_product_source_route_api_client_configuration_or_runtime_change",
+    "no_environment_variable_secret_credential_network_database_or_infrastructure_access",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_admission_record_activation",
+    "no_action_grammar_generic_status_arrived_or_waiting_area_change",
+    "no_product_patient_appointment_clinical_historical_or_protected_data",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only"
+  ]
+}

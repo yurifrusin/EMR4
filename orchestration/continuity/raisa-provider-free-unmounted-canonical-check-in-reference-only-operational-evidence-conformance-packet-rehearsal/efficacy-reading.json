@@ -1,0 +1,36 @@
+{
+  "schema_version": "ariadne.tranche_efficacy_reading.v1",
+  "operation_id": "raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal",
+  "source_head": "b15b565649c274e9da11c6e8c3416094661596ee",
+  "result": "complete_reference_only_conformance_with_zero_admission_release",
+  "workflow": {
+    "new_runtime_control_layers": 0,
+    "new_product_source_files": 0,
+    "new_product_test_files": 0,
+    "provider_calls": 0,
+    "model_workers": 0,
+    "reruns_from_procedural_error": 4,
+    "clockwork_publication_attempts": 0,
+    "byte_exact_rollbacks": 0,
+    "bespoke_updater_executions": 0,
+    "accepted_development_yield": 1,
+    "focused_tests_passed": 11,
+    "hostile_cases_passed": 12
+  },
+  "readiness": {
+    "prior_counts": "11_0_1",
+    "current_counts": "11_0_1",
+    "repository_prerequisites_remaining": 0,
+    "external_facts_inferred": 0,
+    "human_decisions_inferred": 0,
+    "ordinary_admission_releases": 0
+  },
+  "harness": {
+    "native_profile": "paused_pre_provider_hmr_startup_failure",
+    "native_worker_calls": 0,
+    "claude_code_fallback": "not_authorized",
+    "gemini_calls": 0
+  },
+  "assessment": "The accepted product packet was small, exact and fully deterministic. Four reruns came from manually supplied interface details rather than product semantics: module invocation form, a repeated Git object in prose, a copied schema vocabulary and a guessed test path. Safety was strong because every lapse was contained before acceptance; ergonomics remain weaker because the operator could still express facts that the repository already knows."
+}
+
