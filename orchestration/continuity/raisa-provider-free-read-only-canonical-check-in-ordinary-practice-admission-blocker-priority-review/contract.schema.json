@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "operation_id",
+    "expected_prior_readiness",
+    "expected_current_readiness",
+    "remaining_dimension",
+    "repository_prerequisites_remaining",
+    "external_fact_status",
+    "human_choice_status",
+    "ranked_groups",
+    "next_operation",
+    "terminal_after_next_operation"
+  ],
+  "properties": {
+    "schema_version": {"const": "raisa.check_in_admission_blocker_priority_contract.v1"},
+    "operation_id": {"const": "raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-blocker-priority-review"},
+    "expected_prior_readiness": {"const": "6_3_3"},
+    "expected_current_readiness": {"const": "11_0_1"},
+    "remaining_dimension": {"const": "environment_manifest_and_operational_secret_posture"},
+    "repository_prerequisites_remaining": {"const": 0},
+    "external_fact_status": {"const": "absent"},
+    "human_choice_status": {"const": "unselected"},
+    "ranked_groups": {
+      "type": "array",
+      "prefixItems": [
+        {"const": "select_target_environment_and_practice_scope"},
+        {"const": "approve_operational_custody_rotation_and_break_glass_governance"},
+        {"const": "authorize_and_perform_live_evidence_provisioning"},
+        {"const": "perform_independent_uniqueness_and_freshness_readback"},
+        {"const": "confirm_ordinary_activation_separately"}
+      ],
+      "items": false,
+      "minItems": 5,
+      "maxItems": 5
+    },
+    "next_operation": {"const": "raisa-provider-free-read-only-canonical-check-in-operational-evidence-root-decision-brief"},
+    "terminal_after_next_operation": {"const": "pause_for_user_attention"}
+  }
+}

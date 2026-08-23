@@ -1,0 +1,13 @@
+{
+  "schema_version": "ariadne.serial_continuation_intent.v1",
+  "preset": "provider_free_serial_observed_empty_workers",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "freeze_read_only_check_in_admission_blocker_priority_contract",
+  "assessed_stage": "check_in_admission_blocker_priority_preplanning",
+  "active_evidence_paths": [
+    "orchestration/continuity/ariadne-provider-free-governance-clockwork-bound-closeout-entrypoint-live-adoption-efficacy-review/closeout-driver-result.json",
+    "orchestration/continuity/ariadne-provider-free-governance-clockwork-bound-closeout-entrypoint-live-adoption-efficacy-review/explicit-stage-manifest.json",
+    "orchestration/continuity/ariadne-active-operation-latch/current.json"
+  ],
+  "lane_decision_overrides": []
+}

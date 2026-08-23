@@ -1,0 +1,120 @@
+{
+  "active_operation": {
+    "active_tranche": "Provider-free read-only canonical check-in ordinary-practice admission blocker priority review",
+    "completed_stage": "Accepted ariadne-provider-free-governance-clockwork-bound-closeout-entrypoint-live-adoption-efficacy-review at the machine-resolved source.",
+    "next_executable_stage": "fresh_five_source_rehydration_then_freeze_read_only_blocker_ranking_contract",
+    "operation_id": "raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-blocker-priority-review",
+    "resume_after_compaction": true,
+    "source_head": "4673385fbbdbf0e15a7fecd4451956693964ff74",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "git_object_resolution": {
+    "observed_head": "039bff2aca55fd58d11c1c589c59782d813f4aae",
+    "reason_codes": [],
+    "resolved_commit": "4673385fbbdbf0e15a7fecd4451956693964ff74",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "4673385fbbdbf0e15a7fecd4451956693964ff74"
+  },
+  "git_ref_evidence_binding": {
+    "manually_supplied_object_id_count": 0,
+    "policy": "machine_snapshot_only",
+    "reason_codes": [],
+    "schema_version": "ariadne.git_ref_evidence_binding.v1",
+    "status": "passed"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "039bff2aca55fd58d11c1c589c59782d813f4aae",
+    "branch_origin_aligned": true,
+    "head": "039bff2aca55fd58d11c1c589c59782d813f4aae",
+    "origin_branch_commit": "039bff2aca55fd58d11c1c589c59782d813f4aae",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 682
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "check_in_admission_blocker_priority_preplanning",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "deepseek_flash uses declined_negative; the observed-empty serial preset assigns it no work package.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "gemini_verifier",
+        "rationale": "gemini_verifier uses declined_neutral; the observed-empty serial preset assigns it no work package.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "native_subagents uses declined_negative; the observed-empty serial preset assigns it no work package.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-blocker-priority-review",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "if the deterministic continuation fails",
+      "before any worker dispatch",
+      "at the next named tranche boundary"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "typed serial preset declares every managed worker slot observed empty",
+      "worker dispatch requires a separate non-serial runtime state",
+      "the current continuation completes before any external verifier"
+    ]
+  },
+  "planned_action": "freeze_read_only_check_in_admission_blocker_priority_contract",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "orchestration/continuity/ariadne-provider-free-governance-clockwork-bound-closeout-entrypoint-live-adoption-efficacy-review/closeout-driver-result.json",
+      "orchestration/continuity/ariadne-provider-free-governance-clockwork-bound-closeout-entrypoint-live-adoption-efficacy-review/explicit-stage-manifest.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "AGENTS.md#4 Authority Allocation and the current harness settings",
+    "git_refs_and_worktree": "machine_snapshot_only",
+    "live_handover_current_baton": "AGENTS.md#3 Current Baton",
+    "protected_evidence_boundaries": "AGENTS.md#5 Protected Evidence and Closed Gates; AGENTS.md#6 User Decision Boundaries; canonical active latch"
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}
