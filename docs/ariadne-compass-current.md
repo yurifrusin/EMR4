@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> Bind provenance, authority and oracles before increasing scenario volume or realism.
+> Make the privacy gate executable and measurable before allowing it to see the archive.
 
 ## North star
 
@@ -654,22 +654,24 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    A concise brief replaces piecemeal future questions without selecting any answer. Lineage parent: `raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-blocker-priority-review`.
 319. **Give Raisa a traceable synthetic practice laboratory spanning administrative and clinical-diagnostic architecture. — Raisa synthetic-first public-evidence scenario programme orientation**
    Public sources and existing EMR4 contracts now converge on one small reusable envelope boundary. Lineage parent: `raisa-provider-free-read-only-canonical-check-in-operational-evidence-root-decision-brief`.
+320. **Give synthetic administrative and clinical scenarios typed provenance, oracle authority and execution identity before increasing realism or scale. — Raisa traceable synthetic scenario envelope and legacy binding rehearsal**
+   One domain-neutral envelope now reuses both existing reception contracts and enables a measured Diary privacy gate. Lineage parent: `raisa-synthetic-first-public-evidence-scenario-programme-orientation`.
 
 ## Current position
 
-**Build source and oracle traceability before scaling scenario generation or calibrating from private observations. — Raisa synthetic-first public-evidence scenario programme orientation**
+**Test privacy mechanics synthetically before any bounded historical archive reading. — Raisa traceable synthetic scenario envelope and legacy binding rehearsal**
 
-**Why this proof came next:** The research streams are complete and the existing semantic and replay engines need a shared provenance layer.
+**Why this proof came next:** The exact provenance and evidence-class dependency now passes and the archive's temporal density can be evaluated without premature data access.
 
-The next tranche can implement one strict envelope and two exact legacy bindings.
+The next tranche can build the gate, differencer, attack metrics and access subgate on invented snapshots.
 
 ### What this unlocks
 
-- Traceable scenario expansion and a future controlled interface for privacy-reviewed near-lossless local calibration.
+- A separately accepted, empirically measured decision on near-lossless local de-identified Diary use.
 
 ### What it does not solve
 
-- It does not prove real-world efficacy, de-identify the historical archive or open provider/product runtime.
+- It does not yet inspect, de-identify or admit any historical record or prove real-world efficacy.
 
 ## Continuity and authority
 
@@ -1862,8 +1864,9 @@ Prerequisites:
 - `docs/raisa-shared-application-auth-runtime-role-secure-transport-plan.md`
 - `docs/raisa-status-confirm-preflight-idempotency-expectation-repair-closeout.md`
 - `docs/raisa-status-confirm-preflight-idempotency-expectation-repair-plan.md`
-- `docs/raisa-synthetic-first-public-evidence-scenario-programme-orientation-closeout.md`
 - `docs/raisa-synthetic-first-public-evidence-scenario-programme-orientation-plan.md`
+- `docs/raisa-traceable-synthetic-scenario-envelope-and-legacy-binding-rehearsal-closeout.md`
+- `docs/raisa-traceable-synthetic-scenario-envelope-and-legacy-binding-rehearsal-plan.md`
 - `docs/raisa-two-component-oidc-runtime-adapter-closeout.md`
 - `docs/raisa-two-component-oidc-runtime-adapter-design.md`
 - `docs/raisa-two-component-oidc-runtime-adapter-plan.md`
@@ -2647,7 +2650,7 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-status-confirm-runtime-convergence-rehearsal-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-status-confirm-scaffold-parse-catalogue-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-status-transaction-kernel-protocol-sol-acceptance.md`
-- `orchestration/agent_inbox/codex/raisa-synthetic-first-public-evidence-scenario-programme-orientation-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-traceable-synthetic-scenario-envelope-and-legacy-binding-rehearsal-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-two-projection-truth-parity-conformance-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-two-projection-truth-parity-conformance-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/reception-one-availability-reconciliation-sol-acceptance.md`
@@ -3307,8 +3310,9 @@ Prerequisites:
 - `orchestration/continuity/raisa-shared-application-auth-postgresql-persistence/live-local-backend-postgres-evidence.json`
 - `orchestration/continuity/raisa-shared-application-auth-runtime-foundation/provider-free-acceptance-evidence.json`
 - `orchestration/continuity/raisa-shared-application-auth-runtime-role-secure-transport/live-local-backend-postgres-transport-evidence.json`
-- `orchestration/continuity/raisa-synthetic-first-public-evidence-scenario-programme-orientation/evidence.json`
 - `orchestration/continuity/raisa-synthetic-first-public-evidence-scenario-programme-orientation/report.md`
+- `orchestration/continuity/raisa-traceable-synthetic-scenario-envelope-and-legacy-binding-rehearsal/evidence.json`
+- `orchestration/continuity/raisa-traceable-synthetic-scenario-envelope-and-legacy-binding-rehearsal/report.md`
 - `orchestration/continuity/raisa-two-component-oidc-runtime-adapter/provider-free-acceptance-evidence.json`
 - `orchestration/continuity/raisa-two-component-oidc-verifier-architecture-revision/dependency-review-evidence.json`
 - `orchestration/continuity/raisa-two-component-oidc-verifier-architecture-revision/provider-free-acceptance-evidence.json`
@@ -3969,4 +3973,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 424; continuity graph revision 442._
+_Compass map revision 425; continuity graph revision 443._

@@ -1,0 +1,12 @@
+{
+  "schema_version": "emr4.non_phi_pushover_closeout_receipt.v1",
+  "recorded_at": "2026-08-24T01:28:26.0809369+10:00",
+  "operation_id": "raisa-traceable-synthetic-scenario-envelope-and-legacy-binding-rehearsal",
+  "status": "delivered",
+  "provider_status": 1,
+  "request_id": "0bc7646e-a03c-4e1a-827b-f975ab0df4ba",
+  "continuing_to": [
+    "raisa-local-only-historical-diary-snapshot-privacy-feasibility-review"
+  ],
+  "contains_phi": false
+}

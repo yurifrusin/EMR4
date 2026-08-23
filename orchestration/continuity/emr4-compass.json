@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 424,
-  "updated_at": "2026-08-24T00:02:55.6316545+10:00",
-  "source_graph_revision": 442,
-  "orientation_statement": "Bind provenance, authority and oracles before increasing scenario volume or realism.",
+  "map_revision": 425,
+  "updated_at": "2026-08-24T01:06:23.5988946+10:00",
+  "source_graph_revision": 443,
+  "orientation_statement": "Make the privacy gate executable and measurable before allowing it to see the archive.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -5377,24 +5377,34 @@
         "docs/raisa-synthetic-first-public-evidence-scenario-programme-orientation-plan.md",
         "orchestration/continuity/raisa-synthetic-first-public-evidence-scenario-programme-orientation/report.md"
       ]
+    },
+    {
+      "node_id": "raisa-traceable-synthetic-scenario-envelope-and-legacy-binding-rehearsal",
+      "lineage_parent": "raisa-synthetic-first-public-evidence-scenario-programme-orientation",
+      "strategic_role": "Give synthetic administrative and clinical scenarios typed provenance, oracle authority and execution identity before increasing realism or scale.",
+      "outcome": "One domain-neutral envelope now reuses both existing reception contracts and enables a measured Diary privacy gate.",
+      "evidence": [
+        "docs/raisa-traceable-synthetic-scenario-envelope-and-legacy-binding-rehearsal-plan.md",
+        "orchestration/continuity/raisa-traceable-synthetic-scenario-envelope-and-legacy-binding-rehearsal/report.md"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "raisa-synthetic-first-public-evidence-scenario-programme-orientation",
-    "strategic_role": "Build source and oracle traceability before scaling scenario generation or calibrating from private observations.",
-    "why_now": "The research streams are complete and the existing semantic and replay engines need a shared provenance layer.",
-    "outcome": "The next tranche can implement one strict envelope and two exact legacy bindings.",
+    "node_id": "raisa-traceable-synthetic-scenario-envelope-and-legacy-binding-rehearsal",
+    "strategic_role": "Test privacy mechanics synthetically before any bounded historical archive reading.",
+    "why_now": "The exact provenance and evidence-class dependency now passes and the archive's temporal density can be evaluated without premature data access.",
+    "outcome": "The next tranche can build the gate, differencer, attack metrics and access subgate on invented snapshots.",
     "unlocks": [
-      "Traceable scenario expansion and a future controlled interface for privacy-reviewed near-lossless local calibration."
+      "A separately accepted, empirically measured decision on near-lossless local de-identified Diary use."
     ],
     "does_not_solve": [
-      "It does not prove real-world efficacy, de-identify the historical archive or open provider/product runtime."
+      "It does not yet inspect, de-identify or admit any historical record or prove real-world efficacy."
     ],
     "evidence": [
-      "orchestration/continuity/raisa-synthetic-first-public-evidence-scenario-programme-orientation/evidence.json",
-      "orchestration/continuity/raisa-synthetic-first-public-evidence-scenario-programme-orientation/report.md",
-      "docs/raisa-synthetic-first-public-evidence-scenario-programme-orientation-closeout.md",
-      "orchestration/agent_inbox/codex/raisa-synthetic-first-public-evidence-scenario-programme-orientation-sol-acceptance.md"
+      "orchestration/continuity/raisa-traceable-synthetic-scenario-envelope-and-legacy-binding-rehearsal/evidence.json",
+      "orchestration/continuity/raisa-traceable-synthetic-scenario-envelope-and-legacy-binding-rehearsal/report.md",
+      "docs/raisa-traceable-synthetic-scenario-envelope-and-legacy-binding-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-traceable-synthetic-scenario-envelope-and-legacy-binding-rehearsal-sol-acceptance.md"
     ]
   },
   "decision_horizon": [

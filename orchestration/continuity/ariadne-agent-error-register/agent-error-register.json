@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 651,
+  "register_revision": 652,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-24",
@@ -43726,6 +43726,77 @@
       },
       "incident_id": "AER-1136",
       "attempt_id": "clock-55a090a7578e867b02f864a1",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-24",
+      "tranche": "traceable-scenario-envelope-binding",
+      "role": "orchestrator",
+      "resource_id": "clockwork-closeout-intent",
+      "model": "gpt-sol",
+      "reasoning_level": "extra_high",
+      "transport": "local_repository_clockwork",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Clockwork closeout uses the register's exact stage vocabulary and the verification profile's bound interpreter.",
+      "observed_error": "The first check used descriptive incident stages; after correction the first verify call used system Python rather than the bound virtual-environment interpreter.",
+      "detection_method": "Admission and interpreter gates rejected both invocations before verification commands, preparation, publication or pointer movement.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-traceable-synthetic-scenario-envelope-and-legacy-binding-rehearsal/closeout/clockwork-check-attempt-001-rejected-receipt.json",
+        "orchestration/continuity/raisa-traceable-synthetic-scenario-envelope-and-legacy-binding-rehearsal/closeout/clockwork-verify-attempt-001-rejected-receipt.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.clockwork_closed_interface_binding_lapse",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Use deterministic_verification for both observations and invoke check, verify and publish through the bound virtual-environment interpreter.",
+        "prevention_control": "Read INCIDENT_STAGES and the verification command profile before every semantic closeout invocation.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-traceable-synthetic-scenario-envelope-and-legacy-binding-rehearsal/closeout/closeout-intent.json"
+        ]
+      },
+      "incident_id": "AER-1137",
+      "attempt_id": "clock-af946e5d4eeea71614f97c1a",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-24",
+      "tranche": "traceable-scenario-envelope-binding",
+      "role": "orchestrator",
+      "resource_id": "serial-continuation-intent",
+      "model": "gpt-sol",
+      "reasoning_level": "extra_high",
+      "transport": "local_repository_clockwork",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Serial continuation evidence paths use only the schema's admitted documentation and orchestration roots.",
+      "observed_error": "The first intent listed implementation and test roots and failed with serial_continuation_evidence_path_root_forbidden.",
+      "detection_method": "Preflight rejected the intent before runtime-state materialisation or repository mutation.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-traceable-synthetic-scenario-envelope-and-legacy-binding-rehearsal-candidate-precommit-rejected-receipt.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.serial_continuation_evidence_root_misclassification",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Preserve the rejected intent and issue a distinct corrected intent using admitted roots only.",
+        "prevention_control": "Use implementation paths in closeout artifacts, not serial active_evidence_paths.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-traceable-synthetic-scenario-envelope-and-legacy-binding-rehearsal-candidate-precommit-corrected-receipt.json"
+        ]
+      },
+      "incident_id": "AER-1138",
+      "attempt_id": "clock-0b812a63154bfda05816ae4c",
       "origin": "agent_behavior",
       "related_incident_ids": [],
       "status": "corrected"
