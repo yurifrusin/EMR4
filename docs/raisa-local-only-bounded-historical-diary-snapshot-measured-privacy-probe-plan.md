@@ -247,3 +247,20 @@ or reading content. The same aggregate widths support the omitted separated
 year-first form `YY-M-D HH-MM-SS`. Add that one closed candidate. It remains
 subject to the identical 2000-2020 year bound and sole archive-wide
 full-coverage rule; no convention is chosen from plausibility alone.
+
+Exact source `62dc37d53a19ba5d1dfbf4ca01a47f1dc351123c` then appeared to produce a
+two-convention full-coverage tie. The pre-rerun synthetic metadata-concordance
+test rejected that reading: `month_day_two_digit_year` was indented under the
+year-first branch and reused its year, so the label did not represent its
+declared convention. No manifest or content read occurred. Preserve the
+reading as rejected diagnostic evidence and correct only that candidate
+construction.
+
+Phase A already reads each file's modification timestamp and H15 historically
+used that metadata for ordering. A genuine tie may therefore be resolved only
+if exactly one correctly constructed full-coverage convention lies within 24
+hours of modification time for every admissible file. The public reading
+exposes only convention counts and the fixed threshold, never a time, date,
+delta per file or filename. Zero or more than one metadata-concordant
+convention remains `revision_required` unless exactly one full-coverage
+convention exists independently.

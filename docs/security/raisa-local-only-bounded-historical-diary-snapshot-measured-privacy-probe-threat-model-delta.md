@@ -163,3 +163,12 @@ The first coverage calculation returned zero because it omitted the separated
 two-digit year-first ordering supported by the aggregate widths. That single
 ordering is added, but it receives no preference: it must be the unique
 archive-wide full-coverage convention under the same year and time controls.
+
+When two conventions have full syntactic coverage, only metadata already in
+the Phase A boundary may break the tie. Exactly one convention must be within
+the fixed 24-hour modification-time tolerance for every admissible file.
+Aggregate concordance counts are public; exact metadata times and per-file
+deltas remain private. No partial-majority or guessed convention is admitted.
+The first apparent tie is rejected because a candidate label reused the wrong
+year position; the synthetic concordance test requires exact label-to-parser
+semantics before another metadata bind.

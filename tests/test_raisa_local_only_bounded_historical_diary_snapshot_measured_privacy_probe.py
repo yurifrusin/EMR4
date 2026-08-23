@@ -1,5 +1,6 @@
 import ast
 import json
+import os
 from datetime import datetime, timedelta
 from pathlib import Path
 
@@ -408,6 +409,25 @@ def test_phase_a_rejects_two_globally_complete_date_conventions(monkeypatch, tmp
 
     with pytest.raises(probe.ProbeError, match="timestamp_binding_revision_required"):
         probe.build_binding_manifest()
+
+
+def test_phase_a_uses_metadata_concordance_only_to_resolve_full_coverage_tie(
+    monkeypatch, tmp_path
+):
+    root, _ = _configure_synthetic_paths(monkeypatch, tmp_path)
+    first = datetime(2016, 8, 9, 8, 0, 0)
+    for index in range(probe.MAX_FILES):
+        observed = first + timedelta(seconds=index * 30)
+        path = root / f"08-09-16 {observed:%H-%M-%S} AM.doc"
+        path.write_bytes(b"0" * (probe.MIN_FILE_BYTES + 1))
+        timestamp = observed.timestamp()
+        os.utime(path, (timestamp, timestamp))
+
+    manifest, reading = probe.build_binding_manifest()
+
+    assert manifest.timestamp_convention == "month_day_two_digit_year"
+    assert reading["timestamp_metadata_concordance_count"] == probe.MAX_FILES
+    assert reading["timestamp_metadata_concordance_seconds"] == 86400
 
 
 def test_phase_a_rejects_reparse_before_following_file_type(monkeypatch, tmp_path):

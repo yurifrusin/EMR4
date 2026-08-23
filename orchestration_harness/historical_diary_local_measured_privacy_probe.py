@@ -45,6 +45,7 @@ MAX_PRIVATE_PIPE_BYTES = 64 * 1024 * 1024
 POLL_INTERVAL_SECONDS = 30
 FILE_ATTRIBUTE_REPARSE_POINT = 0x400
 TWO_DIGIT_YEAR_MAX = 2020
+METADATA_CONCORDANCE_SECONDS = 24 * 60 * 60
 
 TIME_TOKEN = re.compile(
     r"^(?P<hour>[01]?\d|2[0-3])[:.](?P<minute>[0-5]\d)(?:\s*(?P<ampm>[AaPp][Mm]))?$"
@@ -277,16 +278,16 @@ def timestamp_candidates(filename: str) -> dict[str, datetime]:
                 (year, groups[1], groups[0]),
                 groups[3:6],
             )
+            admit(
+                "month_day_two_digit_year",
+                (year, groups[0], groups[1]),
+                groups[3:6],
+            )
         if len(groups[0]) == 2:
             year = str(2000 + int(groups[0]))
             admit(
                 "year_month_day_two_digit_year",
                 (year, groups[1], groups[2]),
-                groups[3:6],
-            )
-            admit(
-                "month_day_two_digit_year",
-                (year, groups[0], groups[1]),
                 groups[3:6],
             )
     return candidates
@@ -338,6 +339,7 @@ def build_binding_manifest() -> tuple[BindingManifest, dict[str, Any]]:
 
     candidate_sets: list[tuple[Path, os.stat_result, dict[str, datetime]]] = []
     convention_coverage: Counter[str] = Counter()
+    metadata_concordance: Counter[str] = Counter()
     shapes: Counter[str] = Counter()
     numeric_group_shapes: Counter[str] = Counter()
     numeric_digit_totals: Counter[int] = Counter()
@@ -365,6 +367,12 @@ def build_binding_manifest() -> tuple[BindingManifest, dict[str, Any]]:
         admitted_file_count += 1
         candidates = timestamp_candidates(path.name)
         convention_coverage.update(candidates.keys())
+        modified = datetime.fromtimestamp(stat.st_mtime)
+        metadata_concordance.update(
+            label
+            for label, value in candidates.items()
+            if abs((value - modified).total_seconds()) <= METADATA_CONCORDANCE_SECONDS
+        )
         candidate_sets.append((path.resolve(), stat, candidates))
 
     if admitted_file_count == 0:
@@ -373,7 +381,19 @@ def build_binding_manifest() -> tuple[BindingManifest, dict[str, Any]]:
     full_coverage_conventions = sorted(
         label for label, count in convention_coverage.items() if count == admitted_file_count
     )
-    if len(full_coverage_conventions) != 1:
+    metadata_concordant_conventions = sorted(
+        label
+        for label in full_coverage_conventions
+        if metadata_concordance[label] == admitted_file_count
+    )
+    selected_convention = (
+        full_coverage_conventions[0]
+        if len(full_coverage_conventions) == 1
+        else metadata_concordant_conventions[0]
+        if len(metadata_concordant_conventions) == 1
+        else None
+    )
+    if selected_convention is None:
         diagnostic = {
             "schema_version": "historical_diary.safe_binding_diagnostic.v1",
             "status": Decision.REVISION_REQUIRED.value,
@@ -384,6 +404,11 @@ def build_binding_manifest() -> tuple[BindingManifest, dict[str, Any]]:
             "timestamp_parse_failure_count": admitted_file_count - maximum_coverage,
             "timestamp_convention_full_coverage_count": len(full_coverage_conventions),
             "timestamp_convention_coverage": dict(sorted(convention_coverage.items())),
+            "timestamp_metadata_concordance_seconds": METADATA_CONCORDANCE_SECONDS,
+            "timestamp_metadata_concordance": dict(sorted(metadata_concordance.items())),
+            "timestamp_metadata_concordant_full_coverage_count": len(
+                metadata_concordant_conventions
+            ),
             "filename_shape_distribution": dict(sorted(shapes.items())),
             "numeric_group_length_distribution": dict(sorted(numeric_group_shapes.items())),
             "numeric_digit_total_distribution": {
@@ -393,7 +418,6 @@ def build_binding_manifest() -> tuple[BindingManifest, dict[str, Any]]:
         }
         raise ProbeError("timestamp_binding_revision_required:" + json.dumps(diagnostic, sort_keys=True))
 
-    selected_convention = full_coverage_conventions[0]
     parsed = [
         (path, stat, candidates[selected_convention])
         for path, stat, candidates in candidate_sets
@@ -448,6 +472,8 @@ def build_binding_manifest() -> tuple[BindingManifest, dict[str, Any]]:
         "timestamp_parse_success_count": len(parsed),
         "timestamp_parse_failure_count": 0,
         "timestamp_convention": selected_convention,
+        "timestamp_metadata_concordance_seconds": METADATA_CONCORDANCE_SECONDS,
+        "timestamp_metadata_concordance_count": metadata_concordance[selected_convention],
         "selected_file_count": len(files),
         "selected_total_bytes": total_bytes,
         "maximum_file_bytes": max(item.size_bytes for item in files),
