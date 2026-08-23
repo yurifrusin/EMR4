@@ -1,0 +1,60 @@
+{
+  "schema_version": "raisa.local_historical_diary_story_coordinate_bounded_measurement_recovery_contract.v1",
+  "status": "frozen_fail_closed_successor_contract",
+  "recorded_at": "2026-08-24T06:06:37.7778480+10:00",
+  "operation_id": "raisa-local-only-historical-diary-document-story-time-coordinate-bounded-measurement-recovery-rehearsal",
+  "builds_on_reviewed_source": "9cbc39cda3503216b27e81aca4f9199db8561b49",
+  "objective": "perform_one_fresh_bounded_local_story_coordinate_measurement_with_typed_timeout_exact_cleanup_and_count_only_progress",
+  "source_boundary": {
+    "literal_root": "local_data/historical-diary-trove/raw/pilot_01",
+    "new_attempt_root": "local_data/historical-diary-trove/measured-probes/2026-08-24-story-coordinate-v2",
+    "one_leaf_root": true,
+    "one_dense_day": true,
+    "nonrecursive": true,
+    "maximum_files": 80,
+    "maximum_file_bytes": 8388608,
+    "maximum_total_bytes": 134217728,
+    "read_only": true,
+    "symlink_or_reparse_traversal": false
+  },
+  "execution": {
+    "metadata_bind_attempts": 1,
+    "content_runs": 1,
+    "content_retry_authorized": false,
+    "controller_timeout_seconds": 1800,
+    "exact_parent_word_cleanup": true,
+    "count_only_progress": true,
+    "prior_attempt_reuse_or_retry": false
+  },
+  "mapper": {
+    "time_source": "complete_main_story_time_token_outside_tables",
+    "coordinate_source": "same_adjusted_page_and_vertical_quarter_points",
+    "maximum_distance_quarter_points": 16,
+    "different_time_nearest_tie": "unmapped",
+    "row_column_opening_hour_filename_or_interval_inference": false
+  },
+  "acceptance": {
+    "opened_and_parsed_snapshots": 80,
+    "minimum_explicit_story_anchors": 3,
+    "minimum_distinct_mapped_minutes": 3,
+    "minimum_mapped_ratio": 0.25,
+    "positive_interval_mode_required": true,
+    "stable_linkage_required": true,
+    "adjacent_changes_required": true,
+    "source_value_leakage": 0,
+    "private_manifest_projection_key_mapping_or_coordinate_retained": false,
+    "word_cleanup_required": true
+  },
+  "first_use_gate": {
+    "status": "closed_pending_candidate_specific_evaluation",
+    "opened_by_measurement_success": false,
+    "reusable_artifact_created": false
+  },
+  "strongest_result": "ignored_local_research_retention_only_no_downstream_authority",
+  "authority_ceiling": {
+    "historical_derived_fixture_scenario_replay_corpus_or_memory": false,
+    "provider_model_product_runtime_database_or_client_use": false,
+    "ordinary_practice_activation": false,
+    "production_deployment_release_pages_or_protected_refs": false
+  }
+}

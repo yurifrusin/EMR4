@@ -1,0 +1,63 @@
+{
+  "schema_version": "raisa.authored_synthetic_word_coordinate_timeout_throughput_recovery_evidence.v1",
+  "result": "raisa_authored_synthetic_word_coordinate_timeout_containment_and_throughput_pass",
+  "recorded_at": "2026-08-24T06:06:37.7778480+10:00",
+  "planning_source": "636db75f55496664850f4887f6197f5c31e71406",
+  "reviewed_source": "9cbc39cda3503216b27e81aca4f9199db8561b49",
+  "five_source_rehydration": "passed",
+  "deterministic_verification": {
+    "provider_free_historical_diary_controls": 187,
+    "failures": 0,
+    "ruff": "passed",
+    "compileall": "passed",
+    "powershell_parse": "passed",
+    "source_boundary_scan": "passed",
+    "git_diff_check": "passed"
+  },
+  "timeout_containment_proof": {
+    "typed_reason_code": "word_extractor_timeout",
+    "owned_word_processes_removed": 1,
+    "broad_process_name_stop_used": false,
+    "preexisting_word_process_set_preserved": true,
+    "cleanup_completed": true
+  },
+  "throughput_proof": {
+    "authored_synthetic_documents": 12,
+    "opened_documents": 12,
+    "parsed_documents": 12,
+    "table_cells": 168,
+    "structural_segments": 2016,
+    "coordinate_attempts": 2016,
+    "explicit_story_anchors": 288,
+    "elapsed_bucket": "30_to_119_seconds",
+    "coordinate_rate_floor_bucket": "16_or_more_per_second",
+    "word_cleanup_completed": true,
+    "preexisting_word_process_set_preserved": true
+  },
+  "cleanup": {
+    "synthetic_documents_retained": 0,
+    "synthetic_manifest_retained": false,
+    "process_control_retained": false,
+    "progress_sidecar_retained": false,
+    "private_extraction_retained": false,
+    "synthetic_root_absent": true,
+    "owned_word_processes_remaining": 0,
+    "preexisting_word_processes_remaining": 1
+  },
+  "parallelism": {
+    "deepseek": "declined_negative_shared_word_process_and_native_harness_paused",
+    "gemini": "not_applicable_neutral_deterministic_provider_free_contract",
+    "native_subagents": "declined_negative_serial_control_progress_and_occupied_proofs",
+    "gpt_sol": "design_implementation_verification_occupied_proofs_acceptance_git_and_closeout_owner"
+  },
+  "zero_effects": {
+    "historical_archive_enumerations": 0,
+    "historical_content_reads": 0,
+    "historical_derived_artifacts": 0,
+    "provider_network_model_calls": 0,
+    "product_database_or_runtime_operations": 0,
+    "ordinary_practice_releases": 0,
+    "protected_ref_movements": 0,
+    "first_use_gate_opened": false
+  }
+}

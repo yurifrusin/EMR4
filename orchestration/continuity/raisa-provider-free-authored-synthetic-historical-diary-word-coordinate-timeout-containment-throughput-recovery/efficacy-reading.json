@@ -1,0 +1,21 @@
+{
+  "schema_version": "raisa.authored_synthetic_word_coordinate_timeout_throughput_recovery_efficacy.v1",
+  "recorded_at": "2026-08-24T06:06:37.7778480+10:00",
+  "reviewed_source": "9cbc39cda3503216b27e81aca4f9199db8561b49",
+  "decision": "passed",
+  "safety": {
+    "exact_process_identity_cleanup": "passed",
+    "broad_process_name_cleanup": false,
+    "preexisting_process_preservation": "passed",
+    "value_free_progress": "passed",
+    "cleanup": "passed"
+  },
+  "utility": {
+    "coordinate_attempts": 2016,
+    "explicit_story_anchors": 288,
+    "coordinate_rate_floor_bucket": "16_or_more_per_second",
+    "elapsed_bucket": "30_to_119_seconds",
+    "future_measurement_bound_can_be_truthfully_selected": true
+  },
+  "recommendation": "plan_one_fresh_80_snapshot_local_measurement_with_a_new_attempt_root_1800_second_ceiling_exact_parent_cleanup_and_count_only_progress"
+}
