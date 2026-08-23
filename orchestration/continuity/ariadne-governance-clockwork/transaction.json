@@ -1,85 +1,85 @@
 {
   "schema_version": "ariadne.governance_live_tick_transaction.v1",
-  "operation_id": "ariadne-provider-free-governance-clockwork-bound-closeout-entrypoint-and-explicit-stage-manifest-rehearsal",
-  "transaction_id": "txn-b34671fb3132138b906b90c8",
-  "source_commit": "592423b490e80e10806502b251e424f068bdbf6f",
-  "previous_source_commit": "592423b490e80e10806502b251e424f068bdbf6f",
-  "previous_generation_id": "gen-158c1399a5c2b80580d9dba0901ef183e214c6941a370301eacf98bb51c059f7",
-  "previous_bundle_sha256": "158c1399a5c2b80580d9dba0901ef183e214c6941a370301eacf98bb51c059f7",
+  "operation_id": "ariadne-provider-free-governance-clockwork-bound-closeout-entrypoint-live-adoption-efficacy-review",
+  "transaction_id": "txn-909a737d3a2bad62afa83de4",
+  "source_commit": "4673385fbbdbf0e15a7fecd4451956693964ff74",
+  "previous_source_commit": "4673385fbbdbf0e15a7fecd4451956693964ff74",
+  "previous_generation_id": "gen-c92b9c4d846ae086092b4acfd39ae9eb16ae718e770023b356db47638c513b95",
+  "previous_bundle_sha256": "c92b9c4d846ae086092b4acfd39ae9eb16ae718e770023b356db47638c513b95",
   "previous_canonical_sha256s": {
-    "continuity": "e28293affed9bda1aabfcece90f2bf901e48e79d0ad059409f44d66be7b8cad6",
-    "compass": "fcb9b464940fb855487a74c693254c41c6a50fedf3bc8b7157d5102079d22660",
-    "compass_markdown": "657611d418d8a4122036e167dae2527678a6bcaf75dbe935c6f1ace0beca0dff",
-    "active_latch": "49aab5608ba258c58e466315948c8ad478dc773f213de90b326d532a31b22a0b",
+    "continuity": "7a74e9674512cd12e665249083dfc161d2b1b14f176a37210fa40982a3cf7ddd",
+    "compass": "eb899f550ae7480bf9ec713b218a74e28b1af3d9930255093f34406b4611ec6f",
+    "compass_markdown": "c2fef7476c6ab7a4fae2a6e9d0f9bdd24da0532f9a82ded94d18bd9ab01d6f4f",
+    "active_latch": "e34228702e5f0fd9a94cedc98f7908ceea4f8f7bc3515e0c63391c7fb22c722f",
     "error_register": "1e5b69440620483cb460d06a2d9fdb03f35f340a78dd6e89114cca82ca50556e",
     "pattern_report": "37f917894172dbc8a0de5e9213d2c967c9c7381f4b8b0f02c82be63b67910c1d",
-    "current_baton": "b2c6a9f2a4d6315d6278be8b04f74240a1a2e72fad38bf46582a2678e1846a81"
+    "current_baton": "087352102c54ba156dbb5639431e63fc501feeaa5baf34a80eff71e41de6fe94"
   },
   "previous_metadata_sha256s": {
-    "command-manifest.json": "10649e867a4acb0777cd6ff696aaf0a81689128b3848c812949200098a34b0d8",
-    "transaction.json": "2011c46bcfcfa865f345232d863936192c015b0a1f11d10a59cee8cfb68fc192",
+    "command-manifest.json": "7ef9882d34d31dcd59cf2bb55258076fec453c8bf93697ecbef5105491e57f11",
+    "transaction.json": "04c31daabd6ec0b5ff4b3059ae94a2615ffc80629b1413ff14bbfb7efabd38c7",
     "ownership.json": "e78320a1b0d2f61041cd9d8cac1ed4f98d2bbdf7c3b94891a48d123589d8dee9",
-    "generation-manifest.json": "015306d63538fef8037267c31108d78c75612e615d4bb7b5226c9fd5dd0ec022"
+    "generation-manifest.json": "2a30a96627646c14391abf0454461d478dc458135e360f54d1f5c74b3773b745"
   },
   "projection_sha256s": {
-    "graph": "sha256:daf898287ef83c19bbf9a65784f0ef6688ad662e2da18e151ac2f8417a2628c7",
-    "compass": "sha256:c4c10f8530df52b3adc9fde48ca9755ac122c6a5e65547d823f00ac85bbdd094",
-    "report": "sha256:1a0b4183b15f929f3d7e6f2fcc3d379df9cdb36736581f5cbaa6a63d7e68c0c1",
-    "latch": "sha256:58ee6d8ca6b3312e99fa9b165ba95d61da53cb3d7ca63e9571166c1897d525be",
+    "graph": "sha256:543e0c6df16c7e4a198f444e68cd7e8a13f8120e8cf7aa914b314e9dfe9ad401",
+    "compass": "sha256:485696fdeca9baee9e8cb517783cb174f9dfd5d777de23ccf367a44c106c98f7",
+    "report": "sha256:a7167cb5a9ace4207a0e8caf53319efd87a644658b739d8134fcd9bfcce4346f",
+    "latch": "sha256:f957aa69fed32e61c86acb6433d17c1756ad57e446cabb3e057bec983612cbaf",
     "incident_aggregate": "sha256:012cd99c89990d8a80584cdc38452c69df669aaa4fbdbc83e5f088ec2c190ded"
   },
   "journal": [
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-b34671fb3132138b906b90c8",
-      "transaction_id": "txn-b34671fb3132138b906b90c8",
-      "operation_id": "ariadne-provider-free-governance-clockwork-bound-closeout-entrypoint-and-explicit-stage-manifest-rehearsal",
+      "journal_id": "journal-909a737d3a2bad62afa83de4",
+      "transaction_id": "txn-909a737d3a2bad62afa83de4",
+      "operation_id": "ariadne-provider-free-governance-clockwork-bound-closeout-entrypoint-live-adoption-efficacy-review",
       "sequence": 1,
       "previous_event_sha256": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
       "event_type": "manifest-accepted",
       "actor": "gpt-sol",
       "payload": {
-        "manifest_sha256": "sha256:ebfbf7b6e51a00cdfe6e28f112c46e801b9d85e2105b2b94bfd0a930075d4893"
+        "manifest_sha256": "sha256:57afb2e1629302bd7883eaa7025e9346b2d973f91fecc532b6c8221ddaee12a9"
       },
-      "event_sha256": "sha256:8dca7c2ded60e0339f767dfd9a67ded64eed7e2ec74d4e32e52da7f4444004bc"
+      "event_sha256": "sha256:576845a1b55748e709afadc55a7099270704292e235e528b79c55e214e9738be"
     },
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-b34671fb3132138b906b90c8",
-      "transaction_id": "txn-b34671fb3132138b906b90c8",
-      "operation_id": "ariadne-provider-free-governance-clockwork-bound-closeout-entrypoint-and-explicit-stage-manifest-rehearsal",
+      "journal_id": "journal-909a737d3a2bad62afa83de4",
+      "transaction_id": "txn-909a737d3a2bad62afa83de4",
+      "operation_id": "ariadne-provider-free-governance-clockwork-bound-closeout-entrypoint-live-adoption-efficacy-review",
       "sequence": 2,
-      "previous_event_sha256": "sha256:8dca7c2ded60e0339f767dfd9a67ded64eed7e2ec74d4e32e52da7f4444004bc",
+      "previous_event_sha256": "sha256:576845a1b55748e709afadc55a7099270704292e235e528b79c55e214e9738be",
       "event_type": "git-source-resolved",
       "actor": "gpt-sol",
       "payload": {
-        "source_commit": "592423b490e80e10806502b251e424f068bdbf6f",
+        "source_commit": "4673385fbbdbf0e15a7fecd4451956693964ff74",
         "protected_refs_sha256": "sha256:cdc1b2a8af0f767eab683235c0d96558e8f83c297922c3e9aa02a9a76a4aafd2"
       },
-      "event_sha256": "sha256:dd8c6346d16b0f58a7faaaa95b548db9f15b134538743eda86d6b9a6c36c98fa"
+      "event_sha256": "sha256:ef6525da242a4a0d3e87ea855eef28783ac35a885d7359f18cbe90f3256fcd79"
     },
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-b34671fb3132138b906b90c8",
-      "transaction_id": "txn-b34671fb3132138b906b90c8",
-      "operation_id": "ariadne-provider-free-governance-clockwork-bound-closeout-entrypoint-and-explicit-stage-manifest-rehearsal",
+      "journal_id": "journal-909a737d3a2bad62afa83de4",
+      "transaction_id": "txn-909a737d3a2bad62afa83de4",
+      "operation_id": "ariadne-provider-free-governance-clockwork-bound-closeout-entrypoint-live-adoption-efficacy-review",
       "sequence": 3,
-      "previous_event_sha256": "sha256:dd8c6346d16b0f58a7faaaa95b548db9f15b134538743eda86d6b9a6c36c98fa",
+      "previous_event_sha256": "sha256:ef6525da242a4a0d3e87ea855eef28783ac35a885d7359f18cbe90f3256fcd79",
       "event_type": "projections-reduced",
       "actor": "gpt-sol",
       "payload": {
-        "graph_revision": 438,
-        "map_revision": 420
+        "graph_revision": 439,
+        "map_revision": 421
       },
-      "event_sha256": "sha256:e65d4ec8bb24e1aeceeba1fcbab1393f074085c360159c1e8f9c8959607afe5b"
+      "event_sha256": "sha256:24a276551c756ba735a3db7d88dea5d48bffa693ed294d8354ffd77a9b135c80"
     },
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-b34671fb3132138b906b90c8",
-      "transaction_id": "txn-b34671fb3132138b906b90c8",
-      "operation_id": "ariadne-provider-free-governance-clockwork-bound-closeout-entrypoint-and-explicit-stage-manifest-rehearsal",
+      "journal_id": "journal-909a737d3a2bad62afa83de4",
+      "transaction_id": "txn-909a737d3a2bad62afa83de4",
+      "operation_id": "ariadne-provider-free-governance-clockwork-bound-closeout-entrypoint-live-adoption-efficacy-review",
       "sequence": 4,
-      "previous_event_sha256": "sha256:e65d4ec8bb24e1aeceeba1fcbab1393f074085c360159c1e8f9c8959607afe5b",
+      "previous_event_sha256": "sha256:24a276551c756ba735a3db7d88dea5d48bffa693ed294d8354ffd77a9b135c80",
       "event_type": "projections-validated",
       "actor": "gpt-sol",
       "payload": {
@@ -87,26 +87,26 @@
         "compass": "passed",
         "latch": "passed"
       },
-      "event_sha256": "sha256:b9bc72822052b8a5970ffd7c58484b779533f0c07d64a30d5ab8b5cb77ada74e"
+      "event_sha256": "sha256:97a6d16a79ad73fdd9b3d9f422a2650943186d997346602baff0c3b53a505d16"
     },
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-b34671fb3132138b906b90c8",
-      "transaction_id": "txn-b34671fb3132138b906b90c8",
-      "operation_id": "ariadne-provider-free-governance-clockwork-bound-closeout-entrypoint-and-explicit-stage-manifest-rehearsal",
+      "journal_id": "journal-909a737d3a2bad62afa83de4",
+      "transaction_id": "txn-909a737d3a2bad62afa83de4",
+      "operation_id": "ariadne-provider-free-governance-clockwork-bound-closeout-entrypoint-live-adoption-efficacy-review",
       "sequence": 5,
-      "previous_event_sha256": "sha256:b9bc72822052b8a5970ffd7c58484b779533f0c07d64a30d5ab8b5cb77ada74e",
+      "previous_event_sha256": "sha256:97a6d16a79ad73fdd9b3d9f422a2650943186d997346602baff0c3b53a505d16",
       "event_type": "transaction-prepared",
       "actor": "gpt-sol",
       "payload": {
         "publication_mode": "shadow_directory_rename"
       },
-      "event_sha256": "sha256:c9606b08896ac2559d560d8535808d8adf3488d9cfad7fe428260a89eb49bf85"
+      "event_sha256": "sha256:82580fa6969eae82467ed3cdb4f9372de16ddb9160071f9fea3f8d69114a7202"
     }
   ],
   "publication_mode": "lease_bound_pointer_last_live_tick",
   "event_kind": "clean_closeout",
-  "next_boundaries_sha256": "sha256:d686bd59c69033b25a38b4347d1ce576394590d913e08a062c1e0ed8755a5ae8",
+  "next_boundaries_sha256": "sha256:fe62694432f4fbc83728089bd79e5e040238509e02bf860a2320d7f6f823eb23",
   "register_bytes_preserved": true,
   "pattern_bytes_preserved": true
 }

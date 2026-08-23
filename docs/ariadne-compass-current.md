@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> Let the model read the clock instead of assembling its gears by hand.
+> A safe clock is useful when its operator can take one reading instead of rebuilding the dial.
 
 ## North star
 
@@ -646,22 +646,24 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    The map selects sequence automation rather than unsafe test-count reduction. Lineage parent: `ariadne-provider-free-governance-clockwork-typed-serial-continuation-projection-live-adoption-efficacy-review`.
 315. **Move closeout mechanics from model memory into deterministic controls. — Provider-free governance clockwork bound closeout entrypoint and explicit-stage manifest rehearsal**
    Interpreter, Git identity, test order and stage-path selection become machine readings. Lineage parent: `ariadne-provider-free-governance-clockwork-postpublication-validation-cadence-mapping-review`.
+316. **Replace model-operated closeout mechanics with deterministic readings while keeping all safety evidence. — Provider-free governance clockwork bound closeout entrypoint live-adoption efficacy review**
+   One live tick determines whether the bound driver is ready for default eligible governance use. Lineage parent: `ariadne-provider-free-governance-clockwork-bound-closeout-entrypoint-and-explicit-stage-manifest-rehearsal`.
 
 ## Current position
 
-**Rehearse the deterministic closeout control without granting it live mutation authority. — Provider-free governance clockwork bound closeout entrypoint and explicit-stage manifest rehearsal**
+**Use the new control under real clockwork mutation conditions and measure its efficacy. — Provider-free governance clockwork bound closeout entrypoint live-adoption efficacy review**
 
-**Why this proof came next:** Live use exposed interpreter and exact-path transcription lapses while the safety suite remained valuable.
+**Why this proof came next:** The nonpublishing rehearsal passed and live adoption is the remaining proof boundary.
 
-A bounded driver candidate retains all checks and removes four operator choices.
+Conditional acceptance is bound to the fixed driver result after both verification phases.
 
 ### What this unlocks
 
-- Provider-free bound closeout entrypoint live-adoption efficacy review.
+- Default bound-driver use for eligible semantic governance closeouts.
 
 ### What it does not solve
 
-- It does not reduce tests, stage files or qualify a worker Harness.
+- It does not stage files, reduce tests or qualify a worker Harness.
 
 ## Continuity and authority
 
@@ -1251,8 +1253,9 @@ Prerequisites:
 - `docs/ariadne-cf-d2-workflow-incident-diagnosis-and-fluidity-repair-closeout.md`
 - `docs/ariadne-cf-d2-workflow-incident-diagnosis-and-fluidity-repair-plan.md`
 - `docs/ariadne-cf-d2-workflow-incident-diagnosis.md`
-- `docs/ariadne-clockwork-bound-closeout-entrypoint-explicit-stage-manifest-rehearsal-closeout.md`
 - `docs/ariadne-clockwork-bound-closeout-entrypoint-explicit-stage-manifest-rehearsal-plan.md`
+- `docs/ariadne-clockwork-bound-closeout-entrypoint-live-adoption-efficacy-review-closeout.md`
+- `docs/ariadne-clockwork-bound-closeout-entrypoint-live-adoption-efficacy-review-plan.md`
 - `docs/ariadne-clockwork-idempotent-publication-evidence-preservation-repair-plan.md`
 - `docs/ariadne-clockwork-postpublication-validation-cadence-mapping-review-plan.md`
 - `docs/ariadne-clockwork-typed-builder-matched-efficacy-review-plan.md`
@@ -2119,7 +2122,7 @@ Prerequisites:
 - `orchestration/agent_inbox/antigravity/raisa-reception-one-time-reschedule-gemini-review-receipt.json`
 - `orchestration/agent_inbox/codex/ariadne-active-operation-latch-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/ariadne-cf-d2-workflow-fluidity-repair-sol-acceptance.md`
-- `orchestration/agent_inbox/codex/ariadne-clockwork-bound-closeout-entrypoint-explicit-stage-manifest-rehearsal-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/ariadne-clockwork-bound-closeout-entrypoint-live-adoption-efficacy-review-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/ariadne-clockwork-broker-gear-gemini37-command-manifest.json`
 - `orchestration/agent_inbox/codex/ariadne-clockwork-broker-gear-gemini37-review-packet.md`
 - `orchestration/agent_inbox/codex/ariadne-clockwork-broker-gear-gemini37-review-worktree-preflight.json`
@@ -2788,8 +2791,9 @@ Prerequisites:
 - `orchestration/continuity/ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal/contract.json`
 - `orchestration/continuity/ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal/migration-report.md`
 - `orchestration/continuity/ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal/provider-free-migration-evidence.json`
-- `orchestration/continuity/ariadne-provider-free-governance-clockwork-bound-closeout-entrypoint-and-explicit-stage-manifest-rehearsal/evidence.json`
 - `orchestration/continuity/ariadne-provider-free-governance-clockwork-bound-closeout-entrypoint-and-explicit-stage-manifest-rehearsal/report.md`
+- `orchestration/continuity/ariadne-provider-free-governance-clockwork-bound-closeout-entrypoint-live-adoption-efficacy-review/evidence.json`
+- `orchestration/continuity/ariadne-provider-free-governance-clockwork-bound-closeout-entrypoint-live-adoption-efficacy-review/report.md`
 - `orchestration/continuity/ariadne-provider-free-governance-clockwork-idempotent-publication-evidence-preservation-repair/report.md`
 - `orchestration/continuity/ariadne-provider-free-governance-clockwork-postpublication-validation-cadence-mapping-review/report.md`
 - `orchestration/continuity/ariadne-provider-free-governance-clockwork-prospective-current-node-evidence-and-transaction-fact-derivation-repair/evidence.json`
@@ -3953,4 +3957,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 420; continuity graph revision 438._
+_Compass map revision 421; continuity graph revision 439._

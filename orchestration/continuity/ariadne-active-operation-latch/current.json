@@ -1,14 +1,14 @@
 {
   "schema_version": "ariadne.active_operation_latch.v1",
-  "operation_id": "ariadne-provider-free-governance-clockwork-bound-closeout-entrypoint-live-adoption-efficacy-review",
-  "active_tranche": "Provider-free governance clockwork bound closeout entrypoint live-adoption efficacy review",
-  "objective": "Use the accepted bound entrypoint for one provider-free live governance closeout and measure first-pass completion, operator choices, validation preservation and stage-manifest accuracy without automatic staging.",
+  "operation_id": "raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-blocker-priority-review",
+  "active_tranche": "Provider-free read-only canonical check-in ordinary-practice admission blocker priority review",
+  "objective": "Re-read the accepted ordinary-practice check-in admission-readiness evidence, rank its remaining blockers by dependency and architecture leverage, and freeze the narrowest next provider-free tranche without changing product behavior.",
   "status": "in_progress",
-  "source_head": "592423b490e80e10806502b251e424f068bdbf6f",
-  "authority_source": "The accepted nonpublishing rehearsal may open one separately bounded live-adoption efficacy review.",
+  "source_head": "4673385fbbdbf0e15a7fecd4451956693964ff74",
+  "authority_source": "The accepted live driver review returns the workflow to the current check-in product programme under Yuri's standing authority.",
   "checkpoint": {
-    "completed_stage": "Accepted ariadne-provider-free-governance-clockwork-bound-closeout-entrypoint-and-explicit-stage-manifest-rehearsal at the machine-resolved source.",
-    "next_executable_stage": "fresh_five_source_rehydration_then_freeze_one_tick_live_adoption_contract",
+    "completed_stage": "Accepted ariadne-provider-free-governance-clockwork-bound-closeout-entrypoint-live-adoption-efficacy-review at the machine-resolved source.",
+    "next_executable_stage": "fresh_five_source_rehydration_then_freeze_read_only_blocker_ranking_contract",
     "retry_counters": {
       "planning": 0,
       "implementation": 0,
@@ -34,14 +34,8 @@
     "reason": "unfinished_authorized_operation"
   },
   "protected_boundaries": [
-    "provider_free_governance_closeout_driver_live_adoption_efficacy_review_only",
-    "one_exact_semantic_governance_tick_only",
-    "bind_repository_virtual_environment_without_secret_or_environment_mutation",
-    "preserve_existing_semantic_commands_and_postpublication_test_selection",
-    "capture_existing_inline_live_validation_without_second_manual_readback",
-    "machine_derive_allowlisted_explicit_stage_manifest_without_git_index_mutation",
-    "no_automatic_git_staging_commit_or_push_by_driver",
-    "no_test_run_removal_skip_deselection_or_weakening",
+    "provider_free_read_only_check_in_admission_blocker_priority_review_only",
+    "accepted_existing_repository_evidence_only",
     "no_worker_dispatch_native_harness_provider_call_or_transport_qualification",
     "no_silent_claude_code_or_other_transport_fallback",
     "no_authority_allocation_or_worker_transport_policy_change",

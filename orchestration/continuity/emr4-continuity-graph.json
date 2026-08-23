@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 438,
+  "graph_revision": 439,
   "harvests": [],
   "nodes": [
     {
@@ -35385,9 +35385,94 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "ariadne-provider-free-governance-clockwork-bound-closeout-entrypoint-live-adoption-efficacy-review",
+      "title": "Provider-free governance clockwork bound closeout entrypoint live-adoption efficacy review",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "ariadne-provider-free-governance-clockwork-bound-closeout-entrypoint-and-explicit-stage-manifest-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "GPT Sol owns one exact provider-free live governance-driver efficacy review."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "adopt-bound-entrypoint-on-exact-zero-exit",
+          "source": "docs/ariadne-clockwork-bound-closeout-entrypoint-live-adoption-efficacy-review-plan.md",
+          "status": "accepted",
+          "summary": "Adopt the driver for its closed profile only if one live invocation completes both retained verification phases and exact stage derivation."
+        },
+        {
+          "id": "retain-inert-stage-manifest-and-lower-level-recovery",
+          "source": "docs/security/ariadne-clockwork-bound-closeout-entrypoint-live-adoption-efficacy-review-threat-model-delta.md",
+          "status": "accepted",
+          "summary": "Keep staging non-actuating and preserve the established writer and byte-exact rollback as recovery controls."
+        }
+      ],
+      "claim_scope": [
+        "One passing fixed driver result adopts the bound entrypoint only for the exact provider-free semantic governance profile."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/ariadne-clockwork-bound-closeout-entrypoint-live-adoption-efficacy-review-plan.md",
+          "docs/security/ariadne-clockwork-bound-closeout-entrypoint-live-adoption-efficacy-review-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/ariadne-provider-free-governance-clockwork-bound-closeout-entrypoint-live-adoption-efficacy-review/evidence.json",
+          "orchestration/continuity/ariadne-provider-free-governance-clockwork-bound-closeout-entrypoint-live-adoption-efficacy-review/report.md",
+          "orchestration/continuity/ariadne-provider-free-governance-clockwork-bound-closeout-entrypoint-live-adoption-efficacy-review/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/ariadne-clockwork-bound-closeout-entrypoint-live-adoption-efficacy-review-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-23--ariadne-clockwork-bound-closeout-entrypoint-live-adoption-efficacy-review.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/ariadne-clockwork-bound-closeout-entrypoint-live-adoption-efficacy-review-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/ariadne-clockwork-bound-closeout-entrypoint-live-adoption-efficacy-review-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/ariadne-clockwork-bound-closeout-entrypoint-live-adoption-efficacy-review-pre-verifier-receipt.json",
+          "orchestration/agent_inbox/codex/ariadne-clockwork-bound-closeout-entrypoint-live-adoption-efficacy-review-precommit-receipt.json"
+        ],
+        "tests": [
+          "tests/test_current_baton_consistency.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_transactional_closeout.py"
+        ],
+        "artifacts": [
+          "orchestration_harness/governance_clockwork_tick.py",
+          "scripts/ariadne_governance_clockwork_closeout.py",
+          "scripts/ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "orchestration/agent_inbox/codex/ariadne-clockwork-bound-closeout-entrypoint-live-adoption-efficacy-review-preplanning-continuation-intent.json",
+          "orchestration/agent_inbox/codex/ariadne-clockwork-bound-closeout-entrypoint-live-adoption-efficacy-review-pre-verifier-continuation-intent.json",
+          "orchestration/agent_inbox/codex/ariadne-clockwork-bound-closeout-entrypoint-live-adoption-efficacy-review-precommit-continuation-intent.json"
+        ]
+      },
+      "unresolved_gates": [
+        "Automatic staging and use outside the closed governance profile remain unadmitted."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-23T22:00:45.8830204+10:00",
+      "updated_at": "2026-08-23T22:00:45.8830204+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "4673385fbbdbf0e15a7fecd4451956693964ff74",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-23T21:18:20.9899474+10:00"
+  "updated_at": "2026-08-23T22:00:45.8830204+10:00"
 }
