@@ -1,0 +1,20 @@
+{
+  "schema_version": "ariadne.serial_continuation_intent.v1",
+  "preset": "provider_free_serial_observed_empty_workers",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "accept_typed_historical_diary_boundary_convergence_after_complete_governance_verification",
+  "assessed_stage": "historical_diary_access_boundary_convergence_sol_acceptance",
+  "active_evidence_paths": [
+    "docs/raisa-local-only-historical-diary-access-boundary-convergence-plan.md",
+    "docs/security/raisa-local-only-historical-diary-access-boundary-convergence-threat-model-delta.md",
+    "orchestration/agent_inbox/codex/raisa-local-only-historical-diary-access-boundary-convergence-preplanning-receipt.json",
+    "orchestration/continuity/raisa-local-only-historical-diary-snapshot-privacy-feasibility-review/real-access-subgate-contract.json",
+    "orchestration/continuity/ariadne-active-operation-latch/current.json"
+  ],
+  "lane_decision_overrides": [
+    {
+      "lane_id": "gemini_verifier",
+      "decision_code": "not_applicable_neutral"
+    }
+  ]
+}
