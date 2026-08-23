@@ -1,0 +1,46 @@
+{
+  "schema_version": "ariadne.tranche_efficacy_reading.v1",
+  "operation_id": "ariadne-provider-free-governance-clockwork-prospective-current-node-evidence-and-transaction-fact-derivation-repair",
+  "source_head": "86dc6652d154eaa6adc9ca97e7fa2b7e66d7323c",
+  "result": "three_measured_failure_shapes_moved_prepublication_or_output_owned",
+  "workflow": {
+    "new_runtime_control_layers": 0,
+    "new_required_operator_fields": 0,
+    "new_approval_gates": 0,
+    "new_required_closeout_documents": 0,
+    "new_product_files": 0,
+    "provider_calls": 0,
+    "model_workers": 0,
+    "implementation_test_correction_rounds": 1,
+    "procedural_command_shape_rejections": 1,
+    "product_reruns": 0,
+    "provider_reruns": 0,
+    "operator_authored_transaction_totals": 0,
+    "bespoke_updater_executions": 0,
+    "accepted_development_yield": 1
+  },
+  "matched_measurement": {
+    "preceding_postpublication_rollback_shapes": 3,
+    "now_prepublication_timestamp_shapes": 2,
+    "now_output_owned_publication_counter_shapes": 1,
+    "complete_hostile_error_set": 10,
+    "multi_file_build_error_set": 4,
+    "governance_tests_passed": 108,
+    "intent_fields_added": 0
+  },
+  "transaction_accounting": {
+    "authority": "closeout/clockwork-tick-evidence.json",
+    "preauthored_publication_attempts": false,
+    "preauthored_published_generations": false,
+    "preauthored_rollback_count": false,
+    "pending_until_clockwork_publication": true
+  },
+  "harness": {
+    "native_profile": "paused",
+    "claude_code_fallback": "not_authorized",
+    "deepseek_calls": 0,
+    "gemini_calls": 0,
+    "native_subagents": 0
+  },
+  "assessment": "The first repair removes the three measured postpublication failure shapes without adding operator input or weakening the clock. Transaction totals are intentionally absent from this prepublication reading; the repaired tick's machine output is their authority."
+}

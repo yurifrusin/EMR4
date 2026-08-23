@@ -1,0 +1,234 @@
+{
+  "schema_version": "ariadne.governance_live_tick_intent.v1",
+  "transaction_manifest": {
+    "schema_version": "ariadne.transactional_closeout_manifest.v1",
+    "operation_id": "ariadne-provider-free-governance-clockwork-prospective-current-node-evidence-and-transaction-fact-derivation-repair",
+    "title": "Governance clockwork prospective evidence and transaction-fact repair closeout",
+    "source_anchor": "current_head",
+    "recorded_at": "2026-08-23T16:46:31.8267653+10:00",
+    "node": {
+      "id": "ariadne-provider-free-governance-clockwork-prospective-current-node-evidence-and-transaction-fact-derivation-repair",
+      "title": "Provider-free governance clockwork prospective current-node evidence and transaction-fact derivation repair",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "ariadne-provider-free-read-only-governance-clockwork-ergonomics-and-efficacy-review",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's explicit ergonomics-review request and standing authority selected the measured existing-tick repair.",
+          "GPT Sol held the serial implementation and acceptance lease.",
+          "No Harness, provider, authority allocation, product, data, runtime or protected surface opened."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "validate-complete-prospective-human-evidence-set",
+          "source": "orchestration/continuity/ariadne-provider-free-governance-clockwork-prospective-current-node-evidence-and-transaction-fact-derivation-repair/evidence.json",
+          "status": "accepted",
+          "summary": "Validate all prospective plan, closeout and acceptance paths and headers before transaction projection or canonical write."
+        },
+        {
+          "id": "return-one-typed-complete-error-set",
+          "source": "orchestration/continuity/ariadne-provider-free-governance-clockwork-prospective-current-node-evidence-and-transaction-fact-derivation-repair/report.md",
+          "status": "accepted",
+          "summary": "Return every detectable prospective human-evidence defect together as typed revision-required JSON with zero publication or lease movement."
+        },
+        {
+          "id": "derive-command-local-transaction-facts",
+          "source": "scripts/ariadne_governance_clockwork_tick.py",
+          "status": "accepted",
+          "summary": "Emit exact command-local preparation, publication, readback, rollback, lease and generation facts without new intent fields or invented historical totals."
+        },
+        {
+          "id": "select-typed-semantic-builder-successor",
+          "source": "docs/ariadne-provider-free-governance-clockwork-prospective-current-node-evidence-and-transaction-fact-derivation-repair-closeout.md",
+          "status": "accepted",
+          "summary": "Use the passing matched reading to target the remaining highest-yield free-form closeout choices inside the existing tick."
+        }
+      ],
+      "claim_scope": [
+        "The existing tick rejects the complete prospective plans, closeouts and acceptances error set before publication.",
+        "The CLI emits command-local transaction facts for dry, rejected, published, idempotent and rollback dispositions.",
+        "The three previously measured rollback shapes are now prepublication or output-owned.",
+        "Zero new required operator fields, approvals, gates, ledgers, closeout documents or runtime control layers were added.",
+        "The result is provider-free governance evidence and makes no product or worker-reliability claim."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/ariadne-provider-free-governance-clockwork-prospective-current-node-evidence-and-transaction-fact-derivation-repair-plan.md",
+          "docs/security/ariadne-provider-free-governance-clockwork-prospective-current-node-evidence-and-transaction-fact-derivation-repair-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/ariadne-provider-free-governance-clockwork-prospective-current-node-evidence-and-transaction-fact-derivation-repair/evidence.json",
+          "orchestration/continuity/ariadne-provider-free-governance-clockwork-prospective-current-node-evidence-and-transaction-fact-derivation-repair/report.md",
+          "orchestration/continuity/ariadne-provider-free-governance-clockwork-prospective-current-node-evidence-and-transaction-fact-derivation-repair/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/ariadne-provider-free-governance-clockwork-prospective-current-node-evidence-and-transaction-fact-derivation-repair-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-23--clockwork-prospective-evidence-and-transaction-fact-repair.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/ariadne-clockwork-prospective-evidence-transaction-fact-repair-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/ariadne-clockwork-prospective-evidence-transaction-fact-repair-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/ariadne-clockwork-prospective-evidence-transaction-fact-repair-pre-verifier-receipt.json"
+        ],
+        "tests": [
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_current_baton_consistency.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_transactional_closeout.py"
+        ],
+        "artifacts": [
+          "orchestration_harness/governance_clockwork_tick.py",
+          "scripts/ariadne_governance_clockwork_tick.py"
+        ]
+      },
+      "unresolved_gates": [
+        "The broader typed semantic closeout builder and command registry remain unimplemented until their exact zero-added-bureaucracy plan passes.",
+        "Native useful-completion reliability remains unproved and the pinned occupied profile remains paused.",
+        "The generic Authority Allocation prose conflict remains recorded and outside this repair.",
+        "All check-in external operational facts and human choices remain closed.",
+        "Product, provider, runtime, deployment, Pages and protected refs remain closed."
+      ]
+    },
+    "journey": {
+      "strategic_role": "Turn the clockwork ergonomics review's highest-confidence recommendation into one existing-tick control repair.",
+      "outcome": "Complete prospective human-evidence errors and command-local transaction facts are machine readings rather than postpublication operator reconstruction.",
+      "evidence": [
+        "orchestration/continuity/ariadne-provider-free-read-only-governance-clockwork-ergonomics-and-efficacy-review/report.md",
+        "docs/ariadne-provider-free-governance-clockwork-prospective-current-node-evidence-and-transaction-fact-derivation-repair-plan.md",
+        "orchestration/continuity/ariadne-provider-free-governance-clockwork-prospective-current-node-evidence-and-transaction-fact-derivation-repair/evidence.json",
+        "orchestration/continuity/ariadne-provider-free-governance-clockwork-prospective-current-node-evidence-and-transaction-fact-derivation-repair/report.md"
+      ]
+    },
+    "current_position": {
+      "strategic_role": "Keep fail-closed governance safety while moving repository-known clerical work off the operator.",
+      "why_now": "The preceding packet measured three avoidable postpublication rollback shapes and the existing tick can derive all three without a new control layer.",
+      "outcome": "One preparation pass returns all human-evidence defects and every command reports its own exact transaction facts.",
+      "unlocks": [
+        "A matched live closeout can use prospective validation before pointer movement.",
+        "Future efficacy readings can consume output-owned command facts instead of manual counters.",
+        "The next tranche can target remaining high-volume free-form fields after a passing first repair."
+      ],
+      "does_not_solve": [
+        "It does not make every future closeout error-free.",
+        "It does not reconstruct cumulative history absent retained machine outputs.",
+        "It does not qualify a DeepSeek transport or invoke a provider.",
+        "It does not open check-in operational choices, product runtime or protected integration."
+      ],
+      "evidence": [
+        "orchestration/continuity/ariadne-provider-free-governance-clockwork-prospective-current-node-evidence-and-transaction-fact-derivation-repair/evidence.json",
+        "orchestration/continuity/ariadne-provider-free-governance-clockwork-prospective-current-node-evidence-and-transaction-fact-derivation-repair/report.md",
+        "docs/ariadne-provider-free-governance-clockwork-prospective-current-node-evidence-and-transaction-fact-derivation-repair-closeout.md",
+        "orchestration/agent_inbox/codex/ariadne-clockwork-prospective-evidence-transaction-fact-repair-sol-acceptance.md"
+      ],
+      "orientation_statement": "Preserve the clock's safety escapement while replacing repository-known operator memory with prospective typed readings."
+    },
+    "next_operation": {
+      "operation_id": "ariadne-provider-free-governance-clockwork-typed-semantic-closeout-builder-and-command-registry-rehearsal",
+      "active_tranche": "Provider-free governance clockwork typed semantic closeout builder and command registry rehearsal",
+      "objective": "Replace the highest-yield remaining free-form command shapes, closed labels, repository test paths and repeated human-evidence headers with typed selectors and repository-derived expansions inside the existing tick, proving fewer required operator leaves with no new gate, document, approval or parallel control layer.",
+      "authority_source": "Yuri's explicit ergonomics request, standing uninterrupted-development authority and the accepted matched first-repair reading select this next narrow interface repair; provider, product and protected surfaces remain closed.",
+      "next_stage": "fresh_five_source_rehydration_then_freeze_exact_typed_selectors_repository_derived_expansions_and_operator_leaf_reduction_acceptance"
+    },
+    "incidents": [],
+    "broker": {
+      "enabled": false,
+      "posture": "provider_free_shadow"
+    }
+  },
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v1",
+    "commands": [
+      {
+        "command_id": "clockwork-prospective-evidence-repair-closeout-tick-check",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "scripts.ariadne_governance_clockwork_tick",
+          "--check",
+          "--intent",
+          "orchestration/continuity/ariadne-provider-free-governance-clockwork-prospective-current-node-evidence-and-transaction-fact-derivation-repair/closeout/closeout-intent.json"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "clockwork-prospective-evidence-repair-json",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "json.tool",
+          "orchestration/continuity/ariadne-provider-free-governance-clockwork-prospective-current-node-evidence-and-transaction-fact-derivation-repair/evidence.json"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "clockwork-prospective-evidence-repair-ruff",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "ruff",
+          "check",
+          "orchestration_harness/governance_clockwork_tick.py",
+          "scripts/ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "clockwork-prospective-evidence-repair-governance-tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "--repo-root",
+          "C:/Users/sarashera/emr4",
+          "tests/test_current_baton_consistency.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_transactional_closeout.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      }
+    ]
+  },
+  "baton_acceptance": {
+    "label": "Current DeepSeek native Harness acceptance",
+    "paths": [
+      "orchestration/continuity/ariadne-provider-free-governance-clockwork-prospective-current-node-evidence-and-transaction-fact-derivation-repair/report.md",
+      "orchestration/continuity/ariadne-provider-free-governance-clockwork-prospective-current-node-evidence-and-transaction-fact-derivation-repair/efficacy-reading.json",
+      "docs/ariadne-provider-free-governance-clockwork-prospective-current-node-evidence-and-transaction-fact-derivation-repair-closeout.md",
+      "orchestration/agent_inbox/codex/ariadne-clockwork-prospective-evidence-transaction-fact-repair-sol-acceptance.md"
+    ]
+  },
+  "next_operation_protected_boundaries": [
+    "provider_free_existing_governance_clockwork_typed_semantic_interface_rehearsal_only",
+    "typed_selectors_only_for_highest_yield_command_shapes_closed_labels_repository_test_paths_and_repeated_human_evidence_headers",
+    "repository_derived_expansions_replace_operator_repetition_without_weakening_validation",
+    "prove_required_operator_leaf_reduction_against_the_frozen_first_repair_closeout",
+    "zero_net_new_required_operator_fields_approvals_gates_ledgers_or_closeout_documents",
+    "preserve_single_writer_full_git_binding_closed_vocabularies_complete_prospective_error_set_pointer_last_publication_and_byte_exact_rollback",
+    "no_live_publication_through_new_builder_until_frozen_fixtures_and_full_governance_tests_pass",
+    "no_native_harness_worker_provider_call_or_transport_qualification",
+    "no_silent_claude_code_or_other_transport_fallback",
+    "no_authority_allocation_or_worker_transport_policy_change",
+    "no_check_in_external_fact_target_custody_policy_provisioning_or_activation_selection",
+    "no_existing_product_source_route_api_client_configuration_or_runtime_change",
+    "no_environment_variable_secret_credential_network_database_or_infrastructure_access",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_product_patient_appointment_clinical_historical_or_protected_data",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only"
+  ]
+}
