@@ -24,7 +24,7 @@ content was enumerated or accessed, and no provider, model, product, runtime,
 deployment, Pages or protected-ref authority opened.
 
 One wrong manually expanded planning-commit value in the first evidence draft
-was rejected by full-object readback before staging or publication. Register
-The first incident-bearing rehearsal also omitted its required revision
+was rejected by full-object readback before staging or publication. The first
+incident-bearing rehearsal also omitted its required revision
 reading and was rejected before verification. Register revision 654 records
 both contained lapses and their deterministic corrections.
