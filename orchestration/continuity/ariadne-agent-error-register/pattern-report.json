@@ -1,44 +1,44 @@
 {
   "schema_version": "ariadne.agent-error-pattern-report.v1",
-  "register_revision": 658,
+  "register_revision": 659,
   "source_cutoff_on": "2026-08-24",
   "coverage": "bounded_known_preserved_incidents",
-  "canonical_register_sha256": "8561c873b8e9ebaff43ac072e2ac0ddc63fd2f245d552dddf60b7f2c6e616484",
-  "incident_count": 1147,
+  "canonical_register_sha256": "a045cce4e8c6b3cd535aba10b127cad48f27a703c44f52fa60238d0a641b835e",
+  "incident_count": 1149,
   "open_incident_ids": [],
   "counts": {
     "by_origin": {
       "agent_behavior": 613,
       "harness": 73,
-      "operator": 291,
-      "repository": 154,
+      "operator": 292,
+      "repository": 155,
       "transport": 16
     },
     "by_category": {
       "command_scope_violation": 111,
       "evidence_misreport": 80,
       "harness_failure": 73,
-      "operator_error": 291,
+      "operator_error": 292,
       "output_contract_violation": 367,
       "read_only_violation": 5,
       "reasoning_claim_error": 50,
-      "repository_defect": 154,
+      "repository_defect": 155,
       "transport_timeout": 16
     },
     "by_role": {
-      "implementer": 90,
+      "implementer": 91,
       "integration_reviewer": 5,
-      "orchestrator": 989,
+      "orchestrator": 990,
       "verifier": 63
     },
     "by_process_severity": {
-      "low": 757,
+      "low": 759,
       "material": 135,
       "moderate": 255
     },
     "by_candidate_state": {
-      "accepted_candidate_changed": 235,
-      "canonical_unchanged": 728,
+      "accepted_candidate_changed": 236,
+      "canonical_unchanged": 729,
       "untrusted_partial_worktree": 184
     },
     "by_resource_and_role": {
@@ -150,6 +150,7 @@
       "clockwork-canonical-path-staging::orchestrator": 1,
       "clockwork-closed-rolling-acceptance-label::orchestrator": 1,
       "clockwork-closed-tick-intent-path::orchestrator": 1,
+      "clockwork-closed-vocabulary::orchestrator": 1,
       "clockwork-closeout-driver::orchestrator": 1,
       "clockwork-closeout-incident-observation::orchestrator": 1,
       "clockwork-closeout-intent::orchestrator": 3,
@@ -341,6 +342,7 @@
       "guard-postrewrite-selected-tools-count::orchestrator": 1,
       "harness-plan-source-assertions::orchestrator": 2,
       "historical-bounded-worker-controller-source::orchestrator": 1,
+      "historical-diary-active-attempt-test-ownership::implementer": 1,
       "historical-latch-test-selection::orchestrator": 1,
       "historical-source-binding-test-selection::orchestrator": 1,
       "implementation-file-hash-readback::orchestrator": 1,

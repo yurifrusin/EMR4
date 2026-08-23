@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> Measure one fixed slice once; keep promotion default-deny.
+> Build the gate now; keep the first artifact unwritten.
 
 ## North star
 
@@ -672,22 +672,24 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    The mechanism completed safely and closed the main-story coordinate hypothesis with a definite zero-anchor result. Lineage parent: `raisa-provider-free-authored-synthetic-historical-diary-word-coordinate-timeout-containment-throughput-recovery`.
 328. **Recover an explicit scheduling clock without layout inference or source-value release. — Raisa provider-free authored-synthetic historical Diary leading explicit time-token recovery rehearsal**
    The leading-token parser and first-class explicit-source integration pass entirely on authored-synthetic evidence. Lineage parent: `raisa-local-only-historical-diary-document-story-time-coordinate-bounded-measurement-recovery-rehearsal`.
+329. **Recover realistic scheduling motion without releasing historical source values. — Raisa local-only historical Diary leading explicit time-token bounded measurement rehearsal**
+   The strict leading clock produced one contained useful candidate from the fixed private slice. Lineage parent: `raisa-provider-free-authored-synthetic-historical-diary-leading-explicit-time-token-recovery-rehearsal`.
 
 ## Current position
 
-**Measure whether the fixed private slice actually contains useful leading explicit time tokens. — Raisa provider-free authored-synthetic historical Diary leading explicit time-token recovery rehearsal**
+**Make first-use promotion deterministic before a reusable derivative is possible. — Raisa local-only historical Diary leading explicit time-token bounded measurement rehearsal**
 
-**Why this proof came next:** The parser, hostile denials, token-free hashing and aggregate admission now pass before private access.
+**Why this proof came next:** A useful private candidate exists and no reusable artifact does.
 
-One fresh 80-snapshot run may produce a generic ignored-local measurement reading only.
+A typed in-memory evaluator can bind any future admission to one exact digest and purpose.
 
 ### What this unlocks
 
-- Candidate-specific first-use evaluation only if a useful minimized derivative later exists.
+- A later separately planned minimised historical-derived materialiser only after exact admission.
 
 ### What it does not solve
 
-- No reusable historical derivative, product, provider or production authority opens.
+- No historical re-access, artifact write, product, provider or production authority opens.
 
 ## Continuity and authority
 
@@ -1564,6 +1566,8 @@ Prerequisites:
 - `docs/raisa-local-only-historical-diary-access-boundary-convergence-plan.md`
 - `docs/raisa-local-only-historical-diary-document-story-time-coordinate-bounded-measurement-recovery-rehearsal-plan.md`
 - `docs/raisa-local-only-historical-diary-document-story-time-coordinate-recovery-rehearsal-plan.md`
+- `docs/raisa-local-only-historical-diary-leading-explicit-time-token-bounded-measurement-rehearsal-closeout.md`
+- `docs/raisa-local-only-historical-diary-leading-explicit-time-token-bounded-measurement-rehearsal-plan.md`
 - `docs/raisa-local-only-historical-diary-snapshot-privacy-feasibility-review-plan.md`
 - `docs/raisa-local-only-historical-diary-structural-time-axis-recovery-rehearsal-plan.md`
 - `docs/raisa-maintained-oidc-verifier-session-bridge-architecture-closeout.md`
@@ -1598,7 +1602,6 @@ Prerequisites:
 - `docs/raisa-postgresql-oidc-operational-connection-boundary-plan.md`
 - `docs/raisa-practice-context-fabric-direction.md`
 - `docs/raisa-projection-neutral-kernel-truth-architecture.md`
-- `docs/raisa-provider-free-authored-synthetic-historical-diary-leading-explicit-time-token-recovery-rehearsal-closeout.md`
 - `docs/raisa-provider-free-authored-synthetic-historical-diary-leading-explicit-time-token-recovery-rehearsal-plan.md`
 - `docs/raisa-provider-free-authored-synthetic-historical-diary-word-coordinate-timeout-containment-throughput-recovery-plan.md`
 - `docs/raisa-provider-free-authored-synthetic-native-harness-structured-diagnostic-bounded-worker-controller-convergence-rehearsal-closeout.md`
@@ -2461,6 +2464,7 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-legacy-route-convergence-kernel-interface-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-legacy-route-convergence-kernel-interface-preplanning-v2-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-legacy-route-convergence-kernel-interface-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-local-only-historical-diary-leading-explicit-time-token-bounded-measurement-rehearsal-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-gemini37-command-manifest.json`
 - `orchestration/agent_inbox/codex/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-gemini37-repair-review-command-manifest.json`
 - `orchestration/agent_inbox/codex/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-gemini37-repair-review-packet.md`
@@ -2488,7 +2492,6 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-post-combined-editor-compass-baton-orientation-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-post-status-action-compass-baton-orientation-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-post-status-action-compass-baton-orientation-sol-acceptance.md`
-- `orchestration/agent_inbox/codex/raisa-provider-free-authored-synthetic-historical-diary-leading-explicit-time-token-recovery-rehearsal-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review-precommit-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-default-off-live-source-observation-boundary-sol-acceptance.md`
@@ -3055,6 +3058,8 @@ Prerequisites:
 - `orchestration/continuity/raisa-local-only-historical-diary-access-boundary-convergence/report.md`
 - `orchestration/continuity/raisa-local-only-historical-diary-document-story-time-coordinate-bounded-measurement-recovery-rehearsal/report.md`
 - `orchestration/continuity/raisa-local-only-historical-diary-document-story-time-coordinate-recovery-rehearsal/report.md`
+- `orchestration/continuity/raisa-local-only-historical-diary-leading-explicit-time-token-bounded-measurement-rehearsal/evidence.json`
+- `orchestration/continuity/raisa-local-only-historical-diary-leading-explicit-time-token-bounded-measurement-rehearsal/report.md`
 - `orchestration/continuity/raisa-local-only-historical-diary-snapshot-privacy-feasibility-review/report.md`
 - `orchestration/continuity/raisa-local-only-historical-diary-structural-time-axis-recovery-rehearsal/report.md`
 - `orchestration/continuity/raisa-maintained-oidc-verifier-session-bridge-architecture/architecture-policy.json`
@@ -3070,7 +3075,6 @@ Prerequisites:
 - `orchestration/continuity/raisa-ordinary-diary-cancellation-compatibility-consumer-convergence-review/ordinary-diary-cancellation-compatibility-consumer-convergence-review-evidence.schema.json`
 - `orchestration/continuity/raisa-postgresql-oidc-authorization-attempt-store/live-local-backend-postgres-evidence.json`
 - `orchestration/continuity/raisa-postgresql-oidc-operational-connection-boundary/live-local-backend-postgres-operational-evidence.json`
-- `orchestration/continuity/raisa-provider-free-authored-synthetic-historical-diary-leading-explicit-time-token-recovery-rehearsal/evidence.json`
 - `orchestration/continuity/raisa-provider-free-authored-synthetic-historical-diary-leading-explicit-time-token-recovery-rehearsal/report.md`
 - `orchestration/continuity/raisa-provider-free-authored-synthetic-historical-diary-word-coordinate-timeout-containment-throughput-recovery/report.md`
 - `orchestration/continuity/raisa-provider-free-authored-synthetic-native-harness-structured-diagnostic-bounded-worker-controller-convergence-rehearsal/deterministic-evidence.json`
@@ -4005,4 +4009,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 433; continuity graph revision 451._
+_Compass map revision 434; continuity graph revision 452._

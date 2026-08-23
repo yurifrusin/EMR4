@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 658,
+  "register_revision": 659,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-24",
@@ -44123,6 +44123,78 @@
       "incident_id": "AER-1147",
       "attempt_id": "clock-b0c70b657722ef224573fdc7",
       "origin": "repository",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-24",
+      "tranche": "historical-diary-leading-time-measurement",
+      "role": "implementer",
+      "resource_id": "historical-diary-active-attempt-test-ownership",
+      "model": "gpt-sol",
+      "reasoning_level": "extra_high",
+      "transport": "local_repository_clockwork",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "low",
+      "expected_invariant": "Older tests preserve immutable prior evidence while only the current tranche test asserts the active ignored attempt root.",
+      "observed_error": "One older structural recovery test still asserted that the v2 root was active.",
+      "detection_method": "The complete pre-access historical-Diary regression gate failed closed.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-local-only-historical-diary-leading-explicit-time-token-bounded-measurement-rehearsal/closeout/prepublication-contained-lapses.json"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.prior_attempt_tests_must_not_claim_current_active_root",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Remove mutable active-root ownership from the old test and keep it in the current v3 test.",
+        "prevention_control": "Attempt-specific tests assert their immutable root while active-root ownership advances in exactly one current test.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-659.md",
+          "orchestration/continuity/raisa-local-only-historical-diary-leading-explicit-time-token-bounded-measurement-rehearsal/evidence.json"
+        ]
+      },
+      "incident_id": "AER-1148",
+      "attempt_id": "clock-cac6500eab0a18011d7325ae",
+      "origin": "repository",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-24",
+      "tranche": "historical-diary-leading-time-measurement",
+      "role": "orchestrator",
+      "resource_id": "clockwork-closed-vocabulary",
+      "model": "gpt-sol",
+      "reasoning_level": "extra_high",
+      "transport": "local_repository_clockwork",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Incident fields and successor boundaries use executable vocabularies before rehearsal.",
+      "observed_error": "Drafts used unregistered vocabulary, omitted the denial mode, assumed an absent result key and referenced a missing register reading.",
+      "detection_method": "Schema readings, a wrapper error and two nonpublishing ticks exposed the defects.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-local-only-historical-diary-leading-explicit-time-token-bounded-measurement-rehearsal/closeout/prepublication-contained-lapses.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.closeout_fields_require_executable_vocabularies",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Select executable values, restore the denial mode, fix the wrapper and add the referenced register reading.",
+        "prevention_control": "Validate incident fields and successor boundaries directly before rehearsal.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-659.md",
+          "orchestration/continuity/raisa-local-only-historical-diary-leading-explicit-time-token-bounded-measurement-rehearsal/evidence.json"
+        ]
+      },
+      "incident_id": "AER-1149",
+      "attempt_id": "clock-72462d282c9da1c2e03f9d6a",
+      "origin": "operator",
       "related_incident_ids": [],
       "status": "corrected"
     }

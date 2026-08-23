@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 451,
+  "graph_revision": 452,
   "harvests": [],
   "nodes": [
     {
@@ -36540,9 +36540,99 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "raisa-local-only-historical-diary-leading-explicit-time-token-bounded-measurement-rehearsal",
+      "title": "Raisa local-only historical Diary leading explicit time-token bounded measurement rehearsal",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-authored-synthetic-historical-diary-leading-explicit-time-token-recovery-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri delegated first-use gate timing and uninterrupted development; accept the sole locally restricted candidate and make the closed gate executable before any reusable derivative is written."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-leading-time-locally-restricted-candidate",
+          "source": "orchestration/continuity/raisa-local-only-historical-diary-leading-explicit-time-token-bounded-measurement-rehearsal/evidence.json",
+          "status": "accepted",
+          "summary": "Accept exact reviewed source a9e00638b960306766260d6df674c3489be58b86 after one bind, one no-retry run, zero leakage and 222 passing controls."
+        },
+        {
+          "id": "keep-first-use-closed-and-require-minimisation",
+          "source": "orchestration/continuity/raisa-local-only-historical-diary-leading-explicit-time-token-bounded-measurement-rehearsal/report.md",
+          "status": "accepted",
+          "summary": "The useful private candidate opens no reusable artifact; nontrivial uniqueness diagnostics block whole-day or near-lossless first use."
+        },
+        {
+          "id": "continue-to-typed-candidate-specific-first-use-evaluator",
+          "source": "orchestration/continuity/raisa-local-only-historical-diary-leading-explicit-time-token-bounded-measurement-rehearsal/next-tranche-contract.json",
+          "status": "accepted",
+          "summary": "Implement the existing closed gate on authored-synthetic in-memory candidates before any historical-derived artifact materialisation."
+        }
+      ],
+      "claim_scope": [
+        "The sole 80-snapshot run mapped 5281 of 12557 eligible segments across 34 minutes with a 10-minute mode, 199 stable records, 502 changes, zero leakage and complete cleanup."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-local-only-historical-diary-leading-explicit-time-token-bounded-measurement-rehearsal-plan.md",
+          "docs/security/raisa-local-only-historical-diary-leading-explicit-time-token-bounded-measurement-rehearsal-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-local-only-historical-diary-leading-explicit-time-token-bounded-measurement-rehearsal/evidence.json",
+          "orchestration/continuity/raisa-local-only-historical-diary-leading-explicit-time-token-bounded-measurement-rehearsal/report.md",
+          "orchestration/continuity/raisa-local-only-historical-diary-leading-explicit-time-token-bounded-measurement-rehearsal/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/raisa-local-only-historical-diary-leading-explicit-time-token-bounded-measurement-rehearsal-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-24--raisa-local-only-historical-diary-leading-explicit-time-token-bounded-measurement-rehearsal.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-local-only-historical-diary-leading-explicit-time-token-bounded-measurement-rehearsal-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-local-only-historical-diary-leading-explicit-time-token-bounded-measurement-rehearsal-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-local-only-historical-diary-leading-explicit-time-token-bounded-measurement-rehearsal-pre-verifier-receipt.json",
+          "orchestration/continuity/raisa-local-only-historical-diary-leading-explicit-time-token-bounded-measurement-rehearsal/closeout/prepublication-contained-lapses.json",
+          "orchestration/continuity/raisa-local-only-historical-diary-leading-explicit-time-token-bounded-measurement-rehearsal/closeout/pushover-notification-receipt.json"
+        ],
+        "tests": [
+          "tests/test_current_baton_consistency.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_transactional_closeout.py"
+        ],
+        "artifacts": [
+          "orchestration_harness/governance_clockwork_tick.py",
+          "scripts/ariadne_governance_clockwork_closeout.py",
+          "scripts/ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "orchestration/continuity/raisa-local-only-historical-diary-leading-explicit-time-token-bounded-measurement-rehearsal/next-tranche-contract.json"
+        ]
+      },
+      "unresolved_gates": [
+        "Reusable historical-derived materialisation, candidate admission and every product/provider/protected surface remain gated."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-24T09:01:37.5638009+10:00",
+      "updated_at": "2026-08-24T09:01:37.5638009+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "7f9a526e57a4c10502f01b0e7c1cc5ec6910f00c",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-24T07:59:22.5874518+10:00"
+  "updated_at": "2026-08-24T09:01:37.5638009+10:00"
 }

@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 433,
-  "updated_at": "2026-08-24T07:59:22.5874518+10:00",
-  "source_graph_revision": 451,
-  "orientation_statement": "Measure one fixed slice once; keep promotion default-deny.",
+  "map_revision": 434,
+  "updated_at": "2026-08-24T09:01:37.5638009+10:00",
+  "source_graph_revision": 452,
+  "orientation_statement": "Build the gate now; keep the first artifact unwritten.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -5467,24 +5467,34 @@
         "docs/raisa-provider-free-authored-synthetic-historical-diary-leading-explicit-time-token-recovery-rehearsal-plan.md",
         "orchestration/continuity/raisa-provider-free-authored-synthetic-historical-diary-leading-explicit-time-token-recovery-rehearsal/report.md"
       ]
+    },
+    {
+      "node_id": "raisa-local-only-historical-diary-leading-explicit-time-token-bounded-measurement-rehearsal",
+      "lineage_parent": "raisa-provider-free-authored-synthetic-historical-diary-leading-explicit-time-token-recovery-rehearsal",
+      "strategic_role": "Recover realistic scheduling motion without releasing historical source values.",
+      "outcome": "The strict leading clock produced one contained useful candidate from the fixed private slice.",
+      "evidence": [
+        "docs/raisa-local-only-historical-diary-leading-explicit-time-token-bounded-measurement-rehearsal-plan.md",
+        "orchestration/continuity/raisa-local-only-historical-diary-leading-explicit-time-token-bounded-measurement-rehearsal/report.md"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "raisa-provider-free-authored-synthetic-historical-diary-leading-explicit-time-token-recovery-rehearsal",
-    "strategic_role": "Measure whether the fixed private slice actually contains useful leading explicit time tokens.",
-    "why_now": "The parser, hostile denials, token-free hashing and aggregate admission now pass before private access.",
-    "outcome": "One fresh 80-snapshot run may produce a generic ignored-local measurement reading only.",
+    "node_id": "raisa-local-only-historical-diary-leading-explicit-time-token-bounded-measurement-rehearsal",
+    "strategic_role": "Make first-use promotion deterministic before a reusable derivative is possible.",
+    "why_now": "A useful private candidate exists and no reusable artifact does.",
+    "outcome": "A typed in-memory evaluator can bind any future admission to one exact digest and purpose.",
     "unlocks": [
-      "Candidate-specific first-use evaluation only if a useful minimized derivative later exists."
+      "A later separately planned minimised historical-derived materialiser only after exact admission."
     ],
     "does_not_solve": [
-      "No reusable historical derivative, product, provider or production authority opens."
+      "No historical re-access, artifact write, product, provider or production authority opens."
     ],
     "evidence": [
-      "orchestration/continuity/raisa-provider-free-authored-synthetic-historical-diary-leading-explicit-time-token-recovery-rehearsal/evidence.json",
-      "orchestration/continuity/raisa-provider-free-authored-synthetic-historical-diary-leading-explicit-time-token-recovery-rehearsal/report.md",
-      "docs/raisa-provider-free-authored-synthetic-historical-diary-leading-explicit-time-token-recovery-rehearsal-closeout.md",
-      "orchestration/agent_inbox/codex/raisa-provider-free-authored-synthetic-historical-diary-leading-explicit-time-token-recovery-rehearsal-sol-acceptance.md"
+      "orchestration/continuity/raisa-local-only-historical-diary-leading-explicit-time-token-bounded-measurement-rehearsal/evidence.json",
+      "orchestration/continuity/raisa-local-only-historical-diary-leading-explicit-time-token-bounded-measurement-rehearsal/report.md",
+      "docs/raisa-local-only-historical-diary-leading-explicit-time-token-bounded-measurement-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-local-only-historical-diary-leading-explicit-time-token-bounded-measurement-rehearsal-sol-acceptance.md"
     ]
   },
   "decision_horizon": [
