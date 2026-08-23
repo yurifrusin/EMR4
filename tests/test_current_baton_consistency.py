@@ -4,7 +4,9 @@ from pathlib import Path
 import pytest
 
 from orchestration_harness.governance_clockwork_tick import (
+    REQUIRED_NEXT_BOUNDARIES,
     prospective_human_evidence_header_errors,
+    validate_next_operation_protected_boundaries,
 )
 
 
@@ -514,13 +516,8 @@ def test_current_rows_preserve_closed_surface_boundary() -> None:
     for phrase in phrases:
         assert phrase in next_work
     if clockwork_generation_selected:
-        boundaries = set(latch["protected_boundaries"])
-        assert {
-            "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
-            "no_product_patient_appointment_clinical_historical_or_protected_data",
-            "no_production_runtime_deployment_release_or_pages",
-            "no_protected_evidence_access_or_protected_ref_movement",
-            "docs_branding_and_all_unrelated_untracked_files_preserved",
-            "explicit_path_staging_only",
-        }.issubset(boundaries)
+        assert REQUIRED_NEXT_BOUNDARIES.issubset(latch["protected_boundaries"])
+        assert validate_next_operation_protected_boundaries(
+            latch["protected_boundaries"]
+        ) == latch["protected_boundaries"]
     assert "single-owner-migration-retirement-rehearsal" not in next_work

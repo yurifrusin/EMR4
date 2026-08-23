@@ -160,12 +160,51 @@ DERIVED_INPUT_KEYS = {
 REQUIRED_NEXT_BOUNDARIES = {
     "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
     "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
-    "no_product_patient_appointment_clinical_historical_or_protected_data",
     "no_production_runtime_deployment_release_or_pages",
     "no_protected_evidence_access_or_protected_ref_movement",
     "docs_branding_and_all_unrelated_untracked_files_preserved",
     "explicit_path_staging_only",
 }
+
+LEGACY_FULL_DATA_DENIAL_BOUNDARY = (
+    "no_product_patient_appointment_clinical_historical_or_protected_data"
+)
+TYPED_PRODUCT_DATA_DENIAL_BOUNDARY = (
+    "no_product_patient_appointment_clinical_or_protected_data"
+)
+TYPED_HISTORICAL_DATA_DENIAL_BOUNDARY = "no_historical_data_access"
+HISTORICAL_DIARY_ACCESS_BOUNDARY = (
+    "allow_local_only_historical_diary_snapshot_measured_privacy_probe"
+)
+HISTORICAL_DIARY_SUBGATE_BOUNDARIES = frozenset(
+    {
+        HISTORICAL_DIARY_ACCESS_BOUNDARY,
+        "historical_diary_privacy_subgate_contract_sha256_"
+        "e312d58d7743b9b4d79d8a947b765732eea142f47586e0bd1f4e738047802615",
+        "historical_diary_access_one_leaf_root_one_dense_day_nonrecursive_"
+        "maximum_80_files",
+        "historical_diary_access_maximum_134217728_total_bytes_and_"
+        "8388608_per_file",
+        "historical_diary_access_read_only_no_symlink_or_reparse_traversal",
+        "historical_diary_access_new_ignored_output_root_ephemeral_in_memory_"
+        "key_and_failure_cleanup",
+        "historical_diary_access_no_network_provider_model_prompt_telemetry_"
+        "clipboard_or_external_release",
+        "historical_diary_access_no_raw_text_identity_filename_timestamp_key_"
+        "or_mapping_commit",
+        "historical_diary_access_strongest_result_locally_restricted_candidate_"
+        "without_downstream_authority",
+        "historical_diary_access_no_fixture_memory_rag_product_runtime_route_"
+        "api_client_database_or_configuration",
+    }
+)
+HISTORICAL_DATA_BOUNDARY_VOCABULARY = frozenset(
+    {
+        LEGACY_FULL_DATA_DENIAL_BOUNDARY,
+        TYPED_HISTORICAL_DATA_DENIAL_BOUNDARY,
+        *HISTORICAL_DIARY_SUBGATE_BOUNDARIES,
+    }
+)
 
 TRANSACTION_KEYS = {
     "schema_version",
@@ -228,6 +267,50 @@ def _optional_strings(value: object, rule: str, *, maximum: int = 500) -> list[s
     if len(result) != len(set(result)):
         _reject(rule)
     return result
+
+
+def validate_next_operation_protected_boundaries(
+    value: object, *, rule: str = "tick_next_boundaries"
+) -> list[str]:
+    """Admit one closed historical-data mode alongside the stable safety floor."""
+
+    boundaries = _strings(value, rule)
+    boundary_set = set(boundaries)
+    if not REQUIRED_NEXT_BOUNDARIES.issubset(boundary_set):
+        _reject(rule + "_floor")
+
+    unknown_allowances = {
+        item
+        for item in boundary_set
+        if item.startswith("allow_") and item != HISTORICAL_DIARY_ACCESS_BOUNDARY
+    }
+    if unknown_allowances:
+        _reject(rule + "_access_vocabulary")
+
+    historical_boundaries = {
+        item for item in boundary_set if "historical" in item
+    }
+    if not historical_boundaries.issubset(HISTORICAL_DATA_BOUNDARY_VOCABULARY):
+        _reject(rule + "_historical_vocabulary")
+
+    if LEGACY_FULL_DATA_DENIAL_BOUNDARY in historical_boundaries:
+        if historical_boundaries != {LEGACY_FULL_DATA_DENIAL_BOUNDARY}:
+            _reject(rule + "_historical_mode_conflict")
+        return boundaries
+
+    if TYPED_PRODUCT_DATA_DENIAL_BOUNDARY not in boundary_set:
+        _reject(rule + "_product_data_floor")
+
+    if TYPED_HISTORICAL_DATA_DENIAL_BOUNDARY in historical_boundaries:
+        if historical_boundaries != {TYPED_HISTORICAL_DATA_DENIAL_BOUNDARY}:
+            _reject(rule + "_historical_mode_conflict")
+        return boundaries
+
+    if historical_boundaries == HISTORICAL_DIARY_SUBGATE_BOUNDARIES:
+        return boundaries
+    if historical_boundaries & HISTORICAL_DIARY_SUBGATE_BOUNDARIES:
+        _reject(rule + "_historical_subgate_incomplete")
+    _reject(rule + "_historical_mode_missing")
 
 
 def _semantic_exact(value: object, keys: set[str], rule: str) -> dict[str, Any]:
@@ -1175,11 +1258,9 @@ def validate_tick_intent(value: object, contract_value: object) -> dict[str, Any
             contract["clockwork_root"] + "/"
         ):
             _reject("tick_baton_path_owned")
-    boundaries = _strings(
-        row["next_operation_protected_boundaries"], "tick_next_boundaries"
+    boundaries = validate_next_operation_protected_boundaries(
+        row["next_operation_protected_boundaries"]
     )
-    if not REQUIRED_NEXT_BOUNDARIES.issubset(boundaries):
-        _reject("tick_next_boundaries_floor")
     result = {
         "schema_version": version,
         "transaction_manifest": manifest,
@@ -1290,12 +1371,10 @@ def validate_user_decision_tick_intent(
         or operation_id == blocked_operation_id
     ):
         _reject("user_decision_next_operation_id")
-    boundaries = _strings(
+    boundaries = validate_next_operation_protected_boundaries(
         row["next_operation_protected_boundaries"],
-        "user_decision_next_boundaries",
+        rule="user_decision_next_boundaries",
     )
-    if not REQUIRED_NEXT_BOUNDARIES.issubset(boundaries):
-        _reject("user_decision_next_boundaries_floor")
     return {
         "schema_version": USER_DECISION_INTENT_VERSION,
         "blocked_operation_id": blocked_operation_id,

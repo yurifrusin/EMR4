@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 import json
 import subprocess
 import sys
@@ -22,12 +23,18 @@ from orchestration_harness.governance_clockwork_tick import (
     INCIDENT_TRANSPORT,
     INCIDENT_TRANCHE,
     INCIDENT_WORKFLOW_DISPOSITIONS,
+    HISTORICAL_DIARY_ACCESS_BOUNDARY,
+    HISTORICAL_DIARY_SUBGATE_BOUNDARIES,
+    LEGACY_FULL_DATA_DENIAL_BOUNDARY,
+    REQUIRED_NEXT_BOUNDARIES,
     SEMANTIC_BATON_LABEL,
     SEMANTIC_BATON_SLOT,
     SEMANTIC_PROFILE,
     SEMANTIC_TICK_INTENT_VERSION,
     SEMANTIC_VERIFICATION_PROFILE,
     TICK_INCIDENT_INTENT_VERSION,
+    TYPED_HISTORICAL_DATA_DENIAL_BOUNDARY,
+    TYPED_PRODUCT_DATA_DENIAL_BOUNDARY,
     USER_DECISION_INTENT_VERSION,
     CommittedClockworkTick,
     ClockworkTickRejection,
@@ -47,6 +54,7 @@ from orchestration_harness.governance_clockwork_tick import (
     validate_tick_intent,
     validate_tick_live_state,
     validate_user_decision_tick_intent,
+    validate_next_operation_protected_boundaries,
     _validate_commands,
     _compact_rendered_baton,
     _load_baton_compaction_manifest,
@@ -85,6 +93,10 @@ ROOT = Path(__file__).resolve().parents[1]
 CONTRACT_PATH = ROOT / "orchestration/continuity/ariadne-provider-free-clockwork-live-canonical-adoption-retirement/contract.json"
 TOPIC = ROOT / "orchestration/continuity/raisa-provider-free-clockwork-governed-check-in-successor-resolution"
 INTENT_PATH = TOPIC / "closeout-intent.json"
+HISTORICAL_DIARY_SUBGATE_CONTRACT = ROOT / (
+    "orchestration/continuity/raisa-local-only-historical-diary-snapshot-"
+    "privacy-feasibility-review/real-access-subgate-contract.json"
+)
 DECISION_INTENT_PATH = ROOT / (
     "orchestration/continuity/raisa-provider-free-default-off-check-in-relay-free-"
     "unknown-response-transport-redesign/closeout-intent.json"
@@ -1433,7 +1445,6 @@ def test_intent_rejects_derived_unsafe_and_underbounded_input() -> None:
     for boundary in (
         "explicit_path_staging_only",
         "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
-        "no_product_patient_appointment_clinical_historical_or_protected_data",
     ):
         underbounded = json.loads(json.dumps(baseline))
         underbounded["next_operation_protected_boundaries"].remove(boundary)
@@ -1441,6 +1452,145 @@ def test_intent_rejects_derived_unsafe_and_underbounded_input() -> None:
             ClockworkTickRejection, match="tick_next_boundaries_floor"
         ):
             validate_tick_intent(underbounded, contract)
+
+
+def _typed_boundaries(*historical: str) -> list[str]:
+    return [
+        *sorted(REQUIRED_NEXT_BOUNDARIES),
+        TYPED_PRODUCT_DATA_DENIAL_BOUNDARY,
+        *historical,
+    ]
+
+
+def test_historical_boundary_modes_are_closed_and_mutually_exclusive() -> None:
+    legacy = [*sorted(REQUIRED_NEXT_BOUNDARIES), LEGACY_FULL_DATA_DENIAL_BOUNDARY]
+    typed_denial = _typed_boundaries(TYPED_HISTORICAL_DATA_DENIAL_BOUNDARY)
+    bounded_probe = _typed_boundaries(*sorted(HISTORICAL_DIARY_SUBGATE_BOUNDARIES))
+
+    assert validate_next_operation_protected_boundaries(legacy) == legacy
+    assert validate_next_operation_protected_boundaries(typed_denial) == typed_denial
+    assert validate_next_operation_protected_boundaries(bounded_probe) == bounded_probe
+
+    for conflicting in (
+        [*bounded_probe, TYPED_HISTORICAL_DATA_DENIAL_BOUNDARY],
+        [*bounded_probe, LEGACY_FULL_DATA_DENIAL_BOUNDARY],
+        [*legacy, HISTORICAL_DIARY_ACCESS_BOUNDARY],
+    ):
+        with pytest.raises(
+            ClockworkTickRejection, match="historical_mode_conflict"
+        ):
+            validate_next_operation_protected_boundaries(conflicting)
+
+
+def test_historical_boundary_rejects_missing_broad_denial_and_partial_subgate() -> None:
+    bounded_probe = _typed_boundaries(*sorted(HISTORICAL_DIARY_SUBGATE_BOUNDARIES))
+    missing_product_floor = [
+        item for item in bounded_probe if item != TYPED_PRODUCT_DATA_DENIAL_BOUNDARY
+    ]
+    with pytest.raises(ClockworkTickRejection, match="product_data_floor"):
+        validate_next_operation_protected_boundaries(missing_product_floor)
+
+    for member in HISTORICAL_DIARY_SUBGATE_BOUNDARIES:
+        partial = [item for item in bounded_probe if item != member]
+        with pytest.raises(
+            ClockworkTickRejection, match="historical_subgate_incomplete"
+        ):
+            validate_next_operation_protected_boundaries(partial)
+
+
+def test_historical_boundary_rejects_unknown_digest_and_overbroad_allowance() -> None:
+    bounded_probe = _typed_boundaries(*sorted(HISTORICAL_DIARY_SUBGATE_BOUNDARIES))
+    contract_token = next(
+        item for item in bounded_probe if "contract_sha256" in item
+    )
+    altered_digest = [
+        (item[:-1] + ("0" if item[-1] != "0" else "1"))
+        if item == contract_token
+        else item
+        for item in bounded_probe
+    ]
+    with pytest.raises(ClockworkTickRejection, match="historical_vocabulary"):
+        validate_next_operation_protected_boundaries(altered_digest)
+
+    overbroad = _typed_boundaries("allow_all_historical_archive_access")
+    with pytest.raises(ClockworkTickRejection, match="access_vocabulary"):
+        validate_next_operation_protected_boundaries(overbroad)
+
+    unknown_historical = _typed_boundaries("no_historical_data_access_except_local")
+    with pytest.raises(ClockworkTickRejection, match="historical_vocabulary"):
+        validate_next_operation_protected_boundaries(unknown_historical)
+
+
+def test_historical_diary_subgate_is_byte_and_semantically_bound() -> None:
+    contract_bytes = HISTORICAL_DIARY_SUBGATE_CONTRACT.read_bytes()
+    contract = json.loads(contract_bytes)
+    digest = hashlib.sha256(contract_bytes).hexdigest()
+    assert (
+        "historical_diary_privacy_subgate_contract_sha256_" + digest
+        in HISTORICAL_DIARY_SUBGATE_BOUNDARIES
+    )
+    assert contract["schema_version"] == "historical_diary.real_access_subgate.v1"
+    assert contract["executable_in_this_tranche"] is False
+    assert contract["actual_path_bound"] is False
+    assert contract["real_archive_accessed"] is False
+    assert contract["scope"] == {
+        "exact_ignored_local_readback_required": True,
+        "explicitly_nominated_leaf_root_count": 1,
+        "maximum_file_count": 80,
+        "maximum_per_file_bytes": 8388608,
+        "maximum_total_bytes": 134217728,
+        "nominated_dense_day_count": 1,
+        "recursive_access_allowed": False,
+        "symlink_or_reparse_traversal_allowed": False,
+    }
+    assert not any(contract["capabilities"].values())
+    assert contract["retention"] == {
+        "aggregate_non_phi_commit_only": True,
+        "automatic_failure_cleanup_required": True,
+        "ephemeral_in_memory_key_required": True,
+        "ignored_new_output_root_required": True,
+        "key_or_mapping_persistence_allowed": False,
+    }
+    assert contract["decision_vocabulary"] == [
+        "blocked",
+        "revision_required",
+        "locally_restricted_candidate",
+    ]
+    assert contract["strongest_decision_meaning"] == (
+        "ignored_local_research_retention_only_no_downstream_authority"
+    )
+
+
+def test_closeout_and_user_decision_paths_share_the_typed_boundary_control() -> None:
+    contract = validate_contract(_json(CONTRACT_PATH))
+    bounded_probe = _typed_boundaries(*sorted(HISTORICAL_DIARY_SUBGATE_BOUNDARIES))
+
+    closeout = _json(INTENT_PATH)
+    closeout["next_operation_protected_boundaries"] = bounded_probe
+    assert validate_tick_intent(closeout, contract)[
+        "next_operation_protected_boundaries"
+    ] == bounded_probe
+
+    decision = _user_decision_intent(ROOT)
+    decision["next_operation_protected_boundaries"] = bounded_probe
+    assert validate_user_decision_tick_intent(decision, contract)[
+        "next_operation_protected_boundaries"
+    ] == bounded_probe
+
+    incomplete = [
+        item for item in bounded_probe if item != HISTORICAL_DIARY_ACCESS_BOUNDARY
+    ]
+    closeout["next_operation_protected_boundaries"] = incomplete
+    with pytest.raises(
+        ClockworkTickRejection, match="tick_next_boundaries_historical_subgate_incomplete"
+    ):
+        validate_tick_intent(closeout, contract)
+    decision["next_operation_protected_boundaries"] = incomplete
+    with pytest.raises(
+        ClockworkTickRejection,
+        match="user_decision_next_boundaries_historical_subgate_incomplete",
+    ):
+        validate_user_decision_tick_intent(decision, contract)
 
 
 def _governance_v2_manifest() -> dict:
