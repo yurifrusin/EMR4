@@ -1,0 +1,145 @@
+{
+  "schema_version": "raisa.historical_diary_snapshot_privacy_feasibility_evidence.v1",
+  "result": "raisa_local_only_historical_diary_snapshot_privacy_gate_mechanics_pass",
+  "recorded_at": "2026-08-24T01:51:25.4005323+10:00",
+  "plan_source": "ea290960e837a328852736351091bdeb3772066f",
+  "reviewed_source": "1746cbf7a78d7d98597e6458f00953bd1ab193aa",
+  "five_source_rehydration": "passed",
+  "synthetic_gate": {
+    "implementation": "orchestration_harness/historical_diary_snapshot_privacy_gate.py",
+    "evidence_label": "wholly_authored_synthetic",
+    "synthetic_snapshots": 4,
+    "nominal_poll_seconds": 30,
+    "irregular_observation_gaps_present": true,
+    "input_fields_admitted": 18,
+    "input_fields_classified": 18,
+    "unknown_input_fields": 0,
+    "record_observations": 21,
+    "authored_changes": 14,
+    "recovered_changes": 14,
+    "stable_linkage_preserved": true,
+    "scheduling_fields_preserved": true,
+    "interval_censoring_valid": true,
+    "source_values_in_projection": 0,
+    "key_or_mapping_persisted": false,
+    "deidentification_claimed": false,
+    "decision": "ready_for_bounded_local_measurement"
+  },
+  "contextual_risk_reading": {
+    "population_records": 7,
+    "equivalence_class_sizes": [
+      1,
+      2,
+      2,
+      2
+    ],
+    "unique_records": {
+      "successes": 1,
+      "trials": 7
+    },
+    "unique_trajectories": {
+      "successes": 1,
+      "trials": 7
+    },
+    "rare_trajectories": {
+      "successes": 1,
+      "trials": 7
+    },
+    "record_linkage_attack": {
+      "successes": 1,
+      "trials": 2
+    },
+    "trajectory_linkage_attack": {
+      "successes": 1,
+      "trials": 2
+    },
+    "multi_release_differencing_attack": {
+      "successes": 1,
+      "trials": 7
+    },
+    "interpretation": "conditional_synthetic_empirical_reading_not_universal_reidentification_probability"
+  },
+  "real_access_subgate": {
+    "artifact": "orchestration/continuity/raisa-local-only-historical-diary-snapshot-privacy-feasibility-review/real-access-subgate-contract.json",
+    "executable_in_this_tranche": false,
+    "actual_path_bound": false,
+    "leaf_roots": 1,
+    "dense_days": 1,
+    "recursive": false,
+    "maximum_files": 80,
+    "maximum_total_bytes": 134217728,
+    "maximum_per_file_bytes": 8388608,
+    "strongest_future_decision": "locally_restricted_candidate",
+    "downstream_authority_granted": false
+  },
+  "deterministic_verification": {
+    "new_hostile_tests": 46,
+    "unchanged_historical_diary_control_tests": 40,
+    "combined_tests": 86,
+    "combined_failures": 0,
+    "provider_free_wrapper": "passed",
+    "leakage_lint": "passed",
+    "ruff": "passed",
+    "compileall": "passed",
+    "contract_canonical_render": "passed",
+    "git_diff_check": "passed",
+    "contained_prepublication_lapses": 6
+  },
+  "contained_workflow_lapses": [
+    {
+      "attempt": "closeout-precommit-attempt-001",
+      "reason": "serial_continuation_evidence_path_root_forbidden",
+      "effect": "preflight_rejection_before_runtime_state_or_repository_mutation"
+    },
+    {
+      "attempt": "clockwork-check-attempt-001",
+      "reason": "tick_incident_observations",
+      "effect": "admission_rejection_before_verification_preparation_publication_or_pointer_movement"
+    },
+    {
+      "attempt": "clockwork-check-attempt-002",
+      "reason": "tick_semantic_scalar_leaf_budget",
+      "effect": "admission_rejection_before_verification_preparation_publication_or_pointer_movement"
+    },
+    {
+      "attempt": "clockwork-check-attempt-003",
+      "reason": "tick_next_boundaries_floor",
+      "effect": "admission_rejection_before_verification_preparation_publication_or_pointer_movement"
+    },
+    {
+      "attempt": "clockwork-check-attempt-004",
+      "reason": "tick_prospective_current_node_evidence_timestamp_count",
+      "effect": "prospective_evidence_rejection_before_verifier_execution_publication_or_pointer_movement"
+    },
+    {
+      "attempt": "clockwork-check-attempt-005",
+      "reason": "tick_transaction_prepare_missing_conventional_pre_verifier_receipt",
+      "effect": "prospective_preparation_rejection_before_verifier_execution_publication_or_pointer_movement"
+    }
+  ],
+  "parallelism": {
+    "deepseek": "declined_negative_native_harness_paused_and_no_isolated_privacy_lease",
+    "gemini": "not_applicable_neutral_live_provider_forbidden_by_latch",
+    "native_subagents": "declined_negative_tightly_coupled_serial_privacy_invariant",
+    "gpt_sol": "policy_implementation_hostile_verification_acceptance_and_git_owner"
+  },
+  "next_operation": {
+    "operation_id": "raisa-local-only-historical-diary-access-boundary-convergence",
+    "launch": "immediate_after_clockwork_closeout",
+    "first_stage": "freeze_fail_closed_clockwork_boundary_convergence_without_archive_access",
+    "real_access_in_successor": false,
+    "provider_or_network_use": false,
+    "strongest_result": "exact_bounded_historical_diary_subgate_representable"
+  },
+  "zero_effects": {
+    "historical_diary_files_opened_listed_searched_sampled_hashed_or_parsed": 0,
+    "private_calibration_references_resolved": 0,
+    "protected_evidence_accesses": 0,
+    "patient_practice_clinical_or_product_records_processed": 0,
+    "provider_or_model_calls": 0,
+    "product_files_changed": 0,
+    "database_operations": 0,
+    "ordinary_practice_releases": 0,
+    "protected_ref_movements": 0
+  }
+}

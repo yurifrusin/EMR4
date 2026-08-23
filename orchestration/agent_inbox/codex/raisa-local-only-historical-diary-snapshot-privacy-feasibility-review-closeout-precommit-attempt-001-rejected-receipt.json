@@ -1,0 +1,11 @@
+{
+  "schema_version": "ariadne.rejected_serial_continuation_receipt.v1",
+  "operation_id": "raisa-local-only-historical-diary-snapshot-privacy-feasibility-review",
+  "attempt": 1,
+  "status": "revision_required",
+  "reason_code": "serial_continuation_evidence_path_root_forbidden",
+  "rejected_path_root": "orchestration/human_inbox",
+  "runtime_state_materialized": false,
+  "repository_mutated_by_preflight": false,
+  "canonical_state_changed": false
+}

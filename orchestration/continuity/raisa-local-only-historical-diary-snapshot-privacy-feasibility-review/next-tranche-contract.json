@@ -1,0 +1,47 @@
+{
+  "schema_version": "raisa.historical_diary_access_boundary_convergence_next_tranche.v1",
+  "operation_id": "raisa-local-only-historical-diary-access-boundary-convergence",
+  "status": "dependency_satisfied_after_current_clockwork_closeout",
+  "reasoning_level": "extra_high",
+  "objective": "Make one exact bounded local historical Diary privacy subgate representable in the governance clockwork without weakening default denial for product, patient, appointment, clinical, protected or other historical data.",
+  "required_first_stage": [
+    "fresh_five_source_rehydration",
+    "active_latch_validation",
+    "explicit_deepseek_gemini_native_subagent_parallelism_assessment",
+    "fresh_ariadne_receipt",
+    "freeze_fail_closed_boundary_convergence_plan_and_threat_delta"
+  ],
+  "required_changes": [
+    "replace_the_undifferentiated_historical_data_floor_with_typed_default_denial",
+    "add_one_exact_local_historical_diary_privacy_subgate_token",
+    "require_the_accepted_nonexecutable_real_access_contract_before_that_token_can_open",
+    "preserve_product_patient_appointment_clinical_and_protected_data_denial",
+    "preserve_provider_network_model_product_runtime_deployment_pages_and_protected_ref_denial",
+    "add_hostile_tests_for_missing_broad_denial_overbroad_exception_and_unbound_access"
+  ],
+  "exact_future_diary_subgate": {
+    "leaf_roots": 1,
+    "dense_days": 1,
+    "recursive": false,
+    "maximum_files": 80,
+    "maximum_total_bytes": 134217728,
+    "maximum_per_file_bytes": 8388608,
+    "read_only": true,
+    "provider_network_or_model": false,
+    "strongest_decision": "locally_restricted_candidate"
+  },
+  "archive_access_in_this_tranche": false,
+  "successor_after_acceptance": "raisa-local-only-bounded-historical-diary-snapshot-measured-privacy-probe",
+  "closed": [
+    "archive_open_list_search_sample_hash_or_parse",
+    "private_calibration_resolution",
+    "provider_network_model_or_external_release",
+    "raw_or_extracted_text_or_identity_commit",
+    "fixture_memory_or_product_promotion",
+    "product_runtime_route_api_client_database_or_configuration",
+    "ordinary_practice_enablement",
+    "production_deployment_release_or_pages",
+    "protected_evidence_or_ref_movement"
+  ],
+  "protected_commit_floor": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+}

@@ -1,0 +1,12 @@
+{
+  "schema_version": "ariadne.governance_clockwork_rejected_check_receipt.v1",
+  "operation_id": "raisa-local-only-historical-diary-snapshot-privacy-feasibility-review",
+  "attempt": 3,
+  "status": "revision_required",
+  "reason_code": "tick_next_boundaries_floor",
+  "observed_missing_exact_boundary_tokens": 4,
+  "verification_commands_executed": 0,
+  "generation_prepared": false,
+  "generation_published": false,
+  "canonical_pointer_changed": false
+}

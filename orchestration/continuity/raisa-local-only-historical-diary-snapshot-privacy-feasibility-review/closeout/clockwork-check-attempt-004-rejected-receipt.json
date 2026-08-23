@@ -1,0 +1,12 @@
+{
+  "schema_version": "ariadne.governance_prospective_evidence_rejection.v1",
+  "operation_id": "raisa-local-only-historical-diary-snapshot-privacy-feasibility-review",
+  "attempt": 4,
+  "status": "revision_required",
+  "reason_code": "tick_prospective_current_node_evidence",
+  "error": "orchestration/agent_inbox/codex/raisa-local-only-historical-diary-snapshot-privacy-feasibility-review-sol-acceptance.md:timestamp_count",
+  "verification_commands_executed": 0,
+  "generation_prepared": false,
+  "generation_published": false,
+  "canonical_pointer_changed": false
+}
