@@ -1,0 +1,144 @@
+{
+  "schema_version": "ariadne.clockwork_prospective_evidence_transaction_fact_repair_evidence.v1",
+  "operation_id": "ariadne-provider-free-governance-clockwork-prospective-current-node-evidence-and-transaction-fact-derivation-repair",
+  "recorded_at": "2026-08-23T16:43:10.7836980+10:00",
+  "source_head": "86dc6652d154eaa6adc9ca97e7fa2b7e66d7323c",
+  "result": "complete_prospective_error_set_and_command_local_transaction_facts_pass",
+  "implementation": {
+    "existing_files_changed": 4,
+    "new_runtime_control_layers": 0,
+    "new_required_operator_fields": 0,
+    "new_approval_gates": 0,
+    "new_required_closeout_documents": 0,
+    "new_intent_fields": 0,
+    "product_files_changed": 0,
+    "provider_or_harness_files_changed": 0
+  },
+  "prospective_human_evidence": {
+    "categories": [
+      "plans",
+      "closeouts",
+      "acceptances"
+    ],
+    "validation_phase": "before_transaction_projection_and_before_canonical_write",
+    "complete_error_set_returned": true,
+    "structured_cli_rejection": true,
+    "structured_status": "revision_required",
+    "hostile_errors_returned_in_one_helper_reading": 10,
+    "multi_file_build_rejection_defects_asserted": 4,
+    "multi_file_build_rejection_paths": 2,
+    "canonical_mutations_on_rejection": 0,
+    "pointer_movements_on_rejection": 0,
+    "shared_with_current_baton_consistency_test": true,
+    "closed_error_vocabulary": [
+      "nonempty_list_required",
+      "path_string_required",
+      "duplicate_path",
+      "markdown_path_required",
+      "unsafe_path",
+      "file_missing",
+      "file_unreadable",
+      "date_count",
+      "date_invalid",
+      "timestamp_count",
+      "timezone_name",
+      "timestamp_invalid",
+      "offset_required",
+      "offset_not_brisbane",
+      "calendar_date_mismatch"
+    ]
+  },
+  "transaction_facts": {
+    "schema_version": "ariadne.governance_command_transaction_facts.v1",
+    "output_owned": true,
+    "intent_fields_added": 0,
+    "dispositions": [
+      "dry_preparation",
+      "prospective_evidence_rejected",
+      "publication_committed",
+      "idempotent_readback",
+      "byte_exact_rollback"
+    ],
+    "derived_dimensions": [
+      "invocations",
+      "preparations",
+      "preparation_rejections",
+      "publication_attempts",
+      "published_generations",
+      "rollback_attempts",
+      "byte_exact_rollbacks",
+      "idempotent_readbacks",
+      "base_lease_sequence",
+      "prospective_lease_sequence",
+      "result_lease_sequence",
+      "committed_lease_advance",
+      "base_generation_id",
+      "prepared_generation_id",
+      "result_generation_id"
+    ],
+    "historical_total_inferred_from_current_pointer": false,
+    "idempotent_readback_observed": {
+      "preparations": 0,
+      "preparation_rejections": 0,
+      "publication_attempts": 0,
+      "published_generations": 0,
+      "rollback_attempts": 0,
+      "byte_exact_rollbacks": 0,
+      "idempotent_readbacks": 1,
+      "base_lease_sequence": 212,
+      "result_lease_sequence": 212,
+      "committed_lease_advance": 0,
+      "canonical_drift": 0
+    }
+  },
+  "matched_ergonomics": {
+    "preceding_packet_postpublication_rollbacks": 3,
+    "failure_shapes_now_prepublication_or_output_owned": 3,
+    "missing_timestamp_shapes_now_prepublication": 2,
+    "publication_counter_shape_now_output_owned": 1,
+    "new_operator_inputs": 0,
+    "claim": "The three measured failure shapes are no longer operator-authored postpublication discoveries in the normal CLI. This is a fixture-backed control claim, not a claim that every future closeout will be error-free."
+  },
+  "verification": {
+    "ruff_files_passed": 4,
+    "byte_compile_files_passed": 4,
+    "governance_test_counts": {
+      "active_operation_latch": 48,
+      "governance_clockwork_tick": 42,
+      "transactional_closeout": 8,
+      "current_baton_consistency": 10,
+      "total": 108
+    },
+    "full_governance_suite_passed": true,
+    "git_diff_check_passed": true,
+    "repaired_live_publication_used_before_tests": false,
+    "provider_calls": 0,
+    "model_workers": 0,
+    "product_or_protected_effects": 0
+  },
+  "iteration_evidence": {
+    "historical_replay_fixture_compatibility_failures_first_run": 6,
+    "cause": "Historical replay tests supplied acceptance paths outside the graph's accepted-reference shape after their human evidence was modernised for the new guard.",
+    "correction": "Use explicit test-only plan, closeout and canonical acceptance-reference fixtures while leaving the production rule strict.",
+    "corrected_targeted_tests_passed": 6,
+    "procedural_command_shape_rejections": 1,
+    "procedural_command_correction": "The provider-free whole-file runner intentionally rejects pytest node selectors; the six-node diagnosis used direct serial pytest and the canonical whole-file suite then passed.",
+    "product_reruns": 0,
+    "provider_reruns": 0
+  },
+  "parallelism": {
+    "deepseek": "declined_native_paused_no_claude_fallback_tightly_coupled_single_writer_state",
+    "gemini": "declined_provider_free_exact_deterministic_control_surface",
+    "native_subagents": "declined_developer_policy_and_serial_pointer_state",
+    "owner": "gpt_sol"
+  },
+  "protected_boundaries": {
+    "protected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "docs_branding_preserved": true,
+    "product_data_used": false,
+    "provider_used": false,
+    "live_runtime_used": false,
+    "deployment_or_pages": false,
+    "protected_ref_movement": false
+  }
+}
