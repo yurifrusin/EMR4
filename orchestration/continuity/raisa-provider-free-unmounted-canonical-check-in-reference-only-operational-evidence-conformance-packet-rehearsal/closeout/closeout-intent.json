@@ -9,7 +9,7 @@
     "node": {
       "id": "raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal",
       "title": "Canonical check-in reference-only operational-evidence conformance packet rehearsal",
-      "kind": "integration",
+      "kind": "tooling",
       "relationships": [
         {
           "node_id": "raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review",
@@ -47,7 +47,7 @@
           "id": "select-bounded-clockwork-ergonomics-review",
           "source": "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal/efficacy-reading.json",
           "status": "accepted",
-          "summary": "Use the five contained reruns and the extended native-Harness gear period as measured input to a provider-free read-only clockwork ergonomics and efficacy review."
+          "summary": "Use the six contained reruns and the extended native-Harness gear period as measured input to a provider-free read-only clockwork ergonomics and efficacy review."
         }
       ],
       "claim_scope": [
@@ -110,7 +110,7 @@
     },
     "current_position": {
       "strategic_role": "Measure whether the governance clockwork can retain its safety while asking less clerical work of the orchestrator",
-      "why_now": "The reference-only packet is complete and its five corrected interface reruns join the extended DeepSeek gear history as a bounded evidence set.",
+      "why_now": "The reference-only packet is complete and its six corrected interface reruns join the extended DeepSeek gear history as a bounded evidence set.",
       "outcome": "A read-only review will distinguish safety controls from avoidable operator inputs and rank only simplifications with measurable removed work.",
       "unlocks": [
         "A narrow evidence-backed plan for the highest-yield clockwork ergonomic repair, if one is justified."
@@ -155,6 +155,11 @@
       {
         "incident_id": "reference-packet-node-kind-vocabulary",
         "source_id": "reference-packet-local-005",
+        "peers": []
+      },
+      {
+        "incident_id": "reference-packet-node-kind-contract-scope",
+        "source_id": "reference-packet-local-006",
         "peers": []
       }
     ],
@@ -411,6 +416,40 @@
         ]
       },
       "baton_summary": "records one rejected descriptive node kind and its admitted integration-kind correction."
+    },
+    {
+      "attempt_key": "reference-packet-node-kind-contract-scope-001",
+      "observed_on": "2026-08-23",
+      "tranche": "check-in-reference-packet",
+      "role": "orchestrator",
+      "resource_id": "clockwork-contract-inheritance",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_clockwork",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "The selected Continuity kind both belongs to the closed vocabulary and matches the node's actual contract scope.",
+      "observed_error": "The second closeout check used the admitted integration kind, which activated two unrelated inherited appointment-availability contracts.",
+      "detection_method": "The prospective Continuity projection reported both missing contract-evidence identifiers before command execution, mutation, publication or pointer movement.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal/closeout/clockwork-check-attempt-002-rejected-receipt.json",
+        "orchestration/continuity/emr4-continuity-graph.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.valid_node_kind_hidden_contract_scope",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Classify the provider-free conformance packet as tooling instead of asserting irrelevant product integration evidence.",
+        "prevention_control": "The ergonomics review will test whether the selector can preview inherited contract obligations before a dry tick.",
+        "evidence_paths": [
+          "orchestration/continuity/emr4-continuity-graph.json",
+          "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal/closeout/closeout-intent.json"
+        ]
+      },
+      "baton_summary": "records one valid-kind hidden-contract mismatch and its provider-free tooling classification."
     }
   ],
   "next_operation_protected_boundaries": [

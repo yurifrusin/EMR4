@@ -2,8 +2,8 @@
 
 <!-- ariadne-agent-error-register-reading
 revision: 645
-incident_count: 1120
-new_incident_ids: AER-1116,AER-1117,AER-1118,AER-1119,AER-1120
+incident_count: 1121
+new_incident_ids: AER-1116,AER-1117,AER-1118,AER-1119,AER-1120,AER-1121
 open_incident_count: 0
 -->
 
@@ -35,3 +35,11 @@ One closeout intent used the descriptive Continuity node kind `rehearsal`,
 which is outside the graph's closed vocabulary. The first clockwork check
 failed before publication or pointer movement; the corrected intent selects
 the admitted `integration` kind.
+
+## AER-1121
+
+The corrected `integration` kind was syntactically admitted but activated two
+unrelated inherited appointment-availability contracts. The second dry check
+failed before mutation; the conformance packet was reclassified as `tooling`,
+matching its provider-free verification role without asserting irrelevant
+product-contract evidence.

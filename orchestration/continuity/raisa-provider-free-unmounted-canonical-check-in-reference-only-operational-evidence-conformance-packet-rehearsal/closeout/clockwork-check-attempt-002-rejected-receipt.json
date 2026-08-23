@@ -1,0 +1,10 @@
+{
+  "schema_version": "ariadne.clockwork_rejected_check_receipt.v1",
+  "attempt_id": "reference-packet-clockwork-check-002",
+  "recorded_at": "2026-08-23T15:24:00+10:00",
+  "status": "rejected_before_publication",
+  "reason": "tick_transaction_prepare:prospective_projection_invalid:unrelated_inherited_contract_evidence_missing",
+  "canonical_mutation": false,
+  "pointer_movement": false,
+  "correction": "Classify the provider-free conformance packet as tooling; do not assert evidence for unrelated product integration contracts."
+}
