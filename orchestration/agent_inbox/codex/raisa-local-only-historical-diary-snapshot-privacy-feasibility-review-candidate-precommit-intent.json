@@ -1,0 +1,21 @@
+{
+  "schema_version": "ariadne.serial_continuation_intent.v1",
+  "preset": "provider_free_serial_observed_empty_workers",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_synthetic_snapshot_privacy_gate_candidate_and_data_free_real_access_contract",
+  "assessed_stage": "synthetic_snapshot_privacy_gate_candidate_precommit",
+  "active_evidence_paths": [
+    "docs/raisa-local-only-historical-diary-snapshot-privacy-feasibility-review-plan.md",
+    "docs/security/raisa-local-only-historical-diary-snapshot-privacy-feasibility-review-threat-model-delta.md",
+    "orchestration/continuity/raisa-local-only-historical-diary-snapshot-privacy-feasibility-review/real-access-subgate-contract.json",
+    "orchestration/agent_inbox/codex/raisa-local-only-historical-diary-snapshot-privacy-feasibility-review-preplanning-receipt.json",
+    "orchestration/agent_inbox/codex/raisa-local-only-historical-diary-snapshot-privacy-feasibility-review-plan-precommit-receipt.json",
+    "orchestration/continuity/ariadne-active-operation-latch/current.json"
+  ],
+  "lane_decision_overrides": [
+    {
+      "lane_id": "gemini_verifier",
+      "decision_code": "not_applicable_neutral"
+    }
+  ]
+}
