@@ -1,0 +1,82 @@
+{
+  "schema_version": "emr4.check-in-environment-evidence-admission-input-seam-contract.v1",
+  "operation_id": "raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal",
+  "planning_source_head": "ba935ca41c5f93b3584304b0d479df49692bfe21",
+  "accepted_evidence_gate_product_source": "89640f1bb6ad992f68d5c20fd578b4062eeb193d",
+  "accepted_admission_kernel_source": "4204ec6348abb0f92b1a30314699d4a469fa860a",
+  "accepted_native_harness_policy_source": "10e46b5330e86c65721848ee0c9a4254983770d2",
+  "seam": {
+    "module": "orchestration_harness.check_in_environment_evidence_admission",
+    "function": "evaluate_admission_with_environment_evidence",
+    "unmounted": true,
+    "calls_existing_kernel_first": true,
+    "target_existing_reason": "ordinary_activation_closed",
+    "invalid_reading_reason": "ordinary_evidence_missing",
+    "valid_reading_result": "ordinary_activation_closed",
+    "ordinary_admission_release_possible": false
+  },
+  "snapshot_binding_fields": [
+    "environment_evidence_identifier",
+    "environment_evidence_manifest_digest"
+  ],
+  "reading_requirements": {
+    "exact_type": "EnvironmentEvidenceGateReading",
+    "schema_version": "emr4.check-in-environment-evidence-gate-reading.v1",
+    "outcome": "satisfied",
+    "reason_code": "evidence_gate_satisfied",
+    "environment_identifier_pattern": "^env:[a-z0-9][a-z0-9._-]{2,95}$",
+    "generation_matches_snapshot": true,
+    "manifest_digest_pattern": "^[0-9a-f]{64}$",
+    "manifest_digest_matches_snapshot_binding": true,
+    "subclass_or_duck_type_allowed": false
+  },
+  "preserved_controls": [
+    "snapshot_presence_shape_signature_full_git_identity_freshness_environment_and_uniqueness",
+    "feature_flag_exact_true",
+    "kill_switch_clear",
+    "authored_synthetic_and_ordinary_lane_isolation",
+    "ordinary_practice_binding",
+    "ordinary_record_active_state",
+    "operational_evidence_valid_boolean",
+    "ordinary_activation_authority_closed",
+    "control_command_authentication_authorization_scopes_confirmation_idempotency_audit_and_unknown_commit"
+  ],
+  "worker": {
+    "transport": "deepseek_native_harness",
+    "role": "bounded_candidate_contributor",
+    "owned_paths": [
+      "orchestration_harness/check_in_environment_evidence_admission.py",
+      "tests/test_check_in_environment_evidence_admission.py"
+    ],
+    "effective_tools": ["edit", "glob", "read"],
+    "maximum_parallel_tool_calls": 1,
+    "maximum_wall_clock_seconds": 900,
+    "automatic_retries": 0,
+    "fallbacks": 0,
+    "auxiliary_models": 0,
+    "sol_owns_integration_and_acceptance": true
+  },
+  "clockwork": {
+    "readings": ["prepared", "terminal", "accepted_or_recovered"],
+    "per_model_turn_tick": false,
+    "model_or_broker_writes_canonical_continuity": false
+  },
+  "verification": {
+    "ordinary_release_count": 0,
+    "synthetic_lane_unchanged": true,
+    "focused_predecessor_suites_required": true,
+    "fresh_gemini_authority_veto_reserved": true
+  },
+  "closed_boundaries": {
+    "ordinary_practice_enabled": false,
+    "feature_flag_or_allowlist_changed": false,
+    "admission_record_transition_or_activation_added": false,
+    "route_api_graphql_openapi_or_client_changed": false,
+    "generic_status_arrived_grammar_or_waiting_area_changed": false,
+    "environment_configuration_manifest_or_secret_resolved": false,
+    "database_docker_or_infrastructure_used": false,
+    "product_patient_appointment_or_clinical_data_used": false,
+    "production_deployment_release_or_pages": false,
+    "protected_ref_moved": false
+  }
+}

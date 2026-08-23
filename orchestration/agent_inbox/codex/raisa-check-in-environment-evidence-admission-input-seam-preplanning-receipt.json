@@ -1,0 +1,133 @@
+{
+  "active_operation": {
+    "active_tranche": "Provider-free unmounted default-off canonical check-in environment-evidence admission-input seam rehearsal",
+    "completed_stage": "Accepted deepseek-native-harness-pragmatic-real-work-adoption-review-and-plan at the machine-resolved source.",
+    "next_executable_stage": "fresh_five_source_rehydration_then_freeze_the_exact_default_off_admission_input_contract_and_native_worker_slice",
+    "operation_id": "raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "10e46b5330e86c65721848ee0c9a4254983770d2",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "git_object_resolution": {
+    "observed_head": "ba935ca41c5f93b3584304b0d479df49692bfe21",
+    "reason_codes": [],
+    "resolved_commit": "10e46b5330e86c65721848ee0c9a4254983770d2",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "10e46b5330e86c65721848ee0c9a4254983770d2"
+  },
+  "git_ref_evidence_binding": {
+    "manually_supplied_object_id_count": 0,
+    "policy": "machine_snapshot_only",
+    "reason_codes": [],
+    "schema_version": "ariadne.git_ref_evidence_binding.v1",
+    "status": "passed"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "ba935ca41c5f93b3584304b0d479df49692bfe21",
+    "branch_origin_aligned": true,
+    "head": "ba935ca41c5f93b3584304b0d479df49692bfe21",
+    "origin_branch_commit": "ba935ca41c5f93b3584304b0d479df49692bfe21",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 677
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "preplanning_rehydrated_real_work_native_harness_seam",
+    "lanes": [
+      {
+        "disposition": "planned",
+        "expected_leverage": "positive",
+        "lane_id": "deepseek_flash",
+        "rationale": "The accepted pragmatic policy selects one real bounded source-and-test contribution after Sol freezes the contract and proves the exact edit/glob/read surface without a provider.",
+        "work_packages": [
+          "author_the_bounded_admission_kernel_and_focused_test_candidate_in_a_fresh_sparse_worktree"
+        ]
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "The seam changes admission-authority meaning even while default-off, so one fresh read-only veto is reserved after deterministic candidate acceptance; it is not Harness qualification.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Developer policy prohibits proactive delegation and the separable worker package is already assigned to the native DeepSeek Harness.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "if the zero-provider Harness preflight fails outside the allowed adapter surface",
+      "if the native worker reaches the model but returns no bounded candidate",
+      "if deterministic review finds a material admission-authority defect",
+      "before pre-verifier acceptance and tranche closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "freeze the exact fail-closed admission-input contract before worker dispatch",
+      "build and verify the task-coupled Harness adapter before the occupied session",
+      "let Sol inspect and integrate any candidate before deterministic verification",
+      "dispatch the reserved Gemini veto only after the exact reviewed candidate is clean"
+    ]
+  },
+  "planned_action": "freeze_default_off_check_in_environment_evidence_admission_input_contract_and_native_worker_slice",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/deepseek-native-harness-pragmatic-real-work-adoption-review-and-plan.md",
+      "orchestration/continuity/deepseek-native-harness-pragmatic-real-work-adoption-review-and-plan/evidence.json",
+      "orchestration/continuity/deepseek-native-harness-pragmatic-real-work-adoption-review-and-plan/efficacy-reading.json",
+      "docs/deepseek-native-harness-pragmatic-real-work-adoption-review-and-plan-closeout.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-pragmatic-real-work-adoption-review-and-plan-sol-acceptance.md",
+      "docs/raisa-provider-free-unmounted-canonical-check-in-pure-environment-evidence-gate-evaluator-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-canonical-check-in-pure-environment-evidence-gate-evaluator-rehearsal-sol-acceptance.md",
+      "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-pure-environment-evidence-gate-evaluator-rehearsal/contract.json",
+      "docs/raisa-provider-free-unmounted-default-off-ordinary-practice-canonical-check-in-admission-control-kernel-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-check-in-admission-control-kernel-sol-acceptance.md",
+      "orchestration/continuity/raisa-provider-free-unmounted-default-off-ordinary-practice-canonical-check-in-admission-control-kernel-rehearsal/contract.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "Yuri authorizes uninterrupted completion. GPT Sol owns architecture, API meaning, Harness adaptation, verification, integration and acceptance. DeepSeek native Harness may author only the bounded candidate paths after a zero-provider preflight. Gemini is reserved for a post-candidate authority veto if the implemented semantic change meets the risk trigger. Native subagents are declined by developer policy.",
+    "git_refs_and_worktree": "The machine snapshot alone supplies exact task-branch, origin, protected-ref, ancestry and tracked-clean readings. It also records preservation of unrelated untracked files including docs/branding.",
+    "live_handover_current_baton": "The complete live Baton was freshly read. It records the accepted check-in product adapter, default-off route, admission kernel, pure environment evidence-gate evaluator and pragmatic native-Harness real-work policy as the active lineage for this seam.",
+    "protected_evidence_boundaries": "The tranche is provider-free and unmounted except for one broker-mediated native DeepSeek worker call over synthetic repository source. It may add one task-coupled runner/coordinator and focused test, and may change only the admission kernel and its focused deterministic artifacts. It may not access environment configuration, credentials, external facts, databases, routes, APIs, clients, product data, production, deployment, Pages or protected refs."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}
