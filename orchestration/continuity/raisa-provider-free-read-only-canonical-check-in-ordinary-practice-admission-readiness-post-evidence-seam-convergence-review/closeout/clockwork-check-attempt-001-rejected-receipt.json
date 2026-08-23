@@ -1,0 +1,10 @@
+{
+  "schema_version": "ariadne.clockwork_rejected_check_receipt.v1",
+  "attempt_id": "post-evidence-seam-readiness-clockwork-check-001",
+  "recorded_at": "2026-08-23T14:14:00+10:00",
+  "status": "rejected_before_publication",
+  "reason": "tick_baton_compaction_unindexed",
+  "canonical_mutation": false,
+  "pointer_movement": false,
+  "correction": "Replace the invented descriptive label with the established Current DeepSeek native Harness acceptance general rolling slot; preserve the arrival/check-in lineage row unchanged."
+}

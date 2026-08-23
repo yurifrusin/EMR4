@@ -1,14 +1,14 @@
 {
   "schema_version": "ariadne.agent-error-pattern-report.v1",
-  "register_revision": 643,
+  "register_revision": 644,
   "source_cutoff_on": "2026-08-23",
   "coverage": "bounded_known_preserved_incidents",
-  "canonical_register_sha256": "c4e1bb61c3392158ad1aeb289ee2a872fd2d4357bca613de74761a508defa015",
-  "incident_count": 1109,
+  "canonical_register_sha256": "9aa04658aa970ff55f0489380470dc804372125bda0a431395164cc5b15d5b53",
+  "incident_count": 1115,
   "open_incident_ids": [],
   "counts": {
     "by_origin": {
-      "agent_behavior": 577,
+      "agent_behavior": 583,
       "harness": 73,
       "operator": 291,
       "repository": 152,
@@ -19,7 +19,7 @@
       "evidence_misreport": 77,
       "harness_failure": 73,
       "operator_error": 291,
-      "output_contract_violation": 334,
+      "output_contract_violation": 340,
       "read_only_violation": 5,
       "reasoning_claim_error": 50,
       "repository_defect": 152,
@@ -28,17 +28,17 @@
     "by_role": {
       "implementer": 89,
       "integration_reviewer": 5,
-      "orchestrator": 952,
+      "orchestrator": 958,
       "verifier": 63
     },
     "by_process_severity": {
-      "low": 725,
+      "low": 730,
       "material": 135,
-      "moderate": 249
+      "moderate": 250
     },
     "by_candidate_state": {
       "accepted_candidate_changed": 229,
-      "canonical_unchanged": 697,
+      "canonical_unchanged": 703,
       "untrusted_partial_worktree": 183
     },
     "by_resource_and_role": {
@@ -172,7 +172,7 @@
       "clockwork-prospective-graph::orchestrator": 1,
       "clockwork-prospective-incident-revision-artifact::orchestrator": 1,
       "clockwork-prospective-register-revision-reading::orchestrator": 1,
-      "clockwork-rollback-pointer-lease::orchestrator": 2,
+      "clockwork-rollback-pointer-lease::orchestrator": 3,
       "clockwork-rollback-pointer-source-binding::orchestrator": 1,
       "clockwork-rollback-republication-sequence::orchestrator": 1,
       "clockwork-successor-boundary-projector::orchestrator": 1,
@@ -415,6 +415,9 @@
       "plan-commit-staged-whitespace-gate::orchestrator": 1,
       "planning-explicit-path-staging::orchestrator": 1,
       "post-attempt008-threat-delta::orchestrator": 2,
+      "post-seam-readiness-clockwork-check::orchestrator": 3,
+      "post-seam-readiness-clockwork-publication::orchestrator": 1,
+      "post-seam-readiness-source-validator::orchestrator": 1,
       "postclockwork-current-state-suite-selection::orchestrator": 1,
       "postclockwork-powershell-reading::orchestrator": 1,
       "postcompaction-five-source-rehydration-receipt::orchestrator": 1,

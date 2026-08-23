@@ -1,0 +1,36 @@
+{
+  "schema_version": "ariadne.tranche_efficacy_reading.v1",
+  "operation_id": "raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review",
+  "source_head": "f1e88ccfa62a90bd72cbc5dc6c0ac3e249245d4d",
+  "result": "exact_readiness_reading_without_new_control_layer",
+  "workflow": {
+    "new_runtime_control_layers": 0,
+    "new_product_source_files": 0,
+    "new_product_test_files": 0,
+    "provider_calls": 0,
+    "model_workers": 0,
+    "reruns_from_procedural_error": 6,
+    "deterministic_source_bindings": 13,
+    "deterministic_git_bindings": 13,
+    "clockwork_publication_attempts": 2,
+    "byte_exact_rollbacks": 1,
+    "accepted_clockwork_generation": "gen-f3adfd61281b9aecd52ae67baf9ecc3631dfa1d65c089a7e73778d8707a9bd03",
+    "accepted_clockwork_lease": 204,
+    "bespoke_updater_executions": 0
+  },
+  "readiness": {
+    "prior_counts": "11_0_1",
+    "current_counts": "11_0_1",
+    "repository_nodes_advanced": 4,
+    "next_dependency_satisfied_nodes": 1,
+    "external_facts_inferred": 0,
+    "human_decisions_inferred": 0
+  },
+  "harness": {
+    "generic_interoperability_testing": "closed",
+    "exact_failed_native_profile": "not_selected",
+    "claude_code_fallback": "not_authorized",
+    "future_use_posture": "ordinary_real_task_only_when_an_accepted_runner_fits_or_naturally_in_scope_fix_evidence_exists"
+  },
+  "assessment": "The product-readiness reading was exact and required no Harness diagnostic or bespoke updater. Closeout was not frictionless: six bounded clerical or sequencing errors caused rejected checks or one byte-exact rollback before the accepted generation. The clockwork contained every error before durable acceptance, but this measured rerun cost reinforces the pragmatic policy of using its typed controls without pursuing ceremonial perfection."
+}

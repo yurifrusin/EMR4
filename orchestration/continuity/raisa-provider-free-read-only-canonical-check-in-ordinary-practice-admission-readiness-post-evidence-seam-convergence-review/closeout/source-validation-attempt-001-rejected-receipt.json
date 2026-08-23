@@ -1,0 +1,10 @@
+{
+  "schema_version": "ariadne.validation_rejected_receipt.v1",
+  "attempt_id": "post-evidence-seam-readiness-source-validation-001",
+  "recorded_at": "2026-08-23T14:22:00+10:00",
+  "status": "rejected_command_corrected",
+  "reason": "validator_rejected_crlf_instead_of_canonicalizing_crlf_and_rejecting_only_bare_cr",
+  "repository_source_failure": false,
+  "canonical_mutation": false,
+  "correction": "Decode strict UTF-8, normalize CRLF to LF, reject any remaining bare CR, then hash canonical UTF-8 bytes. The corrected reading passed all thirteen hashes and thirteen Git-object ancestry bindings."
+}

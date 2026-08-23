@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> Environment evidence is now a typed, independently mandatory but non-admitting input; the next step is a read-only readiness convergence review, not runtime activation or more Harness diagnosis.
+> Complete the one remaining provider-free reference-only conformance packet, then stop before the first human-owned external selection.
 
 ## North star
 
@@ -624,26 +624,24 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    The strict broker and traceability gears remain, the unchanged-runner perfection rule is retired, and one task-driven adapter allowance opens practical real work. Lineage parent: `raisa-provider-free-unmounted-canonical-check-in-pure-environment-evidence-gate-evaluator-rehearsal`.
 304. **Require reviewed environment evidence as an independent input to the future ordinary canonical check-in admission boundary — Provider-free unmounted default-off canonical check-in environment-evidence admission-input seam rehearsal**
    The typed evidence reading now composes fail-closed with every existing admission control while ordinary activation remains closed. Lineage parent: `deepseek-native-harness-pragmatic-real-work-adoption-review-and-plan`.
+305. **Take an exact readiness-clock reading after completing the repository evidence seam — Post-evidence-seam canonical check-in admission-readiness convergence review**
+   Four repository nodes are accepted without manufacturing an operational fact; one final provider-free conformance node becomes executable. Lineage parent: `raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal`.
 
 ## Current position
 
-**Reassess the remaining ordinary-practice canonical check-in readiness gap after the typed environment-evidence seam — Provider-free unmounted default-off canonical check-in environment-evidence admission-input seam rehearsal**
+**Prove complete reference-only cross-component conformance before requesting any external selection — Post-evidence-seam canonical check-in admission-readiness convergence review**
 
-**Why this proof came next:** The manifest normalizer, typed evidence inputs, pure evidence gate and admission-input composition are accepted, so a read-only convergence review can identify the next smallest blocker without opening runtime authority.
+**Why this proof came next:** The normalizer, typed inputs, pure evaluator and admission seam are independently accepted, making their common unmounted conformance packet the sole dependency-satisfied repository node.
 
-One evidence-led successor will select the narrowest provider-free next tranche while the failed native profile remains out of the immediate worker allocation.
+One authored-synthetic packet will prove the composed satisfied and hostile-denial paths without adding an operational claim or admission capability.
 
 ### What this unlocks
 
-- A complete static chain from normalized environment evidence to a fail-closed default-off admission decision.
-- A current convergence reading that can separate remaining record, signature, distribution and command-mounting gaps.
-- Continued Raisa development without another native-Harness diagnostic detour.
+- Completion of the last repository engineering prerequisite before human-owned environment choices.
 
 ### What it does not solve
 
-- The static seam does not create or sign an operational admission snapshot.
-- The native Harness has not produced an accepted EMR4 candidate.
-- Ordinary practice, product runtime, data, deployment and protected integration remain closed.
+- It does not select an environment, establish a live role, bind or resolve secrets, supply custody evidence, activate ordinary practice or mount a command.
 
 ## Continuity and authority
 
@@ -1650,6 +1648,7 @@ Prerequisites:
 - `docs/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review-plan.md`
 - `docs/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review.md`
 - `docs/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-convergence-review-closeout.md`
+- `docs/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review-closeout.md`
 - `docs/raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis-closeout.md`
 - `docs/raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision-closeout.md`
 - `docs/raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis-closeout.md`
@@ -1708,7 +1707,6 @@ Prerequisites:
 - `docs/raisa-provider-free-unmounted-conditional-command-admission-rehearsal-closeout.md`
 - `docs/raisa-provider-free-unmounted-conditional-command-admission-rehearsal-design.md`
 - `docs/raisa-provider-free-unmounted-conditional-command-admission-rehearsal-plan.md`
-- `docs/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal-closeout.md`
 - `docs/raisa-provider-free-unmounted-default-off-canonical-check-in-non-phi-observer-adapter-rehearsal-closeout.md`
 - `docs/raisa-provider-free-unmounted-default-off-ordinary-practice-canonical-check-in-admission-control-kernel-rehearsal-closeout.md`
 - `docs/raisa-provider-free-unmounted-default-off-ordinary-practice-canonical-check-in-admission-control-kernel-rehearsal-plan.md`
@@ -2271,7 +2269,6 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-check-in-admission-control-kernel-gemini37-review-worktree-preflight.json`
 - `orchestration/agent_inbox/codex/raisa-check-in-admission-control-kernel-pre-verifier-acceptance-attempt-003-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-check-in-admission-control-kernel-sol-acceptance.md`
-- `orchestration/agent_inbox/codex/raisa-check-in-environment-evidence-admission-input-seam-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-cloud-run-api-runtime-identity-enablement-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-cloud-run-public-https-dev-host-deployment-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-cloud-run-public-https-dev-host-readiness-sol-acceptance.md`
@@ -3101,6 +3098,7 @@ Prerequisites:
 - `orchestration/continuity/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave/provider-free-acceptance-evidence.json`
 - `orchestration/continuity/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave/temporal-weave-contract.example.json`
 - `orchestration/continuity/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave/temporal-weave-contract.schema.json`
+- `orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/contract.json`
 - `orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/efficacy-reading.json`
 - `orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/evidence.json`
 - `orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/report.md`
@@ -3108,6 +3106,7 @@ Prerequisites:
 - `orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review/efficacy-reading.json`
 - `orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review/evidence.json`
 - `orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review/report.md`
+- `orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review/evidence.json`
 - `orchestration/continuity/raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis/diagnosis-evidence.json`
 - `orchestration/continuity/raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis/diagnosis-report.md`
 - `orchestration/continuity/raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision/decision-evidence.json`
@@ -3165,7 +3164,6 @@ Prerequisites:
 - `orchestration/continuity/raisa-provider-free-unmounted-conditional-command-admission-rehearsal/scenarios.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-conditional-command-admission-rehearsal/scenarios.schema.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal/deterministic-evidence.json`
-- `orchestration/continuity/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal/efficacy-reading.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-default-off-ordinary-practice-canonical-check-in-admission-control-kernel-rehearsal/contract.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-default-off-ordinary-practice-canonical-check-in-admission-control-kernel-rehearsal/contract.schema.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-default-off-ordinary-practice-canonical-check-in-admission-control-kernel-rehearsal/kernel-rehearsal-report.md`
@@ -3912,4 +3910,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 409; continuity graph revision 427._
+_Compass map revision 410; continuity graph revision 428._

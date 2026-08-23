@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 643,
+  "register_revision": 644,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-23",
@@ -42744,6 +42744,224 @@
       },
       "incident_id": "AER-1109",
       "attempt_id": "clock-49eca5976d5d62066509f8b0",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "post-evidence-seam-check-in-readiness-review",
+      "role": "orchestrator",
+      "resource_id": "post-seam-readiness-clockwork-check",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_clockwork",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "The live acceptance projection selects an existing label from the closed Baton vocabulary.",
+      "observed_error": "The first closeout dry run supplied a newly coined descriptive label and failed closed with tick_baton_compaction_unindexed.",
+      "detection_method": "The clockwork rejected the prospective projection before generation construction, canonical mutation or pointer movement.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review/closeout/clockwork-check-attempt-001-rejected-receipt.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.clockwork_unindexed_baton_label",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Select the established Current DeepSeek native Harness acceptance general rolling slot and preserve the arrival/check-in lineage row.",
+        "prevention_control": "Resolve the label from the manifest and verify whether its existing row carries invariant literals before constructing a closeout intent.",
+        "evidence_paths": [
+          "docs/handover-ledgers/current-baton-acceptance-index.manifest.json",
+          "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review/closeout/closeout-intent.json"
+        ]
+      },
+      "incident_id": "AER-1110",
+      "attempt_id": "clock-83b541d9d27205a8baf12e5a",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "post-evidence-seam-check-in-readiness-review",
+      "role": "orchestrator",
+      "resource_id": "post-seam-readiness-clockwork-check",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_clockwork",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "The live Baton remains within its deterministic byte and line compaction budget.",
+      "observed_error": "The second closeout dry run supplied an exhaustive rolling-row artifact inventory and failed closed with tick_baton_compaction_budget.",
+      "detection_method": "The clockwork rejected the prospective projection before generation construction, canonical mutation or pointer movement.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review/closeout/clockwork-check-attempt-002-rejected-receipt.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.clockwork_active_baton_compaction_budget",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Retain the complete inventory in the immutable closeout graph and project only four essential lookup paths into the live row.",
+        "prevention_control": "Keep detailed inventories in the graph and pre-budget the live rolling-row lookup before dry-run submission.",
+        "evidence_paths": [
+          "orchestration_harness/governance_clockwork_tick.py",
+          "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review/closeout/closeout-intent.json"
+        ]
+      },
+      "incident_id": "AER-1111",
+      "attempt_id": "clock-2fed74e80cdd23d898793ade",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "post-evidence-seam-check-in-readiness-review",
+      "role": "orchestrator",
+      "resource_id": "post-seam-readiness-clockwork-check",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_clockwork",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every incident observation field conforms to the typed length constraints before clockwork submission.",
+      "observed_error": "The third closeout dry run copied the long canonical operation identifier into the bounded tranche field and failed closed with tick_incident_tranche.",
+      "detection_method": "The clockwork rejected intent validation before projection, generation, canonical mutation or pointer movement.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review/closeout/clockwork-check-attempt-003-rejected-receipt.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.clockwork_incident_tranche_length",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Use the stable post-evidence-seam-check-in-readiness-review alias in the bounded observation field.",
+        "prevention_control": "Validate observation identifiers against typed field lengths before dry-run submission.",
+        "evidence_paths": [
+          "orchestration_harness/governance_clockwork_tick.py",
+          "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review/closeout/closeout-intent.json"
+        ]
+      },
+      "incident_id": "AER-1112",
+      "attempt_id": "clock-531e1790214aeb6ef22cb95b",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "post-evidence-seam-check-in-readiness-review",
+      "role": "orchestrator",
+      "resource_id": "post-seam-readiness-source-validator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_powershell",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "The validator implements strict UTF-8, CRLF-to-LF canonicalization and bare-CR rejection exactly as frozen.",
+      "observed_error": "The first source-validation command rejected all carriage returns instead of canonicalizing CRLF and rejecting only bare CR.",
+      "detection_method": "The manual validator rejected a retained CRLF input before completing the hash set; the corrected canonicalization passed all thirteen hashes and Git bindings.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review/closeout/source-validation-attempt-001-rejected-receipt.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.source_validator_rejected_canonicalizable_crlf",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Normalize CRLF to LF before hashing and reject only carriage returns that remain bare.",
+        "prevention_control": "Copy the frozen canonicalization algorithm exactly when constructing a local source validator.",
+        "evidence_paths": [
+          "docs/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review-plan.md",
+          "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review/contract.json"
+        ]
+      },
+      "incident_id": "AER-1113",
+      "attempt_id": "clock-8d753bc7fa96c3c109dd2068",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "post-evidence-seam-check-in-readiness-review",
+      "role": "orchestrator",
+      "resource_id": "post-seam-readiness-clockwork-publication",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_clockwork",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "moderate",
+      "expected_invariant": "A rolling acceptance update preserves literal lineage objects required by the live Baton consistency contract.",
+      "observed_error": "The first live publication replaced the arrival/check-in relation row with compact lookup paths and removed three required literal lineage objects.",
+      "detection_method": "The postpublication current-Baton consistency test failed on the missing post-cancellation orientation object; the clockwork then restored the previous generation byte exactly.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review/closeout/clockwork-publication-attempt-001-rollback-receipt.json",
+        "tests/test_current_baton_consistency.py"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.clockwork_replaced_lineage_bearing_active_row",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Rollback byte-exactly and move this closeout to the established Current DeepSeek native Harness acceptance general rolling slot.",
+        "prevention_control": "Run the current-Baton consistency test against the prospective rolling-slot choice before live publication.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review/closeout/clockwork-publication-attempt-001-rollback-receipt.json",
+          "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review/closeout/closeout-intent.json"
+        ]
+      },
+      "incident_id": "AER-1114",
+      "attempt_id": "clock-4a1f35c58afbc921cc3f3db5",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "post-evidence-seam-check-in-readiness-review",
+      "role": "orchestrator",
+      "resource_id": "clockwork-rollback-pointer-lease",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_clockwork",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "A byte-exact rollback's monotonic lease pointer is committed as the source before a replacement generation is prepared.",
+      "observed_error": "The first replacement dry run was attempted immediately after rollback while lease 203 was not yet bound in the source commit.",
+      "detection_method": "The clockwork rejected tick_pointer_physical_drift before generation construction, command execution or publication.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review/closeout/clockwork-check-attempt-004-rejected-receipt.json",
+        "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review/closeout/clockwork-publication-attempt-001-rollback-receipt.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.clockwork_rollback_lease_not_bound_before_republication",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Commit the lease-203 rollback pointer as the exact source before rerunning the replacement dry check.",
+        "prevention_control": "Treat rollback, monotonic lease source binding and corrected dry run as one ordered recovery sequence.",
+        "evidence_paths": [
+          "orchestration/continuity/ariadne-governance-clockwork/current.json",
+          "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review/closeout/closeout-intent.json"
+        ]
+      },
+      "incident_id": "AER-1115",
+      "attempt_id": "clock-3fb50d007063815e064ee94a",
       "origin": "agent_behavior",
       "related_incident_ids": [],
       "status": "corrected"

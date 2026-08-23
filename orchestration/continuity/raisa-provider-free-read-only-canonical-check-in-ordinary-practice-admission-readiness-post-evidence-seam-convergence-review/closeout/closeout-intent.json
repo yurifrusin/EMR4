@@ -1,0 +1,464 @@
+{
+  "schema_version": "ariadne.governance_live_tick_intent.v2",
+  "transaction_manifest": {
+    "schema_version": "ariadne.transactional_closeout_manifest.v1",
+    "operation_id": "raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review",
+    "title": "Post-evidence-seam canonical check-in admission-readiness convergence review closeout",
+    "source_anchor": "current_head",
+    "recorded_at": "2026-08-23T14:10:17.4271956+10:00",
+    "node": {
+      "id": "raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review",
+      "title": "Post-evidence-seam canonical check-in admission-readiness convergence review",
+      "kind": "review",
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority admits this exact provider-free repository-static convergence review.",
+          "GPT Sol owns the serial classification; DeepSeek, Gemini and native subagents were explicitly declined for the initial review.",
+          "No provider, Harness, environment, credential, database, runtime, product data, deployment, Pages or protected-ref surface opened."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "retain-readiness-matrix-eleven-zero-one",
+          "source": "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review/evidence.json",
+          "status": "accepted",
+          "summary": "Retain eleven satisfied dimensions, zero blocking gaps and one operational-evidence gap because the repository lineage supplies no current external operational fact."
+        },
+        {
+          "id": "accept-four-repository-prerequisite-completions",
+          "source": "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review/report.md",
+          "status": "accepted",
+          "summary": "Accept the manifest normalizer, typed inputs, pure evidence gate and default-off admission seam at their exact reviewed product sources."
+        },
+        {
+          "id": "retain-six-absent-facts-and-five-unselected-decisions",
+          "source": "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/contract.json",
+          "status": "accepted",
+          "summary": "Do not infer operational facts or human selections from reference-only repository evidence."
+        },
+        {
+          "id": "select-reference-only-conformance-packet",
+          "source": "docs/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review-closeout.md",
+          "status": "accepted",
+          "summary": "Select the unmounted authored-synthetic reference-only conformance packet as the sole dependency-satisfied repository successor."
+        },
+        {
+          "id": "retain-pragmatic-native-harness-posture",
+          "source": "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review/efficacy-reading.json",
+          "status": "accepted",
+          "summary": "Open no generic Harness testing, do not select the failed exact profile, permit no silent Claude fallback and reconsider native work only on a real task that fits an accepted runner or naturally in-scope fix evidence."
+        }
+      ],
+      "claim_scope": [
+        "The twelve-dimension ordinary-practice readiness matrix remains exactly eleven satisfied, zero blocking and one operational-evidence gap.",
+        "The remaining dimension is environment_manifest_and_operational_secret_posture and the verdict remains not ready for ordinary-practice admission.",
+        "Four repository prerequisites are accepted and exactly one further repository node is dependency-satisfied.",
+        "Six required external facts remain absent and five human-owned decisions remain unselected.",
+        "Thirteen full Git objects and thirteen canonical-LF source hashes passed with zero ordinary admission releases.",
+        "No product source, product test, runtime or external state changed."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review-plan.md",
+          "docs/security/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review/evidence.json",
+          "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review/report.md",
+          "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-23--post-evidence-seam-check-in-admission-readiness-convergence-review.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-check-in-admission-readiness-post-evidence-seam-convergence-review-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-check-in-admission-readiness-post-evidence-seam-convergence-review-preplanning-receipt.json"
+        ],
+        "tests": [
+          "tests/test_current_baton_consistency.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_transactional_closeout.py"
+        ],
+        "artifacts": [
+          "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review/contract.json",
+          "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review/contract.schema.json",
+          "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review/evidence.schema.json"
+        ]
+      },
+      "unresolved_gates": [
+        "The reference-only conformance packet remains unproved until the next provider-free unmounted rehearsal passes.",
+        "All six current external operational facts remain absent and cannot be replaced by repository evidence.",
+        "All five target, custody, policy, provisioning and activation decisions remain human-owned and unselected.",
+        "Ordinary-practice admission, record activation and command mounting remain closed.",
+        "Native Harness worker allocation remains closed for the immediate successor and Claude Code is not a fallback.",
+        "Product data, production, deployment, release, Pages and protected refs remain closed."
+      ]
+    },
+    "journey": {
+      "strategic_role": "Take an exact readiness-clock reading after completing the repository evidence seam",
+      "outcome": "Four repository nodes are accepted without manufacturing an operational fact; one final provider-free conformance node becomes executable.",
+      "evidence": [
+        "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review/evidence.json",
+        "docs/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review-closeout.md"
+      ]
+    },
+    "current_position": {
+      "strategic_role": "Prove complete reference-only cross-component conformance before requesting any external selection",
+      "why_now": "The normalizer, typed inputs, pure evaluator and admission seam are independently accepted, making their common unmounted conformance packet the sole dependency-satisfied repository node.",
+      "outcome": "One authored-synthetic packet will prove the composed satisfied and hostile-denial paths without adding an operational claim or admission capability.",
+      "unlocks": [
+        "Completion of the last repository engineering prerequisite before human-owned environment choices."
+      ],
+      "does_not_solve": [
+        "It does not select an environment, establish a live role, bind or resolve secrets, supply custody evidence, activate ordinary practice or mount a command."
+      ],
+      "evidence": [
+        "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review/evidence.json",
+        "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/contract.json"
+      ],
+      "orientation_statement": "Complete the one remaining provider-free reference-only conformance packet, then stop before the first human-owned external selection."
+    },
+    "next_operation": {
+      "operation_id": "raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal",
+      "active_tranche": "Provider-free unmounted canonical check-in reference-only operational-evidence conformance packet rehearsal",
+      "objective": "Compose one authored-synthetic opaque-reference-only packet through the accepted environment-manifest normalizer, typed operational-evidence inputs, pure evidence gate and default-off admission seam, proving exact satisfied and hostile denial paths without claiming an external operational fact or releasing ordinary admission.",
+      "authority_source": "Yuri's standing uninterrupted-development authority plus the accepted post-evidence-seam convergence review select the sole dependency-satisfied repository prerequisite; all external selections remain closed.",
+      "next_stage": "fresh_five_source_rehydration_then_freeze_the_exact_authored_synthetic_reference_only_packet_and_cross_component_denial_matrix"
+    },
+    "incidents": [
+      {
+        "incident_id": "post-seam-baton-label-vocabulary",
+        "source_id": "post-seam-closeout-local-001",
+        "peers": []
+      },
+      {
+        "incident_id": "post-seam-baton-compaction-budget",
+        "source_id": "post-seam-closeout-local-002",
+        "peers": []
+      },
+      {
+        "incident_id": "post-seam-incident-tranche-length",
+        "source_id": "post-seam-closeout-local-003",
+        "peers": []
+      },
+      {
+        "incident_id": "post-seam-source-hash-canonicalisation",
+        "source_id": "post-seam-closeout-local-004",
+        "peers": []
+      },
+      {
+        "incident_id": "post-seam-wrong-lineage-bearing-rolling-slot",
+        "source_id": "post-seam-closeout-local-005",
+        "peers": []
+      },
+      {
+        "incident_id": "post-seam-rollback-lease-source-binding",
+        "source_id": "post-seam-closeout-local-006",
+        "peers": []
+      }
+    ],
+    "broker": {
+      "enabled": false,
+      "posture": "provider_free_shadow"
+    }
+  },
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v1",
+    "commands": [
+      {
+        "command_id": "post-evidence-seam-readiness-closeout-tick-check",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "scripts.ariadne_governance_clockwork_tick",
+          "--check",
+          "--intent",
+          "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review/closeout/closeout-intent.json"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "post-evidence-seam-readiness-contract-schema",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "jsonschema",
+          "-i",
+          "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review/contract.json",
+          "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review/contract.schema.json"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "post-evidence-seam-readiness-evidence-schema",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "jsonschema",
+          "-i",
+          "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review/evidence.json",
+          "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review/evidence.schema.json"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "post-evidence-seam-readiness-governance-tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "--repo-root",
+          "C:/Users/sarashera/emr4",
+          "tests/test_current_baton_consistency.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_transactional_closeout.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      }
+    ]
+  },
+  "baton_acceptance": {
+    "label": "Current DeepSeek native Harness acceptance",
+    "paths": [
+      "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review/efficacy-reading.json",
+      "docs/ariadne-agent-error-correction-register-revision-644.md",
+      "docs/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-check-in-admission-readiness-post-evidence-seam-convergence-review-sol-acceptance.md"
+    ]
+  },
+  "agent_error_observations": [
+    {
+      "attempt_key": "post-seam-readiness-closeout-baton-label-001",
+      "observed_on": "2026-08-23",
+      "tranche": "post-evidence-seam-check-in-readiness-review",
+      "role": "orchestrator",
+      "resource_id": "post-seam-readiness-clockwork-check",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_clockwork",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "The live acceptance projection selects an existing label from the closed Baton vocabulary.",
+      "observed_error": "The first closeout dry run supplied a newly coined descriptive label and failed closed with tick_baton_compaction_unindexed.",
+      "detection_method": "The clockwork rejected the prospective projection before generation construction, canonical mutation or pointer movement.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review/closeout/clockwork-check-attempt-001-rejected-receipt.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.clockwork_unindexed_baton_label",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Select the established Current DeepSeek native Harness acceptance general rolling slot and preserve the arrival/check-in lineage row.",
+        "prevention_control": "Resolve the label from the manifest and verify whether its existing row carries invariant literals before constructing a closeout intent.",
+        "evidence_paths": [
+          "docs/handover-ledgers/current-baton-acceptance-index.manifest.json",
+          "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review/closeout/closeout-intent.json"
+        ]
+      },
+      "baton_summary": "records one contained unindexed-label draft and its established rolling-slot correction."
+    },
+    {
+      "attempt_key": "post-seam-readiness-closeout-baton-budget-001",
+      "observed_on": "2026-08-23",
+      "tranche": "post-evidence-seam-check-in-readiness-review",
+      "role": "orchestrator",
+      "resource_id": "post-seam-readiness-clockwork-check",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_clockwork",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "The live Baton remains within its deterministic byte and line compaction budget.",
+      "observed_error": "The second closeout dry run supplied an exhaustive rolling-row artifact inventory and failed closed with tick_baton_compaction_budget.",
+      "detection_method": "The clockwork rejected the prospective projection before generation construction, canonical mutation or pointer movement.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review/closeout/clockwork-check-attempt-002-rejected-receipt.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.clockwork_active_baton_compaction_budget",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Retain the complete inventory in the immutable closeout graph and project only four essential lookup paths into the live row.",
+        "prevention_control": "Keep detailed inventories in the graph and pre-budget the live rolling-row lookup before dry-run submission.",
+        "evidence_paths": [
+          "orchestration_harness/governance_clockwork_tick.py",
+          "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review/closeout/closeout-intent.json"
+        ]
+      },
+      "baton_summary": "records one contained live-row budget overflow and its compact lookup correction."
+    },
+    {
+      "attempt_key": "post-seam-readiness-closeout-tranche-length-001",
+      "observed_on": "2026-08-23",
+      "tranche": "post-evidence-seam-check-in-readiness-review",
+      "role": "orchestrator",
+      "resource_id": "post-seam-readiness-clockwork-check",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_clockwork",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every incident observation field conforms to the typed length constraints before clockwork submission.",
+      "observed_error": "The third closeout dry run copied the long canonical operation identifier into the bounded tranche field and failed closed with tick_incident_tranche.",
+      "detection_method": "The clockwork rejected intent validation before projection, generation, canonical mutation or pointer movement.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review/closeout/clockwork-check-attempt-003-rejected-receipt.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.clockwork_incident_tranche_length",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Use the stable post-evidence-seam-check-in-readiness-review alias in the bounded observation field.",
+        "prevention_control": "Validate observation identifiers against typed field lengths before dry-run submission.",
+        "evidence_paths": [
+          "orchestration_harness/governance_clockwork_tick.py",
+          "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review/closeout/closeout-intent.json"
+        ]
+      },
+      "baton_summary": "records one contained incident-field length lapse and its stable short alias."
+    },
+    {
+      "attempt_key": "post-seam-readiness-source-validation-001",
+      "observed_on": "2026-08-23",
+      "tranche": "post-evidence-seam-check-in-readiness-review",
+      "role": "orchestrator",
+      "resource_id": "post-seam-readiness-source-validator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_powershell",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "The validator implements strict UTF-8, CRLF-to-LF canonicalization and bare-CR rejection exactly as frozen.",
+      "observed_error": "The first source-validation command rejected all carriage returns instead of canonicalizing CRLF and rejecting only bare CR.",
+      "detection_method": "The manual validator rejected a retained CRLF input before completing the hash set; the corrected canonicalization passed all thirteen hashes and Git bindings.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review/closeout/source-validation-attempt-001-rejected-receipt.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.source_validator_rejected_canonicalizable_crlf",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Normalize CRLF to LF before hashing and reject only carriage returns that remain bare.",
+        "prevention_control": "Copy the frozen canonicalization algorithm exactly when constructing a local source validator.",
+        "evidence_paths": [
+          "docs/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review-plan.md",
+          "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review/contract.json"
+        ]
+      },
+      "baton_summary": "records one contained source-validator canonicalization lapse and the passing corrected reading."
+    },
+    {
+      "attempt_key": "post-seam-readiness-publication-lineage-slot-001",
+      "observed_on": "2026-08-23",
+      "tranche": "post-evidence-seam-check-in-readiness-review",
+      "role": "orchestrator",
+      "resource_id": "post-seam-readiness-clockwork-publication",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_clockwork",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "moderate",
+      "expected_invariant": "A rolling acceptance update preserves literal lineage objects required by the live Baton consistency contract.",
+      "observed_error": "The first live publication replaced the arrival/check-in relation row with compact lookup paths and removed three required literal lineage objects.",
+      "detection_method": "The postpublication current-Baton consistency test failed on the missing post-cancellation orientation object; the clockwork then restored the previous generation byte exactly.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review/closeout/clockwork-publication-attempt-001-rollback-receipt.json",
+        "tests/test_current_baton_consistency.py"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.clockwork_replaced_lineage_bearing_active_row",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Rollback byte-exactly and move this closeout to the established Current DeepSeek native Harness acceptance general rolling slot.",
+        "prevention_control": "Run the current-Baton consistency test against the prospective rolling-slot choice before live publication.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review/closeout/clockwork-publication-attempt-001-rollback-receipt.json",
+          "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review/closeout/closeout-intent.json"
+        ]
+      },
+      "baton_summary": "records the byte-exact rollback of one wrong lineage-bearing row selection and its general rolling-slot correction."
+    },
+    {
+      "attempt_key": "post-seam-readiness-rollback-lease-binding-001",
+      "observed_on": "2026-08-23",
+      "tranche": "post-evidence-seam-check-in-readiness-review",
+      "role": "orchestrator",
+      "resource_id": "clockwork-rollback-pointer-lease",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_clockwork",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "A byte-exact rollback's monotonic lease pointer is committed as the source before a replacement generation is prepared.",
+      "observed_error": "The first replacement dry run was attempted immediately after rollback while lease 203 was not yet bound in the source commit.",
+      "detection_method": "The clockwork rejected tick_pointer_physical_drift before generation construction, command execution or publication.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review/closeout/clockwork-check-attempt-004-rejected-receipt.json",
+        "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review/closeout/clockwork-publication-attempt-001-rollback-receipt.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.clockwork_rollback_lease_not_bound_before_republication",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Commit the lease-203 rollback pointer as the exact source before rerunning the replacement dry check.",
+        "prevention_control": "Treat rollback, monotonic lease source binding and corrected dry run as one ordered recovery sequence.",
+        "evidence_paths": [
+          "orchestration/continuity/ariadne-governance-clockwork/current.json",
+          "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review/closeout/closeout-intent.json"
+        ]
+      },
+      "baton_summary": "records one rejected premature postrollback check and the required lease-203 source binding."
+    }
+  ],
+  "next_operation_protected_boundaries": [
+    "provider_free_unmounted_reference_only_conformance_packet_only",
+    "one_authored_synthetic_opaque_reference_only_packet_and_hostile_variants",
+    "compose_only_the_accepted_normalizer_typed_inputs_evidence_gate_and_admission_seam",
+    "no_external_fact_claim_human_selection_or_lasting_action",
+    "no_native_harness_diagnostic_worker_or_provider_call",
+    "no_silent_claude_code_or_other_transport_fallback",
+    "no_existing_product_source_route_api_client_configuration_or_runtime_change",
+    "no_environment_variable_manifest_instance_secret_resolution_credential_store_or_network_access",
+    "no_database_docker_postgresql_sql_live_role_or_infrastructure_action",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_admission_record_activation",
+    "no_action_grammar_generic_status_arrived_or_waiting_area_change",
+    "no_product_patient_appointment_clinical_historical_or_protected_data",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only"
+  ]
+}

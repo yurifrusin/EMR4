@@ -1,0 +1,10 @@
+{
+  "schema_version": "ariadne.clockwork_rejected_check_receipt.v1",
+  "attempt_id": "post-evidence-seam-readiness-clockwork-check-002",
+  "recorded_at": "2026-08-23T14:15:00+10:00",
+  "status": "rejected_before_publication",
+  "reason": "tick_baton_compaction_budget",
+  "canonical_mutation": false,
+  "pointer_movement": false,
+  "correction": "Keep the complete artifact inventory in the immutable closeout graph and reduce the live rolling acceptance row to its four essential lookup paths."
+}

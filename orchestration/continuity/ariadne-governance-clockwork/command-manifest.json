@@ -1,44 +1,44 @@
 {
-  "schema_version": "ariadne.governance_command_manifest.v2",
-  "database_authority": "closed",
+  "schema_version": "ariadne.governance_command_manifest.v1",
   "commands": [
     {
-      "command_id": "check-in-evidence-admission-seam-closeout-tick-check",
+      "command_id": "post-evidence-seam-readiness-closeout-tick-check",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "scripts.ariadne_governance_clockwork_tick",
         "--check",
         "--intent",
-        "orchestration/continuity/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal/closeout/closeout-intent.json"
+        "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review/closeout/closeout-intent.json"
       ],
-      "completion_contract": "final_exit_code_zero_required",
-      "verification_phase": "prepublication"
+      "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "check-in-evidence-admission-seam-closeout-provider-free-tests",
+      "command_id": "post-evidence-seam-readiness-contract-schema",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
-        "scripts.ariadne_provider_free_pytest",
-        "--repo-root",
-        "C:/Users/sarashera/emr4",
-        "tests/test_check_in_environment_evidence_admission.py",
-        "tests/test_raisa_provider_free_unmounted_default_off_canonical_check_in_environment_evidence_admission_input_seam_rehearsal_plan.py",
-        "tests/test_raisa_native_harness_task_worker.py",
-        "tests/test_raisa_provider_free_unmounted_default_off_ordinary_practice_check_in_admission_control_kernel_rehearsal.py",
-        "tests/test_appointment_check_in_environment_evidence_gate.py",
-        "tests/test_api_spine_artifacts.py",
-        "tests/test_ariadne_agent_error_register.py",
-        "tests/test_ariadne_active_operation_latch.py",
-        "tests/test_ariadne_governance_clockwork_tick.py",
-        "tests/test_ariadne_transactional_closeout.py"
+        "jsonschema",
+        "-i",
+        "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review/contract.json",
+        "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review/contract.schema.json"
       ],
-      "completion_contract": "final_exit_code_zero_required",
-      "verification_phase": "prepublication"
+      "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "check-in-evidence-admission-seam-closeout-postpublication-readback",
+      "command_id": "post-evidence-seam-readiness-evidence-schema",
+      "executable": ".venv/Scripts/python.exe",
+      "arguments": [
+        "-m",
+        "jsonschema",
+        "-i",
+        "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review/evidence.json",
+        "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review/evidence.schema.json"
+      ],
+      "completion_contract": "final_exit_code_zero_required"
+    },
+    {
+      "command_id": "post-evidence-seam-readiness-governance-tests",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
@@ -46,17 +46,11 @@
         "--repo-root",
         "C:/Users/sarashera/emr4",
         "tests/test_current_baton_consistency.py",
-        "tests/test_ariadne_agent_error_register.py",
         "tests/test_ariadne_active_operation_latch.py",
         "tests/test_ariadne_governance_clockwork_tick.py",
-        "tests/test_ariadne_transactional_closeout.py",
-        "tests/test_check_in_environment_evidence_admission.py",
-        "tests/test_raisa_provider_free_unmounted_default_off_canonical_check_in_environment_evidence_admission_input_seam_rehearsal_plan.py",
-        "tests/test_raisa_native_harness_task_worker.py",
-        "tests/test_api_spine_artifacts.py"
+        "tests/test_ariadne_transactional_closeout.py"
       ],
-      "completion_contract": "final_exit_code_zero_required",
-      "verification_phase": "postpublication"
+      "completion_contract": "final_exit_code_zero_required"
     }
   ]
 }
