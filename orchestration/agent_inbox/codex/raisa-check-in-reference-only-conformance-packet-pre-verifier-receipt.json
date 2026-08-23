@@ -1,0 +1,128 @@
+{
+  "active_operation": {
+    "active_tranche": "Provider-free unmounted canonical check-in reference-only operational-evidence conformance packet rehearsal",
+    "completed_stage": "Accepted raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review at the machine-resolved source.",
+    "next_executable_stage": "fresh_five_source_rehydration_then_freeze_the_exact_authored_synthetic_reference_only_packet_and_cross_component_denial_matrix",
+    "operation_id": "raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "abe166791c8d3448ee3744cdc7bf4f4c3ad7807c",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_verifier_acceptance",
+  "git_object_resolution": {
+    "observed_head": "904c626e88af7cd947241eae73d987e9418f1637",
+    "reason_codes": [],
+    "resolved_commit": "abe166791c8d3448ee3744cdc7bf4f4c3ad7807c",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "abe166791c8d3448ee3744cdc7bf4f4c3ad7807c"
+  },
+  "git_ref_evidence_binding": {
+    "manually_supplied_object_id_count": 0,
+    "policy": "machine_snapshot_only",
+    "reason_codes": [],
+    "schema_version": "ariadne.git_ref_evidence_binding.v1",
+    "status": "passed"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "904c626e88af7cd947241eae73d987e9418f1637",
+    "branch_origin_aligned": false,
+    "head": "904c626e88af7cd947241eae73d987e9418f1637",
+    "origin_branch_commit": "0e8138c39ece888aa8e63db3f5612ff02328ed67",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 678
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "pre_verifier_exact_candidate",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "DeepSeek remains declined because this tranche forbids provider/Harness work, native occupied use remains paused pending a separate boot proof, and the implementation is already complete under the serial Sol lease.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "gemini_verifier",
+        "rationale": "Gemini is declined after the exact schemas, 12-case reason matrix, source bindings, focused tests, surrounding pure-component tests and API-spine tests all passed; no material semantic conflict or independent-veto trigger remains.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Native subagents remain declined under developer policy and because acceptance is now a serial exact-candidate decision.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "if accepted component contracts conflict",
+      "if implementation would alter an existing product or API surface",
+      "if deterministic verification exposes an unresolved semantic fork",
+      "at tranche closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "preserve the committed frozen packet contract while resuming after restart",
+      "call the accepted normalizer typed-input gate and admission functions without substitute logic",
+      "prove the canonical satisfied gate still terminates at ordinary_activation_closed",
+      "prove all twelve hostile variants before accepting the final repository prerequisite"
+    ]
+  },
+  "planned_action": "accept_deterministic_candidate_without_external_verifier_after_exact_packet_schema_and_denial_matrix_pass",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal-plan.md",
+      "docs/security/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal-threat-model-delta.md",
+      "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal/contract.json",
+      "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal/reference-only-packet.json",
+      "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal/evidence.json",
+      "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal/report.md",
+      "scripts/raisa_provider_free_unmounted_canonical_check_in_reference_only_operational_evidence_conformance_packet_rehearsal.py",
+      "tests/test_raisa_provider_free_unmounted_canonical_check_in_reference_only_operational_evidence_conformance_packet_rehearsal.py",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns this tightly coupled provider-free tranche. The operation-specific Baton and latch pause native DeepSeek and forbid a Claude fallback here; Gemini and native subagents are also declined because the tranche is deterministic serial work and current developer policy prohibits proactive delegation.",
+    "git_refs_and_worktree": "The machine snapshot alone must bind exact HEAD, task-origin state, all four protected refs, tracked cleanliness, and preservation of all unrelated untracked files including docs/branding.",
+    "live_handover_current_baton": "The complete 489-line live handover was freshly read through its final line after the Codex restart. The Current Baton names this reference-only conformance packet as the active successor and keeps ordinary practice and all external operational choices closed.",
+    "protected_evidence_boundaries": "Only one authored-synthetic opaque-reference packet and its twelve hostile variants may traverse the accepted pure modules. No external fact, target selection, secret resolution, database, product data, route, ordinary enablement, admission activation, worker/provider call, deployment, Pages, protected evidence or protected ref is opened."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}
