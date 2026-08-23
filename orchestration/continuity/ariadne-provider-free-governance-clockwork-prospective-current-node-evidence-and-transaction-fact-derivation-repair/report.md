@@ -48,6 +48,12 @@ them. Direct serial pytest was used for the six-node diagnosis, followed by the
 canonical whole-file suite. Neither issue caused product, provider or canonical
 state to rerun.
 
+The post-restart rehydration then supplied a live measure of the remaining
+interface burden: one narrative Git-evidence sentence repeated two full object
+IDs. The existing preflight rejected it before mutation, and the corrected
+machine-snapshot-only receipt passed. This is recorded as AER-1128 and is input
+to the typed semantic builder, not a defect in the accepted four-file repair.
+
 ## Matched efficacy
 
 The preceding packet had three postpublication rollback shapes: two missing

@@ -34,6 +34,12 @@ acceptance rule. One diagnostic command used an unsupported node-selector shape
 with the whole-file provider-free runner; direct serial diagnosis and the
 canonical full suite passed. No product or provider work reran.
 
+The restart also exposed one remaining form-filling trap: I repeated two Git
+objects in a free-form receipt sentence. The preflight rejected it before any
+state change, and the machine-snapshot-only correction passed. It is retained
+as AER-1128 and gives the next typed-builder tranche a concrete target rather
+than another abstract rule.
+
 The next tranche will test a typed semantic closeout builder and command
 registry inside the existing tick, targeting the remaining free-form command,
 label, path and repeated-header burden. Harness/provider use, product and

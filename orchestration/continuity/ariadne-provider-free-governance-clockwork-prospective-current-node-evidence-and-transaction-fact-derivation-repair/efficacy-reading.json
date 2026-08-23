@@ -13,6 +13,8 @@
     "model_workers": 0,
     "implementation_test_correction_rounds": 1,
     "procedural_command_shape_rejections": 1,
+    "procedural_receipt_rejections": 1,
+    "registered_incidents": 1,
     "product_reruns": 0,
     "provider_reruns": 0,
     "operator_authored_transaction_totals": 0,
@@ -42,5 +44,5 @@
     "gemini_calls": 0,
     "native_subagents": 0
   },
-  "assessment": "The first repair removes the three measured postpublication failure shapes without adding operator input or weakening the clock. Transaction totals are intentionally absent from this prepublication reading; the repaired tick's machine output is their authority."
+  "assessment": "The first repair removes the three measured postpublication failure shapes without adding operator input or weakening the clock. One post-restart narrative Git-evidence rejection remains outside this repair's target and supplies direct input to the typed semantic builder. Transaction totals are intentionally absent from this prepublication reading; the repaired tick's machine output is their authority."
 }

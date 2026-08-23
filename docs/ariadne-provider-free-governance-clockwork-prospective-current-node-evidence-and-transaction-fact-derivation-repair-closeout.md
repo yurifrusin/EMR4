@@ -48,6 +48,13 @@ provider-free runner, which correctly rejected that command shape. Direct
 serial pytest supplied the diagnosis and the canonical whole-file run supplied
 acceptance. No product or provider run was repeated.
 
+After the Codex restart, the first restored-session receipt draft repeated two
+Git objects in narrative evidence. The preflight rejected it before any
+canonical change; the corrected receipt delegates all exact identities to the
+machine snapshot and passes. AER-1128 preserves the recurrence. This lies
+outside the first repair's prospective-header and transaction-fact target and
+directly strengthens the next typed-builder priority.
+
 ## Matched ergonomics reading
 
 The preceding packet's three rollback shapes are now controlled earlier or

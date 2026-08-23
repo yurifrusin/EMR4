@@ -1,5 +1,5 @@
 {
-  "schema_version": "ariadne.governance_live_tick_intent.v1",
+  "schema_version": "ariadne.governance_live_tick_intent.v2",
   "transaction_manifest": {
     "schema_version": "ariadne.transactional_closeout_manifest.v1",
     "operation_id": "ariadne-provider-free-governance-clockwork-prospective-current-node-evidence-and-transaction-fact-derivation-repair",
@@ -77,7 +77,10 @@
         ],
         "receipts": [
           "orchestration/agent_inbox/codex/ariadne-clockwork-prospective-evidence-transaction-fact-repair-preplanning-receipt.json",
-          "orchestration/agent_inbox/codex/ariadne-clockwork-prospective-evidence-transaction-fact-repair-pre-verifier-receipt.json"
+          "orchestration/agent_inbox/codex/ariadne-clockwork-prospective-evidence-transaction-fact-repair-pre-verifier-receipt.json",
+          "orchestration/agent_inbox/codex/ariadne-clockwork-prospective-evidence-transaction-fact-repair-restored-session-attempt-001-rejected-receipt.json",
+          "orchestration/agent_inbox/codex/ariadne-clockwork-prospective-evidence-transaction-fact-repair-restored-session-receipt.json",
+          "orchestration/agent_inbox/codex/ariadne-clockwork-prospective-evidence-transaction-fact-repair-precommit-receipt.json"
         ],
         "tests": [
           "tests/test_ariadne_governance_clockwork_tick.py",
@@ -138,7 +141,13 @@
       "authority_source": "Yuri's explicit ergonomics request, standing uninterrupted-development authority and the accepted matched first-repair reading select this next narrow interface repair; provider, product and protected surfaces remain closed.",
       "next_stage": "fresh_five_source_rehydration_then_freeze_exact_typed_selectors_repository_derived_expansions_and_operator_leaf_reduction_acceptance"
     },
-    "incidents": [],
+    "incidents": [
+      {
+        "incident_id": "clockwork-repair-restored-session-manual-git-object",
+        "source_id": "clockwork-repair-local-001",
+        "peers": []
+      }
+    ],
     "broker": {
       "enabled": false,
       "posture": "provider_free_shadow"
@@ -205,10 +214,46 @@
     "paths": [
       "orchestration/continuity/ariadne-provider-free-governance-clockwork-prospective-current-node-evidence-and-transaction-fact-derivation-repair/report.md",
       "orchestration/continuity/ariadne-provider-free-governance-clockwork-prospective-current-node-evidence-and-transaction-fact-derivation-repair/efficacy-reading.json",
+      "docs/ariadne-agent-error-correction-register-revision-646.md",
       "docs/ariadne-provider-free-governance-clockwork-prospective-current-node-evidence-and-transaction-fact-derivation-repair-closeout.md",
       "orchestration/agent_inbox/codex/ariadne-clockwork-prospective-evidence-transaction-fact-repair-sol-acceptance.md"
     ]
   },
+  "agent_error_observations": [
+    {
+      "attempt_key": "clockwork-repair-restored-session-manual-git-object-001",
+      "observed_on": "2026-08-23",
+      "tranche": "clockwork-prospective-evidence-repair",
+      "role": "orchestrator",
+      "resource_id": "postrestart-ariadne-receipt",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_preflight",
+      "stage": "acceptance",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Git reference evidence is supplied exclusively by the machine-owned snapshot.",
+      "observed_error": "The first restored-session receipt draft repeated two full Git object IDs in narrative git_refs_and_worktree evidence.",
+      "detection_method": "The Ariadne preflight returned revision_required with git_refs_evidence_manual_object_id_forbidden and count two before publication; the machine-snapshot-only correction passed.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/ariadne-clockwork-prospective-evidence-transaction-fact-repair-restored-session-attempt-001-rejected-receipt.json",
+        "orchestration/agent_inbox/codex/ariadne-clockwork-prospective-evidence-transaction-fact-repair-restored-session-receipt.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.manual_git_object_in_receipt_prose",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Remove every manually repeated Git object and retain only the machine-owned Git snapshot binding.",
+        "prevention_control": "The next typed semantic builder will remove caller-authored Git-ref narrative from the ordinary receipt path while retaining the existing rejection guard.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/ariadne-clockwork-prospective-evidence-transaction-fact-repair-restored-session-receipt.json"
+        ]
+      },
+      "baton_summary": "records one rejected restored-session manual Git-object repetition and its machine-snapshot-only correction."
+    }
+  ],
   "next_operation_protected_boundaries": [
     "provider_free_existing_governance_clockwork_typed_semantic_interface_rehearsal_only",
     "typed_selectors_only_for_highest_yield_command_shapes_closed_labels_repository_test_paths_and_repeated_human_evidence_headers",

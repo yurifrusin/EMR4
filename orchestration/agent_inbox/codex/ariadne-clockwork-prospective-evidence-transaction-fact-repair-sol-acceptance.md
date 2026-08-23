@@ -27,3 +27,8 @@ before those checks passed.
 No external verifier is required or authorised for this provider-free exact
 control repair. The recorded parallelism assessment declines DeepSeek, Gemini
 and native subagents with bounded rationale.
+
+The later restored-session preflight rejection for two manually repeated Git
+objects is contained before publication and recorded as AER-1128. Its passing
+machine-snapshot-only correction leaves the accepted implementation unchanged
+and supplies direct evidence for the next typed-builder tranche.
