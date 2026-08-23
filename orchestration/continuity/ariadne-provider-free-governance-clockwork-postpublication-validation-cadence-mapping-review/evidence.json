@@ -1,0 +1,37 @@
+{
+  "schema_version": "ariadne.clockwork_validation_cadence_mapping_evidence.v1",
+  "operation_id": "ariadne-provider-free-governance-clockwork-postpublication-validation-cadence-mapping-review",
+  "source_head": "06484b927ae09c1feb4561f687b5064501e09bac",
+  "clockwork_lease_sequence": 218,
+  "collection": {
+    "semantic_command_count": 3,
+    "semantic_test_count": 120,
+    "postpublication_test_count": 162,
+    "repeated_test_node_count": 120,
+    "unique_postpublication_test_node_count": 42,
+    "collection_exit_code": 0
+  },
+  "classification": {
+    "immediate_manual_live_check": "exact_redundant_reading",
+    "repeated_120_test_nodes": "phase_shifted_evidence_retain",
+    "unique_42_preflight_nodes": "moving_state_evidence_retain",
+    "semantic_json_and_ruff": "unique_prepublication_evidence_retain"
+  },
+  "selected_next_action": "provider_free_bound_closeout_entrypoint_and_explicit_stage_manifest_rehearsal",
+  "test_removal_authorised": false,
+  "parallelism": {
+    "deepseek": "declined_native_profile_paused_and_cross_phase_map_not_separable",
+    "gemini": "declined_exact_local_command_and_source_evidence",
+    "native_subagents": "declined_developer_policy_and_serial_conclusion",
+    "owner": "gpt_sol"
+  },
+  "boundaries": {
+    "provider_calls": 0,
+    "worker_dispatches": 0,
+    "product_or_data_reads": 0,
+    "test_runs_removed": 0,
+    "canonical_mutations": 0,
+    "protected_ref_movements": 0,
+    "docs_branding_preserved": true
+  }
+}

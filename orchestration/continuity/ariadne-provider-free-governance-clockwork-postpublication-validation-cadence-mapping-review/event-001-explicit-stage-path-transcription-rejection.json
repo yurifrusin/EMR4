@@ -1,0 +1,13 @@
+{
+  "schema_version": "ariadne.validation_cadence_mapping_event.v1",
+  "event_id": "event-001-explicit-stage-path-transcription-rejection",
+  "operation_id": "ariadne-provider-free-governance-clockwork-postpublication-validation-cadence-mapping-review",
+  "observed_on": "2026-08-23",
+  "source_head": "06484b927ae09c1feb4561f687b5064501e09bac",
+  "expected_path": "orchestration/continuity/emr4-compass.json",
+  "typed_path": "orchestration/continuity/emr-compass.json",
+  "result": "rejected_before_staging",
+  "paths_staged": 0,
+  "canonical_mutations": 0,
+  "correction": "Copy the exact path from the verified Git-status inventory before the explicit-path staging command."
+}

@@ -1,0 +1,113 @@
+{
+  "schema_version": "ariadne.clockwork_validation_cadence_map.v1",
+  "operation_id": "ariadne-provider-free-governance-clockwork-postpublication-validation-cadence-mapping-review",
+  "accepted_source": "b2bca518c2d72ded86b4d53feeddad52fc389dc5",
+  "lease_sequence": 218,
+  "semantic_publication": {
+    "preconditions": [
+      "tracked_worktree_clean",
+      "repository_virtual_environment_is_active"
+    ],
+    "command_count": 3,
+    "commands": [
+      {
+        "id": "semantic-closeout-evidence-json",
+        "scope": "current committed closeout evidence JSON",
+        "phase": "before_prospective_generation_build"
+      },
+      {
+        "id": "semantic-closeout-ruff",
+        "scope": "three governance clockwork implementation/test files",
+        "phase": "before_prospective_generation_build"
+      },
+      {
+        "id": "semantic-closeout-governance-tests",
+        "scope": "120 selected tests against the prepublication canonical generation",
+        "phase": "before_prospective_generation_build"
+      }
+    ],
+    "selected_tests": {
+      "tests/test_current_baton_consistency.py": 10,
+      "tests/test_ariadne_active_operation_latch.py": 48,
+      "tests/test_ariadne_governance_clockwork_tick.py": 54,
+      "tests/test_ariadne_transactional_closeout.py": 8,
+      "total": 120
+    }
+  },
+  "publication_transaction": {
+    "prospective_build_after_semantic_commands": true,
+    "pointer_replaced_last": true,
+    "inline_postmutation_validator": "validate_tick_live_state",
+    "successful_return_requires_inline_validator_pass": true,
+    "inline_validator_invariants": [
+      "git_and_writer_inventory",
+      "pointer_generation_bundle_binding",
+      "ten_canonical_and_metadata_hash_bindings",
+      "previous_generation_git_binding",
+      "single_writer_and_retired_legacy_writer_ownership",
+      "transaction_generation_latch_graph_binding",
+      "event_kind_specific_preservation"
+    ]
+  },
+  "immediate_manual_live_check": {
+    "entrypoint": "published semantic intent --check",
+    "validator": "validate_tick_live_state",
+    "intervening_tracked_mutation": false,
+    "classification": "exact_reexecution_of_successful_publication_return_validator",
+    "new_failure_sensitivity": "none_when_no_intervening_mutation",
+    "future_omission_requirement": "Persist the successful publication result and prove no tracked mutation before the postpublication suite starts."
+  },
+  "postpublication_suite": {
+    "selected_test_count": 162,
+    "phase": "after_the_advanced_canonical_generation_is_live",
+    "same_test_nodes_as_semantic_publication": 120,
+    "same_nodes_classification": "phase_shifted_not_semantically_redundant",
+    "unique_test_nodes": 42,
+    "unique_file": "tests/test_ariadne_orchestrator_preflight.py",
+    "unique_failure_sensitivity": [
+      "moving_live_latch",
+      "five_source_continuation_receipts",
+      "parallelism_lane_projection",
+      "typed_serial_projection_and_pair_cost",
+      "machine_git_binding_and_worker_slot_drift"
+    ]
+  },
+  "observed_failure_attribution": [
+    {
+      "failure": "active_interpreter_mismatch",
+      "detector": "semantic_publication_precondition",
+      "test_suite_detector": false
+    },
+    {
+      "failure": "historical_latch_used_as_current_equivalence_authority",
+      "detector": "unique_42_test_postpublication_preflight_group",
+      "test_suite_detector": true
+    },
+    {
+      "failure": "explicit_stage_path_transcription",
+      "detector": "pre_stage_exact_path_existence_check",
+      "test_suite_detector": false
+    }
+  ],
+  "replacement_evidence_contract": {
+    "manual_live_check": [
+      "successful publish result durably contains status passed and canonical drift zero",
+      "publish implementation still calls validate_tick_live_state after pointer replacement",
+      "no tracked mutation occurs before postpublication verification begins"
+    ],
+    "postpublication_120_tests": [
+      "retain until prospective or postpublication execution supplies the same advanced-generation predicates",
+      "do not treat identical node IDs across different canonical phases as duplicated evidence"
+    ],
+    "postpublication_42_preflight_tests": [
+      "retain after every latch-advancing publication until an equivalent moving-state gate is proven"
+    ]
+  },
+  "ranked_ergonomic_actions": [
+    "bind one closeout entrypoint to the repository interpreter",
+    "make that entrypoint capture inline live validation and run the unchanged postpublication suite",
+    "emit a machine-derived allowlisted explicit-stage manifest",
+    "omit the separate manual live check only after the bound driver proves the replacement contract",
+    "make no test-count reduction in the next implementation"
+  ]
+}
