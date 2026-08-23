@@ -1,0 +1,172 @@
+{
+  "candidate_source": "5a70ddef85e4d2f1350b885ac89e910916e2d7aa",
+  "closed_boundaries": {
+    "database_or_infrastructure_accessed": false,
+    "deployment_release_pages_or_protected_ref_changed": false,
+    "environment_credential_secret_or_network_accessed": false,
+    "ordinary_practice_enabled": false,
+    "product_or_protected_data_used": false,
+    "product_source_route_api_client_configuration_or_runtime_changed": false,
+    "provider_or_harness_called": false
+  },
+  "external_facts": [
+    {
+      "id": "live_runtime_role_binding_and_attestation",
+      "status": "absent"
+    },
+    {
+      "id": "three_current_opaque_secret_bindings",
+      "status": "absent"
+    },
+    {
+      "id": "three_current_rotation_custody_attestations",
+      "status": "absent"
+    },
+    {
+      "id": "current_deny_only_break_glass_posture",
+      "status": "absent"
+    },
+    {
+      "id": "one_current_environment_manifest_instance",
+      "status": "absent"
+    },
+    {
+      "id": "operational_uniqueness_and_freshness_readback",
+      "status": "absent"
+    }
+  ],
+  "human_choices": [
+    {
+      "id": "select_target_environment_and_practice_scope",
+      "status": "unselected"
+    },
+    {
+      "id": "approve_secret_custody_and_operational_owners",
+      "status": "unselected"
+    },
+    {
+      "id": "approve_rotation_policy_and_independent_verifiers",
+      "status": "unselected"
+    },
+    {
+      "id": "authorize_live_role_secret_and_manifest_provisioning",
+      "status": "unselected"
+    },
+    {
+      "id": "confirm_ordinary_activation_separately",
+      "status": "unselected"
+    }
+  ],
+  "next_operation": {
+    "asks_only_root_decision": true,
+    "creates_control_layer": false,
+    "kind": "provider_free_read_only_decision_brief",
+    "operation_id": "raisa-provider-free-read-only-canonical-check-in-operational-evidence-root-decision-brief",
+    "user_attention_required_after_closeout": true
+  },
+  "operation_id": "raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-blocker-priority-review",
+  "parallelism": {
+    "deepseek": "declined_negative_no_work_package",
+    "gemini": "declined_neutral_closed_deterministic_evidence",
+    "native_subagents": "declined_negative_serial_policy",
+    "serial_owner": "gpt_sol"
+  },
+  "ranked_groups": [
+    {
+      "depends_on": [],
+      "id": "select_target_environment_and_practice_scope",
+      "kind": "human_root_decision",
+      "rank": 1
+    },
+    {
+      "depends_on": [
+        "select_target_environment_and_practice_scope"
+      ],
+      "id": "approve_operational_custody_rotation_and_break_glass_governance",
+      "kind": "human_governance_decisions",
+      "rank": 2
+    },
+    {
+      "depends_on": [
+        "select_target_environment_and_practice_scope",
+        "approve_operational_custody_rotation_and_break_glass_governance"
+      ],
+      "id": "authorize_and_perform_live_evidence_provisioning",
+      "kind": "external_operational_work",
+      "rank": 3
+    },
+    {
+      "depends_on": [
+        "authorize_and_perform_live_evidence_provisioning"
+      ],
+      "id": "perform_independent_uniqueness_and_freshness_readback",
+      "kind": "independent_operational_evidence",
+      "rank": 4
+    },
+    {
+      "depends_on": [
+        "perform_independent_uniqueness_and_freshness_readback"
+      ],
+      "id": "confirm_ordinary_activation_separately",
+      "kind": "separate_lasting_impact_confirmation",
+      "rank": 5
+    }
+  ],
+  "readiness_reconciliation": {
+    "current": {
+      "blocking_gap": 0,
+      "operational_evidence_gap": 1,
+      "satisfied": 11
+    },
+    "ordinary_admission_releases": 0,
+    "original": {
+      "blocking_gap": 3,
+      "operational_evidence_gap": 3,
+      "satisfied": 6
+    },
+    "remaining_dimension": "environment_manifest_and_operational_secret_posture",
+    "repository_prerequisites_remaining": 0,
+    "verdict": "not_ready_for_ordinary_practice_admission"
+  },
+  "result": "raisa_provider_free_read_only_canonical_check_in_ordinary_practice_admission_blocker_priority_review_pass",
+  "schema_version": "raisa.check_in_admission_blocker_priority_evidence.v1",
+  "source_bindings": [
+    {
+      "git_object": "27101faa86b5aa3850e90bc4ded8600e5f8d7dc9",
+      "id": "original_readiness_report",
+      "path": "orchestration/continuity/raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review/admission-readiness-review-report.md",
+      "sha256": "81a4a92e4f1f7e539282a646d59474420309f2f93785fe2c007e413ef26c297f"
+    },
+    {
+      "git_object": "f1e88ccfa62a90bd72cbc5dc6c0ac3e249245d4d",
+      "id": "post_evidence_seam_readiness",
+      "path": "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review/evidence.json",
+      "sha256": "6bc34af8b8d7347a0a5096e937e2054c98cb0cc81e437d2c345247049231f0d0"
+    },
+    {
+      "git_object": "b15b565649c274e9da11c6e8c3416094661596ee",
+      "id": "reference_only_conformance_evidence",
+      "path": "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal/evidence.json",
+      "sha256": "dbb3f2675236c476b4caf27699dc3bbde6e4810ec1127dce666994d6757a918f"
+    },
+    {
+      "git_object": "c35d2a1d69ad646cb7b561e201271ced25784df8",
+      "id": "reference_only_conformance_closeout",
+      "path": "docs/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal-closeout.md",
+      "sha256": "d558da15660ee13e06140dcb502615c24928f349337a64859af9b2983ea54f84"
+    },
+    {
+      "git_object": "c35d2a1d69ad646cb7b561e201271ced25784df8",
+      "id": "reference_only_conformance_acceptance",
+      "path": "orchestration/agent_inbox/codex/raisa-check-in-reference-only-conformance-packet-sol-acceptance.md",
+      "sha256": "77a4dde89706251ff2cafd044cfd2914f435ee477deca70be76ae5932fabb8ca"
+    }
+  ],
+  "verification": {
+    "external_facts_inferred": 0,
+    "full_git_bindings_matched": 5,
+    "hostile_mutations_rejected": 35,
+    "human_choices_inferred": 0,
+    "source_hashes_matched": 5
+  }
+}
