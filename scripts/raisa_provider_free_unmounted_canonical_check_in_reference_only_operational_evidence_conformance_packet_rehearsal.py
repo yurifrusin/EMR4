@@ -465,6 +465,10 @@ def render_report(reading: dict[str, Any]) -> str:
     lines = [
         "# Canonical check-in reference-only conformance packet report",
         "",
+        "Date: 2026-08-23",
+        "",
+        "Timestamp: 2026-08-23T15:13:47.3927515+10:00 (Australia/Brisbane)",
+        "",
         f"Result: `{reading['result']}`",
         "",
         "The authored-synthetic packet normalized and satisfied the evidence gate,",
