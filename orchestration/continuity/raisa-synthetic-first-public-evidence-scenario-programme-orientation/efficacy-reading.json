@@ -1,7 +1,7 @@
 {
   "schema_version": "ariadne.tranche_efficacy_reading.v1",
   "operation_id": "raisa-synthetic-first-public-evidence-scenario-programme-orientation",
-  "source_head": "791f133493430d415f0d819241409937cfd611d5",
+  "source_head": "f08287f2fb0467644ca1437ffbadc57a085fe870",
   "result": "public_research_consolidated_into_one_reusable_envelope_boundary",
   "research": {
     "read_only_packages_completed": 7,

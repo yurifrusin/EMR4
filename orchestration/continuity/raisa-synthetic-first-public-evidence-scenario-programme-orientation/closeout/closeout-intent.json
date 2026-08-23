@@ -1,0 +1,100 @@
+{
+  "schema_version": "ariadne.governance_semantic_closeout_intent.v1",
+  "profile": "provider_free_governance_tooling_v1",
+  "artifact_slug": "raisa-synthetic-first-public-evidence-scenario-programme-orientation",
+  "recorded_at": "2026-08-24T00:02:55.6316545+10:00",
+  "closeout": {
+    "operation_id": "raisa-synthetic-first-public-evidence-scenario-programme-orientation",
+    "title": "Raisa synthetic-first public-evidence scenario programme orientation",
+    "builds_on": [
+      "raisa-provider-free-read-only-canonical-check-in-operational-evidence-root-decision-brief"
+    ],
+    "authority_notes": [
+      "Yuri requested public research and research-directed workers, preferred synthetic-first development, and later identified a dense timestamped historical Diary archive as a possible carefully de-identified calibration source.",
+      "GPT Sol owns source-authority reconciliation, privacy interpretation, architecture selection, Git and acceptance.",
+      "Native workers completed seven read-only packages; DeepSeek received no package, Gemini was not called, and no provider or private data opened."
+    ],
+    "decisions": [
+      {
+        "id": "freeze-closed-source-authority-hierarchy",
+        "source": "orchestration/continuity/raisa-synthetic-first-public-evidence-scenario-programme-orientation/source-register.json",
+        "summary": "Classify every influence before use and forbid vendor, fiction, model output and private observations from becoming authoritative outcome oracles."
+      },
+      {
+        "id": "reuse-two-existing-scenario-contracts",
+        "source": "orchestration/continuity/raisa-synthetic-first-public-evidence-scenario-programme-orientation/evidence.json",
+        "summary": "Add one traceability envelope and legacy bindings rather than a third scenario engine."
+      },
+      {
+        "id": "separate-private-calibration-feasibility",
+        "source": "orchestration/continuity/raisa-synthetic-first-public-evidence-scenario-programme-orientation/report.md",
+        "summary": "Keep the historical archive unopened and require a later local-only privacy feasibility gate before any real snapshot access."
+      }
+    ],
+    "claim_scope": [
+      "Seven read-only research packages and twenty registered public sources support one traceable synthetic scenario programme boundary.",
+      "Existing semantic and replay contracts can be bound without content duplication.",
+      "Dense timestamped snapshots make interval-censored workflow reconstruction plausible but do not establish exact event time or irreversible anonymity.",
+      "No private data, provider call, product change or protected surface opened."
+    ],
+    "additional_receipts": [
+      "orchestration/agent_inbox/codex/raisa-synthetic-first-public-evidence-scenario-programme-orientation-preplanning-receipt.json",
+      "orchestration/agent_inbox/codex/raisa-synthetic-first-public-evidence-scenario-programme-orientation-plan-precommit-receipt.json",
+      "orchestration/agent_inbox/codex/raisa-synthetic-first-public-evidence-scenario-programme-orientation-postcompaction-receipt.json",
+      "orchestration/agent_inbox/codex/raisa-synthetic-first-public-evidence-scenario-programme-orientation-candidate-precommit-receipt.json",
+      "orchestration/agent_inbox/codex/raisa-synthetic-first-public-evidence-scenario-programme-orientation-closeout-precommit-receipt.json"
+    ],
+    "additional_artifacts": [
+      "docs/raisa-synthetic-first-public-evidence-scenario-programme-orientation-plan.md",
+      "docs/security/raisa-synthetic-first-public-evidence-scenario-programme-orientation-threat-model-delta.md",
+      "orchestration/continuity/raisa-synthetic-first-public-evidence-scenario-programme-orientation/efficacy-reading.json",
+      "orchestration/continuity/raisa-synthetic-first-public-evidence-scenario-programme-orientation/next-tranche-contract.json"
+    ],
+    "unresolved_gates": [
+      "The historical Diary archive remains unopened; any real snapshot access requires a separate accepted local-only privacy feasibility gate.",
+      "Provider-live synthetic evaluation requires its own exact data, call, cost, effect and proofreader envelope.",
+      "Product, ordinary-practice activation, production, deployment, Pages and protected refs remain closed."
+    ],
+    "journey": {
+      "strategic_role": "Give Raisa a traceable synthetic practice laboratory spanning administrative and clinical-diagnostic architecture.",
+      "outcome": "Public sources and existing EMR4 contracts now converge on one small reusable envelope boundary."
+    },
+    "current_position": {
+      "strategic_role": "Build source and oracle traceability before scaling scenario generation or calibrating from private observations.",
+      "why_now": "The research streams are complete and the existing semantic and replay engines need a shared provenance layer.",
+      "outcome": "The next tranche can implement one strict envelope and two exact legacy bindings.",
+      "unlocks": [
+        "Traceable expansion across reception, administrative and later clinical-diagnostic scenario families.",
+        "A clean future interface for privacy-reviewed aggregate calibration without resolving private data."
+      ],
+      "does_not_solve": [
+        "It does not prove real-world efficacy, de-identify the historical archive or open provider/product runtime."
+      ],
+      "orientation_statement": "Bind provenance, authority and oracles before increasing scenario volume or realism."
+    },
+    "next_operation": {
+      "operation_id": "raisa-traceable-synthetic-scenario-envelope-and-legacy-binding-rehearsal",
+      "active_tranche": "Raisa traceable synthetic scenario envelope and legacy binding rehearsal",
+      "objective": "Implement one strict domain-neutral traceability envelope and bind it to the two existing non-protected reception semantic and replay fixture pairs without duplicating either engine.",
+      "authority_source": "The accepted synthetic-first programme orientation and Yuri's standing uninterrupted-development authority.",
+      "next_stage": "fresh_five_source_rehydration_then_freeze_exact_schema_binding_and_hostile_test_plan"
+    }
+  },
+  "verification_profile": "governance_clockwork_core_v1",
+  "baton_slot": "current_deepseek_native_harness_acceptance",
+  "next_operation_protected_boundaries": [
+    "provider_free_and_unmounted",
+    "wholly_authored_synthetic_non_phi_cases_only",
+    "no_historical_diary_open_list_search_sample_hash_or_parse",
+    "no_private_calibration_reference_resolution",
+    "no_protected_holdout_or_support_surface_access",
+    "no_product_runtime_route_api_client_database_or_configuration_change",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_live_provider_model_prompt_or_cost",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only"
+  ]
+}
