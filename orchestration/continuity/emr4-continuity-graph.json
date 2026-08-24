@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 460,
+  "graph_revision": 461,
   "harvests": [],
   "nodes": [
     {
@@ -37321,9 +37321,99 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "raisa-provider-free-database-backed-default-off-canonical-check-in-post-proposal-revalidation-rehearsal",
+      "title": "Raisa provider-free database-backed default-off canonical check-in post-proposal revalidation rehearsal",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-read-only-authored-synthetic-time-ordered-canonical-check-in-context-operational-evidence-gap-review",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's uninterrupted-development authority applies to the accepted two-transition successor; authored-synthetic local HTTP/PostgreSQL evidence only."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-two-post-proposal-revalidation-witnesses",
+          "source": "orchestration/continuity/raisa-provider-free-database-backed-default-off-canonical-check-in-post-proposal-revalidation-rehearsal/evidence.json",
+          "status": "accepted",
+          "summary": "Accept exact candidate c6365f53b7edd902d31b370a321ebc8bf9427185: current Receptionist revocation and selected waiting-area deactivation both fail closed with zero command effects."
+        },
+        {
+          "id": "advance-to-waiting-area-movement-readiness",
+          "source": "orchestration/continuity/raisa-provider-free-database-backed-default-off-canonical-check-in-post-proposal-revalidation-rehearsal/next-tranche-contract.json",
+          "status": "accepted",
+          "summary": "Close the targeted check-in temporal gap and inspect the still-separate waiting-area movement command family without product changes."
+        }
+      ],
+      "claim_scope": [
+        "Two authored-synthetic database-backed default-off HTTP-route post-proposal revalidation witnesses pass against unchanged product source."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-database-backed-default-off-canonical-check-in-post-proposal-revalidation-rehearsal-plan.md",
+          "docs/security/raisa-provider-free-database-backed-default-off-canonical-check-in-post-proposal-revalidation-rehearsal-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-provider-free-database-backed-default-off-canonical-check-in-post-proposal-revalidation-rehearsal/evidence.json",
+          "orchestration/continuity/raisa-provider-free-database-backed-default-off-canonical-check-in-post-proposal-revalidation-rehearsal/report.md",
+          "orchestration/continuity/raisa-provider-free-database-backed-default-off-canonical-check-in-post-proposal-revalidation-rehearsal/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-database-backed-default-off-canonical-check-in-post-proposal-revalidation-rehearsal-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-24--raisa-provider-free-database-backed-default-off-canonical-check-in-post-proposal-revalidation-rehearsal.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-database-backed-default-off-canonical-check-in-post-proposal-revalidation-rehearsal-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-database-backed-default-off-canonical-check-in-post-proposal-revalidation-rehearsal-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-database-backed-default-off-canonical-check-in-post-proposal-revalidation-rehearsal-pre-verifier-receipt.json",
+          "orchestration/continuity/raisa-provider-free-database-backed-default-off-canonical-check-in-post-proposal-revalidation-rehearsal/closeout/prepublication-contained-lapses.json",
+          "orchestration/continuity/raisa-provider-free-database-backed-default-off-canonical-check-in-post-proposal-revalidation-rehearsal/closeout/pushover-notification-receipt.json"
+        ],
+        "tests": [
+          "tests/test_current_baton_consistency.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_transactional_closeout.py"
+        ],
+        "artifacts": [
+          "orchestration_harness/governance_clockwork_tick.py",
+          "scripts/ariadne_governance_clockwork_closeout.py",
+          "scripts/ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "docs/ariadne-agent-error-correction-register-revision-668.md",
+          "docs/raisa-provider-free-database-backed-default-off-canonical-check-in-post-proposal-revalidation-rehearsal-closeout.md",
+          "orchestration/agent_inbox/codex/raisa-provider-free-database-backed-default-off-canonical-check-in-post-proposal-revalidation-rehearsal-pre-verifier-continuation-intent.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-database-backed-default-off-canonical-check-in-post-proposal-revalidation-rehearsal-sol-acceptance.md",
+          "orchestration/continuity/raisa-provider-free-database-backed-default-off-canonical-check-in-post-proposal-revalidation-rehearsal/efficacy-reading.json",
+          "orchestration/continuity/raisa-provider-free-database-backed-default-off-canonical-check-in-post-proposal-revalidation-rehearsal/next-tranche-contract.json",
+          "orchestration/human_inbox/yuri/2026-08-24--raisa-provider-free-database-backed-default-off-canonical-check-in-post-proposal-revalidation-rehearsal.md"
+        ]
+      },
+      "unresolved_gates": [
+        "Ordinary-practice admission, live environment facts, feature activation, product data, providers, production and protected refs remain closed."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-24T18:00:02.9645865+10:00",
+      "updated_at": "2026-08-24T18:00:02.9645865+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "b4efb2d8dfae869c1e1d72794486ccf72d73f42a",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-24T17:10:39.6960019+10:00"
+  "updated_at": "2026-08-24T18:00:02.9645865+10:00"
 }

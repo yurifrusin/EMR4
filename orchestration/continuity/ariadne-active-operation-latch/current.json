@@ -1,14 +1,14 @@
 {
   "schema_version": "ariadne.active_operation_latch.v1",
-  "operation_id": "raisa-provider-free-database-backed-default-off-canonical-check-in-post-proposal-revalidation-rehearsal",
-  "active_tranche": "Raisa provider-free database-backed default-off canonical check-in post-proposal revalidation rehearsal",
-  "objective": "Prove through the existing default-off authored-synthetic HTTP/database test boundary that confirmation fails closed when current Receptionist authority is revoked or the selected waiting area is deactivated after proposal and before confirmation.",
+  "operation_id": "raisa-provider-free-read-only-waiting-area-movement-command-family-readiness-review",
+  "active_tranche": "Raisa provider-free read-only waiting-area movement command-family readiness review",
+  "objective": "Read only the accepted appointment, check-in, status and waiting-area source/evidence surfaces to identify the narrowest canonical proposal-confirm command boundary for explicit waiting-area movement without overlapping check-in or general status.",
   "status": "in_progress",
-  "source_head": "e5a1b0309c5eb15a0c84a071092cbbf27dc04fae",
-  "authority_source": "Yuri's uninterrupted-development authority applied to the accepted two-transition successor contract.",
+  "source_head": "b4efb2d8dfae869c1e1d72794486ccf72d73f42a",
+  "authority_source": "Yuri's uninterrupted-development authority applied to the accepted provider-free read-only Rayleen successor.",
   "checkpoint": {
-    "completed_stage": "Accepted raisa-provider-free-read-only-authored-synthetic-time-ordered-canonical-check-in-context-operational-evidence-gap-review at the machine-resolved source.",
-    "next_executable_stage": "fresh_five_source_rehydration_then_freeze_two_scenario_database_backed_route_rehearsal_plan",
+    "completed_stage": "Accepted raisa-provider-free-database-backed-default-off-canonical-check-in-post-proposal-revalidation-rehearsal at the machine-resolved source.",
+    "next_executable_stage": "fresh_five_source_rehydration_then_freeze_read_only_waiting_area_movement_readiness_review_plan",
     "retry_counters": {
       "planning": 0,
       "implementation": 0,

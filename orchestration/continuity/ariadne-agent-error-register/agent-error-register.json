@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 667,
+  "register_revision": 668,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-24",
@@ -44625,6 +44625,41 @@
       },
       "incident_id": "AER-1161",
       "attempt_id": "clock-eae06310ec74b58b5681c805",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-24",
+      "tranche": "check-in-post-proposal-revalidation-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "verification-path-and-projection-manifests",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_powershell_python_pytest_git",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Every serial assurance invocation uses exact test paths, every display reads the typed projection and every prospective register revision exists before clockwork execution.",
+      "observed_error": "Two invocations reconstructed historical filenames; two display wrappers assumed nonexistent keys; the first rehearsal and diagnostic verifier then encountered the same missing prospective revision document.",
+      "detection_method": "Pytest discovery exposed missing paths, KeyError exposed display assumptions and the clockwork's exact tick_incident_revision_reading rejection exposed the missing document.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-database-backed-default-off-canonical-check-in-post-proposal-revalidation-rehearsal/closeout/prepublication-contained-lapses.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.verification.manifest-projection-and-register-shape-assumptions",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Bind and reuse the exact seven-file path manifest, typed transaction projection and prospective register-revision reading before clockwork execution.",
+        "prevention_control": "The 207-test manifest, admitted projection and exact revision 668 document are materialised before the corrected rehearsal.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-provider-free-database-backed-default-off-canonical-check-in-post-proposal-revalidation-rehearsal/closeout/prepublication-contained-lapses.json"
+        ]
+      },
+      "incident_id": "AER-1162",
+      "attempt_id": "clock-cc0a2c201cf0851d6a2ba2ae",
       "origin": "operator",
       "related_incident_ids": [],
       "status": "corrected"

@@ -7,7 +7,7 @@
       "arguments": [
         "-m",
         "json.tool",
-        "orchestration/continuity/raisa-provider-free-read-only-authored-synthetic-time-ordered-canonical-check-in-context-operational-evidence-gap-review/evidence.json"
+        "orchestration/continuity/raisa-provider-free-database-backed-default-off-canonical-check-in-post-proposal-revalidation-rehearsal/evidence.json"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
