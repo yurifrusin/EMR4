@@ -1,0 +1,149 @@
+{
+  "schema_version": "raisa.historical_derived_check_in_adapter_test_utility_gap_review_contract.v1",
+  "planning_source": "84ab32ccf2e309be532649d4526bea5d85556535",
+  "input_hash_mode": "strict_utf8_canonical_lf_reject_bare_cr_sha256",
+  "accepted_git_objects": {
+    "occupied_candidate": "517fda26c5c7f46397acc91976bc97b0be3778ef",
+    "sanitised_closeout": "6a1de186f096636402d50a89feae6a81953cd862",
+    "accepted_adapter": "c82c3a741053a9c8da260aa62e1a968af22bb54e"
+  },
+  "inputs": [
+    {
+      "path": "orchestration/continuity/raisa-provider-free-exact-digest-historical-derived-minimised-check-in-context-adapter-test-consumption-rehearsal/occupied-result.json",
+      "sha256": "48f12096fc319a896b7ef70e8dddbd99f8ea3151aa90212cfb030d710d5dad71"
+    },
+    {
+      "path": "orchestration/continuity/raisa-provider-free-exact-digest-historical-derived-minimised-check-in-context-adapter-test-consumption-rehearsal/efficacy-reading.json",
+      "sha256": "8c4d84343435fc55b5cb5248234d4f51e99f219aaf78ec2de45eb4a859b69398"
+    },
+    {
+      "path": "orchestration/continuity/raisa-provider-free-exact-digest-historical-derived-minimised-check-in-context-adapter-test-consumption-rehearsal/next-tranche-contract.json",
+      "sha256": "9ecb5955d96f3786c489e98fbefc9e31cc7ee1294b364cde96d2e7abece0ba0a"
+    },
+    {
+      "path": "orchestration_harness/historical_diary_check_in_adapter_test_consumption.py",
+      "sha256": "de345a31bc611f30befcc6d27a4bdd5f9c4c491e3051c1c3d4e130e2a2ffc9c7"
+    },
+    {
+      "path": "tests/test_raisa_provider_free_exact_digest_historical_derived_minimised_check_in_context_adapter_test_consumption_rehearsal.py",
+      "sha256": "3e82835249a63e25e2d04133fe27c6e779855652b8e273f6d6f086eb0f6d38ce"
+    },
+    {
+      "path": "app/services/appointment_check_in_product_adapter.py",
+      "sha256": "ef6abdfef1b99737c527790be007ab07296bbc0422197858a5ae561012230570"
+    },
+    {
+      "path": "tests/test_raisa_provider_free_unmounted_canonical_check_in_product_adapter.py",
+      "sha256": "950233a05ba27fd3b363d0338cb939069a9d5ea6f44cfc59c4e62795905d2091"
+    },
+    {
+      "path": "tests/test_raisa_provider_free_default_off_canonical_check_in_route_adapter_convergence.py",
+      "sha256": "666f0dbda7f41fb183059f6d9c5d0864001e33faf7ef5984175cb2c8b355241b"
+    },
+    {
+      "path": "docs/raisa-provider-free-read-only-historical-derived-check-in-context-adapter-test-utility-gap-review-plan.md",
+      "sha256": "26bd3216e5ecf41c5e1a354ffdc5e044b1072d5cf1aa2c5c5907542cf30b53e5"
+    },
+    {
+      "path": "docs/security/raisa-provider-free-read-only-historical-derived-check-in-context-adapter-test-utility-gap-review-threat-model-delta.md",
+      "sha256": "78595f66908dc4733f09728cec4e1d6e5d2631a57dc608088530822774eee6dc"
+    }
+  ],
+  "utility_labels": [
+    "digest_only_provenance",
+    "synthetic_time_parameter_only",
+    "independent_behavior_selector"
+  ],
+  "coverage_labels": [
+    "historical_derived_incremental_coverage",
+    "already_covered_product_contract"
+  ],
+  "structural_axes": [
+    {
+      "id": "event_count",
+      "value": 6,
+      "expected_utility": "digest_only_provenance"
+    },
+    {
+      "id": "distinct_relative_minutes",
+      "value": 4,
+      "expected_utility": "digest_only_provenance"
+    },
+    {
+      "id": "relative_minute_span",
+      "value": 19,
+      "expected_utility": "synthetic_time_parameter_only"
+    },
+    {
+      "id": "distinct_event_kinds",
+      "value": 2,
+      "expected_utility": "digest_only_provenance"
+    },
+    {
+      "id": "synthetic_subject_slots",
+      "value": 1,
+      "expected_utility": "digest_only_provenance"
+    },
+    {
+      "id": "resource_slots",
+      "value": 1,
+      "expected_utility": "digest_only_provenance"
+    }
+  ],
+  "occupied_branch": {
+    "source_status": "Booked",
+    "waiting_area_mode": "none",
+    "authority": "active_same_practice_receptionist",
+    "freshness_and_evidence": "valid",
+    "idempotency": "started",
+    "transaction": "commit_and_readback_success",
+    "expected_coverage": "already_covered_product_contract"
+  },
+  "successor_axis_families": [
+    {
+      "id": "source_and_waiting_area_transition",
+      "values": [
+        "eligible_none",
+        "eligible_assign_valid",
+        "eligible_preserve_valid",
+        "intervening_state_change_rejected",
+        "intervening_area_topology_change_rejected"
+      ]
+    },
+    {
+      "id": "authority_evidence_and_freshness_transition",
+      "values": [
+        "unchanged_valid",
+        "actor_revoked",
+        "evidence_invalidated",
+        "proposal_stale_after_intervening_update"
+      ]
+    },
+    {
+      "id": "idempotency_and_outcome_transition",
+      "values": [
+        "first_execution",
+        "exact_replay",
+        "conflict_or_in_progress",
+        "precommit_failure",
+        "commit_outcome_unknown",
+        "committed_readback_unavailable"
+      ]
+    }
+  ],
+  "acceptance": {
+    "expected_decision": "accepted_read_only_utility_gap_review",
+    "expected_historical_derived_incremental_branch_count": 0,
+    "expected_new_business_rule_count": 0,
+    "maximum_successor_axis_family_count": 3,
+    "minimum_hostile_contract_mutations": 60
+  },
+  "closed_boundaries": [
+    "no_local_data_fixture_control_or_archive_access",
+    "no_provider_model_network_or_external_release",
+    "no_product_database_route_client_runtime_or_configuration_change",
+    "no_ordinary_practice_activation_or_product_validity_claim",
+    "no_production_deployment_release_pages_or_protected_ref_movement",
+    "preserve_docs_branding_and_all_unrelated_untracked_files"
+  ]
+}

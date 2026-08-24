@@ -1,0 +1,23 @@
+{
+  "schema_version": "ariadne.serial_continuation_intent.v1",
+  "preset": "provider_free_serial_observed_empty_workers",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_only_the_exact_provider_free_read_only_utility_gap_review_contract_reviewer_tests_generated_evidence_report_successor_axis_contract_and_typed_receipts_after_337_combined_tests_without_accessing_historical_local_material_or_changing_product_runtime_clockwork_owned_or_protected_surfaces",
+  "assessed_stage": "candidate_precommit_for_read_only_historical_derived_check_in_context_adapter_test_utility_gap_review",
+  "active_evidence_paths": [
+    "docs/raisa-provider-free-read-only-historical-derived-check-in-context-adapter-test-utility-gap-review-plan.md",
+    "docs/security/raisa-provider-free-read-only-historical-derived-check-in-context-adapter-test-utility-gap-review-threat-model-delta.md",
+    "orchestration/continuity/raisa-provider-free-read-only-historical-derived-check-in-context-adapter-test-utility-gap-review/contract.json",
+    "orchestration/continuity/raisa-provider-free-read-only-historical-derived-check-in-context-adapter-test-utility-gap-review/evidence.json",
+    "orchestration/continuity/raisa-provider-free-read-only-historical-derived-check-in-context-adapter-test-utility-gap-review/report.md",
+    "orchestration/continuity/raisa-provider-free-read-only-historical-derived-check-in-context-adapter-test-utility-gap-review/authored-synthetic-successor-axis-contract.json",
+    "orchestration/continuity/ariadne-active-operation-latch/current.json",
+    "orchestration/agent_inbox/codex/raisa-provider-free-read-only-historical-derived-check-in-context-adapter-test-utility-gap-review-preplanning-receipt.json"
+  ],
+  "lane_decision_overrides": [
+    {
+      "lane_id": "gemini_verifier",
+      "decision_code": "not_applicable_neutral"
+    }
+  ]
+}

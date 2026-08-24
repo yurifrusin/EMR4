@@ -1,0 +1,100 @@
+{
+  "accepted_git_objects": {
+    "accepted_adapter": "c82c3a741053a9c8da260aa62e1a968af22bb54e",
+    "occupied_candidate": "517fda26c5c7f46397acc91976bc97b0be3778ef",
+    "sanitised_closeout": "6a1de186f096636402d50a89feae6a81953cd862"
+  },
+  "closed_boundaries": {
+    "fixture_control_or_archive_accessed": false,
+    "local_data_accessed": false,
+    "ordinary_practice_activated": false,
+    "product_or_runtime_changed": false,
+    "protected_ref_moved": false,
+    "provider_model_or_network_used": false
+  },
+  "coverage": {
+    "existing_product_contract_coverage": [
+      "booked_and_confirmed_success",
+      "none_assign_and_preserve_waiting_area_success",
+      "exact_replay_and_idempotency_stops",
+      "authority_evidence_and_freshness_rejection",
+      "precommit_failure_commit_unknown_and_readback_unknown",
+      "default_off_route_delegation_and_fail_closed_response_mapping"
+    ],
+    "historical_derived_incremental_branch_count": 0,
+    "new_business_rule_count": 0,
+    "occupied_branch": {
+      "authority": "active_same_practice_receptionist",
+      "expected_coverage": "already_covered_product_contract",
+      "freshness_and_evidence": "valid",
+      "idempotency": "started",
+      "source_status": "Booked",
+      "transaction": "commit_and_readback_success",
+      "waiting_area_mode": "none"
+    }
+  },
+  "decision": "accepted_read_only_utility_gap_review",
+  "hostile_contract_mutations_rejected": 69,
+  "planning_source": "84ab32ccf2e309be532649d4526bea5d85556535",
+  "recorded_at": "2026-08-24T15:12:00.0000000+10:00",
+  "schema_version": "raisa.historical_derived_check_in_adapter_test_utility_gap_review_evidence.v1",
+  "source_bindings": {
+    "app/services/appointment_check_in_product_adapter.py": "ef6abdfef1b99737c527790be007ab07296bbc0422197858a5ae561012230570",
+    "docs/raisa-provider-free-read-only-historical-derived-check-in-context-adapter-test-utility-gap-review-plan.md": "26bd3216e5ecf41c5e1a354ffdc5e044b1072d5cf1aa2c5c5907542cf30b53e5",
+    "docs/security/raisa-provider-free-read-only-historical-derived-check-in-context-adapter-test-utility-gap-review-threat-model-delta.md": "78595f66908dc4733f09728cec4e1d6e5d2631a57dc608088530822774eee6dc",
+    "orchestration/continuity/raisa-provider-free-exact-digest-historical-derived-minimised-check-in-context-adapter-test-consumption-rehearsal/efficacy-reading.json": "8c4d84343435fc55b5cb5248234d4f51e99f219aaf78ec2de45eb4a859b69398",
+    "orchestration/continuity/raisa-provider-free-exact-digest-historical-derived-minimised-check-in-context-adapter-test-consumption-rehearsal/next-tranche-contract.json": "9ecb5955d96f3786c489e98fbefc9e31cc7ee1294b364cde96d2e7abece0ba0a",
+    "orchestration/continuity/raisa-provider-free-exact-digest-historical-derived-minimised-check-in-context-adapter-test-consumption-rehearsal/occupied-result.json": "48f12096fc319a896b7ef70e8dddbd99f8ea3151aa90212cfb030d710d5dad71",
+    "orchestration_harness/historical_diary_check_in_adapter_test_consumption.py": "de345a31bc611f30befcc6d27a4bdd5f9c4c491e3051c1c3d4e130e2a2ffc9c7",
+    "tests/test_raisa_provider_free_default_off_canonical_check_in_route_adapter_convergence.py": "666f0dbda7f41fb183059f6d9c5d0864001e33faf7ef5984175cb2c8b355241b",
+    "tests/test_raisa_provider_free_exact_digest_historical_derived_minimised_check_in_context_adapter_test_consumption_rehearsal.py": "3e82835249a63e25e2d04133fe27c6e779855652b8e273f6d6f086eb0f6d38ce",
+    "tests/test_raisa_provider_free_unmounted_canonical_check_in_product_adapter.py": "950233a05ba27fd3b363d0338cb939069a9d5ea6f44cfc59c4e62795905d2091"
+  },
+  "source_reading": {
+    "adapter_invocations": 1,
+    "canonical_digest_influences": [
+      "synthetic_practice_actor_appointment_command_audit_event_ids",
+      "synthetic_idempotency_material",
+      "synthetic_evidence_material"
+    ],
+    "direct_structural_selector_keys": [
+      "relative_minute_span"
+    ],
+    "existing_adapter_success_matrix_cases": 6,
+    "existing_hostile_contract_mutations": 68
+  },
+  "structural_influence": [
+    {
+      "id": "event_count",
+      "utility": "digest_only_provenance",
+      "value": 6
+    },
+    {
+      "id": "distinct_relative_minutes",
+      "utility": "digest_only_provenance",
+      "value": 4
+    },
+    {
+      "id": "relative_minute_span",
+      "utility": "synthetic_time_parameter_only",
+      "value": 19
+    },
+    {
+      "id": "distinct_event_kinds",
+      "utility": "digest_only_provenance",
+      "value": 2
+    },
+    {
+      "id": "synthetic_subject_slots",
+      "utility": "digest_only_provenance",
+      "value": 1
+    },
+    {
+      "id": "resource_slots",
+      "utility": "digest_only_provenance",
+      "value": 1
+    }
+  ],
+  "successor_axis_family_count": 3,
+  "utility_gap": "no_time_ordered_context_change_selected_a_distinct_adapter_outcome"
+}

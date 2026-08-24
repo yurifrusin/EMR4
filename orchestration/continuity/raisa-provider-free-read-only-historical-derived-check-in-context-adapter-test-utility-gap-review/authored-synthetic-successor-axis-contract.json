@@ -1,0 +1,58 @@
+{
+  "authority": {
+    "authored_synthetic_only": true,
+    "execution_authorized_by_this_contract": false,
+    "historical_fixture_control_archive_or_local_data_access": false,
+    "ordinary_practice_activation": false,
+    "product_adapter_route_database_client_runtime_or_configuration_change": false,
+    "provider_model_network_or_external_release": false
+  },
+  "axis_families": [
+    {
+      "id": "source_and_waiting_area_transition",
+      "values": [
+        "eligible_none",
+        "eligible_assign_valid",
+        "eligible_preserve_valid",
+        "intervening_state_change_rejected",
+        "intervening_area_topology_change_rejected"
+      ]
+    },
+    {
+      "id": "authority_evidence_and_freshness_transition",
+      "values": [
+        "unchanged_valid",
+        "actor_revoked",
+        "evidence_invalidated",
+        "proposal_stale_after_intervening_update"
+      ]
+    },
+    {
+      "id": "idempotency_and_outcome_transition",
+      "values": [
+        "first_execution",
+        "exact_replay",
+        "conflict_or_in_progress",
+        "precommit_failure",
+        "commit_outcome_unknown",
+        "committed_readback_unavailable"
+      ]
+    }
+  ],
+  "basis": {
+    "digest_only_provenance_is_not_behavioral_coverage": true,
+    "historical_derived_incremental_branch_count": 0,
+    "new_business_rule_count": 0
+  },
+  "claim_ceiling": "minimum_authored_synthetic_time_ordered_scenario_axes_only_no_claim_that_axes_occurred_historically_or_establish_product_truth",
+  "composition_rule": {
+    "full_cross_product_required": false,
+    "requires_declared_initial_state_intervening_change_expected_adapter_outcome_and_readback": true,
+    "strategy": "minimal_pairwise_time_ordered_authored_synthetic_scenarios"
+  },
+  "operation_id": "raisa-provider-free-authored-synthetic-time-ordered-canonical-check-in-context-branch-composition-rehearsal",
+  "recorded_at": "2026-08-24T15:12:00.0000000+10:00",
+  "schema_version": "raisa.authored_synthetic_time_ordered_check_in_context_axis_contract.v1",
+  "source_review": "84ab32ccf2e309be532649d4526bea5d85556535",
+  "status": "frozen_authored_synthetic_axes_no_execution_authority"
+}
