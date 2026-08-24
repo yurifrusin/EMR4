@@ -143,6 +143,16 @@ def test_existing_binder_defaults_and_all_three_word_profiles_remain_exact():
     assert "2026-08-24-check-in-context-v1" in source
 
 
+def test_direct_cli_wrapper_bootstraps_the_repository_import_path():
+    source = Path(
+        "scripts/raisa_local_only_historical_derived_minimised_check_in_context_"
+        "scenario_first_use_materialisation_rehearsal.py"
+    ).read_text(encoding="utf-8")
+
+    assert "Path(__file__).resolve().parents[1]" in source
+    assert "sys.path.insert(0" in source
+
+
 def test_observation_timeline_reduces_to_an_admitted_closed_candidate():
     candidate = materialiser.derive_candidate(_synthetic_projection())
 
