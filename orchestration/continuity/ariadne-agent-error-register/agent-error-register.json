@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 666,
+  "register_revision": 667,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-24",
@@ -44590,6 +44590,41 @@
       },
       "incident_id": "AER-1160",
       "attempt_id": "clock-d30b9ebef232d91bd0554063",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-24",
+      "tranche": "time-ordered-check-in-operational-evidence-gap-review",
+      "role": "orchestrator",
+      "resource_id": "diff-hygiene-source-shape-and-test-profile-selection",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_powershell_python_pytest_git",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Diff hygiene stops before commit, reviewer assertions follow exact typed source shapes, bounded profiles exclude known HEAD-sensitive historical idempotence checks, yielded long commands retain their session handles, human evidence uses the machine-derived artifact paths and headers, and serial intents use admitted evidence roots only.",
+      "observed_error": "The planning commit retained two reported terminal blank lines, the first reviewer assumed one line-contiguous phrase plus obsolete attestation keys, one combined profile selected a known historical HEAD-sensitive idempotence assertion, the first clockwork wrapper discarded its yielded session identifier, the first retained rehearsal found one missing threat timestamp plus two shortened human-evidence paths, and the first precommit intent overlisted a human-inbox path.",
+      "detection_method": "Cached diff hygiene, two fail-closed reviewer runs, the overbroad combined pytest profile, exact owned-process-tree inspection, semantic prospective-evidence admission and serial preflight exposed the six lapses before acceptance.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-read-only-authored-synthetic-time-ordered-canonical-check-in-context-operational-evidence-gap-review/closeout/prepublication-contained-lapses.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.preacceptance.diff-source-shape-profile-selection",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Stop on non-empty diff hygiene, inspect exact typed keys before assertions, use a bounded current-plus-predecessor profile, retain/poll yielded exec session handles, derive human-evidence paths and headers before rehearsal, and reuse the admitted serial evidence-root pattern.",
+        "prevention_control": "Candidate diff hygiene, fail-closed typed validation, explicit test-manifest review, retained-session polling, semantic prospective-evidence admission and serial preflight remain in the prepublication loop.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-provider-free-read-only-authored-synthetic-time-ordered-canonical-check-in-context-operational-evidence-gap-review/closeout/prepublication-contained-lapses.json"
+        ]
+      },
+      "incident_id": "AER-1161",
+      "attempt_id": "clock-eae06310ec74b58b5681c805",
       "origin": "operator",
       "related_incident_ids": [],
       "status": "corrected"

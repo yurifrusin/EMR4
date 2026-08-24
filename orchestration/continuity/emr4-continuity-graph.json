@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 459,
+  "graph_revision": 460,
   "harvests": [],
   "nodes": [
     {
@@ -37234,9 +37234,96 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "raisa-provider-free-read-only-authored-synthetic-time-ordered-canonical-check-in-context-operational-evidence-gap-review",
+      "title": "Raisa provider-free read-only time-ordered canonical check-in operational-evidence gap review",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-authored-synthetic-time-ordered-canonical-check-in-context-branch-composition-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's uninterrupted-development authority applies to the accepted read-only successor; classify tracked evidence without route, database, provider or historical-data execution."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-read-only-temporal-operational-evidence-join",
+          "source": "orchestration/continuity/raisa-provider-free-read-only-authored-synthetic-time-ordered-canonical-check-in-context-operational-evidence-gap-review/evidence.json",
+          "status": "accepted",
+          "summary": "Accept exact candidate 7e1b7affc4311faac0116b612b03f54389f046bb: five sources reconcile ten temporal transition groups while preserving the in-memory claim ceiling."
+        },
+        {
+          "id": "freeze-two-transition-post-proposal-revalidation-successor",
+          "source": "orchestration/continuity/raisa-provider-free-read-only-authored-synthetic-time-ordered-canonical-check-in-context-operational-evidence-gap-review/next-tranche-contract.json",
+          "status": "accepted",
+          "summary": "Exercise only current Receptionist revocation and waiting-area deactivation after proposal through the existing authored-synthetic default-off route/database test boundary."
+        }
+      ],
+      "claim_scope": [
+        "Tracked evidence justifies exactly one narrow two-transition product-assurance rehearsal and no repetition of rollback, unknown-response or tenant-role work."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-read-only-authored-synthetic-time-ordered-canonical-check-in-context-operational-evidence-gap-review-plan.md",
+          "docs/security/raisa-provider-free-read-only-authored-synthetic-time-ordered-canonical-check-in-context-operational-evidence-gap-review-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-provider-free-read-only-authored-synthetic-time-ordered-canonical-check-in-context-operational-evidence-gap-review/evidence.json",
+          "orchestration/continuity/raisa-provider-free-read-only-authored-synthetic-time-ordered-canonical-check-in-context-operational-evidence-gap-review/report.md",
+          "orchestration/continuity/raisa-provider-free-read-only-authored-synthetic-time-ordered-canonical-check-in-context-operational-evidence-gap-review/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-read-only-authored-synthetic-time-ordered-canonical-check-in-context-operational-evidence-gap-review-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-24--raisa-provider-free-read-only-authored-synthetic-time-ordered-canonical-check-in-context-operational-evidence-gap-review.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-read-only-authored-synthetic-time-ordered-canonical-check-in-context-operational-evidence-gap-review-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-read-only-authored-synthetic-time-ordered-canonical-check-in-context-operational-evidence-gap-review-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-read-only-authored-synthetic-time-ordered-canonical-check-in-context-operational-evidence-gap-review-pre-verifier-receipt.json",
+          "orchestration/continuity/raisa-provider-free-read-only-authored-synthetic-time-ordered-canonical-check-in-context-operational-evidence-gap-review/closeout/prepublication-contained-lapses.json",
+          "orchestration/continuity/raisa-provider-free-read-only-authored-synthetic-time-ordered-canonical-check-in-context-operational-evidence-gap-review/closeout/pushover-notification-receipt.json"
+        ],
+        "tests": [
+          "tests/test_current_baton_consistency.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_transactional_closeout.py"
+        ],
+        "artifacts": [
+          "orchestration_harness/governance_clockwork_tick.py",
+          "scripts/ariadne_governance_clockwork_closeout.py",
+          "scripts/ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "docs/ariadne-agent-error-correction-register-revision-667.md",
+          "docs/raisa-provider-free-read-only-authored-synthetic-time-ordered-canonical-check-in-context-operational-evidence-gap-review-closeout.md",
+          "orchestration/agent_inbox/codex/raisa-provider-free-read-only-authored-synthetic-time-ordered-canonical-check-in-context-operational-evidence-gap-review-sol-acceptance.md",
+          "orchestration/human_inbox/yuri/2026-08-24--raisa-provider-free-read-only-authored-synthetic-time-ordered-canonical-check-in-context-operational-evidence-gap-review.md"
+        ]
+      },
+      "unresolved_gates": [
+        "The 11/0/1 ordinary-admission posture, six absent external facts, every live environment and secret decision, ordinary activation, production and protected refs remain closed."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-24T17:10:39.6960019+10:00",
+      "updated_at": "2026-08-24T17:10:39.6960019+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "e5a1b0309c5eb15a0c84a071092cbbf27dc04fae",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-24T16:22:26.0503913+10:00"
+  "updated_at": "2026-08-24T17:10:39.6960019+10:00"
 }

@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> Read existing tracked operational evidence before adding another rehearsal.
+> Test the two missing temporal witnesses and do not repeat already accepted operational work.
 
 ## North star
 
@@ -688,22 +688,24 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    The exact reading separates provenance and timing from zero incremental behavioral coverage. Lineage parent: `raisa-provider-free-exact-digest-historical-derived-minimised-check-in-context-adapter-test-consumption-rehearsal`.
 336. **Turn a provenance-only historical-derived atomic test into efficient authored-synthetic temporal control evidence. — Raisa provider-free authored-synthetic time-ordered canonical check-in-context branch composition rehearsal**
    Thirty minimal pairwise scenarios now expose exact precedence, rollback, replay and uncertainty behavior without product or data access. Lineage parent: `raisa-provider-free-read-only-historical-derived-check-in-context-adapter-test-utility-gap-review`.
+337. **Separate genuinely missing physical witnesses from novel combinations of already accepted check-in behavior. — Raisa provider-free read-only time-ordered canonical check-in operational-evidence gap review**
+   Eight physical properties and ten transition groups are reconciled; only two post-proposal route/database witnesses remain useful. Lineage parent: `raisa-provider-free-authored-synthetic-time-ordered-canonical-check-in-context-branch-composition-rehearsal`.
 
 ## Current position
 
-**Avoid duplicating operational evidence before choosing another runtime rehearsal. — Raisa provider-free authored-synthetic time-ordered canonical check-in-context branch composition rehearsal**
+**Prove current authority and waiting-area topology are revalidated at confirmation time. — Raisa provider-free read-only time-ordered canonical check-in operational-evidence gap review**
 
-**Why this proof came next:** The in-memory temporal matrix passes, but accepted database, route and role/tenant tranches may already cover much of its operational surface.
+**Why this proof came next:** The in-memory matrix exposes two time-of-check/time-of-use transitions absent from the accepted database-backed route evidence.
 
-A read-only evidence join will identify one honest incremental operational gap, if any.
+A two-scenario repository rehearsal will either pass the existing route or expose one bounded defect.
 
 ### What this unlocks
 
-- A narrow evidence-backed decision about whether another provider-free operational rehearsal is useful.
+- Database-backed route evidence for current Receptionist revocation and waiting-area deactivation after proposal.
 
 ### What it does not solve
 
-- No route/database execution, real-practice representativeness, ordinary-practice activation or production readiness is proved.
+- No ordinary-practice admission, live environment fact, production readiness or real-practice frequency is proved.
 
 ## Continuity and authority
 
@@ -1619,7 +1621,6 @@ Prerequisites:
 - `docs/raisa-provider-free-authored-synthetic-historical-diary-leading-explicit-time-token-recovery-rehearsal-plan.md`
 - `docs/raisa-provider-free-authored-synthetic-historical-diary-word-coordinate-timeout-containment-throughput-recovery-plan.md`
 - `docs/raisa-provider-free-authored-synthetic-native-harness-structured-diagnostic-bounded-worker-controller-convergence-rehearsal-closeout.md`
-- `docs/raisa-provider-free-authored-synthetic-time-ordered-canonical-check-in-context-branch-composition-rehearsal-closeout.md`
 - `docs/raisa-provider-free-authored-synthetic-time-ordered-canonical-check-in-context-branch-composition-rehearsal-plan.md`
 - `docs/raisa-provider-free-cf-d2-observability-first-event-cue-architecture.md`
 - `docs/raisa-provider-free-cf-d2-observability-first-event-cue-closeout.md`
@@ -1734,6 +1735,8 @@ Prerequisites:
 - `docs/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review-closeout.md`
 - `docs/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review-plan.md`
 - `docs/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review.md`
+- `docs/raisa-provider-free-read-only-authored-synthetic-time-ordered-canonical-check-in-context-operational-evidence-gap-review-closeout.md`
+- `docs/raisa-provider-free-read-only-authored-synthetic-time-ordered-canonical-check-in-context-operational-evidence-gap-review-plan.md`
 - `docs/raisa-provider-free-read-only-canonical-check-in-operational-evidence-root-decision-brief-plan.md`
 - `docs/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-blocker-priority-review-plan.md`
 - `docs/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-convergence-review-closeout.md`
@@ -2512,7 +2515,6 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-post-combined-editor-compass-baton-orientation-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-post-status-action-compass-baton-orientation-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-post-status-action-compass-baton-orientation-sol-acceptance.md`
-- `orchestration/agent_inbox/codex/raisa-provider-free-authored-synthetic-time-ordered-canonical-check-in-context-branch-composition-rehearsal-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review-precommit-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-default-off-live-source-observation-boundary-sol-acceptance.md`
@@ -2555,6 +2557,7 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review-gemini37-review-worktree-preflight.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review-pre-verifier-acceptance-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-provider-free-read-only-authored-synthetic-time-ordered-canonical-check-in-context-operational-evidence-gap-review-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review-preplanning-runtime-state.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-read-only-post-cancellation-programme-orientation-gemini37-review-packet.md`
@@ -3099,7 +3102,6 @@ Prerequisites:
 - `orchestration/continuity/raisa-provider-free-authored-synthetic-historical-diary-leading-explicit-time-token-recovery-rehearsal/report.md`
 - `orchestration/continuity/raisa-provider-free-authored-synthetic-historical-diary-word-coordinate-timeout-containment-throughput-recovery/report.md`
 - `orchestration/continuity/raisa-provider-free-authored-synthetic-native-harness-structured-diagnostic-bounded-worker-controller-convergence-rehearsal/deterministic-evidence.json`
-- `orchestration/continuity/raisa-provider-free-authored-synthetic-time-ordered-canonical-check-in-context-branch-composition-rehearsal/evidence.json`
 - `orchestration/continuity/raisa-provider-free-authored-synthetic-time-ordered-canonical-check-in-context-branch-composition-rehearsal/report.md`
 - `orchestration/continuity/raisa-provider-free-cf-d2-observability-first-event-cue/observability-contract.json`
 - `orchestration/continuity/raisa-provider-free-cf-d2-observability-first-event-cue/observability-contract.schema.json`
@@ -3220,6 +3222,8 @@ Prerequisites:
 - `orchestration/continuity/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave/provider-free-acceptance-evidence.json`
 - `orchestration/continuity/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave/temporal-weave-contract.example.json`
 - `orchestration/continuity/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave/temporal-weave-contract.schema.json`
+- `orchestration/continuity/raisa-provider-free-read-only-authored-synthetic-time-ordered-canonical-check-in-context-operational-evidence-gap-review/evidence.json`
+- `orchestration/continuity/raisa-provider-free-read-only-authored-synthetic-time-ordered-canonical-check-in-context-operational-evidence-gap-review/report.md`
 - `orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/efficacy-reading.json`
 - `orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/evidence.json`
 - `orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/report.md`
@@ -4037,4 +4041,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 441; continuity graph revision 459._
+_Compass map revision 442; continuity graph revision 460._

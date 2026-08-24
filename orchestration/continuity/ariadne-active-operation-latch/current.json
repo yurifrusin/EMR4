@@ -1,14 +1,14 @@
 {
   "schema_version": "ariadne.active_operation_latch.v1",
-  "operation_id": "raisa-provider-free-read-only-authored-synthetic-time-ordered-canonical-check-in-context-operational-evidence-gap-review",
-  "active_tranche": "Raisa provider-free read-only authored-synthetic time-ordered canonical check-in-context operational-evidence gap review",
-  "objective": "Compare the accepted in-memory temporal composition evidence with existing tracked default-off route, disposable PostgreSQL rollback/unknown-commit and runtime role/tenant evidence, then identify the narrowest incremental operational-evidence gap without executing a route or database.",
+  "operation_id": "raisa-provider-free-database-backed-default-off-canonical-check-in-post-proposal-revalidation-rehearsal",
+  "active_tranche": "Raisa provider-free database-backed default-off canonical check-in post-proposal revalidation rehearsal",
+  "objective": "Prove through the existing default-off authored-synthetic HTTP/database test boundary that confirmation fails closed when current Receptionist authority is revoked or the selected waiting area is deactivated after proposal and before confirmation.",
   "status": "in_progress",
-  "source_head": "6ce6dc4c242df7f56a671cffa74fdc2201137ba6",
-  "authority_source": "Yuri's uninterrupted-development authority applied to the accepted read-only successor contract.",
+  "source_head": "e5a1b0309c5eb15a0c84a071092cbbf27dc04fae",
+  "authority_source": "Yuri's uninterrupted-development authority applied to the accepted two-transition successor contract.",
   "checkpoint": {
-    "completed_stage": "Accepted raisa-provider-free-authored-synthetic-time-ordered-canonical-check-in-context-branch-composition-rehearsal at the machine-resolved source.",
-    "next_executable_stage": "fresh_five_source_rehydration_then_freeze_exact_tracked_evidence_allowlist_and_gap_classification_plan",
+    "completed_stage": "Accepted raisa-provider-free-read-only-authored-synthetic-time-ordered-canonical-check-in-context-operational-evidence-gap-review at the machine-resolved source.",
+    "next_executable_stage": "fresh_five_source_rehydration_then_freeze_two_scenario_database_backed_route_rehearsal_plan",
     "retry_counters": {
       "planning": 0,
       "implementation": 0,
@@ -40,8 +40,9 @@
     "no_protected_evidence_access_or_protected_ref_movement",
     "docs_branding_and_all_unrelated_untracked_files_preserved",
     "explicit_path_staging_only",
+    "authored_synthetic_repository_test_data_only",
     "no_product_patient_appointment_clinical_or_protected_data",
     "no_historical_data_access",
-    "no_route_database_client_or_runtime_execution"
+    "no_provider_model_or_external_network"
   ]
 }

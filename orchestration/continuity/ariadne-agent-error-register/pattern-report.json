@@ -1,16 +1,16 @@
 {
   "schema_version": "ariadne.agent-error-pattern-report.v1",
-  "register_revision": 666,
+  "register_revision": 667,
   "source_cutoff_on": "2026-08-24",
   "coverage": "bounded_known_preserved_incidents",
-  "canonical_register_sha256": "f53c7438a4413c5975201cb39bcc94d3ecf31b4e814adbb19fa5f25ce4fc744b",
-  "incident_count": 1160,
+  "canonical_register_sha256": "5044492ef982ca6387e291e72a923ce9aac4b684d6ff889a0d43ee35b7edb761",
+  "incident_count": 1161,
   "open_incident_ids": [],
   "counts": {
     "by_origin": {
       "agent_behavior": 614,
       "harness": 74,
-      "operator": 300,
+      "operator": 301,
       "repository": 156,
       "transport": 16
     },
@@ -18,7 +18,7 @@
       "command_scope_violation": 112,
       "evidence_misreport": 80,
       "harness_failure": 74,
-      "operator_error": 300,
+      "operator_error": 301,
       "output_contract_violation": 367,
       "read_only_violation": 5,
       "reasoning_claim_error": 50,
@@ -28,17 +28,17 @@
     "by_role": {
       "implementer": 93,
       "integration_reviewer": 5,
-      "orchestrator": 999,
+      "orchestrator": 1000,
       "verifier": 63
     },
     "by_process_severity": {
-      "low": 768,
+      "low": 769,
       "material": 135,
       "moderate": 257
     },
     "by_candidate_state": {
       "accepted_candidate_changed": 240,
-      "canonical_unchanged": 735,
+      "canonical_unchanged": 736,
       "untrusted_partial_worktree": 185
     },
     "by_resource_and_role": {
@@ -268,6 +268,7 @@
       "diagnosis-provider-boundary-predicate::orchestrator": 1,
       "diagnosis-validation-manifest::orchestrator": 1,
       "diagnosis-verification-test-manifest::orchestrator": 1,
+      "diff-hygiene-source-shape-and-test-profile-selection::orchestrator": 1,
       "direct-python-launcher::implementer": 1,
       "docker-desktop-windows::orchestrator": 1,
       "emr4-ariadne-agent-error-register-acceptance::orchestrator": 18,
