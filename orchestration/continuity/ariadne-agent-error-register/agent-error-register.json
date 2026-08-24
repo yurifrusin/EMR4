@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 661,
+  "register_revision": 662,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-24",
@@ -44338,6 +44338,78 @@
       },
       "incident_id": "AER-1153",
       "attempt_id": "clock-3385f291af6392c5a84ad02f",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-24",
+      "tranche": "historical-first-use-materialisation",
+      "role": "implementer",
+      "resource_id": "direct-python-launcher",
+      "model": "gpt-sol",
+      "reasoning_level": "extra_high",
+      "transport": "local_python_cli",
+      "stage": "deterministic_verification",
+      "category": "harness_failure",
+      "process_severity": "low",
+      "expected_invariant": "The committed direct-file wrapper imports repository packages and reaches preflight before any private bind.",
+      "observed_error": "The first direct invocation failed with ModuleNotFoundError before importing the materialiser.",
+      "detection_method": "The committed preflight command exited nonzero before source-root inspection or bind.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-local-only-historical-derived-minimised-check-in-context-scenario-first-use-materialisation-rehearsal/closeout/prepublication-contained-lapses.json"
+      ],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "harness.direct_cli_requires_repository_path_bootstrap",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Bootstrap the resolved repository parent and add a focused direct-launch source control before bind.",
+        "prevention_control": "New direct wrappers must prove repository import bootstrap before occupied use.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-662.md",
+          "orchestration/continuity/raisa-local-only-historical-derived-minimised-check-in-context-scenario-first-use-materialisation-rehearsal/evidence.json"
+        ]
+      },
+      "incident_id": "AER-1154",
+      "attempt_id": "clock-0382540795b1408c39d76690",
+      "origin": "harness",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-24",
+      "tranche": "historical-first-use-materialisation",
+      "role": "orchestrator",
+      "resource_id": "derived-fixture-readback-command",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_powershell_python",
+      "stage": "acceptance",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Post-run structural fixture validation uses shell-safe literal input and never requires an occupied rerun.",
+      "observed_error": "The first inline Python command had an unterminated quoted tuple and exited before validating the fixture.",
+      "detection_method": "Python emitted a local SyntaxError while the prior successful occupied terminal and fixture remained unchanged.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-local-only-historical-derived-minimised-check-in-context-scenario-first-use-materialisation-rehearsal/closeout/prepublication-contained-lapses.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.use_literal_stdin_for_multistring_validation",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Pipe a literal PowerShell here-string to Python and validate only the admitted fixture.",
+        "prevention_control": "Use literal standard-input scripts for multi-string post-run JSON validation.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-662.md",
+          "orchestration/continuity/raisa-local-only-historical-derived-minimised-check-in-context-scenario-first-use-materialisation-rehearsal/evidence.json"
+        ]
+      },
+      "incident_id": "AER-1155",
+      "attempt_id": "clock-e81d0d21dc6f5e1fc864aeaa",
       "origin": "operator",
       "related_incident_ids": [],
       "status": "corrected"

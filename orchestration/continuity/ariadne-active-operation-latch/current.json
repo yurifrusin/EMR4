@@ -1,14 +1,14 @@
 {
   "schema_version": "ariadne.active_operation_latch.v1",
-  "operation_id": "raisa-local-only-historical-derived-minimised-check-in-context-scenario-first-use-materialisation-rehearsal",
-  "active_tranche": "Raisa local-only historical-derived minimised check-in-context scenario first-use materialisation rehearsal",
-  "objective": "Run one local-only no-retry exact-gate materialisation attempt that writes one ignored fixture or nothing.",
+  "operation_id": "raisa-provider-free-governance-clockwork-historical-derived-minimised-scenario-consumption-subgate-rehearsal",
+  "active_tranche": "Raisa provider-free governance clockwork historical-derived minimised scenario consumption subgate rehearsal",
+  "objective": "Add one closed clockwork mode for later exact-digest local provider-free test consumption without reading the archive or fixture.",
   "status": "in_progress",
-  "source_head": "85ea931cd1a743f8d1fd2dff077c09d2d8fc1182",
-  "authority_source": "Yuri's delegated first-use gate timing and uninterrupted-development authority within the frozen successor contract.",
+  "source_head": "e7dc4d2587a917fd01ba91d8da2db1391005f4ef",
+  "authority_source": "Yuri's delegated gate timing and standing uninterrupted-development authority, constrained by the frozen successor contract.",
   "checkpoint": {
-    "completed_stage": "Accepted raisa-provider-free-governance-clockwork-historical-derived-first-use-materialisation-subgate-rehearsal at the machine-resolved source.",
-    "next_executable_stage": "fresh_five_source_rehydration_then_freeze_one_run_private_materialiser_plan",
+    "completed_stage": "Accepted raisa-local-only-historical-derived-minimised-check-in-context-scenario-first-use-materialisation-rehearsal at the machine-resolved source.",
+    "next_executable_stage": "fresh_five_source_rehydration_then_freeze_pure_clockwork_consumption_subgate_plan",
     "retry_counters": {
       "planning": 0,
       "implementation": 0,
@@ -41,13 +41,6 @@
     "docs_branding_and_all_unrelated_untracked_files_preserved",
     "explicit_path_staging_only",
     "no_product_patient_appointment_clinical_or_protected_data",
-    "allow_local_only_historical_derived_first_use_materialisation_after_exact_candidate_gate",
-    "historical_first_use_materialisation_subgate_contract_sha256_93b6a177b73176518dcd94e31e9dfba90c26dca9a4c4a1851e2e858dc7393a1e",
-    "historical_first_use_candidate_gate_source_abcd4206a363b0c565c070e0f2cb9c54d627b3b3",
-    "historical_first_use_exact_digest_bound_gate_receipt_required_before_write",
-    "historical_first_use_maximum_one_minimised_structural_scenario_fixture",
-    "historical_first_use_non_admission_or_revision_writes_nothing",
-    "historical_first_use_written_bytes_must_match_admitted_candidate_digest",
-    "historical_first_use_authority_non_transitive"
+    "no_historical_data_access"
   ]
 }

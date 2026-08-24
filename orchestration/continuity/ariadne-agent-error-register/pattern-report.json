@@ -1,24 +1,24 @@
 {
   "schema_version": "ariadne.agent-error-pattern-report.v1",
-  "register_revision": 661,
+  "register_revision": 662,
   "source_cutoff_on": "2026-08-24",
   "coverage": "bounded_known_preserved_incidents",
-  "canonical_register_sha256": "d142916f8caad172141f60bc2e5016924a18eb2e896bc6b25f05eeeab8676f49",
-  "incident_count": 1153,
+  "canonical_register_sha256": "d187d60945bd3e69eff29568f152066a62c814ef78cedc0ef4a9ab2ad120ddda",
+  "incident_count": 1155,
   "open_incident_ids": [],
   "counts": {
     "by_origin": {
       "agent_behavior": 613,
-      "harness": 73,
-      "operator": 295,
+      "harness": 74,
+      "operator": 296,
       "repository": 156,
       "transport": 16
     },
     "by_category": {
       "command_scope_violation": 111,
       "evidence_misreport": 80,
-      "harness_failure": 73,
-      "operator_error": 295,
+      "harness_failure": 74,
+      "operator_error": 296,
       "output_contract_violation": 367,
       "read_only_violation": 5,
       "reasoning_claim_error": 50,
@@ -26,20 +26,20 @@
       "transport_timeout": 16
     },
     "by_role": {
-      "implementer": 92,
+      "implementer": 93,
       "integration_reviewer": 5,
-      "orchestrator": 993,
+      "orchestrator": 994,
       "verifier": 63
     },
     "by_process_severity": {
-      "low": 763,
+      "low": 765,
       "material": 135,
       "moderate": 255
     },
     "by_candidate_state": {
       "accepted_candidate_changed": 237,
-      "canonical_unchanged": 732,
-      "untrusted_partial_worktree": 184
+      "canonical_unchanged": 733,
+      "untrusted_partial_worktree": 185
     },
     "by_resource_and_role": {
       "accepted-guard-graph-clockwork-publication::orchestrator": 1,
@@ -258,6 +258,7 @@
       "delete-confirm-behavior-transaction-harness::implementer": 4,
       "delete-confirm-http-postgresql-harness::orchestrator": 3,
       "delete-confirm-idempotency-route-contract-test::orchestrator": 1,
+      "derived-fixture-readback-command::orchestrator": 1,
       "deterministic-node-process-guard::orchestrator": 1,
       "diagnosis-canonical-evidence-readback::implementer": 1,
       "diagnosis-generator-entry-point::orchestrator": 1,
@@ -266,6 +267,7 @@
       "diagnosis-provider-boundary-predicate::orchestrator": 1,
       "diagnosis-validation-manifest::orchestrator": 1,
       "diagnosis-verification-test-manifest::orchestrator": 1,
+      "direct-python-launcher::implementer": 1,
       "docker-desktop-windows::orchestrator": 1,
       "emr4-ariadne-agent-error-register-acceptance::orchestrator": 18,
       "emr4-arrival-check-in-convergence-prose-fixtures::orchestrator": 1,

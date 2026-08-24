@@ -1,85 +1,85 @@
 {
   "schema_version": "ariadne.governance_live_tick_transaction.v1",
-  "operation_id": "raisa-provider-free-governance-clockwork-historical-derived-first-use-materialisation-subgate-rehearsal",
-  "transaction_id": "txn-424be9355e12d09fb205ccd4",
-  "source_commit": "85ea931cd1a743f8d1fd2dff077c09d2d8fc1182",
-  "previous_source_commit": "85ea931cd1a743f8d1fd2dff077c09d2d8fc1182",
-  "previous_generation_id": "gen-923ec70c16cb34c34426cecff918ab42d4dfa3e8ee4e7b6678d4792fbbec0b57",
-  "previous_bundle_sha256": "923ec70c16cb34c34426cecff918ab42d4dfa3e8ee4e7b6678d4792fbbec0b57",
+  "operation_id": "raisa-local-only-historical-derived-minimised-check-in-context-scenario-first-use-materialisation-rehearsal",
+  "transaction_id": "txn-aa9f8cd07e718378a3f176db",
+  "source_commit": "e7dc4d2587a917fd01ba91d8da2db1391005f4ef",
+  "previous_source_commit": "e7dc4d2587a917fd01ba91d8da2db1391005f4ef",
+  "previous_generation_id": "gen-fe5c4f824388f798d87a15dca9b95fa1258ba6e1c99f98600a0423669e6aab4c",
+  "previous_bundle_sha256": "fe5c4f824388f798d87a15dca9b95fa1258ba6e1c99f98600a0423669e6aab4c",
   "previous_canonical_sha256s": {
-    "continuity": "a1a9577bdd3750d61af148b751ac4dbd009b08e7f9c64c9ce579adeb26ae4d75",
-    "compass": "26fdd97e75cc126f9e8fff96f0c7b5f011243e9dc8c28dcc9507bbefa3093aba",
-    "compass_markdown": "1a7ee176618c934ca2226dd9b939736e8d03cbe1d679c63bfcb9d6c2102df2ab",
-    "active_latch": "49c39a1a6537d0b19112b9e6a13edf4b919afbf6462de7486f707fbe888b7dd6",
-    "error_register": "244686d0f27fe5a10a41f90c590ad1a3888c6b4ebc3205cd20b86ede5b943022",
-    "pattern_report": "7c86c6d1fe23dd72f24353ea65c2249a0900318ab513bb170e96caac321489b0",
-    "current_baton": "af7e3f8960feb6c8468d409302e93ef06256f7e4429ae27f17a4803cfe83cb76"
+    "continuity": "369a6ba3f8eaf5606df070518b6c7f56986b5dcc1a5424a6bab7842edb7b2d12",
+    "compass": "61215be3a451d93e41ecd577d23bacb05a3f3e1c9573b115bc96d95be8ed5b22",
+    "compass_markdown": "ad2a7118f653a907c788a8a6d068cbeaeb16ab479299a9660ed6cf74d2b05d8a",
+    "active_latch": "8cec5d66dcfbc98a5e1e7ed519e719e934f90cc7addb08e2f8866591733fba60",
+    "error_register": "2402c709dd6c84f3551729682fd2c9e11e0373dfd0d75e6fc15a924d51ec31de",
+    "pattern_report": "af8d5d6301e7974a3bfa21facc095c9512b121bfb05b838192f60796bfbf4ecc",
+    "current_baton": "3203d04dce87914bb4f753d338a2c2102f533c4d0e44e6ffb593ba8d53ca8b6a"
   },
   "previous_metadata_sha256s": {
-    "command-manifest.json": "cce3d6bb3665aa381abc178be57211423d29ac5fd504cc409edd5f84eac8b2be",
-    "transaction.json": "7b5fabcbc836ff4e0ae170666b5d57e37d9773fd5c9ae3403d385f4ad874a068",
+    "command-manifest.json": "b94d0189c4faf8e316c1c3c45aee69243fa4de4c240d8665830ae801506ab6f3",
+    "transaction.json": "6507414c94b8c2ac3f474e8afeb5893275912dbd6f221979dc7dc15e300b0d31",
     "ownership.json": "e78320a1b0d2f61041cd9d8cac1ed4f98d2bbdf7c3b94891a48d123589d8dee9",
-    "generation-manifest.json": "6fa5216f5eb4817930e38e592c32eca49f70f0972be02f6d4c4578ad9d26bc42"
+    "generation-manifest.json": "e14bd862ef5a6db25a367e0f297176072483158a5e8e7b97996598396cff40e5"
   },
   "projection_sha256s": {
-    "graph": "sha256:9de21de96dbe751d72ba6494f34bebf07f39a0a63d4992a9bda7541d5b0f1505",
-    "compass": "sha256:4f9d470447e8988a6fa517f5666f96891b7b13b72b96a7fb039a6e00802942c3",
-    "report": "sha256:9e38679ee7f4f3836cdbb2fe9565300d2baaaafd56f4bb2cecfadba9a7e2e3b0",
-    "latch": "sha256:8e001166365820473442c1bb1a71b2f2c407735b3d6b4a960a5c8adee2117d57",
-    "incident_aggregate": "sha256:9491d9efd3641bb10f91882a317ca0f90b1525837bd300f1e70ad5f64df26fe9"
+    "graph": "sha256:b2894ab05d41a1a6f8a493c22803f4e6ca7215f8ad167ce5340e74322261c2bd",
+    "compass": "sha256:c9c8d3d7755d2d033b6f9d7822741a112f06c2f37bd0ddd95b203b9b6c84a65c",
+    "report": "sha256:e62b0ae237b1ec9be3c6c45b2a3b054d43028fb842cff55a0791316e6e94c1a9",
+    "latch": "sha256:a5d215ddda94c5d731327ec79c0d5cfd81342728a630d9122e272cc9ecf25630",
+    "incident_aggregate": "sha256:43387dc474c70aa50571ad084cd8cfb15a6af38f3a86b47ec56ef9ad8459aa94"
   },
   "journal": [
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-424be9355e12d09fb205ccd4",
-      "transaction_id": "txn-424be9355e12d09fb205ccd4",
-      "operation_id": "raisa-provider-free-governance-clockwork-historical-derived-first-use-materialisation-subgate-rehearsal",
+      "journal_id": "journal-aa9f8cd07e718378a3f176db",
+      "transaction_id": "txn-aa9f8cd07e718378a3f176db",
+      "operation_id": "raisa-local-only-historical-derived-minimised-check-in-context-scenario-first-use-materialisation-rehearsal",
       "sequence": 1,
       "previous_event_sha256": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
       "event_type": "manifest-accepted",
       "actor": "gpt-sol",
       "payload": {
-        "manifest_sha256": "sha256:a81e9b9154b6f5cb286f3fe4bbc2384efc64d81663c51c5f01817c67daf5fd29"
+        "manifest_sha256": "sha256:e04c8ad505a36b0cc02cecc1b2ad4fe03ac5ee9ccaf3dcf8542b397f010ddb89"
       },
-      "event_sha256": "sha256:eacf18a28b82242d860bdb379c832a23e80a831ac5fd6303f529cff0b69e824e"
+      "event_sha256": "sha256:0aec3fed79e1a8dbd70eca2a677446d45e05f87bbe75b2205c6845c40ac246e8"
     },
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-424be9355e12d09fb205ccd4",
-      "transaction_id": "txn-424be9355e12d09fb205ccd4",
-      "operation_id": "raisa-provider-free-governance-clockwork-historical-derived-first-use-materialisation-subgate-rehearsal",
+      "journal_id": "journal-aa9f8cd07e718378a3f176db",
+      "transaction_id": "txn-aa9f8cd07e718378a3f176db",
+      "operation_id": "raisa-local-only-historical-derived-minimised-check-in-context-scenario-first-use-materialisation-rehearsal",
       "sequence": 2,
-      "previous_event_sha256": "sha256:eacf18a28b82242d860bdb379c832a23e80a831ac5fd6303f529cff0b69e824e",
+      "previous_event_sha256": "sha256:0aec3fed79e1a8dbd70eca2a677446d45e05f87bbe75b2205c6845c40ac246e8",
       "event_type": "git-source-resolved",
       "actor": "gpt-sol",
       "payload": {
-        "source_commit": "85ea931cd1a743f8d1fd2dff077c09d2d8fc1182",
+        "source_commit": "e7dc4d2587a917fd01ba91d8da2db1391005f4ef",
         "protected_refs_sha256": "sha256:cdc1b2a8af0f767eab683235c0d96558e8f83c297922c3e9aa02a9a76a4aafd2"
       },
-      "event_sha256": "sha256:865d751c4302fdae704550e9f0801d3ec73dd4e9bb84a63595a38111f71056c1"
+      "event_sha256": "sha256:2fe57847d3df6f5c0bfefc13459528a911021a753a8fdc9c241f52e1b1ada018"
     },
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-424be9355e12d09fb205ccd4",
-      "transaction_id": "txn-424be9355e12d09fb205ccd4",
-      "operation_id": "raisa-provider-free-governance-clockwork-historical-derived-first-use-materialisation-subgate-rehearsal",
+      "journal_id": "journal-aa9f8cd07e718378a3f176db",
+      "transaction_id": "txn-aa9f8cd07e718378a3f176db",
+      "operation_id": "raisa-local-only-historical-derived-minimised-check-in-context-scenario-first-use-materialisation-rehearsal",
       "sequence": 3,
-      "previous_event_sha256": "sha256:865d751c4302fdae704550e9f0801d3ec73dd4e9bb84a63595a38111f71056c1",
+      "previous_event_sha256": "sha256:2fe57847d3df6f5c0bfefc13459528a911021a753a8fdc9c241f52e1b1ada018",
       "event_type": "projections-reduced",
       "actor": "gpt-sol",
       "payload": {
-        "graph_revision": 454,
-        "map_revision": 436
+        "graph_revision": 455,
+        "map_revision": 437
       },
-      "event_sha256": "sha256:1fd038518729ce7a3d9cd2a18157fd6678c7b60534df04500c9611acd7760400"
+      "event_sha256": "sha256:407ce83982020a6910d2806c4d7152d56df305e595b539824c0a2e32c6a3cede"
     },
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-424be9355e12d09fb205ccd4",
-      "transaction_id": "txn-424be9355e12d09fb205ccd4",
-      "operation_id": "raisa-provider-free-governance-clockwork-historical-derived-first-use-materialisation-subgate-rehearsal",
+      "journal_id": "journal-aa9f8cd07e718378a3f176db",
+      "transaction_id": "txn-aa9f8cd07e718378a3f176db",
+      "operation_id": "raisa-local-only-historical-derived-minimised-check-in-context-scenario-first-use-materialisation-rehearsal",
       "sequence": 4,
-      "previous_event_sha256": "sha256:1fd038518729ce7a3d9cd2a18157fd6678c7b60534df04500c9611acd7760400",
+      "previous_event_sha256": "sha256:407ce83982020a6910d2806c4d7152d56df305e595b539824c0a2e32c6a3cede",
       "event_type": "projections-validated",
       "actor": "gpt-sol",
       "payload": {
@@ -87,26 +87,26 @@
         "compass": "passed",
         "latch": "passed"
       },
-      "event_sha256": "sha256:faedf808d7aecd6a94dd457f9debfd25d10bc855e13e93e137c6280ce9461fae"
+      "event_sha256": "sha256:8572dc12bd4ad6e1946f7b5722751b528a5a368ec0fae4272fea6ab45e0d5e04"
     },
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-424be9355e12d09fb205ccd4",
-      "transaction_id": "txn-424be9355e12d09fb205ccd4",
-      "operation_id": "raisa-provider-free-governance-clockwork-historical-derived-first-use-materialisation-subgate-rehearsal",
+      "journal_id": "journal-aa9f8cd07e718378a3f176db",
+      "transaction_id": "txn-aa9f8cd07e718378a3f176db",
+      "operation_id": "raisa-local-only-historical-derived-minimised-check-in-context-scenario-first-use-materialisation-rehearsal",
       "sequence": 5,
-      "previous_event_sha256": "sha256:faedf808d7aecd6a94dd457f9debfd25d10bc855e13e93e137c6280ce9461fae",
+      "previous_event_sha256": "sha256:8572dc12bd4ad6e1946f7b5722751b528a5a368ec0fae4272fea6ab45e0d5e04",
       "event_type": "transaction-prepared",
       "actor": "gpt-sol",
       "payload": {
         "publication_mode": "shadow_directory_rename"
       },
-      "event_sha256": "sha256:98227f9bdc671850d04f3478cf352d4066dc1268daac76b6d582878123a01d35"
+      "event_sha256": "sha256:1715c2373d5d25caeb519cae92536895fa226c8a18d1151e3fe3b4b2c9562a6b"
     }
   ],
   "publication_mode": "lease_bound_pointer_last_live_tick",
   "event_kind": "clean_closeout",
-  "next_boundaries_sha256": "sha256:359e9b14f1f6b5024e20c28c02333af0f6a39169b0b5e63c46ca874b07b67430",
+  "next_boundaries_sha256": "sha256:b4c229e51b6ef12c1776cc82723be4bab6fb0bef453de712785fe7506071345e",
   "register_bytes_preserved": false,
   "pattern_bytes_preserved": false
 }
