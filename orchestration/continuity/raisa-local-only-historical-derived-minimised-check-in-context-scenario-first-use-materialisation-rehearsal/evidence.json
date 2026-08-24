@@ -1,0 +1,81 @@
+{
+  "schema_version": "raisa.historical_derived_minimised_check_in_context_first_use_evidence.v1",
+  "recorded_at": "2026-08-24T12:11:47.3159493+10:00",
+  "decision": "accepted_one_exact_gate_admitted_local_test_fixture",
+  "planning_source": "3c621c058244624563d187eaef9cfa911ee68d80",
+  "implementation_source": "bea3302ef087d15619e66c18d2c688b48bbb9a1c",
+  "reviewed_source": "4740813d53ebbc4872fe8c0c08ce2578b1982770",
+  "accepted_bindings": {
+    "materialiser_contract_sha256": "3e07a40f3e7c722e89cf7e082c2e9399a6836998c7b061350423ce54a813ba5f",
+    "candidate_gate_source": "abcd4206a363b0c565c070e0f2cb9c54d627b3b3",
+    "gate_declaration_source": "7f9a526e57a4c10502f01b0e7c1cc5ec6910f00c",
+    "measurement_source": "a9e00638b960306766260d6df674c3489be58b86",
+    "clockwork_mode_member_count": 8
+  },
+  "one_run_reading": {
+    "preflight_count": 1,
+    "metadata_bind_count": 1,
+    "content_run_count": 1,
+    "content_retry_count": 0,
+    "fallback_count": 0,
+    "selected_snapshot_count": 80,
+    "relative_observation_span_seconds": 5160,
+    "selected_total_bytes": 8151040,
+    "maximum_file_bytes": 110592,
+    "gate_decision": "admitted_for_exact_declared_artifact_only",
+    "terminal_decision": "materialised_for_exact_declared_local_test_artifact_only",
+    "fixture_count": 1
+  },
+  "candidate": {
+    "sha256": "2205ab83cec7c5639d39cc563cee80eec825ac33f17571151571d325e74f2dfe",
+    "fixture_sha256": "2205ab83cec7c5639d39cc563cee80eec825ac33f17571151571d325e74f2dfe",
+    "digest_match": true,
+    "schema_valid": true,
+    "event_count": 6,
+    "distinct_relative_minutes": 4,
+    "relative_minute_span": 19,
+    "distinct_event_kinds": 2,
+    "synthetic_subject_slots": 1,
+    "resource_slots": 1,
+    "fixture_bytes": 1125,
+    "fixture_committed": false
+  },
+  "privacy_and_cleanup": {
+    "source_text_emitted": false,
+    "identity_contact_note_emitted": false,
+    "filename_path_or_exact_timestamp_emitted": false,
+    "token_key_or_mapping_emitted": false,
+    "private_projection_persisted": false,
+    "private_manifest_absent": true,
+    "owned_word_control_absent": true,
+    "word_progress_absent": true,
+    "parent_cleanup_receipt_absent": true,
+    "fixture_top_level_field_count": 3,
+    "fixture_event_field_count": 5,
+    "forbidden_value_fields_absent": true
+  },
+  "verification": {
+    "focused_controls_passed": 9,
+    "historical_diary_test_files_passed": 26,
+    "historical_diary_controls_passed": 237,
+    "ruff_passed": true,
+    "compileall_passed": true,
+    "powershell_parse_passed": true,
+    "git_diff_check_passed": true,
+    "protected_refs_aligned": true
+  },
+  "authority": {
+    "provider_or_model_calls": 0,
+    "product_database_client_or_runtime": false,
+    "ordinary_practice": false,
+    "production_deployment_release_or_pages": false,
+    "protected_ref_movement": false,
+    "authority_non_transitive": true
+  },
+  "parallelism": {
+    "deepseek_flash": "declined_negative",
+    "gemini_verifier": "not_applicable_neutral",
+    "native_subagents": "declined_negative",
+    "owner": "gpt_sol_serial"
+  }
+}

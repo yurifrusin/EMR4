@@ -1,0 +1,35 @@
+{
+  "schema_version": "raisa.historical_derived_minimised_scenario_consumption_subgate_successor_contract.v1",
+  "status": "frozen_fail_closed_successor_contract",
+  "recorded_at": "2026-08-24T12:11:47.3159493+10:00",
+  "operation_id": "raisa-provider-free-governance-clockwork-historical-derived-minimised-scenario-consumption-subgate-rehearsal",
+  "accepted_first_use": {
+    "reviewed_source": "4740813d53ebbc4872fe8c0c08ce2578b1982770",
+    "candidate_gate_source": "abcd4206a363b0c565c070e0f2cb9c54d627b3b3",
+    "fixture_sha256": "2205ab83cec7c5639d39cc563cee80eec825ac33f17571151571d325e74f2dfe",
+    "fixture_class": "minimised_structural_scenario",
+    "fixture_location": "local_data/historical-diary-trove/derived-scenarios/2026-08-24-first-use-check-in-context-v1/scenario.json",
+    "fixture_committed": false,
+    "authority_non_transitive": true
+  },
+  "clockwork_objective": {
+    "new_mode": "exact_digest_bound_local_test_fixture_consumption",
+    "fixture_reads_during_clockwork_tranche": 0,
+    "historical_archive_reads": 0,
+    "product_or_adapter_invocations": 0,
+    "partial_mixed_unknown_or_altered_forms_fail_closed": true
+  },
+  "eventual_consumption_ceiling": {
+    "exact_fixture_digest_required": true,
+    "local_provider_free_authored_synthetic_test_context_only": true,
+    "maximum_fixture_reads": 1,
+    "raw_archive_access": false,
+    "source_text_identity_contact_note_filename_path_date_timestamp_token_key_or_mapping_output": false,
+    "provider_model_network_prompt_telemetry_clipboard_or_external_release": false,
+    "product_patient_appointment_clinical_or_protected_data": false,
+    "database_route_client_runtime_or_configuration": false,
+    "ordinary_practice_activation": false,
+    "production_deployment_release_pages_or_protected_refs": false
+  },
+  "claim_ceiling": "the_next_tranche_only_adds_a_closed_clockwork_form_and_does_not_read_or_consume_the_fixture"
+}

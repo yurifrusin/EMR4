@@ -1,0 +1,29 @@
+{
+  "schema_version": "raisa.historical_first_use_prepublication_contained_lapses.v1",
+  "recorded_at": "2026-08-24T12:11:47.3159493+10:00",
+  "occupied_metadata_bind_count": 1,
+  "occupied_content_run_count": 1,
+  "occupied_retry_count": 0,
+  "incidents": [
+    {
+      "incident_id": "AER-1154",
+      "stage": "preflight",
+      "result": "contained_before_private_bind",
+      "private_content_accessed": false,
+      "provider_or_model_called": false
+    },
+    {
+      "incident_id": "AER-1155",
+      "stage": "postrun_readback",
+      "result": "corrected_without_private_rerun",
+      "private_content_accessed": false,
+      "provider_or_model_called": false
+    }
+  ],
+  "ordinary_preaccess_candidate_repairs": {
+    "focused_test_repairs": 1,
+    "surrounding_regression_repairs": 1,
+    "semantic_closeout_intent_repairs": 1,
+    "private_or_provider_runs": 0
+  }
+}

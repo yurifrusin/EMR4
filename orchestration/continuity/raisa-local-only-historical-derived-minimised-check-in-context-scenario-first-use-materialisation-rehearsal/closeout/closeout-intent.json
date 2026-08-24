@@ -1,0 +1,144 @@
+{
+  "schema_version": "ariadne.governance_semantic_closeout_intent.v1",
+  "profile": "provider_free_governance_tooling_v1",
+  "artifact_slug": "raisa-local-only-historical-derived-minimised-check-in-context-scenario-first-use-materialisation-rehearsal",
+  "recorded_at": "2026-08-24T12:11:47.3159493+10:00",
+  "closeout": {
+    "operation_id": "raisa-local-only-historical-derived-minimised-check-in-context-scenario-first-use-materialisation-rehearsal",
+    "title": "Raisa local-only historical-derived minimised check-in-context scenario first-use materialisation rehearsal",
+    "builds_on": [
+      "raisa-provider-free-governance-clockwork-historical-derived-first-use-materialisation-subgate-rehearsal"
+    ],
+    "authority_notes": [
+      "Yuri delegated first-use gate timing and standing uninterrupted development; accept the sole local no-retry exact-gate result and continue without opening downstream authority."
+    ],
+    "decisions": [
+      {
+        "id": "accept-one-exact-gate-admitted-local-fixture",
+        "source": "orchestration/continuity/raisa-local-only-historical-derived-minimised-check-in-context-scenario-first-use-materialisation-rehearsal/evidence.json",
+        "summary": "Accept reviewed source 4740813d53ebbc4872fe8c0c08ce2578b1982770 and exact fixture digest 2205ab83cec7c5639d39cc563cee80eec825ac33f17571151571d325e74f2dfe after one bind and one content run."
+      },
+      {
+        "id": "preserve-non-transitive-local-test-authority",
+        "source": "orchestration/continuity/raisa-local-only-historical-derived-minimised-check-in-context-scenario-first-use-materialisation-rehearsal/next-tranche-contract.json",
+        "summary": "The ignored fixture gains no downstream use authority; add a separate exact-digest local-test consumption clockwork form before any adapter test reads it."
+      }
+    ],
+    "claim_scope": [
+      "One compact local structural fixture is schema-valid and gate-admitted; it does not prove general de-identification, representativeness, product behavior or real-practice validity."
+    ],
+    "additional_receipts": [
+      "orchestration/continuity/raisa-local-only-historical-derived-minimised-check-in-context-scenario-first-use-materialisation-rehearsal/closeout/prepublication-contained-lapses.json",
+      "orchestration/continuity/raisa-local-only-historical-derived-minimised-check-in-context-scenario-first-use-materialisation-rehearsal/closeout/pushover-notification-receipt.json"
+    ],
+    "additional_artifacts": [
+      "orchestration/continuity/raisa-local-only-historical-derived-minimised-check-in-context-scenario-first-use-materialisation-rehearsal/next-tranche-contract.json"
+    ],
+    "unresolved_gates": [
+      "Fixture consumption, adapter testing, product data, ordinary practice, provider use and production remain separately closed."
+    ],
+    "journey": {
+      "strategic_role": "Turn the historical Diary time-lapse into the first empirically grounded but structurally minimised local development scenario.",
+      "outcome": "One exact-digest six-event ignored fixture now exists under non-transitive local-test authority."
+    },
+    "current_position": {
+      "strategic_role": "Represent downstream use as a new closed clockwork form before consuming the fixture.",
+      "why_now": "The fixture is useful and accepted, but the materialisation authority explicitly cannot flow into consumption.",
+      "outcome": "A deterministic governance-only consumption mode that reads neither archive nor fixture.",
+      "unlocks": [
+        "One later provider-free canonical check-in adapter test may consume the exact fixture as local authored-synthetic context."
+      ],
+      "does_not_solve": [
+        "No product, ordinary-practice, provider, broader archive or production authority opens."
+      ],
+      "orientation_statement": "Add only the missing exact-digest consumption gear, then use it in a separately frozen test."
+    },
+    "next_operation": {
+      "operation_id": "raisa-provider-free-governance-clockwork-historical-derived-minimised-scenario-consumption-subgate-rehearsal",
+      "active_tranche": "Raisa provider-free governance clockwork historical-derived minimised scenario consumption subgate rehearsal",
+      "objective": "Add one closed clockwork mode for later exact-digest local provider-free test consumption without reading the archive or fixture.",
+      "authority_source": "Yuri's delegated gate timing and standing uninterrupted-development authority, constrained by the frozen successor contract.",
+      "next_stage": "fresh_five_source_rehydration_then_freeze_pure_clockwork_consumption_subgate_plan"
+    }
+  },
+  "verification_profile": "governance_clockwork_core_v1",
+  "baton_slot": "current_deepseek_native_harness_acceptance",
+  "next_operation_protected_boundaries": [
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only",
+    "no_product_patient_appointment_clinical_or_protected_data",
+    "no_historical_data_access"
+  ],
+  "agent_error_observations": [
+    {
+      "attempt_key": "historical-first-use-direct-launch-preflight-001",
+      "observed_on": "2026-08-24",
+      "tranche": "historical-first-use-materialisation",
+      "role": "implementer",
+      "resource_id": "direct-python-launcher",
+      "model": "gpt-sol",
+      "reasoning_level": "extra_high",
+      "transport": "local_python_cli",
+      "stage": "deterministic_verification",
+      "category": "harness_failure",
+      "process_severity": "low",
+      "expected_invariant": "The committed direct-file wrapper imports repository packages and reaches preflight before any private bind.",
+      "observed_error": "The first direct invocation failed with ModuleNotFoundError before importing the materialiser.",
+      "detection_method": "The committed preflight command exited nonzero before source-root inspection or bind.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-local-only-historical-derived-minimised-check-in-context-scenario-first-use-materialisation-rehearsal/closeout/prepublication-contained-lapses.json"
+      ],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "harness.direct_cli_requires_repository_path_bootstrap",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Bootstrap the resolved repository parent and add a focused direct-launch source control before bind.",
+        "prevention_control": "New direct wrappers must prove repository import bootstrap before occupied use.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-662.md",
+          "orchestration/continuity/raisa-local-only-historical-derived-minimised-check-in-context-scenario-first-use-materialisation-rehearsal/evidence.json"
+        ]
+      },
+      "baton_summary": "records one contained direct-launch import failure before the sole private bind."
+    },
+    {
+      "attempt_key": "historical-first-use-postrun-readback-quoting-001",
+      "observed_on": "2026-08-24",
+      "tranche": "historical-first-use-materialisation",
+      "role": "orchestrator",
+      "resource_id": "derived-fixture-readback-command",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_powershell_python",
+      "stage": "acceptance",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Post-run structural fixture validation uses shell-safe literal input and never requires an occupied rerun.",
+      "observed_error": "The first inline Python command had an unterminated quoted tuple and exited before validating the fixture.",
+      "detection_method": "Python emitted a local SyntaxError while the prior successful occupied terminal and fixture remained unchanged.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-local-only-historical-derived-minimised-check-in-context-scenario-first-use-materialisation-rehearsal/closeout/prepublication-contained-lapses.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.use_literal_stdin_for_multistring_validation",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Pipe a literal PowerShell here-string to Python and validate only the admitted fixture.",
+        "prevention_control": "Use literal standard-input scripts for multi-string post-run JSON validation.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-662.md",
+          "orchestration/continuity/raisa-local-only-historical-derived-minimised-check-in-context-scenario-first-use-materialisation-rehearsal/evidence.json"
+        ]
+      },
+      "baton_summary": "records one corrected post-run shell-quoting lapse without private rerun."
+    }
+  ]
+}

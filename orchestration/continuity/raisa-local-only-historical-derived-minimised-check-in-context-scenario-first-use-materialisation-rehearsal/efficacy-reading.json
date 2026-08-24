@@ -1,0 +1,31 @@
+{
+  "schema_version": "raisa.historical_derived_minimised_check_in_context_first_use_efficacy.v1",
+  "recorded_at": "2026-08-24T12:11:47.3159493+10:00",
+  "reviewed_source": "4740813d53ebbc4872fe8c0c08ce2578b1982770",
+  "decision": "effective_first_use_with_bounded_preaccess_repair_cost",
+  "safety": {
+    "single_bind_single_content_run": true,
+    "content_retry_or_fallback_count": 0,
+    "exact_gate_before_write": true,
+    "candidate_fixture_digest_match": true,
+    "private_projection_persisted": false,
+    "private_control_artifacts_absent": true,
+    "provider_product_and_protected_boundaries_held": true
+  },
+  "utility": {
+    "one_reusable_local_fixture_created": true,
+    "empirical_observation_timeline_preserved_relatively": true,
+    "absolute_source_schedule_or_identity_preserved": false,
+    "fixture_event_count": 6,
+    "fixture_relative_minute_span": 19
+  },
+  "workflow_cost": {
+    "preaccess_candidate_repair_rounds": 2,
+    "failed_preflight_launcher_invocations": 1,
+    "occupied_run_reruns": 0,
+    "postrun_readback_command_corrections": 1,
+    "semantic_closeout_intent_corrections": 1,
+    "provider_or_worker_reruns": 0
+  },
+  "recommendation": "add_one_exact_digest_bound_local_fixture_consumption_clockwork_mode_then_use_the_fixture_in_one_provider_free_check_in_adapter_test_rehearsal"
+}
