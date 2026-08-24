@@ -1,0 +1,22 @@
+{
+  "schema_version": "ariadne.serial_continuation_intent.v1",
+  "preset": "provider_free_serial_observed_empty_workers",
+  "continuation_event": "pre_push",
+  "planned_action": "push_only_the_completed_waiting_area_readiness_review_and_governed_explicit_pause_to_the_task_branch_then_stop",
+  "assessed_stage": "waiting_area_readiness_review_closeout_paused_prepush",
+  "active_evidence_paths": [
+    "docs/raisa-provider-free-read-only-waiting-area-movement-command-family-readiness-review-plan.md",
+    "docs/raisa-provider-free-read-only-waiting-area-movement-command-family-readiness-review-closeout.md",
+    "orchestration/agent_inbox/codex/raisa-provider-free-read-only-waiting-area-movement-command-family-readiness-review-sol-acceptance.md",
+    "orchestration/continuity/raisa-provider-free-read-only-waiting-area-movement-command-family-readiness-review/evidence.json",
+    "orchestration/continuity/raisa-provider-free-read-only-waiting-area-movement-command-family-readiness-review/report.md",
+    "orchestration/continuity/raisa-provider-free-read-only-waiting-area-movement-command-family-readiness-review/pause/clockwork-tick-evidence.json",
+    "orchestration/continuity/ariadne-active-operation-latch/current.json"
+  ],
+  "lane_decision_overrides": [
+    {
+      "lane_id": "gemini_verifier",
+      "decision_code": "not_applicable_neutral"
+    }
+  ]
+}
