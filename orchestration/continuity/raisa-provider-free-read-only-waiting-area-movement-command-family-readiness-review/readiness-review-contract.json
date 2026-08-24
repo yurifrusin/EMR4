@@ -1,0 +1,64 @@
+{
+  "schema_version": "raisa.waiting_area_movement_command_family_readiness_review_contract.v1",
+  "source_head": "11317b69c6fcd0e97a002b4196ec92cc33f47110",
+  "input_hash_mode": "strict_utf8_canonical_lf_reject_bare_cr_sha256",
+  "inputs": [
+    {"path": "app/main.py", "sha256": "0e0f42290688943bc9dd7d5711826acf10430133be0b309eae94bad15da46ca2"},
+    {"path": "app/routers/appointments.py", "sha256": "8443bc1d045672f05567a5cb6443a882dfda4946791412c231ce475995f71d08"},
+    {"path": "app/schemas/appointments.py", "sha256": "ce7a9819e4947fb288c79009a08b7d9f2502b8d096ff5e2eb005796a250aee90"},
+    {"path": "app/models/appointments.py", "sha256": "4ae06eeb87c6d5212e354c39c01a8da397cfa2c21bd1031c24e1467d86c77794"},
+    {"path": "app/services/appointment_status_product_adapter.py", "sha256": "a067e05802a74461fb14571c26e02bb72f34fcdd4624ee2a5ebcadd0266cdf55"},
+    {"path": "app/services/appointment_status_physical.py", "sha256": "4ab9d0ff3816d85d7eb374e97fec7618e0b922354b104766b2898b0989e56f1b"},
+    {"path": "app/services/appointment_check_in_product_adapter.py", "sha256": "ef6abdfef1b99737c527790be007ab07296bbc0422197858a5ae561012230570"},
+    {"path": "docs/api-spine/openapi/appointment-commands.yaml", "sha256": "0dfbce13f3d8933d0cd2355fb41e70612c1550e75c452b95c1528576ac1c8622"},
+    {"path": "docs/api-spine/async/integration-events.yaml", "sha256": "fef2ac9d3fcfa954388bc6432206316ac5a9d64e8906b494a012b88c567a67ba"},
+    {"path": "docs/diary/diary.js", "sha256": "b874287c039574e8f0aae30a8e1cdd52cd07be31998b2cd8473991f37e49bacf"},
+    {"path": "tests/test_api_spine_status_confirm_idempotency_route_contract.py", "sha256": "1379b2f506a8388097404c805d9eaa6599c854ea14b3aff4fc26a22f0aa98101"},
+    {"path": "tests/test_raisa_provider_free_unmounted_status_confirm_product_adapter.py", "sha256": "844477f41caa7b3d85b362dd3ccdc558461aa2cda52d59f0b814d341a6d6d36e"},
+    {"path": "tests/test_model_required_bureau_a5_1_check_in_runtime.py", "sha256": "c99782bef15482347b8cc983db8323d89d68c8bf8467053f94af009b6be6b2ca"},
+    {"path": "docs/raisa-provider-free-status-confirm-http-route-convergence-closeout.md", "sha256": "69c3bbe767118815663ea4cd1417148be17a83abf1c0203e663ef47571aed528"},
+    {"path": "docs/raisa-provider-free-unmounted-status-confirm-runtime-convergence-architecture.md", "sha256": "aa2eab6fddc0f8394ea3950965d525222917506a04b0ef10ab22999e2e442363"},
+    {"path": "orchestration/continuity/raisa-provider-free-database-backed-default-off-canonical-check-in-post-proposal-revalidation-rehearsal/next-tranche-contract.json", "sha256": "a386e7c81eba537518a74eb07655bd6f255fc775df2ab37d4223bdbd947939c1"}
+  ],
+  "classifications": ["satisfied", "blocking_gap"],
+  "verdict_rules": {
+    "any_blocking_gap": "waiting_area_command_family_not_ready",
+    "all_satisfied": "waiting_area_command_family_already_complete"
+  },
+  "dimensions": [
+    {"order": 1, "id": "database_current_truth_ownership", "expected_classification": "satisfied", "question": "Does backend appointment and waiting-area state own the current truth?"},
+    {"order": 2, "id": "non_mutating_proposal_surface", "expected_classification": "satisfied", "question": "Does a waiting-area-only proposal shape and mounted non-mutating route already exist?"},
+    {"order": 3, "id": "check_in_non_overlap", "expected_classification": "satisfied", "question": "Does dedicated check-in retain arrival plus initial assignment while rejecting area moves?"},
+    {"order": 4, "id": "general_status_non_overlap", "expected_classification": "satisfied", "question": "Does status confirmation remain status-only at admission and own only its accepted transition side effects?"},
+    {"order": 5, "id": "human_confirmation_interaction", "expected_classification": "satisfied", "question": "Does the Diary already prepare and explicitly confirm a waiting-area-only proposal without local real-mode mutation?"},
+    {"order": 6, "id": "dedicated_operation_route_identity", "expected_classification": "blocking_gap", "question": "Is there a distinct waiting-area confirm operation, route family and canonical path?"},
+    {"order": 7, "id": "family_bound_signed_evidence", "expected_classification": "blocking_gap", "question": "Is confirmation evidence domain-separated and bound to the waiting-area family rather than status-confirm?"},
+    {"order": 8, "id": "current_authority_and_command_session", "expected_classification": "blocking_gap", "question": "Does a family-owned adapter derive current authority and a distinct backend command session?"},
+    {"order": 9, "id": "locked_destination_revalidation", "expected_classification": "blocking_gap", "question": "Are source version, target appointment and active destination revalidated under command locks?"},
+    {"order": 10, "id": "atomic_mutation_audit_receipt", "expected_classification": "blocking_gap", "question": "Does one transaction atomically change waiting_area_id, write attributable audit and complete a family-qualified receipt?"},
+    {"order": 11, "id": "canonical_public_delivery_and_replay", "expected_classification": "blocking_gap", "question": "Do initial success and same-digest replay return one family-owned canonical public response?"},
+    {"order": 12, "id": "api_spine_client_and_event_convergence", "expected_classification": "blocking_gap", "question": "Are API Spine, real-mode Diary confirmation and a non-actuating committed event contract converged on the sibling family?"}
+  ],
+  "non_overlap": {
+    "check_in": "booked_to_arrived_plus_initial_waiting_area_only_and_existing_area_move_rejected",
+    "general_status": "status_transition_and_accepted_transition_side_effects_only",
+    "waiting_area_movement": "waiting_area_id_only_with_status_and_arrival_unchanged"
+  },
+  "acceptance": {
+    "expected_counts": {"satisfied": 5, "blocking_gap": 7},
+    "expected_verdict": "waiting_area_command_family_not_ready",
+    "expected_next_tranche": "raisa-provider-free-unmounted-waiting-area-confirm-command-family-architecture",
+    "minimum_hostile_mutations": 72,
+    "require_exact_dimension_order": true,
+    "require_exact_source_citations": true,
+    "require_no_app_import": true
+  },
+  "forbidden_surfaces": [
+    "product_source_or_api_spine_edit",
+    "route_edit_mount_call_or_http_transport",
+    "schema_model_migration_database_docker_or_sql",
+    "ordinary_practice_enablement_or_product_command",
+    "historical_product_patient_clinical_or_protected_data",
+    "provider_credentials_network_deployment_release_pages_or_protected_refs"
+  ]
+}
