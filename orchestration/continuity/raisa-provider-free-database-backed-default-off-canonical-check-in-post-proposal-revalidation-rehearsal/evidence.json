@@ -1,0 +1,92 @@
+{
+  "schema_version": "raisa.check_in_post_proposal_revalidation_evidence.v1",
+  "operation_id": "raisa-provider-free-database-backed-default-off-canonical-check-in-post-proposal-revalidation-rehearsal",
+  "recorded_at": "2026-08-24T18:00:02.9645865+10:00",
+  "result": "raisa_provider_free_database_backed_check_in_post_proposal_revalidation_pass",
+  "exact_reviewed_candidate": "c6365f53b7edd902d31b370a321ebc8bf9427185",
+  "scenario_count": 2,
+  "scenarios": [
+    {
+      "id": "current_receptionist_role_revoked_after_proposal",
+      "proposal_safe": true,
+      "persisted_intervening_change": "user_role_admin",
+      "confirmation_http_status": 403,
+      "confirmation_detail": "Insufficient permissions",
+      "appointment_status_after": "Booked",
+      "persisted_row_counts": {
+        "audit": 0,
+        "committed_event": 0,
+        "completed_idempotency": 0
+      },
+      "verdict": "current_authority_revalidated_fail_closed"
+    },
+    {
+      "id": "selected_waiting_area_deactivated_after_proposal",
+      "proposal_safe": true,
+      "persisted_intervening_change": "waiting_area_inactive",
+      "confirmation_http_status": 200,
+      "confirmation_safe": false,
+      "block_codes": [
+        "waiting_area_not_active"
+      ],
+      "signed_evidence_verified_before_current_truth_denial": true,
+      "appointment_status_after": "Booked",
+      "appointment_waiting_area_after": null,
+      "waiting_area_active_after": false,
+      "persisted_row_counts": {
+        "audit": 0,
+        "committed_event": 0,
+        "completed_idempotency": 0
+      },
+      "verdict": "current_waiting_area_truth_revalidated_fail_closed"
+    }
+  ],
+  "source_bindings": [
+    {
+      "path": "tests/test_model_required_bureau_a5_1_check_in_runtime.py",
+      "git_blob": "5a17e3ad3110baa0dfe9dd43619641305deb2fd0",
+      "sha256": "c99782bef15482347b8cc983db8323d89d68c8bf8467053f94af009b6be6b2ca",
+      "changed": true
+    },
+    {
+      "path": "app/routers/appointments.py",
+      "git_blob": "d14cc8805edab8a29a3fda9f2213668c84b54821",
+      "sha256": "8443bc1d045672f05567a5cb6443a882dfda4946791412c231ce475995f71d08",
+      "changed": false
+    },
+    {
+      "path": "app/services/appointment_check_in_product_adapter.py",
+      "git_blob": "6955dec2e31e14c0ae4847acba22f9fb0087715b",
+      "sha256": "ef6abdfef1b99737c527790be007ab07296bbc0422197858a5ae561012230570",
+      "changed": false
+    },
+    {
+      "path": "app/config.py",
+      "git_blob": "d0cbcd76f7a59bd93c472eccc0e390aaa4d62976",
+      "sha256": "f0cafc21a88babd0d60d6ce30067a30d23b4030ad5dd4d26bb841096c62c1f2e",
+      "changed": false
+    }
+  ],
+  "verification": {
+    "focused_post_rehydration_tests_passed": 2,
+    "committed_serial_profile_collected": 207,
+    "committed_serial_profile_passed": 207,
+    "ruff": "passed",
+    "compileall": "passed",
+    "git_diff_check": "passed",
+    "product_and_api_spine_diff": "empty"
+  },
+  "closed_boundaries": {
+    "default_feature_flag_changed": false,
+    "synthetic_practice_allowlist_default_changed": false,
+    "request_response_or_status_contract_changed": false,
+    "generic_status_arrived_changed": false,
+    "action_grammar_client_or_waiting_area_movement_changed": false,
+    "historical_trove_data_accessed": false,
+    "provider_model_or_external_network_used": false,
+    "product_patient_clinical_or_protected_data_used": false,
+    "ordinary_practice_enabled": false,
+    "production_deployment_release_pages_or_protected_ref_moved": false
+  },
+  "claim_ceiling": "two_authored_synthetic_database_backed_default_off_http_route_post_proposal_revalidation_witnesses_only"
+}

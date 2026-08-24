@@ -1,0 +1,24 @@
+{
+  "schema_version": "ariadne.prepublication_contained_lapses.v1",
+  "operation_id": "raisa-provider-free-database-backed-default-off-canonical-check-in-post-proposal-revalidation-rehearsal",
+  "recorded_at": "2026-08-24T18:00:02.9645865+10:00",
+  "lapses": [
+    {
+      "id": "serial_test_profile_path_selection",
+      "stage": "deterministic_verification",
+      "observed": "One precommit invocation named a nonexistent appointment-confirmation matrix path. One postcommit invocation reused stale inferred route, adapter and OpenAPI filenames and stopped on the first missing route path.",
+      "effect": "Both invocations stopped during collection before any test executed; the shared lock was released and no product, database, provider, Git or protected state changed.",
+      "correction": "The exact seven-file manifest was rebuilt from rg --files and then collected and passed all 207 tests serially.",
+      "prevention": "Retain the exact passing profile paths in evidence instead of reconstructing historical filenames from prose or memory."
+    },
+    {
+      "id": "semantic_admission_projection_display",
+      "stage": "clockwork_semantic_admission_check",
+      "observed": "The semantic intent admitted successfully twice, but two diagnostic display wrappers then assumed nonexistent top-level output keys.",
+      "effect": "Only the optional display wrapper failed after validation; no file, Git, runtime, clockwork or protected state changed.",
+      "correction": "Inspect top-level keys first, then read operation and successor from transaction_manifest; the semantic intent itself remained admitted.",
+      "prevention": "Use the validator's typed transaction-manifest projection instead of guessing result coordinates."
+    }
+  ],
+  "open_lapse_count": 0
+}

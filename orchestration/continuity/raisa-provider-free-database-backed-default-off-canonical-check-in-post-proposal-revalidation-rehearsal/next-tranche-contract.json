@@ -1,0 +1,25 @@
+{
+  "schema_version": "raisa.waiting_area_movement_readiness_successor_contract.v1",
+  "operation_id": "raisa-provider-free-read-only-waiting-area-movement-command-family-readiness-review",
+  "recorded_at": "2026-08-24T18:00:02.9645865+10:00",
+  "status": "frozen_provider_free_read_only_successor",
+  "builds_on": {
+    "exact_reviewed_candidate": "c6365f53b7edd902d31b370a321ebc8bf9427185",
+    "closed_check_in_temporal_gap_count": 2
+  },
+  "objective": "Read only the accepted appointment, check-in, status and waiting-area source/evidence surfaces to identify the narrowest canonical proposal-confirm command boundary for explicit waiting-area movement without overlapping check-in or general status.",
+  "acceptance": {
+    "canonical_current_truth_owner_identified": true,
+    "existing_route_contracts_and_gaps_classified": true,
+    "strict_non_overlap_with_check_in_and_general_status_frozen": true,
+    "no_product_source_or_api_spine_change": true,
+    "no_runtime_database_provider_or_historical_data_execution": true
+  },
+  "authority": {
+    "repository_read_only": true,
+    "ordinary_practice_activation": false,
+    "product_patient_clinical_or_protected_data": false,
+    "production_deployment_release_pages_or_protected_ref_movement": false
+  },
+  "claim_ceiling": "provider_free_repository_static_waiting_area_movement_command_family_readiness_only"
+}

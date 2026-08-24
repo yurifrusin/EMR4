@@ -1,0 +1,119 @@
+{
+  "schema_version": "ariadne.governance_semantic_closeout_intent.v1",
+  "profile": "provider_free_governance_tooling_v1",
+  "artifact_slug": "raisa-provider-free-database-backed-default-off-canonical-check-in-post-proposal-revalidation-rehearsal",
+  "recorded_at": "2026-08-24T18:00:02.9645865+10:00",
+  "closeout": {
+    "operation_id": "raisa-provider-free-database-backed-default-off-canonical-check-in-post-proposal-revalidation-rehearsal",
+    "title": "Raisa provider-free database-backed default-off canonical check-in post-proposal revalidation rehearsal",
+    "builds_on": [
+      "raisa-provider-free-read-only-authored-synthetic-time-ordered-canonical-check-in-context-operational-evidence-gap-review"
+    ],
+    "authority_notes": [
+      "Yuri's uninterrupted-development authority applies to the accepted two-transition successor; authored-synthetic local HTTP/PostgreSQL evidence only."
+    ],
+    "decisions": [
+      {
+        "id": "accept-two-post-proposal-revalidation-witnesses",
+        "source": "orchestration/continuity/raisa-provider-free-database-backed-default-off-canonical-check-in-post-proposal-revalidation-rehearsal/evidence.json",
+        "summary": "Accept exact candidate c6365f53b7edd902d31b370a321ebc8bf9427185: current Receptionist revocation and selected waiting-area deactivation both fail closed with zero command effects."
+      },
+      {
+        "id": "advance-to-waiting-area-movement-readiness",
+        "source": "orchestration/continuity/raisa-provider-free-database-backed-default-off-canonical-check-in-post-proposal-revalidation-rehearsal/next-tranche-contract.json",
+        "summary": "Close the targeted check-in temporal gap and inspect the still-separate waiting-area movement command family without product changes."
+      }
+    ],
+    "claim_scope": [
+      "Two authored-synthetic database-backed default-off HTTP-route post-proposal revalidation witnesses pass against unchanged product source."
+    ],
+    "additional_receipts": [
+      "orchestration/agent_inbox/codex/raisa-provider-free-database-backed-default-off-canonical-check-in-post-proposal-revalidation-rehearsal-pre-verifier-receipt.json",
+      "orchestration/continuity/raisa-provider-free-database-backed-default-off-canonical-check-in-post-proposal-revalidation-rehearsal/closeout/prepublication-contained-lapses.json",
+      "orchestration/continuity/raisa-provider-free-database-backed-default-off-canonical-check-in-post-proposal-revalidation-rehearsal/closeout/pushover-notification-receipt.json"
+    ],
+    "additional_artifacts": [
+      "docs/ariadne-agent-error-correction-register-revision-668.md",
+      "docs/raisa-provider-free-database-backed-default-off-canonical-check-in-post-proposal-revalidation-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-provider-free-database-backed-default-off-canonical-check-in-post-proposal-revalidation-rehearsal-pre-verifier-continuation-intent.json",
+      "orchestration/agent_inbox/codex/raisa-provider-free-database-backed-default-off-canonical-check-in-post-proposal-revalidation-rehearsal-sol-acceptance.md",
+      "orchestration/continuity/raisa-provider-free-database-backed-default-off-canonical-check-in-post-proposal-revalidation-rehearsal/efficacy-reading.json",
+      "orchestration/continuity/raisa-provider-free-database-backed-default-off-canonical-check-in-post-proposal-revalidation-rehearsal/next-tranche-contract.json",
+      "orchestration/human_inbox/yuri/2026-08-24--raisa-provider-free-database-backed-default-off-canonical-check-in-post-proposal-revalidation-rehearsal.md"
+    ],
+    "unresolved_gates": [
+      "Ordinary-practice admission, live environment facts, feature activation, product data, providers, production and protected refs remain closed."
+    ],
+    "journey": {
+      "strategic_role": "Turn the two useful in-memory temporal gaps into exact database-backed route assurance without expanding the product.",
+      "outcome": "Both transitions already fail closed; no product repair or further canonical check-in temporal rehearsal is justified."
+    },
+    "current_position": {
+      "strategic_role": "Advance Rayleen's remaining deterministic command architecture beyond check-in and general status.",
+      "why_now": "Explicit waiting-area movement remains the missing separate command family named in the Phase 4 architecture.",
+      "outcome": "A read-only source and evidence review will identify the narrowest canonical movement boundary or exact blockers.",
+      "unlocks": [
+        "A bounded implementation decision for explicit waiting-area movement without overlapping check-in or status."
+      ],
+      "does_not_solve": [
+        "No movement route, client, runtime, ordinary activation or production capability is opened."
+      ],
+      "orientation_statement": "Move to the next missing Rayleen command family instead of adding another check-in evidence loop."
+    },
+    "next_operation": {
+      "operation_id": "raisa-provider-free-read-only-waiting-area-movement-command-family-readiness-review",
+      "active_tranche": "Raisa provider-free read-only waiting-area movement command-family readiness review",
+      "objective": "Read only the accepted appointment, check-in, status and waiting-area source/evidence surfaces to identify the narrowest canonical proposal-confirm command boundary for explicit waiting-area movement without overlapping check-in or general status.",
+      "authority_source": "Yuri's uninterrupted-development authority applied to the accepted provider-free read-only Rayleen successor.",
+      "next_stage": "fresh_five_source_rehydration_then_freeze_read_only_waiting_area_movement_readiness_review_plan"
+    }
+  },
+  "verification_profile": "governance_clockwork_core_v1",
+  "baton_slot": "current_deepseek_native_harness_acceptance",
+  "next_operation_protected_boundaries": [
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only",
+    "authored_synthetic_repository_test_data_only",
+    "no_product_patient_appointment_clinical_or_protected_data",
+    "no_historical_data_access",
+    "no_provider_model_or_external_network"
+  ],
+  "agent_error_observations": [
+    {
+      "attempt_key": "check-in-post-proposal-revalidation-profile-paths-001",
+      "observed_on": "2026-08-24",
+      "tranche": "check-in-post-proposal-revalidation-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "verification-path-and-projection-manifests",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_powershell_python_pytest_git",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Every serial assurance invocation uses exact existing test paths and every diagnostic display reads the validator's typed projection rather than inferred coordinates.",
+      "observed_error": "Two invocations reconstructed historical filenames and stopped at collection; two later display wrappers assumed nonexistent top-level keys after the semantic validator had already passed.",
+      "detection_method": "Pytest file discovery exposed the missing paths; KeyError exposed the display assumptions; rg --files and top-level key inspection then supplied exact manifests.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-database-backed-default-off-canonical-check-in-post-proposal-revalidation-rehearsal/closeout/prepublication-contained-lapses.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.verification.manifest-and-projection-shape-assumptions",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Bind and reuse the exact seven-file path manifest and the validator's typed transaction-manifest projection; inspect before any later shape change.",
+        "prevention_control": "The exact collected 207-test manifest and admitted typed projection are recorded before clockwork rehearsal.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-provider-free-database-backed-default-off-canonical-check-in-post-proposal-revalidation-rehearsal/closeout/prepublication-contained-lapses.json"
+        ]
+      },
+      "baton_summary": "records four contained path/projection-shape assumptions as one bounded workflow incident."
+    }
+  ]
+}

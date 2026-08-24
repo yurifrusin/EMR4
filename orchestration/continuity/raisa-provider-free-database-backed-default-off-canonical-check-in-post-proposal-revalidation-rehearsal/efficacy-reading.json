@@ -1,0 +1,32 @@
+{
+  "schema_version": "ariadne.tranche_efficacy_reading.v1",
+  "operation_id": "raisa-provider-free-database-backed-default-off-canonical-check-in-post-proposal-revalidation-rehearsal",
+  "recorded_at": "2026-08-24T18:00:02.9645865+10:00",
+  "planned_worker_mix": {
+    "deepseek": "declined_negative",
+    "gemini": "not_applicable_neutral",
+    "native_subagents": "declined_negative",
+    "serial_owner": "gpt_sol"
+  },
+  "actual_worker_mix": {
+    "deepseek_dispatches": 0,
+    "gemini_dispatches": 0,
+    "native_subagent_dispatches": 0,
+    "serial_owner": "gpt_sol"
+  },
+  "productive_result": {
+    "new_database_backed_route_witnesses": 2,
+    "product_defects_exposed": 0,
+    "product_source_files_changed": 0,
+    "test_source_files_changed": 1,
+    "committed_profile_tests_passed": 207
+  },
+  "workflow_cost": {
+    "startup_only_missing_test_path_stops": 2,
+    "post_validation_projection_display_stops": 2,
+    "provider_or_worker_cost": 0,
+    "product_or_runtime_side_effects_from_lapses": 0,
+    "bounded_rerun_required": true
+  },
+  "conclusion": "Serial Sol ownership was efficient for the shared database slice; external dispatch would have added coordination without independent acceptance value. Exact test-path and typed-projection manifests remain the ergonomic controls to retain."
+}
