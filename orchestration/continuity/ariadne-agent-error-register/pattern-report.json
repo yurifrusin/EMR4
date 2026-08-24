@@ -1,16 +1,16 @@
 {
   "schema_version": "ariadne.agent-error-pattern-report.v1",
-  "register_revision": 660,
+  "register_revision": 661,
   "source_cutoff_on": "2026-08-24",
   "coverage": "bounded_known_preserved_incidents",
-  "canonical_register_sha256": "b17bfc238d476c0a77e90ac2a25fb420fe22846e04761b9a322088a260db7d61",
-  "incident_count": 1151,
+  "canonical_register_sha256": "d142916f8caad172141f60bc2e5016924a18eb2e896bc6b25f05eeeab8676f49",
+  "incident_count": 1153,
   "open_incident_ids": [],
   "counts": {
     "by_origin": {
       "agent_behavior": 613,
       "harness": 73,
-      "operator": 293,
+      "operator": 295,
       "repository": 156,
       "transport": 16
     },
@@ -18,7 +18,7 @@
       "command_scope_violation": 111,
       "evidence_misreport": 80,
       "harness_failure": 73,
-      "operator_error": 293,
+      "operator_error": 295,
       "output_contract_violation": 367,
       "read_only_violation": 5,
       "reasoning_claim_error": 50,
@@ -28,17 +28,17 @@
     "by_role": {
       "implementer": 92,
       "integration_reviewer": 5,
-      "orchestrator": 991,
+      "orchestrator": 993,
       "verifier": 63
     },
     "by_process_severity": {
-      "low": 761,
+      "low": 763,
       "material": 135,
       "moderate": 255
     },
     "by_candidate_state": {
       "accepted_candidate_changed": 237,
-      "canonical_unchanged": 730,
+      "canonical_unchanged": 732,
       "untrusted_partial_worktree": 184
     },
     "by_resource_and_role": {
@@ -346,6 +346,7 @@
       "historical-latch-test-selection::orchestrator": 1,
       "historical-source-binding-test-selection::orchestrator": 1,
       "implementation-file-hash-readback::orchestrator": 1,
+      "incident-revision-reading::orchestrator": 1,
       "inherited-attempt-004-tests::orchestrator": 1,
       "inherited-provider-free-regression-selection::orchestrator": 1,
       "isolated-root-service-focused-source-binding-test::orchestrator": 1,
@@ -454,6 +455,7 @@
       "prelaunch-composite-readback-command::orchestrator": 1,
       "preplanning-adapter-inventory::orchestrator": 1,
       "preplanning-continuation-event::orchestrator": 1,
+      "preplanning-evidence-path::orchestrator": 1,
       "preplanning-git-ref-prose-binding::orchestrator": 1,
       "preplanning-latch-and-git-evidence::orchestrator": 1,
       "preplanning-orchestrator-receipt::orchestrator": 1,

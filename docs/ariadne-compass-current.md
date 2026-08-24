@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> Connect the gate to the clockwork before first use.
+> Turn the new gear once under the exact digest-bound gate.
 
 ## North star
 
@@ -676,22 +676,24 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    The strict leading clock produced one contained useful candidate from the fixed private slice. Lineage parent: `raisa-provider-free-authored-synthetic-historical-diary-leading-explicit-time-token-recovery-rehearsal`.
 330. **Turn historical first use from a prose judgment into a deterministic control. — Raisa provider-free historical-derived scenario first-use candidate gate evaluator rehearsal**
    The exact write-free typed evaluator passes without private or provider access. Lineage parent: `raisa-local-only-historical-diary-leading-explicit-time-token-bounded-measurement-rehearsal`.
+331. **Connect the deterministic first-use gate to the repository clock without prose authority. — Raisa provider-free governance clockwork historical-derived first-use materialisation subgate rehearsal**
+   One byte-bound mutually exclusive materialisation form now passes. Lineage parent: `raisa-provider-free-historical-derived-scenario-first-use-candidate-gate-evaluator-rehearsal`.
 
 ## Current position
 
-**Make one controlled first-use write representable without weakening the existing measurement mode. — Raisa provider-free historical-derived scenario first-use candidate gate evaluator rehearsal**
+**Exercise the new form exactly once on the bounded local source. — Raisa provider-free governance clockwork historical-derived first-use materialisation subgate rehearsal**
 
-**Why this proof came next:** The gate passes but the live historical mode correctly forbids fixture writes.
+**Why this proof came next:** The gate and its clockwork authority representation both pass.
 
-One new closed clockwork subgate can precede the actual materialiser.
+One admitted ignored local-test fixture or a clean zero-write terminal.
 
 ### What this unlocks
 
-- One later local-only no-retry exact-gate materialisation attempt.
+- Evidence-led check-in scenario development from one minimised structural fixture.
 
 ### What it does not solve
 
-- No archive access, fixture write, product, provider or production authority opens.
+- No product, ordinary-practice, provider or real-practice validity opens.
 
 ## Continuity and authority
 
@@ -1677,7 +1679,8 @@ Prerequisites:
 - `docs/raisa-provider-free-globally-disabled-runtime-instrumentation-scaffold-closeout.md`
 - `docs/raisa-provider-free-globally-disabled-runtime-instrumentation-scaffold-design.md`
 - `docs/raisa-provider-free-globally-disabled-runtime-instrumentation-scaffold-plan.md`
-- `docs/raisa-provider-free-historical-derived-scenario-first-use-candidate-gate-evaluator-rehearsal-closeout.md`
+- `docs/raisa-provider-free-governance-clockwork-historical-derived-first-use-materialisation-subgate-rehearsal-closeout.md`
+- `docs/raisa-provider-free-governance-clockwork-historical-derived-first-use-materialisation-subgate-rehearsal-plan.md`
 - `docs/raisa-provider-free-historical-derived-scenario-first-use-candidate-gate-evaluator-rehearsal-plan.md`
 - `docs/raisa-provider-free-office-cross-surface-replay-isolation-closeout.md`
 - `docs/raisa-provider-free-office-cross-surface-replay-isolation-plan.md`
@@ -2523,7 +2526,7 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-provider-free-disposable-postgresql-status-confirm-scaffold-parse-catalogue-precommit-runtime-state.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-disposable-postgresql-status-confirm-scaffold-parse-catalogue-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-disposable-postgresql-status-confirm-scaffold-parse-catalogue-preplanning-runtime-state.json`
-- `orchestration/agent_inbox/codex/raisa-provider-free-historical-derived-scenario-first-use-candidate-gate-evaluator-rehearsal-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-provider-free-governance-clockwork-historical-derived-first-use-materialisation-subgate-rehearsal-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-provider-free-office-directory-lifecycle-descendants-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-provider-free-ordinary-fallback-client-proposal-confirm-parity-precommit-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-ordinary-fallback-client-proposal-confirm-parity-preplanning-receipt.json`
@@ -3179,7 +3182,8 @@ Prerequisites:
 - `orchestration/continuity/raisa-provider-free-disposable-postgresql-status-confirm-scaffold-parse-catalogue-rehearsal/rehearsal-contract.schema.json`
 - `orchestration/continuity/raisa-provider-free-docker-created-state-profile-conformance-repair/created-state-representation-evidence.json`
 - `orchestration/continuity/raisa-provider-free-docker-created-state-profile-conformance-repair/repair-attestation.json`
-- `orchestration/continuity/raisa-provider-free-historical-derived-scenario-first-use-candidate-gate-evaluator-rehearsal/evidence.json`
+- `orchestration/continuity/raisa-provider-free-governance-clockwork-historical-derived-first-use-materialisation-subgate-rehearsal/evidence.json`
+- `orchestration/continuity/raisa-provider-free-governance-clockwork-historical-derived-first-use-materialisation-subgate-rehearsal/report.md`
 - `orchestration/continuity/raisa-provider-free-historical-derived-scenario-first-use-candidate-gate-evaluator-rehearsal/report.md`
 - `orchestration/continuity/raisa-provider-free-office-directory-lifecycle-descendants/provider-free-acceptance-evidence.json`
 - `orchestration/continuity/raisa-provider-free-office-practitioner-directory-consumer/live-office-backend-postgres-evidence.json`
@@ -4013,4 +4017,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 435; continuity graph revision 453._
+_Compass map revision 436; continuity graph revision 454._

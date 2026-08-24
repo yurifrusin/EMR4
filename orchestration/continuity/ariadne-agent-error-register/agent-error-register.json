@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 660,
+  "register_revision": 661,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-24",
@@ -44267,6 +44267,78 @@
       "incident_id": "AER-1151",
       "attempt_id": "clock-c17892d1eea1f67a6d72ba6d",
       "origin": "repository",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-24",
+      "tranche": "historical-first-use-clockwork-subgate",
+      "role": "orchestrator",
+      "resource_id": "preplanning-evidence-path",
+      "model": "gpt-sol",
+      "reasoning_level": "extra_high",
+      "transport": "local_repository_clockwork",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Continuation evidence paths use authority and evidence-document roots only.",
+      "observed_error": "The first intent included one code root and one test root.",
+      "detection_method": "The receipt builder rejected serial_continuation_evidence_path_root_forbidden before planning.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-governance-clockwork-historical-derived-first-use-materialisation-subgate-rehearsal/closeout/prepublication-contained-lapses.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.continuation_evidence_paths_require_document_roots",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Remove implementation and test roots from active evidence paths.",
+        "prevention_control": "Use authority and evidence-document roots in continuation intents.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-661.md",
+          "orchestration/continuity/raisa-provider-free-governance-clockwork-historical-derived-first-use-materialisation-subgate-rehearsal/evidence.json"
+        ]
+      },
+      "incident_id": "AER-1152",
+      "attempt_id": "clock-02dce3076adf0d7b04615910",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-24",
+      "tranche": "historical-first-use-clockwork-subgate",
+      "role": "orchestrator",
+      "resource_id": "incident-revision-reading",
+      "model": "gpt-sol",
+      "reasoning_level": "extra_high",
+      "transport": "local_repository_clockwork",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "The incident revision note includes the exact machine-readable prospective register reading.",
+      "observed_error": "Revision 661 initially omitted the required revision count IDs and open-count comment.",
+      "detection_method": "The first bound rehearsal rejected tick_incident_revision_reading and one direct tick identified the validator.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-governance-clockwork-historical-derived-first-use-materialisation-subgate-rehearsal/closeout/prepublication-contained-lapses.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.incident_revision_requires_machine_readable_prospective_reading",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Add the exact prospective register reading comment before rehearsal.",
+        "prevention_control": "Build revision comments from the executable incident-artifact validator shape.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-661.md",
+          "orchestration/continuity/raisa-provider-free-governance-clockwork-historical-derived-first-use-materialisation-subgate-rehearsal/evidence.json"
+        ]
+      },
+      "incident_id": "AER-1153",
+      "attempt_id": "clock-3385f291af6392c5a84ad02f",
+      "origin": "operator",
       "related_incident_ids": [],
       "status": "corrected"
     }

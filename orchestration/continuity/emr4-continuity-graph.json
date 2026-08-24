@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 453,
+  "graph_revision": 454,
   "harvests": [],
   "nodes": [
     {
@@ -36721,9 +36721,93 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "raisa-provider-free-governance-clockwork-historical-derived-first-use-materialisation-subgate-rehearsal",
+      "title": "Raisa provider-free governance clockwork historical-derived first-use materialisation subgate rehearsal",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-historical-derived-scenario-first-use-candidate-gate-evaluator-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri delegated gate timing; accept only the closed clockwork representation and continue to the separately frozen one-run local attempt."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-exact-eight-member-materialisation-mode",
+          "source": "orchestration/continuity/raisa-provider-free-governance-clockwork-historical-derived-first-use-materialisation-subgate-rehearsal/evidence.json",
+          "status": "accepted",
+          "summary": "Accept reviewed source f3bb82b872873c1f1c6b58a31e3a008aac2a9d1f after 6 focused and 131 surrounding controls pass."
+        },
+        {
+          "id": "preserve-boundaries-and-continue-to-one-local-attempt",
+          "source": "orchestration/continuity/raisa-provider-free-governance-clockwork-historical-derived-first-use-materialisation-subgate-rehearsal/next-tranche-contract.json",
+          "status": "accepted",
+          "summary": "The non-transitive zero-write boundary remains; one bind, one run and no retry may create one exact admitted local-test fixture or nothing."
+        }
+      ],
+      "claim_scope": [
+        "The clockwork can represent one exact future authority mode; candidate quality, private access and fixture behavior remain unproved."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-governance-clockwork-historical-derived-first-use-materialisation-subgate-rehearsal-plan.md",
+          "docs/security/raisa-provider-free-governance-clockwork-historical-derived-first-use-materialisation-subgate-rehearsal-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-provider-free-governance-clockwork-historical-derived-first-use-materialisation-subgate-rehearsal/evidence.json",
+          "orchestration/continuity/raisa-provider-free-governance-clockwork-historical-derived-first-use-materialisation-subgate-rehearsal/report.md",
+          "orchestration/continuity/raisa-provider-free-governance-clockwork-historical-derived-first-use-materialisation-subgate-rehearsal/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-governance-clockwork-historical-derived-first-use-materialisation-subgate-rehearsal-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-24--raisa-provider-free-governance-clockwork-historical-derived-first-use-materialisation-subgate-rehearsal.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-governance-clockwork-historical-derived-first-use-materialisation-subgate-rehearsal-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-governance-clockwork-historical-derived-first-use-materialisation-subgate-rehearsal-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-governance-clockwork-historical-derived-first-use-materialisation-subgate-rehearsal-pre-verifier-receipt.json",
+          "orchestration/continuity/raisa-provider-free-governance-clockwork-historical-derived-first-use-materialisation-subgate-rehearsal/closeout/prepublication-contained-lapses.json",
+          "orchestration/continuity/raisa-provider-free-governance-clockwork-historical-derived-first-use-materialisation-subgate-rehearsal/closeout/pushover-notification-receipt.json"
+        ],
+        "tests": [
+          "tests/test_current_baton_consistency.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_transactional_closeout.py"
+        ],
+        "artifacts": [
+          "orchestration_harness/governance_clockwork_tick.py",
+          "scripts/ariadne_governance_clockwork_closeout.py",
+          "scripts/ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "orchestration/continuity/raisa-provider-free-governance-clockwork-historical-derived-first-use-materialisation-subgate-rehearsal/next-tranche-contract.json"
+        ]
+      },
+      "unresolved_gates": [
+        "Actual candidate evaluation, fixture materialisation, downstream scenario use and every product/provider/protected surface remain gated."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-24T10:49:51.2828508+10:00",
+      "updated_at": "2026-08-24T10:49:51.2828508+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "85ea931cd1a743f8d1fd2dff077c09d2d8fc1182",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-24T10:07:35.8928123+10:00"
+  "updated_at": "2026-08-24T10:49:51.2828508+10:00"
 }
