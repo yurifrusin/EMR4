@@ -1,0 +1,106 @@
+{
+  "schema_version": "raisa.authored_synthetic_time_ordered_check_in_context_scenario_contract.v1",
+  "operation_id": "raisa-provider-free-authored-synthetic-time-ordered-canonical-check-in-context-branch-composition-rehearsal",
+  "recorded_at": "2026-08-24T15:55:06.2330342+10:00",
+  "status": "frozen_minimum_pairwise_provider_free_rehearsal",
+  "exact_bindings": {
+    "planning_baseline": "d9114b3e9a72fa94acc0a7ab3657f17043c6be0a",
+    "accepted_predecessor_review_source": "0f6c091935f172351972f349db8cc5c1ec72d5dc",
+    "successor_axis_contract_sha256": "dc74a5373a670aca52f804436e33be70a10d60ac96dd46508a58b09fd2ca778f",
+    "adapter_git_blob": "6955dec2e31e14c0ae4847acba22f9fb0087715b",
+    "accepted_adapter_test_git_blob": "97bcfc3725f4df9495333779c75c41d798eeae87",
+    "protected_ref_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+  },
+  "axis_families": {
+    "source_and_waiting_area_transition": [
+      "eligible_none",
+      "eligible_assign_valid",
+      "eligible_preserve_valid",
+      "intervening_state_change_rejected",
+      "intervening_area_topology_change_rejected"
+    ],
+    "authority_evidence_and_freshness_transition": [
+      "unchanged_valid",
+      "actor_revoked",
+      "evidence_invalidated",
+      "proposal_stale_after_intervening_update"
+    ],
+    "idempotency_and_outcome_transition": [
+      "first_execution",
+      "exact_replay",
+      "conflict_or_in_progress",
+      "precommit_failure",
+      "commit_outcome_unknown",
+      "committed_readback_unavailable"
+    ]
+  },
+  "authority_axis_matrix_by_source_row_and_outcome_column": [
+    [0, 0, 0, 1, 2, 3],
+    [0, 0, 1, 0, 3, 2],
+    [1, 1, 2, 3, 0, 0],
+    [2, 2, 0, 0, 1, 3],
+    [3, 3, 3, 2, 0, 1]
+  ],
+  "pairwise_proof": {
+    "scenario_count": 30,
+    "full_cross_product_count": 120,
+    "required_cross_family_pair_count": 74,
+    "lower_bound_basis": "every_5_value_source_axis_member_must_pair_with_every_6_value_outcome_axis_member",
+    "every_source_outcome_pair_appears_exactly_once": true,
+    "every_matrix_row_contains_all_authority_values": true,
+    "every_matrix_column_contains_all_authority_values": true,
+    "removing_any_scenario_loses_its_unique_source_outcome_pair": true
+  },
+  "unmasked_witness_cells": {
+    "eligible_none": [0, 0],
+    "eligible_assign_valid": [1, 3],
+    "eligible_preserve_valid": [2, 4],
+    "intervening_state_change_rejected": [3, 3],
+    "intervening_area_topology_change_rejected": [4, 4],
+    "unchanged_valid": [0, 0],
+    "actor_revoked": [2, 0],
+    "evidence_invalidated": [0, 4],
+    "proposal_stale_after_intervening_update": [2, 3],
+    "first_execution": [0, 0],
+    "exact_replay": [0, 1],
+    "conflict": [0, 2],
+    "in_progress": [1, 2],
+    "precommit_failure": [1, 3],
+    "commit_outcome_unknown": [2, 4],
+    "committed_readback_unavailable": [2, 5]
+  },
+  "scenario_phase_order": [
+    "create_authored_synthetic_initial_state",
+    "freeze_confirmation_and_freshness",
+    "apply_declared_intervening_changes",
+    "invoke_unchanged_unmounted_adapter",
+    "compare_typed_result_callback_boundary_and_readback",
+    "emit_patient_free_structural_evidence"
+  ],
+  "adapter_precedence": [
+    "exact_replay_or_idempotency_stop",
+    "locked_appointment_source_state",
+    "current_actor_reauthorization",
+    "proposal_freshness",
+    "signed_evidence",
+    "waiting_area_topology",
+    "precommit_composition",
+    "commit_outcome",
+    "committed_readback"
+  ],
+  "evidence_rules": {
+    "authored_synthetic_only": true,
+    "masked_axes_reported_separately": true,
+    "patient_shaped_or_secret_values_forbidden": true,
+    "historical_occurrence_or_frequency_claim_forbidden": true,
+    "durable_database_claim_forbidden": true
+  },
+  "closed_boundaries": {
+    "historical_fixture_control_archive_or_local_data_access": false,
+    "product_adapter_route_schema_database_client_runtime_or_configuration_change": false,
+    "provider_model_network_or_external_release": false,
+    "ordinary_practice_activation": false,
+    "production_deployment_release_pages_or_protected_ref_movement": false
+  },
+  "claim_ceiling": "minimum_pairwise_authored_synthetic_in_memory_adapter_composition_and_precedence_only"
+}

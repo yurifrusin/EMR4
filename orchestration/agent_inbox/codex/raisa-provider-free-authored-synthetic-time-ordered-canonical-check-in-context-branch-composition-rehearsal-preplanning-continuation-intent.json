@@ -1,0 +1,16 @@
+{
+  "schema_version": "ariadne.serial_continuation_intent.v1",
+  "preset": "provider_free_serial_observed_empty_workers",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "freeze_minimum_pairwise_time_ordered_authored_synthetic_check_in_context_scenario_plan",
+  "assessed_stage": "authored_synthetic_time_ordered_check_in_context_branch_composition_preplanning",
+  "active_evidence_paths": [
+    "orchestration/continuity/raisa-provider-free-read-only-historical-derived-check-in-context-adapter-test-utility-gap-review/report.md",
+    "orchestration/continuity/raisa-provider-free-read-only-historical-derived-check-in-context-adapter-test-utility-gap-review/efficacy-reading.json",
+    "orchestration/continuity/raisa-provider-free-read-only-historical-derived-check-in-context-adapter-test-utility-gap-review/authored-synthetic-successor-axis-contract.json",
+    "docs/raisa-provider-free-read-only-historical-derived-check-in-context-adapter-test-utility-gap-review-closeout.md",
+    "orchestration/agent_inbox/codex/raisa-provider-free-read-only-historical-derived-check-in-context-adapter-test-utility-gap-review-sol-acceptance.md",
+    "orchestration/continuity/ariadne-active-operation-latch/current.json"
+  ],
+  "lane_decision_overrides": []
+}
