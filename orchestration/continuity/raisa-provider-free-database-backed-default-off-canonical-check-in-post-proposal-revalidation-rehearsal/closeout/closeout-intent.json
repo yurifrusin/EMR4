@@ -95,25 +95,25 @@
       "stage": "deterministic_verification",
       "category": "operator_error",
       "process_severity": "low",
-      "expected_invariant": "Every serial assurance invocation uses exact existing test paths and every diagnostic display reads the validator's typed projection rather than inferred coordinates.",
-      "observed_error": "Two invocations reconstructed historical filenames and stopped at collection; two later display wrappers assumed nonexistent top-level keys after the semantic validator had already passed.",
-      "detection_method": "Pytest file discovery exposed the missing paths; KeyError exposed the display assumptions; rg --files and top-level key inspection then supplied exact manifests.",
+      "expected_invariant": "Every serial assurance invocation uses exact test paths, every display reads the typed projection and every prospective register revision exists before clockwork execution.",
+      "observed_error": "Two invocations reconstructed historical filenames; two display wrappers assumed nonexistent keys; the first rehearsal and diagnostic verifier then encountered the same missing prospective revision document.",
+      "detection_method": "Pytest discovery exposed missing paths, KeyError exposed display assumptions and the clockwork's exact tick_incident_revision_reading rejection exposed the missing document.",
       "evidence_paths": [
         "orchestration/continuity/raisa-provider-free-database-backed-default-off-canonical-check-in-post-proposal-revalidation-rehearsal/closeout/prepublication-contained-lapses.json"
       ],
       "candidate_state": "canonical_unchanged",
       "workflow_disposition": "revision_required",
-      "recurrence_signature": "orchestrator.verification.manifest-and-projection-shape-assumptions",
+      "recurrence_signature": "orchestrator.verification.manifest-projection-and-register-shape-assumptions",
       "causal_claim_level": "observation_only",
       "correction": {
         "status": "control_added",
-        "action": "Bind and reuse the exact seven-file path manifest and the validator's typed transaction-manifest projection; inspect before any later shape change.",
-        "prevention_control": "The exact collected 207-test manifest and admitted typed projection are recorded before clockwork rehearsal.",
+        "action": "Bind and reuse the exact seven-file path manifest, typed transaction projection and prospective register-revision reading before clockwork execution.",
+        "prevention_control": "The 207-test manifest, admitted projection and exact revision 668 document are materialised before the corrected rehearsal.",
         "evidence_paths": [
           "orchestration/continuity/raisa-provider-free-database-backed-default-off-canonical-check-in-post-proposal-revalidation-rehearsal/closeout/prepublication-contained-lapses.json"
         ]
       },
-      "baton_summary": "records four contained path/projection-shape assumptions as one bounded workflow incident."
+      "baton_summary": "records five contained manifest/projection/register-shape lapses as one bounded workflow incident."
     }
   ]
 }

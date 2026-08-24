@@ -24,9 +24,10 @@
   "workflow_cost": {
     "startup_only_missing_test_path_stops": 2,
     "post_validation_projection_display_stops": 2,
+    "clockwork_missing_revision_artifact_stops": 2,
     "provider_or_worker_cost": 0,
     "product_or_runtime_side_effects_from_lapses": 0,
     "bounded_rerun_required": true
   },
-  "conclusion": "Serial Sol ownership was efficient for the shared database slice; external dispatch would have added coordination without independent acceptance value. Exact test-path and typed-projection manifests remain the ergonomic controls to retain."
+  "conclusion": "Serial Sol ownership was efficient for the shared database slice; external dispatch would have added coordination without independent acceptance value. Exact test-path, typed-projection and prospective register-revision manifests remain the ergonomic controls to retain."
 }

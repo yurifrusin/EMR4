@@ -18,6 +18,14 @@
       "effect": "Only the optional display wrapper failed after validation; no file, Git, runtime, clockwork or protected state changed.",
       "correction": "Inspect top-level keys first, then read operation and successor from transaction_manifest; the semantic intent itself remained admitted.",
       "prevention": "Use the validator's typed transaction-manifest projection instead of guessing result coordinates."
+    },
+    {
+      "id": "prospective_register_revision_materialisation",
+      "stage": "clockwork_rehearsal",
+      "observed": "The semantic intent named prospective register revision 668 before its required human revision document existed; the bound rehearsal and direct verifier both rejected the same missing artifact.",
+      "effect": "Both clockwork attempts failed closed before publication and left every governed surface byte-identical.",
+      "correction": "Materialise revision 668 with the exact prospective revision, incident count and AER-1162 machine reading before retry.",
+      "prevention": "Treat the incident revision document as a required semantic input, not a clockwork-generated output."
     }
   ],
   "open_lapse_count": 0

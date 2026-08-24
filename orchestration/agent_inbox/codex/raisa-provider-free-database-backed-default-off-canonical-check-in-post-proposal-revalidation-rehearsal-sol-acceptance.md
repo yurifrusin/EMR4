@@ -26,10 +26,10 @@ was not applicable because no product source changed and closed assertions
 fully decide acceptance. Native subagents had negative leverage at the same
 serial boundary. GPT Sol owned the two witnesses and verification.
 
-AER-1162 records two collection-time path misses and two post-validation
-diagnostic-display key assumptions as one contained manifest/projection-shape
-incident. The corrected exact manifests pass and no product/runtime state was
-affected.
+AER-1162 records two collection-time path misses, two post-validation display
+key assumptions and one omitted prospective register-revision dependency as
+one contained manifest/projection-shape incident. The corrected exact inputs
+pass and no product/runtime state was affected.
 
 The check-in temporal assurance gap is closed. One read-only waiting-area
 movement command-family readiness review may proceed without reopening any

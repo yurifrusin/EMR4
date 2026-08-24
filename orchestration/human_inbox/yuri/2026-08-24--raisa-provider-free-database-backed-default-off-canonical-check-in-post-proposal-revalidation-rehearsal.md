@@ -25,8 +25,9 @@ sanitised timing/provenance seed has produced no new product branch.
 - all 207 tests in the committed serial profile pass;
 - route, adapter, config and API Spine bytes are unchanged; and
 - one bounded manifest/projection-shape incident covers two pre-collection
-  filename misses and two harmless post-validation display assumptions; it is
-  contained in AER-1162.
+  filename misses, two harmless post-validation display assumptions and one
+  omitted prospective register note that caused two fail-closed clockwork
+  invocations; it is contained in AER-1162.
 
 ## Deliberately closed
 

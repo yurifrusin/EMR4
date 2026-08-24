@@ -39,10 +39,11 @@ GraphQL remains read-only and events remain non-actuating.
 ## Workflow reading
 
 One bounded manifest/projection-shape incident contains two startup-only test
-path misses and two post-validation diagnostic-display key assumptions. None
-changed runtime or product state. The exact seven-file passing manifest and
-typed transaction projection are now evidence-bound; AER-1162 records the
-incident.
+path misses, two post-validation diagnostic-display key assumptions and one
+prospective register-revision dependency omitted before two fail-closed
+clockwork invocations. None changed runtime or product state. The exact
+seven-file profile, typed transaction projection and prospective revision
+reading are now evidence-bound; AER-1162 records the incident.
 
 ## Continuing boundary
 
