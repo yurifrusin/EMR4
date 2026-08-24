@@ -1,0 +1,9 @@
+{
+  "schema_version": "ariadne.non_phi_pushover_closeout_receipt.v1",
+  "recorded_at": "2026-08-24T10:49:51.2828508+10:00",
+  "request_id": "c93d034a-872b-432f-8bd3-b586d1b363ab",
+  "delivery_status": 1,
+  "sprint": "Historical first-use clockwork subgate",
+  "continuing": "one local-only no-retry gate-wrapped minimised check-in scenario materialisation attempt",
+  "contains_phi": false
+}

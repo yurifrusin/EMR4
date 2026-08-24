@@ -1,0 +1,25 @@
+{
+  "schema_version": "raisa.governance_clockwork_historical_first_use_materialisation_subgate_efficacy.v1",
+  "recorded_at": "2026-08-24T10:49:51.2828508+10:00",
+  "reviewed_source": "f3bb82b872873c1f1c6b58a31e3a008aac2a9d1f",
+  "decision": "effective_closed_authority_representation",
+  "safety": {
+    "complete_mode_required": true,
+    "denial_measurement_and_materialisation_mutually_exclusive": true,
+    "contract_and_full_gate_source_byte_bound": true,
+    "non_admission_writes_nothing": true,
+    "written_bytes_digest_match_required": true,
+    "authority_non_transitive": true
+  },
+  "ergonomics": {
+    "future_intent_is_box_ticking_only": true,
+    "unknown_or_descriptive_historical_labels_possible": false,
+    "ambiguous_mixed_mode_possible": false,
+    "preplanning_receipt_rejections": 1,
+    "closeout_rehearsal_rejections": 1,
+    "read_only_diagnostic_ticks": 1,
+    "implementation_reruns": 0,
+    "publication_reruns": 0
+  },
+  "recommendation": "run_one_local_only_no_retry_exact_gate_wrapped_minimised_check_in_context_scenario_first_use_materialisation_attempt"
+}

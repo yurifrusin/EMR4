@@ -1,0 +1,26 @@
+{
+  "schema_version": "raisa.governance_clockwork_historical_first_use_materialisation_subgate_contained_lapses.v1",
+  "recorded_at": "2026-08-24T10:49:51.2828508+10:00",
+  "incidents": [
+    {
+      "incident_id": "AER-1152",
+      "attempt_key": "historical-first-use-clockwork-preplanning-evidence-path-001",
+      "reason": "serial_continuation_evidence_path_root_forbidden",
+      "contained_before_planning": true,
+      "implementation_rerun": false,
+      "private_or_provider_access": false,
+      "correction": "remove_code_and_test_roots_from_active_evidence_paths"
+    },
+    {
+      "incident_id": "AER-1153",
+      "attempt_key": "historical-first-use-clockwork-register-reading-001",
+      "reason": "tick_incident_revision_reading",
+      "contained_before_publication": true,
+      "bound_rehearsal_rejected": true,
+      "diagnostic_tick_count": 1,
+      "implementation_rerun": false,
+      "private_or_provider_access": false,
+      "correction": "add_exact_machine_readable_revision_count_ids_and_open_count"
+    }
+  ]
+}

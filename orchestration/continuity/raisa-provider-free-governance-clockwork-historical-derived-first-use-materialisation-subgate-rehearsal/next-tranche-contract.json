@@ -1,0 +1,65 @@
+{
+  "schema_version": "raisa.local_only_historical_derived_minimised_check_in_context_scenario_first_use_materialisation_contract.v1",
+  "status": "frozen_fail_closed_successor_contract",
+  "recorded_at": "2026-08-24T10:49:51.2828508+10:00",
+  "operation_id": "raisa-local-only-historical-derived-minimised-check-in-context-scenario-first-use-materialisation-rehearsal",
+  "builds_on_clockwork_source": "f3bb82b872873c1f1c6b58a31e3a008aac2a9d1f",
+  "candidate_gate_source": "abcd4206a363b0c565c070e0f2cb9c54d627b3b3",
+  "measurement_source": "a9e00638b960306766260d6df674c3489be58b86",
+  "clockwork_materialisation_mode": [
+    "allow_local_only_historical_derived_first_use_materialisation_after_exact_candidate_gate",
+    "historical_first_use_materialisation_subgate_contract_sha256_93b6a177b73176518dcd94e31e9dfba90c26dca9a4c4a1851e2e858dc7393a1e",
+    "historical_first_use_candidate_gate_source_abcd4206a363b0c565c070e0f2cb9c54d627b3b3",
+    "historical_first_use_exact_digest_bound_gate_receipt_required_before_write",
+    "historical_first_use_maximum_one_minimised_structural_scenario_fixture",
+    "historical_first_use_non_admission_or_revision_writes_nothing",
+    "historical_first_use_written_bytes_must_match_admitted_candidate_digest",
+    "historical_first_use_authority_non_transitive"
+  ],
+  "private_input_ceiling": {
+    "nominated_leaf_root": "local_data/historical-diary-trove/raw/pilot_01",
+    "dense_day_count": 1,
+    "maximum_file_count": 80,
+    "maximum_per_file_bytes": 8388608,
+    "maximum_total_bytes": 134217728,
+    "recursive_access_allowed": false,
+    "symlink_or_reparse_traversal_allowed": false,
+    "metadata_bind_count": 1,
+    "content_run_count": 1,
+    "retry_count": 0
+  },
+  "candidate_ceiling": {
+    "purpose": "provider_free_reception_check_in_context_scenario_development",
+    "artifact_class": "minimised_structural_scenario",
+    "fixture_class": "provider_free_local_test_only",
+    "relative_day": 0,
+    "minimum_event_count": 1,
+    "maximum_event_count": 12,
+    "whole_day_or_near_lossless_replay": false,
+    "source_text_identity_contact_note_filename_path_date_timestamp_key_or_mapping_output": false
+  },
+  "writer_ceiling": {
+    "output_root": "local_data/historical-diary-trove/derived-scenarios/2026-08-24-first-use-check-in-context-v1",
+    "maximum_fixture_count": 1,
+    "atomic_temporary_then_replace": true,
+    "exact_gate_admission_required": true,
+    "written_bytes_digest_match_required": true,
+    "blocked_revision_mismatch_or_error_writes_nothing": true,
+    "private_intermediate_or_key_persistence": false,
+    "failure_cleanup_required": true
+  },
+  "provider_and_product_ceiling": {
+    "network_provider_model_prompt_telemetry_clipboard_or_external_release": false,
+    "product_patient_appointment_clinical_or_protected_data": false,
+    "database_client_route_runtime_or_configuration": false,
+    "ordinary_practice_activation": false,
+    "production_deployment_release_pages_or_protected_refs": false
+  },
+  "decision_vocabulary": [
+    "blocked",
+    "revision_required",
+    "materialised_for_exact_declared_local_test_artifact_only"
+  ],
+  "authority_non_transitive": true,
+  "claim_ceiling": "one_local_test_fixture_or_nothing_no_product_or_real_practice_validity_claim"
+}

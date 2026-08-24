@@ -1,0 +1,60 @@
+{
+  "schema_version": "raisa.governance_clockwork_historical_first_use_materialisation_subgate_evidence.v1",
+  "recorded_at": "2026-08-24T10:49:51.2828508+10:00",
+  "decision": "accepted_closed_mode_no_private_access_or_write",
+  "planning_source": "217c9678363da542653514450cace581d3f0900d",
+  "reviewed_source": "f3bb82b872873c1f1c6b58a31e3a008aac2a9d1f",
+  "accepted_contract": {
+    "path": "orchestration/continuity/raisa-provider-free-historical-derived-scenario-first-use-candidate-gate-evaluator-rehearsal/next-tranche-contract.json",
+    "sha256": "93b6a177b73176518dcd94e31e9dfba90c26dca9a4c4a1851e2e858dc7393a1e",
+    "candidate_gate_source": "abcd4206a363b0c565c070e0f2cb9c54d627b3b3"
+  },
+  "closed_mode": {
+    "member_count": 8,
+    "complete_mode_admitted": true,
+    "partial_modes_rejected": 8,
+    "denial_conflicts_rejected": 2,
+    "measurement_conflict_rejected": true,
+    "altered_contract_digest_rejected": true,
+    "altered_candidate_gate_source_rejected": true,
+    "unknown_allowance_rejected": true,
+    "authority_non_transitive": true
+  },
+  "regression": {
+    "legacy_full_denial_unchanged": true,
+    "typed_historical_denial_unchanged": true,
+    "measured_privacy_probe_mode_unchanged": true,
+    "closeout_and_user_decision_paths_share_validator": true
+  },
+  "verification": {
+    "focused_controls_passed": 6,
+    "surrounding_governance_controls_passed": 131,
+    "ruff_passed": true,
+    "compileall_passed": true,
+    "successor_contract_hash_passed": true,
+    "git_diff_check_passed": true
+  },
+  "authority_readback": {
+    "historical_archive_accessed": false,
+    "ignored_attempt_output_accessed": false,
+    "fixture_materialised": false,
+    "writer_added": false,
+    "provider_or_model_called": false,
+    "product_database_client_or_runtime_touched": false,
+    "ordinary_practice_changed": false,
+    "protected_refs_moved": false
+  },
+  "parallelism": {
+    "deepseek_flash": "declined_negative",
+    "gemini_verifier": "not_applicable_neutral",
+    "native_subagents": "declined_negative",
+    "owner": "gpt_sol_serial"
+  },
+  "contained_workflow_cost": {
+    "preplanning_evidence_path_root_rejections": 1,
+    "bound_closeout_rehearsal_rejections": 1,
+    "read_only_diagnostic_ticks": 1,
+    "implementation_or_acceptance_reruns": 0,
+    "private_or_provider_runs": 0
+  }
+}

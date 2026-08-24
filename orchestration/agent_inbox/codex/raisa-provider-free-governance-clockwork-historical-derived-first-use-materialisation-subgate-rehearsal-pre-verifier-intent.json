@@ -1,0 +1,24 @@
+{
+  "schema_version": "ariadne.serial_continuation_intent.v1",
+  "preset": "provider_free_serial_observed_empty_workers",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "accept_the_exact_eight_member_provider_free_clockwork_materialisation_mode_after_deterministic_verification_then_continue_to_one_local_only_no_retry_gate_wrapped_first_use_materialisation_attempt",
+  "assessed_stage": "pre_verifier_acceptance_for_governance_clockwork_historical_derived_first_use_materialisation_subgate",
+  "active_evidence_paths": [
+    "docs/raisa-provider-free-governance-clockwork-historical-derived-first-use-materialisation-subgate-rehearsal-plan.md",
+    "docs/security/raisa-provider-free-governance-clockwork-historical-derived-first-use-materialisation-subgate-rehearsal-threat-model-delta.md",
+    "orchestration/continuity/raisa-provider-free-governance-clockwork-historical-derived-first-use-materialisation-subgate-rehearsal/evidence.json",
+    "orchestration/continuity/raisa-provider-free-governance-clockwork-historical-derived-first-use-materialisation-subgate-rehearsal/efficacy-reading.json",
+    "orchestration/continuity/raisa-provider-free-governance-clockwork-historical-derived-first-use-materialisation-subgate-rehearsal/report.md",
+    "orchestration/continuity/raisa-provider-free-governance-clockwork-historical-derived-first-use-materialisation-subgate-rehearsal/next-tranche-contract.json",
+    "docs/raisa-provider-free-governance-clockwork-historical-derived-first-use-materialisation-subgate-rehearsal-closeout.md",
+    "orchestration/agent_inbox/codex/raisa-provider-free-governance-clockwork-historical-derived-first-use-materialisation-subgate-rehearsal-sol-acceptance.md",
+    "orchestration/continuity/ariadne-active-operation-latch/current.json"
+  ],
+  "lane_decision_overrides": [
+    {
+      "lane_id": "gemini_verifier",
+      "decision_code": "not_applicable_neutral"
+    }
+  ]
+}

@@ -1,0 +1,151 @@
+{
+  "schema_version": "ariadne.governance_semantic_closeout_intent.v1",
+  "profile": "provider_free_governance_tooling_v1",
+  "artifact_slug": "raisa-provider-free-governance-clockwork-historical-derived-first-use-materialisation-subgate-rehearsal",
+  "recorded_at": "2026-08-24T10:49:51.2828508+10:00",
+  "closeout": {
+    "operation_id": "raisa-provider-free-governance-clockwork-historical-derived-first-use-materialisation-subgate-rehearsal",
+    "title": "Raisa provider-free governance clockwork historical-derived first-use materialisation subgate rehearsal",
+    "builds_on": [
+      "raisa-provider-free-historical-derived-scenario-first-use-candidate-gate-evaluator-rehearsal"
+    ],
+    "authority_notes": [
+      "Yuri delegated gate timing; accept only the closed clockwork representation and continue to the separately frozen one-run local attempt."
+    ],
+    "decisions": [
+      {
+        "id": "accept-exact-eight-member-materialisation-mode",
+        "source": "orchestration/continuity/raisa-provider-free-governance-clockwork-historical-derived-first-use-materialisation-subgate-rehearsal/evidence.json",
+        "summary": "Accept reviewed source f3bb82b872873c1f1c6b58a31e3a008aac2a9d1f after 6 focused and 131 surrounding controls pass."
+      },
+      {
+        "id": "preserve-boundaries-and-continue-to-one-local-attempt",
+        "source": "orchestration/continuity/raisa-provider-free-governance-clockwork-historical-derived-first-use-materialisation-subgate-rehearsal/next-tranche-contract.json",
+        "summary": "The non-transitive zero-write boundary remains; one bind, one run and no retry may create one exact admitted local-test fixture or nothing."
+      }
+    ],
+    "claim_scope": [
+      "The clockwork can represent one exact future authority mode; candidate quality, private access and fixture behavior remain unproved."
+    ],
+    "additional_receipts": [
+      "orchestration/continuity/raisa-provider-free-governance-clockwork-historical-derived-first-use-materialisation-subgate-rehearsal/closeout/prepublication-contained-lapses.json",
+      "orchestration/continuity/raisa-provider-free-governance-clockwork-historical-derived-first-use-materialisation-subgate-rehearsal/closeout/pushover-notification-receipt.json"
+    ],
+    "additional_artifacts": [
+      "orchestration/continuity/raisa-provider-free-governance-clockwork-historical-derived-first-use-materialisation-subgate-rehearsal/next-tranche-contract.json"
+    ],
+    "unresolved_gates": [
+      "Actual candidate evaluation, fixture materialisation, downstream scenario use and every product/provider/protected surface remain gated."
+    ],
+    "journey": {
+      "strategic_role": "Connect the deterministic first-use gate to the repository clock without prose authority.",
+      "outcome": "One byte-bound mutually exclusive materialisation form now passes."
+    },
+    "current_position": {
+      "strategic_role": "Exercise the new form exactly once on the bounded local source.",
+      "why_now": "The gate and its clockwork authority representation both pass.",
+      "outcome": "One admitted ignored local-test fixture or a clean zero-write terminal.",
+      "unlocks": [
+        "Evidence-led check-in scenario development from one minimised structural fixture."
+      ],
+      "does_not_solve": [
+        "No product, ordinary-practice, provider or real-practice validity opens."
+      ],
+      "orientation_statement": "Turn the new gear once under the exact digest-bound gate."
+    },
+    "next_operation": {
+      "operation_id": "raisa-local-only-historical-derived-minimised-check-in-context-scenario-first-use-materialisation-rehearsal",
+      "active_tranche": "Raisa local-only historical-derived minimised check-in-context scenario first-use materialisation rehearsal",
+      "objective": "Run one local-only no-retry exact-gate materialisation attempt that writes one ignored fixture or nothing.",
+      "authority_source": "Yuri's delegated first-use gate timing and uninterrupted-development authority within the frozen successor contract.",
+      "next_stage": "fresh_five_source_rehydration_then_freeze_one_run_private_materialiser_plan"
+    }
+  },
+  "verification_profile": "governance_clockwork_core_v1",
+  "baton_slot": "current_deepseek_native_harness_acceptance",
+  "next_operation_protected_boundaries": [
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only",
+    "no_product_patient_appointment_clinical_or_protected_data",
+    "allow_local_only_historical_derived_first_use_materialisation_after_exact_candidate_gate",
+    "historical_first_use_materialisation_subgate_contract_sha256_93b6a177b73176518dcd94e31e9dfba90c26dca9a4c4a1851e2e858dc7393a1e",
+    "historical_first_use_candidate_gate_source_abcd4206a363b0c565c070e0f2cb9c54d627b3b3",
+    "historical_first_use_exact_digest_bound_gate_receipt_required_before_write",
+    "historical_first_use_maximum_one_minimised_structural_scenario_fixture",
+    "historical_first_use_non_admission_or_revision_writes_nothing",
+    "historical_first_use_written_bytes_must_match_admitted_candidate_digest",
+    "historical_first_use_authority_non_transitive"
+  ],
+  "agent_error_observations": [
+    {
+      "attempt_key": "historical-first-use-clockwork-preplanning-evidence-path-001",
+      "observed_on": "2026-08-24",
+      "tranche": "historical-first-use-clockwork-subgate",
+      "role": "orchestrator",
+      "resource_id": "preplanning-evidence-path",
+      "model": "gpt-sol",
+      "reasoning_level": "extra_high",
+      "transport": "local_repository_clockwork",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Continuation evidence paths use authority and evidence-document roots only.",
+      "observed_error": "The first intent included one code root and one test root.",
+      "detection_method": "The receipt builder rejected serial_continuation_evidence_path_root_forbidden before planning.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-governance-clockwork-historical-derived-first-use-materialisation-subgate-rehearsal/closeout/prepublication-contained-lapses.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.continuation_evidence_paths_require_document_roots",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Remove implementation and test roots from active evidence paths.",
+        "prevention_control": "Use authority and evidence-document roots in continuation intents.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-661.md",
+          "orchestration/continuity/raisa-provider-free-governance-clockwork-historical-derived-first-use-materialisation-subgate-rehearsal/evidence.json"
+        ]
+      },
+      "baton_summary": "records one rejected preplanning evidence-root pointer."
+    },
+    {
+      "attempt_key": "historical-first-use-clockwork-register-reading-001",
+      "observed_on": "2026-08-24",
+      "tranche": "historical-first-use-clockwork-subgate",
+      "role": "orchestrator",
+      "resource_id": "incident-revision-reading",
+      "model": "gpt-sol",
+      "reasoning_level": "extra_high",
+      "transport": "local_repository_clockwork",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "The incident revision note includes the exact machine-readable prospective register reading.",
+      "observed_error": "Revision 661 initially omitted the required revision count IDs and open-count comment.",
+      "detection_method": "The first bound rehearsal rejected tick_incident_revision_reading and one direct tick identified the validator.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-governance-clockwork-historical-derived-first-use-materialisation-subgate-rehearsal/closeout/prepublication-contained-lapses.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.incident_revision_requires_machine_readable_prospective_reading",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Add the exact prospective register reading comment before rehearsal.",
+        "prevention_control": "Build revision comments from the executable incident-artifact validator shape.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-661.md",
+          "orchestration/continuity/raisa-provider-free-governance-clockwork-historical-derived-first-use-materialisation-subgate-rehearsal/evidence.json"
+        ]
+      },
+      "baton_summary": "records one rejected missing incident-revision reading."
+    }
+  ]
+}
