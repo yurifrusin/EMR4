@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> Add only the missing exact-digest consumption gear, then use it in a separately frozen test.
+> Consume the exact fixture once, locally, after digest verification and nowhere else.
 
 ## North star
 
@@ -680,22 +680,24 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    One byte-bound mutually exclusive materialisation form now passes. Lineage parent: `raisa-provider-free-historical-derived-scenario-first-use-candidate-gate-evaluator-rehearsal`.
 332. **Turn the historical Diary time-lapse into the first empirically grounded but structurally minimised local development scenario. — Raisa local-only historical-derived minimised check-in-context scenario first-use materialisation rehearsal**
    One exact-digest six-event ignored fixture now exists under non-transitive local-test authority. Lineage parent: `raisa-provider-free-governance-clockwork-historical-derived-first-use-materialisation-subgate-rehearsal`.
+333. **Connect the accepted minimised fixture to a typed local-test authority gear without opening the archive. — Raisa provider-free governance clockwork historical-derived minimised scenario consumption subgate rehearsal**
+   One digest-bound mutually exclusive consumption form now passes. Lineage parent: `raisa-local-only-historical-derived-minimised-check-in-context-scenario-first-use-materialisation-rehearsal`.
 
 ## Current position
 
-**Represent downstream use as a new closed clockwork form before consuming the fixture. — Raisa local-only historical-derived minimised check-in-context scenario first-use materialisation rehearsal**
+**Exercise the new form once in an accepted unmounted check-in adapter test. — Raisa provider-free governance clockwork historical-derived minimised scenario consumption subgate rehearsal**
 
-**Why this proof came next:** The fixture is useful and accepted, but the materialisation authority explicitly cannot flow into consumption.
+**Why this proof came next:** The fixture and its clockwork consumption representation both pass.
 
-A deterministic governance-only consumption mode that reads neither archive nor fixture.
+One exact local provider-free adapter-test consumption or a clean fail-closed terminal.
 
 ### What this unlocks
 
-- One later provider-free canonical check-in adapter test may consume the exact fixture as local authored-synthetic context.
+- Evidence-led check-in context testing from one minimised structural scenario.
 
 ### What it does not solve
 
-- No product, ordinary-practice, provider, broader archive or production authority opens.
+- No archive, product runtime, ordinary-practice, provider or real-practice validity opens.
 
 ## Continuity and authority
 
@@ -1569,7 +1571,6 @@ Prerequisites:
 - `docs/raisa-dual-host-foundation-closeout.md`
 - `docs/raisa-dual-host-foundation-plan.md`
 - `docs/raisa-local-only-bounded-historical-diary-snapshot-measured-privacy-probe-plan.md`
-- `docs/raisa-local-only-historical-derived-minimised-check-in-context-scenario-first-use-materialisation-rehearsal-closeout.md`
 - `docs/raisa-local-only-historical-derived-minimised-check-in-context-scenario-first-use-materialisation-rehearsal-plan.md`
 - `docs/raisa-local-only-historical-diary-access-boundary-convergence-plan.md`
 - `docs/raisa-local-only-historical-diary-document-story-time-coordinate-bounded-measurement-recovery-rehearsal-plan.md`
@@ -1684,6 +1685,8 @@ Prerequisites:
 - `docs/raisa-provider-free-globally-disabled-runtime-instrumentation-scaffold-design.md`
 - `docs/raisa-provider-free-globally-disabled-runtime-instrumentation-scaffold-plan.md`
 - `docs/raisa-provider-free-governance-clockwork-historical-derived-first-use-materialisation-subgate-rehearsal-plan.md`
+- `docs/raisa-provider-free-governance-clockwork-historical-derived-minimised-scenario-consumption-subgate-rehearsal-closeout.md`
+- `docs/raisa-provider-free-governance-clockwork-historical-derived-minimised-scenario-consumption-subgate-rehearsal-plan.md`
 - `docs/raisa-provider-free-historical-derived-scenario-first-use-candidate-gate-evaluator-rehearsal-plan.md`
 - `docs/raisa-provider-free-office-cross-surface-replay-isolation-closeout.md`
 - `docs/raisa-provider-free-office-cross-surface-replay-isolation-plan.md`
@@ -2473,7 +2476,6 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-legacy-route-convergence-kernel-interface-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-legacy-route-convergence-kernel-interface-preplanning-v2-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-legacy-route-convergence-kernel-interface-sol-acceptance.md`
-- `orchestration/agent_inbox/codex/raisa-local-only-historical-derived-minimised-check-in-context-scenario-first-use-materialisation-rehearsal-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-gemini37-command-manifest.json`
 - `orchestration/agent_inbox/codex/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-gemini37-repair-review-command-manifest.json`
 - `orchestration/agent_inbox/codex/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-gemini37-repair-review-packet.md`
@@ -2530,6 +2532,7 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-provider-free-disposable-postgresql-status-confirm-scaffold-parse-catalogue-precommit-runtime-state.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-disposable-postgresql-status-confirm-scaffold-parse-catalogue-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-disposable-postgresql-status-confirm-scaffold-parse-catalogue-preplanning-runtime-state.json`
+- `orchestration/agent_inbox/codex/raisa-provider-free-governance-clockwork-historical-derived-minimised-scenario-consumption-subgate-rehearsal-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-provider-free-office-directory-lifecycle-descendants-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-provider-free-ordinary-fallback-client-proposal-confirm-parity-precommit-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-ordinary-fallback-client-proposal-confirm-parity-preplanning-receipt.json`
@@ -3064,7 +3067,6 @@ Prerequisites:
 - `orchestration/continuity/raisa-dual-host-foundation/final-residue-evidence.json`
 - `orchestration/continuity/raisa-dual-host-foundation/host-profile-matrix-evidence.json`
 - `orchestration/continuity/raisa-local-only-bounded-historical-diary-snapshot-measured-privacy-probe/report.md`
-- `orchestration/continuity/raisa-local-only-historical-derived-minimised-check-in-context-scenario-first-use-materialisation-rehearsal/evidence.json`
 - `orchestration/continuity/raisa-local-only-historical-derived-minimised-check-in-context-scenario-first-use-materialisation-rehearsal/report.md`
 - `orchestration/continuity/raisa-local-only-historical-diary-access-boundary-convergence/report.md`
 - `orchestration/continuity/raisa-local-only-historical-diary-document-story-time-coordinate-bounded-measurement-recovery-rehearsal/report.md`
@@ -3188,6 +3190,8 @@ Prerequisites:
 - `orchestration/continuity/raisa-provider-free-docker-created-state-profile-conformance-repair/created-state-representation-evidence.json`
 - `orchestration/continuity/raisa-provider-free-docker-created-state-profile-conformance-repair/repair-attestation.json`
 - `orchestration/continuity/raisa-provider-free-governance-clockwork-historical-derived-first-use-materialisation-subgate-rehearsal/report.md`
+- `orchestration/continuity/raisa-provider-free-governance-clockwork-historical-derived-minimised-scenario-consumption-subgate-rehearsal/evidence.json`
+- `orchestration/continuity/raisa-provider-free-governance-clockwork-historical-derived-minimised-scenario-consumption-subgate-rehearsal/report.md`
 - `orchestration/continuity/raisa-provider-free-historical-derived-scenario-first-use-candidate-gate-evaluator-rehearsal/report.md`
 - `orchestration/continuity/raisa-provider-free-office-directory-lifecycle-descendants/provider-free-acceptance-evidence.json`
 - `orchestration/continuity/raisa-provider-free-office-practitioner-directory-consumer/live-office-backend-postgres-evidence.json`
@@ -4021,4 +4025,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 437; continuity graph revision 455._
+_Compass map revision 438; continuity graph revision 456._

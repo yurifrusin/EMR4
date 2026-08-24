@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 455,
+  "graph_revision": 456,
   "harvests": [],
   "nodes": [
     {
@@ -36889,9 +36889,94 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "raisa-provider-free-governance-clockwork-historical-derived-minimised-scenario-consumption-subgate-rehearsal",
+      "title": "Raisa provider-free governance clockwork historical-derived minimised scenario consumption subgate rehearsal",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "raisa-local-only-historical-derived-minimised-check-in-context-scenario-first-use-materialisation-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri delegated gate timing; accept only the closed clockwork representation and continue to one separately frozen exact-digest local adapter-test consumption."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-exact-nine-member-consumption-mode",
+          "source": "orchestration/continuity/raisa-provider-free-governance-clockwork-historical-derived-minimised-scenario-consumption-subgate-rehearsal/evidence.json",
+          "status": "accepted",
+          "summary": "Accept reviewed source 5792a993b33a5f0dc0fea78e1c20f7f4164f2c4a after 7 focused and 174 governance-profile controls pass."
+        },
+        {
+          "id": "preserve-boundaries-and-continue-to-one-local-test-read",
+          "source": "orchestration/continuity/raisa-provider-free-governance-clockwork-historical-derived-minimised-scenario-consumption-subgate-rehearsal/next-tranche-contract.json",
+          "status": "accepted",
+          "summary": "The non-transitive successor permits one digest-before-parse fixture read and one local provider-free accepted-adapter test without archive or runtime access."
+        }
+      ],
+      "claim_scope": [
+        "The clockwork can represent one exact future local-test consumption mode; fixture parsing and adapter behavior remain unproved."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-governance-clockwork-historical-derived-minimised-scenario-consumption-subgate-rehearsal-plan.md",
+          "docs/security/raisa-provider-free-governance-clockwork-historical-derived-minimised-scenario-consumption-subgate-rehearsal-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-provider-free-governance-clockwork-historical-derived-minimised-scenario-consumption-subgate-rehearsal/evidence.json",
+          "orchestration/continuity/raisa-provider-free-governance-clockwork-historical-derived-minimised-scenario-consumption-subgate-rehearsal/report.md",
+          "orchestration/continuity/raisa-provider-free-governance-clockwork-historical-derived-minimised-scenario-consumption-subgate-rehearsal/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-governance-clockwork-historical-derived-minimised-scenario-consumption-subgate-rehearsal-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-24--raisa-provider-free-governance-clockwork-historical-derived-minimised-scenario-consumption-subgate-rehearsal.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-governance-clockwork-historical-derived-minimised-scenario-consumption-subgate-rehearsal-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-governance-clockwork-historical-derived-minimised-scenario-consumption-subgate-rehearsal-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-governance-clockwork-historical-derived-minimised-scenario-consumption-subgate-rehearsal-pre-verifier-receipt.json",
+          "orchestration/continuity/raisa-provider-free-governance-clockwork-historical-derived-minimised-scenario-consumption-subgate-rehearsal/closeout/prepublication-contained-lapses.json",
+          "orchestration/continuity/raisa-provider-free-governance-clockwork-historical-derived-minimised-scenario-consumption-subgate-rehearsal/closeout/pushover-notification-receipt.json"
+        ],
+        "tests": [
+          "tests/test_current_baton_consistency.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_transactional_closeout.py"
+        ],
+        "artifacts": [
+          "orchestration_harness/governance_clockwork_tick.py",
+          "scripts/ariadne_governance_clockwork_closeout.py",
+          "scripts/ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "orchestration/continuity/raisa-provider-free-governance-clockwork-historical-derived-minimised-scenario-consumption-subgate-rehearsal/next-tranche-contract.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-governance-clockwork-historical-derived-minimised-scenario-consumption-subgate-rehearsal-pre-verifier-intent.json"
+        ]
+      },
+      "unresolved_gates": [
+        "Actual fixture consumption, adapter-test behavior, archive access and every product/provider/runtime surface remain gated."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-24T12:55:43.0106995+10:00",
+      "updated_at": "2026-08-24T12:55:43.0106995+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "ce1f3717fc89117a9db74ca1b95509f02fef5d82",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-24T12:11:47.3159493+10:00"
+  "updated_at": "2026-08-24T12:55:43.0106995+10:00"
 }

@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 662,
+  "register_revision": 663,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-24",
@@ -44410,6 +44410,42 @@
       },
       "incident_id": "AER-1155",
       "attempt_id": "clock-e81d0d21dc6f5e1fc864aeaa",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-24",
+      "tranche": "historical-consumption-clockwork-subgate",
+      "role": "orchestrator",
+      "resource_id": "planning-source-binding",
+      "model": "gpt-sol",
+      "reasoning_level": "extra_high",
+      "transport": "local_repository_clockwork",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Every closeout Git binding equals the full object ID resolved by Git.",
+      "observed_error": "An uncommitted evidence draft contained a composed but incorrect 40-character planning-source value.",
+      "detection_method": "The mandatory git rev-parse readback compared the draft with the repository object database before staging.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-governance-clockwork-historical-derived-minimised-scenario-consumption-subgate-rehearsal/closeout/prepublication-contained-lapses.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.git_binding.must_resolve_exact_object",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Replace the draft with Git's resolved full planning source before staging.",
+        "prevention_control": "Resolve and compare every authored Git binding with git rev-parse before explicit-path staging.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-663.md",
+          "orchestration/continuity/raisa-provider-free-governance-clockwork-historical-derived-minimised-scenario-consumption-subgate-rehearsal/evidence.json"
+        ]
+      },
+      "incident_id": "AER-1156",
+      "attempt_id": "clock-33d756d6dac77d9107668d4b",
       "origin": "operator",
       "related_incident_ids": [],
       "status": "corrected"

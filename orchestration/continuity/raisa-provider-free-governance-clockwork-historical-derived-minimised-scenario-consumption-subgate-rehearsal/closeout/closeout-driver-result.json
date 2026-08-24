@@ -1,8 +1,8 @@
 {
   "schema_version": "ariadne.governance_bound_closeout_driver_result.v1",
   "status": "passed",
-  "mode": "rehearse",
-  "source_head": "5792a993b33a5f0dc0fea78e1c20f7f4164f2c4a",
+  "mode": "publish",
+  "source_head": "ce1f3717fc89117a9db74ca1b95509f02fef5d82",
   "interpreter": {
     "selected": "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
     "attested": "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
@@ -19,10 +19,10 @@
     "passed_command_count": 3
   },
   "inline_live_validation": {
-    "status": "not_executed_rehearsal",
-    "captured_from": "verified_dry_preparation",
-    "source_commit": "5792a993b33a5f0dc0fea78e1c20f7f4164f2c4a",
-    "generation_id": "gen-33c8596815e89b21c6a2b545453f3f61a2c17069b6fbada7036af6e716c41bf7",
+    "status": "passed",
+    "captured_from": "tick_publish_return_after_validate_tick_live_state",
+    "source_commit": "ce1f3717fc89117a9db74ca1b95509f02fef5d82",
+    "generation_id": "gen-15862796feb66e7b458644d972708deb12c24af5cc6a4c30a3656ee1c73d5938",
     "lease_sequence": 240
   },
   "postpublication_verification": {
@@ -39,10 +39,10 @@
     "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "tracked_drift": 0
   },
-  "publication_surface_changed_file_count": 0,
+  "publication_surface_changed_file_count": 11,
   "stage_manifest": "orchestration/continuity/raisa-provider-free-governance-clockwork-historical-derived-minimised-scenario-consumption-subgate-rehearsal/closeout/explicit-stage-manifest.json",
   "git_add_invocations": 0,
   "git_index_mutations": 0,
   "stage_manifest_path_count": 15,
-  "stage_manifest_sha256": "a8dd1ee8f62f9baca76811b67813aad68e1eeebcf89a1c3eefdbe1eac1f32393"
+  "stage_manifest_sha256": "06baf33cb2b376eed12f71b97bdecf0a653eb00df7638d2d3496da5b5f4d568d"
 }
