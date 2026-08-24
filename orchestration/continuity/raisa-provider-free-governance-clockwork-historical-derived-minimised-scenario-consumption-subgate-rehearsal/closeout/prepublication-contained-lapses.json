@@ -1,0 +1,19 @@
+{
+  "schema_version": "raisa.historical_derived_minimised_scenario_consumption_subgate_contained_lapses.v1",
+  "recorded_at": "2026-08-24T12:55:43.0106995+10:00",
+  "lapses": [
+    {
+      "kind": "ordinary_preacceptance_candidate_test_layout",
+      "outcome": "corrected_before_candidate_acceptance",
+      "private_or_provider_effect": false,
+      "register_incident": false
+    },
+    {
+      "kind": "uncommitted_planning_source_evidence_binding",
+      "outcome": "machine_resolved_full_git_id_replaced_draft_before_commit",
+      "private_or_provider_effect": false,
+      "register_incident": true,
+      "assigned_incident_id": "AER-1156"
+    }
+  ]
+}

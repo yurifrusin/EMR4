@@ -1,0 +1,32 @@
+{
+  "schema_version": "ariadne.governance_explicit_stage_manifest.v1",
+  "status": "passed",
+  "source_head": "5792a993b33a5f0dc0fea78e1c20f7f4164f2c4a",
+  "derivation": "admitted_intent_clockwork_contract_intersect_git_inventory",
+  "paths": [
+    "docs/ariadne-agent-error-correction-register-revision-663.md",
+    "docs/raisa-provider-free-governance-clockwork-historical-derived-minimised-scenario-consumption-subgate-rehearsal-closeout.md",
+    "orchestration/agent_inbox/codex/raisa-provider-free-governance-clockwork-historical-derived-minimised-scenario-consumption-subgate-rehearsal-pre-verifier-intent.json",
+    "orchestration/agent_inbox/codex/raisa-provider-free-governance-clockwork-historical-derived-minimised-scenario-consumption-subgate-rehearsal-pre-verifier-receipt.json",
+    "orchestration/agent_inbox/codex/raisa-provider-free-governance-clockwork-historical-derived-minimised-scenario-consumption-subgate-rehearsal-sol-acceptance.md",
+    "orchestration/continuity/raisa-provider-free-governance-clockwork-historical-derived-minimised-scenario-consumption-subgate-rehearsal/closeout/closeout-driver-result.json",
+    "orchestration/continuity/raisa-provider-free-governance-clockwork-historical-derived-minimised-scenario-consumption-subgate-rehearsal/closeout/closeout-intent.json",
+    "orchestration/continuity/raisa-provider-free-governance-clockwork-historical-derived-minimised-scenario-consumption-subgate-rehearsal/closeout/explicit-stage-manifest.json",
+    "orchestration/continuity/raisa-provider-free-governance-clockwork-historical-derived-minimised-scenario-consumption-subgate-rehearsal/closeout/prepublication-contained-lapses.json",
+    "orchestration/continuity/raisa-provider-free-governance-clockwork-historical-derived-minimised-scenario-consumption-subgate-rehearsal/closeout/pushover-notification-receipt.json",
+    "orchestration/continuity/raisa-provider-free-governance-clockwork-historical-derived-minimised-scenario-consumption-subgate-rehearsal/efficacy-reading.json",
+    "orchestration/continuity/raisa-provider-free-governance-clockwork-historical-derived-minimised-scenario-consumption-subgate-rehearsal/evidence.json",
+    "orchestration/continuity/raisa-provider-free-governance-clockwork-historical-derived-minimised-scenario-consumption-subgate-rehearsal/next-tranche-contract.json",
+    "orchestration/continuity/raisa-provider-free-governance-clockwork-historical-derived-minimised-scenario-consumption-subgate-rehearsal/report.md",
+    "orchestration/human_inbox/yuri/2026-08-24--raisa-provider-free-governance-clockwork-historical-derived-minimised-scenario-consumption-subgate-rehearsal.md"
+  ],
+  "path_count": 15,
+  "allowlist_path_count": 39,
+  "tracked_path_count": 0,
+  "allowlisted_untracked_path_count": 15,
+  "excluded_untracked_path_count": 683,
+  "unexpected_tracked_paths": [],
+  "git_add_invocations": 0,
+  "git_index_mutations": 0,
+  "docs_branding_included": false
+}

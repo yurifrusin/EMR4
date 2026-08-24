@@ -1,0 +1,53 @@
+{
+  "schema_version": "raisa.provider_free_exact_digest_historical_derived_minimised_check_in_context_adapter_test_consumption_contract.v1",
+  "status": "frozen_fail_closed_successor_contract",
+  "recorded_at": "2026-08-24T12:55:43.0106995+10:00",
+  "operation_id": "raisa-provider-free-exact-digest-historical-derived-minimised-check-in-context-adapter-test-consumption-rehearsal",
+  "builds_on_clockwork_source": "5792a993b33a5f0dc0fea78e1c20f7f4164f2c4a",
+  "accepted_first_use_source": "4740813d53ebbc4872fe8c0c08ce2578b1982770",
+  "accepted_unmounted_check_in_adapter_source": "8de886c5148b3259428c8c517674f10ea92d937e",
+  "clockwork_consumption_mode": [
+    "allow_local_only_historical_derived_minimised_scenario_exact_digest_bound_test_consumption",
+    "historical_derived_minimised_scenario_consumption_subgate_contract_sha256_da2507056f37482016125c3ccad909573c0495d86cdc135cd5b13714bc7c93ac",
+    "historical_derived_minimised_scenario_consumption_first_use_source_4740813d53ebbc4872fe8c0c08ce2578b1982770",
+    "historical_derived_minimised_scenario_consumption_fixture_sha256_2205ab83cec7c5639d39cc563cee80eec825ac33f17571151571d325e74f2dfe",
+    "historical_derived_minimised_scenario_consumption_maximum_one_ignored_local_fixture_read",
+    "historical_derived_minimised_scenario_consumption_no_historical_archive_read",
+    "historical_derived_minimised_scenario_consumption_local_provider_free_authored_synthetic_test_context_only",
+    "historical_derived_minimised_scenario_consumption_no_provider_product_database_route_client_runtime_configuration_or_ordinary_practice",
+    "historical_derived_minimised_scenario_consumption_authority_non_transitive"
+  ],
+  "fixture_ceiling": {
+    "path": "local_data/historical-diary-trove/derived-scenarios/2026-08-24-first-use-check-in-context-v1/scenario.json",
+    "sha256": "2205ab83cec7c5639d39cc563cee80eec825ac33f17571151571d325e74f2dfe",
+    "maximum_reads": 1,
+    "exact_digest_verified_before_parsing_same_bytes": true,
+    "historical_archive_reads": 0,
+    "fixture_committed_or_transmitted": false,
+    "source_text_identity_contact_note_filename_path_date_timestamp_token_key_or_mapping_output": false
+  },
+  "consumer_ceiling": {
+    "purpose": "provider_free_local_check_in_adapter_test_context",
+    "accepted_adapter_source_exact": true,
+    "maximum_adapter_test_invocations": 1,
+    "closed_structural_fixture_fields_only": true,
+    "authored_synthetic_appointment_input_only": true,
+    "exact_existing_request_response_contract_preserved": true,
+    "feature_flag_allowlist_default_denial_and_default_off_preserved": true,
+    "route_database_client_configuration_or_runtime": false,
+    "generic_status_arrived_action_grammar_first_party_client_or_waiting_area_change": false
+  },
+  "provider_and_product_ceiling": {
+    "network_provider_model_prompt_telemetry_clipboard_or_external_release": false,
+    "product_patient_appointment_clinical_or_protected_data": false,
+    "ordinary_practice_activation": false,
+    "production_deployment_release_pages_or_protected_refs": false
+  },
+  "decision_vocabulary": [
+    "blocked",
+    "revision_required",
+    "consumed_for_exact_declared_local_adapter_test_only"
+  ],
+  "authority_non_transitive": true,
+  "claim_ceiling": "one_exact_local_provider_free_adapter_test_consumption_no_real_practice_product_runtime_or_archive_validity_claim"
+}

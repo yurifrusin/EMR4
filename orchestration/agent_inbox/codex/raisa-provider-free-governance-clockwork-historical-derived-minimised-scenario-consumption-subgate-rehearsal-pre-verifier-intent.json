@@ -1,0 +1,22 @@
+{
+  "schema_version": "ariadne.serial_continuation_intent.v1",
+  "preset": "provider_free_serial_observed_empty_workers",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "accept_the_exact_nine_member_provider_free_clockwork_historical_derived_minimised_scenario_consumption_mode_at_source_5792a993b33a5f0dc0fea78e1c20f7f4164f2c4a_after_deterministic_verification_without_reading_the_archive_or_fixture_then_continue_to_one_exact_digest_bound_local_provider_free_check_in_adapter_test_consumption_rehearsal",
+  "assessed_stage": "pre_verifier_acceptance_for_governance_clockwork_historical_derived_minimised_scenario_consumption_subgate",
+  "active_evidence_paths": [
+    "docs/raisa-provider-free-governance-clockwork-historical-derived-minimised-scenario-consumption-subgate-rehearsal-plan.md",
+    "docs/security/raisa-provider-free-governance-clockwork-historical-derived-minimised-scenario-consumption-subgate-rehearsal-threat-model-delta.md",
+    "orchestration/continuity/raisa-local-only-historical-derived-minimised-check-in-context-scenario-first-use-materialisation-rehearsal/next-tranche-contract.json",
+    "orchestration/continuity/raisa-local-only-historical-derived-minimised-check-in-context-scenario-first-use-materialisation-rehearsal/report.md",
+    "orchestration/continuity/raisa-local-only-historical-derived-minimised-check-in-context-scenario-first-use-materialisation-rehearsal/efficacy-reading.json",
+    "orchestration/continuity/ariadne-active-operation-latch/current.json",
+    "orchestration/continuity/ariadne-provider-free-clockwork-live-canonical-adoption-retirement/contract.json"
+  ],
+  "lane_decision_overrides": [
+    {
+      "lane_id": "gemini_verifier",
+      "decision_code": "not_applicable_neutral"
+    }
+  ]
+}

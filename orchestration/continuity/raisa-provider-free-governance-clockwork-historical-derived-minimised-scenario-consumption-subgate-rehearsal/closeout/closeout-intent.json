@@ -1,0 +1,120 @@
+{
+  "schema_version": "ariadne.governance_semantic_closeout_intent.v1",
+  "profile": "provider_free_governance_tooling_v1",
+  "artifact_slug": "raisa-provider-free-governance-clockwork-historical-derived-minimised-scenario-consumption-subgate-rehearsal",
+  "recorded_at": "2026-08-24T12:55:43.0106995+10:00",
+  "closeout": {
+    "operation_id": "raisa-provider-free-governance-clockwork-historical-derived-minimised-scenario-consumption-subgate-rehearsal",
+    "title": "Raisa provider-free governance clockwork historical-derived minimised scenario consumption subgate rehearsal",
+    "builds_on": [
+      "raisa-local-only-historical-derived-minimised-check-in-context-scenario-first-use-materialisation-rehearsal"
+    ],
+    "authority_notes": [
+      "Yuri delegated gate timing; accept only the closed clockwork representation and continue to one separately frozen exact-digest local adapter-test consumption."
+    ],
+    "decisions": [
+      {
+        "id": "accept-exact-nine-member-consumption-mode",
+        "source": "orchestration/continuity/raisa-provider-free-governance-clockwork-historical-derived-minimised-scenario-consumption-subgate-rehearsal/evidence.json",
+        "summary": "Accept reviewed source 5792a993b33a5f0dc0fea78e1c20f7f4164f2c4a after 7 focused and 174 governance-profile controls pass."
+      },
+      {
+        "id": "preserve-boundaries-and-continue-to-one-local-test-read",
+        "source": "orchestration/continuity/raisa-provider-free-governance-clockwork-historical-derived-minimised-scenario-consumption-subgate-rehearsal/next-tranche-contract.json",
+        "summary": "The non-transitive successor permits one digest-before-parse fixture read and one local provider-free accepted-adapter test without archive or runtime access."
+      }
+    ],
+    "claim_scope": [
+      "The clockwork can represent one exact future local-test consumption mode; fixture parsing and adapter behavior remain unproved."
+    ],
+    "additional_receipts": [
+      "orchestration/continuity/raisa-provider-free-governance-clockwork-historical-derived-minimised-scenario-consumption-subgate-rehearsal/closeout/prepublication-contained-lapses.json",
+      "orchestration/continuity/raisa-provider-free-governance-clockwork-historical-derived-minimised-scenario-consumption-subgate-rehearsal/closeout/pushover-notification-receipt.json"
+    ],
+    "additional_artifacts": [
+      "orchestration/continuity/raisa-provider-free-governance-clockwork-historical-derived-minimised-scenario-consumption-subgate-rehearsal/next-tranche-contract.json",
+      "orchestration/agent_inbox/codex/raisa-provider-free-governance-clockwork-historical-derived-minimised-scenario-consumption-subgate-rehearsal-pre-verifier-intent.json"
+    ],
+    "unresolved_gates": [
+      "Actual fixture consumption, adapter-test behavior, archive access and every product/provider/runtime surface remain gated."
+    ],
+    "journey": {
+      "strategic_role": "Connect the accepted minimised fixture to a typed local-test authority gear without opening the archive.",
+      "outcome": "One digest-bound mutually exclusive consumption form now passes."
+    },
+    "current_position": {
+      "strategic_role": "Exercise the new form once in an accepted unmounted check-in adapter test.",
+      "why_now": "The fixture and its clockwork consumption representation both pass.",
+      "outcome": "One exact local provider-free adapter-test consumption or a clean fail-closed terminal.",
+      "unlocks": [
+        "Evidence-led check-in context testing from one minimised structural scenario."
+      ],
+      "does_not_solve": [
+        "No archive, product runtime, ordinary-practice, provider or real-practice validity opens."
+      ],
+      "orientation_statement": "Consume the exact fixture once, locally, after digest verification and nowhere else."
+    },
+    "next_operation": {
+      "operation_id": "raisa-provider-free-exact-digest-historical-derived-minimised-check-in-context-adapter-test-consumption-rehearsal",
+      "active_tranche": "Raisa provider-free exact-digest historical-derived minimised check-in-context adapter-test consumption rehearsal",
+      "objective": "Read the accepted ignored fixture exactly once after digest verification and use only its closed structural fields in one local provider-free test of the accepted unmounted canonical check-in adapter.",
+      "authority_source": "Yuri's delegated gate timing and uninterrupted-development authority within the frozen successor contract.",
+      "next_stage": "fresh_five_source_rehydration_then_freeze_one_read_adapter_test_consumption_plan"
+    }
+  },
+  "verification_profile": "governance_clockwork_core_v1",
+  "baton_slot": "current_deepseek_native_harness_acceptance",
+  "next_operation_protected_boundaries": [
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only",
+    "no_product_patient_appointment_clinical_or_protected_data",
+    "allow_local_only_historical_derived_minimised_scenario_exact_digest_bound_test_consumption",
+    "historical_derived_minimised_scenario_consumption_subgate_contract_sha256_da2507056f37482016125c3ccad909573c0495d86cdc135cd5b13714bc7c93ac",
+    "historical_derived_minimised_scenario_consumption_first_use_source_4740813d53ebbc4872fe8c0c08ce2578b1982770",
+    "historical_derived_minimised_scenario_consumption_fixture_sha256_2205ab83cec7c5639d39cc563cee80eec825ac33f17571151571d325e74f2dfe",
+    "historical_derived_minimised_scenario_consumption_maximum_one_ignored_local_fixture_read",
+    "historical_derived_minimised_scenario_consumption_no_historical_archive_read",
+    "historical_derived_minimised_scenario_consumption_local_provider_free_authored_synthetic_test_context_only",
+    "historical_derived_minimised_scenario_consumption_no_provider_product_database_route_client_runtime_configuration_or_ordinary_practice",
+    "historical_derived_minimised_scenario_consumption_authority_non_transitive"
+  ],
+  "agent_error_observations": [
+    {
+      "attempt_key": "historical-consumption-clockwork-planning-source-binding-001",
+      "observed_on": "2026-08-24",
+      "tranche": "historical-consumption-clockwork-subgate",
+      "role": "orchestrator",
+      "resource_id": "planning-source-binding",
+      "model": "gpt-sol",
+      "reasoning_level": "extra_high",
+      "transport": "local_repository_clockwork",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Every closeout Git binding equals the full object ID resolved by Git.",
+      "observed_error": "An uncommitted evidence draft contained a composed but incorrect 40-character planning-source value.",
+      "detection_method": "The mandatory git rev-parse readback compared the draft with the repository object database before staging.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-governance-clockwork-historical-derived-minimised-scenario-consumption-subgate-rehearsal/closeout/prepublication-contained-lapses.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.git_binding.must_resolve_exact_object",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Replace the draft with Git's resolved full planning source before staging.",
+        "prevention_control": "Resolve and compare every authored Git binding with git rev-parse before explicit-path staging.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-663.md",
+          "orchestration/continuity/raisa-provider-free-governance-clockwork-historical-derived-minimised-scenario-consumption-subgate-rehearsal/evidence.json"
+        ]
+      },
+      "baton_summary": "records one contained uncommitted planning-source binding draft."
+    }
+  ]
+}

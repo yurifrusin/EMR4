@@ -1,0 +1,25 @@
+{
+  "schema_version": "raisa.governance_clockwork_historical_derived_minimised_scenario_consumption_subgate_efficacy.v1",
+  "recorded_at": "2026-08-24T12:55:43.0106995+10:00",
+  "reviewed_source": "5792a993b33a5f0dc0fea78e1c20f7f4164f2c4a",
+  "decision": "effective_closed_authority_representation",
+  "safety": {
+    "complete_mode_required": true,
+    "all_five_historical_modes_mutually_exclusive": true,
+    "contract_full_source_and_fixture_digest_bound": true,
+    "maximum_later_fixture_reads": 1,
+    "archive_reads_allowed": false,
+    "local_provider_free_test_context_only": true,
+    "authority_non_transitive": true
+  },
+  "ergonomics": {
+    "future_intent_is_box_ticking_only": true,
+    "unknown_or_descriptive_historical_labels_possible": false,
+    "ambiguous_mixed_mode_possible": false,
+    "candidate_test_layout_corrections": 1,
+    "full_git_id_draft_corrections": 1,
+    "implementation_reruns": 0,
+    "publication_reruns": 0
+  },
+  "recommendation": "run_one_exact_digest_bound_local_provider_free_check_in_adapter_test_consumption_rehearsal"
+}

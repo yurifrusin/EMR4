@@ -1,0 +1,65 @@
+{
+  "schema_version": "raisa.governance_clockwork_historical_derived_minimised_scenario_consumption_subgate_evidence.v1",
+  "recorded_at": "2026-08-24T12:55:43.0106995+10:00",
+  "decision": "accepted_closed_mode_no_archive_or_fixture_read",
+  "planning_source": "6c5a49e1a80e2c651380b79a4f5b59d0bd93ee8c",
+  "reviewed_source": "5792a993b33a5f0dc0fea78e1c20f7f4164f2c4a",
+  "accepted_contract": {
+    "path": "orchestration/continuity/raisa-local-only-historical-derived-minimised-check-in-context-scenario-first-use-materialisation-rehearsal/next-tranche-contract.json",
+    "sha256": "da2507056f37482016125c3ccad909573c0495d86cdc135cd5b13714bc7c93ac",
+    "first_use_source": "4740813d53ebbc4872fe8c0c08ce2578b1982770",
+    "fixture_sha256": "2205ab83cec7c5639d39cc563cee80eec825ac33f17571151571d325e74f2dfe"
+  },
+  "closed_mode": {
+    "member_count": 9,
+    "complete_mode_admitted": true,
+    "partial_modes_rejected": 9,
+    "denial_conflicts_rejected": 2,
+    "measured_probe_conflict_rejected": true,
+    "materialisation_conflict_rejected": true,
+    "altered_contract_digest_rejected": true,
+    "altered_first_use_source_rejected": true,
+    "altered_fixture_digest_rejected": true,
+    "unknown_allowance_rejected": true,
+    "authority_non_transitive": true
+  },
+  "regression": {
+    "legacy_full_denial_unchanged": true,
+    "typed_historical_denial_unchanged": true,
+    "measured_privacy_probe_mode_unchanged": true,
+    "first_use_materialisation_mode_unchanged": true,
+    "closeout_and_user_decision_paths_share_validator": true
+  },
+  "verification": {
+    "focused_controls_passed": 7,
+    "governance_profile_controls_passed": 174,
+    "ruff_passed": true,
+    "compileall_passed": true,
+    "successor_contract_hash_passed": true,
+    "git_diff_check_passed": true
+  },
+  "authority_readback": {
+    "historical_archive_reads": 0,
+    "ignored_fixture_reads": 0,
+    "fixture_consumed": false,
+    "consumer_or_adapter_added": false,
+    "provider_or_model_called": false,
+    "product_database_client_or_runtime_touched": false,
+    "ordinary_practice_changed": false,
+    "protected_refs_moved": false
+  },
+  "parallelism": {
+    "deepseek_flash": "declined_negative",
+    "gemini_verifier": "not_applicable_neutral",
+    "native_subagents": "declined_negative",
+    "owner": "gpt_sol_serial"
+  },
+  "contained_workflow_cost": {
+    "uncommitted_planning_source_draft_corrections": 1,
+    "registered_incident_id": "AER-1156",
+    "candidate_test_block_placement_corrections": 1,
+    "focused_verification_reruns": 1,
+    "implementation_or_acceptance_reruns": 0,
+    "archive_fixture_or_provider_runs": 0
+  }
+}
