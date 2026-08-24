@@ -1,0 +1,55 @@
+{
+  "schema_version": "raisa.governance_clockwork_historical_first_use_materialisation_subgate_contract.v1",
+  "status": "frozen_fail_closed_successor_contract",
+  "recorded_at": "2026-08-24T10:07:35.8928123+10:00",
+  "operation_id": "raisa-provider-free-governance-clockwork-historical-derived-first-use-materialisation-subgate-rehearsal",
+  "builds_on_reviewed_source": "abcd4206a363b0c565c070e0f2cb9c54d627b3b3",
+  "objective": "make_one_exact_gate_wrapped_minimised_historical_derived_fixture_materialisation_authority_representable_as_a_closed_clockwork_mode_before_private_access",
+  "reason_for_dependency": {
+    "existing_historical_mode": "measured_privacy_probe_only",
+    "existing_strongest_result": "locally_restricted_candidate_without_downstream_authority",
+    "existing_fixture_authority": false,
+    "actual_materialisation_representable_now": false
+  },
+  "source_boundary": {
+    "historical_archive_access": false,
+    "ignored_attempt_output_access": false,
+    "authored_synthetic_boundary_tests_only": true,
+    "provider_network_model_calls": false,
+    "product_database_client_or_runtime": false
+  },
+  "implementation": {
+    "add_one_closed_historical_first_use_materialisation_mode": true,
+    "preserve_legacy_denial_measurement_subgate_and_conflict_rules": true,
+    "reject_partial_mixed_or_unknown_historical_modes": true,
+    "bind_exact_candidate_gate_source": "abcd4206a363b0c565c070e0f2cb9c54d627b3b3",
+    "maximum_reusable_fixtures": 1,
+    "exact_gate_receipt_before_write": true,
+    "blocked_or_revision_required_writes_fixture": false,
+    "authority_non_transitive": true
+  },
+  "future_materialisation_ceiling": {
+    "one_leaf_root_one_dense_day_maximum_80_files": true,
+    "one_metadata_bind_one_content_run_no_retry": true,
+    "in_memory_candidate_and_private_intermediates_only": true,
+    "source_text_identity_contact_note_filename_path_date_timestamp_key_or_mapping_output": false,
+    "artifact_class": "minimised_structural_scenario",
+    "purpose": "provider_free_reception_check_in_context_scenario_development",
+    "fixture_class": "provider_free_local_test_only",
+    "whole_day_or_near_lossless_replay": false
+  },
+  "verification": {
+    "provider_free_authored_synthetic_positive_mode": 1,
+    "incomplete_mode_cases": "rejected",
+    "mixed_historical_mode_cases": "rejected",
+    "existing_mode_regressions": 0,
+    "historical_content_runs": 0
+  },
+  "opens_exact_successor": "raisa-local-only-historical-derived-minimised-check-in-context-scenario-first-use-materialisation-rehearsal",
+  "authority_ceiling": {
+    "historical_access_or_fixture_write_in_this_subgate_tranche": false,
+    "provider_model_product_database_client_or_runtime": false,
+    "ordinary_practice_activation": false,
+    "production_deployment_release_pages_or_protected_refs": false
+  }
+}

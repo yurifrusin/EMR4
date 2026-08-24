@@ -1,0 +1,12 @@
+{
+  "schema_version": "emr4.non_phi_pushover_closeout_receipt.v1",
+  "recorded_at": "2026-08-24T10:07:35.8928123+10:00",
+  "operation_id": "raisa-provider-free-historical-derived-scenario-first-use-candidate-gate-evaluator-rehearsal",
+  "status": "delivered",
+  "provider_status": 1,
+  "request_id": "4175a37a-e044-44fb-ae8a-ad75ca8fa74f",
+  "continuing_to": [
+    "raisa-local-only-historical-derived-minimised-check-in-context-scenario-first-use-materialisation-rehearsal"
+  ],
+  "contains_phi": false
+}

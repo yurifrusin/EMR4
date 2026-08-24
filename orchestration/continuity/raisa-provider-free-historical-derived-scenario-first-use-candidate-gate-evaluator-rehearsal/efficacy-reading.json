@@ -1,0 +1,30 @@
+{
+  "schema_version": "raisa.historical_first_use_candidate_gate_evaluator_efficacy.v1",
+  "recorded_at": "2026-08-24T10:07:35.8928123+10:00",
+  "reviewed_source": "abcd4206a363b0c565c070e0f2cb9c54d627b3b3",
+  "decision": "accepted_evaluator_first_use_still_closed",
+  "control_efficacy": {
+    "free_form_candidate_writing_impossible": true,
+    "unknown_fields_and_values_schema_rejected": true,
+    "abbreviated_git_object_id_schema_rejected": true,
+    "digest_and_utility_recomputed": true,
+    "broad_replay_default_denied": true,
+    "exact_binding_non_transitive": true,
+    "evaluator_has_no_writer": true
+  },
+  "authority_efficacy": {
+    "synthetic_positive_confused_with_actual_first_use": false,
+    "actual_candidate_admitted": false,
+    "reusable_artifact_created": false,
+    "archive_provider_product_or_runtime_access": false,
+    "ready_to_guard_one_actual_minimised_candidate": true
+  },
+  "workflow_ergonomics": {
+    "preplanning_receipt_event_vocabulary_rejections": 1,
+    "focused_test_literal_assertion_reruns": 1,
+    "implementation_or_acceptance_reruns": 0,
+    "provider_or_historical_reruns": 0,
+    "typed_gate_decision_repair_loops": 0
+  },
+  "recommendation": "first_add_the_exact_gate_wrapped_materialisation_mode_to_the_clockwork_closed_historical_vocabulary_then_run_one_local_only_no_retry_first_materialisation_attempt"
+}

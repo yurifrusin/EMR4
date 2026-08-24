@@ -1,0 +1,154 @@
+{
+  "schema_version": "ariadne.governance_semantic_closeout_intent.v1",
+  "profile": "provider_free_governance_tooling_v1",
+  "artifact_slug": "raisa-provider-free-historical-derived-scenario-first-use-candidate-gate-evaluator-rehearsal",
+  "recorded_at": "2026-08-24T10:07:35.8928123+10:00",
+  "closeout": {
+    "operation_id": "raisa-provider-free-historical-derived-scenario-first-use-candidate-gate-evaluator-rehearsal",
+    "title": "Raisa provider-free historical-derived scenario first-use candidate gate evaluator rehearsal",
+    "builds_on": [
+      "raisa-local-only-historical-diary-leading-explicit-time-token-bounded-measurement-rehearsal"
+    ],
+    "authority_notes": [
+      "Yuri delegated first-use gate timing; accept the write-free typed evaluator and make exact first-use materialisation representable in clockwork before private access."
+    ],
+    "decisions": [
+      {
+        "id": "accept-typed-write-free-candidate-gate-evaluator",
+        "source": "orchestration/continuity/raisa-provider-free-historical-derived-scenario-first-use-candidate-gate-evaluator-rehearsal/evidence.json",
+        "summary": "Accept exact source abcd4206a363b0c565c070e0f2cb9c54d627b3b3 after 229 controls and complete typed-form denials pass."
+      },
+      {
+        "id": "keep-actual-first-use-closed",
+        "source": "orchestration/continuity/raisa-provider-free-historical-derived-scenario-first-use-candidate-gate-evaluator-rehearsal/report.md",
+        "summary": "The authored-synthetic positive proves behavior only; no historical candidate, write or first-use admission exists."
+      },
+      {
+        "id": "continue-to-closed-clockwork-materialisation-subgate",
+        "source": "orchestration/continuity/raisa-provider-free-historical-derived-scenario-first-use-candidate-gate-evaluator-rehearsal/next-tranche-contract.json",
+        "summary": "Add one exact gate-wrapped minimised-materialisation mode without private access before the actual one-run materialiser."
+      }
+    ],
+    "claim_scope": [
+      "Strict forms, exact source and digest, computed utility, three decisions, non-transitive binding and zero writer behavior pass on authored-synthetic candidates only."
+    ],
+    "additional_receipts": [
+      "orchestration/continuity/raisa-provider-free-historical-derived-scenario-first-use-candidate-gate-evaluator-rehearsal/closeout/prepublication-contained-lapses.json",
+      "orchestration/continuity/raisa-provider-free-historical-derived-scenario-first-use-candidate-gate-evaluator-rehearsal/closeout/pushover-notification-receipt.json"
+    ],
+    "additional_artifacts": [
+      "orchestration_harness/historical_diary_first_use_candidate_gate.py",
+      "orchestration/continuity/raisa-provider-free-historical-derived-scenario-first-use-candidate-gate-evaluator-rehearsal/next-tranche-contract.json"
+    ],
+    "unresolved_gates": [
+      "Clockwork materialisation mode, actual candidate admission, fixture write and every product/provider/protected surface remain gated."
+    ],
+    "journey": {
+      "strategic_role": "Turn historical first use from a prose judgment into a deterministic control.",
+      "outcome": "The exact write-free typed evaluator passes without private or provider access."
+    },
+    "current_position": {
+      "strategic_role": "Make one controlled first-use write representable without weakening the existing measurement mode.",
+      "why_now": "The gate passes but the live historical mode correctly forbids fixture writes.",
+      "outcome": "One new closed clockwork subgate can precede the actual materialiser.",
+      "unlocks": [
+        "One later local-only no-retry exact-gate materialisation attempt."
+      ],
+      "does_not_solve": [
+        "No archive access, fixture write, product, provider or production authority opens."
+      ],
+      "orientation_statement": "Connect the gate to the clockwork before first use."
+    },
+    "next_operation": {
+      "operation_id": "raisa-provider-free-governance-clockwork-historical-derived-first-use-materialisation-subgate-rehearsal",
+      "active_tranche": "Raisa provider-free governance clockwork historical-derived first-use materialisation subgate rehearsal",
+      "objective": "Add and prove one exact closed materialisation mode without historical access.",
+      "authority_source": "Yuri's delegated first-use gate timing and uninterrupted-development authority within the frozen provider-free successor contract.",
+      "next_stage": "fresh_five_source_rehydration_then_freeze_closed_clockwork_materialisation_subgate_plan"
+    }
+  },
+  "verification_profile": "governance_clockwork_core_v1",
+  "baton_slot": "current_deepseek_native_harness_acceptance",
+  "next_operation_protected_boundaries": [
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only",
+    "no_product_patient_appointment_clinical_or_protected_data",
+    "no_historical_data_access",
+    "provider_free_authored_synthetic_boundary_tests_only",
+    "no_private_archive_or_local_attempt_output_access",
+    "no_fixture_materialisation_in_subgate_tranche",
+    "first_use_gate_remains_closed_pending_exact_candidate_admission"
+  ],
+  "agent_error_observations": [
+    {
+      "attempt_key": "historical-first-use-gate-preplanning-event-001",
+      "observed_on": "2026-08-24",
+      "tranche": "historical-first-use-gate-evaluator",
+      "role": "orchestrator",
+      "resource_id": "preplanning-continuation-event",
+      "model": "gpt-sol",
+      "reasoning_level": "extra_high",
+      "transport": "local_repository_clockwork",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Continuation event is selected from the executable profile before receipt generation.",
+      "observed_error": "The first intent used pre_plan instead of pre_sprint_planning.",
+      "detection_method": "The receipt builder rejected serial_continuation_event_invalid before planning.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-historical-derived-scenario-first-use-candidate-gate-evaluator-rehearsal/closeout/prepublication-contained-lapses.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.continuation_event_requires_executable_profile_value",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Select pre_sprint_planning from the executable event list.",
+        "prevention_control": "Read continuation events from --list-continuation-events before authoring an intent.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-660.md",
+          "orchestration/continuity/raisa-provider-free-historical-derived-scenario-first-use-candidate-gate-evaluator-rehearsal/evidence.json"
+        ]
+      },
+      "baton_summary": "records one rejected descriptive preplanning event."
+    },
+    {
+      "attempt_key": "historical-first-use-gate-plan-text-assertion-001",
+      "observed_on": "2026-08-24",
+      "tranche": "historical-first-use-gate-evaluator",
+      "role": "implementer",
+      "resource_id": "plan-text-assertion",
+      "model": "gpt-sol",
+      "reasoning_level": "extra_high",
+      "transport": "local_repository_clockwork",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "low",
+      "expected_invariant": "Focused plan test quotes the unchanged frozen threat text exactly.",
+      "observed_error": "The test asserted operates on while the threat text says accepts.",
+      "detection_method": "The first focused pytest run failed one literal assertion while six behavior tests passed.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-historical-derived-scenario-first-use-candidate-gate-evaluator-rehearsal/closeout/prepublication-contained-lapses.json"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.plan_text_assertion_must_match_frozen_wording",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Align the literal assertion to accepts without changing the threat text.",
+        "prevention_control": "Copy exact frozen text into literal documentation assertions.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-660.md",
+          "orchestration/continuity/raisa-provider-free-historical-derived-scenario-first-use-candidate-gate-evaluator-rehearsal/evidence.json"
+        ]
+      },
+      "baton_summary": "records one contained plan-text literal assertion defect."
+    }
+  ]
+}

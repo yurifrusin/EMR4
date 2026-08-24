@@ -1,0 +1,74 @@
+{
+  "schema_version": "raisa.historical_first_use_candidate_gate_evaluator_evidence.v1",
+  "result": "raisa_provider_free_typed_candidate_gate_evaluator_accepted",
+  "recorded_at": "2026-08-24T10:07:35.8928123+10:00",
+  "planning_source": "ba36ecc7cea86b4c01414ba0f504d3b76034332e",
+  "implementation_source": "abcd4206a363b0c565c070e0f2cb9c54d627b3b3",
+  "reviewed_source": "abcd4206a363b0c565c070e0f2cb9c54d627b3b3",
+  "accepted_measurement_source": "7f9a526e57a4c10502f01b0e7c1cc5ec6910f00c",
+  "five_source_rehydration": "passed",
+  "typed_form": {
+    "strict_validation": true,
+    "extra_fields_forbidden": true,
+    "unconstrained_prose_fields": 0,
+    "full_git_object_id_required": true,
+    "canonical_digest_algorithm": "sha256",
+    "candidate_payload_writer_exists": false,
+    "archive_or_attempt_reader_exists": false
+  },
+  "authored_synthetic_matrix": {
+    "evaluated_cases": 8,
+    "exact_artifact_decisions": 1,
+    "blocked_decisions": 5,
+    "revision_required_decisions": 2,
+    "schema_rejection_cases": 5,
+    "positive_candidate_sha256": "3868b65df91e213b95746e286c8c8b5e9171752fe9c18b6aeca2981771be4471",
+    "positive_binding_non_transitive": true,
+    "whole_day_or_near_lossless_blocked": true,
+    "bounded_multi_event_revision_required": true
+  },
+  "authority": {
+    "evidence_label": "authored_synthetic_gate_behavior_only",
+    "historical_candidate_materialised": false,
+    "historical_first_use_gate_opened": false,
+    "candidate_materialisation_allowed_by_evaluator": false,
+    "historical_archive_or_attempt_access": false,
+    "provider_network_model_calls": 0,
+    "product_database_client_or_runtime_allowed": false,
+    "ordinary_practice_allowed": false,
+    "production_deployment_release_pages_or_protected_refs_allowed": false
+  },
+  "verification": {
+    "focused_controls": 7,
+    "existing_historical_diary_controls": 222,
+    "total_unique_controls": 229,
+    "total_test_files": 25,
+    "failures": 0,
+    "ruff": "passed",
+    "compileall": "passed",
+    "typed_json_schema": "passed",
+    "source_boundary_scan": "passed",
+    "git_diff_check": "passed"
+  },
+  "contained_incidents": {
+    "register_revision": 660,
+    "incident_ids": [
+      "AER-1150",
+      "AER-1151"
+    ],
+    "published_before_correction": false,
+    "archive_or_provider_access_before_correction": false
+  },
+  "parallelism": {
+    "deepseek": "declined_negative_native_harness_paused_no_silent_claude_fallback_and_tightly_coupled_authority_seam",
+    "gemini": "not_applicable_neutral_provider_free_deterministic_gate_with_no_veto_surface",
+    "native_subagents": "declined_negative_schema_digest_decision_and_tests_are_one_small_serial_seam",
+    "gpt_sol": "serial_plan_implementation_verification_acceptance_git_and_closeout_owner"
+  },
+  "first_use_gate": {
+    "status": "closed_pending_candidate_specific_evaluation",
+    "evaluator_ready": true,
+    "actual_candidate_admission_receipts": 0,
+    "reusable_historical_derived_artifacts": 0
+  }
+}

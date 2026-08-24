@@ -1,0 +1,33 @@
+{
+  "schema_version": "raisa.prepublication_contained_lapses.v1",
+  "operation_id": "raisa-provider-free-historical-derived-scenario-first-use-candidate-gate-evaluator-rehearsal",
+  "recorded_at": "2026-08-24T10:07:35.8928123+10:00",
+  "published_before_correction": false,
+  "historical_or_provider_access_before_correction": false,
+  "observations": [
+    {
+      "attempt_key": "historical-first-use-gate-preplanning-event-001",
+      "origin": "operator",
+      "category": "operator_error",
+      "rejected_value": "pre_plan",
+      "accepted_value": "pre_sprint_planning",
+      "detection": "serial_continuation_event_invalid",
+      "workflow_cost": {
+        "receipt_reruns": 1,
+        "plan_or_dispatch_runs": 0
+      }
+    },
+    {
+      "attempt_key": "historical-first-use-gate-plan-text-assertion-001",
+      "origin": "repository",
+      "category": "repository_defect",
+      "rejected_value": "operates on an already in-memory typed model",
+      "accepted_value": "accepts an already in-memory typed model",
+      "detection": "focused_plan_test_literal_mismatch",
+      "workflow_cost": {
+        "focused_test_reruns": 1,
+        "implementation_or_historical_reruns": 0
+      }
+    }
+  ]
+}
