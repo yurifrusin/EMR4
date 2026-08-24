@@ -18,12 +18,14 @@ if str(ROOT) not in sys.path:
 from orchestration_harness.governance_clockwork_tick import (
     BLOCKED_INTENT_VERSION,
     CHECKPOINT_INTENT_VERSION,
+    PAUSE_INTENT_VERSION,
     SEMANTIC_TICK_INTENT_VERSION,
     SEMANTIC_VERIFICATION_PROFILE,
     USER_DECISION_INTENT_VERSION,
     ClockworkTickRejection,
     admit_tick_intent,
     build_checkpoint_tick_generation,
+    build_pause_tick_generation,
     build_user_decision_tick_generation,
     build_tick_generation,
     build_blocked_tick_generation,
@@ -32,6 +34,7 @@ from orchestration_harness.governance_clockwork_tick import (
     rollback_tick_generation,
     validate_blocked_tick_intent,
     validate_checkpoint_tick_intent,
+    validate_pause_tick_intent,
     validate_tick_live_state,
     validate_user_decision_tick_intent,
 )
@@ -541,6 +544,9 @@ def _intent_identity(
     if version == CHECKPOINT_INTENT_VERSION:
         admitted = validate_checkpoint_tick_intent(intent, contract)
         return admitted["operation_id"], "checkpoint_transition", tc.sha256(admitted)
+    if version == PAUSE_INTENT_VERSION:
+        admitted = validate_pause_tick_intent(intent, contract)
+        return admitted["operation_id"], "pause_transition", tc.sha256(admitted)
     if version == USER_DECISION_INTENT_VERSION:
         admitted = validate_user_decision_tick_intent(intent, contract)
         return (
@@ -652,6 +658,8 @@ def main(argv: list[str] | None = None) -> int:
                 prepared = build_blocked_tick_generation(ROOT, contract, intent)
             elif intent.get("schema_version") == CHECKPOINT_INTENT_VERSION:
                 prepared = build_checkpoint_tick_generation(ROOT, contract, intent)
+            elif intent.get("schema_version") == PAUSE_INTENT_VERSION:
+                prepared = build_pause_tick_generation(ROOT, contract, intent)
             elif intent.get("schema_version") == USER_DECISION_INTENT_VERSION:
                 prepared = build_user_decision_tick_generation(
                     ROOT, contract, intent

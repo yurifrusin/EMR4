@@ -1,0 +1,53 @@
+{
+  "schema_version": "ariadne.governance_live_pause_transition_intent.v1",
+  "operation_id": "raisa-provider-free-unmounted-waiting-area-confirm-command-family-architecture",
+  "completed_stage": "Accepted and published raisa-provider-free-read-only-waiting-area-movement-command-family-readiness-review; recorded the unmounted architecture successor without starting its plan or execution.",
+  "resume_executable_stage": "fresh_five_source_rehydration_then_freeze_the_narrowest_fail_closed_unmounted_waiting_area_confirm_command_family_architecture_plan",
+  "terminal_reason": "explicit_user_pause",
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v1",
+    "commands": [
+      {
+        "command_id": "explicit-pause-clockwork-focused-tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "--repo-root",
+          "C:/Users/sarashera/emr4",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "explicit-pause-clockwork-ruff",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "ruff",
+          "check",
+          "orchestration_harness/governance_clockwork_tick.py",
+          "scripts/ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "explicit-pause-clockwork-compile",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "py_compile",
+          "orchestration_harness/governance_clockwork_tick.py",
+          "scripts/ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      }
+    ]
+  }
+}

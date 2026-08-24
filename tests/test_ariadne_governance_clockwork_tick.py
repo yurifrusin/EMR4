@@ -12,6 +12,8 @@ import pytest
 from orchestration_harness.governance_clockwork_tick import (
     BLOCKED_INTENT_VERSION,
     CHECKPOINT_INTENT_VERSION,
+    PAUSE_INTENT_VERSION,
+    PAUSE_TERMINAL_REASON,
     INCIDENT_CANDIDATE_STATES,
     INCIDENT_CAUSAL_CLAIM_LEVEL,
     INCIDENT_CORRECTION_STATUSES,
@@ -45,6 +47,7 @@ from orchestration_harness.governance_clockwork_tick import (
     PREDECESSOR_METADATA_NAMES,
     build_blocked_tick_generation,
     build_checkpoint_tick_generation,
+    build_pause_tick_generation,
     build_tick_generation,
     build_user_decision_tick_generation,
     expand_semantic_tick_intent,
@@ -55,6 +58,7 @@ from orchestration_harness.governance_clockwork_tick import (
     semantic_scalar_leaf_count,
     validate_blocked_tick_intent,
     validate_checkpoint_tick_intent,
+    validate_pause_tick_intent,
     validate_tick_intent,
     validate_tick_live_state,
     validate_user_decision_tick_intent,
@@ -688,6 +692,25 @@ def _checkpoint_intent(worktree: Path) -> dict:
         "operation_id": latch["operation_id"],
         "completed_stage": "Relay-free contract, schemas, harness and deterministic static gates passed at an exact full-Git candidate.",
         "next_executable_stage": "run_one_no_database_relay_free_oci_result_channel_proof_then_stop_on_any_mismatch",
+        "command_manifest": commands,
+    }
+
+
+def _pause_intent(worktree: Path) -> dict:
+    latch = _json(
+        worktree
+        / "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    )
+    commands = _json(
+        worktree
+        / "orchestration/continuity/ariadne-governance-clockwork/command-manifest.json"
+    )
+    return {
+        "schema_version": PAUSE_INTENT_VERSION,
+        "operation_id": latch["operation_id"],
+        "completed_stage": "The accepted predecessor closed and the successor remains unstarted.",
+        "resume_executable_stage": "fresh_five_source_rehydration_then_resume_the_recorded_successor",
+        "terminal_reason": PAUSE_TERMINAL_REASON,
         "command_manifest": commands,
     }
 
@@ -2066,6 +2089,20 @@ def test_checkpoint_intent_is_closed_and_rejects_derived_or_no_progress_input() 
         validate_checkpoint_tick_intent(invalid, contract)
 
 
+def test_pause_intent_is_closed_and_terminal_reason_is_typed() -> None:
+    contract = validate_contract(_json(CONTRACT_PATH))
+    baseline = _pause_intent(ROOT)
+    assert validate_pause_tick_intent(baseline, contract) == baseline
+    derived = json.loads(json.dumps(baseline))
+    derived["source_head"] = "a" * 40
+    with pytest.raises(ClockworkTickRejection, match="pause_tick_intent_keys"):
+        validate_pause_tick_intent(derived, contract)
+    invalid = json.loads(json.dumps(baseline))
+    invalid["terminal_reason"] = "some_descriptive_pause"
+    with pytest.raises(ClockworkTickRejection, match="pause_tick_terminal_reason"):
+        validate_pause_tick_intent(invalid, contract)
+
+
 def test_generation_rejects_all_prospective_header_defects_before_mutation(
     tmp_path: Path,
 ) -> None:
@@ -2301,6 +2338,80 @@ def test_blocked_tick_preserves_every_non_latch_surface_and_rolls_back(
         assert restored_pointer["lease_sequence"] == (
             original_pointer["lease_sequence"] + 2
         )
+
+
+def test_pause_tick_preserves_accepted_state_and_is_pointer_last_recoverable(
+    tmp_path: Path,
+) -> None:
+    with _worktree(tmp_path / "pause-transition") as worktree:
+        contract = validate_contract(_json(worktree / CONTRACT_PATH.relative_to(ROOT)))
+        intent = _pause_intent(worktree)
+        canonical_paths, metadata_paths, pointer_path = _paths(worktree, contract)
+        before_canonical = {
+            key: path.read_bytes() for key, path in canonical_paths.items()
+        }
+        before_metadata = {
+            key: path.read_bytes() for key, path in metadata_paths.items()
+        }
+        before_pointer = pointer_path.read_bytes()
+        prepared = build_pause_tick_generation(worktree, contract, intent)
+        latch = json.loads(prepared["canonical"]["active_latch"].decode("utf-8"))
+        baton = prepared["canonical"]["current_baton"].decode("utf-8")
+        assert latch["status"] == "paused"
+        assert latch["source_head"] == subprocess.run(
+            ["git", "rev-parse", "HEAD"],
+            cwd=worktree,
+            check=True,
+            capture_output=True,
+            text=True,
+        ).stdout.strip()
+        assert latch["checkpoint"]["next_executable_stage"] == intent[
+            "resume_executable_stage"
+        ]
+        assert latch["resume_after_compaction"] is False
+        assert latch["user_attention"] == {"required": False, "reason": None}
+        assert latch["terminal_response"] == {
+            "permitted": True,
+            "reason": PAUSE_TERMINAL_REASON,
+        }
+        assert "Paused by Yuri" in baton
+        assert {
+            key
+            for key in CANONICAL_KEYS
+            if prepared["canonical"][key] != before_canonical[key]
+        } == {"active_latch", "current_baton"}
+        with pytest.raises(OSError, match="injected_tick_precommit_failure"):
+            publish_tick_generation(
+                worktree,
+                prepared,
+                writer_id="clockwork",
+                fail_at="before_pointer_replace",
+            )
+        assert {
+            key: path.read_bytes() for key, path in canonical_paths.items()
+        } == before_canonical
+        assert {
+            key: path.read_bytes() for key, path in metadata_paths.items()
+        } == before_metadata
+        assert pointer_path.read_bytes() == before_pointer
+        active = publish_tick_generation(
+            worktree, prepared, writer_id="clockwork"
+        )
+        assert active["event_kind"] == "pause_transition"
+        assert active["operation_id"] == intent["operation_id"]
+        assert publish_tick_generation(
+            worktree, prepared, writer_id="clockwork"
+        )["generation_id"] == active["generation_id"]
+        rolled_back = rollback_tick_generation(
+            worktree, contract, writer_id="clockwork"
+        )
+        assert rolled_back["byte_exact"] is True
+        assert {
+            key: path.read_bytes() for key, path in canonical_paths.items()
+        } == before_canonical
+        assert {
+            key: path.read_bytes() for key, path in metadata_paths.items()
+        } == before_metadata
 
 
 def test_user_decision_tick_replaces_blocked_latch_and_only_updates_baton(

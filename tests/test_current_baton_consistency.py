@@ -270,6 +270,11 @@ def test_continuity_and_compass_bind_risk_weighted_result_and_product_position()
             assert latch["operation_id"] == selected_transaction["operation_id"]
             assert latch["status"] == "blocked"
             assert graph["nodes"][-1]["id"] != selected_transaction["operation_id"]
+        elif selected_transaction["event_kind"] == "pause_transition":
+            latch = json.loads(ACTIVE_LATCH.read_text(encoding="utf-8"))
+            assert latch["operation_id"] == selected_transaction["operation_id"]
+            assert latch["status"] == "paused"
+            assert graph["nodes"][-1]["id"] != selected_transaction["operation_id"]
         else:
             latch = json.loads(ACTIVE_LATCH.read_text(encoding="utf-8"))
             assert selected_transaction["event_kind"] in {
@@ -336,6 +341,13 @@ def test_live_baton_rows_accept_behavior_and_resume_narrow_product_work() -> Non
             assert latch["status"] == "blocked"
             assert latch["user_attention"]["required"] is True
             assert latch["terminal_response"]["permitted"] is True
+        elif selected_transaction["event_kind"] == "pause_transition":
+            assert selected_transaction["source_commit"] in clockwork_relation
+            assert latch["status"] == "paused"
+            assert latch["resume_after_compaction"] is False
+            assert latch["user_attention"]["required"] is False
+            assert latch["terminal_response"]["permitted"] is True
+            assert latch["terminal_response"]["reason"] == "explicit_user_pause"
         else:
             assert selected_transaction["event_kind"] in {
                 "user_decision_transition",

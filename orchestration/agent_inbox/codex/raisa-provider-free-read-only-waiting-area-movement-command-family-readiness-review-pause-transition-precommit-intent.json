@@ -1,0 +1,22 @@
+{
+  "schema_version": "ariadne.serial_continuation_intent.v1",
+  "preset": "provider_free_serial_observed_empty_workers",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_typed_clockwork_pause_transition_and_its_passed_focused_tests_then_publish_yuris_explicit_pause",
+  "assessed_stage": "waiting_area_readiness_review_explicit_pause_transition_precommit",
+  "active_evidence_paths": [
+    "docs/raisa-provider-free-read-only-waiting-area-movement-command-family-readiness-review-plan.md",
+    "docs/raisa-provider-free-read-only-waiting-area-movement-command-family-readiness-review-closeout.md",
+    "orchestration/agent_inbox/codex/raisa-provider-free-read-only-waiting-area-movement-command-family-readiness-review-sol-acceptance.md",
+    "orchestration/continuity/raisa-provider-free-read-only-waiting-area-movement-command-family-readiness-review/evidence.json",
+    "orchestration/continuity/raisa-provider-free-read-only-waiting-area-movement-command-family-readiness-review/report.md",
+    "orchestration/continuity/raisa-provider-free-read-only-waiting-area-movement-command-family-readiness-review/pause/checkpoint-intent.json",
+    "orchestration/continuity/ariadne-active-operation-latch/current.json"
+  ],
+  "lane_decision_overrides": [
+    {
+      "lane_id": "gemini_verifier",
+      "decision_code": "not_applicable_neutral"
+    }
+  ]
+}
