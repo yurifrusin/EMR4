@@ -1,0 +1,21 @@
+{
+  "schema_version": "ariadne.serial_continuation_intent.v1",
+  "preset": "provider_free_serial_observed_empty_workers",
+  "continuation_event": "restored_conversation",
+  "planned_action": "complete_current_waiting_area_readiness_review_then_pause_per_yuri_instruction",
+  "assessed_stage": "waiting_area_movement_command_family_readiness_review_post_crash_closeout",
+  "active_evidence_paths": [
+    "docs/raisa-provider-free-read-only-waiting-area-movement-command-family-readiness-review-plan.md",
+    "docs/security/raisa-provider-free-read-only-waiting-area-movement-command-family-readiness-review-threat-model-delta.md",
+    "orchestration/continuity/raisa-provider-free-read-only-waiting-area-movement-command-family-readiness-review/readiness-review-contract.json",
+    "orchestration/continuity/raisa-provider-free-read-only-waiting-area-movement-command-family-readiness-review/provider-free-read-only-evidence.json",
+    "orchestration/continuity/raisa-provider-free-read-only-waiting-area-movement-command-family-readiness-review/readiness-review-report.md",
+    "orchestration/continuity/ariadne-active-operation-latch/current.json"
+  ],
+  "lane_decision_overrides": [
+    {
+      "lane_id": "gemini_verifier",
+      "decision_code": "not_applicable_neutral"
+    }
+  ]
+}

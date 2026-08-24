@@ -290,6 +290,10 @@ def render_report(evidence: dict[str, Any]) -> str:
     lines = [
         "# Waiting-area movement command-family readiness review",
         "",
+        "Date: 2026-08-24",
+        "",
+        "Timestamp: 2026-08-24T19:10:01.3753193+10:00 (Australia/Brisbane)",
+        "",
         f"Source HEAD: `{evidence['source_head']}`",
         "",
         f"Result: `{evidence['result']}`",

@@ -1,5 +1,9 @@
 # Waiting-area movement command-family readiness review
 
+Date: 2026-08-24
+
+Timestamp: 2026-08-24T19:10:01.3753193+10:00 (Australia/Brisbane)
+
 Source HEAD: `11317b69c6fcd0e97a002b4196ec92cc33f47110`
 
 Result: `raisa_provider_free_read_only_waiting_area_movement_command_family_readiness_review_pass`

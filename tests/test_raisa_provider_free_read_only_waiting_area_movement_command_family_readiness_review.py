@@ -79,5 +79,7 @@ def test_command_writes_deterministic_evidence_and_report(tmp_path: Path) -> Non
     assert evidence["source_head"] == "11317b69c6fcd0e97a002b4196ec92cc33f47110"
     assert len(evidence["source_bindings"]) == 16
     report = " ".join(report_path.read_text(encoding="utf-8").split())
+    assert "Date: 2026-08-24" in report
+    assert "Australia/Brisbane" in report
     assert "Five reusable" in report
     assert "unmounted command-family architecture" in report
