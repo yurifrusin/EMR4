@@ -1,0 +1,87 @@
+{
+  "adapter_test": {
+    "audit_count": 1,
+    "authenticated_receptionist_reauthorised": true,
+    "call_order": [
+      "claim",
+      "lock",
+      "reauthorize",
+      "verify",
+      "effect",
+      "audit",
+      "event",
+      "complete",
+      "commit",
+      "readback"
+    ],
+    "commit_count": 1,
+    "event_count": 1,
+    "event_schema_version": "diary.appointment_checked_in.v1",
+    "event_type": "diary.appointment_checked_in",
+    "freshness_revalidated": true,
+    "idempotency_claimed_and_completed": true,
+    "invocations": 1,
+    "practice_scope_exact": true,
+    "readback_matched": true,
+    "receipt_schema_version": "appointment.check_in_receipt.v1",
+    "response_patient_free": true,
+    "response_status_code": 200,
+    "signed_evidence_verified": true,
+    "status_after": "Arrived",
+    "status_before": "Booked",
+    "synthetic_identifiers_or_keys_persisted": false,
+    "waiting_area_preserved_none": true
+  },
+  "authority": {
+    "authority_non_transitive": true,
+    "database_route_client_runtime_or_configuration": false,
+    "fixture_is_command_authority": false,
+    "network_or_external_release": false,
+    "ordinary_practice": false,
+    "production_deployment_release_pages_or_protected_refs": false,
+    "provider_or_model_calls": 0
+  },
+  "bindings": {
+    "candidate_gate_source": "abcd4206a363b0c565c070e0f2cb9c54d627b3b3",
+    "clockwork_closeout_source": "ce1f3717fc89117a9db74ca1b95509f02fef5d82",
+    "clockwork_source": "5792a993b33a5f0dc0fea78e1c20f7f4164f2c4a",
+    "current_adapter_blob": "6955dec2e31e14c0ae4847acba22f9fb0087715b",
+    "current_adapter_source": "c82c3a741053a9c8da260aa62e1a968af22bb54e",
+    "first_use_source": "4740813d53ebbc4872fe8c0c08ce2578b1982770",
+    "original_adapter_source": "8de886c5148b3259428c8c517674f10ea92d937e",
+    "plan_source": "5eaac238e8d7541ffd395a5a3f8b8464ae5b68b8",
+    "subgate_contract_sha256": "da2507056f37482016125c3ccad909573c0495d86cdc135cd5b13714bc7c93ac",
+    "successor_contract_sha256": "6d4cfb8ae74317685a478097fa347ead932afb47033591e82ec19afbeebb9658"
+  },
+  "candidate_source": "517fda26c5c7f46397acc91976bc97b0be3778ef",
+  "claim_ceiling": "one_exact_local_provider_free_adapter_test_consumption_no_real_practice_product_runtime_or_archive_validity_claim",
+  "consumption": {
+    "digest_verified_before_parse": true,
+    "fixture_digest_match": true,
+    "fixture_retry_authorized": false,
+    "fixture_sha256_expected": "2205ab83cec7c5639d39cc563cee80eec825ac33f17571151571d325e74f2dfe",
+    "historical_archive_reads": 0,
+    "logical_fixture_read_count": 1,
+    "parsed_from_same_in_memory_bytes": true
+  },
+  "decision": "consumed_for_exact_declared_local_adapter_test_only",
+  "evidence_label": "local_provider_free_historical_derived_minimised_fixture_adapter_test",
+  "privacy": {
+    "filename_path_date_or_timestamp_emitted": false,
+    "fixture_rows_persisted": false,
+    "product_patient_appointment_or_clinical_data_used": false,
+    "source_text_identity_contact_note_emitted": false,
+    "structural_slot_values_persisted": false,
+    "token_key_or_mapping_emitted": false
+  },
+  "reason_codes": [],
+  "schema_version": "raisa.historical_derived_check_in_adapter_test_consumption_result.v1",
+  "structural_utility": {
+    "distinct_event_kinds": 2,
+    "distinct_relative_minutes": 4,
+    "event_count": 6,
+    "relative_minute_span": 19,
+    "resource_slots": 1,
+    "synthetic_subject_slots": 1
+  }
+}

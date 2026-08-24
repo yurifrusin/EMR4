@@ -1,0 +1,21 @@
+{
+  "schema_version": "ariadne.serial_continuation_intent.v1",
+  "preset": "provider_free_serial_observed_empty_workers",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "deterministically_accept_only_the_sanitised_exact_one_read_one_adapter_invocation_result_then_prepare_clockwork_closeout_without_any_fixture_reread_or_external_verifier_dispatch",
+  "assessed_stage": "postconsumption_pre_verifier_acceptance",
+  "active_evidence_paths": [
+    "docs/raisa-provider-free-exact-digest-historical-derived-minimised-check-in-context-adapter-test-consumption-rehearsal-plan.md",
+    "docs/security/raisa-provider-free-exact-digest-historical-derived-minimised-check-in-context-adapter-test-consumption-rehearsal-threat-model-delta.md",
+    "orchestration/continuity/raisa-provider-free-exact-digest-historical-derived-minimised-check-in-context-adapter-test-consumption-rehearsal/occupied-result.json",
+    "orchestration/continuity/raisa-provider-free-governance-clockwork-historical-derived-minimised-scenario-consumption-subgate-rehearsal/next-tranche-contract.json",
+    "orchestration/continuity/ariadne-active-operation-latch/current.json",
+    "orchestration/continuity/ariadne-provider-free-clockwork-live-canonical-adoption-retirement/contract.json"
+  ],
+  "lane_decision_overrides": [
+    {
+      "lane_id": "gemini_verifier",
+      "decision_code": "not_applicable_neutral"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "schema_version": "raisa.historical_derived_check_in_adapter_consumption_prepublication_lapses.v1",
+  "recorded_at": "2026-08-24T14:17:06.1781891+10:00",
+  "occupied_consumption_runs": 1,
+  "occupied_consumption_reruns": 0,
+  "candidate_test_design_corrections": 4,
+  "registered_incident_count": 2,
+  "registered_incident_evidence": [
+    "orchestration/agent_inbox/codex/raisa-provider-free-exact-digest-historical-derived-minimised-check-in-context-adapter-test-consumption-rehearsal-candidate-precommit-first-failure.json",
+    "orchestration/agent_inbox/codex/raisa-provider-free-exact-digest-historical-derived-minimised-check-in-context-adapter-test-consumption-rehearsal-candidate-commit-gate-failure.json",
+    "orchestration/agent_inbox/codex/raisa-provider-free-exact-digest-historical-derived-minimised-check-in-context-adapter-test-consumption-rehearsal-full-id-draft-failure.json",
+    "orchestration/agent_inbox/codex/raisa-provider-free-exact-digest-historical-derived-minimised-check-in-context-adapter-test-consumption-rehearsal-clockwork-owned-latch-direct-writer-failure.json"
+  ],
+  "containment": {
+    "fixture_content_reads": 1,
+    "fixture_retry_authorized": false,
+    "historical_archive_reads": 0,
+    "provider_or_model_calls": 0,
+    "external_release": false,
+    "protected_refs_moved": false
+  }
+}

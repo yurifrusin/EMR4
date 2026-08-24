@@ -20,6 +20,10 @@ THREAT = Path(
     "docs/security/raisa-provider-free-exact-digest-historical-derived-minimised-"
     "check-in-context-adapter-test-consumption-rehearsal-threat-model-delta.md"
 )
+OCCUPIED_RESULT = Path(
+    "orchestration/continuity/raisa-provider-free-exact-digest-historical-derived-"
+    "minimised-check-in-context-adapter-test-consumption-rehearsal/occupied-result.json"
+)
 REAL_FIXTURE_FRAGMENT = (
     "local_data/historical-diary-trove/derived-scenarios/"
     "2026-08-24-first-use-check-in-context-v1/scenario.json"
@@ -304,3 +308,58 @@ def test_real_fixture_is_not_a_pytest_input() -> None:
     assert forbidden_default not in source
     assert "local_data" in REAL_FIXTURE_FRAGMENT
     assert forbidden_real_path not in source
+
+
+def test_occupied_result_is_sanitised_exact_and_nontransitive() -> None:
+    result = json.loads(OCCUPIED_RESULT.read_text(encoding="utf-8"))
+
+    assert result["decision"] == consumption.SUCCESS_DECISION
+    assert result["reason_codes"] == []
+    assert result["candidate_source"] == (
+        "517fda26c5c7f46397acc91976bc97b0be3778ef"
+    )
+    assert result["consumption"] == {
+        "fixture_sha256_expected": consumption.FIXTURE_SHA256,
+        "fixture_digest_match": True,
+        "digest_verified_before_parse": True,
+        "parsed_from_same_in_memory_bytes": True,
+        "logical_fixture_read_count": 1,
+        "fixture_retry_authorized": False,
+        "historical_archive_reads": 0,
+    }
+    assert result["structural_utility"] == consumption.EXPECTED_UTILITY
+    assert result["adapter_test"]["invocations"] == 1
+    assert result["adapter_test"]["call_order"] == [
+        "claim",
+        "lock",
+        "reauthorize",
+        "verify",
+        "effect",
+        "audit",
+        "event",
+        "complete",
+        "commit",
+        "readback",
+    ]
+    assert result["adapter_test"]["waiting_area_preserved_none"] is True
+    assert result["adapter_test"]["response_patient_free"] is True
+    assert result["authority"] == {
+        "authority_non_transitive": True,
+        "database_route_client_runtime_or_configuration": False,
+        "fixture_is_command_authority": False,
+        "network_or_external_release": False,
+        "ordinary_practice": False,
+        "production_deployment_release_pages_or_protected_refs": False,
+        "provider_or_model_calls": 0,
+    }
+    serialized = json.dumps(result, sort_keys=True)
+    for forbidden in (
+        '"events":',
+        '"synthetic_subject_slot":',
+        '"resource_slot":',
+        "patient_id",
+        "patient_name",
+        "appointment_note",
+        "adapter-test-consumption-control.json",
+    ):
+        assert forbidden not in serialized

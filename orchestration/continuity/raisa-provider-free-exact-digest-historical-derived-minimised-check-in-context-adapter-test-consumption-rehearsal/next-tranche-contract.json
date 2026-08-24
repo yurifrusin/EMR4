@@ -1,0 +1,43 @@
+{
+  "schema_version": "raisa.historical_derived_check_in_context_adapter_test_utility_gap_review_contract.v1",
+  "status": "frozen_fail_closed_successor_contract",
+  "recorded_at": "2026-08-24T14:17:06.1781891+10:00",
+  "operation_id": "raisa-provider-free-read-only-historical-derived-check-in-context-adapter-test-utility-gap-review",
+  "accepted_consumption": {
+    "occupied_candidate_source": "517fda26c5c7f46397acc91976bc97b0be3778ef",
+    "occupied_result_sha256": "48f12096fc319a896b7ef70e8dddbd99f8ea3151aa90212cfb030d710d5dad71",
+    "logical_fixture_reads": 1,
+    "adapter_test_invocations": 1,
+    "fixture_retry_authorized": false
+  },
+  "review_inputs": {
+    "committed_sanitised_result_only": true,
+    "accepted_adapter_and_test_source": true,
+    "ignored_fixture_or_control_reads": 0,
+    "historical_archive_reads": 0,
+    "local_data_path_access": false
+  },
+  "review_objective": {
+    "separate_provenance_grounding_from_behavioral_branch_coverage": true,
+    "enumerate_which_closed_structural_axes_influenced_the_adapter_test": true,
+    "identify_unexercised_check_in_context_axes_without_inventing_product_truth": true,
+    "freeze_minimum_authored_synthetic_next_scenario_contract": true,
+    "authorise_further_historical_consumption": false
+  },
+  "output_ceiling": {
+    "read_only_utility_gap_review": true,
+    "authored_synthetic_axis_contract_only": true,
+    "product_or_adapter_change": false,
+    "database_route_client_runtime_or_configuration": false,
+    "ordinary_practice_activation": false,
+    "provider_model_network_or_external_release": false,
+    "production_deployment_release_pages_or_protected_refs": false
+  },
+  "decision_vocabulary": [
+    "blocked",
+    "revision_required",
+    "accepted_read_only_utility_gap_review"
+  ],
+  "authority_non_transitive": true,
+  "claim_ceiling": "read_only_assessment_of_one_sanitised_adapter_test_no_further_historical_data_or_product_validity_claim"
+}

@@ -1,0 +1,38 @@
+{
+  "schema_version": "raisa.historical_derived_check_in_adapter_test_consumption_efficacy.v1",
+  "recorded_at": "2026-08-24T14:17:06.1781891+10:00",
+  "occupied_candidate_source": "517fda26c5c7f46397acc91976bc97b0be3778ef",
+  "decision": "effective_traceable_consumption_with_narrow_behavioral_utility",
+  "safety": {
+    "digest_verified_before_parse_same_bytes": true,
+    "logical_fixture_reads": 1,
+    "retry_possible": false,
+    "archive_reads": 0,
+    "private_or_mapping_material_persisted": false,
+    "external_release": false,
+    "fixture_used_as_command_authority": false
+  },
+  "traceability": {
+    "candidate_source_full_git_bound": true,
+    "adapter_source_and_blob_bound": true,
+    "result_digest_bound": true,
+    "adapter_call_order_closed": true,
+    "local_control_terminal_complete": true
+  },
+  "behavioral_utility": {
+    "canonical_structural_digest_influenced_synthetic_context_derivation": true,
+    "relative_minute_span_influenced_synthetic_test_time": true,
+    "event_kinds_individual_minutes_and_slots_created_distinct_adapter_branches": false,
+    "new_check_in_business_rule_discovered": false,
+    "existing_atomic_check_in_contract_exercised": true,
+    "real_practice_representativeness_proved": false
+  },
+  "workflow": {
+    "occupied_consumption_reruns": 0,
+    "candidate_test_design_corrections": 4,
+    "registered_closeout_incidents": 2,
+    "clockwork_detected_direct_owned_surface_write": true,
+    "full_git_readback_detected_wrong_draft": true
+  },
+  "recommendation": "run_read_only_utility_gap_review_before_authorising_any_further_historical_derived_scenario_consumption"
+}

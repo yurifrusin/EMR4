@@ -1,0 +1,72 @@
+{
+  "schema_version": "raisa.historical_derived_check_in_adapter_test_consumption_evidence.v1",
+  "recorded_at": "2026-08-24T14:17:06.1781891+10:00",
+  "decision": "accepted_one_exact_local_adapter_test_consumption",
+  "planning_source": "5eaac238e8d7541ffd395a5a3f8b8464ae5b68b8",
+  "occupied_candidate_source": "517fda26c5c7f46397acc91976bc97b0be3778ef",
+  "occupied_result": {
+    "path": "orchestration/continuity/raisa-provider-free-exact-digest-historical-derived-minimised-check-in-context-adapter-test-consumption-rehearsal/occupied-result.json",
+    "sha256": "48f12096fc319a896b7ef70e8dddbd99f8ea3151aa90212cfb030d710d5dad71",
+    "fixture_sha256": "2205ab83cec7c5639d39cc563cee80eec825ac33f17571151571d325e74f2dfe",
+    "logical_fixture_reads": 1,
+    "fixture_retry_authorized": false,
+    "historical_archive_reads": 0
+  },
+  "structural_utility": {
+    "event_count": 6,
+    "distinct_relative_minutes": 4,
+    "relative_minute_span": 19,
+    "distinct_event_kinds": 2,
+    "synthetic_subject_slots": 1,
+    "resource_slots": 1
+  },
+  "adapter_test": {
+    "invocations": 1,
+    "call_order": [
+      "claim",
+      "lock",
+      "reauthorize",
+      "verify",
+      "effect",
+      "audit",
+      "event",
+      "complete",
+      "commit",
+      "readback"
+    ],
+    "status_transition": "Booked_to_Arrived",
+    "waiting_area_preserved_none": true,
+    "audit_count": 1,
+    "event_count": 1,
+    "event_schema": "diary.appointment_checked_in.v1",
+    "receipt_schema": "appointment.check_in_receipt.v1",
+    "commit_count": 1,
+    "readback_matched": true,
+    "response_patient_free": true
+  },
+  "verification": {
+    "focused_controls_passed": 11,
+    "adapter_and_api_spine_controls_passed": 123,
+    "governance_profile_controls_passed": 174,
+    "ruff_passed": true,
+    "compileall_passed": true,
+    "git_diff_check_passed_after_guard_repair": true
+  },
+  "authority_readback": {
+    "fixture_rows_or_slot_values_committed": false,
+    "synthetic_identifiers_keys_or_mappings_committed": false,
+    "provider_or_model_calls": 0,
+    "network_or_external_release": false,
+    "product_patient_appointment_or_clinical_data": false,
+    "database_route_client_runtime_or_configuration": false,
+    "ordinary_practice_changed": false,
+    "protected_refs_moved": false,
+    "authority_non_transitive": true
+  },
+  "parallelism": {
+    "deepseek_flash": "declined_negative",
+    "gemini_verifier": "not_applicable_neutral",
+    "native_subagents": "declined_negative",
+    "owner": "gpt_sol_serial"
+  }
+}

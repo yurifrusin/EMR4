@@ -1,0 +1,149 @@
+{
+  "schema_version": "ariadne.governance_semantic_closeout_intent.v1",
+  "profile": "provider_free_governance_tooling_v1",
+  "artifact_slug": "raisa-provider-free-exact-digest-historical-derived-minimised-check-in-context-adapter-test-consumption-rehearsal",
+  "recorded_at": "2026-08-24T14:17:06.1781891+10:00",
+  "closeout": {
+    "operation_id": "raisa-provider-free-exact-digest-historical-derived-minimised-check-in-context-adapter-test-consumption-rehearsal",
+    "title": "Raisa provider-free exact-digest historical-derived minimised check-in-context adapter-test consumption rehearsal",
+    "builds_on": [
+      "raisa-provider-free-governance-clockwork-historical-derived-minimised-scenario-consumption-subgate-rehearsal"
+    ],
+    "authority_notes": [
+      "Yuri delegated gate timing; accept only one exact local one-read adapter-test consumption and continue to a read-only utility gap review."
+    ],
+    "decisions": [
+      {
+        "id": "accept-one-exact-digest-bound-adapter-test-consumption",
+        "source": "orchestration/continuity/raisa-provider-free-exact-digest-historical-derived-minimised-check-in-context-adapter-test-consumption-rehearsal/occupied-result.json",
+        "summary": "Accept occupied source 517fda26c5c7f46397acc91976bc97b0be3778ef after one digest-before-parse fixture read and one exact adapter invocation pass."
+      },
+      {
+        "id": "accept-narrow-behavioral-utility-and-freeze-read-only-review",
+        "source": "orchestration/continuity/raisa-provider-free-exact-digest-historical-derived-minimised-check-in-context-adapter-test-consumption-rehearsal/efficacy-reading.json",
+        "summary": "The scenario grounds provenance and timing but does not establish distinct event-axis branches or a new check-in rule; further historical access remains closed."
+      }
+    ],
+    "claim_scope": [
+      "One accepted minimised local scenario safely exercised one existing unmounted check-in adapter path; no real-practice validity, broader scenario coverage or product runtime is proved."
+    ],
+    "additional_receipts": [
+      "orchestration/agent_inbox/codex/raisa-provider-free-exact-digest-historical-derived-minimised-check-in-context-adapter-test-consumption-rehearsal-pre-verifier-receipt.json",
+      "orchestration/continuity/raisa-provider-free-exact-digest-historical-derived-minimised-check-in-context-adapter-test-consumption-rehearsal/closeout/prepublication-contained-lapses.json",
+      "orchestration/continuity/raisa-provider-free-exact-digest-historical-derived-minimised-check-in-context-adapter-test-consumption-rehearsal/closeout/pushover-notification-receipt.json"
+    ],
+    "additional_artifacts": [
+      "orchestration/continuity/raisa-provider-free-exact-digest-historical-derived-minimised-check-in-context-adapter-test-consumption-rehearsal/next-tranche-contract.json",
+      "orchestration/continuity/raisa-provider-free-exact-digest-historical-derived-minimised-check-in-context-adapter-test-consumption-rehearsal/occupied-result.json",
+      "orchestration/agent_inbox/codex/raisa-provider-free-exact-digest-historical-derived-minimised-check-in-context-adapter-test-consumption-rehearsal-pre-verifier-intent.json"
+    ],
+    "unresolved_gates": [
+      "Any further fixture or archive read, broader structural representativeness, scenario-specific adapter branching and every product/provider/runtime surface remain gated."
+    ],
+    "journey": {
+      "strategic_role": "Carry the first empirically derived minimised Diary time-lapse through a real command-adapter test without retaining private structure.",
+      "outcome": "One exact local one-read adapter-test consumption now passes and is terminal against retry."
+    },
+    "current_position": {
+      "strategic_role": "Measure what the first consumed scenario actually contributed before widening any scenario programme.",
+      "why_now": "The one-shot result passes but its behavioral influence is narrower than its provenance binding.",
+      "outcome": "A read-only utility gap review and minimum authored-synthetic scenario-axis contract.",
+      "unlocks": [
+        "Evidence-led choice of the next useful check-in scenario axes without further historical access."
+      ],
+      "does_not_solve": [
+        "No fixture reuse, archive access, product change, ordinary-practice activation or real-practice validity opens."
+      ],
+      "orientation_statement": "Audit the sanitised result and code only; distinguish grounding from behavioral coverage before authoring more scenarios."
+    },
+    "next_operation": {
+      "operation_id": "raisa-provider-free-read-only-historical-derived-check-in-context-adapter-test-utility-gap-review",
+      "active_tranche": "Raisa provider-free read-only historical-derived check-in-context adapter-test utility gap review",
+      "objective": "Read only the committed sanitised result and accepted repository code to distinguish provenance grounding from behavioral coverage and freeze the minimum authored-synthetic next-scenario axes without any fixture or archive access.",
+      "authority_source": "Yuri's delegated gate timing and uninterrupted-development authority within the frozen successor contract.",
+      "next_stage": "fresh_five_source_rehydration_then_freeze_read_only_utility_gap_review_plan"
+    }
+  },
+  "verification_profile": "governance_clockwork_core_v1",
+  "baton_slot": "current_deepseek_native_harness_acceptance",
+  "next_operation_protected_boundaries": [
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only",
+    "no_product_patient_appointment_clinical_or_protected_data",
+    "no_historical_data_access"
+  ],
+  "agent_error_observations": [
+    {
+      "attempt_key": "historical-check-in-consumption-preexecution-controls-001",
+      "observed_on": "2026-08-24",
+      "tranche": "historical-check-in-adapter-consumption",
+      "role": "orchestrator",
+      "resource_id": "preexecution-form-and-git-gates",
+      "model": "gpt-sol",
+      "reasoning_level": "extra_high",
+      "transport": "local_powershell_git",
+      "stage": "integration",
+      "category": "operator_error",
+      "process_severity": "moderate",
+      "expected_invariant": "Authority evidence roots are typed, nonzero cached-diff checks stop commits, and every Git binding is machine resolved.",
+      "observed_error": "One precommit form used forbidden evidence roots, one native diff warning did not stop a candidate commit, and one later uncommitted full-ID draft was wrong.",
+      "detection_method": "Deterministic preflight, commit output and git rev-parse readback independently caught the three contained pre-execution control lapses.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-provider-free-exact-digest-historical-derived-minimised-check-in-context-adapter-test-consumption-rehearsal-candidate-precommit-first-failure.json",
+        "orchestration/agent_inbox/codex/raisa-provider-free-exact-digest-historical-derived-minimised-check-in-context-adapter-test-consumption-rehearsal-candidate-commit-gate-failure.json",
+        "orchestration/agent_inbox/codex/raisa-provider-free-exact-digest-historical-derived-minimised-check-in-context-adapter-test-consumption-rehearsal-full-id-draft-failure.json"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.preexecution.typed-form-native-exit-git-binding",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Use admitted authority roots, test LASTEXITCODE before commits, and replace authored Git bindings with git rev-parse values.",
+        "prevention_control": "Apply the closed authority-root form, explicit native-exit stop and machine Git-object readback as one pre-execution control sequence.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-exact-digest-historical-derived-minimised-check-in-context-adapter-test-consumption-rehearsal-candidate-precommit-first-failure.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-exact-digest-historical-derived-minimised-check-in-context-adapter-test-consumption-rehearsal-candidate-commit-gate-failure.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-exact-digest-historical-derived-minimised-check-in-context-adapter-test-consumption-rehearsal-full-id-draft-failure.json"
+        ]
+      },
+      "baton_summary": "records three contained pre-execution form, native-exit and full-Git-binding lapses as one bounded workflow incident."
+    },
+    {
+      "attempt_key": "historical-check-in-consumption-latch-writer-001",
+      "observed_on": "2026-08-24",
+      "tranche": "historical-check-in-adapter-consumption",
+      "role": "orchestrator",
+      "resource_id": "clockwork-owned-latch",
+      "model": "gpt-sol",
+      "reasoning_level": "extra_high",
+      "transport": "local_repository_clockwork",
+      "stage": "deterministic_verification",
+      "category": "command_scope_violation",
+      "process_severity": "moderate",
+      "expected_invariant": "Only the governance clockwork writer changes the ten live canonical surfaces.",
+      "observed_error": "The active latch was directly advanced after planning even though it is a clockwork-owned live surface.",
+      "detection_method": "The governance live-state validator rejected the direct edit as canonical_drift before occupied execution.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-provider-free-exact-digest-historical-derived-minimised-check-in-context-adapter-test-consumption-rehearsal-clockwork-owned-latch-direct-writer-failure.json"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.clockwork-owned-surface.single-writer",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Restore the published latch bytes exactly and reserve all later latch movement for the clockwork writer.",
+        "prevention_control": "Treat all ten live canonical surfaces as read-only outside the clockwork publication transaction.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-exact-digest-historical-derived-minimised-check-in-context-adapter-test-consumption-rehearsal-clockwork-owned-latch-direct-writer-failure.json"
+        ]
+      },
+      "baton_summary": "records one contained direct write to the clockwork-owned active latch."
+    }
+  ]
+}

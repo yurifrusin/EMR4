@@ -1,0 +1,16 @@
+{
+  "schema_version": "ariadne.prepublication_contained_git_binding_failure.v1",
+  "operation_id": "raisa-provider-free-exact-digest-historical-derived-minimised-check-in-context-adapter-test-consumption-rehearsal",
+  "status": "contained_before_staging",
+  "reason_code": "authored_full_git_id_did_not_equal_git_object_database",
+  "field": "candidate_commit_with_warning",
+  "rejected_draft": "88a7f92083b7816803500497174914002fc5c4c7",
+  "machine_resolved_value": "88a7f92080331113a4bc42b3d8a2246cfe97abf6",
+  "containment": {
+    "detection": "git_rev_parse_head_readback_before_staging",
+    "fixture_content_reads": 0,
+    "provider_or_model_calls": 0,
+    "staging_of_wrong_binding": false,
+    "correction": "replace_every_authored_git_binding_with_the_machine_resolved_full_object_id"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "schema_version": "emr4.sprint_closeout_notification_receipt.v1",
+  "recorded_at": "2026-08-24T14:17:06.1781891+10:00",
+  "status": 1,
+  "request": "783de8fd-d5aa-4b18-a92b-80b9ae120c8e",
+  "sprint": "Historical-derived check-in adapter consumption",
+  "checks": "1 exact read; 1 adapter invocation; 11 focused; 123 adapter/API; 174 clockwork",
+  "continuing": "Read-only adapter-test utility and next-scenario gap review",
+  "phi_or_private_data_in_notification": false
+}
