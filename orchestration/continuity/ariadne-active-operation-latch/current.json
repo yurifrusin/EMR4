@@ -1,14 +1,14 @@
 {
   "schema_version": "ariadne.active_operation_latch.v1",
-  "operation_id": "raisa-provider-free-historical-derived-scenario-first-use-candidate-gate-evaluator-rehearsal",
-  "active_tranche": "Raisa provider-free historical-derived scenario first-use candidate gate evaluator rehearsal",
-  "objective": "Implement and prove the typed candidate-specific in-memory first-use evaluator on authored-synthetic inputs only.",
+  "operation_id": "raisa-provider-free-governance-clockwork-historical-derived-first-use-materialisation-subgate-rehearsal",
+  "active_tranche": "Raisa provider-free governance clockwork historical-derived first-use materialisation subgate rehearsal",
+  "objective": "Add and prove one exact closed materialisation mode without historical access.",
   "status": "in_progress",
-  "source_head": "7f9a526e57a4c10502f01b0e7c1cc5ec6910f00c",
+  "source_head": "538b5cb47e11aad77ae794873c5fa99718c9354d",
   "authority_source": "Yuri's delegated first-use gate timing and uninterrupted-development authority within the frozen provider-free successor contract.",
   "checkpoint": {
-    "completed_stage": "Accepted raisa-local-only-historical-diary-leading-explicit-time-token-bounded-measurement-rehearsal at the machine-resolved source.",
-    "next_executable_stage": "fresh_five_source_rehydration_then_freeze_typed_candidate_gate_evaluator_plan",
+    "completed_stage": "Accepted raisa-provider-free-historical-derived-scenario-first-use-candidate-gate-evaluator-rehearsal at the machine-resolved source.",
+    "next_executable_stage": "fresh_five_source_rehydration_then_freeze_closed_clockwork_materialisation_subgate_plan",
     "retry_counters": {
       "planning": 0,
       "implementation": 0,
@@ -42,9 +42,9 @@
     "explicit_path_staging_only",
     "no_product_patient_appointment_clinical_or_protected_data",
     "no_historical_data_access",
+    "provider_free_authored_synthetic_boundary_tests_only",
     "no_private_archive_or_local_attempt_output_access",
-    "provider_free_authored_synthetic_candidate_inputs_only",
-    "no_reusable_source_derived_artifact_materialisation",
+    "no_fixture_materialisation_in_subgate_tranche",
     "first_use_gate_remains_closed_pending_exact_candidate_admission"
   ]
 }

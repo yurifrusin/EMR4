@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> Build the gate now; keep the first artifact unwritten.
+> Connect the gate to the clockwork before first use.
 
 ## North star
 
@@ -674,22 +674,24 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    The leading-token parser and first-class explicit-source integration pass entirely on authored-synthetic evidence. Lineage parent: `raisa-local-only-historical-diary-document-story-time-coordinate-bounded-measurement-recovery-rehearsal`.
 329. **Recover realistic scheduling motion without releasing historical source values. — Raisa local-only historical Diary leading explicit time-token bounded measurement rehearsal**
    The strict leading clock produced one contained useful candidate from the fixed private slice. Lineage parent: `raisa-provider-free-authored-synthetic-historical-diary-leading-explicit-time-token-recovery-rehearsal`.
+330. **Turn historical first use from a prose judgment into a deterministic control. — Raisa provider-free historical-derived scenario first-use candidate gate evaluator rehearsal**
+   The exact write-free typed evaluator passes without private or provider access. Lineage parent: `raisa-local-only-historical-diary-leading-explicit-time-token-bounded-measurement-rehearsal`.
 
 ## Current position
 
-**Make first-use promotion deterministic before a reusable derivative is possible. — Raisa local-only historical Diary leading explicit time-token bounded measurement rehearsal**
+**Make one controlled first-use write representable without weakening the existing measurement mode. — Raisa provider-free historical-derived scenario first-use candidate gate evaluator rehearsal**
 
-**Why this proof came next:** A useful private candidate exists and no reusable artifact does.
+**Why this proof came next:** The gate passes but the live historical mode correctly forbids fixture writes.
 
-A typed in-memory evaluator can bind any future admission to one exact digest and purpose.
+One new closed clockwork subgate can precede the actual materialiser.
 
 ### What this unlocks
 
-- A later separately planned minimised historical-derived materialiser only after exact admission.
+- One later local-only no-retry exact-gate materialisation attempt.
 
 ### What it does not solve
 
-- No historical re-access, artifact write, product, provider or production authority opens.
+- No archive access, fixture write, product, provider or production authority opens.
 
 ## Continuity and authority
 
@@ -1566,7 +1568,6 @@ Prerequisites:
 - `docs/raisa-local-only-historical-diary-access-boundary-convergence-plan.md`
 - `docs/raisa-local-only-historical-diary-document-story-time-coordinate-bounded-measurement-recovery-rehearsal-plan.md`
 - `docs/raisa-local-only-historical-diary-document-story-time-coordinate-recovery-rehearsal-plan.md`
-- `docs/raisa-local-only-historical-diary-leading-explicit-time-token-bounded-measurement-rehearsal-closeout.md`
 - `docs/raisa-local-only-historical-diary-leading-explicit-time-token-bounded-measurement-rehearsal-plan.md`
 - `docs/raisa-local-only-historical-diary-snapshot-privacy-feasibility-review-plan.md`
 - `docs/raisa-local-only-historical-diary-structural-time-axis-recovery-rehearsal-plan.md`
@@ -1676,6 +1677,8 @@ Prerequisites:
 - `docs/raisa-provider-free-globally-disabled-runtime-instrumentation-scaffold-closeout.md`
 - `docs/raisa-provider-free-globally-disabled-runtime-instrumentation-scaffold-design.md`
 - `docs/raisa-provider-free-globally-disabled-runtime-instrumentation-scaffold-plan.md`
+- `docs/raisa-provider-free-historical-derived-scenario-first-use-candidate-gate-evaluator-rehearsal-closeout.md`
+- `docs/raisa-provider-free-historical-derived-scenario-first-use-candidate-gate-evaluator-rehearsal-plan.md`
 - `docs/raisa-provider-free-office-cross-surface-replay-isolation-closeout.md`
 - `docs/raisa-provider-free-office-cross-surface-replay-isolation-plan.md`
 - `docs/raisa-provider-free-office-lifecycle-observability-closeout.md`
@@ -2464,7 +2467,6 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-legacy-route-convergence-kernel-interface-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-legacy-route-convergence-kernel-interface-preplanning-v2-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-legacy-route-convergence-kernel-interface-sol-acceptance.md`
-- `orchestration/agent_inbox/codex/raisa-local-only-historical-diary-leading-explicit-time-token-bounded-measurement-rehearsal-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-gemini37-command-manifest.json`
 - `orchestration/agent_inbox/codex/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-gemini37-repair-review-command-manifest.json`
 - `orchestration/agent_inbox/codex/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-gemini37-repair-review-packet.md`
@@ -2521,6 +2523,7 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-provider-free-disposable-postgresql-status-confirm-scaffold-parse-catalogue-precommit-runtime-state.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-disposable-postgresql-status-confirm-scaffold-parse-catalogue-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-disposable-postgresql-status-confirm-scaffold-parse-catalogue-preplanning-runtime-state.json`
+- `orchestration/agent_inbox/codex/raisa-provider-free-historical-derived-scenario-first-use-candidate-gate-evaluator-rehearsal-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-provider-free-office-directory-lifecycle-descendants-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-provider-free-ordinary-fallback-client-proposal-confirm-parity-precommit-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-ordinary-fallback-client-proposal-confirm-parity-preplanning-receipt.json`
@@ -3058,7 +3061,6 @@ Prerequisites:
 - `orchestration/continuity/raisa-local-only-historical-diary-access-boundary-convergence/report.md`
 - `orchestration/continuity/raisa-local-only-historical-diary-document-story-time-coordinate-bounded-measurement-recovery-rehearsal/report.md`
 - `orchestration/continuity/raisa-local-only-historical-diary-document-story-time-coordinate-recovery-rehearsal/report.md`
-- `orchestration/continuity/raisa-local-only-historical-diary-leading-explicit-time-token-bounded-measurement-rehearsal/evidence.json`
 - `orchestration/continuity/raisa-local-only-historical-diary-leading-explicit-time-token-bounded-measurement-rehearsal/report.md`
 - `orchestration/continuity/raisa-local-only-historical-diary-snapshot-privacy-feasibility-review/report.md`
 - `orchestration/continuity/raisa-local-only-historical-diary-structural-time-axis-recovery-rehearsal/report.md`
@@ -3177,6 +3179,8 @@ Prerequisites:
 - `orchestration/continuity/raisa-provider-free-disposable-postgresql-status-confirm-scaffold-parse-catalogue-rehearsal/rehearsal-contract.schema.json`
 - `orchestration/continuity/raisa-provider-free-docker-created-state-profile-conformance-repair/created-state-representation-evidence.json`
 - `orchestration/continuity/raisa-provider-free-docker-created-state-profile-conformance-repair/repair-attestation.json`
+- `orchestration/continuity/raisa-provider-free-historical-derived-scenario-first-use-candidate-gate-evaluator-rehearsal/evidence.json`
+- `orchestration/continuity/raisa-provider-free-historical-derived-scenario-first-use-candidate-gate-evaluator-rehearsal/report.md`
 - `orchestration/continuity/raisa-provider-free-office-directory-lifecycle-descendants/provider-free-acceptance-evidence.json`
 - `orchestration/continuity/raisa-provider-free-office-practitioner-directory-consumer/live-office-backend-postgres-evidence.json`
 - `orchestration/continuity/raisa-provider-free-oidc-admission-grant-redemption-bridge/live-local-http-backend-postgres-redemption-evidence.json`
@@ -4009,4 +4013,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 434; continuity graph revision 452._
+_Compass map revision 435; continuity graph revision 453._

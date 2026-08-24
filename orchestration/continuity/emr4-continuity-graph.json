@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 452,
+  "graph_revision": 453,
   "harvests": [],
   "nodes": [
     {
@@ -36630,9 +36630,100 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "raisa-provider-free-historical-derived-scenario-first-use-candidate-gate-evaluator-rehearsal",
+      "title": "Raisa provider-free historical-derived scenario first-use candidate gate evaluator rehearsal",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "raisa-local-only-historical-diary-leading-explicit-time-token-bounded-measurement-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri delegated first-use gate timing; accept the write-free typed evaluator and make exact first-use materialisation representable in clockwork before private access."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-typed-write-free-candidate-gate-evaluator",
+          "source": "orchestration/continuity/raisa-provider-free-historical-derived-scenario-first-use-candidate-gate-evaluator-rehearsal/evidence.json",
+          "status": "accepted",
+          "summary": "Accept exact source abcd4206a363b0c565c070e0f2cb9c54d627b3b3 after 229 controls and complete typed-form denials pass."
+        },
+        {
+          "id": "keep-actual-first-use-closed",
+          "source": "orchestration/continuity/raisa-provider-free-historical-derived-scenario-first-use-candidate-gate-evaluator-rehearsal/report.md",
+          "status": "accepted",
+          "summary": "The authored-synthetic positive proves behavior only; no historical candidate, write or first-use admission exists."
+        },
+        {
+          "id": "continue-to-closed-clockwork-materialisation-subgate",
+          "source": "orchestration/continuity/raisa-provider-free-historical-derived-scenario-first-use-candidate-gate-evaluator-rehearsal/next-tranche-contract.json",
+          "status": "accepted",
+          "summary": "Add one exact gate-wrapped minimised-materialisation mode without private access before the actual one-run materialiser."
+        }
+      ],
+      "claim_scope": [
+        "Strict forms, exact source and digest, computed utility, three decisions, non-transitive binding and zero writer behavior pass on authored-synthetic candidates only."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-historical-derived-scenario-first-use-candidate-gate-evaluator-rehearsal-plan.md",
+          "docs/security/raisa-provider-free-historical-derived-scenario-first-use-candidate-gate-evaluator-rehearsal-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-provider-free-historical-derived-scenario-first-use-candidate-gate-evaluator-rehearsal/evidence.json",
+          "orchestration/continuity/raisa-provider-free-historical-derived-scenario-first-use-candidate-gate-evaluator-rehearsal/report.md",
+          "orchestration/continuity/raisa-provider-free-historical-derived-scenario-first-use-candidate-gate-evaluator-rehearsal/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-historical-derived-scenario-first-use-candidate-gate-evaluator-rehearsal-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-24--raisa-provider-free-historical-derived-scenario-first-use-candidate-gate-evaluator-rehearsal.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-historical-derived-scenario-first-use-candidate-gate-evaluator-rehearsal-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-historical-derived-scenario-first-use-candidate-gate-evaluator-rehearsal-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-historical-derived-scenario-first-use-candidate-gate-evaluator-rehearsal-pre-verifier-receipt.json",
+          "orchestration/continuity/raisa-provider-free-historical-derived-scenario-first-use-candidate-gate-evaluator-rehearsal/closeout/prepublication-contained-lapses.json",
+          "orchestration/continuity/raisa-provider-free-historical-derived-scenario-first-use-candidate-gate-evaluator-rehearsal/closeout/pushover-notification-receipt.json"
+        ],
+        "tests": [
+          "tests/test_current_baton_consistency.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_transactional_closeout.py"
+        ],
+        "artifacts": [
+          "orchestration_harness/governance_clockwork_tick.py",
+          "scripts/ariadne_governance_clockwork_closeout.py",
+          "scripts/ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "orchestration_harness/historical_diary_first_use_candidate_gate.py",
+          "orchestration/continuity/raisa-provider-free-historical-derived-scenario-first-use-candidate-gate-evaluator-rehearsal/next-tranche-contract.json"
+        ]
+      },
+      "unresolved_gates": [
+        "Clockwork materialisation mode, actual candidate admission, fixture write and every product/provider/protected surface remain gated."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-24T10:07:35.8928123+10:00",
+      "updated_at": "2026-08-24T10:07:35.8928123+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "538b5cb47e11aad77ae794873c5fa99718c9354d",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-24T09:01:37.5638009+10:00"
+  "updated_at": "2026-08-24T10:07:35.8928123+10:00"
 }

@@ -1,44 +1,44 @@
 {
   "schema_version": "ariadne.agent-error-pattern-report.v1",
-  "register_revision": 659,
+  "register_revision": 660,
   "source_cutoff_on": "2026-08-24",
   "coverage": "bounded_known_preserved_incidents",
-  "canonical_register_sha256": "a045cce4e8c6b3cd535aba10b127cad48f27a703c44f52fa60238d0a641b835e",
-  "incident_count": 1149,
+  "canonical_register_sha256": "b17bfc238d476c0a77e90ac2a25fb420fe22846e04761b9a322088a260db7d61",
+  "incident_count": 1151,
   "open_incident_ids": [],
   "counts": {
     "by_origin": {
       "agent_behavior": 613,
       "harness": 73,
-      "operator": 292,
-      "repository": 155,
+      "operator": 293,
+      "repository": 156,
       "transport": 16
     },
     "by_category": {
       "command_scope_violation": 111,
       "evidence_misreport": 80,
       "harness_failure": 73,
-      "operator_error": 292,
+      "operator_error": 293,
       "output_contract_violation": 367,
       "read_only_violation": 5,
       "reasoning_claim_error": 50,
-      "repository_defect": 155,
+      "repository_defect": 156,
       "transport_timeout": 16
     },
     "by_role": {
-      "implementer": 91,
+      "implementer": 92,
       "integration_reviewer": 5,
-      "orchestrator": 990,
+      "orchestrator": 991,
       "verifier": 63
     },
     "by_process_severity": {
-      "low": 759,
+      "low": 761,
       "material": 135,
       "moderate": 255
     },
     "by_candidate_state": {
-      "accepted_candidate_changed": 236,
-      "canonical_unchanged": 729,
+      "accepted_candidate_changed": 237,
+      "canonical_unchanged": 730,
       "untrusted_partial_worktree": 184
     },
     "by_resource_and_role": {
@@ -430,6 +430,7 @@
       "ordinary-practice-check-in-readiness-reviewer::orchestrator": 3,
       "package-unloaded-relative-import-closure::orchestrator": 1,
       "plan-commit-staged-whitespace-gate::orchestrator": 1,
+      "plan-text-assertion::implementer": 1,
       "planning-explicit-path-staging::orchestrator": 1,
       "post-attempt008-threat-delta::orchestrator": 2,
       "post-seam-readiness-clockwork-check::orchestrator": 3,
@@ -452,6 +453,7 @@
       "preexecution-git-refs-evidence-binding::orchestrator": 1,
       "prelaunch-composite-readback-command::orchestrator": 1,
       "preplanning-adapter-inventory::orchestrator": 1,
+      "preplanning-continuation-event::orchestrator": 1,
       "preplanning-git-ref-prose-binding::orchestrator": 1,
       "preplanning-latch-and-git-evidence::orchestrator": 1,
       "preplanning-orchestrator-receipt::orchestrator": 1,

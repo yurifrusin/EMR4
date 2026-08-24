@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 659,
+  "register_revision": 660,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-24",
@@ -44195,6 +44195,78 @@
       "incident_id": "AER-1149",
       "attempt_id": "clock-72462d282c9da1c2e03f9d6a",
       "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-24",
+      "tranche": "historical-first-use-gate-evaluator",
+      "role": "orchestrator",
+      "resource_id": "preplanning-continuation-event",
+      "model": "gpt-sol",
+      "reasoning_level": "extra_high",
+      "transport": "local_repository_clockwork",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Continuation event is selected from the executable profile before receipt generation.",
+      "observed_error": "The first intent used pre_plan instead of pre_sprint_planning.",
+      "detection_method": "The receipt builder rejected serial_continuation_event_invalid before planning.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-historical-derived-scenario-first-use-candidate-gate-evaluator-rehearsal/closeout/prepublication-contained-lapses.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.continuation_event_requires_executable_profile_value",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Select pre_sprint_planning from the executable event list.",
+        "prevention_control": "Read continuation events from --list-continuation-events before authoring an intent.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-660.md",
+          "orchestration/continuity/raisa-provider-free-historical-derived-scenario-first-use-candidate-gate-evaluator-rehearsal/evidence.json"
+        ]
+      },
+      "incident_id": "AER-1150",
+      "attempt_id": "clock-9af323db6ea50c459381dd16",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-24",
+      "tranche": "historical-first-use-gate-evaluator",
+      "role": "implementer",
+      "resource_id": "plan-text-assertion",
+      "model": "gpt-sol",
+      "reasoning_level": "extra_high",
+      "transport": "local_repository_clockwork",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "low",
+      "expected_invariant": "Focused plan test quotes the unchanged frozen threat text exactly.",
+      "observed_error": "The test asserted operates on while the threat text says accepts.",
+      "detection_method": "The first focused pytest run failed one literal assertion while six behavior tests passed.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-historical-derived-scenario-first-use-candidate-gate-evaluator-rehearsal/closeout/prepublication-contained-lapses.json"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.plan_text_assertion_must_match_frozen_wording",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Align the literal assertion to accepts without changing the threat text.",
+        "prevention_control": "Copy exact frozen text into literal documentation assertions.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-660.md",
+          "orchestration/continuity/raisa-provider-free-historical-derived-scenario-first-use-candidate-gate-evaluator-rehearsal/evidence.json"
+        ]
+      },
+      "incident_id": "AER-1151",
+      "attempt_id": "clock-c17892d1eea1f67a6d72ba6d",
+      "origin": "repository",
       "related_incident_ids": [],
       "status": "corrected"
     }
