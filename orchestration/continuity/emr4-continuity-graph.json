@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 457,
+  "graph_revision": 458,
   "harvests": [],
   "nodes": [
     {
@@ -37060,9 +37060,96 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "raisa-provider-free-read-only-historical-derived-check-in-context-adapter-test-utility-gap-review",
+      "title": "Raisa provider-free read-only historical-derived check-in-context adapter-test utility gap review",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-exact-digest-historical-derived-minimised-check-in-context-adapter-test-consumption-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri delegated gate timing; accept a repository-static utility reading only and continue to authored-synthetic temporal composition without further historical access."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-zero-incremental-branch-utility-reading",
+          "source": "orchestration/continuity/raisa-provider-free-read-only-historical-derived-check-in-context-adapter-test-utility-gap-review/evidence.json",
+          "status": "accepted",
+          "summary": "Accept exact candidate 4cdc1df910c644116f686de472cc385b6a1b1bef: provenance and synthetic time influence passed, with zero incremental adapter branches and zero new business rules."
+        },
+        {
+          "id": "freeze-three-authored-synthetic-temporal-axis-families",
+          "source": "orchestration/continuity/raisa-provider-free-read-only-historical-derived-check-in-context-adapter-test-utility-gap-review/authored-synthetic-successor-axis-contract.json",
+          "status": "accepted",
+          "summary": "Freeze a minimal pairwise time-ordered successor across source/waiting-area, authority/evidence/freshness and idempotency/outcome transitions; no historical occurrence claim or execution authority."
+        }
+      ],
+      "claim_scope": [
+        "One sanitised candidate supplied traceable provenance and a synthetic time offset but no distinct adapter branch or new product rule."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-read-only-historical-derived-check-in-context-adapter-test-utility-gap-review-plan.md",
+          "docs/security/raisa-provider-free-read-only-historical-derived-check-in-context-adapter-test-utility-gap-review-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-provider-free-read-only-historical-derived-check-in-context-adapter-test-utility-gap-review/evidence.json",
+          "orchestration/continuity/raisa-provider-free-read-only-historical-derived-check-in-context-adapter-test-utility-gap-review/report.md",
+          "orchestration/continuity/raisa-provider-free-read-only-historical-derived-check-in-context-adapter-test-utility-gap-review/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-read-only-historical-derived-check-in-context-adapter-test-utility-gap-review-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-24--raisa-provider-free-read-only-historical-derived-check-in-context-adapter-test-utility-gap-review.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-read-only-historical-derived-check-in-context-adapter-test-utility-gap-review-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-read-only-historical-derived-check-in-context-adapter-test-utility-gap-review-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-read-only-historical-derived-check-in-context-adapter-test-utility-gap-review-pre-verifier-receipt.json",
+          "orchestration/continuity/raisa-provider-free-read-only-historical-derived-check-in-context-adapter-test-utility-gap-review/closeout/prepublication-contained-lapses.json",
+          "orchestration/continuity/raisa-provider-free-read-only-historical-derived-check-in-context-adapter-test-utility-gap-review/closeout/pushover-notification-receipt.json"
+        ],
+        "tests": [
+          "tests/test_current_baton_consistency.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_transactional_closeout.py"
+        ],
+        "artifacts": [
+          "orchestration_harness/governance_clockwork_tick.py",
+          "scripts/ariadne_governance_clockwork_closeout.py",
+          "scripts/ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "docs/ariadne-agent-error-correction-register-revision-665.md",
+          "docs/raisa-provider-free-read-only-historical-derived-check-in-context-adapter-test-utility-gap-review-closeout.md",
+          "orchestration/agent_inbox/codex/raisa-provider-free-read-only-historical-derived-check-in-context-adapter-test-utility-gap-review-sol-acceptance.md",
+          "orchestration/human_inbox/yuri/2026-08-24--raisa-provider-free-read-only-historical-derived-check-in-context-adapter-test-utility-gap-review.md"
+        ]
+      },
+      "unresolved_gates": [
+        "Further historical access, product validity, ordinary-practice activation and every provider, runtime, deployment or protected-ref surface remain gated."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-24T15:21:43.2895486+10:00",
+      "updated_at": "2026-08-24T15:21:43.2895486+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "0f6c091935f172351972f349db8cc5c1ec72d5dc",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-24T14:17:06.1781891+10:00"
+  "updated_at": "2026-08-24T15:21:43.2895486+10:00"
 }

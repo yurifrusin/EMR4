@@ -1,0 +1,32 @@
+{
+  "schema_version": "ariadne.governance_explicit_stage_manifest.v1",
+  "status": "passed",
+  "source_head": "0f6c091935f172351972f349db8cc5c1ec72d5dc",
+  "derivation": "admitted_intent_clockwork_contract_intersect_git_inventory",
+  "paths": [
+    "AGENTS.md",
+    "docs/ariadne-compass-current.md",
+    "orchestration/continuity/ariadne-active-operation-latch/current.json",
+    "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json",
+    "orchestration/continuity/ariadne-agent-error-register/pattern-report.json",
+    "orchestration/continuity/ariadne-governance-clockwork/command-manifest.json",
+    "orchestration/continuity/ariadne-governance-clockwork/current.json",
+    "orchestration/continuity/ariadne-governance-clockwork/generation-manifest.json",
+    "orchestration/continuity/ariadne-governance-clockwork/transaction.json",
+    "orchestration/continuity/emr4-compass.json",
+    "orchestration/continuity/emr4-continuity-graph.json",
+    "orchestration/continuity/raisa-provider-free-read-only-historical-derived-check-in-context-adapter-test-utility-gap-review/closeout/clockwork-tick-evidence.json",
+    "orchestration/continuity/raisa-provider-free-read-only-historical-derived-check-in-context-adapter-test-utility-gap-review/closeout/clockwork-tick-report.md",
+    "orchestration/continuity/raisa-provider-free-read-only-historical-derived-check-in-context-adapter-test-utility-gap-review/closeout/closeout-driver-result.json",
+    "orchestration/continuity/raisa-provider-free-read-only-historical-derived-check-in-context-adapter-test-utility-gap-review/closeout/explicit-stage-manifest.json"
+  ],
+  "path_count": 15,
+  "allowlist_path_count": 38,
+  "tracked_path_count": 11,
+  "allowlisted_untracked_path_count": 4,
+  "excluded_untracked_path_count": 683,
+  "unexpected_tracked_paths": [],
+  "git_add_invocations": 0,
+  "git_index_mutations": 0,
+  "docs_branding_included": false
+}

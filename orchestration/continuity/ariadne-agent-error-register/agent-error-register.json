@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 664,
+  "register_revision": 665,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-24",
@@ -44521,6 +44521,41 @@
       "incident_id": "AER-1158",
       "attempt_id": "clock-70467fab9b8010fe29dcdd47",
       "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-24",
+      "tranche": "historical-check-in-utility-gap-review",
+      "role": "orchestrator",
+      "resource_id": "focused-tests-static-checks-and-native-git-gate",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_powershell_pytest_ruff_git",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Privacy assertions distinguish aggregate from row-level keys, static checks are clean, and output-silent Git commands are judged by native exit code.",
+      "observed_error": "One assertion matched an admitted aggregate key, Ruff found one unused test import, one PowerShell conditional misread output-silent git diff --quiet success, and the first semantic check lacked the conventional efficacy projection path.",
+      "detection_method": "Focused pytest, Ruff, the exact-candidate tracked-worktree gate and the clockwork semantic projection check rejected or exposed the four lapses before publication.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-read-only-historical-derived-check-in-context-adapter-test-utility-gap-review/closeout/prepublication-contained-lapses.json"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.preacceptance.test-hygiene-native-exit",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Use exact singular JSON-key assertions, remove the unused import, repeat the Git gate with explicit LASTEXITCODE handling and add the conventional efficacy projection.",
+        "prevention_control": "Keep exact-key privacy assertions, Ruff, explicit native-exit checks and conventional efficacy projection generation in the prepublication loop.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-provider-free-read-only-historical-derived-check-in-context-adapter-test-utility-gap-review/closeout/prepublication-contained-lapses.json"
+        ]
+      },
+      "incident_id": "AER-1159",
+      "attempt_id": "clock-79b1f6ba43d924a19dfd3371",
+      "origin": "operator",
       "related_incident_ids": [],
       "status": "corrected"
     }

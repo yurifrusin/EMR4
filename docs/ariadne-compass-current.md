@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> Audit the sanitised result and code only; distinguish grounding from behavioral coverage before authoring more scenarios.
+> Compose authored-synthetic temporal changes without reopening the trove or duplicating the atomic suite.
 
 ## North star
 
@@ -684,22 +684,24 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    One digest-bound mutually exclusive consumption form now passes. Lineage parent: `raisa-local-only-historical-derived-minimised-check-in-context-scenario-first-use-materialisation-rehearsal`.
 334. **Carry the first empirically derived minimised Diary time-lapse through a real command-adapter test without retaining private structure. — Raisa provider-free exact-digest historical-derived minimised check-in-context adapter-test consumption rehearsal**
    One exact local one-read adapter-test consumption now passes and is terminal against retry. Lineage parent: `raisa-provider-free-governance-clockwork-historical-derived-minimised-scenario-consumption-subgate-rehearsal`.
+335. **Measure whether the first historical-derived scenario changed behavior or only provenance. — Raisa provider-free read-only historical-derived check-in-context adapter-test utility gap review**
+   The exact reading separates provenance and timing from zero incremental behavioral coverage. Lineage parent: `raisa-provider-free-exact-digest-historical-derived-minimised-check-in-context-adapter-test-consumption-rehearsal`.
 
 ## Current position
 
-**Measure what the first consumed scenario actually contributed before widening any scenario programme. — Raisa provider-free exact-digest historical-derived minimised check-in-context adapter-test consumption rehearsal**
+**Turn the measured gap into a small temporal authored-synthetic scenario programme. — Raisa provider-free read-only historical-derived check-in-context adapter-test utility gap review**
 
-**Why this proof came next:** The one-shot result passes but its behavioral influence is narrower than its provenance binding.
+**Why this proof came next:** The existing adapter suite already covers atomic branches; time-ordered composition is the untested utility gap.
 
-A read-only utility gap review and minimum authored-synthetic scenario-axis contract.
+Three bounded axis families and a minimal pairwise composition rule.
 
 ### What this unlocks
 
-- Evidence-led choice of the next useful check-in scenario axes without further historical access.
+- Useful synthetic check-in stories with declared intervening changes and expected readback.
 
 ### What it does not solve
 
-- No fixture reuse, archive access, product change, ordinary-practice activation or real-practice validity opens.
+- No historical representativeness, further data access, product behavior change or ordinary-practice readiness is proved.
 
 ## Continuity and authority
 
@@ -1683,7 +1685,6 @@ Prerequisites:
 - `docs/raisa-provider-free-disposable-postgresql-status-confirm-product-adapter-integration-rehearsal-plan.md`
 - `docs/raisa-provider-free-disposable-postgresql-status-confirm-scaffold-parse-catalogue-rehearsal-closeout.md`
 - `docs/raisa-provider-free-disposable-postgresql-status-confirm-scaffold-parse-catalogue-rehearsal-plan.md`
-- `docs/raisa-provider-free-exact-digest-historical-derived-minimised-check-in-context-adapter-test-consumption-rehearsal-closeout.md`
 - `docs/raisa-provider-free-exact-digest-historical-derived-minimised-check-in-context-adapter-test-consumption-rehearsal-plan.md`
 - `docs/raisa-provider-free-globally-disabled-runtime-instrumentation-scaffold-closeout.md`
 - `docs/raisa-provider-free-globally-disabled-runtime-instrumentation-scaffold-design.md`
@@ -1741,6 +1742,8 @@ Prerequisites:
 - `docs/raisa-provider-free-read-only-delete-confirm-route-convergence-review.md`
 - `docs/raisa-provider-free-read-only-delete-confirm-route-mounting-readiness-review-closeout.md`
 - `docs/raisa-provider-free-read-only-delete-confirm-route-mounting-readiness-review-plan.md`
+- `docs/raisa-provider-free-read-only-historical-derived-check-in-context-adapter-test-utility-gap-review-closeout.md`
+- `docs/raisa-provider-free-read-only-historical-derived-check-in-context-adapter-test-utility-gap-review-plan.md`
 - `docs/raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review-closeout.md`
 - `docs/raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review-plan.md`
 - `docs/raisa-provider-free-read-only-post-cancellation-programme-orientation-closeout.md`
@@ -2535,7 +2538,6 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-provider-free-disposable-postgresql-status-confirm-scaffold-parse-catalogue-precommit-runtime-state.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-disposable-postgresql-status-confirm-scaffold-parse-catalogue-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-disposable-postgresql-status-confirm-scaffold-parse-catalogue-preplanning-runtime-state.json`
-- `orchestration/agent_inbox/codex/raisa-provider-free-exact-digest-historical-derived-minimised-check-in-context-adapter-test-consumption-rehearsal-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-provider-free-office-directory-lifecycle-descendants-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-provider-free-ordinary-fallback-client-proposal-confirm-parity-precommit-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-ordinary-fallback-client-proposal-confirm-parity-preplanning-receipt.json`
@@ -2549,6 +2551,7 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review-gemini37-review-worktree-preflight.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review-pre-verifier-acceptance-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-provider-free-read-only-historical-derived-check-in-context-adapter-test-utility-gap-review-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review-preplanning-runtime-state.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-read-only-post-cancellation-programme-orientation-gemini37-review-packet.md`
@@ -3192,7 +3195,6 @@ Prerequisites:
 - `orchestration/continuity/raisa-provider-free-disposable-postgresql-status-confirm-scaffold-parse-catalogue-rehearsal/rehearsal-contract.schema.json`
 - `orchestration/continuity/raisa-provider-free-docker-created-state-profile-conformance-repair/created-state-representation-evidence.json`
 - `orchestration/continuity/raisa-provider-free-docker-created-state-profile-conformance-repair/repair-attestation.json`
-- `orchestration/continuity/raisa-provider-free-exact-digest-historical-derived-minimised-check-in-context-adapter-test-consumption-rehearsal/evidence.json`
 - `orchestration/continuity/raisa-provider-free-exact-digest-historical-derived-minimised-check-in-context-adapter-test-consumption-rehearsal/report.md`
 - `orchestration/continuity/raisa-provider-free-governance-clockwork-historical-derived-first-use-materialisation-subgate-rehearsal/report.md`
 - `orchestration/continuity/raisa-provider-free-governance-clockwork-historical-derived-minimised-scenario-consumption-subgate-rehearsal/report.md`
@@ -3233,6 +3235,8 @@ Prerequisites:
 - `orchestration/continuity/raisa-provider-free-read-only-delete-confirm-route-mounting-readiness-review/route-mounting-readiness-review-contract.json`
 - `orchestration/continuity/raisa-provider-free-read-only-delete-confirm-route-mounting-readiness-review/route-mounting-readiness-review-contract.schema.json`
 - `orchestration/continuity/raisa-provider-free-read-only-delete-confirm-route-mounting-readiness-review/route-mounting-readiness-review-report.md`
+- `orchestration/continuity/raisa-provider-free-read-only-historical-derived-check-in-context-adapter-test-utility-gap-review/evidence.json`
+- `orchestration/continuity/raisa-provider-free-read-only-historical-derived-check-in-context-adapter-test-utility-gap-review/report.md`
 - `orchestration/continuity/raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review/admission-readiness-review-contract.json`
 - `orchestration/continuity/raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review/admission-readiness-review-contract.schema.json`
 - `orchestration/continuity/raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review/admission-readiness-review-report.md`
@@ -4029,4 +4033,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 439; continuity graph revision 457._
+_Compass map revision 440; continuity graph revision 458._

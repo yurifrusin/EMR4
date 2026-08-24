@@ -1,16 +1,16 @@
 {
   "schema_version": "ariadne.agent-error-pattern-report.v1",
-  "register_revision": 664,
+  "register_revision": 665,
   "source_cutoff_on": "2026-08-24",
   "coverage": "bounded_known_preserved_incidents",
-  "canonical_register_sha256": "8b4e824cdbd7381992ba4e5c49fc202ed7d80fcc14b64c20c2085afc2d4f256c",
-  "incident_count": 1158,
+  "canonical_register_sha256": "1537b1643d5bca26be8b5356f47557f1d3b8903a76de5ba7a77e8b9335621c7b",
+  "incident_count": 1159,
   "open_incident_ids": [],
   "counts": {
     "by_origin": {
       "agent_behavior": 614,
       "harness": 74,
-      "operator": 298,
+      "operator": 299,
       "repository": 156,
       "transport": 16
     },
@@ -18,7 +18,7 @@
       "command_scope_violation": 112,
       "evidence_misreport": 80,
       "harness_failure": 74,
-      "operator_error": 298,
+      "operator_error": 299,
       "output_contract_violation": 367,
       "read_only_violation": 5,
       "reasoning_claim_error": 50,
@@ -28,16 +28,16 @@
     "by_role": {
       "implementer": 93,
       "integration_reviewer": 5,
-      "orchestrator": 997,
+      "orchestrator": 998,
       "verifier": 63
     },
     "by_process_severity": {
-      "low": 766,
+      "low": 767,
       "material": 135,
       "moderate": 257
     },
     "by_candidate_state": {
-      "accepted_candidate_changed": 239,
+      "accepted_candidate_changed": 240,
       "canonical_unchanged": 734,
       "untrusted_partial_worktree": 185
     },
@@ -311,6 +311,7 @@
       "explicit-path-precommit-diff-gate::orchestrator": 1,
       "factory-fixture-package-scope-projection::implementer": 1,
       "factory-import-recovery-focused-tests::implementer": 1,
+      "focused-tests-static-checks-and-native-git-gate::orchestrator": 1,
       "fresh-five-source-preplanning-receipt::orchestrator": 1,
       "frozen-plan-process-and-authority-vocabulary::orchestrator": 1,
       "future-attempt-embedded-helper-identity::implementer": 1,
