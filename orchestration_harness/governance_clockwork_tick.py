@@ -219,12 +219,38 @@ HISTORICAL_FIRST_USE_MATERIALISATION_SUBGATE_BOUNDARIES = frozenset(
         "historical_first_use_authority_non_transitive",
     }
 )
+HISTORICAL_DERIVED_MINIMISED_SCENARIO_CONSUMPTION_ACCESS_BOUNDARY = (
+    "allow_local_only_historical_derived_minimised_scenario_exact_digest_"
+    "bound_test_consumption"
+)
+HISTORICAL_DERIVED_MINIMISED_SCENARIO_CONSUMPTION_SUBGATE_BOUNDARIES = frozenset(
+    {
+        HISTORICAL_DERIVED_MINIMISED_SCENARIO_CONSUMPTION_ACCESS_BOUNDARY,
+        "historical_derived_minimised_scenario_consumption_subgate_contract_"
+        "sha256_da2507056f37482016125c3ccad909573c0495d86cdc135cd5b13714bc7c93ac",
+        "historical_derived_minimised_scenario_consumption_first_use_source_"
+        "4740813d53ebbc4872fe8c0c08ce2578b1982770",
+        "historical_derived_minimised_scenario_consumption_fixture_sha256_"
+        "2205ab83cec7c5639d39cc563cee80eec825ac33f17571151571d325e74f2dfe",
+        "historical_derived_minimised_scenario_consumption_maximum_one_ignored_"
+        "local_fixture_read",
+        "historical_derived_minimised_scenario_consumption_no_historical_"
+        "archive_read",
+        "historical_derived_minimised_scenario_consumption_local_provider_free_"
+        "authored_synthetic_test_context_only",
+        "historical_derived_minimised_scenario_consumption_no_provider_product_"
+        "database_route_client_runtime_configuration_or_ordinary_practice",
+        "historical_derived_minimised_scenario_consumption_authority_non_"
+        "transitive",
+    }
+)
 HISTORICAL_DATA_BOUNDARY_VOCABULARY = frozenset(
     {
         LEGACY_FULL_DATA_DENIAL_BOUNDARY,
         TYPED_HISTORICAL_DATA_DENIAL_BOUNDARY,
         *HISTORICAL_DIARY_SUBGATE_BOUNDARIES,
         *HISTORICAL_FIRST_USE_MATERIALISATION_SUBGATE_BOUNDARIES,
+        *HISTORICAL_DERIVED_MINIMISED_SCENARIO_CONSUMPTION_SUBGATE_BOUNDARIES,
     }
 )
 
@@ -309,6 +335,7 @@ def validate_next_operation_protected_boundaries(
         not in {
             HISTORICAL_DIARY_ACCESS_BOUNDARY,
             HISTORICAL_FIRST_USE_MATERIALISATION_ACCESS_BOUNDARY,
+            HISTORICAL_DERIVED_MINIMISED_SCENARIO_CONSUMPTION_ACCESS_BOUNDARY,
         }
     }
     if unknown_allowances:
@@ -333,20 +360,19 @@ def validate_next_operation_protected_boundaries(
             _reject(rule + "_historical_mode_conflict")
         return boundaries
 
-    if historical_boundaries == HISTORICAL_DIARY_SUBGATE_BOUNDARIES:
-        return boundaries
-    if (
-        historical_boundaries & HISTORICAL_DIARY_SUBGATE_BOUNDARIES
-        and historical_boundaries
-        & HISTORICAL_FIRST_USE_MATERIALISATION_SUBGATE_BOUNDARIES
-    ):
+    allowance_modes = (
+        HISTORICAL_DIARY_SUBGATE_BOUNDARIES,
+        HISTORICAL_FIRST_USE_MATERIALISATION_SUBGATE_BOUNDARIES,
+        HISTORICAL_DERIVED_MINIMISED_SCENARIO_CONSUMPTION_SUBGATE_BOUNDARIES,
+    )
+    touched_modes = [
+        mode for mode in allowance_modes if historical_boundaries & mode
+    ]
+    if len(touched_modes) > 1:
         _reject(rule + "_historical_mode_conflict")
-    if historical_boundaries == HISTORICAL_FIRST_USE_MATERIALISATION_SUBGATE_BOUNDARIES:
+    if any(historical_boundaries == mode for mode in allowance_modes):
         return boundaries
-    if historical_boundaries & (
-        HISTORICAL_DIARY_SUBGATE_BOUNDARIES
-        | HISTORICAL_FIRST_USE_MATERIALISATION_SUBGATE_BOUNDARIES
-    ):
+    if touched_modes:
         _reject(rule + "_historical_subgate_incomplete")
     _reject(rule + "_historical_mode_missing")
 

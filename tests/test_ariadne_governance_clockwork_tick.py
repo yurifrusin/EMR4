@@ -23,6 +23,8 @@ from orchestration_harness.governance_clockwork_tick import (
     INCIDENT_TRANSPORT,
     INCIDENT_TRANCHE,
     INCIDENT_WORKFLOW_DISPOSITIONS,
+    HISTORICAL_DERIVED_MINIMISED_SCENARIO_CONSUMPTION_ACCESS_BOUNDARY,
+    HISTORICAL_DERIVED_MINIMISED_SCENARIO_CONSUMPTION_SUBGATE_BOUNDARIES,
     HISTORICAL_DIARY_ACCESS_BOUNDARY,
     HISTORICAL_DIARY_SUBGATE_BOUNDARIES,
     HISTORICAL_FIRST_USE_MATERIALISATION_ACCESS_BOUNDARY,
@@ -102,6 +104,11 @@ HISTORICAL_DIARY_SUBGATE_CONTRACT = ROOT / (
 HISTORICAL_FIRST_USE_MATERIALISATION_SUBGATE_CONTRACT = ROOT / (
     "orchestration/continuity/raisa-provider-free-historical-derived-scenario-"
     "first-use-candidate-gate-evaluator-rehearsal/next-tranche-contract.json"
+)
+HISTORICAL_DERIVED_MINIMISED_SCENARIO_CONSUMPTION_SUBGATE_CONTRACT = ROOT / (
+    "orchestration/continuity/raisa-local-only-historical-derived-minimised-"
+    "check-in-context-scenario-first-use-materialisation-rehearsal/"
+    "next-tranche-contract.json"
 )
 DECISION_INTENT_PATH = ROOT / (
     "orchestration/continuity/raisa-provider-free-default-off-check-in-relay-free-"
@@ -1478,6 +1485,11 @@ def test_historical_boundary_modes_are_closed_and_mutually_exclusive() -> None:
     materialisation = _typed_boundaries(
         *sorted(HISTORICAL_FIRST_USE_MATERIALISATION_SUBGATE_BOUNDARIES)
     )
+    consumption = _typed_boundaries(
+        *sorted(
+            HISTORICAL_DERIVED_MINIMISED_SCENARIO_CONSUMPTION_SUBGATE_BOUNDARIES
+        )
+    )
 
     assert validate_next_operation_protected_boundaries(legacy) == legacy
     assert validate_next_operation_protected_boundaries(typed_denial) == typed_denial
@@ -1486,6 +1498,7 @@ def test_historical_boundary_modes_are_closed_and_mutually_exclusive() -> None:
         validate_next_operation_protected_boundaries(materialisation)
         == materialisation
     )
+    assert validate_next_operation_protected_boundaries(consumption) == consumption
 
     for conflicting in (
         [*bounded_probe, TYPED_HISTORICAL_DATA_DENIAL_BOUNDARY],
@@ -1494,6 +1507,10 @@ def test_historical_boundary_modes_are_closed_and_mutually_exclusive() -> None:
         [*materialisation, TYPED_HISTORICAL_DATA_DENIAL_BOUNDARY],
         [*materialisation, LEGACY_FULL_DATA_DENIAL_BOUNDARY],
         [*bounded_probe, *HISTORICAL_FIRST_USE_MATERIALISATION_SUBGATE_BOUNDARIES],
+        [*consumption, TYPED_HISTORICAL_DATA_DENIAL_BOUNDARY],
+        [*consumption, LEGACY_FULL_DATA_DENIAL_BOUNDARY],
+        [*bounded_probe, *HISTORICAL_DERIVED_MINIMISED_SCENARIO_CONSUMPTION_SUBGATE_BOUNDARIES],
+        [*materialisation, *HISTORICAL_DERIVED_MINIMISED_SCENARIO_CONSUMPTION_SUBGATE_BOUNDARIES],
     ):
         with pytest.raises(
             ClockworkTickRejection, match="historical_mode_conflict"
@@ -1521,6 +1538,18 @@ def test_historical_boundary_rejects_missing_broad_denial_and_partial_subgate() 
     )
     for member in HISTORICAL_FIRST_USE_MATERIALISATION_SUBGATE_BOUNDARIES:
         partial = [item for item in materialisation if item != member]
+        with pytest.raises(
+            ClockworkTickRejection, match="historical_subgate_incomplete"
+        ):
+            validate_next_operation_protected_boundaries(partial)
+
+    consumption = _typed_boundaries(
+        *sorted(
+            HISTORICAL_DERIVED_MINIMISED_SCENARIO_CONSUMPTION_SUBGATE_BOUNDARIES
+        )
+    )
+    for member in HISTORICAL_DERIVED_MINIMISED_SCENARIO_CONSUMPTION_SUBGATE_BOUNDARIES:
+        partial = [item for item in consumption if item != member]
         with pytest.raises(
             ClockworkTickRejection, match="historical_subgate_incomplete"
         ):
@@ -1573,6 +1602,28 @@ def test_historical_boundary_rejects_unknown_digest_and_overbroad_allowance() ->
         with pytest.raises(ClockworkTickRejection, match="historical_vocabulary"):
             validate_next_operation_protected_boundaries(
                 altered_materialisation_coordinate
+            )
+
+    consumption = _typed_boundaries(
+        *sorted(
+            HISTORICAL_DERIVED_MINIMISED_SCENARIO_CONSUMPTION_SUBGATE_BOUNDARIES
+        )
+    )
+    for coordinate_fragment in (
+        "consumption_subgate_contract_sha256",
+        "consumption_first_use_source",
+        "consumption_fixture_sha256",
+    ):
+        selected = next(item for item in consumption if coordinate_fragment in item)
+        altered_consumption_coordinate = [
+            (item[:-1] + ("0" if item[-1] != "0" else "1"))
+            if item == selected
+            else item
+            for item in consumption
+        ]
+        with pytest.raises(ClockworkTickRejection, match="historical_vocabulary"):
+            validate_next_operation_protected_boundaries(
+                altered_consumption_coordinate
             )
 
 
@@ -1664,14 +1715,87 @@ def test_historical_first_use_materialisation_subgate_is_byte_and_semantically_b
     )
 
 
+def test_historical_derived_minimised_scenario_consumption_subgate_is_bound() -> None:
+    contract_bytes = (
+        HISTORICAL_DERIVED_MINIMISED_SCENARIO_CONSUMPTION_SUBGATE_CONTRACT.read_bytes()
+    )
+    contract = json.loads(contract_bytes)
+    digest = hashlib.sha256(contract_bytes).hexdigest()
+    boundaries = (
+        HISTORICAL_DERIVED_MINIMISED_SCENARIO_CONSUMPTION_SUBGATE_BOUNDARIES
+    )
+
+    assert (
+        "historical_derived_minimised_scenario_consumption_subgate_contract_"
+        "sha256_" + digest
+        in boundaries
+    )
+    assert contract["schema_version"] == (
+        "raisa.historical_derived_minimised_scenario_consumption_subgate_"
+        "successor_contract.v1"
+    )
+    assert contract["status"] == "frozen_fail_closed_successor_contract"
+    accepted = contract["accepted_first_use"]
+    assert accepted == {
+        "reviewed_source": "4740813d53ebbc4872fe8c0c08ce2578b1982770",
+        "candidate_gate_source": "abcd4206a363b0c565c070e0f2cb9c54d627b3b3",
+        "fixture_sha256": (
+            "2205ab83cec7c5639d39cc563cee80eec825ac33f17571151571d325e74f2dfe"
+        ),
+        "fixture_class": "minimised_structural_scenario",
+        "fixture_location": (
+            "local_data/historical-diary-trove/derived-scenarios/"
+            "2026-08-24-first-use-check-in-context-v1/scenario.json"
+        ),
+        "fixture_committed": False,
+        "authority_non_transitive": True,
+    }
+    assert (
+        "historical_derived_minimised_scenario_consumption_first_use_source_"
+        + accepted["reviewed_source"]
+        in boundaries
+    )
+    assert (
+        "historical_derived_minimised_scenario_consumption_fixture_sha256_"
+        + accepted["fixture_sha256"]
+        in boundaries
+    )
+    assert contract["clockwork_objective"] == {
+        "new_mode": "exact_digest_bound_local_test_fixture_consumption",
+        "fixture_reads_during_clockwork_tranche": 0,
+        "historical_archive_reads": 0,
+        "product_or_adapter_invocations": 0,
+        "partial_mixed_unknown_or_altered_forms_fail_closed": True,
+    }
+    ceiling = contract["eventual_consumption_ceiling"]
+    assert ceiling["exact_fixture_digest_required"] is True
+    assert ceiling["local_provider_free_authored_synthetic_test_context_only"] is True
+    assert ceiling["maximum_fixture_reads"] == 1
+    assert ceiling["raw_archive_access"] is False
+    assert ceiling["provider_model_network_prompt_telemetry_clipboard_or_external_release"] is False
+    assert ceiling["product_patient_appointment_clinical_or_protected_data"] is False
+    assert ceiling["database_route_client_runtime_or_configuration"] is False
+    assert ceiling["ordinary_practice_activation"] is False
+    assert HISTORICAL_DERIVED_MINIMISED_SCENARIO_CONSUMPTION_ACCESS_BOUNDARY in boundaries
+    assert contract["claim_ceiling"] == (
+        "the_next_tranche_only_adds_a_closed_clockwork_form_and_does_not_read_"
+        "or_consume_the_fixture"
+    )
+
+
 def test_closeout_and_user_decision_paths_share_the_typed_boundary_control() -> None:
     contract = validate_contract(_json(CONTRACT_PATH))
     bounded_probe = _typed_boundaries(*sorted(HISTORICAL_DIARY_SUBGATE_BOUNDARIES))
     materialisation = _typed_boundaries(
         *sorted(HISTORICAL_FIRST_USE_MATERIALISATION_SUBGATE_BOUNDARIES)
     )
+    consumption = _typed_boundaries(
+        *sorted(
+            HISTORICAL_DERIVED_MINIMISED_SCENARIO_CONSUMPTION_SUBGATE_BOUNDARIES
+        )
+    )
 
-    for boundaries in (bounded_probe, materialisation):
+    for boundaries in (bounded_probe, materialisation, consumption):
         closeout = _json(INTENT_PATH)
         closeout["next_operation_protected_boundaries"] = boundaries
         assert validate_tick_intent(closeout, contract)[
@@ -1687,6 +1811,10 @@ def test_closeout_and_user_decision_paths_share_the_typed_boundary_control() -> 
     for boundaries, access_boundary in (
         (bounded_probe, HISTORICAL_DIARY_ACCESS_BOUNDARY),
         (materialisation, HISTORICAL_FIRST_USE_MATERIALISATION_ACCESS_BOUNDARY),
+        (
+            consumption,
+            HISTORICAL_DERIVED_MINIMISED_SCENARIO_CONSUMPTION_ACCESS_BOUNDARY,
+        ),
     ):
         incomplete = [item for item in boundaries if item != access_boundary]
         closeout = _json(INTENT_PATH)
