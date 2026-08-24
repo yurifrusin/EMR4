@@ -410,6 +410,29 @@ def test_receptionist_only_authority(
     assert _row_counts(db) == (0, 0, 0)
 
 
+def test_current_receptionist_role_revoked_after_proposal_denies_confirmation(
+    client, db, receptionist_user, practice, practitioner, patient
+):
+    appt = _make_appt(db, practice, practitioner, patient)
+    payload, data = _proposal(client, receptionist_user, appt.id)
+    assert data["safe"] is True
+
+    # Retain a token issued while the actor was a Receptionist, then persist the
+    # current authority change before the separate confirmation request.
+    headers = _auth(receptionist_user, "ci-current-role-revoked")
+    receptionist_user.role = UserRole.Admin
+    db.commit()
+
+    resp = client.post(CONFIRM_URL, json=payload, headers=headers)
+
+    assert resp.status_code == 403, resp.text
+    assert resp.json()["detail"] == "Insufficient permissions"
+    db.expire_all()
+    assert db.get(User, receptionist_user.id).role == UserRole.Admin
+    assert db.get(Appointment, appt.id).status == AppointmentStatus.Booked
+    assert _row_counts(db) == (0, 0, 0)
+
+
 # ── Evidence tamper/expiry/purpose/actor/practice failures ───────────────────
 
 
@@ -558,6 +581,43 @@ def test_inactive_area_rejected(
         b["code"] == "waiting_area_not_active" for b in data["blocks"]
     )
     assert data["signed_confirmation_evidence"] is None
+
+
+def test_selected_waiting_area_deactivated_after_proposal_denies_confirmation(
+    client, db, receptionist_user, practice, practitioner, patient
+):
+    loc = _make_location(db, practice)
+    area = _make_area(db, practice, loc, name="Closes After Proposal")
+    appt = _make_appt(db, practice, practitioner, patient, location=loc)
+    payload, data = _proposal(
+        client,
+        receptionist_user,
+        appt.id,
+        waiting_area_id=area.id,
+    )
+    assert data["safe"] is True
+
+    area.is_active = False
+    db.commit()
+
+    resp = _confirm(client, receptionist_user, payload, "ci-area-deactivated")
+
+    assert resp.status_code == 200, resp.text
+    body = resp.json()
+    assert body["safe"] is False
+    assert body["receipt"] is None
+    assert [block["code"] for block in body["blocks"]] == [
+        "waiting_area_not_active"
+    ]
+    assert "check_in_signed_confirmation_evidence_verified" in body[
+        "audit_evidence"
+    ]
+    db.expire_all()
+    fresh = db.get(Appointment, appt.id)
+    assert fresh.status == AppointmentStatus.Booked
+    assert fresh.waiting_area_id is None
+    assert db.get(WaitingArea, area.id).is_active is False
+    assert _row_counts(db) == (0, 0, 0)
 
 
 def test_cross_practice_area_rejected(
