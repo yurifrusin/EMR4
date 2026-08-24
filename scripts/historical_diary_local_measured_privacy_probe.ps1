@@ -6,7 +6,13 @@ param(
     [Parameter(Mandatory = $true)]
     [string]$ProgressPath,
     [Parameter(Mandatory = $true)]
-    [ValidateSet("HistoricalMeasuredProbe", "AuthoredSyntheticRecovery")]
+    # Preserved accepted legacy pair:
+    # ValidateSet("HistoricalMeasuredProbe", "AuthoredSyntheticRecovery")
+    [ValidateSet(
+        "HistoricalMeasuredProbe",
+        "HistoricalFirstUseMaterialisation",
+        "AuthoredSyntheticRecovery"
+    )]
     [string]$ExecutionProfile
 )
 
@@ -22,6 +28,7 @@ $MaximumVerticalQuarterPoints = 100000
 $OutputSchema = "historical_diary.private_word_story_coordinate_extraction.v2"
 $repositoryRoot = (Resolve-Path -LiteralPath (Join-Path $PSScriptRoot "..")).Path
 $historicalAttemptRoot = Join-Path $repositoryRoot "local_data\historical-diary-trove\measured-probes\2026-08-24-leading-token-v3"
+$firstUseAttemptRoot = Join-Path $repositoryRoot "local_data\historical-diary-trove\first-use-attempts\2026-08-24-check-in-context-v1"
 $syntheticAttemptRoot = Join-Path $repositoryRoot "local_data\authored-synthetic-diary-word-coordinate-recovery\run-v1"
 $syntheticDocumentRoot = Join-Path $syntheticAttemptRoot "documents"
 if ($ExecutionProfile -eq "HistoricalMeasuredProbe") {
@@ -29,6 +36,11 @@ if ($ExecutionProfile -eq "HistoricalMeasuredProbe") {
     $expectedManifest = Join-Path $historicalAttemptRoot "private-binding-manifest.json"
     $expectedControl = Join-Path $historicalAttemptRoot "owned-word-process-control.json"
     $expectedProgress = Join-Path $historicalAttemptRoot "word-extraction-progress.json"
+} elseif ($ExecutionProfile -eq "HistoricalFirstUseMaterialisation") {
+    $ExpectedSchema = "historical_diary.private_binding_manifest.v1"
+    $expectedManifest = Join-Path $firstUseAttemptRoot "private-binding-manifest.json"
+    $expectedControl = Join-Path $firstUseAttemptRoot "owned-word-process-control.json"
+    $expectedProgress = Join-Path $firstUseAttemptRoot "word-extraction-progress.json"
 } else {
     $ExpectedSchema = "historical_diary.authored_synthetic_binding_manifest.v1"
     $expectedManifest = Join-Path $syntheticAttemptRoot "synthetic-binding-manifest.json"

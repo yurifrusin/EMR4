@@ -465,13 +465,28 @@ def _safe_public_write(path: Path, value: dict[str, Any]) -> None:
     )
 
 
-def build_binding_manifest() -> tuple[BindingManifest, dict[str, Any]]:
+def build_binding_manifest(
+    *,
+    attempt_root: Path | None = None,
+    core_path: Path | None = None,
+    extractor_path: Path | None = None,
+) -> tuple[BindingManifest, dict[str, Any]]:
+    """Bind one exact attempt while preserving the accepted default profile."""
+
+    attempt_root = ATTEMPT_ROOT if attempt_root is None else attempt_root
+    core_path = CORE_PATH if core_path is None else core_path
+    extractor_path = EXTRACTOR_PATH if extractor_path is None else extractor_path
     root = BOUND_ROOT.resolve(strict=True)
     expected = BOUND_ROOT.resolve()
     ignored = (REPO_ROOT / "local_data/historical-diary-trove").resolve()
     if root != expected or not root.is_relative_to(ignored) or _is_reparse(BOUND_ROOT):
         raise ProbeError("root_boundary_invalid")
-    if ATTEMPT_ROOT.exists():
+    attempt_root = attempt_root.resolve()
+    if (
+        not attempt_root.is_relative_to(ignored)
+        or attempt_root == ignored
+        or attempt_root.exists()
+    ):
         raise ProbeError("attempt_root_already_exists")
 
     candidate_sets: list[tuple[Path, os.stat_result, dict[str, datetime]]] = []
@@ -589,12 +604,12 @@ def build_binding_manifest() -> tuple[BindingManifest, dict[str, Any]]:
     manifest = BindingManifest(
         schema_version="historical_diary.private_binding_manifest.v1",
         root=str(root),
-        attempt_root=str(ATTEMPT_ROOT.resolve()),
+        attempt_root=str(attempt_root),
         selected_source_day=selected_day,
         selector="densest_unique_closed_timestamp_convention_first_80_chronological",
         timestamp_convention=selected_convention,
-        core_sha256=_sha256_path(CORE_PATH),
-        extractor_sha256=_sha256_path(EXTRACTOR_PATH),
+        core_sha256=_sha256_path(core_path),
+        extractor_sha256=_sha256_path(extractor_path),
         total_bytes=total_bytes,
         files=files,
     )
