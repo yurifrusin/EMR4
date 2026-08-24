@@ -1,0 +1,30 @@
+{
+  "schema_version": "raisa.waiting_area_confirm_architecture_successor_contract.v1",
+  "operation_id": "raisa-provider-free-unmounted-waiting-area-confirm-command-family-architecture",
+  "recorded_at": "2026-08-24T19:10:37.5579771+10:00",
+  "status": "planned_paused_by_explicit_yuri_instruction",
+  "builds_on": {
+    "exact_reviewed_candidate": "e39fcf9fac968fcc06809b32b096c2b7b049947e",
+    "readiness_verdict": "waiting_area_command_family_not_ready",
+    "satisfied_dimensions": 5,
+    "blocking_dimensions": 7
+  },
+  "objective": "Freeze one provider-free unmounted waiting-area-confirm command-family architecture with distinct operation identity, family-bound evidence, current-authority and locked destination checks, atomic waiting-area-only mutation/audit/idempotency/receipt semantics, canonical replay delivery and a non-actuating event posture without overlapping check-in or general status.",
+  "acceptance": {
+    "waiting_area_only_mutation": true,
+    "status_and_arrival_unchanged": true,
+    "check_in_and_general_status_non_overlap": true,
+    "family_qualified_authority_evidence_idempotency_and_receipt": true,
+    "unmounted_architecture_only": true,
+    "no_product_source_or_api_spine_change": true,
+    "no_runtime_database_provider_or_historical_data_execution": true
+  },
+  "authority": {
+    "start_authorized_now": false,
+    "pause_source": "Yuri explicitly instructed completion of the current tranche followed by a work pause.",
+    "resume_requires_explicit_yuri_instruction": true,
+    "product_patient_clinical_or_protected_data": false,
+    "production_deployment_release_pages_or_protected_ref_movement": false
+  },
+  "claim_ceiling": "provider_free_unmounted_waiting_area_confirm_architecture_only"
+}

@@ -1,0 +1,10 @@
+{
+  "schema_version": "emr4.non_phi_pushover_closeout_receipt.v1",
+  "recorded_at": "2026-08-24T19:10:37.5579771+10:00",
+  "sprint": "Waiting-area command readiness",
+  "engine_state": "paused",
+  "reason": "Yuri requested pause after accepted read-only review; architecture successor recorded but unstarted",
+  "request": "5e023832-8a18-4320-b6fa-2571109e1a36",
+  "status": 1,
+  "contains_phi": false
+}

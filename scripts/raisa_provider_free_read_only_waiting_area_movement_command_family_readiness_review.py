@@ -22,8 +22,8 @@ BASE = (
 )
 DEFAULT_CONTRACT = BASE / "readiness-review-contract.json"
 DEFAULT_SCHEMA = BASE / "readiness-review-contract.schema.json"
-DEFAULT_EVIDENCE = BASE / "provider-free-read-only-evidence.json"
-DEFAULT_REPORT = BASE / "readiness-review-report.md"
+DEFAULT_EVIDENCE = BASE / "evidence.json"
+DEFAULT_REPORT = BASE / "report.md"
 
 
 def _canonical_json(value: Any) -> str:

@@ -1,0 +1,30 @@
+{
+  "schema_version": "ariadne.tranche_efficacy_reading.v1",
+  "recorded_at": "2026-08-24T19:10:37.5579771+10:00",
+  "operation_id": "raisa-provider-free-read-only-waiting-area-movement-command-family-readiness-review",
+  "result": "passed",
+  "substantive_outcome": {
+    "source_bindings_passed": 16,
+    "ordered_dimensions_passed": 12,
+    "satisfied_foundations": 5,
+    "blocking_dimensions": 7,
+    "hostile_mutations_rejected": 76,
+    "product_source_changes": 0,
+    "runtime_surfaces_opened": 0
+  },
+  "workflow": {
+    "planned_owner": "gpt_sol_serial",
+    "actual_owner": "gpt_sol_serial",
+    "deepseek_disposition": "declined_negative_leverage",
+    "gemini_disposition": "not_applicable_neutral",
+    "native_subagents_disposition": "declined_negative_leverage",
+    "external_worker_dispatches": 0,
+    "provider_calls": 0,
+    "pre_acceptance_marker_corrections": 1,
+    "pre_acceptance_assertion_corrections": 2,
+    "accepted_candidate_rework_cycles": 0,
+    "clockwork_publication_retries": 0
+  },
+  "reading": "The serial static join produced one bounded not-ready decision without external worker overhead or product/runtime execution. The early marker and whitespace assertions failed before acceptance and were corrected locally; no accepted evidence or product state was rerun.",
+  "next_improvement": "Retain exact canonical clockwork artifact names in the tranche template so the closeout driver consumes generated evidence directly."
+}
