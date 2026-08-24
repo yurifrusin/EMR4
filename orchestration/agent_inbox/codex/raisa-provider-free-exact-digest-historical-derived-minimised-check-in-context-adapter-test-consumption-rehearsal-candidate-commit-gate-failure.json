@@ -1,0 +1,17 @@
+{
+  "schema_version": "ariadne.prepublication_contained_commit_gate_failure.v1",
+  "operation_id": "raisa-provider-free-exact-digest-historical-derived-minimised-check-in-context-adapter-test-consumption-rehearsal",
+  "stage": "candidate_commit_before_any_real_fixture_read",
+  "status": "contained_in_immediate_descendant",
+  "reason_code": "git_diff_cached_check_nonzero_not_propagated_by_powershell",
+  "affected_path": "scripts/raisa_provider_free_exact_digest_historical_derived_minimised_check_in_context_adapter_test_consumption_rehearsal.py",
+  "finding": "new_blank_line_at_eof",
+  "candidate_commit_with_warning": "88a7f92080331113a4bc42b3d8a2246cfe97abf6",
+  "containment": {
+    "fixture_content_reads": 0,
+    "adapter_test_invocations_against_real_fixture": 0,
+    "provider_or_model_calls": 0,
+    "protected_refs_moved": false,
+    "correction": "remove_the_extra_blank_line_and_explicitly_test_last_exit_code_before_every_later_commit"
+  }
+}

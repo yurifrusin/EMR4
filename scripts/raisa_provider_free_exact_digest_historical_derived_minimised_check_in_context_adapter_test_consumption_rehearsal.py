@@ -16,4 +16,3 @@ from orchestration_harness.historical_diary_check_in_adapter_test_consumption im
 
 if __name__ == "__main__":
     raise SystemExit(main())
-
