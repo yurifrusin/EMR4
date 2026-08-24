@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 461,
+  "graph_revision": 462,
   "harvests": [],
   "nodes": [
     {
@@ -37411,9 +37411,98 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "raisa-provider-free-read-only-waiting-area-movement-command-family-readiness-review",
+      "title": "Raisa provider-free read-only waiting-area movement command-family readiness review",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-database-backed-default-off-canonical-check-in-post-proposal-revalidation-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's uninterrupted-development authority applied to this provider-free repository-static review; his latest explicit instruction requires a pause immediately after closeout."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-waiting-area-command-family-not-ready",
+          "source": "orchestration/continuity/raisa-provider-free-read-only-waiting-area-movement-command-family-readiness-review/evidence.json",
+          "status": "accepted",
+          "summary": "Accept the exact 5 satisfied / 7 blocking matrix and preserve the status-confirm fail-closed boundary."
+        },
+        {
+          "id": "record-unmounted-architecture-successor-paused",
+          "source": "orchestration/continuity/raisa-provider-free-read-only-waiting-area-movement-command-family-readiness-review/next-tranche-contract.json",
+          "status": "accepted",
+          "summary": "Record the narrow unmounted waiting-area-confirm architecture successor without starting it, per Yuri's explicit pause instruction."
+        }
+      ],
+      "claim_scope": [
+        "Repository-static readiness only: sixteen source bindings, twelve ordered dimensions and seventy-six hostile mutations establish five reusable foundations and seven blocking family-owned controls."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-read-only-waiting-area-movement-command-family-readiness-review-plan.md",
+          "docs/security/raisa-provider-free-read-only-waiting-area-movement-command-family-readiness-review-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-provider-free-read-only-waiting-area-movement-command-family-readiness-review/evidence.json",
+          "orchestration/continuity/raisa-provider-free-read-only-waiting-area-movement-command-family-readiness-review/report.md",
+          "orchestration/continuity/raisa-provider-free-read-only-waiting-area-movement-command-family-readiness-review/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-read-only-waiting-area-movement-command-family-readiness-review-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-24--raisa-provider-free-read-only-waiting-area-movement-command-family-readiness-review.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-read-only-waiting-area-movement-command-family-readiness-review-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-read-only-waiting-area-movement-command-family-readiness-review-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-read-only-waiting-area-movement-command-family-readiness-review-pre-verifier-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-read-only-waiting-area-movement-command-family-readiness-review-restored-conversation-receipt.json",
+          "orchestration/continuity/raisa-provider-free-read-only-waiting-area-movement-command-family-readiness-review/closeout/pushover-notification-receipt.json"
+        ],
+        "tests": [
+          "tests/test_current_baton_consistency.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_transactional_closeout.py"
+        ],
+        "artifacts": [
+          "orchestration_harness/governance_clockwork_tick.py",
+          "scripts/ariadne_governance_clockwork_closeout.py",
+          "scripts/ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "orchestration/continuity/raisa-provider-free-read-only-waiting-area-movement-command-family-readiness-review/readiness-review-contract.json",
+          "orchestration/continuity/raisa-provider-free-read-only-waiting-area-movement-command-family-readiness-review/readiness-review-contract.schema.json",
+          "orchestration/continuity/raisa-provider-free-read-only-waiting-area-movement-command-family-readiness-review/next-tranche-contract.json",
+          "scripts/raisa_provider_free_read_only_waiting_area_movement_command_family_readiness_review.py",
+          "tests/test_raisa_provider_free_read_only_waiting_area_movement_command_family_readiness_review.py",
+          "tests/test_raisa_provider_free_read_only_waiting_area_movement_command_family_readiness_review_plan.py"
+        ]
+      },
+      "unresolved_gates": [
+        "The separate waiting-area-confirm architecture, product implementation, route/API Spine convergence, runtime, ordinary-practice activation and protected integration remain closed and paused."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-24T19:10:37.5579771+10:00",
+      "updated_at": "2026-08-24T19:10:37.5579771+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "2565ac1c465752d6b66919621541e54449e4948c",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-24T18:00:02.9645865+10:00"
+  "updated_at": "2026-08-24T19:10:37.5579771+10:00"
 }

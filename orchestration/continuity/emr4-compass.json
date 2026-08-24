@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 443,
-  "updated_at": "2026-08-24T18:00:02.9645865+10:00",
-  "source_graph_revision": 461,
-  "orientation_statement": "Move to the next missing Rayleen command family instead of adding another check-in evidence loop.",
+  "map_revision": 444,
+  "updated_at": "2026-08-24T19:10:37.5579771+10:00",
+  "source_graph_revision": 462,
+  "orientation_statement": "The review is accepted and the engine pauses before the unmounted waiting-area-confirm architecture successor, as Yuri instructed.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -5567,24 +5567,34 @@
         "docs/raisa-provider-free-database-backed-default-off-canonical-check-in-post-proposal-revalidation-rehearsal-plan.md",
         "orchestration/continuity/raisa-provider-free-database-backed-default-off-canonical-check-in-post-proposal-revalidation-rehearsal/report.md"
       ]
+    },
+    {
+      "node_id": "raisa-provider-free-read-only-waiting-area-movement-command-family-readiness-review",
+      "lineage_parent": "raisa-provider-free-database-backed-default-off-canonical-check-in-post-proposal-revalidation-rehearsal",
+      "strategic_role": "Separate explicit waiting-area movement from dedicated arrival/check-in and general status authority.",
+      "outcome": "The exact missing sibling command boundary is known without widening any accepted product path.",
+      "evidence": [
+        "docs/raisa-provider-free-read-only-waiting-area-movement-command-family-readiness-review-plan.md",
+        "orchestration/continuity/raisa-provider-free-read-only-waiting-area-movement-command-family-readiness-review/report.md"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "raisa-provider-free-database-backed-default-off-canonical-check-in-post-proposal-revalidation-rehearsal",
-    "strategic_role": "Advance Rayleen's remaining deterministic command architecture beyond check-in and general status.",
-    "why_now": "Explicit waiting-area movement remains the missing separate command family named in the Phase 4 architecture.",
-    "outcome": "A read-only source and evidence review will identify the narrowest canonical movement boundary or exact blockers.",
+    "node_id": "raisa-provider-free-read-only-waiting-area-movement-command-family-readiness-review",
+    "strategic_role": "Hold a precise unmounted architecture successor for the missing waiting-area movement family.",
+    "why_now": "The proposal and human confirmation interaction exist, while confirmation authority, transaction and delivery remain deliberately absent.",
+    "outcome": "Five foundations can be reused and seven controls must be designed together before implementation or mounting.",
     "unlocks": [
-      "A bounded implementation decision for explicit waiting-area movement without overlapping check-in or status."
+      "A future unmounted architecture can specify one family-qualified movement transaction without overlapping check-in or status."
     ],
     "does_not_solve": [
-      "No movement route, client, runtime, ordinary activation or production capability is opened."
+      "No waiting-area write path, route, API Spine operation, client convergence, runtime or ordinary activation is opened."
     ],
     "evidence": [
-      "orchestration/continuity/raisa-provider-free-database-backed-default-off-canonical-check-in-post-proposal-revalidation-rehearsal/evidence.json",
-      "orchestration/continuity/raisa-provider-free-database-backed-default-off-canonical-check-in-post-proposal-revalidation-rehearsal/report.md",
-      "docs/raisa-provider-free-database-backed-default-off-canonical-check-in-post-proposal-revalidation-rehearsal-closeout.md",
-      "orchestration/agent_inbox/codex/raisa-provider-free-database-backed-default-off-canonical-check-in-post-proposal-revalidation-rehearsal-sol-acceptance.md"
+      "orchestration/continuity/raisa-provider-free-read-only-waiting-area-movement-command-family-readiness-review/evidence.json",
+      "orchestration/continuity/raisa-provider-free-read-only-waiting-area-movement-command-family-readiness-review/report.md",
+      "docs/raisa-provider-free-read-only-waiting-area-movement-command-family-readiness-review-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-provider-free-read-only-waiting-area-movement-command-family-readiness-review-sol-acceptance.md"
     ]
   },
   "decision_horizon": [

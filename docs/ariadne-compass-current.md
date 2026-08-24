@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> Move to the next missing Rayleen command family instead of adding another check-in evidence loop.
+> The review is accepted and the engine pauses before the unmounted waiting-area-confirm architecture successor, as Yuri instructed.
 
 ## North star
 
@@ -692,22 +692,24 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    Eight physical properties and ten transition groups are reconciled; only two post-proposal route/database witnesses remain useful. Lineage parent: `raisa-provider-free-authored-synthetic-time-ordered-canonical-check-in-context-branch-composition-rehearsal`.
 338. **Turn the two useful in-memory temporal gaps into exact database-backed route assurance without expanding the product. — Raisa provider-free database-backed default-off canonical check-in post-proposal revalidation rehearsal**
    Both transitions already fail closed; no product repair or further canonical check-in temporal rehearsal is justified. Lineage parent: `raisa-provider-free-read-only-authored-synthetic-time-ordered-canonical-check-in-context-operational-evidence-gap-review`.
+339. **Separate explicit waiting-area movement from dedicated arrival/check-in and general status authority. — Raisa provider-free read-only waiting-area movement command-family readiness review**
+   The exact missing sibling command boundary is known without widening any accepted product path. Lineage parent: `raisa-provider-free-database-backed-default-off-canonical-check-in-post-proposal-revalidation-rehearsal`.
 
 ## Current position
 
-**Advance Rayleen's remaining deterministic command architecture beyond check-in and general status. — Raisa provider-free database-backed default-off canonical check-in post-proposal revalidation rehearsal**
+**Hold a precise unmounted architecture successor for the missing waiting-area movement family. — Raisa provider-free read-only waiting-area movement command-family readiness review**
 
-**Why this proof came next:** Explicit waiting-area movement remains the missing separate command family named in the Phase 4 architecture.
+**Why this proof came next:** The proposal and human confirmation interaction exist, while confirmation authority, transaction and delivery remain deliberately absent.
 
-A read-only source and evidence review will identify the narrowest canonical movement boundary or exact blockers.
+Five foundations can be reused and seven controls must be designed together before implementation or mounting.
 
 ### What this unlocks
 
-- A bounded implementation decision for explicit waiting-area movement without overlapping check-in or status.
+- A future unmounted architecture can specify one family-qualified movement transaction without overlapping check-in or status.
 
 ### What it does not solve
 
-- No movement route, client, runtime, ordinary activation or production capability is opened.
+- No waiting-area write path, route, API Spine operation, client convergence, runtime or ordinary activation is opened.
 
 ## Continuity and authority
 
@@ -1642,7 +1644,6 @@ Prerequisites:
 - `docs/raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review-closeout.md`
 - `docs/raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review-plan.md`
 - `docs/raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review.md`
-- `docs/raisa-provider-free-database-backed-default-off-canonical-check-in-post-proposal-revalidation-rehearsal-closeout.md`
 - `docs/raisa-provider-free-database-backed-default-off-canonical-check-in-post-proposal-revalidation-rehearsal-plan.md`
 - `docs/raisa-provider-free-default-off-canonical-check-in-non-phi-observability-manifest-convergence-rehearsal-closeout.md`
 - `docs/raisa-provider-free-default-off-canonical-check-in-rollout-kill-switch-rollback-runbook-convergence-rehearsal-closeout.md`
@@ -1772,6 +1773,8 @@ Prerequisites:
 - `docs/raisa-provider-free-read-only-unmounted-delete-confirm-physical-representability-review-closeout.md`
 - `docs/raisa-provider-free-read-only-unmounted-delete-confirm-physical-representability-review-plan.md`
 - `docs/raisa-provider-free-read-only-unmounted-delete-confirm-physical-representability-review.md`
+- `docs/raisa-provider-free-read-only-waiting-area-movement-command-family-readiness-review-closeout.md`
+- `docs/raisa-provider-free-read-only-waiting-area-movement-command-family-readiness-review-plan.md`
 - `docs/raisa-provider-free-session-practitioner-directory-read-bridge-closeout.md`
 - `docs/raisa-provider-free-session-practitioner-directory-read-bridge-design.md`
 - `docs/raisa-provider-free-session-practitioner-directory-read-bridge-plan.md`
@@ -2520,7 +2523,6 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-post-status-action-compass-baton-orientation-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review-precommit-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review-preplanning-receipt.json`
-- `orchestration/agent_inbox/codex/raisa-provider-free-database-backed-default-off-canonical-check-in-post-proposal-revalidation-rehearsal-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-provider-free-default-off-live-source-observation-boundary-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture-preplanning-runtime-state.json`
@@ -2576,6 +2578,7 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review-precommit-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-provider-free-read-only-waiting-area-movement-command-family-readiness-review-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-provider-free-status-confirm-http-route-convergence-postcompaction-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-status-confirm-http-route-convergence-precommit-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-status-confirm-http-route-convergence-preplanning-receipt.json`
@@ -3134,7 +3137,6 @@ Prerequisites:
 - `orchestration/continuity/raisa-provider-free-clockwork-governed-check-in-successor-resolution/successor-resolution-report.md`
 - `orchestration/continuity/raisa-provider-free-compatibility-conformance-harness-readiness-repair/structural-repair-evidence.json`
 - `orchestration/continuity/raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review/consumer-and-preservation-inventory.json`
-- `orchestration/continuity/raisa-provider-free-database-backed-default-off-canonical-check-in-post-proposal-revalidation-rehearsal/evidence.json`
 - `orchestration/continuity/raisa-provider-free-database-backed-default-off-canonical-check-in-post-proposal-revalidation-rehearsal/report.md`
 - `orchestration/continuity/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture/contract.json`
 - `orchestration/continuity/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture/provider-free-architecture-evidence.json`
@@ -3269,6 +3271,8 @@ Prerequisites:
 - `orchestration/continuity/raisa-provider-free-read-only-unmounted-delete-confirm-physical-representability-review/provider-free-review-evidence.json`
 - `orchestration/continuity/raisa-provider-free-read-only-unmounted-delete-confirm-physical-representability-review/provider-free-review-evidence.schema.json`
 - `orchestration/continuity/raisa-provider-free-read-only-unmounted-delete-confirm-physical-representability-review/review-contract.json`
+- `orchestration/continuity/raisa-provider-free-read-only-waiting-area-movement-command-family-readiness-review/evidence.json`
+- `orchestration/continuity/raisa-provider-free-read-only-waiting-area-movement-command-family-readiness-review/report.md`
 - `orchestration/continuity/raisa-provider-free-session-practitioner-directory-read-bridge/live-local-http-backend-postgres-directory-evidence.json`
 - `orchestration/continuity/raisa-provider-free-status-confirm-http-route-convergence/provider-free-http-postgresql-evidence.json`
 - `orchestration/continuity/raisa-provider-free-status-confirm-http-route-convergence/provider-free-http-postgresql-evidence.schema.json`
@@ -4045,4 +4049,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 443; continuity graph revision 461._
+_Compass map revision 444; continuity graph revision 462._

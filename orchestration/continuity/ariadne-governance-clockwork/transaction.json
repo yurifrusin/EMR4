@@ -1,85 +1,85 @@
 {
   "schema_version": "ariadne.governance_live_tick_transaction.v1",
-  "operation_id": "raisa-provider-free-database-backed-default-off-canonical-check-in-post-proposal-revalidation-rehearsal",
-  "transaction_id": "txn-a0257da92a48cbc4e5d0c23b",
-  "source_commit": "b4efb2d8dfae869c1e1d72794486ccf72d73f42a",
-  "previous_source_commit": "b4efb2d8dfae869c1e1d72794486ccf72d73f42a",
-  "previous_generation_id": "gen-4685ba39e8c35abb32ed7a9595e27834cd152c03ea4680282e6ade9bdb936b01",
-  "previous_bundle_sha256": "4685ba39e8c35abb32ed7a9595e27834cd152c03ea4680282e6ade9bdb936b01",
+  "operation_id": "raisa-provider-free-read-only-waiting-area-movement-command-family-readiness-review",
+  "transaction_id": "txn-765a14a7f220ad147ecc9eef",
+  "source_commit": "2565ac1c465752d6b66919621541e54449e4948c",
+  "previous_source_commit": "2565ac1c465752d6b66919621541e54449e4948c",
+  "previous_generation_id": "gen-32b0ff4558f73e9d2b906d037aefe05eb94badc276f0f9157b27d19016b5c13e",
+  "previous_bundle_sha256": "32b0ff4558f73e9d2b906d037aefe05eb94badc276f0f9157b27d19016b5c13e",
   "previous_canonical_sha256s": {
-    "continuity": "cf5f1d4cd652b694f32834c424b9fe249a15851edafe2a881b6302ec9d95c008",
-    "compass": "8fef88005e5ad3a2ac9620bc73c3902a88e30f072421ef6e1c4ea548b21c780f",
-    "compass_markdown": "b8c8652be4357641895426da1ab2139013c2530ce00c100dc24a37f31c202639",
-    "active_latch": "cfc72837244b1088c508dcde17f0bc8d60a01443abcb1e439e8aa535fee1ff26",
-    "error_register": "4772639dbd9587cc30587e7018ce639e5f06a5d0eac3975c4fe9ee577e63a0c5",
-    "pattern_report": "c37c10490394936bad21ccc9a874a8e9c0b87e4857e5aca5fba0ea99fabaacaa",
-    "current_baton": "10baa343b66a7649c5e574c3d40eafe4f1e120418d746b4c34e7cf01efbf9df0"
+    "continuity": "29f64040c0144585093833971017d7acb462babec1774def602638fac30cd547",
+    "compass": "bda38ab750b6b56ad37bef0a893d1976fe0300d01df4773894ad5bd7788ce6d4",
+    "compass_markdown": "1b87fb27f8187ab68b06373973678e14bc1710749b9fd8a07f35132ad29c8660",
+    "active_latch": "92da94fcdbbdc678831606a7c37cb4635b4a94eb78b16fff71cc3a47fef88ef1",
+    "error_register": "be85e1a14b5c1947dd548320edc7923462c0791ba96c9c54e6cb79ba4aca6165",
+    "pattern_report": "6fcd53a0a99a03222c7cdeeff607355b6f0cf382b0b47d306f56b14cd14fb7fc",
+    "current_baton": "985cce0362e98668ac704acf3941471bb0d21d59d47d09f18a35505195d9163a"
   },
   "previous_metadata_sha256s": {
-    "command-manifest.json": "cf18802319476cedc73e8c0289b5519e96d57ced06448c4b35ade74fe900b51d",
-    "transaction.json": "bd77f5785bb437dfad20f854ebe9141a6e8fe45f13cb2af70ac5c8392b0c9e3f",
+    "command-manifest.json": "bd8a4a4e08f63fcdb0b59114cde138239043077723bbebd5a6249abe05d87878",
+    "transaction.json": "c022e40a3a3cc194d4de31d3d23f7c265075ac955e864527cfc1b9508946bb66",
     "ownership.json": "e78320a1b0d2f61041cd9d8cac1ed4f98d2bbdf7c3b94891a48d123589d8dee9",
-    "generation-manifest.json": "fb3f4d9af43e6cccec905a44cc58288f7e8783a1a6c4593d20606c2bbe7d0ba9"
+    "generation-manifest.json": "a6cef08e51d88c58752ef94a0ba4b42352b9885d3f48446ee915df348b8beaf2"
   },
   "projection_sha256s": {
-    "graph": "sha256:e4bef2a371f9fc241e63b4534782ebaaefa469d189cb3781d1d759c2fa8c0cb2",
-    "compass": "sha256:4d596189375e6a9994b49b107023f0d429cfe42233373dc1fa24715f581994ea",
-    "report": "sha256:ea29d21bb0b4dce6596d5ad97d9c1510938f7bb826a8cdab35c56db9468bb735",
-    "latch": "sha256:df465d8be8c5643d3844497e71584186a20adbe23e94230364b544d5142fe226",
-    "incident_aggregate": "sha256:1e63a648c05b311daa5783d80b13cdc3f7fdbfea036f3267f1ba4df7074d3d3e"
+    "graph": "sha256:6ce3401aaf5b9949d0d815678791a382ee6696aef4a50b06f0a7338d32f5e0fb",
+    "compass": "sha256:e4a5d2d7c1521c3ff66a2ef3b32a8daffac3cf749710fb638530ef2b4087fda1",
+    "report": "sha256:a9fb9fba82c34c4677b044ffec663dc43a1c964d6d9542997d81af8b3c7c190c",
+    "latch": "sha256:93b14f90010e80be4bc97b8d9c2e04e837609b755d9911215b0964793311095e",
+    "incident_aggregate": "sha256:012cd99c89990d8a80584cdc38452c69df669aaa4fbdbc83e5f088ec2c190ded"
   },
   "journal": [
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-a0257da92a48cbc4e5d0c23b",
-      "transaction_id": "txn-a0257da92a48cbc4e5d0c23b",
-      "operation_id": "raisa-provider-free-database-backed-default-off-canonical-check-in-post-proposal-revalidation-rehearsal",
+      "journal_id": "journal-765a14a7f220ad147ecc9eef",
+      "transaction_id": "txn-765a14a7f220ad147ecc9eef",
+      "operation_id": "raisa-provider-free-read-only-waiting-area-movement-command-family-readiness-review",
       "sequence": 1,
       "previous_event_sha256": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
       "event_type": "manifest-accepted",
       "actor": "gpt-sol",
       "payload": {
-        "manifest_sha256": "sha256:1269a73887d2d8d7f36dc882343caebca4ba9cc55c4479b2297a7f874cb79464"
+        "manifest_sha256": "sha256:3e21c4de7183a242886654af18ad5fadfece89519c4abee6ed881d77e353d08c"
       },
-      "event_sha256": "sha256:156db76ccd22f88ff742c5623563492b43a715e27c4c23d638900be8f636243c"
+      "event_sha256": "sha256:cc2634f1055e455e592406db7275d806429bedd4b717deddfede9c18c455114b"
     },
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-a0257da92a48cbc4e5d0c23b",
-      "transaction_id": "txn-a0257da92a48cbc4e5d0c23b",
-      "operation_id": "raisa-provider-free-database-backed-default-off-canonical-check-in-post-proposal-revalidation-rehearsal",
+      "journal_id": "journal-765a14a7f220ad147ecc9eef",
+      "transaction_id": "txn-765a14a7f220ad147ecc9eef",
+      "operation_id": "raisa-provider-free-read-only-waiting-area-movement-command-family-readiness-review",
       "sequence": 2,
-      "previous_event_sha256": "sha256:156db76ccd22f88ff742c5623563492b43a715e27c4c23d638900be8f636243c",
+      "previous_event_sha256": "sha256:cc2634f1055e455e592406db7275d806429bedd4b717deddfede9c18c455114b",
       "event_type": "git-source-resolved",
       "actor": "gpt-sol",
       "payload": {
-        "source_commit": "b4efb2d8dfae869c1e1d72794486ccf72d73f42a",
+        "source_commit": "2565ac1c465752d6b66919621541e54449e4948c",
         "protected_refs_sha256": "sha256:cdc1b2a8af0f767eab683235c0d96558e8f83c297922c3e9aa02a9a76a4aafd2"
       },
-      "event_sha256": "sha256:29fc439f6878d3df2f41a48c72b7c208723c8f8c862c7cfb2e9ac9750d3a1634"
+      "event_sha256": "sha256:f564cfa37e11ef1dc183f50f9466f08a7c12ad56b01b0a38ccef0bf7cafff1ea"
     },
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-a0257da92a48cbc4e5d0c23b",
-      "transaction_id": "txn-a0257da92a48cbc4e5d0c23b",
-      "operation_id": "raisa-provider-free-database-backed-default-off-canonical-check-in-post-proposal-revalidation-rehearsal",
+      "journal_id": "journal-765a14a7f220ad147ecc9eef",
+      "transaction_id": "txn-765a14a7f220ad147ecc9eef",
+      "operation_id": "raisa-provider-free-read-only-waiting-area-movement-command-family-readiness-review",
       "sequence": 3,
-      "previous_event_sha256": "sha256:29fc439f6878d3df2f41a48c72b7c208723c8f8c862c7cfb2e9ac9750d3a1634",
+      "previous_event_sha256": "sha256:f564cfa37e11ef1dc183f50f9466f08a7c12ad56b01b0a38ccef0bf7cafff1ea",
       "event_type": "projections-reduced",
       "actor": "gpt-sol",
       "payload": {
-        "graph_revision": 461,
-        "map_revision": 443
+        "graph_revision": 462,
+        "map_revision": 444
       },
-      "event_sha256": "sha256:a7a01e150f2bc8dfc7477cda151bb1b0fb0431435ed0e5b47ad0eb0f8c8833d9"
+      "event_sha256": "sha256:dbec9bac212ed317bcca683042254589a478f6d6bf86d1e320741dce58104694"
     },
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-a0257da92a48cbc4e5d0c23b",
-      "transaction_id": "txn-a0257da92a48cbc4e5d0c23b",
-      "operation_id": "raisa-provider-free-database-backed-default-off-canonical-check-in-post-proposal-revalidation-rehearsal",
+      "journal_id": "journal-765a14a7f220ad147ecc9eef",
+      "transaction_id": "txn-765a14a7f220ad147ecc9eef",
+      "operation_id": "raisa-provider-free-read-only-waiting-area-movement-command-family-readiness-review",
       "sequence": 4,
-      "previous_event_sha256": "sha256:a7a01e150f2bc8dfc7477cda151bb1b0fb0431435ed0e5b47ad0eb0f8c8833d9",
+      "previous_event_sha256": "sha256:dbec9bac212ed317bcca683042254589a478f6d6bf86d1e320741dce58104694",
       "event_type": "projections-validated",
       "actor": "gpt-sol",
       "payload": {
@@ -87,26 +87,26 @@
         "compass": "passed",
         "latch": "passed"
       },
-      "event_sha256": "sha256:88e5e813c4b0c77b17305cb6285b25fdf66b9ab4fdd8b8e8a17598afd6d433f2"
+      "event_sha256": "sha256:f7f2ce3c144df5362c532a65a75841c9642c8fcef0d76df38b07c8d992b6b41a"
     },
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-a0257da92a48cbc4e5d0c23b",
-      "transaction_id": "txn-a0257da92a48cbc4e5d0c23b",
-      "operation_id": "raisa-provider-free-database-backed-default-off-canonical-check-in-post-proposal-revalidation-rehearsal",
+      "journal_id": "journal-765a14a7f220ad147ecc9eef",
+      "transaction_id": "txn-765a14a7f220ad147ecc9eef",
+      "operation_id": "raisa-provider-free-read-only-waiting-area-movement-command-family-readiness-review",
       "sequence": 5,
-      "previous_event_sha256": "sha256:88e5e813c4b0c77b17305cb6285b25fdf66b9ab4fdd8b8e8a17598afd6d433f2",
+      "previous_event_sha256": "sha256:f7f2ce3c144df5362c532a65a75841c9642c8fcef0d76df38b07c8d992b6b41a",
       "event_type": "transaction-prepared",
       "actor": "gpt-sol",
       "payload": {
         "publication_mode": "shadow_directory_rename"
       },
-      "event_sha256": "sha256:d5fd44ad63290791c99715d107048cd24c7892df31a948249fe30c597a8c942e"
+      "event_sha256": "sha256:5999a015cff4ecf256aa4b71b8a0ce9196665f5c5fd1121b208ced46cfb0034d"
     }
   ],
   "publication_mode": "lease_bound_pointer_last_live_tick",
   "event_kind": "clean_closeout",
-  "next_boundaries_sha256": "sha256:416253f17273c2a02fa61fc13399c31d0359c27fa0d3494d51a327b515ab67e6",
-  "register_bytes_preserved": false,
-  "pattern_bytes_preserved": false
+  "next_boundaries_sha256": "sha256:9e6a5f79476c695854edbd5f62981fdf975f5553599405f8152fcbfd601f602e",
+  "register_bytes_preserved": true,
+  "pattern_bytes_preserved": true
 }
