@@ -1,0 +1,10 @@
+{
+  "schema_version": "ariadne.pushover_closeout_receipt.v1",
+  "recorded_at": "2026-08-24T15:21:43.2895486+10:00",
+  "operation_id": "raisa-provider-free-read-only-historical-derived-check-in-context-adapter-test-utility-gap-review",
+  "request": "7edd9f72-1031-4da5-89de-0db578b36b32",
+  "status": 1,
+  "checks": "13 exact-HEAD focused; 337 combined; 69 hostile mutations",
+  "continuing": "Authored-synthetic time-ordered check-in context branch composition",
+  "contains_phi": false
+}

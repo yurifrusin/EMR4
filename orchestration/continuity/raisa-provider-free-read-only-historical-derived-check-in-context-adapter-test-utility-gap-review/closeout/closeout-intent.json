@@ -1,0 +1,114 @@
+{
+  "schema_version": "ariadne.governance_semantic_closeout_intent.v1",
+  "profile": "provider_free_governance_tooling_v1",
+  "artifact_slug": "raisa-provider-free-read-only-historical-derived-check-in-context-adapter-test-utility-gap-review",
+  "recorded_at": "2026-08-24T15:21:43.2895486+10:00",
+  "closeout": {
+    "operation_id": "raisa-provider-free-read-only-historical-derived-check-in-context-adapter-test-utility-gap-review",
+    "title": "Raisa provider-free read-only historical-derived check-in-context adapter-test utility gap review",
+    "builds_on": [
+      "raisa-provider-free-exact-digest-historical-derived-minimised-check-in-context-adapter-test-consumption-rehearsal"
+    ],
+    "authority_notes": [
+      "Yuri delegated gate timing; accept a repository-static utility reading only and continue to authored-synthetic temporal composition without further historical access."
+    ],
+    "decisions": [
+      {
+        "id": "accept-zero-incremental-branch-utility-reading",
+        "source": "orchestration/continuity/raisa-provider-free-read-only-historical-derived-check-in-context-adapter-test-utility-gap-review/evidence.json",
+        "summary": "Accept exact candidate 4cdc1df910c644116f686de472cc385b6a1b1bef: provenance and synthetic time influence passed, with zero incremental adapter branches and zero new business rules."
+      },
+      {
+        "id": "freeze-three-authored-synthetic-temporal-axis-families",
+        "source": "orchestration/continuity/raisa-provider-free-read-only-historical-derived-check-in-context-adapter-test-utility-gap-review/authored-synthetic-successor-axis-contract.json",
+        "summary": "Freeze a minimal pairwise time-ordered successor across source/waiting-area, authority/evidence/freshness and idempotency/outcome transitions; no historical occurrence claim or execution authority."
+      }
+    ],
+    "claim_scope": [
+      "One sanitised candidate supplied traceable provenance and a synthetic time offset but no distinct adapter branch or new product rule."
+    ],
+    "additional_receipts": [
+      "orchestration/agent_inbox/codex/raisa-provider-free-read-only-historical-derived-check-in-context-adapter-test-utility-gap-review-pre-verifier-receipt.json",
+      "orchestration/continuity/raisa-provider-free-read-only-historical-derived-check-in-context-adapter-test-utility-gap-review/closeout/prepublication-contained-lapses.json",
+      "orchestration/continuity/raisa-provider-free-read-only-historical-derived-check-in-context-adapter-test-utility-gap-review/closeout/pushover-notification-receipt.json"
+    ],
+    "additional_artifacts": [
+      "docs/ariadne-agent-error-correction-register-revision-665.md",
+      "docs/raisa-provider-free-read-only-historical-derived-check-in-context-adapter-test-utility-gap-review-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-provider-free-read-only-historical-derived-check-in-context-adapter-test-utility-gap-review-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-24--raisa-provider-free-read-only-historical-derived-check-in-context-adapter-test-utility-gap-review.md"
+    ],
+    "unresolved_gates": [
+      "Further historical access, product validity, ordinary-practice activation and every provider, runtime, deployment or protected-ref surface remain gated."
+    ],
+    "journey": {
+      "strategic_role": "Measure whether the first historical-derived scenario changed behavior or only provenance.",
+      "outcome": "The exact reading separates provenance and timing from zero incremental behavioral coverage."
+    },
+    "current_position": {
+      "strategic_role": "Turn the measured gap into a small temporal authored-synthetic scenario programme.",
+      "why_now": "The existing adapter suite already covers atomic branches; time-ordered composition is the untested utility gap.",
+      "outcome": "Three bounded axis families and a minimal pairwise composition rule.",
+      "unlocks": [
+        "Useful synthetic check-in stories with declared intervening changes and expected readback."
+      ],
+      "does_not_solve": [
+        "No historical representativeness, further data access, product behavior change or ordinary-practice readiness is proved."
+      ],
+      "orientation_statement": "Compose authored-synthetic temporal changes without reopening the trove or duplicating the atomic suite."
+    },
+    "next_operation": {
+      "operation_id": "raisa-provider-free-authored-synthetic-time-ordered-canonical-check-in-context-branch-composition-rehearsal",
+      "active_tranche": "Raisa provider-free authored-synthetic time-ordered canonical check-in-context branch composition rehearsal",
+      "objective": "Freeze and rehearse the minimum pairwise authored-synthetic time-ordered check-in context scenarios across the three accepted axis families, using the unchanged unmounted adapter and no historical data.",
+      "authority_source": "Yuri's uninterrupted-development authority applied to the accepted successor-axis contract.",
+      "next_stage": "fresh_five_source_rehydration_then_freeze_minimum_pairwise_time_ordered_scenario_plan"
+    }
+  },
+  "verification_profile": "governance_clockwork_core_v1",
+  "baton_slot": "current_deepseek_native_harness_acceptance",
+  "next_operation_protected_boundaries": [
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only",
+    "no_product_patient_appointment_clinical_or_protected_data",
+    "no_historical_data_access"
+  ],
+  "agent_error_observations": [
+    {
+      "attempt_key": "historical-utility-gap-preacceptance-controls-001",
+      "observed_on": "2026-08-24",
+      "tranche": "historical-check-in-utility-gap-review",
+      "role": "orchestrator",
+      "resource_id": "focused-tests-static-checks-and-native-git-gate",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_powershell_pytest_ruff_git",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Privacy assertions distinguish aggregate from row-level keys, static checks are clean, and output-silent Git commands are judged by native exit code.",
+      "observed_error": "One assertion matched an admitted aggregate key, Ruff found one unused test import, one PowerShell conditional misread output-silent git diff --quiet success, and the first semantic check lacked the conventional efficacy projection path.",
+      "detection_method": "Focused pytest, Ruff, the exact-candidate tracked-worktree gate and the clockwork semantic projection check rejected or exposed the four lapses before publication.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-read-only-historical-derived-check-in-context-adapter-test-utility-gap-review/closeout/prepublication-contained-lapses.json"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.preacceptance.test-hygiene-native-exit",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Use exact singular JSON-key assertions, remove the unused import, repeat the Git gate with explicit LASTEXITCODE handling and add the conventional efficacy projection.",
+        "prevention_control": "Keep exact-key privacy assertions, Ruff, explicit native-exit checks and conventional efficacy projection generation in the prepublication loop.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-provider-free-read-only-historical-derived-check-in-context-adapter-test-utility-gap-review/closeout/prepublication-contained-lapses.json"
+        ]
+      },
+      "baton_summary": "records four contained prepublication exact-key, static-import, native-exit and efficacy-projection lapses as one bounded workflow incident."
+    }
+  ]
+}

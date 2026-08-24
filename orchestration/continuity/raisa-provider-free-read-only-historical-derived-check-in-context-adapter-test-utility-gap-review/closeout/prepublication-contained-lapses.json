@@ -1,0 +1,43 @@
+{
+  "schema_version": "ariadne.prepublication_contained_lapses.v1",
+  "recorded_at": "2026-08-24T15:21:43.2895486+10:00",
+  "operation_id": "raisa-provider-free-read-only-historical-derived-check-in-context-adapter-test-utility-gap-review",
+  "status": "contained_before_acceptance",
+  "lapses": [
+    {
+      "id": "aggregate-key-substring-assertion",
+      "stage": "focused_test",
+      "observation": "A privacy assertion rejected the admitted aggregate key synthetic_subject_slots while intending to reject the singular row-level key synthetic_subject_slot.",
+      "correction": "Match the exact quoted singular JSON key only.",
+      "historical_or_local_data_access": false
+    },
+    {
+      "id": "unused-test-import",
+      "stage": "static_check",
+      "observation": "Ruff rejected one unused copy import after focused tests passed.",
+      "correction": "Remove the unused import and rerun focused tests, Ruff and compileall.",
+      "historical_or_local_data_access": false
+    },
+    {
+      "id": "powershell-output-silent-git-conditional",
+      "stage": "exact_candidate_gate",
+      "observation": "PowerShell treated the output-silent successful git diff --quiet invocation as a false conditional instead of reading its native exit code.",
+      "correction": "Run the native command first and test LASTEXITCODE explicitly; the corrected gate confirmed a clean tracked worktree.",
+      "historical_or_local_data_access": false
+    },
+    {
+      "id": "clockwork-conventional-efficacy-projection",
+      "stage": "semantic_closeout_check",
+      "observation": "The typed evidence and report existed, but the continuity projection also required the conventional tranche-local efficacy-reading.json path.",
+      "correction": "Add a compact efficacy projection carrying only the already accepted typed reading and rerun the semantic check.",
+      "historical_or_local_data_access": false
+    }
+  ],
+  "effects": {
+    "fixture_control_or_archive_read": false,
+    "provider_model_or_network_call": false,
+    "product_or_runtime_change": false,
+    "protected_ref_movement": false,
+    "accepted_candidate_changed_after_exact_candidate_commit": false
+  }
+}

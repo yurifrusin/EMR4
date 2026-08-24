@@ -1,0 +1,32 @@
+{
+  "schema_version": "raisa.historical_derived_check_in_adapter_test_utility_gap_review_efficacy.v1",
+  "recorded_at": "2026-08-24T15:21:43.2895486+10:00",
+  "exact_reviewed_candidate": "4cdc1df910c644116f686de472cc385b6a1b1bef",
+  "decision": "effective_provenance_and_time_grounding_without_incremental_behavioral_coverage",
+  "utility": {
+    "canonical_digest_bound_traceability": true,
+    "synthetic_time_parameter_supplied": true,
+    "historical_derived_incremental_adapter_branches": 0,
+    "new_check_in_business_rules": 0,
+    "atomic_branch_repetition_recommended": false,
+    "time_ordered_authored_synthetic_composition_recommended": true,
+    "successor_axis_family_count": 3,
+    "full_cross_product_required": false
+  },
+  "verification": {
+    "hostile_contract_mutations_rejected": 69,
+    "exact_head_focused_tests_passed": 13,
+    "combined_tests_passed": 337,
+    "ruff_passed": true,
+    "compileall_passed": true
+  },
+  "closed_boundaries": {
+    "local_data_accessed": false,
+    "fixture_control_or_archive_accessed": false,
+    "provider_model_or_network_used": false,
+    "product_or_runtime_changed": false,
+    "ordinary_practice_activated": false,
+    "protected_ref_moved": false
+  },
+  "recommendation": "freeze_and_rehearse_a_minimum_pairwise_authored_synthetic_time_ordered_check_in_context_branch_composition_without_historical_data"
+}
