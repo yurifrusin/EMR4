@@ -1,0 +1,16 @@
+{
+  "decision": "effective_minimum_pairwise_time_ordered_adapter_precedence_evidence",
+  "planning_source": "78bf34d7db6ed001f7f50eeb1c7a554ccb458b11",
+  "recommendation": "review_the_temporal_composition_evidence_for_the_narrowest_adapter_or_operational_gap_without_reopening_historical_data",
+  "recorded_at": "2026-08-24T16:12:00.0000000+10:00",
+  "schema_version": "raisa.authored_synthetic_time_ordered_check_in_context_branch_composition_efficacy.v1",
+  "utility": {
+    "all_unmasked_witnesses_passed": true,
+    "cross_family_pairs_covered": 74,
+    "full_cross_product_avoided_cases": 90,
+    "historical_data_reads": 0,
+    "new_check_in_business_rules": 0,
+    "product_files_changed": 0,
+    "scenario_count": 30
+  }
+}

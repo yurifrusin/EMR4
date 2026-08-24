@@ -1,0 +1,1298 @@
+{
+  "claim_ceiling": "minimum_pairwise_authored_synthetic_in_memory_adapter_composition_and_precedence_only",
+  "closed_boundaries": {
+    "historical_or_local_data_accessed": false,
+    "ordinary_practice_activated": false,
+    "product_adapter_route_schema_database_client_runtime_or_configuration_changed": false,
+    "production_deployment_release_pages_or_protected_ref_moved": false,
+    "provider_model_or_network_used": false
+  },
+  "contract_sha256": "3e0a5201e390d71077481d31fe0e8fd40c1ca0f83c992ba0e4627864a0172e4d",
+  "decision": "accepted_provider_free_authored_synthetic_pairwise_composition_rehearsal",
+  "exact_bindings": {
+    "accepted_adapter_test_git_blob": "97bcfc3725f4df9495333779c75c41d798eeae87",
+    "accepted_predecessor_review_source": "0f6c091935f172351972f349db8cc5c1ec72d5dc",
+    "adapter_git_blob": "6955dec2e31e14c0ae4847acba22f9fb0087715b",
+    "planning_baseline": "d9114b3e9a72fa94acc0a7ab3657f17043c6be0a",
+    "protected_ref_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "successor_axis_contract_sha256": "dc74a5373a670aca52f804436e33be70a10d60ac96dd46508a58b09fd2ca778f"
+  },
+  "hostile_contract_mutations_rejected": 72,
+  "idempotency_submode_counts": {
+    "conflict": 3,
+    "in_progress": 2
+  },
+  "operation_id": "raisa-provider-free-authored-synthetic-time-ordered-canonical-check-in-context-branch-composition-rehearsal",
+  "pairwise_coverage": {
+    "authority_outcome_pairs": 24,
+    "full_cross_product_count": 120,
+    "minimum_by_unique_source_outcome_pairs": true,
+    "required_cross_family_pair_count": 74,
+    "scenario_count": 30,
+    "source_authority_pairs": 20,
+    "source_outcome_pairs": 30
+  },
+  "planning_source": "78bf34d7db6ed001f7f50eeb1c7a554ccb458b11",
+  "recorded_at": "2026-08-24T16:12:00.0000000+10:00",
+  "result_outcome_counts": {
+    "authority_revoked": 3,
+    "confirmation_required": 3,
+    "confirmed_write": 2,
+    "idempotency_conflict": 3,
+    "in_progress": 2,
+    "outcome_unknown": 2,
+    "replay": 5,
+    "retry_required": 1,
+    "stale_precondition": 4,
+    "validation_rejected": 5
+  },
+  "result_reason_counts": {
+    "command_in_progress": 2,
+    "commit_outcome_unknown": 1,
+    "committed_readback_unavailable": 1,
+    "current_authority_revoked": 3,
+    "idempotency_key_conflict": 3,
+    "invalid_source_status": 4,
+    "none": 7,
+    "precommit_composition_failed": 1,
+    "signed_evidence_expired": 3,
+    "stale_check_in_proposal_freshness_id": 4,
+    "waiting_area_not_active": 1
+  },
+  "scenario_results": [
+    {
+      "axes": {
+        "authority_evidence_and_freshness_transition": "unchanged_valid",
+        "idempotency_and_outcome_transition": "first_execution",
+        "idempotency_submode": "started",
+        "source_and_waiting_area_transition": "eligible_none"
+      },
+      "callback_sequence": [
+        "claim",
+        "lock",
+        "reauthorize",
+        "verify",
+        "effect",
+        "audit",
+        "event",
+        "complete",
+        "commit",
+        "readback"
+      ],
+      "cell": [
+        0,
+        0
+      ],
+      "expected_adapter_result": {
+        "committed": true,
+        "kind": "confirmed_write",
+        "outcome": "confirmed_write",
+        "reason": null
+      },
+      "initial_state": {
+        "status": "Booked",
+        "waiting_area_mode": "none"
+      },
+      "intervening_changes": [
+        "no_intervening_change"
+      ],
+      "observed_adapter_result": {
+        "committed": true,
+        "kind": "confirmed_write",
+        "outcome": "confirmed_write",
+        "reason": null
+      },
+      "readback_disposition": "matching_committed_readback",
+      "replay_seed_created_through_same_adapter": false,
+      "scenario_id": "s01-o01"
+    },
+    {
+      "axes": {
+        "authority_evidence_and_freshness_transition": "unchanged_valid",
+        "idempotency_and_outcome_transition": "exact_replay",
+        "idempotency_submode": "replay",
+        "source_and_waiting_area_transition": "eligible_none"
+      },
+      "callback_sequence": [
+        "claim"
+      ],
+      "cell": [
+        0,
+        1
+      ],
+      "expected_adapter_result": {
+        "committed": true,
+        "kind": "replay",
+        "outcome": "replay",
+        "reason": null
+      },
+      "initial_state": {
+        "status": "Booked",
+        "waiting_area_mode": "none"
+      },
+      "intervening_changes": [
+        "no_intervening_change"
+      ],
+      "observed_adapter_result": {
+        "committed": true,
+        "kind": "replay",
+        "outcome": "replay",
+        "reason": null
+      },
+      "readback_disposition": "exact_replay_without_lock_or_readback",
+      "replay_seed_created_through_same_adapter": true,
+      "scenario_id": "s01-o02"
+    },
+    {
+      "axes": {
+        "authority_evidence_and_freshness_transition": "unchanged_valid",
+        "idempotency_and_outcome_transition": "conflict_or_in_progress",
+        "idempotency_submode": "conflict",
+        "source_and_waiting_area_transition": "eligible_none"
+      },
+      "callback_sequence": [
+        "claim",
+        "rollback"
+      ],
+      "cell": [
+        0,
+        2
+      ],
+      "expected_adapter_result": {
+        "committed": false,
+        "kind": "stopped",
+        "outcome": "idempotency_conflict",
+        "reason": "idempotency_key_conflict"
+      },
+      "initial_state": {
+        "status": "Booked",
+        "waiting_area_mode": "none"
+      },
+      "intervening_changes": [
+        "no_intervening_change"
+      ],
+      "observed_adapter_result": {
+        "committed": false,
+        "kind": "stopped",
+        "outcome": "idempotency_conflict",
+        "reason": "idempotency_key_conflict"
+      },
+      "readback_disposition": "not_reached_after_fail_closed_stop",
+      "replay_seed_created_through_same_adapter": false,
+      "scenario_id": "s01-o03"
+    },
+    {
+      "axes": {
+        "authority_evidence_and_freshness_transition": "actor_revoked",
+        "idempotency_and_outcome_transition": "precommit_failure",
+        "idempotency_submode": "started",
+        "source_and_waiting_area_transition": "eligible_none"
+      },
+      "callback_sequence": [
+        "claim",
+        "lock",
+        "reauthorize",
+        "rollback"
+      ],
+      "cell": [
+        0,
+        3
+      ],
+      "expected_adapter_result": {
+        "committed": false,
+        "kind": "stopped",
+        "outcome": "authority_revoked",
+        "reason": "current_authority_revoked"
+      },
+      "initial_state": {
+        "status": "Booked",
+        "waiting_area_mode": "none"
+      },
+      "intervening_changes": [
+        "current_receptionist_revoked"
+      ],
+      "observed_adapter_result": {
+        "committed": false,
+        "kind": "stopped",
+        "outcome": "authority_revoked",
+        "reason": "current_authority_revoked"
+      },
+      "readback_disposition": "not_reached_after_fail_closed_stop",
+      "replay_seed_created_through_same_adapter": false,
+      "scenario_id": "s01-o04"
+    },
+    {
+      "axes": {
+        "authority_evidence_and_freshness_transition": "evidence_invalidated",
+        "idempotency_and_outcome_transition": "commit_outcome_unknown",
+        "idempotency_submode": "started",
+        "source_and_waiting_area_transition": "eligible_none"
+      },
+      "callback_sequence": [
+        "claim",
+        "lock",
+        "reauthorize",
+        "verify",
+        "rollback"
+      ],
+      "cell": [
+        0,
+        4
+      ],
+      "expected_adapter_result": {
+        "committed": false,
+        "kind": "stopped",
+        "outcome": "confirmation_required",
+        "reason": "signed_evidence_expired"
+      },
+      "initial_state": {
+        "status": "Booked",
+        "waiting_area_mode": "none"
+      },
+      "intervening_changes": [
+        "signed_evidence_invalidated"
+      ],
+      "observed_adapter_result": {
+        "committed": false,
+        "kind": "stopped",
+        "outcome": "confirmation_required",
+        "reason": "signed_evidence_expired"
+      },
+      "readback_disposition": "not_reached_after_fail_closed_stop",
+      "replay_seed_created_through_same_adapter": false,
+      "scenario_id": "s01-o05"
+    },
+    {
+      "axes": {
+        "authority_evidence_and_freshness_transition": "proposal_stale_after_intervening_update",
+        "idempotency_and_outcome_transition": "committed_readback_unavailable",
+        "idempotency_submode": "started",
+        "source_and_waiting_area_transition": "eligible_none"
+      },
+      "callback_sequence": [
+        "claim",
+        "lock",
+        "reauthorize",
+        "rollback"
+      ],
+      "cell": [
+        0,
+        5
+      ],
+      "expected_adapter_result": {
+        "committed": false,
+        "kind": "stopped",
+        "outcome": "stale_precondition",
+        "reason": "stale_check_in_proposal_freshness_id"
+      },
+      "initial_state": {
+        "status": "Booked",
+        "waiting_area_mode": "none"
+      },
+      "intervening_changes": [
+        "eligible_appointment_state_changed_after_proposal"
+      ],
+      "observed_adapter_result": {
+        "committed": false,
+        "kind": "stopped",
+        "outcome": "stale_precondition",
+        "reason": "stale_check_in_proposal_freshness_id"
+      },
+      "readback_disposition": "not_reached_after_fail_closed_stop",
+      "replay_seed_created_through_same_adapter": false,
+      "scenario_id": "s01-o06"
+    },
+    {
+      "axes": {
+        "authority_evidence_and_freshness_transition": "unchanged_valid",
+        "idempotency_and_outcome_transition": "first_execution",
+        "idempotency_submode": "started",
+        "source_and_waiting_area_transition": "eligible_assign_valid"
+      },
+      "callback_sequence": [
+        "claim",
+        "lock",
+        "reauthorize",
+        "verify",
+        "waiting_area",
+        "effect",
+        "audit",
+        "event",
+        "complete",
+        "commit",
+        "readback"
+      ],
+      "cell": [
+        1,
+        0
+      ],
+      "expected_adapter_result": {
+        "committed": true,
+        "kind": "confirmed_write",
+        "outcome": "confirmed_write",
+        "reason": null
+      },
+      "initial_state": {
+        "status": "Booked",
+        "waiting_area_mode": "assign"
+      },
+      "intervening_changes": [
+        "no_intervening_change"
+      ],
+      "observed_adapter_result": {
+        "committed": true,
+        "kind": "confirmed_write",
+        "outcome": "confirmed_write",
+        "reason": null
+      },
+      "readback_disposition": "matching_committed_readback",
+      "replay_seed_created_through_same_adapter": false,
+      "scenario_id": "s02-o01"
+    },
+    {
+      "axes": {
+        "authority_evidence_and_freshness_transition": "unchanged_valid",
+        "idempotency_and_outcome_transition": "exact_replay",
+        "idempotency_submode": "replay",
+        "source_and_waiting_area_transition": "eligible_assign_valid"
+      },
+      "callback_sequence": [
+        "claim"
+      ],
+      "cell": [
+        1,
+        1
+      ],
+      "expected_adapter_result": {
+        "committed": true,
+        "kind": "replay",
+        "outcome": "replay",
+        "reason": null
+      },
+      "initial_state": {
+        "status": "Booked",
+        "waiting_area_mode": "assign"
+      },
+      "intervening_changes": [
+        "no_intervening_change"
+      ],
+      "observed_adapter_result": {
+        "committed": true,
+        "kind": "replay",
+        "outcome": "replay",
+        "reason": null
+      },
+      "readback_disposition": "exact_replay_without_lock_or_readback",
+      "replay_seed_created_through_same_adapter": true,
+      "scenario_id": "s02-o02"
+    },
+    {
+      "axes": {
+        "authority_evidence_and_freshness_transition": "actor_revoked",
+        "idempotency_and_outcome_transition": "conflict_or_in_progress",
+        "idempotency_submode": "in_progress",
+        "source_and_waiting_area_transition": "eligible_assign_valid"
+      },
+      "callback_sequence": [
+        "claim",
+        "rollback"
+      ],
+      "cell": [
+        1,
+        2
+      ],
+      "expected_adapter_result": {
+        "committed": false,
+        "kind": "stopped",
+        "outcome": "in_progress",
+        "reason": "command_in_progress"
+      },
+      "initial_state": {
+        "status": "Booked",
+        "waiting_area_mode": "assign"
+      },
+      "intervening_changes": [
+        "current_receptionist_revoked"
+      ],
+      "observed_adapter_result": {
+        "committed": false,
+        "kind": "stopped",
+        "outcome": "in_progress",
+        "reason": "command_in_progress"
+      },
+      "readback_disposition": "not_reached_after_fail_closed_stop",
+      "replay_seed_created_through_same_adapter": false,
+      "scenario_id": "s02-o03"
+    },
+    {
+      "axes": {
+        "authority_evidence_and_freshness_transition": "unchanged_valid",
+        "idempotency_and_outcome_transition": "precommit_failure",
+        "idempotency_submode": "started",
+        "source_and_waiting_area_transition": "eligible_assign_valid"
+      },
+      "callback_sequence": [
+        "claim",
+        "lock",
+        "reauthorize",
+        "verify",
+        "waiting_area",
+        "effect",
+        "audit",
+        "rollback"
+      ],
+      "cell": [
+        1,
+        3
+      ],
+      "expected_adapter_result": {
+        "committed": false,
+        "kind": "stopped",
+        "outcome": "retry_required",
+        "reason": "precommit_composition_failed"
+      },
+      "initial_state": {
+        "status": "Booked",
+        "waiting_area_mode": "assign"
+      },
+      "intervening_changes": [
+        "no_intervening_change"
+      ],
+      "observed_adapter_result": {
+        "committed": false,
+        "kind": "stopped",
+        "outcome": "retry_required",
+        "reason": "precommit_composition_failed"
+      },
+      "readback_disposition": "rolled_back_to_transaction_entry",
+      "replay_seed_created_through_same_adapter": false,
+      "scenario_id": "s02-o04"
+    },
+    {
+      "axes": {
+        "authority_evidence_and_freshness_transition": "proposal_stale_after_intervening_update",
+        "idempotency_and_outcome_transition": "commit_outcome_unknown",
+        "idempotency_submode": "started",
+        "source_and_waiting_area_transition": "eligible_assign_valid"
+      },
+      "callback_sequence": [
+        "claim",
+        "lock",
+        "reauthorize",
+        "rollback"
+      ],
+      "cell": [
+        1,
+        4
+      ],
+      "expected_adapter_result": {
+        "committed": false,
+        "kind": "stopped",
+        "outcome": "stale_precondition",
+        "reason": "stale_check_in_proposal_freshness_id"
+      },
+      "initial_state": {
+        "status": "Booked",
+        "waiting_area_mode": "assign"
+      },
+      "intervening_changes": [
+        "eligible_appointment_state_changed_after_proposal"
+      ],
+      "observed_adapter_result": {
+        "committed": false,
+        "kind": "stopped",
+        "outcome": "stale_precondition",
+        "reason": "stale_check_in_proposal_freshness_id"
+      },
+      "readback_disposition": "not_reached_after_fail_closed_stop",
+      "replay_seed_created_through_same_adapter": false,
+      "scenario_id": "s02-o05"
+    },
+    {
+      "axes": {
+        "authority_evidence_and_freshness_transition": "evidence_invalidated",
+        "idempotency_and_outcome_transition": "committed_readback_unavailable",
+        "idempotency_submode": "started",
+        "source_and_waiting_area_transition": "eligible_assign_valid"
+      },
+      "callback_sequence": [
+        "claim",
+        "lock",
+        "reauthorize",
+        "verify",
+        "rollback"
+      ],
+      "cell": [
+        1,
+        5
+      ],
+      "expected_adapter_result": {
+        "committed": false,
+        "kind": "stopped",
+        "outcome": "confirmation_required",
+        "reason": "signed_evidence_expired"
+      },
+      "initial_state": {
+        "status": "Booked",
+        "waiting_area_mode": "assign"
+      },
+      "intervening_changes": [
+        "signed_evidence_invalidated"
+      ],
+      "observed_adapter_result": {
+        "committed": false,
+        "kind": "stopped",
+        "outcome": "confirmation_required",
+        "reason": "signed_evidence_expired"
+      },
+      "readback_disposition": "not_reached_after_fail_closed_stop",
+      "replay_seed_created_through_same_adapter": false,
+      "scenario_id": "s02-o06"
+    },
+    {
+      "axes": {
+        "authority_evidence_and_freshness_transition": "actor_revoked",
+        "idempotency_and_outcome_transition": "first_execution",
+        "idempotency_submode": "started",
+        "source_and_waiting_area_transition": "eligible_preserve_valid"
+      },
+      "callback_sequence": [
+        "claim",
+        "lock",
+        "reauthorize",
+        "rollback"
+      ],
+      "cell": [
+        2,
+        0
+      ],
+      "expected_adapter_result": {
+        "committed": false,
+        "kind": "stopped",
+        "outcome": "authority_revoked",
+        "reason": "current_authority_revoked"
+      },
+      "initial_state": {
+        "status": "Confirmed",
+        "waiting_area_mode": "preserve"
+      },
+      "intervening_changes": [
+        "current_receptionist_revoked"
+      ],
+      "observed_adapter_result": {
+        "committed": false,
+        "kind": "stopped",
+        "outcome": "authority_revoked",
+        "reason": "current_authority_revoked"
+      },
+      "readback_disposition": "not_reached_after_fail_closed_stop",
+      "replay_seed_created_through_same_adapter": false,
+      "scenario_id": "s03-o01"
+    },
+    {
+      "axes": {
+        "authority_evidence_and_freshness_transition": "actor_revoked",
+        "idempotency_and_outcome_transition": "exact_replay",
+        "idempotency_submode": "replay",
+        "source_and_waiting_area_transition": "eligible_preserve_valid"
+      },
+      "callback_sequence": [
+        "claim"
+      ],
+      "cell": [
+        2,
+        1
+      ],
+      "expected_adapter_result": {
+        "committed": true,
+        "kind": "replay",
+        "outcome": "replay",
+        "reason": null
+      },
+      "initial_state": {
+        "status": "Confirmed",
+        "waiting_area_mode": "preserve"
+      },
+      "intervening_changes": [
+        "current_receptionist_revoked"
+      ],
+      "observed_adapter_result": {
+        "committed": true,
+        "kind": "replay",
+        "outcome": "replay",
+        "reason": null
+      },
+      "readback_disposition": "exact_replay_without_lock_or_readback",
+      "replay_seed_created_through_same_adapter": true,
+      "scenario_id": "s03-o02"
+    },
+    {
+      "axes": {
+        "authority_evidence_and_freshness_transition": "evidence_invalidated",
+        "idempotency_and_outcome_transition": "conflict_or_in_progress",
+        "idempotency_submode": "conflict",
+        "source_and_waiting_area_transition": "eligible_preserve_valid"
+      },
+      "callback_sequence": [
+        "claim",
+        "rollback"
+      ],
+      "cell": [
+        2,
+        2
+      ],
+      "expected_adapter_result": {
+        "committed": false,
+        "kind": "stopped",
+        "outcome": "idempotency_conflict",
+        "reason": "idempotency_key_conflict"
+      },
+      "initial_state": {
+        "status": "Confirmed",
+        "waiting_area_mode": "preserve"
+      },
+      "intervening_changes": [
+        "signed_evidence_invalidated"
+      ],
+      "observed_adapter_result": {
+        "committed": false,
+        "kind": "stopped",
+        "outcome": "idempotency_conflict",
+        "reason": "idempotency_key_conflict"
+      },
+      "readback_disposition": "not_reached_after_fail_closed_stop",
+      "replay_seed_created_through_same_adapter": false,
+      "scenario_id": "s03-o03"
+    },
+    {
+      "axes": {
+        "authority_evidence_and_freshness_transition": "proposal_stale_after_intervening_update",
+        "idempotency_and_outcome_transition": "precommit_failure",
+        "idempotency_submode": "started",
+        "source_and_waiting_area_transition": "eligible_preserve_valid"
+      },
+      "callback_sequence": [
+        "claim",
+        "lock",
+        "reauthorize",
+        "rollback"
+      ],
+      "cell": [
+        2,
+        3
+      ],
+      "expected_adapter_result": {
+        "committed": false,
+        "kind": "stopped",
+        "outcome": "stale_precondition",
+        "reason": "stale_check_in_proposal_freshness_id"
+      },
+      "initial_state": {
+        "status": "Confirmed",
+        "waiting_area_mode": "preserve"
+      },
+      "intervening_changes": [
+        "eligible_appointment_state_changed_after_proposal"
+      ],
+      "observed_adapter_result": {
+        "committed": false,
+        "kind": "stopped",
+        "outcome": "stale_precondition",
+        "reason": "stale_check_in_proposal_freshness_id"
+      },
+      "readback_disposition": "not_reached_after_fail_closed_stop",
+      "replay_seed_created_through_same_adapter": false,
+      "scenario_id": "s03-o04"
+    },
+    {
+      "axes": {
+        "authority_evidence_and_freshness_transition": "unchanged_valid",
+        "idempotency_and_outcome_transition": "commit_outcome_unknown",
+        "idempotency_submode": "started",
+        "source_and_waiting_area_transition": "eligible_preserve_valid"
+      },
+      "callback_sequence": [
+        "claim",
+        "lock",
+        "reauthorize",
+        "verify",
+        "waiting_area",
+        "effect",
+        "audit",
+        "event",
+        "complete",
+        "commit"
+      ],
+      "cell": [
+        2,
+        4
+      ],
+      "expected_adapter_result": {
+        "committed": null,
+        "kind": "stopped",
+        "outcome": "outcome_unknown",
+        "reason": "commit_outcome_unknown"
+      },
+      "initial_state": {
+        "status": "Confirmed",
+        "waiting_area_mode": "preserve"
+      },
+      "intervening_changes": [
+        "no_intervening_change"
+      ],
+      "observed_adapter_result": {
+        "committed": null,
+        "kind": "stopped",
+        "outcome": "outcome_unknown",
+        "reason": "commit_outcome_unknown"
+      },
+      "readback_disposition": "commit_outcome_unknown_without_readback",
+      "replay_seed_created_through_same_adapter": false,
+      "scenario_id": "s03-o05"
+    },
+    {
+      "axes": {
+        "authority_evidence_and_freshness_transition": "unchanged_valid",
+        "idempotency_and_outcome_transition": "committed_readback_unavailable",
+        "idempotency_submode": "started",
+        "source_and_waiting_area_transition": "eligible_preserve_valid"
+      },
+      "callback_sequence": [
+        "claim",
+        "lock",
+        "reauthorize",
+        "verify",
+        "waiting_area",
+        "effect",
+        "audit",
+        "event",
+        "complete",
+        "commit",
+        "readback"
+      ],
+      "cell": [
+        2,
+        5
+      ],
+      "expected_adapter_result": {
+        "committed": null,
+        "kind": "stopped",
+        "outcome": "outcome_unknown",
+        "reason": "committed_readback_unavailable"
+      },
+      "initial_state": {
+        "status": "Confirmed",
+        "waiting_area_mode": "preserve"
+      },
+      "intervening_changes": [
+        "no_intervening_change"
+      ],
+      "observed_adapter_result": {
+        "committed": null,
+        "kind": "stopped",
+        "outcome": "outcome_unknown",
+        "reason": "committed_readback_unavailable"
+      },
+      "readback_disposition": "committed_readback_unavailable_no_false_success",
+      "replay_seed_created_through_same_adapter": false,
+      "scenario_id": "s03-o06"
+    },
+    {
+      "axes": {
+        "authority_evidence_and_freshness_transition": "evidence_invalidated",
+        "idempotency_and_outcome_transition": "first_execution",
+        "idempotency_submode": "started",
+        "source_and_waiting_area_transition": "intervening_state_change_rejected"
+      },
+      "callback_sequence": [
+        "claim",
+        "lock",
+        "rollback"
+      ],
+      "cell": [
+        3,
+        0
+      ],
+      "expected_adapter_result": {
+        "committed": false,
+        "kind": "stopped",
+        "outcome": "validation_rejected",
+        "reason": "invalid_source_status"
+      },
+      "initial_state": {
+        "status": "Booked",
+        "waiting_area_mode": "none"
+      },
+      "intervening_changes": [
+        "signed_evidence_invalidated",
+        "appointment_changed_to_ineligible_source_state"
+      ],
+      "observed_adapter_result": {
+        "committed": false,
+        "kind": "stopped",
+        "outcome": "validation_rejected",
+        "reason": "invalid_source_status"
+      },
+      "readback_disposition": "not_reached_after_fail_closed_stop",
+      "replay_seed_created_through_same_adapter": false,
+      "scenario_id": "s04-o01"
+    },
+    {
+      "axes": {
+        "authority_evidence_and_freshness_transition": "evidence_invalidated",
+        "idempotency_and_outcome_transition": "exact_replay",
+        "idempotency_submode": "replay",
+        "source_and_waiting_area_transition": "intervening_state_change_rejected"
+      },
+      "callback_sequence": [
+        "claim"
+      ],
+      "cell": [
+        3,
+        1
+      ],
+      "expected_adapter_result": {
+        "committed": true,
+        "kind": "replay",
+        "outcome": "replay",
+        "reason": null
+      },
+      "initial_state": {
+        "status": "Booked",
+        "waiting_area_mode": "none"
+      },
+      "intervening_changes": [
+        "signed_evidence_invalidated",
+        "appointment_changed_to_ineligible_source_state"
+      ],
+      "observed_adapter_result": {
+        "committed": true,
+        "kind": "replay",
+        "outcome": "replay",
+        "reason": null
+      },
+      "readback_disposition": "exact_replay_without_lock_or_readback",
+      "replay_seed_created_through_same_adapter": true,
+      "scenario_id": "s04-o02"
+    },
+    {
+      "axes": {
+        "authority_evidence_and_freshness_transition": "unchanged_valid",
+        "idempotency_and_outcome_transition": "conflict_or_in_progress",
+        "idempotency_submode": "in_progress",
+        "source_and_waiting_area_transition": "intervening_state_change_rejected"
+      },
+      "callback_sequence": [
+        "claim",
+        "rollback"
+      ],
+      "cell": [
+        3,
+        2
+      ],
+      "expected_adapter_result": {
+        "committed": false,
+        "kind": "stopped",
+        "outcome": "in_progress",
+        "reason": "command_in_progress"
+      },
+      "initial_state": {
+        "status": "Booked",
+        "waiting_area_mode": "none"
+      },
+      "intervening_changes": [
+        "appointment_changed_to_ineligible_source_state"
+      ],
+      "observed_adapter_result": {
+        "committed": false,
+        "kind": "stopped",
+        "outcome": "in_progress",
+        "reason": "command_in_progress"
+      },
+      "readback_disposition": "not_reached_after_fail_closed_stop",
+      "replay_seed_created_through_same_adapter": false,
+      "scenario_id": "s04-o03"
+    },
+    {
+      "axes": {
+        "authority_evidence_and_freshness_transition": "unchanged_valid",
+        "idempotency_and_outcome_transition": "precommit_failure",
+        "idempotency_submode": "started",
+        "source_and_waiting_area_transition": "intervening_state_change_rejected"
+      },
+      "callback_sequence": [
+        "claim",
+        "lock",
+        "rollback"
+      ],
+      "cell": [
+        3,
+        3
+      ],
+      "expected_adapter_result": {
+        "committed": false,
+        "kind": "stopped",
+        "outcome": "validation_rejected",
+        "reason": "invalid_source_status"
+      },
+      "initial_state": {
+        "status": "Booked",
+        "waiting_area_mode": "none"
+      },
+      "intervening_changes": [
+        "appointment_changed_to_ineligible_source_state"
+      ],
+      "observed_adapter_result": {
+        "committed": false,
+        "kind": "stopped",
+        "outcome": "validation_rejected",
+        "reason": "invalid_source_status"
+      },
+      "readback_disposition": "not_reached_after_fail_closed_stop",
+      "replay_seed_created_through_same_adapter": false,
+      "scenario_id": "s04-o04"
+    },
+    {
+      "axes": {
+        "authority_evidence_and_freshness_transition": "actor_revoked",
+        "idempotency_and_outcome_transition": "commit_outcome_unknown",
+        "idempotency_submode": "started",
+        "source_and_waiting_area_transition": "intervening_state_change_rejected"
+      },
+      "callback_sequence": [
+        "claim",
+        "lock",
+        "rollback"
+      ],
+      "cell": [
+        3,
+        4
+      ],
+      "expected_adapter_result": {
+        "committed": false,
+        "kind": "stopped",
+        "outcome": "validation_rejected",
+        "reason": "invalid_source_status"
+      },
+      "initial_state": {
+        "status": "Booked",
+        "waiting_area_mode": "none"
+      },
+      "intervening_changes": [
+        "current_receptionist_revoked",
+        "appointment_changed_to_ineligible_source_state"
+      ],
+      "observed_adapter_result": {
+        "committed": false,
+        "kind": "stopped",
+        "outcome": "validation_rejected",
+        "reason": "invalid_source_status"
+      },
+      "readback_disposition": "not_reached_after_fail_closed_stop",
+      "replay_seed_created_through_same_adapter": false,
+      "scenario_id": "s04-o05"
+    },
+    {
+      "axes": {
+        "authority_evidence_and_freshness_transition": "proposal_stale_after_intervening_update",
+        "idempotency_and_outcome_transition": "committed_readback_unavailable",
+        "idempotency_submode": "started",
+        "source_and_waiting_area_transition": "intervening_state_change_rejected"
+      },
+      "callback_sequence": [
+        "claim",
+        "lock",
+        "rollback"
+      ],
+      "cell": [
+        3,
+        5
+      ],
+      "expected_adapter_result": {
+        "committed": false,
+        "kind": "stopped",
+        "outcome": "validation_rejected",
+        "reason": "invalid_source_status"
+      },
+      "initial_state": {
+        "status": "Booked",
+        "waiting_area_mode": "none"
+      },
+      "intervening_changes": [
+        "eligible_appointment_state_changed_after_proposal",
+        "appointment_changed_to_ineligible_source_state"
+      ],
+      "observed_adapter_result": {
+        "committed": false,
+        "kind": "stopped",
+        "outcome": "validation_rejected",
+        "reason": "invalid_source_status"
+      },
+      "readback_disposition": "not_reached_after_fail_closed_stop",
+      "replay_seed_created_through_same_adapter": false,
+      "scenario_id": "s04-o06"
+    },
+    {
+      "axes": {
+        "authority_evidence_and_freshness_transition": "proposal_stale_after_intervening_update",
+        "idempotency_and_outcome_transition": "first_execution",
+        "idempotency_submode": "started",
+        "source_and_waiting_area_transition": "intervening_area_topology_change_rejected"
+      },
+      "callback_sequence": [
+        "claim",
+        "lock",
+        "reauthorize",
+        "rollback"
+      ],
+      "cell": [
+        4,
+        0
+      ],
+      "expected_adapter_result": {
+        "committed": false,
+        "kind": "stopped",
+        "outcome": "stale_precondition",
+        "reason": "stale_check_in_proposal_freshness_id"
+      },
+      "initial_state": {
+        "status": "Booked",
+        "waiting_area_mode": "assign"
+      },
+      "intervening_changes": [
+        "eligible_appointment_state_changed_after_proposal",
+        "assigned_waiting_area_became_inactive"
+      ],
+      "observed_adapter_result": {
+        "committed": false,
+        "kind": "stopped",
+        "outcome": "stale_precondition",
+        "reason": "stale_check_in_proposal_freshness_id"
+      },
+      "readback_disposition": "not_reached_after_fail_closed_stop",
+      "replay_seed_created_through_same_adapter": false,
+      "scenario_id": "s05-o01"
+    },
+    {
+      "axes": {
+        "authority_evidence_and_freshness_transition": "proposal_stale_after_intervening_update",
+        "idempotency_and_outcome_transition": "exact_replay",
+        "idempotency_submode": "replay",
+        "source_and_waiting_area_transition": "intervening_area_topology_change_rejected"
+      },
+      "callback_sequence": [
+        "claim"
+      ],
+      "cell": [
+        4,
+        1
+      ],
+      "expected_adapter_result": {
+        "committed": true,
+        "kind": "replay",
+        "outcome": "replay",
+        "reason": null
+      },
+      "initial_state": {
+        "status": "Booked",
+        "waiting_area_mode": "assign"
+      },
+      "intervening_changes": [
+        "eligible_appointment_state_changed_after_proposal",
+        "assigned_waiting_area_became_inactive"
+      ],
+      "observed_adapter_result": {
+        "committed": true,
+        "kind": "replay",
+        "outcome": "replay",
+        "reason": null
+      },
+      "readback_disposition": "exact_replay_without_lock_or_readback",
+      "replay_seed_created_through_same_adapter": true,
+      "scenario_id": "s05-o02"
+    },
+    {
+      "axes": {
+        "authority_evidence_and_freshness_transition": "proposal_stale_after_intervening_update",
+        "idempotency_and_outcome_transition": "conflict_or_in_progress",
+        "idempotency_submode": "conflict",
+        "source_and_waiting_area_transition": "intervening_area_topology_change_rejected"
+      },
+      "callback_sequence": [
+        "claim",
+        "rollback"
+      ],
+      "cell": [
+        4,
+        2
+      ],
+      "expected_adapter_result": {
+        "committed": false,
+        "kind": "stopped",
+        "outcome": "idempotency_conflict",
+        "reason": "idempotency_key_conflict"
+      },
+      "initial_state": {
+        "status": "Booked",
+        "waiting_area_mode": "assign"
+      },
+      "intervening_changes": [
+        "eligible_appointment_state_changed_after_proposal",
+        "assigned_waiting_area_became_inactive"
+      ],
+      "observed_adapter_result": {
+        "committed": false,
+        "kind": "stopped",
+        "outcome": "idempotency_conflict",
+        "reason": "idempotency_key_conflict"
+      },
+      "readback_disposition": "not_reached_after_fail_closed_stop",
+      "replay_seed_created_through_same_adapter": false,
+      "scenario_id": "s05-o03"
+    },
+    {
+      "axes": {
+        "authority_evidence_and_freshness_transition": "evidence_invalidated",
+        "idempotency_and_outcome_transition": "precommit_failure",
+        "idempotency_submode": "started",
+        "source_and_waiting_area_transition": "intervening_area_topology_change_rejected"
+      },
+      "callback_sequence": [
+        "claim",
+        "lock",
+        "reauthorize",
+        "verify",
+        "rollback"
+      ],
+      "cell": [
+        4,
+        3
+      ],
+      "expected_adapter_result": {
+        "committed": false,
+        "kind": "stopped",
+        "outcome": "confirmation_required",
+        "reason": "signed_evidence_expired"
+      },
+      "initial_state": {
+        "status": "Booked",
+        "waiting_area_mode": "assign"
+      },
+      "intervening_changes": [
+        "signed_evidence_invalidated",
+        "assigned_waiting_area_became_inactive"
+      ],
+      "observed_adapter_result": {
+        "committed": false,
+        "kind": "stopped",
+        "outcome": "confirmation_required",
+        "reason": "signed_evidence_expired"
+      },
+      "readback_disposition": "not_reached_after_fail_closed_stop",
+      "replay_seed_created_through_same_adapter": false,
+      "scenario_id": "s05-o04"
+    },
+    {
+      "axes": {
+        "authority_evidence_and_freshness_transition": "unchanged_valid",
+        "idempotency_and_outcome_transition": "commit_outcome_unknown",
+        "idempotency_submode": "started",
+        "source_and_waiting_area_transition": "intervening_area_topology_change_rejected"
+      },
+      "callback_sequence": [
+        "claim",
+        "lock",
+        "reauthorize",
+        "verify",
+        "waiting_area",
+        "rollback"
+      ],
+      "cell": [
+        4,
+        4
+      ],
+      "expected_adapter_result": {
+        "committed": false,
+        "kind": "stopped",
+        "outcome": "validation_rejected",
+        "reason": "waiting_area_not_active"
+      },
+      "initial_state": {
+        "status": "Booked",
+        "waiting_area_mode": "assign"
+      },
+      "intervening_changes": [
+        "assigned_waiting_area_became_inactive"
+      ],
+      "observed_adapter_result": {
+        "committed": false,
+        "kind": "stopped",
+        "outcome": "validation_rejected",
+        "reason": "waiting_area_not_active"
+      },
+      "readback_disposition": "not_reached_after_fail_closed_stop",
+      "replay_seed_created_through_same_adapter": false,
+      "scenario_id": "s05-o05"
+    },
+    {
+      "axes": {
+        "authority_evidence_and_freshness_transition": "actor_revoked",
+        "idempotency_and_outcome_transition": "committed_readback_unavailable",
+        "idempotency_submode": "started",
+        "source_and_waiting_area_transition": "intervening_area_topology_change_rejected"
+      },
+      "callback_sequence": [
+        "claim",
+        "lock",
+        "reauthorize",
+        "rollback"
+      ],
+      "cell": [
+        4,
+        5
+      ],
+      "expected_adapter_result": {
+        "committed": false,
+        "kind": "stopped",
+        "outcome": "authority_revoked",
+        "reason": "current_authority_revoked"
+      },
+      "initial_state": {
+        "status": "Booked",
+        "waiting_area_mode": "assign"
+      },
+      "intervening_changes": [
+        "current_receptionist_revoked",
+        "assigned_waiting_area_became_inactive"
+      ],
+      "observed_adapter_result": {
+        "committed": false,
+        "kind": "stopped",
+        "outcome": "authority_revoked",
+        "reason": "current_authority_revoked"
+      },
+      "readback_disposition": "not_reached_after_fail_closed_stop",
+      "replay_seed_created_through_same_adapter": false,
+      "scenario_id": "s05-o06"
+    }
+  ],
+  "schema_version": "raisa.authored_synthetic_time_ordered_check_in_context_branch_composition_evidence.v1",
+  "unmasked_witnesses": {
+    "actor_revoked": true,
+    "commit_outcome_unknown": true,
+    "committed_readback_unavailable": true,
+    "conflict": true,
+    "eligible_assign_valid": true,
+    "eligible_none": true,
+    "eligible_preserve_valid": true,
+    "evidence_invalidated": true,
+    "exact_replay": true,
+    "first_execution": true,
+    "in_progress": true,
+    "intervening_area_topology_change_rejected": true,
+    "intervening_state_change_rejected": true,
+    "precommit_failure": true,
+    "proposal_stale_after_intervening_update": true,
+    "unchanged_valid": true
+  }
+}
