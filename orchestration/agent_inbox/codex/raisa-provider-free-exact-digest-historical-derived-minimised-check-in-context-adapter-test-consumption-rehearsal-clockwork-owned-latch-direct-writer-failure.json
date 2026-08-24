@@ -1,0 +1,17 @@
+{
+  "schema_version": "ariadne.prepublication_contained_clockwork_writer_failure.v1",
+  "operation_id": "raisa-provider-free-exact-digest-historical-derived-minimised-check-in-context-adapter-test-consumption-rehearsal",
+  "status": "contained_by_byte_exact_live_restore_before_occupied_read",
+  "reason_code": "clockwork_owned_latch_direct_writer_rejected_as_canonical_drift",
+  "first_committed_source": "88a7f92080331113a4bc42b3d8a2246cfe97abf6",
+  "owned_surface": "orchestration/continuity/ariadne-active-operation-latch/current.json",
+  "detection": "governance_live_adoption_canonical_drift",
+  "containment": {
+    "published_live_bytes_restored_from": "a344a3ecf782d730ca7a240acec3fdeaf0aa4f2a",
+    "fixture_content_reads": 0,
+    "adapter_test_invocations_against_real_fixture": 0,
+    "provider_or_model_calls": 0,
+    "protected_refs_moved": false,
+    "future_rule": "all_ten_clockwork_owned_surfaces_change_only_through_the_clockwork_writer"
+  }
+}
