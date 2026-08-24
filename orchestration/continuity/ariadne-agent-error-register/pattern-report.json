@@ -1,24 +1,24 @@
 {
   "schema_version": "ariadne.agent-error-pattern-report.v1",
-  "register_revision": 663,
+  "register_revision": 664,
   "source_cutoff_on": "2026-08-24",
   "coverage": "bounded_known_preserved_incidents",
-  "canonical_register_sha256": "38e5f3388f050dcb1e5b637401de50a10b8d1fe35b1f6bdf07f3d260c1aee1a2",
-  "incident_count": 1156,
+  "canonical_register_sha256": "8b4e824cdbd7381992ba4e5c49fc202ed7d80fcc14b64c20c2085afc2d4f256c",
+  "incident_count": 1158,
   "open_incident_ids": [],
   "counts": {
     "by_origin": {
-      "agent_behavior": 613,
+      "agent_behavior": 614,
       "harness": 74,
-      "operator": 297,
+      "operator": 298,
       "repository": 156,
       "transport": 16
     },
     "by_category": {
-      "command_scope_violation": 111,
+      "command_scope_violation": 112,
       "evidence_misreport": 80,
       "harness_failure": 74,
-      "operator_error": 297,
+      "operator_error": 298,
       "output_contract_violation": 367,
       "read_only_violation": 5,
       "reasoning_claim_error": 50,
@@ -28,16 +28,16 @@
     "by_role": {
       "implementer": 93,
       "integration_reviewer": 5,
-      "orchestrator": 995,
+      "orchestrator": 997,
       "verifier": 63
     },
     "by_process_severity": {
       "low": 766,
       "material": 135,
-      "moderate": 255
+      "moderate": 257
     },
     "by_candidate_state": {
-      "accepted_candidate_changed": 237,
+      "accepted_candidate_changed": 239,
       "canonical_unchanged": 734,
       "untrusted_partial_worktree": 185
     },
@@ -177,6 +177,7 @@
       "clockwork-owned-active-latch-projection::orchestrator": 1,
       "clockwork-owned-active-operation-latch::orchestrator": 2,
       "clockwork-owned-error-register-projection::orchestrator": 1,
+      "clockwork-owned-latch::orchestrator": 1,
       "clockwork-prospective-graph::orchestrator": 1,
       "clockwork-prospective-incident-revision-artifact::orchestrator": 1,
       "clockwork-prospective-projection::orchestrator": 1,
@@ -454,6 +455,7 @@
       "pre-verifier-task-branch-alignment::orchestrator": 1,
       "predecessor-clockwork-intent-read::orchestrator": 1,
       "predecessor-fixture-causal-claim::orchestrator": 1,
+      "preexecution-form-and-git-gates::orchestrator": 1,
       "preexecution-git-refs-evidence-binding::orchestrator": 1,
       "prelaunch-composite-readback-command::orchestrator": 1,
       "preplanning-adapter-inventory::orchestrator": 1,

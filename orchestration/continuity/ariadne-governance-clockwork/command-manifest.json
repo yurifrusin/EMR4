@@ -7,7 +7,7 @@
       "arguments": [
         "-m",
         "json.tool",
-        "orchestration/continuity/raisa-provider-free-governance-clockwork-historical-derived-minimised-scenario-consumption-subgate-rehearsal/evidence.json"
+        "orchestration/continuity/raisa-provider-free-exact-digest-historical-derived-minimised-check-in-context-adapter-test-consumption-rehearsal/evidence.json"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },

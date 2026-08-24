@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 663,
+  "register_revision": 664,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-24",
@@ -44447,6 +44447,80 @@
       "incident_id": "AER-1156",
       "attempt_id": "clock-33d756d6dac77d9107668d4b",
       "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-24",
+      "tranche": "historical-check-in-adapter-consumption",
+      "role": "orchestrator",
+      "resource_id": "preexecution-form-and-git-gates",
+      "model": "gpt-sol",
+      "reasoning_level": "extra_high",
+      "transport": "local_powershell_git",
+      "stage": "integration",
+      "category": "operator_error",
+      "process_severity": "moderate",
+      "expected_invariant": "Authority evidence roots are typed, nonzero cached-diff checks stop commits, and every Git binding is machine resolved.",
+      "observed_error": "One precommit form used forbidden evidence roots, one native diff warning did not stop a candidate commit, and one later uncommitted full-ID draft was wrong.",
+      "detection_method": "Deterministic preflight, commit output and git rev-parse readback independently caught the three contained pre-execution control lapses.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-provider-free-exact-digest-historical-derived-minimised-check-in-context-adapter-test-consumption-rehearsal-candidate-precommit-first-failure.json",
+        "orchestration/agent_inbox/codex/raisa-provider-free-exact-digest-historical-derived-minimised-check-in-context-adapter-test-consumption-rehearsal-candidate-commit-gate-failure.json",
+        "orchestration/agent_inbox/codex/raisa-provider-free-exact-digest-historical-derived-minimised-check-in-context-adapter-test-consumption-rehearsal-full-id-draft-failure.json"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.preexecution.typed-form-native-exit-git-binding",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Use admitted authority roots, test LASTEXITCODE before commits, and replace authored Git bindings with git rev-parse values.",
+        "prevention_control": "Apply the closed authority-root form, explicit native-exit stop and machine Git-object readback as one pre-execution control sequence.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-exact-digest-historical-derived-minimised-check-in-context-adapter-test-consumption-rehearsal-candidate-precommit-first-failure.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-exact-digest-historical-derived-minimised-check-in-context-adapter-test-consumption-rehearsal-candidate-commit-gate-failure.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-exact-digest-historical-derived-minimised-check-in-context-adapter-test-consumption-rehearsal-full-id-draft-failure.json"
+        ]
+      },
+      "incident_id": "AER-1157",
+      "attempt_id": "clock-2fb8936f5ce5235dc1f2e83c",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-24",
+      "tranche": "historical-check-in-adapter-consumption",
+      "role": "orchestrator",
+      "resource_id": "clockwork-owned-latch",
+      "model": "gpt-sol",
+      "reasoning_level": "extra_high",
+      "transport": "local_repository_clockwork",
+      "stage": "deterministic_verification",
+      "category": "command_scope_violation",
+      "process_severity": "moderate",
+      "expected_invariant": "Only the governance clockwork writer changes the ten live canonical surfaces.",
+      "observed_error": "The active latch was directly advanced after planning even though it is a clockwork-owned live surface.",
+      "detection_method": "The governance live-state validator rejected the direct edit as canonical_drift before occupied execution.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-provider-free-exact-digest-historical-derived-minimised-check-in-context-adapter-test-consumption-rehearsal-clockwork-owned-latch-direct-writer-failure.json"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.clockwork-owned-surface.single-writer",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Restore the published latch bytes exactly and reserve all later latch movement for the clockwork writer.",
+        "prevention_control": "Treat all ten live canonical surfaces as read-only outside the clockwork publication transaction.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-exact-digest-historical-derived-minimised-check-in-context-adapter-test-consumption-rehearsal-clockwork-owned-latch-direct-writer-failure.json"
+        ]
+      },
+      "incident_id": "AER-1158",
+      "attempt_id": "clock-70467fab9b8010fe29dcdd47",
+      "origin": "agent_behavior",
       "related_incident_ids": [],
       "status": "corrected"
     }

@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> Consume the exact fixture once, locally, after digest verification and nowhere else.
+> Audit the sanitised result and code only; distinguish grounding from behavioral coverage before authoring more scenarios.
 
 ## North star
 
@@ -682,22 +682,24 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    One exact-digest six-event ignored fixture now exists under non-transitive local-test authority. Lineage parent: `raisa-provider-free-governance-clockwork-historical-derived-first-use-materialisation-subgate-rehearsal`.
 333. **Connect the accepted minimised fixture to a typed local-test authority gear without opening the archive. — Raisa provider-free governance clockwork historical-derived minimised scenario consumption subgate rehearsal**
    One digest-bound mutually exclusive consumption form now passes. Lineage parent: `raisa-local-only-historical-derived-minimised-check-in-context-scenario-first-use-materialisation-rehearsal`.
+334. **Carry the first empirically derived minimised Diary time-lapse through a real command-adapter test without retaining private structure. — Raisa provider-free exact-digest historical-derived minimised check-in-context adapter-test consumption rehearsal**
+   One exact local one-read adapter-test consumption now passes and is terminal against retry. Lineage parent: `raisa-provider-free-governance-clockwork-historical-derived-minimised-scenario-consumption-subgate-rehearsal`.
 
 ## Current position
 
-**Exercise the new form once in an accepted unmounted check-in adapter test. — Raisa provider-free governance clockwork historical-derived minimised scenario consumption subgate rehearsal**
+**Measure what the first consumed scenario actually contributed before widening any scenario programme. — Raisa provider-free exact-digest historical-derived minimised check-in-context adapter-test consumption rehearsal**
 
-**Why this proof came next:** The fixture and its clockwork consumption representation both pass.
+**Why this proof came next:** The one-shot result passes but its behavioral influence is narrower than its provenance binding.
 
-One exact local provider-free adapter-test consumption or a clean fail-closed terminal.
+A read-only utility gap review and minimum authored-synthetic scenario-axis contract.
 
 ### What this unlocks
 
-- Evidence-led check-in context testing from one minimised structural scenario.
+- Evidence-led choice of the next useful check-in scenario axes without further historical access.
 
 ### What it does not solve
 
-- No archive, product runtime, ordinary-practice, provider or real-practice validity opens.
+- No fixture reuse, archive access, product change, ordinary-practice activation or real-practice validity opens.
 
 ## Continuity and authority
 
@@ -1681,11 +1683,12 @@ Prerequisites:
 - `docs/raisa-provider-free-disposable-postgresql-status-confirm-product-adapter-integration-rehearsal-plan.md`
 - `docs/raisa-provider-free-disposable-postgresql-status-confirm-scaffold-parse-catalogue-rehearsal-closeout.md`
 - `docs/raisa-provider-free-disposable-postgresql-status-confirm-scaffold-parse-catalogue-rehearsal-plan.md`
+- `docs/raisa-provider-free-exact-digest-historical-derived-minimised-check-in-context-adapter-test-consumption-rehearsal-closeout.md`
+- `docs/raisa-provider-free-exact-digest-historical-derived-minimised-check-in-context-adapter-test-consumption-rehearsal-plan.md`
 - `docs/raisa-provider-free-globally-disabled-runtime-instrumentation-scaffold-closeout.md`
 - `docs/raisa-provider-free-globally-disabled-runtime-instrumentation-scaffold-design.md`
 - `docs/raisa-provider-free-globally-disabled-runtime-instrumentation-scaffold-plan.md`
 - `docs/raisa-provider-free-governance-clockwork-historical-derived-first-use-materialisation-subgate-rehearsal-plan.md`
-- `docs/raisa-provider-free-governance-clockwork-historical-derived-minimised-scenario-consumption-subgate-rehearsal-closeout.md`
 - `docs/raisa-provider-free-governance-clockwork-historical-derived-minimised-scenario-consumption-subgate-rehearsal-plan.md`
 - `docs/raisa-provider-free-historical-derived-scenario-first-use-candidate-gate-evaluator-rehearsal-plan.md`
 - `docs/raisa-provider-free-office-cross-surface-replay-isolation-closeout.md`
@@ -2532,7 +2535,7 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-provider-free-disposable-postgresql-status-confirm-scaffold-parse-catalogue-precommit-runtime-state.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-disposable-postgresql-status-confirm-scaffold-parse-catalogue-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-disposable-postgresql-status-confirm-scaffold-parse-catalogue-preplanning-runtime-state.json`
-- `orchestration/agent_inbox/codex/raisa-provider-free-governance-clockwork-historical-derived-minimised-scenario-consumption-subgate-rehearsal-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-provider-free-exact-digest-historical-derived-minimised-check-in-context-adapter-test-consumption-rehearsal-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-provider-free-office-directory-lifecycle-descendants-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-provider-free-ordinary-fallback-client-proposal-confirm-parity-precommit-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-ordinary-fallback-client-proposal-confirm-parity-preplanning-receipt.json`
@@ -3189,8 +3192,9 @@ Prerequisites:
 - `orchestration/continuity/raisa-provider-free-disposable-postgresql-status-confirm-scaffold-parse-catalogue-rehearsal/rehearsal-contract.schema.json`
 - `orchestration/continuity/raisa-provider-free-docker-created-state-profile-conformance-repair/created-state-representation-evidence.json`
 - `orchestration/continuity/raisa-provider-free-docker-created-state-profile-conformance-repair/repair-attestation.json`
+- `orchestration/continuity/raisa-provider-free-exact-digest-historical-derived-minimised-check-in-context-adapter-test-consumption-rehearsal/evidence.json`
+- `orchestration/continuity/raisa-provider-free-exact-digest-historical-derived-minimised-check-in-context-adapter-test-consumption-rehearsal/report.md`
 - `orchestration/continuity/raisa-provider-free-governance-clockwork-historical-derived-first-use-materialisation-subgate-rehearsal/report.md`
-- `orchestration/continuity/raisa-provider-free-governance-clockwork-historical-derived-minimised-scenario-consumption-subgate-rehearsal/evidence.json`
 - `orchestration/continuity/raisa-provider-free-governance-clockwork-historical-derived-minimised-scenario-consumption-subgate-rehearsal/report.md`
 - `orchestration/continuity/raisa-provider-free-historical-derived-scenario-first-use-candidate-gate-evaluator-rehearsal/report.md`
 - `orchestration/continuity/raisa-provider-free-office-directory-lifecycle-descendants/provider-free-acceptance-evidence.json`
@@ -4025,4 +4029,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 438; continuity graph revision 456._
+_Compass map revision 439; continuity graph revision 457._

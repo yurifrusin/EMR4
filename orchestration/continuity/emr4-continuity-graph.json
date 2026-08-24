@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 456,
+  "graph_revision": 457,
   "harvests": [],
   "nodes": [
     {
@@ -36974,9 +36974,95 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "raisa-provider-free-exact-digest-historical-derived-minimised-check-in-context-adapter-test-consumption-rehearsal",
+      "title": "Raisa provider-free exact-digest historical-derived minimised check-in-context adapter-test consumption rehearsal",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-governance-clockwork-historical-derived-minimised-scenario-consumption-subgate-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri delegated gate timing; accept only one exact local one-read adapter-test consumption and continue to a read-only utility gap review."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-one-exact-digest-bound-adapter-test-consumption",
+          "source": "orchestration/continuity/raisa-provider-free-exact-digest-historical-derived-minimised-check-in-context-adapter-test-consumption-rehearsal/occupied-result.json",
+          "status": "accepted",
+          "summary": "Accept occupied source 517fda26c5c7f46397acc91976bc97b0be3778ef after one digest-before-parse fixture read and one exact adapter invocation pass."
+        },
+        {
+          "id": "accept-narrow-behavioral-utility-and-freeze-read-only-review",
+          "source": "orchestration/continuity/raisa-provider-free-exact-digest-historical-derived-minimised-check-in-context-adapter-test-consumption-rehearsal/efficacy-reading.json",
+          "status": "accepted",
+          "summary": "The scenario grounds provenance and timing but does not establish distinct event-axis branches or a new check-in rule; further historical access remains closed."
+        }
+      ],
+      "claim_scope": [
+        "One accepted minimised local scenario safely exercised one existing unmounted check-in adapter path; no real-practice validity, broader scenario coverage or product runtime is proved."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-exact-digest-historical-derived-minimised-check-in-context-adapter-test-consumption-rehearsal-plan.md",
+          "docs/security/raisa-provider-free-exact-digest-historical-derived-minimised-check-in-context-adapter-test-consumption-rehearsal-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-provider-free-exact-digest-historical-derived-minimised-check-in-context-adapter-test-consumption-rehearsal/evidence.json",
+          "orchestration/continuity/raisa-provider-free-exact-digest-historical-derived-minimised-check-in-context-adapter-test-consumption-rehearsal/report.md",
+          "orchestration/continuity/raisa-provider-free-exact-digest-historical-derived-minimised-check-in-context-adapter-test-consumption-rehearsal/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-exact-digest-historical-derived-minimised-check-in-context-adapter-test-consumption-rehearsal-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-24--raisa-provider-free-exact-digest-historical-derived-minimised-check-in-context-adapter-test-consumption-rehearsal.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-exact-digest-historical-derived-minimised-check-in-context-adapter-test-consumption-rehearsal-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-exact-digest-historical-derived-minimised-check-in-context-adapter-test-consumption-rehearsal-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-exact-digest-historical-derived-minimised-check-in-context-adapter-test-consumption-rehearsal-pre-verifier-receipt.json",
+          "orchestration/continuity/raisa-provider-free-exact-digest-historical-derived-minimised-check-in-context-adapter-test-consumption-rehearsal/closeout/prepublication-contained-lapses.json",
+          "orchestration/continuity/raisa-provider-free-exact-digest-historical-derived-minimised-check-in-context-adapter-test-consumption-rehearsal/closeout/pushover-notification-receipt.json"
+        ],
+        "tests": [
+          "tests/test_current_baton_consistency.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_transactional_closeout.py"
+        ],
+        "artifacts": [
+          "orchestration_harness/governance_clockwork_tick.py",
+          "scripts/ariadne_governance_clockwork_closeout.py",
+          "scripts/ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "orchestration/continuity/raisa-provider-free-exact-digest-historical-derived-minimised-check-in-context-adapter-test-consumption-rehearsal/next-tranche-contract.json",
+          "orchestration/continuity/raisa-provider-free-exact-digest-historical-derived-minimised-check-in-context-adapter-test-consumption-rehearsal/occupied-result.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-exact-digest-historical-derived-minimised-check-in-context-adapter-test-consumption-rehearsal-pre-verifier-intent.json"
+        ]
+      },
+      "unresolved_gates": [
+        "Any further fixture or archive read, broader structural representativeness, scenario-specific adapter branching and every product/provider/runtime surface remain gated."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-24T14:17:06.1781891+10:00",
+      "updated_at": "2026-08-24T14:17:06.1781891+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "6a1de186f096636402d50a89feae6a81953cd862",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-24T12:55:43.0106995+10:00"
+  "updated_at": "2026-08-24T14:17:06.1781891+10:00"
 }

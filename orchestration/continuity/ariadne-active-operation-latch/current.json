@@ -1,14 +1,14 @@
 {
   "schema_version": "ariadne.active_operation_latch.v1",
-  "operation_id": "raisa-provider-free-exact-digest-historical-derived-minimised-check-in-context-adapter-test-consumption-rehearsal",
-  "active_tranche": "Raisa provider-free exact-digest historical-derived minimised check-in-context adapter-test consumption rehearsal",
-  "objective": "Read the accepted ignored fixture exactly once after digest verification and use only its closed structural fields in one local provider-free test of the accepted unmounted canonical check-in adapter.",
+  "operation_id": "raisa-provider-free-read-only-historical-derived-check-in-context-adapter-test-utility-gap-review",
+  "active_tranche": "Raisa provider-free read-only historical-derived check-in-context adapter-test utility gap review",
+  "objective": "Read only the committed sanitised result and accepted repository code to distinguish provenance grounding from behavioral coverage and freeze the minimum authored-synthetic next-scenario axes without any fixture or archive access.",
   "status": "in_progress",
-  "source_head": "ce1f3717fc89117a9db74ca1b95509f02fef5d82",
+  "source_head": "6a1de186f096636402d50a89feae6a81953cd862",
   "authority_source": "Yuri's delegated gate timing and uninterrupted-development authority within the frozen successor contract.",
   "checkpoint": {
-    "completed_stage": "Accepted raisa-provider-free-governance-clockwork-historical-derived-minimised-scenario-consumption-subgate-rehearsal at the machine-resolved source.",
-    "next_executable_stage": "fresh_five_source_rehydration_then_freeze_one_read_adapter_test_consumption_plan",
+    "completed_stage": "Accepted raisa-provider-free-exact-digest-historical-derived-minimised-check-in-context-adapter-test-consumption-rehearsal at the machine-resolved source.",
+    "next_executable_stage": "fresh_five_source_rehydration_then_freeze_read_only_utility_gap_review_plan",
     "retry_counters": {
       "planning": 0,
       "implementation": 0,
@@ -41,14 +41,6 @@
     "docs_branding_and_all_unrelated_untracked_files_preserved",
     "explicit_path_staging_only",
     "no_product_patient_appointment_clinical_or_protected_data",
-    "allow_local_only_historical_derived_minimised_scenario_exact_digest_bound_test_consumption",
-    "historical_derived_minimised_scenario_consumption_subgate_contract_sha256_da2507056f37482016125c3ccad909573c0495d86cdc135cd5b13714bc7c93ac",
-    "historical_derived_minimised_scenario_consumption_first_use_source_4740813d53ebbc4872fe8c0c08ce2578b1982770",
-    "historical_derived_minimised_scenario_consumption_fixture_sha256_2205ab83cec7c5639d39cc563cee80eec825ac33f17571151571d325e74f2dfe",
-    "historical_derived_minimised_scenario_consumption_maximum_one_ignored_local_fixture_read",
-    "historical_derived_minimised_scenario_consumption_no_historical_archive_read",
-    "historical_derived_minimised_scenario_consumption_local_provider_free_authored_synthetic_test_context_only",
-    "historical_derived_minimised_scenario_consumption_no_provider_product_database_route_client_runtime_configuration_or_ordinary_practice",
-    "historical_derived_minimised_scenario_consumption_authority_non_transitive"
+    "no_historical_data_access"
   ]
 }
