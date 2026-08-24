@@ -1,0 +1,22 @@
+{
+  "schema_version": "ariadne.serial_continuation_intent.v1",
+  "preset": "provider_free_serial_observed_empty_workers",
+  "continuation_event": "post_compaction",
+  "planned_action": "freeze_and_execute_one_exact_digest_bound_single_read_local_provider_free_historical_derived_minimised_check_in_context_fixture_consumption_in_one_test_of_the_accepted_unmounted_canonical_check_in_adapter_while_preserving_its_contract_default_off_denial_and_every_archive_provider_product_runtime_and_ordinary_practice_boundary",
+  "assessed_stage": "postcompaction_rehydration_for_exact_digest_historical_derived_minimised_check_in_context_adapter_test_consumption",
+  "active_evidence_paths": [
+    "orchestration/continuity/raisa-provider-free-governance-clockwork-historical-derived-minimised-scenario-consumption-subgate-rehearsal/report.md",
+    "orchestration/continuity/raisa-provider-free-governance-clockwork-historical-derived-minimised-scenario-consumption-subgate-rehearsal/efficacy-reading.json",
+    "orchestration/continuity/raisa-provider-free-governance-clockwork-historical-derived-minimised-scenario-consumption-subgate-rehearsal/next-tranche-contract.json",
+    "docs/raisa-provider-free-governance-clockwork-historical-derived-minimised-scenario-consumption-subgate-rehearsal-closeout.md",
+    "orchestration/agent_inbox/codex/raisa-provider-free-governance-clockwork-historical-derived-minimised-scenario-consumption-subgate-rehearsal-sol-acceptance.md",
+    "orchestration/continuity/ariadne-active-operation-latch/current.json",
+    "orchestration/continuity/ariadne-provider-free-clockwork-live-canonical-adoption-retirement/contract.json"
+  ],
+  "lane_decision_overrides": [
+    {
+      "lane_id": "gemini_verifier",
+      "decision_code": "not_applicable_neutral"
+    }
+  ]
+}
