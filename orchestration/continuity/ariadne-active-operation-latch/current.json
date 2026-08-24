@@ -4,11 +4,11 @@
   "active_tranche": "Raisa provider-free exact-digest historical-derived minimised check-in-context adapter-test consumption rehearsal",
   "objective": "Read the accepted ignored fixture exactly once after digest verification and use only its closed structural fields in one local provider-free test of the accepted unmounted canonical check-in adapter.",
   "status": "in_progress",
-  "source_head": "ce1f3717fc89117a9db74ca1b95509f02fef5d82",
+  "source_head": "5eaac238e8d7541ffd395a5a3f8b8464ae5b68b8",
   "authority_source": "Yuri's delegated gate timing and uninterrupted-development authority within the frozen successor contract.",
   "checkpoint": {
-    "completed_stage": "Accepted raisa-provider-free-governance-clockwork-historical-derived-minimised-scenario-consumption-subgate-rehearsal at the machine-resolved source.",
-    "next_executable_stage": "fresh_five_source_rehydration_then_freeze_one_read_adapter_test_consumption_plan",
+    "completed_stage": "Frozen the exact-digest one-read adapter-test consumption plan at source 5eaac238e8d7541ffd395a5a3f8b8464ae5b68b8 without reading the fixture.",
+    "next_executable_stage": "implement_prepare_consume_one_shot_harness_and_synthetic_only_controls_without_fixture_read",
     "retry_counters": {
       "planning": 0,
       "implementation": 0,

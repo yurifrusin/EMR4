@@ -1,0 +1,20 @@
+{
+  "schema_version": "ariadne.prepublication_contained_preflight_failure.v1",
+  "operation_id": "raisa-provider-free-exact-digest-historical-derived-minimised-check-in-context-adapter-test-consumption-rehearsal",
+  "stage": "candidate_precommit_before_any_real_fixture_read",
+  "status": "contained_before_receipt_or_staging",
+  "reason_code": "serial_continuation_evidence_path_root_forbidden",
+  "rejected_paths": [
+    "orchestration_harness/historical_diary_check_in_adapter_test_consumption.py",
+    "scripts/raisa_provider_free_exact_digest_historical_derived_minimised_check_in_context_adapter_test_consumption_rehearsal.py",
+    "tests/test_raisa_provider_free_exact_digest_historical_derived_minimised_check_in_context_adapter_test_consumption_rehearsal.py"
+  ],
+  "containment": {
+    "receipt_written": false,
+    "fixture_content_reads": 0,
+    "adapter_test_invocations_against_real_fixture": 0,
+    "provider_or_model_calls": 0,
+    "staging_or_commit_performed": false,
+    "correction": "retain_code_and_tests_as_candidate_surfaces_but_bind_only_allowed_authority_evidence_roots_in_the_continuation_intent"
+  }
+}

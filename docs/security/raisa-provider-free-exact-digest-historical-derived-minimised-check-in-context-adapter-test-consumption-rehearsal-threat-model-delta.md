@@ -37,4 +37,3 @@ checks remain independent. It does not prove de-identification of the wider
 trove, real-practice representativeness, route/database/runtime behaviour,
 ordinary-practice readiness, clinical validity, production suitability or
 safe future reuse. Authority is non-transitive.
-

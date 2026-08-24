@@ -8,6 +8,8 @@ Status: `frozen_fail_closed_before_fixture_read`
 
 Planning source: `a344a3ecf782d730ca7a240acec3fdeaf0aa4f2a`
 
+Frozen plan commit: `5eaac238e8d7541ffd395a5a3f8b8464ae5b68b8`
+
 ## Objective
 
 Consume the accepted ignored historical-derived fixture exactly once, after
@@ -181,4 +183,3 @@ client, runtime or configuration; ordinary-practice enablement; feature-flag,
 allowlist or default-denial change; generic-status `Arrived` grammar; first-
 party client; waiting-area movement; production; deployment; release; Pages;
 protected evidence; or protected-ref movement is authorised.
-
