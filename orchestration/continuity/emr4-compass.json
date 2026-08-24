@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 440,
-  "updated_at": "2026-08-24T15:21:43.2895486+10:00",
-  "source_graph_revision": 458,
-  "orientation_statement": "Compose authored-synthetic temporal changes without reopening the trove or duplicating the atomic suite.",
+  "map_revision": 441,
+  "updated_at": "2026-08-24T16:22:26.0503913+10:00",
+  "source_graph_revision": 459,
+  "orientation_statement": "Read existing tracked operational evidence before adding another rehearsal.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -5537,24 +5537,34 @@
         "docs/raisa-provider-free-read-only-historical-derived-check-in-context-adapter-test-utility-gap-review-plan.md",
         "orchestration/continuity/raisa-provider-free-read-only-historical-derived-check-in-context-adapter-test-utility-gap-review/report.md"
       ]
+    },
+    {
+      "node_id": "raisa-provider-free-authored-synthetic-time-ordered-canonical-check-in-context-branch-composition-rehearsal",
+      "lineage_parent": "raisa-provider-free-read-only-historical-derived-check-in-context-adapter-test-utility-gap-review",
+      "strategic_role": "Turn a provenance-only historical-derived atomic test into efficient authored-synthetic temporal control evidence.",
+      "outcome": "Thirty minimal pairwise scenarios now expose exact precedence, rollback, replay and uncertainty behavior without product or data access.",
+      "evidence": [
+        "docs/raisa-provider-free-authored-synthetic-time-ordered-canonical-check-in-context-branch-composition-rehearsal-plan.md",
+        "orchestration/continuity/raisa-provider-free-authored-synthetic-time-ordered-canonical-check-in-context-branch-composition-rehearsal/report.md"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "raisa-provider-free-read-only-historical-derived-check-in-context-adapter-test-utility-gap-review",
-    "strategic_role": "Turn the measured gap into a small temporal authored-synthetic scenario programme.",
-    "why_now": "The existing adapter suite already covers atomic branches; time-ordered composition is the untested utility gap.",
-    "outcome": "Three bounded axis families and a minimal pairwise composition rule.",
+    "node_id": "raisa-provider-free-authored-synthetic-time-ordered-canonical-check-in-context-branch-composition-rehearsal",
+    "strategic_role": "Avoid duplicating operational evidence before choosing another runtime rehearsal.",
+    "why_now": "The in-memory temporal matrix passes, but accepted database, route and role/tenant tranches may already cover much of its operational surface.",
+    "outcome": "A read-only evidence join will identify one honest incremental operational gap, if any.",
     "unlocks": [
-      "Useful synthetic check-in stories with declared intervening changes and expected readback."
+      "A narrow evidence-backed decision about whether another provider-free operational rehearsal is useful."
     ],
     "does_not_solve": [
-      "No historical representativeness, further data access, product behavior change or ordinary-practice readiness is proved."
+      "No route/database execution, real-practice representativeness, ordinary-practice activation or production readiness is proved."
     ],
     "evidence": [
-      "orchestration/continuity/raisa-provider-free-read-only-historical-derived-check-in-context-adapter-test-utility-gap-review/evidence.json",
-      "orchestration/continuity/raisa-provider-free-read-only-historical-derived-check-in-context-adapter-test-utility-gap-review/report.md",
-      "docs/raisa-provider-free-read-only-historical-derived-check-in-context-adapter-test-utility-gap-review-closeout.md",
-      "orchestration/agent_inbox/codex/raisa-provider-free-read-only-historical-derived-check-in-context-adapter-test-utility-gap-review-sol-acceptance.md"
+      "orchestration/continuity/raisa-provider-free-authored-synthetic-time-ordered-canonical-check-in-context-branch-composition-rehearsal/evidence.json",
+      "orchestration/continuity/raisa-provider-free-authored-synthetic-time-ordered-canonical-check-in-context-branch-composition-rehearsal/report.md",
+      "docs/raisa-provider-free-authored-synthetic-time-ordered-canonical-check-in-context-branch-composition-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-provider-free-authored-synthetic-time-ordered-canonical-check-in-context-branch-composition-rehearsal-sol-acceptance.md"
     ]
   },
   "decision_horizon": [

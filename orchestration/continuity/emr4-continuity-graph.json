@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 458,
+  "graph_revision": 459,
   "harvests": [],
   "nodes": [
     {
@@ -37147,9 +37147,96 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "raisa-provider-free-authored-synthetic-time-ordered-canonical-check-in-context-branch-composition-rehearsal",
+      "title": "Raisa provider-free authored-synthetic time-ordered canonical check-in-context branch composition rehearsal",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-read-only-historical-derived-check-in-context-adapter-test-utility-gap-review",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's uninterrupted-development authority applies to the accepted three-axis successor contract; rehearse authored-synthetic in-memory composition only, with no historical access or product change."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-minimum-pairwise-temporal-composition-evidence",
+          "source": "orchestration/continuity/raisa-provider-free-authored-synthetic-time-ordered-canonical-check-in-context-branch-composition-rehearsal/evidence.json",
+          "status": "accepted",
+          "summary": "Accept exact candidate 203f297d610ee30ce6c9d50243999ed4a8041df4: 30 authored-synthetic scenarios cover all 74 cross-family pairs with every unmasked witness passing."
+        },
+        {
+          "id": "freeze-read-only-operational-evidence-gap-review-successor",
+          "source": "orchestration/continuity/raisa-provider-free-authored-synthetic-time-ordered-canonical-check-in-context-branch-composition-rehearsal/next-tranche-contract.json",
+          "status": "accepted",
+          "summary": "Compare the in-memory result with existing tracked database, default-off route and role/tenant evidence before authorising any new operational execution."
+        }
+      ],
+      "claim_scope": [
+        "The unchanged unmounted check-in adapter composes the frozen authored-synthetic temporal transitions with exact fail-closed precedence at the 30-case pairwise lower bound."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-authored-synthetic-time-ordered-canonical-check-in-context-branch-composition-rehearsal-plan.md",
+          "docs/security/raisa-provider-free-authored-synthetic-time-ordered-canonical-check-in-context-branch-composition-rehearsal-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-provider-free-authored-synthetic-time-ordered-canonical-check-in-context-branch-composition-rehearsal/evidence.json",
+          "orchestration/continuity/raisa-provider-free-authored-synthetic-time-ordered-canonical-check-in-context-branch-composition-rehearsal/report.md",
+          "orchestration/continuity/raisa-provider-free-authored-synthetic-time-ordered-canonical-check-in-context-branch-composition-rehearsal/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-authored-synthetic-time-ordered-canonical-check-in-context-branch-composition-rehearsal-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-24--raisa-provider-free-authored-synthetic-time-ordered-canonical-check-in-context-branch-composition-rehearsal.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-authored-synthetic-time-ordered-canonical-check-in-context-branch-composition-rehearsal-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-authored-synthetic-time-ordered-canonical-check-in-context-branch-composition-rehearsal-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-authored-synthetic-time-ordered-canonical-check-in-context-branch-composition-rehearsal-pre-verifier-receipt.json",
+          "orchestration/continuity/raisa-provider-free-authored-synthetic-time-ordered-canonical-check-in-context-branch-composition-rehearsal/closeout/prepublication-contained-lapses.json",
+          "orchestration/continuity/raisa-provider-free-authored-synthetic-time-ordered-canonical-check-in-context-branch-composition-rehearsal/closeout/pushover-notification-receipt.json"
+        ],
+        "tests": [
+          "tests/test_current_baton_consistency.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_transactional_closeout.py"
+        ],
+        "artifacts": [
+          "orchestration_harness/governance_clockwork_tick.py",
+          "scripts/ariadne_governance_clockwork_closeout.py",
+          "scripts/ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "docs/ariadne-agent-error-correction-register-revision-666.md",
+          "docs/raisa-provider-free-authored-synthetic-time-ordered-canonical-check-in-context-branch-composition-rehearsal-closeout.md",
+          "orchestration/agent_inbox/codex/raisa-provider-free-authored-synthetic-time-ordered-canonical-check-in-context-branch-composition-rehearsal-sol-acceptance.md",
+          "orchestration/human_inbox/yuri/2026-08-24--raisa-provider-free-authored-synthetic-time-ordered-canonical-check-in-context-branch-composition-rehearsal.md"
+        ]
+      },
+      "unresolved_gates": [
+        "Historical occurrence, database durability, mounted-route behavior, ordinary-practice readiness and every provider, production and protected-ref surface remain gated."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-24T16:22:26.0503913+10:00",
+      "updated_at": "2026-08-24T16:22:26.0503913+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "6ce6dc4c242df7f56a671cffa74fdc2201137ba6",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-24T15:21:43.2895486+10:00"
+  "updated_at": "2026-08-24T16:22:26.0503913+10:00"
 }

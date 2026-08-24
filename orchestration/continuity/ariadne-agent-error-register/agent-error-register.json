@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 665,
+  "register_revision": 666,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-24",
@@ -44555,6 +44555,41 @@
       },
       "incident_id": "AER-1159",
       "attempt_id": "clock-79b1f6ba43d924a19dfd3371",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-24",
+      "tranche": "time-ordered-check-in-context-composition",
+      "role": "orchestrator",
+      "resource_id": "privacy-scan-serial-receipt-and-long-pytest-terminal-control",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_powershell_python_pytest_git",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Privacy checks distinguish typed result fields from patient-shaped content, serial receipts admit only supported evidence roots, and yielded long-running checks retain a terminal session record.",
+      "observed_error": "One generic privacy substring matched an admitted result field, one serial intent overlisted script/test evidence roots, one long pytest session handle was not retained for direct terminal citation, and the first semantic closeout draft used a descriptive candidate-state label outside the closed vocabulary.",
+      "detection_method": "The first release scan, serial preflight and semantic clockwork check failed closed; the missing pytest terminal handle was noticed before acceptance and the exact profile was repeated with a retained session.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-authored-synthetic-time-ordered-canonical-check-in-context-branch-composition-rehearsal/closeout/prepublication-contained-lapses.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.preacceptance.exact-key-evidence-root-session-handle",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Use exact patient-shaped keys, keep implementation paths outside serial active evidence roots, retain/poll long-running session identifiers to terminal exit, and select incident state from the clockwork's closed vocabulary.",
+        "prevention_control": "Focused regression assertions, typed serial preflight, retained-session polling and semantic clockwork admission remain in the prepublication loop.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-provider-free-authored-synthetic-time-ordered-canonical-check-in-context-branch-composition-rehearsal/closeout/prepublication-contained-lapses.json"
+        ]
+      },
+      "incident_id": "AER-1160",
+      "attempt_id": "clock-d30b9ebef232d91bd0554063",
       "origin": "operator",
       "related_incident_ids": [],
       "status": "corrected"

@@ -1,0 +1,69 @@
+{
+  "schema_version": "ariadne.governance_live_tick_state.v1",
+  "status": "passed",
+  "head": "6ce6dc4c242df7f56a671cffa74fdc2201137ba6",
+  "source_commit": "6ce6dc4c242df7f56a671cffa74fdc2201137ba6",
+  "generation_id": "gen-348e9dd6b2d410b848f4d89364aea7165567c24243ab75f31727e55dbb3c653a",
+  "bundle_sha256": "348e9dd6b2d410b848f4d89364aea7165567c24243ab75f31727e55dbb3c653a",
+  "previous_generation_id": "gen-f81548a613b355683e7fd44ab1ad666fc1dc8bc46e3f9c7af2e51c896fb225cc",
+  "previous_source_commit": "6ce6dc4c242df7f56a671cffa74fdc2201137ba6",
+  "clockwork_owned_surfaces": 10,
+  "dual_owned_surfaces": 0,
+  "retired_legacy_writer_classes": 4,
+  "canonical_drift": 0,
+  "lease_sequence": 243,
+  "operation_id": "raisa-provider-free-authored-synthetic-time-ordered-canonical-check-in-context-branch-composition-rehearsal",
+  "event_kind": "clean_closeout",
+  "previous_metadata_files": 4,
+  "transaction_facts": {
+    "schema_version": "ariadne.governance_command_transaction_facts.v1",
+    "command_disposition": "publication_committed",
+    "invocations": 1,
+    "preparations": 1,
+    "preparation_rejections": 0,
+    "publication_attempts": 1,
+    "published_generations": 1,
+    "rollback_attempts": 0,
+    "byte_exact_rollbacks": 0,
+    "idempotent_readbacks": 0,
+    "base_lease_sequence": 242,
+    "prospective_lease_sequence": 243,
+    "result_lease_sequence": 243,
+    "committed_lease_advance": 1,
+    "base_generation_id": "gen-f81548a613b355683e7fd44ab1ad666fc1dc8bc46e3f9c7af2e51c896fb225cc",
+    "prepared_generation_id": "gen-348e9dd6b2d410b848f4d89364aea7165567c24243ab75f31727e55dbb3c653a",
+    "result_generation_id": "gen-348e9dd6b2d410b848f4d89364aea7165567c24243ab75f31727e55dbb3c653a"
+  },
+  "caller_authored_derived_fields": 0,
+  "live_publication_count": 1,
+  "bespoke_updater_executions": 0,
+  "verification_facts": {
+    "schema_version": "ariadne.governance_semantic_verification_facts.v1",
+    "profile": "governance_clockwork_core_v1",
+    "disposition": "verification_passed",
+    "command_count": 3,
+    "executed_command_count": 3,
+    "passed_command_count": 3,
+    "tracked_drift": 0,
+    "commands": [
+      {
+        "command_id": "semantic-closeout-evidence-json",
+        "exit_code": 0,
+        "stdout_sha256": "ecab6e5b28b985ca89d6431b0dada3851d45bfbdb5bbf04dfeb76f716406565f",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "command_id": "semantic-closeout-ruff",
+        "exit_code": 0,
+        "stdout_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "command_id": "semantic-closeout-governance-tests",
+        "exit_code": 0,
+        "stdout_sha256": "6f56d1941d6e6b217f191c1435e40069b1de98bcedb6de4d8fbdfa8e8f0263a2",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ]
+  }
+}

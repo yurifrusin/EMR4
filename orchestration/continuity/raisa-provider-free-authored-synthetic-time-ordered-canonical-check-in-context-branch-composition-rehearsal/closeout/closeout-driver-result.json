@@ -1,0 +1,48 @@
+{
+  "schema_version": "ariadne.governance_bound_closeout_driver_result.v1",
+  "status": "passed",
+  "mode": "publish",
+  "source_head": "6ce6dc4c242df7f56a671cffa74fdc2201137ba6",
+  "interpreter": {
+    "selected": "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+    "attested": "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+    "caller_interpreter_ignored": true
+  },
+  "semantic_verification": {
+    "command_ids": [
+      "semantic-closeout-evidence-json",
+      "semantic-closeout-ruff",
+      "semantic-closeout-governance-tests"
+    ],
+    "command_count": 3,
+    "executed_command_count": 3,
+    "passed_command_count": 3
+  },
+  "inline_live_validation": {
+    "status": "passed",
+    "captured_from": "tick_publish_return_after_validate_tick_live_state",
+    "source_commit": "6ce6dc4c242df7f56a671cffa74fdc2201137ba6",
+    "generation_id": "gen-348e9dd6b2d410b848f4d89364aea7165567c24243ab75f31727e55dbb3c653a",
+    "lease_sequence": 243
+  },
+  "postpublication_verification": {
+    "test_paths": [
+      "tests/test_current_baton_consistency.py",
+      "tests/test_ariadne_active_operation_latch.py",
+      "tests/test_ariadne_governance_clockwork_tick.py",
+      "tests/test_ariadne_transactional_closeout.py",
+      "tests/test_ariadne_orchestrator_preflight.py"
+    ],
+    "test_file_count": 5,
+    "exit_code": 0,
+    "stdout_sha256": "f80d9994ee9a886ec444dcc94cf9c23b88102e843d17b575f8c00549b8b3ea5a",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tracked_drift": 0
+  },
+  "publication_surface_changed_file_count": 11,
+  "stage_manifest": "orchestration/continuity/raisa-provider-free-authored-synthetic-time-ordered-canonical-check-in-context-branch-composition-rehearsal/closeout/explicit-stage-manifest.json",
+  "git_add_invocations": 0,
+  "git_index_mutations": 0,
+  "stage_manifest_path_count": 15,
+  "stage_manifest_sha256": "5dd64a35e977e4f3f501b4ba3134d2bfda0260577bfe9e0d26f9a9d19b9f7040"
+}
