@@ -1,0 +1,10 @@
+{
+  "schema_version": "ariadne.pushover_closeout_receipt.v1",
+  "operation_id": "raisa-provider-free-authored-synthetic-time-ordered-canonical-check-in-context-branch-composition-rehearsal",
+  "recorded_at": "2026-08-24T16:22:26.0503913+10:00",
+  "status": 1,
+  "request": "b113214c-8c52-49ba-8c91-7fb73242bde7",
+  "checks": "14 focused; 264 combined; 72 hostile; Ruff/compileall",
+  "continuing": "read-only temporal check-in operational evidence gap review",
+  "contains_phi": false
+}

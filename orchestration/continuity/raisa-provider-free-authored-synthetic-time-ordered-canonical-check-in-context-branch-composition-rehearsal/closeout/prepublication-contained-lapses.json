@@ -1,0 +1,43 @@
+{
+  "schema_version": "ariadne.prepublication_contained_lapses.v1",
+  "recorded_at": "2026-08-24T16:22:26.0503913+10:00",
+  "operation_id": "raisa-provider-free-authored-synthetic-time-ordered-canonical-check-in-context-branch-composition-rehearsal",
+  "status": "contained_before_acceptance",
+  "lapses": [
+    {
+      "id": "typed-reason-field-overbroad-privacy-substring",
+      "stage": "first_deterministic_release",
+      "observation": "The first privacy scan rejected the admitted typed adapter key result_reason_counts because it searched for the generic substring reason.",
+      "correction": "Restrict the scan to actual patient-shaped keys, exact opaque values and identifiers while retaining typed adapter reason fields; add a regression assertion distinguishing them.",
+      "historical_or_local_data_access": false
+    },
+    {
+      "id": "serial-receipt-evidence-root-overreach",
+      "stage": "candidate_precommit_receipt",
+      "observation": "The first serial continuation intent included script and test paths even though active evidence paths admit documentation and orchestration roots only.",
+      "correction": "Remove the implementation paths from active_evidence_paths while keeping them in the explicit Git staging manifest and deterministic test profile; rerun preflight to a pass.",
+      "historical_or_local_data_access": false
+    },
+    {
+      "id": "yielded-pytest-session-handle-not-retained",
+      "stage": "combined_verification",
+      "observation": "The first long-running combined pytest command yielded after thirty seconds without its session identifier being retained in the visible record, so its terminal exit could not be cited directly.",
+      "correction": "Repeat the exact profile with the session object retained and poll that handle to terminal exit code zero; use this retained-session pattern for future long serial checks.",
+      "historical_or_local_data_access": false
+    },
+    {
+      "id": "incident-candidate-state-closed-vocabulary",
+      "stage": "semantic_closeout_check",
+      "observation": "The first closeout draft used the descriptive label accepted_candidate_unchanged outside the incident register's closed candidate-state vocabulary.",
+      "correction": "Use the admitted canonical_unchanged value and rerun semantic clockwork admission.",
+      "historical_or_local_data_access": false
+    }
+  ],
+  "effects": {
+    "fixture_control_archive_or_local_data_read": false,
+    "provider_model_or_network_call": false,
+    "product_or_runtime_change": false,
+    "protected_ref_movement": false,
+    "accepted_candidate_changed_after_exact_candidate_commit": false
+  }
+}

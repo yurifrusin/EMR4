@@ -1,0 +1,28 @@
+{
+  "schema_version": "raisa.authored_synthetic_time_ordered_check_in_context_operational_gap_review_contract.v1",
+  "operation_id": "raisa-provider-free-read-only-authored-synthetic-time-ordered-canonical-check-in-context-operational-evidence-gap-review",
+  "recorded_at": "2026-08-24T16:22:26.0503913+10:00",
+  "status": "frozen_read_only_successor_no_execution_authority",
+  "builds_on": {
+    "exact_candidate": "203f297d610ee30ce6c9d50243999ed4a8041df4",
+    "evidence_sha256": "42d97554c9223d4cdeaebc5701f85c93f2cb40921c6f8806da3eff0975d9a362",
+    "scenario_count": 30,
+    "cross_family_pairs": 74
+  },
+  "objective": "Compare the accepted in-memory temporal composition evidence with existing tracked default-off route, disposable PostgreSQL rollback/unknown-commit and runtime role/tenant evidence, then identify the narrowest incremental operational-evidence gap without executing a route or database.",
+  "read_only_questions": [
+    "which_temporal_branches_already_have_database_backed_evidence",
+    "which_temporal_branches_already_have_default_off_route_evidence",
+    "which_role_tenant_and_readback_claims_are_already_attested",
+    "what_single_incremental_provider_free_operational_rehearsal_if_any_is_justified"
+  ],
+  "authority": {
+    "tracked_repository_evidence_only": true,
+    "historical_or_local_data_access": false,
+    "database_route_client_or_runtime_execution": false,
+    "product_or_contract_change": false,
+    "provider_model_network_or_external_release": false,
+    "ordinary_practice_activation": false
+  },
+  "claim_ceiling": "read_only_operational_evidence_gap_classification_and_one_narrow_successor_recommendation_only"
+}
