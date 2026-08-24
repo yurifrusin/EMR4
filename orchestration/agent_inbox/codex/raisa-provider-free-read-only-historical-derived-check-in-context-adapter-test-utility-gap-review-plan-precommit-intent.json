@@ -1,0 +1,22 @@
+{
+  "schema_version": "ariadne.serial_continuation_intent.v1",
+  "preset": "provider_free_serial_observed_empty_workers",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_only_the_frozen_provider_free_read_only_historical_derived_check_in_context_adapter_test_utility_gap_review_plan_threat_delta_and_exact_orchestrator_receipts_without_touching_clockwork_owned_product_historical_local_protected_or_unrelated_paths",
+  "assessed_stage": "precommit_for_read_only_historical_derived_check_in_context_adapter_test_utility_gap_review_plan",
+  "active_evidence_paths": [
+    "docs/raisa-provider-free-read-only-historical-derived-check-in-context-adapter-test-utility-gap-review-plan.md",
+    "docs/security/raisa-provider-free-read-only-historical-derived-check-in-context-adapter-test-utility-gap-review-threat-model-delta.md",
+    "orchestration/continuity/raisa-provider-free-exact-digest-historical-derived-minimised-check-in-context-adapter-test-consumption-rehearsal/report.md",
+    "orchestration/continuity/raisa-provider-free-exact-digest-historical-derived-minimised-check-in-context-adapter-test-consumption-rehearsal/efficacy-reading.json",
+    "orchestration/continuity/raisa-provider-free-exact-digest-historical-derived-minimised-check-in-context-adapter-test-consumption-rehearsal/next-tranche-contract.json",
+    "orchestration/continuity/ariadne-active-operation-latch/current.json",
+    "orchestration/agent_inbox/codex/raisa-provider-free-read-only-historical-derived-check-in-context-adapter-test-utility-gap-review-preplanning-receipt.json"
+  ],
+  "lane_decision_overrides": [
+    {
+      "lane_id": "gemini_verifier",
+      "decision_code": "not_applicable_neutral"
+    }
+  ]
+}
