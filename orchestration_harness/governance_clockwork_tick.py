@@ -198,11 +198,33 @@ HISTORICAL_DIARY_SUBGATE_BOUNDARIES = frozenset(
         "api_client_database_or_configuration",
     }
 )
+HISTORICAL_FIRST_USE_MATERIALISATION_ACCESS_BOUNDARY = (
+    "allow_local_only_historical_derived_first_use_materialisation_after_"
+    "exact_candidate_gate"
+)
+HISTORICAL_FIRST_USE_MATERIALISATION_SUBGATE_BOUNDARIES = frozenset(
+    {
+        HISTORICAL_FIRST_USE_MATERIALISATION_ACCESS_BOUNDARY,
+        "historical_first_use_materialisation_subgate_contract_sha256_"
+        "93b6a177b73176518dcd94e31e9dfba90c26dca9a4c4a1851e2e858dc7393a1e",
+        "historical_first_use_candidate_gate_source_"
+        "abcd4206a363b0c565c070e0f2cb9c54d627b3b3",
+        "historical_first_use_exact_digest_bound_gate_receipt_required_"
+        "before_write",
+        "historical_first_use_maximum_one_minimised_structural_scenario_"
+        "fixture",
+        "historical_first_use_non_admission_or_revision_writes_nothing",
+        "historical_first_use_written_bytes_must_match_admitted_candidate_"
+        "digest",
+        "historical_first_use_authority_non_transitive",
+    }
+)
 HISTORICAL_DATA_BOUNDARY_VOCABULARY = frozenset(
     {
         LEGACY_FULL_DATA_DENIAL_BOUNDARY,
         TYPED_HISTORICAL_DATA_DENIAL_BOUNDARY,
         *HISTORICAL_DIARY_SUBGATE_BOUNDARIES,
+        *HISTORICAL_FIRST_USE_MATERIALISATION_SUBGATE_BOUNDARIES,
     }
 )
 
@@ -282,7 +304,12 @@ def validate_next_operation_protected_boundaries(
     unknown_allowances = {
         item
         for item in boundary_set
-        if item.startswith("allow_") and item != HISTORICAL_DIARY_ACCESS_BOUNDARY
+        if item.startswith("allow_")
+        and item
+        not in {
+            HISTORICAL_DIARY_ACCESS_BOUNDARY,
+            HISTORICAL_FIRST_USE_MATERIALISATION_ACCESS_BOUNDARY,
+        }
     }
     if unknown_allowances:
         _reject(rule + "_access_vocabulary")
@@ -308,7 +335,18 @@ def validate_next_operation_protected_boundaries(
 
     if historical_boundaries == HISTORICAL_DIARY_SUBGATE_BOUNDARIES:
         return boundaries
-    if historical_boundaries & HISTORICAL_DIARY_SUBGATE_BOUNDARIES:
+    if (
+        historical_boundaries & HISTORICAL_DIARY_SUBGATE_BOUNDARIES
+        and historical_boundaries
+        & HISTORICAL_FIRST_USE_MATERIALISATION_SUBGATE_BOUNDARIES
+    ):
+        _reject(rule + "_historical_mode_conflict")
+    if historical_boundaries == HISTORICAL_FIRST_USE_MATERIALISATION_SUBGATE_BOUNDARIES:
+        return boundaries
+    if historical_boundaries & (
+        HISTORICAL_DIARY_SUBGATE_BOUNDARIES
+        | HISTORICAL_FIRST_USE_MATERIALISATION_SUBGATE_BOUNDARIES
+    ):
         _reject(rule + "_historical_subgate_incomplete")
     _reject(rule + "_historical_mode_missing")
 

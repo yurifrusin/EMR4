@@ -25,6 +25,8 @@ from orchestration_harness.governance_clockwork_tick import (
     INCIDENT_WORKFLOW_DISPOSITIONS,
     HISTORICAL_DIARY_ACCESS_BOUNDARY,
     HISTORICAL_DIARY_SUBGATE_BOUNDARIES,
+    HISTORICAL_FIRST_USE_MATERIALISATION_ACCESS_BOUNDARY,
+    HISTORICAL_FIRST_USE_MATERIALISATION_SUBGATE_BOUNDARIES,
     LEGACY_FULL_DATA_DENIAL_BOUNDARY,
     REQUIRED_NEXT_BOUNDARIES,
     SEMANTIC_BATON_LABEL,
@@ -96,6 +98,10 @@ INTENT_PATH = TOPIC / "closeout-intent.json"
 HISTORICAL_DIARY_SUBGATE_CONTRACT = ROOT / (
     "orchestration/continuity/raisa-local-only-historical-diary-snapshot-"
     "privacy-feasibility-review/real-access-subgate-contract.json"
+)
+HISTORICAL_FIRST_USE_MATERIALISATION_SUBGATE_CONTRACT = ROOT / (
+    "orchestration/continuity/raisa-provider-free-historical-derived-scenario-"
+    "first-use-candidate-gate-evaluator-rehearsal/next-tranche-contract.json"
 )
 DECISION_INTENT_PATH = ROOT / (
     "orchestration/continuity/raisa-provider-free-default-off-check-in-relay-free-"
@@ -1469,15 +1475,25 @@ def test_historical_boundary_modes_are_closed_and_mutually_exclusive() -> None:
     legacy = [*sorted(REQUIRED_NEXT_BOUNDARIES), LEGACY_FULL_DATA_DENIAL_BOUNDARY]
     typed_denial = _typed_boundaries(TYPED_HISTORICAL_DATA_DENIAL_BOUNDARY)
     bounded_probe = _typed_boundaries(*sorted(HISTORICAL_DIARY_SUBGATE_BOUNDARIES))
+    materialisation = _typed_boundaries(
+        *sorted(HISTORICAL_FIRST_USE_MATERIALISATION_SUBGATE_BOUNDARIES)
+    )
 
     assert validate_next_operation_protected_boundaries(legacy) == legacy
     assert validate_next_operation_protected_boundaries(typed_denial) == typed_denial
     assert validate_next_operation_protected_boundaries(bounded_probe) == bounded_probe
+    assert (
+        validate_next_operation_protected_boundaries(materialisation)
+        == materialisation
+    )
 
     for conflicting in (
         [*bounded_probe, TYPED_HISTORICAL_DATA_DENIAL_BOUNDARY],
         [*bounded_probe, LEGACY_FULL_DATA_DENIAL_BOUNDARY],
         [*legacy, HISTORICAL_DIARY_ACCESS_BOUNDARY],
+        [*materialisation, TYPED_HISTORICAL_DATA_DENIAL_BOUNDARY],
+        [*materialisation, LEGACY_FULL_DATA_DENIAL_BOUNDARY],
+        [*bounded_probe, *HISTORICAL_FIRST_USE_MATERIALISATION_SUBGATE_BOUNDARIES],
     ):
         with pytest.raises(
             ClockworkTickRejection, match="historical_mode_conflict"
@@ -1495,6 +1511,16 @@ def test_historical_boundary_rejects_missing_broad_denial_and_partial_subgate() 
 
     for member in HISTORICAL_DIARY_SUBGATE_BOUNDARIES:
         partial = [item for item in bounded_probe if item != member]
+        with pytest.raises(
+            ClockworkTickRejection, match="historical_subgate_incomplete"
+        ):
+            validate_next_operation_protected_boundaries(partial)
+
+    materialisation = _typed_boundaries(
+        *sorted(HISTORICAL_FIRST_USE_MATERIALISATION_SUBGATE_BOUNDARIES)
+    )
+    for member in HISTORICAL_FIRST_USE_MATERIALISATION_SUBGATE_BOUNDARIES:
+        partial = [item for item in materialisation if item != member]
         with pytest.raises(
             ClockworkTickRejection, match="historical_subgate_incomplete"
         ):
@@ -1522,6 +1548,32 @@ def test_historical_boundary_rejects_unknown_digest_and_overbroad_allowance() ->
     unknown_historical = _typed_boundaries("no_historical_data_access_except_local")
     with pytest.raises(ClockworkTickRejection, match="historical_vocabulary"):
         validate_next_operation_protected_boundaries(unknown_historical)
+
+    materialisation = _typed_boundaries(
+        *sorted(HISTORICAL_FIRST_USE_MATERIALISATION_SUBGATE_BOUNDARIES)
+    )
+    for selected in (
+        next(
+            item
+            for item in materialisation
+            if "materialisation_subgate_contract_sha256" in item
+        ),
+        next(
+            item
+            for item in materialisation
+            if "historical_first_use_candidate_gate_source" in item
+        ),
+    ):
+        altered_materialisation_coordinate = [
+            (item[:-1] + ("0" if item[-1] != "0" else "1"))
+            if item == selected
+            else item
+            for item in materialisation
+        ]
+        with pytest.raises(ClockworkTickRejection, match="historical_vocabulary"):
+            validate_next_operation_protected_boundaries(
+                altered_materialisation_coordinate
+            )
 
 
 def test_historical_diary_subgate_is_byte_and_semantically_bound() -> None:
@@ -1564,36 +1616,93 @@ def test_historical_diary_subgate_is_byte_and_semantically_bound() -> None:
     )
 
 
+def test_historical_first_use_materialisation_subgate_is_byte_and_semantically_bound() -> None:
+    contract_bytes = HISTORICAL_FIRST_USE_MATERIALISATION_SUBGATE_CONTRACT.read_bytes()
+    contract = json.loads(contract_bytes)
+    digest = hashlib.sha256(contract_bytes).hexdigest()
+    assert (
+        "historical_first_use_materialisation_subgate_contract_sha256_" + digest
+        in HISTORICAL_FIRST_USE_MATERIALISATION_SUBGATE_BOUNDARIES
+    )
+    assert contract["schema_version"] == (
+        "raisa.governance_clockwork_historical_first_use_materialisation_"
+        "subgate_contract.v1"
+    )
+    assert contract["status"] == "frozen_fail_closed_successor_contract"
+    assert contract["builds_on_reviewed_source"] == (
+        "abcd4206a363b0c565c070e0f2cb9c54d627b3b3"
+    )
+    assert (
+        "historical_first_use_candidate_gate_source_"
+        + contract["builds_on_reviewed_source"]
+        in HISTORICAL_FIRST_USE_MATERIALISATION_SUBGATE_BOUNDARIES
+    )
+    assert contract["source_boundary"] == {
+        "historical_archive_access": False,
+        "ignored_attempt_output_access": False,
+        "authored_synthetic_boundary_tests_only": True,
+        "provider_network_model_calls": False,
+        "product_database_client_or_runtime": False,
+    }
+    assert contract["implementation"] == {
+        "add_one_closed_historical_first_use_materialisation_mode": True,
+        "preserve_legacy_denial_measurement_subgate_and_conflict_rules": True,
+        "reject_partial_mixed_or_unknown_historical_modes": True,
+        "bind_exact_candidate_gate_source": (
+            "abcd4206a363b0c565c070e0f2cb9c54d627b3b3"
+        ),
+        "maximum_reusable_fixtures": 1,
+        "exact_gate_receipt_before_write": True,
+        "blocked_or_revision_required_writes_fixture": False,
+        "authority_non_transitive": True,
+    }
+    assert contract["verification"]["historical_content_runs"] == 0
+    assert not any(contract["authority_ceiling"].values())
+    assert (
+        HISTORICAL_FIRST_USE_MATERIALISATION_ACCESS_BOUNDARY
+        in HISTORICAL_FIRST_USE_MATERIALISATION_SUBGATE_BOUNDARIES
+    )
+
+
 def test_closeout_and_user_decision_paths_share_the_typed_boundary_control() -> None:
     contract = validate_contract(_json(CONTRACT_PATH))
     bounded_probe = _typed_boundaries(*sorted(HISTORICAL_DIARY_SUBGATE_BOUNDARIES))
+    materialisation = _typed_boundaries(
+        *sorted(HISTORICAL_FIRST_USE_MATERIALISATION_SUBGATE_BOUNDARIES)
+    )
 
-    closeout = _json(INTENT_PATH)
-    closeout["next_operation_protected_boundaries"] = bounded_probe
-    assert validate_tick_intent(closeout, contract)[
-        "next_operation_protected_boundaries"
-    ] == bounded_probe
+    for boundaries in (bounded_probe, materialisation):
+        closeout = _json(INTENT_PATH)
+        closeout["next_operation_protected_boundaries"] = boundaries
+        assert validate_tick_intent(closeout, contract)[
+            "next_operation_protected_boundaries"
+        ] == boundaries
 
-    decision = _user_decision_intent(ROOT)
-    decision["next_operation_protected_boundaries"] = bounded_probe
-    assert validate_user_decision_tick_intent(decision, contract)[
-        "next_operation_protected_boundaries"
-    ] == bounded_probe
+        decision = _user_decision_intent(ROOT)
+        decision["next_operation_protected_boundaries"] = boundaries
+        assert validate_user_decision_tick_intent(decision, contract)[
+            "next_operation_protected_boundaries"
+        ] == boundaries
 
-    incomplete = [
-        item for item in bounded_probe if item != HISTORICAL_DIARY_ACCESS_BOUNDARY
-    ]
-    closeout["next_operation_protected_boundaries"] = incomplete
-    with pytest.raises(
-        ClockworkTickRejection, match="tick_next_boundaries_historical_subgate_incomplete"
+    for boundaries, access_boundary in (
+        (bounded_probe, HISTORICAL_DIARY_ACCESS_BOUNDARY),
+        (materialisation, HISTORICAL_FIRST_USE_MATERIALISATION_ACCESS_BOUNDARY),
     ):
-        validate_tick_intent(closeout, contract)
-    decision["next_operation_protected_boundaries"] = incomplete
-    with pytest.raises(
-        ClockworkTickRejection,
-        match="user_decision_next_boundaries_historical_subgate_incomplete",
-    ):
-        validate_user_decision_tick_intent(decision, contract)
+        incomplete = [item for item in boundaries if item != access_boundary]
+        closeout = _json(INTENT_PATH)
+        closeout["next_operation_protected_boundaries"] = incomplete
+        with pytest.raises(
+            ClockworkTickRejection,
+            match="tick_next_boundaries_historical_subgate_incomplete",
+        ):
+            validate_tick_intent(closeout, contract)
+        decision = _user_decision_intent(ROOT)
+        decision["next_operation_protected_boundaries"] = incomplete
+        with pytest.raises(
+            ClockworkTickRejection,
+            match="user_decision_next_boundaries_historical_subgate_incomplete",
+        ):
+            validate_user_decision_tick_intent(decision, contract)
 
 
 def _governance_v2_manifest() -> dict:
