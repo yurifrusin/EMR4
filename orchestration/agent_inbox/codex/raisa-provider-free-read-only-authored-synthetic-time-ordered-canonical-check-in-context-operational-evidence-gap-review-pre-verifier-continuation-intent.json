@@ -1,0 +1,21 @@
+{
+  "schema_version": "ariadne.serial_continuation_intent.v1",
+  "preset": "provider_free_serial_observed_empty_workers",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "accept_exact_read_only_temporal_to_operational_evidence_gap_classification_without_external_verifier",
+  "assessed_stage": "time_ordered_check_in_operational_evidence_gap_review_pre_verifier_acceptance",
+  "active_evidence_paths": [
+    "docs/raisa-provider-free-read-only-authored-synthetic-time-ordered-canonical-check-in-context-operational-evidence-gap-review-plan.md",
+    "docs/security/raisa-provider-free-read-only-authored-synthetic-time-ordered-canonical-check-in-context-operational-evidence-gap-review-threat-model-delta.md",
+    "orchestration/continuity/raisa-provider-free-read-only-authored-synthetic-time-ordered-canonical-check-in-context-operational-evidence-gap-review/contract.json",
+    "orchestration/continuity/raisa-provider-free-read-only-authored-synthetic-time-ordered-canonical-check-in-context-operational-evidence-gap-review/evidence.json",
+    "orchestration/continuity/raisa-provider-free-read-only-authored-synthetic-time-ordered-canonical-check-in-context-operational-evidence-gap-review/report.md",
+    "orchestration/continuity/ariadne-active-operation-latch/current.json"
+  ],
+  "lane_decision_overrides": [
+    {
+      "lane_id": "gemini_verifier",
+      "decision_code": "not_applicable_neutral"
+    }
+  ]
+}

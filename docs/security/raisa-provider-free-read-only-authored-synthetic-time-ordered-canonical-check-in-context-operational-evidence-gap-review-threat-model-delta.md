@@ -2,6 +2,8 @@
 
 Date: 2026-08-24
 
+Timestamp: 2026-08-24T16:58:16.1298284+10:00 (Australia/Brisbane)
+
 Status: `frozen_read_only_delta`
 
 ## Changed surface

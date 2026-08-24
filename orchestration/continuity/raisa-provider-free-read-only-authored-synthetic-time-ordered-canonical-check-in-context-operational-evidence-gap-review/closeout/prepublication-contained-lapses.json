@@ -1,0 +1,46 @@
+{
+  "schema_version": "ariadne.prepublication_contained_lapses.v1",
+  "operation_id": "raisa-provider-free-read-only-authored-synthetic-time-ordered-canonical-check-in-context-operational-evidence-gap-review",
+  "candidate_source": "7e1b7affc4311faac0116b612b03f54389f046bb",
+  "candidate_state": "canonical_unchanged",
+  "lapses": [
+    {
+      "id": "terminal_blank_line_diff_hygiene",
+      "detected_by": "git_diff_cached_check",
+      "effect": "planning_commit_only",
+      "correction": "removed_two_extra_terminal_blank_lines_in_candidate"
+    },
+    {
+      "id": "source_prose_and_transaction_shape_assumption",
+      "detected_by": "fail_closed_reviewer",
+      "effect": "zero_evidence_release",
+      "correction": "normalised_prose_and_used_exact_typed_attestation_keys"
+    },
+    {
+      "id": "historical_head_sensitive_test_overselection",
+      "detected_by": "combined_pytest_profile",
+      "effect": "one_baseline_only_failure",
+      "correction": "ran_exact_current_and_predecessor_profile_24_of_24_passed"
+    },
+    {
+      "id": "clockwork_rehearsal_session_handle_discarded",
+      "detected_by": "orphaned_owned_process_tree_readback",
+      "effect": "zero_publication_and_zero_canonical_write",
+      "correction": "stopped_exact_owned_tree_and_reran_with_retained_session_handle"
+    },
+    {
+      "id": "prospective_human_evidence_path_and_timestamp_mismatch",
+      "detected_by": "semantic_clockwork_check",
+      "effect": "zero_publication_and_zero_canonical_write",
+      "correction": "added_threat_timestamp_and_exact_artifact_slug_acceptance_and_yuri_paths"
+    },
+    {
+      "id": "serial_precommit_evidence_root_overlisted",
+      "detected_by": "ariadne_orchestrator_preflight",
+      "effect": "zero_receipt_release",
+      "correction": "removed_human_inbox_path_and_used_only_admitted_evidence_roots"
+    }
+  ],
+  "product_or_runtime_effect_count": 0,
+  "open_lapse_count": 0
+}

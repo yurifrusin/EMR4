@@ -1,0 +1,116 @@
+{
+  "schema_version": "ariadne.governance_semantic_closeout_intent.v1",
+  "profile": "provider_free_governance_tooling_v1",
+  "artifact_slug": "raisa-provider-free-read-only-authored-synthetic-time-ordered-canonical-check-in-context-operational-evidence-gap-review",
+  "recorded_at": "2026-08-24T17:10:39.6960019+10:00",
+  "closeout": {
+    "operation_id": "raisa-provider-free-read-only-authored-synthetic-time-ordered-canonical-check-in-context-operational-evidence-gap-review",
+    "title": "Raisa provider-free read-only time-ordered canonical check-in operational-evidence gap review",
+    "builds_on": [
+      "raisa-provider-free-authored-synthetic-time-ordered-canonical-check-in-context-branch-composition-rehearsal"
+    ],
+    "authority_notes": [
+      "Yuri's uninterrupted-development authority applies to the accepted read-only successor; classify tracked evidence without route, database, provider or historical-data execution."
+    ],
+    "decisions": [
+      {
+        "id": "accept-read-only-temporal-operational-evidence-join",
+        "source": "orchestration/continuity/raisa-provider-free-read-only-authored-synthetic-time-ordered-canonical-check-in-context-operational-evidence-gap-review/evidence.json",
+        "summary": "Accept exact candidate 7e1b7affc4311faac0116b612b03f54389f046bb: five sources reconcile ten temporal transition groups while preserving the in-memory claim ceiling."
+      },
+      {
+        "id": "freeze-two-transition-post-proposal-revalidation-successor",
+        "source": "orchestration/continuity/raisa-provider-free-read-only-authored-synthetic-time-ordered-canonical-check-in-context-operational-evidence-gap-review/next-tranche-contract.json",
+        "summary": "Exercise only current Receptionist revocation and waiting-area deactivation after proposal through the existing authored-synthetic default-off route/database test boundary."
+      }
+    ],
+    "claim_scope": [
+      "Tracked evidence justifies exactly one narrow two-transition product-assurance rehearsal and no repetition of rollback, unknown-response or tenant-role work."
+    ],
+    "additional_receipts": [
+      "orchestration/agent_inbox/codex/raisa-provider-free-read-only-authored-synthetic-time-ordered-canonical-check-in-context-operational-evidence-gap-review-pre-verifier-receipt.json",
+      "orchestration/continuity/raisa-provider-free-read-only-authored-synthetic-time-ordered-canonical-check-in-context-operational-evidence-gap-review/closeout/prepublication-contained-lapses.json",
+      "orchestration/continuity/raisa-provider-free-read-only-authored-synthetic-time-ordered-canonical-check-in-context-operational-evidence-gap-review/closeout/pushover-notification-receipt.json"
+    ],
+    "additional_artifacts": [
+      "docs/ariadne-agent-error-correction-register-revision-667.md",
+      "docs/raisa-provider-free-read-only-authored-synthetic-time-ordered-canonical-check-in-context-operational-evidence-gap-review-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-provider-free-read-only-authored-synthetic-time-ordered-canonical-check-in-context-operational-evidence-gap-review-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-24--raisa-provider-free-read-only-authored-synthetic-time-ordered-canonical-check-in-context-operational-evidence-gap-review.md"
+    ],
+    "unresolved_gates": [
+      "The 11/0/1 ordinary-admission posture, six absent external facts, every live environment and secret decision, ordinary activation, production and protected refs remain closed."
+    ],
+    "journey": {
+      "strategic_role": "Separate genuinely missing physical witnesses from novel combinations of already accepted check-in behavior.",
+      "outcome": "Eight physical properties and ten transition groups are reconciled; only two post-proposal route/database witnesses remain useful."
+    },
+    "current_position": {
+      "strategic_role": "Prove current authority and waiting-area topology are revalidated at confirmation time.",
+      "why_now": "The in-memory matrix exposes two time-of-check/time-of-use transitions absent from the accepted database-backed route evidence.",
+      "outcome": "A two-scenario repository rehearsal will either pass the existing route or expose one bounded defect.",
+      "unlocks": [
+        "Database-backed route evidence for current Receptionist revocation and waiting-area deactivation after proposal."
+      ],
+      "does_not_solve": [
+        "No ordinary-practice admission, live environment fact, production readiness or real-practice frequency is proved."
+      ],
+      "orientation_statement": "Test the two missing temporal witnesses and do not repeat already accepted operational work."
+    },
+    "next_operation": {
+      "operation_id": "raisa-provider-free-database-backed-default-off-canonical-check-in-post-proposal-revalidation-rehearsal",
+      "active_tranche": "Raisa provider-free database-backed default-off canonical check-in post-proposal revalidation rehearsal",
+      "objective": "Prove through the existing default-off authored-synthetic HTTP/database test boundary that confirmation fails closed when current Receptionist authority is revoked or the selected waiting area is deactivated after proposal and before confirmation.",
+      "authority_source": "Yuri's uninterrupted-development authority applied to the accepted two-transition successor contract.",
+      "next_stage": "fresh_five_source_rehydration_then_freeze_two_scenario_database_backed_route_rehearsal_plan"
+    }
+  },
+  "verification_profile": "governance_clockwork_core_v1",
+  "baton_slot": "current_deepseek_native_harness_acceptance",
+  "next_operation_protected_boundaries": [
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only",
+    "authored_synthetic_repository_test_data_only",
+    "no_product_patient_appointment_clinical_or_protected_data",
+    "no_historical_data_access",
+    "no_provider_model_or_external_network"
+  ],
+  "agent_error_observations": [
+    {
+      "attempt_key": "time-ordered-check-in-operational-gap-review-controls-001",
+      "observed_on": "2026-08-24",
+      "tranche": "time-ordered-check-in-operational-evidence-gap-review",
+      "role": "orchestrator",
+      "resource_id": "diff-hygiene-source-shape-and-test-profile-selection",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_powershell_python_pytest_git",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Diff hygiene stops before commit, reviewer assertions follow exact typed source shapes, bounded profiles exclude known HEAD-sensitive historical idempotence checks, yielded long commands retain their session handles, human evidence uses the machine-derived artifact paths and headers, and serial intents use admitted evidence roots only.",
+      "observed_error": "The planning commit retained two reported terminal blank lines, the first reviewer assumed one line-contiguous phrase plus obsolete attestation keys, one combined profile selected a known historical HEAD-sensitive idempotence assertion, the first clockwork wrapper discarded its yielded session identifier, the first retained rehearsal found one missing threat timestamp plus two shortened human-evidence paths, and the first precommit intent overlisted a human-inbox path.",
+      "detection_method": "Cached diff hygiene, two fail-closed reviewer runs, the overbroad combined pytest profile, exact owned-process-tree inspection, semantic prospective-evidence admission and serial preflight exposed the six lapses before acceptance.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-read-only-authored-synthetic-time-ordered-canonical-check-in-context-operational-evidence-gap-review/closeout/prepublication-contained-lapses.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.preacceptance.diff-source-shape-profile-selection",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Stop on non-empty diff hygiene, inspect exact typed keys before assertions, use a bounded current-plus-predecessor profile, retain/poll yielded exec session handles, derive human-evidence paths and headers before rehearsal, and reuse the admitted serial evidence-root pattern.",
+        "prevention_control": "Candidate diff hygiene, fail-closed typed validation, explicit test-manifest review, retained-session polling, semantic prospective-evidence admission and serial preflight remain in the prepublication loop.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-provider-free-read-only-authored-synthetic-time-ordered-canonical-check-in-context-operational-evidence-gap-review/closeout/prepublication-contained-lapses.json"
+        ]
+      },
+      "baton_summary": "records six contained prepublication diff-hygiene, source-shape, test-profile, session-handle, derived-human-evidence and serial-root lapses as one bounded workflow incident."
+    }
+  ]
+}

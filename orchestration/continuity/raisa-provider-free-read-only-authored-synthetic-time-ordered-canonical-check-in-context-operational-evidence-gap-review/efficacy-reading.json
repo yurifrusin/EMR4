@@ -1,0 +1,44 @@
+{
+  "schema_version": "ariadne.tranche_efficacy_reading.v1",
+  "operation_id": "raisa-provider-free-read-only-authored-synthetic-time-ordered-canonical-check-in-context-operational-evidence-gap-review",
+  "source_head": "7e1b7affc4311faac0116b612b03f54389f046bb",
+  "result": "effective_narrow_gap_isolation_with_six_contained_verification_lapses",
+  "before": {
+    "temporal_scenarios": 30,
+    "cross_family_pairs": 74,
+    "unclassified_incremental_operational_gap": true
+  },
+  "after": {
+    "accepted_source_bindings": 5,
+    "physical_properties_reconciled": 8,
+    "temporal_transitions_classified": 10,
+    "unbacked_temporal_transitions": 2,
+    "hostile_contract_mutations_rejected": 40,
+    "focused_tests_passed": 10,
+    "focused_and_predecessor_tests_passed": 24,
+    "product_api_client_or_configuration_changes": 0,
+    "route_database_runtime_or_provider_actions": 0,
+    "worker_or_subagent_runs": 0,
+    "new_reusable_control_layers": 0,
+    "focused_correction_iterations": 2,
+    "overbroad_historical_test_selections": 1,
+    "discarded_long_session_handles": 1,
+    "semantic_clockwork_rejections": 1,
+    "serial_evidence_root_rejections": 1
+  },
+  "workflow_lapses": [
+    "The planning commit retained an extra terminal blank line in each new Markdown file; cached diff hygiene reported both before commit, and the candidate removed them.",
+    "The first reviewer run assumed one line-contiguous prose marker and obsolete transaction-attestation key names; exact source inspection corrected the normalised prose check and typed keys before evidence release.",
+    "One combined verification profile included a known historical HEAD-sensitive idempotence assertion; the exact current reviewer plus accepted temporal predecessor profile then passed 24/24 without changing the candidate.",
+    "The first clockwork rehearsal wrapper printed only stdout and discarded the exec session identifier at its 30-second yield; its exact orphaned process tree was stopped and the rehearsal was rerun with the handle retained to terminal completion.",
+    "The first retained clockwork rehearsal rejected one missing threat timestamp and two human-evidence filenames shorter than the artifact slug; the exact derived paths and timestamp were supplied before publication.",
+    "The first closeout-precommit serial intent included the Yuri human-inbox path outside admitted evidence roots; preflight rejected it and the corrected intent used only admitted docs, Codex inbox, continuity and latch roots."
+  ],
+  "clockwork_effect": {
+    "short_git_ids_rejected_by_construction": true,
+    "source_shape_drift_failed_before_release": true,
+    "product_or_database_effects_caused": 0,
+    "remaining_friction_class": "cheap_prepublication_format_source_shape_and_profile_selection"
+  },
+  "bounded_conclusion": "The tranche avoided repeating accepted rollback, unknown-response and tenant-role work while isolating two concrete post-proposal route/database witnesses. The corrections were prepublication and caused no product or runtime action."
+}

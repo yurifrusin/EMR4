@@ -1,0 +1,10 @@
+{
+  "schema_version": "ariadne.pushover_closeout_receipt.v1",
+  "operation_id": "raisa-provider-free-read-only-authored-synthetic-time-ordered-canonical-check-in-context-operational-evidence-gap-review",
+  "recorded_at": "2026-08-24T17:10:39.6960019+10:00",
+  "status": 1,
+  "request": "0105bbe1-be04-4641-9d3f-1f34a238a8b8",
+  "checks": "10 focused; 24 joined; 40 hostile; Ruff/compileall/no-write",
+  "continuing": "two-scenario post-proposal authority and waiting-area revalidation rehearsal",
+  "contains_phi": false
+}

@@ -1,0 +1,32 @@
+{
+  "schema_version": "raisa.check_in_post_proposal_revalidation_successor_contract.v1",
+  "operation_id": "raisa-provider-free-database-backed-default-off-canonical-check-in-post-proposal-revalidation-rehearsal",
+  "recorded_at": "2026-08-24T17:10:39.6960019+10:00",
+  "status": "frozen_provider_free_successor",
+  "builds_on": {
+    "exact_reviewed_candidate": "7e1b7affc4311faac0116b612b03f54389f046bb",
+    "evidence_sha256": "09be9b9bc9e9a149fee0f1a5da0fc591017bfc7b4a517fda1a0f700003b22d97",
+    "unbacked_temporal_transition_count": 2
+  },
+  "objective": "Prove through the existing default-off authored-synthetic HTTP/database test boundary that confirmation fails closed when current Receptionist authority is revoked or the selected waiting area is deactivated after proposal and before confirmation.",
+  "required_scenarios": [
+    "receptionist_role_revoked_after_proposal_before_confirmation",
+    "assigned_waiting_area_deactivated_after_proposal_before_confirmation"
+  ],
+  "acceptance": {
+    "default_off_and_allowlist_unchanged": true,
+    "exact_request_response_and_status_contract_unchanged": true,
+    "zero_appointment_audit_event_or_completion_effect_on_denial": true,
+    "current_authority_and_waiting_area_revalidated": true,
+    "no_product_source_change_unless_a_real_defect_is_exposed": true,
+    "ordinary_admission_prerequisite_reopened": false
+  },
+  "authority": {
+    "authored_synthetic_repository_test_data_only": true,
+    "provider_model_network_or_historical_data_access": false,
+    "ordinary_practice_activation": false,
+    "product_patient_clinical_or_protected_data": false,
+    "production_deployment_release_pages_or_protected_ref_movement": false
+  },
+  "claim_ceiling": "database_backed_default_off_route_post_proposal_revalidation_for_two_authored_synthetic_transitions_only"
+}
