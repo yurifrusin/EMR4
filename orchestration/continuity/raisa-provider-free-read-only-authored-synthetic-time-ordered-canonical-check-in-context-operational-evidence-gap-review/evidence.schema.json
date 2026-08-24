@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/time-ordered-check-in-operational-gap-review-evidence-v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "operation_id", "result", "review_baseline", "source_bindings", "temporal_reading", "physical_evidence_inventory", "temporal_transition_classification", "gap_classification", "admission_boundary", "parallelism", "verification", "closed_boundaries"],
+  "properties": {
+    "schema_version": {"const": "raisa.time_ordered_check_in_operational_gap_review_evidence.v1"},
+    "operation_id": {"type": "string"},
+    "result": {"const": "raisa_provider_free_read_only_time_ordered_check_in_operational_evidence_gap_review_pass"},
+    "review_baseline": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "source_bindings": {"type": "array", "minItems": 5, "maxItems": 5},
+    "temporal_reading": {"type": "object"},
+    "physical_evidence_inventory": {"type": "array", "minItems": 8},
+    "temporal_transition_classification": {"type": "array", "minItems": 9},
+    "gap_classification": {"type": "object"},
+    "admission_boundary": {"type": "object"},
+    "parallelism": {"type": "object"},
+    "verification": {"type": "object"},
+    "closed_boundaries": {"type": "object"}
+  }
+}

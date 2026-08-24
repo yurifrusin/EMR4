@@ -35,4 +35,3 @@ Ordinary activation, product/API/client/configuration changes, product or
 protected data, external systems, production, deployment, release, Pages and
 protected-ref movement remain closed. A future lasting action still requires
 the existing explicit human decision and final confirmation boundary.
-

@@ -103,4 +103,3 @@ protected-ref movement is authorised.
 All unrelated and untracked files, especially `docs/branding/`, remain
 preserved. Staging is explicit-path only; `git add .` and `git add -A` remain
 forbidden.
-

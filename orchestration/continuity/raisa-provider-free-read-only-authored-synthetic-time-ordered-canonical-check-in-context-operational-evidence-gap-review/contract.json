@@ -1,0 +1,54 @@
+{
+  "schema_version": "raisa.time_ordered_check_in_operational_gap_review_contract.v1",
+  "operation_id": "raisa-provider-free-read-only-authored-synthetic-time-ordered-canonical-check-in-context-operational-evidence-gap-review",
+  "planning_source": "f3776b11dabc00ae344c27ef80e5af88f34ccddc",
+  "hash_mode": "strict_utf8_canonical_lf_reject_bare_cr_sha256",
+  "accepted_sources": [
+    {
+      "id": "temporal_composition_evidence",
+      "git_object": "203f297d610ee30ce6c9d50243999ed4a8041df4",
+      "path": "orchestration/continuity/raisa-provider-free-authored-synthetic-time-ordered-canonical-check-in-context-branch-composition-rehearsal/evidence.json",
+      "sha256": "42d97554c9223d4cdeaebc5701f85c93f2cb40921c6f8806da3eff0975d9a362"
+    },
+    {
+      "id": "default_off_route_closeout",
+      "git_object": "0e5aaab7c35cd8a8ee83ae662c0978cf1ddcb4eb",
+      "path": "docs/raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal-closeout.md",
+      "sha256": "6ccdc05d5958b51eea87585e3c0d656cccc67de7137456daf6c88b9dc641fc3a"
+    },
+    {
+      "id": "rollback_unknown_response_attestation",
+      "git_object": "0e50f7f48d9c8622341a1679db507de78b1260a5",
+      "path": "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-008/transaction-attestation.json",
+      "sha256": "d7967117f59fadde447ca0e848c428ef3461ee12a4bd140f715d8b067be5890e"
+    },
+    {
+      "id": "runtime_role_tenant_attestation",
+      "git_object": "6a2832575e9b4df5c40a13984db7281e79814a94",
+      "path": "orchestration/continuity/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal/tenant-role-attestation.json",
+      "sha256": "1d0e6bfa7224a1f8b57465b44bb6b1df14f997032e7537827b8acb373a777c8a"
+    },
+    {
+      "id": "admission_blocker_priority_evidence",
+      "git_object": "5ebea68c345108e00c30bb0e525a95b0bda7047e",
+      "path": "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-blocker-priority-review/evidence.json",
+      "sha256": "508fa3cb6e23ca45adf8c9d0c6c73de005ebe767ff2ff32d6f53533c4e62a321"
+    }
+  ],
+  "expected_temporal_scenario_count": 30,
+  "expected_cross_family_pair_count": 74,
+  "expected_temporal_claim_ceiling": "minimum_pairwise_authored_synthetic_in_memory_adapter_composition_and_precedence_only",
+  "physical_classification_vocabulary": [
+    "accepted_route_and_database_evidence",
+    "accepted_route_evidence_and_in_memory_composition_only",
+    "accepted_database_evidence_and_in_memory_composition_only",
+    "in_memory_composition_only"
+  ],
+  "recommendation_vocabulary": [
+    "no_incremental_operational_rehearsal_justified",
+    "one_incremental_provider_free_operational_rehearsal_justified"
+  ],
+  "expected_admission_readiness": "11_0_1",
+  "expected_repository_prerequisites_remaining": 0,
+  "minimum_hostile_mutations": 40
+}

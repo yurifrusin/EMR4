@@ -1,0 +1,176 @@
+{
+  "admission_boundary": {
+    "external_facts_absent": 6,
+    "ordinary_admission_releases": 0,
+    "readiness": {
+      "blocking_gap": 0,
+      "operational_evidence_gap": 1,
+      "satisfied": 11
+    },
+    "repository_prerequisites_remaining": 0,
+    "verdict": "not_ready_for_ordinary_practice_admission"
+  },
+  "closed_boundaries": {
+    "historical_or_local_data_accessed": false,
+    "ordinary_practice_enabled": false,
+    "product_api_schema_client_or_configuration_changed": false,
+    "product_patient_appointment_clinical_or_protected_data_used": false,
+    "production_deployment_release_pages_or_protected_ref_moved": false,
+    "provider_model_network_or_harness_used": false,
+    "route_database_client_or_runtime_executed": false
+  },
+  "gap_classification": {
+    "gap_id": "post_proposal_current_authority_and_waiting_area_revalidation_through_database_backed_route",
+    "gap_kind": "non_admission_product_assurance",
+    "next_operation": "raisa-provider-free-database-backed-default-off-canonical-check-in-post-proposal-revalidation-rehearsal",
+    "next_scope": [
+      "receptionist_role_revoked_after_proposal_before_confirmation",
+      "assigned_waiting_area_deactivated_after_proposal_before_confirmation"
+    ],
+    "ordinary_admission_prerequisite_reopened": false,
+    "recommendation": "one_incremental_provider_free_operational_rehearsal_justified",
+    "runtime_role_tenant_rehearsal_repeated": false,
+    "unbacked_temporal_transition_count": 2,
+    "unknown_response_rehearsal_repeated": false
+  },
+  "operation_id": "raisa-provider-free-read-only-authored-synthetic-time-ordered-canonical-check-in-context-operational-evidence-gap-review",
+  "parallelism": {
+    "deepseek": "declined_negative_no_bounded_work_package",
+    "gemini": "not_applicable_neutral_closed_predicates",
+    "native_subagents": "declined_negative_serial_boundary",
+    "serial_owner": "gpt_sol"
+  },
+  "physical_evidence_inventory": [
+    {
+      "database": false,
+      "property": "default_off_and_authored_synthetic_allowlist_denial",
+      "route": true
+    },
+    {
+      "database": true,
+      "property": "eligible_write_and_waiting_area_assignment_or_preservation",
+      "route": true
+    },
+    {
+      "database": true,
+      "property": "locked_source_state_and_freshness_revalidation",
+      "route": true
+    },
+    {
+      "database": true,
+      "property": "signed_evidence_verification",
+      "route": true
+    },
+    {
+      "database": true,
+      "property": "idempotency_replay_conflict_and_in_progress",
+      "route": true
+    },
+    {
+      "database": true,
+      "property": "atomic_precommit_rollback",
+      "route": true
+    },
+    {
+      "database": true,
+      "property": "unknown_response_authoritative_readback",
+      "route": false
+    },
+    {
+      "database": true,
+      "property": "restricted_role_and_cross_tenant_denial",
+      "route": false
+    }
+  ],
+  "result": "raisa_provider_free_read_only_time_ordered_check_in_operational_evidence_gap_review_pass",
+  "review_baseline": "f3776b11dabc00ae344c27ef80e5af88f34ccddc",
+  "schema_version": "raisa.time_ordered_check_in_operational_gap_review_evidence.v1",
+  "source_bindings": [
+    {
+      "git_object": "203f297d610ee30ce6c9d50243999ed4a8041df4",
+      "id": "temporal_composition_evidence",
+      "path": "orchestration/continuity/raisa-provider-free-authored-synthetic-time-ordered-canonical-check-in-context-branch-composition-rehearsal/evidence.json",
+      "sha256": "42d97554c9223d4cdeaebc5701f85c93f2cb40921c6f8806da3eff0975d9a362"
+    },
+    {
+      "git_object": "0e5aaab7c35cd8a8ee83ae662c0978cf1ddcb4eb",
+      "id": "default_off_route_closeout",
+      "path": "docs/raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal-closeout.md",
+      "sha256": "6ccdc05d5958b51eea87585e3c0d656cccc67de7137456daf6c88b9dc641fc3a"
+    },
+    {
+      "git_object": "0e50f7f48d9c8622341a1679db507de78b1260a5",
+      "id": "rollback_unknown_response_attestation",
+      "path": "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-008/transaction-attestation.json",
+      "sha256": "d7967117f59fadde447ca0e848c428ef3461ee12a4bd140f715d8b067be5890e"
+    },
+    {
+      "git_object": "6a2832575e9b4df5c40a13984db7281e79814a94",
+      "id": "runtime_role_tenant_attestation",
+      "path": "orchestration/continuity/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal/tenant-role-attestation.json",
+      "sha256": "1d0e6bfa7224a1f8b57465b44bb6b1df14f997032e7537827b8acb373a777c8a"
+    },
+    {
+      "git_object": "5ebea68c345108e00c30bb0e525a95b0bda7047e",
+      "id": "admission_blocker_priority_evidence",
+      "path": "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-blocker-priority-review/evidence.json",
+      "sha256": "508fa3cb6e23ca45adf8c9d0c6c73de005ebe767ff2ff32d6f53533c4e62a321"
+    }
+  ],
+  "temporal_reading": {
+    "claim_ceiling": "minimum_pairwise_authored_synthetic_in_memory_adapter_composition_and_precedence_only",
+    "cross_family_pair_count": 74,
+    "physical_capability_claimed": false,
+    "scenario_count": 30,
+    "unmasked_witness_count": 16
+  },
+  "temporal_transition_classification": [
+    {
+      "classification": "accepted_route_and_database_evidence",
+      "transition": "unchanged_valid_first_execution"
+    },
+    {
+      "classification": "accepted_route_and_database_evidence",
+      "transition": "eligible_waiting_area_assign_or_preserve"
+    },
+    {
+      "classification": "accepted_route_and_database_evidence",
+      "transition": "proposal_stale_after_intervening_state_update"
+    },
+    {
+      "classification": "accepted_route_and_database_evidence",
+      "transition": "signed_evidence_invalidated"
+    },
+    {
+      "classification": "accepted_route_and_database_evidence",
+      "transition": "exact_replay_conflict_and_in_progress"
+    },
+    {
+      "classification": "accepted_route_and_database_evidence",
+      "transition": "precommit_composition_failure_and_rollback"
+    },
+    {
+      "classification": "accepted_database_evidence_and_in_memory_composition_only",
+      "transition": "commit_outcome_unknown_and_authoritative_readback"
+    },
+    {
+      "classification": "accepted_route_evidence_and_in_memory_composition_only",
+      "transition": "current_receptionist_revoked_after_proposal"
+    },
+    {
+      "classification": "accepted_route_evidence_and_in_memory_composition_only",
+      "transition": "assigned_waiting_area_became_inactive_after_proposal"
+    },
+    {
+      "classification": "accepted_database_evidence_and_in_memory_composition_only",
+      "transition": "restricted_role_and_cross_tenant_denial"
+    }
+  ],
+  "verification": {
+    "external_facts_inferred": 0,
+    "full_git_bindings_matched": 5,
+    "hostile_mutations_rejected": 40,
+    "source_hashes_matched": 5,
+    "temporal_scenarios_joined": 30
+  }
+}

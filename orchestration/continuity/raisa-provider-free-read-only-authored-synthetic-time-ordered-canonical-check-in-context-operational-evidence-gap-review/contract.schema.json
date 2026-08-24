@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/time-ordered-check-in-operational-gap-review-contract-v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "operation_id", "planning_source", "hash_mode", "accepted_sources", "expected_temporal_scenario_count", "expected_cross_family_pair_count", "expected_temporal_claim_ceiling", "physical_classification_vocabulary", "recommendation_vocabulary", "expected_admission_readiness", "expected_repository_prerequisites_remaining", "minimum_hostile_mutations"],
+  "properties": {
+    "schema_version": {"const": "raisa.time_ordered_check_in_operational_gap_review_contract.v1"},
+    "operation_id": {"const": "raisa-provider-free-read-only-authored-synthetic-time-ordered-canonical-check-in-context-operational-evidence-gap-review"},
+    "planning_source": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "hash_mode": {"const": "strict_utf8_canonical_lf_reject_bare_cr_sha256"},
+    "accepted_sources": {
+      "type": "array", "minItems": 5, "maxItems": 5,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["id", "git_object", "path", "sha256"],
+        "properties": {
+          "id": {"type": "string"},
+          "git_object": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+          "path": {"type": "string", "minLength": 1},
+          "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+        }
+      }
+    },
+    "expected_temporal_scenario_count": {"const": 30},
+    "expected_cross_family_pair_count": {"const": 74},
+    "expected_temporal_claim_ceiling": {"const": "minimum_pairwise_authored_synthetic_in_memory_adapter_composition_and_precedence_only"},
+    "physical_classification_vocabulary": {"const": ["accepted_route_and_database_evidence", "accepted_route_evidence_and_in_memory_composition_only", "accepted_database_evidence_and_in_memory_composition_only", "in_memory_composition_only"]},
+    "recommendation_vocabulary": {"const": ["no_incremental_operational_rehearsal_justified", "one_incremental_provider_free_operational_rehearsal_justified"]},
+    "expected_admission_readiness": {"const": "11_0_1"},
+    "expected_repository_prerequisites_remaining": {"const": 0},
+    "minimum_hostile_mutations": {"type": "integer", "minimum": 40}
+  }
+}
