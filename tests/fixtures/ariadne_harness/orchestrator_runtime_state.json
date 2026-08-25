@@ -42,7 +42,7 @@
       "retry_counters": {
         "fixture": 0
       },
-      "settings_fingerprint": "sha256:6634eb38439d295823ca8536bcbc21b43299beb170a578c7b74ae75675b040b7"
+      "settings_fingerprint": "sha256:ff760735680a5257cca955749abade97e859ce1aeb43a67c3390edddea1d41c5"
     },
     "interruption_policy": {
       "chronological_last_prompt_is_controlling_authority": false,

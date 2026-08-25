@@ -17,14 +17,13 @@ if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
 from orchestration_harness.programme_admission import (
-    ADMITTED_PROGRAMME_GATE,
-    ADMITTED_TASK_CLASS,
     FORBIDDEN_EFFECTS,
     G0_G01_ALLOWED_PATHS,
     TASK_MANIFEST_VERSION,
     ProgrammeAdmissionError,
     admission_payload,
     evaluate_committed_scope,
+    evaluate_programme_operation_admission,
     evaluate_programme_admission,
     git_change_inventory,
     load_programme_policy,
@@ -184,16 +183,29 @@ def build_task_manifest(
         "task_branch_push",
     ),
 ) -> dict[str, Any]:
-    """Build the current typed G0.2 manifest without persisting an authority token."""
+    """Build the current typed G0.3 manifest without persisting an authority token."""
     root = repo_root.resolve()
     policy = load_programme_policy(root)
+    active = policy.overlay["profiles"][policy.overlay["active_profile"]]
+    if policy.state["active_correction"] == "G0.3":
+        base_commit = policy.state["g0_3_correction"]["authorized_parent_commit"]
+        task_id = "raisa-ariadne-g0-3-operational-g1a-transition-correction"
+        objective = "Activate the operational G1A transition seam and semantic delta contract only; stop before G1A implementation."
+    else:
+        reviewed = policy.state["gate_transition"]["reviewed_commit"]
+        rows = _run_git(root, "rev-list", "--reverse", f"{reviewed}..HEAD").splitlines()
+        if not rows:
+            raise PreflightError("G1A activation commit unavailable")
+        base_commit = rows[0]
+        task_id = "raisa-ariadne-g1a-verdict-integration-semantics-repair"
+        objective = "Repair canonical verdict and integration semantics inside the pre-reviewed G1A scope only."
     return {
         "schema_version": TASK_MANIFEST_VERSION,
-        "task_id": "raisa-ariadne-g0-2-transition-scope-boundary-correction",
-        "task_class": ADMITTED_TASK_CLASS,
-        "programme_gate": ADMITTED_PROGRAMME_GATE,
-        "objective": "Repair the G0 transition seam, rename-safe scope and side-effect boundaries only; stop before G1A.",
-        "base_commit": policy.state["g0_2_correction"]["authorized_parent_commit"],
+        "task_id": task_id,
+        "task_class": active["admitted_task_classes"][0],
+        "programme_gate": active["programme_gate"],
+        "objective": objective,
+        "base_commit": base_commit,
         "candidate_or_current_head": _run_git(root, "rev-parse", "HEAD"),
         "allowed_path_roots": sorted(policy.allowed_paths),
         "intended_side_effect_classes": list(intended_effects),
@@ -315,10 +327,20 @@ def build_report(
             "reason_codes": [error.reason_code],
             "checks": [],
         }
-    admission = evaluate_programme_admission(
-        repo_root=root, manifest=task_manifest, entrypoint=entrypoint
-    )
-    scope = evaluate_committed_scope(repo_root=root, manifest=task_manifest, phase=phase)
+    if entrypoint in {"task_branch_commit", "task_branch_push"}:
+        operation = evaluate_programme_operation_admission(
+            repo_root=root,
+            manifest=task_manifest,
+            entrypoint=entrypoint,
+            phase=phase,
+        )
+        admission = operation
+        scope = operation
+    else:
+        admission = evaluate_programme_admission(
+            repo_root=root, manifest=task_manifest, entrypoint=entrypoint
+        )
+        scope = evaluate_committed_scope(repo_root=root, manifest=task_manifest, phase=phase)
     checks = [
         Check(
             "programme_admission",

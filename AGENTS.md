@@ -3,7 +3,7 @@
 `orchestration/programme/current-state.json`, `orchestration/programme/gates.yaml`,
 and the active recovery admission policy outrank the historical baton below while
 the programme is in recovery. The older baton is evidence only and its named
-successor must not resume. Gate G0.2 is the only authorised correction; G1A is
+successor must not resume. Gate G0.3 is the only authorised correction; G1A is
 closed. Missing, malformed, stale, or contradictory programme state is a hard stop.
 
 # EMR4 Centaur — Live Agent Handover

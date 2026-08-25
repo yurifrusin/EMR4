@@ -1,11 +1,12 @@
-schema_version: "ariadne.programme_recovery.v3"
+schema_version: "ariadne.programme_recovery.v4"
 status: "active_emergency_overlay"
 authority_owner: "Yuri"
-recorded_at: "2026-08-25T20:00:26+10:00"
+recorded_at: "2026-08-25T22:10:00+10:00"
 state_file: "orchestration/programme/current-state.json"
 gates_file: "orchestration/programme/gates.yaml"
 risk_file: "orchestration/programme/risk-register.yaml"
 inventory_file: "orchestration/programme/branch-pr-disposition.yaml"
+g1a_scope_file: "orchestration/programme/g1a-verdict-integration-scope.yaml"
 admission_command: "python scripts/raisa_ariadne_recovery_preflight.py --task-manifest <path> --phase development"
 required_before:
   - "task_selection"
@@ -20,23 +21,136 @@ required_before:
   - "protected_ref_operation"
   - "deployment"
 missing_or_invalid_state: "hard_stop"
-recovery_mode:
-  expected_programme_mode: "recovery"
-  expected_current_gate: "G0"
-  expected_gate_status: "revision_required"
-  active_correction: "G0.2"
-  autonomous_task_selection: false
-  admitted_task_classes: ["g0_2_controller_maintenance"]
-  out_of_gate_result: "blocked"
-  feature_work_eligible: false
-  provider_calls_eligible: false
-  deployment_eligible: false
-  protected_ref_movement_eligible: false
-  g1a_eligible: false
+active_profile: "G0.3_CONTROLLER_MAINTENANCE"
+profiles:
+  G0.3_CONTROLLER_MAINTENANCE:
+    profile_kind: "controller_maintenance"
+    expected_programme_mode: "recovery"
+    expected_current_gate: "G0"
+    expected_gate_status: "revision_required"
+    active_correction: "G0.3"
+    programme_gate: "G0.3"
+    admitted_task_classes: ["g0_3_controller_maintenance"]
+    allowed_effects: ["repository_read", "control_plane_edit", "task_branch_commit", "task_branch_push"]
+    forbidden_effects: ["autonomous_worker_dispatch", "provider_invocation", "product_behavior_change", "dependency_change", "migration_change", "g1b_work", "integration", "protected_ref_movement", "deployment", "pages", "real_data_access"]
+    closed_entrypoints: ["worker_dispatch", "provider_invocation", "clockwork_tick_mutation", "clockwork_closeout_mutation", "integration", "protected_ref_operation", "deployment"]
+    scope_behavior: "g0_controller_maintenance"
+    allowed_paths:
+      - "AGENTS.md"
+      - "docs/architecture/ariadne-clockwork-correction.md"
+      - "docs/architecture/raisa-projection-native-north-star.md"
+      - "docs/programme/raisa-ariadne-recovery-programme.md"
+      - "orchestration/continuity/ariadne-active-operation-latch/current.json"
+      - "orchestration/harness_settings/autonomous_continuation.yaml"
+      - "orchestration/harness_settings/programme_recovery.yaml"
+      - "orchestration/harness_settings/project.yaml"
+      - "orchestration/programme/branch-pr-disposition.yaml"
+      - "orchestration/programme/current-state.json"
+      - "orchestration/programme/g1a-verdict-integration-scope.yaml"
+      - "orchestration/programme/gates.yaml"
+      - "orchestration/programme/risk-register.yaml"
+      - "orchestration_harness/deepcode_artifact.py"
+      - "orchestration_harness/programme_admission.py"
+      - "orchestration_harness/orchestrator_preflight.py"
+      - "orchestration_harness/review_acceptance.py"
+      - "scripts/agent_worktrees.py"
+      - "scripts/ariadne_antigravity.py"
+      - "scripts/ariadne_deepcode_liveness.py"
+      - "scripts/ariadne_deepseek_claude.py"
+      - "scripts/ariadne_governance_clockwork_closeout.py"
+      - "scripts/ariadne_governance_clockwork_tick.py"
+      - "scripts/ariadne_orchestrator_preflight.py"
+      - "scripts/ariadne_review_acceptance.py"
+      - "scripts/drive_agent_headless.py"
+      - "scripts/raisa_ariadne_recovery_preflight.py"
+      - "tests/fixtures/ariadne_harness/orchestrator_runtime_state.json"
+      - "tests/test_ariadne_antigravity.py"
+      - "tests/test_ariadne_deepcode_runtime_observability.py"
+      - "tests/test_ariadne_deepseek_claude.py"
+      - "tests/test_ariadne_governance_clockwork_tick.py"
+      - "tests/test_ariadne_orchestrator_preflight.py"
+      - "tests/test_ariadne_review_acceptance.py"
+      - "tests/test_programme_admission.py"
+      - "tests/test_raisa_ariadne_recovery_preflight.py"
+    autonomous_task_selection: false
+    out_of_gate_result: "blocked"
+    feature_work_eligible: false
+    product_work_eligible: false
+    provider_calls_eligible: false
+    deployment_eligible: false
+    protected_ref_movement_eligible: false
+    g1a_eligible: false
+  G0_TO_G1A_STATE_TRANSITION:
+    profile_kind: "state_transition"
+    expected_programme_mode: "recovery"
+    expected_current_gate: "G1A"
+    expected_gate_status: "active"
+    active_correction: "G1A"
+    programme_gate: "G0_TO_G1A"
+    admitted_task_classes: ["g0_to_g1a_state_transition"]
+    allowed_effects: ["repository_read", "control_plane_edit", "task_branch_commit", "task_branch_push", "external_review_record", "transition_artifact"]
+    forbidden_effects: ["dependency_change", "deployment", "g1b_work", "implementation_change", "integration", "migration_change", "pages", "product_behavior_change", "protected_ref_movement", "provider_invocation", "real_data_access"]
+    closed_entrypoints: ["worker_dispatch", "provider_invocation", "clockwork_tick_mutation", "clockwork_closeout_mutation", "integration", "protected_ref_operation", "deployment"]
+    scope_behavior: "semantic_state_transition"
+    allowed_paths:
+      - "AGENTS.md"
+      - "orchestration/continuity/ariadne-active-operation-latch/current.json"
+      - "orchestration/harness_settings/programme_recovery.yaml"
+      - "orchestration/programme/current-state.json"
+      - "orchestration/programme/gates.yaml"
+    autonomous_task_selection: false
+    out_of_gate_result: "blocked"
+    feature_work_eligible: false
+    product_work_eligible: false
+    provider_calls_eligible: false
+    deployment_eligible: false
+    protected_ref_movement_eligible: false
+    g1a_eligible: true
+  G1A_ACTIVE:
+    profile_kind: "active_gate"
+    expected_programme_mode: "recovery"
+    expected_current_gate: "G1A"
+    expected_gate_status: "active"
+    active_correction: "G1A"
+    programme_gate: "G1A"
+    admitted_task_classes: ["g1a_verdict_and_integration_semantics_repair"]
+    allowed_effects: ["repository_read", "control_plane_edit", "task_branch_commit", "task_branch_push", "external_review_preparation"]
+    forbidden_effects: ["autonomous_worker_dispatch", "dependency_change", "deployment", "g1b_work", "integration", "migration_change", "pages", "product_behavior_change", "protected_ref_movement", "provider_invocation", "real_data_access"]
+    closed_entrypoints: ["worker_dispatch", "provider_invocation", "clockwork_tick_mutation", "clockwork_closeout_mutation", "integration", "protected_ref_operation", "deployment"]
+    scope_behavior: "g1a_bounded_repair"
+    allowed_paths:
+      - "AGENTS.md"
+      - "orchestration/continuity/ariadne-active-operation-latch/current.json"
+      - "orchestration/harness_settings/programme_recovery.yaml"
+      - "orchestration/programme/current-state.json"
+      - "orchestration/programme/gates.yaml"
+      - "orchestration_harness/programme_admission.py"
+      - "orchestration_harness/verdict.py"
+      - "orchestration_harness/deepcode_artifact.py"
+      - "orchestration_harness/review_acceptance.py"
+      - "scripts/agent_worktrees.py"
+      - "scripts/ariadne_antigravity.py"
+      - "scripts/ariadne_deepcode_liveness.py"
+      - "scripts/ariadne_review_acceptance.py"
+      - "scripts/raisa_ariadne_recovery_preflight.py"
+      - "tests/test_agent_worktrees.py"
+      - "tests/test_ariadne_antigravity.py"
+      - "tests/test_ariadne_deepcode_runtime_observability.py"
+      - "tests/test_ariadne_review_acceptance.py"
+      - "tests/test_programme_admission.py"
+      - "tests/test_raisa_ariadne_recovery_preflight.py"
+    autonomous_task_selection: false
+    out_of_gate_result: "blocked"
+    feature_work_eligible: false
+    product_work_eligible: false
+    provider_calls_eligible: false
+    deployment_eligible: false
+    protected_ref_movement_eligible: false
+    g1a_eligible: true
 scope_policy:
   expected_branch: "codex/raisa-ariadne-recovery-g0"
   frozen_recovery_base: "03e6860394c39086ec1ffb3f2457acc5f7c8b5f9"
-  authorized_parent_commit: "087522d7b9cf6d5a26056412230f2513530aab1f"
+  authorized_parent_commit: "7cae4e88e2f3951e51dcaf1378e52187e191a33d"
   candidate_commit_limit: 1
   allowed_paths:
     - "AGENTS.md"
@@ -49,32 +163,40 @@ scope_policy:
     - "orchestration/harness_settings/project.yaml"
     - "orchestration/programme/branch-pr-disposition.yaml"
     - "orchestration/programme/current-state.json"
+    - "orchestration/programme/g1a-verdict-integration-scope.yaml"
     - "orchestration/programme/gates.yaml"
     - "orchestration/programme/risk-register.yaml"
     - "orchestration_harness/programme_admission.py"
     - "orchestration_harness/orchestrator_preflight.py"
+    - "orchestration_harness/deepcode_artifact.py"
+    - "orchestration_harness/review_acceptance.py"
     - "scripts/agent_worktrees.py"
     - "scripts/ariadne_antigravity.py"
+    - "scripts/ariadne_deepcode_liveness.py"
     - "scripts/ariadne_deepseek_claude.py"
     - "scripts/ariadne_governance_clockwork_closeout.py"
     - "scripts/ariadne_governance_clockwork_tick.py"
     - "scripts/ariadne_orchestrator_preflight.py"
+    - "scripts/ariadne_review_acceptance.py"
     - "scripts/drive_agent_headless.py"
     - "scripts/raisa_ariadne_recovery_preflight.py"
     - "tests/fixtures/ariadne_harness/orchestrator_runtime_state.json"
     - "tests/test_ariadne_antigravity.py"
+    - "tests/test_ariadne_deepcode_runtime_observability.py"
     - "tests/test_ariadne_deepseek_claude.py"
     - "tests/test_ariadne_governance_clockwork_tick.py"
     - "tests/test_ariadne_orchestrator_preflight.py"
+    - "tests/test_ariadne_review_acceptance.py"
     - "tests/test_programme_admission.py"
     - "tests/test_raisa_ariadne_recovery_preflight.py"
 transition_policy:
   manifest_schema_version: "ariadne.programme_gate_transition_manifest.v1"
-  task_class: "g0_to_g1a_gate_transition"
+  task_class: "g0_to_g1a_state_transition"
   from_gate: "G0"
   to_gate: "G1A"
-  transition_status: "gate_transition"
+  transition_status: "complete"
   external_review_record_root: "orchestration/programme/external-reviews"
+  transition_artifact_root: "orchestration/programme/gate-transitions"
   candidate_commit_limit: 1
   fixed_allowed_paths:
     - "AGENTS.md"
@@ -85,6 +207,7 @@ transition_policy:
   forbidden_effect_classes:
     - "dependency_change"
     - "deployment"
+    - "g1b_work"
     - "implementation_change"
     - "integration"
     - "migration_change"

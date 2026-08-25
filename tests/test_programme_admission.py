@@ -16,6 +16,7 @@ from orchestration_harness.programme_admission import (
     ProgrammeAdmissionError,
     ProgrammeDecision,
     evaluate_committed_scope,
+    evaluate_programme_operation_admission,
     evaluate_programme_admission,
     git_change_inventory,
     load_programme_policy,
@@ -45,13 +46,14 @@ def _policy_sandbox(tmp_path: Path) -> Path:
         pa.GATES_PATH,
         pa.RISK_PATH,
         pa.INVENTORY_PATH,
+        pa.G1A_SCOPE_PATH,
         pa.LATCH_PATH,
         pa.AGENTS_PATH,
     ):
         target = root / relative
         target.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(ROOT / relative, target)
-    for relative_text in pa.G0_G01_ALLOWED_PATHS:
+    for relative_text in pa.G0_G03_ALLOWED_PATHS:
         source = ROOT / relative_text
         if not source.is_file():
             continue
@@ -175,7 +177,7 @@ def test_state_and_gate_disagreement_is_rejected(tmp_path: Path) -> None:
     path = root / pa.GATES_PATH
     path.write_text(
         path.read_text(encoding="utf-8").replace(
-                'next_eligible_tranche: "G0.2"',
+                'next_eligible_tranche: "G0.3"',
             'next_eligible_tranche: "G1A"',
             1,
         ),
@@ -199,6 +201,17 @@ def test_duplicate_risk_id_is_rejected(tmp_path: Path) -> None:
     )
 
     with pytest.raises(ProgrammeAdmissionError, match="risk_id_duplicate"):
+        load_programme_policy(root)
+
+
+def test_g1a_parser_inventory_and_allowlist_are_exact(tmp_path: Path) -> None:
+    root = _policy_sandbox(tmp_path)
+    path = root / pa.G1A_SCOPE_PATH
+    scope = yaml.safe_load(path.read_text(encoding="utf-8"))
+    scope["verdict_parsers"][0]["disposition"] = "leave_duplicate_parser"
+    _write_yaml(path, scope)
+
+    with pytest.raises(ProgrammeAdmissionError, match="g1a_parser_inventory_invalid"):
         load_programme_policy(root)
 
 
@@ -338,15 +351,15 @@ def test_forbidden_side_effect_entrypoints_remain_closed(entrypoint: str) -> Non
     )
 
     assert decision.admitted is False
-    assert decision.reason_codes == [f"{entrypoint}_closed_in_g0"]
+    assert decision.reason_codes == [f"{entrypoint}_closed_in_active_profile"]
 
 
 def test_machine_state_does_not_claim_stale_review_acceptance() -> None:
     policy = load_programme_policy(ROOT)
 
     assert policy.state["g0_acceptance"]["status"] == "superseded_revision_required"
-    assert policy.state["g0_2_correction"]["g1a_authorized"] is False
-    assert policy.state["g0_2_correction"]["external_review_status"] in {
+    assert policy.state["g0_3_correction"]["g1a_authorized"] is False
+    assert policy.state["g0_3_correction"]["external_review_status"] in {
         "not_started",
         "pending",
     }
@@ -544,7 +557,7 @@ def _build_transition_repository(tmp_path: Path) -> tuple[Path, dict]:
     branch = "codex/raisa-ariadne-recovery-g0"
     _git(root, "init", "-b", branch)
     _git(root, "config", "user.email", "tests@example.invalid")
-    _git(root, "config", "user.name", "G0.2 Tests")
+    _git(root, "config", "user.name", "G0.3 Tests")
     _git(root, "config", "core.autocrlf", "false")
     (root / "app").mkdir(exist_ok=True)
     (root / "app/main.py").write_text("# unchanged product path\n", encoding="utf-8")
@@ -567,14 +580,17 @@ def _build_transition_repository(tmp_path: Path) -> tuple[Path, dict]:
     state["recovery_baton"]["base_sha"] = protected
     state["recovery_baton"]["protected_baton_sha"] = protected
     state["clockwork_snapshot"]["frozen_sha"] = protected
-    state["g0_2_correction"]["authorized_parent_commit"] = protected
-    state["g0_2_correction"]["status"] = "review_pending"
-    state["g0_2_correction"]["external_review_status"] = "pending"
+    state["g0_3_correction"]["authorized_parent_commit"] = protected
+    state["g0_3_correction"]["reviewed_g0_2_tree"] = _git(root, "rev-parse", f"{protected}^{{tree}}")
+    state["g0_3_correction"]["status"] = "review_pending"
+    state["g0_3_correction"]["external_review_status"] = "pending"
+    state["g0_acceptance"]["external_gate_review"]["reviewed_commit"] = protected
+    state["g0_acceptance"]["external_gate_review"]["reviewed_tree"] = _git(root, "rev-parse", f"{protected}^{{tree}}")
     _write_json(state_path, state)
 
     gates_path = root / pa.GATES_PATH
     gates = yaml.safe_load(gates_path.read_text(encoding="utf-8"))
-    next(row for row in gates["gates"] if row["id"] == "G0.2")[
+    next(row for row in gates["gates"] if row["id"] == "G0.3")[
         "status"
     ] = "review_pending"
     _write_yaml(gates_path, gates)
@@ -600,7 +616,7 @@ def _build_transition_repository(tmp_path: Path) -> tuple[Path, dict]:
     )
     _write_json(latch_path, latch)
     _git(root, "add", "-A")
-    _git(root, "commit", "-m", "G0.2 reviewed candidate")
+    _git(root, "commit", "-m", "G0.3 reviewed candidate")
     reviewed = _git(root, "rev-parse", "HEAD")
     reviewed_tree = _git(root, "rev-parse", f"{reviewed}^{{tree}}")
 
@@ -619,6 +635,7 @@ def _build_transition_repository(tmp_path: Path) -> tuple[Path, dict]:
     review_path = (
         root / pa.TRANSITION_REVIEW_ROOT / f"{transition_id}.json"
     )
+    artifact_path = root / pa.TRANSITION_ARTIFACT_ROOT / f"{transition_id}.json"
     record = {
         "schema_version": "raisa-ariadne.external-g0-review.v1",
         "review_id": transition_id,
@@ -630,31 +647,45 @@ def _build_transition_repository(tmp_path: Path) -> tuple[Path, dict]:
         "reviewer_surface": reviewer_surface,
     }
     _write_json(review_path, record)
+    review_digest = "sha256:" + hashlib.sha256(review_path.read_bytes()).hexdigest()
 
     agents_path = root / pa.AGENTS_PATH
     agents_text = agents_path.read_text(encoding="utf-8")
     agents_path.write_text(
         agents_text.replace(
-            "Gate G0.2 is the only authorised correction; G1A is\nclosed.",
-            "The reviewed state-only G0 to G1A transition is complete; Gate G1A is\nnext eligible but not started.",
+            "Gate G0.3 is the only authorised correction; G1A is\nclosed.",
+            "The reviewed G0 to G1A transition is complete; Gate G1A is active\nfor its bounded typed task only.",
             1,
         ),
         encoding="utf-8",
     )
 
     state = json.loads(state_path.read_text(encoding="utf-8"))
+    state["observed_at"] = "2026-08-25T22:20:00+10:00"
     state["current_gate"] = "G1A"
-    state["current_gate_status"] = "gate_transition"
-    state["active_correction"] = "gate_transition"
-    state["task_selection"]["allowed_task_kinds"] = [pa.TRANSITION_TASK_CLASS]
+    state["current_gate_status"] = "active"
+    state["active_correction"] = "G1A"
+    state["active_profile"] = pa.G1A_ACTIVE_PROFILE
+    state["task_selection"]["allowed_task_kinds"] = [pa.G1A_TASK_CLASS]
     state["task_selection"]["next_eligible_tranche"] = "G1A"
-    state["task_selection"]["next_tranche_started"] = False
     state["task_selection"]["next_tranche_admission_requires_state_transition"] = False
-    state["g0_2_correction"]["status"] = "external_review_passed"
-    state["g0_2_correction"]["external_review_status"] = "pass"
-    state["g0_2_correction"]["g1a_authorized"] = True
+    state["task_selection"]["next_eligibility_condition"] = "bounded_G1A_profile_active_next_tranche_not_started"
+    state["g0_acceptance"]["status"] = "passed"
+    state["g0_acceptance"]["external_gate_review"] = {
+        "verdict": "PASS",
+        "reviewed_commit": reviewed,
+        "reviewed_tree": reviewed_tree,
+        "handover_sha256": review_digest.removeprefix("sha256:"),
+        "finding_count": 0,
+        "g1a_authorized": True,
+    }
+    state["g0_acceptance"]["next_action"] = "begin_bounded_G1A_only"
+    state["g0_3_correction"]["status"] = "external_review_passed"
+    state["g0_3_correction"]["external_review_status"] = "pass"
+    state["g0_3_correction"]["g1a_authorized"] = True
+    state["g0_3_correction"]["next_action"] = "bounded_G1A_profile_active"
     state["gate_transition"] = {
-        "status": "gate_transition",
+        "status": "complete",
         "transition_id": transition_id,
         "from_gate": "G0",
         "to_gate": "G1A",
@@ -669,14 +700,15 @@ def _build_transition_repository(tmp_path: Path) -> tuple[Path, dict]:
     _write_json(state_path, state)
 
     gates = yaml.safe_load(gates_path.read_text(encoding="utf-8"))
+    gates["programme"]["prepared_at"] = "2026-08-25T22:20:00+10:00"
     gates["programme"]["current_gate"] = "G1A"
-    gates["programme"]["current_gate_status"] = "gate_transition"
+    gates["programme"]["current_gate_status"] = "active"
     gates["programme"]["next_eligible_tranche"] = "G1A"
     statuses = {
         "G0": "passed",
         "G0.1": "superseded_revision_required",
-        "G0.2": "external_review_passed",
-        "G1A": "gate_transition_open",
+        "G0.3": "external_review_passed",
+        "G1A": "active",
     }
     for row in gates["gates"]:
         if row["id"] in statuses:
@@ -684,24 +716,19 @@ def _build_transition_repository(tmp_path: Path) -> tuple[Path, dict]:
     _write_yaml(gates_path, gates)
 
     review_relative = review_path.relative_to(root).as_posix()
-    transition_paths = sorted(pa.TRANSITION_FIXED_ALLOWED_PATHS | {review_relative})
+    artifact_relative = artifact_path.relative_to(root).as_posix()
+    transition_paths = sorted(
+        pa.TRANSITION_FIXED_ALLOWED_PATHS | {review_relative, artifact_relative}
+    )
     overlay = yaml.safe_load(overlay_path.read_text(encoding="utf-8"))
-    recovery = overlay["recovery_mode"]
-    recovery["expected_current_gate"] = "G1A"
-    recovery["expected_gate_status"] = "gate_transition"
-    recovery["active_correction"] = "gate_transition"
-    recovery["admitted_task_classes"] = [pa.TRANSITION_TASK_CLASS]
-    recovery["g1a_eligible"] = True
-    overlay["scope_policy"]["authorized_parent_commit"] = reviewed
-    overlay["scope_policy"]["allowed_paths"] = transition_paths
+    overlay["active_profile"] = pa.G1A_ACTIVE_PROFILE
     _write_yaml(overlay_path, overlay)
     latch = json.loads(latch_path.read_text(encoding="utf-8"))
+    latch["authority_source"] = "Yuri's external Gate G0 PASS and typed G0 transition activate bounded G1A only."
     latch["checkpoint"]["settings_fingerprint"] = settings_fingerprint(
         root / "orchestration/harness_settings"
     )
     _write_json(latch_path, latch)
-    _git(root, "add", *transition_paths)
-    _git(root, "commit", "-m", "state-only G0 to G1A transition")
 
     manifest = {
         "schema_version": pa.TRANSITION_MANIFEST_VERSION,
@@ -712,8 +739,7 @@ def _build_transition_repository(tmp_path: Path) -> tuple[Path, dict]:
         "reviewed_tree": reviewed_tree,
         "transition_parent": reviewed,
         "external_review_verdict": "PASS",
-        "external_review_record_sha256": "sha256:"
-        + hashlib.sha256(review_path.read_bytes()).hexdigest(),
+        "external_review_record_sha256": review_digest,
         "blocking_finding_count": 0,
         "reviewer_surface": reviewer_surface,
         "state_digest_before": before_policy.state_digest,
@@ -721,6 +747,30 @@ def _build_transition_repository(tmp_path: Path) -> tuple[Path, dict]:
         "allowed_transition_paths": transition_paths,
         "forbidden_effect_classes": sorted(pa.TRANSITION_FORBIDDEN_EFFECTS),
     }
+    after_policy = load_programme_policy(root)
+    pointer_map = pa._transition_semantic_pointer_map(root, reviewed)
+    manifest_digest = "sha256:" + hashlib.sha256(
+        json.dumps(manifest, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    ).hexdigest()
+    artifact = {
+        "schema_version": "raisa-ariadne.g0-to-g1a-transition.v1",
+        "transition_id": transition_id,
+        "recorded_at": "2026-08-25T22:20:00+10:00",
+        "transition_manifest": manifest,
+        "transition_manifest_sha256": manifest_digest,
+        "reviewed_commit": reviewed,
+        "reviewed_tree": reviewed_tree,
+        "external_review_record_sha256": review_digest,
+        "state_digest_before": before_policy.state_digest,
+        "state_digest_after": after_policy.state_digest,
+        "policy_digest_before": before_policy.policy_digest,
+        "policy_digest_after": after_policy.policy_digest,
+        "changed_semantic_pointers": pointer_map,
+        "scope_result": {"admitted": True, "phase": "development"},
+    }
+    _write_json(artifact_path, artifact)
+    _git(root, "add", *transition_paths)
+    _git(root, "commit", "-m", "operational G0 to G1A transition")
     return root, manifest
 
 
@@ -734,6 +784,21 @@ def test_valid_synthetic_state_only_transition_is_admitted(tmp_path: Path) -> No
     assert decision.admitted is True
     assert decision.reason_codes == []
     assert decision.candidate_commit_count == 1
+
+    policy = load_programme_policy(root)
+    g1a_manifest = build_task_manifest(root)
+    g1a_decision = evaluate_programme_admission(
+        repo_root=root, manifest=g1a_manifest, entrypoint="task_selection"
+    )
+    assert policy.state["current_gate"] == "G1A"
+    assert policy.state["current_gate_status"] == "active"
+    assert policy.state["active_profile"] == pa.G1A_ACTIVE_PROFILE
+    assert policy.state["feature_work_eligible"] is False
+    assert policy.state["product_work_eligible"] is False
+    assert policy.state["task_selection"]["next_tranche_started"] is False
+    assert g1a_manifest["task_class"] == pa.G1A_TASK_CLASS
+    assert set(g1a_manifest["allowed_path_roots"]) == pa.G1A_ALLOWED_PATHS
+    assert g1a_decision.admitted is True
 
 
 @pytest.mark.parametrize(
@@ -775,8 +840,191 @@ def test_transition_rejects_changed_implementation_path(tmp_path: Path) -> None:
     )
 
     assert decision.admitted is False
-    assert "scope_tranche_path_outside_policy" in decision.reason_codes
+    assert "scope_tranche_path_outside_task_manifest" in decision.reason_codes
     assert "transition_python_implementation_forbidden" in decision.reason_codes
+
+
+@pytest.fixture(scope="module")
+def transition_template(tmp_path_factory: pytest.TempPathFactory) -> tuple[Path, dict]:
+    return _build_transition_repository(tmp_path_factory.mktemp("g03-transition-template"))
+
+
+def _transition_copy(
+    transition_template: tuple[Path, dict], tmp_path: Path
+) -> tuple[Path, dict]:
+    source, manifest = transition_template
+    root = tmp_path / "transition-copy"
+    shutil.copytree(source, root)
+    return root, json.loads(json.dumps(manifest))
+
+
+def _transition_decision(root: Path, manifest: dict):
+    return evaluate_committed_scope(
+        repo_root=root, manifest=manifest, phase="pre-push"
+    )
+
+
+@pytest.mark.parametrize("case", ["safety_ref", "frozen_sha"])
+def test_transition_rejects_safety_ref_or_frozen_sha_drift(
+    transition_template: tuple[Path, dict], tmp_path: Path, case: str
+) -> None:
+    root, manifest = _transition_copy(transition_template, tmp_path)
+    if case == "safety_ref":
+        _git(
+            root,
+            "branch",
+            "-f",
+            "safety/ariadne-clockwork-pre-g0-20260825",
+            "HEAD",
+        )
+    else:
+        path = root / pa.STATE_PATH
+        state = json.loads(path.read_text(encoding="utf-8"))
+        state["clockwork_snapshot"]["frozen_sha"] = _git(root, "rev-parse", "HEAD")
+        _write_json(path, state)
+    assert _transition_decision(root, manifest).admitted is False
+
+
+def test_transition_rejects_preservation_artifact_path_or_digest_drift(
+    transition_template: tuple[Path, dict], tmp_path: Path
+) -> None:
+    root, manifest = _transition_copy(transition_template, tmp_path)
+    path = root / pa.STATE_PATH
+    state = json.loads(path.read_text(encoding="utf-8"))
+    state["clockwork_snapshot"]["git_bundle"]["sha256"] = "0" * 64
+    _write_json(path, state)
+    assert _transition_decision(root, manifest).admitted is False
+
+
+def test_transition_rejects_protected_ref_drift(
+    transition_template: tuple[Path, dict], tmp_path: Path
+) -> None:
+    root, manifest = _transition_copy(transition_template, tmp_path)
+    _git(root, "branch", "-f", "master", "HEAD")
+    decision = _transition_decision(root, manifest)
+    assert decision.admitted is False
+    assert "transition_protected_refs_changed" in decision.reason_codes
+
+
+@pytest.mark.parametrize(
+    "section,field,value",
+    [
+        ("repository_inventory", "pre_g0_remote_branch_count", 136),
+        ("global_checks", "global_gate", "green"),
+        ("actions_performed", "protected_ref_movements", 1),
+    ],
+)
+def test_transition_rejects_preserved_state_inventory_global_red_or_action_drift(
+    transition_template: tuple[Path, dict],
+    tmp_path: Path,
+    section: str,
+    field: str,
+    value: object,
+) -> None:
+    root, manifest = _transition_copy(transition_template, tmp_path)
+    path = root / pa.STATE_PATH
+    state = json.loads(path.read_text(encoding="utf-8"))
+    state[section][field] = value
+    _write_json(path, state)
+    assert _transition_decision(root, manifest).admitted is False
+
+
+def test_transition_rejects_agents_body_change(
+    transition_template: tuple[Path, dict], tmp_path: Path
+) -> None:
+    root, manifest = _transition_copy(transition_template, tmp_path)
+    with (root / pa.AGENTS_PATH).open("a", encoding="utf-8") as stream:
+        stream.write("\nunauthorised body drift\n")
+    decision = _transition_decision(root, manifest)
+    assert decision.admitted is False
+    assert "transition_agents_body_changed" in decision.reason_codes
+
+
+@pytest.mark.parametrize("field", ["objective", "source_head", "status", "next_executable_stage"])
+def test_transition_rejects_latch_objective_source_status_or_next_drift(
+    transition_template: tuple[Path, dict], tmp_path: Path, field: str
+) -> None:
+    root, manifest = _transition_copy(transition_template, tmp_path)
+    path = root / pa.LATCH_PATH
+    latch = json.loads(path.read_text(encoding="utf-8"))
+    if field == "next_executable_stage":
+        latch["checkpoint"][field] = "unauthorised"
+    elif field == "status":
+        latch[field] = "paused"
+    elif field == "source_head":
+        latch[field] = "0" * 40
+    else:
+        latch[field] = "unauthorised objective"
+    _write_json(path, latch)
+    assert _transition_decision(root, manifest).admitted is False
+
+
+def test_transition_rejects_unrelated_gate_or_later_status_change(
+    transition_template: tuple[Path, dict], tmp_path: Path
+) -> None:
+    root, manifest = _transition_copy(transition_template, tmp_path)
+    path = root / pa.GATES_PATH
+    gates = yaml.safe_load(path.read_text(encoding="utf-8"))
+    next(row for row in gates["gates"] if row["id"] == "G1B")["status"] = "active"
+    _write_yaml(path, gates)
+    assert _transition_decision(root, manifest).admitted is False
+
+
+@pytest.mark.parametrize("case", ["path", "effect"])
+def test_transition_rejects_widened_g1a_path_or_effect(
+    transition_template: tuple[Path, dict], tmp_path: Path, case: str
+) -> None:
+    root, manifest = _transition_copy(transition_template, tmp_path)
+    path = root / pa.OVERLAY_PATH
+    overlay = yaml.safe_load(path.read_text(encoding="utf-8"))
+    profile = overlay["profiles"][pa.G1A_ACTIVE_PROFILE]
+    profile["allowed_paths" if case == "path" else "allowed_effects"].append(
+        "app/main.py" if case == "path" else "product_behavior_change"
+    )
+    _write_yaml(path, overlay)
+    assert _transition_decision(root, manifest).admitted is False
+
+
+def test_transition_rejects_missing_transition_artifact(
+    transition_template: tuple[Path, dict], tmp_path: Path
+) -> None:
+    root, manifest = _transition_copy(transition_template, tmp_path)
+    artifact = root / pa.TRANSITION_ARTIFACT_ROOT / f"{manifest['transition_id']}.json"
+    artifact.unlink()
+    decision = _transition_decision(root, manifest)
+    assert decision.admitted is False
+    assert "transition_artifact_missing" in decision.reason_codes
+
+
+def test_transition_rejects_incorrect_semantic_pointer_list(
+    transition_template: tuple[Path, dict], tmp_path: Path
+) -> None:
+    root, manifest = _transition_copy(transition_template, tmp_path)
+    path = root / pa.TRANSITION_ARTIFACT_ROOT / f"{manifest['transition_id']}.json"
+    artifact = json.loads(path.read_text(encoding="utf-8"))
+    artifact["changed_semantic_pointers"][pa.STATE_PATH.as_posix()] = ["/observed_at"]
+    _write_json(path, artifact)
+    decision = _transition_decision(root, manifest)
+    assert decision.admitted is False
+    assert "transition_artifact_binding_mismatch" in decision.reason_codes
+
+
+def test_commit_and_push_require_one_combined_admission_and_scope_decision() -> None:
+    manifest = _manifest()
+    manifest["allowed_path_roots"] = [pa.STATE_PATH.as_posix()]
+    direct = evaluate_programme_admission(
+        repo_root=ROOT, manifest=manifest, entrypoint="task_branch_commit"
+    )
+    combined = evaluate_programme_operation_admission(
+        repo_root=ROOT,
+        manifest=manifest,
+        entrypoint="task_branch_commit",
+        phase="development",
+    )
+    assert direct.admitted is False
+    assert direct.reason_codes == ["combined_operation_admission_required"]
+    assert combined.admitted is False
+    assert "scope_tranche_path_outside_task_manifest" in combined.reason_codes
 
 
 def test_direct_antigravity_runner_rechecks_admission_before_forged_receipt(

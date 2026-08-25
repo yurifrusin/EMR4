@@ -1,7 +1,7 @@
 schema_version: "raisa-ariadne.programme-gates.v1"
 programme:
   name: "Raisa Medical Office and Ariadne Recovery & Convergence"
-  prepared_at: "2026-08-25T20:37:14+10:00"
+  prepared_at: "2026-08-25T22:10:00+10:00"
   repository: "yurifrusin/EMR4"
   observed_public_master: "2e34bdad732fdab32fbf778280b3d3c70d66d602"
   programme_mode: "recovery"
@@ -10,7 +10,7 @@ programme:
   feature_work_eligible: false
   clockwork_remote_visibility: "source_branch_aligned_with_origin"
   clockwork_local_state: "preserved_exactly_at_03e6860394c39086ec1ffb3f2457acc5f7c8b5f9"
-  next_eligible_tranche: "G0.2"
+  next_eligible_tranche: "G0.3"
 
 global_hard_stops:
   - "critical_or_high_security_finding"
@@ -55,7 +55,7 @@ protected_invariants:
 gates:
   - id: "G0"
     name: "Preserve, Freeze and Establish Truth"
-    status: "revision_required_g0_2"
+    status: "revision_required_g0_3"
     prerequisites: []
     programme_mode: "recovery"
     allowed_work:
@@ -90,7 +90,7 @@ gates:
       - "branch_pr_inventory_complete_or_reproducible"
       - "out_of_gate_work_blocked"
       - "independent_review_non_negative"
-    next_gate: "G0.2"
+    next_gate: "G0.3"
 
   - id: "G0.1"
     name: "Correct Gate Enforcement and Authority Precedence"
@@ -127,7 +127,7 @@ gates:
 
   - id: "G0.2"
     name: "Repair Transition Seam, Rename-Safe Scope and Side-Effect Boundaries"
-    status: "review_pending"
+    status: "superseded_revision_required"
     prerequisites: ["G0_1_review_revision_required"]
     programme_mode: "recovery"
     allowed_work:
@@ -152,6 +152,41 @@ gates:
       - "invalid_transition_bindings_are_rejected"
       - "full_and_tranche_scope_are_rename_and_mode_safe"
       - "direct_side_effect_runner_calls_recheck_admission"
+      - "post_push_origin_matches_exact_candidate"
+      - "candidate_state_is_review_pending"
+    next_gate: "external_G0_review"
+
+  - id: "G0.3"
+    name: "Activate an Operational G1A Transition Seam"
+    status: "review_pending"
+    prerequisites: ["G0_2_review_revision_required"]
+    programme_mode: "recovery"
+    allowed_work:
+      - "pre_reviewed_data_driven_gate_profiles"
+      - "operational_g0_to_g1a_state_transition"
+      - "canonical_combined_commit_push_admission"
+      - "semantic_delta_contract"
+      - "exact_g1a_scope_inventory"
+      - "adversarial_transition_tests"
+      - "review_pending_recovery_branch_publication"
+    prohibited_work:
+      - "g1a_implementation"
+      - "g1b"
+      - "product_behavior_change"
+      - "migration_change"
+      - "dependency_change"
+      - "provider_call"
+      - "integration"
+      - "protected_ref_movement"
+      - "deployment_or_pages"
+      - "real_data"
+    exit_checks:
+      - "g0_3_candidate_remains_fail_closed"
+      - "transition_lands_directly_in_operational_bounded_g1a"
+      - "transition_semantic_delta_is_exact"
+      - "transition_artifacts_are_persisted_and_digest_bound"
+      - "commit_and_push_use_one_combined_admission_decision"
+      - "g1a_scope_is_pre_reviewed_and_cannot_widen"
       - "post_push_origin_matches_exact_candidate"
       - "candidate_state_is_review_pending"
     next_gate: "external_G0_review"
