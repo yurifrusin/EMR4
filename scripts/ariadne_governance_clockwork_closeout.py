@@ -396,10 +396,16 @@ def run_bound_closeout(
     intent_raw: Path,
     mode: str,
     runner: Runner = subprocess.run,
+    programme_task_manifest: Path | None = None,
 ) -> dict[str, Any]:
     """Run the fixed closeout sequence; rehearsal is the only occupied use here."""
 
     repo_root = repo_root.resolve()
+    require_programme_admission(
+        repo_root=repo_root,
+        manifest_path=programme_task_manifest,
+        entrypoint="clockwork_closeout_mutation",
+    )
     intent_path = _intent_path(repo_root, intent_raw)
     intent = _load(intent_path)
     if intent.get("schema_version") != SEMANTIC_TICK_INTENT_VERSION:
@@ -419,15 +425,20 @@ def run_bound_closeout(
     if mode not in {"rehearse", "publish"}:
         raise CloseoutDriverRejection("driver_mode_invalid")
     relative_intent = intent_path.relative_to(repo_root).as_posix()
+    tick_command = [
+        str(interpreter),
+        "-m",
+        "scripts.ariadne_governance_clockwork_tick",
+        tick_flag,
+        "--intent",
+        relative_intent,
+    ]
+    if programme_task_manifest is not None:
+        tick_command.extend(
+            ["--programme-task-manifest", str(programme_task_manifest.resolve())]
+        )
     tick_completed = _run_text(
-        [
-            str(interpreter),
-            "-m",
-            "scripts.ariadne_governance_clockwork_tick",
-            tick_flag,
-            "--intent",
-            relative_intent,
-        ],
+        tick_command,
         repo_root=repo_root,
         runner=runner,
     )
@@ -549,6 +560,7 @@ def main(argv: list[str] | None = None) -> int:
         ROOT,
         intent_raw=arguments.intent,
         mode="rehearse" if arguments.rehearse else "publish",
+        programme_task_manifest=arguments.programme_task_manifest,
     )
     print(json.dumps(result, indent=2, ensure_ascii=False))
     return 0

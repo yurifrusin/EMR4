@@ -72,7 +72,10 @@ def test_machine_state_freezes_authority_and_forbidden_actions() -> None:
     assert state["programme_mode"] == "recovery"
     assert state["current_gate"] == "G0"
     assert state["current_gate_status"] == "revision_required"
+    assert state["active_correction"] == "G0.2"
     assert state["feature_work_eligible"] is False
+    assert state["g0_2_correction"]["status"] in {"in_progress", "review_pending"}
+    assert state["g0_2_correction"]["g1a_authorized"] is False
     assert state["recovery_baton"]["base_sha"] == (
         "03e6860394c39086ec1ffb3f2457acc5f7c8b5f9"
     )

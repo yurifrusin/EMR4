@@ -15,6 +15,14 @@ from scripts.ariadne_deepseek_claude import (
 )
 
 
+@pytest.fixture(autouse=True)
+def _admit_direct_worker_unit_surface(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setattr(
+        "scripts.ariadne_deepseek_claude.require_programme_admission",
+        lambda **_kwargs: None,
+    )
+
+
 def test_command_uses_bare_headless_mode_and_no_session_persistence():
     command = build_command(packet="bounded", model="deepseek-v4-flash", effort="high")
 

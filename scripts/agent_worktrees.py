@@ -416,6 +416,17 @@ def repo_root_for_cwd(cwd: Path | None = None) -> Path:
     return Path(result.stdout.strip()).resolve()
 
 
+def _require_command_admission(
+    args: argparse.Namespace, *, entrypoint: str
+) -> None:
+    """Re-evaluate recovery admission at each mutating command boundary."""
+    require_programme_admission(
+        repo_root=REPO_ROOT,
+        manifest_path=getattr(args, "programme_task_manifest", None),
+        entrypoint=entrypoint,
+    )
+
+
 def inbox_root(repo_root: Path = REPO_ROOT) -> Path:
     return repo_root / "orchestration" / "agent_inbox"
 
@@ -687,6 +698,7 @@ def publish_submit_alert(
 
 
 def setup(args: argparse.Namespace) -> None:
+    _require_command_admission(args, entrypoint="integration")
     require_clean()
 
     worktree_root = Path(args.worktree_root).resolve()
@@ -717,6 +729,7 @@ def setup(args: argparse.Namespace) -> None:
 
 
 def handoff(args: argparse.Namespace) -> None:
+    _require_command_admission(args, entrypoint="protected_ref_operation")
     if args.commit_message:
         commit_checkpoint(args.commit_message)
 
@@ -744,6 +757,7 @@ def handoff(args: argparse.Namespace) -> None:
 
 
 def submit(args: argparse.Namespace) -> None:
+    _require_command_admission(args, entrypoint="integration")
     repo = repo_root_for_cwd()
     branch = git_stdout(["branch", "--show-current"], cwd=repo)
     if not branch:
@@ -804,6 +818,7 @@ def submit(args: argparse.Namespace) -> None:
 
 
 def dispatch(args: argparse.Namespace) -> None:
+    _require_command_admission(args, entrypoint="worker_dispatch")
     created = git_stdout(["rev-parse", "--short", "HEAD"])
     task_id = args.task_id or f"{args.agent}-{slugify(args.title)}"
     branch = args.branch or AGENTS[args.agent]
@@ -835,6 +850,7 @@ def dispatch(args: argparse.Namespace) -> None:
 
 
 def suggest_task(args: argparse.Namespace) -> None:
+    _require_command_admission(args, entrypoint="worker_dispatch")
     repo = repo_root_for_cwd(Path.cwd().resolve())
     created = local_timestamp()
     head = git_stdout(["rev-parse", "--short", "HEAD"], cwd=repo)
@@ -889,6 +905,7 @@ _Codex/orchestrator to fill in: accepted, deferred, merged into an active sprint
 
 
 def submit_plan(args: argparse.Namespace) -> None:
+    _require_command_admission(args, entrypoint="worker_dispatch")
     repo = repo_root_for_cwd(Path.cwd().resolve())
     created = local_timestamp()
     head = git_stdout(["rev-parse", "--short", "HEAD"], cwd=repo)
@@ -953,6 +970,7 @@ def brief(args: argparse.Namespace) -> None:
 
 
 def claim(args: argparse.Namespace) -> None:
+    _require_command_admission(args, entrypoint="worker_dispatch")
     files = task_files(args.agent)
     matches = [path for path in files if path.stem == args.task or path.name == args.task]
     if not matches:
@@ -962,6 +980,7 @@ def claim(args: argparse.Namespace) -> None:
 
 
 def sync(args: argparse.Namespace) -> None:
+    _require_command_admission(args, entrypoint="integration")
     repo = Path.cwd().resolve()
     require_clean(repo)
 
@@ -980,6 +999,7 @@ def sync(args: argparse.Namespace) -> None:
 
 
 def realign(args: argparse.Namespace) -> None:
+    _require_command_admission(args, entrypoint="integration")
     repo = Path.cwd().resolve()
     require_clean(repo)
 
@@ -1014,6 +1034,7 @@ def realign(args: argparse.Namespace) -> None:
 
 
 def handin(args: argparse.Namespace) -> None:
+    _require_command_admission(args, entrypoint="integration")
     args.fetch = True
     sync(args)
     if args.no_brief:
@@ -1100,6 +1121,7 @@ def audit(args: argparse.Namespace) -> None:
 
 
 def record_integration(args: argparse.Namespace) -> None:
+    _require_command_admission(args, entrypoint="integration")
     commit_ref = args.integration_commit or "HEAD"
     resolved = git_stdout(["rev-parse", "--short", commit_ref], check=False)
     commit = resolved or commit_ref
@@ -1116,6 +1138,7 @@ def record_integration(args: argparse.Namespace) -> None:
 
 
 def retire_stale(args: argparse.Namespace) -> None:
+    _require_command_admission(args, entrypoint="integration")
     candidates = stale_worktree_candidates()
     if not candidates:
         print("[ok] no stale disposable worktrees found")

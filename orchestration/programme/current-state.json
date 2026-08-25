@@ -1,10 +1,11 @@
 {
   "schema_version": "raisa-ariadne.programme-state.v1",
-  "observed_at": "2026-08-25T18:27:17+10:00",
+  "observed_at": "2026-08-25T20:37:14+10:00",
   "programme_name": "Raisa Medical Office and Ariadne Recovery & Convergence",
   "programme_mode": "recovery",
   "current_gate": "G0",
   "current_gate_status": "revision_required",
+  "active_correction": "G0.2",
   "machine_authoritative": true,
   "feature_work_eligible": false,
   "authority": {
@@ -247,7 +248,7 @@
   "task_selection": {
     "autonomous_selection_enabled": false,
     "allowed_task_kinds": [
-      "g0_1_controller_maintenance"
+      "g0_2_controller_maintenance"
     ],
     "blocked_task_kinds": [
       "product_feature",
@@ -259,24 +260,24 @@
     ],
     "admission_command": "python scripts/raisa_ariadne_recovery_preflight.py --task-manifest <path> --phase development",
     "out_of_gate_result": "blocked",
-    "next_eligible_tranche": "G0.1",
+    "next_eligible_tranche": "G0.2",
     "next_eligible_now": true,
-    "next_tranche_started": false,
+    "next_tranche_started": true,
     "next_tranche_admission_requires_state_transition": true,
-    "next_eligibility_condition": "external_G0_review_requires_G0_1_correction"
+    "next_eligibility_condition": "external_G0_review_requires_G0_2_correction"
   },
   "parallelism_efficacy": {
     "deepseek": {
       "disposition": "declined",
-      "rationale": "external/provider lane forbidden in G0 and its last native startup proof was not accepted"
+      "rationale": "external/provider lane forbidden in G0.2 and the transition/scope repair is a tightly coupled controller invariant"
     },
     "gemini": {
       "disposition": "declined",
-      "rationale": "live external provider call forbidden in G0"
+      "rationale": "live external provider call forbidden in G0.2; independence is reserved for the later external review"
     },
     "native_subagent": {
       "disposition": "declined",
-      "rationale": "G0.1 is a tightly coupled serial admission/latch correction; independence is preserved for the external G0 review after the pushed candidate"
+      "rationale": "G0.2 is a tightly coupled serial admission/scope/boundary correction and current execution policy does not authorise delegation"
     }
   },
   "actions_performed": {
@@ -311,10 +312,10 @@
     },
     "external_gate_review": {
       "verdict": "REVISION_REQUIRED",
-      "reviewed_commit": "c720aaa306c449faae879bf9e6192c72b6c3c6a4",
-      "reviewed_tree": "c304850067dfe92a02fdb612f2f2155fe1e60551",
-      "handover_sha256": "afbcd1e4d821588f17bc2d6b5351561b3b933fcba9872b2f0b8a039dfde4ae03",
-      "finding_count": 4,
+      "reviewed_commit": "087522d7b9cf6d5a26056412230f2513530aab1f",
+      "reviewed_tree": "a84b040d8146a2ed5bfbddaff3531768801aa3be",
+      "handover_sha256": "a0bbed2d8f090717e03442ff0c5917c749cf6a6f5ad300867c0b701ac0c2a719",
+      "finding_count": 2,
       "g1a_authorized": false
     },
     "g0_checks": {
@@ -336,8 +337,18 @@
     "authorized_parent_commit": "c720aaa306c449faae879bf9e6192c72b6c3c6a4",
     "reviewed_g0_tree": "c304850067dfe92a02fdb612f2f2155fe1e60551",
     "candidate_commit_limit": 1,
+    "external_review_status": "revision_required",
+    "g1a_authorized": false,
+    "next_action": "superseded_by_G0_2_revision_required"
+  },
+  "g0_2_correction": {
+    "status": "review_pending",
+    "authorized_parent_commit": "087522d7b9cf6d5a26056412230f2513530aab1f",
+    "reviewed_g0_1_tree": "a84b040d8146a2ed5bfbddaff3531768801aa3be",
+    "candidate_commit_limit": 1,
     "external_review_status": "pending",
     "g1a_authorized": false,
-    "next_action": "external_G0_review_exact_candidate_then_separate_gate_transition_if_pass"
-  }
+    "next_action": "external_G0_review_only"
+  },
+  "gate_transition": null
 }

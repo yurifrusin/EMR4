@@ -1,7 +1,7 @@
 # Raisa Medical Office and Ariadne Recovery & Convergence Programme
 
 Status: controlling recovery programme
-Prepared: 2026-08-25T16:21:42+10:00
+Prepared: 2026-08-25T20:00:26+10:00
 Repository: `yurifrusin/EMR4`
 Machine authority: `orchestration/programme/current-state.json`
 Gate authority: `orchestration/programme/gates.yaml`
@@ -194,8 +194,34 @@ diverging embedded copy.
 
 ## Immediate sequence
 
-The earlier G0 acceptance was superseded by an external `REVISION_REQUIRED`
-decision. G0.1 is the only active correction gate. It must publish one
+The G0.1 candidate was superseded by a second external `REVISION_REQUIRED`
+decision. G0.2 is the only active correction gate. It must publish one
 `review_pending` candidate and then stop for external G0 review. G1A remains
-closed until a later, separate gate-transition commit; this document does not
-start or execute G1A.
+closed until a later, separate state-only gate-transition commit.
+
+G0.2 pre-reviews that transition seam. A typed transition manifest must bind the
+reviewed commit and tree, immutable external PASS record, zero blocking
+findings, before-state and before-policy digests, exact one-commit parentage and
+a tiny governance-only path set. The same admission code must reject product,
+implementation, migration, dependency, provider, integration, deployment and
+protected-ref effects. The controller is an application-level interlock; it is
+not an operating-system security boundary against a principal who can execute
+arbitrary shell, Git or Python commands.
+
+The closed transition manifest schema is
+`ariadne.programme_gate_transition_manifest.v1`. Its exact fields are
+`schema_version`, `transition_id`, `from_gate`, `to_gate`, `reviewed_commit`,
+`reviewed_tree`, `transition_parent`, `external_review_verdict`,
+`external_review_record_sha256`, `blocking_finding_count`, `reviewer_surface`,
+`state_digest_before`, `policy_digest_before`, `allowed_transition_paths` and
+`forbidden_effect_classes`. The external review record is a strict newly added
+JSON object under `orchestration/programme/external-reviews/`; its bytes are
+SHA-256 bound by the manifest.
+
+Committed, staged and unstaged scope uses NUL-delimited
+`git diff --raw -z --no-renames --abbrev=40`. The controller parses status,
+path, old mode and new mode, checks both the frozen-base and tranche ranges, and
+rejects paths outside their respective allowlists, symlinks, gitlinks, type
+changes and unapproved executable or mode changes. Provider, clockwork and
+worktree command functions re-run programme admission inside the callable
+side-effect boundary. An earlier orchestrator receipt remains evidence only.

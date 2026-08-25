@@ -108,8 +108,19 @@ def deepseek_environment(
 
 
 def run_worker(
-    *, packet_path: Path, cwd: Path, output_path: Path, model: str, effort: str
+    *,
+    packet_path: Path,
+    cwd: Path,
+    output_path: Path,
+    model: str,
+    effort: str,
+    programme_task_manifest: Path | None = None,
 ) -> dict:
+    require_programme_admission(
+        repo_root=REPO_ROOT,
+        manifest_path=programme_task_manifest,
+        entrypoint="provider_invocation",
+    )
     packet = packet_path.read_text(encoding="utf-8")
     if not packet.strip():
         raise ValueError("worker packet must not be empty")
@@ -190,6 +201,7 @@ def main() -> int:
             output_path=args.output.resolve(),
             model=args.model,
             effort=args.effort,
+            programme_task_manifest=args.programme_task_manifest,
         )
     except (OSError, ValueError, RuntimeError, json.JSONDecodeError) as error:
         print(f"DeepSeek Claude transport failed: {error}", file=sys.stderr)

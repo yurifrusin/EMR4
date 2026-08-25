@@ -8,6 +8,13 @@ from scripts import ariadne_antigravity
 from scripts.ariadne_antigravity import WorktreeState, build_command
 
 
+@pytest.fixture(autouse=True)
+def _admit_direct_worker_unit_surface(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setattr(
+        ariadne_antigravity, "require_programme_admission", lambda **_kwargs: None
+    )
+
+
 def _state(branch: str = "antigravity/bounded") -> WorktreeState:
     return WorktreeState(
         root=Path("C:/worktrees/bounded"),

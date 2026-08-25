@@ -1,4 +1,4 @@
-"""Read-only, strict Gate G0/G0.1 recovery and committed-scope preflight."""
+"""Read-only, strict Gate G0 correction/transition committed-scope preflight."""
 
 from __future__ import annotations
 
@@ -26,6 +26,7 @@ from orchestration_harness.programme_admission import (
     admission_payload,
     evaluate_committed_scope,
     evaluate_programme_admission,
+    git_change_inventory,
     load_programme_policy,
     strict_json_object,
 )
@@ -159,14 +160,13 @@ def _alembic_heads(repo_root: Path) -> list[str]:
 
 
 def _changed_tracked_paths(repo_root: Path) -> set[str]:
-    paths: set[str] = set()
-    for args in (("diff", "--name-only"), ("diff", "--cached", "--name-only")):
-        paths.update(
-            line.replace("\\", "/")
-            for line in _run_git(repo_root, *args).splitlines()
-            if line
+    return {
+        change.path
+        for change in (
+            *git_change_inventory(repo_root),
+            *git_change_inventory(repo_root, "--cached"),
         )
-    return paths
+    }
 
 
 def _risk_ids(repo_root: Path) -> set[str]:
@@ -184,16 +184,16 @@ def build_task_manifest(
         "task_branch_push",
     ),
 ) -> dict[str, Any]:
-    """Build the current typed G0.1 manifest without persisting an authority token."""
+    """Build the current typed G0.2 manifest without persisting an authority token."""
     root = repo_root.resolve()
     policy = load_programme_policy(root)
     return {
         "schema_version": TASK_MANIFEST_VERSION,
-        "task_id": "raisa-ariadne-g0-1-gate-enforcement-correction",
+        "task_id": "raisa-ariadne-g0-2-transition-scope-boundary-correction",
         "task_class": ADMITTED_TASK_CLASS,
         "programme_gate": ADMITTED_PROGRAMME_GATE,
-        "objective": "Correct Gate G0 enforcement and authority precedence only; stop before G1A.",
-        "base_commit": policy.state["g0_1_correction"]["authorized_parent_commit"],
+        "objective": "Repair the G0 transition seam, rename-safe scope and side-effect boundaries only; stop before G1A.",
+        "base_commit": policy.state["g0_2_correction"]["authorized_parent_commit"],
         "candidate_or_current_head": _run_git(root, "rev-parse", "HEAD"),
         "allowed_path_roots": sorted(policy.allowed_paths),
         "intended_side_effect_classes": list(intended_effects),
@@ -323,7 +323,7 @@ def build_report(
         Check(
             "programme_admission",
             admission.admitted,
-            "typed G0.1 maintenance task admitted" if admission.admitted else "typed programme admission denied",
+            "typed correction or state-only transition admitted" if admission.admitted else "typed programme admission denied",
             admission_payload(admission),
         ),
         Check(
@@ -344,10 +344,13 @@ def build_report(
         "programme_mode": policy.state["programme_mode"],
         "current_gate": policy.state["current_gate"],
         "current_gate_status": policy.state["current_gate_status"],
-        "active_correction": ADMITTED_PROGRAMME_GATE,
+        "active_correction": policy.state["active_correction"],
         "requested_entrypoint": entrypoint,
         "feature_work_eligible": False,
-        "g1a_authorized": False,
+        "g1a_authorized": bool(
+            policy.state.get("gate_transition")
+            and policy.state["gate_transition"].get("g1a_authorized") is True
+        ),
         "global_gate": policy.state["global_checks"]["global_gate"],
         "failed_checks": failed,
         "checks": [asdict(check) for check in checks],
@@ -358,7 +361,7 @@ def _render_human(report: dict[str, Any]) -> str:
     lines = [
         f"Raisa/Ariadne recovery preflight: {report['status'].upper()}",
         f"phase={report.get('phase')} mode={report.get('programme_mode')} gate={report.get('current_gate')} active_correction={report.get('active_correction')}",
-        "feature_work_eligible=false g1a_authorized=false",
+        f"feature_work_eligible=false g1a_authorized={str(bool(report.get('g1a_authorized'))).lower()}",
     ]
     for check in report.get("checks", []):
         lines.append(f"[{'PASS' if check['passed'] else 'BLOCK'}] {check['check_id']}: {check['summary']}")

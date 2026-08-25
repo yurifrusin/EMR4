@@ -347,7 +347,13 @@ def run_worker(
     os_sandbox: bool,
     structured_decision: bool = True,
     command_manifest_path: Path | None = None,
+    programme_task_manifest: Path | None = None,
 ) -> dict:
+    require_programme_admission(
+        repo_root=REPO_ROOT,
+        manifest_path=programme_task_manifest,
+        entrypoint="provider_invocation",
+    )
     orchestrator_receipt_sha256 = admit_orchestrator_receipt(orchestrator_receipt_path)
     if command_manifest_path is not None and not structured_decision:
         raise ValueError("command manifests require structured verifier decisions")
@@ -607,6 +613,7 @@ def main() -> int:
                 if args.command_manifest is not None
                 else None
             ),
+            programme_task_manifest=args.programme_task_manifest,
         )
     except (OSError, ValueError, RuntimeError) as error:
         print(f"Antigravity verifier failed: {error}", file=sys.stderr)
