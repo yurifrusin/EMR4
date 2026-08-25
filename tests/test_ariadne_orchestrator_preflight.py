@@ -589,7 +589,7 @@ def test_hard_event_without_source_policy_fails_closed(tmp_path: Path):
     assert "rehydration_source_policy_missing:pre_push" in receipt["reasons"]
 
 
-def test_typed_serial_intent_materializes_one_passing_existing_receipt(
+def test_typed_serial_intent_fails_closed_for_pre_recovery_latch_fingerprint(
     tmp_path: Path,
 ) -> None:
     intent = _serial_intent()
@@ -617,9 +617,11 @@ def test_typed_serial_intent_materializes_one_passing_existing_receipt(
     )
     assert runtime_state["workspace_receipts"] == []
     assert runtime_state["assigned_agent_ids"] == []
-    assert receipt["status"] == "passed"
+    assert receipt["status"] == "revision_required"
+    assert receipt["worker_dispatch_permitted"] is False
+    assert "active_operation_settings_fingerprint_mismatch" in receipt["reasons"]
     assert receipt["rehydration_sources"] == REQUIRED_SOURCES
-    assert receipt["terminal_handback_permitted"] is False
+    assert receipt["terminal_handback_permitted"] is True
     assert receipt["git_ref_evidence_binding"]["status"] == "passed"
     assert receipt["git_object_resolution"]["status"] == "passed"
     assert receipt["git_refs_snapshot"]["protected_refs_aligned"] is True

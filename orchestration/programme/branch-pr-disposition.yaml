@@ -1,0 +1,118 @@
+schema_version: "raisa-ariadne.branch-pr-disposition.v1"
+observed_at: "2026-08-25T16:21:42+10:00"
+repository: "yurifrusin/EMR4"
+programme_mode: "recovery"
+current_gate: "G0"
+mutation_policy:
+  branch_deletion: "forbidden"
+  pr_closure: "forbidden"
+  pr_merge: "forbidden"
+  feature_rebase: "forbidden"
+  protected_ref_movement: "forbidden"
+
+authoritative_refs:
+  protected_master: "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+  protected_handoff_current: "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+  recovery_base: "03e6860394c39086ec1ffb3f2457acc5f7c8b5f9"
+  recovery_branch: "codex/raisa-ariadne-recovery-g0"
+  safety_ref: "refs/heads/safety/ariadne-clockwork-pre-g0-20260825"
+
+remote_branch_inventory:
+  pre_g0_count: 135
+  current_count_before_authorized_recovery_push: 135
+  post_push_expected_count: 136
+  authorized_added_ref: "refs/heads/codex/raisa-ariadne-recovery-g0"
+  retrieval_command: "git ls-remote --heads origin"
+  baseline_normalization: "exclude only the authorized recovery ref if present; sort complete '<sha> refs/heads/<name>' rows, one ASCII space between fields, LF rows, final LF"
+  pre_g0_snapshot_sha256: "1478dc7a8e0a034971d1ee33996e59753469efec30e98576539a409891639730"
+  prefix_summary:
+    antigravity: 1
+    claude: 3
+    codex: 111
+    dependabot: 15
+    master: 1
+    other: 3
+    safety: 1
+  disposition_summary:
+    protected_authority: 1
+    dependency_update: 15
+    quarantine_stacked_oidc_office: 11
+    preserve_safety_evidence: 1
+    requires_human_decision: 107
+  exact_row_policy: "The deterministic retrieval plus count and digest is the complete exact inventory; no branch was closed, deleted or rewritten."
+
+local_topology:
+  local_branch_count_after_g0_refs: 590
+  worktree_count: 484
+  dirty_worktree_count: 40
+  dirty_tracked_entries: 125
+  dirty_untracked_entries_after_g0_files: 742
+  worktree_inventory_command: "for each path from git worktree list --porcelain, run git -C <path> status --porcelain"
+  worktree_inventory_normalization: "sorted '<absolute-path>|<head>|<branch>|tracked=<n>|untracked=<n>' LF rows with final LF"
+  worktree_inventory_sha256: "345f815bf519f1d42f9801a60fc47c5f30425de0ba632d3250daa1978ec6f315"
+  stash_count: 10
+  pre_g0_current_worktree_untracked_count: 683
+  pre_g0_current_worktree_untracked_bytes: 2785086
+  pre_g0_untracked_archive_entries: 683
+  pre_g0_untracked_archive_sha256: "3e93835c8bfb0166c2f2a97a8463246443f11b80fd351af814829bc41d174868"
+
+ambiguous_current_aliases:
+  policy: "non_authoritative_preserve_without_movement"
+  refs:
+    - ref: "refs/heads/codex/current"
+      sha: "cb454ec4874ef6c28d6e4350907ea430ceeece30"
+      counterpart: "refs/remotes/origin/codex/current"
+      counterpart_sha: "e4deb95b660ef76f0fff5d08d23c685e055265cf"
+      status: "diverged"
+    - ref: "refs/heads/claude/current"
+      sha: "2beeffe8b32f859a9adfcd4d423829dc7ebcfbb4"
+      counterpart: "refs/remotes/origin/claude/current"
+      counterpart_sha: "deece41c09c1a23eaaa6e913da14697da5442870"
+      status: "diverged"
+    - ref: "refs/heads/antigravity/current"
+      sha: "be5eeceb5e9f203de61cfadd9ac45e3c80184306"
+      counterpart: "refs/remotes/origin/antigravity/current"
+      counterpart_sha: "be5eeceb5e9f203de61cfadd9ac45e3c80184306"
+      status: "aligned_but_non_authoritative"
+
+open_pr_inventory:
+  count: 26
+  retrieval_command: "gh pr list --state open --limit 100 --json number,title,headRefName,baseRefName,isDraft,updatedAt,url"
+  disposition_summary:
+    dependency_update: 15
+    quarantine_stacked_oidc_office: 11
+  prs:
+    - {number: 1, draft: false, head: "dependabot/github_actions/actions/configure-pages-6", base: "master", disposition: "dependency_update"}
+    - {number: 2, draft: false, head: "dependabot/github_actions/actions/deploy-pages-5", base: "master", disposition: "dependency_update"}
+    - {number: 3, draft: false, head: "dependabot/github_actions/github/codeql-action-4", base: "master", disposition: "dependency_update"}
+    - {number: 4, draft: false, head: "dependabot/pip/google-cloud-aiplatform-1.158.0", base: "master", disposition: "dependency_update"}
+    - {number: 5, draft: false, head: "dependabot/github_actions/actions/upload-pages-artifact-5", base: "master", disposition: "dependency_update"}
+    - {number: 6, draft: false, head: "dependabot/pip/cryptography-49.0.0", base: "master", disposition: "dependency_update"}
+    - {number: 7, draft: false, head: "dependabot/github_actions/actions/setup-node-6", base: "master", disposition: "dependency_update"}
+    - {number: 8, draft: false, head: "dependabot/pip/tzdata-2026.2", base: "master", disposition: "dependency_update"}
+    - {number: 11, draft: false, head: "dependabot/pip/sqlalchemy-2.0.51", base: "master", disposition: "dependency_update"}
+    - {number: 12, draft: false, head: "dependabot/pip/google-genai-2.9.0", base: "master", disposition: "dependency_update"}
+    - {number: 13, draft: false, head: "dependabot/npm_and_yarn/EMR4-Sidebar/babel/core-8.0.1", base: "master", disposition: "dependency_update"}
+    - {number: 14, draft: false, head: "dependabot/npm_and_yarn/EMR4-Sidebar/babel-loader-10.1.1", base: "master", disposition: "dependency_update"}
+    - {number: 17, draft: false, head: "dependabot/npm_and_yarn/EMR4-Sidebar/babel/preset-env-8.0.2", base: "master", disposition: "dependency_update"}
+    - {number: 18, draft: false, head: "dependabot/npm_and_yarn/EMR4-Sidebar/types/office-runtime-1.0.38", base: "master", disposition: "dependency_update"}
+    - {number: 19, draft: false, head: "dependabot/npm_and_yarn/EMR4-Sidebar/webpack-cli-7.1.0", base: "master", disposition: "dependency_update"}
+    - {number: 76, draft: true, head: "codex/raisa-oidc-verifier-session-bridge-architecture", base: "master", disposition: "quarantine", stack_order: 1}
+    - {number: 77, draft: true, head: "codex/raisa-two-component-oidc-verifier-architecture", base: "codex/raisa-oidc-verifier-session-bridge-architecture", disposition: "quarantine", stack_order: 2}
+    - {number: 78, draft: true, head: "codex/raisa-two-component-oidc-runtime-adapter", base: "codex/raisa-two-component-oidc-verifier-architecture", disposition: "quarantine", stack_order: 3}
+    - {number: 79, draft: true, head: "codex/raisa-postgresql-oidc-authorization-attempt-store", base: "codex/raisa-two-component-oidc-runtime-adapter", disposition: "quarantine", stack_order: 4}
+    - {number: 80, draft: true, head: "codex/raisa-postgresql-oidc-operational-connection-boundary", base: "codex/raisa-postgresql-oidc-authorization-attempt-store", disposition: "quarantine", stack_order: 5}
+    - {number: 81, draft: true, head: "codex/raisa-provider-free-oidc-start-callback-transport-boundary", base: "codex/raisa-postgresql-oidc-operational-connection-boundary", disposition: "quarantine", stack_order: 6}
+    - {number: 82, draft: true, head: "codex/raisa-provider-free-oidc-binding-admission-grant-boundary", base: "codex/raisa-provider-free-oidc-start-callback-transport-boundary", disposition: "quarantine", stack_order: 7}
+    - {number: 83, draft: true, head: "codex/raisa-provider-free-oidc-admission-grant-redemption-bridge", base: "codex/raisa-provider-free-oidc-binding-admission-grant-boundary", disposition: "quarantine", stack_order: 8}
+    - {number: 84, draft: true, head: "codex/raisa-provider-free-session-practitioner-directory-read-bridge", base: "codex/raisa-provider-free-oidc-admission-grant-redemption-bridge", disposition: "quarantine", stack_order: 9}
+    - {number: 85, draft: true, head: "codex/raisa-provider-free-office-practitioner-directory-consumer", base: "codex/raisa-provider-free-session-practitioner-directory-read-bridge", disposition: "quarantine", stack_order: 10}
+    - {number: 86, draft: true, head: "codex/raisa-provider-free-office-directory-lifecycle-descendants", base: "codex/raisa-provider-free-office-practitioner-directory-consumer", disposition: "quarantine", stack_order: 11}
+
+g0_conclusion:
+  branches_deleted: 0
+  branches_rebased: 0
+  prs_closed: 0
+  prs_merged: 0
+  protected_refs_moved: 0
+  pages_runs_triggered: 0

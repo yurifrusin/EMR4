@@ -1,0 +1,27 @@
+schema_version: "ariadne.programme_recovery.v1"
+status: "active_emergency_overlay"
+authority_owner: "Yuri"
+recorded_at: "2026-08-25T16:21:42+10:00"
+state_file: "orchestration/programme/current-state.json"
+gates_file: "orchestration/programme/gates.yaml"
+admission_command: "python scripts/raisa_ariadne_recovery_preflight.py --task-kind g0_recovery"
+required_before:
+  - "task_selection"
+  - "worker_dispatch"
+  - "provider_invocation"
+  - "integration"
+  - "protected_ref_operation"
+missing_or_invalid_state: "hard_stop"
+recovery_mode:
+  expected_programme_mode: "recovery"
+  expected_current_gate: "G0"
+  autonomous_task_selection: false
+  allowed_task_kinds: ["g0_recovery"]
+  out_of_gate_result: "blocked"
+  feature_work_eligible: false
+  provider_calls_eligible: false
+  deployment_eligible: false
+  protected_ref_movement_eligible: false
+reversibility:
+  removal_requires: "accepted_gate_transition_with_updated_current_state_and_tests"
+  default_on_transition_error: "hard_stop"

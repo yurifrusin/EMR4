@@ -1,0 +1,324 @@
+{
+  "schema_version": "raisa-ariadne.programme-state.v1",
+  "observed_at": "2026-08-25T16:21:42+10:00",
+  "programme_name": "Raisa Medical Office and Ariadne Recovery & Convergence",
+  "programme_mode": "recovery",
+  "current_gate": "G0",
+  "current_gate_status": "passed",
+  "machine_authoritative": true,
+  "feature_work_eligible": false,
+  "authority": {
+    "owner": "Yuri",
+    "directive_sha256": "9f77a453ac546cd81f4aea77ea21ff84f3e3e44659694be6ea9dafe6b428ccea",
+    "structured_state_precedence": "current-state.json then gates.yaml",
+    "narrative_handover_role": "evidence_and_continuity_only",
+    "missing_or_invalid_state": "hard_stop"
+  },
+  "recovery_baton": {
+    "branch": "codex/raisa-ariadne-recovery-g0",
+    "base_sha": "03e6860394c39086ec1ffb3f2457acc5f7c8b5f9",
+    "base_relation_to_protected_master": "direct_descendant_1810_commits_ahead_zero_behind",
+    "protected_baton_ref": "handoff/current",
+    "protected_baton_sha": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "source_branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "source_branch_remote_alignment_at_freeze": true
+  },
+  "protected_refs": {
+    "movement_authorized": false,
+    "expected_sha": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "refs": [
+      "refs/heads/master",
+      "refs/heads/handoff/current",
+      "refs/remotes/origin/master",
+      "refs/remotes/origin/handoff/current"
+    ]
+  },
+  "clockwork_snapshot": {
+    "classification": "tracked_implemented_clean_and_pushed_on_source_branch",
+    "frozen_sha": "03e6860394c39086ec1ffb3f2457acc5f7c8b5f9",
+    "latest_typed_pause_transition_sha": "1d5ebbdff4f2c7d87e6b02b7b64eada675d3f815",
+    "local_safety_ref": "refs/heads/safety/ariadne-clockwork-pre-g0-20260825",
+    "git_bundle": {
+      "path": "C:/Users/sarashera/Downloads/emr4-recovery-preservation-20260825/emr4-clockwork-pre-g0-03e6860.bundle",
+      "bytes": 56025988,
+      "sha256": "730db5102101fa680949b2192afb26c494ad6d580566cc92b58da1cf596a96ec",
+      "verified_complete_history": true
+    },
+    "pre_g0_untracked_archive": {
+      "path": "C:/Users/sarashera/Downloads/emr4-recovery-preservation-20260825/emr4-current-worktree-untracked-pre-g0-03e6860.zip",
+      "entries": 683,
+      "bytes": 1437967,
+      "sha256": "3e93835c8bfb0166c2f2a97a8463246443f11b80fd351af814829bc41d174868",
+      "user_branding_preserved": true,
+      "potential_secret_pattern_hit_count": 1,
+      "potential_secret_pattern_hit_disposition": "preserved_local_archive_only_not_staged_or_pushed"
+    }
+  },
+  "repository_inventory": {
+    "pre_g0_remote_branch_count": 135,
+    "pre_g0_remote_branch_snapshot_sha256": "1478dc7a8e0a034971d1ee33996e59753469efec30e98576539a409891639730",
+    "authorized_recovery_push_adds_one_branch": true,
+    "post_push_expected_remote_branch_count": 136,
+    "open_pr_count": 26,
+    "dependency_pr_count": 15,
+    "stacked_draft_oidc_office_pr_count": 11,
+    "worktree_count": 484,
+    "dirty_worktree_count": 40,
+    "worktree_snapshot_sha256": "345f815bf519f1d42f9801a60fc47c5f30425de0ba632d3250daa1978ec6f315",
+    "local_branch_count_after_recovery_refs": 590,
+    "stash_count": 10,
+    "pre_g0_current_worktree_untracked_count": 683,
+    "pre_g0_current_worktree_untracked_bytes": 2785086,
+    "current_alias_status": "codex_and_claude_diverged_antigravity_aligned_all_non_authoritative"
+  },
+  "product_path_inventory": {
+    "mounted_runtime": {
+      "entrypoint": "app/main.py",
+      "static_mounts": [
+        "/static -> static",
+        "/taskpane -> EMR4 Sidebar/src/taskpane"
+      ],
+      "router_mounts": [
+        "auth",
+        "application_auth",
+        "patients",
+        "clinical",
+        "letters",
+        "consultation",
+        "search",
+        "appointments",
+        "diary",
+        "diary_events",
+        "bernie_dev",
+        "practice",
+        "practice_administration",
+        "graphql"
+      ],
+      "active_appointment_command_services": {
+        "status_confirm": [
+          "app/services/appointment_status_product_adapter.py",
+          "app/services/appointment_status_composition.py",
+          "app/services/appointment_status_physical.py"
+        ],
+        "delete_confirm": [
+          "app/services/appointment_delete_product_adapter.py",
+          "app/services/appointment_delete_composition.py",
+          "app/services/appointment_delete_physical.py"
+        ],
+        "reachability_evidence": "app/main.py mounts appointments.router; mounted status-confirm and delete-confirm routes call the product adapters"
+      },
+      "g0_disposition": "inventory_only_no_runtime_change"
+    },
+    "unmounted_or_default_off": {
+      "default_off_mounted_roots": [
+        "app/services/appointment_check_in_product_adapter.py"
+      ],
+      "default_off_evidence": "mounted appointments check-in routes call _a5_check_in_gate_open and require rayleen_a5_check_in_enabled plus a synthetic-practice allowlist",
+      "unmounted_roots": [
+        "app/graphql/native_diary_application_session_practitioner.py",
+        "app/graphql/native_diary_rayleen_waiting_room.py"
+      ],
+      "g0_disposition": "preserve_default_off_or_unmounted_state_without_activation"
+    },
+    "authored_synthetic": {
+      "roots": [
+        "tests/fixtures",
+        "docs/diary/stage3a",
+        "docs/diary/stage3b",
+        "review"
+      ],
+      "observed_candidate_file_count": 396,
+      "g0_disposition": "tests_and_evidence_only"
+    },
+    "experimental_controller": {
+      "roots": [
+        "orchestration_harness",
+        "orchestration/harness_settings",
+        "orchestration/continuity",
+        "scripts/ariadne_*",
+        "scripts/deepseek_*"
+      ],
+      "g0_disposition": "clockwork_preserved_provider_execution_forbidden"
+    },
+    "production_adjacent": {
+      "roots": [
+        "docker-compose.yml",
+        "deploy/raisa-office-web-dev",
+        "EMR4 Sidebar/manifest.xml",
+        "manifest.online.xml",
+        ".github/workflows/pages.yml",
+        ".github/workflows/python-security.yml",
+        ".github/workflows/node-security.yml",
+        ".github/workflows/codeql.yml"
+      ],
+      "g0_disposition": "no_deploy_release_pages_or_runtime_activation"
+    },
+    "inventory_rule": "classification records reachability posture only; it is not runtime safety acceptance"
+  },
+  "workflow_inventory": {
+    "files": [
+      ".github/workflows/codeql.yml",
+      ".github/workflows/node-security.yml",
+      ".github/workflows/pages.yml",
+      ".github/workflows/python-security.yml",
+      ".github/workflows/ui-review.yml"
+    ],
+    "gaps": [
+      "no required repository-wide application pytest gate",
+      "global pytest collection is currently red",
+      "Python dependency audit is currently red",
+      "task-branch local reviewed Bandit baseline mismatches on 10 unexpected findings"
+    ]
+  },
+  "harness_inventory": {
+    "clockwork_core": [
+      "orchestration_harness/governance_clockwork.py",
+      "orchestration_harness/governance_clockwork_tick.py",
+      "orchestration_harness/governance_live_adoption.py",
+      "orchestration_harness/governance_migration.py",
+      "orchestration_harness/governance_writer_guard.py",
+      "orchestration_harness/shadow_clockwork.py",
+      "scripts/ariadne_governance_clockwork_tick.py",
+      "scripts/ariadne_governance_clockwork_closeout.py"
+    ],
+    "harness_settings_file_count": 25,
+    "settings_file_reference_missing_count": 0,
+    "contradictory_default": "standing continuation says continue; emergency recovery overlay has explicit higher precedence",
+    "contradictory_default_disposition": "contained_by_programme_recovery_overlay",
+    "historical_active_operation": {
+      "operation_id": "raisa-provider-free-unmounted-waiting-area-confirm-command-family-architecture",
+      "status_at_g0_redirect": "paused",
+      "source_head": "1d5ebbdff4f2c7d87e6b02b7b64eada675d3f815",
+      "replacement_authority": "explicit_Yuri_G0_redirect"
+    }
+  },
+  "global_checks": {
+    "pytest_collection": {
+      "status": "red",
+      "observed_at": "2026-08-25T15:52:00+10:00",
+      "command": "python -m scripts.ariadne_serial_pytest --timeout-seconds 600 -- --collect-only -q -p no:cacheprovider",
+      "exit_code": 2,
+      "error": "tests/test_api_spine_confirmation_family_idempotency_integration.py imports removed app.routers.appointments._BERNIE_SESSION_STORE",
+      "g0_action": "record_and_contain_not_repair"
+    },
+    "python_security": {
+      "status": "red",
+      "workflow_run_id": 32765568883,
+      "head_sha": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "failure_step": "Dependency CVE scan (pip-audit)",
+      "package": "cryptography 48.0.1",
+      "advisories": [
+        "PYSEC-2026-3552",
+        "PYSEC-2026-3553",
+        "PYSEC-2026-3554"
+      ],
+      "hosted_master_lint": "passed",
+      "hosted_master_bandit": "passed",
+      "task_branch_local_lint": "passed",
+      "task_branch_local_bandit": {
+        "status": "red_reviewed_baseline_mismatch",
+        "unexpected_finding_count": 10,
+        "g0_action": "record_and_contain_not_rebaseline_or_fix"
+      },
+      "g0_action": "record_and_contain_not_repair"
+    },
+    "node_office_security": {
+      "status": "green_on_latest_master_run",
+      "observed_date": "2026-08-24"
+    },
+    "codeql": {
+      "status": "green_on_latest_master_run",
+      "observed_date": "2026-08-24"
+    },
+    "alembic": {
+      "status": "one_head",
+      "head": "x3y4z5a6b7c8"
+    },
+    "global_gate": "red_repair_only",
+    "feature_work_suspended": true
+  },
+  "stop_ship_containment": {
+    "destructive_migration": "recorded_R-001_no_migration_execution",
+    "implicit_patient": "recorded_R-002_no_product_change",
+    "public_static_audio": "recorded_R-003_no_pages_or_deploy",
+    "global_collection": "recorded_R-011_feature_work_ineligible",
+    "dependency_security": "recorded_R-012_feature_work_ineligible"
+  },
+  "task_selection": {
+    "autonomous_selection_enabled": false,
+    "allowed_task_kinds": [
+      "g0_recovery"
+    ],
+    "blocked_task_kinds": [
+      "product_feature",
+      "g1a",
+      "integration",
+      "provider_call",
+      "deployment",
+      "protected_ref_operation"
+    ],
+    "admission_command": "python scripts/raisa_ariadne_recovery_preflight.py --task-kind g0_recovery",
+    "out_of_gate_result": "blocked",
+    "next_eligible_tranche": "G1A",
+    "next_eligible_now": true,
+    "next_tranche_started": false,
+    "next_tranche_admission_requires_state_transition": true,
+    "next_eligibility_condition": "satisfied_by_G0_independent_acceptance"
+  },
+  "parallelism_efficacy": {
+    "deepseek": {
+      "disposition": "declined",
+      "rationale": "external/provider lane forbidden in G0 and its last native startup proof was not accepted"
+    },
+    "gemini": {
+      "disposition": "declined",
+      "rationale": "live external provider call forbidden in G0"
+    },
+    "native_subagent": {
+      "disposition": "reserved",
+      "rationale": "fresh independent read-only G0 review required after implementation"
+    }
+  },
+  "actions_performed": {
+    "protected_ref_movements": 0,
+    "branches_deleted": 0,
+    "feature_branches_rebased": 0,
+    "prs_closed": 0,
+    "prs_merged": 0,
+    "pages_runs_triggered": 0,
+    "deployments": 0,
+    "live_provider_calls": 0,
+    "real_patient_data_accesses": 0,
+    "product_defects_fixed": 0,
+    "g1a_started": false
+  },
+  "g0_acceptance": {
+    "status": "passed",
+    "independent_review": {
+      "reviewer_surface": "fresh_native_subagent",
+      "review_task": "/root/g0_independent_review",
+      "verdict": "PASS",
+      "reviewed_candidate_tree": "f199dc7768fb2fe2ab06f5233a73d5dc8922139b",
+      "findings": [],
+      "residual_risks": [
+        "global pytest collection remains red",
+        "Python dependency audit remains red",
+        "task-branch reviewed Bandit baseline remains red",
+        "post-push recovery-ref readback remains required"
+      ]
+    },
+    "g0_checks": {
+      "recovery_preflight": "passed_exit_0",
+      "product_feature_block_proof": "blocked_exit_2_task_admission_only",
+      "focused_recovery_tests": "15_passed",
+      "related_ariadne_compatibility_tests": "68_passed",
+      "canonical_ci_lint": "passed",
+      "canonical_ci_bandit": "red_10_unexpected_contained_not_rebaselined",
+      "global_pytest_collection": "red_import_error_recorded_not_repaired",
+      "alembic_static_graph": "one_head_x3y4z5a6b7c8",
+      "structured_document_parse": "passed",
+      "staged_diff_check": "passed"
+    },
+    "next_action": "stop_after_G0; G1A is the only next eligible tranche and is not started"
+  }
+}

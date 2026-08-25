@@ -1,5 +1,11 @@
 schema_version: ariadne.autonomous_continuation.v5
 default_posture: continue_without_user_permission
+emergency_programme_overlay:
+  status: active
+  settings_file: programme_recovery.yaml
+  precedence: higher_than_default_posture_and_standing_programme_authority
+  required_before_task_selection: true
+  missing_or_invalid: hard_stop
 applies_when: [verified_sprint_is_active, failure_is_inside_existing_mandate, no_user_owned_decision_is_required]
 policy_decision:
   owner: Yuri
