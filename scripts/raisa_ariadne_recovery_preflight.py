@@ -17,8 +17,7 @@ if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
 from orchestration_harness.programme_admission import (
-    FORBIDDEN_EFFECTS,
-    G0_G01_ALLOWED_PATHS,
+    G0_G04_ALLOWED_PATHS,
     TASK_MANIFEST_VERSION,
     ProgrammeAdmissionError,
     admission_payload,
@@ -30,7 +29,7 @@ from orchestration_harness.programme_admission import (
     strict_json_object,
 )
 
-ALLOWED_G0_TRACKED_PATHS = G0_G01_ALLOWED_PATHS
+ALLOWED_G0_TRACKED_PATHS = G0_G04_ALLOWED_PATHS
 EXPECTED_RISKS = {
     *(f"R-{index:03d}" for index in range(1, 14)),
     *(f"A-{index:03d}" for index in range(1, 11)),
@@ -102,7 +101,7 @@ def _normalised_remote_rows(repo_root: Path) -> list[str]:
         prefix = "refs/remotes/origin/"
         if not ref.startswith(prefix):
             raise PreflightError("unexpected origin ref")
-        rows.append(f"{object_id} refs/heads/{ref[len(prefix):]}")
+        rows.append(f"{object_id} refs/heads/{ref[len(prefix) :]}")
     return sorted(rows)
 
 
@@ -134,7 +133,9 @@ def _alembic_heads(repo_root: Path) -> list[str]:
             if not isinstance(node, (ast.Assign, ast.AnnAssign)):
                 continue
             targets = node.targets if isinstance(node, ast.Assign) else [node.target]
-            name = next((target.id for target in targets if isinstance(target, ast.Name)), None)
+            name = next(
+                (target.id for target in targets if isinstance(target, ast.Name)), None
+            )
             if name not in {"revision", "down_revision"}:
                 continue
             try:
@@ -146,7 +147,10 @@ def _alembic_heads(repo_root: Path) -> list[str]:
             elif name == "down_revision" and (
                 value is None
                 or isinstance(value, str)
-                or (isinstance(value, tuple) and all(isinstance(item, str) for item in value))
+                or (
+                    isinstance(value, tuple)
+                    and all(isinstance(item, str) for item in value)
+                )
             ):
                 down = value
         if revision:
@@ -176,21 +180,16 @@ def _risk_ids(repo_root: Path) -> set[str]:
 def build_task_manifest(
     repo_root: Path = REPO_ROOT,
     *,
-    intended_effects: Iterable[str] = (
-        "repository_read",
-        "control_plane_edit",
-        "task_branch_commit",
-        "task_branch_push",
-    ),
+    intended_effects: Iterable[str] | None = None,
 ) -> dict[str, Any]:
-    """Build the current typed G0.3 manifest without persisting an authority token."""
+    """Build the current typed G0.4 manifest without persisting an authority token."""
     root = repo_root.resolve()
     policy = load_programme_policy(root)
     active = policy.overlay["profiles"][policy.overlay["active_profile"]]
-    if policy.state["active_correction"] == "G0.3":
-        base_commit = policy.state["g0_3_correction"]["authorized_parent_commit"]
-        task_id = "raisa-ariadne-g0-3-operational-g1a-transition-correction"
-        objective = "Activate the operational G1A transition seam and semantic delta contract only; stop before G1A implementation."
+    if policy.state["active_correction"] == "G0.4":
+        base_commit = policy.state["g0_4_correction"]["authorized_parent_commit"]
+        task_id = "raisa-ariadne-g0-4-immutable-gatekeeper-correction"
+        objective = "Correct immutable review bindings, operational G1A scope and the transition-pinned gatekeeper only; stop before G1A implementation."
     else:
         reviewed = policy.state["gate_transition"]["reviewed_commit"]
         rows = _run_git(root, "rev-list", "--reverse", f"{reviewed}..HEAD").splitlines()
@@ -208,8 +207,10 @@ def build_task_manifest(
         "base_commit": base_commit,
         "candidate_or_current_head": _run_git(root, "rev-parse", "HEAD"),
         "allowed_path_roots": sorted(policy.allowed_paths),
-        "intended_side_effect_classes": list(intended_effects),
-        "forbidden_side_effect_classes": sorted(FORBIDDEN_EFFECTS),
+        "intended_side_effect_classes": list(
+            active["allowed_effects"] if intended_effects is None else intended_effects
+        ),
+        "forbidden_side_effect_classes": sorted(active["forbidden_effects"]),
         "state_digest": policy.state_digest,
         "policy_digest": policy.policy_digest,
     }
@@ -226,7 +227,9 @@ def _preservation_checks(repo_root: Path, state: dict[str, Any]) -> list[Check]:
         Check(
             "protected_refs",
             all(value == expected for value in refs.values()),
-            "protected refs remain exact" if all(value == expected for value in refs.values()) else "protected ref drift",
+            "protected refs remain exact"
+            if all(value == expected for value in refs.values())
+            else "protected ref drift",
             refs,
         )
     )
@@ -236,7 +239,9 @@ def _preservation_checks(repo_root: Path, state: dict[str, Any]) -> list[Check]:
         Check(
             "clockwork_safety_ref",
             safety == snapshot["frozen_sha"],
-            "safety ref preserves the frozen source" if safety == snapshot["frozen_sha"] else "safety ref drift",
+            "safety ref preserves the frozen source"
+            if safety == snapshot["frozen_sha"]
+            else "safety ref drift",
             {"observed": safety, "expected": snapshot["frozen_sha"]},
         )
     )
@@ -247,12 +252,18 @@ def _preservation_checks(repo_root: Path, state: dict[str, Any]) -> list[Check]:
         observed = _sha256_file(Path(item["path"]))
         passed = observed == item["sha256"]
         artifact_ok = artifact_ok and passed
-        artifacts[key] = {"observed": observed, "expected": item["sha256"], "passed": passed}
+        artifacts[key] = {
+            "observed": observed,
+            "expected": item["sha256"],
+            "passed": passed,
+        }
     checks.append(
         Check(
             "local_preservation_artifacts",
             artifact_ok,
-            "preservation artifacts match" if artifact_ok else "preservation artifact mismatch",
+            "preservation artifacts match"
+            if artifact_ok
+            else "preservation artifact mismatch",
             artifacts,
         )
     )
@@ -268,7 +279,11 @@ def _preservation_checks(repo_root: Path, state: dict[str, Any]) -> list[Check]:
             "remote_branch_inventory",
             remote_ok,
             "remote baseline remains exact" if remote_ok else "remote baseline drift",
-            {"baseline_count": count, "baseline_digest": digest, "current_count": current},
+            {
+                "baseline_count": count,
+                "baseline_digest": digest,
+                "current_count": current,
+            },
         )
     )
     return checks
@@ -278,31 +293,90 @@ def _static_checks(repo_root: Path, policy: Any) -> list[Check]:
     state = policy.state
     checks: list[Check] = []
     risk_ids = {row["id"] for row in policy.risks["risks"]}
-    checks.append(Check("strict_risk_inventory", risk_ids == EXPECTED_RISKS, "strict risk inventory is exact", sorted(risk_ids)))
-    workflows_missing = [path for path in REQUIRED_WORKFLOWS if not (repo_root / path).is_file()]
-    checks.append(Check("workflow_inventory", not workflows_missing, "workflow inventory is present", workflows_missing))
+    checks.append(
+        Check(
+            "strict_risk_inventory",
+            risk_ids == EXPECTED_RISKS,
+            "strict risk inventory is exact",
+            sorted(risk_ids),
+        )
+    )
+    workflows_missing = [
+        path for path in REQUIRED_WORKFLOWS if not (repo_root / path).is_file()
+    ]
+    checks.append(
+        Check(
+            "workflow_inventory",
+            not workflows_missing,
+            "workflow inventory is present",
+            workflows_missing,
+        )
+    )
     heads = _alembic_heads(repo_root)
     expected_head = state["global_checks"]["alembic"]["head"]
-    checks.append(Check("alembic_heads", heads == [expected_head], "Alembic graph remains one-headed", {"heads": heads, "expected": expected_head}))
+    checks.append(
+        Check(
+            "alembic_heads",
+            heads == [expected_head],
+            "Alembic graph remains one-headed",
+            {"heads": heads, "expected": expected_head},
+        )
+    )
     global_checks = state["global_checks"]
     global_red = (
         global_checks["pytest_collection"]["status"] == "red"
         and global_checks["python_security"]["status"] == "red"
-        and global_checks["python_security"]["task_branch_local_bandit"]["status"] == "red_reviewed_baseline_mismatch"
+        and global_checks["python_security"]["task_branch_local_bandit"]["status"]
+        == "red_reviewed_baseline_mismatch"
         and global_checks["global_gate"] == "red_repair_only"
         and global_checks["feature_work_suspended"] is True
     )
-    checks.append(Check("global_red_containment", global_red, "known global reds remain explicit and feature work remains suspended"))
-    migration = (repo_root / "alembic/versions/d4787e8e3629_phase_0_baseline.py").read_text(encoding="utf-8")
-    destructive = "TRUNCATE TABLE prescriptions, mbs_claims, clinical_diagnoses, encounters, patients CASCADE" in migration
-    checks.append(Check("destructive_upgrade_evidence", destructive, "R-001 binds the actual destructive upgrade"))
-    consultation = (repo_root / "app/routers/consultation.py").read_text(encoding="utf-8")
+    checks.append(
+        Check(
+            "global_red_containment",
+            global_red,
+            "known global reds remain explicit and feature work remains suspended",
+        )
+    )
+    migration = (
+        repo_root / "alembic/versions/d4787e8e3629_phase_0_baseline.py"
+    ).read_text(encoding="utf-8")
+    destructive = (
+        "TRUNCATE TABLE prescriptions, mbs_claims, clinical_diagnoses, encounters, patients CASCADE"
+        in migration
+    )
+    checks.append(
+        Check(
+            "destructive_upgrade_evidence",
+            destructive,
+            "R-001 binds the actual destructive upgrade",
+        )
+    )
+    consultation = (repo_root / "app/routers/consultation.py").read_text(
+        encoding="utf-8"
+    )
     main = (repo_root / "app/main.py").read_text(encoding="utf-8")
-    static_audio = 'os.path.join("static", "audio", audio_filename)' in consultation and 'app.mount("/static", StaticFiles(directory="static")' in main
-    checks.append(Check("public_static_audio_evidence", static_audio, "R-003 binds the actual upload and static mount"))
+    static_audio = (
+        'os.path.join("static", "audio", audio_filename)' in consultation
+        and 'app.mount("/static", StaticFiles(directory="static")' in main
+    )
+    checks.append(
+        Check(
+            "public_static_audio_evidence",
+            static_audio,
+            "R-003 binds the actual upload and static mount",
+        )
+    )
     actions = state["actions_performed"]
     forbidden_zero = all(value in (0, False) for value in actions.values())
-    checks.append(Check("forbidden_action_accounting", forbidden_zero, "all forbidden-action counters remain zero", actions))
+    checks.append(
+        Check(
+            "forbidden_action_accounting",
+            forbidden_zero,
+            "all forbidden-action counters remain zero",
+            actions,
+        )
+    )
     return checks
 
 
@@ -340,18 +414,24 @@ def build_report(
         admission = evaluate_programme_admission(
             repo_root=root, manifest=task_manifest, entrypoint=entrypoint
         )
-        scope = evaluate_committed_scope(repo_root=root, manifest=task_manifest, phase=phase)
+        scope = evaluate_committed_scope(
+            repo_root=root, manifest=task_manifest, phase=phase
+        )
     checks = [
         Check(
             "programme_admission",
             admission.admitted,
-            "typed correction or state-only transition admitted" if admission.admitted else "typed programme admission denied",
+            "typed correction or state-only transition admitted"
+            if admission.admitted
+            else "typed programme admission denied",
             admission_payload(admission),
         ),
         Check(
             "committed_scope",
             scope.admitted,
-            "Git scope and phase binding passed" if scope.admitted else "Git scope or phase binding denied",
+            "Git scope and phase binding passed"
+            if scope.admitted
+            else "Git scope or phase binding denied",
             admission_payload(scope),
         ),
         *_preservation_checks(root, policy.state),
@@ -386,7 +466,9 @@ def _render_human(report: dict[str, Any]) -> str:
         f"feature_work_eligible=false g1a_authorized={str(bool(report.get('g1a_authorized'))).lower()}",
     ]
     for check in report.get("checks", []):
-        lines.append(f"[{'PASS' if check['passed'] else 'BLOCK'}] {check['check_id']}: {check['summary']}")
+        lines.append(
+            f"[{'PASS' if check['passed'] else 'BLOCK'}] {check['check_id']}: {check['summary']}"
+        )
     if report["failed_checks"]:
         lines.append("failed_checks=" + ",".join(report["failed_checks"]))
     return "\n".join(lines)
@@ -396,7 +478,11 @@ def main(argv: Iterable[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--repo-root", type=Path, default=REPO_ROOT)
     parser.add_argument("--task-manifest", type=Path)
-    parser.add_argument("--phase", choices=("development", "pre-push", "post-push"), default="development")
+    parser.add_argument(
+        "--phase",
+        choices=("development", "pre-push", "post-push"),
+        default="development",
+    )
     parser.add_argument(
         "--entrypoint",
         choices=(
@@ -410,10 +496,16 @@ def main(argv: Iterable[str] | None = None) -> int:
     parser.add_argument("--format", choices=("human", "json"), default="human")
     args = parser.parse_args(list(argv) if argv is not None else None)
     try:
-        manifest = strict_json_object(args.task_manifest) if args.task_manifest else None
+        manifest = (
+            strict_json_object(args.task_manifest) if args.task_manifest else None
+        )
         report = build_report(args.repo_root, manifest, args.phase, args.entrypoint)
     except (OSError, ProgrammeAdmissionError, PreflightError) as error:
-        reason = error.reason_code if isinstance(error, ProgrammeAdmissionError) else "programme_state_missing_or_invalid"
+        reason = (
+            error.reason_code
+            if isinstance(error, ProgrammeAdmissionError)
+            else "programme_state_missing_or_invalid"
+        )
         report = {
             "schema_version": "raisa-ariadne.recovery-preflight.v2",
             "status": "blocked",
@@ -424,7 +516,11 @@ def main(argv: Iterable[str] | None = None) -> int:
             "reason_codes": [reason],
             "checks": [],
         }
-    print(json.dumps(report, indent=2, sort_keys=True) if args.format == "json" else _render_human(report))
+    print(
+        json.dumps(report, indent=2, sort_keys=True)
+        if args.format == "json"
+        else _render_human(report)
+    )
     return 0 if report["status"] == "passed" else 2
 
 

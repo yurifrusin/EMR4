@@ -1,18 +1,18 @@
 {
   "schema_version": "raisa-ariadne.programme-state.v1",
-  "observed_at": "2026-08-25T22:10:00+10:00",
+  "observed_at": "2026-08-26T01:12:34+10:00",
   "programme_name": "Raisa Medical Office and Ariadne Recovery & Convergence",
   "programme_mode": "recovery",
   "current_gate": "G0",
   "current_gate_status": "revision_required",
-  "active_correction": "G0.3",
-  "active_profile": "G0.3_CONTROLLER_MAINTENANCE",
+  "active_correction": "G0.4",
+  "active_profile": "G0.4_CONTROLLER_MAINTENANCE",
   "machine_authoritative": true,
   "feature_work_eligible": false,
   "product_work_eligible": false,
   "authority": {
     "owner": "Yuri",
-    "directive_sha256": "184abe114520f551b4f1365dde1bdbc683686444058abd327ddfc6fd704ae394",
+    "directive_sha256": "de613651ba640122699bc9f2d410136f02fe1d69bb020d4a46b126eb9788d4e9",
     "structured_state_precedence": "current-state.json then gates.yaml",
     "narrative_handover_role": "evidence_and_continuity_only",
     "missing_or_invalid_state": "hard_stop"
@@ -255,7 +255,7 @@
   "task_selection": {
     "autonomous_selection_enabled": false,
     "allowed_task_kinds": [
-      "g0_3_controller_maintenance"
+      "g0_4_controller_maintenance"
     ],
     "blocked_task_kinds": [
       "product_feature",
@@ -267,24 +267,24 @@
     ],
     "admission_command": "python scripts/raisa_ariadne_recovery_preflight.py --task-manifest <path> --phase development",
     "out_of_gate_result": "blocked",
-    "next_eligible_tranche": "G0.3",
+    "next_eligible_tranche": "G0.4",
     "next_eligible_now": true,
     "next_tranche_started": false,
     "next_tranche_admission_requires_state_transition": true,
-    "next_eligibility_condition": "external_G0_review_requires_G0_3_operational_transition_correction"
+    "next_eligibility_condition": "external_G0_review_requires_G0_4_scope_and_immutable_gatekeeper_correction"
   },
   "parallelism_efficacy": {
     "deepseek": {
       "disposition": "declined",
-      "rationale": "provider execution is forbidden in G0.3 and the profile/semantic-transition repair is a tightly coupled controller invariant"
+      "rationale": "provider execution is forbidden in G0.4 and immutable review, cumulative-scope and gatekeeper invariants are one tightly coupled controller correction"
     },
     "gemini": {
       "disposition": "declined",
-      "rationale": "live external provider execution is forbidden in G0.3; independence is reserved for the later external review"
+      "rationale": "live external provider execution is forbidden in G0.4; independence is reserved for the later external review"
     },
     "native_subagent": {
       "disposition": "declined",
-      "rationale": "G0.3 is a tightly coupled serial profile/admission/semantic-transition correction and current execution policy does not authorise delegation"
+      "rationale": "G0.4 is a tightly coupled serial reference-monitor correction and current execution policy does not authorise delegation"
     }
   },
   "actions_performed": {
@@ -320,7 +320,7 @@
     "external_gate_review": {
       "verdict": "REVISION_REQUIRED",
       "reviewed_commit": "7cae4e88e2f3951e51dcaf1378e52187e191a33d",
-      "reviewed_tree": "bbeddb0e129f5787d7852913d72e3409ae65b1d8",
+      "reviewed_tree": "bbeddb0e467c57970024d14cddf72156bed86947",
       "handover_sha256": "184abe114520f551b4f1365dde1bdbc683686444058abd327ddfc6fd704ae394",
       "finding_count": 2,
       "g1a_authorized": false
@@ -328,9 +328,9 @@
     "g0_checks": {
       "recovery_preflight": "passed_exit_0",
       "product_feature_block_proof": "blocked_exit_2_task_admission_only",
-      "focused_recovery_tests": "99_passed",
-      "related_ariadne_compatibility_tests": "226_passed",
-      "canonical_ci_lint": "passed",
+      "focused_recovery_tests": "119_passed_including_13_real_git_pinned_gatekeeper_lifecycle_tests",
+      "related_ariadne_compatibility_tests": "197_passed_7_pre_existing_clockwork_semantic_fixture_failures_contained",
+      "canonical_ci_lint": "passed_ruff_lint_format_compile_and_historical_diary_leakage_lint",
       "canonical_ci_bandit": "not_executed_missing_bandit_module_prior_red_10_unexpected_contained_not_rebaselined",
       "global_pytest_collection": "red_import_error_recorded_not_repaired",
       "alembic_static_graph": "one_head_x3y4z5a6b7c8_empty_upgrade_passed_model_drift_red_4_tables",
@@ -358,9 +358,21 @@
     "next_action": "superseded_by_G0_3_revision_required"
   },
   "g0_3_correction": {
-    "status": "review_pending",
+    "status": "superseded_revision_required",
     "authorized_parent_commit": "7cae4e88e2f3951e51dcaf1378e52187e191a33d",
-    "reviewed_g0_2_tree": "bbeddb0e129f5787d7852913d72e3409ae65b1d8",
+    "reviewed_g0_2_tree": "bbeddb0e467c57970024d14cddf72156bed86947",
+    "candidate_commit_limit": 1,
+    "external_review_status": "revision_required",
+    "g1a_authorized": false,
+    "next_action": "superseded_by_G0_4_revision_required"
+  },
+  "g0_4_correction": {
+    "status": "review_pending",
+    "authorized_parent_commit": "2af92789819e8114a1bfe8e956a5742136e4a139",
+    "reviewed_g0_3_tree": "9da62d169d564c86afdd087ec03da270e4989d91",
+    "correction_directive_sha256": "de613651ba640122699bc9f2d410136f02fe1d69bb020d4a46b126eb9788d4e9",
+    "review_verdict": "REVISION_REQUIRED",
+    "review_finding_count": 3,
     "candidate_commit_limit": 1,
     "external_review_status": "pending",
     "g1a_authorized": false,

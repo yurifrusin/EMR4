@@ -1,7 +1,7 @@
 schema_version: "raisa-ariadne.programme-gates.v1"
 programme:
   name: "Raisa Medical Office and Ariadne Recovery & Convergence"
-  prepared_at: "2026-08-25T22:10:00+10:00"
+  prepared_at: "2026-08-26T01:12:34+10:00"
   repository: "yurifrusin/EMR4"
   observed_public_master: "2e34bdad732fdab32fbf778280b3d3c70d66d602"
   programme_mode: "recovery"
@@ -10,7 +10,7 @@ programme:
   feature_work_eligible: false
   clockwork_remote_visibility: "source_branch_aligned_with_origin"
   clockwork_local_state: "preserved_exactly_at_03e6860394c39086ec1ffb3f2457acc5f7c8b5f9"
-  next_eligible_tranche: "G0.3"
+  next_eligible_tranche: "G0.4"
 
 global_hard_stops:
   - "critical_or_high_security_finding"
@@ -55,7 +55,7 @@ protected_invariants:
 gates:
   - id: "G0"
     name: "Preserve, Freeze and Establish Truth"
-    status: "revision_required_g0_3"
+    status: "revision_required_g0_4"
     prerequisites: []
     programme_mode: "recovery"
     allowed_work:
@@ -90,7 +90,7 @@ gates:
       - "branch_pr_inventory_complete_or_reproducible"
       - "out_of_gate_work_blocked"
       - "independent_review_non_negative"
-    next_gate: "G0.3"
+    next_gate: "G0.4"
 
   - id: "G0.1"
     name: "Correct Gate Enforcement and Authority Precedence"
@@ -158,7 +158,7 @@ gates:
 
   - id: "G0.3"
     name: "Activate an Operational G1A Transition Seam"
-    status: "review_pending"
+    status: "superseded_revision_required"
     prerequisites: ["G0_2_review_revision_required"]
     programme_mode: "recovery"
     allowed_work:
@@ -187,6 +187,43 @@ gates:
       - "transition_artifacts_are_persisted_and_digest_bound"
       - "commit_and_push_use_one_combined_admission_decision"
       - "g1a_scope_is_pre_reviewed_and_cannot_widen"
+      - "post_push_origin_matches_exact_candidate"
+      - "candidate_state_is_review_pending"
+    next_gate: "G0.4"
+
+  - id: "G0.4"
+    name: "Correct Operational G1A Scope and Install an Immutable Gatekeeper"
+    status: "review_pending"
+    prerequisites: ["G0_3_review_revision_required"]
+    programme_mode: "recovery"
+    allowed_work:
+      - "immutable_historical_review_binding"
+      - "cumulative_history_and_active_tranche_scope_separation"
+      - "exact_dynamic_transition_evidence_paths"
+      - "narrow_first_g1a_verdict_kernel_scope"
+      - "transition_pinned_clean_gatekeeper"
+      - "real_repository_lifecycle_tests"
+      - "review_pending_recovery_branch_publication"
+    prohibited_work:
+      - "g1a_implementation"
+      - "g1b"
+      - "product_behavior_change"
+      - "migration_change"
+      - "dependency_change"
+      - "provider_call"
+      - "integration"
+      - "protected_ref_movement"
+      - "deployment_or_pages"
+      - "real_data"
+    exit_checks:
+      - "all_retained_review_commit_tree_bindings_resolve"
+      - "historical_review_records_are_transition_immutable"
+      - "g1a_full_history_uses_only_the_cumulative_exact_allowlist"
+      - "g1a_tranche_uses_only_the_active_manifest_and_profile"
+      - "dynamic_transition_evidence_paths_are_exact"
+      - "ordinary_g1a_cannot_modify_its_reference_monitor"
+      - "combined_commit_and_push_require_the_clean_transition_pinned_gatekeeper"
+      - "real_transition_and_g1a_lifecycle_passes"
       - "post_push_origin_matches_exact_candidate"
       - "candidate_state_is_review_pending"
     next_gate: "external_G0_review"

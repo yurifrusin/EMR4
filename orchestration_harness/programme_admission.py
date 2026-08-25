@@ -25,21 +25,21 @@ INVENTORY_PATH = Path("orchestration/programme/branch-pr-disposition.yaml")
 G1A_SCOPE_PATH = Path("orchestration/programme/g1a-verdict-integration-scope.yaml")
 OVERLAY_PATH = Path("orchestration/harness_settings/programme_recovery.yaml")
 PROJECT_PATH = Path("orchestration/harness_settings/project.yaml")
-CONTINUATION_PATH = Path(
-    "orchestration/harness_settings/autonomous_continuation.yaml"
+CONTINUATION_PATH = Path("orchestration/harness_settings/autonomous_continuation.yaml")
+LATCH_PATH = Path(
+    "orchestration/continuity/ariadne-active-operation-latch/current.json"
 )
-LATCH_PATH = Path("orchestration/continuity/ariadne-active-operation-latch/current.json")
 AGENTS_PATH = Path("AGENTS.md")
 
 TASK_MANIFEST_VERSION = "ariadne.programme_task_manifest.v1"
 TRANSITION_MANIFEST_VERSION = "ariadne.programme_gate_transition_manifest.v1"
 DECISION_VERSION = "ariadne.programme_admission_decision.v1"
 SCOPE_VERSION = "ariadne.programme_scope_decision.v1"
-ADMITTED_TASK_CLASS = "g0_3_controller_maintenance"
-ADMITTED_PROGRAMME_GATE = "G0.3"
+ADMITTED_TASK_CLASS = "g0_4_controller_maintenance"
+ADMITTED_PROGRAMME_GATE = "G0.4"
 TRANSITION_TASK_CLASS = "g0_to_g1a_state_transition"
 G1A_TASK_CLASS = "g1a_verdict_and_integration_semantics_repair"
-G0_CONTROLLER_PROFILE = "G0.3_CONTROLLER_MAINTENANCE"
+G0_CONTROLLER_PROFILE = "G0.4_CONTROLLER_MAINTENANCE"
 TRANSITION_PROFILE = "G0_TO_G1A_STATE_TRANSITION"
 G1A_ACTIVE_PROFILE = "G1A_ACTIVE"
 TRANSITION_FROM_GATE = "G0"
@@ -108,8 +108,11 @@ TRANSITION_FORBIDDEN_EFFECTS = {
 }
 G1A_FORBIDDEN_EFFECTS = {
     "autonomous_worker_dispatch",
+    "closeout_state_transition",
+    "controller_policy_change",
     "dependency_change",
     "deployment",
+    "gatekeeper_change",
     "g1b_work",
     "integration",
     "migration_change",
@@ -118,6 +121,7 @@ G1A_FORBIDDEN_EFFECTS = {
     "protected_ref_movement",
     "provider_invocation",
     "real_data_access",
+    "programme_state_change",
 }
 ALLOWED_MAINTENANCE_EFFECTS = {
     "repository_read",
@@ -125,7 +129,13 @@ ALLOWED_MAINTENANCE_EFFECTS = {
     "task_branch_commit",
     "task_branch_push",
 }
-G1A_ALLOWED_EFFECTS = ALLOWED_MAINTENANCE_EFFECTS | {"external_review_preparation"}
+G1A_ALLOWED_EFFECTS = {
+    "repository_read",
+    "verdict_kernel_edit",
+    "task_branch_commit",
+    "task_branch_push",
+    "external_review_preparation",
+}
 ENTRYPOINT_REQUIRED_EFFECT = {
     "task_selection": "repository_read",
     "recovery_preflight": "repository_read",
@@ -183,27 +193,22 @@ G0_G03_ALLOWED_PATHS = G0_G02_ALLOWED_PATHS | {
     "tests/test_ariadne_deepcode_runtime_observability.py",
     "tests/test_ariadne_review_acceptance.py",
 }
+G0_G04_ALLOWED_PATHS = G0_G03_ALLOWED_PATHS | {
+    "orchestration_harness/pinned_programme_gatekeeper.py",
+    "scripts/raisa_ariadne_pinned_gatekeeper.py",
+    "tests/test_programme_pinned_gatekeeper.py",
+}
 G1A_ALLOWED_PATHS = {
-    "AGENTS.md",
-    "orchestration/continuity/ariadne-active-operation-latch/current.json",
-    "orchestration/harness_settings/programme_recovery.yaml",
-    "orchestration/programme/current-state.json",
-    "orchestration/programme/gates.yaml",
-    "orchestration_harness/programme_admission.py",
     "orchestration_harness/verdict.py",
     "orchestration_harness/deepcode_artifact.py",
     "orchestration_harness/review_acceptance.py",
-    "scripts/agent_worktrees.py",
     "scripts/ariadne_antigravity.py",
     "scripts/ariadne_deepcode_liveness.py",
     "scripts/ariadne_review_acceptance.py",
-    "scripts/raisa_ariadne_recovery_preflight.py",
-    "tests/test_agent_worktrees.py",
     "tests/test_ariadne_antigravity.py",
     "tests/test_ariadne_deepcode_runtime_observability.py",
     "tests/test_ariadne_review_acceptance.py",
-    "tests/test_programme_admission.py",
-    "tests/test_raisa_ariadne_recovery_preflight.py",
+    "tests/test_ariadne_verdict.py",
 }
 TRANSITION_FIXED_ALLOWED_PATHS = {
     "AGENTS.md",
@@ -322,7 +327,10 @@ def _unique_text_list(
     if (
         not isinstance(value, list)
         or not minimum <= len(value) <= maximum
-        or any(not isinstance(item, str) or not item or item != item.strip() for item in value)
+        or any(
+            not isinstance(item, str) or not item or item != item.strip()
+            for item in value
+        )
         or len(set(value)) != len(value)
     ):
         raise ProgrammeAdmissionError(reason)
@@ -518,7 +526,26 @@ def _is_ancestor(root: Path, ancestor: str, descendant: str) -> bool:
     return completed.returncode == 0
 
 
-def _validate_state(value: dict[str, Any]) -> None:
+def _validate_commit_tree_binding(
+    root: Path, *, commit: object, tree: object, reason: str
+) -> None:
+    if (
+        not isinstance(commit, str)
+        or _SHA1.fullmatch(commit) is None
+        or not isinstance(tree, str)
+        or _SHA1.fullmatch(tree) is None
+    ):
+        raise ProgrammeAdmissionError(reason)
+    try:
+        actual_tree = _run_git(root, "rev-parse", f"{commit}^{{tree}}")
+        resolved_tree = _run_git(root, "rev-parse", f"{tree}^{{tree}}")
+    except ProgrammeAdmissionError as error:
+        raise ProgrammeAdmissionError(reason) from error
+    if actual_tree != tree or resolved_tree != tree:
+        raise ProgrammeAdmissionError(reason)
+
+
+def _validate_state(value: dict[str, Any], root: Path) -> None:
     _exact_keys(
         value,
         {
@@ -550,6 +577,7 @@ def _validate_state(value: dict[str, Any]) -> None:
             "g0_1_correction",
             "g0_2_correction",
             "g0_3_correction",
+            "g0_4_correction",
             "gate_transition",
         },
         "programme_state_schema_invalid",
@@ -600,9 +628,7 @@ def _validate_state(value: dict[str, Any]) -> None:
         "programme_task_selection_schema_invalid",
     )
     blocked_task_kinds = set(
-        _unique_text_list(
-            selection["blocked_task_kinds"], "blocked_task_kinds_invalid"
-        )
+        _unique_text_list(selection["blocked_task_kinds"], "blocked_task_kinds_invalid")
     )
     _bounded_text(selection["admission_command"], "admission_command_invalid", 500)
     phase = value["active_correction"]
@@ -612,9 +638,13 @@ def _validate_state(value: dict[str, Any]) -> None:
         ADMITTED_TASK_CLASS if phase == ADMITTED_PROGRAMME_GATE else G1A_TASK_CLASS
     )
     expected_gate = "G0" if phase == ADMITTED_PROGRAMME_GATE else TRANSITION_TO_GATE
-    expected_status = "revision_required" if phase == ADMITTED_PROGRAMME_GATE else "active"
+    expected_status = (
+        "revision_required" if phase == ADMITTED_PROGRAMME_GATE else "active"
+    )
     expected_profile = (
-        G0_CONTROLLER_PROFILE if phase == ADMITTED_PROGRAMME_GATE else G1A_ACTIVE_PROFILE
+        G0_CONTROLLER_PROFILE
+        if phase == ADMITTED_PROGRAMME_GATE
+        else G1A_ACTIVE_PROFILE
     )
     if (
         selection["autonomous_selection_enabled"] is not False
@@ -630,7 +660,11 @@ def _validate_state(value: dict[str, Any]) -> None:
         }
         or selection["out_of_gate_result"] != "blocked"
         or selection["next_eligible_tranche"]
-        != (ADMITTED_PROGRAMME_GATE if phase == ADMITTED_PROGRAMME_GATE else TRANSITION_TO_GATE)
+        != (
+            ADMITTED_PROGRAMME_GATE
+            if phase == ADMITTED_PROGRAMME_GATE
+            else TRANSITION_TO_GATE
+        )
         or selection["next_eligible_now"] is not True
         or selection["next_tranche_started"] is not False
         or selection["next_tranche_admission_requires_state_transition"]
@@ -643,34 +677,49 @@ def _validate_state(value: dict[str, Any]) -> None:
 
     acceptance = _exact_keys(
         value["g0_acceptance"],
-        {"status", "independent_review", "external_gate_review", "g0_checks", "next_action"},
+        {
+            "status",
+            "independent_review",
+            "external_gate_review",
+            "g0_checks",
+            "next_action",
+        },
         "g0_acceptance_schema_invalid",
     )
     external_review = _exact_keys(
         acceptance["external_gate_review"],
         {
-            "verdict", "reviewed_commit", "reviewed_tree", "handover_sha256",
-            "finding_count", "g1a_authorized",
+            "verdict",
+            "reviewed_commit",
+            "reviewed_tree",
+            "handover_sha256",
+            "finding_count",
+            "g1a_authorized",
         },
         "g0_external_review_schema_invalid",
     )
     for field in ("reviewed_commit", "reviewed_tree"):
-        if not isinstance(external_review[field], str) or _SHA1.fullmatch(external_review[field]) is None:
+        if (
+            not isinstance(external_review[field], str)
+            or _SHA1.fullmatch(external_review[field]) is None
+        ):
             raise ProgrammeAdmissionError("g0_external_review_binding_invalid")
-    if not isinstance(external_review["handover_sha256"], str) or re.fullmatch(
-        r"[0-9a-f]{64}", external_review["handover_sha256"]
-    ) is None:
+    if (
+        not isinstance(external_review["handover_sha256"], str)
+        or re.fullmatch(r"[0-9a-f]{64}", external_review["handover_sha256"]) is None
+    ):
         raise ProgrammeAdmissionError("g0_external_review_digest_invalid")
-    expected_review = (
-        ("REVISION_REQUIRED", False, 2, "superseded_revision_required")
-        if phase == ADMITTED_PROGRAMME_GATE
-        else ("PASS", True, 0, "passed")
-    )
+    expected_review = ("REVISION_REQUIRED", False, 2)
     if (
         external_review["verdict"] != expected_review[0]
         or external_review["g1a_authorized"] is not expected_review[1]
         or external_review["finding_count"] != expected_review[2]
-        or acceptance["status"] != expected_review[3]
+        or acceptance["status"]
+        != (
+            "superseded_revision_required"
+            if phase == ADMITTED_PROGRAMME_GATE
+            else "passed"
+        )
     ):
         raise ProgrammeAdmissionError("g0_external_review_state_invalid")
 
@@ -688,7 +737,8 @@ def _validate_state(value: dict[str, Any]) -> None:
         "g0_1_correction_schema_invalid",
     )
     if (
-        correction["status"] not in {"in_progress", "review_pending", "superseded_revision_required"}
+        correction["status"]
+        not in {"in_progress", "review_pending", "superseded_revision_required"}
         or not isinstance(correction["authorized_parent_commit"], str)
         or _SHA1.fullmatch(correction["authorized_parent_commit"]) is None
         or correction["candidate_commit_limit"] != 1
@@ -712,9 +762,10 @@ def _validate_state(value: dict[str, Any]) -> None:
         "g0_2_correction_schema_invalid",
     )
     for field in ("authorized_parent_commit", "reviewed_g0_1_tree"):
-        if not isinstance(correction_g02[field], str) or _SHA1.fullmatch(
-            correction_g02[field]
-        ) is None:
+        if (
+            not isinstance(correction_g02[field], str)
+            or _SHA1.fullmatch(correction_g02[field]) is None
+        ):
             raise ProgrammeAdmissionError("g0_2_correction_binding_invalid")
     if correction_g02["candidate_commit_limit"] != 1:
         raise ProgrammeAdmissionError("g0_2_correction_limit_invalid")
@@ -739,27 +790,103 @@ def _validate_state(value: dict[str, Any]) -> None:
         "g0_3_correction_schema_invalid",
     )
     for field in ("authorized_parent_commit", "reviewed_g0_2_tree"):
-        if not isinstance(correction_g03[field], str) or _SHA1.fullmatch(
-            correction_g03[field]
-        ) is None:
+        if (
+            not isinstance(correction_g03[field], str)
+            or _SHA1.fullmatch(correction_g03[field]) is None
+        ):
             raise ProgrammeAdmissionError("g0_3_correction_binding_invalid")
     if correction_g03["candidate_commit_limit"] != 1:
         raise ProgrammeAdmissionError("g0_3_correction_limit_invalid")
+    if (
+        correction_g03["status"] != "superseded_revision_required"
+        or correction_g03["external_review_status"] != "revision_required"
+        or correction_g03["g1a_authorized"] is not False
+    ):
+        raise ProgrammeAdmissionError("g0_3_correction_history_invalid")
+
+    correction_g04 = _exact_keys(
+        value["g0_4_correction"],
+        {
+            "status",
+            "authorized_parent_commit",
+            "reviewed_g0_3_tree",
+            "correction_directive_sha256",
+            "review_verdict",
+            "review_finding_count",
+            "candidate_commit_limit",
+            "external_review_status",
+            "g1a_authorized",
+            "next_action",
+        },
+        "g0_4_correction_schema_invalid",
+    )
+    for field in (
+        "authorized_parent_commit",
+        "reviewed_g0_3_tree",
+    ):
+        if (
+            not isinstance(correction_g04[field], str)
+            or _SHA1.fullmatch(correction_g04[field]) is None
+        ):
+            raise ProgrammeAdmissionError("g0_4_correction_binding_invalid")
+    if (
+        not isinstance(correction_g04["correction_directive_sha256"], str)
+        or re.fullmatch(r"[0-9a-f]{64}", correction_g04["correction_directive_sha256"])
+        is None
+        or correction_g04["review_verdict"] != "REVISION_REQUIRED"
+        or correction_g04["review_finding_count"] != 3
+        or correction_g04["candidate_commit_limit"] != 1
+    ):
+        raise ProgrammeAdmissionError("g0_4_correction_review_invalid")
+
+    _validate_commit_tree_binding(
+        root,
+        commit=correction["authorized_parent_commit"],
+        tree=correction["reviewed_g0_tree"],
+        reason="g0_1_review_tree_binding_invalid",
+    )
+    _validate_commit_tree_binding(
+        root,
+        commit=correction_g02["authorized_parent_commit"],
+        tree=correction_g02["reviewed_g0_1_tree"],
+        reason="g0_2_review_tree_binding_invalid",
+    )
+    _validate_commit_tree_binding(
+        root,
+        commit=correction_g03["authorized_parent_commit"],
+        tree=correction_g03["reviewed_g0_2_tree"],
+        reason="g0_3_review_tree_binding_invalid",
+    )
+    _validate_commit_tree_binding(
+        root,
+        commit=correction_g04["authorized_parent_commit"],
+        tree=correction_g04["reviewed_g0_3_tree"],
+        reason="g0_4_review_tree_binding_invalid",
+    )
+    if (
+        external_review["reviewed_commit"] != correction_g03["authorized_parent_commit"]
+        or external_review["reviewed_tree"] != correction_g03["reviewed_g0_2_tree"]
+        or correction_g04["correction_directive_sha256"]
+        != authority["directive_sha256"]
+    ):
+        raise ProgrammeAdmissionError("retained_external_review_history_invalid")
+
     if phase == ADMITTED_PROGRAMME_GATE:
         if (
-            correction_g03["status"] not in {"in_progress", "review_pending"}
-            or correction_g03["external_review_status"] not in {"not_started", "pending"}
-            or correction_g03["g1a_authorized"] is not False
+            correction_g04["status"] not in {"in_progress", "review_pending"}
+            or correction_g04["external_review_status"]
+            not in {"not_started", "pending"}
+            or correction_g04["g1a_authorized"] is not False
             or value["gate_transition"] is not None
         ):
-            raise ProgrammeAdmissionError("g0_3_correction_not_fail_closed")
+            raise ProgrammeAdmissionError("g0_4_correction_not_fail_closed")
     else:
         if (
-            correction_g03["status"] != "external_review_passed"
-            or correction_g03["external_review_status"] != "pass"
-            or correction_g03["g1a_authorized"] is not True
+            correction_g04["status"] != "external_review_passed"
+            or correction_g04["external_review_status"] != "pass"
+            or correction_g04["g1a_authorized"] is not True
         ):
-            raise ProgrammeAdmissionError("g0_3_transition_history_invalid")
+            raise ProgrammeAdmissionError("g0_4_transition_history_invalid")
         transition = _exact_keys(
             value["gate_transition"],
             {
@@ -786,15 +913,19 @@ def _validate_state(value: dict[str, Any]) -> None:
             or transition["g1a_authorized"] is not True
         ):
             raise ProgrammeAdmissionError("gate_transition_state_invalid")
-        if _IDENTIFIER.fullmatch(
-            _bounded_text(transition["transition_id"], "transition_id_invalid", 128)
-        ) is None:
+        if (
+            _IDENTIFIER.fullmatch(
+                _bounded_text(transition["transition_id"], "transition_id_invalid", 128)
+            )
+            is None
+        ):
             raise ProgrammeAdmissionError("transition_id_invalid")
         _bounded_text(transition["reviewer_surface"], "reviewer_surface_invalid", 256)
         for field in ("reviewed_commit", "reviewed_tree"):
-            if not isinstance(transition[field], str) or _SHA1.fullmatch(
-                transition[field]
-            ) is None:
+            if (
+                not isinstance(transition[field], str)
+                or _SHA1.fullmatch(transition[field]) is None
+            ):
                 raise ProgrammeAdmissionError("gate_transition_binding_invalid")
 
     baton = value.get("recovery_baton")
@@ -835,7 +966,13 @@ def _validate_state(value: dict[str, Any]) -> None:
 def _validate_gates(value: dict[str, Any], state: dict[str, Any]) -> None:
     _exact_keys(
         value,
-        {"schema_version", "programme", "global_hard_stops", "protected_invariants", "gates"},
+        {
+            "schema_version",
+            "programme",
+            "global_hard_stops",
+            "protected_invariants",
+            "gates",
+        },
         "programme_gates_schema_invalid",
     )
     if value["schema_version"] != "raisa-ariadne.programme-gates.v1":
@@ -872,7 +1009,9 @@ def _validate_gates(value: dict[str, Any], state: dict[str, Any]) -> None:
         raise ProgrammeAdmissionError("programme_state_gate_disagreement")
     _unique_text_list(value["global_hard_stops"], "global_hard_stops_invalid")
     protected = _exact_keys(
-        value["protected_invariants"], {"raisa", "ariadne"}, "protected_invariants_invalid"
+        value["protected_invariants"],
+        {"raisa", "ariadne"},
+        "protected_invariants_invalid",
     )
     _unique_text_list(protected["raisa"], "raisa_invariants_invalid")
     _unique_text_list(protected["ariadne"], "ariadne_invariants_invalid")
@@ -881,28 +1020,49 @@ def _validate_gates(value: dict[str, Any], state: dict[str, Any]) -> None:
         raise ProgrammeAdmissionError("gate_inventory_invalid")
     by_id: dict[str, dict[str, Any]] = {}
     allowed_gate_keys = {
-        "id", "name", "status", "prerequisites", "programme_mode", "allowed_work",
-        "prohibited_work", "exit_checks", "next_gate",
+        "id",
+        "name",
+        "status",
+        "prerequisites",
+        "programme_mode",
+        "allowed_work",
+        "prohibited_work",
+        "exit_checks",
+        "next_gate",
     }
     for gate in gates:
         if not isinstance(gate, dict) or not set(gate).issubset(allowed_gate_keys):
             raise ProgrammeAdmissionError("gate_schema_invalid")
-        required = {"id", "name", "status", "prerequisites", "programme_mode", "exit_checks", "next_gate"}
+        required = {
+            "id",
+            "name",
+            "status",
+            "prerequisites",
+            "programme_mode",
+            "exit_checks",
+            "next_gate",
+        }
         if not required.issubset(gate):
             raise ProgrammeAdmissionError("gate_schema_invalid")
         gate_id = _bounded_text(gate["id"], "gate_id_invalid", 32)
         if gate_id in by_id:
             raise ProgrammeAdmissionError("gate_id_duplicate")
         _unique_text_list(gate["exit_checks"], "gate_exit_checks_invalid")
-        if gate["programme_mode"] not in {"recovery", "convergence", "pilot_preparation", "release"}:
+        if gate["programme_mode"] not in {
+            "recovery",
+            "convergence",
+            "pilot_preparation",
+            "release",
+        }:
             raise ProgrammeAdmissionError("gate_mode_invalid")
         by_id[gate_id] = gate
     if state["active_correction"] == ADMITTED_PROGRAMME_GATE:
         current_statuses = {
-            "G0": "revision_required_g0_3",
+            "G0": "revision_required_g0_4",
             "G0.1": "superseded_revision_required",
             "G0.2": "superseded_revision_required",
-            "G0.3": state["g0_3_correction"]["status"],
+            "G0.3": "superseded_revision_required",
+            "G0.4": state["g0_4_correction"]["status"],
             "G1A": "blocked_by_external_G0_review",
         }
     else:
@@ -910,7 +1070,8 @@ def _validate_gates(value: dict[str, Any], state: dict[str, Any]) -> None:
             "G0": "passed",
             "G0.1": "superseded_revision_required",
             "G0.2": "superseded_revision_required",
-            "G0.3": "external_review_passed",
+            "G0.3": "superseded_revision_required",
+            "G0.4": "external_review_passed",
             "G1A": "active",
         }
     expected_statuses = {
@@ -942,7 +1103,15 @@ def _validate_gates(value: dict[str, Any], state: dict[str, Any]) -> None:
 def _validate_risks(value: dict[str, Any]) -> None:
     _exact_keys(
         value,
-        {"schema_version", "observed_at", "programme_mode", "current_gate", "status_vocabulary", "default_g0_control", "risks"},
+        {
+            "schema_version",
+            "observed_at",
+            "programme_mode",
+            "current_gate",
+            "status_vocabulary",
+            "default_g0_control",
+            "risks",
+        },
         "risk_register_schema_invalid",
     )
     if (
@@ -951,7 +1120,9 @@ def _validate_risks(value: dict[str, Any]) -> None:
         or value["current_gate"] != "G0"
     ):
         raise ProgrammeAdmissionError("risk_register_header_invalid")
-    vocabulary = set(_unique_text_list(value["status_vocabulary"], "risk_status_vocabulary_invalid"))
+    vocabulary = set(
+        _unique_text_list(value["status_vocabulary"], "risk_status_vocabulary_invalid")
+    )
     if vocabulary != {
         "observed_unresolved",
         "seeded_requires_verification",
@@ -959,7 +1130,10 @@ def _validate_risks(value: dict[str, Any]) -> None:
         "closed_with_evidence",
     }:
         raise ProgrammeAdmissionError("risk_status_vocabulary_invalid")
-    expected = {*(f"R-{index:03d}" for index in range(1, 14)), *(f"A-{index:03d}" for index in range(1, 11))}
+    expected = {
+        *(f"R-{index:03d}" for index in range(1, 14)),
+        *(f"A-{index:03d}" for index in range(1, 11)),
+    }
     risks = value["risks"]
     if not isinstance(risks, list) or len(risks) != len(expected):
         raise ProgrammeAdmissionError("risk_inventory_invalid")
@@ -980,9 +1154,15 @@ def _validate_risks(value: dict[str, Any]) -> None:
         by_id[risk_id] = item
     if set(by_id) != expected:
         raise ProgrammeAdmissionError("risk_inventory_invalid")
-    if "upgrade() executes op.execute" not in by_id["R-001"]["evidence"] or "TRUNCATE TABLE prescriptions" not in by_id["R-001"]["evidence"]:
+    if (
+        "upgrade() executes op.execute" not in by_id["R-001"]["evidence"]
+        or "TRUNCATE TABLE prescriptions" not in by_id["R-001"]["evidence"]
+    ):
         raise ProgrammeAdmissionError("risk_r001_evidence_invalid")
-    if "static/audio" not in by_id["R-003"]["evidence"] or "app/main.py mounts static at /static" not in by_id["R-003"]["evidence"]:
+    if (
+        "static/audio" not in by_id["R-003"]["evidence"]
+        or "app/main.py mounts static at /static" not in by_id["R-003"]["evidence"]
+    ):
         raise ProgrammeAdmissionError("risk_r003_evidence_invalid")
 
 
@@ -990,9 +1170,18 @@ def _validate_inventory(value: dict[str, Any], state: dict[str, Any]) -> None:
     _exact_keys(
         value,
         {
-            "schema_version", "observed_at", "repository", "programme_mode", "current_gate",
-            "mutation_policy", "authoritative_refs", "remote_branch_inventory", "local_topology",
-            "ambiguous_current_aliases", "open_pr_inventory", "g0_conclusion",
+            "schema_version",
+            "observed_at",
+            "repository",
+            "programme_mode",
+            "current_gate",
+            "mutation_policy",
+            "authoritative_refs",
+            "remote_branch_inventory",
+            "local_topology",
+            "ambiguous_current_aliases",
+            "open_pr_inventory",
+            "g0_conclusion",
         },
         "branch_inventory_schema_invalid",
     )
@@ -1004,27 +1193,48 @@ def _validate_inventory(value: dict[str, Any], state: dict[str, Any]) -> None:
         raise ProgrammeAdmissionError("branch_inventory_header_invalid")
     mutation = _exact_keys(
         value["mutation_policy"],
-        {"branch_deletion", "pr_closure", "pr_merge", "feature_rebase", "protected_ref_movement"},
+        {
+            "branch_deletion",
+            "pr_closure",
+            "pr_merge",
+            "feature_rebase",
+            "protected_ref_movement",
+        },
         "mutation_policy_schema_invalid",
     )
     if set(mutation.values()) != {"forbidden"}:
         raise ProgrammeAdmissionError("mutation_policy_not_fail_closed")
     refs = value.get("authoritative_refs")
-    if not isinstance(refs, dict) or refs.get("recovery_branch") != state["recovery_baton"]["branch"] or refs.get("recovery_base") != state["recovery_baton"]["base_sha"]:
+    if (
+        not isinstance(refs, dict)
+        or refs.get("recovery_branch") != state["recovery_baton"]["branch"]
+        or refs.get("recovery_base") != state["recovery_baton"]["base_sha"]
+    ):
         raise ProgrammeAdmissionError("branch_inventory_authority_disagreement")
     open_prs = value.get("open_pr_inventory")
-    if not isinstance(open_prs, dict) or not isinstance(open_prs.get("prs"), list) or open_prs.get("count") != len(open_prs["prs"]):
+    if (
+        not isinstance(open_prs, dict)
+        or not isinstance(open_prs.get("prs"), list)
+        or open_prs.get("count") != len(open_prs["prs"])
+    ):
         raise ProgrammeAdmissionError("open_pr_inventory_invalid")
     numbers: set[int] = set()
     for pr in open_prs["prs"]:
-        if not isinstance(pr, dict) or not set(pr).issubset({"number", "draft", "head", "base", "disposition", "stack_order"}):
+        if not isinstance(pr, dict) or not set(pr).issubset(
+            {"number", "draft", "head", "base", "disposition", "stack_order"}
+        ):
             raise ProgrammeAdmissionError("open_pr_entry_schema_invalid")
         if not {"number", "draft", "head", "base", "disposition"}.issubset(pr):
             raise ProgrammeAdmissionError("open_pr_entry_schema_invalid")
         if pr["disposition"] not in {"dependency_update", "quarantine"}:
             raise ProgrammeAdmissionError("open_pr_disposition_invalid")
         number = pr["number"]
-        if isinstance(number, bool) or not isinstance(number, int) or number <= 0 or number in numbers:
+        if (
+            isinstance(number, bool)
+            or not isinstance(number, int)
+            or number <= 0
+            or number in numbers
+        ):
             raise ProgrammeAdmissionError("open_pr_number_invalid")
         numbers.add(number)
 
@@ -1060,13 +1270,14 @@ def _validate_g1a_scope(value: dict[str, Any]) -> None:
             "schema_version",
             "status",
             "prepared_at",
-            "source_commit",
+            "inventory_source_commit",
             "task_class",
             "objective",
             "verdict_parsers",
             "review_callers",
             "cli_exit_consumers",
             "integration_consumers",
+            "excluded_consumers",
             "allowed_paths",
             "allowed_effects",
             "forbidden_effects",
@@ -1076,48 +1287,108 @@ def _validate_g1a_scope(value: dict[str, Any]) -> None:
     if (
         value["schema_version"] != "raisa-ariadne.g1a-verdict-integration-scope.v1"
         or value["status"] != "pre_reviewed_closed_scope"
-        or value["source_commit"] != "7cae4e88e2f3951e51dcaf1378e52187e191a33d"
+        or value["inventory_source_commit"]
+        != "2af92789819e8114a1bfe8e956a5742136e4a139"
         or value["task_class"] != G1A_TASK_CLASS
         or set(_unique_text_list(value["allowed_paths"], "g1a_scope_paths_invalid"))
         != G1A_ALLOWED_PATHS
         or set(_unique_text_list(value["allowed_effects"], "g1a_scope_effects_invalid"))
         != G1A_ALLOWED_EFFECTS
-        or set(_unique_text_list(value["forbidden_effects"], "g1a_scope_forbidden_invalid"))
+        or set(
+            _unique_text_list(value["forbidden_effects"], "g1a_scope_forbidden_invalid")
+        )
         != G1A_FORBIDDEN_EFFECTS
     ):
         raise ProgrammeAdmissionError("g1a_scope_not_exact")
     parser_rows = value["verdict_parsers"]
     expected_parsers = [
-        {"id": "review_acceptance_table_parser", "path": "orchestration_harness/review_acceptance.py", "symbol": "_parse_artifact_marker", "disposition": "replace_with_canonical_parser"},
-        {"id": "deepcode_terminal_marker_parser", "path": "orchestration_harness/deepcode_artifact.py", "symbol": "parse_artifact_marker", "disposition": "delegate_to_canonical_parser"},
-        {"id": "antigravity_structured_and_legacy_parser", "path": "scripts/ariadne_antigravity.py", "symbol": "parse_structured_decision", "disposition": "delegate_decision_semantics_to_canonical_parser"},
+        {
+            "id": "review_acceptance_table_parser",
+            "path": "orchestration_harness/review_acceptance.py",
+            "symbol": "_parse_artifact_marker",
+            "disposition": "replace_with_canonical_parser",
+        },
+        {
+            "id": "deepcode_terminal_marker_parser",
+            "path": "orchestration_harness/deepcode_artifact.py",
+            "symbol": "parse_artifact_marker",
+            "disposition": "delegate_to_canonical_parser",
+        },
+        {
+            "id": "antigravity_structured_and_legacy_parser",
+            "path": "scripts/ariadne_antigravity.py",
+            "symbol": "parse_structured_decision",
+            "disposition": "delegate_decision_semantics_to_canonical_parser",
+        },
     ]
     if parser_rows != expected_parsers:
         raise ProgrammeAdmissionError("g1a_parser_inventory_invalid")
     expected_callers = [
-        {"id": "review_acceptance_gate", "path": "orchestration_harness/review_acceptance.py", "symbol": "accept_review_artifact"},
-        {"id": "review_acceptance_cli", "path": "scripts/ariadne_review_acceptance.py", "symbol": "main"},
-        {"id": "deepcode_liveness_observer", "path": "scripts/ariadne_deepcode_liveness.py", "symbol": "_artifact_state"},
-        {"id": "antigravity_worker", "path": "scripts/ariadne_antigravity.py", "symbol": "run_worker"},
+        {
+            "id": "review_acceptance_gate",
+            "path": "orchestration_harness/review_acceptance.py",
+            "symbol": "accept_review_artifact",
+        },
+        {
+            "id": "review_acceptance_cli",
+            "path": "scripts/ariadne_review_acceptance.py",
+            "symbol": "main",
+        },
+        {
+            "id": "deepcode_liveness_observer",
+            "path": "scripts/ariadne_deepcode_liveness.py",
+            "symbol": "_artifact_state",
+        },
+        {
+            "id": "antigravity_worker",
+            "path": "scripts/ariadne_antigravity.py",
+            "symbol": "run_worker",
+        },
     ]
     caller_rows = value["review_callers"]
     if caller_rows != expected_callers:
         raise ProgrammeAdmissionError("g1a_review_caller_inventory_invalid")
     expected_cli = [
-        {"id": "review_acceptance_exit_mapping", "path": "scripts/ariadne_review_acceptance.py", "contract": "accepted_exit_0_rejected_exit_1_input_error_exit_2"},
-        {"id": "antigravity_transport_exit_mapping", "path": "scripts/ariadne_antigravity.py", "contract": "valid_worker_receipt_exit_0_transport_or_contract_failure_exit_2"},
+        {
+            "id": "review_acceptance_exit_mapping",
+            "path": "scripts/ariadne_review_acceptance.py",
+            "contract": "accepted_exit_0_rejected_exit_1_input_error_exit_2",
+        },
+        {
+            "id": "antigravity_transport_exit_mapping",
+            "path": "scripts/ariadne_antigravity.py",
+            "contract": "valid_worker_receipt_exit_0_transport_or_contract_failure_exit_2",
+        },
     ]
     cli_rows = value["cli_exit_consumers"]
     if cli_rows != expected_cli:
         raise ProgrammeAdmissionError("g1a_cli_consumer_inventory_invalid")
     integration_rows = value["integration_consumers"]
-    if integration_rows != [{
-        "id": "worktree_integration_recording",
-        "path": "scripts/agent_worktrees.py",
-        "symbol": "record_integration",
-        "risk": "free_text_result_must_not_convert_revision_required_to_integration_authority",
-    }]:
+    if integration_rows != [
+        {
+            "id": "worktree_integration_recording",
+            "path": "scripts/agent_worktrees.py",
+            "symbol": "record_integration",
+            "risk": "free_text_result_must_not_convert_revision_required_to_integration_authority",
+            "disposition": "defer_to_separate_pure_adapter_subtranche",
+        }
+    ]:
         raise ProgrammeAdmissionError("g1a_integration_consumer_inventory_invalid")
+    if value["excluded_consumers"] != [
+        {
+            "id": "evidence_gate_diagnostic_and_command_admission",
+            "path": "scripts/ariadne_evidence_gate.py",
+            "disposition": "out_of_g1a_verdict_kernel",
+            "rationale": "owns diagnostic and command-result admission vocabulary, not external review verdict or integration authority",
+        },
+        {
+            "id": "worktree_integration_mutator",
+            "path": "scripts/agent_worktrees.py",
+            "disposition": "later_separate_subtranche",
+            "rationale": "integration mutation is outside the first immutable G1A verdict-kernel tranche",
+        },
+    ]:
+        raise ProgrammeAdmissionError("g1a_excluded_consumer_inventory_invalid")
 
 
 def _validate_overlay(
@@ -1126,16 +1397,30 @@ def _validate_overlay(
     _exact_keys(
         value,
         {
-            "schema_version", "status", "authority_owner", "recorded_at", "state_file",
-            "gates_file", "risk_file", "inventory_file", "g1a_scope_file",
-            "admission_command", "required_before", "missing_or_invalid_state",
-            "active_profile", "profiles", "scope_policy", "transition_policy",
-            "gated_entrypoints", "reversibility",
+            "schema_version",
+            "status",
+            "authority_owner",
+            "recorded_at",
+            "state_file",
+            "gates_file",
+            "risk_file",
+            "inventory_file",
+            "g1a_scope_file",
+            "admission_command",
+            "required_before",
+            "missing_or_invalid_state",
+            "active_profile",
+            "profiles",
+            "scope_policy",
+            "transition_policy",
+            "pinned_gatekeeper",
+            "gated_entrypoints",
+            "reversibility",
         },
         "recovery_overlay_schema_invalid",
     )
     if (
-        value["schema_version"] != "ariadne.programme_recovery.v4"
+        value["schema_version"] != "ariadne.programme_recovery.v5"
         or value["status"] != "active_emergency_overlay"
         or value["authority_owner"] != "Yuri"
         or value["state_file"] != STATE_PATH.as_posix()
@@ -1146,41 +1431,68 @@ def _validate_overlay(
         or value["missing_or_invalid_state"] != "hard_stop"
     ):
         raise ProgrammeAdmissionError("recovery_overlay_header_invalid")
-    if set(_unique_text_list(value["required_before"], "recovery_required_before_invalid")) != ENTRYPOINTS:
+    if (
+        set(
+            _unique_text_list(
+                value["required_before"], "recovery_required_before_invalid"
+            )
+        )
+        != ENTRYPOINTS
+    ):
         raise ProgrammeAdmissionError("recovery_entrypoint_coverage_incomplete")
     profiles = value["profiles"]
     if not isinstance(profiles, dict) or set(profiles) != {
-        G0_CONTROLLER_PROFILE, TRANSITION_PROFILE, G1A_ACTIVE_PROFILE
+        G0_CONTROLLER_PROFILE,
+        TRANSITION_PROFILE,
+        G1A_ACTIVE_PROFILE,
     }:
         raise ProgrammeAdmissionError("recovery_profiles_invalid")
     expected = {
         G0_CONTROLLER_PROFILE: {
-            "profile_kind": "controller_maintenance", "expected_current_gate": "G0",
-            "expected_gate_status": "revision_required", "active_correction": ADMITTED_PROGRAMME_GATE,
-            "programme_gate": ADMITTED_PROGRAMME_GATE, "task_class": ADMITTED_TASK_CLASS,
-            "effects": ALLOWED_MAINTENANCE_EFFECTS, "forbidden": FORBIDDEN_EFFECTS,
-            "behavior": "g0_controller_maintenance", "paths": G0_G03_ALLOWED_PATHS,
+            "profile_kind": "controller_maintenance",
+            "expected_current_gate": "G0",
+            "expected_gate_status": "revision_required",
+            "active_correction": ADMITTED_PROGRAMME_GATE,
+            "programme_gate": ADMITTED_PROGRAMME_GATE,
+            "task_class": ADMITTED_TASK_CLASS,
+            "effects": ALLOWED_MAINTENANCE_EFFECTS,
+            "forbidden": FORBIDDEN_EFFECTS,
+            "behavior": "g0_controller_maintenance",
+            "paths": G0_G04_ALLOWED_PATHS,
             "g1a": False,
         },
         TRANSITION_PROFILE: {
-            "profile_kind": "state_transition", "expected_current_gate": TRANSITION_TO_GATE,
-            "expected_gate_status": "active", "active_correction": TRANSITION_TO_GATE,
-            "programme_gate": "G0_TO_G1A", "task_class": TRANSITION_TASK_CLASS,
-            "effects": ALLOWED_MAINTENANCE_EFFECTS | {"external_review_record", "transition_artifact"},
-            "forbidden": TRANSITION_FORBIDDEN_EFFECTS, "behavior": "semantic_state_transition",
-            "paths": TRANSITION_FIXED_ALLOWED_PATHS, "g1a": True,
+            "profile_kind": "state_transition",
+            "expected_current_gate": TRANSITION_TO_GATE,
+            "expected_gate_status": "active",
+            "active_correction": TRANSITION_TO_GATE,
+            "programme_gate": "G0_TO_G1A",
+            "task_class": TRANSITION_TASK_CLASS,
+            "effects": ALLOWED_MAINTENANCE_EFFECTS
+            | {"external_review_record", "transition_artifact"},
+            "forbidden": TRANSITION_FORBIDDEN_EFFECTS,
+            "behavior": "semantic_state_transition",
+            "paths": TRANSITION_FIXED_ALLOWED_PATHS,
+            "g1a": True,
         },
         G1A_ACTIVE_PROFILE: {
-            "profile_kind": "active_gate", "expected_current_gate": TRANSITION_TO_GATE,
-            "expected_gate_status": "active", "active_correction": TRANSITION_TO_GATE,
-            "programme_gate": TRANSITION_TO_GATE, "task_class": G1A_TASK_CLASS,
-            "effects": G1A_ALLOWED_EFFECTS, "forbidden": G1A_FORBIDDEN_EFFECTS,
-            "behavior": "g1a_bounded_repair", "paths": G1A_ALLOWED_PATHS,
+            "profile_kind": "active_gate",
+            "expected_current_gate": TRANSITION_TO_GATE,
+            "expected_gate_status": "active",
+            "active_correction": TRANSITION_TO_GATE,
+            "programme_gate": TRANSITION_TO_GATE,
+            "task_class": G1A_TASK_CLASS,
+            "effects": G1A_ALLOWED_EFFECTS,
+            "forbidden": G1A_FORBIDDEN_EFFECTS,
+            "behavior": "g1a_bounded_repair",
+            "paths": G1A_ALLOWED_PATHS,
             "g1a": True,
         },
     }
     for name, spec in expected.items():
-        row = _exact_keys(profiles[name], _PROFILE_KEYS, "recovery_profile_schema_invalid")
+        row = _exact_keys(
+            profiles[name], _PROFILE_KEYS, "recovery_profile_schema_invalid"
+        )
         if (
             row["profile_kind"] != spec["profile_kind"]
             or row["expected_programme_mode"] != "recovery"
@@ -1189,23 +1501,40 @@ def _validate_overlay(
             or row["active_correction"] != spec["active_correction"]
             or row["programme_gate"] != spec["programme_gate"]
             or row["admitted_task_classes"] != [spec["task_class"]]
-            or set(_unique_text_list(row["allowed_effects"], "profile_effects_invalid")) != spec["effects"]
-            or set(_unique_text_list(row["forbidden_effects"], "profile_forbidden_invalid")) != spec["forbidden"]
-            or set(_unique_text_list(row["closed_entrypoints"], "profile_entrypoints_invalid")) != ENTRYPOINTS_CLOSED_IN_G0
+            or set(_unique_text_list(row["allowed_effects"], "profile_effects_invalid"))
+            != spec["effects"]
+            or set(
+                _unique_text_list(row["forbidden_effects"], "profile_forbidden_invalid")
+            )
+            != spec["forbidden"]
+            or set(
+                _unique_text_list(
+                    row["closed_entrypoints"], "profile_entrypoints_invalid"
+                )
+            )
+            != ENTRYPOINTS_CLOSED_IN_G0
             or row["scope_behavior"] != spec["behavior"]
-            or set(_unique_text_list(row["allowed_paths"], "profile_paths_invalid")) != spec["paths"]
+            or set(_unique_text_list(row["allowed_paths"], "profile_paths_invalid"))
+            != spec["paths"]
             or row["autonomous_task_selection"] is not False
             or row["out_of_gate_result"] != "blocked"
-            or any(row[key] is not False for key in (
-                "feature_work_eligible", "product_work_eligible", "provider_calls_eligible",
-                "deployment_eligible", "protected_ref_movement_eligible",
-            ))
+            or any(
+                row[key] is not False
+                for key in (
+                    "feature_work_eligible",
+                    "product_work_eligible",
+                    "provider_calls_eligible",
+                    "deployment_eligible",
+                    "protected_ref_movement_eligible",
+                )
+            )
             or row["g1a_eligible"] is not spec["g1a"]
         ):
             raise ProgrammeAdmissionError("recovery_profile_not_exact")
     active_profile = value["active_profile"]
     if active_profile != state["active_profile"] or active_profile not in {
-        G0_CONTROLLER_PROFILE, G1A_ACTIVE_PROFILE
+        G0_CONTROLLER_PROFILE,
+        G1A_ACTIVE_PROFILE,
     }:
         raise ProgrammeAdmissionError("recovery_active_profile_invalid")
     active = profiles[active_profile]
@@ -1218,21 +1547,35 @@ def _validate_overlay(
         raise ProgrammeAdmissionError("recovery_profile_state_disagreement")
     scope = _exact_keys(
         value["scope_policy"],
-        {"expected_branch", "frozen_recovery_base", "authorized_parent_commit", "candidate_commit_limit", "allowed_paths"},
+        {
+            "expected_branch",
+            "frozen_recovery_base",
+            "authorized_parent_commit",
+            "candidate_commit_limit",
+            "allowed_paths",
+        },
         "scope_policy_schema_invalid",
     )
     if (
         scope["expected_branch"] != state["recovery_baton"]["branch"]
         or scope["frozen_recovery_base"] != state["recovery_baton"]["base_sha"]
-        or scope["authorized_parent_commit"] != state["g0_3_correction"]["authorized_parent_commit"]
+        or scope["authorized_parent_commit"]
+        != state["g0_4_correction"]["authorized_parent_commit"]
         or scope["candidate_commit_limit"] != 1
-        or set(_unique_text_list(scope["allowed_paths"], "scope_allowed_paths_invalid")) != G0_G03_ALLOWED_PATHS
+        or set(_unique_text_list(scope["allowed_paths"], "scope_allowed_paths_invalid"))
+        != G0_G04_ALLOWED_PATHS
     ):
         raise ProgrammeAdmissionError("scope_policy_state_disagreement")
-    allowed_paths = _unique_text_list(active["allowed_paths"], "scope_allowed_paths_invalid")
+    allowed_paths = _unique_text_list(
+        active["allowed_paths"], "scope_allowed_paths_invalid"
+    )
     for raw in allowed_paths:
         path = PurePosixPath(raw)
-        if path.is_absolute() or "\\" in raw or any(part in {"", ".", ".."} for part in path.parts):
+        if (
+            path.is_absolute()
+            or "\\" in raw
+            or any(part in {"", ".", ".."} for part in path.parts)
+        ):
             raise ProgrammeAdmissionError("scope_allowed_path_invalid")
     entrypoints = value["gated_entrypoints"]
     if not isinstance(entrypoints, list) or not entrypoints:
@@ -1240,21 +1583,58 @@ def _validate_overlay(
     observed: set[str] = set()
     observed_ids: set[str] = set()
     for item in entrypoints:
-        row = _exact_keys(item, {"id", "path", "entrypoint"}, "gated_entrypoint_schema_invalid")
+        row = _exact_keys(
+            item, {"id", "path", "entrypoint"}, "gated_entrypoint_schema_invalid"
+        )
         if row["entrypoint"] not in ENTRYPOINTS or row["id"] in observed_ids:
             raise ProgrammeAdmissionError("gated_entrypoint_inventory_invalid")
         observed.add(row["entrypoint"])
         observed_ids.add(row["id"])
-        if row["path"] not in G0_G03_ALLOWED_PATHS or not (root / row["path"]).is_file():
+        if (
+            row["path"] not in G0_G04_ALLOWED_PATHS
+            or not (root / row["path"]).is_file()
+        ):
             raise ProgrammeAdmissionError("gated_entrypoint_path_invalid")
     if observed != ENTRYPOINTS:
         raise ProgrammeAdmissionError("recovery_entrypoint_coverage_incomplete")
+    gatekeeper = _exact_keys(
+        value["pinned_gatekeeper"],
+        {
+            "schema_version",
+            "module",
+            "cli",
+            "source_binding",
+            "clean_source_required",
+            "target_is_data_only",
+            "candidate_controller_execution_forbidden",
+            "combined_operation_only",
+        },
+        "pinned_gatekeeper_policy_schema_invalid",
+    )
+    if gatekeeper != {
+        "schema_version": "ariadne.pinned_programme_gatekeeper_policy.v1",
+        "module": "orchestration_harness/pinned_programme_gatekeeper.py",
+        "cli": "scripts/raisa_ariadne_pinned_gatekeeper.py",
+        "source_binding": "gate_transition.reviewed_commit_and_reviewed_tree",
+        "clean_source_required": True,
+        "target_is_data_only": True,
+        "candidate_controller_execution_forbidden": True,
+        "combined_operation_only": True,
+    }:
+        raise ProgrammeAdmissionError("pinned_gatekeeper_policy_invalid")
     transition = _exact_keys(
         value["transition_policy"],
         {
-            "manifest_schema_version", "task_class", "from_gate", "to_gate",
-            "transition_status", "external_review_record_root", "transition_artifact_root",
-            "candidate_commit_limit", "fixed_allowed_paths", "forbidden_effect_classes",
+            "manifest_schema_version",
+            "task_class",
+            "from_gate",
+            "to_gate",
+            "transition_status",
+            "external_review_record_root",
+            "transition_artifact_root",
+            "candidate_commit_limit",
+            "fixed_allowed_paths",
+            "forbidden_effect_classes",
         },
         "transition_policy_schema_invalid",
     )
@@ -1267,12 +1647,24 @@ def _validate_overlay(
         or transition["external_review_record_root"] != TRANSITION_REVIEW_ROOT
         or transition["transition_artifact_root"] != TRANSITION_ARTIFACT_ROOT
         or transition["candidate_commit_limit"] != 1
-        or set(_unique_text_list(transition["fixed_allowed_paths"], "transition_fixed_paths_invalid")) != TRANSITION_FIXED_ALLOWED_PATHS
-        or set(_unique_text_list(transition["forbidden_effect_classes"], "transition_forbidden_effects_invalid")) != TRANSITION_FORBIDDEN_EFFECTS
+        or set(
+            _unique_text_list(
+                transition["fixed_allowed_paths"], "transition_fixed_paths_invalid"
+            )
+        )
+        != TRANSITION_FIXED_ALLOWED_PATHS
+        or set(
+            _unique_text_list(
+                transition["forbidden_effect_classes"],
+                "transition_forbidden_effects_invalid",
+            )
+        )
+        != TRANSITION_FORBIDDEN_EFFECTS
     ):
         raise ProgrammeAdmissionError("transition_policy_invalid")
     reversibility = _exact_keys(
-        value["reversibility"], {"removal_requires", "default_on_transition_error"},
+        value["reversibility"],
+        {"removal_requires", "default_on_transition_error"},
         "recovery_reversibility_invalid",
     )
     if reversibility != {
@@ -1291,34 +1683,60 @@ def _validate_precedence(
 ) -> None:
     _exact_keys(
         project,
-        {"schema_version", "project_id", "master_authority", "allocation", "operating_model", "secure_sdlc", "direction_collaboration", "autonomous_continuation", "cost_controls"},
+        {
+            "schema_version",
+            "project_id",
+            "master_authority",
+            "allocation",
+            "operating_model",
+            "secure_sdlc",
+            "direction_collaboration",
+            "autonomous_continuation",
+            "cost_controls",
+        },
         "project_settings_schema_invalid",
     )
     _exact_keys(
         continuation,
-        {"schema_version", "default_posture", "emergency_programme_overlay", "applies_when", "policy_decision", "standing_programme_authority", "architecture_strengthening_choice_policy", "failure_loop", "authority", "execution_limits", "pause_for_user_only_when", "must_not_pause_for", "evidence", "task_lifecycle", "resume_checkpoint", "document_metadata"},
+        {
+            "schema_version",
+            "default_posture",
+            "emergency_programme_overlay",
+            "applies_when",
+            "policy_decision",
+            "standing_programme_authority",
+            "architecture_strengthening_choice_policy",
+            "failure_loop",
+            "authority",
+            "execution_limits",
+            "pause_for_user_only_when",
+            "must_not_pause_for",
+            "evidence",
+            "task_lifecycle",
+            "resume_checkpoint",
+            "document_metadata",
+        },
         "continuation_settings_schema_invalid",
     )
-    project_overlay = project.get("autonomous_continuation", {}).get("emergency_overlay", {})
+    project_overlay = project.get("autonomous_continuation", {}).get(
+        "emergency_overlay", {}
+    )
     continuation_overlay = continuation.get("emergency_programme_overlay", {})
-    if (
-        project_overlay != {
-            "settings_file": "programme_recovery.yaml",
-            "required": True,
-            "precedence": "higher_than_standing_continuation",
-            "missing_or_invalid": "hard_stop",
-        }
-        or continuation_overlay != {
-            "status": "active",
-            "settings_file": "programme_recovery.yaml",
-            "precedence": "higher_than_default_posture_and_standing_programme_authority",
-            "required_before_task_selection": True,
-            "missing_or_invalid": "hard_stop",
-        }
-    ):
+    if project_overlay != {
+        "settings_file": "programme_recovery.yaml",
+        "required": True,
+        "precedence": "higher_than_standing_continuation",
+        "missing_or_invalid": "hard_stop",
+    } or continuation_overlay != {
+        "status": "active",
+        "settings_file": "programme_recovery.yaml",
+        "precedence": "higher_than_default_posture_and_standing_programme_authority",
+        "required_before_task_selection": True,
+        "missing_or_invalid": "hard_stop",
+    }:
         raise ProgrammeAdmissionError("recovery_precedence_invalid")
     phase_token = (
-        "Gate G0.3 is the only authorised correction; G1A is"
+        "Gate G0.4 is the only authorised correction; G1A is"
         if state["active_correction"] == ADMITTED_PROGRAMME_GATE
         else "The reviewed G0 to G1A transition is complete; Gate G1A is active"
     )
@@ -1327,7 +1745,9 @@ def _validate_precedence(
         phase_token,
         "Missing, malformed, stale, or contradictory programme state is a hard stop.",
     )
-    if not agents_text.startswith(required_header[0]) or any(token not in agents_text[:1200] for token in required_header[1:]):
+    if not agents_text.startswith(required_header[0]) or any(
+        token not in agents_text[:1200] for token in required_header[1:]
+    ):
         raise ProgrammeAdmissionError("agents_recovery_precedence_missing")
 
 
@@ -1384,7 +1804,7 @@ def load_programme_policy(repo_root: Path) -> ProgrammePolicy:
         agents_text = (root / AGENTS_PATH).read_text(encoding="utf-8")
     except (OSError, UnicodeError) as error:
         raise ProgrammeAdmissionError("agents_handover_missing") from error
-    _validate_state(state)
+    _validate_state(state, root)
     _validate_gates(gates, state)
     _validate_risks(risks)
     _validate_inventory(inventory, state)
@@ -1427,7 +1847,15 @@ def load_programme_policy(repo_root: Path) -> ProgrammePolicy:
         full_range_allowed_paths=tuple(
             allowed_paths
             if state["active_correction"] == ADMITTED_PROGRAMME_GATE
-            else sorted(G0_G03_ALLOWED_PATHS | TRANSITION_FIXED_ALLOWED_PATHS | set(allowed_paths))
+            else sorted(
+                G0_G04_ALLOWED_PATHS
+                | TRANSITION_FIXED_ALLOWED_PATHS
+                | set(allowed_paths)
+                | {
+                    f"{TRANSITION_REVIEW_ROOT}/{state['gate_transition']['transition_id']}.json",
+                    f"{TRANSITION_ARTIFACT_ROOT}/{state['gate_transition']['transition_id']}.json",
+                }
+            )
         ),
     )
 
@@ -1500,10 +1928,12 @@ def _validate_manifest(
     if not isinstance(head, str) or _SHA1.fullmatch(head) is None:
         raise ProgrammeAdmissionError("task_manifest_head_invalid")
     if policy.state["active_correction"] == ADMITTED_PROGRAMME_GATE:
-        expected_base = policy.state["g0_3_correction"]["authorized_parent_commit"]
+        expected_base = policy.state["g0_4_correction"]["authorized_parent_commit"]
     else:
         reviewed = policy.state["gate_transition"]["reviewed_commit"]
-        commits = _run_git(repo_root, "rev-list", "--reverse", f"{reviewed}..HEAD").splitlines()
+        commits = _run_git(
+            repo_root, "rev-list", "--reverse", f"{reviewed}..HEAD"
+        ).splitlines()
         expected_base = commits[0] if commits else ""
     if base != expected_base:
         raise ProgrammeAdmissionError("task_manifest_base_stale")
@@ -1514,11 +1944,23 @@ def _validate_manifest(
         raise ProgrammeAdmissionError("task_manifest_state_digest_stale")
     if manifest["policy_digest"] != policy.policy_digest:
         raise ProgrammeAdmissionError("task_manifest_policy_digest_stale")
-    paths = _unique_text_list(manifest["allowed_path_roots"], "task_manifest_paths_invalid")
+    paths = _unique_text_list(
+        manifest["allowed_path_roots"], "task_manifest_paths_invalid"
+    )
     if not set(paths).issubset(policy.allowed_paths):
         raise ProgrammeAdmissionError("task_manifest_path_outside_policy")
-    intended = set(_unique_text_list(manifest["intended_side_effect_classes"], "task_manifest_intended_effects_invalid"))
-    forbidden = set(_unique_text_list(manifest["forbidden_side_effect_classes"], "task_manifest_forbidden_effects_invalid"))
+    intended = set(
+        _unique_text_list(
+            manifest["intended_side_effect_classes"],
+            "task_manifest_intended_effects_invalid",
+        )
+    )
+    forbidden = set(
+        _unique_text_list(
+            manifest["forbidden_side_effect_classes"],
+            "task_manifest_forbidden_effects_invalid",
+        )
+    )
     allowed_effects = set(active_profile["allowed_effects"])
     if not intended.issubset(allowed_effects) or intended & forbidden:
         raise ProgrammeAdmissionError("task_manifest_effects_not_admitted")
@@ -1546,7 +1988,10 @@ def _validate_transition_manifest(
     ):
         raise ProgrammeAdmissionError("transition_gate_invalid")
     for field in ("reviewed_commit", "reviewed_tree", "transition_parent"):
-        if not isinstance(manifest[field], str) or _SHA1.fullmatch(manifest[field]) is None:
+        if (
+            not isinstance(manifest[field], str)
+            or _SHA1.fullmatch(manifest[field]) is None
+        ):
             raise ProgrammeAdmissionError("transition_git_binding_invalid")
     if manifest["transition_parent"] != manifest["reviewed_commit"]:
         raise ProgrammeAdmissionError("transition_parent_invalid")
@@ -1563,7 +2008,10 @@ def _validate_transition_manifest(
         "state_digest_before",
         "policy_digest_before",
     ):
-        if not isinstance(manifest[field], str) or _SHA256.fullmatch(manifest[field]) is None:
+        if (
+            not isinstance(manifest[field], str)
+            or _SHA256.fullmatch(manifest[field]) is None
+        ):
             raise ProgrammeAdmissionError(f"transition_{field}_invalid")
     review_path = f"{TRANSITION_REVIEW_ROOT}/{transition_id}.json"
     artifact_path = f"{TRANSITION_ARTIFACT_ROOT}/{transition_id}.json"
@@ -1573,12 +2021,15 @@ def _validate_transition_manifest(
     expected_paths = TRANSITION_FIXED_ALLOWED_PATHS | {review_path, artifact_path}
     if set(allowed_paths) != expected_paths:
         raise ProgrammeAdmissionError("transition_allowed_paths_not_exact")
-    if set(
-        _unique_text_list(
-            manifest["forbidden_effect_classes"],
-            "transition_forbidden_effects_invalid",
+    if (
+        set(
+            _unique_text_list(
+                manifest["forbidden_effect_classes"],
+                "transition_forbidden_effects_invalid",
+            )
         )
-    ) != TRANSITION_FORBIDDEN_EFFECTS:
+        != TRANSITION_FORBIDDEN_EFFECTS
+    ):
         raise ProgrammeAdmissionError("transition_forbidden_effects_incomplete")
     if (
         policy.state["active_correction"] != TRANSITION_TO_GATE
@@ -1619,16 +2070,28 @@ def evaluate_programme_admission(
 ) -> ProgrammeDecision:
     """Return one structured, fail-closed decision for a gated entrypoint."""
     if entrypoint not in ENTRYPOINTS:
-        return _decision(admitted=False, reasons=["entrypoint_unknown"], policy=None, task_class=None)
+        return _decision(
+            admitted=False, reasons=["entrypoint_unknown"], policy=None, task_class=None
+        )
     try:
         policy = load_programme_policy(repo_root)
     except ProgrammeAdmissionError as error:
-        return _decision(admitted=False, reasons=[error.reason_code], policy=None, task_class=None)
+        return _decision(
+            admitted=False, reasons=[error.reason_code], policy=None, task_class=None
+        )
     if manifest is None:
-        return _decision(admitted=False, reasons=["task_manifest_missing"], policy=policy, task_class=None)
+        return _decision(
+            admitted=False,
+            reasons=["task_manifest_missing"],
+            policy=policy,
+            task_class=None,
+        )
     task_class = _manifest_task_class(manifest)
     try:
-        if isinstance(manifest, dict) and manifest.get("schema_version") == TRANSITION_MANIFEST_VERSION:
+        if (
+            isinstance(manifest, dict)
+            and manifest.get("schema_version") == TRANSITION_MANIFEST_VERSION
+        ):
             normalized, _ = _validate_transition_manifest(manifest, policy=policy)
             normalized_task_class = TRANSITION_TASK_CLASS
         else:
@@ -1637,17 +2100,39 @@ def evaluate_programme_admission(
             )
             normalized_task_class = normalized["task_class"]
     except ProgrammeAdmissionError as error:
-        return _decision(admitted=False, reasons=[error.reason_code], policy=policy, task_class=task_class)
+        return _decision(
+            admitted=False,
+            reasons=[error.reason_code],
+            policy=policy,
+            task_class=task_class,
+        )
     active_profile = policy.overlay["profiles"][policy.overlay["active_profile"]]
     if entrypoint in set(active_profile["closed_entrypoints"]):
-        return _decision(admitted=False, reasons=[f"{entrypoint}_closed_in_active_profile"], policy=policy, task_class=normalized_task_class)
+        return _decision(
+            admitted=False,
+            reasons=[f"{entrypoint}_closed_in_active_profile"],
+            policy=policy,
+            task_class=normalized_task_class,
+        )
     if entrypoint in {"task_branch_commit", "task_branch_push"}:
-        return _decision(admitted=False, reasons=["combined_operation_admission_required"], policy=policy, task_class=normalized_task_class)
+        return _decision(
+            admitted=False,
+            reasons=["combined_operation_admission_required"],
+            policy=policy,
+            task_class=normalized_task_class,
+        )
     if normalized_task_class != TRANSITION_TASK_CLASS:
         required_effect = ENTRYPOINT_REQUIRED_EFFECT[entrypoint]
         if required_effect not in normalized["intended_side_effect_classes"]:
-            return _decision(admitted=False, reasons=["task_manifest_required_effect_missing"], policy=policy, task_class=normalized_task_class)
-    return _decision(admitted=True, reasons=[], policy=policy, task_class=normalized_task_class)
+            return _decision(
+                admitted=False,
+                reasons=["task_manifest_required_effect_missing"],
+                policy=policy,
+                task_class=normalized_task_class,
+            )
+    return _decision(
+        admitted=True, reasons=[], policy=policy, task_class=normalized_task_class
+    )
 
 
 def _scope_change_inventories(
@@ -1696,9 +2181,7 @@ def _strict_yaml_payload(payload: bytes, reason: str) -> dict[str, Any]:
 
 def _fresh_origin_head(root: Path, branch: str) -> str | None:
     try:
-        row = _run_git(
-            root, "ls-remote", "--heads", "origin", f"refs/heads/{branch}"
-        )
+        row = _run_git(root, "ls-remote", "--heads", "origin", f"refs/heads/{branch}")
     except ProgrammeAdmissionError:
         return None
     fields = row.split()
@@ -1751,17 +2234,11 @@ _TRANSITION_STATE_POINTERS = {
     "/task_selection/next_tranche_admission_requires_state_transition",
     "/task_selection/next_eligibility_condition",
     "/g0_acceptance/status",
-    "/g0_acceptance/external_gate_review/verdict",
-    "/g0_acceptance/external_gate_review/reviewed_commit",
-    "/g0_acceptance/external_gate_review/reviewed_tree",
-    "/g0_acceptance/external_gate_review/handover_sha256",
-    "/g0_acceptance/external_gate_review/finding_count",
-    "/g0_acceptance/external_gate_review/g1a_authorized",
     "/g0_acceptance/next_action",
-    "/g0_3_correction/status",
-    "/g0_3_correction/external_review_status",
-    "/g0_3_correction/g1a_authorized",
-    "/g0_3_correction/next_action",
+    "/g0_4_correction/status",
+    "/g0_4_correction/external_review_status",
+    "/g0_4_correction/g1a_authorized",
+    "/g0_4_correction/next_action",
     "/gate_transition",
 }
 _TRANSITION_GATES_POINTERS = {
@@ -1770,8 +2247,8 @@ _TRANSITION_GATES_POINTERS = {
     "/programme/current_gate_status",
     "/programme/next_eligible_tranche",
     "/gates/0/status",
-    "/gates/3/status",
     "/gates/4/status",
+    "/gates/5/status",
 }
 _TRANSITION_OVERLAY_POINTERS = {"/active_profile"}
 _TRANSITION_LATCH_POINTERS = {
@@ -1793,15 +2270,27 @@ def _transition_semantic_pointer_map(root: Path, reviewed: str) -> dict[str, lis
         try:
             after_payload = (root / path).read_bytes()
         except OSError as error:
-            raise ProgrammeAdmissionError("transition_semantic_input_missing") from error
+            raise ProgrammeAdmissionError(
+                "transition_semantic_input_missing"
+            ) from error
         if kind == "json":
-            before = _strict_json_payload(before_payload, "transition_semantic_before_invalid")
-            after = _strict_json_payload(after_payload, "transition_semantic_after_invalid")
+            before = _strict_json_payload(
+                before_payload, "transition_semantic_before_invalid"
+            )
+            after = _strict_json_payload(
+                after_payload, "transition_semantic_after_invalid"
+            )
         else:
-            before = _strict_yaml_payload(before_payload, "transition_semantic_before_invalid")
-            after = _strict_yaml_payload(after_payload, "transition_semantic_after_invalid")
+            before = _strict_yaml_payload(
+                before_payload, "transition_semantic_before_invalid"
+            )
+            after = _strict_yaml_payload(
+                after_payload, "transition_semantic_after_invalid"
+            )
         result[path.as_posix()] = sorted(_semantic_pointers(before, after))
-    before_agents = _git_object_bytes(root, f"{reviewed}:{AGENTS_PATH.as_posix()}").replace(b"\r\n", b"\n")
+    before_agents = _git_object_bytes(
+        root, f"{reviewed}:{AGENTS_PATH.as_posix()}"
+    ).replace(b"\r\n", b"\n")
     try:
         after_agents = (root / AGENTS_PATH).read_bytes().replace(b"\r\n", b"\n")
     except OSError as error:
@@ -1818,16 +2307,18 @@ def _transition_semantic_pointer_map(root: Path, reviewed: str) -> dict[str, lis
         b"`orchestration/programme/current-state.json`, `orchestration/programme/gates.yaml`,\n"
         b"and the active recovery admission policy outrank the historical baton below while\n"
         b"the programme is in recovery. The older baton is evidence only and its named\n"
-        b"successor must not resume. Gate G0.3 is the only authorised correction; G1A is\n"
+        b"successor must not resume. Gate G0.4 is the only authorised correction; G1A is\n"
         b"closed. Missing, malformed, stale, or contradictory programme state is a hard stop.\n\n"
     )
     expected_after = expected_before.replace(
-        b"Gate G0.3 is the only authorised correction; G1A is\nclosed.",
+        b"Gate G0.4 is the only authorised correction; G1A is\nclosed.",
         b"The reviewed G0 to G1A transition is complete; Gate G1A is active\nfor its bounded typed task only.",
     )
     if before_header != expected_before or after_header != expected_after:
         raise ProgrammeAdmissionError("transition_agents_header_not_exact")
-    result[AGENTS_PATH.as_posix()] = ["/emergency_header"] if before_header != after_header else []
+    result[AGENTS_PATH.as_posix()] = (
+        ["/emergency_header"] if before_header != after_header else []
+    )
     return result
 
 
@@ -1880,21 +2371,24 @@ def _transition_scope_reasons(
         LATCH_PATH,
         AGENTS_PATH,
     )
-    if _digest_paths_at(root, reviewed, policy_paths) != manifest["policy_digest_before"]:
+    if (
+        _digest_paths_at(root, reviewed, policy_paths)
+        != manifest["policy_digest_before"]
+    ):
         reasons.append("transition_policy_digest_before_mismatch")
     prior_state = _strict_json_payload(
         before_state_payload, "transition_prior_state_invalid"
     )
-    prior_g03 = prior_state.get("g0_3_correction")
+    prior_g04 = prior_state.get("g0_4_correction")
     if (
         prior_state.get("programme_mode") != "recovery"
         or prior_state.get("current_gate") != TRANSITION_FROM_GATE
         or prior_state.get("current_gate_status") != "revision_required"
         or prior_state.get("active_correction") != ADMITTED_PROGRAMME_GATE
         or prior_state.get("active_profile") != G0_CONTROLLER_PROFILE
-        or not isinstance(prior_g03, dict)
-        or prior_g03.get("status") != "review_pending"
-        or prior_g03.get("g1a_authorized") is not False
+        or not isinstance(prior_g04, dict)
+        or prior_g04.get("status") != "review_pending"
+        or prior_g04.get("g1a_authorized") is not False
         or prior_state.get("gate_transition") is not None
     ):
         reasons.append("transition_g1a_not_previously_closed")
@@ -1946,8 +2440,7 @@ def _transition_scope_reasons(
             or record["reviewed_commit"] != reviewed
             or record["reviewed_tree"] != manifest["reviewed_tree"]
             or record["verdict"] != manifest["external_review_verdict"]
-            or record["blocking_finding_count"]
-            != manifest["blocking_finding_count"]
+            or record["blocking_finding_count"] != manifest["blocking_finding_count"]
             or record["reviewer_surface"] != manifest["reviewer_surface"]
         ):
             reasons.append("transition_review_record_binding_mismatch")
@@ -1973,9 +2466,11 @@ def _transition_scope_reasons(
         LATCH_PATH.as_posix(): _TRANSITION_LATCH_POINTERS,
         AGENTS_PATH.as_posix(): {"/emergency_header"},
     }
-    if pointer_map and {
-        path: set(pointers) for path, pointers in pointer_map.items()
-    } != allowed_pointer_map:
+    if (
+        pointer_map
+        and {path: set(pointers) for path, pointers in pointer_map.items()}
+        != allowed_pointer_map
+    ):
         reasons.append("transition_semantic_pointer_delta_not_exact")
 
     after_state_digest = _sha256_bytes((root / STATE_PATH).read_bytes())
@@ -1984,9 +2479,7 @@ def _transition_scope_reasons(
         json.dumps(manifest, sort_keys=True, separators=(",", ":")).encode("utf-8")
     )
     if artifact_payload:
-        artifact = _strict_json_payload(
-            artifact_payload, "transition_artifact_invalid"
-        )
+        artifact = _strict_json_payload(artifact_payload, "transition_artifact_invalid")
         expected_artifact_keys = {
             "schema_version",
             "transition_id",
@@ -2012,7 +2505,8 @@ def _transition_scope_reasons(
             or artifact["transition_manifest_sha256"] != manifest_digest
             or artifact["reviewed_commit"] != reviewed
             or artifact["reviewed_tree"] != manifest["reviewed_tree"]
-            or artifact["external_review_record_sha256"] != manifest["external_review_record_sha256"]
+            or artifact["external_review_record_sha256"]
+            != manifest["external_review_record_sha256"]
             or artifact["state_digest_before"] != manifest["state_digest_before"]
             or artifact["state_digest_after"] != after_state_digest
             or artifact["policy_digest_before"] != manifest["policy_digest_before"]
@@ -2021,17 +2515,6 @@ def _transition_scope_reasons(
             or artifact["scope_result"] != {"admitted": True, "phase": "development"}
         ):
             reasons.append("transition_artifact_binding_mismatch")
-
-    current_external = policy.state["g0_acceptance"]["external_gate_review"]
-    if (
-        current_external["reviewed_commit"] != reviewed
-        or current_external["reviewed_tree"] != manifest["reviewed_tree"]
-        or current_external["handover_sha256"] != manifest["external_review_record_sha256"].removeprefix("sha256:")
-        or current_external["verdict"] != "PASS"
-        or current_external["finding_count"] != 0
-        or current_external["g1a_authorized"] is not True
-    ):
-        reasons.append("transition_external_review_state_disagreement")
 
     changed_paths = {row.path for row in tranche_changes}
     required_paths = {
@@ -2095,10 +2578,34 @@ def evaluate_committed_scope(
 ) -> ScopeDecision:
     """Bind correction/transition scope with rename-safe path and mode evidence."""
     if phase not in {"development", "pre-push", "post-push"}:
-        return ScopeDecision(SCOPE_VERSION, False, ["scope_phase_invalid"], phase, None, None, None, None, None, [])
-    admission = evaluate_programme_admission(repo_root=repo_root, manifest=manifest, entrypoint="recovery_preflight")
+        return ScopeDecision(
+            SCOPE_VERSION,
+            False,
+            ["scope_phase_invalid"],
+            phase,
+            None,
+            None,
+            None,
+            None,
+            None,
+            [],
+        )
+    admission = evaluate_programme_admission(
+        repo_root=repo_root, manifest=manifest, entrypoint="recovery_preflight"
+    )
     if not admission.admitted:
-        return ScopeDecision(SCOPE_VERSION, False, admission.reason_codes, phase, None, None, None, None, None, [])
+        return ScopeDecision(
+            SCOPE_VERSION,
+            False,
+            admission.reason_codes,
+            phase,
+            None,
+            None,
+            None,
+            None,
+            None,
+            [],
+        )
     root = repo_root.resolve()
     policy = load_programme_policy(root)
     is_transition = (
@@ -2157,13 +2664,13 @@ def evaluate_committed_scope(
         full_allowed_paths.update(declared_paths)
     if not set(changed).issubset(full_allowed_paths):
         reasons.append("scope_path_outside_policy")
-    if not is_transition and not set(changed).issubset(declared_paths):
-        reasons.append("scope_path_outside_task_manifest")
     if not is_transition and not set(tranche_changed).issubset(policy.allowed_paths):
         reasons.append("scope_tranche_path_outside_policy")
     if not set(tranche_changed).issubset(declared_paths):
         reasons.append("scope_tranche_path_outside_task_manifest")
-    tracked_dirty = bool(_run_git(root, "status", "--porcelain", "--untracked-files=no"))
+    tracked_dirty = bool(
+        _run_git(root, "status", "--porcelain", "--untracked-files=no")
+    )
     if phase in {"pre-push", "post-push"} and tracked_dirty:
         reasons.append("scope_tracked_worktree_dirty")
     origin_head: str | None = None
@@ -2213,7 +2720,7 @@ def admission_payload(decision: ProgrammeDecision | ScopeDecision) -> dict[str, 
     return asdict(decision)
 
 
-def evaluate_programme_operation_admission(
+def _evaluate_programme_operation_admission_core(
     *,
     repo_root: Path,
     manifest: object | None,
@@ -2223,32 +2730,106 @@ def evaluate_programme_operation_admission(
     """Return the one canonical admission-and-scope decision for commit or push."""
     if entrypoint not in {"task_branch_commit", "task_branch_push"}:
         return ScopeDecision(
-            SCOPE_VERSION, False, ["combined_operation_entrypoint_invalid"], phase,
-            None, None, None, None, None, [],
+            SCOPE_VERSION,
+            False,
+            ["combined_operation_entrypoint_invalid"],
+            phase,
+            None,
+            None,
+            None,
+            None,
+            None,
+            [],
         )
     admission = evaluate_programme_admission(
         repo_root=repo_root, manifest=manifest, entrypoint="recovery_preflight"
     )
     if not admission.admitted:
         return ScopeDecision(
-            SCOPE_VERSION, False, admission.reason_codes, phase,
-            None, None, None, None, None, [],
+            SCOPE_VERSION,
+            False,
+            admission.reason_codes,
+            phase,
+            None,
+            None,
+            None,
+            None,
+            None,
+            [],
         )
     if not isinstance(manifest, dict):
         return ScopeDecision(
-            SCOPE_VERSION, False, ["task_manifest_missing"], phase,
-            None, None, None, None, None, [],
+            SCOPE_VERSION,
+            False,
+            ["task_manifest_missing"],
+            phase,
+            None,
+            None,
+            None,
+            None,
+            None,
+            [],
         )
     if manifest.get("schema_version") != TRANSITION_MANIFEST_VERSION:
         required_effect = ENTRYPOINT_REQUIRED_EFFECT[entrypoint]
         effects = manifest.get("intended_side_effect_classes")
         if not isinstance(effects, list) or required_effect not in effects:
             return ScopeDecision(
-                SCOPE_VERSION, False, ["task_manifest_required_effect_missing"], phase,
-                None, None, None, None, None, [],
+                SCOPE_VERSION,
+                False,
+                ["task_manifest_required_effect_missing"],
+                phase,
+                None,
+                None,
+                None,
+                None,
+                None,
+                [],
             )
-    return evaluate_committed_scope(
-        repo_root=repo_root, manifest=manifest, phase=phase
+    return evaluate_committed_scope(repo_root=repo_root, manifest=manifest, phase=phase)
+
+
+def evaluate_programme_operation_admission(
+    *,
+    repo_root: Path,
+    manifest: object | None,
+    entrypoint: str,
+    phase: str,
+) -> ScopeDecision:
+    """Fail closed unless G1A combined operations use the pinned gatekeeper."""
+    try:
+        policy = load_programme_policy(repo_root)
+    except ProgrammeAdmissionError as error:
+        return ScopeDecision(
+            SCOPE_VERSION,
+            False,
+            [error.reason_code],
+            phase,
+            None,
+            None,
+            None,
+            None,
+            None,
+            [],
+        )
+    if policy.state["active_correction"] == TRANSITION_TO_GATE:
+        return ScopeDecision(
+            SCOPE_VERSION,
+            False,
+            ["pinned_gatekeeper_required"],
+            phase,
+            None,
+            None,
+            None,
+            None,
+            None,
+            [],
+        )
+    return _evaluate_programme_operation_admission_core(
+        repo_root=repo_root,
+        manifest=manifest,
+        entrypoint=entrypoint,
+        phase=phase,
     )
 
 

@@ -5,7 +5,7 @@
   "objective": "Freeze one provider-free unmounted waiting-area-confirm command-family architecture with distinct operation identity, family-bound evidence, current-authority and locked destination checks, atomic waiting-area-only mutation/audit/idempotency/receipt semantics, canonical replay delivery and a non-actuating event posture without overlapping check-in or general status.",
   "status": "replaced",
   "source_head": "c720aaa306c449faae879bf9e6192c72b6c3c6a4",
-  "authority_source": "Yuri's explicit Gate G0 recovery redirect replaced the historical successor; G0.3 is the only current correction and G1A remains closed pending an external PASS and the typed transition.",
+  "authority_source": "Yuri's explicit Gate G0 recovery redirect replaced the historical successor; G0.4 is the only current correction and G1A remains closed pending an external PASS and the typed transition.",
   "checkpoint": {
     "completed_stage": "Historical waiting-area successor terminally replaced by Yuri's Gate G0 recovery redirect; it cannot resume from this latch.",
     "next_executable_stage": null,
@@ -15,7 +15,7 @@
       "review": 0,
       "verification": 0
     },
-      "settings_fingerprint": "sha256:ff760735680a5257cca955749abade97e859ce1aeb43a67c3390edddea1d41c5"
+      "settings_fingerprint": "sha256:64a3014d8238b4bb448c3424d456ce9f8a571bda9e990cd72bdc2c9ceb38c8cd"
   },
   "interruption_policy": {
     "chronological_last_prompt_is_controlling_authority": false,

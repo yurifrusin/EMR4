@@ -194,11 +194,11 @@ diverging embedded copy.
 
 ## Immediate sequence
 
-The G0.2 candidate received an external `REVISION_REQUIRED` decision. G0.3 is
+The G0.3 candidate received an external `REVISION_REQUIRED` decision. G0.4 is
 the only active correction gate. It must publish one `review_pending` candidate
 and then stop for external G0 review. G1A implementation remains closed.
 
-G0.3 pre-reviews three data-driven profiles: controller maintenance, the G0 to
+G0.4 preserves three data-driven profiles: controller maintenance, the G0 to
 G1A state transition, and bounded G1A activation. A valid transition must land
 directly in operational `G1A_ACTIVE`, with feature and product work still false,
 and must persist both the immutable external PASS record and a digest-bound
@@ -206,7 +206,10 @@ transition artifact. A canonical semantic-delta comparison permits only the
 enumerated state, gate-header/status, emergency-header and terminal-latch
 changes; all preserved state, profiles, scope, entrypoints, effects, global-red
 evidence and action counters must remain identical. Commit and push callers use
-one combined admission-and-scope decision. The controller is an application-level
+one combined admission-and-scope decision from a clean gatekeeper worktree pinned
+to the exact reviewed commit and tree in the transition record. Candidate
+controller and preflight code are inspected as data and are never imported or
+executed by that gatekeeper. The controller remains an application-level
 interlock; it is not an operating-system security boundary against a principal
 who can execute arbitrary shell, Git or Python commands.
 
@@ -223,10 +226,13 @@ newly added JSON object under `orchestration/programme/gate-transitions/`; it
 binds the canonical manifest digest, before/after state and policy digests,
 review record digest, exact semantic pointers and admitted development scope.
 
-The exact G1A parser, caller, CLI-exit and integration-consumer inventory and
-its immutable path/effect boundary are recorded in
-`orchestration/programme/g1a-verdict-integration-scope.yaml`. G0.3 does not make
-the parser or integration-semantic changes themselves.
+The exact G1A parser, caller, CLI-exit, integration-consumer and excluded-consumer
+inventory and its immutable path/effect boundary are recorded in
+`orchestration/programme/g1a-verdict-integration-scope.yaml`. G0.4 does not make
+the parser or integration-semantic changes themselves. The first G1A tranche is
+restricted to the verdict kernel, its pure consumers and exact tests. Programme
+state, policy, admission, preflight, the pinned gatekeeper and worktree mutation
+remain outside that tranche; closeout is a later state-only transition.
 
 Committed, staged and unstaged scope uses NUL-delimited
 `git diff --raw -z --no-renames --abbrev=40`. The controller parses status,
@@ -235,3 +241,9 @@ rejects paths outside their respective allowlists, symlinks, gitlinks, type
 changes and unapproved executable or mode changes. Provider, clockwork and
 worktree command functions re-run programme admission inside the callable
 side-effect boundary. An earlier orchestrator receipt remains evidence only.
+
+The frozen-base range is checked only against the immutable cumulative exact-path
+allowlist. The active G1A manifest and profile constrain only the post-transition
+tranche. The cumulative set derives the external-review and transition-artifact
+paths exactly from `gate_transition.transition_id`; prefixes and wildcards are
+not admitted.
