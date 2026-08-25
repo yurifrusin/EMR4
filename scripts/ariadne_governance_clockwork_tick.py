@@ -40,6 +40,10 @@ from orchestration_harness.governance_clockwork_tick import (
 )
 from orchestration_harness.governance_live_adoption import validate_contract
 from orchestration_harness import transactional_closeout as tc
+from orchestration_harness.programme_admission import (
+    ProgrammeAdmissionError,
+    require_programme_admission,
+)
 
 
 CONTRACT = ROOT / "orchestration/continuity/ariadne-provider-free-clockwork-live-canonical-adoption-retirement/contract.json"
@@ -594,7 +598,14 @@ def main(argv: list[str] | None = None) -> int:
     mode.add_argument("--rollback", action="store_true")
     mode.add_argument("--prepare-evidence", action="store_true")
     parser.add_argument("--intent", type=Path)
+    parser.add_argument("--programme-task-manifest", type=Path)
     arguments = parser.parse_args(argv)
+    if arguments.publish or arguments.rollback or arguments.prepare_evidence:
+        require_programme_admission(
+            repo_root=ROOT,
+            manifest_path=arguments.programme_task_manifest,
+            entrypoint="clockwork_tick_mutation",
+        )
     contract = validate_contract(_load(CONTRACT))
     if arguments.rollback:
         if arguments.intent is not None:
@@ -701,6 +712,20 @@ def main(argv: list[str] | None = None) -> int:
 def cli(argv: list[str] | None = None) -> int:
     try:
         return main(argv)
+    except ProgrammeAdmissionError as error:
+        print(
+            json.dumps(
+                {
+                    "schema_version": "ariadne.programme_entrypoint_rejection.v1",
+                    "status": "revision_required",
+                    "reason": str(error),
+                    "canonical_writes": 0,
+                    "pointer_movement": 0,
+                },
+                indent=2,
+            )
+        )
+        return 2
     except SemanticVerificationRejection as error:
         result = _semantic_verification_rejection_result(error)
         print(json.dumps(result, indent=2, ensure_ascii=False))

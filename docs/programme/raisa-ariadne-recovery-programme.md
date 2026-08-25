@@ -194,5 +194,8 @@ diverging embedded copy.
 
 ## Immediate sequence
 
-G0 passed its deterministic checks and fresh independent native review. G1A is
-the only next eligible tranche. This document does not start or execute G1A.
+The earlier G0 acceptance was superseded by an external `REVISION_REQUIRED`
+decision. G0.1 is the only active correction gate. It must publish one
+`review_pending` candidate and then stop for external G0 review. G1A remains
+closed until a later, separate gate-transition commit; this document does not
+start or execute G1A.

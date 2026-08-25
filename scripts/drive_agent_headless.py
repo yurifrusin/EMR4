@@ -84,6 +84,16 @@ from pathlib import Path
 
 import yaml
 
+REPO_ROOT = Path(__file__).resolve().parents[1]
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
+
+from orchestration_harness.programme_admission import (
+    ProgrammeAdmissionError,
+    require_programme_admission,
+)
+
+
 # ── Permission posture — RATIFY BEFORE PRODUCTION USE ────────────────────────
 # A headless worker must never block on a permission prompt (nobody answers it).
 # We allowlist exactly what a sprint worker needs — git / python / pytest /
@@ -272,7 +282,18 @@ def main() -> int:
                    help="If no --session-id/--resume given, mint and pin a fresh UUID; print it to stderr.")
     p.add_argument("--dry-run", action="store_true",
                    help="Print the claude argv as JSON and exit without executing.")
+    p.add_argument("--programme-task-manifest", type=Path)
     args = p.parse_args()
+
+    try:
+        require_programme_admission(
+            repo_root=REPO_ROOT,
+            manifest_path=args.programme_task_manifest,
+            entrypoint="provider_invocation",
+        )
+    except ProgrammeAdmissionError as error:
+        print(json.dumps({"error": "programme_admission_denied", "reason": str(error)}), file=sys.stderr)
+        return 2
 
     # Resolve per-phase model/effort defaults (explicit flags always win).
     if args.phase:

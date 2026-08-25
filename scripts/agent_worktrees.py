@@ -9,13 +9,21 @@ import subprocess
 import sys
 from pathlib import Path
 
+REPO_ROOT = Path(__file__).resolve().parents[1]
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
+
+from orchestration_harness.programme_admission import (
+    ProgrammeAdmissionError,
+    require_programme_admission,
+)
+
 
 for stream in (sys.stdout, sys.stderr):
     if hasattr(stream, "reconfigure"):
         stream.reconfigure(encoding="utf-8", errors="replace")
 
 
-REPO_ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_WORKTREE_ROOT = REPO_ROOT.parent / "EMR4-worktrees"
 AGENTS = {
     "codex": "codex/current",
@@ -1379,12 +1387,43 @@ def build_parser() -> argparse.ArgumentParser:
     status_parser = subparsers.add_parser("status", help="Show branch and worktree status")
     status_parser.set_defaults(func=status)
 
+    for command_parser in subparsers.choices.values():
+        command_parser.add_argument(
+            "--programme-task-manifest",
+            type=Path,
+            help="Typed programme admission manifest required for mutating commands during recovery.",
+        )
+
     return parser
 
 
 def main() -> None:
     parser = build_parser()
     args = parser.parse_args()
+    gated_commands = {
+        "setup": "integration",
+        "handoff": "protected_ref_operation",
+        "submit": "integration",
+        "dispatch": "worker_dispatch",
+        "suggest-task": "worker_dispatch",
+        "plan": "worker_dispatch",
+        "claim": "worker_dispatch",
+        "sync": "integration",
+        "realign": "integration",
+        "handin": "integration",
+        "record-integration": "integration",
+        "retire-stale": "integration",
+    }
+    entrypoint = gated_commands.get(args.command)
+    if entrypoint is not None:
+        try:
+            require_programme_admission(
+                repo_root=REPO_ROOT,
+                manifest_path=args.programme_task_manifest,
+                entrypoint=entrypoint,
+            )
+        except ProgrammeAdmissionError as error:
+            parser.error(f"programme admission denied: {error}")
     args.func(args)
 
 

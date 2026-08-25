@@ -10,6 +10,7 @@ from scripts.raisa_ariadne_recovery_preflight import (
     _changed_tracked_paths,
     _remote_baseline_snapshot,
     _risk_ids,
+    build_task_manifest,
     build_report,
     main,
 )
@@ -24,7 +25,7 @@ def load_state() -> dict:
 
 
 def test_g0_recovery_preflight_passes_while_preserving_global_red() -> None:
-    report = build_report(ROOT, "g0_recovery")
+    report = build_report(ROOT, build_task_manifest(ROOT), "development")
 
     assert report["status"] == "passed"
     assert report["programme_mode"] == "recovery"
@@ -35,24 +36,17 @@ def test_g0_recovery_preflight_passes_while_preserving_global_red() -> None:
     assert all(check["passed"] for check in report["checks"])
 
 
-@pytest.mark.parametrize(
-    "task_kind",
-    [
-        "product_feature",
-        "g1a",
-        "integration",
-        "provider_call",
-        "deployment",
-        "protected_ref_operation",
-    ],
-)
-def test_every_out_of_gate_task_kind_is_mechanically_blocked(task_kind: str) -> None:
-    report = build_report(ROOT, task_kind)
+@pytest.mark.parametrize("task_class", ["product_feature", "g1a", "integration"])
+def test_every_out_of_gate_task_class_is_mechanically_blocked(
+    task_class: str,
+) -> None:
+    manifest = build_task_manifest(ROOT)
+    manifest["task_class"] = task_class
+    report = build_report(ROOT, manifest, "development")
 
     assert report["status"] == "blocked"
-    assert report["out_of_gate_work_blocked"] is True
     assert report["feature_work_eligible"] is False
-    assert report["failed_checks"] == ["task_admission"]
+    assert "programme_admission" in report["failed_checks"]
 
 
 def test_missing_programme_state_fails_closed(tmp_path: Path, capsys) -> None:
@@ -60,8 +54,6 @@ def test_missing_programme_state_fails_closed(tmp_path: Path, capsys) -> None:
         [
             "--repo-root",
             str(tmp_path),
-            "--task-kind",
-            "g0_recovery",
             "--format",
             "json",
         ]
@@ -79,6 +71,7 @@ def test_machine_state_freezes_authority_and_forbidden_actions() -> None:
     assert state["machine_authoritative"] is True
     assert state["programme_mode"] == "recovery"
     assert state["current_gate"] == "G0"
+    assert state["current_gate_status"] == "revision_required"
     assert state["feature_work_eligible"] is False
     assert state["recovery_baton"]["base_sha"] == (
         "03e6860394c39086ec1ffb3f2457acc5f7c8b5f9"
@@ -144,10 +137,9 @@ def test_preflight_source_contains_no_write_or_network_primitive() -> None:
 
 
 def test_cli_returns_nonzero_as_positive_block_proof(capsys) -> None:
-    exit_code = main(["--task-kind", "product_feature", "--format", "json"])
+    exit_code = main(["--format", "json"])
     report = json.loads(capsys.readouterr().out)
 
     assert exit_code == 2
     assert report["status"] == "blocked"
-    assert report["out_of_gate_work_blocked"] is True
-    assert report["failed_checks"] == ["task_admission"]
+    assert "programme_admission" in report["failed_checks"]

@@ -30,6 +30,10 @@ from orchestration_harness.git_refs_snapshot import (
     build_git_refs_snapshot,
     failure_projection as git_refs_failure_projection,
 )
+from orchestration_harness.programme_admission import (
+    admission_payload,
+    evaluate_programme_admission,
+)
 from orchestration_harness.settings_fingerprint import settings_fingerprint
 
 SETTINGS_DIR = REPO_ROOT / "orchestration" / "harness_settings"
@@ -108,6 +112,18 @@ def _build_receipt_from_runtime_state(
         runtime_state=runtime_state,
         settings_fingerprint=current_settings_fingerprint,
     )
+    programme_decision = evaluate_programme_admission(
+        repo_root=repository_root,
+        manifest=runtime_state.get("programme_task_manifest"),
+        entrypoint="worker_dispatch",
+    )
+    receipt["programme_admission"] = admission_payload(programme_decision)
+    receipt["admission_classification"] = (
+        "advisory_receipt_only_not_executable_admission"
+    )
+    receipt["admission_usable"] = False
+    if programme_decision.mode == "recovery" and programme_decision.gate == "G0":
+        receipt["worker_dispatch_permitted"] = False
     runtime_active_operation = runtime_state.get("active_operation")
     if isinstance(runtime_active_operation, dict) and runtime_active_operation:
         checkpoint = runtime_active_operation.get("checkpoint")

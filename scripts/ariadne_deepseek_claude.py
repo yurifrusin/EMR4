@@ -9,6 +9,11 @@ import subprocess
 import sys
 from pathlib import Path
 
+REPO_ROOT = Path(__file__).resolve().parents[1]
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
+
+from orchestration_harness.programme_admission import require_programme_admission
 
 BASE_URL = "https://api.deepseek.com/anthropic"
 MODELS = {"deepseek-v4-flash", "deepseek-v4-pro"}
@@ -171,8 +176,14 @@ def main() -> int:
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--model", choices=sorted(MODELS), default="deepseek-v4-flash")
     parser.add_argument("--effort", choices=sorted(EFFORTS), default="high")
+    parser.add_argument("--programme-task-manifest", type=Path)
     args = parser.parse_args()
     try:
+        require_programme_admission(
+            repo_root=REPO_ROOT,
+            manifest_path=args.programme_task_manifest,
+            entrypoint="provider_invocation",
+        )
         receipt = run_worker(
             packet_path=args.packet.resolve(),
             cwd=args.cwd.resolve(),

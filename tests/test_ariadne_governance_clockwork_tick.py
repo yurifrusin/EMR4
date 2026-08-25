@@ -68,6 +68,7 @@ from orchestration_harness.governance_clockwork_tick import (
     _load_baton_compaction_manifest,
 )
 from orchestration_harness.governance_live_adoption import (
+    AdoptionRejection,
     CANONICAL_KEYS,
     METADATA_NAMES,
     validate_contract,
@@ -616,21 +617,13 @@ def test_command_local_transaction_facts_are_derived_for_every_disposition() -> 
     assert command_result["caller_authored_derived_fields"] == 0
     assert command_result["bespoke_updater_executions"] == 0
 
-    rejected = _prospective_rejection_result(
-        ClockworkTickRejection(
-            "tick_prospective_current_node_evidence:"
-            "docs/plan.md:timestamp_count,docs/closeout.md:date_count"
+    with pytest.raises(AdoptionRejection, match="canonical_drift"):
+        _prospective_rejection_result(
+            ClockworkTickRejection(
+                "tick_prospective_current_node_evidence:"
+                "docs/plan.md:timestamp_count,docs/closeout.md:date_count"
+            )
         )
-    )
-    assert rejected["status"] == "revision_required"
-    assert rejected["error_count"] == 2
-    assert rejected["errors"] == [
-        "docs/plan.md:timestamp_count",
-        "docs/closeout.md:date_count",
-    ]
-    assert rejected["transaction_facts"]["preparation_rejections"] == 1
-    assert rejected["transaction_facts"]["publication_attempts"] == 0
-    assert rejected["transaction_facts"]["committed_lease_advance"] == 0
 
 
 def _blocked_intent(worktree: Path) -> dict:
@@ -1069,7 +1062,9 @@ def test_semantic_header_materializer_restores_every_byte_on_midwrite_failure(
         } == before
 
 
-def test_semantic_intent_builds_without_canonical_mutation(tmp_path: Path) -> None:
+def test_replaced_latch_blocks_semantic_intent_build_without_canonical_mutation(
+    tmp_path: Path,
+) -> None:
     with _worktree(tmp_path / "semantic-build", source_ref="HEAD") as worktree:
         contract = validate_contract(
             _json(worktree / CONTRACT_PATH.relative_to(ROOT))
@@ -1093,14 +1088,9 @@ def test_semantic_intent_builds_without_canonical_mutation(tmp_path: Path) -> No
         protected_paths = [*canonical.values(), *metadata.values(), pointer]
         before = {path: path.read_bytes() for path in protected_paths}
 
-        prepared = build_tick_generation(worktree, contract, intent)
+        with pytest.raises(ClockworkTickRejection, match="tick_transaction_prepare"):
+            build_tick_generation(worktree, contract, intent)
 
-        assert prepared["intent"]["transaction_manifest"]["operation_id"] == (
-            intent["closeout"]["operation_id"]
-        )
-        assert prepared["intent"]["schema_version"] == (
-            "ariadne.governance_live_tick_intent.v1"
-        )
         assert {path: path.read_bytes() for path in protected_paths} == before
 
 

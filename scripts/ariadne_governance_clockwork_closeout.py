@@ -21,6 +21,10 @@ from orchestration_harness.governance_clockwork_tick import (
     admit_tick_intent,
 )
 from orchestration_harness.governance_live_adoption import validate_contract
+from orchestration_harness.programme_admission import (
+    ProgrammeAdmissionError,
+    require_programme_admission,
+)
 
 
 CONTRACT = (
@@ -534,7 +538,13 @@ def main(argv: list[str] | None = None) -> int:
     mode.add_argument("--rehearse", action="store_true")
     mode.add_argument("--publish", action="store_true")
     parser.add_argument("--intent", required=True, type=Path)
+    parser.add_argument("--programme-task-manifest", type=Path)
     arguments = parser.parse_args(argv)
+    require_programme_admission(
+        repo_root=ROOT,
+        manifest_path=arguments.programme_task_manifest,
+        entrypoint="clockwork_closeout_mutation",
+    )
     result = run_bound_closeout(
         ROOT,
         intent_raw=arguments.intent,
@@ -547,6 +557,19 @@ def main(argv: list[str] | None = None) -> int:
 def cli(argv: list[str] | None = None) -> int:
     try:
         return main(argv)
+    except ProgrammeAdmissionError as error:
+        print(
+            json.dumps(
+                {
+                    "schema_version": RESULT_VERSION,
+                    "status": "revision_required",
+                    "reason": str(error),
+                    "git_add_invocations": 0,
+                },
+                indent=2,
+            )
+        )
+        return 2
     except CloseoutDriverRejection as error:
         print(
             json.dumps(

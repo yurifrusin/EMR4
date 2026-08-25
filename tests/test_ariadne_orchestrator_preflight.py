@@ -107,7 +107,15 @@ def test_generic_orchestrator_receipt_passes_with_explicit_adapter_slot_and_work
     receipt = build_receipt(runtime_state_path=RUNTIME_STATE)
 
     assert receipt["status"] == "passed"
-    assert receipt["worker_dispatch_permitted"] is True
+    assert receipt["worker_dispatch_permitted"] is False
+    assert receipt["admission_usable"] is False
+    assert receipt["admission_classification"] == (
+        "advisory_receipt_only_not_executable_admission"
+    )
+    assert receipt["programme_admission"]["admitted"] is False
+    assert receipt["programme_admission"]["reason_codes"] == [
+        "task_manifest_missing"
+    ]
     assert (
         receipt["authority_boundary"]
         == "receipt_only_no_worker_control_or_integration_authority"
@@ -589,7 +597,7 @@ def test_hard_event_without_source_policy_fails_closed(tmp_path: Path):
     assert "rehydration_source_policy_missing:pre_push" in receipt["reasons"]
 
 
-def test_typed_serial_intent_fails_closed_for_pre_recovery_latch_fingerprint(
+def test_typed_serial_intent_uses_current_replacement_latch_and_still_blocks_dispatch(
     tmp_path: Path,
 ) -> None:
     intent = _serial_intent()
@@ -617,9 +625,10 @@ def test_typed_serial_intent_fails_closed_for_pre_recovery_latch_fingerprint(
     )
     assert runtime_state["workspace_receipts"] == []
     assert runtime_state["assigned_agent_ids"] == []
-    assert receipt["status"] == "revision_required"
+    assert receipt["status"] == "passed"
     assert receipt["worker_dispatch_permitted"] is False
-    assert "active_operation_settings_fingerprint_mismatch" in receipt["reasons"]
+    assert "active_operation_settings_fingerprint_mismatch" not in receipt["reasons"]
+    assert receipt["programme_admission"]["admitted"] is False
     assert receipt["rehydration_sources"] == REQUIRED_SOURCES
     assert receipt["terminal_handback_permitted"] is True
     assert receipt["git_ref_evidence_binding"]["status"] == "passed"

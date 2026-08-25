@@ -15,11 +15,16 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
+REPO_ROOT = Path(__file__).resolve().parents[1]
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
+
 from scripts.ariadne_evidence_gate import (
     admit_command_results,
     command_manifest_sha256,
     load_command_manifest,
 )
+from orchestration_harness.programme_admission import require_programme_admission
 
 
 DEFAULT_MODEL = "gemini-3.7-flash-high"
@@ -565,6 +570,7 @@ def main() -> int:
     parser.add_argument("--cwd", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--orchestrator-receipt", type=Path, required=True)
+    parser.add_argument("--programme-task-manifest", type=Path)
     parser.add_argument(
         "--command-manifest",
         type=Path,
@@ -583,6 +589,11 @@ def main() -> int:
     )
     args = parser.parse_args()
     try:
+        require_programme_admission(
+            repo_root=REPO_ROOT,
+            manifest_path=args.programme_task_manifest,
+            entrypoint="provider_invocation",
+        )
         receipt = run_worker(
             packet_path=args.packet.resolve(),
             cwd=args.cwd.resolve(),

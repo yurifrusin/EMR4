@@ -1,16 +1,16 @@
 schema_version: "raisa-ariadne.programme-gates.v1"
 programme:
   name: "Raisa Medical Office and Ariadne Recovery & Convergence"
-  prepared_at: "2026-08-25T16:21:42+10:00"
+  prepared_at: "2026-08-25T18:27:17+10:00"
   repository: "yurifrusin/EMR4"
   observed_public_master: "2e34bdad732fdab32fbf778280b3d3c70d66d602"
   programme_mode: "recovery"
   current_gate: "G0"
-  current_gate_status: "passed"
+  current_gate_status: "revision_required"
   feature_work_eligible: false
   clockwork_remote_visibility: "source_branch_aligned_with_origin"
   clockwork_local_state: "preserved_exactly_at_03e6860394c39086ec1ffb3f2457acc5f7c8b5f9"
-  next_eligible_tranche: "G1A"
+  next_eligible_tranche: "G0.1"
 
 global_hard_stops:
   - "critical_or_high_security_finding"
@@ -55,7 +55,7 @@ protected_invariants:
 gates:
   - id: "G0"
     name: "Preserve, Freeze and Establish Truth"
-    status: "passed"
+    status: "revision_required_g0_1"
     prerequisites: []
     programme_mode: "recovery"
     allowed_work:
@@ -90,12 +90,45 @@ gates:
       - "branch_pr_inventory_complete_or_reproducible"
       - "out_of_gate_work_blocked"
       - "independent_review_non_negative"
-    next_gate: "G1A"
+    next_gate: "G0.1"
+
+  - id: "G0.1"
+    name: "Correct Gate Enforcement and Authority Precedence"
+    status: "review_pending"
+    prerequisites: ["G0_review_revision_required"]
+    programme_mode: "recovery"
+    allowed_work:
+      - "strict_programme_admission"
+      - "canonical_entrypoint_gate_enforcement"
+      - "committed_scope_and_remote_binding"
+      - "instruction_pointer_precedence"
+      - "historical_latch_replacement"
+      - "risk_evidence_correction"
+      - "adversarial_gate_tests"
+      - "review_pending_recovery_branch_publication"
+    prohibited_work:
+      - "g1a"
+      - "product_behavior_change"
+      - "dependency_change"
+      - "provider_call"
+      - "integration"
+      - "protected_ref_movement"
+      - "deployment_or_pages"
+      - "real_data"
+    exit_checks:
+      - "canonical_dispatch_fails_closed_in_g0"
+      - "all_gated_entrypoints_require_typed_manifest"
+      - "strict_cross_file_policy_validation"
+      - "committed_base_to_head_scope_is_allowlisted"
+      - "post_push_origin_matches_exact_candidate"
+      - "old_latch_cannot_resume"
+      - "candidate_state_is_review_pending"
+    next_gate: "external_G0_review"
 
   - id: "G1A"
     name: "Correct Verdict and Integration Semantics"
-    status: "next_eligible_not_started"
-    prerequisites: ["G0"]
+    status: "blocked_by_external_G0_review"
+    prerequisites: ["external_G0_review_pass_and_separate_gate_transition"]
     programme_mode: "recovery"
     exit_checks:
       - "artifact_valid_review_verdict_integration_authorized_separate"

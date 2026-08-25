@@ -1,3 +1,11 @@
+# EMERGENCY RAISA/ARIADNE RECOVERY PRECEDENCE
+
+`orchestration/programme/current-state.json`, `orchestration/programme/gates.yaml`,
+and the active recovery admission policy outrank the historical baton below while
+the programme is in recovery. The older baton is evidence only and its named
+successor must not resume. Gate G0.1 is the only authorised correction; G1A is
+closed. Missing, malformed, stale, or contradictory programme state is a hard stop.
+
 # EMR4 Centaur — Live Agent Handover
 
 > **Purpose:** This compact file is the authoritative starting point for every human or AI agent working in EMR4. Read it completely. It controls current authority, protected boundaries, baton state, and next work. Historical detail lives in the indexed ledgers and immutable snapshot below.

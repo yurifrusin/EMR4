@@ -3,19 +3,19 @@
   "operation_id": "raisa-provider-free-unmounted-waiting-area-confirm-command-family-architecture",
   "active_tranche": "Raisa provider-free unmounted waiting-area-confirm command-family architecture",
   "objective": "Freeze one provider-free unmounted waiting-area-confirm command-family architecture with distinct operation identity, family-bound evidence, current-authority and locked destination checks, atomic waiting-area-only mutation/audit/idempotency/receipt semantics, canonical replay delivery and a non-actuating event posture without overlapping check-in or general status.",
-  "status": "paused",
-  "source_head": "1d5ebbdff4f2c7d87e6b02b7b64eada675d3f815",
-  "authority_source": "Recorded dependency-satisfied successor, explicitly paused by Yuri after the current tranche closeout.",
+  "status": "replaced",
+  "source_head": "c720aaa306c449faae879bf9e6192c72b6c3c6a4",
+  "authority_source": "Yuri's explicit Gate G0 recovery redirect replaced the historical successor; G0.1 is the only current correction and G1A remains closed.",
   "checkpoint": {
-    "completed_stage": "Accepted and published raisa-provider-free-read-only-waiting-area-movement-command-family-readiness-review; recorded the unmounted architecture successor without starting its plan or execution.",
-    "next_executable_stage": "fresh_five_source_rehydration_then_freeze_the_narrowest_fail_closed_unmounted_waiting_area_confirm_command_family_architecture_plan",
+    "completed_stage": "Historical waiting-area successor terminally replaced by Yuri's Gate G0 recovery redirect; it cannot resume from this latch.",
+    "next_executable_stage": null,
     "retry_counters": {
       "planning": 0,
       "implementation": 0,
       "review": 0,
       "verification": 0
     },
-    "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
+    "settings_fingerprint": "sha256:b37114166914f51c431c62b12c4976875296212ed87a672ca2bbb0f536bdb1b4"
   },
   "interruption_policy": {
     "chronological_last_prompt_is_controlling_authority": false,
@@ -31,11 +31,11 @@
   },
   "terminal_response": {
     "permitted": true,
-    "reason": "explicit_user_pause"
+    "reason": "explicit_yuri_recovery_redirect"
   },
   "protected_boundaries": [
     "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
-    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_G1A_or_product_behavior_change",
     "no_production_runtime_deployment_release_or_pages",
     "no_protected_evidence_access_or_protected_ref_movement",
     "docs_branding_and_all_unrelated_untracked_files_preserved",
@@ -44,6 +44,7 @@
     "no_product_patient_appointment_clinical_or_protected_data",
     "no_historical_data_access",
     "no_provider_model_or_external_network",
-    "successor_execution_paused_by_explicit_yuri_instruction"
+    "historical_waiting_area_successor_replaced_and_non_resumable",
+    "G0_1_only_then_external_G0_review"
   ]
 }

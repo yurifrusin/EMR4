@@ -1,10 +1,10 @@
 {
   "schema_version": "raisa-ariadne.programme-state.v1",
-  "observed_at": "2026-08-25T16:21:42+10:00",
+  "observed_at": "2026-08-25T18:27:17+10:00",
   "programme_name": "Raisa Medical Office and Ariadne Recovery & Convergence",
   "programme_mode": "recovery",
   "current_gate": "G0",
-  "current_gate_status": "passed",
+  "current_gate_status": "revision_required",
   "machine_authoritative": true,
   "feature_work_eligible": false,
   "authority": {
@@ -247,7 +247,7 @@
   "task_selection": {
     "autonomous_selection_enabled": false,
     "allowed_task_kinds": [
-      "g0_recovery"
+      "g0_1_controller_maintenance"
     ],
     "blocked_task_kinds": [
       "product_feature",
@@ -257,13 +257,13 @@
       "deployment",
       "protected_ref_operation"
     ],
-    "admission_command": "python scripts/raisa_ariadne_recovery_preflight.py --task-kind g0_recovery",
+    "admission_command": "python scripts/raisa_ariadne_recovery_preflight.py --task-manifest <path> --phase development",
     "out_of_gate_result": "blocked",
-    "next_eligible_tranche": "G1A",
+    "next_eligible_tranche": "G0.1",
     "next_eligible_now": true,
     "next_tranche_started": false,
     "next_tranche_admission_requires_state_transition": true,
-    "next_eligibility_condition": "satisfied_by_G0_independent_acceptance"
+    "next_eligibility_condition": "external_G0_review_requires_G0_1_correction"
   },
   "parallelism_efficacy": {
     "deepseek": {
@@ -275,8 +275,8 @@
       "rationale": "live external provider call forbidden in G0"
     },
     "native_subagent": {
-      "disposition": "reserved",
-      "rationale": "fresh independent read-only G0 review required after implementation"
+      "disposition": "declined",
+      "rationale": "G0.1 is a tightly coupled serial admission/latch correction; independence is preserved for the external G0 review after the pushed candidate"
     }
   },
   "actions_performed": {
@@ -293,19 +293,29 @@
     "g1a_started": false
   },
   "g0_acceptance": {
-    "status": "passed",
+    "status": "superseded_revision_required",
     "independent_review": {
-      "reviewer_surface": "fresh_native_subagent",
+      "reviewer_surface": "historical_native_subagent",
       "review_task": "/root/g0_independent_review",
-      "verdict": "PASS",
+      "verdict": "STALE_SUPERSEDED",
       "reviewed_candidate_tree": "f199dc7768fb2fe2ab06f5233a73d5dc8922139b",
-      "findings": [],
+      "findings": [
+        "review did not bind the pushed G0 tree c304850067dfe92a02fdb612f2f2155fe1e60551 and confers no current acceptance"
+      ],
       "residual_risks": [
         "global pytest collection remains red",
         "Python dependency audit remains red",
         "task-branch reviewed Bandit baseline remains red",
         "post-push recovery-ref readback remains required"
       ]
+    },
+    "external_gate_review": {
+      "verdict": "REVISION_REQUIRED",
+      "reviewed_commit": "c720aaa306c449faae879bf9e6192c72b6c3c6a4",
+      "reviewed_tree": "c304850067dfe92a02fdb612f2f2155fe1e60551",
+      "handover_sha256": "afbcd1e4d821588f17bc2d6b5351561b3b933fcba9872b2f0b8a039dfde4ae03",
+      "finding_count": 4,
+      "g1a_authorized": false
     },
     "g0_checks": {
       "recovery_preflight": "passed_exit_0",
@@ -319,6 +329,15 @@
       "structured_document_parse": "passed",
       "staged_diff_check": "passed"
     },
-    "next_action": "stop_after_G0; G1A is the only next eligible tranche and is not started"
+    "next_action": "perform_G0_1_only_then_stop_for_external_G0_review"
+  },
+  "g0_1_correction": {
+    "status": "review_pending",
+    "authorized_parent_commit": "c720aaa306c449faae879bf9e6192c72b6c3c6a4",
+    "reviewed_g0_tree": "c304850067dfe92a02fdb612f2f2155fe1e60551",
+    "candidate_commit_limit": 1,
+    "external_review_status": "pending",
+    "g1a_authorized": false,
+    "next_action": "external_G0_review_exact_candidate_then_separate_gate_transition_if_pass"
   }
 }

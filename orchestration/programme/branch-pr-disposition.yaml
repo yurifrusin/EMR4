@@ -1,5 +1,5 @@
 schema_version: "raisa-ariadne.branch-pr-disposition.v1"
-observed_at: "2026-08-25T16:21:42+10:00"
+observed_at: "2026-08-25T18:27:17+10:00"
 repository: "yurifrusin/EMR4"
 programme_mode: "recovery"
 current_gate: "G0"
