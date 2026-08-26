@@ -1,7 +1,7 @@
 schema_version: "raisa-ariadne.programme-gates.v1"
 programme:
   name: "Raisa Medical Office and Ariadne Recovery & Convergence"
-  prepared_at: "2026-08-26T01:12:34+10:00"
+  prepared_at: "2026-08-26T10:48:53+10:00"
   repository: "yurifrusin/EMR4"
   observed_public_master: "2e34bdad732fdab32fbf778280b3d3c70d66d602"
   programme_mode: "recovery"
@@ -10,7 +10,7 @@ programme:
   feature_work_eligible: false
   clockwork_remote_visibility: "source_branch_aligned_with_origin"
   clockwork_local_state: "preserved_exactly_at_03e6860394c39086ec1ffb3f2457acc5f7c8b5f9"
-  next_eligible_tranche: "G0.4"
+  next_eligible_tranche: "G0.5"
 
 global_hard_stops:
   - "critical_or_high_security_finding"
@@ -55,7 +55,7 @@ protected_invariants:
 gates:
   - id: "G0"
     name: "Preserve, Freeze and Establish Truth"
-    status: "revision_required_g0_4"
+    status: "revision_required_g0_5"
     prerequisites: []
     programme_mode: "recovery"
     allowed_work:
@@ -90,7 +90,7 @@ gates:
       - "branch_pr_inventory_complete_or_reproducible"
       - "out_of_gate_work_blocked"
       - "independent_review_non_negative"
-    next_gate: "G0.4"
+    next_gate: "G0.5"
 
   - id: "G0.1"
     name: "Correct Gate Enforcement and Authority Precedence"
@@ -193,7 +193,7 @@ gates:
 
   - id: "G0.4"
     name: "Correct Operational G1A Scope and Install an Immutable Gatekeeper"
-    status: "review_pending"
+    status: "superseded_revision_required"
     prerequisites: ["G0_3_review_revision_required"]
     programme_mode: "recovery"
     allowed_work:
@@ -226,12 +226,51 @@ gates:
       - "real_transition_and_g1a_lifecycle_passes"
       - "post_push_origin_matches_exact_candidate"
       - "candidate_state_is_review_pending"
+    next_gate: "G0.5"
+
+  - id: "G0.5"
+    name: "Bind Decisive Review, Clean Target and G1A Subgates"
+    status: "review_pending"
+    prerequisites: ["G0_4_review_revision_required"]
+    programme_mode: "recovery"
+    allowed_work:
+      - "append_only_external_review_ledger"
+      - "explicit_decisive_review_pointer"
+      - "untracked_file_scope_inventory"
+      - "separate_clean_g1a_target_contract"
+      - "operation_binding_and_exact_push_contract"
+      - "g1a_subgate_scope_decomposition"
+      - "provider_symbol_immutability_contract"
+      - "adversarial_gatekeeper_lifecycle_tests"
+      - "review_pending_recovery_branch_publication"
+    prohibited_work:
+      - "g1a_implementation"
+      - "g1b"
+      - "product_behavior_change"
+      - "migration_change"
+      - "dependency_change"
+      - "provider_call"
+      - "integration"
+      - "protected_ref_movement"
+      - "deployment_or_pages"
+      - "real_data"
+    exit_checks:
+      - "exactly_one_decisive_external_review_resolves"
+      - "all_review_records_are_digest_bound_and_append_only"
+      - "legacy_untracked_worktree_is_rejected_as_g1a_target"
+      - "separate_clean_target_and_exact_untracked_additions_are_enforced"
+      - "commit_and_push_bind_head_index_changes_and_origin"
+      - "g0_transition_opens_only_g1a_1"
+      - "g1a_2_provider_execution_symbols_are_immutable"
+      - "g1a_3_integration_mutation_remains_deferred"
+      - "post_push_origin_matches_exact_candidate"
+      - "candidate_state_is_review_pending"
     next_gate: "external_G0_review"
 
   - id: "G1A"
     name: "Correct Verdict and Integration Semantics"
-    status: "blocked_by_external_G0_review"
-    prerequisites: ["external_G0_review_pass_and_separate_gate_transition"]
+    status: "subgated_closed"
+    prerequisites: ["G1A.1", "G1A.2", "G1A.3"]
     programme_mode: "recovery"
     exit_checks:
       - "artifact_valid_review_verdict_integration_authorized_separate"
@@ -241,6 +280,41 @@ gates:
       - "verdict_bound_to_candidate_base_policy_and_evidence"
       - "adversarial_regression_tests_pass"
     next_gate: "G1B"
+
+  - id: "G1A.1"
+    name: "Canonical Verdict Kernel and Pure Acceptance Consumers"
+    status: "blocked_by_external_G0_review"
+    prerequisites: ["external_G0_review_pass_and_separate_gate_transition"]
+    programme_mode: "recovery"
+    exit_checks:
+      - "canonical_verdict_algebra_is_pure"
+      - "artifact_validity_review_verdict_and_integration_authority_are_separate"
+      - "negative_ambiguous_or_conflicting_verdict_never_authorizes_integration"
+      - "pure_consumers_delegate_to_the_canonical_parser"
+      - "provider_transport_and_integration_mutation_are_unchanged"
+    next_gate: "external_G1A_1_review"
+
+  - id: "G1A.2"
+    name: "Antigravity Provider Verdict Adapter"
+    status: "blocked_by_G1A_1_external_review"
+    prerequisites: ["G1A.1_external_review_pass_and_state_only_subgate_transition"]
+    programme_mode: "recovery"
+    exit_checks:
+      - "provider_launch_admission_worktree_and_receipt_safety_symbols_unchanged"
+      - "only_verdict_adapter_semantics_change"
+      - "provider_invocation_remains_closed"
+    next_gate: "external_G1A_2_review"
+
+  - id: "G1A.3"
+    name: "Integration Consumer Mutation"
+    status: "deferred_integration_mutation"
+    prerequisites: ["G1A.2_external_review_pass_and_separate_integration_authority"]
+    programme_mode: "recovery"
+    exit_checks:
+      - "negative_verdict_cannot_reach_integration_mutation"
+      - "integration_authority_is_separately_typed_and_reviewed"
+      - "protected_integration_remains_separately_authorized"
+    next_gate: "G1A"
 
   - id: "G1B"
     name: "Persisted Clockwork State Machine and Replay"

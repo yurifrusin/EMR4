@@ -6,6 +6,7 @@ from pathlib import Path
 import pytest
 
 import orchestration_harness.programme_admission as pa
+import orchestration_harness.pinned_programme_gatekeeper as pg
 from scripts.raisa_ariadne_recovery_preflight import build_task_manifest
 from tests.test_programme_admission import (
     _build_transition_repository,
@@ -13,6 +14,9 @@ from tests.test_programme_admission import (
     _write_json,
     _write_yaml,
 )
+
+
+ROOT = Path(__file__).resolve().parents[1]
 
 
 def _manifest_path(root: Path, manifest: dict, name: str) -> Path:
@@ -77,7 +81,14 @@ def test_real_bare_origin_transition_and_g1a_lifecycle_passes(tmp_path: Path) ->
     )
     assert pre_transition.returncode == 0
     assert pre_transition_payload["admitted"] is True
-    _git(target, "push", "origin", "codex/raisa-ariadne-recovery-g0")
+    transition_binding = pre_transition_payload["operation_binding"]
+    _git(
+        target,
+        "push",
+        f"--force-with-lease={transition_binding['force_with_lease']}",
+        "origin",
+        transition_binding["exact_push_refspec"],
+    )
     post_transition, post_transition_payload = _gatekeeper_cli(
         gatekeeper=gatekeeper,
         target=target,
@@ -86,6 +97,14 @@ def test_real_bare_origin_transition_and_g1a_lifecycle_passes(tmp_path: Path) ->
     )
     assert post_transition.returncode == 0
     assert post_transition_payload["admitted"] is True
+
+    activation_manifest = build_task_manifest(target)
+    activation_scope = pa.evaluate_committed_scope(
+        repo_root=target, manifest=activation_manifest, phase="development"
+    )
+    assert activation_scope.admitted is True
+    assert activation_scope.target_cleanliness["activation_clean"] is True
+    assert activation_scope.target_cleanliness["preserved_legacy_worktree"] is False
 
     policy = pa.load_programme_policy(target)
     dynamic_paths = {
@@ -100,10 +119,30 @@ def test_real_bare_origin_transition_and_g1a_lifecycle_passes(tmp_path: Path) ->
         "# authored-synthetic G1A lifecycle change\n",
         encoding="utf-8",
     )
+    verdict_test_path = target / "tests/test_ariadne_verdict.py"
+    verdict_test_path.write_text(
+        "def test_authored_synthetic_verdict_placeholder():\n    assert True\n",
+        encoding="utf-8",
+    )
     g1a_manifest = build_task_manifest(target)
     assert pa.AGENTS_PATH.as_posix() not in g1a_manifest["allowed_path_roots"]
     g1a_development_path = _manifest_path(
         target, g1a_manifest, "g1a-development-manifest.json"
+    )
+    scope_development = pa.evaluate_committed_scope(
+        repo_root=target, manifest=g1a_manifest, phase="development"
+    )
+    assert scope_development.admitted is True
+    assert set(scope_development.target_cleanliness["untracked_paths"]) == {
+        "orchestration_harness/verdict.py",
+        "tests/test_ariadne_verdict.py",
+    }
+
+    _git(
+        target,
+        "add",
+        "orchestration_harness/verdict.py",
+        "tests/test_ariadne_verdict.py",
     )
     development, development_payload = _gatekeeper_cli(
         gatekeeper=gatekeeper,
@@ -118,8 +157,18 @@ def test_real_bare_origin_transition_and_g1a_lifecycle_passes(tmp_path: Path) ->
         in development_payload["scope_decision"]["changed_paths"]
     )
 
-    _git(target, "add", "orchestration_harness/verdict.py")
-    _git(target, "commit", "-m", "synthetic G1A verdict kernel change")
+    committed = pg.commit_exact_admitted_index(
+        prior_decision=pg.PinnedGatekeeperDecision(**development_payload),
+        gatekeeper_root=gatekeeper,
+        target_repo_root=target,
+        manifest=g1a_manifest,
+        message="synthetic G1A verdict kernel change",
+    )
+    assert _git(target, "rev-parse", "HEAD") == committed
+    assert (
+        _git(target, "rev-parse", "HEAD^{tree}")
+        == (development_payload["operation_binding"]["index_tree"])
+    )
     g1a_manifest = build_task_manifest(target)
     g1a_manifest_path = _manifest_path(target, g1a_manifest, "g1a-manifest.json")
     pre_g1a, pre_g1a_payload = _gatekeeper_cli(
@@ -130,7 +179,21 @@ def test_real_bare_origin_transition_and_g1a_lifecycle_passes(tmp_path: Path) ->
     )
     assert pre_g1a.returncode == 0
     assert pre_g1a_payload["admitted"] is True
-    _git(target, "push", "origin", "codex/raisa-ariadne-recovery-g0")
+    g1a_binding = pre_g1a_payload["operation_binding"]
+    assert pg.exact_push_argv(pg.PinnedGatekeeperDecision(**pre_g1a_payload)) == [
+        "git",
+        "push",
+        f"--force-with-lease={g1a_binding['force_with_lease']}",
+        "origin",
+        g1a_binding["exact_push_refspec"],
+    ]
+    _git(
+        target,
+        "push",
+        f"--force-with-lease={g1a_binding['force_with_lease']}",
+        "origin",
+        g1a_binding["exact_push_refspec"],
+    )
     post_g1a, post_g1a_payload = _gatekeeper_cli(
         gatekeeper=gatekeeper,
         target=target,
@@ -232,7 +295,7 @@ def test_dirty_or_wrongly_pinned_gatekeeper_fails_closed(tmp_path: Path) -> None
         "add",
         "--detach",
         str(wrong),
-        _transition_manifest["reviewed_commit"] + "^",
+        _git(target, "rev-parse", "HEAD"),
     )
     wrongly_pinned, wrong_payload = _gatekeeper_cli(
         gatekeeper=wrong,
@@ -242,6 +305,73 @@ def test_dirty_or_wrongly_pinned_gatekeeper_fails_closed(tmp_path: Path) -> None
     )
     assert wrongly_pinned.returncode == 2
     assert "gatekeeper_source_not_transition_pinned" in wrong_payload["reason_codes"]
+
+
+def test_preserved_legacy_683_file_worktree_is_never_a_g1a_target(
+    tmp_path: Path,
+) -> None:
+    _target, gatekeeper, _transition_manifest = _transition_fixture(tmp_path)
+    manifest = build_task_manifest(ROOT)
+    manifest_path = tmp_path / "legacy-target-manifest.json"
+    _write_json(manifest_path, manifest)
+
+    completed, payload = _gatekeeper_cli(
+        gatekeeper=gatekeeper,
+        target=ROOT,
+        manifest_path=manifest_path,
+        phase="development",
+    )
+
+    assert completed.returncode == 2
+    assert (
+        "gatekeeper_target_preserved_legacy_worktree_forbidden"
+        in payload["reason_codes"]
+    )
+
+
+def test_operation_binding_revalidation_rejects_post_admission_index_drift(
+    tmp_path: Path,
+) -> None:
+    target, gatekeeper, transition_manifest = _transition_fixture(tmp_path)
+    transition_push = pg.evaluate_pinned_programme_operation(
+        gatekeeper_root=gatekeeper,
+        target_repo_root=target,
+        manifest=transition_manifest,
+        entrypoint="task_branch_push",
+        phase="pre-push",
+    )
+    assert transition_push.admitted is True
+    subprocess.run(
+        pg.exact_push_argv(transition_push),
+        cwd=target,
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    verdict = target / "orchestration_harness/verdict.py"
+    verdict.write_text("# staged verdict\n", encoding="utf-8")
+    _git(target, "add", "orchestration_harness/verdict.py")
+    manifest = build_task_manifest(target)
+
+    prior = pg.evaluate_pinned_programme_operation(
+        gatekeeper_root=gatekeeper,
+        target_repo_root=target,
+        manifest=manifest,
+        entrypoint="task_branch_commit",
+        phase="development",
+    )
+    assert prior.admitted is True
+
+    verdict.write_text("# changed after admission\n", encoding="utf-8")
+    fresh = pg.revalidate_pinned_operation_binding(
+        prior_decision=prior,
+        gatekeeper_root=gatekeeper,
+        target_repo_root=target,
+        manifest=manifest,
+    )
+
+    assert fresh.admitted is False
+    assert "gatekeeper_operation_binding_drift" in fresh.reason_codes
 
 
 @pytest.mark.parametrize("case", ["widen_scope", "rewrite_review", "closeout"])

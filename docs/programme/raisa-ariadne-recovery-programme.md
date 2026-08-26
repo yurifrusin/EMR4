@@ -102,7 +102,8 @@ Exit requires:
 - every seeded stop-ship risk assigned an owner, gate and status;
 - no protected-ref movement, public deployment, real-provider call or real data;
 - a non-negative independent review; and
-- a concise handover naming G1A as the only next tranche.
+- a concise handover naming the bounded G1A.1 pure-verdict tranche as the only
+  transition-eligible successor.
 
 ### G1 — Make Ariadne a trustworthy controller
 
@@ -194,24 +195,34 @@ diverging embedded copy.
 
 ## Immediate sequence
 
-The G0.3 candidate received an external `REVISION_REQUIRED` decision. G0.4 is
+The G0.4 candidate received an external `REVISION_REQUIRED` decision. G0.5 is
 the only active correction gate. It must publish one `review_pending` candidate
 and then stop for external G0 review. G1A implementation remains closed.
 
-G0.4 preserves three data-driven profiles: controller maintenance, the G0 to
-G1A state transition, and bounded G1A activation. A valid transition must land
-directly in operational `G1A_ACTIVE`, with feature and product work still false,
-and must persist both the immutable external PASS record and a digest-bound
-transition artifact. A canonical semantic-delta comparison permits only the
-enumerated state, gate-header/status, emergency-header and terminal-latch
-changes; all preserved state, profiles, scope, entrypoints, effects, global-red
-evidence and action counters must remain identical. Commit and push callers use
-one combined admission-and-scope decision from a clean gatekeeper worktree pinned
-to the exact reviewed commit and tree in the transition record. Candidate
-controller and preflight code are inspected as data and are never imported or
-executed by that gatekeeper. The controller remains an application-level
-interlock; it is not an operating-system security boundary against a principal
-who can execute arbitrary shell, Git or Python commands.
+G0.5 replaces the ambiguous singular review projection with a digest-bound,
+append-only review history and one explicit decisive pointer. A PASS transition
+may append exactly one new decisive record; it may not mutate, delete or reorder
+any older negative review. G0 passes only when that decisive record binds the
+exact reviewed G0.5 commit and tree, contains `PASS` with zero blocking findings,
+and agrees with transition and G1A authorization state.
+
+The G0 transition now opens only `G1A.1_ACTIVE`, the pure verdict kernel and its
+provider-free acceptance consumers. `G1A.2` is a later state-only transition to
+the Antigravity verdict adapter with provider invocation still closed and exact
+provider execution symbols hash-bound. `G1A.3` integration mutation remains
+deferred and has no active profile.
+
+G1A work must run in a separate clean target worktree at the transition commit.
+The preserved legacy worktree at `C:/Users/sarashera/emr4`, with its 683 user
+untracked files, may be neither gatekeeper nor G1A target. The pinned gatekeeper
+observes NUL-delimited untracked paths, admits only the two exact new G1A.1 files
+during development, rejects root import hooks and non-regular/reparse objects,
+and requires zero untracked paths before and after push. Its operation decision
+binds target HEAD, index tree, changed-path digest and expected origin head so an
+exact-SHA push uses an explicit lease. The narrow commit wrapper creates a commit
+from the admitted index tree and compare-and-swaps only the expected task-branch
+HEAD after a second binding check. Candidate controller and preflight code remain
+data only and are never imported or executed by the gatekeeper.
 
 The closed transition manifest schema is
 `ariadne.programme_gate_transition_manifest.v1`. Its exact fields are
@@ -226,13 +237,10 @@ newly added JSON object under `orchestration/programme/gate-transitions/`; it
 binds the canonical manifest digest, before/after state and policy digests,
 review record digest, exact semantic pointers and admitted development scope.
 
-The exact G1A parser, caller, CLI-exit, integration-consumer and excluded-consumer
-inventory and its immutable path/effect boundary are recorded in
-`orchestration/programme/g1a-verdict-integration-scope.yaml`. G0.4 does not make
-the parser or integration-semantic changes themselves. The first G1A tranche is
-restricted to the verdict kernel, its pure consumers and exact tests. Programme
-state, policy, admission, preflight, the pinned gatekeeper and worktree mutation
-remain outside that tranche; closeout is a later state-only transition.
+The exact G1A.1, G1A.2 and deferred G1A.3 parser, caller, CLI-exit,
+integration-consumer, path, effect and symbol boundaries are recorded in
+`orchestration/programme/g1a-verdict-integration-scope.yaml`. G0.5 does not make
+the verdict, provider-adapter or integration-semantic changes themselves.
 
 Committed, staged and unstaged scope uses NUL-delimited
 `git diff --raw -z --no-renames --abbrev=40`. The controller parses status,

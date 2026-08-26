@@ -45,13 +45,42 @@ def _policy_sandbox(tmp_path: Path) -> Path:
     alternates = root / ".git/objects/info/alternates"
     alternates.parent.mkdir(parents=True, exist_ok=True)
     alternates.write_bytes((object_store + "\n").encode("utf-8"))
-    (root / "orchestration/programme").mkdir(parents=True)
+    _git(root, "config", "core.longpaths", "true")
+    _git(
+        root,
+        "update-ref",
+        "refs/heads/policy-sandbox",
+        "4ce17198fad677aed1fe45be4e3bf2b18c713b3b",
+    )
+    _git(root, "symbolic-ref", "HEAD", "refs/heads/policy-sandbox")
+    _git(root, "read-tree", "HEAD")
+    _git(root, "sparse-checkout", "init", "--no-cone")
+    _git(
+        root,
+        "sparse-checkout",
+        "set",
+        "--no-cone",
+        *sorted(
+            pa.G0_G05_ALLOWED_PATHS
+            | pa.G1A_ALLOWED_PATHS
+            | {
+                "app/main.py",
+                "orchestration_harness/",
+                "scripts/",
+                "orchestration/harness_settings/",
+                "orchestration/programme/",
+                "orchestration/continuity/ariadne-active-operation-latch/",
+            }
+        ),
+    )
+    (root / "orchestration/programme").mkdir(parents=True, exist_ok=True)
     (root / "orchestration/continuity/ariadne-active-operation-latch").mkdir(
-        parents=True
+        parents=True, exist_ok=True
     )
     shutil.copytree(
         ROOT / "orchestration/harness_settings",
         root / "orchestration/harness_settings",
+        dirs_exist_ok=True,
     )
     for relative in (
         pa.STATE_PATH,
@@ -65,7 +94,7 @@ def _policy_sandbox(tmp_path: Path) -> Path:
         target = root / relative
         target.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(ROOT / relative, target)
-    for relative_text in pa.G0_G04_ALLOWED_PATHS | pa.G1A_ALLOWED_PATHS:
+    for relative_text in pa.G0_G05_ALLOWED_PATHS | pa.G1A_ALLOWED_PATHS:
         source = ROOT / relative_text
         if not source.is_file():
             continue
@@ -94,7 +123,7 @@ def test_canonical_orchestrator_cannot_dispatch_with_current_fingerprint() -> No
     assert receipt["programme_admission"]["admitted"] is False
 
 
-def test_mislabeled_product_task_cannot_enter_g0_1() -> None:
+def test_mislabeled_product_task_cannot_enter_g0_5() -> None:
     manifest = _manifest()
     manifest["task_class"] = "product_feature"
 
@@ -195,8 +224,8 @@ def test_state_and_gate_disagreement_is_rejected(tmp_path: Path) -> None:
     path = root / pa.GATES_PATH
     path.write_text(
         path.read_text(encoding="utf-8").replace(
-            'next_eligible_tranche: "G0.4"',
-            'next_eligible_tranche: "G1A"',
+            'next_eligible_tranche: "G0.5"',
+            'next_eligible_tranche: "G1A.1"',
             1,
         ),
         encoding="utf-8",
@@ -224,11 +253,60 @@ def test_g1a_parser_inventory_and_allowlist_are_exact(tmp_path: Path) -> None:
     root = _policy_sandbox(tmp_path)
     path = root / pa.G1A_SCOPE_PATH
     scope = yaml.safe_load(path.read_text(encoding="utf-8"))
-    scope["verdict_parsers"][0]["disposition"] = "leave_duplicate_parser"
+    scope["subgates"]["G1A.1"]["verdict_parsers"][0]["disposition"] = (
+        "leave_duplicate_parser"
+    )
     _write_yaml(path, scope)
 
-    with pytest.raises(ProgrammeAdmissionError, match="g1a_parser_inventory_invalid"):
+    with pytest.raises(ProgrammeAdmissionError, match="g1a_1_parser_inventory_invalid"):
         load_programme_policy(root)
+
+
+def test_g1a_1_excludes_provider_and_integration_mutators() -> None:
+    policy = load_programme_policy(ROOT)
+    g1a_1_paths = set(policy.g1a_scope["subgates"]["G1A.1"]["allowed_paths"])
+
+    assert "scripts/ariadne_antigravity.py" not in g1a_1_paths
+    assert "scripts/agent_worktrees.py" not in g1a_1_paths
+    assert policy.g1a_scope["transition_opens_only"] == "G1A.1"
+    assert policy.g1a_scope["subgates"]["G1A.2"]["status"].startswith("closed_")
+    assert policy.g1a_scope["subgates"]["G1A.3"]["allowed_paths"] == []
+
+
+def test_g1a_2_adapter_only_mutation_preserves_provider_contract(
+    tmp_path: Path,
+) -> None:
+    root = _policy_sandbox(tmp_path)
+    path = root / "scripts/ariadne_antigravity.py"
+    source = path.read_text(encoding="utf-8")
+    path.write_text(
+        source.replace(
+            "    return next(iter(unique.values()))\n",
+            "    return dict(next(iter(unique.values())))\n",
+            1,
+        ),
+        encoding="utf-8",
+    )
+
+    assert pa.g1a2_provider_contract_reasons(root) == []
+
+
+def test_g1a_2_nonadapter_provider_mutation_is_rejected(tmp_path: Path) -> None:
+    root = _policy_sandbox(tmp_path)
+    path = root / "scripts/ariadne_antigravity.py"
+    source = path.read_text(encoding="utf-8")
+    path.write_text(
+        source.replace(
+            "    require_programme_admission(\n",
+            "    provider_contract_drift = None\n    require_programme_admission(\n",
+            1,
+        ),
+        encoding="utf-8",
+    )
+
+    reasons = pa.g1a2_provider_contract_reasons(root)
+    assert "g1a_2_nonadapter_provider_code_changed" in reasons
+    assert "g1a_2_protected_provider_symbol_changed" in reasons
 
 
 def _scope_git_stub(
@@ -256,6 +334,8 @@ def _scope_git_stub(
             return ""
         if args == ("status", "--porcelain", "--untracked-files=no"):
             return ""
+        if args == ("write-tree",):
+            return head
         if args[:3] == ("ls-remote", "--heads", "origin"):
             return "" if remote is None else f"{remote}\trefs/heads/{branch}"
         raise AssertionError(args)
@@ -278,9 +358,9 @@ def _admitted(policy: pa.ProgrammePolicy) -> ProgrammeDecision:
 
 def _changes(
     path: str = "AGENTS.md",
-) -> tuple[list[GitPathChange], list[GitPathChange]]:
+) -> tuple[list[GitPathChange], list[GitPathChange], list[GitPathChange]]:
     rows = [GitPathChange("M", path, "100644", "100644")]
-    return rows, rows
+    return rows, rows, []
 
 
 def test_committed_product_path_is_rejected(monkeypatch: pytest.MonkeyPatch) -> None:
@@ -398,11 +478,20 @@ def test_machine_state_does_not_claim_stale_review_acceptance() -> None:
     policy = load_programme_policy(ROOT)
 
     assert policy.state["g0_acceptance"]["status"] == "superseded_revision_required"
-    assert policy.state["g0_4_correction"]["g1a_authorized"] is False
-    assert policy.state["g0_4_correction"]["external_review_status"] in {
+    assert policy.state["g0_5_correction"]["g1a_authorized"] is False
+    assert policy.state["g0_5_correction"]["external_review_status"] in {
         "not_started",
         "pending",
     }
+    decisive_id = policy.state["g0_acceptance"]["decisive_review_id"]
+    decisive = next(
+        row
+        for row in policy.state["g0_acceptance"]["external_review_history"]
+        if row["review_id"] == decisive_id
+    )
+    assert decisive["reviewed_commit"] == "4ce17198fad677aed1fe45be4e3bf2b18c713b3b"
+    assert decisive["verdict"] == "REVISION_REQUIRED"
+    assert decisive["blocking_finding_count"] == 3
 
 
 def test_production_review_history_uses_real_resolving_commit_trees() -> None:
@@ -425,14 +514,15 @@ def test_production_review_history_uses_real_resolving_commit_trees() -> None:
             state["g0_4_correction"]["authorized_parent_commit"],
             "9da62d169d564c86afdd087ec03da270e4989d91",
         ),
+        (
+            state["g0_5_correction"]["authorized_parent_commit"],
+            "e061800df0ae7c5daba6b2db13e8aa774f3eaff9",
+        ),
     ]
     for commit, tree in expected:
         assert _git(ROOT, "rev-parse", f"{commit}^{{tree}}") == tree
         assert _git(ROOT, "rev-parse", f"{tree}^{{tree}}") == tree
-    assert (
-        state["g0_acceptance"]["external_gate_review"]["reviewed_tree"]
-        == "bbeddb0e467c57970024d14cddf72156bed86947"
-    )
+    assert len(state["g0_acceptance"]["external_review_history"]) == 5
 
 
 def test_false_g0_2_tree_binding_is_rejected_and_unresolved() -> None:
@@ -450,11 +540,11 @@ def test_false_g0_2_tree_binding_is_rejected_and_unresolved() -> None:
 @pytest.mark.parametrize(
     ("section", "field"),
     [
-        ("g0_acceptance", "external_gate_review"),
         ("g0_1_correction", "reviewed_g0_tree"),
         ("g0_2_correction", "reviewed_g0_1_tree"),
         ("g0_3_correction", "reviewed_g0_2_tree"),
         ("g0_4_correction", "reviewed_g0_3_tree"),
+        ("g0_5_correction", "reviewed_g0_4_tree"),
     ],
 )
 def test_retained_review_history_cannot_rewrite_tree_bindings(
@@ -463,14 +553,54 @@ def test_retained_review_history_cannot_rewrite_tree_bindings(
     root = _policy_sandbox(tmp_path)
     path = root / pa.STATE_PATH
     state = json.loads(path.read_text(encoding="utf-8"))
-    if section == "g0_acceptance":
-        state[section][field]["reviewed_tree"] = "0" * 40
-    else:
-        state[section][field] = "0" * 40
+    state[section][field] = "0" * 40
     _write_json(path, state)
     with pytest.raises(
         ProgrammeAdmissionError,
-        match="review.*binding_invalid|retained_external_review_history_invalid",
+        match="review.*binding_invalid|decisive_external_review_binding_invalid",
+    ):
+        load_programme_policy(root)
+
+
+def test_retained_review_record_bytes_are_immutable(tmp_path: Path) -> None:
+    root = _policy_sandbox(tmp_path)
+    state = json.loads((root / pa.STATE_PATH).read_text(encoding="utf-8"))
+    retained = state["g0_acceptance"]["external_review_history"][0]
+    path = root / retained["review_record_path"]
+    path.write_bytes(path.read_bytes() + b" ")
+
+    with pytest.raises(ProgrammeAdmissionError, match="review_record_digest_mismatch"):
+        load_programme_policy(root)
+
+
+@pytest.mark.parametrize("case", ["delete", "reorder", "digest", "rewrite_and_rebind"])
+def test_retained_review_ledger_cannot_be_deleted_reordered_or_rebound(
+    tmp_path: Path, case: str
+) -> None:
+    root = _policy_sandbox(tmp_path)
+    path = root / pa.STATE_PATH
+    state = json.loads(path.read_text(encoding="utf-8"))
+    history = state["g0_acceptance"]["external_review_history"]
+    if case == "delete":
+        del history[1]
+    elif case == "reorder":
+        history[0], history[1] = history[1], history[0]
+    elif case == "digest":
+        history[0]["review_record_sha256"] = "sha256:" + "0" * 64
+    else:
+        record_path = root / history[0]["review_record_path"]
+        record = json.loads(record_path.read_text(encoding="utf-8"))
+        record["reviewer_surface"] = "rewritten_external_review"
+        history[0]["reviewer_surface"] = "rewritten_external_review"
+        _write_json(record_path, record)
+        history[0]["review_record_sha256"] = (
+            "sha256:" + hashlib.sha256(record_path.read_bytes()).hexdigest()
+        )
+    _write_json(path, state)
+
+    with pytest.raises(
+        ProgrammeAdmissionError,
+        match="retained_external_review_history_invalid|review_record_digest_mismatch",
     ):
         load_programme_policy(root)
 
@@ -653,6 +783,48 @@ def test_raw_inventory_allows_ordinary_regular_file_modification(
     assert pa._change_inventory_reasons(changes) == []
 
 
+def test_untracked_inventory_observes_regular_file_and_rejects_import_hooks(
+    tmp_path: Path,
+) -> None:
+    root, _base = _new_inventory_repo(tmp_path)
+    allowed = root / "orchestration_harness/verdict.py"
+    allowed.parent.mkdir(parents=True)
+    allowed.write_text("# new verdict\n", encoding="utf-8")
+    hook = root / "sitecustomize.py"
+    hook.write_text("raise RuntimeError\n", encoding="utf-8")
+
+    inventory = pa.git_untracked_inventory(root)
+    assert {(row.status, row.path) for row in inventory} == {
+        ("?", "orchestration_harness/verdict.py"),
+        ("?", "sitecustomize.py"),
+    }
+    assert "scope_import_hook_forbidden" in pa._change_inventory_reasons(inventory)
+
+
+def test_untracked_inventory_rejects_symlink_or_reparse_component(
+    tmp_path: Path,
+) -> None:
+    root, _base = _new_inventory_repo(tmp_path)
+    target = tmp_path / "junction-target"
+    target.mkdir()
+    (target / "outside.py").write_text("outside\n", encoding="utf-8")
+    link = root / "orchestration_harness"
+    try:
+        link.symlink_to(target, target_is_directory=True)
+    except OSError:
+        completed = subprocess.run(
+            ["cmd.exe", "/d", "/c", "mklink", "/J", str(link), str(target)],
+            check=False,
+            capture_output=True,
+            text=True,
+        )
+        if completed.returncode != 0:
+            pytest.skip(f"reparse creation unavailable: {completed.stderr}")
+
+    with pytest.raises(ProgrammeAdmissionError, match="untracked_reparse_forbidden"):
+        pa.git_untracked_inventory(root)
+
+
 def _write_json(path: Path, value: dict) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(value, indent=2) + "\n", encoding="utf-8")
@@ -665,58 +837,44 @@ def _write_yaml(path: Path, value: dict) -> None:
 def _build_transition_repository(tmp_path: Path) -> tuple[Path, dict]:
     root = _policy_sandbox(tmp_path)
     branch = "codex/raisa-ariadne-recovery-g0"
-    _git(root, "checkout", "-b", branch)
+    _git(root, "branch", "-m", branch)
     _git(root, "config", "user.email", "tests@example.invalid")
-    _git(root, "config", "user.name", "G0.4 Tests")
+    _git(root, "config", "user.name", "G0.5 Tests")
     _git(root, "config", "core.autocrlf", "false")
-    (root / "app").mkdir(exist_ok=True)
-    (root / "app/main.py").write_text("# unchanged product path\n", encoding="utf-8")
-    _git(root, "add", "-A")
-    _git(root, "commit", "-m", "protected seed")
-    protected = _git(root, "rev-parse", "HEAD")
-    _git(root, "branch", "master", protected)
-    _git(root, "branch", "handoff/current", protected)
-    _git(root, "branch", "safety/ariadne-clockwork-pre-g0-20260825", protected)
+    _git(
+        root,
+        "branch",
+        "master",
+        "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    )
+    _git(
+        root,
+        "branch",
+        "handoff/current",
+        "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    )
+    _git(
+        root,
+        "branch",
+        "safety/ariadne-clockwork-pre-g0-20260825",
+        "03e6860394c39086ec1ffb3f2457acc5f7c8b5f9",
+    )
 
     state_path = root / pa.STATE_PATH
     state = json.loads(state_path.read_text(encoding="utf-8"))
-    state["protected_refs"]["expected_sha"] = protected
-    state["protected_refs"]["refs"] = [
-        "refs/heads/master",
-        "refs/heads/handoff/current",
-        "refs/remotes/origin/master",
-        "refs/remotes/origin/handoff/current",
-    ]
-    state["recovery_baton"]["base_sha"] = protected
-    state["recovery_baton"]["protected_baton_sha"] = protected
-    state["clockwork_snapshot"]["frozen_sha"] = protected
-    state["g0_4_correction"]["authorized_parent_commit"] = protected
-    state["g0_4_correction"]["reviewed_g0_3_tree"] = _git(
-        root, "rev-parse", f"{protected}^{{tree}}"
-    )
-    state["g0_4_correction"]["status"] = "review_pending"
-    state["g0_4_correction"]["external_review_status"] = "pending"
+    state["g0_5_correction"]["status"] = "review_pending"
+    state["g0_5_correction"]["external_review_status"] = "pending"
+    state["g0_5_correction"]["next_action"] = "external_G0_review_only"
     _write_json(state_path, state)
 
     gates_path = root / pa.GATES_PATH
     gates = yaml.safe_load(gates_path.read_text(encoding="utf-8"))
-    next(row for row in gates["gates"] if row["id"] == "G0.4")["status"] = (
+    next(row for row in gates["gates"] if row["id"] == "G0.5")["status"] = (
         "review_pending"
     )
     _write_yaml(gates_path, gates)
 
-    inventory_path = root / pa.INVENTORY_PATH
-    inventory = yaml.safe_load(inventory_path.read_text(encoding="utf-8"))
-    inventory["authoritative_refs"]["protected_master"] = protected
-    inventory["authoritative_refs"]["protected_handoff_current"] = protected
-    inventory["authoritative_refs"]["recovery_base"] = protected
-    _write_yaml(inventory_path, inventory)
-
     overlay_path = root / pa.OVERLAY_PATH
-    overlay = yaml.safe_load(overlay_path.read_text(encoding="utf-8"))
-    overlay["scope_policy"]["frozen_recovery_base"] = protected
-    overlay["scope_policy"]["authorized_parent_commit"] = protected
-    _write_yaml(overlay_path, overlay)
     from orchestration_harness.settings_fingerprint import settings_fingerprint
 
     latch_path = root / pa.LATCH_PATH
@@ -726,7 +884,7 @@ def _build_transition_repository(tmp_path: Path) -> tuple[Path, dict]:
     )
     _write_json(latch_path, latch)
     _git(root, "add", "-A")
-    _git(root, "commit", "-m", "G0.4 reviewed candidate")
+    _git(root, "commit", "-m", "G0.5 reviewed candidate")
     reviewed = _git(root, "rev-parse", "HEAD")
     reviewed_tree = _git(root, "rev-parse", f"{reviewed}^{{tree}}")
 
@@ -734,18 +892,37 @@ def _build_transition_repository(tmp_path: Path) -> tuple[Path, dict]:
     origin.mkdir()
     _git(origin, "init", "--bare")
     _git(root, "remote", "add", "origin", str(origin))
+    protected = "2e34bdad732fdab32fbf778280b3d3c70d66d602"
     _git(root, "push", "origin", f"{protected}:refs/heads/master")
     _git(root, "push", "origin", f"{protected}:refs/heads/handoff/current")
     _git(root, "push", "-u", "origin", branch)
     _git(root, "fetch", "origin")
 
-    before_policy = load_programme_policy(root)
+    load_programme_policy(root)
+    before_state_digest = pa._sha256_bytes(
+        pa._git_object_bytes(root, f"{reviewed}:{pa.STATE_PATH.as_posix()}")
+    )
+    before_policy_digest = pa._digest_paths_at(
+        root,
+        reviewed,
+        (
+            pa.GATES_PATH,
+            pa.RISK_PATH,
+            pa.INVENTORY_PATH,
+            pa.G1A_SCOPE_PATH,
+            pa.OVERLAY_PATH,
+            pa.PROJECT_PATH,
+            pa.CONTINUATION_PATH,
+            pa.LATCH_PATH,
+            pa.AGENTS_PATH,
+        ),
+    )
     transition_id = "g0-to-g1a-synthetic-pass"
     reviewer_surface = "external_native_review"
     review_path = root / pa.TRANSITION_REVIEW_ROOT / f"{transition_id}.json"
     artifact_path = root / pa.TRANSITION_ARTIFACT_ROOT / f"{transition_id}.json"
     record = {
-        "schema_version": "raisa-ariadne.external-g0-review.v1",
+        "schema_version": "raisa-ariadne.external-g0-review.v2",
         "review_id": transition_id,
         "recorded_at": "2026-08-25T20:00:26+10:00",
         "reviewed_commit": reviewed,
@@ -753,6 +930,8 @@ def _build_transition_repository(tmp_path: Path) -> tuple[Path, dict]:
         "verdict": "PASS",
         "blocking_finding_count": 0,
         "reviewer_surface": reviewer_surface,
+        "g1a_authorized": True,
+        "source_artifact_sha256": "1" * 64,
     }
     _write_json(review_path, record)
     review_digest = "sha256:" + hashlib.sha256(review_path.read_bytes()).hexdigest()
@@ -761,8 +940,8 @@ def _build_transition_repository(tmp_path: Path) -> tuple[Path, dict]:
     agents_text = agents_path.read_text(encoding="utf-8")
     agents_path.write_text(
         agents_text.replace(
-            "Gate G0.4 is the only authorised correction; G1A is\nclosed.",
-            "The reviewed G0 to G1A transition is complete; Gate G1A is active\nfor its bounded typed task only.",
+            "Gate G0.5 is the only authorised correction; G1A is\nclosed.",
+            "The reviewed G0 to G1A.1 transition is complete; Gate G1A.1 is active\nfor its bounded pure-verdict task only.",
             1,
         ),
         encoding="utf-8",
@@ -770,47 +949,63 @@ def _build_transition_repository(tmp_path: Path) -> tuple[Path, dict]:
 
     state = json.loads(state_path.read_text(encoding="utf-8"))
     state["observed_at"] = "2026-08-25T22:20:00+10:00"
-    state["current_gate"] = "G1A"
+    state["current_gate"] = "G1A.1"
     state["current_gate_status"] = "active"
-    state["active_correction"] = "G1A"
+    state["active_correction"] = "G1A.1"
     state["active_profile"] = pa.G1A_ACTIVE_PROFILE
     state["task_selection"]["allowed_task_kinds"] = [pa.G1A_TASK_CLASS]
-    state["task_selection"]["next_eligible_tranche"] = "G1A"
+    state["task_selection"]["next_eligible_tranche"] = "G1A.1"
     state["task_selection"]["next_tranche_admission_requires_state_transition"] = False
     state["task_selection"]["next_eligibility_condition"] = (
-        "bounded_G1A_profile_active_next_tranche_not_started"
+        "bounded_G1A_1_profile_active_next_tranche_not_started"
     )
     state["g0_acceptance"]["status"] = "passed"
-    state["g0_acceptance"]["next_action"] = "begin_bounded_G1A_only"
-    state["g0_4_correction"]["status"] = "external_review_passed"
-    state["g0_4_correction"]["external_review_status"] = "pass"
-    state["g0_4_correction"]["g1a_authorized"] = True
-    state["g0_4_correction"]["next_action"] = "bounded_G1A_profile_active"
+    state["g0_acceptance"]["decisive_review_id"] = transition_id
+    state["g0_acceptance"]["external_review_history"].append(
+        {
+            "review_id": transition_id,
+            "review_record_path": review_path.relative_to(root).as_posix(),
+            "reviewed_commit": reviewed,
+            "reviewed_tree": reviewed_tree,
+            "verdict": "PASS",
+            "blocking_finding_count": 0,
+            "reviewer_surface": reviewer_surface,
+            "g1a_authorized": True,
+            "review_record_sha256": review_digest,
+        }
+    )
+    state["g0_acceptance"]["next_action"] = "begin_bounded_G1A_1_only"
+    state["g0_5_correction"]["status"] = "external_review_passed"
+    state["g0_5_correction"]["external_review_status"] = "pass"
+    state["g0_5_correction"]["g1a_authorized"] = True
+    state["g0_5_correction"]["next_action"] = "bounded_G1A_1_profile_active"
     state["gate_transition"] = {
         "status": "complete",
         "transition_id": transition_id,
         "from_gate": "G0",
-        "to_gate": "G1A",
+        "to_gate": "G1A.1",
         "reviewed_commit": reviewed,
         "reviewed_tree": reviewed_tree,
         "external_review_status": "pass",
         "blocking_finding_count": 0,
         "reviewer_surface": reviewer_surface,
         "g1a_authorized": True,
-        "next_action": "G1A_only",
+        "next_action": "G1A_1_only",
     }
     _write_json(state_path, state)
 
     gates = yaml.safe_load(gates_path.read_text(encoding="utf-8"))
     gates["programme"]["prepared_at"] = "2026-08-25T22:20:00+10:00"
-    gates["programme"]["current_gate"] = "G1A"
+    gates["programme"]["current_gate"] = "G1A.1"
     gates["programme"]["current_gate_status"] = "active"
-    gates["programme"]["next_eligible_tranche"] = "G1A"
+    gates["programme"]["next_eligible_tranche"] = "G1A.1"
     statuses = {
         "G0": "passed",
         "G0.1": "superseded_revision_required",
-        "G0.4": "external_review_passed",
-        "G1A": "active",
+        "G0.4": "superseded_revision_required",
+        "G0.5": "external_review_passed",
+        "G1A": "active_subgate_G1A_1",
+        "G1A.1": "active",
     }
     for row in gates["gates"]:
         if row["id"] in statuses:
@@ -827,7 +1022,7 @@ def _build_transition_repository(tmp_path: Path) -> tuple[Path, dict]:
     _write_yaml(overlay_path, overlay)
     latch = json.loads(latch_path.read_text(encoding="utf-8"))
     latch["authority_source"] = (
-        "Yuri's external Gate G0 PASS and typed G0 transition activate bounded G1A only."
+        "Yuri's external Gate G0 PASS and typed G0 transition activate bounded G1A.1 only."
     )
     latch["checkpoint"]["settings_fingerprint"] = settings_fingerprint(
         root / "orchestration/harness_settings"
@@ -838,7 +1033,7 @@ def _build_transition_repository(tmp_path: Path) -> tuple[Path, dict]:
         "schema_version": pa.TRANSITION_MANIFEST_VERSION,
         "transition_id": transition_id,
         "from_gate": "G0",
-        "to_gate": "G1A",
+        "to_gate": "G1A.1",
         "reviewed_commit": reviewed,
         "reviewed_tree": reviewed_tree,
         "transition_parent": reviewed,
@@ -846,8 +1041,8 @@ def _build_transition_repository(tmp_path: Path) -> tuple[Path, dict]:
         "external_review_record_sha256": review_digest,
         "blocking_finding_count": 0,
         "reviewer_surface": reviewer_surface,
-        "state_digest_before": before_policy.state_digest,
-        "policy_digest_before": before_policy.policy_digest,
+        "state_digest_before": before_state_digest,
+        "policy_digest_before": before_policy_digest,
         "allowed_transition_paths": transition_paths,
         "forbidden_effect_classes": sorted(pa.TRANSITION_FORBIDDEN_EFFECTS),
     }
@@ -868,15 +1063,26 @@ def _build_transition_repository(tmp_path: Path) -> tuple[Path, dict]:
         "reviewed_commit": reviewed,
         "reviewed_tree": reviewed_tree,
         "external_review_record_sha256": review_digest,
-        "state_digest_before": before_policy.state_digest,
+        "state_digest_before": before_state_digest,
         "state_digest_after": after_policy.state_digest,
-        "policy_digest_before": before_policy.policy_digest,
+        "policy_digest_before": before_policy_digest,
         "policy_digest_after": after_policy.policy_digest,
         "changed_semantic_pointers": pointer_map,
         "scope_result": {"admitted": True, "phase": "development"},
+        "target_cleanliness_contract": {
+            "schema_version": "ariadne.g1a_target_cleanliness_contract.v1",
+            "preserved_legacy_worktree": "C:/Users/sarashera/emr4",
+            "separate_clean_target_required": True,
+            "activation_untracked_count_required": 0,
+            "development_allowed_untracked_paths": sorted(
+                pa.G1A_ALLOWED_UNTRACKED_PATHS
+            ),
+            "pre_push_untracked_count_required": 0,
+            "post_push_untracked_count_required": 0,
+        },
     }
     _write_json(artifact_path, artifact)
-    _git(root, "add", *transition_paths)
+    _git(root, "add", "--sparse", *transition_paths)
     _git(root, "commit", "-m", "operational G0 to G1A transition")
     return root, manifest
 
@@ -897,7 +1103,7 @@ def test_valid_synthetic_state_only_transition_is_admitted(tmp_path: Path) -> No
     g1a_decision = evaluate_programme_admission(
         repo_root=root, manifest=g1a_manifest, entrypoint="task_selection"
     )
-    assert policy.state["current_gate"] == "G1A"
+    assert policy.state["current_gate"] == "G1A.1"
     assert policy.state["current_gate_status"] == "active"
     assert policy.state["active_profile"] == pa.G1A_ACTIVE_PROFILE
     assert policy.state["feature_work_eligible"] is False
@@ -906,6 +1112,31 @@ def test_valid_synthetic_state_only_transition_is_admitted(tmp_path: Path) -> No
     assert g1a_manifest["task_class"] == pa.G1A_TASK_CLASS
     assert set(g1a_manifest["allowed_path_roots"]) == pa.G1A_ALLOWED_PATHS
     assert g1a_decision.admitted is True
+    history = policy.state["g0_acceptance"]["external_review_history"]
+    assert len(history) == 6
+    assert [row["verdict"] for row in history[:5]] == ["REVISION_REQUIRED"] * 5
+    assert history[-1]["review_id"] == manifest["transition_id"]
+    assert history[-1]["reviewed_commit"] == manifest["reviewed_commit"]
+    assert history[-1]["reviewed_tree"] == manifest["reviewed_tree"]
+    assert history[-1]["verdict"] == "PASS"
+    assert (
+        policy.state["g0_acceptance"]["decisive_review_id"] == history[-1]["review_id"]
+    )
+
+
+def test_passed_g0_state_cannot_point_to_decisive_negative_review(
+    tmp_path: Path,
+) -> None:
+    root, _manifest = _build_transition_repository(tmp_path)
+    path = root / pa.STATE_PATH
+    state = json.loads(path.read_text(encoding="utf-8"))
+    state["g0_acceptance"]["decisive_review_id"] = state["g0_acceptance"][
+        "external_review_history"
+    ][-2]["review_id"]
+    _write_json(path, state)
+
+    with pytest.raises(ProgrammeAdmissionError, match="decisive_review_state_invalid"):
+        load_programme_policy(root)
 
 
 @pytest.mark.parametrize(
@@ -922,9 +1153,12 @@ def test_valid_synthetic_state_only_transition_is_admitted(tmp_path: Path) -> No
     ],
 )
 def test_transition_rejects_wrong_binding(
-    tmp_path: Path, field: str, value: object
+    transition_template: tuple[Path, dict],
+    tmp_path: Path,
+    field: str,
+    value: object,
 ) -> None:
-    root, manifest = _build_transition_repository(tmp_path)
+    root, manifest = _transition_copy(transition_template, tmp_path)
     manifest[field] = value
 
     decision = evaluate_committed_scope(
@@ -935,8 +1169,10 @@ def test_transition_rejects_wrong_binding(
     assert decision.reason_codes
 
 
-def test_transition_rejects_changed_implementation_path(tmp_path: Path) -> None:
-    root, manifest = _build_transition_repository(tmp_path)
+def test_transition_rejects_changed_implementation_path(
+    transition_template: tuple[Path, dict], tmp_path: Path
+) -> None:
+    root, manifest = _transition_copy(transition_template, tmp_path)
     with (root / "orchestration_harness/programme_admission.py").open(
         "a", encoding="utf-8"
     ) as stream:
@@ -969,6 +1205,146 @@ def _transition_copy(
 
 def _transition_decision(root: Path, manifest: dict):
     return evaluate_committed_scope(repo_root=root, manifest=manifest, phase="pre-push")
+
+
+def _mark_transition_as_origin_head(root: Path) -> None:
+    branch = _git(root, "branch", "--show-current")
+    _git(root, "update-ref", f"refs/remotes/origin/{branch}", "HEAD")
+
+
+@pytest.mark.parametrize(
+    "relative_path",
+    ["orchestration_harness/verdict.py", "tests/test_ariadne_verdict.py"],
+)
+def test_g1a_development_observes_and_admits_exact_allowed_untracked_files(
+    transition_template: tuple[Path, dict], tmp_path: Path, relative_path: str
+) -> None:
+    root, _transition_manifest = _transition_copy(transition_template, tmp_path)
+    _mark_transition_as_origin_head(root)
+    path = root / relative_path
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text("# authored-synthetic untracked candidate\n", encoding="utf-8")
+    manifest = build_task_manifest(root)
+
+    decision = evaluate_committed_scope(
+        repo_root=root, manifest=manifest, phase="development"
+    )
+
+    assert decision.admitted is True
+    assert decision.target_cleanliness["untracked_paths"] == [relative_path]
+    assert relative_path in decision.changed_paths
+
+
+@pytest.mark.parametrize(
+    "relative_path",
+    [
+        "app/evil.py",
+        "sitecustomize.py",
+        "bootstrap.pth",
+    ],
+)
+def test_g1a_development_rejects_other_untracked_and_import_hook_files(
+    transition_template: tuple[Path, dict], tmp_path: Path, relative_path: str
+) -> None:
+    root, _transition_manifest = _transition_copy(transition_template, tmp_path)
+    _mark_transition_as_origin_head(root)
+    (root / relative_path).write_text("# forbidden\n", encoding="utf-8")
+    manifest = build_task_manifest(root)
+
+    decision = evaluate_committed_scope(
+        repo_root=root, manifest=manifest, phase="development"
+    )
+
+    assert decision.admitted is False
+    assert "scope_untracked_path_outside_development_allowlist" in decision.reason_codes
+    if relative_path == "sitecustomize.py" or relative_path.endswith(".pth"):
+        assert "scope_import_hook_forbidden" in decision.reason_codes
+
+
+def test_g1a_pre_push_rejects_even_allowed_untracked_file(
+    transition_template: tuple[Path, dict], tmp_path: Path
+) -> None:
+    root, _transition_manifest = _transition_copy(transition_template, tmp_path)
+    _mark_transition_as_origin_head(root)
+    path = root / "orchestration_harness/verdict.py"
+    path.write_text("# allowed only before staging\n", encoding="utf-8")
+    manifest = build_task_manifest(root)
+
+    decision = evaluate_committed_scope(
+        repo_root=root, manifest=manifest, phase="pre-push"
+    )
+
+    assert decision.admitted is False
+    assert "scope_untracked_files_forbidden" in decision.reason_codes
+
+
+def test_g1a_development_rejects_extra_untracked_file_beside_allowed_file(
+    transition_template: tuple[Path, dict], tmp_path: Path
+) -> None:
+    root, _transition_manifest = _transition_copy(transition_template, tmp_path)
+    _mark_transition_as_origin_head(root)
+    allowed = root / "orchestration_harness/verdict.py"
+    allowed.write_text("# allowed candidate\n", encoding="utf-8")
+    extra = root / "orchestration_harness/extra.py"
+    extra.write_text("# forbidden sibling\n", encoding="utf-8")
+    manifest = build_task_manifest(root)
+
+    decision = evaluate_committed_scope(
+        repo_root=root, manifest=manifest, phase="development"
+    )
+
+    assert decision.admitted is False
+    assert decision.target_cleanliness["untracked_paths"] == [
+        "orchestration_harness/extra.py",
+        "orchestration_harness/verdict.py",
+    ]
+    assert "scope_untracked_path_outside_development_allowlist" in decision.reason_codes
+
+
+@pytest.mark.parametrize(
+    "relative_path",
+    [
+        "app/main.py",
+        "alembic/versions/forbidden_g1a.py",
+        "requirements-g1a.txt",
+        "scripts/agent_worktrees.py",
+    ],
+)
+def test_g1a_product_migration_dependency_and_integration_paths_fail(
+    transition_template: tuple[Path, dict], tmp_path: Path, relative_path: str
+) -> None:
+    root, _transition_manifest = _transition_copy(transition_template, tmp_path)
+    _mark_transition_as_origin_head(root)
+    path = root / relative_path
+    path.parent.mkdir(parents=True, exist_ok=True)
+    if path.exists():
+        path.write_text(
+            path.read_text(encoding="utf-8") + "\n# forbidden\n", encoding="utf-8"
+        )
+    else:
+        path.write_text("# forbidden\n", encoding="utf-8")
+    manifest = build_task_manifest(root)
+
+    decision = evaluate_committed_scope(
+        repo_root=root, manifest=manifest, phase="development"
+    )
+
+    assert decision.admitted is False
+    assert "scope_tranche_path_outside_policy" in decision.reason_codes
+
+
+def test_g1a_development_rejects_origin_drift(
+    transition_template: tuple[Path, dict], tmp_path: Path
+) -> None:
+    root, _transition_manifest = _transition_copy(transition_template, tmp_path)
+    manifest = build_task_manifest(root)
+
+    decision = evaluate_committed_scope(
+        repo_root=root, manifest=manifest, phase="development"
+    )
+
+    assert decision.admitted is False
+    assert "scope_origin_not_authorized_parent_development" in decision.reason_codes
 
 
 @pytest.mark.parametrize("case", ["safety_ref", "frozen_sha"])

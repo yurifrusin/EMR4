@@ -1,7 +1,7 @@
-schema_version: "ariadne.programme_recovery.v5"
+schema_version: "ariadne.programme_recovery.v6"
 status: "active_emergency_overlay"
 authority_owner: "Yuri"
-recorded_at: "2026-08-26T01:12:34+10:00"
+recorded_at: "2026-08-26T09:30:43+10:00"
 state_file: "orchestration/programme/current-state.json"
 gates_file: "orchestration/programme/gates.yaml"
 risk_file: "orchestration/programme/risk-register.yaml"
@@ -21,16 +21,16 @@ required_before:
   - "protected_ref_operation"
   - "deployment"
 missing_or_invalid_state: "hard_stop"
-active_profile: "G0.4_CONTROLLER_MAINTENANCE"
+active_profile: "G0.5_CONTROLLER_MAINTENANCE"
 profiles:
-  G0.4_CONTROLLER_MAINTENANCE:
+  G0.5_CONTROLLER_MAINTENANCE:
     profile_kind: "controller_maintenance"
     expected_programme_mode: "recovery"
     expected_current_gate: "G0"
     expected_gate_status: "revision_required"
-    active_correction: "G0.4"
-    programme_gate: "G0.4"
-    admitted_task_classes: ["g0_4_controller_maintenance"]
+    active_correction: "G0.5"
+    programme_gate: "G0.5"
+    admitted_task_classes: ["g0_5_controller_maintenance"]
     allowed_effects: ["repository_read", "control_plane_edit", "task_branch_commit", "task_branch_push"]
     forbidden_effects: ["autonomous_worker_dispatch", "provider_invocation", "product_behavior_change", "dependency_change", "migration_change", "g1b_work", "integration", "protected_ref_movement", "deployment", "pages", "real_data_access"]
     closed_entrypoints: ["worker_dispatch", "provider_invocation", "clockwork_tick_mutation", "clockwork_closeout_mutation", "integration", "protected_ref_operation", "deployment"]
@@ -49,6 +49,11 @@ profiles:
       - "orchestration/programme/g1a-verdict-integration-scope.yaml"
       - "orchestration/programme/gates.yaml"
       - "orchestration/programme/risk-register.yaml"
+      - "orchestration/programme/reviews/g0-review-c720aaa-revision-required.json"
+      - "orchestration/programme/reviews/g0-review-087522d-revision-required.json"
+      - "orchestration/programme/reviews/g0-review-7cae4e8-revision-required.json"
+      - "orchestration/programme/reviews/g0-review-2af9278-revision-required.json"
+      - "orchestration/programme/reviews/g0-review-4ce1719-revision-required.json"
       - "orchestration_harness/deepcode_artifact.py"
       - "orchestration_harness/programme_admission.py"
       - "orchestration_harness/pinned_programme_gatekeeper.py"
@@ -86,10 +91,10 @@ profiles:
   G0_TO_G1A_STATE_TRANSITION:
     profile_kind: "state_transition"
     expected_programme_mode: "recovery"
-    expected_current_gate: "G1A"
+    expected_current_gate: "G1A.1"
     expected_gate_status: "active"
-    active_correction: "G1A"
-    programme_gate: "G0_TO_G1A"
+    active_correction: "G1A.1"
+    programme_gate: "G0_TO_G1A.1"
     admitted_task_classes: ["g0_to_g1a_state_transition"]
     allowed_effects: ["repository_read", "control_plane_edit", "task_branch_commit", "task_branch_push", "external_review_record", "transition_artifact"]
     forbidden_effects: ["dependency_change", "deployment", "g1b_work", "implementation_change", "integration", "migration_change", "pages", "product_behavior_change", "protected_ref_movement", "provider_invocation", "real_data_access"]
@@ -109,14 +114,14 @@ profiles:
     deployment_eligible: false
     protected_ref_movement_eligible: false
     g1a_eligible: true
-  G1A_ACTIVE:
+  G1A.1_ACTIVE:
     profile_kind: "active_gate"
     expected_programme_mode: "recovery"
-    expected_current_gate: "G1A"
+    expected_current_gate: "G1A.1"
     expected_gate_status: "active"
-    active_correction: "G1A"
-    programme_gate: "G1A"
-    admitted_task_classes: ["g1a_verdict_and_integration_semantics_repair"]
+    active_correction: "G1A.1"
+    programme_gate: "G1A.1"
+    admitted_task_classes: ["g1a_1_verdict_kernel_and_pure_consumers"]
     allowed_effects: ["repository_read", "verdict_kernel_edit", "task_branch_commit", "task_branch_push", "external_review_preparation"]
     forbidden_effects: ["autonomous_worker_dispatch", "closeout_state_transition", "controller_policy_change", "dependency_change", "deployment", "gatekeeper_change", "g1b_work", "integration", "migration_change", "pages", "product_behavior_change", "programme_state_change", "protected_ref_movement", "provider_invocation", "real_data_access"]
     closed_entrypoints: ["worker_dispatch", "provider_invocation", "clockwork_tick_mutation", "clockwork_closeout_mutation", "integration", "protected_ref_operation", "deployment"]
@@ -125,10 +130,8 @@ profiles:
       - "orchestration_harness/verdict.py"
       - "orchestration_harness/deepcode_artifact.py"
       - "orchestration_harness/review_acceptance.py"
-      - "scripts/ariadne_antigravity.py"
       - "scripts/ariadne_deepcode_liveness.py"
       - "scripts/ariadne_review_acceptance.py"
-      - "tests/test_ariadne_antigravity.py"
       - "tests/test_ariadne_deepcode_runtime_observability.py"
       - "tests/test_ariadne_review_acceptance.py"
       - "tests/test_ariadne_verdict.py"
@@ -143,7 +146,7 @@ profiles:
 scope_policy:
   expected_branch: "codex/raisa-ariadne-recovery-g0"
   frozen_recovery_base: "03e6860394c39086ec1ffb3f2457acc5f7c8b5f9"
-  authorized_parent_commit: "2af92789819e8114a1bfe8e956a5742136e4a139"
+  authorized_parent_commit: "4ce17198fad677aed1fe45be4e3bf2b18c713b3b"
   candidate_commit_limit: 1
   allowed_paths:
     - "AGENTS.md"
@@ -159,6 +162,11 @@ scope_policy:
     - "orchestration/programme/g1a-verdict-integration-scope.yaml"
     - "orchestration/programme/gates.yaml"
     - "orchestration/programme/risk-register.yaml"
+    - "orchestration/programme/reviews/g0-review-c720aaa-revision-required.json"
+    - "orchestration/programme/reviews/g0-review-087522d-revision-required.json"
+    - "orchestration/programme/reviews/g0-review-7cae4e8-revision-required.json"
+    - "orchestration/programme/reviews/g0-review-2af9278-revision-required.json"
+    - "orchestration/programme/reviews/g0-review-4ce1719-revision-required.json"
     - "orchestration_harness/programme_admission.py"
     - "orchestration_harness/pinned_programme_gatekeeper.py"
     - "orchestration_harness/orchestrator_preflight.py"
@@ -189,7 +197,7 @@ transition_policy:
   manifest_schema_version: "ariadne.programme_gate_transition_manifest.v1"
   task_class: "g0_to_g1a_state_transition"
   from_gate: "G0"
-  to_gate: "G1A"
+  to_gate: "G1A.1"
   transition_status: "complete"
   external_review_record_root: "orchestration/programme/external-reviews"
   transition_artifact_root: "orchestration/programme/gate-transitions"
@@ -213,14 +221,29 @@ transition_policy:
     - "provider_invocation"
     - "real_data_access"
 pinned_gatekeeper:
-  schema_version: "ariadne.pinned_programme_gatekeeper_policy.v1"
+  schema_version: "ariadne.pinned_programme_gatekeeper_policy.v2"
   module: "orchestration_harness/pinned_programme_gatekeeper.py"
   cli: "scripts/raisa_ariadne_pinned_gatekeeper.py"
-  source_binding: "gate_transition.reviewed_commit_and_reviewed_tree"
+  source_binding: "g0_acceptance.decisive_review_id_and_gate_transition_reviewed_commit_tree"
   clean_source_required: true
   target_is_data_only: true
   candidate_controller_execution_forbidden: true
   combined_operation_only: true
+  operation_binding_fields: ["target_head", "index_tree", "changed_paths_digest", "expected_origin_head"]
+target_worktree_policy:
+  schema_version: "ariadne.g1a_target_worktree_policy.v1"
+  preserved_legacy_worktree: "C:/Users/sarashera/emr4"
+  preserved_legacy_worktree_forbidden_as_gatekeeper: true
+  preserved_legacy_worktree_forbidden_as_target: true
+  separate_clean_target_required: true
+  activation_untracked_count_required: 0
+  development_allowed_untracked_paths:
+    - "orchestration_harness/verdict.py"
+    - "tests/test_ariadne_verdict.py"
+  pre_push_untracked_count_required: 0
+  post_push_untracked_count_required: 0
+  root_import_hooks_forbidden: ["sitecustomize.py", "*.pth"]
+  nonregular_reparse_symlink_and_junction_forbidden: true
 gated_entrypoints:
   - {id: "canonical_orchestrator_advisory", path: "scripts/ariadne_orchestrator_preflight.py", entrypoint: "worker_dispatch"}
   - {id: "antigravity_provider", path: "scripts/ariadne_antigravity.py", entrypoint: "provider_invocation"}

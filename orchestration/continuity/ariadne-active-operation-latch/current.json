@@ -5,7 +5,7 @@
   "objective": "Freeze one provider-free unmounted waiting-area-confirm command-family architecture with distinct operation identity, family-bound evidence, current-authority and locked destination checks, atomic waiting-area-only mutation/audit/idempotency/receipt semantics, canonical replay delivery and a non-actuating event posture without overlapping check-in or general status.",
   "status": "replaced",
   "source_head": "c720aaa306c449faae879bf9e6192c72b6c3c6a4",
-  "authority_source": "Yuri's explicit Gate G0 recovery redirect replaced the historical successor; G0.4 is the only current correction and G1A remains closed pending an external PASS and the typed transition.",
+  "authority_source": "Yuri's explicit Gate G0 recovery redirect replaced the historical successor; G0.5 is the only current correction and G1A remains closed pending an external PASS and the typed transition into G1A.1.",
   "checkpoint": {
     "completed_stage": "Historical waiting-area successor terminally replaced by Yuri's Gate G0 recovery redirect; it cannot resume from this latch.",
     "next_executable_stage": null,
@@ -15,7 +15,7 @@
       "review": 0,
       "verification": 0
     },
-      "settings_fingerprint": "sha256:64a3014d8238b4bb448c3424d456ce9f8a571bda9e990cd72bdc2c9ceb38c8cd"
+      "settings_fingerprint": "sha256:8f5e81f7cc950e0f1791b36b788ba708f68001ff10df26d24171088e42e72cbe"
   },
   "interruption_policy": {
     "chronological_last_prompt_is_controlling_authority": false,
@@ -45,6 +45,8 @@
     "no_historical_data_access",
     "no_provider_model_or_external_network",
     "historical_waiting_area_successor_replaced_and_non_resumable",
-    "typed_active_profile_only_then_named_external_review"
+    "typed_active_profile_only_then_named_external_review",
+    "preserved_legacy_worktree_is_neither_gatekeeper_nor_g1a_target",
+    "g1a_transition_opens_only_g1a_1"
   ]
 }

@@ -1,0 +1,12 @@
+{
+  "schema_version": "raisa-ariadne.external-g0-review.v2",
+  "review_id": "g0-review-087522d-revision-required",
+  "recorded_at": "2026-08-26T09:30:43+10:00",
+  "reviewed_commit": "087522d7b9cf6d5a26056412230f2513530aab1f",
+  "reviewed_tree": "a84b040d8146a2ed5bfbddaff3531768801aa3be",
+  "verdict": "REVISION_REQUIRED",
+  "blocking_finding_count": 2,
+  "reviewer_surface": "external_gate_review",
+  "g1a_authorized": false,
+  "source_artifact_sha256": "a0bbed2d8f090717e03442ff0c5917c749cf6a6f5ad300867c0b701ac0c2a719"
+}
