@@ -46,33 +46,10 @@ def _policy_sandbox(tmp_path: Path) -> Path:
     alternates.parent.mkdir(parents=True, exist_ok=True)
     alternates.write_bytes((object_store + "\n").encode("utf-8"))
     _git(root, "config", "core.longpaths", "true")
-    _git(
-        root,
-        "update-ref",
-        "refs/heads/policy-sandbox",
-        "4ce17198fad677aed1fe45be4e3bf2b18c713b3b",
-    )
+    _git(root, "config", "user.email", "tests@example.invalid")
+    _git(root, "config", "user.name", "Programme Policy Tests")
     _git(root, "symbolic-ref", "HEAD", "refs/heads/policy-sandbox")
-    _git(root, "read-tree", "HEAD")
-    _git(root, "sparse-checkout", "init", "--no-cone")
-    _git(
-        root,
-        "sparse-checkout",
-        "set",
-        "--no-cone",
-        *sorted(
-            pa.G0_G05_ALLOWED_PATHS
-            | pa.G1A_ALLOWED_PATHS
-            | {
-                "app/main.py",
-                "orchestration_harness/",
-                "scripts/",
-                "orchestration/harness_settings/",
-                "orchestration/programme/",
-                "orchestration/continuity/ariadne-active-operation-latch/",
-            }
-        ),
-    )
+    _git(root, "read-tree", "--empty")
     (root / "orchestration/programme").mkdir(parents=True, exist_ok=True)
     (root / "orchestration/continuity/ariadne-active-operation-latch").mkdir(
         parents=True, exist_ok=True
@@ -94,7 +71,7 @@ def _policy_sandbox(tmp_path: Path) -> Path:
         target = root / relative
         target.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(ROOT / relative, target)
-    for relative_text in pa.G0_G05_ALLOWED_PATHS | pa.G1A_ALLOWED_PATHS:
+    for relative_text in pa.G0_G07_ALLOWED_PATHS | pa.G1A_ALLOWED_PATHS:
         source = ROOT / relative_text
         if not source.is_file():
             continue
@@ -107,6 +84,18 @@ def _policy_sandbox(tmp_path: Path) -> Path:
         dirs_exist_ok=True,
         ignore=shutil.ignore_patterns("__pycache__", "*.pyc"),
     )
+    _git(root, "add", "-A")
+    tree = _git(root, "write-tree")
+    commit = _git(
+        root,
+        "commit-tree",
+        tree,
+        "-p",
+        "4ce17198fad677aed1fe45be4e3bf2b18c713b3b",
+        "-m",
+        "authored-synthetic policy sandbox",
+    )
+    _git(root, "update-ref", "refs/heads/policy-sandbox", commit)
     return root
 
 
@@ -169,14 +158,14 @@ def test_missing_malformed_or_contradictory_policy_fails_closed(
         (root / pa.STATE_PATH).write_text("{", encoding="utf-8")
     else:
         gates = (root / pa.GATES_PATH).read_text(encoding="utf-8")
-        (root / pa.GATES_PATH).write_text(
+        (root / pa.GATES_PATH).write_bytes(
             gates.replace(
                 'current_gate_status: "revision_required"',
                 'current_gate_status: "passed"',
                 1,
-            ),
-            encoding="utf-8",
+            ).encode("utf-8")
         )
+    _git(root, "add", "-A")
 
     with pytest.raises(ProgrammeAdmissionError):
         load_programme_policy(root)
@@ -185,24 +174,41 @@ def test_missing_malformed_or_contradictory_policy_fails_closed(
 def test_duplicate_yaml_key_is_rejected(tmp_path: Path) -> None:
     root = _policy_sandbox(tmp_path)
     path = root / pa.GATES_PATH
-    path.write_text(
-        'schema_version: "duplicate"\n' + path.read_text(encoding="utf-8"),
-        encoding="utf-8",
+    path.write_bytes(
+        ('schema_version: "duplicate"\n' + path.read_text(encoding="utf-8")).encode(
+            "utf-8"
+        )
     )
+    _git(root, "add", "--", pa.GATES_PATH.as_posix())
 
     with pytest.raises(ProgrammeAdmissionError, match="yaml_duplicate_key"):
+        load_programme_policy(root)
+
+
+@pytest.mark.parametrize(
+    "variable", ["GIT_DIR", "GIT_INDEX_FILE", "GIT_CONFIG_PARAMETERS"]
+)
+def test_programme_policy_rejects_git_redirection_environment(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path, variable: str
+) -> None:
+    root = _policy_sandbox(tmp_path)
+    monkeypatch.setenv(variable, "synthetic-redirection")
+
+    with pytest.raises(
+        ProgrammeAdmissionError, match="trusted_git_environment_forbidden"
+    ):
         load_programme_policy(root)
 
 
 def test_duplicate_json_key_is_rejected(tmp_path: Path) -> None:
     root = _policy_sandbox(tmp_path)
     path = root / pa.STATE_PATH
-    path.write_text(
-        path.read_text(encoding="utf-8").replace(
-            "{\n", '{\n  "schema_version": "duplicate",\n', 1
-        ),
-        encoding="utf-8",
+    path.write_bytes(
+        path.read_text(encoding="utf-8")
+        .replace("{\n", '{\n  "schema_version": "duplicate",\n', 1)
+        .encode("utf-8")
     )
+    _git(root, "add", "--", pa.STATE_PATH.as_posix())
 
     with pytest.raises(ProgrammeAdmissionError, match="json_duplicate_key"):
         load_programme_policy(root)
@@ -213,7 +219,8 @@ def test_unknown_policy_field_is_rejected(tmp_path: Path) -> None:
     path = root / pa.STATE_PATH
     state = json.loads(path.read_text(encoding="utf-8"))
     state["permissive_unknown"] = True
-    path.write_text(json.dumps(state), encoding="utf-8")
+    path.write_bytes(json.dumps(state).encode("utf-8"))
+    _git(root, "add", "--", pa.STATE_PATH.as_posix())
 
     with pytest.raises(ProgrammeAdmissionError, match="programme_state_schema_invalid"):
         load_programme_policy(root)
@@ -222,14 +229,16 @@ def test_unknown_policy_field_is_rejected(tmp_path: Path) -> None:
 def test_state_and_gate_disagreement_is_rejected(tmp_path: Path) -> None:
     root = _policy_sandbox(tmp_path)
     path = root / pa.GATES_PATH
-    path.write_text(
-        path.read_text(encoding="utf-8").replace(
-            'next_eligible_tranche: "G0.6"',
+    path.write_bytes(
+        path.read_text(encoding="utf-8")
+        .replace(
+            'next_eligible_tranche: "G0.7"',
             'next_eligible_tranche: "G1A.1"',
             1,
-        ),
-        encoding="utf-8",
+        )
+        .encode("utf-8")
     )
+    _git(root, "add", "--", pa.GATES_PATH.as_posix())
 
     with pytest.raises(
         ProgrammeAdmissionError, match="programme_state_gate_disagreement"
@@ -240,10 +249,12 @@ def test_state_and_gate_disagreement_is_rejected(tmp_path: Path) -> None:
 def test_duplicate_risk_id_is_rejected(tmp_path: Path) -> None:
     root = _policy_sandbox(tmp_path)
     path = root / pa.RISK_PATH
-    path.write_text(
-        path.read_text(encoding="utf-8").replace('- id: "R-002"', '- id: "R-001"', 1),
-        encoding="utf-8",
+    path.write_bytes(
+        path.read_text(encoding="utf-8")
+        .replace('- id: "R-002"', '- id: "R-001"', 1)
+        .encode("utf-8")
     )
+    _git(root, "add", "--", pa.RISK_PATH.as_posix())
 
     with pytest.raises(ProgrammeAdmissionError, match="risk_id_duplicate"):
         load_programme_policy(root)
@@ -451,7 +462,7 @@ def test_historical_latch_cannot_resume(tmp_path: Path) -> None:
     path = root / pa.LATCH_PATH
     latch = json.loads(path.read_text(encoding="utf-8"))
     latch["status"] = "paused"
-    path.write_text(json.dumps(latch), encoding="utf-8")
+    _write_json(path, latch)
 
     with pytest.raises(
         ProgrammeAdmissionError, match="historical_latch_not_terminally_replaced"
@@ -463,7 +474,8 @@ def test_agents_emergency_header_has_machine_precedence(tmp_path: Path) -> None:
     root = _policy_sandbox(tmp_path)
     path = root / pa.AGENTS_PATH
     text = path.read_text(encoding="utf-8")
-    path.write_text(text.split("# EMR4 Centaur", 1)[1], encoding="utf-8")
+    path.write_bytes(text.split("# EMR4 Centaur", 1)[1].encode("utf-8"))
+    _git(root, "add", "--", pa.AGENTS_PATH.as_posix())
 
     with pytest.raises(
         ProgrammeAdmissionError, match="agents_recovery_precedence_missing"
@@ -485,8 +497,8 @@ def test_machine_state_does_not_claim_stale_review_acceptance() -> None:
     policy = load_programme_policy(ROOT)
 
     assert policy.state["g0_acceptance"]["status"] == "superseded_revision_required"
-    assert policy.state["g0_6_correction"]["g1a_authorized"] is False
-    assert policy.state["g0_6_correction"]["external_review_status"] in {
+    assert policy.state["g0_7_correction"]["g1a_authorized"] is False
+    assert policy.state["g0_7_correction"]["external_review_status"] in {
         "not_started",
         "pending",
     }
@@ -496,7 +508,7 @@ def test_machine_state_does_not_claim_stale_review_acceptance() -> None:
         for row in policy.state["g0_acceptance"]["external_review_history"]
         if row["review_id"] == decisive_id
     )
-    assert decisive["reviewed_commit"] == "71e2c5f2f586fa4d1ca8fa9787a4906dbbb997f1"
+    assert decisive["reviewed_commit"] == "4a8e71ca98d3af013d51ca6c206932e363cdf174"
     assert decisive["verdict"] == "REVISION_REQUIRED"
     assert decisive["blocking_finding_count"] == 2
 
@@ -529,11 +541,15 @@ def test_production_review_history_uses_real_resolving_commit_trees() -> None:
             state["g0_6_correction"]["authorized_parent_commit"],
             "ef84162bbc6ef24241678d14e0183b876af3a1e3",
         ),
+        (
+            state["g0_7_correction"]["authorized_parent_commit"],
+            "a23cc914dddd1e17121f7b04083ee1c08338549a",
+        ),
     ]
     for commit, tree in expected:
         assert _git(ROOT, "rev-parse", f"{commit}^{{tree}}") == tree
         assert _git(ROOT, "rev-parse", f"{tree}^{{tree}}") == tree
-    assert len(state["g0_acceptance"]["external_review_history"]) == 6
+    assert len(state["g0_acceptance"]["external_review_history"]) == 7
 
 
 def test_false_g0_2_tree_binding_is_rejected_and_unresolved() -> None:
@@ -557,6 +573,7 @@ def test_false_g0_2_tree_binding_is_rejected_and_unresolved() -> None:
         ("g0_4_correction", "reviewed_g0_3_tree"),
         ("g0_5_correction", "reviewed_g0_4_tree"),
         ("g0_6_correction", "reviewed_g0_5_tree"),
+        ("g0_7_correction", "reviewed_g0_6_tree"),
     ],
 )
 def test_retained_review_history_cannot_rewrite_tree_bindings(
@@ -580,6 +597,7 @@ def test_retained_review_record_bytes_are_immutable(tmp_path: Path) -> None:
     retained = state["g0_acceptance"]["external_review_history"][0]
     path = root / retained["review_record_path"]
     path.write_bytes(path.read_bytes() + b" ")
+    _stage_written_repository_path(path)
 
     with pytest.raises(ProgrammeAdmissionError, match="review_record_digest_mismatch"):
         load_programme_policy(root)
@@ -1023,15 +1041,36 @@ def test_git_administrative_identity_rejects_unmodelled_hook_execution(
 
 def _write_json(path: Path, value: dict) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(value, indent=2) + "\n", encoding="utf-8")
+    path.write_bytes((json.dumps(value, indent=2) + "\n").encode("utf-8"))
+    _stage_written_repository_path(path)
 
 
 def _write_yaml(path: Path, value: dict) -> None:
-    path.write_text(yaml.safe_dump(value, sort_keys=False), encoding="utf-8")
+    path.write_bytes(yaml.safe_dump(value, sort_keys=False).encode("utf-8"))
+    _stage_written_repository_path(path)
+
+
+def _stage_written_repository_path(path: Path) -> None:
+    completed = subprocess.run(
+        ["git", "rev-parse", "--show-toplevel"],
+        cwd=path.parent,
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    if completed.returncode != 0:
+        return
+    root = Path(completed.stdout.strip()).resolve()
+    try:
+        relative = path.resolve().relative_to(root).as_posix()
+    except ValueError:
+        return
+    _git(root, "add", "--", relative)
 
 
 def _build_transition_repository(tmp_path: Path) -> tuple[Path, dict]:
     root = _policy_sandbox(tmp_path)
+    synthetic_base = _git(root, "rev-parse", "HEAD")
     branch = "codex/raisa-ariadne-recovery-g0"
     _git(root, "branch", "-m", branch)
     _git(root, "config", "user.email", "tests@example.invalid")
@@ -1063,24 +1102,30 @@ def _build_transition_repository(tmp_path: Path) -> tuple[Path, dict]:
 
     state_path = root / pa.STATE_PATH
     state = json.loads(state_path.read_text(encoding="utf-8"))
-    state["g0_6_correction"]["status"] = "review_pending"
-    state["g0_6_correction"]["external_review_status"] = "pending"
-    state["g0_6_correction"]["next_action"] = "external_G0_review_only"
+    state["recovery_baton"]["base_sha"] = synthetic_base
+    state["g0_7_correction"]["status"] = "review_pending"
+    state["g0_7_correction"]["external_review_status"] = "pending"
+    state["g0_7_correction"]["next_action"] = "external_G0_review_only"
     _write_json(state_path, state)
 
     gates_path = root / pa.GATES_PATH
     gates = yaml.safe_load(gates_path.read_text(encoding="utf-8"))
-    next(row for row in gates["gates"] if row["id"] == "G0.6")["status"] = (
+    next(row for row in gates["gates"] if row["id"] == "G0.7")["status"] = (
         "review_pending"
     )
     _write_yaml(gates_path, gates)
 
     overlay_path = root / pa.OVERLAY_PATH
     overlay = yaml.safe_load(overlay_path.read_text(encoding="utf-8"))
+    overlay["scope_policy"]["frozen_recovery_base"] = synthetic_base
     overlay["remote_identity_policy"] = pa.build_synthetic_remote_identity_policy(
         origin
     )
     _write_yaml(overlay_path, overlay)
+    inventory_path = root / pa.INVENTORY_PATH
+    inventory = yaml.safe_load(inventory_path.read_text(encoding="utf-8"))
+    inventory["authoritative_refs"]["recovery_base"] = synthetic_base
+    _write_yaml(inventory_path, inventory)
     from orchestration_harness.settings_fingerprint import settings_fingerprint
 
     latch_path = root / pa.LATCH_PATH
@@ -1140,14 +1185,14 @@ def _build_transition_repository(tmp_path: Path) -> tuple[Path, dict]:
 
     agents_path = root / pa.AGENTS_PATH
     agents_text = agents_path.read_text(encoding="utf-8")
-    agents_path.write_text(
+    agents_path.write_bytes(
         agents_text.replace(
-            "Gate G0.6 is the only authorised correction; G1A is\nclosed.",
+            "Gate G0.7 is the only authorised correction; G1A is\nclosed.",
             "The reviewed G0 to G1A.1 transition is complete; Gate G1A.1 is active\nfor its bounded pure-verdict task only.",
             1,
-        ),
-        encoding="utf-8",
+        ).encode("utf-8")
     )
+    _git(root, "add", "--", pa.AGENTS_PATH.as_posix())
 
     state = json.loads(state_path.read_text(encoding="utf-8"))
     state["observed_at"] = "2026-08-25T22:20:00+10:00"
@@ -1177,10 +1222,10 @@ def _build_transition_repository(tmp_path: Path) -> tuple[Path, dict]:
         }
     )
     state["g0_acceptance"]["next_action"] = "begin_bounded_G1A_1_only"
-    state["g0_6_correction"]["status"] = "external_review_passed"
-    state["g0_6_correction"]["external_review_status"] = "pass"
-    state["g0_6_correction"]["g1a_authorized"] = True
-    state["g0_6_correction"]["next_action"] = "bounded_G1A_1_profile_active"
+    state["g0_7_correction"]["status"] = "external_review_passed"
+    state["g0_7_correction"]["external_review_status"] = "pass"
+    state["g0_7_correction"]["g1a_authorized"] = True
+    state["g0_7_correction"]["next_action"] = "bounded_G1A_1_profile_active"
     state["gate_transition"] = {
         "status": "complete",
         "transition_id": transition_id,
@@ -1206,7 +1251,8 @@ def _build_transition_repository(tmp_path: Path) -> tuple[Path, dict]:
         "G0.1": "superseded_revision_required",
         "G0.4": "superseded_revision_required",
         "G0.5": "superseded_revision_required",
-        "G0.6": "external_review_passed",
+        "G0.6": "superseded_revision_required",
+        "G0.7": "external_review_passed",
         "G1A": "active_subgate_G1A_1",
         "G1A.1": "active",
     }
@@ -1321,8 +1367,8 @@ def test_valid_synthetic_state_only_transition_is_admitted(tmp_path: Path) -> No
     assert set(g1a_manifest["allowed_path_roots"]) == pa.G1A_ALLOWED_PATHS
     assert g1a_decision.admitted is True
     history = policy.state["g0_acceptance"]["external_review_history"]
-    assert len(history) == 7
-    assert [row["verdict"] for row in history[:6]] == ["REVISION_REQUIRED"] * 6
+    assert len(history) == 8
+    assert [row["verdict"] for row in history[:7]] == ["REVISION_REQUIRED"] * 7
     assert history[-1]["review_id"] == manifest["transition_id"]
     assert history[-1]["reviewed_commit"] == manifest["reviewed_commit"]
     assert history[-1]["reviewed_tree"] == manifest["reviewed_tree"]
@@ -1457,6 +1503,7 @@ def test_g1a_development_rejects_other_untracked_and_import_hook_files(
 ) -> None:
     root, _transition_manifest = _transition_copy(transition_template, tmp_path)
     _mark_transition_as_origin_head(root)
+    (root / relative_path).parent.mkdir(parents=True, exist_ok=True)
     (root / relative_path).write_text("# forbidden\n", encoding="utf-8")
     manifest = build_task_manifest(root)
 
@@ -1656,8 +1703,9 @@ def test_transition_rejects_agents_body_change(
     transition_template: tuple[Path, dict], tmp_path: Path
 ) -> None:
     root, manifest = _transition_copy(transition_template, tmp_path)
-    with (root / pa.AGENTS_PATH).open("a", encoding="utf-8") as stream:
-        stream.write("\nunauthorised body drift\n")
+    agents_path = root / pa.AGENTS_PATH
+    agents_path.write_bytes(agents_path.read_bytes() + b"\nunauthorised body drift\n")
+    _stage_written_repository_path(agents_path)
     decision = _transition_decision(root, manifest)
     assert decision.admitted is False
     assert "transition_agents_body_changed" in decision.reason_codes
@@ -1718,7 +1766,7 @@ def test_transition_rejects_missing_transition_artifact(
     artifact.unlink()
     decision = _transition_decision(root, manifest)
     assert decision.admitted is False
-    assert "transition_artifact_missing" in decision.reason_codes
+    assert "trusted_git_path_missing" in decision.reason_codes
 
 
 def test_transition_rejects_incorrect_semantic_pointer_list(

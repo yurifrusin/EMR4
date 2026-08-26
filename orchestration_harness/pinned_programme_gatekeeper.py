@@ -9,7 +9,6 @@ from __future__ import annotations
 
 import json
 import os
-import tempfile
 from dataclasses import asdict, dataclass, replace
 from datetime import datetime, timezone
 from pathlib import Path
@@ -20,6 +19,15 @@ from orchestration_harness import programme_admission as admission
 
 PINNED_GATEKEEPER_DECISION_VERSION = "ariadne.pinned_programme_gatekeeper_decision.v1"
 PINNED_OPERATION_RECEIPT_VERSION = "ariadne.pinned_programme_operation_receipt.v1"
+PINNED_RECEIPT_SINK_VERSION = "ariadne.pinned_receipt_sink.v1"
+PINNED_SOURCE_PATHS = (
+    "orchestration_harness/__init__.py",
+    "orchestration_harness/trusted_git.py",
+    "orchestration_harness/programme_admission.py",
+    "orchestration_harness/pinned_programme_gatekeeper.py",
+    "scripts/raisa_ariadne_gatekeeper_bootstrap.py",
+    "scripts/raisa_ariadne_pinned_gatekeeper.py",
+)
 
 
 @dataclass(frozen=True)
@@ -44,6 +52,8 @@ class PinnedGatekeeperDecision:
     expected_origin_head: str | None
     target_cleanliness: dict[str, Any] | None
     remote_identity: dict[str, Any] | None
+    source_trusted_git_identity: dict[str, Any] | None
+    receipt_sink_binding: dict[str, Any] | None
     operation_binding: dict[str, Any] | None
     scope_decision: dict[str, Any] | None
 
@@ -61,8 +71,19 @@ def _decision(
     transition_id: str | None,
     decisive_review: dict[str, Any] | None,
     scope_decision: admission.ScopeDecision | None,
+    source_trusted_git_identity: dict[str, Any] | None = None,
+    receipt_sink_binding: dict[str, Any] | None = None,
 ) -> PinnedGatekeeperDecision:
     unique_reasons = list(dict.fromkeys(reasons))
+    operation_binding = (
+        dict(scope_decision.operation_binding or {}) if scope_decision else None
+    )
+    if operation_binding is not None and source_trusted_git_identity is not None:
+        operation_binding["source_trusted_git_identity_sha256"] = (
+            source_trusted_git_identity["trusted_git_identity_sha256"]
+        )
+    if operation_binding is not None and receipt_sink_binding is not None:
+        operation_binding["receipt_sink"] = receipt_sink_binding
     return PinnedGatekeeperDecision(
         schema_version=PINNED_GATEKEEPER_DECISION_VERSION,
         admitted=not unique_reasons
@@ -103,9 +124,9 @@ def _decision(
             scope_decision.target_cleanliness if scope_decision else None
         ),
         remote_identity=(scope_decision.remote_identity if scope_decision else None),
-        operation_binding=(
-            scope_decision.operation_binding if scope_decision else None
-        ),
+        source_trusted_git_identity=source_trusted_git_identity,
+        receipt_sink_binding=receipt_sink_binding,
+        operation_binding=operation_binding,
         scope_decision=asdict(scope_decision) if scope_decision is not None else None,
     )
 
@@ -117,6 +138,7 @@ def evaluate_pinned_programme_operation(
     manifest: object | None,
     entrypoint: str,
     phase: str,
+    receipt_sink_binding: dict[str, Any] | None = None,
 ) -> PinnedGatekeeperDecision:
     """Evaluate one candidate commit/push from an exact clean trusted source."""
     source = gatekeeper_root.resolve()
@@ -129,6 +151,7 @@ def evaluate_pinned_programme_operation(
     transition_id: str | None = None
     decisive_review: dict[str, Any] | None = None
     scope_decision: admission.ScopeDecision | None = None
+    source_trusted_git_identity: dict[str, Any] | None = None
 
     if source == target:
         reasons.append("gatekeeper_target_not_isolated")
@@ -140,14 +163,26 @@ def evaluate_pinned_programme_operation(
     try:
         gatekeeper_commit = admission._run_git(source, "rev-parse", "HEAD")
         gatekeeper_tree = admission._run_git(source, "rev-parse", "HEAD^{tree}")
+        source_trusted_git_identity = admission.trusted_git.attest_repository(
+            source,
+            attested_paths=PINNED_SOURCE_PATHS,
+            expected_commit=gatekeeper_commit,
+        )
         source_status = admission._run_git(
             source, "status", "--porcelain", "--untracked-files=no"
         )
         source_inventory = admission.git_all_file_inventory(source)
         gatekeeper_clean = not bool(source_status) and not source_inventory
-    except admission.ProgrammeAdmissionError:
+    except (
+        admission.ProgrammeAdmissionError,
+        admission.trusted_git.TrustedGitError,
+    ) as error:
         gatekeeper_clean = False
-        reasons.append("gatekeeper_git_observation_failed")
+        reasons.append(
+            error.reason_code
+            if hasattr(error, "reason_code")
+            else "gatekeeper_git_observation_failed"
+        )
     if not gatekeeper_clean:
         reasons.append("gatekeeper_worktree_not_clean")
 
@@ -168,9 +203,16 @@ def evaluate_pinned_programme_operation(
             transition_id=transition_id,
             decisive_review=decisive_review,
             scope_decision=None,
+            source_trusted_git_identity=source_trusted_git_identity,
+            receipt_sink_binding=receipt_sink_binding,
         )
 
     target_worktree_policy = target_policy.overlay["target_worktree_policy"]
+    g0_recovery_push = (
+        target_policy.state.get("active_correction")
+        == admission.ADMITTED_PROGRAMME_GATE
+        and target_policy.state.get("active_profile") == admission.G0_CONTROLLER_PROFILE
+    )
     normalized_legacy = (
         str(target_worktree_policy["preserved_legacy_worktree"])
         .replace("\\", "/")
@@ -179,7 +221,10 @@ def evaluate_pinned_programme_operation(
     )
     if str(source).replace("\\", "/").rstrip("/").casefold() == normalized_legacy:
         reasons.append("gatekeeper_preserved_legacy_worktree_forbidden")
-    if str(target).replace("\\", "/").rstrip("/").casefold() == normalized_legacy:
+    if (
+        not g0_recovery_push
+        and str(target).replace("\\", "/").rstrip("/").casefold() == normalized_legacy
+    ):
         reasons.append("gatekeeper_target_preserved_legacy_worktree_forbidden")
 
     acceptance = target_policy.state["g0_acceptance"]
@@ -194,35 +239,74 @@ def evaluate_pinned_programme_operation(
             ),
             None,
         )
-    if decisive_review is None:
-        reasons.append("gatekeeper_decisive_review_missing")
-    elif (
-        decisive_review.get("verdict") != "PASS"
-        or decisive_review.get("blocking_finding_count") != 0
-        or decisive_review.get("g1a_authorized") is not True
-    ):
-        reasons.append("gatekeeper_decisive_review_not_pass")
-
-    transition = target_policy.state.get("gate_transition")
-    if not isinstance(transition, dict):
-        reasons.append("gatekeeper_transition_record_missing")
-    else:
-        transition_id = transition.get("transition_id")
-        if gatekeeper_commit != transition.get(
-            "reviewed_commit"
-        ) or gatekeeper_tree != transition.get("reviewed_tree"):
-            reasons.append("gatekeeper_source_not_transition_pinned")
-        if decisive_review is not None and (
-            transition.get("transition_id") != decisive_review.get("review_id")
-            or gatekeeper_commit != decisive_review.get("reviewed_commit")
-            or gatekeeper_tree != decisive_review.get("reviewed_tree")
+    if g0_recovery_push:
+        correction = target_policy.state["g0_7_correction"]
+        if entrypoint != "task_branch_push" or phase not in {"pre-push", "post-push"}:
+            reasons.append("gatekeeper_g0_correction_push_only")
+        if decisive_review is None:
+            reasons.append("gatekeeper_decisive_review_missing")
+        elif (
+            decisive_review.get("verdict") != "REVISION_REQUIRED"
+            or decisive_review.get("blocking_finding_count") != 2
+            or decisive_review.get("g1a_authorized") is not False
+            or decisive_review.get("reviewed_commit")
+            != correction["authorized_parent_commit"]
+            or decisive_review.get("reviewed_tree") != correction["reviewed_g0_6_tree"]
         ):
-            reasons.append("gatekeeper_source_not_decisive_review_pinned")
-        if target_policy.state.get("active_profile") != admission.G1A_ACTIVE_PROFILE:
-            reasons.append("gatekeeper_target_profile_not_g1a")
+            reasons.append("gatekeeper_g0_correction_review_binding_invalid")
+        try:
+            target_tree = admission._run_git(target, "rev-parse", "HEAD^{tree}")
+            parent_row = admission._run_git(
+                target, "rev-list", "--parents", "-n", "1", "HEAD"
+            ).split()
+        except admission.ProgrammeAdmissionError:
+            target_tree = None
+            parent_row = []
+            reasons.append("gatekeeper_g0_candidate_binding_observation_failed")
+        if (
+            gatekeeper_commit != target_head
+            or gatekeeper_tree != target_tree
+            or len(parent_row) != 2
+            or parent_row[1] != correction["authorized_parent_commit"]
+            or correction["status"] != "review_pending"
+            or correction["external_review_status"] != "pending"
+            or correction["g1a_authorized"] is not False
+            or target_policy.state.get("gate_transition") is not None
+        ):
+            reasons.append("gatekeeper_source_not_g0_candidate_pinned")
+    else:
+        if decisive_review is None:
+            reasons.append("gatekeeper_decisive_review_missing")
+        elif (
+            decisive_review.get("verdict") != "PASS"
+            or decisive_review.get("blocking_finding_count") != 0
+            or decisive_review.get("g1a_authorized") is not True
+        ):
+            reasons.append("gatekeeper_decisive_review_not_pass")
+
+        transition = target_policy.state.get("gate_transition")
+        if not isinstance(transition, dict):
+            reasons.append("gatekeeper_transition_record_missing")
+        else:
+            transition_id = transition.get("transition_id")
+            if gatekeeper_commit != transition.get(
+                "reviewed_commit"
+            ) or gatekeeper_tree != transition.get("reviewed_tree"):
+                reasons.append("gatekeeper_source_not_transition_pinned")
+            if decisive_review is not None and (
+                transition.get("transition_id") != decisive_review.get("review_id")
+                or gatekeeper_commit != decisive_review.get("reviewed_commit")
+                or gatekeeper_tree != decisive_review.get("reviewed_tree")
+            ):
+                reasons.append("gatekeeper_source_not_decisive_review_pinned")
+            if (
+                target_policy.state.get("active_profile")
+                != admission.G1A_ACTIVE_PROFILE
+            ):
+                reasons.append("gatekeeper_target_profile_not_g1a")
 
     artifact: dict[str, Any] | None = None
-    if isinstance(transition_id, str):
+    if not g0_recovery_push and isinstance(transition_id, str):
         artifact_path = (
             target / admission.TRANSITION_ARTIFACT_ROOT / f"{transition_id}.json"
         )
@@ -313,6 +397,8 @@ def evaluate_pinned_programme_operation(
                 or binding.get("exact_push_refspec") is None
                 or binding.get("remote_identity_sha256") is None
                 or binding.get("git_administrative_identity_sha256") is None
+                or binding.get("trusted_git_identity_sha256") is None
+                or source_trusted_git_identity is None
                 or binding.get("explicit_destination") is None
             ):
                 reasons.append("gatekeeper_push_binding_invalid")
@@ -329,6 +415,8 @@ def evaluate_pinned_programme_operation(
         transition_id=transition_id,
         decisive_review=decisive_review,
         scope_decision=scope_decision,
+        source_trusted_git_identity=source_trusted_git_identity,
+        receipt_sink_binding=receipt_sink_binding,
     )
 
 
@@ -346,6 +434,7 @@ def revalidate_pinned_operation_binding(
         manifest=manifest,
         entrypoint=prior_decision.entrypoint,
         phase=prior_decision.phase,
+        receipt_sink_binding=prior_decision.receipt_sink_binding,
     )
     if not prior_decision.admitted:
         return replace(
@@ -465,6 +554,8 @@ def _operation_receipt(
     decision: PinnedGatekeeperDecision,
     result_sha: str,
     result_tree: str,
+    reservation: "OperationReceiptReservation",
+    final_revalidation: dict[str, Any],
     post_push_decision: PinnedGatekeeperDecision | None = None,
 ) -> dict[str, Any]:
     payload: dict[str, Any] = {
@@ -485,6 +576,9 @@ def _operation_receipt(
         "post_push_decision_admitted": (
             post_push_decision.admitted if post_push_decision else None
         ),
+        "receipt_sink": reservation.binding,
+        "receipt_path": reservation.path.as_posix(),
+        "final_revalidation": final_revalidation,
     }
     payload["operation_receipt_sha256"] = admission._sha256_bytes(
         json.dumps(payload, sort_keys=True, separators=(",", ":")).encode("utf-8")
@@ -492,35 +586,282 @@ def _operation_receipt(
     return payload
 
 
-def write_operation_receipt(path: Path, payload: dict[str, Any]) -> None:
-    """Atomically persist one exact operation receipt outside candidate authority."""
-    destination = path.resolve()
-    if not destination.parent.is_dir():
-        raise admission.ProgrammeAdmissionError("gatekeeper_receipt_parent_missing")
-    encoded = (json.dumps(payload, indent=2, sort_keys=True) + "\n").encode("utf-8")
-    handle: int | None = None
-    temporary = ""
+def _canonical_digest(value: object) -> str:
+    return admission._sha256_bytes(
+        json.dumps(value, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    )
+
+
+def _path_within(candidate: Path, root: Path) -> bool:
     try:
-        handle, temporary = tempfile.mkstemp(
-            prefix=f".{destination.name}.", suffix=".tmp", dir=destination.parent
-        )
-        with os.fdopen(handle, "wb") as stream:
-            handle = None
-            stream.write(encoded)
-            stream.flush()
-            os.fsync(stream.fileno())
-        os.replace(temporary, destination)
-    except OSError as error:
-        if handle is not None:
-            os.close(handle)
-        if temporary:
+        return candidate.resolve(strict=True).is_relative_to(root.resolve(strict=True))
+    except (OSError, ValueError):
+        return False
+
+
+def _same_file_identity(left: dict[str, Any], right: dict[str, Any]) -> bool:
+    return all(left.get(key) == right.get(key) for key in ("device", "inode", "mode"))
+
+
+@dataclass
+class OperationReceiptReservation:
+    """Exclusive, identity-stable reservation for one internally named receipt."""
+
+    path: Path
+    descriptor: int
+    directory_identity: dict[str, Any]
+    file_identity: dict[str, Any]
+    binding: dict[str, Any]
+    finalized: bool = False
+
+    def _assert_identity(self) -> None:
+        try:
+            current_directory = admission.trusted_git._path_identity(  # noqa: SLF001
+                self.path.parent, directory=True
+            )
+            current_file = os.fstat(self.descriptor)
+            path_file = self.path.lstat()
+        except OSError as error:
+            raise admission.ProgrammeAdmissionError(
+                "gatekeeper_receipt_identity_drift"
+            ) from error
+        current_file_identity = {
+            "device": int(current_file.st_dev),
+            "inode": int(current_file.st_ino),
+            "mode": int(current_file.st_mode),
+        }
+        path_file_identity = {
+            "device": int(path_file.st_dev),
+            "inode": int(path_file.st_ino),
+            "mode": int(path_file.st_mode),
+        }
+        if (
+            not _same_file_identity(self.directory_identity, current_directory)
+            or not _same_file_identity(self.file_identity, current_file_identity)
+            or not _same_file_identity(self.file_identity, path_file_identity)
+        ):
+            raise admission.ProgrammeAdmissionError("gatekeeper_receipt_identity_drift")
+
+    def finalize(self, payload: dict[str, Any]) -> None:
+        if self.finalized or self.descriptor < 0:
+            raise admission.ProgrammeAdmissionError(
+                "gatekeeper_receipt_already_finalized"
+            )
+        self._assert_identity()
+        encoded = (json.dumps(payload, indent=2, sort_keys=True) + "\n").encode("utf-8")
+        try:
+            offset = 0
+            while offset < len(encoded):
+                written = os.write(self.descriptor, encoded[offset:])
+                if written <= 0:
+                    raise OSError("short receipt write")
+                offset += written
+            os.fsync(self.descriptor)
+            self._assert_identity()
+            os.close(self.descriptor)
+            self.descriptor = -1
+            self.finalized = True
             try:
-                os.unlink(temporary)
+                directory_handle = os.open(
+                    self.path.parent,
+                    os.O_RDONLY | getattr(os, "O_DIRECTORY", 0),
+                )
             except OSError:
-                pass
+                directory_handle = -1
+            if directory_handle >= 0:
+                try:
+                    os.fsync(directory_handle)
+                finally:
+                    os.close(directory_handle)
+            if self.path.read_bytes() != encoded:
+                raise OSError("receipt readback mismatch")
+        except OSError as error:
+            if self.descriptor >= 0:
+                os.close(self.descriptor)
+                self.descriptor = -1
+            raise admission.ProgrammeAdmissionError(
+                "gatekeeper_receipt_write_failed"
+            ) from error
+
+    def close_unfinalized(self) -> None:
+        """Close an unsuccessful reservation while preserving the collision marker."""
+        if self.descriptor >= 0:
+            os.close(self.descriptor)
+            self.descriptor = -1
+
+
+def reserve_operation_receipt(
+    *,
+    receipt_directory: Path,
+    operation: str,
+    decision: PinnedGatekeeperDecision,
+    gatekeeper_root: Path,
+    target_repo_root: Path,
+) -> OperationReceiptReservation:
+    """Reserve one internally named receipt outside every governed repository."""
+    try:
+        directory_identity = admission.trusted_git._path_identity(  # noqa: SLF001
+            receipt_directory.absolute(), directory=True
+        )
+        directory = Path(directory_identity["resolved_path"])
+    except (OSError, admission.trusted_git.TrustedGitError) as error:
         raise admission.ProgrammeAdmissionError(
-            "gatekeeper_receipt_write_failed"
+            "gatekeeper_receipt_directory_invalid"
         ) from error
+    target = target_repo_root.resolve(strict=True)
+    source = gatekeeper_root.resolve(strict=True)
+    target_identity = (decision.target_cleanliness or {}).get("trusted_git_identity")
+    source_identity = decision.source_trusted_git_identity
+    if not isinstance(target_identity, dict) or not isinstance(source_identity, dict):
+        raise admission.ProgrammeAdmissionError(
+            "gatekeeper_receipt_repository_identity_missing"
+        )
+    forbidden_roots = [source, target]
+    for identity in (source_identity, target_identity):
+        for key in ("gitdir", "commondir"):
+            value = identity.get(key, {}).get("resolved_path")
+            if isinstance(value, str):
+                forbidden_roots.append(Path(value))
+    policy = admission.load_programme_policy(target)
+    snapshot = policy.state["clockwork_snapshot"]
+    for key in ("git_bundle", "pre_g0_untracked_archive"):
+        preservation = Path(snapshot[key]["path"]).resolve(strict=True)
+        forbidden_roots.extend((preservation, preservation.parent))
+    if any(_path_within(directory, root) for root in forbidden_roots):
+        raise admission.ProgrammeAdmissionError(
+            "gatekeeper_receipt_directory_forbidden"
+        )
+    stable_directory_identity = {
+        key: directory_identity[key]
+        for key in ("resolved_path", "device", "inode", "mode")
+    }
+    operation_basis = {
+        "schema_version": PINNED_RECEIPT_SINK_VERSION,
+        "operation": operation,
+        "gatekeeper_commit": decision.gatekeeper_commit,
+        "target_head": decision.target_head,
+        "target_index_tree": decision.target_index_tree,
+        "operation_binding": decision.operation_binding,
+        "directory_identity": stable_directory_identity,
+    }
+    operation_identifier = _canonical_digest(operation_basis).removeprefix("sha256:")
+    filename = f"ariadne-{operation}-{operation_identifier}.json"
+    destination = directory / filename
+    flags = os.O_WRONLY | os.O_CREAT | os.O_EXCL | getattr(os, "O_BINARY", 0)
+    try:
+        descriptor = os.open(destination, flags, 0o600)
+        observed = os.fstat(descriptor)
+    except FileExistsError as error:
+        raise admission.ProgrammeAdmissionError(
+            "gatekeeper_receipt_collision"
+        ) from error
+    except OSError as error:
+        raise admission.ProgrammeAdmissionError(
+            "gatekeeper_receipt_reservation_failed"
+        ) from error
+    file_identity = {
+        "device": int(observed.st_dev),
+        "inode": int(observed.st_ino),
+        "mode": int(observed.st_mode),
+    }
+    binding = {
+        "schema_version": PINNED_RECEIPT_SINK_VERSION,
+        "directory": directory.as_posix(),
+        "directory_identity_sha256": _canonical_digest(stable_directory_identity),
+        "operation_identifier": operation_identifier,
+        "filename": filename,
+        "reservation_file_identity": file_identity,
+    }
+    return OperationReceiptReservation(
+        path=destination,
+        descriptor=descriptor,
+        directory_identity=directory_identity,
+        file_identity=file_identity,
+        binding=binding,
+    )
+
+
+def _identity_without_head(identity: dict[str, Any]) -> dict[str, Any]:
+    return {
+        key: value
+        for key, value in identity.items()
+        if key not in {"head", "head_tree", "trusted_git_identity_sha256"}
+    }
+
+
+def _final_operation_revalidation(
+    *,
+    decision: PinnedGatekeeperDecision,
+    gatekeeper_root: Path,
+    target_repo_root: Path,
+    result_sha: str,
+    result_tree: str,
+    expected_remote_sha: str | None,
+) -> dict[str, Any]:
+    source = gatekeeper_root.resolve()
+    target = target_repo_root.resolve()
+    try:
+        source_identity = admission.trusted_git.attest_repository(
+            source,
+            attested_paths=PINNED_SOURCE_PATHS,
+            expected_commit=decision.gatekeeper_commit,
+        )
+    except admission.trusted_git.TrustedGitError as error:
+        raise admission.ProgrammeAdmissionError(error.reason_code) from error
+    if source_identity != decision.source_trusted_git_identity:
+        raise admission.ProgrammeAdmissionError("gatekeeper_source_identity_drift")
+    policy = admission.load_programme_policy(target)
+    prior_target_identity = (decision.target_cleanliness or {}).get(
+        "trusted_git_identity"
+    )
+    if not isinstance(prior_target_identity, dict) or _identity_without_head(
+        policy.trusted_git_identity
+    ) != _identity_without_head(prior_target_identity):
+        raise admission.ProgrammeAdmissionError("gatekeeper_target_identity_drift")
+    if (
+        admission._run_git(target, "rev-parse", "HEAD") != result_sha
+        or admission._run_git(target, "rev-parse", "HEAD^{tree}") != result_tree
+        or admission._run_git(target, "write-tree") != result_tree
+    ):
+        raise admission.ProgrammeAdmissionError("gatekeeper_result_binding_drift")
+    remote_identity = admission.observe_remote_identity(
+        target, policy.overlay["remote_identity_policy"]
+    )
+    if remote_identity != decision.remote_identity:
+        raise admission.ProgrammeAdmissionError("gatekeeper_remote_identity_drift")
+    branch = decision.target_branch
+    remote_head = (
+        admission._fresh_remote_head(
+            target, remote_identity["normalized_push_url"], branch
+        )
+        if isinstance(branch, str)
+        else None
+    )
+    if remote_head != expected_remote_sha:
+        raise admission.ProgrammeAdmissionError("gatekeeper_remote_readback_drift")
+    expected_protected = policy.state["protected_refs"]["expected_sha"]
+    protected_refs = {
+        ref: admission._run_git(target, "rev-parse", ref)
+        for ref in policy.state["protected_refs"]["refs"]
+    }
+    if any(value != expected_protected for value in protected_refs.values()):
+        raise admission.ProgrammeAdmissionError("gatekeeper_protected_ref_drift")
+    payload = {
+        "schema_version": "ariadne.pinned_operation_final_revalidation.v1",
+        "source_trusted_git_identity_sha256": source_identity[
+            "trusted_git_identity_sha256"
+        ],
+        "target_trusted_git_identity_sha256": policy.trusted_git_identity[
+            "trusted_git_identity_sha256"
+        ],
+        "result_sha": result_sha,
+        "result_tree": result_tree,
+        "remote_readback_sha": remote_head,
+        "protected_refs": protected_refs,
+        "status": "passed",
+    }
+    payload["final_revalidation_sha256"] = _canonical_digest(payload)
+    return payload
 
 
 def execute_exact_index_commit(
@@ -529,33 +870,71 @@ def execute_exact_index_commit(
     target_repo_root: Path,
     manifest: object | None,
     message: str,
+    receipt_directory: Path,
 ) -> dict[str, Any]:
-    """Evaluate, revalidate, commit the exact index tree, and return its receipt."""
-    decision = evaluate_pinned_programme_operation(
+    """Reserve, commit the exact index tree, revalidate, and finalize evidence."""
+    base_decision = evaluate_pinned_programme_operation(
         gatekeeper_root=gatekeeper_root,
         target_repo_root=target_repo_root,
         manifest=manifest,
         entrypoint="task_branch_commit",
         phase="development",
     )
-    if not decision.admitted:
+    if not base_decision.admitted:
         raise admission.ProgrammeAdmissionError(
             "gatekeeper_exact_index_commit_not_admitted"
         )
-    candidate = commit_exact_admitted_index(
-        prior_decision=decision,
+    reservation = reserve_operation_receipt(
+        receipt_directory=receipt_directory,
+        operation="exact_index_commit",
+        decision=base_decision,
         gatekeeper_root=gatekeeper_root,
         target_repo_root=target_repo_root,
-        manifest=manifest,
-        message=message,
     )
-    tree = admission._run_git(target_repo_root.resolve(), "rev-parse", "HEAD^{tree}")
-    return _operation_receipt(
-        operation="exact_index_commit",
-        decision=decision,
-        result_sha=candidate,
-        result_tree=tree,
-    )
+    try:
+        decision = evaluate_pinned_programme_operation(
+            gatekeeper_root=gatekeeper_root,
+            target_repo_root=target_repo_root,
+            manifest=manifest,
+            entrypoint="task_branch_commit",
+            phase="development",
+            receipt_sink_binding=reservation.binding,
+        )
+        if not decision.admitted:
+            raise admission.ProgrammeAdmissionError(
+                "gatekeeper_exact_index_commit_not_admitted"
+            )
+        candidate = commit_exact_admitted_index(
+            prior_decision=decision,
+            gatekeeper_root=gatekeeper_root,
+            target_repo_root=target_repo_root,
+            manifest=manifest,
+            message=message,
+        )
+        tree = admission._run_git(
+            target_repo_root.resolve(), "rev-parse", "HEAD^{tree}"
+        )
+        final_revalidation = _final_operation_revalidation(
+            decision=decision,
+            gatekeeper_root=gatekeeper_root,
+            target_repo_root=target_repo_root,
+            result_sha=candidate,
+            result_tree=tree,
+            expected_remote_sha=decision.expected_origin_head,
+        )
+        payload = _operation_receipt(
+            operation="exact_index_commit",
+            decision=decision,
+            result_sha=candidate,
+            result_tree=tree,
+            reservation=reservation,
+            final_revalidation=final_revalidation,
+        )
+        reservation.finalize(payload)
+        return payload
+    except Exception:
+        reservation.close_unfinalized()
+        raise
 
 
 def execute_exact_sha_push(
@@ -563,40 +942,79 @@ def execute_exact_sha_push(
     gatekeeper_root: Path,
     target_repo_root: Path,
     manifest: object | None,
+    receipt_directory: Path,
 ) -> dict[str, Any]:
-    """Evaluate, revalidate, push the exact SHA, and verify the same destination."""
-    decision = evaluate_pinned_programme_operation(
+    """Reserve, push one exact SHA, revalidate, and finalize evidence."""
+    base_decision = evaluate_pinned_programme_operation(
         gatekeeper_root=gatekeeper_root,
         target_repo_root=target_repo_root,
         manifest=manifest,
         entrypoint="task_branch_push",
         phase="pre-push",
     )
-    fresh = revalidate_pinned_operation_binding(
-        prior_decision=decision,
+    if not base_decision.admitted:
+        raise admission.ProgrammeAdmissionError("gatekeeper_exact_push_not_admitted")
+    reservation = reserve_operation_receipt(
+        receipt_directory=receipt_directory,
+        operation="exact_sha_push",
+        decision=base_decision,
         gatekeeper_root=gatekeeper_root,
         target_repo_root=target_repo_root,
-        manifest=manifest,
     )
-    argv = exact_push_argv(fresh)
-    target = target_repo_root.resolve()
-    admission._run_git(target, *argv[1:])
-    post_push = evaluate_pinned_programme_operation(
-        gatekeeper_root=gatekeeper_root,
-        target_repo_root=target,
-        manifest=manifest,
-        entrypoint="task_branch_push",
-        phase="post-push",
-    )
-    if not post_push.admitted or post_push.expected_origin_head != fresh.target_head:
-        raise admission.ProgrammeAdmissionError(
-            "gatekeeper_exact_push_postcondition_failed"
+    try:
+        decision = evaluate_pinned_programme_operation(
+            gatekeeper_root=gatekeeper_root,
+            target_repo_root=target_repo_root,
+            manifest=manifest,
+            entrypoint="task_branch_push",
+            phase="pre-push",
+            receipt_sink_binding=reservation.binding,
         )
-    result_tree = admission._run_git(target, "rev-parse", "HEAD^{tree}")
-    return _operation_receipt(
-        operation="exact_sha_push",
-        decision=fresh,
-        result_sha=fresh.target_head or "",
-        result_tree=result_tree,
-        post_push_decision=post_push,
-    )
+        fresh = revalidate_pinned_operation_binding(
+            prior_decision=decision,
+            gatekeeper_root=gatekeeper_root,
+            target_repo_root=target_repo_root,
+            manifest=manifest,
+        )
+        argv = exact_push_argv(fresh)
+        target = target_repo_root.resolve()
+        admission._run_git(target, *argv[1:])
+        post_push = evaluate_pinned_programme_operation(
+            gatekeeper_root=gatekeeper_root,
+            target_repo_root=target,
+            manifest=manifest,
+            entrypoint="task_branch_push",
+            phase="post-push",
+            receipt_sink_binding=reservation.binding,
+        )
+        if (
+            not post_push.admitted
+            or post_push.expected_origin_head != fresh.target_head
+        ):
+            raise admission.ProgrammeAdmissionError(
+                "gatekeeper_exact_push_postcondition_failed"
+            )
+        result_sha = fresh.target_head or ""
+        result_tree = admission._run_git(target, "rev-parse", "HEAD^{tree}")
+        final_revalidation = _final_operation_revalidation(
+            decision=fresh,
+            gatekeeper_root=gatekeeper_root,
+            target_repo_root=target,
+            result_sha=result_sha,
+            result_tree=result_tree,
+            expected_remote_sha=result_sha,
+        )
+        payload = _operation_receipt(
+            operation="exact_sha_push",
+            decision=fresh,
+            result_sha=result_sha,
+            result_tree=result_tree,
+            reservation=reservation,
+            final_revalidation=final_revalidation,
+            post_push_decision=post_push,
+        )
+        reservation.finalize(payload)
+        return payload
+    except Exception:
+        reservation.close_unfinalized()
+        raise

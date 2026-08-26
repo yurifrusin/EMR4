@@ -6,7 +6,6 @@ import argparse
 import ast
 import hashlib
 import json
-import subprocess
 import sys
 from dataclasses import asdict, dataclass
 from pathlib import Path
@@ -17,7 +16,7 @@ if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
 from orchestration_harness.programme_admission import (
-    G0_G06_ALLOWED_PATHS,
+    G0_G07_ALLOWED_PATHS,
     TASK_MANIFEST_VERSION,
     ProgrammeAdmissionError,
     admission_payload,
@@ -27,9 +26,10 @@ from orchestration_harness.programme_admission import (
     git_change_inventory,
     load_programme_policy,
     strict_json_object,
+    _run_git as _trusted_run_git,
 )
 
-ALLOWED_G0_TRACKED_PATHS = G0_G06_ALLOWED_PATHS
+ALLOWED_G0_TRACKED_PATHS = G0_G07_ALLOWED_PATHS
 EXPECTED_RISKS = {
     *(f"R-{index:03d}" for index in range(1, 14)),
     *(f"A-{index:03d}" for index in range(1, 11)),
@@ -58,22 +58,9 @@ class PreflightError(RuntimeError):
 
 def _run_git(repo_root: Path, *args: str) -> str:
     try:
-        completed = subprocess.run(  # noqa: S603
-            ["git", *args],
-            cwd=repo_root,
-            check=False,
-            capture_output=True,
-            text=True,
-            encoding="utf-8",
-            errors="replace",
-            shell=False,
-            timeout=30,
-        )
-    except (OSError, subprocess.TimeoutExpired) as error:
+        return _trusted_run_git(repo_root, *args)
+    except ProgrammeAdmissionError as error:
         raise PreflightError("git observation failed") from error
-    if completed.returncode != 0:
-        raise PreflightError("git observation failed")
-    return completed.stdout.strip()
 
 
 def _sha256_file(path: Path) -> str:
@@ -177,19 +164,49 @@ def _risk_ids(repo_root: Path) -> set[str]:
     return {row["id"] for row in policy.risks["risks"]}
 
 
+def _verification_phase(repo_root: Path, state: dict[str, Any]) -> str:
+    """Select the one phase matching development, pre-push, or post-push Git state."""
+    root = repo_root.resolve()
+    correction_key = str(state["active_correction"]).lower().replace(".", "_")
+    correction = state.get(f"{correction_key}_correction")
+    if not isinstance(correction, dict):
+        raise PreflightError("active correction binding unavailable")
+    parent = correction.get("authorized_parent_commit")
+    head = _run_git(root, "rev-parse", "HEAD")
+    branch = _run_git(root, "branch", "--show-current")
+    policy = load_programme_policy(root)
+    try:
+        from orchestration_harness.programme_admission import _fresh_remote_head
+
+        origin = _fresh_remote_head(
+            root,
+            policy.overlay["remote_identity_policy"]["normalized_push_url"],
+            branch,
+        )
+    except ProgrammeAdmissionError as error:
+        raise PreflightError("fresh remote observation failed") from error
+    if head == parent and origin == parent:
+        return "development"
+    if origin == parent and head != parent:
+        return "pre-push"
+    if origin == head and head != parent:
+        return "post-push"
+    raise PreflightError("Git lifecycle phase is contradictory")
+
+
 def build_task_manifest(
     repo_root: Path = REPO_ROOT,
     *,
     intended_effects: Iterable[str] | None = None,
 ) -> dict[str, Any]:
-    """Build the current typed G0.6 or G1A.1 manifest without persisting a token."""
+    """Build the current typed G0.7 or G1A.1 manifest without persisting a token."""
     root = repo_root.resolve()
     policy = load_programme_policy(root)
     active = policy.overlay["profiles"][policy.overlay["active_profile"]]
-    if policy.state["active_correction"] == "G0.6":
-        base_commit = policy.state["g0_6_correction"]["authorized_parent_commit"]
-        task_id = "raisa-ariadne-g0-6-complete-cleanliness-remote-identity"
-        objective = "Correct complete ignored/untracked cleanliness, isolated bootstrap, exact remote identity and canonical receipt-emitting operations only; stop before G1A implementation."
+    if policy.state["active_correction"] == "G0.7":
+        base_commit = policy.state["g0_7_correction"]["authorized_parent_commit"]
+        task_id = "raisa-ariadne-g0-7-trusted-git-closed-receipt-sink"
+        objective = "Correct trusted Git observation and physical-byte binding plus the closed non-overwriting receipt sink only; stop before G1A implementation."
     else:
         reviewed = policy.state["gate_transition"]["reviewed_commit"]
         rows = _run_git(root, "rev-list", "--reverse", f"{reviewed}..HEAD").splitlines()

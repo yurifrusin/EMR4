@@ -10,6 +10,7 @@ from scripts.raisa_ariadne_recovery_preflight import (
     _changed_tracked_paths,
     _remote_baseline_snapshot,
     _risk_ids,
+    _verification_phase,
     build_task_manifest,
     build_report,
     main,
@@ -24,10 +25,12 @@ def load_state() -> dict:
     return json.loads(STATE.read_text(encoding="utf-8"))
 
 
-def test_g0_recovery_preflight_passes_while_preserving_global_red() -> None:
-    report = build_report(ROOT, build_task_manifest(ROOT), "development")
+def test_g0_recovery_preflight_uses_the_current_git_lifecycle_phase() -> None:
+    phase = _verification_phase(ROOT, load_state())
+    report = build_report(ROOT, build_task_manifest(ROOT), phase)
 
     assert report["status"] == "passed"
+    assert report["phase"] == phase
     assert report["programme_mode"] == "recovery"
     assert report["current_gate"] == "G0"
     assert report["feature_work_eligible"] is False
@@ -72,18 +75,19 @@ def test_machine_state_freezes_authority_and_forbidden_actions() -> None:
     assert state["programme_mode"] == "recovery"
     assert state["current_gate"] == "G0"
     assert state["current_gate_status"] == "revision_required"
-    assert state["active_correction"] == "G0.6"
-    assert state["active_profile"] == "G0.6_CONTROLLER_MAINTENANCE"
+    assert state["active_correction"] == "G0.7"
+    assert state["active_profile"] == "G0.7_CONTROLLER_MAINTENANCE"
     assert state["feature_work_eligible"] is False
     assert state["g0_2_correction"]["status"] == "superseded_revision_required"
     assert state["g0_4_correction"]["status"] == "superseded_revision_required"
     assert state["g0_5_correction"]["status"] == "superseded_revision_required"
-    assert state["g0_6_correction"]["status"] in {"in_progress", "review_pending"}
-    assert state["g0_6_correction"]["authorized_parent_commit"] == (
-        "71e2c5f2f586fa4d1ca8fa9787a4906dbbb997f1"
+    assert state["g0_6_correction"]["status"] == "superseded_revision_required"
+    assert state["g0_7_correction"]["status"] in {"in_progress", "review_pending"}
+    assert state["g0_7_correction"]["authorized_parent_commit"] == (
+        "4a8e71ca98d3af013d51ca6c206932e363cdf174"
     )
-    assert state["g0_6_correction"]["reviewed_g0_5_tree"] == (
-        "ef84162bbc6ef24241678d14e0183b876af3a1e3"
+    assert state["g0_7_correction"]["reviewed_g0_6_tree"] == (
+        "a23cc914dddd1e17121f7b04083ee1c08338549a"
     )
     assert state["g0_2_correction"]["g1a_authorized"] is False
     assert state["recovery_baton"]["base_sha"] == (

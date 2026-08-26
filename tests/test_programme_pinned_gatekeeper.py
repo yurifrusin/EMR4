@@ -1,4 +1,5 @@
 import json
+import os
 import subprocess
 import sys
 from pathlib import Path
@@ -70,9 +71,10 @@ def _gatekeeper_operation(
     gatekeeper: Path,
     target: Path,
     manifest_path: Path,
-    receipt_path: Path,
+    receipt_directory: Path,
     message: str | None = None,
 ) -> tuple[subprocess.CompletedProcess[str], dict]:
+    receipt_directory.mkdir(parents=True, exist_ok=True)
     argv = [
         sys.executable,
         "-I",
@@ -87,8 +89,8 @@ def _gatekeeper_operation(
         str(target),
         "--task-manifest",
         str(manifest_path),
-        "--receipt",
-        str(receipt_path),
+        "--receipt-directory",
+        str(receipt_directory),
         "--format",
         "json",
     ]
@@ -134,7 +136,7 @@ def test_real_bare_origin_transition_and_g1a_lifecycle_passes(tmp_path: Path) ->
         gatekeeper=gatekeeper,
         target=target,
         manifest_path=transition_manifest_path,
-        receipt_path=target.parent / "transition-push-receipt.json",
+        receipt_directory=target.parent / "transition-receipts",
     )
     assert transition_push.returncode == 0
     assert transition_receipt["operation"] == "exact_sha_push"
@@ -216,7 +218,7 @@ def test_real_bare_origin_transition_and_g1a_lifecycle_passes(tmp_path: Path) ->
         gatekeeper=gatekeeper,
         target=target,
         manifest_path=g1a_development_path,
-        receipt_path=target.parent / "g1a-commit-receipt.json",
+        receipt_directory=target.parent / "g1a-commit-receipts",
         message="synthetic G1A verdict kernel change",
     )
     assert commit_completed.returncode == 0
@@ -250,7 +252,7 @@ def test_real_bare_origin_transition_and_g1a_lifecycle_passes(tmp_path: Path) ->
         gatekeeper=gatekeeper,
         target=target,
         manifest_path=g1a_manifest_path,
-        receipt_path=target.parent / "g1a-push-receipt.json",
+        receipt_directory=target.parent / "g1a-push-receipts",
     )
     assert g1a_push.returncode == 0
     assert g1a_push_receipt["post_push_readback_sha"] == committed
@@ -271,6 +273,7 @@ def test_real_bare_origin_transition_and_g1a_lifecycle_passes(tmp_path: Path) ->
     assert post_g1a_payload["admitted"] is True
 
     product_path = target / "app/main.py"
+    product_path.parent.mkdir(parents=True, exist_ok=True)
     product_path.write_text("# unrelated product drift\n", encoding="utf-8")
     product_manifest = build_task_manifest(target)
     product_manifest_path = _manifest_path(
@@ -374,7 +377,7 @@ def test_dirty_or_wrongly_pinned_gatekeeper_fails_closed(tmp_path: Path) -> None
     assert "gatekeeper_source_not_transition_pinned" in wrong_payload["reason_codes"]
 
 
-def test_preserved_legacy_683_file_worktree_is_never_a_g1a_target(
+def test_preserved_legacy_worktree_cannot_use_unpinned_gatekeeper(
     tmp_path: Path,
 ) -> None:
     _target, gatekeeper, _transition_manifest = _transition_fixture(tmp_path)
@@ -390,10 +393,7 @@ def test_preserved_legacy_683_file_worktree_is_never_a_g1a_target(
     )
 
     assert completed.returncode == 2
-    assert (
-        "gatekeeper_target_preserved_legacy_worktree_forbidden"
-        in payload["reason_codes"]
-    )
+    assert "gatekeeper_source_not_g0_candidate_pinned" in payload["reason_codes"]
 
 
 def test_operation_binding_revalidation_rejects_post_admission_index_drift(
@@ -565,3 +565,287 @@ def test_candidate_local_combined_api_is_not_an_accepted_g1a_gatekeeper(
     )
     assert decision.admitted is False
     assert decision.reason_codes == ["pinned_gatekeeper_required"]
+
+
+_HIGH_RISK_GIT_ENVIRONMENT = (
+    "GIT_DIR",
+    "GIT_COMMON_DIR",
+    "GIT_WORK_TREE",
+    "GIT_INDEX_FILE",
+    "GIT_OBJECT_DIRECTORY",
+    "GIT_ALTERNATE_OBJECT_DIRECTORIES",
+    "GIT_REPLACE_REF_BASE",
+    "GIT_CONFIG_COUNT",
+    "GIT_CONFIG_KEY_0",
+    "GIT_CONFIG_VALUE_0",
+    "GIT_CONFIG_PARAMETERS",
+    "GIT_EXEC_PATH",
+    "GIT_SHALLOW_FILE",
+    "GIT_SSL_NO_VERIFY",
+)
+
+
+@pytest.mark.parametrize("variable", _HIGH_RISK_GIT_ENVIRONMENT)
+def test_bootstrap_rejects_high_risk_git_environment_before_controller_import(
+    tmp_path: Path, variable: str
+) -> None:
+    target, gatekeeper, _transition_manifest = _transition_fixture(tmp_path)
+    manifest = build_task_manifest(target)
+    manifest_path = _manifest_path(target, manifest, "environment-manifest.json")
+    marker = tmp_path / "controller-imported"
+    controller = gatekeeper / "scripts/raisa_ariadne_pinned_gatekeeper.py"
+    controller.write_text(
+        controller.read_text(encoding="utf-8")
+        + f"\nPath({str(marker)!r}).write_text('imported', encoding='utf-8')\n",
+        encoding="utf-8",
+    )
+    environment = os.environ.copy()
+    environment[variable] = "1"
+    completed = subprocess.run(
+        [
+            sys.executable,
+            "-I",
+            "-B",
+            str(gatekeeper / "scripts/raisa_ariadne_gatekeeper_bootstrap.py"),
+            "--expected-source-commit",
+            _git(gatekeeper, "rev-parse", "HEAD"),
+            "--expected-source-tree",
+            _git(gatekeeper, "rev-parse", "HEAD^{tree}"),
+            "evaluate",
+            "--target-repo",
+            str(target),
+            "--task-manifest",
+            str(manifest_path),
+            "--entrypoint",
+            "task_branch_commit",
+            "--phase",
+            "development",
+            "--format",
+            "json",
+        ],
+        cwd=gatekeeper,
+        env=environment,
+        check=False,
+        capture_output=True,
+        text=True,
+        timeout=60,
+    )
+
+    assert completed.returncode == 2
+    assert json.loads(completed.stdout)["reason_codes"] == [
+        "trusted_git_environment_forbidden"
+    ]
+    assert marker.exists() is False
+
+
+@pytest.mark.parametrize("flag", ["--assume-unchanged", "--skip-worktree"])
+def test_bootstrap_rejects_index_visibility_flags_before_controller_import(
+    tmp_path: Path, flag: str
+) -> None:
+    target, gatekeeper, _transition_manifest = _transition_fixture(tmp_path)
+    manifest = build_task_manifest(target)
+    manifest_path = _manifest_path(target, manifest, "index-flag-manifest.json")
+    marker = tmp_path / "controller-imported"
+    controller_relative = "scripts/raisa_ariadne_pinned_gatekeeper.py"
+    controller = gatekeeper / controller_relative
+    controller.write_text(
+        controller.read_text(encoding="utf-8")
+        + f"\nPath({str(marker)!r}).write_text('imported', encoding='utf-8')\n",
+        encoding="utf-8",
+    )
+    _git(gatekeeper, "update-index", flag, controller_relative)
+
+    completed, payload = _gatekeeper_cli(
+        gatekeeper=gatekeeper,
+        target=target,
+        manifest_path=manifest_path,
+        phase="development",
+    )
+
+    assert completed.returncode == 2
+    assert payload["reason_codes"] == ["trusted_git_index_flags_forbidden"]
+    assert marker.exists() is False
+
+
+@pytest.mark.parametrize("flag", ["--assume-unchanged", "--skip-worktree"])
+def test_target_policy_rejects_index_visibility_flags(
+    flag: str, tmp_path: Path
+) -> None:
+    target, gatekeeper, transition_manifest = _transition_fixture(tmp_path)
+    _git(
+        target,
+        "update-index",
+        flag,
+        "orchestration/programme/current-state.json",
+    )
+
+    decision = pg.evaluate_pinned_programme_operation(
+        gatekeeper_root=gatekeeper,
+        target_repo_root=target,
+        manifest=transition_manifest,
+        entrypoint="task_branch_push",
+        phase="pre-push",
+    )
+
+    assert decision.admitted is False
+    assert "trusted_git_index_flags_forbidden" in decision.reason_codes
+
+
+def test_target_authority_physical_bytes_must_match_the_bound_index(
+    tmp_path: Path,
+) -> None:
+    target, gatekeeper, transition_manifest = _transition_fixture(tmp_path)
+    state_path = target / pa.STATE_PATH
+    state = json.loads(state_path.read_text(encoding="utf-8"))
+    state["observed_at"] = "2026-08-26T23:59:59+10:00"
+    state_path.write_text(json.dumps(state, indent=2) + "\n", encoding="utf-8")
+
+    decision = pg.evaluate_pinned_programme_operation(
+        gatekeeper_root=gatekeeper,
+        target_repo_root=target,
+        manifest=transition_manifest,
+        entrypoint="task_branch_push",
+        phase="pre-push",
+    )
+
+    assert decision.admitted is False
+    assert "trusted_git_physical_bytes_mismatch" in decision.reason_codes
+
+
+def test_operation_cli_accepts_only_a_receipt_directory(tmp_path: Path) -> None:
+    target, gatekeeper, _transition_manifest = _transition_fixture(tmp_path)
+    manifest_path = _manifest_path(
+        target, build_task_manifest(target), "receipt-argument-manifest.json"
+    )
+    completed = subprocess.run(
+        [
+            sys.executable,
+            "-I",
+            "-B",
+            str(gatekeeper / "scripts/raisa_ariadne_gatekeeper_bootstrap.py"),
+            "--expected-source-commit",
+            _git(gatekeeper, "rev-parse", "HEAD"),
+            "--expected-source-tree",
+            _git(gatekeeper, "rev-parse", "HEAD^{tree}"),
+            "push",
+            "--target-repo",
+            str(target),
+            "--task-manifest",
+            str(manifest_path),
+            "--receipt",
+            str(tmp_path / "arbitrary.json"),
+        ],
+        cwd=gatekeeper,
+        check=False,
+        capture_output=True,
+        text=True,
+        timeout=60,
+    )
+
+    assert completed.returncode != 0
+    assert (tmp_path / "arbitrary.json").exists() is False
+
+
+@pytest.mark.parametrize("location", ["target", "gatekeeper", "gitdir"])
+def test_receipt_sink_rejects_repository_and_git_administration_locations(
+    tmp_path: Path, location: str
+) -> None:
+    target, gatekeeper, transition_manifest = _transition_fixture(tmp_path)
+    decision = pg.evaluate_pinned_programme_operation(
+        gatekeeper_root=gatekeeper,
+        target_repo_root=target,
+        manifest=transition_manifest,
+        entrypoint="task_branch_push",
+        phase="pre-push",
+    )
+    assert decision.admitted is True
+    locations = {
+        "target": target / "receipts",
+        "gatekeeper": gatekeeper / "receipts",
+        "gitdir": Path(_git(target, "rev-parse", "--absolute-git-dir")) / "receipts",
+    }
+    locations[location].mkdir(parents=True)
+
+    with pytest.raises(pa.ProgrammeAdmissionError, match="receipt_directory_forbidden"):
+        pg.reserve_operation_receipt(
+            receipt_directory=locations[location],
+            operation="exact_sha_push",
+            decision=decision,
+            gatekeeper_root=gatekeeper,
+            target_repo_root=target,
+        )
+
+
+def test_receipt_sink_reserves_exclusively_and_never_overwrites(tmp_path: Path) -> None:
+    target, gatekeeper, transition_manifest = _transition_fixture(tmp_path)
+    decision = pg.evaluate_pinned_programme_operation(
+        gatekeeper_root=gatekeeper,
+        target_repo_root=target,
+        manifest=transition_manifest,
+        entrypoint="task_branch_push",
+        phase="pre-push",
+    )
+    receipt_directory = tmp_path / "closed-receipts"
+    receipt_directory.mkdir()
+    first = pg.reserve_operation_receipt(
+        receipt_directory=receipt_directory,
+        operation="exact_sha_push",
+        decision=decision,
+        gatekeeper_root=gatekeeper,
+        target_repo_root=target,
+    )
+    try:
+        assert first.path.parent == receipt_directory.resolve()
+        assert first.path.exists()
+        with pytest.raises(pa.ProgrammeAdmissionError, match="receipt_collision"):
+            pg.reserve_operation_receipt(
+                receipt_directory=receipt_directory,
+                operation="exact_sha_push",
+                decision=decision,
+                gatekeeper_root=gatekeeper,
+                target_repo_root=target,
+            )
+    finally:
+        first.close_unfinalized()
+
+
+def test_receipt_sink_rejects_symlink_or_junction_substitution(tmp_path: Path) -> None:
+    target, gatekeeper, transition_manifest = _transition_fixture(tmp_path)
+    decision = pg.evaluate_pinned_programme_operation(
+        gatekeeper_root=gatekeeper,
+        target_repo_root=target,
+        manifest=transition_manifest,
+        entrypoint="task_branch_push",
+        phase="pre-push",
+    )
+    real_directory = tmp_path / "real-receipts"
+    real_directory.mkdir()
+    substituted = tmp_path / "substituted-receipts"
+    try:
+        substituted.symlink_to(real_directory, target_is_directory=True)
+    except OSError:
+        completed = subprocess.run(
+            [
+                "cmd.exe",
+                "/d",
+                "/c",
+                "mklink",
+                "/J",
+                str(substituted),
+                str(real_directory),
+            ],
+            check=False,
+            capture_output=True,
+            text=True,
+        )
+        if completed.returncode != 0:
+            pytest.skip(f"reparse creation unavailable: {completed.stderr}")
+
+    with pytest.raises(pa.ProgrammeAdmissionError, match="receipt_directory_invalid"):
+        pg.reserve_operation_receipt(
+            receipt_directory=substituted,
+            operation="exact_sha_push",
+            decision=decision,
+            gatekeeper_root=gatekeeper,
+            target_repo_root=target,
+        )

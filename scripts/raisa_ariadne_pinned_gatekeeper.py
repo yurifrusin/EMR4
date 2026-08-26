@@ -11,7 +11,6 @@ from orchestration_harness.pinned_programme_gatekeeper import (
     evaluate_pinned_programme_operation,
     execute_exact_index_commit,
     execute_exact_sha_push,
-    write_operation_receipt,
 )
 from orchestration_harness.programme_admission import strict_json_object
 
@@ -37,12 +36,12 @@ def main() -> int:
     commit.add_argument("--target-repo", required=True, type=Path)
     commit.add_argument("--task-manifest", required=True, type=Path)
     commit.add_argument("--message", required=True)
-    commit.add_argument("--receipt", required=True, type=Path)
+    commit.add_argument("--receipt-directory", required=True, type=Path)
     commit.add_argument("--format", choices=("human", "json"), default="human")
     push = subparsers.add_parser("push")
     push.add_argument("--target-repo", required=True, type=Path)
     push.add_argument("--task-manifest", required=True, type=Path)
-    push.add_argument("--receipt", required=True, type=Path)
+    push.add_argument("--receipt-directory", required=True, type=Path)
     push.add_argument("--format", choices=("human", "json"), default="human")
     args = parser.parse_args()
 
@@ -54,8 +53,8 @@ def main() -> int:
             target_repo_root=args.target_repo,
             manifest=manifest,
             message=args.message,
+            receipt_directory=args.receipt_directory,
         )
-        write_operation_receipt(args.receipt, payload)
         print(json.dumps(payload, indent=2, sort_keys=True))
         return 0
     if args.operation == "push":
@@ -63,8 +62,8 @@ def main() -> int:
             gatekeeper_root=gatekeeper_root,
             target_repo_root=args.target_repo,
             manifest=manifest,
+            receipt_directory=args.receipt_directory,
         )
-        write_operation_receipt(args.receipt, payload)
         print(json.dumps(payload, indent=2, sort_keys=True))
         return 0
     decision = evaluate_pinned_programme_operation(
