@@ -17,7 +17,7 @@ if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
 from orchestration_harness.programme_admission import (
-    G0_G05_ALLOWED_PATHS,
+    G0_G06_ALLOWED_PATHS,
     TASK_MANIFEST_VERSION,
     ProgrammeAdmissionError,
     admission_payload,
@@ -29,7 +29,7 @@ from orchestration_harness.programme_admission import (
     strict_json_object,
 )
 
-ALLOWED_G0_TRACKED_PATHS = G0_G05_ALLOWED_PATHS
+ALLOWED_G0_TRACKED_PATHS = G0_G06_ALLOWED_PATHS
 EXPECTED_RISKS = {
     *(f"R-{index:03d}" for index in range(1, 14)),
     *(f"A-{index:03d}" for index in range(1, 11)),
@@ -182,14 +182,14 @@ def build_task_manifest(
     *,
     intended_effects: Iterable[str] | None = None,
 ) -> dict[str, Any]:
-    """Build the current typed G0.5 or G1A.1 manifest without persisting a token."""
+    """Build the current typed G0.6 or G1A.1 manifest without persisting a token."""
     root = repo_root.resolve()
     policy = load_programme_policy(root)
     active = policy.overlay["profiles"][policy.overlay["active_profile"]]
-    if policy.state["active_correction"] == "G0.5":
-        base_commit = policy.state["g0_5_correction"]["authorized_parent_commit"]
-        task_id = "raisa-ariadne-g0-5-decisive-review-clean-target-subgates"
-        objective = "Correct decisive review state, clean G1A target enforcement, operation binding and exact G1A subgates only; stop before G1A implementation."
+    if policy.state["active_correction"] == "G0.6":
+        base_commit = policy.state["g0_6_correction"]["authorized_parent_commit"]
+        task_id = "raisa-ariadne-g0-6-complete-cleanliness-remote-identity"
+        objective = "Correct complete ignored/untracked cleanliness, isolated bootstrap, exact remote identity and canonical receipt-emitting operations only; stop before G1A implementation."
     else:
         reviewed = policy.state["gate_transition"]["reviewed_commit"]
         rows = _run_git(root, "rev-list", "--reverse", f"{reviewed}..HEAD").splitlines()

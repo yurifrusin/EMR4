@@ -35,9 +35,14 @@ def _gatekeeper_cli(
     completed = subprocess.run(
         [
             sys.executable,
+            "-I",
             "-B",
-            "-m",
-            "scripts.raisa_ariadne_pinned_gatekeeper",
+            str(gatekeeper / "scripts/raisa_ariadne_gatekeeper_bootstrap.py"),
+            "--expected-source-commit",
+            _git(gatekeeper, "rev-parse", "HEAD"),
+            "--expected-source-tree",
+            _git(gatekeeper, "rev-parse", "HEAD^{tree}"),
+            "evaluate",
             "--target-repo",
             str(target),
             "--task-manifest",
@@ -50,6 +55,48 @@ def _gatekeeper_cli(
             "json",
         ],
         cwd=gatekeeper,
+        check=False,
+        capture_output=True,
+        text=True,
+        timeout=60,
+    )
+    assert completed.stdout.strip(), completed.stderr
+    return completed, json.loads(completed.stdout)
+
+
+def _gatekeeper_operation(
+    *,
+    operation: str,
+    gatekeeper: Path,
+    target: Path,
+    manifest_path: Path,
+    receipt_path: Path,
+    message: str | None = None,
+) -> tuple[subprocess.CompletedProcess[str], dict]:
+    argv = [
+        sys.executable,
+        "-I",
+        "-B",
+        str(gatekeeper / "scripts/raisa_ariadne_gatekeeper_bootstrap.py"),
+        "--expected-source-commit",
+        _git(gatekeeper, "rev-parse", "HEAD"),
+        "--expected-source-tree",
+        _git(gatekeeper, "rev-parse", "HEAD^{tree}"),
+        operation,
+        "--target-repo",
+        str(target),
+        "--task-manifest",
+        str(manifest_path),
+        "--receipt",
+        str(receipt_path),
+        "--format",
+        "json",
+    ]
+    if message is not None:
+        argv.extend(["--message", message])
+    completed = subprocess.run(
+        argv,
+        cwd=target,
         check=False,
         capture_output=True,
         text=True,
@@ -82,12 +129,19 @@ def test_real_bare_origin_transition_and_g1a_lifecycle_passes(tmp_path: Path) ->
     assert pre_transition.returncode == 0
     assert pre_transition_payload["admitted"] is True
     transition_binding = pre_transition_payload["operation_binding"]
-    _git(
-        target,
-        "push",
-        f"--force-with-lease={transition_binding['force_with_lease']}",
-        "origin",
-        transition_binding["exact_push_refspec"],
+    transition_push, transition_receipt = _gatekeeper_operation(
+        operation="push",
+        gatekeeper=gatekeeper,
+        target=target,
+        manifest_path=transition_manifest_path,
+        receipt_path=target.parent / "transition-push-receipt.json",
+    )
+    assert transition_push.returncode == 0
+    assert transition_receipt["operation"] == "exact_sha_push"
+    assert transition_receipt["post_push_decision_admitted"] is True
+    assert (
+        transition_receipt["remote_identity"]["normalized_push_url"]
+        == (transition_binding["explicit_destination"])
     )
     post_transition, post_transition_payload = _gatekeeper_cli(
         gatekeeper=gatekeeper,
@@ -157,13 +211,16 @@ def test_real_bare_origin_transition_and_g1a_lifecycle_passes(tmp_path: Path) ->
         in development_payload["scope_decision"]["changed_paths"]
     )
 
-    committed = pg.commit_exact_admitted_index(
-        prior_decision=pg.PinnedGatekeeperDecision(**development_payload),
-        gatekeeper_root=gatekeeper,
-        target_repo_root=target,
-        manifest=g1a_manifest,
+    commit_completed, commit_receipt = _gatekeeper_operation(
+        operation="commit",
+        gatekeeper=gatekeeper,
+        target=target,
+        manifest_path=g1a_development_path,
+        receipt_path=target.parent / "g1a-commit-receipt.json",
         message="synthetic G1A verdict kernel change",
     )
+    assert commit_completed.returncode == 0
+    committed = commit_receipt["result_sha"]
     assert _git(target, "rev-parse", "HEAD") == committed
     assert (
         _git(target, "rev-parse", "HEAD^{tree}")
@@ -183,16 +240,26 @@ def test_real_bare_origin_transition_and_g1a_lifecycle_passes(tmp_path: Path) ->
     assert pg.exact_push_argv(pg.PinnedGatekeeperDecision(**pre_g1a_payload)) == [
         "git",
         "push",
+        "--no-verify",
         f"--force-with-lease={g1a_binding['force_with_lease']}",
-        "origin",
+        g1a_binding["explicit_destination"],
         g1a_binding["exact_push_refspec"],
     ]
-    _git(
-        target,
-        "push",
-        f"--force-with-lease={g1a_binding['force_with_lease']}",
-        "origin",
-        g1a_binding["exact_push_refspec"],
+    g1a_push, g1a_push_receipt = _gatekeeper_operation(
+        operation="push",
+        gatekeeper=gatekeeper,
+        target=target,
+        manifest_path=g1a_manifest_path,
+        receipt_path=target.parent / "g1a-push-receipt.json",
+    )
+    assert g1a_push.returncode == 0
+    assert g1a_push_receipt["post_push_readback_sha"] == committed
+    assert g1a_push_receipt["schema_version"] == (
+        "ariadne.pinned_programme_operation_receipt.v1"
+    )
+    assert (
+        g1a_push_receipt["admitted_operation_binding"]["explicit_destination"]
+        == g1a_push_receipt["remote_identity"]["normalized_push_url"]
     )
     post_g1a, post_g1a_payload = _gatekeeper_cli(
         gatekeeper=gatekeeper,
@@ -286,7 +353,7 @@ def test_dirty_or_wrongly_pinned_gatekeeper_fails_closed(tmp_path: Path) -> None
         phase="development",
     )
     assert dirty.returncode == 2
-    assert "gatekeeper_worktree_not_clean" in dirty_payload["reason_codes"]
+    assert "gatekeeper_bootstrap_source_not_clean" in dirty_payload["reason_codes"]
 
     wrong = tmp_path / "wrong-gatekeeper"
     _git(
@@ -372,6 +439,79 @@ def test_operation_binding_revalidation_rejects_post_admission_index_drift(
 
     assert fresh.admitted is False
     assert "gatekeeper_operation_binding_drift" in fresh.reason_codes
+
+
+def test_operation_binding_revalidation_rejects_remote_drift(tmp_path: Path) -> None:
+    target, gatekeeper, transition_manifest = _transition_fixture(tmp_path)
+    admitted = pg.evaluate_pinned_programme_operation(
+        gatekeeper_root=gatekeeper,
+        target_repo_root=target,
+        manifest=transition_manifest,
+        entrypoint="task_branch_push",
+        phase="pre-push",
+    )
+    assert admitted.admitted is True
+    fake = tmp_path / "remote-drift.git"
+    fake.mkdir()
+    _git(fake, "init", "--bare")
+    _git(target, "remote", "set-url", "origin", str(fake))
+
+    fresh = pg.revalidate_pinned_operation_binding(
+        prior_decision=admitted,
+        gatekeeper_root=gatekeeper,
+        target_repo_root=target,
+        manifest=transition_manifest,
+    )
+
+    assert fresh.admitted is False
+    assert "gatekeeper_operation_binding_drift" in fresh.reason_codes
+    assert any(code.startswith("remote_identity") for code in fresh.reason_codes)
+
+
+@pytest.mark.parametrize(
+    "relative_path",
+    [
+        ".env",
+        "sitecustomize.py",
+        "usercustomize.py",
+        "module.pyc",
+        "__pycache__/module.pyc",
+        ".pytest_cache/v/cache/nodeids",
+        ".venv/Lib/site-packages/runtime.py",
+    ],
+)
+def test_isolated_bootstrap_rejects_ignored_gatekeeper_material_without_execution(
+    tmp_path: Path, relative_path: str
+) -> None:
+    target, gatekeeper, _transition_manifest = _transition_fixture(tmp_path)
+    manifest = build_task_manifest(target)
+    manifest_path = _manifest_path(target, manifest, "ignored-source-manifest.json")
+    git_exclude = Path(_git(gatekeeper, "rev-parse", "--git-path", "info/exclude"))
+    if not git_exclude.is_absolute():
+        git_exclude = gatekeeper / git_exclude
+    git_exclude.parent.mkdir(parents=True, exist_ok=True)
+    git_exclude.write_text(f"/{relative_path}\n", encoding="utf-8")
+    material = gatekeeper / relative_path
+    material.parent.mkdir(parents=True, exist_ok=True)
+    marker = tmp_path / "startup-hook-executed"
+    if relative_path in {"sitecustomize.py", "usercustomize.py"}:
+        material.write_text(
+            f"from pathlib import Path\nPath({str(marker)!r}).write_text('ran')\n",
+            encoding="utf-8",
+        )
+    else:
+        material.write_text("synthetic\n", encoding="utf-8")
+
+    completed, payload = _gatekeeper_cli(
+        gatekeeper=gatekeeper,
+        target=target,
+        manifest_path=manifest_path,
+        phase="development",
+    )
+
+    assert completed.returncode == 2
+    assert payload["reason_codes"] == ["gatekeeper_bootstrap_source_not_clean"]
+    assert marker.exists() is False
 
 
 @pytest.mark.parametrize("case", ["widen_scope", "rewrite_review", "closeout"])

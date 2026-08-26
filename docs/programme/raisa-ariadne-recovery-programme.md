@@ -1,7 +1,7 @@
 # Raisa Medical Office and Ariadne Recovery & Convergence Programme
 
 Status: controlling recovery programme
-Prepared: 2026-08-25T20:00:26+10:00
+Prepared: 2026-08-26T11:57:17+10:00
 Repository: `yurifrusin/EMR4`
 Machine authority: `orchestration/programme/current-state.json`
 Gate authority: `orchestration/programme/gates.yaml`
@@ -17,6 +17,9 @@ repository copy records the accepted interpretation of those inputs.
 | Gate G0 directive (`pasted-text.txt`) | `9f77a453ac546cd81f4aea77ea21ff84f3e3e44659694be6ea9dafe6b428ccea` |
 | `Raisa_Ariadne_Recovery_Programme.md` | `42bc39ffc92c67ce0b56c5eac632f22f4403b92e957b8c1b53474c0356f817dc` |
 | `Raisa_Ariadne_Gates.yaml` | `453ac6746357f11270960c0752338c70a4a849d326eccdce317d0b00bf4ed0ab` |
+| G0.6 correction handover | `744b84e7bc00244828accb1b6879e58ae08aca0749d10b33bad3748aeff07c44` |
+| External G0.5 review narrative | `682f0634cb683d19ace06c7c9a3094ee39878b8156f912162883eabad851b184` |
+| External G0.5 review record | `5762acbb96597d15772b68acf9b111d60cb49c05afd016a936bf15a9952a7830` |
 
 `AGENTS.md`, historical receipts, ledgers and handovers remain evidence and
 continuity aids. They do not override the structured programme state. Missing,
@@ -195,16 +198,61 @@ diverging embedded copy.
 
 ## Immediate sequence
 
-The G0.4 candidate received an external `REVISION_REQUIRED` decision. G0.5 is
-the only active correction gate. It must publish one `review_pending` candidate
+The G0.5 candidate at `71e2c5f2f586fa4d1ca8fa9787a4906dbbb997f1`
+received an external `REVISION_REQUIRED` decision with two blocking findings.
+G0.6 is the only active correction gate. It must publish one `review_pending` candidate
 and then stop for external G0 review. G1A implementation remains closed.
 
-G0.5 replaces the ambiguous singular review projection with a digest-bound,
+The accepted G0.5 controls remain exact: they replace the ambiguous singular review projection with a digest-bound,
 append-only review history and one explicit decisive pointer. A PASS transition
 may append exactly one new decisive record; it may not mutate, delete or reorder
 any older negative review. G0 passes only when that decisive record binds the
-exact reviewed G0.5 commit and tree, contains `PASS` with zero blocking findings,
+exact reviewed G0.6 commit and tree, contains `PASS` with zero blocking findings,
 and agrees with transition and G1A authorization state.
+
+G0.6 adds a complete NUL-safe union inventory: ordinary non-tracked paths from
+`git ls-files --others --exclude-standard -z` plus ignored paths from
+`git ls-files --others --ignored --exclude-standard -z`. Repository ignore,
+`.git/info/exclude` and configured global-exclude rules therefore cannot hide an
+execution-affecting file. Development can expose only the two exact G1A.1
+additions; pre-push, post-push and gatekeeper source require zero ordinary or
+ignored additions. Every observed path component is checked for symlink,
+junction, reparse and non-regular substitution, and case-folded NFC aliases of
+protected paths are rejected without reading file contents.
+The `.git` administrative entry is modelled separately: HEAD, index, objects
+and refs remain Git-bound, ignore surfaces are neutralised by the union
+inventory, `core.hooksPath` and non-sample client hooks are forbidden, and the
+exact push also uses `--no-verify`.
+
+The pinned source is launched only through
+`python -I -B scripts/raisa_ariadne_gatekeeper_bootstrap.py`. The stdlib-only
+bootstrap proves its exact commit/tree binding and complete source cleanliness
+before adding that one verified source root to `sys.path`; target and candidate
+roots are never executable controller sources.
+
+The production remote identity is closed to the single effective fetch and push
+destination `https://github.com/yurifrusin/emr4`, identity
+`github.com/yurifrusin/emr4`, with no explicit `pushurl`, multiple URL or any
+`insteadOf`/`pushInsteadOf` rewrite. A distinct synthetic policy binds one exact
+absolute local bare repository for tests. Every decision re-observes this
+identity, includes its digest in the operation binding, and uses the bound
+explicit destination for lease-protected push and fresh post-push readback.
+
+The canonical bootstrap CLI exposes only `evaluate`, exact-index `commit` and
+exact-SHA `push`. The mutating operations revalidate the admitted binding, have
+no arbitrary Git argv/remote/refspec input, verify their exact postcondition and
+atomically emit an `ariadne.pinned_programme_operation_receipt.v1` receipt.
+
+The G0.6 verification matrix passes 182 focused controller cases and 176 bounded
+controller/review/worktree compatibility cases. The broader clockwork
+measurement remains contained at 61 passes and the same seven historical
+`tick_next_boundaries_floor` semantic-fixture failures. Ruff lint and format,
+source compilation, strict JSON/YAML parsing, Git whitespace and historical
+Diary leakage checks pass. Alembic remains one-headed at `x3y4z5a6b7c8`; a
+disposable empty-database upgrade passes before the unchanged four-table model
+drift fails. Global collection remains stopped by the previously recorded
+`_BERNIE_SESSION_STORE` import, and Bandit remains unavailable and was not
+rebaselined.
 
 The G0 transition now opens only `G1A.1_ACTIVE`, the pure verdict kernel and its
 provider-free acceptance consumers. `G1A.2` is a later state-only transition to
@@ -215,11 +263,12 @@ deferred and has no active profile.
 G1A work must run in a separate clean target worktree at the transition commit.
 The preserved legacy worktree at `C:/Users/sarashera/emr4`, with its 683 user
 untracked files, may be neither gatekeeper nor G1A target. The pinned gatekeeper
-observes NUL-delimited untracked paths, admits only the two exact new G1A.1 files
-during development, rejects root import hooks and non-regular/reparse objects,
-and requires zero untracked paths before and after push. Its operation decision
-binds target HEAD, index tree, changed-path digest and expected origin head so an
-exact-SHA push uses an explicit lease. The narrow commit wrapper creates a commit
+observes the complete ordinary-and-ignored inventory, admits only the two exact
+new G1A.1 files during development, rejects import hooks and
+non-regular/reparse objects, and requires zero additions before and after push.
+Its operation decision binds target HEAD, index tree, changed-path and
+filesystem-inventory digests, exact remote identity, explicit destination and
+expected remote head so an exact-SHA push uses an explicit lease. The narrow commit wrapper creates a commit
 from the admitted index tree and compare-and-swaps only the expected task-branch
 HEAD after a second binding check. Candidate controller and preflight code remain
 data only and are never imported or executed by the gatekeeper.
@@ -239,7 +288,7 @@ review record digest, exact semantic pointers and admitted development scope.
 
 The exact G1A.1, G1A.2 and deferred G1A.3 parser, caller, CLI-exit,
 integration-consumer, path, effect and symbol boundaries are recorded in
-`orchestration/programme/g1a-verdict-integration-scope.yaml`. G0.5 does not make
+`orchestration/programme/g1a-verdict-integration-scope.yaml`. G0.6 does not make
 the verdict, provider-adapter or integration-semantic changes themselves.
 
 Committed, staged and unstaged scope uses NUL-delimited

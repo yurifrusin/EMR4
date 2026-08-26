@@ -1,18 +1,18 @@
 {
   "schema_version": "raisa-ariadne.programme-state.v1",
-  "observed_at": "2026-08-26T10:48:53+10:00",
+  "observed_at": "2026-08-26T13:24:37+10:00",
   "programme_name": "Raisa Medical Office and Ariadne Recovery & Convergence",
   "programme_mode": "recovery",
   "current_gate": "G0",
   "current_gate_status": "revision_required",
-  "active_correction": "G0.5",
-  "active_profile": "G0.5_CONTROLLER_MAINTENANCE",
+  "active_correction": "G0.6",
+  "active_profile": "G0.6_CONTROLLER_MAINTENANCE",
   "machine_authoritative": true,
   "feature_work_eligible": false,
   "product_work_eligible": false,
   "authority": {
     "owner": "Yuri",
-    "directive_sha256": "aae344c4e41d30e0a3a581723eb0327f6311733257163caa08822521089021ac",
+    "directive_sha256": "744b84e7bc00244828accb1b6879e58ae08aca0749d10b33bad3748aeff07c44",
     "structured_state_precedence": "current-state.json then gates.yaml",
     "narrative_handover_role": "evidence_and_continuity_only",
     "missing_or_invalid_state": "hard_stop"
@@ -256,7 +256,7 @@
   "task_selection": {
     "autonomous_selection_enabled": false,
     "allowed_task_kinds": [
-      "g0_5_controller_maintenance"
+      "g0_6_controller_maintenance"
     ],
     "blocked_task_kinds": [
       "product_feature",
@@ -268,24 +268,24 @@
     ],
     "admission_command": "python scripts/raisa_ariadne_recovery_preflight.py --task-manifest <path> --phase development",
     "out_of_gate_result": "blocked",
-    "next_eligible_tranche": "G0.5",
+    "next_eligible_tranche": "G0.6",
     "next_eligible_now": true,
     "next_tranche_started": false,
     "next_tranche_admission_requires_state_transition": true,
-    "next_eligibility_condition": "external_G0_review_requires_G0_5_decisive_review_clean_target_and_subgate_correction"
+    "next_eligibility_condition": "external_G0_review_requires_G0_6_complete_filesystem_cleanliness_remote_identity_and_canonical_operation_correction"
   },
   "parallelism_efficacy": {
     "deepseek": {
       "disposition": "declined",
-      "rationale": "provider execution is forbidden in G0.5 and the decisive-review, clean-target and operation-binding invariants share one tightly coupled controller seam"
+      "rationale": "provider execution is forbidden in G0.6 and complete-filesystem inventory, remote identity and canonical operations share one tightly coupled reference-monitor seam"
     },
     "gemini": {
       "disposition": "reserved",
-      "rationale": "live external provider execution is forbidden in G0.5; Gemini independence is reserved for the later external G0 review only"
+      "rationale": "live external provider execution is forbidden in G0.6; independent review is reserved for the later external G0 review only"
     },
     "native_subagent": {
       "disposition": "declined",
-      "rationale": "G0.5 is a tightly coupled serial reference-monitor correction and current execution policy does not authorise delegation"
+      "rationale": "G0.6 is a tightly coupled serial reference-monitor correction and current execution policy does not authorise delegation"
     }
   },
   "actions_performed": {
@@ -318,7 +318,7 @@
         "post-push recovery-ref readback remains required"
       ]
     },
-    "decisive_review_id": "g0-review-4ce1719-revision-required",
+    "decisive_review_id": "g0-review-71e2c5f-revision-required",
     "external_review_history": [
       {
         "review_id": "g0-review-c720aaa-revision-required",
@@ -374,21 +374,32 @@
         "reviewer_surface": "external_gate_review",
         "g1a_authorized": false,
         "review_record_sha256": "sha256:b1e640aad986755642434969c93272fb6d7d2a33f8bb246bcdc3df06ef36105f"
+      },
+      {
+        "review_id": "g0-review-71e2c5f-revision-required",
+        "review_record_path": "orchestration/programme/reviews/g0-review-71e2c5f-revision-required.json",
+        "reviewed_commit": "71e2c5f2f586fa4d1ca8fa9787a4906dbbb997f1",
+        "reviewed_tree": "ef84162bbc6ef24241678d14e0183b876af3a1e3",
+        "verdict": "REVISION_REQUIRED",
+        "blocking_finding_count": 2,
+        "reviewer_surface": "external_chatgpt_repository_review",
+        "g1a_authorized": false,
+        "review_record_sha256": "sha256:5762acbb96597d15772b68acf9b111d60cb49c05afd016a936bf15a9952a7830"
       }
     ],
     "g0_checks": {
       "recovery_preflight": "passed_exit_0",
       "product_feature_block_proof": "blocked_exit_2_task_admission_only",
-      "focused_recovery_tests": "144_passed_including_real_git_worktree_untracked_decisive_review_subgate_and_operation_binding_tests",
-      "related_ariadne_compatibility_tests": "197_passed_7_pre_existing_clockwork_semantic_fixture_failures_contained",
-      "canonical_ci_lint": "passed_ruff_lint_format_compile_and_historical_diary_leakage_lint",
+      "focused_recovery_tests": "182_passed_including_complete_ignored_inventory_remote_identity_bootstrap_exact_commit_push_and_prior_gate_semantics",
+      "related_ariadne_compatibility_tests": "176_passed_plus_clockwork_measurement_61_passed_7_pre_existing_tick_next_boundaries_floor_semantic_fixture_failures_contained",
+      "canonical_ci_lint": "passed_ruff_lint_format_source_compile_git_diff_check_and_historical_diary_leakage_lint",
       "canonical_ci_bandit": "not_executed_missing_bandit_module_prior_red_10_unexpected_contained_not_rebaselined",
-      "global_pytest_collection": "red_import_error_recorded_not_repaired",
+      "global_pytest_collection": "red_single_import_error_removed_BERNIE_SESSION_STORE_recorded_not_repaired",
       "alembic_static_graph": "one_head_x3y4z5a6b7c8_empty_upgrade_passed_model_drift_red_4_tables",
       "structured_document_parse": "passed",
       "staged_diff_check": "passed"
     },
-    "next_action": "external_G0_review_of_G0_5_candidate_only"
+    "next_action": "external_G0_review_of_G0_6_candidate_only"
   },
   "g0_1_correction": {
     "status": "superseded_revision_required",
@@ -430,12 +441,24 @@
     "next_action": "superseded_by_G0_5_revision_required"
   },
   "g0_5_correction": {
-    "status": "review_pending",
+    "status": "superseded_revision_required",
     "authorized_parent_commit": "4ce17198fad677aed1fe45be4e3bf2b18c713b3b",
     "reviewed_g0_4_tree": "e061800df0ae7c5daba6b2db13e8aa774f3eaff9",
     "correction_directive_sha256": "aae344c4e41d30e0a3a581723eb0327f6311733257163caa08822521089021ac",
     "review_verdict": "REVISION_REQUIRED",
     "review_finding_count": 3,
+    "candidate_commit_limit": 1,
+    "external_review_status": "revision_required",
+    "g1a_authorized": false,
+    "next_action": "superseded_by_G0_6_revision_required"
+  },
+  "g0_6_correction": {
+    "status": "review_pending",
+    "authorized_parent_commit": "71e2c5f2f586fa4d1ca8fa9787a4906dbbb997f1",
+    "reviewed_g0_5_tree": "ef84162bbc6ef24241678d14e0183b876af3a1e3",
+    "correction_directive_sha256": "744b84e7bc00244828accb1b6879e58ae08aca0749d10b33bad3748aeff07c44",
+    "review_verdict": "REVISION_REQUIRED",
+    "review_finding_count": 2,
     "candidate_commit_limit": 1,
     "external_review_status": "pending",
     "g1a_authorized": false,

@@ -1,4 +1,4 @@
-schema_version: "ariadne.programme_recovery.v6"
+schema_version: "ariadne.programme_recovery.v7"
 status: "active_emergency_overlay"
 authority_owner: "Yuri"
 recorded_at: "2026-08-26T09:30:43+10:00"
@@ -21,16 +21,16 @@ required_before:
   - "protected_ref_operation"
   - "deployment"
 missing_or_invalid_state: "hard_stop"
-active_profile: "G0.5_CONTROLLER_MAINTENANCE"
+active_profile: "G0.6_CONTROLLER_MAINTENANCE"
 profiles:
-  G0.5_CONTROLLER_MAINTENANCE:
+  G0.6_CONTROLLER_MAINTENANCE:
     profile_kind: "controller_maintenance"
     expected_programme_mode: "recovery"
     expected_current_gate: "G0"
     expected_gate_status: "revision_required"
-    active_correction: "G0.5"
-    programme_gate: "G0.5"
-    admitted_task_classes: ["g0_5_controller_maintenance"]
+    active_correction: "G0.6"
+    programme_gate: "G0.6"
+    admitted_task_classes: ["g0_6_controller_maintenance"]
     allowed_effects: ["repository_read", "control_plane_edit", "task_branch_commit", "task_branch_push"]
     forbidden_effects: ["autonomous_worker_dispatch", "provider_invocation", "product_behavior_change", "dependency_change", "migration_change", "g1b_work", "integration", "protected_ref_movement", "deployment", "pages", "real_data_access"]
     closed_entrypoints: ["worker_dispatch", "provider_invocation", "clockwork_tick_mutation", "clockwork_closeout_mutation", "integration", "protected_ref_operation", "deployment"]
@@ -54,6 +54,7 @@ profiles:
       - "orchestration/programme/reviews/g0-review-7cae4e8-revision-required.json"
       - "orchestration/programme/reviews/g0-review-2af9278-revision-required.json"
       - "orchestration/programme/reviews/g0-review-4ce1719-revision-required.json"
+      - "orchestration/programme/reviews/g0-review-71e2c5f-revision-required.json"
       - "orchestration_harness/deepcode_artifact.py"
       - "orchestration_harness/programme_admission.py"
       - "orchestration_harness/pinned_programme_gatekeeper.py"
@@ -69,6 +70,7 @@ profiles:
       - "scripts/ariadne_review_acceptance.py"
       - "scripts/drive_agent_headless.py"
       - "scripts/raisa_ariadne_recovery_preflight.py"
+      - "scripts/raisa_ariadne_gatekeeper_bootstrap.py"
       - "scripts/raisa_ariadne_pinned_gatekeeper.py"
       - "tests/fixtures/ariadne_harness/orchestrator_runtime_state.json"
       - "tests/test_ariadne_antigravity.py"
@@ -146,7 +148,7 @@ profiles:
 scope_policy:
   expected_branch: "codex/raisa-ariadne-recovery-g0"
   frozen_recovery_base: "03e6860394c39086ec1ffb3f2457acc5f7c8b5f9"
-  authorized_parent_commit: "4ce17198fad677aed1fe45be4e3bf2b18c713b3b"
+  authorized_parent_commit: "71e2c5f2f586fa4d1ca8fa9787a4906dbbb997f1"
   candidate_commit_limit: 1
   allowed_paths:
     - "AGENTS.md"
@@ -167,6 +169,7 @@ scope_policy:
     - "orchestration/programme/reviews/g0-review-7cae4e8-revision-required.json"
     - "orchestration/programme/reviews/g0-review-2af9278-revision-required.json"
     - "orchestration/programme/reviews/g0-review-4ce1719-revision-required.json"
+    - "orchestration/programme/reviews/g0-review-71e2c5f-revision-required.json"
     - "orchestration_harness/programme_admission.py"
     - "orchestration_harness/pinned_programme_gatekeeper.py"
     - "orchestration_harness/orchestrator_preflight.py"
@@ -182,6 +185,7 @@ scope_policy:
     - "scripts/ariadne_review_acceptance.py"
     - "scripts/drive_agent_headless.py"
     - "scripts/raisa_ariadne_recovery_preflight.py"
+    - "scripts/raisa_ariadne_gatekeeper_bootstrap.py"
     - "scripts/raisa_ariadne_pinned_gatekeeper.py"
     - "tests/fixtures/ariadne_harness/orchestrator_runtime_state.json"
     - "tests/test_ariadne_antigravity.py"
@@ -221,17 +225,21 @@ transition_policy:
     - "provider_invocation"
     - "real_data_access"
 pinned_gatekeeper:
-  schema_version: "ariadne.pinned_programme_gatekeeper_policy.v2"
+  schema_version: "ariadne.pinned_programme_gatekeeper_policy.v3"
   module: "orchestration_harness/pinned_programme_gatekeeper.py"
-  cli: "scripts/raisa_ariadne_pinned_gatekeeper.py"
+  bootstrap: "scripts/raisa_ariadne_gatekeeper_bootstrap.py"
+  cli: "scripts/raisa_ariadne_gatekeeper_bootstrap.py"
+  operation_cli_module: "scripts/raisa_ariadne_pinned_gatekeeper.py"
+  canonical_operations: ["evaluate", "commit", "push"]
+  operation_receipt_schema: "ariadne.pinned_programme_operation_receipt.v1"
   source_binding: "g0_acceptance.decisive_review_id_and_gate_transition_reviewed_commit_tree"
   clean_source_required: true
   target_is_data_only: true
   candidate_controller_execution_forbidden: true
   combined_operation_only: true
-  operation_binding_fields: ["target_head", "index_tree", "changed_paths_digest", "expected_origin_head"]
+  operation_binding_fields: ["target_head", "index_tree", "changed_paths_digest", "filesystem_inventory_digest", "git_administrative_identity_sha256", "expected_origin_head", "remote_identity_sha256", "explicit_destination"]
 target_worktree_policy:
-  schema_version: "ariadne.g1a_target_worktree_policy.v1"
+  schema_version: "ariadne.g1a_target_worktree_policy.v2"
   preserved_legacy_worktree: "C:/Users/sarashera/emr4"
   preserved_legacy_worktree_forbidden_as_gatekeeper: true
   preserved_legacy_worktree_forbidden_as_target: true
@@ -242,8 +250,27 @@ target_worktree_policy:
     - "tests/test_ariadne_verdict.py"
   pre_push_untracked_count_required: 0
   post_push_untracked_count_required: 0
-  root_import_hooks_forbidden: ["sitecustomize.py", "*.pth"]
+  root_import_hooks_forbidden: ["sitecustomize.py", "usercustomize.py", "*.pth"]
   nonregular_reparse_symlink_and_junction_forbidden: true
+  ignored_and_untracked_inventory_required: true
+  protected_path_aliases_forbidden: true
+  inventory_command: "git ls-files --others --exclude-standard -z plus git ls-files --others --ignored --exclude-standard -z"
+  git_administrative_entry: ".git"
+  git_administrative_policy: "head_index_objects_refs_bound_info_excludes_neutralized_non_sample_hooks_and_core_hooks_path_forbidden"
+remote_identity_policy:
+  schema_version: "ariadne.remote_identity_policy.v1"
+  mode: "production"
+  remote_name: "origin"
+  normalized_fetch_url: "https://github.com/yurifrusin/emr4"
+  normalized_push_url: "https://github.com/yurifrusin/emr4"
+  fetch_url_count: 1
+  push_url_count: 1
+  explicit_push_url_count: 0
+  expected_repository_identity: "github.com/yurifrusin/emr4"
+  normalization_policy: "https_github_owner_repository_lowercase_strip_terminal_dot_git_no_query_fragment_or_userinfo"
+  url_rewrite_policy: "reject_all_insteadOf_and_pushInsteadOf"
+  url_rewrite_count: 0
+  remote_identity_sha256: "sha256:8c7dbd4840f7352cd35300a5a10c9ecbed143857b8bab37086fb5c30be6fbe0b"
 gated_entrypoints:
   - {id: "canonical_orchestrator_advisory", path: "scripts/ariadne_orchestrator_preflight.py", entrypoint: "worker_dispatch"}
   - {id: "antigravity_provider", path: "scripts/ariadne_antigravity.py", entrypoint: "provider_invocation"}

@@ -7,7 +7,11 @@ controller or preflight code is imported or executed.
 
 from __future__ import annotations
 
+import json
+import os
+import tempfile
 from dataclasses import asdict, dataclass, replace
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -15,6 +19,7 @@ from orchestration_harness import programme_admission as admission
 
 
 PINNED_GATEKEEPER_DECISION_VERSION = "ariadne.pinned_programme_gatekeeper_decision.v1"
+PINNED_OPERATION_RECEIPT_VERSION = "ariadne.pinned_programme_operation_receipt.v1"
 
 
 @dataclass(frozen=True)
@@ -38,6 +43,7 @@ class PinnedGatekeeperDecision:
     changed_paths_digest: str | None
     expected_origin_head: str | None
     target_cleanliness: dict[str, Any] | None
+    remote_identity: dict[str, Any] | None
     operation_binding: dict[str, Any] | None
     scope_decision: dict[str, Any] | None
 
@@ -96,6 +102,7 @@ def _decision(
         target_cleanliness=(
             scope_decision.target_cleanliness if scope_decision else None
         ),
+        remote_identity=(scope_decision.remote_identity if scope_decision else None),
         operation_binding=(
             scope_decision.operation_binding if scope_decision else None
         ),
@@ -134,9 +141,10 @@ def evaluate_pinned_programme_operation(
         gatekeeper_commit = admission._run_git(source, "rev-parse", "HEAD")
         gatekeeper_tree = admission._run_git(source, "rev-parse", "HEAD^{tree}")
         source_status = admission._run_git(
-            source, "status", "--porcelain", "--untracked-files=all"
+            source, "status", "--porcelain", "--untracked-files=no"
         )
-        gatekeeper_clean = not bool(source_status)
+        source_inventory = admission.git_all_file_inventory(source)
+        gatekeeper_clean = not bool(source_status) and not source_inventory
     except admission.ProgrammeAdmissionError:
         gatekeeper_clean = False
         reasons.append("gatekeeper_git_observation_failed")
@@ -303,6 +311,9 @@ def evaluate_pinned_programme_operation(
                 or binding.get("expected_origin_head") is None
                 or binding.get("force_with_lease") is None
                 or binding.get("exact_push_refspec") is None
+                or binding.get("remote_identity_sha256") is None
+                or binding.get("git_administrative_identity_sha256") is None
+                or binding.get("explicit_destination") is None
             ):
                 reasons.append("gatekeeper_push_binding_invalid")
 
@@ -368,13 +379,15 @@ def exact_push_argv(decision: PinnedGatekeeperDecision) -> list[str]:
         or decision.phase != "pre-push"
         or not isinstance(binding.get("force_with_lease"), str)
         or not isinstance(binding.get("exact_push_refspec"), str)
+        or not isinstance(binding.get("explicit_destination"), str)
     ):
         raise admission.ProgrammeAdmissionError("gatekeeper_exact_push_not_admitted")
     return [
         "git",
         "push",
+        "--no-verify",
         f"--force-with-lease={binding['force_with_lease']}",
-        "origin",
+        binding["explicit_destination"],
         binding["exact_push_refspec"],
     ]
 
@@ -444,3 +457,146 @@ def commit_exact_admitted_index(
             "gatekeeper_exact_index_commit_postcondition_failed"
         )
     return candidate
+
+
+def _operation_receipt(
+    *,
+    operation: str,
+    decision: PinnedGatekeeperDecision,
+    result_sha: str,
+    result_tree: str,
+    post_push_decision: PinnedGatekeeperDecision | None = None,
+) -> dict[str, Any]:
+    payload: dict[str, Any] = {
+        "schema_version": PINNED_OPERATION_RECEIPT_VERSION,
+        "recorded_at": datetime.now(timezone.utc).isoformat(),
+        "operation": operation,
+        "status": "completed",
+        "gatekeeper_commit": decision.gatekeeper_commit,
+        "gatekeeper_tree": decision.gatekeeper_tree,
+        "target_branch": decision.target_branch,
+        "admitted_operation_binding": decision.operation_binding,
+        "remote_identity": decision.remote_identity,
+        "result_sha": result_sha,
+        "result_tree": result_tree,
+        "post_push_readback_sha": (
+            post_push_decision.expected_origin_head if post_push_decision else None
+        ),
+        "post_push_decision_admitted": (
+            post_push_decision.admitted if post_push_decision else None
+        ),
+    }
+    payload["operation_receipt_sha256"] = admission._sha256_bytes(
+        json.dumps(payload, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    )
+    return payload
+
+
+def write_operation_receipt(path: Path, payload: dict[str, Any]) -> None:
+    """Atomically persist one exact operation receipt outside candidate authority."""
+    destination = path.resolve()
+    if not destination.parent.is_dir():
+        raise admission.ProgrammeAdmissionError("gatekeeper_receipt_parent_missing")
+    encoded = (json.dumps(payload, indent=2, sort_keys=True) + "\n").encode("utf-8")
+    handle: int | None = None
+    temporary = ""
+    try:
+        handle, temporary = tempfile.mkstemp(
+            prefix=f".{destination.name}.", suffix=".tmp", dir=destination.parent
+        )
+        with os.fdopen(handle, "wb") as stream:
+            handle = None
+            stream.write(encoded)
+            stream.flush()
+            os.fsync(stream.fileno())
+        os.replace(temporary, destination)
+    except OSError as error:
+        if handle is not None:
+            os.close(handle)
+        if temporary:
+            try:
+                os.unlink(temporary)
+            except OSError:
+                pass
+        raise admission.ProgrammeAdmissionError(
+            "gatekeeper_receipt_write_failed"
+        ) from error
+
+
+def execute_exact_index_commit(
+    *,
+    gatekeeper_root: Path,
+    target_repo_root: Path,
+    manifest: object | None,
+    message: str,
+) -> dict[str, Any]:
+    """Evaluate, revalidate, commit the exact index tree, and return its receipt."""
+    decision = evaluate_pinned_programme_operation(
+        gatekeeper_root=gatekeeper_root,
+        target_repo_root=target_repo_root,
+        manifest=manifest,
+        entrypoint="task_branch_commit",
+        phase="development",
+    )
+    if not decision.admitted:
+        raise admission.ProgrammeAdmissionError(
+            "gatekeeper_exact_index_commit_not_admitted"
+        )
+    candidate = commit_exact_admitted_index(
+        prior_decision=decision,
+        gatekeeper_root=gatekeeper_root,
+        target_repo_root=target_repo_root,
+        manifest=manifest,
+        message=message,
+    )
+    tree = admission._run_git(target_repo_root.resolve(), "rev-parse", "HEAD^{tree}")
+    return _operation_receipt(
+        operation="exact_index_commit",
+        decision=decision,
+        result_sha=candidate,
+        result_tree=tree,
+    )
+
+
+def execute_exact_sha_push(
+    *,
+    gatekeeper_root: Path,
+    target_repo_root: Path,
+    manifest: object | None,
+) -> dict[str, Any]:
+    """Evaluate, revalidate, push the exact SHA, and verify the same destination."""
+    decision = evaluate_pinned_programme_operation(
+        gatekeeper_root=gatekeeper_root,
+        target_repo_root=target_repo_root,
+        manifest=manifest,
+        entrypoint="task_branch_push",
+        phase="pre-push",
+    )
+    fresh = revalidate_pinned_operation_binding(
+        prior_decision=decision,
+        gatekeeper_root=gatekeeper_root,
+        target_repo_root=target_repo_root,
+        manifest=manifest,
+    )
+    argv = exact_push_argv(fresh)
+    target = target_repo_root.resolve()
+    admission._run_git(target, *argv[1:])
+    post_push = evaluate_pinned_programme_operation(
+        gatekeeper_root=gatekeeper_root,
+        target_repo_root=target,
+        manifest=manifest,
+        entrypoint="task_branch_push",
+        phase="post-push",
+    )
+    if not post_push.admitted or post_push.expected_origin_head != fresh.target_head:
+        raise admission.ProgrammeAdmissionError(
+            "gatekeeper_exact_push_postcondition_failed"
+        )
+    result_tree = admission._run_git(target, "rev-parse", "HEAD^{tree}")
+    return _operation_receipt(
+        operation="exact_sha_push",
+        decision=fresh,
+        result_sha=fresh.target_head or "",
+        result_tree=result_tree,
+        post_push_decision=post_push,
+    )

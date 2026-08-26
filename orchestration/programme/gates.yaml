@@ -1,7 +1,7 @@
 schema_version: "raisa-ariadne.programme-gates.v1"
 programme:
   name: "Raisa Medical Office and Ariadne Recovery & Convergence"
-  prepared_at: "2026-08-26T10:48:53+10:00"
+  prepared_at: "2026-08-26T11:57:17+10:00"
   repository: "yurifrusin/EMR4"
   observed_public_master: "2e34bdad732fdab32fbf778280b3d3c70d66d602"
   programme_mode: "recovery"
@@ -10,7 +10,7 @@ programme:
   feature_work_eligible: false
   clockwork_remote_visibility: "source_branch_aligned_with_origin"
   clockwork_local_state: "preserved_exactly_at_03e6860394c39086ec1ffb3f2457acc5f7c8b5f9"
-  next_eligible_tranche: "G0.5"
+  next_eligible_tranche: "G0.6"
 
 global_hard_stops:
   - "critical_or_high_security_finding"
@@ -55,7 +55,7 @@ protected_invariants:
 gates:
   - id: "G0"
     name: "Preserve, Freeze and Establish Truth"
-    status: "revision_required_g0_5"
+    status: "revision_required_g0_6"
     prerequisites: []
     programme_mode: "recovery"
     allowed_work:
@@ -90,7 +90,7 @@ gates:
       - "branch_pr_inventory_complete_or_reproducible"
       - "out_of_gate_work_blocked"
       - "independent_review_non_negative"
-    next_gate: "G0.5"
+    next_gate: "G0.6"
 
   - id: "G0.1"
     name: "Correct Gate Enforcement and Authority Precedence"
@@ -230,7 +230,7 @@ gates:
 
   - id: "G0.5"
     name: "Bind Decisive Review, Clean Target and G1A Subgates"
-    status: "review_pending"
+    status: "superseded_revision_required"
     prerequisites: ["G0_4_review_revision_required"]
     programme_mode: "recovery"
     allowed_work:
@@ -263,6 +263,45 @@ gates:
       - "g0_transition_opens_only_g1a_1"
       - "g1a_2_provider_execution_symbols_are_immutable"
       - "g1a_3_integration_mutation_remains_deferred"
+      - "post_push_origin_matches_exact_candidate"
+      - "candidate_state_is_review_pending"
+    next_gate: "G0.6"
+
+  - id: "G0.6"
+    name: "Enforce Complete Cleanliness and Remote Identity"
+    status: "review_pending"
+    prerequisites: ["G0_5_review_revision_required"]
+    programme_mode: "recovery"
+    allowed_work:
+      - "append_only_external_review_ledger"
+      - "complete_untracked_and_ignored_filesystem_inventory"
+      - "isolated_no_bytecode_gatekeeper_bootstrap"
+      - "closed_production_and_synthetic_remote_identity"
+      - "canonical_exact_index_commit_operation"
+      - "canonical_exact_sha_push_operation"
+      - "durable_operation_receipts"
+      - "adversarial_gatekeeper_lifecycle_tests"
+      - "review_pending_recovery_branch_publication"
+    prohibited_work:
+      - "g1a_implementation"
+      - "g1b"
+      - "product_behavior_change"
+      - "migration_change"
+      - "dependency_change"
+      - "provider_call"
+      - "integration"
+      - "protected_ref_movement"
+      - "deployment_or_pages"
+      - "real_data"
+    exit_checks:
+      - "all_untracked_and_ignored_files_are_inventory_bound"
+      - "gitignore_info_exclude_and_global_excludes_cannot_hide_files"
+      - "gatekeeper_bootstrap_is_isolated_and_no_bytecode"
+      - "gatekeeper_source_and_pre_post_push_are_completely_clean"
+      - "production_remote_identity_is_exact_and_closed"
+      - "remote_rewrites_multiple_urls_and_drift_are_rejected"
+      - "canonical_commit_and_push_revalidate_and_emit_receipts"
+      - "push_and_readback_use_the_same_explicit_bound_destination"
       - "post_push_origin_matches_exact_candidate"
       - "candidate_state_is_review_pending"
     next_gate: "external_G0_review"

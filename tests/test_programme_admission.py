@@ -224,7 +224,7 @@ def test_state_and_gate_disagreement_is_rejected(tmp_path: Path) -> None:
     path = root / pa.GATES_PATH
     path.write_text(
         path.read_text(encoding="utf-8").replace(
-            'next_eligible_tranche: "G0.5"',
+            'next_eligible_tranche: "G0.6"',
             'next_eligible_tranche: "G1A.1"',
             1,
         ),
@@ -314,7 +314,7 @@ def _scope_git_stub(
     *,
     commit_count: int = 1,
     changed: str = "AGENTS.md",
-    remote: str | None = None,
+    remote: str | None = "base",
 ):
     head = manifest["candidate_or_current_head"]
     branch = "codex/raisa-ariadne-recovery-g0"
@@ -336,8 +336,15 @@ def _scope_git_stub(
             return ""
         if args == ("write-tree",):
             return head
-        if args[:3] == ("ls-remote", "--heads", "origin"):
-            return "" if remote is None else f"{remote}\trefs/heads/{branch}"
+        if args == (
+            "rev-parse",
+            "--path-format=absolute",
+            "--git-common-dir",
+        ):
+            return str((ROOT / ".git").resolve())
+        if args[:2] == ("ls-remote", "--refs"):
+            observed = manifest["base_commit"] if remote == "base" else remote
+            return "" if observed is None else f"{observed}\trefs/heads/{branch}"
         raise AssertionError(args)
 
     return run
@@ -478,8 +485,8 @@ def test_machine_state_does_not_claim_stale_review_acceptance() -> None:
     policy = load_programme_policy(ROOT)
 
     assert policy.state["g0_acceptance"]["status"] == "superseded_revision_required"
-    assert policy.state["g0_5_correction"]["g1a_authorized"] is False
-    assert policy.state["g0_5_correction"]["external_review_status"] in {
+    assert policy.state["g0_6_correction"]["g1a_authorized"] is False
+    assert policy.state["g0_6_correction"]["external_review_status"] in {
         "not_started",
         "pending",
     }
@@ -489,9 +496,9 @@ def test_machine_state_does_not_claim_stale_review_acceptance() -> None:
         for row in policy.state["g0_acceptance"]["external_review_history"]
         if row["review_id"] == decisive_id
     )
-    assert decisive["reviewed_commit"] == "4ce17198fad677aed1fe45be4e3bf2b18c713b3b"
+    assert decisive["reviewed_commit"] == "71e2c5f2f586fa4d1ca8fa9787a4906dbbb997f1"
     assert decisive["verdict"] == "REVISION_REQUIRED"
-    assert decisive["blocking_finding_count"] == 3
+    assert decisive["blocking_finding_count"] == 2
 
 
 def test_production_review_history_uses_real_resolving_commit_trees() -> None:
@@ -518,11 +525,15 @@ def test_production_review_history_uses_real_resolving_commit_trees() -> None:
             state["g0_5_correction"]["authorized_parent_commit"],
             "e061800df0ae7c5daba6b2db13e8aa774f3eaff9",
         ),
+        (
+            state["g0_6_correction"]["authorized_parent_commit"],
+            "ef84162bbc6ef24241678d14e0183b876af3a1e3",
+        ),
     ]
     for commit, tree in expected:
         assert _git(ROOT, "rev-parse", f"{commit}^{{tree}}") == tree
         assert _git(ROOT, "rev-parse", f"{tree}^{{tree}}") == tree
-    assert len(state["g0_acceptance"]["external_review_history"]) == 5
+    assert len(state["g0_acceptance"]["external_review_history"]) == 6
 
 
 def test_false_g0_2_tree_binding_is_rejected_and_unresolved() -> None:
@@ -545,6 +556,7 @@ def test_false_g0_2_tree_binding_is_rejected_and_unresolved() -> None:
         ("g0_3_correction", "reviewed_g0_2_tree"),
         ("g0_4_correction", "reviewed_g0_3_tree"),
         ("g0_5_correction", "reviewed_g0_4_tree"),
+        ("g0_6_correction", "reviewed_g0_5_tree"),
     ],
 )
 def test_retained_review_history_cannot_rewrite_tree_bindings(
@@ -825,6 +837,190 @@ def test_untracked_inventory_rejects_symlink_or_reparse_component(
         pa.git_untracked_inventory(root)
 
 
+@pytest.mark.parametrize(
+    "relative_path",
+    [
+        ".env",
+        ".env.local",
+        "sitecustomize.py",
+        "usercustomize.py",
+        "bootstrap.pth",
+        "module.pyc",
+        "__pycache__/module.pyc",
+        ".pytest_cache/v/cache/nodeids",
+        ".venv/Lib/site-packages/runtime.py",
+        "credentials.json",
+    ],
+)
+def test_complete_inventory_observes_repository_ignored_execution_material(
+    tmp_path: Path, relative_path: str
+) -> None:
+    root, _base = _new_inventory_repo(tmp_path)
+    ignore = root / ".gitignore"
+    ignore.write_text("*\n", encoding="utf-8")
+    _git(root, "add", "-f", ".gitignore")
+    _git(root, "commit", "-m", "ignore fixture")
+    path = root / relative_path
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text("synthetic\n", encoding="utf-8")
+
+    inventory = pa.git_all_file_inventory(root)
+
+    assert [(row.status, row.path) for row in inventory] == [("!", relative_path)]
+
+
+@pytest.mark.parametrize("exclude_surface", ["info", "configured_global"])
+def test_complete_inventory_cannot_be_blinded_by_non_repository_excludes(
+    tmp_path: Path, exclude_surface: str
+) -> None:
+    root, _base = _new_inventory_repo(tmp_path)
+    hidden = root / "hidden-runtime.py"
+    hidden.write_text("synthetic\n", encoding="utf-8")
+    if exclude_surface == "info":
+        (root / ".git/info/exclude").write_text("hidden-runtime.py\n", encoding="utf-8")
+    else:
+        excludes = tmp_path / "global-excludes"
+        excludes.write_text("hidden-runtime.py\n", encoding="utf-8")
+        _git(root, "config", "core.excludesFile", str(excludes))
+
+    inventory = pa.git_all_file_inventory(root)
+
+    assert [(row.status, row.path) for row in inventory] == [("!", "hidden-runtime.py")]
+
+
+@pytest.mark.parametrize(
+    ("tracked", "alias"),
+    [
+        ("orchestration_harness/verdict.py", "orchestration_harness/Verdict.py"),
+        ("tests/caf\u00e9.py", "tests/cafe\u0301.py"),
+    ],
+)
+def test_complete_inventory_rejects_case_and_unicode_protected_path_aliases(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path, tracked: str, alias: str
+) -> None:
+    root = tmp_path / "alias-repo"
+    root.mkdir()
+
+    def inventory(_root: Path, *args: str) -> bytes:
+        if "--cached" in args:
+            return tracked.encode("utf-8") + b"\0"
+        if "--ignored" in args:
+            return b""
+        return alias.encode("utf-8") + b"\0"
+
+    monkeypatch.setattr(pa, "_run_git_bytes", inventory)
+    with pytest.raises(ProgrammeAdmissionError, match="protected_path_alias_forbidden"):
+        pa.git_all_file_inventory(root)
+
+
+def _remote_identity_repo(tmp_path: Path) -> tuple[Path, Path, dict]:
+    root = tmp_path / "remote-repo"
+    bare = tmp_path / "bound-origin.git"
+    root.mkdir()
+    bare.mkdir()
+    _git(root, "init", "-b", "remote-test")
+    _git(bare, "init", "--bare")
+    _git(root, "remote", "add", "origin", str(bare))
+    return root, bare, pa.build_synthetic_remote_identity_policy(bare)
+
+
+def test_production_remote_identity_policy_matches_verified_repository() -> None:
+    policy = load_programme_policy(ROOT).overlay["remote_identity_policy"]
+
+    observed = pa.observe_remote_identity(ROOT, policy)
+
+    assert observed["expected_repository_identity"] == "github.com/yurifrusin/emr4"
+    assert observed["normalized_fetch_url"] == "https://github.com/yurifrusin/emr4"
+    assert observed["normalized_push_url"] == observed["normalized_fetch_url"]
+    assert observed["explicit_push_url_count"] == 0
+
+
+def test_synthetic_bound_bare_remote_identity_passes(tmp_path: Path) -> None:
+    root, _bare, policy = _remote_identity_repo(tmp_path)
+
+    observed = pa.observe_remote_identity(root, policy)
+
+    assert observed == policy
+
+
+def test_production_policy_rejects_local_fake_bare_origin(tmp_path: Path) -> None:
+    root, _bare, _synthetic = _remote_identity_repo(tmp_path)
+    production = load_programme_policy(ROOT).overlay["remote_identity_policy"]
+
+    with pytest.raises(ProgrammeAdmissionError, match="remote_identity"):
+        pa.observe_remote_identity(root, production)
+
+
+@pytest.mark.parametrize(
+    "mutation",
+    [
+        "changed_fetch",
+        "multiple_fetch",
+        "changed_push",
+        "multiple_push",
+        "instead_of",
+        "push_instead_of",
+        "valid_fetch_redirected_push",
+    ],
+)
+def test_remote_identity_rejects_url_and_rewrite_adversaries(
+    tmp_path: Path, mutation: str
+) -> None:
+    root, _bare, policy = _remote_identity_repo(tmp_path)
+    fake = tmp_path / "fake-origin.git"
+    fake.mkdir()
+    _git(fake, "init", "--bare")
+    if mutation == "changed_fetch":
+        _git(root, "remote", "set-url", "origin", str(fake))
+    elif mutation == "multiple_fetch":
+        _git(root, "config", "--add", "remote.origin.url", str(fake))
+    elif mutation in {"changed_push", "valid_fetch_redirected_push"}:
+        _git(root, "remote", "set-url", "--push", "origin", str(fake))
+    elif mutation == "multiple_push":
+        _git(root, "config", "--add", "remote.origin.pushurl", str(fake))
+        _git(root, "config", "--add", "remote.origin.pushurl", str(_bare))
+    elif mutation == "instead_of":
+        _git(root, "config", f"url.{fake.as_posix()}.insteadOf", _bare.as_posix())
+    else:
+        _git(
+            root,
+            "config",
+            f"url.{fake.as_posix()}.pushInsteadOf",
+            _bare.as_posix(),
+        )
+
+    with pytest.raises(ProgrammeAdmissionError, match="remote_identity"):
+        pa.observe_remote_identity(root, policy)
+
+
+@pytest.mark.parametrize("mutation", ["client_hook", "core_hooks_path"])
+def test_git_administrative_identity_rejects_unmodelled_hook_execution(
+    tmp_path: Path, mutation: str
+) -> None:
+    root, _bare, _policy = _remote_identity_repo(tmp_path)
+    if mutation == "client_hook":
+        hooks = (
+            Path(
+                _git(
+                    root,
+                    "rev-parse",
+                    "--path-format=absolute",
+                    "--git-common-dir",
+                )
+            )
+            / "hooks"
+        )
+        hooks.mkdir(parents=True, exist_ok=True)
+        (hooks / "pre-push").write_text("synthetic\n", encoding="utf-8")
+    else:
+        custom_hooks = tmp_path / "custom-hooks"
+        custom_hooks.mkdir()
+        _git(root, "config", "core.hooksPath", str(custom_hooks))
+
+    with pytest.raises(ProgrammeAdmissionError, match="git_administrative"):
+        pa.observe_git_administrative_identity(root)
+
+
 def _write_json(path: Path, value: dict) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(value, indent=2) + "\n", encoding="utf-8")
@@ -860,21 +1056,31 @@ def _build_transition_repository(tmp_path: Path) -> tuple[Path, dict]:
         "03e6860394c39086ec1ffb3f2457acc5f7c8b5f9",
     )
 
+    origin = tmp_path / "origin.git"
+    origin.mkdir()
+    _git(origin, "init", "--bare")
+    _git(root, "remote", "add", "origin", str(origin))
+
     state_path = root / pa.STATE_PATH
     state = json.loads(state_path.read_text(encoding="utf-8"))
-    state["g0_5_correction"]["status"] = "review_pending"
-    state["g0_5_correction"]["external_review_status"] = "pending"
-    state["g0_5_correction"]["next_action"] = "external_G0_review_only"
+    state["g0_6_correction"]["status"] = "review_pending"
+    state["g0_6_correction"]["external_review_status"] = "pending"
+    state["g0_6_correction"]["next_action"] = "external_G0_review_only"
     _write_json(state_path, state)
 
     gates_path = root / pa.GATES_PATH
     gates = yaml.safe_load(gates_path.read_text(encoding="utf-8"))
-    next(row for row in gates["gates"] if row["id"] == "G0.5")["status"] = (
+    next(row for row in gates["gates"] if row["id"] == "G0.6")["status"] = (
         "review_pending"
     )
     _write_yaml(gates_path, gates)
 
     overlay_path = root / pa.OVERLAY_PATH
+    overlay = yaml.safe_load(overlay_path.read_text(encoding="utf-8"))
+    overlay["remote_identity_policy"] = pa.build_synthetic_remote_identity_policy(
+        origin
+    )
+    _write_yaml(overlay_path, overlay)
     from orchestration_harness.settings_fingerprint import settings_fingerprint
 
     latch_path = root / pa.LATCH_PATH
@@ -888,10 +1094,6 @@ def _build_transition_repository(tmp_path: Path) -> tuple[Path, dict]:
     reviewed = _git(root, "rev-parse", "HEAD")
     reviewed_tree = _git(root, "rev-parse", f"{reviewed}^{{tree}}")
 
-    origin = tmp_path / "origin.git"
-    origin.mkdir()
-    _git(origin, "init", "--bare")
-    _git(root, "remote", "add", "origin", str(origin))
     protected = "2e34bdad732fdab32fbf778280b3d3c70d66d602"
     _git(root, "push", "origin", f"{protected}:refs/heads/master")
     _git(root, "push", "origin", f"{protected}:refs/heads/handoff/current")
@@ -940,7 +1142,7 @@ def _build_transition_repository(tmp_path: Path) -> tuple[Path, dict]:
     agents_text = agents_path.read_text(encoding="utf-8")
     agents_path.write_text(
         agents_text.replace(
-            "Gate G0.5 is the only authorised correction; G1A is\nclosed.",
+            "Gate G0.6 is the only authorised correction; G1A is\nclosed.",
             "The reviewed G0 to G1A.1 transition is complete; Gate G1A.1 is active\nfor its bounded pure-verdict task only.",
             1,
         ),
@@ -975,10 +1177,10 @@ def _build_transition_repository(tmp_path: Path) -> tuple[Path, dict]:
         }
     )
     state["g0_acceptance"]["next_action"] = "begin_bounded_G1A_1_only"
-    state["g0_5_correction"]["status"] = "external_review_passed"
-    state["g0_5_correction"]["external_review_status"] = "pass"
-    state["g0_5_correction"]["g1a_authorized"] = True
-    state["g0_5_correction"]["next_action"] = "bounded_G1A_1_profile_active"
+    state["g0_6_correction"]["status"] = "external_review_passed"
+    state["g0_6_correction"]["external_review_status"] = "pass"
+    state["g0_6_correction"]["g1a_authorized"] = True
+    state["g0_6_correction"]["next_action"] = "bounded_G1A_1_profile_active"
     state["gate_transition"] = {
         "status": "complete",
         "transition_id": transition_id,
@@ -1003,7 +1205,8 @@ def _build_transition_repository(tmp_path: Path) -> tuple[Path, dict]:
         "G0": "passed",
         "G0.1": "superseded_revision_required",
         "G0.4": "superseded_revision_required",
-        "G0.5": "external_review_passed",
+        "G0.5": "superseded_revision_required",
+        "G0.6": "external_review_passed",
         "G1A": "active_subgate_G1A_1",
         "G1A.1": "active",
     }
@@ -1070,7 +1273,7 @@ def _build_transition_repository(tmp_path: Path) -> tuple[Path, dict]:
         "changed_semantic_pointers": pointer_map,
         "scope_result": {"admitted": True, "phase": "development"},
         "target_cleanliness_contract": {
-            "schema_version": "ariadne.g1a_target_cleanliness_contract.v1",
+            "schema_version": "ariadne.g1a_target_cleanliness_contract.v2",
             "preserved_legacy_worktree": "C:/Users/sarashera/emr4",
             "separate_clean_target_required": True,
             "activation_untracked_count_required": 0,
@@ -1079,6 +1282,11 @@ def _build_transition_repository(tmp_path: Path) -> tuple[Path, dict]:
             ),
             "pre_push_untracked_count_required": 0,
             "post_push_untracked_count_required": 0,
+            "inventory_includes_ignored": True,
+            "protected_path_aliases_forbidden": True,
+            "remote_identity_sha256": overlay["remote_identity_policy"][
+                "remote_identity_sha256"
+            ],
         },
     }
     _write_json(artifact_path, artifact)
@@ -1113,8 +1321,8 @@ def test_valid_synthetic_state_only_transition_is_admitted(tmp_path: Path) -> No
     assert set(g1a_manifest["allowed_path_roots"]) == pa.G1A_ALLOWED_PATHS
     assert g1a_decision.admitted is True
     history = policy.state["g0_acceptance"]["external_review_history"]
-    assert len(history) == 6
-    assert [row["verdict"] for row in history[:5]] == ["REVISION_REQUIRED"] * 5
+    assert len(history) == 7
+    assert [row["verdict"] for row in history[:6]] == ["REVISION_REQUIRED"] * 6
     assert history[-1]["review_id"] == manifest["transition_id"]
     assert history[-1]["reviewed_commit"] == manifest["reviewed_commit"]
     assert history[-1]["reviewed_tree"] == manifest["reviewed_tree"]
@@ -1209,7 +1417,7 @@ def _transition_decision(root: Path, manifest: dict):
 
 def _mark_transition_as_origin_head(root: Path) -> None:
     branch = _git(root, "branch", "--show-current")
-    _git(root, "update-ref", f"refs/remotes/origin/{branch}", "HEAD")
+    _git(root, "push", "origin", f"HEAD:refs/heads/{branch}")
 
 
 @pytest.mark.parametrize(
@@ -1240,6 +1448,7 @@ def test_g1a_development_observes_and_admits_exact_allowed_untracked_files(
     [
         "app/evil.py",
         "sitecustomize.py",
+        "usercustomize.py",
         "bootstrap.pth",
     ],
 )
@@ -1257,7 +1466,10 @@ def test_g1a_development_rejects_other_untracked_and_import_hook_files(
 
     assert decision.admitted is False
     assert "scope_untracked_path_outside_development_allowlist" in decision.reason_codes
-    if relative_path == "sitecustomize.py" or relative_path.endswith(".pth"):
+    if relative_path in {
+        "sitecustomize.py",
+        "usercustomize.py",
+    } or relative_path.endswith(".pth"):
         assert "scope_import_hook_forbidden" in decision.reason_codes
 
 
@@ -1276,6 +1488,27 @@ def test_g1a_pre_push_rejects_even_allowed_untracked_file(
 
     assert decision.admitted is False
     assert "scope_untracked_files_forbidden" in decision.reason_codes
+
+
+@pytest.mark.parametrize("phase", ["pre-push", "post-push"])
+def test_g1a_pre_and_post_push_reject_ignored_files(
+    transition_template: tuple[Path, dict], tmp_path: Path, phase: str
+) -> None:
+    root, _transition_manifest = _transition_copy(transition_template, tmp_path)
+    _mark_transition_as_origin_head(root)
+    exclude_path = Path(_git(root, "rev-parse", "--git-path", "info/exclude"))
+    if not exclude_path.is_absolute():
+        exclude_path = root / exclude_path
+    exclude_path.write_text("/.env\n", encoding="utf-8")
+    (root / ".env").write_text("synthetic\n", encoding="utf-8")
+    manifest = build_task_manifest(root)
+
+    decision = evaluate_committed_scope(repo_root=root, manifest=manifest, phase=phase)
+
+    assert decision.admitted is False
+    assert "scope_untracked_files_forbidden" in decision.reason_codes
+    assert decision.target_cleanliness["ignored_paths"] == [".env"]
+    assert decision.target_cleanliness["inventory_includes_ignored"] is True
 
 
 def test_g1a_development_rejects_extra_untracked_file_beside_allowed_file(
@@ -1337,11 +1570,18 @@ def test_g1a_development_rejects_origin_drift(
     transition_template: tuple[Path, dict], tmp_path: Path
 ) -> None:
     root, _transition_manifest = _transition_copy(transition_template, tmp_path)
+    policy = load_programme_policy(root)
+    reviewed = policy.state["gate_transition"]["reviewed_commit"]
+    branch = _git(root, "branch", "--show-current")
+    _git(root, "push", "--force", "origin", f"{reviewed}:refs/heads/{branch}")
     manifest = build_task_manifest(root)
 
-    decision = evaluate_committed_scope(
-        repo_root=root, manifest=manifest, phase="development"
-    )
+    try:
+        decision = evaluate_committed_scope(
+            repo_root=root, manifest=manifest, phase="development"
+        )
+    finally:
+        _git(root, "push", "--force", "origin", f"HEAD:refs/heads/{branch}")
 
     assert decision.admitted is False
     assert "scope_origin_not_authorized_parent_development" in decision.reason_codes
