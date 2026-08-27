@@ -1,12 +1,12 @@
 {
   "schema_version": "raisa-ariadne.programme-state.v1",
-  "observed_at": "2026-08-27T11:29:08+10:00",
+  "observed_at": "2026-08-27T14:17:53+10:00",
   "programme_name": "Raisa Medical Office and Ariadne Recovery & Convergence",
   "programme_mode": "recovery",
-  "current_gate": "G0",
-  "current_gate_status": "revision_required",
-  "active_correction": "G0.8",
-  "active_profile": "G0.8_FSMONITOR_CLOSURE",
+  "current_gate": "G1A.1",
+  "current_gate_status": "active",
+  "active_correction": "G1A.1",
+  "active_profile": "G1A.1_ACTIVE",
   "machine_authoritative": true,
   "feature_work_eligible": false,
   "product_work_eligible": false,
@@ -256,7 +256,7 @@
   "task_selection": {
     "autonomous_selection_enabled": false,
     "allowed_task_kinds": [
-      "g0_8_fsmonitor_closure"
+      "g1a_1_verdict_kernel_and_pure_consumers"
     ],
     "blocked_task_kinds": [
       "product_feature",
@@ -268,11 +268,11 @@
     ],
     "admission_command": "python scripts/raisa_ariadne_recovery_preflight.py --task-manifest <path> --phase development",
     "out_of_gate_result": "blocked",
-    "next_eligible_tranche": "G0.8",
+    "next_eligible_tranche": "G1A.1",
     "next_eligible_now": true,
     "next_tranche_started": false,
-    "next_tranche_admission_requires_state_transition": true,
-    "next_eligibility_condition": "external_G0_review_requires_G0_8_fsmonitor_closed_configuration_index_validity_and_complete_pre_import_source_attestation"
+    "next_tranche_admission_requires_state_transition": false,
+    "next_eligibility_condition": "bounded_G1A_1_profile_active_next_tranche_not_started"
   },
   "parallelism_efficacy": {
     "deepseek": {
@@ -302,7 +302,7 @@
     "g1a_started": false
   },
   "g0_acceptance": {
-    "status": "superseded_revision_required",
+    "status": "passed",
     "independent_review": {
       "reviewer_surface": "historical_native_subagent",
       "review_task": "/root/g0_independent_review",
@@ -318,7 +318,7 @@
         "post-push recovery-ref readback remains required"
       ]
     },
-    "decisive_review_id": "g0-review-6e101d1-independent-20260827-revision-required",
+    "decisive_review_id": "g0-review-d91a384-independent-20260827-pass",
     "external_review_history": [
       {
         "review_id": "g0-review-c720aaa-revision-required",
@@ -407,6 +407,17 @@
         "reviewer_surface": "external_chatgpt_repository_review",
         "g1a_authorized": false,
         "review_record_sha256": "sha256:7f6dd7053d4edf87839127001abbd6842638d287045fcf4fe4a82e18c0ea7f7b"
+      },
+      {
+        "review_id": "g0-review-d91a384-independent-20260827-pass",
+        "review_record_path": "orchestration/programme/external-reviews/g0-review-d91a384-independent-20260827-pass.json",
+        "reviewed_commit": "d91a3844ddfca1e6e5519237ca80023a2b17694b",
+        "reviewed_tree": "270aaa136d9948d7d0cd6cff965ad6d760da6e18",
+        "verdict": "PASS",
+        "blocking_finding_count": 0,
+        "reviewer_surface": "external_chatgpt_repository_review",
+        "g1a_authorized": true,
+        "review_record_sha256": "sha256:13312733f50a870e06078844c89b7be74aa40f82c30f2b118ea1bc67605b139a"
       }
     ],
     "g0_checks": {
@@ -421,7 +432,7 @@
       "structured_document_parse": "passed",
       "staged_diff_check": "passed"
     },
-    "next_action": "external_G0_review_of_G0_8_candidate_only"
+    "next_action": "begin_bounded_G1A_1_only"
   },
   "g0_1_correction": {
     "status": "superseded_revision_required",
@@ -499,16 +510,28 @@
     "next_action": "superseded_by_G0_8_revision_required"
   },
   "g0_8_correction": {
-    "status": "review_pending",
+    "status": "external_review_passed",
     "authorized_parent_commit": "6e101d15f824f68c3f44d0a3cb44a3aa2afd5b1b",
     "reviewed_g0_7_tree": "00c1af2f47ceee88c10507809f69058c24c6bd85",
     "correction_directive_sha256": "ff5f2e0a1291fa77e7b62a1529933921837b762a4c5faf6795994140f99ca243",
     "review_verdict": "REVISION_REQUIRED",
     "review_finding_count": 1,
     "candidate_commit_limit": 1,
-    "external_review_status": "pending",
-    "g1a_authorized": false,
-    "next_action": "external_G0_review_only"
+    "external_review_status": "pass",
+    "g1a_authorized": true,
+    "next_action": "bounded_G1A_1_profile_active"
   },
-  "gate_transition": null
+  "gate_transition": {
+    "status": "complete",
+    "transition_id": "g0-review-d91a384-independent-20260827-pass",
+    "from_gate": "G0",
+    "to_gate": "G1A.1",
+    "reviewed_commit": "d91a3844ddfca1e6e5519237ca80023a2b17694b",
+    "reviewed_tree": "270aaa136d9948d7d0cd6cff965ad6d760da6e18",
+    "external_review_status": "pass",
+    "blocking_finding_count": 0,
+    "reviewer_surface": "external_chatgpt_repository_review",
+    "g1a_authorized": true,
+    "next_action": "G1A_1_only"
+  }
 }

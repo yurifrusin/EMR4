@@ -1,0 +1,111 @@
+{
+  "schema_version": "raisa-ariadne.g0-to-g1a-transition.v1",
+  "transition_id": "g0-review-d91a384-independent-20260827-pass",
+  "recorded_at": "2026-08-27T14:17:53+10:00",
+  "transition_manifest": {
+    "schema_version": "ariadne.programme_gate_transition_manifest.v1",
+    "transition_id": "g0-review-d91a384-independent-20260827-pass",
+    "from_gate": "G0",
+    "to_gate": "G1A.1",
+    "reviewed_commit": "d91a3844ddfca1e6e5519237ca80023a2b17694b",
+    "reviewed_tree": "270aaa136d9948d7d0cd6cff965ad6d760da6e18",
+    "transition_parent": "d91a3844ddfca1e6e5519237ca80023a2b17694b",
+    "external_review_verdict": "PASS",
+    "external_review_record_sha256": "sha256:13312733f50a870e06078844c89b7be74aa40f82c30f2b118ea1bc67605b139a",
+    "blocking_finding_count": 0,
+    "reviewer_surface": "external_chatgpt_repository_review",
+    "state_digest_before": "sha256:1270ef8aa69e7ebe917d113612affd94fecfb7d43f760f062cd632949ed1b473",
+    "policy_digest_before": "sha256:ab4b2e4f639040911296a11f8b173fb5c9044b5d919954c73fea91c967f13542",
+    "allowed_transition_paths": [
+      "AGENTS.md",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json",
+      "orchestration/harness_settings/programme_recovery.yaml",
+      "orchestration/programme/current-state.json",
+      "orchestration/programme/external-reviews/g0-review-d91a384-independent-20260827-pass.json",
+      "orchestration/programme/gate-transitions/g0-review-d91a384-independent-20260827-pass.json",
+      "orchestration/programme/gates.yaml"
+    ],
+    "forbidden_effect_classes": [
+      "dependency_change",
+      "deployment",
+      "g1b_work",
+      "implementation_change",
+      "integration",
+      "migration_change",
+      "pages",
+      "product_behavior_change",
+      "protected_ref_movement",
+      "provider_invocation",
+      "real_data_access"
+    ]
+  },
+  "transition_manifest_sha256": "sha256:4fb5d523f9e09f2653ea2fc30752aec6a947602930ed9d8fc7ef5e9e354f336f",
+  "reviewed_commit": "d91a3844ddfca1e6e5519237ca80023a2b17694b",
+  "reviewed_tree": "270aaa136d9948d7d0cd6cff965ad6d760da6e18",
+  "external_review_record_sha256": "sha256:13312733f50a870e06078844c89b7be74aa40f82c30f2b118ea1bc67605b139a",
+  "state_digest_before": "sha256:1270ef8aa69e7ebe917d113612affd94fecfb7d43f760f062cd632949ed1b473",
+  "state_digest_after": "sha256:bafae242425c54f7dda7fdb2308329e6d47bf8c19508e141acec5a8a2eeb07bf",
+  "policy_digest_before": "sha256:ab4b2e4f639040911296a11f8b173fb5c9044b5d919954c73fea91c967f13542",
+  "policy_digest_after": "sha256:bbec33e9be756dffd5de0900856be1097e7da4df62336e54f88b2573df4b1553",
+  "changed_semantic_pointers": {
+    "AGENTS.md": [
+      "/emergency_header"
+    ],
+    "orchestration/continuity/ariadne-active-operation-latch/current.json": [
+      "/authority_source",
+      "/checkpoint/settings_fingerprint"
+    ],
+    "orchestration/harness_settings/programme_recovery.yaml": [
+      "/active_profile"
+    ],
+    "orchestration/programme/current-state.json": [
+      "/active_correction",
+      "/active_profile",
+      "/current_gate",
+      "/current_gate_status",
+      "/g0_8_correction/external_review_status",
+      "/g0_8_correction/g1a_authorized",
+      "/g0_8_correction/next_action",
+      "/g0_8_correction/status",
+      "/g0_acceptance/decisive_review_id",
+      "/g0_acceptance/external_review_history/8",
+      "/g0_acceptance/next_action",
+      "/g0_acceptance/status",
+      "/gate_transition",
+      "/observed_at",
+      "/task_selection/allowed_task_kinds/0",
+      "/task_selection/next_eligibility_condition",
+      "/task_selection/next_eligible_tranche",
+      "/task_selection/next_tranche_admission_requires_state_transition"
+    ],
+    "orchestration/programme/gates.yaml": [
+      "/gates/0/status",
+      "/gates/10/status",
+      "/gates/8/status",
+      "/gates/9/status",
+      "/programme/current_gate",
+      "/programme/current_gate_status",
+      "/programme/next_eligible_tranche",
+      "/programme/prepared_at"
+    ]
+  },
+  "scope_result": {
+    "admitted": true,
+    "phase": "development"
+  },
+  "target_cleanliness_contract": {
+    "schema_version": "ariadne.g1a_target_cleanliness_contract.v2",
+    "preserved_legacy_worktree": "C:/Users/sarashera/emr4",
+    "separate_clean_target_required": true,
+    "activation_untracked_count_required": 0,
+    "development_allowed_untracked_paths": [
+      "orchestration_harness/verdict.py",
+      "tests/test_ariadne_verdict.py"
+    ],
+    "pre_push_untracked_count_required": 0,
+    "post_push_untracked_count_required": 0,
+    "inventory_includes_ignored": true,
+    "protected_path_aliases_forbidden": true,
+    "remote_identity_sha256": "sha256:8c7dbd4840f7352cd35300a5a10c9ecbed143857b8bab37086fb5c30be6fbe0b"
+  }
+}

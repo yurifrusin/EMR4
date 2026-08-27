@@ -21,7 +21,7 @@ required_before:
   - "protected_ref_operation"
   - "deployment"
 missing_or_invalid_state: "hard_stop"
-active_profile: "G0.8_FSMONITOR_CLOSURE"
+active_profile: "G1A.1_ACTIVE"
 profiles:
   G0.8_FSMONITOR_CLOSURE:
     profile_kind: "controller_maintenance"

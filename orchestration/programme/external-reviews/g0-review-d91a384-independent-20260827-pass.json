@@ -1,0 +1,12 @@
+{
+  "schema_version": "raisa-ariadne.external-g0-review.v2",
+  "review_id": "g0-review-d91a384-independent-20260827-pass",
+  "recorded_at": "2026-08-27T12:56:12+10:00",
+  "reviewed_commit": "d91a3844ddfca1e6e5519237ca80023a2b17694b",
+  "reviewed_tree": "270aaa136d9948d7d0cd6cff965ad6d760da6e18",
+  "verdict": "PASS",
+  "blocking_finding_count": 0,
+  "reviewer_surface": "external_chatgpt_repository_review",
+  "g1a_authorized": true,
+  "source_artifact_sha256": "b9b4590fb0e33534896e719f72e883a0344b7e46be538fa059e6305c6d1aaced"
+}
