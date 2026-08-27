@@ -2,8 +2,8 @@
 
 Exit codes
 ----------
-0 — accepted
-1 — rejected
+0 — operation authorized
+1 — operation not authorized
 2 — input or internal error
 
 Usage
@@ -124,10 +124,9 @@ def main() -> int:
 
     print(result.to_json())
 
-    if result.accepted:
+    if result.operation_authorized:
         return 0
-    else:
-        return 1
+    return 1
 
 
 if __name__ == "__main__":

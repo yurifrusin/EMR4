@@ -33,7 +33,9 @@ def _digest_bytes(chunks: Iterable[bytes]) -> str:
 
 
 def _digest_json(value: Any) -> str:
-    return _digest_bytes((json.dumps(value, sort_keys=True, separators=(",", ":")).encode("utf-8"),))
+    return _digest_bytes(
+        (json.dumps(value, sort_keys=True, separators=(",", ":")).encode("utf-8"),)
+    )
 
 
 def _file_digest(path: Path) -> str | None:
@@ -71,6 +73,10 @@ def _file_state(path: Path) -> dict[str, Any]:
 def _artifact_state(path: Path, artifact_kind: str) -> dict[str, Any]:
     state = _file_state(path)
     state["valid_marker"] = False
+    state["artifact_valid"] = False
+    state["canonical_marker"] = None
+    state["review_verdict"] = None
+    state["integration_authorized"] = False
     if not state["exists"]:
         return state
     try:
@@ -80,7 +86,11 @@ def _artifact_state(path: Path, artifact_kind: str) -> dict[str, Any]:
         return state
     marker = parse_artifact_marker(body, artifact_kind)
     state["valid_marker"] = marker["valid"]
+    state["artifact_valid"] = marker["artifact_valid"]
     state["marker_reason"] = marker["reason"]
+    state["canonical_marker"] = marker["marker"]
+    state["review_verdict"] = marker["review_verdict"]
+    state["integration_authorized"] = marker["integration_authorized"]
     return state
 
 
@@ -103,10 +113,18 @@ def _receipt_state(path: Path) -> dict[str, Any]:
 
 def _mailbox_state(outbox: Path) -> dict[str, Any]:
     if not outbox.is_dir():
-        return {"exists": False, "event_count": 0, "event_fingerprint": _digest_json([])}
+        return {
+            "exists": False,
+            "event_count": 0,
+            "event_fingerprint": _digest_json([]),
+        }
     events: list[dict[str, Any]] = []
     try:
-        paths = sorted(path for path in outbox.iterdir() if path.is_file() and path.suffix == ".json")
+        paths = sorted(
+            path
+            for path in outbox.iterdir()
+            if path.is_file() and path.suffix == ".json"
+        )
     except OSError as error:
         return {
             "exists": True,
@@ -116,7 +134,14 @@ def _mailbox_state(outbox: Path) -> dict[str, Any]:
         }
     for path in paths:
         state = _file_state(path)
-        events.append({"name": path.name, "size": state.get("size"), "mtime_ns": state.get("mtime_ns"), "digest": state.get("digest")})
+        events.append(
+            {
+                "name": path.name,
+                "size": state.get("size"),
+                "mtime_ns": state.get("mtime_ns"),
+                "digest": state.get("digest"),
+            }
+        )
     return {
         "exists": True,
         "event_count": len(events),
@@ -126,7 +151,9 @@ def _mailbox_state(outbox: Path) -> dict[str, Any]:
 
 def _run_text(command: list[str], cwd: Path) -> tuple[str | None, int | None]:
     try:
-        result = subprocess.run(command, cwd=cwd, capture_output=True, text=True, check=False)
+        result = subprocess.run(
+            command, cwd=cwd, capture_output=True, text=True, check=False
+        )
     except (OSError, ValueError):
         return None, None
     if result.returncode != 0:
@@ -134,9 +161,13 @@ def _run_text(command: list[str], cwd: Path) -> tuple[str | None, int | None]:
     return result.stdout, result.returncode
 
 
-def _stream_command_digest(command: list[str], cwd: Path) -> tuple[str | None, int | None]:
+def _stream_command_digest(
+    command: list[str], cwd: Path
+) -> tuple[str | None, int | None]:
     try:
-        process = subprocess.Popen(command, cwd=cwd, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
+        process = subprocess.Popen(
+            command, cwd=cwd, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL
+        )
     except (OSError, ValueError):
         return None, None
     assert process.stdout is not None
@@ -147,12 +178,18 @@ def _stream_command_digest(command: list[str], cwd: Path) -> tuple[str | None, i
 
 
 def _git_state(cwd: Path) -> dict[str, Any]:
-    root, returncode = _run_text(["git", "-C", str(cwd), "rev-parse", "--show-toplevel"], cwd)
+    root, returncode = _run_text(
+        ["git", "-C", str(cwd), "rev-parse", "--show-toplevel"], cwd
+    )
     if not root:
         return {"available": False, "return_code": returncode}
     head, head_code = _run_text(["git", "-C", str(cwd), "rev-parse", "HEAD"], cwd)
-    status, status_code = _run_text(["git", "-C", str(cwd), "status", "--short", "--branch"], cwd)
-    diff, diff_code = _stream_command_digest(["git", "-C", str(cwd), "diff", "--no-ext-diff", "--binary"], cwd)
+    status, status_code = _run_text(
+        ["git", "-C", str(cwd), "status", "--short", "--branch"], cwd
+    )
+    diff, diff_code = _stream_command_digest(
+        ["git", "-C", str(cwd), "diff", "--no-ext-diff", "--binary"], cwd
+    )
     cached_diff, cached_code = _stream_command_digest(
         ["git", "-C", str(cwd), "diff", "--cached", "--no-ext-diff", "--binary"], cwd
     )
@@ -202,7 +239,9 @@ def _process_state(pid: int) -> dict[str, Any]:
 
     if not state["present"]:
         return state
-    output, returncode = _run_text(["ps", "-p", str(pid), "-o", "stat=,time="], Path.cwd())
+    output, returncode = _run_text(
+        ["ps", "-p", str(pid), "-o", "stat=,time="], Path.cwd()
+    )
     if output and returncode == 0:
         state["activity_available"] = True
         state["activity_fingerprint"] = _digest_bytes((output.strip().encode("utf-8"),))
@@ -246,14 +285,28 @@ def _signal_value(snapshot: dict[str, Any], name: str) -> Any:
     return snapshot.get(name)
 
 
-def classify_liveness(previous: dict[str, Any] | None, current: dict[str, Any]) -> dict[str, Any]:
+def classify_liveness(
+    previous: dict[str, Any] | None, current: dict[str, Any]
+) -> dict[str, Any]:
     """Classify from observable changes; elapsed time is intentionally ignored."""
-    if current.get("artifact", {}).get("valid_marker") is True:
-        return {"status": "completed", "reason": "canonical_artifact_marker_observed", "changed_signals": []}
+    artifact = current.get("artifact", {})
+    artifact_valid = artifact.get("artifact_valid", artifact.get("valid_marker"))
+    if artifact_valid is True:
+        return {
+            "status": "completed",
+            "reason": "canonical_artifact_marker_observed",
+            "changed_signals": [],
+        }
 
     current_processes = current.get("processes", [])
-    if current_processes and not any(process.get("present") for process in current_processes):
-        return {"status": "process_missing", "reason": "all_observed_processes_absent", "changed_signals": []}
+    if current_processes and not any(
+        process.get("present") for process in current_processes
+    ):
+        return {
+            "status": "process_missing",
+            "reason": "all_observed_processes_absent",
+            "changed_signals": [],
+        }
 
     if previous is None:
         return {
@@ -263,11 +316,22 @@ def classify_liveness(previous: dict[str, Any] | None, current: dict[str, Any]) 
         }
 
     changed = [
-        name for name in SIGNAL_NAMES if _digest_json(_signal_value(previous, name)) != _digest_json(_signal_value(current, name))
+        name
+        for name in SIGNAL_NAMES
+        if _digest_json(_signal_value(previous, name))
+        != _digest_json(_signal_value(current, name))
     ]
     if changed:
-        return {"status": "progressing", "reason": "observable_signals_changed", "changed_signals": changed}
-    return {"status": "idle_observed", "reason": "no_observable_signal_change", "changed_signals": []}
+        return {
+            "status": "progressing",
+            "reason": "observable_signals_changed",
+            "changed_signals": changed,
+        }
+    return {
+        "status": "idle_observed",
+        "reason": "no_observable_signal_change",
+        "changed_signals": [],
+    }
 
 
 def observe_liveness(
@@ -299,7 +363,9 @@ def observe_liveness(
         "reason": classification["reason"],
         "changed_signals": classification["changed_signals"],
         "observed_at": current["observed_at"],
-        "elapsed_seconds_advisory": max(0.0, current_epoch - previous_epoch) if isinstance(previous_epoch, (int, float)) else None,
+        "elapsed_seconds_advisory": max(0.0, current_epoch - previous_epoch)
+        if isinstance(previous_epoch, (int, float))
+        else None,
         "elapsed_time_used_for_classification": False,
         "process_termination_requested": False,
         "snapshot": current,
@@ -321,17 +387,39 @@ def _write_json(path: Path, payload: dict[str, Any]) -> None:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Observe Deep Code progress without killing or owning its lifecycle.")
+    parser = argparse.ArgumentParser(
+        description="Observe Deep Code progress without killing or owning its lifecycle."
+    )
     parser.add_argument("--cwd", type=Path, required=True)
     parser.add_argument("--artifact", type=Path, required=True)
-    parser.add_argument("--artifact-kind", choices=("decision", "completion"), default="decision")
+    parser.add_argument(
+        "--artifact-kind", choices=("decision", "completion"), default="decision"
+    )
     parser.add_argument("--receipt", type=Path, required=True)
     parser.add_argument("--outbox", type=Path, required=True)
-    parser.add_argument("--watch", type=Path, action="append", default=[], help="Relevant file to observe; repeatable")
-    parser.add_argument("--process-pid", type=int, action="append", default=[], help="Supervisor/child PID to observe; repeatable")
-    parser.add_argument("--previous", type=Path, help="Prior snapshot or observation JSON")
-    parser.add_argument("--state", type=Path, help="Read prior state and write this observation here")
-    parser.add_argument("--evidence", type=Path, help="Also write this observation JSON")
+    parser.add_argument(
+        "--watch",
+        type=Path,
+        action="append",
+        default=[],
+        help="Relevant file to observe; repeatable",
+    )
+    parser.add_argument(
+        "--process-pid",
+        type=int,
+        action="append",
+        default=[],
+        help="Supervisor/child PID to observe; repeatable",
+    )
+    parser.add_argument(
+        "--previous", type=Path, help="Prior snapshot or observation JSON"
+    )
+    parser.add_argument(
+        "--state", type=Path, help="Read prior state and write this observation here"
+    )
+    parser.add_argument(
+        "--evidence", type=Path, help="Also write this observation JSON"
+    )
     args = parser.parse_args()
     try:
         previous_path = args.previous or args.state
@@ -351,7 +439,10 @@ def main() -> int:
         if args.evidence:
             _write_json(args.evidence, result)
     except (OSError, ValueError, json.JSONDecodeError) as error:
-        print(json.dumps({"status": "invalid_observation", "reason": str(error)}), file=sys.stderr)
+        print(
+            json.dumps({"status": "invalid_observation", "reason": str(error)}),
+            file=sys.stderr,
+        )
         return 2
     print(json.dumps(result, indent=2))
     return 0

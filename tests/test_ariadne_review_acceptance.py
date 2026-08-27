@@ -14,10 +14,7 @@ from pathlib import Path
 
 import pytest
 
-from orchestration_harness.review_acceptance import (
-    ReviewAcceptance,
-    accept_review_artifact,
-)
+from orchestration_harness.review_acceptance import accept_review_artifact
 
 # ---------------------------------------------------------------------------
 # Helpers
@@ -32,18 +29,28 @@ def tmp_worktree(tmp_path: Path) -> Path:
     subprocess.run(["git", "init"], cwd=str(repo), check=True, capture_output=True)
     subprocess.run(
         ["git", "config", "user.email", "test@emr4.dev"],
-        cwd=str(repo), check=True, capture_output=True,
+        cwd=str(repo),
+        check=True,
+        capture_output=True,
     )
     subprocess.run(
         ["git", "config", "user.name", "Test Runner"],
-        cwd=str(repo), check=True, capture_output=True,
+        cwd=str(repo),
+        check=True,
+        capture_output=True,
     )
     (repo / "README.md").write_text("# worktree")
     subprocess.run(
-        ["git", "add", "README.md"], cwd=str(repo), check=True, capture_output=True,
+        ["git", "add", "README.md"],
+        cwd=str(repo),
+        check=True,
+        capture_output=True,
     )
     subprocess.run(
-        ["git", "commit", "-m", "initial"], cwd=str(repo), check=True, capture_output=True,
+        ["git", "commit", "-m", "initial"],
+        cwd=str(repo),
+        check=True,
+        capture_output=True,
     )
     return repo
 
@@ -52,14 +59,22 @@ def _commit_file(repo: Path, rel_path: str, content: str, msg: str) -> str:
     """Create a file, commit it, return the commit SHA."""
     full = repo / rel_path
     full.parent.mkdir(parents=True, exist_ok=True)
-    full.write_text(content)
-    subprocess.run(["git", "add", rel_path], cwd=str(repo), check=True, capture_output=True)
+    full.write_text(content, encoding="utf-8")
     subprocess.run(
-        ["git", "commit", "-m", msg], cwd=str(repo), check=True, capture_output=True,
+        ["git", "add", rel_path], cwd=str(repo), check=True, capture_output=True
+    )
+    subprocess.run(
+        ["git", "commit", "-m", msg],
+        cwd=str(repo),
+        check=True,
+        capture_output=True,
     )
     result = subprocess.run(
-        ["git", "rev-parse", "HEAD"], cwd=str(repo),
-        check=True, capture_output=True, text=True,
+        ["git", "rev-parse", "HEAD"],
+        cwd=str(repo),
+        check=True,
+        capture_output=True,
+        text=True,
     )
     return result.stdout.strip()
 
@@ -86,57 +101,101 @@ def _make_receipt(
     if extra:
         data.update(extra)
     p = root / "receipt.json"
-    p.write_text(json.dumps(data))
+    p.write_text(json.dumps(data), encoding="utf-8")
     return p
 
 
 def _make_artifact(root: Path, content: str, *, name: str = "artifact.md") -> Path:
     p = root / name
     p.parent.mkdir(parents=True, exist_ok=True)
-    p.write_text(content)
+    p.write_text(content, encoding="utf-8")
     return p
 
 
 def _make_collect_file(root: Path, content: str, *, name: str = "collect.txt") -> Path:
     p = root / name
     p.parent.mkdir(parents=True, exist_ok=True)
-    p.write_text(content)
+    p.write_text(content, encoding="utf-8")
     return p
 
 
 def _run_cli(*args: str) -> subprocess.CompletedProcess:
     """Run the CLI (sys.path bootstrap handles repo root)."""
-    script = Path(__file__).resolve().parent.parent / "scripts" / "ariadne_review_acceptance.py"
+    script = (
+        Path(__file__).resolve().parent.parent
+        / "scripts"
+        / "ariadne_review_acceptance.py"
+    )
     project_root = Path(__file__).resolve().parent.parent
     env = os.environ.copy()
     existing = env.get("PYTHONPATH", "")
     env["PYTHONPATH"] = str(project_root) + (os.pathsep + existing if existing else "")
     return subprocess.run(
         [sys.executable, str(script), *args],
-        capture_output=True, text=True, env=env,
+        capture_output=True,
+        text=True,
+        env=env,
     )
 
 
 def _get_branch(repo: Path) -> str:
     return subprocess.run(
-        ["git", "branch", "--show-current"], cwd=str(repo),
-        capture_output=True, text=True, check=True,
+        ["git", "branch", "--show-current"],
+        cwd=str(repo),
+        capture_output=True,
+        text=True,
+        check=True,
     ).stdout.strip()
 
 
 def _get_head(repo: Path) -> str:
     return subprocess.run(
-        ["git", "rev-parse", "HEAD"], cwd=str(repo),
-        capture_output=True, text=True, check=True,
+        ["git", "rev-parse", "HEAD"],
+        cwd=str(repo),
+        capture_output=True,
+        text=True,
+        check=True,
     ).stdout.strip()
+
+
+def _run_acceptance_cli(
+    *,
+    artifact: Path,
+    artifact_kind: str,
+    receipt: Path,
+    worktree: Path,
+    branch: str,
+    commit: str,
+    collect: Path,
+) -> subprocess.CompletedProcess:
+    return _run_cli(
+        "--artifact",
+        str(artifact),
+        "--artifact-kind",
+        artifact_kind,
+        "--receipt",
+        str(receipt),
+        "--worktree",
+        str(worktree),
+        "--expected-branch",
+        branch,
+        "--candidate-commit",
+        commit,
+        "--pytest-collect-output",
+        str(collect),
+        "--review-mode",
+        "executable",
+    )
 
 
 def _check_json_contract(output: dict):
     """Assert the JSON contract includes schema_version, status, artifact, and artifact_kind."""
     assert "schema_version" in output
-    assert output["schema_version"] == "ariadne.review_acceptance.v1"
+    assert output["schema_version"] == "ariadne.review_acceptance.v2"
+    assert output["accepted_semantics"] == "operation_authorized"
+    assert output["accepted"] is output["operation_authorized"]
     assert "status" in output
-    if output["accepted"]:
+    if output["operation_authorized"]:
         assert output["status"] == "accepted"
     else:
         assert output["status"] == "rejected"
@@ -145,6 +204,15 @@ def _check_json_contract(output: dict):
     assert output["artifact"] is not None
     assert "artifact_kind" in output, "missing artifact_kind in JSON contract"
     assert output["artifact_kind"] in ("decision", "completion")
+    for key in (
+        "artifact_path_validation",
+        "receipt_path_validation",
+        "pytest_collect_path_validation",
+    ):
+        assert output[key]["label"]
+        assert isinstance(output[key]["contained"], bool)
+        assert isinstance(output[key]["ordinary_file"], bool)
+        assert isinstance(output[key]["valid"], bool)
 
 
 # ===================================================================
@@ -165,13 +233,22 @@ class TestAcceptDecision:
         collect = _make_collect_file(tmp_worktree, "139 tests collected")
 
         result = accept_review_artifact(
-            artifact_path=art, artifact_kind="decision",
-            receipt_path=receipt, review_worktree=tmp_worktree,
-            expected_branch=branch, candidate_commit=commit,
-            pytest_collect_path=collect, review_mode="executable",
+            artifact_path=art,
+            artifact_kind="decision",
+            receipt_path=receipt,
+            review_worktree=tmp_worktree,
+            expected_branch=branch,
+            candidate_commit=commit,
+            pytest_collect_path=collect,
+            review_mode="executable",
         )
         assert result.accepted is True, f"reasons: {result.reasons}"
-        assert result.canonical_marker == "DECISION: pass"
+        assert result.artifact_valid is True
+        assert result.evidence_valid is True
+        assert result.review_verdict == "pass"
+        assert result.integration_authorized is True
+        assert result.operation_authorized is True
+        assert result.canonical_marker == "DECISION: PASS"
         assert result.receipt_cross_check == "passed"
         assert result.authoritative_pytest_count == 139
         assert result.scratch_outputs_ignored is True
@@ -191,13 +268,22 @@ class TestAcceptDecision:
         collect = _make_collect_file(tmp_worktree, "review/test_diary_smoke.py: 139")
 
         result = accept_review_artifact(
-            artifact_path=art, artifact_kind="completion",
-            receipt_path=receipt, review_worktree=tmp_worktree,
-            expected_branch=branch, candidate_commit=commit,
-            pytest_collect_path=collect, review_mode="static_evidence",
+            artifact_path=art,
+            artifact_kind="completion",
+            receipt_path=receipt,
+            review_worktree=tmp_worktree,
+            expected_branch=branch,
+            candidate_commit=commit,
+            pytest_collect_path=collect,
+            review_mode="static_evidence",
         )
         assert result.accepted is True, f"reasons: {result.reasons}"
-        assert result.canonical_marker == "STATUS: complete"
+        assert result.artifact_valid is True
+        assert result.evidence_valid is True
+        assert result.review_verdict is None
+        assert result.integration_authorized is False
+        assert result.operation_authorized is True
+        assert result.canonical_marker == "STATUS: COMPLETE"
         assert result.authoritative_pytest_count == 139
 
         # JSON contract
@@ -213,13 +299,17 @@ class TestAcceptDecision:
         collect = _make_collect_file(tmp_worktree, "5 tests collected")
 
         result = accept_review_artifact(
-            artifact_path=art, artifact_kind="decision",
-            receipt_path=receipt, review_worktree=tmp_worktree,
-            expected_branch=branch, candidate_commit=commit,
-            pytest_collect_path=collect, review_mode="executable",
+            artifact_path=art,
+            artifact_kind="decision",
+            receipt_path=receipt,
+            review_worktree=tmp_worktree,
+            expected_branch=branch,
+            candidate_commit=commit,
+            pytest_collect_path=collect,
+            review_mode="executable",
         )
         assert result.accepted is True, f"reasons: {result.reasons}"
-        assert result.canonical_marker == "DECISION: pass"
+        assert result.canonical_marker == "DECISION: PASS"
 
     def test_decision_pass_bold_table_cell(self, tmp_worktree: Path):
         """Bold decision marker inside a Markdown table cell is accepted."""
@@ -230,13 +320,17 @@ class TestAcceptDecision:
         collect = _make_collect_file(tmp_worktree, "5 tests collected")
 
         result = accept_review_artifact(
-            artifact_path=art, artifact_kind="decision",
-            receipt_path=receipt, review_worktree=tmp_worktree,
-            expected_branch=branch, candidate_commit=commit,
-            pytest_collect_path=collect, review_mode="executable",
+            artifact_path=art,
+            artifact_kind="decision",
+            receipt_path=receipt,
+            review_worktree=tmp_worktree,
+            expected_branch=branch,
+            candidate_commit=commit,
+            pytest_collect_path=collect,
+            review_mode="executable",
         )
         assert result.accepted is True
-        assert result.canonical_marker == "DECISION: pass"
+        assert result.canonical_marker == "DECISION: PASS"
 
     def test_completion_table_cell_backtick(self, tmp_worktree: Path):
         """Completion marker inside a Markdown table cell with backticks."""
@@ -247,13 +341,17 @@ class TestAcceptDecision:
         collect = _make_collect_file(tmp_worktree, "5 tests collected")
 
         result = accept_review_artifact(
-            artifact_path=art, artifact_kind="completion",
-            receipt_path=receipt, review_worktree=tmp_worktree,
-            expected_branch=branch, candidate_commit=commit,
-            pytest_collect_path=collect, review_mode="executable",
+            artifact_path=art,
+            artifact_kind="completion",
+            receipt_path=receipt,
+            review_worktree=tmp_worktree,
+            expected_branch=branch,
+            candidate_commit=commit,
+            pytest_collect_path=collect,
+            review_mode="executable",
         )
         assert result.accepted is True
-        assert result.canonical_marker == "STATUS: complete"
+        assert result.canonical_marker == "STATUS: COMPLETE"
 
     def test_decision_case_insensitive(self, tmp_worktree: Path):
         """Case-insensitive marker matching."""
@@ -264,13 +362,17 @@ class TestAcceptDecision:
         collect = _make_collect_file(tmp_worktree, "5 tests collected")
 
         result = accept_review_artifact(
-            artifact_path=art, artifact_kind="decision",
-            receipt_path=receipt, review_worktree=tmp_worktree,
-            expected_branch=branch, candidate_commit=commit,
-            pytest_collect_path=collect, review_mode="executable",
+            artifact_path=art,
+            artifact_kind="decision",
+            receipt_path=receipt,
+            review_worktree=tmp_worktree,
+            expected_branch=branch,
+            candidate_commit=commit,
+            pytest_collect_path=collect,
+            review_mode="executable",
         )
         assert result.accepted is True
-        assert result.canonical_marker == "DECISION: pass"
+        assert result.canonical_marker == "DECISION: PASS"
 
     def test_decision_underscore_formatting(self, tmp_worktree: Path):
         """Decision marker with underscore formatting."""
@@ -281,37 +383,44 @@ class TestAcceptDecision:
         collect = _make_collect_file(tmp_worktree, "5 tests collected")
 
         result = accept_review_artifact(
-            artifact_path=art, artifact_kind="decision",
-            receipt_path=receipt, review_worktree=tmp_worktree,
-            expected_branch=branch, candidate_commit=commit,
-            pytest_collect_path=collect, review_mode="executable",
+            artifact_path=art,
+            artifact_kind="decision",
+            receipt_path=receipt,
+            review_worktree=tmp_worktree,
+            expected_branch=branch,
+            candidate_commit=commit,
+            pytest_collect_path=collect,
+            review_mode="executable",
         )
         assert result.accepted is True
-        assert result.canonical_marker == "DECISION: pass"
+        assert result.canonical_marker == "DECISION: PASS"
 
     def test_decision_multi_column_row_accepted(self, tmp_worktree: Path):
         """Decision marker in a multi-column table row is accepted.
 
-        e.g.: | Verdict | **DECISION: pass** | Notes |
+        e.g.: | Verdict | **`DECISION: pass`** | Notes |
         This matches runner.mjs::validArtifact() behaviour.
         """
         branch = _get_branch(tmp_worktree)
         commit = _commit_file(tmp_worktree, "src/main.py", "mcr1", "add main")
         art = _make_artifact(
-            tmp_worktree,
-            "| Verdict | **DECISION: pass** | Notes |\n"
+            tmp_worktree, "| Verdict | **`DECISION: pass`** | Notes |\n"
         )
         receipt = _make_receipt(tmp_worktree, artifact_kind="decision")
         collect = _make_collect_file(tmp_worktree, "5 tests collected")
 
         result = accept_review_artifact(
-            artifact_path=art, artifact_kind="decision",
-            receipt_path=receipt, review_worktree=tmp_worktree,
-            expected_branch=branch, candidate_commit=commit,
-            pytest_collect_path=collect, review_mode="executable",
+            artifact_path=art,
+            artifact_kind="decision",
+            receipt_path=receipt,
+            review_worktree=tmp_worktree,
+            expected_branch=branch,
+            candidate_commit=commit,
+            pytest_collect_path=collect,
+            review_mode="executable",
         )
         assert result.accepted is True, f"reasons: {result.reasons}"
-        assert result.canonical_marker == "DECISION: pass"
+        assert result.canonical_marker == "DECISION: PASS"
 
     def test_completion_multi_column_row_accepted(self, tmp_worktree: Path):
         """Completion marker in a multi-column table row is accepted.
@@ -320,21 +429,22 @@ class TestAcceptDecision:
         """
         branch = _get_branch(tmp_worktree)
         commit = _commit_file(tmp_worktree, "src/main.py", "mcr2", "add main")
-        art = _make_artifact(
-            tmp_worktree,
-            "| Status | `STATUS: complete` | Notes |\n"
-        )
+        art = _make_artifact(tmp_worktree, "| Status | `STATUS: complete` | Notes |\n")
         receipt = _make_receipt(tmp_worktree, artifact_kind="completion")
         collect = _make_collect_file(tmp_worktree, "5 tests collected")
 
         result = accept_review_artifact(
-            artifact_path=art, artifact_kind="completion",
-            receipt_path=receipt, review_worktree=tmp_worktree,
-            expected_branch=branch, candidate_commit=commit,
-            pytest_collect_path=collect, review_mode="executable",
+            artifact_path=art,
+            artifact_kind="completion",
+            receipt_path=receipt,
+            review_worktree=tmp_worktree,
+            expected_branch=branch,
+            candidate_commit=commit,
+            pytest_collect_path=collect,
+            review_mode="executable",
         )
         assert result.accepted is True, f"reasons: {result.reasons}"
-        assert result.canonical_marker == "STATUS: complete"
+        assert result.canonical_marker == "STATUS: COMPLETE"
 
     def test_multi_column_wrong_kind_rejected(self, tmp_worktree: Path):
         """Completion-kind finds DECISION in multi-column row (wrong kind).
@@ -343,22 +453,23 @@ class TestAcceptDecision:
         """
         branch = _get_branch(tmp_worktree)
         commit = _commit_file(tmp_worktree, "src/main.py", "mcr3", "add main")
-        art = _make_artifact(
-            tmp_worktree,
-            "| Verdict | **DECISION: pass** | Notes |\n"
-        )
+        art = _make_artifact(tmp_worktree, "| Verdict | **DECISION: pass** | Notes |\n")
         receipt = _make_receipt(tmp_worktree, artifact_kind="completion")
         collect = _make_collect_file(tmp_worktree, "5 tests collected")
 
         result = accept_review_artifact(
-            artifact_path=art, artifact_kind="completion",
-            receipt_path=receipt, review_worktree=tmp_worktree,
-            expected_branch=branch, candidate_commit=commit,
-            pytest_collect_path=collect, review_mode="executable",
+            artifact_path=art,
+            artifact_kind="completion",
+            receipt_path=receipt,
+            review_worktree=tmp_worktree,
+            expected_branch=branch,
+            candidate_commit=commit,
+            pytest_collect_path=collect,
+            review_mode="executable",
         )
         assert result.accepted is False
-        assert any("STATUS: complete" in r for r in result.reasons), (
-            f"expected STATUS: complete rejection, got {result.reasons}"
+        assert any("STATUS: COMPLETE" in r for r in result.reasons), (
+            f"expected STATUS: COMPLETE rejection, got {result.reasons}"
         )
 
 
@@ -372,13 +483,137 @@ class TestRejectDecision:
         collect = _make_collect_file(tmp_worktree, "1 test collected")
 
         result = accept_review_artifact(
-            artifact_path=art, artifact_kind="decision",
-            receipt_path=receipt, review_worktree=tmp_worktree,
-            expected_branch=branch, candidate_commit=commit,
-            pytest_collect_path=collect, review_mode="executable",
+            artifact_path=art,
+            artifact_kind="decision",
+            receipt_path=receipt,
+            review_worktree=tmp_worktree,
+            expected_branch=branch,
+            candidate_commit=commit,
+            pytest_collect_path=collect,
+            review_mode="executable",
         )
-        assert result.canonical_marker == "DECISION: revision_required"
-        assert result.accepted is True
+        assert result.artifact_valid is True
+        assert result.evidence_valid is True
+        assert result.review_verdict == "revision_required"
+        assert result.canonical_marker == "DECISION: REVISION_REQUIRED"
+        assert result.integration_authorized is False
+        assert result.operation_authorized is False
+        assert result.accepted is False
+        assert result.reasons == []
+        output = json.loads(result.to_json())
+        _check_json_contract(output)
+        assert output["accepted"] is False
+        assert output["accepted"] is output["operation_authorized"]
+
+    def test_pass_with_malformed_receipt_has_no_authority(self, tmp_worktree: Path):
+        branch = _get_branch(tmp_worktree)
+        commit = _commit_file(tmp_worktree, "src/main.py", "bad-receipt", "add main")
+        art = _make_artifact(tmp_worktree, "DECISION: PASS\n")
+        receipt = _make_receipt(tmp_worktree, artifact_kind="decision", status="failed")
+        collect = _make_collect_file(tmp_worktree, "5 tests collected")
+
+        result = accept_review_artifact(
+            artifact_path=art,
+            artifact_kind="decision",
+            receipt_path=receipt,
+            review_worktree=tmp_worktree,
+            expected_branch=branch,
+            candidate_commit=commit,
+            pytest_collect_path=collect,
+            review_mode="executable",
+        )
+
+        assert result.artifact_valid is True
+        assert result.evidence_valid is False
+        assert result.review_verdict == "pass"
+        assert result.integration_authorized is False
+        assert result.operation_authorized is False
+
+    @pytest.mark.parametrize(
+        "body",
+        [
+            "DECISION: PASS\nDECISION: PASS\n",
+            "DECISION: PASS\nDECISION: REVISION_REQUIRED\n",
+            "DECISION: PASS\n" + "\n".join(f"evidence {index}" for index in range(9)),
+            "DECISION: INCONCLUSIVE\n",
+        ],
+    )
+    def test_invalid_decision_marker_forms_never_authorize(
+        self, tmp_worktree: Path, body: str
+    ):
+        branch = _get_branch(tmp_worktree)
+        commit = _commit_file(tmp_worktree, "src/main.py", "invalid-marker", "add main")
+        art = _make_artifact(tmp_worktree, body)
+        receipt = _make_receipt(tmp_worktree, artifact_kind="decision")
+        collect = _make_collect_file(tmp_worktree, "5 tests collected")
+
+        result = accept_review_artifact(
+            artifact_path=art,
+            artifact_kind="decision",
+            receipt_path=receipt,
+            review_worktree=tmp_worktree,
+            expected_branch=branch,
+            candidate_commit=commit,
+            pytest_collect_path=collect,
+            review_mode="executable",
+        )
+
+        assert result.artifact_valid is False
+        assert result.evidence_valid is True
+        assert result.integration_authorized is False
+        assert result.operation_authorized is False
+
+    @pytest.mark.parametrize("indentation", [" ", "  ", "   "])
+    def test_api_and_cli_reject_early_pass_followed_by_indented_visible_lines(
+        self, tmp_worktree: Path, indentation: str
+    ) -> None:
+        branch = _get_branch(tmp_worktree)
+        commit = _commit_file(
+            tmp_worktree, "src/main.py", f"terminal-{len(indentation)}", "add main"
+        )
+        body = "DECISION: PASS\n" + "\n".join(
+            f"{indentation}visible evidence line {index}" for index in range(9)
+        )
+        art = _make_artifact(tmp_worktree, body)
+        receipt = _make_receipt(tmp_worktree, artifact_kind="decision")
+        collect = _make_collect_file(tmp_worktree, "5 tests collected")
+
+        result = accept_review_artifact(
+            artifact_path=art,
+            artifact_kind="decision",
+            receipt_path=receipt,
+            review_worktree=tmp_worktree,
+            expected_branch=branch,
+            candidate_commit=commit,
+            pytest_collect_path=collect,
+            review_mode="executable",
+        )
+
+        assert result.artifact_valid is False
+        assert result.artifact_reason_code == "terminal_marker_not_near_artifact_end"
+        assert result.review_verdict is None
+        assert result.evidence_valid is True
+        assert result.integration_authorized is False
+        assert result.operation_authorized is False
+
+        cli = _run_acceptance_cli(
+            artifact=art,
+            artifact_kind="decision",
+            receipt=receipt,
+            worktree=tmp_worktree,
+            branch=branch,
+            commit=commit,
+            collect=collect,
+        )
+        assert cli.returncode == 1, cli.stderr
+        output = json.loads(cli.stdout)
+        assert output["artifact_valid"] is False
+        assert output["artifact_reason_code"] == (
+            "terminal_marker_not_near_artifact_end"
+        )
+        assert output["review_verdict"] is None
+        assert output["integration_authorized"] is False
+        assert output["operation_authorized"] is False
 
     def test_verdict_only_rejected(self, tmp_worktree: Path):
         """VERDICT without DECISION is rejected."""
@@ -389,10 +624,14 @@ class TestRejectDecision:
         collect = _make_collect_file(tmp_worktree, "5 tests collected")
 
         result = accept_review_artifact(
-            artifact_path=art, artifact_kind="decision",
-            receipt_path=receipt, review_worktree=tmp_worktree,
-            expected_branch=branch, candidate_commit=commit,
-            pytest_collect_path=collect, review_mode="executable",
+            artifact_path=art,
+            artifact_kind="decision",
+            receipt_path=receipt,
+            review_worktree=tmp_worktree,
+            expected_branch=branch,
+            candidate_commit=commit,
+            pytest_collect_path=collect,
+            review_mode="executable",
         )
         assert result.accepted is False
         assert any("VERDICT" in r for r in result.reasons)
@@ -406,13 +645,17 @@ class TestRejectDecision:
         collect = _make_collect_file(tmp_worktree, "10 tests collected")
 
         result = accept_review_artifact(
-            artifact_path=art, artifact_kind="completion",
-            receipt_path=receipt, review_worktree=tmp_worktree,
-            expected_branch=branch, candidate_commit=commit,
-            pytest_collect_path=collect, review_mode="executable",
+            artifact_path=art,
+            artifact_kind="completion",
+            receipt_path=receipt,
+            review_worktree=tmp_worktree,
+            expected_branch=branch,
+            candidate_commit=commit,
+            pytest_collect_path=collect,
+            review_mode="executable",
         )
         assert result.accepted is False
-        assert any("STATUS: complete" in r for r in result.reasons)
+        assert any("STATUS: COMPLETE" in r for r in result.reasons)
 
     def test_wrong_kind_table_cell(self, tmp_worktree: Path):
         """Completion-kind with DECISION in table cell (wrong kind) fails."""
@@ -423,13 +666,17 @@ class TestRejectDecision:
         collect = _make_collect_file(tmp_worktree, "10 tests collected")
 
         result = accept_review_artifact(
-            artifact_path=art, artifact_kind="completion",
-            receipt_path=receipt, review_worktree=tmp_worktree,
-            expected_branch=branch, candidate_commit=commit,
-            pytest_collect_path=collect, review_mode="executable",
+            artifact_path=art,
+            artifact_kind="completion",
+            receipt_path=receipt,
+            review_worktree=tmp_worktree,
+            expected_branch=branch,
+            candidate_commit=commit,
+            pytest_collect_path=collect,
+            review_mode="executable",
         )
         assert result.accepted is False
-        assert any("STATUS: complete" in r for r in result.reasons)
+        assert any("STATUS: COMPLETE" in r for r in result.reasons)
 
     def test_receipt_status_mismatch(self, tmp_worktree: Path):
         """Receipt with wrong status is rejected."""
@@ -440,10 +687,14 @@ class TestRejectDecision:
         collect = _make_collect_file(tmp_worktree, "3 tests collected")
 
         result = accept_review_artifact(
-            artifact_path=art, artifact_kind="completion",
-            receipt_path=receipt, review_worktree=tmp_worktree,
-            expected_branch=branch, candidate_commit=commit,
-            pytest_collect_path=collect, review_mode="executable",
+            artifact_path=art,
+            artifact_kind="completion",
+            receipt_path=receipt,
+            review_worktree=tmp_worktree,
+            expected_branch=branch,
+            candidate_commit=commit,
+            pytest_collect_path=collect,
+            review_mode="executable",
         )
         assert result.accepted is False
         assert any("status" in r for r in result.reasons)
@@ -457,10 +708,14 @@ class TestRejectDecision:
         collect = _make_collect_file(tmp_worktree, "3 tests collected")
 
         result = accept_review_artifact(
-            artifact_path=art, artifact_kind="completion",
-            receipt_path=receipt, review_worktree=tmp_worktree,
-            expected_branch=branch, candidate_commit=commit,
-            pytest_collect_path=collect, review_mode="executable",
+            artifact_path=art,
+            artifact_kind="completion",
+            receipt_path=receipt,
+            review_worktree=tmp_worktree,
+            expected_branch=branch,
+            candidate_commit=commit,
+            pytest_collect_path=collect,
+            review_mode="executable",
         )
         assert result.accepted is False
         assert any("artifact_kind" in r for r in result.reasons)
@@ -474,10 +729,14 @@ class TestRejectDecision:
         collect = _make_collect_file(tmp_worktree, "3 tests collected")
 
         result = accept_review_artifact(
-            artifact_path=art, artifact_kind="completion",
-            receipt_path=receipt, review_worktree=tmp_worktree,
-            expected_branch=branch, candidate_commit=commit,
-            pytest_collect_path=collect, review_mode="executable",
+            artifact_path=art,
+            artifact_kind="completion",
+            receipt_path=receipt,
+            review_worktree=tmp_worktree,
+            expected_branch=branch,
+            candidate_commit=commit,
+            pytest_collect_path=collect,
+            review_mode="executable",
         )
         assert result.accepted is False
         assert any("artifact_observed" in r for r in result.reasons)
@@ -491,10 +750,14 @@ class TestRejectDecision:
         collect = _make_collect_file(tmp_worktree, "3 tests collected")
 
         result = accept_review_artifact(
-            artifact_path=art, artifact_kind="completion",
-            receipt_path=receipt, review_worktree=tmp_worktree,
-            expected_branch=branch, candidate_commit=commit,
-            pytest_collect_path=collect, review_mode="executable",
+            artifact_path=art,
+            artifact_kind="completion",
+            receipt_path=receipt,
+            review_worktree=tmp_worktree,
+            expected_branch=branch,
+            candidate_commit=commit,
+            pytest_collect_path=collect,
+            review_mode="executable",
         )
         assert result.accepted is False
         assert any("permission_prompt_observed" in r for r in result.reasons)
@@ -508,10 +771,14 @@ class TestRejectDecision:
         collect = _make_collect_file(tmp_worktree, "3 tests collected")
 
         result = accept_review_artifact(
-            artifact_path=art, artifact_kind="completion",
-            receipt_path=receipt, review_worktree=tmp_worktree,
-            expected_branch=branch, candidate_commit=commit,
-            pytest_collect_path=collect, review_mode="executable",
+            artifact_path=art,
+            artifact_kind="completion",
+            receipt_path=receipt,
+            review_worktree=tmp_worktree,
+            expected_branch=branch,
+            candidate_commit=commit,
+            pytest_collect_path=collect,
+            review_mode="executable",
         )
         assert result.accepted is False
         assert any("process_cleanup_confirmed" in r for r in result.reasons)
@@ -527,10 +794,14 @@ class TestRejectDecision:
         collect = _make_collect_file(tmp_worktree, "5 tests collected")
 
         result = accept_review_artifact(
-            artifact_path=art, artifact_kind="completion",
-            receipt_path=receipt, review_worktree=tmp_worktree,
-            expected_branch=branch, candidate_commit=commit,
-            pytest_collect_path=collect, review_mode="executable",
+            artifact_path=art,
+            artifact_kind="completion",
+            receipt_path=receipt,
+            review_worktree=tmp_worktree,
+            expected_branch=branch,
+            candidate_commit=commit,
+            pytest_collect_path=collect,
+            review_mode="executable",
         )
         assert result.accepted is False
         assert any("must be an object" in r for r in result.reasons)
@@ -545,10 +816,14 @@ class TestRejectDecision:
         collect = _make_collect_file(tmp_worktree, "5 tests collected")
 
         result = accept_review_artifact(
-            artifact_path=art, artifact_kind="completion",
-            receipt_path=receipt, review_worktree=tmp_worktree,
-            expected_branch=branch, candidate_commit=commit,
-            pytest_collect_path=collect, review_mode="executable",
+            artifact_path=art,
+            artifact_kind="completion",
+            receipt_path=receipt,
+            review_worktree=tmp_worktree,
+            expected_branch=branch,
+            candidate_commit=commit,
+            pytest_collect_path=collect,
+            review_mode="executable",
         )
         assert result.accepted is False
         assert any("must be an object" in r for r in result.reasons)
@@ -564,10 +839,14 @@ class TestBranchAncestry:
         collect = _make_collect_file(tmp_worktree, "5 tests collected")
 
         result = accept_review_artifact(
-            artifact_path=art, artifact_kind="completion",
-            receipt_path=receipt, review_worktree=tmp_worktree,
-            expected_branch="nonexistent-branch", candidate_commit=head,
-            pytest_collect_path=collect, review_mode="executable",
+            artifact_path=art,
+            artifact_kind="completion",
+            receipt_path=receipt,
+            review_worktree=tmp_worktree,
+            expected_branch="nonexistent-branch",
+            candidate_commit=head,
+            pytest_collect_path=collect,
+            review_mode="executable",
         )
         assert result.accepted is False
         assert any("branch" in r.lower() for r in result.reasons)
@@ -577,15 +856,31 @@ class TestBranchAncestry:
         branch = _get_branch(tmp_worktree)
         orphan = tmp_path / "orphan"
         orphan.mkdir(parents=True, exist_ok=True)
-        subprocess.run(["git", "init"], cwd=str(orphan), check=True, capture_output=True)
-        subprocess.run(["git", "config", "user.email", "t@t.com"],
-                       cwd=str(orphan), check=True, capture_output=True)
-        subprocess.run(["git", "config", "user.name", "T"],
-                       cwd=str(orphan), check=True, capture_output=True)
+        subprocess.run(
+            ["git", "init"], cwd=str(orphan), check=True, capture_output=True
+        )
+        subprocess.run(
+            ["git", "config", "user.email", "t@t.com"],
+            cwd=str(orphan),
+            check=True,
+            capture_output=True,
+        )
+        subprocess.run(
+            ["git", "config", "user.name", "T"],
+            cwd=str(orphan),
+            check=True,
+            capture_output=True,
+        )
         (orphan / "f.txt").write_text("orphan")
-        subprocess.run(["git", "add", "f.txt"], cwd=str(orphan), check=True, capture_output=True)
-        subprocess.run(["git", "commit", "-m", "orphan"],
-                       cwd=str(orphan), check=True, capture_output=True)
+        subprocess.run(
+            ["git", "add", "f.txt"], cwd=str(orphan), check=True, capture_output=True
+        )
+        subprocess.run(
+            ["git", "commit", "-m", "orphan"],
+            cwd=str(orphan),
+            check=True,
+            capture_output=True,
+        )
         orphan_commit = _get_head(orphan)
 
         art = _make_artifact(tmp_worktree, "STATUS: complete\n")
@@ -593,14 +888,22 @@ class TestBranchAncestry:
         collect = _make_collect_file(tmp_worktree, "5 tests collected")
 
         result = accept_review_artifact(
-            artifact_path=art, artifact_kind="completion",
-            receipt_path=receipt, review_worktree=tmp_worktree,
-            expected_branch=branch, candidate_commit=orphan_commit,
-            pytest_collect_path=collect, review_mode="executable",
+            artifact_path=art,
+            artifact_kind="completion",
+            receipt_path=receipt,
+            review_worktree=tmp_worktree,
+            expected_branch=branch,
+            candidate_commit=orphan_commit,
+            pytest_collect_path=collect,
+            review_mode="executable",
         )
         assert result.accepted is False
-        assert any("ancestor" in r.lower() or "ancestry check" in r.lower()
-                   or "error" in r.lower() for r in result.reasons)
+        assert any(
+            "ancestor" in r.lower()
+            or "ancestry check" in r.lower()
+            or "error" in r.lower()
+            for r in result.reasons
+        )
 
 
 # ===================================================================
@@ -611,7 +914,9 @@ class TestBranchAncestry:
 
 
 class TestPathBoundaries:
-    def test_artifact_outside_worktree_rejected(self, tmp_worktree: Path, tmp_path: Path):
+    def test_artifact_outside_worktree_rejected(
+        self, tmp_worktree: Path, tmp_path: Path
+    ):
         """Artifact path outside the worktree is rejected."""
         branch = _get_branch(tmp_worktree)
         commit = _commit_file(tmp_worktree, "src/main.py", "x", "add main")
@@ -620,10 +925,14 @@ class TestPathBoundaries:
         collect = _make_collect_file(tmp_worktree, "5 tests collected")
 
         result = accept_review_artifact(
-            artifact_path=art, artifact_kind="completion",
-            receipt_path=receipt, review_worktree=tmp_worktree,
-            expected_branch=branch, candidate_commit=commit,
-            pytest_collect_path=collect, review_mode="executable",
+            artifact_path=art,
+            artifact_kind="completion",
+            receipt_path=receipt,
+            review_worktree=tmp_worktree,
+            expected_branch=branch,
+            candidate_commit=commit,
+            pytest_collect_path=collect,
+            review_mode="executable",
         )
         assert result.accepted is False
         assert any("outside" in r.lower() for r in result.reasons)
@@ -637,10 +946,14 @@ class TestPathBoundaries:
         collect = _make_collect_file(tmp_worktree, "5 tests collected")
 
         result = accept_review_artifact(
-            artifact_path=missing, artifact_kind="completion",
-            receipt_path=receipt, review_worktree=tmp_worktree,
-            expected_branch=branch, candidate_commit=commit,
-            pytest_collect_path=collect, review_mode="executable",
+            artifact_path=missing,
+            artifact_kind="completion",
+            receipt_path=receipt,
+            review_worktree=tmp_worktree,
+            expected_branch=branch,
+            candidate_commit=commit,
+            pytest_collect_path=collect,
+            review_mode="executable",
         )
         assert result.accepted is False
         assert any("not an ordinary file" in r.lower() for r in result.reasons)
@@ -656,12 +969,242 @@ class TestPathBoundaries:
         collect = _make_collect_file(tmp_worktree, "5 tests collected")
 
         result = accept_review_artifact(
-            artifact_path=art, artifact_kind="completion",
-            receipt_path=receipt, review_worktree=tmp_worktree,
-            expected_branch=branch, candidate_commit=commit,
-            pytest_collect_path=collect, review_mode="executable",
+            artifact_path=art,
+            artifact_kind="completion",
+            receipt_path=receipt,
+            review_worktree=tmp_worktree,
+            expected_branch=branch,
+            candidate_commit=commit,
+            pytest_collect_path=collect,
+            review_mode="executable",
         )
         assert result.accepted is False
+
+
+class TestStructuredInvalidEvidence:
+    @pytest.mark.parametrize(
+        "invalid_case",
+        [
+            "outside_artifact",
+            "outside_receipt",
+            "outside_collect",
+            "invalid_utf8_artifact",
+            "invalid_utf8_receipt",
+            "invalid_utf8_collect",
+        ],
+    )
+    def test_api_and_cli_return_structured_rejection_and_exit_1(
+        self, invalid_case: str, tmp_worktree: Path, tmp_path: Path
+    ) -> None:
+        branch = _get_branch(tmp_worktree)
+        commit = _commit_file(tmp_worktree, "src/main.py", invalid_case, "evidence")
+        art = _make_artifact(tmp_worktree, "STATUS: COMPLETE\n")
+        receipt = _make_receipt(tmp_worktree)
+        collect = _make_collect_file(tmp_worktree, "5 tests collected")
+
+        surface = invalid_case.removeprefix("outside_").removeprefix("invalid_utf8_")
+        if invalid_case == "outside_artifact":
+            art = _make_artifact(
+                tmp_path, "STATUS: COMPLETE\n", name="outside-artifact.md"
+            )
+        elif invalid_case == "outside_receipt":
+            receipt = _make_receipt(tmp_path)
+        elif invalid_case == "outside_collect":
+            collect = _make_collect_file(
+                tmp_path, "5 tests collected", name="outside-collect.txt"
+            )
+        elif invalid_case == "invalid_utf8_artifact":
+            art.write_bytes(b"\xff\xfeDECISION")
+        elif invalid_case == "invalid_utf8_receipt":
+            receipt.write_bytes(b"\xff\xfe{")
+        else:
+            collect.write_bytes(b"\xff\xfe5")
+
+        result = accept_review_artifact(
+            artifact_path=art,
+            artifact_kind="completion",
+            receipt_path=receipt,
+            review_worktree=tmp_worktree,
+            expected_branch=branch,
+            candidate_commit=commit,
+            pytest_collect_path=collect,
+            review_mode="executable",
+        )
+
+        validation = getattr(
+            result,
+            {
+                "artifact": "artifact_path_validation",
+                "receipt": "receipt_path_validation",
+                "collect": "pytest_collect_path_validation",
+            }[surface],
+        )
+        assert result.evidence_valid is False
+        assert result.operation_authorized is False
+        assert result.integration_authorized is False
+        if surface == "artifact":
+            assert result.artifact_valid is False
+        else:
+            assert result.artifact_valid is True
+        if invalid_case.startswith("outside_"):
+            assert validation.contained is False
+            assert validation.valid is False
+            assert any("outside" in reason.lower() for reason in result.reasons)
+        else:
+            assert validation.contained is True
+            assert validation.ordinary_file is True
+            assert validation.valid is True
+            assert any("decode" in reason.lower() for reason in result.reasons)
+
+        cli = _run_acceptance_cli(
+            artifact=art,
+            artifact_kind="completion",
+            receipt=receipt,
+            worktree=tmp_worktree,
+            branch=branch,
+            commit=commit,
+            collect=collect,
+        )
+        assert cli.returncode == 1, cli.stderr
+        output = json.loads(cli.stdout)
+        assert output["evidence_valid"] is False
+        assert output["operation_authorized"] is False
+        assert output["integration_authorized"] is False
+
+
+class TestHostileMarkerContexts:
+    @pytest.mark.parametrize(
+        ("body", "kind", "reason_code"),
+        [
+            (
+                "Example:\n```text\nDECISION: PASS\n```",
+                "decision",
+                "non_authoritative_marker_context",
+            ),
+            (
+                "~~~text\nSTATUS: COMPLETE\n~~~",
+                "completion",
+                "non_authoritative_marker_context",
+            ),
+            (
+                "    DECISION: PASS",
+                "decision",
+                "non_authoritative_marker_context",
+            ),
+            (
+                "Human-visible revision required.\n<!-- DECISION: PASS -->",
+                "decision",
+                "non_authoritative_marker_context",
+            ),
+            (
+                "DECISION: PASS\n<!-- DECISION: REVISION_REQUIRED -->",
+                "decision",
+                "non_authoritative_marker_context",
+            ),
+            (
+                "DECISION: REVISION_REQUIRED\n```\nDECISION: PASS\n```",
+                "decision",
+                "non_authoritative_marker_context",
+            ),
+            (
+                "Example: `left | DECISION: PASS | right`",
+                "decision",
+                "non_authoritative_marker_context",
+            ),
+            (
+                "> | DECISION: PASS |",
+                "decision",
+                "non_authoritative_marker_context",
+            ),
+            (
+                "- | DECISION: PASS |",
+                "decision",
+                "non_authoritative_marker_context",
+            ),
+            (
+                "not a table | DECISION: PASS | quoted example",
+                "decision",
+                "non_authoritative_marker_context",
+            ),
+            (
+                r"\| DECISION: PASS \|",
+                "decision",
+                "non_authoritative_marker_context",
+            ),
+            (
+                "DECISION: PASS\nExample: `left | DECISION: REVISION_REQUIRED | right`",
+                "decision",
+                "non_authoritative_marker_context",
+            ),
+            (
+                "DECISION: PASS\n> | DECISION: REVISION_REQUIRED |",
+                "decision",
+                "non_authoritative_marker_context",
+            ),
+            (
+                "DECISION: PASS\n- | DECISION: REVISION_REQUIRED |",
+                "decision",
+                "non_authoritative_marker_context",
+            ),
+            (
+                "DECISION: PASS\n"
+                "not a table | DECISION: REVISION_REQUIRED | quoted example",
+                "decision",
+                "non_authoritative_marker_context",
+            ),
+            (
+                "DECISION: PASS\n" + r"\| DECISION: REVISION_REQUIRED \|",
+                "decision",
+                "non_authoritative_marker_context",
+            ),
+            ("DECISıON: PASS", "decision", "non_ascii_marker_lexeme"),
+            ("ſTATUS: COMPLETE", "completion", "non_ascii_marker_lexeme"),
+        ],
+    )
+    def test_api_and_cli_never_authorize_hidden_or_non_ascii_markers(
+        self,
+        body: str,
+        kind: str,
+        reason_code: str,
+        tmp_worktree: Path,
+    ) -> None:
+        branch = _get_branch(tmp_worktree)
+        commit = _commit_file(tmp_worktree, "src/main.py", body, "marker case")
+        art = _make_artifact(tmp_worktree, body)
+        receipt = _make_receipt(tmp_worktree, artifact_kind=kind)
+        collect = _make_collect_file(tmp_worktree, "5 tests collected")
+
+        result = accept_review_artifact(
+            artifact_path=art,
+            artifact_kind=kind,
+            receipt_path=receipt,
+            review_worktree=tmp_worktree,
+            expected_branch=branch,
+            candidate_commit=commit,
+            pytest_collect_path=collect,
+            review_mode="executable",
+        )
+
+        assert result.artifact_valid is False
+        assert result.evidence_valid is True
+        assert result.integration_authorized is False
+        assert result.operation_authorized is False
+        assert result.artifact_reason_code == reason_code
+
+        cli = _run_acceptance_cli(
+            artifact=art,
+            artifact_kind=kind,
+            receipt=receipt,
+            worktree=tmp_worktree,
+            branch=branch,
+            commit=commit,
+            collect=collect,
+        )
+        assert cli.returncode == 1, cli.stderr
+        output = json.loads(cli.stdout)
+        assert output["artifact_valid"] is False
+        assert output["integration_authorized"] is False
+        assert output["operation_authorized"] is False
 
 
 class TestWorktreeRelativePaths:
@@ -675,14 +1218,20 @@ class TestWorktreeRelativePaths:
 
         # Pass relative path "sub/artifact.md"
         result = accept_review_artifact(
-            artifact_path="sub/artifact.md", artifact_kind="completion",
-            receipt_path=receipt, review_worktree=tmp_worktree,
-            expected_branch=branch, candidate_commit=commit,
-            pytest_collect_path=collect, review_mode="executable",
+            artifact_path="sub/artifact.md",
+            artifact_kind="completion",
+            receipt_path=receipt,
+            review_worktree=tmp_worktree,
+            expected_branch=branch,
+            candidate_commit=commit,
+            pytest_collect_path=collect,
+            review_mode="executable",
         )
         assert result.accepted is True, f"reasons: {result.reasons}"
 
-    def test_relative_artifact_from_different_cwd(self, tmp_worktree: Path, tmp_path: Path):
+    def test_relative_artifact_from_different_cwd(
+        self, tmp_worktree: Path, tmp_path: Path
+    ):
         """Relative paths are resolved against worktree, not caller cwd."""
         branch = _get_branch(tmp_worktree)
         commit = _commit_file(tmp_worktree, "src/main.py", "rp2", "add main")
@@ -698,10 +1247,14 @@ class TestWorktreeRelativePaths:
         try:
             os.chdir(str(other_dir))
             result = accept_review_artifact(
-                artifact_path="sub/artifact.md", artifact_kind="completion",
-                receipt_path=receipt, review_worktree=tmp_worktree,
-                expected_branch=branch, candidate_commit=commit,
-                pytest_collect_path=collect, review_mode="executable",
+                artifact_path="sub/artifact.md",
+                artifact_kind="completion",
+                receipt_path=receipt,
+                review_worktree=tmp_worktree,
+                expected_branch=branch,
+                candidate_commit=commit,
+                pytest_collect_path=collect,
+                review_mode="executable",
             )
         finally:
             os.chdir(str(old_cwd))
@@ -716,9 +1269,12 @@ class TestWorktreeRelativePaths:
         _make_receipt(tmp_worktree)  # creates receipt.json in worktree
 
         result = accept_review_artifact(
-            artifact_path=art, artifact_kind="completion",
-            receipt_path="receipt.json", review_worktree=tmp_worktree,
-            expected_branch=branch, candidate_commit=commit,
+            artifact_path=art,
+            artifact_kind="completion",
+            receipt_path="receipt.json",
+            review_worktree=tmp_worktree,
+            expected_branch=branch,
+            candidate_commit=commit,
             pytest_collect_path=_make_collect_file(tmp_worktree, "5 tests collected"),
             review_mode="executable",
         )
@@ -733,10 +1289,14 @@ class TestWorktreeRelativePaths:
         _make_collect_file(tmp_worktree, "5 tests collected")  # creates collect.txt
 
         result = accept_review_artifact(
-            artifact_path=art, artifact_kind="completion",
-            receipt_path=receipt, review_worktree=tmp_worktree,
-            expected_branch=branch, candidate_commit=commit,
-            pytest_collect_path="collect.txt", review_mode="executable",
+            artifact_path=art,
+            artifact_kind="completion",
+            receipt_path=receipt,
+            review_worktree=tmp_worktree,
+            expected_branch=branch,
+            candidate_commit=commit,
+            pytest_collect_path="collect.txt",
+            review_mode="executable",
         )
         assert result.accepted is True, f"reasons: {result.reasons}"
 
@@ -751,10 +1311,14 @@ class TestPytestCollection:
         collect = _make_collect_file(tmp_worktree, "1 test collected")
 
         result = accept_review_artifact(
-            artifact_path=art, artifact_kind="completion",
-            receipt_path=receipt, review_worktree=tmp_worktree,
-            expected_branch=branch, candidate_commit=commit,
-            pytest_collect_path=collect, review_mode="executable",
+            artifact_path=art,
+            artifact_kind="completion",
+            receipt_path=receipt,
+            review_worktree=tmp_worktree,
+            expected_branch=branch,
+            candidate_commit=commit,
+            pytest_collect_path=collect,
+            review_mode="executable",
         )
         assert result.accepted is True
         assert result.authoritative_pytest_count == 1
@@ -768,10 +1332,14 @@ class TestPytestCollection:
         collect = _make_collect_file(tmp_worktree, "review/test_diary_smoke.py: 139")
 
         result = accept_review_artifact(
-            artifact_path=art, artifact_kind="completion",
-            receipt_path=receipt, review_worktree=tmp_worktree,
-            expected_branch=branch, candidate_commit=commit,
-            pytest_collect_path=collect, review_mode="executable",
+            artifact_path=art,
+            artifact_kind="completion",
+            receipt_path=receipt,
+            review_worktree=tmp_worktree,
+            expected_branch=branch,
+            candidate_commit=commit,
+            pytest_collect_path=collect,
+            review_mode="executable",
         )
         assert result.accepted is True
         assert result.authoritative_pytest_count == 139
@@ -785,10 +1353,14 @@ class TestPytestCollection:
         missing = tmp_worktree / "does_not_exist.txt"
 
         result = accept_review_artifact(
-            artifact_path=art, artifact_kind="completion",
-            receipt_path=receipt, review_worktree=tmp_worktree,
-            expected_branch=branch, candidate_commit=commit,
-            pytest_collect_path=missing, review_mode="executable",
+            artifact_path=art,
+            artifact_kind="completion",
+            receipt_path=receipt,
+            review_worktree=tmp_worktree,
+            expected_branch=branch,
+            candidate_commit=commit,
+            pytest_collect_path=missing,
+            review_mode="executable",
         )
         assert result.accepted is False
         assert any("read error" in r.lower() for r in result.reasons)
@@ -802,10 +1374,14 @@ class TestPytestCollection:
         collect = _make_collect_file(tmp_worktree, "0 tests collected")
 
         result = accept_review_artifact(
-            artifact_path=art, artifact_kind="completion",
-            receipt_path=receipt, review_worktree=tmp_worktree,
-            expected_branch=branch, candidate_commit=commit,
-            pytest_collect_path=collect, review_mode="executable",
+            artifact_path=art,
+            artifact_kind="completion",
+            receipt_path=receipt,
+            review_worktree=tmp_worktree,
+            expected_branch=branch,
+            candidate_commit=commit,
+            pytest_collect_path=collect,
+            review_mode="executable",
         )
         assert result.accepted is False
         assert result.authoritative_pytest_count is None
@@ -821,10 +1397,14 @@ class TestPytestCollection:
         )
 
         result = accept_review_artifact(
-            artifact_path=art, artifact_kind="completion",
-            receipt_path=receipt, review_worktree=tmp_worktree,
-            expected_branch=branch, candidate_commit=commit,
-            pytest_collect_path=collect, review_mode="executable",
+            artifact_path=art,
+            artifact_kind="completion",
+            receipt_path=receipt,
+            review_worktree=tmp_worktree,
+            expected_branch=branch,
+            candidate_commit=commit,
+            pytest_collect_path=collect,
+            review_mode="executable",
         )
         assert result.accepted is False
         assert result.authoritative_pytest_count is None
@@ -839,14 +1419,19 @@ class TestPytestCollection:
         # Create collect file with spaces in the path
         spaced_dir = tmp_worktree / "my collect"
         spaced_dir.mkdir(parents=True, exist_ok=True)
-        collect = _make_collect_file(spaced_dir, "5 tests collected",
-                                      name="output collection.txt")
+        collect = _make_collect_file(
+            spaced_dir, "5 tests collected", name="output collection.txt"
+        )
 
         result = accept_review_artifact(
-            artifact_path=art, artifact_kind="completion",
-            receipt_path=receipt, review_worktree=tmp_worktree,
-            expected_branch=branch, candidate_commit=commit,
-            pytest_collect_path=collect, review_mode="executable",
+            artifact_path=art,
+            artifact_kind="completion",
+            receipt_path=receipt,
+            review_worktree=tmp_worktree,
+            expected_branch=branch,
+            candidate_commit=commit,
+            pytest_collect_path=collect,
+            review_mode="executable",
         )
         assert result.accepted is True
         assert result.authoritative_pytest_count == 5
@@ -860,10 +1445,14 @@ class TestPytestCollection:
         collect = _make_collect_file(tmp_worktree, "total: 42")
 
         result = accept_review_artifact(
-            artifact_path=art, artifact_kind="completion",
-            receipt_path=receipt, review_worktree=tmp_worktree,
-            expected_branch=branch, candidate_commit=commit,
-            pytest_collect_path=collect, review_mode="executable",
+            artifact_path=art,
+            artifact_kind="completion",
+            receipt_path=receipt,
+            review_worktree=tmp_worktree,
+            expected_branch=branch,
+            candidate_commit=commit,
+            pytest_collect_path=collect,
+            review_mode="executable",
         )
         # "total: 42" is not .py: N and not "N test(s) collected"
         assert result.authoritative_pytest_count is None
@@ -880,10 +1469,14 @@ class TestPytestCollection:
         )
 
         result = accept_review_artifact(
-            artifact_path=art, artifact_kind="completion",
-            receipt_path=receipt, review_worktree=tmp_worktree,
-            expected_branch=branch, candidate_commit=commit,
-            pytest_collect_path=collect, review_mode="executable",
+            artifact_path=art,
+            artifact_kind="completion",
+            receipt_path=receipt,
+            review_worktree=tmp_worktree,
+            expected_branch=branch,
+            candidate_commit=commit,
+            pytest_collect_path=collect,
+            review_mode="executable",
         )
         assert result.accepted is True
         assert result.authoritative_pytest_count == 47
@@ -905,10 +1498,14 @@ class TestPytestCollection:
         )
 
         result = accept_review_artifact(
-            artifact_path=art, artifact_kind="completion",
-            receipt_path=receipt, review_worktree=tmp_worktree,
-            expected_branch=branch, candidate_commit=commit,
-            pytest_collect_path=collect, review_mode="executable",
+            artifact_path=art,
+            artifact_kind="completion",
+            receipt_path=receipt,
+            review_worktree=tmp_worktree,
+            expected_branch=branch,
+            candidate_commit=commit,
+            pytest_collect_path=collect,
+            review_mode="executable",
         )
         assert result.accepted is True, f"reasons: {result.reasons}"
         assert result.authoritative_pytest_count == 82
@@ -924,10 +1521,14 @@ class TestPytestCollection:
         )
 
         result = accept_review_artifact(
-            artifact_path=art, artifact_kind="completion",
-            receipt_path=receipt, review_worktree=tmp_worktree,
-            expected_branch=branch, candidate_commit=commit,
-            pytest_collect_path=collect, review_mode="executable",
+            artifact_path=art,
+            artifact_kind="completion",
+            receipt_path=receipt,
+            review_worktree=tmp_worktree,
+            expected_branch=branch,
+            candidate_commit=commit,
+            pytest_collect_path=collect,
+            review_mode="executable",
         )
         assert result.accepted is True, f"reasons: {result.reasons}"
         assert result.authoritative_pytest_count == 139
@@ -946,10 +1547,14 @@ class TestPytestCollection:
         )
 
         result = accept_review_artifact(
-            artifact_path=art, artifact_kind="completion",
-            receipt_path=receipt, review_worktree=tmp_worktree,
-            expected_branch=branch, candidate_commit=commit,
-            pytest_collect_path=collect, review_mode="executable",
+            artifact_path=art,
+            artifact_kind="completion",
+            receipt_path=receipt,
+            review_worktree=tmp_worktree,
+            expected_branch=branch,
+            candidate_commit=commit,
+            pytest_collect_path=collect,
+            review_mode="executable",
         )
         assert result.accepted is True, f"reasons: {result.reasons}"
         assert result.authoritative_pytest_count == 82
@@ -968,15 +1573,21 @@ class TestPytestCollection:
         )
 
         result = accept_review_artifact(
-            artifact_path=art, artifact_kind="completion",
-            receipt_path=receipt, review_worktree=tmp_worktree,
-            expected_branch=branch, candidate_commit=commit,
-            pytest_collect_path=collect, review_mode="executable",
+            artifact_path=art,
+            artifact_kind="completion",
+            receipt_path=receipt,
+            review_worktree=tmp_worktree,
+            expected_branch=branch,
+            candidate_commit=commit,
+            pytest_collect_path=collect,
+            review_mode="executable",
         )
         assert result.accepted is False
         assert result.authoritative_pytest_count is None
 
-    def test_duplicate_same_path_same_count_not_double_counted(self, tmp_worktree: Path):
+    def test_duplicate_same_path_same_count_not_double_counted(
+        self, tmp_worktree: Path
+    ):
         """Same path with same count is not double-counted."""
         branch = _get_branch(tmp_worktree)
         commit = _commit_file(tmp_worktree, "src/main.py", "agg5", "add main")
@@ -984,15 +1595,18 @@ class TestPytestCollection:
         receipt = _make_receipt(tmp_worktree)
         collect = _make_collect_file(
             tmp_worktree,
-            "tests/test_a.py: 10\n"
-            "tests/test_a.py: 10",
+            "tests/test_a.py: 10\ntests/test_a.py: 10",
         )
 
         result = accept_review_artifact(
-            artifact_path=art, artifact_kind="completion",
-            receipt_path=receipt, review_worktree=tmp_worktree,
-            expected_branch=branch, candidate_commit=commit,
-            pytest_collect_path=collect, review_mode="executable",
+            artifact_path=art,
+            artifact_kind="completion",
+            receipt_path=receipt,
+            review_worktree=tmp_worktree,
+            expected_branch=branch,
+            candidate_commit=commit,
+            pytest_collect_path=collect,
+            review_mode="executable",
         )
         assert result.accepted is True, f"reasons: {result.reasons}"
         assert result.authoritative_pytest_count == 10
@@ -1005,15 +1619,18 @@ class TestPytestCollection:
         receipt = _make_receipt(tmp_worktree)
         collect = _make_collect_file(
             tmp_worktree,
-            "tests/test_a.py: 10\n"
-            "tests/test_a.py: 15",
+            "tests/test_a.py: 10\ntests/test_a.py: 15",
         )
 
         result = accept_review_artifact(
-            artifact_path=art, artifact_kind="completion",
-            receipt_path=receipt, review_worktree=tmp_worktree,
-            expected_branch=branch, candidate_commit=commit,
-            pytest_collect_path=collect, review_mode="executable",
+            artifact_path=art,
+            artifact_kind="completion",
+            receipt_path=receipt,
+            review_worktree=tmp_worktree,
+            expected_branch=branch,
+            candidate_commit=commit,
+            pytest_collect_path=collect,
+            review_mode="executable",
         )
         assert result.accepted is False
         assert result.authoritative_pytest_count is None
@@ -1029,18 +1646,24 @@ class TestWorkerCountMismatch:
         collect = _make_collect_file(tmp_worktree, "139 tests collected")
 
         result = accept_review_artifact(
-            artifact_path=art, artifact_kind="completion",
-            receipt_path=receipt, review_worktree=tmp_worktree,
-            expected_branch=branch, candidate_commit=commit,
-            pytest_collect_path=collect, review_mode="executable",
+            artifact_path=art,
+            artifact_kind="completion",
+            receipt_path=receipt,
+            review_worktree=tmp_worktree,
+            expected_branch=branch,
+            candidate_commit=commit,
+            pytest_collect_path=collect,
+            review_mode="executable",
             worker_reported_count=135,
         )
         assert result.accepted is False
         assert result.worker_count_mismatch is True
         assert result.worker_reported_count == 135
         assert result.authoritative_pytest_count == 139
-        assert any("mismatch" in r.lower() or "worker reported" in r.lower()
-                    for r in result.reasons)
+        assert any(
+            "mismatch" in r.lower() or "worker reported" in r.lower()
+            for r in result.reasons
+        )
 
     def test_worker_count_matches(self, tmp_worktree: Path):
         """Worker-reported count matching collection does not cause mismatch."""
@@ -1051,15 +1674,21 @@ class TestWorkerCountMismatch:
         collect = _make_collect_file(tmp_worktree, "139 tests collected")
 
         result = accept_review_artifact(
-            artifact_path=art, artifact_kind="completion",
-            receipt_path=receipt, review_worktree=tmp_worktree,
-            expected_branch=branch, candidate_commit=commit,
-            pytest_collect_path=collect, review_mode="executable",
+            artifact_path=art,
+            artifact_kind="completion",
+            receipt_path=receipt,
+            review_worktree=tmp_worktree,
+            expected_branch=branch,
+            candidate_commit=commit,
+            pytest_collect_path=collect,
+            review_mode="executable",
         )
         assert result.worker_count_mismatch is False
         assert result.worker_reported_count is None
-        assert not any("mismatch" in r.lower() or "worker reported" in r.lower()
-                       for r in result.reasons)
+        assert not any(
+            "mismatch" in r.lower() or "worker reported" in r.lower()
+            for r in result.reasons
+        )
 
 
 class TestReceiptProhibition:
@@ -1072,10 +1701,14 @@ class TestReceiptProhibition:
         collect = _make_collect_file(tmp_worktree, "5 tests collected")
 
         result = accept_review_artifact(
-            artifact_path=art, artifact_kind="completion",
-            receipt_path=receipt, review_worktree=tmp_worktree,
-            expected_branch=branch, candidate_commit=commit,
-            pytest_collect_path=collect, review_mode="executable",
+            artifact_path=art,
+            artifact_kind="completion",
+            receipt_path=receipt,
+            review_worktree=tmp_worktree,
+            expected_branch=branch,
+            candidate_commit=commit,
+            pytest_collect_path=collect,
+            review_mode="executable",
         )
         assert result.accepted is False
         assert any("artifact_path" in r for r in result.reasons)
@@ -1095,15 +1728,35 @@ class TestCLI:
         receipt = _make_receipt(tmp_worktree)
         collect = _make_collect_file(tmp_worktree, "5 tests collected")
 
-        script = Path(__file__).resolve().parent.parent / "scripts" / "ariadne_review_acceptance.py"
+        script = (
+            Path(__file__).resolve().parent.parent
+            / "scripts"
+            / "ariadne_review_acceptance.py"
+        )
         # Run without PYTHONPATH — sys.path bootstrap in the script handles it
         result = subprocess.run(
-            [sys.executable, str(script),
-             "--artifact", str(art), "--artifact-kind", "completion",
-             "--receipt", str(receipt), "--worktree", str(tmp_worktree),
-             "--expected-branch", branch, "--candidate-commit", commit,
-             "--pytest-collect-output", str(collect), "--review-mode", "executable"],
-            capture_output=True, text=True,
+            [
+                sys.executable,
+                str(script),
+                "--artifact",
+                str(art),
+                "--artifact-kind",
+                "completion",
+                "--receipt",
+                str(receipt),
+                "--worktree",
+                str(tmp_worktree),
+                "--expected-branch",
+                branch,
+                "--candidate-commit",
+                commit,
+                "--pytest-collect-output",
+                str(collect),
+                "--review-mode",
+                "executable",
+            ],
+            capture_output=True,
+            text=True,
         )
         assert result.returncode == 0, f"stderr: {result.stderr}"
 
@@ -1115,10 +1768,22 @@ class TestCLI:
         collect = _make_collect_file(tmp_worktree, "5 tests collected")
 
         result = _run_cli(
-            "--artifact", str(art), "--artifact-kind", "completion",
-            "--receipt", str(receipt), "--worktree", str(tmp_worktree),
-            "--expected-branch", branch, "--candidate-commit", commit,
-            "--pytest-collect-output", str(collect), "--review-mode", "executable",
+            "--artifact",
+            str(art),
+            "--artifact-kind",
+            "completion",
+            "--receipt",
+            str(receipt),
+            "--worktree",
+            str(tmp_worktree),
+            "--expected-branch",
+            branch,
+            "--candidate-commit",
+            commit,
+            "--pytest-collect-output",
+            str(collect),
+            "--review-mode",
+            "executable",
         )
         assert result.returncode == 0, f"stderr: {result.stderr}"
         output = json.loads(result.stdout)
@@ -1133,12 +1798,61 @@ class TestCLI:
         collect = _make_collect_file(tmp_worktree, "5 tests collected")
 
         result = _run_cli(
-            "--artifact", str(art), "--artifact-kind", "completion",
-            "--receipt", str(receipt), "--worktree", str(tmp_worktree),
-            "--expected-branch", "nonexistent", "--candidate-commit", head,
-            "--pytest-collect-output", str(collect), "--review-mode", "executable",
+            "--artifact",
+            str(art),
+            "--artifact-kind",
+            "completion",
+            "--receipt",
+            str(receipt),
+            "--worktree",
+            str(tmp_worktree),
+            "--expected-branch",
+            "nonexistent",
+            "--candidate-commit",
+            head,
+            "--pytest-collect-output",
+            str(collect),
+            "--review-mode",
+            "executable",
         )
         assert result.returncode == 1
+
+    def test_cli_revision_required_exit_1_with_explicit_negative_verdict(
+        self, tmp_worktree: Path
+    ):
+        branch = _get_branch(tmp_worktree)
+        commit = _commit_file(tmp_worktree, "src/main.py", "cli-negative", "add main")
+        art = _make_artifact(tmp_worktree, "DECISION: REVISION_REQUIRED\n")
+        receipt = _make_receipt(tmp_worktree, artifact_kind="decision")
+        collect = _make_collect_file(tmp_worktree, "5 tests collected")
+
+        result = _run_cli(
+            "--artifact",
+            str(art),
+            "--artifact-kind",
+            "decision",
+            "--receipt",
+            str(receipt),
+            "--worktree",
+            str(tmp_worktree),
+            "--expected-branch",
+            branch,
+            "--candidate-commit",
+            commit,
+            "--pytest-collect-output",
+            str(collect),
+            "--review-mode",
+            "executable",
+        )
+
+        assert result.returncode == 1
+        output = json.loads(result.stdout)
+        assert output["artifact_valid"] is True
+        assert output["evidence_valid"] is True
+        assert output["review_verdict"] == "revision_required"
+        assert output["integration_authorized"] is False
+        assert output["operation_authorized"] is False
+        assert output["accepted"] is False
 
     def test_cli_missing_required_arg_exit_2(self):
         result = _run_cli("--artifact", "x.md")
@@ -1152,23 +1866,47 @@ class TestCLI:
         collect = _make_collect_file(tmp_worktree, "5 tests collected")
 
         result = _run_cli(
-            "--artifact", str(art), "--artifact-kind", "completion",
-            "--receipt", str(receipt), "--worktree", str(tmp_worktree),
-            "--expected-branch", branch, "--candidate-commit", commit,
-            "--pytest-collect-output", str(collect), "--review-mode", "static_evidence",
+            "--artifact",
+            str(art),
+            "--artifact-kind",
+            "completion",
+            "--receipt",
+            str(receipt),
+            "--worktree",
+            str(tmp_worktree),
+            "--expected-branch",
+            branch,
+            "--candidate-commit",
+            commit,
+            "--pytest-collect-output",
+            str(collect),
+            "--review-mode",
+            "static_evidence",
         )
         assert result.returncode == 0
         output = json.loads(result.stdout)
-        for key in ("accepted", "reasons", "artifact", "artifact_kind",
-                    "observed_branch", "observed_head",
-                    "ancestry_result", "canonical_marker", "receipt_cross_check",
-                    "authoritative_pytest_count", "worker_reported_count",
-                    "worker_count_mismatch", "review_mode", "scratch_outputs_ignored",
-                    "schema_version", "status"):
+        for key in (
+            "accepted",
+            "reasons",
+            "artifact",
+            "artifact_kind",
+            "observed_branch",
+            "observed_head",
+            "ancestry_result",
+            "canonical_marker",
+            "receipt_cross_check",
+            "authoritative_pytest_count",
+            "worker_reported_count",
+            "worker_count_mismatch",
+            "review_mode",
+            "scratch_outputs_ignored",
+            "schema_version",
+            "status",
+        ):
             assert key in output, f"missing key: {key}"
         assert output["review_mode"] == "static_evidence"
         assert output["scratch_outputs_ignored"] is True
-        assert output["schema_version"] == "ariadne.review_acceptance.v1"
+        assert output["schema_version"] == "ariadne.review_acceptance.v2"
         assert output["status"] == "accepted"
         assert output["artifact"] is not None
         assert output["artifact_kind"] == "completion"
@@ -1183,10 +1921,14 @@ class TestReviewModes:
         collect = _make_collect_file(tmp_worktree, "5 tests collected")
 
         result = accept_review_artifact(
-            artifact_path=art, artifact_kind="completion",
-            receipt_path=receipt, review_worktree=tmp_worktree,
-            expected_branch=branch, candidate_commit=commit,
-            pytest_collect_path=collect, review_mode="executable",
+            artifact_path=art,
+            artifact_kind="completion",
+            receipt_path=receipt,
+            review_worktree=tmp_worktree,
+            expected_branch=branch,
+            candidate_commit=commit,
+            pytest_collect_path=collect,
+            review_mode="executable",
         )
         assert result.review_mode == "executable"
 
@@ -1198,10 +1940,14 @@ class TestReviewModes:
         collect = _make_collect_file(tmp_worktree, "5 tests collected")
 
         result = accept_review_artifact(
-            artifact_path=art, artifact_kind="completion",
-            receipt_path=receipt, review_worktree=tmp_worktree,
-            expected_branch=branch, candidate_commit=commit,
-            pytest_collect_path=collect, review_mode="static_evidence",
+            artifact_path=art,
+            artifact_kind="completion",
+            receipt_path=receipt,
+            review_worktree=tmp_worktree,
+            expected_branch=branch,
+            candidate_commit=commit,
+            pytest_collect_path=collect,
+            review_mode="static_evidence",
         )
         assert result.review_mode == "static_evidence"
 
@@ -1217,10 +1963,14 @@ class TestStrictSettingsUnchanged:
         collect = _make_collect_file(tmp_worktree, "5 tests collected")
 
         result = accept_review_artifact(
-            artifact_path=art, artifact_kind="completion",
-            receipt_path=receipt, review_worktree=tmp_worktree,
-            expected_branch=branch, candidate_commit=commit,
-            pytest_collect_path=collect, review_mode="executable",
+            artifact_path=art,
+            artifact_kind="completion",
+            receipt_path=receipt,
+            review_worktree=tmp_worktree,
+            expected_branch=branch,
+            candidate_commit=commit,
+            pytest_collect_path=collect,
+            review_mode="executable",
         )
         assert result.accepted is False
         after = receipt.read_text()
@@ -1231,6 +1981,7 @@ class TestInvalidReviewMode:
     def test_invalid_mode_raises_value_error(self, tmp_worktree: Path):
         """A direct API call with invalid review_mode raises ValueError."""
         import pytest as _pytest
+
         branch = _get_branch(tmp_worktree)
         commit = _commit_file(tmp_worktree, "src/main.py", "inv1", "add main")
         art = _make_artifact(tmp_worktree, "STATUS: complete\n")
@@ -1239,9 +1990,12 @@ class TestInvalidReviewMode:
 
         with _pytest.raises(ValueError, match="invalid review_mode"):
             accept_review_artifact(
-                artifact_path=art, artifact_kind="completion",
-                receipt_path=receipt, review_worktree=tmp_worktree,
-                expected_branch=branch, candidate_commit=commit,
+                artifact_path=art,
+                artifact_kind="completion",
+                receipt_path=receipt,
+                review_worktree=tmp_worktree,
+                expected_branch=branch,
+                candidate_commit=commit,
                 pytest_collect_path=collect,
                 review_mode="invalid_mode",  # type: ignore[arg-type]
             )
@@ -1255,10 +2009,21 @@ class TestInvalidReviewMode:
         collect = _make_collect_file(tmp_worktree, "5 tests collected")
 
         result = _run_cli(
-            "--artifact", str(art), "--artifact-kind", "completion",
-            "--receipt", str(receipt), "--worktree", str(tmp_worktree),
-            "--expected-branch", branch, "--candidate-commit", commit,
-            "--pytest-collect-output", str(collect),
-            "--review-mode", "invalid_mode",
+            "--artifact",
+            str(art),
+            "--artifact-kind",
+            "completion",
+            "--receipt",
+            str(receipt),
+            "--worktree",
+            str(tmp_worktree),
+            "--expected-branch",
+            branch,
+            "--candidate-commit",
+            commit,
+            "--pytest-collect-output",
+            str(collect),
+            "--review-mode",
+            "invalid_mode",
         )
         assert result.returncode == 2
