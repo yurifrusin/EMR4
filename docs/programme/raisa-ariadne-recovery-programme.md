@@ -198,31 +198,25 @@ diverging embedded copy.
 
 ## Immediate sequence
 
-The G0.5 candidate at `71e2c5f2f586fa4d1ca8fa9787a4906dbbb997f1`
-received an external `REVISION_REQUIRED` decision with two blocking findings.
-G0.6 is the only active correction gate. It must publish one `review_pending` candidate
-and then stop for external G0 review. G1A implementation remains closed.
+The G0.7 candidate at `6e101d15f824f68c3f44d0a3cb44a3aa2afd5b1b`
+received an external `REVISION_REQUIRED` decision with one blocking finding.
+G0.8 is the only active correction gate. It may publish exactly one direct-child
+`review_pending` candidate and then must stop for external G0 review. G1A
+implementation remains closed.
 
-The accepted G0.5 controls remain exact: they replace the ambiguous singular review projection with a digest-bound,
-append-only review history and one explicit decisive pointer. A PASS transition
-may append exactly one new decisive record; it may not mutate, delete or reorder
-any older negative review. G0 passes only when that decisive record binds the
-exact reviewed G0.6 commit and tree, contains `PASS` with zero blocking findings,
-and agrees with transition and G1A authorization state.
+The accepted G0.7 trusted-Git, physical-byte and closed non-overwriting receipt
+controls remain exact. G0.8 closes the repository-local fsmonitor seam: every
+trusted Git process receives command-level `core.fsmonitor=false` and
+`core.ignoreStat=false`; repository and worktree values for `core.fsmonitor`,
+`core.fsmonitorHookVersion` and `core.ignoreStat` are admitted only when absent
+or boolean-false; and the index fsmonitor-valid view is observed and bound.
+The isolated bootstrap and imported runner enforce the same policy.
 
-G0.6 adds a complete NUL-safe union inventory: ordinary non-tracked paths from
-`git ls-files --others --exclude-standard -z` plus ignored paths from
-`git ls-files --others --ignored --exclude-standard -z`. Repository ignore,
-`.git/info/exclude` and configured global-exclude rules therefore cannot hide an
-execution-affecting file. Development can expose only the two exact G1A.1
-additions; pre-push, post-push and gatekeeper source require zero ordinary or
-ignored additions. Every observed path component is checked for symlink,
-junction, reparse and non-regular substitution, and case-folded NFC aliases of
-protected paths are rejected without reading file contents.
-The `.git` administrative entry is modelled separately: HEAD, index, objects
-and refs remain Git-bound, ignore surfaces are neutralised by the union
-inventory, `core.hooksPath` and non-sample client hooks are forbidden, and the
-exact push also uses `--no-verify`.
+The pre-import source inventory is the narrow actual import closure. In addition
+to the existing bootstrap and controller sources it binds `models.py`,
+`allocation.py`, `allocator.py`, `settings_fingerprint.py` and
+`active_operation.py` to the reviewed index/tree objects and physical bytes.
+Those five modules are attested, not modified.
 
 The pinned source is launched only through
 `python -I -B scripts/raisa_ariadne_gatekeeper_bootstrap.py`. The stdlib-only

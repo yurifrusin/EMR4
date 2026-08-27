@@ -1,7 +1,7 @@
-schema_version: "ariadne.programme_recovery.v8"
+schema_version: "ariadne.programme_recovery.v9"
 status: "active_emergency_overlay"
 authority_owner: "Yuri"
-recorded_at: "2026-08-26T23:58:00+10:00"
+recorded_at: "2026-08-27T10:07:16+10:00"
 state_file: "orchestration/programme/current-state.json"
 gates_file: "orchestration/programme/gates.yaml"
 risk_file: "orchestration/programme/risk-register.yaml"
@@ -21,16 +21,16 @@ required_before:
   - "protected_ref_operation"
   - "deployment"
 missing_or_invalid_state: "hard_stop"
-active_profile: "G0.7_CONTROLLER_MAINTENANCE"
+active_profile: "G0.8_FSMONITOR_CLOSURE"
 profiles:
-  G0.7_CONTROLLER_MAINTENANCE:
+  G0.8_FSMONITOR_CLOSURE:
     profile_kind: "controller_maintenance"
     expected_programme_mode: "recovery"
     expected_current_gate: "G0"
     expected_gate_status: "revision_required"
-    active_correction: "G0.7"
-    programme_gate: "G0.7"
-    admitted_task_classes: ["g0_7_controller_maintenance"]
+    active_correction: "G0.8"
+    programme_gate: "G0.8"
+    admitted_task_classes: ["g0_8_fsmonitor_closure"]
     allowed_effects: ["repository_read", "control_plane_edit", "task_branch_commit", "task_branch_push"]
     forbidden_effects: ["autonomous_worker_dispatch", "provider_invocation", "product_behavior_change", "dependency_change", "migration_change", "g1b_work", "integration", "protected_ref_movement", "deployment", "pages", "real_data_access"]
     closed_entrypoints: ["worker_dispatch", "provider_invocation", "clockwork_tick_mutation", "clockwork_closeout_mutation", "integration", "protected_ref_operation", "deployment"]
@@ -56,6 +56,7 @@ profiles:
       - "orchestration/programme/reviews/g0-review-4ce1719-revision-required.json"
       - "orchestration/programme/reviews/g0-review-71e2c5f-revision-required.json"
       - "orchestration/programme/reviews/g0-review-4a8e71c-independent-20260826-revision-required.json"
+      - "orchestration/programme/reviews/g0-review-6e101d1-independent-20260827-revision-required.json"
       - "orchestration_harness/deepcode_artifact.py"
       - "orchestration_harness/programme_admission.py"
       - "orchestration_harness/trusted_git.py"
@@ -150,7 +151,7 @@ profiles:
 scope_policy:
   expected_branch: "codex/raisa-ariadne-recovery-g0"
   frozen_recovery_base: "03e6860394c39086ec1ffb3f2457acc5f7c8b5f9"
-  authorized_parent_commit: "4a8e71ca98d3af013d51ca6c206932e363cdf174"
+  authorized_parent_commit: "6e101d15f824f68c3f44d0a3cb44a3aa2afd5b1b"
   candidate_commit_limit: 1
   allowed_paths:
     - "AGENTS.md"
@@ -173,6 +174,7 @@ scope_policy:
     - "orchestration/programme/reviews/g0-review-4ce1719-revision-required.json"
     - "orchestration/programme/reviews/g0-review-71e2c5f-revision-required.json"
     - "orchestration/programme/reviews/g0-review-4a8e71c-independent-20260826-revision-required.json"
+    - "orchestration/programme/reviews/g0-review-6e101d1-independent-20260827-revision-required.json"
     - "orchestration_harness/programme_admission.py"
     - "orchestration_harness/trusted_git.py"
     - "orchestration_harness/pinned_programme_gatekeeper.py"
@@ -229,14 +231,14 @@ transition_policy:
     - "provider_invocation"
     - "real_data_access"
 pinned_gatekeeper:
-  schema_version: "ariadne.pinned_programme_gatekeeper_policy.v4"
+  schema_version: "ariadne.pinned_programme_gatekeeper_policy.v5"
   module: "orchestration_harness/pinned_programme_gatekeeper.py"
   bootstrap: "scripts/raisa_ariadne_gatekeeper_bootstrap.py"
   cli: "scripts/raisa_ariadne_gatekeeper_bootstrap.py"
   operation_cli_module: "scripts/raisa_ariadne_pinned_gatekeeper.py"
   canonical_operations: ["evaluate", "commit", "push"]
   operation_receipt_schema: "ariadne.pinned_programme_operation_receipt.v1"
-  source_binding: "expected_commit_tree_plus_trusted_physical_source_bytes"
+  source_binding: "expected_commit_tree_plus_trusted_physical_source_bytes_and_fsmonitor_closed_configuration"
   clean_source_required: true
   target_is_data_only: true
   candidate_controller_execution_forbidden: true

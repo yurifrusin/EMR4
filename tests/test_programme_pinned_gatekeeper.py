@@ -8,6 +8,7 @@ import pytest
 
 import orchestration_harness.programme_admission as pa
 import orchestration_harness.pinned_programme_gatekeeper as pg
+import scripts.raisa_ariadne_gatekeeper_bootstrap as bootstrap
 from scripts.raisa_ariadne_recovery_preflight import build_task_manifest
 from tests.test_programme_admission import (
     _build_transition_repository,
@@ -18,6 +19,257 @@ from tests.test_programme_admission import (
 
 
 ROOT = Path(__file__).resolve().parents[1]
+
+
+_TRUSTED_GIT_OVERRIDES = (
+    "-c",
+    "core.fsmonitor=false",
+    "-c",
+    "core.ignoreStat=false",
+)
+
+
+def test_canonical_recovery_push_binding_tracks_active_g08_correction() -> None:
+    policy = pa.load_programme_policy(ROOT)
+    state = policy.state
+    correction = state[pg.G0_CORRECTION_STATE_KEY]
+    decisive_review = next(
+        review
+        for review in state["g0_acceptance"]["external_review_history"]
+        if review["review_id"] == state["g0_acceptance"]["decisive_review_id"]
+    )
+
+    assert pg.G0_CORRECTION_STATE_KEY == "g0_8_correction"
+    assert pg.G0_REVIEWED_TREE_FIELD == "reviewed_g0_7_tree"
+    assert decisive_review["reviewed_commit"] == correction["authorized_parent_commit"]
+    assert decisive_review["reviewed_tree"] == correction[pg.G0_REVIEWED_TREE_FIELD]
+    assert (
+        decisive_review["blocking_finding_count"] == correction["review_finding_count"]
+    )
+
+
+def _new_fsmonitor_repository(tmp_path: Path) -> tuple[Path, Path, Path]:
+    root = tmp_path / "fsmonitor-repository"
+    root.mkdir()
+    _git(root, "init", "-b", "fsmonitor-test")
+    _git(root, "config", "user.email", "tests@example.invalid")
+    _git(root, "config", "user.name", "G0.8 Fsmonitor Tests")
+    _git(root, "config", "core.autocrlf", "false")
+    tracked = root / "tracked.py"
+    safe = root / "safe.py"
+    tracked.write_text("TRACKED = 'reviewed'\n", encoding="utf-8")
+    safe.write_text("SAFE = True\n", encoding="utf-8")
+    _git(root, "add", "tracked.py", "safe.py")
+    _git(root, "commit", "-m", "seed fsmonitor repository")
+    hook = tmp_path / "external-fsmonitor-hook.sh"
+    hook.write_bytes(b"#!/bin/sh\nprintf 'g0-8-token\\0'\n")
+    hook.chmod(hook.stat().st_mode | 0o111)
+    return root, tracked, hook
+
+
+def _prime_external_fsmonitor(root: Path, hook: Path) -> None:
+    _git(root, "config", "core.fsmonitor", hook.as_posix())
+    _git(root, "config", "core.fsmonitorHookVersion", "2")
+    assert _git(root, "status", "--porcelain") == ""
+
+
+def _hide_tracked_modification(root: Path, tracked: Path, hook: Path) -> None:
+    _prime_external_fsmonitor(root, hook)
+    tracked.write_text("TRACKED = 'unreviewed'\n", encoding="utf-8")
+    assert _git(root, "status", "--porcelain") == ""
+    assert _git(root, "diff", "--name-only") == ""
+    assert _git(root, "ls-files", "-f", "--", tracked.name).startswith("h ")
+    assert tracked.name in _git(
+        root,
+        *_TRUSTED_GIT_OVERRIDES,
+        "status",
+        "--porcelain",
+    )
+
+
+def test_parent_fsmonitor_bypass_is_reproduced_with_an_external_hook(
+    tmp_path: Path,
+) -> None:
+    root, tracked, hook = _new_fsmonitor_repository(tmp_path)
+
+    _hide_tracked_modification(root, tracked, hook)
+
+
+def test_trusted_repository_attestation_rejects_configured_fsmonitor(
+    tmp_path: Path,
+) -> None:
+    root, tracked, hook = _new_fsmonitor_repository(tmp_path)
+    _hide_tracked_modification(root, tracked, hook)
+
+    with pytest.raises(
+        pa.trusted_git.TrustedGitError,
+        match="trusted_git_configuration_forbidden",
+    ):
+        pa.trusted_git.attest_repository(
+            root,
+            attested_paths=["safe.py"],
+            expected_commit=_git(root, "rev-parse", "HEAD"),
+        )
+
+
+def test_trusted_repository_attestation_rejects_fsmonitor_valid_index_entries(
+    tmp_path: Path,
+) -> None:
+    root, tracked, hook = _new_fsmonitor_repository(tmp_path)
+    _prime_external_fsmonitor(root, hook)
+    _git(root, "update-index", "--fsmonitor-valid", tracked.name)
+    assert _git(root, "ls-files", "-f", "--", tracked.name).startswith("h ")
+
+    with pytest.raises(
+        pa.trusted_git.TrustedGitError,
+        match="trusted_git_configuration_forbidden",
+    ):
+        pa.trusted_git.attest_repository(
+            root,
+            attested_paths=["safe.py"],
+            expected_commit=_git(root, "rev-parse", "HEAD"),
+        )
+
+
+@pytest.mark.parametrize(
+    "scope,key",
+    [
+        ("--local", "core.fsmonitor"),
+        ("--local", "core.fsmonitorHookVersion"),
+        ("--local", "core.ignoreStat"),
+        ("--worktree", "core.fsmonitor"),
+        ("--worktree", "core.fsmonitorHookVersion"),
+        ("--worktree", "core.ignoreStat"),
+    ],
+)
+def test_trusted_repository_configuration_allows_only_explicit_false(
+    tmp_path: Path, scope: str, key: str
+) -> None:
+    root, _tracked, _hook = _new_fsmonitor_repository(tmp_path)
+    if scope == "--worktree":
+        _git(root, "config", "extensions.worktreeConfig", "true")
+    _git(root, "config", scope, key, "false")
+
+    identity = pa.trusted_git.attest_repository(
+        root,
+        attested_paths=["safe.py"],
+        expected_commit=_git(root, "rev-parse", "HEAD"),
+    )
+
+    assert identity["command_overrides"] == [
+        "core.fsmonitor=false",
+        "core.ignoreStat=false",
+    ]
+    assert identity["index_visibility"]["fsmonitor_valid_count"] == 0
+    observed = identity["repository_configuration"][scope[2:]][key]
+    assert observed["values"] == ["false"]
+    assert observed["admitted"] is True
+
+
+def test_clean_trusted_git_identity_records_closed_visibility_controls(
+    tmp_path: Path,
+) -> None:
+    root, _tracked, _hook = _new_fsmonitor_repository(tmp_path)
+
+    identity = pa.trusted_git.attest_repository(
+        root,
+        attested_paths=["safe.py"],
+        expected_commit=_git(root, "rev-parse", "HEAD"),
+    )
+
+    assert identity["command_overrides"] == [
+        "core.fsmonitor=false",
+        "core.ignoreStat=false",
+    ]
+    assert identity["index_visibility"]["fsmonitor_valid_count"] == 0
+    assert (
+        identity["repository_configuration"]["worktree_configuration_active"] is False
+    )
+    for scope in ("local", "worktree"):
+        for key in (
+            "core.fsmonitor",
+            "core.fsmonitorHookVersion",
+            "core.ignoreStat",
+        ):
+            assert identity["repository_configuration"][scope][key] == {
+                "values": [],
+                "normalised_boolean_values": [],
+                "admitted": True,
+            }
+
+
+def test_bootstrap_and_imported_trusted_runner_use_identical_git_overrides() -> None:
+    assert bootstrap._TRUSTED_GIT_COMMAND_OVERRIDES == (
+        pa.trusted_git.TRUSTED_GIT_COMMAND_OVERRIDES
+    )
+    assert bootstrap._SOURCE_MODULES == pg.PINNED_SOURCE_PATHS
+
+
+@pytest.mark.parametrize(
+    "key,value",
+    [
+        ("core.fsmonitor", "true"),
+        ("core.fsmonitor", "../external-hook"),
+        ("core.fsmonitorHookVersion", "2"),
+        ("core.ignoreStat", "definitely-not-a-boolean"),
+    ],
+)
+def test_trusted_repository_configuration_rejects_nonfalse_or_malformed_values(
+    tmp_path: Path, key: str, value: str
+) -> None:
+    root, _tracked, _hook = _new_fsmonitor_repository(tmp_path)
+    expected_commit = _git(root, "rev-parse", "HEAD")
+    _git(root, "config", "--local", key, value)
+
+    with pytest.raises(
+        pa.trusted_git.TrustedGitError,
+        match="trusted_git_configuration_forbidden",
+    ):
+        pa.trusted_git.attest_repository(
+            root,
+            attested_paths=["safe.py"],
+            expected_commit=expected_commit,
+        )
+
+
+def test_trusted_repository_configuration_rejects_mixed_duplicate_values(
+    tmp_path: Path,
+) -> None:
+    root, _tracked, _hook = _new_fsmonitor_repository(tmp_path)
+    _git(root, "config", "--local", "--add", "core.fsmonitor", "false")
+    _git(root, "config", "--local", "--add", "core.fsmonitor", "true")
+
+    with pytest.raises(
+        pa.trusted_git.TrustedGitError,
+        match="trusted_git_configuration_forbidden",
+    ):
+        pa.trusted_git.attest_repository(
+            root,
+            attested_paths=["safe.py"],
+            expected_commit=_git(root, "rev-parse", "HEAD"),
+        )
+
+
+def test_trusted_repository_configuration_rejects_included_local_value(
+    tmp_path: Path,
+) -> None:
+    root, _tracked, hook = _new_fsmonitor_repository(tmp_path)
+    included = tmp_path / "included-git-config"
+    included.write_text(
+        f"[core]\n\tfsmonitor = {hook.as_posix()}\n",
+        encoding="utf-8",
+    )
+    _git(root, "config", "--local", "include.path", included.as_posix())
+
+    with pytest.raises(
+        pa.trusted_git.TrustedGitError,
+        match="trusted_git_configuration_forbidden",
+    ):
+        pa.trusted_git.attest_repository(
+            root,
+            attested_paths=["safe.py"],
+            expected_commit=_git(root, "rev-parse", "HEAD"),
+        )
 
 
 def _manifest_path(root: Path, manifest: dict, name: str) -> Path:
@@ -665,6 +917,91 @@ def test_bootstrap_rejects_index_visibility_flags_before_controller_import(
     assert completed.returncode == 2
     assert payload["reason_codes"] == ["trusted_git_index_flags_forbidden"]
     assert marker.exists() is False
+
+
+@pytest.mark.parametrize(
+    "relative_path",
+    [
+        "orchestration_harness/models.py",
+        "orchestration_harness/allocation.py",
+        "orchestration_harness/allocator.py",
+        "orchestration_harness/settings_fingerprint.py",
+        "orchestration_harness/active_operation.py",
+    ],
+)
+def test_bootstrap_rejects_fsmonitor_hidden_import_source_before_execution(
+    tmp_path: Path, relative_path: str
+) -> None:
+    target, gatekeeper, _transition_manifest = _transition_fixture(tmp_path)
+    manifest = build_task_manifest(target)
+    manifest_path = _manifest_path(target, manifest, "fsmonitor-source-manifest.json")
+    marker = tmp_path / f"{Path(relative_path).stem}-executed"
+    source = gatekeeper / relative_path
+    hook = tmp_path / "external-source-fsmonitor-hook.sh"
+    hook.write_bytes(b"#!/bin/sh\nprintf 'g0-8-source-token\\0'\n")
+    hook.chmod(hook.stat().st_mode | 0o111)
+    _prime_external_fsmonitor(gatekeeper, hook)
+    source.write_text(
+        source.read_text(encoding="utf-8")
+        + "\n__import__('pathlib').Path("
+        + repr(str(marker))
+        + ").write_text('executed', encoding='utf-8')\n",
+        encoding="utf-8",
+    )
+    assert _git(gatekeeper, "status", "--porcelain") == ""
+    assert relative_path in _git(
+        gatekeeper,
+        *_TRUSTED_GIT_OVERRIDES,
+        "status",
+        "--porcelain",
+    )
+
+    completed, payload = _gatekeeper_cli(
+        gatekeeper=gatekeeper,
+        target=target,
+        manifest_path=manifest_path,
+        phase="development",
+    )
+
+    assert completed.returncode == 2
+    assert payload["reason_codes"] == ["trusted_git_configuration_forbidden"]
+    assert marker.exists() is False
+
+
+@pytest.mark.parametrize("phase", ["development", "pre-push", "post-push"])
+def test_target_fsmonitor_configuration_fails_closed_in_each_lifecycle_phase(
+    tmp_path: Path, phase: str
+) -> None:
+    target, gatekeeper, transition_manifest = _transition_fixture(tmp_path)
+    manifest_path = _manifest_path(
+        target, transition_manifest, f"fsmonitor-target-{phase}-manifest.json"
+    )
+    hook = tmp_path / "external-target-fsmonitor-hook.sh"
+    hook.write_bytes(b"#!/bin/sh\nprintf 'g0-8-target-token\\0'\n")
+    hook.chmod(hook.stat().st_mode | 0o111)
+    _prime_external_fsmonitor(target, hook)
+    out_of_scope = target / "orchestration_harness/models.py"
+    out_of_scope.write_text(
+        out_of_scope.read_text(encoding="utf-8") + "\nUnreviewed hidden drift.\n",
+        encoding="utf-8",
+    )
+    assert _git(target, "status", "--porcelain") == ""
+    assert "orchestration_harness/models.py" in _git(
+        target,
+        *_TRUSTED_GIT_OVERRIDES,
+        "status",
+        "--porcelain",
+    )
+
+    completed, payload = _gatekeeper_cli(
+        gatekeeper=gatekeeper,
+        target=target,
+        manifest_path=manifest_path,
+        phase=phase,
+    )
+
+    assert completed.returncode == 2
+    assert "trusted_git_configuration_forbidden" in payload["reason_codes"]
 
 
 @pytest.mark.parametrize("flag", ["--assume-unchanged", "--skip-worktree"])

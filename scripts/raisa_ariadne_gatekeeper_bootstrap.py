@@ -53,10 +53,26 @@ _SAFE_ENV = {
     "USERPROFILE",
     "WINDIR",
 }
+_TRUSTED_GIT_COMMAND_OVERRIDES = (
+    "-c",
+    "core.fsmonitor=false",
+    "-c",
+    "core.ignoreStat=false",
+)
+_VISIBILITY_CONFIGURATION_KEYS = (
+    "core.fsmonitor",
+    "core.fsmonitorHookVersion",
+    "core.ignoreStat",
+)
 _SOURCE_MODULES = (
     "orchestration_harness/__init__.py",
+    "orchestration_harness/models.py",
+    "orchestration_harness/allocation.py",
+    "orchestration_harness/allocator.py",
     "orchestration_harness/trusted_git.py",
     "orchestration_harness/programme_admission.py",
+    "orchestration_harness/settings_fingerprint.py",
+    "orchestration_harness/active_operation.py",
     "orchestration_harness/pinned_programme_gatekeeper.py",
     "scripts/raisa_ariadne_gatekeeper_bootstrap.py",
     "scripts/raisa_ariadne_pinned_gatekeeper.py",
@@ -125,9 +141,11 @@ def _git_environment() -> dict[str, str]:
     return environment
 
 
-def _git(root: Path, *args: str, allow_failure: bool = False) -> bytes:
+def _git_result(
+    root: Path, *args: str, allow_failure: bool = False
+) -> subprocess.CompletedProcess[bytes]:
     completed = subprocess.run(  # noqa: S603
-        [str(_stock_git()), *args],
+        [str(_stock_git()), *_TRUSTED_GIT_COMMAND_OVERRIDES, *args],
         cwd=root,
         env=_git_environment(),
         check=False,
@@ -136,7 +154,18 @@ def _git(root: Path, *args: str, allow_failure: bool = False) -> bytes:
         timeout=30,
     )
     if completed.returncode != 0 and not allow_failure:
+        diagnostic = completed.stderr.decode("utf-8", errors="replace").casefold()
+        if "bad boolean config value" in diagnostic and any(
+            f"for '{key.casefold()}'" in diagnostic
+            for key in _VISIBILITY_CONFIGURATION_KEYS
+        ):
+            raise RuntimeError("repository visibility configuration forbidden")
         raise RuntimeError("git observation failed")
+    return completed
+
+
+def _git(root: Path, *args: str, allow_failure: bool = False) -> bytes:
+    completed = _git_result(root, *args, allow_failure=allow_failure)
     return completed.stdout
 
 
@@ -168,8 +197,67 @@ def _argument_value(name: str) -> str:
         raise RuntimeError(f"missing {name}") from error
 
 
+def _reject_repository_visibility_configuration(root: Path) -> None:
+    worktree_extension = _git_result(
+        root,
+        "config",
+        "--local",
+        "--type=bool",
+        "--get",
+        "extensions.worktreeConfig",
+        allow_failure=True,
+    )
+    if worktree_extension.returncode == 1:
+        worktree_configuration_active = False
+    elif worktree_extension.returncode == 0:
+        worktree_configuration_active = worktree_extension.stdout.strip() == b"true"
+        if worktree_extension.stdout.strip() not in {b"true", b"false"}:
+            raise RuntimeError("repository visibility configuration forbidden")
+    else:
+        raise RuntimeError("repository visibility configuration forbidden")
+    for scope in ("local", "worktree"):
+        if scope == "worktree" and not worktree_configuration_active:
+            continue
+        for key in _VISIBILITY_CONFIGURATION_KEYS:
+            raw = _git_result(
+                root,
+                "config",
+                f"--{scope}",
+                "--includes",
+                "--null",
+                "--get-all",
+                key,
+                allow_failure=True,
+            )
+            if raw.returncode == 1:
+                continue
+            if raw.returncode != 0:
+                raise RuntimeError("repository visibility configuration forbidden")
+            typed = _git_result(
+                root,
+                "config",
+                f"--{scope}",
+                "--includes",
+                "--type=bool",
+                "--null",
+                "--get-all",
+                key,
+                allow_failure=True,
+            )
+            raw_values = raw.stdout.split(b"\0")
+            typed_values = typed.stdout.split(b"\0")
+            if (
+                typed.returncode != 0
+                or raw_values[-1] != b""
+                or typed_values[-1] != b""
+                or len(raw_values) != len(typed_values)
+                or any(value != b"false" for value in typed_values[:-1])
+            ):
+                raise RuntimeError("repository visibility configuration forbidden")
+
+
 def _reject_index_visibility_controls(root: Path) -> None:
-    for mode in ("-v", "-t"):
+    for mode in ("-f", "-v", "-t"):
         payload = _git(root, "ls-files", mode, "-z")
         fields = payload.split(b"\0")
         if fields[-1] != b"":
@@ -178,7 +266,9 @@ def _reject_index_visibility_controls(root: Path) -> None:
             if len(field) < 3 or field[1:2] != b" ":
                 raise RuntimeError("index inventory invalid")
             tag = chr(field[0])
-            if (mode == "-v" and tag.islower()) or (mode == "-t" and tag == "S"):
+            if (mode in {"-f", "-v"} and tag.islower()) or (
+                mode == "-t" and tag == "S"
+            ):
                 raise RuntimeError("index visibility flags forbidden")
     sparse = (
         _git(
@@ -247,6 +337,7 @@ def _bootstrap_source() -> tuple[Path, str, str]:
     ).resolve(strict=True)
     if observed_root != gatekeeper_root.resolve(strict=True):
         raise RuntimeError("worktree mismatch")
+    _reject_repository_visibility_configuration(gatekeeper_root)
     _reject_index_visibility_controls(gatekeeper_root)
     tracked_dirty = _git(
         gatekeeper_root, "status", "--porcelain", "--untracked-files=no"
@@ -296,6 +387,9 @@ def main() -> int:
         reason = {
             "bootstrap flags invalid": "gatekeeper_bootstrap_flags_invalid",
             "trusted Git environment forbidden": "trusted_git_environment_forbidden",
+            "repository visibility configuration forbidden": (
+                "trusted_git_configuration_forbidden"
+            ),
             "index visibility flags forbidden": "trusted_git_index_flags_forbidden",
             "sparse index forbidden": "trusted_git_sparse_index_forbidden",
             "split index forbidden": "trusted_git_split_index_forbidden",

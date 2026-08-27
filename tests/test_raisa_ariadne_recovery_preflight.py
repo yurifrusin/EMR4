@@ -75,19 +75,19 @@ def test_machine_state_freezes_authority_and_forbidden_actions() -> None:
     assert state["programme_mode"] == "recovery"
     assert state["current_gate"] == "G0"
     assert state["current_gate_status"] == "revision_required"
-    assert state["active_correction"] == "G0.7"
-    assert state["active_profile"] == "G0.7_CONTROLLER_MAINTENANCE"
+    assert state["active_correction"] == "G0.8"
+    assert state["active_profile"] == "G0.8_FSMONITOR_CLOSURE"
     assert state["feature_work_eligible"] is False
     assert state["g0_2_correction"]["status"] == "superseded_revision_required"
     assert state["g0_4_correction"]["status"] == "superseded_revision_required"
     assert state["g0_5_correction"]["status"] == "superseded_revision_required"
     assert state["g0_6_correction"]["status"] == "superseded_revision_required"
-    assert state["g0_7_correction"]["status"] in {"in_progress", "review_pending"}
-    assert state["g0_7_correction"]["authorized_parent_commit"] == (
-        "4a8e71ca98d3af013d51ca6c206932e363cdf174"
+    assert state["g0_8_correction"]["status"] in {"in_progress", "review_pending"}
+    assert state["g0_8_correction"]["authorized_parent_commit"] == (
+        "6e101d15f824f68c3f44d0a3cb44a3aa2afd5b1b"
     )
-    assert state["g0_7_correction"]["reviewed_g0_6_tree"] == (
-        "a23cc914dddd1e17121f7b04083ee1c08338549a"
+    assert state["g0_8_correction"]["reviewed_g0_7_tree"] == (
+        "00c1af2f47ceee88c10507809f69058c24c6bd85"
     )
     assert state["g0_2_correction"]["g1a_authorized"] is False
     assert state["recovery_baton"]["base_sha"] == (

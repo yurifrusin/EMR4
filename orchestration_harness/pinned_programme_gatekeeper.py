@@ -20,10 +20,17 @@ from orchestration_harness import programme_admission as admission
 PINNED_GATEKEEPER_DECISION_VERSION = "ariadne.pinned_programme_gatekeeper_decision.v1"
 PINNED_OPERATION_RECEIPT_VERSION = "ariadne.pinned_programme_operation_receipt.v1"
 PINNED_RECEIPT_SINK_VERSION = "ariadne.pinned_receipt_sink.v1"
+G0_CORRECTION_STATE_KEY = "g0_8_correction"
+G0_REVIEWED_TREE_FIELD = "reviewed_g0_7_tree"
 PINNED_SOURCE_PATHS = (
     "orchestration_harness/__init__.py",
+    "orchestration_harness/models.py",
+    "orchestration_harness/allocation.py",
+    "orchestration_harness/allocator.py",
     "orchestration_harness/trusted_git.py",
     "orchestration_harness/programme_admission.py",
+    "orchestration_harness/settings_fingerprint.py",
+    "orchestration_harness/active_operation.py",
     "orchestration_harness/pinned_programme_gatekeeper.py",
     "scripts/raisa_ariadne_gatekeeper_bootstrap.py",
     "scripts/raisa_ariadne_pinned_gatekeeper.py",
@@ -240,18 +247,20 @@ def evaluate_pinned_programme_operation(
             None,
         )
     if g0_recovery_push:
-        correction = target_policy.state["g0_7_correction"]
+        correction = target_policy.state[G0_CORRECTION_STATE_KEY]
         if entrypoint != "task_branch_push" or phase not in {"pre-push", "post-push"}:
             reasons.append("gatekeeper_g0_correction_push_only")
         if decisive_review is None:
             reasons.append("gatekeeper_decisive_review_missing")
         elif (
             decisive_review.get("verdict") != "REVISION_REQUIRED"
-            or decisive_review.get("blocking_finding_count") != 2
+            or decisive_review.get("blocking_finding_count")
+            != correction["review_finding_count"]
             or decisive_review.get("g1a_authorized") is not False
             or decisive_review.get("reviewed_commit")
             != correction["authorized_parent_commit"]
-            or decisive_review.get("reviewed_tree") != correction["reviewed_g0_6_tree"]
+            or decisive_review.get("reviewed_tree")
+            != correction[G0_REVIEWED_TREE_FIELD]
         ):
             reasons.append("gatekeeper_g0_correction_review_binding_invalid")
         try:

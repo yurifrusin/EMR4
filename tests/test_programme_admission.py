@@ -71,7 +71,7 @@ def _policy_sandbox(tmp_path: Path) -> Path:
         target = root / relative
         target.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(ROOT / relative, target)
-    for relative_text in pa.G0_G07_ALLOWED_PATHS | pa.G1A_ALLOWED_PATHS:
+    for relative_text in pa.G0_G08_ALLOWED_PATHS | pa.G1A_ALLOWED_PATHS:
         source = ROOT / relative_text
         if not source.is_file():
             continue
@@ -232,7 +232,7 @@ def test_state_and_gate_disagreement_is_rejected(tmp_path: Path) -> None:
     path.write_bytes(
         path.read_text(encoding="utf-8")
         .replace(
-            'next_eligible_tranche: "G0.7"',
+            'next_eligible_tranche: "G0.8"',
             'next_eligible_tranche: "G1A.1"',
             1,
         )
@@ -497,8 +497,8 @@ def test_machine_state_does_not_claim_stale_review_acceptance() -> None:
     policy = load_programme_policy(ROOT)
 
     assert policy.state["g0_acceptance"]["status"] == "superseded_revision_required"
-    assert policy.state["g0_7_correction"]["g1a_authorized"] is False
-    assert policy.state["g0_7_correction"]["external_review_status"] in {
+    assert policy.state["g0_8_correction"]["g1a_authorized"] is False
+    assert policy.state["g0_8_correction"]["external_review_status"] in {
         "not_started",
         "pending",
     }
@@ -508,9 +508,9 @@ def test_machine_state_does_not_claim_stale_review_acceptance() -> None:
         for row in policy.state["g0_acceptance"]["external_review_history"]
         if row["review_id"] == decisive_id
     )
-    assert decisive["reviewed_commit"] == "4a8e71ca98d3af013d51ca6c206932e363cdf174"
+    assert decisive["reviewed_commit"] == "6e101d15f824f68c3f44d0a3cb44a3aa2afd5b1b"
     assert decisive["verdict"] == "REVISION_REQUIRED"
-    assert decisive["blocking_finding_count"] == 2
+    assert decisive["blocking_finding_count"] == 1
 
 
 def test_production_review_history_uses_real_resolving_commit_trees() -> None:
@@ -545,11 +545,15 @@ def test_production_review_history_uses_real_resolving_commit_trees() -> None:
             state["g0_7_correction"]["authorized_parent_commit"],
             "a23cc914dddd1e17121f7b04083ee1c08338549a",
         ),
+        (
+            state["g0_8_correction"]["authorized_parent_commit"],
+            "00c1af2f47ceee88c10507809f69058c24c6bd85",
+        ),
     ]
     for commit, tree in expected:
         assert _git(ROOT, "rev-parse", f"{commit}^{{tree}}") == tree
         assert _git(ROOT, "rev-parse", f"{tree}^{{tree}}") == tree
-    assert len(state["g0_acceptance"]["external_review_history"]) == 7
+    assert len(state["g0_acceptance"]["external_review_history"]) == 8
 
 
 def test_false_g0_2_tree_binding_is_rejected_and_unresolved() -> None:
@@ -574,6 +578,7 @@ def test_false_g0_2_tree_binding_is_rejected_and_unresolved() -> None:
         ("g0_5_correction", "reviewed_g0_4_tree"),
         ("g0_6_correction", "reviewed_g0_5_tree"),
         ("g0_7_correction", "reviewed_g0_6_tree"),
+        ("g0_8_correction", "reviewed_g0_7_tree"),
     ],
 )
 def test_retained_review_history_cannot_rewrite_tree_bindings(
@@ -1103,14 +1108,14 @@ def _build_transition_repository(tmp_path: Path) -> tuple[Path, dict]:
     state_path = root / pa.STATE_PATH
     state = json.loads(state_path.read_text(encoding="utf-8"))
     state["recovery_baton"]["base_sha"] = synthetic_base
-    state["g0_7_correction"]["status"] = "review_pending"
-    state["g0_7_correction"]["external_review_status"] = "pending"
-    state["g0_7_correction"]["next_action"] = "external_G0_review_only"
+    state["g0_8_correction"]["status"] = "review_pending"
+    state["g0_8_correction"]["external_review_status"] = "pending"
+    state["g0_8_correction"]["next_action"] = "external_G0_review_only"
     _write_json(state_path, state)
 
     gates_path = root / pa.GATES_PATH
     gates = yaml.safe_load(gates_path.read_text(encoding="utf-8"))
-    next(row for row in gates["gates"] if row["id"] == "G0.7")["status"] = (
+    next(row for row in gates["gates"] if row["id"] == "G0.8")["status"] = (
         "review_pending"
     )
     _write_yaml(gates_path, gates)
@@ -1187,7 +1192,7 @@ def _build_transition_repository(tmp_path: Path) -> tuple[Path, dict]:
     agents_text = agents_path.read_text(encoding="utf-8")
     agents_path.write_bytes(
         agents_text.replace(
-            "Gate G0.7 is the only authorised correction; G1A is\nclosed.",
+            "Gate G0.8 is the only authorised correction; G1A is\nclosed.",
             "The reviewed G0 to G1A.1 transition is complete; Gate G1A.1 is active\nfor its bounded pure-verdict task only.",
             1,
         ).encode("utf-8")
@@ -1222,10 +1227,10 @@ def _build_transition_repository(tmp_path: Path) -> tuple[Path, dict]:
         }
     )
     state["g0_acceptance"]["next_action"] = "begin_bounded_G1A_1_only"
-    state["g0_7_correction"]["status"] = "external_review_passed"
-    state["g0_7_correction"]["external_review_status"] = "pass"
-    state["g0_7_correction"]["g1a_authorized"] = True
-    state["g0_7_correction"]["next_action"] = "bounded_G1A_1_profile_active"
+    state["g0_8_correction"]["status"] = "external_review_passed"
+    state["g0_8_correction"]["external_review_status"] = "pass"
+    state["g0_8_correction"]["g1a_authorized"] = True
+    state["g0_8_correction"]["next_action"] = "bounded_G1A_1_profile_active"
     state["gate_transition"] = {
         "status": "complete",
         "transition_id": transition_id,
@@ -1252,7 +1257,8 @@ def _build_transition_repository(tmp_path: Path) -> tuple[Path, dict]:
         "G0.4": "superseded_revision_required",
         "G0.5": "superseded_revision_required",
         "G0.6": "superseded_revision_required",
-        "G0.7": "external_review_passed",
+        "G0.7": "superseded_revision_required",
+        "G0.8": "external_review_passed",
         "G1A": "active_subgate_G1A_1",
         "G1A.1": "active",
     }
@@ -1367,8 +1373,8 @@ def test_valid_synthetic_state_only_transition_is_admitted(tmp_path: Path) -> No
     assert set(g1a_manifest["allowed_path_roots"]) == pa.G1A_ALLOWED_PATHS
     assert g1a_decision.admitted is True
     history = policy.state["g0_acceptance"]["external_review_history"]
-    assert len(history) == 8
-    assert [row["verdict"] for row in history[:7]] == ["REVISION_REQUIRED"] * 7
+    assert len(history) == 9
+    assert [row["verdict"] for row in history[:8]] == ["REVISION_REQUIRED"] * 8
     assert history[-1]["review_id"] == manifest["transition_id"]
     assert history[-1]["reviewed_commit"] == manifest["reviewed_commit"]
     assert history[-1]["reviewed_tree"] == manifest["reviewed_tree"]

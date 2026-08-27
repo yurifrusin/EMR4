@@ -1,7 +1,7 @@
 schema_version: "raisa-ariadne.programme-gates.v1"
 programme:
   name: "Raisa Medical Office and Ariadne Recovery & Convergence"
-  prepared_at: "2026-08-26T23:58:00+10:00"
+  prepared_at: "2026-08-27T10:07:16+10:00"
   repository: "yurifrusin/EMR4"
   observed_public_master: "2e34bdad732fdab32fbf778280b3d3c70d66d602"
   programme_mode: "recovery"
@@ -10,7 +10,7 @@ programme:
   feature_work_eligible: false
   clockwork_remote_visibility: "source_branch_aligned_with_origin"
   clockwork_local_state: "preserved_exactly_at_03e6860394c39086ec1ffb3f2457acc5f7c8b5f9"
-  next_eligible_tranche: "G0.7"
+  next_eligible_tranche: "G0.8"
 
 global_hard_stops:
   - "critical_or_high_security_finding"
@@ -55,7 +55,7 @@ protected_invariants:
 gates:
   - id: "G0"
     name: "Preserve, Freeze and Establish Truth"
-    status: "revision_required_g0_7"
+    status: "revision_required_g0_8"
     prerequisites: []
     programme_mode: "recovery"
     allowed_work:
@@ -308,7 +308,7 @@ gates:
 
   - id: "G0.7"
     name: "Bind Trusted Git and Close the Receipt Sink"
-    status: "review_pending"
+    status: "superseded_revision_required"
     prerequisites: ["G0_6_review_revision_required"]
     programme_mode: "recovery"
     allowed_work:
@@ -339,6 +339,41 @@ gates:
       - "receipt_directory_is_external_identity_stable_and_preexisting"
       - "receipt_name_is_internal_exclusively_reserved_and_never_overwritten"
       - "operation_result_remote_readback_and_protected_refs_revalidate"
+      - "focused_phase_aware_suite_is_green"
+      - "post_push_origin_matches_exact_candidate"
+      - "candidate_state_is_review_pending"
+    next_gate: "G0.8"
+
+  - id: "G0.8"
+    name: "Close Fsmonitor and Complete Pre-Import Source Attestation"
+    status: "review_pending"
+    prerequisites: ["G0_7_review_revision_required"]
+    programme_mode: "recovery"
+    allowed_work:
+      - "append_only_external_review_ledger"
+      - "command_level_fsmonitor_and_ignore_stat_disable"
+      - "repository_and_worktree_visibility_configuration_rejection"
+      - "fsmonitor_valid_index_entry_rejection"
+      - "complete_narrow_pre_import_source_attestation"
+      - "phase_aware_development_pre_push_post_push_verification"
+      - "review_pending_recovery_branch_publication"
+    prohibited_work:
+      - "g1a_implementation"
+      - "g1b"
+      - "product_behavior_change"
+      - "migration_change"
+      - "dependency_change"
+      - "provider_call"
+      - "integration"
+      - "protected_ref_movement"
+      - "deployment_or_pages"
+      - "real_data"
+    exit_checks:
+      - "all_trusted_git_processes_force_disable_fsmonitor_and_ignore_stat"
+      - "nonfalse_or_malformed_repository_and_worktree_visibility_config_fails_closed"
+      - "fsmonitor_valid_index_entries_fail_closed"
+      - "all_repository_local_import_sources_are_physically_attested_before_import"
+      - "source_and_target_identity_revalidate_before_and_after_mutation"
       - "focused_phase_aware_suite_is_green"
       - "post_push_origin_matches_exact_candidate"
       - "candidate_state_is_review_pending"

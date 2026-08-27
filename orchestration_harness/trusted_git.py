@@ -64,6 +64,21 @@ _PASSTHROUGH_ENVIRONMENT = {
     "WINDIR",
 }
 _REPARSE_FLAG = getattr(stat, "FILE_ATTRIBUTE_REPARSE_POINT", 0x400)
+TRUSTED_GIT_COMMAND_OVERRIDES = (
+    "-c",
+    "core.fsmonitor=false",
+    "-c",
+    "core.ignoreStat=false",
+)
+_IDENTITY_COMMAND_OVERRIDES = (
+    "core.fsmonitor=false",
+    "core.ignoreStat=false",
+)
+_VISIBILITY_CONFIGURATION_KEYS = (
+    "core.fsmonitor",
+    "core.fsmonitorHookVersion",
+    "core.ignoreStat",
+)
 
 
 def _sha256_bytes(payload: bytes) -> str:
@@ -187,7 +202,7 @@ def _run(
     environment = closed_git_environment()
     try:
         completed = subprocess.run(  # noqa: S603
-            [str(git), *args],
+            [str(git), *TRUSTED_GIT_COMMAND_OVERRIDES, *args],
             cwd=root,
             env=environment,
             check=False,
@@ -201,6 +216,17 @@ def _run(
     except (OSError, subprocess.TimeoutExpired) as error:
         raise TrustedGitError("trusted_git_execution_failed") from error
     if completed.returncode != 0 and not allow_failure:
+        stderr = completed.stderr
+        diagnostic = (
+            stderr.decode("utf-8", errors="replace")
+            if isinstance(stderr, bytes)
+            else str(stderr)
+        ).casefold()
+        if "bad boolean config value" in diagnostic and any(
+            f"for '{key.casefold()}'" in diagnostic
+            for key in _VISIBILITY_CONFIGURATION_KEYS
+        ):
+            raise TrustedGitError("trusted_git_configuration_forbidden")
         raise TrustedGitError("trusted_git_observation_failed")
     return completed
 
@@ -213,6 +239,20 @@ def run_git(root: Path, *args: str, timeout: int = 30) -> str:
 def run_git_bytes(root: Path, *args: str, timeout: int = 30) -> bytes:
     """Run Git through the trusted substrate without losing NUL delimiters."""
     return bytes(_run(root, args, binary=True, timeout=timeout).stdout)
+
+
+def run_git_optional_bytes(
+    root: Path, *args: str, timeout: int = 30
+) -> tuple[int, bytes]:
+    """Run a trusted Git command whose exit status is part of the observation."""
+    completed = _run(
+        root,
+        args,
+        binary=True,
+        allow_failure=True,
+        timeout=timeout,
+    )
+    return completed.returncode, bytes(completed.stdout)
 
 
 def _optional_git(root: Path, *args: str) -> tuple[int, str]:
@@ -245,11 +285,101 @@ def _parse_tagged_paths(payload: bytes) -> list[tuple[str, str]]:
     return rows
 
 
+def _nul_config_values(payload: bytes) -> list[str]:
+    fields = payload.split(b"\0")
+    if fields[-1] != b"":
+        raise TrustedGitError("trusted_git_configuration_forbidden")
+    try:
+        return [field.decode("utf-8") for field in fields[:-1]]
+    except UnicodeDecodeError as error:
+        raise TrustedGitError("trusted_git_configuration_forbidden") from error
+
+
+def _repository_visibility_configuration(root: Path) -> dict[str, Any]:
+    observed: dict[str, Any] = {}
+    worktree_extension = _run(
+        root,
+        (
+            "config",
+            "--local",
+            "--type=bool",
+            "--get",
+            "extensions.worktreeConfig",
+        ),
+        binary=False,
+        allow_failure=True,
+    )
+    if worktree_extension.returncode == 1:
+        worktree_configuration_active = False
+    elif worktree_extension.returncode == 0:
+        extension_value = str(worktree_extension.stdout).strip()
+        if extension_value not in {"true", "false"}:
+            raise TrustedGitError("trusted_git_configuration_forbidden")
+        worktree_configuration_active = extension_value == "true"
+    else:
+        raise TrustedGitError("trusted_git_configuration_forbidden")
+    for scope in ("local", "worktree"):
+        scoped: dict[str, Any] = {}
+        for key in _VISIBILITY_CONFIGURATION_KEYS:
+            if scope == "worktree" and not worktree_configuration_active:
+                scoped[key] = {
+                    "values": [],
+                    "normalised_boolean_values": [],
+                    "admitted": True,
+                }
+                continue
+            raw = _run(
+                root,
+                ("config", f"--{scope}", "--includes", "--null", "--get-all", key),
+                binary=True,
+                allow_failure=True,
+            )
+            if raw.returncode == 1:
+                values: list[str] = []
+                normalised: list[str] = []
+            elif raw.returncode == 0:
+                values = _nul_config_values(bytes(raw.stdout))
+                typed = _run(
+                    root,
+                    (
+                        "config",
+                        f"--{scope}",
+                        "--includes",
+                        "--type=bool",
+                        "--null",
+                        "--get-all",
+                        key,
+                    ),
+                    binary=True,
+                    allow_failure=True,
+                )
+                if typed.returncode != 0:
+                    raise TrustedGitError("trusted_git_configuration_forbidden")
+                normalised = _nul_config_values(bytes(typed.stdout))
+                if len(normalised) != len(values) or any(
+                    value != "false" for value in normalised
+                ):
+                    raise TrustedGitError("trusted_git_configuration_forbidden")
+            else:
+                raise TrustedGitError("trusted_git_configuration_forbidden")
+            scoped[key] = {
+                "values": values,
+                "normalised_boolean_values": normalised,
+                "admitted": True,
+            }
+        observed[scope] = scoped
+    observed["worktree_configuration_active"] = worktree_configuration_active
+    return observed
+
+
 def _reject_index_visibility_controls(root: Path) -> dict[str, Any]:
+    fsmonitor = _parse_tagged_paths(run_git_bytes(root, "ls-files", "-f", "-z"))
     verbose = _parse_tagged_paths(run_git_bytes(root, "ls-files", "-v", "-z"))
     typed = _parse_tagged_paths(run_git_bytes(root, "ls-files", "-t", "-z"))
-    if any(tag.islower() for tag, _path in verbose) or any(
-        tag == "S" for tag, _path in typed
+    if (
+        any(tag.islower() for tag, _path in fsmonitor)
+        or any(tag.islower() for tag, _path in verbose)
+        or any(tag == "S" for tag, _path in typed)
     ):
         raise TrustedGitError("trusted_git_index_flags_forbidden")
     sparse_status, sparse = _optional_git(
@@ -267,6 +397,7 @@ def _reject_index_visibility_controls(root: Path) -> dict[str, Any]:
         "entry_count": len(rows),
         "tracked_paths_sha256": _canonical_digest(rows),
         "assume_unchanged_count": 0,
+        "fsmonitor_valid_count": 0,
         "skip_worktree_count": 0,
         "sparse_checkout": False,
         "split_index": False,
@@ -457,6 +588,7 @@ def attest_repository(
     gitdir = _absolute_git_path(worktree, "--git-dir")
     commondir = _absolute_git_path(worktree, "--git-common-dir")
     index = _absolute_git_path(worktree, "--git-path", "index")
+    repository_configuration = _repository_visibility_configuration(worktree)
     flags = _reject_index_visibility_controls(worktree)
     head = run_git(worktree, "rev-parse", "HEAD")
     head_tree = run_git(worktree, "rev-parse", "HEAD^{tree}")
@@ -493,6 +625,8 @@ def attest_repository(
         "head_tree": head_tree,
         "index_tree": index_tree,
         "index_visibility": flags,
+        "command_overrides": list(_IDENTITY_COMMAND_OVERRIDES),
+        "repository_configuration": repository_configuration,
         "git_administration_files": admin_files,
         "physical_attestation": attestation,
         "no_replace_objects": True,
