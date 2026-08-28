@@ -1,21 +1,21 @@
 {
   "schema_version": "ariadne.active_operation_latch.v1",
-  "operation_id": "raisa-provider-free-unmounted-waiting-area-confirm-command-family-architecture",
-  "active_tranche": "Raisa provider-free unmounted waiting-area-confirm command-family architecture",
-  "objective": "Freeze one provider-free unmounted waiting-area-confirm command-family architecture with distinct operation identity, family-bound evidence, current-authority and locked destination checks, atomic waiting-area-only mutation/audit/idempotency/receipt semantics, canonical replay delivery and a non-actuating event posture without overlapping check-in or general status.",
-  "status": "replaced",
-  "source_head": "c720aaa306c449faae879bf9e6192c72b6c3c6a4",
-  "authority_source": "Yuri's external Gate G0 PASS and typed G0 transition activate bounded G1A.1 only.",
+  "operation_id": "g1a2-transition-enablement-20260828-v1",
+  "active_tranche": "G1A.2 transition enablement only",
+  "objective": "Record the owner ACCEPT_WITH_RESIDUAL_RISK disposition and prepare a reviewed G1A.1 to G1A.2 state-transition seam plus an inactive bounded G1A.2 profile without starting G1A.2 implementation or invoking a provider.",
+  "status": "paused",
+  "source_head": "91f1e6e645424a448bdcdfa2adabb86d31fb5f0b",
+  "authority_source": "Yuri Frusin fresh task generation g1a2-transition-enablement-20260828-v1",
   "checkpoint": {
-    "completed_stage": "Historical waiting-area successor terminally replaced by Yuri's Gate G0 recovery redirect; it cannot resume from this latch.",
-    "next_executable_stage": null,
+    "completed_stage": "Owner-authorised transition-enablement candidate prepared and left review_pending.",
+    "next_executable_stage": "External G1A.2 transition-enablement review only; no state transition or implementation is authorised.",
     "retry_counters": {
       "planning": 0,
       "implementation": 0,
-      "review": 0,
-      "verification": 0
+      "verification": 0,
+      "publication": 0
     },
-      "settings_fingerprint": "sha256:4cd67bc098e5bdf77682d0467f5bf2518bd500f661d1dcc127994ad8c143056f"
+    "settings_fingerprint": "sha256:b0bbd2102450eecc2e4ac7752e4ea8da8d0c59617e39181def37adf2f8c48754"
   },
   "interruption_policy": {
     "chronological_last_prompt_is_controlling_authority": false,
@@ -31,24 +31,19 @@
   },
   "terminal_response": {
     "permitted": true,
-    "reason": "explicit_yuri_recovery_redirect"
+    "reason": "owner_directed_stop_for_external_review"
   },
   "protected_boundaries": [
-    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
-    "no_product_behavior_change_outside_the_active_typed_gate_profile",
-    "no_production_runtime_deployment_release_or_pages",
-    "no_protected_evidence_access_or_protected_ref_movement",
-    "docs_branding_and_all_unrelated_untracked_files_preserved",
-    "explicit_path_staging_only",
-    "authored_synthetic_repository_test_data_only",
-    "no_product_patient_appointment_clinical_or_protected_data",
-    "no_historical_data_access",
-    "no_provider_model_or_external_network",
-    "historical_waiting_area_successor_replaced_and_non_resumable",
-    "typed_active_profile_only_then_named_external_review",
-    "preserved_legacy_worktree_is_neither_gatekeeper_nor_g1a_target",
-    "g1a_transition_opens_only_g1a_1",
-    "g1a_gatekeeper_inventory_includes_ignored_and_untracked_files",
-    "g1a_operations_bind_the_exact_remote_identity_and_explicit_destination"
+    "G1A.1_owner_disposition_and_transition_enablement_candidate_remain_frozen",
+    "G1A.1_owner_acceptance_is_not_an_external_PASS",
+    "G1A.1_implementation_and_residual_risk_record_remain_frozen",
+    "G1A.2_state_transition_not_started",
+    "G1A.2_implementation_not_started",
+    "provider_invocation_forbidden",
+    "Antigravity_source_and_tests_unchanged",
+    "G1A.3_integration_deferred",
+    "no_product_migration_dependency_deployment_Pages_or_protected_ref_change",
+    "only_recovery_branch_fast_forward_candidate_publication_authorised",
+    "legacy_worktree_and_unrelated_user_files_preserved"
   ]
 }

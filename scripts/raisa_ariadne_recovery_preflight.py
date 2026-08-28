@@ -167,12 +167,28 @@ def _risk_ids(repo_root: Path) -> set[str]:
 def _verification_phase(repo_root: Path, state: dict[str, Any]) -> str:
     """Select the one phase matching development, pre-push, or post-push Git state."""
     root = repo_root.resolve()
-    correction_key = str(state["active_correction"]).lower().replace(".", "_")
-    correction = state.get(f"{correction_key}_correction")
-    if not isinstance(correction, dict):
-        raise PreflightError("active correction binding unavailable")
-    parent = correction.get("authorized_parent_commit")
     head = _run_git(root, "rev-parse", "HEAD")
+    active_correction = state["active_correction"]
+    if active_correction == "G0.8":
+        parent = state["g0_8_correction"]["authorized_parent_commit"]
+    elif active_correction == "G1A.1":
+        reviewed = state["gate_transition"]["reviewed_commit"]
+        rows = _run_git(
+            root, "rev-list", "--reverse", f"{reviewed}..{head}"
+        ).splitlines()
+        parent = rows[0] if rows else None
+    elif active_correction == "G1A.2":
+        reviewed = state["g1a_subgate_authority"]["subgates"]["G1A.2"][
+            "state_transition"
+        ]["enablement_controller_commit"]
+        rows = _run_git(
+            root, "rev-list", "--reverse", f"{reviewed}..{head}"
+        ).splitlines()
+        parent = rows[0] if rows else None
+    else:
+        parent = None
+    if not isinstance(parent, str):
+        raise PreflightError("active correction binding unavailable")
     branch = _run_git(root, "branch", "--show-current")
     policy = load_programme_policy(root)
     try:
@@ -199,15 +215,17 @@ def build_task_manifest(
     *,
     intended_effects: Iterable[str] | None = None,
 ) -> dict[str, Any]:
-    """Build the current typed G0.8 or G1A.1 manifest without persisting a token."""
+    """Build the currently admitted typed task manifest without persisting a token."""
     root = repo_root.resolve()
     policy = load_programme_policy(root)
     active = policy.overlay["profiles"][policy.overlay["active_profile"]]
+    if not policy.state["task_selection"]["allowed_task_kinds"]:
+        raise PreflightError("no implementation task is currently eligible")
     if policy.state["active_correction"] == "G0.8":
         base_commit = policy.state["g0_8_correction"]["authorized_parent_commit"]
         task_id = "raisa-ariadne-g0-8-fsmonitor-closure"
         objective = "Close trusted Git fsmonitor configuration and index visibility plus complete the narrow pre-import source attestation only; stop before G1A implementation."
-    else:
+    elif policy.state["active_correction"] == "G1A.1":
         reviewed = policy.state["gate_transition"]["reviewed_commit"]
         rows = _run_git(root, "rev-list", "--reverse", f"{reviewed}..HEAD").splitlines()
         if not rows:
@@ -215,6 +233,16 @@ def build_task_manifest(
         base_commit = rows[0]
         task_id = "raisa-ariadne-g1a-1-pure-verdict-kernel"
         objective = "Repair the canonical verdict algebra and pure acceptance consumers inside the pre-reviewed G1A.1 scope only."
+    else:
+        reviewed = policy.state["g1a_subgate_authority"]["subgates"]["G1A.2"][
+            "state_transition"
+        ]["enablement_controller_commit"]
+        rows = _run_git(root, "rev-list", "--reverse", f"{reviewed}..HEAD").splitlines()
+        if not rows:
+            raise PreflightError("G1A.2 activation commit unavailable")
+        base_commit = rows[0]
+        task_id = "raisa-ariadne-g1a-2-antigravity-verdict-adapter"
+        objective = "Implement only the structured Antigravity verdict adapter inside the three pre-reviewed mutable symbols without provider invocation."
     return {
         "schema_version": TASK_MANIFEST_VERSION,
         "task_id": task_id,

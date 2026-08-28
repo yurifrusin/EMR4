@@ -1,13 +1,13 @@
 schema_version: "raisa-ariadne.g1a-verdict-integration-scope.v2"
 status: "pre_reviewed_closed_subgates"
-prepared_at: "2026-08-26T09:30:43+10:00"
-inventory_source_commit: "4ce17198fad677aed1fe45be4e3bf2b18c713b3b"
+prepared_at: "2026-08-28T11:17:02+10:00"
+inventory_source_commit: "91f1e6e645424a448bdcdfa2adabb86d31fb5f0b"
 active_subgate_after_g0_transition: "G1A.1"
 transition_opens_only: "G1A.1"
 objective: "Separate the pure verdict kernel, provider verdict adapter and integration mutator so each receives its own exact review and state transition."
 subgates:
   G1A.1:
-    status: "pre_reviewed_closed_scope"
+    status: "accepted_by_owner_with_residual_risk_frozen"
     task_class: "g1a_1_verdict_kernel_and_pure_consumers"
     objective: "Create one pure verdict algebra and migrate only provider-free acceptance consumers."
     allowed_paths:
@@ -68,7 +68,7 @@ subgates:
         path: "scripts/ariadne_review_acceptance.py"
         contract: "accepted_exit_0_rejected_exit_1_input_error_exit_2"
   G1A.2:
-    status: "closed_pending_g1a_1_external_acceptance_and_state_transition"
+    status: "closed_pending_transition_enablement_external_review_and_state_transition"
     task_class: "g1a_2_antigravity_verdict_adapter"
     objective: "Delegate Antigravity verdict interpretation to the accepted pure kernel without changing provider execution safety."
     allowed_paths:
@@ -103,7 +103,7 @@ subgates:
       - "parse_structured_decision"
     immutable_provider_contract:
       path: "scripts/ariadne_antigravity.py"
-      source_commit: "4ce17198fad677aed1fe45be4e3bf2b18c713b3b"
+      source_commit: "91f1e6e645424a448bdcdfa2adabb86d31fb5f0b"
       hash_semantics: "sha256_of_ast_dump_with_allowed_mutation_symbols_replaced_by_pass"
       protected_ast_sha256: "sha256:30e1e223a18ec9ac7b88fa8f338550abad1a5613feb985574af0299eb533edbc"
       protected_symbols:

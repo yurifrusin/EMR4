@@ -1,7 +1,7 @@
 schema_version: "raisa-ariadne.programme-gates.v1"
 programme:
   name: "Raisa Medical Office and Ariadne Recovery & Convergence"
-  prepared_at: "2026-08-27T14:17:53+10:00"
+  prepared_at: "2026-08-28T11:17:02+10:00"
   repository: "yurifrusin/EMR4"
   observed_public_master: "2e34bdad732fdab32fbf778280b3d3c70d66d602"
   programme_mode: "recovery"
@@ -10,7 +10,7 @@ programme:
   feature_work_eligible: false
   clockwork_remote_visibility: "source_branch_aligned_with_origin"
   clockwork_local_state: "preserved_exactly_at_03e6860394c39086ec1ffb3f2457acc5f7c8b5f9"
-  next_eligible_tranche: "G1A.1"
+  next_eligible_tranche: "G1A.2"
 
 global_hard_stops:
   - "critical_or_high_security_finding"
@@ -381,7 +381,7 @@ gates:
 
   - id: "G1A"
     name: "Correct Verdict and Integration Semantics"
-    status: "active_subgate_G1A_1"
+    status: "transition_enablement_review_pending"
     prerequisites: ["G1A.1", "G1A.2", "G1A.3"]
     programme_mode: "recovery"
     exit_checks:
@@ -395,7 +395,7 @@ gates:
 
   - id: "G1A.1"
     name: "Canonical Verdict Kernel and Pure Acceptance Consumers"
-    status: "active"
+    status: "accepted_by_owner_with_residual_risk"
     prerequisites: ["external_G0_review_pass_and_separate_gate_transition"]
     programme_mode: "recovery"
     exit_checks:
@@ -404,12 +404,12 @@ gates:
       - "negative_ambiguous_or_conflicting_verdict_never_authorizes_integration"
       - "pure_consumers_delegate_to_the_canonical_parser"
       - "provider_transport_and_integration_mutation_are_unchanged"
-    next_gate: "external_G1A_1_review"
+    next_gate: "G1A.2-E0_external_review"
 
   - id: "G1A.2"
     name: "Antigravity Provider Verdict Adapter"
-    status: "blocked_by_G1A_1_external_review"
-    prerequisites: ["G1A.1_external_review_pass_and_state_only_subgate_transition"]
+    status: "closed_pending_transition_enablement_external_review_and_state_transition"
+    prerequisites: ["G1A.1_owner_accept_with_residual_risk", "G1A.2-E0_external_review_pass", "state_only_subgate_transition"]
     programme_mode: "recovery"
     exit_checks:
       - "provider_launch_admission_worktree_and_receipt_safety_symbols_unchanged"

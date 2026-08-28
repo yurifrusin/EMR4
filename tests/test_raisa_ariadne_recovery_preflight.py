@@ -3,6 +3,8 @@ from pathlib import Path
 
 import pytest
 
+import orchestration_harness.programme_admission as pa
+
 from scripts.raisa_ariadne_recovery_preflight import (
     ALLOWED_G0_TRACKED_PATHS,
     EXPECTED_RISKS,
@@ -11,6 +13,7 @@ from scripts.raisa_ariadne_recovery_preflight import (
     _remote_baseline_snapshot,
     _risk_ids,
     _verification_phase,
+    PreflightError,
     build_task_manifest,
     build_report,
     main,
@@ -27,24 +30,38 @@ def load_state() -> dict:
 
 def test_g0_recovery_preflight_uses_the_current_git_lifecycle_phase() -> None:
     phase = _verification_phase(ROOT, load_state())
-    report = build_report(ROOT, build_task_manifest(ROOT), phase)
+    with pytest.raises(PreflightError, match="no implementation task"):
+        build_task_manifest(ROOT)
+    report = build_report(ROOT, None, phase)
 
-    assert report["status"] == "passed"
+    assert report["status"] == "blocked"
     assert report["phase"] == phase
     assert report["programme_mode"] == "recovery"
-    assert report["current_gate"] == "G0"
+    assert report["current_gate"] == "G1A.1"
     assert report["feature_work_eligible"] is False
     assert report["global_gate"] == "red_repair_only"
-    assert report["failed_checks"] == []
-    assert all(check["passed"] for check in report["checks"])
+    assert "programme_admission" in report["failed_checks"]
 
 
 @pytest.mark.parametrize("task_class", ["product_feature", "g1a", "integration"])
 def test_every_out_of_gate_task_class_is_mechanically_blocked(
     task_class: str,
 ) -> None:
-    manifest = build_task_manifest(ROOT)
-    manifest["task_class"] = task_class
+    policy = pa.load_programme_policy(ROOT)
+    manifest = {
+        "schema_version": pa.TASK_MANIFEST_VERSION,
+        "task_id": "closed-candidate-probe",
+        "task_class": task_class,
+        "programme_gate": "G1A.1",
+        "objective": "Prove the owner disposition does not open implementation.",
+        "base_commit": "91f1e6e645424a448bdcdfa2adabb86d31fb5f0b",
+        "candidate_or_current_head": "91f1e6e645424a448bdcdfa2adabb86d31fb5f0b",
+        "allowed_path_roots": [],
+        "intended_side_effect_classes": ["repository_read"],
+        "forbidden_side_effect_classes": sorted(pa.G1A_FORBIDDEN_EFFECTS),
+        "state_digest": policy.state_digest,
+        "policy_digest": policy.policy_digest,
+    }
     report = build_report(ROOT, manifest, "development")
 
     assert report["status"] == "blocked"
@@ -73,16 +90,16 @@ def test_machine_state_freezes_authority_and_forbidden_actions() -> None:
 
     assert state["machine_authoritative"] is True
     assert state["programme_mode"] == "recovery"
-    assert state["current_gate"] == "G0"
-    assert state["current_gate_status"] == "revision_required"
-    assert state["active_correction"] == "G0.8"
-    assert state["active_profile"] == "G0.8_FSMONITOR_CLOSURE"
+    assert state["current_gate"] == "G1A.1"
+    assert state["current_gate_status"] == "active"
+    assert state["active_correction"] == "G1A.1"
+    assert state["active_profile"] == "G1A.1_ACTIVE"
     assert state["feature_work_eligible"] is False
     assert state["g0_2_correction"]["status"] == "superseded_revision_required"
     assert state["g0_4_correction"]["status"] == "superseded_revision_required"
     assert state["g0_5_correction"]["status"] == "superseded_revision_required"
     assert state["g0_6_correction"]["status"] == "superseded_revision_required"
-    assert state["g0_8_correction"]["status"] in {"in_progress", "review_pending"}
+    assert state["g0_8_correction"]["status"] == "external_review_passed"
     assert state["g0_8_correction"]["authorized_parent_commit"] == (
         "6e101d15f824f68c3f44d0a3cb44a3aa2afd5b1b"
     )
@@ -129,7 +146,11 @@ def test_static_alembic_graph_has_one_recorded_head() -> None:
 
 
 def test_tracked_working_changes_cannot_escape_the_g0_allowlist() -> None:
-    assert _changed_tracked_paths(ROOT) <= ALLOWED_G0_TRACKED_PATHS
+    assert _changed_tracked_paths(ROOT) <= (
+        ALLOWED_G0_TRACKED_PATHS
+        | pa.G1A_ALLOWED_PATHS
+        | pa.G1A2_ENABLEMENT_ALLOWED_PATHS
+    )
 
 
 def test_preflight_source_contains_no_write_or_network_primitive() -> None:

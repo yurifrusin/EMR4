@@ -1,0 +1,24 @@
+{
+  "schema_version": "ariadne.owner_subgate_disposition.v1",
+  "disposition_id": "g1a1-owner-accept-91f1e6e-20260828",
+  "recorded_at": "2026-08-28T11:17:02+10:00",
+  "owner": "Yuri Frusin",
+  "programme_gate": "G1A.1",
+  "subject_commit": "91f1e6e645424a448bdcdfa2adabb86d31fb5f0b",
+  "subject_tree": "24b92d586061901e7574d511105b21ea66d97f7e",
+  "decision": "ACCEPT_WITH_RESIDUAL_RISK",
+  "residual_risks": [
+    {
+      "id": "G1A1-PARSER-MIXED-TAB-001",
+      "classification": "parser_robustness_backlog",
+      "description": "Mixed space-plus-tab indentation remains an unclosed free-form source-text marker edge case.",
+      "accepted_for_progression": true,
+      "must_be_reconsidered_before": "future high-trust free-form text integration authority"
+    }
+  ],
+  "g1a2_transition_enablement_authorized": true,
+  "g1a2_state_transition_authorized": false,
+  "g1a2_implementation_authorized": false,
+  "provider_invocation_authorized": false,
+  "integration_authorized": false
+}

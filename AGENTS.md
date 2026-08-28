@@ -3,8 +3,8 @@
 `orchestration/programme/current-state.json`, `orchestration/programme/gates.yaml`,
 and the active recovery admission policy outrank the historical baton below while
 the programme is in recovery. The older baton is evidence only and its named
-successor must not resume. The reviewed G0 to G1A.1 transition is complete; Gate G1A.1 is active
-for its bounded pure-verdict task only. Missing, malformed, stale, or contradictory programme state is a hard stop.
+successor must not resume. Gate G1A.1 is owner-accepted with residual risk; G1A.2
+transition enablement is review-pending and its state transition, implementation and provider invocation remain closed. Missing, malformed, stale, or contradictory programme state is a hard stop.
 
 # EMR4 Centaur — Live Agent Handover
 

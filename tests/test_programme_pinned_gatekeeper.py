@@ -11,6 +11,7 @@ import orchestration_harness.pinned_programme_gatekeeper as pg
 import scripts.raisa_ariadne_gatekeeper_bootstrap as bootstrap
 from scripts.raisa_ariadne_recovery_preflight import build_task_manifest
 from tests.test_programme_admission import (
+    _build_subgate_transition_repository,
     _build_transition_repository,
     _git,
     _write_json,
@@ -541,6 +542,255 @@ def test_real_bare_origin_transition_and_g1a_lifecycle_passes(tmp_path: Path) ->
         assert completed.returncode == 2
         assert payload["admitted"] is False
         assert "scope_tranche_path_outside_policy" in payload["reason_codes"]
+
+
+def test_real_subgate_transition_and_g1a2_exact_lifecycle_passes(
+    tmp_path: Path,
+) -> None:
+    target, gatekeeper, transition_manifest, enablement = (
+        _build_subgate_transition_repository(tmp_path)
+    )
+    transition_manifest_path = _manifest_path(
+        target, transition_manifest, "g1a2-transition-manifest.json"
+    )
+
+    development, development_payload = _gatekeeper_cli(
+        gatekeeper=gatekeeper,
+        target=target,
+        manifest_path=transition_manifest_path,
+        phase="development",
+    )
+    assert development.returncode == 0, development_payload
+    assert development_payload["admitted"] is True
+    assert development_payload["gatekeeper_commit"] == enablement
+    assert set(development_payload["scope_decision"]["changed_paths"]) >= set(
+        transition_manifest["allowed_transition_paths"]
+    )
+
+    transition_commit, transition_commit_receipt = _gatekeeper_operation(
+        operation="commit",
+        gatekeeper=gatekeeper,
+        target=target,
+        manifest_path=transition_manifest_path,
+        receipt_directory=tmp_path / "g1a2-transition-commit-receipts",
+        message="synthetic state-only G1A.1 to G1A.2 transition",
+    )
+    assert transition_commit.returncode == 0, transition_commit_receipt
+    transition_sha = transition_commit_receipt["result_sha"]
+    assert (
+        _git(target, "rev-list", "--parents", "-n", "1", transition_sha).split()[1]
+        == enablement
+    )
+
+    pre_transition, pre_transition_payload = _gatekeeper_cli(
+        gatekeeper=gatekeeper,
+        target=target,
+        manifest_path=transition_manifest_path,
+        phase="pre-push",
+    )
+    assert pre_transition.returncode == 0, pre_transition_payload
+    transition_push, transition_push_receipt = _gatekeeper_operation(
+        operation="push",
+        gatekeeper=gatekeeper,
+        target=target,
+        manifest_path=transition_manifest_path,
+        receipt_directory=tmp_path / "g1a2-transition-push-receipts",
+    )
+    assert transition_push.returncode == 0, transition_push_receipt
+    assert transition_push_receipt["post_push_readback_sha"] == transition_sha
+    post_transition, post_transition_payload = _gatekeeper_cli(
+        gatekeeper=gatekeeper,
+        target=target,
+        manifest_path=transition_manifest_path,
+        phase="post-push",
+    )
+    assert post_transition.returncode == 0, post_transition_payload
+    assert post_transition_payload["admitted"] is True
+
+    policy = pa.load_programme_policy(target)
+    assert policy.state["current_gate"] == "G1A.2"
+    assert policy.overlay["active_profile"] == pa.G1A2_ACTIVE_PROFILE
+    assert (
+        policy.state["g1a_subgate_authority"]["subgates"]["G1A.2"][
+            "provider_invocation_authorized"
+        ]
+        is False
+    )
+    exact_manifest = build_task_manifest(target)
+    narrowed_manifest = dict(exact_manifest)
+    narrowed_manifest["allowed_path_roots"] = ["scripts/ariadne_antigravity.py"]
+    narrowed = pa.evaluate_programme_admission(
+        repo_root=target,
+        manifest=narrowed_manifest,
+        entrypoint="recovery_preflight",
+    )
+    assert narrowed.admitted is False
+    assert narrowed.reason_codes == ["g1a_2_task_manifest_paths_not_exact"]
+    reopened_manifest = dict(exact_manifest)
+    reopened_manifest["allowed_path_roots"] = [
+        *exact_manifest["allowed_path_roots"],
+        "orchestration_harness/verdict.py",
+    ]
+    reopened = pa.evaluate_programme_admission(
+        repo_root=target,
+        manifest=reopened_manifest,
+        entrypoint="recovery_preflight",
+    )
+    assert reopened.admitted is False
+    assert reopened.reason_codes == ["task_manifest_path_outside_policy"]
+
+    candidate_gatekeeper_path = (
+        target / "orchestration_harness/pinned_programme_gatekeeper.py"
+    )
+    candidate_gatekeeper_bytes = candidate_gatekeeper_path.read_bytes()
+    candidate_gatekeeper_path.write_text(
+        "print('FORGED_G1A2_CANDIDATE_ACCEPT')\n", encoding="utf-8"
+    )
+    _git(
+        target,
+        "add",
+        "--",
+        "orchestration_harness/pinned_programme_gatekeeper.py",
+    )
+    forged_manifest = build_task_manifest(target)
+    forged_manifest_path = _manifest_path(
+        target, forged_manifest, "g1a2-forged-gatekeeper-manifest.json"
+    )
+    forged, forged_payload = _gatekeeper_cli(
+        gatekeeper=gatekeeper,
+        target=target,
+        manifest_path=forged_manifest_path,
+        phase="development",
+    )
+    assert forged.returncode == 2
+    assert forged_payload["admitted"] is False
+    assert "FORGED_G1A2_CANDIDATE_ACCEPT" not in forged.stdout
+    candidate_gatekeeper_path.write_bytes(candidate_gatekeeper_bytes)
+    _git(
+        target,
+        "add",
+        "--",
+        "orchestration_harness/pinned_programme_gatekeeper.py",
+    )
+
+    antigravity_path = target / "scripts/ariadne_antigravity.py"
+    antigravity = antigravity_path.read_text(encoding="utf-8")
+    antigravity_path.write_text(
+        antigravity.replace(
+            "        return STRUCTURED_DECISION_SCHEMA\n",
+            "        return dict(STRUCTURED_DECISION_SCHEMA)\n",
+            1,
+        )
+        .replace(
+            '    admitted: dict[str, Any] = {"decision": decision, "review": review.strip()}\n',
+            '    admitted: dict[str, Any] = {"decision": str(decision), "review": review.strip()}\n',
+            1,
+        )
+        .replace(
+            "    return next(iter(unique.values()))\n",
+            "    return dict(next(iter(unique.values())))\n",
+            1,
+        ),
+        encoding="utf-8",
+    )
+    antigravity_test_path = target / "tests/test_ariadne_antigravity.py"
+    antigravity_test_path.write_text(
+        antigravity_test_path.read_text(encoding="utf-8")
+        + "\n\ndef test_synthetic_g1a2_exact_enum_adapter():\n"
+        + "    assert {'pass', 'revision_required'} == {'pass', 'revision_required'}\n",
+        encoding="utf-8",
+    )
+    _git(
+        target,
+        "add",
+        "--",
+        "scripts/ariadne_antigravity.py",
+        "tests/test_ariadne_antigravity.py",
+    )
+    task_manifest = build_task_manifest(target)
+    assert set(task_manifest["allowed_path_roots"]) == pa.G1A2_ALLOWED_PATHS
+    assert set(task_manifest["intended_side_effect_classes"]) == (
+        pa.G1A2_ALLOWED_EFFECTS
+    )
+    provider_denial = pa.evaluate_programme_admission(
+        repo_root=target,
+        manifest=task_manifest,
+        entrypoint="provider_invocation",
+    )
+    assert provider_denial.admitted is False
+    assert provider_denial.reason_codes == [
+        "provider_invocation_closed_in_active_profile"
+    ]
+    assert pa.g1a2_provider_contract_reasons(target) == []
+
+    local_decision = pa.evaluate_programme_operation_admission(
+        repo_root=target,
+        manifest=task_manifest,
+        entrypoint="task_branch_commit",
+        phase="development",
+    )
+    assert local_decision.admitted is False
+    assert local_decision.reason_codes == ["pinned_gatekeeper_required"]
+    task_manifest_path = _manifest_path(
+        target, task_manifest, "g1a2-development-manifest.json"
+    )
+    task_development, task_development_payload = _gatekeeper_cli(
+        gatekeeper=gatekeeper,
+        target=target,
+        manifest_path=task_manifest_path,
+        phase="development",
+    )
+    assert task_development.returncode == 0, task_development_payload
+    assert task_development_payload["admitted"] is True
+
+    task_commit, task_commit_receipt = _gatekeeper_operation(
+        operation="commit",
+        gatekeeper=gatekeeper,
+        target=target,
+        manifest_path=task_manifest_path,
+        receipt_directory=tmp_path / "g1a2-task-commit-receipts",
+        message="synthetic bounded G1A.2 adapter",
+    )
+    assert task_commit.returncode == 0, task_commit_receipt
+    task_sha = task_commit_receipt["result_sha"]
+    task_manifest = build_task_manifest(target)
+    task_manifest_path = _manifest_path(
+        target, task_manifest, "g1a2-pre-push-manifest.json"
+    )
+    pre_task, pre_task_payload = _gatekeeper_cli(
+        gatekeeper=gatekeeper,
+        target=target,
+        manifest_path=task_manifest_path,
+        phase="pre-push",
+    )
+    assert pre_task.returncode == 0, pre_task_payload
+    task_push, task_push_receipt = _gatekeeper_operation(
+        operation="push",
+        gatekeeper=gatekeeper,
+        target=target,
+        manifest_path=task_manifest_path,
+        receipt_directory=tmp_path / "g1a2-task-push-receipts",
+    )
+    assert task_push.returncode == 0, task_push_receipt
+    assert task_push_receipt["post_push_readback_sha"] == task_sha
+    post_task, post_task_payload = _gatekeeper_cli(
+        gatekeeper=gatekeeper,
+        target=target,
+        manifest_path=task_manifest_path,
+        phase="post-push",
+    )
+    assert post_task.returncode == 0, post_task_payload
+    assert post_task_payload["admitted"] is True
+    assert (
+        _git(
+            target,
+            "ls-remote",
+            "--refs",
+            str(tmp_path / "g1a2-origin.git"),
+            "refs/heads/codex/raisa-ariadne-recovery-g0",
+        ).split()[0]
+        == task_sha
+    )
 
 
 @pytest.mark.parametrize(

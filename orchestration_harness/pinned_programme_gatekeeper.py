@@ -220,6 +220,11 @@ def evaluate_pinned_programme_operation(
         == admission.ADMITTED_PROGRAMME_GATE
         and target_policy.state.get("active_profile") == admission.G0_CONTROLLER_PROFILE
     )
+    g1a2_active = (
+        target_policy.state.get("active_correction")
+        == admission.SUBGATE_TRANSITION_TO_GATE
+        and target_policy.state.get("active_profile") == admission.G1A2_ACTIVE_PROFILE
+    )
     normalized_legacy = (
         str(target_worktree_policy["preserved_legacy_worktree"])
         .replace("\\", "/")
@@ -234,8 +239,12 @@ def evaluate_pinned_programme_operation(
     ):
         reasons.append("gatekeeper_target_preserved_legacy_worktree_forbidden")
 
-    acceptance = target_policy.state["g0_acceptance"]
-    decisive_id = acceptance.get("decisive_review_id")
+    if g1a2_active:
+        acceptance = target_policy.state["g1a_subgate_authority"]
+        decisive_id = acceptance.get("decisive_transition_enablement_review_id")
+    else:
+        acceptance = target_policy.state["g0_acceptance"]
+        decisive_id = acceptance.get("decisive_review_id")
     history = acceptance.get("external_review_history")
     if isinstance(decisive_id, str) and isinstance(history, list):
         decisive_review = next(
@@ -283,6 +292,41 @@ def evaluate_pinned_programme_operation(
             or target_policy.state.get("gate_transition") is not None
         ):
             reasons.append("gatekeeper_source_not_g0_candidate_pinned")
+    elif g1a2_active:
+        if decisive_review is None:
+            reasons.append("gatekeeper_subgate_decisive_review_missing")
+        elif (
+            decisive_review.get("verdict") != "PASS"
+            or decisive_review.get("blocking_finding_count") != 0
+            or decisive_review.get("g1a2_state_transition_authorized") is not True
+            or decisive_review.get("g1a2_implementation_authorized") is not False
+            or decisive_review.get("provider_invocation_authorized") is not False
+        ):
+            reasons.append("gatekeeper_subgate_decisive_review_not_pass")
+
+        g1a2 = target_policy.state["g1a_subgate_authority"]["subgates"]["G1A.2"]
+        transition = g1a2.get("state_transition")
+        if not isinstance(transition, dict):
+            reasons.append("gatekeeper_subgate_transition_record_missing")
+        else:
+            transition_id = transition.get("transition_id")
+            if gatekeeper_commit != transition.get(
+                "enablement_controller_commit"
+            ) or gatekeeper_tree != transition.get("enablement_controller_tree"):
+                reasons.append("gatekeeper_source_not_subgate_transition_pinned")
+            if decisive_review is not None and (
+                transition_id != decisive_review.get("review_id")
+                or gatekeeper_commit != decisive_review.get("reviewed_commit")
+                or gatekeeper_tree != decisive_review.get("reviewed_tree")
+            ):
+                reasons.append("gatekeeper_source_not_subgate_review_pinned")
+            if (
+                g1a2.get("state_transition_status") != "complete"
+                or g1a2.get("implementation_authorized") is not True
+                or g1a2.get("implementation_started") is not False
+                or g1a2.get("provider_invocation_authorized") is not False
+            ):
+                reasons.append("gatekeeper_target_subgate_state_invalid")
     else:
         if decisive_review is None:
             reasons.append("gatekeeper_decisive_review_missing")
@@ -316,34 +360,67 @@ def evaluate_pinned_programme_operation(
 
     artifact: dict[str, Any] | None = None
     if not g0_recovery_push and isinstance(transition_id, str):
-        artifact_path = (
-            target / admission.TRANSITION_ARTIFACT_ROOT / f"{transition_id}.json"
+        artifact_root = (
+            admission.SUBGATE_TRANSITION_ARTIFACT_ROOT
+            if g1a2_active
+            else admission.TRANSITION_ARTIFACT_ROOT
         )
+        artifact_path = target / artifact_root / f"{transition_id}.json"
         try:
             artifact = admission.strict_json_object(artifact_path)
         except admission.ProgrammeAdmissionError as error:
             reasons.append(error.reason_code)
         if artifact is not None:
-            expected_artifact_fields = {
-                "schema_version",
-                "transition_id",
-                "recorded_at",
-                "transition_manifest",
-                "transition_manifest_sha256",
-                "reviewed_commit",
-                "reviewed_tree",
-                "external_review_record_sha256",
-                "state_digest_before",
-                "state_digest_after",
-                "policy_digest_before",
-                "policy_digest_after",
-                "changed_semantic_pointers",
-                "scope_result",
-                "target_cleanliness_contract",
-            }
+            expected_artifact_fields = (
+                {
+                    "schema_version",
+                    "transition_id",
+                    "recorded_at",
+                    "transition_manifest",
+                    "transition_manifest_sha256",
+                    "owner_disposition_record_sha256",
+                    "external_review_record_sha256",
+                    "enablement_controller_commit",
+                    "enablement_controller_tree",
+                    "state_digest_before",
+                    "state_digest_after",
+                    "policy_digest_before",
+                    "policy_digest_after",
+                    "changed_semantic_pointers",
+                    "scope_result",
+                    "g1a2_profile_contract",
+                }
+                if g1a2_active
+                else {
+                    "schema_version",
+                    "transition_id",
+                    "recorded_at",
+                    "transition_manifest",
+                    "transition_manifest_sha256",
+                    "reviewed_commit",
+                    "reviewed_tree",
+                    "external_review_record_sha256",
+                    "state_digest_before",
+                    "state_digest_after",
+                    "policy_digest_before",
+                    "policy_digest_after",
+                    "changed_semantic_pointers",
+                    "scope_result",
+                    "target_cleanliness_contract",
+                }
+            )
             if set(artifact) != expected_artifact_fields:
                 reasons.append("gatekeeper_transition_artifact_schema_invalid")
-            elif (
+            elif g1a2_active and (
+                artifact["schema_version"] != "ariadne.g1a1-to-g1a2-transition.v1"
+                or artifact["transition_id"] != transition_id
+                or artifact["enablement_controller_commit"] != gatekeeper_commit
+                or artifact["enablement_controller_tree"] != gatekeeper_tree
+                or artifact["state_digest_after"] != target_policy.state_digest
+                or artifact["policy_digest_after"] != target_policy.policy_digest
+            ):
+                reasons.append("gatekeeper_target_not_subgate_transition_version")
+            elif not g1a2_active and (
                 artifact["schema_version"] != "raisa-ariadne.g0-to-g1a-transition.v1"
                 or artifact["transition_id"] != transition_id
                 or artifact["reviewed_commit"] != gatekeeper_commit
@@ -354,7 +431,10 @@ def evaluate_pinned_programme_operation(
                 reasons.append("gatekeeper_target_not_transition_version")
 
     if isinstance(manifest, dict) and artifact is not None:
-        if manifest.get("schema_version") == admission.TRANSITION_MANIFEST_VERSION:
+        if manifest.get("schema_version") in {
+            admission.TRANSITION_MANIFEST_VERSION,
+            admission.SUBGATE_TRANSITION_MANIFEST_VERSION,
+        }:
             if artifact.get("transition_manifest") != manifest:
                 reasons.append("gatekeeper_transition_manifest_not_bound")
         elif manifest.get("state_digest") != artifact.get(
