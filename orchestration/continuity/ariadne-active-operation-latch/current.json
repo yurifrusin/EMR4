@@ -1,21 +1,21 @@
 {
   "schema_version": "ariadne.active_operation_latch.v1",
-  "operation_id": "g1a2-transition-enablement-20260828-v1",
-  "active_tranche": "G1A.2 transition enablement only",
-  "objective": "Record the owner ACCEPT_WITH_RESIDUAL_RISK disposition and prepare a reviewed G1A.1 to G1A.2 state-transition seam plus an inactive bounded G1A.2 profile without starting G1A.2 implementation or invoking a provider.",
-  "status": "paused",
-  "source_head": "91f1e6e645424a448bdcdfa2adabb86d31fb5f0b",
-  "authority_source": "Yuri Frusin fresh task generation g1a2-transition-enablement-20260828-v1",
+  "operation_id": "g1a2-antigravity-verdict-adapter",
+  "active_tranche": "G1A.2 bounded Antigravity verdict adapter",
+  "objective": "Implement only the structured verdict adapter inside the three reviewed Antigravity symbols without invoking a provider.",
+  "status": "in_progress",
+  "source_head": "dab684e84270a3ce4a8a2fca5fbead2ea2361ef6",
+  "authority_source": "External G1A.2 transition-enablement PASS plus Yuri Frusin owner disposition",
   "checkpoint": {
-    "completed_stage": "Owner-authorised transition-enablement candidate prepared and left review_pending.",
-    "next_executable_stage": "External G1A.2 transition-enablement review only; no state transition or implementation is authorised.",
+    "completed_stage": "Externally accepted state-only G1A.1 to G1A.2 transition complete.",
+    "next_executable_stage": "Implement the bounded G1A.2 Antigravity verdict adapter without provider invocation.",
     "retry_counters": {
       "planning": 0,
       "implementation": 0,
       "verification": 0,
       "publication": 0
     },
-    "settings_fingerprint": "sha256:b0bbd2102450eecc2e4ac7752e4ea8da8d0c59617e39181def37adf2f8c48754"
+    "settings_fingerprint": "sha256:08049975465eb044c3111b9073184adbd098bacb86199abdb738fcd0d536d319"
   },
   "interruption_policy": {
     "chronological_last_prompt_is_controlling_authority": false,
@@ -24,21 +24,21 @@
     "scope_addition_behavior": "merge_then_resume",
     "replacement_requires_explicit_pause_or_redirect": true
   },
-  "resume_after_compaction": false,
+  "resume_after_compaction": true,
   "user_attention": {
     "required": false,
     "reason": null
   },
   "terminal_response": {
-    "permitted": true,
-    "reason": "owner_directed_stop_for_external_review"
+    "permitted": false,
+    "reason": "unfinished_authorized_operation"
   },
   "protected_boundaries": [
     "G1A.1_owner_disposition_and_transition_enablement_candidate_remain_frozen",
     "G1A.1_owner_acceptance_is_not_an_external_PASS",
     "G1A.1_implementation_and_residual_risk_record_remain_frozen",
-    "G1A.2_state_transition_not_started",
-    "G1A.2_implementation_not_started",
+    "G1A.2_state_transition_complete_and_frozen",
+    "G1A.2_implementation_bounded_authorized_not_started",
     "provider_invocation_forbidden",
     "Antigravity_source_and_tests_unchanged",
     "G1A.3_integration_deferred",

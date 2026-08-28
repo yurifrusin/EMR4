@@ -1,11 +1,11 @@
 schema_version: "raisa-ariadne.programme-gates.v1"
 programme:
   name: "Raisa Medical Office and Ariadne Recovery & Convergence"
-  prepared_at: "2026-08-28T11:17:02+10:00"
+  prepared_at: "2026-08-28T14:37:40+10:00"
   repository: "yurifrusin/EMR4"
   observed_public_master: "2e34bdad732fdab32fbf778280b3d3c70d66d602"
   programme_mode: "recovery"
-  current_gate: "G1A.1"
+  current_gate: "G1A.2"
   current_gate_status: "active"
   feature_work_eligible: false
   clockwork_remote_visibility: "source_branch_aligned_with_origin"
@@ -381,7 +381,7 @@ gates:
 
   - id: "G1A"
     name: "Correct Verdict and Integration Semantics"
-    status: "transition_enablement_review_pending"
+    status: "active_subgate_G1A_2"
     prerequisites: ["G1A.1", "G1A.2", "G1A.3"]
     programme_mode: "recovery"
     exit_checks:
@@ -404,11 +404,11 @@ gates:
       - "negative_ambiguous_or_conflicting_verdict_never_authorizes_integration"
       - "pure_consumers_delegate_to_the_canonical_parser"
       - "provider_transport_and_integration_mutation_are_unchanged"
-    next_gate: "G1A.2-E0_external_review"
+    next_gate: "G1A.2"
 
   - id: "G1A.2"
     name: "Antigravity Provider Verdict Adapter"
-    status: "closed_pending_transition_enablement_external_review_and_state_transition"
+    status: "active"
     prerequisites: ["G1A.1_owner_accept_with_residual_risk", "G1A.2-E0_external_review_pass", "state_only_subgate_transition"]
     programme_mode: "recovery"
     exit_checks:

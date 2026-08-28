@@ -1,0 +1,15 @@
+{
+  "schema_version": "ariadne.external_subgate_review.v1",
+  "review_id": "g1a2-e0-review-dab684e-independent-20260828-pass",
+  "recorded_at": "2026-08-28T13:23:24+10:00",
+  "review_subject": "G1A.2_transition_enablement",
+  "reviewed_commit": "dab684e84270a3ce4a8a2fca5fbead2ea2361ef6",
+  "reviewed_tree": "13942ffcd4b791615b97c10696dc4a07f7e6c85a",
+  "verdict": "PASS",
+  "blocking_finding_count": 0,
+  "reviewer_surface": "external_chatgpt_repository_review",
+  "g1a2_state_transition_authorized": true,
+  "g1a2_implementation_authorized": false,
+  "provider_invocation_authorized": false,
+  "source_artifact_sha256": "e8c3d4424538a9682283a7ebac0f9c100951b999c796211897094fa5ccb4889d"
+}
