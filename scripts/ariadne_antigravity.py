@@ -72,43 +72,46 @@ def structured_decision_schema(
     command_manifest: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Build the exact verifier egress schema for the selected command gate."""
-    if command_manifest is None:
-        return STRUCTURED_DECISION_SCHEMA
-    commands = command_manifest["commands"]
-    return {
+    from orchestration_harness.verdict import ReviewVerdict
+
+    schema: dict[str, Any] = {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
         "type": "object",
         "additionalProperties": False,
-        "required": ["decision", "review", "command_results"],
+        "required": ["decision", "review"],
         "properties": {
-            "decision": {"enum": ["pass", "revision_required"]},
+            "decision": {"enum": [verdict.value for verdict in ReviewVerdict]},
             "review": {"type": "string", "minLength": 1, "maxLength": 40000},
-            "command_results": {
-                "type": "array",
-                "minItems": len(commands),
-                "maxItems": len(commands),
-                # The provider tool-schema dialect requires an explicit `items`
-                # schema and does not admit tuple-only `prefixItems`. Exact id,
-                # argv and ordering remain enforced locally by
-                # `admit_command_results` after structured output returns.
-                "items": {
-                    "type": "object",
-                    "additionalProperties": False,
-                    "required": ["id", "argv", "exit_code"],
-                    "properties": {
-                        "id": {"enum": [command["id"] for command in commands]},
-                        "argv": {
-                            "type": "array",
-                            "minItems": 1,
-                            "maxItems": 128,
-                            "items": {"type": "string"},
-                        },
-                        "exit_code": {"type": "integer"},
-                    },
-                },
-            },
         },
     }
+    if command_manifest is not None:
+        commands = command_manifest["commands"]
+        schema["required"].append("command_results")
+        schema["properties"]["command_results"] = {
+            "type": "array",
+            "minItems": len(commands),
+            "maxItems": len(commands),
+            # The provider tool-schema dialect requires an explicit `items`
+            # schema and does not admit tuple-only `prefixItems`. Exact id,
+            # argv and ordering remain enforced locally by
+            # `admit_command_results` after structured output returns.
+            "items": {
+                "type": "object",
+                "additionalProperties": False,
+                "required": ["id", "argv", "exit_code"],
+                "properties": {
+                    "id": {"enum": [command["id"] for command in commands]},
+                    "argv": {
+                        "type": "array",
+                        "minItems": 1,
+                        "maxItems": 128,
+                        "items": {"type": "string"},
+                    },
+                    "exit_code": {"type": "integer"},
+                },
+            },
+        }
+    return schema
 
 
 @dataclass(frozen=True)
@@ -224,10 +227,30 @@ def _as_structured_decision(
     value: object,
     command_manifest: dict[str, Any] | None = None,
 ) -> dict[str, Any] | None:
+    from orchestration_harness.verdict import (
+        ArtifactKind,
+        ReviewVerdict,
+        parse_artifact_verdict,
+    )
+
     if isinstance(value, str):
+
+        class DuplicateJsonMemberError(ValueError):
+            pass
+
+        def reject_duplicate_members(
+            pairs: list[tuple[str, object]],
+        ) -> dict[str, object]:
+            decoded: dict[str, object] = {}
+            for key, item in pairs:
+                if key in decoded:
+                    raise DuplicateJsonMemberError(key)
+                decoded[key] = item
+            return decoded
+
         try:
-            value = json.loads(value)
-        except json.JSONDecodeError:
+            value = json.loads(value, object_pairs_hook=reject_duplicate_members)
+        except (json.JSONDecodeError, DuplicateJsonMemberError):
             return None
     expected_keys = {"decision", "review"}
     if command_manifest is not None:
@@ -236,19 +259,47 @@ def _as_structured_decision(
         return None
     decision = value.get("decision")
     review = value.get("review")
-    if decision not in {"pass", "revision_required"}:
+    if not isinstance(decision, str):
+        return None
+    try:
+        canonical_decision = ReviewVerdict(decision)
+    except ValueError:
         return None
     if not isinstance(review, str) or not review.strip() or len(review) > 40000:
         return None
-    if DECISION_PATTERN.search(review):
+    normalized_review = review.strip()
+    review_assessment = parse_artifact_verdict(
+        normalized_review,
+        ArtifactKind.DECISION,
+    )
+    if review_assessment.reason_code != "missing_authoritative_marker":
         return None
-    admitted: dict[str, Any] = {"decision": decision, "review": review.strip()}
+
+    canonical_marker = f"DECISION: {canonical_decision.value.upper()}"
+    assessment = parse_artifact_verdict(canonical_marker, ArtifactKind.DECISION)
+    expected_integration_authority = canonical_decision is ReviewVerdict.PASS
+    if (
+        assessment.artifact_kind is not ArtifactKind.DECISION
+        or not assessment.artifact_valid
+        or assessment.review_verdict is not canonical_decision
+        or assessment.integration_authorized is not expected_integration_authority
+        or assessment.canonical_marker != canonical_marker
+        or assessment.reason_code != "terminal_marker_observed"
+    ):
+        return None
+
+    canonical_decision_value = canonical_decision.value
+    admitted: dict[str, Any] = {
+        "decision": canonical_decision_value,
+        "review": normalized_review,
+        "verdict_assessment": assessment.to_dict(),
+    }
     if command_manifest is not None:
         try:
             admitted["command_results"] = admit_command_results(
                 manifest=command_manifest,
                 results=value["command_results"],
-                decision=decision,
+                decision=canonical_decision_value,
             )
         except ValueError:
             return None
@@ -259,19 +310,50 @@ def parse_structured_decision(
     stdout: str,
     command_manifest: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
+    class DuplicateJsonMemberError(ValueError):
+        pass
+
+    def reject_duplicate_members(
+        pairs: list[tuple[str, object]],
+    ) -> dict[str, object]:
+        decoded: dict[str, object] = {}
+        for key, value in pairs:
+            if key in decoded:
+                raise DuplicateJsonMemberError(key)
+            decoded[key] = value
+        return decoded
+
     try:
-        root = json.loads(stdout)
+        root = json.loads(stdout, object_pairs_hook=reject_duplicate_members)
+    except DuplicateJsonMemberError:
+        root = None
     except json.JSONDecodeError as error:
         raise RuntimeError(
             "Antigravity structured output was not one JSON value"
         ) from error
 
+    wrapper_keys = ("structured_output", "result", "response", "output")
     candidates: list[dict[str, Any]] = []
-    direct = _as_structured_decision(root, command_manifest)
+    direct_source = root
+    if isinstance(root, dict):
+        if "verdict_assessment" in root:
+            direct_source = None
+            wrapper_keys = ()
+        else:
+            direct_keys = {"decision", "review"}
+            if command_manifest is not None:
+                direct_keys.add("command_results")
+            if direct_keys.issubset(root):
+                if set(root).issubset(direct_keys | set(wrapper_keys)):
+                    direct_source = {key: root[key] for key in direct_keys}
+                else:
+                    direct_source = None
+                    wrapper_keys = ()
+    direct = _as_structured_decision(direct_source, command_manifest)
     if direct is not None:
         candidates.append(direct)
     if isinstance(root, dict):
-        for key in ("structured_output", "result", "response", "output"):
+        for key in wrapper_keys:
             candidate = _as_structured_decision(root.get(key), command_manifest)
             if candidate is not None:
                 candidates.append(candidate)
