@@ -1,4 +1,4 @@
-schema_version: "ariadne.programme_recovery.v10"
+schema_version: "ariadne.programme_recovery.v11"
 status: "active_emergency_overlay"
 authority_owner: "Yuri"
 recorded_at: "2026-08-28T11:17:02+10:00"
@@ -21,7 +21,7 @@ required_before:
   - "protected_ref_operation"
   - "deployment"
 missing_or_invalid_state: "hard_stop"
-active_profile: "G1A.2_ACTIVE"
+active_profile: "G1A.3-E0_REVIEW_PENDING"
 profiles:
   G0.8_FSMONITOR_CLOSURE:
     profile_kind: "controller_maintenance"
@@ -197,6 +197,76 @@ profiles:
     deployment_eligible: false
     protected_ref_movement_eligible: false
     g1a_eligible: true
+  G1A.3-E0_REVIEW_PENDING:
+    profile_kind: "review_pending_controller"
+    expected_programme_mode: "recovery"
+    expected_current_gate: "G1A.2"
+    expected_gate_status: "active"
+    active_correction: "G1A.2"
+    programme_gate: "G1A.3-E0"
+    admitted_task_classes: []
+    allowed_effects: ["repository_read"]
+    forbidden_effects: ["autonomous_worker_dispatch", "closeout_state_transition", "controller_policy_change", "dependency_change", "deployment", "gatekeeper_change", "g1b_work", "integration", "migration_change", "pages", "product_behavior_change", "programme_state_change", "protected_ref_movement", "provider_invocation", "real_data_access"]
+    closed_entrypoints: ["worker_dispatch", "provider_invocation", "clockwork_tick_mutation", "clockwork_closeout_mutation", "integration", "protected_ref_operation", "deployment"]
+    scope_behavior: "external_review_only_no_implementation"
+    allowed_paths: []
+    autonomous_task_selection: false
+    out_of_gate_result: "blocked"
+    feature_work_eligible: false
+    product_work_eligible: false
+    provider_calls_eligible: false
+    deployment_eligible: false
+    protected_ref_movement_eligible: false
+    g1a_eligible: true
+  G1A.2_TO_G1A.3_STATE_TRANSITION:
+    profile_kind: "state_transition"
+    expected_programme_mode: "recovery"
+    expected_current_gate: "G1A.3"
+    expected_gate_status: "active"
+    active_correction: "G1A.3"
+    programme_gate: "G1A.2_TO_G1A.3"
+    admitted_task_classes: ["g1a_2_to_g1a_3_state_transition"]
+    allowed_effects: ["repository_read", "control_plane_edit", "task_branch_commit", "task_branch_push", "external_review_record", "transition_artifact"]
+    forbidden_effects: ["dependency_change", "deployment", "g1b_work", "implementation_change", "integration", "migration_change", "pages", "product_behavior_change", "protected_ref_movement", "provider_invocation", "real_data_access"]
+    closed_entrypoints: ["worker_dispatch", "provider_invocation", "clockwork_tick_mutation", "clockwork_closeout_mutation", "integration", "protected_ref_operation", "deployment"]
+    scope_behavior: "g1a2_to_g1a3_semantic_state_transition"
+    allowed_paths:
+      - "AGENTS.md"
+      - "orchestration/continuity/ariadne-active-operation-latch/current.json"
+      - "orchestration/harness_settings/programme_recovery.yaml"
+      - "orchestration/programme/current-state.json"
+      - "orchestration/programme/gates.yaml"
+    autonomous_task_selection: false
+    out_of_gate_result: "blocked"
+    feature_work_eligible: false
+    product_work_eligible: false
+    provider_calls_eligible: false
+    deployment_eligible: false
+    protected_ref_movement_eligible: false
+    g1a_eligible: true
+  G1A.3_ACTIVE:
+    profile_kind: "active_gate"
+    expected_programme_mode: "recovery"
+    expected_current_gate: "G1A.3"
+    expected_gate_status: "active"
+    active_correction: "G1A.3"
+    programme_gate: "G1A.3"
+    admitted_task_classes: ["g1a_3_integration_consumer_mutation"]
+    allowed_effects: ["repository_read", "integration_authority_adapter_edit", "task_branch_commit", "task_branch_push", "external_review_preparation"]
+    forbidden_effects: ["autonomous_worker_dispatch", "closeout_state_transition", "controller_policy_change", "dependency_change", "deployment", "gatekeeper_change", "g1b_work", "integration", "migration_change", "pages", "product_behavior_change", "programme_state_change", "protected_ref_movement", "provider_invocation", "real_data_access"]
+    closed_entrypoints: ["worker_dispatch", "provider_invocation", "clockwork_tick_mutation", "clockwork_closeout_mutation", "integration", "protected_ref_operation", "deployment"]
+    scope_behavior: "g1a_bounded_integration_authority_consumer"
+    allowed_paths:
+      - "scripts/agent_worktrees.py"
+      - "tests/test_agent_worktrees.py"
+    autonomous_task_selection: false
+    out_of_gate_result: "blocked"
+    feature_work_eligible: false
+    product_work_eligible: false
+    provider_calls_eligible: false
+    deployment_eligible: false
+    protected_ref_movement_eligible: false
+    g1a_eligible: true
 scope_policy:
   expected_branch: "codex/raisa-ariadne-recovery-g0"
   frozen_recovery_base: "03e6860394c39086ec1ffb3f2457acc5f7c8b5f9"
@@ -324,8 +394,41 @@ subgate_transition_policy:
     - "protected_ref_movement"
     - "provider_invocation"
     - "real_data_access"
+g1a3_transition_policy:
+  manifest_schema_version: "ariadne.programme_g1a2_to_g1a3_transition_manifest.v1"
+  task_class: "g1a_2_to_g1a_3_state_transition"
+  transition_profile: "G1A.2_TO_G1A.3_STATE_TRANSITION"
+  resulting_active_profile: "G1A.3_ACTIVE"
+  from_gate: "G1A.2"
+  to_gate: "G1A.3"
+  transition_status: "review_pending"
+  implementation_review_record_root: "orchestration/programme/subgate-implementation-reviews"
+  implementation_review_schema_version: "ariadne.external_subgate_implementation_review.v1"
+  external_review_record_root: "orchestration/programme/subgate-transition-enablement-reviews"
+  external_review_schema_version: "ariadne.external_g1a3_transition_enablement_review.v1"
+  transition_artifact_root: "orchestration/programme/subgate-transitions"
+  transition_artifact_schema_version: "ariadne.g1a2-to-g1a3-transition.v1"
+  candidate_commit_limit: 1
+  fixed_allowed_paths:
+    - "AGENTS.md"
+    - "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    - "orchestration/harness_settings/programme_recovery.yaml"
+    - "orchestration/programme/current-state.json"
+    - "orchestration/programme/gates.yaml"
+  forbidden_effect_classes:
+    - "dependency_change"
+    - "deployment"
+    - "g1b_work"
+    - "implementation_change"
+    - "integration"
+    - "migration_change"
+    - "pages"
+    - "product_behavior_change"
+    - "protected_ref_movement"
+    - "provider_invocation"
+    - "real_data_access"
 pinned_gatekeeper:
-  schema_version: "ariadne.pinned_programme_gatekeeper_policy.v6"
+  schema_version: "ariadne.pinned_programme_gatekeeper_policy.v7"
   module: "orchestration_harness/pinned_programme_gatekeeper.py"
   bootstrap: "scripts/raisa_ariadne_gatekeeper_bootstrap.py"
   cli: "scripts/raisa_ariadne_gatekeeper_bootstrap.py"

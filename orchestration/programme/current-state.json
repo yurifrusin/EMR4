@@ -1,12 +1,12 @@
 {
   "schema_version": "raisa-ariadne.programme-state.v1",
-  "observed_at": "2026-08-28T14:37:40+10:00",
+  "observed_at": "2026-08-28T22:50:13+10:00",
   "programme_name": "Raisa Medical Office and Ariadne Recovery & Convergence",
   "programme_mode": "recovery",
   "current_gate": "G1A.2",
   "current_gate_status": "active",
   "active_correction": "G1A.2",
-  "active_profile": "G1A.2_ACTIVE",
+  "active_profile": "G1A.3-E0_REVIEW_PENDING",
   "machine_authoritative": true,
   "feature_work_eligible": false,
   "product_work_eligible": false,
@@ -255,9 +255,7 @@
   },
   "task_selection": {
     "autonomous_selection_enabled": false,
-    "allowed_task_kinds": [
-      "g1a_2_antigravity_verdict_adapter"
-    ],
+    "allowed_task_kinds": [],
     "blocked_task_kinds": [
       "product_feature",
       "g1a_untyped_or_out_of_scope",
@@ -268,24 +266,24 @@
     ],
     "admission_command": "python scripts/raisa_ariadne_recovery_preflight.py --task-manifest <path> --phase development",
     "out_of_gate_result": "blocked",
-    "next_eligible_tranche": "G1A.2",
-    "next_eligible_now": true,
+    "next_eligible_tranche": "G1A.3",
+    "next_eligible_now": false,
     "next_tranche_started": false,
-    "next_tranche_admission_requires_state_transition": false,
-    "next_eligibility_condition": "bounded_G1A_2_profile_active_next_tranche_not_started"
+    "next_tranche_admission_requires_state_transition": true,
+    "next_eligibility_condition": "external_G1A3_transition_enablement_PASS_then_exact_state_only_transition"
   },
   "parallelism_efficacy": {
     "deepseek": {
       "disposition": "declined",
-      "rationale": "provider execution is forbidden and the owner disposition, subgate authority, transition seam and active-profile definition form one tightly coupled control-plane authority change"
+      "rationale": "provider execution is forbidden and the implementation-review ledger, transition seam, active profile and pinned reference-monitor changes are one serial control-plane authority package"
     },
     "gemini": {
       "disposition": "reserved",
-      "rationale": "independent external review is reserved for the published transition-enablement candidate; no verifier or provider invocation is authorised in this tranche"
+      "rationale": "independent external review is reserved for the published G1A.3 transition-enablement candidate; no verifier or provider invocation is authorised in this tranche"
     },
     "native_subagent": {
       "disposition": "declined",
-      "rationale": "the exact owner directive requires one serial root-owned control-plane candidate and provides no separable native-subagent work package"
+      "rationale": "the exact owner exception requires one serial root-owned control-plane candidate and provides no separable native-subagent work package"
     }
   },
   "actions_performed": {
@@ -435,12 +433,16 @@
     "next_action": "external_G1A2_transition_enablement_review_only"
   },
   "g1a_subgate_authority": {
-    "schema_version": "ariadne.g1a_subgate_authority.v1",
+    "schema_version": "ariadne.g1a_subgate_authority.v2",
     "owner_disposition_record_root": "orchestration/programme/owner-dispositions",
     "external_subgate_review_record_root": "orchestration/programme/subgate-reviews",
+    "implementation_review_record_root": "orchestration/programme/subgate-implementation-reviews",
+    "g1a3_transition_enablement_review_record_root": "orchestration/programme/subgate-transition-enablement-reviews",
     "subgate_transition_artifact_root": "orchestration/programme/subgate-transitions",
     "decisive_owner_disposition_id": "g1a1-owner-accept-91f1e6e-20260828",
     "decisive_transition_enablement_review_id": "g1a2-e0-review-dab684e-independent-20260828-pass",
+    "decisive_implementation_review_id": "g1a2-review-37e2d6f-independent-20260828-pass",
+    "decisive_g1a3_transition_enablement_review_id": null,
     "owner_disposition_history": [
       {
         "disposition_id": "g1a1-owner-accept-91f1e6e-20260828",
@@ -468,6 +470,24 @@
         "review_record_sha256": "sha256:21515235c250b51afcdf52e745ce25a66c289fd6c384620a3011bfd895a94cbf"
       }
     ],
+    "implementation_review_history": [
+      {
+        "review_id": "g1a2-review-37e2d6f-independent-20260828-pass",
+        "review_record_path": "orchestration/programme/subgate-implementation-reviews/g1a2-review-37e2d6f-independent-20260828-pass.json",
+        "reviewed_commit": "37e2d6f51ebbdb281771f922a5f460fd23e2571b",
+        "reviewed_tree": "798a2eda11438fe05da2528298006775774ccfc4",
+        "reviewed_parent": "474d79e0ef918dc8e7fef6780ea34c5c105fe236",
+        "review_subject": "G1A.2_antigravity_verdict_adapter",
+        "verdict": "PASS",
+        "blocking_finding_count": 0,
+        "reviewer_surface": "external_chatgpt_repository_review",
+        "g1a3_transition_enablement_authorized": true,
+        "provider_invocation_authorized": false,
+        "integration_authorized": false,
+        "review_record_sha256": "sha256:bd29a64c591e0cddd9cc47cc2ae4408f63c36acc3e663bd431bc369ee7385fcb"
+      }
+    ],
+    "g1a3_transition_enablement_review_history": [],
     "subgates": {
       "G1A.1": {
         "implementation_status": "accepted_by_owner_with_residual_risk",
@@ -495,15 +515,35 @@
           "reviewer_surface": "external_chatgpt_repository_review",
           "next_action": "G1A_2_adapter_only"
         },
-        "implementation_authorized": true,
+        "implementation_status": "external_review_passed",
+        "implementation_review_id": "g1a2-review-37e2d6f-independent-20260828-pass",
+        "implementation_authorized": false,
         "implementation_started": false,
         "provider_invocation_authorized": false,
-        "next_action": "begin_bounded_G1A_2_adapter_implementation"
+        "next_action": "external_G1A3_transition_enablement_review_only"
       },
       "G1A.3": {
-        "status": "deferred",
-        "integration_authorized": false,
-        "protected_ref_movement_authorized": false
+        "status": "closed_pending_state_transition",
+        "transition_enablement_tranche": "G1A.3-E0",
+        "transition_enablement_status": "review_pending",
+        "state_transition_status": "not_started",
+        "state_transition": null,
+        "implementation_authorized": false,
+        "implementation_started": false,
+        "integration_execution_authorized": false,
+        "provider_invocation_authorized": false,
+        "protected_ref_movement_authorized": false,
+        "next_action": "external_G1A3_transition_enablement_review_only",
+        "owner_exception": {
+          "task_generation": "g1a3-transition-enablement-runtime-source-encoding-replacement-20260829-v1",
+          "branch": "codex/raisa-ariadne-recovery-g0",
+          "authorized_parent_commit": "37e2d6f51ebbdb281771f922a5f460fd23e2571b",
+          "candidate_commit_limit": 1,
+          "state_transition_authorized": false,
+          "provider_invocation_authorized": false,
+          "integration_authorized": false,
+          "protected_ref_movement_authorized": false
+        }
       }
     }
   },

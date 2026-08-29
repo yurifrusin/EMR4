@@ -25,6 +25,7 @@ from orchestration_harness.programme_admission import (
 )
 from scripts.ariadne_orchestrator_preflight import build_receipt
 from scripts.raisa_ariadne_recovery_preflight import PreflightError, build_task_manifest
+from orchestration_harness.settings_fingerprint import settings_fingerprint
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -76,7 +77,10 @@ def _policy_sandbox(tmp_path: Path) -> Path:
         target.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(ROOT / relative, target)
     for relative_text in (
-        pa.G0_G08_ALLOWED_PATHS | pa.G1A_ALLOWED_PATHS | pa.G1A2_ALLOWED_PATHS
+        pa.G0_G08_ALLOWED_PATHS
+        | pa.G1A_ALLOWED_PATHS
+        | pa.G1A2_ALLOWED_PATHS
+        | pa.G1A3_ALLOWED_PATHS
     ):
         source = ROOT / relative_text
         if not source.is_file():
@@ -88,6 +92,8 @@ def _policy_sandbox(tmp_path: Path) -> Path:
         pa.TRANSITION_REVIEW_ROOT,
         pa.TRANSITION_ARTIFACT_ROOT,
         pa.SUBGATE_REVIEW_ROOT,
+        pa.SUBGATE_IMPLEMENTATION_REVIEW_ROOT,
+        pa.G1A3_TRANSITION_REVIEW_ROOT,
         pa.SUBGATE_TRANSITION_ARTIFACT_ROOT,
     ):
         source_root = ROOT / authority_root
@@ -136,8 +142,16 @@ def _manifest() -> dict:
     }
 
 
-def test_canonical_orchestrator_cannot_dispatch_with_current_fingerprint() -> None:
-    receipt = build_receipt(runtime_state_path=RUNTIME_STATE)
+def test_canonical_orchestrator_cannot_dispatch_with_current_fingerprint(
+    tmp_path: Path,
+) -> None:
+    runtime = json.loads(RUNTIME_STATE.read_text(encoding="utf-8"))
+    runtime["active_operation"]["checkpoint"]["settings_fingerprint"] = (
+        settings_fingerprint(ROOT / "orchestration/harness_settings")
+    )
+    runtime_path = tmp_path / "orchestrator-runtime-state.json"
+    _write_json(runtime_path, runtime)
+    receipt = build_receipt(runtime_state_path=runtime_path)
 
     assert receipt["status"] == "passed"
     assert receipt["worker_dispatch_permitted"] is False
@@ -168,7 +182,7 @@ def test_missing_manifest_blocks_every_gated_entrypoint(entrypoint: str) -> None
 
 
 @pytest.mark.parametrize("field", ["state_digest", "policy_digest"])
-def test_stale_manifest_digests_fail_closed(field: str) -> None:
+def test_review_pending_profile_precedes_manifest_digest_evaluation(field: str) -> None:
     manifest = _manifest()
     manifest[field] = "sha256:" + "0" * 64
 
@@ -177,7 +191,7 @@ def test_stale_manifest_digests_fail_closed(field: str) -> None:
     )
 
     assert decision.admitted is False
-    assert decision.reason_codes == [f"task_manifest_{field}_stale"]
+    assert decision.reason_codes == ["task_class_not_admitted"]
 
 
 @pytest.mark.parametrize("failure", ["missing", "malformed", "contradictory"])
@@ -190,14 +204,10 @@ def test_missing_malformed_or_contradictory_policy_fails_closed(
     elif failure == "malformed":
         (root / pa.STATE_PATH).write_text("{", encoding="utf-8")
     else:
-        gates = (root / pa.GATES_PATH).read_text(encoding="utf-8")
-        (root / pa.GATES_PATH).write_bytes(
-            gates.replace(
-                'current_gate_status: "revision_required"',
-                'current_gate_status: "passed"',
-                1,
-            ).encode("utf-8")
-        )
+        gates_path = root / pa.GATES_PATH
+        gates = yaml.safe_load(gates_path.read_text(encoding="utf-8"))
+        gates["programme"]["current_gate_status"] = "passed"
+        _write_yaml(gates_path, gates)
     _git(root, "add", "-A")
 
     with pytest.raises(ProgrammeAdmissionError):
@@ -262,15 +272,9 @@ def test_unknown_policy_field_is_rejected(tmp_path: Path) -> None:
 def test_state_and_gate_disagreement_is_rejected(tmp_path: Path) -> None:
     root = _policy_sandbox(tmp_path)
     path = root / pa.GATES_PATH
-    path.write_bytes(
-        path.read_text(encoding="utf-8")
-        .replace(
-            'next_eligible_tranche: "G0.8"',
-            'next_eligible_tranche: "G1A.1"',
-            1,
-        )
-        .encode("utf-8")
-    )
+    gates = yaml.safe_load(path.read_text(encoding="utf-8"))
+    gates["programme"]["next_eligible_tranche"] = "G1A.1"
+    _write_yaml(path, gates)
     _git(root, "add", "--", pa.GATES_PATH.as_posix())
 
     with pytest.raises(
@@ -313,8 +317,12 @@ def test_g1a_1_excludes_provider_and_integration_mutators() -> None:
     assert "scripts/ariadne_antigravity.py" not in g1a_1_paths
     assert "scripts/agent_worktrees.py" not in g1a_1_paths
     assert policy.g1a_scope["transition_opens_only"] == "G1A.1"
-    assert policy.g1a_scope["subgates"]["G1A.2"]["status"].startswith("closed_")
-    assert policy.g1a_scope["subgates"]["G1A.3"]["allowed_paths"] == []
+    assert policy.g1a_scope["subgates"]["G1A.2"]["status"] == (
+        "external_review_passed_frozen"
+    )
+    assert set(policy.g1a_scope["subgates"]["G1A.3"]["allowed_paths"]) == (
+        pa.G1A3_ALLOWED_PATHS
+    )
 
 
 def test_owner_disposition_is_exact_digest_bound_and_not_external_pass() -> None:
@@ -332,8 +340,10 @@ def test_owner_disposition_is_exact_digest_bound_and_not_external_pass() -> None
     assert record["g1a2_state_transition_authorized"] is False
     assert record["g1a2_implementation_authorized"] is False
     assert record["provider_invocation_authorized"] is False
-    assert authority["external_review_history"] == []
-    assert authority["decisive_transition_enablement_review_id"] is None
+    assert authority["external_review_history"][0]["verdict"] == "PASS"
+    assert authority["decisive_transition_enablement_review_id"] == (
+        "g1a2-e0-review-dab684e-independent-20260828-pass"
+    )
     assert record["residual_risks"] == [
         {
             "id": "G1A1-PARSER-MIXED-TAB-001",
@@ -345,23 +355,26 @@ def test_owner_disposition_is_exact_digest_bound_and_not_external_pass() -> None
     ]
 
 
-def test_owner_acceptance_alone_keeps_g1a2_implementation_closed() -> None:
+def test_g1a2_pass_alone_keeps_g1a3_implementation_closed() -> None:
     policy = load_programme_policy(ROOT)
     g1a2 = policy.state["g1a_subgate_authority"]["subgates"]["G1A.2"]
+    g1a3 = policy.state["g1a_subgate_authority"]["subgates"]["G1A.3"]
 
-    assert policy.state["current_gate"] == "G1A.1"
-    assert policy.overlay["active_profile"] == pa.G1A_ACTIVE_PROFILE
+    assert policy.state["current_gate"] == "G1A.2"
+    assert policy.overlay["active_profile"] == pa.G1A3_ENABLEMENT_PENDING_PROFILE
     assert policy.state["task_selection"]["allowed_task_kinds"] == []
-    assert g1a2["transition_enablement_status"] == "review_pending"
-    assert g1a2["state_transition_status"] == "not_started"
+    assert g1a2["transition_enablement_status"] == "external_review_passed"
+    assert g1a2["state_transition_status"] == "complete"
+    assert g1a2["implementation_status"] == "external_review_passed"
     assert g1a2["implementation_authorized"] is False
     assert g1a2["implementation_started"] is False
     assert g1a2["provider_invocation_authorized"] is False
-    assert policy.state["g1a_subgate_authority"]["subgates"]["G1A.3"] == {
-        "status": "deferred",
-        "integration_authorized": False,
-        "protected_ref_movement_authorized": False,
-    }
+    assert g1a3["status"] == "closed_pending_state_transition"
+    assert g1a3["transition_enablement_status"] == "review_pending"
+    assert g1a3["state_transition_status"] == "not_started"
+    assert g1a3["implementation_authorized"] is False
+    assert g1a3["integration_execution_authorized"] is False
+    assert g1a3["provider_invocation_authorized"] is False
     assert set(
         policy.overlay["profiles"][pa.G1A2_ACTIVE_PROFILE]["forbidden_effects"]
     ) == (pa.G1A_FORBIDDEN_EFFECTS)
@@ -382,6 +395,76 @@ def test_owner_acceptance_alone_keeps_g1a2_implementation_closed() -> None:
         PreflightError, match="no implementation task is currently eligible"
     ):
         build_task_manifest(ROOT)
+
+
+def test_g1a2_implementation_pass_is_exact_and_ledger_separated() -> None:
+    policy = load_programme_policy(ROOT)
+    authority = policy.state["g1a_subgate_authority"]
+    entry = authority["implementation_review_history"][0]
+    path = ROOT / entry["review_record_path"]
+
+    assert hashlib.sha256(path.read_bytes()).hexdigest() == (
+        "bd29a64c591e0cddd9cc47cc2ae4408f63c36acc3e663bd431bc369ee7385fcb"
+    )
+    assert entry["review_record_sha256"] == (
+        "sha256:bd29a64c591e0cddd9cc47cc2ae4408f63c36acc3e663bd431bc369ee7385fcb"
+    )
+    assert authority["implementation_review_record_root"] == (
+        pa.SUBGATE_IMPLEMENTATION_REVIEW_ROOT
+    )
+    assert authority["external_subgate_review_record_root"] == pa.SUBGATE_REVIEW_ROOT
+    assert (
+        authority["implementation_review_record_root"]
+        != (authority["external_subgate_review_record_root"])
+    )
+    assert entry["reviewed_commit"] == ("37e2d6f51ebbdb281771f922a5f460fd23e2571b")
+    assert entry["reviewed_tree"] == "798a2eda11438fe05da2528298006775774ccfc4"
+    assert entry["reviewed_parent"] == ("474d79e0ef918dc8e7fef6780ea34c5c105fe236")
+
+
+def test_enablement_candidate_preserves_accepted_implementation_blobs() -> None:
+    assert _git(ROOT, "rev-parse", "HEAD:scripts/ariadne_antigravity.py") == (
+        "ff1c95d9a24fddcba1df3ee6dc10a21b71b89049"
+    )
+    assert _git(ROOT, "rev-parse", "HEAD:scripts/agent_worktrees.py") == (
+        "f15d13f60c2c93edef0559b7b30b536b334bb884"
+    )
+
+
+@pytest.mark.parametrize(
+    "case",
+    ["missing", "rewritten", "negative", "stale", "wrong_tree", "findings"],
+)
+def test_g1a2_implementation_review_failures_hard_stop(
+    tmp_path: Path, case: str
+) -> None:
+    root = _policy_sandbox(tmp_path)
+    state_path = root / pa.STATE_PATH
+    state = json.loads(state_path.read_text(encoding="utf-8"))
+    entry = state["g1a_subgate_authority"]["implementation_review_history"][0]
+    record_path = root / entry["review_record_path"]
+    if case == "missing":
+        record_path.unlink()
+        _git(root, "add", "-A")
+    elif case == "rewritten":
+        record_path.write_bytes(record_path.read_bytes() + b" ")
+        _git(root, "add", "--", entry["review_record_path"])
+    else:
+        record = json.loads(record_path.read_text(encoding="utf-8"))
+        if case == "negative":
+            record["verdict"] = entry["verdict"] = "REVISION_REQUIRED"
+        elif case == "stale":
+            record["reviewed_commit"] = entry["reviewed_commit"] = "0" * 40
+        elif case == "wrong_tree":
+            record["reviewed_tree"] = entry["reviewed_tree"] = "0" * 40
+        else:
+            record["blocking_finding_count"] = entry["blocking_finding_count"] = 1
+        _write_json(record_path, record)
+        entry["review_record_sha256"] = pa._sha256_bytes(record_path.read_bytes())
+        _write_json(state_path, state)
+
+    with pytest.raises(ProgrammeAdmissionError):
+        load_programme_policy(root)
 
 
 @pytest.mark.parametrize("case", ["missing", "rewritten", "contradictory"])
@@ -506,6 +589,433 @@ def test_every_protected_antigravity_symbol_is_immutable(
     assert "g1a_2_protected_provider_symbol_changed" in reasons
 
 
+def test_g1a3_record_integration_is_the_only_mutable_production_symbol(
+    tmp_path: Path,
+) -> None:
+    root = _policy_sandbox(tmp_path)
+    path = root / "scripts/agent_worktrees.py"
+    source = path.read_text(encoding="utf-8")
+    updated = source.replace(
+        "def record_integration(args: argparse.Namespace) -> None:\n",
+        "def record_integration(args: argparse.Namespace) -> None:\n"
+        '    """Synthetic bounded consumer mutation."""\n',
+        1,
+    )
+    assert updated != source
+    path.write_text(updated, encoding="utf-8")
+
+    assert pa.g1a3_integration_contract_reasons(root) == []
+
+
+def test_g1a2_hash_semantics_and_digest_remain_unchanged() -> None:
+    scope = yaml.safe_load((ROOT / pa.G1A_SCOPE_PATH).read_text(encoding="utf-8"))
+    g1a2 = scope["subgates"]["G1A.2"]
+    contract = g1a2["immutable_provider_contract"]
+    payload = pa._git_object_bytes(
+        ROOT, f"{contract['source_commit']}:{contract['path']}"
+    )
+
+    assert contract["hash_semantics"] == (
+        "sha256_of_ast_dump_with_allowed_mutation_symbols_replaced_by_pass"
+    )
+    assert contract["protected_ast_sha256"] == (
+        "sha256:30e1e223a18ec9ac7b88fa8f338550abad1a5613feb985574af0299eb533edbc"
+    )
+    assert (
+        pa._protected_module_ast_hash(payload, set(g1a2["allowed_mutation_symbols"]))
+        == contract["protected_ast_sha256"]
+    )
+
+
+def test_g1a3_baseline_blob_satisfies_body_only_contract() -> None:
+    scope = yaml.safe_load((ROOT / pa.G1A_SCOPE_PATH).read_text(encoding="utf-8"))
+    g1a3 = scope["subgates"]["G1A.3"]
+    contract = g1a3["immutable_integration_consumer_contract"]
+    payload = pa._git_object_bytes(
+        ROOT, f"{contract['source_commit']}:{contract['path']}"
+    )
+
+    assert contract["source_blob"] == ("f15d13f60c2c93edef0559b7b30b536b334bb884")
+    assert (
+        pa._run_git(
+            ROOT,
+            "rev-parse",
+            f"{contract['source_commit']}:{contract['path']}",
+        )
+        == contract["source_blob"]
+    )
+    assert contract["hash_semantics"] == (
+        "sha256_of_ast_dump_with_only_allowed_function_bodies_replaced_by_pass"
+    )
+    assert contract["runtime_source_parsing_contract"] == (
+        pa.G1A3_RUNTIME_SOURCE_PARSING_CONTRACT
+    )
+    assert contract["protected_ast_sha256"] == (
+        "sha256:e016601c0c6f577ae51beecc0fb47e8ec28b235458b5e2cc6031e4a5babb57f6"
+    )
+    assert (
+        pa._protected_module_ast_hash_with_only_allowed_function_bodies_replaced_by_pass(
+            payload, set(g1a3["allowed_mutation_symbols"])
+        )
+        == contract["protected_ast_sha256"]
+    )
+
+
+@pytest.mark.parametrize("prefix", [b"", b"# coding: utf-8\n"])
+def test_g1a3_runtime_source_parser_admits_utf8_baseline_and_cookie(
+    tmp_path: Path, prefix: bytes
+) -> None:
+    root = _policy_sandbox(tmp_path)
+    path = root / "scripts/agent_worktrees.py"
+    path.write_bytes(prefix + path.read_bytes())
+
+    assert pa.g1a3_integration_contract_reasons(root) == []
+
+
+@pytest.mark.parametrize(
+    "encoded_expression",
+    [
+        b'__import__("pathlib").Path("g1a3-source-probe").write_text("executed")',
+        b'__import__("subprocess").run(["git", "status"], check=False)',
+    ],
+    ids=["filesystem-write", "subprocess-git"],
+)
+def test_g1a3_utf7_encoded_top_level_effect_is_rejected_before_import(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    encoded_expression: bytes,
+) -> None:
+    monkeypatch.chdir(tmp_path)
+    future = b"from __future__ import annotations\n"
+    baseline = (
+        b"# coding: utf-7\n"
+        + future
+        + b"\ndef record_integration(value):\n    return value\n"
+    )
+    encoded_line = b"# +AAo-" + encoded_expression + b"+AAo-#\n"
+    payload = baseline.replace(future, future + encoded_line, 1)
+    assert payload != baseline
+
+    monitored_tree = pa._runtime_faithful_python_module_ast(payload)
+    runtime_tree = compile(
+        payload,
+        "synthetic-agent-worktrees.py",
+        "exec",
+        flags=ast.PyCF_ONLY_AST | ast.PyCF_TYPE_COMMENTS,
+        dont_inherit=True,
+    )
+    forced_utf8_tree = ast.parse(payload.decode("utf-8"), type_comments=True)
+
+    assert isinstance(runtime_tree, ast.Module)
+    assert ast.dump(monitored_tree, include_attributes=False) == ast.dump(
+        runtime_tree, include_attributes=False
+    )
+    assert len(runtime_tree.body) == len(forced_utf8_tree.body) + 1
+    assert (
+        pa._protected_module_ast_hash_with_only_allowed_function_bodies_replaced_by_pass(
+            payload, {"record_integration"}
+        )
+        != pa._protected_module_ast_hash_with_only_allowed_function_bodies_replaced_by_pass(
+            baseline, {"record_integration"}
+        )
+    )
+    root = _policy_sandbox(tmp_path)
+    (root / "scripts/agent_worktrees.py").write_bytes(payload)
+    assert "g1a_3_nonconsumer_code_changed" in pa.g1a3_integration_contract_reasons(
+        root
+    )
+    assert not Path("g1a3-source-probe").exists()
+
+
+@pytest.mark.parametrize(
+    "payload_prefix",
+    [
+        b"# coding: emr4-unknown-codec\n",
+        b"\xef\xbb\xbf# coding: latin-1\n",
+    ],
+    ids=["unknown-encoding", "utf8-bom-cookie-conflict"],
+)
+def test_g1a3_unknown_encoding_and_bom_cookie_conflict_fail_closed(
+    tmp_path: Path, payload_prefix: bytes
+) -> None:
+    root = _policy_sandbox(tmp_path)
+    path = root / "scripts/agent_worktrees.py"
+    payload = payload_prefix + path.read_bytes()
+    path.write_bytes(payload)
+
+    with pytest.raises(
+        pa.ProgrammeAdmissionError,
+        match="g1a_3_integration_contract_source_invalid",
+    ):
+        pa._runtime_faithful_python_module_ast(payload)
+    assert pa.g1a3_integration_contract_reasons(root) == [
+        "g1a_3_allowed_function_body_contract_invalid"
+    ]
+
+
+@pytest.mark.parametrize(
+    ("replacement", "expected_reason"),
+    [
+        (
+            "@staticmethod\n"
+            "def record_integration(args: argparse.Namespace) -> None:\n",
+            "g1a_3_nonconsumer_code_changed",
+        ),
+        (
+            "def record_integration(\n"
+            "    args: argparse.Namespace = None,\n"
+            ") -> None:\n",
+            "g1a_3_nonconsumer_code_changed",
+        ),
+        (
+            "def record_integration(\n"
+            "    args: argparse.Namespace, *, marker: object = None\n"
+            ") -> None:\n",
+            "g1a_3_nonconsumer_code_changed",
+        ),
+        (
+            "def record_integration(args: object) -> None:\n",
+            "g1a_3_nonconsumer_code_changed",
+        ),
+        (
+            "def record_integration(\n"
+            "    args: argparse.Namespace, extra: object\n"
+            ") -> None:\n",
+            "g1a_3_nonconsumer_code_changed",
+        ),
+        (
+            "def record_integration(args: argparse.Namespace) -> int:\n",
+            "g1a_3_nonconsumer_code_changed",
+        ),
+        (
+            "async def record_integration(args: argparse.Namespace) -> None:\n",
+            "g1a_3_allowed_function_body_contract_invalid",
+        ),
+    ],
+    ids=[
+        "decorator",
+        "positional-default",
+        "keyword-only-default",
+        "annotation",
+        "parameter-shape",
+        "return-annotation",
+        "async-function",
+    ],
+)
+def test_g1a3_record_integration_definition_metadata_is_immutable(
+    tmp_path: Path, replacement: str, expected_reason: str
+) -> None:
+    root = _policy_sandbox(tmp_path)
+    path = root / "scripts/agent_worktrees.py"
+    source = path.read_text(encoding="utf-8")
+    updated = source.replace(
+        "def record_integration(args: argparse.Namespace) -> None:\n",
+        replacement,
+        1,
+    )
+    assert updated != source
+    path.write_text(updated, encoding="utf-8")
+
+    assert expected_reason in pa.g1a3_integration_contract_reasons(root)
+
+
+@pytest.mark.parametrize("default_kind", ["positional", "keyword-only"])
+def test_g1a3_import_time_append_log_default_is_rejected_before_import(
+    tmp_path: Path, default_kind: str
+) -> None:
+    root = _policy_sandbox(tmp_path)
+    path = root / "scripts/agent_worktrees.py"
+    source = path.read_text(encoding="utf-8")
+    effect_root = tmp_path / "import-time-effect"
+    expression = (
+        "append_integration_log(agent='synthetic', task='synthetic', "
+        "branch='synthetic', review='import-time', "
+        "integration_commit='synthetic', result='integrated', follow_up='', "
+        f"repo_root=Path({str(effect_root)!r}))"
+    )
+    if default_kind == "positional":
+        replacement = (
+            "def record_integration(\n"
+            f"    args: argparse.Namespace = {expression},\n"
+            ") -> None:\n"
+        )
+    else:
+        replacement = (
+            "def record_integration(\n"
+            "    args: argparse.Namespace, *,\n"
+            f"    marker: object = {expression},\n"
+            ") -> None:\n"
+        )
+    path.write_text(
+        source.replace(
+            "def record_integration(args: argparse.Namespace) -> None:\n",
+            replacement,
+            1,
+        ),
+        encoding="utf-8",
+    )
+
+    assert not (effect_root / "orchestration/integration_log.md").exists()
+    assert "g1a_3_nonconsumer_code_changed" in (
+        pa.g1a3_integration_contract_reasons(root)
+    )
+    assert not (effect_root / "orchestration/integration_log.md").exists()
+
+
+@pytest.mark.parametrize(
+    "expression",
+    [
+        'run_git(["status"])',
+        'subprocess.run(["git", "status"], check=False)',
+    ],
+    ids=["run-git", "subprocess"],
+)
+def test_g1a3_import_time_process_default_is_rejected_before_import(
+    tmp_path: Path, expression: str
+) -> None:
+    root = _policy_sandbox(tmp_path)
+    path = root / "scripts/agent_worktrees.py"
+    source = path.read_text(encoding="utf-8")
+    replacement = (
+        "def record_integration(\n"
+        f"    args: argparse.Namespace = {expression},\n"
+        ") -> None:\n"
+    )
+    path.write_text(
+        source.replace(
+            "def record_integration(args: argparse.Namespace) -> None:\n",
+            replacement,
+            1,
+        ),
+        encoding="utf-8",
+    )
+
+    assert "g1a_3_nonconsumer_code_changed" in (
+        pa.g1a3_integration_contract_reasons(root)
+    )
+
+
+@pytest.mark.parametrize("mutation", ["missing", "duplicate", "malformed"])
+def test_g1a3_missing_duplicate_or_malformed_allowed_function_fails_closed(
+    tmp_path: Path, mutation: str
+) -> None:
+    root = _policy_sandbox(tmp_path)
+    path = root / "scripts/agent_worktrees.py"
+    source = path.read_text(encoding="utf-8")
+    tree = ast.parse(source)
+    node = next(
+        item
+        for item in tree.body
+        if isinstance(item, ast.FunctionDef) and item.name == "record_integration"
+    )
+    segment = ast.get_source_segment(source, node)
+    assert segment is not None
+    if mutation == "duplicate":
+        updated = f"{source.rstrip()}\n\n{segment}\n"
+        path.write_text(updated, encoding="utf-8")
+    elif mutation == "missing":
+        lines = source.splitlines(keepends=True)
+        del lines[node.lineno - 1 : node.end_lineno]
+        path.write_text("".join(lines), encoding="utf-8")
+    else:
+        path.write_bytes(
+            source.replace(
+                "def record_integration(args: argparse.Namespace) -> None:\n",
+                "def record_integration(:\n",
+                1,
+            ).encode("utf-8")
+        )
+
+    assert pa.g1a3_integration_contract_reasons(root) == [
+        "g1a_3_allowed_function_body_contract_invalid"
+    ]
+
+
+def test_g1a3_body_only_hash_preserves_type_comment_metadata() -> None:
+    baseline = b"def record_integration(value):\n    return value\n"
+    body_changed = b"def record_integration(value):\n    return None\n"
+    type_comment_changed = (
+        b"def record_integration(value):  # type: (int) -> int\n    return value\n"
+    )
+    allowed = {"record_integration"}
+
+    assert (
+        pa._protected_module_ast_hash_with_only_allowed_function_bodies_replaced_by_pass(
+            baseline, allowed
+        )
+        == pa._protected_module_ast_hash_with_only_allowed_function_bodies_replaced_by_pass(
+            body_changed, allowed
+        )
+    )
+    assert (
+        pa._protected_module_ast_hash_with_only_allowed_function_bodies_replaced_by_pass(
+            baseline, allowed
+        )
+        != pa._protected_module_ast_hash_with_only_allowed_function_bodies_replaced_by_pass(
+            type_comment_changed, allowed
+        )
+    )
+
+
+@pytest.mark.skipif(
+    sys.version_info < (3, 12), reason="PEP 695 syntax needs Python 3.12"
+)
+def test_g1a3_body_only_hash_preserves_type_parameters_when_supported() -> None:
+    baseline = b"def record_integration[T](value: T) -> T:\n    return value\n"
+    changed = b"def record_integration[U](value: U) -> U:\n    return value\n"
+    allowed = {"record_integration"}
+
+    assert (
+        pa._protected_module_ast_hash_with_only_allowed_function_bodies_replaced_by_pass(
+            baseline, allowed
+        )
+        != pa._protected_module_ast_hash_with_only_allowed_function_bodies_replaced_by_pass(
+            changed, allowed
+        )
+    )
+
+
+@pytest.mark.parametrize(
+    "symbol",
+    [
+        "_require_command_admission",
+        "append_integration_log",
+        "build_parser",
+        "main",
+        "run_git",
+        "push_handoff_refs",
+        "handoff",
+        "sync",
+        "realign",
+        "submit",
+        "dispatch",
+        "ensure_integration_log",
+        "integration_log_records",
+    ],
+)
+def test_every_protected_g1a3_integration_symbol_is_immutable(
+    tmp_path: Path, symbol: str
+) -> None:
+    root = _policy_sandbox(tmp_path)
+    path = root / "scripts/agent_worktrees.py"
+    source = path.read_text(encoding="utf-8")
+    tree = ast.parse(source)
+    node = next(
+        item
+        for item in tree.body
+        if isinstance(item, (ast.ClassDef, ast.FunctionDef, ast.AsyncFunctionDef))
+        and item.name == symbol
+    )
+    lines = source.splitlines(keepends=True)
+    lines.insert(node.body[0].lineno - 1, "    synthetic_contract_drift = None\n")
+    path.write_text("".join(lines), encoding="utf-8")
+
+    reasons = pa.g1a3_integration_contract_reasons(root)
+
+    assert "g1a_3_nonconsumer_code_changed" in reasons
+    assert "g1a_3_protected_integration_symbol_changed" in reasons
+
+
 def _scope_git_stub(
     manifest: dict,
     *,
@@ -525,6 +1035,8 @@ def _scope_git_stub(
             return manifest["base_commit"]
         if args[:2] == ("rev-list", "--count"):
             return str(commit_count)
+        if args[:2] == ("rev-list", "--reverse"):
+            return manifest["base_commit"]
         if args[:2] == ("diff", "--name-only"):
             return changed if "..HEAD" in args[-1] else ""
         if args == ("diff", "--cached", "--name-only"):
@@ -574,6 +1086,12 @@ def test_committed_product_path_is_rejected(monkeypatch: pytest.MonkeyPatch) -> 
     monkeypatch.setattr(
         pa, "evaluate_programme_admission", lambda **_kwargs: _admitted(policy)
     )
+    monkeypatch.setattr(
+        pa,
+        "_validate_manifest",
+        lambda value, **_kwargs: (value, value["allowed_path_roots"]),
+    )
+    monkeypatch.setattr(pa, "g1a2_provider_contract_reasons", lambda _root: [])
     monkeypatch.setattr(pa, "_is_ancestor", lambda *_args: True)
     monkeypatch.setattr(
         pa, "_run_git", _scope_git_stub(manifest, changed="app/main.py")
@@ -601,6 +1119,12 @@ def test_later_commit_after_candidate_is_rejected(
     monkeypatch.setattr(
         pa, "evaluate_programme_admission", lambda **_kwargs: _admitted(policy)
     )
+    monkeypatch.setattr(
+        pa,
+        "_validate_manifest",
+        lambda value, **_kwargs: (value, value["allowed_path_roots"]),
+    )
+    monkeypatch.setattr(pa, "g1a2_provider_contract_reasons", lambda _root: [])
     monkeypatch.setattr(pa, "_is_ancestor", lambda *_args: True)
     monkeypatch.setattr(pa, "_run_git", _scope_git_stub(manifest, commit_count=2))
     monkeypatch.setattr(
@@ -625,6 +1149,12 @@ def test_post_push_missing_or_mismatched_origin_is_rejected(
     monkeypatch.setattr(
         pa, "evaluate_programme_admission", lambda **_kwargs: _admitted(policy)
     )
+    monkeypatch.setattr(
+        pa,
+        "_validate_manifest",
+        lambda value, **_kwargs: (value, value["allowed_path_roots"]),
+    )
+    monkeypatch.setattr(pa, "g1a2_provider_contract_reasons", lambda _root: [])
     monkeypatch.setattr(pa, "_is_ancestor", lambda *_args: True)
     monkeypatch.setattr(pa, "_run_git", _scope_git_stub(manifest, remote=remote))
     monkeypatch.setattr(
@@ -643,16 +1173,14 @@ def test_post_push_missing_or_mismatched_origin_is_rejected(
     )
 
 
-def test_historical_latch_cannot_resume(tmp_path: Path) -> None:
+def test_review_pending_latch_cannot_resume_implementation(tmp_path: Path) -> None:
     root = _policy_sandbox(tmp_path)
     path = root / pa.LATCH_PATH
     latch = json.loads(path.read_text(encoding="utf-8"))
-    latch["status"] = "paused"
+    latch["status"] = "in_progress"
     _write_json(path, latch)
 
-    with pytest.raises(
-        ProgrammeAdmissionError, match="historical_latch_not_terminally_replaced"
-    ):
+    with pytest.raises(ProgrammeAdmissionError, match="g1a3_enablement_latch_invalid"):
         load_programme_policy(root)
 
 
@@ -679,24 +1207,20 @@ def test_forbidden_side_effect_entrypoints_remain_closed(entrypoint: str) -> Non
     assert decision.reason_codes == [f"{entrypoint}_closed_in_active_profile"]
 
 
-def test_machine_state_does_not_claim_stale_review_acceptance() -> None:
+def test_machine_state_claims_only_exact_g1a2_implementation_acceptance() -> None:
     policy = load_programme_policy(ROOT)
 
-    assert policy.state["g0_acceptance"]["status"] == "superseded_revision_required"
-    assert policy.state["g0_8_correction"]["g1a_authorized"] is False
-    assert policy.state["g0_8_correction"]["external_review_status"] in {
-        "not_started",
-        "pending",
-    }
-    decisive_id = policy.state["g0_acceptance"]["decisive_review_id"]
-    decisive = next(
-        row
-        for row in policy.state["g0_acceptance"]["external_review_history"]
-        if row["review_id"] == decisive_id
-    )
-    assert decisive["reviewed_commit"] == "6e101d15f824f68c3f44d0a3cb44a3aa2afd5b1b"
-    assert decisive["verdict"] == "REVISION_REQUIRED"
-    assert decisive["blocking_finding_count"] == 1
+    authority = policy.state["g1a_subgate_authority"]
+    decisive_id = authority["decisive_implementation_review_id"]
+    decisive = authority["implementation_review_history"][0]
+    assert decisive["review_id"] == decisive_id
+    assert decisive["reviewed_commit"] == ("37e2d6f51ebbdb281771f922a5f460fd23e2571b")
+    assert decisive["reviewed_tree"] == "798a2eda11438fe05da2528298006775774ccfc4"
+    assert decisive["reviewed_parent"] == ("474d79e0ef918dc8e7fef6780ea34c5c105fe236")
+    assert decisive["verdict"] == "PASS"
+    assert decisive["blocking_finding_count"] == 0
+    assert authority["decisive_g1a3_transition_enablement_review_id"] is None
+    assert authority["g1a3_transition_enablement_review_history"] == []
 
 
 def test_production_review_history_uses_real_resolving_commit_trees() -> None:
@@ -739,7 +1263,7 @@ def test_production_review_history_uses_real_resolving_commit_trees() -> None:
     for commit, tree in expected:
         assert _git(ROOT, "rev-parse", f"{commit}^{{tree}}") == tree
         assert _git(ROOT, "rev-parse", f"{tree}^{{tree}}") == tree
-    assert len(state["g0_acceptance"]["external_review_history"]) == 8
+    assert len(state["g0_acceptance"]["external_review_history"]) == 9
 
 
 def test_false_g0_2_tree_binding_is_rejected_and_unresolved() -> None:
@@ -1843,17 +2367,316 @@ def _build_subgate_transition_repository(
     return root, gatekeeper, manifest, enablement
 
 
+def _build_g1a3_transition_repository(
+    tmp_path: Path,
+) -> tuple[Path, Path, dict, str]:
+    """Build a real staged G1A.2 -> G1A.3 transition over this candidate."""
+    root = tmp_path / "g1a3-target"
+    root.mkdir()
+    _git(root, "init", "-b", "codex/raisa-ariadne-recovery-g0")
+    object_store = _git(
+        ROOT, "rev-parse", "--path-format=absolute", "--git-path", "objects"
+    )
+    alternates = root / ".git/objects/info/alternates"
+    alternates.parent.mkdir(parents=True, exist_ok=True)
+    alternates.write_bytes((object_store + "\n").encode("utf-8"))
+    _git(root, "config", "user.email", "tests@example.invalid")
+    _git(root, "config", "user.name", "G1A.3 Transition Tests")
+    _git(root, "config", "core.autocrlf", "false")
+    _git(root, "config", "core.longpaths", "true")
+    _copy_indexed_candidate(root)
+
+    origin = tmp_path / "g1a3-origin.git"
+    origin.mkdir()
+    _git(origin, "init", "--bare")
+    _git(root, "remote", "add", "origin", str(origin))
+    overlay_path = root / pa.OVERLAY_PATH
+    overlay = yaml.safe_load(overlay_path.read_text(encoding="utf-8"))
+    overlay["remote_identity_policy"] = pa.build_synthetic_remote_identity_policy(
+        origin
+    )
+    _write_yaml(overlay_path, overlay)
+    latch_path = root / pa.LATCH_PATH
+    latch = json.loads(latch_path.read_text(encoding="utf-8"))
+    latch["checkpoint"]["settings_fingerprint"] = settings_fingerprint(
+        root / "orchestration/harness_settings"
+    )
+    _write_json(latch_path, latch)
+    _git(root, "add", "-A")
+    enablement_tree = _git(root, "write-tree")
+    implementation = "37e2d6f51ebbdb281771f922a5f460fd23e2571b"
+    enablement = _git(
+        root,
+        "commit-tree",
+        enablement_tree,
+        "-p",
+        implementation,
+        "-m",
+        "synthetic G1A.3 transition enablement candidate",
+    )
+    branch_ref = "refs/heads/codex/raisa-ariadne-recovery-g0"
+    _git(root, "update-ref", branch_ref, enablement)
+    protected = "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    _git(root, "branch", "master", protected)
+    _git(root, "branch", "handoff/current", protected)
+    _git(
+        root,
+        "branch",
+        "safety/ariadne-clockwork-pre-g0-20260825",
+        "03e6860394c39086ec1ffb3f2457acc5f7c8b5f9",
+    )
+    _git(root, "push", "origin", f"{protected}:refs/heads/master")
+    _git(root, "push", "origin", f"{protected}:refs/heads/handoff/current")
+    _git(root, "push", "-u", "origin", f"{enablement}:{branch_ref}")
+    _git(root, "fetch", "origin")
+    load_programme_policy(root)
+
+    gatekeeper = tmp_path / "g1a3-pinned-gatekeeper"
+    _git(root, "worktree", "add", "--detach", str(gatekeeper), enablement)
+    before_state_digest = pa._sha256_bytes(
+        pa._git_object_bytes(root, f"{enablement}:{pa.STATE_PATH.as_posix()}")
+    )
+    before_policy_digest = pa._digest_paths_at(
+        root,
+        enablement,
+        (
+            pa.GATES_PATH,
+            pa.RISK_PATH,
+            pa.INVENTORY_PATH,
+            pa.G1A_SCOPE_PATH,
+            pa.OVERLAY_PATH,
+            pa.PROJECT_PATH,
+            pa.CONTINUATION_PATH,
+            pa.LATCH_PATH,
+            pa.AGENTS_PATH,
+        ),
+    )
+    transition_id = "g1a2-to-g1a3-synthetic-pass"
+    review_id = "g1a3-e0-synthetic-pass"
+    reviewer_surface = "external_native_review"
+    review_path = root / pa.G1A3_TRANSITION_REVIEW_ROOT / f"{review_id}.json"
+    artifact_path = root / pa.SUBGATE_TRANSITION_ARTIFACT_ROOT / f"{transition_id}.json"
+    review = {
+        "schema_version": "ariadne.external_g1a3_transition_enablement_review.v1",
+        "review_id": review_id,
+        "recorded_at": "2026-08-28T23:00:00+10:00",
+        "review_subject": "G1A.3_transition_enablement",
+        "reviewed_commit": enablement,
+        "reviewed_tree": enablement_tree,
+        "reviewed_parent": implementation,
+        "verdict": "PASS",
+        "blocking_finding_count": 0,
+        "reviewer_surface": reviewer_surface,
+        "g1a3_state_transition_authorized": True,
+        "g1a3_implementation_authorized": False,
+        "provider_invocation_authorized": False,
+        "integration_authorized": False,
+        "source_artifact_sha256": "2" * 64,
+    }
+    _write_json(review_path, review)
+    review_digest = pa._sha256_bytes(review_path.read_bytes())
+
+    state_path = root / pa.STATE_PATH
+    state = json.loads(state_path.read_text(encoding="utf-8"))
+    state["observed_at"] = "2026-08-28T23:05:00+10:00"
+    state["current_gate"] = "G1A.3"
+    state["active_correction"] = "G1A.3"
+    state["active_profile"] = pa.G1A3_ACTIVE_PROFILE
+    selection = state["task_selection"]
+    selection["allowed_task_kinds"] = [pa.G1A3_TASK_CLASS]
+    selection["next_eligible_now"] = True
+    selection["next_tranche_admission_requires_state_transition"] = False
+    selection["next_eligibility_condition"] = (
+        "bounded_G1A_3_profile_active_next_tranche_not_started"
+    )
+    authority = state["g1a_subgate_authority"]
+    authority["decisive_g1a3_transition_enablement_review_id"] = review_id
+    authority["g1a3_transition_enablement_review_history"] = [
+        {
+            "review_id": review_id,
+            "review_record_path": review_path.relative_to(root).as_posix(),
+            "reviewed_commit": enablement,
+            "reviewed_tree": enablement_tree,
+            "reviewed_parent": implementation,
+            "verdict": "PASS",
+            "blocking_finding_count": 0,
+            "reviewer_surface": reviewer_surface,
+            "g1a3_state_transition_authorized": True,
+            "g1a3_implementation_authorized": False,
+            "provider_invocation_authorized": False,
+            "integration_authorized": False,
+            "review_record_sha256": review_digest,
+        }
+    ]
+    g1a3 = authority["subgates"]["G1A.3"]
+    g1a3["status"] = "active"
+    g1a3["transition_enablement_status"] = "external_review_passed"
+    g1a3["state_transition_status"] = "complete"
+    g1a3["state_transition"] = {
+        "status": "complete",
+        "transition_id": transition_id,
+        "from_gate": "G1A.2",
+        "to_gate": "G1A.3",
+        "g1a2_implementation_review_id": authority["decisive_implementation_review_id"],
+        "external_review_id": review_id,
+        "enablement_controller_commit": enablement,
+        "enablement_controller_tree": enablement_tree,
+        "external_review_status": "pass",
+        "blocking_finding_count": 0,
+        "reviewer_surface": reviewer_surface,
+        "next_action": "G1A_3_integration_consumer_only",
+    }
+    g1a3["implementation_authorized"] = True
+    g1a3["next_action"] = "begin_bounded_G1A3_integration_consumer_implementation"
+    _write_json(state_path, state)
+
+    gates_path = root / pa.GATES_PATH
+    gates = yaml.safe_load(gates_path.read_text(encoding="utf-8"))
+    gates["programme"]["prepared_at"] = "2026-08-28T23:05:00+10:00"
+    gates["programme"]["current_gate"] = "G1A.3"
+    by_id = {row["id"]: row for row in gates["gates"]}
+    by_id["G1A"]["status"] = "active_subgate_G1A_3"
+    by_id["G1A.3"]["status"] = "active"
+    _write_yaml(gates_path, gates)
+
+    overlay = yaml.safe_load(overlay_path.read_text(encoding="utf-8"))
+    overlay["active_profile"] = pa.G1A3_ACTIVE_PROFILE
+    overlay["g1a3_transition_policy"]["transition_status"] = "complete"
+    _write_yaml(overlay_path, overlay)
+
+    agents_path = root / pa.AGENTS_PATH
+    agents = agents_path.read_text(encoding="utf-8")
+    old_header = (
+        "Gate G1A.2 implementation is externally accepted. G1A.3 transition enablement\n"
+        "is review-pending as a runtime-faithful source-byte/body-only-AST replacement; its state transition,\n"
+        "implementation, integration entrypoint, provider invocation and every protected ref\n"
+        "remain closed."
+    )
+    new_header = (
+        "Gate G1A.3 is active only for its bounded integration-authority consumer;\n"
+        "integration execution, provider invocation and every protected ref remain closed."
+    )
+    assert old_header in agents
+    agents_path.write_bytes(agents.replace(old_header, new_header, 1).encode("utf-8"))
+    _git(root, "add", "--", pa.AGENTS_PATH.as_posix())
+
+    latch = json.loads(latch_path.read_text(encoding="utf-8"))
+    latch["operation_id"] = "g1a3-integration-consumer-mutation"
+    latch["active_tranche"] = "G1A.3 bounded integration-authority consumer"
+    latch["objective"] = (
+        "Implement only record_integration as the canonical immutable worker-receipt authority consumer without executing integration."
+    )
+    latch["status"] = "in_progress"
+    latch["source_head"] = enablement
+    latch["authority_source"] = (
+        "External G1A.3 transition-enablement PASS plus exact G1A.2 implementation PASS"
+    )
+    latch["checkpoint"]["completed_stage"] = (
+        "Externally accepted state-only G1A.2 to G1A.3 transition complete."
+    )
+    latch["checkpoint"]["next_executable_stage"] = (
+        "Implement the bounded G1A.3 integration-authority consumer without executing integration."
+    )
+    latch["resume_after_compaction"] = True
+    latch["terminal_response"] = {
+        "permitted": False,
+        "reason": "unfinished_authorized_operation",
+    }
+    latch["protected_boundaries"][7] = (
+        "G1A.3_state_transition_complete_implementation_bounded_not_started"
+    )
+    latch["checkpoint"]["settings_fingerprint"] = settings_fingerprint(
+        root / "orchestration/harness_settings"
+    )
+    _write_json(latch_path, latch)
+
+    review_relative = review_path.relative_to(root).as_posix()
+    artifact_relative = artifact_path.relative_to(root).as_posix()
+    transition_paths = sorted(
+        pa.G1A3_TRANSITION_FIXED_ALLOWED_PATHS | {review_relative, artifact_relative}
+    )
+    implementation_entry = authority["implementation_review_history"][0]
+    manifest = {
+        "schema_version": pa.G1A3_TRANSITION_MANIFEST_VERSION,
+        "transition_id": transition_id,
+        "from_gate": "G1A.2",
+        "to_gate": "G1A.3",
+        "g1a2_implementation_review_id": implementation_entry["review_id"],
+        "g1a2_implementation_review_record_sha256": implementation_entry[
+            "review_record_sha256"
+        ],
+        "g1a2_implementation_commit": implementation_entry["reviewed_commit"],
+        "g1a2_implementation_tree": implementation_entry["reviewed_tree"],
+        "enablement_review_id": review_id,
+        "enablement_controller_commit": enablement,
+        "enablement_controller_tree": enablement_tree,
+        "transition_parent": enablement,
+        "external_review_verdict": "PASS",
+        "external_review_record_sha256": review_digest,
+        "blocking_finding_count": 0,
+        "reviewer_surface": reviewer_surface,
+        "state_digest_before": before_state_digest,
+        "policy_digest_before": before_policy_digest,
+        "allowed_transition_paths": transition_paths,
+        "forbidden_effect_classes": sorted(pa.TRANSITION_FORBIDDEN_EFFECTS),
+    }
+    after_policy = load_programme_policy(root)
+    pointer_map = pa._g1a3_transition_semantic_pointer_map(root, enablement)
+    manifest_digest = pa._sha256_bytes(
+        json.dumps(manifest, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    )
+    scope = after_policy.g1a_scope["subgates"]["G1A.3"]
+    contract = scope["immutable_integration_consumer_contract"]
+    artifact = {
+        "schema_version": "ariadne.g1a2-to-g1a3-transition.v1",
+        "transition_id": transition_id,
+        "recorded_at": "2026-08-28T23:05:00+10:00",
+        "transition_manifest": manifest,
+        "transition_manifest_sha256": manifest_digest,
+        "g1a2_implementation_review_record_sha256": implementation_entry[
+            "review_record_sha256"
+        ],
+        "external_review_record_sha256": review_digest,
+        "enablement_controller_commit": enablement,
+        "enablement_controller_tree": enablement_tree,
+        "state_digest_before": before_state_digest,
+        "state_digest_after": after_policy.state_digest,
+        "policy_digest_before": before_policy_digest,
+        "policy_digest_after": after_policy.policy_digest,
+        "changed_semantic_pointers": pointer_map,
+        "scope_result": {"admitted": True, "phase": "development"},
+        "g1a3_profile_contract": {
+            "active_profile": pa.G1A3_ACTIVE_PROFILE,
+            "task_class": pa.G1A3_TASK_CLASS,
+            "allowed_paths": sorted(pa.G1A3_ALLOWED_PATHS),
+            "allowed_effects": sorted(pa.G1A3_ALLOWED_EFFECTS),
+            "integration_entrypoint_closed": True,
+            "provider_invocation_authorized": False,
+            "allowed_mutation_symbols": ["record_integration"],
+            "hash_semantics": contract["hash_semantics"],
+            "runtime_source_parsing_contract": contract[
+                "runtime_source_parsing_contract"
+            ],
+            "protected_ast_sha256": contract["protected_ast_sha256"],
+            "source_blob": contract["source_blob"],
+        },
+    }
+    _write_json(artifact_path, artifact)
+    _git(root, "add", "--", *transition_paths)
+    return root, gatekeeper, manifest, enablement
+
+
 @pytest.fixture(scope="module")
 def staged_subgate_transition(
     tmp_path_factory: pytest.TempPathFactory,
 ) -> tuple[Path, dict]:
-    root, _gatekeeper, manifest, _enablement = _build_subgate_transition_repository(
+    root, _gatekeeper, manifest, _enablement = _build_g1a3_transition_repository(
         tmp_path_factory.mktemp("staged-subgate-transition")
     )
     return root, manifest
 
 
-def test_valid_synthetic_g1a1_to_g1a2_state_transition_is_admitted(
+def test_valid_synthetic_g1a2_to_g1a3_state_transition_is_admitted(
     staged_subgate_transition: tuple[Path, dict],
 ) -> None:
     root, manifest = staged_subgate_transition
@@ -1866,9 +2689,9 @@ def test_valid_synthetic_g1a1_to_g1a2_state_transition_is_admitted(
     assert decision.reason_codes == []
     assert decision.candidate_commit_count == 0
     assert set(manifest["allowed_transition_paths"]) == (
-        pa.SUBGATE_TRANSITION_FIXED_ALLOWED_PATHS
+        pa.G1A3_TRANSITION_FIXED_ALLOWED_PATHS
         | {
-            f"{pa.SUBGATE_REVIEW_ROOT}/{manifest['transition_id']}.json",
+            f"{pa.G1A3_TRANSITION_REVIEW_ROOT}/{manifest['enablement_review_id']}.json",
             f"{pa.SUBGATE_TRANSITION_ARTIFACT_ROOT}/{manifest['transition_id']}.json",
         }
     )
@@ -1904,13 +2727,13 @@ def test_subgate_transition_rejects_semantic_pointer_widening(
     staged_subgate_transition: tuple[Path, dict], monkeypatch: pytest.MonkeyPatch
 ) -> None:
     root, manifest = staged_subgate_transition
-    actual = pa._subgate_transition_semantic_pointer_map(
+    actual = pa._g1a3_transition_semantic_pointer_map(
         root, manifest["enablement_controller_commit"]
     )
     widened = copy.deepcopy(actual)
     widened[pa.STATE_PATH.as_posix()].append("/global_checks/global_gate")
     monkeypatch.setattr(
-        pa, "_subgate_transition_semantic_pointer_map", lambda *_args: widened
+        pa, "_g1a3_transition_semantic_pointer_map", lambda *_args: widened
     )
 
     decision = evaluate_committed_scope(
@@ -1918,9 +2741,7 @@ def test_subgate_transition_rejects_semantic_pointer_widening(
     )
 
     assert decision.admitted is False
-    assert "subgate_transition_semantic_pointer_delta_not_exact" in (
-        decision.reason_codes
-    )
+    assert "g1a3_transition_semantic_pointer_delta_not_exact" in (decision.reason_codes)
 
 
 def test_candidate_local_controller_cannot_accept_subgate_transition(

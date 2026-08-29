@@ -1,7 +1,7 @@
 schema_version: "raisa-ariadne.programme-gates.v1"
 programme:
   name: "Raisa Medical Office and Ariadne Recovery & Convergence"
-  prepared_at: "2026-08-28T14:37:40+10:00"
+  prepared_at: "2026-08-28T22:50:13+10:00"
   repository: "yurifrusin/EMR4"
   observed_public_master: "2e34bdad732fdab32fbf778280b3d3c70d66d602"
   programme_mode: "recovery"
@@ -10,7 +10,7 @@ programme:
   feature_work_eligible: false
   clockwork_remote_visibility: "source_branch_aligned_with_origin"
   clockwork_local_state: "preserved_exactly_at_03e6860394c39086ec1ffb3f2457acc5f7c8b5f9"
-  next_eligible_tranche: "G1A.2"
+  next_eligible_tranche: "G1A.3"
 
 global_hard_stops:
   - "critical_or_high_security_finding"
@@ -381,7 +381,7 @@ gates:
 
   - id: "G1A"
     name: "Correct Verdict and Integration Semantics"
-    status: "active_subgate_G1A_2"
+    status: "g1a3_transition_enablement_review_pending"
     prerequisites: ["G1A.1", "G1A.2", "G1A.3"]
     programme_mode: "recovery"
     exit_checks:
@@ -408,23 +408,25 @@ gates:
 
   - id: "G1A.2"
     name: "Antigravity Provider Verdict Adapter"
-    status: "active"
+    status: "external_review_passed"
     prerequisites: ["G1A.1_owner_accept_with_residual_risk", "G1A.2-E0_external_review_pass", "state_only_subgate_transition"]
     programme_mode: "recovery"
     exit_checks:
       - "provider_launch_admission_worktree_and_receipt_safety_symbols_unchanged"
       - "only_verdict_adapter_semantics_change"
       - "provider_invocation_remains_closed"
-    next_gate: "external_G1A_2_review"
+    next_gate: "G1A.3"
 
   - id: "G1A.3"
     name: "Integration Consumer Mutation"
-    status: "deferred_integration_mutation"
-    prerequisites: ["G1A.2_external_review_pass_and_separate_integration_authority"]
+    status: "closed_pending_transition_enablement_external_review_and_state_transition"
+    prerequisites: ["G1A.2_external_review_pass", "G1A.3-E0_external_review_pass", "state_only_subgate_transition"]
     programme_mode: "recovery"
     exit_checks:
       - "negative_verdict_cannot_reach_integration_mutation"
       - "integration_authority_is_separately_typed_and_reviewed"
+      - "record_integration_is_the_only_mutable_production_symbol"
+      - "integration_entrypoint_remains_closed_during_implementation"
       - "protected_integration_remains_separately_authorized"
     next_gate: "G1A"
 

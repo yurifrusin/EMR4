@@ -11,8 +11,7 @@ import orchestration_harness.pinned_programme_gatekeeper as pg
 import scripts.raisa_ariadne_gatekeeper_bootstrap as bootstrap
 from scripts.raisa_ariadne_recovery_preflight import build_task_manifest
 from tests.test_programme_admission import (
-    _build_subgate_transition_repository,
-    _build_transition_repository,
+    _build_g1a3_transition_repository,
     _git,
     _write_json,
     _write_yaml,
@@ -30,22 +29,26 @@ _TRUSTED_GIT_OVERRIDES = (
 )
 
 
-def test_canonical_recovery_push_binding_tracks_active_g08_correction() -> None:
+def test_retained_g08_recovery_push_binding_tracks_its_external_review() -> None:
     policy = pa.load_programme_policy(ROOT)
     state = policy.state
     correction = state[pg.G0_CORRECTION_STATE_KEY]
-    decisive_review = next(
+    correction_review = next(
         review
         for review in state["g0_acceptance"]["external_review_history"]
-        if review["review_id"] == state["g0_acceptance"]["decisive_review_id"]
+        if review["reviewed_commit"] == correction["authorized_parent_commit"]
+        and review["reviewed_tree"] == correction[pg.G0_REVIEWED_TREE_FIELD]
     )
 
     assert pg.G0_CORRECTION_STATE_KEY == "g0_8_correction"
     assert pg.G0_REVIEWED_TREE_FIELD == "reviewed_g0_7_tree"
-    assert decisive_review["reviewed_commit"] == correction["authorized_parent_commit"]
-    assert decisive_review["reviewed_tree"] == correction[pg.G0_REVIEWED_TREE_FIELD]
     assert (
-        decisive_review["blocking_finding_count"] == correction["review_finding_count"]
+        correction_review["reviewed_commit"] == correction["authorized_parent_commit"]
+    )
+    assert correction_review["reviewed_tree"] == correction[pg.G0_REVIEWED_TREE_FIELD]
+    assert (
+        correction_review["blocking_finding_count"]
+        == correction["review_finding_count"]
     )
 
 
@@ -362,14 +365,16 @@ def _gatekeeper_operation(
 
 
 def _transition_fixture(tmp_path: Path) -> tuple[Path, Path, dict]:
-    target, transition_manifest = _build_transition_repository(tmp_path)
-    reviewed = transition_manifest["reviewed_commit"]
-    gatekeeper = tmp_path / "pinned-gatekeeper"
-    _git(target, "worktree", "add", "--detach", str(gatekeeper), reviewed)
+    target, gatekeeper, transition_manifest, _enablement = (
+        _build_g1a3_transition_repository(tmp_path)
+    )
+    _git(target, "commit", "--no-verify", "-m", "synthetic G1A.3 state transition")
     return target, gatekeeper, transition_manifest
 
 
-def test_real_bare_origin_transition_and_g1a_lifecycle_passes(tmp_path: Path) -> None:
+def test_real_bare_origin_transition_compatibility_lifecycle_passes(
+    tmp_path: Path,
+) -> None:
     target, gatekeeper, transition_manifest = _transition_fixture(tmp_path)
     transition_manifest_path = _manifest_path(
         target, transition_manifest, "transition-manifest.json"
@@ -417,118 +422,16 @@ def test_real_bare_origin_transition_and_g1a_lifecycle_passes(tmp_path: Path) ->
 
     policy = pa.load_programme_policy(target)
     dynamic_paths = {
-        f"{pa.TRANSITION_REVIEW_ROOT}/{transition_manifest['transition_id']}.json",
-        f"{pa.TRANSITION_ARTIFACT_ROOT}/{transition_manifest['transition_id']}.json",
+        f"{pa.G1A3_TRANSITION_REVIEW_ROOT}/{transition_manifest['enablement_review_id']}.json",
+        f"{pa.SUBGATE_TRANSITION_ARTIFACT_ROOT}/{transition_manifest['transition_id']}.json",
     }
     assert dynamic_paths.issubset(policy.full_range_allowed_paths)
     assert all("*" not in path for path in policy.full_range_allowed_paths)
 
-    verdict_path = target / "orchestration_harness/verdict.py"
-    verdict_path.write_text(
-        "# authored-synthetic G1A lifecycle change\n",
-        encoding="utf-8",
-    )
-    verdict_test_path = target / "tests/test_ariadne_verdict.py"
-    verdict_test_path.write_text(
-        "def test_authored_synthetic_verdict_placeholder():\n    assert True\n",
-        encoding="utf-8",
-    )
-    g1a_manifest = build_task_manifest(target)
-    assert pa.AGENTS_PATH.as_posix() not in g1a_manifest["allowed_path_roots"]
-    g1a_development_path = _manifest_path(
-        target, g1a_manifest, "g1a-development-manifest.json"
-    )
-    scope_development = pa.evaluate_committed_scope(
-        repo_root=target, manifest=g1a_manifest, phase="development"
-    )
-    assert scope_development.admitted is True
-    assert set(scope_development.target_cleanliness["untracked_paths"]) == {
-        "orchestration_harness/verdict.py",
-        "tests/test_ariadne_verdict.py",
-    }
-
-    _git(
-        target,
-        "add",
-        "orchestration_harness/verdict.py",
-        "tests/test_ariadne_verdict.py",
-    )
-    development, development_payload = _gatekeeper_cli(
-        gatekeeper=gatekeeper,
-        target=target,
-        manifest_path=g1a_development_path,
-        phase="development",
-    )
-    assert development.returncode == 0
-    assert development_payload["admitted"] is True
-    assert (
-        pa.AGENTS_PATH.as_posix()
-        in development_payload["scope_decision"]["changed_paths"]
-    )
-
-    commit_completed, commit_receipt = _gatekeeper_operation(
-        operation="commit",
-        gatekeeper=gatekeeper,
-        target=target,
-        manifest_path=g1a_development_path,
-        receipt_directory=target.parent / "g1a-commit-receipts",
-        message="synthetic G1A verdict kernel change",
-    )
-    assert commit_completed.returncode == 0
-    committed = commit_receipt["result_sha"]
-    assert _git(target, "rev-parse", "HEAD") == committed
-    assert (
-        _git(target, "rev-parse", "HEAD^{tree}")
-        == (development_payload["operation_binding"]["index_tree"])
-    )
-    g1a_manifest = build_task_manifest(target)
-    g1a_manifest_path = _manifest_path(target, g1a_manifest, "g1a-manifest.json")
-    pre_g1a, pre_g1a_payload = _gatekeeper_cli(
-        gatekeeper=gatekeeper,
-        target=target,
-        manifest_path=g1a_manifest_path,
-        phase="pre-push",
-    )
-    assert pre_g1a.returncode == 0
-    assert pre_g1a_payload["admitted"] is True
-    g1a_binding = pre_g1a_payload["operation_binding"]
-    assert pg.exact_push_argv(pg.PinnedGatekeeperDecision(**pre_g1a_payload)) == [
-        "git",
-        "push",
-        "--no-verify",
-        f"--force-with-lease={g1a_binding['force_with_lease']}",
-        g1a_binding["explicit_destination"],
-        g1a_binding["exact_push_refspec"],
-    ]
-    g1a_push, g1a_push_receipt = _gatekeeper_operation(
-        operation="push",
-        gatekeeper=gatekeeper,
-        target=target,
-        manifest_path=g1a_manifest_path,
-        receipt_directory=target.parent / "g1a-push-receipts",
-    )
-    assert g1a_push.returncode == 0
-    assert g1a_push_receipt["post_push_readback_sha"] == committed
-    assert g1a_push_receipt["schema_version"] == (
-        "ariadne.pinned_programme_operation_receipt.v1"
-    )
-    assert (
-        g1a_push_receipt["admitted_operation_binding"]["explicit_destination"]
-        == g1a_push_receipt["remote_identity"]["normalized_push_url"]
-    )
-    post_g1a, post_g1a_payload = _gatekeeper_cli(
-        gatekeeper=gatekeeper,
-        target=target,
-        manifest_path=g1a_manifest_path,
-        phase="post-push",
-    )
-    assert post_g1a.returncode == 0
-    assert post_g1a_payload["admitted"] is True
-
     product_path = target / "app/main.py"
     product_path.parent.mkdir(parents=True, exist_ok=True)
     product_path.write_text("# unrelated product drift\n", encoding="utf-8")
-    product_manifest = build_task_manifest(target)
+    product_manifest = activation_manifest
     product_manifest_path = _manifest_path(
         target, product_manifest, "product-drift-manifest.json"
     )
@@ -544,14 +447,14 @@ def test_real_bare_origin_transition_and_g1a_lifecycle_passes(tmp_path: Path) ->
         assert "scope_tranche_path_outside_policy" in payload["reason_codes"]
 
 
-def test_real_subgate_transition_and_g1a2_exact_lifecycle_passes(
+def test_real_g1a3_transition_and_exact_consumer_lifecycle_passes(
     tmp_path: Path,
 ) -> None:
     target, gatekeeper, transition_manifest, enablement = (
-        _build_subgate_transition_repository(tmp_path)
+        _build_g1a3_transition_repository(tmp_path)
     )
     transition_manifest_path = _manifest_path(
-        target, transition_manifest, "g1a2-transition-manifest.json"
+        target, transition_manifest, "g1a3-transition-manifest.json"
     )
 
     development, development_payload = _gatekeeper_cli(
@@ -572,8 +475,8 @@ def test_real_subgate_transition_and_g1a2_exact_lifecycle_passes(
         gatekeeper=gatekeeper,
         target=target,
         manifest_path=transition_manifest_path,
-        receipt_directory=tmp_path / "g1a2-transition-commit-receipts",
-        message="synthetic state-only G1A.1 to G1A.2 transition",
+        receipt_directory=tmp_path / "g1a3-transition-commit-receipts",
+        message="synthetic state-only G1A.2 to G1A.3 transition",
     )
     assert transition_commit.returncode == 0, transition_commit_receipt
     transition_sha = transition_commit_receipt["result_sha"]
@@ -594,7 +497,7 @@ def test_real_subgate_transition_and_g1a2_exact_lifecycle_passes(
         gatekeeper=gatekeeper,
         target=target,
         manifest_path=transition_manifest_path,
-        receipt_directory=tmp_path / "g1a2-transition-push-receipts",
+        receipt_directory=tmp_path / "g1a3-transition-push-receipts",
     )
     assert transition_push.returncode == 0, transition_push_receipt
     assert transition_push_receipt["post_push_readback_sha"] == transition_sha
@@ -608,28 +511,34 @@ def test_real_subgate_transition_and_g1a2_exact_lifecycle_passes(
     assert post_transition_payload["admitted"] is True
 
     policy = pa.load_programme_policy(target)
-    assert policy.state["current_gate"] == "G1A.2"
-    assert policy.overlay["active_profile"] == pa.G1A2_ACTIVE_PROFILE
+    assert policy.state["current_gate"] == "G1A.3"
+    assert policy.overlay["active_profile"] == pa.G1A3_ACTIVE_PROFILE
     assert (
-        policy.state["g1a_subgate_authority"]["subgates"]["G1A.2"][
+        policy.state["g1a_subgate_authority"]["subgates"]["G1A.3"][
             "provider_invocation_authorized"
+        ]
+        is False
+    )
+    assert (
+        policy.state["g1a_subgate_authority"]["subgates"]["G1A.3"][
+            "integration_execution_authorized"
         ]
         is False
     )
     exact_manifest = build_task_manifest(target)
     narrowed_manifest = dict(exact_manifest)
-    narrowed_manifest["allowed_path_roots"] = ["scripts/ariadne_antigravity.py"]
+    narrowed_manifest["allowed_path_roots"] = ["scripts/agent_worktrees.py"]
     narrowed = pa.evaluate_programme_admission(
         repo_root=target,
         manifest=narrowed_manifest,
         entrypoint="recovery_preflight",
     )
     assert narrowed.admitted is False
-    assert narrowed.reason_codes == ["g1a_2_task_manifest_paths_not_exact"]
+    assert narrowed.reason_codes == ["g1a_3_task_manifest_paths_not_exact"]
     reopened_manifest = dict(exact_manifest)
     reopened_manifest["allowed_path_roots"] = [
         *exact_manifest["allowed_path_roots"],
-        "orchestration_harness/verdict.py",
+        "scripts/ariadne_antigravity.py",
     ]
     reopened = pa.evaluate_programme_admission(
         repo_root=target,
@@ -644,7 +553,7 @@ def test_real_subgate_transition_and_g1a2_exact_lifecycle_passes(
     )
     candidate_gatekeeper_bytes = candidate_gatekeeper_path.read_bytes()
     candidate_gatekeeper_path.write_text(
-        "print('FORGED_G1A2_CANDIDATE_ACCEPT')\n", encoding="utf-8"
+        "print('FORGED_G1A3_CANDIDATE_ACCEPT')\n", encoding="utf-8"
     )
     _git(
         target,
@@ -654,7 +563,7 @@ def test_real_subgate_transition_and_g1a2_exact_lifecycle_passes(
     )
     forged_manifest = build_task_manifest(target)
     forged_manifest_path = _manifest_path(
-        target, forged_manifest, "g1a2-forged-gatekeeper-manifest.json"
+        target, forged_manifest, "g1a3-forged-gatekeeper-manifest.json"
     )
     forged, forged_payload = _gatekeeper_cli(
         gatekeeper=gatekeeper,
@@ -664,7 +573,7 @@ def test_real_subgate_transition_and_g1a2_exact_lifecycle_passes(
     )
     assert forged.returncode == 2
     assert forged_payload["admitted"] is False
-    assert "FORGED_G1A2_CANDIDATE_ACCEPT" not in forged.stdout
+    assert "FORGED_G1A3_CANDIDATE_ACCEPT" not in forged.stdout
     candidate_gatekeeper_path.write_bytes(candidate_gatekeeper_bytes)
     _git(
         target,
@@ -673,44 +582,38 @@ def test_real_subgate_transition_and_g1a2_exact_lifecycle_passes(
         "orchestration_harness/pinned_programme_gatekeeper.py",
     )
 
-    antigravity_path = target / "scripts/ariadne_antigravity.py"
-    antigravity = antigravity_path.read_text(encoding="utf-8")
-    antigravity_path.write_text(
-        antigravity.replace(
-            "        return STRUCTURED_DECISION_SCHEMA\n",
-            "        return dict(STRUCTURED_DECISION_SCHEMA)\n",
-            1,
-        )
-        .replace(
-            '    admitted: dict[str, Any] = {"decision": decision, "review": review.strip()}\n',
-            '    admitted: dict[str, Any] = {"decision": str(decision), "review": review.strip()}\n',
-            1,
-        )
-        .replace(
-            "    return next(iter(unique.values()))\n",
-            "    return dict(next(iter(unique.values())))\n",
+    consumer_path = target / "scripts/agent_worktrees.py"
+    consumer = consumer_path.read_text(encoding="utf-8")
+    consumer_path.write_text(
+        consumer.replace(
+            "def record_integration(args: argparse.Namespace) -> None:\n"
+            '    _require_command_admission(args, entrypoint="integration")\n',
+            "def record_integration(args: argparse.Namespace) -> None:\n"
+            '    """Consume only validated immutable integration authority."""\n'
+            '    _require_command_admission(args, entrypoint="integration")\n',
             1,
         ),
         encoding="utf-8",
     )
-    antigravity_test_path = target / "tests/test_ariadne_antigravity.py"
-    antigravity_test_path.write_text(
-        antigravity_test_path.read_text(encoding="utf-8")
-        + "\n\ndef test_synthetic_g1a2_exact_enum_adapter():\n"
-        + "    assert {'pass', 'revision_required'} == {'pass', 'revision_required'}\n",
+    assert consumer_path.read_text(encoding="utf-8") != consumer
+    consumer_test_path = target / "tests/test_agent_worktrees.py"
+    consumer_test_path.write_text(
+        consumer_test_path.read_text(encoding="utf-8")
+        + "\n\ndef test_synthetic_g1a3_consumer_contract_marker():\n"
+        + "    assert 'ariadne.worker_receipt.v1'.startswith('ariadne.')\n",
         encoding="utf-8",
     )
     _git(
         target,
         "add",
         "--",
-        "scripts/ariadne_antigravity.py",
-        "tests/test_ariadne_antigravity.py",
+        "scripts/agent_worktrees.py",
+        "tests/test_agent_worktrees.py",
     )
     task_manifest = build_task_manifest(target)
-    assert set(task_manifest["allowed_path_roots"]) == pa.G1A2_ALLOWED_PATHS
+    assert set(task_manifest["allowed_path_roots"]) == pa.G1A3_ALLOWED_PATHS
     assert set(task_manifest["intended_side_effect_classes"]) == (
-        pa.G1A2_ALLOWED_EFFECTS
+        pa.G1A3_ALLOWED_EFFECTS
     )
     provider_denial = pa.evaluate_programme_admission(
         repo_root=target,
@@ -721,7 +624,14 @@ def test_real_subgate_transition_and_g1a2_exact_lifecycle_passes(
     assert provider_denial.reason_codes == [
         "provider_invocation_closed_in_active_profile"
     ]
-    assert pa.g1a2_provider_contract_reasons(target) == []
+    integration_denial = pa.evaluate_programme_admission(
+        repo_root=target,
+        manifest=task_manifest,
+        entrypoint="integration",
+    )
+    assert integration_denial.admitted is False
+    assert integration_denial.reason_codes == ["integration_closed_in_active_profile"]
+    assert pa.g1a3_integration_contract_reasons(target) == []
 
     local_decision = pa.evaluate_programme_operation_admission(
         repo_root=target,
@@ -732,7 +642,7 @@ def test_real_subgate_transition_and_g1a2_exact_lifecycle_passes(
     assert local_decision.admitted is False
     assert local_decision.reason_codes == ["pinned_gatekeeper_required"]
     task_manifest_path = _manifest_path(
-        target, task_manifest, "g1a2-development-manifest.json"
+        target, task_manifest, "g1a3-development-manifest.json"
     )
     task_development, task_development_payload = _gatekeeper_cli(
         gatekeeper=gatekeeper,
@@ -748,14 +658,14 @@ def test_real_subgate_transition_and_g1a2_exact_lifecycle_passes(
         gatekeeper=gatekeeper,
         target=target,
         manifest_path=task_manifest_path,
-        receipt_directory=tmp_path / "g1a2-task-commit-receipts",
-        message="synthetic bounded G1A.2 adapter",
+        receipt_directory=tmp_path / "g1a3-task-commit-receipts",
+        message="synthetic bounded G1A.3 consumer",
     )
     assert task_commit.returncode == 0, task_commit_receipt
     task_sha = task_commit_receipt["result_sha"]
     task_manifest = build_task_manifest(target)
     task_manifest_path = _manifest_path(
-        target, task_manifest, "g1a2-pre-push-manifest.json"
+        target, task_manifest, "g1a3-pre-push-manifest.json"
     )
     pre_task, pre_task_payload = _gatekeeper_cli(
         gatekeeper=gatekeeper,
@@ -769,7 +679,7 @@ def test_real_subgate_transition_and_g1a2_exact_lifecycle_passes(
         gatekeeper=gatekeeper,
         target=target,
         manifest_path=task_manifest_path,
-        receipt_directory=tmp_path / "g1a2-task-push-receipts",
+        receipt_directory=tmp_path / "g1a3-task-push-receipts",
     )
     assert task_push.returncode == 0, task_push_receipt
     assert task_push_receipt["post_push_readback_sha"] == task_sha
@@ -786,7 +696,7 @@ def test_real_subgate_transition_and_g1a2_exact_lifecycle_passes(
             target,
             "ls-remote",
             "--refs",
-            str(tmp_path / "g1a2-origin.git"),
+            str(tmp_path / "g1a3-origin.git"),
             "refs/heads/codex/raisa-ariadne-recovery-g0",
         ).split()[0]
         == task_sha
@@ -876,14 +786,30 @@ def test_dirty_or_wrongly_pinned_gatekeeper_fails_closed(tmp_path: Path) -> None
         phase="development",
     )
     assert wrongly_pinned.returncode == 2
-    assert "gatekeeper_source_not_transition_pinned" in wrong_payload["reason_codes"]
+    assert (
+        "gatekeeper_source_not_g1a3_transition_pinned"
+        in (wrong_payload["reason_codes"])
+    )
 
 
 def test_preserved_legacy_worktree_cannot_use_unpinned_gatekeeper(
     tmp_path: Path,
 ) -> None:
     _target, gatekeeper, _transition_manifest = _transition_fixture(tmp_path)
-    manifest = build_task_manifest(ROOT)
+    manifest = {
+        "schema_version": pa.TASK_MANIFEST_VERSION,
+        "task_id": "preserved-legacy-probe",
+        "task_class": pa.G1A3_TASK_CLASS,
+        "programme_gate": "G1A.3",
+        "objective": "Prove the preserved legacy target remains closed.",
+        "base_commit": _git(ROOT, "rev-parse", "HEAD"),
+        "candidate_or_current_head": _git(ROOT, "rev-parse", "HEAD"),
+        "allowed_path_roots": sorted(pa.G1A3_ALLOWED_PATHS),
+        "intended_side_effect_classes": sorted(pa.G1A3_ALLOWED_EFFECTS),
+        "forbidden_side_effect_classes": sorted(pa.G1A_FORBIDDEN_EFFECTS),
+        "state_digest": pa.load_programme_policy(ROOT).state_digest,
+        "policy_digest": pa.load_programme_policy(ROOT).policy_digest,
+    }
     manifest_path = tmp_path / "legacy-target-manifest.json"
     _write_json(manifest_path, manifest)
 
@@ -895,7 +821,7 @@ def test_preserved_legacy_worktree_cannot_use_unpinned_gatekeeper(
     )
 
     assert completed.returncode == 2
-    assert "gatekeeper_source_not_g0_candidate_pinned" in payload["reason_codes"]
+    assert "gatekeeper_source_not_transition_pinned" in payload["reason_codes"]
 
 
 def test_operation_binding_revalidation_rejects_post_admission_index_drift(
@@ -917,9 +843,17 @@ def test_operation_binding_revalidation_rejects_post_admission_index_drift(
         capture_output=True,
         text=True,
     )
-    verdict = target / "orchestration_harness/verdict.py"
-    verdict.write_text("# staged verdict\n", encoding="utf-8")
-    _git(target, "add", "orchestration_harness/verdict.py")
+    consumer = target / "scripts/agent_worktrees.py"
+    consumer.write_text(
+        consumer.read_text(encoding="utf-8").replace(
+            "def record_integration(args: argparse.Namespace) -> None:\n",
+            "def record_integration(args: argparse.Namespace) -> None:\n"
+            '    """Synthetic receipt consumer."""\n',
+            1,
+        ),
+        encoding="utf-8",
+    )
+    _git(target, "add", "scripts/agent_worktrees.py")
     manifest = build_task_manifest(target)
 
     prior = pg.evaluate_pinned_programme_operation(
@@ -931,7 +865,13 @@ def test_operation_binding_revalidation_rejects_post_admission_index_drift(
     )
     assert prior.admitted is True
 
-    verdict.write_text("# changed after admission\n", encoding="utf-8")
+    consumer.write_text(
+        consumer.read_text(encoding="utf-8").replace(
+            "Synthetic receipt consumer.", "Changed after admission."
+        ),
+        encoding="utf-8",
+    )
+    _git(target, "add", "scripts/agent_worktrees.py")
     fresh = pg.revalidate_pinned_operation_binding(
         prior_decision=prior,
         gatekeeper_root=gatekeeper,
@@ -1025,15 +965,15 @@ def test_g1a_cannot_widen_scope_rewrite_evidence_or_inline_closeout(
     if case == "widen_scope":
         path = target / pa.OVERLAY_PATH
         overlay = pa._strict_yaml(path)
-        overlay["profiles"][pa.G1A_ACTIVE_PROFILE]["allowed_paths"].append(
+        overlay["profiles"][pa.G1A3_ACTIVE_PROFILE]["allowed_paths"].append(
             "app/main.py"
         )
         _write_yaml(path, overlay)
     elif case == "rewrite_review":
         path = (
             target
-            / pa.TRANSITION_REVIEW_ROOT
-            / f"{transition_manifest['transition_id']}.json"
+            / pa.G1A3_TRANSITION_REVIEW_ROOT
+            / f"{transition_manifest['enablement_review_id']}.json"
         )
         review = json.loads(path.read_text(encoding="utf-8"))
         review["blocking_finding_count"] = 1

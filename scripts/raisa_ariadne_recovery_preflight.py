@@ -177,6 +177,14 @@ def _verification_phase(repo_root: Path, state: dict[str, Any]) -> str:
             root, "rev-list", "--reverse", f"{reviewed}..{head}"
         ).splitlines()
         parent = rows[0] if rows else None
+    elif active_correction == "G1A.3":
+        reviewed = state["g1a_subgate_authority"]["subgates"]["G1A.3"][
+            "state_transition"
+        ]["enablement_controller_commit"]
+        rows = _run_git(
+            root, "rev-list", "--reverse", f"{reviewed}..{head}"
+        ).splitlines()
+        parent = rows[0] if rows else None
     elif active_correction == "G1A.2":
         reviewed = state["g1a_subgate_authority"]["subgates"]["G1A.2"][
             "state_transition"
@@ -233,6 +241,16 @@ def build_task_manifest(
         base_commit = rows[0]
         task_id = "raisa-ariadne-g1a-1-pure-verdict-kernel"
         objective = "Repair the canonical verdict algebra and pure acceptance consumers inside the pre-reviewed G1A.1 scope only."
+    elif policy.state["active_profile"] == "G1A.3_ACTIVE":
+        reviewed = policy.state["g1a_subgate_authority"]["subgates"]["G1A.3"][
+            "state_transition"
+        ]["enablement_controller_commit"]
+        rows = _run_git(root, "rev-list", "--reverse", f"{reviewed}..HEAD").splitlines()
+        if not rows:
+            raise PreflightError("G1A.3 activation commit unavailable")
+        base_commit = rows[0]
+        task_id = "raisa-ariadne-g1a-3-integration-authority-consumer"
+        objective = "Implement only the canonical worker-receipt authority consumer inside record_integration without executing integration."
     else:
         reviewed = policy.state["g1a_subgate_authority"]["subgates"]["G1A.2"][
             "state_transition"

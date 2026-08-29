@@ -1,21 +1,21 @@
 {
   "schema_version": "ariadne.active_operation_latch.v1",
-  "operation_id": "g1a2-antigravity-verdict-adapter",
-  "active_tranche": "G1A.2 bounded Antigravity verdict adapter",
-  "objective": "Implement only the structured verdict adapter inside the three reviewed Antigravity symbols without invoking a provider.",
-  "status": "in_progress",
-  "source_head": "dab684e84270a3ce4a8a2fca5fbead2ea2361ef6",
-  "authority_source": "External G1A.2 transition-enablement PASS plus Yuri Frusin owner disposition",
+  "operation_id": "g1a3-transition-enablement-runtime-source-encoding-replacement-20260829-v1",
+  "active_tranche": "G1A.3 transition-enablement runtime source-encoding replacement candidate",
+  "objective": "Replace the rejected transition-enablement candidate with runtime-faithful source-byte AST interpretation while retaining the body-only record_integration boundary and keeping the G1A.2 to G1A.3 state transition unperformed.",
+  "status": "paused",
+  "source_head": "37e2d6f51ebbdb281771f922a5f460fd23e2571b",
+  "authority_source": "External G1A.2 implementation PASS, external G1A.3-E0 runtime source-encoding REVISION_REQUIRED, and Yuri's explicit g1a3-transition-enablement-runtime-source-encoding-replacement-20260829-v1 owner exception",
   "checkpoint": {
-    "completed_stage": "Externally accepted state-only G1A.1 to G1A.2 transition complete.",
-    "next_executable_stage": "Implement the bounded G1A.2 Antigravity verdict adapter without provider invocation.",
+    "completed_stage": "Rejected G1A.3-E0 candidate preserved and runtime-faithful body-only AST replacement prepared without state transition.",
+    "next_executable_stage": "External G1A.3 transition-enablement review only.",
     "retry_counters": {
       "planning": 0,
       "implementation": 0,
       "verification": 0,
       "publication": 0
     },
-    "settings_fingerprint": "sha256:08049975465eb044c3111b9073184adbd098bacb86199abdb738fcd0d536d319"
+    "settings_fingerprint": "sha256:c8a9362cf2a1ff0e87dd0a57c303e554c34c756c2e5fb540a948867d5a18ebbb"
   },
   "interruption_policy": {
     "chronological_last_prompt_is_controlling_authority": false,
@@ -24,26 +24,27 @@
     "scope_addition_behavior": "merge_then_resume",
     "replacement_requires_explicit_pause_or_redirect": true
   },
-  "resume_after_compaction": true,
+  "resume_after_compaction": false,
   "user_attention": {
     "required": false,
     "reason": null
   },
   "terminal_response": {
-    "permitted": false,
-    "reason": "unfinished_authorized_operation"
+    "permitted": true,
+    "reason": "external_review_required_before_state_transition"
   },
   "protected_boundaries": [
-    "G1A.1_owner_disposition_and_transition_enablement_candidate_remain_frozen",
-    "G1A.1_owner_acceptance_is_not_an_external_PASS",
-    "G1A.1_implementation_and_residual_risk_record_remain_frozen",
+    "G1A.1_owner_disposition_and_implementation_remain_frozen",
+    "G1A.2_transition_enablement_review_and_state_transition_remain_frozen",
+    "G1A.2_implementation_PASS_record_is_append_only_and_digest_bound",
     "G1A.2_state_transition_complete_and_frozen",
-    "G1A.2_implementation_bounded_authorized_not_started",
+    "G1A.2_implementation_externally_accepted_and_source_frozen",
     "provider_invocation_forbidden",
-    "Antigravity_source_and_tests_unchanged",
-    "G1A.3_integration_deferred",
+    "Antigravity_source_tests_and_agent_worktrees_unchanged",
+    "G1A.3_state_transition_and_implementation_not_started",
+    "integration_entrypoint_and_execution_forbidden",
     "no_product_migration_dependency_deployment_Pages_or_protected_ref_change",
-    "only_recovery_branch_fast_forward_candidate_publication_authorised",
+    "only_exact_recovery_branch_non_fast_forward_replacement_with_bound_lease_authorised",
     "legacy_worktree_and_unrelated_user_files_preserved"
   ]
 }

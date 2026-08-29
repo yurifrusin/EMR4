@@ -1,6 +1,6 @@
-schema_version: "raisa-ariadne.g1a-verdict-integration-scope.v2"
-status: "pre_reviewed_closed_subgates"
-prepared_at: "2026-08-28T11:17:02+10:00"
+schema_version: "raisa-ariadne.g1a-verdict-integration-scope.v3"
+status: "g1a3_transition_enablement_review_pending"
+prepared_at: "2026-08-28T22:50:13+10:00"
 inventory_source_commit: "91f1e6e645424a448bdcdfa2adabb86d31fb5f0b"
 active_subgate_after_g0_transition: "G1A.1"
 transition_opens_only: "G1A.1"
@@ -68,7 +68,7 @@ subgates:
         path: "scripts/ariadne_review_acceptance.py"
         contract: "accepted_exit_0_rejected_exit_1_input_error_exit_2"
   G1A.2:
-    status: "closed_pending_transition_enablement_external_review_and_state_transition"
+    status: "external_review_passed_frozen"
     task_class: "g1a_2_antigravity_verdict_adapter"
     objective: "Delegate Antigravity verdict interpretation to the accepted pure kernel without changing provider execution safety."
     allowed_paths:
@@ -132,27 +132,91 @@ subgates:
         contract: "valid_worker_receipt_exit_0_transport_or_contract_failure_exit_2"
         disposition: "immutable_behavioral_regression_boundary"
   G1A.3:
-    status: "deferred_no_active_profile"
+    status: "closed_pending_transition_enablement_external_review_and_state_transition"
     task_class: "g1a_3_integration_consumer_mutation"
-    objective: "Repair integration authority only after G1A.2 acceptance and a separately authorised integration transition."
-    candidate_paths:
+    objective: "Repair only the canonical integration-authority consumer after the separately reviewed state transition, without executing integration."
+    allowed_paths:
       - "scripts/agent_worktrees.py"
-    allowed_paths: []
+      - "tests/test_agent_worktrees.py"
     allowed_untracked_paths: []
-    allowed_effects: []
+    allowed_effects:
+      - "repository_read"
+      - "integration_authority_adapter_edit"
+      - "task_branch_commit"
+      - "task_branch_push"
+      - "external_review_preparation"
     forbidden_effects:
+      - "autonomous_worker_dispatch"
+      - "closeout_state_transition"
+      - "controller_policy_change"
+      - "dependency_change"
+      - "deployment"
+      - "gatekeeper_change"
+      - "g1b_work"
       - "integration"
+      - "migration_change"
+      - "pages"
+      - "product_behavior_change"
+      - "programme_state_change"
       - "protected_ref_movement"
       - "provider_invocation"
-      - "deployment"
-      - "pages"
       - "real_data_access"
+    allowed_mutation_symbols:
+      - "record_integration"
+    immutable_integration_consumer_contract:
+      path: "scripts/agent_worktrees.py"
+      source_commit: "37e2d6f51ebbdb281771f922a5f460fd23e2571b"
+      source_blob: "f15d13f60c2c93edef0559b7b30b536b334bb884"
+      hash_semantics: "sha256_of_ast_dump_with_only_allowed_function_bodies_replaced_by_pass"
+      runtime_source_parsing_contract: "python_compile_original_bytes_PyCF_ONLY_AST_PyCF_TYPE_COMMENTS_dont_inherit"
+      protected_ast_sha256: "sha256:e016601c0c6f577ae51beecc0fb47e8ec28b235458b5e2cc6031e4a5babb57f6"
+      protected_symbols:
+        _require_command_admission: "sha256:f04e1cf1549b058989f76d6c09f024853f79b3d99c8535b7f1063597de42a0e2"
+        append_integration_log: "sha256:a9f28a5a0e664d16ae55ac7b82bc7c3a8bb2e7a248d076f83b51b56122e6d010"
+        build_parser: "sha256:114c103a2f8d3873009bdc1b338ccd557c5e3f82cb096b1dbdcf55014818a8c2"
+        main: "sha256:8db86658067a7debdb0d23f0c260671a1e45b98eec0628e5e51d21589ecd64f0"
+        run_git: "sha256:20f26e9b2407255f1eb1cc47b3013e8ad781b62acaca50c0c1dd545ba4503e0d"
+        push_handoff_refs: "sha256:979d6a147b3d58d57e9a4c4979542a2ea8c8bbd31568060e4a304018f6e9a38a"
+        handoff: "sha256:2f4ecfe358368d2a4725575d68f2502388f2e4b9c04ef6ee611ad996755bbe46"
+        sync: "sha256:952cd39a0971655a6716cc38fd0ec45e3a304223396a3036efba33f7826a1813"
+        realign: "sha256:ddb0e0f6699c3847bc7ac95f8fe0002b7053add503e81979ebac9f237e642d99"
+        submit: "sha256:352c4bda935a599b0a81ce1372d25412106b724a7af3aa9e44ecf07f0984ed34"
+        dispatch: "sha256:4ed7cfca642f36b7ad787e3083de8136b87de38156f37eb9c2b1f710be893628"
+        ensure_integration_log: "sha256:7c6048a97da3e3b61aa7f547df0cd005a765c126eb9dde293b48631e6e5a0356"
+        integration_log_records: "sha256:8609d42e75ddd4dd4ea93f01bc15a8a5cbb3bf0d2d9f919a0d4d784064eb494e"
+    record_integration_contract:
+      review_argument: "immutable_canonical_G1A2_worker_receipt_path"
+      parser: "strict_json_with_duplicate_key_rejection"
+      receipt_schema: "ariadne.worker_receipt.v1"
+      required_status: "completed"
+      required_decision_contract: "schema_constrained_json_v1"
+      legacy_text_receipts: "reject"
+      verdict_authority: "recompute_canonical_verdict_locally"
+      required_pass_envelope:
+        decision: "pass"
+        artifact_kind: "decision"
+        valid: true
+        review_verdict: "pass"
+        artifact_integration_authority: true
+        canonical_marker: "DECISION: PASS"
+        reason: "terminal_marker_observed"
+      rejected_verdicts: ["revision_required", "malformed", "ambiguous", "mismatched"]
+      branch_binding: "receipt_branch_equals_cli_branch"
+      integration_commit_binding: "full_commit_sha_and_head_before_equals_head_after_equals_integration_commit"
+      dirty_after: false
+      command_results: "when_present_agree_with_canonical_envelope_and_top_level_fields"
+      receipt_digest: "sha256_exact_bytes_retained_in_integration_ledger"
+      ledger_result: "derived_from_validated_authority_not_user_supplied_result"
+      preserved_symbols: ["append_integration_log", "all_git_and_ref_mutating_helpers"]
+      forbidden_git_effects: ["merge", "reset", "branch_movement", "protected_ref_update"]
+      integration_entrypoint_during_implementation: "closed"
+      free_text_follow_up: "non_authoritative"
     integration_consumers:
       - id: "worktree_integration_recording"
         path: "scripts/agent_worktrees.py"
         symbol: "record_integration"
         risk: "free_text_result_must_not_convert_revision_required_to_integration_authority"
-        disposition: "deferred_until_separate_integration_authority"
+        disposition: "pre_reviewed_for_G1A3_implementation_only_integration_execution_closed"
 excluded_consumers:
   - id: "evidence_gate_diagnostic_and_command_admission"
     path: "scripts/ariadne_evidence_gate.py"

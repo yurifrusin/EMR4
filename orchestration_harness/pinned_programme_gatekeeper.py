@@ -225,6 +225,11 @@ def evaluate_pinned_programme_operation(
         == admission.SUBGATE_TRANSITION_TO_GATE
         and target_policy.state.get("active_profile") == admission.G1A2_ACTIVE_PROFILE
     )
+    g1a3_active = (
+        target_policy.state.get("active_correction")
+        == admission.G1A3_TRANSITION_TO_GATE
+        and target_policy.state.get("active_profile") == admission.G1A3_ACTIVE_PROFILE
+    )
     normalized_legacy = (
         str(target_worktree_policy["preserved_legacy_worktree"])
         .replace("\\", "/")
@@ -239,13 +244,18 @@ def evaluate_pinned_programme_operation(
     ):
         reasons.append("gatekeeper_target_preserved_legacy_worktree_forbidden")
 
-    if g1a2_active:
+    if g1a3_active:
+        acceptance = target_policy.state["g1a_subgate_authority"]
+        decisive_id = acceptance.get("decisive_g1a3_transition_enablement_review_id")
+        history = acceptance.get("g1a3_transition_enablement_review_history")
+    elif g1a2_active:
         acceptance = target_policy.state["g1a_subgate_authority"]
         decisive_id = acceptance.get("decisive_transition_enablement_review_id")
+        history = acceptance.get("external_review_history")
     else:
         acceptance = target_policy.state["g0_acceptance"]
         decisive_id = acceptance.get("decisive_review_id")
-    history = acceptance.get("external_review_history")
+        history = acceptance.get("external_review_history")
     if isinstance(decisive_id, str) and isinstance(history, list):
         decisive_review = next(
             (
@@ -292,6 +302,56 @@ def evaluate_pinned_programme_operation(
             or target_policy.state.get("gate_transition") is not None
         ):
             reasons.append("gatekeeper_source_not_g0_candidate_pinned")
+    elif g1a3_active:
+        if decisive_review is None:
+            reasons.append("gatekeeper_g1a3_decisive_review_missing")
+        elif (
+            decisive_review.get("verdict") != "PASS"
+            or decisive_review.get("blocking_finding_count") != 0
+            or decisive_review.get("g1a3_state_transition_authorized") is not True
+            or decisive_review.get("g1a3_implementation_authorized") is not False
+            or decisive_review.get("provider_invocation_authorized") is not False
+            or decisive_review.get("integration_authorized") is not False
+        ):
+            reasons.append("gatekeeper_g1a3_decisive_review_not_pass")
+        authority = target_policy.state["g1a_subgate_authority"]
+        implementation = authority["implementation_review_history"][0]
+        if (
+            implementation.get("verdict") != "PASS"
+            or implementation.get("blocking_finding_count") != 0
+            or implementation.get("reviewed_commit")
+            != "37e2d6f51ebbdb281771f922a5f460fd23e2571b"
+            or implementation.get("reviewed_tree")
+            != "798a2eda11438fe05da2528298006775774ccfc4"
+            or implementation.get("g1a3_transition_enablement_authorized") is not True
+            or implementation.get("provider_invocation_authorized") is not False
+            or implementation.get("integration_authorized") is not False
+        ):
+            reasons.append("gatekeeper_g1a2_implementation_review_invalid")
+        g1a3 = authority["subgates"]["G1A.3"]
+        transition = g1a3.get("state_transition")
+        if not isinstance(transition, dict):
+            reasons.append("gatekeeper_g1a3_transition_record_missing")
+        else:
+            transition_id = transition.get("transition_id")
+            if gatekeeper_commit != transition.get(
+                "enablement_controller_commit"
+            ) or gatekeeper_tree != transition.get("enablement_controller_tree"):
+                reasons.append("gatekeeper_source_not_g1a3_transition_pinned")
+            if decisive_review is not None and (
+                transition.get("external_review_id") != decisive_review.get("review_id")
+                or gatekeeper_commit != decisive_review.get("reviewed_commit")
+                or gatekeeper_tree != decisive_review.get("reviewed_tree")
+            ):
+                reasons.append("gatekeeper_source_not_g1a3_review_pinned")
+            if (
+                g1a3.get("state_transition_status") != "complete"
+                or g1a3.get("implementation_authorized") is not True
+                or g1a3.get("implementation_started") is not False
+                or g1a3.get("integration_execution_authorized") is not False
+                or g1a3.get("provider_invocation_authorized") is not False
+            ):
+                reasons.append("gatekeeper_target_g1a3_state_invalid")
     elif g1a2_active:
         if decisive_review is None:
             reasons.append("gatekeeper_subgate_decisive_review_missing")
@@ -362,7 +422,7 @@ def evaluate_pinned_programme_operation(
     if not g0_recovery_push and isinstance(transition_id, str):
         artifact_root = (
             admission.SUBGATE_TRANSITION_ARTIFACT_ROOT
-            if g1a2_active
+            if g1a2_active or g1a3_active
             else admission.TRANSITION_ARTIFACT_ROOT
         )
         artifact_path = target / artifact_root / f"{transition_id}.json"
@@ -373,6 +433,25 @@ def evaluate_pinned_programme_operation(
         if artifact is not None:
             expected_artifact_fields = (
                 {
+                    "schema_version",
+                    "transition_id",
+                    "recorded_at",
+                    "transition_manifest",
+                    "transition_manifest_sha256",
+                    "g1a2_implementation_review_record_sha256",
+                    "external_review_record_sha256",
+                    "enablement_controller_commit",
+                    "enablement_controller_tree",
+                    "state_digest_before",
+                    "state_digest_after",
+                    "policy_digest_before",
+                    "policy_digest_after",
+                    "changed_semantic_pointers",
+                    "scope_result",
+                    "g1a3_profile_contract",
+                }
+                if g1a3_active
+                else {
                     "schema_version",
                     "transition_id",
                     "recorded_at",
@@ -411,6 +490,15 @@ def evaluate_pinned_programme_operation(
             )
             if set(artifact) != expected_artifact_fields:
                 reasons.append("gatekeeper_transition_artifact_schema_invalid")
+            elif g1a3_active and (
+                artifact["schema_version"] != "ariadne.g1a2-to-g1a3-transition.v1"
+                or artifact["transition_id"] != transition_id
+                or artifact["enablement_controller_commit"] != gatekeeper_commit
+                or artifact["enablement_controller_tree"] != gatekeeper_tree
+                or artifact["state_digest_after"] != target_policy.state_digest
+                or artifact["policy_digest_after"] != target_policy.policy_digest
+            ):
+                reasons.append("gatekeeper_target_not_g1a3_transition_version")
             elif g1a2_active and (
                 artifact["schema_version"] != "ariadne.g1a1-to-g1a2-transition.v1"
                 or artifact["transition_id"] != transition_id
@@ -420,13 +508,18 @@ def evaluate_pinned_programme_operation(
                 or artifact["policy_digest_after"] != target_policy.policy_digest
             ):
                 reasons.append("gatekeeper_target_not_subgate_transition_version")
-            elif not g1a2_active and (
-                artifact["schema_version"] != "raisa-ariadne.g0-to-g1a-transition.v1"
-                or artifact["transition_id"] != transition_id
-                or artifact["reviewed_commit"] != gatekeeper_commit
-                or artifact["reviewed_tree"] != gatekeeper_tree
-                or artifact["state_digest_after"] != target_policy.state_digest
-                or artifact["policy_digest_after"] != target_policy.policy_digest
+            elif (
+                not g1a2_active
+                and not g1a3_active
+                and (
+                    artifact["schema_version"]
+                    != "raisa-ariadne.g0-to-g1a-transition.v1"
+                    or artifact["transition_id"] != transition_id
+                    or artifact["reviewed_commit"] != gatekeeper_commit
+                    or artifact["reviewed_tree"] != gatekeeper_tree
+                    or artifact["state_digest_after"] != target_policy.state_digest
+                    or artifact["policy_digest_after"] != target_policy.policy_digest
+                )
             ):
                 reasons.append("gatekeeper_target_not_transition_version")
 
@@ -434,6 +527,7 @@ def evaluate_pinned_programme_operation(
         if manifest.get("schema_version") in {
             admission.TRANSITION_MANIFEST_VERSION,
             admission.SUBGATE_TRANSITION_MANIFEST_VERSION,
+            admission.G1A3_TRANSITION_MANIFEST_VERSION,
         }:
             if artifact.get("transition_manifest") != manifest:
                 reasons.append("gatekeeper_transition_manifest_not_bound")

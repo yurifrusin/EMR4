@@ -37,7 +37,7 @@ def test_g0_recovery_preflight_uses_the_current_git_lifecycle_phase() -> None:
     assert report["status"] == "blocked"
     assert report["phase"] == phase
     assert report["programme_mode"] == "recovery"
-    assert report["current_gate"] == "G1A.1"
+    assert report["current_gate"] == "G1A.2"
     assert report["feature_work_eligible"] is False
     assert report["global_gate"] == "red_repair_only"
     assert "programme_admission" in report["failed_checks"]
@@ -90,10 +90,13 @@ def test_machine_state_freezes_authority_and_forbidden_actions() -> None:
 
     assert state["machine_authoritative"] is True
     assert state["programme_mode"] == "recovery"
-    assert state["current_gate"] == "G1A.1"
+    assert state["current_gate"] == "G1A.2"
     assert state["current_gate_status"] == "active"
-    assert state["active_correction"] == "G1A.1"
-    assert state["active_profile"] == "G1A.1_ACTIVE"
+    assert state["active_correction"] == "G1A.2"
+    assert state["active_profile"] == "G1A.3-E0_REVIEW_PENDING"
+    assert state["g1a_subgate_authority"]["subgates"]["G1A.3"]["owner_exception"][
+        "task_generation"
+    ] == ("g1a3-transition-enablement-runtime-source-encoding-replacement-20260829-v1")
     assert state["feature_work_eligible"] is False
     assert state["g0_2_correction"]["status"] == "superseded_revision_required"
     assert state["g0_4_correction"]["status"] == "superseded_revision_required"
@@ -150,6 +153,7 @@ def test_tracked_working_changes_cannot_escape_the_g0_allowlist() -> None:
         ALLOWED_G0_TRACKED_PATHS
         | pa.G1A_ALLOWED_PATHS
         | pa.G1A2_ENABLEMENT_ALLOWED_PATHS
+        | pa.G1A3_ENABLEMENT_ALLOWED_PATHS
     )
 
 

@@ -198,6 +198,27 @@ diverging embedded copy.
 
 ## Immediate sequence
 
+G1A.2 is externally accepted at exact source
+`37e2d6f51ebbdb281771f922a5f460fd23e2571b` and exact tree
+`798a2eda11438fe05da2528298006775774ccfc4`. Its implementation-review record
+is append-only and does not itself activate G1A.3. The current G1A.3-E0
+runtime-faithful source-byte/body-only-AST replacement controller candidate is review-pending while
+`current_gate` remains `G1A.2`.
+No implementation task, integration entrypoint, provider call, G1B work,
+product work, deployment or protected-ref movement is eligible.
+
+The next permitted action is one external review of the exact G1A.3
+transition-enablement candidate. Only a separate exact PASS with zero findings
+may support a later state-only transition to `G1A.3_ACTIVE`. That transition
+must append its review and transition artifact, change only the fixed semantic
+control-plane pointers, and leave the accepted G1A.2 and baseline
+`agent_worktrees.py` blobs exact. After that transition, the bounded G1A.3
+implementation profile admits only `scripts/agent_worktrees.py` and
+`tests/test_agent_worktrees.py`, with `record_integration` as the sole mutable
+production function body. Its decorators, synchronous function kind, complete
+signature/default/annotation metadata and every other module statement remain
+AST-bound, and the `integration` entrypoint remains closed.
+
 The G0.7 candidate at `6e101d15f824f68c3f44d0a3cb44a3aa2afd5b1b`
 received an external `REVISION_REQUIRED` decision with one blocking finding.
 G0.8 is the only active correction gate. It may publish exactly one direct-child
