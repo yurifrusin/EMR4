@@ -1,12 +1,12 @@
 {
   "schema_version": "raisa-ariadne.programme-state.v1",
-  "observed_at": "2026-08-28T22:50:13+10:00",
+  "observed_at": "2026-08-29T18:09:19+10:00",
   "programme_name": "Raisa Medical Office and Ariadne Recovery & Convergence",
   "programme_mode": "recovery",
-  "current_gate": "G1A.2",
+  "current_gate": "G1A.3",
   "current_gate_status": "active",
-  "active_correction": "G1A.2",
-  "active_profile": "G1A.3-E0_REVIEW_PENDING",
+  "active_correction": "G1A.3",
+  "active_profile": "G1A.3_ACTIVE",
   "machine_authoritative": true,
   "feature_work_eligible": false,
   "product_work_eligible": false,
@@ -255,7 +255,9 @@
   },
   "task_selection": {
     "autonomous_selection_enabled": false,
-    "allowed_task_kinds": [],
+    "allowed_task_kinds": [
+      "g1a_3_integration_consumer_mutation"
+    ],
     "blocked_task_kinds": [
       "product_feature",
       "g1a_untyped_or_out_of_scope",
@@ -267,10 +269,10 @@
     "admission_command": "python scripts/raisa_ariadne_recovery_preflight.py --task-manifest <path> --phase development",
     "out_of_gate_result": "blocked",
     "next_eligible_tranche": "G1A.3",
-    "next_eligible_now": false,
+    "next_eligible_now": true,
     "next_tranche_started": false,
-    "next_tranche_admission_requires_state_transition": true,
-    "next_eligibility_condition": "external_G1A3_transition_enablement_PASS_then_exact_state_only_transition"
+    "next_tranche_admission_requires_state_transition": false,
+    "next_eligibility_condition": "bounded_G1A_3_profile_active_next_tranche_not_started"
   },
   "parallelism_efficacy": {
     "deepseek": {
@@ -442,7 +444,7 @@
     "decisive_owner_disposition_id": "g1a1-owner-accept-91f1e6e-20260828",
     "decisive_transition_enablement_review_id": "g1a2-e0-review-dab684e-independent-20260828-pass",
     "decisive_implementation_review_id": "g1a2-review-37e2d6f-independent-20260828-pass",
-    "decisive_g1a3_transition_enablement_review_id": null,
+    "decisive_g1a3_transition_enablement_review_id": "g1a3-e0-review-e5cb887-independent-20260829-pass",
     "owner_disposition_history": [
       {
         "disposition_id": "g1a1-owner-accept-91f1e6e-20260828",
@@ -487,7 +489,23 @@
         "review_record_sha256": "sha256:bd29a64c591e0cddd9cc47cc2ae4408f63c36acc3e663bd431bc369ee7385fcb"
       }
     ],
-    "g1a3_transition_enablement_review_history": [],
+    "g1a3_transition_enablement_review_history": [
+      {
+        "review_id": "g1a3-e0-review-e5cb887-independent-20260829-pass",
+        "review_record_path": "orchestration/programme/subgate-transition-enablement-reviews/g1a3-e0-review-e5cb887-independent-20260829-pass.json",
+        "reviewed_commit": "e5cb887090ea1cafdce30e4e1d787940f5622104",
+        "reviewed_tree": "848d1a3602a1f6c1cc17edc9e3e3c54e16fc3152",
+        "reviewed_parent": "37e2d6f51ebbdb281771f922a5f460fd23e2571b",
+        "verdict": "PASS",
+        "blocking_finding_count": 0,
+        "reviewer_surface": "external_chatgpt_repository_review",
+        "g1a3_state_transition_authorized": true,
+        "g1a3_implementation_authorized": false,
+        "provider_invocation_authorized": false,
+        "integration_authorized": false,
+        "review_record_sha256": "sha256:8c695d7694b5f41b3f9cba20efdef576d2b27f655cce8d12174edf7f3dfda9fc"
+      }
+    ],
     "subgates": {
       "G1A.1": {
         "implementation_status": "accepted_by_owner_with_residual_risk",
@@ -523,17 +541,30 @@
         "next_action": "external_G1A3_transition_enablement_review_only"
       },
       "G1A.3": {
-        "status": "closed_pending_state_transition",
+        "status": "active",
         "transition_enablement_tranche": "G1A.3-E0",
-        "transition_enablement_status": "review_pending",
-        "state_transition_status": "not_started",
-        "state_transition": null,
-        "implementation_authorized": false,
+        "transition_enablement_status": "external_review_passed",
+        "state_transition_status": "complete",
+        "state_transition": {
+          "status": "complete",
+          "transition_id": "g1a2-to-g1a3-e5cb887-pass",
+          "from_gate": "G1A.2",
+          "to_gate": "G1A.3",
+          "g1a2_implementation_review_id": "g1a2-review-37e2d6f-independent-20260828-pass",
+          "external_review_id": "g1a3-e0-review-e5cb887-independent-20260829-pass",
+          "enablement_controller_commit": "e5cb887090ea1cafdce30e4e1d787940f5622104",
+          "enablement_controller_tree": "848d1a3602a1f6c1cc17edc9e3e3c54e16fc3152",
+          "external_review_status": "pass",
+          "blocking_finding_count": 0,
+          "reviewer_surface": "external_chatgpt_repository_review",
+          "next_action": "G1A_3_integration_consumer_only"
+        },
+        "implementation_authorized": true,
         "implementation_started": false,
         "integration_execution_authorized": false,
         "provider_invocation_authorized": false,
         "protected_ref_movement_authorized": false,
-        "next_action": "external_G1A3_transition_enablement_review_only",
+        "next_action": "begin_bounded_G1A3_integration_consumer_implementation",
         "owner_exception": {
           "task_generation": "g1a3-transition-enablement-runtime-source-encoding-replacement-20260829-v1",
           "branch": "codex/raisa-ariadne-recovery-g0",
