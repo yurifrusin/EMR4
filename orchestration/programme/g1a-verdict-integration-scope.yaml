@@ -1,6 +1,6 @@
-schema_version: "raisa-ariadne.g1a-verdict-integration-scope.v3"
-status: "g1a3_transition_enablement_review_pending"
-prepared_at: "2026-08-28T22:50:13+10:00"
+schema_version: "raisa-ariadne.g1a-verdict-integration-scope.v4"
+status: "g1a3_r0_review_pending_r1_predefined"
+prepared_at: "2026-08-30T00:00:00+10:00"
 inventory_source_commit: "91f1e6e645424a448bdcdfa2adabb86d31fb5f0b"
 active_subgate_after_g0_transition: "G1A.1"
 transition_opens_only: "G1A.1"
@@ -132,15 +132,18 @@ subgates:
         contract: "valid_worker_receipt_exit_0_transport_or_contract_failure_exit_2"
         disposition: "immutable_behavioral_regression_boundary"
   G1A.3:
-    status: "closed_pending_transition_enablement_external_review_and_state_transition"
-    task_class: "g1a_3_integration_consumer_mutation"
-    objective: "Repair only the canonical integration-authority consumer after the separately reviewed state transition, without executing integration."
+    status: "revision_required_R0_review_pending_R1_predefined"
+    task_class: "g1a_3_review_byte_binding_and_integration_consumer"
+    objective: "Bind complete review-time physical bytes in the review producer and integration consumer only after external R0 PASS and a state-only transition."
     allowed_paths:
+      - "scripts/ariadne_antigravity.py"
+      - "tests/test_ariadne_antigravity.py"
       - "scripts/agent_worktrees.py"
       - "tests/test_agent_worktrees.py"
     allowed_untracked_paths: []
     allowed_effects:
       - "repository_read"
+      - "review_evidence_binding_edit"
       - "integration_authority_adapter_edit"
       - "task_branch_commit"
       - "task_branch_push"
@@ -161,14 +164,37 @@ subgates:
       - "protected_ref_movement"
       - "provider_invocation"
       - "real_data_access"
-    allowed_mutation_symbols:
+    antigravity_allowed_mutation_symbols:
+      - "run_worker"
+    integration_allowed_mutation_symbols:
       - "record_integration"
+    immutable_review_producer_contract:
+      path: "scripts/ariadne_antigravity.py"
+      source_commit: "5a298856be05ce08e50dd7ab4501b7e16a3d0843"
+      source_blob: "ff1c95d9a24fddcba1df3ee6dc10a21b71b89049"
+      hash_semantics: "sha256_of_runtime_faithful_ast_with_only_run_worker_body_replaced_by_pass"
+      runtime_source_parsing_contract: "python_compile_original_bytes_PyCF_ONLY_AST_PyCF_TYPE_COMMENTS_dont_inherit"
+      first_executable_statement_contract: "require_programme_admission_repo_root_REPO_ROOT_manifest_path_programme_task_manifest_entrypoint_provider_invocation_as_first_executable_statement"
+      protected_ast_sha256: "sha256:cb4f0845acfa52e71ac80b7f4a333873b11af518726236d62700427d7e647141"
+      protected_symbols:
+        WorktreeState: "sha256:40c0127c580660b086dcc03fb28f847cf3a169efb0d3366183d4f8de8665c86d"
+        _git: "sha256:d9ac1e15b5001f06f55a9afe4b521a4bf4c5592516ae4ad277889332681e7085"
+        inspect_worktree: "sha256:4c74f38cd869c9f3e193d2a610ff032fc9401279cf0f7cfa458c7584a053c0c5"
+        build_command: "sha256:00ad0624cb67ed96ab3599b3211a09f886e053af32f25b83d3eefbf716c3ca72"
+        admit_orchestrator_receipt: "sha256:d9c8c2effd9ff3db8f1f98b68d0252d95fff8e4ff08b9edf6bf9b161c969de57"
+        structured_decision_schema: "sha256:f7a02df9087f1f1c81ba31f2425edb0705908471c542ff5f6db312e1406b6fa2"
+        _as_structured_decision: "sha256:e3d7f5b9be5a32fc7691090d55f008262b10b1d7cd98d7a003d5f5d27d32ec12"
+        parse_structured_decision: "sha256:96c7c396666bb4d7ac7a7f578bb7216eeee3ba0ba5a5def7616d3a62e0e8f3fd"
+        _atomic_receipt_write: "sha256:78b0f6d41abd9bbdc1fb1917576deb97518477c4fbc78fd1f96d8f102d0cf0d9"
+        _output_evidence: "sha256:f436dd3360be32a14ed5c0b20b93f6600103f684130b766475dab391b5f79fc4"
+        main: "sha256:b4028cf830456cacede63be6ec7a319c803c642b37c142cc3f9f2b42981f933b"
     immutable_integration_consumer_contract:
       path: "scripts/agent_worktrees.py"
       source_commit: "37e2d6f51ebbdb281771f922a5f460fd23e2571b"
       source_blob: "f15d13f60c2c93edef0559b7b30b536b334bb884"
       hash_semantics: "sha256_of_ast_dump_with_only_allowed_function_bodies_replaced_by_pass"
       runtime_source_parsing_contract: "python_compile_original_bytes_PyCF_ONLY_AST_PyCF_TYPE_COMMENTS_dont_inherit"
+      first_executable_statement_contract: "_require_command_admission_args_entrypoint_integration_as_first_executable_statement"
       protected_ast_sha256: "sha256:e016601c0c6f577ae51beecc0fb47e8ec28b235458b5e2cc6031e4a5babb57f6"
       protected_symbols:
         _require_command_admission: "sha256:f04e1cf1549b058989f76d6c09f024853f79b3d99c8535b7f1063597de42a0e2"
@@ -211,6 +237,23 @@ subgates:
       forbidden_git_effects: ["merge", "reset", "branch_movement", "protected_ref_update"]
       integration_entrypoint_during_implementation: "closed"
       free_text_follow_up: "non_authoritative"
+      complete_review_attestation:
+        schema: "ariadne.complete_tracked_tree_attestation.v1"
+        required_fields: ["head", "head_tree", "index_tree", "complete_tracked_tree_sha256", "complete_tracked_path_count", "trusted_git_identity_sha256"]
+        before_after_exact_equality: true
+        fresh_integration_time_attestation_required: true
+        fresh_digest_and_path_count_equal_receipt: true
+        legacy_or_incomplete_receipt: "reject"
+        mismatch_ledger_mutation_count: 0
+    review_producer_attestation_contract:
+      schema: "ariadne.complete_tracked_tree_attestation.v1"
+      required_before_and_after_fields: ["head", "head_tree", "index_tree", "complete_tracked_tree_sha256", "complete_tracked_path_count", "trusted_git_identity_sha256"]
+      before_provider_launch: true
+      immediately_after_provider_exit: true
+      before_after_exact_equality: true
+      mismatch_result: "existing_fail_closed_diagnostic_receipt_only"
+      provider_controls_attestation_fields: false
+      tests_invoke_provider: false
     integration_consumers:
       - id: "worktree_integration_recording"
         path: "scripts/agent_worktrees.py"

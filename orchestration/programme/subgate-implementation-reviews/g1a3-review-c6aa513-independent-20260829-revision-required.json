@@ -1,0 +1,19 @@
+{
+  "schema_version": "ariadne.external_g1a3_implementation_review.v1",
+  "review_id": "g1a3-review-c6aa513-independent-20260829-revision-required",
+  "recorded_at": "2026-08-29T23:32:22+10:00",
+  "review_subject": "G1A.3_integration_authority_consumer",
+  "reviewed_commit": "c6aa513be3cdade785fc48283881825ef37345a3",
+  "reviewed_tree": "01b11e07c4e9038a6d4e2c3fcd9b63c49caa4fbb",
+  "reviewed_parent": "5a298856be05ce08e50dd7ab4501b7e16a3d0843",
+  "verdict": "REVISION_REQUIRED",
+  "blocking_finding_count": 1,
+  "reviewer_surface": "external_chatgpt_repository_review",
+  "g1a_complete": false,
+  "g1b_transition_enablement_authorized": false,
+  "integration_runtime_authorized": false,
+  "provider_invocation_authorized": false,
+  "protected_ref_movement_authorized": false,
+  "only_next_work": "bounded_G1A3_R0_complete_review_byte_binding_control_plane",
+  "source_artifact_sha256": "dc952626f3b63f69971915f8653f428560dd00211fe43addf1056b59763b86f0"
+}

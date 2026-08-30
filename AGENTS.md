@@ -3,8 +3,8 @@
 `orchestration/programme/current-state.json`, `orchestration/programme/gates.yaml`,
 and the active recovery admission policy outrank the historical baton below while
 the programme is in recovery. The older baton is evidence only and its named
-successor must not resume. Gate G1A.3 is active only for its bounded integration-authority consumer;
-integration execution, provider invocation and every protected ref remain closed.
+successor must not resume. The replacement Gate G1A.3-R0 is review-pending with no eligible implementation task;
+integration execution, provider invocation, G1B and every protected ref remain closed.
 Missing, malformed, stale, or contradictory programme state is a hard stop.
 
 # EMR4 Centaur — Live Agent Handover

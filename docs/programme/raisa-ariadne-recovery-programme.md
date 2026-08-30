@@ -198,26 +198,36 @@ diverging embedded copy.
 
 ## Immediate sequence
 
-G1A.2 is externally accepted at exact source
-`37e2d6f51ebbdb281771f922a5f460fd23e2571b` and exact tree
-`798a2eda11438fe05da2528298006775774ccfc4`. Its implementation-review record
-is append-only and does not itself activate G1A.3. The current G1A.3-E0
-runtime-faithful source-byte/body-only-AST replacement controller candidate is review-pending while
-`current_gate` remains `G1A.2`.
-No implementation task, integration entrypoint, provider call, G1B work,
-product work, deployment or protected-ref movement is eligible.
+G1A.2 and its transition evidence remain externally accepted and append-only.
+The rejected G1A.3 implementation at `c6aa513be3cdade785fc48283881825ef37345a3`
+is negative evidence only. G1A.3-R0 is the current review-pending correction,
+directly over `5a298856be05ce08e50dd7ab4501b7e16a3d0843`. It has no eligible
+implementation task. Integration, provider invocation, G1B, product,
+deployment, Pages and protected-ref movement remain closed.
 
-The next permitted action is one external review of the exact G1A.3
-transition-enablement candidate. Only a separate exact PASS with zero findings
-may support a later state-only transition to `G1A.3_ACTIVE`. That transition
-must append its review and transition artifact, change only the fixed semantic
-control-plane pointers, and leave the accepted G1A.2 and baseline
-`agent_worktrees.py` blobs exact. After that transition, the bounded G1A.3
-implementation profile admits only `scripts/agent_worktrees.py` and
-`tests/test_agent_worktrees.py`, with `record_integration` as the sole mutable
-production function body. Its decorators, synchronous function kind, complete
-signature/default/annotation metadata and every other module statement remain
-AST-bound, and the `integration` entrypoint remains closed.
+R0 closes the trusted-Git stat-cache seam by forcing `core.checkStat=default`
+and `core.trustctime=true`, rejecting contradictory local, worktree or included
+configuration, and binding every stage-zero tracked regular file's raw physical
+bytes, mode and object identity to the complete HEAD tree. It also predefines,
+but does not activate, `G1A.3-R1_REVIEW_BINDING_ACTIVE`. Only a later external
+R0 PASS with zero blocking findings may authorise one state-only transition.
+That transition must be executed by the clean R0-pinned gatekeeper and may only
+append the review and transition evidence plus the fixed semantic control-plane
+pointers.
+
+The later R1 profile is joint and exact: `scripts/ariadne_antigravity.py`,
+`tests/test_ariadne_antigravity.py`, `scripts/agent_worktrees.py`, and
+`tests/test_agent_worktrees.py`. Only the body of the one top-level ordinary
+synchronous Antigravity `run_worker` and the body of `record_integration` are
+mutable. Runtime-faithful original-byte AST compilation preserves every
+decorator, default, signature, annotation, type comment and other definition
+surface; `WorktreeState`, `inspect_worktree` and all other module statements
+remain immutable. Source-only checks require the exact `provider_invocation`
+programme-admission call to remain the first executable `run_worker` statement
+and the exact `integration` programme-admission call to remain the first
+executable `record_integration` statement. Provider and integration
+execution remain closed throughout R1, and the resulting implementation must
+receive a further external review before G1A can complete or G1B can begin.
 
 The G0.7 candidate at `6e101d15f824f68c3f44d0a3cb44a3aa2afd5b1b`
 received an external `REVISION_REQUIRED` decision with one blocking finding.

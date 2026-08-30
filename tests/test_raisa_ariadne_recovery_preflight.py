@@ -6,7 +6,6 @@ import pytest
 import orchestration_harness.programme_admission as pa
 
 from scripts.raisa_ariadne_recovery_preflight import (
-    ALLOWED_G0_TRACKED_PATHS,
     EXPECTED_RISKS,
     _alembic_heads,
     _changed_tracked_paths,
@@ -37,7 +36,7 @@ def test_g0_recovery_preflight_uses_the_current_git_lifecycle_phase() -> None:
     assert report["status"] == "blocked"
     assert report["phase"] == phase
     assert report["programme_mode"] == "recovery"
-    assert report["current_gate"] == "G1A.2"
+    assert report["current_gate"] == "G1A.3"
     assert report["feature_work_eligible"] is False
     assert report["global_gate"] == "red_repair_only"
     assert "programme_admission" in report["failed_checks"]
@@ -90,13 +89,13 @@ def test_machine_state_freezes_authority_and_forbidden_actions() -> None:
 
     assert state["machine_authoritative"] is True
     assert state["programme_mode"] == "recovery"
-    assert state["current_gate"] == "G1A.2"
-    assert state["current_gate_status"] == "active"
-    assert state["active_correction"] == "G1A.2"
-    assert state["active_profile"] == "G1A.3-E0_REVIEW_PENDING"
+    assert state["current_gate"] == "G1A.3"
+    assert state["current_gate_status"] == "revision_required"
+    assert state["active_correction"] == "G1A.3-R0"
+    assert state["active_profile"] == pa.G1A3_R0_REVIEW_PENDING_PROFILE
     assert state["g1a_subgate_authority"]["subgates"]["G1A.3"]["owner_exception"][
         "task_generation"
-    ] == ("g1a3-transition-enablement-runtime-source-encoding-replacement-20260829-v1")
+    ] == ("g1a3-r0-review-producer-body-only-ast-replacement-20260830-v1")
     assert state["feature_work_eligible"] is False
     assert state["g0_2_correction"]["status"] == "superseded_revision_required"
     assert state["g0_4_correction"]["status"] == "superseded_revision_required"
@@ -149,12 +148,34 @@ def test_static_alembic_graph_has_one_recorded_head() -> None:
 
 
 def test_tracked_working_changes_cannot_escape_the_g0_allowlist() -> None:
-    assert _changed_tracked_paths(ROOT) <= (
-        ALLOWED_G0_TRACKED_PATHS
-        | pa.G1A_ALLOWED_PATHS
-        | pa.G1A2_ENABLEMENT_ALLOWED_PATHS
-        | pa.G1A3_ENABLEMENT_ALLOWED_PATHS
+    assert _changed_tracked_paths(ROOT) <= set(
+        pa.load_programme_policy(ROOT).full_range_allowed_paths
     )
+
+
+def test_r0_has_no_task_and_synthetic_r1_manifest_is_exact(tmp_path: Path) -> None:
+    from tests.test_programme_admission import (
+        _build_g1a3_r0_transition_repository,
+        _git,
+    )
+
+    with pytest.raises(PreflightError, match="no implementation task"):
+        build_task_manifest(ROOT)
+
+    target, _gatekeeper, _manifest, _r0 = _build_g1a3_r0_transition_repository(tmp_path)
+    _git(target, "commit", "--no-verify", "-m", "synthetic R0 to R1 transition")
+    manifest = build_task_manifest(target)
+
+    assert manifest["task_class"] == pa.G1A3_R1_TASK_CLASS
+    assert set(manifest["allowed_path_roots"]) == pa.G1A3_R1_ALLOWED_PATHS
+    assert set(manifest["intended_side_effect_classes"]) == (pa.G1A3_R1_ALLOWED_EFFECTS)
+    for entrypoint in ("provider_invocation", "integration"):
+        decision = pa.evaluate_programme_admission(
+            repo_root=target,
+            manifest=manifest,
+            entrypoint=entrypoint,
+        )
+        assert decision.admitted is False
 
 
 def test_preflight_source_contains_no_write_or_network_primitive() -> None:

@@ -11,6 +11,7 @@ import orchestration_harness.pinned_programme_gatekeeper as pg
 import scripts.raisa_ariadne_gatekeeper_bootstrap as bootstrap
 from scripts.raisa_ariadne_recovery_preflight import build_task_manifest
 from tests.test_programme_admission import (
+    _build_g1a3_r0_transition_repository,
     _build_g1a3_transition_repository,
     _git,
     _write_json,
@@ -589,8 +590,8 @@ def test_real_g1a3_transition_and_exact_consumer_lifecycle_passes(
             "def record_integration(args: argparse.Namespace) -> None:\n"
             '    _require_command_admission(args, entrypoint="integration")\n',
             "def record_integration(args: argparse.Namespace) -> None:\n"
-            '    """Consume only validated immutable integration authority."""\n'
-            '    _require_command_admission(args, entrypoint="integration")\n',
+            '    _require_command_admission(args, entrypoint="integration")\n'
+            '    """Consume only validated immutable integration authority."""\n',
             1,
         ),
         encoding="utf-8",
@@ -846,8 +847,8 @@ def test_operation_binding_revalidation_rejects_post_admission_index_drift(
     consumer = target / "scripts/agent_worktrees.py"
     consumer.write_text(
         consumer.read_text(encoding="utf-8").replace(
-            "def record_integration(args: argparse.Namespace) -> None:\n",
-            "def record_integration(args: argparse.Namespace) -> None:\n"
+            '    _require_command_admission(args, entrypoint="integration")\n',
+            '    _require_command_admission(args, entrypoint="integration")\n'
             '    """Synthetic receipt consumer."""\n',
             1,
         ),
@@ -1376,3 +1377,217 @@ def test_receipt_sink_rejects_symlink_or_junction_substitution(tmp_path: Path) -
             gatekeeper_root=gatekeeper,
             target_repo_root=target,
         )
+
+
+def test_g1a3_r0_transition_and_exact_r1_joint_lifecycle_passes(
+    tmp_path: Path,
+) -> None:
+    target, gatekeeper, transition_manifest, r0_candidate = (
+        _build_g1a3_r0_transition_repository(tmp_path)
+    )
+    development = pg.evaluate_pinned_programme_operation(
+        gatekeeper_root=gatekeeper,
+        target_repo_root=target,
+        manifest=transition_manifest,
+        entrypoint="task_branch_commit",
+        phase="development",
+    )
+    assert development.admitted is True, development.reason_codes
+    assert development.gatekeeper_commit == r0_candidate
+
+    candidate_local = pg.evaluate_pinned_programme_operation(
+        gatekeeper_root=target,
+        target_repo_root=target,
+        manifest=transition_manifest,
+        entrypoint="task_branch_commit",
+        phase="development",
+    )
+    assert candidate_local.admitted is False
+    assert "gatekeeper_target_not_isolated" in candidate_local.reason_codes
+
+    transition_commit_receipts = tmp_path / "g1a3-r0-transition-commit-receipts"
+    transition_commit_receipts.mkdir()
+    transition_commit_receipt = pg.execute_exact_index_commit(
+        gatekeeper_root=gatekeeper,
+        target_repo_root=target,
+        manifest=transition_manifest,
+        receipt_directory=transition_commit_receipts,
+        message="synthetic external PASS G1A.3-R0 to R1 transition",
+    )
+    transition_sha = transition_commit_receipt["result_sha"]
+    assert _git(target, "rev-list", "--parents", "-n", "1", transition_sha) == (
+        f"{transition_sha} {r0_candidate}"
+    )
+
+    transition_push_receipts = tmp_path / "g1a3-r0-transition-push-receipts"
+    transition_push_receipts.mkdir()
+    transition_push_receipt = pg.execute_exact_sha_push(
+        gatekeeper_root=gatekeeper,
+        target_repo_root=target,
+        manifest=transition_manifest,
+        receipt_directory=transition_push_receipts,
+    )
+    assert transition_push_receipt["post_push_readback_sha"] == transition_sha
+
+    policy = pa.load_programme_policy(target)
+    assert policy.state["active_profile"] == pa.G1A3_R1_ACTIVE_PROFILE
+    assert set(policy.allowed_paths) == pa.G1A3_R1_ALLOWED_PATHS
+    assert (
+        set(policy.overlay["profiles"][pa.G1A3_R1_ACTIVE_PROFILE]["allowed_effects"])
+        == pa.G1A3_R1_ALLOWED_EFFECTS
+    )
+    assert policy.overlay["profiles"][pa.G1A3_R1_ACTIVE_PROFILE]["source_contract"] == {
+        "antigravity_allowed_mutation": "run_worker_body_only",
+        "antigravity_runtime_source_parsing_contract": pa.G1A3_RUNTIME_SOURCE_PARSING_CONTRACT,
+        "run_worker_first_admission_contract": pa.G1A3_RUN_WORKER_FIRST_ADMISSION_CONTRACT,
+        "integration_allowed_mutation": "record_integration_body_only",
+        "record_integration_first_admission_contract": pa.G1A3_RECORD_INTEGRATION_FIRST_ADMISSION_CONTRACT,
+    }
+
+    forged_path = target / "orchestration_harness/pinned_programme_gatekeeper.py"
+    accepted_gatekeeper = forged_path.read_bytes()
+    forged_path.write_text(
+        "raise SystemExit('forged candidate controller')\n", encoding="utf-8"
+    )
+    _git(target, "add", "--", forged_path.relative_to(target).as_posix())
+    forged_manifest = build_task_manifest(target)
+    forged_decision = pg.evaluate_pinned_programme_operation(
+        gatekeeper_root=gatekeeper,
+        target_repo_root=target,
+        manifest=forged_manifest,
+        entrypoint="task_branch_commit",
+        phase="development",
+    )
+    assert forged_decision.admitted is False
+    assert "scope_tranche_path_outside_policy" in forged_decision.reason_codes
+    forged_path.write_bytes(accepted_gatekeeper)
+    _git(target, "add", "--", forged_path.relative_to(target).as_posix())
+
+    antigravity_path = target / "scripts/ariadne_antigravity.py"
+    antigravity = antigravity_path.read_text(encoding="utf-8")
+    antigravity_path.write_text(
+        antigravity.replace(
+            '        entrypoint="provider_invocation",\n    )\n',
+            '        entrypoint="provider_invocation",\n'
+            "    )\n"
+            "    complete_review_binding_enabled = True\n",
+            1,
+        ),
+        encoding="utf-8",
+    )
+    assert antigravity_path.read_text(encoding="utf-8") != antigravity
+
+    consumer_path = target / "scripts/agent_worktrees.py"
+    consumer = consumer_path.read_text(encoding="utf-8")
+    consumer_path.write_text(
+        consumer.replace(
+            "def record_integration(args: argparse.Namespace) -> None:\n"
+            '    _require_command_admission(args, entrypoint="integration")\n',
+            "def record_integration(args: argparse.Namespace) -> None:\n"
+            '    _require_command_admission(args, entrypoint="integration")\n'
+            "    complete_review_binding_required = True\n",
+            1,
+        ),
+        encoding="utf-8",
+    )
+    assert consumer_path.read_text(encoding="utf-8") != consumer
+
+    producer_test = target / "tests/test_ariadne_antigravity.py"
+    producer_test.write_text(
+        producer_test.read_text(encoding="utf-8")
+        + "\n\ndef test_synthetic_complete_review_binding_marker():\n"
+        + "    assert 'complete_tracked_tree'.startswith('complete_')\n",
+        encoding="utf-8",
+    )
+    consumer_test = target / "tests/test_agent_worktrees.py"
+    consumer_test.write_text(
+        consumer_test.read_text(encoding="utf-8")
+        + "\n\ndef test_synthetic_integration_binding_marker():\n"
+        + "    assert 'review_attestation'.endswith('attestation')\n",
+        encoding="utf-8",
+    )
+    _git(target, "add", "--", *sorted(pa.G1A3_R1_ALLOWED_PATHS))
+
+    task_manifest = build_task_manifest(target)
+    assert set(task_manifest["allowed_path_roots"]) == pa.G1A3_R1_ALLOWED_PATHS
+    assert set(task_manifest["intended_side_effect_classes"]) == (
+        pa.G1A3_R1_ALLOWED_EFFECTS
+    )
+    narrowed_manifest = dict(task_manifest)
+    narrowed_manifest["allowed_path_roots"] = sorted(pa.G1A3_R1_ALLOWED_PATHS)[1:]
+    narrowed = pa.evaluate_programme_admission(
+        repo_root=target,
+        manifest=narrowed_manifest,
+        entrypoint="recovery_preflight",
+    )
+    assert narrowed.admitted is False
+    assert narrowed.reason_codes == ["g1a_3_r1_task_manifest_paths_not_exact"]
+    widened_manifest = dict(task_manifest)
+    widened_manifest["allowed_path_roots"] = [
+        *task_manifest["allowed_path_roots"],
+        "app/main.py",
+    ]
+    widened = pa.evaluate_programme_admission(
+        repo_root=target,
+        manifest=widened_manifest,
+        entrypoint="recovery_preflight",
+    )
+    assert widened.admitted is False
+    assert widened.reason_codes == ["task_manifest_path_outside_policy"]
+    assert pa.g1a3_review_producer_contract_reasons(target) == []
+    assert pa.g1a3_integration_contract_reasons(target) == []
+    for entrypoint in ("provider_invocation", "integration"):
+        denied = pa.evaluate_programme_admission(
+            repo_root=target,
+            manifest=task_manifest,
+            entrypoint=entrypoint,
+        )
+        assert denied.admitted is False
+
+    task_development = pg.evaluate_pinned_programme_operation(
+        gatekeeper_root=gatekeeper,
+        target_repo_root=target,
+        manifest=task_manifest,
+        entrypoint="task_branch_commit",
+        phase="development",
+    )
+    assert task_development.admitted is True, task_development.reason_codes
+
+    task_commit_receipts = tmp_path / "g1a3-r1-commit-receipts"
+    task_commit_receipts.mkdir()
+    task_commit_receipt = pg.execute_exact_index_commit(
+        gatekeeper_root=gatekeeper,
+        target_repo_root=target,
+        manifest=task_manifest,
+        receipt_directory=task_commit_receipts,
+        message="synthetic exact four-path G1A.3-R1 implementation",
+    )
+    task_sha = task_commit_receipt["result_sha"]
+
+    task_manifest = build_task_manifest(target)
+    task_push_receipts = tmp_path / "g1a3-r1-push-receipts"
+    task_push_receipts.mkdir()
+    task_push_receipt = pg.execute_exact_sha_push(
+        gatekeeper_root=gatekeeper,
+        target_repo_root=target,
+        manifest=task_manifest,
+        receipt_directory=task_push_receipts,
+    )
+    assert task_push_receipt["post_push_readback_sha"] == task_sha
+
+    post_push = pg.evaluate_pinned_programme_operation(
+        gatekeeper_root=gatekeeper,
+        target_repo_root=target,
+        manifest=task_manifest,
+        entrypoint="task_branch_push",
+        phase="post-push",
+    )
+    assert post_push.admitted is True, post_push.reason_codes
+    assert (
+        _git(target, "rev-parse", "master")
+        == policy.state["protected_refs"]["expected_sha"]
+    )
+    assert (
+        _git(target, "rev-parse", "handoff/current")
+        == policy.state["protected_refs"]["expected_sha"]
+    )

@@ -1,12 +1,12 @@
 {
   "schema_version": "raisa-ariadne.programme-state.v1",
-  "observed_at": "2026-08-29T18:09:19+10:00",
+  "observed_at": "2026-08-30T00:00:00+10:00",
   "programme_name": "Raisa Medical Office and Ariadne Recovery & Convergence",
   "programme_mode": "recovery",
   "current_gate": "G1A.3",
-  "current_gate_status": "active",
-  "active_correction": "G1A.3",
-  "active_profile": "G1A.3_ACTIVE",
+  "current_gate_status": "revision_required",
+  "active_correction": "G1A.3-R0",
+  "active_profile": "G1A.3-R0_REVIEW_PENDING",
   "machine_authoritative": true,
   "feature_work_eligible": false,
   "product_work_eligible": false,
@@ -255,9 +255,7 @@
   },
   "task_selection": {
     "autonomous_selection_enabled": false,
-    "allowed_task_kinds": [
-      "g1a_3_integration_consumer_mutation"
-    ],
+    "allowed_task_kinds": [],
     "blocked_task_kinds": [
       "product_feature",
       "g1a_untyped_or_out_of_scope",
@@ -268,20 +266,20 @@
     ],
     "admission_command": "python scripts/raisa_ariadne_recovery_preflight.py --task-manifest <path> --phase development",
     "out_of_gate_result": "blocked",
-    "next_eligible_tranche": "G1A.3",
-    "next_eligible_now": true,
+    "next_eligible_tranche": "G1A.3-R1",
+    "next_eligible_now": false,
     "next_tranche_started": false,
-    "next_tranche_admission_requires_state_transition": false,
-    "next_eligibility_condition": "bounded_G1A_3_profile_active_next_tranche_not_started"
+    "next_tranche_admission_requires_state_transition": true,
+    "next_eligibility_condition": "external_G1A3_R0_PASS_and_state_only_transition_required"
   },
   "parallelism_efficacy": {
     "deepseek": {
       "disposition": "declined",
-      "rationale": "provider execution is forbidden and the implementation-review ledger, transition seam, active profile and pinned reference-monitor changes are one serial control-plane authority package"
+      "rationale": "provider execution is forbidden and rejected-candidate preservation, leased rollback, body-only AST correction, tests and publication form one serial custody chain"
     },
     "gemini": {
       "disposition": "reserved",
-      "rationale": "independent external review is reserved for the published G1A.3 transition-enablement candidate; no verifier or provider invocation is authorised in this tranche"
+      "rationale": "independent external review is reserved for the published replacement G1A.3-R0 candidate; no verifier or provider invocation is authorised in this tranche"
     },
     "native_subagent": {
       "disposition": "declined",
@@ -445,6 +443,8 @@
     "decisive_transition_enablement_review_id": "g1a2-e0-review-dab684e-independent-20260828-pass",
     "decisive_implementation_review_id": "g1a2-review-37e2d6f-independent-20260828-pass",
     "decisive_g1a3_transition_enablement_review_id": "g1a3-e0-review-e5cb887-independent-20260829-pass",
+    "decisive_g1a3_implementation_review_id": "g1a3-review-c6aa513-independent-20260829-revision-required",
+    "decisive_g1a3_r0_review_id": null,
     "owner_disposition_history": [
       {
         "disposition_id": "g1a1-owner-accept-91f1e6e-20260828",
@@ -506,6 +506,26 @@
         "review_record_sha256": "sha256:8c695d7694b5f41b3f9cba20efdef576d2b27f655cce8d12174edf7f3dfda9fc"
       }
     ],
+    "g1a3_implementation_review_history": [
+      {
+        "review_id": "g1a3-review-c6aa513-independent-20260829-revision-required",
+        "review_record_path": "orchestration/programme/subgate-implementation-reviews/g1a3-review-c6aa513-independent-20260829-revision-required.json",
+        "reviewed_commit": "c6aa513be3cdade785fc48283881825ef37345a3",
+        "reviewed_tree": "01b11e07c4e9038a6d4e2c3fcd9b63c49caa4fbb",
+        "reviewed_parent": "5a298856be05ce08e50dd7ab4501b7e16a3d0843",
+        "review_subject": "G1A.3_integration_authority_consumer",
+        "verdict": "REVISION_REQUIRED",
+        "blocking_finding_count": 1,
+        "reviewer_surface": "external_chatgpt_repository_review",
+        "g1a_complete": false,
+        "g1b_transition_enablement_authorized": false,
+        "integration_runtime_authorized": false,
+        "provider_invocation_authorized": false,
+        "protected_ref_movement_authorized": false,
+        "review_record_sha256": "sha256:f199fe00c4097650de7710ec480a25f920723e663ee1fa17cbf8785c04035e3a"
+      }
+    ],
+    "g1a3_r0_review_history": [],
     "subgates": {
       "G1A.1": {
         "implementation_status": "accepted_by_owner_with_residual_risk",
@@ -541,7 +561,7 @@
         "next_action": "external_G1A3_transition_enablement_review_only"
       },
       "G1A.3": {
-        "status": "active",
+        "status": "revision_required",
         "transition_enablement_tranche": "G1A.3-E0",
         "transition_enablement_status": "external_review_passed",
         "state_transition_status": "complete",
@@ -559,16 +579,21 @@
           "reviewer_surface": "external_chatgpt_repository_review",
           "next_action": "G1A_3_integration_consumer_only"
         },
-        "implementation_authorized": true,
+        "implementation_status": "revision_required",
+        "implementation_review_id": "g1a3-review-c6aa513-independent-20260829-revision-required",
+        "r0_status": "review_pending",
+        "r1_state_transition_status": "not_started",
+        "r1_state_transition": null,
+        "implementation_authorized": false,
         "implementation_started": false,
         "integration_execution_authorized": false,
         "provider_invocation_authorized": false,
         "protected_ref_movement_authorized": false,
-        "next_action": "begin_bounded_G1A3_integration_consumer_implementation",
+        "next_action": "external_G1A3_R0_review_only",
         "owner_exception": {
-          "task_generation": "g1a3-transition-enablement-runtime-source-encoding-replacement-20260829-v1",
+          "task_generation": "g1a3-r0-review-producer-body-only-ast-replacement-20260830-v1",
           "branch": "codex/raisa-ariadne-recovery-g0",
-          "authorized_parent_commit": "37e2d6f51ebbdb281771f922a5f460fd23e2571b",
+          "authorized_parent_commit": "5a298856be05ce08e50dd7ab4501b7e16a3d0843",
           "candidate_commit_limit": 1,
           "state_transition_authorized": false,
           "provider_invocation_authorized": false,

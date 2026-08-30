@@ -69,15 +69,28 @@ TRUSTED_GIT_COMMAND_OVERRIDES = (
     "core.fsmonitor=false",
     "-c",
     "core.ignoreStat=false",
+    "-c",
+    "core.checkStat=default",
+    "-c",
+    "core.trustctime=true",
 )
 _IDENTITY_COMMAND_OVERRIDES = (
     "core.fsmonitor=false",
     "core.ignoreStat=false",
+    "core.checkStat=default",
+    "core.trustctime=true",
 )
-_VISIBILITY_CONFIGURATION_KEYS = (
+_FALSE_VISIBILITY_CONFIGURATION_KEYS = (
     "core.fsmonitor",
     "core.fsmonitorHookVersion",
     "core.ignoreStat",
+)
+_CHECKSTAT_CONFIGURATION_KEY = "core.checkStat"
+_TRUSTCTIME_CONFIGURATION_KEY = "core.trustctime"
+_VISIBILITY_CONFIGURATION_KEYS = (
+    *_FALSE_VISIBILITY_CONFIGURATION_KEYS,
+    _CHECKSTAT_CONFIGURATION_KEY,
+    _TRUSTCTIME_CONFIGURATION_KEY,
 )
 
 
@@ -339,26 +352,43 @@ def _repository_visibility_configuration(root: Path) -> dict[str, Any]:
                 normalised: list[str] = []
             elif raw.returncode == 0:
                 values = _nul_config_values(bytes(raw.stdout))
-                typed = _run(
-                    root,
-                    (
-                        "config",
-                        f"--{scope}",
-                        "--includes",
-                        "--type=bool",
-                        "--null",
-                        "--get-all",
-                        key,
-                    ),
-                    binary=True,
-                    allow_failure=True,
-                )
-                if typed.returncode != 0:
+                if len(values) != 1:
                     raise TrustedGitError("trusted_git_configuration_forbidden")
-                normalised = _nul_config_values(bytes(typed.stdout))
-                if len(normalised) != len(values) or any(
-                    value != "false" for value in normalised
-                ):
+                if key == _CHECKSTAT_CONFIGURATION_KEY:
+                    normalised = list(values)
+                    if values != ["default"]:
+                        raise TrustedGitError("trusted_git_configuration_forbidden")
+                else:
+                    typed = _run(
+                        root,
+                        (
+                            "config",
+                            f"--{scope}",
+                            "--includes",
+                            "--type=bool",
+                            "--null",
+                            "--get-all",
+                            key,
+                        ),
+                        binary=True,
+                        allow_failure=True,
+                    )
+                    if typed.returncode != 0:
+                        raise TrustedGitError("trusted_git_configuration_forbidden")
+                    normalised = _nul_config_values(bytes(typed.stdout))
+                    expected = (
+                        "true" if key == _TRUSTCTIME_CONFIGURATION_KEY else "false"
+                    )
+                    canonical = (
+                        values == ["true"]
+                        if key == _TRUSTCTIME_CONFIGURATION_KEY
+                        else True
+                    )
+                    if normalised != [expected] or not canonical:
+                        raise TrustedGitError("trusted_git_configuration_forbidden")
+                if key in _FALSE_VISIBILITY_CONFIGURATION_KEYS and normalised != [
+                    "false"
+                ]:
                     raise TrustedGitError("trusted_git_configuration_forbidden")
             else:
                 raise TrustedGitError("trusted_git_configuration_forbidden")
@@ -505,6 +535,176 @@ def _git_blob_object_id(payload: bytes, object_format: str) -> str:
     raise TrustedGitError("trusted_git_object_format_invalid")
 
 
+def _parse_complete_index_entries(root: Path) -> dict[str, tuple[str, str]]:
+    payload = run_git_bytes(root, "ls-files", "--cached", "--stage", "-z")
+    fields = payload.split(b"\0")
+    if fields[-1] != b"":
+        raise TrustedGitError("trusted_git_complete_index_invalid")
+    result: dict[str, tuple[str, str]] = {}
+    for field in fields[:-1]:
+        if b"\t" not in field:
+            raise TrustedGitError("trusted_git_complete_index_invalid")
+        header, raw_path = field.split(b"\t", 1)
+        try:
+            mode, object_id, stage = header.decode("ascii").split(" ")
+            relative = raw_path.decode("utf-8").replace("\\", "/")
+        except (UnicodeDecodeError, ValueError) as error:
+            raise TrustedGitError("trusted_git_complete_index_invalid") from error
+        if stage != "0":
+            raise TrustedGitError("trusted_git_unresolved_index_stage_forbidden")
+        if mode not in {"100644", "100755"}:
+            raise TrustedGitError("trusted_git_tracked_mode_forbidden")
+        if relative in result or _normalise_relative(relative) != relative:
+            raise TrustedGitError("trusted_git_complete_index_invalid")
+        result[relative] = (mode, object_id)
+    return result
+
+
+def _parse_complete_tree_entries(
+    root: Path, expected_commit: str
+) -> dict[str, tuple[str, str]]:
+    payload = run_git_bytes(root, "ls-tree", "-r", "-z", expected_commit)
+    fields = payload.split(b"\0")
+    if fields[-1] != b"":
+        raise TrustedGitError("trusted_git_complete_tree_invalid")
+    result: dict[str, tuple[str, str]] = {}
+    for field in fields[:-1]:
+        if b"\t" not in field:
+            raise TrustedGitError("trusted_git_complete_tree_invalid")
+        header, raw_path = field.split(b"\t", 1)
+        try:
+            mode, object_type, object_id = header.decode("ascii").split(" ")
+            relative = raw_path.decode("utf-8").replace("\\", "/")
+        except (UnicodeDecodeError, ValueError) as error:
+            raise TrustedGitError("trusted_git_complete_tree_invalid") from error
+        if object_type != "blob" or mode not in {"100644", "100755"}:
+            raise TrustedGitError("trusted_git_tracked_mode_forbidden")
+        if relative in result or _normalise_relative(relative) != relative:
+            raise TrustedGitError("trusted_git_complete_tree_invalid")
+        result[relative] = (mode, object_id)
+    return result
+
+
+def _physical_read_identity(observed: os.stat_result) -> tuple[int, ...]:
+    return (
+        int(observed.st_dev),
+        int(observed.st_ino),
+        int(observed.st_mode),
+        int(observed.st_size),
+        int(observed.st_mtime_ns),
+        int(observed.st_ctime_ns),
+    )
+
+
+def _complete_tree_directory_identities(
+    worktree: Path, relative_paths: Iterable[str]
+) -> dict[str, tuple[int, ...]]:
+    """Observe each containing directory once without trusting path caches."""
+    directories = {""}
+    for relative in relative_paths:
+        parent = PurePosixPath(relative).parent
+        while parent != PurePosixPath("."):
+            directories.add(parent.as_posix())
+            parent = parent.parent
+    result: dict[str, tuple[int, ...]] = {}
+    for relative in sorted(directories, key=lambda item: (item.count("/"), item)):
+        physical = (
+            worktree
+            if not relative
+            else worktree / Path(*PurePosixPath(relative).parts)
+        )
+        try:
+            observed = physical.lstat()
+        except OSError as error:
+            raise TrustedGitError("trusted_git_physical_source_missing") from error
+        if (
+            not stat.S_ISDIR(observed.st_mode)
+            or physical.is_symlink()
+            or _is_reparse(observed)
+        ):
+            raise TrustedGitError("trusted_git_reparse_forbidden")
+        result[relative] = _physical_read_identity(observed)
+    return result
+
+
+def attest_complete_tracked_tree(root: Path, *, expected_commit: str) -> dict[str, Any]:
+    """Bind every physical stage-zero regular file to one exact commit tree."""
+    reject_high_risk_environment()
+    _validate_path_components(root.absolute())
+    requested = root.resolve(strict=True)
+    worktree = Path(run_git(requested, "rev-parse", "--show-toplevel")).resolve(
+        strict=True
+    )
+    if requested != worktree:
+        raise TrustedGitError("trusted_git_worktree_mismatch")
+    _repository_visibility_configuration(worktree)
+    _reject_index_visibility_controls(worktree)
+    object_format = run_git(worktree, "rev-parse", "--show-object-format")
+    resolved_commit = run_git(worktree, "rev-parse", f"{expected_commit}^{{commit}}")
+    if resolved_commit != expected_commit:
+        raise TrustedGitError("trusted_git_expected_commit_mismatch")
+    head = run_git(worktree, "rev-parse", "HEAD")
+    if head != expected_commit:
+        raise TrustedGitError("trusted_git_expected_commit_mismatch")
+    expected_tree = run_git(worktree, "rev-parse", f"{expected_commit}^{{tree}}")
+    if run_git_bytes(worktree, "ls-files", "--unmerged", "-z"):
+        raise TrustedGitError("trusted_git_unresolved_index_stage_forbidden")
+    index_entries = _parse_complete_index_entries(worktree)
+    tree_entries = _parse_complete_tree_entries(worktree, expected_commit)
+    index_tree = run_git(worktree, "write-tree")
+    if index_tree != expected_tree:
+        raise TrustedGitError("trusted_git_index_tree_binding_failed")
+    if index_entries != tree_entries:
+        raise TrustedGitError("trusted_git_complete_tree_inventory_mismatch")
+
+    directory_identities = _complete_tree_directory_identities(worktree, tree_entries)
+    rows: list[dict[str, Any]] = []
+    for relative in sorted(tree_entries):
+        mode, object_id = tree_entries[relative]
+        physical = worktree / Path(*PurePosixPath(relative).parts)
+        try:
+            before = physical.lstat()
+            if (
+                not stat.S_ISREG(before.st_mode)
+                or physical.is_symlink()
+                or _is_reparse(before)
+            ):
+                raise TrustedGitError("trusted_git_physical_source_not_regular")
+            payload = physical.read_bytes()
+            after = physical.lstat()
+        except TrustedGitError:
+            raise
+        except OSError as error:
+            raise TrustedGitError("trusted_git_physical_source_missing") from error
+        if _physical_read_identity(before) != _physical_read_identity(after):
+            raise TrustedGitError("trusted_git_physical_source_changed_during_read")
+        if _git_blob_object_id(payload, object_format) != object_id:
+            raise TrustedGitError("trusted_git_physical_bytes_mismatch")
+        rows.append(
+            {
+                "path": relative,
+                "mode": mode,
+                "object_id": object_id,
+                "physical_sha256": _sha256_bytes(payload),
+                "size": len(payload),
+            }
+        )
+    if directory_identities != _complete_tree_directory_identities(
+        worktree, tree_entries
+    ):
+        raise TrustedGitError("trusted_git_physical_source_changed_during_read")
+    return {
+        "schema_version": "ariadne.complete_tracked_tree_attestation.v1",
+        "head": head,
+        "head_tree": expected_tree,
+        "index_tree": index_tree,
+        "object_format": object_format,
+        "complete_tracked_path_count": len(rows),
+        "paths": rows,
+        "complete_tracked_tree_sha256": _canonical_digest(rows),
+    }
+
+
 def _attest_paths(
     root: Path, paths: Iterable[str | Path], *, expected_commit: str | None
 ) -> dict[str, Any]:
@@ -575,6 +775,7 @@ def attest_repository(
     *,
     attested_paths: Iterable[str | Path],
     expected_commit: str | None = None,
+    complete_tracked_tree: bool = False,
 ) -> dict[str, Any]:
     """Bind a real worktree, Git administration, index, and physical bytes."""
     reject_high_risk_environment()
@@ -606,6 +807,11 @@ def attest_repository(
     attestation = _attest_paths(
         worktree, attested_paths, expected_commit=expected_commit
     )
+    complete_attestation = (
+        attest_complete_tracked_tree(worktree, expected_commit=head)
+        if complete_tracked_tree
+        else None
+    )
     identity: dict[str, Any] = {
         "schema_version": "ariadne.trusted_git_identity.v1",
         "git_executable": {
@@ -633,5 +839,7 @@ def attest_repository(
         "closed_environment": True,
         "trusted_git_identity_sha256": "",
     }
+    if complete_attestation is not None:
+        identity["complete_tracked_tree_attestation"] = complete_attestation
     identity["trusted_git_identity_sha256"] = _canonical_digest(identity)
     return identity
