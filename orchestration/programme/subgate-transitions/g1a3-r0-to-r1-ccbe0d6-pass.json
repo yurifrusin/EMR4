@@ -1,0 +1,83 @@
+{
+  "schema_version": "ariadne.g1a3-r0-to-r1-transition.v1",
+  "transition_id": "g1a3-r0-to-r1-ccbe0d6-pass",
+  "recorded_at": "2026-08-30T20:58:42+10:00",
+  "transition_manifest": {
+    "schema_version": "ariadne.programme_g1a3_r0_to_r1_transition_manifest.v1",
+    "transition_id": "g1a3-r0-to-r1-ccbe0d6-pass",
+    "from_profile": "G1A.3-R0_REVIEW_PENDING",
+    "to_profile": "G1A.3-R1_REVIEW_BINDING_ACTIVE",
+    "r0_candidate_commit": "ccbe0d6a36218903fc6582a0b348bd0b0199794b",
+    "r0_candidate_tree": "466e2783fb37a013a699532112ff3923ba6f4033",
+    "r0_external_review_id": "g1a3-r0-review-ccbe0d6-independent-20260830-pass",
+    "r0_external_review_record_sha256": "sha256:b2681a46fdff07c3e2d2a61f1aeecc2f95d22bbd99c64d8f71a6c931d5abdbfd",
+    "rejected_g1a3_review_id": "g1a3-review-c6aa513-independent-20260829-revision-required",
+    "rejected_g1a3_review_record_sha256": "sha256:f199fe00c4097650de7710ec480a25f920723e663ee1fa17cbf8785c04035e3a",
+    "transition_parent": "ccbe0d6a36218903fc6582a0b348bd0b0199794b",
+    "external_review_verdict": "PASS",
+    "blocking_finding_count": 0,
+    "reviewer_surface": "external_chatgpt_repository_review",
+    "state_digest_before": "sha256:08135e4f727dab2d3c017bcc149d452502e52d8a4aa7dfda56190c5f18314ff4",
+    "policy_digest_before": "sha256:ac2b07893ebbf269caa78c58a36991e6ca78def9e0246ebdd77ddcf3666cb9b7",
+    "allowed_transition_paths": [
+      "AGENTS.md",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json",
+      "orchestration/harness_settings/programme_recovery.yaml",
+      "orchestration/programme/current-state.json",
+      "orchestration/programme/gates.yaml",
+      "orchestration/programme/subgate-implementation-reviews/g1a3-r0-review-ccbe0d6-independent-20260830-pass.json",
+      "orchestration/programme/subgate-transitions/g1a3-r0-to-r1-ccbe0d6-pass.json"
+    ],
+    "forbidden_effect_classes": [
+      "dependency_change",
+      "deployment",
+      "g1b_work",
+      "implementation_change",
+      "integration",
+      "migration_change",
+      "pages",
+      "product_behavior_change",
+      "protected_ref_movement",
+      "provider_invocation",
+      "real_data_access"
+    ]
+  },
+  "transition_manifest_sha256": "sha256:a6a46c6ff6a7aa9aca941f1d702d5d39594471390ce5ddbceb80cb8ec3a2c2cd",
+  "r0_external_review_record_sha256": "sha256:b2681a46fdff07c3e2d2a61f1aeecc2f95d22bbd99c64d8f71a6c931d5abdbfd",
+  "rejected_g1a3_review_record_sha256": "sha256:f199fe00c4097650de7710ec480a25f920723e663ee1fa17cbf8785c04035e3a",
+  "r0_controller_commit": "ccbe0d6a36218903fc6582a0b348bd0b0199794b",
+  "r0_controller_tree": "466e2783fb37a013a699532112ff3923ba6f4033",
+  "state_digest_before": "sha256:08135e4f727dab2d3c017bcc149d452502e52d8a4aa7dfda56190c5f18314ff4",
+  "state_digest_after": "sha256:326bda96416f3b0404393620ed89f6d57e67d0bd5a73a7ba7ac4ce6f5b95ec9c",
+  "policy_digest_before": "sha256:ac2b07893ebbf269caa78c58a36991e6ca78def9e0246ebdd77ddcf3666cb9b7",
+  "policy_digest_after": "sha256:851d72fd55af643d37f00e297f0b6d9a7eef6666c1e293b916effdc119b5b97d",
+  "scope_result": {
+    "admitted": true,
+    "phase": "development"
+  },
+  "r1_profile_contract": {
+    "active_profile": "G1A.3-R1_REVIEW_BINDING_ACTIVE",
+    "task_class": "g1a_3_review_byte_binding_and_integration_consumer",
+    "allowed_paths": [
+      "scripts/agent_worktrees.py",
+      "scripts/ariadne_antigravity.py",
+      "tests/test_agent_worktrees.py",
+      "tests/test_ariadne_antigravity.py"
+    ],
+    "allowed_effects": [
+      "external_review_preparation",
+      "integration_authority_adapter_edit",
+      "repository_read",
+      "review_evidence_binding_edit",
+      "task_branch_commit",
+      "task_branch_push"
+    ],
+    "provider_invocation_authorized": false,
+    "integration_execution_authorized": false,
+    "antigravity_allowed_mutation": "run_worker_body_only",
+    "antigravity_runtime_source_parsing_contract": "python_compile_original_bytes_PyCF_ONLY_AST_PyCF_TYPE_COMMENTS_dont_inherit",
+    "run_worker_first_admission_contract": "require_programme_admission_repo_root_REPO_ROOT_manifest_path_programme_task_manifest_entrypoint_provider_invocation_as_first_executable_statement",
+    "integration_allowed_mutation": "record_integration_body_only",
+    "record_integration_first_admission_contract": "_require_command_admission_args_entrypoint_integration_as_first_executable_statement"
+  }
+}

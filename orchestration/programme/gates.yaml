@@ -1,12 +1,12 @@
 schema_version: "raisa-ariadne.programme-gates.v1"
 programme:
   name: "Raisa Medical Office and Ariadne Recovery & Convergence"
-  prepared_at: "2026-08-30T00:00:00+10:00"
+  prepared_at: "2026-08-30T20:58:42+10:00"
   repository: "yurifrusin/EMR4"
   observed_public_master: "2e34bdad732fdab32fbf778280b3d3c70d66d602"
   programme_mode: "recovery"
   current_gate: "G1A.3"
-  current_gate_status: "revision_required"
+  current_gate_status: "active"
   feature_work_eligible: false
   clockwork_remote_visibility: "source_branch_aligned_with_origin"
   clockwork_local_state: "preserved_exactly_at_03e6860394c39086ec1ffb3f2457acc5f7c8b5f9"
@@ -381,7 +381,7 @@ gates:
 
   - id: "G1A"
     name: "Correct Verdict and Integration Semantics"
-    status: "revision_required_G1A_3_R0"
+    status: "active_subgate_G1A_3_R1"
     prerequisites: ["G1A.1", "G1A.2", "G1A.3"]
     programme_mode: "recovery"
     exit_checks:
@@ -419,7 +419,7 @@ gates:
 
   - id: "G1A.3"
     name: "Complete Review-Byte Binding and Integration Consumer"
-    status: "revision_required"
+    status: "active_review_binding"
     prerequisites: ["G1A.2_external_review_pass", "G1A.3-E0_external_review_pass", "state_only_subgate_transition", "rejected_G1A.3_review_bound"]
     programme_mode: "recovery"
     exit_checks:

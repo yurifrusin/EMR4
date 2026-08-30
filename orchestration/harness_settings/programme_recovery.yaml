@@ -21,7 +21,7 @@ required_before:
   - "protected_ref_operation"
   - "deployment"
 missing_or_invalid_state: "hard_stop"
-active_profile: "G1A.3-R0_REVIEW_PENDING"
+active_profile: "G1A.3-R1_REVIEW_BINDING_ACTIVE"
 profiles:
   G0.8_FSMONITOR_CLOSURE:
     profile_kind: "controller_maintenance"
@@ -512,7 +512,7 @@ g1a3_r0_transition_policy:
   resulting_active_profile: "G1A.3-R1_REVIEW_BINDING_ACTIVE"
   from_profile: "G1A.3-R0_REVIEW_PENDING"
   to_profile: "G1A.3-R1_REVIEW_BINDING_ACTIVE"
-  transition_status: "not_started"
+  transition_status: "complete"
   rejected_review_id: "g1a3-review-c6aa513-independent-20260829-revision-required"
   rejected_review_record_sha256: "sha256:f199fe00c4097650de7710ec480a25f920723e663ee1fa17cbf8785c04035e3a"
   external_review_record_root: "orchestration/programme/subgate-implementation-reviews"

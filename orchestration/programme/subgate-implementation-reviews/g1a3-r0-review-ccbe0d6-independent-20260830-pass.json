@@ -1,0 +1,18 @@
+{
+  "schema_version": "ariadne.external_g1a3_r0_review.v1",
+  "review_id": "g1a3-r0-review-ccbe0d6-independent-20260830-pass",
+  "recorded_at": "2026-08-30T18:45:33+10:00",
+  "review_subject": "G1A.3-R0_complete_review_byte_binding_control_plane",
+  "reviewed_commit": "ccbe0d6a36218903fc6582a0b348bd0b0199794b",
+  "reviewed_tree": "466e2783fb37a013a699532112ff3923ba6f4033",
+  "reviewed_parent": "5a298856be05ce08e50dd7ab4501b7e16a3d0843",
+  "verdict": "PASS",
+  "blocking_finding_count": 0,
+  "reviewer_surface": "external_chatgpt_repository_review",
+  "g1a3_r1_state_transition_authorized": true,
+  "g1a3_r1_implementation_authorized": false,
+  "provider_invocation_authorized": false,
+  "integration_authorized": false,
+  "protected_ref_movement_authorized": false,
+  "source_artifact_sha256": "71c7eabd6b00f641c82ebc5f533df6882c2d779856f20d26d74a44341c017032"
+}
