@@ -1,15 +1,29 @@
+import ast
 import copy
 import json
+import os
+import subprocess
 from pathlib import Path
 from types import SimpleNamespace
 
 import pytest
 
 import orchestration_harness.programme_admission as programme_admission
+from orchestration_harness import trusted_git
 from orchestration_harness.verdict import ReviewVerdict
 from scripts import ariadne_antigravity
 from scripts.ariadne_antigravity import WorktreeState, build_command
 from scripts.raisa_ariadne_recovery_preflight import build_task_manifest
+
+
+TEST_HEAD = "a" * 40
+TEST_TREE = "b" * 40
+TEST_COMPLETE_DIGEST = "sha256:" + "c" * 64
+TEST_IDENTITY_DIGEST = "sha256:" + "d" * 64
+_REAL_ATTEST_REPOSITORY = trusted_git.attest_repository
+_REAL_RUN_GIT = trusted_git.run_git
+_REAL_RUN_GIT_BYTES = trusted_git.run_git_bytes
+_REAL_SUBPROCESS_RUN = subprocess.run
 
 
 @pytest.fixture(autouse=True)
@@ -18,12 +32,37 @@ def _admit_direct_worker_unit_surface(monkeypatch: pytest.MonkeyPatch) -> None:
         ariadne_antigravity, "require_programme_admission", lambda **_kwargs: None
     )
 
+    def _attest(root, *, expected_commit=None, **_kwargs):
+        head = expected_commit or TEST_HEAD
+        return {
+            "worktree": {"resolved_path": str(Path(root).resolve())},
+            "head": head,
+            "head_tree": TEST_TREE,
+            "index_tree": TEST_TREE,
+            "trusted_git_identity_sha256": TEST_IDENTITY_DIGEST,
+            "complete_tracked_tree_attestation": {
+                "head": head,
+                "head_tree": TEST_TREE,
+                "index_tree": TEST_TREE,
+                "complete_tracked_tree_sha256": TEST_COMPLETE_DIGEST,
+                "complete_tracked_path_count": 1,
+            },
+        }
+
+    monkeypatch.setattr(trusted_git, "attest_repository", _attest)
+    monkeypatch.setattr(
+        trusted_git,
+        "run_git",
+        lambda *_args: "codex/verifier-candidate",
+    )
+    monkeypatch.setattr(trusted_git, "run_git_bytes", lambda *_args: b"")
+
 
 def _state(branch: str = "antigravity/bounded") -> WorktreeState:
     return WorktreeState(
         root=Path("C:/worktrees/bounded"),
         branch=branch,
-        head="abc123",
+        head=TEST_HEAD,
         dirty=False,
     )
 
@@ -77,7 +116,7 @@ def _mock_completed_worker(
     state = WorktreeState(
         root=tmp_path,
         branch="codex/verifier-candidate",
-        head="abc123",
+        head=TEST_HEAD,
         dirty=False,
     )
     states = iter([state, state])
@@ -113,6 +152,43 @@ def _passed_orchestrator_receipt(tmp_path: Path) -> Path:
         encoding="utf-8",
     )
     return path
+
+
+def _new_real_candidate_repository(tmp_path: Path) -> Path:
+    candidate = tmp_path / "candidate"
+    candidate.mkdir()
+
+    def _git(*argv: str) -> None:
+        _REAL_SUBPROCESS_RUN(
+            ["git", *argv],
+            cwd=candidate,
+            check=True,
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+        )
+
+    _git("init", "-b", "codex/verifier-candidate")
+    _git("config", "user.email", "tests@example.invalid")
+    _git("config", "user.name", "G1A3 R1 Trusted Git Tests")
+    _git("config", "core.autocrlf", "false")
+    (candidate / "AGENTS.md").write_bytes(b"trusted-git-first\n")
+    _git("add", "AGENTS.md")
+    _git("commit", "-m", "seed trusted Git candidate")
+    return candidate
+
+
+def _real_git_or_synthetic_provider(
+    provider_result: SimpleNamespace,
+    provider_calls: list[list[str]],
+):
+    def _run(command, *args, **kwargs):
+        if command and command[0] == "agy":
+            provider_calls.append(command)
+            return provider_result
+        return _REAL_SUBPROCESS_RUN(command, *args, **kwargs)
+
+    return _run
 
 
 def test_command_always_binds_a_fresh_project_and_exact_worktree():
@@ -182,7 +258,7 @@ def test_run_worker_records_canonical_high_model_and_read_only_result(
     state = WorktreeState(
         root=tmp_path,
         branch="codex/verifier-candidate",
-        head="abc123",
+        head=TEST_HEAD,
         dirty=False,
     )
     states = iter([state, state])
@@ -230,6 +306,901 @@ def test_run_worker_records_canonical_high_model_and_read_only_result(
     assert receipt["transport"] == ("antigravity_new_project_bound_readonly_worktree")
     assert output.is_file()
     assert len(receipt["orchestrator_receipt_sha256"]) == 64
+    assert (
+        receipt["complete_review_attestation_before"]
+        == receipt["complete_review_attestation_after"]
+        == {
+            "head": TEST_HEAD,
+            "head_tree": TEST_TREE,
+            "index_tree": TEST_TREE,
+            "complete_tracked_tree_sha256": TEST_COMPLETE_DIGEST,
+            "complete_tracked_path_count": 1,
+            "trusted_git_identity_sha256": TEST_IDENTITY_DIGEST,
+        }
+    )
+    assert (
+        receipt["nontracked_inventory_before"]
+        == receipt["nontracked_inventory_after"]
+        == {
+            "ordinary_count": 0,
+            "ordinary_paths_sha256": (
+                "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+            ),
+            "ignored_count": 0,
+            "ignored_paths_sha256": (
+                "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+            ),
+        }
+    )
+
+
+def test_run_worker_admission_is_first_and_denial_has_zero_other_access(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    observed: list[str] = []
+
+    def _deny(**_kwargs) -> None:
+        observed.append("admission")
+        raise RuntimeError("active profile denies provider invocation")
+
+    monkeypatch.setattr(ariadne_antigravity, "require_programme_admission", _deny)
+    monkeypatch.setattr(
+        ariadne_antigravity.subprocess,
+        "run",
+        lambda *_args, **_kwargs: pytest.fail("provider or Git access occurred"),
+    )
+    output = tmp_path / "must-not-exist.json"
+
+    with pytest.raises(RuntimeError, match="active profile denies"):
+        ariadne_antigravity.run_worker(
+            packet_path=tmp_path / "missing-packet.md",
+            cwd=tmp_path / "missing-worktree",
+            output_path=output,
+            orchestrator_receipt_path=tmp_path / "missing-orchestrator.json",
+            model="gemini-3.7-flash-high",
+            os_sandbox=False,
+        )
+
+    assert observed == ["admission"]
+    assert not output.exists()
+
+
+def test_run_worker_source_has_no_legacy_or_caller_path_git_observation() -> None:
+    source = Path(ariadne_antigravity.__file__).read_text(encoding="utf-8")
+    module = ast.parse(source)
+    run_worker = next(
+        node
+        for node in module.body
+        if isinstance(node, ast.FunctionDef) and node.name == "run_worker"
+    )
+    calls = [node for node in ast.walk(run_worker) if isinstance(node, ast.Call)]
+
+    direct_names = {call.func.id for call in calls if isinstance(call.func, ast.Name)}
+    assert direct_names.isdisjoint({"inspect_worktree", "_git"})
+
+    subprocess_calls = [
+        call
+        for call in calls
+        if isinstance(call.func, ast.Attribute)
+        and call.func.attr == "run"
+        and isinstance(call.func.value, ast.Name)
+        and call.func.value.id == "subprocess"
+    ]
+    assert len(subprocess_calls) == 1
+    assert isinstance(subprocess_calls[0].args[0], ast.Name)
+    assert subprocess_calls[0].args[0].id == "provider_command"
+
+    literal_git_commands = []
+    for call in subprocess_calls:
+        if not call.args or not isinstance(call.args[0], (ast.List, ast.Tuple)):
+            continue
+        elements = call.args[0].elts
+        if (
+            elements
+            and isinstance(elements[0], ast.Constant)
+            and str(elements[0].value).lower() in {"git", "git.exe"}
+        ):
+            literal_git_commands.append(call)
+    assert literal_git_commands == []
+
+
+@pytest.mark.parametrize(
+    "mode",
+    [
+        "success",
+        "pre_attestation_failure",
+        "post_attestation_failure",
+        "nonzero_provider",
+        "structured_rejection",
+    ],
+)
+def test_run_worker_never_reaches_legacy_git_observers_on_any_exit_class(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    mode: str,
+) -> None:
+    packet = tmp_path / "packet.md"
+    packet.write_text("Review only.", encoding="utf-8")
+    output = tmp_path / "receipt.json"
+    orchestrator_receipt = _passed_orchestrator_receipt(tmp_path)
+    legacy_calls: list[str] = []
+
+    def _legacy_tripwire(*_args, **_kwargs):
+        legacy_calls.append("legacy")
+        raise AssertionError("legacy Git observation executed")
+
+    monkeypatch.setattr(ariadne_antigravity, "inspect_worktree", _legacy_tripwire)
+    monkeypatch.setattr(ariadne_antigravity, "_git", _legacy_tripwire)
+    attest_calls = 0
+
+    def _attest(root, *, expected_commit=None, **_kwargs):
+        nonlocal attest_calls
+        attest_calls += 1
+        if mode == "pre_attestation_failure" and attest_calls == 2:
+            raise trusted_git.TrustedGitError("synthetic_pre_attestation_failure")
+        if mode == "post_attestation_failure" and attest_calls == 3:
+            raise trusted_git.TrustedGitError("synthetic_post_attestation_failure")
+        head = expected_commit or TEST_HEAD
+        return {
+            "worktree": {"resolved_path": str(Path(root).resolve())},
+            "head": head,
+            "head_tree": TEST_TREE,
+            "index_tree": TEST_TREE,
+            "trusted_git_identity_sha256": TEST_IDENTITY_DIGEST,
+            "complete_tracked_tree_attestation": {
+                "head": head,
+                "head_tree": TEST_TREE,
+                "index_tree": TEST_TREE,
+                "complete_tracked_tree_sha256": TEST_COMPLETE_DIGEST,
+                "complete_tracked_path_count": 1,
+            },
+        }
+
+    def _run_git(root, *argv):
+        if argv == ("rev-parse", "--show-toplevel"):
+            return str(Path(root).resolve())
+        if argv == ("symbolic-ref", "--quiet", "--short", "HEAD"):
+            return "codex/verifier-candidate"
+        if argv == ("rev-parse", "HEAD"):
+            return TEST_HEAD
+        raise AssertionError(f"unexpected trusted Git command: {argv!r}")
+
+    monkeypatch.setattr(trusted_git, "attest_repository", _attest)
+    monkeypatch.setattr(trusted_git, "run_git", _run_git)
+    provider_calls = 0
+
+    def _provider(*_args, **_kwargs):
+        nonlocal provider_calls
+        provider_calls += 1
+        if mode == "nonzero_provider":
+            return SimpleNamespace(returncode=7, stdout="", stderr="transport")
+        if mode == "structured_rejection":
+            stdout = json.dumps({"result": "not structured"})
+        else:
+            stdout = json.dumps(
+                {"decision": "pass", "review": "Trusted Git boundary passed."}
+            )
+        return SimpleNamespace(returncode=0, stdout=stdout, stderr="")
+
+    monkeypatch.setattr(ariadne_antigravity.subprocess, "run", _provider)
+    invocation = lambda: ariadne_antigravity.run_worker(
+        packet_path=packet,
+        cwd=tmp_path,
+        output_path=output,
+        orchestrator_receipt_path=orchestrator_receipt,
+        model="gemini-3.7-flash-high",
+        os_sandbox=False,
+    )
+
+    if mode == "success":
+        assert invocation()["decision"] == "pass"
+    elif mode == "pre_attestation_failure":
+        with pytest.raises(
+            trusted_git.TrustedGitError, match="synthetic_pre_attestation_failure"
+        ):
+            invocation()
+    else:
+        with pytest.raises(RuntimeError):
+            invocation()
+
+    assert legacy_calls == []
+    assert provider_calls == (0 if mode == "pre_attestation_failure" else 1)
+    assert output.exists() is (mode != "pre_attestation_failure")
+
+
+@pytest.mark.parametrize("branch", ["", "master", "handoff/current"])
+def test_run_worker_rejects_detached_or_protected_branch_before_provider(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    branch: str,
+) -> None:
+    packet = tmp_path / "packet.md"
+    packet.write_text("Review only.", encoding="utf-8")
+    output = tmp_path / "must-not-exist.json"
+    orchestrator_receipt = _passed_orchestrator_receipt(tmp_path)
+    monkeypatch.setattr(trusted_git, "run_git", lambda *_args: branch)
+    monkeypatch.setattr(
+        ariadne_antigravity,
+        "inspect_worktree",
+        lambda *_args, **_kwargs: pytest.fail("legacy inspect_worktree executed"),
+    )
+    monkeypatch.setattr(
+        ariadne_antigravity.subprocess,
+        "run",
+        lambda *_args, **_kwargs: pytest.fail("provider executed"),
+    )
+
+    with pytest.raises(ValueError, match="protected or detached branch"):
+        ariadne_antigravity.run_worker(
+            packet_path=packet,
+            cwd=tmp_path,
+            output_path=output,
+            orchestrator_receipt_path=orchestrator_receipt,
+            model="gemini-3.7-flash-high",
+            os_sandbox=False,
+        )
+
+    assert not output.exists()
+
+
+def test_run_worker_rejects_fsmonitor_before_hook_or_provider_execution(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    candidate = _new_real_candidate_repository(tmp_path)
+    packet = tmp_path / "packet.md"
+    packet.write_text("Review only.", encoding="utf-8")
+    output = tmp_path / "must-not-exist.json"
+    orchestrator_receipt = _passed_orchestrator_receipt(tmp_path)
+    sentinel = tmp_path / "fsmonitor-executed.txt"
+    hook = tmp_path / "fsmonitor.cmd"
+    hook.write_text(
+        f'@echo off\r\necho executed>"{sentinel}"\r\necho token\r\n',
+        encoding="utf-8",
+    )
+    _REAL_SUBPROCESS_RUN(
+        ["git", "config", "--local", "core.fsmonitor", str(hook)],
+        cwd=candidate,
+        check=True,
+        capture_output=True,
+    )
+    _REAL_SUBPROCESS_RUN(
+        ["git", "config", "--local", "core.fsmonitorHookVersion", "2"],
+        cwd=candidate,
+        check=True,
+        capture_output=True,
+    )
+    monkeypatch.setattr(trusted_git, "attest_repository", _REAL_ATTEST_REPOSITORY)
+    monkeypatch.setattr(trusted_git, "run_git", _REAL_RUN_GIT)
+    monkeypatch.setattr(trusted_git, "run_git_bytes", _REAL_RUN_GIT_BYTES)
+    monkeypatch.setattr(
+        ariadne_antigravity,
+        "inspect_worktree",
+        lambda *_args, **_kwargs: pytest.fail("legacy inspect_worktree executed"),
+    )
+    provider_calls: list[list[str]] = []
+    monkeypatch.setattr(
+        ariadne_antigravity.subprocess,
+        "run",
+        _real_git_or_synthetic_provider(
+            SimpleNamespace(returncode=0, stdout="", stderr=""), provider_calls
+        ),
+    )
+
+    with pytest.raises(
+        trusted_git.TrustedGitError, match="trusted_git_configuration_forbidden"
+    ):
+        ariadne_antigravity.run_worker(
+            packet_path=packet,
+            cwd=candidate,
+            output_path=output,
+            orchestrator_receipt_path=orchestrator_receipt,
+            model="gemini-3.7-flash-high",
+            os_sandbox=False,
+        )
+
+    assert provider_calls == []
+    assert not sentinel.exists()
+    assert not output.exists()
+
+
+def test_run_worker_ignores_caller_path_git_on_success(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    candidate = _new_real_candidate_repository(tmp_path)
+    packet = tmp_path / "packet.md"
+    packet.write_text("Review only.", encoding="utf-8")
+    output = tmp_path / "receipt.json"
+    orchestrator_receipt = _passed_orchestrator_receipt(tmp_path)
+    fake_bin = tmp_path / "fake-bin"
+    fake_bin.mkdir()
+    sentinel = tmp_path / "caller-path-git-executed.txt"
+    (fake_bin / "git.cmd").write_text(
+        f'@echo off\r\necho executed>"{sentinel}"\r\nexit /b 99\r\n',
+        encoding="utf-8",
+    )
+    monkeypatch.setenv("PATH", str(fake_bin) + os.pathsep + os.environ["PATH"])
+    monkeypatch.setattr(trusted_git, "attest_repository", _REAL_ATTEST_REPOSITORY)
+    monkeypatch.setattr(trusted_git, "run_git", _REAL_RUN_GIT)
+    monkeypatch.setattr(trusted_git, "run_git_bytes", _REAL_RUN_GIT_BYTES)
+    monkeypatch.setattr(
+        ariadne_antigravity,
+        "inspect_worktree",
+        lambda *_args, **_kwargs: pytest.fail("legacy inspect_worktree executed"),
+    )
+    provider_calls: list[list[str]] = []
+    provider_result = SimpleNamespace(
+        returncode=0,
+        stdout=json.dumps(
+            {"decision": "pass", "review": "Caller PATH Git was not used."}
+        ),
+        stderr="",
+    )
+    monkeypatch.setattr(
+        ariadne_antigravity.subprocess,
+        "run",
+        _real_git_or_synthetic_provider(provider_result, provider_calls),
+    )
+
+    receipt = ariadne_antigravity.run_worker(
+        packet_path=packet,
+        cwd=candidate,
+        output_path=output,
+        orchestrator_receipt_path=orchestrator_receipt,
+        model="gemini-3.7-flash-high",
+        os_sandbox=False,
+    )
+
+    assert receipt["decision"] == "pass"
+    assert len(provider_calls) == 1
+    assert not sentinel.exists()
+
+
+@pytest.mark.parametrize(
+    ("key", "value"),
+    [
+        ("core.ignoreStat", "true"),
+        ("core.checkStat", "minimal"),
+        ("core.trustctime", "false"),
+    ],
+)
+def test_run_worker_rejects_visibility_weakening_before_provider(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    key: str,
+    value: str,
+) -> None:
+    candidate = _new_real_candidate_repository(tmp_path)
+    _REAL_SUBPROCESS_RUN(
+        ["git", "config", "--local", key, value],
+        cwd=candidate,
+        check=True,
+        capture_output=True,
+    )
+    packet = tmp_path / "packet.md"
+    packet.write_text("Review only.", encoding="utf-8")
+    output = tmp_path / "must-not-exist.json"
+    orchestrator_receipt = _passed_orchestrator_receipt(tmp_path)
+    monkeypatch.setattr(trusted_git, "attest_repository", _REAL_ATTEST_REPOSITORY)
+    monkeypatch.setattr(trusted_git, "run_git", _REAL_RUN_GIT)
+    monkeypatch.setattr(trusted_git, "run_git_bytes", _REAL_RUN_GIT_BYTES)
+    provider_calls: list[list[str]] = []
+    monkeypatch.setattr(
+        ariadne_antigravity.subprocess,
+        "run",
+        _real_git_or_synthetic_provider(
+            SimpleNamespace(returncode=0, stdout="", stderr=""), provider_calls
+        ),
+    )
+
+    with pytest.raises(
+        trusted_git.TrustedGitError, match="trusted_git_configuration_forbidden"
+    ):
+        ariadne_antigravity.run_worker(
+            packet_path=packet,
+            cwd=candidate,
+            output_path=output,
+            orchestrator_receipt_path=orchestrator_receipt,
+            model="gemini-3.7-flash-high",
+            os_sandbox=False,
+        )
+
+    assert provider_calls == []
+    assert not output.exists()
+
+
+def test_run_worker_rejects_high_risk_git_environment_before_provider(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    candidate = _new_real_candidate_repository(tmp_path)
+    packet = tmp_path / "packet.md"
+    packet.write_text("Review only.", encoding="utf-8")
+    output = tmp_path / "must-not-exist.json"
+    orchestrator_receipt = _passed_orchestrator_receipt(tmp_path)
+    monkeypatch.setattr(trusted_git, "attest_repository", _REAL_ATTEST_REPOSITORY)
+    monkeypatch.setattr(trusted_git, "run_git", _REAL_RUN_GIT)
+    monkeypatch.setattr(trusted_git, "run_git_bytes", _REAL_RUN_GIT_BYTES)
+    monkeypatch.setenv("GIT_DIR", str(tmp_path / "attacker-selected-git-dir"))
+    provider_calls: list[list[str]] = []
+    monkeypatch.setattr(
+        ariadne_antigravity.subprocess,
+        "run",
+        _real_git_or_synthetic_provider(
+            SimpleNamespace(returncode=0, stdout="", stderr=""), provider_calls
+        ),
+    )
+
+    with pytest.raises(
+        trusted_git.TrustedGitError, match="trusted_git_environment_forbidden"
+    ):
+        ariadne_antigravity.run_worker(
+            packet_path=packet,
+            cwd=candidate,
+            output_path=output,
+            orchestrator_receipt_path=orchestrator_receipt,
+            model="gemini-3.7-flash-high",
+            os_sandbox=False,
+        )
+
+    assert provider_calls == []
+    assert not output.exists()
+
+
+@pytest.mark.parametrize("failure_surface", ["attestation", "ordinary", "ignored"])
+def test_pre_provider_complete_review_failure_starts_no_provider_and_writes_no_receipt(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    failure_surface: str,
+) -> None:
+    packet = tmp_path / "packet.md"
+    packet.write_text("Review only.", encoding="utf-8")
+    output = tmp_path / "must-not-exist.json"
+    orchestrator_receipt = _passed_orchestrator_receipt(tmp_path)
+    state = WorktreeState(
+        root=tmp_path,
+        branch="codex/verifier-candidate",
+        head=TEST_HEAD,
+        dirty=False,
+    )
+    monkeypatch.setattr(
+        ariadne_antigravity,
+        "inspect_worktree",
+        lambda *_args, **_kwargs: state,
+    )
+    if failure_surface == "attestation":
+        monkeypatch.setattr(
+            trusted_git,
+            "attest_repository",
+            lambda *_args, **_kwargs: (_ for _ in ()).throw(
+                trusted_git.TrustedGitError("synthetic_complete_tree_failure")
+            ),
+        )
+    else:
+
+        def _inventory(_root, *argv):
+            ignored = "--ignored" in argv
+            if (failure_surface == "ignored") == ignored:
+                return b"synthetic-path\x00"
+            return b""
+
+        monkeypatch.setattr(trusted_git, "run_git_bytes", _inventory)
+    provider_calls = 0
+
+    def _provider(*_args, **_kwargs):
+        nonlocal provider_calls
+        provider_calls += 1
+        raise AssertionError("provider must not run")
+
+    monkeypatch.setattr(ariadne_antigravity.subprocess, "run", _provider)
+
+    with pytest.raises((ValueError, trusted_git.TrustedGitError)):
+        ariadne_antigravity.run_worker(
+            packet_path=packet,
+            cwd=tmp_path,
+            output_path=output,
+            orchestrator_receipt_path=orchestrator_receipt,
+            model="gemini-3.7-flash-high",
+            os_sandbox=False,
+        )
+
+    assert provider_calls == 0
+    assert not output.exists()
+
+
+@pytest.mark.parametrize(
+    "drift_surface",
+    [
+        "head",
+        "tree",
+        "index",
+        "identity",
+        "tracked_digest",
+        "ordinary",
+        "ignored",
+        "branch",
+    ],
+)
+def test_post_provider_boundary_rejects_every_bound_identity_or_inventory_drift(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    drift_surface: str,
+) -> None:
+    packet = tmp_path / "packet.md"
+    packet.write_text("Review only.", encoding="utf-8")
+    output = tmp_path / "failure.json"
+    orchestrator_receipt = _passed_orchestrator_receipt(tmp_path)
+    state = WorktreeState(
+        root=tmp_path,
+        branch="codex/verifier-candidate",
+        head=TEST_HEAD,
+        dirty=False,
+    )
+    states = iter([state, state])
+    monkeypatch.setattr(
+        ariadne_antigravity,
+        "inspect_worktree",
+        lambda *_args, **_kwargs: next(states),
+    )
+    attestation_calls = 0
+
+    def _attest(_root, *, expected_commit, **_kwargs):
+        nonlocal attestation_calls
+        attestation_calls += 1
+        head = expected_commit or TEST_HEAD
+        tree = TEST_TREE
+        index_tree = TEST_TREE
+        identity_digest = TEST_IDENTITY_DIGEST
+        complete_digest = TEST_COMPLETE_DIGEST
+        if attestation_calls == 3:
+            if drift_surface == "head":
+                head = "e" * 40
+            elif drift_surface == "tree":
+                tree = "e" * 40
+                index_tree = tree
+            elif drift_surface == "index":
+                index_tree = "e" * 40
+            elif drift_surface == "identity":
+                identity_digest = "sha256:" + "e" * 64
+            elif drift_surface == "tracked_digest":
+                complete_digest = "sha256:" + "e" * 64
+        return {
+            "worktree": {"resolved_path": str(Path(_root).resolve())},
+            "head": head,
+            "head_tree": tree,
+            "index_tree": index_tree,
+            "trusted_git_identity_sha256": identity_digest,
+            "complete_tracked_tree_attestation": {
+                "head": head,
+                "head_tree": tree,
+                "index_tree": index_tree,
+                "complete_tracked_tree_sha256": complete_digest,
+                "complete_tracked_path_count": 1,
+            },
+        }
+
+    monkeypatch.setattr(trusted_git, "attest_repository", _attest)
+    branch_calls = 0
+
+    def _branch(*_args):
+        nonlocal branch_calls
+        branch_calls += 1
+        if drift_surface == "branch" and branch_calls == 3:
+            return "codex/escaped"
+        return state.branch
+
+    monkeypatch.setattr(trusted_git, "run_git", _branch)
+    ordinary_calls = 0
+    ignored_calls = 0
+
+    def _inventory(_root, *argv):
+        nonlocal ordinary_calls, ignored_calls
+        if "--ignored" in argv:
+            ignored_calls += 1
+            if drift_surface == "ignored" and ignored_calls == 3:
+                return b"ignored.tmp\x00"
+        else:
+            ordinary_calls += 1
+            if drift_surface == "ordinary" and ordinary_calls == 3:
+                return b"ordinary.tmp\x00"
+        return b""
+
+    monkeypatch.setattr(trusted_git, "run_git_bytes", _inventory)
+    provider_calls = 0
+
+    def _provider(*_args, **_kwargs):
+        nonlocal provider_calls
+        provider_calls += 1
+        return SimpleNamespace(
+            returncode=0,
+            stdout=json.dumps({"decision": "pass", "review": "Synthetic pass."}),
+            stderr="",
+        )
+
+    monkeypatch.setattr(ariadne_antigravity.subprocess, "run", _provider)
+
+    with pytest.raises(RuntimeError, match="complete review attestation failed"):
+        ariadne_antigravity.run_worker(
+            packet_path=packet,
+            cwd=tmp_path,
+            output_path=output,
+            orchestrator_receipt_path=orchestrator_receipt,
+            model="gemini-3.7-flash-high",
+            os_sandbox=False,
+        )
+
+    failure = json.loads(output.read_text(encoding="utf-8"))
+    assert provider_calls == 1
+    assert failure["candidate_review_admitted"] is False
+    assert failure["reason_code"] == "complete_review_attestation_postcondition_failed"
+
+
+def test_nonzero_provider_return_still_requires_post_provider_complete_attestation(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    packet = tmp_path / "packet.md"
+    packet.write_text("Review only.", encoding="utf-8")
+    output = tmp_path / "failure.json"
+    orchestrator_receipt = _passed_orchestrator_receipt(tmp_path)
+    state = WorktreeState(tmp_path, "codex/verifier-candidate", TEST_HEAD, False)
+    states = iter([state, state])
+    monkeypatch.setattr(
+        ariadne_antigravity,
+        "inspect_worktree",
+        lambda *_args, **_kwargs: next(states),
+    )
+    calls = 0
+
+    def _attest(_root, *, expected_commit, **_kwargs):
+        nonlocal calls
+        calls += 1
+        head = expected_commit or TEST_HEAD
+        digest = TEST_COMPLETE_DIGEST if calls < 3 else "sha256:" + "e" * 64
+        return {
+            "worktree": {"resolved_path": str(Path(_root).resolve())},
+            "head": head,
+            "head_tree": TEST_TREE,
+            "index_tree": TEST_TREE,
+            "trusted_git_identity_sha256": TEST_IDENTITY_DIGEST,
+            "complete_tracked_tree_attestation": {
+                "head": head,
+                "head_tree": TEST_TREE,
+                "index_tree": TEST_TREE,
+                "complete_tracked_tree_sha256": digest,
+                "complete_tracked_path_count": 1,
+            },
+        }
+
+    monkeypatch.setattr(trusted_git, "attest_repository", _attest)
+    monkeypatch.setattr(
+        ariadne_antigravity.subprocess,
+        "run",
+        lambda *_args, **_kwargs: SimpleNamespace(
+            returncode=9, stdout="transport output", stderr="transport error"
+        ),
+    )
+
+    with pytest.raises(RuntimeError, match="complete review attestation failed"):
+        ariadne_antigravity.run_worker(
+            packet_path=packet,
+            cwd=tmp_path,
+            output_path=output,
+            orchestrator_receipt_path=orchestrator_receipt,
+            model="gemini-3.7-flash-high",
+            os_sandbox=False,
+        )
+
+    failure = json.loads(output.read_text(encoding="utf-8"))
+    assert calls == 3
+    assert failure["exit_code"] == 9
+    assert failure["candidate_review_admitted"] is False
+
+
+def test_complete_attestation_detects_same_size_restored_mtime_provider_drift(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    candidate = tmp_path / "candidate"
+    candidate.mkdir()
+
+    def _git(*argv: str) -> str:
+        completed = _REAL_SUBPROCESS_RUN(
+            ["git", *argv],
+            cwd=candidate,
+            check=True,
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+        )
+        return completed.stdout.strip()
+
+    _git("init", "-b", "codex/verifier-candidate")
+    _git("config", "user.email", "tests@example.invalid")
+    _git("config", "user.name", "G1A3 R1 Tests")
+    _git("config", "core.autocrlf", "false")
+    tracked = candidate / "AGENTS.md"
+    tracked.write_bytes(b"reviewed-bytes\n")
+    _git("add", "AGENTS.md")
+    _git("commit", "-m", "seed candidate")
+    original_stat = tracked.stat()
+
+    evidence = tmp_path / "evidence"
+    evidence.mkdir()
+    packet = evidence / "packet.md"
+    packet.write_text("Review only.", encoding="utf-8")
+    output = evidence / "failure.json"
+    orchestrator_receipt = _passed_orchestrator_receipt(evidence)
+    monkeypatch.setattr(trusted_git, "attest_repository", _REAL_ATTEST_REPOSITORY)
+    monkeypatch.setattr(trusted_git, "run_git", _REAL_RUN_GIT)
+    monkeypatch.setattr(trusted_git, "run_git_bytes", _REAL_RUN_GIT_BYTES)
+
+    def _provider_or_git(command, *args, **kwargs):
+        if command and command[0] == "agy":
+            tracked.write_bytes(b"mutated-bytes!\n")
+            assert tracked.stat().st_size == original_stat.st_size
+            os.utime(
+                tracked,
+                ns=(original_stat.st_atime_ns, original_stat.st_mtime_ns),
+            )
+            return SimpleNamespace(
+                returncode=0,
+                stdout=json.dumps({"decision": "pass", "review": "Synthetic pass."}),
+                stderr="",
+            )
+        return _REAL_SUBPROCESS_RUN(command, *args, **kwargs)
+
+    monkeypatch.setattr(ariadne_antigravity.subprocess, "run", _provider_or_git)
+
+    with pytest.raises(RuntimeError, match="complete review attestation failed"):
+        ariadne_antigravity.run_worker(
+            packet_path=packet,
+            cwd=candidate,
+            output_path=output,
+            orchestrator_receipt_path=orchestrator_receipt,
+            model="gemini-3.7-flash-high",
+            os_sandbox=False,
+        )
+
+    failure = json.loads(output.read_text(encoding="utf-8"))
+    assert failure["candidate_review_admitted"] is False
+    assert failure["reason_code"] == "complete_review_attestation_postcondition_failed"
+
+
+def test_same_size_restored_mtime_drift_before_attestation_starts_no_provider(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    candidate = tmp_path / "candidate"
+    candidate.mkdir()
+
+    def _git(*argv: str) -> str:
+        completed = _REAL_SUBPROCESS_RUN(
+            ["git", *argv],
+            cwd=candidate,
+            check=True,
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+        )
+        return completed.stdout.strip()
+
+    _git("init", "-b", "codex/verifier-candidate")
+    _git("config", "user.email", "tests@example.invalid")
+    _git("config", "user.name", "G1A3 R1 Tests")
+    _git("config", "core.autocrlf", "false")
+    tracked = candidate / "AGENTS.md"
+    tracked.write_bytes(b"reviewed-bytes\n")
+    _git("add", "AGENTS.md")
+    _git("commit", "-m", "seed candidate")
+    original_stat = tracked.stat()
+    evidence = tmp_path / "evidence"
+    evidence.mkdir()
+    packet = evidence / "packet.md"
+    packet.write_text("Review only.", encoding="utf-8")
+    output = evidence / "must-not-exist.json"
+    orchestrator_receipt = _passed_orchestrator_receipt(evidence)
+    monkeypatch.setattr(trusted_git, "attest_repository", _REAL_ATTEST_REPOSITORY)
+    monkeypatch.setattr(trusted_git, "run_git", _REAL_RUN_GIT)
+    monkeypatch.setattr(trusted_git, "run_git_bytes", _REAL_RUN_GIT_BYTES)
+    real_build_command = ariadne_antigravity.build_command
+
+    def _build_then_mutate(**kwargs):
+        command = real_build_command(**kwargs)
+        tracked.write_bytes(b"mutated-bytes!\n")
+        assert tracked.stat().st_size == original_stat.st_size
+        os.utime(
+            tracked,
+            ns=(original_stat.st_atime_ns, original_stat.st_mtime_ns),
+        )
+        return command
+
+    monkeypatch.setattr(ariadne_antigravity, "build_command", _build_then_mutate)
+    provider_calls = 0
+
+    def _provider_or_git(command, *args, **kwargs):
+        nonlocal provider_calls
+        if command and command[0] == "agy":
+            provider_calls += 1
+            raise AssertionError("provider must not run")
+        return _REAL_SUBPROCESS_RUN(command, *args, **kwargs)
+
+    monkeypatch.setattr(ariadne_antigravity.subprocess, "run", _provider_or_git)
+
+    with pytest.raises(trusted_git.TrustedGitError):
+        ariadne_antigravity.run_worker(
+            packet_path=packet,
+            cwd=candidate,
+            output_path=output,
+            orchestrator_receipt_path=orchestrator_receipt,
+            model="gemini-3.7-flash-high",
+            os_sandbox=False,
+        )
+
+    assert provider_calls == 0
+    assert not output.exists()
+
+
+@pytest.mark.parametrize(
+    ("config_key", "config_value"),
+    [("core.checkStat", "minimal"), ("core.trustctime", "false")],
+)
+def test_provider_created_repository_configuration_drift_fails_closed(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    config_key: str,
+    config_value: str,
+) -> None:
+    candidate = tmp_path / "candidate"
+    candidate.mkdir()
+
+    def _git(*argv: str) -> str:
+        completed = _REAL_SUBPROCESS_RUN(
+            ["git", *argv],
+            cwd=candidate,
+            check=True,
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+        )
+        return completed.stdout.strip()
+
+    _git("init", "-b", "codex/verifier-candidate")
+    _git("config", "user.email", "tests@example.invalid")
+    _git("config", "user.name", "G1A3 R1 Tests")
+    _git("config", "core.autocrlf", "false")
+    (candidate / "AGENTS.md").write_bytes(b"reviewed-bytes\n")
+    _git("add", "AGENTS.md")
+    _git("commit", "-m", "seed candidate")
+    evidence = tmp_path / "evidence"
+    evidence.mkdir()
+    packet = evidence / "packet.md"
+    packet.write_text("Review only.", encoding="utf-8")
+    output = evidence / "failure.json"
+    orchestrator_receipt = _passed_orchestrator_receipt(evidence)
+    monkeypatch.setattr(trusted_git, "attest_repository", _REAL_ATTEST_REPOSITORY)
+    monkeypatch.setattr(trusted_git, "run_git", _REAL_RUN_GIT)
+    monkeypatch.setattr(trusted_git, "run_git_bytes", _REAL_RUN_GIT_BYTES)
+
+    def _provider_or_git(command, *args, **kwargs):
+        if command and command[0] == "agy":
+            _git("config", config_key, config_value)
+            return SimpleNamespace(
+                returncode=0,
+                stdout=json.dumps({"decision": "pass", "review": "Synthetic pass."}),
+                stderr="",
+            )
+        return _REAL_SUBPROCESS_RUN(command, *args, **kwargs)
+
+    monkeypatch.setattr(ariadne_antigravity.subprocess, "run", _provider_or_git)
+
+    with pytest.raises(RuntimeError, match="complete review attestation failed"):
+        ariadne_antigravity.run_worker(
+            packet_path=packet,
+            cwd=candidate,
+            output_path=output,
+            orchestrator_receipt_path=orchestrator_receipt,
+            model="gemini-3.7-flash-high",
+            os_sandbox=False,
+        )
+
+    failure = json.loads(output.read_text(encoding="utf-8"))
+    assert failure["candidate_review_admitted"] is False
 
 
 def test_nonzero_transport_writes_digest_only_failure_receipt(
@@ -242,7 +1213,7 @@ def test_nonzero_transport_writes_digest_only_failure_receipt(
     state = WorktreeState(
         root=tmp_path,
         branch="codex/verifier-candidate",
-        head="abc123",
+        head=TEST_HEAD,
         dirty=False,
     )
     states = iter([state, state])
@@ -329,24 +1300,44 @@ def test_run_worker_fails_if_verifier_modifies_candidate(
     packet.write_text("Review only.", encoding="utf-8")
     output = tmp_path / "receipt.json"
     orchestrator_receipt = _passed_orchestrator_receipt(tmp_path)
-    before = WorktreeState(
-        root=tmp_path,
-        branch="codex/verifier-candidate",
-        head="abc123",
-        dirty=False,
-    )
-    after = WorktreeState(
-        root=tmp_path,
-        branch="codex/verifier-candidate",
-        head="abc123",
-        dirty=True,
-    )
-    states = iter([before, after])
     monkeypatch.setattr(
         ariadne_antigravity,
         "inspect_worktree",
-        lambda *_args, **_kwargs: next(states),
+        lambda *_args, **_kwargs: pytest.fail("legacy inspect_worktree executed"),
     )
+    attestation_calls = 0
+
+    def _attest(root, *, expected_commit=None, **_kwargs):
+        nonlocal attestation_calls
+        attestation_calls += 1
+        head = expected_commit or TEST_HEAD
+        digest = TEST_COMPLETE_DIGEST if attestation_calls < 3 else "sha256:" + "e" * 64
+        return {
+            "worktree": {"resolved_path": str(Path(root).resolve())},
+            "head": head,
+            "head_tree": TEST_TREE,
+            "index_tree": TEST_TREE,
+            "trusted_git_identity_sha256": TEST_IDENTITY_DIGEST,
+            "complete_tracked_tree_attestation": {
+                "head": head,
+                "head_tree": TEST_TREE,
+                "index_tree": TEST_TREE,
+                "complete_tracked_tree_sha256": digest,
+                "complete_tracked_path_count": 1,
+            },
+        }
+
+    def _run_git(root, *argv):
+        if "--show-toplevel" in argv:
+            return str(Path(root).resolve())
+        if "symbolic-ref" in argv:
+            return "codex/verifier-candidate"
+        if argv == ("rev-parse", "HEAD"):
+            return TEST_HEAD
+        raise AssertionError(f"unexpected trusted Git command: {argv!r}")
+
+    monkeypatch.setattr(trusted_git, "attest_repository", _attest)
+    monkeypatch.setattr(trusted_git, "run_git", _run_git)
     monkeypatch.setattr(
         ariadne_antigravity.subprocess,
         "run",
@@ -359,7 +1350,7 @@ def test_run_worker_fails_if_verifier_modifies_candidate(
         ),
     )
 
-    with pytest.raises(RuntimeError, match="modified its read-only candidate"):
+    with pytest.raises(RuntimeError, match="complete review attestation failed"):
         ariadne_antigravity.run_worker(
             packet_path=packet,
             cwd=tmp_path,
@@ -373,10 +1364,10 @@ def test_run_worker_fails_if_verifier_modifies_candidate(
     assert failure["schema_version"] == "ariadne.egress-failure-receipt.v1"
     assert failure["status"] == ("egress_failed_without_admitted_terminal_decision")
     assert failure["exit_code"] == 0
-    assert failure["head_before"] == failure["head_after"] == "abc123"
+    assert failure["head_before"] == failure["head_after"] == TEST_HEAD
     assert failure["dirty_after"] is True
     assert failure["worktree_identity_unchanged"] is False
-    assert failure["reason_code"] == "read_only_worktree_postcondition_failed"
+    assert failure["reason_code"] == "complete_review_attestation_postcondition_failed"
     assert failure["terminal_decision_admitted"] is False
     assert failure["candidate_review_admitted"] is False
     assert failure["stdout"]["bytes"] > 0
@@ -403,7 +1394,7 @@ def test_run_worker_rejects_missing_or_duplicate_terminal_decision(
     state = WorktreeState(
         root=tmp_path,
         branch="codex/verifier-candidate",
-        head="abc123",
+        head=TEST_HEAD,
         dirty=False,
     )
     states = iter([state, state])
@@ -478,7 +1469,7 @@ def test_run_worker_rejects_missing_or_conflicting_structured_decision(
     state = WorktreeState(
         root=tmp_path,
         branch="codex/verifier-candidate",
-        head="abc123",
+        head=TEST_HEAD,
         dirty=False,
     )
     states = iter([state, state])
@@ -1152,7 +2143,12 @@ def test_legacy_text_mode_remains_transport_compatibility_without_assessment(
     assert "verdict_assessment" not in receipt
 
 
-def test_current_programme_admits_only_the_exact_g1a2_task_paths() -> None:
+def test_current_programme_admits_only_the_exact_g1a3_r1_task_paths(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setattr(trusted_git, "attest_repository", _REAL_ATTEST_REPOSITORY)
+    monkeypatch.setattr(trusted_git, "run_git", _REAL_RUN_GIT)
+    monkeypatch.setattr(trusted_git, "run_git_bytes", _REAL_RUN_GIT_BYTES)
     manifest = build_task_manifest(Path(__file__).resolve().parents[1])
     decision = programme_admission.evaluate_programme_admission(
         repo_root=Path(__file__).resolve().parents[1],
@@ -1162,12 +2158,14 @@ def test_current_programme_admits_only_the_exact_g1a2_task_paths() -> None:
 
     assert decision.admitted is True
     assert set(manifest["allowed_path_roots"]) == {
+        "scripts/agent_worktrees.py",
         "scripts/ariadne_antigravity.py",
+        "tests/test_agent_worktrees.py",
         "tests/test_ariadne_antigravity.py",
     }
     for widened_paths in (
         ["scripts/ariadne_antigravity.py"],
-        [*manifest["allowed_path_roots"], "scripts/agent_worktrees.py"],
+        [*manifest["allowed_path_roots"], "scripts/forbidden.py"],
     ):
         widened = dict(manifest)
         widened["allowed_path_roots"] = widened_paths
@@ -1179,7 +2177,12 @@ def test_current_programme_admits_only_the_exact_g1a2_task_paths() -> None:
         assert rejected.admitted is False
 
 
-def test_current_programme_denies_provider_invocation_and_later_work() -> None:
+def test_current_programme_denies_provider_invocation_and_later_work(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setattr(trusted_git, "attest_repository", _REAL_ATTEST_REPOSITORY)
+    monkeypatch.setattr(trusted_git, "run_git", _REAL_RUN_GIT)
+    monkeypatch.setattr(trusted_git, "run_git_bytes", _REAL_RUN_GIT_BYTES)
     root = Path(__file__).resolve().parents[1]
     manifest = build_task_manifest(root)
     provider = programme_admission.evaluate_programme_admission(
@@ -1188,15 +2191,18 @@ def test_current_programme_denies_provider_invocation_and_later_work() -> None:
         entrypoint="provider_invocation",
     )
     policy = programme_admission.load_programme_policy(root)
-    profile = policy.overlay["profiles"]["G1A.2_ACTIVE"]
+    profile = policy.overlay["profiles"][programme_admission.G1A3_R1_ACTIVE_PROFILE]
 
     assert provider.admitted is False
     assert provider.reason_codes == ["provider_invocation_closed_in_active_profile"]
-    assert programme_admission.g1a2_provider_contract_reasons(root) == []
-    assert profile["allowed_paths"] == [
+    assert programme_admission.g1a3_review_producer_contract_reasons(root) == []
+    assert programme_admission.g1a3_integration_contract_reasons(root) == []
+    assert set(profile["allowed_paths"]) == {
+        "scripts/agent_worktrees.py",
         "scripts/ariadne_antigravity.py",
+        "tests/test_agent_worktrees.py",
         "tests/test_ariadne_antigravity.py",
-    ]
+    }
     assert {
         "g1b_work",
         "integration",

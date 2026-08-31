@@ -1122,19 +1122,493 @@ def audit(args: argparse.Namespace) -> None:
 
 def record_integration(args: argparse.Namespace) -> None:
     _require_command_admission(args, entrypoint="integration")
-    commit_ref = args.integration_commit or "HEAD"
-    resolved = git_stdout(["rev-parse", "--short", commit_ref], check=False)
-    commit = resolved or commit_ref
-    path = append_integration_log(
-        agent=args.agent,
-        task=args.task,
-        branch=args.branch,
-        review=args.review,
-        integration_commit=commit,
-        result=args.result,
-        follow_up=args.follow_up,
+    import hashlib
+    import json
+    import stat
+
+    from orchestration_harness import trusted_git
+    from orchestration_harness.verdict import (
+        ArtifactKind,
+        ReviewVerdict,
+        parse_artifact_verdict,
     )
-    print(f"[ok] wrote {path.relative_to(REPO_ROOT)}")
+
+    class _IntegrationReceiptRejected(ValueError):
+        pass
+
+    def _reject(reason_code: str) -> None:
+        raise _IntegrationReceiptRejected(reason_code)
+
+    def _is_bounded_text(value: object, limit: int) -> bool:
+        return (
+            isinstance(value, str)
+            and bool(value)
+            and len(value) <= limit
+            and "\x00" not in value
+            and "\r" not in value
+            and "\n" not in value
+        )
+
+    def _is_within(path: Path, root: Path) -> bool:
+        try:
+            path.relative_to(root)
+        except ValueError:
+            return False
+        return True
+
+    def _canonical_json_bytes(value: object) -> bytes:
+        return json.dumps(
+            value,
+            ensure_ascii=False,
+            sort_keys=True,
+            separators=(",", ":"),
+        ).encode("utf-8")
+
+    def _canonical_digest(value: object) -> str:
+        return "sha256:" + hashlib.sha256(_canonical_json_bytes(value)).hexdigest()
+
+    def _strict_json_object(payload: bytes) -> dict[str, object]:
+        def _object(pairs: list[tuple[str, object]]) -> dict[str, object]:
+            value: dict[str, object] = {}
+            for key, item in pairs:
+                if key in value:
+                    _reject("receipt_json_duplicate_key")
+                value[key] = item
+            return value
+
+        def _constant(_: str) -> object:
+            _reject("receipt_json_constant_invalid")
+
+        try:
+            text = payload.decode("utf-8")
+            value = json.loads(
+                text,
+                object_pairs_hook=_object,
+                parse_constant=_constant,
+            )
+        except UnicodeDecodeError:
+            _reject("receipt_utf8_invalid")
+        except json.JSONDecodeError:
+            _reject("receipt_json_invalid")
+        if not isinstance(value, dict):
+            _reject("receipt_root_invalid")
+        return value
+
+    full_sha = re.compile(r"[0-9a-f]{40}").fullmatch
+    raw_digest = re.compile(r"[0-9a-f]{64}").fullmatch
+    prefixed_digest = re.compile(r"sha256:[0-9a-f]{64}").fullmatch
+    attestation_keys = {
+        "head",
+        "head_tree",
+        "index_tree",
+        "complete_tracked_tree_sha256",
+        "complete_tracked_path_count",
+        "trusted_git_identity_sha256",
+    }
+    inventory_keys = {
+        "ordinary_count",
+        "ordinary_paths_sha256",
+        "ignored_count",
+        "ignored_paths_sha256",
+    }
+
+    def _validate_attestation_projection(value: object) -> dict[str, object]:
+        if not isinstance(value, dict) or set(value) != attestation_keys:
+            _reject("receipt_complete_attestation_schema_invalid")
+        count = value["complete_tracked_path_count"]
+        if (
+            not isinstance(value["head"], str)
+            or full_sha(value["head"]) is None
+            or not isinstance(value["head_tree"], str)
+            or full_sha(value["head_tree"]) is None
+            or value["index_tree"] != value["head_tree"]
+            or not isinstance(value["complete_tracked_tree_sha256"], str)
+            or prefixed_digest(value["complete_tracked_tree_sha256"]) is None
+            or type(count) is not int
+            or count <= 0
+            or not isinstance(value["trusted_git_identity_sha256"], str)
+            or prefixed_digest(value["trusted_git_identity_sha256"]) is None
+        ):
+            _reject("receipt_complete_attestation_invalid")
+        return value
+
+    def _validate_inventory_projection(value: object) -> dict[str, object]:
+        if not isinstance(value, dict) or set(value) != inventory_keys:
+            _reject("receipt_nontracked_inventory_schema_invalid")
+        empty_digest = _canonical_digest([])
+        if (
+            type(value["ordinary_count"]) is not int
+            or value["ordinary_count"] != 0
+            or type(value["ignored_count"]) is not int
+            or value["ignored_count"] != 0
+            or value["ordinary_paths_sha256"] != empty_digest
+            or value["ignored_paths_sha256"] != empty_digest
+        ):
+            _reject("receipt_nontracked_inventory_invalid")
+        return value
+
+    def _decode_nul_paths(payload: bytes) -> list[str]:
+        if not payload:
+            return []
+        if not payload.endswith(b"\x00"):
+            _reject("candidate_nontracked_inventory_invalid")
+        paths = [part.decode("utf-8") for part in payload[:-1].split(b"\x00")]
+        if any(not path for path in paths):
+            _reject("candidate_nontracked_inventory_invalid")
+        return sorted(paths)
+
+    def _fresh_inventory(candidate_root: Path) -> dict[str, object]:
+        ordinary_paths = _decode_nul_paths(
+            trusted_git.run_git_bytes(
+                candidate_root,
+                "ls-files",
+                "--others",
+                "--exclude-standard",
+                "-z",
+            )
+        )
+        ignored_paths = _decode_nul_paths(
+            trusted_git.run_git_bytes(
+                candidate_root,
+                "ls-files",
+                "--others",
+                "--ignored",
+                "--exclude-standard",
+                "-z",
+            )
+        )
+        return {
+            "ordinary_count": len(ordinary_paths),
+            "ordinary_paths_sha256": _canonical_digest(ordinary_paths),
+            "ignored_count": len(ignored_paths),
+            "ignored_paths_sha256": _canonical_digest(ignored_paths),
+        }
+
+    def _fresh_attestation_projection(identity: dict[str, object]) -> dict[str, object]:
+        complete = identity.get("complete_tracked_tree_attestation")
+        if not isinstance(complete, dict):
+            _reject("candidate_complete_attestation_missing")
+        projection = {
+            "head": identity.get("head"),
+            "head_tree": identity.get("head_tree"),
+            "index_tree": identity.get("index_tree"),
+            "complete_tracked_tree_sha256": complete.get(
+                "complete_tracked_tree_sha256"
+            ),
+            "complete_tracked_path_count": complete.get("complete_tracked_path_count"),
+            "trusted_git_identity_sha256": identity.get("trusted_git_identity_sha256"),
+        }
+        if (
+            complete.get("head") != projection["head"]
+            or complete.get("head_tree") != projection["head_tree"]
+            or complete.get("index_tree") != projection["index_tree"]
+        ):
+            _reject("candidate_complete_attestation_inconsistent")
+        return _validate_attestation_projection(projection)
+
+    try:
+        if args.result != "integrated":
+            _reject("integration_result_sentinel_invalid")
+        if not isinstance(args.review, str) or not args.review:
+            _reject("receipt_path_invalid")
+        supplied_receipt_path = Path(args.review)
+        if not supplied_receipt_path.is_absolute():
+            _reject("receipt_path_not_absolute")
+        receipt_leaf = supplied_receipt_path.lstat()
+        reparse_flag = getattr(stat, "FILE_ATTRIBUTE_REPARSE_POINT", 0x400)
+        if (
+            not stat.S_ISREG(receipt_leaf.st_mode)
+            or supplied_receipt_path.is_symlink()
+            or getattr(receipt_leaf, "st_file_attributes", 0) & reparse_flag
+        ):
+            _reject("receipt_path_not_regular")
+        receipt_path = supplied_receipt_path.resolve(strict=True)
+        controller_root = REPO_ROOT.resolve(strict=True)
+        if _is_within(receipt_path, controller_root):
+            _reject("receipt_path_inside_controller")
+        if not 0 < receipt_leaf.st_size <= 4 * 1024 * 1024:
+            _reject("receipt_size_invalid")
+        receipt_bytes = receipt_path.read_bytes()
+        receipt_after = receipt_path.stat()
+        before_identity = (
+            receipt_leaf.st_dev,
+            receipt_leaf.st_ino,
+            receipt_leaf.st_size,
+            receipt_leaf.st_mtime_ns,
+        )
+        after_identity = (
+            receipt_after.st_dev,
+            receipt_after.st_ino,
+            receipt_after.st_size,
+            receipt_after.st_mtime_ns,
+        )
+        if (
+            before_identity != after_identity
+            or len(receipt_bytes) != receipt_leaf.st_size
+        ):
+            _reject("receipt_changed_during_read")
+        worker_receipt_digest = hashlib.sha256(receipt_bytes).hexdigest()
+        receipt = _strict_json_object(receipt_bytes)
+
+        base_keys = {
+            "schema_version",
+            "status",
+            "transport",
+            "model",
+            "requested_model",
+            "reasoning_effort",
+            "decision",
+            "decision_contract",
+            "worktree",
+            "branch",
+            "head_before",
+            "head_after",
+            "dirty_after",
+            "os_sandbox",
+            "orchestrator_receipt_sha256",
+            "result",
+            "decision_envelope",
+            "complete_review_attestation_before",
+            "complete_review_attestation_after",
+            "nontracked_inventory_before",
+            "nontracked_inventory_after",
+        }
+        command_keys = base_keys | {"command_manifest_sha256", "command_results"}
+        receipt_keys = set(receipt)
+        if receipt_keys == base_keys:
+            has_commands = False
+        elif receipt_keys == command_keys:
+            has_commands = True
+        else:
+            _reject("receipt_schema_invalid")
+
+        if receipt["schema_version"] != "ariadne.worker_receipt.v1":
+            _reject("receipt_version_invalid")
+        if receipt["status"] != "completed":
+            _reject("receipt_status_non_authorizing")
+        if receipt["transport"] != "antigravity_new_project_bound_readonly_worktree":
+            _reject("receipt_transport_non_authorizing")
+        if receipt["decision_contract"] != "schema_constrained_json_v1":
+            _reject("receipt_decision_contract_non_authorizing")
+        if receipt["decision"] != "pass":
+            _reject("receipt_decision_non_authorizing")
+        if receipt["reasoning_effort"] not in {"low", "medium", "high"}:
+            _reject("receipt_reasoning_effort_invalid")
+        if type(receipt["dirty_after"]) is not bool or receipt["dirty_after"]:
+            _reject("receipt_dirty_after_invalid")
+        if type(receipt["os_sandbox"]) is not bool:
+            _reject("receipt_os_sandbox_invalid")
+        if not _is_bounded_text(receipt["model"], 256) or not _is_bounded_text(
+            receipt["requested_model"], 256
+        ):
+            _reject("receipt_model_invalid")
+        if not _is_bounded_text(receipt["worktree"], 4096) or not _is_bounded_text(
+            receipt["branch"], 1024
+        ):
+            _reject("receipt_worktree_or_branch_invalid")
+        if (
+            not isinstance(receipt["head_before"], str)
+            or full_sha(receipt["head_before"]) is None
+            or not isinstance(receipt["head_after"], str)
+            or full_sha(receipt["head_after"]) is None
+        ):
+            _reject("receipt_head_invalid")
+        if (
+            not isinstance(receipt["orchestrator_receipt_sha256"], str)
+            or raw_digest(receipt["orchestrator_receipt_sha256"]) is None
+        ):
+            _reject("receipt_orchestrator_digest_invalid")
+        if (
+            not isinstance(receipt["result"], str)
+            or not receipt["result"]
+            or len(receipt["result"]) > 40_000
+        ):
+            _reject("receipt_result_invalid")
+
+        review_before = _validate_attestation_projection(
+            receipt["complete_review_attestation_before"]
+        )
+        review_after = _validate_attestation_projection(
+            receipt["complete_review_attestation_after"]
+        )
+        inventory_before = _validate_inventory_projection(
+            receipt["nontracked_inventory_before"]
+        )
+        inventory_after = _validate_inventory_projection(
+            receipt["nontracked_inventory_after"]
+        )
+        if review_before != review_after:
+            _reject("receipt_complete_attestation_changed")
+        if inventory_before != inventory_after:
+            _reject("receipt_nontracked_inventory_changed")
+
+        envelope = receipt["decision_envelope"]
+        expected_envelope_keys = {
+            "decision",
+            "review",
+            "verdict_assessment",
+        } | ({"command_results"} if has_commands else set())
+        if not isinstance(envelope, dict) or set(envelope) != expected_envelope_keys:
+            _reject("receipt_envelope_schema_invalid")
+        if envelope["decision"] != receipt["decision"]:
+            _reject("receipt_envelope_decision_mismatch")
+        if envelope["review"] != receipt["result"]:
+            _reject("receipt_envelope_review_mismatch")
+        canonical_decision = ReviewVerdict(receipt["decision"])
+        canonical_marker = f"DECISION: {canonical_decision.value.upper()}"
+        assessment = parse_artifact_verdict(canonical_marker, ArtifactKind.DECISION)
+        derived_assessment = assessment.to_dict()
+        if (
+            canonical_decision is not ReviewVerdict.PASS
+            or not assessment.integration_authorized
+            or _canonical_json_bytes(envelope["verdict_assessment"])
+            != _canonical_json_bytes(derived_assessment)
+        ):
+            _reject("receipt_verdict_assessment_mismatch")
+
+        command_manifest_digest: str | None = None
+        command_results_digest: str | None = None
+        if has_commands:
+            if (
+                not isinstance(receipt["command_manifest_sha256"], str)
+                or raw_digest(receipt["command_manifest_sha256"]) is None
+            ):
+                _reject("receipt_command_manifest_digest_invalid")
+            if _canonical_json_bytes(
+                receipt["command_results"]
+            ) != _canonical_json_bytes(envelope["command_results"]):
+                _reject("receipt_command_results_mismatch")
+            command_results = receipt["command_results"]
+            if (
+                not isinstance(command_results, list)
+                or not 1 <= len(command_results) <= 64
+            ):
+                _reject("receipt_command_results_invalid")
+            command_ids: set[str] = set()
+            for row in command_results:
+                if not isinstance(row, dict) or set(row) != {"id", "argv", "exit_code"}:
+                    _reject("receipt_command_result_schema_invalid")
+                command_id = row["id"]
+                if (
+                    not isinstance(command_id, str)
+                    or re.fullmatch(r"[A-Z][A-Z0-9_-]{0,31}", command_id) is None
+                    or command_id in command_ids
+                ):
+                    _reject("receipt_command_id_invalid")
+                command_ids.add(command_id)
+                argv = row["argv"]
+                if not isinstance(argv, list) or not 1 <= len(argv) <= 128:
+                    _reject("receipt_command_argv_invalid")
+                if any(not _is_bounded_text(token, 4096) for token in argv):
+                    _reject("receipt_command_token_invalid")
+                if type(row["exit_code"]) is not int or row["exit_code"] != 0:
+                    _reject("receipt_command_exit_invalid")
+            command_manifest_digest = "sha256:" + receipt["command_manifest_sha256"]
+            command_results_digest = _canonical_digest(command_results)
+
+        integration_commit = args.integration_commit
+        if (
+            not isinstance(integration_commit, str)
+            or full_sha(integration_commit) is None
+        ):
+            _reject("integration_commit_invalid")
+        if (
+            receipt["head_before"] != integration_commit
+            or receipt["head_after"] != integration_commit
+            or review_before["head"] != integration_commit
+        ):
+            _reject("integration_commit_receipt_mismatch")
+        if not isinstance(args.branch, str) or args.branch != receipt["branch"]:
+            _reject("integration_branch_receipt_mismatch")
+        candidate_supplied = Path(receipt["worktree"])
+        if not candidate_supplied.is_absolute():
+            _reject("candidate_worktree_not_absolute")
+        candidate_root = candidate_supplied.resolve(strict=True)
+        if not candidate_root.is_dir() or candidate_root == controller_root:
+            _reject("candidate_worktree_invalid")
+        if _is_within(receipt_path, candidate_root):
+            _reject("receipt_path_inside_candidate")
+
+        identity = trusted_git.attest_repository(
+            candidate_root,
+            attested_paths=["AGENTS.md"],
+            expected_commit=integration_commit,
+            complete_tracked_tree=True,
+        )
+        fresh_attestation = _fresh_attestation_projection(identity)
+        fresh_inventory = _fresh_inventory(candidate_root)
+        if fresh_attestation != review_before or fresh_inventory != inventory_before:
+            _reject("candidate_review_binding_mismatch")
+        observed_branch = trusted_git.run_git(
+            candidate_root, "symbolic-ref", "--quiet", "--short", "HEAD"
+        )
+        if observed_branch != receipt["branch"] or observed_branch != args.branch:
+            _reject("candidate_branch_mismatch")
+        status = trusted_git.run_git_bytes(
+            candidate_root,
+            "status",
+            "--porcelain=v1",
+            "-z",
+            "--untracked-files=all",
+        )
+        if (
+            status
+            or fresh_inventory["ordinary_count"]
+            or fresh_inventory["ignored_count"]
+        ):
+            _reject("candidate_worktree_not_clean")
+
+        audit = json.dumps(
+            {
+                "authority_contract": "canonical_g1a3_r1_complete_review_binding_v1",
+                "candidate_tree": fresh_attestation["head_tree"],
+                "command_manifest_sha256": command_manifest_digest,
+                "command_results_sha256": command_results_digest,
+                "complete_tracked_path_count": fresh_attestation[
+                    "complete_tracked_path_count"
+                ],
+                "complete_tracked_tree_sha256": fresh_attestation[
+                    "complete_tracked_tree_sha256"
+                ],
+                "decision_contract": "schema_constrained_json_v1",
+                "ignored_untracked_count": fresh_inventory["ignored_count"],
+                "orchestrator_receipt_sha256": "sha256:"
+                + receipt["orchestrator_receipt_sha256"],
+                "ordinary_untracked_count": fresh_inventory["ordinary_count"],
+                "trusted_git_identity_sha256": fresh_attestation[
+                    "trusted_git_identity_sha256"
+                ],
+                "verifier_review_sha256": "sha256:"
+                + hashlib.sha256(receipt["result"].encode("utf-8")).hexdigest(),
+                "worker_receipt_sha256": "sha256:" + worker_receipt_digest,
+            },
+            ensure_ascii=False,
+            sort_keys=True,
+            separators=(",", ":"),
+        )
+        append_integration_log(
+            agent=args.agent,
+            task=args.task,
+            branch=observed_branch,
+            review=audit,
+            integration_commit=integration_commit,
+            result="integrated",
+            follow_up=args.follow_up,
+        )
+    except _IntegrationReceiptRejected as error:
+        print(f"[rejected] {error}", file=sys.stderr)
+        raise SystemExit(1) from None
+    except (
+        OSError,
+        TypeError,
+        ValueError,
+        KeyError,
+        UnicodeError,
+        trusted_git.TrustedGitError,
+    ):
+        print("[rejected] integration_receipt_validation_failed", file=sys.stderr)
+        raise SystemExit(1) from None
+    print("[ok] wrote orchestration/integration_log.md")
 
 
 def retire_stale(args: argparse.Namespace) -> None:

@@ -436,13 +436,169 @@ def run_worker(
         manifest_path=programme_task_manifest,
         entrypoint="provider_invocation",
     )
+    from orchestration_harness import trusted_git
+
+    def _canonical_digest(value: object) -> str:
+        rendered = json.dumps(
+            value,
+            ensure_ascii=False,
+            sort_keys=True,
+            separators=(",", ":"),
+        ).encode("utf-8")
+        return "sha256:" + hashlib.sha256(rendered).hexdigest()
+
+    def _decode_nul_paths(payload: bytes) -> list[str]:
+        if not payload:
+            return []
+        if not payload.endswith(b"\x00"):
+            raise ValueError("trusted Git path inventory was not NUL terminated")
+        paths = [part.decode("utf-8") for part in payload[:-1].split(b"\x00")]
+        if any(not path for path in paths):
+            raise ValueError("trusted Git path inventory contained an empty path")
+        return sorted(paths)
+
+    def _complete_review_observation(
+        candidate_root: Path,
+        *,
+        expected_state: WorktreeState | None = None,
+    ) -> tuple[WorktreeState, dict[str, object], dict[str, object]]:
+        resolved = candidate_root.resolve(strict=True)
+        if not resolved.is_dir():
+            raise ValueError("Antigravity cwd must be an existing directory")
+        identity = trusted_git.attest_repository(
+            resolved,
+            attested_paths=["AGENTS.md"],
+            expected_commit=(
+                expected_state.head if expected_state is not None else None
+            ),
+            complete_tracked_tree=True,
+        )
+        worktree_identity = identity.get("worktree")
+        if not isinstance(worktree_identity, dict) or not isinstance(
+            worktree_identity.get("resolved_path"), str
+        ):
+            raise ValueError("trusted Git worktree identity was invalid")
+        observed_root = Path(worktree_identity["resolved_path"]).resolve(strict=True)
+        if observed_root != resolved:
+            raise ValueError(
+                f"Antigravity cwd must equal the Git worktree root: {observed_root}"
+            )
+        observed_branch = trusted_git.run_git(
+            observed_root, "symbolic-ref", "--quiet", "--short", "HEAD"
+        )
+        if not observed_branch or observed_branch in PROTECTED_BRANCHES:
+            raise ValueError(
+                f"Antigravity refuses protected or detached branch: {observed_branch!r}"
+            )
+        ordinary_paths = _decode_nul_paths(
+            trusted_git.run_git_bytes(
+                observed_root,
+                "ls-files",
+                "--others",
+                "--exclude-standard",
+                "-z",
+            )
+        )
+        ignored_paths = _decode_nul_paths(
+            trusted_git.run_git_bytes(
+                observed_root,
+                "ls-files",
+                "--others",
+                "--ignored",
+                "--exclude-standard",
+                "-z",
+            )
+        )
+        complete = identity.get("complete_tracked_tree_attestation")
+        if not isinstance(complete, dict):
+            raise ValueError("complete tracked-tree attestation was not returned")
+        projection: dict[str, object] = {
+            "head": identity.get("head"),
+            "head_tree": identity.get("head_tree"),
+            "index_tree": identity.get("index_tree"),
+            "complete_tracked_tree_sha256": complete.get(
+                "complete_tracked_tree_sha256"
+            ),
+            "complete_tracked_path_count": complete.get("complete_tracked_path_count"),
+            "trusted_git_identity_sha256": identity.get("trusted_git_identity_sha256"),
+        }
+        full_sha = re.compile(r"[0-9a-f]{40}").fullmatch
+        digest = re.compile(r"sha256:[0-9a-f]{64}").fullmatch
+        count = projection["complete_tracked_path_count"]
+        if (
+            not isinstance(projection["head"], str)
+            or full_sha(projection["head"]) is None
+            or not isinstance(projection["head_tree"], str)
+            or full_sha(projection["head_tree"]) is None
+            or projection["index_tree"] != projection["head_tree"]
+            or complete.get("head") != projection["head"]
+            or complete.get("head_tree") != projection["head_tree"]
+            or complete.get("index_tree") != projection["index_tree"]
+            or not isinstance(projection["complete_tracked_tree_sha256"], str)
+            or digest(projection["complete_tracked_tree_sha256"]) is None
+            or type(count) is not int
+            or count <= 0
+            or not isinstance(projection["trusted_git_identity_sha256"], str)
+            or digest(projection["trusted_git_identity_sha256"]) is None
+        ):
+            raise ValueError("complete review attestation projection was invalid")
+        inventory: dict[str, object] = {
+            "ordinary_count": len(ordinary_paths),
+            "ordinary_paths_sha256": _canonical_digest(ordinary_paths),
+            "ignored_count": len(ignored_paths),
+            "ignored_paths_sha256": _canonical_digest(ignored_paths),
+        }
+        if ordinary_paths or ignored_paths:
+            raise ValueError("candidate contains non-tracked paths")
+        state = WorktreeState(
+            root=observed_root,
+            branch=observed_branch,
+            head=projection["head"],
+            dirty=False,
+        )
+        if expected_state is not None and state != expected_state:
+            raise ValueError("trusted Git worktree identity changed")
+        return state, projection, inventory
+
+    def _trusted_diagnostic_state(candidate_root: Path) -> WorktreeState:
+        resolved = candidate_root.resolve(strict=True)
+        observed_root = resolved
+        branch = ""
+        head = ""
+        try:
+            candidate = Path(
+                trusted_git.run_git(resolved, "rev-parse", "--show-toplevel")
+            ).resolve(strict=True)
+            if candidate == resolved:
+                observed_root = candidate
+        except (OSError, ValueError, trusted_git.TrustedGitError):
+            pass
+        try:
+            branch = trusted_git.run_git(
+                observed_root, "symbolic-ref", "--quiet", "--short", "HEAD"
+            )
+        except trusted_git.TrustedGitError:
+            pass
+        try:
+            head = trusted_git.run_git(observed_root, "rev-parse", "HEAD")
+        except trusted_git.TrustedGitError:
+            pass
+        return WorktreeState(
+            root=observed_root,
+            branch=branch,
+            head=head,
+            dirty=True,
+        )
+
+    before, initial_review_attestation, initial_nontracked_inventory = (
+        _complete_review_observation(cwd)
+    )
     orchestrator_receipt_sha256 = admit_orchestrator_receipt(orchestrator_receipt_path)
     if command_manifest_path is not None and not structured_decision:
         raise ValueError("command manifests require structured verifier decisions")
     packet = packet_path.read_text(encoding="utf-8")
     if not packet.strip():
         raise ValueError("worker packet must not be empty")
-    before = inspect_worktree(cwd, require_clean=True)
     command_manifest = (
         load_command_manifest(command_manifest_path)
         if command_manifest_path is not None
@@ -452,24 +608,147 @@ def run_worker(
     reasoning_effort = MODEL_EFFORTS.get(canonical_model)
     if reasoning_effort is None:
         raise ValueError(f"unsupported Antigravity model: {model}")
-    started = time.monotonic()
-    completed = subprocess.run(
-        build_command(
-            packet=packet,
-            state=before,
-            model=model,
-            os_sandbox=os_sandbox,
-            structured_decision=structured_decision,
-            command_manifest=command_manifest,
-        ),
-        cwd=before.root,
-        capture_output=True,
-        text=True,
-        encoding="utf-8",
+    provider_command = build_command(
+        packet=packet,
+        state=before,
+        model=model,
+        os_sandbox=os_sandbox,
+        structured_decision=structured_decision,
+        command_manifest=command_manifest,
     )
+    started = time.monotonic()
+    (
+        pre_provider_state,
+        complete_review_attestation_before,
+        nontracked_inventory_before,
+    ) = _complete_review_observation(before.root, expected_state=before)
+    if (
+        pre_provider_state != before
+        or complete_review_attestation_before != initial_review_attestation
+        or nontracked_inventory_before != initial_nontracked_inventory
+    ):
+        raise ValueError("complete review boundary changed before provider launch")
+    try:
+        completed = subprocess.run(
+            provider_command,
+            cwd=before.root,
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+        )
+    except (OSError, UnicodeError, subprocess.SubprocessError) as error:
+        elapsed_ms = round((time.monotonic() - started) * 1000)
+        try:
+            (
+                after,
+                complete_review_attestation_after,
+                nontracked_inventory_after,
+            ) = _complete_review_observation(before.root, expected_state=before)
+        except (
+            OSError,
+            UnicodeError,
+            ValueError,
+            KeyError,
+            trusted_git.TrustedGitError,
+        ):
+            after = _trusted_diagnostic_state(before.root)
+        failure_receipt: dict[str, Any] = {
+            "schema_version": "ariadne.egress-failure-receipt.v1",
+            "status": "egress_failed_without_admitted_terminal_decision",
+            "transport": "antigravity_new_project_bound_readonly_worktree",
+            "model": canonical_model,
+            "requested_model": model,
+            "reasoning_effort": reasoning_effort,
+            "worktree": str(before.root),
+            "branch": before.branch,
+            "head_before": before.head,
+            "head_after": after.head,
+            "dirty_after": after.dirty,
+            "worktree_identity_unchanged": False,
+            "os_sandbox": os_sandbox,
+            "orchestrator_receipt_sha256": orchestrator_receipt_sha256,
+            "exit_code": None,
+            "elapsed_ms": elapsed_ms,
+            "stdout": _output_evidence(""),
+            "stderr": _output_evidence(""),
+            "decision_contract": (
+                "schema_constrained_json_v1"
+                if structured_decision
+                else "legacy_terminal_line_v1"
+            ),
+            "reason_code": "provider_subprocess_raised",
+            "terminal_decision_admitted": False,
+            "candidate_review_admitted": False,
+        }
+        if command_manifest is not None:
+            failure_receipt["command_manifest_sha256"] = command_manifest_sha256(
+                command_manifest
+            )
+        _atomic_receipt_write(output_path, failure_receipt)
+        raise RuntimeError(
+            "Antigravity provider subprocess raised; "
+            f"digest-only diagnostics written to {output_path}"
+        ) from error
+    try:
+        (
+            after,
+            complete_review_attestation_after,
+            nontracked_inventory_after,
+        ) = _complete_review_observation(before.root, expected_state=before)
+        if (
+            after != before
+            or complete_review_attestation_after != complete_review_attestation_before
+            or nontracked_inventory_after != nontracked_inventory_before
+        ):
+            raise ValueError("complete review boundary changed")
+    except (
+        OSError,
+        UnicodeError,
+        ValueError,
+        KeyError,
+        trusted_git.TrustedGitError,
+    ) as error:
+        elapsed_ms = round((time.monotonic() - started) * 1000)
+        after = _trusted_diagnostic_state(before.root)
+        failure_receipt: dict[str, Any] = {
+            "schema_version": "ariadne.egress-failure-receipt.v1",
+            "status": "egress_failed_without_admitted_terminal_decision",
+            "transport": "antigravity_new_project_bound_readonly_worktree",
+            "model": canonical_model,
+            "requested_model": model,
+            "reasoning_effort": reasoning_effort,
+            "worktree": str(before.root),
+            "branch": before.branch,
+            "head_before": before.head,
+            "head_after": after.head,
+            "dirty_after": after.dirty,
+            "worktree_identity_unchanged": False,
+            "os_sandbox": os_sandbox,
+            "orchestrator_receipt_sha256": orchestrator_receipt_sha256,
+            "exit_code": completed.returncode,
+            "elapsed_ms": elapsed_ms,
+            "stdout": _output_evidence(completed.stdout or ""),
+            "stderr": _output_evidence(completed.stderr or ""),
+            "decision_contract": (
+                "schema_constrained_json_v1"
+                if structured_decision
+                else "legacy_terminal_line_v1"
+            ),
+            "reason_code": "complete_review_attestation_postcondition_failed",
+            "terminal_decision_admitted": False,
+            "candidate_review_admitted": False,
+        }
+        if command_manifest is not None:
+            failure_receipt["command_manifest_sha256"] = command_manifest_sha256(
+                command_manifest
+            )
+        _atomic_receipt_write(output_path, failure_receipt)
+        raise RuntimeError(
+            "complete review attestation failed after provider return; "
+            f"digest-only diagnostics written to {output_path}"
+        ) from error
     elapsed_ms = round((time.monotonic() - started) * 1000)
     if completed.returncode != 0:
-        after = inspect_worktree(before.root, require_clean=False)
         failure_receipt: dict[str, Any] = {
             "schema_version": "ariadne.transport-failure-receipt.v1",
             "status": "transport_failed_without_terminal_decision",
@@ -510,7 +789,6 @@ def run_worker(
             f"Antigravity transport failed ({completed.returncode}); "
             f"digest-only diagnostics written to {output_path}"
         )
-    after = inspect_worktree(before.root, require_clean=False)
     worktree_identity_unchanged = (
         after.root == before.root
         and after.branch == before.branch
@@ -640,6 +918,10 @@ def run_worker(
         "os_sandbox": os_sandbox,
         "orchestrator_receipt_sha256": orchestrator_receipt_sha256,
         "result": result,
+        "complete_review_attestation_before": complete_review_attestation_before,
+        "complete_review_attestation_after": complete_review_attestation_after,
+        "nontracked_inventory_before": nontracked_inventory_before,
+        "nontracked_inventory_after": nontracked_inventory_after,
     }
     if decision_envelope is not None:
         receipt["decision_envelope"] = decision_envelope
