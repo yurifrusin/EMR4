@@ -23,7 +23,7 @@ required_before:
   - "protected_ref_operation"
   - "deployment"
 missing_or_invalid_state: "hard_stop"
-active_profile: "G1A_CLOSEOUT_G1B_ENABLEMENT_REVIEW_PENDING"
+active_profile: "G1B.1_PURE_STATE_EVENT_KERNEL_ACTIVE"
 profiles:
   G0.8_FSMONITOR_CLOSURE:
     profile_kind: "controller_maintenance"
@@ -604,7 +604,7 @@ g1a_to_g1b1_transition_policy:
   resulting_active_profile: "G1B.1_PURE_STATE_EVENT_KERNEL_ACTIVE"
   from_profile: "G1A_CLOSEOUT_G1B_ENABLEMENT_REVIEW_PENDING"
   to_profile: "G1B.1_PURE_STATE_EVENT_KERNEL_ACTIVE"
-  transition_status: "review_pending"
+  transition_status: "complete"
   g1a3_r1_review_id: "g1a3-r1-review-23aa3ab-independent-20260831-pass"
   g1a3_r1_review_record_sha256: "sha256:8787d9ca16b73545f4cab5962d031ec7e1ea4f066a70ee3c7e0d0f322d6aab89"
   external_review_record_root: "orchestration/programme/gate-transition-enablement-reviews"

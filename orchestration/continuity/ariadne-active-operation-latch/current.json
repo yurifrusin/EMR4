@@ -1,21 +1,21 @@
 {
   "schema_version": "ariadne.active_operation_latch.v1",
-  "operation_id": "g1a-closeout-g1b-enablement-lineage-totality-replacement-20260902-v1",
-  "active_tranche": "G1A closeout and G1B lineage/totality replacement external review",
-  "objective": "Preserve the accepted G1A.3-R1 surface and closed G1B.1 boundaries while publishing one identity-consistent, control-flow-total replacement without performing the G1A-to-G1B.1 transition or implementing G1B.1.",
-  "status": "paused",
-  "source_head": "23aa3ab19aec6cee9246e7dd3a88f61ada39bd7a",
-  "authority_source": "Yuri Frusin owner exception for task generation g1a-closeout-g1b-enablement-lineage-totality-replacement-20260902-v1; one direct-child lineage and totality replacement only; candidate-local admission is not acceptance",
+  "operation_id": "g1b1-pure-state-event-kernel",
+  "active_tranche": "G1B.1 bounded pure state/event kernel",
+  "objective": "Implement only the pure deterministic G1B.1 state/event kernel.",
+  "status": "in_progress",
+  "source_head": "00534520ed387c5766281de932e91ad74f7071f1",
+  "authority_source": "External G1A closeout and G1B transition-enablement PASS",
   "checkpoint": {
-    "completed_stage": "External G1A.3-R1 PASS, accepted G1A surface, corrected clockwork inventory, pinned-only G1B.1 operation boundary and closed runtime effect grammar retained; replacement identity, transition totality and substantive required-test grammar made exact.",
-    "next_executable_stage": "External G1A closeout and G1B transition-enablement review only.",
+    "completed_stage": "Externally accepted state-only G1A to G1B.1 transition complete.",
+    "next_executable_stage": "Implement the bounded G1B.1 pure state/event kernel only.",
     "retry_counters": {
       "planning": 0,
       "implementation": 0,
       "verification": 0,
       "publication": 0
     },
-    "settings_fingerprint": "sha256:9c7ab2be986315f4eb5075c4e4dcaf66cd3b0b53625cc1ac4c9b835a6304498e"
+    "settings_fingerprint": "sha256:473222fd07046e7959e19b764a51ccf02312e2d79bbe9280cd471ba2b5de9434"
   },
   "interruption_policy": {
     "chronological_last_prompt_is_controlling_authority": false,
@@ -24,14 +24,14 @@
     "scope_addition_behavior": "merge_then_resume",
     "replacement_requires_explicit_pause_or_redirect": true
   },
-  "resume_after_compaction": false,
+  "resume_after_compaction": true,
   "user_attention": {
     "required": false,
     "reason": null
   },
   "terminal_response": {
-    "permitted": true,
-    "reason": "review_pending_external_review_required"
+    "permitted": false,
+    "reason": "unfinished_authorized_operation"
   },
   "protected_boundaries": [
     "G1A.1_owner_disposition_and_residual_risk_remain_frozen",
@@ -44,9 +44,9 @@
     "accepted_G1A_runtime_sources_remain_exact",
     "G1A.3_rejected_implementation_review_is_append_only_and_digest_bound",
     "G1A_closeout_remains_review_pending",
-    "G1B_remains_closed_pending_state_transition",
-    "G1B1_implementation_not_started",
-    "integration_entrypoint_and_execution_forbidden",
+    "G1B1_state_transition_complete",
+    "G1B1_pure_kernel_only",
+    "all_runtime_entrypoints_closed",
     "no_product_migration_dependency_deployment_Pages_or_protected_ref_change",
     "only_exact_recovery_branch_direct_child_fast_forward_owner_exception_publication_authorised",
     "legacy_worktree_and_unrelated_user_files_preserved"

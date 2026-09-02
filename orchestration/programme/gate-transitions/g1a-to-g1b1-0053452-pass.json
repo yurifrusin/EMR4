@@ -1,0 +1,208 @@
+{
+  "schema_version": "ariadne.g1a-to-g1b1-transition.v1",
+  "transition_id": "g1a-to-g1b1-0053452-pass",
+  "recorded_at": "2026-09-02T16:26:40+10:00",
+  "transition_manifest": {
+    "schema_version": "ariadne.programme_g1a_to_g1b1_transition_manifest.v1",
+    "transition_id": "g1a-to-g1b1-0053452-pass",
+    "from_profile": "G1A_CLOSEOUT_G1B_ENABLEMENT_REVIEW_PENDING",
+    "to_profile": "G1B.1_PURE_STATE_EVENT_KERNEL_ACTIVE",
+    "g1a3_r1_review_id": "g1a3-r1-review-23aa3ab-independent-20260831-pass",
+    "g1a3_r1_review_record_sha256": "sha256:8787d9ca16b73545f4cab5962d031ec7e1ea4f066a70ee3c7e0d0f322d6aab89",
+    "enablement_review_id": "g1a-closeout-g1b-review-0053452-independent-20260902-pass",
+    "enablement_candidate_commit": "00534520ed387c5766281de932e91ad74f7071f1",
+    "enablement_candidate_tree": "a3da6c213f8d9769fa632de740cd90a85e2b5f09",
+    "enablement_candidate_parent": "23aa3ab19aec6cee9246e7dd3a88f61ada39bd7a",
+    "transition_parent": "00534520ed387c5766281de932e91ad74f7071f1",
+    "external_review_verdict": "PASS",
+    "external_review_record_sha256": "sha256:ad73ba7b14ed1f696a27e2627e76c238ff5f9386dcecaa61d7256713f7ae0cf6",
+    "blocking_finding_count": 0,
+    "reviewer_surface": "external_chatgpt_repository_review",
+    "state_digest_before": "sha256:6cf01db6310118fd26f752cc8db552a2c7cc5d81958740aec49498fc2d3ca263",
+    "policy_digest_before": "sha256:b98351a19df7c7adf83c7facdbb626bf1c862dcf22f756112774bb7fcea1aa56",
+    "accepted_surface_sha256": "sha256:0a5b5b6bd650f01b6d8ee232416d51f084fd5896af060a4e38fe00d89cfd6d78",
+    "accepted_surface_git_blob": "9d3cf79e37a59cda77125f4caf6523d5d5e87c40",
+    "clockwork_scope_sha256": "sha256:b79ab026e5a59b39a6412e33abe065d9ea0a96cc32115d2d01fc0f78d7fc4676",
+    "clockwork_scope_git_blob": "1d8888b4b28f5cd620bdb84e4c090dcf23a68e47",
+    "allowed_transition_paths": [
+      "AGENTS.md",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json",
+      "orchestration/harness_settings/programme_recovery.yaml",
+      "orchestration/programme/current-state.json",
+      "orchestration/programme/gate-transition-enablement-reviews/g1a-closeout-g1b-review-0053452-independent-20260902-pass.json",
+      "orchestration/programme/gate-transitions/g1a-to-g1b1-0053452-pass.json",
+      "orchestration/programme/gates.yaml"
+    ],
+    "required_semantic_pointer_delta": {
+      "AGENTS.md": [
+        "/emergency_header"
+      ],
+      "orchestration/continuity/ariadne-active-operation-latch/current.json": [
+        "/active_tranche",
+        "/authority_source",
+        "/checkpoint/completed_stage",
+        "/checkpoint/next_executable_stage",
+        "/checkpoint/settings_fingerprint",
+        "/objective",
+        "/operation_id",
+        "/protected_boundaries/10",
+        "/protected_boundaries/11",
+        "/protected_boundaries/12",
+        "/resume_after_compaction",
+        "/source_head",
+        "/status",
+        "/terminal_response/permitted",
+        "/terminal_response/reason"
+      ],
+      "orchestration/harness_settings/programme_recovery.yaml": [
+        "/active_profile",
+        "/g1a_to_g1b1_transition_policy/transition_status"
+      ],
+      "orchestration/programme/current-state.json": [
+        "/active_correction",
+        "/active_profile",
+        "/current_gate",
+        "/g1a_closeout/external_review_status",
+        "/g1a_closeout/g1a_closed",
+        "/g1a_closeout/next_action",
+        "/g1a_closeout/status",
+        "/g1b/state_transition",
+        "/g1b/state_transition_status",
+        "/g1b/status",
+        "/g1b/transition_enablement_status",
+        "/observed_at",
+        "/task_selection/allowed_task_kinds/0",
+        "/task_selection/next_eligibility_condition",
+        "/task_selection/next_eligible_now",
+        "/task_selection/next_tranche_admission_requires_state_transition"
+      ],
+      "orchestration/programme/gates.yaml": [
+        "/gates/13/status",
+        "/gates/14/status",
+        "/gates/9/status",
+        "/programme/current_gate",
+        "/programme/prepared_at"
+      ]
+    },
+    "protected_refs_before": {
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "forbidden_effect_classes": [
+      "autonomous_worker_dispatch",
+      "clockwork_runtime_mutation",
+      "dependency_change",
+      "deployment",
+      "g1b_work",
+      "implementation_change",
+      "integration",
+      "migration_change",
+      "pages",
+      "product_behavior_change",
+      "protected_ref_movement",
+      "provider_invocation",
+      "real_data_access"
+    ]
+  },
+  "transition_manifest_sha256": "sha256:69554914032feab1c070491bdfffa3719809f27339efc8382a98325f0ccb07df",
+  "g1a3_r1_review_record_sha256": "sha256:8787d9ca16b73545f4cab5962d031ec7e1ea4f066a70ee3c7e0d0f322d6aab89",
+  "external_review_record_sha256": "sha256:ad73ba7b14ed1f696a27e2627e76c238ff5f9386dcecaa61d7256713f7ae0cf6",
+  "enablement_candidate_commit": "00534520ed387c5766281de932e91ad74f7071f1",
+  "enablement_candidate_tree": "a3da6c213f8d9769fa632de740cd90a85e2b5f09",
+  "enablement_candidate_parent": "23aa3ab19aec6cee9246e7dd3a88f61ada39bd7a",
+  "accepted_surface_sha256": "sha256:0a5b5b6bd650f01b6d8ee232416d51f084fd5896af060a4e38fe00d89cfd6d78",
+  "accepted_surface_git_blob": "9d3cf79e37a59cda77125f4caf6523d5d5e87c40",
+  "clockwork_scope_sha256": "sha256:b79ab026e5a59b39a6412e33abe065d9ea0a96cc32115d2d01fc0f78d7fc4676",
+  "clockwork_scope_git_blob": "1d8888b4b28f5cd620bdb84e4c090dcf23a68e47",
+  "state_digest_before": "sha256:6cf01db6310118fd26f752cc8db552a2c7cc5d81958740aec49498fc2d3ca263",
+  "state_digest_after": "sha256:9e67ecb928aa488423300fafc731134511c4cb3f064b5b66dba593e7bd9f5397",
+  "policy_digest_before": "sha256:b98351a19df7c7adf83c7facdbb626bf1c862dcf22f756112774bb7fcea1aa56",
+  "policy_digest_after": "sha256:b6f07976c8197572bca05f56766ca269bcec00fe59c5768ab0d27555a26daaf9",
+  "changed_semantic_pointers": {
+    "AGENTS.md": [
+      "/emergency_header"
+    ],
+    "orchestration/continuity/ariadne-active-operation-latch/current.json": [
+      "/active_tranche",
+      "/authority_source",
+      "/checkpoint/completed_stage",
+      "/checkpoint/next_executable_stage",
+      "/checkpoint/settings_fingerprint",
+      "/objective",
+      "/operation_id",
+      "/protected_boundaries/10",
+      "/protected_boundaries/11",
+      "/protected_boundaries/12",
+      "/resume_after_compaction",
+      "/source_head",
+      "/status",
+      "/terminal_response/permitted",
+      "/terminal_response/reason"
+    ],
+    "orchestration/harness_settings/programme_recovery.yaml": [
+      "/active_profile",
+      "/g1a_to_g1b1_transition_policy/transition_status"
+    ],
+    "orchestration/programme/current-state.json": [
+      "/active_correction",
+      "/active_profile",
+      "/current_gate",
+      "/g1a_closeout/external_review_status",
+      "/g1a_closeout/g1a_closed",
+      "/g1a_closeout/next_action",
+      "/g1a_closeout/status",
+      "/g1b/state_transition",
+      "/g1b/state_transition_status",
+      "/g1b/status",
+      "/g1b/transition_enablement_status",
+      "/observed_at",
+      "/task_selection/allowed_task_kinds/0",
+      "/task_selection/next_eligibility_condition",
+      "/task_selection/next_eligible_now",
+      "/task_selection/next_tranche_admission_requires_state_transition"
+    ],
+    "orchestration/programme/gates.yaml": [
+      "/gates/13/status",
+      "/gates/14/status",
+      "/gates/9/status",
+      "/programme/current_gate",
+      "/programme/prepared_at"
+    ]
+  },
+  "scope_result": "passed",
+  "g1b1_profile_contract": {
+    "active_profile": "G1B.1_PURE_STATE_EVENT_KERNEL_ACTIVE",
+    "task_class": "g1b_1_pure_state_event_kernel",
+    "allowed_paths": [
+      "orchestration_harness/clockwork_state.py",
+      "tests/test_clockwork_state.py"
+    ],
+    "allowed_effects": [
+      "clockwork_state_kernel_edit",
+      "external_review_preparation",
+      "repository_read",
+      "task_branch_commit",
+      "task_branch_push"
+    ],
+    "forbidden_effects": [
+      "autonomous_worker_dispatch",
+      "clockwork_runtime_mutation",
+      "closeout_state_transition",
+      "controller_policy_change",
+      "dependency_change",
+      "deployment",
+      "g1c_work",
+      "integration",
+      "migration_change",
+      "pages",
+      "product_behavior_change",
+      "programme_state_change",
+      "protected_ref_movement",
+      "provider_invocation",
+      "real_data_access"
+    ],
+    "runtime_entrypoints_closed": true
+  }
+}

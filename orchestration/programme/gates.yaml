@@ -1,11 +1,11 @@
 schema_version: "raisa-ariadne.programme-gates.v1"
 programme:
   name: "Raisa Medical Office and Ariadne Recovery & Convergence"
-  prepared_at: "2026-08-31T18:00:00+10:00"
+  prepared_at: "2026-09-02T16:26:40+10:00"
   repository: "yurifrusin/EMR4"
   observed_public_master: "2e34bdad732fdab32fbf778280b3d3c70d66d602"
   programme_mode: "recovery"
-  current_gate: "G1A.3"
+  current_gate: "G1B.1"
   current_gate_status: "active"
   feature_work_eligible: false
   clockwork_remote_visibility: "source_branch_aligned_with_origin"
@@ -381,7 +381,7 @@ gates:
 
   - id: "G1A"
     name: "Correct Verdict and Integration Semantics"
-    status: "closeout_review_pending"
+    status: "passed"
     prerequisites: ["G1A.1", "G1A.2", "G1A.3"]
     programme_mode: "recovery"
     exit_checks:
@@ -435,7 +435,7 @@ gates:
 
   - id: "G1B"
     name: "Persisted Clockwork State Machine and Replay"
-    status: "closed_pending_state_transition"
+    status: "active_subgate_G1B_1"
     prerequisites: ["G1A"]
     programme_mode: "recovery"
     exit_checks:
@@ -449,7 +449,7 @@ gates:
 
   - id: "G1B.1"
     name: "Pure State Event and Reducer Kernel"
-    status: "closed_pending_state_transition"
+    status: "active"
     prerequisites: ["external_G1A_closeout_G1B_transition_enablement_review_pass", "state_only_G1A_to_G1B1_transition"]
     programme_mode: "recovery"
     exit_checks:
