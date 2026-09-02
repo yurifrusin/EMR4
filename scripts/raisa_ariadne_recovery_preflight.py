@@ -17,6 +17,7 @@ if str(REPO_ROOT) not in sys.path:
 
 from orchestration_harness.programme_admission import (
     G0_G08_ALLOWED_PATHS,
+    G1B1_ACTIVE_PROFILE,
     TASK_MANIFEST_VERSION,
     ProgrammeAdmissionError,
     admission_payload,
@@ -197,6 +198,16 @@ def _verification_phase(repo_root: Path, state: dict[str, Any]) -> str:
         parent = state["g1a_subgate_authority"]["subgates"]["G1A.3"]["owner_exception"][
             "authorized_parent_commit"
         ]
+    elif active_correction == "G1A-C0":
+        parent = state["g1a_subgate_authority"]["subgates"]["G1A.3"]["owner_exception"][
+            "authorized_parent_commit"
+        ]
+    elif active_correction == "G1B.1":
+        reviewed = state["g1b"]["state_transition"]["enablement_candidate_commit"]
+        rows = _run_git(
+            root, "rev-list", "--reverse", f"{reviewed}..{head}"
+        ).splitlines()
+        parent = rows[0] if rows else None
     elif active_correction == "G1A.2":
         reviewed = state["g1a_subgate_authority"]["subgates"]["G1A.2"][
             "state_transition"
@@ -209,7 +220,9 @@ def _verification_phase(repo_root: Path, state: dict[str, Any]) -> str:
         parent = None
     if not isinstance(parent, str):
         raise PreflightError("active correction binding unavailable")
-    branch = _run_git(root, "branch", "--show-current")
+    branch = (
+        _run_git(root, "branch", "--show-current") or state["recovery_baton"]["branch"]
+    )
     policy = load_programme_policy(root)
     try:
         from orchestration_harness.programme_admission import _fresh_remote_head
@@ -253,6 +266,20 @@ def build_task_manifest(
         base_commit = rows[0]
         task_id = "raisa-ariadne-g1a-1-pure-verdict-kernel"
         objective = "Repair the canonical verdict algebra and pure acceptance consumers inside the pre-reviewed G1A.1 scope only."
+    elif policy.state["active_profile"] == G1B1_ACTIVE_PROFILE:
+        reviewed = policy.state["g1b"]["state_transition"][
+            "enablement_candidate_commit"
+        ]
+        rows = _run_git(root, "rev-list", "--reverse", f"{reviewed}..HEAD").splitlines()
+        if not rows:
+            raise PreflightError("G1B.1 activation commit unavailable")
+        base_commit = rows[0]
+        task_id = "raisa-ariadne-g1b-1-pure-state-event-kernel"
+        objective = (
+            "Implement only the pure typed G1B.1 state/event/command kernel and "
+            "its direct tests without clockwork runtime, provider, integration, "
+            "product or protected-ref effects."
+        )
     elif policy.state["active_profile"] == "G1A.3_ACTIVE":
         reviewed = policy.state["g1a_subgate_authority"]["subgates"]["G1A.3"][
             "state_transition"

@@ -13,7 +13,7 @@ from orchestration_harness import trusted_git
 from orchestration_harness.verdict import ReviewVerdict
 from scripts import ariadne_antigravity
 from scripts.ariadne_antigravity import WorktreeState, build_command
-from scripts.raisa_ariadne_recovery_preflight import build_task_manifest
+from scripts.raisa_ariadne_recovery_preflight import PreflightError, build_task_manifest
 
 
 TEST_HEAD = "a" * 40
@@ -2143,38 +2143,62 @@ def test_legacy_text_mode_remains_transport_compatibility_without_assessment(
     assert "verdict_assessment" not in receipt
 
 
-def test_current_programme_admits_only_the_exact_g1a3_r1_task_paths(
+def test_current_programme_has_no_eligible_task_during_closeout_review(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     monkeypatch.setattr(trusted_git, "attest_repository", _REAL_ATTEST_REPOSITORY)
     monkeypatch.setattr(trusted_git, "run_git", _REAL_RUN_GIT)
     monkeypatch.setattr(trusted_git, "run_git_bytes", _REAL_RUN_GIT_BYTES)
-    manifest = build_task_manifest(Path(__file__).resolve().parents[1])
-    decision = programme_admission.evaluate_programme_admission(
-        repo_root=Path(__file__).resolve().parents[1],
-        manifest=manifest,
-        entrypoint="recovery_preflight",
-    )
+    root = Path(__file__).resolve().parents[1]
+    policy = programme_admission.load_programme_policy(root)
+    profile = policy.overlay["profiles"][
+        programme_admission.G1A_CLOSEOUT_REVIEW_PENDING_PROFILE
+    ]
 
-    assert decision.admitted is True
-    assert set(manifest["allowed_path_roots"]) == {
+    assert policy.state["active_profile"] == (
+        programme_admission.G1A_CLOSEOUT_REVIEW_PENDING_PROFILE
+    )
+    assert policy.state["active_correction"] == "G1A-C0"
+    assert policy.state["task_selection"]["allowed_task_kinds"] == []
+    assert policy.state["task_selection"]["next_eligible_now"] is False
+    assert profile["admitted_task_classes"] == []
+    with pytest.raises(
+        PreflightError, match="^no implementation task is currently eligible$"
+    ):
+        build_task_manifest(root)
+    assert policy.state["g1a_closeout"]["status"] == "review_pending"
+    assert policy.state["g1b"]["status"] == "closed_pending_state_transition"
+    assert policy.state["g1b"]["state_transition_status"] == "not_started"
+    assert policy.state["g1b"]["implementation_started"] is False
+
+
+def test_historical_g1a3_r1_profile_preserves_exact_four_path_invariant(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setattr(trusted_git, "attest_repository", _REAL_ATTEST_REPOSITORY)
+    monkeypatch.setattr(trusted_git, "run_git", _REAL_RUN_GIT)
+    monkeypatch.setattr(trusted_git, "run_git_bytes", _REAL_RUN_GIT_BYTES)
+    policy = programme_admission.load_programme_policy(
+        Path(__file__).resolve().parents[1]
+    )
+    historical_profile = policy.overlay["profiles"][
+        programme_admission.G1A3_R1_ACTIVE_PROFILE
+    ]
+
+    assert set(historical_profile["allowed_paths"]) == {
         "scripts/agent_worktrees.py",
         "scripts/ariadne_antigravity.py",
         "tests/test_agent_worktrees.py",
         "tests/test_ariadne_antigravity.py",
     }
-    for widened_paths in (
-        ["scripts/ariadne_antigravity.py"],
-        [*manifest["allowed_path_roots"], "scripts/forbidden.py"],
-    ):
-        widened = dict(manifest)
-        widened["allowed_path_roots"] = widened_paths
-        rejected = programme_admission.evaluate_programme_admission(
-            repo_root=Path(__file__).resolve().parents[1],
-            manifest=widened,
-            entrypoint="recovery_preflight",
-        )
-        assert rejected.admitted is False
+    assert historical_profile["admitted_task_classes"] == [
+        "g1a_3_review_byte_binding_and_integration_consumer"
+    ]
+    r1 = policy.state["g1a_subgate_authority"]["subgates"]["G1A.3"]
+    assert r1["r1_state_transition"]["to_profile"] == (
+        programme_admission.G1A3_R1_ACTIVE_PROFILE
+    )
+    assert policy.state["active_profile"] != programme_admission.G1A3_R1_ACTIVE_PROFILE
 
 
 def test_current_programme_denies_provider_invocation_and_later_work(
@@ -2184,27 +2208,33 @@ def test_current_programme_denies_provider_invocation_and_later_work(
     monkeypatch.setattr(trusted_git, "run_git", _REAL_RUN_GIT)
     monkeypatch.setattr(trusted_git, "run_git_bytes", _REAL_RUN_GIT_BYTES)
     root = Path(__file__).resolve().parents[1]
-    manifest = build_task_manifest(root)
+    manifest: dict[str, object] = {}
     provider = programme_admission.evaluate_programme_admission(
         repo_root=root,
         manifest=manifest,
         entrypoint="provider_invocation",
     )
     policy = programme_admission.load_programme_policy(root)
-    profile = policy.overlay["profiles"][programme_admission.G1A3_R1_ACTIVE_PROFILE]
+    integration = programme_admission.evaluate_programme_admission(
+        repo_root=root,
+        manifest=manifest,
+        entrypoint="integration",
+    )
+    profile = policy.overlay["profiles"][
+        programme_admission.G1A_CLOSEOUT_REVIEW_PENDING_PROFILE
+    ]
 
     assert provider.admitted is False
     assert provider.reason_codes == ["provider_invocation_closed_in_active_profile"]
+    assert integration.admitted is False
+    assert integration.reason_codes == ["integration_closed_in_active_profile"]
     assert programme_admission.g1a3_review_producer_contract_reasons(root) == []
     assert programme_admission.g1a3_integration_contract_reasons(root) == []
-    assert set(profile["allowed_paths"]) == {
-        "scripts/agent_worktrees.py",
-        "scripts/ariadne_antigravity.py",
-        "tests/test_agent_worktrees.py",
-        "tests/test_ariadne_antigravity.py",
-    }
+    assert profile["allowed_paths"] == []
+    assert profile["admitted_task_classes"] == []
     assert {
         "g1b_work",
+        "clockwork_runtime_mutation",
         "integration",
         "product_behavior_change",
         "deployment",

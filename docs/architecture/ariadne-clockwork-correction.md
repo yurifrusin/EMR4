@@ -108,3 +108,34 @@ blocked.
 - G1E: configuration integrity and kernel extraction boundaries.
 
 No item in that list is implemented or started by G0.
+
+## G1A closeout and G1B transition-enablement controller
+
+The G1A.3-R1 implementation at
+`23aa3ab19aec6cee9246e7dd3a88f61ada39bd7a` has an external PASS. The
+accepted G1A runtime and evidence surface is frozen in
+`orchestration/programme/g1a-accepted-surface.yaml`; the existing clockwork is
+an inventory input only in `orchestration/programme/g1b-clockwork-scope.yaml`.
+Neither artifact grants runtime, provider, integration, product or protected-ref
+authority.
+
+The replacement inventory treats `current-state.json` `clockwork_core` as a
+minimum closure. It therefore includes the live-adoption and governance-
+migration writer/cutover modules, their exact accepted blobs, direct CLI
+adapters, importing tests and historical fixtures. The inventory records their
+commit points, leases, replay, authority and extraction disposition without
+modifying or executing either runtime module.
+
+The current controller remains at `G1A.3` under
+`G1A_CLOSEOUT_G1B_ENABLEMENT_REVIEW_PENDING`. It has no eligible task and cannot
+accept itself. A later clean gatekeeper pinned to an externally accepted
+enablement candidate may evaluate the exact seven-path, state-only
+`G1A_TO_G1B1_STATE_TRANSITION`. Until that separately reviewed transition
+passes, G1A is not machine-closed and G1B remains closed.
+
+The bounded successor profile is predefined as
+`G1B.1_PURE_STATE_EVENT_KERNEL_ACTIVE`. Its only prospective implementation
+paths are `orchestration_harness/clockwork_state.py` and
+`tests/test_clockwork_state.py`; both remain absent in this candidate. Existing
+clockwork runtime modules are inventory and compatibility boundaries, never
+mutation targets for G1B.1.

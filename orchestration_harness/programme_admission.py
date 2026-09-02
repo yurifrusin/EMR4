@@ -28,6 +28,8 @@ GATES_PATH = Path("orchestration/programme/gates.yaml")
 RISK_PATH = Path("orchestration/programme/risk-register.yaml")
 INVENTORY_PATH = Path("orchestration/programme/branch-pr-disposition.yaml")
 G1A_SCOPE_PATH = Path("orchestration/programme/g1a-verdict-integration-scope.yaml")
+G1A_ACCEPTED_SURFACE_PATH = Path("orchestration/programme/g1a-accepted-surface.yaml")
+G1B_CLOCKWORK_SCOPE_PATH = Path("orchestration/programme/g1b-clockwork-scope.yaml")
 OVERLAY_PATH = Path("orchestration/harness_settings/programme_recovery.yaml")
 PROJECT_PATH = Path("orchestration/harness_settings/project.yaml")
 CONTINUATION_PATH = Path("orchestration/harness_settings/autonomous_continuation.yaml")
@@ -41,6 +43,8 @@ AUTHORITY_FIXED_PATHS = (
     RISK_PATH,
     INVENTORY_PATH,
     G1A_SCOPE_PATH,
+    G1A_ACCEPTED_SURFACE_PATH,
+    G1B_CLOCKWORK_SCOPE_PATH,
     OVERLAY_PATH,
     PROJECT_PATH,
     CONTINUATION_PATH,
@@ -52,6 +56,7 @@ AUTHORITY_INDEX_ROOTS = (
     Path("orchestration/programme/reviews"),
     Path("orchestration/programme/external-reviews"),
     Path("orchestration/programme/gate-transitions"),
+    Path("orchestration/programme/gate-transition-enablement-reviews"),
     Path("orchestration/programme/owner-dispositions"),
     Path("orchestration/programme/subgate-reviews"),
     Path("orchestration/programme/subgate-implementation-reviews"),
@@ -68,6 +73,9 @@ G1A3_TRANSITION_MANIFEST_VERSION = (
 G1A3_R0_TRANSITION_MANIFEST_VERSION = (
     "ariadne.programme_g1a3_r0_to_r1_transition_manifest.v1"
 )
+G1A_TO_G1B1_TRANSITION_MANIFEST_VERSION = (
+    "ariadne.programme_g1a_to_g1b1_transition_manifest.v1"
+)
 DECISION_VERSION = "ariadne.programme_admission_decision.v1"
 SCOPE_VERSION = "ariadne.programme_scope_decision.v1"
 ADMITTED_TASK_CLASS = "g0_8_fsmonitor_closure"
@@ -80,6 +88,8 @@ G1A2_TASK_CLASS = "g1a_2_antigravity_verdict_adapter"
 G1A3_TASK_CLASS = "g1a_3_integration_consumer_mutation"
 G1A3_R1_TASK_CLASS = "g1a_3_review_byte_binding_and_integration_consumer"
 G1A3_R0_TRANSITION_TASK_CLASS = "g1a_3_r0_to_r1_state_transition"
+G1A_TO_G1B1_TRANSITION_TASK_CLASS = "g1a_to_g1b1_state_transition"
+G1B1_TASK_CLASS = "g1b_1_pure_state_event_kernel"
 G0_CONTROLLER_PROFILE = "G0.8_FSMONITOR_CLOSURE"
 TRANSITION_PROFILE = "G0_TO_G1A_STATE_TRANSITION"
 G1A_ACTIVE_PROFILE = "G1A.1_ACTIVE"
@@ -91,8 +101,68 @@ G1A3_ACTIVE_PROFILE = "G1A.3_ACTIVE"
 G1A3_R0_REVIEW_PENDING_PROFILE = "G1A.3-R0_REVIEW_PENDING"
 G1A3_R0_TRANSITION_PROFILE = "G1A.3-R0_TO_R1_STATE_TRANSITION"
 G1A3_R1_ACTIVE_PROFILE = "G1A.3-R1_REVIEW_BINDING_ACTIVE"
+G1A_CLOSEOUT_REVIEW_PENDING_PROFILE = "G1A_CLOSEOUT_G1B_ENABLEMENT_REVIEW_PENDING"
+G1A_TO_G1B1_TRANSITION_PROFILE = "G1A_TO_G1B1_STATE_TRANSITION"
+G1B1_ACTIVE_PROFILE = "G1B.1_PURE_STATE_EVENT_KERNEL_ACTIVE"
 G1A3_R0_CORRECTION = "G1A.3-R0"
 G1A3_R1_CORRECTION = "G1A.3-R1"
+G1A_CLOSEOUT_CORRECTION = "G1A-C0"
+G1A_CLOSEOUT_REPLACEMENT_TASK_GENERATION = (
+    "g1a-closeout-g1b-enablement-lineage-totality-replacement-20260902-v1"
+)
+G1A_CLOSEOUT_REPLACEMENT_TRANCHE = (
+    "G1A closeout and G1B lineage/totality replacement external review"
+)
+G1A_CLOSEOUT_REPLACEMENT_OBJECTIVE = (
+    "Preserve the accepted G1A.3-R1 surface and closed G1B.1 boundaries while "
+    "publishing one identity-consistent, control-flow-total replacement without "
+    "performing the G1A-to-G1B.1 transition or implementing G1B.1."
+)
+G1A_CLOSEOUT_REPLACEMENT_AUTHORITY = (
+    "Yuri Frusin owner exception for task generation "
+    f"{G1A_CLOSEOUT_REPLACEMENT_TASK_GENERATION}; one direct-child lineage and "
+    "totality replacement only; candidate-local admission is not acceptance"
+)
+G1A_CLOSEOUT_REPLACEMENT_COMPLETED_STAGE = (
+    "External G1A.3-R1 PASS, accepted G1A surface, corrected clockwork inventory, "
+    "pinned-only G1B.1 operation boundary and closed runtime effect grammar retained; "
+    "replacement identity, transition totality and substantive required-test grammar "
+    "made exact."
+)
+G1A_CLOSEOUT_REPLACEMENT_NEXT_STAGE = (
+    "External G1A closeout and G1B transition-enablement review only."
+)
+G1B1_RUNTIME_PATH = Path("orchestration_harness/clockwork_state.py")
+G1B1_TEST_PATH = Path("tests/test_clockwork_state.py")
+G1B1_EXACT_PUBLIC_API = frozenset(
+    {
+        "STATE_SCHEMA_VERSION",
+        "EVENT_SCHEMA_VERSION",
+        "COMMAND_SCHEMA_VERSION",
+        "ClockworkState",
+        "ClockworkEvent",
+        "ClockworkCommand",
+        "TransitionResult",
+        "InvalidTransition",
+        "transition",
+        "canonical_bytes",
+    }
+)
+G1B1_SCHEMA_CONSTANTS = {
+    "STATE_SCHEMA_VERSION": "ariadne.clockwork_state.v1",
+    "EVENT_SCHEMA_VERSION": "ariadne.clockwork_event.v1",
+    "COMMAND_SCHEMA_VERSION": "ariadne.clockwork_command.v1",
+}
+G1B1_REQUIRED_DETERMINISM_TESTS = frozenset(
+    {
+        "test_same_input_gives_byte_identical_output",
+        "test_canonical_key_order_and_unicode_policy",
+        "test_no_ambient_locale_time_or_environment_dependency",
+        "test_closed_invalid_transition_behavior",
+        "test_transition_does_not_mutate_inputs",
+        "test_serialized_form_includes_schema_versions",
+    }
+)
 G1A3_RUNTIME_SOURCE_PARSING_CONTRACT = (
     "python_compile_original_bytes_PyCF_ONLY_AST_PyCF_TYPE_COMMENTS_dont_inherit"
 )
@@ -126,6 +196,13 @@ G1A3_TRANSITION_REVIEW_ROOT = (
     "orchestration/programme/subgate-transition-enablement-reviews"
 )
 SUBGATE_TRANSITION_ARTIFACT_ROOT = "orchestration/programme/subgate-transitions"
+G1A_CLOSEOUT_REVIEW_ROOT = "orchestration/programme/gate-transition-enablement-reviews"
+G1A_TO_G1B1_TRANSITION_ARTIFACT_ROOT = "orchestration/programme/gate-transitions"
+G1A3_R1_REVIEW_ID = "g1a3-r1-review-23aa3ab-independent-20260831-pass"
+G1A3_R1_REVIEW_PATH = f"{SUBGATE_IMPLEMENTATION_REVIEW_ROOT}/{G1A3_R1_REVIEW_ID}.json"
+G1A3_R1_REVIEW_SHA256 = (
+    "sha256:8787d9ca16b73545f4cab5962d031ec7e1ea4f066a70ee3c7e0d0f322d6aab89"
+)
 G1A3_R0_REVIEW_ID = "g1a3-review-c6aa513-independent-20260829-revision-required"
 G1A3_R0_REVIEW_PATH = f"{SUBGATE_IMPLEMENTATION_REVIEW_ROOT}/{G1A3_R0_REVIEW_ID}.json"
 G1A3_R0_REVIEW_SHA256 = (
@@ -229,6 +306,33 @@ G1A3_R0_TRANSITION_MANIFEST_KEYS = {
     "allowed_transition_paths",
     "forbidden_effect_classes",
 }
+G1A_TO_G1B1_TRANSITION_MANIFEST_KEYS = {
+    "schema_version",
+    "transition_id",
+    "from_profile",
+    "to_profile",
+    "g1a3_r1_review_id",
+    "g1a3_r1_review_record_sha256",
+    "enablement_review_id",
+    "enablement_candidate_commit",
+    "enablement_candidate_tree",
+    "enablement_candidate_parent",
+    "transition_parent",
+    "external_review_verdict",
+    "external_review_record_sha256",
+    "blocking_finding_count",
+    "reviewer_surface",
+    "state_digest_before",
+    "policy_digest_before",
+    "accepted_surface_sha256",
+    "accepted_surface_git_blob",
+    "clockwork_scope_sha256",
+    "clockwork_scope_git_blob",
+    "allowed_transition_paths",
+    "required_semantic_pointer_delta",
+    "protected_refs_before",
+    "forbidden_effect_classes",
+}
 
 FORBIDDEN_EFFECTS = {
     "autonomous_worker_dispatch",
@@ -301,6 +405,39 @@ G1A3_ALLOWED_EFFECTS = {
     "external_review_preparation",
 }
 G1A3_R1_ALLOWED_EFFECTS = G1A3_ALLOWED_EFFECTS | {"review_evidence_binding_edit"}
+G1B1_ALLOWED_EFFECTS = {
+    "repository_read",
+    "clockwork_state_kernel_edit",
+    "task_branch_commit",
+    "task_branch_push",
+    "external_review_preparation",
+}
+G1B1_FORBIDDEN_EFFECTS = {
+    "autonomous_worker_dispatch",
+    "clockwork_runtime_mutation",
+    "closeout_state_transition",
+    "controller_policy_change",
+    "dependency_change",
+    "deployment",
+    "g1c_work",
+    "integration",
+    "migration_change",
+    "pages",
+    "product_behavior_change",
+    "programme_state_change",
+    "protected_ref_movement",
+    "provider_invocation",
+    "real_data_access",
+}
+G1A_CLOSEOUT_FORBIDDEN_EFFECTS = G1A_FORBIDDEN_EFFECTS | {"clockwork_runtime_mutation"}
+G1A_TO_G1B1_ALLOWED_EFFECTS = ALLOWED_MAINTENANCE_EFFECTS | {
+    "external_review_record",
+    "transition_artifact",
+}
+G1A_TO_G1B1_FORBIDDEN_EFFECTS = TRANSITION_FORBIDDEN_EFFECTS | {
+    "autonomous_worker_dispatch",
+    "clockwork_runtime_mutation",
+}
 ENTRYPOINT_REQUIRED_EFFECT = {
     "task_selection": "repository_read",
     "recovery_preflight": "repository_read",
@@ -411,6 +548,10 @@ G1A3_ALLOWED_PATHS = {
     "tests/test_agent_worktrees.py",
 }
 G1A3_R1_ALLOWED_PATHS = G1A2_ALLOWED_PATHS | G1A3_ALLOWED_PATHS
+G1B1_ALLOWED_PATHS = {
+    "orchestration_harness/clockwork_state.py",
+    "tests/test_clockwork_state.py",
+}
 TRANSITION_FIXED_ALLOWED_PATHS = {
     "AGENTS.md",
     "orchestration/continuity/ariadne-active-operation-latch/current.json",
@@ -427,6 +568,63 @@ SUBGATE_TRANSITION_FIXED_ALLOWED_PATHS = {
 }
 G1A3_TRANSITION_FIXED_ALLOWED_PATHS = SUBGATE_TRANSITION_FIXED_ALLOWED_PATHS
 G1A3_R0_TRANSITION_FIXED_ALLOWED_PATHS = SUBGATE_TRANSITION_FIXED_ALLOWED_PATHS
+G1A_TO_G1B1_TRANSITION_FIXED_ALLOWED_PATHS = {
+    "AGENTS.md",
+    "orchestration/continuity/ariadne-active-operation-latch/current.json",
+    "orchestration/harness_settings/programme_recovery.yaml",
+    "orchestration/programme/current-state.json",
+    "orchestration/programme/gates.yaml",
+}
+# The two typed evidence paths are appended from the transition manifest.
+G1A_TO_G1B1_TRANSITION_SEMANTIC_POINTERS = {
+    "AGENTS.md": ["/emergency_header"],
+    "orchestration/continuity/ariadne-active-operation-latch/current.json": [
+        "/active_tranche",
+        "/authority_source",
+        "/checkpoint/completed_stage",
+        "/checkpoint/next_executable_stage",
+        "/checkpoint/settings_fingerprint",
+        "/objective",
+        "/operation_id",
+        "/protected_boundaries/10",
+        "/protected_boundaries/11",
+        "/protected_boundaries/12",
+        "/resume_after_compaction",
+        "/source_head",
+        "/status",
+        "/terminal_response/permitted",
+        "/terminal_response/reason",
+    ],
+    "orchestration/harness_settings/programme_recovery.yaml": [
+        "/active_profile",
+        "/g1a_to_g1b1_transition_policy/transition_status",
+    ],
+    "orchestration/programme/current-state.json": [
+        "/active_correction",
+        "/active_profile",
+        "/current_gate",
+        "/g1a_closeout/external_review_status",
+        "/g1a_closeout/g1a_closed",
+        "/g1a_closeout/next_action",
+        "/g1a_closeout/status",
+        "/g1b/state_transition",
+        "/g1b/state_transition_status",
+        "/g1b/status",
+        "/g1b/transition_enablement_status",
+        "/observed_at",
+        "/task_selection/allowed_task_kinds/0",
+        "/task_selection/next_eligibility_condition",
+        "/task_selection/next_eligible_now",
+        "/task_selection/next_tranche_admission_requires_state_transition",
+    ],
+    "orchestration/programme/gates.yaml": [
+        "/gates/13/status",
+        "/gates/14/status",
+        "/gates/9/status",
+        "/programme/current_gate",
+        "/programme/prepared_at",
+    ],
+}
 G1A2_ENABLEMENT_ALLOWED_PATHS = {
     "AGENTS.md",
     "orchestration/continuity/ariadne-active-operation-latch/current.json",
@@ -480,9 +678,195 @@ G1A3_R0_CONTROLLER_ALLOWED_PATHS = {
     "tests/test_raisa_ariadne_recovery_preflight.py",
     "tests/test_trusted_git_complete_tree.py",
 }
-ACCEPTED_CUMULATIVE_HISTORY_PATHS = {"scripts/ariadne_deepcode_notify.sh"}
+G1A_CLOSEOUT_CONTROLLER_ALLOWED_PATHS = {
+    "AGENTS.md",
+    "docs/programme/raisa-ariadne-recovery-programme.md",
+    "docs/architecture/ariadne-clockwork-correction.md",
+    "docs/architecture/ariadne-g1b-state-machine-plan.md",
+    "orchestration/continuity/ariadne-active-operation-latch/current.json",
+    "orchestration/harness_settings/programme_recovery.yaml",
+    "orchestration/programme/current-state.json",
+    "orchestration/programme/g1a-verdict-integration-scope.yaml",
+    "orchestration/programme/g1a-accepted-surface.yaml",
+    "orchestration/programme/g1b-clockwork-scope.yaml",
+    "orchestration/programme/gates.yaml",
+    G1A3_R1_REVIEW_PATH,
+    "orchestration_harness/programme_admission.py",
+    "orchestration_harness/pinned_programme_gatekeeper.py",
+    "scripts/raisa_ariadne_recovery_preflight.py",
+    "tests/test_programme_admission.py",
+    "tests/test_programme_pinned_gatekeeper.py",
+    "tests/test_raisa_ariadne_recovery_preflight.py",
+}
+ACCEPTED_CUMULATIVE_HISTORY_PATHS = {
+    "scripts/ariadne_deepcode_notify.sh",
+    "orchestration/programme/subgate-implementation-reviews/g1a3-r0-review-ccbe0d6-independent-20260830-pass.json",
+    "orchestration/programme/subgate-transitions/g1a3-r0-to-r1-ccbe0d6-pass.json",
+    "orchestration/programme/subgate-transition-enablement-reviews/g1a3-e0-review-e5cb887-independent-20260829-pass.json",
+    "orchestration/programme/subgate-transitions/g1a2-to-g1a3-e5cb887-pass.json",
+}
 ACCEPTED_CUMULATIVE_MODE_CHANGES = {
     ("M", "scripts/ariadne_deepcode_notify.sh", "100755", "100644")
+}
+G1A_ACCEPTED_SOURCE_BLOBS = {
+    "orchestration_harness/verdict.py": "0be88e9e8ac89b402b9f6f143b1efcc44e56f9e5",
+    "orchestration_harness/deepcode_artifact.py": "487bab4110380db4949d1a86e35121589d298efb",
+    "orchestration_harness/review_acceptance.py": "372a3ff14ef4cd989e3cd1f54375c72004920b9b",
+    "scripts/ariadne_deepcode_liveness.py": "4f24e9b8952dbdc64782ff4682a94420f0c82315",
+    "scripts/ariadne_review_acceptance.py": "c3085d8fde667f54ee852f9d51c7303ce3ba2522",
+    "scripts/ariadne_antigravity.py": "40ae4b7022afd6f38f76648f35ce23b4e9c30f5c",
+    "scripts/agent_worktrees.py": "2555e4343ffa8e30a5610ef475cf5def4652979c",
+    "orchestration_harness/trusted_git.py": "144398a79e1e125825a298b387546081445ed347",
+    "orchestration_harness/programme_admission.py": "98f3ba163211588a4c12ef679e77a3e9600f3ce2",
+    "orchestration_harness/pinned_programme_gatekeeper.py": "eccb2c0477e015e40d948d8da890e5e6deaf08b1",
+    "scripts/raisa_ariadne_gatekeeper_bootstrap.py": "20889a28de86628bd43d0243c9233d57dfc91c48",
+    "scripts/raisa_ariadne_pinned_gatekeeper.py": "3c992f6c1b443b7786849f37b4b6ddbd3a5ee4e5",
+    "scripts/raisa_ariadne_recovery_preflight.py": "bb0767bac6e364a1371e1801a7046f3b434689a0",
+}
+G1A_ACCEPTED_EVIDENCE = {
+    "orchestration/programme/external-reviews/g0-review-d91a384-independent-20260827-pass.json": (
+        "raisa-ariadne.external-g0-review.v2",
+        "g0-review-d91a384-independent-20260827-pass",
+        "sha256:13312733f50a870e06078844c89b7be74aa40f82c30f2b118ea1bc67605b139a",
+        "8775a9e53761ac4c3263f9873b9581fd899bc9d7",
+    ),
+    "orchestration/programme/gate-transitions/g0-review-d91a384-independent-20260827-pass.json": (
+        "raisa-ariadne.g0-to-g1a-transition.v1",
+        "g0-review-d91a384-independent-20260827-pass",
+        "sha256:1564ac2c3809d203e32f451a4137f9868305d50f84829ef0a324e318dfd9aa8a",
+        "e523b1e03cbae83efa58912fd64855c79f69d2a3",
+    ),
+    "orchestration/programme/owner-dispositions/g1a1-owner-accept-91f1e6e-20260828.json": (
+        "ariadne.owner_subgate_disposition.v1",
+        "g1a1-owner-accept-91f1e6e-20260828",
+        "sha256:19be803ab0d545af2a8d48fff6f8e60d483d4729f4b8f422c8064e052045a47e",
+        "eab25f13d23d5e29a3b29cb3c768b970c6f4aa9a",
+    ),
+    "orchestration/programme/subgate-reviews/g1a2-e0-review-dab684e-independent-20260828-pass.json": (
+        "ariadne.external_subgate_review.v1",
+        "g1a2-e0-review-dab684e-independent-20260828-pass",
+        "sha256:21515235c250b51afcdf52e745ce25a66c289fd6c384620a3011bfd895a94cbf",
+        "d92f0f4483f99f358591dd173a9a4c28ccdec22f",
+    ),
+    "orchestration/programme/subgate-transitions/g1a2-e0-review-dab684e-independent-20260828-pass.json": (
+        "ariadne.g1a1-to-g1a2-transition.v1",
+        "g1a2-e0-review-dab684e-independent-20260828-pass",
+        "sha256:22d30c6e26215a5bece0f6493080ca39db0ac7c56e494c047d457c1875b52fb5",
+        "4566f4352a5e8b581846e4186efc18e97889feec",
+    ),
+    "orchestration/programme/subgate-implementation-reviews/g1a2-review-37e2d6f-independent-20260828-pass.json": (
+        "ariadne.external_subgate_implementation_review.v1",
+        "g1a2-review-37e2d6f-independent-20260828-pass",
+        "sha256:bd29a64c591e0cddd9cc47cc2ae4408f63c36acc3e663bd431bc369ee7385fcb",
+        "54f13f203833467235482c475034f16b0fe1b3f0",
+    ),
+    "orchestration/programme/subgate-transition-enablement-reviews/g1a3-e0-review-e5cb887-independent-20260829-pass.json": (
+        "ariadne.external_g1a3_transition_enablement_review.v1",
+        "g1a3-e0-review-e5cb887-independent-20260829-pass",
+        "sha256:8c695d7694b5f41b3f9cba20efdef576d2b27f655cce8d12174edf7f3dfda9fc",
+        "025d053d394d1090e3c533ee565e7e48474eb84d",
+    ),
+    "orchestration/programme/subgate-transitions/g1a2-to-g1a3-e5cb887-pass.json": (
+        "ariadne.g1a2-to-g1a3-transition.v1",
+        "g1a2-to-g1a3-e5cb887-pass",
+        "sha256:5145ff767e04827840dae79ce1fd6362f54a7291ff0989ee3be61b1094af7623",
+        "b7493acff8353f452d3e334cc6521b0c9f0de809",
+    ),
+    "orchestration/programme/subgate-implementation-reviews/g1a3-review-c6aa513-independent-20260829-revision-required.json": (
+        "ariadne.external_g1a3_implementation_review.v1",
+        "g1a3-review-c6aa513-independent-20260829-revision-required",
+        "sha256:f199fe00c4097650de7710ec480a25f920723e663ee1fa17cbf8785c04035e3a",
+        "b10ba10360a796880f5452248040316c6eb4f916",
+    ),
+    "orchestration/programme/subgate-implementation-reviews/g1a3-r0-review-ccbe0d6-independent-20260830-pass.json": (
+        "ariadne.external_g1a3_r0_review.v1",
+        "g1a3-r0-review-ccbe0d6-independent-20260830-pass",
+        "sha256:b2681a46fdff07c3e2d2a61f1aeecc2f95d22bbd99c64d8f71a6c931d5abdbfd",
+        "ea374a07720da90b1eca8ef6def7c63e78b18bf4",
+    ),
+    "orchestration/programme/subgate-transitions/g1a3-r0-to-r1-ccbe0d6-pass.json": (
+        "ariadne.g1a3-r0-to-r1-transition.v1",
+        "g1a3-r0-to-r1-ccbe0d6-pass",
+        "sha256:ecd173af1797d0a1475a53c4c3440eac48ec829fdc14d59a77018e2a42b1f1af",
+        "b3d231e5cabd35aae7ed6ef833c3824732f4842e",
+    ),
+    G1A3_R1_REVIEW_PATH: (
+        "ariadne.external_g1a3_r1_implementation_review.v1",
+        G1A3_R1_REVIEW_ID,
+        G1A3_R1_REVIEW_SHA256,
+        "7ffbd6870eb24124252d9b1fa1d3a9e882f8b682",
+    ),
+}
+CLOCKWORK_INVENTORY_BLOBS = {
+    "orchestration_harness/models.py": "409c18fa9d0c189104ec032b9320b8ac4df13202",
+    "orchestration_harness/active_operation.py": "13d73d6a13ab480deef011b958af5d9969ef2913",
+    "orchestration_harness/governance_clockwork.py": "fa76a6804364285f6498c983e7051ba007f07c99",
+    "orchestration_harness/governance_clockwork_tick.py": "2b8d22d552ca036980dc34c31ad3c9b62691ee96",
+    "orchestration_harness/governance_live_adoption.py": "e59a37850067dfc36bdd88e5f5a4d00f7bb7195a",
+    "orchestration_harness/governance_migration.py": "2eb83080134220dcc888ff3fdf42de8adf886ff5",
+    "orchestration_harness/shadow_clockwork.py": "e64796168ccf65f1d43d716f0da38d850cc8bc54",
+    "orchestration_harness/transactional_closeout.py": "879de3f6b02d9f4290c60acee175295b18848ba4",
+    "orchestration_harness/governance_writer_guard.py": "595f7addbadc635031603ff9cd8db3ec7598edef",
+    "scripts/ariadne_governance_clockwork_tick.py": "07aea889b38b72b928d2de8f3dc5237db7b16e4c",
+    "scripts/ariadne_governance_clockwork_closeout.py": "65c391de4087087bc86bbf1dc9c513afa53ab78f",
+    "scripts/ariadne_provider_free_clockwork_live_canonical_adoption_retirement.py": "9d2039f972992af714369894c72fe93fbaf09172",
+    "scripts/ariadne_provider_free_clockwork_single_owner_migration_retirement_rehearsal.py": "007c2733c19e11b0596b3ffdb68cde336d60589e",
+    "tests/test_ariadne_harness.py": "682dd6b60f61032c63a60dbc66547292b19ce4ca",
+    "tests/test_ariadne_active_operation_latch.py": "f299f5f1ac7ec4fa91b4d3bf66c0661e6ffb1104",
+    "tests/test_ariadne_governance_clockwork_tick.py": "0f88f7ee3b8b199b9fdedf4d9f3ba28fa951e4ec",
+    "tests/test_ariadne_transactional_closeout.py": "d90387b2b496765281d463004e7f1809243c6d3a",
+    "tests/test_ariadne_provider_free_clockwork_governance_projection_consolidation_repair.py": "68005d32c6868d6daeb1d3a0fb5f7367aea5957b",
+    "tests/test_ariadne_provider_free_clockwork_live_canonical_adoption_retirement.py": "abee5f711164f21ed9bc03ebf5407b33ace75f4d",
+    "tests/test_ariadne_provider_free_clockwork_single_owner_migration_retirement_rehearsal.py": "ab5b60ba3affd6b8a01368bb6519af7b150f40c0",
+    "tests/test_deepseek_native_harness_provider_free_edit_argument_result_coordinate_diagnostic_recovery.py": "fad91813af990645ba908da8eca1999e5c5a1ade",
+    "tests/test_deepseek_native_harness_provider_free_edit_coordinate_future_runner_integration_rehearsal.py": "57ca692ad81e51500170de36a36ca1c2d25a31a1",
+    "tests/test_raisa_native_harness_bounded_occupied_useful_worker_coordinate_recovery_rehearsal.py": "2ba8dc00a790a18e62a9de40906d7f2769966dbb",
+    "orchestration/continuity/ariadne-provider-free-clockwork-live-canonical-adoption-retirement/adoption-report.md": "95efd89c38c2ce608463f4573c44405f4263aadf",
+    "orchestration/continuity/ariadne-provider-free-clockwork-live-canonical-adoption-retirement/closeout-intent.json": "52458144cc37275efa0cfe203d0b4678f7389ce4",
+    "orchestration/continuity/ariadne-provider-free-clockwork-live-canonical-adoption-retirement/contract.json": "04bab9ef4fd6bd351b392d88633d34c99764c280",
+    "orchestration/continuity/ariadne-provider-free-clockwork-live-canonical-adoption-retirement/provider-free-live-adoption-evidence.json": "4402dc37c989b28b86f69407c772f2c3665ee43d",
+    "orchestration/continuity/ariadne-provider-free-clockwork-live-canonical-adoption-retirement/writer-inventory.json": "3d535eabb71fbdb9864520a0869bfcea90e841d0",
+    "orchestration/continuity/ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal/canonical-mirror-receipt.json": "79233f93b50545fdb6a8ad2f01177548d8c8b9f0",
+    "orchestration/continuity/ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal/closeout-intent.json": "1ecb6c68ea836f9164c377bd0f96dc38209b1e37",
+    "orchestration/continuity/ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal/contract.json": "ab95f7ef5e4550e6b17ecb84edf4c840ec77f38c",
+    "orchestration/continuity/ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal/migration-report.md": "a67144bd3117778541922b13f7c80aff06a85e9a",
+    "orchestration/continuity/ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal/provider-free-migration-evidence.json": "319224cfc8df9dd874ac0145c60d950b31ed1a7e",
+}
+CLOCKWORK_CORE_MINIMUM_PATHS = {
+    "orchestration_harness/governance_clockwork.py",
+    "orchestration_harness/governance_clockwork_tick.py",
+    "orchestration_harness/governance_live_adoption.py",
+    "orchestration_harness/governance_migration.py",
+    "orchestration_harness/governance_writer_guard.py",
+    "orchestration_harness/shadow_clockwork.py",
+    "scripts/ariadne_governance_clockwork_tick.py",
+    "scripts/ariadne_governance_clockwork_closeout.py",
+}
+CLOCKWORK_DIRECT_CLI_PATHS = {
+    "scripts/ariadne_governance_clockwork_tick.py",
+    "scripts/ariadne_governance_clockwork_closeout.py",
+    "scripts/ariadne_provider_free_clockwork_live_canonical_adoption_retirement.py",
+    "scripts/ariadne_provider_free_clockwork_single_owner_migration_retirement_rehearsal.py",
+}
+CLOCKWORK_DIRECT_TEST_PATHS = {
+    "tests/test_ariadne_governance_clockwork_tick.py",
+    "tests/test_ariadne_provider_free_clockwork_live_canonical_adoption_retirement.py",
+    "tests/test_ariadne_provider_free_clockwork_single_owner_migration_retirement_rehearsal.py",
+    "tests/test_deepseek_native_harness_provider_free_edit_argument_result_coordinate_diagnostic_recovery.py",
+    "tests/test_deepseek_native_harness_provider_free_edit_coordinate_future_runner_integration_rehearsal.py",
+    "tests/test_raisa_native_harness_bounded_occupied_useful_worker_coordinate_recovery_rehearsal.py",
+}
+CLOCKWORK_DIRECT_FIXTURE_PATHS = {
+    "orchestration/continuity/ariadne-provider-free-clockwork-live-canonical-adoption-retirement/adoption-report.md",
+    "orchestration/continuity/ariadne-provider-free-clockwork-live-canonical-adoption-retirement/closeout-intent.json",
+    "orchestration/continuity/ariadne-provider-free-clockwork-live-canonical-adoption-retirement/contract.json",
+    "orchestration/continuity/ariadne-provider-free-clockwork-live-canonical-adoption-retirement/provider-free-live-adoption-evidence.json",
+    "orchestration/continuity/ariadne-provider-free-clockwork-live-canonical-adoption-retirement/writer-inventory.json",
+    "orchestration/continuity/ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal/canonical-mirror-receipt.json",
+    "orchestration/continuity/ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal/closeout-intent.json",
+    "orchestration/continuity/ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal/contract.json",
+    "orchestration/continuity/ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal/migration-report.md",
+    "orchestration/continuity/ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal/provider-free-migration-evidence.json",
 }
 
 _IDENTIFIER = re.compile(r"^[a-z][a-z0-9._-]{0,127}$")
@@ -1695,6 +2079,29 @@ def _validate_g1a3_r0_review(
 
 
 def _validate_g1a_subgate_authority(value: object, root: Path) -> dict[str, Any]:
+    if not isinstance(value, dict):
+        raise ProgrammeAdmissionError("g1a_subgate_authority_schema_invalid")
+    legacy_v2 = value.get("schema_version") == "ariadne.g1a_subgate_authority.v2"
+    implementation_review_keys = {
+        "decisive_g1a3_implementation_review_id",
+        "g1a3_implementation_review_history",
+    }
+    r0_review_keys = {
+        "decisive_g1a3_r0_review_id",
+        "g1a3_r0_review_history",
+    }
+    for optional_keys in (implementation_review_keys, r0_review_keys):
+        present = optional_keys & set(value)
+        if present and present != optional_keys:
+            raise ProgrammeAdmissionError("g1a_subgate_authority_schema_invalid")
+    legacy_review_keys = (
+        implementation_review_keys
+        if implementation_review_keys <= set(value)
+        else set()
+    ) | (r0_review_keys if r0_review_keys <= set(value) else set())
+    r1_keys = (
+        set() if legacy_v2 else {"decisive_g1a3_r1_review_id", "g1a3_r1_review_history"}
+    )
     authority = _exact_keys(
         value,
         {
@@ -1708,20 +2115,22 @@ def _validate_g1a_subgate_authority(value: object, root: Path) -> dict[str, Any]
             "decisive_transition_enablement_review_id",
             "decisive_implementation_review_id",
             "decisive_g1a3_transition_enablement_review_id",
-            "decisive_g1a3_implementation_review_id",
-            "decisive_g1a3_r0_review_id",
             "owner_disposition_history",
             "external_review_history",
             "implementation_review_history",
             "g1a3_transition_enablement_review_history",
-            "g1a3_implementation_review_history",
-            "g1a3_r0_review_history",
             "subgates",
-        },
+        }
+        | legacy_review_keys
+        | r1_keys,
         "g1a_subgate_authority_schema_invalid",
     )
     if (
-        authority["schema_version"] != "ariadne.g1a_subgate_authority.v2"
+        authority["schema_version"]
+        not in {
+            "ariadne.g1a_subgate_authority.v2",
+            "ariadne.g1a_subgate_authority.v3",
+        }
         or authority["owner_disposition_record_root"] != OWNER_DISPOSITION_ROOT
         or authority["external_subgate_review_record_root"] != SUBGATE_REVIEW_ROOT
         or authority["implementation_review_record_root"]
@@ -1736,8 +2145,68 @@ def _validate_g1a_subgate_authority(value: object, root: Path) -> dict[str, Any]
 
     _validate_g1a2_implementation_review(authority, root)
     _validate_g1a3_enablement_reviews(authority, root)
-    _validate_g1a3_implementation_review(authority, root)
-    _validate_g1a3_r0_review(authority, root)
+    if implementation_review_keys <= set(authority):
+        _validate_g1a3_implementation_review(authority, root)
+    if r0_review_keys <= set(authority):
+        _validate_g1a3_r0_review(authority, root)
+    if not legacy_v2:
+        r1_record = _validate_g1a3_r1_review(root)
+        r1_history = authority["g1a3_r1_review_history"]
+        if (
+            authority["decisive_g1a3_r1_review_id"] != G1A3_R1_REVIEW_ID
+            or not isinstance(r1_history, list)
+            or len(r1_history) != 1
+        ):
+            raise ProgrammeAdmissionError("g1a3_r1_review_history_invalid")
+        r1_entry = _exact_keys(
+            r1_history[0],
+            {
+                "review_id",
+                "review_record_path",
+                "review_record_sha256",
+                "reviewed_commit",
+                "reviewed_tree",
+                "reviewed_parent",
+                "review_subject",
+                "verdict",
+                "blocking_finding_count",
+                "reviewer_surface",
+                "g1a_exit_criteria_satisfied",
+                "g1a_closeout_authorized",
+                "g1b_transition_enablement_authorized",
+                "g1b_state_transition_authorized",
+                "g1b_implementation_authorized",
+                "provider_invocation_authorized",
+                "integration_execution_authorized",
+                "protected_ref_movement_authorized",
+            },
+            "g1a3_r1_review_history_entry_invalid",
+        )
+        for field in (
+            "review_id",
+            "reviewed_commit",
+            "reviewed_tree",
+            "reviewed_parent",
+            "review_subject",
+            "verdict",
+            "blocking_finding_count",
+            "reviewer_surface",
+            "g1a_exit_criteria_satisfied",
+            "g1a_closeout_authorized",
+            "g1b_transition_enablement_authorized",
+            "g1b_state_transition_authorized",
+            "g1b_implementation_authorized",
+            "provider_invocation_authorized",
+            "integration_execution_authorized",
+            "protected_ref_movement_authorized",
+        ):
+            if r1_entry[field] != r1_record[field]:
+                raise ProgrammeAdmissionError("g1a3_r1_review_history_binding_invalid")
+        if (
+            r1_entry["review_record_path"] != G1A3_R1_REVIEW_PATH
+            or r1_entry["review_record_sha256"] != G1A3_R1_REVIEW_SHA256
+        ):
+            raise ProgrammeAdmissionError("g1a3_r1_review_history_binding_invalid")
 
     history = authority["owner_disposition_history"]
     if not isinstance(history, list) or len(history) != 1:
@@ -1888,6 +2357,450 @@ def _validate_g1a_subgate_authority(value: object, root: Path) -> dict[str, Any]
     return authority
 
 
+def _validate_g1a3_r1_review(root: Path) -> dict[str, Any]:
+    try:
+        payload = (root / G1A3_R1_REVIEW_PATH).read_bytes()
+    except OSError as error:
+        raise ProgrammeAdmissionError("g1a3_r1_review_missing") from error
+    if _sha256_bytes(payload) != G1A3_R1_REVIEW_SHA256:
+        raise ProgrammeAdmissionError("g1a3_r1_review_digest_mismatch")
+    record = _strict_json_payload(payload, "g1a3_r1_review_invalid")
+    _exact_keys(
+        record,
+        {
+            "schema_version",
+            "review_id",
+            "recorded_at",
+            "review_subject",
+            "reviewed_commit",
+            "reviewed_tree",
+            "reviewed_parent",
+            "verdict",
+            "blocking_finding_count",
+            "reviewer_surface",
+            "g1a_exit_criteria_satisfied",
+            "g1a_closeout_authorized",
+            "g1b_transition_enablement_authorized",
+            "g1b_state_transition_authorized",
+            "g1b_implementation_authorized",
+            "provider_invocation_authorized",
+            "integration_execution_authorized",
+            "protected_ref_movement_authorized",
+            "only_next_work",
+            "source_artifact_sha256",
+        },
+        "g1a3_r1_review_schema_invalid",
+    )
+    if record != {
+        "schema_version": "ariadne.external_g1a3_r1_implementation_review.v1",
+        "review_id": G1A3_R1_REVIEW_ID,
+        "recorded_at": "2026-08-31T16:14:04+10:00",
+        "review_subject": "G1A.3-R1_complete_review_byte_binding",
+        "reviewed_commit": "23aa3ab19aec6cee9246e7dd3a88f61ada39bd7a",
+        "reviewed_tree": "e06fbf5c5f46b7a637a1d2987ce34c8f37990283",
+        "reviewed_parent": "29b07cc8c70dd5813d59d99fb2be113a88dd55e2",
+        "verdict": "PASS",
+        "blocking_finding_count": 0,
+        "reviewer_surface": "external_chatgpt_repository_review",
+        "g1a_exit_criteria_satisfied": True,
+        "g1a_closeout_authorized": True,
+        "g1b_transition_enablement_authorized": True,
+        "g1b_state_transition_authorized": False,
+        "g1b_implementation_authorized": False,
+        "provider_invocation_authorized": False,
+        "integration_execution_authorized": False,
+        "protected_ref_movement_authorized": False,
+        "only_next_work": "bounded_G1A_closeout_and_G1B_transition_enablement",
+        "source_artifact_sha256": "1876a099fe40f14b05106b174c9789af8bf88a15063d54dfa5dedcc39bb3058b",
+    }:
+        raise ProgrammeAdmissionError("g1a3_r1_review_semantics_invalid")
+    _validate_commit_tree_binding(
+        root,
+        commit=record["reviewed_commit"],
+        tree=record["reviewed_tree"],
+        reason="g1a3_r1_review_commit_tree_binding_invalid",
+    )
+    _validate_sole_parent(
+        root,
+        record["reviewed_commit"],
+        record["reviewed_parent"],
+        "g1a3_r1_review_parent_binding_invalid",
+    )
+    return record
+
+
+def _validate_g1a_accepted_surface(root: Path) -> dict[str, Any]:
+    surface = _strict_yaml(root / G1A_ACCEPTED_SURFACE_PATH)
+    _exact_keys(
+        surface,
+        {
+            "schema_version",
+            "status",
+            "source_commit",
+            "source_tree",
+            "source_parent",
+            "runtime_sources",
+            "authority_evidence",
+            "residual_risks",
+            "runtime_execution_authorized",
+            "future_transition_input_only",
+        },
+        "g1a_accepted_surface_schema_invalid",
+    )
+    if (
+        surface["schema_version"] != "ariadne.g1a_accepted_surface.v1"
+        or surface["status"] != "frozen_for_external_closeout_review"
+        or surface["source_commit"] != "23aa3ab19aec6cee9246e7dd3a88f61ada39bd7a"
+        or surface["source_tree"] != "e06fbf5c5f46b7a637a1d2987ce34c8f37990283"
+        or surface["source_parent"] != "29b07cc8c70dd5813d59d99fb2be113a88dd55e2"
+        or surface["runtime_execution_authorized"] is not False
+        or surface["future_transition_input_only"] is not True
+    ):
+        raise ProgrammeAdmissionError("g1a_accepted_surface_header_invalid")
+    sources = surface["runtime_sources"]
+    if not isinstance(sources, list) or len(sources) != len(G1A_ACCEPTED_SOURCE_BLOBS):
+        raise ProgrammeAdmissionError("g1a_accepted_source_inventory_invalid")
+    observed_sources: dict[str, str] = {}
+    for value in sources:
+        row = _exact_keys(
+            value,
+            {"path", "git_blob", "role"},
+            "g1a_accepted_source_entry_invalid",
+        )
+        path = _bounded_text(row["path"], "g1a_accepted_source_path_invalid", 240)
+        blob = _bounded_text(row["git_blob"], "g1a_accepted_source_blob_invalid", 40)
+        _bounded_text(row["role"], "g1a_accepted_source_role_invalid", 160)
+        if path in observed_sources or _SHA1.fullmatch(blob) is None:
+            raise ProgrammeAdmissionError("g1a_accepted_source_entry_invalid")
+        observed_sources[path] = blob
+        try:
+            source_blob = _run_git(
+                root, "rev-parse", f"{surface['source_commit']}:{path}"
+            )
+        except ProgrammeAdmissionError as error:
+            raise ProgrammeAdmissionError("g1a_accepted_source_missing") from error
+        if source_blob != blob:
+            raise ProgrammeAdmissionError("g1a_accepted_source_git_binding_mismatch")
+    if observed_sources != G1A_ACCEPTED_SOURCE_BLOBS:
+        raise ProgrammeAdmissionError("g1a_accepted_source_inventory_invalid")
+    protected_runtime = {
+        path: blob
+        for path, blob in G1A_ACCEPTED_SOURCE_BLOBS.items()
+        if path
+        not in {
+            "orchestration_harness/programme_admission.py",
+            "orchestration_harness/pinned_programme_gatekeeper.py",
+            "scripts/raisa_ariadne_recovery_preflight.py",
+        }
+    }
+    for path, expected_blob in protected_runtime.items():
+        if _run_git(root, "hash-object", "--", path) != expected_blob:
+            raise ProgrammeAdmissionError("g1a_accepted_runtime_blob_changed")
+
+    evidence = surface["authority_evidence"]
+    if not isinstance(evidence, list) or len(evidence) != len(G1A_ACCEPTED_EVIDENCE):
+        raise ProgrammeAdmissionError("g1a_accepted_evidence_inventory_invalid")
+    observed_evidence: dict[str, tuple[str, str, str, str]] = {}
+    for value in evidence:
+        row = _exact_keys(
+            value,
+            {
+                "path",
+                "schema_version",
+                "record_id",
+                "subject_commit",
+                "subject_tree",
+                "subject_parent",
+                "physical_sha256",
+                "git_blob",
+                "disposition",
+                "authority_granted",
+                "authority_withheld",
+            },
+            "g1a_accepted_evidence_entry_invalid",
+        )
+        path = _bounded_text(row["path"], "g1a_accepted_evidence_path_invalid", 260)
+        schema = _bounded_text(
+            row["schema_version"], "g1a_accepted_evidence_schema_invalid", 160
+        )
+        record_id = _bounded_text(
+            row["record_id"], "g1a_accepted_evidence_id_invalid", 160
+        )
+        physical = _bounded_text(
+            row["physical_sha256"], "g1a_accepted_evidence_digest_invalid", 71
+        )
+        blob = _bounded_text(row["git_blob"], "g1a_accepted_evidence_blob_invalid", 40)
+        _bounded_text(
+            row["disposition"], "g1a_accepted_evidence_disposition_invalid", 80
+        )
+        _unique_text_list(
+            row["authority_granted"],
+            "g1a_accepted_authority_granted_invalid",
+            minimum=0,
+        )
+        _unique_text_list(
+            row["authority_withheld"], "g1a_accepted_authority_withheld_invalid"
+        )
+        if (
+            path in observed_evidence
+            or _SHA256.fullmatch(physical) is None
+            or _SHA1.fullmatch(blob) is None
+        ):
+            raise ProgrammeAdmissionError("g1a_accepted_evidence_entry_invalid")
+        try:
+            payload = (root / path).read_bytes()
+        except OSError as error:
+            raise ProgrammeAdmissionError("g1a_accepted_evidence_missing") from error
+        record = _strict_json_payload(payload, "g1a_accepted_evidence_record_invalid")
+        actual_id = record.get(
+            "review_id", record.get("transition_id", record.get("disposition_id"))
+        )
+        if (
+            record.get("schema_version") != schema
+            or actual_id != record_id
+            or _sha256_bytes(payload) != physical
+            or _run_git(root, "hash-object", "--", path) != blob
+        ):
+            raise ProgrammeAdmissionError("g1a_accepted_evidence_binding_mismatch")
+        observed_evidence[path] = (schema, record_id, physical, blob)
+    if observed_evidence != G1A_ACCEPTED_EVIDENCE:
+        raise ProgrammeAdmissionError("g1a_accepted_evidence_inventory_invalid")
+    risks = surface["residual_risks"]
+    if risks != [
+        {
+            "id": "G1A1-PARSER-MIXED-TAB-001",
+            "status": "accepted_not_fixed",
+            "classification": "parser_robustness_backlog",
+            "description": "Mixed space-plus-tab indentation remains an unclosed free-form source-text marker edge case.",
+            "accepted_for_progression": True,
+            "must_be_reconsidered_before": "future high-trust free-form text integration authority",
+        }
+    ]:
+        raise ProgrammeAdmissionError("g1a_accepted_residual_risk_invalid")
+    return surface
+
+
+def _validate_g1b_clockwork_scope(
+    root: Path, *, future_kernel_active: bool = False
+) -> dict[str, Any]:
+    scope = _strict_yaml(root / G1B_CLOCKWORK_SCOPE_PATH)
+    _exact_keys(
+        scope,
+        {
+            "schema_version",
+            "status",
+            "source_commit",
+            "source_tree",
+            "items",
+            "inventory_closure",
+            "authority_surface_controls",
+            "persistence",
+            "known_historical_fixture_failures",
+            "raisa_emr4_coupling",
+            "portable_ariadne_extraction_boundary",
+            "runtime_mutation_authorized",
+            "implementation_authorized",
+        },
+        "g1b_clockwork_scope_schema_invalid",
+    )
+    if (
+        scope["schema_version"] != "ariadne.g1b_clockwork_scope.v1"
+        or scope["status"] != "inventory_only_review_pending"
+        or scope["source_commit"] != "23aa3ab19aec6cee9246e7dd3a88f61ada39bd7a"
+        or scope["source_tree"] != "e06fbf5c5f46b7a637a1d2987ce34c8f37990283"
+        or scope["runtime_mutation_authorized"] is not False
+        or scope["implementation_authorized"] is not False
+    ):
+        raise ProgrammeAdmissionError("g1b_clockwork_scope_header_invalid")
+    classifications = {
+        "state_schema",
+        "event_schema",
+        "command_schema",
+        "pure_transition_or_reducer",
+        "persistent_state_writer",
+        "append_only_journal",
+        "lease_or_CAS",
+        "replay_or_recovery",
+        "narrative_projection",
+        "provider_or_worktree_adapter",
+        "legacy_duplicate_authority",
+        "test_fixture",
+    }
+    items = scope["items"]
+    if not isinstance(items, list) or len(items) != len(CLOCKWORK_INVENTORY_BLOBS):
+        raise ProgrammeAdmissionError("g1b_clockwork_inventory_invalid")
+    observed: dict[str, str] = {}
+    for value in items:
+        row = _exact_keys(
+            value,
+            {
+                "path",
+                "git_blob",
+                "classifications",
+                "entrypoints",
+                "writers",
+                "authority_role",
+            },
+            "g1b_clockwork_item_schema_invalid",
+        )
+        path = _bounded_text(row["path"], "g1b_clockwork_path_invalid", 260)
+        blob = _bounded_text(row["git_blob"], "g1b_clockwork_blob_invalid", 40)
+        item_classes = set(
+            _unique_text_list(
+                row["classifications"], "g1b_clockwork_classification_invalid"
+            )
+        )
+        _unique_text_list(row["entrypoints"], "g1b_clockwork_entrypoint_invalid")
+        if not isinstance(row["writers"], list) or any(
+            not isinstance(item, str) for item in row["writers"]
+        ):
+            raise ProgrammeAdmissionError("g1b_clockwork_writer_invalid")
+        _bounded_text(
+            row["authority_role"], "g1b_clockwork_authority_role_invalid", 180
+        )
+        if path in observed or not item_classes or not item_classes <= classifications:
+            raise ProgrammeAdmissionError("g1b_clockwork_item_invalid")
+        if (
+            _run_git(root, "rev-parse", f"{scope['source_commit']}:{path}") != blob
+            or _run_git(root, "hash-object", "--", path) != blob
+        ):
+            raise ProgrammeAdmissionError("g1b_clockwork_blob_changed")
+        observed[path] = blob
+    if observed != CLOCKWORK_INVENTORY_BLOBS:
+        raise ProgrammeAdmissionError("g1b_clockwork_inventory_invalid")
+    closure = _exact_keys(
+        scope["inventory_closure"],
+        {
+            "minimum_clockwork_core_paths",
+            "direct_cli_paths",
+            "direct_test_paths",
+            "direct_fixture_paths",
+        },
+        "g1b_clockwork_inventory_closure_invalid",
+    )
+    closure_sets = {
+        key: set(
+            _unique_text_list(closure[key], "g1b_clockwork_inventory_closure_invalid")
+        )
+        for key in closure
+    }
+    current_state = _strict_json(root / STATE_PATH)
+    current_core = current_state.get("harness_inventory", {}).get("clockwork_core")
+    if (
+        not isinstance(current_core, list)
+        or set(current_core) != CLOCKWORK_CORE_MINIMUM_PATHS
+        or closure_sets["minimum_clockwork_core_paths"] != CLOCKWORK_CORE_MINIMUM_PATHS
+        or closure_sets["direct_cli_paths"] != CLOCKWORK_DIRECT_CLI_PATHS
+        or closure_sets["direct_test_paths"] != CLOCKWORK_DIRECT_TEST_PATHS
+        or closure_sets["direct_fixture_paths"] != CLOCKWORK_DIRECT_FIXTURE_PATHS
+        or not set().union(*closure_sets.values()).issubset(observed)
+    ):
+        raise ProgrammeAdmissionError("g1b_clockwork_inventory_closure_invalid")
+    controls = _exact_keys(
+        scope["authority_surface_controls"],
+        {
+            "orchestration_harness/governance_live_adoption.py",
+            "orchestration_harness/governance_migration.py",
+        },
+        "g1b_clockwork_authority_surface_controls_invalid",
+    )
+    control_keys = {
+        "roles",
+        "entrypoints",
+        "writers",
+        "authority_role",
+        "persistence_format",
+        "atomicity_or_commit_point",
+        "lease_or_cas_behavior",
+        "replay_or_recovery_behavior",
+        "narrative_or_structured_authority",
+        "raisa_emr4_coupling",
+        "portable_extraction_disposition",
+    }
+    items_by_path = {row["path"]: row for row in items}
+    for path, value in controls.items():
+        control = _exact_keys(
+            value,
+            control_keys,
+            "g1b_clockwork_authority_surface_controls_invalid",
+        )
+        roles = set(
+            _unique_text_list(
+                control["roles"],
+                "g1b_clockwork_authority_surface_controls_invalid",
+            )
+        )
+        entrypoints = set(
+            _unique_text_list(
+                control["entrypoints"],
+                "g1b_clockwork_authority_surface_controls_invalid",
+            )
+        )
+        writers = set(
+            _unique_text_list(
+                control["writers"],
+                "g1b_clockwork_authority_surface_controls_invalid",
+            )
+        )
+        if (
+            "persistent_state_writer" not in roles
+            or "adapter_migration_boundary" not in roles
+            or not entrypoints.issubset(set(items_by_path[path]["entrypoints"]))
+            or writers != set(items_by_path[path]["writers"])
+        ):
+            raise ProgrammeAdmissionError(
+                "g1b_clockwork_authority_surface_controls_invalid"
+            )
+        for key in control_keys - {"roles", "entrypoints", "writers"}:
+            _bounded_text(
+                control[key],
+                "g1b_clockwork_authority_surface_controls_invalid",
+                400,
+            )
+    failures = _exact_keys(
+        scope["known_historical_fixture_failures"],
+        {"count", "suite", "classification", "containment", "fixture_sources"},
+        "g1b_clockwork_failures_schema_invalid",
+    )
+    if (
+        failures["count"] != 7
+        or failures["suite"] != "tests/test_ariadne_governance_clockwork_tick.py"
+        or failures["classification"]
+        != "unchanged_pre_existing_tick_next_boundaries_floor_semantic_fixture_failures"
+        or failures["fixture_sources"]
+        != [
+            "f98baaa5c57cfcf00f8d2e6cd0d1113d4a59ed6e",
+            "1f6009943fcc2e8478511b95c85bf50388e3a634",
+            "dcb5093a61f0365aeb2651e3bcfd87a36fe0c438",
+        ]
+    ):
+        raise ProgrammeAdmissionError("g1b_clockwork_failures_invalid")
+    boundary = _exact_keys(
+        scope["portable_ariadne_extraction_boundary"],
+        {
+            "include",
+            "exclude",
+            "future_kernel_paths",
+            "future_kernel_paths_absent_at_source",
+        },
+        "g1b_extraction_boundary_schema_invalid",
+    )
+    present_future_paths = {
+        path for path in G1B1_ALLOWED_PATHS if (root / path).exists()
+    }
+    if (
+        set(boundary["future_kernel_paths"]) != G1B1_ALLOWED_PATHS
+        or boundary["future_kernel_paths_absent_at_source"] is not True
+        or (not future_kernel_active and present_future_paths)
+        or (
+            future_kernel_active
+            and present_future_paths not in (set(), G1B1_ALLOWED_PATHS)
+        )
+    ):
+        raise ProgrammeAdmissionError("g1b_future_kernel_boundary_invalid")
+    return scope
+
+
 def _validate_review_history(acceptance: dict[str, Any], root: Path) -> dict[str, Any]:
     history = acceptance["external_review_history"]
     if not isinstance(history, list) or not history:
@@ -1971,7 +2884,384 @@ def _validate_review_history(acceptance: dict[str, Any], root: Path) -> dict[str
     return by_id[decisive_id]
 
 
+def _validate_closeout_or_g1b1_state(value: dict[str, Any], root: Path) -> None:
+    _exact_keys(
+        value,
+        {
+            "schema_version",
+            "observed_at",
+            "programme_name",
+            "programme_mode",
+            "current_gate",
+            "current_gate_status",
+            "active_correction",
+            "active_profile",
+            "machine_authoritative",
+            "feature_work_eligible",
+            "product_work_eligible",
+            "authority",
+            "recovery_baton",
+            "protected_refs",
+            "clockwork_snapshot",
+            "repository_inventory",
+            "product_path_inventory",
+            "workflow_inventory",
+            "harness_inventory",
+            "global_checks",
+            "stop_ship_containment",
+            "task_selection",
+            "parallelism_efficacy",
+            "actions_performed",
+            "g0_acceptance",
+            "g1a_subgate_authority",
+            "g1a_closeout",
+            "g1b",
+            "g0_1_correction",
+            "g0_2_correction",
+            "g0_3_correction",
+            "g0_4_correction",
+            "g0_5_correction",
+            "g0_6_correction",
+            "g0_7_correction",
+            "g0_8_correction",
+            "gate_transition",
+        },
+        "programme_state_schema_invalid",
+    )
+    g1b1_active = value["active_profile"] == G1B1_ACTIVE_PROFILE
+    if (
+        value["schema_version"] != "raisa-ariadne.programme-state.v2"
+        or value["programme_mode"] != "recovery"
+        or value["machine_authoritative"] is not True
+        or value["feature_work_eligible"] is not False
+        or value["product_work_eligible"] is not False
+        or value["current_gate"] != ("G1B.1" if g1b1_active else "G1A.3")
+        or value["current_gate_status"] != "active"
+        or value["active_correction"]
+        != ("G1B.1" if g1b1_active else G1A_CLOSEOUT_CORRECTION)
+    ):
+        raise ProgrammeAdmissionError("programme_state_not_fail_closed")
+    frozen_source_state = _strict_json_payload(
+        _git_object_bytes(
+            root,
+            "23aa3ab19aec6cee9246e7dd3a88f61ada39bd7a:" + STATE_PATH.as_posix(),
+        ),
+        "g1a_frozen_source_state_invalid",
+    )
+    # The exact 23aa closeout lineage is immutable. Historical authored-synthetic
+    # G0 transition fixtures use a synthetic recovery base and are validated by
+    # the legacy v1 state validator after their transition; they must not be
+    # misclassified as the real closeout candidate while building that history.
+    exact_closeout_lineage = (
+        value["recovery_baton"].get("base_sha")
+        == "03e6860394c39086ec1ffb3f2457acc5f7c8b5f9"
+    )
+    if exact_closeout_lineage:
+        for frozen_key in (
+            "recovery_baton",
+            "protected_refs",
+            "clockwork_snapshot",
+            "repository_inventory",
+            "product_path_inventory",
+            "workflow_inventory",
+            "harness_inventory",
+            "global_checks",
+            "stop_ship_containment",
+            "g0_acceptance",
+            "g0_1_correction",
+            "g0_2_correction",
+            "g0_3_correction",
+            "g0_4_correction",
+            "g0_5_correction",
+            "g0_6_correction",
+            "g0_7_correction",
+            "g0_8_correction",
+            "gate_transition",
+        ):
+            if value[frozen_key] != frozen_source_state[frozen_key]:
+                raise ProgrammeAdmissionError(
+                    "retained_external_review_history_invalid"
+                    if frozen_key == "g0_acceptance"
+                    else "historical_review_binding_invalid"
+                )
+        for frozen_subgate in ("G1A.1", "G1A.2"):
+            if (
+                value["g1a_subgate_authority"]["subgates"][frozen_subgate]
+                != (
+                    frozen_source_state["g1a_subgate_authority"]["subgates"][
+                        frozen_subgate
+                    ]
+                )
+            ):
+                raise ProgrammeAdmissionError("retained_g1a_subgate_history_invalid")
+    authority_header = _exact_keys(
+        value["authority"],
+        {
+            "owner",
+            "directive_sha256",
+            "structured_state_precedence",
+            "narrative_handover_role",
+            "missing_or_invalid_state",
+        },
+        "programme_authority_schema_invalid",
+    )
+    if (
+        authority_header["owner"] != "Yuri"
+        or authority_header["structured_state_precedence"]
+        != "current-state.json then gates.yaml"
+        or authority_header["narrative_handover_role"] != "evidence_and_continuity_only"
+        or authority_header["missing_or_invalid_state"] != "hard_stop"
+    ):
+        raise ProgrammeAdmissionError("programme_authority_precedence_invalid")
+    protected = _exact_keys(
+        value["protected_refs"],
+        {"movement_authorized", "expected_sha", "refs"},
+        "protected_refs_schema_invalid",
+    )
+    if (
+        protected["movement_authorized"] is not False
+        or protected["expected_sha"] != "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+        or set(protected["refs"])
+        != {
+            "refs/heads/master",
+            "refs/heads/handoff/current",
+            "refs/remotes/origin/master",
+            "refs/remotes/origin/handoff/current",
+        }
+    ):
+        raise ProgrammeAdmissionError("protected_refs_invalid")
+    acceptance = _exact_keys(
+        value["g0_acceptance"],
+        {
+            "status",
+            "independent_review",
+            "decisive_review_id",
+            "external_review_history",
+            "g0_checks",
+            "next_action",
+        },
+        "g0_acceptance_schema_invalid",
+    )
+    decisive_g0 = _validate_review_history(acceptance, root)
+    if (
+        acceptance["status"] != "passed"
+        or decisive_g0["verdict"] != "PASS"
+        or decisive_g0["blocking_finding_count"] != 0
+        or decisive_g0["g1a_authorized"] is not True
+    ):
+        raise ProgrammeAdmissionError("g0_decisive_review_state_invalid")
+
+    g1a_authority = _validate_g1a_subgate_authority(
+        value["g1a_subgate_authority"], root
+    )
+    if g1a_authority["schema_version"] != "ariadne.g1a_subgate_authority.v3":
+        raise ProgrammeAdmissionError("g1a_closeout_authority_version_invalid")
+    g1a3 = _exact_keys(
+        g1a_authority["subgates"]["G1A.3"],
+        {
+            "status",
+            "transition_enablement_tranche",
+            "transition_enablement_status",
+            "state_transition_status",
+            "state_transition",
+            "state_transition",
+            "implementation_status",
+            "implementation_review_id",
+            "r0_status",
+            "r1_state_transition_status",
+            "r1_state_transition",
+            "implementation_authorized",
+            "implementation_lifecycle",
+            "integration_execution_authorized",
+            "provider_invocation_authorized",
+            "protected_ref_movement_authorized",
+            "next_action",
+            "owner_exception",
+        },
+        "g1a_3_state_schema_invalid",
+    )
+    lifecycle = _exact_keys(
+        g1a3["implementation_lifecycle"],
+        {"started", "candidate_published", "external_review", "completed"},
+        "g1a3_implementation_lifecycle_schema_invalid",
+    )
+    owner_exception = _exact_keys(
+        g1a3["owner_exception"],
+        {
+            "task_generation",
+            "branch",
+            "authorized_parent_commit",
+            "old_pinned_gatekeeper_commit",
+            "old_pinned_gatekeeper_expected_result",
+            "candidate_local_admission_authoritative",
+            "candidate_commit_limit",
+            "state_transition_authorized",
+            "provider_invocation_authorized",
+            "integration_authorized",
+            "protected_ref_movement_authorized",
+        },
+        "g1a_closeout_owner_exception_schema_invalid",
+    )
+    if (
+        g1a3["status"] != "implementation_complete_closeout_review_pending"
+        or g1a3["transition_enablement_status"] != "external_review_passed"
+        or g1a3["state_transition_status"] != "complete"
+        or g1a3["implementation_status"] != "external_review_passed"
+        or g1a3["implementation_review_id"] != G1A3_R1_REVIEW_ID
+        or g1a3["r0_status"] != "external_review_passed"
+        or g1a3["r1_state_transition_status"] != "complete"
+        or g1a3["implementation_authorized"] is not False
+        or lifecycle
+        != {
+            "started": True,
+            "candidate_published": True,
+            "external_review": "pass",
+            "completed": True,
+        }
+        or g1a3["integration_execution_authorized"] is not False
+        or g1a3["provider_invocation_authorized"] is not False
+        or g1a3["protected_ref_movement_authorized"] is not False
+        or g1a3["next_action"]
+        != "external_G1A_closeout_G1B_transition_enablement_review_only"
+        or owner_exception
+        != {
+            "task_generation": G1A_CLOSEOUT_REPLACEMENT_TASK_GENERATION,
+            "branch": "codex/raisa-ariadne-recovery-g0",
+            "authorized_parent_commit": "23aa3ab19aec6cee9246e7dd3a88f61ada39bd7a",
+            "old_pinned_gatekeeper_commit": "ccbe0d6a36218903fc6582a0b348bd0b0199794b",
+            "old_pinned_gatekeeper_expected_result": "reject_out_of_profile_controller_paths",
+            "candidate_local_admission_authoritative": False,
+            "candidate_commit_limit": 1,
+            "state_transition_authorized": False,
+            "provider_invocation_authorized": False,
+            "integration_authorized": False,
+            "protected_ref_movement_authorized": False,
+        }
+    ):
+        raise ProgrammeAdmissionError("g1a3_closeout_state_invalid")
+
+    closeout = _exact_keys(
+        value["g1a_closeout"],
+        {
+            "status",
+            "external_review_status",
+            "g1a_closed",
+            "accepted_surface_path",
+            "clockwork_scope_path",
+            "candidate_local_admission_authoritative",
+            "next_action",
+        },
+        "g1a_closeout_state_schema_invalid",
+    )
+    g1b = _exact_keys(
+        value["g1b"],
+        {
+            "status",
+            "transition_enablement_status",
+            "state_transition_status",
+            "state_transition",
+            "implementation_started",
+            "provider_invocation_authorized",
+            "integration_execution_authorized",
+            "protected_ref_movement_authorized",
+        },
+        "g1b_state_schema_invalid",
+    )
+    expected_closeout = {
+        "status": "accepted" if g1b1_active else "review_pending",
+        "external_review_status": "pass" if g1b1_active else "pending",
+        "g1a_closed": g1b1_active,
+        "accepted_surface_path": G1A_ACCEPTED_SURFACE_PATH.as_posix(),
+        "clockwork_scope_path": G1B_CLOCKWORK_SCOPE_PATH.as_posix(),
+        "candidate_local_admission_authoritative": False,
+        "next_action": (
+            "begin_bounded_G1B1_pure_state_event_kernel"
+            if g1b1_active
+            else "external_G1A_closeout_G1B_transition_enablement_review_only"
+        ),
+    }
+    expected_g1b = {
+        "status": "active_G1B1" if g1b1_active else "closed_pending_state_transition",
+        "transition_enablement_status": "external_review_passed"
+        if g1b1_active
+        else "review_pending",
+        "state_transition_status": "complete" if g1b1_active else "not_started",
+        "state_transition": g1b["state_transition"] if g1b1_active else None,
+        "implementation_started": False,
+        "provider_invocation_authorized": False,
+        "integration_execution_authorized": False,
+        "protected_ref_movement_authorized": False,
+    }
+    if closeout != expected_closeout or g1b != expected_g1b:
+        raise ProgrammeAdmissionError("g1a_closeout_g1b_state_invalid")
+    if g1b1_active:
+        transition = _exact_keys(
+            g1b["state_transition"],
+            {
+                "status",
+                "transition_id",
+                "from_profile",
+                "to_profile",
+                "enablement_review_id",
+                "enablement_candidate_commit",
+                "enablement_candidate_tree",
+                "external_review_status",
+                "blocking_finding_count",
+                "reviewer_surface",
+                "next_action",
+            },
+            "g1a_to_g1b1_transition_state_schema_invalid",
+        )
+        if (
+            transition["status"] != "complete"
+            or transition["from_profile"] != G1A_CLOSEOUT_REVIEW_PENDING_PROFILE
+            or transition["to_profile"] != G1B1_ACTIVE_PROFILE
+            or transition["external_review_status"] != "pass"
+            or transition["blocking_finding_count"] != 0
+            or transition["next_action"] != "begin_bounded_G1B1_pure_state_event_kernel"
+            or _SHA1.fullmatch(transition["enablement_candidate_commit"]) is None
+            or _SHA1.fullmatch(transition["enablement_candidate_tree"]) is None
+        ):
+            raise ProgrammeAdmissionError("g1a_to_g1b1_transition_state_invalid")
+
+    selection = _exact_keys(
+        value["task_selection"],
+        {
+            "autonomous_selection_enabled",
+            "allowed_task_kinds",
+            "blocked_task_kinds",
+            "admission_command",
+            "out_of_gate_result",
+            "next_eligible_tranche",
+            "next_eligible_now",
+            "next_tranche_started",
+            "next_tranche_admission_requires_state_transition",
+            "next_eligibility_condition",
+        },
+        "programme_task_selection_schema_invalid",
+    )
+    if (
+        selection["autonomous_selection_enabled"] is not False
+        or selection["allowed_task_kinds"] != ([G1B1_TASK_CLASS] if g1b1_active else [])
+        or selection["out_of_gate_result"] != "blocked"
+        or selection["next_eligible_tranche"] != "G1B.1"
+        or selection["next_eligible_now"] is not g1b1_active
+        or selection["next_tranche_started"] is not False
+        or selection["next_tranche_admission_requires_state_transition"]
+        is not (not g1b1_active)
+    ):
+        raise ProgrammeAdmissionError("programme_task_selection_not_fail_closed")
+    _validate_g1a_accepted_surface(root)
+    _validate_g1b_clockwork_scope(root, future_kernel_active=g1b1_active)
+
+
 def _validate_state(value: dict[str, Any], root: Path) -> None:
+    if value.get("active_profile") in {
+        G1A_CLOSEOUT_REVIEW_PENDING_PROFILE,
+        G1B1_ACTIVE_PROFILE,
+    }:
+        _validate_closeout_or_g1b1_state(value, root)
+        return
     _exact_keys(
         value,
         {
@@ -2064,6 +3354,18 @@ def _validate_state(value: dict[str, Any], root: Path) -> None:
         },
         "g1a_2_state_schema_invalid",
     )
+    g1a3_correction_keys = {
+        "implementation_status",
+        "implementation_review_id",
+        "r0_status",
+        "r1_state_transition_status",
+        "r1_state_transition",
+    }
+    present_g1a3_correction_keys = g1a3_correction_keys & set(subgates["G1A.3"])
+    if present_g1a3_correction_keys and (
+        present_g1a3_correction_keys != g1a3_correction_keys
+    ):
+        raise ProgrammeAdmissionError("g1a_3_state_schema_invalid")
     g1a3_state = _exact_keys(
         subgates["G1A.3"],
         {
@@ -2072,11 +3374,6 @@ def _validate_state(value: dict[str, Any], root: Path) -> None:
             "transition_enablement_status",
             "state_transition_status",
             "state_transition",
-            "implementation_status",
-            "implementation_review_id",
-            "r0_status",
-            "r1_state_transition_status",
-            "r1_state_transition",
             "implementation_authorized",
             "implementation_started",
             "integration_execution_authorized",
@@ -2084,7 +3381,8 @@ def _validate_state(value: dict[str, Any], root: Path) -> None:
             "protected_ref_movement_authorized",
             "next_action",
             "owner_exception",
-        },
+        }
+        | present_g1a3_correction_keys,
         "g1a_3_state_schema_invalid",
     )
     owner_exception = _exact_keys(
@@ -2120,16 +3418,30 @@ def _validate_state(value: dict[str, Any], root: Path) -> None:
         or g1a3_state["provider_invocation_authorized"] is not False
         or g1a3_state["protected_ref_movement_authorized"] is not False
         or owner_exception
-        != {
-            "task_generation": "g1a3-r0-review-producer-body-only-ast-replacement-20260830-v1",
-            "branch": "codex/raisa-ariadne-recovery-g0",
-            "authorized_parent_commit": "5a298856be05ce08e50dd7ab4501b7e16a3d0843",
-            "candidate_commit_limit": 1,
-            "state_transition_authorized": False,
-            "provider_invocation_authorized": False,
-            "integration_authorized": False,
-            "protected_ref_movement_authorized": False,
-        }
+        != (
+            {
+                "task_generation": "g1a3-transition-enablement-runtime-source-encoding-replacement-20260829-v1",
+                "branch": "codex/raisa-ariadne-recovery-g0",
+                "authorized_parent_commit": "37e2d6f51ebbdb281771f922a5f460fd23e2571b",
+                "candidate_commit_limit": 1,
+                "state_transition_authorized": False,
+                "provider_invocation_authorized": False,
+                "integration_authorized": False,
+                "protected_ref_movement_authorized": False,
+            }
+            if value["active_profile"]
+            in {G1A3_ENABLEMENT_PENDING_PROFILE, G1A3_ACTIVE_PROFILE}
+            else {
+                "task_generation": "g1a3-r0-review-producer-body-only-ast-replacement-20260830-v1",
+                "branch": "codex/raisa-ariadne-recovery-g0",
+                "authorized_parent_commit": "5a298856be05ce08e50dd7ab4501b7e16a3d0843",
+                "candidate_commit_limit": 1,
+                "state_transition_authorized": False,
+                "provider_invocation_authorized": False,
+                "integration_authorized": False,
+                "protected_ref_movement_authorized": False,
+            }
+        )
     ):
         raise ProgrammeAdmissionError("g1a_subgate_state_not_fail_closed")
     transition = _exact_keys(
@@ -2190,6 +3502,7 @@ def _validate_state(value: dict[str, Any], root: Path) -> None:
         )
         r0_pending = value["active_profile"] == G1A3_R0_REVIEW_PENDING_PROFILE
         r1_active = value["active_profile"] == G1A3_R1_ACTIVE_PROFILE
+        g1a3_active = value["active_profile"] == G1A3_ACTIVE_PROFILE
         if (r0_pending or r1_active) and (
             g1a3_state["implementation_status"] != "revision_required"
             or g1a3_state["implementation_review_id"]
@@ -2239,14 +3552,22 @@ def _validate_state(value: dict[str, Any], root: Path) -> None:
             )
         if (
             g1a3_state["status"]
-            != ("active_review_binding" if r1_active else "revision_required")
+            != (
+                "active_review_binding"
+                if r1_active
+                else ("active" if g1a3_active else "revision_required")
+            )
             or g1a3_state["transition_enablement_status"] != "external_review_passed"
-            or g1a3_state["implementation_authorized"] is not r1_active
+            or g1a3_state["implementation_authorized"] is not (r1_active or g1a3_active)
             or g1a3_state["next_action"]
             != (
                 "begin_bounded_G1A3_R1_review_binding_implementation"
                 if r1_active
-                else "external_G1A3_R0_review_only"
+                else (
+                    "begin_bounded_G1A3_integration_consumer_implementation"
+                    if g1a3_active
+                    else "external_G1A3_R0_review_only"
+                )
             )
             or g1a3_transition["status"] != "complete"
             or g1a3_transition["from_gate"] != G1A3_TRANSITION_FROM_GATE
@@ -2257,7 +3578,7 @@ def _validate_state(value: dict[str, Any], root: Path) -> None:
             != subgate_authority["decisive_g1a3_transition_enablement_review_id"]
             or g1a3_transition["external_review_status"] != "pass"
             or g1a3_transition["blocking_finding_count"] != 0
-            or not (r0_pending or r1_active)
+            or not (r0_pending or r1_active or g1a3_active)
         ):
             raise ProgrammeAdmissionError("g1a3_state_transition_invalid")
         _validate_commit_tree_binding(
@@ -2992,17 +4313,22 @@ def _validate_gates(value: dict[str, Any], state: dict[str, Any]) -> None:
         or programme["feature_work_eligible"] is not False
         or programme["next_eligible_tranche"]
         != (
-            ADMITTED_PROGRAMME_GATE
-            if state["active_correction"] == ADMITTED_PROGRAMME_GATE
+            "G1B.1"
+            if state["active_profile"]
+            in {G1A_CLOSEOUT_REVIEW_PENDING_PROFILE, G1B1_ACTIVE_PROFILE}
             else (
-                G1A3_TRANSITION_TO_GATE
-                if state["active_profile"]
-                in {G1A3_ENABLEMENT_PENDING_PROFILE, G1A3_ACTIVE_PROFILE}
+                ADMITTED_PROGRAMME_GATE
+                if state["active_correction"] == ADMITTED_PROGRAMME_GATE
                 else (
-                    G1A3_R1_CORRECTION
+                    G1A3_TRANSITION_TO_GATE
                     if state["active_profile"]
-                    in {G1A3_R0_REVIEW_PENDING_PROFILE, G1A3_R1_ACTIVE_PROFILE}
-                    else SUBGATE_TRANSITION_TO_GATE
+                    in {G1A3_ENABLEMENT_PENDING_PROFILE, G1A3_ACTIVE_PROFILE}
+                    else (
+                        G1A3_R1_CORRECTION
+                        if state["active_profile"]
+                        in {G1A3_R0_REVIEW_PENDING_PROFILE, G1A3_R1_ACTIVE_PROFILE}
+                        else SUBGATE_TRANSITION_TO_GATE
+                    )
                 )
             )
         )
@@ -3057,7 +4383,27 @@ def _validate_gates(value: dict[str, Any], state: dict[str, Any]) -> None:
         }:
             raise ProgrammeAdmissionError("gate_mode_invalid")
         by_id[gate_id] = gate
-    if state["active_correction"] == ADMITTED_PROGRAMME_GATE:
+    if state["active_profile"] in {
+        G1A_CLOSEOUT_REVIEW_PENDING_PROFILE,
+        G1B1_ACTIVE_PROFILE,
+    }:
+        g1b1_active = state["active_profile"] == G1B1_ACTIVE_PROFILE
+        current_statuses = {
+            "G0": "passed",
+            "G0.1": "superseded_revision_required",
+            "G0.2": "superseded_revision_required",
+            "G0.3": "superseded_revision_required",
+            "G0.4": "superseded_revision_required",
+            "G0.5": "superseded_revision_required",
+            "G0.6": "superseded_revision_required",
+            "G0.7": "superseded_revision_required",
+            "G0.8": "external_review_passed",
+            "G1A": "passed" if g1b1_active else "closeout_review_pending",
+            "G1A.1": "accepted_by_owner_with_residual_risk",
+            "G1A.2": "external_review_passed",
+            "G1A.3": "implementation_external_review_passed",
+        }
+    elif state["active_correction"] == ADMITTED_PROGRAMME_GATE:
         current_statuses = {
             "G0": "revision_required_g0_8",
             "G0.1": "superseded_revision_required",
@@ -3124,6 +4470,8 @@ def _validate_gates(value: dict[str, Any], state: dict[str, Any]) -> None:
     elif state["active_profile"] in {
         G1A3_R0_REVIEW_PENDING_PROFILE,
         G1A3_R1_ACTIVE_PROFILE,
+        G1A_CLOSEOUT_REVIEW_PENDING_PROFILE,
+        G1B1_ACTIVE_PROFILE,
     }:
         r1_active = state["active_profile"] == G1A3_R1_ACTIVE_PROFILE
         current_statuses = {
@@ -3161,7 +4509,27 @@ def _validate_gates(value: dict[str, Any], state: dict[str, Any]) -> None:
         }
     expected_statuses = {
         **current_statuses,
-        "G1B": "blocked_by_G1A",
+        "G1B": (
+            "active_subgate_G1B_1"
+            if state["active_profile"] == G1B1_ACTIVE_PROFILE
+            else (
+                "closed_pending_state_transition"
+                if state["active_profile"] == G1A_CLOSEOUT_REVIEW_PENDING_PROFILE
+                else "blocked_by_G1A"
+            )
+        ),
+        **(
+            {
+                "G1B.1": (
+                    "active"
+                    if state["active_profile"] == G1B1_ACTIVE_PROFILE
+                    else "closed_pending_state_transition"
+                )
+            }
+            if state["active_profile"]
+            in {G1A_CLOSEOUT_REVIEW_PENDING_PROFILE, G1B1_ACTIVE_PROFILE}
+            else {}
+        ),
         "G1C": "blocked_by_G1B",
         "G1D": "blocked_by_G1C",
         "G1E": "blocked_by_G1D",
@@ -3178,7 +4546,21 @@ def _validate_gates(value: dict[str, Any], state: dict[str, Any]) -> None:
         for gate_id, status in expected_statuses.items()
     ):
         raise ProgrammeAdmissionError("gate_status_vocabulary_invalid")
-    if state["active_correction"] == ADMITTED_PROGRAMME_GATE:
+    if state["active_profile"] == G1A_CLOSEOUT_REVIEW_PENDING_PROFILE:
+        if (
+            by_id["G1A"]["status"] != "closeout_review_pending"
+            or by_id["G1B"]["status"] != "closed_pending_state_transition"
+            or by_id["G1B.1"]["status"] != "closed_pending_state_transition"
+        ):
+            raise ProgrammeAdmissionError("g1a_closeout_g1b_not_closed")
+    elif state["active_profile"] == G1B1_ACTIVE_PROFILE:
+        if (
+            by_id["G1A"]["status"] != "passed"
+            or by_id["G1B"]["status"] != "active_subgate_G1B_1"
+            or by_id["G1B.1"]["status"] != "active"
+        ):
+            raise ProgrammeAdmissionError("g1b1_not_active")
+    elif state["active_correction"] == ADMITTED_PROGRAMME_GATE:
         if by_id.get("G1A.1", {}).get("status") != "blocked_by_external_G0_review":
             raise ProgrammeAdmissionError("g1a_not_closed")
     elif state["active_correction"] == TRANSITION_TO_GATE:
@@ -3652,7 +5034,7 @@ def _validate_g1a_scope(value: dict[str, Any], root: Path) -> None:
     )
     if (
         value["schema_version"] != "raisa-ariadne.g1a-verdict-integration-scope.v4"
-        or value["status"] != "g1a3_r0_review_pending_r1_predefined"
+        or value["status"] != "g1a3_r1_external_review_passed_closeout_review_pending"
         or value["inventory_source_commit"]
         != "91f1e6e645424a448bdcdfa2adabb86d31fb5f0b"
         or value["active_subgate_after_g0_transition"] != TRANSITION_TO_GATE
@@ -3830,7 +5212,7 @@ def _validate_g1a_scope(value: dict[str, Any], root: Path) -> None:
         )
     )
     if (
-        g1a3["status"] != "revision_required_R0_review_pending_R1_predefined"
+        g1a3["status"] != "external_review_passed_frozen"
         or g1a3["task_class"] != G1A3_R1_TASK_CLASS
         or set(_unique_text_list(g1a3["allowed_paths"], "g1a_3_paths_invalid"))
         != G1A3_R1_ALLOWED_PATHS
@@ -4164,6 +5546,1144 @@ def g1a3_review_producer_contract_reasons(repo_root: Path) -> list[str]:
     return list(dict.fromkeys(reasons))
 
 
+_G1B1_RUNTIME_TOP_LEVEL_ORDER = (
+    "STATE_SCHEMA_VERSION",
+    "EVENT_SCHEMA_VERSION",
+    "COMMAND_SCHEMA_VERSION",
+    "ClockworkState",
+    "ClockworkEvent",
+    "ClockworkCommand",
+    "InvalidTransition",
+    "TransitionResult",
+    "transition",
+    "canonical_bytes",
+)
+_G1B1_TEST_FUNCTION_ORDER = (
+    "test_same_input_gives_byte_identical_output",
+    "test_canonical_key_order_and_unicode_policy",
+    "test_no_ambient_locale_time_or_environment_dependency",
+    "test_closed_invalid_transition_behavior",
+    "test_transition_does_not_mutate_inputs",
+    "test_serialized_form_includes_schema_versions",
+)
+_G1B1_TEST_IMPORT_ORDER = (
+    "COMMAND_SCHEMA_VERSION",
+    "EVENT_SCHEMA_VERSION",
+    "STATE_SCHEMA_VERSION",
+    "ClockworkCommand",
+    "ClockworkEvent",
+    "ClockworkState",
+    "InvalidTransition",
+    "TransitionResult",
+    "canonical_bytes",
+    "transition",
+)
+_G1B1_RUNTIME_PRIVATE_BINDINGS = frozenset({"_dataclass", "_Enum", "_unique", "_json"})
+_G1B1_RUNTIME_CALL_TARGETS = frozenset(
+    {
+        "_dataclass",
+        "TransitionResult",
+        "InvalidTransition",
+        "type",
+        "TypeError",
+    }
+)
+_G1B1_TEST_CALL_TARGETS = frozenset(
+    {"transition", "canonical_bytes", "TransitionResult", "InvalidTransition"}
+)
+_G1B1_LEXICALLY_PROTECTED_BINDINGS = frozenset(
+    set(G1B1_EXACT_PUBLIC_API)
+    | set(_G1B1_RUNTIME_PRIVATE_BINDINGS)
+    | {"type", "TypeError", "str", "list", "tuple", "dict", "sorted"}
+)
+_G1B1_DYNAMIC_EXECUTION_NAMES = frozenset(
+    {
+        "__import__",
+        "breakpoint",
+        "compile",
+        "eval",
+        "exec",
+        "getattr",
+        "globals",
+        "input",
+        "locals",
+        "open",
+        "print",
+        "setattr",
+        "delattr",
+        "vars",
+    }
+)
+_G1B1_REFLECTIVE_DUNDERS = frozenset(
+    {
+        "__bases__",
+        "__builtins__",
+        "__class__",
+        "__code__",
+        "__dict__",
+        "__globals__",
+        "__loader__",
+        "__mro__",
+        "__spec__",
+        "__subclasses__",
+    }
+)
+
+
+def _g1b1_compile_source(path: Path) -> ast.Module:
+    payload = path.read_bytes()
+    module = compile(
+        payload,
+        str(path),
+        mode="exec",
+        flags=ast.PyCF_ONLY_AST | ast.PyCF_TYPE_COMMENTS,
+        dont_inherit=True,
+    )
+    if not isinstance(module, ast.Module):
+        raise ValueError("compiled source is not a module AST")
+    return module
+
+
+def _g1b1_optional_docstring_body(body: list[ast.stmt]) -> list[ast.stmt]:
+    if (
+        body
+        and isinstance(body[0], ast.Expr)
+        and isinstance(body[0].value, ast.Constant)
+        and isinstance(body[0].value.value, str)
+    ):
+        return body[1:]
+    return body
+
+
+def _g1b1_ast_matches_expression(node: ast.AST | None, source: str) -> bool:
+    if node is None:
+        return False
+    expected = ast.parse(source, mode="eval").body
+    return ast.dump(node, include_attributes=False) == ast.dump(
+        expected, include_attributes=False
+    )
+
+
+def _g1b1_public_bindings(module: ast.Module) -> set[str]:
+    names: set[str] = set()
+    for node in module.body:
+        if isinstance(node, (ast.FunctionDef, ast.ClassDef)):
+            names.add(node.name)
+        elif isinstance(node, ast.Import):
+            names.update(
+                alias.asname or alias.name.split(".")[0] for alias in node.names
+            )
+        elif isinstance(node, ast.ImportFrom):
+            names.update(alias.asname or alias.name for alias in node.names)
+        elif isinstance(node, (ast.Assign, ast.AnnAssign)):
+            targets = node.targets if isinstance(node, ast.Assign) else [node.target]
+            names.update(
+                target.id for target in targets if isinstance(target, ast.Name)
+            )
+    return {name for name in names if not name.startswith("_")}
+
+
+def _g1b1_exact_dataclass_decorator(node: ast.AST) -> bool:
+    if not isinstance(node, ast.Call) or node.args:
+        return False
+    if not isinstance(node.func, ast.Name) or node.func.id != "_dataclass":
+        return False
+    values = {keyword.arg: keyword.value for keyword in node.keywords}
+    return (
+        set(values) == {"frozen", "slots"}
+        and isinstance(values["frozen"], ast.Constant)
+        and values["frozen"].value is True
+        and isinstance(values["slots"], ast.Constant)
+        and values["slots"].value is True
+    )
+
+
+def _g1b1_function_signature_exact(
+    node: ast.FunctionDef,
+    arguments: tuple[tuple[str, str], ...],
+    returns: str | None,
+) -> bool:
+    observed = tuple(
+        (argument.arg, ast.unparse(argument.annotation) if argument.annotation else "")
+        for argument in node.args.args
+    )
+    return not (
+        node.decorator_list
+        or node.args.posonlyargs
+        or node.args.vararg is not None
+        or node.args.kwonlyargs
+        or node.args.kwarg is not None
+        or node.args.defaults
+        or node.args.kw_defaults
+        or observed != arguments
+        or (ast.unparse(node.returns) if node.returns else None) != returns
+        or node.type_comment is not None
+        or getattr(node, "type_params", [])
+    )
+
+
+def _g1b1_validate_enum(node: ast.ClassDef) -> tuple[bool, set[str]]:
+    valid_header = (
+        len(node.bases) == 1
+        and isinstance(node.bases[0], ast.Name)
+        and node.bases[0].id == "_Enum"
+        and not node.keywords
+        and len(node.decorator_list) == 1
+        and isinstance(node.decorator_list[0], ast.Name)
+        and node.decorator_list[0].id == "_unique"
+        and not getattr(node, "type_params", [])
+    )
+    names: set[str] = set()
+    values: set[str] = set()
+    body = _g1b1_optional_docstring_body(node.body)
+    for statement in body:
+        if not (
+            isinstance(statement, ast.Assign)
+            and len(statement.targets) == 1
+            and isinstance(statement.targets[0], ast.Name)
+            and statement.targets[0].id.isupper()
+            and isinstance(statement.value, ast.Constant)
+            and isinstance(statement.value.value, str)
+            and bool(statement.value.value)
+        ):
+            return False, set()
+        names.add(statement.targets[0].id)
+        values.add(statement.value.value)
+    return valid_header and bool(names) and len(names) == len(values), names
+
+
+def _g1b1_validate_dataclass(
+    node: ast.ClassDef,
+    expected: tuple[tuple[str, str, str | None], ...],
+) -> bool:
+    if not (
+        not node.bases
+        and not node.keywords
+        and len(node.decorator_list) == 1
+        and _g1b1_exact_dataclass_decorator(node.decorator_list[0])
+        and not getattr(node, "type_params", [])
+    ):
+        return False
+    body = _g1b1_optional_docstring_body(node.body)
+    if len(body) != len(expected):
+        return False
+    for statement, (name, annotation, default) in zip(body, expected, strict=True):
+        if not (
+            isinstance(statement, ast.AnnAssign)
+            and isinstance(statement.target, ast.Name)
+            and statement.target.id == name
+            and statement.simple == 1
+            and _g1b1_ast_matches_expression(statement.annotation, annotation)
+        ):
+            return False
+        if default is None:
+            if statement.value is not None:
+                return False
+        elif not _g1b1_ast_matches_expression(statement.value, default):
+            return False
+    return True
+
+
+def _g1b1_enum_member(
+    node: ast.AST,
+    *,
+    enum_name: str,
+    members: dict[str, set[str]],
+) -> bool:
+    return (
+        isinstance(node, ast.Attribute)
+        and isinstance(node.value, ast.Name)
+        and node.value.id == enum_name
+        and node.attr in members.get(enum_name, set())
+    )
+
+
+def _g1b1_transition_condition(node: ast.AST, *, members: dict[str, set[str]]) -> bool:
+    if isinstance(node, ast.BoolOp) and isinstance(node.op, (ast.And, ast.Or)):
+        return len(node.values) >= 2 and all(
+            _g1b1_transition_condition(value, members=members) for value in node.values
+        )
+    if not (
+        isinstance(node, ast.Compare)
+        and len(node.ops) == 1
+        and isinstance(node.ops[0], (ast.Is, ast.IsNot))
+        and len(node.comparators) == 1
+        and isinstance(node.left, ast.Name)
+    ):
+        return False
+    enum_for_parameter = {
+        "state": "ClockworkState",
+        "event": "ClockworkEvent",
+        "command": "ClockworkCommand",
+    }
+    enum_name = enum_for_parameter.get(node.left.id)
+    return bool(enum_name) and _g1b1_enum_member(
+        node.comparators[0], enum_name=enum_name, members=members
+    )
+
+
+def _g1b1_transition_return_value(
+    node: ast.AST, *, members: dict[str, set[str]]
+) -> bool:
+    if not (
+        isinstance(node, ast.Call)
+        and isinstance(node.func, ast.Name)
+        and node.func.id == "TransitionResult"
+        and len(node.args) == 3
+        and not node.keywords
+    ):
+        return False
+    state, command, invalid = node.args
+    state_valid = (
+        isinstance(state, ast.Name)
+        and state.id == "state"
+        or _g1b1_enum_member(state, enum_name="ClockworkState", members=members)
+    )
+    command_valid = (
+        isinstance(command, ast.Name)
+        and command.id == "command"
+        or _g1b1_enum_member(command, enum_name="ClockworkCommand", members=members)
+    )
+    invalid_valid = isinstance(invalid, ast.Constant) and invalid.value is None
+    if (
+        isinstance(invalid, ast.Call)
+        and isinstance(invalid.func, ast.Name)
+        and invalid.func.id == "InvalidTransition"
+        and len(invalid.args) == 1
+        and not invalid.keywords
+        and isinstance(invalid.args[0], ast.Constant)
+        and isinstance(invalid.args[0].value, str)
+        and bool(invalid.args[0].value)
+    ):
+        invalid_valid = True
+    return state_valid and command_valid and invalid_valid
+
+
+def _g1b1_transition_statements(
+    statements: list[ast.stmt], *, members: dict[str, set[str]]
+) -> bool:
+    if not statements:
+        return False
+    for statement in statements:
+        if isinstance(statement, ast.Return):
+            if not _g1b1_transition_return_value(statement.value, members=members):
+                return False
+            continue
+        if isinstance(statement, ast.If):
+            if not (
+                _g1b1_transition_condition(statement.test, members=members)
+                and _g1b1_transition_statements(statement.body, members=members)
+                and (
+                    not statement.orelse
+                    or _g1b1_transition_statements(statement.orelse, members=members)
+                )
+            ):
+                return False
+            continue
+        return False
+    return True
+
+
+def _g1b1_transition_must_return(statements: list[ast.stmt]) -> bool:
+    """Prove that every reachable path through a restricted statement list returns."""
+    for statement in statements:
+        if isinstance(statement, ast.Return):
+            return True
+        if isinstance(statement, ast.If) and (
+            _g1b1_transition_must_return(statement.body)
+            and bool(statement.orelse)
+            and _g1b1_transition_must_return(statement.orelse)
+        ):
+            return True
+    return False
+
+
+def _g1b1_fixed_type_error_raise(statement: ast.stmt) -> bool:
+    return (
+        isinstance(statement, ast.Raise)
+        and statement.cause is None
+        and isinstance(statement.exc, ast.Call)
+        and isinstance(statement.exc.func, ast.Name)
+        and statement.exc.func.id == "TypeError"
+        and len(statement.exc.args) == 1
+        and not statement.exc.keywords
+        and isinstance(statement.exc.args[0], ast.Constant)
+        and statement.exc.args[0].value == "invalid_clockwork_transition_result"
+    )
+
+
+def _g1b1_exact_guard(statement: ast.stmt, expression: str) -> bool:
+    return (
+        isinstance(statement, ast.If)
+        and not statement.orelse
+        and len(statement.body) == 1
+        and _g1b1_ast_matches_expression(statement.test, expression)
+        and _g1b1_fixed_type_error_raise(statement.body[0])
+    )
+
+
+def _g1b1_validate_canonical_body(node: ast.FunctionDef) -> tuple[bool, bool]:
+    guards = (
+        "not (type(value) is TransitionResult)",
+        "not (type(value.state) is ClockworkState)",
+        "not (type(value.command) is ClockworkCommand)",
+        "not (value.invalid is None or type(value.invalid) is InvalidTransition)",
+        "not (value.invalid is None or type(value.invalid.code) is str)",
+    )
+    guard_valid = len(node.body) >= len(guards) and all(
+        _g1b1_exact_guard(statement, expression)
+        for statement, expression in zip(node.body, guards, strict=False)
+    )
+    if len(node.body) != 7:
+        return guard_valid, False
+    payload, returned = node.body[5:]
+    payload_valid = (
+        isinstance(payload, ast.Assign)
+        and len(payload.targets) == 1
+        and isinstance(payload.targets[0], ast.Name)
+        and payload.targets[0].id == "payload"
+        and _g1b1_ast_matches_expression(
+            payload.value,
+            """{
+                "command_schema_version": COMMAND_SCHEMA_VERSION,
+                "event_schema_version": EVENT_SCHEMA_VERSION,
+                "invalid": value.invalid.code if value.invalid is not None else None,
+                "state": value.state.value,
+                "state_schema_version": STATE_SCHEMA_VERSION,
+                "command": value.command.value,
+            }""",
+        )
+    )
+    return_valid = isinstance(returned, ast.Return) and _g1b1_ast_matches_expression(
+        returned.value,
+        """_json.dumps(
+            payload,
+            allow_nan=False,
+            ensure_ascii=False,
+            separators=(",", ":"),
+            sort_keys=True,
+        ).encode("utf-8")""",
+    )
+    return guard_valid, payload_valid and return_valid
+
+
+def _g1b1_top_level_binding_name(statement: ast.stmt) -> str | None:
+    if (
+        isinstance(statement, ast.Assign)
+        and len(statement.targets) == 1
+        and isinstance(statement.targets[0], ast.Name)
+    ):
+        return statement.targets[0].id
+    if isinstance(statement, (ast.ClassDef, ast.FunctionDef)):
+        return statement.name
+    return None
+
+
+def _g1b1_runtime_imports_exact(body: list[ast.stmt]) -> bool:
+    if len(body) < 3:
+        return False
+    dataclass_import, enum_import, json_import = body[:3]
+    return (
+        isinstance(dataclass_import, ast.ImportFrom)
+        and dataclass_import.module == "dataclasses"
+        and dataclass_import.level == 0
+        and [(item.name, item.asname) for item in dataclass_import.names]
+        == [("dataclass", "_dataclass")]
+        and isinstance(enum_import, ast.ImportFrom)
+        and enum_import.module == "enum"
+        and enum_import.level == 0
+        and [(item.name, item.asname) for item in enum_import.names]
+        == [("Enum", "_Enum"), ("unique", "_unique")]
+        and isinstance(json_import, ast.Import)
+        and [(item.name, item.asname) for item in json_import.names]
+        == [("json", "_json")]
+        and sum(isinstance(item, (ast.Import, ast.ImportFrom)) for item in body) == 3
+    )
+
+
+def _g1b1_scan_lexical_shadowing(module: ast.Module, reasons: list[str]) -> None:
+    for function in (
+        node for node in ast.walk(module) if isinstance(node, ast.FunctionDef)
+    ):
+        bound = {
+            argument.arg
+            for argument in (
+                *function.args.posonlyargs,
+                *function.args.args,
+                *function.args.kwonlyargs,
+            )
+        }
+        if function.args.vararg:
+            bound.add(function.args.vararg.arg)
+        if function.args.kwarg:
+            bound.add(function.args.kwarg.arg)
+        bound.update(
+            node.id
+            for statement in function.body
+            for node in ast.walk(statement)
+            if isinstance(node, ast.Name) and isinstance(node.ctx, ast.Store)
+        )
+        bound.update(
+            node.name
+            for statement in function.body
+            for node in ast.walk(statement)
+            if isinstance(node, (ast.FunctionDef, ast.ClassDef))
+            and node is not function
+        )
+        if bound & _G1B1_LEXICALLY_PROTECTED_BINDINGS:
+            reasons.append("g1b1_lexical_binding_shadowed")
+
+
+def _g1b1_scan_obvious_effects(
+    module: ast.Module, *, test_module: bool, reasons: list[str]
+) -> None:
+    allowed_names = (
+        _G1B1_TEST_CALL_TARGETS if test_module else _G1B1_RUNTIME_CALL_TARGETS
+    )
+    for statement in _g1b1_optional_docstring_body(module.body):
+        if isinstance(statement, ast.Expr):
+            reasons.append("g1b1_module_level_effect_forbidden")
+        if isinstance(statement, (ast.Assign, ast.AnnAssign)):
+            value = statement.value
+            if value is not None and not isinstance(value, ast.Constant):
+                reasons.append("g1b1_module_level_effect_forbidden")
+    for node in ast.walk(module):
+        if isinstance(node, ast.FunctionDef):
+            definition_values: list[ast.AST] = [
+                *node.decorator_list,
+                *node.args.defaults,
+                *(value for value in node.args.kw_defaults if value is not None),
+                *(
+                    argument.annotation
+                    for argument in (
+                        *node.args.posonlyargs,
+                        *node.args.args,
+                        *node.args.kwonlyargs,
+                    )
+                    if argument.annotation is not None
+                ),
+            ]
+            if node.returns is not None:
+                definition_values.append(node.returns)
+            if any(
+                isinstance(item, ast.Call)
+                for value in definition_values
+                for item in ast.walk(value)
+            ):
+                reasons.append("g1b1_definition_time_effect_forbidden")
+        if isinstance(node, ast.Name) and node.id in _G1B1_DYNAMIC_EXECUTION_NAMES:
+            reasons.append("g1b1_dynamic_execution_forbidden")
+        if isinstance(node, ast.Attribute) and node.attr in _G1B1_REFLECTIVE_DUNDERS:
+            reasons.append("g1b1_reflection_forbidden")
+        if isinstance(node, (ast.JoinedStr, ast.FormattedValue)):
+            reasons.append("g1b1_protocol_dispatch_forbidden")
+        if not isinstance(node, ast.Call):
+            continue
+        if isinstance(node.func, ast.Name):
+            if node.func.id in _G1B1_DYNAMIC_EXECUTION_NAMES:
+                reasons.append("g1b1_dynamic_execution_forbidden")
+            elif node.func.id not in allowed_names:
+                reasons.append("g1b1_unknown_call_target")
+                if node.func.id in {
+                    "str",
+                    "list",
+                    "tuple",
+                    "dict",
+                    "sorted",
+                }:
+                    reasons.append("g1b1_protocol_dispatch_forbidden")
+            continue
+        if not isinstance(node.func, ast.Attribute):
+            reasons.append("g1b1_unknown_call_target")
+            continue
+        exact_dumps = (
+            isinstance(node.func.value, ast.Name)
+            and node.func.value.id == "_json"
+            and node.func.attr == "dumps"
+        )
+        exact_encode = (
+            node.func.attr == "encode"
+            and isinstance(node.func.value, ast.Call)
+            and isinstance(node.func.value.func, ast.Attribute)
+            and isinstance(node.func.value.func.value, ast.Name)
+            and node.func.value.func.value.id == "_json"
+            and node.func.value.func.attr == "dumps"
+            and len(node.args) == 1
+            and isinstance(node.args[0], ast.Constant)
+            and node.args[0].value == "utf-8"
+            and not node.keywords
+        )
+        if not (exact_dumps or exact_encode):
+            reasons.append("g1b1_unknown_call_target")
+            reasons.append("g1b1_protocol_dispatch_forbidden")
+
+
+def _g1b1_validate_runtime_contract(module: ast.Module, reasons: list[str]) -> None:
+    body = _g1b1_optional_docstring_body(module.body)
+    if not _g1b1_runtime_imports_exact(body):
+        reasons.append("g1b1_runtime_import_not_allowlisted")
+    observed_order = tuple(
+        name
+        for statement in body[3:]
+        if (name := _g1b1_top_level_binding_name(statement)) is not None
+    )
+    if len(body) != 13 or observed_order != _G1B1_RUNTIME_TOP_LEVEL_ORDER:
+        reasons.append("g1b1_runtime_top_level_grammar_invalid")
+    if _g1b1_public_bindings(module) != set(G1B1_EXACT_PUBLIC_API):
+        reasons.append("g1b1_exact_public_api_mismatch")
+
+    assignments = {
+        statement.targets[0].id: statement.value
+        for statement in body
+        if isinstance(statement, ast.Assign)
+        and len(statement.targets) == 1
+        and isinstance(statement.targets[0], ast.Name)
+    }
+    for name, expected in G1B1_SCHEMA_CONSTANTS.items():
+        value = assignments.get(name)
+        if not isinstance(value, ast.Constant) or value.value != expected:
+            reasons.append("g1b1_schema_constant_invalid")
+
+    classes = {
+        statement.name: statement
+        for statement in body
+        if isinstance(statement, ast.ClassDef)
+    }
+    members: dict[str, set[str]] = {}
+    for name in ("ClockworkState", "ClockworkEvent", "ClockworkCommand"):
+        node = classes.get(name)
+        valid, observed_members = (
+            _g1b1_validate_enum(node) if node is not None else (False, set())
+        )
+        if not valid:
+            reasons.append("g1b1_closed_vocabulary_type_invalid")
+        members[name] = observed_members
+
+    invalid = classes.get("InvalidTransition")
+    result = classes.get("TransitionResult")
+    if invalid is None or not _g1b1_validate_dataclass(
+        invalid, (("code", "str", None),)
+    ):
+        reasons.append("g1b1_transition_result_type_invalid")
+    if result is None or not _g1b1_validate_dataclass(
+        result,
+        (
+            ("state", "ClockworkState", None),
+            ("command", "ClockworkCommand", None),
+            ("invalid", "InvalidTransition | None", "None"),
+        ),
+    ):
+        reasons.append("g1b1_transition_result_type_invalid")
+
+    functions = {
+        statement.name: statement
+        for statement in body
+        if isinstance(statement, ast.FunctionDef)
+    }
+    transition = functions.get("transition")
+    if transition is None or not _g1b1_function_signature_exact(
+        transition,
+        (
+            ("state", "ClockworkState"),
+            ("event", "ClockworkEvent"),
+            ("command", "ClockworkCommand"),
+        ),
+        "TransitionResult",
+    ):
+        reasons.append("g1b1_transition_signature_invalid")
+    elif not _g1b1_transition_statements(transition.body, members=members):
+        reasons.append("g1b1_transition_grammar_invalid")
+    elif not _g1b1_transition_must_return(transition.body):
+        reasons.append("g1b1_transition_not_total")
+
+    canonical = functions.get("canonical_bytes")
+    if canonical is None or not _g1b1_function_signature_exact(
+        canonical, (("value", "TransitionResult"),), "bytes"
+    ):
+        reasons.append("g1b1_canonical_bytes_signature_invalid")
+    elif canonical is not None:
+        guards_valid, body_valid = _g1b1_validate_canonical_body(canonical)
+        if not guards_valid:
+            reasons.append("g1b1_canonical_type_guards_invalid")
+        if not body_valid:
+            reasons.append("g1b1_canonical_bytes_grammar_invalid")
+            reasons.append("g1b1_canonical_bytes_contract_missing")
+        if any(
+            isinstance(node, ast.Call)
+            and isinstance(node.func, ast.Attribute)
+            and isinstance(node.func.value, ast.Name)
+            and node.func.value.id == "_json"
+            and node.func.attr == "dumps"
+            and any(
+                keyword.arg == "sort_keys"
+                and isinstance(keyword.value, ast.Constant)
+                and keyword.value.value is not True
+                for keyword in node.keywords
+            )
+            for node in ast.walk(canonical)
+        ):
+            reasons.append("g1b1_nondeterministic_serialization_forbidden")
+
+    _g1b1_scan_lexical_shadowing(module, reasons)
+    _g1b1_scan_obvious_effects(module, test_module=False, reasons=reasons)
+
+
+def _g1b1_attribute_chain(node: ast.Attribute) -> tuple[str, tuple[str, ...]] | None:
+    attributes: list[str] = []
+    current: ast.AST = node
+    while isinstance(current, ast.Attribute):
+        attributes.append(current.attr)
+        current = current.value
+    if not isinstance(current, ast.Name):
+        return None
+    return current.id, tuple(reversed(attributes))
+
+
+def _g1b1_test_expression(node: ast.AST, local_names: set[str]) -> bool:
+    if isinstance(node, ast.Constant):
+        return True
+    if isinstance(node, ast.Name):
+        return node.id in local_names or node.id in G1B1_EXACT_PUBLIC_API
+    if isinstance(node, ast.Attribute):
+        chain = _g1b1_attribute_chain(node)
+        if chain is None:
+            return False
+        root, attributes = chain
+        if root in {"ClockworkState", "ClockworkEvent", "ClockworkCommand"}:
+            return len(attributes) == 1 and attributes[0].isupper()
+        return root in local_names and all(
+            item in {"state", "command", "invalid", "code", "value"}
+            for item in attributes
+        )
+    if isinstance(node, ast.Call):
+        if not (
+            isinstance(node.func, ast.Name)
+            and node.func.id in _G1B1_TEST_CALL_TARGETS
+            and not node.keywords
+        ):
+            return False
+        arity = {
+            "transition": 3,
+            "canonical_bytes": 1,
+            "TransitionResult": 3,
+            "InvalidTransition": 1,
+        }
+        return len(node.args) == arity[node.func.id] and all(
+            _g1b1_test_expression(argument, local_names) for argument in node.args
+        )
+    if isinstance(node, ast.Compare):
+        return (
+            len(node.ops) == 1
+            and isinstance(node.ops[0], (ast.Eq, ast.Is, ast.IsNot, ast.In, ast.NotIn))
+            and len(node.comparators) == 1
+            and _g1b1_test_expression(node.left, local_names)
+            and _g1b1_test_expression(node.comparators[0], local_names)
+        )
+    if isinstance(node, ast.BoolOp) and isinstance(node.op, (ast.And, ast.Or)):
+        return all(_g1b1_test_expression(value, local_names) for value in node.values)
+    if isinstance(node, ast.UnaryOp) and isinstance(node.op, ast.Not):
+        return _g1b1_test_expression(node.operand, local_names)
+    if isinstance(node, (ast.Tuple, ast.List)):
+        return all(_g1b1_test_expression(value, local_names) for value in node.elts)
+    if isinstance(node, ast.Dict):
+        return all(
+            key is not None
+            and _g1b1_test_expression(key, local_names)
+            and _g1b1_test_expression(value, local_names)
+            for key, value in zip(node.keys, node.values, strict=True)
+        )
+    return False
+
+
+def _g1b1_test_call_origins(
+    node: ast.AST, local_call_origins: dict[str, set[str]]
+) -> set[str]:
+    origins = {
+        item.func.id
+        for item in ast.walk(node)
+        if isinstance(item, ast.Call) and isinstance(item.func, ast.Name)
+    }
+    for item in ast.walk(node):
+        if isinstance(item, ast.Name) and isinstance(item.ctx, ast.Load):
+            origins.update(local_call_origins.get(item.id, set()))
+    return origins
+
+
+def _g1b1_mutation_identity_assertion(node: ast.AST) -> str | None:
+    if not (
+        isinstance(node, ast.Compare)
+        and len(node.ops) == 1
+        and isinstance(node.ops[0], ast.Is)
+        and len(node.comparators) == 1
+        and isinstance(node.left, ast.Name)
+        and isinstance(node.comparators[0], ast.Attribute)
+        and isinstance(node.comparators[0].value, ast.Name)
+    ):
+        return None
+    expected = {
+        "state": "ClockworkState",
+        "event": "ClockworkEvent",
+        "command": "ClockworkCommand",
+    }
+    parameter = node.left.id
+    enum_name = expected.get(parameter)
+    if (
+        enum_name is None
+        or node.comparators[0].value.id != enum_name
+        or not node.comparators[0].attr.isupper()
+    ):
+        return None
+    return parameter
+
+
+_G1B1_CANONICAL_EXPECTED_BYTES = (
+    b'{"command":"hold","command_schema_version":"ariadne.clockwork_command.v1",'
+    b'"event_schema_version":"ariadne.clockwork_event.v1","invalid":null,'
+    b'"state":"active","state_schema_version":"ariadne.clockwork_state.v1"}'
+)
+
+
+def _g1b1_assignment_matches(
+    statement: ast.stmt, *, name: str, expression: str
+) -> bool:
+    return (
+        isinstance(statement, ast.Assign)
+        and len(statement.targets) == 1
+        and isinstance(statement.targets[0], ast.Name)
+        and statement.targets[0].id == name
+        and _g1b1_ast_matches_expression(statement.value, expression)
+    )
+
+
+def _g1b1_assert_matches(statement: ast.stmt, expression: str) -> bool:
+    return (
+        isinstance(statement, ast.Assert)
+        and statement.msg is None
+        and _g1b1_ast_matches_expression(statement.test, expression)
+    )
+
+
+def _g1b1_structurally_equal(left: ast.AST, right: ast.AST) -> bool:
+    return ast.dump(left, include_attributes=False) == ast.dump(
+        right, include_attributes=False
+    )
+
+
+def _g1b1_assertion_is_derived_tautology(node: ast.AST) -> bool:
+    for candidate in ast.walk(node):
+        if not (
+            isinstance(candidate, ast.Compare)
+            and len(candidate.ops) == 1
+            and len(candidate.comparators) == 1
+        ):
+            continue
+        comparator = candidate.comparators[0]
+        if isinstance(candidate.ops[0], (ast.Eq, ast.NotEq, ast.Is, ast.IsNot)):
+            if _g1b1_structurally_equal(candidate.left, comparator):
+                return True
+        if isinstance(candidate.ops[0], (ast.In, ast.NotIn)) and isinstance(
+            comparator, (ast.Tuple, ast.List, ast.Set)
+        ):
+            if comparator.elts and all(
+                _g1b1_structurally_equal(candidate.left, item)
+                for item in comparator.elts
+            ):
+                return True
+    return False
+
+
+def _g1b1_named_test_semantics_exact(node: ast.FunctionDef) -> bool:
+    body = node.body
+    repeated_inputs = {
+        "test_same_input_gives_byte_identical_output": ("ClockworkCommand.ADVANCE"),
+        "test_no_ambient_locale_time_or_environment_dependency": (
+            "ClockworkCommand.HOLD"
+        ),
+    }
+    command = repeated_inputs.get(node.name)
+    if command is not None:
+        transition_expression = (
+            f"transition(ClockworkState.IDLE, ClockworkEvent.START, {command})"
+        )
+        return (
+            len(body) == 5
+            and _g1b1_assignment_matches(
+                body[0], name="first_result", expression=transition_expression
+            )
+            and _g1b1_assignment_matches(
+                body[1], name="second_result", expression=transition_expression
+            )
+            and _g1b1_assignment_matches(
+                body[2],
+                name="first_payload",
+                expression="canonical_bytes(first_result)",
+            )
+            and _g1b1_assignment_matches(
+                body[3],
+                name="second_payload",
+                expression="canonical_bytes(second_result)",
+            )
+            and _g1b1_assert_matches(body[4], "first_payload == second_payload")
+        )
+    if node.name == "test_canonical_key_order_and_unicode_policy":
+        return (
+            len(body) == 3
+            and _g1b1_assignment_matches(
+                body[0],
+                name="result",
+                expression=(
+                    "TransitionResult(ClockworkState.ACTIVE, "
+                    "ClockworkCommand.HOLD, None)"
+                ),
+            )
+            and _g1b1_assignment_matches(
+                body[1], name="payload", expression="canonical_bytes(result)"
+            )
+            and isinstance(body[2], ast.Assert)
+            and isinstance(body[2].test, ast.Compare)
+            and len(body[2].test.ops) == 1
+            and isinstance(body[2].test.ops[0], ast.Eq)
+            and isinstance(body[2].test.left, ast.Name)
+            and body[2].test.left.id == "payload"
+            and len(body[2].test.comparators) == 1
+            and isinstance(body[2].test.comparators[0], ast.Constant)
+            and body[2].test.comparators[0].value == _G1B1_CANONICAL_EXPECTED_BYTES
+        )
+    if node.name == "test_closed_invalid_transition_behavior":
+        return (
+            len(body) == 3
+            and _g1b1_assignment_matches(
+                body[0],
+                name="result",
+                expression=(
+                    "transition(ClockworkState.ACTIVE, ClockworkEvent.START, "
+                    "ClockworkCommand.HOLD)"
+                ),
+            )
+            and _g1b1_assignment_matches(
+                body[1],
+                name="expected",
+                expression='InvalidTransition("invalid_transition")',
+            )
+            and _g1b1_assert_matches(body[2], "result.invalid == expected")
+        )
+    if node.name == "test_transition_does_not_mutate_inputs":
+        return (
+            len(body) == 7
+            and _g1b1_assignment_matches(
+                body[0], name="state", expression="ClockworkState.IDLE"
+            )
+            and _g1b1_assignment_matches(
+                body[1], name="event", expression="ClockworkEvent.START"
+            )
+            and _g1b1_assignment_matches(
+                body[2], name="command", expression="ClockworkCommand.ADVANCE"
+            )
+            and isinstance(body[3], ast.Expr)
+            and _g1b1_ast_matches_expression(
+                body[3].value, "transition(state, event, command)"
+            )
+            and _g1b1_assert_matches(body[4], "state is ClockworkState.IDLE")
+            and _g1b1_assert_matches(body[5], "event is ClockworkEvent.START")
+            and _g1b1_assert_matches(body[6], "command is ClockworkCommand.ADVANCE")
+        )
+    if node.name == "test_serialized_form_includes_schema_versions":
+        expected_versions = (
+            b"ariadne.clockwork_state.v1",
+            b"ariadne.clockwork_event.v1",
+            b"ariadne.clockwork_command.v1",
+        )
+        if not (
+            len(body) == 5
+            and _g1b1_assignment_matches(
+                body[0],
+                name="result",
+                expression=(
+                    "transition(ClockworkState.IDLE, ClockworkEvent.START, "
+                    "ClockworkCommand.ADVANCE)"
+                ),
+            )
+            and _g1b1_assignment_matches(
+                body[1], name="payload", expression="canonical_bytes(result)"
+            )
+        ):
+            return False
+        observed_versions: list[bytes] = []
+        for statement in body[2:]:
+            if not (
+                isinstance(statement, ast.Assert)
+                and isinstance(statement.test, ast.Compare)
+                and len(statement.test.ops) == 1
+                and isinstance(statement.test.ops[0], ast.In)
+                and isinstance(statement.test.left, ast.Constant)
+                and isinstance(statement.test.left.value, bytes)
+                and len(statement.test.comparators) == 1
+                and isinstance(statement.test.comparators[0], ast.Name)
+                and statement.test.comparators[0].id == "payload"
+            ):
+                return False
+            observed_versions.append(statement.test.left.value)
+        return tuple(observed_versions) == expected_versions
+    return False
+
+
+def _g1b1_validate_test_function(node: ast.FunctionDef) -> bool:
+    if not _g1b1_function_signature_exact(node, (), None):
+        return False
+    local_names: set[str] = set()
+    local_call_origins: dict[str, set[str]] = {}
+    substantive_asserts = 0
+    mutation_identity_assertions: set[str] = set()
+    required_assert_calls = {
+        "test_same_input_gives_byte_identical_output": {"canonical_bytes"},
+        "test_canonical_key_order_and_unicode_policy": {"canonical_bytes"},
+        "test_no_ambient_locale_time_or_environment_dependency": {"canonical_bytes"},
+        "test_closed_invalid_transition_behavior": {
+            "transition",
+            "InvalidTransition",
+        },
+        "test_transition_does_not_mutate_inputs": set(),
+        "test_serialized_form_includes_schema_versions": {"canonical_bytes"},
+    }[node.name]
+    for statement in node.body:
+        if isinstance(statement, ast.Assign):
+            if not (
+                len(statement.targets) == 1
+                and isinstance(statement.targets[0], ast.Name)
+                and statement.targets[0].id not in _G1B1_LEXICALLY_PROTECTED_BINDINGS
+                and _g1b1_test_expression(statement.value, local_names)
+            ):
+                return False
+            local_names.add(statement.targets[0].id)
+            local_call_origins[statement.targets[0].id] = _g1b1_test_call_origins(
+                statement.value, local_call_origins
+            )
+            continue
+        if isinstance(statement, ast.Expr):
+            if not (
+                isinstance(statement.value, ast.Call)
+                and isinstance(statement.value.func, ast.Name)
+                and statement.value.func.id == "transition"
+                and _g1b1_test_expression(statement.value, local_names)
+            ):
+                return False
+            continue
+        if isinstance(statement, ast.Assert):
+            if (
+                isinstance(statement.test, ast.Constant)
+                and statement.test.value is True
+            ) or not _g1b1_test_expression(statement.test, local_names):
+                return False
+            if _g1b1_assertion_is_derived_tautology(statement.test):
+                return False
+            if node.name == "test_transition_does_not_mutate_inputs":
+                parameter = _g1b1_mutation_identity_assertion(statement.test)
+                if parameter is None:
+                    return False
+                mutation_identity_assertions.add(parameter)
+            elif not required_assert_calls.issubset(
+                _g1b1_test_call_origins(statement.test, local_call_origins)
+            ):
+                return False
+            substantive_asserts += 1
+            continue
+        return False
+    required_calls = {
+        "test_same_input_gives_byte_identical_output": {
+            "transition",
+            "canonical_bytes",
+        },
+        "test_canonical_key_order_and_unicode_policy": {
+            "TransitionResult",
+            "canonical_bytes",
+        },
+        "test_no_ambient_locale_time_or_environment_dependency": {
+            "transition",
+            "canonical_bytes",
+        },
+        "test_closed_invalid_transition_behavior": {
+            "transition",
+            "InvalidTransition",
+        },
+        "test_transition_does_not_mutate_inputs": {"transition"},
+        "test_serialized_form_includes_schema_versions": {
+            "transition",
+            "canonical_bytes",
+        },
+    }[node.name]
+    observed_calls = {
+        item.func.id
+        for item in ast.walk(node)
+        if isinstance(item, ast.Call) and isinstance(item.func, ast.Name)
+    }
+    mutation_contract_valid = (
+        node.name != "test_transition_does_not_mutate_inputs"
+        or mutation_identity_assertions == {"state", "event", "command"}
+    )
+    return (
+        substantive_asserts > 0
+        and required_calls.issubset(observed_calls)
+        and mutation_contract_valid
+        and _g1b1_named_test_semantics_exact(node)
+    )
+
+
+def _g1b1_validate_test_contract(module: ast.Module, reasons: list[str]) -> None:
+    body = _g1b1_optional_docstring_body(module.body)
+    exact_import = (
+        bool(body)
+        and isinstance(body[0], ast.ImportFrom)
+        and body[0].module
+        == G1B1_RUNTIME_PATH.with_suffix("").as_posix().replace("/", ".")
+        and body[0].level == 0
+        and tuple(item.name for item in body[0].names) == _G1B1_TEST_IMPORT_ORDER
+        and all(item.asname is None for item in body[0].names)
+        and sum(isinstance(item, (ast.Import, ast.ImportFrom)) for item in body) == 1
+    )
+    if not exact_import:
+        reasons.append("g1b1_test_import_not_allowlisted")
+        reasons.append("g1b1_test_kernel_import_surface_not_exact")
+    functions = [item for item in body[1:] if isinstance(item, ast.FunctionDef)]
+    if (
+        len(body) != 1 + len(_G1B1_TEST_FUNCTION_ORDER)
+        or tuple(item.name for item in functions) != _G1B1_TEST_FUNCTION_ORDER
+    ):
+        reasons.append("g1b1_test_top_level_grammar_invalid")
+    if set(item.name for item in functions) != set(G1B1_REQUIRED_DETERMINISM_TESTS):
+        reasons.append("g1b1_determinism_test_contract_incomplete")
+    for function in functions:
+        if (
+            function.name not in G1B1_REQUIRED_DETERMINISM_TESTS
+            or not _g1b1_validate_test_function(function)
+        ):
+            reasons.append("g1b1_test_function_grammar_invalid")
+            reasons.append("g1b1_determinism_test_contract_incomplete")
+    _g1b1_scan_lexical_shadowing(module, reasons)
+    _g1b1_scan_obvious_effects(module, test_module=True, reasons=reasons)
+
+
+def g1b1_kernel_contract_reasons(repo_root: Path) -> list[str]:
+    """Evaluate the closed two-file future G1B.1 pure-kernel/effect contract."""
+    root = repo_root.resolve()
+    runtime = root / G1B1_RUNTIME_PATH
+    tests = root / G1B1_TEST_PATH
+    if not runtime.is_file() or not tests.is_file():
+        return ["g1b1_exact_files_missing"]
+    try:
+        runtime_module = _g1b1_compile_source(runtime)
+    except (LookupError, OSError, SyntaxError, UnicodeError, ValueError):
+        return ["g1b1_runtime_source_invalid"]
+    try:
+        test_module = _g1b1_compile_source(tests)
+    except (LookupError, OSError, SyntaxError, UnicodeError, ValueError):
+        return ["g1b1_test_source_invalid"]
+
+    reasons: list[str] = []
+    _g1b1_validate_runtime_contract(runtime_module, reasons)
+    _g1b1_validate_test_contract(test_module, reasons)
+    return list(dict.fromkeys(reasons))
+
+
 def _validate_overlay(
     value: dict[str, Any], state: dict[str, Any], root: Path
 ) -> list[str]:
@@ -4179,6 +6699,8 @@ def _validate_overlay(
             "risk_file",
             "inventory_file",
             "g1a_scope_file",
+            "g1a_accepted_surface_file",
+            "g1b_clockwork_scope_file",
             "admission_command",
             "required_before",
             "missing_or_invalid_state",
@@ -4190,6 +6712,7 @@ def _validate_overlay(
             "subgate_transition_policy",
             "g1a3_transition_policy",
             "g1a3_r0_transition_policy",
+            "g1a_to_g1b1_transition_policy",
             "pinned_gatekeeper",
             "target_worktree_policy",
             "remote_identity_policy",
@@ -4199,7 +6722,7 @@ def _validate_overlay(
         "recovery_overlay_schema_invalid",
     )
     if (
-        value["schema_version"] != "ariadne.programme_recovery.v12"
+        value["schema_version"] != "ariadne.programme_recovery.v13"
         or value["status"] != "active_emergency_overlay"
         or value["authority_owner"] != "Yuri"
         or value["state_file"] != STATE_PATH.as_posix()
@@ -4207,6 +6730,8 @@ def _validate_overlay(
         or value["risk_file"] != RISK_PATH.as_posix()
         or value["inventory_file"] != INVENTORY_PATH.as_posix()
         or value["g1a_scope_file"] != G1A_SCOPE_PATH.as_posix()
+        or value["g1a_accepted_surface_file"] != G1A_ACCEPTED_SURFACE_PATH.as_posix()
+        or value["g1b_clockwork_scope_file"] != G1B_CLOCKWORK_SCOPE_PATH.as_posix()
         or value["missing_or_invalid_state"] != "hard_stop"
     ):
         raise ProgrammeAdmissionError("recovery_overlay_header_invalid")
@@ -4232,6 +6757,9 @@ def _validate_overlay(
         G1A3_R0_REVIEW_PENDING_PROFILE,
         G1A3_R0_TRANSITION_PROFILE,
         G1A3_R1_ACTIVE_PROFILE,
+        G1A_CLOSEOUT_REVIEW_PENDING_PROFILE,
+        G1A_TO_G1B1_TRANSITION_PROFILE,
+        G1B1_ACTIVE_PROFILE,
     }:
         raise ProgrammeAdmissionError("recovery_profiles_invalid")
     expected = {
@@ -4382,6 +6910,45 @@ def _validate_overlay(
             "paths": G1A3_R1_ALLOWED_PATHS,
             "g1a": True,
         },
+        G1A_CLOSEOUT_REVIEW_PENDING_PROFILE: {
+            "profile_kind": "review_pending_controller",
+            "expected_current_gate": "G1A.3",
+            "expected_gate_status": "active",
+            "active_correction": G1A_CLOSEOUT_CORRECTION,
+            "programme_gate": G1A_CLOSEOUT_CORRECTION,
+            "task_classes": [],
+            "effects": {"repository_read"},
+            "forbidden": G1A_CLOSEOUT_FORBIDDEN_EFFECTS,
+            "behavior": "external_G1A_closeout_G1B_transition_enablement_review_only",
+            "paths": set(),
+            "g1a": True,
+        },
+        G1A_TO_G1B1_TRANSITION_PROFILE: {
+            "profile_kind": "state_transition",
+            "expected_current_gate": "G1B.1",
+            "expected_gate_status": "active",
+            "active_correction": "G1B.1",
+            "programme_gate": "G1A_TO_G1B.1",
+            "task_class": G1A_TO_G1B1_TRANSITION_TASK_CLASS,
+            "effects": G1A_TO_G1B1_ALLOWED_EFFECTS,
+            "forbidden": G1A_TO_G1B1_FORBIDDEN_EFFECTS,
+            "behavior": "g1a_to_g1b1_semantic_state_transition",
+            "paths": G1A_TO_G1B1_TRANSITION_FIXED_ALLOWED_PATHS,
+            "g1a": False,
+        },
+        G1B1_ACTIVE_PROFILE: {
+            "profile_kind": "active_gate",
+            "expected_current_gate": "G1B.1",
+            "expected_gate_status": "active",
+            "active_correction": "G1B.1",
+            "programme_gate": "G1B.1",
+            "task_class": G1B1_TASK_CLASS,
+            "effects": G1B1_ALLOWED_EFFECTS,
+            "forbidden": G1B1_FORBIDDEN_EFFECTS,
+            "behavior": "g1b1_pure_state_event_kernel_only",
+            "paths": G1B1_ALLOWED_PATHS,
+            "g1a": False,
+        },
     }
     for name, spec in expected.items():
         expected_profile_keys = _PROFILE_KEYS | (
@@ -4458,6 +7025,8 @@ def _validate_overlay(
         G1A3_ACTIVE_PROFILE,
         G1A3_R0_REVIEW_PENDING_PROFILE,
         G1A3_R1_ACTIVE_PROFILE,
+        G1A_CLOSEOUT_REVIEW_PENDING_PROFILE,
+        G1B1_ACTIVE_PROFILE,
     }:
         raise ProgrammeAdmissionError("recovery_active_profile_invalid")
     active = profiles[active_profile]
@@ -4747,6 +7316,8 @@ def _validate_overlay(
                 G1A3_ACTIVE_PROFILE,
                 G1A3_R0_REVIEW_PENDING_PROFILE,
                 G1A3_R1_ACTIVE_PROFILE,
+                G1A_CLOSEOUT_REVIEW_PENDING_PROFILE,
+                G1B1_ACTIVE_PROFILE,
             }
             else "not_started"
         )
@@ -4804,6 +7375,8 @@ def _validate_overlay(
             G1A3_ACTIVE_PROFILE,
             G1A3_R0_REVIEW_PENDING_PROFILE,
             G1A3_R1_ACTIVE_PROFILE,
+            G1A_CLOSEOUT_REVIEW_PENDING_PROFILE,
+            G1B1_ACTIVE_PROFILE,
         }
         else "review_pending"
     )
@@ -4875,7 +7448,12 @@ def _validate_overlay(
         or r0_transition["transition_status"]
         != (
             "complete"
-            if state["active_profile"] == G1A3_R1_ACTIVE_PROFILE
+            if state["active_profile"]
+            in {
+                G1A3_R1_ACTIVE_PROFILE,
+                G1A_CLOSEOUT_REVIEW_PENDING_PROFILE,
+                G1B1_ACTIVE_PROFILE,
+            }
             else "not_started"
         )
         or r0_transition["rejected_review_id"] != G1A3_R0_REVIEW_ID
@@ -4894,6 +7472,68 @@ def _validate_overlay(
         != TRANSITION_FORBIDDEN_EFFECTS
     ):
         raise ProgrammeAdmissionError("g1a3_r0_transition_policy_invalid")
+    closeout_transition = _exact_keys(
+        value["g1a_to_g1b1_transition_policy"],
+        {
+            "manifest_schema_version",
+            "task_class",
+            "transition_profile",
+            "resulting_active_profile",
+            "from_profile",
+            "to_profile",
+            "transition_status",
+            "g1a3_r1_review_id",
+            "g1a3_r1_review_record_sha256",
+            "external_review_record_root",
+            "external_review_schema_version",
+            "transition_artifact_root",
+            "transition_artifact_schema_version",
+            "accepted_surface_path",
+            "clockwork_scope_path",
+            "candidate_commit_limit",
+            "fixed_allowed_paths",
+            "exact_transition_path_count",
+            "forbidden_effect_classes",
+        },
+        "g1a_to_g1b1_transition_policy_schema_invalid",
+    )
+    expected_closeout_transition_status = (
+        "complete"
+        if state["active_profile"] == G1B1_ACTIVE_PROFILE
+        else "review_pending"
+    )
+    if (
+        closeout_transition["manifest_schema_version"]
+        != G1A_TO_G1B1_TRANSITION_MANIFEST_VERSION
+        or closeout_transition["task_class"] != G1A_TO_G1B1_TRANSITION_TASK_CLASS
+        or closeout_transition["transition_profile"] != G1A_TO_G1B1_TRANSITION_PROFILE
+        or closeout_transition["resulting_active_profile"] != G1B1_ACTIVE_PROFILE
+        or closeout_transition["from_profile"] != G1A_CLOSEOUT_REVIEW_PENDING_PROFILE
+        or closeout_transition["to_profile"] != G1B1_ACTIVE_PROFILE
+        or closeout_transition["transition_status"]
+        != expected_closeout_transition_status
+        or closeout_transition["g1a3_r1_review_id"] != G1A3_R1_REVIEW_ID
+        or closeout_transition["g1a3_r1_review_record_sha256"] != G1A3_R1_REVIEW_SHA256
+        or closeout_transition["external_review_record_root"]
+        != G1A_CLOSEOUT_REVIEW_ROOT
+        or closeout_transition["external_review_schema_version"]
+        != "ariadne.external_g1a_closeout_g1b_enablement_review.v1"
+        or closeout_transition["transition_artifact_root"]
+        != G1A_TO_G1B1_TRANSITION_ARTIFACT_ROOT
+        or closeout_transition["transition_artifact_schema_version"]
+        != "ariadne.g1a-to-g1b1-transition.v1"
+        or closeout_transition["accepted_surface_path"]
+        != G1A_ACCEPTED_SURFACE_PATH.as_posix()
+        or closeout_transition["clockwork_scope_path"]
+        != G1B_CLOCKWORK_SCOPE_PATH.as_posix()
+        or closeout_transition["candidate_commit_limit"] != 1
+        or set(closeout_transition["fixed_allowed_paths"])
+        != G1A_TO_G1B1_TRANSITION_FIXED_ALLOWED_PATHS
+        or closeout_transition["exact_transition_path_count"] != 7
+        or set(closeout_transition["forbidden_effect_classes"])
+        != G1A_TO_G1B1_FORBIDDEN_EFFECTS
+    ):
+        raise ProgrammeAdmissionError("g1a_to_g1b1_transition_policy_invalid")
     reversibility = _exact_keys(
         value["reversibility"],
         {"removal_requires", "default_on_transition_error"},
@@ -4968,24 +7608,33 @@ def _validate_precedence(
     }:
         raise ProgrammeAdmissionError("recovery_precedence_invalid")
     phase_token = (
-        f"Gate {ADMITTED_PROGRAMME_GATE} is the only authorised correction; G1A is"
-        if state["active_correction"] == ADMITTED_PROGRAMME_GATE
+        "Gate G1A.3 implementation is externally accepted. G1A closeout and G1B transition enablement are review-pending; G1B remains closed."
+        if state["active_profile"] == G1A_CLOSEOUT_REVIEW_PENDING_PROFILE
         else (
-            "Gate G1A.2 implementation is externally accepted. G1A.3 transition enablement"
-            if state["active_profile"] == G1A3_ENABLEMENT_PENDING_PROFILE
+            "Gate G1B.1 is active only for the bounded pure state/event kernel"
+            if state["active_profile"] == G1B1_ACTIVE_PROFILE
             else (
-                "Gate G1A.3-R0 is review-pending with no eligible implementation task"
-                if state["active_profile"] == G1A3_R0_REVIEW_PENDING_PROFILE
+                f"Gate {ADMITTED_PROGRAMME_GATE} is the only authorised correction; G1A is"
+                if state["active_correction"] == ADMITTED_PROGRAMME_GATE
                 else (
-                    "Gate G1A.3-R1 is active only for complete review-byte binding"
-                    if state["active_profile"] == G1A3_R1_ACTIVE_PROFILE
+                    "Gate G1A.2 implementation is externally accepted. G1A.3 transition enablement"
+                    if state["active_profile"] == G1A3_ENABLEMENT_PENDING_PROFILE
                     else (
-                        "Gate G1A.3 is active only for its bounded integration-authority consumer"
-                        if state["active_profile"] == G1A3_ACTIVE_PROFILE
+                        "Gate G1A.3-R0 is review-pending with no eligible implementation task"
+                        if state["active_profile"] == G1A3_R0_REVIEW_PENDING_PROFILE
                         else (
-                            "Gate G1A.2 is active only for its bounded verdict adapter; provider invocation"
-                            if state["active_correction"] == SUBGATE_TRANSITION_TO_GATE
-                            else "Gate G1A.1 is owner-accepted with residual risk; G1A.2"
+                            "Gate G1A.3-R1 is active only for complete review-byte binding"
+                            if state["active_profile"] == G1A3_R1_ACTIVE_PROFILE
+                            else (
+                                "Gate G1A.3 is active only for its bounded integration-authority consumer"
+                                if state["active_profile"] == G1A3_ACTIVE_PROFILE
+                                else (
+                                    "Gate G1A.2 is active only for its bounded verdict adapter; provider invocation"
+                                    if state["active_correction"]
+                                    == SUBGATE_TRANSITION_TO_GATE
+                                    else "Gate G1A.1 is owner-accepted with residual risk; G1A.2"
+                                )
+                            )
                         )
                     )
                 )
@@ -5001,6 +7650,12 @@ def _validate_precedence(
         token not in agents_text[:1200] for token in required_header[1:]
     ):
         raise ProgrammeAdmissionError("agents_recovery_precedence_missing")
+    if (
+        state["active_profile"] == G1A_CLOSEOUT_REVIEW_PENDING_PROFILE
+        and f"Task generation `{G1A_CLOSEOUT_REPLACEMENT_TASK_GENERATION}`"
+        not in agents_text
+    ):
+        raise ProgrammeAdmissionError("agents_recovery_operation_identity_invalid")
 
 
 def _validate_latch(
@@ -5017,6 +7672,10 @@ def _validate_latch(
             reason = "g1a3_r0_latch_invalid"
         elif state.get("active_profile") == G1A3_R1_ACTIVE_PROFILE:
             reason = "g1a3_r1_latch_invalid"
+        elif state.get("active_profile") == G1A_CLOSEOUT_REVIEW_PENDING_PROFILE:
+            reason = "g1a_closeout_review_pending_latch_invalid"
+        elif state.get("active_profile") == G1B1_ACTIVE_PROFILE:
+            reason = "g1b1_active_latch_invalid"
         elif state.get("active_profile") == G1A3_ACTIVE_PROFILE:
             reason = "g1a3_active_latch_invalid"
         else:
@@ -5024,7 +7683,34 @@ def _validate_latch(
         raise ProgrammeAdmissionError(reason) from error
     if latch["checkpoint"]["settings_fingerprint"] != current_fingerprint:
         raise ProgrammeAdmissionError("active_operation_settings_fingerprint_invalid")
-    if state["active_correction"] == TRANSITION_TO_GATE:
+    if state["active_profile"] == G1A_CLOSEOUT_REVIEW_PENDING_PROFILE:
+        if (
+            latch["operation_id"] != G1A_CLOSEOUT_REPLACEMENT_TASK_GENERATION
+            or latch["active_tranche"] != G1A_CLOSEOUT_REPLACEMENT_TRANCHE
+            or latch["objective"] != G1A_CLOSEOUT_REPLACEMENT_OBJECTIVE
+            or latch["status"] != "paused"
+            or latch["resume_after_compaction"] is not False
+            or latch["user_attention"]["required"] is not False
+            or latch["terminal_response"]["permitted"] is not True
+            or latch["source_head"] != "23aa3ab19aec6cee9246e7dd3a88f61ada39bd7a"
+            or latch["authority_source"] != G1A_CLOSEOUT_REPLACEMENT_AUTHORITY
+            or latch["checkpoint"]["completed_stage"]
+            != G1A_CLOSEOUT_REPLACEMENT_COMPLETED_STAGE
+            or latch["checkpoint"]["next_executable_stage"]
+            != G1A_CLOSEOUT_REPLACEMENT_NEXT_STAGE
+        ):
+            raise ProgrammeAdmissionError("g1a_closeout_review_pending_latch_invalid")
+    elif state["active_profile"] == G1B1_ACTIVE_PROFILE:
+        if (
+            latch["operation_id"] != "g1b1-pure-state-event-kernel"
+            or latch["status"] != "in_progress"
+            or latch["resume_after_compaction"] is not True
+            or latch["terminal_response"]["permitted"] is not False
+            or _SHA1.fullmatch(latch["source_head"]) is None
+            or "external" not in latch["authority_source"].lower()
+        ):
+            raise ProgrammeAdmissionError("g1b1_active_latch_invalid")
+    elif state["active_correction"] == TRANSITION_TO_GATE:
         if (
             latch["operation_id"] != "g1a2-transition-enablement-20260828-v1"
             or latch["status"] != "paused"
@@ -5138,6 +7824,8 @@ class ProgrammePolicy:
     risks: dict[str, Any]
     inventory: dict[str, Any]
     g1a_scope: dict[str, Any]
+    g1a_accepted_surface: dict[str, Any]
+    g1b_clockwork_scope: dict[str, Any]
     overlay: dict[str, Any]
     project: dict[str, Any]
     continuation: dict[str, Any]
@@ -5159,6 +7847,8 @@ def load_programme_policy(repo_root: Path) -> ProgrammePolicy:
     risks = _strict_yaml(root / RISK_PATH)
     inventory = _strict_yaml(root / INVENTORY_PATH)
     g1a_scope = _strict_yaml(root / G1A_SCOPE_PATH)
+    g1a_accepted_surface = _strict_yaml(root / G1A_ACCEPTED_SURFACE_PATH)
+    g1b_clockwork_scope = _strict_yaml(root / G1B_CLOCKWORK_SCOPE_PATH)
     overlay = _strict_yaml(root / OVERLAY_PATH)
     project = _strict_yaml(root / PROJECT_PATH)
     continuation = _strict_yaml(root / CONTINUATION_PATH)
@@ -5186,6 +7876,8 @@ def load_programme_policy(repo_root: Path) -> ProgrammePolicy:
             RISK_PATH,
             INVENTORY_PATH,
             G1A_SCOPE_PATH,
+            G1A_ACCEPTED_SURFACE_PATH,
+            G1B_CLOCKWORK_SCOPE_PATH,
             OVERLAY_PATH,
             PROJECT_PATH,
             CONTINUATION_PATH,
@@ -5199,6 +7891,8 @@ def load_programme_policy(repo_root: Path) -> ProgrammePolicy:
         risks=risks,
         inventory=inventory,
         g1a_scope=g1a_scope,
+        g1a_accepted_surface=g1a_accepted_surface,
+        g1b_clockwork_scope=g1b_clockwork_scope,
         overlay=overlay,
         project=project,
         continuation=continuation,
@@ -5217,6 +7911,8 @@ def load_programme_policy(repo_root: Path) -> ProgrammePolicy:
                 | G1A2_ENABLEMENT_ALLOWED_PATHS
                 | G1A3_ENABLEMENT_ALLOWED_PATHS
                 | G1A3_R0_CONTROLLER_ALLOWED_PATHS
+                | G1A3_R1_ALLOWED_PATHS
+                | G1A_CLOSEOUT_CONTROLLER_ALLOWED_PATHS
                 | ACCEPTED_CUMULATIVE_HISTORY_PATHS
                 | set(allowed_paths)
                 | {
@@ -5254,6 +7950,14 @@ def load_programme_policy(repo_root: Path) -> ProgrammePolicy:
                         f"{SUBGATE_TRANSITION_ARTIFACT_ROOT}/{state['g1a_subgate_authority']['subgates']['G1A.3']['r1_state_transition']['transition_id']}.json",
                     }
                     if state["active_profile"] == G1A3_R1_ACTIVE_PROFILE
+                    else set()
+                )
+                | (
+                    {
+                        f"{G1A_CLOSEOUT_REVIEW_ROOT}/{state['g1b']['state_transition']['enablement_review_id']}.json",
+                        f"{G1A_TO_G1B1_TRANSITION_ARTIFACT_ROOT}/{state['g1b']['state_transition']['transition_id']}.json",
+                    }
+                    if state["active_profile"] == G1B1_ACTIVE_PROFILE
                     else set()
                 )
             )
@@ -5357,6 +8061,14 @@ def _validate_manifest(
             repo_root, "rev-list", "--reverse", f"{reviewed}..HEAD"
         ).splitlines()
         expected_base = commits[0] if commits else ""
+    elif policy.state["active_profile"] == G1B1_ACTIVE_PROFILE:
+        reviewed = policy.state["g1b"]["state_transition"][
+            "enablement_candidate_commit"
+        ]
+        commits = _run_git(
+            repo_root, "rev-list", "--reverse", f"{reviewed}..HEAD"
+        ).splitlines()
+        expected_base = commits[0] if commits else ""
     elif policy.state["active_correction"] == SUBGATE_TRANSITION_TO_GATE:
         reviewed = policy.state["g1a_subgate_authority"]["subgates"]["G1A.2"][
             "state_transition"
@@ -5391,6 +8103,8 @@ def _validate_manifest(
         raise ProgrammeAdmissionError("g1a_3_task_manifest_paths_not_exact")
     if task_class == G1A3_R1_TASK_CLASS and set(paths) != G1A3_R1_ALLOWED_PATHS:
         raise ProgrammeAdmissionError("g1a_3_r1_task_manifest_paths_not_exact")
+    if task_class == G1B1_TASK_CLASS and set(paths) != G1B1_ALLOWED_PATHS:
+        raise ProgrammeAdmissionError("g1b1_task_manifest_paths_not_exact")
     intended = set(
         _unique_text_list(
             manifest["intended_side_effect_classes"],
@@ -5807,6 +8521,238 @@ def _validate_g1a3_r0_transition_manifest(
     return manifest, allowed_paths
 
 
+def _validate_g1a_to_g1b1_transition_manifest(
+    value: object, *, policy: ProgrammePolicy, repo_root: Path
+) -> tuple[dict[str, Any], list[str]]:
+    manifest = _exact_keys(
+        value,
+        G1A_TO_G1B1_TRANSITION_MANIFEST_KEYS,
+        "g1a_to_g1b1_transition_manifest_schema_invalid",
+    )
+    if manifest["schema_version"] != G1A_TO_G1B1_TRANSITION_MANIFEST_VERSION:
+        raise ProgrammeAdmissionError("g1a_to_g1b1_transition_manifest_version_invalid")
+    transition_id = _bounded_text(
+        manifest["transition_id"], "g1a_to_g1b1_transition_id_invalid", 128
+    )
+    review_id = _bounded_text(
+        manifest["enablement_review_id"],
+        "g1a_to_g1b1_enablement_review_id_invalid",
+        128,
+    )
+    if (
+        _IDENTIFIER.fullmatch(transition_id) is None
+        or _IDENTIFIER.fullmatch(review_id) is None
+    ):
+        raise ProgrammeAdmissionError("g1a_to_g1b1_transition_id_invalid")
+    if (
+        manifest["from_profile"] != G1A_CLOSEOUT_REVIEW_PENDING_PROFILE
+        or manifest["to_profile"] != G1B1_ACTIVE_PROFILE
+        or manifest["g1a3_r1_review_id"] != G1A3_R1_REVIEW_ID
+        or manifest["g1a3_r1_review_record_sha256"] != G1A3_R1_REVIEW_SHA256
+        or manifest["external_review_verdict"] != "PASS"
+        or isinstance(manifest["blocking_finding_count"], bool)
+        or manifest["blocking_finding_count"] != 0
+    ):
+        raise ProgrammeAdmissionError("g1a_to_g1b1_transition_authority_invalid")
+    for field in (
+        "enablement_candidate_commit",
+        "enablement_candidate_tree",
+        "enablement_candidate_parent",
+        "transition_parent",
+        "accepted_surface_git_blob",
+        "clockwork_scope_git_blob",
+    ):
+        if (
+            not isinstance(manifest[field], str)
+            or _SHA1.fullmatch(manifest[field]) is None
+        ):
+            raise ProgrammeAdmissionError("g1a_to_g1b1_transition_git_binding_invalid")
+    for field in (
+        "external_review_record_sha256",
+        "state_digest_before",
+        "policy_digest_before",
+        "accepted_surface_sha256",
+        "clockwork_scope_sha256",
+    ):
+        if (
+            not isinstance(manifest[field], str)
+            or _SHA256.fullmatch(manifest[field]) is None
+        ):
+            raise ProgrammeAdmissionError(f"g1a_to_g1b1_transition_{field}_invalid")
+    if (
+        manifest["transition_parent"] != manifest["enablement_candidate_commit"]
+        or manifest["enablement_candidate_parent"]
+        != "23aa3ab19aec6cee9246e7dd3a88f61ada39bd7a"
+    ):
+        raise ProgrammeAdmissionError("g1a_to_g1b1_transition_parent_invalid")
+    _validate_commit_tree_binding(
+        repo_root,
+        commit=manifest["enablement_candidate_commit"],
+        tree=manifest["enablement_candidate_tree"],
+        reason="g1a_to_g1b1_enablement_candidate_tree_invalid",
+    )
+    _validate_sole_parent(
+        repo_root,
+        manifest["enablement_candidate_commit"],
+        manifest["enablement_candidate_parent"],
+        "g1a_to_g1b1_enablement_candidate_parent_invalid",
+    )
+    review_path = f"{G1A_CLOSEOUT_REVIEW_ROOT}/{review_id}.json"
+    artifact_path = f"{G1A_TO_G1B1_TRANSITION_ARTIFACT_ROOT}/{transition_id}.json"
+    allowed_paths = _unique_text_list(
+        manifest["allowed_transition_paths"],
+        "g1a_to_g1b1_transition_allowed_paths_invalid",
+    )
+    if (
+        set(allowed_paths)
+        != G1A_TO_G1B1_TRANSITION_FIXED_ALLOWED_PATHS
+        | {
+            review_path,
+            artifact_path,
+        }
+        or len(allowed_paths) != 7
+    ):
+        raise ProgrammeAdmissionError("g1a_to_g1b1_transition_allowed_paths_not_exact")
+    if (
+        set(manifest["forbidden_effect_classes"]) != G1A_TO_G1B1_FORBIDDEN_EFFECTS
+        or manifest["required_semantic_pointer_delta"]
+        != G1A_TO_G1B1_TRANSITION_SEMANTIC_POINTERS
+    ):
+        raise ProgrammeAdmissionError("g1a_to_g1b1_transition_contract_invalid")
+    if manifest["protected_refs_before"] != {
+        "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+        "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+        "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+        "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    }:
+        raise ProgrammeAdmissionError("g1a_to_g1b1_protected_refs_invalid")
+    try:
+        review_payload = (repo_root / review_path).read_bytes()
+    except OSError as error:
+        raise ProgrammeAdmissionError(
+            "g1a_to_g1b1_enablement_review_missing"
+        ) from error
+    if _sha256_bytes(review_payload) != manifest["external_review_record_sha256"]:
+        raise ProgrammeAdmissionError("g1a_to_g1b1_enablement_review_digest_mismatch")
+    review = _strict_json_payload(
+        review_payload, "g1a_to_g1b1_enablement_review_invalid"
+    )
+    _exact_keys(
+        review,
+        {
+            "schema_version",
+            "review_id",
+            "recorded_at",
+            "review_subject",
+            "reviewed_commit",
+            "reviewed_tree",
+            "reviewed_parent",
+            "verdict",
+            "blocking_finding_count",
+            "reviewer_surface",
+            "g1a_closeout_authorized",
+            "g1b_state_transition_authorized",
+            "g1b_implementation_authorized",
+            "provider_invocation_authorized",
+            "integration_execution_authorized",
+            "protected_ref_movement_authorized",
+            "source_artifact_sha256",
+        },
+        "g1a_to_g1b1_enablement_review_schema_invalid",
+    )
+    if (
+        review["schema_version"]
+        != "ariadne.external_g1a_closeout_g1b_enablement_review.v1"
+        or review["review_id"] != review_id
+        or review["review_subject"]
+        != "G1A_closeout_and_G1B_transition_enablement_controller"
+        or review["reviewed_commit"] != manifest["enablement_candidate_commit"]
+        or review["reviewed_tree"] != manifest["enablement_candidate_tree"]
+        or review["reviewed_parent"] != manifest["enablement_candidate_parent"]
+        or review["verdict"] != "PASS"
+        or review["blocking_finding_count"] != 0
+        or review["reviewer_surface"] != manifest["reviewer_surface"]
+        or review["g1a_closeout_authorized"] is not True
+        or review["g1b_state_transition_authorized"] is not True
+        or review["g1b_implementation_authorized"] is not False
+        or review["provider_invocation_authorized"] is not False
+        or review["integration_execution_authorized"] is not False
+        or review["protected_ref_movement_authorized"] is not False
+        or not isinstance(review["source_artifact_sha256"], str)
+        or re.fullmatch(r"[0-9a-f]{64}", review["source_artifact_sha256"]) is None
+    ):
+        raise ProgrammeAdmissionError("g1a_to_g1b1_enablement_review_not_pass")
+    _timestamp_with_timezone(
+        review["recorded_at"], "g1a_to_g1b1_enablement_review_timestamp_invalid"
+    )
+
+    for path, digest_field, blob_field in (
+        (
+            G1A_ACCEPTED_SURFACE_PATH,
+            "accepted_surface_sha256",
+            "accepted_surface_git_blob",
+        ),
+        (
+            G1B_CLOCKWORK_SCOPE_PATH,
+            "clockwork_scope_sha256",
+            "clockwork_scope_git_blob",
+        ),
+    ):
+        payload = _git_object_bytes(
+            repo_root, f"{manifest['enablement_candidate_commit']}:{path.as_posix()}"
+        )
+        if (
+            _sha256_bytes(payload) != manifest[digest_field]
+            or _run_git(
+                repo_root,
+                "rev-parse",
+                f"{manifest['enablement_candidate_commit']}:{path.as_posix()}",
+            )
+            != manifest[blob_field]
+        ):
+            raise ProgrammeAdmissionError("g1a_to_g1b1_frozen_input_mismatch")
+    before_state = _git_object_bytes(
+        repo_root,
+        f"{manifest['enablement_candidate_commit']}:{STATE_PATH.as_posix()}",
+    )
+    before_policy = _digest_paths_at(
+        repo_root,
+        manifest["enablement_candidate_commit"],
+        (
+            GATES_PATH,
+            RISK_PATH,
+            INVENTORY_PATH,
+            G1A_SCOPE_PATH,
+            G1A_ACCEPTED_SURFACE_PATH,
+            G1B_CLOCKWORK_SCOPE_PATH,
+            OVERLAY_PATH,
+            PROJECT_PATH,
+            CONTINUATION_PATH,
+            LATCH_PATH,
+            AGENTS_PATH,
+        ),
+    )
+    if (
+        _sha256_bytes(before_state) != manifest["state_digest_before"]
+        or before_policy != manifest["policy_digest_before"]
+        or policy.state["active_profile"] != G1B1_ACTIVE_PROFILE
+        or policy.overlay["active_profile"] != G1B1_ACTIVE_PROFILE
+    ):
+        raise ProgrammeAdmissionError("g1a_to_g1b1_transition_phase_not_active")
+    transition = policy.state["g1b"]["state_transition"]
+    if (
+        transition["transition_id"] != transition_id
+        or transition["enablement_review_id"] != review_id
+        or transition["enablement_candidate_commit"]
+        != manifest["enablement_candidate_commit"]
+        or transition["enablement_candidate_tree"]
+        != manifest["enablement_candidate_tree"]
+        or transition["reviewer_surface"] != manifest["reviewer_surface"]
+    ):
+        raise ProgrammeAdmissionError("g1a_to_g1b1_transition_state_disagreement")
+    return manifest, allowed_paths
+
+
 def _manifest_task_class(value: object) -> str | None:
     if not isinstance(value, dict):
         return None
@@ -5818,6 +8764,8 @@ def _manifest_task_class(value: object) -> str | None:
         return G1A3_TRANSITION_TASK_CLASS
     if value.get("schema_version") == G1A3_R0_TRANSITION_MANIFEST_VERSION:
         return G1A3_R0_TRANSITION_TASK_CLASS
+    if value.get("schema_version") == G1A_TO_G1B1_TRANSITION_MANIFEST_VERSION:
+        return G1A_TO_G1B1_TRANSITION_TASK_CLASS
     task_class = value.get("task_class")
     return task_class if isinstance(task_class, str) else None
 
@@ -5884,6 +8832,17 @@ def evaluate_programme_admission(
                 manifest, policy=policy
             )
             normalized_task_class = G1A3_R0_TRANSITION_TASK_CLASS
+        elif (
+            isinstance(manifest, dict)
+            and manifest.get("schema_version")
+            == G1A_TO_G1B1_TRANSITION_MANIFEST_VERSION
+        ):
+            normalized, _ = _validate_g1a_to_g1b1_transition_manifest(
+                manifest,
+                policy=policy,
+                repo_root=repo_root.resolve(),
+            )
+            normalized_task_class = G1A_TO_G1B1_TRANSITION_TASK_CLASS
         else:
             normalized, _ = _validate_manifest(
                 manifest, policy=policy, repo_root=repo_root.resolve()
@@ -5908,6 +8867,7 @@ def evaluate_programme_admission(
         SUBGATE_TRANSITION_TASK_CLASS,
         G1A3_TRANSITION_TASK_CLASS,
         G1A3_R0_TRANSITION_TASK_CLASS,
+        G1A_TO_G1B1_TRANSITION_TASK_CLASS,
     }:
         required_effect = ENTRYPOINT_REQUIRED_EFFECT[entrypoint]
         if required_effect not in normalized["intended_side_effect_classes"]:
@@ -7345,6 +10305,199 @@ def _g1a3_r0_transition_scope_reasons(
     return list(dict.fromkeys(reasons)), origin_head
 
 
+def _g1a_to_g1b1_transition_semantic_pointer_map(
+    root: Path, parent: str
+) -> dict[str, list[str]]:
+    result: dict[str, list[str]] = {}
+    for path, kind in (
+        (STATE_PATH, "json"),
+        (GATES_PATH, "yaml"),
+        (OVERLAY_PATH, "yaml"),
+        (LATCH_PATH, "json"),
+    ):
+        before_payload = _git_object_bytes(root, f"{parent}:{path.as_posix()}")
+        after_payload = (root / path).read_bytes()
+        if kind == "json":
+            before = _strict_json_payload(
+                before_payload, "g1a_to_g1b1_semantic_before_invalid"
+            )
+            after = _strict_json_payload(
+                after_payload, "g1a_to_g1b1_semantic_after_invalid"
+            )
+        else:
+            before = _strict_yaml_payload(
+                before_payload, "g1a_to_g1b1_semantic_before_invalid"
+            )
+            after = _strict_yaml_payload(
+                after_payload, "g1a_to_g1b1_semantic_after_invalid"
+            )
+        result[path.as_posix()] = sorted(_semantic_pointers(before, after))
+    before_agents = _git_object_bytes(
+        root, f"{parent}:{AGENTS_PATH.as_posix()}"
+    ).replace(b"\r\n", b"\n")
+    after_agents = (root / AGENTS_PATH).read_bytes().replace(b"\r\n", b"\n")
+    marker = b"# EMR4 Centaur \xe2\x80\x94 Live Agent Handover"
+    if marker not in before_agents or marker not in after_agents:
+        raise ProgrammeAdmissionError("g1a_to_g1b1_agents_marker_missing")
+    before_header, before_body = before_agents.split(marker, 1)
+    after_header, after_body = after_agents.split(marker, 1)
+    if before_body != after_body:
+        raise ProgrammeAdmissionError("g1a_to_g1b1_agents_body_changed")
+    result[AGENTS_PATH.as_posix()] = (
+        ["/emergency_header"] if before_header != after_header else []
+    )
+    return result
+
+
+def _g1a_to_g1b1_transition_scope_reasons(
+    *,
+    root: Path,
+    policy: ProgrammePolicy,
+    manifest: dict[str, Any],
+    phase: str,
+    branch: str,
+    head: str,
+    commit_count: int,
+    tranche_changes: Sequence[GitPathChange],
+    remote_identity: dict[str, Any],
+) -> tuple[list[str], str | None]:
+    reasons: list[str] = []
+    parent = manifest["enablement_candidate_commit"]
+    if commit_count != 1:
+        reasons.append("g1a_to_g1b1_transition_commit_count_invalid")
+    parents = _run_git(root, "rev-list", "--parents", "-n", "1", head).split()
+    if len(parents) != 2 or parents[1] != parent:
+        reasons.append("g1a_to_g1b1_transition_not_direct_child")
+    expected_paths = set(manifest["allowed_transition_paths"])
+    actual_paths = {change.path for change in tranche_changes}
+    if actual_paths != expected_paths:
+        reasons.append("g1a_to_g1b1_transition_paths_not_exact")
+    if any(
+        change.new_mode != "100644"
+        or (change.status == "A" and change.old_mode != "000000")
+        or (change.status == "M" and change.old_mode != "100644")
+        or change.status not in {"A", "M"}
+        for change in tranche_changes
+    ):
+        reasons.append("g1a_to_g1b1_transition_mode_or_status_invalid")
+    if any(
+        change.path.endswith(".py")
+        or change.path.startswith("tests/")
+        or change.path.startswith("app/")
+        or change.path.startswith("alembic/")
+        or change.path.startswith(".github/")
+        for change in tranche_changes
+    ):
+        reasons.append("g1a_to_g1b1_transition_implementation_change_forbidden")
+    try:
+        semantic = _g1a_to_g1b1_transition_semantic_pointer_map(root, parent)
+    except ProgrammeAdmissionError as error:
+        reasons.append(error.reason_code)
+        semantic = {}
+    if semantic != G1A_TO_G1B1_TRANSITION_SEMANTIC_POINTERS:
+        reasons.append("g1a_to_g1b1_transition_semantic_pointer_delta_not_exact")
+    artifact_path = (
+        root
+        / G1A_TO_G1B1_TRANSITION_ARTIFACT_ROOT
+        / f"{manifest['transition_id']}.json"
+    )
+    try:
+        artifact = strict_json_object(artifact_path)
+    except ProgrammeAdmissionError as error:
+        reasons.append(error.reason_code)
+        artifact = None
+    if artifact is not None:
+        expected_artifact_keys = {
+            "schema_version",
+            "transition_id",
+            "recorded_at",
+            "transition_manifest",
+            "transition_manifest_sha256",
+            "g1a3_r1_review_record_sha256",
+            "external_review_record_sha256",
+            "enablement_candidate_commit",
+            "enablement_candidate_tree",
+            "enablement_candidate_parent",
+            "accepted_surface_sha256",
+            "accepted_surface_git_blob",
+            "clockwork_scope_sha256",
+            "clockwork_scope_git_blob",
+            "state_digest_before",
+            "state_digest_after",
+            "policy_digest_before",
+            "policy_digest_after",
+            "changed_semantic_pointers",
+            "scope_result",
+            "g1b1_profile_contract",
+        }
+        if set(artifact) != expected_artifact_keys:
+            reasons.append("g1a_to_g1b1_transition_artifact_schema_invalid")
+        else:
+            profile_contract = {
+                "active_profile": G1B1_ACTIVE_PROFILE,
+                "task_class": G1B1_TASK_CLASS,
+                "allowed_paths": sorted(G1B1_ALLOWED_PATHS),
+                "allowed_effects": sorted(G1B1_ALLOWED_EFFECTS),
+                "forbidden_effects": sorted(G1B1_FORBIDDEN_EFFECTS),
+                "runtime_entrypoints_closed": True,
+            }
+            manifest_digest = _sha256_bytes(
+                json.dumps(
+                    manifest,
+                    ensure_ascii=False,
+                    sort_keys=True,
+                    separators=(",", ":"),
+                ).encode("utf-8")
+            )
+            if (
+                artifact["schema_version"] != "ariadne.g1a-to-g1b1-transition.v1"
+                or artifact["transition_id"] != manifest["transition_id"]
+                or artifact["transition_manifest"] != manifest
+                or artifact["transition_manifest_sha256"] != manifest_digest
+                or artifact["g1a3_r1_review_record_sha256"] != G1A3_R1_REVIEW_SHA256
+                or artifact["external_review_record_sha256"]
+                != manifest["external_review_record_sha256"]
+                or artifact["enablement_candidate_commit"] != parent
+                or artifact["enablement_candidate_tree"]
+                != manifest["enablement_candidate_tree"]
+                or artifact["enablement_candidate_parent"]
+                != manifest["enablement_candidate_parent"]
+                or artifact["accepted_surface_sha256"]
+                != manifest["accepted_surface_sha256"]
+                or artifact["accepted_surface_git_blob"]
+                != manifest["accepted_surface_git_blob"]
+                or artifact["clockwork_scope_sha256"]
+                != manifest["clockwork_scope_sha256"]
+                or artifact["clockwork_scope_git_blob"]
+                != manifest["clockwork_scope_git_blob"]
+                or artifact["state_digest_before"] != manifest["state_digest_before"]
+                or artifact["state_digest_after"] != policy.state_digest
+                or artifact["policy_digest_before"] != manifest["policy_digest_before"]
+                or artifact["policy_digest_after"] != policy.policy_digest
+                or artifact["changed_semantic_pointers"] != semantic
+                or artifact["scope_result"] != "passed"
+                or artifact["g1b1_profile_contract"] != profile_contract
+            ):
+                reasons.append("g1a_to_g1b1_transition_artifact_binding_mismatch")
+            try:
+                _timestamp_with_timezone(
+                    artifact["recorded_at"],
+                    "g1a_to_g1b1_transition_artifact_timestamp_invalid",
+                )
+            except ProgrammeAdmissionError as error:
+                reasons.append(error.reason_code)
+    origin_head = _fresh_remote_head(
+        root, remote_identity["normalized_push_url"], branch
+    )
+    if origin_head is None:
+        reasons.append("scope_fresh_origin_observation_invalid")
+    elif phase in {"development", "pre-push"} and origin_head != parent:
+        reasons.append("g1a_to_g1b1_origin_not_transition_parent")
+    elif phase == "post-push" and origin_head != head:
+        reasons.append("g1a_to_g1b1_origin_head_mismatch")
+    return list(dict.fromkeys(reasons)), origin_head
+
+
 def evaluate_committed_scope(
     *,
     repo_root: Path,
@@ -7417,11 +10570,16 @@ def evaluate_committed_scope(
         isinstance(manifest, dict)
         and manifest.get("schema_version") == G1A3_R0_TRANSITION_MANIFEST_VERSION
     )
+    is_g1a_to_g1b1_transition = (
+        isinstance(manifest, dict)
+        and manifest.get("schema_version") == G1A_TO_G1B1_TRANSITION_MANIFEST_VERSION
+    )
     is_transition = (
         is_g0_transition
         or is_subgate_transition
         or is_g1a3_transition
         or is_g1a3_r0_transition
+        or is_g1a_to_g1b1_transition
     )
     if is_g0_transition:
         normalized, declared_paths = _validate_transition_manifest(
@@ -7439,6 +10597,12 @@ def evaluate_committed_scope(
         normalized, declared_paths = _validate_g1a3_r0_transition_manifest(
             manifest, policy=policy
         )
+    elif is_g1a_to_g1b1_transition:
+        normalized, declared_paths = _validate_g1a_to_g1b1_transition_manifest(
+            manifest,
+            policy=policy,
+            repo_root=root,
+        )
     else:
         normalized, declared_paths = _validate_manifest(
             manifest, policy=policy, repo_root=root
@@ -7455,6 +10619,16 @@ def evaluate_committed_scope(
         parent = normalized["enablement_controller_commit"]
     elif is_g1a3_r0_transition:
         parent = normalized["r0_candidate_commit"]
+    elif is_g1a_to_g1b1_transition:
+        parent = normalized["enablement_candidate_commit"]
+    elif policy.state["active_profile"] == G1B1_ACTIVE_PROFILE:
+        reviewed = policy.state["g1b"]["state_transition"][
+            "enablement_candidate_commit"
+        ]
+        activation_commits = _run_git(
+            root, "rev-list", "--reverse", f"{reviewed}..{head}"
+        ).splitlines()
+        parent = activation_commits[0] if activation_commits else ""
     elif policy.state["active_profile"] == G1A3_R1_ACTIVE_PROFILE:
         reviewed = policy.state["g1a_subgate_authority"]["subgates"]["G1A.3"][
             "r1_state_transition"
@@ -7508,6 +10682,8 @@ def evaluate_committed_scope(
         SUBGATE_TRANSITION_TO_GATE,
         G1A3_TRANSITION_TO_GATE,
         G1A3_R1_CORRECTION,
+        G1A_CLOSEOUT_CORRECTION,
+        "G1B.1",
     }
     try:
         full_changes, tranche_changes, untracked_changes = _scope_change_inventories(
@@ -7585,6 +10761,8 @@ def evaluate_committed_scope(
                     if is_subgate_transition
                     or is_g1a3_transition
                     or is_g1a3_r0_transition
+                    or is_g1a_to_g1b1_transition
+                    or policy.state["active_profile"] == G1B1_ACTIVE_PROFILE
                     else set(target_policy["g1a2_development_allowed_untracked_paths"])
                 )
             )
@@ -7647,6 +10825,19 @@ def evaluate_committed_scope(
             remote_identity=remote_identity,
         )
         reasons.extend(transition_reasons)
+    elif is_g1a_to_g1b1_transition:
+        transition_reasons, origin_head = _g1a_to_g1b1_transition_scope_reasons(
+            root=root,
+            policy=policy,
+            manifest=normalized,
+            phase=phase,
+            branch=branch,
+            head=head,
+            commit_count=commit_count,
+            tranche_changes=tranche_changes,
+            remote_identity=remote_identity,
+        )
+        reasons.extend(transition_reasons)
     elif phase == "pre-push":
         origin_head = _fresh_remote_head(
             root, remote_identity["normalized_push_url"], branch
@@ -7680,6 +10871,8 @@ def evaluate_committed_scope(
     if not is_transition and policy.state["active_profile"] == G1A3_R1_ACTIVE_PROFILE:
         reasons.extend(g1a3_review_producer_contract_reasons(root))
         reasons.extend(g1a3_integration_contract_reasons(root))
+    if not is_transition and policy.state["active_profile"] == G1B1_ACTIVE_PROFILE:
+        reasons.extend(g1b1_kernel_contract_reasons(root))
     if not is_transition and normalized["candidate_or_current_head"] != head:
         reasons.append("task_manifest_head_stale")
     try:
@@ -7832,6 +11025,7 @@ def _evaluate_programme_operation_admission_core(
         SUBGATE_TRANSITION_MANIFEST_VERSION,
         G1A3_TRANSITION_MANIFEST_VERSION,
         G1A3_R0_TRANSITION_MANIFEST_VERSION,
+        G1A_TO_G1B1_TRANSITION_MANIFEST_VERSION,
     }:
         required_effect = ENTRYPOINT_REQUIRED_EFFECT[entrypoint]
         effects = manifest.get("intended_side_effect_classes")
@@ -7874,7 +11068,9 @@ def evaluate_programme_operation_admission(
             None,
             [],
         )
-    if policy.state["active_correction"] in {
+    if policy.state["active_profile"] == G1B1_ACTIVE_PROFILE or policy.state[
+        "active_correction"
+    ] in {
         TRANSITION_TO_GATE,
         SUBGATE_TRANSITION_TO_GATE,
         G1A3_TRANSITION_TO_GATE,

@@ -1,0 +1,287 @@
+schema_version: "ariadne.g1b_clockwork_scope.v1"
+status: "inventory_only_review_pending"
+source_commit: "23aa3ab19aec6cee9246e7dd3a88f61ada39bd7a"
+source_tree: "e06fbf5c5f46b7a637a1d2987ce34c8f37990283"
+items:
+  - path: "orchestration_harness/models.py"
+    git_blob: "409c18fa9d0c189104ec032b9320b8ac4df13202"
+    classifications: ["state_schema", "event_schema", "command_schema"]
+    entrypoints: ["typed_model_construction"]
+    writers: []
+    authority_role: "structured_harness_vocabulary"
+  - path: "orchestration_harness/active_operation.py"
+    git_blob: "13d73d6a13ab480deef011b958af5d9969ef2913"
+    classifications: ["state_schema", "event_schema", "pure_transition_or_reducer", "narrative_projection"]
+    entrypoints: ["load_active_operation", "project_operation_transition"]
+    writers: []
+    authority_role: "typed_active_operation_latch_model"
+  - path: "orchestration_harness/governance_clockwork.py"
+    git_blob: "fa76a6804364285f6498c983e7051ba007f07c99"
+    classifications: ["event_schema", "pure_transition_or_reducer", "append_only_journal", "narrative_projection", "persistent_state_writer"]
+    entrypoints: ["build_bundle", "validate_bundle", "publish_private_shadow"]
+    writers: ["publish_private_shadow"]
+    authority_role: "historical_private_shadow_reducer_and_publisher"
+  - path: "orchestration_harness/governance_clockwork_tick.py"
+    git_blob: "2b8d22d552ca036980dc34c31ad3c9b62691ee96"
+    classifications: ["state_schema", "event_schema", "command_schema", "pure_transition_or_reducer", "persistent_state_writer", "append_only_journal", "lease_or_CAS", "replay_or_recovery", "narrative_projection"]
+    entrypoints: ["prepare_tick_generation", "publish_tick_generation", "rollback_tick_generation"]
+    writers: ["publish_tick_generation", "rollback_tick_generation"]
+    authority_role: "current_single_governance_clockwork_writer"
+  - path: "orchestration_harness/governance_live_adoption.py"
+    git_blob: "e59a37850067dfc36bdd88e5f5a4d00f7bb7195a"
+    classifications: ["state_schema", "event_schema", "command_schema", "persistent_state_writer", "append_only_journal", "lease_or_CAS", "replay_or_recovery", "narrative_projection", "provider_or_worktree_adapter"]
+    entrypoints: ["validate_contract", "validate_intent", "validate_writer_inventory", "build_generation", "publish_live_generation", "rollback_live_generation", "validate_live_state"]
+    writers: ["publish_live_generation", "rollback_live_generation"]
+    authority_role: "live_single_owner_governance_publication_and_retirement_cutover"
+  - path: "orchestration_harness/governance_migration.py"
+    git_blob: "2eb83080134220dcc888ff3fdf42de8adf886ff5"
+    classifications: ["state_schema", "event_schema", "command_schema", "persistent_state_writer", "append_only_journal", "lease_or_CAS", "replay_or_recovery", "narrative_projection", "legacy_duplicate_authority", "provider_or_worktree_adapter"]
+    entrypoints: ["validate_contract", "validate_intent", "initialize_mirror", "build_clockwork_generation", "publish_generation", "switch_generation", "validate_mirror"]
+    writers: ["publish_generation", "switch_generation"]
+    authority_role: "canonical_mirror_generation_writer_and_single_owner_cutover_boundary"
+  - path: "orchestration_harness/shadow_clockwork.py"
+    git_blob: "e64796168ccf65f1d43d716f0da38d850cc8bc54"
+    classifications: ["state_schema", "event_schema", "command_schema", "pure_transition_or_reducer", "persistent_state_writer", "append_only_journal", "lease_or_CAS", "provider_or_worktree_adapter"]
+    entrypoints: ["build_generation", "validate_generation", "publish_private_shadow"]
+    writers: ["publish_private_shadow"]
+    authority_role: "provider_free_private_shadow_rehearsal_only"
+  - path: "orchestration_harness/transactional_closeout.py"
+    git_blob: "879de3f6b02d9f4290c60acee175295b18848ba4"
+    classifications: ["state_schema", "event_schema", "command_schema", "pure_transition_or_reducer", "persistent_state_writer", "append_only_journal", "lease_or_CAS", "replay_or_recovery", "narrative_projection", "provider_or_worktree_adapter"]
+    entrypoints: ["prepare_transaction", "validate_bundle", "publish_shadow"]
+    writers: ["publish_shadow"]
+    authority_role: "provider_free_transactional_closeout_rehearsal_only"
+  - path: "orchestration_harness/governance_writer_guard.py"
+    git_blob: "595f7addbadc635031603ff9cd8db3ec7598edef"
+    classifications: ["legacy_duplicate_authority"]
+    entrypoints: ["clockwork_is_active", "refuse_retired_legacy_writer"]
+    writers: []
+    authority_role: "retired_direct_writer_denial_guard"
+  - path: "scripts/ariadne_governance_clockwork_tick.py"
+    git_blob: "07aea889b38b72b928d2de8f3dc5237db7b16e4c"
+    classifications: ["persistent_state_writer", "lease_or_CAS", "replay_or_recovery", "narrative_projection", "provider_or_worktree_adapter"]
+    entrypoints: ["cli", "main"]
+    writers: ["clockwork_tick_cli"]
+    authority_role: "current_clockwork_tick_command_adapter"
+  - path: "scripts/ariadne_governance_clockwork_closeout.py"
+    git_blob: "65c391de4087087bc86bbf1dc9c513afa53ab78f"
+    classifications: ["command_schema", "persistent_state_writer", "lease_or_CAS", "narrative_projection", "provider_or_worktree_adapter"]
+    entrypoints: ["run_bound_closeout", "cli", "main"]
+    writers: ["bound_closeout_driver"]
+    authority_role: "current_clockwork_closeout_command_adapter"
+  - path: "scripts/ariadne_provider_free_clockwork_live_canonical_adoption_retirement.py"
+    git_blob: "9d2039f972992af714369894c72fe93fbaf09172"
+    classifications: ["command_schema", "provider_or_worktree_adapter", "replay_or_recovery"]
+    entrypoints: ["cli", "main"]
+    writers: ["explicit_apply_only_live_adoption_runner"]
+    authority_role: "direct_provider_free_live_adoption_and_retirement_CLI"
+  - path: "scripts/ariadne_provider_free_clockwork_single_owner_migration_retirement_rehearsal.py"
+    git_blob: "007c2733c19e11b0596b3ffdb68cde336d60589e"
+    classifications: ["command_schema", "provider_or_worktree_adapter", "replay_or_recovery"]
+    entrypoints: ["cli", "main"]
+    writers: []
+    authority_role: "direct_read_only_single_owner_migration_rehearsal_CLI"
+  - path: "tests/test_ariadne_harness.py"
+    git_blob: "682dd6b60f61032c63a60dbc66547292b19ce4ca"
+    classifications: ["test_fixture"]
+    entrypoints: ["pytest_collection"]
+    writers: []
+    authority_role: "direct_models_and_reducer_regression"
+  - path: "tests/test_ariadne_active_operation_latch.py"
+    git_blob: "f299f5f1ac7ec4fa91b4d3bf66c0661e6ffb1104"
+    classifications: ["test_fixture"]
+    entrypoints: ["pytest_collection"]
+    writers: []
+    authority_role: "direct_active_operation_regression"
+  - path: "tests/test_ariadne_governance_clockwork_tick.py"
+    git_blob: "0f88f7ee3b8b199b9fdedf4d9f3ba28fa951e4ec"
+    classifications: ["test_fixture", "replay_or_recovery"]
+    entrypoints: ["pytest_collection"]
+    writers: []
+    authority_role: "direct_tick_publish_rollback_and_historical_replay_regression"
+  - path: "tests/test_ariadne_transactional_closeout.py"
+    git_blob: "d90387b2b496765281d463004e7f1809243c6d3a"
+    classifications: ["test_fixture"]
+    entrypoints: ["pytest_collection"]
+    writers: []
+    authority_role: "direct_transactional_closeout_regression"
+  - path: "tests/test_ariadne_provider_free_clockwork_governance_projection_consolidation_repair.py"
+    git_blob: "68005d32c6868d6daeb1d3a0fb5f7367aea5957b"
+    classifications: ["test_fixture", "legacy_duplicate_authority"]
+    entrypoints: ["pytest_collection"]
+    writers: []
+    authority_role: "direct_single_writer_retirement_regression"
+  - path: "tests/test_ariadne_provider_free_clockwork_live_canonical_adoption_retirement.py"
+    git_blob: "abee5f711164f21ed9bc03ebf5407b33ace75f4d"
+    classifications: ["test_fixture", "replay_or_recovery", "lease_or_CAS"]
+    entrypoints: ["pytest_collection"]
+    writers: []
+    authority_role: "direct_live_adoption_atomicity_rollback_and_writer_retirement_regression"
+  - path: "tests/test_ariadne_provider_free_clockwork_single_owner_migration_retirement_rehearsal.py"
+    git_blob: "ab5b60ba3affd6b8a01368bb6519af7b150f40c0"
+    classifications: ["test_fixture", "replay_or_recovery", "lease_or_CAS"]
+    entrypoints: ["pytest_collection"]
+    writers: []
+    authority_role: "direct_migration_cutover_fault_replay_and_single_owner_regression"
+  - path: "tests/test_deepseek_native_harness_provider_free_edit_argument_result_coordinate_diagnostic_recovery.py"
+    git_blob: "fad91813af990645ba908da8eca1999e5c5a1ade"
+    classifications: ["test_fixture", "provider_or_worktree_adapter"]
+    entrypoints: ["pytest_collection"]
+    writers: []
+    authority_role: "direct_live_adoption_contract_compatibility_regression"
+  - path: "tests/test_deepseek_native_harness_provider_free_edit_coordinate_future_runner_integration_rehearsal.py"
+    git_blob: "57ca692ad81e51500170de36a36ca1c2d25a31a1"
+    classifications: ["test_fixture", "provider_or_worktree_adapter"]
+    entrypoints: ["pytest_collection"]
+    writers: []
+    authority_role: "direct_live_adoption_future_runner_compatibility_regression"
+  - path: "tests/test_raisa_native_harness_bounded_occupied_useful_worker_coordinate_recovery_rehearsal.py"
+    git_blob: "2ba8dc00a790a18e62a9de40906d7f2769966dbb"
+    classifications: ["test_fixture", "provider_or_worktree_adapter"]
+    entrypoints: ["pytest_collection"]
+    writers: []
+    authority_role: "direct_live_adoption_contract_useful_worker_compatibility_regression"
+  - path: "orchestration/continuity/ariadne-provider-free-clockwork-live-canonical-adoption-retirement/adoption-report.md"
+    git_blob: "95efd89c38c2ce608463f4573c44405f4263aadf"
+    classifications: ["test_fixture", "narrative_projection"]
+    entrypoints: ["historical_fixture_readback"]
+    writers: []
+    authority_role: "live_adoption_historical_narrative_fixture"
+  - path: "orchestration/continuity/ariadne-provider-free-clockwork-live-canonical-adoption-retirement/closeout-intent.json"
+    git_blob: "52458144cc37275efa0cfe203d0b4678f7389ce4"
+    classifications: ["test_fixture", "command_schema"]
+    entrypoints: ["validate_intent_fixture"]
+    writers: []
+    authority_role: "live_adoption_direct_closeout_intent_fixture"
+  - path: "orchestration/continuity/ariadne-provider-free-clockwork-live-canonical-adoption-retirement/contract.json"
+    git_blob: "04bab9ef4fd6bd351b392d88633d34c99764c280"
+    classifications: ["test_fixture", "state_schema"]
+    entrypoints: ["validate_contract_fixture"]
+    writers: []
+    authority_role: "live_adoption_direct_contract_fixture"
+  - path: "orchestration/continuity/ariadne-provider-free-clockwork-live-canonical-adoption-retirement/provider-free-live-adoption-evidence.json"
+    git_blob: "4402dc37c989b28b86f69407c772f2c3665ee43d"
+    classifications: ["test_fixture", "replay_or_recovery"]
+    entrypoints: ["historical_fixture_readback"]
+    writers: []
+    authority_role: "live_adoption_historical_structured_evidence_fixture"
+  - path: "orchestration/continuity/ariadne-provider-free-clockwork-live-canonical-adoption-retirement/writer-inventory.json"
+    git_blob: "3d535eabb71fbdb9864520a0869bfcea90e841d0"
+    classifications: ["test_fixture", "legacy_duplicate_authority"]
+    entrypoints: ["validate_writer_inventory_fixture"]
+    writers: []
+    authority_role: "live_adoption_direct_writer_inventory_fixture"
+  - path: "orchestration/continuity/ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal/canonical-mirror-receipt.json"
+    git_blob: "79233f93b50545fdb6a8ad2f01177548d8c8b9f0"
+    classifications: ["test_fixture", "replay_or_recovery"]
+    entrypoints: ["historical_fixture_readback"]
+    writers: []
+    authority_role: "migration_historical_canonical_mirror_receipt_fixture"
+  - path: "orchestration/continuity/ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal/closeout-intent.json"
+    git_blob: "1ecb6c68ea836f9164c377bd0f96dc38209b1e37"
+    classifications: ["test_fixture", "command_schema"]
+    entrypoints: ["validate_intent_fixture"]
+    writers: []
+    authority_role: "migration_direct_closeout_intent_fixture"
+  - path: "orchestration/continuity/ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal/contract.json"
+    git_blob: "ab95f7ef5e4550e6b17ecb84edf4c840ec77f38c"
+    classifications: ["test_fixture", "state_schema"]
+    entrypoints: ["validate_contract_fixture"]
+    writers: []
+    authority_role: "migration_direct_contract_fixture"
+  - path: "orchestration/continuity/ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal/migration-report.md"
+    git_blob: "a67144bd3117778541922b13f7c80aff06a85e9a"
+    classifications: ["test_fixture", "narrative_projection"]
+    entrypoints: ["historical_fixture_readback"]
+    writers: []
+    authority_role: "migration_historical_narrative_fixture"
+  - path: "orchestration/continuity/ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal/provider-free-migration-evidence.json"
+    git_blob: "319224cfc8df9dd874ac0145c60d950b31ed1a7e"
+    classifications: ["test_fixture", "replay_or_recovery"]
+    entrypoints: ["historical_fixture_readback"]
+    writers: []
+    authority_role: "migration_historical_structured_evidence_fixture"
+inventory_closure:
+  minimum_clockwork_core_paths:
+    - "orchestration_harness/governance_clockwork.py"
+    - "orchestration_harness/governance_clockwork_tick.py"
+    - "orchestration_harness/governance_live_adoption.py"
+    - "orchestration_harness/governance_migration.py"
+    - "orchestration_harness/governance_writer_guard.py"
+    - "orchestration_harness/shadow_clockwork.py"
+    - "scripts/ariadne_governance_clockwork_tick.py"
+    - "scripts/ariadne_governance_clockwork_closeout.py"
+  direct_cli_paths:
+    - "scripts/ariadne_governance_clockwork_tick.py"
+    - "scripts/ariadne_governance_clockwork_closeout.py"
+    - "scripts/ariadne_provider_free_clockwork_live_canonical_adoption_retirement.py"
+    - "scripts/ariadne_provider_free_clockwork_single_owner_migration_retirement_rehearsal.py"
+  direct_test_paths:
+    - "tests/test_ariadne_governance_clockwork_tick.py"
+    - "tests/test_ariadne_provider_free_clockwork_live_canonical_adoption_retirement.py"
+    - "tests/test_ariadne_provider_free_clockwork_single_owner_migration_retirement_rehearsal.py"
+    - "tests/test_deepseek_native_harness_provider_free_edit_argument_result_coordinate_diagnostic_recovery.py"
+    - "tests/test_deepseek_native_harness_provider_free_edit_coordinate_future_runner_integration_rehearsal.py"
+    - "tests/test_raisa_native_harness_bounded_occupied_useful_worker_coordinate_recovery_rehearsal.py"
+  direct_fixture_paths:
+    - "orchestration/continuity/ariadne-provider-free-clockwork-live-canonical-adoption-retirement/adoption-report.md"
+    - "orchestration/continuity/ariadne-provider-free-clockwork-live-canonical-adoption-retirement/closeout-intent.json"
+    - "orchestration/continuity/ariadne-provider-free-clockwork-live-canonical-adoption-retirement/contract.json"
+    - "orchestration/continuity/ariadne-provider-free-clockwork-live-canonical-adoption-retirement/provider-free-live-adoption-evidence.json"
+    - "orchestration/continuity/ariadne-provider-free-clockwork-live-canonical-adoption-retirement/writer-inventory.json"
+    - "orchestration/continuity/ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal/canonical-mirror-receipt.json"
+    - "orchestration/continuity/ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal/closeout-intent.json"
+    - "orchestration/continuity/ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal/contract.json"
+    - "orchestration/continuity/ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal/migration-report.md"
+    - "orchestration/continuity/ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal/provider-free-migration-evidence.json"
+authority_surface_controls:
+  "orchestration_harness/governance_live_adoption.py":
+    roles: ["persistent_state_writer", "lease_or_CAS", "replay_or_recovery", "narrative_projection", "adapter_migration_boundary"]
+    entrypoints: ["build_generation", "publish_live_generation", "rollback_live_generation", "validate_live_state"]
+    writers: ["publish_live_generation", "rollback_live_generation"]
+    authority_role: "single-owner live publication, legacy-writer retirement and canonical governance cutover"
+    persistence_format: "Git-bound immutable generation files, ownership metadata and current pointer"
+    atomicity_or_commit_point: "temporary sibling writes followed by canonical replacement with current pointer replaced last"
+    lease_or_cas_behavior: "writer lock plus source, protected-ref, generation and current-pointer identity checks"
+    replay_or_recovery_behavior: "retains prior generation, detects canonical drift and supports byte-exact rollback then restore"
+    narrative_or_structured_authority: "structured generation, ownership and pointer data are authoritative; Markdown is derived"
+    raisa_emr4_coupling: "owns the ten repository-governance surfaces only; no EMR4 product-runtime dependency"
+    portable_extraction_disposition: "retain contract and pure validation vocabulary; keep filesystem, Git and live cutover behind an adapter"
+  "orchestration_harness/governance_migration.py":
+    roles: ["persistent_state_writer", "lease_or_CAS", "replay_or_recovery", "narrative_projection", "legacy_duplicate_authority", "adapter_migration_boundary"]
+    entrypoints: ["initialize_mirror", "build_clockwork_generation", "publish_generation", "switch_generation", "validate_mirror"]
+    writers: ["publish_generation", "switch_generation"]
+    authority_role: "canonical-mirror generation preparation, ownership transfer and single-owner migration cutover"
+    persistence_format: "immutable canonical-mirror generations, ownership record, migration lease and selected-generation pointer"
+    atomicity_or_commit_point: "prepared generation is non-authoritative until selected-generation pointer replacement commits the cutover"
+    lease_or_cas_behavior: "exclusive migration lease with exact source, protected-ref, prior-generation and writer-identity checks"
+    replay_or_recovery_behavior: "immutable predecessor and successor generations permit deterministic rollback and restoration"
+    narrative_or_structured_authority: "structured generation, ownership, transaction and pointer objects are authoritative; reports are derived"
+    raisa_emr4_coupling: "migrates repository-governance surfaces and retirement metadata only; no EMR4 product-runtime dependency"
+    portable_extraction_disposition: "retain migration contract and pure generation validation; exclude repository cutover, filesystem and Git adapters from the pure kernel"
+persistence:
+  formats: ["canonical_JSON", "JSONL_append_only_journal", "Markdown_projection", "Git_bound_generation_directory"]
+  atomicity: "temporary_sibling_writes_then_os_replace_with_pointer_replaced_last"
+  lease_and_stale_writer: "exclusive writer.lock plus writer identity, source head, generation, tip and lease-sequence checks"
+  replay_and_recovery: "full previous generation retained; current pointer selects active generation; rollback restores immediate predecessor; historical fixture commits are explicit"
+  idempotence: "already-recorded operations return no committed lease advance; duplicate or stale events reject"
+  narrative_vs_structured_authority: "structured state, journal, manifest and pointer are authoritative; Markdown is a derived projection"
+known_historical_fixture_failures:
+  count: 7
+  suite: "tests/test_ariadne_governance_clockwork_tick.py"
+  classification: "unchanged_pre_existing_tick_next_boundaries_floor_semantic_fixture_failures"
+  containment: "historical fixtures only; current runtime and fixture behaviour unchanged in this candidate"
+  fixture_sources:
+    - "f98baaa5c57cfcf00f8d2e6cd0d1113d4a59ed6e"
+    - "1f6009943fcc2e8478511b95c85bf50388e3a634"
+    - "dcb5093a61f0365aeb2651e3bcfd87a36fe0c438"
+raisa_emr4_coupling:
+  coupled_surfaces: ["AGENTS.md", "orchestration/continuity/emr4-continuity-graph.json", "orchestration/continuity/emr4-compass.json", "orchestration/continuity/ariadne-active-operation-latch/current.json", "docs/ariadne-agent-error-correction-register-revision-668.md"]
+  product_runtime_dependency: false
+portable_ariadne_extraction_boundary:
+  include: ["closed state/event/command schemas", "canonical serialization and hashing", "pure reducer", "invalid-transition rejection", "append-only journal validation", "lease/CAS vocabulary"]
+  exclude: ["filesystem persistence", "Git observation", "subprocess", "database", "provider", "worktree", "EMR4 product", "Raisa narrative projection"]
+  future_kernel_paths: ["orchestration_harness/clockwork_state.py", "tests/test_clockwork_state.py"]
+  future_kernel_paths_absent_at_source: true
+runtime_mutation_authorized: false
+implementation_authorized: false

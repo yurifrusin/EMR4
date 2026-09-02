@@ -1,6 +1,6 @@
 schema_version: "raisa-ariadne.g1a-verdict-integration-scope.v4"
-status: "g1a3_r0_review_pending_r1_predefined"
-prepared_at: "2026-08-30T00:00:00+10:00"
+status: "g1a3_r1_external_review_passed_closeout_review_pending"
+prepared_at: "2026-08-31T18:00:00+10:00"
 inventory_source_commit: "91f1e6e645424a448bdcdfa2adabb86d31fb5f0b"
 active_subgate_after_g0_transition: "G1A.1"
 transition_opens_only: "G1A.1"
@@ -132,9 +132,9 @@ subgates:
         contract: "valid_worker_receipt_exit_0_transport_or_contract_failure_exit_2"
         disposition: "immutable_behavioral_regression_boundary"
   G1A.3:
-    status: "revision_required_R0_review_pending_R1_predefined"
+    status: "external_review_passed_frozen"
     task_class: "g1a_3_review_byte_binding_and_integration_consumer"
-    objective: "Bind complete review-time physical bytes in the review producer and integration consumer only after external R0 PASS and a state-only transition."
+    objective: "Preserve the externally accepted complete review-time physical byte binding; no runtime execution or further implementation is authorised."
     allowed_paths:
       - "scripts/ariadne_antigravity.py"
       - "tests/test_ariadne_antigravity.py"

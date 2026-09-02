@@ -84,18 +84,21 @@ def test_missing_programme_state_fails_closed(tmp_path: Path, capsys) -> None:
     assert report["failed_checks"] == ["programme_state_missing_or_invalid"]
 
 
-def test_machine_state_freezes_authority_and_forbidden_actions() -> None:
+def test_machine_state_freezes_closeout_authority_and_forbidden_actions() -> None:
     state = load_state()
 
     assert state["machine_authoritative"] is True
     assert state["programme_mode"] == "recovery"
     assert state["current_gate"] == "G1A.3"
-    assert state["current_gate_status"] == "revision_required"
-    assert state["active_correction"] == "G1A.3-R0"
-    assert state["active_profile"] == pa.G1A3_R0_REVIEW_PENDING_PROFILE
-    assert state["g1a_subgate_authority"]["subgates"]["G1A.3"]["owner_exception"][
-        "task_generation"
-    ] == ("g1a3-r0-review-producer-body-only-ast-replacement-20260830-v1")
+    assert state["current_gate_status"] == "active"
+    assert state["active_correction"] == pa.G1A_CLOSEOUT_CORRECTION
+    assert state["active_profile"] == pa.G1A_CLOSEOUT_REVIEW_PENDING_PROFILE
+    assert (
+        state["g1a_subgate_authority"]["subgates"]["G1A.3"]["owner_exception"][
+            "task_generation"
+        ]
+        == pa.G1A_CLOSEOUT_REPLACEMENT_TASK_GENERATION
+    )
     assert state["feature_work_eligible"] is False
     assert state["g0_2_correction"]["status"] == "superseded_revision_required"
     assert state["g0_4_correction"]["status"] == "superseded_revision_required"
@@ -126,8 +129,12 @@ def test_machine_state_freezes_authority_and_forbidden_actions() -> None:
         "live_provider_calls": 0,
         "real_patient_data_accesses": 0,
         "product_defects_fixed": 0,
-        "g1a_started": False,
+        "g1a_started": True,
     }
+    assert state["g1a_closeout"]["status"] == "review_pending"
+    assert state["g1a_closeout"]["g1a_closed"] is False
+    assert state["g1b"]["status"] == "closed_pending_state_transition"
+    assert state["g1b"]["implementation_started"] is False
 
 
 def test_pre_g0_branch_inventory_remains_reproducible_after_authorized_push() -> None:

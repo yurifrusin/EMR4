@@ -1,4 +1,4 @@
-schema_version: "ariadne.programme_recovery.v12"
+schema_version: "ariadne.programme_recovery.v13"
 status: "active_emergency_overlay"
 authority_owner: "Yuri"
 recorded_at: "2026-08-28T11:17:02+10:00"
@@ -7,6 +7,8 @@ gates_file: "orchestration/programme/gates.yaml"
 risk_file: "orchestration/programme/risk-register.yaml"
 inventory_file: "orchestration/programme/branch-pr-disposition.yaml"
 g1a_scope_file: "orchestration/programme/g1a-verdict-integration-scope.yaml"
+g1a_accepted_surface_file: "orchestration/programme/g1a-accepted-surface.yaml"
+g1b_clockwork_scope_file: "orchestration/programme/g1b-clockwork-scope.yaml"
 admission_command: "python scripts/raisa_ariadne_recovery_preflight.py --task-manifest <path> --phase development"
 required_before:
   - "task_selection"
@@ -21,7 +23,7 @@ required_before:
   - "protected_ref_operation"
   - "deployment"
 missing_or_invalid_state: "hard_stop"
-active_profile: "G1A.3-R1_REVIEW_BINDING_ACTIVE"
+active_profile: "G1A_CLOSEOUT_G1B_ENABLEMENT_REVIEW_PENDING"
 profiles:
   G0.8_FSMONITOR_CLOSURE:
     profile_kind: "controller_maintenance"
@@ -345,6 +347,74 @@ profiles:
       run_worker_first_admission_contract: "require_programme_admission_repo_root_REPO_ROOT_manifest_path_programme_task_manifest_entrypoint_provider_invocation_as_first_executable_statement"
       integration_allowed_mutation: "record_integration_body_only"
       record_integration_first_admission_contract: "_require_command_admission_args_entrypoint_integration_as_first_executable_statement"
+  G1A_CLOSEOUT_G1B_ENABLEMENT_REVIEW_PENDING:
+    profile_kind: "review_pending_controller"
+    expected_programme_mode: "recovery"
+    expected_current_gate: "G1A.3"
+    expected_gate_status: "active"
+    active_correction: "G1A-C0"
+    programme_gate: "G1A-C0"
+    admitted_task_classes: []
+    allowed_effects: ["repository_read"]
+    forbidden_effects: ["autonomous_worker_dispatch", "clockwork_runtime_mutation", "closeout_state_transition", "controller_policy_change", "dependency_change", "deployment", "g1b_work", "gatekeeper_change", "integration", "migration_change", "pages", "product_behavior_change", "programme_state_change", "protected_ref_movement", "provider_invocation", "real_data_access"]
+    closed_entrypoints: ["worker_dispatch", "provider_invocation", "clockwork_tick_mutation", "clockwork_closeout_mutation", "integration", "protected_ref_operation", "deployment"]
+    scope_behavior: "external_G1A_closeout_G1B_transition_enablement_review_only"
+    allowed_paths: []
+    autonomous_task_selection: false
+    out_of_gate_result: "blocked"
+    feature_work_eligible: false
+    product_work_eligible: false
+    provider_calls_eligible: false
+    deployment_eligible: false
+    protected_ref_movement_eligible: false
+    g1a_eligible: true
+  G1A_TO_G1B1_STATE_TRANSITION:
+    profile_kind: "state_transition"
+    expected_programme_mode: "recovery"
+    expected_current_gate: "G1B.1"
+    expected_gate_status: "active"
+    active_correction: "G1B.1"
+    programme_gate: "G1A_TO_G1B.1"
+    admitted_task_classes: ["g1a_to_g1b1_state_transition"]
+    allowed_effects: ["repository_read", "control_plane_edit", "external_review_record", "transition_artifact", "task_branch_commit", "task_branch_push"]
+    forbidden_effects: ["autonomous_worker_dispatch", "clockwork_runtime_mutation", "dependency_change", "deployment", "g1b_work", "implementation_change", "integration", "migration_change", "pages", "product_behavior_change", "protected_ref_movement", "provider_invocation", "real_data_access"]
+    closed_entrypoints: ["worker_dispatch", "provider_invocation", "clockwork_tick_mutation", "clockwork_closeout_mutation", "integration", "protected_ref_operation", "deployment"]
+    scope_behavior: "g1a_to_g1b1_semantic_state_transition"
+    allowed_paths:
+      - "AGENTS.md"
+      - "orchestration/continuity/ariadne-active-operation-latch/current.json"
+      - "orchestration/harness_settings/programme_recovery.yaml"
+      - "orchestration/programme/current-state.json"
+      - "orchestration/programme/gates.yaml"
+    autonomous_task_selection: false
+    out_of_gate_result: "blocked"
+    feature_work_eligible: false
+    product_work_eligible: false
+    provider_calls_eligible: false
+    deployment_eligible: false
+    protected_ref_movement_eligible: false
+    g1a_eligible: false
+  G1B.1_PURE_STATE_EVENT_KERNEL_ACTIVE:
+    profile_kind: "active_gate"
+    expected_programme_mode: "recovery"
+    expected_current_gate: "G1B.1"
+    expected_gate_status: "active"
+    active_correction: "G1B.1"
+    programme_gate: "G1B.1"
+    admitted_task_classes: ["g1b_1_pure_state_event_kernel"]
+    allowed_effects: ["repository_read", "clockwork_state_kernel_edit", "task_branch_commit", "task_branch_push", "external_review_preparation"]
+    forbidden_effects: ["autonomous_worker_dispatch", "clockwork_runtime_mutation", "closeout_state_transition", "controller_policy_change", "dependency_change", "deployment", "g1c_work", "integration", "migration_change", "pages", "product_behavior_change", "programme_state_change", "protected_ref_movement", "provider_invocation", "real_data_access"]
+    closed_entrypoints: ["worker_dispatch", "provider_invocation", "clockwork_tick_mutation", "clockwork_closeout_mutation", "integration", "protected_ref_operation", "deployment"]
+    scope_behavior: "g1b1_pure_state_event_kernel_only"
+    allowed_paths: ["orchestration_harness/clockwork_state.py", "tests/test_clockwork_state.py"]
+    autonomous_task_selection: false
+    out_of_gate_result: "blocked"
+    feature_work_eligible: false
+    product_work_eligible: false
+    provider_calls_eligible: false
+    deployment_eligible: false
+    protected_ref_movement_eligible: false
+    g1a_eligible: false
 scope_policy:
   expected_branch: "codex/raisa-ariadne-recovery-g0"
   frozen_recovery_base: "03e6860394c39086ec1ffb3f2457acc5f7c8b5f9"
@@ -527,6 +597,26 @@ g1a3_r0_transition_policy:
     - "orchestration/programme/current-state.json"
     - "orchestration/programme/gates.yaml"
   forbidden_effect_classes: ["dependency_change", "deployment", "g1b_work", "implementation_change", "integration", "migration_change", "pages", "product_behavior_change", "protected_ref_movement", "provider_invocation", "real_data_access"]
+g1a_to_g1b1_transition_policy:
+  manifest_schema_version: "ariadne.programme_g1a_to_g1b1_transition_manifest.v1"
+  task_class: "g1a_to_g1b1_state_transition"
+  transition_profile: "G1A_TO_G1B1_STATE_TRANSITION"
+  resulting_active_profile: "G1B.1_PURE_STATE_EVENT_KERNEL_ACTIVE"
+  from_profile: "G1A_CLOSEOUT_G1B_ENABLEMENT_REVIEW_PENDING"
+  to_profile: "G1B.1_PURE_STATE_EVENT_KERNEL_ACTIVE"
+  transition_status: "review_pending"
+  g1a3_r1_review_id: "g1a3-r1-review-23aa3ab-independent-20260831-pass"
+  g1a3_r1_review_record_sha256: "sha256:8787d9ca16b73545f4cab5962d031ec7e1ea4f066a70ee3c7e0d0f322d6aab89"
+  external_review_record_root: "orchestration/programme/gate-transition-enablement-reviews"
+  external_review_schema_version: "ariadne.external_g1a_closeout_g1b_enablement_review.v1"
+  transition_artifact_root: "orchestration/programme/gate-transitions"
+  transition_artifact_schema_version: "ariadne.g1a-to-g1b1-transition.v1"
+  accepted_surface_path: "orchestration/programme/g1a-accepted-surface.yaml"
+  clockwork_scope_path: "orchestration/programme/g1b-clockwork-scope.yaml"
+  candidate_commit_limit: 1
+  fixed_allowed_paths: ["AGENTS.md", "orchestration/continuity/ariadne-active-operation-latch/current.json", "orchestration/harness_settings/programme_recovery.yaml", "orchestration/programme/current-state.json", "orchestration/programme/gates.yaml"]
+  exact_transition_path_count: 7
+  forbidden_effect_classes: ["autonomous_worker_dispatch", "clockwork_runtime_mutation", "dependency_change", "deployment", "g1b_work", "implementation_change", "integration", "migration_change", "pages", "product_behavior_change", "protected_ref_movement", "provider_invocation", "real_data_access"]
 pinned_gatekeeper:
   schema_version: "ariadne.pinned_programme_gatekeeper_policy.v7"
   module: "orchestration_harness/pinned_programme_gatekeeper.py"

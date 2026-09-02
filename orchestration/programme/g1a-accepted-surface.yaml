@@ -1,0 +1,187 @@
+schema_version: "ariadne.g1a_accepted_surface.v1"
+status: "frozen_for_external_closeout_review"
+source_commit: "23aa3ab19aec6cee9246e7dd3a88f61ada39bd7a"
+source_tree: "e06fbf5c5f46b7a637a1d2987ce34c8f37990283"
+source_parent: "29b07cc8c70dd5813d59d99fb2be113a88dd55e2"
+runtime_sources:
+  - path: "orchestration_harness/verdict.py"
+    git_blob: "0be88e9e8ac89b402b9f6f143b1efcc44e56f9e5"
+    role: "accepted_pure_verdict_kernel"
+  - path: "orchestration_harness/deepcode_artifact.py"
+    git_blob: "487bab4110380db4949d1a86e35121589d298efb"
+    role: "accepted_review_artifact_parser"
+  - path: "orchestration_harness/review_acceptance.py"
+    git_blob: "372a3ff14ef4cd989e3cd1f54375c72004920b9b"
+    role: "accepted_review_acceptance_consumer"
+  - path: "scripts/ariadne_deepcode_liveness.py"
+    git_blob: "4f24e9b8952dbdc64782ff4682a94420f0c82315"
+    role: "accepted_review_artifact_entrypoint"
+  - path: "scripts/ariadne_review_acceptance.py"
+    git_blob: "c3085d8fde667f54ee852f9d51c7303ce3ba2522"
+    role: "accepted_review_acceptance_entrypoint"
+  - path: "scripts/ariadne_antigravity.py"
+    git_blob: "40ae4b7022afd6f38f76648f35ce23b4e9c30f5c"
+    role: "accepted_provider_adapter_with_admission_boundary"
+  - path: "scripts/agent_worktrees.py"
+    git_blob: "2555e4343ffa8e30a5610ef475cf5def4652979c"
+    role: "accepted_integration_consumer_with_admission_boundary"
+  - path: "orchestration_harness/trusted_git.py"
+    git_blob: "144398a79e1e125825a298b387546081445ed347"
+    role: "accepted_physical_git_attestation"
+  - path: "orchestration_harness/programme_admission.py"
+    git_blob: "98f3ba163211588a4c12ef679e77a3e9600f3ce2"
+    role: "accepted_g1a_controller_at_reviewed_source"
+  - path: "orchestration_harness/pinned_programme_gatekeeper.py"
+    git_blob: "eccb2c0477e015e40d948d8da890e5e6deaf08b1"
+    role: "accepted_g1a_pinned_gatekeeper_at_reviewed_source"
+  - path: "scripts/raisa_ariadne_gatekeeper_bootstrap.py"
+    git_blob: "20889a28de86628bd43d0243c9233d57dfc91c48"
+    role: "accepted_pinned_gatekeeper_bootstrap"
+  - path: "scripts/raisa_ariadne_pinned_gatekeeper.py"
+    git_blob: "3c992f6c1b443b7786849f37b4b6ddbd3a5ee4e5"
+    role: "accepted_pinned_gatekeeper_operation_cli"
+  - path: "scripts/raisa_ariadne_recovery_preflight.py"
+    git_blob: "bb0767bac6e364a1371e1801a7046f3b434689a0"
+    role: "accepted_recovery_preflight_at_reviewed_source"
+authority_evidence:
+  - path: "orchestration/programme/external-reviews/g0-review-d91a384-independent-20260827-pass.json"
+    schema_version: "raisa-ariadne.external-g0-review.v2"
+    record_id: "g0-review-d91a384-independent-20260827-pass"
+    subject_commit: "d91a3844ddfca1e6e5519237ca80023a2b17694b"
+    subject_tree: "270aaa136d9948d7d0cd6cff965ad6d760da6e18"
+    subject_parent: null
+    physical_sha256: "sha256:13312733f50a870e06078844c89b7be74aa40f82c30f2b118ea1bc67605b139a"
+    git_blob: "8775a9e53761ac4c3263f9873b9581fd899bc9d7"
+    disposition: "PASS"
+    authority_granted: ["G0_closeout", "G1A_state_transition"]
+    authority_withheld: ["provider_invocation", "integration", "protected_ref_movement"]
+  - path: "orchestration/programme/gate-transitions/g0-review-d91a384-independent-20260827-pass.json"
+    schema_version: "raisa-ariadne.g0-to-g1a-transition.v1"
+    record_id: "g0-review-d91a384-independent-20260827-pass"
+    subject_commit: "d91a3844ddfca1e6e5519237ca80023a2b17694b"
+    subject_tree: "270aaa136d9948d7d0cd6cff965ad6d760da6e18"
+    subject_parent: null
+    physical_sha256: "sha256:1564ac2c3809d203e32f451a4137f9868305d50f84829ef0a324e318dfd9aa8a"
+    git_blob: "e523b1e03cbae83efa58912fd64855c79f69d2a3"
+    disposition: "TRANSITION_COMPLETE"
+    authority_granted: ["G1A.1_active"]
+    authority_withheld: ["provider_invocation", "integration", "protected_ref_movement"]
+  - path: "orchestration/programme/owner-dispositions/g1a1-owner-accept-91f1e6e-20260828.json"
+    schema_version: "ariadne.owner_subgate_disposition.v1"
+    record_id: "g1a1-owner-accept-91f1e6e-20260828"
+    subject_commit: "91f1e6e645424a448bdcdfa2adabb86d31fb5f0b"
+    subject_tree: "24b92d586061901e7574d511105b21ea66d97f7e"
+    subject_parent: null
+    physical_sha256: "sha256:19be803ab0d545af2a8d48fff6f8e60d483d4729f4b8f422c8064e052045a47e"
+    git_blob: "eab25f13d23d5e29a3b29cb3c768b970c6f4aa9a"
+    disposition: "ACCEPT_WITH_RESIDUAL_RISK"
+    authority_granted: ["G1A.2_transition_enablement"]
+    authority_withheld: ["external_PASS_label", "G1A.2_state_transition", "provider_invocation", "integration"]
+  - path: "orchestration/programme/subgate-reviews/g1a2-e0-review-dab684e-independent-20260828-pass.json"
+    schema_version: "ariadne.external_subgate_review.v1"
+    record_id: "g1a2-e0-review-dab684e-independent-20260828-pass"
+    subject_commit: "dab684e84270a3ce4a8a2fca5fbead2ea2361ef6"
+    subject_tree: "13942ffcd4b791615b97c10696dc4a07f7e6c85a"
+    subject_parent: null
+    physical_sha256: "sha256:21515235c250b51afcdf52e745ce25a66c289fd6c384620a3011bfd895a94cbf"
+    git_blob: "d92f0f4483f99f358591dd173a9a4c28ccdec22f"
+    disposition: "PASS"
+    authority_granted: ["G1A.2_state_transition"]
+    authority_withheld: ["G1A.2_implementation", "provider_invocation"]
+  - path: "orchestration/programme/subgate-transitions/g1a2-e0-review-dab684e-independent-20260828-pass.json"
+    schema_version: "ariadne.g1a1-to-g1a2-transition.v1"
+    record_id: "g1a2-e0-review-dab684e-independent-20260828-pass"
+    subject_commit: "dab684e84270a3ce4a8a2fca5fbead2ea2361ef6"
+    subject_tree: "13942ffcd4b791615b97c10696dc4a07f7e6c85a"
+    subject_parent: null
+    physical_sha256: "sha256:22d30c6e26215a5bece0f6493080ca39db0ac7c56e494c047d457c1875b52fb5"
+    git_blob: "4566f4352a5e8b581846e4186efc18e97889feec"
+    disposition: "TRANSITION_COMPLETE"
+    authority_granted: ["G1A.2_active"]
+    authority_withheld: ["provider_invocation", "integration"]
+  - path: "orchestration/programme/subgate-implementation-reviews/g1a2-review-37e2d6f-independent-20260828-pass.json"
+    schema_version: "ariadne.external_subgate_implementation_review.v1"
+    record_id: "g1a2-review-37e2d6f-independent-20260828-pass"
+    subject_commit: "37e2d6f51ebbdb281771f922a5f460fd23e2571b"
+    subject_tree: "798a2eda11438fe05da2528298006775774ccfc4"
+    subject_parent: "474d79e0ef918dc8e7fef6780ea34c5c105fe236"
+    physical_sha256: "sha256:bd29a64c591e0cddd9cc47cc2ae4408f63c36acc3e663bd431bc369ee7385fcb"
+    git_blob: "54f13f203833467235482c475034f16b0fe1b3f0"
+    disposition: "PASS"
+    authority_granted: ["G1A.3_transition_enablement"]
+    authority_withheld: ["provider_invocation", "integration"]
+  - path: "orchestration/programme/subgate-transition-enablement-reviews/g1a3-e0-review-e5cb887-independent-20260829-pass.json"
+    schema_version: "ariadne.external_g1a3_transition_enablement_review.v1"
+    record_id: "g1a3-e0-review-e5cb887-independent-20260829-pass"
+    subject_commit: "e5cb887090ea1cafdce30e4e1d787940f5622104"
+    subject_tree: "848d1a3602a1f6c1cc17edc9e3e3c54e16fc3152"
+    subject_parent: "37e2d6f51ebbdb281771f922a5f460fd23e2571b"
+    physical_sha256: "sha256:8c695d7694b5f41b3f9cba20efdef576d2b27f655cce8d12174edf7f3dfda9fc"
+    git_blob: "025d053d394d1090e3c533ee565e7e48474eb84d"
+    disposition: "PASS"
+    authority_granted: ["G1A.3_state_transition"]
+    authority_withheld: ["G1A.3_implementation", "provider_invocation", "integration"]
+  - path: "orchestration/programme/subgate-transitions/g1a2-to-g1a3-e5cb887-pass.json"
+    schema_version: "ariadne.g1a2-to-g1a3-transition.v1"
+    record_id: "g1a2-to-g1a3-e5cb887-pass"
+    subject_commit: "e5cb887090ea1cafdce30e4e1d787940f5622104"
+    subject_tree: "848d1a3602a1f6c1cc17edc9e3e3c54e16fc3152"
+    subject_parent: null
+    physical_sha256: "sha256:5145ff767e04827840dae79ce1fd6362f54a7291ff0989ee3be61b1094af7623"
+    git_blob: "b7493acff8353f452d3e334cc6521b0c9f0de809"
+    disposition: "TRANSITION_COMPLETE"
+    authority_granted: ["G1A.3_active"]
+    authority_withheld: ["provider_invocation", "integration"]
+  - path: "orchestration/programme/subgate-implementation-reviews/g1a3-review-c6aa513-independent-20260829-revision-required.json"
+    schema_version: "ariadne.external_g1a3_implementation_review.v1"
+    record_id: "g1a3-review-c6aa513-independent-20260829-revision-required"
+    subject_commit: "c6aa513be3cdade785fc48283881825ef37345a3"
+    subject_tree: "01b11e07c4e9038a6d4e2c3fcd9b63c49caa4fbb"
+    subject_parent: "5a298856be05ce08e50dd7ab4501b7e16a3d0843"
+    physical_sha256: "sha256:f199fe00c4097650de7710ec480a25f920723e663ee1fa17cbf8785c04035e3a"
+    git_blob: "b10ba10360a796880f5452248040316c6eb4f916"
+    disposition: "REVISION_REQUIRED"
+    authority_granted: []
+    authority_withheld: ["G1A_complete", "G1B_transition_enablement", "provider_invocation", "integration", "protected_ref_movement"]
+  - path: "orchestration/programme/subgate-implementation-reviews/g1a3-r0-review-ccbe0d6-independent-20260830-pass.json"
+    schema_version: "ariadne.external_g1a3_r0_review.v1"
+    record_id: "g1a3-r0-review-ccbe0d6-independent-20260830-pass"
+    subject_commit: "ccbe0d6a36218903fc6582a0b348bd0b0199794b"
+    subject_tree: "466e2783fb37a013a699532112ff3923ba6f4033"
+    subject_parent: "5a298856be05ce08e50dd7ab4501b7e16a3d0843"
+    physical_sha256: "sha256:b2681a46fdff07c3e2d2a61f1aeecc2f95d22bbd99c64d8f71a6c931d5abdbfd"
+    git_blob: "ea374a07720da90b1eca8ef6def7c63e78b18bf4"
+    disposition: "PASS"
+    authority_granted: ["G1A.3-R1_state_transition"]
+    authority_withheld: ["G1A.3-R1_implementation", "provider_invocation", "integration", "protected_ref_movement"]
+  - path: "orchestration/programme/subgate-transitions/g1a3-r0-to-r1-ccbe0d6-pass.json"
+    schema_version: "ariadne.g1a3-r0-to-r1-transition.v1"
+    record_id: "g1a3-r0-to-r1-ccbe0d6-pass"
+    subject_commit: "ccbe0d6a36218903fc6582a0b348bd0b0199794b"
+    subject_tree: "466e2783fb37a013a699532112ff3923ba6f4033"
+    subject_parent: null
+    physical_sha256: "sha256:ecd173af1797d0a1475a53c4c3440eac48ec829fdc14d59a77018e2a42b1f1af"
+    git_blob: "b3d231e5cabd35aae7ed6ef833c3824732f4842e"
+    disposition: "TRANSITION_COMPLETE"
+    authority_granted: ["G1A.3-R1_active"]
+    authority_withheld: ["provider_invocation", "integration", "protected_ref_movement"]
+  - path: "orchestration/programme/subgate-implementation-reviews/g1a3-r1-review-23aa3ab-independent-20260831-pass.json"
+    schema_version: "ariadne.external_g1a3_r1_implementation_review.v1"
+    record_id: "g1a3-r1-review-23aa3ab-independent-20260831-pass"
+    subject_commit: "23aa3ab19aec6cee9246e7dd3a88f61ada39bd7a"
+    subject_tree: "e06fbf5c5f46b7a637a1d2987ce34c8f37990283"
+    subject_parent: "29b07cc8c70dd5813d59d99fb2be113a88dd55e2"
+    physical_sha256: "sha256:8787d9ca16b73545f4cab5962d031ec7e1ea4f066a70ee3c7e0d0f322d6aab89"
+    git_blob: "7ffbd6870eb24124252d9b1fa1d3a9e882f8b682"
+    disposition: "PASS"
+    authority_granted: ["G1A_exit_criteria_satisfied", "G1A_closeout_enablement", "G1B_transition_enablement"]
+    authority_withheld: ["G1B_state_transition", "G1B_implementation", "provider_invocation", "integration", "protected_ref_movement"]
+residual_risks:
+  - id: "G1A1-PARSER-MIXED-TAB-001"
+    status: "accepted_not_fixed"
+    classification: "parser_robustness_backlog"
+    description: "Mixed space-plus-tab indentation remains an unclosed free-form source-text marker edge case."
+    accepted_for_progression: true
+    must_be_reconsidered_before: "future high-trust free-form text integration authority"
+runtime_execution_authorized: false
+future_transition_input_only: true
