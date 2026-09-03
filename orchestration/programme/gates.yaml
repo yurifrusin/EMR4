@@ -1,7 +1,7 @@
 schema_version: "raisa-ariadne.programme-gates.v1"
 programme:
   name: "Raisa Medical Office and Ariadne Recovery & Convergence"
-  prepared_at: "2026-09-02T16:26:40+10:00"
+  prepared_at: "2026-09-03T10:30:00+10:00"
   repository: "yurifrusin/EMR4"
   observed_public_master: "2e34bdad732fdab32fbf778280b3d3c70d66d602"
   programme_mode: "recovery"
@@ -10,7 +10,7 @@ programme:
   feature_work_eligible: false
   clockwork_remote_visibility: "source_branch_aligned_with_origin"
   clockwork_local_state: "preserved_exactly_at_03e6860394c39086ec1ffb3f2457acc5f7c8b5f9"
-  next_eligible_tranche: "G1B.1"
+  next_eligible_tranche: "G1B.2"
 
 global_hard_stops:
   - "critical_or_high_security_finding"
@@ -435,7 +435,7 @@ gates:
 
   - id: "G1B"
     name: "Persisted Clockwork State Machine and Replay"
-    status: "active_subgate_G1B_1"
+    status: "g1b1_closeout_review_pending"
     prerequisites: ["G1A"]
     programme_mode: "recovery"
     exit_checks:
@@ -445,11 +445,11 @@ gates:
       - "crash_recovery_deterministic"
       - "stale_lease_cannot_commit"
       - "narrative_generated_from_structured_state"
-    next_gate: "G1B.1"
+    next_gate: "G1B.2"
 
   - id: "G1B.1"
     name: "Pure State Event and Reducer Kernel"
-    status: "active"
+    status: "implementation_external_review_passed_closeout_review_pending"
     prerequisites: ["external_G1A_closeout_G1B_transition_enablement_review_pass", "state_only_G1A_to_G1B1_transition"]
     programme_mode: "recovery"
     exit_checks:
@@ -460,6 +460,20 @@ gates:
       - "invalid_transition_rejected"
       - "canonical_deterministic_serialisation"
       - "no_runtime_or_product_imports"
+    next_gate: "G1B.2"
+
+  - id: "G1B.2"
+    name: "Pure Versioned Journal and Deterministic Replay Kernel"
+    status: "closed_pending_state_transition"
+    prerequisites: ["G1B.1_external_implementation_review_pass", "external_G1B1_closeout_G1B2_transition_enablement_review_pass", "state_only_G1B1_to_G1B2_transition"]
+    programme_mode: "recovery"
+    exit_checks:
+      - "versioned_journal_entry_vocabulary"
+      - "fixed_genesis_and_exact_previous_digest_chain"
+      - "canonical_entry_bytes_and_sha256_digest"
+      - "replay_rederives_every_result_with_accepted_G1B1_reducer"
+      - "closed_tamper_gap_reorder_mismatch_and_type_rejection"
+      - "pure_no_filesystem_git_process_network_database_clock_randomness_or_existing_clockwork_imports"
     next_gate: "G1B"
 
   - id: "G1C"

@@ -2,10 +2,12 @@
 
 ## Status and authority
 
-This is a review-pending design and extraction boundary, not a G1B
-implementation. The programme remains at `G1A.3`; G1A closeout awaits external
-review, G1B is closed pending a separately reviewed state transition, and no
-G1B task is currently eligible.
+G1B.1 is implemented and externally accepted at exact commit
+`faaf2d2b4e72c823b79d9da9aed49f0182125748`. Its accepted two-file surface and
+byte-exact PASS are frozen by `orchestration/programme/g1b1-accepted-surface.yaml`.
+The programme remains at `G1B.1` in the review-pending `G1B-C0` controller
+profile. G1B.1 closeout is not yet accepted, G1B.2 is closed pending a separate
+state transition, and no implementation task is eligible.
 
 The source inventory is
 `orchestration/programme/g1b-clockwork-scope.yaml`, bound to commit
@@ -27,35 +29,40 @@ contract/intent/evidence fixtures are enumerated one-for-one in the scope.
 The scope also records per-module persistence format, atomic commit point,
 lease/CAS checks, replay and recovery semantics, structured-versus-narrative
 authority, EMR4 coupling, and extraction disposition. These runtime modules
-remain byte-exact at the accepted source. G1B.1 may reuse their pure vocabulary
-only; filesystem, Git, live publication and migration/cutover behavior stay
-behind adapters and are not implemented or executed by this candidate.
+remain byte-exact at the accepted source. Neither this controller nor the future
+G1B.2 kernel imports, changes or executes them.
 
 ## State-only transition seam
 
 After this controller candidate receives a zero-finding external PASS, a clean
-gatekeeper pinned to the exact reviewed candidate may evaluate one direct-child
-`G1A_TO_G1B1_STATE_TRANSITION`. The transition is limited to the seven declared
-control-plane paths, binds the reviewed candidate, before-state and
-before-policy digests, accepted-surface and clockwork-scope physical digests and
-Git blobs, exact semantic pointer delta, production destination, expected
-remote head and fresh readback. It closes G1A and activates G1B.1 as state; it
-does not implement G1B.1.
+gatekeeper pinned to that exact reviewed candidate may evaluate one direct-child
+`G1B1_TO_G1B2_STATE_TRANSITION`. The transition changes exactly seven declared
+control-plane/evidence paths and binds the G1B.1 PASS, reviewed controller
+commit/tree/sole parent, recomputed before-state and before-policy digests,
+accepted G1B.1 surface and Git blobs, exact semantic pointer delta, production
+destination, expected remote head and fresh readback. It closes G1B.1 and
+activates G1B.2 as state; it does not implement G1B.2.
 
-## Bounded G1B.1 kernel
+## Frozen G1B.1 kernel
 
-The future profile is `G1B.1_PURE_STATE_EVENT_KERNEL_ACTIVE`, task class
-`g1b_1_pure_state_event_kernel`. Its allowed implementation paths are exactly:
+The accepted profile was `G1B.1_PURE_STATE_EVENT_KERNEL_ACTIVE`, task class
+`g1b_1_pure_state_event_kernel`. Its complete implementation is exactly:
 
 - `orchestration_harness/clockwork_state.py`
 - `tests/test_clockwork_state.py`
 
-Both paths are absent from this candidate. The kernel will be limited to closed
-typed state, event and command schemas; a pure transition/reducer function;
-invalid-transition rejection; explicit schema versions; and canonical,
-deterministic serialisation. It will not import filesystem, Git, network,
-subprocess, database, clock, randomness, environment, provider, integration,
-product, worktree or existing clockwork runtime adapters.
+Both files remain byte-identical to the externally reviewed commit. The closed
+typed state/event/command vocabulary, pure total reducer, invalid-transition
+result and canonical deterministic serialization are accepted. The reducer is
+a typed internal API; G1B.2 owns untrusted journal-boundary validation.
+
+## Defined G1B.2 kernel
+
+`docs/architecture/ariadne-g1b2-journal-replay-plan.md` and
+`orchestration/programme/g1b2-journal-replay-scope.yaml` define the future pure
+versioned journal and deterministic replay kernel. Its only future paths are
+`orchestration_harness/clockwork_journal.py` and
+`tests/test_clockwork_journal.py`; both are absent in this candidate.
 
 ## Extraction boundary
 
@@ -74,6 +81,9 @@ unchanged and are used only as inventory and later compatibility evidence.
 
 Provider invocation, integration execution, product and migration work,
 dependency or workflow changes, deployment and Pages work, existing clockwork
-runtime mutation, G1C work, and protected-ref movement remain closed. The next
-action is external review of the G1A closeout and G1B transition-enablement
-candidate only.
+runtime mutation, persistence, G1C work, and protected-ref movement remain
+closed. The next action is external review of task generation
+`g1b1-closeout-g1b2-enablement-field-protocol-closure-replacement-20260903-v1`
+only. That replacement retains the canonical staged exact-index transition
+lifecycle but closes every future journal and nested transition-result field
+type before protocol use; it does not perform the transition.

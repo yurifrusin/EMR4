@@ -2,6 +2,7 @@ import ast
 import copy
 import json
 import hashlib
+import inspect
 import shutil
 import subprocess
 import sys
@@ -13,6 +14,7 @@ import pytest
 import yaml
 
 import orchestration_harness.programme_admission as pa
+import orchestration_harness.pinned_programme_gatekeeper as pg
 from orchestration_harness.programme_admission import (
     ENTRYPOINTS,
     GitPathChange,
@@ -171,6 +173,628 @@ def test_serialized_form_includes_schema_versions():
     assert b"ariadne.clockwork_state.v1" in payload
     assert b"ariadne.clockwork_event.v1" in payload
     assert b"ariadne.clockwork_command.v1" in payload
+"""
+
+
+def _valid_g1b2_runtime_source() -> str:
+    return """from dataclasses import dataclass as _dataclass
+from enum import Enum as _Enum, unique as _unique
+import hashlib as _hashlib
+import json as _json
+from orchestration_harness.clockwork_state import (
+    ClockworkCommand as _ClockworkCommand,
+    ClockworkEvent as _ClockworkEvent,
+    ClockworkState as _ClockworkState,
+    InvalidTransition as _InvalidTransition,
+    TransitionResult as _TransitionResult,
+    canonical_bytes as _canonical_bytes,
+    transition as _transition,
+)
+
+JOURNAL_ENTRY_SCHEMA_VERSION = "ariadne.clockwork_journal_entry.v1"
+REPLAY_SCHEMA_VERSION = "ariadne.clockwork_replay.v1"
+GENESIS_PREVIOUS_DIGEST = "sha256:" + "0" * 64
+
+
+@_unique
+class JournalRejection(_Enum):
+    WRONG_SCHEMA = "wrong_schema"
+    FOREIGN_TYPE = "foreign_type"
+    INVALID_SEQUENCE = "invalid_sequence"
+    SEQUENCE_GAP = "sequence_gap"
+    DUPLICATE_SEQUENCE = "duplicate_sequence"
+    REORDERED_ENTRY = "reordered_entry"
+    PREVIOUS_DIGEST_MISMATCH = "previous_digest_mismatch"
+    MALFORMED_DIGEST = "malformed_digest"
+    ENTRY_BYTES_TAMPERED = "entry_bytes_tampered"
+    STORED_RESULT_MISMATCH = "stored_result_mismatch"
+    UNRECOGNISED_INVALID_TRANSITION_CODE = "unrecognised_invalid_transition_code"
+    INVALID_TRANSITION_REPRESENTED_AS_SUCCESS = "invalid_transition_represented_as_success"
+    VALID_TRANSITION_REPRESENTED_AS_INVALID = "valid_transition_represented_as_invalid"
+    MUTABLE_INPUT_COLLECTION = "mutable_input_collection"
+
+
+@_dataclass(frozen=True, slots=True)
+class JournalEntry:
+    schema_version: str
+    sequence: int
+    previous_digest: str
+    event: _ClockworkEvent
+    command: _ClockworkCommand
+    stored_result: _TransitionResult
+    digest: str
+
+
+@_dataclass(frozen=True, slots=True)
+class ReplayResult:
+    schema_version: str
+    state: _ClockworkState
+    next_sequence: int
+    previous_digest: str
+    validated_journal: tuple[JournalEntry, ...]
+    rejection: JournalRejection | None
+
+
+def _is_digest(value: object) -> bool:
+    return (
+        type(value) is str
+        and len(value) == 71
+        and value.startswith("sha256:")
+        and all(character in "0123456789abcdef" for character in value[7:])
+    )
+
+
+def _closed_result(
+    state: _ClockworkState,
+    next_sequence: int,
+    previous_digest: str,
+    validated_journal: tuple[JournalEntry, ...],
+    rejection: JournalRejection | None,
+) -> ReplayResult:
+    return ReplayResult(
+        REPLAY_SCHEMA_VERSION,
+        state,
+        next_sequence,
+        previous_digest,
+        validated_journal,
+        rejection,
+    )
+
+
+def canonical_entry_bytes(entry: JournalEntry) -> bytes:
+    if type(entry) is not JournalEntry:
+        raise TypeError("invalid_clockwork_journal_entry")
+    if not (
+        type(entry.schema_version) is str
+        and type(entry.sequence) is int
+        and type(entry.previous_digest) is str
+        and type(entry.event) is _ClockworkEvent
+        and type(entry.command) is _ClockworkCommand
+        and type(entry.stored_result) is _TransitionResult
+        and type(entry.stored_result.state) is _ClockworkState
+        and type(entry.stored_result.command) is _ClockworkCommand
+        and (
+            entry.stored_result.invalid is None
+            or type(entry.stored_result.invalid) is _InvalidTransition
+        )
+        and (
+            entry.stored_result.invalid is None
+            or type(entry.stored_result.invalid.code) is str
+        )
+        and type(entry.digest) is str
+    ):
+        raise TypeError("invalid_clockwork_journal_entry")
+    stored_result = _json.loads(_canonical_bytes(entry.stored_result).decode("utf-8"))
+    return _json.dumps(
+        {
+            "command": entry.command.value,
+            "event": entry.event.value,
+            "previous_digest": entry.previous_digest,
+            "schema_version": entry.schema_version,
+            "sequence": entry.sequence,
+            "stored_result": stored_result,
+        },
+        allow_nan=False,
+        ensure_ascii=False,
+        separators=(",", ":"),
+        sort_keys=True,
+    ).encode("utf-8")
+
+
+def entry_digest(entry: JournalEntry) -> str:
+    return "sha256:" + _hashlib.sha256(canonical_entry_bytes(entry)).hexdigest()
+
+
+def append_entry(
+    journal: tuple[JournalEntry, ...],
+    event: _ClockworkEvent,
+    command: _ClockworkCommand,
+) -> ReplayResult:
+    base = replay(journal)
+    if base.rejection is not None:
+        return base
+    if type(event) is not _ClockworkEvent or type(command) is not _ClockworkCommand:
+        return _closed_result(
+            base.state,
+            base.next_sequence,
+            base.previous_digest,
+            base.validated_journal,
+            JournalRejection.FOREIGN_TYPE,
+        )
+    result = _transition(base.state, event, command)
+    draft = JournalEntry(
+        JOURNAL_ENTRY_SCHEMA_VERSION,
+        base.next_sequence,
+        base.previous_digest,
+        event,
+        command,
+        result,
+        "",
+    )
+    entry = JournalEntry(
+        draft.schema_version,
+        draft.sequence,
+        draft.previous_digest,
+        draft.event,
+        draft.command,
+        draft.stored_result,
+        entry_digest(draft),
+    )
+    return replay(journal + (entry,))
+
+
+def replay(journal: tuple[JournalEntry, ...]) -> ReplayResult:
+    if type(journal) is not tuple:
+        rejection = (
+            JournalRejection.MUTABLE_INPUT_COLLECTION
+            if type(journal) is list
+            else JournalRejection.FOREIGN_TYPE
+        )
+        return _closed_result(
+            _ClockworkState.IDLE,
+            1,
+            GENESIS_PREVIOUS_DIGEST,
+            (),
+            rejection,
+        )
+    state = _ClockworkState.IDLE
+    next_sequence = 1
+    previous_digest = GENESIS_PREVIOUS_DIGEST
+    validated_journal: tuple[JournalEntry, ...] = ()
+    for entry in journal:
+        if type(entry) is not JournalEntry:
+            return _closed_result(state, next_sequence, previous_digest, validated_journal, JournalRejection.FOREIGN_TYPE)
+        if type(entry.schema_version) is not str:
+            return _closed_result(state, next_sequence, previous_digest, validated_journal, JournalRejection.FOREIGN_TYPE)
+        if entry.schema_version != JOURNAL_ENTRY_SCHEMA_VERSION:
+            return _closed_result(state, next_sequence, previous_digest, validated_journal, JournalRejection.WRONG_SCHEMA)
+        if type(entry.sequence) is not int or entry.sequence <= 0:
+            return _closed_result(state, next_sequence, previous_digest, validated_journal, JournalRejection.INVALID_SEQUENCE)
+        if entry.sequence > next_sequence:
+            return _closed_result(state, next_sequence, previous_digest, validated_journal, JournalRejection.SEQUENCE_GAP)
+        if entry.sequence < next_sequence:
+            rejection = (
+                JournalRejection.DUPLICATE_SEQUENCE
+                if entry.sequence == next_sequence - 1
+                else JournalRejection.REORDERED_ENTRY
+            )
+            return _closed_result(state, next_sequence, previous_digest, validated_journal, rejection)
+        if type(entry.previous_digest) is not str or type(entry.digest) is not str:
+            return _closed_result(state, next_sequence, previous_digest, validated_journal, JournalRejection.FOREIGN_TYPE)
+        if not _is_digest(entry.previous_digest) or not _is_digest(entry.digest):
+            return _closed_result(state, next_sequence, previous_digest, validated_journal, JournalRejection.MALFORMED_DIGEST)
+        if entry.previous_digest != previous_digest:
+            return _closed_result(state, next_sequence, previous_digest, validated_journal, JournalRejection.PREVIOUS_DIGEST_MISMATCH)
+        if (
+            type(entry.event) is not _ClockworkEvent
+            or type(entry.command) is not _ClockworkCommand
+            or type(entry.stored_result) is not _TransitionResult
+            or type(entry.stored_result.state) is not _ClockworkState
+            or type(entry.stored_result.command) is not _ClockworkCommand
+            or not (
+                entry.stored_result.invalid is None
+                or type(entry.stored_result.invalid) is _InvalidTransition
+            )
+        ):
+            return _closed_result(state, next_sequence, previous_digest, validated_journal, JournalRejection.FOREIGN_TYPE)
+        if (
+            entry.stored_result.invalid is not None
+            and type(entry.stored_result.invalid.code) is not str
+        ):
+            return _closed_result(state, next_sequence, previous_digest, validated_journal, JournalRejection.FOREIGN_TYPE)
+        if (
+            entry.stored_result.invalid is not None
+            and entry.stored_result.invalid.code != "invalid_transition"
+        ):
+            return _closed_result(state, next_sequence, previous_digest, validated_journal, JournalRejection.UNRECOGNISED_INVALID_TRANSITION_CODE)
+        if entry.digest != entry_digest(entry):
+            return _closed_result(state, next_sequence, previous_digest, validated_journal, JournalRejection.ENTRY_BYTES_TAMPERED)
+        derived = _transition(state, entry.event, entry.command)
+        if derived.invalid is not None and entry.stored_result.invalid is None:
+            return _closed_result(state, next_sequence, previous_digest, validated_journal, JournalRejection.INVALID_TRANSITION_REPRESENTED_AS_SUCCESS)
+        if derived.invalid is None and entry.stored_result.invalid is not None:
+            return _closed_result(state, next_sequence, previous_digest, validated_journal, JournalRejection.VALID_TRANSITION_REPRESENTED_AS_INVALID)
+        if _canonical_bytes(derived) != _canonical_bytes(entry.stored_result):
+            return _closed_result(state, next_sequence, previous_digest, validated_journal, JournalRejection.STORED_RESULT_MISMATCH)
+        state = derived.state
+        next_sequence += 1
+        previous_digest = entry.digest
+        validated_journal += (entry,)
+    return _closed_result(state, next_sequence, previous_digest, validated_journal, None)
+"""
+
+
+def _rejected_g1b2_runtime_source() -> str:
+    source = _valid_g1b2_runtime_source()
+    corrections = (
+        """    if not (
+        type(entry.schema_version) is str
+        and type(entry.sequence) is int
+        and type(entry.previous_digest) is str
+        and type(entry.event) is _ClockworkEvent
+        and type(entry.command) is _ClockworkCommand
+        and type(entry.stored_result) is _TransitionResult
+        and type(entry.stored_result.state) is _ClockworkState
+        and type(entry.stored_result.command) is _ClockworkCommand
+        and (
+            entry.stored_result.invalid is None
+            or type(entry.stored_result.invalid) is _InvalidTransition
+        )
+        and (
+            entry.stored_result.invalid is None
+            or type(entry.stored_result.invalid.code) is str
+        )
+        and type(entry.digest) is str
+    ):
+        raise TypeError("invalid_clockwork_journal_entry")
+""",
+        """        if type(entry.schema_version) is not str:
+            return _closed_result(state, next_sequence, previous_digest, validated_journal, JournalRejection.FOREIGN_TYPE)
+""",
+        """        if type(entry.previous_digest) is not str or type(entry.digest) is not str:
+            return _closed_result(state, next_sequence, previous_digest, validated_journal, JournalRejection.FOREIGN_TYPE)
+""",
+        """        if (
+            entry.stored_result.invalid is not None
+            and type(entry.stored_result.invalid.code) is not str
+        ):
+            return _closed_result(state, next_sequence, previous_digest, validated_journal, JournalRejection.FOREIGN_TYPE)
+""",
+    )
+    for correction in corrections:
+        assert source.count(correction) == 1
+        source = source.replace(correction, "", 1)
+    return source
+
+
+def _valid_g1b2_test_source() -> str:
+    return """from dataclasses import replace as _replace
+from orchestration_harness.clockwork_journal import (
+    GENESIS_PREVIOUS_DIGEST,
+    JOURNAL_ENTRY_SCHEMA_VERSION,
+    JournalEntry,
+    JournalRejection,
+    ReplayResult,
+    append_entry,
+    canonical_entry_bytes,
+    entry_digest,
+    replay,
+)
+from orchestration_harness.clockwork_state import (
+    ClockworkCommand,
+    ClockworkEvent,
+    ClockworkState,
+    InvalidTransition,
+    TransitionResult,
+)
+
+
+class _ExplosiveForeignEntry:
+    @property
+    def schema_version(self):
+        raise AssertionError("foreign_entry_was_inspected")
+
+
+_PROTOCOL_EVENTS: list[str] = []
+
+
+class _ProtocolSentinel:
+    def _fail(self, protocol: str):
+        _PROTOCOL_EVENTS.append(protocol)
+        raise AssertionError(f"sentinel_protocol_dispatched:{protocol}")
+
+    def __eq__(self, _other):
+        return self._fail("__eq__")
+
+    def __ne__(self, _other):
+        return self._fail("__ne__")
+
+    def __lt__(self, _other):
+        return self._fail("__lt__")
+
+    def __le__(self, _other):
+        return self._fail("__le__")
+
+    def __gt__(self, _other):
+        return self._fail("__gt__")
+
+    def __ge__(self, _other):
+        return self._fail("__ge__")
+
+    def __len__(self):
+        return self._fail("__len__")
+
+    def startswith(self, _prefix):
+        return self._fail("startswith")
+
+    def __iter__(self):
+        return self._fail("__iter__")
+
+    def __getitem__(self, _key):
+        return self._fail("__getitem__")
+
+    def __str__(self):
+        return self._fail("__str__")
+
+    def __format__(self, _format_spec):
+        return self._fail("__format__")
+
+    def __call__(self, *_args, **_kwargs):
+        return self._fail("__call__")
+
+    @property
+    def value(self):
+        return self._fail("value")
+
+    @property
+    def state(self):
+        return self._fail("state")
+
+    @property
+    def command(self):
+        return self._fail("command")
+
+    @property
+    def invalid(self):
+        return self._fail("invalid")
+
+    @property
+    def code(self):
+        return self._fail("code")
+
+
+def _base_journal() -> tuple[JournalEntry, ...]:
+    first = append_entry((), ClockworkEvent.START, ClockworkCommand.ADVANCE)
+    assert first.rejection is None
+    second = append_entry(
+        first.validated_journal,
+        ClockworkEvent.STOP,
+        ClockworkCommand.HOLD,
+    )
+    assert second.rejection is None
+    return second.validated_journal
+
+
+def _redigest(entry: JournalEntry) -> JournalEntry:
+    draft = _replace(entry, digest="")
+    return _replace(draft, digest=entry_digest(draft))
+
+
+def _assert_fixed_serializer_errors(entry):
+    for serializer in (canonical_entry_bytes, entry_digest):
+        try:
+            serializer(entry)
+        except TypeError as error:
+            assert type(error) is TypeError
+            assert error.args == ("invalid_clockwork_journal_entry",)
+        else:
+            raise AssertionError("fixed_journal_type_error_not_raised")
+
+
+def _assert_field_protocol_closed(entry: JournalEntry, rejection: JournalRejection):
+    _PROTOCOL_EVENTS.clear()
+    result = replay((entry,))
+    assert type(result) is ReplayResult
+    assert result.rejection is rejection
+    assert _PROTOCOL_EVENTS == []
+    _assert_fixed_serializer_errors(entry)
+    assert _PROTOCOL_EVENTS == []
+
+
+def test_genesis_and_digest_chain_are_deterministic():
+    first_result = append_entry((), ClockworkEvent.START, ClockworkCommand.ADVANCE)
+    assert first_result.rejection is None
+    first = first_result.validated_journal[0]
+    expected = (
+        b'{"command":"advance","event":"start","previous_digest":"sha256:'
+        b'0000000000000000000000000000000000000000000000000000000000000000",'
+        b'"schema_version":"ariadne.clockwork_journal_entry.v1","sequence":1,'
+        b'"stored_result":{"command":"advance","command_schema_version":'
+        b'"ariadne.clockwork_command.v1","event_schema_version":'
+        b'"ariadne.clockwork_event.v1","invalid":null,"state":"active",'
+        b'"state_schema_version":"ariadne.clockwork_state.v1"}}'
+    )
+    assert first.sequence == 1
+    assert first.previous_digest == GENESIS_PREVIOUS_DIGEST
+    assert canonical_entry_bytes(first) == expected
+    assert canonical_entry_bytes(first) == canonical_entry_bytes(first)
+    assert entry_digest(first) == first.digest
+    assert first.digest == "sha256:58cb7d6ba45ce9071c26c587977e3b676e90d2c491227d1b2a64b19d2fa11d9c"
+    repeated = append_entry((), ClockworkEvent.START, ClockworkCommand.ADVANCE)
+    assert repeated == first_result
+    original = first_result.validated_journal
+    appended = append_entry(original, ClockworkEvent.STOP, ClockworkCommand.HOLD)
+    assert original == (first,)
+    assert original[0] is first
+    assert appended.validated_journal[1].sequence == 2
+    assert appended.validated_journal[1].previous_digest == first.digest
+
+
+def test_replay_rederives_each_result():
+    journal = _base_journal()
+    result = replay(journal)
+    assert result.rejection is None
+    assert result.state is ClockworkState.ACTIVE
+    assert result.next_sequence == 3
+    assert result.previous_digest == journal[-1].digest
+    assert result.validated_journal == journal
+
+
+def test_tamper_gap_duplicate_and_reorder_are_rejected():
+    first, second = _base_journal()
+    third_result = append_entry((first, second), ClockworkEvent.STOP, ClockworkCommand.ADVANCE)
+    assert third_result.rejection is None
+    third = third_result.validated_journal[-1]
+    gap = _redigest(_replace(second, sequence=3))
+    duplicate = _redigest(_replace(second, sequence=1))
+    reordered = _redigest(_replace(third, sequence=1))
+    assert replay((first, gap)).rejection is JournalRejection.SEQUENCE_GAP
+    assert replay((first, duplicate)).rejection is JournalRejection.DUPLICATE_SEQUENCE
+    assert replay((first, second, reordered)).rejection is JournalRejection.REORDERED_ENTRY
+
+
+def test_wrong_schema_foreign_types_and_malformed_digests_are_rejected():
+    first = _base_journal()[0]
+    assert replay((_replace(first, schema_version="wrong"),)).rejection is JournalRejection.WRONG_SCHEMA
+    assert replay((_ExplosiveForeignEntry(),)).rejection is JournalRejection.FOREIGN_TYPE
+    _assert_fixed_serializer_errors(_ExplosiveForeignEntry())
+    assert replay((_replace(first, sequence=True),)).rejection is JournalRejection.INVALID_SEQUENCE
+    assert replay((_replace(first, sequence=0),)).rejection is JournalRejection.INVALID_SEQUENCE
+    assert replay((_replace(first, sequence="1"),)).rejection is JournalRejection.INVALID_SEQUENCE
+    assert replay([first]).rejection is JournalRejection.MUTABLE_INPUT_COLLECTION
+    sentinel = _ProtocolSentinel()
+    field_matrix = (
+        (_replace(first, schema_version=sentinel), JournalRejection.FOREIGN_TYPE),
+        (_replace(first, sequence=sentinel), JournalRejection.INVALID_SEQUENCE),
+        (_replace(first, previous_digest=sentinel), JournalRejection.FOREIGN_TYPE),
+        (_replace(first, event=sentinel), JournalRejection.FOREIGN_TYPE),
+        (_replace(first, command=sentinel), JournalRejection.FOREIGN_TYPE),
+        (_replace(first, stored_result=sentinel), JournalRejection.FOREIGN_TYPE),
+        (
+            _replace(
+                first,
+                stored_result=TransitionResult(
+                    sentinel,
+                    first.stored_result.command,
+                    first.stored_result.invalid,
+                ),
+            ),
+            JournalRejection.FOREIGN_TYPE,
+        ),
+        (
+            _replace(
+                first,
+                stored_result=TransitionResult(
+                    first.stored_result.state,
+                    sentinel,
+                    first.stored_result.invalid,
+                ),
+            ),
+            JournalRejection.FOREIGN_TYPE,
+        ),
+        (
+            _replace(
+                first,
+                stored_result=TransitionResult(
+                    first.stored_result.state,
+                    first.stored_result.command,
+                    sentinel,
+                ),
+            ),
+            JournalRejection.FOREIGN_TYPE,
+        ),
+        (
+            _replace(
+                first,
+                stored_result=TransitionResult(
+                    first.stored_result.state,
+                    first.stored_result.command,
+                    InvalidTransition(sentinel),
+                ),
+            ),
+            JournalRejection.FOREIGN_TYPE,
+        ),
+        (_replace(first, digest=sentinel), JournalRejection.FOREIGN_TYPE),
+    )
+    for entry, rejection in field_matrix:
+        _assert_field_protocol_closed(entry, rejection)
+
+
+def test_malformed_chain_tamper_and_previous_digest_are_rejected():
+    first, second = _base_journal()
+    malformed_digest = _replace(first, digest="sha256:not-a-digest")
+    malformed_previous = _replace(first, previous_digest="not-a-digest")
+    wrong_previous = _replace(first, previous_digest="sha256:" + "1" * 64)
+    field_tamper = _replace(first, event=ClockworkEvent.STOP)
+    assert replay((malformed_digest,)).rejection is JournalRejection.MALFORMED_DIGEST
+    assert replay((malformed_previous,)).rejection is JournalRejection.MALFORMED_DIGEST
+    assert replay((wrong_previous,)).rejection is JournalRejection.PREVIOUS_DIGEST_MISMATCH
+    assert replay((field_tamper,)).rejection is JournalRejection.ENTRY_BYTES_TAMPERED
+    assert replay((first, _replace(second, digest="sha256:" + "f" * 64))).rejection is JournalRejection.ENTRY_BYTES_TAMPERED
+
+
+def test_result_representation_mismatches_and_all_rejections_are_reachable():
+    first, second = _base_journal()
+    stored_mismatch = _redigest(
+        _replace(
+            first,
+            stored_result=TransitionResult(
+                ClockworkState.ACTIVE,
+                ClockworkCommand.HOLD,
+                None,
+            ),
+        )
+    )
+    invalid_as_success = _redigest(
+        _replace(
+            second,
+            stored_result=TransitionResult(
+                ClockworkState.ACTIVE,
+                ClockworkCommand.HOLD,
+                None,
+            ),
+        )
+    )
+    valid_as_invalid = _redigest(
+        _replace(
+            first,
+            stored_result=TransitionResult(
+                ClockworkState.ACTIVE,
+                ClockworkCommand.ADVANCE,
+                InvalidTransition("invalid_transition"),
+            ),
+        )
+    )
+    unknown_invalid_code = _redigest(
+        _replace(
+            second,
+            stored_result=TransitionResult(
+                ClockworkState.ACTIVE,
+                ClockworkCommand.HOLD,
+                InvalidTransition("foreign_code"),
+            ),
+        )
+    )
+    assert replay((stored_mismatch,)).rejection is JournalRejection.STORED_RESULT_MISMATCH
+    assert replay((first, invalid_as_success)).rejection is JournalRejection.INVALID_TRANSITION_REPRESENTED_AS_SUCCESS
+    assert replay((valid_as_invalid,)).rejection is JournalRejection.VALID_TRANSITION_REPRESENTED_AS_INVALID
+    assert replay((first, unknown_invalid_code)).rejection is JournalRejection.UNRECOGNISED_INVALID_TRANSITION_CODE
+    assert {member.value for member in JournalRejection} == {
+        "wrong_schema",
+        "foreign_type",
+        "invalid_sequence",
+        "sequence_gap",
+        "duplicate_sequence",
+        "reordered_entry",
+        "previous_digest_mismatch",
+        "malformed_digest",
+        "entry_bytes_tampered",
+        "stored_result_mismatch",
+        "unrecognised_invalid_transition_code",
+        "invalid_transition_represented_as_success",
+        "valid_transition_represented_as_invalid",
+        "mutable_input_collection",
+    }
 """
 
 
@@ -382,6 +1006,8 @@ def _policy_sandbox(tmp_path: Path) -> Path:
         pa.G1A_SCOPE_PATH,
         pa.G1A_ACCEPTED_SURFACE_PATH,
         pa.G1B_CLOCKWORK_SCOPE_PATH,
+        pa.G1B1_ACCEPTED_SURFACE_PATH,
+        pa.G1B2_JOURNAL_REPLAY_SCOPE_PATH,
         pa.LATCH_PATH,
         pa.AGENTS_PATH,
         Path(pa.OWNER_DISPOSITION_PATH),
@@ -398,6 +1024,7 @@ def _policy_sandbox(tmp_path: Path) -> Path:
         | set(pa.G1A_ACCEPTED_SOURCE_BLOBS)
         | set(pa.CLOCKWORK_INVENTORY_BLOBS)
         | set(pa.G1A_ACCEPTED_EVIDENCE)
+        | pa.G1B1_ALLOWED_PATHS
     ):
         source = ROOT / relative_text
         if not source.is_file():
@@ -674,46 +1301,36 @@ def test_owner_disposition_is_exact_digest_bound_and_not_external_pass() -> None
 
 def test_current_closeout_candidate_is_review_pending_and_admits_no_task() -> None:
     policy = load_programme_policy(ROOT)
-    g1a2 = policy.state["g1a_subgate_authority"]["subgates"]["G1A.2"]
-    g1a3 = policy.state["g1a_subgate_authority"]["subgates"]["G1A.3"]
+    g1b1 = policy.state["g1b"]["subgates"]["G1B.1"]
+    g1b2 = policy.state["g1b"]["subgates"]["G1B.2"]
 
-    assert policy.state["current_gate"] == "G1A.3"
-    assert policy.overlay["active_profile"] == pa.G1A_CLOSEOUT_REVIEW_PENDING_PROFILE
+    assert policy.state["current_gate"] == "G1B.1"
+    assert policy.state["active_correction"] == pa.G1B1_CLOSEOUT_CORRECTION
+    assert policy.overlay["active_profile"] == pa.G1B1_CLOSEOUT_REVIEW_PENDING_PROFILE
     assert policy.state["task_selection"]["allowed_task_kinds"] == []
     assert policy.state["task_selection"]["next_eligible_now"] is False
-    assert g1a2["transition_enablement_status"] == "external_review_passed"
-    assert g1a2["state_transition_status"] == "complete"
-    assert g1a2["implementation_status"] == "external_review_passed"
-    assert g1a2["implementation_authorized"] is False
-    assert g1a2["implementation_started"] is False
-    assert g1a2["provider_invocation_authorized"] is False
-    assert g1a3["status"] == "implementation_complete_closeout_review_pending"
-    assert g1a3["transition_enablement_status"] == "external_review_passed"
-    assert g1a3["state_transition_status"] == "complete"
-    assert g1a3["implementation_status"] == "external_review_passed"
-    assert g1a3["implementation_review_id"] == pa.G1A3_R1_REVIEW_ID
-    assert g1a3["r0_status"] == "external_review_passed"
-    assert g1a3["r1_state_transition_status"] == "complete"
-    assert g1a3["implementation_lifecycle"] == {
-        "started": True,
-        "candidate_published": True,
-        "external_review": "pass",
-        "completed": True,
+    assert policy.state["task_selection"]["next_eligible_tranche"] == "G1B.2"
+    assert g1b1 == {
+        "status": "implementation_external_review_passed_closeout_review_pending",
+        "implementation_status": "external_review_passed",
+        "implementation_started": True,
+        "implementation_complete": True,
+        "closeout_status": "review_pending",
+        "closed": False,
+        "accepted_surface_path": pa.G1B1_ACCEPTED_SURFACE_PATH.as_posix(),
     }
-    assert g1a3["implementation_authorized"] is False
-    assert g1a3["integration_execution_authorized"] is False
-    assert g1a3["provider_invocation_authorized"] is False
-    assert policy.state["g1a_closeout"] == {
-        "status": "review_pending",
-        "external_review_status": "pending",
-        "g1a_closed": False,
-        "accepted_surface_path": pa.G1A_ACCEPTED_SURFACE_PATH.as_posix(),
-        "clockwork_scope_path": pa.G1B_CLOCKWORK_SCOPE_PATH.as_posix(),
-        "candidate_local_admission_authoritative": False,
-        "next_action": "external_G1A_closeout_G1B_transition_enablement_review_only",
-    }
-    assert policy.state["g1b"]["status"] == "closed_pending_state_transition"
-    assert policy.state["g1b"]["implementation_started"] is False
+    assert g1b2["status"] == "closed_pending_state_transition"
+    assert g1b2["state_transition_status"] == "not_started"
+    assert g1b2["state_transition"] is None
+    assert g1b2["implementation_authorized"] is False
+    assert g1b2["implementation_started"] is False
+    assert policy.state["g1b"]["decisive_implementation_review_id"] == (
+        pa.G1B1_REVIEW_ID
+    )
+    assert policy.state["g1b"]["status"] == "g1b1_closeout_review_pending"
+    assert policy.state["g1b"]["next_action"] == (
+        "external_G1B1_closeout_G1B2_transition_enablement_review_only"
+    )
     provider = evaluate_programme_admission(
         repo_root=ROOT, manifest={}, entrypoint="provider_invocation"
     )
@@ -726,7 +1343,7 @@ def test_current_closeout_candidate_is_review_pending_and_admits_no_task() -> No
         phase="development",
     )
     assert local_operation.admitted is False
-    assert local_operation.reason_codes == ["task_manifest_schema_invalid"]
+    assert local_operation.reason_codes == ["pinned_gatekeeper_required"]
     with pytest.raises(
         PreflightError, match="no implementation task is currently eligible"
     ):
@@ -1942,7 +2559,7 @@ def test_review_pending_latch_cannot_resume_implementation(tmp_path: Path) -> No
 
     with pytest.raises(
         ProgrammeAdmissionError,
-        match="g1a_closeout_review_pending_latch_invalid",
+        match="g1b1_closeout_review_pending_latch_invalid",
     ):
         load_programme_policy(root)
 
@@ -1950,60 +2567,57 @@ def test_review_pending_latch_cannot_resume_implementation(tmp_path: Path) -> No
 def test_current_replacement_operation_identity_is_exact_across_control_surfaces() -> (
     None
 ):
-    expected = pa.G1A_CLOSEOUT_REPLACEMENT_TASK_GENERATION
+    expected = pa.G1B1_CLOSEOUT_TASK_GENERATION
     state = json.loads((ROOT / pa.STATE_PATH).read_text(encoding="utf-8"))
     latch = json.loads((ROOT / pa.LATCH_PATH).read_text(encoding="utf-8"))
     agents = (ROOT / pa.AGENTS_PATH).read_text(encoding="utf-8")
     narrative = (ROOT / "docs/programme/raisa-ariadne-recovery-programme.md").read_text(
         encoding="utf-8"
     )
+    g1b_plan = (ROOT / "docs/architecture/ariadne-g1b-state-machine-plan.md").read_text(
+        encoding="utf-8"
+    )
 
-    assert (
-        state["g1a_subgate_authority"]["subgates"]["G1A.3"]["owner_exception"][
-            "task_generation"
-        ]
-        == expected
+    assert state["active_profile"] == pa.G1B1_CLOSEOUT_REVIEW_PENDING_PROFILE
+    assert state["authority"]["directive_sha256"] == (pa.G1B1_CLOSEOUT_DIRECTIVE_SHA256)
+    assert state["g1b"]["next_action"] == (
+        "external_G1B1_closeout_G1B2_transition_enablement_review_only"
     )
     assert latch["operation_id"] == expected
-    assert latch["active_tranche"] == pa.G1A_CLOSEOUT_REPLACEMENT_TRANCHE
-    assert latch["objective"] == pa.G1A_CLOSEOUT_REPLACEMENT_OBJECTIVE
-    assert latch["authority_source"] == pa.G1A_CLOSEOUT_REPLACEMENT_AUTHORITY
-    assert (
-        latch["checkpoint"]["completed_stage"]
-        == pa.G1A_CLOSEOUT_REPLACEMENT_COMPLETED_STAGE
-    )
-    assert (
-        latch["checkpoint"]["next_executable_stage"]
-        == pa.G1A_CLOSEOUT_REPLACEMENT_NEXT_STAGE
-    )
+    assert latch["active_tranche"] == pa.G1B1_CLOSEOUT_TRANCHE
+    assert latch["objective"] == pa.G1B1_CLOSEOUT_OBJECTIVE
+    assert latch["authority_source"] == pa.G1B1_CLOSEOUT_AUTHORITY
+    assert latch["checkpoint"]["completed_stage"] == pa.G1B1_CLOSEOUT_COMPLETED_STAGE
+    assert latch["checkpoint"]["next_executable_stage"] == pa.G1B1_CLOSEOUT_NEXT_STAGE
     assert f"Task generation `{expected}`" in agents
     assert expected in narrative
+    assert expected in g1b_plan
 
 
 @pytest.mark.parametrize(
     ("case", "expected_reason"),
     [
-        ("state_task_generation", "g1a3_closeout_state_invalid"),
+        ("state_next_action", "g1b_state_invalid"),
         (
             "latch_operation_id",
-            "g1a_closeout_review_pending_latch_invalid",
+            "g1b1_closeout_review_pending_latch_invalid",
         ),
         (
             "latch_active_tranche",
-            "g1a_closeout_review_pending_latch_invalid",
+            "g1b1_closeout_review_pending_latch_invalid",
         ),
-        ("latch_objective", "g1a_closeout_review_pending_latch_invalid"),
+        ("latch_objective", "g1b1_closeout_review_pending_latch_invalid"),
         (
             "latch_authority_source",
-            "g1a_closeout_review_pending_latch_invalid",
+            "g1b1_closeout_review_pending_latch_invalid",
         ),
         (
             "latch_completed_stage",
-            "g1a_closeout_review_pending_latch_invalid",
+            "g1b1_closeout_review_pending_latch_invalid",
         ),
         (
             "latch_next_stage",
-            "g1a_closeout_review_pending_latch_invalid",
+            "g1b1_closeout_review_pending_latch_invalid",
         ),
         ("agents_task_generation", "agents_recovery_operation_identity_invalid"),
     ],
@@ -2013,12 +2627,10 @@ def test_current_replacement_operation_identity_drift_matrix_fails_closed(
 ) -> None:
     root = _policy_sandbox(tmp_path)
     stale = "g1a-closeout-g1b-enablement-stale-operation"
-    if case == "state_task_generation":
+    if case == "state_next_action":
         path = root / pa.STATE_PATH
         state = json.loads(path.read_text(encoding="utf-8"))
-        state["g1a_subgate_authority"]["subgates"]["G1A.3"]["owner_exception"][
-            "task_generation"
-        ] = stale
+        state["g1b"]["next_action"] = stale
         _write_json(path, state)
     elif case.startswith("latch_"):
         path = root / pa.LATCH_PATH
@@ -2040,9 +2652,8 @@ def test_current_replacement_operation_identity_drift_matrix_fails_closed(
     else:
         path = root / pa.AGENTS_PATH
         text = path.read_text(encoding="utf-8").replace(
-            pa.G1A_CLOSEOUT_REPLACEMENT_TASK_GENERATION,
+            pa.G1B1_CLOSEOUT_TASK_GENERATION,
             stale,
-            1,
         )
         path.write_bytes(text.encode("utf-8"))
         _git(root, "add", "--", pa.AGENTS_PATH.as_posix())
@@ -3334,6 +3945,8 @@ def _build_g1a3_transition_repository(
     overlay["active_profile"] = pa.G1A3_ENABLEMENT_PENDING_PROFILE
     overlay["g1a3_transition_policy"]["transition_status"] = "review_pending"
     overlay["g1a3_r0_transition_policy"]["transition_status"] = "not_started"
+    overlay["g1a_to_g1b1_transition_policy"]["transition_status"] = "review_pending"
+    overlay["g1b1_to_g1b2_transition_policy"]["transition_status"] = "review_pending"
     overlay["remote_identity_policy"] = pa.build_synthetic_remote_identity_policy(
         origin
     )
@@ -3648,6 +4261,8 @@ def _build_g1a3_r0_transition_repository(
     overlay = yaml.safe_load(overlay_path.read_text(encoding="utf-8"))
     overlay["active_profile"] = pa.G1A3_R0_REVIEW_PENDING_PROFILE
     overlay["g1a3_r0_transition_policy"]["transition_status"] = "not_started"
+    overlay["g1a_to_g1b1_transition_policy"]["transition_status"] = "review_pending"
+    overlay["g1b1_to_g1b2_transition_policy"]["transition_status"] = "review_pending"
     overlay["remote_identity_policy"] = pa.build_synthetic_remote_identity_policy(
         origin
     )
@@ -3972,6 +4587,13 @@ def _build_g1a_to_g1b1_transition_repository(
     _git(root, "config", "core.autocrlf", "false")
     _git(root, "config", "core.longpaths", "true")
     _copy_indexed_candidate(root)
+    historical_closeout = "00534520ed387c5766281de932e91ad74f7071f1"
+    for relative in (pa.STATE_PATH, pa.GATES_PATH, pa.LATCH_PATH, pa.AGENTS_PATH):
+        (root / relative).write_bytes(
+            pa._git_object_bytes(ROOT, f"{historical_closeout}:{relative.as_posix()}")
+        )
+    for relative in pa.G1B1_ALLOWED_PATHS:
+        (root / relative).unlink()
 
     origin = tmp_path / "g1b1-origin.git"
     origin.mkdir()
@@ -3979,6 +4601,9 @@ def _build_g1a_to_g1b1_transition_repository(
     _git(root, "remote", "add", "origin", str(origin))
     overlay_path = root / pa.OVERLAY_PATH
     overlay = yaml.safe_load(overlay_path.read_text(encoding="utf-8"))
+    overlay["active_profile"] = pa.G1A_CLOSEOUT_REVIEW_PENDING_PROFILE
+    overlay["g1a_to_g1b1_transition_policy"]["transition_status"] = "review_pending"
+    overlay["g1b1_to_g1b2_transition_policy"]["transition_status"] = "review_pending"
     overlay["remote_identity_policy"] = pa.build_synthetic_remote_identity_policy(
         origin
     )
@@ -4240,6 +4865,426 @@ def _build_g1a_to_g1b1_transition_repository(
     return root, gatekeeper, manifest, enablement, transition
 
 
+def _build_g1b1_to_g1b2_transition_repository(
+    tmp_path: Path,
+) -> tuple[Path, Path, dict, str, str]:
+    """Build a direct-child closeout controller and separate state-only transition."""
+    root = tmp_path / "g1b2-transition-target"
+    root.mkdir()
+    _git(root, "init", "-b", "codex/raisa-ariadne-recovery-g0")
+    object_store = _git(
+        ROOT, "rev-parse", "--path-format=absolute", "--git-path", "objects"
+    )
+    alternates = root / ".git/objects/info/alternates"
+    alternates.parent.mkdir(parents=True, exist_ok=True)
+    alternates.write_bytes((object_store + "\n").encode("utf-8"))
+    _git(root, "config", "user.email", "tests@example.invalid")
+    _git(root, "config", "user.name", "G1B.2 Transition Tests")
+    _git(root, "config", "core.autocrlf", "false")
+    _git(root, "config", "core.longpaths", "true")
+    _copy_indexed_candidate(root)
+
+    origin = tmp_path / "g1b2-origin.git"
+    origin.mkdir()
+    _git(origin, "init", "--bare")
+    _git(root, "remote", "add", "origin", str(origin))
+    overlay_path = root / pa.OVERLAY_PATH
+    overlay = yaml.safe_load(overlay_path.read_text(encoding="utf-8"))
+    overlay["remote_identity_policy"] = pa.build_synthetic_remote_identity_policy(
+        origin
+    )
+    _write_yaml(overlay_path, overlay)
+    latch_path = root / pa.LATCH_PATH
+    latch = json.loads(latch_path.read_text(encoding="utf-8"))
+    latch["checkpoint"]["settings_fingerprint"] = settings_fingerprint(
+        root / "orchestration/harness_settings"
+    )
+    _write_json(latch_path, latch)
+    _git(root, "add", "-A")
+    controller_tree = _git(root, "write-tree")
+    accepted_g1b1 = "faaf2d2b4e72c823b79d9da9aed49f0182125748"
+    controller = _git(
+        root,
+        "commit-tree",
+        controller_tree,
+        "-p",
+        accepted_g1b1,
+        "-m",
+        "synthetic externally reviewable G1B.1 closeout controller",
+    )
+    branch_ref = "refs/heads/codex/raisa-ariadne-recovery-g0"
+    _git(root, "update-ref", branch_ref, controller)
+    protected = "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    _git(root, "branch", "master", protected)
+    _git(root, "branch", "handoff/current", protected)
+    _git(
+        root,
+        "branch",
+        "safety/ariadne-clockwork-pre-g0-20260825",
+        "03e6860394c39086ec1ffb3f2457acc5f7c8b5f9",
+    )
+    _git(root, "push", "origin", f"{protected}:refs/heads/master")
+    _git(root, "push", "origin", f"{protected}:refs/heads/handoff/current")
+    _git(root, "push", "-u", "origin", f"{controller}:{branch_ref}")
+    _git(root, "fetch", "origin")
+    before_policy = load_programme_policy(root)
+    assert before_policy.state["active_profile"] == (
+        pa.G1B1_CLOSEOUT_REVIEW_PENDING_PROFILE
+    )
+    assert before_policy.allowed_paths == ()
+
+    gatekeeper = tmp_path / "g1b2-pinned-gatekeeper"
+    _git(root, "worktree", "add", "--detach", str(gatekeeper), controller)
+    _materialize_exact_commit_bytes(gatekeeper, controller)
+
+    transition_id = "g1b1-to-g1b2-synthetic-pass"
+    review_id = "g1b1-closeout-g1b2-synthetic-pass"
+    reviewer_surface = "external_native_review"
+    review_relative = (
+        "orchestration/programme/subgate-transition-enablement-reviews/"
+        f"{review_id}.json"
+    )
+    artifact_relative = f"{pa.SUBGATE_TRANSITION_ARTIFACT_ROOT}/{transition_id}.json"
+    review_path = root / review_relative
+    artifact_path = root / artifact_relative
+    review = {
+        "schema_version": "ariadne.external_g1b1_closeout_g1b2_enablement_review.v1",
+        "review_id": review_id,
+        "recorded_at": "2026-09-03T11:00:00+10:00",
+        "review_subject": "G1B1_closeout_and_G1B2_transition_enablement_controller",
+        "reviewed_commit": controller,
+        "reviewed_tree": controller_tree,
+        "reviewed_parent": accepted_g1b1,
+        "verdict": "PASS",
+        "blocking_finding_count": 0,
+        "reviewer_surface": reviewer_surface,
+        "g1b1_closeout_authorized": True,
+        "g1b2_state_transition_authorized": True,
+        "g1b2_implementation_authorized": False,
+        "provider_invocation_authorized": False,
+        "integration_execution_authorized": False,
+        "existing_clockwork_runtime_mutation_authorized": False,
+        "g1c_authorized": False,
+        "protected_ref_movement_authorized": False,
+        "source_artifact_sha256": "4" * 64,
+    }
+    _write_json(review_path, review)
+    review_digest = pa._sha256_bytes(review_path.read_bytes())
+
+    state_path = root / pa.STATE_PATH
+    state = json.loads(state_path.read_text(encoding="utf-8"))
+    state["observed_at"] = "2026-09-03T11:05:00+10:00"
+    state["current_gate"] = "G1B.2"
+    state["active_correction"] = "G1B.2"
+    state["active_profile"] = pa.G1B2_ACTIVE_PROFILE
+    state["g1b"]["status"] = "active_G1B2"
+    state["g1b"]["next_action"] = "begin_bounded_G1B2_pure_journal_replay_kernel"
+    state["g1b"]["subgates"]["G1B.1"].update(
+        {
+            "status": "passed",
+            "closeout_status": "accepted",
+            "closed": True,
+        }
+    )
+    transition_record = {
+        "status": "complete",
+        "transition_id": transition_id,
+        "from_profile": pa.G1B1_CLOSEOUT_REVIEW_PENDING_PROFILE,
+        "to_profile": pa.G1B2_ACTIVE_PROFILE,
+        "enablement_review_id": review_id,
+        "enablement_candidate_commit": controller,
+        "enablement_candidate_tree": controller_tree,
+        "external_review_status": "pass",
+        "blocking_finding_count": 0,
+        "reviewer_surface": reviewer_surface,
+        "next_action": "begin_bounded_G1B2_pure_journal_replay_kernel",
+    }
+    state["g1b"]["subgates"]["G1B.2"].update(
+        {
+            "status": "active",
+            "state_transition_status": "complete",
+            "state_transition": transition_record,
+            "implementation_authorized": True,
+        }
+    )
+    state["task_selection"].update(
+        {
+            "allowed_task_kinds": [pa.G1B2_TASK_CLASS],
+            "next_eligible_now": True,
+            "next_tranche_admission_requires_state_transition": False,
+            "next_eligibility_condition": (
+                "bounded_G1B2_profile_active_next_tranche_not_started"
+            ),
+        }
+    )
+    _write_json(state_path, state)
+
+    gates_path = root / pa.GATES_PATH
+    gates = yaml.safe_load(gates_path.read_text(encoding="utf-8"))
+    gates["programme"]["prepared_at"] = "2026-09-03T11:05:00+10:00"
+    gates["programme"]["current_gate"] = "G1B.2"
+    by_id = {row["id"]: row for row in gates["gates"]}
+    by_id["G1B"]["status"] = "active_subgate_G1B_2"
+    by_id["G1B.1"]["status"] = "passed"
+    by_id["G1B.2"]["status"] = "active"
+    _write_yaml(gates_path, gates)
+
+    overlay = yaml.safe_load(overlay_path.read_text(encoding="utf-8"))
+    overlay["active_profile"] = pa.G1B2_ACTIVE_PROFILE
+    overlay["g1b1_to_g1b2_transition_policy"]["transition_status"] = "complete"
+    _write_yaml(overlay_path, overlay)
+
+    agents_path = root / pa.AGENTS_PATH
+    agents = agents_path.read_text(encoding="utf-8")
+    marker = "# EMR4 Centaur — Live Agent Handover"
+    assert marker in agents
+    body = agents.split(marker, 1)[1]
+    agents_path.write_bytes(
+        (
+            "# EMERGENCY RAISA/ARIADNE RECOVERY PRECEDENCE\n\n"
+            "Gate G1B.2 is active only for the pure versioned journal and "
+            "deterministic replay kernel; G1C remains closed.\n\n"
+            "Missing, malformed, stale, or contradictory programme state is a "
+            "hard stop.\n\n" + marker + body
+        ).encode("utf-8")
+    )
+
+    latch = json.loads(latch_path.read_text(encoding="utf-8"))
+    latch.update(
+        {
+            "operation_id": "g1b2-pure-journal-replay-kernel",
+            "active_tranche": "G1B.2 pure journal and deterministic replay kernel",
+            "objective": (
+                "Implement only the predeclared pure G1B.2 journal/replay kernel."
+            ),
+            "status": "in_progress",
+            "source_head": controller,
+            "authority_source": (
+                "External G1B.1 closeout and G1B.2 transition-enablement PASS"
+            ),
+            "resume_after_compaction": True,
+        }
+    )
+    latch["checkpoint"]["completed_stage"] = (
+        "G1B.1 closeout accepted and state-only G1B.1-to-G1B.2 transition complete."
+    )
+    latch["checkpoint"]["next_executable_stage"] = (
+        "Bounded G1B.2 pure journal/replay implementation only."
+    )
+    latch["checkpoint"]["settings_fingerprint"] = settings_fingerprint(
+        root / "orchestration/harness_settings"
+    )
+    latch["terminal_response"].update(
+        {"permitted": False, "reason": "unfinished_authorized_operation"}
+    )
+    _write_json(latch_path, latch)
+
+    transition_paths = sorted(
+        pa.G1B1_TO_G1B2_TRANSITION_FIXED_ALLOWED_PATHS
+        | {review_relative, artifact_relative}
+    )
+    accepted_payload = pa._git_object_bytes(
+        root, f"{controller}:{pa.G1B1_ACCEPTED_SURFACE_PATH.as_posix()}"
+    )
+    manifest = {
+        "schema_version": pa.G1B1_TO_G1B2_TRANSITION_MANIFEST_VERSION,
+        "transition_id": transition_id,
+        "from_profile": pa.G1B1_CLOSEOUT_REVIEW_PENDING_PROFILE,
+        "to_profile": pa.G1B2_ACTIVE_PROFILE,
+        "g1b1_implementation_review_id": pa.G1B1_REVIEW_ID,
+        "g1b1_implementation_review_record_sha256": pa.G1B1_REVIEW_SHA256,
+        "enablement_review_id": review_id,
+        "enablement_candidate_commit": controller,
+        "enablement_candidate_tree": controller_tree,
+        "enablement_candidate_parent": accepted_g1b1,
+        "transition_parent": controller,
+        "external_review_verdict": "PASS",
+        "external_review_record_sha256": review_digest,
+        "blocking_finding_count": 0,
+        "reviewer_surface": reviewer_surface,
+        "state_digest_before": before_policy.state_digest,
+        "policy_digest_before": before_policy.policy_digest,
+        "accepted_surface_sha256": pa._sha256_bytes(accepted_payload),
+        "accepted_runtime_git_blob": "5a8600b043773c3187b3770d9c40614ced76a370",
+        "accepted_test_git_blob": "94b9cd01d33adc47da324d61855e79c9c940e9ef",
+        "allowed_transition_paths": transition_paths,
+        "required_semantic_pointer_delta": (
+            pa.G1B1_TO_G1B2_TRANSITION_SEMANTIC_POINTERS
+        ),
+        "protected_refs_before": {
+            "refs/heads/master": protected,
+            "refs/heads/handoff/current": protected,
+            "refs/remotes/origin/master": protected,
+            "refs/remotes/origin/handoff/current": protected,
+        },
+        "forbidden_effect_classes": sorted(pa.G1B1_TO_G1B2_FORBIDDEN_EFFECTS),
+    }
+    _git(
+        root,
+        "add",
+        "--",
+        *(path for path in transition_paths if path != artifact_relative),
+    )
+    after_policy = load_programme_policy(root)
+    semantic = pa._g1b1_to_g1b2_transition_semantic_pointer_map(root, controller)
+    assert semantic == pa.G1B1_TO_G1B2_TRANSITION_SEMANTIC_POINTERS
+    artifact = {
+        "schema_version": "ariadne.g1b1-to-g1b2-transition.v1",
+        "transition_id": transition_id,
+        "recorded_at": "2026-09-03T11:05:00+10:00",
+        "transition_manifest": manifest,
+        "transition_manifest_sha256": pa._sha256_bytes(
+            json.dumps(
+                manifest,
+                ensure_ascii=False,
+                sort_keys=True,
+                separators=(",", ":"),
+            ).encode("utf-8")
+        ),
+        "g1b1_implementation_review_record_sha256": pa.G1B1_REVIEW_SHA256,
+        "external_review_record_sha256": review_digest,
+        "enablement_candidate_commit": controller,
+        "enablement_candidate_tree": controller_tree,
+        "enablement_candidate_parent": accepted_g1b1,
+        "accepted_surface_sha256": manifest["accepted_surface_sha256"],
+        "accepted_runtime_git_blob": manifest["accepted_runtime_git_blob"],
+        "accepted_test_git_blob": manifest["accepted_test_git_blob"],
+        "state_digest_before": before_policy.state_digest,
+        "state_digest_after": after_policy.state_digest,
+        "policy_digest_before": before_policy.policy_digest,
+        "policy_digest_after": after_policy.policy_digest,
+        "changed_semantic_pointers": semantic,
+        "scope_result": "passed",
+        "g1b2_profile_contract": {
+            "active_profile": pa.G1B2_ACTIVE_PROFILE,
+            "task_class": pa.G1B2_TASK_CLASS,
+            "allowed_paths": sorted(pa.G1B2_ALLOWED_PATHS),
+            "allowed_effects": sorted(pa.G1B2_ALLOWED_EFFECTS),
+            "forbidden_effects": sorted(pa.G1B2_FORBIDDEN_EFFECTS),
+            "runtime_entrypoints_closed": True,
+        },
+    }
+    _write_json(artifact_path, artifact)
+    _git(root, "add", "--", *transition_paths)
+    staged_tree = _git(root, "write-tree")
+    assert _git(root, "rev-parse", "HEAD") == controller
+    assert staged_tree != controller_tree
+    return root, gatekeeper, manifest, controller, staged_tree
+
+
+def test_synthetic_g1b1_closeout_to_g1b2_state_transition_is_separate_and_pinned(
+    tmp_path: Path,
+) -> None:
+    root, gatekeeper, manifest, controller, staged_tree = (
+        _build_g1b1_to_g1b2_transition_repository(tmp_path)
+    )
+    development = pg.evaluate_pinned_programme_operation(
+        gatekeeper_root=gatekeeper,
+        target_repo_root=root,
+        manifest=manifest,
+        entrypoint="task_branch_commit",
+        phase="development",
+    )
+    assert development.admitted is True, development.reason_codes
+    assert development.gatekeeper_commit == controller
+    assert development.target_head == controller
+    assert development.target_index_tree == staged_tree
+    assert '"commit", "--no-verify"' not in inspect.getsource(
+        _build_g1b1_to_g1b2_transition_repository
+    )
+    receipt_directory = tmp_path / "g1b2-operation-receipts"
+    receipt_directory.mkdir()
+    commit_receipt = pg.execute_exact_index_commit(
+        gatekeeper_root=gatekeeper,
+        target_repo_root=root,
+        manifest=manifest,
+        message="synthetic G1B.1 to G1B.2 transition",
+        receipt_directory=receipt_directory,
+    )
+    transition = commit_receipt["result_sha"]
+    assert commit_receipt["result_tree"] == staged_tree
+    assert _git(root, "rev-list", "--parents", "-n", "1", transition) == (
+        f"{transition} {controller}"
+    )
+    pre_push = pg.evaluate_pinned_programme_operation(
+        gatekeeper_root=gatekeeper,
+        target_repo_root=root,
+        manifest=manifest,
+        entrypoint="task_branch_push",
+        phase="pre-push",
+    )
+    assert pre_push.admitted is True, pre_push.reason_codes
+    push_receipt = pg.execute_exact_sha_push(
+        gatekeeper_root=gatekeeper,
+        target_repo_root=root,
+        manifest=manifest,
+        receipt_directory=receipt_directory,
+    )
+    assert push_receipt["result_sha"] == transition
+    assert push_receipt["post_push_readback_sha"] == transition
+    post_push = pg.evaluate_pinned_programme_operation(
+        gatekeeper_root=gatekeeper,
+        target_repo_root=root,
+        manifest=manifest,
+        entrypoint="task_branch_push",
+        phase="post-push",
+    )
+    assert post_push.admitted is True, post_push.reason_codes
+    task_manifest = build_task_manifest(root)
+    assert task_manifest["task_class"] == pa.G1B2_TASK_CLASS
+    assert set(task_manifest["allowed_path_roots"]) == pa.G1B2_ALLOWED_PATHS
+    assert not (root / pa.G1B2_RUNTIME_PATH).exists()
+    assert not (root / pa.G1B2_TEST_PATH).exists()
+    candidate_local = evaluate_programme_operation_admission(
+        repo_root=root,
+        manifest=manifest,
+        entrypoint="task_branch_push",
+        phase="pre-push",
+    )
+    assert candidate_local.admitted is False
+    assert candidate_local.reason_codes == ["pinned_gatekeeper_required"]
+    for entrypoint in ("provider_invocation", "integration"):
+        denied = evaluate_programme_admission(
+            repo_root=root,
+            manifest=task_manifest,
+            entrypoint=entrypoint,
+        )
+        assert denied.admitted is False
+    for forbidden_effect in (
+        "existing_clockwork_mutation",
+        "g1c_work",
+        "protected_ref_movement",
+    ):
+        forged_effect = copy.deepcopy(task_manifest)
+        forged_effect["intended_side_effect_classes"].append(forbidden_effect)
+        denied = evaluate_programme_admission(
+            repo_root=root,
+            manifest=forged_effect,
+            entrypoint="recovery_preflight",
+        )
+        assert denied.admitted is False
+        assert denied.reason_codes == ["task_manifest_effects_not_admitted"]
+    for forged_paths, expected_reason in (
+        (
+            [pa.G1B2_RUNTIME_PATH.as_posix()],
+            "g1b2_task_manifest_paths_not_exact",
+        ),
+        (
+            [*task_manifest["allowed_path_roots"], "app/main.py"],
+            "task_manifest_path_outside_policy",
+        ),
+    ):
+        forged_scope = copy.deepcopy(task_manifest)
+        forged_scope["allowed_path_roots"] = forged_paths
+        denied = evaluate_programme_admission(
+            repo_root=root,
+            manifest=forged_scope,
+            entrypoint="recovery_preflight",
+        )
+        assert denied.admitted is False
+        assert denied.reason_codes == [expected_reason]
+
+
 def test_historical_r0_candidate_is_bound_to_explicit_commit_and_review() -> None:
     historical_commit = "ccbe0d6a36218903fc6582a0b348bd0b0199794b"
     state = pa._strict_json_payload(
@@ -4491,6 +5536,230 @@ def test_g1b1_closed_two_file_contract_accepts_legitimate_pure_kernel(
     _write_g1b1_contract_candidate(tmp_path)
 
     assert pa.g1b1_kernel_contract_reasons(tmp_path) == []
+
+
+def test_g1b1_pass_and_accepted_surface_are_exact_and_g1b2_is_not_implemented() -> None:
+    policy = load_programme_policy(ROOT)
+    surface = policy.g1b1_accepted_surface
+    review_path = ROOT / pa.G1B1_REVIEW_PATH
+
+    assert hashlib.sha256(review_path.read_bytes()).hexdigest() == (
+        "098950cb7763b1483ee67124c13086af847ee8ba1dedcfc752f77ef06988278a"
+    )
+    assert surface["source"] == {
+        "commit": "faaf2d2b4e72c823b79d9da9aed49f0182125748",
+        "tree": "a27d0f1e05df2c8f64c070b318a5c1c3cf30f870",
+        "sole_parent": "a6703be708d99d148296562d30fe4d5ae011f869",
+    }
+    assert surface["kernel"]["runtime"]["git_blob"] == (
+        "5a8600b043773c3187b3770d9c40614ced76a370"
+    )
+    assert surface["kernel"]["tests"]["git_blob"] == (
+        "94b9cd01d33adc47da324d61855e79c9c940e9ef"
+    )
+    assert pa.g1b1_kernel_contract_reasons(ROOT) == []
+    assert not (ROOT / pa.G1B2_RUNTIME_PATH).exists()
+    assert not (ROOT / pa.G1B2_TEST_PATH).exists()
+
+
+def test_g1b2_predeclared_contract_accepts_only_the_two_synthetic_future_files(
+    tmp_path: Path,
+) -> None:
+    root = tmp_path / "g1b2-contract"
+    runtime = root / pa.G1B2_RUNTIME_PATH
+    tests = root / pa.G1B2_TEST_PATH
+    runtime.parent.mkdir(parents=True)
+    tests.parent.mkdir(parents=True)
+    runtime.write_bytes(_valid_g1b2_runtime_source().encode("utf-8"))
+    tests.write_bytes(_valid_g1b2_test_source().encode("utf-8"))
+
+    assert pa.g1b2_journal_contract_reasons(root) == []
+    accepted_kernel = ROOT / pa.G1B1_RUNTIME_PATH
+    synthetic_kernel = root / pa.G1B1_RUNTIME_PATH
+    synthetic_kernel.parent.mkdir(parents=True, exist_ok=True)
+    synthetic_kernel.write_bytes(accepted_kernel.read_bytes())
+    completed = subprocess.run(
+        [sys.executable, "-m", "pytest", "-q", pa.G1B2_TEST_PATH.as_posix()],
+        cwd=root,
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    assert completed.returncode == 0, completed.stdout + completed.stderr
+    assert "6 passed" in completed.stdout
+
+
+def test_g1b2_rejected_runtime_is_exact_negative_evidence_and_new_tests_close_it(
+    tmp_path: Path,
+) -> None:
+    root = tmp_path / "g1b2-rejected-field-protocol-baseline"
+    runtime = root / pa.G1B2_RUNTIME_PATH
+    tests = root / pa.G1B2_TEST_PATH
+    runtime.parent.mkdir(parents=True)
+    tests.parent.mkdir(parents=True)
+    accepted_kernel = ROOT / pa.G1B1_RUNTIME_PATH
+    synthetic_kernel = root / pa.G1B1_RUNTIME_PATH
+    synthetic_kernel.parent.mkdir(parents=True, exist_ok=True)
+    synthetic_kernel.write_bytes(accepted_kernel.read_bytes())
+    rejected_source = _rejected_g1b2_runtime_source()
+    runtime.write_bytes(rejected_source.encode("utf-8"))
+    tests.write_bytes(_valid_g1b2_test_source().encode("utf-8"))
+
+    rejected_module = compile(
+        rejected_source.encode("utf-8"),
+        "rejected-g1b2-runtime.py",
+        "exec",
+        ast.PyCF_ONLY_AST | ast.PyCF_TYPE_COMMENTS,
+        dont_inherit=True,
+    )
+    assert pa._g1b2_ast_sha256(rejected_module) == (pa.G1B2_REJECTED_RUNTIME_AST_SHA256)
+    assert pa.g1b2_journal_contract_reasons(root) == ["g1b2_runtime_ast_not_exact"]
+    rejected = subprocess.run(
+        [sys.executable, "-m", "pytest", "-q", pa.G1B2_TEST_PATH.as_posix()],
+        cwd=root,
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    assert rejected.returncode != 0
+    assert "sentinel_protocol_dispatched" in rejected.stdout + rejected.stderr
+
+    runtime.write_bytes(_valid_g1b2_runtime_source().encode("utf-8"))
+    corrected = subprocess.run(
+        [sys.executable, "-m", "pytest", "-q", pa.G1B2_TEST_PATH.as_posix()],
+        cwd=root,
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    assert corrected.returncode == 0, corrected.stdout + corrected.stderr
+    assert "6 passed" in corrected.stdout
+
+
+@pytest.mark.parametrize(
+    ("mutation", "expected_reason"),
+    [
+        (
+            lambda source: source.replace("import hashlib", "import os"),
+            "g1b2_runtime_ast_not_exact",
+        ),
+        (
+            lambda source: source.replace(
+                '    ENTRY_BYTES_TAMPERED = "entry_bytes_tampered"\n', ""
+            ),
+            "g1b2_runtime_ast_not_exact",
+        ),
+        (
+            lambda source: source.replace(
+                "    if type(entry) is not JournalEntry:\n",
+                '    open("journal")\n    if type(entry) is not JournalEntry:\n',
+                1,
+            ),
+            "g1b2_runtime_ast_not_exact",
+        ),
+    ],
+)
+def test_g1b2_source_contract_rejects_scope_purity_and_vocabulary_drift(
+    tmp_path: Path, mutation: Callable[[str], str], expected_reason: str
+) -> None:
+    root = tmp_path / "g1b2-contract-adversary"
+    runtime = root / pa.G1B2_RUNTIME_PATH
+    tests = root / pa.G1B2_TEST_PATH
+    runtime.parent.mkdir(parents=True)
+    tests.parent.mkdir(parents=True)
+    runtime.write_bytes(mutation(_valid_g1b2_runtime_source()).encode("utf-8"))
+    tests.write_bytes(_valid_g1b2_test_source().encode("utf-8"))
+
+    assert expected_reason in pa.g1b2_journal_contract_reasons(root)
+
+
+def _rejected_broad_runtime_semantics_would_accept(source: str) -> bool:
+    module = compile(
+        source.encode("utf-8"),
+        "rejected-broad-runtime.py",
+        "exec",
+        ast.PyCF_ONLY_AST | ast.PyCF_TYPE_COMMENTS,
+        dont_inherit=True,
+    )
+    public = {
+        node.name
+        for node in module.body
+        if isinstance(node, (ast.ClassDef, ast.FunctionDef))
+        and not node.name.startswith("_")
+    }
+    public.update(
+        target.id
+        for node in module.body
+        if isinstance(node, ast.Assign)
+        for target in node.targets
+        if isinstance(target, ast.Name) and target.id.isupper()
+    )
+    calls = {
+        node.func.id
+        for node in ast.walk(module)
+        if isinstance(node, ast.Call) and isinstance(node.func, ast.Name)
+    }
+    return public == set(pa.G1B2_PUBLIC_API) and {
+        "_transition",
+        "_canonical_bytes",
+        "type",
+    }.issubset(calls)
+
+
+def _rejected_assertion_only_test_predicate(source: str) -> bool:
+    module = compile(
+        source.encode("utf-8"),
+        "rejected-broad-tests.py",
+        "exec",
+        ast.PyCF_ONLY_AST | ast.PyCF_TYPE_COMMENTS,
+        dont_inherit=True,
+    )
+    functions = [node for node in module.body if isinstance(node, ast.FunctionDef)]
+    return {node.name for node in functions} == set(pa.G1B2_REQUIRED_TESTS) and all(
+        any(isinstance(item, ast.Assert) for item in ast.walk(function))
+        for function in functions
+    )
+
+
+def test_g1b2_exact_ast_rejects_callback_semantic_substitution_before_execution(
+    tmp_path: Path,
+) -> None:
+    root = tmp_path / "g1b2-callback-adversary"
+    runtime = root / pa.G1B2_RUNTIME_PATH
+    tests = root / pa.G1B2_TEST_PATH
+    runtime.parent.mkdir(parents=True)
+    tests.parent.mkdir(parents=True)
+    callback_source = _valid_g1b2_runtime_source().replace(
+        "    if type(journal) is not tuple:\n",
+        "    if journal and callable(journal[0]):\n"
+        "        return journal[0]()\n"
+        "    if type(journal) is not tuple:\n",
+        1,
+    )
+    runtime.write_bytes(callback_source.encode("utf-8"))
+    tests.write_bytes(_valid_g1b2_test_source().encode("utf-8"))
+
+    assert _rejected_broad_runtime_semantics_would_accept(callback_source) is True
+    assert pa.g1b2_journal_contract_reasons(root) == ["g1b2_runtime_ast_not_exact"]
+
+
+def test_g1b2_exact_ast_rejects_noop_assertion_bodies_before_import(
+    tmp_path: Path,
+) -> None:
+    root = tmp_path / "g1b2-noop-test-adversary"
+    runtime = root / pa.G1B2_RUNTIME_PATH
+    tests = root / pa.G1B2_TEST_PATH
+    runtime.parent.mkdir(parents=True)
+    tests.parent.mkdir(parents=True)
+    noop_tests = "\n\n".join(
+        f"def {name}():\n    assert {{'{name}'}}"
+        for name in sorted(pa.G1B2_REQUIRED_TESTS)
+    )
+    runtime.write_bytes(_valid_g1b2_runtime_source().encode("utf-8"))
+    tests.write_bytes(noop_tests.encode("utf-8"))
+
+    assert _rejected_assertion_only_test_predicate(noop_tests) is True
+    assert pa.g1b2_journal_contract_reasons(root) == ["g1b2_test_ast_not_exact"]
 
 
 @pytest.mark.parametrize(
@@ -5081,7 +6350,7 @@ def test_commit_and_push_require_one_combined_admission_and_scope_decision() -> 
     assert direct.admitted is False
     assert direct.reason_codes == ["task_class_not_admitted"]
     assert combined.admitted is False
-    assert combined.reason_codes == ["task_class_not_admitted"]
+    assert combined.reason_codes == ["pinned_gatekeeper_required"]
 
 
 def test_direct_antigravity_runner_rechecks_admission_before_forged_receipt(

@@ -1,0 +1,41 @@
+schema_version: "ariadne.g1b1_accepted_surface.v1"
+status: "frozen_for_G1B2_transition_enablement_review"
+source:
+  commit: "faaf2d2b4e72c823b79d9da9aed49f0182125748"
+  tree: "a27d0f1e05df2c8f64c070b318a5c1c3cf30f870"
+  sole_parent: "a6703be708d99d148296562d30fe4d5ae011f869"
+kernel:
+  runtime:
+    path: "orchestration_harness/clockwork_state.py"
+    physical_sha256: "sha256:6e54a4414c3fb22a46caa6b471749d31a4e9fcc356f90f011e9fd8d17a31d052"
+    git_blob: "5a8600b043773c3187b3770d9c40614ced76a370"
+  tests:
+    path: "tests/test_clockwork_state.py"
+    physical_sha256: "sha256:87ee65d4799b648fb4b1a1ea9e1357d9dff540d9fa9f27780e08d6611ebee34c"
+    git_blob: "94b9cd01d33adc47da324d61855e79c9c940e9ef"
+implementation_review_ledger:
+  append_only: true
+  decisive_review_id: "g1b1-review-faaf2d2-independent-20260903-pass"
+  records:
+    - review_id: "g1b1-review-faaf2d2-independent-20260903-pass"
+      path: "orchestration/programme/subgate-implementation-reviews/g1b1-review-faaf2d2-independent-20260903-pass.json"
+      physical_sha256: "sha256:098950cb7763b1483ee67124c13086af847ee8ba1dedcfc752f77ef06988278a"
+      verdict: "PASS"
+      blocking_finding_count: 0
+      reviewed_commit: "faaf2d2b4e72c823b79d9da9aed49f0182125748"
+      reviewed_tree: "a27d0f1e05df2c8f64c070b318a5c1c3cf30f870"
+      reviewed_parent: "a6703be708d99d148296562d30fe4d5ae011f869"
+verification:
+  source_contract_reasons: []
+  transition_matrix: "8/8"
+  canonical_serialization: "accepted"
+authority:
+  provider_invocation_authorized: false
+  integration_execution_authorized: false
+  existing_clockwork_runtime_mutation_authorized: false
+  future_transition_input_only: true
+residual_boundaries:
+  - "transition_is_typed_internal_API_not_an_untrusted_parser"
+  - "invalid_code_must_be_closed_at_the_journal_boundary"
+  - "result_alone_is_not_event_provenance"
+  - "persistence_and_live_CAS_remain_outside_G1B1"

@@ -1,18 +1,18 @@
 {
   "schema_version": "raisa-ariadne.programme-state.v2",
-  "observed_at": "2026-09-02T16:26:40+10:00",
+  "observed_at": "2026-09-03T22:28:42+10:00",
   "programme_name": "Raisa Medical Office and Ariadne Recovery & Convergence",
   "programme_mode": "recovery",
   "current_gate": "G1B.1",
   "current_gate_status": "active",
-  "active_correction": "G1B.1",
-  "active_profile": "G1B.1_PURE_STATE_EVENT_KERNEL_ACTIVE",
+  "active_correction": "G1B-C0",
+  "active_profile": "G1B1_CLOSEOUT_G1B2_ENABLEMENT_REVIEW_PENDING",
   "machine_authoritative": true,
   "feature_work_eligible": false,
   "product_work_eligible": false,
   "authority": {
     "owner": "Yuri",
-    "directive_sha256": "ff5f2e0a1291fa77e7b62a1529933921837b762a4c5faf6795994140f99ca243",
+    "directive_sha256": "54f3680390f6eb7d4e4051dad3b4f5104368a1aeb05e8acd4d4450effadc72cd",
     "structured_state_precedence": "current-state.json then gates.yaml",
     "narrative_handover_role": "evidence_and_continuity_only",
     "missing_or_invalid_state": "hard_stop"
@@ -255,9 +255,7 @@
   },
   "task_selection": {
     "autonomous_selection_enabled": false,
-    "allowed_task_kinds": [
-      "g1b_1_pure_state_event_kernel"
-    ],
+    "allowed_task_kinds": [],
     "blocked_task_kinds": [
       "product_feature",
       "g1a_untyped_or_out_of_scope",
@@ -268,24 +266,24 @@
     ],
     "admission_command": "python scripts/raisa_ariadne_recovery_preflight.py --task-manifest <path> --phase development",
     "out_of_gate_result": "blocked",
-    "next_eligible_tranche": "G1B.1",
-    "next_eligible_now": true,
+    "next_eligible_tranche": "G1B.2",
+    "next_eligible_now": false,
     "next_tranche_started": false,
-    "next_tranche_admission_requires_state_transition": false,
-    "next_eligibility_condition": "bounded_G1B1_profile_active_next_tranche_not_started"
+    "next_tranche_admission_requires_state_transition": true,
+    "next_eligibility_condition": "external_G1B1_closeout_G1B2_transition_enablement_PASS_then_separate_state_transition"
   },
   "parallelism_efficacy": {
     "deepseek": {
       "disposition": "declined",
-      "rationale": "provider execution is forbidden and the tightly coupled owner-exception closeout controller has no separable DeepSeek work package"
+      "rationale": "provider execution is forbidden and the field-protocol AST correction plus retained transition lifecycle form one serial control-plane consistency domain"
     },
     "gemini": {
       "disposition": "reserved",
-      "rationale": "independent verification is reserved for external review of the published enablement candidate; no verifier or provider invocation is authorised in this tranche"
+      "rationale": "independent verification is reserved for external review of the published replacement; no verifier or provider invocation is authorised in this tranche"
     },
     "native_subagent": {
       "disposition": "declined",
-      "rationale": "the exact owner exception requires one serial root-owned control-plane candidate and its state, evidence, inventory and transition contracts are one consistency domain"
+      "rationale": "the owner-authorised field-protocol replacement, exact ASTs, sentinel matrix and retained transition lifecycle are one serial consistency domain"
     }
   },
   "actions_performed": {
@@ -672,10 +670,10 @@
     "accepted_surface_path": "orchestration/programme/g1a-accepted-surface.yaml",
     "clockwork_scope_path": "orchestration/programme/g1b-clockwork-scope.yaml",
     "candidate_local_admission_authoritative": false,
-    "next_action": "begin_bounded_G1B1_pure_state_event_kernel"
+    "next_action": "G1B_progression_only"
   },
   "g1b": {
-    "status": "active_G1B1",
+    "status": "g1b1_closeout_review_pending",
     "transition_enablement_status": "external_review_passed",
     "state_transition_status": "complete",
     "state_transition": {
@@ -691,9 +689,56 @@
       "reviewer_surface": "external_chatgpt_repository_review",
       "next_action": "begin_bounded_G1B1_pure_state_event_kernel"
     },
-    "implementation_started": false,
+    "implementation_started": true,
+    "implementation_review_record_root": "orchestration/programme/subgate-implementation-reviews",
+    "decisive_implementation_review_id": "g1b1-review-faaf2d2-independent-20260903-pass",
+    "implementation_review_history": [
+      {
+        "review_id": "g1b1-review-faaf2d2-independent-20260903-pass",
+        "review_record_path": "orchestration/programme/subgate-implementation-reviews/g1b1-review-faaf2d2-independent-20260903-pass.json",
+        "review_record_sha256": "sha256:098950cb7763b1483ee67124c13086af847ee8ba1dedcfc752f77ef06988278a",
+        "reviewed_commit": "faaf2d2b4e72c823b79d9da9aed49f0182125748",
+        "reviewed_tree": "a27d0f1e05df2c8f64c070b318a5c1c3cf30f870",
+        "reviewed_parent": "a6703be708d99d148296562d30fe4d5ae011f869",
+        "verdict": "PASS",
+        "blocking_finding_count": 0,
+        "reviewer_surface": "external_chatgpt_repository_review",
+        "g1b1_complete": true,
+        "g1b2_transition_enablement_authorized": true,
+        "g1b2_state_transition_authorized": false,
+        "g1b2_implementation_authorized": false,
+        "provider_invocation_authorized": false,
+        "integration_execution_authorized": false,
+        "existing_clockwork_runtime_mutation_authorized": false,
+        "protected_ref_movement_authorized": false
+      }
+    ],
+    "subgates": {
+      "G1B.1": {
+        "status": "implementation_external_review_passed_closeout_review_pending",
+        "implementation_status": "external_review_passed",
+        "implementation_started": true,
+        "implementation_complete": true,
+        "closeout_status": "review_pending",
+        "closed": false,
+        "accepted_surface_path": "orchestration/programme/g1b1-accepted-surface.yaml"
+      },
+      "G1B.2": {
+        "status": "closed_pending_state_transition",
+        "state_transition_status": "not_started",
+        "state_transition": null,
+        "implementation_authorized": false,
+        "implementation_started": false,
+        "provider_invocation_authorized": false,
+        "integration_execution_authorized": false,
+        "existing_clockwork_runtime_mutation_authorized": false
+      }
+    },
+    "candidate_local_admission_authoritative": false,
+    "next_action": "external_G1B1_closeout_G1B2_transition_enablement_review_only",
     "provider_invocation_authorized": false,
     "integration_execution_authorized": false,
+    "existing_clockwork_runtime_mutation_authorized": false,
     "protected_ref_movement_authorized": false
   },
   "g0_1_correction": {

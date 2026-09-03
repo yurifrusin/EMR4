@@ -1,0 +1,232 @@
+schema_version: "ariadne.g1b2_journal_replay_scope.v1"
+status: "defined_not_implemented"
+gate: "G1B.2"
+name: "Pure Versioned Journal and Deterministic Replay Kernel"
+active_profile: "G1B.2_PURE_JOURNAL_REPLAY_KERNEL_ACTIVE"
+task_class: "g1b_2_pure_journal_replay_kernel"
+implementation_paths:
+  - "orchestration_harness/clockwork_journal.py"
+  - "tests/test_clockwork_journal.py"
+schemas:
+  entry: "ariadne.clockwork_journal_entry.v1"
+  replay: "ariadne.clockwork_replay.v1"
+  genesis_previous_digest: "sha256:0000000000000000000000000000000000000000000000000000000000000000"
+public_api:
+  - "JOURNAL_ENTRY_SCHEMA_VERSION"
+  - "REPLAY_SCHEMA_VERSION"
+  - "GENESIS_PREVIOUS_DIGEST"
+  - "JournalRejection"
+  - "JournalEntry"
+  - "ReplayResult"
+  - "canonical_entry_bytes"
+  - "entry_digest"
+  - "append_entry"
+  - "replay"
+record_shapes:
+  JournalRejection:
+    decorator: "unique_enum"
+    members:
+      - "WRONG_SCHEMA=wrong_schema"
+      - "FOREIGN_TYPE=foreign_type"
+      - "INVALID_SEQUENCE=invalid_sequence"
+      - "SEQUENCE_GAP=sequence_gap"
+      - "DUPLICATE_SEQUENCE=duplicate_sequence"
+      - "REORDERED_ENTRY=reordered_entry"
+      - "PREVIOUS_DIGEST_MISMATCH=previous_digest_mismatch"
+      - "MALFORMED_DIGEST=malformed_digest"
+      - "ENTRY_BYTES_TAMPERED=entry_bytes_tampered"
+      - "STORED_RESULT_MISMATCH=stored_result_mismatch"
+      - "UNRECOGNISED_INVALID_TRANSITION_CODE=unrecognised_invalid_transition_code"
+      - "INVALID_TRANSITION_REPRESENTED_AS_SUCCESS=invalid_transition_represented_as_success"
+      - "VALID_TRANSITION_REPRESENTED_AS_INVALID=valid_transition_represented_as_invalid"
+      - "MUTABLE_INPUT_COLLECTION=mutable_input_collection"
+  JournalEntry:
+    decorator: "dataclass_frozen_true_slots_true"
+    fields:
+      - "schema_version:str"
+      - "sequence:int"
+      - "previous_digest:str"
+      - "event:_ClockworkEvent"
+      - "command:_ClockworkCommand"
+      - "stored_result:_TransitionResult"
+      - "digest:str"
+  ReplayResult:
+    decorator: "dataclass_frozen_true_slots_true"
+    fields:
+      - "schema_version:str"
+      - "state:_ClockworkState"
+      - "next_sequence:int"
+      - "previous_digest:str"
+      - "validated_journal:tuple[JournalEntry,...]"
+      - "rejection:JournalRejection|None"
+function_signatures:
+  canonical_entry_bytes: "(entry:JournalEntry)->bytes"
+  entry_digest: "(entry:JournalEntry)->str"
+  append_entry: "(journal:tuple[JournalEntry,...],event:_ClockworkEvent,command:_ClockworkCommand)->ReplayResult"
+  replay: "(journal:tuple[JournalEntry,...])->ReplayResult"
+semantic_contract:
+  sequence_origin: 1
+  previous_digest_binding: "exact_SHA256_chain_from_fixed_genesis"
+  event_and_command_binding: "exact_G1B1_enum_values"
+  stored_transition_result: "required_but_never_trusted"
+  canonical_entry_bytes: "sorted_compact_UTF8_JSON_allow_nan_false"
+  canonical_entry_fields:
+    - "command"
+    - "event"
+    - "previous_digest"
+    - "schema_version"
+    - "sequence"
+    - "stored_result"
+  entry_digest: "sha256_of_canonical_entry_bytes"
+  append_operation: "replay_existing_tuple_then_append_one_derived_entry_then_replay"
+  replay: "validate_full_entry_then_rederive_each_result_with_accepted_G1B1_transition"
+  field_type_boundary:
+    - "outer_object=exact_JournalEntry"
+    - "schema_version=exact_str"
+    - "sequence=exact_int"
+    - "previous_digest=exact_str"
+    - "event=exact_ClockworkEvent"
+    - "command=exact_ClockworkCommand"
+    - "stored_result=exact_TransitionResult"
+    - "stored_result.state=exact_ClockworkState"
+    - "stored_result.command=exact_ClockworkCommand"
+    - "stored_result.invalid=None_or_exact_InvalidTransition"
+    - "stored_result.invalid.code=exact_str_when_present"
+    - "digest=exact_str"
+  foreign_field_rejections:
+    schema_version: "foreign_type"
+    sequence: "invalid_sequence"
+    previous_digest: "foreign_type"
+    event: "foreign_type"
+    command: "foreign_type"
+    stored_result: "foreign_type"
+    stored_result.state: "foreign_type"
+    stored_result.command: "foreign_type"
+    stored_result.invalid: "foreign_type"
+    stored_result.invalid.code: "foreign_type"
+    digest: "foreign_type"
+  canonical_serializer_fixed_error: 'TypeError("invalid_clockwork_journal_entry")'
+  entry_digest_fixed_error: 'inherits_TypeError("invalid_clockwork_journal_entry")'
+  validation_precedence:
+    - "immutable_collection_before_iteration"
+    - "exact_entry_type_before_attribute_access"
+    - "exact_schema_type_before_schema_comparison"
+    - "exact_sequence_type_before_sequence_ordering"
+    - "exact_digest_field_types_before_digest_protocol_or_comparison"
+    - "exact_event_command_and_stored_result_types_before_use"
+    - "exact_nested_result_field_types_before_invalid_code_comparison"
+    - "canonical_bytes_and_digest_after_complete_field_closure"
+    - "G1B1_rederivation_then_representation_then_canonical_result_bytes"
+  rejection_result: "closed_ReplayResult_with_only_fully_validated_prefix"
+rejection_vocabulary:
+  - "wrong_schema"
+  - "foreign_type"
+  - "invalid_sequence"
+  - "sequence_gap"
+  - "duplicate_sequence"
+  - "reordered_entry"
+  - "previous_digest_mismatch"
+  - "malformed_digest"
+  - "entry_bytes_tampered"
+  - "stored_result_mismatch"
+  - "unrecognised_invalid_transition_code"
+  - "invalid_transition_represented_as_success"
+  - "valid_transition_represented_as_invalid"
+  - "mutable_input_collection"
+purity_contract:
+  allowed_import_modules:
+    - "dataclasses"
+    - "enum"
+    - "hashlib"
+    - "json"
+    - "orchestration_harness.clockwork_state"
+  forbidden_capabilities:
+    - "filesystem"
+    - "git"
+    - "subprocess"
+    - "network"
+    - "database"
+    - "environment"
+    - "clock_or_timezone"
+    - "randomness_or_uuid"
+    - "concurrency"
+    - "native_interfaces"
+    - "provider_or_worktree_adapters"
+    - "raisa_or_emr4_product_code"
+    - "existing_clockwork_writer_or_persistence_adapter"
+source_contract:
+  parsing: "original_bytes_PyCF_ONLY_AST_PyCF_TYPE_COMMENTS_dont_inherit"
+  canonical_ast: "ast_dump_annotate_fields_true_include_attributes_false_UTF8_SHA256"
+  rejected_runtime_ast_sha256: "cd1aba1f360c25392e32dde56c2ca6cef1d66d08287f8e6b9309adecb00a4872"
+  rejected_test_ast_sha256: "2aa023fec78a41a720418d1b06bbf02914b0f79c885ca2727231819fc4a4a644"
+  rejected_ast_disposition: "preserved_negative_evidence_not_admissible"
+  runtime_ast_sha256: "a514433e5b67312d0746e552f6a6e3d1ffb25d55056f4e7c7aabc344fe2b40fe"
+  test_ast_sha256: "07825bf0078dff36e490d27e46bf899bd1aead19c06bb77b46e811fb6e18aa83"
+  exact_public_api: true
+  exact_private_helpers:
+    - "_is_digest"
+    - "_closed_result"
+  exact_kernel_import_surface:
+    - "ClockworkCommand as _ClockworkCommand"
+    - "ClockworkEvent as _ClockworkEvent"
+    - "ClockworkState as _ClockworkState"
+    - "InvalidTransition as _InvalidTransition"
+    - "TransitionResult as _TransitionResult"
+    - "canonical_bytes as _canonical_bytes"
+    - "transition as _transition"
+  dynamic_execution_forbidden: true
+  definition_time_effects_forbidden: true
+  semantic_substitution_forbidden: true
+substantive_test_contract:
+  required_tests:
+    - "test_genesis_and_digest_chain_are_deterministic"
+    - "test_malformed_chain_tamper_and_previous_digest_are_rejected"
+    - "test_replay_rederives_each_result"
+    - "test_result_representation_mismatches_and_all_rejections_are_reachable"
+    - "test_tamper_gap_duplicate_and_reorder_are_rejected"
+    - "test_wrong_schema_foreign_types_and_malformed_digests_are_rejected"
+  exact_required_test_set: true
+  exact_canonical_bytes_and_digest_assertions_required: true
+  real_append_and_replay_API_calls_required: true
+  hash_chain_traversal_and_rederivation_required: true
+  every_rejection_value_reachable_required: true
+  foreign_type_must_not_be_inspected: true
+  field_level_protocol_sentinel_matrix_required: true
+  field_sentinel_paths:
+    - "schema_version"
+    - "sequence"
+    - "previous_digest"
+    - "event"
+    - "command"
+    - "stored_result"
+    - "stored_result.state"
+    - "stored_result.command"
+    - "stored_result.invalid"
+    - "stored_result.invalid.code"
+    - "digest"
+  field_sentinel_protocols:
+    - "__eq__"
+    - "__ne__"
+    - "ordering_comparisons"
+    - "__len__"
+    - "startswith"
+    - "__iter__"
+    - "__getitem__"
+    - "__str__"
+    - "__format__"
+    - "__call__"
+    - ".value"
+  protocol_event_count_expected: 0
+  canonical_entry_bytes_foreign_type_error: 'TypeError("invalid_clockwork_journal_entry")'
+  entry_digest_foreign_type_error: 'TypeError("invalid_clockwork_journal_entry")'
+  replay_totality_required: true
+  synthetic_source_only_before_transition: true
+authority:
+  implementation_authorized: false
+  state_transition_authorized: false
+  provider_invocation_authorized: false
+  integration_execution_authorized: false
+  existing_clockwork_runtime_mutation_authorized: false
+  persistence_authorized: false
+  g1c_authorized: false
+  protected_ref_movement_authorized: false

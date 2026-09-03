@@ -6,15 +6,16 @@ Repository: `yurifrusin/EMR4`
 Machine authority: `orchestration/programme/current-state.json`
 Gate authority: `orchestration/programme/gates.yaml`
 
-Current gate posture (2026-09-02): G1A.3-R1 has an exact external PASS at
-`23aa3ab19aec6cee9246e7dd3a88f61ada39bd7a`. The owner-authorised closeout and
-G1B transition-enablement lineage/totality replacement task generation
-`g1a-closeout-g1b-enablement-lineage-totality-replacement-20260902-v1` remains
-review-pending, admits no task, retains the accepted `clockwork_core` inventory,
-no-task Antigravity truth, pinned-only G1B.1 candidate operation boundary and
-closed runtime effect grammar, makes transition and required-test semantics
-total and substantive, does not close G1A, and leaves G1B closed pending a
-separately reviewed state transition.
+Current gate posture (2026-09-03): G1B.1 has an exact zero-finding external PASS
+at `faaf2d2b4e72c823b79d9da9aed49f0182125748`. Task generation
+`g1b1-closeout-g1b2-enablement-field-protocol-closure-replacement-20260903-v1`
+freezes that accepted two-file kernel and PASS byte-exactly, retains the
+canonical staged exact-index transition lifecycle, and closes every future
+G1B.2 journal and nested transition-result field type before protocol use. The
+candidate remains at G1B.1 in the
+`G1B1_CLOSEOUT_G1B2_ENABLEMENT_REVIEW_PENDING` profile, admits no task, does not
+close G1B.1, does not perform the transition, and does not implement G1B.2.
+Only independent external controller review may occur next.
 
 ## Authority and provenance
 

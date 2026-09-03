@@ -36,7 +36,7 @@ def test_g0_recovery_preflight_uses_the_current_git_lifecycle_phase() -> None:
     assert report["status"] == "blocked"
     assert report["phase"] == phase
     assert report["programme_mode"] == "recovery"
-    assert report["current_gate"] == "G1A.3"
+    assert report["current_gate"] == "G1B.1"
     assert report["feature_work_eligible"] is False
     assert report["global_gate"] == "red_repair_only"
     assert "programme_admission" in report["failed_checks"]
@@ -89,16 +89,10 @@ def test_machine_state_freezes_closeout_authority_and_forbidden_actions() -> Non
 
     assert state["machine_authoritative"] is True
     assert state["programme_mode"] == "recovery"
-    assert state["current_gate"] == "G1A.3"
+    assert state["current_gate"] == "G1B.1"
     assert state["current_gate_status"] == "active"
-    assert state["active_correction"] == pa.G1A_CLOSEOUT_CORRECTION
-    assert state["active_profile"] == pa.G1A_CLOSEOUT_REVIEW_PENDING_PROFILE
-    assert (
-        state["g1a_subgate_authority"]["subgates"]["G1A.3"]["owner_exception"][
-            "task_generation"
-        ]
-        == pa.G1A_CLOSEOUT_REPLACEMENT_TASK_GENERATION
-    )
+    assert state["active_correction"] == pa.G1B1_CLOSEOUT_CORRECTION
+    assert state["active_profile"] == pa.G1B1_CLOSEOUT_REVIEW_PENDING_PROFILE
     assert state["feature_work_eligible"] is False
     assert state["g0_2_correction"]["status"] == "superseded_revision_required"
     assert state["g0_4_correction"]["status"] == "superseded_revision_required"
@@ -131,10 +125,13 @@ def test_machine_state_freezes_closeout_authority_and_forbidden_actions() -> Non
         "product_defects_fixed": 0,
         "g1a_started": True,
     }
-    assert state["g1a_closeout"]["status"] == "review_pending"
-    assert state["g1a_closeout"]["g1a_closed"] is False
-    assert state["g1b"]["status"] == "closed_pending_state_transition"
-    assert state["g1b"]["implementation_started"] is False
+    assert state["g1a_closeout"]["status"] == "accepted"
+    assert state["g1a_closeout"]["g1a_closed"] is True
+    assert state["g1b"]["status"] == "g1b1_closeout_review_pending"
+    assert state["g1b"]["implementation_started"] is True
+    assert state["g1b"]["subgates"]["G1B.1"]["implementation_complete"] is True
+    assert state["g1b"]["subgates"]["G1B.1"]["closed"] is False
+    assert state["g1b"]["subgates"]["G1B.2"]["state_transition"] is None
 
 
 def test_pre_g0_branch_inventory_remains_reproducible_after_authorized_push() -> None:

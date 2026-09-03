@@ -18,6 +18,7 @@ if str(REPO_ROOT) not in sys.path:
 from orchestration_harness.programme_admission import (
     G0_G08_ALLOWED_PATHS,
     G1B1_ACTIVE_PROFILE,
+    G1B2_ACTIVE_PROFILE,
     TASK_MANIFEST_VERSION,
     ProgrammeAdmissionError,
     admission_payload,
@@ -36,6 +37,7 @@ EXPECTED_RISKS = {
     *(f"A-{index:03d}" for index in range(1, 11)),
 }
 RECOVERY_REMOTE_REF = "refs/heads/codex/raisa-ariadne-recovery-g0"
+NON_PROGRAMME_REMOTE_REF_PREFIXES = ("refs/heads/safety/g1b1-rejected-",)
 REQUIRED_WORKFLOWS = (
     ".github/workflows/codeql.yml",
     ".github/workflows/node-security.yml",
@@ -98,7 +100,14 @@ def _rows_digest(rows: list[str]) -> str:
 
 
 def _remote_baseline_snapshot(repo_root: Path) -> tuple[int, str, bool, int]:
-    rows = _normalised_remote_rows(repo_root)
+    rows = [
+        row
+        for row in _normalised_remote_rows(repo_root)
+        if not any(
+            row.split(" ", 1)[1].startswith(prefix)
+            for prefix in NON_PROGRAMME_REMOTE_REF_PREFIXES
+        )
+    ]
     suffix = f" {RECOVERY_REMOTE_REF}"
     recovery_rows = [row for row in rows if row.endswith(suffix)]
     if len(recovery_rows) > 1:
@@ -208,6 +217,16 @@ def _verification_phase(repo_root: Path, state: dict[str, Any]) -> str:
             root, "rev-list", "--reverse", f"{reviewed}..{head}"
         ).splitlines()
         parent = rows[0] if rows else None
+    elif active_correction == "G1B-C0":
+        parent = state["g1b"]["implementation_review_history"][-1]["reviewed_commit"]
+    elif active_correction == "G1B.2":
+        reviewed = state["g1b"]["subgates"]["G1B.2"]["state_transition"][
+            "enablement_candidate_commit"
+        ]
+        rows = _run_git(
+            root, "rev-list", "--reverse", f"{reviewed}..{head}"
+        ).splitlines()
+        parent = rows[0] if rows else None
     elif active_correction == "G1A.2":
         reviewed = state["g1a_subgate_authority"]["subgates"]["G1A.2"][
             "state_transition"
@@ -279,6 +298,20 @@ def build_task_manifest(
             "Implement only the pure typed G1B.1 state/event/command kernel and "
             "its direct tests without clockwork runtime, provider, integration, "
             "product or protected-ref effects."
+        )
+    elif policy.state["active_profile"] == G1B2_ACTIVE_PROFILE:
+        reviewed = policy.state["g1b"]["subgates"]["G1B.2"]["state_transition"][
+            "enablement_candidate_commit"
+        ]
+        rows = _run_git(root, "rev-list", "--reverse", f"{reviewed}..HEAD").splitlines()
+        if not rows:
+            raise PreflightError("G1B.2 activation commit unavailable")
+        base_commit = rows[0]
+        task_id = "raisa-ariadne-g1b-2-pure-journal-replay-kernel"
+        objective = (
+            "Implement only the pure typed G1B.2 append-only journal/replay kernel "
+            "and its direct tests without persistence, clockwork runtime, provider, "
+            "integration, product or protected-ref effects."
         )
     elif policy.state["active_profile"] == "G1A.3_ACTIVE":
         reviewed = policy.state["g1a_subgate_authority"]["subgates"]["G1A.3"][
