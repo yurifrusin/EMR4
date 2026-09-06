@@ -25,7 +25,7 @@ required_before:
   - "protected_ref_operation"
   - "deployment"
 missing_or_invalid_state: "hard_stop"
-active_profile: "G1B1_CLOSEOUT_G1B2_ENABLEMENT_REVIEW_PENDING"
+active_profile: "G1B.2_PURE_JOURNAL_REPLAY_KERNEL_ACTIVE"
 profiles:
   G0.8_FSMONITOR_CLOSURE:
     profile_kind: "controller_maintenance"
@@ -689,7 +689,7 @@ g1b1_to_g1b2_transition_policy:
   resulting_active_profile: "G1B.2_PURE_JOURNAL_REPLAY_KERNEL_ACTIVE"
   from_profile: "G1B1_CLOSEOUT_G1B2_ENABLEMENT_REVIEW_PENDING"
   to_profile: "G1B.2_PURE_JOURNAL_REPLAY_KERNEL_ACTIVE"
-  transition_status: "review_pending"
+  transition_status: "complete"
   g1b1_implementation_review_id: "g1b1-review-faaf2d2-independent-20260903-pass"
   g1b1_implementation_review_record_sha256: "sha256:098950cb7763b1483ee67124c13086af847ee8ba1dedcfc752f77ef06988278a"
   external_review_record_root: "orchestration/programme/subgate-transition-enablement-reviews"

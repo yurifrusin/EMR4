@@ -1,11 +1,9 @@
 # EMERGENCY RAISA/ARIADNE RECOVERY PRECEDENCE
 
-`orchestration/programme/current-state.json`, `orchestration/programme/gates.yaml`,
-and the active recovery admission policy outrank the historical baton below while
-the programme is in recovery. The older baton is evidence only and its named
-successor must not resume. Gate G1B.1 implementation is externally accepted; its closeout and G1B.2 transition enablement are review-pending, and G1B.2 remains closed.
+`orchestration/programme/current-state.json`, `orchestration/programme/gates.yaml`, and the active recovery admission policy outrank the historical baton below.
+Gate G1B.2 is active only for the pure versioned journal and deterministic replay kernel; G1B.1 closeout is accepted and G1C remains closed.
 Missing, malformed, stale, or contradictory programme state is a hard stop.
-Task generation `g1b1-closeout-g1b2-enablement-field-protocol-closure-replacement-20260903-v1` is paused for independent external review; candidate-local admission is not acceptance.
+Task generation `g1b1-to-g1b2-state-transition-9334903-20260904-v1` authorizes only the seven-path state transition and readiness proof. Stop for a separate bounded G1B.2 implementation handover; implementation has not started.
 
 # EMR4 Centaur — Live Agent Handover
 

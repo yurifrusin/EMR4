@@ -1,12 +1,12 @@
 {
   "schema_version": "raisa-ariadne.programme-state.v2",
-  "observed_at": "2026-09-03T22:28:42+10:00",
+  "observed_at": "2026-09-06T22:29:19+10:00",
   "programme_name": "Raisa Medical Office and Ariadne Recovery & Convergence",
   "programme_mode": "recovery",
-  "current_gate": "G1B.1",
+  "current_gate": "G1B.2",
   "current_gate_status": "active",
-  "active_correction": "G1B-C0",
-  "active_profile": "G1B1_CLOSEOUT_G1B2_ENABLEMENT_REVIEW_PENDING",
+  "active_correction": "G1B.2",
+  "active_profile": "G1B.2_PURE_JOURNAL_REPLAY_KERNEL_ACTIVE",
   "machine_authoritative": true,
   "feature_work_eligible": false,
   "product_work_eligible": false,
@@ -255,7 +255,9 @@
   },
   "task_selection": {
     "autonomous_selection_enabled": false,
-    "allowed_task_kinds": [],
+    "allowed_task_kinds": [
+      "g1b_2_pure_journal_replay_kernel"
+    ],
     "blocked_task_kinds": [
       "product_feature",
       "g1a_untyped_or_out_of_scope",
@@ -267,10 +269,10 @@
     "admission_command": "python scripts/raisa_ariadne_recovery_preflight.py --task-manifest <path> --phase development",
     "out_of_gate_result": "blocked",
     "next_eligible_tranche": "G1B.2",
-    "next_eligible_now": false,
+    "next_eligible_now": true,
     "next_tranche_started": false,
-    "next_tranche_admission_requires_state_transition": true,
-    "next_eligibility_condition": "external_G1B1_closeout_G1B2_transition_enablement_PASS_then_separate_state_transition"
+    "next_tranche_admission_requires_state_transition": false,
+    "next_eligibility_condition": "bounded_G1B2_profile_active_next_tranche_not_started"
   },
   "parallelism_efficacy": {
     "deepseek": {
@@ -673,7 +675,7 @@
     "next_action": "G1B_progression_only"
   },
   "g1b": {
-    "status": "g1b1_closeout_review_pending",
+    "status": "active_G1B2",
     "transition_enablement_status": "external_review_passed",
     "state_transition_status": "complete",
     "state_transition": {
@@ -715,19 +717,31 @@
     ],
     "subgates": {
       "G1B.1": {
-        "status": "implementation_external_review_passed_closeout_review_pending",
+        "status": "passed",
         "implementation_status": "external_review_passed",
         "implementation_started": true,
         "implementation_complete": true,
-        "closeout_status": "review_pending",
-        "closed": false,
+        "closeout_status": "accepted",
+        "closed": true,
         "accepted_surface_path": "orchestration/programme/g1b1-accepted-surface.yaml"
       },
       "G1B.2": {
-        "status": "closed_pending_state_transition",
-        "state_transition_status": "not_started",
-        "state_transition": null,
-        "implementation_authorized": false,
+        "status": "active",
+        "state_transition_status": "complete",
+        "state_transition": {
+          "status": "complete",
+          "transition_id": "g1b1-to-g1b2-9334903-pass",
+          "from_profile": "G1B1_CLOSEOUT_G1B2_ENABLEMENT_REVIEW_PENDING",
+          "to_profile": "G1B.2_PURE_JOURNAL_REPLAY_KERNEL_ACTIVE",
+          "enablement_review_id": "g1b1-closeout-g1b2-review-9334903-independent-20260904-pass",
+          "enablement_candidate_commit": "9334903cbdc7fe04e1c58759ca4babf0fd6d453b",
+          "enablement_candidate_tree": "b78dd45caadad2bee651aaec6601a9072a7edeaa",
+          "external_review_status": "pass",
+          "blocking_finding_count": 0,
+          "reviewer_surface": "external_chatgpt_repository_review",
+          "next_action": "begin_bounded_G1B2_pure_journal_replay_kernel"
+        },
+        "implementation_authorized": true,
         "implementation_started": false,
         "provider_invocation_authorized": false,
         "integration_execution_authorized": false,
@@ -735,7 +749,7 @@
       }
     },
     "candidate_local_admission_authoritative": false,
-    "next_action": "external_G1B1_closeout_G1B2_transition_enablement_review_only",
+    "next_action": "begin_bounded_G1B2_pure_journal_replay_kernel",
     "provider_invocation_authorized": false,
     "integration_execution_authorized": false,
     "existing_clockwork_runtime_mutation_authorized": false,

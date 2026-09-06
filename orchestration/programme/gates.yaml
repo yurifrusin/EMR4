@@ -1,11 +1,11 @@
 schema_version: "raisa-ariadne.programme-gates.v1"
 programme:
   name: "Raisa Medical Office and Ariadne Recovery & Convergence"
-  prepared_at: "2026-09-03T10:30:00+10:00"
+  prepared_at: "2026-09-06T22:29:19+10:00"
   repository: "yurifrusin/EMR4"
   observed_public_master: "2e34bdad732fdab32fbf778280b3d3c70d66d602"
   programme_mode: "recovery"
-  current_gate: "G1B.1"
+  current_gate: "G1B.2"
   current_gate_status: "active"
   feature_work_eligible: false
   clockwork_remote_visibility: "source_branch_aligned_with_origin"
@@ -435,7 +435,7 @@ gates:
 
   - id: "G1B"
     name: "Persisted Clockwork State Machine and Replay"
-    status: "g1b1_closeout_review_pending"
+    status: "active_subgate_G1B_2"
     prerequisites: ["G1A"]
     programme_mode: "recovery"
     exit_checks:
@@ -449,7 +449,7 @@ gates:
 
   - id: "G1B.1"
     name: "Pure State Event and Reducer Kernel"
-    status: "implementation_external_review_passed_closeout_review_pending"
+    status: "passed"
     prerequisites: ["external_G1A_closeout_G1B_transition_enablement_review_pass", "state_only_G1A_to_G1B1_transition"]
     programme_mode: "recovery"
     exit_checks:
@@ -464,7 +464,7 @@ gates:
 
   - id: "G1B.2"
     name: "Pure Versioned Journal and Deterministic Replay Kernel"
-    status: "closed_pending_state_transition"
+    status: "active"
     prerequisites: ["G1B.1_external_implementation_review_pass", "external_G1B1_closeout_G1B2_transition_enablement_review_pass", "state_only_G1B1_to_G1B2_transition"]
     programme_mode: "recovery"
     exit_checks:

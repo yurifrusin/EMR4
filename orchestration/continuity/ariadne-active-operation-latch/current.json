@@ -1,21 +1,21 @@
 {
   "schema_version": "ariadne.active_operation_latch.v1",
-  "operation_id": "g1b1-closeout-g1b2-enablement-field-protocol-closure-replacement-20260903-v1",
-  "active_tranche": "G1B.1 closeout and G1B.2 nested-field protocol-closure replacement",
-  "objective": "Retain the exact accepted G1B.1 kernel, PASS and canonical transition lifecycle while closing every future G1B.2 JournalEntry and TransitionResult field type before protocol use, without performing the transition or implementing G1B.2.",
-  "status": "paused",
-  "source_head": "faaf2d2b4e72c823b79d9da9aed49f0182125748",
-  "authority_source": "Yuri Frusin owner authorization for task generation g1b1-closeout-g1b2-enablement-field-protocol-closure-replacement-20260903-v1; exactly one direct-child field-protocol-closure replacement only; candidate-local admission is not acceptance",
+  "operation_id": "g1b2-pure-journal-replay-kernel",
+  "active_tranche": "G1B.2 pure journal and deterministic replay kernel readiness",
+  "objective": "Activate only the exact bounded G1B.2 profile and prove readiness; stop before implementation under Yuri's explicit state-transition-only instruction.",
+  "status": "in_progress",
+  "source_head": "9334903cbdc7fe04e1c58759ca4babf0fd6d453b",
+  "authority_source": "Yuri Frusin state-transition-only owner authorization, external G1B.1 closeout/G1B.2 enablement PASS and explicit digest reconciliation; separate implementation handover required.",
   "checkpoint": {
-    "completed_stage": "Exact G1B.1 implementation PASS, accepted kernel and pinned exact-index transition lifecycle retained; rejected nested-field protocol dispatch reproduced and closed by new exact runtime/test AST contracts with zero-dispatch field sentinels.",
-    "next_executable_stage": "Independent external review of the direct-child replacement only.",
+    "completed_stage": "G1B.1 closeout accepted and exact state-only G1B.1-to-G1B.2 transition prepared; G1B.2 implementation has not started.",
+    "next_executable_stage": "Prove bounded G1B.2 implementation readiness and stop for a separate implementation handover under the explicit owner instruction.",
     "retry_counters": {
       "planning": 0,
       "implementation": 0,
       "verification": 0,
       "publication": 0
     },
-    "settings_fingerprint": "sha256:0119fb644473c4d9425c2b79883800bf456a3530d8b4ac841bbed6440991f472"
+    "settings_fingerprint": "sha256:9ae6d6cd92b3d184cfb44ac407f9321b13166c02f41090bd9a6d8c8f3a7d53c4"
   },
   "interruption_policy": {
     "chronological_last_prompt_is_controlling_authority": false,
@@ -24,14 +24,14 @@
     "scope_addition_behavior": "merge_then_resume",
     "replacement_requires_explicit_pause_or_redirect": true
   },
-  "resume_after_compaction": false,
+  "resume_after_compaction": true,
   "user_attention": {
     "required": false,
     "reason": null
   },
   "terminal_response": {
-    "permitted": true,
-    "reason": "review_pending_external_G1B1_closeout_G1B2_replacement"
+    "permitted": false,
+    "reason": "unfinished_authorized_operation"
   },
   "protected_boundaries": [
     "G1A.1_owner_disposition_and_residual_risk_remain_frozen",
