@@ -3889,6 +3889,61 @@ def _validate_closeout_or_g1b1_state(value: dict[str, Any], root: Path) -> None:
     _validate_g1b_clockwork_scope(root, future_kernel_active=g1b1_active)
 
 
+def _g1b2_committed_transition_history(
+    root: Path, transition: dict[str, Any]
+) -> set[str]:
+    """Retain accepted history without letting current state select authority."""
+    if _run_git(root, "rev-parse", "HEAD") == transition["enablement_candidate_commit"]:
+        # Policy is needed to construct the staged transition's after-digests.
+        # This prospective stage grants no cumulative historical paths; the
+        # explicit transition manifest and exact-index operation validate it.
+        _validate_commit_tree_binding(
+            root,
+            commit=transition["enablement_candidate_commit"],
+            tree=transition["enablement_candidate_tree"],
+            reason="g1b1_to_g1b2_enablement_candidate_tree_invalid",
+        )
+        _validate_sole_parent(
+            root,
+            transition["enablement_candidate_commit"],
+            "faaf2d2b4e72c823b79d9da9aed49f0182125748",
+            "g1b1_to_g1b2_enablement_candidate_parent_invalid",
+        )
+        return set()
+
+    # This closed recovery profile has one accepted governing transition.
+    # Pin it independently of the candidate's state, filenames and HEAD.
+    accepted_commit = "f726021a71e08f81529d3eecd807a695f7ba7e3a"
+    if not _is_ancestor(root, accepted_commit, "HEAD"):
+        raise ProgrammeAdmissionError("g1b2_transition_history_source_invalid")
+    frozen_state = _strict_json_payload(
+        _git_object_bytes(root, f"{accepted_commit}:{STATE_PATH.as_posix()}"),
+        "g1b2_transition_history_state_invalid",
+    )
+    frozen_transition = frozen_state["g1b"]["subgates"]["G1B.2"]["state_transition"]
+    if set(transition) != set(frozen_transition) or any(
+        type(transition[key]) is not type(value) or transition[key] != value
+        for key, value in frozen_transition.items()
+    ):
+        raise ProgrammeAdmissionError("g1b2_transition_history_state_mismatch")
+    review_path = (
+        f"{G1A3_TRANSITION_REVIEW_ROOT}/"
+        f"{frozen_transition['enablement_review_id']}.json"
+    )
+    artifact_path = (
+        f"{SUBGATE_TRANSITION_ARTIFACT_ROOT}/{frozen_transition['transition_id']}.json"
+    )
+    for path in (review_path, artifact_path):
+        expected = _git_object_bytes(root, f"{accepted_commit}:{path}")
+        try:
+            actual = (root / path).read_bytes()
+        except OSError as error:
+            raise ProgrammeAdmissionError("g1b2_transition_history_missing") from error
+        if actual != expected:
+            raise ProgrammeAdmissionError("g1b2_transition_history_bytes_mismatch")
+    return {review_path, artifact_path}
+
+
 def _validate_g1b1_closeout_or_g1b2_state(value: dict[str, Any], root: Path) -> None:
     expected_keys = {
         "schema_version",
@@ -4171,13 +4226,27 @@ def _validate_g1b1_closeout_or_g1b2_state(value: dict[str, Any], root: Path) -> 
             or transition["from_profile"] != G1B1_CLOSEOUT_REVIEW_PENDING_PROFILE
             or transition["to_profile"] != G1B2_ACTIVE_PROFILE
             or transition["external_review_status"] != "pass"
+            or type(transition["blocking_finding_count"]) is not int
             or transition["blocking_finding_count"] != 0
             or transition["next_action"]
             != "begin_bounded_G1B2_pure_journal_replay_kernel"
-            or _SHA1.fullmatch(transition["enablement_candidate_commit"]) is None
-            or _SHA1.fullmatch(transition["enablement_candidate_tree"]) is None
+            or any(
+                not isinstance(transition[field], str)
+                or _SHA1.fullmatch(transition[field]) is None
+                for field in (
+                    "enablement_candidate_commit",
+                    "enablement_candidate_tree",
+                )
+            )
+            or any(
+                not isinstance(transition[field], str)
+                or _IDENTIFIER.fullmatch(transition[field]) is None
+                for field in ("transition_id", "enablement_review_id")
+            )
+            or not isinstance(transition["reviewer_surface"], str)
         ):
             raise ProgrammeAdmissionError("g1b1_to_g1b2_transition_state_invalid")
+        _g1b2_committed_transition_history(root, transition)
         expected_g1b2 = {
             "status": "active",
             "state_transition_status": "complete",
@@ -9269,6 +9338,13 @@ def load_programme_policy(repo_root: Path) -> ProgrammePolicy:
                         G1B1_CLOSEOUT_REVIEW_PENDING_PROFILE,
                         G1B2_ACTIVE_PROFILE,
                     }
+                    else set()
+                )
+                | (
+                    _g1b2_committed_transition_history(
+                        root, state["g1b"]["subgates"]["G1B.2"]["state_transition"]
+                    )
+                    if state["active_profile"] == G1B2_ACTIVE_PROFILE
                     else set()
                 )
             )

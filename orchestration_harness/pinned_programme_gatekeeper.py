@@ -12,7 +12,7 @@ import os
 from dataclasses import asdict, dataclass, replace
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any
+from typing import Any, Callable
 
 from orchestration_harness import programme_admission as admission
 
@@ -1025,14 +1025,43 @@ def commit_exact_admitted_index(
     message: str,
 ) -> str:
     """Commit the exact admitted index tree and CAS-update only its task branch."""
+
+    def revalidate(
+        prior: PinnedGatekeeperDecision, target: Path
+    ) -> PinnedGatekeeperDecision:
+        return revalidate_pinned_operation_binding(
+            prior_decision=prior,
+            gatekeeper_root=gatekeeper_root,
+            target_repo_root=target,
+            manifest=manifest,
+        )
+
+    return _commit_exact_admitted_index_core(
+        prior_decision=prior_decision,
+        target_repo_root=target_repo_root,
+        message=message,
+        revalidate=revalidate,
+        run_git=admission._run_git,
+    )
+
+
+def _commit_exact_admitted_index_core(
+    *,
+    prior_decision: PinnedGatekeeperDecision,
+    target_repo_root: Path,
+    message: str,
+    revalidate: Callable[[PinnedGatekeeperDecision, Path], PinnedGatekeeperDecision],
+    run_git: Callable[..., str],
+) -> str:
+    """Shared mutation sequence; the public wrapper owns policy and Git binding.
+
+    Callables are private implementation dependencies, never manifest/CLI inputs.
+    Authored synthetic tests can exercise this exact sequence independently of
+    historical repository materialization. It does not itself accept a policy.
+    """
     if not isinstance(message, str) or not message.strip() or len(message) > 500:
         raise admission.ProgrammeAdmissionError("gatekeeper_commit_message_invalid")
-    fresh = revalidate_pinned_operation_binding(
-        prior_decision=prior_decision,
-        gatekeeper_root=gatekeeper_root,
-        target_repo_root=target_repo_root,
-        manifest=manifest,
-    )
+    fresh = revalidate(prior_decision, target_repo_root)
     binding = fresh.operation_binding or {}
     if (
         not fresh.admitted
@@ -1046,7 +1075,7 @@ def commit_exact_admitted_index(
             "gatekeeper_exact_index_commit_not_admitted"
         )
     target = target_repo_root.resolve()
-    candidate = admission._run_git(
+    candidate = run_git(
         target,
         "commit-tree",
         binding["index_tree"],
@@ -1055,17 +1084,12 @@ def commit_exact_admitted_index(
         "-m",
         message.strip(),
     )
-    final = revalidate_pinned_operation_binding(
-        prior_decision=fresh,
-        gatekeeper_root=gatekeeper_root,
-        target_repo_root=target,
-        manifest=manifest,
-    )
+    final = revalidate(fresh, target)
     if not final.admitted:
         raise admission.ProgrammeAdmissionError(
             "gatekeeper_operation_binding_drift_before_commit"
         )
-    admission._run_git(
+    run_git(
         target,
         "update-ref",
         binding["branch_ref"],
@@ -1073,9 +1097,8 @@ def commit_exact_admitted_index(
         binding["target_head"],
     )
     if (
-        admission._run_git(target, "rev-parse", "HEAD") != candidate
-        or admission._run_git(target, "rev-parse", "HEAD^{tree}")
-        != binding["index_tree"]
+        run_git(target, "rev-parse", "HEAD") != candidate
+        or run_git(target, "rev-parse", "HEAD^{tree}") != binding["index_tree"]
     ):
         raise admission.ProgrammeAdmissionError(
             "gatekeeper_exact_index_commit_postcondition_failed"
@@ -1234,6 +1257,35 @@ def reserve_operation_receipt(
     target_repo_root: Path,
 ) -> OperationReceiptReservation:
     """Reserve one internally named receipt outside every governed repository."""
+
+    def preservation_paths(target: Path) -> tuple[Path, ...]:
+        policy = admission.load_programme_policy(target)
+        snapshot = policy.state["clockwork_snapshot"]
+        return tuple(
+            Path(snapshot[key]["path"]).resolve(strict=True)
+            for key in ("git_bundle", "pre_g0_untracked_archive")
+        )
+
+    return _reserve_operation_receipt_core(
+        receipt_directory=receipt_directory,
+        operation=operation,
+        decision=decision,
+        gatekeeper_root=gatekeeper_root,
+        target_repo_root=target_repo_root,
+        preservation_paths=preservation_paths,
+    )
+
+
+def _reserve_operation_receipt_core(
+    *,
+    receipt_directory: Path,
+    operation: str,
+    decision: PinnedGatekeeperDecision,
+    gatekeeper_root: Path,
+    target_repo_root: Path,
+    preservation_paths: Callable[[Path], tuple[Path, ...]],
+) -> OperationReceiptReservation:
+    """Shared reservation implementation; public callers bind policy loading."""
     try:
         directory_identity = admission.trusted_git._path_identity(  # noqa: SLF001
             receipt_directory.absolute(), directory=True
@@ -1257,10 +1309,7 @@ def reserve_operation_receipt(
             value = identity.get(key, {}).get("resolved_path")
             if isinstance(value, str):
                 forbidden_roots.append(Path(value))
-    policy = admission.load_programme_policy(target)
-    snapshot = policy.state["clockwork_snapshot"]
-    for key in ("git_bundle", "pre_g0_untracked_archive"):
-        preservation = Path(snapshot[key]["path"]).resolve(strict=True)
+    for preservation in preservation_paths(target):
         forbidden_roots.extend((preservation, preservation.parent))
     if any(_path_within(directory, root) for root in forbidden_roots):
         raise admission.ProgrammeAdmissionError(
@@ -1400,6 +1449,30 @@ def _final_operation_revalidation(
     return payload
 
 
+@dataclass(frozen=True, slots=True)
+class _OperationServices:
+    """Private bound implementation dependencies, never caller authority data."""
+
+    evaluate: Callable[..., PinnedGatekeeperDecision]
+    reserve: Callable[..., OperationReceiptReservation]
+    revalidate: Callable[..., PinnedGatekeeperDecision]
+    commit: Callable[..., str]
+    final_revalidation: Callable[..., dict[str, Any]]
+    run_git: Callable[..., str]
+
+
+def _operation_services() -> _OperationServices:
+    """Bind only the existing operational functions for public entrypoints."""
+    return _OperationServices(
+        evaluate=evaluate_pinned_programme_operation,
+        reserve=reserve_operation_receipt,
+        revalidate=revalidate_pinned_operation_binding,
+        commit=commit_exact_admitted_index,
+        final_revalidation=_final_operation_revalidation,
+        run_git=admission._run_git,
+    )
+
+
 def execute_exact_index_commit(
     *,
     gatekeeper_root: Path,
@@ -1409,7 +1482,27 @@ def execute_exact_index_commit(
     receipt_directory: Path,
 ) -> dict[str, Any]:
     """Reserve, commit the exact index tree, revalidate, and finalize evidence."""
-    base_decision = evaluate_pinned_programme_operation(
+    return _execute_exact_index_commit_core(
+        gatekeeper_root=gatekeeper_root,
+        target_repo_root=target_repo_root,
+        manifest=manifest,
+        message=message,
+        receipt_directory=receipt_directory,
+        services=_operation_services(),
+    )
+
+
+def _execute_exact_index_commit_core(
+    *,
+    gatekeeper_root: Path,
+    target_repo_root: Path,
+    manifest: object | None,
+    message: str,
+    receipt_directory: Path,
+    services: _OperationServices,
+) -> dict[str, Any]:
+    """Shared orchestration; public entrypoints own every dependency binding."""
+    base_decision = services.evaluate(
         gatekeeper_root=gatekeeper_root,
         target_repo_root=target_repo_root,
         manifest=manifest,
@@ -1420,7 +1513,7 @@ def execute_exact_index_commit(
         raise admission.ProgrammeAdmissionError(
             "gatekeeper_exact_index_commit_not_admitted"
         )
-    reservation = reserve_operation_receipt(
+    reservation = services.reserve(
         receipt_directory=receipt_directory,
         operation="exact_index_commit",
         decision=base_decision,
@@ -1428,7 +1521,7 @@ def execute_exact_index_commit(
         target_repo_root=target_repo_root,
     )
     try:
-        decision = evaluate_pinned_programme_operation(
+        decision = services.evaluate(
             gatekeeper_root=gatekeeper_root,
             target_repo_root=target_repo_root,
             manifest=manifest,
@@ -1440,17 +1533,17 @@ def execute_exact_index_commit(
             raise admission.ProgrammeAdmissionError(
                 "gatekeeper_exact_index_commit_not_admitted"
             )
-        candidate = commit_exact_admitted_index(
+        candidate = services.commit(
             prior_decision=decision,
             gatekeeper_root=gatekeeper_root,
             target_repo_root=target_repo_root,
             manifest=manifest,
             message=message,
         )
-        tree = admission._run_git(
+        tree = services.run_git(
             target_repo_root.resolve(), "rev-parse", "HEAD^{tree}"
         )
-        final_revalidation = _final_operation_revalidation(
+        final_revalidation = services.final_revalidation(
             decision=decision,
             gatekeeper_root=gatekeeper_root,
             target_repo_root=target_repo_root,
@@ -1481,7 +1574,25 @@ def execute_exact_sha_push(
     receipt_directory: Path,
 ) -> dict[str, Any]:
     """Reserve, push one exact SHA, revalidate, and finalize evidence."""
-    base_decision = evaluate_pinned_programme_operation(
+    return _execute_exact_sha_push_core(
+        gatekeeper_root=gatekeeper_root,
+        target_repo_root=target_repo_root,
+        manifest=manifest,
+        receipt_directory=receipt_directory,
+        services=_operation_services(),
+    )
+
+
+def _execute_exact_sha_push_core(
+    *,
+    gatekeeper_root: Path,
+    target_repo_root: Path,
+    manifest: object | None,
+    receipt_directory: Path,
+    services: _OperationServices,
+) -> dict[str, Any]:
+    """Shared push orchestration with caller-inaccessible public bindings."""
+    base_decision = services.evaluate(
         gatekeeper_root=gatekeeper_root,
         target_repo_root=target_repo_root,
         manifest=manifest,
@@ -1490,7 +1601,7 @@ def execute_exact_sha_push(
     )
     if not base_decision.admitted:
         raise admission.ProgrammeAdmissionError("gatekeeper_exact_push_not_admitted")
-    reservation = reserve_operation_receipt(
+    reservation = services.reserve(
         receipt_directory=receipt_directory,
         operation="exact_sha_push",
         decision=base_decision,
@@ -1498,7 +1609,7 @@ def execute_exact_sha_push(
         target_repo_root=target_repo_root,
     )
     try:
-        decision = evaluate_pinned_programme_operation(
+        decision = services.evaluate(
             gatekeeper_root=gatekeeper_root,
             target_repo_root=target_repo_root,
             manifest=manifest,
@@ -1506,7 +1617,7 @@ def execute_exact_sha_push(
             phase="pre-push",
             receipt_sink_binding=reservation.binding,
         )
-        fresh = revalidate_pinned_operation_binding(
+        fresh = services.revalidate(
             prior_decision=decision,
             gatekeeper_root=gatekeeper_root,
             target_repo_root=target_repo_root,
@@ -1514,8 +1625,8 @@ def execute_exact_sha_push(
         )
         argv = exact_push_argv(fresh)
         target = target_repo_root.resolve()
-        admission._run_git(target, *argv[1:])
-        post_push = evaluate_pinned_programme_operation(
+        services.run_git(target, *argv[1:])
+        post_push = services.evaluate(
             gatekeeper_root=gatekeeper_root,
             target_repo_root=target,
             manifest=manifest,
@@ -1531,8 +1642,8 @@ def execute_exact_sha_push(
                 "gatekeeper_exact_push_postcondition_failed"
             )
         result_sha = fresh.target_head or ""
-        result_tree = admission._run_git(target, "rev-parse", "HEAD^{tree}")
-        final_revalidation = _final_operation_revalidation(
+        result_tree = services.run_git(target, "rev-parse", "HEAD^{tree}")
+        final_revalidation = services.final_revalidation(
             decision=fresh,
             gatekeeper_root=gatekeeper_root,
             target_repo_root=target,

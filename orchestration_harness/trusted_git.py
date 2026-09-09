@@ -13,6 +13,7 @@ import json
 import os
 import stat
 import subprocess
+import tempfile
 from pathlib import Path, PurePosixPath
 from typing import Any, Iterable, Sequence
 
@@ -843,3 +844,397 @@ def attest_repository(
         identity["complete_tracked_tree_attestation"] = complete_attestation
     identity["trusted_git_identity_sha256"] = _canonical_digest(identity)
     return identity
+
+
+def _index_metadata(payload: bytes, object_format: str) -> tuple[dict[str, Any], bytes]:
+    """Inspect structural metadata, never decode or return index filenames.
+
+    Only v2/v3 ordinary stage-zero regular files are supported. TREE is the
+    sole supported extension; its contents are opaque and are discarded from
+    the returned index. Git subsequently derives a tree without this cache.
+    See https://git-scm.com/docs/index-format.
+    """
+    if type(payload) is not bytes or len(payload) > 128 * 1024 * 1024:
+        raise TrustedGitError("trusted_git_index_snapshot_invalid")
+    if object_format not in {"sha1", "sha256"}:
+        raise TrustedGitError("trusted_git_object_format_invalid")
+    hash_size = 20 if object_format == "sha1" else 32
+    end = len(payload) - hash_size
+    if end < 12 or payload[:4] != b"DIRC":
+        raise TrustedGitError("trusted_git_index_snapshot_invalid")
+    checksum = hashlib.new(object_format, payload[:end], usedforsecurity=False).digest()
+    if checksum != payload[end:]:
+        raise TrustedGitError("trusted_git_index_checksum_invalid")
+    version = int.from_bytes(payload[4:8], "big")
+    if version not in {2, 3}:
+        raise TrustedGitError("trusted_git_index_version_unsupported")
+    count = int.from_bytes(payload[8:12], "big")
+    fixed_size = 42 + hash_size
+    if count > (end - 12) // (fixed_size + 1):
+        raise TrustedGitError("trusted_git_index_snapshot_invalid")
+    cursor = 12
+    for _ in range(count):
+        start = cursor
+        if start + fixed_size >= end:
+            raise TrustedGitError("trusted_git_index_snapshot_invalid")
+        mode = int.from_bytes(payload[start + 24 : start + 28], "big")
+        if mode not in {0o100644, 0o100755}:
+            raise TrustedGitError("trusted_git_tracked_mode_forbidden")
+        flags = int.from_bytes(
+            payload[start + 40 + hash_size : start + fixed_size], "big"
+        )
+        if flags & 0x3000:
+            raise TrustedGitError("trusted_git_unresolved_index_stage_forbidden")
+        # All extended flags, including intent-to-add, are outside this route.
+        if flags & 0xC000:
+            raise TrustedGitError("trusted_git_index_flags_forbidden")
+        cursor += fixed_size
+        terminator = payload.find(b"\0", cursor, end)
+        length = terminator - cursor
+        if terminator < 0 or length <= 0 or min(length, 0xFFF) != flags & 0xFFF:
+            raise TrustedGitError("trusted_git_index_snapshot_invalid")
+        # Skip opaque filename bytes. Only padding is inspected.
+        cursor = start + ((terminator + 1 - start + 7) // 8) * 8
+        if cursor > end or any(payload[terminator:cursor]):
+            raise TrustedGitError("trusted_git_index_snapshot_invalid")
+    entries_end = cursor
+    extensions: list[str] = []
+    while cursor < end:
+        if end - cursor < 8:
+            raise TrustedGitError("trusted_git_index_extension_invalid")
+        signature = payload[cursor : cursor + 4]
+        size = int.from_bytes(payload[cursor + 4 : cursor + 8], "big")
+        cursor += 8
+        if size > end - cursor:
+            raise TrustedGitError("trusted_git_index_extension_invalid")
+        if signature != b"TREE" or extensions:
+            raise TrustedGitError("trusted_git_index_extension_forbidden")
+        extensions.append("TREE")
+        cursor += size
+    entries = payload[:entries_end]
+    uncached = (
+        entries + hashlib.new(object_format, entries, usedforsecurity=False).digest()
+    )
+    return {
+        "version": version,
+        "object_format": object_format,
+        "entry_count": count,
+        "extensions_discarded": extensions,
+        "assume_unchanged_count": 0,
+        "extended_flag_count": 0,
+        "skip_worktree_count": 0,
+        "fsmonitor_extension_present": False,
+        "original_index_sha256": _sha256_bytes(payload),
+        "extension_free_index_sha256": _sha256_bytes(uncached),
+    }, uncached
+
+
+def _read_regular_snapshot(
+    path: Path, *, maximum_bytes: int | None = None
+) -> tuple[dict[str, Any], bytes]:
+    """Bind identity and bytes across one regular-file read."""
+    before = _path_identity(path, directory=False)
+    if maximum_bytes is not None and before["size"] > maximum_bytes:
+        raise TrustedGitError("trusted_git_snapshot_size_exceeded")
+    try:
+        if maximum_bytes is None:
+            payload = path.read_bytes()
+        else:
+            with path.open("rb") as stream:
+                payload = stream.read(maximum_bytes + 1)
+    except OSError as error:
+        raise TrustedGitError("trusted_git_snapshot_read_failed") from error
+    after = _path_identity(path, directory=False)
+    if maximum_bytes is not None and len(payload) > maximum_bytes:
+        raise TrustedGitError("trusted_git_snapshot_size_exceeded")
+    if before != after or len(payload) != after["size"]:
+        raise TrustedGitError("trusted_git_snapshot_drift")
+    return {**after, "sha256": _sha256_bytes(payload)}, payload
+
+
+def _derive_index_snapshot(
+    payload: bytes,
+    *,
+    object_format: str,
+    scratch_parent: Path,
+    attested_paths: tuple[str, ...] = (),
+) -> tuple[str, dict[str, str]]:
+    """Derive the tree and selected OIDs from ONE owned index snapshot."""
+    git = resolve_stock_git()
+    environment = closed_git_environment()
+    # Do not inherit system Git templates/configuration into the owned scratch.
+    environment["GIT_CONFIG_NOSYSTEM"] = "1"
+
+    def command(root: Path, args: list[str]) -> bytes:
+        try:
+            result = subprocess.run(  # noqa: S603
+                [str(git), *TRUSTED_GIT_COMMAND_OVERRIDES, *args],
+                cwd=root,
+                env=environment,
+                stdin=subprocess.DEVNULL,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.DEVNULL,
+                check=False,
+                shell=False,
+                timeout=30,
+            )
+        except (OSError, subprocess.TimeoutExpired) as error:
+            raise TrustedGitError("trusted_git_index_derivation_failed") from error
+        if result.returncode:
+            raise TrustedGitError("trusted_git_index_derivation_failed")
+        return result.stdout
+
+    def oid(result: bytes) -> str:
+        length = 40 if object_format == "sha1" else 64
+        if (
+            len(result) != length + 1
+            or result[-1:] != b"\n"
+            or any(byte not in b"0123456789abcdef" for byte in result[:-1])
+        ):
+            raise TrustedGitError("trusted_git_index_derivation_failed")
+        return result[:-1].decode("ascii")
+
+    with tempfile.TemporaryDirectory(
+        prefix="ariadne-index-", dir=scratch_parent
+    ) as temp:
+        owned = Path(temp)
+        _validate_path_components(owned)
+        command(
+            owned,
+            ["init", "--quiet", "--template=", f"--object-format={object_format}", "."],
+        )
+        (owned / ".git" / "index").write_bytes(payload)
+        tree = oid(command(owned, ["write-tree", "--missing-ok"]))
+        objects = {
+            path: oid(command(owned, ["rev-parse", "--verify", f":0:{path}"]))
+            for path in attested_paths
+        }
+    return tree, objects
+
+
+def _derive_uncached_index_tree(
+    payload: bytes, *, object_format: str, scratch_parent: Path
+) -> str:
+    return _derive_index_snapshot(
+        payload, object_format=object_format, scratch_parent=scratch_parent
+    )[0]
+
+
+def _physical_git_administration(root: Path) -> dict[str, Any]:
+    """Validate physical locators BEFORE Git can canonicalize away a link."""
+    marker = root / ".git"
+    _validate_path_components(marker)
+    locators: list[dict[str, Any]] = []
+
+    def pointer(file: Path, *, prefix: bytes = b"") -> Path:
+        identity, payload = _read_regular_snapshot(file, maximum_bytes=4096)
+        locators.append(identity)
+        if prefix and not payload.startswith(prefix):
+            raise TrustedGitError("trusted_git_administration_path_invalid")
+        raw = payload[len(prefix) :].rstrip(b"\r\n")
+        if not raw or any(char in raw for char in (b"\0", b"\r", b"\n")):
+            raise TrustedGitError("trusted_git_administration_path_invalid")
+        try:
+            target = Path(raw.decode("utf-8"))
+        except UnicodeError as error:
+            raise TrustedGitError("trusted_git_administration_path_invalid") from error
+        if not target.is_absolute():
+            target = file.parent / target
+        _validate_path_components(target)
+        _path_identity(target, directory=True)
+        return target.resolve(strict=True)
+
+    if stat.S_ISDIR(marker.lstat().st_mode):
+        gitdir = marker.resolve(strict=True)
+    else:
+        gitdir = pointer(marker, prefix=b"gitdir: ")
+    common_marker = gitdir / "commondir"
+    if common_marker.exists() or common_marker.is_symlink():
+        commondir = pointer(common_marker)
+    else:
+        commondir = gitdir
+    index = gitdir / "index"
+    # These raw fixed descendants have not passed through a Git path formatter.
+    for file in (index, gitdir / "HEAD", commondir / "config"):
+        _path_identity(file, directory=False)
+    worktree_config = gitdir / "config.worktree"
+    if worktree_config.exists() or worktree_config.is_symlink():
+        _path_identity(worktree_config, directory=False)
+    return {
+        "gitdir": gitdir,
+        "commondir": commondir,
+        "index": index,
+        "locators": locators,
+    }
+
+
+def _literal_attested_paths(paths: Sequence[str]) -> tuple[str, ...]:
+    if type(paths) not in {list, tuple} or not paths:
+        raise TrustedGitError("trusted_git_attested_path_invalid")
+    result: list[str] = []
+    aliases: set[str] = set()
+    for value in paths:
+        if (
+            type(value) is not str
+            or not value
+            or any(
+                char
+                not in "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_./-"
+                for char in value
+            )
+        ):
+            raise TrustedGitError("trusted_git_attested_path_invalid")
+        parts = value.split("/")
+        if (
+            any(
+                part in {"", ".", ".."}
+                or part.lower() == ".git"
+                or part.endswith(".")
+                or part.split(".")[0].upper()
+                in {
+                    "CON",
+                    "PRN",
+                    "AUX",
+                    "NUL",
+                    *(f"COM{i}" for i in range(10)),
+                    *(f"LPT{i}" for i in range(10)),
+                }
+                for part in parts
+            )
+            or value.casefold() in aliases
+        ):
+            raise TrustedGitError("trusted_git_attested_path_invalid")
+        aliases.add(value.casefold())
+        result.append(value)
+    return tuple(sorted(result))
+
+
+def attest_target_index(
+    root: Path,
+    *,
+    attested_paths: Sequence[str],
+    expected_head: str,
+    expected_index_tree: str,
+    scratch_parent: Path,
+) -> dict[str, Any]:
+    """Observe a target as data without listing unrelated tracked filenames.
+
+    This separate API is not wired into programme admission. Its caller must
+    authenticate the expected identities and exact paths before use. It proves
+    whole staged tree identity and selected physical bytes, NOT full physical
+    cleanliness, object existence, source trust, review or operation authority.
+    """
+    paths = _literal_attested_paths(attested_paths)
+    for value in (expected_head, expected_index_tree):
+        if (
+            type(value) is not str
+            or len(value) not in {40, 64}
+            or any(char not in "0123456789abcdef" for char in value)
+        ):
+            raise TrustedGitError("trusted_git_expected_identity_invalid")
+    reject_high_risk_environment()
+    _validate_path_components(root.absolute())
+    worktree = root.resolve(strict=True)
+    physical_admin = _physical_git_administration(worktree)
+    if (
+        Path(run_git(worktree, "rev-parse", "--show-toplevel")).resolve(strict=True)
+        != worktree
+    ):
+        raise TrustedGitError("trusted_git_worktree_mismatch")
+    gitdir = physical_admin["gitdir"]
+    commondir = physical_admin["commondir"]
+    index = physical_admin["index"]
+    scratch_identity = _stable_path_identity(scratch_parent, directory=True)
+    scratch = scratch_parent.resolve(strict=True)
+    if any(
+        scratch == base or scratch.is_relative_to(base)
+        for base in (worktree, gitdir, commondir)
+    ):
+        raise TrustedGitError("trusted_git_scratch_not_isolated")
+
+    def context() -> dict[str, Any]:
+        if _physical_git_administration(worktree) != physical_admin:
+            raise TrustedGitError("trusted_git_snapshot_drift")
+        for args, expected in (
+            (("--git-dir",), gitdir),
+            (("--git-common-dir",), commondir),
+            (("--git-path", "index"), index),
+        ):
+            canonical = Path(
+                run_git(worktree, "rev-parse", "--path-format=absolute", *args)
+            )
+            if canonical != expected:
+                raise TrustedGitError("trusted_git_administration_path_invalid")
+        configuration = _repository_visibility_configuration(worktree)
+        status, sparse = _optional_git(
+            worktree, "config", "--type=bool", "--get", "core.sparseCheckout"
+        )
+        if (status == 0 and sparse != "false") or status not in {0, 1}:
+            raise TrustedGitError("trusted_git_sparse_index_forbidden")
+        if run_git(worktree, "rev-parse", "--shared-index-path"):
+            raise TrustedGitError("trusted_git_split_index_forbidden")
+        if run_git(worktree, "rev-parse", "HEAD") != expected_head:
+            raise TrustedGitError("trusted_git_expected_commit_mismatch")
+        admin = []
+        for file in (commondir / "config", gitdir / "config.worktree"):
+            if file.exists():
+                admin.append(_read_regular_snapshot(file)[0])
+        return {
+            "configuration": configuration,
+            "git_executable": _read_regular_snapshot(resolve_stock_git())[0],
+            "administration_files": admin,
+            "physical_locators": physical_admin["locators"],
+            "worktree": _stable_path_identity(worktree, directory=True),
+            "gitdir": _stable_path_identity(gitdir, directory=True),
+            "commondir": _stable_path_identity(commondir, directory=True),
+        }
+
+    before = context()
+    original_identity, original = _read_regular_snapshot(
+        index, maximum_bytes=128 * 1024 * 1024
+    )
+    object_format = run_git(worktree, "rev-parse", "--show-object-format")
+    metadata, uncached = _index_metadata(original, object_format)
+    if len(expected_head) != (40 if object_format == "sha1" else 64):
+        raise TrustedGitError("trusted_git_expected_identity_invalid")
+    tree, objects = _derive_index_snapshot(
+        uncached,
+        object_format=object_format,
+        scratch_parent=scratch,
+        attested_paths=paths,
+    )
+    if tree != expected_index_tree:
+        raise TrustedGitError("trusted_git_expected_index_tree_mismatch")
+    rows: list[dict[str, Any]] = []
+    for path in paths:
+        # A stage-zero object expression identifies one entry, without ls-files
+        # pathspec directory/prefix expansion or decoding any filename output.
+        oid = objects[path]
+        identity, physical = _read_regular_snapshot(worktree / path)
+        if _git_blob_object_id(physical, object_format) != oid:
+            raise TrustedGitError("trusted_git_physical_bytes_mismatch")
+        rows.append({"path": path, "object_id": oid, "physical": identity})
+    for row in rows:
+        if _read_regular_snapshot(worktree / row["path"])[0] != row["physical"]:
+            raise TrustedGitError("trusted_git_snapshot_drift")
+    if (
+        _read_regular_snapshot(index, maximum_bytes=128 * 1024 * 1024)[0]
+        != original_identity
+        or context() != before
+    ):
+        raise TrustedGitError("trusted_git_snapshot_drift")
+    if _stable_path_identity(scratch, directory=True) != scratch_identity:
+        raise TrustedGitError("trusted_git_snapshot_drift")
+    result = {
+        "schema_version": "ariadne.target_index_observation.v1",
+        "head": expected_head,
+        "index_tree": tree,
+        "index": original_identity,
+        "index_metadata": metadata,
+        "repository": before,
+        "physical_paths": rows,
+        "complete_physical_worktree_attested": False,
+        "operation_authority": False,
+    }
+    result["observation_sha256"] = _canonical_digest(result)
+    return result
