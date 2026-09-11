@@ -53,24 +53,24 @@ def test_compact_live_handover_retains_required_authority_and_boundaries() -> No
         "## 4. Authority Allocation",
         "## 5. Protected Evidence and Closed Gates",
         "## 6. User Decision Boundaries",
-        "GPT Sol",
-        "DeepSeek V4 Flash/high via Claude Code `--bare`",
-        "DeepSeek Pro is not the Conductor",
+        "Ariadne-Graph-Compass-Clockwork",
+        "orchestration/programme/current-state.json",
+        "orchestration/programme/gates.yaml",
+        "Yuri reaffirmed standing authority on 2026-09-11",
+        "External model/provider lanes remain closed",
         "Protected holdouts v1, v2, and v3 remain sealed",
         "T3.1-T3.4 remain intact and blocked by default",
         "Protected holdouts v1-v10",
-        "lc4v9d1-sol-acceptance.md",
-        "7 extraction and 14 policy gaps",
-        "LC4V10 fresh certification passed",
-        "lc4v10-sol-acceptance.md",
-        "bernie-lc4v10-fresh-certification-closeout.md",
-        "`certification_pass`",
-        "complete and every dimension 576/576",
-        "No V11 is needed or authorized",
-        "standing fresh-version cycle is complete",
+        "no V11 is authorised",
+        "Do not normalise local refs",
+        "docs/programme/recovery-execution-plan-20260911.md",
+        "docs/handover-archive/AGENTS-2026-09-11-pre-reconciliation.md",
         "docs/handover-ledgers/bernie-language-evaluation.md",
     ]:
         assert required in live
+
+    assert "implementation has not started" not in live
+    assert "align and push `master` plus `handoff/current`" not in live
 
 
 def test_live_handover_names_every_required_rehydration_source() -> None:
@@ -88,6 +88,12 @@ def test_live_handover_names_every_required_rehydration_source() -> None:
 def test_live_handover_routes_removed_history_to_verified_snapshot_and_ledgers() -> None:
     live = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
     manifest = json.loads(MANIFEST_PATH.read_text(encoding="utf-8"))
+
+    predecessor = "docs/handover-archive/AGENTS-2026-09-11-pre-reconciliation.md"
+    assert predecessor in live
+    assert hashlib.sha256((ROOT / predecessor).read_bytes()).hexdigest() == (
+        "7f3f2b7eea22d347bbf4212a3ea0ba8c5a1d93194f6622fd6a2e6aa4fc9c0729"
+    )
 
     assert manifest["archive_path"] in live
     assert manifest["sha256"] in live
