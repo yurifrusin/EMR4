@@ -1,3 +1,4 @@
+import hashlib
 import json
 from pathlib import Path
 
@@ -25,6 +26,17 @@ STATE = ROOT / "orchestration/programme/current-state.json"
 
 def load_state() -> dict:
     return json.loads(STATE.read_text(encoding="utf-8"))
+
+
+def load_historical_closeout_state() -> dict:
+    payload = (
+        ROOT / "tests/fixtures/programme/g1b1-closeout-9334903.json"
+    ).read_bytes()
+    if hashlib.sha256(payload).hexdigest() != (
+        "bd2404fca334fc39a5d09efca2206b46feb68161d4837b7866969a027e58d038"
+    ):
+        raise ValueError("historical_closeout_fixture_digest_mismatch")
+    return json.loads(payload)
 
 
 def test_g0_recovery_preflight_uses_the_current_git_lifecycle_phase() -> None:
@@ -85,7 +97,7 @@ def test_missing_programme_state_fails_closed(tmp_path: Path, capsys) -> None:
 
 
 def test_machine_state_freezes_closeout_authority_and_forbidden_actions() -> None:
-    state = load_state()
+    state = load_historical_closeout_state()
 
     assert state["machine_authoritative"] is True
     assert state["programme_mode"] == "recovery"
@@ -210,3 +222,38 @@ def test_cli_returns_nonzero_as_positive_block_proof(capsys) -> None:
     assert exit_code == 2
     assert report["status"] == "blocked"
     assert "programme_admission" in report["failed_checks"]
+
+
+def test_current_machine_state_keeps_recovery_boundaries_closed() -> None:
+    state = load_state()
+
+    assert state["machine_authoritative"] is True
+    assert state["programme_mode"] == "recovery"
+    assert state["feature_work_eligible"] is False
+    assert state["product_work_eligible"] is False
+    assert state["protected_refs"]["movement_authorized"] is False
+    assert state["protected_refs"]["expected_sha"] == (
+        "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    )
+    assert len(state["protected_refs"]["refs"]) == 4
+    assert set(state["protected_refs"]["refs"]) == {
+        "refs/heads/master",
+        "refs/heads/handoff/current",
+        "refs/remotes/origin/master",
+        "refs/remotes/origin/handoff/current",
+    }
+    for action in (
+        "protected_ref_movements",
+        "branches_deleted",
+        "feature_branches_rebased",
+        "prs_closed",
+        "prs_merged",
+        "pages_runs_triggered",
+        "deployments",
+        "live_provider_calls",
+        "real_patient_data_accesses",
+        "product_defects_fixed",
+    ):
+        assert state["actions_performed"][action] == 0
+    assert "product_feature" not in state["task_selection"]["allowed_task_kinds"]
+    assert "product_feature" in state["task_selection"]["blocked_task_kinds"]
