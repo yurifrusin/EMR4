@@ -39,11 +39,16 @@ def load_historical_closeout_state() -> dict:
     return json.loads(payload)
 
 
-def test_g0_recovery_preflight_uses_the_current_git_lifecycle_phase() -> None:
-    phase = _verification_phase(ROOT, load_state())
+@pytest.mark.parametrize("expected_phase", ["development", "pre-push", "post-push"])
+def test_g0_recovery_preflight_uses_the_current_git_lifecycle_phase(tmp_path, monkeypatch, expected_phase) -> None:
+    from tests.recovery_preflight_fixtures import make_preflight_fixture
+
+    fixture = make_preflight_fixture(tmp_path, monkeypatch, "G1B.1", expected_phase)
+    root = fixture.root
+    phase = _verification_phase(root, fixture.state)
     with pytest.raises(PreflightError, match="no implementation task"):
-        build_task_manifest(ROOT)
-    report = build_report(ROOT, None, phase)
+        build_task_manifest(root)
+    report = build_report(root, None, phase)
 
     assert report["status"] == "blocked"
     assert report["phase"] == phase
@@ -52,6 +57,11 @@ def test_g0_recovery_preflight_uses_the_current_git_lifecycle_phase() -> None:
     assert report["feature_work_eligible"] is False
     assert report["global_gate"] == "red_repair_only"
     assert "programme_admission" in report["failed_checks"]
+
+    assert phase == expected_phase
+    assert report["failed_checks"] == ["programme_admission", "committed_scope"]
+    for check in report["checks"][:2]:
+        assert check["evidence"]["reason_codes"] == ["task_manifest_missing"]
 
 
 @pytest.mark.parametrize("task_class", ["product_feature", "g1a", "integration"])
@@ -169,29 +179,23 @@ def test_tracked_working_changes_cannot_escape_the_g0_allowlist() -> None:
     )
 
 
-def test_r0_has_no_task_and_synthetic_r1_manifest_is_exact(tmp_path: Path) -> None:
-    from tests.test_programme_admission import (
-        _build_g1a3_r0_transition_repository,
-        _git,
-    )
+def test_r0_has_no_task_and_synthetic_r1_manifest_is_exact(tmp_path: Path, monkeypatch) -> None:
+    from tests.recovery_preflight_fixtures import make_preflight_fixture
 
+    r0 = make_preflight_fixture(tmp_path / "r0", monkeypatch, "G1A.3-R0", "development")
     with pytest.raises(PreflightError, match="no implementation task"):
-        build_task_manifest(ROOT)
+        build_task_manifest(r0.root)
 
-    target, _gatekeeper, _manifest, _r0 = _build_g1a3_r0_transition_repository(tmp_path)
-    _git(target, "commit", "--no-verify", "-m", "synthetic R0 to R1 transition")
-    manifest = build_task_manifest(target)
-
+    r1 = make_preflight_fixture(tmp_path / "r1", monkeypatch, "G1A.3-R1", "development")
+    manifest = build_task_manifest(r1.root)
     assert manifest["task_class"] == pa.G1A3_R1_TASK_CLASS
     assert set(manifest["allowed_path_roots"]) == pa.G1A3_R1_ALLOWED_PATHS
-    assert set(manifest["intended_side_effect_classes"]) == (pa.G1A3_R1_ALLOWED_EFFECTS)
+    assert set(manifest["intended_side_effect_classes"]) == pa.G1A3_R1_ALLOWED_EFFECTS
+    assert pa.evaluate_programme_admission(repo_root=r1.root, manifest=manifest, entrypoint="recovery_preflight").admitted is True
     for entrypoint in ("provider_invocation", "integration"):
-        decision = pa.evaluate_programme_admission(
-            repo_root=target,
-            manifest=manifest,
-            entrypoint=entrypoint,
-        )
+        decision = pa.evaluate_programme_admission(repo_root=r1.root, manifest=manifest, entrypoint=entrypoint)
         assert decision.admitted is False
+        assert decision.reason_codes == [f"{entrypoint}_closed_in_active_profile"]
 
 
 def test_preflight_source_contains_no_write_or_network_primitive() -> None:
@@ -257,3 +261,29 @@ def test_current_machine_state_keeps_recovery_boundaries_closed() -> None:
         assert state["actions_performed"][action] == 0
     assert "product_feature" not in state["task_selection"]["allowed_task_kinds"]
     assert "product_feature" in state["task_selection"]["blocked_task_kinds"]
+
+@pytest.mark.parametrize("expected_phase", ["development", "pre-push", "post-push"])
+def test_current_g1b2_preflight_requires_manifest_and_preserves_checks(tmp_path, monkeypatch, expected_phase):
+    from tests.recovery_preflight_fixtures import make_preflight_fixture
+    fixture = make_preflight_fixture(tmp_path, monkeypatch, "G1B.2", expected_phase)
+    phase = _verification_phase(fixture.root, fixture.state)
+    assert phase == expected_phase
+    manifest = build_task_manifest(fixture.root)
+    assert manifest["task_class"] == pa.G1B2_TASK_CLASS
+    assert set(manifest["allowed_path_roots"]) == pa.G1B2_ALLOWED_PATHS
+    assert set(manifest["forbidden_side_effect_classes"]) == pa.G1B2_FORBIDDEN_EFFECTS
+    assert pa.evaluate_programme_admission(repo_root=fixture.root, manifest=manifest, entrypoint="recovery_preflight").admitted is True
+    for entrypoint in ("provider_invocation", "integration"):
+        decision = pa.evaluate_programme_admission(repo_root=fixture.root, manifest=manifest, entrypoint=entrypoint)
+        assert decision.admitted is False
+        assert decision.reason_codes == [f"{entrypoint}_closed_in_active_profile"]
+    report = build_report(fixture.root, None, phase)
+    assert report["current_gate"] == "G1B.2"
+    assert report["feature_work_eligible"] is False
+    assert report["failed_checks"] == ["programme_admission", "committed_scope"]
+    fixture.artifact.write_bytes(b"authored corrupt artifact")
+    report = build_report(fixture.root, None, phase)
+    assert "local_preservation_artifacts" in report["failed_checks"]
+    fixture.state["actions_performed"]["live_provider_calls"] = 1
+    report = build_report(fixture.root, None, phase)
+    assert "forbidden_action_accounting" in report["failed_checks"]
