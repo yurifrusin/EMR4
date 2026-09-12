@@ -1,16 +1,16 @@
 schema_version: raisa-ariadne.programme-gates.v1
 programme:
   name: Raisa Medical Office and Ariadne Recovery & Convergence
-  prepared_at: '2026-09-12T14:09:39.488210+00:00'
+  prepared_at: '2026-09-12T16:55:57.407586+00:00'
   repository: yurifrusin/EMR4
   observed_public_master: 2e34bdad732fdab32fbf778280b3d3c70d66d602
   programme_mode: recovery
-  current_gate: G1C
+  current_gate: G1D
   current_gate_status: active
   feature_work_eligible: false
   clockwork_remote_visibility: source_branch_aligned_with_origin
   clockwork_local_state: preserved_exactly_at_03e6860394c39086ec1ffb3f2457acc5f7c8b5f9
-  next_eligible_tranche: G1C
+  next_eligible_tranche: G1D
 global_hard_stops:
 - critical_or_high_security_finding
 - global_required_check_red_beyond_repair_budget
@@ -484,7 +484,7 @@ gates:
   next_gate: G1B
 - id: G1C
   name: Escapement, Governor and Global Objective
-  status: active
+  status: passed
   prerequisites:
   - G1B
   programme_mode: recovery
@@ -498,7 +498,7 @@ gates:
   next_gate: G1D
 - id: G1D
   name: Independent Verification and Provenance
-  status: blocked_by_G1C
+  status: active
   prerequisites:
   - G1C
   programme_mode: recovery

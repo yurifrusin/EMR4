@@ -26,7 +26,7 @@ required_before:
 - protected_ref_operation
 - deployment
 missing_or_invalid_state: hard_stop
-active_profile: G1C_GOVERNOR_ACTIVE
+active_profile: G1D_PROVENANCE_ACTIVE
 profiles:
   G0.8_FSMONITOR_CLOSURE:
     profile_kind: controller_maintenance
@@ -1024,6 +1024,55 @@ profiles:
     scope_behavior: bounded_g1c_governor
     scope_file: orchestration/programme/g1c-governor-scope.json
     recovery_envelope_limits_required: true
+    global_execution_defaults_unchanged: true
+    closed_entrypoints:
+    - worker_dispatch
+    - provider_invocation
+    - clockwork_tick_mutation
+    - clockwork_closeout_mutation
+    - integration
+    - protected_ref_operation
+    - deployment
+  G1D_PROVENANCE_ACTIVE:
+    profile_kind: bounded_G1D_provenance
+    expected_programme_mode: recovery
+    expected_current_gate: G1D
+    expected_gate_status: active
+    active_correction: G1D
+    programme_gate: G1D
+    admitted_task_classes:
+    - g1d_observed_provenance_and_independent_verification
+    allowed_effects:
+    - control_plane_edit
+    - repository_read
+    - task_branch_commit
+    - task_branch_push
+    forbidden_effects:
+    - autonomous_worker_dispatch
+    - dependency_change
+    - deployment
+    - existing_clockwork_runtime_mutation
+    - integration
+    - migration_change
+    - pages
+    - product_behavior_change
+    - protected_ref_movement
+    - provider_invocation
+    - real_data_access
+    allowed_paths:
+    - orchestration_harness/clockwork_observer.py
+    - orchestration_harness/clockwork_provenance.py
+    - tests/test_clockwork_provenance.py
+    autonomous_task_selection: false
+    feature_work_eligible: false
+    product_work_eligible: false
+    provider_calls_eligible: false
+    deployment_eligible: false
+    protected_ref_movement_eligible: false
+    g1e_eligible: false
+    scope_behavior: bounded_g1d_provenance
+    scope_file: orchestration/programme/g1d-provenance-scope.json
+    reviewed_local_authored_verification_only: true
     global_execution_defaults_unchanged: true
     closed_entrypoints:
     - worker_dispatch

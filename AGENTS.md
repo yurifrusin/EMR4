@@ -1,5 +1,5 @@
 # EMERGENCY RAISA/ARIADNE RECOVERY PRECEDENCE
-Gate G1C is active only for the bounded recovery governor and its versioned persistence integration
+Gate G1D is active only for bounded observed provenance and independent local verification
 Missing, malformed, stale, or contradictory programme state is a hard stop.
 
 # EMR4 / Raisa — Recovery and Development Instructions
@@ -44,11 +44,11 @@ Structured `orchestration/programme/current-state.json`, `orchestration/programm
 | Last verified remote recovery source | `3e0204b7999ff53fd4d5785d2ea831b3a58da4ca` before this current-control repair; obtain fresh readback. |
 | Local ref arrangement | Detached HEAD; the five named recovery/protected local refs were absent at migration and preflight publication. Preserve that arrangement unless an admitted operation explicitly changes it. |
 | Protected remote refs | `master` and `handoff/current`: `2e34bdad732fdab32fbf778280b3d3c70d66d602` |
-| Active programme gate | G1C governor; the bounded G1B persistence component is accepted. G1C implementation is eligible; operational multi-task control and G1D remain unaccepted. |
+| Active programme gate | G1D provenance; the bounded G1C governor component is accepted. G1D implementation is eligible; operational multi-task control and G1E remain unaccepted. |
 | Published repairs | Cumulative-history admission correction `d512399aa52fdc1d43b68e3e5117d3142037671d`; journal `723e42fc70841b0e8ceed7fd5a2f63e0eecd573e`; historical state-test repair `f127ec9e14b5ac1966e50cfba1d1285527a2e759`. |
 | Active execution plan | `docs/programme/recovery-execution-plan-20260911.md` |
 | Local evidence | `C:/Users/there/EMR4-migration/20260911-v1`; current continuation checkpoint: `current-control-repair-20260912-v1/coordinator-checkpoint.json` beneath that root |
-| Next dependency | Integrate and verify the bounded G1C governor task in orchestration/programme/g1c-governor-scope.json; its current operation explicitly supersedes the preserved G1B operation. |
+| Next dependency | Integrate and verify the bounded G1D provenance task in orchestration/programme/g1d-provenance-scope.json; its current operation explicitly supersedes the preserved G1C operation. |
 
 The original remote-machine checkout, worktrees and historical evidence remain preserved. Do not replay a consumed source-machine publication operator. Do not assume an old branch label, timestamp or narrative baton is current authority.
 
