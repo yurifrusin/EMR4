@@ -7,10 +7,13 @@ is hash pinned, so a later active gate cannot silently change the test baseline.
 from __future__ import annotations
 
 import copy
+import ast
+import builtins
 import os
 import subprocess
 import tempfile
 import unittest
+import types
 from contextlib import ExitStack, contextmanager
 from pathlib import Path
 from unittest.mock import patch
@@ -18,6 +21,8 @@ from unittest.mock import patch
 from orchestration_harness import bounded_g1b as b
 from orchestration_harness import pinned_programme_gatekeeper as pg
 from orchestration_harness import programme_admission as pa
+from orchestration_harness import configuration_core as core
+from orchestration_harness import raisa_policy as rp
 from scripts import raisa_ariadne_recovery_preflight as pf
 
 
@@ -38,7 +43,8 @@ class ClosedRequestTests(unittest.TestCase):
                          {"schema_version": None, "operation_kind": "accept_journal"},
                          {"operation_kind": "accept_g1b"}, {"operation_kind": "implement_g1c"},
                          {"task_class": b.G1C_TASK}, {"operation_kind": "accept_g1c"},
-                         {"operation_kind": "implement_g1d"}, {"task_class": b.G1D_TASK}):
+                         {"operation_kind": "implement_g1d"}, {"task_class": b.G1D_TASK},
+                         {"operation_kind": "accept_g1d"}, {"operation_kind": "assess_g1e"}, {"task_class": b.G1E_TASK}):
             with self.subTest(manifest=manifest), no_legacy_observation(), \
                     patch.object(pa, "load_programme_policy", side_effect=AssertionError("old loader")), \
                     patch.object(pf, "load_programme_policy", side_effect=AssertionError("old loader")):
@@ -130,7 +136,7 @@ class NativeFixture:
         self.q = dict(schema_version=b.BINDING_VERSION, operation_id="authored-g1b-acceptance",
             operation_kind="accept_journal", phase="development", base_commit=self.base, base_tree=tree,
             expected_head=self.base, expected_index_tree=candidate_tree, candidate_tree=candidate_tree,
-            activation_commit=None,
+            activation_commit=None, installed_controller=None,
             source_sha256={p: b._sha((self.source / p).read_bytes()) for p in b.SOURCE_PATHS},
             payload_sha256={p: b._sha((self.root / p).read_bytes()) for p in b.INPUT_PATHS})
         self.binding_path = self.home / "binding.json"
@@ -160,7 +166,7 @@ class NativeFixture:
         return {"schema_version": b.REQUEST_VERSION, "operation_id": self.q["operation_id"],
                 "operation_kind": self.q["operation_kind"], "binding_sha256": context.expected_binding_sha256,
                 "candidate_tree": self.q["candidate_tree"], "allowed_paths": sorted(b.operation_paths(self.q["operation_kind"])),
-                "intended_side_effect_classes": sorted(b.EFFECTS)}
+                "intended_side_effect_classes": ["repository_read"] if self.q["operation_kind"] == "assess_g1e" else sorted(b.EFFECTS)}
 
     def decision(self):
         context = self.context()
@@ -180,10 +186,11 @@ class SuccessorFixture(NativeFixture):
     Production constants, pinned authority bytes and validators are unchanged.
     """
     def __init__(self, assets: Path, operation_kind="accept_g1b"):
-        assert operation_kind in {"accept_g1b", "accept_g1c"}
+        assert operation_kind in {"accept_g1b", "accept_g1c", "accept_g1d"}
         self.operation = b._operation(operation_kind)
         self.publication = self.operation["accepted_publication"]
         self.is_provenance = operation_kind == "accept_g1c"
+        self.is_configuration = operation_kind == "accept_g1d"
         self.temporary = tempfile.TemporaryDirectory(prefix="g1c-contract-")
         self.home = Path(self.temporary.name)
         self.root = self.home / "target"
@@ -196,25 +203,59 @@ class SuccessorFixture(NativeFixture):
                        for p in self.operation["baseline_pins"]}
         self.evidence = {p: (assets / "evidence" / p).read_bytes() for p in self.operation["evidence_pins"]}
         frozen_paths = {*b.FROZEN_PINS, b.COST}
-        if self.is_provenance:
+        if self.is_provenance or self.is_configuration:
             frozen_paths.update({b.SCOPE_PATH, *b.PROVENANCE_DEPENDENCY_PINS})
-        self.frozen = {p: (assets / "inputs" / p).read_bytes() for p in frozen_paths}
-        source_directory = "g1c-accepted-source" if self.is_provenance else "g1b-accepted-source"
+        if self.is_configuration:
+            frozen_paths.update({b.G1C_SCOPE, *b.GOVERNOR_PINS, *b.CONFIGURATION_PATHS})
+
+        def frozen_input(path):
+            if self.is_configuration:
+                if path == b.G1C_SCOPE:
+                    return (self.source / "g1c-baseline" / path).read_bytes()
+                if path in b.GOVERNOR_PINS:
+                    return (self.source / "g1c-accepted-source" / path).read_bytes()
+                if path in b.CONFIGURATION_PATHS:
+                    return (assets / "configuration" / path).read_bytes()
+            return (assets / "inputs" / path).read_bytes()
+
+        self.frozen = {p: frozen_input(p) for p in frozen_paths}
+        source_directory = "g1d-accepted-source" if self.is_configuration else "g1c-accepted-source" if self.is_provenance else "g1b-accepted-source"
         self.accepted_source = {p: (self.source / source_directory / p).read_bytes()
                                 for p in self.operation["accepted_pins"]}
-        for path, raw in {**self.before, **self.frozen, **self.accepted_source}.items():
+        initial_source, installed_source = {}, {}
+        if self.is_configuration:
+            installed_source = {p: (self.source / p).read_bytes() for p in b.SOURCE_PATHS | b.CONTROLLER_PATHS}
+            initial_source = {p: raw for p, raw in installed_source.items() if p not in b.CONTROLLER_PATHS}
+            for p in ("orchestration_harness/bounded_g1b.py", "orchestration_harness/programme_admission.py", "tests/test_bounded_g1b.py"):
+                initial_source[p] = (self.source.parent / "inputs" / p).read_bytes()
+        initial = {**self.before, **self.frozen, **self.accepted_source, **initial_source}
+        for path, raw in initial.items():
             self.write(path, raw)
         self.git("init", "--quiet", "--template=", ".")
         self.git("config", "core.autocrlf", "false")
         self.git("config", "core.filemode", "false")
         self.git("config", "index.version", "2")
-        self.git("add", "--", *sorted({*self.before, *self.frozen, *self.accepted_source}))
+        self.git("add", "--", *sorted(initial))
         tree = self.git("write-tree")
         self.base = self.git("commit-tree", tree, "-m", "authored G1B component baseline")
         self.git("update-ref", "--no-deref", "HEAD", self.base)
-        transition = b.build_g1d_acceptance_transition if self.is_provenance else b.build_g1c_acceptance_transition
-        scope = b.build_provenance_scope if self.is_provenance else b.build_governor_scope
-        self.after = transition(self.before, scope("2026-09-12T00:00:00+00:00", self.base))
+        self.controller = None
+        if self.is_configuration:
+            parent = self.base
+            for path in b.CONTROLLER_PATHS:
+                self.write(path, installed_source[path])
+            self.git("add", "--", *sorted(b.CONTROLLER_PATHS))
+            tree = self.git("write-tree")
+            self.base = self.git("commit-tree", tree, "-p", parent, "-m", "authored five-file controller installation")
+            self.git("update-ref", "--no-deref", "HEAD", self.base, parent)
+            self.controller = {"commit": self.base, "parent": parent, "tree": tree,
+                               "source_sha256": {p: b._sha(installed_source[p]) for p in b.CONTROLLER_PATHS}}
+            self.after = b.build_g1e_acceptance_transition(self.before,
+                b.build_configuration_scope("2026-09-12T00:00:00+00:00", self.base, self.controller))
+        else:
+            transition = b.build_g1d_acceptance_transition if self.is_provenance else b.build_g1c_acceptance_transition
+            scope = b.build_provenance_scope if self.is_provenance else b.build_governor_scope
+            self.after = transition(self.before, scope("2026-09-12T00:00:00+00:00", self.base))
         for path, raw in self.after.items():
             self.write(path, raw)
         self.git("add", "--", *sorted(self.operation["transition_paths"]))
@@ -222,7 +263,7 @@ class SuccessorFixture(NativeFixture):
         self.q = dict(schema_version=b.BINDING_VERSION, operation_id="authored-g1c-acceptance",
             operation_kind=operation_kind, phase="development", base_commit=self.base, base_tree=tree,
             expected_head=self.base, expected_index_tree=candidate_tree, candidate_tree=candidate_tree,
-            activation_commit=None,
+            activation_commit=None, installed_controller=copy.deepcopy(self.controller),
             source_sha256={p: b._sha((self.source / p).read_bytes()) for p in b.SOURCE_PATHS},
             payload_sha256={p: b._sha((self.root / p).read_bytes()) for p in self.operation["input_paths"]})
         self.binding_path = self.home / "binding.json"
@@ -261,6 +302,7 @@ class SuccessorFixture(NativeFixture):
         return commit
 
     def prepare_implementation(self, activation):
+        assert not self.is_configuration, "installed G1E component is assessed, not republished"
         kind = "implement_g1d" if self.is_provenance else "implement_g1c"
         self.q.update(operation_kind=kind, phase="development", base_commit=activation,
                       base_tree=self.q["candidate_tree"], activation_commit=activation)
@@ -269,6 +311,12 @@ class SuccessorFixture(NativeFixture):
         self.git("add", "--", *sorted(b.operation_paths(kind)))
         tree = self.git("write-tree")
         self.q.update(candidate_tree=tree, expected_index_tree=tree)
+
+    def prepare_assessment(self, activation):
+        assert self.is_configuration
+        self.q.update(operation_kind="assess_g1e", phase="assessment", base_commit=activation,
+                      base_tree=self.q["candidate_tree"], expected_head=activation,
+                      expected_index_tree=self.q["candidate_tree"], activation_commit=activation)
 
 
 def build_integration_suite(assets: Path) -> unittest.TestSuite:
@@ -807,7 +855,8 @@ def build_integration_suite(assets: Path) -> unittest.TestSuite:
         def test_legacy_loader_rejects_each_g1d_marker_before_observation(self):
             f = self.fx
             historical = b._json((f.source / "baseline" / b.STATE).read_bytes())
-            for path in b.BOUNDED_SCOPE_PATHS:
+            self.assertFalse((f.root / b.G1E_SCOPE).exists())
+            for path in (b.SCOPE_PATH, b.G1C_SCOPE, b.G1D_SCOPE):
                 (f.root / path).unlink()
             variants = [{**historical, key: value} for key, value in
                         (("active_profile", b.G1D_PROFILE), ("current_gate", "G1D"), ("g1d", None))]
@@ -834,7 +883,7 @@ def build_integration_suite(assets: Path) -> unittest.TestSuite:
                 manifest={**manifest, "allowed_paths": sorted(b.G1D_TRANSITION_PATHS | b.PROVENANCE_PATHS)},
                 entrypoint="task_branch_commit", phase="development")
             self.assertEqual(result.reason_codes, ("bounded_g1b_manifest_binding_mismatch",))
-            for kind in ("accept_g1d", "implement_g1e", None, []):
+            for kind in ("accept_g1e", "implement_g1e", None, []):
                 f.q["operation_kind"] = kind
                 result = b.evaluate_bounded_g1b_operation(context=f.context(), manifest=manifest,
                     entrypoint="task_branch_commit", phase="development")
@@ -850,8 +899,394 @@ def build_integration_suite(assets: Path) -> unittest.TestSuite:
             f.q.update(candidate_tree=tree, expected_index_tree=tree)
             self.assertEqual(f.decision().reason_codes, ("bounded_g1b_transition_base_mismatch",))
 
+    class ConfigurationTests(unittest.TestCase):
+        def setUp(self):
+            self.source = Path(b.__file__).resolve().parents[1]
+            self.documents = {Path(p).name: (assets / "configuration" / p).read_bytes() for p in b.CONFIGURATION_PATHS}
+            self.expected = {name: b._sha(raw) for name, raw in self.documents.items()}
+            self.state = b._json((self.source / "g1d-baseline" / b.STATE).read_bytes())
+            self.agents = (self.source / "g1d-baseline" / b.AGENTS).read_text()
+
+        def validate(self):
+            return rp.validate_recovery_configuration(documents=self.documents, expected_sha256=self.expected,
+                                                     agents_text=self.agents, state=self.state)
+
+        def mutate(self, name, fields, value):
+            document = core.decode(self.documents[name], "yaml")
+            target = document
+            for field in fields[:-1]:
+                target = target[field]
+            target[fields[-1]] = value
+            self.documents[name] = b._canonical(document)
+            self.expected[name] = b._sha(self.documents[name])
+
+        def test_actual_ten_policy_closure_is_pure_and_canonical(self):
+            with patch.object(builtins, "open", side_effect=AssertionError("configuration observed filesystem")), \
+                    patch.object(os, "listdir", side_effect=AssertionError("configuration discovered files")), \
+                    patch.object(os, "scandir", side_effect=AssertionError("configuration discovered files")), \
+                    patch.object(subprocess, "Popen", side_effect=AssertionError("configuration started process")):
+                snapshot = self.validate()
+            self.assertEqual(len(snapshot.documents), 10)
+            self.assertEqual(dict(snapshot.source_sha256), self.expected)
+            self.assertFalse(hasattr(snapshot, "execution_authorized"))
+            reversed_documents = dict(reversed(list(self.documents.items())))
+            equivalent = rp.validate_recovery_configuration(documents=reversed_documents, expected_sha256=self.expected,
+                                                            agents_text=self.agents, state=self.state)
+            self.assertEqual(snapshot, equivalent)
+
+        def test_every_policy_is_required_and_exact_bytes_are_bound(self):
+            self.validate()
+            for name in tuple(self.documents):
+                original = self.documents.pop(name)
+                with self.subTest(missing=name), self.assertRaises(core.ConfigurationError) as caught:
+                    self.validate()
+                self.assertEqual(caught.exception.reason_code, "configuration_document_set")
+                self.documents[name] = original + b"\n"
+                with self.subTest(changed=name), self.assertRaises(core.ConfigurationError) as caught:
+                    self.validate()
+                self.assertEqual(caught.exception.reason_code, "configuration_document_changed")
+                self.documents[name] = original
+
+        def test_extra_documents_aliases_and_unregistered_fields_reject(self):
+            self.validate()
+            for name in ("extra.yaml", "./project.yaml", "PROJECT.yaml", "nested/project.yaml", "nested\\project.yaml"):
+                self.documents[name] = self.documents["project.yaml"]
+                self.expected[name] = b._sha(self.documents[name])
+                with self.subTest(name=name), self.assertRaises(core.ConfigurationError) as caught:
+                    self.validate()
+                self.assertEqual(caught.exception.reason_code, "configuration_document_set")
+                del self.documents[name], self.expected[name]
+            self.mutate("project.yaml", ("unexpected_policy_file",), "unseen.yaml")
+            with self.assertRaises(core.ConfigurationError) as caught:
+                self.validate()
+            self.assertEqual(caught.exception.reason_code, "configuration_schema_invalid")
+
+        def test_every_declared_reference_is_checked_without_following_it(self):
+            self.validate()
+            originals, original_pins = dict(self.documents), dict(self.expected)
+            for reference in rp.POLICY_REFERENCES:
+                for target in ("missing.yaml", "../project.yaml", "security_review_protocol.yaml"
+                               if reference.target != "security_review_protocol.yaml" else "project.yaml"):
+                    self.documents, self.expected = dict(originals), dict(original_pins)
+                    self.mutate(reference.source, reference.fields, target)
+                    with self.subTest(source=reference.source, fields=reference.fields, target=target), \
+                            self.assertRaises(core.ConfigurationError) as caught:
+                        self.validate()
+                    self.assertEqual(caught.exception.reason_code, "configuration_reference_invalid")
+
+        def test_nested_shapes_and_authority_values_are_validated_after_rebinding(self):
+            self.validate()
+            originals, original_pins = dict(self.documents), dict(self.expected)
+            cases = (
+                ("project.yaml", ("master_authority", "conductor_can_commit"), 1, "configuration_schema_invalid"),
+                ("project.yaml", ("master_authority", "conductor_can_commit"), True, "configuration_recovery_semantics_invalid"),
+                ("operating_model.yaml", ("verifier", "deterministic_failure_action"), "continue", "configuration_recovery_semantics_invalid"),
+                ("verifier_execution_policy.yaml", ("external_verifier", "decision_contract", "exact_terminal_decision_count"), 0,
+                 "configuration_recovery_semantics_invalid"),
+                ("security_review_protocol.yaml", ("independence", "workers_cannot_self_certify"), False,
+                 "configuration_recovery_semantics_invalid"),
+                ("security_review_protocol.yaml", ("risk_classification", "security_sensitive_tier"), "routine_delta",
+                 "configuration_recovery_semantics_invalid"),
+                ("security_review_protocol.yaml", ("risk_classification", "security_sensitive_triggers"), [],
+                 "configuration_recovery_semantics_invalid"),
+                ("direction_collaboration.yaml", ("dialogue", "maximum_orchestrator_rejoinders"), -1, "configuration_schema_invalid"),
+                ("cost_controls.yaml", ("current_profile", "monetary_budget_enforcement"), "active", "configuration_recovery_semantics_invalid"),
+                ("deepseek_cost_calibration.yaml", ("calibrations",), [{"sample_count": "one"}], "configuration_schema_invalid"),
+                ("evidence_led_workflow.yaml", ("worker_environment", "package_or_environment_mutation"), [], "configuration_schema_invalid"),
+            )
+            for name, fields, value, reason in cases:
+                self.documents, self.expected = dict(originals), dict(original_pins)
+                self.mutate(name, fields, value)
+                with self.subTest(name=name, fields=fields), self.assertRaises((core.ConfigurationError, rp.RaisaPolicyError)) as caught:
+                    self.validate()
+                self.assertEqual(caught.exception.reason_code, reason)
+
+        def test_ambiguous_encodings_and_unknown_schemas_reject(self):
+            for raw, encoding, reason in (
+                (b'x: 1\nx: 2\n', "yaml", "configuration_duplicate_or_invalid_key"),
+                (b'{"x":1,"x":2}', "json", "configuration_duplicate_or_invalid_key"),
+                (b'x: &shared [1]\ny: *shared\n', "yaml", "configuration_alias_or_cycle"),
+                (b'x: &unused 1\n', "yaml", "configuration_alias_or_cycle"),
+                (b'x: .nan\n', "yaml", "configuration_nonfinite_number"),
+                (b'{"x":Infinity}', "json", "configuration_nonfinite_number"),
+                (b'x: 2026-09-12\n', "yaml", "configuration_value_type"),
+                (b'\xef\xbb\xbf{}', "json", "configuration_encoding"),
+            ):
+                with self.subTest(raw=raw), self.assertRaises(core.ConfigurationError) as caught:
+                    core.decode(raw, encoding)
+                self.assertEqual(caught.exception.reason_code, reason)
+            self.mutate("project.yaml", ("schema_version",), "ariadne.project_settings.future")
+            with self.assertRaises(core.ConfigurationError) as caught:
+                self.validate()
+            self.assertEqual(caught.exception.reason_code, "configuration_schema_invalid")
+
+        def test_core_interface_supports_an_unrelated_authored_consumer(self):
+            docs = {"alpha.json": b'{"version":1,"next":"beta.json"}', "beta.json": b'{"enabled":false}'}
+            schemas = {
+                "alpha.json": ("json", ("object", (("version", ("literal", 1)), ("next", ("string", False))), ())),
+                "beta.json": ("json", ("object", (("enabled", ("boolean",)),), ())),
+            }
+            pins = {name: b._sha(raw) for name, raw in docs.items()}
+            reference = (core.Reference("alpha.json", ("next",), "beta.json"),)
+            result = core.validate_configuration(documents=docs, expected_sha256=pins, schemas=schemas,
+                                                 references=reference, roots=("alpha.json",))
+            self.assertEqual(len(result.documents), 2)
+            with self.assertRaises(core.ConfigurationError) as caught:
+                core.validate_configuration(documents=docs, expected_sha256=pins, schemas=schemas,
+                                            references=(), roots=("alpha.json",))
+            self.assertEqual(caught.exception.reason_code, "configuration_reference_unreachable")
+
+        def test_historical_precedence_matches_the_pinned_original_decision(self):
+            raw = (self.source.parent / "inputs/orchestration_harness/programme_admission.py").read_bytes()
+            self.assertEqual(b._sha(raw), "bcfd63edabd4b86bbbebbc3bb2ce5a1e52780eec4981156c7a571cff87147001")
+            tree = ast.parse(raw)
+            wanted = {"G1B1_CLOSEOUT_REVIEW_PENDING_PROFILE", "G1B2_ACTIVE_PROFILE", "G1A_CLOSEOUT_REVIEW_PENDING_PROFILE",
+                "G1B1_ACTIVE_PROFILE", "ADMITTED_PROGRAMME_GATE", "G1A3_ENABLEMENT_PENDING_PROFILE",
+                "G1A3_R0_REVIEW_PENDING_PROFILE", "G1A3_R1_ACTIVE_PROFILE", "G1A3_ACTIVE_PROFILE",
+                "SUBGATE_TRANSITION_TO_GATE", "G1A_CLOSEOUT_REPLACEMENT_TASK_GENERATION", "G1B1_CLOSEOUT_TASK_GENERATION"}
+            class LegacyError(ValueError):
+                def __init__(self, reason_code):
+                    self.reason_code = reason_code
+            namespace = {"Any": object, "ProgrammeAdmissionError": LegacyError,
+                "bounded_g1b": types.SimpleNamespace(PROFILE_PREAMBLES={
+                    "G1B_COMPLETION_ACTIVE": "Gate G1B is active only for bounded persistence, recovery, stale-lease protection and derived narrative",
+                    "G1C_GOVERNOR_ACTIVE": "Gate G1C is active only for the bounded recovery governor and its versioned persistence integration",
+                    "G1D_PROVENANCE_ACTIVE": "Gate G1D is active only for bounded observed provenance and independent local verification"})}
+            for node in tree.body:
+                if isinstance(node, ast.Assign) and len(node.targets) == 1 and isinstance(node.targets[0], ast.Name) and node.targets[0].id in wanted:
+                    namespace[node.targets[0].id] = ast.literal_eval(node.value)
+            nodes = [node for node in tree.body if isinstance(node, ast.FunctionDef) and node.name in {"_exact_keys", "_validate_precedence"}]
+            self.assertEqual(len(nodes), 2)
+            exec(compile(ast.Module(body=nodes, type_ignores=[]), "<pinned-pure-precedence>", "exec"), namespace)
+            old = namespace["_validate_precedence"]
+            project, continuation = (core.decode(self.documents[name], "yaml") for name in ("project.yaml", "autonomous_continuation.yaml"))
+            rows = [
+                ("authored_G0", "G0.8", "Gate G0.8 is the only authorised correction; G1A is", None),
+                ("authored_G1A1", "G1A.1", "Gate G1A.1 is owner-accepted with residual risk; G1A.2", None),
+                ("authored_G1A2", "G1A.2", "Gate G1A.2 is active only for its bounded verdict adapter; provider invocation", None),
+                (namespace["G1A3_ENABLEMENT_PENDING_PROFILE"], "G1A.3", "Gate G1A.2 implementation is externally accepted. G1A.3 transition enablement", None),
+                (namespace["G1A3_R0_REVIEW_PENDING_PROFILE"], "G1A.3", "Gate G1A.3-R0 is review-pending with no eligible implementation task", None),
+                (namespace["G1A3_R1_ACTIVE_PROFILE"], "G1A.3", "Gate G1A.3-R1 is active only for complete review-byte binding", None),
+                (namespace["G1A3_ACTIVE_PROFILE"], "G1A.3", "Gate G1A.3 is active only for its bounded integration-authority consumer", None),
+                (namespace["G1A_CLOSEOUT_REVIEW_PENDING_PROFILE"], "G1A", "Gate G1A.3 implementation is externally accepted. G1A closeout and G1B transition enablement are review-pending; G1B remains closed.", namespace["G1A_CLOSEOUT_REPLACEMENT_TASK_GENERATION"]),
+                (namespace["G1B1_ACTIVE_PROFILE"], "G1B.1", "Gate G1B.1 is active only for the bounded pure state/event kernel", None),
+                (namespace["G1B1_CLOSEOUT_REVIEW_PENDING_PROFILE"], "G1B.1", "Gate G1B.1 implementation is externally accepted; its closeout and G1B.2 transition enablement are review-pending, and G1B.2 remains closed.", namespace["G1B1_CLOSEOUT_TASK_GENERATION"]),
+                (namespace["G1B2_ACTIVE_PROFILE"], "G1B.2", "Gate G1B.2 is active only for the pure versioned journal and deterministic replay kernel", None),
+            ]
+            rows.extend((profile, "authored", token, None) for profile, token in namespace["bounded_g1b"].PROFILE_PREAMBLES.items())
+            for profile, correction, token, task in rows:
+                state = {"active_profile": profile, "active_correction": correction}
+                header = "# EMERGENCY RAISA/ARIADNE RECOVERY PRECEDENCE\n" + token + "\nMissing, malformed, stale, or contradictory programme state is a hard stop.\n"
+                text = header + ("Task generation `" + task + "`" if task else "")
+                with self.subTest(profile=profile):
+                    self.assertIsNone(old(project, continuation, text, state))
+                    self.assertIsNone(pa._validate_precedence(project, continuation, text, state))
+                    cases = [({**project, "extra": True}, continuation, text, "project_settings_schema_invalid"),
+                        (project, {**continuation, "extra": True}, text, "continuation_settings_schema_invalid"),
+                        (project, continuation, "missing header", "agents_recovery_precedence_missing")]
+                    changed_project = copy.deepcopy(project)
+                    changed_project["autonomous_continuation"]["emergency_overlay"]["required"] = False
+                    cases.append((changed_project, continuation, text, "recovery_precedence_invalid"))
+                    if task:
+                        cases.append((project, continuation, header, "agents_recovery_operation_identity_invalid"))
+                    for first, second, agents, reason in cases:
+                        for call, error in ((old, LegacyError), (pa._validate_precedence, pa.ProgrammeAdmissionError)):
+                            with self.assertRaises(error) as caught:
+                                call(first, second, agents, state)
+                            self.assertEqual(caught.exception.reason_code, reason)
+
+    class ConfigurationAdmissionTests(unittest.TestCase):
+        def setUp(self):
+            self.fx = SuccessorFixture(assets, "accept_g1d")
+            self.addCleanup(self.fx.close)
+            self.guard = no_legacy_observation()
+            self.guard.__enter__()
+            self.addCleanup(self.guard.__exit__, None, None, None)
+            self.history = self.fx.component_history()
+            self.history.__enter__()
+            self.addCleanup(self.history.__exit__, None, None, None)
+
+        def test_native_controller_installation_and_activation_are_distinct(self):
+            f = self.fx
+            decision = f.decision()
+            self.assertTrue(decision.policy_admitted, decision.reason_codes)
+            self.assertFalse(decision.execution_authorized)
+            self.assertFalse(decision.assessment_passed)
+            self.assertEqual(decision.current_gate, "G1E")
+            state = b._json(f.after[b.STATE])
+            self.assertTrue(state["g1d"]["completion_accepted"])
+            self.assertFalse(state["g1e"]["completion_accepted"])
+            for key in ("g1b", "g1c"):
+                self.assertEqual(state[key], b._json(f.before[b.STATE])[key])
+            self.assertEqual(state["g1d"]["current_operation"], b._json(f.before[b.STATE])["g1d"]["current_operation"])
+            self.assertEqual(b.operation_paths("accept_g1d"), b.G1E_TRANSITION_PATHS)
+            self.assertEqual(b.operation_paths("assess_g1e"), frozenset())
+
+        def test_actual_read_only_assessment_cannot_grant_publication(self):
+            f = self.fx
+            self.assertTrue(f.decision().policy_admitted)
+            activation = f.activate()
+            f.prepare_assessment(activation)
+            context = f.context()
+            manifest = pf.build_task_manifest(f.root, bounded_context=context)
+            report = pf.build_report(f.root, manifest, phase="assessment", entrypoint="recovery_preflight", bounded_context=context)
+            self.assertEqual(report["status"], "assessment_pass", report)
+            self.assertTrue(report["assessment_passed"])
+            self.assertFalse(report["policy_eligible"])
+            self.assertFalse(report["execution_authorized"])
+            self.assertEqual(report["configuration_document_count"], 10)
+            self.assertEqual(len(report["configuration_sha256"]), 64)
+            self.assertEqual(f.git("rev-parse", "HEAD"), activation)
+            self.assertEqual(f.git("write-tree"), f.q["candidate_tree"])
+            for entrypoint, phase in (("task_branch_commit", "development"), ("task_branch_push", "pre-push"),
+                                     ("task_branch_push", "post-push"), ("provider_invocation", "assessment")):
+                with patch.object(b, "load_bounded_g1b_inputs", side_effect=AssertionError("effect request observed inputs")):
+                    result = b.evaluate_bounded_g1b_operation(context=context, manifest=manifest, entrypoint=entrypoint, phase=phase)
+                self.assertEqual(result.reason_codes, ("bounded_g1e_assessment_entrypoint_closed",))
+                self.assertFalse(result.policy_admitted)
+                self.assertFalse(result.assessment_passed)
+
+        def test_complete_configuration_validation_is_on_the_actual_path(self):
+            f = self.fx
+            seen = []
+            validate = core.validate_configuration
+            def observed(**kwargs):
+                seen.append((set(kwargs["documents"]), dict(kwargs["expected_sha256"])))
+                return validate(**kwargs)
+            with patch.object(core, "validate_configuration", side_effect=observed):
+                self.assertTrue(f.decision().policy_admitted)
+            self.assertEqual(len(seen), 1)
+            self.assertEqual(seen[0][0], {Path(p).name for p in b.CONFIGURATION_PATHS})
+            self.assertEqual(seen[0][1], {Path(p).name: f.q["payload_sha256"][p] for p in b.CONFIGURATION_PATHS})
+            with patch.object(core, "validate_configuration", side_effect=core.ConfigurationError("authored_core_rejection")):
+                self.assertEqual(f.decision().reason_codes, ("authored_core_rejection",))
+
+        def test_bounded_precedence_never_imports_the_historical_module(self):
+            f = self.fx
+            context = f.context()
+            inputs = b.load_bounded_g1b_inputs(context)
+            original = builtins.__import__
+            def no_history(name, globals=None, locals=None, fromlist=(), level=0):
+                if name == "orchestration_harness.programme_admission" or (name == "orchestration_harness" and "programme_admission" in (fromlist or ())):
+                    raise AssertionError("historical module imported by bounded policy")
+                return original(name, globals, locals, fromlist, level)
+            with patch.object(builtins, "__import__", side_effect=no_history):
+                _after, snapshot = b._validate_loaded_policy(inputs)
+            self.assertEqual(len(snapshot.documents), 10)
+
+        def test_each_policy_leaf_is_bound_before_validation(self):
+            f = self.fx
+            self.assertTrue(f.decision().policy_admitted)
+            for path in b.CONFIGURATION_LEAF_PINS:
+                raw = (f.root / path).read_bytes()
+                f.write(path, raw + b"\n")
+                with self.subTest(path=path):
+                    self.assertEqual(f.decision().reason_codes, ("bounded_g1b_input_digest_changed",))
+                    f.q["payload_sha256"][path] = b._sha(raw + b"\n")
+                    self.assertEqual(f.decision().reason_codes, ("bounded_g1b_frozen_input_changed",))
+                f.write(path, raw)
+                f.q["payload_sha256"][path] = b._sha(raw)
+
+        def test_missing_extra_and_old_revision_bindings_reject(self):
+            f = self.fx
+            self.assertTrue(f.decision().policy_admitted)
+            original = copy.deepcopy(f.q)
+            f.q["schema_version"] = "ariadne.bounded_g1b_binding.v1"
+            self.assertEqual(f.decision().reason_codes, ("bounded_g1b_binding_version",))
+            f.q = copy.deepcopy(original)
+            del f.q["source_sha256"]["orchestration_harness/raisa_policy.py"]
+            self.assertEqual(f.decision().reason_codes, ("bounded_g1b_source_paths",))
+            f.q = copy.deepcopy(original)
+            del f.q["payload_sha256"][next(iter(b.CONFIGURATION_LEAF_PINS))]
+            self.assertEqual(f.decision().reason_codes, ("bounded_g1b_payload_paths",))
+            f.q = copy.deepcopy(original)
+            f.q["payload_sha256"]["unregistered.yaml"] = "0" * 64
+            self.assertEqual(f.decision().reason_codes, ("bounded_g1b_payload_paths",))
+
+        def test_installed_commit_parent_tree_and_source_are_authenticated(self):
+            f = self.fx
+            self.assertTrue(f.decision().policy_admitted)
+            controller = copy.deepcopy(f.q["installed_controller"])
+            for field in ("parent", "tree"):
+                f.q["installed_controller"] = copy.deepcopy(controller)
+                f.q["installed_controller"][field] = "0" * 40
+                with self.subTest(field=field):
+                    self.assertEqual(f.decision().reason_codes, ("bounded_g1e_controller_publication_invalid",))
+            f.q["installed_controller"] = copy.deepcopy(controller)
+            f.q["installed_controller"]["source_sha256"]["orchestration_harness/raisa_policy.py"] = "0" * 64
+            self.assertEqual(f.decision().reason_codes, ("bounded_g1e_installed_controller_changed",))
+            f.q["installed_controller"] = copy.deepcopy(controller)
+            path = "orchestration_harness/configuration_core.py"
+            raw = (f.root / path).read_bytes()
+            f.write(path, raw + b"\n")
+            f.q["payload_sha256"][path] = b._sha(raw + b"\n")
+            self.assertEqual(f.decision().reason_codes, ("bounded_g1e_installed_controller_changed",))
+
+        def test_assessment_rejects_stale_activation_and_different_current_tree(self):
+            f = self.fx
+            activation = f.activate()
+            f.prepare_assessment(activation)
+            self.assertTrue(f.decision().assessment_passed)
+            current = copy.deepcopy(f.q)
+            f.q["activation_commit"] = f.controller["commit"]
+            self.assertFalse(f.decision().assessment_passed)
+            f.q = copy.deepcopy(current)
+            f.q["candidate_tree"] = "0" * 40
+            self.assertEqual(f.decision().reason_codes, ("bounded_g1e_assessment_current_binding",))
+            f.q = copy.deepcopy(current)
+            child = f.git("commit-tree", f.q["base_tree"], "-p", activation, "-m", "authored later observation")
+            f.git("update-ref", "--no-deref", "HEAD", child, activation)
+            self.assertFalse(f.decision().assessment_passed)
+
+        def test_activation_cannot_expand_configuration_or_execution_authority(self):
+            f = self.fx
+            original = b._json(f.after[b.G1E_SCOPE])
+            cases = (
+                ("g2_eligible", True), ("g1e_complete", True), ("feature_work_eligible", True),
+                ("allowed_effects", ["repository_read", "task_branch_push"]),
+                ("assessment_allowed_paths", ["orchestration_harness/configuration_core.py"]),
+                ("configuration_paths", sorted(b.CONFIGURATION_PATHS) + ["unknown.yaml"]),
+            )
+            for key, value in cases:
+                scope = copy.deepcopy(original)
+                scope[key] = value
+                with self.subTest(key=key), self.assertRaises(b.BoundedG1BError) as caught:
+                    b.build_g1e_acceptance_transition(f.before, scope)
+                self.assertEqual(caught.exception.reason_code, "bounded_g1e_scope_invalid")
+
+        def test_provenance_evidence_and_history_remain_required(self):
+            f = self.fx
+            self.assertTrue(f.decision().policy_admitted)
+            for path in b.G1D_EVIDENCE_PINS:
+                changed = dict(f.evidence)
+                changed[path] += b"\n"
+                with self.subTest(path=path), self.assertRaises(b.BoundedG1BError) as caught:
+                    b.validate_g1e_acceptance_transition(f.before, f.after, changed)
+                self.assertEqual(caught.exception.reason_code, "bounded_g1e_evidence_changed")
+            f.component_header = f.component_header.replace(f.publication["tree"], "0" * 40)
+            self.assertEqual(f.decision().reason_codes, ("bounded_g1e_component_publication_invalid",))
+
+        def test_legacy_loading_rejects_each_g1e_marker(self):
+            f = self.fx
+            historical = b._json((f.source / "baseline" / b.STATE).read_bytes())
+            cases = [lambda s: s.update(active_profile=b.G1E_PROFILE), lambda s: s.update(current_gate="G1E"),
+                     lambda s: s.update(g1e={}), lambda s: s["task_selection"].update(allowed_task_kinds=[b.G1E_TASK])]
+            for mutate in cases:
+                state = copy.deepcopy(historical)
+                mutate(state)
+                f.write(b.STATE, b._canonical(state))
+                with self.assertRaises(pa.ProgrammeAdmissionError) as caught:
+                    pa.load_programme_policy(f.root)
+                self.assertEqual(caught.exception.reason_code, "bounded_g1b_context_required")
+            f.write(b.STATE, b._canonical(historical))
+            with self.assertRaises(pa.ProgrammeAdmissionError) as caught:
+                pa.load_programme_policy(f.root)
+            self.assertEqual(caught.exception.reason_code, "bounded_g1b_context_required")
+
     suite = unittest.defaultTestLoader.loadTestsFromTestCase(ClosedRequestTests)
     suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(IntegratedTests))
     suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(SuccessorTests))
     suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(ProvenanceAdmissionTests))
+    suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(ConfigurationTests))
+    suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(ConfigurationAdmissionTests))
     return suite

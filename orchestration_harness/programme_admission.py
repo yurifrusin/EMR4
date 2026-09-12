@@ -21,7 +21,7 @@ from urllib.parse import urlsplit
 
 import yaml
 
-from orchestration_harness import bounded_g1b, trusted_git
+from orchestration_harness import bounded_g1b, raisa_policy, trusted_git
 
 STATE_PATH = Path("orchestration/programme/current-state.json")
 GATES_PATH = Path("orchestration/programme/gates.yaml")
@@ -88,7 +88,7 @@ G1B1_TO_G1B2_TRANSITION_MANIFEST_VERSION = (
 DECISION_VERSION = "ariadne.programme_admission_decision.v1"
 SCOPE_VERSION = "ariadne.programme_scope_decision.v1"
 ADMITTED_TASK_CLASS = "g0_8_fsmonitor_closure"
-ADMITTED_PROGRAMME_GATE = "G0.8"
+ADMITTED_PROGRAMME_GATE = raisa_policy.ADMITTED_PROGRAMME_GATE
 TRANSITION_TASK_CLASS = "g0_to_g1a_state_transition"
 SUBGATE_TRANSITION_TASK_CLASS = "g1a_1_to_g1a_2_state_transition"
 G1A3_TRANSITION_TASK_CLASS = "g1a_2_to_g1a_3_state_transition"
@@ -106,25 +106,23 @@ TRANSITION_PROFILE = "G0_TO_G1A_STATE_TRANSITION"
 G1A_ACTIVE_PROFILE = "G1A.1_ACTIVE"
 SUBGATE_TRANSITION_PROFILE = "G1A.1_TO_G1A.2_STATE_TRANSITION"
 G1A2_ACTIVE_PROFILE = "G1A.2_ACTIVE"
-G1A3_ENABLEMENT_PENDING_PROFILE = "G1A.3-E0_REVIEW_PENDING"
+G1A3_ENABLEMENT_PENDING_PROFILE = raisa_policy.G1A3_ENABLEMENT_PENDING_PROFILE
 G1A3_TRANSITION_PROFILE = "G1A.2_TO_G1A.3_STATE_TRANSITION"
-G1A3_ACTIVE_PROFILE = "G1A.3_ACTIVE"
-G1A3_R0_REVIEW_PENDING_PROFILE = "G1A.3-R0_REVIEW_PENDING"
+G1A3_ACTIVE_PROFILE = raisa_policy.G1A3_ACTIVE_PROFILE
+G1A3_R0_REVIEW_PENDING_PROFILE = raisa_policy.G1A3_R0_REVIEW_PENDING_PROFILE
 G1A3_R0_TRANSITION_PROFILE = "G1A.3-R0_TO_R1_STATE_TRANSITION"
-G1A3_R1_ACTIVE_PROFILE = "G1A.3-R1_REVIEW_BINDING_ACTIVE"
-G1A_CLOSEOUT_REVIEW_PENDING_PROFILE = "G1A_CLOSEOUT_G1B_ENABLEMENT_REVIEW_PENDING"
+G1A3_R1_ACTIVE_PROFILE = raisa_policy.G1A3_R1_ACTIVE_PROFILE
+G1A_CLOSEOUT_REVIEW_PENDING_PROFILE = raisa_policy.G1A_CLOSEOUT_REVIEW_PENDING_PROFILE
 G1A_TO_G1B1_TRANSITION_PROFILE = "G1A_TO_G1B1_STATE_TRANSITION"
-G1B1_ACTIVE_PROFILE = "G1B.1_PURE_STATE_EVENT_KERNEL_ACTIVE"
-G1B1_CLOSEOUT_REVIEW_PENDING_PROFILE = "G1B1_CLOSEOUT_G1B2_ENABLEMENT_REVIEW_PENDING"
+G1B1_ACTIVE_PROFILE = raisa_policy.G1B1_ACTIVE_PROFILE
+G1B1_CLOSEOUT_REVIEW_PENDING_PROFILE = raisa_policy.G1B1_CLOSEOUT_REVIEW_PENDING_PROFILE
 G1B1_TO_G1B2_TRANSITION_PROFILE = "G1B1_TO_G1B2_STATE_TRANSITION"
-G1B2_ACTIVE_PROFILE = "G1B.2_PURE_JOURNAL_REPLAY_KERNEL_ACTIVE"
+G1B2_ACTIVE_PROFILE = raisa_policy.G1B2_ACTIVE_PROFILE
 G1A3_R0_CORRECTION = "G1A.3-R0"
 G1A3_R1_CORRECTION = "G1A.3-R1"
 G1A_CLOSEOUT_CORRECTION = "G1A-C0"
 G1B1_CLOSEOUT_CORRECTION = "G1B-C0"
-G1B1_CLOSEOUT_TASK_GENERATION = (
-    "g1b1-closeout-g1b2-enablement-field-protocol-closure-replacement-20260903-v1"
-)
+G1B1_CLOSEOUT_TASK_GENERATION = raisa_policy.G1B1_CLOSEOUT_TASK_GENERATION
 G1B1_CLOSEOUT_DIRECTIVE_SHA256 = (
     "54f3680390f6eb7d4e4051dad3b4f5104368a1aeb05e8acd4d4450effadc72cd"
 )
@@ -149,9 +147,7 @@ G1B1_CLOSEOUT_COMPLETED_STAGE = (
 G1B1_CLOSEOUT_NEXT_STAGE = (
     "Independent external review of the direct-child replacement only."
 )
-G1A_CLOSEOUT_REPLACEMENT_TASK_GENERATION = (
-    "g1a-closeout-g1b-enablement-lineage-totality-replacement-20260902-v1"
-)
+G1A_CLOSEOUT_REPLACEMENT_TASK_GENERATION = raisa_policy.G1A_CLOSEOUT_REPLACEMENT_TASK_GENERATION
 G1A_CLOSEOUT_REPLACEMENT_TRANCHE = (
     "G1A closeout and G1B lineage/totality replacement external review"
 )
@@ -225,7 +221,7 @@ G1A3_RECORD_INTEGRATION_FIRST_ADMISSION_CONTRACT = (
 TRANSITION_FROM_GATE = "G0"
 TRANSITION_TO_GATE = "G1A.1"
 SUBGATE_TRANSITION_FROM_GATE = "G1A.1"
-SUBGATE_TRANSITION_TO_GATE = "G1A.2"
+SUBGATE_TRANSITION_TO_GATE = raisa_policy.SUBGATE_TRANSITION_TO_GATE
 G1A3_TRANSITION_FROM_GATE = "G1A.2"
 G1A3_TRANSITION_TO_GATE = "G1A.3"
 TRANSITION_REVIEW_ROOT = "orchestration/programme/external-reviews"
@@ -8877,123 +8873,11 @@ def _validate_precedence(
     agents_text: str,
     state: dict[str, Any],
 ) -> None:
-    _exact_keys(
-        project,
-        {
-            "schema_version",
-            "project_id",
-            "master_authority",
-            "allocation",
-            "operating_model",
-            "secure_sdlc",
-            "direction_collaboration",
-            "autonomous_continuation",
-            "cost_controls",
-        },
-        "project_settings_schema_invalid",
-    )
-    _exact_keys(
-        continuation,
-        {
-            "schema_version",
-            "default_posture",
-            "emergency_programme_overlay",
-            "applies_when",
-            "policy_decision",
-            "standing_programme_authority",
-            "architecture_strengthening_choice_policy",
-            "failure_loop",
-            "authority",
-            "execution_limits",
-            "pause_for_user_only_when",
-            "must_not_pause_for",
-            "evidence",
-            "task_lifecycle",
-            "resume_checkpoint",
-            "document_metadata",
-        },
-        "continuation_settings_schema_invalid",
-    )
-    project_overlay = project.get("autonomous_continuation", {}).get(
-        "emergency_overlay", {}
-    )
-    continuation_overlay = continuation.get("emergency_programme_overlay", {})
-    if project_overlay != {
-        "settings_file": "programme_recovery.yaml",
-        "required": True,
-        "precedence": "higher_than_standing_continuation",
-        "missing_or_invalid": "hard_stop",
-    } or continuation_overlay != {
-        "status": "active",
-        "settings_file": "programme_recovery.yaml",
-        "precedence": "higher_than_default_posture_and_standing_programme_authority",
-        "required_before_task_selection": True,
-        "missing_or_invalid": "hard_stop",
-    }:
-        raise ProgrammeAdmissionError("recovery_precedence_invalid")
-    phase_token = (
-        bounded_g1b.PROFILE_PREAMBLES[state["active_profile"]]
-        if state["active_profile"] in bounded_g1b.PROFILE_PREAMBLES
-        else
-        "Gate G1B.1 implementation is externally accepted; its closeout and G1B.2 transition enablement are review-pending, and G1B.2 remains closed."
-        if state["active_profile"] == G1B1_CLOSEOUT_REVIEW_PENDING_PROFILE
-        else (
-            "Gate G1B.2 is active only for the pure versioned journal and deterministic replay kernel"
-            if state["active_profile"] == G1B2_ACTIVE_PROFILE
-            else "Gate G1A.3 implementation is externally accepted. G1A closeout and G1B transition enablement are review-pending; G1B remains closed."
-            if state["active_profile"] == G1A_CLOSEOUT_REVIEW_PENDING_PROFILE
-            else (
-                "Gate G1B.1 is active only for the bounded pure state/event kernel"
-                if state["active_profile"] == G1B1_ACTIVE_PROFILE
-                else (
-                    f"Gate {ADMITTED_PROGRAMME_GATE} is the only authorised correction; G1A is"
-                    if state["active_correction"] == ADMITTED_PROGRAMME_GATE
-                    else (
-                        "Gate G1A.2 implementation is externally accepted. G1A.3 transition enablement"
-                        if state["active_profile"] == G1A3_ENABLEMENT_PENDING_PROFILE
-                        else (
-                            "Gate G1A.3-R0 is review-pending with no eligible implementation task"
-                            if state["active_profile"] == G1A3_R0_REVIEW_PENDING_PROFILE
-                            else (
-                                "Gate G1A.3-R1 is active only for complete review-byte binding"
-                                if state["active_profile"] == G1A3_R1_ACTIVE_PROFILE
-                                else (
-                                    "Gate G1A.3 is active only for its bounded integration-authority consumer"
-                                    if state["active_profile"] == G1A3_ACTIVE_PROFILE
-                                    else (
-                                        "Gate G1A.2 is active only for its bounded verdict adapter; provider invocation"
-                                        if state["active_correction"]
-                                        == SUBGATE_TRANSITION_TO_GATE
-                                        else "Gate G1A.1 is owner-accepted with residual risk; G1A.2"
-                                    )
-                                )
-                            )
-                        )
-                    )
-                )
-            )
-        )
-    )
-    required_header = (
-        "# EMERGENCY RAISA/ARIADNE RECOVERY PRECEDENCE",
-        phase_token,
-        "Missing, malformed, stale, or contradictory programme state is a hard stop.",
-    )
-    if not agents_text.startswith(required_header[0]) or any(
-        token not in agents_text[:1200] for token in required_header[1:]
-    ):
-        raise ProgrammeAdmissionError("agents_recovery_precedence_missing")
-    if (
-        state["active_profile"] == G1A_CLOSEOUT_REVIEW_PENDING_PROFILE
-        and f"Task generation `{G1A_CLOSEOUT_REPLACEMENT_TASK_GENERATION}`"
-        not in agents_text
-    ):
-        raise ProgrammeAdmissionError("agents_recovery_operation_identity_invalid")
-    if (
-        state["active_profile"] == G1B1_CLOSEOUT_REVIEW_PENDING_PROFILE
-        and f"Task generation `{G1B1_CLOSEOUT_TASK_GENERATION}`" not in agents_text
-    ):
-        raise ProgrammeAdmissionError("agents_recovery_operation_identity_invalid")
+    """Compatibility entrypoint for the single Raisa precedence decision."""
+    try:
+        raisa_policy.validate_precedence(project, continuation, agents_text, state)
+    except raisa_policy.RaisaPolicyError as error:
+        raise ProgrammeAdmissionError(error.reason_code) from error
 
 
 def _validate_latch(
@@ -9227,11 +9111,11 @@ def ensure_legacy_profile(repo_root: Path) -> None:
         if (type(g1b) is not dict or type(selection) is not dict
                 or type(selection.get("allowed_task_kinds")) is not list):
             raise ProgrammeAdmissionError("programme_state_missing_or_invalid")
-        if (profile in (bounded_g1b.PROFILE, bounded_g1b.G1C_PROFILE, bounded_g1b.G1D_PROFILE)
-                or state.get("current_gate") in ("G1B", "G1C", "G1D") or "g1c" in state or "g1d" in state
+        if (profile in (bounded_g1b.PROFILE, bounded_g1b.G1C_PROFILE, bounded_g1b.G1D_PROFILE, bounded_g1b.G1E_PROFILE)
+                or state.get("current_gate") in ("G1B", "G1C", "G1D", "G1E") or "g1c" in state or "g1d" in state or "g1e" in state
                 or "completion" in g1b or "acceptance" in g1b
                 or any(task in selection["allowed_task_kinds"] for task in
-                       (bounded_g1b.TASK_CLASS, bounded_g1b.G1C_TASK, bounded_g1b.G1D_TASK))):
+                       (bounded_g1b.TASK_CLASS, bounded_g1b.G1C_TASK, bounded_g1b.G1D_TASK, bounded_g1b.G1E_TASK))):
             raise ProgrammeAdmissionError("bounded_g1b_context_required")
         if type(profile) is not str or profile not in legacy_profiles:
             raise ProgrammeAdmissionError("programme_state_missing_or_invalid")
