@@ -37,7 +37,8 @@ class ClosedRequestTests(unittest.TestCase):
                          {"schema_version": "ariadne.bounded_g1b_request.future"},
                          {"schema_version": None, "operation_kind": "accept_journal"},
                          {"operation_kind": "accept_g1b"}, {"operation_kind": "implement_g1c"},
-                         {"task_class": b.G1C_TASK}):
+                         {"task_class": b.G1C_TASK}, {"operation_kind": "accept_g1c"},
+                         {"operation_kind": "implement_g1d"}, {"task_class": b.G1D_TASK}):
             with self.subTest(manifest=manifest), no_legacy_observation(), \
                     patch.object(pa, "load_programme_policy", side_effect=AssertionError("old loader")), \
                     patch.object(pf, "load_programme_policy", side_effect=AssertionError("old loader")):
@@ -178,7 +179,11 @@ class SuccessorFixture(NativeFixture):
     all activation, candidate, predecessor, index and source checks use real Git.
     Production constants, pinned authority bytes and validators are unchanged.
     """
-    def __init__(self, assets: Path):
+    def __init__(self, assets: Path, operation_kind="accept_g1b"):
+        assert operation_kind in {"accept_g1b", "accept_g1c"}
+        self.operation = b._operation(operation_kind)
+        self.publication = self.operation["accepted_publication"]
+        self.is_provenance = operation_kind == "accept_g1c"
         self.temporary = tempfile.TemporaryDirectory(prefix="g1c-contract-")
         self.home = Path(self.temporary.name)
         self.root = self.home / "target"
@@ -187,11 +192,16 @@ class SuccessorFixture(NativeFixture):
         self.scratch.mkdir()
         self.assets = assets
         self.source = Path(b.__file__).resolve().parents[1]
-        self.before = {p: (self.source / "g1b-baseline" / p).read_bytes() for p in b.G1B_BASELINE_PINS}
-        self.evidence = {p: (assets / "evidence" / p).read_bytes() for p in b.G1B_EVIDENCE_PINS}
-        self.frozen = {p: (assets / "inputs" / p).read_bytes() for p in (*b.FROZEN_PINS, b.COST)}
-        self.accepted_source = {p: (self.source / "g1b-accepted-source" / p).read_bytes()
-                                for p in b.PERSISTENCE_PINS}
+        self.before = {p: (self.source / self.operation["baseline_directory"] / p).read_bytes()
+                       for p in self.operation["baseline_pins"]}
+        self.evidence = {p: (assets / "evidence" / p).read_bytes() for p in self.operation["evidence_pins"]}
+        frozen_paths = {*b.FROZEN_PINS, b.COST}
+        if self.is_provenance:
+            frozen_paths.update({b.SCOPE_PATH, *b.PROVENANCE_DEPENDENCY_PINS})
+        self.frozen = {p: (assets / "inputs" / p).read_bytes() for p in frozen_paths}
+        source_directory = "g1c-accepted-source" if self.is_provenance else "g1b-accepted-source"
+        self.accepted_source = {p: (self.source / source_directory / p).read_bytes()
+                                for p in self.operation["accepted_pins"]}
         for path, raw in {**self.before, **self.frozen, **self.accepted_source}.items():
             self.write(path, raw)
         self.git("init", "--quiet", "--template=", ".")
@@ -202,27 +212,28 @@ class SuccessorFixture(NativeFixture):
         tree = self.git("write-tree")
         self.base = self.git("commit-tree", tree, "-m", "authored G1B component baseline")
         self.git("update-ref", "--no-deref", "HEAD", self.base)
-        self.after = b.build_g1c_acceptance_transition(self.before,
-            b.build_governor_scope("2026-09-12T00:00:00+00:00", self.base))
+        transition = b.build_g1d_acceptance_transition if self.is_provenance else b.build_g1c_acceptance_transition
+        scope = b.build_provenance_scope if self.is_provenance else b.build_governor_scope
+        self.after = transition(self.before, scope("2026-09-12T00:00:00+00:00", self.base))
         for path, raw in self.after.items():
             self.write(path, raw)
-        self.git("add", "--", *sorted(b.G1C_TRANSITION_PATHS))
+        self.git("add", "--", *sorted(self.operation["transition_paths"]))
         candidate_tree = self.git("write-tree")
         self.q = dict(schema_version=b.BINDING_VERSION, operation_id="authored-g1c-acceptance",
-            operation_kind="accept_g1b", phase="development", base_commit=self.base, base_tree=tree,
+            operation_kind=operation_kind, phase="development", base_commit=self.base, base_tree=tree,
             expected_head=self.base, expected_index_tree=candidate_tree, candidate_tree=candidate_tree,
             activation_commit=None,
             source_sha256={p: b._sha((self.source / p).read_bytes()) for p in b.SOURCE_PATHS},
-            payload_sha256={p: b._sha((self.root / p).read_bytes()) for p in b.G1C_INPUT_PATHS})
+            payload_sha256={p: b._sha((self.root / p).read_bytes()) for p in self.operation["input_paths"]})
         self.binding_path = self.home / "binding.json"
-        self.component_header = ("tree " + b.PERSISTENCE_PUBLICATION["tree"] + "\nparent "
-                                 + b.PERSISTENCE_PUBLICATION["parent"] + "\n\nauthored observation\n")
+        self.component_header = ("tree " + self.publication["tree"] + "\nparent "
+                                 + self.publication["parent"] + "\n\nauthored observation\n")
         self.component_ancestry_error = None
 
     @contextmanager
     def component_history(self):
         run, run_bytes = b.trusted_git.run_git, b.trusted_git.run_git_bytes
-        accepted = b.PERSISTENCE_PUBLICATION["commit"]
+        accepted = self.publication["commit"]
 
         def observed_text(root, *args, **kwargs):
             if root == self.root and args == ("cat-file", "commit", accepted):
@@ -250,11 +261,12 @@ class SuccessorFixture(NativeFixture):
         return commit
 
     def prepare_implementation(self, activation):
-        self.q.update(operation_kind="implement_g1c", phase="development", base_commit=activation,
+        kind = "implement_g1d" if self.is_provenance else "implement_g1c"
+        self.q.update(operation_kind=kind, phase="development", base_commit=activation,
                       base_tree=self.q["candidate_tree"], activation_commit=activation)
-        for path in b.GOVERNOR_PATHS:
+        for path in b.operation_paths(kind):
             self.write(path, b"authored candidate; deliberately not importable Python\n")
-        self.git("add", "--", *sorted(b.GOVERNOR_PATHS))
+        self.git("add", "--", *sorted(b.operation_paths(kind)))
         tree = self.git("write-tree")
         self.q.update(candidate_tree=tree, expected_index_tree=tree)
 
@@ -661,7 +673,185 @@ def build_integration_suite(assets: Path) -> unittest.TestSuite:
                     entrypoint="task_branch_commit", phase="development")
                 self.assertEqual(result.reason_codes, ("bounded_g1b_operation_kind",))
 
+    class ProvenanceAdmissionTests(unittest.TestCase):
+        def setUp(self):
+            self.fx = SuccessorFixture(assets, "accept_g1c")
+            self.addCleanup(self.fx.close)
+            self.enterContext(self.fx.component_history())
+            self.enterContext(no_legacy_observation())
+
+        def test_native_transition_and_implementation_keep_acceptance_separate(self):
+            f = self.fx
+            result = f.decision()
+            self.assertTrue(result.policy_admitted, result.reason_codes)
+            self.assertFalse(result.execution_authorized)
+            self.assertEqual((result.current_gate, result.active_profile), ("G1D", b.G1D_PROFILE))
+            activation = f.activate()
+            self.assertTrue(f.decision().policy_admitted)
+            f.prepare_implementation(activation)
+            result = f.decision()
+            self.assertTrue(result.policy_admitted, result.reason_codes)
+            self.assertFalse(result.execution_authorized)
+            self.assertIn("G1C component accepted", result.claim_limits)
+            self.assertEqual(b.operation_paths(f.q["operation_kind"]), b.PROVENANCE_PATHS)
+            scope = b._json(f.after[b.G1D_SCOPE])
+            self.assertFalse(scope["g1d_complete"])
+            self.assertFalse(scope["g1e_eligible"])
+            self.assertFalse(scope["operational_multi_task_control_accepted"])
+            f.q["activation_commit"] = None
+            self.assertEqual(f.decision().reason_codes, ("bounded_g1b_activation_binding_required",))
+
+        def test_historical_scopes_counters_and_global_closures_are_preserved(self):
+            f = self.fx
+            old, new = b._json(f.before[b.STATE]), b._json(f.after[b.STATE])
+            self.assertEqual(new["g1b"], old["g1b"])
+            self.assertEqual(new["g1c"]["current_operation"], old["g1c"]["current_operation"])
+            self.assertEqual(new["actions_performed"], old["actions_performed"])
+            self.assertEqual(new["global_checks"], old["global_checks"])
+            for path, expected in ((b.G1C_SCOPE, f.before[b.G1C_SCOPE]),
+                                    (b.SCOPE_PATH, f.frozen[b.SCOPE_PATH]), (b.LATCH, f.frozen[b.LATCH])):
+                self.assertEqual((f.root / path).read_bytes(), expected)
+            for counter, value in new["actions_performed"].items():
+                if type(value) is not int:
+                    continue
+                changed = copy.deepcopy(new)
+                changed["actions_performed"][counter] = value + 1
+                with self.subTest(counter=counter), self.assertRaises(b.BoundedG1BError) as caught:
+                    b.validate_g1d_acceptance_transition(f.before, {**f.after, b.STATE: b._canonical(changed)}, f.evidence)
+                self.assertEqual(caught.exception.reason_code, "bounded_g1d_authority_delta_invalid")
+            for path in (b.STATE, b.GATES, b.OVERLAY):
+                changed = b._document(f.after[path], path)
+                changed["unreviewed_permission"] = True
+                with self.subTest(path=path), self.assertRaises(b.BoundedG1BError) as caught:
+                    b.validate_g1d_acceptance_transition(f.before, {**f.after, path: b._canonical(changed)}, f.evidence)
+                self.assertEqual(caught.exception.reason_code, "bounded_g1d_authority_delta_invalid")
+
+        def test_each_acceptance_evidence_and_predecessor_is_authenticated(self):
+            f = self.fx
+            for path in b.G1C_EVIDENCE_PINS:
+                with self.subTest(evidence=path), self.assertRaises(b.BoundedG1BError) as caught:
+                    b.validate_g1d_acceptance_transition(f.before, f.after, {**f.evidence, path: b"changed"})
+                self.assertEqual(caught.exception.reason_code, "bounded_g1d_evidence_changed")
+            for path in b.G1C_BASELINE_PINS:
+                with self.subTest(predecessor=path), self.assertRaises(b.BoundedG1BError) as caught:
+                    b.build_g1d_acceptance_transition({**f.before, path: f.before[path] + b"\n"},
+                                                      b._json(f.after[b.G1D_SCOPE]))
+                self.assertEqual(caught.exception.reason_code, "bounded_g1d_predecessor_changed")
+
+        def test_scope_rejects_effect_expansion_and_declared_independence(self):
+            f = self.fx
+            scope = b._json(f.after[b.G1D_SCOPE])
+            for key, value in (("g1d_complete", True), ("g1e_eligible", True), ("feature_work_eligible", True),
+                               ("operational_multi_task_control_accepted", True),
+                               ("existing_clockwork_writers_activated", True),
+                               ("implementation_paths", sorted(b.PROVENANCE_PATHS | b.GOVERNOR_PATHS)),
+                               ("allowed_effects", ["provider_invocation"])):
+                with self.subTest(key=key), self.assertRaises(b.BoundedG1BError) as caught:
+                    b.build_g1d_acceptance_transition(f.before, {**scope, key: value})
+                self.assertEqual(caught.exception.reason_code, "bounded_g1d_scope_invalid")
+            for key, value in (("execution_profile", "live_models"), ("live_model_context_accepted", True),
+                               ("worker_declarations_establish_independence", True),
+                               ("control_and_publication_risk_floor", "routine_delta"),
+                               ("replay_grants_execution_integration_or_usage_settlement_authority", True),
+                               ("global_policy_and_existing_execution_defaults_changed", True)):
+                changed = copy.deepcopy(scope)
+                changed["verification_boundary"][key] = value
+                with self.subTest(key=key), self.assertRaises(b.BoundedG1BError) as caught:
+                    b.build_g1d_acceptance_transition(f.before, changed)
+                self.assertEqual(caught.exception.reason_code, "bounded_g1d_scope_invalid")
+
+        def test_governor_publication_history_and_preserved_inputs_are_checked(self):
+            f = self.fx
+            correct = f.component_header
+            for wrong in (correct.replace(b.GOVERNOR_PUBLICATION["parent"], "0" * 40),
+                          correct.replace(b.GOVERNOR_PUBLICATION["tree"], "0" * 40),
+                          correct.replace("\n\n", "\nparent " + "1" * 40 + "\n\n")):
+                f.component_header = wrong
+                self.assertEqual(f.decision().reason_codes, ("bounded_g1d_component_publication_invalid",))
+            f.component_header = correct
+            f.component_ancestry_error = "trusted_git_command_failed"
+            self.assertEqual(f.decision().reason_codes, ("trusted_git_command_failed",))
+            f.component_ancestry_error = None
+            for path, raw in list(f.accepted_source.items()):
+                f.accepted_source[path] = raw + b"\n"
+                self.assertEqual(f.decision().reason_codes, ("bounded_g1d_accepted_component_changed",))
+                f.accepted_source[path] = raw
+            pins = {b.G1C_SCOPE: b.G1C_BASELINE_PINS[b.G1C_SCOPE], **b.GOVERNOR_PINS,
+                    **b.PROVENANCE_DEPENDENCY_PINS, b.COST: b.COST_PIN}
+            for path in pins:
+                raw = (f.root / path).read_bytes()
+                f.write(path, raw + b"\n")
+                f.q["payload_sha256"][path] = b._sha(raw + b"\n")
+                with self.subTest(path=path):
+                    self.assertEqual(f.decision().reason_codes, ("bounded_g1b_frozen_input_changed",))
+                f.write(path, raw)
+                f.q["payload_sha256"][path] = b._sha(raw)
+            self.assertTrue(f.decision().policy_admitted)
+
+        def test_native_activation_and_current_authority_cannot_be_substituted(self):
+            f = self.fx
+            activation = f.activate()
+            f.prepare_implementation(activation)
+            f.q["activation_commit"] = f.base
+            self.assertEqual(f.decision().reason_codes, ("bounded_g1b_activation_parent_invalid",))
+            f.q["activation_commit"] = activation
+            f.write(b.AGENTS, f.after[b.AGENTS] + b"\n")
+            f.git("add", "--", b.AGENTS)
+            tree = f.git("write-tree")
+            descendant = f.git("commit-tree", tree, "-p", activation, "-m", "unaccepted authority drift")
+            f.git("update-ref", "--no-deref", "HEAD", descendant, activation)
+            f.write(b.AGENTS, f.after[b.AGENTS])
+            f.q.update(base_commit=descendant, base_tree=tree, expected_head=descendant)
+            self.assertEqual(f.decision().reason_codes, ("bounded_g1b_activation_not_committed",))
+
+        def test_legacy_loader_rejects_each_g1d_marker_before_observation(self):
+            f = self.fx
+            historical = b._json((f.source / "baseline" / b.STATE).read_bytes())
+            for path in b.BOUNDED_SCOPE_PATHS:
+                (f.root / path).unlink()
+            variants = [{**historical, key: value} for key, value in
+                        (("active_profile", b.G1D_PROFILE), ("current_gate", "G1D"), ("g1d", None))]
+            task = copy.deepcopy(historical)
+            task["task_selection"]["allowed_task_kinds"] = [b.G1D_TASK]
+            variants.append(task)
+            for state in variants:
+                f.write(b.STATE, b._canonical(state))
+                with self.subTest(state=state.get("current_gate")), self.assertRaises(pa.ProgrammeAdmissionError) as caught:
+                    pa.load_programme_policy(f.root)
+                self.assertEqual(caught.exception.reason_code, "bounded_g1b_context_required")
+                self.assertEqual(pf.build_report(f.root)["status"], "blocked")
+            f.write(b.STATE, b._canonical(historical))
+            f.write(b.G1D_SCOPE, b"malformed scope still closes legacy route")
+            with self.assertRaises(pa.ProgrammeAdmissionError) as caught:
+                pa.load_programme_policy(f.root)
+            self.assertEqual(caught.exception.reason_code, "bounded_g1b_context_required")
+
+        def test_combined_scope_unknown_operations_and_transition_base_reject(self):
+            f = self.fx
+            context = f.context()
+            manifest = f.manifest(context)
+            result = b.evaluate_bounded_g1b_operation(context=context,
+                manifest={**manifest, "allowed_paths": sorted(b.G1D_TRANSITION_PATHS | b.PROVENANCE_PATHS)},
+                entrypoint="task_branch_commit", phase="development")
+            self.assertEqual(result.reason_codes, ("bounded_g1b_manifest_binding_mismatch",))
+            for kind in ("accept_g1d", "implement_g1e", None, []):
+                f.q["operation_kind"] = kind
+                result = b.evaluate_bounded_g1b_operation(context=f.context(), manifest=manifest,
+                    entrypoint="task_branch_commit", phase="development")
+                self.assertEqual(result.reason_codes, ("bounded_g1b_operation_kind",))
+            f.q["operation_kind"] = "accept_g1c"
+            changed = b.build_g1d_acceptance_transition(f.before,
+                b.build_provenance_scope("2026-09-12T00:00:00+00:00", "0" * 40))
+            for path, raw in changed.items():
+                f.write(path, raw)
+                f.q["payload_sha256"][path] = b._sha(raw)
+            f.git("add", "--", *sorted(b.G1D_TRANSITION_PATHS))
+            tree = f.git("write-tree")
+            f.q.update(candidate_tree=tree, expected_index_tree=tree)
+            self.assertEqual(f.decision().reason_codes, ("bounded_g1b_transition_base_mismatch",))
+
     suite = unittest.defaultTestLoader.loadTestsFromTestCase(ClosedRequestTests)
     suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(IntegratedTests))
     suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(SuccessorTests))
+    suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(ProvenanceAdmissionTests))
     return suite

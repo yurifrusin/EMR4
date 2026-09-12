@@ -1,4 +1,4 @@
-"""Bounded G1B/G1C checks for an externally reviewed publication request.
+"""Bounded G1B/G1C/G1D checks for an externally reviewed publication request.
 
 This route reads a fixed set of ordinary files. It never imports candidate code,
 discovers settings, loads historical policy, or executes a commit/push. Its
@@ -151,6 +151,55 @@ G1C_LIMITS = ("policy eligibility is not publication authority", "no complete ph
 OPERATION_PATHS = {"accept_journal": TRANSITION_PATHS, "complete_g1b": COMPLETION_PATHS,
                    "accept_g1b": G1C_TRANSITION_PATHS, "implement_g1c": GOVERNOR_PATHS}
 
+G1D_PROFILE = "G1D_PROVENANCE_ACTIVE"
+G1D_TASK = "g1d_observed_provenance_and_independent_verification"
+G1D_PREAMBLE = "Gate G1D is active only for bounded observed provenance and independent local verification"
+G1D_SCOPE = "orchestration/programme/g1d-provenance-scope.json"
+G1C_BASELINE_PINS = {
+    AGENTS: "e320b14f1bdd9f813892a0d8c8a0fc471eac20c513ec0561e0f37d437f312a8e",
+    STATE: "74ea3399c148bcfecab429884a02cde41d0bb4d2a6af5acffd9ca7e4b6647db2",
+    GATES: "eae6d337d300c7e7bd7ea681436d9177430235b5779710397929466d13b3ccfb",
+    OVERLAY: "325b282a3fdc65fea1da6172664f3b49bb6a94070bb94ccab63d5e2e16af1cb0",
+    G1C_SCOPE: "e37b0acd28dfa1c61bfded97f1b17844271dfdf4b75d631f81d8a30d4748ce88",
+}
+GOVERNOR_PUBLICATION = {
+    "commit": "c4deef05e40b855c8f398456df98bb7590773257",
+    "parent": "e57aa0d3735ba803b2c3869fc7cf8684b172de56",
+    "tree": "b2888b3de5b9cc491b99099259e0d8b255677baf",
+}
+GOVERNOR_PINS = {
+    "orchestration_harness/clockwork_governor.py": "d17143de860e2d671c4af67c03f9265591f66e840a3bb2196697d08253407795",
+    "orchestration_harness/clockwork_persistence.py": "e2c81e22539642b0245dc92bfed8aff62fabdf773c28dbae6503154ac64a4ff8",
+    "tests/test_clockwork_governor.py": "595723e6bc2a90467c179a5423c11178a3cb742dbc9572977a2bda154ab4914e",
+}
+PROVENANCE_DEPENDENCY_PINS = {
+    "orchestration_harness/verdict.py": "8c7683fea46e98ddc467823ec11dde497c166123c549d49f938ef8fcdc5ff7cd",
+    "orchestration/harness_settings/operating_model.yaml": "0181a3b007f800cc7b610d8f16a9ac551daf7345da15232e464f40dda1e3ca6f",
+    "orchestration/harness_settings/verifier_execution_policy.yaml": "92721606167a0bcb6b65d40e62061d9aaba25b2e57e72d9a2ee0445d51d5258d",
+    "orchestration/harness_settings/security_review_protocol.yaml": "861e5f577b98e8e3928333d28b8fade24d7e214f0cd666961f665fbce153dc70",
+}
+G1C_EVIDENCE_PINS = {
+    "g1c-evidence/implementation-review-windows.json": "a2f076026f60586670a898127a644a7b3309519a416c0c4bd5f79ce27b72d6a8",
+    "g1c-evidence/operation-review.json": "f186946e9f64224b9078b834a192a0e2d10a54b1aa8f57807659a5e1e1657cb4",
+    "g1c-evidence/fresh-readback.json": "c44551d5b1658c1a5f4e7366e337dc43bfccd1189b5abc0b9d6b8922c6d1db8d",
+    "g1c-evidence/windows-governor-1.stdout.json": "8ab07396da4a4af0d2912c88ef284590155047deafe5d274131e8a72d65e52d0",
+    "g1c-evidence/windows-persistence-1.stdout.json": "006d3315e09bcd1f596e32af8ddcdd94ca6f44abeee0940d7f203b7f7477aa30",
+    "g1c-evidence/candidate-manifest-v1.json": "e1551690b6cf0c23bc6782ed6547f84307cde2141b6a2dcdb246a9a2a65817a7",
+}
+G1D_CRITERIA = ("execution_and_context_provenance_machine_checkable", "generating_worker_not_sole_verifier",
+                "declared_unproven_independence_rejected", "risk_tiered_independent_verification")
+PROVENANCE_PATHS = frozenset({"orchestration_harness/clockwork_provenance.py",
+                            "orchestration_harness/clockwork_observer.py", "tests/test_clockwork_provenance.py"})
+G1D_TRANSITION_PATHS = frozenset({STATE, GATES, OVERLAY, AGENTS, G1D_SCOPE})
+G1D_INPUT_PATHS = G1C_INPUT_PATHS | {G1D_SCOPE, *GOVERNOR_PINS, *PROVENANCE_DEPENDENCY_PINS}
+G1D_LIMITS = ("policy eligibility is not publication authority", "no complete physical worktree attestation",
+              "no full-suite or whole-loader acceptance", "G1D component and operational multi-task control remain unaccepted",
+              "only reviewed local authored verification; no provider or live-model context authority",
+              "existing writers, autonomous worker dispatch, product work and protected refs remain closed")
+PROFILE_PREAMBLES[G1D_PROFILE] = G1D_PREAMBLE
+BOUNDED_SCOPE_PATHS = BOUNDED_SCOPE_PATHS | {G1D_SCOPE}
+OPERATION_PATHS.update(accept_g1c=G1D_TRANSITION_PATHS, implement_g1d=PROVENANCE_PATHS)
+
 
 def operation_paths(kind: str) -> frozenset[str]:
     _need(type(kind) is str and kind in OPERATION_PATHS, "bounded_g1b_operation_kind")
@@ -159,6 +208,17 @@ def operation_paths(kind: str) -> frozenset[str]:
 
 def _operation(kind: str) -> dict:
     paths = operation_paths(kind)
+    if kind in {"accept_g1c", "implement_g1d"}:
+        return {
+            "paths": paths, "successor": True, "transition": kind == "accept_g1c",
+            "input_paths": G1D_INPUT_PATHS, "transition_paths": G1D_TRANSITION_PATHS,
+            "scope_path": G1D_SCOPE, "baseline_pins": G1C_BASELINE_PINS,
+            "baseline_directory": "g1c-baseline", "evidence_pins": G1C_EVIDENCE_PINS,
+            "profile": G1D_PROFILE, "gate": "G1D", "accepted_publication": GOVERNOR_PUBLICATION,
+            "accepted_pins": GOVERNOR_PINS, "component_reason": "bounded_g1d",
+            "limits": (("G1C component acceptance awaits reviewed transition publication",)
+                       if kind == "accept_g1c" else ("G1C component accepted",)) + G1D_LIMITS,
+        }
     successor = kind in {"accept_g1b", "implement_g1c"}
     return {
         "paths": paths, "successor": successor, "transition": kind in {"accept_journal", "accept_g1b"},
@@ -170,6 +230,8 @@ def _operation(kind: str) -> dict:
         "evidence_pins": G1B_EVIDENCE_PINS if successor else EVIDENCE_PINS,
         "profile": G1C_PROFILE if successor else PROFILE,
         "gate": "G1C" if successor else "G1B",
+        "accepted_publication": PERSISTENCE_PUBLICATION, "accepted_pins": PERSISTENCE_PINS,
+        "component_reason": "bounded_g1c",
         "limits": (("G1B component acceptance awaits reviewed transition publication",) + G1C_LIMITS
                    if kind == "accept_g1b" else ("G1B component accepted",) + G1C_LIMITS if successor else LIMITS),
     }
@@ -271,7 +333,7 @@ def recognises_bounded_request(manifest: object) -> bool:
     task = manifest.get("task_class")
     return ((type(version) is str and version.startswith("ariadne.bounded_g1b_"))
             or (type(kind) is str and kind in OPERATION_PATHS)
-            or (type(task) is str and task in {TASK_CLASS, G1C_TASK}))
+            or (type(task) is str and task in {TASK_CLASS, G1C_TASK, G1D_TASK}))
 
 
 def build_completion_scope(recorded_at: str, transition_base: str) -> dict:
@@ -537,6 +599,148 @@ def validate_g1c_acceptance_transition(before: dict[str, bytes], after: dict[str
     _need(after[G1C_SCOPE] == expected[G1C_SCOPE], "bounded_g1c_scope_encoding_invalid")
 
 
+def build_provenance_scope(recorded_at: str, transition_base: str) -> dict:
+    return {
+        "schema_version": "ariadne.g1d_provenance_scope.v1", "recorded_at": recorded_at,
+        "transition_base_commit": transition_base, "accepted_component": "G1C_bounded_recovery_governor",
+        "accepted_publication": dict(GOVERNOR_PUBLICATION), "accepted_source_sha256": dict(GOVERNOR_PINS),
+        "criteria": list(G1C_CRITERIA), "evidence_sha256": dict(G1C_EVIDENCE_PINS),
+        "preserved_predecessor_scope": {"path": G1C_SCOPE, "sha256": G1C_BASELINE_PINS[G1C_SCOPE]},
+        "current_operation": {
+            "operation_id": "g1d-provenance-and-independent-verification", "profile": G1D_PROFILE,
+            "task_class": G1D_TASK, "status": "active", "completion_accepted": False,
+            "supersedes": {"operation_id": "g1c-recovery-governor", "scope_path": G1C_SCOPE,
+                           "scope_sha256": G1C_BASELINE_PINS[G1C_SCOPE], "historical_latch_preserved": True},
+        },
+        "implementation_paths": sorted(PROVENANCE_PATHS), "provenance_criteria": list(G1D_CRITERIA),
+        "dependency_sha256": dict(PROVENANCE_DEPENDENCY_PINS),
+        "allowed_effects": sorted(EFFECTS), "forbidden_effects": sorted(FORBIDDEN),
+        "verification_boundary": {
+            "execution_profile": "reviewed_local_authored_programs", "live_model_context_accepted": False,
+            "trusted_controller_owns": ["assignment_and_risk_classification", "reviewed_source_allowlist",
+                "context_assembly", "assignment_to_capture_directory_binding", "durable_independent_anchor_retention"],
+            "routine_requires_independent_deterministic_recomputation": True,
+            "control_and_publication_risk_floor": "dual_review",
+            "red_context": "fresh_candidate_only_without_blue_or_previous_review_artifacts",
+            "worker_declarations_establish_independence": False,
+            "replay_grants_execution_integration_or_usage_settlement_authority": False,
+            "global_policy_and_existing_execution_defaults_changed": False,
+        },
+        "g1b_component_accepted": True, "g1c_component_accepted": True, "g1d_complete": False,
+        "g1e_eligible": False, "operational_multi_task_control_accepted": False,
+        "feature_work_eligible": False, "existing_clockwork_writers_activated": False,
+        "claim_limits": list(G1D_LIMITS),
+    }
+
+
+def _validate_provenance_scope(scope: dict) -> None:
+    stamp, base = scope.get("recorded_at"), scope.get("transition_base_commit")
+    _need(type(stamp) is str and datetime.fromisoformat(stamp).tzinfo is not None, "bounded_g1b_timestamp_invalid")
+    _need(type(base) is str and re.fullmatch(r"[0-9a-f]{40}", base) is not None, "bounded_g1b_transition_base_invalid")
+    _need(_canonical(scope) == _canonical(build_provenance_scope(stamp, base)), "bounded_g1d_scope_invalid")
+
+
+def build_g1d_acceptance_transition(before: dict[str, bytes], scope: dict) -> dict[str, bytes]:
+    """Accept the published G1C component and enable only bounded G1D implementation."""
+    _keys(before, set(G1C_BASELINE_PINS), "bounded_g1d_predecessor_paths")
+    for path, digest in G1C_BASELINE_PINS.items():
+        _need(type(before[path]) is bytes and _sha(before[path]) == digest, "bounded_g1d_predecessor_changed")
+    _validate_provenance_scope(scope)
+    state, gates, overlay = (_document(before[p], p) for p in (STATE, GATES, OVERLAY))
+    _need(state["active_profile"] == G1C_PROFILE and state["current_gate"] == "G1C"
+          and state["g1b"]["status"] == "passed" and state["g1c"]["status"] == "active"
+          and state["g1c"]["completion_accepted"] is False and "g1d" not in state,
+          "bounded_g1d_predecessor_profile")
+    _need(state["feature_work_eligible"] is False and state["product_work_eligible"] is False
+          and state["global_checks"]["global_gate"] == "red_repair_only"
+          and state["global_checks"]["feature_work_suspended"] is True, "bounded_g1b_repair_only_required")
+    _need(state["g1c"]["scope_sha256"] == _sha(before[G1C_SCOPE])
+          and state["g1c"]["current_operation"] == _json(before[G1C_SCOPE])["current_operation"],
+          "bounded_g1d_predecessor_operation_changed")
+    scope_raw = _canonical(scope) + b"\n"
+    state.update(current_gate="G1D", active_correction="G1D", active_profile=G1D_PROFILE,
+                 observed_at=scope["recorded_at"])
+    state["g1c"].update(status="passed", completion_accepted=True)
+    # Earlier scope/current_operation objects remain verbatim historical records.
+    state["g1c"]["acceptance"] = {"scope_path": G1D_SCOPE, "scope_sha256": _sha(scope_raw),
+        "accepted_component_commit": GOVERNOR_PUBLICATION["commit"], "criteria": list(G1C_CRITERIA)}
+    state["g1d"] = {"status": "active", "scope_path": G1D_SCOPE, "scope_sha256": _sha(scope_raw),
+        "current_operation": copy.deepcopy(scope["current_operation"]), "completion_accepted": False}
+    state["task_selection"].update(allowed_task_kinds=[G1D_TASK], next_eligible_tranche="G1D",
+                                   next_eligibility_condition="bounded_G1D_provenance_profile_active")
+    gates["programme"].update(current_gate="G1D", next_eligible_tranche="G1D", prepared_at=scope["recorded_at"])
+    by_id = {row["id"]: row for row in gates["gates"]}
+    _need(len(by_id) == len(gates["gates"]) and by_id["G1C"]["exit_checks"] == list(G1C_CRITERIA)
+          and by_id["G1D"]["exit_checks"] == list(G1D_CRITERIA) and by_id["G1C"]["status"] == "active"
+          and by_id["G1D"]["status"] == "blocked_by_G1C" and by_id["G1E"]["status"] == "blocked_by_G1D",
+          "bounded_g1d_gate_predecessor_invalid")
+    by_id["G1C"]["status"], by_id["G1D"]["status"] = "passed", "active"
+    _need(overlay["active_profile"] == G1C_PROFILE and G1D_PROFILE not in overlay["profiles"],
+          "bounded_g1d_profile_already_active")
+    overlay["active_profile"] = G1D_PROFILE
+    overlay["profiles"][G1D_PROFILE] = {
+        "profile_kind": "bounded_G1D_provenance", "expected_programme_mode": "recovery",
+        "expected_current_gate": "G1D", "expected_gate_status": "active", "active_correction": "G1D",
+        "programme_gate": "G1D", "admitted_task_classes": [G1D_TASK],
+        "allowed_effects": sorted(EFFECTS), "forbidden_effects": sorted(FORBIDDEN),
+        "allowed_paths": sorted(PROVENANCE_PATHS), "autonomous_task_selection": False,
+        "feature_work_eligible": False, "product_work_eligible": False, "provider_calls_eligible": False,
+        "deployment_eligible": False, "protected_ref_movement_eligible": False, "g1e_eligible": False,
+        "scope_behavior": "bounded_g1d_provenance", "scope_file": G1D_SCOPE,
+        "reviewed_local_authored_verification_only": True, "global_execution_defaults_unchanged": True,
+        "closed_entrypoints": ["worker_dispatch", "provider_invocation", "clockwork_tick_mutation",
+                               "clockwork_closeout_mutation", "integration", "protected_ref_operation", "deployment"],
+    }
+    text = before[AGENTS].decode("utf-8")
+    replacements = {
+        G1C_PREAMBLE: G1D_PREAMBLE,
+        "| Active programme gate | G1C governor; the bounded G1B persistence component is accepted. G1C implementation is eligible; operational multi-task control and G1D remain unaccepted. |":
+        "| Active programme gate | G1D provenance; the bounded G1C governor component is accepted. G1D implementation is eligible; operational multi-task control and G1E remain unaccepted. |",
+        "| Next dependency | Integrate and verify the bounded G1C governor task in orchestration/programme/g1c-governor-scope.json; its current operation explicitly supersedes the preserved G1B operation. |":
+        "| Next dependency | Integrate and verify the bounded G1D provenance task in orchestration/programme/g1d-provenance-scope.json; its current operation explicitly supersedes the preserved G1C operation. |",
+    }
+    for old, new in replacements.items():
+        _need(text.count(old) == 1, "bounded_g1d_agents_predecessor_changed")
+        text = text.replace(old, new, 1)
+    return {STATE: json.dumps(state, indent=2, ensure_ascii=False).encode() + b"\n",
+            GATES: yaml.safe_dump(gates, sort_keys=False, allow_unicode=True).encode(),
+            OVERLAY: yaml.safe_dump(overlay, sort_keys=False, allow_unicode=True).encode(),
+            AGENTS: text.encode(), G1D_SCOPE: scope_raw}
+
+
+def validate_g1d_acceptance_transition(before: dict[str, bytes], after: dict[str, bytes],
+                                       evidence: dict[str, bytes]) -> None:
+    _keys(after, G1D_TRANSITION_PATHS, "bounded_g1d_transition_paths")
+    _keys(evidence, set(G1C_EVIDENCE_PINS), "bounded_g1d_evidence_paths")
+    for path, digest in G1C_EVIDENCE_PINS.items():
+        _need(type(evidence[path]) is bytes and _sha(evidence[path]) == digest, "bounded_g1d_evidence_changed")
+    review = _json(evidence["g1c-evidence/implementation-review-windows.json"])
+    operation = _json(evidence["g1c-evidence/operation-review.json"])
+    tests = _json(evidence["g1c-evidence/windows-governor-1.stdout.json"])
+    persistence = _json(evidence["g1c-evidence/windows-persistence-1.stdout.json"])
+    readback = _json(evidence["g1c-evidence/fresh-readback.json"])
+    _need(review["verdict"] == "G1C_GOVERNOR_CODE_LOCAL_AND_WINDOWS_EVIDENCE_PASS"
+          and review["source_sha256"] == GOVERNOR_PINS
+          and operation["six_g1c_criteria_supported_for_bounded_component_acceptance"] is True
+          and set(operation["criteria_evidence"]) == set(G1C_CRITERIA)
+          and operation["implementation_review_sha256"] == G1C_EVIDENCE_PINS["g1c-evidence/implementation-review-windows.json"]
+          and tests["status"] == "PASS" and tests["tests"] == 32 and tests["observation_guard_violations"] == []
+          and tests["failures"] == tests["errors"] == tests["provider_calls"] == tests["external_worker_dispatches"] == 0
+          and persistence["status"] == "pass" and persistence["tests_run"] == 15 and persistence["guard_violations"] == []
+          and persistence["native_process_death_boundaries"] == ["after_commit", "before_commit"]
+          and all(readback[key] == value for key, value in GOVERNOR_PUBLICATION.items())
+          and readback["remote"][RECOVERY_REF] == GOVERNOR_PUBLICATION["commit"],
+          "bounded_g1d_component_evidence_invalid")
+    expected = build_g1d_acceptance_transition(before, _json(after[G1D_SCOPE]))
+    for path in G1D_TRANSITION_PATHS:
+        if path.endswith((".json", ".yaml")):
+            _need(_canonical(_document(after[path], path)) == _canonical(_document(expected[path], path)),
+                  "bounded_g1d_authority_delta_invalid")
+        else:
+            _need(after[path] == expected[path], "bounded_g1d_agents_delta_invalid")
+    _need(after[G1D_SCOPE] == expected[G1D_SCOPE], "bounded_g1d_scope_encoding_invalid")
+
+
 @dataclass(frozen=True, slots=True)
 class BoundedG1BContext:
     target_root: Path
@@ -636,21 +840,24 @@ def load_bounded_g1b_inputs(context: BoundedG1BContext) -> BoundedG1BInputs:
     frozen_pins = dict(FROZEN_PINS)
     if operation["successor"]:
         frozen_pins.update({COST: COST_PIN, SCOPE_PATH: G1B_BASELINE_PINS[SCOPE_PATH]})
+    if operation["gate"] == "G1D":
+        frozen_pins.update({G1C_SCOPE: G1C_BASELINE_PINS[G1C_SCOPE], **GOVERNOR_PINS, **PROVENANCE_DEPENDENCY_PINS})
     for path, digest in frozen_pins.items():
         _need(_sha(payloads[path]) == digest, "bounded_g1b_frozen_input_changed")
     evidence = {path: read(evidence_root / path, digest) for path, digest in operation["evidence_pins"].items()}
     base = binding["base_commit"]
     if operation["successor"]:
-        accepted = PERSISTENCE_PUBLICATION["commit"]
+        publication = operation["accepted_publication"]
+        accepted = publication["commit"]
         headers = trusted_git.run_git(target, "cat-file", "commit", accepted).split("\n\n", 1)[0].splitlines()
         _need([line for line in headers if line.startswith("parent ")] ==
-              ["parent " + PERSISTENCE_PUBLICATION["parent"]]
+              ["parent " + publication["parent"]]
               and [line for line in headers if line.startswith("tree ")] ==
-              ["tree " + PERSISTENCE_PUBLICATION["tree"]], "bounded_g1c_component_publication_invalid")
+              ["tree " + publication["tree"]], operation["component_reason"] + "_component_publication_invalid")
         trusted_git.run_git(target, "merge-base", "--is-ancestor", accepted, base)
-        for path, digest in PERSISTENCE_PINS.items():
+        for path, digest in operation["accepted_pins"].items():
             _need(_sha(trusted_git.run_git_bytes(target, "cat-file", "blob", accepted + ":" + path)) == digest,
-                  "bounded_g1c_accepted_component_changed")
+                  operation["component_reason"] + "_accepted_component_changed")
     if operation["transition"]:
         _need(binding["activation_commit"] is None, "bounded_g1b_premature_activation")
         for path, digest in operation["baseline_pins"].items():
@@ -697,7 +904,8 @@ def _validate_loaded_policy(inputs: BoundedG1BInputs) -> dict[str, bytes]:
 
     operation = _operation(inputs.binding["operation_kind"])
     after = {path: inputs.payloads[path] for path in operation["transition_paths"]}
-    validator = validate_g1c_acceptance_transition if operation["successor"] else validate_g1b_acceptance_transition
+    validator = {"G1B": validate_g1b_acceptance_transition, "G1C": validate_g1c_acceptance_transition,
+                 "G1D": validate_g1d_acceptance_transition}[operation["gate"]]
     validator(inputs.before, after, inputs.evidence)
     try:
         programme_admission._validate_precedence(

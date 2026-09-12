@@ -9227,11 +9227,11 @@ def ensure_legacy_profile(repo_root: Path) -> None:
         if (type(g1b) is not dict or type(selection) is not dict
                 or type(selection.get("allowed_task_kinds")) is not list):
             raise ProgrammeAdmissionError("programme_state_missing_or_invalid")
-        if (profile in (bounded_g1b.PROFILE, bounded_g1b.G1C_PROFILE)
-                or state.get("current_gate") in ("G1B", "G1C") or "g1c" in state
+        if (profile in (bounded_g1b.PROFILE, bounded_g1b.G1C_PROFILE, bounded_g1b.G1D_PROFILE)
+                or state.get("current_gate") in ("G1B", "G1C", "G1D") or "g1c" in state or "g1d" in state
                 or "completion" in g1b or "acceptance" in g1b
                 or any(task in selection["allowed_task_kinds"] for task in
-                       (bounded_g1b.TASK_CLASS, bounded_g1b.G1C_TASK))):
+                       (bounded_g1b.TASK_CLASS, bounded_g1b.G1C_TASK, bounded_g1b.G1D_TASK))):
             raise ProgrammeAdmissionError("bounded_g1b_context_required")
         if type(profile) is not str or profile not in legacy_profiles:
             raise ProgrammeAdmissionError("programme_state_missing_or_invalid")
