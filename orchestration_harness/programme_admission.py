@@ -8932,8 +8932,8 @@ def _validate_precedence(
     }:
         raise ProgrammeAdmissionError("recovery_precedence_invalid")
     phase_token = (
-        bounded_g1b.NEW_PREAMBLE
-        if state["active_profile"] == bounded_g1b.PROFILE
+        bounded_g1b.PROFILE_PREAMBLES[state["active_profile"]]
+        if state["active_profile"] in bounded_g1b.PROFILE_PREAMBLES
         else
         "Gate G1B.1 implementation is externally accepted; its closeout and G1B.2 transition enablement are review-pending, and G1B.2 remains closed."
         if state["active_profile"] == G1B1_CLOSEOUT_REVIEW_PENDING_PROFILE
@@ -9209,7 +9209,7 @@ class ProgrammePolicy:
 
 
 def ensure_legacy_profile(repo_root: Path) -> None:
-    """Inspect one ordinary state file before any legacy broad observation."""
+    """Inspect ordinary state and literal scope markers before legacy observation."""
     try:
         raw = trusted_git._read_regular_snapshot(repo_root / STATE_PATH, maximum_bytes=2 * 1024 * 1024)[1]
         state = bounded_g1b._json(raw)
@@ -9227,17 +9227,21 @@ def ensure_legacy_profile(repo_root: Path) -> None:
         if (type(g1b) is not dict or type(selection) is not dict
                 or type(selection.get("allowed_task_kinds")) is not list):
             raise ProgrammeAdmissionError("programme_state_missing_or_invalid")
-        if (profile == bounded_g1b.PROFILE or state.get("current_gate") == "G1B"
-                or "completion" in g1b or bounded_g1b.TASK_CLASS in selection["allowed_task_kinds"]):
+        if (profile in (bounded_g1b.PROFILE, bounded_g1b.G1C_PROFILE)
+                or state.get("current_gate") in ("G1B", "G1C") or "g1c" in state
+                or "completion" in g1b or "acceptance" in g1b
+                or any(task in selection["allowed_task_kinds"] for task in
+                       (bounded_g1b.TASK_CLASS, bounded_g1b.G1C_TASK))):
             raise ProgrammeAdmissionError("bounded_g1b_context_required")
         if type(profile) is not str or profile not in legacy_profiles:
             raise ProgrammeAdmissionError("programme_state_missing_or_invalid")
-        try:
-            (repo_root / bounded_g1b.SCOPE_PATH).lstat()
-        except FileNotFoundError:
-            pass
-        else:
-            raise ProgrammeAdmissionError("bounded_g1b_context_required")
+        for scope_path in sorted(bounded_g1b.BOUNDED_SCOPE_PATHS):
+            try:
+                (repo_root / scope_path).lstat()
+            except FileNotFoundError:
+                pass
+            else:
+                raise ProgrammeAdmissionError("bounded_g1b_context_required")
     except ProgrammeAdmissionError:
         raise
     except (trusted_git.TrustedGitError, bounded_g1b.BoundedG1BError) as error:
