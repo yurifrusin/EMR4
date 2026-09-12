@@ -1,12 +1,12 @@
 {
   "schema_version": "raisa-ariadne.programme-state.v2",
-  "observed_at": "2026-09-12T16:55:57.407586+00:00",
+  "observed_at": "2026-09-12T23:54:53.775251+00:00",
   "programme_name": "Raisa Medical Office and Ariadne Recovery & Convergence",
   "programme_mode": "recovery",
-  "current_gate": "G1D",
+  "current_gate": "G1E",
   "current_gate_status": "active",
-  "active_correction": "G1D",
-  "active_profile": "G1D_PROVENANCE_ACTIVE",
+  "active_correction": "G1E",
+  "active_profile": "G1E_CONFIGURATION_CORE_ACTIVE",
   "machine_authoritative": true,
   "feature_work_eligible": false,
   "product_work_eligible": false,
@@ -256,7 +256,7 @@
   "task_selection": {
     "autonomous_selection_enabled": false,
     "allowed_task_kinds": [
-      "g1d_observed_provenance_and_independent_verification"
+      "g1e_configuration_core_assessment"
     ],
     "blocked_task_kinds": [
       "product_feature",
@@ -268,11 +268,11 @@
     ],
     "admission_command": "python scripts/raisa_ariadne_recovery_preflight.py --task-manifest <path> --phase development",
     "out_of_gate_result": "blocked",
-    "next_eligible_tranche": "G1D",
+    "next_eligible_tranche": "G1E",
     "next_eligible_now": true,
     "next_tranche_started": false,
     "next_tranche_admission_requires_state_transition": false,
-    "next_eligibility_condition": "bounded_G1D_provenance_profile_active"
+    "next_eligibility_condition": "bounded_G1E_installed_configuration_assessment_active"
   },
   "parallelism_efficacy": {
     "deepseek": {
@@ -912,7 +912,7 @@
     }
   },
   "g1d": {
-    "status": "active",
+    "status": "passed",
     "scope_path": "orchestration/programme/g1d-provenance-scope.json",
     "scope_sha256": "a1fe6c4f5cafa0f5c7137bfc4a5c7950e10715bbcdfc07ed5ba9f7b2fccd649b",
     "current_operation": {
@@ -925,6 +925,36 @@
         "operation_id": "g1c-recovery-governor",
         "scope_path": "orchestration/programme/g1c-governor-scope.json",
         "scope_sha256": "e37b0acd28dfa1c61bfded97f1b17844271dfdf4b75d631f81d8a30d4748ce88",
+        "historical_latch_preserved": true
+      }
+    },
+    "completion_accepted": true,
+    "acceptance": {
+      "scope_path": "orchestration/programme/g1e-configuration-core-scope.json",
+      "scope_sha256": "f32c05eadf4a24ab377bde42de4a56b5de126ea1294b2c2e25e6b6be54c4e021",
+      "accepted_component_commit": "8145d098df1ee7eef9ba095211e979cebc40629a",
+      "criteria": [
+        "execution_and_context_provenance_machine_checkable",
+        "generating_worker_not_sole_verifier",
+        "declared_unproven_independence_rejected",
+        "risk_tiered_independent_verification"
+      ]
+    }
+  },
+  "g1e": {
+    "status": "active",
+    "scope_path": "orchestration/programme/g1e-configuration-core-scope.json",
+    "scope_sha256": "f32c05eadf4a24ab377bde42de4a56b5de126ea1294b2c2e25e6b6be54c4e021",
+    "current_operation": {
+      "operation_id": "g1e-configuration-and-core-assessment",
+      "profile": "G1E_CONFIGURATION_CORE_ACTIVE",
+      "task_class": "g1e_configuration_core_assessment",
+      "status": "active",
+      "completion_accepted": false,
+      "supersedes": {
+        "operation_id": "g1d-provenance-and-independent-verification",
+        "scope_path": "orchestration/programme/g1d-provenance-scope.json",
+        "scope_sha256": "a1fe6c4f5cafa0f5c7137bfc4a5c7950e10715bbcdfc07ed5ba9f7b2fccd649b",
         "historical_latch_preserved": true
       }
     },
