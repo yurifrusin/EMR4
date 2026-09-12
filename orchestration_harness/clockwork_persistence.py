@@ -207,6 +207,9 @@ def _ordinary(path: Path, *, missing: bool = False, directory: bool = False) -> 
 class ClockworkStore:
     """Each operation opens a short connection; no live handle crosses a fork."""
 
+    _schema_version = STORE_SCHEMA_VERSION
+    _user_version = 1
+
     def __init__(self, path: Path):
         _need(isinstance(path, Path) and path.is_absolute() and ".." not in path.parts, "unsafe_path")
         _need(not str(path).startswith(("//", "\\\\")), "unsafe_path")
@@ -256,7 +259,8 @@ class ClockworkStore:
                 raise PersistenceError("commit_outcome_unknown") from error
             if isinstance(error, sqlite3.Error):
                 code = getattr(error, "sqlite_errorcode", 0) & 0xFF
-                reason = "store_busy" if code in (sqlite3.SQLITE_BUSY, sqlite3.SQLITE_LOCKED) else "storage_error"
+                reason = ("store_busy" if code in (sqlite3.SQLITE_BUSY, sqlite3.SQLITE_LOCKED) else
+                          "store_full" if code == sqlite3.SQLITE_FULL else "storage_error")
                 raise PersistenceError(reason) from error
             raise
         finally:
@@ -286,22 +290,22 @@ class ClockworkStore:
             now = _now_ns()
             _need(_integer(now), "clock_regressed")
             db.execute(f"PRAGMA application_id={_APPLICATION_ID}")
-            db.execute("PRAGMA user_version=1")
+            db.execute(f"PRAGMA user_version={store._user_version}")
             db.execute("INSERT INTO metadata VALUES (1,?,?,?,?,?,?,?,?,?)", (
-                STORE_SCHEMA_VERSION, secrets.token_hex(32), 0, GENESIS_PREVIOUS_DIGEST,
+                store._schema_version, secrets.token_hex(32), 0, GENESIS_PREVIOUS_DIGEST,
                 0, None, None, 0, now))
         return store
 
     def _load(self, db):
         _need(db.execute("PRAGMA application_id").fetchone() == (_APPLICATION_ID,)
-              and db.execute("PRAGMA user_version").fetchone() == (1,), "store_corrupt")
+              and db.execute("PRAGMA user_version").fetchone() == (self._user_version,), "store_corrupt")
         schema = db.execute("SELECT sql FROM sqlite_schema WHERE name NOT GLOB 'sqlite_*'").fetchall()
         _need(len(schema) == len(_SCHEMA) and {row[0] for row in schema} == set(_SCHEMA), "store_corrupt")
         rows = db.execute("SELECT * FROM metadata LIMIT 2").fetchall()
         _need(len(rows) == 1 and len(rows[0]) == 10, "store_corrupt")
         keys = ("id", "version", "store_id", "sequence", "digest", "fence", "owner", "token", "expires", "last")
         meta = dict(zip(keys, rows[0]))
-        _need(meta["id"] == 1 and meta["version"] == STORE_SCHEMA_VERSION and _hex(meta["store_id"]), "store_corrupt")
+        _need(meta["id"] == 1 and meta["version"] == self._schema_version and _hex(meta["store_id"]), "store_corrupt")
         _need(_integer(meta["sequence"], maximum=_MAX_ENTRIES) and _digest(meta["digest"])
               and _integer(meta["fence"]) and _integer(meta["expires"]) and _integer(meta["last"]), "store_corrupt")
         if meta["owner"] is None:
@@ -316,15 +320,28 @@ class ClockworkStore:
         for sequence, request_id, payload, digest, entry_fence in rows:
             _need(_label(request_id) and request_id not in requests and
                   _integer(entry_fence, max(1, fence), meta["fence"]), "store_corrupt")
-            entry = _decode(payload, digest)
+            entry = self._decode_entry(payload, digest, request_id, meta["last"])
             _need(sequence == entry.sequence, "store_corrupt")
             journal.append(entry)
             requests[request_id] = entry
             fence = entry_fence
-        derived = replay(tuple(journal))
-        _need(derived.rejection is None and derived.next_sequence - 1 == meta["sequence"]
-              and derived.previous_digest == meta["digest"], "store_corrupt")
-        return meta, Snapshot(derived), requests
+        snapshot = self._recover_entries(tuple(journal))
+        _need(snapshot.head == JournalHead(meta["sequence"], meta["digest"]), "store_corrupt")
+        return meta, snapshot, requests
+
+    @staticmethod
+    def _decode_entry(payload, digest, request_id, last_ns):
+        return _decode(payload, digest)
+
+    @staticmethod
+    def _recover_entries(entries):
+        derived = replay(entries)
+        _need(derived.rejection is None, "store_corrupt")
+        return Snapshot(derived)
+
+    @staticmethod
+    def _commit_result(entry, already_committed):
+        return CommitResult(entry, already_committed)
 
     @staticmethod
     def _stamp(meta) -> int:
@@ -351,7 +368,7 @@ class ClockworkStore:
         with self._transaction() as db:
             _, _, requests = self._load(db)
             entry = requests.get(request_id)
-            return None if entry is None else CommitResult(entry, True)
+            return None if entry is None else self._commit_result(entry, True)
 
     def acquire_lease(self, owner: str, ttl_ns: int) -> Lease:
         _need(_label(owner) and _integer(ttl_ns, 1, _MAX_TTL_NS), "invalid_argument")
@@ -411,3 +428,130 @@ class ClockworkStore:
             db.execute("UPDATE metadata SET head_sequence=?,head_digest=?,last_ns=? WHERE id=1",
                        (entry.sequence, entry.digest, meta["last"]))
             return CommitResult(entry, False)
+
+
+def _governor():
+    # v1 users retain their exact three-module boundary. v2 is opt-in, with no
+    # automatic migration, reinterpretation or dependency on legacy writers.
+    from orchestration_harness import clockwork_governor
+    return clockwork_governor
+
+
+@dataclass(frozen=True, slots=True)
+class GovernorSnapshot:
+    replayed: object
+
+    @property
+    def head(self):
+        entries = self.replayed.entries
+        return JournalHead(len(entries), entries[-1].digest if entries else GENESIS_PREVIOUS_DIGEST)
+
+    @property
+    def state(self):
+        return self.replayed.state
+
+    @property
+    def narrative(self):
+        return self.replayed.narrative
+
+
+@dataclass(frozen=True, slots=True)
+class GovernorCommitResult:
+    entry: object
+    already_committed: bool
+
+    @property
+    def accepted(self):
+        return self.entry.value["outcome"]["accepted"]
+
+    @property
+    def reason(self):
+        return self.entry.value["outcome"]["reason"]
+
+    @property
+    def dispatch_allowed(self):
+        """Only a fresh, committed dispatch claim can be consumed once by a caller.
+
+        Readback/duplicate invocation is evidence, never a second dispatch. The
+        Admission first reserves resources; a separate claim rechecks current
+        state under the lease and consumes the dispatch right. The trusted
+        executor still owes authority verification and its deadline timer.
+        No worker is run here; a lost claim response never licenses a retry.
+        """
+        return self.accepted and not self.already_committed and self.entry.value["command"]["kind"] == "claim"
+
+
+class GovernorStore(ClockworkStore):
+    """Explicit v2 journal, using v1's transaction, lease, fencing and head CAS."""
+
+    _schema_version = "ariadne.clockwork_store.v2"
+    _user_version = 2
+    _storage_limit_bytes = 60 * 1024 * 1024
+
+    def _connect(self):
+        db = super()._connect()
+        try:
+            page_size = db.execute("PRAGMA page_size").fetchone()[0]
+            _need(_integer(page_size, 512, 65536), "store_corrupt")
+            maximum = self._storage_limit_bytes // page_size
+            _need(db.execute(f"PRAGMA max_page_count={maximum}").fetchone() == (maximum,), "store_full")
+            return db
+        except BaseException:
+            db.close()
+            raise
+
+    @staticmethod
+    def _decode_entry(payload, digest, request_id, last_ns):
+        g = _governor()
+        try:
+            entry = g.Entry(payload, digest)
+            value = entry.value
+            _need(value.get("request_id") == request_id and g.integer(value.get("at_ns"), 0, last_ns), "store_corrupt")
+            return entry
+        except (g.GovernorError, KeyError, TypeError) as error:
+            raise PersistenceError("store_corrupt") from error
+
+    @staticmethod
+    def _recover_entries(entries):
+        g = _governor()
+        try:
+            return GovernorSnapshot(g.replay(entries))
+        except g.GovernorError as error:
+            raise PersistenceError("store_corrupt") from error
+
+    @staticmethod
+    def _commit_result(entry, already_committed):
+        return GovernorCommitResult(entry, already_committed)
+
+    def append(self, lease: Lease, expected: JournalHead, request_id: str, command: dict) -> GovernorCommitResult:
+        g = _governor()
+        _need(type(expected) is JournalHead and _integer(expected.sequence, maximum=_MAX_ENTRIES)
+              and _digest(expected.digest) and _label(request_id), "invalid_argument")
+        try:
+            g.validate_command(command)
+            raw_command = g.canonical(command)
+            command = g.document(raw_command)
+        except g.GovernorError as error:
+            raise PersistenceError(error.code) from error
+        with self._transaction(write=True) as db:
+            meta, snapshot, requests = self._load(db)
+            self._lease(meta, lease, self._stamp(meta))
+            existing = requests.get(request_id)
+            if existing is not None:
+                _need(g.canonical(existing.value["command"]) == raw_command
+                      and expected == JournalHead(existing.sequence - 1, existing.previous_digest), "request_conflict")
+                return GovernorCommitResult(existing, True)
+            _need(expected == snapshot.head, "head_conflict")
+            _need(meta["sequence"] < _MAX_ENTRIES, "store_full")
+            try:
+                entry = g.append(snapshot.replayed, command, self._stamp(meta), request_id)
+            except g.GovernorError as error:
+                raise PersistenceError(error.code) from error
+            db.execute("INSERT INTO entries VALUES (?,?,?,?,?)",
+                       (entry.sequence, request_id, entry.payload, entry.digest, lease.fence))
+            self._lease(meta, lease, self._stamp(meta))
+            if command["kind"] in {"admit", "claim"} and entry.value["outcome"]["accepted"]:
+                _need(meta["last"] < entry.value["outcome"]["not_after_ns"], "admission_expired")
+            db.execute("UPDATE metadata SET head_sequence=?,head_digest=?,last_ns=? WHERE id=1",
+                       (entry.sequence, entry.digest, meta["last"]))
+            return GovernorCommitResult(entry, False)
