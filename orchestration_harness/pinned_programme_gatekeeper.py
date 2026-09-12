@@ -146,8 +146,14 @@ def evaluate_pinned_programme_operation(
     entrypoint: str,
     phase: str,
     receipt_sink_binding: dict[str, Any] | None = None,
-) -> PinnedGatekeeperDecision:
+    bounded_context: admission.bounded_g1b.BoundedG1BContext | None = None,
+) -> PinnedGatekeeperDecision | admission.bounded_g1b.BoundedG1BDecision:
     """Evaluate one candidate commit/push from an exact clean trusted source."""
+    if bounded_context is not None or admission.bounded_g1b.recognises_bounded_request(manifest):
+        return admission.bounded_g1b.evaluate_bounded_g1b_operation(
+            context=bounded_context, manifest=manifest, entrypoint=entrypoint, phase=phase,
+            target_root=target_repo_root, source_root=gatekeeper_root,
+        )
     source = gatekeeper_root.resolve()
     target = target_repo_root.resolve()
     reasons: list[str] = []
@@ -168,6 +174,7 @@ def evaluate_pinned_programme_operation(
         reasons.append("scope_phase_invalid")
 
     try:
+        admission.ensure_legacy_profile(target)
         gatekeeper_commit = admission._run_git(source, "rev-parse", "HEAD")
         gatekeeper_tree = admission._run_git(source, "rev-parse", "HEAD^{tree}")
         source_trusted_git_identity = admission.trusted_git.attest_repository(
@@ -1025,6 +1032,7 @@ def commit_exact_admitted_index(
     message: str,
 ) -> str:
     """Commit the exact admitted index tree and CAS-update only its task branch."""
+    _deny_bounded_execution(manifest, prior_decision)
 
     def revalidate(
         prior: PinnedGatekeeperDecision, target: Path
@@ -1473,6 +1481,12 @@ def _operation_services() -> _OperationServices:
     )
 
 
+def _deny_bounded_execution(manifest: object, decision: object = None) -> None:
+    if (admission.bounded_g1b.recognises_bounded_request(manifest)
+            or isinstance(decision, admission.bounded_g1b.BoundedG1BDecision)):
+        raise admission.ProgrammeAdmissionError("bounded_g1b_reviewed_publisher_required")
+
+
 def execute_exact_index_commit(
     *,
     gatekeeper_root: Path,
@@ -1482,6 +1496,7 @@ def execute_exact_index_commit(
     receipt_directory: Path,
 ) -> dict[str, Any]:
     """Reserve, commit the exact index tree, revalidate, and finalize evidence."""
+    _deny_bounded_execution(manifest)
     return _execute_exact_index_commit_core(
         gatekeeper_root=gatekeeper_root,
         target_repo_root=target_repo_root,
@@ -1574,6 +1589,7 @@ def execute_exact_sha_push(
     receipt_directory: Path,
 ) -> dict[str, Any]:
     """Reserve, push one exact SHA, revalidate, and finalize evidence."""
+    _deny_bounded_execution(manifest)
     return _execute_exact_sha_push_core(
         gatekeeper_root=gatekeeper_root,
         target_repo_root=target_repo_root,

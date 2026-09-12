@@ -21,7 +21,7 @@ from urllib.parse import urlsplit
 
 import yaml
 
-from orchestration_harness import trusted_git
+from orchestration_harness import bounded_g1b, trusted_git
 
 STATE_PATH = Path("orchestration/programme/current-state.json")
 GATES_PATH = Path("orchestration/programme/gates.yaml")
@@ -8932,6 +8932,9 @@ def _validate_precedence(
     }:
         raise ProgrammeAdmissionError("recovery_precedence_invalid")
     phase_token = (
+        bounded_g1b.NEW_PREAMBLE
+        if state["active_profile"] == bounded_g1b.PROFILE
+        else
         "Gate G1B.1 implementation is externally accepted; its closeout and G1B.2 transition enablement are review-pending, and G1B.2 remains closed."
         if state["active_profile"] == G1B1_CLOSEOUT_REVIEW_PENDING_PROFILE
         else (
@@ -9205,8 +9208,53 @@ class ProgrammePolicy:
     trusted_git_identity: dict[str, Any]
 
 
-def load_programme_policy(repo_root: Path) -> ProgrammePolicy:
+def ensure_legacy_profile(repo_root: Path) -> None:
+    """Inspect one ordinary state file before any legacy broad observation."""
+    try:
+        raw = trusted_git._read_regular_snapshot(repo_root / STATE_PATH, maximum_bytes=2 * 1024 * 1024)[1]
+        state = bounded_g1b._json(raw)
+        profile = state.get("active_profile")
+        legacy_profiles = {
+            G0_CONTROLLER_PROFILE, TRANSITION_PROFILE, G1A_ACTIVE_PROFILE,
+            SUBGATE_TRANSITION_PROFILE, G1A2_ACTIVE_PROFILE, G1A3_ENABLEMENT_PENDING_PROFILE,
+            G1A3_TRANSITION_PROFILE, G1A3_ACTIVE_PROFILE, G1A3_R0_REVIEW_PENDING_PROFILE,
+            G1A3_R0_TRANSITION_PROFILE, G1A3_R1_ACTIVE_PROFILE, G1A_CLOSEOUT_REVIEW_PENDING_PROFILE,
+            G1A_TO_G1B1_TRANSITION_PROFILE, G1B1_ACTIVE_PROFILE, G1B1_CLOSEOUT_REVIEW_PENDING_PROFILE,
+            G1B1_TO_G1B2_TRANSITION_PROFILE, G1B2_ACTIVE_PROFILE,
+        }
+        g1b = state.get("g1b", {})
+        selection = state.get("task_selection")
+        if (type(g1b) is not dict or type(selection) is not dict
+                or type(selection.get("allowed_task_kinds")) is not list):
+            raise ProgrammeAdmissionError("programme_state_missing_or_invalid")
+        if (profile == bounded_g1b.PROFILE or state.get("current_gate") == "G1B"
+                or "completion" in g1b or bounded_g1b.TASK_CLASS in selection["allowed_task_kinds"]):
+            raise ProgrammeAdmissionError("bounded_g1b_context_required")
+        if type(profile) is not str or profile not in legacy_profiles:
+            raise ProgrammeAdmissionError("programme_state_missing_or_invalid")
+        try:
+            (repo_root / bounded_g1b.SCOPE_PATH).lstat()
+        except FileNotFoundError:
+            pass
+        else:
+            raise ProgrammeAdmissionError("bounded_g1b_context_required")
+    except ProgrammeAdmissionError:
+        raise
+    except (trusted_git.TrustedGitError, bounded_g1b.BoundedG1BError) as error:
+        raise ProgrammeAdmissionError(error.reason_code) from error
+    except (OSError, ValueError, TypeError, RecursionError) as error:
+        raise ProgrammeAdmissionError("programme_state_missing_or_invalid") from error
+
+
+def load_programme_policy(
+    repo_root: Path, *, bounded_context: bounded_g1b.BoundedG1BContext | None = None,
+) -> ProgrammePolicy | bounded_g1b.BoundedG1BInputs:
     """Strictly load and cross-check all controlling recovery inputs."""
+    if bounded_context is not None:
+        if repo_root.absolute() != bounded_context.target_root.absolute():
+            raise ProgrammeAdmissionError("bounded_g1b_caller_target_mismatch")
+        return bounded_g1b.load_bounded_g1b_inputs(bounded_context)
+    ensure_legacy_profile(repo_root)
     root = repo_root.resolve()
     trusted_git_identity = attest_programme_authority(root)
     state = _strict_json(root / STATE_PATH)
@@ -10404,6 +10452,9 @@ def evaluate_programme_admission(
     entrypoint: str,
 ) -> ProgrammeDecision:
     """Return one structured, fail-closed decision for a gated entrypoint."""
+    if bounded_g1b.recognises_bounded_request(manifest):
+        return _decision(admitted=False, reasons=["bounded_g1b_explicit_operation_context_required"],
+                         policy=None, task_class=None)
     if entrypoint not in ENTRYPOINTS:
         return _decision(
             admitted=False, reasons=["entrypoint_unknown"], policy=None, task_class=None
@@ -12932,8 +12983,14 @@ def evaluate_programme_operation_admission(
     manifest: object | None,
     entrypoint: str,
     phase: str,
-) -> ScopeDecision:
+    bounded_context: bounded_g1b.BoundedG1BContext | None = None,
+) -> ScopeDecision | bounded_g1b.BoundedG1BDecision:
     """Fail closed unless governed combined operations use the pinned gatekeeper."""
+    if bounded_context is not None or bounded_g1b.recognises_bounded_request(manifest):
+        return bounded_g1b.evaluate_bounded_g1b_operation(
+            context=bounded_context, manifest=manifest, entrypoint=entrypoint, phase=phase,
+            target_root=repo_root,
+        )
     try:
         policy = load_programme_policy(repo_root)
     except ProgrammeAdmissionError as error:
@@ -13003,6 +13060,8 @@ def require_programme_operation_admission(
 ) -> ScopeDecision:
     """Raise unless the canonical combined commit/push decision is admitted."""
     manifest = strict_json_object(manifest_path) if manifest_path is not None else None
+    if bounded_g1b.recognises_bounded_request(manifest):
+        raise ProgrammeAdmissionError("bounded_g1b_reviewed_publisher_required")
     decision = evaluate_programme_operation_admission(
         repo_root=repo_root,
         manifest=manifest,

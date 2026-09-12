@@ -16,6 +16,7 @@ if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
 from orchestration_harness.programme_admission import (
+    bounded_g1b,
     G0_G08_ALLOWED_PATHS,
     G1B1_ACTIVE_PROFILE,
     G1B2_ACTIVE_PROFILE,
@@ -266,8 +267,15 @@ def build_task_manifest(
     repo_root: Path = REPO_ROOT,
     *,
     intended_effects: Iterable[str] | None = None,
+    bounded_context: bounded_g1b.BoundedG1BContext | None = None,
 ) -> dict[str, Any]:
     """Build the currently admitted typed task manifest without persisting a token."""
+    if bounded_context is not None:
+        if repo_root.absolute() != bounded_context.target_root.absolute():
+            raise PreflightError("bounded G1B target differs from caller")
+        if intended_effects is not None and list(intended_effects) != sorted(bounded_g1b.EFFECTS):
+            raise PreflightError("bounded G1B effect override rejected")
+        return bounded_g1b.build_bounded_g1b_manifest(bounded_context)
     root = repo_root.resolve()
     policy = load_programme_policy(root)
     active = policy.overlay["profiles"][policy.overlay["active_profile"]]
@@ -530,8 +538,15 @@ def build_report(
     task_manifest: object | None = None,
     phase: str = "development",
     entrypoint: str = "recovery_preflight",
+    *,
+    bounded_context: bounded_g1b.BoundedG1BContext | None = None,
 ) -> dict[str, Any]:
     """Build a deterministic report; no task label can substitute for a manifest."""
+    if bounded_context is not None or bounded_g1b.recognises_bounded_request(task_manifest):
+        return bounded_g1b.bounded_g1b_report(
+            context=bounded_context, manifest=task_manifest, entrypoint=entrypoint, phase=phase,
+            target_root=repo_root,
+        )
     root = repo_root.resolve()
     try:
         policy = load_programme_policy(root)
@@ -623,6 +638,10 @@ def main(argv: Iterable[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--repo-root", type=Path, default=REPO_ROOT)
     parser.add_argument("--task-manifest", type=Path)
+    parser.add_argument("--bounded-binding", type=Path)
+    parser.add_argument("--bounded-binding-sha256")
+    parser.add_argument("--bounded-evidence-root", type=Path)
+    parser.add_argument("--bounded-scratch-root", type=Path)
     parser.add_argument(
         "--phase",
         choices=("development", "pre-push", "post-push"),
@@ -641,11 +660,23 @@ def main(argv: Iterable[str] | None = None) -> int:
     parser.add_argument("--format", choices=("human", "json"), default="human")
     args = parser.parse_args(list(argv) if argv is not None else None)
     try:
+        bounded_values = (args.bounded_binding, args.bounded_binding_sha256,
+                          args.bounded_evidence_root, args.bounded_scratch_root)
+        context = None
+        if any(value is not None for value in bounded_values):
+            if not all(value is not None for value in bounded_values):
+                raise PreflightError("incomplete bounded G1B context")
+            context = bounded_g1b.BoundedG1BContext(
+                args.repo_root, REPO_ROOT, args.bounded_evidence_root,
+                args.bounded_scratch_root, args.bounded_binding, args.bounded_binding_sha256,
+            )
         manifest = (
             strict_json_object(args.task_manifest) if args.task_manifest else None
         )
-        report = build_report(args.repo_root, manifest, args.phase, args.entrypoint)
-    except (OSError, ProgrammeAdmissionError, PreflightError) as error:
+        if context is not None and manifest is None:
+            manifest = build_task_manifest(args.repo_root, bounded_context=context)
+        report = build_report(args.repo_root, manifest, args.phase, args.entrypoint, bounded_context=context)
+    except (OSError, ValueError, TypeError, RecursionError, ProgrammeAdmissionError, PreflightError) as error:
         reason = (
             error.reason_code
             if isinstance(error, ProgrammeAdmissionError)
@@ -666,7 +697,7 @@ def main(argv: Iterable[str] | None = None) -> int:
         if args.format == "json"
         else _render_human(report)
     )
-    return 0 if report["status"] == "passed" else 2
+    return 0 if report["status"] in {"passed", "policy_eligible"} else 2
 
 
 if __name__ == "__main__":
