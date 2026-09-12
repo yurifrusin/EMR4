@@ -1,12 +1,12 @@
 {
   "schema_version": "raisa-ariadne.programme-state.v2",
-  "observed_at": "2026-09-12T04:17:16.155902+00:00",
+  "observed_at": "2026-09-12T14:09:39.488210+00:00",
   "programme_name": "Raisa Medical Office and Ariadne Recovery & Convergence",
   "programme_mode": "recovery",
-  "current_gate": "G1B",
+  "current_gate": "G1C",
   "current_gate_status": "active",
-  "active_correction": "G1B",
-  "active_profile": "G1B_COMPLETION_ACTIVE",
+  "active_correction": "G1C",
+  "active_profile": "G1C_GOVERNOR_ACTIVE",
   "machine_authoritative": true,
   "feature_work_eligible": false,
   "product_work_eligible": false,
@@ -256,7 +256,7 @@
   "task_selection": {
     "autonomous_selection_enabled": false,
     "allowed_task_kinds": [
-      "g1b_persistence_recovery_lease_and_narrative"
+      "g1c_finite_budgets_and_progress_governor"
     ],
     "blocked_task_kinds": [
       "product_feature",
@@ -268,11 +268,11 @@
     ],
     "admission_command": "python scripts/raisa_ariadne_recovery_preflight.py --task-manifest <path> --phase development",
     "out_of_gate_result": "blocked",
-    "next_eligible_tranche": "G1B",
+    "next_eligible_tranche": "G1C",
     "next_eligible_now": true,
     "next_tranche_started": false,
     "next_tranche_admission_requires_state_transition": false,
-    "next_eligibility_condition": "bounded_G1B_completion_profile_active"
+    "next_eligibility_condition": "bounded_G1C_governor_profile_active"
   },
   "parallelism_efficacy": {
     "deepseek": {
@@ -675,7 +675,7 @@
     "next_action": "G1B_progression_only"
   },
   "g1b": {
-    "status": "active_completion",
+    "status": "passed",
     "transition_enablement_status": "external_review_passed",
     "state_transition_status": "complete",
     "state_transition": {
@@ -749,7 +749,7 @@
       }
     },
     "candidate_local_admission_authoritative": false,
-    "next_action": "g1b_persistence_recovery_lease_and_narrative",
+    "next_action": "G1C_governor_implementation",
     "provider_invocation_authorized": false,
     "integration_execution_authorized": false,
     "existing_clockwork_runtime_mutation_authorized": false,
@@ -764,6 +764,19 @@
         "status": "active",
         "completion_accepted": false
       }
+    },
+    "acceptance": {
+      "scope_path": "orchestration/programme/g1c-governor-scope.json",
+      "scope_sha256": "e37b0acd28dfa1c61bfded97f1b17844271dfdf4b75d631f81d8a30d4748ce88",
+      "accepted_component_commit": "9a1a2a44cfd7f083398671cc7a44d5f7c16c8d5a",
+      "criteria": [
+        "closed_state_machine_implemented",
+        "append_only_versioned_event_journal",
+        "invalid_transition_rejected",
+        "crash_recovery_deterministic",
+        "stale_lease_cannot_commit",
+        "narrative_generated_from_structured_state"
+      ]
     }
   },
   "g0_1_correction": {
@@ -865,5 +878,24 @@
     "reviewer_surface": "external_chatgpt_repository_review",
     "g1a_authorized": true,
     "next_action": "G1A_1_owner_accepted_G1A_2_transition_enablement_review_pending"
+  },
+  "g1c": {
+    "status": "active",
+    "scope_path": "orchestration/programme/g1c-governor-scope.json",
+    "scope_sha256": "e37b0acd28dfa1c61bfded97f1b17844271dfdf4b75d631f81d8a30d4748ce88",
+    "current_operation": {
+      "operation_id": "g1c-recovery-governor",
+      "profile": "G1C_GOVERNOR_ACTIVE",
+      "task_class": "g1c_finite_budgets_and_progress_governor",
+      "status": "active",
+      "completion_accepted": false,
+      "supersedes": {
+        "operation_id": "g1b-persistence-recovery-completion",
+        "scope_path": "orchestration/programme/g1b-completion-scope.json",
+        "scope_sha256": "023a9307fb4b02e44136cece07ad697f0cf6c952e82bbcc162a7b7c57eb4814d",
+        "historical_latch_preserved": true
+      }
+    },
+    "completion_accepted": false
   }
 }
