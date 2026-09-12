@@ -1,627 +1,634 @@
-schema_version: "raisa-ariadne.programme-gates.v1"
+schema_version: raisa-ariadne.programme-gates.v1
 programme:
-  name: "Raisa Medical Office and Ariadne Recovery & Convergence"
-  prepared_at: "2026-09-06T22:29:19+10:00"
-  repository: "yurifrusin/EMR4"
-  observed_public_master: "2e34bdad732fdab32fbf778280b3d3c70d66d602"
-  programme_mode: "recovery"
-  current_gate: "G1B.2"
-  current_gate_status: "active"
+  name: Raisa Medical Office and Ariadne Recovery & Convergence
+  prepared_at: '2026-09-12T04:17:16.155902+00:00'
+  repository: yurifrusin/EMR4
+  observed_public_master: 2e34bdad732fdab32fbf778280b3d3c70d66d602
+  programme_mode: recovery
+  current_gate: G1B
+  current_gate_status: active
   feature_work_eligible: false
-  clockwork_remote_visibility: "source_branch_aligned_with_origin"
-  clockwork_local_state: "preserved_exactly_at_03e6860394c39086ec1ffb3f2457acc5f7c8b5f9"
-  next_eligible_tranche: "G1B.2"
-
+  clockwork_remote_visibility: source_branch_aligned_with_origin
+  clockwork_local_state: preserved_exactly_at_03e6860394c39086ec1ffb3f2457acc5f7c8b5f9
+  next_eligible_tranche: G1B
 global_hard_stops:
-  - "critical_or_high_security_finding"
-  - "global_required_check_red_beyond_repair_budget"
-  - "destructive_or_ambiguous_migration"
-  - "clinical_safety_invariant_affected"
-  - "required_independent_verifier_unavailable"
-  - "no_measurable_progress"
-  - "retry_budget_exhausted"
-  - "cost_or_wall_clock_budget_exhausted"
-  - "work_in_progress_limit_exceeded"
-  - "stale_lease_receipt_base_or_worktree"
-  - "material_scope_expansion"
-  - "protected_ref_or_deployment_authority_missing"
-  - "programme_state_missing_or_invalid"
-
+- critical_or_high_security_finding
+- global_required_check_red_beyond_repair_budget
+- destructive_or_ambiguous_migration
+- clinical_safety_invariant_affected
+- required_independent_verifier_unavailable
+- no_measurable_progress
+- retry_budget_exhausted
+- cost_or_wall_clock_budget_exhausted
+- work_in_progress_limit_exceeded
+- stale_lease_receipt_base_or_worktree
+- material_scope_expansion
+- protected_ref_or_deployment_authority_missing
+- programme_state_missing_or_invalid
 protected_invariants:
   raisa:
-    - "no_implicit_patient_identity"
-    - "no_public_phi"
-    - "ai_candidate_not_authority"
-    - "actor_practice_role_purpose_resource_bound"
-    - "tenant_enforcement_application_and_database"
-    - "one_canonical_command_path"
-    - "concurrency_invariants_database_enforced"
-    - "projection_typed_versioned_provenance_and_freshness_bound"
-    - "stale_projection_cannot_authorize_action"
-    - "stable_accessible_fallback"
-    - "migration_preserves_data_without_separate_destructive_authority"
+  - no_implicit_patient_identity
+  - no_public_phi
+  - ai_candidate_not_authority
+  - actor_practice_role_purpose_resource_bound
+  - tenant_enforcement_application_and_database
+  - one_canonical_command_path
+  - concurrency_invariants_database_enforced
+  - projection_typed_versioned_provenance_and_freshness_bound
+  - stale_projection_cannot_authorize_action
+  - stable_accessible_fallback
+  - migration_preserves_data_without_separate_destructive_authority
   ariadne:
-    - "artifact_validity_separate_from_verdict_and_integration_authority"
-    - "negative_verdict_never_integrates"
-    - "one_canonical_verdict_parser"
-    - "global_red_suspends_feature_work"
-    - "finite_budgets_and_retries"
-    - "no_progress_stops"
-    - "independence_machine_verifiable"
-    - "structured_state_is_authoritative"
-    - "missing_policy_fails_closed"
-    - "worker_cannot_self_authorize_integration"
-
+  - artifact_validity_separate_from_verdict_and_integration_authority
+  - negative_verdict_never_integrates
+  - one_canonical_verdict_parser
+  - global_red_suspends_feature_work
+  - finite_budgets_and_retries
+  - no_progress_stops
+  - independence_machine_verifiable
+  - structured_state_is_authoritative
+  - missing_policy_fails_closed
+  - worker_cannot_self_authorize_integration
 gates:
-  - id: "G0"
-    name: "Preserve, Freeze and Establish Truth"
-    status: "passed"
-    prerequisites: []
-    programme_mode: "recovery"
-    allowed_work:
-      - "read_only_preflight"
-      - "local_state_preservation"
-      - "clockwork_discovery_and_snapshot"
-      - "branch_and_pr_inventory"
-      - "risk_register"
-      - "programme_state"
-      - "recovery_preflight"
-      - "fail_closed_recovery_mode"
-      - "deterministic_g0_tests"
-      - "independent_g0_review"
-      - "minimal_stop_ship_containment"
-    prohibited_work:
-      - "product_feature_development"
-      - "merge_to_master"
-      - "protected_ref_movement"
-      - "branch_deletion"
-      - "pr_closure"
-      - "public_pages_deploy"
-      - "production_deploy"
-      - "real_patient_data"
-      - "live_ai_identity_or_clinical_provider_call"
-      - "ariadne_extraction"
-    exit_checks:
-      - "local_work_preserved"
-      - "clockwork_state_classified"
-      - "authoritative_base_and_baton_recorded"
-      - "machine_authoritative_current_state_exists"
-      - "all_known_risks_owned_and_gated"
-      - "branch_pr_inventory_complete_or_reproducible"
-      - "out_of_gate_work_blocked"
-      - "independent_review_non_negative"
-    next_gate: "G0.7"
-
-  - id: "G0.1"
-    name: "Correct Gate Enforcement and Authority Precedence"
-    status: "superseded_revision_required"
-    prerequisites: ["G0_review_revision_required"]
-    programme_mode: "recovery"
-    allowed_work:
-      - "strict_programme_admission"
-      - "canonical_entrypoint_gate_enforcement"
-      - "committed_scope_and_remote_binding"
-      - "instruction_pointer_precedence"
-      - "historical_latch_replacement"
-      - "risk_evidence_correction"
-      - "adversarial_gate_tests"
-      - "review_pending_recovery_branch_publication"
-    prohibited_work:
-      - "g1a"
-      - "product_behavior_change"
-      - "dependency_change"
-      - "provider_call"
-      - "integration"
-      - "protected_ref_movement"
-      - "deployment_or_pages"
-      - "real_data"
-    exit_checks:
-      - "canonical_dispatch_fails_closed_in_g0"
-      - "all_gated_entrypoints_require_typed_manifest"
-      - "strict_cross_file_policy_validation"
-      - "committed_base_to_head_scope_is_allowlisted"
-      - "post_push_origin_matches_exact_candidate"
-      - "old_latch_cannot_resume"
-      - "candidate_state_is_review_pending"
-    next_gate: "G0.2"
-
-  - id: "G0.2"
-    name: "Repair Transition Seam, Rename-Safe Scope and Side-Effect Boundaries"
-    status: "superseded_revision_required"
-    prerequisites: ["G0_1_review_revision_required"]
-    programme_mode: "recovery"
-    allowed_work:
-      - "generic_state_only_gate_transition_seam"
-      - "rename_and_mode_safe_committed_scope"
-      - "side_effect_boundary_admission"
-      - "adversarial_git_scope_tests"
-      - "review_pending_recovery_branch_publication"
-    prohibited_work:
-      - "g1a"
-      - "product_behavior_change"
-      - "migration_change"
-      - "dependency_change"
-      - "provider_call"
-      - "integration"
-      - "protected_ref_movement"
-      - "deployment_or_pages"
-      - "real_data"
-    exit_checks:
-      - "g0_2_candidate_remains_fail_closed"
-      - "valid_synthetic_state_only_transition_is_admitted"
-      - "invalid_transition_bindings_are_rejected"
-      - "full_and_tranche_scope_are_rename_and_mode_safe"
-      - "direct_side_effect_runner_calls_recheck_admission"
-      - "post_push_origin_matches_exact_candidate"
-      - "candidate_state_is_review_pending"
-    next_gate: "external_G0_review"
-
-  - id: "G0.3"
-    name: "Activate an Operational G1A Transition Seam"
-    status: "superseded_revision_required"
-    prerequisites: ["G0_2_review_revision_required"]
-    programme_mode: "recovery"
-    allowed_work:
-      - "pre_reviewed_data_driven_gate_profiles"
-      - "operational_g0_to_g1a_state_transition"
-      - "canonical_combined_commit_push_admission"
-      - "semantic_delta_contract"
-      - "exact_g1a_scope_inventory"
-      - "adversarial_transition_tests"
-      - "review_pending_recovery_branch_publication"
-    prohibited_work:
-      - "g1a_implementation"
-      - "g1b"
-      - "product_behavior_change"
-      - "migration_change"
-      - "dependency_change"
-      - "provider_call"
-      - "integration"
-      - "protected_ref_movement"
-      - "deployment_or_pages"
-      - "real_data"
-    exit_checks:
-      - "g0_3_candidate_remains_fail_closed"
-      - "transition_lands_directly_in_operational_bounded_g1a"
-      - "transition_semantic_delta_is_exact"
-      - "transition_artifacts_are_persisted_and_digest_bound"
-      - "commit_and_push_use_one_combined_admission_decision"
-      - "g1a_scope_is_pre_reviewed_and_cannot_widen"
-      - "post_push_origin_matches_exact_candidate"
-      - "candidate_state_is_review_pending"
-    next_gate: "G0.4"
-
-  - id: "G0.4"
-    name: "Correct Operational G1A Scope and Install an Immutable Gatekeeper"
-    status: "superseded_revision_required"
-    prerequisites: ["G0_3_review_revision_required"]
-    programme_mode: "recovery"
-    allowed_work:
-      - "immutable_historical_review_binding"
-      - "cumulative_history_and_active_tranche_scope_separation"
-      - "exact_dynamic_transition_evidence_paths"
-      - "narrow_first_g1a_verdict_kernel_scope"
-      - "transition_pinned_clean_gatekeeper"
-      - "real_repository_lifecycle_tests"
-      - "review_pending_recovery_branch_publication"
-    prohibited_work:
-      - "g1a_implementation"
-      - "g1b"
-      - "product_behavior_change"
-      - "migration_change"
-      - "dependency_change"
-      - "provider_call"
-      - "integration"
-      - "protected_ref_movement"
-      - "deployment_or_pages"
-      - "real_data"
-    exit_checks:
-      - "all_retained_review_commit_tree_bindings_resolve"
-      - "historical_review_records_are_transition_immutable"
-      - "g1a_full_history_uses_only_the_cumulative_exact_allowlist"
-      - "g1a_tranche_uses_only_the_active_manifest_and_profile"
-      - "dynamic_transition_evidence_paths_are_exact"
-      - "ordinary_g1a_cannot_modify_its_reference_monitor"
-      - "combined_commit_and_push_require_the_clean_transition_pinned_gatekeeper"
-      - "real_transition_and_g1a_lifecycle_passes"
-      - "post_push_origin_matches_exact_candidate"
-      - "candidate_state_is_review_pending"
-    next_gate: "G0.5"
-
-  - id: "G0.5"
-    name: "Bind Decisive Review, Clean Target and G1A Subgates"
-    status: "superseded_revision_required"
-    prerequisites: ["G0_4_review_revision_required"]
-    programme_mode: "recovery"
-    allowed_work:
-      - "append_only_external_review_ledger"
-      - "explicit_decisive_review_pointer"
-      - "untracked_file_scope_inventory"
-      - "separate_clean_g1a_target_contract"
-      - "operation_binding_and_exact_push_contract"
-      - "g1a_subgate_scope_decomposition"
-      - "provider_symbol_immutability_contract"
-      - "adversarial_gatekeeper_lifecycle_tests"
-      - "review_pending_recovery_branch_publication"
-    prohibited_work:
-      - "g1a_implementation"
-      - "g1b"
-      - "product_behavior_change"
-      - "migration_change"
-      - "dependency_change"
-      - "provider_call"
-      - "integration"
-      - "protected_ref_movement"
-      - "deployment_or_pages"
-      - "real_data"
-    exit_checks:
-      - "exactly_one_decisive_external_review_resolves"
-      - "all_review_records_are_digest_bound_and_append_only"
-      - "legacy_untracked_worktree_is_rejected_as_g1a_target"
-      - "separate_clean_target_and_exact_untracked_additions_are_enforced"
-      - "commit_and_push_bind_head_index_changes_and_origin"
-      - "g0_transition_opens_only_g1a_1"
-      - "g1a_2_provider_execution_symbols_are_immutable"
-      - "g1a_3_integration_mutation_remains_deferred"
-      - "post_push_origin_matches_exact_candidate"
-      - "candidate_state_is_review_pending"
-    next_gate: "G0.6"
-
-  - id: "G0.6"
-    name: "Enforce Complete Cleanliness and Remote Identity"
-    status: "superseded_revision_required"
-    prerequisites: ["G0_5_review_revision_required"]
-    programme_mode: "recovery"
-    allowed_work:
-      - "append_only_external_review_ledger"
-      - "complete_untracked_and_ignored_filesystem_inventory"
-      - "isolated_no_bytecode_gatekeeper_bootstrap"
-      - "closed_production_and_synthetic_remote_identity"
-      - "canonical_exact_index_commit_operation"
-      - "canonical_exact_sha_push_operation"
-      - "durable_operation_receipts"
-      - "adversarial_gatekeeper_lifecycle_tests"
-      - "review_pending_recovery_branch_publication"
-    prohibited_work:
-      - "g1a_implementation"
-      - "g1b"
-      - "product_behavior_change"
-      - "migration_change"
-      - "dependency_change"
-      - "provider_call"
-      - "integration"
-      - "protected_ref_movement"
-      - "deployment_or_pages"
-      - "real_data"
-    exit_checks:
-      - "all_untracked_and_ignored_files_are_inventory_bound"
-      - "gitignore_info_exclude_and_global_excludes_cannot_hide_files"
-      - "gatekeeper_bootstrap_is_isolated_and_no_bytecode"
-      - "gatekeeper_source_and_pre_post_push_are_completely_clean"
-      - "production_remote_identity_is_exact_and_closed"
-      - "remote_rewrites_multiple_urls_and_drift_are_rejected"
-      - "canonical_commit_and_push_revalidate_and_emit_receipts"
-      - "push_and_readback_use_the_same_explicit_bound_destination"
-      - "post_push_origin_matches_exact_candidate"
-      - "candidate_state_is_review_pending"
-    next_gate: "G0.7"
-
-  - id: "G0.7"
-    name: "Bind Trusted Git and Close the Receipt Sink"
-    status: "superseded_revision_required"
-    prerequisites: ["G0_6_review_revision_required"]
-    programme_mode: "recovery"
-    allowed_work:
-      - "append_only_external_review_ledger"
-      - "stock_git_closed_environment_substrate"
-      - "physical_source_and_authority_byte_binding"
-      - "index_visibility_flag_rejection"
-      - "closed_external_receipt_directory"
-      - "exclusive_non_overwriting_receipt_reservation"
-      - "phase_aware_development_pre_push_post_push_verification"
-      - "review_pending_recovery_branch_publication"
-    prohibited_work:
-      - "g1a_implementation"
-      - "g1b"
-      - "product_behavior_change"
-      - "migration_change"
-      - "dependency_change"
-      - "provider_call"
-      - "integration"
-      - "protected_ref_movement"
-      - "deployment_or_pages"
-      - "real_data"
-    exit_checks:
-      - "all_git_observations_use_resolved_stock_git_and_closed_environment"
-      - "git_redirection_config_and_replace_inputs_fail_before_import"
-      - "assume_unchanged_skip_worktree_sparse_and_split_indexes_fail_closed"
-      - "controller_and_authority_bytes_match_bound_index_and_tree_objects"
-      - "receipt_directory_is_external_identity_stable_and_preexisting"
-      - "receipt_name_is_internal_exclusively_reserved_and_never_overwritten"
-      - "operation_result_remote_readback_and_protected_refs_revalidate"
-      - "focused_phase_aware_suite_is_green"
-      - "post_push_origin_matches_exact_candidate"
-      - "candidate_state_is_review_pending"
-    next_gate: "G0.8"
-
-  - id: "G0.8"
-    name: "Close Fsmonitor and Complete Pre-Import Source Attestation"
-    status: "external_review_passed"
-    prerequisites: ["G0_7_review_revision_required"]
-    programme_mode: "recovery"
-    allowed_work:
-      - "append_only_external_review_ledger"
-      - "command_level_fsmonitor_and_ignore_stat_disable"
-      - "repository_and_worktree_visibility_configuration_rejection"
-      - "fsmonitor_valid_index_entry_rejection"
-      - "complete_narrow_pre_import_source_attestation"
-      - "phase_aware_development_pre_push_post_push_verification"
-      - "review_pending_recovery_branch_publication"
-    prohibited_work:
-      - "g1a_implementation"
-      - "g1b"
-      - "product_behavior_change"
-      - "migration_change"
-      - "dependency_change"
-      - "provider_call"
-      - "integration"
-      - "protected_ref_movement"
-      - "deployment_or_pages"
-      - "real_data"
-    exit_checks:
-      - "all_trusted_git_processes_force_disable_fsmonitor_and_ignore_stat"
-      - "nonfalse_or_malformed_repository_and_worktree_visibility_config_fails_closed"
-      - "fsmonitor_valid_index_entries_fail_closed"
-      - "all_repository_local_import_sources_are_physically_attested_before_import"
-      - "source_and_target_identity_revalidate_before_and_after_mutation"
-      - "focused_phase_aware_suite_is_green"
-      - "post_push_origin_matches_exact_candidate"
-      - "candidate_state_is_review_pending"
-    next_gate: "external_G0_review"
-
-  - id: "G1A"
-    name: "Correct Verdict and Integration Semantics"
-    status: "passed"
-    prerequisites: ["G1A.1", "G1A.2", "G1A.3"]
-    programme_mode: "recovery"
-    exit_checks:
-      - "artifact_valid_review_verdict_integration_authorized_separate"
-      - "revision_required_never_returns_integration_success"
-      - "canonical_parser_only"
-      - "ambiguous_or_conflicting_markers_rejected"
-      - "verdict_bound_to_candidate_base_policy_and_evidence"
-      - "adversarial_regression_tests_pass"
-    next_gate: "G1B"
-
-  - id: "G1A.1"
-    name: "Canonical Verdict Kernel and Pure Acceptance Consumers"
-    status: "accepted_by_owner_with_residual_risk"
-    prerequisites: ["external_G0_review_pass_and_separate_gate_transition"]
-    programme_mode: "recovery"
-    exit_checks:
-      - "canonical_verdict_algebra_is_pure"
-      - "artifact_validity_review_verdict_and_integration_authority_are_separate"
-      - "negative_ambiguous_or_conflicting_verdict_never_authorizes_integration"
-      - "pure_consumers_delegate_to_the_canonical_parser"
-      - "provider_transport_and_integration_mutation_are_unchanged"
-    next_gate: "G1A.2"
-
-  - id: "G1A.2"
-    name: "Antigravity Provider Verdict Adapter"
-    status: "external_review_passed"
-    prerequisites: ["G1A.1_owner_accept_with_residual_risk", "G1A.2-E0_external_review_pass", "state_only_subgate_transition"]
-    programme_mode: "recovery"
-    exit_checks:
-      - "provider_launch_admission_worktree_and_receipt_safety_symbols_unchanged"
-      - "only_verdict_adapter_semantics_change"
-      - "provider_invocation_remains_closed"
-    next_gate: "G1A.3"
-
-  - id: "G1A.3"
-    name: "Complete Review-Byte Binding and Integration Consumer"
-    status: "implementation_external_review_passed"
-    prerequisites: ["G1A.2_external_review_pass", "G1A.3-E0_external_review_pass", "state_only_subgate_transition", "rejected_G1A.3_review_bound"]
-    programme_mode: "recovery"
-    exit_checks:
-      - "negative_verdict_cannot_reach_integration_mutation"
-      - "integration_authority_is_separately_typed_and_reviewed"
-      - "review_producer_and_integration_consumer_bind_the_complete_physical_tracked_tree"
-      - "future_R1_changes_only_the_exact_four_review_binding_paths"
-      - "future_R1_antigravity_mutation_is_run_worker_body_only_with_exact_provider_admission_first"
-      - "future_R1_integration_mutation_is_record_integration_body_only_with_exact_integration_admission_first"
-      - "integration_entrypoint_remains_closed_during_implementation"
-      - "protected_integration_remains_separately_authorized"
-    next_gate: "G1A"
-
-  - id: "G1B"
-    name: "Persisted Clockwork State Machine and Replay"
-    status: "active_subgate_G1B_2"
-    prerequisites: ["G1A"]
-    programme_mode: "recovery"
-    exit_checks:
-      - "closed_state_machine_implemented"
-      - "append_only_versioned_event_journal"
-      - "invalid_transition_rejected"
-      - "crash_recovery_deterministic"
-      - "stale_lease_cannot_commit"
-      - "narrative_generated_from_structured_state"
-    next_gate: "G1B.2"
-
-  - id: "G1B.1"
-    name: "Pure State Event and Reducer Kernel"
-    status: "passed"
-    prerequisites: ["external_G1A_closeout_G1B_transition_enablement_review_pass", "state_only_G1A_to_G1B1_transition"]
-    programme_mode: "recovery"
-    exit_checks:
-      - "closed_state_vocabulary"
-      - "closed_event_vocabulary"
-      - "closed_command_vocabulary"
-      - "pure_deterministic_transition_function"
-      - "invalid_transition_rejected"
-      - "canonical_deterministic_serialisation"
-      - "no_runtime_or_product_imports"
-    next_gate: "G1B.2"
-
-  - id: "G1B.2"
-    name: "Pure Versioned Journal and Deterministic Replay Kernel"
-    status: "active"
-    prerequisites: ["G1B.1_external_implementation_review_pass", "external_G1B1_closeout_G1B2_transition_enablement_review_pass", "state_only_G1B1_to_G1B2_transition"]
-    programme_mode: "recovery"
-    exit_checks:
-      - "versioned_journal_entry_vocabulary"
-      - "fixed_genesis_and_exact_previous_digest_chain"
-      - "canonical_entry_bytes_and_sha256_digest"
-      - "replay_rederives_every_result_with_accepted_G1B1_reducer"
-      - "closed_tamper_gap_reorder_mismatch_and_type_rejection"
-      - "pure_no_filesystem_git_process_network_database_clock_randomness_or_existing_clockwork_imports"
-    next_gate: "G1B"
-
-  - id: "G1C"
-    name: "Escapement, Governor and Global Objective"
-    status: "blocked_by_G1B"
-    prerequisites: ["G1B"]
-    programme_mode: "recovery"
-    exit_checks:
-      - "finite_retry_cost_token_and_wall_clock_budgets"
-      - "global_red_enters_repair_only_mode"
-      - "no_progress_stops_or_quarantines"
-      - "wip_and_stack_limits_enforced"
-      - "high_risk_human_authority_enforced"
-      - "structured_stop_reason"
-    next_gate: "G1D"
-
-  - id: "G1D"
-    name: "Independent Verification and Provenance"
-    status: "blocked_by_G1C"
-    prerequisites: ["G1C"]
-    programme_mode: "recovery"
-    exit_checks:
-      - "execution_and_context_provenance_machine_checkable"
-      - "generating_worker_not_sole_verifier"
-      - "declared_unproven_independence_rejected"
-      - "risk_tiered_independent_verification"
-    next_gate: "G1E"
-
-  - id: "G1E"
-    name: "Configuration Integrity and Core Boundaries"
-    status: "blocked_by_G1D"
-    prerequisites: ["G1D"]
-    programme_mode: "recovery"
-    exit_checks:
-      - "all_referenced_policy_files_exist_and_validate"
-      - "duplicated_authority_logic_removed"
-      - "ariadne_core_interface_defined"
-      - "raisa_specific_policy_behind_adapter"
-      - "chaos_and_compatibility_tests_pass"
-    next_gate: "G2"
-
-  - id: "G2"
-    name: "Trustworthy Trunk and Stop-Ship Remediation"
-    status: "blocked_by_G1"
-    prerequisites: ["G1E"]
-    programme_mode: "recovery"
-    exit_checks:
-      - "repository_wide_collection_and_tests_pass"
-      - "required_application_migration_and_safety_ci"
-      - "dependency_audit_pass_or_explicit_exception"
-      - "destructive_migration_removed"
-      - "empty_and_populated_alembic_paths_pass"
-      - "no_public_audio_or_phi_path"
-      - "no_implicit_patient"
-      - "cross_tenant_tests_application_and_database_pass"
-      - "appointment_concurrency_database_enforced"
-      - "ai_outputs_draft_until_human_attestation"
-      - "production_profile_excludes_dev_hosts_and_browser_bearer_storage"
-      - "no_unresolved_critical_or_high_stop_ship_risk"
-    next_gate: "G3"
-
-  - id: "G3"
-    name: "Projection-Native Constitutional Architecture"
-    status: "blocked_by_G2"
-    prerequisites: ["G2"]
-    programme_mode: "convergence"
-    exit_checks:
-      - "versioned_intent_command_event_and_projection_schemas"
-      - "constrained_projection_grammar"
-      - "risk_and_confirmation_contract"
-      - "provider_free_validated_read_only_projection"
-      - "invalid_stale_overprivileged_and_inaccessible_projections_rejected"
-      - "stable_fallback_renders_same_semantics"
-    next_gate: "G4"
-
-  - id: "G4"
-    name: "Safe Appointment and Diary Vertical"
-    status: "blocked_by_G3"
-    prerequisites: ["G3"]
-    programme_mode: "convergence"
-    exit_checks:
-      - "authored_synthetic_end_to_end_journey"
-      - "database_prevents_double_booking"
-      - "stale_projection_cannot_mutate"
-      - "tenant_safe_attributable_actions"
-      - "two_surfaces_semantically_equivalent"
-      - "ai_disabled_fallback_usable"
-      - "global_gates_green"
-    next_gate: "G5"
-
-  - id: "G5"
-    name: "Projection Runtime and Multimodal Adapters"
-    status: "blocked_by_G4"
-    prerequisites: ["G4"]
-    programme_mode: "convergence"
-    exit_checks:
-      - "two_input_modalities"
-      - "two_presentation_surfaces"
-      - "grammar_cannot_express_unauthorised_capability"
-      - "revoked_or_stale_action_binding_rejected"
-      - "accessibility_and_privacy_tests_pass"
-      - "deterministic_fallback_usable"
-    next_gate: "G6"
-
-  - id: "G6"
-    name: "Clinician-Controlled Encounter and Document Intelligence"
-    status: "blocked_by_G5"
-    prerequisites: ["G5"]
-    programme_mode: "convergence"
-    exit_checks:
-      - "explicit_patient_and_clinician"
-      - "private_bounded_audio_lifecycle"
-      - "ai_cannot_finalise_diagnosis_prescription_or_claim"
-      - "clinician_attestation_and_edit_provenance"
-      - "failure_and_deletion_cleanup"
-      - "synthetic_end_to_end_encounter"
-      - "global_gates_green"
-    next_gate: "G7"
-
-  - id: "G7"
-    name: "Operational Clinical-Safety and Regulatory Readiness"
-    status: "blocked_by_G6"
-    prerequisites: ["G6"]
-    programme_mode: "pilot_preparation"
-    exit_checks:
-      - "independent_security_assessment"
-      - "backup_restore_and_disaster_recovery_rehearsal"
-      - "privacy_impact_assessment"
-      - "intended_purpose_and_regulatory_classification"
-      - "clinical_hazard_log_and_safety_case"
-      - "production_identity_and_infrastructure_reproducible"
-      - "pilot_scope_and_rollback_approved"
-      - "no_unresolved_critical_or_high_risk"
-    next_gate: "G8"
-
-  - id: "G8"
-    name: "Ariadne Extraction"
-    status: "blocked_by_G7"
-    prerequisites: ["G7"]
-    programme_mode: "convergence"
-    exit_checks:
-      - "core_has_no_raisa_assumptions"
-      - "versioned_public_api_and_schemas"
-      - "deterministic_replay_and_chaos_tests"
-      - "used_on_two_unrelated_repositories"
-      - "benchmarked_against_simpler_orchestration"
-      - "documentation_threat_model_security_and_license"
-      - "name_and_trademark_search"
-      - "raisa_consumes_versioned_package"
-      - "no_diverging_copy"
-    next_gate: null
+- id: G0
+  name: Preserve, Freeze and Establish Truth
+  status: passed
+  prerequisites: []
+  programme_mode: recovery
+  allowed_work:
+  - read_only_preflight
+  - local_state_preservation
+  - clockwork_discovery_and_snapshot
+  - branch_and_pr_inventory
+  - risk_register
+  - programme_state
+  - recovery_preflight
+  - fail_closed_recovery_mode
+  - deterministic_g0_tests
+  - independent_g0_review
+  - minimal_stop_ship_containment
+  prohibited_work:
+  - product_feature_development
+  - merge_to_master
+  - protected_ref_movement
+  - branch_deletion
+  - pr_closure
+  - public_pages_deploy
+  - production_deploy
+  - real_patient_data
+  - live_ai_identity_or_clinical_provider_call
+  - ariadne_extraction
+  exit_checks:
+  - local_work_preserved
+  - clockwork_state_classified
+  - authoritative_base_and_baton_recorded
+  - machine_authoritative_current_state_exists
+  - all_known_risks_owned_and_gated
+  - branch_pr_inventory_complete_or_reproducible
+  - out_of_gate_work_blocked
+  - independent_review_non_negative
+  next_gate: G0.7
+- id: G0.1
+  name: Correct Gate Enforcement and Authority Precedence
+  status: superseded_revision_required
+  prerequisites:
+  - G0_review_revision_required
+  programme_mode: recovery
+  allowed_work:
+  - strict_programme_admission
+  - canonical_entrypoint_gate_enforcement
+  - committed_scope_and_remote_binding
+  - instruction_pointer_precedence
+  - historical_latch_replacement
+  - risk_evidence_correction
+  - adversarial_gate_tests
+  - review_pending_recovery_branch_publication
+  prohibited_work:
+  - g1a
+  - product_behavior_change
+  - dependency_change
+  - provider_call
+  - integration
+  - protected_ref_movement
+  - deployment_or_pages
+  - real_data
+  exit_checks:
+  - canonical_dispatch_fails_closed_in_g0
+  - all_gated_entrypoints_require_typed_manifest
+  - strict_cross_file_policy_validation
+  - committed_base_to_head_scope_is_allowlisted
+  - post_push_origin_matches_exact_candidate
+  - old_latch_cannot_resume
+  - candidate_state_is_review_pending
+  next_gate: G0.2
+- id: G0.2
+  name: Repair Transition Seam, Rename-Safe Scope and Side-Effect Boundaries
+  status: superseded_revision_required
+  prerequisites:
+  - G0_1_review_revision_required
+  programme_mode: recovery
+  allowed_work:
+  - generic_state_only_gate_transition_seam
+  - rename_and_mode_safe_committed_scope
+  - side_effect_boundary_admission
+  - adversarial_git_scope_tests
+  - review_pending_recovery_branch_publication
+  prohibited_work:
+  - g1a
+  - product_behavior_change
+  - migration_change
+  - dependency_change
+  - provider_call
+  - integration
+  - protected_ref_movement
+  - deployment_or_pages
+  - real_data
+  exit_checks:
+  - g0_2_candidate_remains_fail_closed
+  - valid_synthetic_state_only_transition_is_admitted
+  - invalid_transition_bindings_are_rejected
+  - full_and_tranche_scope_are_rename_and_mode_safe
+  - direct_side_effect_runner_calls_recheck_admission
+  - post_push_origin_matches_exact_candidate
+  - candidate_state_is_review_pending
+  next_gate: external_G0_review
+- id: G0.3
+  name: Activate an Operational G1A Transition Seam
+  status: superseded_revision_required
+  prerequisites:
+  - G0_2_review_revision_required
+  programme_mode: recovery
+  allowed_work:
+  - pre_reviewed_data_driven_gate_profiles
+  - operational_g0_to_g1a_state_transition
+  - canonical_combined_commit_push_admission
+  - semantic_delta_contract
+  - exact_g1a_scope_inventory
+  - adversarial_transition_tests
+  - review_pending_recovery_branch_publication
+  prohibited_work:
+  - g1a_implementation
+  - g1b
+  - product_behavior_change
+  - migration_change
+  - dependency_change
+  - provider_call
+  - integration
+  - protected_ref_movement
+  - deployment_or_pages
+  - real_data
+  exit_checks:
+  - g0_3_candidate_remains_fail_closed
+  - transition_lands_directly_in_operational_bounded_g1a
+  - transition_semantic_delta_is_exact
+  - transition_artifacts_are_persisted_and_digest_bound
+  - commit_and_push_use_one_combined_admission_decision
+  - g1a_scope_is_pre_reviewed_and_cannot_widen
+  - post_push_origin_matches_exact_candidate
+  - candidate_state_is_review_pending
+  next_gate: G0.4
+- id: G0.4
+  name: Correct Operational G1A Scope and Install an Immutable Gatekeeper
+  status: superseded_revision_required
+  prerequisites:
+  - G0_3_review_revision_required
+  programme_mode: recovery
+  allowed_work:
+  - immutable_historical_review_binding
+  - cumulative_history_and_active_tranche_scope_separation
+  - exact_dynamic_transition_evidence_paths
+  - narrow_first_g1a_verdict_kernel_scope
+  - transition_pinned_clean_gatekeeper
+  - real_repository_lifecycle_tests
+  - review_pending_recovery_branch_publication
+  prohibited_work:
+  - g1a_implementation
+  - g1b
+  - product_behavior_change
+  - migration_change
+  - dependency_change
+  - provider_call
+  - integration
+  - protected_ref_movement
+  - deployment_or_pages
+  - real_data
+  exit_checks:
+  - all_retained_review_commit_tree_bindings_resolve
+  - historical_review_records_are_transition_immutable
+  - g1a_full_history_uses_only_the_cumulative_exact_allowlist
+  - g1a_tranche_uses_only_the_active_manifest_and_profile
+  - dynamic_transition_evidence_paths_are_exact
+  - ordinary_g1a_cannot_modify_its_reference_monitor
+  - combined_commit_and_push_require_the_clean_transition_pinned_gatekeeper
+  - real_transition_and_g1a_lifecycle_passes
+  - post_push_origin_matches_exact_candidate
+  - candidate_state_is_review_pending
+  next_gate: G0.5
+- id: G0.5
+  name: Bind Decisive Review, Clean Target and G1A Subgates
+  status: superseded_revision_required
+  prerequisites:
+  - G0_4_review_revision_required
+  programme_mode: recovery
+  allowed_work:
+  - append_only_external_review_ledger
+  - explicit_decisive_review_pointer
+  - untracked_file_scope_inventory
+  - separate_clean_g1a_target_contract
+  - operation_binding_and_exact_push_contract
+  - g1a_subgate_scope_decomposition
+  - provider_symbol_immutability_contract
+  - adversarial_gatekeeper_lifecycle_tests
+  - review_pending_recovery_branch_publication
+  prohibited_work:
+  - g1a_implementation
+  - g1b
+  - product_behavior_change
+  - migration_change
+  - dependency_change
+  - provider_call
+  - integration
+  - protected_ref_movement
+  - deployment_or_pages
+  - real_data
+  exit_checks:
+  - exactly_one_decisive_external_review_resolves
+  - all_review_records_are_digest_bound_and_append_only
+  - legacy_untracked_worktree_is_rejected_as_g1a_target
+  - separate_clean_target_and_exact_untracked_additions_are_enforced
+  - commit_and_push_bind_head_index_changes_and_origin
+  - g0_transition_opens_only_g1a_1
+  - g1a_2_provider_execution_symbols_are_immutable
+  - g1a_3_integration_mutation_remains_deferred
+  - post_push_origin_matches_exact_candidate
+  - candidate_state_is_review_pending
+  next_gate: G0.6
+- id: G0.6
+  name: Enforce Complete Cleanliness and Remote Identity
+  status: superseded_revision_required
+  prerequisites:
+  - G0_5_review_revision_required
+  programme_mode: recovery
+  allowed_work:
+  - append_only_external_review_ledger
+  - complete_untracked_and_ignored_filesystem_inventory
+  - isolated_no_bytecode_gatekeeper_bootstrap
+  - closed_production_and_synthetic_remote_identity
+  - canonical_exact_index_commit_operation
+  - canonical_exact_sha_push_operation
+  - durable_operation_receipts
+  - adversarial_gatekeeper_lifecycle_tests
+  - review_pending_recovery_branch_publication
+  prohibited_work:
+  - g1a_implementation
+  - g1b
+  - product_behavior_change
+  - migration_change
+  - dependency_change
+  - provider_call
+  - integration
+  - protected_ref_movement
+  - deployment_or_pages
+  - real_data
+  exit_checks:
+  - all_untracked_and_ignored_files_are_inventory_bound
+  - gitignore_info_exclude_and_global_excludes_cannot_hide_files
+  - gatekeeper_bootstrap_is_isolated_and_no_bytecode
+  - gatekeeper_source_and_pre_post_push_are_completely_clean
+  - production_remote_identity_is_exact_and_closed
+  - remote_rewrites_multiple_urls_and_drift_are_rejected
+  - canonical_commit_and_push_revalidate_and_emit_receipts
+  - push_and_readback_use_the_same_explicit_bound_destination
+  - post_push_origin_matches_exact_candidate
+  - candidate_state_is_review_pending
+  next_gate: G0.7
+- id: G0.7
+  name: Bind Trusted Git and Close the Receipt Sink
+  status: superseded_revision_required
+  prerequisites:
+  - G0_6_review_revision_required
+  programme_mode: recovery
+  allowed_work:
+  - append_only_external_review_ledger
+  - stock_git_closed_environment_substrate
+  - physical_source_and_authority_byte_binding
+  - index_visibility_flag_rejection
+  - closed_external_receipt_directory
+  - exclusive_non_overwriting_receipt_reservation
+  - phase_aware_development_pre_push_post_push_verification
+  - review_pending_recovery_branch_publication
+  prohibited_work:
+  - g1a_implementation
+  - g1b
+  - product_behavior_change
+  - migration_change
+  - dependency_change
+  - provider_call
+  - integration
+  - protected_ref_movement
+  - deployment_or_pages
+  - real_data
+  exit_checks:
+  - all_git_observations_use_resolved_stock_git_and_closed_environment
+  - git_redirection_config_and_replace_inputs_fail_before_import
+  - assume_unchanged_skip_worktree_sparse_and_split_indexes_fail_closed
+  - controller_and_authority_bytes_match_bound_index_and_tree_objects
+  - receipt_directory_is_external_identity_stable_and_preexisting
+  - receipt_name_is_internal_exclusively_reserved_and_never_overwritten
+  - operation_result_remote_readback_and_protected_refs_revalidate
+  - focused_phase_aware_suite_is_green
+  - post_push_origin_matches_exact_candidate
+  - candidate_state_is_review_pending
+  next_gate: G0.8
+- id: G0.8
+  name: Close Fsmonitor and Complete Pre-Import Source Attestation
+  status: external_review_passed
+  prerequisites:
+  - G0_7_review_revision_required
+  programme_mode: recovery
+  allowed_work:
+  - append_only_external_review_ledger
+  - command_level_fsmonitor_and_ignore_stat_disable
+  - repository_and_worktree_visibility_configuration_rejection
+  - fsmonitor_valid_index_entry_rejection
+  - complete_narrow_pre_import_source_attestation
+  - phase_aware_development_pre_push_post_push_verification
+  - review_pending_recovery_branch_publication
+  prohibited_work:
+  - g1a_implementation
+  - g1b
+  - product_behavior_change
+  - migration_change
+  - dependency_change
+  - provider_call
+  - integration
+  - protected_ref_movement
+  - deployment_or_pages
+  - real_data
+  exit_checks:
+  - all_trusted_git_processes_force_disable_fsmonitor_and_ignore_stat
+  - nonfalse_or_malformed_repository_and_worktree_visibility_config_fails_closed
+  - fsmonitor_valid_index_entries_fail_closed
+  - all_repository_local_import_sources_are_physically_attested_before_import
+  - source_and_target_identity_revalidate_before_and_after_mutation
+  - focused_phase_aware_suite_is_green
+  - post_push_origin_matches_exact_candidate
+  - candidate_state_is_review_pending
+  next_gate: external_G0_review
+- id: G1A
+  name: Correct Verdict and Integration Semantics
+  status: passed
+  prerequisites:
+  - G1A.1
+  - G1A.2
+  - G1A.3
+  programme_mode: recovery
+  exit_checks:
+  - artifact_valid_review_verdict_integration_authorized_separate
+  - revision_required_never_returns_integration_success
+  - canonical_parser_only
+  - ambiguous_or_conflicting_markers_rejected
+  - verdict_bound_to_candidate_base_policy_and_evidence
+  - adversarial_regression_tests_pass
+  next_gate: G1B
+- id: G1A.1
+  name: Canonical Verdict Kernel and Pure Acceptance Consumers
+  status: accepted_by_owner_with_residual_risk
+  prerequisites:
+  - external_G0_review_pass_and_separate_gate_transition
+  programme_mode: recovery
+  exit_checks:
+  - canonical_verdict_algebra_is_pure
+  - artifact_validity_review_verdict_and_integration_authority_are_separate
+  - negative_ambiguous_or_conflicting_verdict_never_authorizes_integration
+  - pure_consumers_delegate_to_the_canonical_parser
+  - provider_transport_and_integration_mutation_are_unchanged
+  next_gate: G1A.2
+- id: G1A.2
+  name: Antigravity Provider Verdict Adapter
+  status: external_review_passed
+  prerequisites:
+  - G1A.1_owner_accept_with_residual_risk
+  - G1A.2-E0_external_review_pass
+  - state_only_subgate_transition
+  programme_mode: recovery
+  exit_checks:
+  - provider_launch_admission_worktree_and_receipt_safety_symbols_unchanged
+  - only_verdict_adapter_semantics_change
+  - provider_invocation_remains_closed
+  next_gate: G1A.3
+- id: G1A.3
+  name: Complete Review-Byte Binding and Integration Consumer
+  status: implementation_external_review_passed
+  prerequisites:
+  - G1A.2_external_review_pass
+  - G1A.3-E0_external_review_pass
+  - state_only_subgate_transition
+  - rejected_G1A.3_review_bound
+  programme_mode: recovery
+  exit_checks:
+  - negative_verdict_cannot_reach_integration_mutation
+  - integration_authority_is_separately_typed_and_reviewed
+  - review_producer_and_integration_consumer_bind_the_complete_physical_tracked_tree
+  - future_R1_changes_only_the_exact_four_review_binding_paths
+  - future_R1_antigravity_mutation_is_run_worker_body_only_with_exact_provider_admission_first
+  - future_R1_integration_mutation_is_record_integration_body_only_with_exact_integration_admission_first
+  - integration_entrypoint_remains_closed_during_implementation
+  - protected_integration_remains_separately_authorized
+  next_gate: G1A
+- id: G1B
+  name: Persisted Clockwork State Machine and Replay
+  status: active_completion
+  prerequisites:
+  - G1A
+  programme_mode: recovery
+  exit_checks:
+  - closed_state_machine_implemented
+  - append_only_versioned_event_journal
+  - invalid_transition_rejected
+  - crash_recovery_deterministic
+  - stale_lease_cannot_commit
+  - narrative_generated_from_structured_state
+  next_gate: G1C
+- id: G1B.1
+  name: Pure State Event and Reducer Kernel
+  status: passed
+  prerequisites:
+  - external_G1A_closeout_G1B_transition_enablement_review_pass
+  - state_only_G1A_to_G1B1_transition
+  programme_mode: recovery
+  exit_checks:
+  - closed_state_vocabulary
+  - closed_event_vocabulary
+  - closed_command_vocabulary
+  - pure_deterministic_transition_function
+  - invalid_transition_rejected
+  - canonical_deterministic_serialisation
+  - no_runtime_or_product_imports
+  next_gate: G1B.2
+- id: G1B.2
+  name: Pure Versioned Journal and Deterministic Replay Kernel
+  status: passed
+  prerequisites:
+  - G1B.1_external_implementation_review_pass
+  - external_G1B1_closeout_G1B2_transition_enablement_review_pass
+  - state_only_G1B1_to_G1B2_transition
+  programme_mode: recovery
+  exit_checks:
+  - versioned_journal_entry_vocabulary
+  - fixed_genesis_and_exact_previous_digest_chain
+  - canonical_entry_bytes_and_sha256_digest
+  - replay_rederives_every_result_with_accepted_G1B1_reducer
+  - closed_tamper_gap_reorder_mismatch_and_type_rejection
+  - pure_no_filesystem_git_process_network_database_clock_randomness_or_existing_clockwork_imports
+  next_gate: G1B
+- id: G1C
+  name: Escapement, Governor and Global Objective
+  status: blocked_by_G1B
+  prerequisites:
+  - G1B
+  programme_mode: recovery
+  exit_checks:
+  - finite_retry_cost_token_and_wall_clock_budgets
+  - global_red_enters_repair_only_mode
+  - no_progress_stops_or_quarantines
+  - wip_and_stack_limits_enforced
+  - high_risk_human_authority_enforced
+  - structured_stop_reason
+  next_gate: G1D
+- id: G1D
+  name: Independent Verification and Provenance
+  status: blocked_by_G1C
+  prerequisites:
+  - G1C
+  programme_mode: recovery
+  exit_checks:
+  - execution_and_context_provenance_machine_checkable
+  - generating_worker_not_sole_verifier
+  - declared_unproven_independence_rejected
+  - risk_tiered_independent_verification
+  next_gate: G1E
+- id: G1E
+  name: Configuration Integrity and Core Boundaries
+  status: blocked_by_G1D
+  prerequisites:
+  - G1D
+  programme_mode: recovery
+  exit_checks:
+  - all_referenced_policy_files_exist_and_validate
+  - duplicated_authority_logic_removed
+  - ariadne_core_interface_defined
+  - raisa_specific_policy_behind_adapter
+  - chaos_and_compatibility_tests_pass
+  next_gate: G2
+- id: G2
+  name: Trustworthy Trunk and Stop-Ship Remediation
+  status: blocked_by_G1
+  prerequisites:
+  - G1E
+  programme_mode: recovery
+  exit_checks:
+  - repository_wide_collection_and_tests_pass
+  - required_application_migration_and_safety_ci
+  - dependency_audit_pass_or_explicit_exception
+  - destructive_migration_removed
+  - empty_and_populated_alembic_paths_pass
+  - no_public_audio_or_phi_path
+  - no_implicit_patient
+  - cross_tenant_tests_application_and_database_pass
+  - appointment_concurrency_database_enforced
+  - ai_outputs_draft_until_human_attestation
+  - production_profile_excludes_dev_hosts_and_browser_bearer_storage
+  - no_unresolved_critical_or_high_stop_ship_risk
+  next_gate: G3
+- id: G3
+  name: Projection-Native Constitutional Architecture
+  status: blocked_by_G2
+  prerequisites:
+  - G2
+  programme_mode: convergence
+  exit_checks:
+  - versioned_intent_command_event_and_projection_schemas
+  - constrained_projection_grammar
+  - risk_and_confirmation_contract
+  - provider_free_validated_read_only_projection
+  - invalid_stale_overprivileged_and_inaccessible_projections_rejected
+  - stable_fallback_renders_same_semantics
+  next_gate: G4
+- id: G4
+  name: Safe Appointment and Diary Vertical
+  status: blocked_by_G3
+  prerequisites:
+  - G3
+  programme_mode: convergence
+  exit_checks:
+  - authored_synthetic_end_to_end_journey
+  - database_prevents_double_booking
+  - stale_projection_cannot_mutate
+  - tenant_safe_attributable_actions
+  - two_surfaces_semantically_equivalent
+  - ai_disabled_fallback_usable
+  - global_gates_green
+  next_gate: G5
+- id: G5
+  name: Projection Runtime and Multimodal Adapters
+  status: blocked_by_G4
+  prerequisites:
+  - G4
+  programme_mode: convergence
+  exit_checks:
+  - two_input_modalities
+  - two_presentation_surfaces
+  - grammar_cannot_express_unauthorised_capability
+  - revoked_or_stale_action_binding_rejected
+  - accessibility_and_privacy_tests_pass
+  - deterministic_fallback_usable
+  next_gate: G6
+- id: G6
+  name: Clinician-Controlled Encounter and Document Intelligence
+  status: blocked_by_G5
+  prerequisites:
+  - G5
+  programme_mode: convergence
+  exit_checks:
+  - explicit_patient_and_clinician
+  - private_bounded_audio_lifecycle
+  - ai_cannot_finalise_diagnosis_prescription_or_claim
+  - clinician_attestation_and_edit_provenance
+  - failure_and_deletion_cleanup
+  - synthetic_end_to_end_encounter
+  - global_gates_green
+  next_gate: G7
+- id: G7
+  name: Operational Clinical-Safety and Regulatory Readiness
+  status: blocked_by_G6
+  prerequisites:
+  - G6
+  programme_mode: pilot_preparation
+  exit_checks:
+  - independent_security_assessment
+  - backup_restore_and_disaster_recovery_rehearsal
+  - privacy_impact_assessment
+  - intended_purpose_and_regulatory_classification
+  - clinical_hazard_log_and_safety_case
+  - production_identity_and_infrastructure_reproducible
+  - pilot_scope_and_rollback_approved
+  - no_unresolved_critical_or_high_risk
+  next_gate: G8
+- id: G8
+  name: Ariadne Extraction
+  status: blocked_by_G7
+  prerequisites:
+  - G7
+  programme_mode: convergence
+  exit_checks:
+  - core_has_no_raisa_assumptions
+  - versioned_public_api_and_schemas
+  - deterministic_replay_and_chaos_tests
+  - used_on_two_unrelated_repositories
+  - benchmarked_against_simpler_orchestration
+  - documentation_threat_model_security_and_license
+  - name_and_trademark_search
+  - raisa_consumes_versioned_package
+  - no_diverging_copy
+  next_gate: null
