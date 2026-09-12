@@ -1,12 +1,12 @@
 # Raisa recovery execution plan
 
 Date: 2026-09-12
-Timestamp: 2026-09-12T07:58:12.358357+10:00
+Timestamp: 2026-09-12T11:23:24.602402+10:00
 Status: current execution plan within the existing recovery programme; not a new gate authority
 
 ## Outcome and current foundation
 
-Restore confidence in controller behaviour and the repository, then consolidate Ariadne-Graph-Compass-Clockwork and resume Raisa's projection-native architecture and feature work. Measure recovery by integrated repairs, resolved failure causes and accepted gate criteria.
+Restore confidence in controller behaviour and the repository, then consolidate Ariadne-Graph-Compass-Clockwork and resume Raisa's projection-native architecture and feature work. Measure recovery by integrated repairs, verified current controls and accepted gate criteria.
 
 The cumulative-history admission defect is repaired at `d512399aa52fdc1d43b68e3e5117d3142037671d`. Its legitimate G1B.1-to-G1B.2 records remain preserved. The journal was published at `723e42fc70841b0e8ceed7fd5a2f63e0eecd573e`; the historical state-test repair at `f127ec9e14b5ac1966e50cfba1d1285527a2e759`. The integrated preflight fixture repair is published at `07e65e4e49cc3e7f954f33030ed6d64fd050adaf`. Fresh readback verified its parent `f127ec9e14b5ac1966e50cfba1d1285527a2e759`, exact tree and recovery remote; protected refs remained unchanged.
 
@@ -21,17 +21,17 @@ The historical state repair preserves the earlier 25 assertions against a pinned
 
 ## Immediate sequence
 
-1. Integrate and publish this concise handover/plan reconciliation after review and focused checks. Preserve the complete predecessor and align the existing live-handover contract test with current authority. Do not alter programme state, gate criteria or frozen historical receipts in this batch.
-2. Recover the existing 33-row failure matrix through permitted ordinary evidence. Add dispositions for the named integrated repairs, retaining the archived run unchanged. Do not invent a new current total by subtraction.
-3. Repair remaining failures in shared-cause batches, beginning with known fixture dependencies and the unexplained trusted-Git observation. Use existing isolated proofs as inputs to integrated repairs. Preserve positive baselines, intended invariants and exact negative reasons.
-4. Map reusable journal/controller evidence to the actual G1B.2 and overarching G1B criteria. Investigate only uncovered requirements or failures that undermine their controls. Close the gate through a reviewed state transition when its complete applicable criteria are met.
-5. Continue through G1C-G1E and G2 in dependency order, reusing existing implementation where sound. Resume G3 architecture work when structured eligibility permits it.
+1. The handover/plan reconciliation is published at `3e0204b7999ff53fd4d5785d2ea831b3a58da4ca`. Restore its required machine preamble and verify the unchanged current precedence validator; the concise text exposed a present compatibility defect.
+2. The independently reviewed original 33-row matrix and archived suite summaries have been recovered. Update that existing matrix with published repair evidence and current control dispositions, preserving the archived outcomes.
+3. Verify only the present controls needed for the next operation. A historical cause may remain unknown when focused current evidence is sufficient. Do not recreate the old trusted-Git incident or replay every historical lifecycle merely to explain the past. Repair a demonstrated current defect or an acceptance-relevant coverage gap.
+4. Bind the existing journal review/results to the six G1B.2 criteria and implement the missing bounded acceptance/successor controller path. State booleans alone cannot activate a profile the current validator does not support. Test the actual new transition using a valid baseline and targeted mutations.
+5. Complete G1B persistence, deterministic crash recovery, stale-lease/CAS rejection and derived-narrative requirements. Continue through G1C-G1E and G2 in dependency order, reusing sound implementation, then resume G3 architecture work when structured eligibility permits it.
 
 Each completed batch includes its implementation, sufficient verification, required independent review, permitted publication and current failure disposition. A standalone proof or routine checkpoint is not the end of the work.
 
 ## Failure disposition
 
-Use the existing matrix, with these minimum fields: original node, intended invariant, demonstrated cause, current repair/evidence, residual coverage, gate/global relevance and next action. Preserve uncertain causes as uncertain. Classify shared causes once and link affected rows.
+Retain the original outcome and any unknown historical cause. Current control evidence and relevance determine the next action; the archived failure count alone is not a gate. Use the existing matrix, with these minimum fields: original node, intended invariant, demonstrated cause, current repair/evidence, residual coverage, gate/global relevance and next action. Preserve uncertain causes as uncertain. Classify shared causes once and link affected rows.
 
 | Family | Repair/evidence needed |
 |---|---|
@@ -39,7 +39,7 @@ Use the existing matrix, with these minimum fields: original node, intended inva
 | Whole-policy loading and transition fixtures | Separate authorised authored inputs from historical broad loaders, while retaining the real validation and transition decisions. No repository-wide copy or protected inventory. |
 | Risk/validator negatives | Actual validator accepts a valid authored baseline, then rejects the targeted mutation for its exact intended reason. An earlier fixture failure is not equivalent evidence. |
 | Historical cumulative scope failures | Compare with the already-published correction using actual admission behaviour. Do not expand scope to satisfy stale fixtures. |
-| Trusted-Git observation | Reproduce the intended interaction in an ordinary synthetic repository on this Windows runtime; distinguish environment, fixture and production defects before changing behaviour. |
+| Trusted-Git observation | Verify the currently needed Git observation and review-binding control using authenticated current data and the tested publication mechanism. Preserve the old cause as unknown; reproduce an incident only if a present failure requires it. |
 
 The archived 430/33/1 run is historical. Focused checks do not establish a current full-suite pass. Required global red checks, repair budgets and feature suspension continue to apply. A later-gate label alone cannot waive a global stop.
 
@@ -74,6 +74,6 @@ The programme state and existing accepted transitions own gate truth. Narrative 
 - Preflight outcome: `publication-completed-checkpoint-20260912.json`, exact `preflight-request.json`, independent reviews, publication outputs and stage receipts beneath that root. The earlier stopped-readback and authentication-diagnostic records remain preserved; the reviewed push-only continuation and fresh readback establish completion.
 - Integrated preflight test evidence: `C:/Users/there/EMR4-migration/20260911-v1/integrated-preflight-repair/coordinator-checkpoint.json` and `final-verification.json`.
 - Earlier published-state checkpoint: `C:/Users/there/EMR4-migration/20260911-v1/historical-receipts/publication-coordinator-checkpoint-v2.json`.
-- Source-machine historical receipts are preserved; locate the existing failure matrix from its accepted design/checkpoint references without broad protected discovery.
+- Recovered ordinary evidence and the original matrix are under `C:/Users/there/EMR4-migration/20260911-v1/recovered-historical-evidence-20260912-v1`. Source records remain preserved. Current continuation: `current-control-repair-20260912-v1/coordinator-checkpoint.json` beneath the migration root.
 
 Record each next dependency and its exact source in the existing coordinator checkpoint. Continue until the programme is back on sound development ground or a genuinely material owner decision is required.

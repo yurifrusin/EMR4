@@ -1,7 +1,11 @@
+# EMERGENCY RAISA/ARIADNE RECOVERY PRECEDENCE
+Gate G1B.2 is active only for the pure versioned journal and deterministic replay kernel
+Missing, malformed, stale, or contradictory programme state is a hard stop.
+
 # EMR4 / Raisa — Recovery and Development Instructions
 
 Date: 2026-09-12
-Timestamp: 2026-09-12T07:58:12.358357+10:00
+Timestamp: 2026-09-12T11:23:24.602402+10:00
 
 ## 1. Project and durable objective
 
@@ -37,14 +41,14 @@ Structured `orchestration/programme/current-state.json`, `orchestration/programm
 | Local machine and repository | `DESKTOP-RLTV4BS`, `C:/Users/there/EMR4` |
 | Recovery publication destination | `refs/heads/codex/raisa-ariadne-recovery-g0` at `https://github.com/yurifrusin/emr4` |
 | Verified preflight repair source | `07e65e4e49cc3e7f954f33030ed6d64fd050adaf`, published with exact parent/tree and remote readback. Obtain a fresh exact HEAD observation before acting. |
-| Last verified remote recovery source | `07e65e4e49cc3e7f954f33030ed6d64fd050adaf` |
+| Last verified remote recovery source | `3e0204b7999ff53fd4d5785d2ea831b3a58da4ca` before this current-control repair; obtain fresh readback. |
 | Local ref arrangement | Detached HEAD; the five named recovery/protected local refs were absent at migration and preflight publication. Preserve that arrangement unless an admitted operation explicitly changes it. |
 | Protected remote refs | `master` and `handoff/current`: `2e34bdad732fdab32fbf778280b3d3c70d66d602` |
 | Active programme gate | G1B.2 pure journal/replay; G1B.1 closeout accepted. G1B.2 closeout and G1C remain pending. |
 | Published repairs | Cumulative-history admission correction `d512399aa52fdc1d43b68e3e5117d3142037671d`; journal `723e42fc70841b0e8ceed7fd5a2f63e0eecd573e`; historical state-test repair `f127ec9e14b5ac1966e50cfba1d1285527a2e759`. |
 | Active execution plan | `docs/programme/recovery-execution-plan-20260911.md` |
-| Local evidence | `C:/Users/there/EMR4-migration/20260911-v1`; latest preflight checkpoint: `recovery-publication-v1/publication-completed-checkpoint-20260912.json` beneath that root |
-| Next dependency | Integrate the reviewed handover reconciliation, then continue named failure disposition and actual G1B.2/G1B acceptance gaps. |
+| Local evidence | `C:/Users/there/EMR4-migration/20260911-v1`; current continuation checkpoint: `current-control-repair-20260912-v1/coordinator-checkpoint.json` beneath that root |
+| Next dependency | Verify relevant current controls, accept the published G1B.2 journal through the required controller transition, then complete the remaining G1B guarantees. |
 
 The original remote-machine checkout, worktrees and historical evidence remain preserved. Do not replay a consumed source-machine publication operator. Do not assume an old branch label, timestamp or narrative baton is current authority.
 
@@ -93,7 +97,7 @@ Side questions and status requests do not cancel active work. Answer briefly and
 
 Define one reviewable batch by its shared cause: exact base and owned files, intended invariant, forbidden effects, meaningful verification, publication authority and recovery route. Reuse accepted mechanisms. A separate proof is useful only if it resolves a remaining uncertainty that integration cannot yet test safely.
 
-For each original failing node, retain its intended safety check, establish a valid baseline, require the targeted rejection reason, and record residual coverage. Fix fixtures when they encode the wrong historical phase; change production behaviour only when evidence demonstrates a defect. Never weaken assertions, suppress a required failure or alter historical authority records to make tests green.
+Use historical failures to identify relevant present controls. A precise past cause may remain unknown once focused current evidence establishes the control we need. Preserve the old result and uncertainty; do not label it a current defect or require incident reconstruction solely because it once failed. For a control needing repair, retain its intended safety check, establish a valid baseline, require the targeted rejection reason, and record residual coverage. Fix fixtures when they encode the wrong historical phase; change production behaviour only when evidence demonstrates a defect. Never weaken assertions, suppress a required failure or alter historical authority records to make tests green.
 
 Focused tests prove their exercised boundary. Synthetic observations, substituted state loading, real Git mechanics and full runtime integration must be labelled accurately. Do not add supporting proof case counts to the number of original failures repaired. Required red checks and repair budgets still apply.
 

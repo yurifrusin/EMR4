@@ -110,3 +110,47 @@ def test_live_handover_routes_removed_history_to_verified_snapshot_and_ledgers()
     for relative_path in ledgers:
         assert relative_path in live
         assert (ROOT / relative_path).is_file()
+
+
+def _current_precedence_inputs():
+    import yaml
+
+    project = yaml.safe_load(
+        (ROOT / "orchestration/harness_settings/project.yaml").read_text(encoding="utf-8")
+    )
+    continuation = yaml.safe_load(
+        (ROOT / "orchestration/harness_settings/autonomous_continuation.yaml").read_text(
+            encoding="utf-8"
+        )
+    )
+    state = json.loads(
+        (ROOT / "orchestration/programme/current-state.json").read_text(encoding="utf-8")
+    )
+    agents = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
+    return project, continuation, agents, state
+
+
+def test_live_handover_satisfies_current_machine_precedence() -> None:
+    from orchestration_harness.programme_admission import _validate_precedence
+
+    _validate_precedence(*_current_precedence_inputs())
+
+
+def test_current_machine_precedence_rejects_damaged_preamble() -> None:
+    from orchestration_harness.programme_admission import (
+        ProgrammeAdmissionError,
+        _validate_precedence,
+    )
+
+    project, continuation, agents, state = _current_precedence_inputs()
+    _validate_precedence(project, continuation, agents, state)
+    for line in agents.splitlines()[:3]:
+        assert line.strip()
+        damaged = agents.replace(line, "")
+        assert damaged != agents
+        try:
+            _validate_precedence(project, continuation, damaged, state)
+        except ProgrammeAdmissionError as error:
+            assert error.reason_code == "agents_recovery_precedence_missing"
+        else:
+            raise AssertionError("damaged machine preamble was accepted")
