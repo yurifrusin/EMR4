@@ -1,5 +1,5 @@
 # EMERGENCY RAISA/ARIADNE RECOVERY PRECEDENCE
-Gate G1E is active only for read-only configuration and installed controller assessment
+Gate G2 is active only for bounded baseline repair and separately reviewed isolated synthetic tests
 Missing, malformed, stale, or contradictory programme state is a hard stop.
 
 # EMR4 / Raisa — Recovery and Development Instructions
@@ -44,11 +44,11 @@ Structured `orchestration/programme/current-state.json`, `orchestration/programm
 | Last verified remote recovery source | `3e0204b7999ff53fd4d5785d2ea831b3a58da4ca` before this current-control repair; obtain fresh readback. |
 | Local ref arrangement | Detached HEAD; the five named recovery/protected local refs were absent at migration and preflight publication. Preserve that arrangement unless an admitted operation explicitly changes it. |
 | Protected remote refs | `master` and `handoff/current`: `2e34bdad732fdab32fbf778280b3d3c70d66d602` |
-| Active programme gate | G1E configuration/core assessment; the bounded G1D provenance component is accepted. The installed controller is eligible for read-only assessment; operational multi-task control and G2 remain unaccepted. |
+| Active programme gate | G2 baseline repair; the G1E configuration/core criteria are accepted. Only the exact active repair and separately reviewed isolated synthetic tests are eligible; global CI, G2 completion and feature development remain unaccepted. |
 | Published repairs | Cumulative-history admission correction `d512399aa52fdc1d43b68e3e5117d3142037671d`; journal `723e42fc70841b0e8ceed7fd5a2f63e0eecd573e`; historical state-test repair `f127ec9e14b5ac1966e50cfba1d1285527a2e759`. |
 | Active execution plan | `docs/programme/recovery-execution-plan-20260911.md` |
 | Local evidence | `C:/Users/there/EMR4-migration/20260911-v1`; current continuation checkpoint: `current-control-repair-20260912-v1/coordinator-checkpoint.json` beneath that root |
-| Next dependency | Verify the installed configuration/core component using orchestration/programme/g1e-configuration-core-scope.json; its read-only assessment explicitly supersedes the preserved G1D operation. |
+| Next dependency | Integrate and verify the exact confirmation-family fixture repair in orchestration/programme/g2-baseline-repair-scope.json, then continue current stop-ship repairs under standing authority. |
 
 The original remote-machine checkout, worktrees and historical evidence remain preserved. Do not replay a consumed source-machine publication operator. Do not assume an old branch label, timestamp or narrative baton is current authority.
 
@@ -74,6 +74,7 @@ Only the previously permitted committed aggregate report/closeout for v2 and agg
 
 - Protected-ref movement, merge/integration, deployment, release and GitHub Pages are closed without their specific applicable authority.
 - Real patient/clinical data, live external model/identity/clinical providers and product runtime effects are closed during this recovery work. Do not start application, database or browser runtimes merely to satisfy a historical test fixture.
+- Yuri expressly authorised the isolated G2 application/PostgreSQL test-only exception: contract SHA-256 `49548a67c22720f5101b9bc1ae030ccf0884e00121a803cce132439154631386`, owner approval SHA-256 `c5b4e40e59847b9ec7b2ebfa19788ea9dccdcdd71f3195f503d4106152baf546`. This covers independently scoped and reviewed batches with synthetic data, a new disposable database, no public application listener, and test-process network access only to that database on loopback. Each launch requires the reviewed executable/import/endpoint/cleanup binding and the contract's finite budgets. Real data, existing environments, providers, protected evidence and all other closures remain excluded. The general closed-surfaces policy is preserved; admission alone grants no runtime execution authority.
 - T3.1-T3.4 remain intact and blocked by default. Historical T3/provider exceptions and occupied ledgers are consumed; no T3R7 retry or silent transport/model fallback.
 - Keep raw historical diary material local and ignored under `local_data/historical-diary-trove/`. No broad reading, external transmission, runtime retrieval, training or commitment is authorised by recovery.
 - Never expose credentials or secrets in commands, logs or packets. No credential/IAM/cloud-policy mutation authority is inferred from development authority.

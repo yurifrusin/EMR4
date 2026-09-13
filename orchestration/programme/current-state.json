@@ -1,12 +1,12 @@
 {
   "schema_version": "raisa-ariadne.programme-state.v2",
-  "observed_at": "2026-09-12T23:54:53.775251+00:00",
+  "observed_at": "2026-09-13T13:11:56.187976+00:00",
   "programme_name": "Raisa Medical Office and Ariadne Recovery & Convergence",
   "programme_mode": "recovery",
-  "current_gate": "G1E",
+  "current_gate": "G2",
   "current_gate_status": "active",
-  "active_correction": "G1E",
-  "active_profile": "G1E_CONFIGURATION_CORE_ACTIVE",
+  "active_correction": "G2",
+  "active_profile": "G2_BASELINE_REPAIR_ACTIVE",
   "machine_authoritative": true,
   "feature_work_eligible": false,
   "product_work_eligible": false,
@@ -256,7 +256,7 @@
   "task_selection": {
     "autonomous_selection_enabled": false,
     "allowed_task_kinds": [
-      "g1e_configuration_core_assessment"
+      "g2_confirmation_family_fixture_repair"
     ],
     "blocked_task_kinds": [
       "product_feature",
@@ -268,11 +268,11 @@
     ],
     "admission_command": "python scripts/raisa_ariadne_recovery_preflight.py --task-manifest <path> --phase development",
     "out_of_gate_result": "blocked",
-    "next_eligible_tranche": "G1E",
+    "next_eligible_tranche": "G2",
     "next_eligible_now": true,
     "next_tranche_started": false,
     "next_tranche_admission_requires_state_transition": false,
-    "next_eligibility_condition": "bounded_G1E_installed_configuration_assessment_active"
+    "next_eligibility_condition": "bounded_G2_baseline_repair_active"
   },
   "parallelism_efficacy": {
     "deepseek": {
@@ -942,7 +942,7 @@
     }
   },
   "g1e": {
-    "status": "active",
+    "status": "passed",
     "scope_path": "orchestration/programme/g1e-configuration-core-scope.json",
     "scope_sha256": "f32c05eadf4a24ab377bde42de4a56b5de126ea1294b2c2e25e6b6be54c4e021",
     "current_operation": {
@@ -955,6 +955,38 @@
         "operation_id": "g1d-provenance-and-independent-verification",
         "scope_path": "orchestration/programme/g1d-provenance-scope.json",
         "scope_sha256": "a1fe6c4f5cafa0f5c7137bfc4a5c7950e10715bbcdfc07ed5ba9f7b2fccd649b",
+        "historical_latch_preserved": true
+      }
+    },
+    "completion_accepted": true,
+    "acceptance": {
+      "scope_path": "orchestration/programme/g2-baseline-repair-scope.json",
+      "scope_sha256": "9b70a5b441d3aec55c5197ecc0a9d0c4aafa9b147998c00ab480d581966bcc66",
+      "accepted_component_commit": "167e5d7245d6d0cec87b61568036869d0126f543",
+      "criteria": [
+        "all_referenced_policy_files_exist_and_validate",
+        "duplicated_authority_logic_removed",
+        "ariadne_core_interface_defined",
+        "raisa_specific_policy_behind_adapter",
+        "chaos_and_compatibility_tests_pass"
+      ],
+      "assessment_sha256": "c2a6250c9f259a37a0a533e956ebdfd1fba422feec3fb2713e23a4724b2e9eb9"
+    }
+  },
+  "g2": {
+    "status": "active",
+    "scope_path": "orchestration/programme/g2-baseline-repair-scope.json",
+    "scope_sha256": "9b70a5b441d3aec55c5197ecc0a9d0c4aafa9b147998c00ab480d581966bcc66",
+    "current_operation": {
+      "operation_id": "g2-confirmation-family-fixture-repair",
+      "profile": "G2_BASELINE_REPAIR_ACTIVE",
+      "task_class": "g2_confirmation_family_fixture_repair",
+      "status": "active",
+      "completion_accepted": false,
+      "supersedes": {
+        "operation_id": "g1e-configuration-and-core-assessment",
+        "scope_path": "orchestration/programme/g1e-configuration-core-scope.json",
+        "scope_sha256": "f32c05eadf4a24ab377bde42de4a56b5de126ea1294b2c2e25e6b6be54c4e021",
         "historical_latch_preserved": true
       }
     },
