@@ -12,7 +12,6 @@ from app.models.appointments import (
     AppointmentAuditLog,
     AppointmentCommandIdempotency,
 )
-from app.routers.appointments import _BERNIE_SESSION_STORE
 from tests.conftest import make_token
 
 
@@ -57,24 +56,27 @@ def _row_counts(db) -> tuple[int, int, int]:
     )
 
 
-def _session_event_count(payload: dict) -> int | None:
+def _session_event_count(context, payload: dict) -> int | None:
     binding = payload.get("session_binding")
     if not binding:
         selection = payload.get("selection_proposal") or {}
         binding = selection.get("session_binding")
     if not binding:
         return None
-    session = _BERNIE_SESSION_STORE.get_session(binding["session_id"])
+    store = appointments_router._bernie_session_store(
+        context["db"], context["practice"].id
+    )
+    session = store.get_session(binding["session_id"])
     assert session is not None
     return len(session.events)
 
 
-def _effect_snapshot(db, payload: dict) -> tuple[tuple[int, int, int], int | None]:
-    return _row_counts(db), _session_event_count(payload)
+def _effect_snapshot(context, payload: dict) -> tuple[tuple[int, int, int], int | None]:
+    return _row_counts(context["db"]), _session_event_count(context, payload)
 
 
-def _assert_effect_snapshot(db, payload: dict, expected):
-    assert _effect_snapshot(db, payload) == expected
+def _assert_effect_snapshot(context, payload: dict, expected):
+    assert _effect_snapshot(context, payload) == expected
 
 
 def _append_warning(payload: dict, warning: str) -> dict:
@@ -107,6 +109,7 @@ def _build_staff_create_conflict(context) -> dict:
 def _build_bernie_create(context) -> dict:
     return bernie_create._bound_confirm_payload(
         context["client"],
+        context["db"],
         context["token"],
         context["practitioner"],
         context["patient"],
@@ -245,13 +248,13 @@ def test_all_confirmation_families_require_idempotency_key_before_side_effects(
     family_context,
 ):
     payload = family_context["family"].build_payload(family_context)
-    before = _effect_snapshot(family_context["db"], payload)
+    before = _effect_snapshot(family_context, payload)
 
     resp = _post_confirm(family_context, payload, None)
 
     assert resp.status_code == 400, resp.text
     assert resp.json()["detail"]["code"] == "idempotency_key_required"
-    _assert_effect_snapshot(family_context["db"], payload, before)
+    _assert_effect_snapshot(family_context, payload, before)
 
 
 def test_all_confirmation_families_replay_same_key_same_body_without_second_side_effect(
@@ -263,13 +266,13 @@ def test_all_confirmation_families_replay_same_key_same_body_without_second_side
     first = _post_confirm(family_context, payload, key)
     assert first.status_code == 200, first.text
     assert first.json()["safe"] is True
-    after_first = _effect_snapshot(family_context["db"], payload)
+    after_first = _effect_snapshot(family_context, payload)
 
     second = _post_confirm(family_context, payload, key)
 
     assert second.status_code == 200, second.text
     assert second.json() == first.json()
-    _assert_effect_snapshot(family_context["db"], payload, after_first)
+    _assert_effect_snapshot(family_context, payload, after_first)
     ledger = family_context["db"].query(AppointmentCommandIdempotency).one()
     assert ledger.operation_id == family_context["family"].operation_id
     assert ledger.route_family == family_context["family"].route_family
@@ -285,14 +288,14 @@ def test_all_confirmation_families_conflict_same_key_different_body_without_side
     key = f"s146-{family_context['family'].name}-conflict"
     first = _post_confirm(family_context, payload, key)
     assert first.status_code == 200, first.text
-    after_first = _effect_snapshot(family_context["db"], payload)
+    after_first = _effect_snapshot(family_context, payload)
 
     changed = family_context["family"].build_conflict_payload(family_context)
     second = _post_confirm(family_context, changed, key)
 
     assert second.status_code == 409, second.text
     assert second.json()["detail"]["code"] == "idempotency_key_conflict"
-    _assert_effect_snapshot(family_context["db"], payload, after_first)
+    _assert_effect_snapshot(family_context, payload, after_first)
 
 
 @pytest.mark.parametrize(
@@ -319,10 +322,10 @@ def test_all_confirmation_families_fail_closed_for_non_replay_ledger_states(
     elif state == "failed_transient":
         claim.record.state = "failed_transient"
         family_context["db"].flush()
-    before = _effect_snapshot(family_context["db"], payload)
+    before = _effect_snapshot(family_context, payload)
 
     resp = _post_confirm(family_context, payload, key)
 
     assert resp.status_code == expected_status, resp.text
     assert resp.json()["detail"]["code"] == expected_code
-    _assert_effect_snapshot(family_context["db"], payload, before)
+    _assert_effect_snapshot(family_context, payload, before)

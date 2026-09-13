@@ -30,7 +30,6 @@ from app.schemas.appointments import (
     SlotSearchProposalOut,
 )
 from app.services.bernie.semantic_extraction import extract_semantics
-from scripts import reception_one_bureau_typed_plan_protocol as typed_plan
 
 
 CONTRACT_VERSION = "reception.one.bureau.plan-input.v1"
@@ -328,6 +327,8 @@ def build_product_context_frame(
     observed_at: datetime | None = None,
     handle_key: bytes | None = None,
 ) -> tuple[dict[str, Any], dict[str, str], dict[str, uuid.UUID]]:
+    from scripts import reception_one_bureau_typed_plan_protocol as typed_plan
+
     if not instruction.strip():
         raise ReceptionOneRuntimeError("instruction_required")
     if len(instruction) > 512:
@@ -480,6 +481,8 @@ def build_slot_search_input(
     frame: dict[str, Any],
     handle_map: dict[str, uuid.UUID],
 ) -> SlotSearchProposalIn | None:
+    from scripts import reception_one_bureau_typed_plan_protocol as typed_plan
+
     extraction = typed_plan.extraction_for(frame)
     practitioners = frame["context"]["practitioners"]
     patients = frame["context"]["patients"]
@@ -670,6 +673,8 @@ def proofread_provider_blocked_plan(
     now: datetime,
     plan: dict[str, Any] | None = None,
 ) -> tuple[dict[str, Any], dict[str, Any], dict[str, Any] | None]:
+    from scripts import reception_one_bureau_typed_plan_protocol as typed_plan
+
     typed_plan.validate_schema(frame, "input")
     if plan is not None:
         candidate = plan
