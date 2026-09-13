@@ -1,8 +1,10 @@
 from copy import deepcopy
 from dataclasses import dataclass
 from datetime import datetime, timezone
+from functools import partial
 from importlib import import_module
 from typing import Callable
+from uuid import UUID
 
 import pytest
 
@@ -11,6 +13,26 @@ from app.models.appointments import (
     Appointment,
     AppointmentAuditLog,
     AppointmentCommandIdempotency,
+)
+from app.models.tenancy import UserCapabilityGrant
+from app.schemas.appointments import (
+    AppointmentDeleteProposalConfirmationIn,
+    AppointmentStatusProposalConfirmationIn,
+)
+from app.services import appointment_delete_product_adapter as delete_adapter
+from app.services import appointment_status_product_adapter as status_adapter
+from app.services.appointment_delete_composition import (
+    delete_confirm_envelope_projection,
+    validate_delete_confirm_private_receipt_bytes,
+)
+from app.services.appointment_delete_physical import (
+    delete_confirm_response_integrity_valid,
+    delete_confirm_session_binding_digest,
+)
+from app.services.appointment_status_physical import status_confirm_session_binding_digest
+from app.services.appointment_idempotency import (
+    AppointmentIdempotencyDecision,
+    hash_idempotency_key,
 )
 from tests.conftest import make_token
 
@@ -156,7 +178,112 @@ def _build_delete(context) -> dict:
         context["patient"],
     )
     context["appointment"] = appt
-    return delete_confirm._delete_payload(context["client"], context["token"], appt.id)
+    context["db"].add(UserCapabilityGrant(
+        practice_id=context["practice"].id,
+        user_id=context["gp_user"].id,
+        capability_code="appointment.cancel.confirm",
+    ))
+    # Make fixture identities and authority visible to the command-owned session.
+    context["db"].commit()
+    context["db"].refresh(context["gp_user"])
+    return delete_confirm._delete_payload(
+        context["client"],
+        context["token"],
+        appt.id,
+        status_reason_code="PATIENT_CANCELLED",
+    )
+
+
+def _build_delete_conflict(context) -> dict:
+    return delete_confirm._delete_payload(
+        context["client"],
+        context["token"],
+        context["appointment"].id,
+        cancellation_reason="G2 different signed cancellation reason",
+        status_reason_code="PATIENT_CANCELLED",
+    )
+
+
+def _preclaim_legacy(preclaim, context, payload: dict, *, key: str):
+    return preclaim(context["db"], context["gp_user"], payload, key=key)
+
+
+def _preclaim_physical(context, payload: dict, *, key: str):
+    """Author a bound non-completed ledger fixture, without invoking a command."""
+    user = context["gp_user"]
+    family = context["family"]
+    if family.name == "status":
+        body = AppointmentStatusProposalConfirmationIn.model_validate(payload)
+        adapter = status_adapter
+        admit = status_adapter.status_confirm_admission_adapter
+        domain_secret = appointments_router._status_confirm_domain_secret
+        evidence_secret = appointments_router._status_confirm_evidence_secret()
+        version_binding = body.status_proposal_version_binding
+        session_digest = status_confirm_session_binding_digest
+        session_identity = {}
+    else:
+        assert family.name == "delete"
+        body = AppointmentDeleteProposalConfirmationIn.model_validate(payload)
+        adapter = delete_adapter
+        admit = delete_adapter.delete_confirm_admission_adapter
+        domain_secret = appointments_router._delete_confirm_domain_secret
+        evidence_secret = appointments_router._delete_confirm_evidence_secret()
+        version_binding = body.delete_proposal_version_binding
+        session_digest = delete_confirm_session_binding_digest
+        session_identity = {"actor_id": user.id, "practice_id": user.practice_id}
+
+    session_reference = adapter.authenticated_session_reference(
+        context["token"],
+        secret=domain_secret("authenticated-session"),
+        **session_identity,
+    )
+    ingress = adapter._proposal_server_ingress(
+        body=body,
+        authenticated_user=user,
+        session_reference=session_reference,
+        evidence_secret=evidence_secret,
+        proposal_version_binding=version_binding,
+        proposal_version_binding_secret=domain_secret("proposal-version"),
+    )
+    admission = admit({
+        "structure": "valid",
+        "transport": adapter._transport(body, idempotency_key=key),
+        "server": ingress.as_adapter_mapping(),
+    })
+    assert admission["kind"] == "kernel_request_ready", admission
+    assert admission["effect_authority"] is False
+    request = admission["kernel_request"]
+    assert request["practice_id"] == str(context["practice"].id) == str(user.practice_id)
+    assert request["actor_id"] == str(user.id)
+    assert request["operation_id"] == family.operation_id
+    assert request["route_family"] == family.route_family
+    assert request["target_appointment_id"] == str(context["appointment"].id)
+
+    record = AppointmentCommandIdempotency(
+        practice_id=user.practice_id,
+        actor_user_id=str(user.id),
+        actor_role=request["actor_role"],
+        operation_id=request["operation_id"],
+        route_family=request["route_family"],
+        idempotency_key_hash=hash_idempotency_key(
+            request["idempotency_key"], domain_secret("idempotency")
+        ),
+        request_body_hash=request["request_digest"],
+        request_body_canonicalization_version=1,
+        state="in_progress",
+        target_appointment_id=UUID(request["target_appointment_id"]),
+        session_binding_digest=session_digest(
+            secret=domain_secret("stored-session-binding"),
+            practice_id=user.practice_id,
+            actor_user_id=str(user.id),
+            authenticated_session_id=session_reference,
+        ),
+        authority_generation=request.get("authority_generation"),
+    )
+    context["db"].add(record)
+    context["db"].flush()
+    # This acknowledges successful fixture insertion, not a product kernel claim.
+    return AppointmentIdempotencyDecision(kind="started", record=record)
 
 
 CONFIRMATION_FAMILIES = [
@@ -167,7 +294,7 @@ CONFIRMATION_FAMILIES = [
         route_family=staff_create.ROUTE_FAMILY,
         build_payload=_build_staff_create,
         build_conflict_payload=_build_staff_create_conflict,
-        preclaim=staff_create._preclaim,
+        preclaim=partial(_preclaim_legacy, staff_create._preclaim),
     ),
     ConfirmationFamily(
         name="bernie_create",
@@ -178,7 +305,7 @@ CONFIRMATION_FAMILIES = [
         # Minimum viable body-hash conflict for the session-bound Bernie shape.
         # Strengthen this if Bernie selection/session payload variants expand.
         build_conflict_payload=lambda context: _append_warning(context["payload"], "changed-body"),
-        preclaim=bernie_create._preclaim,
+        preclaim=partial(_preclaim_legacy, bernie_create._preclaim),
     ),
     ConfirmationFamily(
         name="status",
@@ -187,7 +314,7 @@ CONFIRMATION_FAMILIES = [
         route_family=status_confirm.ROUTE_FAMILY,
         build_payload=_build_status,
         build_conflict_payload=_build_status_conflict,
-        preclaim=status_confirm._preclaim,
+        preclaim=_preclaim_physical,
     ),
     ConfirmationFamily(
         name="update",
@@ -196,7 +323,7 @@ CONFIRMATION_FAMILIES = [
         route_family=update_confirm.ROUTE_FAMILY,
         build_payload=_build_update,
         build_conflict_payload=lambda context: _append_warning(context["payload"], "changed-body"),
-        preclaim=update_confirm._preclaim,
+        preclaim=partial(_preclaim_legacy, update_confirm._preclaim),
     ),
     ConfirmationFamily(
         name="delete",
@@ -204,8 +331,8 @@ CONFIRMATION_FAMILIES = [
         operation_id=delete_confirm.OPERATION_ID,
         route_family=delete_confirm.ROUTE_FAMILY,
         build_payload=_build_delete,
-        build_conflict_payload=lambda context: _append_warning(context["payload"], "changed-body"),
-        preclaim=delete_confirm._preclaim,
+        build_conflict_payload=_build_delete_conflict,
+        preclaim=_preclaim_physical,
     ),
 ]
 
@@ -241,7 +368,7 @@ def _post_confirm(context, payload: dict, key: str | None):
 
 
 def _preclaim(context, payload: dict, key: str):
-    return context["family"].preclaim(context["db"], context["gp_user"], payload, key=key)
+    return context["family"].preclaim(context, payload, key=key)
 
 
 def test_all_confirmation_families_require_idempotency_key_before_side_effects(
@@ -277,7 +404,16 @@ def test_all_confirmation_families_replay_same_key_same_body_without_second_side
     assert ledger.operation_id == family_context["family"].operation_id
     assert ledger.route_family == family_context["family"].route_family
     assert ledger.state == "completed"
-    assert ledger.response_body_json == first.json()
+    if family_context["family"].name == "delete":
+        private_bytes = ledger.response_body_canonical_bytes
+        assert delete_confirm_response_integrity_valid(
+            private_bytes, ledger.response_body_hash
+        )
+        private_receipt = validate_delete_confirm_private_receipt_bytes(private_bytes)
+        assert private_receipt == ledger.response_body_json
+        assert delete_confirm_envelope_projection(private_bytes) == first.json()
+    else:
+        assert ledger.response_body_json == first.json()
 
 
 def test_all_confirmation_families_conflict_same_key_different_body_without_side_effect(
@@ -286,11 +422,13 @@ def test_all_confirmation_families_conflict_same_key_different_body_without_side
     payload = family_context["family"].build_payload(family_context)
     family_context["payload"] = payload
     key = f"s146-{family_context['family'].name}-conflict"
+    # Prepare both valid proposals while their signed source state is current.
+    changed = family_context["family"].build_conflict_payload(family_context)
+
     first = _post_confirm(family_context, payload, key)
     assert first.status_code == 200, first.text
     after_first = _effect_snapshot(family_context, payload)
 
-    changed = family_context["family"].build_conflict_payload(family_context)
     second = _post_confirm(family_context, changed, key)
 
     assert second.status_code == 409, second.text
@@ -322,6 +460,9 @@ def test_all_confirmation_families_fail_closed_for_non_replay_ledger_states(
     elif state == "failed_transient":
         claim.record.state = "failed_transient"
         family_context["db"].flush()
+    if family_context["family"].name in {"status", "delete"}:
+        # Publish the authored row/state before the independent command session.
+        family_context["db"].commit()
     before = _effect_snapshot(family_context, payload)
 
     resp = _post_confirm(family_context, payload, key)

@@ -612,6 +612,18 @@ def compose_delete_confirm(
                     "idempotency_key_in_progress",
                     "The prior request is still in progress.",
                 )
+            elif decision.kind == "stale_in_progress_not_replayable":
+                return _error(
+                    409,
+                    "idempotency_key_stale_in_progress",
+                    "A prior confirmation with this Idempotency-Key is stale and needs staff review.",
+                )
+            elif decision.kind == "failed_transient_not_replayable":
+                return _error(
+                    503,
+                    "idempotency_key_failed_transient",
+                    "A prior confirmation with this Idempotency-Key failed transiently and needs staff review.",
+                )
             else:
                 return _error(
                     503,

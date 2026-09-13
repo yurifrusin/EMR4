@@ -14,6 +14,7 @@ import time
 import uuid
 from contextlib import contextmanager
 from dataclasses import dataclass
+from datetime import datetime, timedelta, timezone
 from typing import Iterator, Literal, Sequence
 from uuid import UUID
 
@@ -27,6 +28,7 @@ from app.models.appointments import (
     AppointmentCommandIdempotency,
 )
 from app.models.tenancy import User, UserCapabilityGrant
+from app.services.appointment_idempotency import _as_aware_utc
 
 
 DELETE_CONFIRM_OPERATION_ID = "confirmAppointmentDeleteProposal"
@@ -36,6 +38,7 @@ DELETE_CONFIRM_SESSION_DOMAIN = b"appointment-delete-session:v1"
 DELETE_CONFIRM_CAPABILITY = "appointment.cancel.confirm"
 DELETE_CONFIRM_GENERATION_MAX = 9223372036854775807
 DELETE_CONFIRM_LOCK_WAIT_DEADLINE_MS = 2000
+DELETE_CONFIRM_IDEMPOTENCY_STALE_AFTER = timedelta(minutes=10)
 DELETE_CONFIRM_CANCELLATION_REASON_MAX = 500
 DELETE_CONFIRM_STATUS = "Cancelled"
 DELETE_CONFIRM_RESPONSE_FIELDS = (
@@ -70,6 +73,8 @@ DeleteConfirmDecisionKind = Literal[
     "conflict",
     "legacy_receipt_not_replayable",
     "in_progress_not_replayable",
+    "stale_in_progress_not_replayable",
+    "failed_transient_not_replayable",
     "receipt_integrity_failure",
 ]
 
@@ -615,8 +620,19 @@ def delete_confirm_locked_transaction(
                 pre_state_version=pre_state_version,
             )
         elif record.state != "completed":
+            non_replay_kind: DeleteConfirmDecisionKind = "in_progress_not_replayable"
+            if record.state == "failed_transient":
+                non_replay_kind = "failed_transient_not_replayable"
+            elif record.state == "in_progress":
+                updated_at = _as_aware_utc(record.updated_at)
+                if (
+                    updated_at is not None
+                    and datetime.now(timezone.utc) - updated_at
+                    >= DELETE_CONFIRM_IDEMPOTENCY_STALE_AFTER
+                ):
+                    non_replay_kind = "stale_in_progress_not_replayable"
             decision = DeleteConfirmPhysicalDecision(
-                kind="in_progress_not_replayable",
+                kind=non_replay_kind,
                 user=user,
                 appointment=appointment,
                 record=record,

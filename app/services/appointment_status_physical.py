@@ -13,6 +13,7 @@ import json
 import uuid
 from contextlib import contextmanager
 from dataclasses import dataclass
+from datetime import datetime, timedelta, timezone
 from typing import Callable, Iterator, Literal, Sequence
 from uuid import UUID
 
@@ -22,12 +23,14 @@ from sqlalchemy.orm import Session
 
 from app.models.appointments import Appointment, AppointmentCommandIdempotency
 from app.models.tenancy import Practice
+from app.services.appointment_idempotency import _as_aware_utc
 
 
 STATUS_CONFIRM_OPERATION_ID = "confirmAppointmentStatusProposal"
 STATUS_CONFIRM_ROUTE_FAMILY = "status-confirm"
 STATUS_CONFIRM_RECEIPT_VERSION = 1
 STATUS_CONFIRM_SESSION_DOMAIN = b"appointment-status-session:v1"
+STATUS_CONFIRM_IDEMPOTENCY_STALE_AFTER = timedelta(minutes=10)
 STATUS_CONFIRM_RESPONSE_FIELDS = (
     "appointment_id",
     "status",
@@ -42,6 +45,8 @@ StatusConfirmDecisionKind = Literal[
     "conflict",
     "legacy_receipt_not_replayable",
     "in_progress_not_replayable",
+    "stale_in_progress_not_replayable",
+    "failed_transient_not_replayable",
     "receipt_integrity_failure",
 ]
 
@@ -346,8 +351,19 @@ def status_confirm_locked_transaction(
                 pre_state_version=pre_state_version,
             )
         elif record.state != "completed":
+            non_replay_kind: StatusConfirmDecisionKind = "in_progress_not_replayable"
+            if record.state == "failed_transient":
+                non_replay_kind = "failed_transient_not_replayable"
+            elif record.state == "in_progress":
+                updated_at = _as_aware_utc(record.updated_at)
+                if (
+                    updated_at is not None
+                    and datetime.now(timezone.utc) - updated_at
+                    >= STATUS_CONFIRM_IDEMPOTENCY_STALE_AFTER
+                ):
+                    non_replay_kind = "stale_in_progress_not_replayable"
             decision = StatusConfirmPhysicalDecision(
-                kind="in_progress_not_replayable",
+                kind=non_replay_kind,
                 appointment=appointment,
                 record=record,
                 pre_state_version=pre_state_version,

@@ -36,14 +36,19 @@ def _get_default_provider() -> "AiProvider":
 
 class AiService:
     def __init__(self, provider: Optional["AiProvider"] = None) -> None:
-        self._provider: AiProvider = provider or _get_default_provider()
+        self._provider: Optional[AiProvider] = provider or None
+
+    def _get_provider(self) -> AiProvider:
+        if self._provider is None:
+            self._provider = _get_default_provider()
+        return self._provider
 
     async def analyze_consultation_text(
         self,
         prompt: str,
         actor_context: AiActorContext | None = None,
     ) -> AiResult:
-        result = await AccessAiService(self._provider).invoke(
+        result = await AccessAiService(self._get_provider()).invoke(
             AccessAiRequest(
                 actor=actor_context or _fallback_clinical_actor_context(),
                 capability=AiCapability.CLINICAL_EXTRACTION,
@@ -76,7 +81,7 @@ class AiService:
             "mime_type": mime_type,
             "prompt": prompt_text,
         }
-        result = await AccessAiService(self._provider).invoke(
+        result = await AccessAiService(self._get_provider()).invoke(
             AccessAiRequest(
                 actor=actor_context or _fallback_clinical_actor_context(),
                 capability=AiCapability.AUDIO_SCRIBE,
@@ -102,7 +107,7 @@ class AiService:
         prompt: str,
         actor_context: AiActorContext | None = None,
     ) -> AiResult:
-        result = await AccessAiService(self._provider).invoke(
+        result = await AccessAiService(self._get_provider()).invoke(
             AccessAiRequest(
                 actor=actor_context or _fallback_clinical_actor_context(),
                 capability=AiCapability.LETTER_DRAFTING,
