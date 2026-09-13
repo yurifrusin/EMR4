@@ -1560,6 +1560,27 @@ def g2_repair_profile() -> dict:
     return profile
 
 
+def g2_batch_profile() -> dict:
+    """Six ordinary source paths; reviewed defect repair grants no runtime."""
+    profile = g2_repair_profile()
+    profile.update(
+        profile_kind='bounded_G2_reviewed_baseline_repair',
+        scope_behavior='bounded_g2_reviewed_repair_batches',
+        allowed_paths=sorted([
+            'app/services/reception_one_proposal_runtime.py',
+            'tests/test_api_spine_confirmation_family_idempotency_integration.py',
+            'app/services/appointment_status_physical.py',
+            'app/services/appointment_delete_physical.py',
+            'app/services/appointment_status_composition.py',
+            'app/services/appointment_delete_composition.py',
+        ]),
+    )
+    profile['allowed_effects'] = sorted({*profile['allowed_effects'], 'product_behavior_change'})
+    profile['forbidden_effects'] = [effect for effect in profile['forbidden_effects']
+                                    if effect != 'product_behavior_change']
+    return profile
+
+
 POLICY_REFERENCES = (
     core.Reference("project.yaml", ("operating_model", "settings_file"), "operating_model.yaml"),
     core.Reference("project.yaml", ("secure_sdlc", "settings_file"), "security_review_protocol.yaml"),
@@ -1645,6 +1666,11 @@ def validate_recovery_configuration(*, documents: dict[str, bytes], expected_sha
             raise RaisaPolicyError("configuration_calibration_semantics_invalid")
     if state["active_profile"] == G1E_PROFILE and overlay["profiles"][G1E_PROFILE] != configuration_profile():
         raise RaisaPolicyError("configuration_assessment_profile_invalid")
-    if state["active_profile"] == G2_PROFILE and overlay["profiles"][G2_PROFILE] != g2_repair_profile():
-        raise RaisaPolicyError("configuration_g2_repair_profile_invalid")
+    if state["active_profile"] == G2_PROFILE:
+        profile = overlay["profiles"][G2_PROFILE]
+        expected = (g2_batch_profile()
+                    if profile["scope_behavior"] == 'bounded_g2_reviewed_repair_batches'
+                    else g2_repair_profile())
+        if profile != expected:
+            raise RaisaPolicyError("configuration_g2_repair_profile_invalid")
     return snapshot

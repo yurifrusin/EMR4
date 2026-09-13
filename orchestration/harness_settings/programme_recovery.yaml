@@ -1131,7 +1131,7 @@ profiles:
     - task_branch_commit
     - task_branch_push
   G2_BASELINE_REPAIR_ACTIVE:
-    profile_kind: bounded_G2_baseline_repair
+    profile_kind: bounded_G2_reviewed_baseline_repair
     expected_programme_mode: recovery
     expected_current_gate: G2
     expected_gate_status: active
@@ -1141,6 +1141,7 @@ profiles:
     - g2_confirmation_family_fixture_repair
     allowed_effects:
     - control_plane_edit
+    - product_behavior_change
     - repository_read
     - task_branch_commit
     - task_branch_push
@@ -1152,11 +1153,14 @@ profiles:
     - integration
     - migration_change
     - pages
-    - product_behavior_change
     - protected_ref_movement
     - provider_invocation
     - real_data_access
     allowed_paths:
+    - app/services/appointment_delete_composition.py
+    - app/services/appointment_delete_physical.py
+    - app/services/appointment_status_composition.py
+    - app/services/appointment_status_physical.py
     - app/services/reception_one_proposal_runtime.py
     - tests/test_api_spine_confirmation_family_idempotency_integration.py
     autonomous_task_selection: false
@@ -1166,7 +1170,7 @@ profiles:
     deployment_eligible: false
     protected_ref_movement_eligible: false
     g2_eligible: true
-    scope_behavior: bounded_g2_baseline_repair
+    scope_behavior: bounded_g2_reviewed_repair_batches
     scope_file: orchestration/programme/g2-baseline-repair-scope.json
     global_execution_defaults_unchanged: true
     closed_entrypoints:

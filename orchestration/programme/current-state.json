@@ -1,6 +1,6 @@
 {
   "schema_version": "raisa-ariadne.programme-state.v2",
-  "observed_at": "2026-09-13T13:11:56.187976+00:00",
+  "observed_at": "2026-09-13T14:43:27+00:00",
   "programme_name": "Raisa Medical Office and Ariadne Recovery & Convergence",
   "programme_mode": "recovery",
   "current_gate": "G2",
@@ -272,7 +272,7 @@
     "next_eligible_now": true,
     "next_tranche_started": false,
     "next_tranche_admission_requires_state_transition": false,
-    "next_eligibility_condition": "bounded_G2_baseline_repair_active"
+    "next_eligibility_condition": "bounded_G2_reviewed_repair_batches_active"
   },
   "parallelism_efficacy": {
     "deepseek": {
@@ -976,19 +976,20 @@
   "g2": {
     "status": "active",
     "scope_path": "orchestration/programme/g2-baseline-repair-scope.json",
-    "scope_sha256": "9b70a5b441d3aec55c5197ecc0a9d0c4aafa9b147998c00ab480d581966bcc66",
+    "scope_sha256": "cf3b6a0e9db12a57454e63768b08ec1c8a74458959d5350fdd6f5c88354a9b7e",
     "current_operation": {
-      "operation_id": "g2-confirmation-family-fixture-repair",
-      "profile": "G2_BASELINE_REPAIR_ACTIVE",
-      "task_class": "g2_confirmation_family_fixture_repair",
-      "status": "active",
       "completion_accepted": false,
+      "operation_id": "g2-reviewed-baseline-repair",
+      "profile": "G2_BASELINE_REPAIR_ACTIVE",
+      "status": "active",
       "supersedes": {
-        "operation_id": "g1e-configuration-and-core-assessment",
-        "scope_path": "orchestration/programme/g1e-configuration-core-scope.json",
-        "scope_sha256": "f32c05eadf4a24ab377bde42de4a56b5de126ea1294b2c2e25e6b6be54c4e021",
-        "historical_latch_preserved": true
-      }
+        "historical_latch_preserved": true,
+        "operation_id": "g2-confirmation-family-fixture-repair",
+        "scope_commit": "9b9c4400a99b9d1f57b36cd108fd5f64456502a5",
+        "scope_path": "orchestration/programme/g2-baseline-repair-scope.json",
+        "scope_sha256": "9b70a5b441d3aec55c5197ecc0a9d0c4aafa9b147998c00ab480d581966bcc66"
+      },
+      "task_class": "g2_confirmation_family_fixture_repair"
     },
     "completion_accepted": false
   }

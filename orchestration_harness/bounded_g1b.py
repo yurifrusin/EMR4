@@ -320,13 +320,98 @@ BOUNDED_SCOPE_PATHS = BOUNDED_SCOPE_PATHS | {G2_SCOPE}
 OPERATION_PATHS.update(accept_g1e=G2_TRANSITION_PATHS, repair_g2_fixture=frozenset(G2_REPAIR_PINS))
 
 
-def operation_paths(kind: str) -> frozenset[str]:
+# The first G2 activation remains historical authority. New candidate hashes live
+# in reviewed bindings, never in a controller source constant.
+# Retain the task identifier recognized by the unchanged no-context guard.
+G2_BATCH_TASK = G2_TASK
+G2_BATCH_BINDING_VERSION = "ariadne.bounded_g2_batch_binding.v1"
+G2_BATCH_SCOPE_VERSION = "ariadne.g2_reviewed_batch_scope.v1"
+G2_BATCH_PATHS = frozenset({
+    G2_FIXTURE, G2_COLD_IMPORT,
+    "app/services/appointment_status_physical.py",
+    "app/services/appointment_delete_physical.py",
+    "app/services/appointment_status_composition.py",
+    "app/services/appointment_delete_composition.py",
+})
+G2_BATCH_CONTROL_PATHS = frozenset({STATE, OVERLAY, G2_SCOPE})
+G2_BATCH_CODE_PATHS = frozenset({
+    "orchestration_harness/bounded_g1b.py", "orchestration_harness/raisa_policy.py",
+    "tests/test_bounded_g1b.py",
+})
+G2_BATCH_MAINTENANCE_PATHS = G2_BATCH_CODE_PATHS | G2_BATCH_CONTROL_PATHS
+G2_BATCH_INPUT_PATHS = G2_INPUT_PATHS | G2_BATCH_PATHS
+G2_BATCH_KINDS = frozenset({"enable_g2_batches", "repair_g2_batch"})
+G2_BATCH_EFFECTS = EFFECTS | {"product_behavior_change"}
+G2_BATCH_LIMITS = (
+    "only the reviewed literal-file baseline repair in this binding is eligible",
+    "source-level defect repair grants no application or database execution authority",
+    "isolated synthetic tests retain the owner contract and independent execution binding",
+    "no G2 completion, feature, provider, real-data, protected-evidence or integration acceptance",
+)
+G2_INITIAL_CONTROLLER = {'commit': 'a8b5a1aaa91f1953beca73c94218e2a057c8b7d9',
+ 'parent': '144d792c9e83e82b99c873c09ba5e6df616560e5',
+ 'source_sha256': {'orchestration_harness/bounded_g1b.py': 'faeaa3ed84f782616e812810e1c3fb1b73018bbef0132783c4ff79b036428519',
+                   'orchestration_harness/configuration_core.py': 'f7ba7a80eb0a590f9fb71b864e6c1f9f43241d9f7d70a38da67a9243fea208e5',
+                   'orchestration_harness/programme_admission.py': 'ac816a8a79b2d8222fa357777c075950927e86cf30c8a5b25ffd08a474052181',
+                   'orchestration_harness/raisa_policy.py': '625c3619af42277134908878851bfd675b67be63ecc04e79f18c126143c1c7d2',
+                   'tests/test_bounded_g1b.py': 'd8912f19b2b7cb39aef1917155ca64e7dc89b5b73064fb46867dcaa4d8e6615f'},
+ 'tree': '586e53ab9ab1db88b409d06ee9605d431f5ed954'}
+G2_INITIAL_POLICY_PINS = {'AGENTS.md': 'fb96aced8c29739a7a98c7d837a752094690972d271219fb0a265ccc9f88c7ad',
+ 'orchestration/harness_settings/programme_recovery.yaml': '80697adf9b63180ddc43928336b15533c0f3a884b3137bbbf5539ea15b163850',
+ 'orchestration/programme/current-state.json': '9bcf3351704514df6c992ffa679d64c658e1e2a6915709cb3e9ccc19e961a811',
+ 'orchestration/programme/g2-baseline-repair-scope.json': '9b70a5b441d3aec55c5197ecc0a9d0c4aafa9b147998c00ab480d581966bcc66',
+ 'orchestration/programme/gates.yaml': '115a651a0b13156a591045638d1833a9a71347e7b1f7e694767eac49d2abc341'}
+G2_INITIAL_ACTIVATION = {
+    "commit": "9b9c4400a99b9d1f57b36cd108fd5f64456502a5",
+    "parent": G2_INITIAL_CONTROLLER["commit"],
+    "tree": "b34d4ac985e5c96061a575c4c14f39dce643d59d",
+}
+G2_INITIAL_REPAIR = {
+    "commit": "f6881e198f73d26f6410ff63de850e743f715254",
+    "parent": G2_INITIAL_ACTIVATION["commit"],
+    "tree": "d673fba4a1d11369677dd4cdeb57bc9d0962a276",
+}
+OPERATION_PATHS.update(enable_g2_batches=G2_BATCH_MAINTENANCE_PATHS,
+                       repair_g2_batch=G2_BATCH_PATHS)
+
+
+def _batch_changes(binding: dict) -> dict:
+    kind = binding.get("operation_kind")
+    rows = binding.get("repair_sha256")
+    _need(kind in G2_BATCH_KINDS and type(rows) is dict and 1 <= len(rows) <= 6,
+          "bounded_g2_batch_changes_invalid")
+    allowed = G2_BATCH_MAINTENANCE_PATHS if kind == "enable_g2_batches" else G2_BATCH_PATHS
+    _need(set(rows) <= allowed and (kind != "enable_g2_batches" or set(rows) == allowed),
+          "bounded_g2_batch_path_not_allowed")
+    for row in rows.values():
+        _keys(row, {"before_sha256", "after_sha256"}, "bounded_g2_batch_change_schema")
+        _need(all(type(v) is str and re.fullmatch(r"[0-9a-f]{64}", v) for v in row.values())
+              and row["before_sha256"] != row["after_sha256"], "bounded_g2_batch_change_digest")
+    return rows
+
+
+def operation_effects(kind: str) -> frozenset[str]:
+    if kind == "repair_g2_batch":
+        return G2_BATCH_EFFECTS
+    return frozenset({"repository_read"}) if kind == "assess_g1e" else EFFECTS
+
+
+def operation_paths(kind: str, binding: dict | None = None) -> frozenset[str]:
     _need(type(kind) is str and kind in OPERATION_PATHS, "bounded_g1b_operation_kind")
+    if kind == "repair_g2_batch":
+        _need(type(binding) is dict and binding.get("operation_kind") == kind,
+              "bounded_g2_batch_binding_required")
+        return frozenset(_batch_changes(binding))
     return OPERATION_PATHS[kind]
 
 
-def _operation(kind: str) -> dict:
-    paths = operation_paths(kind)
+def _operation(kind: str, binding: dict | None = None) -> dict:
+    paths = operation_paths(kind, binding)
+    if kind in G2_BATCH_KINDS:
+        return {"paths": paths, "input_paths": G2_BATCH_INPUT_PATHS,
+                "transition_paths": G2_TRANSITION_PATHS, "scope_path": G2_SCOPE,
+                "transition": kind == "enable_g2_batches", "batch": True,
+                "profile": G2_PROFILE, "gate": "G2", "limits": G2_BATCH_LIMITS}
     if kind in {"accept_g1e", "repair_g2_fixture"}:
         return {
             "paths": paths, "successor": True, "transition": kind == "accept_g1e",
@@ -470,7 +555,7 @@ def recognises_bounded_request(manifest: object) -> bool:
     task = manifest.get("task_class")
     return ((type(version) is str and version.startswith("ariadne.bounded_g1b_"))
             or (type(kind) is str and kind in OPERATION_PATHS)
-            or (type(task) is str and task in {TASK_CLASS, G1C_TASK, G1D_TASK, G1E_TASK, G2_TASK}))
+            or (type(task) is str and task in {TASK_CLASS, G1C_TASK, G1D_TASK, G1E_TASK, G2_TASK, G2_BATCH_TASK}))
 
 
 def build_completion_scope(recorded_at: str, transition_base: str) -> dict:
@@ -1237,6 +1322,201 @@ def _digest_map(value: object, paths: frozenset[str], reason: str) -> dict:
     return result
 
 
+def build_g2_batch_scope(recorded_at: str, transition_base: str, controller_sources: dict) -> dict:
+    sources = _digest_map(controller_sources, CONTROLLER_PATHS, "bounded_g2_batch_controller_paths")
+    _need(type(recorded_at) is str and datetime.fromisoformat(recorded_at).tzinfo is not None,
+          "bounded_g2_batch_timestamp")
+    _need(type(transition_base) is str and re.fullmatch(r"[0-9a-f]{40}", transition_base),
+          "bounded_g2_batch_transition_base")
+    _need(all(sources[p] == G2_INITIAL_CONTROLLER["source_sha256"][p]
+              for p in CONTROLLER_PATHS - G2_BATCH_CODE_PATHS),
+          "bounded_g2_batch_unchanged_controller_component")
+    return {
+        "schema_version": G2_BATCH_SCOPE_VERSION, "recorded_at": recorded_at,
+        "transition_base_commit": transition_base,
+        "initial_activation": copy.deepcopy(G2_INITIAL_ACTIVATION),
+        "initial_scope": {"path": G2_SCOPE, "sha256": G2_INITIAL_POLICY_PINS[G2_SCOPE]},
+        "initial_source_repair": copy.deepcopy(G2_INITIAL_REPAIR),
+        "controller_source_sha256": dict(sources),
+        "current_operation": {
+            "operation_id": "g2-reviewed-baseline-repair", "profile": G2_PROFILE,
+            "task_class": G2_BATCH_TASK, "status": "active", "completion_accepted": False,
+            "supersedes": {"operation_id": "g2-confirmation-family-fixture-repair",
+                           "scope_path": G2_SCOPE, "scope_commit": G2_INITIAL_ACTIVATION["commit"],
+                           "scope_sha256": G2_INITIAL_POLICY_PINS[G2_SCOPE],
+                           "historical_latch_preserved": True},
+        },
+        "allowed_paths": sorted(G2_BATCH_PATHS), "maximum_changed_files": 6,
+        "candidate_authority": "independently_reviewed_exact_operation_binding",
+        "allowed_effects": sorted(G2_BATCH_EFFECTS),
+        "forbidden_effects": raisa_policy.g2_batch_profile()["forbidden_effects"],
+        "owner_test_runtime_exception": raisa_policy.g2_test_exception(),
+        "g2_exit_requirements": list(G2_CRITERIA), "g1e_complete": True, "g2_complete": False,
+        "global_gate": "red_repair_only", "feature_work_eligible": False,
+        "operational_multi_task_control_accepted": False, "execution_authorized": False,
+        "existing_clockwork_writers_activated": False, "claim_limits": list(G2_BATCH_LIMITS),
+    }
+
+
+def _validate_g2_batch_scope(scope: dict) -> None:
+    expected = build_g2_batch_scope(scope.get("recorded_at"), scope.get("transition_base_commit"),
+                                    scope.get("controller_source_sha256"))
+    _need(_canonical(scope) == _canonical(expected), "bounded_g2_batch_scope_invalid")
+
+
+def build_g2_batch_transition(before: dict[str, bytes], scope: dict) -> dict[str, bytes]:
+    """Change the active G2 lane, leaving historical acceptance and gates intact."""
+    _keys(before, G2_BATCH_CONTROL_PATHS, "bounded_g2_batch_transition_paths")
+    for path in G2_BATCH_CONTROL_PATHS:
+        _need(type(before[path]) is bytes and _sha(before[path]) == G2_INITIAL_POLICY_PINS[path],
+              "bounded_g2_batch_initial_policy_changed")
+    _validate_g2_batch_scope(scope)
+    state = _json(before[STATE])
+    overlay = _document(before[OVERLAY], OVERLAY)
+    scope_raw = _canonical(scope) + b"\n"
+    state["observed_at"] = scope["recorded_at"]
+    state["g2"].update(scope_sha256=_sha(scope_raw), current_operation=_json(_canonical(scope["current_operation"])))
+    state["task_selection"].update(allowed_task_kinds=[G2_BATCH_TASK],
+                                   next_eligibility_condition="bounded_G2_reviewed_repair_batches_active")
+    overlay["profiles"][G2_PROFILE] = raisa_policy.g2_batch_profile()
+    return {STATE: (json.dumps(state, indent=2, ensure_ascii=False) + "\n").encode(),
+            OVERLAY: yaml.safe_dump(overlay, sort_keys=False, allow_unicode=True).encode(),
+            G2_SCOPE: scope_raw}
+
+
+def _batch_publication(target: Path, publication: dict, base: str) -> None:
+    headers = trusted_git.run_git(target, "cat-file", "commit", publication["commit"]).split("\n\n", 1)[0].splitlines()
+    _need([line for line in headers if line.startswith("parent ")] == ["parent " + publication["parent"]]
+          and [line for line in headers if line.startswith("tree ")] == ["tree " + publication["tree"]],
+          "bounded_g2_batch_publication_invalid")
+    trusted_git.run_git(target, "merge-base", "--is-ancestor", publication["commit"], base)
+
+
+def _load_g2_batch_inputs(context, target, source, evidence_root, scratch, binding, read, snapshots):
+    """The caller digest authenticates the binding before any selected input read."""
+    _keys(binding, {"schema_version", "operation_id", "operation_kind", "phase", "base_commit", "base_tree",
+                    "expected_head", "expected_index_tree", "candidate_tree", "source_sha256", "payload_sha256",
+                    "activation_commit", "installed_controller", "repair_sha256"},
+          "bounded_g2_batch_binding_schema")
+    _need(binding["schema_version"] == G2_BATCH_BINDING_VERSION, "bounded_g2_batch_binding_version")
+    changes = _batch_changes(binding)
+    maintenance = binding["operation_kind"] == "enable_g2_batches"
+    _need(type(binding["operation_id"]) is str and re.fullmatch(r"[a-z0-9][a-z0-9-]{1,79}", binding["operation_id"]),
+          "bounded_g2_batch_operation_id")
+    _need(binding["phase"] in {"development", "pre-push", "post-push"}, "bounded_g2_batch_phase")
+    _need(all(type(binding[k]) is str and re.fullmatch(r"[0-9a-f]{40}", binding[k])
+              for k in ("base_commit", "base_tree", "expected_head", "expected_index_tree", "candidate_tree")),
+          "bounded_g2_batch_git_binding")
+    source_pins = _digest_map(binding["source_sha256"], SOURCE_PATHS, "bounded_g2_batch_source_paths")
+    payload_pins = _digest_map(binding["payload_sha256"], G2_BATCH_INPUT_PATHS, "bounded_g2_batch_payload_paths")
+    _need(source_pins["orchestration_harness/trusted_git.py"] ==
+          "5f8bfd44b63282e205a22bef1b81d0b8b5271572ba47c5b5df7371c0f638874f", "bounded_g1b_git_source_changed")
+    source_payloads = {path: read(source / path, digest) for path, digest in source_pins.items()}
+    payloads = {path: read(target / path, digest) for path, digest in sorted(payload_pins.items())}
+    scope = _json(payloads[G2_SCOPE])
+    _validate_g2_batch_scope(scope)
+    frozen = {**FROZEN_PINS, COST: COST_PIN, SCOPE_PATH: G1B_BASELINE_PINS[SCOPE_PATH],
+              G1C_SCOPE: G1C_BASELINE_PINS[G1C_SCOPE], G1D_SCOPE: G1D_BASELINE_PINS[G1D_SCOPE],
+              G1E_SCOPE: G1E_BASELINE_PINS[G1E_SCOPE], **GOVERNOR_PINS, **PROVENANCE_DEPENDENCY_PINS,
+              **PROVENANCE_PINS, **CONFIGURATION_LEAF_PINS,
+              AGENTS: G2_INITIAL_POLICY_PINS[AGENTS], GATES: G2_INITIAL_POLICY_PINS[GATES]}
+    _need(all(_sha(payloads[path]) == digest for path, digest in frozen.items()),
+          "bounded_g2_batch_frozen_input_changed")
+    evidence = {path: read(evidence_root / path, digest) for path, digest in G1E_EVIDENCE_PINS.items()}
+    base = binding["base_commit"]
+    initial_policy = {}
+    for publication, pins in (
+        (G1E_PUBLICATION, G1E_SOURCE_PINS), (G1E_ACTIVATION, G1E_BASELINE_PINS),
+        (G2_INITIAL_CONTROLLER, G2_INITIAL_CONTROLLER["source_sha256"]),
+        (G2_INITIAL_ACTIVATION, G2_INITIAL_POLICY_PINS),
+        (G2_INITIAL_REPAIR, {p: row["after_sha256"] for p, row in G2_REPAIR_PINS.items()}),
+    ):
+        _batch_publication(target, publication, base)
+        for path, digest in pins.items():
+            raw = trusted_git.run_git_bytes(target, "cat-file", "blob", publication["commit"] + ":" + path)
+            _need(_sha(raw) == digest, "bounded_g2_batch_historical_bytes_changed")
+            if publication is G2_INITIAL_ACTIVATION:
+                initial_policy[path] = raw
+    legacy_before = {path: read(source / "g1e-baseline" / path, digest)
+                     for path, digest in G1E_BASELINE_PINS.items()}
+    validate_g2_acceptance_transition(legacy_before, initial_policy, evidence)
+    base_payloads = {path: trusted_git.run_git_bytes(target, "cat-file", "blob", base + ":" + path)
+                     for path in sorted(G2_BATCH_INPUT_PATHS)}
+    for path, raw in base_payloads.items():
+        if path in changes:
+            _need(_sha(raw) == changes[path]["before_sha256"], "bounded_g2_batch_preimage_changed")
+            _need(_sha(payloads[path]) == changes[path]["after_sha256"], "bounded_g2_batch_candidate_changed")
+        else:
+            _need(raw == payloads[path], "bounded_g2_batch_unowned_input_changed")
+    controller = binding["installed_controller"]
+    _validate_installed_controller(controller)
+    _batch_publication(target, controller, base)
+    if maintenance:
+        _need(controller == G2_INITIAL_CONTROLLER and binding["activation_commit"] == G2_INITIAL_ACTIVATION["commit"],
+              "bounded_g2_batch_maintenance_predecessor")
+        _need(scope["transition_base_commit"] == base, "bounded_g2_batch_maintenance_base")
+        for path, digest in G2_INITIAL_POLICY_PINS.items():
+            _need(_sha(base_payloads[path]) == digest, "bounded_g2_batch_maintenance_policy_changed")
+        for path, row in G2_REPAIR_PINS.items():
+            _need(_sha(base_payloads[path]) == row["after_sha256"], "bounded_g2_batch_first_repair_changed")
+    else:
+        activation = binding["activation_commit"]
+        _need(type(activation) is str and activation == controller["commit"], "bounded_g2_batch_activation_binding")
+        _need(controller["parent"] == scope["transition_base_commit"], "bounded_g2_batch_activation_parent")
+        _need(controller["source_sha256"] == scope["controller_source_sha256"],
+              "bounded_g2_batch_controller_disagreement")
+        for path in G2_TRANSITION_PATHS:
+            _need(trusted_git.run_git_bytes(target, "cat-file", "blob", activation + ":" + path) == payloads[path],
+                  "bounded_g2_batch_activation_not_committed")
+    for path in SOURCE_PATHS | CONTROLLER_PATHS:
+        if path not in source_payloads:
+            source_payloads[path] = read(source / path, scope["controller_source_sha256"][path])
+        raw = source_payloads[path]
+        _need(payloads.get(path, raw) == raw, "bounded_g2_batch_loaded_source_disagreement")
+        if path in CONTROLLER_PATHS:
+            _need(_sha(raw) == scope["controller_source_sha256"][path], "bounded_g2_batch_prospective_controller_changed")
+            installed_raw = trusted_git.run_git_bytes(target, "cat-file", "blob", controller["commit"] + ":" + path)
+            _need(_sha(installed_raw) == controller["source_sha256"][path], "bounded_g2_batch_installed_controller_changed")
+            if maintenance:
+                _need(_sha(base_payloads[path]) == controller["source_sha256"][path],
+                      "bounded_g2_batch_prior_controller_not_installed")
+        if not maintenance or path not in G2_BATCH_CODE_PATHS:
+            _need(trusted_git.run_git_bytes(target, "cat-file", "blob", base + ":" + path) == raw,
+                  "bounded_g2_batch_source_not_installed")
+    attested = G2_BATCH_INPUT_PATHS - set(changes) if binding["phase"] == "development" else G2_BATCH_INPUT_PATHS
+    observation = trusted_git.attest_target_index(target, attested_paths=tuple(sorted(attested)),
+        expected_head=binding["expected_head"], expected_index_tree=binding["expected_index_tree"], scratch_parent=scratch)
+    _need(trusted_git.run_git(target, "rev-parse", base + "^{tree}") == binding["base_tree"],
+          "bounded_g2_batch_base_tree_changed")
+    if binding["phase"] == "development":
+        _need(binding["expected_head"] == base and binding["expected_index_tree"] in
+              {binding["base_tree"], binding["candidate_tree"]}, "bounded_g2_batch_development_binding")
+    else:
+        headers = trusted_git.run_git(target, "cat-file", "commit", binding["expected_head"]).split("\n\n", 1)[0].splitlines()
+        _need([line for line in headers if line.startswith("parent ")] == ["parent " + base]
+              and [line for line in headers if line.startswith("tree ")] == ["tree " + binding["candidate_tree"]]
+              and binding["expected_index_tree"] == binding["candidate_tree"], "bounded_g2_batch_committed_binding")
+    for path, snapshot in snapshots.items():
+        _need(trusted_git._read_regular_snapshot(path, maximum_bytes=2 * 1024 * 1024) == snapshot,
+              "bounded_g1b_snapshot_drift")
+    return BoundedG1BInputs(binding, initial_policy, payloads, evidence, observation)
+
+
+def _validate_g2_batch_loaded_policy(inputs):
+    scope = _json(inputs.payloads[G2_SCOPE])
+    expected = build_g2_batch_transition({p: inputs.before[p] for p in G2_BATCH_CONTROL_PATHS}, scope)
+    _need(all(inputs.payloads[p] == raw for p, raw in expected.items()), "bounded_g2_batch_policy_delta_invalid")
+    after = {p: inputs.payloads[p] for p in G2_TRANSITION_PATHS}
+    try:
+        configuration = raisa_policy.validate_recovery_configuration(
+            documents={Path(p).name: inputs.payloads[p] for p in CONFIGURATION_PATHS},
+            expected_sha256={Path(p).name: inputs.binding["payload_sha256"][p] for p in CONFIGURATION_PATHS},
+            agents_text=after[AGENTS].decode("utf-8"), state=_json(after[STATE]))
+    except (raisa_policy.RaisaPolicyError, configuration_core.ConfigurationError) as error:
+        raise BoundedG1BError(error.reason_code) from error
+    return after, configuration
+
+
 def load_bounded_g1b_inputs(context: BoundedG1BContext) -> BoundedG1BInputs:
     """Read authenticated ordinary inputs; expected digest is caller authority."""
     _need(type(context) is BoundedG1BContext, "bounded_g1b_context_required")
@@ -1273,6 +1553,9 @@ def load_bounded_g1b_inputs(context: BoundedG1BContext) -> BoundedG1BInputs:
         return snapshot[1]
 
     binding = _json(read(binding_path, context.expected_binding_sha256))
+    if type(binding.get("operation_kind")) is str and binding["operation_kind"] in G2_BATCH_KINDS:
+        return _load_g2_batch_inputs(context, target, source, evidence_root, scratch,
+                                     binding, read, snapshots)
     _keys(binding, {"schema_version", "operation_id", "operation_kind", "phase", "base_commit", "base_tree",
                     "expected_head", "expected_index_tree", "candidate_tree", "source_sha256", "payload_sha256",
                     "activation_commit", "installed_controller"},
@@ -1404,7 +1687,9 @@ def load_bounded_g1b_inputs(context: BoundedG1BContext) -> BoundedG1BInputs:
 
 
 def _validate_loaded_policy(inputs: BoundedG1BInputs) -> tuple[dict[str, bytes], configuration_core.ValidatedConfiguration | None]:
-    operation = _operation(inputs.binding["operation_kind"])
+    operation = _operation(inputs.binding["operation_kind"], inputs.binding)
+    if operation.get("batch"):
+        return _validate_g2_batch_loaded_policy(inputs)
     after = {path: inputs.payloads[path] for path in operation["transition_paths"]}
     validator = {"G1B": validate_g1b_acceptance_transition, "G1C": validate_g1c_acceptance_transition,
                  "G1D": validate_g1d_acceptance_transition, "G1E": validate_g1e_acceptance_transition,
@@ -1439,8 +1724,8 @@ def build_bounded_g1b_manifest(context: BoundedG1BContext) -> dict:
     q = inputs.binding
     return {"schema_version": REQUEST_VERSION, "operation_id": q["operation_id"],
             "operation_kind": q["operation_kind"], "binding_sha256": context.expected_binding_sha256,
-            "candidate_tree": q["candidate_tree"], "allowed_paths": sorted(operation_paths(q["operation_kind"])),
-            "intended_side_effect_classes": ["repository_read"] if _operation(q["operation_kind"]).get("assessment") else sorted(EFFECTS)}
+            "candidate_tree": q["candidate_tree"], "allowed_paths": sorted(operation_paths(q["operation_kind"], q)),
+            "intended_side_effect_classes": sorted(operation_effects(q["operation_kind"]))}
 
 
 def evaluate_bounded_g1b_operation(*, context: BoundedG1BContext | None, manifest: object,
@@ -1467,11 +1752,11 @@ def evaluate_bounded_g1b_operation(*, context: BoundedG1BContext | None, manifes
         _need(q["phase"] == phase, "bounded_g1b_phase_disagreement")
         expected = {"schema_version": REQUEST_VERSION, "operation_id": q["operation_id"],
                     "operation_kind": q["operation_kind"], "binding_sha256": context.expected_binding_sha256,
-                    "candidate_tree": q["candidate_tree"], "allowed_paths": sorted(operation_paths(q["operation_kind"])),
-                    "intended_side_effect_classes": ["repository_read"] if _operation(q["operation_kind"]).get("assessment") else sorted(EFFECTS)}
+                    "candidate_tree": q["candidate_tree"], "allowed_paths": sorted(operation_paths(q["operation_kind"], q)),
+                    "intended_side_effect_classes": sorted(operation_effects(q["operation_kind"]))}
         _need(_canonical(manifest) == _canonical(expected), "bounded_g1b_manifest_binding_mismatch")
         _after, configuration = _validate_loaded_policy(inputs)
-        operation = _operation(q["operation_kind"])
+        operation = _operation(q["operation_kind"], q)
         if operation.get("assessment"):
             _need(entrypoint == "recovery_preflight" and phase == "assessment", "bounded_g1e_assessment_entrypoint_closed")
             _need(configuration is not None, "bounded_g1e_configuration_required")
