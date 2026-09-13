@@ -31,13 +31,15 @@ G1B_PROFILE = "G1B_COMPLETION_ACTIVE"
 G1C_PROFILE = "G1C_GOVERNOR_ACTIVE"
 G1D_PROFILE = "G1D_PROVENANCE_ACTIVE"
 G1E_PROFILE = "G1E_CONFIGURATION_CORE_ACTIVE"
+G2_PROFILE = "G2_BASELINE_REPAIR_ACTIVE"
 G1B_PREAMBLE = "Gate G1B is active only for bounded persistence, recovery, stale-lease protection and derived narrative"
 G1C_PREAMBLE = "Gate G1C is active only for the bounded recovery governor and its versioned persistence integration"
 G1D_PREAMBLE = "Gate G1D is active only for bounded observed provenance and independent local verification"
 G1E_PREAMBLE = "Gate G1E is active only for read-only configuration and installed controller assessment"
+G2_PREAMBLE = "Gate G2 is active only for bounded baseline repair and separately reviewed isolated synthetic tests"
 BOUNDED_PROFILE_PREAMBLES = MappingProxyType({
     G1B_PROFILE: G1B_PREAMBLE, G1C_PROFILE: G1C_PREAMBLE,
-    G1D_PROFILE: G1D_PREAMBLE, G1E_PROFILE: G1E_PREAMBLE,
+    G1D_PROFILE: G1D_PREAMBLE, G1E_PROFILE: G1E_PREAMBLE, G2_PROFILE: G2_PREAMBLE,
 })
 
 ADMITTED_PROGRAMME_GATE = 'G0.8'
@@ -860,6 +862,20 @@ _SHAPE_78 = ("object", (
     ('closed_entrypoints', _SHAPE_4),
 ), ())
 
+_G2_EXCEPTION_SHAPE = ("object", (
+    ('contract_sha256', _SHAPE_1), ('owner_approval_sha256', _SHAPE_1),
+    ('profile', _SHAPE_1), ('independent_execution_binding_required', _SHAPE_2),
+    ('admission_grants_runtime_authority', _SHAPE_2),
+    ('active_test_environments', _SHAPE_26), ('collection_attempts', _SHAPE_26),
+    ('test_attempts', _SHAPE_26), ('maximum_minutes_per_test_attempt', _SHAPE_26),
+    ('maximum_runtime_minutes_including_collection', _SHAPE_26),
+    ('automatic_retry_after_uncertain_effect', _SHAPE_2),
+), ())
+_G2_PROFILE_SHAPE = ("object", tuple(
+    (name, shape) for name, shape in _SHAPE_78[1]
+    if name != 'installed_controller_assessment_only'
+) + (('owner_test_runtime_exception', _G2_EXCEPTION_SHAPE),), ())
+
 _SHAPE_79 = ("object", (
     ('G0.8_FSMONITOR_CLOSURE', _SHAPE_72),
     ('G0_TO_G1A_STATE_TRANSITION', _SHAPE_72),
@@ -882,7 +898,8 @@ _SHAPE_79 = ("object", (
     ('G1C_GOVERNOR_ACTIVE', _SHAPE_76),
     ('G1D_PROVENANCE_ACTIVE', _SHAPE_77),
     ('G1E_CONFIGURATION_CORE_ACTIVE', _SHAPE_78),
-), ('G1E_CONFIGURATION_CORE_ACTIVE',))
+    ('G2_BASELINE_REPAIR_ACTIVE', _G2_PROFILE_SHAPE),
+), ('G1E_CONFIGURATION_CORE_ACTIVE', 'G2_BASELINE_REPAIR_ACTIVE'))
 
 _SHAPE_80 = ("object", (
     ('expected_branch', _SHAPE_1),
@@ -1507,6 +1524,42 @@ def configuration_profile() -> dict:
     return copy.deepcopy(_CONFIGURATION_PROFILE)
 
 
+def g2_test_exception() -> dict:
+    """Owner-approved envelope; a separately reviewed binding must enforce it."""
+    return {
+        'contract_sha256': '49548a67c22720f5101b9bc1ae030ccf0884e00121a803cce132439154631386',
+        'owner_approval_sha256': 'c5b4e40e59847b9ec7b2ebfa19788ea9dccdcdd71f3195f503d4106152baf546',
+        'profile': 'isolated_synthetic_application_postgresql_tests',
+        'independent_execution_binding_required': True,
+        'admission_grants_runtime_authority': False,
+        'active_test_environments': 1, 'collection_attempts': 1, 'test_attempts': 3,
+        'maximum_minutes_per_test_attempt': 10,
+        'maximum_runtime_minutes_including_collection': 35,
+        'automatic_retry_after_uncertain_effect': False,
+    }
+
+
+def g2_repair_profile() -> dict:
+    profile = configuration_profile()
+    profile.pop('installed_controller_assessment_only')
+    profile.update(
+        profile_kind='bounded_G2_baseline_repair', expected_current_gate='G2',
+        active_correction='G2', programme_gate='G2',
+        admitted_task_classes=['g2_confirmation_family_fixture_repair'],
+        allowed_effects=['control_plane_edit', 'repository_read', 'task_branch_commit', 'task_branch_push'],
+        allowed_paths=['app/services/reception_one_proposal_runtime.py',
+                       'tests/test_api_spine_confirmation_family_idempotency_integration.py'],
+        g2_eligible=True, scope_behavior='bounded_g2_baseline_repair',
+        scope_file='orchestration/programme/g2-baseline-repair-scope.json',
+        owner_test_runtime_exception=g2_test_exception(),
+    )
+    profile['forbidden_effects'] = [effect for effect in profile['forbidden_effects']
+                                    if effect not in profile['allowed_effects']]
+    profile['closed_entrypoints'] = [entry for entry in profile['closed_entrypoints']
+                                     if entry not in {'task_branch_commit', 'task_branch_push'}]
+    return profile
+
+
 POLICY_REFERENCES = (
     core.Reference("project.yaml", ("operating_model", "settings_file"), "operating_model.yaml"),
     core.Reference("project.yaml", ("secure_sdlc", "settings_file"), "security_review_protocol.yaml"),
@@ -1592,4 +1645,6 @@ def validate_recovery_configuration(*, documents: dict[str, bytes], expected_sha
             raise RaisaPolicyError("configuration_calibration_semantics_invalid")
     if state["active_profile"] == G1E_PROFILE and overlay["profiles"][G1E_PROFILE] != configuration_profile():
         raise RaisaPolicyError("configuration_assessment_profile_invalid")
+    if state["active_profile"] == G2_PROFILE and overlay["profiles"][G2_PROFILE] != g2_repair_profile():
+        raise RaisaPolicyError("configuration_g2_repair_profile_invalid")
     return snapshot

@@ -248,6 +248,77 @@ G1E_LIMITS = ("validation grants no execution or publication authority", "read-o
 BOUNDED_SCOPE_PATHS = BOUNDED_SCOPE_PATHS | {G1E_SCOPE}
 OPERATION_PATHS.update(accept_g1d=G1E_TRANSITION_PATHS, assess_g1e=frozenset())
 
+G2_PROFILE = raisa_policy.G2_PROFILE
+G2_PREAMBLE = raisa_policy.G2_PREAMBLE
+G2_TASK = "g2_confirmation_family_fixture_repair"
+G2_SCOPE = "orchestration/programme/g2-baseline-repair-scope.json"
+G2_FIXTURE = "tests/test_api_spine_confirmation_family_idempotency_integration.py"
+G2_FIXTURE_BEFORE = "3834f8101023728af11bd66f5b72aad1922d3ee92b712d112b95d055af31e130"
+G2_ORIGINAL_FIXTURE_AFTER = "55be615610fdcd98c9bd4b73eed53e640a2ccc525e651597a66fc24967df884f"
+G2_FIXTURE_AFTER = "64e6459b3cca707a966e464e9fbed8d7f71ef77b43ff4d79a9ee8502608f4fd3"
+G2_COLD_IMPORT = "app/services/reception_one_proposal_runtime.py"
+G2_REPAIR_PINS = {
+    G2_FIXTURE: {"before_sha256": G2_FIXTURE_BEFORE, "after_sha256": G2_FIXTURE_AFTER},
+    G2_COLD_IMPORT: {"before_sha256": "d15282a6a7c6f46207caf2a6490e29aa7d0a46f27c296489042e6afea564a817",
+                     "after_sha256": "72da706fe90376a0eb7613aa76e1858ff5a64f03509f72b152fdac4791c42b22"},
+}
+G1E_BASELINE_PINS = {
+    AGENTS: "42ad5ffa741d2b9df1568cc4ac35f32e49fb0a3d019079c5c65d3aea8145cb6b",
+    STATE: "b43a1fb2be8d914ea47854f723ef867e4c5d12c4f16f29a38e1ff8ce314edd2c",
+    GATES: "9ccfc924ea0015d78543178864527595636bd31315ff24117f1bbe7448dfdf02",
+    OVERLAY: "94caacaa5ef51a69f17007ef7aa27ae881d239233b2b87a959973b726f7224d5",
+    G1E_SCOPE: "f32c05eadf4a24ab377bde42de4a56b5de126ea1294b2c2e25e6b6be54c4e021",
+}
+G1E_PUBLICATION = {
+    "commit": "167e5d7245d6d0cec87b61568036869d0126f543",
+    "parent": "8145d098df1ee7eef9ba095211e979cebc40629a",
+    "tree": "a36008121ee63edca94b8957edcaed114768f031",
+}
+G1E_ACTIVATION = {
+    "commit": "144d792c9e83e82b99c873c09ba5e6df616560e5",
+    "parent": G1E_PUBLICATION["commit"],
+    "tree": "3c7524c1cb98dd2d9148d301331c148cd524477c",
+}
+# Historical assessed bytes, distinct from the installed G2 controller binding.
+G1E_SOURCE_PINS = {
+    "orchestration_harness/bounded_g1b.py": "73cb024a15297ddced538fe2a53d72182c571dd8d64a6dd6bfa83499b8bc8485",
+    "orchestration_harness/configuration_core.py": "f7ba7a80eb0a590f9fb71b864e6c1f9f43241d9f7d70a38da67a9243fea208e5",
+    "orchestration_harness/programme_admission.py": "9c6814b30b331f3f3e32f1e4d92b08f31b856b26d51859fec3ad8f00cad782aa",
+    "orchestration_harness/raisa_policy.py": "bbf16e19f583727f262fdab604e2f1fff476a4970f063d51550e383c132f490b",
+    "tests/test_bounded_g1b.py": "24b0b617dce4077ec1f9c645cf8bf1dbc2b1e47281fda40069b519237c7ab402",
+}
+G1E_EVIDENCE_PINS = {
+    "g1e-evidence/criteria-review.json": "d7eb21c867fe49fb5ae40554f6fab3cc36f90591b3e1074809649b1e8cdf9711",
+    "g1e-evidence/assessment.stdout.json": "c2a6250c9f259a37a0a533e956ebdfd1fba422feec3fb2713e23a4724b2e9eb9",
+    "g1e-evidence/assessment-binding.json": "fb5da1f532d83284c194ba90c943c91f4e719062a4edafb8c72564b254489f95",
+    "g1e-evidence/fresh-readback.json": "12eb107dbc12ccc82e36a92e82af6322f5ec08a8244282b4c06019199ff57b97",
+    "g1e-evidence/isolated-test-contract.json": raisa_policy.g2_test_exception()["contract_sha256"],
+    "g1e-evidence/owner-runtime-approval.json": raisa_policy.g2_test_exception()["owner_approval_sha256"],
+    "g1e-evidence/fixture-refinement-source.json": "daa51a817d05dea7445be67a6cb69bc5a59d45ffdb8e50730c50301f8354ff1d",
+    "g1e-evidence/fixture-refinement-independent-review.json": "d698a16f8e2407136578256add5b39b76b7c72143c5fc95a2a2050fbea317cfa",
+    "g1e-evidence/cold-import-source-review.json": "92ea00cd43855b17a15ff79ad052294e82c88ab3a789e86533212e94fc150555",
+    "g1e-evidence/cold-import-independent-review.json": "6221c16c4217c57e7f5f814600eb90e353a3a80f4dae5c12c04dfd49832abe9e",
+}
+G2_CRITERIA = (
+    "repository_wide_collection_and_tests_pass", "required_application_migration_and_safety_ci",
+    "dependency_audit_pass_or_explicit_exception", "destructive_migration_removed",
+    "empty_and_populated_alembic_paths_pass", "no_public_audio_or_phi_path", "no_implicit_patient",
+    "cross_tenant_tests_application_and_database_pass", "appointment_concurrency_database_enforced",
+    "ai_outputs_draft_until_human_attestation",
+    "production_profile_excludes_dev_hosts_and_browser_bearer_storage",
+    "no_unresolved_critical_or_high_stop_ship_risk",
+)
+G2_TRANSITION_PATHS = frozenset({STATE, GATES, OVERLAY, AGENTS, G2_SCOPE})
+G2_INPUT_PATHS = G1E_INPUT_PATHS | {G2_SCOPE, *G2_REPAIR_PINS}
+G2_LIMITS = (
+    "policy eligibility grants no execution or publication authority",
+    "only the reviewed confirmation-family fixture and cold-import prerequisite bytes are admitted",
+    "isolated synthetic tests require the owner contract and independent execution-binding review",
+    "no global CI, G2 completion, feature, provider, real-data or protected-integration acceptance",
+)
+BOUNDED_SCOPE_PATHS = BOUNDED_SCOPE_PATHS | {G2_SCOPE}
+OPERATION_PATHS.update(accept_g1e=G2_TRANSITION_PATHS, repair_g2_fixture=frozenset(G2_REPAIR_PINS))
+
 
 def operation_paths(kind: str) -> frozenset[str]:
     _need(type(kind) is str and kind in OPERATION_PATHS, "bounded_g1b_operation_kind")
@@ -256,6 +327,15 @@ def operation_paths(kind: str) -> frozenset[str]:
 
 def _operation(kind: str) -> dict:
     paths = operation_paths(kind)
+    if kind in {"accept_g1e", "repair_g2_fixture"}:
+        return {
+            "paths": paths, "successor": True, "transition": kind == "accept_g1e",
+            "input_paths": G2_INPUT_PATHS, "transition_paths": G2_TRANSITION_PATHS,
+            "scope_path": G2_SCOPE, "baseline_pins": G1E_BASELINE_PINS,
+            "baseline_directory": "g1e-baseline", "evidence_pins": G1E_EVIDENCE_PINS,
+            "profile": G2_PROFILE, "gate": "G2", "accepted_publication": G1E_PUBLICATION,
+            "accepted_pins": G1E_SOURCE_PINS, "component_reason": "bounded_g2", "limits": G2_LIMITS,
+        }
     if kind in {"accept_g1d", "assess_g1e"}:
         return {
             "paths": paths, "successor": True, "transition": kind == "accept_g1d", "assessment": kind == "assess_g1e",
@@ -390,7 +470,7 @@ def recognises_bounded_request(manifest: object) -> bool:
     task = manifest.get("task_class")
     return ((type(version) is str and version.startswith("ariadne.bounded_g1b_"))
             or (type(kind) is str and kind in OPERATION_PATHS)
-            or (type(task) is str and task in {TASK_CLASS, G1C_TASK, G1D_TASK, G1E_TASK}))
+            or (type(task) is str and task in {TASK_CLASS, G1C_TASK, G1D_TASK, G1E_TASK, G2_TASK}))
 
 
 def build_completion_scope(recorded_at: str, transition_base: str) -> dict:
@@ -945,6 +1025,175 @@ def validate_g1e_acceptance_transition(before: dict[str, bytes], after: dict[str
     _need(after[G1E_SCOPE] == expected[G1E_SCOPE], "bounded_g1e_scope_encoding_invalid")
 
 
+def build_g2_repair_scope(recorded_at: str, transition_base: str, installed_controller: dict) -> dict:
+    controller = _validate_installed_controller(installed_controller)
+    _need(controller["commit"] == transition_base, "bounded_g2_controller_must_precede_activation")
+    _need(controller["source_sha256"]["orchestration_harness/configuration_core.py"]
+          == G1E_SOURCE_PINS["orchestration_harness/configuration_core.py"], "bounded_g2_preserved_core_changed")
+    return {
+        "schema_version": "ariadne.g2_baseline_repair_scope.v1", "recorded_at": recorded_at,
+        "transition_base_commit": transition_base, "accepted_component": "G1E_configuration_and_core",
+        "accepted_publication": dict(G1E_PUBLICATION), "accepted_source_sha256": dict(G1E_SOURCE_PINS),
+        "accepted_activation": dict(G1E_ACTIVATION), "criteria": list(G1E_CRITERIA),
+        "evidence_sha256": dict(G1E_EVIDENCE_PINS),
+        "preserved_predecessor_scope": {"path": G1E_SCOPE, "sha256": G1E_BASELINE_PINS[G1E_SCOPE]},
+        "current_operation": {
+            "operation_id": "g2-confirmation-family-fixture-repair", "profile": G2_PROFILE,
+            "task_class": G2_TASK, "status": "active", "completion_accepted": False,
+            "supersedes": {"operation_id": "g1e-configuration-and-core-assessment",
+                "scope_path": G1E_SCOPE, "scope_sha256": G1E_BASELINE_PINS[G1E_SCOPE],
+                "historical_latch_preserved": True},
+        },
+        "installed_controller_publication": copy.deepcopy(controller),
+        "installed_component_paths": sorted(CONTROLLER_PATHS),
+        "repair": {"path": G2_FIXTURE, "before_sha256": G2_FIXTURE_BEFORE,
+                   "original_reviewed_after_sha256": G2_ORIGINAL_FIXTURE_AFTER,
+                   "after_sha256": G2_FIXTURE_AFTER, "runtime_acceptance": False},
+        "repair_sha256": copy.deepcopy(G2_REPAIR_PINS),
+        "cold_import_prerequisite": "Delay the excluded typed-plan import until its existing default-off product-context functions are invoked; no clinical or provider semantics changed",
+        "allowed_paths": sorted(G2_REPAIR_PINS), "allowed_effects": sorted(EFFECTS),
+        "forbidden_effects": raisa_policy.g2_repair_profile()["forbidden_effects"],
+        "owner_test_runtime_exception": raisa_policy.g2_test_exception(),
+        "g2_exit_requirements": list(G2_CRITERIA), "g1e_complete": True, "g2_complete": False,
+        "global_gate": "red_repair_only", "feature_work_eligible": False,
+        "execution_authorized": False, "operational_multi_task_control_accepted": False,
+        "existing_clockwork_writers_activated": False, "claim_limits": list(G2_LIMITS),
+    }
+
+
+def _validate_g2_repair_scope(scope: dict) -> None:
+    stamp, base = scope.get("recorded_at"), scope.get("transition_base_commit")
+    _need(type(stamp) is str and datetime.fromisoformat(stamp).tzinfo is not None, "bounded_g1b_timestamp_invalid")
+    _need(type(base) is str and re.fullmatch(r"[0-9a-f]{40}", base) is not None, "bounded_g1b_transition_base_invalid")
+    expected = build_g2_repair_scope(stamp, base, scope.get("installed_controller_publication"))
+    _need(_canonical(scope) == _canonical(expected), "bounded_g2_scope_invalid")
+
+
+def build_g2_acceptance_transition(before: dict[str, bytes], scope: dict) -> dict[str, bytes]:
+    """Record accepted G1E evidence and open the exact first G2 repair only."""
+    _keys(before, set(G1E_BASELINE_PINS), "bounded_g2_predecessor_paths")
+    for path, digest in G1E_BASELINE_PINS.items():
+        _need(type(before[path]) is bytes and _sha(before[path]) == digest, "bounded_g2_predecessor_changed")
+    _validate_g2_repair_scope(scope)
+    state, gates, overlay = (_document(before[p], p) for p in (STATE, GATES, OVERLAY))
+    _need(state["active_profile"] == G1E_PROFILE and state["current_gate"] == "G1E"
+          and all(state[key]["status"] == "passed" for key in ("g1b", "g1c", "g1d"))
+          and state["g1e"]["status"] == "active" and state["g1e"]["completion_accepted"] is False
+          and "g2" not in state, "bounded_g2_predecessor_profile")
+    _need(state["feature_work_eligible"] is False and state["product_work_eligible"] is False
+          and state["global_checks"]["global_gate"] == "red_repair_only"
+          and state["global_checks"]["feature_work_suspended"] is True, "bounded_g1b_repair_only_required")
+    _need(state["g1e"]["scope_sha256"] == _sha(before[G1E_SCOPE])
+          and state["g1e"]["current_operation"] == _json(before[G1E_SCOPE])["current_operation"],
+          "bounded_g2_predecessor_operation_changed")
+    scope_raw = _canonical(scope) + b"\n"
+    state.update(current_gate="G2", active_correction="G2", active_profile=G2_PROFILE,
+                 observed_at=scope["recorded_at"])
+    state["g1e"].update(status="passed", completion_accepted=True)
+    state["g1e"]["acceptance"] = {"scope_path": G2_SCOPE, "scope_sha256": _sha(scope_raw),
+        "accepted_component_commit": G1E_PUBLICATION["commit"], "criteria": list(G1E_CRITERIA),
+        "assessment_sha256": G1E_EVIDENCE_PINS["g1e-evidence/assessment.stdout.json"]}
+    state["g2"] = {"status": "active", "scope_path": G2_SCOPE, "scope_sha256": _sha(scope_raw),
+        "current_operation": copy.deepcopy(scope["current_operation"]), "completion_accepted": False}
+    state["task_selection"].update(allowed_task_kinds=[G2_TASK], next_eligible_tranche="G2",
+        next_eligibility_condition="bounded_G2_baseline_repair_active")
+    gates["programme"].update(current_gate="G2", next_eligible_tranche="G2", prepared_at=scope["recorded_at"])
+    by_id = {row["id"]: row for row in gates["gates"]}
+    _need(len(by_id) == len(gates["gates"]) and by_id["G1E"]["exit_checks"] == list(G1E_CRITERIA)
+          and by_id["G2"]["exit_checks"] == list(G2_CRITERIA) and by_id["G1E"]["status"] == "active"
+          and by_id["G2"]["status"] == "blocked_by_G1", "bounded_g2_gate_predecessor_invalid")
+    by_id["G1E"]["status"], by_id["G2"]["status"] = "passed", "active"
+    _need(overlay["active_profile"] == G1E_PROFILE and G2_PROFILE not in overlay["profiles"],
+          "bounded_g2_profile_already_active")
+    overlay["active_profile"] = G2_PROFILE
+    overlay["profiles"][G2_PROFILE] = raisa_policy.g2_repair_profile()
+    text = before[AGENTS].decode("utf-8")
+    old_runtime = "- Real patient/clinical data, live external model/identity/clinical providers and product runtime effects are closed during this recovery work. Do not start application, database or browser runtimes merely to satisfy a historical test fixture."
+    exception = raisa_policy.g2_test_exception()
+    replacements = {
+        G1E_PREAMBLE: G2_PREAMBLE,
+        "| Active programme gate | G1E configuration/core assessment; the bounded G1D provenance component is accepted. The installed controller is eligible for read-only assessment; operational multi-task control and G2 remain unaccepted. |":
+        "| Active programme gate | G2 baseline repair; the G1E configuration/core criteria are accepted. Only the exact active repair and separately reviewed isolated synthetic tests are eligible; global CI, G2 completion and feature development remain unaccepted. |",
+        "| Next dependency | Verify the installed configuration/core component using orchestration/programme/g1e-configuration-core-scope.json; its read-only assessment explicitly supersedes the preserved G1D operation. |":
+        "| Next dependency | Integrate and verify the exact confirmation-family fixture repair in orchestration/programme/g2-baseline-repair-scope.json, then continue current stop-ship repairs under standing authority. |",
+        old_runtime: old_runtime + "\n- Yuri expressly authorised the isolated G2 application/PostgreSQL test-only exception: contract SHA-256 `" + exception["contract_sha256"] + "`, owner approval SHA-256 `" + exception["owner_approval_sha256"] + "`. This covers independently scoped and reviewed batches with synthetic data, a new disposable database, no public application listener, and test-process network access only to that database on loopback. Each launch requires the reviewed executable/import/endpoint/cleanup binding and the contract's finite budgets. Real data, existing environments, providers, protected evidence and all other closures remain excluded. The general closed-surfaces policy is preserved; admission alone grants no runtime execution authority.",
+    }
+    for old, new in replacements.items():
+        _need(text.count(old) == 1, "bounded_g2_agents_predecessor_changed")
+        text = text.replace(old, new, 1)
+    return {STATE: json.dumps(state, indent=2, ensure_ascii=False).encode() + b"\n",
+            GATES: yaml.safe_dump(gates, sort_keys=False, allow_unicode=True).encode(),
+            OVERLAY: yaml.safe_dump(overlay, sort_keys=False, allow_unicode=True).encode(),
+            AGENTS: text.encode(), G2_SCOPE: scope_raw}
+
+
+def validate_g2_acceptance_transition(before: dict[str, bytes], after: dict[str, bytes],
+                                      evidence: dict[str, bytes]) -> None:
+    _keys(after, G2_TRANSITION_PATHS, "bounded_g2_transition_paths")
+    _keys(evidence, set(G1E_EVIDENCE_PINS), "bounded_g2_evidence_paths")
+    for path, digest in G1E_EVIDENCE_PINS.items():
+        _need(type(evidence[path]) is bytes and _sha(evidence[path]) == digest, "bounded_g2_evidence_changed")
+    review = _json(evidence["g1e-evidence/criteria-review.json"])
+    assessment = _json(evidence["g1e-evidence/assessment.stdout.json"])
+    binding = _json(evidence["g1e-evidence/assessment-binding.json"])
+    readback = _json(evidence["g1e-evidence/fresh-readback.json"])
+    approval = _json(evidence["g1e-evidence/owner-runtime-approval.json"])
+    contract = _json(evidence["g1e-evidence/isolated-test-contract.json"])
+    refinement = _json(evidence["g1e-evidence/fixture-refinement-independent-review.json"])
+    cold_import = _json(evidence["g1e-evidence/cold-import-independent-review.json"])
+    _need(review["verdict"] == "G1E_CONFIGURATION_CORE_CRITERIA_PASS"
+          and set(review["criteria"]) == set(G1E_CRITERIA)
+          and all(value.startswith("PASS:") for value in review["criteria"].values())
+          and review["installed_controller_commit"] == G1E_PUBLICATION["commit"]
+          and review["activation_commit"] == G1E_ACTIVATION["commit"]
+          and review["assessment_sha256"] == G1E_EVIDENCE_PINS["g1e-evidence/assessment.stdout.json"]
+          and review["assessment_binding_sha256"] == assessment["binding_sha256"]
+          == G1E_EVIDENCE_PINS["g1e-evidence/assessment-binding.json"]
+          and assessment["status"] == "assessment_pass" and assessment["assessment_passed"] is True
+          and assessment["execution_authorized"] is False and assessment["policy_eligible"] is False
+          and assessment["reason_codes"] == assessment["failed_checks"] == []
+          and assessment["configuration_document_count"] == review["configuration_documents"] == 10
+          and assessment["configuration_sha256"] == review["configuration_sha256"]
+          == "5018a1040498890d595f1f1f3429c331020152fa11e874e76a5aa09fa0125453"
+          and binding["operation_kind"] == "assess_g1e" and binding["phase"] == "assessment"
+          and binding["base_commit"] == binding["expected_head"] == binding["activation_commit"] == G1E_ACTIVATION["commit"]
+          and binding["base_tree"] == binding["expected_index_tree"] == binding["candidate_tree"] == G1E_ACTIVATION["tree"]
+          and binding["installed_controller"] == {**G1E_PUBLICATION, "source_sha256": G1E_SOURCE_PINS}
+          and all(readback[key] == value for key, value in G1E_ACTIVATION.items())
+          and readback["remote"][RECOVERY_REF] == G1E_ACTIVATION["commit"],
+          "bounded_g2_g1e_evidence_invalid")
+    _need(approval["approved"] is True and approval["owner_response_verbatim"] == "Yes"
+          and approval["contract_sha256"] == G1E_EVIDENCE_PINS["g1e-evidence/isolated-test-contract.json"]
+          and contract["first_candidate"]["path"] == G2_FIXTURE
+          and contract["first_candidate"]["before_sha256"] == G2_FIXTURE_BEFORE
+          and contract["first_candidate"]["after_sha256"] == G2_ORIGINAL_FIXTURE_AFTER
+          and refinement["verdict"] == "BERNIE_ARGUMENT_REFINEMENT_STATIC_PASS"
+          and refinement["original_candidate_sha256"] == G2_ORIGINAL_FIXTURE_AFTER
+          and refinement["candidate_sha256"] == G2_FIXTURE_AFTER
+          and refinement["source_review_sha256"] == G1E_EVIDENCE_PINS["g1e-evidence/fixture-refinement-source.json"]
+          and refinement["assertions_preserved"] == 16 and refinement["test_methods"] == 4
+          and refinement["runtime_authority_unchanged"] is True
+          and refinement["module_repaired_or_runtime_accepted"] is False,
+          "bounded_g2_owner_exception_invalid")
+    _need(cold_import["verdict"] == "LAZY_TYPED_PLAN_IMPORT_STATIC_PASS"
+          and cold_import["source_review_sha256"] == G1E_EVIDENCE_PINS["g1e-evidence/cold-import-source-review.json"]
+          and cold_import["path"] == G2_COLD_IMPORT
+          and cold_import["before_sha256"] == G2_REPAIR_PINS[G2_COLD_IMPORT]["before_sha256"]
+          and cold_import["candidate_sha256"] == G2_REPAIR_PINS[G2_COLD_IMPORT]["after_sha256"]
+          and cold_import["remaining_ast_identical"] is True
+          and cold_import["excluded_script_read_copied_or_imported"] is False
+          and cold_import["application_runtime_tested"] is False and cold_import["runtime_feature_activated"] is False,
+          "bounded_g2_cold_import_review_invalid")
+    expected = build_g2_acceptance_transition(before, _json(after[G2_SCOPE]))
+    for path in G2_TRANSITION_PATHS:
+        if path.endswith((".json", ".yaml")):
+            _need(_canonical(_document(after[path], path)) == _canonical(_document(expected[path], path)),
+                  "bounded_g2_authority_delta_invalid")
+        else:
+            _need(after[path] == expected[path], "bounded_g2_agents_delta_invalid")
+    _need(after[G2_SCOPE] == expected[G2_SCOPE], "bounded_g2_scope_encoding_invalid")
+
+
 @dataclass(frozen=True, slots=True)
 class BoundedG1BContext:
     target_root: Path
@@ -1034,7 +1283,7 @@ def load_bounded_g1b_inputs(context: BoundedG1BContext) -> BoundedG1BInputs:
           "bounded_g1b_operation_id")
     _need(binding["phase"] in ({"assessment"} if operation.get("assessment")
                               else {"development", "pre-push", "post-push"}), "bounded_g1b_phase")
-    if operation["gate"] == "G1E":
+    if operation["gate"] in {"G1E", "G2"}:
         _validate_installed_controller(binding["installed_controller"])
     else:
         _need(binding["installed_controller"] is None, "bounded_g1e_unexpected_installed_controller")
@@ -1052,10 +1301,12 @@ def load_bounded_g1b_inputs(context: BoundedG1BContext) -> BoundedG1BInputs:
     frozen_pins = dict(FROZEN_PINS)
     if operation["successor"]:
         frozen_pins.update({COST: COST_PIN, SCOPE_PATH: G1B_BASELINE_PINS[SCOPE_PATH]})
-    if operation["gate"] in {"G1D", "G1E"}:
+    if operation["gate"] in {"G1D", "G1E", "G2"}:
         frozen_pins.update({G1C_SCOPE: G1C_BASELINE_PINS[G1C_SCOPE], **GOVERNOR_PINS, **PROVENANCE_DEPENDENCY_PINS})
-    if operation["gate"] == "G1E":
+    if operation["gate"] in {"G1E", "G2"}:
         frozen_pins.update({G1D_SCOPE: G1D_BASELINE_PINS[G1D_SCOPE], **PROVENANCE_PINS, **CONFIGURATION_LEAF_PINS})
+    if operation["gate"] == "G2":
+        frozen_pins[G1E_SCOPE] = G1E_BASELINE_PINS[G1E_SCOPE]
     for path, digest in frozen_pins.items():
         _need(_sha(payloads[path]) == digest, "bounded_g1b_frozen_input_changed")
     evidence = {path: read(evidence_root / path, digest) for path, digest in operation["evidence_pins"].items()}
@@ -1072,7 +1323,22 @@ def load_bounded_g1b_inputs(context: BoundedG1BContext) -> BoundedG1BInputs:
         for path, digest in operation["accepted_pins"].items():
             _need(_sha(trusted_git.run_git_bytes(target, "cat-file", "blob", accepted + ":" + path)) == digest,
                   operation["component_reason"] + "_accepted_component_changed")
-    if operation["gate"] == "G1E":
+    if operation["gate"] == "G2":
+        accepted_activation = G1E_ACTIVATION["commit"]
+        headers = trusted_git.run_git(target, "cat-file", "commit", accepted_activation).split("\n\n", 1)[0].splitlines()
+        _need([line for line in headers if line.startswith("parent ")] == ["parent " + G1E_ACTIVATION["parent"]]
+              and [line for line in headers if line.startswith("tree ")] == ["tree " + G1E_ACTIVATION["tree"]],
+              "bounded_g2_accepted_activation_invalid")
+        trusted_git.run_git(target, "merge-base", "--is-ancestor", accepted_activation, base)
+        for path, digest in G1E_BASELINE_PINS.items():
+            _need(_sha(trusted_git.run_git_bytes(target, "cat-file", "blob", accepted_activation + ":" + path)) == digest,
+                  "bounded_g2_assessed_authority_changed")
+        for path, pins in G2_REPAIR_PINS.items():
+            _need(_sha(trusted_git.run_git_bytes(target, "cat-file", "blob", base + ":" + path)) == pins["before_sha256"],
+                  "bounded_g2_fixture_predecessor_changed")
+            expected = pins["before_sha256"] if operation["transition"] else pins["after_sha256"]
+            _need(_sha(payloads[path]) == expected, "bounded_g2_fixture_candidate_changed")
+    if operation["gate"] in {"G1E", "G2"}:
         controller = binding["installed_controller"]
         installed = controller["commit"]
         headers = trusted_git.run_git(target, "cat-file", "commit", installed).split("\n\n", 1)[0].splitlines()
@@ -1113,8 +1379,8 @@ def load_bounded_g1b_inputs(context: BoundedG1BContext) -> BoundedG1BInputs:
                 _need(trusted_git.run_git_bytes(target, "cat-file", "blob", commit + ":" + path) == payloads[path],
                       "bounded_g1b_activation_not_committed")
     attested = operation["input_paths"]
-    if operation["transition"] and binding["phase"] == "development":
-        attested = attested - operation["transition_paths"]
+    if binding["phase"] == "development":
+        attested = attested - operation["paths"]
     observation = trusted_git.attest_target_index(target, attested_paths=tuple(sorted(attested)),
         expected_head=binding["expected_head"], expected_index_tree=binding["expected_index_tree"], scratch_parent=scratch)
     _need(trusted_git.run_git(target, "rev-parse", binding["base_commit"] + "^{tree}") == binding["base_tree"],
@@ -1141,7 +1407,8 @@ def _validate_loaded_policy(inputs: BoundedG1BInputs) -> tuple[dict[str, bytes],
     operation = _operation(inputs.binding["operation_kind"])
     after = {path: inputs.payloads[path] for path in operation["transition_paths"]}
     validator = {"G1B": validate_g1b_acceptance_transition, "G1C": validate_g1c_acceptance_transition,
-                 "G1D": validate_g1d_acceptance_transition, "G1E": validate_g1e_acceptance_transition}[operation["gate"]]
+                 "G1D": validate_g1d_acceptance_transition, "G1E": validate_g1e_acceptance_transition,
+                 "G2": validate_g2_acceptance_transition}[operation["gate"]]
     validator(inputs.before, after, inputs.evidence)
     try:
         raisa_policy.validate_precedence(
@@ -1150,8 +1417,8 @@ def _validate_loaded_policy(inputs: BoundedG1BInputs) -> tuple[dict[str, bytes],
             after[AGENTS].decode("utf-8"), _json(after[STATE]),
         )
         configuration = None
-        if operation["gate"] == "G1E":
-            scope = _json(after[G1E_SCOPE])
+        if operation["gate"] in {"G1E", "G2"}:
+            scope = _json(after[operation["scope_path"]])
             _need(_canonical(scope["installed_controller_publication"]) == _canonical(inputs.binding["installed_controller"]),
                   "bounded_g1e_controller_binding_disagreement")
             configuration = raisa_policy.validate_recovery_configuration(

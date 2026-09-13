@@ -44,7 +44,8 @@ class ClosedRequestTests(unittest.TestCase):
                          {"operation_kind": "accept_g1b"}, {"operation_kind": "implement_g1c"},
                          {"task_class": b.G1C_TASK}, {"operation_kind": "accept_g1c"},
                          {"operation_kind": "implement_g1d"}, {"task_class": b.G1D_TASK},
-                         {"operation_kind": "accept_g1d"}, {"operation_kind": "assess_g1e"}, {"task_class": b.G1E_TASK}):
+                         {"operation_kind": "accept_g1d"}, {"operation_kind": "assess_g1e"}, {"task_class": b.G1E_TASK},
+                         {"operation_kind": "accept_g1e"}, {"operation_kind": "repair_g2_fixture"}, {"task_class": b.G2_TASK}):
             with self.subTest(manifest=manifest), no_legacy_observation(), \
                     patch.object(pa, "load_programme_policy", side_effect=AssertionError("old loader")), \
                     patch.object(pf, "load_programme_policy", side_effect=AssertionError("old loader")):
@@ -186,11 +187,12 @@ class SuccessorFixture(NativeFixture):
     Production constants, pinned authority bytes and validators are unchanged.
     """
     def __init__(self, assets: Path, operation_kind="accept_g1b"):
-        assert operation_kind in {"accept_g1b", "accept_g1c", "accept_g1d"}
+        assert operation_kind in {"accept_g1b", "accept_g1c", "accept_g1d", "accept_g1e"}
         self.operation = b._operation(operation_kind)
         self.publication = self.operation["accepted_publication"]
         self.is_provenance = operation_kind == "accept_g1c"
-        self.is_configuration = operation_kind == "accept_g1d"
+        self.is_g2 = operation_kind == "accept_g1e"
+        self.is_configuration = operation_kind in {"accept_g1d", "accept_g1e"}
         self.temporary = tempfile.TemporaryDirectory(prefix="g1c-contract-")
         self.home = Path(self.temporary.name)
         self.root = self.home / "target"
@@ -207,8 +209,21 @@ class SuccessorFixture(NativeFixture):
             frozen_paths.update({b.SCOPE_PATH, *b.PROVENANCE_DEPENDENCY_PINS})
         if self.is_configuration:
             frozen_paths.update({b.G1C_SCOPE, *b.GOVERNOR_PINS, *b.CONFIGURATION_PATHS})
+        if self.is_g2:
+            frozen_paths.update({b.G1D_SCOPE, *b.PROVENANCE_PINS, *b.G2_REPAIR_PINS})
 
         def frozen_input(path):
+            if self.is_g2:
+                if path in self.before:
+                    return self.before[path]
+                if path == b.G1D_SCOPE:
+                    return (self.source / "g1d-baseline" / path).read_bytes()
+                if path in b.PROVENANCE_PINS:
+                    return (self.source / "g1d-accepted-source" / path).read_bytes()
+                if path == b.G2_FIXTURE:
+                    return (assets / "g2-fixture/before").read_bytes()
+                if path == b.G2_COLD_IMPORT:
+                    return (assets / "g2-cold-import/before").read_bytes()
             if self.is_configuration:
                 if path == b.G1C_SCOPE:
                     return (self.source / "g1c-baseline" / path).read_bytes()
@@ -219,15 +234,18 @@ class SuccessorFixture(NativeFixture):
             return (assets / "inputs" / path).read_bytes()
 
         self.frozen = {p: frozen_input(p) for p in frozen_paths}
-        source_directory = "g1d-accepted-source" if self.is_configuration else "g1c-accepted-source" if self.is_provenance else "g1b-accepted-source"
+        source_directory = "g1e-accepted-source" if self.is_g2 else "g1d-accepted-source" if self.is_configuration else "g1c-accepted-source" if self.is_provenance else "g1b-accepted-source"
         self.accepted_source = {p: (self.source / source_directory / p).read_bytes()
                                 for p in self.operation["accepted_pins"]}
         initial_source, installed_source = {}, {}
         if self.is_configuration:
             installed_source = {p: (self.source / p).read_bytes() for p in b.SOURCE_PATHS | b.CONTROLLER_PATHS}
-            initial_source = {p: raw for p, raw in installed_source.items() if p not in b.CONTROLLER_PATHS}
-            for p in ("orchestration_harness/bounded_g1b.py", "orchestration_harness/programme_admission.py", "tests/test_bounded_g1b.py"):
-                initial_source[p] = (self.source.parent / "inputs" / p).read_bytes()
+            if self.is_g2:
+                initial_source = {p: (self.source / "g1e-accepted-source" / p).read_bytes() for p in installed_source}
+            else:
+                initial_source = {p: raw for p, raw in installed_source.items() if p not in b.CONTROLLER_PATHS}
+                for p in ("orchestration_harness/bounded_g1b.py", "orchestration_harness/programme_admission.py", "tests/test_bounded_g1b.py"):
+                    initial_source[p] = (self.source.parent / "inputs" / p).read_bytes()
         initial = {**self.before, **self.frozen, **self.accepted_source, **initial_source}
         for path, raw in initial.items():
             self.write(path, raw)
@@ -242,16 +260,18 @@ class SuccessorFixture(NativeFixture):
         self.controller = None
         if self.is_configuration:
             parent = self.base
-            for path in b.CONTROLLER_PATHS:
+            changed_controller = b.CONTROLLER_PATHS - {"orchestration_harness/configuration_core.py"} if self.is_g2 else b.CONTROLLER_PATHS
+            for path in changed_controller:
                 self.write(path, installed_source[path])
-            self.git("add", "--", *sorted(b.CONTROLLER_PATHS))
+            self.git("add", "--", *sorted(changed_controller))
             tree = self.git("write-tree")
-            self.base = self.git("commit-tree", tree, "-p", parent, "-m", "authored five-file controller installation")
+            self.base = self.git("commit-tree", tree, "-p", parent, "-m", "authored controller installation")
             self.git("update-ref", "--no-deref", "HEAD", self.base, parent)
             self.controller = {"commit": self.base, "parent": parent, "tree": tree,
                                "source_sha256": {p: b._sha(installed_source[p]) for p in b.CONTROLLER_PATHS}}
-            self.after = b.build_g1e_acceptance_transition(self.before,
-                b.build_configuration_scope("2026-09-12T00:00:00+00:00", self.base, self.controller))
+            transition = b.build_g2_acceptance_transition if self.is_g2 else b.build_g1e_acceptance_transition
+            scope = b.build_g2_repair_scope if self.is_g2 else b.build_configuration_scope
+            self.after = transition(self.before, scope("2026-09-13T00:00:00+00:00", self.base, self.controller))
         else:
             transition = b.build_g1d_acceptance_transition if self.is_provenance else b.build_g1c_acceptance_transition
             scope = b.build_provenance_scope if self.is_provenance else b.build_governor_scope
@@ -270,6 +290,8 @@ class SuccessorFixture(NativeFixture):
         self.component_header = ("tree " + self.publication["tree"] + "\nparent "
                                  + self.publication["parent"] + "\n\nauthored observation\n")
         self.component_ancestry_error = None
+        self.accepted_activation_header = "tree " + b.G1E_ACTIVATION["tree"] + "\nparent " + b.G1E_ACTIVATION["parent"] + "\n\nauthored historical activation\n"
+        self.accepted_activation_source = dict(self.before)
 
     @contextmanager
     def component_history(self):
@@ -277,6 +299,11 @@ class SuccessorFixture(NativeFixture):
         accepted = self.publication["commit"]
 
         def observed_text(root, *args, **kwargs):
+            if self.is_g2 and root == self.root:
+                if args == ("cat-file", "commit", b.G1E_ACTIVATION["commit"]):
+                    return self.accepted_activation_header
+                if args == ("merge-base", "--is-ancestor", b.G1E_ACTIVATION["commit"], self.q["base_commit"]):
+                    return ""
             if root == self.root and args == ("cat-file", "commit", accepted):
                 return self.component_header
             if root == self.root and args == ("merge-base", "--is-ancestor", accepted, self.q["base_commit"]):
@@ -286,6 +313,10 @@ class SuccessorFixture(NativeFixture):
             return run(root, *args, **kwargs)
 
         def observed_bytes(root, *args, **kwargs):
+            if self.is_g2:
+                for path, raw in self.accepted_activation_source.items():
+                    if root == self.root and args == ("cat-file", "blob", b.G1E_ACTIVATION["commit"] + ":" + path):
+                        return raw
             for path, raw in self.accepted_source.items():
                 if root == self.root and args == ("cat-file", "blob", accepted + ":" + path):
                     return raw
@@ -302,12 +333,19 @@ class SuccessorFixture(NativeFixture):
         return commit
 
     def prepare_implementation(self, activation):
-        assert not self.is_configuration, "installed G1E component is assessed, not republished"
-        kind = "implement_g1d" if self.is_provenance else "implement_g1c"
+        assert self.is_g2 or not self.is_configuration, "installed G1E component is assessed, not republished"
+        kind = "repair_g2_fixture" if self.is_g2 else "implement_g1d" if self.is_provenance else "implement_g1c"
         self.q.update(operation_kind=kind, phase="development", base_commit=activation,
                       base_tree=self.q["candidate_tree"], activation_commit=activation)
         for path in b.operation_paths(kind):
-            self.write(path, b"authored candidate; deliberately not importable Python\n")
+            if self.is_g2:
+                folder = "g2-fixture" if path == b.G2_FIXTURE else "g2-cold-import"
+                raw = (self.assets / folder / "after").read_bytes()
+            else:
+                raw = b"authored candidate; deliberately not importable Python\n"
+            self.write(path, raw)
+            if self.is_g2:
+                self.q["payload_sha256"][path] = b._sha(raw)
         self.git("add", "--", *sorted(b.operation_paths(kind)))
         tree = self.git("write-tree")
         self.q.update(candidate_tree=tree, expected_index_tree=tree)
@@ -883,7 +921,7 @@ def build_integration_suite(assets: Path) -> unittest.TestSuite:
                 manifest={**manifest, "allowed_paths": sorted(b.G1D_TRANSITION_PATHS | b.PROVENANCE_PATHS)},
                 entrypoint="task_branch_commit", phase="development")
             self.assertEqual(result.reason_codes, ("bounded_g1b_manifest_binding_mismatch",))
-            for kind in ("accept_g1e", "implement_g1e", None, []):
+            for kind in ("accept_g2", "implement_g1e", None, []):
                 f.q["operation_kind"] = kind
                 result = b.evaluate_bounded_g1b_operation(context=f.context(), manifest=manifest,
                     entrypoint="task_branch_commit", phase="development")
@@ -1283,10 +1321,224 @@ def build_integration_suite(assets: Path) -> unittest.TestSuite:
                 pa.load_programme_policy(f.root)
             self.assertEqual(caught.exception.reason_code, "bounded_g1b_context_required")
 
+    class G2AdmissionTests(unittest.TestCase):
+        def setUp(self):
+            self.fx = SuccessorFixture(assets, "accept_g1e")
+            self.addCleanup(self.fx.close)
+            self.stack = ExitStack()
+            self.addCleanup(self.stack.close)
+            self.stack.enter_context(no_legacy_observation())
+            self.stack.enter_context(self.fx.component_history())
+
+        def test_four_changed_files_authenticate_all_five_installed_components(self):
+            f = self.fx
+            result = f.decision()
+            self.assertTrue(result.policy_admitted, result.reason_codes)
+            self.assertEqual(result.current_gate, "G2")
+            self.assertFalse(result.execution_authorized)
+            changed = set(f.git("diff-tree", "--no-commit-id", "--name-only", "-r", f.base).splitlines())
+            self.assertEqual(changed, b.CONTROLLER_PATHS - {"orchestration_harness/configuration_core.py"})
+            self.assertEqual(set(f.controller["source_sha256"]), b.CONTROLLER_PATHS)
+            original = copy.deepcopy(f.q["installed_controller"])
+            del f.q["installed_controller"]["source_sha256"]["orchestration_harness/configuration_core.py"]
+            self.assertEqual(f.decision().reason_codes, ("bounded_g1e_controller_source_paths",))
+            f.q["installed_controller"] = original
+            f.q["installed_controller"]["source_sha256"]["orchestration_harness/configuration_core.py"] = "0" * 64
+            self.assertEqual(f.decision().reason_codes, ("bounded_g1e_installed_controller_changed",))
+
+        def test_acceptance_preserves_prior_authority_and_all_g2_requirements(self):
+            f = self.fx
+            before, after = b._json(f.before[b.STATE]), b._json(f.after[b.STATE])
+            changed_keys = {"current_gate", "active_correction", "active_profile", "observed_at", "g1e", "g2", "task_selection"}
+            self.assertEqual({k:v for k,v in after.items() if k not in changed_keys},
+                             {k:v for k,v in before.items() if k not in changed_keys})
+            self.assertTrue(after["g1e"]["completion_accepted"])
+            self.assertFalse(after["g2"]["completion_accepted"])
+            self.assertEqual(after["g1e"]["current_operation"], before["g1e"]["current_operation"])
+            self.assertEqual(after["global_checks"], before["global_checks"])
+            gates = b._document(f.after[b.GATES], b.GATES)
+            rows = {row["id"]:row for row in gates["gates"]}
+            self.assertEqual(rows["G2"]["exit_checks"], list(b.G2_CRITERIA))
+            self.assertEqual(len(rows["G2"]["exit_checks"]), 12)
+            self.assertEqual(rows["G1E"]["status"], "passed")
+            self.assertEqual(rows["G2"]["status"], "active")
+
+        def test_historical_assessment_is_distinct_from_current_controller(self):
+            f = self.fx
+            self.assertTrue(f.decision().policy_admitted)
+            scope = b._json(f.after[b.G2_SCOPE])
+            self.assertEqual(scope["accepted_publication"], b.G1E_PUBLICATION)
+            self.assertEqual(scope["accepted_activation"], b.G1E_ACTIVATION)
+            self.assertNotEqual(scope["accepted_publication"]["commit"], f.controller["commit"])
+            self.assertEqual(scope["accepted_source_sha256"], b.G1E_SOURCE_PINS)
+            for path in b.CONTROLLER_PATHS - {"orchestration_harness/configuration_core.py"}:
+                self.assertNotEqual(scope["accepted_source_sha256"][path], f.controller["source_sha256"][path])
+            f.accepted_activation_header = f.accepted_activation_header.replace(b.G1E_ACTIVATION["tree"], "0" * 40)
+            self.assertEqual(f.decision().reason_codes, ("bounded_g2_accepted_activation_invalid",))
+
+        def test_assessed_source_and_historical_authority_cannot_be_substituted(self):
+            f = self.fx
+            self.assertTrue(f.decision().policy_admitted)
+            path = "orchestration_harness/raisa_policy.py"
+            original = f.accepted_source[path]
+            f.accepted_source[path] = original + b"\n"
+            self.assertEqual(f.decision().reason_codes, ("bounded_g2_accepted_component_changed",))
+            f.accepted_source[path] = original
+            f.accepted_activation_source[b.STATE] += b"\n"
+            self.assertEqual(f.decision().reason_codes, ("bounded_g2_assessed_authority_changed",))
+
+        def test_every_acceptance_and_owner_evidence_input_is_required(self):
+            f = self.fx
+            b.validate_g2_acceptance_transition(f.before, f.after, f.evidence)
+            for path in b.G1E_EVIDENCE_PINS:
+                with self.subTest(path=path):
+                    with self.assertRaises(b.BoundedG1BError) as caught:
+                        b.validate_g2_acceptance_transition(f.before, f.after, {k:v for k,v in f.evidence.items() if k != path})
+                    self.assertEqual(caught.exception.reason_code, "bounded_g2_evidence_paths")
+                    with self.assertRaises(b.BoundedG1BError) as caught:
+                        b.validate_g2_acceptance_transition(f.before, f.after, {**f.evidence, path:f.evidence[path]+b"\n"})
+                    self.assertEqual(caught.exception.reason_code, "bounded_g2_evidence_changed")
+
+        def test_scope_cannot_expand_paths_outcomes_or_runtime_authority(self):
+            f = self.fx
+            original = b._json(f.after[b.G2_SCOPE])
+            for field, value in (("allowed_paths", [b.G2_FIXTURE, "app/main.py"]),
+                                 ("allowed_effects", ["repository_read", "database_runtime"]),
+                                 ("execution_authorized", True), ("g2_complete", True),
+                                 ("g2_exit_requirements", []), ("feature_work_eligible", True)):
+                with self.subTest(field=field), self.assertRaises(b.BoundedG1BError) as caught:
+                    b.build_g2_acceptance_transition(f.before, {**original, field:value})
+                self.assertEqual(caught.exception.reason_code, "bounded_g2_scope_invalid")
+            changed = copy.deepcopy(original)
+            changed["owner_test_runtime_exception"]["admission_grants_runtime_authority"] = True
+            with self.assertRaises(b.BoundedG1BError) as caught:
+                b.build_g2_acceptance_transition(f.before, changed)
+            self.assertEqual(caught.exception.reason_code, "bounded_g2_scope_invalid")
+
+        def test_configuration_validation_and_general_runtime_closures_are_retained(self):
+            f = self.fx
+            calls = []
+            validate = core.validate_configuration
+            def observe(**kwargs):
+                calls.append(set(kwargs["documents"]))
+                return validate(**kwargs)
+            with patch.object(core, "validate_configuration", side_effect=observe):
+                self.assertTrue(f.decision().policy_admitted)
+            self.assertEqual(calls, [{Path(p).name for p in b.CONFIGURATION_PATHS}])
+            path = "orchestration/harness_settings/evidence_led_workflow.yaml"
+            self.assertEqual(b._sha((f.root / path).read_bytes()), b.CONFIGURATION_LEAF_PINS[path])
+            docs = {Path(p).name:(f.root / p).read_bytes() for p in b.CONFIGURATION_PATHS}
+            original = b._document(docs["programme_recovery.yaml"], "programme_recovery.yaml")
+            for key, value in (("independent_execution_binding_required", False), ("test_attempts", 999),
+                               ("owner_approval_sha256", "0" * 64)):
+                changed = copy.deepcopy(original)
+                changed["profiles"][b.G2_PROFILE]["owner_test_runtime_exception"][key] = value
+                docs["programme_recovery.yaml"] = b._canonical(changed)
+                with self.subTest(key=key), self.assertRaises(rp.RaisaPolicyError) as caught:
+                    rp.validate_recovery_configuration(documents=docs, expected_sha256={n:b._sha(v) for n,v in docs.items()},
+                        agents_text=f.after[b.AGENTS].decode(), state=b._json(f.after[b.STATE]))
+                self.assertEqual(caught.exception.reason_code, "configuration_g2_repair_profile_invalid")
+
+        def test_exact_fixture_repair_requires_published_activation_and_both_hashes(self):
+            f = self.fx
+            activation = f.activate()
+            f.prepare_implementation(activation)
+            result = f.decision()
+            self.assertTrue(result.policy_admitted, result.reason_codes)
+            self.assertFalse(result.execution_authorized)
+            self.assertEqual(b.operation_paths("repair_g2_fixture"), frozenset(b.G2_REPAIR_PINS))
+            self.assertEqual(f.git("show", activation + ":" + b.G2_FIXTURE).strip(),
+                             (assets / "g2-fixture/before").read_text().strip())
+            raw = (f.root / b.G2_FIXTURE).read_bytes()
+            f.write(b.G2_FIXTURE, raw + b"\n")
+            f.q["payload_sha256"][b.G2_FIXTURE] = b._sha(raw + b"\n")
+            self.assertEqual(f.decision().reason_codes, ("bounded_g2_fixture_candidate_changed",))
+            f.write(b.G2_FIXTURE, raw)
+            f.q["payload_sha256"][b.G2_FIXTURE] = b._sha(raw)
+            f.q["activation_commit"] = f.base
+            self.assertFalse(f.decision().policy_admitted)
+
+        def test_rebinding_scope_cannot_grant_application_effects(self):
+            f = self.fx
+            context = f.context()
+            manifest = f.manifest(context)
+            for key, value in (("intended_side_effect_classes", sorted(b.EFFECTS | {"database_runtime"})),
+                               ("allowed_paths", sorted(b.G2_TRANSITION_PATHS | {b.G2_FIXTURE}))):
+                result = b.evaluate_bounded_g1b_operation(context=context, manifest={**manifest, key:value},
+                    entrypoint="task_branch_commit", phase="development")
+                self.assertEqual(result.reason_codes, ("bounded_g1b_manifest_binding_mismatch",))
+                self.assertFalse(result.execution_authorized)
+
+        def test_committed_fixture_repair_keeps_activation_binding_and_scope(self):
+            f = self.fx
+            activation = f.activate()
+            f.prepare_implementation(activation)
+            self.assertTrue(f.decision().policy_admitted)
+            commit = f.git("commit-tree", f.q["candidate_tree"], "-p", activation, "-m", "authored exact fixture repair")
+            f.git("update-ref", "--no-deref", "HEAD", commit, activation)
+            f.q.update(phase="pre-push", expected_head=commit)
+            context = f.context()
+            result = b.evaluate_bounded_g1b_operation(context=context, manifest=f.manifest(context),
+                entrypoint="task_branch_push", phase="pre-push")
+            self.assertTrue(result.policy_admitted, result.reason_codes)
+            self.assertFalse(result.execution_authorized)
+            self.assertEqual(f.q["activation_commit"], activation)
+            self.assertEqual(f.q["base_commit"], activation)
+
+        def test_cold_import_prerequisite_is_exact_and_only_delays_the_excluded_import(self):
+            f = self.fx
+            before = ast.parse((assets / "g2-cold-import/before").read_bytes())
+            after = ast.parse((assets / "g2-cold-import/after").read_bytes())
+            module = "reception_one_bureau_typed_plan_protocol"
+            def moved(node):
+                return isinstance(node, ast.ImportFrom) and node.module == "scripts" and any(a.name == module for a in node.names)
+            self.assertEqual(sum(moved(node) for node in before.body), 1)
+            self.assertFalse(any(moved(node) for node in after.body))
+            owners = {node.name for node in after.body if isinstance(node, ast.FunctionDef)
+                      and any(moved(child) for child in node.body)}
+            self.assertEqual(owners, {"build_product_context_frame", "build_slot_search_input", "proofread_provider_blocked_plan"})
+            class RemoveMoved(ast.NodeTransformer):
+                def visit_ImportFrom(self, node):
+                    return None if moved(node) else node
+            self.assertEqual(ast.dump(RemoveMoved().visit(before), include_attributes=False),
+                             ast.dump(RemoveMoved().visit(after), include_attributes=False))
+            activation = f.activate()
+            f.prepare_implementation(activation)
+            self.assertTrue(f.decision().policy_admitted)
+            raw = (f.root / b.G2_COLD_IMPORT).read_bytes() + b"\n"
+            f.write(b.G2_COLD_IMPORT, raw)
+            f.q["payload_sha256"][b.G2_COLD_IMPORT] = b._sha(raw)
+            self.assertEqual(f.decision().reason_codes, ("bounded_g2_fixture_candidate_changed",))
+
+        def test_every_g2_marker_closes_legacy_loading_before_observation(self):
+            f = self.fx
+            historical = b._json((f.source / "baseline" / b.STATE).read_bytes())
+            for path in b.BOUNDED_SCOPE_PATHS:
+                target = f.root / path
+                if target.exists():
+                    target.unlink()
+            cases = [lambda s:s.update(active_profile=b.G2_PROFILE), lambda s:s.update(current_gate="G2"),
+                     lambda s:s.update(active_correction="G2"), lambda s:s.update(g2=None),
+                     lambda s:s["task_selection"].update(allowed_task_kinds=[b.G2_TASK])]
+            for mutate in cases:
+                state = copy.deepcopy(historical)
+                mutate(state)
+                f.write(b.STATE, b._canonical(state))
+                with self.assertRaises(pa.ProgrammeAdmissionError) as caught:
+                    pa.load_programme_policy(f.root)
+                self.assertEqual(caught.exception.reason_code, "bounded_g1b_context_required")
+                self.assertEqual(pf.build_report(f.root)["status"], "blocked")
+            f.write(b.STATE, b._canonical(historical))
+            f.write(b.G2_SCOPE, b"malformed G2 scope marker")
+            with self.assertRaises(pa.ProgrammeAdmissionError) as caught:
+                pa.load_programme_policy(f.root)
+            self.assertEqual(caught.exception.reason_code, "bounded_g1b_context_required")
+
     suite = unittest.defaultTestLoader.loadTestsFromTestCase(ClosedRequestTests)
     suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(IntegratedTests))
     suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(SuccessorTests))
     suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(ProvenanceAdmissionTests))
     suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(ConfigurationTests))
     suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(ConfigurationAdmissionTests))
+    suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(G2AdmissionTests))
     return suite
