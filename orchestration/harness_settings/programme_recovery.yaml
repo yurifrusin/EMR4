@@ -1157,12 +1157,154 @@ profiles:
     - provider_invocation
     - real_data_access
     allowed_paths:
+    - app/__init__.py
+    - app/config.py
+    - app/database.py
+    - app/dependencies.py
+    - app/graphql/__init__.py
+    - app/graphql/context.py
+    - app/graphql/router.py
+    - app/graphql/schema.py
+    - app/main.py
+    - app/middleware/__init__.py
+    - app/middleware/error_handler.py
+    - app/middleware/shadow_instrumentation.py
+    - app/models/__init__.py
+    - app/models/ai_audit.py
+    - app/models/application_auth.py
+    - app/models/application_identity_federation.py
+    - app/models/application_identity_oidc_attempt.py
+    - app/models/appointments.py
+    - app/models/base.py
+    - app/models/bernie_sessions.py
+    - app/models/billing.py
+    - app/models/care_plans.py
+    - app/models/clinical.py
+    - app/models/diary.py
+    - app/models/diary_events.py
+    - app/models/kiosk.py
+    - app/models/messaging.py
+    - app/models/patients.py
+    - app/models/practice_administration_commands.py
+    - app/models/rag.py
+    - app/models/results.py
+    - app/models/tenancy.py
+    - app/routers/__init__.py
+    - app/routers/application_auth.py
+    - app/routers/appointments.py
+    - app/routers/auth.py
+    - app/routers/bernie_dev.py
+    - app/routers/clinical.py
+    - app/routers/consultation.py
+    - app/routers/diary.py
+    - app/routers/diary_events.py
+    - app/routers/letters.py
+    - app/routers/patients.py
+    - app/routers/practice.py
+    - app/routers/practice_administration.py
+    - app/routers/search.py
+    - app/schemas/__init__.py
+    - app/schemas/application_auth_transport.py
+    - app/schemas/application_identity_oidc_transport.py
+    - app/schemas/appointments.py
+    - app/schemas/auth.py
+    - app/schemas/clinical.py
+    - app/schemas/diary.py
+    - app/schemas/diary_events.py
+    - app/schemas/patients.py
+    - app/schemas/practice.py
+    - app/schemas/practice_administration_default_location_command.py
+    - app/services/__init__.py
+    - app/services/ai/__init__.py
+    - app/services/ai/access_service.py
+    - app/services/ai/audit_events.py
+    - app/services/ai/audit_store.py
+    - app/services/ai/contracts.py
+    - app/services/ai/costing.py
+    - app/services/ai/entitlements.py
+    - app/services/ai/registry.py
+    - app/services/ai/service.py
+    - app/services/application_auth_operational_hardening.py
+    - app/services/application_auth_persistence.py
+    - app/services/application_auth_role_runtime.py
+    - app/services/application_auth_runtime.py
+    - app/services/application_auth_transport.py
+    - app/services/application_identity_federation.py
+    - app/services/application_identity_oidc_adapter.py
+    - app/services/application_identity_oidc_admission_grant.py
+    - app/services/application_identity_oidc_binding_database_role.py
+    - app/services/application_identity_oidc_redemption.py
+    - app/services/application_identity_oidc_redemption_database_role.py
+    - app/services/application_identity_oidc_transport.py
+    - app/services/appointment_check_in_product_adapter.py
     - app/services/appointment_delete_composition.py
     - app/services/appointment_delete_physical.py
+    - app/services/appointment_delete_product_adapter.py
+    - app/services/appointment_idempotency.py
     - app/services/appointment_status_composition.py
     - app/services/appointment_status_physical.py
+    - app/services/appointment_status_product_adapter.py
+    - app/services/auth_service.py
+    - app/services/bernie/__init__.py
+    - app/services/bernie/action_grammar.py
+    - app/services/bernie/capabilities.py
+    - app/services/bernie/confirm_gate.py
+    - app/services/bernie/context.py
+    - app/services/bernie/evidence.py
+    - app/services/bernie/frames.py
+    - app/services/bernie/interpreter.py
+    - app/services/bernie/language_normalization.py
+    - app/services/bernie/normalizer.py
+    - app/services/bernie/pilot.py
+    - app/services/bernie/policy.py
+    - app/services/bernie/schedule_explanations.py
+    - app/services/bernie/semantic_extraction.py
+    - app/services/bernie/session.py
+    - app/services/bernie/session_store.py
+    - app/services/bernie/temporal.py
+    - app/services/bernie/transitions.py
+    - app/services/bernie/ui_view_model.py
+    - app/services/bernie_booking_classifier.py
+    - app/services/bernie_booking_interpreter.py
+    - app/services/bernie_patient_context.py
+    - app/services/bernie_pilot_gate.py
+    - app/services/bernie_slot_normalizer.py
+    - app/services/bernie_transition_table.py
+    - app/services/bernie_turn_evidence.py
+    - app/services/diary/__init__.py
+    - app/services/diary/action_grammar.py
+    - app/services/diary/capabilities.py
+    - app/services/diary/confirm_actions.py
+    - app/services/diary/confirm_gate.py
+    - app/services/diary/envelope_capability_policy.py
+    - app/services/diary/envelopes.py
+    - app/services/diary/frames.py
+    - app/services/diary/outcomes.py
+    - app/services/diary/policy.py
+    - app/services/diary/schedule_explanations.py
+    - app/services/diary/shadow_instrumentation.py
+    - app/services/diary/temporal.py
+    - app/services/diary_committed_events.py
+    - app/services/practice/__init__.py
+    - app/services/practice/practice_administration_default_location_command.py
+    - app/services/practice/practitioner_directory_read.py
+    - app/services/practice_knowledge/__init__.py
+    - app/services/practice_knowledge/boundary.py
+    - app/services/practice_knowledge/envelopes.py
+    - app/services/practice_knowledge/examples.py
+    - app/services/practice_knowledge/facts.py
+    - app/services/practice_knowledge/retriever.py
+    - app/services/reception_one_isolated_vertex_planner.py
     - app/services/reception_one_proposal_runtime.py
+    - scripts/ariadne_serial_pytest.py
+    - tests/__init__.py
+    - tests/conftest.py
+    - tests/test_api_spine_bernie_create_confirm_idempotency_route_contract.py
     - tests/test_api_spine_confirmation_family_idempotency_integration.py
+    - tests/test_api_spine_delete_confirm_idempotency_route_contract.py
+    - tests/test_api_spine_staff_create_confirm_idempotency_route_contract.py
+    - tests/test_api_spine_status_confirm_idempotency_route_contract.py
+    - tests/test_api_spine_update_confirm_idempotency_route_contract.py
     autonomous_task_selection: false
     feature_work_eligible: false
     product_work_eligible: false
@@ -1170,7 +1312,7 @@ profiles:
     deployment_eligible: false
     protected_ref_movement_eligible: false
     g2_eligible: true
-    scope_behavior: bounded_g2_reviewed_repair_batches
+    scope_behavior: bounded_g2_catalogue_repair_batches
     scope_file: orchestration/programme/g2-baseline-repair-scope.json
     global_execution_defaults_unchanged: true
     closed_entrypoints:
