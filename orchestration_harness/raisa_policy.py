@@ -1742,6 +1742,50 @@ def g2_catalogue_profile() -> dict:
     return profile
 
 
+G2_MIGRATION_PATHS = (
+    'alembic/versions/d4787e8e3629_phase_0_baseline.py',
+    'tests/test_phase0_migration_preservation.py',
+)
+G2_MIGRATION_OWNER_RECORD = 'g2-migration-evidence/owner-supported-paths.json'
+G2_MIGRATION_OWNER_SHA256 = '20f2bd2b29abdb3ca20cc45f729a4d1640484aa2b82dff35f79f5ead46a0b8f2'
+
+
+def g2_migration_contract() -> dict:
+    """The owner's supported paths interpret, but do not accept, the G2 check."""
+    return {
+        'criterion': 'empty_and_populated_alembic_paths_pass',
+        'owner_decision': {'evidence_path': G2_MIGRATION_OWNER_RECORD,
+                           'sha256': G2_MIGRATION_OWNER_SHA256},
+        'successful_paths': ['fresh_database', 'recognised_empty_core_database'],
+        'recognised_empty_core_tables': ['clinical_diagnoses', 'encounters', 'mbs_claims',
+                                         'patients', 'prescriptions'],
+        'directory_records_preserved': ['mbs_directory', 'snomed_directory'],
+        'supported_legacy_path_allows_populated_directories': True,
+        'refused_unchanged_paths': ['populated_legacy_core_database',
+                                    'partial_legacy_core_schema',
+                                    'unsupported_schema_or_revision'],
+        'refusal_preserves': ['data', 'schema', 'enums', 'alembic_revision'],
+        'downgrade': {'populated_or_unsupported_state': 'refuse_unchanged',
+                      'legacy_directory_tables': 'retained',
+                      'fresh_directory_tables': 'drop_only_if_empty'},
+        'populated_legacy_conversion_required': False,
+        'data_destruction_authorized': False,
+        'criterion_acceptance_claimed': False,
+        'historical_gate_definition_rewritten': False,
+    }
+
+
+def g2_migration_profile() -> dict:
+    """Only the two reviewed migration files; runtime authority stays separate."""
+    profile = g2_batch_profile()
+    profile.update(scope_behavior='bounded_g2_migration_preservation',
+                   allowed_paths=list(G2_MIGRATION_PATHS))
+    profile['allowed_effects'] = sorted({*profile['allowed_effects'], 'migration_change'})
+    profile['forbidden_effects'] = [effect for effect in profile['forbidden_effects']
+                                    if effect != 'migration_change']
+    return profile
+
+
 POLICY_REFERENCES = (
     core.Reference("project.yaml", ("operating_model", "settings_file"), "operating_model.yaml"),
     core.Reference("project.yaml", ("secure_sdlc", "settings_file"), "security_review_protocol.yaml"),
@@ -1829,7 +1873,9 @@ def validate_recovery_configuration(*, documents: dict[str, bytes], expected_sha
         raise RaisaPolicyError("configuration_assessment_profile_invalid")
     if state["active_profile"] == G2_PROFILE:
         profile = overlay["profiles"][G2_PROFILE]
-        expected = (g2_catalogue_profile()
+        expected = (g2_migration_profile()
+                    if profile["scope_behavior"] == 'bounded_g2_migration_preservation'
+                    else g2_catalogue_profile()
                     if profile["scope_behavior"] == 'bounded_g2_catalogue_repair_batches'
                     else g2_batch_profile()
                     if profile["scope_behavior"] == 'bounded_g2_reviewed_repair_batches'

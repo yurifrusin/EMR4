@@ -47,7 +47,8 @@ class ClosedRequestTests(unittest.TestCase):
                          {"operation_kind": "accept_g1d"}, {"operation_kind": "assess_g1e"}, {"task_class": b.G1E_TASK},
                          {"operation_kind": "accept_g1e"}, {"operation_kind": "repair_g2_fixture"}, {"task_class": b.G2_TASK},
                          {"operation_kind": "enable_g2_batches"}, {"operation_kind": "extend_g2_catalogue"},
-                         {"operation_kind": "repair_g2_batch"}):
+                         {"operation_kind": "repair_g2_batch"}, {"operation_kind": "enable_g2_migration"},
+                         {"operation_kind": "repair_g2_migration"}):
             with self.subTest(manifest=manifest), no_legacy_observation(), \
                     patch.object(pa, "load_programme_policy", side_effect=AssertionError("old loader")), \
                     patch.object(pf, "load_programme_policy", side_effect=AssertionError("old loader")):
@@ -525,6 +526,88 @@ class G2CatalogueFixture(G2BatchFixture):
 
     def prepare_batch(self, changes):
         super().prepare_batch(changes)
+        self.q["payload_sha256"] = {p: b._sha((self.root / p).read_bytes()) for p in b.batch_input_paths(self.q)}
+
+
+class G2MigrationFixture(G2CatalogueFixture):
+    """Fixed captured v2 authority, with a genuinely absent authored test file."""
+    MIGRATION = "alembic/versions/d4787e8e3629_phase_0_baseline.py"
+    TEST = "tests/test_phase0_migration_preservation.py"
+
+    def __init__(self, assets):
+        super().__init__(assets)
+        self.migration_previous_policy = {
+            p: (assets / "g2-catalogue-published-policy" / p).read_bytes()
+            for p in b.G2_MIGRATION_PREDECESSOR_POLICY}
+        self.migration_previous_source = {
+            p: (self.source / "g2-catalogue-installed-source" / p).read_bytes()
+            for p in b.SOURCE_PATHS | b.CONTROLLER_PATHS}
+        previous = {**self.migration_previous_policy, **self.migration_previous_source,
+                    self.MIGRATION: b"# authored historical migration; never imported\n"}
+        for path, raw in previous.items():
+            self.write(path, raw)
+        self.git("add", "--", *sorted(previous))
+        base_tree = self.git("write-tree")
+        base = self.git("commit-tree", base_tree, "-p", self.base, "-m", "authored installed catalogue baseline")
+        self.git("update-ref", "--no-deref", "HEAD", base)
+        self.base = base
+        self.batch_scope = b.build_g2_migration_scope("2026-09-14T01:00:00+00:00", base,
+            {p: b._sha((self.source / p).read_bytes()) for p in b.CONTROLLER_PATHS})
+        after = b.build_g2_migration_transition(
+            {p: self.migration_previous_policy[p] for p in b.G2_BATCH_CONTROL_PATHS}, self.batch_scope)
+        after.update({p: (self.source / p).read_bytes() for p in b.G2_BATCH_CODE_PATHS})
+        changes = {p: {"before_sha256": b._sha((self.root / p).read_bytes()), "after_sha256": b._sha(raw)}
+                   for p, raw in after.items()}
+        for path, raw in after.items():
+            self.write(path, raw)
+        self.git("add", "--", *sorted(after))
+        tree = self.git("write-tree")
+        self.q.update(schema_version=b.G2_MIGRATION_BINDING_VERSION, operation_id="authored-g2-migration-enablement",
+            operation_kind="enable_g2_migration", phase="development", base_commit=base, base_tree=base_tree,
+            expected_head=base, expected_index_tree=tree, candidate_tree=tree,
+            activation_commit=b.G2_MIGRATION_PREDECESSOR["commit"],
+            installed_controller=copy.deepcopy(b.G2_MIGRATION_PREDECESSOR), repair_sha256=changes)
+        self.q["payload_sha256"] = {p: b._sha((self.root / p).read_bytes()) for p in b.batch_input_paths(self.q)}
+
+    @contextmanager
+    def component_history(self):
+        with super().component_history():
+            run, run_bytes = b.trusted_git.run_git, b.trusted_git.run_git_bytes
+            publication = b.G2_MIGRATION_PREDECESSOR
+            files = {**self.migration_previous_policy, **self.migration_previous_source}
+
+            def observed_text(root, *args, **kwargs):
+                if root == self.root and args == ("cat-file", "commit", publication["commit"]):
+                    return "tree " + publication["tree"] + "\nparent " + publication["parent"] + "\n\nauthored fixed history\n"
+                if root == self.root and args == ("merge-base", "--is-ancestor", publication["commit"], self.q["base_commit"]):
+                    return ""
+                return run(root, *args, **kwargs)
+
+            def observed_bytes(root, *args, **kwargs):
+                for path, raw in files.items():
+                    if root == self.root and args == ("cat-file", "blob", publication["commit"] + ":" + path):
+                        return raw
+                return run_bytes(root, *args, **kwargs)
+
+            with patch.object(b.trusted_git, "run_git", side_effect=observed_text), \
+                    patch.object(b.trusted_git, "run_git_bytes", side_effect=observed_bytes):
+                yield
+
+    def prepare_migration(self, changes):
+        base = self.git("rev-parse", "HEAD")
+        base_tree = self.git("rev-parse", "HEAD^{tree}")
+        rows = {}
+        for path, raw in changes.items():
+            prior = self.root / path
+            rows[path] = {"before_sha256": b._sha(prior.read_bytes()) if prior.is_file() else None,
+                          "after_sha256": b._sha(raw)}
+            self.write(path, raw)
+        self.git("add", "--", *sorted(changes))
+        tree = self.git("write-tree")
+        self.q.update(operation_kind="repair_g2_migration", operation_id="authored-g2-migration-repair",
+            phase="development", base_commit=base, base_tree=base_tree, expected_head=base,
+            expected_index_tree=tree, candidate_tree=tree, activation_commit=self.activation,
+            installed_controller=copy.deepcopy(self.batch_controller), repair_sha256=rows)
         self.q["payload_sha256"] = {p: b._sha((self.root / p).read_bytes()) for p in b.batch_input_paths(self.q)}
 
 
@@ -1985,6 +2068,234 @@ def build_integration_suite(assets: Path) -> unittest.TestSuite:
             f.q["schema_version"] = b.G2_BATCH_BINDING_VERSION
             self.assertEqual(f.decision().reason_codes, ("bounded_g2_batch_binding_version",))
 
+    class G2MigrationAdmissionTests(unittest.TestCase):
+        def setUp(self):
+            self.fx = G2MigrationFixture(assets)
+            self.addCleanup(self.fx.close)
+            self.stack = ExitStack()
+            self.addCleanup(self.stack.close)
+            self.stack.enter_context(no_legacy_observation())
+            self.stack.enter_context(self.fx.component_history())
+
+        def test_enablement_preserves_gates_and_binds_owner_supported_paths(self):
+            f = self.fx
+            context = f.context()
+            manifest = pf.build_task_manifest(f.root, bounded_context=context)
+            report = pf.build_report(f.root, manifest, bounded_context=context,
+                                     phase="development", entrypoint="task_branch_commit")
+            self.assertEqual(report["status"], "policy_eligible", report)
+            self.assertFalse(report["execution_authorized"])
+            self.assertEqual(set(manifest["allowed_paths"]), b.G2_BATCH_MAINTENANCE_PATHS)
+            self.assertEqual(set(manifest["intended_side_effect_classes"]), b.EFFECTS)
+            before = b._json(f.migration_previous_policy[b.STATE])
+            current = b._json((f.root / b.STATE).read_bytes())
+            self.assertEqual(before["g1e"], current["g1e"])
+            self.assertFalse(current["g2"]["completion_accepted"])
+            for path in (b.AGENTS, b.GATES):
+                self.assertEqual((f.root / path).read_bytes(), f.migration_previous_policy[path])
+            self.assertEqual(f.batch_scope["allowed_paths"], sorted(b.G2_MIGRATION_PATHS))
+            self.assertEqual(f.batch_scope["migration_supported_paths"], rp.g2_migration_contract())
+            self.assertEqual(f.batch_scope["g2_exit_requirements"], list(b.G2_CRITERIA))
+            self.assertEqual(f.batch_scope["owner_test_runtime_exception"], rp.g2_test_exception())
+            self.assertNotIn("source_catalogue", f.batch_scope)
+            self.assertFalse((f.root / f.TEST).exists())
+            self.assertIn("migration_change", rp.g2_catalogue_profile()["forbidden_effects"])
+            self.assertIn("migration_change", rp.g2_batch_profile()["forbidden_effects"])
+            f.commit_current()
+            self.assertTrue(f.decision().policy_admitted)
+
+        def test_new_test_addition_uses_real_base_absence_in_all_phases(self):
+            f = self.fx
+            f.activate_batches()
+            frozen = {p: (f.root / p).read_bytes() for p in b.CONTROLLER_PATHS | b.G2_TRANSITION_PATHS}
+            f.prepare_migration({f.MIGRATION: b"# authored non-destructive repair\n",
+                                  f.TEST: b"# authored preservation regression; never imported\n"})
+            self.assertIsNone(f.q["repair_sha256"][f.TEST]["before_sha256"])
+            self.assertEqual(set(f.q["payload_sha256"]), b.G2_CATALOGUE_POLICY_PATHS | b.G2_MIGRATION_PATHS)
+            run = b.trusted_git.run_git_bytes
+            absence_queries = []
+
+            def observed(root, *args, **kwargs):
+                if root == f.root and args[:2] == ("ls-tree", "-z"):
+                    absence_queries.append(args)
+                return run(root, *args, **kwargs)
+
+            with patch.object(b.trusted_git, "run_git_bytes", side_effect=observed):
+                self.assertTrue(f.decision().policy_admitted)
+            self.assertIn(("ls-tree", "-z", f.q["base_commit"], "--", f.TEST), absence_queries)
+            self.assertEqual(b.operation_effects(f.q["operation_kind"]), b.G2_MIGRATION_EFFECTS)
+            f.commit_current()
+            self.assertTrue(f.decision().policy_admitted)
+            f.q["phase"] = "post-push"
+            self.assertTrue(f.decision().policy_admitted)
+            self.assertTrue(all((f.root / p).read_bytes() == raw for p, raw in frozen.items()))
+
+        def test_present_empty_file_cannot_be_relabelled_as_absent(self):
+            f = self.fx
+            f.activate_batches()
+            f.write(f.TEST, b"")
+            f.git("add", "--", f.TEST)
+            tree = f.git("write-tree")
+            parent = f.git("rev-parse", "HEAD")
+            base = f.git("commit-tree", tree, "-p", parent, "-m", "authored existing empty test")
+            f.git("update-ref", "--no-deref", "HEAD", base, parent)
+            f.prepare_migration({f.TEST: b"# authored test update\n"})
+            self.assertEqual(f.q["repair_sha256"][f.TEST]["before_sha256"], b._sha(b""))
+            self.assertTrue(f.decision().policy_admitted)
+            f.q["repair_sha256"][f.TEST]["before_sha256"] = None
+            self.assertEqual(f.decision().reason_codes, ("bounded_g2_migration_addition_already_exists",))
+
+        def test_new_addition_requires_successful_git_absence_observation(self):
+            f = self.fx
+            f.activate_batches()
+            f.prepare_migration({f.TEST: b"# authored new regression\n"})
+            self.assertTrue(f.decision().policy_admitted)
+            f.q["repair_sha256"][f.TEST]["before_sha256"] = b._sha(b"")
+            self.assertEqual(f.decision().reason_codes, ("trusted_git_observation_failed",))
+            f.q["repair_sha256"][f.TEST]["before_sha256"] = None
+            run = b.trusted_git.run_git_bytes
+
+            def failed(root, *args, **kwargs):
+                if root == f.root and args == ("ls-tree", "-z", f.q["base_commit"], "--", f.TEST):
+                    raise b.trusted_git.TrustedGitError("authored_absence_observation_failed")
+                return run(root, *args, **kwargs)
+
+            with patch.object(b.trusted_git, "run_git_bytes", side_effect=failed):
+                self.assertEqual(f.decision().reason_codes, ("authored_absence_observation_failed",))
+
+        def test_wrong_lane_and_paths_reject_before_selected_reads(self):
+            f = self.fx
+            f.activate_batches()
+            f.prepare_migration({f.MIGRATION: b"# authored repair\n"})
+            original = copy.deepcopy(f.q)
+            row = original["repair_sha256"][f.MIGRATION]
+            cases = [
+                (lambda q: q.update(schema_version=b.G2_CATALOGUE_BINDING_VERSION), "bounded_g2_batch_binding_version"),
+                (lambda q: q.update(operation_kind="repair_g2_batch"), "bounded_g2_batch_binding_version"),
+                (lambda q: q.update(repair_sha256={f.MIGRATION: {"before_sha256": None, "after_sha256": row["after_sha256"]}}),
+                 "bounded_g2_batch_change_digest"),
+                (lambda q: q.update(repair_sha256={f.TEST: {"before_sha256": None, "after_sha256": None}}),
+                 "bounded_g2_batch_change_digest"),
+            ]
+            for path in ("alembic/env.py", "alembic/versions/unreviewed.py", "../outside.py",
+                         "orchestration_harness/bounded_g1b.py", b.STATE, f.AI):
+                cases.append((lambda q, path=path: q.update(repair_sha256={path: copy.deepcopy(row)}),
+                              "bounded_g2_batch_path_not_allowed"))
+            read = b.trusted_git._read_regular_snapshot
+            for mutate, reason in cases:
+                f.q = copy.deepcopy(original)
+                mutate(f.q)
+                seen = []
+
+                def observed(path, **kwargs):
+                    seen.append(path)
+                    return read(path, **kwargs)
+
+                with self.subTest(reason=reason, binding=f.q["repair_sha256"]), \
+                        patch.object(b.trusted_git, "_read_regular_snapshot", side_effect=observed):
+                    self.assertEqual(f.decision().reason_codes, (reason,))
+                self.assertFalse(any(path.is_relative_to(f.root) for path in seen))
+            f.q = original
+
+        def test_unselected_files_are_not_read_and_extra_payload_is_rejected(self):
+            f = self.fx
+            f.activate_batches()
+            f.prepare_migration({f.MIGRATION: b"# selected migration only\n"})
+            self.assertNotIn(f.TEST, f.q["payload_sha256"])
+            read = b.trusted_git._read_regular_snapshot
+            seen = []
+
+            def observed(path, **kwargs):
+                seen.append(path)
+                self.assertNotEqual(path, f.root / f.TEST)
+                return read(path, **kwargs)
+
+            with patch.object(b.trusted_git, "_read_regular_snapshot", side_effect=observed):
+                self.assertTrue(f.decision().policy_admitted)
+            self.assertIn(f.assets / "evidence" / rp.G2_MIGRATION_OWNER_RECORD, seen)
+            f.q["payload_sha256"][f.TEST] = b._sha(b"unselected")
+            with patch.object(b.trusted_git, "_read_regular_snapshot", side_effect=observed):
+                self.assertEqual(f.decision().reason_codes, ("bounded_g2_batch_payload_paths",))
+
+        def test_exact_source_preimage_candidate_and_activation_bindings_remain_required(self):
+            f = self.fx
+            self.assertTrue(f.decision().policy_admitted)
+            f.q["installed_controller"]["source_sha256"] = copy.deepcopy(f.batch_scope["controller_source_sha256"])
+            self.assertEqual(f.decision().reason_codes, ("bounded_g2_batch_maintenance_predecessor",))
+            f.q["installed_controller"] = copy.deepcopy(b.G2_MIGRATION_PREDECESSOR)
+            f.activate_batches()
+            f.prepare_migration({f.MIGRATION: b"# exact migration repair\n"})
+            self.assertTrue(f.decision().policy_admitted)
+            original = copy.deepcopy(f.q)
+            for mutate, reason in (
+                (lambda q: q["repair_sha256"][f.MIGRATION].update(before_sha256="0" * 64), "bounded_g2_batch_preimage_changed"),
+                (lambda q: q["repair_sha256"][f.MIGRATION].update(after_sha256="0" * 64), "bounded_g2_batch_candidate_changed"),
+                (lambda q: q["source_sha256"].update({"orchestration_harness/bounded_g1b.py": "0" * 64}),
+                 "bounded_g1b_input_digest_changed"),
+                (lambda q: q.update(activation_commit=b.G2_MIGRATION_PREDECESSOR["commit"]), "bounded_g2_batch_activation_binding"),
+            ):
+                f.q = copy.deepcopy(original)
+                mutate(f.q)
+                with self.subTest(reason=reason):
+                    self.assertEqual(f.decision().reason_codes, (reason,))
+            f.q = original
+
+        def test_owner_interpretation_runtime_and_completion_cannot_be_weakened(self):
+            f = self.fx
+            self.assertTrue(f.decision().policy_admitted)
+            original = copy.deepcopy(f.q)
+            for mutate in (
+                lambda s: s["migration_supported_paths"]["owner_decision"].update(sha256="0" * 64),
+                lambda s: s["migration_supported_paths"]["successful_paths"].append("populated_legacy_core_database"),
+                lambda s: s["migration_supported_paths"]["refusal_preserves"].remove("alembic_revision"),
+                lambda s: s["migration_supported_paths"]["directory_records_preserved"].pop(),
+                lambda s: s["migration_supported_paths"].update(criterion_acceptance_claimed=True),
+                lambda s: s.update(g2_complete=True),
+                lambda s: s.update(execution_authorized=True),
+                lambda s: s["owner_test_runtime_exception"].update(admission_grants_runtime_authority=True),
+                lambda s: s["allowed_additions"].append("alembic/versions/another.py"),
+                lambda s: s.update(source_catalogue={"source_binding_sha256": rp.G2_CATALOGUE_SOURCE_BINDING_SHA256}),
+            ):
+                scope = copy.deepcopy(f.batch_scope)
+                mutate(scope)
+                raw = b._canonical(scope) + b"\n"
+                f.write(b.G2_SCOPE, raw)
+                f.q = copy.deepcopy(original)
+                f.q["payload_sha256"][b.G2_SCOPE] = b._sha(raw)
+                f.q["repair_sha256"][b.G2_SCOPE]["after_sha256"] = b._sha(raw)
+                self.assertEqual(f.decision().reason_codes, ("bounded_g2_batch_scope_invalid",))
+
+        def test_owner_record_bytes_must_match_the_pinned_decision(self):
+            f = self.fx
+            self.assertTrue(f.decision().policy_admitted)
+            read = b.trusted_git._read_regular_snapshot
+            owner = f.assets / "evidence" / rp.G2_MIGRATION_OWNER_RECORD
+
+            def changed(path, **kwargs):
+                snapshot = read(path, **kwargs)
+                return (snapshot[0], b"{}\n") if path == owner else snapshot
+
+            with patch.object(b.trusted_git, "_read_regular_snapshot", side_effect=changed):
+                self.assertEqual(f.decision().reason_codes, ("bounded_g1b_input_digest_changed",))
+
+        def test_repair_cannot_change_unowned_state_or_add_runtime_effects(self):
+            f = self.fx
+            f.activate_batches()
+            f.prepare_migration({f.MIGRATION: b"# selected repair\n"})
+            self.assertTrue(f.decision().policy_admitted)
+            context = f.context()
+            manifest = f.manifest(context)
+            manifest["intended_side_effect_classes"].append("real_data_access")
+            decision = b.evaluate_bounded_g1b_operation(context=context, manifest=manifest,
+                entrypoint="task_branch_commit", phase="development")
+            self.assertEqual(decision.reason_codes, ("bounded_g1b_manifest_binding_mismatch",))
+            state = b._json((f.root / b.STATE).read_bytes())
+            state["g2"]["completion_accepted"] = True
+            raw = b._canonical(state)
+            f.write(b.STATE, raw)
+            f.q["payload_sha256"][b.STATE] = b._sha(raw)
+            self.assertEqual(f.decision().reason_codes, ("bounded_g2_batch_unowned_input_changed",))
+
     suite = unittest.defaultTestLoader.loadTestsFromTestCase(ClosedRequestTests)
     suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(IntegratedTests))
     suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(SuccessorTests))
@@ -1994,4 +2305,5 @@ def build_integration_suite(assets: Path) -> unittest.TestSuite:
     suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(G2AdmissionTests))
     suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(G2BatchAdmissionTests))
     suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(G2CatalogueAdmissionTests))
+    suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(G2MigrationAdmissionTests))
     return suite

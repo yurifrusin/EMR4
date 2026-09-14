@@ -388,9 +388,37 @@ G2_INITIAL_REPAIR = {
     "parent": G2_INITIAL_ACTIVATION["commit"],
     "tree": "d673fba4a1d11369677dd4cdeb57bc9d0962a276",
 }
+G2_MIGRATION_BINDING_VERSION = "ariadne.bounded_g2_batch_binding.v3"
+G2_MIGRATION_SCOPE_VERSION = "ariadne.g2_reviewed_batch_scope.v3"
+G2_MIGRATION_PATHS = frozenset(raisa_policy.G2_MIGRATION_PATHS)
+G2_MIGRATION_ADDITION = "tests/test_phase0_migration_preservation.py"
+G2_MIGRATION_EFFECTS = G2_BATCH_EFFECTS | {"migration_change"}
+G2_MIGRATION_PREDECESSOR = {
+    "commit": "0371fc14a6e0333305641189193f4054adb5c11d",
+    "parent": "1af384bb2f914ed10cd7d59625d9f47f8a4c0e92",
+    "tree": "d32dbfa1f43c65755df32fafae249f3923439497",
+    "source_sha256": {
+        "orchestration_harness/bounded_g1b.py": "e163b8d1c4aabd28d94169acc9ec0af830fe0c209716125e9379e1e40c13bb21",
+        "orchestration_harness/configuration_core.py": "f7ba7a80eb0a590f9fb71b864e6c1f9f43241d9f7d70a38da67a9243fea208e5",
+        "orchestration_harness/programme_admission.py": "ac816a8a79b2d8222fa357777c075950927e86cf30c8a5b25ffd08a474052181",
+        "orchestration_harness/raisa_policy.py": "b54740083d90a06949bc3019fc60d9fbb7568980be93c16c37e4253adbad7e48",
+        "tests/test_bounded_g1b.py": "be6b8ad18d517b8922da61a05e1126eed235abe1fe58fd9c7c29470cca1c19fe",
+    },
+}
+G2_MIGRATION_PREDECESSOR_POLICY = {
+    AGENTS: "fb96aced8c29739a7a98c7d837a752094690972d271219fb0a265ccc9f88c7ad",
+    STATE: "dc1b557d01614cc45c5e064f3309c3101726da8e748348b2e1492d4900f8c746",
+    OVERLAY: "1f18ba0a822c6a9b78c8dcc7742e3229f50368bd4f0f329f7db3901b963d8cf1",
+    G2_SCOPE: "6b67b5e5f553f62be848919fb08c5ef081f4eb580523140e746f4b0dee580406",
+    GATES: "115a651a0b13156a591045638d1833a9a71347e7b1f7e694767eac49d2abc341",
+}
+G2_BATCH_KINDS = G2_BATCH_KINDS | {"enable_g2_migration", "repair_g2_migration"}
+G2_MAINTENANCE_KINDS = frozenset({"enable_g2_batches", "extend_g2_catalogue", "enable_g2_migration"})
 OPERATION_PATHS.update(enable_g2_batches=G2_BATCH_MAINTENANCE_PATHS,
                        extend_g2_catalogue=G2_BATCH_MAINTENANCE_PATHS,
-                       repair_g2_batch=G2_BATCH_PATHS)
+                       repair_g2_batch=G2_BATCH_PATHS,
+                       enable_g2_migration=G2_BATCH_MAINTENANCE_PATHS,
+                       repair_g2_migration=G2_MIGRATION_PATHS)
 
 
 def _batch_changes(binding: dict) -> dict:
@@ -398,14 +426,20 @@ def _batch_changes(binding: dict) -> dict:
     rows = binding.get("repair_sha256")
     _need(kind in G2_BATCH_KINDS and type(rows) is dict and 1 <= len(rows) <= 6,
           "bounded_g2_batch_changes_invalid")
-    maintenance = kind in {"enable_g2_batches", "extend_g2_catalogue"}
+    maintenance = kind in G2_MAINTENANCE_KINDS
     catalogue = binding.get("schema_version") == G2_CATALOGUE_BINDING_VERSION
-    allowed = G2_BATCH_MAINTENANCE_PATHS if maintenance else G2_CATALOGUE_PATHS if catalogue else G2_BATCH_PATHS
+    migration = binding.get("schema_version") == G2_MIGRATION_BINDING_VERSION
+    _need((kind in {"enable_g2_migration", "repair_g2_migration"}) == migration,
+          "bounded_g2_batch_binding_version")
+    allowed = (G2_BATCH_MAINTENANCE_PATHS if maintenance else G2_MIGRATION_PATHS if migration
+               else G2_CATALOGUE_PATHS if catalogue else G2_BATCH_PATHS)
     _need(set(rows) <= allowed and (not maintenance or set(rows) == allowed),
           "bounded_g2_batch_path_not_allowed")
-    for row in rows.values():
+    for path, row in rows.items():
         _keys(row, {"before_sha256", "after_sha256"}, "bounded_g2_batch_change_schema")
-        _need(all(type(v) is str and re.fullmatch(r"[0-9a-f]{64}", v) for v in row.values())
+        addition = migration and not maintenance and path == G2_MIGRATION_ADDITION and row["before_sha256"] is None
+        digests = (row["after_sha256"],) if addition else row.values()
+        _need(all(type(v) is str and re.fullmatch(r"[0-9a-f]{64}", v) for v in digests)
               and row["before_sha256"] != row["after_sha256"], "bounded_g2_batch_change_digest")
     return rows
 
@@ -413,12 +447,14 @@ def _batch_changes(binding: dict) -> dict:
 def batch_input_paths(binding: dict) -> frozenset[str]:
     """Catalogue authority is metadata; only fixed policy and selected files open."""
     changes = _batch_changes(binding)
-    if binding.get("schema_version") == G2_CATALOGUE_BINDING_VERSION:
+    if binding.get("schema_version") in {G2_CATALOGUE_BINDING_VERSION, G2_MIGRATION_BINDING_VERSION}:
         return G2_CATALOGUE_POLICY_PATHS | frozenset(changes)
     return G2_BATCH_INPUT_PATHS
 
 
 def operation_effects(kind: str) -> frozenset[str]:
+    if kind == "repair_g2_migration":
+        return G2_MIGRATION_EFFECTS
     if kind == "repair_g2_batch":
         return G2_BATCH_EFFECTS
     return frozenset({"repository_read"}) if kind == "assess_g1e" else EFFECTS
@@ -426,7 +462,7 @@ def operation_effects(kind: str) -> frozenset[str]:
 
 def operation_paths(kind: str, binding: dict | None = None) -> frozenset[str]:
     _need(type(kind) is str and kind in OPERATION_PATHS, "bounded_g1b_operation_kind")
-    if kind == "repair_g2_batch":
+    if kind in {"repair_g2_batch", "repair_g2_migration"}:
         _need(type(binding) is dict and binding.get("operation_kind") == kind,
               "bounded_g2_batch_binding_required")
         return frozenset(_batch_changes(binding))
@@ -438,7 +474,7 @@ def _operation(kind: str, binding: dict | None = None) -> dict:
     if kind in G2_BATCH_KINDS:
         return {"paths": paths, "input_paths": batch_input_paths(binding),
                 "transition_paths": G2_TRANSITION_PATHS, "scope_path": G2_SCOPE,
-                "transition": kind in {"enable_g2_batches", "extend_g2_catalogue"}, "batch": True,
+                "transition": kind in G2_MAINTENANCE_KINDS, "batch": True,
                 "profile": G2_PROFILE, "gate": "G2", "limits": G2_BATCH_LIMITS}
     if kind in {"accept_g1e", "repair_g2_fixture"}:
         return {
@@ -1404,8 +1440,31 @@ def build_g2_catalogue_scope(recorded_at: str, transition_base: str, controller_
     return scope
 
 
+def build_g2_migration_scope(recorded_at: str, transition_base: str, controller_sources: dict) -> dict:
+    """A separate migration lane; no extension of the historical catalogue."""
+    scope = build_g2_batch_scope(recorded_at, transition_base, controller_sources)
+    scope.update(
+        schema_version=G2_MIGRATION_SCOPE_VERSION,
+        enable_operation="enable_g2_migration", repair_operation="repair_g2_migration",
+        allowed_paths=sorted(G2_MIGRATION_PATHS), maximum_changed_files=2,
+        allowed_additions=[G2_MIGRATION_ADDITION],
+        allowed_effects=sorted(G2_MIGRATION_EFFECTS),
+        forbidden_effects=raisa_policy.g2_migration_profile()["forbidden_effects"],
+        migration_supported_paths=raisa_policy.g2_migration_contract(),
+        prior_catalogue_activation={"commit": G2_MIGRATION_PREDECESSOR["commit"],
+                                    "scope_sha256": G2_MIGRATION_PREDECESSOR_POLICY[G2_SCOPE]},
+    )
+    scope["current_operation"]["operation_id"] = "g2-migration-preservation-repair"
+    scope["current_operation"]["supersedes"] = {
+        "operation_id": "g2-reviewed-baseline-repair", "scope_path": G2_SCOPE,
+        "scope_commit": G2_MIGRATION_PREDECESSOR["commit"],
+        "scope_sha256": G2_MIGRATION_PREDECESSOR_POLICY[G2_SCOPE], "historical_latch_preserved": True}
+    return scope
+
+
 def _validate_g2_batch_scope(scope: dict) -> None:
-    builder = (build_g2_catalogue_scope if scope.get("schema_version") == G2_CATALOGUE_SCOPE_VERSION
+    builder = (build_g2_migration_scope if scope.get("schema_version") == G2_MIGRATION_SCOPE_VERSION
+               else build_g2_catalogue_scope if scope.get("schema_version") == G2_CATALOGUE_SCOPE_VERSION
                else build_g2_batch_scope)
     expected = builder(scope.get("recorded_at"), scope.get("transition_base_commit"),
                        scope.get("controller_source_sha256"))
@@ -1450,6 +1509,25 @@ def build_g2_catalogue_transition(before: dict[str, bytes], scope: dict) -> dict
             OVERLAY: yaml.safe_dump(overlay, sort_keys=False, allow_unicode=True).encode(), G2_SCOPE: scope_raw}
 
 
+def build_g2_migration_transition(before: dict[str, bytes], scope: dict) -> dict[str, bytes]:
+    """Bind the owner-supported migration paths without accepting or rewriting G2."""
+    _keys(before, G2_BATCH_CONTROL_PATHS, "bounded_g2_migration_transition_paths")
+    for path in G2_BATCH_CONTROL_PATHS:
+        _need(type(before[path]) is bytes and _sha(before[path]) == G2_MIGRATION_PREDECESSOR_POLICY[path],
+              "bounded_g2_migration_prior_policy_changed")
+    _need(scope.get("schema_version") == G2_MIGRATION_SCOPE_VERSION, "bounded_g2_migration_scope_version")
+    _validate_g2_batch_scope(scope)
+    state = _json(before[STATE])
+    overlay = _document(before[OVERLAY], OVERLAY)
+    scope_raw = _canonical(scope) + b"\n"
+    state["observed_at"] = scope["recorded_at"]
+    state["g2"].update(scope_sha256=_sha(scope_raw), current_operation=_json(_canonical(scope["current_operation"])))
+    state["task_selection"].update(next_eligibility_condition="bounded_G2_migration_preservation_active")
+    overlay["profiles"][G2_PROFILE] = raisa_policy.g2_migration_profile()
+    return {STATE: (json.dumps(state, indent=2, ensure_ascii=False) + "\n").encode(),
+            OVERLAY: yaml.safe_dump(overlay, sort_keys=False, allow_unicode=True).encode(), G2_SCOPE: scope_raw}
+
+
 def _batch_publication(target: Path, publication: dict, base: str) -> None:
     headers = trusted_git.run_git(target, "cat-file", "commit", publication["commit"]).split("\n\n", 1)[0].splitlines()
     _need([line for line in headers if line.startswith("parent ")] == ["parent " + publication["parent"]]
@@ -1465,13 +1543,17 @@ def _load_g2_batch_inputs(context, target, source, evidence_root, scratch, bindi
                     "activation_commit", "installed_controller", "repair_sha256"},
           "bounded_g2_batch_binding_schema")
     catalogue = binding["schema_version"] == G2_CATALOGUE_BINDING_VERSION
-    _need(binding["schema_version"] in {G2_BATCH_BINDING_VERSION, G2_CATALOGUE_BINDING_VERSION}
-          and (binding["operation_kind"] != "extend_g2_catalogue" or catalogue)
-          and (binding["operation_kind"] != "enable_g2_batches" or not catalogue),
+    migration = binding["schema_version"] == G2_MIGRATION_BINDING_VERSION
+    version_kinds = {
+        G2_BATCH_BINDING_VERSION: {"enable_g2_batches", "repair_g2_batch"},
+        G2_CATALOGUE_BINDING_VERSION: {"extend_g2_catalogue", "repair_g2_batch"},
+        G2_MIGRATION_BINDING_VERSION: {"enable_g2_migration", "repair_g2_migration"},
+    }
+    _need(binding["operation_kind"] in version_kinds.get(binding["schema_version"], set()),
           "bounded_g2_batch_binding_version")
     changes = _batch_changes(binding)
     input_paths = batch_input_paths(binding)
-    maintenance = binding["operation_kind"] in {"enable_g2_batches", "extend_g2_catalogue"}
+    maintenance = binding["operation_kind"] in G2_MAINTENANCE_KINDS
     _need(type(binding["operation_id"]) is str and re.fullmatch(r"[a-z0-9][a-z0-9-]{1,79}", binding["operation_id"]),
           "bounded_g2_batch_operation_id")
     _need(binding["phase"] in {"development", "pre-push", "post-push"}, "bounded_g2_batch_phase")
@@ -1487,6 +1569,8 @@ def _load_g2_batch_inputs(context, target, source, evidence_root, scratch, bindi
     scope = _json(payloads[G2_SCOPE])
     _need((scope.get("schema_version") == G2_CATALOGUE_SCOPE_VERSION) == catalogue,
           "bounded_g2_catalogue_scope_binding_mismatch")
+    _need((scope.get("schema_version") == G2_MIGRATION_SCOPE_VERSION) == migration,
+          "bounded_g2_migration_scope_binding_mismatch")
     _validate_g2_batch_scope(scope)
     frozen = {**FROZEN_PINS, COST: COST_PIN, SCOPE_PATH: G1B_BASELINE_PINS[SCOPE_PATH],
               G1C_SCOPE: G1C_BASELINE_PINS[G1C_SCOPE], G1D_SCOPE: G1D_BASELINE_PINS[G1D_SCOPE],
@@ -1513,8 +1597,11 @@ def _load_g2_batch_inputs(context, target, source, evidence_root, scratch, bindi
     legacy_before = {path: read(source / "g1e-baseline" / path, digest)
                      for path, digest in G1E_BASELINE_PINS.items()}
     validate_g2_acceptance_transition(legacy_before, initial_policy, evidence)
+    if migration:
+        owner_path = raisa_policy.G2_MIGRATION_OWNER_RECORD
+        evidence[owner_path] = read(evidence_root / owner_path, raisa_policy.G2_MIGRATION_OWNER_SHA256)
     prior_policy = initial_policy
-    if catalogue:
+    if catalogue or migration:
         _batch_publication(target, G2_CATALOGUE_PREDECESSOR, base)
         prior_policy = {}
         for path, digest in {**G2_CATALOGUE_PREDECESSOR_POLICY,
@@ -1523,11 +1610,29 @@ def _load_g2_batch_inputs(context, target, source, evidence_root, scratch, bindi
             _need(_sha(raw) == digest, "bounded_g2_catalogue_predecessor_bytes_changed")
             if path in G2_CATALOGUE_PREDECESSOR_POLICY:
                 prior_policy[path] = raw
-    base_payloads = {path: trusted_git.run_git_bytes(target, "cat-file", "blob", base + ":" + path)
-                     for path in sorted(input_paths)}
+    if migration:
+        _batch_publication(target, G2_MIGRATION_PREDECESSOR, base)
+        prior_policy = {}
+        for path, digest in {**G2_MIGRATION_PREDECESSOR_POLICY,
+                             **G2_MIGRATION_PREDECESSOR["source_sha256"]}.items():
+            raw = trusted_git.run_git_bytes(target, "cat-file", "blob", G2_MIGRATION_PREDECESSOR["commit"] + ":" + path)
+            _need(_sha(raw) == digest, "bounded_g2_migration_predecessor_bytes_changed")
+            if path in G2_MIGRATION_PREDECESSOR_POLICY:
+                prior_policy[path] = raw
+    base_payloads = {}
+    for path in sorted(input_paths):
+        if path in changes and changes[path]["before_sha256"] is None:
+            # Only the fixed new test reaches this branch. Empty bytes are a
+            # present blob; absence requires a successful literal-path query.
+            _need(trusted_git.run_git_bytes(target, "ls-tree", "-z", base, "--", path) == b"",
+                  "bounded_g2_migration_addition_already_exists")
+            base_payloads[path] = None
+        else:
+            base_payloads[path] = trusted_git.run_git_bytes(target, "cat-file", "blob", base + ":" + path)
     for path, raw in base_payloads.items():
         if path in changes:
-            _need(_sha(raw) == changes[path]["before_sha256"], "bounded_g2_batch_preimage_changed")
+            _need((None if raw is None else _sha(raw)) == changes[path]["before_sha256"],
+                  "bounded_g2_batch_preimage_changed")
             _need(_sha(payloads[path]) == changes[path]["after_sha256"], "bounded_g2_batch_candidate_changed")
         else:
             _need(raw == payloads[path], "bounded_g2_batch_unowned_input_changed")
@@ -1535,15 +1640,17 @@ def _load_g2_batch_inputs(context, target, source, evidence_root, scratch, bindi
     _validate_installed_controller(controller)
     _batch_publication(target, controller, base)
     if maintenance:
-        expected_controller = G2_CATALOGUE_PREDECESSOR if catalogue else G2_INITIAL_CONTROLLER
-        expected_activation = expected_controller["commit"] if catalogue else G2_INITIAL_ACTIVATION["commit"]
+        expected_controller = (G2_MIGRATION_PREDECESSOR if migration else G2_CATALOGUE_PREDECESSOR if catalogue
+                               else G2_INITIAL_CONTROLLER)
+        expected_activation = expected_controller["commit"] if catalogue or migration else G2_INITIAL_ACTIVATION["commit"]
         _need(controller == expected_controller and binding["activation_commit"] == expected_activation,
               "bounded_g2_batch_maintenance_predecessor")
         _need(scope["transition_base_commit"] == base, "bounded_g2_batch_maintenance_base")
-        prior_pins = G2_CATALOGUE_PREDECESSOR_POLICY if catalogue else G2_INITIAL_POLICY_PINS
+        prior_pins = (G2_MIGRATION_PREDECESSOR_POLICY if migration else G2_CATALOGUE_PREDECESSOR_POLICY if catalogue
+                      else G2_INITIAL_POLICY_PINS)
         for path, digest in prior_pins.items():
             _need(_sha(base_payloads[path]) == digest, "bounded_g2_batch_maintenance_policy_changed")
-        if not catalogue:
+        if not catalogue and not migration:
             for path, row in G2_REPAIR_PINS.items():
                 _need(_sha(base_payloads[path]) == row["after_sha256"], "bounded_g2_batch_first_repair_changed")
     else:
@@ -1591,7 +1698,8 @@ def _load_g2_batch_inputs(context, target, source, evidence_root, scratch, bindi
 
 def _validate_g2_batch_loaded_policy(inputs):
     scope = _json(inputs.payloads[G2_SCOPE])
-    builder = (build_g2_catalogue_transition if scope.get("schema_version") == G2_CATALOGUE_SCOPE_VERSION
+    builder = (build_g2_migration_transition if scope.get("schema_version") == G2_MIGRATION_SCOPE_VERSION
+               else build_g2_catalogue_transition if scope.get("schema_version") == G2_CATALOGUE_SCOPE_VERSION
                else build_g2_batch_transition)
     expected = builder({p: inputs.before[p] for p in G2_BATCH_CONTROL_PATHS}, scope)
     _need(all(inputs.payloads[p] == raw for p, raw in expected.items()), "bounded_g2_batch_policy_delta_invalid")
