@@ -1141,7 +1141,6 @@ profiles:
     - g2_confirmation_family_fixture_repair
     allowed_effects:
     - control_plane_edit
-    - migration_change
     - product_behavior_change
     - repository_read
     - task_branch_commit
@@ -1152,13 +1151,16 @@ profiles:
     - deployment
     - existing_clockwork_runtime_mutation
     - integration
+    - migration_change
     - pages
     - protected_ref_movement
     - provider_invocation
     - real_data_access
     allowed_paths:
-    - alembic/versions/d4787e8e3629_phase_0_baseline.py
-    - tests/test_phase0_migration_preservation.py
+    - EMR4 Sidebar/src/taskpane/taskpane.js
+    - app/main.py
+    - app/routers/consultation.py
+    - tests/test_consultation_audio_privacy.py
     autonomous_task_selection: false
     feature_work_eligible: false
     product_work_eligible: false
@@ -1166,7 +1168,7 @@ profiles:
     deployment_eligible: false
     protected_ref_movement_eligible: false
     g2_eligible: true
-    scope_behavior: bounded_g2_migration_preservation
+    scope_behavior: bounded_g2_audio_privacy_repair
     scope_file: orchestration/programme/g2-baseline-repair-scope.json
     global_execution_defaults_unchanged: true
     closed_entrypoints:

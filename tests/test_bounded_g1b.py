@@ -48,7 +48,9 @@ class ClosedRequestTests(unittest.TestCase):
                          {"operation_kind": "accept_g1e"}, {"operation_kind": "repair_g2_fixture"}, {"task_class": b.G2_TASK},
                          {"operation_kind": "enable_g2_batches"}, {"operation_kind": "extend_g2_catalogue"},
                          {"operation_kind": "repair_g2_batch"}, {"operation_kind": "enable_g2_migration"},
-                         {"operation_kind": "repair_g2_migration"}, {"operation_kind": "align_g2_instructions"}):
+                         {"operation_kind": "repair_g2_migration"}, {"operation_kind": "align_g2_instructions"},
+                         {"operation_kind": "enable_g2_audio_privacy"},
+                         {"operation_kind": "repair_g2_audio_privacy"}):
             with self.subTest(manifest=manifest), no_legacy_observation(), \
                     patch.object(pa, "load_programme_policy", side_effect=AssertionError("old loader")), \
                     patch.object(pf, "load_programme_policy", side_effect=AssertionError("old loader")):
@@ -106,6 +108,180 @@ class ClosedRequestTests(unittest.TestCase):
             with self.subTest(raw=raw), self.assertRaises((ValueError, b.BoundedG1BError)):
                 b._document(raw, "fixture.yaml")
         self.assertNotEqual(b._canonical({"x": False}), b._canonical({"x": 0}))
+
+
+class G2AudioSourceContractTests(unittest.TestCase):
+    @staticmethod
+    def prospective_sources():
+        sources = copy.deepcopy(b.G2_AUDIO_PREDECESSOR["source_sha256"])
+        sources["orchestration_harness/bounded_g1b.py"] = "1" * 64
+        sources["orchestration_harness/raisa_policy.py"] = "2" * 64
+        sources["tests/test_bounded_g1b.py"] = "3" * 64
+        return sources
+
+    def scope(self):
+        return b.build_g2_audio_scope(
+            "2026-09-14T14:00:00+00:00",
+            b.G2_AUDIO_INSTRUCTIONS_PUBLICATION["commit"],
+            self.prospective_sources(),
+        )
+
+    def test_v5_scope_is_exact_and_preserves_all_closures(self):
+        scope = self.scope()
+        self.assertEqual(scope["schema_version"], b.G2_AUDIO_SCOPE_VERSION)
+        self.assertEqual(scope["transition_base_commit"], b.G2_AUDIO_INSTRUCTIONS_PUBLICATION["commit"])
+        self.assertEqual(
+            scope["current_instruction_policy"],
+            {"path": b.AGENTS, "sha256": b.G2_AUDIO_INSTRUCTIONS_SHA256,
+             "previous_sha256": b.G2_INSTRUCTIONS_SHA256,
+             "publication": b.G2_AUDIO_INSTRUCTIONS_PUBLICATION},
+        )
+        self.assertEqual(scope["allowed_paths"], sorted(b.G2_AUDIO_PATHS))
+        self.assertEqual(scope["allowed_additions"], [b.G2_AUDIO_ADDITION])
+        self.assertEqual(scope["maximum_changed_files"], 4)
+        self.assertEqual(scope["prior_instruction_alignment"]["commit"], b.G2_AUDIO_PREDECESSOR["commit"])
+        self.assertEqual(scope["trusted_git_successor"],
+                         {**b.G2_AUDIO_TRUSTED_GIT_PUBLICATION,
+                          "source_sha256": b.G2_AUDIO_TRUSTED_GIT_SOURCE_SHA256})
+        self.assertEqual(scope["owner_test_runtime_exception"], rp.g2_test_exception())
+        self.assertEqual(scope["claim_limits"], list(b.G2_AUDIO_LIMITS))
+        self.assertFalse(scope["execution_authorized"])
+        self.assertFalse(scope["feature_work_eligible"])
+        self.assertFalse(scope["g2_complete"])
+        b._validate_g2_batch_scope(scope)
+        for mutate in (
+            lambda s: s["allowed_paths"].append("app/not-reviewed.py"),
+            lambda s: s["allowed_additions"].append("tests/not-reviewed.py"),
+            lambda s: s.update(maximum_changed_files=5),
+            lambda s: s["trusted_git_successor"].update(commit="0" * 40),
+            lambda s: s["current_instruction_policy"].update(sha256="0" * 64),
+            lambda s: s["current_instruction_policy"]["publication"].update(commit="0" * 40),
+            lambda s: s["trusted_git_successor"]["source_sha256"].update(
+                {"orchestration_harness/trusted_git.py": "0" * 64}),
+            lambda s: s.update(execution_authorized=True),
+            lambda s: s.update(g2_complete=True),
+            lambda s: s["owner_test_runtime_exception"].update(admission_grants_runtime_authority=True),
+            lambda s: s["claim_limits"].pop(),
+        ):
+            changed = copy.deepcopy(scope)
+            mutate(changed)
+            with self.subTest(changed=changed), self.assertRaises(b.BoundedG1BError) as caught:
+                b._validate_g2_batch_scope(changed)
+            self.assertEqual(caught.exception.reason_code, "bounded_g2_batch_scope_invalid")
+
+    def test_activation_owns_six_and_repair_owns_only_four(self):
+        row = {"before_sha256": "4" * 64, "after_sha256": "5" * 64}
+        activation = {
+            "schema_version": b.G2_AUDIO_BINDING_VERSION,
+            "operation_kind": "enable_g2_audio_privacy",
+            "repair_sha256": {p: copy.deepcopy(row) for p in b.G2_AUDIO_MAINTENANCE_PATHS},
+        }
+        self.assertEqual(set(b._batch_changes(activation)), b.G2_AUDIO_MAINTENANCE_PATHS)
+        self.assertEqual(len(b.G2_AUDIO_MAINTENANCE_PATHS), 6)
+        missing = copy.deepcopy(activation)
+        missing["repair_sha256"].pop(b.STATE)
+        with self.assertRaises(b.BoundedG1BError) as caught:
+            b._batch_changes(missing)
+        self.assertEqual(caught.exception.reason_code, "bounded_g2_batch_path_not_allowed")
+
+        repair = {
+            "schema_version": b.G2_AUDIO_BINDING_VERSION,
+            "operation_kind": "repair_g2_audio_privacy",
+            "repair_sha256": {p: copy.deepcopy(row) for p in b.G2_AUDIO_PATHS},
+        }
+        repair["repair_sha256"][b.G2_AUDIO_ADDITION]["before_sha256"] = None
+        self.assertEqual(set(b._batch_changes(repair)), b.G2_AUDIO_PATHS)
+        self.assertEqual(b.operation_paths("repair_g2_audio_privacy", repair), b.G2_AUDIO_PATHS)
+        self.assertEqual(b.operation_effects("repair_g2_audio_privacy"), b.G2_AUDIO_EFFECTS)
+        self.assertEqual(b._operation("repair_g2_audio_privacy", repair)["limits"], b.G2_AUDIO_LIMITS)
+
+        invalid = copy.deepcopy(repair)
+        invalid["repair_sha256"]["tests/not-reviewed.py"] = invalid["repair_sha256"].pop(b.G2_AUDIO_ADDITION)
+        with self.assertRaises(b.BoundedG1BError) as caught:
+            b._batch_changes(invalid)
+        self.assertEqual(caught.exception.reason_code, "bounded_g2_batch_path_not_allowed")
+        invalid = copy.deepcopy(repair)
+        invalid["repair_sha256"]["app/main.py"]["before_sha256"] = None
+        with self.assertRaises(b.BoundedG1BError) as caught:
+            b._batch_changes(invalid)
+        self.assertEqual(caught.exception.reason_code, "bounded_g2_batch_change_digest")
+
+    def test_v4_cannot_be_relabelled_as_audio(self):
+        for operation in ("enable_g2_audio_privacy", "repair_g2_audio_privacy"):
+            binding = {
+                "schema_version": b.G2_INSTRUCTIONS_BINDING_VERSION,
+                "operation_kind": operation,
+                "repair_sha256": {
+                    "orchestration_harness/bounded_g1b.py":
+                        {"before_sha256": "6" * 64, "after_sha256": "7" * 64},
+                },
+            }
+            with self.subTest(operation=operation), self.assertRaises(b.BoundedG1BError) as caught:
+                b._batch_changes(binding)
+            self.assertEqual(caught.exception.reason_code, "bounded_g2_batch_binding_version")
+
+    def test_trusted_git_successor_commit_and_blobs_fail_closed(self):
+        publication = b.G2_AUDIO_TRUSTED_GIT_PUBLICATION
+        def observed_text(_root, *args, **_kwargs):
+            if args == ("cat-file", "commit", publication["commit"]):
+                return "tree " + publication["tree"] + "\nparent " + publication["parent"] + "\n\nauthored\n"
+            if args == ("merge-base", "--is-ancestor", publication["commit"], "f" * 40):
+                return ""
+            raise AssertionError(args)
+
+        def observed_bytes(_root, *args, **_kwargs):
+            prefix = publication["commit"] + ":"
+            path = args[2][len(prefix):]
+            return b.G2_AUDIO_TRUSTED_GIT_SOURCE_SHA256[path].encode()
+
+        with patch.object(b.trusted_git, "run_git", side_effect=observed_text), \
+                patch.object(b.trusted_git, "run_git_bytes", side_effect=observed_bytes), \
+                patch.object(b, "_sha", side_effect=lambda raw: raw.decode()):
+            b._validate_g2_audio_trusted_git_publication(Path("synthetic"), "f" * 40)
+
+        with patch.object(b.trusted_git, "run_git", return_value="tree " + "0" * 40):
+            with self.assertRaises(b.BoundedG1BError) as caught:
+                b._validate_g2_audio_trusted_git_publication(Path("synthetic"), "f" * 40)
+        self.assertEqual(caught.exception.reason_code, "bounded_g2_batch_publication_invalid")
+
+        def changed_bytes(_root, *args, **_kwargs):
+            return b"0" * 64
+        with patch.object(b.trusted_git, "run_git", side_effect=observed_text), \
+                patch.object(b.trusted_git, "run_git_bytes", side_effect=changed_bytes), \
+                patch.object(b, "_sha", side_effect=lambda raw: raw.decode()):
+            with self.assertRaises(b.BoundedG1BError) as caught:
+                b._validate_g2_audio_trusted_git_publication(Path("synthetic"), "f" * 40)
+        self.assertEqual(caught.exception.reason_code,
+                         "bounded_g2_audio_trusted_git_publication_bytes_changed")
+
+    def test_instruction_successor_preserves_previous_and_binds_current_bytes(self):
+        publication = b.G2_AUDIO_INSTRUCTIONS_PUBLICATION
+
+        def observed_text(_root, *args, **_kwargs):
+            if args == ("cat-file", "commit", publication["commit"]):
+                return "tree " + publication["tree"] + "\nparent " + publication["parent"] + "\n\nauthored\n"
+            if args == ("merge-base", "--is-ancestor", publication["commit"], "f" * 40):
+                return ""
+            raise AssertionError(args)
+
+        def observed_bytes(_root, *args, **_kwargs):
+            commit = args[2].split(":", 1)[0]
+            digest = (b.G2_INSTRUCTIONS_SHA256
+                      if commit == publication["parent"] else b.G2_AUDIO_INSTRUCTIONS_SHA256)
+            return digest.encode()
+
+        with patch.object(b.trusted_git, "run_git", side_effect=observed_text), \
+                patch.object(b.trusted_git, "run_git_bytes", side_effect=observed_bytes), \
+                patch.object(b, "_sha", side_effect=lambda raw: raw.decode()):
+            b._validate_g2_audio_instructions_publication(Path("synthetic"), "f" * 40)
+
+        with patch.object(b.trusted_git, "run_git", side_effect=observed_text), \
+                patch.object(b.trusted_git, "run_git_bytes", return_value=b"0" * 64), \
+                patch.object(b, "_sha", side_effect=lambda raw: raw.decode()):
+            with self.assertRaises(b.BoundedG1BError) as caught:
+                b._validate_g2_audio_instructions_publication(Path("synthetic"), "f" * 40)
+        self.assertEqual(caught.exception.reason_code,
+                         "bounded_g2_audio_instructions_publication_bytes_changed")
 
 
 class NativeFixture:
@@ -684,6 +860,153 @@ class G2InstructionsFixture(G2MigrationFixture):
             with patch.object(b.trusted_git, "run_git", side_effect=observed_text), \
                     patch.object(b.trusted_git, "run_git_bytes", side_effect=observed_bytes):
                 yield
+
+
+class G2AudioFixture(G2MigrationFixture):
+    """Authored v5 activation over exact v4, trusted-Git, and instruction history."""
+    MAIN = "app/main.py"
+    CONSULTATION = "app/routers/consultation.py"
+    SIDEBAR = "EMR4 Sidebar/src/taskpane/taskpane.js"
+    TEST = "tests/test_consultation_audio_privacy.py"
+
+    def __init__(self, assets):
+        super().__init__(assets)
+        self.audio_previous_policy = {
+            p: (assets / "g2-audio-predecessor-policy" / p).read_bytes()
+            for p in b.G2_AUDIO_PREDECESSOR_POLICY}
+        self.audio_previous_source = {
+            p: (assets / "g2-audio-predecessor-source" / p).read_bytes()
+            for p in b.SOURCE_PATHS | b.CONTROLLER_PATHS}
+        self.instruction_previous_policy = {
+            p: (assets / "g2-migration-published-policy" / p).read_bytes()
+            for p in b.G2_INSTRUCTIONS_PREDECESSOR_POLICY}
+        self.instruction_previous_source = {
+            p: (self.source / "g2-migration-installed-source" / p).read_bytes()
+            for p in b.SOURCE_PATHS | b.CONTROLLER_PATHS}
+        self.old_published_instructions = (
+            assets / "g2-instructions-published-policy" / b.AGENTS).read_bytes()
+        self.current_instructions = (
+            assets / "g2-audio-instructions-publication" / b.AGENTS).read_bytes()
+        self.trusted_git_publication_source = {
+            p: (assets / "g2-audio-trusted-git-publication" / p).read_bytes()
+            for p in b.G2_AUDIO_TRUSTED_GIT_SOURCE_SHA256}
+        product = {
+            self.MAIN: b"# authored application baseline; never imported\n",
+            self.CONSULTATION: b"# authored consultation baseline; never imported\n",
+            self.SIDEBAR: b"// authored sidebar baseline; never executed\n",
+        }
+        previous = {**self.audio_previous_policy, **self.audio_previous_source, **product}
+        for path, raw in previous.items():
+            self.write(path, raw)
+        test_path = self.root / self.TEST
+        if test_path.exists():
+            test_path.unlink()
+        self.git("add", "--", *sorted(previous))
+        self.git("rm", "--cached", "--ignore-unmatch", "--", self.TEST)
+        prior_tree = self.git("write-tree")
+        prior = self.git("commit-tree", prior_tree, "-p", self.base, "-m", "authored installed v4 baseline")
+        for path, raw in self.trusted_git_publication_source.items():
+            self.write(path, raw)
+        self.git("add", "--", *sorted(self.trusted_git_publication_source))
+        trusted_tree = self.git("write-tree")
+        trusted = self.git("commit-tree", trusted_tree, "-p", prior, "-m", "authored trusted Git successor")
+        self.write(b.AGENTS, self.current_instructions)
+        self.git("add", "--", b.AGENTS)
+        base_tree = self.git("write-tree")
+        base = self.git("commit-tree", base_tree, "-p", trusted, "-m", "authored current instructions")
+        self.git("update-ref", "--no-deref", "HEAD", base)
+        self.base = base
+        sources = {p: b._sha((self.source / p).read_bytes()) for p in b.CONTROLLER_PATHS}
+        self.batch_scope = b.build_g2_audio_scope("2026-09-14T14:30:00+00:00", base, sources)
+        after = b.build_g2_audio_transition(
+            {p: self.audio_previous_policy[p] for p in b.G2_BATCH_CONTROL_PATHS}, self.batch_scope)
+        after.update({p: (self.source / p).read_bytes() for p in b.G2_BATCH_CODE_PATHS})
+        changes = {p: {"before_sha256": b._sha((self.root / p).read_bytes()),
+                       "after_sha256": b._sha(raw)} for p, raw in after.items()}
+        for path, raw in after.items():
+            self.write(path, raw)
+        self.git("add", "--", *sorted(after))
+        tree = self.git("write-tree")
+        self.q.update(
+            schema_version=b.G2_AUDIO_BINDING_VERSION,
+            operation_id="authored-g2-audio-activation",
+            operation_kind="enable_g2_audio_privacy",
+            phase="development", base_commit=base, base_tree=base_tree,
+            expected_head=base, expected_index_tree=tree, candidate_tree=tree,
+            activation_commit=b.G2_AUDIO_PREDECESSOR["commit"],
+            installed_controller=copy.deepcopy(b.G2_AUDIO_PREDECESSOR),
+            repair_sha256=changes,
+            source_sha256={p: b._sha((self.source / p).read_bytes()) for p in b.SOURCE_PATHS},
+        )
+        self.q["payload_sha256"] = {
+            p: b._sha((self.root / p).read_bytes()) for p in b.batch_input_paths(self.q)}
+
+    @contextmanager
+    def component_history(self):
+        with super().component_history():
+            run, run_bytes = b.trusted_git.run_git, b.trusted_git.run_git_bytes
+            declarations = (
+                b.G2_INSTRUCTIONS_PREDECESSOR, b.G2_INSTRUCTIONS_PUBLICATION,
+                b.G2_AUDIO_PREDECESSOR, b.G2_AUDIO_TRUSTED_GIT_PUBLICATION,
+                b.G2_AUDIO_INSTRUCTIONS_PUBLICATION,
+            )
+            predecessor_files = {
+                b.G2_INSTRUCTIONS_PREDECESSOR["commit"]:
+                    {**self.instruction_previous_policy, **self.instruction_previous_source},
+                b.G2_AUDIO_PREDECESSOR["commit"]:
+                    {**self.audio_previous_policy, **self.audio_previous_source},
+                b.G2_AUDIO_TRUSTED_GIT_PUBLICATION["commit"]: self.trusted_git_publication_source,
+            }
+
+            def observed_text(root, *args, **kwargs):
+                for declared in declarations:
+                    if root == self.root and args == ("cat-file", "commit", declared["commit"]):
+                        return ("tree " + declared["tree"] + "\nparent " + declared["parent"]
+                                + "\n\nauthored fixed history\n")
+                    if root == self.root and args == (
+                            "merge-base", "--is-ancestor", declared["commit"], self.q["base_commit"]):
+                        return ""
+                return run(root, *args, **kwargs)
+
+            def observed_bytes(root, *args, **kwargs):
+                for commit, files in predecessor_files.items():
+                    for path, raw in files.items():
+                        if root == self.root and args == ("cat-file", "blob", commit + ":" + path):
+                            return raw
+                publication = b.G2_INSTRUCTIONS_PUBLICATION
+                if root == self.root and args == ("cat-file", "blob", publication["commit"] + ":" + b.AGENTS):
+                    return self.old_published_instructions
+                if root == self.root and args == ("cat-file", "blob", publication["parent"] + ":" + b.AGENTS):
+                    return self.instruction_previous_policy[b.AGENTS]
+                publication = b.G2_AUDIO_INSTRUCTIONS_PUBLICATION
+                if root == self.root and args == ("cat-file", "blob", publication["parent"] + ":" + b.AGENTS):
+                    return self.audio_previous_policy[b.AGENTS]
+                if root == self.root and args == ("cat-file", "blob", publication["commit"] + ":" + b.AGENTS):
+                    return self.current_instructions
+                return run_bytes(root, *args, **kwargs)
+
+            with patch.object(b.trusted_git, "run_git", side_effect=observed_text), \
+                    patch.object(b.trusted_git, "run_git_bytes", side_effect=observed_bytes):
+                yield
+
+    def prepare_audio(self, changes):
+        base = self.git("rev-parse", "HEAD")
+        base_tree = self.git("rev-parse", "HEAD^{tree}")
+        rows = {}
+        for path, raw in changes.items():
+            prior = self.root / path
+            rows[path] = {"before_sha256": b._sha(prior.read_bytes()) if prior.is_file() else None,
+                          "after_sha256": b._sha(raw)}
+            self.write(path, raw)
+        self.git("add", "--", *sorted(changes))
+        tree = self.git("write-tree")
+        self.q.update(
+            operation_kind="repair_g2_audio_privacy", operation_id="authored-g2-audio-repair",
+            phase="development", base_commit=base, base_tree=base_tree, expected_head=base,
+            expected_index_tree=tree, candidate_tree=tree, activation_commit=self.activation,
+            installed_controller=copy.deepcopy(self.batch_controller), repair_sha256=rows)
+        self.q["payload_sha256"] = {
+            p: b._sha((self.root / p).read_bytes()) for p in b.batch_input_paths(self.q)}
 
 
 def build_integration_suite(assets: Path) -> unittest.TestSuite:
@@ -2526,7 +2849,106 @@ def build_integration_suite(assets: Path) -> unittest.TestSuite:
                 previous.q["payload_sha256"][b.AGENTS] = b.G2_INSTRUCTIONS_SHA256
                 self.assertEqual(previous.decision().reason_codes, ("bounded_g2_batch_frozen_input_changed",))
 
+    class G2AudioAdmissionTests(unittest.TestCase):
+        def setUp(self):
+            self.fx = G2AudioFixture(assets)
+            self.addCleanup(self.fx.close)
+            self.stack = ExitStack()
+            self.addCleanup(self.stack.close)
+            self.stack.enter_context(no_legacy_observation())
+            self.stack.enter_context(self.fx.component_history())
+
+        def test_exact_activation_then_four_path_repair_admit_without_runtime_authority(self):
+            f = self.fx
+            context = f.context()
+            manifest = pf.build_task_manifest(f.root, bounded_context=context)
+            report = pf.build_report(
+                f.root, manifest, bounded_context=context,
+                phase="development", entrypoint="task_branch_commit")
+            self.assertEqual(report["status"], "policy_eligible", report)
+            self.assertFalse(report["execution_authorized"])
+            self.assertEqual(set(manifest["allowed_paths"]), b.G2_AUDIO_MAINTENANCE_PATHS)
+            self.assertEqual(len(manifest["allowed_paths"]), 6)
+            self.assertEqual(f.batch_scope["allowed_paths"], sorted(b.G2_AUDIO_PATHS))
+            self.assertEqual(f.batch_scope["allowed_additions"], [f.TEST])
+            self.assertEqual(
+                f.batch_scope["current_instruction_policy"]["sha256"],
+                b.G2_AUDIO_INSTRUCTIONS_SHA256)
+            self.assertEqual((f.root / b.AGENTS).read_bytes(), f.current_instructions)
+            self.assertFalse(f.batch_scope["execution_authorized"])
+            self.assertFalse(f.batch_scope["feature_work_eligible"])
+            self.assertFalse(f.batch_scope["g2_complete"])
+            self.assertTrue(f.decision().policy_admitted)
+
+            f.activate_batches()
+            changes = {
+                f.MAIN: b"# authored main privacy repair; never imported\n",
+                f.CONSULTATION: b"# authored consultation privacy repair; never imported\n",
+                f.SIDEBAR: b"// authored object URL repair; never executed\n",
+                f.TEST: b"# authored focused privacy regression; never imported\n",
+            }
+            f.prepare_audio(changes)
+            self.assertEqual(set(f.q["repair_sha256"]), b.G2_AUDIO_PATHS)
+            self.assertIsNone(f.q["repair_sha256"][f.TEST]["before_sha256"])
+            self.assertIn(f.SIDEBAR, f.q["repair_sha256"])
+            self.assertEqual(set(f.manifest(f.context())["allowed_paths"]), b.G2_AUDIO_PATHS)
+            self.assertEqual(b.operation_effects(f.q["operation_kind"]), b.G2_AUDIO_EFFECTS)
+            self.assertTrue(f.decision().policy_admitted)
+            f.commit_current()
+            self.assertTrue(f.decision().policy_admitted)
+            f.q["phase"] = "post-push"
+            self.assertTrue(f.decision().policy_admitted)
+
+        def test_stale_current_instructions_and_trusted_git_source_are_denied(self):
+            f = self.fx
+            self.assertTrue(f.decision().policy_admitted)
+            original = copy.deepcopy(f.q)
+            f.write(b.AGENTS, f.audio_previous_policy[b.AGENTS])
+            f.q["payload_sha256"][b.AGENTS] = b._sha(f.audio_previous_policy[b.AGENTS])
+            self.assertEqual(f.decision().reason_codes, ("bounded_g2_batch_frozen_input_changed",))
+            f.write(b.AGENTS, f.current_instructions)
+            f.q = copy.deepcopy(original)
+            f.q["source_sha256"]["orchestration_harness/trusted_git.py"] = b._sha(
+                f.audio_previous_source["orchestration_harness/trusted_git.py"])
+            self.assertEqual(f.decision().reason_codes, ("bounded_g1b_git_source_changed",))
+
+        def test_scope_addition_and_runtime_effect_expansion_are_denied(self):
+            f = self.fx
+            self.assertTrue(f.decision().policy_admitted)
+            original = copy.deepcopy(f.q)
+            scope = copy.deepcopy(f.batch_scope)
+            scope["allowed_paths"].append("app/not-reviewed.py")
+            raw = b._canonical(scope) + b"\n"
+            f.write(b.G2_SCOPE, raw)
+            f.q["payload_sha256"][b.G2_SCOPE] = b._sha(raw)
+            f.q["repair_sha256"][b.G2_SCOPE]["after_sha256"] = b._sha(raw)
+            self.assertEqual(f.decision().reason_codes, ("bounded_g2_batch_scope_invalid",))
+            f.write(b.G2_SCOPE, b._canonical(f.batch_scope) + b"\n")
+            f.q = original
+
+            f.activate_batches()
+            changes = {
+                f.MAIN: b"# authored main repair\n",
+                f.CONSULTATION: b"# authored consultation repair\n",
+                f.SIDEBAR: b"// authored sidebar repair\n",
+                f.TEST: b"# authored focused test\n",
+            }
+            f.prepare_audio(changes)
+            saved_repair = copy.deepcopy(f.q)
+            f.q["repair_sha256"]["tests/not-reviewed.py"] = f.q["repair_sha256"].pop(f.TEST)
+            self.assertEqual(f.decision().reason_codes, ("bounded_g2_batch_path_not_allowed",))
+            f.q = saved_repair
+            context = f.context()
+            manifest = f.manifest(context)
+            manifest["intended_side_effect_classes"].append("provider_invocation")
+            decision = b.evaluate_bounded_g1b_operation(
+                context=context, manifest=manifest,
+                entrypoint="recovery_preflight", phase=f.q["phase"])
+            self.assertFalse(decision.policy_admitted)
+            self.assertEqual(decision.reason_codes, ("bounded_g1b_manifest_binding_mismatch",))
+
     suite = unittest.defaultTestLoader.loadTestsFromTestCase(ClosedRequestTests)
+    suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(G2AudioSourceContractTests))
     suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(IntegratedTests))
     suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(SuccessorTests))
     suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(ProvenanceAdmissionTests))
@@ -2537,4 +2959,5 @@ def build_integration_suite(assets: Path) -> unittest.TestSuite:
     suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(G2CatalogueAdmissionTests))
     suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(G2MigrationAdmissionTests))
     suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(G2InstructionsAdmissionTests))
+    suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(G2AudioAdmissionTests))
     return suite

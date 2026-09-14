@@ -455,6 +455,61 @@ G2_BATCH_KINDS = G2_BATCH_KINDS | {"align_g2_instructions"}
 G2_MAINTENANCE_KINDS = G2_MAINTENANCE_KINDS | {"align_g2_instructions"}
 OPERATION_PATHS["align_g2_instructions"] = G2_INSTRUCTIONS_MAINTENANCE_PATHS
 
+# A v5 successor activates one exact audio-privacy source repair. The installed
+# v4 controller and all earlier publications remain historical authority.
+G2_AUDIO_BINDING_VERSION = "ariadne.bounded_g2_batch_binding.v5"
+G2_AUDIO_SCOPE_VERSION = "ariadne.g2_reviewed_batch_scope.v5"
+G2_AUDIO_PATHS = frozenset(raisa_policy.G2_AUDIO_PRIVACY_PATHS)
+G2_AUDIO_ADDITION = "tests/test_consultation_audio_privacy.py"
+G2_AUDIO_EFFECTS = G2_BATCH_EFFECTS
+G2_AUDIO_PREDECESSOR = {
+    "commit": "8f27fcc622933ba256dc33142f85ac92849d6b89",
+    "parent": G2_INSTRUCTIONS_PUBLICATION["commit"],
+    "tree": "0d13644799ac636f9eeb802daab76fe954db9489",
+    "source_sha256": {
+        "orchestration_harness/bounded_g1b.py": "87fa503900f47168481820daa3499d9e08b4b2f52a99eff59aba58e0030b3bed",
+        "orchestration_harness/configuration_core.py": "f7ba7a80eb0a590f9fb71b864e6c1f9f43241d9f7d70a38da67a9243fea208e5",
+        "orchestration_harness/programme_admission.py": "ac816a8a79b2d8222fa357777c075950927e86cf30c8a5b25ffd08a474052181",
+        "orchestration_harness/raisa_policy.py": "3f1df407698e17087fc35289d9276f7074d297e961c8a047b42563a50e5fe30b",
+        "tests/test_bounded_g1b.py": "22fcdab3131c8827d2ca0b6592c9b0e7d82226108cdf5688d043efa865dad0eb",
+    },
+}
+G2_AUDIO_PREDECESSOR_POLICY = {
+    AGENTS: G2_INSTRUCTIONS_SHA256,
+    STATE: "802438d220e50331e6868a748a3b76a1b837e782abad81cf330ae33d1d035f23",
+    OVERLAY: "73f719feba004b1d2a8efd52d88d0f546516b279e8badfe50ba80a919556a2f7",
+    G2_SCOPE: "c03f3a329a334ae2a59619d807853be2b9dbbbb68399e29dfc49eb93e4a5ac65",
+    GATES: G2_INITIAL_POLICY_PINS[GATES],
+}
+G2_AUDIO_TRUSTED_GIT_PUBLICATION = {
+    "commit": "9e271036c1e7d4aec842f1e1a4a3f9c1666411dd",
+    "parent": "eaabb48b0df6c6c1f9e0ba086d1c360009b54e03",
+    "tree": "4451dea5d6ffae12e89a03706eabacac42fa7b47",
+}
+G2_AUDIO_TRUSTED_GIT_SOURCE_SHA256 = {
+    "orchestration_harness/trusted_git.py": "4a856bffe2b68d7c7e1875152629c9024a32679b59d9b1ed8301c368d41ff527",
+    "orchestration_harness/controller_maintenance_record.py": "d93b8f106b4c96aa7a6ba5c26518232d9f152b4927b10d32db5d066d03ccc1b5",
+    "tests/test_programme_target_index.py": "69b7711049d5b3046eeed4aeaded8becbcf4e8055484891789f570cbe998adab",
+}
+G2_AUDIO_INSTRUCTIONS_SHA256 = "254c906919e49c69b53c82fa2a678953b45e20d5e2ce2503184583daf09f8cc7"
+G2_AUDIO_INSTRUCTIONS_PUBLICATION = {
+    "commit": "e787fd8e92c70e4aa7f58d13c98b8f04ec6fee0a",
+    "parent": G2_AUDIO_TRUSTED_GIT_PUBLICATION["commit"],
+    "tree": "5ff10cc3775b5b4d292d443b15c9d05df48aed5f",
+}
+G2_AUDIO_MAINTENANCE_PATHS = G2_BATCH_MAINTENANCE_PATHS
+G2_AUDIO_LIMITS = (
+    "only the reviewed literal four-file audio privacy repair in this binding is eligible",
+    "source scope removes only application-created persistent or public audio files and bounds browser object URL lifetime",
+    "framework or operating-system multipart temporary storage, endpoint authorization and full PHI safety are not accepted",
+    "admission grants no application, database, provider or test-runtime execution authority",
+    "no G2 completion, feature, real-data, protected-evidence or integration acceptance",
+)
+G2_BATCH_KINDS = G2_BATCH_KINDS | {"enable_g2_audio_privacy", "repair_g2_audio_privacy"}
+G2_MAINTENANCE_KINDS = G2_MAINTENANCE_KINDS | {"enable_g2_audio_privacy"}
+OPERATION_PATHS.update(enable_g2_audio_privacy=G2_AUDIO_MAINTENANCE_PATHS,
+                       repair_g2_audio_privacy=G2_AUDIO_PATHS)
+
 
 def _batch_changes(binding: dict) -> dict:
     kind = binding.get("operation_kind")
@@ -465,18 +520,23 @@ def _batch_changes(binding: dict) -> dict:
     catalogue = binding.get("schema_version") == G2_CATALOGUE_BINDING_VERSION
     instructions = binding.get("schema_version") == G2_INSTRUCTIONS_BINDING_VERSION
     migration = instructions or binding.get("schema_version") == G2_MIGRATION_BINDING_VERSION
+    audio = binding.get("schema_version") == G2_AUDIO_BINDING_VERSION
     _need((kind in {"enable_g2_migration", "repair_g2_migration", "align_g2_instructions"}) == migration
           and (kind != "align_g2_instructions" or instructions)
-          and (not instructions or kind in {"align_g2_instructions", "repair_g2_migration"}),
+          and (not instructions or kind in {"align_g2_instructions", "repair_g2_migration"})
+          and (kind in {"enable_g2_audio_privacy", "repair_g2_audio_privacy"}) == audio,
           "bounded_g2_batch_binding_version")
-    allowed = (G2_INSTRUCTIONS_MAINTENANCE_PATHS if maintenance and instructions
-               else G2_BATCH_MAINTENANCE_PATHS if maintenance else G2_MIGRATION_PATHS if migration
-               else G2_CATALOGUE_PATHS if catalogue else G2_BATCH_PATHS)
+    allowed = (G2_AUDIO_MAINTENANCE_PATHS if maintenance and audio
+               else G2_INSTRUCTIONS_MAINTENANCE_PATHS if maintenance and instructions
+               else G2_BATCH_MAINTENANCE_PATHS if maintenance else G2_AUDIO_PATHS if audio
+               else G2_MIGRATION_PATHS if migration else G2_CATALOGUE_PATHS if catalogue else G2_BATCH_PATHS)
     _need(set(rows) <= allowed and (not maintenance or set(rows) == allowed),
           "bounded_g2_batch_path_not_allowed")
     for path, row in rows.items():
         _keys(row, {"before_sha256", "after_sha256"}, "bounded_g2_batch_change_schema")
-        addition = migration and not maintenance and path == G2_MIGRATION_ADDITION and row["before_sha256"] is None
+        addition = (not maintenance and row["before_sha256"] is None
+                    and ((migration and path == G2_MIGRATION_ADDITION)
+                         or (audio and path == G2_AUDIO_ADDITION)))
         digests = (row["after_sha256"],) if addition else row.values()
         _need(all(type(v) is str and re.fullmatch(r"[0-9a-f]{64}", v) for v in digests)
               and row["before_sha256"] != row["after_sha256"], "bounded_g2_batch_change_digest")
@@ -487,7 +547,7 @@ def batch_input_paths(binding: dict) -> frozenset[str]:
     """Catalogue authority is metadata; only fixed policy and selected files open."""
     changes = _batch_changes(binding)
     if binding.get("schema_version") in {G2_CATALOGUE_BINDING_VERSION, G2_MIGRATION_BINDING_VERSION,
-                                         G2_INSTRUCTIONS_BINDING_VERSION}:
+                                         G2_INSTRUCTIONS_BINDING_VERSION, G2_AUDIO_BINDING_VERSION}:
         return G2_CATALOGUE_POLICY_PATHS | frozenset(changes)
     return G2_BATCH_INPUT_PATHS
 
@@ -495,14 +555,14 @@ def batch_input_paths(binding: dict) -> frozenset[str]:
 def operation_effects(kind: str) -> frozenset[str]:
     if kind == "repair_g2_migration":
         return G2_MIGRATION_EFFECTS
-    if kind == "repair_g2_batch":
+    if kind in {"repair_g2_batch", "repair_g2_audio_privacy"}:
         return G2_BATCH_EFFECTS
     return frozenset({"repository_read"}) if kind == "assess_g1e" else EFFECTS
 
 
 def operation_paths(kind: str, binding: dict | None = None) -> frozenset[str]:
     _need(type(kind) is str and kind in OPERATION_PATHS, "bounded_g1b_operation_kind")
-    if kind in {"repair_g2_batch", "repair_g2_migration"}:
+    if kind in {"repair_g2_batch", "repair_g2_migration", "repair_g2_audio_privacy"}:
         _need(type(binding) is dict and binding.get("operation_kind") == kind,
               "bounded_g2_batch_binding_required")
         return frozenset(_batch_changes(binding))
@@ -515,7 +575,9 @@ def _operation(kind: str, binding: dict | None = None) -> dict:
         return {"paths": paths, "input_paths": batch_input_paths(binding),
                 "transition_paths": G2_TRANSITION_PATHS, "scope_path": G2_SCOPE,
                 "transition": kind in G2_MAINTENANCE_KINDS, "batch": True,
-                "profile": G2_PROFILE, "gate": "G2", "limits": G2_BATCH_LIMITS}
+                "profile": G2_PROFILE, "gate": "G2",
+                "limits": G2_AUDIO_LIMITS if binding.get("schema_version") == G2_AUDIO_BINDING_VERSION
+                else G2_BATCH_LIMITS}
     if kind in {"accept_g1e", "repair_g2_fixture"}:
         return {
             "paths": paths, "successor": True, "transition": kind == "accept_g1e",
@@ -1519,8 +1581,49 @@ def build_g2_instructions_scope(recorded_at: str, transition_base: str, controll
     return scope
 
 
+def build_g2_audio_scope(recorded_at: str, transition_base: str, controller_sources: dict) -> dict:
+    """Activate only the reviewed audio privacy source paths; runtime stays closed."""
+    scope = build_g2_migration_scope(recorded_at, transition_base, controller_sources)
+    _need(len(G2_AUDIO_PATHS) == 4 and G2_AUDIO_ADDITION in G2_AUDIO_PATHS,
+          "bounded_g2_audio_paths_changed")
+    _need(all(type(v) is str and re.fullmatch(r"[0-9a-f]{40}", v)
+              for publication in (G2_AUDIO_TRUSTED_GIT_PUBLICATION, G2_AUDIO_INSTRUCTIONS_PUBLICATION)
+              for v in publication.values()),
+          "bounded_g2_audio_publication_unbound")
+    _digest_map(G2_AUDIO_TRUSTED_GIT_SOURCE_SHA256,
+                frozenset(G2_AUDIO_TRUSTED_GIT_SOURCE_SHA256),
+                "bounded_g2_audio_trusted_git_sources")
+    scope.update(
+        schema_version=G2_AUDIO_SCOPE_VERSION,
+        enable_operation="enable_g2_audio_privacy",
+        repair_operation="repair_g2_audio_privacy",
+        allowed_paths=sorted(G2_AUDIO_PATHS),
+        maximum_changed_files=4,
+        allowed_additions=[G2_AUDIO_ADDITION],
+        allowed_effects=sorted(G2_AUDIO_EFFECTS),
+        forbidden_effects=raisa_policy.g2_audio_privacy_profile()["forbidden_effects"],
+        current_instruction_policy={"path": AGENTS, "sha256": G2_AUDIO_INSTRUCTIONS_SHA256,
+            "previous_sha256": G2_INSTRUCTIONS_SHA256,
+            "publication": copy.deepcopy(G2_AUDIO_INSTRUCTIONS_PUBLICATION)},
+        prior_migration_activation={"commit": G2_INSTRUCTIONS_PREDECESSOR["commit"],
+                                    "scope_sha256": G2_INSTRUCTIONS_PREDECESSOR_POLICY[G2_SCOPE]},
+        prior_instruction_alignment={"commit": G2_AUDIO_PREDECESSOR["commit"],
+                                     "scope_sha256": G2_AUDIO_PREDECESSOR_POLICY[G2_SCOPE]},
+        trusted_git_successor={**copy.deepcopy(G2_AUDIO_TRUSTED_GIT_PUBLICATION),
+                               "source_sha256": copy.deepcopy(G2_AUDIO_TRUSTED_GIT_SOURCE_SHA256)},
+        claim_limits=list(G2_AUDIO_LIMITS),
+    )
+    scope["current_operation"]["operation_id"] = "g2-audio-privacy-repair"
+    scope["current_operation"]["supersedes"] = {
+        "operation_id": "g2-migration-preservation-repair", "scope_path": G2_SCOPE,
+        "scope_commit": G2_AUDIO_PREDECESSOR["commit"],
+        "scope_sha256": G2_AUDIO_PREDECESSOR_POLICY[G2_SCOPE], "historical_latch_preserved": True}
+    return scope
+
+
 def _validate_g2_batch_scope(scope: dict) -> None:
-    builder = (build_g2_instructions_scope if scope.get("schema_version") == G2_INSTRUCTIONS_SCOPE_VERSION
+    builder = (build_g2_audio_scope if scope.get("schema_version") == G2_AUDIO_SCOPE_VERSION
+               else build_g2_instructions_scope if scope.get("schema_version") == G2_INSTRUCTIONS_SCOPE_VERSION
                else build_g2_migration_scope if scope.get("schema_version") == G2_MIGRATION_SCOPE_VERSION
                else build_g2_catalogue_scope if scope.get("schema_version") == G2_CATALOGUE_SCOPE_VERSION
                else build_g2_batch_scope)
@@ -1602,12 +1705,50 @@ def build_g2_instructions_transition(before: dict[str, bytes], scope: dict) -> d
             OVERLAY: before[OVERLAY], G2_SCOPE: scope_raw}
 
 
+def build_g2_audio_transition(before: dict[str, bytes], scope: dict) -> dict[str, bytes]:
+    """Activate the exact audio source scope without accepting G2 or runtime."""
+    _keys(before, G2_BATCH_CONTROL_PATHS, "bounded_g2_audio_transition_paths")
+    for path in G2_BATCH_CONTROL_PATHS:
+        _need(type(before[path]) is bytes and _sha(before[path]) == G2_AUDIO_PREDECESSOR_POLICY[path],
+              "bounded_g2_audio_prior_policy_changed")
+    _need(scope.get("schema_version") == G2_AUDIO_SCOPE_VERSION, "bounded_g2_audio_scope_version")
+    _validate_g2_batch_scope(scope)
+    state = _json(before[STATE])
+    overlay = _document(before[OVERLAY], OVERLAY)
+    scope_raw = _canonical(scope) + b"\n"
+    state["observed_at"] = scope["recorded_at"]
+    state["g2"].update(scope_sha256=_sha(scope_raw), current_operation=_json(_canonical(scope["current_operation"])))
+    state["task_selection"].update(next_eligibility_condition="bounded_G2_audio_privacy_repair_active")
+    overlay["profiles"][G2_PROFILE] = raisa_policy.g2_audio_privacy_profile()
+    return {STATE: (json.dumps(state, indent=2, ensure_ascii=False) + "\n").encode(),
+            OVERLAY: yaml.safe_dump(overlay, sort_keys=False, allow_unicode=True).encode(),
+            G2_SCOPE: scope_raw}
+
+
 def _batch_publication(target: Path, publication: dict, base: str) -> None:
     headers = trusted_git.run_git(target, "cat-file", "commit", publication["commit"]).split("\n\n", 1)[0].splitlines()
     _need([line for line in headers if line.startswith("parent ")] == ["parent " + publication["parent"]]
           and [line for line in headers if line.startswith("tree ")] == ["tree " + publication["tree"]],
           "bounded_g2_batch_publication_invalid")
     trusted_git.run_git(target, "merge-base", "--is-ancestor", publication["commit"], base)
+
+
+def _validate_g2_audio_trusted_git_publication(target: Path, base: str) -> None:
+    _batch_publication(target, G2_AUDIO_TRUSTED_GIT_PUBLICATION, base)
+    for path, digest in G2_AUDIO_TRUSTED_GIT_SOURCE_SHA256.items():
+        raw = trusted_git.run_git_bytes(
+            target, "cat-file", "blob", G2_AUDIO_TRUSTED_GIT_PUBLICATION["commit"] + ":" + path)
+        _need(_sha(raw) == digest, "bounded_g2_audio_trusted_git_publication_bytes_changed")
+
+
+def _validate_g2_audio_instructions_publication(target: Path, base: str) -> None:
+    _batch_publication(target, G2_AUDIO_INSTRUCTIONS_PUBLICATION, base)
+    for commit, digest in (
+        (G2_AUDIO_INSTRUCTIONS_PUBLICATION["parent"], G2_INSTRUCTIONS_SHA256),
+        (G2_AUDIO_INSTRUCTIONS_PUBLICATION["commit"], G2_AUDIO_INSTRUCTIONS_SHA256),
+    ):
+        raw = trusted_git.run_git_bytes(target, "cat-file", "blob", commit + ":" + AGENTS)
+        _need(_sha(raw) == digest, "bounded_g2_audio_instructions_publication_bytes_changed")
 
 
 def _load_g2_batch_inputs(context, target, source, evidence_root, scratch, binding, read, snapshots):
@@ -1619,11 +1760,13 @@ def _load_g2_batch_inputs(context, target, source, evidence_root, scratch, bindi
     catalogue = binding["schema_version"] == G2_CATALOGUE_BINDING_VERSION
     instructions = binding["schema_version"] == G2_INSTRUCTIONS_BINDING_VERSION
     migration = instructions or binding["schema_version"] == G2_MIGRATION_BINDING_VERSION
+    audio = binding["schema_version"] == G2_AUDIO_BINDING_VERSION
     version_kinds = {
         G2_BATCH_BINDING_VERSION: {"enable_g2_batches", "repair_g2_batch"},
         G2_CATALOGUE_BINDING_VERSION: {"extend_g2_catalogue", "repair_g2_batch"},
         G2_MIGRATION_BINDING_VERSION: {"enable_g2_migration", "repair_g2_migration"},
         G2_INSTRUCTIONS_BINDING_VERSION: {"align_g2_instructions", "repair_g2_migration"},
+        G2_AUDIO_BINDING_VERSION: {"enable_g2_audio_privacy", "repair_g2_audio_privacy"},
     }
     _need(binding["operation_kind"] in version_kinds.get(binding["schema_version"], set()),
           "bounded_g2_batch_binding_version")
@@ -1638,8 +1781,11 @@ def _load_g2_batch_inputs(context, target, source, evidence_root, scratch, bindi
           "bounded_g2_batch_git_binding")
     source_pins = _digest_map(binding["source_sha256"], SOURCE_PATHS, "bounded_g2_batch_source_paths")
     payload_pins = _digest_map(binding["payload_sha256"], input_paths, "bounded_g2_batch_payload_paths")
-    _need(source_pins["orchestration_harness/trusted_git.py"] ==
-          "5f8bfd44b63282e205a22bef1b81d0b8b5271572ba47c5b5df7371c0f638874f", "bounded_g1b_git_source_changed")
+    expected_git_source = (G2_AUDIO_TRUSTED_GIT_SOURCE_SHA256["orchestration_harness/trusted_git.py"]
+                           if audio else
+                           "5f8bfd44b63282e205a22bef1b81d0b8b5271572ba47c5b5df7371c0f638874f")
+    _need(source_pins["orchestration_harness/trusted_git.py"] == expected_git_source,
+          "bounded_g1b_git_source_changed")
     source_payloads = {path: read(source / path, digest) for path, digest in source_pins.items()}
     payloads = {path: read(target / path, digest) for path, digest in sorted(payload_pins.items())}
     scope = _json(payloads[G2_SCOPE])
@@ -1649,12 +1795,15 @@ def _load_g2_batch_inputs(context, target, source, evidence_root, scratch, bindi
           "bounded_g2_migration_scope_binding_mismatch")
     _need((scope.get("schema_version") == G2_INSTRUCTIONS_SCOPE_VERSION) == instructions,
           "bounded_g2_instructions_scope_binding_mismatch")
+    _need((scope.get("schema_version") == G2_AUDIO_SCOPE_VERSION) == audio,
+          "bounded_g2_audio_scope_binding_mismatch")
     _validate_g2_batch_scope(scope)
     frozen = {**FROZEN_PINS, COST: COST_PIN, SCOPE_PATH: G1B_BASELINE_PINS[SCOPE_PATH],
               G1C_SCOPE: G1C_BASELINE_PINS[G1C_SCOPE], G1D_SCOPE: G1D_BASELINE_PINS[G1D_SCOPE],
               G1E_SCOPE: G1E_BASELINE_PINS[G1E_SCOPE], **GOVERNOR_PINS, **PROVENANCE_DEPENDENCY_PINS,
               **PROVENANCE_PINS, **CONFIGURATION_LEAF_PINS,
-              AGENTS: G2_INSTRUCTIONS_SHA256 if instructions else G2_INITIAL_POLICY_PINS[AGENTS],
+              AGENTS: (G2_AUDIO_INSTRUCTIONS_SHA256 if audio else
+                       G2_INSTRUCTIONS_SHA256 if instructions else G2_INITIAL_POLICY_PINS[AGENTS]),
               GATES: G2_INITIAL_POLICY_PINS[GATES]}
     _need(all(_sha(payloads[path]) == digest for path, digest in frozen.items()),
           "bounded_g2_batch_frozen_input_changed")
@@ -1676,11 +1825,11 @@ def _load_g2_batch_inputs(context, target, source, evidence_root, scratch, bindi
     legacy_before = {path: read(source / "g1e-baseline" / path, digest)
                      for path, digest in G1E_BASELINE_PINS.items()}
     validate_g2_acceptance_transition(legacy_before, initial_policy, evidence)
-    if migration:
+    if migration or audio:
         owner_path = raisa_policy.G2_MIGRATION_OWNER_RECORD
         evidence[owner_path] = read(evidence_root / owner_path, raisa_policy.G2_MIGRATION_OWNER_SHA256)
     prior_policy = initial_policy
-    if catalogue or migration:
+    if catalogue or migration or audio:
         _batch_publication(target, G2_CATALOGUE_PREDECESSOR, base)
         prior_policy = {}
         for path, digest in {**G2_CATALOGUE_PREDECESSOR_POLICY,
@@ -1689,7 +1838,7 @@ def _load_g2_batch_inputs(context, target, source, evidence_root, scratch, bindi
             _need(_sha(raw) == digest, "bounded_g2_catalogue_predecessor_bytes_changed")
             if path in G2_CATALOGUE_PREDECESSOR_POLICY:
                 prior_policy[path] = raw
-    if migration:
+    if migration or audio:
         _batch_publication(target, G2_MIGRATION_PREDECESSOR, base)
         prior_policy = {}
         for path, digest in {**G2_MIGRATION_PREDECESSOR_POLICY,
@@ -1698,7 +1847,7 @@ def _load_g2_batch_inputs(context, target, source, evidence_root, scratch, bindi
             _need(_sha(raw) == digest, "bounded_g2_migration_predecessor_bytes_changed")
             if path in G2_MIGRATION_PREDECESSOR_POLICY:
                 prior_policy[path] = raw
-    if instructions:
+    if instructions or audio:
         _batch_publication(target, G2_INSTRUCTIONS_PREDECESSOR, base)
         prior_policy = {}
         for path, digest in {**G2_INSTRUCTIONS_PREDECESSOR_POLICY,
@@ -1712,13 +1861,25 @@ def _load_g2_batch_inputs(context, target, source, evidence_root, scratch, bindi
                                (G2_INSTRUCTIONS_PUBLICATION["commit"], G2_INSTRUCTIONS_SHA256)):
             raw = trusted_git.run_git_bytes(target, "cat-file", "blob", commit + ":" + AGENTS)
             _need(_sha(raw) == digest, "bounded_g2_instructions_publication_bytes_changed")
+    if audio:
+        _batch_publication(target, G2_AUDIO_PREDECESSOR, base)
+        prior_policy = {}
+        for path, digest in {**G2_AUDIO_PREDECESSOR_POLICY,
+                             **G2_AUDIO_PREDECESSOR["source_sha256"]}.items():
+            raw = trusted_git.run_git_bytes(target, "cat-file", "blob", G2_AUDIO_PREDECESSOR["commit"] + ":" + path)
+            _need(_sha(raw) == digest, "bounded_g2_audio_predecessor_bytes_changed")
+            if path in G2_AUDIO_PREDECESSOR_POLICY:
+                prior_policy[path] = raw
+        _validate_g2_audio_trusted_git_publication(target, base)
+        _validate_g2_audio_instructions_publication(target, base)
     base_payloads = {}
     for path in sorted(input_paths):
         if path in changes and changes[path]["before_sha256"] is None:
             # Only the fixed new test reaches this branch. Empty bytes are a
             # present blob; absence requires a successful literal-path query.
             _need(trusted_git.run_git_bytes(target, "ls-tree", "-z", base, "--", path) == b"",
-                  "bounded_g2_migration_addition_already_exists")
+                  "bounded_g2_audio_addition_already_exists" if audio
+                  else "bounded_g2_migration_addition_already_exists")
             base_payloads[path] = None
         else:
             base_payloads[path] = trusted_git.run_git_bytes(target, "cat-file", "blob", base + ":" + path)
@@ -1733,19 +1894,21 @@ def _load_g2_batch_inputs(context, target, source, evidence_root, scratch, bindi
     _validate_installed_controller(controller)
     _batch_publication(target, controller, base)
     if maintenance:
-        expected_controller = (G2_INSTRUCTIONS_PREDECESSOR if instructions
+        expected_controller = (G2_AUDIO_PREDECESSOR if audio else G2_INSTRUCTIONS_PREDECESSOR if instructions
                                else G2_MIGRATION_PREDECESSOR if migration else G2_CATALOGUE_PREDECESSOR if catalogue
                                else G2_INITIAL_CONTROLLER)
-        expected_activation = expected_controller["commit"] if catalogue or migration else G2_INITIAL_ACTIVATION["commit"]
+        expected_activation = (expected_controller["commit"] if catalogue or migration or audio
+                               else G2_INITIAL_ACTIVATION["commit"])
         _need(controller == expected_controller and binding["activation_commit"] == expected_activation,
               "bounded_g2_batch_maintenance_predecessor")
         _need(scope["transition_base_commit"] == base, "bounded_g2_batch_maintenance_base")
-        prior_pins = ({**G2_INSTRUCTIONS_PREDECESSOR_POLICY, AGENTS: G2_INSTRUCTIONS_SHA256} if instructions
+        prior_pins = ({**G2_AUDIO_PREDECESSOR_POLICY, AGENTS: G2_AUDIO_INSTRUCTIONS_SHA256} if audio
+                      else {**G2_INSTRUCTIONS_PREDECESSOR_POLICY, AGENTS: G2_INSTRUCTIONS_SHA256} if instructions
                       else G2_MIGRATION_PREDECESSOR_POLICY if migration else G2_CATALOGUE_PREDECESSOR_POLICY if catalogue
                       else G2_INITIAL_POLICY_PINS)
         for path, digest in prior_pins.items():
             _need(_sha(base_payloads[path]) == digest, "bounded_g2_batch_maintenance_policy_changed")
-        if not catalogue and not migration:
+        if not catalogue and not migration and not audio:
             for path, row in G2_REPAIR_PINS.items():
                 _need(_sha(base_payloads[path]) == row["after_sha256"], "bounded_g2_batch_first_repair_changed")
     else:
@@ -1793,7 +1956,8 @@ def _load_g2_batch_inputs(context, target, source, evidence_root, scratch, bindi
 
 def _validate_g2_batch_loaded_policy(inputs):
     scope = _json(inputs.payloads[G2_SCOPE])
-    builder = (build_g2_instructions_transition if scope.get("schema_version") == G2_INSTRUCTIONS_SCOPE_VERSION
+    builder = (build_g2_audio_transition if scope.get("schema_version") == G2_AUDIO_SCOPE_VERSION
+               else build_g2_instructions_transition if scope.get("schema_version") == G2_INSTRUCTIONS_SCOPE_VERSION
                else build_g2_migration_transition if scope.get("schema_version") == G2_MIGRATION_SCOPE_VERSION
                else build_g2_catalogue_transition if scope.get("schema_version") == G2_CATALOGUE_SCOPE_VERSION
                else build_g2_batch_transition)

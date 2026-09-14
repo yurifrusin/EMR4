@@ -1786,6 +1786,22 @@ def g2_migration_profile() -> dict:
     return profile
 
 
+G2_AUDIO_PRIVACY_PATHS = (
+    'app/main.py',
+    'app/routers/consultation.py',
+    'EMR4 Sidebar/src/taskpane/taskpane.js',
+    'tests/test_consultation_audio_privacy.py',
+)
+
+
+def g2_audio_privacy_profile() -> dict:
+    """Only the four reviewed source paths; application and test runtimes stay separate."""
+    profile = g2_batch_profile()
+    profile.update(scope_behavior='bounded_g2_audio_privacy_repair',
+                   allowed_paths=sorted(G2_AUDIO_PRIVACY_PATHS))
+    return profile
+
+
 POLICY_REFERENCES = (
     core.Reference("project.yaml", ("operating_model", "settings_file"), "operating_model.yaml"),
     core.Reference("project.yaml", ("secure_sdlc", "settings_file"), "security_review_protocol.yaml"),
@@ -1873,7 +1889,9 @@ def validate_recovery_configuration(*, documents: dict[str, bytes], expected_sha
         raise RaisaPolicyError("configuration_assessment_profile_invalid")
     if state["active_profile"] == G2_PROFILE:
         profile = overlay["profiles"][G2_PROFILE]
-        expected = (g2_migration_profile()
+        expected = (g2_audio_privacy_profile()
+                    if profile["scope_behavior"] == 'bounded_g2_audio_privacy_repair'
+                    else g2_migration_profile()
                     if profile["scope_behavior"] == 'bounded_g2_migration_preservation'
                     else g2_catalogue_profile()
                     if profile["scope_behavior"] == 'bounded_g2_catalogue_repair_batches'
