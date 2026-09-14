@@ -1,4 +1,3 @@
-import os
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
@@ -25,8 +24,6 @@ app.add_middleware(
     runtime=shadow_instrumentation_runtime,
 )
 
-os.makedirs("static/audio", exist_ok=True)
-app.mount("/static", StaticFiles(directory="static"), name="static")
 app.mount("/taskpane", StaticFiles(directory="EMR4 Sidebar/src/taskpane", html=True), name="taskpane")
 
 app.include_router(auth.router)

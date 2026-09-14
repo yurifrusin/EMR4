@@ -85,9 +85,11 @@ let backgroundSyncTimer = null;
 let syncDebugState = { tick: 0, textLen: 0, fetch: "idle", http: "-", result: "-", extract: "-" };
 let typeaheadTimer = null;
 let mediaRecorder  = null;
-let audioChunks    = [];
 let isRecording    = false;
 let currentAudioUrl = null;
+let audioGeneration = 0;
+let audioContext = null;
+let audioStartPending = false;
 let officeHostRuntimeProfile = null;
 let clinicianOneDocumentContextAdapter = null;
 
@@ -302,6 +304,7 @@ async function login() {
 }
 
 function logout() {
+  clearAudioSession();
   token = null;
   currentPatient = null;
   localStorage.removeItem("emr4_token");
@@ -426,6 +429,7 @@ async function searchPatients(query) {
 }
 
 async function loadPatient(patientId) {
+  if (audioPatientId() !== String(patientId)) clearAudioSession();
   document.getElementById("search-panel").classList.add("hidden");
   document.getElementById("patient-search-input").value = "";
   document.getElementById("patient-search-results").innerHTML = "";
@@ -433,6 +437,7 @@ async function loadPatient(patientId) {
   const res = await apiFetch(`/patients/${patientId}/summary`);
   if (!res || !res.ok) return;
   const data = await res.json();
+  if (audioPatientId() !== String(data.patient.id)) clearAudioSession();
   currentPatient = data.patient;
   setBanner(currentPatient);
   updateOpenFileButton();
@@ -800,71 +805,176 @@ window.forceAiSync = function () {
 // CONSULT TAB — AUDIO SCRIBE
 // ═══════════════════════════════════════════════════════════
 
-async function toggleRecording() {
-  const btn         = document.getElementById("btn-record");
-  const audioStatus = document.getElementById("audio-status");
-  if (!isRecording) {
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      mediaRecorder = new MediaRecorder(stream);
-      audioChunks   = [];
-      mediaRecorder.ondataavailable = e => { if (e.data.size > 0) audioChunks.push(e.data); };
-      mediaRecorder.onstop = processAudio;
-      mediaRecorder.start();
-      isRecording = true;
-      btn.textContent = "⏹️ Stop Recording";
-      btn.classList.add("recording");
-      audioStatus.classList.remove("hidden");
-      setStatus("Capturing consultation audio…");
-    } catch {
-      alert("Microphone access is required for the AI Scribe.");
-    }
-  } else {
-    mediaRecorder.stop();
-    mediaRecorder.stream.getTracks().forEach(t => t.stop());
-    isRecording = false;
-    btn.textContent = "🎤 Start Recording";
-    btn.classList.remove("recording");
-    audioStatus.classList.add("hidden");
+function audioPatientId() {
+  return currentPatient ? String(currentPatient.id) : null;
+}
+
+function audioIsCurrent(context) {
+  return context.generation === audioGeneration && context.patientId === audioPatientId();
+}
+
+function stopAudioTracks(stream) {
+  if (!stream) return;
+  for (const track of stream.getTracks()) {
+    try { if (track.readyState !== "ended") track.stop(); } catch (_) {}
   }
 }
 
-async function processAudio() {
-  setStatus("⏳ Processing audio with Vertex AI…");
-  const blob = new Blob(audioChunks, { type: "audio/webm" });
-  const form = new FormData();
-  form.append("audio_file", blob, "consultation.webm");
+function clearAudioPlayback() {
+  const player = document.getElementById("audio-playback");
+  if (player) {
+    player.pause();
+    player.removeAttribute("src");
+    player.load();
+    player.classList.add("hidden");
+  }
+  const transcript = document.getElementById("raw-transcript");
+  if (transcript) transcript.value = "";
+  document.getElementById("transcript-row")?.classList.add("hidden");
+  if (currentAudioUrl) URL.revokeObjectURL(currentAudioUrl);
+  currentAudioUrl = null;
+}
+
+function updateRecordingUI() {
+  const btn = document.getElementById("btn-record");
+  if (btn) {
+    btn.textContent = isRecording ? "⏹️ Stop Recording" : "🎤 Start Recording";
+    btn.classList.toggle("recording", isRecording);
+  }
+  document.getElementById("audio-status")?.classList.toggle("hidden", !isRecording);
+}
+
+function clearAudioSession({ preservePlayback = false } = {}) {
+  audioGeneration++;
+  const context = audioContext;
+  audioContext = null;
+  audioStartPending = false;
+  if (context) {
+    context.abort?.abort();
+    context.chunks.length = 0;
+    if (context.recorder) {
+      context.recorder.ondataavailable = null;
+      context.recorder.onstop = null;
+      context.recorder.onerror = null;
+      try { if (context.recorder.state !== "inactive") context.recorder.stop(); } catch (_) {}
+    }
+    stopAudioTracks(context.stream);
+  }
+  mediaRecorder = null;
+  isRecording = false;
+  updateRecordingUI();
+  if (!preservePlayback) clearAudioPlayback();
+}
+
+window.addEventListener("pagehide", () => clearAudioSession());
+
+async function toggleRecording() {
+  if (audioStartPending) return;
+  if (isRecording) {
+    const context = audioContext;
+    try {
+      context.recorder.stop();
+    } catch (_) {
+      clearAudioSession({ preservePlayback: true });
+      setStatus("❌ Recording could not be stopped.");
+    } finally {
+      stopAudioTracks(context.stream);
+      isRecording = false;
+      updateRecordingUI();
+    }
+    return;
+  }
+  clearAudioSession({ preservePlayback: true });
+  const context = { generation: audioGeneration, patientId: audioPatientId(), chunks: [] };
+  audioContext = context;
+  audioStartPending = true;
   try {
-    const headers = {};
-    if (token) headers["Authorization"] = "Bearer " + token;
-    const res  = await fetch(API_BASE + "/scribe-consultation", { method: "POST", headers, body: form });
-    const data = await res.json();
+    context.stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    if (!audioIsCurrent(context)) { stopAudioTracks(context.stream); return; }
+    context.recorder = new MediaRecorder(context.stream);
+    mediaRecorder = context.recorder;
+    context.recorder.ondataavailable = event => {
+      if (audioIsCurrent(context) && event.data.size > 0) context.chunks.push(event.data);
+    };
+    context.recorder.onerror = () => {
+      stopAudioTracks(context.stream);
+      if (audioIsCurrent(context)) {
+        clearAudioSession({ preservePlayback: true });
+        setStatus("❌ Recording failed.");
+      }
+    };
+    context.recorder.onstop = () => {
+      stopAudioTracks(context.stream);
+      if (!audioIsCurrent(context)) { context.chunks.length = 0; return; }
+      isRecording = false;
+      updateRecordingUI();
+      void processAudio(context);
+    };
+    context.recorder.start();
+    clearAudioPlayback();
+    isRecording = true;
+    updateRecordingUI();
+    setStatus("Capturing consultation audio…");
+  } catch (_) {
+    stopAudioTracks(context.stream);
+    if (audioIsCurrent(context)) {
+      clearAudioSession({ preservePlayback: true });
+      alert("Microphone access and recording support are required for the AI Scribe.");
+    }
+  } finally {
+    if (audioIsCurrent(context)) audioStartPending = false;
+  }
+}
 
-    updateFormFields(data);
-
-    if (data.audio_url) {
-      currentAudioUrl = data.audio_url;
-      const player    = document.getElementById("audio-playback");
-      player.src      = BACKEND_URL + data.audio_url;
+async function processAudio(context) {
+  if (!audioIsCurrent(context)) return;
+  try {
+    const blob = new Blob(context.chunks, { type: "audio/webm" });
+    context.chunks.length = 0;
+    clearAudioPlayback();
+    currentAudioUrl = URL.createObjectURL(blob);
+    const player = document.getElementById("audio-playback");
+    if (player) {
+      player.src = currentAudioUrl;
       player.classList.remove("hidden");
     }
+    setStatus("⏳ Processing consultation audio…");
+    const form = new FormData();
+    form.append("audio_file", blob, "consultation.webm");
+    context.abort = new AbortController();
+    const headers = {};
+    if (token) headers["Authorization"] = "Bearer " + token;
+    const res = await fetch(API_BASE + "/scribe-consultation", {
+      method: "POST", headers, body: form, signal: context.abort.signal,
+    });
+    if (!audioIsCurrent(context)) return;
+    const data = await res.json();
+    if (!audioIsCurrent(context)) return;
+    if (!res.ok || !data || typeof data !== "object" || Array.isArray(data) || data.error) {
+      throw new Error("Transcription failed");
+    }
+    updateFormFields(data);
     if (data.raw_transcript) {
       document.getElementById("raw-transcript").value = data.raw_transcript;
       document.getElementById("transcript-row").classList.remove("hidden");
     }
 
-    setStatus("✅ Audio scribe complete.");
-    isLocked = true;
-    updateLockUI();
-
     if (data.generated_clinical_note) {
-      Word.run(async ctx => {
+      await Word.run(async ctx => {
+        if (!audioIsCurrent(context)) return;
         ctx.document.body.insertParagraph(data.generated_clinical_note, Word.InsertLocation.end);
         await ctx.sync();
       });
     }
+    if (!audioIsCurrent(context)) return;
+    setStatus("✅ Audio scribe complete.");
+    isLocked = true;
+    updateLockUI();
   } catch {
-    setStatus("❌ Scribe failed.");
+    if (audioIsCurrent(context)) setStatus("❌ Scribe failed.");
+  } finally {
+    context.chunks.length = 0;
+    stopAudioTracks(context.stream);
   }
 }
 
@@ -1031,6 +1141,7 @@ document.addEventListener("click", e => {
 // ═══════════════════════════════════════════════════════════
 
 async function approveAndFinalize() {
+  const audioSnapshot = { generation: audioGeneration, patientId: audioPatientId() };
   setStatus("⏳ Saving to database…");
   const consultType = document.getElementById("consult-type")?.value || "";
   const overrides   = { consultation_type: consultType, mbs_items: [], diagnoses: [], medications: [] };
@@ -1050,15 +1161,18 @@ async function approveAndFinalize() {
 
   try {
     const text    = await getCurrentConsultText();
+    if (!audioIsCurrent(audioSnapshot)) return;
     const headers = { "Content-Type": "application/json" };
     if (token) headers["Authorization"] = "Bearer " + token;
     const res = await fetch(API_BASE + "/finalize", {
       method: "POST",
       headers,
-      body: JSON.stringify({ document_id: SESSION_ID, text_delta: text, clinician_overrides: overrides, audio_url: currentAudioUrl, patient_id: currentPatient ? String(currentPatient.id) : null }),
+      body: JSON.stringify({ document_id: SESSION_ID, text_delta: text, clinician_overrides: overrides, patient_id: audioSnapshot.patientId }),
     });
+    if (!audioIsCurrent(audioSnapshot)) return;
     if (res.ok) {
       const data = await res.json();
+      if (!audioIsCurrent(audioSnapshot)) return;
       if (data._saved === false) {
         setStatus("❌ " + (data._save_error || "Save failed"));
       } else {
@@ -1069,16 +1183,14 @@ async function approveAndFinalize() {
         updateStartConsultButton();
         const btn = document.getElementById("btn-finalize");
         if (btn) { btn.disabled = true; btn.textContent = "✅ Finalised"; }
-        const player = document.getElementById("audio-playback");
-        if (player) { player.pause(); player.src = ""; player.classList.add("hidden"); }
+        clearAudioSession();
         document.getElementById("transcript-row")?.classList.add("hidden");
-        currentAudioUrl = null;
       }
     } else {
       setStatus("❌ Server error " + res.status);
     }
   } catch {
-    setStatus("❌ Network error. Check the backend.");
+    if (audioIsCurrent(audioSnapshot)) setStatus("❌ Network error. Check the backend.");
   }
 }
 
@@ -1713,6 +1825,7 @@ function openCommandCentre() {
     if (!consultStarted) {
       insertConsultHeader(currentPatient).then(inserted => {
         if (inserted) {
+          clearAudioSession();
           consultStarted = true;
           lastSyncedText = "";
           updateStartConsultButton();
@@ -1731,6 +1844,7 @@ function openCommandCentre() {
         } else if (msg.type === "insert_note" && msg.text) {
           insertNoteIntoWord(msg.text);
         } else if (msg.type === "consult_finalized") {
+          clearAudioSession();
           // Reflect the Command Centre's finalised coding in the taskpane Consult
           // tab and lock it so background sync won't overwrite it.
           if (msg.data) { updateFormFields(msg.data); isLocked = true; updateLockUI(); }
@@ -1876,6 +1990,7 @@ window.startConsultation = async function () {
   if (consultStarted) { setStatus("A consultation is already in progress this session."); return; }
   const inserted = await insertConsultHeader(currentPatient);
   if (!inserted) return;
+  clearAudioSession();
   consultStarted = true;
   lastSyncedText = "";
   lastAiResponse = null;

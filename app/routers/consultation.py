@@ -1,5 +1,4 @@
 import json
-import os
 import uuid
 from fastapi import APIRouter, Depends, UploadFile, File
 from fastapi.responses import JSONResponse
@@ -21,21 +20,7 @@ import datetime
 
 router = APIRouter(prefix="/api/v1", tags=["consultation"])
 
-# Absolute path of the only directory we may delete audio temp files from.
-# Computed once at import using the process CWD (the project root when uvicorn
-# is started normally). os.remove is refused for paths outside this boundary.
-_AUDIO_DIR = os.path.abspath(os.path.join("static", "audio"))
-
 _ai_service = AiService()
-
-
-def _safe_audio_cleanup(audio_url: str) -> None:
-    """Delete a temp audio file only if it resolves inside _AUDIO_DIR."""
-    resolved = os.path.abspath(audio_url.lstrip("/"))
-    if not resolved.startswith(_AUDIO_DIR + os.sep):
-        return
-    if os.path.exists(resolved):
-        os.remove(resolved)
 
 
 # --- Request schemas ---
@@ -58,7 +43,7 @@ class FinalizePayload(BaseModel):
     document_id: str
     text_delta: str
     clinician_overrides: OverrideData
-    audio_url: Optional[str] = None
+    audio_url: Optional[str] = None  # Legacy input; never used for storage or deletion.
     patient_id: Optional[str] = None
 
 
@@ -300,12 +285,6 @@ async def scribe_consultation(
 ):
     audio_bytes = await audio_file.read()
 
-    audio_filename = f"{uuid.uuid4()}.webm"
-    audio_filepath = os.path.join("static", "audio", audio_filename)
-    os.makedirs(os.path.dirname(audio_filepath), exist_ok=True)
-    with open(audio_filepath, "wb") as f:
-        f.write(audio_bytes)
-
     prompt = """
 You are an expert AI medical scribe for an Australian general practice.
 Listen to the following audio recording of a doctor-patient consultation.
@@ -353,11 +332,11 @@ Return strict JSON only, no markdown:
         dx   = result.get("clinical_diagnoses", [])
         rx   = result.get("medications_and_prescriptions", [])
         print(f"[scribe] type={result.get('encounter_metadata',{}).get('consultation_type','?')} | MBS={mbs} | dx_count={len(dx)} | rx_count={len(rx)}")
-        result["audio_url"] = f"/static/audio/{audio_filename}"
+        result.pop("audio_url", None)
         return result
     except Exception as e:
         print(f"[scribe] Gemini error: {type(e).__name__}")
-        return {"error": "Transcription failed. Please try again."}
+        return JSONResponse(status_code=502, content={"error": "Transcription failed. Please try again."})
 
 
 @router.post("/finalize")
@@ -385,9 +364,6 @@ async def finalize_consultation(
             payload.clinician_overrides.diagnoses,
             payload.clinician_overrides.medications,
         )
-        if payload.audio_url:
-            _safe_audio_cleanup(payload.audio_url)
-
         # Build a brief clinical note from the saved data to insert into Word
         lines = [f"Consultation: {consult_type}"]
         if payload.clinician_overrides.diagnoses:
