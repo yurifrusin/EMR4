@@ -49,7 +49,7 @@ class MaintenanceRecord:
 _HEX40 = re.compile(r"[0-9a-f]{40}\Z")
 _HEX64 = re.compile(r"[0-9a-f]{64}\Z")
 _GENERATION = re.compile(r"[a-z][a-z0-9-]{1,95}\Z")
-_PATH = re.compile(r"[A-Za-z0-9_./-]+\Z")
+_PATH = re.compile(r"[A-Za-z0-9_./ -]+\Z")
 _TOP_KEYS = {
     "schema_version",
     "generation_id",
@@ -102,9 +102,14 @@ def _path(value: Any) -> str:
         _error("path_invalid")
     prefixes: dict[str, str] = {}
     for index, part in enumerate(parts):
-        if part in {"", ".", ".."} or part.lower() == ".git" or part.endswith("."):
+        if (
+            part in {"", ".", ".."}
+            or part != part.strip(" ")
+            or part.lower() == ".git"
+            or part.endswith(".")
+        ):
             _error("path_invalid")
-        if part.split(".", 1)[0].upper() in _DEVICE:
+        if part.split(".", 1)[0].rstrip(" .").upper() in _DEVICE:
             _error("path_invalid")
         prefix = "/".join(parts[: index + 1])
         prior = prefixes.setdefault(prefix.casefold(), prefix)

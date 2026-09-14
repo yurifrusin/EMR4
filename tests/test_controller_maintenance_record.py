@@ -3,7 +3,6 @@
 from dataclasses import FrozenInstanceError
 import hashlib
 import json
-
 import pytest
 
 from orchestration_harness.controller_maintenance_record import (
@@ -109,8 +108,18 @@ def test_unrecognised_authority_flag_is_not_admitted():
         "a\\b.py",
         "C:/file.py",
         ":(glob)**",
-        "a/space name.py",
+        "a/ leading.py",
+        "a/ .hidden",
+        "a/space name.py ",
+        "a/space\tname.py",
+        "a/space\nname.py",
+        "a/space\x00name.py",
         "a/é.py",
+        "a/CON .txt",
+        "a/COM1 .py",
+        "EMR4 Sidebar /src/taskpane/taskpane.js",
+        "EMR4 Sidebar/src/taskpane/taskpane.js ",
+        "EMR4 Sidebar/src/taskpane/taskpane\t.js",
     ],
 )
 def test_path_alias_and_expansion_forms_are_closed(path):
@@ -128,6 +137,9 @@ def test_path_alias_and_expansion_forms_are_closed(path):
         ("Dir/a.py", "dir/b.py"),
         ("a", "a/b.py"),
         ("a/b.py", "a"),
+        ("Sidebar/taskpane.js", "sidebar/taskpane.js"),
+        ("EMR4 Sidebar/src/taskpane/taskpane.js", "EMR4 Sidebar/src/taskpane/taskpane.js"),
+        ("EMR4 Sidebar", "EMR4 Sidebar/src/taskpane/taskpane.js"),
     ],
 )
 def test_duplicates_case_aliases_and_directory_collisions_are_closed(first, second):
@@ -136,6 +148,16 @@ def test_duplicates_case_aliases_and_directory_collisions_are_closed(first, seco
     value["changed_files"][1]["path"] = second
     with pytest.raises(MaintenanceRecordError):
         _parse(value)
+
+
+def test_literal_internal_ascii_space_path_roundtrips_in_changed_and_frozen_rows():
+    value = _record()
+    path = "EMR4 Sidebar/src/taskpane/taskpane.js"
+    value["changed_files"][0]["path"] = path
+    value["frozen_files"][0]["path"] = path.replace("taskpane.js", "frozen.js")
+    record = _parse(value)
+    assert record.changed_files[0].path == path
+    assert record.frozen_files[0].path == "EMR4 Sidebar/src/taskpane/frozen.js"
 
 
 def test_changed_and_frozen_paths_cannot_overlap():
