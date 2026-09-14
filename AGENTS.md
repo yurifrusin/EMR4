@@ -8,6 +8,10 @@ For each new worker or reviewer subagent, assign the minimum sufficient model an
 
 Keep the recovery coordinator at Yuri's selected maximum reasoning effort. Report actual assignments accurately: existing agents retain their settings, and assigning an agent model or effort does not change a UI setting.
 
+# Development Environment Installation Authority
+
+Yuri grants standing authority to install useful development tools and dependencies in project-specific environments without requesting routine confirmation. In the process, record the versions installed and the changes made in the appropriate project environment or change record. This authority persists across sessions. Reuse suitable existing installations.
+
 # EMR4 / Raisa — Recovery and Development Instructions
 
 Date: 2026-09-12
