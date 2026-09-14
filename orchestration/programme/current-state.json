@@ -1,6 +1,6 @@
 {
   "schema_version": "raisa-ariadne.programme-state.v2",
-  "observed_at": "2026-09-14T01:00:08.524189+00:00",
+  "observed_at": "2026-09-14T04:02:08.976880+00:00",
   "programme_name": "Raisa Medical Office and Ariadne Recovery & Convergence",
   "programme_mode": "recovery",
   "current_gate": "G2",
@@ -976,7 +976,7 @@
   "g2": {
     "status": "active",
     "scope_path": "orchestration/programme/g2-baseline-repair-scope.json",
-    "scope_sha256": "25cb1df22f28216b75de03c404b1f92b5a0f36c5da06bb41711e6fee1e769104",
+    "scope_sha256": "c03f3a329a334ae2a59619d807853be2b9dbbbb68399e29dfc49eb93e4a5ac65",
     "current_operation": {
       "completion_accepted": false,
       "operation_id": "g2-migration-preservation-repair",

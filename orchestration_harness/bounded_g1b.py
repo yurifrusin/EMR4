@@ -420,6 +420,41 @@ OPERATION_PATHS.update(enable_g2_batches=G2_BATCH_MAINTENANCE_PATHS,
                        enable_g2_migration=G2_BATCH_MAINTENANCE_PATHS,
                        repair_g2_migration=G2_MIGRATION_PATHS)
 
+# This successor aligns only the published owner instruction change. Historical
+# activation pins above and the migration profile remain unchanged.
+G2_INSTRUCTIONS_BINDING_VERSION = "ariadne.bounded_g2_batch_binding.v4"
+G2_INSTRUCTIONS_SCOPE_VERSION = "ariadne.g2_reviewed_batch_scope.v4"
+G2_INSTRUCTIONS_SHA256 = "1477744869ac675faf7d7ef5093bec18e058a050a5e1e15c5c2d0bf4af0f21c5"
+G2_INSTRUCTIONS_PUBLICATION = {
+    "commit": "7ec6e974f61c9e474228649d66a24ad0f054ebc9",
+    "parent": "e3c6e185b1a754e4b144707a20b5974d18a4d23b",
+    "tree": "a753f22942a0adbed7ef1a754d50554dc32e60b2",
+}
+G2_INSTRUCTIONS_PREDECESSOR = {
+    "commit": "84c6b3520fb96971a9afc6f21027b4957c0dd63c",
+    "parent": "e7e9be69fe4343775c6912bf68eba3fc4a9852c3",
+    "tree": "9c61e3650a0e41efc9f7889ca7723e1a99401453",
+    "source_sha256": {
+        "orchestration_harness/bounded_g1b.py": "7d2450b2439e7ab6410a38a06d9876197251dc874ce9f998dc6d90d8c5488833",
+        "orchestration_harness/configuration_core.py": "f7ba7a80eb0a590f9fb71b864e6c1f9f43241d9f7d70a38da67a9243fea208e5",
+        "orchestration_harness/programme_admission.py": "ac816a8a79b2d8222fa357777c075950927e86cf30c8a5b25ffd08a474052181",
+        "orchestration_harness/raisa_policy.py": "3f1df407698e17087fc35289d9276f7074d297e961c8a047b42563a50e5fe30b",
+        "tests/test_bounded_g1b.py": "d666e6cfe0e3971d44c5b41b4a1b91470da631d71520daf640ee81f7c9e71655",
+    },
+}
+G2_INSTRUCTIONS_PREDECESSOR_POLICY = {
+    AGENTS: "fb96aced8c29739a7a98c7d837a752094690972d271219fb0a265ccc9f88c7ad",
+    STATE: "2b17cc2b02076bb757be6fe0e9815be93bc75ef93eaaa09aa70f68d14803f570",
+    OVERLAY: "73f719feba004b1d2a8efd52d88d0f546516b279e8badfe50ba80a919556a2f7",
+    G2_SCOPE: "25cb1df22f28216b75de03c404b1f92b5a0f36c5da06bb41711e6fee1e769104",
+    GATES: "115a651a0b13156a591045638d1833a9a71347e7b1f7e694767eac49d2abc341",
+}
+G2_INSTRUCTIONS_MAINTENANCE_PATHS = frozenset({
+    "orchestration_harness/bounded_g1b.py", "tests/test_bounded_g1b.py", STATE, G2_SCOPE})
+G2_BATCH_KINDS = G2_BATCH_KINDS | {"align_g2_instructions"}
+G2_MAINTENANCE_KINDS = G2_MAINTENANCE_KINDS | {"align_g2_instructions"}
+OPERATION_PATHS["align_g2_instructions"] = G2_INSTRUCTIONS_MAINTENANCE_PATHS
+
 
 def _batch_changes(binding: dict) -> dict:
     kind = binding.get("operation_kind")
@@ -428,10 +463,14 @@ def _batch_changes(binding: dict) -> dict:
           "bounded_g2_batch_changes_invalid")
     maintenance = kind in G2_MAINTENANCE_KINDS
     catalogue = binding.get("schema_version") == G2_CATALOGUE_BINDING_VERSION
-    migration = binding.get("schema_version") == G2_MIGRATION_BINDING_VERSION
-    _need((kind in {"enable_g2_migration", "repair_g2_migration"}) == migration,
+    instructions = binding.get("schema_version") == G2_INSTRUCTIONS_BINDING_VERSION
+    migration = instructions or binding.get("schema_version") == G2_MIGRATION_BINDING_VERSION
+    _need((kind in {"enable_g2_migration", "repair_g2_migration", "align_g2_instructions"}) == migration
+          and (kind != "align_g2_instructions" or instructions)
+          and (not instructions or kind in {"align_g2_instructions", "repair_g2_migration"}),
           "bounded_g2_batch_binding_version")
-    allowed = (G2_BATCH_MAINTENANCE_PATHS if maintenance else G2_MIGRATION_PATHS if migration
+    allowed = (G2_INSTRUCTIONS_MAINTENANCE_PATHS if maintenance and instructions
+               else G2_BATCH_MAINTENANCE_PATHS if maintenance else G2_MIGRATION_PATHS if migration
                else G2_CATALOGUE_PATHS if catalogue else G2_BATCH_PATHS)
     _need(set(rows) <= allowed and (not maintenance or set(rows) == allowed),
           "bounded_g2_batch_path_not_allowed")
@@ -447,7 +486,8 @@ def _batch_changes(binding: dict) -> dict:
 def batch_input_paths(binding: dict) -> frozenset[str]:
     """Catalogue authority is metadata; only fixed policy and selected files open."""
     changes = _batch_changes(binding)
-    if binding.get("schema_version") in {G2_CATALOGUE_BINDING_VERSION, G2_MIGRATION_BINDING_VERSION}:
+    if binding.get("schema_version") in {G2_CATALOGUE_BINDING_VERSION, G2_MIGRATION_BINDING_VERSION,
+                                         G2_INSTRUCTIONS_BINDING_VERSION}:
         return G2_CATALOGUE_POLICY_PATHS | frozenset(changes)
     return G2_BATCH_INPUT_PATHS
 
@@ -1462,8 +1502,26 @@ def build_g2_migration_scope(recorded_at: str, transition_base: str, controller_
     return scope
 
 
+def build_g2_instructions_scope(recorded_at: str, transition_base: str, controller_sources: dict) -> dict:
+    """Recognize one published instruction policy without broadening G2."""
+    scope = build_g2_migration_scope(recorded_at, transition_base, controller_sources)
+    _need(all(type(v) is str and re.fullmatch(r"[0-9a-f]{40}", v)
+              for v in G2_INSTRUCTIONS_PUBLICATION.values()), "bounded_g2_instructions_publication_unbound")
+    _need(controller_sources["orchestration_harness/raisa_policy.py"] ==
+          G2_INSTRUCTIONS_PREDECESSOR["source_sha256"]["orchestration_harness/raisa_policy.py"],
+          "bounded_g2_instructions_profile_changed")
+    scope.update(schema_version=G2_INSTRUCTIONS_SCOPE_VERSION, enable_operation="align_g2_instructions",
+        current_instruction_policy={"path": AGENTS, "sha256": G2_INSTRUCTIONS_SHA256,
+            "previous_sha256": G2_INITIAL_POLICY_PINS[AGENTS],
+            "publication": copy.deepcopy(G2_INSTRUCTIONS_PUBLICATION)},
+        prior_migration_activation={"commit": G2_INSTRUCTIONS_PREDECESSOR["commit"],
+                                   "scope_sha256": G2_INSTRUCTIONS_PREDECESSOR_POLICY[G2_SCOPE]})
+    return scope
+
+
 def _validate_g2_batch_scope(scope: dict) -> None:
-    builder = (build_g2_migration_scope if scope.get("schema_version") == G2_MIGRATION_SCOPE_VERSION
+    builder = (build_g2_instructions_scope if scope.get("schema_version") == G2_INSTRUCTIONS_SCOPE_VERSION
+               else build_g2_migration_scope if scope.get("schema_version") == G2_MIGRATION_SCOPE_VERSION
                else build_g2_catalogue_scope if scope.get("schema_version") == G2_CATALOGUE_SCOPE_VERSION
                else build_g2_batch_scope)
     expected = builder(scope.get("recorded_at"), scope.get("transition_base_commit"),
@@ -1528,6 +1586,22 @@ def build_g2_migration_transition(before: dict[str, bytes], scope: dict) -> dict
             OVERLAY: yaml.safe_dump(overlay, sort_keys=False, allow_unicode=True).encode(), G2_SCOPE: scope_raw}
 
 
+def build_g2_instructions_transition(before: dict[str, bytes], scope: dict) -> dict[str, bytes]:
+    """Update only scope consistency; the migration profile and gates stay fixed."""
+    _keys(before, G2_BATCH_CONTROL_PATHS, "bounded_g2_instructions_transition_paths")
+    for path in G2_BATCH_CONTROL_PATHS:
+        _need(type(before[path]) is bytes and _sha(before[path]) == G2_INSTRUCTIONS_PREDECESSOR_POLICY[path],
+              "bounded_g2_instructions_prior_policy_changed")
+    _need(scope.get("schema_version") == G2_INSTRUCTIONS_SCOPE_VERSION, "bounded_g2_instructions_scope_version")
+    _validate_g2_batch_scope(scope)
+    scope_raw = _canonical(scope) + b"\n"
+    state = _json(before[STATE])
+    state["observed_at"] = scope["recorded_at"]
+    state["g2"]["scope_sha256"] = _sha(scope_raw)
+    return {STATE: (json.dumps(state, indent=2, ensure_ascii=False) + "\n").encode(),
+            OVERLAY: before[OVERLAY], G2_SCOPE: scope_raw}
+
+
 def _batch_publication(target: Path, publication: dict, base: str) -> None:
     headers = trusted_git.run_git(target, "cat-file", "commit", publication["commit"]).split("\n\n", 1)[0].splitlines()
     _need([line for line in headers if line.startswith("parent ")] == ["parent " + publication["parent"]]
@@ -1543,11 +1617,13 @@ def _load_g2_batch_inputs(context, target, source, evidence_root, scratch, bindi
                     "activation_commit", "installed_controller", "repair_sha256"},
           "bounded_g2_batch_binding_schema")
     catalogue = binding["schema_version"] == G2_CATALOGUE_BINDING_VERSION
-    migration = binding["schema_version"] == G2_MIGRATION_BINDING_VERSION
+    instructions = binding["schema_version"] == G2_INSTRUCTIONS_BINDING_VERSION
+    migration = instructions or binding["schema_version"] == G2_MIGRATION_BINDING_VERSION
     version_kinds = {
         G2_BATCH_BINDING_VERSION: {"enable_g2_batches", "repair_g2_batch"},
         G2_CATALOGUE_BINDING_VERSION: {"extend_g2_catalogue", "repair_g2_batch"},
         G2_MIGRATION_BINDING_VERSION: {"enable_g2_migration", "repair_g2_migration"},
+        G2_INSTRUCTIONS_BINDING_VERSION: {"align_g2_instructions", "repair_g2_migration"},
     }
     _need(binding["operation_kind"] in version_kinds.get(binding["schema_version"], set()),
           "bounded_g2_batch_binding_version")
@@ -1569,14 +1645,17 @@ def _load_g2_batch_inputs(context, target, source, evidence_root, scratch, bindi
     scope = _json(payloads[G2_SCOPE])
     _need((scope.get("schema_version") == G2_CATALOGUE_SCOPE_VERSION) == catalogue,
           "bounded_g2_catalogue_scope_binding_mismatch")
-    _need((scope.get("schema_version") == G2_MIGRATION_SCOPE_VERSION) == migration,
+    _need((scope.get("schema_version") in {G2_MIGRATION_SCOPE_VERSION, G2_INSTRUCTIONS_SCOPE_VERSION}) == migration,
           "bounded_g2_migration_scope_binding_mismatch")
+    _need((scope.get("schema_version") == G2_INSTRUCTIONS_SCOPE_VERSION) == instructions,
+          "bounded_g2_instructions_scope_binding_mismatch")
     _validate_g2_batch_scope(scope)
     frozen = {**FROZEN_PINS, COST: COST_PIN, SCOPE_PATH: G1B_BASELINE_PINS[SCOPE_PATH],
               G1C_SCOPE: G1C_BASELINE_PINS[G1C_SCOPE], G1D_SCOPE: G1D_BASELINE_PINS[G1D_SCOPE],
               G1E_SCOPE: G1E_BASELINE_PINS[G1E_SCOPE], **GOVERNOR_PINS, **PROVENANCE_DEPENDENCY_PINS,
               **PROVENANCE_PINS, **CONFIGURATION_LEAF_PINS,
-              AGENTS: G2_INITIAL_POLICY_PINS[AGENTS], GATES: G2_INITIAL_POLICY_PINS[GATES]}
+              AGENTS: G2_INSTRUCTIONS_SHA256 if instructions else G2_INITIAL_POLICY_PINS[AGENTS],
+              GATES: G2_INITIAL_POLICY_PINS[GATES]}
     _need(all(_sha(payloads[path]) == digest for path, digest in frozen.items()),
           "bounded_g2_batch_frozen_input_changed")
     evidence = {path: read(evidence_root / path, digest) for path, digest in G1E_EVIDENCE_PINS.items()}
@@ -1619,6 +1698,20 @@ def _load_g2_batch_inputs(context, target, source, evidence_root, scratch, bindi
             _need(_sha(raw) == digest, "bounded_g2_migration_predecessor_bytes_changed")
             if path in G2_MIGRATION_PREDECESSOR_POLICY:
                 prior_policy[path] = raw
+    if instructions:
+        _batch_publication(target, G2_INSTRUCTIONS_PREDECESSOR, base)
+        prior_policy = {}
+        for path, digest in {**G2_INSTRUCTIONS_PREDECESSOR_POLICY,
+                             **G2_INSTRUCTIONS_PREDECESSOR["source_sha256"]}.items():
+            raw = trusted_git.run_git_bytes(target, "cat-file", "blob", G2_INSTRUCTIONS_PREDECESSOR["commit"] + ":" + path)
+            _need(_sha(raw) == digest, "bounded_g2_instructions_predecessor_bytes_changed")
+            if path in G2_INSTRUCTIONS_PREDECESSOR_POLICY:
+                prior_policy[path] = raw
+        _batch_publication(target, G2_INSTRUCTIONS_PUBLICATION, base)
+        for commit, digest in ((G2_INSTRUCTIONS_PUBLICATION["parent"], G2_INITIAL_POLICY_PINS[AGENTS]),
+                               (G2_INSTRUCTIONS_PUBLICATION["commit"], G2_INSTRUCTIONS_SHA256)):
+            raw = trusted_git.run_git_bytes(target, "cat-file", "blob", commit + ":" + AGENTS)
+            _need(_sha(raw) == digest, "bounded_g2_instructions_publication_bytes_changed")
     base_payloads = {}
     for path in sorted(input_paths):
         if path in changes and changes[path]["before_sha256"] is None:
@@ -1640,13 +1733,15 @@ def _load_g2_batch_inputs(context, target, source, evidence_root, scratch, bindi
     _validate_installed_controller(controller)
     _batch_publication(target, controller, base)
     if maintenance:
-        expected_controller = (G2_MIGRATION_PREDECESSOR if migration else G2_CATALOGUE_PREDECESSOR if catalogue
+        expected_controller = (G2_INSTRUCTIONS_PREDECESSOR if instructions
+                               else G2_MIGRATION_PREDECESSOR if migration else G2_CATALOGUE_PREDECESSOR if catalogue
                                else G2_INITIAL_CONTROLLER)
         expected_activation = expected_controller["commit"] if catalogue or migration else G2_INITIAL_ACTIVATION["commit"]
         _need(controller == expected_controller and binding["activation_commit"] == expected_activation,
               "bounded_g2_batch_maintenance_predecessor")
         _need(scope["transition_base_commit"] == base, "bounded_g2_batch_maintenance_base")
-        prior_pins = (G2_MIGRATION_PREDECESSOR_POLICY if migration else G2_CATALOGUE_PREDECESSOR_POLICY if catalogue
+        prior_pins = ({**G2_INSTRUCTIONS_PREDECESSOR_POLICY, AGENTS: G2_INSTRUCTIONS_SHA256} if instructions
+                      else G2_MIGRATION_PREDECESSOR_POLICY if migration else G2_CATALOGUE_PREDECESSOR_POLICY if catalogue
                       else G2_INITIAL_POLICY_PINS)
         for path, digest in prior_pins.items():
             _need(_sha(base_payloads[path]) == digest, "bounded_g2_batch_maintenance_policy_changed")
@@ -1674,7 +1769,7 @@ def _load_g2_batch_inputs(context, target, source, evidence_root, scratch, bindi
             if maintenance:
                 _need(_sha(base_payloads[path]) == controller["source_sha256"][path],
                       "bounded_g2_batch_prior_controller_not_installed")
-        if not maintenance or path not in G2_BATCH_CODE_PATHS:
+        if not maintenance or path not in changes:
             _need(trusted_git.run_git_bytes(target, "cat-file", "blob", base + ":" + path) == raw,
                   "bounded_g2_batch_source_not_installed")
     attested = input_paths - set(changes) if binding["phase"] == "development" else input_paths
@@ -1698,7 +1793,8 @@ def _load_g2_batch_inputs(context, target, source, evidence_root, scratch, bindi
 
 def _validate_g2_batch_loaded_policy(inputs):
     scope = _json(inputs.payloads[G2_SCOPE])
-    builder = (build_g2_migration_transition if scope.get("schema_version") == G2_MIGRATION_SCOPE_VERSION
+    builder = (build_g2_instructions_transition if scope.get("schema_version") == G2_INSTRUCTIONS_SCOPE_VERSION
+               else build_g2_migration_transition if scope.get("schema_version") == G2_MIGRATION_SCOPE_VERSION
                else build_g2_catalogue_transition if scope.get("schema_version") == G2_CATALOGUE_SCOPE_VERSION
                else build_g2_batch_transition)
     expected = builder({p: inputs.before[p] for p in G2_BATCH_CONTROL_PATHS}, scope)
