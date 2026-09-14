@@ -335,7 +335,20 @@ def test_target_observation_has_no_name_inventory_or_unselected_reads(
         [":(glob)**"],
         ["owned.py", "OWNED.py"],
         [".git/config"],
+        ["x/.GIT/config"],
+        ["x/file."],
+        ["x/ file.txt"],
         ["x/CON.txt"],
+        ["x/COM0.txt"],
+        ["x/LPT0.txt"],
+        ["x/CON .txt"],
+        ["EMR4 Sidebar /src/taskpane/taskpane.js"],
+        ["EMR4 Sidebar/src/taskpane/taskpane.js "],
+        ["EMR4 Sidebar/src/taskpane/taskpane\t.js"],
+        ["EMR4 Sidebar/src/taskpane/é.js"],
+        ["EMR4 Sidebar/src/taskpane/taskpane.js", "emr4 sidebar/src/taskpane/taskpane.js"],
+        ["EMR4 Sidebar", "EMR4 Sidebar/src/taskpane/taskpane.js"],
+        ["EMR4 Sidebar/src/a.py", "emr4 sidebar/src/b.py"],
         ["owned.py/"],
         ["x\\y"],
         ["/owned.py"],
@@ -375,6 +388,43 @@ def test_physical_change_is_rejected_even_with_unchanged_index(target, tmp_path)
         git.TrustedGitError, match="trusted_git_physical_bytes_mismatch"
     ):
         _observe(target, tmp_path)
+
+
+def test_target_observation_attests_literal_internal_space_paths(tmp_path):
+    changed_path = "EMR4 Sidebar/src/taskpane/taskpane.js"
+    preserved_path = "EMR4 Sidebar/src/taskpane/frozen sibling.txt"
+    changed = b"export const taskpane = true;\n"
+    preserved = b"preserved sibling\n"
+    target = create_synthetic_repository(
+        tmp_path / "target", {changed_path: changed, preserved_path: preserved}
+    )
+    expected_head = target.head()
+    expected_tree = target.index_tree()
+    observation = git.attest_target_index(
+        target.root,
+        attested_paths=[changed_path, preserved_path],
+        expected_head=expected_head,
+        expected_index_tree=expected_tree,
+        scratch_parent=tmp_path,
+    )
+    rows = {row["path"]: row for row in observation["physical_paths"]}
+    assert [row["path"] for row in observation["physical_paths"]] == sorted(
+        [changed_path, preserved_path]
+    )
+    assert observation["head"] == expected_head
+    assert observation["index_tree"] == expected_tree
+    assert rows[changed_path]["physical"]["sha256"] == "sha256:" + hashlib.sha256(changed).hexdigest()
+    assert rows[preserved_path]["physical"]["sha256"] == "sha256:" + hashlib.sha256(preserved).hexdigest()
+    assert observation["complete_physical_worktree_attested"] is False
+    assert observation["operation_authority"] is False
+    assert rows[changed_path]["object_id"] == hashlib.sha1(
+        b"blob " + str(len(changed)).encode() + b"\0" + changed,
+        usedforsecurity=False,
+    ).hexdigest()
+    assert rows[preserved_path]["object_id"] == hashlib.sha1(
+        b"blob " + str(len(preserved)).encode() + b"\0" + preserved,
+        usedforsecurity=False,
+    ).hexdigest()
 
 
 def test_target_observation_attests_nested_and_executable_paths(tmp_path):

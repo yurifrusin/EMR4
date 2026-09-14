@@ -1072,40 +1072,52 @@ def _literal_attested_paths(paths: Sequence[str]) -> tuple[str, ...]:
     if type(paths) not in {list, tuple} or not paths:
         raise TrustedGitError("trusted_git_attested_path_invalid")
     result: list[str] = []
-    aliases: set[str] = set()
+    full_paths: set[str] = set()
+    prefixes: dict[str, str] = {}
+    devices = {
+        "CON",
+        "PRN",
+        "AUX",
+        "NUL",
+        *(f"COM{i}" for i in range(10)),
+        *(f"LPT{i}" for i in range(10)),
+    }
     for value in paths:
         if (
             type(value) is not str
             or not value
             or any(
                 char
-                not in "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_./-"
+                not in "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_./- "
                 for char in value
             )
         ):
             raise TrustedGitError("trusted_git_attested_path_invalid")
         parts = value.split("/")
-        if (
-            any(
-                part in {"", ".", ".."}
-                or part.lower() == ".git"
-                or part.endswith(".")
-                or part.split(".")[0].upper()
-                in {
-                    "CON",
-                    "PRN",
-                    "AUX",
-                    "NUL",
-                    *(f"COM{i}" for i in range(10)),
-                    *(f"LPT{i}" for i in range(10)),
-                }
-                for part in parts
-            )
-            or value.casefold() in aliases
+        if any(
+            part in {"", ".", ".."}
+            or part != part.strip(" ")
+            or part.casefold() == ".git"
+            or part.endswith(".")
+            or part.split(".", 1)[0].rstrip(" .").upper() in devices
+            for part in parts
         ):
             raise TrustedGitError("trusted_git_attested_path_invalid")
-        aliases.add(value.casefold())
+        folded = value.casefold()
+        if folded in full_paths:
+            raise TrustedGitError("trusted_git_attested_path_invalid")
+        full_paths.add(folded)
+        for index in range(1, len(parts) + 1):
+            spelling = "/".join(parts[:index])
+            key = spelling.casefold()
+            prior = prefixes.setdefault(key, spelling)
+            if prior != spelling:
+                raise TrustedGitError("trusted_git_attested_path_invalid")
         result.append(value)
+    for path in full_paths:
+        parts = path.split("/")
+        if any("/".join(parts[:index]) in full_paths for index in range(1, len(parts))):
+            raise TrustedGitError("trusted_git_attested_path_invalid")
     return tuple(sorted(result))
 
 
