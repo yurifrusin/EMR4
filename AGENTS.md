@@ -2,6 +2,12 @@
 Gate G2 is active only for bounded baseline repair and separately reviewed isolated synthetic tests
 Missing, malformed, stale, or contradictory programme state is a hard stop.
 
+# Worker Model and Reasoning Allocation
+
+For each new worker or reviewer subagent, assign the minimum sufficient model and a reasoning effort appropriate to its concrete task. Prefer smaller models for bounded mechanical work. Use stronger models or higher effort when complexity, uncertainty, safety, or independent judgment requires it, and escalate when the evidence shows the initial allocation is insufficient. Do not default every worker to the coordinator's settings.
+
+Keep the recovery coordinator at Yuri's selected maximum reasoning effort. Report actual assignments accurately: existing agents retain their settings, and assigning an agent model or effort does not change a UI setting.
+
 # EMR4 / Raisa — Recovery and Development Instructions
 
 Date: 2026-09-12
@@ -58,7 +64,7 @@ The historical full-suite result is 430 passed, 33 failed, 1 skipped. It is not 
 
 The recovery coordinator owns task selection, coupled implementation, evidence interpretation and continued progress. Use an independent reviewer for substantive controller/admission changes and the required publication review. A worker cannot independently accept its own implementation or acquire protected integration authority.
 
-Keep the coordinator at Yuri's selected maximum reasoning effort for this recovery and its architecture decisions. Subagents inherit the coordinator's model and effort unless an explicit task allocation and current session rules permit a different setting. Match any permitted cheaper allocation to genuinely mechanical, bounded work; escalate when uncertainty changes correctness, scope or acceptance. Do not claim to change a UI setting through prose.
+Apply the Worker Model and Reasoning Allocation policy at the top of this file to every new subagent assignment. Keep required reviewers independent of implementation and choose their model and effort for the judgment the review needs.
 
 Use another agent only for a concrete separable contribution or required independence when it saves a meaningful cycle. Keep shared-state and tightly coupled work serial. Do not create mandatory parallelism paperwork or dispatch workers merely to fill lanes. External model/provider lanes remain closed; archived Sol, DeepSeek and Gemini allocations do not reopen them.
 
