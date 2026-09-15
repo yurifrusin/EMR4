@@ -9,6 +9,7 @@ from __future__ import annotations
 import copy
 import ast
 import builtins
+import json
 import os
 import subprocess
 import tempfile
@@ -50,7 +51,9 @@ class ClosedRequestTests(unittest.TestCase):
                          {"operation_kind": "repair_g2_batch"}, {"operation_kind": "enable_g2_migration"},
                          {"operation_kind": "repair_g2_migration"}, {"operation_kind": "align_g2_instructions"},
                          {"operation_kind": "enable_g2_audio_privacy"},
-                         {"operation_kind": "repair_g2_audio_privacy"}):
+                         {"operation_kind": "repair_g2_audio_privacy"},
+                         {"operation_kind": "enable_g2_patient_binding"},
+                         {"operation_kind": "repair_g2_patient_binding"}):
             with self.subTest(manifest=manifest), no_legacy_observation(), \
                     patch.object(pa, "load_programme_policy", side_effect=AssertionError("old loader")), \
                     patch.object(pf, "load_programme_policy", side_effect=AssertionError("old loader")):
@@ -862,6 +865,164 @@ class G2InstructionsFixture(G2MigrationFixture):
                 yield
 
 
+class G2PatientSourceContractTests(unittest.TestCase):
+    @staticmethod
+    def prospective_sources():
+        sources = copy.deepcopy(b.G2_PATIENT_PREDECESSOR["source_sha256"])
+        sources["orchestration_harness/bounded_g1b.py"] = "8" * 64
+        sources["orchestration_harness/raisa_policy.py"] = "9" * 64
+        sources["tests/test_bounded_g1b.py"] = "a" * 64
+        return sources
+
+    def scope(self):
+        return b.build_g2_patient_scope(
+            "2026-09-15T00:00:00+00:00",
+            b.G2_AUDIO_REPAIR_PUBLICATION["commit"],
+            self.prospective_sources(),
+        )
+
+    def test_v6_scope_is_exact_and_keeps_runtime_and_acceptance_closed(self):
+        scope = self.scope()
+        self.assertEqual(scope["schema_version"], b.G2_PATIENT_SCOPE_VERSION)
+        self.assertEqual(scope["transition_base_commit"], b.G2_AUDIO_REPAIR_PUBLICATION["commit"])
+        self.assertEqual(scope["allowed_paths"], sorted(b.G2_PATIENT_PATHS))
+        self.assertEqual(scope["allowed_additions"], [b.G2_PATIENT_ADDITION])
+        self.assertEqual(scope["maximum_changed_files"], 4)
+        self.assertEqual(scope["prior_audio_activation"],
+                         {"commit": b.G2_PATIENT_PREDECESSOR["commit"],
+                          "scope_sha256": b.G2_PATIENT_PREDECESSOR_POLICY[b.G2_SCOPE]})
+        self.assertEqual(scope["published_audio_repair"],
+                         {**b.G2_AUDIO_REPAIR_PUBLICATION,
+                          "source_sha256": b.G2_AUDIO_REPAIR_SOURCE_SHA256})
+        self.assertEqual(scope["claim_limits"], list(b.G2_PATIENT_LIMITS))
+        self.assertFalse(scope["execution_authorized"])
+        self.assertFalse(scope["feature_work_eligible"])
+        self.assertFalse(scope["g2_complete"])
+        b._validate_g2_batch_scope(scope)
+        for mutate in (
+            lambda s: s["allowed_paths"].append("app/not-reviewed.py"),
+            lambda s: s["allowed_additions"].append("tests/not-reviewed.py"),
+            lambda s: s.update(maximum_changed_files=5),
+            lambda s: s["published_audio_repair"].update(commit="0" * 40),
+            lambda s: s["published_audio_repair"]["source_sha256"].update(
+                {"app/routers/consultation.py": "0" * 64}),
+            lambda s: s.update(execution_authorized=True),
+            lambda s: s.update(g2_complete=True),
+            lambda s: s["owner_test_runtime_exception"].update(admission_grants_runtime_authority=True),
+            lambda s: s["claim_limits"].pop(),
+        ):
+            changed = copy.deepcopy(scope)
+            mutate(changed)
+            with self.subTest(changed=changed), self.assertRaises(b.BoundedG1BError) as caught:
+                b._validate_g2_batch_scope(changed)
+            self.assertEqual(caught.exception.reason_code, "bounded_g2_batch_scope_invalid")
+
+    def test_activation_owns_six_and_repair_is_the_exact_four_path_lane(self):
+        row = {"before_sha256": "b" * 64, "after_sha256": "c" * 64}
+        activation = {
+            "schema_version": b.G2_PATIENT_BINDING_VERSION,
+            "operation_kind": "enable_g2_patient_binding",
+            "repair_sha256": {p: copy.deepcopy(row) for p in b.G2_PATIENT_MAINTENANCE_PATHS},
+        }
+        self.assertEqual(set(b._batch_changes(activation)), b.G2_PATIENT_MAINTENANCE_PATHS)
+        self.assertEqual(len(b.G2_PATIENT_MAINTENANCE_PATHS), 6)
+        missing = copy.deepcopy(activation)
+        missing["repair_sha256"].pop(b.STATE)
+        with self.assertRaises(b.BoundedG1BError) as caught:
+            b._batch_changes(missing)
+        self.assertEqual(caught.exception.reason_code, "bounded_g2_batch_path_not_allowed")
+        repair = {
+            "schema_version": b.G2_PATIENT_BINDING_VERSION,
+            "operation_kind": "repair_g2_patient_binding",
+            "repair_sha256": {p: copy.deepcopy(row) for p in b.G2_PATIENT_PATHS},
+        }
+        repair["repair_sha256"][b.G2_PATIENT_ADDITION]["before_sha256"] = None
+        self.assertEqual(b.operation_paths("repair_g2_patient_binding", repair), b.G2_PATIENT_PATHS)
+        self.assertEqual(b.operation_effects("repair_g2_patient_binding"), b.G2_PATIENT_EFFECTS)
+        self.assertEqual(b._operation("repair_g2_patient_binding", repair)["limits"], b.G2_PATIENT_LIMITS)
+        for path in ("app/main.py", "tests/not-reviewed.py", "../outside.py"):
+            invalid = copy.deepcopy(repair)
+            invalid["repair_sha256"][path] = invalid["repair_sha256"].pop(b.G2_PATIENT_ADDITION)
+            with self.subTest(path=path), self.assertRaises(b.BoundedG1BError) as caught:
+                b._batch_changes(invalid)
+            self.assertEqual(caught.exception.reason_code, "bounded_g2_batch_path_not_allowed")
+        invalid = copy.deepcopy(repair)
+        invalid["repair_sha256"]["tests/test_consultation_audio_privacy.py"]["before_sha256"] = None
+        with self.assertRaises(b.BoundedG1BError) as caught:
+            b._batch_changes(invalid)
+        self.assertEqual(caught.exception.reason_code, "bounded_g2_batch_change_digest")
+        later_repair = copy.deepcopy(repair)
+        later_repair["repair_sha256"][b.G2_PATIENT_ADDITION]["before_sha256"] = "f" * 64
+        self.assertEqual(set(b._batch_changes(later_repair)), b.G2_PATIENT_PATHS)
+
+    def test_v1_through_v5_dispatch_compatibility_matrix(self):
+        row = {"before_sha256": "1" * 64, "after_sha256": "2" * 64}
+        cases = (
+            (b.G2_BATCH_BINDING_VERSION, "enable_g2_batches", b.G2_BATCH_MAINTENANCE_PATHS, b.EFFECTS),
+            (b.G2_BATCH_BINDING_VERSION, "repair_g2_batch", {b.G2_FIXTURE}, b.G2_BATCH_EFFECTS),
+            (b.G2_CATALOGUE_BINDING_VERSION, "extend_g2_catalogue", b.G2_BATCH_MAINTENANCE_PATHS, b.EFFECTS),
+            (b.G2_CATALOGUE_BINDING_VERSION, "repair_g2_batch",
+             {"app/services/ai/service.py"}, b.G2_BATCH_EFFECTS),
+            (b.G2_MIGRATION_BINDING_VERSION, "enable_g2_migration", b.G2_BATCH_MAINTENANCE_PATHS, b.EFFECTS),
+            (b.G2_MIGRATION_BINDING_VERSION, "repair_g2_migration",
+             {"alembic/versions/d4787e8e3629_phase_0_baseline.py"}, b.G2_MIGRATION_EFFECTS),
+            (b.G2_INSTRUCTIONS_BINDING_VERSION, "align_g2_instructions",
+             b.G2_INSTRUCTIONS_MAINTENANCE_PATHS, b.EFFECTS),
+            (b.G2_INSTRUCTIONS_BINDING_VERSION, "repair_g2_migration",
+             {"alembic/versions/d4787e8e3629_phase_0_baseline.py"}, b.G2_MIGRATION_EFFECTS),
+            (b.G2_AUDIO_BINDING_VERSION, "enable_g2_audio_privacy", b.G2_AUDIO_MAINTENANCE_PATHS, b.EFFECTS),
+            (b.G2_AUDIO_BINDING_VERSION, "repair_g2_audio_privacy", {"app/main.py"}, b.G2_AUDIO_EFFECTS),
+        )
+        for version, kind, paths, effects in cases:
+            binding = {"schema_version": version, "operation_kind": kind,
+                       "repair_sha256": {p: copy.deepcopy(row) for p in paths}}
+            with self.subTest(version=version, kind=kind):
+                self.assertEqual(set(b._batch_changes(binding)), set(paths))
+                self.assertEqual(set(b.operation_paths(kind, binding)), set(paths))
+                self.assertEqual(b.operation_effects(kind), effects)
+
+    def test_v5_cannot_be_relabelled_as_patient_binding(self):
+        for operation in ("enable_g2_patient_binding", "repair_g2_patient_binding"):
+            binding = {
+                "schema_version": b.G2_AUDIO_BINDING_VERSION,
+                "operation_kind": operation,
+                "repair_sha256": {
+                    "orchestration_harness/bounded_g1b.py":
+                        {"before_sha256": "d" * 64, "after_sha256": "e" * 64},
+                },
+            }
+            with self.subTest(operation=operation), self.assertRaises(b.BoundedG1BError) as caught:
+                b._batch_changes(binding)
+            self.assertEqual(caught.exception.reason_code, "bounded_g2_batch_binding_version")
+
+    def test_exact_audio_repair_publication_headers_and_blobs_are_required(self):
+        publication = b.G2_AUDIO_REPAIR_PUBLICATION
+        raw_by_path = {path: ("authored:" + path).encode() for path in b.G2_AUDIO_REPAIR_SOURCE_SHA256}
+        original_sha = b._sha
+
+        def observed_text(_root, *args, **_kwargs):
+            if args == ("cat-file", "commit", publication["commit"]):
+                return "tree " + publication["tree"] + "\nparent " + publication["parent"] + "\n\nauthored\n"
+            if args == ("merge-base", "--is-ancestor", publication["commit"], "f" * 40):
+                return ""
+            raise AssertionError(args)
+
+        def observed_bytes(_root, *args, **_kwargs):
+            prefix = publication["commit"] + ":"
+            return raw_by_path[args[2][len(prefix):]]
+
+        digest_by_raw = {raw: b.G2_AUDIO_REPAIR_SOURCE_SHA256[path] for path, raw in raw_by_path.items()}
+        with patch.object(b.trusted_git, "run_git", side_effect=observed_text), \
+                patch.object(b.trusted_git, "run_git_bytes", side_effect=observed_bytes), \
+                patch.object(b, "_sha", side_effect=lambda raw: digest_by_raw.get(raw, original_sha(raw))):
+            b._validate_g2_patient_audio_publication(Path("authored"), "f" * 40)
+            raw_by_path["app/routers/consultation.py"] = b"changed"
+            with self.assertRaises(b.BoundedG1BError) as caught:
+                b._validate_g2_patient_audio_publication(Path("authored"), "f" * 40)
+            self.assertEqual(caught.exception.reason_code,
+                             "bounded_g2_patient_audio_publication_bytes_changed")
+
+
 class G2AudioFixture(G2MigrationFixture):
     """Authored v5 activation over exact v4, trusted-Git, and instruction history."""
     MAIN = "app/main.py"
@@ -1007,6 +1168,139 @@ class G2AudioFixture(G2MigrationFixture):
             installed_controller=copy.deepcopy(self.batch_controller), repair_sha256=rows)
         self.q["payload_sha256"] = {
             p: b._sha((self.root / p).read_bytes()) for p in b.batch_input_paths(self.q)}
+
+
+class G2PatientFixture(G2AudioFixture):
+    """Authored v6 activation over exact v5 policy/source and published audio bytes."""
+    PATIENT_TEST = "tests/test_consultation_patient_binding.py"
+    AUDIO_TEST = "tests/test_consultation_audio_privacy.py"
+
+    def __init__(self, assets):
+        super().__init__(assets)
+        self.patient_previous_policy = {
+            p: (assets / "g2-patient-predecessor-policy" / p).read_bytes()
+            for p in b.G2_PATIENT_PREDECESSOR_POLICY}
+        self.patient_previous_source = {
+            p: (assets / "g2-patient-predecessor-source" / p).read_bytes()
+            for p in b.SOURCE_PATHS | b.CONTROLLER_PATHS}
+        self.audio_publication_source = {
+            p: (assets / "g2-patient-audio-publication" / p).read_bytes()
+            for p in b.G2_AUDIO_REPAIR_SOURCE_SHA256}
+        previous = {
+            **self.patient_previous_policy,
+            **self.patient_previous_source,
+            **self.audio_publication_source,
+        }
+        for path, raw in previous.items():
+            self.write(path, raw)
+        patient_test = self.root / self.PATIENT_TEST
+        if patient_test.exists():
+            patient_test.unlink()
+        self.git("add", "--", *sorted(previous))
+        self.git("rm", "--cached", "--ignore-unmatch", "--", self.PATIENT_TEST)
+        base_tree = self.git("write-tree")
+        base = self.git("commit-tree", base_tree, "-p", self.base,
+                        "-m", "authored exact published audio baseline")
+        self.git("update-ref", "--no-deref", "HEAD", base, self.base)
+        self.base = base
+        sources = {p: b._sha((self.source / p).read_bytes()) for p in b.CONTROLLER_PATHS}
+        self.batch_scope = b.build_g2_patient_scope("2026-09-15T00:00:00+00:00", base, sources)
+        after = b.build_g2_patient_transition(
+            {p: self.patient_previous_policy[p] for p in b.G2_BATCH_CONTROL_PATHS},
+            self.batch_scope)
+        after.update({p: (self.source / p).read_bytes() for p in b.G2_BATCH_CODE_PATHS})
+        changes = {p: {"before_sha256": b._sha((self.root / p).read_bytes()),
+                       "after_sha256": b._sha(raw)} for p, raw in after.items()}
+        for path, raw in after.items():
+            self.write(path, raw)
+        self.git("add", "--", *sorted(after))
+        tree = self.git("write-tree")
+        self.q.update(
+            schema_version=b.G2_PATIENT_BINDING_VERSION,
+            operation_id="authored-g2-patient-activation",
+            operation_kind="enable_g2_patient_binding",
+            phase="development", base_commit=base, base_tree=base_tree,
+            expected_head=base, expected_index_tree=tree, candidate_tree=tree,
+            activation_commit=b.G2_PATIENT_PREDECESSOR["commit"],
+            installed_controller=copy.deepcopy(b.G2_PATIENT_PREDECESSOR),
+            repair_sha256=changes,
+            source_sha256={p: b._sha((self.source / p).read_bytes()) for p in b.SOURCE_PATHS},
+        )
+        self.q["payload_sha256"] = {
+            p: b._sha((self.root / p).read_bytes()) for p in b.batch_input_paths(self.q)}
+        self.patient_predecessor_header = (
+            "tree " + b.G2_PATIENT_PREDECESSOR["tree"] + "\nparent "
+            + b.G2_PATIENT_PREDECESSOR["parent"] + "\n\nauthored v5 predecessor\n")
+        self.audio_publication_header = (
+            "tree " + b.G2_AUDIO_REPAIR_PUBLICATION["tree"] + "\nparent "
+            + b.G2_AUDIO_REPAIR_PUBLICATION["parent"] + "\n\nauthored audio publication\n")
+
+    @contextmanager
+    def component_history(self):
+        with super().component_history():
+            run, run_bytes = b.trusted_git.run_git, b.trusted_git.run_git_bytes
+            predecessor = b.G2_PATIENT_PREDECESSOR
+            publication = b.G2_AUDIO_REPAIR_PUBLICATION
+
+            def observed_text(root, *args, **kwargs):
+                if root == self.root and args == ("cat-file", "commit", predecessor["commit"]):
+                    return self.patient_predecessor_header
+                if root == self.root and args == ("cat-file", "commit", publication["commit"]):
+                    return self.audio_publication_header
+                if root == self.root and args in (
+                    ("merge-base", "--is-ancestor", predecessor["commit"], self.q["base_commit"]),
+                    ("merge-base", "--is-ancestor", publication["commit"], self.q["base_commit"]),
+                ):
+                    return ""
+                return run(root, *args, **kwargs)
+
+            def observed_bytes(root, *args, **kwargs):
+                for path, raw in {**self.patient_previous_policy,
+                                  **self.patient_previous_source}.items():
+                    if root == self.root and args == (
+                            "cat-file", "blob", predecessor["commit"] + ":" + path):
+                        return raw
+                for path, raw in self.audio_publication_source.items():
+                    if root == self.root and args == (
+                            "cat-file", "blob", publication["commit"] + ":" + path):
+                        return raw
+                return run_bytes(root, *args, **kwargs)
+
+            with patch.object(b.trusted_git, "run_git", side_effect=observed_text), \
+                    patch.object(b.trusted_git, "run_git_bytes", side_effect=observed_bytes):
+                yield
+
+    def prepare_patient(self, changes):
+        base = self.git("rev-parse", "HEAD")
+        base_tree = self.git("rev-parse", "HEAD^{tree}")
+        rows = {}
+        for path, raw in changes.items():
+            prior = self.root / path
+            rows[path] = {"before_sha256": b._sha(prior.read_bytes()) if prior.is_file() else None,
+                          "after_sha256": b._sha(raw)}
+            self.write(path, raw)
+        self.git("add", "--", *sorted(changes))
+        tree = self.git("write-tree")
+        self.q.update(
+            operation_kind="repair_g2_patient_binding",
+            operation_id="authored-g2-patient-repair",
+            phase="development", base_commit=base, base_tree=base_tree,
+            expected_head=base, expected_index_tree=tree, candidate_tree=tree,
+            activation_commit=self.activation,
+            installed_controller=copy.deepcopy(self.batch_controller),
+            repair_sha256=rows,
+        )
+        self.q["payload_sha256"] = {
+            p: b._sha((self.root / p).read_bytes()) for p in b.batch_input_paths(self.q)}
+
+    def restage(self, path, raw, *, repair_after=False):
+        self.write(path, raw)
+        self.git("add", "--", path)
+        tree = self.git("write-tree")
+        self.q.update(expected_index_tree=tree, candidate_tree=tree)
+        self.q["payload_sha256"][path] = b._sha(raw)
+        if repair_after:
+            self.q["repair_sha256"][path]["after_sha256"] = b._sha(raw)
 
 
 def build_integration_suite(assets: Path) -> unittest.TestSuite:
@@ -2947,8 +3241,180 @@ def build_integration_suite(assets: Path) -> unittest.TestSuite:
             self.assertFalse(decision.policy_admitted)
             self.assertEqual(decision.reason_codes, ("bounded_g1b_manifest_binding_mismatch",))
 
+    class G2PatientAdmissionTests(unittest.TestCase):
+        def setUp(self):
+            self.fx = G2PatientFixture(assets)
+            self.addCleanup(self.fx.close)
+            self.stack = ExitStack()
+            self.addCleanup(self.stack.close)
+            self.stack.enter_context(no_legacy_observation())
+            self.stack.enter_context(self.fx.component_history())
+
+        @staticmethod
+        def repair_changes(f):
+            return {
+                f.CONSULTATION: b"# authored explicit patient consultation repair; never imported\n",
+                f.SIDEBAR: b"// authored explicit patient sidebar guard; never executed\n",
+                f.AUDIO_TEST: b"# authored retained audio privacy regression with explicit patient\n",
+                f.PATIENT_TEST: b"# authored patient binding regression; never imported\n",
+            }
+
+        def assert_full_admission(self, f):
+            context = f.context()
+            manifest = f.manifest(context)
+            entrypoint = {
+                "development": "task_branch_commit",
+                "pre-push": "task_branch_push",
+                "post-push": "task_branch_push",
+            }[f.q["phase"]]
+            report = pf.build_report(
+                f.root, manifest, bounded_context=context,
+                phase=f.q["phase"], entrypoint=entrypoint)
+            self.assertEqual(report["status"], "policy_eligible", report)
+            self.assertFalse(report["execution_authorized"])
+            for decision in (
+                pa.evaluate_programme_operation_admission(
+                    repo_root=f.root, manifest=manifest, entrypoint=entrypoint,
+                    phase=f.q["phase"], bounded_context=context),
+                pg.evaluate_pinned_programme_operation(
+                    gatekeeper_root=f.source, target_repo_root=f.root, manifest=manifest,
+                    entrypoint=entrypoint, phase=f.q["phase"], bounded_context=context),
+            ):
+                self.assertTrue(decision.policy_admitted, decision.reason_codes)
+                self.assertFalse(decision.execution_authorized)
+                self.assertEqual(decision.candidate_tree, f.q["candidate_tree"])
+
+        def test_exact_transition_then_activation_and_four_path_repair_lifecycle(self):
+            f = self.fx
+            before_state = b._json(f.patient_previous_policy[b.STATE])
+            expected_state = copy.deepcopy(before_state)
+            scope_raw = b._canonical(f.batch_scope) + b"\n"
+            expected_state["observed_at"] = f.batch_scope["recorded_at"]
+            expected_state["g2"].update(
+                scope_sha256=b._sha(scope_raw),
+                current_operation=copy.deepcopy(f.batch_scope["current_operation"]))
+            expected_state["task_selection"]["next_eligibility_condition"] = (
+                "bounded_G2_patient_binding_repair_active")
+            self.assertEqual(b._json((f.root / b.STATE).read_bytes()), expected_state)
+            before_overlay = b._document(f.patient_previous_policy[b.OVERLAY], b.OVERLAY)
+            before_overlay["profiles"][b.G2_PROFILE] = rp.g2_patient_binding_profile()
+            self.assertEqual(b._document((f.root / b.OVERLAY).read_bytes(), b.OVERLAY), before_overlay)
+            self.assertEqual((f.root / b.G2_SCOPE).read_bytes(), scope_raw)
+            self.assertEqual(set(f.q["repair_sha256"]), b.G2_PATIENT_MAINTENANCE_PATHS)
+            self.assertEqual(len(f.q["repair_sha256"]), 6)
+            self.assert_full_admission(f)
+
+            f.activate_batches()
+            f.prepare_patient(self.repair_changes(f))
+            self.assertEqual(set(f.q["repair_sha256"]), b.G2_PATIENT_PATHS)
+            self.assertIsNone(f.q["repair_sha256"][f.PATIENT_TEST]["before_sha256"])
+            self.assertIsNotNone(f.q["repair_sha256"][f.AUDIO_TEST]["before_sha256"])
+            self.assert_full_admission(f)
+            f.commit_current()
+            self.assertEqual(f.q["phase"], "pre-push")
+            self.assert_full_admission(f)
+            f.q["phase"] = "post-push"
+            self.assert_full_admission(f)
+
+        def test_stale_v5_controller_and_stale_patient_policy_are_denied(self):
+            f = self.fx
+            self.assertTrue(f.decision().policy_admitted)
+            original = copy.deepcopy(f.q)
+            f.q["installed_controller"] = copy.deepcopy(b.G2_AUDIO_PREDECESSOR)
+            self.assertEqual(f.decision().reason_codes, ("bounded_g2_batch_maintenance_predecessor",))
+            f.q = original
+            state = b._json((f.root / b.STATE).read_bytes())
+            state["task_selection"]["next_eligibility_condition"] = "bounded_G2_audio_privacy_repair_active"
+            raw = (json.dumps(state, indent=2, ensure_ascii=False) + "\n").encode()
+            f.restage(b.STATE, raw, repair_after=True)
+            self.assertEqual(f.decision().reason_codes, ("bounded_g2_batch_policy_delta_invalid",))
+
+        def test_predecessor_and_audio_publication_history_are_exact(self):
+            f = self.fx
+            self.assertTrue(f.decision().policy_admitted)
+            original_header = f.audio_publication_header
+            f.audio_publication_header = (
+                "tree " + "0" * 40 + "\nparent " + b.G2_AUDIO_REPAIR_PUBLICATION["parent"]
+                + "\n\nauthored wrong tree\n")
+            self.assertEqual(f.decision().reason_codes, ("bounded_g2_batch_publication_invalid",))
+            f.audio_publication_header = original_header
+            path = "app/routers/consultation.py"
+            original_audio = f.audio_publication_source[path]
+            f.audio_publication_source[path] = b"# authored changed published audio blob\n"
+            self.assertEqual(
+                f.decision().reason_codes,
+                ("bounded_g2_patient_audio_publication_bytes_changed",))
+            f.audio_publication_source[path] = original_audio
+            source_path = "orchestration_harness/bounded_g1b.py"
+            f.patient_previous_source[source_path] = b"# authored stale v5 controller bytes\n"
+            self.assertEqual(
+                f.decision().reason_codes,
+                ("bounded_g2_patient_predecessor_bytes_changed",))
+
+        def test_scope_and_repair_path_or_runtime_effect_expansion_are_denied(self):
+            f = self.fx
+            scope = copy.deepcopy(f.batch_scope)
+            scope["allowed_paths"].append("app/not-reviewed.py")
+            raw = b._canonical(scope) + b"\n"
+            f.restage(b.G2_SCOPE, raw, repair_after=True)
+            self.assertEqual(f.decision().reason_codes, ("bounded_g2_batch_scope_invalid",))
+
+            other = G2PatientFixture(assets)
+            self.addCleanup(other.close)
+            with no_legacy_observation(), other.component_history():
+                other.activate_batches()
+                other.prepare_patient(self.repair_changes(other))
+                original = copy.deepcopy(other.q)
+                row = other.q["repair_sha256"].pop(other.PATIENT_TEST)
+                other.q["repair_sha256"]["tests/not-reviewed.py"] = row
+                self.assertEqual(other.decision().reason_codes, ("bounded_g2_batch_path_not_allowed",))
+                other.q = original
+                context = other.context()
+                manifest = other.manifest(context)
+                manifest["intended_side_effect_classes"].append("provider_invocation")
+                decision = b.evaluate_bounded_g1b_operation(
+                    context=context, manifest=manifest,
+                    entrypoint="recovery_preflight", phase=other.q["phase"])
+                self.assertEqual(
+                    decision.reason_codes, ("bounded_g1b_manifest_binding_mismatch",))
+                self.assertFalse(decision.execution_authorized)
+
+        def test_wrong_addition_substitution_and_existing_audio_none_are_denied(self):
+            f = self.fx
+            f.activate_batches()
+            f.prepare_patient(self.repair_changes(f))
+            original = copy.deepcopy(f.q)
+            row = f.q["repair_sha256"].pop(f.PATIENT_TEST)
+            f.q["repair_sha256"]["tests/not-reviewed.py"] = row
+            self.assertEqual(f.decision().reason_codes, ("bounded_g2_batch_path_not_allowed",))
+            f.q = copy.deepcopy(original)
+            f.q["repair_sha256"][f.AUDIO_TEST]["before_sha256"] = None
+            self.assertEqual(f.decision().reason_codes, ("bounded_g2_batch_change_digest",))
+
+        def test_candidate_and_preimage_drift_are_denied(self):
+            f = self.fx
+            f.activate_batches()
+            f.prepare_patient(self.repair_changes(f))
+            original = copy.deepcopy(f.q)
+            f.q["repair_sha256"][f.CONSULTATION]["before_sha256"] = "0" * 64
+            self.assertEqual(f.decision().reason_codes, ("bounded_g2_batch_preimage_changed",))
+            f.q = copy.deepcopy(original)
+            f.q["repair_sha256"][f.CONSULTATION]["after_sha256"] = "0" * 64
+            self.assertEqual(f.decision().reason_codes, ("bounded_g2_batch_candidate_changed",))
+
+        def test_unowned_input_drift_is_denied(self):
+            f = self.fx
+            f.activate_batches()
+            f.prepare_patient(self.repair_changes(f))
+            state = b._json((f.root / b.STATE).read_bytes())
+            state["observed_at"] = "2026-09-15T00:00:01+00:00"
+            raw = (json.dumps(state, indent=2, ensure_ascii=False) + "\n").encode()
+            f.restage(b.STATE, raw)
+            self.assertEqual(f.decision().reason_codes, ("bounded_g2_batch_unowned_input_changed",))
+
     suite = unittest.defaultTestLoader.loadTestsFromTestCase(ClosedRequestTests)
     suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(G2AudioSourceContractTests))
+    suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(G2PatientSourceContractTests))
     suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(IntegratedTests))
     suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(SuccessorTests))
     suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(ProvenanceAdmissionTests))
@@ -2960,4 +3426,5 @@ def build_integration_suite(assets: Path) -> unittest.TestSuite:
     suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(G2MigrationAdmissionTests))
     suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(G2InstructionsAdmissionTests))
     suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(G2AudioAdmissionTests))
+    suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(G2PatientAdmissionTests))
     return suite

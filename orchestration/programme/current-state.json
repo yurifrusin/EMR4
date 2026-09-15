@@ -1,6 +1,6 @@
 {
   "schema_version": "raisa-ariadne.programme-state.v2",
-  "observed_at": "2026-09-14T14:30:00+00:00",
+  "observed_at": "2026-09-15T00:00:00+00:00",
   "programme_name": "Raisa Medical Office and Ariadne Recovery & Convergence",
   "programme_mode": "recovery",
   "current_gate": "G2",
@@ -272,7 +272,7 @@
     "next_eligible_now": true,
     "next_tranche_started": false,
     "next_tranche_admission_requires_state_transition": false,
-    "next_eligibility_condition": "bounded_G2_audio_privacy_repair_active"
+    "next_eligibility_condition": "bounded_G2_patient_binding_repair_active"
   },
   "parallelism_efficacy": {
     "deepseek": {
@@ -976,18 +976,18 @@
   "g2": {
     "status": "active",
     "scope_path": "orchestration/programme/g2-baseline-repair-scope.json",
-    "scope_sha256": "92222e77419479234ddce8e7524ef890bafcbeb82535f6e06b2b2e7f1a49ebad",
+    "scope_sha256": "c6040347ba4a9c9294e873680acfbaffca16583afca9648a9ac9756c6a6c3a13",
     "current_operation": {
       "completion_accepted": false,
-      "operation_id": "g2-audio-privacy-repair",
+      "operation_id": "g2-patient-binding-repair",
       "profile": "G2_BASELINE_REPAIR_ACTIVE",
       "status": "active",
       "supersedes": {
         "historical_latch_preserved": true,
-        "operation_id": "g2-migration-preservation-repair",
-        "scope_commit": "8f27fcc622933ba256dc33142f85ac92849d6b89",
+        "operation_id": "g2-audio-privacy-repair",
+        "scope_commit": "77b4e285c31d961d1fdda9779f2f7c3a52d6773b",
         "scope_path": "orchestration/programme/g2-baseline-repair-scope.json",
-        "scope_sha256": "c03f3a329a334ae2a59619d807853be2b9dbbbb68399e29dfc49eb93e4a5ac65"
+        "scope_sha256": "92222e77419479234ddce8e7524ef890bafcbeb82535f6e06b2b2e7f1a49ebad"
       },
       "task_class": "g2_confirmation_family_fixture_repair"
     },

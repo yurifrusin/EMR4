@@ -1802,6 +1802,22 @@ def g2_audio_privacy_profile() -> dict:
     return profile
 
 
+G2_PATIENT_BINDING_PATHS = (
+    'app/routers/consultation.py',
+    'EMR4 Sidebar/src/taskpane/taskpane.js',
+    'tests/test_consultation_audio_privacy.py',
+    'tests/test_consultation_patient_binding.py',
+)
+
+
+def g2_patient_binding_profile() -> dict:
+    """Only the four reviewed patient-binding paths; runtime authority stays separate."""
+    profile = g2_batch_profile()
+    profile.update(scope_behavior='bounded_g2_patient_binding_repair',
+                   allowed_paths=sorted(G2_PATIENT_BINDING_PATHS))
+    return profile
+
+
 POLICY_REFERENCES = (
     core.Reference("project.yaml", ("operating_model", "settings_file"), "operating_model.yaml"),
     core.Reference("project.yaml", ("secure_sdlc", "settings_file"), "security_review_protocol.yaml"),
@@ -1889,7 +1905,9 @@ def validate_recovery_configuration(*, documents: dict[str, bytes], expected_sha
         raise RaisaPolicyError("configuration_assessment_profile_invalid")
     if state["active_profile"] == G2_PROFILE:
         profile = overlay["profiles"][G2_PROFILE]
-        expected = (g2_audio_privacy_profile()
+        expected = (g2_patient_binding_profile()
+                    if profile["scope_behavior"] == 'bounded_g2_patient_binding_repair'
+                    else g2_audio_privacy_profile()
                     if profile["scope_behavior"] == 'bounded_g2_audio_privacy_repair'
                     else g2_migration_profile()
                     if profile["scope_behavior"] == 'bounded_g2_migration_preservation'
