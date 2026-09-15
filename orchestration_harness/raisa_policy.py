@@ -1818,6 +1818,22 @@ def g2_patient_binding_profile() -> dict:
     return profile
 
 
+G2_CONSULTATION_ATOMICITY_PATHS = (
+    'app/routers/consultation.py',
+    'tests/test_consultation_audio_privacy.py',
+    'tests/test_consultation_patient_binding.py',
+    'tests/test_consultation_finalize_atomicity.py',
+)
+
+
+def g2_consultation_atomicity_profile() -> dict:
+    """Only the reviewed transaction repair; role and runtime authority stay separate."""
+    profile = g2_batch_profile()
+    profile.update(scope_behavior='bounded_g2_consultation_atomicity_repair',
+                   allowed_paths=sorted(G2_CONSULTATION_ATOMICITY_PATHS))
+    return profile
+
+
 POLICY_REFERENCES = (
     core.Reference("project.yaml", ("operating_model", "settings_file"), "operating_model.yaml"),
     core.Reference("project.yaml", ("secure_sdlc", "settings_file"), "security_review_protocol.yaml"),
@@ -1905,7 +1921,9 @@ def validate_recovery_configuration(*, documents: dict[str, bytes], expected_sha
         raise RaisaPolicyError("configuration_assessment_profile_invalid")
     if state["active_profile"] == G2_PROFILE:
         profile = overlay["profiles"][G2_PROFILE]
-        expected = (g2_patient_binding_profile()
+        expected = (g2_consultation_atomicity_profile()
+                    if profile["scope_behavior"] == 'bounded_g2_consultation_atomicity_repair'
+                    else g2_patient_binding_profile()
                     if profile["scope_behavior"] == 'bounded_g2_patient_binding_repair'
                     else g2_audio_privacy_profile()
                     if profile["scope_behavior"] == 'bounded_g2_audio_privacy_repair'

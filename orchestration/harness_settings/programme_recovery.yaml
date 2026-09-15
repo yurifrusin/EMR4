@@ -1157,9 +1157,9 @@ profiles:
     - provider_invocation
     - real_data_access
     allowed_paths:
-    - EMR4 Sidebar/src/taskpane/taskpane.js
     - app/routers/consultation.py
     - tests/test_consultation_audio_privacy.py
+    - tests/test_consultation_finalize_atomicity.py
     - tests/test_consultation_patient_binding.py
     autonomous_task_selection: false
     feature_work_eligible: false
@@ -1168,7 +1168,7 @@ profiles:
     deployment_eligible: false
     protected_ref_movement_eligible: false
     g2_eligible: true
-    scope_behavior: bounded_g2_patient_binding_repair
+    scope_behavior: bounded_g2_consultation_atomicity_repair
     scope_file: orchestration/programme/g2-baseline-repair-scope.json
     global_execution_defaults_unchanged: true
     closed_entrypoints:

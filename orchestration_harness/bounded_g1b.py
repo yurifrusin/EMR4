@@ -562,6 +562,59 @@ OPERATION_PATHS.update(enable_g2_patient_binding=G2_PATIENT_MAINTENANCE_PATHS,
                        repair_g2_patient_binding=G2_PATIENT_PATHS)
 
 
+# A v7 successor repairs consultation transaction atomicity without adding
+# clinical-role or practitioner-attestation authority.
+G2_ATOMICITY_BINDING_VERSION = "ariadne.bounded_g2_batch_binding.v7"
+G2_ATOMICITY_SCOPE_VERSION = "ariadne.g2_reviewed_batch_scope.v7"
+G2_ATOMICITY_PATHS = frozenset(raisa_policy.G2_CONSULTATION_ATOMICITY_PATHS)
+G2_ATOMICITY_ADDITION = "tests/test_consultation_finalize_atomicity.py"
+G2_ATOMICITY_EFFECTS = G2_BATCH_EFFECTS
+G2_ATOMICITY_PREDECESSOR = {
+    "commit": "65aec51154a48fa375cac23cc2add52b752f67f5",
+    "parent": G2_AUDIO_REPAIR_PUBLICATION["commit"],
+    "tree": "fc1b16b3db42ceb51c71efa97030e0a4673f39aa",
+    "source_sha256": {
+        "orchestration_harness/bounded_g1b.py": "4198c1614bc752693a2c902d126ce1b877f8dd56fa63e7bee737b3a8e5c8cf75",
+        "orchestration_harness/configuration_core.py": "f7ba7a80eb0a590f9fb71b864e6c1f9f43241d9f7d70a38da67a9243fea208e5",
+        "orchestration_harness/programme_admission.py": "ac816a8a79b2d8222fa357777c075950927e86cf30c8a5b25ffd08a474052181",
+        "orchestration_harness/raisa_policy.py": "4209113c351a7a822a7859577044884b7405fc1db0d425dc79ad54ad235b1eeb",
+        "tests/test_bounded_g1b.py": "371496e2480a2701d76c9b1eaf984f5c61df38c8152bc6d3f808ebde00e2ce99",
+    },
+}
+G2_ATOMICITY_PREDECESSOR_POLICY = {
+    AGENTS: G2_AUDIO_INSTRUCTIONS_SHA256,
+    STATE: "c1eb738c4979625d4538c2f6cdf8ea624ff48ed8c618ab93a77d06028ad71ab6",
+    OVERLAY: "a6ce84d31a06d3afa303cc244a0c48a5742aefb39b81af702d24f049f4d0491a",
+    G2_SCOPE: "c6040347ba4a9c9294e873680acfbaffca16583afca9648a9ac9756c6a6c3a13",
+    GATES: G2_INITIAL_POLICY_PINS[GATES],
+}
+G2_PATIENT_REPAIR_PUBLICATION = {
+    "commit": "bc7800e3fa297942f6444e792094f679f37bb70e",
+    "parent": G2_ATOMICITY_PREDECESSOR["commit"],
+    "tree": "978c6e8e74c783e356fff40205f189e6567edf34",
+}
+G2_PATIENT_REPAIR_SOURCE_SHA256 = {
+    "app/main.py": "43047906b436a3d6f2bc0dda32a1625977cd583f99c072b34f99c0039affd7bc",
+    "app/routers/consultation.py": "37c942807859ae6ca6317d7be788e15eee4193428aa606018971df1f67de7069",
+    "EMR4 Sidebar/src/taskpane/taskpane.js": "c61d2184e837064a3f6cfffb03404dca296c0a44e5e2093ec30414fc5b1758bf",
+    "tests/test_consultation_audio_privacy.py": "e0c19552eb200d8f18d00466082ae1182804a3540109dc568736da0c5c9d4d2a",
+    "tests/test_consultation_patient_binding.py": "dc55f6d92b9d0f5fb1a7f7a2ef5bc980345ca7217703b3eb8747f3874649df5a",
+}
+G2_ATOMICITY_MAINTENANCE_PATHS = G2_BATCH_MAINTENANCE_PATHS
+G2_ATOMICITY_LIMITS = (
+    "only the reviewed literal four-file consultation transaction-atomicity repair in this binding is eligible",
+    "encounter and child records form one commit and rollback unit while explicit patient and practice binding are preserved",
+    "existing audio privacy, draft-only analysis and patient-binding assertions remain required with the UUID helper return contract",
+    "admission grants no application, database, provider or test-runtime execution authority",
+    "clinical-role restrictions, actor or practitioner provenance and human-attestation policy are not accepted or changed",
+    "no G2 completion, tenant-wide acceptance, feature, real-data, protected-evidence or integration acceptance",
+)
+G2_BATCH_KINDS = G2_BATCH_KINDS | {"enable_g2_consultation_atomicity", "repair_g2_consultation_atomicity"}
+G2_MAINTENANCE_KINDS = G2_MAINTENANCE_KINDS | {"enable_g2_consultation_atomicity"}
+OPERATION_PATHS.update(enable_g2_consultation_atomicity=G2_ATOMICITY_MAINTENANCE_PATHS,
+                       repair_g2_consultation_atomicity=G2_ATOMICITY_PATHS)
+
+
 def _batch_changes(binding: dict) -> dict:
     kind = binding.get("operation_kind")
     rows = binding.get("repair_sha256")
@@ -573,16 +626,20 @@ def _batch_changes(binding: dict) -> dict:
     migration = instructions or binding.get("schema_version") == G2_MIGRATION_BINDING_VERSION
     audio = binding.get("schema_version") == G2_AUDIO_BINDING_VERSION
     patient = binding.get("schema_version") == G2_PATIENT_BINDING_VERSION
+    atomicity = binding.get("schema_version") == G2_ATOMICITY_BINDING_VERSION
     _need((kind in {"enable_g2_migration", "repair_g2_migration", "align_g2_instructions"}) == migration
           and (kind != "align_g2_instructions" or instructions)
           and (not instructions or kind in {"align_g2_instructions", "repair_g2_migration"})
           and (kind in {"enable_g2_audio_privacy", "repair_g2_audio_privacy"}) == audio
-          and (kind in {"enable_g2_patient_binding", "repair_g2_patient_binding"}) == patient,
+          and (kind in {"enable_g2_patient_binding", "repair_g2_patient_binding"}) == patient
+          and (kind in {"enable_g2_consultation_atomicity", "repair_g2_consultation_atomicity"}) == atomicity,
           "bounded_g2_batch_binding_version")
-    allowed = (G2_PATIENT_MAINTENANCE_PATHS if maintenance and patient
+    allowed = (G2_ATOMICITY_MAINTENANCE_PATHS if maintenance and atomicity
+               else G2_PATIENT_MAINTENANCE_PATHS if maintenance and patient
                else G2_AUDIO_MAINTENANCE_PATHS if maintenance and audio
                else G2_INSTRUCTIONS_MAINTENANCE_PATHS if maintenance and instructions
-               else G2_BATCH_MAINTENANCE_PATHS if maintenance else G2_PATIENT_PATHS if patient
+               else G2_BATCH_MAINTENANCE_PATHS if maintenance else G2_ATOMICITY_PATHS if atomicity
+               else G2_PATIENT_PATHS if patient
                else G2_AUDIO_PATHS if audio else G2_MIGRATION_PATHS if migration
                else G2_CATALOGUE_PATHS if catalogue else G2_BATCH_PATHS)
     _need(set(rows) <= allowed and (not maintenance or set(rows) == allowed),
@@ -592,7 +649,8 @@ def _batch_changes(binding: dict) -> dict:
         addition = (not maintenance and row["before_sha256"] is None
                     and ((migration and path == G2_MIGRATION_ADDITION)
                          or (audio and path == G2_AUDIO_ADDITION)
-                         or (patient and path == G2_PATIENT_ADDITION)))
+                         or (patient and path == G2_PATIENT_ADDITION)
+                         or (atomicity and path == G2_ATOMICITY_ADDITION)))
         digests = (row["after_sha256"],) if addition else row.values()
         _need(all(type(v) is str and re.fullmatch(r"[0-9a-f]{64}", v) for v in digests)
               and row["before_sha256"] != row["after_sha256"], "bounded_g2_batch_change_digest")
@@ -604,7 +662,7 @@ def batch_input_paths(binding: dict) -> frozenset[str]:
     changes = _batch_changes(binding)
     if binding.get("schema_version") in {G2_CATALOGUE_BINDING_VERSION, G2_MIGRATION_BINDING_VERSION,
                                          G2_INSTRUCTIONS_BINDING_VERSION, G2_AUDIO_BINDING_VERSION,
-                                         G2_PATIENT_BINDING_VERSION}:
+                                         G2_PATIENT_BINDING_VERSION, G2_ATOMICITY_BINDING_VERSION}:
         return G2_CATALOGUE_POLICY_PATHS | frozenset(changes)
     return G2_BATCH_INPUT_PATHS
 
@@ -612,7 +670,8 @@ def batch_input_paths(binding: dict) -> frozenset[str]:
 def operation_effects(kind: str) -> frozenset[str]:
     if kind == "repair_g2_migration":
         return G2_MIGRATION_EFFECTS
-    if kind in {"repair_g2_batch", "repair_g2_audio_privacy", "repair_g2_patient_binding"}:
+    if kind in {"repair_g2_batch", "repair_g2_audio_privacy", "repair_g2_patient_binding",
+                "repair_g2_consultation_atomicity"}:
         return G2_BATCH_EFFECTS
     return frozenset({"repository_read"}) if kind == "assess_g1e" else EFFECTS
 
@@ -620,7 +679,7 @@ def operation_effects(kind: str) -> frozenset[str]:
 def operation_paths(kind: str, binding: dict | None = None) -> frozenset[str]:
     _need(type(kind) is str and kind in OPERATION_PATHS, "bounded_g1b_operation_kind")
     if kind in {"repair_g2_batch", "repair_g2_migration", "repair_g2_audio_privacy",
-                "repair_g2_patient_binding"}:
+                "repair_g2_patient_binding", "repair_g2_consultation_atomicity"}:
         _need(type(binding) is dict and binding.get("operation_kind") == kind,
               "bounded_g2_batch_binding_required")
         return frozenset(_batch_changes(binding))
@@ -634,7 +693,8 @@ def _operation(kind: str, binding: dict | None = None) -> dict:
                 "transition_paths": G2_TRANSITION_PATHS, "scope_path": G2_SCOPE,
                 "transition": kind in G2_MAINTENANCE_KINDS, "batch": True,
                 "profile": G2_PROFILE, "gate": "G2",
-                "limits": G2_PATIENT_LIMITS if binding.get("schema_version") == G2_PATIENT_BINDING_VERSION
+                "limits": G2_ATOMICITY_LIMITS if binding.get("schema_version") == G2_ATOMICITY_BINDING_VERSION
+                else G2_PATIENT_LIMITS if binding.get("schema_version") == G2_PATIENT_BINDING_VERSION
                 else G2_AUDIO_LIMITS if binding.get("schema_version") == G2_AUDIO_BINDING_VERSION
                 else G2_BATCH_LIMITS}
     if kind in {"accept_g1e", "repair_g2_fixture"}:
@@ -1713,8 +1773,41 @@ def build_g2_patient_scope(recorded_at: str, transition_base: str, controller_so
     return scope
 
 
+def build_g2_atomicity_scope(recorded_at: str, transition_base: str, controller_sources: dict) -> dict:
+    """Activate only the reviewed consultation transaction repair; runtime stays separate."""
+    scope = build_g2_patient_scope(recorded_at, transition_base, controller_sources)
+    _need(len(G2_ATOMICITY_PATHS) == 4 and G2_ATOMICITY_ADDITION in G2_ATOMICITY_PATHS,
+          "bounded_g2_atomicity_paths_changed")
+    _need(all(type(v) is str and re.fullmatch(r"[0-9a-f]{40}", v)
+              for v in G2_PATIENT_REPAIR_PUBLICATION.values()),
+          "bounded_g2_atomicity_patient_publication_unbound")
+    _digest_map(G2_PATIENT_REPAIR_SOURCE_SHA256, frozenset(G2_PATIENT_REPAIR_SOURCE_SHA256),
+                "bounded_g2_atomicity_patient_sources")
+    scope.update(
+        schema_version=G2_ATOMICITY_SCOPE_VERSION,
+        enable_operation="enable_g2_consultation_atomicity",
+        repair_operation="repair_g2_consultation_atomicity",
+        allowed_paths=sorted(G2_ATOMICITY_PATHS),
+        maximum_changed_files=4,
+        allowed_additions=[G2_ATOMICITY_ADDITION],
+        allowed_effects=sorted(G2_ATOMICITY_EFFECTS),
+        forbidden_effects=raisa_policy.g2_consultation_atomicity_profile()["forbidden_effects"],
+        prior_patient_activation={"commit": G2_ATOMICITY_PREDECESSOR["commit"],
+                                "scope_sha256": G2_ATOMICITY_PREDECESSOR_POLICY[G2_SCOPE]},
+        published_patient_repair={**copy.deepcopy(G2_PATIENT_REPAIR_PUBLICATION),
+                                "source_sha256": copy.deepcopy(G2_PATIENT_REPAIR_SOURCE_SHA256)},
+        claim_limits=list(G2_ATOMICITY_LIMITS),
+    )
+    scope["current_operation"]["operation_id"] = "g2-consultation-atomicity-repair"
+    scope["current_operation"]["supersedes"] = {
+        "operation_id": "g2-patient-binding-repair", "scope_path": G2_SCOPE,
+        "scope_commit": G2_ATOMICITY_PREDECESSOR["commit"],
+        "scope_sha256": G2_ATOMICITY_PREDECESSOR_POLICY[G2_SCOPE], "historical_latch_preserved": True}
+    return scope
+
 def _validate_g2_batch_scope(scope: dict) -> None:
-    builder = (build_g2_patient_scope if scope.get("schema_version") == G2_PATIENT_SCOPE_VERSION
+    builder = (build_g2_atomicity_scope if scope.get("schema_version") == G2_ATOMICITY_SCOPE_VERSION
+               else build_g2_patient_scope if scope.get("schema_version") == G2_PATIENT_SCOPE_VERSION
                else build_g2_audio_scope if scope.get("schema_version") == G2_AUDIO_SCOPE_VERSION
                else build_g2_instructions_scope if scope.get("schema_version") == G2_INSTRUCTIONS_SCOPE_VERSION
                else build_g2_migration_scope if scope.get("schema_version") == G2_MIGRATION_SCOPE_VERSION
@@ -1838,6 +1931,25 @@ def build_g2_patient_transition(before: dict[str, bytes], scope: dict) -> dict[s
             G2_SCOPE: scope_raw}
 
 
+def build_g2_atomicity_transition(before: dict[str, bytes], scope: dict) -> dict[str, bytes]:
+    """Activate atomic consultation persistence without accepting G2 or runtime."""
+    _keys(before, G2_BATCH_CONTROL_PATHS, "bounded_g2_atomicity_transition_paths")
+    for path in G2_BATCH_CONTROL_PATHS:
+        _need(type(before[path]) is bytes and _sha(before[path]) == G2_ATOMICITY_PREDECESSOR_POLICY[path],
+              "bounded_g2_atomicity_prior_policy_changed")
+    _need(scope.get("schema_version") == G2_ATOMICITY_SCOPE_VERSION, "bounded_g2_atomicity_scope_version")
+    _validate_g2_batch_scope(scope)
+    state = _json(before[STATE])
+    overlay = _document(before[OVERLAY], OVERLAY)
+    scope_raw = _canonical(scope) + b"\n"
+    state["observed_at"] = scope["recorded_at"]
+    state["g2"].update(scope_sha256=_sha(scope_raw), current_operation=_json(_canonical(scope["current_operation"])))
+    state["task_selection"].update(next_eligibility_condition="bounded_G2_consultation_atomicity_repair_active")
+    overlay["profiles"][G2_PROFILE] = raisa_policy.g2_consultation_atomicity_profile()
+    return {STATE: (json.dumps(state, indent=2, ensure_ascii=False) + "\n").encode(),
+            OVERLAY: yaml.safe_dump(overlay, sort_keys=False, allow_unicode=True).encode(),
+            G2_SCOPE: scope_raw}
+
 def _batch_publication(target: Path, publication: dict, base: str) -> None:
     headers = trusted_git.run_git(target, "cat-file", "commit", publication["commit"]).split("\n\n", 1)[0].splitlines()
     _need([line for line in headers if line.startswith("parent ")] == ["parent " + publication["parent"]]
@@ -1872,6 +1984,13 @@ def _validate_g2_patient_audio_publication(target: Path, base: str) -> None:
         _need(_sha(raw) == digest, "bounded_g2_patient_audio_publication_bytes_changed")
 
 
+def _validate_g2_atomicity_patient_publication(target: Path, base: str) -> None:
+    _batch_publication(target, G2_PATIENT_REPAIR_PUBLICATION, base)
+    for path, digest in G2_PATIENT_REPAIR_SOURCE_SHA256.items():
+        raw = trusted_git.run_git_bytes(
+            target, "cat-file", "blob", G2_PATIENT_REPAIR_PUBLICATION["commit"] + ":" + path)
+        _need(_sha(raw) == digest, "bounded_g2_atomicity_patient_publication_bytes_changed")
+
 def _load_g2_batch_inputs(context, target, source, evidence_root, scratch, binding, read, snapshots):
     """The caller digest authenticates the binding before any selected input read."""
     _keys(binding, {"schema_version", "operation_id", "operation_kind", "phase", "base_commit", "base_tree",
@@ -1883,7 +2002,8 @@ def _load_g2_batch_inputs(context, target, source, evidence_root, scratch, bindi
     migration = instructions or binding["schema_version"] == G2_MIGRATION_BINDING_VERSION
     audio = binding["schema_version"] == G2_AUDIO_BINDING_VERSION
     patient = binding["schema_version"] == G2_PATIENT_BINDING_VERSION
-    post_audio = audio or patient
+    atomicity = binding["schema_version"] == G2_ATOMICITY_BINDING_VERSION
+    post_audio = audio or patient or atomicity
     version_kinds = {
         G2_BATCH_BINDING_VERSION: {"enable_g2_batches", "repair_g2_batch"},
         G2_CATALOGUE_BINDING_VERSION: {"extend_g2_catalogue", "repair_g2_batch"},
@@ -1891,6 +2011,7 @@ def _load_g2_batch_inputs(context, target, source, evidence_root, scratch, bindi
         G2_INSTRUCTIONS_BINDING_VERSION: {"align_g2_instructions", "repair_g2_migration"},
         G2_AUDIO_BINDING_VERSION: {"enable_g2_audio_privacy", "repair_g2_audio_privacy"},
         G2_PATIENT_BINDING_VERSION: {"enable_g2_patient_binding", "repair_g2_patient_binding"},
+        G2_ATOMICITY_BINDING_VERSION: {"enable_g2_consultation_atomicity", "repair_g2_consultation_atomicity"},
     }
     _need(binding["operation_kind"] in version_kinds.get(binding["schema_version"], set()),
           "bounded_g2_batch_binding_version")
@@ -1923,6 +2044,8 @@ def _load_g2_batch_inputs(context, target, source, evidence_root, scratch, bindi
           "bounded_g2_audio_scope_binding_mismatch")
     _need((scope.get("schema_version") == G2_PATIENT_SCOPE_VERSION) == patient,
           "bounded_g2_patient_scope_binding_mismatch")
+    _need((scope.get("schema_version") == G2_ATOMICITY_SCOPE_VERSION) == atomicity,
+          "bounded_g2_atomicity_scope_binding_mismatch")
     _validate_g2_batch_scope(scope)
     frozen = {**FROZEN_PINS, COST: COST_PIN, SCOPE_PATH: G1B_BASELINE_PINS[SCOPE_PATH],
               G1C_SCOPE: G1C_BASELINE_PINS[G1C_SCOPE], G1D_SCOPE: G1D_BASELINE_PINS[G1D_SCOPE],
@@ -1998,7 +2121,7 @@ def _load_g2_batch_inputs(context, target, source, evidence_root, scratch, bindi
                 prior_policy[path] = raw
         _validate_g2_audio_trusted_git_publication(target, base)
         _validate_g2_audio_instructions_publication(target, base)
-    if patient:
+    if patient or atomicity:
         _batch_publication(target, G2_PATIENT_PREDECESSOR, base)
         prior_policy = {}
         for path, digest in {**G2_PATIENT_PREDECESSOR_POLICY,
@@ -2008,13 +2131,24 @@ def _load_g2_batch_inputs(context, target, source, evidence_root, scratch, bindi
             if path in G2_PATIENT_PREDECESSOR_POLICY:
                 prior_policy[path] = raw
         _validate_g2_patient_audio_publication(target, base)
+    if atomicity:
+        _batch_publication(target, G2_ATOMICITY_PREDECESSOR, base)
+        prior_policy = {}
+        for path, digest in {**G2_ATOMICITY_PREDECESSOR_POLICY,
+                             **G2_ATOMICITY_PREDECESSOR["source_sha256"]}.items():
+            raw = trusted_git.run_git_bytes(target, "cat-file", "blob", G2_ATOMICITY_PREDECESSOR["commit"] + ":" + path)
+            _need(_sha(raw) == digest, "bounded_g2_atomicity_predecessor_bytes_changed")
+            if path in G2_ATOMICITY_PREDECESSOR_POLICY:
+                prior_policy[path] = raw
+        _validate_g2_atomicity_patient_publication(target, base)
     base_payloads = {}
     for path in sorted(input_paths):
         if path in changes and changes[path]["before_sha256"] is None:
             # Only the fixed new test reaches this branch. Empty bytes are a
             # present blob; absence requires a successful literal-path query.
             _need(trusted_git.run_git_bytes(target, "ls-tree", "-z", base, "--", path) == b"",
-                  "bounded_g2_patient_addition_already_exists" if patient
+                  "bounded_g2_atomicity_addition_already_exists" if atomicity
+                  else "bounded_g2_patient_addition_already_exists" if patient
                   else "bounded_g2_audio_addition_already_exists" if audio
                   else "bounded_g2_migration_addition_already_exists")
             base_payloads[path] = None
@@ -2031,7 +2165,8 @@ def _load_g2_batch_inputs(context, target, source, evidence_root, scratch, bindi
     _validate_installed_controller(controller)
     _batch_publication(target, controller, base)
     if maintenance:
-        expected_controller = (G2_PATIENT_PREDECESSOR if patient else G2_AUDIO_PREDECESSOR if audio
+        expected_controller = (G2_ATOMICITY_PREDECESSOR if atomicity
+                               else G2_PATIENT_PREDECESSOR if patient else G2_AUDIO_PREDECESSOR if audio
                                else G2_INSTRUCTIONS_PREDECESSOR if instructions
                                else G2_MIGRATION_PREDECESSOR if migration else G2_CATALOGUE_PREDECESSOR if catalogue
                                else G2_INITIAL_CONTROLLER)
@@ -2040,7 +2175,8 @@ def _load_g2_batch_inputs(context, target, source, evidence_root, scratch, bindi
         _need(controller == expected_controller and binding["activation_commit"] == expected_activation,
               "bounded_g2_batch_maintenance_predecessor")
         _need(scope["transition_base_commit"] == base, "bounded_g2_batch_maintenance_base")
-        prior_pins = ({**G2_PATIENT_PREDECESSOR_POLICY, AGENTS: G2_AUDIO_INSTRUCTIONS_SHA256} if patient
+        prior_pins = ({**G2_ATOMICITY_PREDECESSOR_POLICY, AGENTS: G2_AUDIO_INSTRUCTIONS_SHA256} if atomicity
+                      else {**G2_PATIENT_PREDECESSOR_POLICY, AGENTS: G2_AUDIO_INSTRUCTIONS_SHA256} if patient
                       else {**G2_AUDIO_PREDECESSOR_POLICY, AGENTS: G2_AUDIO_INSTRUCTIONS_SHA256} if audio
                       else {**G2_INSTRUCTIONS_PREDECESSOR_POLICY, AGENTS: G2_INSTRUCTIONS_SHA256} if instructions
                       else G2_MIGRATION_PREDECESSOR_POLICY if migration else G2_CATALOGUE_PREDECESSOR_POLICY if catalogue
@@ -2095,7 +2231,8 @@ def _load_g2_batch_inputs(context, target, source, evidence_root, scratch, bindi
 
 def _validate_g2_batch_loaded_policy(inputs):
     scope = _json(inputs.payloads[G2_SCOPE])
-    builder = (build_g2_patient_transition if scope.get("schema_version") == G2_PATIENT_SCOPE_VERSION
+    builder = (build_g2_atomicity_transition if scope.get("schema_version") == G2_ATOMICITY_SCOPE_VERSION
+               else build_g2_patient_transition if scope.get("schema_version") == G2_PATIENT_SCOPE_VERSION
                else build_g2_audio_transition if scope.get("schema_version") == G2_AUDIO_SCOPE_VERSION
                else build_g2_instructions_transition if scope.get("schema_version") == G2_INSTRUCTIONS_SCOPE_VERSION
                else build_g2_migration_transition if scope.get("schema_version") == G2_MIGRATION_SCOPE_VERSION
