@@ -163,7 +163,7 @@ class ConsultationPatientBindingTests(unittest.TestCase):
 
         def save(*args):
             saved.append(args)
-            return SimpleNamespace(id="authored-encounter")
+            return uuid.UUID("00000000-0000-4000-8000-000000000101")
 
         database = PatientDatabase(patients)
         handler = route("finalize_consultation", dict(
@@ -179,6 +179,10 @@ class ConsultationPatientBindingTests(unittest.TestCase):
         result, saved, db = self.finalize_route(payload, [other, selected])
         self.assertEqual(result.status_code, 200)
         self.assertTrue(result.content["_saved"])
+        self.assertEqual(
+            result.content["encounter_id"],
+            "00000000-0000-4000-8000-000000000101",
+        )
         self.assertEqual(len(saved), 1)
         self.assertIs(saved[0][0], db)
         self.assertIs(saved[0][1], selected)

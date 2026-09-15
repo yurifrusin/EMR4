@@ -115,8 +115,8 @@ def _save_encounter(db: Session, patient: Patient, document_id: str, text: str,
         status=EncounterStatus.Finalized,
     )
     db.add(encounter)
-    db.commit()
-    db.refresh(encounter)
+    db.flush()
+    encounter_id = encounter.id
 
     for item in mbs_items:
         item_num = item.get("item_number") or item.get("item")
@@ -124,7 +124,7 @@ def _save_encounter(db: Session, patient: Patient, document_id: str, text: str,
             db.add(MbsClaim(
                 practice_id=patient.practice_id,
                 patient_id=patient.id,
-                encounter_id=encounter.id,
+                encounter_id=encounter_id,
                 item_number=str(item_num),
                 description=item.get("description", ""),
                 claim_status=ClaimStatus.Submitted,
@@ -136,7 +136,7 @@ def _save_encounter(db: Session, patient: Patient, document_id: str, text: str,
             db.add(ClinicalDiagnosis(
                 practice_id=patient.practice_id,
                 patient_id=patient.id,
-                encounter_id=encounter.id,
+                encounter_id=encounter_id,
                 term=term,
                 snomed_ct_au_code=str(diag.get("snomed_ct_au_code") or diag.get("concept_id") or ""),
             ))
@@ -147,14 +147,14 @@ def _save_encounter(db: Session, patient: Patient, document_id: str, text: str,
             db.add(Prescription(
                 practice_id=patient.practice_id,
                 patient_id=patient.id,
-                encounter_id=encounter.id,
+                encounter_id=encounter_id,
                 drug_name=drug_name,
                 dosage_text=med.get("dosage_text") or med.get("dosage") or "",
                 is_active=True,
             ))
 
     db.commit()
-    return encounter
+    return encounter_id
 
 
 # --- Endpoints ---
@@ -312,7 +312,7 @@ async def finalize_consultation(
             return JSONResponse(status_code=404, content={"_saved": False, "_save_error": "Patient not found."})
 
         consult_type = payload.clinician_overrides.consultation_type or "Standard Consultation"
-        encounter = _save_encounter(
+        encounter_id = _save_encounter(
             db, patient, payload.document_id, payload.text_delta, consult_type,
             payload.clinician_overrides.mbs_items,
             payload.clinician_overrides.diagnoses,
@@ -336,7 +336,7 @@ async def finalize_consultation(
 
         return JSONResponse(content={
             "_saved": True,
-            "encounter_id": str(encounter.id),
+            "encounter_id": str(encounter_id),
             "generated_clinical_note": "\n".join(lines),
         })
     except Exception as e:

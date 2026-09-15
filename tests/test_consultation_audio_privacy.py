@@ -10,6 +10,7 @@ from pathlib import Path
 import shutil
 import subprocess
 from types import SimpleNamespace
+import uuid
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -121,7 +122,8 @@ def test_legacy_finalize_audio_url_is_accepted_but_never_read_or_deleted():
     query = SimpleNamespace(filter=lambda *args: SimpleNamespace(first=lambda: patient))
     namespace = dict(open=fail_filesystem, os=NoFilesystem(), _safe_audio_cleanup=fail_filesystem,
                      Patient=SimpleNamespace(id="id", practice_id="practice_id"),
-                     _save_encounter=lambda *args: SimpleNamespace(id="synthetic-encounter"), JSONResponse=response)
+                     _save_encounter=lambda *args: uuid.UUID("00000000-0000-4000-8000-000000000101"),
+                     JSONResponse=response)
     result = asyncio.run(selected_function("finalize_consultation", namespace)(
         Payload(), SimpleNamespace(query=lambda model: query, rollback=fail_filesystem),
         SimpleNamespace(practice_id="synthetic-practice")))
