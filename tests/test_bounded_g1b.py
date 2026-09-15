@@ -1319,6 +1319,635 @@ class G2AtomicitySourceContractTests(unittest.TestCase):
         )
 
 
+class G2ClinicalSourceContractTests(unittest.TestCase):
+    @staticmethod
+    def prospective_sources():
+        sources = copy.deepcopy(b.G2_CLINICAL_PREDECESSOR["source_sha256"])
+        sources["orchestration_harness/bounded_g1b.py"] = "b" * 64
+        sources["orchestration_harness/raisa_policy.py"] = "c" * 64
+        sources["tests/test_bounded_g1b.py"] = "d" * 64
+        return sources
+
+    def scope(self):
+        return b.build_g2_clinical_scope(
+            "2026-09-15T06:00:00+00:00",
+            b.G2_ATOMICITY_REPAIR_PUBLICATION["commit"],
+            self.prospective_sources(),
+        )
+
+    def test_v8_scope_binds_owner_contract_and_published_atomicity_without_runtime(self):
+        scope = self.scope()
+        self.assertEqual(scope["schema_version"], b.G2_CLINICAL_SCOPE_VERSION)
+        self.assertEqual(
+            scope["transition_base_commit"],
+            b.G2_ATOMICITY_REPAIR_PUBLICATION["commit"],
+        )
+        self.assertEqual(scope["allowed_paths"], sorted(b.G2_CLINICAL_PATHS))
+        self.assertEqual(scope["allowed_additions"], [])
+        self.assertEqual(scope["maximum_changed_files"], 6)
+        self.assertEqual(
+            scope["prior_atomicity_activation"],
+            {
+                "commit": b.G2_CLINICAL_PREDECESSOR["commit"],
+                "scope_sha256": b.G2_CLINICAL_PREDECESSOR_POLICY[b.G2_SCOPE],
+            },
+        )
+        self.assertEqual(
+            scope["published_atomicity_repair"],
+            {
+                **b.G2_ATOMICITY_REPAIR_PUBLICATION,
+                "source_sha256": b.G2_ATOMICITY_REPAIR_SOURCE_SHA256,
+            },
+        )
+        self.assertEqual(
+            scope["clinical_authority_contract"],
+            rp.g2_clinical_authority_contract(),
+        )
+        self.assertEqual(scope["claim_limits"], list(b.G2_CLINICAL_LIMITS))
+        self.assertFalse(scope["execution_authorized"])
+        self.assertFalse(scope["feature_work_eligible"])
+        self.assertFalse(scope["g2_complete"])
+        b._validate_g2_batch_scope(scope)
+        stale_contract = copy.deepcopy(scope["clinical_authority_contract"])
+        stale_contract["source_revision"] = 2
+        with patch.object(
+            rp, "g2_clinical_authority_contract", return_value=stale_contract
+        ), self.assertRaises(b.BoundedG1BError) as caught:
+            self.scope()
+        self.assertEqual(
+            caught.exception.reason_code,
+            "bounded_g2_clinical_source_revision",
+        )
+        for mutate in (
+            lambda s: s["allowed_paths"].append("app/not-reviewed.py"),
+            lambda s: s["allowed_additions"].append("tests/not-reviewed.py"),
+            lambda s: s.update(maximum_changed_files=7),
+            lambda s: s["prior_atomicity_activation"].update(commit="0" * 40),
+            lambda s: s["published_atomicity_repair"].update(commit="0" * 40),
+            lambda s: s["clinical_authority_contract"].update(
+                roles=["GP", "NURSE"]
+            ),
+            lambda s: s["clinical_authority_contract"].update(source_revision=2),
+            lambda s: s["clinical_authority_contract"]["typed_finalization_request"]["document_id"].update(
+                distinct_from_word_document_identity=False
+            ),
+            lambda s: s["clinical_authority_contract"]["typed_finalization_request"]["document_context"].update(
+                url_max_length=2049
+            ),
+            lambda s: s["clinical_authority_contract"]["typed_finalization_request"]["document_context"].update(
+                strip_or_normalize_url=True
+            ),
+            lambda s: s["clinical_authority_contract"]["typed_finalization_request"]["declared_aliases"].update(
+                both_present="prefer_canonical"
+            ),
+            lambda s: s["clinical_authority_contract"]["attestation_transport"].update(
+                type="coerced_boolean"
+            ),
+            lambda s: s["clinical_authority_contract"]["authority_transaction"].update(
+                postgresql_isolation_level="SERIALIZABLE"
+            ),
+            lambda s: s["clinical_authority_contract"]["authority_transaction"]["integrity_conflict_handling"].update(
+                automatic_retry=True
+            ),
+            lambda s: s["clinical_authority_contract"]["practitioner_attribution"].update(
+                **{"MbsClaim.practitioner_id": "client_practitioner_id"}
+            ),
+            lambda s: s["clinical_authority_contract"]["attestation_audit"]["metadata_keys"].remove(
+                "reviewed_content_sha256"
+            ),
+            lambda s: s["clinical_authority_contract"]["idempotency_receipt"]["storage"].update(
+                existing_database_unique_constraint=False
+            ),
+            lambda s: s["clinical_authority_contract"]["idempotency_receipt"]["event_id"].update(
+                canonical_name="{canonical_practice_uuid}:{canonical_document_id_uuid}"
+            ),
+            lambda s: s["clinical_authority_contract"]["idempotency_receipt"]["receipt_fields"]["metadata"].update(
+                attested=1
+            ),
+            lambda s: s["clinical_authority_contract"]["idempotency_receipt"]["target_validation"].update(
+                status="draft"
+            ),
+            lambda s: s["clinical_authority_contract"]["idempotency_receipt"]["matching_content_replay"].update(
+                additional_audit_writes=True
+            ),
+            lambda s: s["clinical_authority_contract"]["idempotency_receipt"]["mismatch_or_corruption"].update(
+                status=200
+            ),
+            lambda s: s["clinical_authority_contract"]["idempotency_receipt"]["retention_and_schema"].update(
+                bounded_finalization_path_never_updates_or_deletes_receipt=False
+            ),
+            lambda s: s["clinical_authority_contract"]["idempotency_receipt"]["retention_and_schema"].update(
+                database_immutability_enforced=True
+            ),
+            lambda s: s["clinical_authority_contract"]["idempotency_receipt"]["retention_and_schema"].update(
+                database_retention_enforced=True
+            ),
+            lambda s: s["clinical_authority_contract"]["idempotency_receipt"]["retention_and_schema"].update(
+                receipt_retention_required_for_replay=False
+            ),
+            lambda s: s["clinical_authority_contract"]["idempotency_receipt"]["retention_and_schema"].update(
+                receipt_loss_or_undetectable_mutation_outside_accepted_guarantee=False
+            ),
+            lambda s: s["clinical_authority_contract"]["idempotency_receipt"]["retention_and_schema"].update(
+                detectable_receipt_or_target_corruption="accept"
+            ),
+            lambda s: s["clinical_authority_contract"]["idempotency_receipt"]["retention_and_schema"].update(
+                known_receipt_loss_or_mutation="retry_automatically"
+            ),
+            lambda s: s["clinical_authority_contract"]["idempotency_receipt"]["retention_and_schema"].update(
+                production_durable_idempotency_accepted=True
+            ),
+            lambda s: s["clinical_authority_contract"]["canonical_saved_projection"]["same_projection_for"].remove(
+                "matching_replay_response"
+            ),
+            lambda s: s["clinical_authority_contract"]["canonical_saved_projection"]["successful_response"].update(
+                matching_replay_is_exactly_equal=False
+            ),
+            lambda s: s["clinical_authority_contract"]["taskpane_confirmation"]["per_start_binding"]["boundary_markers"].update(
+                uuid_bound_end_marker=False
+            ),
+            lambda s: s["clinical_authority_contract"]["taskpane_confirmation"]["per_start_binding"]["boundary_markers"].update(
+                date_or_age_prose_is_never_a_boundary=False
+            ),
+            lambda s: s["clinical_authority_contract"]["taskpane_confirmation"]["per_start_binding"]["boundary_markers"].update(
+                fail_closed_if_end_missing_duplicate_invalid_or_crosses_section=False
+            ),
+            lambda s: s["clinical_authority_contract"]["taskpane_confirmation"]["command_centre_interlock"].update(
+                taskpane_finalization_blocked_while_command_centre_open=False
+            ),
+            lambda s: s["clinical_authority_contract"]["taskpane_confirmation"]["confirmed_response"].update(
+                empty_or_arbitrary_string="accept"
+            ),
+            lambda s: s["clinical_authority_contract"]["taskpane_confirmation"]["patient_document_url_getter"].update(
+                fallback_or_synthetic_url=True
+            ),
+            lambda s: s["clinical_authority_contract"]["taskpane_confirmation"]["ambiguous_retry"].update(
+                fresh_confirmation_required=False
+            ),
+            lambda s: s["clinical_authority_contract"]["synthetic_staff_practitioners_and_patients_standing_authority"]["permitted_entities"].remove(
+                "fictional_practitioners"
+            ),
+            lambda s: s.update(execution_authorized=True),
+            lambda s: s["claim_limits"].pop(),
+        ):
+            changed = copy.deepcopy(scope)
+            mutate(changed)
+            with self.subTest(changed=changed), self.assertRaises(
+                b.BoundedG1BError
+            ) as caught:
+                b._validate_g2_batch_scope(changed)
+            self.assertEqual(
+                caught.exception.reason_code,
+                "bounded_g2_batch_scope_invalid",
+            )
+
+    def test_activation_and_repair_each_own_exactly_six_existing_paths(self):
+        row = {"before_sha256": "1" * 64, "after_sha256": "2" * 64}
+        activation = {
+            "schema_version": b.G2_CLINICAL_BINDING_VERSION,
+            "operation_kind": "enable_g2_clinical_authority",
+            "repair_sha256": {
+                p: copy.deepcopy(row)
+                for p in b.G2_CLINICAL_MAINTENANCE_PATHS
+            },
+        }
+        self.assertEqual(
+            set(b._batch_changes(activation)),
+            b.G2_CLINICAL_MAINTENANCE_PATHS,
+        )
+        self.assertEqual(len(b.G2_CLINICAL_MAINTENANCE_PATHS), 6)
+
+        repair = {
+            "schema_version": b.G2_CLINICAL_BINDING_VERSION,
+            "operation_kind": "repair_g2_clinical_authority",
+            "repair_sha256": {
+                p: copy.deepcopy(row) for p in b.G2_CLINICAL_PATHS
+            },
+        }
+        self.assertEqual(set(b._batch_changes(repair)), b.G2_CLINICAL_PATHS)
+        self.assertEqual(len(b.G2_CLINICAL_PATHS), 6)
+        self.assertEqual(
+            b.operation_paths("repair_g2_clinical_authority", repair),
+            b.G2_CLINICAL_PATHS,
+        )
+        self.assertEqual(
+            b.operation_effects("repair_g2_clinical_authority"),
+            b.G2_BATCH_EFFECTS,
+        )
+        self.assertEqual(
+            b._operation("repair_g2_clinical_authority", repair)["limits"],
+            b.G2_CLINICAL_LIMITS,
+        )
+        for path in b.G2_CLINICAL_PATHS:
+            invalid = copy.deepcopy(repair)
+            invalid["repair_sha256"][path]["before_sha256"] = None
+            with self.subTest(path=path), self.assertRaises(
+                b.BoundedG1BError
+            ) as caught:
+                b._batch_changes(invalid)
+            self.assertEqual(
+                caught.exception.reason_code,
+                "bounded_g2_batch_change_digest",
+            )
+
+    def test_v1_through_v8_dispatch_remains_compatible(self):
+        row = {"before_sha256": "3" * 64, "after_sha256": "4" * 64}
+        cases = (
+            (b.G2_BATCH_BINDING_VERSION, "enable_g2_batches",
+             b.G2_BATCH_MAINTENANCE_PATHS, b.EFFECTS),
+            (b.G2_BATCH_BINDING_VERSION, "repair_g2_batch",
+             {b.G2_FIXTURE}, b.G2_BATCH_EFFECTS),
+            (b.G2_CATALOGUE_BINDING_VERSION, "extend_g2_catalogue",
+             b.G2_BATCH_MAINTENANCE_PATHS, b.EFFECTS),
+            (b.G2_CATALOGUE_BINDING_VERSION, "repair_g2_batch",
+             {"app/services/ai/service.py"}, b.G2_BATCH_EFFECTS),
+            (b.G2_MIGRATION_BINDING_VERSION, "enable_g2_migration",
+             b.G2_BATCH_MAINTENANCE_PATHS, b.EFFECTS),
+            (b.G2_MIGRATION_BINDING_VERSION, "repair_g2_migration",
+             {"alembic/versions/d4787e8e3629_phase_0_baseline.py"},
+             b.G2_MIGRATION_EFFECTS),
+            (b.G2_INSTRUCTIONS_BINDING_VERSION, "align_g2_instructions",
+             b.G2_INSTRUCTIONS_MAINTENANCE_PATHS, b.EFFECTS),
+            (b.G2_INSTRUCTIONS_BINDING_VERSION, "repair_g2_migration",
+             {"alembic/versions/d4787e8e3629_phase_0_baseline.py"},
+             b.G2_MIGRATION_EFFECTS),
+            (b.G2_AUDIO_BINDING_VERSION, "enable_g2_audio_privacy",
+             b.G2_AUDIO_MAINTENANCE_PATHS, b.EFFECTS),
+            (b.G2_AUDIO_BINDING_VERSION, "repair_g2_audio_privacy",
+             {"app/main.py"}, b.G2_AUDIO_EFFECTS),
+            (b.G2_PATIENT_BINDING_VERSION, "enable_g2_patient_binding",
+             b.G2_PATIENT_MAINTENANCE_PATHS, b.EFFECTS),
+            (b.G2_PATIENT_BINDING_VERSION, "repair_g2_patient_binding",
+             {"app/routers/consultation.py"}, b.G2_PATIENT_EFFECTS),
+            (b.G2_ATOMICITY_BINDING_VERSION,
+             "enable_g2_consultation_atomicity",
+             b.G2_ATOMICITY_MAINTENANCE_PATHS, b.EFFECTS),
+            (b.G2_ATOMICITY_BINDING_VERSION,
+             "repair_g2_consultation_atomicity",
+             {"app/routers/consultation.py"}, b.G2_ATOMICITY_EFFECTS),
+            (b.G2_CLINICAL_BINDING_VERSION,
+             "enable_g2_clinical_authority",
+             b.G2_CLINICAL_MAINTENANCE_PATHS, b.EFFECTS),
+            (b.G2_CLINICAL_BINDING_VERSION,
+             "repair_g2_clinical_authority",
+             b.G2_CLINICAL_PATHS, b.G2_BATCH_EFFECTS),
+        )
+        for version, kind, paths, effects in cases:
+            binding = {
+                "schema_version": version,
+                "operation_kind": kind,
+                "repair_sha256": {
+                    p: copy.deepcopy(row) for p in paths
+                },
+            }
+            with self.subTest(version=version, kind=kind):
+                self.assertEqual(set(b._batch_changes(binding)), set(paths))
+                self.assertEqual(set(b.operation_paths(kind, binding)), set(paths))
+                self.assertEqual(b.operation_effects(kind), effects)
+
+    def test_v7_cannot_be_relabelled_as_clinical_authority(self):
+        for operation in (
+            "enable_g2_clinical_authority",
+            "repair_g2_clinical_authority",
+        ):
+            binding = {
+                "schema_version": b.G2_ATOMICITY_BINDING_VERSION,
+                "operation_kind": operation,
+                "repair_sha256": {
+                    "orchestration_harness/bounded_g1b.py": {
+                        "before_sha256": "5" * 64,
+                        "after_sha256": "6" * 64,
+                    },
+                },
+            }
+            with self.subTest(operation=operation), self.assertRaises(
+                b.BoundedG1BError
+            ) as caught:
+                b._batch_changes(binding)
+            self.assertEqual(
+                caught.exception.reason_code,
+                "bounded_g2_batch_binding_version",
+            )
+
+    def test_owner_contract_and_atomicity_publication_are_exact(self):
+        profile = rp.g2_clinical_authority_profile()
+        contract = rp.g2_clinical_authority_contract()
+        self.assertEqual(b.G2_CLINICAL_SOURCE_REVISION, 4)
+        self.assertEqual(contract["semantic_version"], "v8")
+        self.assertEqual(contract["source_revision"], 4)
+        self.assertEqual(contract["roles"], ["GP"])
+        for key in (
+            "active_authenticated_user_required",
+            "active_linked_same_practice_practitioner_required",
+            "explicit_clinician_attestation_required",
+            "server_owned_practitioner_and_prescriber_identity",
+            "no_administrative_or_nurse_bypass",
+            "fresh_command_transaction_authority_recheck_required",
+            "clinical_rows_and_typed_attestation_audit_one_commit",
+        ):
+            self.assertIs(contract[key], True)
+        for key in (
+            "raw_clinical_text_in_audit_metadata",
+            "admission_grants_runtime_authority",
+            "real_clinical_operation_authorized",
+            "g2_completion_claimed",
+        ):
+            self.assertIs(contract[key], False)
+        self.assertEqual(contract["typed_finalization_request"], {
+            "nested_dto_extra_fields": "forbid",
+            "strings": "strict_nonblank_required_without_coercion",
+            "declared_aliases": {
+                "both_present": "require_exact_equal_values",
+                "conflict": "reject_422",
+                "implicit_or_undeclared_aliases": False,
+            },
+            "document_id": {
+                "type": "canonical_uuid_string", "required": True,
+                "client_generated_per_start": True,
+                "distinct_from_word_document_identity": True,
+                "word_identity_confers_command_authority": False,
+            },
+            "document_context": {
+                "required": True, "extra_fields": "forbid",
+                "url": "strict_nonblank_string", "url_scheme": "http_or_https",
+                "url_max_length": 2048, "strip_or_normalize_url": False,
+                "must_exactly_match_freshly_locked_Patient.document_url": True,
+            },
+            "maximum_lengths": {
+                "clinical_text": 100000, "consultation_type": 255,
+                "mbs_item_number": 10, "mbs_description": 2048,
+                "diagnosis_term": 255, "diagnosis_code": 50,
+                "medication_drug": 255, "medication_dose": 2048,
+            },
+            "maximum_items_per_nested_list": 100,
+        })
+        self.assertEqual(contract["attestation_transport"], {
+            "field": "clinician_attested", "required": True,
+            "type": "strict_json_boolean", "only_literal_true_authorizes": True,
+            "missing_or_non_boolean": "reject_422", "false": "reject_403_before_clinical_writes",
+            "client_role_or_practitioner_fields_confer_authority": False,
+        })
+        self.assertEqual(contract["authority_transaction"], {
+            "fresh_command_owned_session": True,
+            "postgresql_isolation_level": "READ COMMITTED",
+            "transaction_local_practice_context": True,
+            "lock_and_recheck_order": ["User", "Practitioner", "Patient"],
+            "locks_held_through_receipt_clinical_and_audit_commit": True,
+            "authorization_and_document_binding_before_writes": True,
+            "preallocate_Encounter_uuid_before_receipt": True,
+            "flush_unique_receipt_before_clinical_rows": True,
+            "receipt_and_clinical_rows_one_transaction": True,
+            "provider_or_await_work_inside_transaction": False,
+            "integrity_conflict_handling": {
+                "rollback_before_classification": True,
+                "fresh_scope_recheck_after_rollback": True,
+                "automatic_retry": False,
+            },
+        })
+        self.assertEqual(contract["practitioner_attribution"], {
+            "source": "fresh_active_same_practice_User.practitioner_id",
+            "Encounter.practitioner_id": "server_resolved_Practitioner.id",
+            "Prescription.prescribed_by": "server_resolved_Practitioner.id",
+            "MbsClaim.practitioner_id": "server_resolved_Practitioner.id",
+            "MbsClaim.Submitted": "internal_synthetic_database_state_only",
+            "real_billing_submission_policy_accepted": False,
+        })
+        self.assertEqual(contract["attestation_audit"], {
+            "event_type": "clinical.consultation.attested", "decision": "recorded",
+            "source_surface": "api", "capability": None, "method": None,
+            "ai_invocation_claimed": False,
+            "typed_fields": ["event_id", "correlation_id", "actor_user_id", "actor_roles",
+                             "practice_id", "event_timestamp", "event_type", "decision",
+                             "source_surface", "capability", "method",
+                             "target_resource_type", "target_resource_id"],
+            "target_resource_type": "encounter",
+            "metadata_keys": ["attested", "normalization_policy_id", "patient_id",
+                              "practitioner_id", "reviewed_content_sha256", "server_policy_id"],
+            "metadata_type_equality": "strict_including_attested_is_True_not_1_equals_True",
+            "server_policy_id": "emr4.clinical-finalization.gp-linked-practitioner.v1",
+            "normalization_policy_id": "emr4.clinical-finalization.saved-projection.v1",
+            "content_hash": "server_sha256_sorted_compact_utf8_json_effective_saved_projection",
+            "client_hash_accepted": False,
+            "raw_clinical_text_or_document_url_metadata": False,
+            "audit_failure_rolls_back_all_clinical_rows": True,
+        })
+        receipt = contract["idempotency_receipt"]
+        self.assertEqual(receipt["storage"], {
+            "model": "AccessAiAuditLog", "unique_column": "event_id",
+            "existing_database_unique_constraint": True,
+        })
+        self.assertEqual(receipt["event_id"], {
+            "algorithm": "server_uuidv5",
+            "namespace_uuid": "7b56fb23-fdc5-5bd9-951f-80a7b9b94b2e",
+            "name_prefix": "emr4.clinical-finalization.receipt.v1",
+            "canonical_name": "{name_prefix}:{canonical_practice_uuid}:{canonical_document_id_uuid}",
+            "client_event_id_accepted": False,
+        })
+        self.assertEqual(receipt["command_document_id"],
+                         "canonical_uuid_distinct_from_word_identity")
+        self.assertEqual(receipt["typed_field_requirements"], {
+            "event_id": "UUID", "correlation_id": "UUID",
+            "event_timestamp": "timezone_aware_datetime",
+            "capability": None, "method": None,
+        })
+        self.assertEqual(receipt["receipt_fields"], {
+            "event_id": "server_uuidv5_receipt_event_id",
+            "correlation_id": "canonical_document_id_uuid",
+            "actor_user_id": "fresh_authenticated_User.id",
+            "actor_roles": ["GP"],
+            "practice_id": "fresh_transaction_practice_id",
+            "event_timestamp": "timezone_aware_server_timestamp",
+            "event_type": "clinical.consultation.attested",
+            "decision": "recorded", "source_surface": "api",
+            "capability": None, "method": None,
+            "target_resource_type": "encounter",
+            "target_resource_id": "preallocated_Encounter.id",
+            "metadata": {
+                "attested": True,
+                "normalization_policy_id": "emr4.clinical-finalization.saved-projection.v1",
+                "patient_id": "freshly_locked_Patient.id",
+                "practitioner_id": "freshly_locked_Practitioner.id",
+                "reviewed_content_sha256": "server_computed_canonical_projection_hash",
+                "server_policy_id": "emr4.clinical-finalization.gp-linked-practitioner.v1",
+            },
+        })
+        self.assertEqual(receipt["target_validation"], {
+            "resource_must_be_finalized_Encounter": True,
+            "matched_core_fields": ["id", "practice_id", "patient_id",
+                                    "practitioner_id", "status"],
+            "status": "finalized",
+            "command_id_must_match_correlation_id": True,
+            "actor_practice_patient_practitioner_and_hash_must_match": True,
+            "metadata_values_and_types_must_match": True,
+        })
+        self.assertEqual(receipt["matching_content_replay"], {
+            "same_response_projection": True,
+            "additional_clinical_writes": False,
+            "additional_audit_writes": False,
+        })
+        self.assertEqual(receipt["mismatch_or_corruption"], {
+            "status": 409, "generic_indistinguishable_response": True,
+        })
+        self.assertEqual(receipt["retention_and_schema"], {
+            "bounded_finalization_path_never_updates_or_deletes_receipt": True,
+            "database_immutability_enforced": False,
+            "database_retention_enforced": False,
+            "receipt_retention_required_for_replay": True,
+            "receipt_loss_or_undetectable_mutation_outside_accepted_guarantee": True,
+            "detectable_receipt_or_target_corruption": "generic_409_no_writes",
+            "known_receipt_loss_or_mutation": "stop_no_retry_pending_separate_repair_and_review",
+            "schema_migration_required": False,
+            "guarantee_scope": "bounded_synthetic_retained_records_only",
+            "production_durable_idempotency_accepted": False,
+        })
+        self.assertEqual(contract["canonical_saved_projection"], {
+            "built_once_after_strict_validation": True,
+            "normalization_policy_id": "emr4.clinical-finalization.saved-projection.v1",
+            "hash_projection_fields": ["normalization_policy_id", "patient_id",
+                                       "document_id", "exact_document_context",
+                                       "effective_consultation_type", "clinical_text",
+                                       "canonical_child_dtos"],
+            "same_projection_for": ["clinical_row_values", "reviewed_content_sha256",
+                                    "successful_response", "matching_replay_response"],
+            "successful_response": {
+                "_saved": True,
+                "fields": ["encounter_id", "generated_clinical_note"],
+                "matching_replay_is_exactly_equal": True,
+            },
+            "raw_clinical_text_or_document_url_in_audit": False,
+        })
+        self.assertEqual(contract["taskpane_confirmation"], {
+            "explicit_personal_clinician_review_and_authorization": True,
+            "ai_does_not_authorize": True,
+            "invalidate_prior_binding_before_patient_await": True,
+            "per_start_binding": {
+                "new_full_canonical_document_id_uuid": True,
+                "exact_document_context_url": True,
+                "boundary_markers": {
+                    "uuid_bound_start_marker": True,
+                    "uuid_bound_end_marker": True,
+                    "same_document_id_uuid_required": True,
+                    "insert_both_for_each_new_consult": True,
+                    "paragraph_selection": "all_and_only_strictly_between_exact_markers",
+                    "date_or_age_prose_is_never_a_boundary": True,
+                    "fail_closed_if_end_missing_duplicate_invalid_or_crosses_section": True,
+                    "legacy_regex_fallback_for_new_consults": False,
+                },
+            },
+            "command_centre_interlock": {
+                "opening_blocked_while": ["consultation_start",
+                                          "consultation_finalization",
+                                          "ambiguous_submitted_snapshot"],
+                "taskpane_finalization_blocked_while_command_centre_open": True,
+            },
+            "confirmed_response": {
+                "encounter_id": "canonical_uuid_string",
+                "empty_or_arbitrary_string": "reject",
+            },
+            "patient_document_url_getter": {
+                "real_getter_required": True,
+                "fallback_or_synthetic_url": False,
+                "failure": "cancel_without_request",
+            },
+            "one_shot_confirmation_of_exact_request_snapshot": True,
+            "second_word_and_form_read_after_confirmation": True,
+            "second_read_mismatch": "cancel_without_request",
+            "per_binding_in_flight_guard": True,
+            "reusable_attestation_state": False,
+            "patient_or_reviewed_content_change_requires_fresh_confirmation": True,
+            "patient_or_session_change_during_word_read_cancels_request": True,
+            "cancel_or_unavailable_confirmation_sends_nothing": True,
+            "ambiguous_retry": {
+                "same_exact_command_snapshot_required": True,
+                "fresh_confirmation_required": True,
+                "silent_or_automatic_retry": False,
+            },
+        })
+        fixtures = contract["synthetic_staff_practitioners_and_patients_standing_authority"]
+        self.assertIs(fixtures["persistent"], True)
+        self.assertEqual(fixtures["permitted_entities"],
+                         ["fictional_staff", "fictional_practitioners", "fictional_patients"])
+        self.assertIs(fixtures["fictional_entities_only"], True)
+        self.assertIs(fixtures["ai_is_clinician_or_attester"], False)
+        self.assertIs(fixtures["real_identity_or_professional_credential_claim"], False)
+        self.assertIs(fixtures["existing_independent_review_and_finite_runtime_budgets_preserved"], True)
+        self.assertEqual(
+            profile["scope_behavior"],
+            "bounded_g2_clinical_authority_repair",
+        )
+        self.assertEqual(
+            profile["allowed_paths"], sorted(b.G2_CLINICAL_PATHS)
+        )
+        self.assertEqual(
+            contract["owner_decision"]["evidence_path"],
+            rp.G2_CLINICAL_OWNER_RECORD,
+        )
+        self.assertEqual(
+            contract["owner_decision"]["sha256"],
+            rp.G2_CLINICAL_OWNER_SHA256,
+        )
+
+        original_sha = b._sha
+        publication_raw = {
+            p: ("publication:" + p).encode()
+            for p in b.G2_ATOMICITY_REPAIR_SOURCE_SHA256
+        }
+        digest_by_raw = {
+            raw: b.G2_ATOMICITY_REPAIR_SOURCE_SHA256[path]
+            for path, raw in publication_raw.items()
+        }
+
+        def observed_text(_root, *args, **_kwargs):
+            for declared in (b.G2_ATOMICITY_REPAIR_PUBLICATION,):
+                if args == ("cat-file", "commit", declared["commit"]):
+                    return (
+                        "tree " + declared["tree"] + "\nparent "
+                        + declared["parent"] + "\n\nauthored\n"
+                    )
+                if args == (
+                    "merge-base", "--is-ancestor", declared["commit"], "f" * 40
+                ):
+                    return ""
+            raise AssertionError(args)
+
+        def observed_bytes(_root, *args, **_kwargs):
+            commit_path = args[2]
+            commit, path = commit_path.split(":", 1)
+            if commit == b.G2_ATOMICITY_REPAIR_PUBLICATION["commit"]:
+                return publication_raw[path]
+            raise AssertionError(args)
+
+        with patch.object(
+            b.trusted_git, "run_git", side_effect=observed_text
+        ), patch.object(
+            b.trusted_git, "run_git_bytes", side_effect=observed_bytes
+        ), patch.object(
+            b, "_sha",
+            side_effect=lambda raw: digest_by_raw.get(raw, original_sha(raw)),
+        ):
+            b._validate_g2_clinical_atomicity_publication(
+                Path("authored"), "f" * 40
+            )
+
+        publication_raw["app/routers/consultation.py"] = b"changed"
+        with patch.object(
+            b.trusted_git, "run_git", side_effect=observed_text
+        ), patch.object(
+            b.trusted_git, "run_git_bytes", side_effect=observed_bytes
+        ), patch.object(
+            b, "_sha",
+            side_effect=lambda raw: digest_by_raw.get(raw, original_sha(raw)),
+        ):
+            with self.assertRaises(b.BoundedG1BError) as caught:
+                b._validate_g2_clinical_atomicity_publication(
+                    Path("authored"), "f" * 40
+                )
+        self.assertEqual(
+            caught.exception.reason_code,
+            "bounded_g2_clinical_atomicity_publication_bytes_changed",
+        )
+
+
 class G2AudioFixture(G2MigrationFixture):
     """Authored v5 activation over exact v4, trusted-Git, and instruction history."""
     MAIN = "app/main.py"
@@ -1809,6 +2438,221 @@ class G2AtomicityFixture(G2PatientFixture):
         self.q.update(
             operation_kind="repair_g2_consultation_atomicity",
             operation_id="authored-g2-atomicity-repair",
+            phase="development",
+            base_commit=base,
+            base_tree=base_tree,
+            expected_head=base,
+            expected_index_tree=tree,
+            candidate_tree=tree,
+            activation_commit=self.activation,
+            installed_controller=copy.deepcopy(self.batch_controller),
+            repair_sha256=rows,
+        )
+        self.q["payload_sha256"] = {
+            p: b._sha((self.root / p).read_bytes())
+            for p in b.batch_input_paths(self.q)
+        }
+
+
+class G2ClinicalFixture(G2AtomicityFixture):
+    """Authored v8 activation over exact v7 policy and atomicity publication."""
+
+    AUDIT_EVENTS = "app/services/ai/audit_events.py"
+
+    def __init__(self, assets):
+        super().__init__(assets)
+        self.clinical_previous_policy = {
+            p: (
+                assets / "g2-clinical-predecessor-policy" / p
+            ).read_bytes()
+            for p in b.G2_CLINICAL_PREDECESSOR_POLICY
+        }
+        self.clinical_previous_source = {
+            p: (
+                assets / "g2-clinical-predecessor-source" / p
+            ).read_bytes()
+            for p in b.SOURCE_PATHS | b.CONTROLLER_PATHS
+        }
+        self.atomicity_publication_source = {
+            p: (
+                assets / "g2-clinical-atomicity-publication" / p
+            ).read_bytes()
+            for p in b.G2_ATOMICITY_REPAIR_SOURCE_SHA256
+        }
+        self.clinical_owner_record = (
+            assets / "evidence" / rp.G2_CLINICAL_OWNER_RECORD
+        ).read_bytes()
+
+        predecessor = {
+            **self.clinical_previous_policy,
+            **self.clinical_previous_source,
+        }
+        for path, raw in predecessor.items():
+            self.write(path, raw)
+        self.git("add", "--", *sorted(predecessor))
+        predecessor_tree = self.git("write-tree")
+        predecessor_base = self.git(
+            "commit-tree",
+            predecessor_tree,
+            "-p",
+            self.base,
+            "-m",
+            "authored exact v7 atomicity activation baseline",
+        )
+        self.git(
+            "update-ref", "--no-deref", "HEAD", predecessor_base, self.base
+        )
+
+        for path, raw in self.atomicity_publication_source.items():
+            self.write(path, raw)
+        self.git(
+            "add", "--", *sorted(self.atomicity_publication_source)
+        )
+        base_tree = self.git("write-tree")
+        base = self.git(
+            "commit-tree",
+            base_tree,
+            "-p",
+            predecessor_base,
+            "-m",
+            "authored exact published atomicity and owner policy baseline",
+        )
+        self.git(
+            "update-ref", "--no-deref", "HEAD", base, predecessor_base
+        )
+        self.base = base
+
+        sources = {
+            p: b._sha((self.source / p).read_bytes())
+            for p in b.CONTROLLER_PATHS
+        }
+        self.batch_scope = b.build_g2_clinical_scope(
+            "2026-09-15T06:00:00+00:00", base, sources
+        )
+        after = b.build_g2_clinical_transition(
+            {
+                p: self.clinical_previous_policy[p]
+                for p in b.G2_BATCH_CONTROL_PATHS
+            },
+            self.batch_scope,
+        )
+        after.update({
+            p: (self.source / p).read_bytes()
+            for p in b.G2_BATCH_CODE_PATHS
+        })
+        changes = {
+            p: {
+                "before_sha256": b._sha((self.root / p).read_bytes()),
+                "after_sha256": b._sha(raw),
+            }
+            for p, raw in after.items()
+        }
+        for path, raw in after.items():
+            self.write(path, raw)
+        self.git("add", "--", *sorted(after))
+        tree = self.git("write-tree")
+        self.q.update(
+            schema_version=b.G2_CLINICAL_BINDING_VERSION,
+            operation_id="authored-g2-clinical-authority-activation",
+            operation_kind="enable_g2_clinical_authority",
+            phase="development",
+            base_commit=base,
+            base_tree=base_tree,
+            expected_head=base,
+            expected_index_tree=tree,
+            candidate_tree=tree,
+            activation_commit=b.G2_CLINICAL_PREDECESSOR["commit"],
+            installed_controller=copy.deepcopy(b.G2_CLINICAL_PREDECESSOR),
+            repair_sha256=changes,
+            source_sha256={
+                p: b._sha((self.source / p).read_bytes())
+                for p in b.SOURCE_PATHS
+            },
+        )
+        self.q["payload_sha256"] = {
+            p: b._sha((self.root / p).read_bytes())
+            for p in b.batch_input_paths(self.q)
+        }
+        self.clinical_predecessor_header = (
+            "tree " + b.G2_CLINICAL_PREDECESSOR["tree"] + "\nparent "
+            + b.G2_CLINICAL_PREDECESSOR["parent"]
+            + "\n\nauthored v7 predecessor\n"
+        )
+        self.atomicity_publication_header = (
+            "tree " + b.G2_ATOMICITY_REPAIR_PUBLICATION["tree"] + "\nparent "
+            + b.G2_ATOMICITY_REPAIR_PUBLICATION["parent"]
+            + "\n\nauthored atomicity publication\n"
+        )
+
+    @contextmanager
+    def component_history(self):
+        with super().component_history():
+            run = b.trusted_git.run_git
+            run_bytes = b.trusted_git.run_git_bytes
+            predecessor = b.G2_CLINICAL_PREDECESSOR
+            publication = b.G2_ATOMICITY_REPAIR_PUBLICATION
+
+            def observed_text(root, *args, **kwargs):
+                if root == self.root and args == (
+                    "cat-file", "commit", predecessor["commit"]
+                ):
+                    return self.clinical_predecessor_header
+                if root == self.root and args == (
+                    "cat-file", "commit", publication["commit"]
+                ):
+                    return self.atomicity_publication_header
+                if root == self.root and args in (
+                    (
+                        "merge-base", "--is-ancestor",
+                        predecessor["commit"], self.q["base_commit"],
+                    ),
+                    (
+                        "merge-base", "--is-ancestor",
+                        publication["commit"], self.q["base_commit"],
+                    ),
+                ):
+                    return ""
+                return run(root, *args, **kwargs)
+
+            def observed_bytes(root, *args, **kwargs):
+                for path, raw in {
+                    **self.clinical_previous_policy,
+                    **self.clinical_previous_source,
+                }.items():
+                    if root == self.root and args == (
+                        "cat-file", "blob", predecessor["commit"] + ":" + path,
+                    ):
+                        return raw
+                for path, raw in self.atomicity_publication_source.items():
+                    if root == self.root and args == (
+                        "cat-file", "blob", publication["commit"] + ":" + path,
+                    ):
+                        return raw
+                return run_bytes(root, *args, **kwargs)
+
+            with patch.object(
+                b.trusted_git, "run_git", side_effect=observed_text
+            ), patch.object(
+                b.trusted_git, "run_git_bytes", side_effect=observed_bytes
+            ):
+                yield
+
+    def prepare_clinical(self, changes):
+        base = self.git("rev-parse", "HEAD")
+        base_tree = self.git("rev-parse", "HEAD^{tree}")
+        rows = {}
+        for path, raw in changes.items():
+            prior = self.root / path
+            rows[path] = {
+                "before_sha256": b._sha(prior.read_bytes()),
+                "after_sha256": b._sha(raw),
+            }
+            self.write(path, raw)
+        self.git("add", "--", *sorted(changes))
+        tree = self.git("write-tree")
+        self.q.update(
+            operation_kind="repair_g2_clinical_authority",
+            operation_id="authored-g2-clinical-authority-repair",
             phase="development",
             base_commit=base,
             base_tree=base_tree,
@@ -4237,10 +5081,325 @@ def build_integration_suite(assets: Path) -> unittest.TestSuite:
             )
 
 
+    class G2ClinicalAdmissionTests(unittest.TestCase):
+        def setUp(self):
+            self.fx = G2ClinicalFixture(assets)
+            self.addCleanup(self.fx.close)
+            self.stack = ExitStack()
+            self.addCleanup(self.stack.close)
+            self.stack.enter_context(no_legacy_observation())
+            self.stack.enter_context(self.fx.component_history())
+
+        @staticmethod
+        def repair_changes(f):
+            return {
+                f.CONSULTATION: b"# authored GP authority repair; never imported\n",
+                f.AUDIT_EVENTS: b"# authored attestation audit repair; never imported\n",
+                f.SIDEBAR: b"// authored explicit attestation control; never executed\n",
+                f.AUDIO_TEST: b"# authored retained audio privacy regression\n",
+                f.PATIENT_TEST: b"# authored retained patient binding regression\n",
+                f.ATOMICITY_TEST: b"# authored retained finalize atomicity regression\n",
+            }
+
+        def assert_full_admission(self, f):
+            context = f.context()
+            manifest = f.manifest(context)
+            entrypoint = {
+                "development": "task_branch_commit",
+                "pre-push": "task_branch_push",
+                "post-push": "task_branch_push",
+            }[f.q["phase"]]
+            report = pf.build_report(
+                f.root,
+                manifest,
+                bounded_context=context,
+                phase=f.q["phase"],
+                entrypoint=entrypoint,
+            )
+            self.assertEqual(report["status"], "policy_eligible", report)
+            self.assertFalse(report["execution_authorized"])
+            for decision in (
+                pa.evaluate_programme_operation_admission(
+                    repo_root=f.root,
+                    manifest=manifest,
+                    entrypoint=entrypoint,
+                    phase=f.q["phase"],
+                    bounded_context=context,
+                ),
+                pg.evaluate_pinned_programme_operation(
+                    gatekeeper_root=f.source,
+                    target_repo_root=f.root,
+                    manifest=manifest,
+                    entrypoint=entrypoint,
+                    phase=f.q["phase"],
+                    bounded_context=context,
+                ),
+            ):
+                self.assertTrue(decision.policy_admitted, decision.reason_codes)
+                self.assertFalse(decision.execution_authorized)
+                self.assertEqual(decision.candidate_tree, f.q["candidate_tree"])
+
+        def test_exact_transition_then_six_file_repair_admits_in_all_phases(self):
+            f = self.fx
+            before_state = b._json(f.clinical_previous_policy[b.STATE])
+            expected_state = copy.deepcopy(before_state)
+            scope_raw = b._canonical(f.batch_scope) + b"\n"
+            expected_state["observed_at"] = f.batch_scope["recorded_at"]
+            expected_state["g2"].update(
+                scope_sha256=b._sha(scope_raw),
+                current_operation=copy.deepcopy(
+                    f.batch_scope["current_operation"]
+                ),
+            )
+            expected_state["task_selection"]["next_eligibility_condition"] = (
+                "bounded_G2_clinical_authority_repair_active"
+            )
+            self.assertEqual(
+                b._json((f.root / b.STATE).read_bytes()), expected_state
+            )
+            before_overlay = b._document(
+                f.clinical_previous_policy[b.OVERLAY], b.OVERLAY
+            )
+            before_overlay["profiles"][b.G2_PROFILE] = (
+                rp.g2_clinical_authority_profile()
+            )
+            self.assertEqual(
+                b._document((f.root / b.OVERLAY).read_bytes(), b.OVERLAY),
+                before_overlay,
+            )
+            self.assertEqual((f.root / b.G2_SCOPE).read_bytes(), scope_raw)
+            self.assertEqual(
+                set(f.q["repair_sha256"]),
+                b.G2_CLINICAL_MAINTENANCE_PATHS,
+            )
+            self.assertEqual(len(f.q["repair_sha256"]), 6)
+            self.assertFalse(f.batch_scope["execution_authorized"])
+            self.assertFalse(f.batch_scope["g2_complete"])
+            self.assert_full_admission(f)
+
+            f.activate_batches()
+            f.prepare_clinical(self.repair_changes(f))
+            self.assertEqual(set(f.q["repair_sha256"]), b.G2_CLINICAL_PATHS)
+            self.assertTrue(all(
+                row["before_sha256"] is not None
+                for row in f.q["repair_sha256"].values()
+            ))
+            self.assert_full_admission(f)
+            f.commit_current()
+            self.assertEqual(f.q["phase"], "pre-push")
+            self.assert_full_admission(f)
+            f.q["phase"] = "post-push"
+            self.assert_full_admission(f)
+
+        def test_current_operation_supersedes_atomicity_without_opening_global_gates(self):
+            f = self.fx
+            operation = f.batch_scope["current_operation"]
+            self.assertEqual(
+                operation["operation_id"], "g2-clinical-authority-repair"
+            )
+            self.assertEqual(
+                operation["supersedes"]["operation_id"],
+                "g2-consultation-atomicity-repair",
+            )
+            self.assertEqual(f.batch_scope["global_gate"], "red_repair_only")
+            self.assertFalse(f.batch_scope["execution_authorized"])
+            self.assertFalse(f.batch_scope["feature_work_eligible"])
+            self.assertFalse(f.batch_scope["g2_complete"])
+            self.assertEqual(
+                f.batch_scope["clinical_authority_contract"],
+                rp.g2_clinical_authority_contract(),
+            )
+            self.assertTrue(f.decision().policy_admitted)
+
+        def test_stale_v7_controller_and_stale_clinical_policy_are_denied(self):
+            f = self.fx
+            self.assertTrue(f.decision().policy_admitted)
+            original = copy.deepcopy(f.q)
+            f.q["installed_controller"] = copy.deepcopy(
+                b.G2_ATOMICITY_PREDECESSOR
+            )
+            self.assertEqual(
+                f.decision().reason_codes,
+                ("bounded_g2_batch_maintenance_predecessor",),
+            )
+            f.q = original
+            state = b._json((f.root / b.STATE).read_bytes())
+            state["task_selection"]["next_eligibility_condition"] = (
+                "bounded_G2_consultation_atomicity_repair_active"
+            )
+            raw = (json.dumps(state, indent=2, ensure_ascii=False) + "\n").encode()
+            f.restage(b.STATE, raw, repair_after=True)
+            self.assertEqual(
+                f.decision().reason_codes,
+                ("bounded_g2_batch_policy_delta_invalid",),
+            )
+
+        def test_predecessor_and_atomicity_publication_are_independently_exact(self):
+            f = self.fx
+            self.assertTrue(f.decision().policy_admitted)
+            original_header = f.atomicity_publication_header
+            f.atomicity_publication_header = (
+                "tree " + "0" * 40 + "\nparent "
+                + b.G2_ATOMICITY_REPAIR_PUBLICATION["parent"]
+                + "\n\nauthored wrong tree\n"
+            )
+            self.assertEqual(
+                f.decision().reason_codes,
+                ("bounded_g2_batch_publication_invalid",),
+            )
+            f.atomicity_publication_header = original_header
+            path = "app/routers/consultation.py"
+            original_publication = f.atomicity_publication_source[path]
+            f.atomicity_publication_source[path] = b"# changed publication blob\n"
+            self.assertEqual(
+                f.decision().reason_codes,
+                ("bounded_g2_clinical_atomicity_publication_bytes_changed",),
+            )
+            f.atomicity_publication_source[path] = original_publication
+            source_path = "orchestration_harness/bounded_g1b.py"
+            original_source = f.clinical_previous_source[source_path]
+            f.clinical_previous_source[source_path] = b"# stale v7 controller bytes\n"
+            self.assertEqual(
+                f.decision().reason_codes,
+                ("bounded_g2_clinical_predecessor_bytes_changed",),
+            )
+            f.clinical_previous_source[source_path] = original_source
+
+        def test_owner_record_changed_or_missing_is_denied_as_authenticated_input(self):
+            f = self.fx
+            self.assertTrue(f.decision().policy_admitted)
+            read = b.trusted_git._read_regular_snapshot
+            owner = f.assets / "evidence" / rp.G2_CLINICAL_OWNER_RECORD
+
+            def changed(path, **kwargs):
+                snapshot = read(path, **kwargs)
+                return (snapshot[0], b"{}\n") if path == owner else snapshot
+
+            with patch.object(
+                b.trusted_git, "_read_regular_snapshot", side_effect=changed
+            ):
+                self.assertEqual(
+                    f.decision().reason_codes,
+                    ("bounded_g1b_input_digest_changed",),
+                )
+
+            def missing(path, **kwargs):
+                if path == owner:
+                    raise FileNotFoundError(path)
+                return read(path, **kwargs)
+
+            with patch.object(
+                b.trusted_git, "_read_regular_snapshot", side_effect=missing
+            ):
+                self.assertEqual(
+                    f.decision().reason_codes,
+                    ("bounded_g1b_invalid_input",),
+                )
+
+        def test_scope_drift_and_clinical_authority_expansion_are_denied(self):
+            f = self.fx
+            for mutate in (
+                lambda s: s["allowed_paths"].append("app/not-reviewed.py"),
+                lambda s: s["clinical_authority_contract"].update(
+                    roles=["GP", "NURSE"]
+                ),
+                lambda s: s["clinical_authority_contract"]["owner_decision"].update(
+                    sha256="0" * 64
+                ),
+                lambda s: s["clinical_authority_contract"]["attestation_transport"].update(only_literal_true_authorizes=False),
+                lambda s: s["clinical_authority_contract"]["idempotency_receipt"]["retention_and_schema"].update(bounded_finalization_path_never_updates_or_deletes_receipt=False),
+                lambda s: s["clinical_authority_contract"]["idempotency_receipt"]["retention_and_schema"].update(database_immutability_enforced=True),
+                lambda s: s["clinical_authority_contract"]["idempotency_receipt"]["retention_and_schema"].update(database_retention_enforced=True),
+                lambda s: s["clinical_authority_contract"]["idempotency_receipt"]["retention_and_schema"].update(receipt_retention_required_for_replay=False),
+                lambda s: s["clinical_authority_contract"]["idempotency_receipt"]["retention_and_schema"].update(receipt_loss_or_undetectable_mutation_outside_accepted_guarantee=False),
+                lambda s: s["clinical_authority_contract"]["idempotency_receipt"]["retention_and_schema"].update(detectable_receipt_or_target_corruption="accept"),
+                lambda s: s["clinical_authority_contract"]["idempotency_receipt"]["retention_and_schema"].update(known_receipt_loss_or_mutation="retry_automatically"),
+                lambda s: s["clinical_authority_contract"]["idempotency_receipt"]["retention_and_schema"].update(production_durable_idempotency_accepted=True),
+                lambda s: s["clinical_authority_contract"]["authority_transaction"].update(lock_and_recheck_order=["Patient"]),
+                lambda s: s["clinical_authority_contract"]["practitioner_attribution"].update(source="client_practitioner_id"),
+                lambda s: s["clinical_authority_contract"]["attestation_audit"].update(event_type="ai.invocation.allowed"),
+                lambda s: s["clinical_authority_contract"]["attestation_audit"]["metadata_keys"].remove("reviewed_content_sha256"),
+                lambda s: s["clinical_authority_contract"]["taskpane_confirmation"].update(patient_or_reviewed_content_change_requires_fresh_confirmation=False),
+                lambda s: s["clinical_authority_contract"]["synthetic_staff_practitioners_and_patients_standing_authority"]["permitted_entities"].remove("fictional_practitioners"),
+                lambda s: s.update(execution_authorized=True),
+            ):
+                scope = copy.deepcopy(f.batch_scope)
+                mutate(scope)
+                raw = b._canonical(scope) + b"\n"
+                try:
+                    f.restage(b.G2_SCOPE, raw, repair_after=True)
+                    self.assertEqual(
+                        f.decision().reason_codes,
+                        ("bounded_g2_batch_scope_invalid",),
+                    )
+                finally:
+                    f.restage(b.G2_SCOPE, b._canonical(f.batch_scope) + b"\n", repair_after=True)
+
+        def test_changed_path_null_preimage_and_runtime_effect_are_denied(self):
+            f = self.fx
+            f.activate_batches()
+            f.prepare_clinical(self.repair_changes(f))
+            original = copy.deepcopy(f.q)
+            row = f.q["repair_sha256"].pop(f.AUDIT_EVENTS)
+            f.q["repair_sha256"]["app/not-reviewed.py"] = row
+            self.assertEqual(
+                f.decision().reason_codes,
+                ("bounded_g2_batch_path_not_allowed",),
+            )
+            f.q = copy.deepcopy(original)
+            f.q["repair_sha256"][f.AUDIO_TEST]["before_sha256"] = None
+            self.assertEqual(
+                f.decision().reason_codes,
+                ("bounded_g2_batch_change_digest",),
+            )
+            f.q = original
+            context = f.context()
+            manifest = f.manifest(context)
+            manifest["intended_side_effect_classes"].append("provider_invocation")
+            decision = b.evaluate_bounded_g1b_operation(
+                context=context,
+                manifest=manifest,
+                entrypoint="task_branch_commit",
+                phase=f.q["phase"],
+            )
+            self.assertEqual(
+                decision.reason_codes,
+                ("bounded_g1b_manifest_binding_mismatch",),
+            )
+            self.assertFalse(decision.execution_authorized)
+
+        def test_candidate_preimage_and_unowned_input_drift_are_denied(self):
+            f = self.fx
+            f.activate_batches()
+            f.prepare_clinical(self.repair_changes(f))
+            original = copy.deepcopy(f.q)
+            f.q["repair_sha256"][f.CONSULTATION]["before_sha256"] = "0" * 64
+            self.assertEqual(
+                f.decision().reason_codes,
+                ("bounded_g2_batch_preimage_changed",),
+            )
+            f.q = copy.deepcopy(original)
+            f.q["repair_sha256"][f.CONSULTATION]["after_sha256"] = "0" * 64
+            self.assertEqual(
+                f.decision().reason_codes,
+                ("bounded_g2_batch_candidate_changed",),
+            )
+            f.q = copy.deepcopy(original)
+            state = b._json((f.root / b.STATE).read_bytes())
+            state["observed_at"] = "2026-09-15T06:00:01+00:00"
+            raw = (json.dumps(state, indent=2, ensure_ascii=False) + "\n").encode()
+            f.restage(b.STATE, raw)
+            self.assertEqual(
+                f.decision().reason_codes,
+                ("bounded_g2_batch_unowned_input_changed",),
+            )
+
+
     suite = unittest.defaultTestLoader.loadTestsFromTestCase(ClosedRequestTests)
     suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(G2AudioSourceContractTests))
     suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(G2PatientSourceContractTests))
     suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(G2AtomicitySourceContractTests))
+    suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(G2ClinicalSourceContractTests))
     suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(IntegratedTests))
     suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(SuccessorTests))
     suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(ProvenanceAdmissionTests))
@@ -4254,4 +5413,5 @@ def build_integration_suite(assets: Path) -> unittest.TestSuite:
     suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(G2AudioAdmissionTests))
     suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(G2PatientAdmissionTests))
     suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(G2AtomicityAdmissionTests))
+    suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(G2ClinicalAdmissionTests))
     return suite

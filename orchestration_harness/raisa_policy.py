@@ -1834,6 +1834,288 @@ def g2_consultation_atomicity_profile() -> dict:
     return profile
 
 
+G2_CLINICAL_AUTHORITY_PATHS = (
+    'app/routers/consultation.py',
+    'app/services/ai/audit_events.py',
+    'EMR4 Sidebar/src/taskpane/taskpane.js',
+    'tests/test_consultation_audio_privacy.py',
+    'tests/test_consultation_patient_binding.py',
+    'tests/test_consultation_finalize_atomicity.py',
+)
+G2_CLINICAL_OWNER_RECORD = 'g2-clinical-policy/owner-policy.json'
+G2_CLINICAL_OWNER_SHA256 = 'c67d52473f6255758ea444e07b8e3ccce683cc5676ecb8a220c37f98f42bbd2f'
+
+
+def g2_clinical_authority_contract() -> dict:
+    """Semantic V8 source revision 4; fictional fixtures confer no live authority."""
+    return {
+        'owner_decision': {'evidence_path': G2_CLINICAL_OWNER_RECORD,
+                           'sha256': G2_CLINICAL_OWNER_SHA256},
+        'semantic_version': 'v8',
+        'source_revision': 4,
+        'roles': ['GP'],
+        'active_authenticated_user_required': True,
+        'active_linked_same_practice_practitioner_required': True,
+        'explicit_clinician_attestation_required': True,
+        'server_owned_practitioner_and_prescriber_identity': True,
+        'no_administrative_or_nurse_bypass': True,
+        'fresh_command_transaction_authority_recheck_required': True,
+        'clinical_rows_and_typed_attestation_audit_one_commit': True,
+        'raw_clinical_text_in_audit_metadata': False,
+        'typed_finalization_request': {
+            'nested_dto_extra_fields': 'forbid',
+            'strings': 'strict_nonblank_required_without_coercion',
+            'declared_aliases': {
+                'both_present': 'require_exact_equal_values',
+                'conflict': 'reject_422',
+                'implicit_or_undeclared_aliases': False,
+            },
+            'document_id': {
+                'type': 'canonical_uuid_string',
+                'required': True,
+                'client_generated_per_start': True,
+                'distinct_from_word_document_identity': True,
+                'word_identity_confers_command_authority': False,
+            },
+            'document_context': {
+                'required': True,
+                'extra_fields': 'forbid',
+                'url': 'strict_nonblank_string',
+                'url_scheme': 'http_or_https',
+                'url_max_length': 2048,
+                'strip_or_normalize_url': False,
+                'must_exactly_match_freshly_locked_Patient.document_url': True,
+            },
+            'maximum_lengths': {
+                'clinical_text': 100000,
+                'consultation_type': 255,
+                'mbs_item_number': 10,
+                'mbs_description': 2048,
+                'diagnosis_term': 255,
+                'diagnosis_code': 50,
+                'medication_drug': 255,
+                'medication_dose': 2048,
+            },
+            'maximum_items_per_nested_list': 100,
+        },
+        'attestation_transport': {
+            'field': 'clinician_attested',
+            'required': True,
+            'type': 'strict_json_boolean',
+            'only_literal_true_authorizes': True,
+            'missing_or_non_boolean': 'reject_422',
+            'false': 'reject_403_before_clinical_writes',
+            'client_role_or_practitioner_fields_confer_authority': False,
+        },
+        'authority_transaction': {
+            'fresh_command_owned_session': True,
+            'postgresql_isolation_level': 'READ COMMITTED',
+            'transaction_local_practice_context': True,
+            'lock_and_recheck_order': ['User', 'Practitioner', 'Patient'],
+            'locks_held_through_receipt_clinical_and_audit_commit': True,
+            'authorization_and_document_binding_before_writes': True,
+            'preallocate_Encounter_uuid_before_receipt': True,
+            'flush_unique_receipt_before_clinical_rows': True,
+            'receipt_and_clinical_rows_one_transaction': True,
+            'provider_or_await_work_inside_transaction': False,
+            'integrity_conflict_handling': {
+                'rollback_before_classification': True,
+                'fresh_scope_recheck_after_rollback': True,
+                'automatic_retry': False,
+            },
+        },
+        'practitioner_attribution': {
+            'source': 'fresh_active_same_practice_User.practitioner_id',
+            'Encounter.practitioner_id': 'server_resolved_Practitioner.id',
+            'Prescription.prescribed_by': 'server_resolved_Practitioner.id',
+            'MbsClaim.practitioner_id': 'server_resolved_Practitioner.id',
+            'MbsClaim.Submitted': 'internal_synthetic_database_state_only',
+            'real_billing_submission_policy_accepted': False,
+        },
+        'attestation_audit': {
+            'event_type': 'clinical.consultation.attested',
+            'decision': 'recorded',
+            'source_surface': 'api',
+            'capability': None,
+            'method': None,
+            'ai_invocation_claimed': False,
+            'typed_fields': ['event_id', 'correlation_id', 'actor_user_id',
+                             'actor_roles', 'practice_id', 'event_timestamp',
+                             'event_type', 'decision', 'source_surface', 'capability',
+                             'method', 'target_resource_type', 'target_resource_id'],
+            'target_resource_type': 'encounter',
+            'metadata_keys': ['attested', 'normalization_policy_id', 'patient_id',
+                              'practitioner_id', 'reviewed_content_sha256', 'server_policy_id'],
+            'metadata_type_equality': 'strict_including_attested_is_True_not_1_equals_True',
+            'server_policy_id': 'emr4.clinical-finalization.gp-linked-practitioner.v1',
+            'normalization_policy_id': 'emr4.clinical-finalization.saved-projection.v1',
+            'content_hash': 'server_sha256_sorted_compact_utf8_json_effective_saved_projection',
+            'client_hash_accepted': False,
+            'raw_clinical_text_or_document_url_metadata': False,
+            'audit_failure_rolls_back_all_clinical_rows': True,
+        },
+        'idempotency_receipt': {
+            'storage': {
+                'model': 'AccessAiAuditLog',
+                'unique_column': 'event_id',
+                'existing_database_unique_constraint': True,
+            },
+            'event_id': {
+                'algorithm': 'server_uuidv5',
+                'namespace_uuid': '7b56fb23-fdc5-5bd9-951f-80a7b9b94b2e',
+                'name_prefix': 'emr4.clinical-finalization.receipt.v1',
+                'canonical_name': '{name_prefix}:{canonical_practice_uuid}:{canonical_document_id_uuid}',
+                'client_event_id_accepted': False,
+            },
+            'command_document_id': 'canonical_uuid_distinct_from_word_identity',
+            'typed_field_requirements': {
+                'event_id': 'UUID',
+                'correlation_id': 'UUID',
+                'event_timestamp': 'timezone_aware_datetime',
+                'capability': None,
+                'method': None,
+            },
+            'receipt_fields': {
+                'event_id': 'server_uuidv5_receipt_event_id',
+                'correlation_id': 'canonical_document_id_uuid',
+                'actor_user_id': 'fresh_authenticated_User.id',
+                'actor_roles': ['GP'],
+                'practice_id': 'fresh_transaction_practice_id',
+                'event_timestamp': 'timezone_aware_server_timestamp',
+                'event_type': 'clinical.consultation.attested',
+                'decision': 'recorded',
+                'source_surface': 'api',
+                'capability': None,
+                'method': None,
+                'target_resource_type': 'encounter',
+                'target_resource_id': 'preallocated_Encounter.id',
+                'metadata': {
+                    'attested': True,
+                    'normalization_policy_id': 'emr4.clinical-finalization.saved-projection.v1',
+                    'patient_id': 'freshly_locked_Patient.id',
+                    'practitioner_id': 'freshly_locked_Practitioner.id',
+                    'reviewed_content_sha256': 'server_computed_canonical_projection_hash',
+                    'server_policy_id': 'emr4.clinical-finalization.gp-linked-practitioner.v1',
+                },
+            },
+            'target_validation': {
+                'resource_must_be_finalized_Encounter': True,
+                'matched_core_fields': ['id', 'practice_id', 'patient_id',
+                                        'practitioner_id', 'status'],
+                'status': 'finalized',
+                'command_id_must_match_correlation_id': True,
+                'actor_practice_patient_practitioner_and_hash_must_match': True,
+                'metadata_values_and_types_must_match': True,
+            },
+            'matching_content_replay': {
+                'same_response_projection': True,
+                'additional_clinical_writes': False,
+                'additional_audit_writes': False,
+            },
+            'mismatch_or_corruption': {
+                'status': 409,
+                'generic_indistinguishable_response': True,
+            },
+            'retention_and_schema': {
+                'bounded_finalization_path_never_updates_or_deletes_receipt': True,
+                'database_immutability_enforced': False,
+                'database_retention_enforced': False,
+                'receipt_retention_required_for_replay': True,
+                'receipt_loss_or_undetectable_mutation_outside_accepted_guarantee': True,
+                'detectable_receipt_or_target_corruption': "generic_409_no_writes",
+                'known_receipt_loss_or_mutation': "stop_no_retry_pending_separate_repair_and_review",
+                'schema_migration_required': False,
+                'guarantee_scope': "bounded_synthetic_retained_records_only",
+                'production_durable_idempotency_accepted': False,
+            },
+        },
+        'canonical_saved_projection': {
+            'built_once_after_strict_validation': True,
+            'normalization_policy_id': 'emr4.clinical-finalization.saved-projection.v1',
+            'hash_projection_fields': ['normalization_policy_id', 'patient_id',
+                                       'document_id', 'exact_document_context',
+                                       'effective_consultation_type', 'clinical_text',
+                                       'canonical_child_dtos'],
+            'same_projection_for': ['clinical_row_values', 'reviewed_content_sha256',
+                                    'successful_response', 'matching_replay_response'],
+            'successful_response': {
+                '_saved': True,
+                'fields': ['encounter_id', 'generated_clinical_note'],
+                'matching_replay_is_exactly_equal': True,
+            },
+            'raw_clinical_text_or_document_url_in_audit': False,
+        },
+        'taskpane_confirmation': {
+            'explicit_personal_clinician_review_and_authorization': True,
+            'ai_does_not_authorize': True,
+            'invalidate_prior_binding_before_patient_await': True,
+            'per_start_binding': {
+                'new_full_canonical_document_id_uuid': True,
+                'exact_document_context_url': True,
+                'boundary_markers': {
+                    'uuid_bound_start_marker': True,
+                    'uuid_bound_end_marker': True,
+                    'same_document_id_uuid_required': True,
+                    'insert_both_for_each_new_consult': True,
+                    'paragraph_selection': 'all_and_only_strictly_between_exact_markers',
+                    'date_or_age_prose_is_never_a_boundary': True,
+                    'fail_closed_if_end_missing_duplicate_invalid_or_crosses_section': True,
+                    'legacy_regex_fallback_for_new_consults': False,
+                },
+            },
+            'command_centre_interlock': {
+                'opening_blocked_while': ['consultation_start',
+                                          'consultation_finalization',
+                                          'ambiguous_submitted_snapshot'],
+                'taskpane_finalization_blocked_while_command_centre_open': True,
+            },
+            'confirmed_response': {
+                'encounter_id': 'canonical_uuid_string',
+                'empty_or_arbitrary_string': 'reject',
+            },
+            'patient_document_url_getter': {
+                'real_getter_required': True,
+                'fallback_or_synthetic_url': False,
+                'failure': 'cancel_without_request',
+            },
+            'one_shot_confirmation_of_exact_request_snapshot': True,
+            'second_word_and_form_read_after_confirmation': True,
+            'second_read_mismatch': 'cancel_without_request',
+            'per_binding_in_flight_guard': True,
+            'reusable_attestation_state': False,
+            'patient_or_reviewed_content_change_requires_fresh_confirmation': True,
+            'patient_or_session_change_during_word_read_cancels_request': True,
+            'cancel_or_unavailable_confirmation_sends_nothing': True,
+            'ambiguous_retry': {
+                'same_exact_command_snapshot_required': True,
+                'fresh_confirmation_required': True,
+                'silent_or_automatic_retry': False,
+            },
+        },
+        'synthetic_staff_practitioners_and_patients_standing_authority': {
+            'persistent': True,
+            'permitted_entities': ['fictional_staff', 'fictional_practitioners', 'fictional_patients'],
+            'appropriate_to_active_reviewed_scope': True,
+            'fictional_entities_only': True,
+            'real_identity_or_professional_credential_claim': False,
+            'ai_is_clinician_or_attester': False,
+            'existing_independent_review_and_finite_runtime_budgets_preserved': True,
+        },
+        'runtime_scope': 'isolated_synthetic_development_only',
+        'admission_grants_runtime_authority': False,
+        'real_clinical_operation_authorized': False,
+        'g2_completion_claimed': False,
+    }
+
+
+def g2_clinical_authority_profile() -> dict:
+    """Only the six owner-scoped clinical repair files; runtime remains separate."""
+    profile = g2_batch_profile()
+    profile.update(scope_behavior='bounded_g2_clinical_authority_repair',
+                   allowed_paths=sorted(G2_CLINICAL_AUTHORITY_PATHS))
+    return profile
+
+
 POLICY_REFERENCES = (
     core.Reference("project.yaml", ("operating_model", "settings_file"), "operating_model.yaml"),
     core.Reference("project.yaml", ("secure_sdlc", "settings_file"), "security_review_protocol.yaml"),
@@ -1921,7 +2203,9 @@ def validate_recovery_configuration(*, documents: dict[str, bytes], expected_sha
         raise RaisaPolicyError("configuration_assessment_profile_invalid")
     if state["active_profile"] == G2_PROFILE:
         profile = overlay["profiles"][G2_PROFILE]
-        expected = (g2_consultation_atomicity_profile()
+        expected = (g2_clinical_authority_profile()
+                    if profile["scope_behavior"] == 'bounded_g2_clinical_authority_repair'
+                    else g2_consultation_atomicity_profile()
                     if profile["scope_behavior"] == 'bounded_g2_consultation_atomicity_repair'
                     else g2_patient_binding_profile()
                     if profile["scope_behavior"] == 'bounded_g2_patient_binding_repair'
