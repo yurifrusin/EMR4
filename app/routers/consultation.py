@@ -5,7 +5,7 @@ from fastapi.responses import JSONResponse
 from sqlalchemy import or_, and_
 from sqlalchemy.orm import Session
 from pydantic import BaseModel
-from typing import Optional, List, Dict, Any
+from typing import Optional, List, Dict, Any, Literal
 from google.cloud import discoveryengine_v1 as discoveryengine
 from app.config import settings
 from app.dependencies import get_db, get_current_user
@@ -16,7 +16,6 @@ from app.models.billing import MbsClaim, MbsDirectory, ClaimStatus
 from app.services.ai.service import AiService
 from app.services.ai.audit_store import persist_access_ai_audit_events
 from app.services.ai.entitlements import actor_context_from_user
-import datetime
 
 router = APIRouter(prefix="/api/v1", tags=["consultation"])
 
@@ -35,7 +34,7 @@ class OverrideData(BaseModel):
 class ConsultationPayload(BaseModel):
     document_id: str
     text_delta: str
-    is_finalized: bool
+    is_finalized: Literal[False] = False
     clinician_overrides: Optional[OverrideData] = None
 
 
@@ -44,7 +43,7 @@ class FinalizePayload(BaseModel):
     text_delta: str
     clinician_overrides: OverrideData
     audio_url: Optional[str] = None  # Legacy input; never used for storage or deletion.
-    patient_id: Optional[str] = None
+    patient_id: uuid.UUID
 
 
 # --- Helpers ---
@@ -100,27 +99,6 @@ def _search_mbs_rules(query: str, db: Session) -> str:
     except Exception as e:
         print(f"Vertex AI Search error: {e}")
         return _search_local_mbs(query, db)
-
-
-def _get_or_create_default_patient(db: Session, practice_id: uuid.UUID) -> Patient:
-    patient = db.query(Patient).filter_by(
-        practice_id=practice_id,
-        first_name="John",
-        last_name="Citizen",
-    ).first()
-    if not patient:
-        patient = Patient(
-            practice_id=practice_id,
-            first_name="John",
-            last_name="Citizen",
-            date_of_birth=datetime.date(1974, 4, 12),
-            medicare_number="1234567890",
-            ihi_number="8003608333333333",
-        )
-        db.add(patient)
-        db.commit()
-        db.refresh(patient)
-    return patient
 
 
 def _save_encounter(db: Session, patient: Patient, document_id: str, text: str,
@@ -251,29 +229,9 @@ async def analyze_consultation(
         print(f"Vertex AI error: {e}")
         extracted["encounter_metadata"]["consultation_type"] = "AI Processing Error"
 
-    save_error = None
-    if payload.is_finalized:
-        try:
-            patient = _get_or_create_default_patient(db, current_user.practice_id)
-            overrides = payload.clinician_overrides
-            consult_type = (
-                (overrides.consultation_type if overrides else None)
-                or extracted.get("encounter_metadata", {}).get("consultation_type", "Standard Consultation")
-            )
-            mbs_items = overrides.mbs_items if overrides else extracted.get("encounter_metadata", {}).get("mbs_item_candidates", [])
-            diagnoses = overrides.diagnoses if overrides else extracted.get("clinical_diagnoses", [])
-            medications = overrides.medications if overrides else extracted.get("medications_and_prescriptions", [])
-            _save_encounter(db, patient, payload.document_id, payload.text_delta, consult_type, mbs_items, diagnoses, medications)
-        except Exception as e:
-            db.rollback()
-            print(f"[analyze] save error: {type(e).__name__}")
-            save_error = "Encounter save failed. Please contact support."
-
-    if payload.is_finalized:
-        extracted["_saved"] = save_error is None
-        if save_error:
-            extracted["_save_error"] = save_error
-
+    # Analysis results cannot claim that a clinical record was persisted.
+    extracted.pop("_saved", None)
+    extracted.pop("_save_error", None)
     return extracted
 
 
@@ -346,16 +304,12 @@ async def finalize_consultation(
     current_user: User = Depends(get_current_user),
 ):
     try:
-        # Use provided patient_id; fall back to default only if not supplied
-        if payload.patient_id:
-            patient = db.query(Patient).filter(
-                Patient.id == payload.patient_id,
-                Patient.practice_id == current_user.practice_id,
-            ).first()
-            if not patient:
-                return JSONResponse(content={"_saved": False, "_save_error": f"Patient {payload.patient_id} not found"})
-        else:
-            patient = _get_or_create_default_patient(db, current_user.practice_id)
+        patient = db.query(Patient).filter(
+            Patient.id == payload.patient_id,
+            Patient.practice_id == current_user.practice_id,
+        ).first()
+        if not patient:
+            return JSONResponse(status_code=404, content={"_saved": False, "_save_error": "Patient not found."})
 
         consult_type = payload.clinician_overrides.consultation_type or "Standard Consultation"
         encounter = _save_encounter(

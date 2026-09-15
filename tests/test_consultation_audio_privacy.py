@@ -108,7 +108,7 @@ def test_legacy_finalize_audio_url_is_accepted_but_never_read_or_deleted():
     assert any(isinstance(n, ast.AnnAssign) and n.target.id == "audio_url" for n in payload_class.body)
 
     class Payload:
-        patient_id = None
+        patient_id = "00000000-0000-4000-8000-000000000001"
         document_id = "synthetic-document"
         text_delta = "synthetic notes"
         clinician_overrides = SimpleNamespace(consultation_type="test", mbs_items=[], diagnoses=[], medications=[])
@@ -117,11 +117,14 @@ def test_legacy_finalize_audio_url_is_accepted_but_never_read_or_deleted():
         def audio_url(self):
             raise AssertionError("Legacy audio URL must not convey filesystem authority")
 
+    patient = SimpleNamespace(id=Payload.patient_id, practice_id="synthetic-practice")
+    query = SimpleNamespace(filter=lambda *args: SimpleNamespace(first=lambda: patient))
     namespace = dict(open=fail_filesystem, os=NoFilesystem(), _safe_audio_cleanup=fail_filesystem,
-                     _get_or_create_default_patient=lambda *args: SimpleNamespace(id="synthetic-patient"),
+                     Patient=SimpleNamespace(id="id", practice_id="practice_id"),
                      _save_encounter=lambda *args: SimpleNamespace(id="synthetic-encounter"), JSONResponse=response)
     result = asyncio.run(selected_function("finalize_consultation", namespace)(
-        Payload(), SimpleNamespace(rollback=fail_filesystem), SimpleNamespace(practice_id="synthetic-practice")))
+        Payload(), SimpleNamespace(query=lambda model: query, rollback=fail_filesystem),
+        SimpleNamespace(practice_id="synthetic-practice")))
     assert result.content["_saved"] is True
 
 
@@ -217,6 +220,13 @@ function showTranscript(f,text){
     f.fetch(async()=>({ok:true,json:async()=>({_saved:true})}));await f.run('approveAndFinalize()');
     assert(!('audio_url' in JSON.parse(f.requests.at(-1).options.body)));assert(f.created.every(u=>f.revoked.includes(u)));
     assert.equal(f.element('raw-transcript').value,'');assert(f.element('transcript-row').classList.contains('hidden'));});
+  for(const patient of ['null', '{id:""}']) {
+    await check('finalize requires explicit patient: '+patient,async()=>{
+      const f=fixture();f.run('currentPatient='+patient+';getCurrentConsultText=async()=>{throw Error("must not read Word");}');
+      await f.run('approveAndFinalize()');assert.equal(f.requests.length,0);assert.equal(f.notes.length,0);
+      assert.match(f.context.lastStatus,/Select a patient/);assert.equal(f.run('isLocked'),false);
+    });
+  }
   await check('finalize failure preserves playback',async()=>{const f=fixture();await f.start();await f.stop();
     showTranscript(f,'synthetic transcript');
     f.fetch(async()=>({ok:true,json:async()=>({_saved:false})}));await f.run('approveAndFinalize()');assert.equal(f.revoked.length,0);
@@ -264,4 +274,4 @@ def test_browser_audio_components_with_authored_adapters():
     assert result.returncode == 0, result.stderr
     report = json.loads(result.stdout)
     assert report["passed"] is True
-    assert len(report["cases"]) == 18
+    assert len(report["cases"]) == 20

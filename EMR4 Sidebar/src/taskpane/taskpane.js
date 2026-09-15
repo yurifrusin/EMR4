@@ -1142,6 +1142,10 @@ document.addEventListener("click", e => {
 
 async function approveAndFinalize() {
   const audioSnapshot = { generation: audioGeneration, patientId: audioPatientId() };
+  if (!audioSnapshot.patientId) {
+    setStatus("Select a patient before finalising the consultation.");
+    return;
+  }
   setStatus("⏳ Saving to database…");
   const consultType = document.getElementById("consult-type")?.value || "";
   const overrides   = { consultation_type: consultType, mbs_items: [], diagnoses: [], medications: [] };
