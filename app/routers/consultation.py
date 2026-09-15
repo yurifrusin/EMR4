@@ -1,19 +1,41 @@
+import hashlib
 import json
+import re
 import uuid
-from fastapi import APIRouter, Depends, UploadFile, File
+from collections.abc import Callable
+from datetime import datetime, timezone
+from urllib.parse import urlsplit
+
+from fastapi import APIRouter, Depends, HTTPException, UploadFile, File, status
 from fastapi.responses import JSONResponse
-from sqlalchemy import or_, and_
+from sqlalchemy import or_, and_, text
+from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
-from pydantic import BaseModel
+from pydantic import (
+    BaseModel,
+    ConfigDict,
+    Field,
+    StrictBool,
+    StrictStr,
+    field_validator,
+    model_validator,
+)
 from typing import Optional, List, Dict, Any, Literal
 from google.cloud import discoveryengine_v1 as discoveryengine
 from app.config import settings
-from app.dependencies import get_db, get_current_user
+from app.dependencies import get_command_session_factory, get_db, get_current_user
+from app.models.ai_audit import AccessAiAuditLog
 from app.models.patients import Patient
-from app.models.tenancy import User
+from app.models.tenancy import Practitioner, User, UserRole
 from app.models.clinical import Encounter, EncounterStatus, ClinicalDiagnosis, Prescription
 from app.models.billing import MbsClaim, MbsDirectory, ClaimStatus
 from app.services.ai.service import AiService
+from app.services.ai.audit_events import (
+    AiAuditDecision,
+    AiAuditEventType,
+    AiAuditSourceSurface,
+    build_access_ai_audit_event,
+)
 from app.services.ai.audit_store import persist_access_ai_audit_events
 from app.services.ai.entitlements import actor_context_from_user
 
@@ -38,12 +60,160 @@ class ConsultationPayload(BaseModel):
     clinician_overrides: Optional[OverrideData] = None
 
 
+def _same_exact_value(left: object, right: object) -> bool:
+    if type(left) is not type(right):
+        return False
+    if isinstance(left, dict):
+        return (
+            left.keys() == right.keys()
+            and all(_same_exact_value(left[key], right[key]) for key in left)
+        )
+    if isinstance(left, list):
+        return len(left) == len(right) and all(
+            _same_exact_value(a, b) for a, b in zip(left, right)
+        )
+    return left == right
+
+
+def _canonicalize_aliases(
+    value: object,
+    aliases: dict[str, str],
+) -> object:
+    if not isinstance(value, dict):
+        return value
+    result = dict(value)
+    for canonical, alias in aliases.items():
+        if canonical in result and alias in result:
+            if not _same_exact_value(result[canonical], result[alias]):
+                raise ValueError(f"conflicting values for {canonical} and {alias}")
+            del result[alias]
+        elif alias in result:
+            result[canonical] = result.pop(alias)
+    return result
+
+
+def _require_meaningful(value: str) -> str:
+    if not value.strip():
+        raise ValueError("value must contain non-whitespace characters")
+    return value
+
+
+class FinalizeMbsItem(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    item_number: StrictStr = Field(min_length=1, max_length=10)
+    description: StrictStr = Field(default="", max_length=2048)
+
+    @model_validator(mode="before")
+    @classmethod
+    def accept_known_aliases(cls, value: object) -> object:
+        return _canonicalize_aliases(value, {"item_number": "item"})
+
+    @field_validator("item_number")
+    @classmethod
+    def require_item_number(cls, value: str) -> str:
+        return _require_meaningful(value)
+
+
+class FinalizeDiagnosis(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    term: StrictStr = Field(min_length=1, max_length=255)
+    snomed_ct_au_code: StrictStr = Field(min_length=1, max_length=50)
+
+    @model_validator(mode="before")
+    @classmethod
+    def accept_known_aliases(cls, value: object) -> object:
+        return _canonicalize_aliases(
+            value,
+            {
+                "term": "concept_name",
+                "snomed_ct_au_code": "concept_id",
+            },
+        )
+
+    @field_validator("term", "snomed_ct_au_code")
+    @classmethod
+    def require_diagnosis_identity(cls, value: str) -> str:
+        return _require_meaningful(value)
+
+
+class FinalizeMedication(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    drug_name: StrictStr = Field(min_length=1, max_length=255)
+    dosage_text: StrictStr = Field(default="", max_length=2048)
+
+    @model_validator(mode="before")
+    @classmethod
+    def accept_known_aliases(cls, value: object) -> object:
+        return _canonicalize_aliases(
+            value,
+            {
+                "drug_name": "drug",
+                "dosage_text": "dosage",
+            },
+        )
+
+    @field_validator("drug_name")
+    @classmethod
+    def require_drug_name(cls, value: str) -> str:
+        return _require_meaningful(value)
+
+
+class FinalizeOverrideData(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    consultation_type: StrictStr | None = Field(default=None, max_length=255)
+    mbs_items: list[FinalizeMbsItem] = Field(default_factory=list, max_length=100)
+    diagnoses: list[FinalizeDiagnosis] = Field(default_factory=list, max_length=100)
+    medications: list[FinalizeMedication] = Field(default_factory=list, max_length=100)
+
+    @model_validator(mode="before")
+    @classmethod
+    def accept_known_aliases(cls, value: object) -> object:
+        return _canonicalize_aliases(
+            value,
+            {
+                "mbs_items": "mbs_item_candidates",
+                "diagnoses": "clinical_diagnoses",
+                "medications": "medications_and_prescriptions",
+            },
+        )
+
+    @field_validator("consultation_type")
+    @classmethod
+    def reject_whitespace_consultation_type(cls, value: str | None) -> str | None:
+        if value is not None and value and not value.strip():
+            raise ValueError("consultation_type cannot be whitespace-only")
+        return value
+
+
 class FinalizePayload(BaseModel):
-    document_id: str
-    text_delta: str
-    clinician_overrides: OverrideData
-    audio_url: Optional[str] = None  # Legacy input; never used for storage or deletion.
+    model_config = ConfigDict(extra="forbid")
+
+    document_id: uuid.UUID
+    document_context: StrictStr = Field(min_length=1, max_length=2048)
+    text_delta: StrictStr = Field(min_length=1, max_length=100000)
+    clinician_overrides: FinalizeOverrideData
+    clinician_attested: StrictBool
+    audio_url: StrictStr | None = Field(default=None, max_length=2048)
     patient_id: uuid.UUID
+
+    @field_validator("document_context")
+    @classmethod
+    def require_exact_url(cls, value: str) -> str:
+        if value != value.strip():
+            raise ValueError("document_context must not contain boundary whitespace")
+        parsed = urlsplit(value)
+        if parsed.scheme not in {"http", "https"} or not parsed.netloc:
+            raise ValueError("document_context must be an absolute HTTP(S) URL")
+        return value
+
+    @field_validator("text_delta")
+    @classmethod
+    def require_text_delta(cls, value: str) -> str:
+        return _require_meaningful(value)
 
 
 # --- Helpers ---
@@ -101,13 +271,117 @@ def _search_mbs_rules(query: str, db: Session) -> str:
         return _search_local_mbs(query, db)
 
 
-def _save_encounter(db: Session, patient: Patient, document_id: str, text: str,
-                    consult_type: str, mbs_items: list, diagnoses: list, medications: list):
-    from app.models.tenancy import Practice
-    practice = db.query(Practice).filter(Practice.id == patient.practice_id).first()
+CLINICAL_FINALIZATION_POLICY_ID = "emr4.clinical-finalization.gp-linked-practitioner.v1"
+CLINICAL_FINALIZATION_NORMALIZATION_POLICY_ID = "emr4.clinical-finalization.saved-projection.v1"
+# Synthetic-only schema-free proof: audit retention/immutability is not DB-enforced,
+# so this is not production durable-idempotency acceptance.
+CLINICAL_FINALIZATION_IDEMPOTENCY_NAME = "emr4.clinical-finalization.receipt.v1"
+CLINICAL_FINALIZATION_IDEMPOTENCY_NAMESPACE = uuid.UUID(
+    "7b56fb23-fdc5-5bd9-951f-80a7b9b94b2e"
+)
+_FINALIZATION_CONFLICT_CONTENT = {
+    "_saved": False,
+    "_save_error": "Finalization command conflict.",
+}
+_FINALIZATION_SAVE_FAILURE_CONTENT = {
+    "_saved": False,
+    "_save_error": "Encounter save failed. Please contact support.",
+}
+
+
+def _clinical_finalization_event_id(
+    practice_id: uuid.UUID,
+    document_id: uuid.UUID,
+) -> uuid.UUID:
+    canonical_name = (
+        f"{CLINICAL_FINALIZATION_IDEMPOTENCY_NAME}:"
+        f"{str(practice_id)}:{str(document_id)}"
+    )
+    return uuid.uuid5(CLINICAL_FINALIZATION_IDEMPOTENCY_NAMESPACE, canonical_name)
+
+
+def _effective_finalization_projection(
+    payload: FinalizePayload,
+    *,
+    patient_id: uuid.UUID,
+) -> dict[str, object]:
+    overrides = payload.clinician_overrides.model_dump(mode="json")
+    consultation_type = overrides["consultation_type"]
+    return {
+        "consultation_type": (
+            consultation_type
+            if consultation_type not in {None, ""}
+            else "Standard Consultation"
+        ),
+        # Technical debt: this command UUID occupies legacy google_doc_id storage.
+        "document_id": str(payload.document_id),
+        "document_context": payload.document_context,
+        "normalization_policy_id": CLINICAL_FINALIZATION_NORMALIZATION_POLICY_ID,
+        "overrides": {
+            "diagnoses": overrides["diagnoses"],
+            "mbs_items": overrides["mbs_items"],
+            "medications": overrides["medications"],
+        },
+        "patient_id": str(patient_id),
+        "text": payload.text_delta,
+    }
+
+
+def _reviewed_content_sha256(projection: dict[str, object]) -> str:
+    """Hash the exact canonical clinical command projection."""
+    canonical = json.dumps(
+        projection,
+        sort_keys=True,
+        separators=(",", ":"),
+        ensure_ascii=False,
+        allow_nan=False,
+    ).encode("utf-8")
+    return hashlib.sha256(canonical).hexdigest()
+
+
+def _finalization_response(
+    encounter_id: uuid.UUID,
+    projection: dict[str, object],
+) -> dict[str, object]:
+    overrides = projection["overrides"]
+    lines = [f"Consultation: {projection['consultation_type']}"]
+    diagnoses = [item["term"] for item in overrides["diagnoses"]]
+    if diagnoses:
+        lines.append("Diagnoses: " + ", ".join(diagnoses))
+    mbs_items = [f"MBS {item['item_number']}" for item in overrides["mbs_items"]]
+    if mbs_items:
+        lines.append("Billed: " + ", ".join(mbs_items))
+    medications = [
+        f"{item['drug_name']} {item['dosage_text']}".strip()
+        for item in overrides["medications"]
+    ]
+    if medications:
+        lines.append("Prescribed: " + "; ".join(medications))
+    return {
+        "_saved": True,
+        "encounter_id": str(encounter_id),
+        "generated_clinical_note": "\n".join(lines),
+    }
+
+
+def _save_encounter(
+    db: Session,
+    patient: Patient,
+    practitioner_id: uuid.UUID,
+    encounter_id: uuid.UUID,
+    document_id: str,
+    text: str,
+    consult_type: str,
+    mbs_items: list[dict[str, str]],
+    diagnoses: list[dict[str, str]],
+    medications: list[dict[str, str]],
+) -> uuid.UUID:
     encounter = Encounter(
+        id=encounter_id,
         practice_id=patient.practice_id,
         patient_id=patient.id,
+        practitioner_id=practitioner_id,
+        # Technical debt: command UUID, not a Word document identity.
         google_doc_id=document_id,
         consultation_type=consult_type,
         raw_document_text=text,
@@ -116,45 +390,121 @@ def _save_encounter(db: Session, patient: Patient, document_id: str, text: str,
     )
     db.add(encounter)
     db.flush()
-    encounter_id = encounter.id
 
     for item in mbs_items:
-        item_num = item.get("item_number") or item.get("item")
-        if item_num:
-            db.add(MbsClaim(
-                practice_id=patient.practice_id,
-                patient_id=patient.id,
-                encounter_id=encounter_id,
-                item_number=str(item_num),
-                description=item.get("description", ""),
-                claim_status=ClaimStatus.Submitted,
-            ))
+        db.add(MbsClaim(
+            practice_id=patient.practice_id,
+            patient_id=patient.id,
+            practitioner_id=practitioner_id,
+            encounter_id=encounter_id,
+            item_number=item["item_number"],
+            description=item["description"],
+            # Existing synthetic DB semantics only; no provider dispatch occurs.
+            claim_status=ClaimStatus.Submitted,
+            submitted_at=datetime.now(timezone.utc),
+        ))
 
-    for diag in diagnoses:
-        term = diag.get("term") or diag.get("concept_name") or ""
-        if term:
-            db.add(ClinicalDiagnosis(
-                practice_id=patient.practice_id,
-                patient_id=patient.id,
-                encounter_id=encounter_id,
-                term=term,
-                snomed_ct_au_code=str(diag.get("snomed_ct_au_code") or diag.get("concept_id") or ""),
-            ))
+    for diagnosis in diagnoses:
+        db.add(ClinicalDiagnosis(
+            practice_id=patient.practice_id,
+            patient_id=patient.id,
+            encounter_id=encounter_id,
+            term=diagnosis["term"],
+            snomed_ct_au_code=diagnosis["snomed_ct_au_code"],
+        ))
 
-    for med in medications:
-        drug_name = med.get("drug_name") or med.get("drug") or ""
-        if drug_name:
-            db.add(Prescription(
-                practice_id=patient.practice_id,
-                patient_id=patient.id,
-                encounter_id=encounter_id,
-                drug_name=drug_name,
-                dosage_text=med.get("dosage_text") or med.get("dosage") or "",
-                is_active=True,
-            ))
+    for medication in medications:
+        db.add(Prescription(
+            practice_id=patient.practice_id,
+            patient_id=patient.id,
+            encounter_id=encounter_id,
+            prescribed_by=practitioner_id,
+            drug_name=medication["drug_name"],
+            dosage_text=medication["dosage_text"],
+            is_active=True,
+        ))
 
-    db.commit()
+    db.flush()
     return encounter_id
+
+
+def _validated_replay_target(
+    db: Session,
+    receipt: AccessAiAuditLog,
+    *,
+    event_id: uuid.UUID,
+    actor_user_id: uuid.UUID,
+    practice_id: uuid.UUID,
+    practitioner_id: uuid.UUID,
+    patient_id: uuid.UUID,
+    projection: dict[str, object],
+    reviewed_hash: str,
+) -> Encounter | None:
+    expected_metadata = {
+        "attested": True,
+        "normalization_policy_id": CLINICAL_FINALIZATION_NORMALIZATION_POLICY_ID,
+        "patient_id": str(patient_id),
+        "practitioner_id": str(practitioner_id),
+        "reviewed_content_sha256": reviewed_hash,
+        "server_policy_id": CLINICAL_FINALIZATION_POLICY_ID,
+    }
+    stored_metadata = receipt.metadata_json
+    stored_hash = (
+        stored_metadata.get("reviewed_content_sha256")
+        if isinstance(stored_metadata, dict)
+        else None
+    )
+    if (
+        receipt.event_id != event_id
+        or receipt.practice_id != practice_id
+        or receipt.actor_user_id != actor_user_id
+        or receipt.actor_roles != [UserRole.GP.value]
+        or receipt.event_type != AiAuditEventType.CLINICAL_CONSULTATION_ATTESTED.value
+        or receipt.decision != AiAuditDecision.RECORDED.value
+        or receipt.source_surface != AiAuditSourceSurface.API.value
+        or receipt.capability is not None
+        or receipt.method is not None
+        or receipt.reason_code is not None
+        or receipt.target_resource_type != "encounter"
+        or not isinstance(receipt.correlation_id, uuid.UUID)
+        or not isinstance(receipt.event_timestamp, datetime)
+        or receipt.event_timestamp.tzinfo is None
+        or receipt.event_timestamp.utcoffset() is None
+        or not isinstance(stored_hash, str)
+        or re.fullmatch(r"[0-9a-f]{64}", stored_hash) is None
+        or not isinstance(stored_metadata, dict)
+        or stored_metadata.get("attested") is not True
+        or not _same_exact_value(stored_metadata, expected_metadata)
+    ):
+        return None
+    try:
+        target_id = uuid.UUID(receipt.target_resource_id)
+    except (AttributeError, TypeError, ValueError):
+        return None
+    if str(target_id) != receipt.target_resource_id:
+        return None
+
+    encounter = (
+        db.query(Encounter)
+        .filter(
+            Encounter.id == target_id,
+            Encounter.practice_id == practice_id,
+            Encounter.patient_id == patient_id,
+            Encounter.practitioner_id == practitioner_id,
+        )
+        .with_for_update()
+        .first()
+    )
+    if (
+        encounter is None
+        or encounter.status != EncounterStatus.Finalized
+        or encounter.is_finalized is not True
+        or encounter.google_doc_id != projection["document_id"]
+        or encounter.consultation_type != projection["consultation_type"]
+        or encounter.raw_document_text != projection["text"]
+    ):
+        return None
+    return encounter
 
 
 # --- Endpoints ---
@@ -300,46 +650,190 @@ Return strict JSON only, no markdown:
 @router.post("/finalize")
 async def finalize_consultation(
     payload: FinalizePayload,
-    db: Session = Depends(get_db),
+    command_session_factory: Callable[[], Session] = Depends(get_command_session_factory),
     current_user: User = Depends(get_current_user),
 ):
-    try:
-        patient = db.query(Patient).filter(
-            Patient.id == payload.patient_id,
-            Patient.practice_id == current_user.practice_id,
-        ).first()
-        if not patient:
-            return JSONResponse(status_code=404, content={"_saved": False, "_save_error": "Patient not found."})
-
-        consult_type = payload.clinician_overrides.consultation_type or "Standard Consultation"
-        encounter_id = _save_encounter(
-            db, patient, payload.document_id, payload.text_delta, consult_type,
-            payload.clinician_overrides.mbs_items,
-            payload.clinician_overrides.diagnoses,
-            payload.clinician_overrides.medications,
+    if payload.clinician_attested is not True:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Clinical finalization is not permitted.",
         )
-        # Build a brief clinical note from the saved data to insert into Word
-        lines = [f"Consultation: {consult_type}"]
-        if payload.clinician_overrides.diagnoses:
-            dx = [d.get("term", "") for d in payload.clinician_overrides.diagnoses if d.get("term")]
-            if dx:
-                lines.append("Diagnoses: " + ", ".join(dx))
-        if payload.clinician_overrides.mbs_items:
-            mbs = [f"MBS {m.get('item_number','')}" for m in payload.clinician_overrides.mbs_items if m.get("item_number")]
-            if mbs:
-                lines.append("Billed: " + ", ".join(mbs))
-        if payload.clinician_overrides.medications:
-            rx = [f"{m.get('drug_name','')} {m.get('dosage_text','')}".strip()
-                  for m in payload.clinician_overrides.medications if m.get("drug_name")]
-            if rx:
-                lines.append("Prescribed: " + "; ".join(rx))
 
-        return JSONResponse(content={
-            "_saved": True,
-            "encounter_id": str(encounter_id),
-            "generated_clinical_note": "\n".join(lines),
-        })
-    except Exception as e:
-        db.rollback()
-        print(f"[finalize] exception: {type(e).__name__}")
-        return JSONResponse(content={"_saved": False, "_save_error": "Encounter save failed. Please contact support."})
+    actor_user_id = current_user.id
+    practice_id = current_user.practice_id
+    event_id = _clinical_finalization_event_id(practice_id, payload.document_id)
+    try:
+        with command_session_factory() as command_db:
+            with command_db.begin():
+                command_db.execute(
+                    text("SELECT set_config('app.current_practice_id', :practice_id, true)"),
+                    {"practice_id": str(practice_id)},
+                )
+                authority_user = (
+                    command_db.query(User)
+                    .filter(User.id == actor_user_id, User.practice_id == practice_id)
+                    .with_for_update()
+                    .first()
+                )
+                if (
+                    authority_user is None
+                    or not authority_user.is_active
+                    or authority_user.role != UserRole.GP
+                ):
+                    raise HTTPException(
+                        status_code=status.HTTP_403_FORBIDDEN,
+                        detail="Clinical finalization is not permitted.",
+                    )
+
+                practitioner = (
+                    command_db.query(Practitioner)
+                    .filter(
+                        Practitioner.id == authority_user.practitioner_id,
+                        Practitioner.practice_id == practice_id,
+                    )
+                    .with_for_update()
+                    .first()
+                )
+                if practitioner is None or not practitioner.is_active:
+                    raise HTTPException(
+                        status_code=status.HTTP_403_FORBIDDEN,
+                        detail="Clinical finalization is not permitted.",
+                    )
+
+                patient = (
+                    command_db.query(Patient)
+                    .filter(
+                        Patient.id == payload.patient_id,
+                        Patient.practice_id == practice_id,
+                    )
+                    .with_for_update()
+                    .first()
+                )
+                if patient is None:
+                    return JSONResponse(
+                        status_code=404,
+                        content={"_saved": False, "_save_error": "Patient not found."},
+                    )
+
+                # Exact string equality only. This does not prove Office identity.
+                if (
+                    patient.document_url is None
+                    or payload.document_context != patient.document_url
+                ):
+                    return JSONResponse(
+                        status_code=status.HTTP_409_CONFLICT,
+                        content=_FINALIZATION_CONFLICT_CONTENT,
+                    )
+
+                projection = _effective_finalization_projection(
+                    payload,
+                    patient_id=patient.id,
+                )
+                reviewed_hash = _reviewed_content_sha256(projection)
+                receipt = (
+                    command_db.query(AccessAiAuditLog)
+                    .filter(
+                        AccessAiAuditLog.event_id == event_id,
+                        AccessAiAuditLog.practice_id == practice_id,
+                        AccessAiAuditLog.event_type
+                        == AiAuditEventType.CLINICAL_CONSULTATION_ATTESTED.value,
+                    )
+                    .with_for_update()
+                    .first()
+                )
+                if receipt is not None:
+                    replay_target = _validated_replay_target(
+                        command_db,
+                        receipt,
+                        event_id=event_id,
+                        actor_user_id=authority_user.id,
+                        practice_id=practice_id,
+                        practitioner_id=practitioner.id,
+                        patient_id=patient.id,
+                        projection=projection,
+                        reviewed_hash=reviewed_hash,
+                    )
+                    if replay_target is None:
+                        return JSONResponse(
+                            status_code=status.HTTP_409_CONFLICT,
+                            content=_FINALIZATION_CONFLICT_CONTENT,
+                        )
+                    return JSONResponse(
+                        content=_finalization_response(replay_target.id, projection)
+                    )
+
+                encounter_id = uuid.uuid4()
+                audit_event = build_access_ai_audit_event(
+                    event_id=event_id,
+                    event_type=AiAuditEventType.CLINICAL_CONSULTATION_ATTESTED,
+                    source_surface=AiAuditSourceSurface.API,
+                    decision=AiAuditDecision.RECORDED,
+                    actor_user_id=authority_user.id,
+                    actor_roles=(authority_user.role.value,),
+                    practice_id=practice_id,
+                    target_resource_type="encounter",
+                    target_resource_id=encounter_id,
+                    metadata={
+                        "practitioner_id": str(practitioner.id),
+                        "patient_id": str(patient.id),
+                        "server_policy_id": CLINICAL_FINALIZATION_POLICY_ID,
+                        "normalization_policy_id": (
+                            CLINICAL_FINALIZATION_NORMALIZATION_POLICY_ID
+                        ),
+                        "attested": True,
+                        "reviewed_content_sha256": reviewed_hash,
+                    },
+                )
+                # Receipt is flushed before any clinical row is staged.
+                persist_access_ai_audit_events(command_db, (audit_event,))
+
+                overrides = projection["overrides"]
+                _save_encounter(
+                    command_db,
+                    patient,
+                    practitioner.id,
+                    encounter_id,
+                    projection["document_id"],
+                    projection["text"],
+                    projection["consultation_type"],
+                    overrides["mbs_items"],
+                    overrides["diagnoses"],
+                    overrides["medications"],
+                )
+                response_content = _finalization_response(encounter_id, projection)
+
+        return JSONResponse(content=response_content)
+    except HTTPException:
+        raise
+    except IntegrityError:
+        # The failed transaction is closed before this bounded collision check.
+        try:
+            with command_session_factory() as conflict_db:
+                with conflict_db.begin():
+                    conflict_db.execute(
+                        text(
+                            "SELECT set_config("
+                            "'app.current_practice_id', :practice_id, true)"
+                        ),
+                        {"practice_id": str(practice_id)},
+                    )
+                    same_scope_receipt_exists = (
+                        conflict_db.query(AccessAiAuditLog)
+                        .filter(
+                            AccessAiAuditLog.event_id == event_id,
+                            AccessAiAuditLog.practice_id == practice_id,
+                        )
+                        .first()
+                        is not None
+                    )
+            if same_scope_receipt_exists:
+                return JSONResponse(
+                    status_code=status.HTTP_409_CONFLICT,
+                    content=_FINALIZATION_CONFLICT_CONTENT,
+                )
+        except Exception as check_error:
+            print(f"[finalize] collision check: {type(check_error).__name__}")
+        return JSONResponse(content=_FINALIZATION_SAVE_FAILURE_CONTENT)
+    except Exception as error:
+        print(f"[finalize] exception: {type(error).__name__}")
+        return JSONResponse(content=_FINALIZATION_SAVE_FAILURE_CONTENT)

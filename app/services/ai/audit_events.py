@@ -30,6 +30,7 @@ class AiAuditEventType(str, Enum):
     IDENTITY_PATIENT_VERIFIED_BY_STAFF = "identity.patient_verified_by_staff"
     KNOWLEDGE_QUERY_ALLOWED = "knowledge.query.allowed"
     KNOWLEDGE_QUERY_BLOCKED = "knowledge.query.blocked"
+    CLINICAL_CONSULTATION_ATTESTED = "clinical.consultation.attested"
 
 
 class AiAuditDecision(str, Enum):
@@ -125,6 +126,7 @@ class AccessAiAuditEvent(BaseModel):
 def build_access_ai_audit_event(
     *,
     event_type: AiAuditEventType,
+    event_id: UUID | None = None,
     source_surface: AiAuditSourceSurface,
     decision: AiAuditDecision,
     actor_user_id: UUID | None = None,
@@ -146,6 +148,7 @@ def build_access_ai_audit_event(
             bounded_metadata[key] = str(value)
 
     return AccessAiAuditEvent(
+        event_id=event_id if event_id is not None else uuid4(),
         event_type=event_type,
         actor_user_id=actor_user_id,
         actor_roles=actor_roles,

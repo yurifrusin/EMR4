@@ -42,6 +42,11 @@ let commandCentreDialog = null;
 let commandCentreOpen   = false;          // pause background sync while CC is driving
 let lastConsultHeader   = "";             // most recent header text inserted (full line)
 let consultStarted      = false;          // a consult header has been planted this session
+let consultationGeneration = 0;
+let consultationBinding = null;          // published only after an exact, successful Word start
+let consultationStartPending = null;
+let finalizationInFlight = null;
+let finalizationSubmission = null;       // no changed-content retry after an ambiguous save
 const NOTE_BOOKMARK     = "EMR4_NOTE_POINT"; // anchors note insertion after the consult header
 const SECTION_HEADING   = "Contemporaneous Notes"; // where consults are planted
 const SECTION_TAG_CN    = "emr4-section-cn";       // content-control tag for the CN heading
@@ -174,7 +179,7 @@ function updateSyncDebug(patch = {}) {
 function updateStartConsultButton() {
   const btn = document.getElementById("btn-start-consult");
   if (!btn) return;
-  const canStart = Boolean(currentPatient) && !consultStarted && !commandCentreOpen;
+  const canStart = Boolean(currentPatient) && !consultStarted && !consultationStartPending && !finalizationInFlight && !commandCentreOpen;
   btn.disabled = !canStart;
   btn.textContent = consultStarted ? "Consultation Started" : "▶ Start Consultation";
   btn.title = consultStarted
@@ -304,6 +309,7 @@ async function login() {
 }
 
 function logout() {
+  invalidateConsultationBinding();
   clearAudioSession();
   token = null;
   currentPatient = null;
@@ -429,15 +435,22 @@ async function searchPatients(query) {
 }
 
 async function loadPatient(patientId) {
-  if (audioPatientId() !== String(patientId)) clearAudioSession();
+  // Invalidate before the first await, even if this selection later fails.
+  invalidateConsultationBinding();
+  const selectionGeneration = consultationGeneration;
+  const selectionToken = token;
+  currentPatient = null;
+  clearAudioSession();
+  document.getElementById("btn-command-center").disabled = true;
+  updateStartConsultButton();
   document.getElementById("search-panel").classList.add("hidden");
   document.getElementById("patient-search-input").value = "";
   document.getElementById("patient-search-results").innerHTML = "";
 
   const res = await apiFetch(`/patients/${patientId}/summary`);
-  if (!res || !res.ok) return;
+  if (selectionGeneration !== consultationGeneration || selectionToken !== token || !res || !res.ok) return;
   const data = await res.json();
-  if (audioPatientId() !== String(data.patient.id)) clearAudioSession();
+  if (selectionGeneration !== consultationGeneration || selectionToken !== token || String(data.patient?.id) !== String(patientId)) return;
   currentPatient = data.patient;
   setBanner(currentPatient);
   updateOpenFileButton();
@@ -452,7 +465,8 @@ async function loadPatient(patientId) {
   // Sidebar — meds (separate fetch, runs in background)
   apiFetch(`/patients/${patientId}/medications`).then(async r => {
     if (!r || !r.ok) return;
-    _renderSidebarMeds(await r.json());
+    const meds = await r.json();
+    if (selectionGeneration === consultationGeneration && selectionToken === token) _renderSidebarMeds(meds);
   });
 
   // Pre-populate whichever tabs are already visible
@@ -460,8 +474,8 @@ async function loadPatient(patientId) {
   if (!document.getElementById("panel-meds").classList.contains("hidden")) loadMeds();
   if (!document.getElementById("panel-allergies").classList.contains("hidden")) renderAllergies(data.allergies || []);
 
-  // Silently protect section headings — no-op if already tagged, repairs if missing
-  repairDocumentStructure();
+  // Only touch the selected patient\'s associated document.
+  if (wordDocumentContext() === currentPatient.document_url) repairDocumentStructure();
 }
 
 function _renderSidebarAllergies(allergies) {
@@ -1140,61 +1154,138 @@ document.addEventListener("click", e => {
 // FINALIZE RECORD
 // ═══════════════════════════════════════════════════════════
 
-async function approveAndFinalize() {
-  const audioSnapshot = { generation: audioGeneration, patientId: audioPatientId() };
-  if (!audioSnapshot.patientId) {
-    setStatus("Select a patient before finalising the consultation.");
-    return;
-  }
-  setStatus("⏳ Saving to database…");
-  const consultType = document.getElementById("consult-type")?.value || "";
-  const overrides   = { consultation_type: consultType, mbs_items: [], diagnoses: [], medications: [] };
+function wordDocumentContext() {
+  const value = typeof Office !== "undefined" ? Office.context?.document?.url : null;
+  return typeof value === "string" && value.trim() && value.length <= 2048 ? value : null;
+}
 
+function invalidateConsultationBinding() {
+  consultationGeneration++;
+  consultationBinding = null;
+  consultationStartPending = null;
+  finalizationSubmission = null;
+  lastConsultHeader = "";
+  consultStarted = false;
+  finalizationInFlight?.controller.abort();
+  const button = document.getElementById("btn-finalize");
+  if (button) { button.disabled = true; button.textContent = "Approve & Finalise Record"; }
+  updateStartConsultButton();
+}
+
+function consultationCaptureIsCurrent(capture) {
+  return Boolean(capture && token && capture.token === token
+    && capture.generation === consultationGeneration
+    && capture.patientId === audioPatientId()
+    && capture.documentContext === currentPatient?.document_url
+    && capture.documentContext === wordDocumentContext());
+}
+
+function consultationIsCurrent(binding) {
+  return Boolean(consultStarted && binding === consultationBinding
+    && binding?.header === lastConsultHeader && consultationCaptureIsCurrent(binding));
+}
+
+function finalizationOverridesSnapshot() {
+  const overrides = {
+    consultation_type: document.getElementById("consult-type")?.value || "",
+    mbs_items: [], diagnoses: [], medications: [],
+  };
   for (let i = 0; i < mbsRowCount; i++) {
     const code = document.getElementById(`mbs-item-${i}`)?.value.trim();
-    if (code) overrides.mbs_items.push({ item_number: code, description: document.getElementById(`mbs-desc-${i}`)?.value || "" });
+    if (code) overrides.mbs_items.push({
+      item_number: code, description: document.getElementById(`mbs-desc-${i}`)?.value || "",
+    });
   }
   for (let i = 0; i < snomedRowCount; i++) {
     const term = document.getElementById(`snomed-term-${i}`)?.value.trim();
-    if (term) overrides.diagnoses.push({ term, snomed_ct_au_code: document.getElementById(`snomed-code-${i}`)?.value || "" });
+    if (term) overrides.diagnoses.push({
+      term, snomed_ct_au_code: document.getElementById(`snomed-code-${i}`)?.value || "",
+    });
   }
   for (let i = 0; i < rxRowCount; i++) {
     const drug = document.getElementById(`rx-name-${i}`)?.value.trim();
-    if (drug) overrides.medications.push({ drug_name: drug, dosage_text: document.getElementById(`rx-dose-${i}`)?.value || "" });
+    if (drug) overrides.medications.push({
+      drug_name: drug, dosage_text: document.getElementById(`rx-dose-${i}`)?.value || "",
+    });
   }
+  return overrides;
+}
 
+async function approveAndFinalize() {
+  if (!audioPatientId()) { setStatus("Select a patient before finalising the consultation."); return; }
+  if (!token) { setStatus("Sign in before finalising the consultation."); return; }
+  if (commandCentreOpen) { setStatus("Close Command Centre before finalising in the taskpane."); return; }
+  const binding = consultationBinding;
+  if (!consultationIsCurrent(binding)) {
+    setStatus("Start a consultation in this patient's matching Word document before finalising.");
+    return;
+  }
+  if (finalizationInFlight) return;
+  const attempt = { binding, controller: new AbortController() };
+  finalizationInFlight = attempt;
+  const button = document.getElementById("btn-finalize");
+  if (button) button.disabled = true;
   try {
-    const text    = await getCurrentConsultText();
-    if (!audioIsCurrent(audioSnapshot)) return;
-    const headers = { "Content-Type": "application/json" };
-    if (token) headers["Authorization"] = "Bearer " + token;
+    const text = await getCurrentConsultText();
+    if (!consultationIsCurrent(binding)) return;
+    if (!text.trim()) { setStatus("Add and review consultation notes before finalising."); return; }
+    const overrides = finalizationOverridesSnapshot();
+    const snapshot = JSON.stringify({
+      document_id: binding.commandId, document_context: binding.documentContext,
+      text_delta: text, clinician_overrides: overrides,
+      patient_id: binding.patientId, clinician_attested: true,
+    });
+    if (finalizationSubmission && finalizationSubmission.snapshot !== snapshot) {
+      setStatus("Previous save may have completed. Restore its reviewed content and retry to resolve that save.");
+      return;
+    }
+    const affirmation = "I am the authenticated GP. I have personally reviewed this patient's consultation text, diagnoses, billing items and medications, and authorise finalisation. AI suggestions do not authorise this save.";
+    if (typeof window.confirm !== "function" || window.confirm(affirmation) !== true) {
+      setStatus("Not saved. Explicit clinician attestation is required.");
+      return;
+    }
+    if (!consultationIsCurrent(binding)) return;
+    // Word can change while the confirmation is open. Affirm only this exact
+    // patient, document, notes and synchronous form projection; never cache consent.
+    const confirmedText = await getCurrentConsultText();
+    if (!consultationIsCurrent(binding)) return;
+    if (confirmedText !== text || JSON.stringify(finalizationOverridesSnapshot()) !== JSON.stringify(overrides)) {
+      setStatus("Not saved. Consultation changed during confirmation; review it and confirm again.");
+      return;
+    }
+    finalizationSubmission = { binding, snapshot };
+    setStatus("Saving to database...");
     const res = await fetch(API_BASE + "/finalize", {
       method: "POST",
-      headers,
-      body: JSON.stringify({ document_id: SESSION_ID, text_delta: text, clinician_overrides: overrides, patient_id: audioSnapshot.patientId }),
+      headers: { "Content-Type": "application/json", "Authorization": "Bearer " + binding.token },
+      body: snapshot, signal: attempt.controller.signal,
     });
-    if (!audioIsCurrent(audioSnapshot)) return;
-    if (res.ok) {
-      const data = await res.json();
-      if (!audioIsCurrent(audioSnapshot)) return;
-      if (data._saved === false) {
-        setStatus("❌ " + (data._save_error || "Save failed"));
-      } else {
-        setStatus("✅ Record finalised & saved.");
-        isLocked = true;
-        updateLockUI();
-        consultStarted = false;   // allow a new consultation to be started
-        updateStartConsultButton();
-        const btn = document.getElementById("btn-finalize");
-        if (btn) { btn.disabled = true; btn.textContent = "✅ Finalised"; }
-        clearAudioSession();
-        document.getElementById("transcript-row")?.classList.add("hidden");
-      }
-    } else {
-      setStatus("❌ Server error " + res.status);
+    if (!consultationIsCurrent(binding)) return;
+    if (!res.ok) {
+      setStatus("Save not confirmed (server " + res.status + "). Retry only the same reviewed consultation.");
+      return;
     }
+    const data = await res.json();
+    if (!consultationIsCurrent(binding)) return;
+    if (data._saved !== true || typeof data.encounter_id !== "string"
+      || !/^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/.test(data.encounter_id)) {
+      setStatus("Save not confirmed. Retry the same reviewed consultation.");
+      return;
+    }
+    isLocked = true;
+    updateLockUI();
+    invalidateConsultationBinding();
+    if (button) { button.disabled = true; button.textContent = "Finalised"; }
+    clearAudioSession();
+    document.getElementById("transcript-row")?.classList.add("hidden");
+    setStatus("Record finalised and saved.");
   } catch {
-    if (audioIsCurrent(audioSnapshot)) setStatus("❌ Network error. Check the backend.");
+    if (consultationIsCurrent(binding)) {
+      setStatus("Save not confirmed. Check the Word binding and connection; retry the same reviewed consultation.");
+    }
+  } finally {
+    if (finalizationInFlight === attempt) finalizationInFlight = null;
+    if (button && consultationIsCurrent(binding) && !commandCentreOpen) button.disabled = false;
   }
 }
 
@@ -1798,6 +1889,10 @@ const CC_URL = "https://yurifrusin.github.io/EMR4/command-centre/command-centre.
 // click gesture (no await before it). Awaiting first breaks the user-gesture
 // chain, which makes Office on the web more likely to block/prompt the window.
 function openCommandCentre() {
+  if (consultationStartPending || finalizationInFlight || finalizationSubmission) {
+    setStatus("Resolve the current consultation start or submitted save before opening Command Centre.");
+    return;
+  }
   if (!currentPatient) {
     setStatus("Load a patient before opening Command Centre.");
     return;
@@ -1826,16 +1921,7 @@ function openCommandCentre() {
 
     // Plant the dated consult header now (after the window opened), unless one
     // was already started this session.
-    if (!consultStarted) {
-      insertConsultHeader(currentPatient).then(inserted => {
-        if (inserted) {
-          clearAudioSession();
-          consultStarted = true;
-          lastSyncedText = "";
-          updateStartConsultButton();
-        }
-      });
-    }
+    if (!consultStarted) window.startConsultation();
 
     commandCentreDialog.addEventHandler(Office.EventType.DialogMessageReceived, arg => {
       try {
@@ -1852,7 +1938,7 @@ function openCommandCentre() {
           // Reflect the Command Centre's finalised coding in the taskpane Consult
           // tab and lock it so background sync won't overwrite it.
           if (msg.data) { updateFormFields(msg.data); isLocked = true; updateLockUI(); }
-          consultStarted = false;                 // allow a new consult to be started
+          invalidateConsultationBinding();       // a dialog cannot preserve a stale save binding
           updateStartConsultButton();
           const fbtn = document.getElementById("btn-finalize");
           if (fbtn) { fbtn.disabled = true; fbtn.textContent = "✅ Finalised"; }
@@ -1947,123 +2033,130 @@ async function repairDocumentStructure() {
   }
 }
 
-async function insertConsultHeader(patient) {
-  const { datePart, restPart, full } = buildConsultHeader(patient);
-  lastConsultHeader = full;
+async function insertConsultHeader(patient, capture) {
+  const { datePart, restPart } = buildConsultHeader(patient);
+  const marker = "[EMR4 " + capture.commandId + "]";
+  const endMarker = "[/EMR4 " + capture.commandId + "]";
+  const full = datePart + "  " + restPart + " " + marker;
   try {
-    await Word.run(async ctx => {
+    return await Word.run(async ctx => {
       const paras = ctx.document.body.paragraphs;
       paras.load("items/text,items/styleBuiltIn");
       const cnCtrls = ctx.document.contentControls.getByTag(SECTION_TAG_CN);
       cnCtrls.load("items");
       await ctx.sync();
-
-      // Prefer content-control tag (survives minor text edits); fall back to text search
-      let insertTarget = cnCtrls.items.length > 0 ? cnCtrls.items[0] : null;
-      if (!insertTarget) {
-        for (const p of paras.items) {
-          if (p.styleBuiltIn === Word.BuiltInStyleName.heading1 &&
-              (p.text || "").trim().toLowerCase() === SECTION_HEADING.toLowerCase()) {
-            insertTarget = p; break;
-          }
-        }
-      }
-
-      const para = insertTarget
-        ? insertTarget.insertParagraph(datePart, Word.InsertLocation.after)
-        : ctx.document.body.insertParagraph(datePart, Word.InsertLocation.end);
+      if (!consultationCaptureIsCurrent(capture)) return null;
+      const headings = paras.items.filter(p =>
+        p.styleBuiltIn === Word.BuiltInStyleName.heading1
+        && (p.text || "").trim().toLowerCase() === SECTION_HEADING.toLowerCase());
+      // An absent/ambiguous section cannot silently fall back to the document body.
+      if (headings.length !== 1 || cnCtrls.items.length > 1) return null;
+      const para = headings[0].insertParagraph(datePart, Word.InsertLocation.after);
       para.styleBuiltIn = Word.BuiltInStyleName.normal;
-      para.font.bold = true;                              // date in bold
-      const rest = para.insertText("  " + restPart, Word.InsertLocation.end);
-      rest.font.bold = false;                             // name/time/age plain
-      // Bookmark the end of the header so the SOAP note inserts right after it
+      para.font.bold = true;
+      const rest = para.insertText("  " + restPart + " " + marker, Word.InsertLocation.end);
+      rest.font.bold = false;
+      const end = para.insertParagraph(endMarker, Word.InsertLocation.after);
+      end.styleBuiltIn = Word.BuiltInStyleName.normal;
+      end.font.bold = false;
       para.getRange(Word.RangeLocation.end).insertBookmark(NOTE_BOOKMARK);
       para.getRange(Word.RangeLocation.end).select();
       await ctx.sync();
+      if (!consultationCaptureIsCurrent(capture)) return null;
+      return Object.freeze({ ...capture, header: full, marker, endMarker });
     });
-    return true;
-  } catch (e) {
-    setStatus("Header insert failed: " + e.message);
-    return false;
+  } catch {
+    return null;
   }
 }
 
-// Starts a new consultation: plants the dated header under Contemporaneous Notes.
+// Publish a new binding only after Word insertion completes for the same identity.
 window.startConsultation = async function () {
   if (!currentPatient) { setStatus("Load a patient before starting a consultation."); return; }
-  if (consultStarted) { setStatus("A consultation is already in progress this session."); return; }
-  const inserted = await insertConsultHeader(currentPatient);
-  if (!inserted) return;
-  clearAudioSession();
-  consultStarted = true;
-  lastSyncedText = "";
-  lastAiResponse = null;
-  updateSyncDebug({ tick: 0, textLen: 0, fetch: "started", http: "-", result: "-", extract: "-" });
+  if (!token) { setStatus("Sign in before starting a consultation."); return; }
+  if (consultStarted || consultationStartPending || finalizationInFlight) {
+    setStatus("A consultation or save is already in progress this session."); return;
+  }
+  const documentContext = wordDocumentContext();
+  if (!documentContext || documentContext !== currentPatient.document_url) {
+    setStatus("Open this patient's exact stored Word document before starting a consultation."); return;
+  }
+  invalidateConsultationBinding();
+  const capture = Object.freeze({
+    generation: consultationGeneration, patientId: audioPatientId(),
+    token, documentContext, commandId: crypto.randomUUID(),
+  });
+  const patient = { ...currentPatient };
+  consultationStartPending = capture;
   updateStartConsultButton();
-  isLocked = false; updateLockUI();   // fresh consult — AI live again
-  updateFormFields({});               // clear any previously displayed coding
-  const fbtn = document.getElementById("btn-finalize");
-  if (fbtn) { fbtn.disabled = false; fbtn.textContent = "Approve & Finalise Record"; }
-  setStatus("Consultation started - type after the header; press Enter for a new line.");
-  setTimeout(runBackgroundSync, 0);
+  try {
+    const binding = await insertConsultHeader(patient, capture);
+    if (!consultationCaptureIsCurrent(capture)) return;
+    if (!binding) {
+      setStatus("Consultation not started. Check the Word document and its Contemporaneous Notes heading.");
+      return;
+    }
+    consultationBinding = binding;
+    lastConsultHeader = binding.header;
+    consultStarted = true;
+    clearAudioSession();
+    lastSyncedText = "";
+    lastAiResponse = null;
+    updateSyncDebug({ tick: 0, textLen: 0, fetch: "started", http: "-", result: "-", extract: "-" });
+    isLocked = commandCentreOpen;
+    updateLockUI();
+    updateFormFields({});
+    const button = document.getElementById("btn-finalize");
+    if (button) { button.disabled = commandCentreOpen; button.textContent = "Approve & Finalise Record"; }
+    setStatus("Consultation started. Type notes between its header and closing marker; keep both markers intact.");
+    setTimeout(runBackgroundSync, 0);
+  } finally {
+    if (consultationStartPending === capture) consultationStartPending = null;
+    updateStartConsultButton();
+  }
 };
 
-// Reads ONLY the current consultation's notes: from the planted header down to
-// the previous consult header or the next section heading — never the whole doc.
+// Read only the exactly bound header and marker; never substitute an older consult.
 async function getCurrentConsultText() {
+  const binding = consultationBinding;
+  if (!consultationIsCurrent(binding)) throw new Error("Consultation binding is not current.");
   return Word.run(async ctx => {
     const paras = ctx.document.body.paragraphs;
     paras.load("items/text,items/styleBuiltIn");
     await ctx.sync();
+    if (!consultationIsCurrent(binding)) throw new Error("Consultation binding changed during Word read.");
     const items = paras.items;
-    const sectionHeadings = new Set(PROTECTED_SECTIONS.map(s => s.text.toLowerCase()));
-    const paraText = p => (p.text || "").trim();
-    const compact = s => String(s || "").replace(/\s+/g, " ").trim();
-    const isHeading1 = p =>
-      p.styleBuiltIn === Word.BuiltInStyleName.heading1 ||
-      sectionHeadings.has(paraText(p).toLowerCase());
-    let cnIdx = items.findIndex(p =>
-      paraText(p).toLowerCase() === SECTION_HEADING.toLowerCase());
-    if (cnIdx === -1) {
-      updateSyncDebug({ extract: "cn:-1 hdr:-1 lines:0" });
-      return "";
+    const paraText = p => p.text || "";
+    const isHeading1 = p => p.styleBuiltIn === Word.BuiltInStyleName.heading1;
+    const headings = items.map((p, idx) =>
+      isHeading1(p) && paraText(p).trim().toLowerCase() === SECTION_HEADING.toLowerCase()
+        ? idx : -1).filter(idx => idx >= 0);
+    const occurrences = marker => items.reduce(
+      (count, p) => count + paraText(p).split(marker).length - 1, 0);
+    if (!binding.endMarker || headings.length !== 1
+      || occurrences(binding.marker) !== 1 || occurrences(binding.endMarker) !== 1) {
+      throw new Error("Consultation section or unique boundary marker is missing or ambiguous.");
     }
-
-    // Locate the current consult header (first matching line after the section heading)
-    const wantedHeader = compact(lastConsultHeader);
+    const cnIdx = headings[0];
     let startIdx = -1;
-    let selected = null;
-    let fallback = null;
     for (let i = cnIdx + 1; i < items.length; i++) {
-      if (isHeading1(items[i])) break;                          // hit next section — no consult yet
-      const text = paraText(items[i]);
-      if (!CONSULT_HEADER_RE.test(text)) continue;
-      const candidate = { idx: i, tail: text.replace(CONSULT_HEADER_PREFIX_RE, "").trim() };
-      if (!fallback) fallback = candidate;
-      if (!wantedHeader || compact(text).startsWith(wantedHeader)) {
-        selected = candidate;
-        startIdx = i;
-        break;
-      }
+      if (isHeading1(items[i])) break;
+      if (paraText(items[i]).startsWith(binding.header)) { startIdx = i; break; }
     }
-    if (startIdx === -1 && fallback) {
-      selected = fallback;
-      startIdx = fallback.idx;
+    const endIdx = items.findIndex(p => paraText(p) === binding.endMarker);
+    if (startIdx < 0 || endIdx <= startIdx) {
+      throw new Error("The exact started consultation boundaries are invalid.");
     }
-    if (startIdx === -1) {
-      updateSyncDebug({ extract: `cn:${cnIdx} hdr:-1 lines:0` });
-      return "";
-    }
-
-    // Collect notes until the previous consult header or the next section heading
-    const lines = selected?.tail ? [selected.tail] : [];
-    for (let i = startIdx + 1; i < items.length; i++) {
+    const tail = paraText(items[startIdx]).slice(binding.header.length).trim();
+    const lines = tail ? [tail] : [];
+    for (let i = startIdx + 1; i < endIdx; i++) {
       const p = items[i];
-      if (isHeading1(p)) break;
-      if (CONSULT_HEADER_RE.test((p.text || "").trim())) break;
-      lines.push(p.text);
+      if (isHeading1(p)) throw new Error("Consultation boundaries cross a document section.");
+      // Dates and ages are ordinary note content, never an implicit end boundary.
+      lines.push(paraText(p));
     }
-    updateSyncDebug({ extract: `cn:${cnIdx} hdr:${startIdx} lines:${lines.length}` });
+    if (!consultationIsCurrent(binding)) throw new Error("Consultation binding changed.");
+    updateSyncDebug({ extract: "bound lines:" + lines.length });
     return lines.join("\n").trim();
   });
 }
@@ -2764,6 +2857,8 @@ async function performPatientDetailsSave(body) {
     }
 
     const data = await res.json();
+    if (String(currentPatient?.id) !== String(patientId) || String(data.id) !== String(patientId)) return;
+    if (data.document_url !== currentPatient.document_url) invalidateConsultationBinding();
     currentPatient = data;
     pendingPatientEditPayload = null;
     setBanner(currentPatient);
