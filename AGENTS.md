@@ -8,6 +8,14 @@ For each new worker or reviewer subagent, assign the minimum sufficient model an
 
 Keep the recovery coordinator at Yuri's selected maximum reasoning effort. Report actual assignments accurately: existing agents retain their settings, and assigning an agent model or effort does not change a UI setting.
 
+# Host Engineering Meetings
+
+Host A coordinates implementation and the canonical meeting record; Host B independently reviews design and participates. Keep both hosts' selected configurations unchanged. Use the existing native task-message route and one Host A heartbeat, defaulting to every two hours while development is active and there is new work or evidence. Either host may request a topic with its reason, urgency and evidence. Coalesce requests and missed slots; retain due or requested meetings pending while either host is unavailable, stale or in a critical operation.
+
+Both hosts freeze independent briefs before either reads the peer contribution. Reconfirm fresh readiness at meeting start and each discussion boundary; both hosts then read and respond in at most two rounds. Record actions, owners, completion criteria, disagreement and unresolved questions; require both hosts to acknowledge the exact decision revision and digest. Advance the evidence cursor only over material actually discussed; retain undiscussed and unresolved material. Silence is not agreement. Refer only materially necessary owner decisions to Yuri and continue authorised development. Meeting agreement never replaces independent acceptance or changes recovery, protected-evidence or publication boundaries.
+
+Use the reviewed local protocol and current verification status in `C:/Users/there/EMR4-tools/host-collaboration-candidate-v1/README.md`. Apply and record task-specific worker settings and escalation through supported spawn controls using `C:/Users/there/EMR4-tools/host-collaboration-candidate-v1/worker-allocation.md`. Coordinate changes to this file with active publication pins.
+
 # Development Environment Installation Authority
 
 Yuri grants standing authority to install useful development tools and dependencies in project-specific environments without requesting routine confirmation. In the process, record the versions installed and the changes made in the appropriate project environment or change record. This authority persists across sessions. Reuse suitable existing installations.

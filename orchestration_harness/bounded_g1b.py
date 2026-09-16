@@ -670,6 +670,58 @@ OPERATION_PATHS.update(enable_g2_clinical_authority=G2_CLINICAL_MAINTENANCE_PATH
                        repair_g2_clinical_authority=G2_CLINICAL_PATHS)
 
 
+G2_MIGRATION_GUARD_BINDING_VERSION = "ariadne.bounded_g2_batch_binding.v9"
+G2_MIGRATION_GUARD_SCOPE_VERSION = "ariadne.g2_reviewed_batch_scope.v9"
+G2_MIGRATION_GUARD_CODE_PATHS = frozenset({
+    "orchestration_harness/bounded_g1b.py", "tests/test_bounded_g1b.py",
+})
+G2_MIGRATION_GUARD_MAINTENANCE_PATHS = G2_BATCH_CONTROL_PATHS | G2_MIGRATION_GUARD_CODE_PATHS | {AGENTS}
+G2_MIGRATION_GUARD_INSTRUCTIONS_SHA256 = "93ebf50187b6132fcee91cee7f4ba0b81bb59286ed9eaf52cdadab3a09ba20c1"
+G2_MIGRATION_GUARD_PREDECESSOR = {
+    "commit": "a0b8620b172f37648326d7fd86214c4019a5e275",
+    "parent": "9ffd3b8cb2b3aea873458f9758bc29393ff44e2b",
+    "tree": "3542610ba876074ec39b9342ee014dd134fef3e8",
+    "source_sha256": {
+        "orchestration_harness/bounded_g1b.py": "8deff19d46498ae2dfdd0bbb06f9d638f8621e1f120053139ff648ca25da3d43",
+        "orchestration_harness/configuration_core.py": "f7ba7a80eb0a590f9fb71b864e6c1f9f43241d9f7d70a38da67a9243fea208e5",
+        "orchestration_harness/programme_admission.py": "ac816a8a79b2d8222fa357777c075950927e86cf30c8a5b25ffd08a474052181",
+        "orchestration_harness/raisa_policy.py": "c8d825067fad126383ec14f7ae34b277a5078898f06044eced9c40938bad6d75",
+        "tests/test_bounded_g1b.py": "11b7922837b6045c0a7227ce46db4ca0dc86d1c9204261c96fe95109bd1bad48",
+    },
+}
+G2_MIGRATION_GUARD_PREDECESSOR_POLICY = {
+    AGENTS: "254c906919e49c69b53c82fa2a678953b45e20d5e2ce2503184583daf09f8cc7",
+    STATE: "d66b7c336123e4c7168f442144d58fdf1a10be033638f72e0ac17ae99fb43f33",
+    OVERLAY: "3cad4644d7f3799b755155dc803a7c5fd3e2e2f0f734c0db6548efaf95a472ba",
+    G2_SCOPE: "bda7013d18e2497780e5938b213ad898ccd6421943abecece1f769d412baf5a2",
+    GATES: G2_INITIAL_POLICY_PINS[GATES],
+}
+G2_MIGRATION_GUARD_PRIOR_ACCEPTANCE = {
+    "path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-entry/migration-preservation/repair-v1/native-acceptance.json",
+    "sha256": "3d28829c3e6406dbdd1a7a280bdb008c70f968d301696ba5e49e9ea5aaa8ce5d",
+    "role": "opaque_historical_reference_only_no_new_runtime_or_criterion_acceptance",
+}
+G2_MIGRATION_GUARD_CLINICAL_ACCEPTANCE = {
+    "path": "C:/Users/there/EMR4-tools/g2-clinical-product5-publish-20260915-v1/resume-20260916/actual-post-publication-acceptance.json",
+    "sha256": "2e47c6a1900c0204281e6d51bceed659cc76a40d339d5fa3604ff74f05ab7683",
+    "role": "opaque_historical_publication_acceptance_not_runtime_authority",
+}
+G2_MIGRATION_GUARD_REPAIR_PINS = {
+    "alembic/versions/d4787e8e3629_phase_0_baseline.py": "d2c66aadecb0e35f75b6aab369189a9075fa7db26d304ea2993944d5d0fd9732",
+    "tests/test_phase0_migration_preservation.py": "d3792958aca0ac7bb9d98510f895b41b22fa20b7108190a9b57fdc06ba9d8e79",
+}
+G2_MIGRATION_GUARD_LIMITS = (
+    "only the two existing migration downgrade-guard source and regression paths are eligible",
+    "the owner-supported migration contract and all historical latches and acceptance remain unchanged",
+    "the prior 25-case migration acceptance is an opaque historical reference, not new execution authority",
+    "admission grants no runtime, G2 completion, feature, provider, real-data, protected-evidence or integration acceptance",
+)
+G2_BATCH_KINDS = G2_BATCH_KINDS | {"enable_g2_migration_downgrade_guard", "repair_g2_migration_downgrade_guard"}
+G2_MAINTENANCE_KINDS = G2_MAINTENANCE_KINDS | {"enable_g2_migration_downgrade_guard"}
+OPERATION_PATHS.update(enable_g2_migration_downgrade_guard=G2_MIGRATION_GUARD_MAINTENANCE_PATHS,
+                       repair_g2_migration_downgrade_guard=G2_MIGRATION_PATHS)
+
+
 def _batch_changes(binding: dict) -> dict:
     kind = binding.get("operation_kind")
     rows = binding.get("repair_sha256")
@@ -683,15 +735,19 @@ def _batch_changes(binding: dict) -> dict:
     patient = binding.get("schema_version") == G2_PATIENT_BINDING_VERSION
     atomicity = binding.get("schema_version") == G2_ATOMICITY_BINDING_VERSION
     clinical = binding.get("schema_version") == G2_CLINICAL_BINDING_VERSION
+    guard = binding.get("schema_version") == G2_MIGRATION_GUARD_BINDING_VERSION
     _need((kind in {"enable_g2_migration", "repair_g2_migration", "align_g2_instructions"}) == migration
           and (kind != "align_g2_instructions" or instructions)
           and (not instructions or kind in {"align_g2_instructions", "repair_g2_migration"})
           and (kind in {"enable_g2_audio_privacy", "repair_g2_audio_privacy"}) == audio
           and (kind in {"enable_g2_patient_binding", "repair_g2_patient_binding"}) == patient
           and (kind in {"enable_g2_consultation_atomicity", "repair_g2_consultation_atomicity"}) == atomicity
-          and (kind in {"enable_g2_clinical_authority", "repair_g2_clinical_authority"}) == clinical,
+          and (kind in {"enable_g2_clinical_authority", "repair_g2_clinical_authority"}) == clinical
+          and (kind in {"enable_g2_migration_downgrade_guard", "repair_g2_migration_downgrade_guard"}) == guard,
           "bounded_g2_batch_binding_version")
-    allowed = (G2_CLINICAL_MAINTENANCE_PATHS if maintenance and clinical
+    allowed = (G2_MIGRATION_GUARD_MAINTENANCE_PATHS if maintenance and guard
+               else G2_MIGRATION_PATHS if guard
+               else G2_CLINICAL_MAINTENANCE_PATHS if maintenance and clinical
                else G2_ATOMICITY_MAINTENANCE_PATHS if maintenance and atomicity
                else G2_PATIENT_MAINTENANCE_PATHS if maintenance and patient
                else G2_AUDIO_MAINTENANCE_PATHS if maintenance and audio
@@ -701,7 +757,7 @@ def _batch_changes(binding: dict) -> dict:
                else G2_PATIENT_PATHS if patient
                else G2_AUDIO_PATHS if audio else G2_MIGRATION_PATHS if migration
                else G2_CATALOGUE_PATHS if catalogue else G2_BATCH_PATHS)
-    _need(set(rows) <= allowed and (not maintenance or set(rows) == allowed),
+    _need(set(rows) <= allowed and (not (maintenance or guard) or set(rows) == allowed),
           "bounded_g2_batch_path_not_allowed")
     for path, row in rows.items():
         _keys(row, {"before_sha256", "after_sha256"}, "bounded_g2_batch_change_schema")
@@ -713,6 +769,9 @@ def _batch_changes(binding: dict) -> dict:
         digests = (row["after_sha256"],) if addition else row.values()
         _need(all(type(v) is str and re.fullmatch(r"[0-9a-f]{64}", v) for v in digests)
               and row["before_sha256"] != row["after_sha256"], "bounded_g2_batch_change_digest")
+        if guard and not maintenance:
+            _need(row["before_sha256"] == G2_MIGRATION_GUARD_REPAIR_PINS[path],
+                  "bounded_g2_migration_guard_repair_preimage")
     return rows
 
 
@@ -722,13 +781,13 @@ def batch_input_paths(binding: dict) -> frozenset[str]:
     if binding.get("schema_version") in {G2_CATALOGUE_BINDING_VERSION, G2_MIGRATION_BINDING_VERSION,
                                          G2_INSTRUCTIONS_BINDING_VERSION, G2_AUDIO_BINDING_VERSION,
                                          G2_PATIENT_BINDING_VERSION, G2_ATOMICITY_BINDING_VERSION,
-                                         G2_CLINICAL_BINDING_VERSION}:
+                                         G2_CLINICAL_BINDING_VERSION, G2_MIGRATION_GUARD_BINDING_VERSION}:
         return G2_CATALOGUE_POLICY_PATHS | frozenset(changes)
     return G2_BATCH_INPUT_PATHS
 
 
 def operation_effects(kind: str) -> frozenset[str]:
-    if kind == "repair_g2_migration":
+    if kind in {"repair_g2_migration", "repair_g2_migration_downgrade_guard"}:
         return G2_MIGRATION_EFFECTS
     if kind in {"repair_g2_batch", "repair_g2_audio_privacy", "repair_g2_patient_binding",
                 "repair_g2_consultation_atomicity", "repair_g2_clinical_authority"}:
@@ -739,7 +798,8 @@ def operation_effects(kind: str) -> frozenset[str]:
 def operation_paths(kind: str, binding: dict | None = None) -> frozenset[str]:
     _need(type(kind) is str and kind in OPERATION_PATHS, "bounded_g1b_operation_kind")
     if kind in {"repair_g2_batch", "repair_g2_migration", "repair_g2_audio_privacy",
-                "repair_g2_patient_binding", "repair_g2_consultation_atomicity", "repair_g2_clinical_authority"}:
+                "repair_g2_patient_binding", "repair_g2_consultation_atomicity", "repair_g2_clinical_authority",
+                "repair_g2_migration_downgrade_guard"}:
         _need(type(binding) is dict and binding.get("operation_kind") == kind,
               "bounded_g2_batch_binding_required")
         return frozenset(_batch_changes(binding))
@@ -753,7 +813,8 @@ def _operation(kind: str, binding: dict | None = None) -> dict:
                 "transition_paths": G2_TRANSITION_PATHS, "scope_path": G2_SCOPE,
                 "transition": kind in G2_MAINTENANCE_KINDS, "batch": True,
                 "profile": G2_PROFILE, "gate": "G2",
-                "limits": G2_CLINICAL_LIMITS if binding.get("schema_version") == G2_CLINICAL_BINDING_VERSION
+                "limits": G2_MIGRATION_GUARD_LIMITS if binding.get("schema_version") == G2_MIGRATION_GUARD_BINDING_VERSION
+                else G2_CLINICAL_LIMITS if binding.get("schema_version") == G2_CLINICAL_BINDING_VERSION
                 else G2_ATOMICITY_LIMITS if binding.get("schema_version") == G2_ATOMICITY_BINDING_VERSION
                 else G2_PATIENT_LIMITS if binding.get("schema_version") == G2_PATIENT_BINDING_VERSION
                 else G2_AUDIO_LIMITS if binding.get("schema_version") == G2_AUDIO_BINDING_VERSION
@@ -1903,8 +1964,44 @@ def build_g2_clinical_scope(recorded_at: str, transition_base: str, controller_s
     return scope
 
 
+def build_g2_migration_guard_scope(recorded_at: str, transition_base: str, controller_sources: dict) -> dict:
+    """A distinct V9 successor from accepted clinical publication; no replay."""
+    _need(transition_base == G2_MIGRATION_GUARD_PREDECESSOR["commit"],
+          "bounded_g2_migration_guard_transition_base")
+    scope = build_g2_clinical_scope(recorded_at, transition_base, controller_sources)
+    _need(all(controller_sources[path] == G2_MIGRATION_GUARD_PREDECESSOR["source_sha256"][path]
+              for path in CONTROLLER_PATHS - G2_MIGRATION_GUARD_CODE_PATHS),
+          "bounded_g2_migration_guard_unchanged_controller_component")
+    scope["prior_instruction_policy"] = copy.deepcopy(scope["current_instruction_policy"])
+    scope.update(
+        schema_version=G2_MIGRATION_GUARD_SCOPE_VERSION,
+        enable_operation="enable_g2_migration_downgrade_guard",
+        repair_operation="repair_g2_migration_downgrade_guard",
+        allowed_paths=sorted(G2_MIGRATION_PATHS), maximum_changed_files=2, allowed_additions=[],
+        allowed_effects=sorted(G2_MIGRATION_EFFECTS),
+        forbidden_effects=raisa_policy.g2_migration_profile()["forbidden_effects"],
+        migration_supported_paths=raisa_policy.g2_migration_contract(),
+        repair_preimage_sha256=copy.deepcopy(G2_MIGRATION_GUARD_REPAIR_PINS),
+        current_instruction_policy={"path": AGENTS, "sha256": G2_MIGRATION_GUARD_INSTRUCTIONS_SHA256,
+            "previous_sha256": G2_MIGRATION_GUARD_PREDECESSOR_POLICY[AGENTS],
+            "authority": "accepted_meeting_insertion_owned_by_exact_maintenance_candidate"},
+        published_clinical_repair={key: G2_MIGRATION_GUARD_PREDECESSOR[key]
+                                   for key in ("commit", "parent", "tree")},
+        prior_migration_acceptance=copy.deepcopy(G2_MIGRATION_GUARD_PRIOR_ACCEPTANCE),
+        prior_clinical_publication_acceptance=copy.deepcopy(G2_MIGRATION_GUARD_CLINICAL_ACCEPTANCE),
+        claim_limits=list(G2_MIGRATION_GUARD_LIMITS),
+    )
+    scope["current_operation"]["operation_id"] = "g2-migration-downgrade-guard-repair"
+    scope["current_operation"]["supersedes"] = {
+        "operation_id": "g2-clinical-authority-repair", "scope_path": G2_SCOPE,
+        "scope_commit": G2_MIGRATION_GUARD_PREDECESSOR["commit"],
+        "scope_sha256": G2_MIGRATION_GUARD_PREDECESSOR_POLICY[G2_SCOPE], "historical_latch_preserved": True}
+    return scope
+
+
 def _validate_g2_batch_scope(scope: dict) -> None:
-    builder = (build_g2_clinical_scope if scope.get("schema_version") == G2_CLINICAL_SCOPE_VERSION
+    builder = (build_g2_migration_guard_scope if scope.get("schema_version") == G2_MIGRATION_GUARD_SCOPE_VERSION
+               else build_g2_clinical_scope if scope.get("schema_version") == G2_CLINICAL_SCOPE_VERSION
                else build_g2_atomicity_scope if scope.get("schema_version") == G2_ATOMICITY_SCOPE_VERSION
                else build_g2_patient_scope if scope.get("schema_version") == G2_PATIENT_SCOPE_VERSION
                else build_g2_audio_scope if scope.get("schema_version") == G2_AUDIO_SCOPE_VERSION
@@ -2069,6 +2166,27 @@ def build_g2_clinical_transition(before: dict[str, bytes], scope: dict) -> dict[
             G2_SCOPE: scope_raw}
 
 
+def build_g2_migration_guard_transition(before: dict[str, bytes], scope: dict) -> dict[str, bytes]:
+    """Preserve accepted historical state; replace only the active repair lane."""
+    _keys(before, G2_BATCH_CONTROL_PATHS, "bounded_g2_migration_guard_transition_paths")
+    for path in G2_BATCH_CONTROL_PATHS:
+        _need(type(before[path]) is bytes and _sha(before[path]) == G2_MIGRATION_GUARD_PREDECESSOR_POLICY[path],
+              "bounded_g2_migration_guard_prior_policy_changed")
+    _need(scope.get("schema_version") == G2_MIGRATION_GUARD_SCOPE_VERSION,
+          "bounded_g2_migration_guard_scope_version")
+    _validate_g2_batch_scope(scope)
+    state = _json(before[STATE])
+    overlay = _document(before[OVERLAY], OVERLAY)
+    scope_raw = _canonical(scope) + b"\n"
+    state["observed_at"] = scope["recorded_at"]
+    state["g2"].update(scope_sha256=_sha(scope_raw), current_operation=_json(_canonical(scope["current_operation"])))
+    state["task_selection"].update(next_eligibility_condition="bounded_G2_migration_downgrade_guard_active")
+    overlay["profiles"][G2_PROFILE] = raisa_policy.g2_migration_profile()
+    return {STATE: (json.dumps(state, indent=2, ensure_ascii=False) + "\n").encode(),
+            OVERLAY: yaml.safe_dump(overlay, sort_keys=False, allow_unicode=True).encode(),
+            G2_SCOPE: scope_raw}
+
+
 def _batch_publication(target: Path, publication: dict, base: str) -> None:
     headers = trusted_git.run_git(target, "cat-file", "commit", publication["commit"]).split("\n\n", 1)[0].splitlines()
     _need([line for line in headers if line.startswith("parent ")] == ["parent " + publication["parent"]]
@@ -2131,7 +2249,8 @@ def _load_g2_batch_inputs(context, target, source, evidence_root, scratch, bindi
     patient = binding["schema_version"] == G2_PATIENT_BINDING_VERSION
     atomicity = binding["schema_version"] == G2_ATOMICITY_BINDING_VERSION
     clinical = binding["schema_version"] == G2_CLINICAL_BINDING_VERSION
-    post_audio = audio or patient or atomicity or clinical
+    guard = binding["schema_version"] == G2_MIGRATION_GUARD_BINDING_VERSION
+    post_audio = audio or patient or atomicity or clinical or guard
     version_kinds = {
         G2_BATCH_BINDING_VERSION: {"enable_g2_batches", "repair_g2_batch"},
         G2_CATALOGUE_BINDING_VERSION: {"extend_g2_catalogue", "repair_g2_batch"},
@@ -2141,12 +2260,16 @@ def _load_g2_batch_inputs(context, target, source, evidence_root, scratch, bindi
         G2_PATIENT_BINDING_VERSION: {"enable_g2_patient_binding", "repair_g2_patient_binding"},
         G2_ATOMICITY_BINDING_VERSION: {"enable_g2_consultation_atomicity", "repair_g2_consultation_atomicity"},
         G2_CLINICAL_BINDING_VERSION: {"enable_g2_clinical_authority", "repair_g2_clinical_authority"},
+        G2_MIGRATION_GUARD_BINDING_VERSION: {"enable_g2_migration_downgrade_guard", "repair_g2_migration_downgrade_guard"},
     }
     _need(binding["operation_kind"] in version_kinds.get(binding["schema_version"], set()),
           "bounded_g2_batch_binding_version")
     changes = _batch_changes(binding)
     input_paths = batch_input_paths(binding)
     maintenance = binding["operation_kind"] in G2_MAINTENANCE_KINDS
+    if guard and maintenance:
+        _need(binding["base_commit"] == G2_MIGRATION_GUARD_PREDECESSOR["commit"],
+              "bounded_g2_migration_guard_transition_base")
     _need(type(binding["operation_id"]) is str and re.fullmatch(r"[a-z0-9][a-z0-9-]{1,79}", binding["operation_id"]),
           "bounded_g2_batch_operation_id")
     _need(binding["phase"] in {"development", "pre-push", "post-push"}, "bounded_g2_batch_phase")
@@ -2177,12 +2300,14 @@ def _load_g2_batch_inputs(context, target, source, evidence_root, scratch, bindi
           "bounded_g2_atomicity_scope_binding_mismatch")
     _need((scope.get("schema_version") == G2_CLINICAL_SCOPE_VERSION) == clinical,
           "bounded_g2_clinical_scope_binding_mismatch")
+    _need((scope.get("schema_version") == G2_MIGRATION_GUARD_SCOPE_VERSION) == guard,
+          "bounded_g2_migration_guard_scope_binding_mismatch")
     _validate_g2_batch_scope(scope)
     frozen = {**FROZEN_PINS, COST: COST_PIN, SCOPE_PATH: G1B_BASELINE_PINS[SCOPE_PATH],
               G1C_SCOPE: G1C_BASELINE_PINS[G1C_SCOPE], G1D_SCOPE: G1D_BASELINE_PINS[G1D_SCOPE],
               G1E_SCOPE: G1E_BASELINE_PINS[G1E_SCOPE], **GOVERNOR_PINS, **PROVENANCE_DEPENDENCY_PINS,
               **PROVENANCE_PINS, **CONFIGURATION_LEAF_PINS,
-              AGENTS: (G2_AUDIO_INSTRUCTIONS_SHA256 if post_audio else
+              AGENTS: (G2_MIGRATION_GUARD_INSTRUCTIONS_SHA256 if guard else G2_AUDIO_INSTRUCTIONS_SHA256 if post_audio else
                        G2_INSTRUCTIONS_SHA256 if instructions else G2_INITIAL_POLICY_PINS[AGENTS]),
               GATES: G2_INITIAL_POLICY_PINS[GATES]}
     _need(all(_sha(payloads[path]) == digest for path, digest in frozen.items()),
@@ -2208,7 +2333,7 @@ def _load_g2_batch_inputs(context, target, source, evidence_root, scratch, bindi
     if migration or post_audio:
         owner_path = raisa_policy.G2_MIGRATION_OWNER_RECORD
         evidence[owner_path] = read(evidence_root / owner_path, raisa_policy.G2_MIGRATION_OWNER_SHA256)
-    if clinical:
+    if clinical or guard:
         owner_path = raisa_policy.G2_CLINICAL_OWNER_RECORD
         evidence[owner_path] = read(evidence_root / owner_path, raisa_policy.G2_CLINICAL_OWNER_SHA256)
     prior_policy = initial_policy
@@ -2255,7 +2380,7 @@ def _load_g2_batch_inputs(context, target, source, evidence_root, scratch, bindi
                 prior_policy[path] = raw
         _validate_g2_audio_trusted_git_publication(target, base)
         _validate_g2_audio_instructions_publication(target, base)
-    if patient or atomicity or clinical:
+    if patient or atomicity or clinical or guard:
         _batch_publication(target, G2_PATIENT_PREDECESSOR, base)
         prior_policy = {}
         for path, digest in {**G2_PATIENT_PREDECESSOR_POLICY,
@@ -2265,7 +2390,7 @@ def _load_g2_batch_inputs(context, target, source, evidence_root, scratch, bindi
             if path in G2_PATIENT_PREDECESSOR_POLICY:
                 prior_policy[path] = raw
         _validate_g2_patient_audio_publication(target, base)
-    if atomicity or clinical:
+    if atomicity or clinical or guard:
         _batch_publication(target, G2_ATOMICITY_PREDECESSOR, base)
         prior_policy = {}
         for path, digest in {**G2_ATOMICITY_PREDECESSOR_POLICY,
@@ -2275,7 +2400,7 @@ def _load_g2_batch_inputs(context, target, source, evidence_root, scratch, bindi
             if path in G2_ATOMICITY_PREDECESSOR_POLICY:
                 prior_policy[path] = raw
         _validate_g2_atomicity_patient_publication(target, base)
-    if clinical:
+    if clinical or guard:
         _batch_publication(target, G2_CLINICAL_PREDECESSOR, base)
         prior_policy = {}
         for path, digest in {**G2_CLINICAL_PREDECESSOR_POLICY,
@@ -2285,6 +2410,16 @@ def _load_g2_batch_inputs(context, target, source, evidence_root, scratch, bindi
             if path in G2_CLINICAL_PREDECESSOR_POLICY:
                 prior_policy[path] = raw
         _validate_g2_clinical_atomicity_publication(target, base)
+    if guard:
+        _batch_publication(target, G2_MIGRATION_GUARD_PREDECESSOR, base)
+        prior_policy = {}
+        for path, digest in {**G2_MIGRATION_GUARD_PREDECESSOR_POLICY,
+                             **G2_MIGRATION_GUARD_PREDECESSOR["source_sha256"]}.items():
+            raw = trusted_git.run_git_bytes(target, "cat-file", "blob",
+                G2_MIGRATION_GUARD_PREDECESSOR["commit"] + ":" + path)
+            _need(_sha(raw) == digest, "bounded_g2_migration_guard_predecessor_bytes_changed")
+            if path in G2_MIGRATION_GUARD_PREDECESSOR_POLICY:
+                prior_policy[path] = raw
     base_payloads = {}
     for path in sorted(input_paths):
         if path in changes and changes[path]["before_sha256"] is None:
@@ -2309,7 +2444,7 @@ def _load_g2_batch_inputs(context, target, source, evidence_root, scratch, bindi
     _validate_installed_controller(controller)
     _batch_publication(target, controller, base)
     if maintenance:
-        expected_controller = (G2_CLINICAL_PREDECESSOR if clinical
+        expected_controller = (G2_MIGRATION_GUARD_PREDECESSOR if guard else G2_CLINICAL_PREDECESSOR if clinical
                                else G2_ATOMICITY_PREDECESSOR if atomicity
                                else G2_PATIENT_PREDECESSOR if patient else G2_AUDIO_PREDECESSOR if audio
                                else G2_INSTRUCTIONS_PREDECESSOR if instructions
@@ -2320,7 +2455,8 @@ def _load_g2_batch_inputs(context, target, source, evidence_root, scratch, bindi
         _need(controller == expected_controller and binding["activation_commit"] == expected_activation,
               "bounded_g2_batch_maintenance_predecessor")
         _need(scope["transition_base_commit"] == base, "bounded_g2_batch_maintenance_base")
-        prior_pins = ({**G2_CLINICAL_PREDECESSOR_POLICY, AGENTS: G2_AUDIO_INSTRUCTIONS_SHA256} if clinical
+        prior_pins = (G2_MIGRATION_GUARD_PREDECESSOR_POLICY if guard
+                      else {**G2_CLINICAL_PREDECESSOR_POLICY, AGENTS: G2_AUDIO_INSTRUCTIONS_SHA256} if clinical
                       else {**G2_ATOMICITY_PREDECESSOR_POLICY, AGENTS: G2_AUDIO_INSTRUCTIONS_SHA256} if atomicity
                       else {**G2_PATIENT_PREDECESSOR_POLICY, AGENTS: G2_AUDIO_INSTRUCTIONS_SHA256} if patient
                       else {**G2_AUDIO_PREDECESSOR_POLICY, AGENTS: G2_AUDIO_INSTRUCTIONS_SHA256} if audio
@@ -2377,7 +2513,8 @@ def _load_g2_batch_inputs(context, target, source, evidence_root, scratch, bindi
 
 def _validate_g2_batch_loaded_policy(inputs):
     scope = _json(inputs.payloads[G2_SCOPE])
-    builder = (build_g2_clinical_transition if scope.get("schema_version") == G2_CLINICAL_SCOPE_VERSION
+    builder = (build_g2_migration_guard_transition if scope.get("schema_version") == G2_MIGRATION_GUARD_SCOPE_VERSION
+               else build_g2_clinical_transition if scope.get("schema_version") == G2_CLINICAL_SCOPE_VERSION
                else build_g2_atomicity_transition if scope.get("schema_version") == G2_ATOMICITY_SCOPE_VERSION
                else build_g2_patient_transition if scope.get("schema_version") == G2_PATIENT_SCOPE_VERSION
                else build_g2_audio_transition if scope.get("schema_version") == G2_AUDIO_SCOPE_VERSION

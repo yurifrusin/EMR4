@@ -2669,6 +2669,192 @@ class G2ClinicalFixture(G2AtomicityFixture):
         }
 
 
+class G2MigrationGuardSourceContractTests(unittest.TestCase):
+    def test_production_v9_identity_and_narrow_paths_are_exact(self):
+        self.assertEqual(
+            {key: b.G2_MIGRATION_GUARD_PREDECESSOR[key] for key in ("commit", "parent", "tree")},
+            {"commit": "a0b8620b172f37648326d7fd86214c4019a5e275",
+             "parent": "9ffd3b8cb2b3aea873458f9758bc29393ff44e2b",
+             "tree": "3542610ba876074ec39b9342ee014dd134fef3e8"},
+        )
+        self.assertEqual(b.G2_MIGRATION_GUARD_INSTRUCTIONS_SHA256,
+                         "93ebf50187b6132fcee91cee7f4ba0b81bb59286ed9eaf52cdadab3a09ba20c1")
+        self.assertEqual(b.G2_MIGRATION_GUARD_PREDECESSOR_POLICY[b.AGENTS],
+                         "254c906919e49c69b53c82fa2a678953b45e20d5e2ce2503184583daf09f8cc7")
+        self.assertEqual(b.G2_MIGRATION_GUARD_MAINTENANCE_PATHS,
+                         {b.AGENTS, b.STATE, b.OVERLAY, b.G2_SCOPE,
+                          "orchestration_harness/bounded_g1b.py", "tests/test_bounded_g1b.py"})
+        self.assertEqual(set(b.G2_MIGRATION_GUARD_REPAIR_PINS), b.G2_MIGRATION_PATHS)
+        sources = copy.deepcopy(b.G2_MIGRATION_GUARD_PREDECESSOR["source_sha256"])
+        for path in b.G2_MIGRATION_GUARD_CODE_PATHS:
+            sources[path] = "1" * 64
+        scope = b.build_g2_migration_guard_scope(
+            "2026-09-16T02:00:00+00:00", b.G2_MIGRATION_GUARD_PREDECESSOR["commit"], sources)
+        self.assertEqual(scope["published_clinical_repair"], {
+            "commit": "a0b8620b172f37648326d7fd86214c4019a5e275",
+            "parent": "9ffd3b8cb2b3aea873458f9758bc29393ff44e2b",
+            "tree": "3542610ba876074ec39b9342ee014dd134fef3e8",
+        })
+        self.assertEqual(scope["current_operation"]["supersedes"], {
+            "operation_id": "g2-clinical-authority-repair",
+            "scope_path": "orchestration/programme/g2-baseline-repair-scope.json",
+            "scope_commit": "a0b8620b172f37648326d7fd86214c4019a5e275",
+            "scope_sha256": "bda7013d18e2497780e5938b213ad898ccd6421943abecece1f769d412baf5a2",
+            "historical_latch_preserved": True,
+        })
+        self.assertEqual(scope["prior_instruction_policy"], {
+            "path": "AGENTS.md",
+            "sha256": "254c906919e49c69b53c82fa2a678953b45e20d5e2ce2503184583daf09f8cc7",
+            "previous_sha256": "1477744869ac675faf7d7ef5093bec18e058a050a5e1e15c5c2d0bf4af0f21c5",
+            "publication": {
+                "commit": "e787fd8e92c70e4aa7f58d13c98b8f04ec6fee0a",
+                "parent": "9e271036c1e7d4aec842f1e1a4a3f9c1666411dd",
+                "tree": "5ff10cc3775b5b4d292d443b15c9d05df48aed5f",
+            },
+        })
+        self.assertEqual(scope["current_instruction_policy"], {
+            "path": "AGENTS.md",
+            "sha256": "93ebf50187b6132fcee91cee7f4ba0b81bb59286ed9eaf52cdadab3a09ba20c1",
+            "previous_sha256": "254c906919e49c69b53c82fa2a678953b45e20d5e2ce2503184583daf09f8cc7",
+            "authority": "accepted_meeting_insertion_owned_by_exact_maintenance_candidate",
+        })
+        migration_acceptance = {
+            "path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-entry/migration-preservation/repair-v1/native-acceptance.json",
+            "sha256": "3d28829c3e6406dbdd1a7a280bdb008c70f968d301696ba5e49e9ea5aaa8ce5d",
+            "role": "opaque_historical_reference_only_no_new_runtime_or_criterion_acceptance",
+        }
+        clinical_acceptance = {
+            "path": "C:/Users/there/EMR4-tools/g2-clinical-product5-publish-20260915-v1/resume-20260916/actual-post-publication-acceptance.json",
+            "sha256": "2e47c6a1900c0204281e6d51bceed659cc76a40d339d5fa3604ff74f05ab7683",
+            "role": "opaque_historical_publication_acceptance_not_runtime_authority",
+        }
+        self.assertEqual(b.G2_MIGRATION_GUARD_PRIOR_ACCEPTANCE, migration_acceptance)
+        self.assertEqual(scope["prior_migration_acceptance"], migration_acceptance)
+        self.assertEqual(b.G2_MIGRATION_GUARD_CLINICAL_ACCEPTANCE, clinical_acceptance)
+        self.assertEqual(scope["prior_clinical_publication_acceptance"], clinical_acceptance)
+        self.assertEqual(scope["schema_version"], "ariadne.g2_reviewed_batch_scope.v9")
+        self.assertEqual(scope["allowed_paths"], sorted(b.G2_MIGRATION_PATHS))
+        self.assertEqual(scope["allowed_additions"], [])
+        self.assertEqual(scope["maximum_changed_files"], 2)
+        self.assertEqual(scope["migration_supported_paths"], rp.g2_migration_contract())
+        self.assertNotIn("publication", scope["current_instruction_policy"])
+        self.assertEqual(scope["prior_migration_acceptance"]["sha256"],
+                         "3d28829c3e6406dbdd1a7a280bdb008c70f968d301696ba5e49e9ea5aaa8ce5d")
+        self.assertFalse(scope["execution_authorized"])
+        self.assertFalse(scope["g2_complete"])
+        self.assertFalse(scope["feature_work_eligible"])
+
+
+class G2MigrationGuardFixture(G2ClinicalFixture):
+    """Exact captured bytes with test-only V9 publication identity substitution.
+
+    Only commit/tree/parent are replaced by a tiny authored repository's identity.
+    All policy/source/AGENTS hashes and the actual loader/decision code stay fixed.
+    Earlier immutable history uses the existing component-history observations.
+    This proves synthetic controller composition, never real-repository admission.
+    """
+
+    def __init__(self, assets, stack):
+        super().__init__(assets)
+        try:
+            self._prepare_guard(assets, stack)
+        except BaseException:
+            self.close()
+            raise
+
+    def _prepare_guard(self, assets, stack):
+        self.guard_previous_policy = {
+            p: (assets / "g2-migration-guard-predecessor-policy" / p).read_bytes()
+            for p in b.G2_MIGRATION_GUARD_PREDECESSOR_POLICY}
+        self.guard_previous_source = {
+            p: (assets / "g2-migration-guard-predecessor-source" / p).read_bytes()
+            for p in b.CONTROLLER_PATHS}
+        self.guard_repair_before = {
+            p: (assets / "g2-migration-guard-repair-before" / p).read_bytes()
+            for p in b.G2_MIGRATION_PATHS}
+        self.guard_agents = (assets / "g2-migration-guard-current" / b.AGENTS).read_bytes()
+        pins = {**b.G2_MIGRATION_GUARD_PREDECESSOR_POLICY,
+                **b.G2_MIGRATION_GUARD_PREDECESSOR["source_sha256"],
+                **b.G2_MIGRATION_GUARD_REPAIR_PINS}
+        predecessor = {**self.guard_previous_policy, **self.guard_previous_source, **self.guard_repair_before}
+        if any(b._sha(raw) != pins[path] for path, raw in predecessor.items()):
+            raise AssertionError("V9 authored fixture requires exact captured predecessor bytes")
+        if b._sha(self.guard_agents) != b.G2_MIGRATION_GUARD_INSTRUCTIONS_SHA256:
+            raise AssertionError("V9 authored fixture requires exact accepted AGENTS bytes")
+        for path, raw in predecessor.items():
+            self.write(path, raw)
+        self.git("add", "--", *sorted(predecessor))
+        parent = self.git("rev-parse", "HEAD")
+        tree = self.git("write-tree")
+        base = self.git("commit-tree", tree, "-p", parent, "-m", "authored exact clinical predecessor bytes")
+        self.git("update-ref", "--no-deref", "HEAD", base, parent)
+        publication = copy.deepcopy(b.G2_MIGRATION_GUARD_PREDECESSOR)
+        publication.update(commit=base, parent=parent, tree=tree)
+        stack.enter_context(patch.object(b, "G2_MIGRATION_GUARD_PREDECESSOR", publication))
+        self.base = base
+        self.guard_header_override = None
+        self.guard_blob_overrides = {}
+        self.batch_scope = b.build_g2_migration_guard_scope(
+            "2026-09-16T02:00:00+00:00", base,
+            {p: b._sha((self.source / p).read_bytes()) for p in b.CONTROLLER_PATHS})
+        after = b.build_g2_migration_guard_transition(
+            {p: self.guard_previous_policy[p] for p in b.G2_BATCH_CONTROL_PATHS}, self.batch_scope)
+        after.update({p: (self.source / p).read_bytes() for p in b.G2_MIGRATION_GUARD_CODE_PATHS})
+        after[b.AGENTS] = self.guard_agents
+        rows = {p: {"before_sha256": b._sha((self.root / p).read_bytes()), "after_sha256": b._sha(raw)}
+                for p, raw in after.items()}
+        for path, raw in after.items():
+            self.write(path, raw)
+        self.git("add", "--", *sorted(after))
+        candidate = self.git("write-tree")
+        self.q.update(schema_version=b.G2_MIGRATION_GUARD_BINDING_VERSION,
+            operation_id="authored-g2-migration-guard-enablement",
+            operation_kind="enable_g2_migration_downgrade_guard", phase="development",
+            base_commit=base, base_tree=tree, expected_head=base,
+            expected_index_tree=candidate, candidate_tree=candidate,
+            activation_commit=base, installed_controller=copy.deepcopy(publication), repair_sha256=rows,
+            source_sha256={p: b._sha((self.source / p).read_bytes()) for p in b.SOURCE_PATHS})
+        self.q["payload_sha256"] = {p: b._sha((self.root / p).read_bytes()) for p in b.batch_input_paths(self.q)}
+
+    @contextmanager
+    def component_history(self):
+        with super().component_history():
+            run, run_bytes = b.trusted_git.run_git, b.trusted_git.run_git_bytes
+            commit = b.G2_MIGRATION_GUARD_PREDECESSOR["commit"]
+
+            def observed_text(root, *args, **kwargs):
+                if root == self.root and args == ("cat-file", "commit", commit) and self.guard_header_override is not None:
+                    return self.guard_header_override
+                return run(root, *args, **kwargs)
+
+            def observed_bytes(root, *args, **kwargs):
+                for path, raw in self.guard_blob_overrides.items():
+                    if root == self.root and args == ("cat-file", "blob", commit + ":" + path):
+                        return raw
+                return run_bytes(root, *args, **kwargs)
+
+            with patch.object(b.trusted_git, "run_git", side_effect=observed_text), \
+                    patch.object(b.trusted_git, "run_git_bytes", side_effect=observed_bytes):
+                yield
+
+    def prepare_guard(self):
+        base = self.git("rev-parse", "HEAD")
+        tree = self.git("rev-parse", "HEAD^{tree}")
+        rows = {}
+        for path in sorted(b.G2_MIGRATION_PATHS):
+            raw = (self.root / path).read_bytes() + b"\n# Authored V9 guard fixture; never imported.\n"
+            rows[path] = {"before_sha256": b._sha((self.root / path).read_bytes()), "after_sha256": b._sha(raw)}
+            self.write(path, raw)
+        self.git("add", "--", *sorted(rows))
+        candidate = self.git("write-tree")
+        self.q.update(operation_id="authored-g2-migration-guard-repair",
+            operation_kind="repair_g2_migration_downgrade_guard", phase="development",
+            base_commit=base, base_tree=tree, expected_head=base,
+            expected_index_tree=candidate, candidate_tree=candidate,
+            activation_commit=self.activation, installed_controller=copy.deepcopy(self.batch_controller), repair_sha256=rows)
+        self.q["payload_sha256"] = {p: b._sha((self.root / p).read_bytes()) for p in b.batch_input_paths(self.q)}
+
+
 def build_integration_suite(assets: Path) -> unittest.TestSuite:
     """Explicit external fixture input; never discover a live/historical checkout."""
     class IntegratedTests(unittest.TestCase):
@@ -5395,7 +5581,240 @@ def build_integration_suite(assets: Path) -> unittest.TestSuite:
             )
 
 
+    class G2MigrationGuardAdmissionTests(unittest.TestCase):
+        def setUp(self):
+            self.stack = ExitStack()
+            self.addCleanup(self.stack.close)
+            self.fx = G2MigrationGuardFixture(assets, self.stack)
+            self.addCleanup(self.fx.close)
+            self.stack.enter_context(no_legacy_observation())
+            self.stack.enter_context(self.fx.component_history())
+
+        def assert_admitted(self):
+            f = self.fx
+            context = f.context()
+            entrypoint = "task_branch_commit" if f.q["phase"] == "development" else "task_branch_push"
+            for decision in (
+                pa.evaluate_programme_operation_admission(repo_root=f.root, manifest=f.manifest(context),
+                    entrypoint=entrypoint, phase=f.q["phase"], bounded_context=context),
+                pg.evaluate_pinned_programme_operation(gatekeeper_root=f.source, target_repo_root=f.root,
+                    manifest=f.manifest(context), entrypoint=entrypoint, phase=f.q["phase"], bounded_context=context),
+            ):
+                self.assertTrue(decision.policy_admitted, decision.reason_codes)
+                self.assertFalse(decision.execution_authorized)
+                self.assertEqual(decision.candidate_tree, f.q["candidate_tree"])
+
+        def assert_denied(self, reason, manifest=None):
+            f = self.fx
+            paths = b.G2_MIGRATION_GUARD_MAINTENANCE_PATHS | b.G2_MIGRATION_PATHS
+            before = {p: (f.root / p).read_bytes() for p in paths}
+            if manifest is None:
+                decision = f.decision()
+            else:
+                decision = b.evaluate_bounded_g1b_operation(context=f.context(), manifest=manifest,
+                    entrypoint="task_branch_commit", phase=f.q["phase"])
+            self.assertEqual(decision.reason_codes, (reason,))
+            self.assertFalse(decision.policy_admitted)
+            self.assertFalse(decision.execution_authorized)
+            self.assertEqual({p: (f.root / p).read_bytes() for p in paths}, before)
+
+        def test_exact_six_file_maintenance_then_two_existing_files_all_phases(self):
+            f = self.fx
+            self.assertEqual(set(f.q["repair_sha256"]), b.G2_MIGRATION_GUARD_MAINTENANCE_PATHS)
+            self.assertEqual(len(f.q["repair_sha256"]), 6)
+            self.assertEqual(b.operation_effects(f.q["operation_kind"]), b.EFFECTS)
+            self.assert_admitted()
+            f.activate_batches()
+            self.assert_admitted()
+            f.q["phase"] = "post-push"
+            self.assert_admitted()
+            f.prepare_guard()
+            self.assertEqual(set(f.q["repair_sha256"]), b.G2_MIGRATION_PATHS)
+            self.assertEqual(len(f.q["repair_sha256"]), 2)
+            self.assertTrue(all(row["before_sha256"] is not None for row in f.q["repair_sha256"].values()))
+            self.assertEqual(b.operation_effects(f.q["operation_kind"]), b.G2_MIGRATION_EFFECTS)
+            self.assert_admitted()
+            f.commit_current()
+            self.assert_admitted()
+            f.q["phase"] = "post-push"
+            self.assert_admitted()
+
+        def test_transition_preserves_historical_state_latches_profiles_and_gates(self):
+            f = self.fx
+            self.assert_admitted()
+            expected = b._json(f.guard_previous_policy[b.STATE])
+            expected["observed_at"] = f.batch_scope["recorded_at"]
+            expected["g2"].update(scope_sha256=b._sha((f.root / b.G2_SCOPE).read_bytes()),
+                current_operation=copy.deepcopy(f.batch_scope["current_operation"]))
+            expected["task_selection"]["next_eligibility_condition"] = "bounded_G2_migration_downgrade_guard_active"
+            self.assertEqual(b._json((f.root / b.STATE).read_bytes()), expected)
+            expected_overlay = b._document(f.guard_previous_policy[b.OVERLAY], b.OVERLAY)
+            expected_overlay["profiles"][b.G2_PROFILE] = rp.g2_migration_profile()
+            self.assertEqual(b._document((f.root / b.OVERLAY).read_bytes(), b.OVERLAY), expected_overlay)
+            self.assertEqual((f.root / b.GATES).read_bytes(), f.guard_previous_policy[b.GATES])
+            self.assertTrue(f.batch_scope["current_operation"]["supersedes"]["historical_latch_preserved"])
+            self.assertEqual(f.batch_scope["current_operation"]["supersedes"]["operation_id"], "g2-clinical-authority-repair")
+            prior_scope = b._json(f.guard_previous_policy[b.G2_SCOPE])
+            for field in ("initial_activation", "initial_scope", "initial_source_repair", "migration_supported_paths",
+                          "published_atomicity_repair", "published_patient_repair", "published_audio_repair"):
+                self.assertEqual(f.batch_scope[field], prior_scope[field])
+            for field in ("execution_authorized", "g2_complete", "feature_work_eligible", "existing_clockwork_writers_activated"):
+                self.assertIs(f.batch_scope[field], False)
+            for path in b.CONTROLLER_PATHS - b.G2_MIGRATION_GUARD_CODE_PATHS:
+                self.assertEqual((f.root / path).read_bytes(), f.guard_previous_source[path])
+
+        def test_stale_predecessor_policy_and_instruction_bytes_fail_from_valid_baseline(self):
+            f = self.fx
+            self.assert_admitted()
+            original = copy.deepcopy(f.q)
+            f.q["base_commit"] = "0" * 40
+            self.assert_denied("bounded_g2_migration_guard_transition_base")
+            f.q = copy.deepcopy(original)
+            f.q["installed_controller"] = copy.deepcopy(b.G2_CLINICAL_PREDECESSOR)
+            self.assert_denied("bounded_g2_batch_maintenance_predecessor")
+            f.q = copy.deepcopy(original)
+            state_raw = (f.root / b.STATE).read_bytes()
+            state = b._json(state_raw)
+            state["task_selection"]["next_eligibility_condition"] = "bounded_G2_clinical_authority_repair_active"
+            f.restage(b.STATE, (json.dumps(state, indent=2, ensure_ascii=False) + "\n").encode(), repair_after=True)
+            self.assert_denied("bounded_g2_batch_policy_delta_invalid")
+            f.restage(b.STATE, state_raw, repair_after=True)
+            # Different current bytes are authenticated in the binding but remain unaccepted.
+            f.restage(b.AGENTS, f.guard_agents + b"\nUnaccepted instruction change.\n", repair_after=True)
+            self.assert_denied("bounded_g2_batch_frozen_input_changed")
+            f.restage(b.AGENTS, f.guard_agents, repair_after=True)
+            self.assert_admitted()
+
+        def test_exact_publication_header_and_predecessor_blobs_are_required(self):
+            f = self.fx
+            self.assert_admitted()
+            predecessor = b.G2_MIGRATION_GUARD_PREDECESSOR
+            f.guard_header_override = "tree " + "0" * 40 + "\nparent " + predecessor["parent"] + "\n\nwrong tree\n"
+            self.assert_denied("bounded_g2_batch_publication_invalid")
+            f.guard_header_override = None
+            for path in (b.STATE, b.AGENTS, "orchestration_harness/bounded_g1b.py"):
+                with self.subTest(path=path):
+                    f.guard_blob_overrides[path] = b"invalid captured predecessor bytes\n"
+                    self.assert_denied("bounded_g2_migration_guard_predecessor_bytes_changed")
+                    del f.guard_blob_overrides[path]
+            self.assert_admitted()
+
+        def test_historical_versions_kinds_and_path_expansion_do_not_alias_v9(self):
+            f = self.fx
+            self.assert_admitted()
+            original = copy.deepcopy(f.q)
+            for field, value in (("schema_version", b.G2_MIGRATION_BINDING_VERSION),
+                                 ("schema_version", b.G2_INSTRUCTIONS_BINDING_VERSION),
+                                 ("schema_version", b.G2_CLINICAL_BINDING_VERSION),
+                                 ("operation_kind", "enable_g2_migration"),
+                                 ("operation_kind", "align_g2_instructions")):
+                f.q = copy.deepcopy(original)
+                f.q[field] = value
+                self.assert_denied("bounded_g2_batch_binding_version")
+            f.q = copy.deepcopy(original)
+            row = f.q["repair_sha256"].pop(b.AGENTS)
+            f.q["repair_sha256"]["orchestration_harness/raisa_policy.py"] = row
+            self.assert_denied("bounded_g2_batch_path_not_allowed")
+            f.q = copy.deepcopy(original)
+            f.q["repair_sha256"].pop(b.AGENTS)
+            self.assert_denied("bounded_g2_batch_path_not_allowed")
+            f.q = original
+            f.activate_batches()
+            f.prepare_guard()
+            self.assert_admitted()
+            original = copy.deepcopy(f.q)
+            for change in ("missing", "unselected", "addition", "stale", "historical"):
+                f.q = copy.deepcopy(original)
+                path = sorted(b.G2_MIGRATION_PATHS)[0]
+                reason = "bounded_g2_batch_path_not_allowed"
+                if change == "missing":
+                    f.q["repair_sha256"].pop(path)
+                elif change == "unselected":
+                    f.q["repair_sha256"]["alembic/versions/unreviewed.py"] = f.q["repair_sha256"].pop(path)
+                elif change == "addition":
+                    f.q["repair_sha256"][path]["before_sha256"] = None
+                    reason = "bounded_g2_batch_change_digest"
+                elif change == "stale":
+                    f.q["repair_sha256"][path]["before_sha256"] = "0" * 64
+                    reason = "bounded_g2_migration_guard_repair_preimage"
+                else:
+                    f.q["operation_kind"] = "repair_g2_migration"
+                    reason = "bounded_g2_batch_binding_version"
+                self.assert_denied(reason)
+            f.q = original
+            self.assert_admitted()
+
+        def test_scope_runtime_effect_and_g2_expansion_are_denied(self):
+            f = self.fx
+            self.assert_admitted()
+            for mutate in (
+                lambda s: s["allowed_paths"].append("alembic/versions/unreviewed.py"),
+                lambda s: s.update(maximum_changed_files=3),
+                lambda s: s.update(allowed_additions=["tests/test_phase0_migration_preservation.py"]),
+                lambda s: s["allowed_effects"].append("provider_invocation"),
+                lambda s: s.update(execution_authorized=True),
+                lambda s: s.update(g2_complete=True),
+                lambda s: s.update(feature_work_eligible=True),
+                lambda s: s["migration_supported_paths"].update(data_destruction_authorized=True),
+                lambda s: s["current_instruction_policy"].update(sha256=b.G2_AUDIO_INSTRUCTIONS_SHA256),
+                lambda s: s["prior_migration_acceptance"].update(sha256="0" * 64),
+            ):
+                scope = copy.deepcopy(f.batch_scope)
+                mutate(scope)
+                try:
+                    f.restage(b.G2_SCOPE, b._canonical(scope) + b"\n", repair_after=True)
+                    self.assert_denied("bounded_g2_batch_scope_invalid")
+                finally:
+                    f.restage(b.G2_SCOPE, b._canonical(f.batch_scope) + b"\n", repair_after=True)
+            for effect in ("migration_change", "provider_invocation", "application_runtime", "integration"):
+                manifest = f.manifest(f.context())
+                manifest["intended_side_effect_classes"].append(effect)
+                self.assert_denied("bounded_g1b_manifest_binding_mismatch", manifest)
+            self.assert_admitted()
+
+        def test_ordinary_publisher_cannot_execute_v9_admission(self):
+            f = self.fx
+            self.assert_admitted()
+            manifest = f.manifest(f.context())
+            with patch.object(pg, "_operation_services", side_effect=AssertionError("publisher effect")):
+                with self.assertRaises(pa.ProgrammeAdmissionError) as caught:
+                    pg.execute_exact_index_commit(gatekeeper_root=f.source, target_repo_root=f.root,
+                        manifest=manifest, message="must not execute", receipt_directory=f.home / "forbidden-receipts")
+            self.assertEqual(caught.exception.reason_code, "bounded_g1b_reviewed_publisher_required")
+
+        def test_migration_owner_evidence_and_unchanged_policy_component_are_bound(self):
+            f = self.fx
+            read = b.trusted_git._read_regular_snapshot
+            for owner_record in (rp.G2_MIGRATION_OWNER_RECORD, rp.G2_CLINICAL_OWNER_RECORD):
+                with self.subTest(owner_record=owner_record):
+                    self.assert_admitted()
+                    owner = f.assets / "evidence" / owner_record
+
+                    def changed(path, **kwargs):
+                        snapshot = read(path, **kwargs)
+                        return (snapshot[0], b"{}\n") if path == owner else snapshot
+
+                    with patch.object(b.trusted_git, "_read_regular_snapshot", side_effect=changed):
+                        self.assert_denied("bounded_g1b_input_digest_changed")
+                    self.assert_admitted()
+            scope = copy.deepcopy(f.batch_scope)
+            scope["controller_source_sha256"]["orchestration_harness/raisa_policy.py"] = "0" * 64
+            try:
+                f.restage(b.G2_SCOPE, b._canonical(scope) + b"\n", repair_after=True)
+                self.assert_denied("bounded_g2_migration_guard_unchanged_controller_component")
+            finally:
+                f.restage(b.G2_SCOPE, b._canonical(f.batch_scope) + b"\n", repair_after=True)
+            f.activate_batches()
+            f.prepare_guard()
+            self.assert_admitted()
+            for effect in ("provider_invocation", "application_runtime", "integration"):
+                manifest = f.manifest(f.context())
+                manifest["intended_side_effect_classes"].append(effect)
+                self.assert_denied("bounded_g1b_manifest_binding_mismatch", manifest)
+
     suite = unittest.defaultTestLoader.loadTestsFromTestCase(ClosedRequestTests)
+    suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(G2MigrationGuardSourceContractTests))
+    suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(G2MigrationGuardAdmissionTests))
     suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(G2AudioSourceContractTests))
     suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(G2PatientSourceContractTests))
     suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(G2AtomicitySourceContractTests))
