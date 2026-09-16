@@ -1157,8 +1157,13 @@ profiles:
     - provider_invocation
     - real_data_access
     allowed_paths:
-    - alembic/versions/d4787e8e3629_phase_0_baseline.py
-    - tests/test_phase0_migration_preservation.py
+    - alembic/versions/y4z5a6b7c8d9_enforce_practitioner_appointment_no_overlap.py
+    - app/models/appointments.py
+    - app/routers/appointments.py
+    - app/schemas/appointments.py
+    - app/services/appointment_conflicts.py
+    - app/services/appointment_status_composition.py
+    - tests/test_appointment_concurrency.py
     autonomous_task_selection: false
     feature_work_eligible: false
     product_work_eligible: false
@@ -1166,7 +1171,7 @@ profiles:
     deployment_eligible: false
     protected_ref_movement_eligible: false
     g2_eligible: true
-    scope_behavior: bounded_g2_migration_preservation
+    scope_behavior: bounded_g2_appointment_concurrency
     scope_file: orchestration/programme/g2-baseline-repair-scope.json
     global_execution_defaults_unchanged: true
     closed_entrypoints:

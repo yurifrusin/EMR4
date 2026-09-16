@@ -2,15 +2,39 @@
 Gate G2 is active only for bounded baseline repair and separately reviewed isolated synthetic tests
 Missing, malformed, stale, or contradictory programme state is a hard stop.
 
+# Identity-Specific Instruction Relay
+
+Read the shared instructions in this file first, then follow only the route matching your actual platform task and agent role:
+
+| Identity | Additional direction |
+|---|---|
+| Host A lead, task `01a0a72f-a9bd-72f3-b259-0de184339a44` | Read `AGENTS_Host_A.md` in this repository for coordinator duties and current priorities. |
+| Host B lead, task `01a0a730-27a3-7232-b633-71effda7283a` | Read `AGENTS_Host_B.md` in this repository before starting or resuming assigned work. |
+| Worker subagent | Follow the explicit bounded worker assignment; inherit shared rules, not the parent's host identity or authority. |
+
+Task titles, machine names and quoted or inherited messages do not establish host identity. If identity is uncertain, resolve it through the existing coordinator channel before taking host-specific action. A future host replacement needs an explicit identity-map update.
+
+Host A maintains both rolling notes. Each lead rereads its own note on a new assignment, after rehydration, and at the next safe checkpoint after a material update; never interrupt a critical operation. Deliver material Host B queue changes through the existing native task message with the note's revision and SHA-256. Report the revision read with the next substantive response; duplicate delivery must not repeat work or create acknowledgement loops. If a required note is absent, its digest differs from the assignment, or its direction conflicts with authoritative state, pause only the affected assignment and report the discrepancy to Host A. Do not guess, replay consumed work or poll for changes.
+
+Within a delivered queue revision, Host B may complete successive READY tasks without a fresh message for each task, provided their stated dependencies and applicable admission remain satisfied. Skip WAITING tasks; if no task is READY, return to reserve. Completed task IDs remain completed even if a rolling note or delayed message still lists them. Host A promotes work to READY only with a concrete scope, exact inputs, owned output and completion criteria. Queue status never substitutes for an enforced gate, execution binding or independent acceptance.
+
+This is an explicit read-and-message convention. The additional filename is not an automatic identity-aware loader, watcher or wake-up mechanism. The rolling note supplies task direction within shared policy; it cannot change gates, scope, runtime, publication or independent-acceptance authority. Preserve assignment input pins and defer changes to any instruction file covered by an active publication. Record material handoffs in the existing checkpoint/messages, without a new ledger. Treat a newly created local relay note as unpublished until its own exact publication scope is reviewed.
+
 # Worker Model and Reasoning Allocation
 
 For each new worker or reviewer subagent, assign the minimum sufficient model and a reasoning effort appropriate to its concrete task. Prefer smaller models for bounded mechanical work. Use stronger models or higher effort when complexity, uncertainty, safety, or independent judgment requires it, and escalate when the evidence shows the initial allocation is insufficient. Do not default every worker to the coordinator's settings.
 
 Keep the recovery coordinator at Yuri's selected maximum reasoning effort. Report actual assignments accurately: existing agents retain their settings, and assigning an agent model or effort does not change a UI setting.
 
+## Worker Capacity and Retirement
+
+Yuri grants standing authority to retire or delete completed or inactive worker subagents through supported agent lifecycle controls when needed to free creation capacity. Preserve their useful findings and handoff evidence first. Safely hand off any active work before interrupting or retiring its worker. This authority applies to worker subagents; keep Host A and Host B and their selected configurations intact.
+
+When a worker limit is reached, reuse a suitable existing worker or retire completed workers where the available controls permit it. Choose the worker for the task using the allocation policy above; record its retained settings and any limits on changing or verifying them. If retirement is unavailable or does not free capacity, report that limitation accurately and continue useful work through available workers, hosts or the coordinator. Do not delay independent work merely to obtain a fresh worker, and do not claim that a capacity slot was freed without confirmation.
+
 # Host Engineering Meetings
 
-Host A coordinates implementation and the canonical meeting record; Host B independently reviews design and participates. Keep both hosts' selected configurations unchanged. Use the existing native task-message route and one Host A heartbeat, defaulting to every two hours while development is active and there is new work or evidence. Either host may request a topic with its reason, urgency and evidence. Coalesce requests and missed slots; retain due or requested meetings pending while either host is unavailable, stale or in a critical operation.
+Host A coordinates implementation and the canonical meeting record; Host B supplies distinct parallel contributions or required independent review when their value justifies the extra work. Keep both hosts' selected configurations unchanged. Prefer brief informal communication through the existing native task-message route. Meetings default to daily while development is active and there is material new work or evidence; retain the single Host A heartbeat and keep it paused while Host B is in reserve. Do not activate Host B solely for a meeting, repeated acknowledgement or work-seeking. Either host may request a topic with its reason, urgency and evidence. Coalesce requests and missed slots; retain due or requested meetings pending while either host is unavailable, stale or in a critical operation.
 
 Both hosts freeze independent briefs before either reads the peer contribution. Reconfirm fresh readiness at meeting start and each discussion boundary; both hosts then read and respond in at most two rounds. Record actions, owners, completion criteria, disagreement and unresolved questions; require both hosts to acknowledge the exact decision revision and digest. Advance the evidence cursor only over material actually discussed; retain undiscussed and unresolved material. Silence is not agreement. Refer only materially necessary owner decisions to Yuri and continue authorised development. Meeting agreement never replaces independent acceptance or changes recovery, protected-evidence or publication boundaries.
 
@@ -36,6 +60,10 @@ The controlling programme is `docs/programme/raisa-ariadne-recovery-programme.md
 ## 2. Mandatory Rehydration
 
 Read this file, the relevant structured state/gate, the active plan and the latest applicable checkpoint. Resolve the current work from its exact commit, candidate and evidence. Read only the ordinary paths needed for the next action.
+
+After every automatic context compaction, make rereading the current `AGENTS.md` from disk the first project action before resuming substantive work. Then resolve your actual task/agent identity, follow its instruction-relay route, and reconcile the active assignment with the current checkpoint and necessary authoritative state. Apply this to Host A, Host B and worker subagents; workers retain their own bounded role and do not assume a parent's host identity. A compaction summary is a navigation aid, not a substitute for current instruction bytes or assignment pins.
+
+If a previously launched operation is still in flight, preserve its existing execution and recovery boundary: observe/reconcile that same attempt and perform only already-authorised necessary recovery, then rehydrate before new work. Never restart an operation, repeat a consumed check or mint a duplicate receipt merely because context was compacted. If rehydration finds a missing or conflicting required source, stop dependent work and report the concrete discrepancy. This is a mandatory agent procedure; it does not claim that a file edit installs an automatic compaction hook or causes Codex to reload files by itself.
 
 These five existing source identities remain the continuity vocabulary:
 
@@ -79,6 +107,18 @@ The recovery coordinator owns task selection, coupled implementation, evidence i
 Apply the Worker Model and Reasoning Allocation policy at the top of this file to every new subagent assignment. Keep required reviewers independent of implementation and choose their model and effort for the judgment the review needs.
 
 Use another agent only for a concrete separable contribution or required independence when it saves a meaningful cycle. Keep shared-state and tightly coupled work serial. Do not create mandatory parallelism paperwork or dispatch workers merely to fill lanes. External model/provider lanes remain closed; archived Sol, DeepSeek and Gemini allocations do not reopen them.
+
+### Host A / Host B delivery across G2–G4
+
+Host A actively selects useful parallel work from the accepted G2–G4 trajectory review. Host B is available for substantive implementation contributions, independently authored tests and bounded investigations, as well as required independent review. Assign a concrete deliverable when it can advance accepted repair work or remove a later dependency; keep Host B in reserve when no such assignment is ready. Preserve both hosts' selected configurations and use brief informal coordination.
+
+- During G2, keep one admitted shared-cause implementation batch. Host A owns product design, implementation and integration; Host B can develop the independent acceptance specification, regression tests or a separable evidence contribution for that batch. Stage contributions in isolated candidates with exact source pins and owned outputs; editing different files in the shared checkout alone does not preserve publication pins.
+- While G2 remains active, use permitted ordinary sources for dependency-independent G3 contract preparation and G4 journey/test specifications. A pending G2 criterion does not by itself block unrelated preparation. This preparation does not activate G3/G4 implementation, runtime or acceptance; their structured gate and admission requirements still apply.
+- When the relevant gates and prerequisites permit implementation, the reviewed starting split is: G3 — Host A command/read contracts and backend validation, Host B projection validation and fallback behavior; G4 — Host A backend journey and contention behavior, Host B Diary/Word surface integration, accessibility and AI-off equivalence tests. Refine assignments around actual dependencies and stable interfaces, not gate labels alone.
+
+Each assignment needs a brief scope, exact inputs and owned outputs, completion criteria and dependency boundary. Reuse the existing checkpoint and evidence; do not add a parallel reporting layer. Shared database/application execution, integration and publication remain serial and separately authorised. A host that authors part of a combined candidate cannot supply the required independent acceptance of that candidate. Meeting agreement is not acceptance. Worker limits should trigger the reuse/retirement policy above rather than prevent otherwise useful work.
+
+The supporting review is `C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/repair-trajectory-parallelism-review-20260916.md`, with Host B's independent review at `parallel-work-review-20260916-host-b.md` in the same directory. Use the current coordinator checkpoint for assignments and later evidence; these reviews do not themselves change gate authority.
 
 ## 5. Protected Evidence and Closed Gates
 

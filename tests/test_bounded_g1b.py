@@ -53,7 +53,9 @@ class ClosedRequestTests(unittest.TestCase):
                          {"operation_kind": "enable_g2_audio_privacy"},
                          {"operation_kind": "repair_g2_audio_privacy"},
                          {"operation_kind": "enable_g2_patient_binding"},
-                         {"operation_kind": "repair_g2_patient_binding"}):
+                         {"operation_kind": "repair_g2_patient_binding"},
+                         {"operation_kind": "enable_g2_appointment_concurrency"},
+                         {"operation_kind": "repair_g2_appointment_concurrency"}):
             with self.subTest(manifest=manifest), no_legacy_observation(), \
                     patch.object(pa, "load_programme_policy", side_effect=AssertionError("old loader")), \
                     patch.object(pf, "load_programme_policy", side_effect=AssertionError("old loader")):
@@ -2745,6 +2747,218 @@ class G2MigrationGuardSourceContractTests(unittest.TestCase):
         self.assertFalse(scope["feature_work_eligible"])
 
 
+class G2AppointmentConcurrencySourceContractTests(unittest.TestCase):
+    """Pure V10 admission checks; product/runtime behavior is tested separately."""
+
+    @staticmethod
+    def controller_sources():
+        sources = copy.deepcopy(b.G2_APPOINTMENT_PREDECESSOR["source_sha256"])
+        for path in b.G2_APPOINTMENT_CODE_PATHS:
+            sources[path] = "1" * 64
+        return sources
+
+    @staticmethod
+    def repair_binding():
+        rows = {}
+        for path, before in b.G2_APPOINTMENT_REPAIR_PINS.items():
+            rows[path] = {"before_sha256": before, "after_sha256": "f" * 64}
+        return {"schema_version": b.G2_APPOINTMENT_BINDING_VERSION,
+                "operation_kind": "repair_g2_appointment_concurrency", "repair_sha256": rows}
+
+    @staticmethod
+    def maintenance_binding():
+        rows = {path: {"before_sha256": "1" * 64, "after_sha256": "2" * 64}
+                for path in b.G2_APPOINTMENT_MAINTENANCE_PATHS}
+        return {"schema_version": b.G2_APPOINTMENT_BINDING_VERSION,
+                "operation_kind": "enable_g2_appointment_concurrency", "repair_sha256": rows}
+
+    def assert_reason(self, reason, call):
+        with self.assertRaises(b.BoundedG1BError) as caught:
+            call()
+        self.assertEqual(caught.exception.reason_code, reason)
+
+    def build_scope(self):
+        return b.build_g2_appointment_scope(
+            "2026-09-16T08:00:00+00:00", b.G2_APPOINTMENT_PREDECESSOR["commit"],
+            self.controller_sources())
+
+    def test_v10_identity_scope_and_previous_publication_are_exact(self):
+        self.assertEqual(b.G2_APPOINTMENT_BINDING_VERSION, "ariadne.bounded_g2_batch_binding.v10")
+        self.assertEqual(b.G2_APPOINTMENT_SCOPE_VERSION, "ariadne.g2_reviewed_batch_scope.v10")
+        self.assertEqual({key: b.G2_APPOINTMENT_PREDECESSOR[key] for key in ("commit", "parent", "tree")}, {
+            "commit": "c8f1fbb75e701163d4bb8b04f170ee4d74653016",
+            "parent": "5b386240baa53b7882219832dc6057d66999ca61",
+            "tree": "53bbd4b805a55b9e97dd30a808d904a736913f9f",
+        })
+        self.assertEqual(b.G2_APPOINTMENT_PREDECESSOR_POLICY, {
+            b.AGENTS: "93ebf50187b6132fcee91cee7f4ba0b81bb59286ed9eaf52cdadab3a09ba20c1",
+            b.STATE: "c6a7feabf91fb86dc992ec80a11219582d630305ec7db473c499c68446fc09c3",
+            b.OVERLAY: "73f719feba004b1d2a8efd52d88d0f546516b279e8badfe50ba80a919556a2f7",
+            b.G2_SCOPE: "16910ab6b4da530de132072462520ba45f869f6e36c33eec6cbb38dc2050b891",
+            b.GATES: "115a651a0b13156a591045638d1833a9a71347e7b1f7e694767eac49d2abc341",
+        })
+        scope = self.build_scope()
+        self.assertEqual(scope["schema_version"], b.G2_APPOINTMENT_SCOPE_VERSION)
+        self.assertEqual(scope["transition_base_commit"], b.G2_APPOINTMENT_PREDECESSOR["commit"])
+        self.assertEqual(scope["allowed_paths"], sorted(b.G2_APPOINTMENT_PATHS))
+        self.assertEqual(scope["allowed_additions"], sorted(b.G2_APPOINTMENT_ADDITIONS))
+        self.assertEqual(scope["maximum_changed_files"], 7)
+        self.assertEqual(b.G2_APPOINTMENT_REPAIR_PINS, {
+            "app/models/appointments.py": "4ae06eeb87c6d5212e354c39c01a8da397cfa2c21bd1031c24e1467d86c77794",
+            "app/schemas/appointments.py": "ce7a9819e4947fb288c79009a08b7d9f2502b8d096ff5e2eb005796a250aee90",
+            "app/routers/appointments.py": "8443bc1d045672f05567a5cb6443a882dfda4946791412c231ce475995f71d08",
+            "app/services/appointment_status_composition.py":
+                "1bde039d39a3b9d3e041585d9e4a38f403409a438f21be4bb37fd3891fe9a2dc",
+            "app/services/appointment_conflicts.py": None,
+            "alembic/versions/y4z5a6b7c8d9_enforce_practitioner_appointment_no_overlap.py": None,
+            "tests/test_appointment_concurrency.py": None,
+        })
+        self.assertEqual(scope["repair_preimage_sha256"], b.G2_APPOINTMENT_REPAIR_PINS)
+        self.assertEqual(scope["appointment_concurrency_invariant"], b.G2_APPOINTMENT_INVARIANT)
+        self.assertEqual(scope["current_instruction_policy"]["sha256"],
+                         "97d6ea223508d53ee704a0cc3ceec383e2eea9f3db764376b538e8341bee886e")
+        self.assertEqual(scope["current_instruction_policy"]["previous_sha256"],
+                         b.G2_MIGRATION_GUARD_INSTRUCTIONS_SHA256)
+        self.assertEqual(scope["published_migration_guard_repair"]["acceptance"],
+                         b.G2_APPOINTMENT_PUBLICATION_ACCEPTANCE)
+        self.assertEqual(scope["current_operation"]["supersedes"]["operation_id"],
+                         "g2-migration-downgrade-guard-repair")
+        self.assertTrue(scope["current_operation"]["supersedes"]["historical_latch_preserved"])
+        for field in ("execution_authorized", "g2_complete", "feature_work_eligible",
+                      "operational_multi_task_control_accepted"):
+            self.assertIs(scope[field], False)
+
+    def test_exact_seven_file_maintenance_and_repair_are_the_only_v10_shapes(self):
+        self.assertEqual(b.G2_APPOINTMENT_PATHS, {
+            "app/models/appointments.py", "app/schemas/appointments.py",
+            "app/routers/appointments.py", "app/services/appointment_status_composition.py",
+            "app/services/appointment_conflicts.py",
+            "alembic/versions/y4z5a6b7c8d9_enforce_practitioner_appointment_no_overlap.py",
+            "tests/test_appointment_concurrency.py",
+        })
+        self.assertEqual(b.G2_APPOINTMENT_ADDITIONS, {
+            "app/services/appointment_conflicts.py",
+            "alembic/versions/y4z5a6b7c8d9_enforce_practitioner_appointment_no_overlap.py",
+            "tests/test_appointment_concurrency.py",
+        })
+        self.assertEqual(b.G2_APPOINTMENT_MAINTENANCE_PATHS, {
+            b.AGENTS, b.STATE, b.G2_SCOPE, b.OVERLAY,
+            "orchestration_harness/bounded_g1b.py",
+            "orchestration_harness/raisa_policy.py",
+            "tests/test_bounded_g1b.py",
+        })
+        maintenance = self.maintenance_binding()
+        repair = self.repair_binding()
+        self.assertEqual(set(b._batch_changes(maintenance)), b.G2_APPOINTMENT_MAINTENANCE_PATHS)
+        self.assertEqual(len(b._batch_changes(maintenance)), 7)
+        self.assertEqual(set(b._batch_changes(repair)), b.G2_APPOINTMENT_PATHS)
+        self.assertEqual(len(b._batch_changes(repair)), 7)
+        self.assertEqual({path for path, row in repair["repair_sha256"].items()
+                          if row["before_sha256"] is None}, b.G2_APPOINTMENT_ADDITIONS)
+        self.assertEqual(b.operation_paths("repair_g2_appointment_concurrency", repair),
+                         b.G2_APPOINTMENT_PATHS)
+        self.assertEqual(b.operation_effects("repair_g2_appointment_concurrency"),
+                         b.G2_MIGRATION_EFFECTS)
+        self.assertEqual(b._operation("repair_g2_appointment_concurrency", repair)["limits"],
+                         b.G2_APPOINTMENT_LIMITS)
+
+    def test_v10_profile_keeps_runtime_closed_and_selects_only_the_exact_product_paths(self):
+        profile = b._g2_appointment_profile()
+        self.assertEqual(b.G2_APPOINTMENT_CODE_PATHS, {
+            "orchestration_harness/bounded_g1b.py",
+            "orchestration_harness/raisa_policy.py",
+            "tests/test_bounded_g1b.py",
+        })
+        self.assertEqual(b.G2_APPOINTMENT_PATHS,
+                         frozenset(rp.G2_APPOINTMENT_CONCURRENCY_PATHS))
+        self.assertEqual(profile, rp.g2_appointment_concurrency_profile())
+        self.assertEqual(profile["admitted_task_classes"], [b.G2_BATCH_TASK])
+        self.assertEqual(profile["allowed_paths"], sorted(b.G2_APPOINTMENT_PATHS))
+        self.assertEqual(profile["allowed_effects"], sorted(b.G2_MIGRATION_EFFECTS))
+        self.assertEqual(profile["scope_behavior"], "bounded_g2_appointment_concurrency")
+        self.assertNotIn("application_runtime", profile["allowed_effects"])
+        self.assertFalse(self.build_scope()["execution_authorized"])
+        self.assertIn("provider_invocation", profile["forbidden_effects"])
+
+    def test_v10_schema_cannot_alias_a_historical_operation_kind(self):
+        binding = self.repair_binding()
+        binding["operation_kind"] = "repair_g2_migration_downgrade_guard"
+        self.assert_reason("bounded_g2_batch_binding_version", lambda: b._batch_changes(binding))
+
+    def test_wrong_predecessor_and_instruction_policy_are_rejected_exactly(self):
+        self.assert_reason("bounded_g2_appointment_transition_base", lambda:
+            b.build_g2_appointment_scope("2026-09-16T08:00:00+00:00", "0" * 40,
+                                         self.controller_sources()))
+        scope = self.build_scope()
+        scope["current_instruction_policy"]["sha256"] = b.G2_MIGRATION_GUARD_INSTRUCTIONS_SHA256
+        self.assert_reason("bounded_g2_batch_scope_invalid", lambda: b._validate_g2_batch_scope(scope))
+        scope = self.build_scope()
+        scope["current_instruction_policy"]["previous_sha256"] = "0" * 64
+        self.assert_reason("bounded_g2_batch_scope_invalid", lambda: b._validate_g2_batch_scope(scope))
+
+    def test_out_of_scope_extra_and_unsupported_additions_are_rejected_exactly(self):
+        binding = self.repair_binding()
+        path = "app/models/appointments.py"
+        binding["repair_sha256"]["app/services/unreviewed.py"] = binding["repair_sha256"].pop(path)
+        self.assert_reason("bounded_g2_batch_path_not_allowed", lambda: b._batch_changes(binding))
+        binding = self.repair_binding()
+        binding["repair_sha256"]["app/models/unreviewed.py"] = {
+            "before_sha256": "1" * 64, "after_sha256": "2" * 64}
+        self.assert_reason("bounded_g2_batch_changes_invalid", lambda: b._batch_changes(binding))
+        binding = self.repair_binding()
+        binding["repair_sha256"][path]["before_sha256"] = None
+        self.assert_reason("bounded_g2_appointment_repair_preimage", lambda: b._batch_changes(binding))
+        binding = self.repair_binding()
+        addition = sorted(b.G2_APPOINTMENT_ADDITIONS)[0]
+        binding["repair_sha256"][addition]["before_sha256"] = "1" * 64
+        self.assert_reason("bounded_g2_appointment_repair_preimage", lambda: b._batch_changes(binding))
+
+    def test_seven_file_exception_does_not_broaden_historical_batch_versions(self):
+        repair = self.repair_binding()
+        repair["repair_sha256"].pop(sorted(b.G2_APPOINTMENT_PATHS)[0])
+        self.assert_reason("bounded_g2_batch_changes_invalid", lambda: b._batch_changes(repair))
+        historical = self.repair_binding()
+        historical.update(schema_version=b.G2_MIGRATION_GUARD_BINDING_VERSION,
+                          operation_kind="repair_g2_migration_downgrade_guard")
+        self.assert_reason("bounded_g2_batch_changes_invalid", lambda: b._batch_changes(historical))
+
+    def test_stale_latches_runtime_authority_and_scope_expansion_fail_closed(self):
+        mutations = (
+            lambda s: s.update(execution_authorized=True),
+            lambda s: s["allowed_effects"].append("application_runtime"),
+            lambda s: s.update(feature_work_eligible=True),
+            lambda s: s.update(g2_complete=True),
+            lambda s: s.update(operational_multi_task_control_accepted=True),
+            lambda s: s.update(global_gate="green"),
+            lambda s: s["current_operation"]["supersedes"].update(historical_latch_preserved=False),
+            lambda s: s["allowed_paths"].append("app/services/unreviewed.py"),
+            lambda s: s.update(maximum_changed_files=8),
+        )
+        for mutate in mutations:
+            scope = self.build_scope()
+            mutate(scope)
+            with self.subTest(mutate=mutate):
+                self.assert_reason("bounded_g2_batch_scope_invalid", lambda: b._validate_g2_batch_scope(scope))
+
+
+    def test_historical_v9_builder_keeps_policy_source_immutable(self):
+        # Contract-level compatibility only. No V9 loader/runtime is claimed.
+        sources = copy.deepcopy(b.G2_MIGRATION_GUARD_PREDECESSOR["source_sha256"])
+        for index, path in enumerate(sorted(b.G2_MIGRATION_GUARD_CODE_PATHS), 1):
+            sources[path] = f"{index:064x}"
+        scope = b.build_g2_migration_guard_scope(
+            "2026-09-16T08:00:00+00:00",
+            b.G2_MIGRATION_GUARD_PREDECESSOR["commit"], sources)
+        self.assertEqual(scope["schema_version"], b.G2_MIGRATION_GUARD_SCOPE_VERSION)
+        self.assertEqual(len(b.G2_MIGRATION_GUARD_MAINTENANCE_PATHS), 6)
+        self.assertEqual(scope["controller_source_sha256"], sources)
+        sources["orchestration_harness/raisa_policy.py"] = "0" * 64
+        self.assert_reason("bounded_g2_migration_guard_unchanged_controller_component",
+            lambda: b.build_g2_migration_guard_scope(
+                "2026-09-16T08:00:00+00:00",
+                b.G2_MIGRATION_GUARD_PREDECESSOR["commit"], sources))
+
+
 class G2MigrationGuardFixture(G2ClinicalFixture):
     """Exact captured bytes with test-only V9 publication identity substitution.
 
@@ -2853,6 +3067,197 @@ class G2MigrationGuardFixture(G2ClinicalFixture):
             expected_index_tree=candidate, candidate_tree=candidate,
             activation_commit=self.activation, installed_controller=copy.deepcopy(self.batch_controller), repair_sha256=rows)
         self.q["payload_sha256"] = {p: b._sha((self.root / p).read_bytes()) for p in b.batch_input_paths(self.q)}
+
+
+class G2AppointmentFixture(G2ClinicalFixture):
+    """Capture predecessor Git data; execute only the current pinned capsule.
+
+    No historical code is copied or claimed as loaded. The historical fixture
+    supplies earlier observations; both new decisions use self.source unchanged.
+    """
+
+    def __init__(self, assets, stack):
+        super().__init__(assets)
+        try:
+            self._capture_guard_predecessor(assets, stack)
+            self._prepare_appointment(assets, stack)
+        except BaseException:
+            self.close()
+            raise
+
+    def _capture_guard_predecessor(self, assets, stack):
+        self.guard_previous_policy = {
+            p: (assets / "g2-migration-guard-predecessor-policy" / p).read_bytes()
+            for p in b.G2_MIGRATION_GUARD_PREDECESSOR_POLICY}
+        self.guard_previous_source = {
+            p: (assets / "g2-migration-guard-predecessor-source" / p).read_bytes()
+            for p in b.CONTROLLER_PATHS}
+        self.guard_repair_before = {
+            p: (assets / "g2-migration-guard-repair-before" / p).read_bytes()
+            for p in b.G2_MIGRATION_PATHS}
+        self.guard_agents = (assets / "g2-migration-guard-current" / b.AGENTS).read_bytes()
+        pins = {**b.G2_MIGRATION_GUARD_PREDECESSOR_POLICY,
+                **b.G2_MIGRATION_GUARD_PREDECESSOR["source_sha256"],
+                **b.G2_MIGRATION_GUARD_REPAIR_PINS}
+        predecessor = {**self.guard_previous_policy, **self.guard_previous_source, **self.guard_repair_before}
+        if any(b._sha(raw) != pins[path] for path, raw in predecessor.items()):
+            raise AssertionError("V9 authored fixture requires exact captured predecessor bytes")
+        if b._sha(self.guard_agents) != b.G2_MIGRATION_GUARD_INSTRUCTIONS_SHA256:
+            raise AssertionError("V9 authored fixture requires exact accepted AGENTS bytes")
+        for path, raw in predecessor.items():
+            self.write(path, raw)
+        self.git("add", "--", *sorted(predecessor))
+        parent = self.git("rev-parse", "HEAD")
+        tree = self.git("write-tree")
+        base = self.git("commit-tree", tree, "-p", parent, "-m", "authored exact clinical predecessor bytes")
+        self.git("update-ref", "--no-deref", "HEAD", base, parent)
+        publication = copy.deepcopy(b.G2_MIGRATION_GUARD_PREDECESSOR)
+        publication.update(commit=base, parent=parent, tree=tree)
+        stack.enter_context(patch.object(b, "G2_MIGRATION_GUARD_PREDECESSOR", publication))
+        self.base = base
+
+    def _prepare_appointment(self, assets, stack):
+        self.appointment_previous_policy = {
+            path: (assets / "g2-appointment-predecessor-policy" / path).read_bytes()
+            for path in b.G2_APPOINTMENT_PREDECESSOR_POLICY
+        }
+        self.appointment_previous_source = {
+            path: (assets / "g2-appointment-predecessor-source" / path).read_bytes()
+            for path in b.SOURCE_PATHS | b.CONTROLLER_PATHS
+        }
+        self.appointment_repair_before = {
+            path: (assets / "g2-appointment-repair-before" / path).read_bytes()
+            for path, digest in b.G2_APPOINTMENT_REPAIR_PINS.items() if digest is not None
+        }
+        self.appointment_agents = (
+            assets / "g2-appointment-current" / b.AGENTS
+        ).read_bytes()
+        pins = {
+            **b.G2_APPOINTMENT_PREDECESSOR_POLICY,
+            **b.G2_APPOINTMENT_PREDECESSOR["source_sha256"],
+            **{path: digest for path, digest in b.G2_APPOINTMENT_REPAIR_PINS.items()
+               if digest is not None},
+        }
+        captured = {
+            **self.appointment_previous_policy,
+            **{path: self.appointment_previous_source[path]
+               for path in b.CONTROLLER_PATHS},
+            **self.appointment_repair_before,
+        }
+        if any(b._sha(raw) != pins[path] for path, raw in captured.items()):
+            raise AssertionError("V10 fixture requires exact captured predecessor bytes")
+        if b._sha(self.appointment_agents) != b.G2_APPOINTMENT_INSTRUCTIONS_SHA256:
+            raise AssertionError("V10 fixture requires exact current AGENTS bytes")
+        for path in b.G2_APPOINTMENT_ADDITIONS:
+            if (self.root / path).exists():
+                raise AssertionError("V10 fixture requires absent additions")
+        predecessor = {
+            **self.appointment_previous_policy,
+            **self.appointment_previous_source,
+            **self.appointment_repair_before,
+        }
+        for path, raw in predecessor.items():
+            self.write(path, raw)
+        self.git("add", "--", *sorted(predecessor))
+        parent = self.base
+        tree = self.git("write-tree")
+        base = self.git("commit-tree", tree, "-p", parent,
+                        "-m", "authored exact v9 appointment predecessor bytes")
+        self.git("update-ref", "--no-deref", "HEAD", base, parent)
+        publication = copy.deepcopy(b.G2_APPOINTMENT_PREDECESSOR)
+        publication.update(commit=base, parent=parent, tree=tree)
+        stack.enter_context(patch.object(b, "G2_APPOINTMENT_PREDECESSOR", publication))
+        self.base = base
+        sources = {
+            path: b._sha((self.source / path).read_bytes())
+            for path in b.CONTROLLER_PATHS
+        }
+        self.batch_scope = b.build_g2_appointment_scope(
+            "2026-09-16T08:00:00+00:00", base, sources)
+        after = b.build_g2_appointment_transition(
+            {path: self.appointment_previous_policy[path]
+             for path in b.G2_BATCH_CONTROL_PATHS},
+            self.batch_scope,
+        )
+        after.update({
+            path: (self.source / path).read_bytes()
+            for path in b.G2_APPOINTMENT_CODE_PATHS
+        })
+        after[b.AGENTS] = self.appointment_agents
+        rows = {
+            path: {
+                "before_sha256": b._sha((self.root / path).read_bytes()),
+                "after_sha256": b._sha(raw),
+            }
+            for path, raw in after.items()
+        }
+        for path, raw in after.items():
+            self.write(path, raw)
+        self.git("add", "--", *sorted(after))
+        candidate = self.git("write-tree")
+        self.q.update(
+            schema_version=b.G2_APPOINTMENT_BINDING_VERSION,
+            operation_id="authored-g2-appointment-concurrency-enablement",
+            operation_kind="enable_g2_appointment_concurrency",
+            phase="development", base_commit=base, base_tree=tree,
+            expected_head=base, expected_index_tree=candidate,
+            candidate_tree=candidate, activation_commit=base,
+            installed_controller=copy.deepcopy(publication),
+            repair_sha256=rows,
+            source_sha256={
+                path: b._sha((self.source / path).read_bytes())
+                for path in b.SOURCE_PATHS
+            },
+        )
+        self.q["payload_sha256"] = {
+            path: b._sha((self.root / path).read_bytes())
+            for path in b.batch_input_paths(self.q)
+        }
+
+    def prepare_appointment(self):
+        base = self.git("rev-parse", "HEAD")
+        base_tree = self.git("rev-parse", "HEAD^{tree}")
+        changes = {}
+        for path, before in b.G2_APPOINTMENT_REPAIR_PINS.items():
+            if before is None:
+                raw = ("\"\"\"Authored isolated appointment concurrency fixture: "
+                       + path + ".\"\"\"\n").encode()
+            else:
+                raw = ((self.root / path).read_bytes()
+                       + b"\n# Authored V10 appointment concurrency fixture; never imported.\n")
+            changes[path] = raw
+        rows = {
+            path: {"before_sha256": b.G2_APPOINTMENT_REPAIR_PINS[path],
+                   "after_sha256": b._sha(raw)}
+            for path, raw in changes.items()
+        }
+        for path, raw in changes.items():
+            self.write(path, raw)
+        self.git("add", "--", *sorted(changes))
+        tree = self.git("write-tree")
+        self.q.update(
+            operation_id="authored-g2-appointment-concurrency-repair",
+            operation_kind="repair_g2_appointment_concurrency",
+            phase="development", base_commit=base, base_tree=base_tree,
+            expected_head=base, expected_index_tree=tree, candidate_tree=tree,
+            activation_commit=self.activation,
+            installed_controller=copy.deepcopy(self.batch_controller),
+            repair_sha256=rows,
+        )
+        self.q["payload_sha256"] = {
+            path: b._sha((self.root / path).read_bytes())
+            for path in b.batch_input_paths(self.q)
+        }
+
+    def add_preexisting_addition_base(self, path):
+        parent = self.git("rev-parse", "HEAD")
+        self.write(path, b"# Authored pre-existing addition.\n")
+        self.git("add", "--", path)
+        tree = self.git("write-tree")
+        commit = self.git("commit-tree", tree, "-p", parent,
+                          "-m", "authored pre-existing addition baseline")
+        self.git("update-ref", "--no-deref", "HEAD", commit, parent)
+        return commit
 
 
 def build_integration_suite(assets: Path) -> unittest.TestSuite:
@@ -5812,9 +6217,144 @@ def build_integration_suite(assets: Path) -> unittest.TestSuite:
                 manifest["intended_side_effect_classes"].append(effect)
                 self.assert_denied("bounded_g1b_manifest_binding_mismatch", manifest)
 
+    class G2AppointmentConcurrencyAdmissionTests(unittest.TestCase):
+        def setUp(self):
+            self.stack = ExitStack()
+            self.addCleanup(self.stack.close)
+            self.fx = G2AppointmentFixture(assets, self.stack)
+            self.addCleanup(self.fx.close)
+            self.stack.enter_context(no_legacy_observation())
+            self.stack.enter_context(self.fx.component_history())
+
+        def observed_paths(self):
+            paths = b.G2_APPOINTMENT_MAINTENANCE_PATHS | b.G2_APPOINTMENT_PATHS
+            return {path: ((self.fx.root / path).read_bytes()
+                           if (self.fx.root / path).exists() else None)
+                    for path in paths}
+
+        def assert_admitted(self):
+            f = self.fx
+            context = f.context()
+            entrypoint = ("task_branch_commit" if f.q["phase"] == "development"
+                          else "task_branch_push")
+            for decision in (
+                pa.evaluate_programme_operation_admission(
+                    repo_root=f.root, manifest=f.manifest(context),
+                    entrypoint=entrypoint, phase=f.q["phase"], bounded_context=context),
+                pg.evaluate_pinned_programme_operation(
+                    gatekeeper_root=f.source, target_repo_root=f.root,
+                    manifest=f.manifest(context), entrypoint=entrypoint,
+                    phase=f.q["phase"], bounded_context=context),
+            ):
+                self.assertTrue(decision.policy_admitted, decision.reason_codes)
+                self.assertFalse(decision.execution_authorized)
+                self.assertEqual(decision.candidate_tree, f.q["candidate_tree"])
+
+        def assert_denied(self, reason):
+            before = self.observed_paths()
+            decision = self.fx.decision()
+            self.assertEqual(decision.reason_codes, (reason,))
+            self.assertFalse(decision.policy_admitted)
+            self.assertFalse(decision.execution_authorized)
+            self.assertEqual(self.observed_paths(), before)
+
+        def test_valid_enable_and_repair_compose_through_real_validator_and_full_loader(self):
+            f = self.fx
+            self.assertEqual(set(f.q["repair_sha256"]),
+                             b.G2_APPOINTMENT_MAINTENANCE_PATHS)
+            self.assertEqual(len(f.q["repair_sha256"]), 7)
+            self.assertEqual(b._g2_appointment_profile(),
+                             rp.g2_appointment_concurrency_profile())
+            self.assert_admitted()
+            f.activate_batches()
+            self.assert_admitted()
+            f.prepare_appointment()
+            self.assertEqual(set(f.q["repair_sha256"]), b.G2_APPOINTMENT_PATHS)
+            self.assertEqual(len(f.q["repair_sha256"]), 7)
+            self.assertEqual({path for path, row in f.q["repair_sha256"].items()
+                              if row["before_sha256"] is None},
+                             b.G2_APPOINTMENT_ADDITIONS)
+            self.assert_admitted()
+            f.commit_current()
+            self.assert_admitted()
+
+        def test_malformed_appointment_profile_is_rejected_by_real_validator(self):
+            f = self.fx
+            documents = {
+                Path(path).name: (f.root / path).read_bytes()
+                for path in b.CONFIGURATION_PATHS
+            }
+            expected = {name: b._sha(raw) for name, raw in documents.items()}
+            state = b._json((f.root / b.STATE).read_bytes())
+            agents = (f.root / b.AGENTS).read_text(encoding="utf-8")
+            rp.validate_recovery_configuration(
+                documents=documents, expected_sha256=expected,
+                agents_text=agents, state=state)
+            overlay = b._document((f.root / b.OVERLAY).read_bytes(), b.OVERLAY)
+            overlay["profiles"][b.G2_PROFILE]["allowed_paths"].append(
+                "app/services/unreviewed.py")
+            malformed = (json.dumps(overlay, indent=2, ensure_ascii=False) + "\n").encode()
+            documents[Path(b.OVERLAY).name] = malformed
+            expected[Path(b.OVERLAY).name] = b._sha(malformed)
+            with self.assertRaises(rp.RaisaPolicyError) as caught:
+                rp.validate_recovery_configuration(
+                    documents=documents, expected_sha256=expected,
+                    agents_text=agents, state=state)
+            self.assertEqual(caught.exception.reason_code,
+                             "configuration_g2_repair_profile_invalid")
+
+        def test_schema_kind_and_phase_mismatches_have_targeted_reasons(self):
+            f = self.fx
+            original = copy.deepcopy(f.q)
+            f.q["schema_version"] = b.G2_MIGRATION_GUARD_BINDING_VERSION
+            self.assert_denied("bounded_g2_batch_binding_version")
+            f.q = copy.deepcopy(original)
+            f.q["operation_kind"] = "enable_g2_migration_downgrade_guard"
+            self.assert_denied("bounded_g2_batch_binding_version")
+            f.q = copy.deepcopy(original)
+            context = f.context()
+            decision = b.evaluate_bounded_g1b_operation(
+                context=context, manifest=f.manifest(context),
+                entrypoint="task_branch_push", phase="pre-push")
+            self.assertEqual(decision.reason_codes,
+                             ("bounded_g1b_phase_disagreement",))
+            self.assertFalse(decision.policy_admitted)
+
+        def test_revised_policy_source_drift_and_unloaded_root_are_rejected(self):
+            f = self.fx
+            path = "orchestration_harness/raisa_policy.py"
+            original = f.q["source_sha256"][path]
+            f.q["source_sha256"][path] = "0" * 64
+            self.assert_denied("bounded_g1b_input_digest_changed")
+            f.q["source_sha256"][path] = original
+            self.assert_admitted()
+            context = f.context()
+            unloaded = f.home / "unloaded-source"
+            unloaded.mkdir()
+            wrong_context = b.BoundedG1BContext(
+                context.target_root, unloaded, context.evidence_root,
+                context.scratch_root, context.binding_path, context.expected_binding_sha256)
+            decision = b.evaluate_bounded_g1b_operation(
+                context=wrong_context, manifest=f.manifest(context),
+                entrypoint="task_branch_commit", phase=f.q["phase"])
+            self.assertEqual(decision.reason_codes, ("bounded_g1b_source_not_isolated",))
+            self.assertFalse(decision.policy_admitted)
+            self.assertFalse(decision.execution_authorized)
+
+        def test_preexisting_fixed_addition_is_rejected(self):
+            f = self.fx
+            f.activate_batches()
+            addition = sorted(b.G2_APPOINTMENT_ADDITIONS)[0]
+            f.add_preexisting_addition_base(addition)
+            f.prepare_appointment()
+            self.assert_denied("bounded_g2_appointment_addition_already_exists")
+
+
     suite = unittest.defaultTestLoader.loadTestsFromTestCase(ClosedRequestTests)
     suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(G2MigrationGuardSourceContractTests))
+    suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(G2AppointmentConcurrencySourceContractTests))
     suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(G2MigrationGuardAdmissionTests))
+    suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(G2AppointmentConcurrencyAdmissionTests))
     suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(G2AudioSourceContractTests))
     suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(G2PatientSourceContractTests))
     suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(G2AtomicitySourceContractTests))
