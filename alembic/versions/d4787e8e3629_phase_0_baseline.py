@@ -5,6 +5,7 @@ Revises:
 Create Date: 2026-06-13 22:25:59.005106
 
 """
+from collections import Counter
 from contextlib import contextmanager
 from typing import Sequence, Union
 
@@ -204,6 +205,799 @@ LEGACY_FOREIGN_KEYS = {
 }
 
 
+# Fixed post-upgrade contract derived statically from migration d2c66aadecb0e35f...
+# and reviewed proposal c86dc5d3d7235fab...; never captured from a live database.
+# Columns: name, declared type, nullable, server default. Physical order is irrelevant.
+POST_UPGRADE_COLUMNS = {
+    'allergies': (
+        ('id', 'uuid', False, None),
+        ('patient_id', 'uuid', False, None),
+        ('practice_id', 'uuid', False, None),
+        ('reaction', 'text', True, None),
+        ('recorded_date', 'date', True, None),
+        ('severity', 'character varying(50)', True, None),
+        ('snomed_code', 'character varying(50)', True, None),
+        ('substance', 'character varying(255)', False, None),
+    ),
+    'appointment_types': (
+        ('color_hex', 'character varying(7)', True, None),
+        ('default_duration', 'integer', True, None),
+        ('id', 'uuid', False, None),
+        ('is_bookable_online', 'boolean', True, None),
+        ('name', 'character varying(100)', False, None),
+        ('practice_id', 'uuid', False, None),
+    ),
+    'appointments': (
+        ('appointment_type_id', 'uuid', True, None),
+        ('booked_by', 'uuid', True, None),
+        ('booked_via', 'bookingchannel', True, None),
+        ('created_at', 'timestamp with time zone', True, 'now()'),
+        ('duration_minutes', 'integer', True, None),
+        ('id', 'uuid', False, None),
+        ('location_id', 'uuid', True, None),
+        ('notes', 'character varying(1000)', True, None),
+        ('patient_id', 'uuid', False, None),
+        ('practice_id', 'uuid', False, None),
+        ('practitioner_id', 'uuid', False, None),
+        ('queue_position', 'integer', True, None),
+        ('reason', 'character varying(500)', True, None),
+        ('start_time', 'timestamp with time zone', False, None),
+        ('status', 'appointmentstatus', True, None),
+        ('waiting_room', 'character varying(50)', True, None),
+    ),
+    'call_log': (
+        ('answered_by', 'uuid', True, None),
+        ('call_time', 'timestamp with time zone', True, 'now()'),
+        ('call_type', 'calltype', False, None),
+        ('caller_number', 'character varying(20)', True, None),
+        ('duration_seconds', 'integer', True, None),
+        ('id', 'uuid', False, None),
+        ('notes', 'character varying(1000)', True, None),
+        ('patient_id', 'uuid', True, None),
+        ('practice_id', 'uuid', False, None),
+    ),
+    'care_plans': (
+        ('created_at', 'timestamp with time zone', True, 'now()'),
+        ('encounter_id', 'uuid', True, None),
+        ('id', 'uuid', False, None),
+        ('mbs_item', 'character varying(20)', True, None),
+        ('patient_id', 'uuid', False, None),
+        ('plan_data', 'jsonb', True, None),
+        ('plan_type', 'careplantype', False, None),
+        ('practice_id', 'uuid', False, None),
+        ('review_date', 'date', True, None),
+        ('status', 'careplanstatus', True, None),
+        ('valid_until', 'date', True, None),
+    ),
+    'checkin_events': (
+        ('appointment_id', 'uuid', True, None),
+        ('checkin_method', 'checkinmethod', False, None),
+        ('checkin_time', 'timestamp with time zone', True, 'now()'),
+        ('id', 'uuid', False, None),
+        ('kiosk_id', 'character varying(50)', True, None),
+        ('patient_id', 'uuid', False, None),
+        ('practice_id', 'uuid', False, None),
+        ('waiting_room_assigned', 'character varying(50)', True, None),
+    ),
+    'clinical_diagnoses': (
+        ('encounter_id', 'uuid', True, None),
+        ('id', 'uuid', False, None),
+        ('is_active', 'boolean', True, None),
+        ('onset_date', 'date', True, None),
+        ('patient_id', 'uuid', False, None),
+        ('practice_id', 'uuid', False, None),
+        ('resolved_date', 'date', True, None),
+        ('severity', 'character varying(50)', True, None),
+        ('snomed_ct_au_code', 'character varying(50)', True, None),
+        ('term', 'character varying(255)', False, None),
+    ),
+    'clinical_images': (
+        ('body_site', 'character varying(100)', True, None),
+        ('caption', 'text', True, None),
+        ('captured_at', 'timestamp with time zone', True, 'now()'),
+        ('encounter_id', 'uuid', True, None),
+        ('id', 'uuid', False, None),
+        ('image_url', 'character varying(500)', False, None),
+        ('patient_id', 'uuid', False, None),
+        ('practice_id', 'uuid', False, None),
+    ),
+    'community_encounters': (
+        ('created_at', 'timestamp with time zone', True, 'now()'),
+        ('deidentified_text', 'text', False, None),
+        ('encounter_embedding', 'vector(768)', True, None),
+        ('gp_tier', 'gptier', True, None),
+        ('id', 'uuid', False, None),
+        ('mbs_item', 'character varying(20)', True, None),
+        ('practice_asgc_ra_code', 'character varying(10)', True, None),
+        ('practice_latitude', 'double precision', True, None),
+        ('practice_longitude', 'double precision', True, None),
+        ('practice_specialty_tags', 'jsonb', True, None),
+        ('snomed_codes', 'jsonb', True, None),
+        ('source_practice_id', 'uuid', True, None),
+    ),
+    'consent_forms': (
+        ('document_path', 'character varying(500)', True, None),
+        ('encounter_id', 'uuid', True, None),
+        ('form_type', 'character varying(100)', False, None),
+        ('id', 'uuid', False, None),
+        ('patient_id', 'uuid', False, None),
+        ('practice_id', 'uuid', False, None),
+        ('signature_data', 'text', True, None),
+        ('signed_at', 'timestamp with time zone', True, None),
+    ),
+    'encounters': (
+        ('appointment_id', 'uuid', True, None),
+        ('consultation_date', 'timestamp with time zone', True, 'CURRENT_TIMESTAMP'),
+        ('consultation_type', 'character varying(255)', True, None),
+        ('created_at', 'timestamp with time zone', True, 'now()'),
+        ('document_embedding', 'vector(768)', True, None),
+        ('google_doc_id', 'character varying(255)', True, None),
+        ('id', 'uuid', False, None),
+        ('is_finalized', 'boolean', True, None),
+        ('is_shared_to_hive', 'boolean', True, None),
+        ('patient_id', 'uuid', False, None),
+        ('practice_id', 'uuid', False, None),
+        ('practitioner_id', 'uuid', True, None),
+        ('raw_document_text', 'text', True, None),
+        ('status', 'encounterstatus', True, None),
+        ('template_type', 'templatetype', True, None),
+        ('updated_at', 'timestamp with time zone', True, 'now()'),
+    ),
+    'ihi_records': (
+        ('id', 'uuid', False, None),
+        ('ihi_number', 'character varying(20)', False, None),
+        ('ihi_status', 'character varying(50)', True, None),
+        ('patient_id', 'uuid', False, None),
+        ('source', 'ihisource', True, None),
+        ('verified_at', 'timestamp with time zone', True, None),
+    ),
+    'immunisations': (
+        ('air_notification_sent', 'boolean', True, None),
+        ('batch_number', 'character varying(50)', True, None),
+        ('date_given', 'date', True, None),
+        ('dose_number', 'character varying(10)', True, None),
+        ('id', 'uuid', False, None),
+        ('patient_id', 'uuid', False, None),
+        ('practice_id', 'uuid', False, None),
+        ('route', 'character varying(50)', True, None),
+        ('site', 'character varying(50)', True, None),
+        ('vaccine_name', 'character varying(255)', False, None),
+    ),
+    'internal_messages': (
+        ('appointment_id', 'uuid', True, None),
+        ('body', 'text', False, None),
+        ('created_at', 'timestamp with time zone', True, 'now()'),
+        ('id', 'uuid', False, None),
+        ('is_read', 'boolean', True, None),
+        ('patient_id', 'uuid', True, None),
+        ('practice_id', 'uuid', False, None),
+        ('priority', 'messagepriority', True, None),
+        ('read_at', 'timestamp with time zone', True, None),
+        ('recipient_id', 'uuid', True, None),
+        ('recipient_role', 'character varying(50)', True, None),
+        ('sender_id', 'uuid', False, None),
+        ('subject', 'character varying(255)', True, None),
+    ),
+    'invoices': (
+        ('encounter_id', 'uuid', True, None),
+        ('id', 'uuid', False, None),
+        ('issued_at', 'timestamp with time zone', True, None),
+        ('paid_amount', 'numeric(10,2)', True, None),
+        ('patient_id', 'uuid', False, None),
+        ('practice_id', 'uuid', False, None),
+        ('status', 'invoicestatus', True, None),
+        ('total_amount', 'numeric(10,2)', True, None),
+    ),
+    'mbs_claims': (
+        ('amount', 'numeric(10,2)', True, None),
+        ('claim_status', 'claimstatus', True, None),
+        ('claim_type', 'claimtype', True, None),
+        ('description', 'text', True, None),
+        ('encounter_id', 'uuid', True, None),
+        ('gateway_claim_id', 'character varying(100)', True, None),
+        ('id', 'uuid', False, None),
+        ('item_number', 'character varying(10)', False, None),
+        ('patient_id', 'uuid', False, None),
+        ('practice_id', 'uuid', False, None),
+        ('practitioner_id', 'uuid', True, None),
+        ('response_data', 'jsonb', True, None),
+        ('submitted_at', 'timestamp with time zone', True, None),
+    ),
+    'mbs_directory': (
+        ('description', 'text', False, None),
+        ('fee', 'character varying(20)', True, None),
+        ('item_number', 'character varying(10)', False, None),
+    ),
+    'mhr_uploads': (
+        ('document_type', 'mhrdocumenttype', False, None),
+        ('encounter_id', 'uuid', True, None),
+        ('id', 'uuid', False, None),
+        ('mhr_document_id', 'character varying(100)', True, None),
+        ('patient_id', 'uuid', False, None),
+        ('upload_status', 'character varying(50)', True, None),
+        ('uploaded_at', 'timestamp with time zone', True, None),
+    ),
+    'patient_history': (
+        ('category', 'historycategory', False, None),
+        ('date_recorded', 'date', True, None),
+        ('description', 'text', False, None),
+        ('id', 'uuid', False, None),
+        ('patient_id', 'uuid', False, None),
+        ('practice_id', 'uuid', False, None),
+    ),
+    'patient_qr_tokens': (
+        ('created_at', 'timestamp with time zone', True, 'now()'),
+        ('expires_at', 'timestamp with time zone', False, None),
+        ('id', 'uuid', False, None),
+        ('patient_id', 'uuid', False, None),
+        ('token_hash', 'character varying(255)', False, None),
+    ),
+    'patients': (
+        ('address_line1', 'character varying(255)', True, None),
+        ('address_postcode', 'character varying(10)', True, None),
+        ('address_state', 'character varying(10)', True, None),
+        ('address_suburb', 'character varying(100)', True, None),
+        ('concession_type', 'character varying(50)', True, None),
+        ('consent_facial_recognition', 'boolean', True, None),
+        ('created_at', 'timestamp with time zone', True, 'now()'),
+        ('date_of_birth', 'date', False, None),
+        ('dva_number', 'character varying(20)', True, None),
+        ('email', 'character varying(255)', True, None),
+        ('emergency_contact_name', 'character varying(200)', True, None),
+        ('emergency_contact_phone', 'character varying(20)', True, None),
+        ('emergency_contact_relationship', 'character varying(50)', True, None),
+        ('face_embedding_id', 'character varying(255)', True, None),
+        ('first_name', 'character varying(100)', False, None),
+        ('gender_identity', 'character varying(50)', True, None),
+        ('id', 'uuid', False, None),
+        ('ihi_number', 'character varying(20)', True, None),
+        ('indigenous_status', 'character varying(50)', True, None),
+        ('last_name', 'character varying(100)', False, None),
+        ('medicare_number', 'character varying(20)', True, None),
+        ('phone_home', 'character varying(20)', True, None),
+        ('phone_mobile', 'character varying(20)', True, None),
+        ('practice_id', 'uuid', False, None),
+        ('preferred_language', 'character varying(50)', True, None),
+        ('sex', 'character varying(10)', True, None),
+        ('sms_consent', 'boolean', True, None),
+        ('sms_consent_date', 'timestamp with time zone', True, None),
+        ('updated_at', 'timestamp with time zone', True, 'now()'),
+    ),
+    'practice_locations': (
+        ('address_line1', 'character varying(255)', True, None),
+        ('address_postcode', 'character varying(10)', True, None),
+        ('address_state', 'character varying(10)', True, None),
+        ('address_suburb', 'character varying(100)', True, None),
+        ('id', 'uuid', False, None),
+        ('is_active', 'boolean', True, None),
+        ('name', 'character varying(255)', False, None),
+        ('phone', 'character varying(20)', True, None),
+        ('practice_id', 'uuid', False, None),
+        ('waiting_rooms', 'jsonb', True, None),
+    ),
+    'practices': (
+        ('abn', 'character varying(20)', True, None),
+        ('address_line1', 'character varying(255)', True, None),
+        ('address_line2', 'character varying(255)', True, None),
+        ('address_postcode', 'character varying(10)', True, None),
+        ('address_state', 'character varying(10)', True, None),
+        ('address_suburb', 'character varying(100)', True, None),
+        ('asgc_ra_code', 'character varying(10)', True, None),
+        ('created_at', 'timestamp with time zone', True, 'now()'),
+        ('email', 'character varying(255)', True, None),
+        ('hive_mind_opt_in', 'boolean', True, None),
+        ('id', 'uuid', False, None),
+        ('latitude', 'double precision', True, None),
+        ('logo_url', 'character varying(500)', True, None),
+        ('longitude', 'double precision', True, None),
+        ('name', 'character varying(255)', False, None),
+        ('phone', 'character varying(20)', True, None),
+        ('practice_embedding', 'vector(768)', True, None),
+        ('proda_cert_expiry', 'timestamp with time zone', True, None),
+        ('proda_device_cert_path', 'character varying(500)', True, None),
+        ('specialty_tags', 'jsonb', True, None),
+        ('timezone', 'character varying(50)', True, None),
+    ),
+    'practitioner_schedules': (
+        ('day_of_week', 'integer', False, None),
+        ('end_time', 'time without time zone', False, None),
+        ('id', 'uuid', False, None),
+        ('location_id', 'uuid', True, None),
+        ('practitioner_id', 'uuid', False, None),
+        ('slot_duration_minutes', 'integer', True, None),
+        ('start_time', 'time without time zone', False, None),
+    ),
+    'practitioners': (
+        ('ahpra_number', 'character varying(20)', True, None),
+        ('created_at', 'timestamp with time zone', True, 'now()'),
+        ('default_location_id', 'uuid', True, None),
+        ('first_name', 'character varying(100)', False, None),
+        ('hpi_i', 'character varying(20)', True, None),
+        ('id', 'uuid', False, None),
+        ('is_active', 'boolean', True, None),
+        ('last_name', 'character varying(100)', False, None),
+        ('practice_id', 'uuid', False, None),
+        ('prescriber_number', 'character varying(20)', True, None),
+        ('provider_number', 'character varying(20)', True, None),
+        ('specialty', 'character varying(100)', True, None),
+    ),
+    'prescriptions': (
+        ('created_at', 'timestamp with time zone', True, 'now()'),
+        ('dosage_text', 'text', True, None),
+        ('drug_name', 'character varying(255)', False, None),
+        ('encounter_id', 'uuid', True, None),
+        ('end_date', 'date', True, None),
+        ('erx_token', 'character varying(255)', True, None),
+        ('frequency', 'character varying(100)', True, None),
+        ('id', 'uuid', False, None),
+        ('is_active', 'boolean', True, None),
+        ('patient_id', 'uuid', False, None),
+        ('pbs_code', 'character varying(20)', True, None),
+        ('practice_id', 'uuid', False, None),
+        ('prescribed_by', 'uuid', True, None),
+        ('quantity', 'character varying(20)', True, None),
+        ('repeats', 'character varying(10)', True, None),
+        ('route', 'character varying(50)', True, None),
+        ('start_date', 'date', True, None),
+    ),
+    'rag_feedback': (
+        ('created_at', 'timestamp with time zone', True, 'now()'),
+        ('encounter_id', 'uuid', True, None),
+        ('id', 'uuid', False, None),
+        ('practice_id', 'uuid', False, None),
+        ('query_embedding', 'vector(768)', True, None),
+        ('retrieved_community_ids', 'jsonb', True, None),
+        ('was_accepted', 'boolean', True, None),
+    ),
+    'referrals': (
+        ('created_at', 'timestamp with time zone', True, 'now()'),
+        ('encounter_id', 'uuid', True, None),
+        ('id', 'uuid', False, None),
+        ('letter_document_path', 'character varying(500)', True, None),
+        ('patient_id', 'uuid', False, None),
+        ('practice_id', 'uuid', False, None),
+        ('practitioner_id', 'uuid', True, None),
+        ('reason', 'text', True, None),
+        ('referral_to', 'character varying(255)', True, None),
+        ('specialty', 'character varying(100)', True, None),
+        ('status', 'referralstatus', True, None),
+        ('urgency', 'character varying(50)', True, None),
+    ),
+    'reminders': (
+        ('due_date', 'date', True, None),
+        ('id', 'uuid', False, None),
+        ('is_dismissed', 'boolean', True, None),
+        ('message', 'text', True, None),
+        ('patient_id', 'uuid', False, None),
+        ('practice_id', 'uuid', False, None),
+        ('practitioner_id', 'uuid', True, None),
+        ('reminder_type', 'remindertype', False, None),
+        ('triggered_by_result_id', 'uuid', True, None),
+    ),
+    'result_items': (
+        ('flag', 'resultflag', True, None),
+        ('id', 'uuid', False, None),
+        ('loinc_code', 'character varying(20)', True, None),
+        ('reference_range', 'character varying(100)', True, None),
+        ('result_id', 'uuid', False, None),
+        ('test_name', 'character varying(255)', False, None),
+        ('units', 'character varying(50)', True, None),
+        ('value', 'character varying(100)', True, None),
+    ),
+    'results': (
+        ('ai_summary', 'text', True, None),
+        ('display_pdf_url', 'character varying(500)', True, None),
+        ('id', 'uuid', False, None),
+        ('is_abnormal', 'boolean', True, None),
+        ('lab_name', 'character varying(255)', True, None),
+        ('parsed_data', 'jsonb', True, None),
+        ('patient_id', 'uuid', False, None),
+        ('practice_id', 'uuid', False, None),
+        ('raw_message', 'text', True, None),
+        ('received_at', 'timestamp with time zone', True, 'now()'),
+        ('report_date', 'date', True, None),
+        ('result_source', 'resultsource', False, None),
+        ('reviewed_at', 'timestamp with time zone', True, None),
+        ('reviewed_by', 'uuid', True, None),
+        ('specimen_date', 'date', True, None),
+        ('status', 'resultstatus', True, None),
+        ('test_request_id', 'uuid', True, None),
+    ),
+    'scanned_documents': (
+        ('document_type', 'documenttype', False, None),
+        ('file_url', 'character varying(500)', False, None),
+        ('id', 'uuid', False, None),
+        ('notes', 'text', True, None),
+        ('patient_id', 'uuid', False, None),
+        ('practice_id', 'uuid', False, None),
+        ('scanned_at', 'timestamp with time zone', True, 'now()'),
+        ('triage_status', 'triagestatus', True, None),
+        ('triaged_to', 'uuid', True, None),
+    ),
+    'schedule_overrides': (
+        ('date', 'date', False, None),
+        ('id', 'uuid', False, None),
+        ('is_unavailable', 'boolean', True, None),
+        ('override_end', 'time without time zone', True, None),
+        ('override_start', 'time without time zone', True, None),
+        ('practitioner_id', 'uuid', False, None),
+        ('reason', 'character varying(255)', True, None),
+    ),
+    'sms_log': (
+        ('clicksend_message_id', 'character varying(100)', True, None),
+        ('direction', 'smsdirection', False, None),
+        ('id', 'uuid', False, None),
+        ('message_body', 'text', False, None),
+        ('patient_id', 'uuid', True, None),
+        ('phone_number', 'character varying(20)', False, None),
+        ('practice_id', 'uuid', False, None),
+        ('sent_at', 'timestamp with time zone', True, 'now()'),
+        ('sms_type', 'smstype', True, None),
+        ('status', 'smsstatus', True, None),
+    ),
+    'snomed_directory': (
+        ('concept_id', 'character varying(50)', False, None),
+        ('term', 'character varying(255)', False, None),
+    ),
+    'test_requests': (
+        ('created_at', 'timestamp with time zone', True, 'now()'),
+        ('encounter_id', 'uuid', True, None),
+        ('id', 'uuid', False, None),
+        ('patient_id', 'uuid', False, None),
+        ('practice_id', 'uuid', False, None),
+        ('practitioner_id', 'uuid', True, None),
+        ('request_text', 'text', True, None),
+        ('request_type', 'requesttype', False, None),
+        ('status', 'requeststatus', True, None),
+        ('urgency', 'character varying(50)', True, None),
+    ),
+    'users': (
+        ('created_at', 'timestamp with time zone', True, 'now()'),
+        ('email', 'character varying(255)', False, None),
+        ('id', 'uuid', False, None),
+        ('is_active', 'boolean', True, None),
+        ('password_hash', 'character varying(255)', False, None),
+        ('practice_id', 'uuid', False, None),
+        ('practitioner_id', 'uuid', True, None),
+        ('role', 'userrole', False, None),
+    ),
+}
+
+# Constraint names are generated; ordered keys and multiplicity are semantic.
+POST_UPGRADE_CONSTRAINTS = {
+    'allergies': (
+        ('p', ('id',), None, ()),
+        ('f', ('patient_id',), 'patients', ('id',)),
+        ('f', ('practice_id',), 'practices', ('id',)),
+    ),
+    'appointment_types': (
+        ('p', ('id',), None, ()),
+        ('f', ('practice_id',), 'practices', ('id',)),
+    ),
+    'appointments': (
+        ('p', ('id',), None, ()),
+        ('f', ('appointment_type_id',), 'appointment_types', ('id',)),
+        ('f', ('booked_by',), 'users', ('id',)),
+        ('f', ('location_id',), 'practice_locations', ('id',)),
+        ('f', ('patient_id',), 'patients', ('id',)),
+        ('f', ('practice_id',), 'practices', ('id',)),
+        ('f', ('practitioner_id',), 'practitioners', ('id',)),
+    ),
+    'call_log': (
+        ('p', ('id',), None, ()),
+        ('f', ('answered_by',), 'users', ('id',)),
+        ('f', ('patient_id',), 'patients', ('id',)),
+        ('f', ('practice_id',), 'practices', ('id',)),
+    ),
+    'care_plans': (
+        ('p', ('id',), None, ()),
+        ('f', ('encounter_id',), 'encounters', ('id',)),
+        ('f', ('patient_id',), 'patients', ('id',)),
+        ('f', ('practice_id',), 'practices', ('id',)),
+    ),
+    'checkin_events': (
+        ('p', ('id',), None, ()),
+        ('f', ('appointment_id',), 'appointments', ('id',)),
+        ('f', ('patient_id',), 'patients', ('id',)),
+        ('f', ('practice_id',), 'practices', ('id',)),
+    ),
+    'clinical_diagnoses': (
+        ('p', ('id',), None, ()),
+        ('f', ('encounter_id',), 'encounters', ('id',)),
+        ('f', ('patient_id',), 'patients', ('id',)),
+        ('f', ('practice_id',), 'practices', ('id',)),
+    ),
+    'clinical_images': (
+        ('p', ('id',), None, ()),
+        ('f', ('encounter_id',), 'encounters', ('id',)),
+        ('f', ('patient_id',), 'patients', ('id',)),
+        ('f', ('practice_id',), 'practices', ('id',)),
+    ),
+    'community_encounters': (
+        ('p', ('id',), None, ()),
+        ('f', ('source_practice_id',), 'practices', ('id',)),
+    ),
+    'consent_forms': (
+        ('p', ('id',), None, ()),
+        ('f', ('encounter_id',), 'encounters', ('id',)),
+        ('f', ('patient_id',), 'patients', ('id',)),
+        ('f', ('practice_id',), 'practices', ('id',)),
+    ),
+    'encounters': (
+        ('p', ('id',), None, ()),
+        ('f', ('appointment_id',), 'appointments', ('id',)),
+        ('f', ('patient_id',), 'patients', ('id',)),
+        ('f', ('practice_id',), 'practices', ('id',)),
+        ('f', ('practitioner_id',), 'practitioners', ('id',)),
+    ),
+    'ihi_records': (
+        ('p', ('id',), None, ()),
+        ('f', ('patient_id',), 'patients', ('id',)),
+    ),
+    'immunisations': (
+        ('p', ('id',), None, ()),
+        ('f', ('patient_id',), 'patients', ('id',)),
+        ('f', ('practice_id',), 'practices', ('id',)),
+    ),
+    'internal_messages': (
+        ('p', ('id',), None, ()),
+        ('f', ('appointment_id',), 'appointments', ('id',)),
+        ('f', ('patient_id',), 'patients', ('id',)),
+        ('f', ('practice_id',), 'practices', ('id',)),
+        ('f', ('recipient_id',), 'users', ('id',)),
+        ('f', ('sender_id',), 'users', ('id',)),
+    ),
+    'invoices': (
+        ('p', ('id',), None, ()),
+        ('f', ('encounter_id',), 'encounters', ('id',)),
+        ('f', ('patient_id',), 'patients', ('id',)),
+        ('f', ('practice_id',), 'practices', ('id',)),
+    ),
+    'mbs_claims': (
+        ('p', ('id',), None, ()),
+        ('f', ('encounter_id',), 'encounters', ('id',)),
+        ('f', ('patient_id',), 'patients', ('id',)),
+        ('f', ('practice_id',), 'practices', ('id',)),
+        ('f', ('practitioner_id',), 'practitioners', ('id',)),
+    ),
+    'mbs_directory': (
+        ('p', ('item_number',), None, ()),
+    ),
+    'mhr_uploads': (
+        ('p', ('id',), None, ()),
+        ('f', ('encounter_id',), 'encounters', ('id',)),
+        ('f', ('patient_id',), 'patients', ('id',)),
+    ),
+    'patient_history': (
+        ('p', ('id',), None, ()),
+        ('f', ('patient_id',), 'patients', ('id',)),
+        ('f', ('practice_id',), 'practices', ('id',)),
+    ),
+    'patient_qr_tokens': (
+        ('p', ('id',), None, ()),
+        ('u', ('token_hash',), None, ()),
+        ('f', ('patient_id',), 'patients', ('id',)),
+    ),
+    'patients': (
+        ('p', ('id',), None, ()),
+        ('f', ('practice_id',), 'practices', ('id',)),
+    ),
+    'practice_locations': (
+        ('p', ('id',), None, ()),
+        ('f', ('practice_id',), 'practices', ('id',)),
+    ),
+    'practices': (
+        ('p', ('id',), None, ()),
+    ),
+    'practitioner_schedules': (
+        ('p', ('id',), None, ()),
+        ('f', ('location_id',), 'practice_locations', ('id',)),
+        ('f', ('practitioner_id',), 'practitioners', ('id',)),
+    ),
+    'practitioners': (
+        ('p', ('id',), None, ()),
+        ('f', ('default_location_id',), 'practice_locations', ('id',)),
+        ('f', ('practice_id',), 'practices', ('id',)),
+    ),
+    'prescriptions': (
+        ('p', ('id',), None, ()),
+        ('f', ('encounter_id',), 'encounters', ('id',)),
+        ('f', ('patient_id',), 'patients', ('id',)),
+        ('f', ('practice_id',), 'practices', ('id',)),
+        ('f', ('prescribed_by',), 'practitioners', ('id',)),
+    ),
+    'rag_feedback': (
+        ('p', ('id',), None, ()),
+        ('f', ('encounter_id',), 'encounters', ('id',)),
+        ('f', ('practice_id',), 'practices', ('id',)),
+    ),
+    'referrals': (
+        ('p', ('id',), None, ()),
+        ('f', ('encounter_id',), 'encounters', ('id',)),
+        ('f', ('patient_id',), 'patients', ('id',)),
+        ('f', ('practice_id',), 'practices', ('id',)),
+        ('f', ('practitioner_id',), 'practitioners', ('id',)),
+    ),
+    'reminders': (
+        ('p', ('id',), None, ()),
+        ('f', ('patient_id',), 'patients', ('id',)),
+        ('f', ('practice_id',), 'practices', ('id',)),
+        ('f', ('practitioner_id',), 'practitioners', ('id',)),
+        ('f', ('triggered_by_result_id',), 'results', ('id',)),
+    ),
+    'result_items': (
+        ('p', ('id',), None, ()),
+        ('f', ('result_id',), 'results', ('id',)),
+    ),
+    'results': (
+        ('p', ('id',), None, ()),
+        ('f', ('patient_id',), 'patients', ('id',)),
+        ('f', ('practice_id',), 'practices', ('id',)),
+        ('f', ('reviewed_by',), 'practitioners', ('id',)),
+        ('f', ('test_request_id',), 'test_requests', ('id',)),
+    ),
+    'scanned_documents': (
+        ('p', ('id',), None, ()),
+        ('f', ('patient_id',), 'patients', ('id',)),
+        ('f', ('practice_id',), 'practices', ('id',)),
+        ('f', ('triaged_to',), 'practitioners', ('id',)),
+    ),
+    'schedule_overrides': (
+        ('p', ('id',), None, ()),
+        ('f', ('practitioner_id',), 'practitioners', ('id',)),
+    ),
+    'sms_log': (
+        ('p', ('id',), None, ()),
+        ('f', ('patient_id',), 'patients', ('id',)),
+        ('f', ('practice_id',), 'practices', ('id',)),
+    ),
+    'snomed_directory': (
+        ('p', ('concept_id',), None, ()),
+    ),
+    'test_requests': (
+        ('p', ('id',), None, ()),
+        ('f', ('encounter_id',), 'encounters', ('id',)),
+        ('f', ('patient_id',), 'patients', ('id',)),
+        ('f', ('practice_id',), 'practices', ('id',)),
+        ('f', ('practitioner_id',), 'practitioners', ('id',)),
+    ),
+    'users': (
+        ('p', ('id',), None, ()),
+        ('u', ('email',), None, ()),
+        ('f', ('practice_id',), 'practices', ('id',)),
+        ('f', ('practitioner_id',), 'practitioners', ('id',)),
+    ),
+}
+
+# Names are used explicitly by reversal; preserve every standalone index.
+POST_UPGRADE_INDEXES = {
+    'allergies': (('ix_allergies_patient_id', ('patient_id',)),),
+    'appointment_types': (('ix_appointment_types_practice_id', ('practice_id',)),),
+    'appointments': (('ix_appointments_patient_id', ('patient_id',)), ('ix_appointments_practice_id', ('practice_id',)), ('ix_appointments_practitioner_id', ('practitioner_id',)), ('ix_appointments_start_time', ('start_time',))),
+    'call_log': (('ix_call_log_practice_id', ('practice_id',)),),
+    'care_plans': (('ix_care_plans_patient_id', ('patient_id',)), ('ix_care_plans_practice_id', ('practice_id',))),
+    'checkin_events': (('ix_checkin_events_patient_id', ('patient_id',)),),
+    'clinical_diagnoses': (('ix_clinical_diagnoses_patient_id', ('patient_id',)), ('ix_clinical_diagnoses_practice_id', ('practice_id',))),
+    'clinical_images': (('ix_clinical_images_patient_id', ('patient_id',)),),
+    'community_encounters': (),
+    'consent_forms': (('ix_consent_forms_patient_id', ('patient_id',)),),
+    'encounters': (('ix_encounters_patient_id', ('patient_id',)), ('ix_encounters_practice_id', ('practice_id',))),
+    'ihi_records': (('ix_ihi_records_patient_id', ('patient_id',)),),
+    'immunisations': (('ix_immunisations_patient_id', ('patient_id',)),),
+    'internal_messages': (('ix_internal_messages_practice_id', ('practice_id',)), ('ix_internal_messages_recipient_id', ('recipient_id',))),
+    'invoices': (('ix_invoices_patient_id', ('patient_id',)),),
+    'mbs_claims': (('ix_mbs_claims_claim_status', ('claim_status',)), ('ix_mbs_claims_patient_id', ('patient_id',)), ('ix_mbs_claims_practice_id', ('practice_id',))),
+    'mbs_directory': (),
+    'mhr_uploads': (('ix_mhr_uploads_patient_id', ('patient_id',)),),
+    'patient_history': (('ix_patient_history_patient_id', ('patient_id',)),),
+    'patient_qr_tokens': (('ix_patient_qr_tokens_patient_id', ('patient_id',)),),
+    'patients': (('ix_patients_last_name', ('last_name',)), ('ix_patients_medicare_number', ('medicare_number',)), ('ix_patients_practice_id', ('practice_id',))),
+    'practice_locations': (('ix_practice_locations_practice_id', ('practice_id',)),),
+    'practices': (),
+    'practitioner_schedules': (('ix_practitioner_schedules_practitioner_id', ('practitioner_id',)),),
+    'practitioners': (('ix_practitioners_practice_id', ('practice_id',)),),
+    'prescriptions': (('ix_prescriptions_patient_id', ('patient_id',)),),
+    'rag_feedback': (('ix_rag_feedback_practice_id', ('practice_id',)),),
+    'referrals': (('ix_referrals_patient_id', ('patient_id',)),),
+    'reminders': (('ix_reminders_patient_id', ('patient_id',)), ('ix_reminders_practice_id', ('practice_id',))),
+    'result_items': (('ix_result_items_result_id', ('result_id',)),),
+    'results': (('ix_results_patient_id', ('patient_id',)), ('ix_results_practice_id', ('practice_id',)), ('ix_results_status', ('status',))),
+    'scanned_documents': (('ix_scanned_documents_patient_id', ('patient_id',)),),
+    'schedule_overrides': (('ix_schedule_overrides_practitioner_id_date', ('practitioner_id', 'date')),),
+    'sms_log': (('ix_sms_log_patient_id', ('patient_id',)), ('ix_sms_log_practice_id', ('practice_id',))),
+    'snomed_directory': (),
+    'test_requests': (('ix_test_requests_patient_id', ('patient_id',)),),
+    'users': (('ix_users_email', ('email',)), ('ix_users_practice_id', ('practice_id',))),
+}
+
+POST_UPGRADE_ENUMS = {
+    'appointmentstatus': ('Booked', 'Confirmed', 'Arrived', 'InConsult', 'Completed', 'Cancelled', 'NoShow', 'DNA'),
+    'bookingchannel': ('Receptionist', 'Online', 'Phone', 'Kiosk', 'App'),
+    'calltype': ('Inbound', 'Outbound', 'Telehealth', 'Missed'),
+    'careplanstatus': ('Draft', 'Active', 'Review_Due', 'Completed'),
+    'careplantype': ('GPCCMP', 'MHTP', 'HealthAssessment45', 'HealthAssessment75', 'ATSI_HA', 'Antenatal'),
+    'checkinmethod': ('Details', 'QR', 'NFC', 'FacialRecognition'),
+    'claimstatus': ('Draft', 'Submitted', 'Accepted', 'Rejected', 'Paid'),
+    'claimtype': ('BulkBill', 'PatientClaim', 'DVA', 'WorkCover', 'TAC', 'ECLIPSE'),
+    'documenttype': ('SpecialistLetter', 'Report', 'Correspondence', 'Other'),
+    'encounterstatus': ('Draft', 'InProgress', 'Finalized', 'Amended'),
+    'gptier': ('Tier1_Gold', 'Tier2', 'Tier3'),
+    'historycategory': ('Medical', 'Surgical', 'Family', 'Social'),
+    'ihisource': ('Manual', 'HI_Service'),
+    'invoicestatus': ('Draft', 'Issued', 'Paid', 'Overdue', 'Cancelled'),
+    'messagepriority': ('Normal', 'Urgent', 'Critical'),
+    'mhrdocumenttype': ('SharedHealthSummary', 'EventSummary', 'DischargeSummary', 'Other'),
+    'referralstatus': ('Draft', 'Sent', 'Accepted', 'Completed'),
+    'remindertype': ('ResultFollowUp', 'Recall', 'ReviewAppointment', 'CarePlanReview', 'Custom'),
+    'requeststatus': ('Pending', 'ResultReceived', 'Reviewed'),
+    'requesttype': ('Pathology', 'Radiology', 'Specialist', 'Other'),
+    'resultflag': ('Normal', 'Low', 'High', 'Critical'),
+    'resultsource': ('PIT', 'HL7', 'Manual', 'Scan'),
+    'resultstatus': ('New', 'Reviewed', 'ActionRequired', 'Filed'),
+    'smsdirection': ('Outbound', 'Inbound'),
+    'smsstatus': ('Queued', 'Sent', 'Delivered', 'Failed', 'Replied'),
+    'smstype': ('AppointmentReminder', 'Confirmation', 'ResultNotification', 'Recall', 'Bulk', 'Custom'),
+    'templatetype': ('SOAP', 'Procedure', 'MentalHealth', 'CDM', 'GPCCMP', 'HealthAssessment', 'Antenatal', 'WoundCare'),
+    'triagestatus': ('Pending', 'Triaged', 'Reviewed'),
+    'userrole': ('GP', 'Receptionist', 'Nurse', 'Admin', 'PracticeOwner'),
+}
+
+
+# PostgreSQL 16 catalog identities; no format_type/search-path erasure.
+# namespace, type, typmod, kind, extension, extension namespace, collation namespace/name
+POST_TYPE_FACTS = {
+    'appointmentstatus': ('public', 'appointmentstatus', -1, 'e', None, None, None, None),
+    'bookingchannel': ('public', 'bookingchannel', -1, 'e', None, None, None, None),
+    'boolean': ('pg_catalog', 'bool', -1, 'b', None, None, None, None),
+    'calltype': ('public', 'calltype', -1, 'e', None, None, None, None),
+    'careplanstatus': ('public', 'careplanstatus', -1, 'e', None, None, None, None),
+    'careplantype': ('public', 'careplantype', -1, 'e', None, None, None, None),
+    'character varying(10)': ('pg_catalog', 'varchar', 14, 'b', None, None, 'pg_catalog', 'default'),
+    'character varying(100)': ('pg_catalog', 'varchar', 104, 'b', None, None, 'pg_catalog', 'default'),
+    'character varying(1000)': ('pg_catalog', 'varchar', 1004, 'b', None, None, 'pg_catalog', 'default'),
+    'character varying(20)': ('pg_catalog', 'varchar', 24, 'b', None, None, 'pg_catalog', 'default'),
+    'character varying(200)': ('pg_catalog', 'varchar', 204, 'b', None, None, 'pg_catalog', 'default'),
+    'character varying(255)': ('pg_catalog', 'varchar', 259, 'b', None, None, 'pg_catalog', 'default'),
+    'character varying(50)': ('pg_catalog', 'varchar', 54, 'b', None, None, 'pg_catalog', 'default'),
+    'character varying(500)': ('pg_catalog', 'varchar', 504, 'b', None, None, 'pg_catalog', 'default'),
+    'character varying(7)': ('pg_catalog', 'varchar', 11, 'b', None, None, 'pg_catalog', 'default'),
+    'checkinmethod': ('public', 'checkinmethod', -1, 'e', None, None, None, None),
+    'claimstatus': ('public', 'claimstatus', -1, 'e', None, None, None, None),
+    'claimtype': ('public', 'claimtype', -1, 'e', None, None, None, None),
+    'date': ('pg_catalog', 'date', -1, 'b', None, None, None, None),
+    'documenttype': ('public', 'documenttype', -1, 'e', None, None, None, None),
+    'double precision': ('pg_catalog', 'float8', -1, 'b', None, None, None, None),
+    'encounterstatus': ('public', 'encounterstatus', -1, 'e', None, None, None, None),
+    'gptier': ('public', 'gptier', -1, 'e', None, None, None, None),
+    'historycategory': ('public', 'historycategory', -1, 'e', None, None, None, None),
+    'ihisource': ('public', 'ihisource', -1, 'e', None, None, None, None),
+    'integer': ('pg_catalog', 'int4', -1, 'b', None, None, None, None),
+    'invoicestatus': ('public', 'invoicestatus', -1, 'e', None, None, None, None),
+    'jsonb': ('pg_catalog', 'jsonb', -1, 'b', None, None, None, None),
+    'messagepriority': ('public', 'messagepriority', -1, 'e', None, None, None, None),
+    'mhrdocumenttype': ('public', 'mhrdocumenttype', -1, 'e', None, None, None, None),
+    'numeric(10,2)': ('pg_catalog', 'numeric', 655366, 'b', None, None, None, None),
+    'referralstatus': ('public', 'referralstatus', -1, 'e', None, None, None, None),
+    'remindertype': ('public', 'remindertype', -1, 'e', None, None, None, None),
+    'requeststatus': ('public', 'requeststatus', -1, 'e', None, None, None, None),
+    'requesttype': ('public', 'requesttype', -1, 'e', None, None, None, None),
+    'resultflag': ('public', 'resultflag', -1, 'e', None, None, None, None),
+    'resultsource': ('public', 'resultsource', -1, 'e', None, None, None, None),
+    'resultstatus': ('public', 'resultstatus', -1, 'e', None, None, None, None),
+    'smsdirection': ('public', 'smsdirection', -1, 'e', None, None, None, None),
+    'smsstatus': ('public', 'smsstatus', -1, 'e', None, None, None, None),
+    'smstype': ('public', 'smstype', -1, 'e', None, None, None, None),
+    'templatetype': ('public', 'templatetype', -1, 'e', None, None, None, None),
+    'text': ('pg_catalog', 'text', -1, 'b', None, None, 'pg_catalog', 'default'),
+    'time without time zone': ('pg_catalog', 'time', -1, 'b', None, None, None, None),
+    'timestamp with time zone': ('pg_catalog', 'timestamptz', -1, 'b', None, None, None, None),
+    'triagestatus': ('public', 'triagestatus', -1, 'e', None, None, None, None),
+    'userrole': ('public', 'userrole', -1, 'e', None, None, None, None),
+    'uuid': ('pg_catalog', 'uuid', -1, 'b', None, None, None, None),
+    'vector(768)': ('public', 'vector', 768, 'b', 'vector', 'public', None, None),
+}
+
+
 @contextmanager
 def _preservation_transaction():
     """Require transactional online PostgreSQL; undo even a late DDL refusal."""
@@ -335,6 +1129,185 @@ def _validate_legacy_shape(tables: set[str]) -> None:
             raise RuntimeError(f"Phase-0 refuses unexpected legacy constraints in {name}")
 
 
+def _validate_post_upgrade_shape() -> None:
+    """Compare fixed source expectations under downgrade's existing locks.
+
+    This adapter is deliberately limited to PostgreSQL 16 and this revision's
+    plain columns, immediate constraints and btree indexes. Unknown forms refuse.
+    """
+    bind = op.get_bind()
+    if int(bind.execute(sa.text("SHOW server_version_num")).scalar_one()) // 10000 != 16:
+        raise RuntimeError("Phase-0 refuses unsupported downgrade catalog version")
+    columns = bind.execute(sa.text("""
+        SELECT c.relname, a.attname, tn.nspname, t.typname, a.atttypmod,
+               t.typtype, e.extname, en.nspname, cn.nspname, co.collname,
+               NOT a.attnotnull, pg_catalog.pg_get_expr(d.adbin, d.adrelid),
+               a.attidentity, a.attgenerated,
+               EXISTS (SELECT 1 FROM pg_catalog.pg_depend dep
+                       WHERE dep.classid = 'pg_catalog.pg_attrdef'::regclass
+                         AND dep.objid = d.oid
+                         AND dep.refclassid = 'pg_catalog.pg_proc'::regclass
+                         AND dep.refobjid <> 'pg_catalog.now()'::regprocedure) AS other_default_function
+        FROM pg_catalog.pg_attribute a
+        JOIN pg_catalog.pg_class c ON c.oid = a.attrelid
+        JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
+        JOIN pg_catalog.pg_type t ON t.oid = a.atttypid
+        JOIN pg_catalog.pg_namespace tn ON tn.oid = t.typnamespace
+        LEFT JOIN pg_catalog.pg_attrdef d ON d.adrelid = a.attrelid AND d.adnum = a.attnum
+        LEFT JOIN pg_catalog.pg_collation co ON co.oid = a.attcollation
+        LEFT JOIN pg_catalog.pg_namespace cn ON cn.oid = co.collnamespace
+        LEFT JOIN pg_catalog.pg_depend ed ON ed.classid = 'pg_catalog.pg_type'::regclass
+          AND ed.objid = t.oid AND ed.refclassid = 'pg_catalog.pg_extension'::regclass AND ed.deptype = 'e'
+        LEFT JOIN pg_catalog.pg_extension e ON e.oid = ed.refobjid
+        LEFT JOIN pg_catalog.pg_namespace en ON en.oid = e.extnamespace
+        WHERE n.nspname = 'public' AND c.relkind = 'r' AND c.relname <> 'alembic_version'
+          AND a.attnum > 0 AND NOT a.attisdropped
+    """)).all()
+    expected_columns = Counter(
+        (table, name, *POST_TYPE_FACTS[declared], nullable, default, "", "", False)
+        for table, rows in POST_UPGRADE_COLUMNS.items()
+        for name, declared, nullable, default in rows
+    )
+    _require_post_upgrade_records("columns", Counter(tuple(row) for row in columns), expected_columns)
+    enum_rows = bind.execute(sa.text("""
+        SELECT t.typname, array_agg(e.enumlabel ORDER BY e.enumsortorder)
+        FROM pg_catalog.pg_type t JOIN pg_catalog.pg_namespace n ON n.oid = t.typnamespace
+        JOIN pg_catalog.pg_enum e ON e.enumtypid = t.oid
+        WHERE n.nspname = 'public' GROUP BY t.typname
+    """)).all()
+    enums = {name: tuple(labels) for name, labels in enum_rows if name in OWNED_ENUM_TYPES}
+    if enums != POST_UPGRADE_ENUMS:
+        raise RuntimeError("Phase-0 refuses changed revision-owned enum labels")
+    constraints = bind.execute(sa.text("""
+        SELECT k.oid, k.conrelid, k.conindid, c.relname AS table_name, k.contype,
+               ARRAY(SELECT a.attname FROM unnest(k.conkey) WITH ORDINALITY x(num, ord)
+                     LEFT JOIN pg_catalog.pg_attribute a ON a.attrelid = k.conrelid AND a.attnum = x.num
+                     ORDER BY x.ord) AS keys,
+               rn.nspname AS remote_schema, rc.relname AS remote_table,
+               ARRAY(SELECT a.attname FROM unnest(k.confkey) WITH ORDINALITY x(num, ord)
+                     LEFT JOIN pg_catalog.pg_attribute a ON a.attrelid = k.confrelid AND a.attnum = x.num
+                     ORDER BY x.ord) AS remote_keys,
+               k.confupdtype, k.confdeltype, k.confmatchtype,
+               k.condeferrable, k.condeferred, k.convalidated,
+               k.conislocal, k.coninhcount, k.conparentid
+        FROM pg_catalog.pg_constraint k JOIN pg_catalog.pg_class c ON c.oid = k.conrelid
+        JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
+        LEFT JOIN pg_catalog.pg_class rc ON rc.oid = k.confrelid
+        LEFT JOIN pg_catalog.pg_namespace rn ON rn.oid = rc.relnamespace
+        WHERE n.nspname = 'public' AND c.relkind = 'r' AND c.relname <> 'alembic_version'
+    """)).mappings().all()
+    actual_constraints = Counter()
+    supporting = {}
+    for row in constraints:
+        kind = row["contype"]
+        if (kind not in {"p", "u", "f"} or row["condeferrable"] or row["condeferred"]
+                or not row["convalidated"] or not row["conislocal"]
+                or row["coninhcount"] != 0 or row["conparentid"] != 0):
+            raise RuntimeError(f"Phase-0 refuses unexpected post-upgrade constraints in {row['table_name']}: timing/validation/kind")
+        if kind == "f":
+            if (row["remote_schema"] != "public" or row["confupdtype"] != "a"
+                    or row["confdeltype"] != "a" or row["confmatchtype"] != "s"):
+                raise RuntimeError(f"Phase-0 refuses unexpected post-upgrade constraints in {row['table_name']}: qualified target/action/match")
+            target, remote_keys = row["remote_table"], tuple(row["remote_keys"])
+        else:
+            target, remote_keys = None, ()
+            index_oid = row["conindid"]
+            if not index_oid or index_oid in supporting:
+                raise RuntimeError("Phase-0 refuses ambiguous constraint index ownership")
+            supporting[index_oid] = (row["conrelid"], kind, tuple(row["keys"]))
+        actual_constraints[(row["table_name"], kind, tuple(row["keys"]), target, remote_keys)] += 1
+    expected_constraints = Counter((table, *row) for table, rows in POST_UPGRADE_CONSTRAINTS.items() for row in rows)
+    _require_post_upgrade_records("constraints", actual_constraints, expected_constraints)
+    indexes = bind.execute(sa.text("""
+        SELECT i.indexrelid, i.indrelid, c.relname AS table_name, ic.relname AS index_name,
+               am.amname, i.indisunique, i.indisprimary, i.indisexclusion,
+               i.indimmediate, i.indisvalid, i.indisready, i.indislive, i.indnullsnotdistinct,
+               i.indnkeyatts, i.indnatts,
+               pg_catalog.pg_get_expr(i.indexprs, i.indrelid) AS expressions,
+               pg_catalog.pg_get_expr(i.indpred, i.indrelid) AS predicate,
+               ARRAY(SELECT a.attname FROM unnest(i.indkey) WITH ORDINALITY x(num, ord)
+                     LEFT JOIN pg_catalog.pg_attribute a ON a.attrelid = i.indrelid AND a.attnum = x.num
+                     ORDER BY x.ord) AS keys,
+               i.indoption::smallint[] AS options,
+               ARRAY(SELECT coalesce(nc.nspname || '.' || co.collname, '')
+                     FROM unnest(i.indcollation) WITH ORDINALITY x(oid, ord)
+                     LEFT JOIN pg_catalog.pg_collation co ON co.oid = x.oid
+                     LEFT JOIN pg_catalog.pg_namespace nc ON nc.oid = co.collnamespace ORDER BY x.ord) AS collations,
+               (SELECT jsonb_agg(jsonb_build_array(ns.nspname, oc.opcname, nt.nspname, t.typname,
+                           oc.opcdefault, ma.amname, nf.nspname, f.opfname) ORDER BY x.ord)
+                FROM unnest(i.indclass) WITH ORDINALITY x(oid, ord)
+                JOIN pg_catalog.pg_opclass oc ON oc.oid = x.oid
+                JOIN pg_catalog.pg_namespace ns ON ns.oid = oc.opcnamespace
+                JOIN pg_catalog.pg_type t ON t.oid = oc.opcintype
+                JOIN pg_catalog.pg_namespace nt ON nt.oid = t.typnamespace
+                JOIN pg_catalog.pg_am ma ON ma.oid = oc.opcmethod
+                JOIN pg_catalog.pg_opfamily f ON f.oid = oc.opcfamily
+                JOIN pg_catalog.pg_namespace nf ON nf.oid = f.opfnamespace) AS opclasses
+        FROM pg_catalog.pg_index i JOIN pg_catalog.pg_class c ON c.oid = i.indrelid
+        JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
+        JOIN pg_catalog.pg_class ic ON ic.oid = i.indexrelid
+        JOIN pg_catalog.pg_am am ON am.oid = ic.relam
+        WHERE n.nspname = 'public' AND c.relkind = 'r' AND c.relname <> 'alembic_version'
+    """)).mappings().all()
+    actual_indexes = Counter()
+    seen_supporting = set()
+    for row in indexes:
+        owner = supporting.get(row["indexrelid"])
+        if owner is not None:
+            if owner[0] != row["indrelid"] or owner[2] != tuple(row["keys"]):
+                raise RuntimeError("Phase-0 refuses mismatched constraint supporting index")
+            label = ("constraint", owner[1])
+            seen_supporting.add(row["indexrelid"])
+        else:
+            label = ("standalone", row["index_name"])
+        actual_indexes[(row["table_name"], label, tuple(row["keys"]), row["amname"],
+                        row["indisunique"], row["indisprimary"], row["indisexclusion"],
+                        row["indimmediate"], row["indisvalid"], row["indisready"], row["indislive"],
+                        row["indnullsnotdistinct"], row["indnkeyatts"], row["indnatts"],
+                        row["expressions"], row["predicate"], tuple(row["options"]),
+                        tuple(row["collations"]), tuple(tuple(value) for value in (row["opclasses"] or [])))] += 1
+    if seen_supporting != set(supporting):
+        raise RuntimeError("Phase-0 refuses missing constraint supporting index")
+    _require_post_upgrade_records("indexes", actual_indexes, _expected_post_upgrade_indexes())
+
+
+def _require_post_upgrade_records(category, actual, expected):
+    differences = (actual - expected) + (expected - actual)
+    if differences:
+        tables = ", ".join(sorted({record[0] for record in differences}))
+        raise RuntimeError(f"Phase-0 refuses unexpected post-upgrade {category} in {tables}: record/set mismatch")
+
+
+def _expected_post_upgrade_indexes():
+    # PostgreSQL 16 defaults: varchar is binary compatible with text; enum uses anyenum.
+    # These qualified opclasses/families come from pg_opclass.dat, not the observed DB.
+    classes = {
+        "uuid": ("uuid_ops", "uuid", "uuid_ops"),
+        "varchar": ("text_ops", "text", "text_ops"),
+        "text": ("text_ops", "text", "text_ops"),
+        "date": ("date_ops", "date", "datetime_ops"),
+        "timestamptz": ("timestamptz_ops", "timestamptz", "datetime_ops"),
+        "enum": ("enum_ops", "anyenum", "enum_ops"),
+    }
+    result = Counter()
+    for table, columns in POST_UPGRADE_COLUMNS.items():
+        types = {name: POST_TYPE_FACTS[declared] for name, declared, _, _ in columns}
+        expected = [(('standalone', name), keys, False, False) for name, keys in POST_UPGRADE_INDEXES[table]]
+        expected += [(('constraint', kind), keys, True, kind == 'p')
+                     for kind, keys, _, _ in POST_UPGRADE_CONSTRAINTS[table] if kind in {'p', 'u'}]
+        for label, keys, unique, primary in expected:
+            collations, opclasses = [], []
+            for name in keys:
+                fact = types[name]
+                collations.append('.'.join(fact[6:]) if fact[6] is not None else '')
+                opc, input_type, family = classes['enum' if fact[3] == 'e' else fact[1]]
+                opclasses.append(('pg_catalog', opc, 'pg_catalog', input_type, True, 'btree', 'pg_catalog', family))
+            result[(table, label, keys, 'btree', unique, primary, False, True, True, True, True,
+                    False, len(keys), len(keys), None, None, (0,) * len(keys),
+                    tuple(collations), tuple(opclasses))] += 1
+    return result
+
+
 def _check_enum_name_collisions() -> None:
     existing = set(op.get_bind().execute(sa.text("""
         SELECT t.typname FROM pg_catalog.pg_type t
@@ -433,6 +1406,7 @@ def downgrade() -> None:
         if fresh:
             affected |= LEGACY_DIRECTORY_TABLES
         _require_empty(affected, "downgrade")
+        _validate_post_upgrade_shape()
         _downgrade_schema()
         if fresh:
             for table in (

@@ -13,6 +13,7 @@ are synthetic. No application/provider imports or subprocesses are used.
 from __future__ import annotations
 
 import importlib.util
+import json
 import os
 from pathlib import Path
 import shutil
@@ -98,24 +99,71 @@ CORE_INSERTS = {
 
 def _snapshot(connection):
     """Capture schema, enums/extensions and every synthetic row, including version."""
+    connection.exec_driver_sql("SET LOCAL search_path TO public, pg_catalog, pg_temp")
     queries = {
         "relations": """SELECT n.nspname, c.relname, c.relkind, c.relpersistence,
-            c.relrowsecurity, c.relforcerowsecurity
+            c.relrowsecurity, c.relforcerowsecurity, c.oid
             FROM pg_class c JOIN pg_namespace n ON n.oid = c.relnamespace
             WHERE n.nspname IN ('public', 'phase0_shared') ORDER BY 1, 2""",
         "columns": """SELECT n.nspname, c.relname, a.attnum, a.attname,
             format_type(a.atttypid, a.atttypmod), a.attnotnull,
-            pg_get_expr(d.adbin, d.adrelid), a.attidentity, a.attgenerated
+            pg_get_expr(d.adbin, d.adrelid), a.attidentity, a.attgenerated,
+            a.atttypid, a.atttypmod, tn.nspname, t.typname, t.typtype,
+            a.attcollation, cn.nspname, co.collname, e.extname, en.nspname
             FROM pg_attribute a JOIN pg_class c ON c.oid = a.attrelid
             JOIN pg_namespace n ON n.oid = c.relnamespace
+            JOIN pg_type t ON t.oid = a.atttypid JOIN pg_namespace tn ON tn.oid = t.typnamespace
+            LEFT JOIN pg_collation co ON co.oid = a.attcollation
+            LEFT JOIN pg_namespace cn ON cn.oid = co.collnamespace
+            LEFT JOIN pg_depend ed ON ed.classid = 'pg_type'::regclass AND ed.objid = t.oid
+              AND ed.refclassid = 'pg_extension'::regclass AND ed.deptype = 'e'
+            LEFT JOIN pg_extension e ON e.oid = ed.refobjid
+            LEFT JOIN pg_namespace en ON en.oid = e.extnamespace
             LEFT JOIN pg_attrdef d ON d.adrelid = a.attrelid AND d.adnum = a.attnum
             WHERE n.nspname IN ('public', 'phase0_shared')
               AND a.attnum > 0 AND NOT a.attisdropped ORDER BY 1, 2, 3""",
         "constraints": """SELECT n.nspname, c.relname, k.conname,
-            pg_get_constraintdef(k.oid)
+            pg_get_constraintdef(k.oid), k.oid, k.contype, k.conrelid, k.conindid,
+            k.conkey, k.confrelid, k.confkey, k.confupdtype, k.confdeltype, k.confmatchtype,
+            k.condeferrable, k.condeferred, k.convalidated, k.conislocal, k.coninhcount, k.conparentid
             FROM pg_constraint k JOIN pg_class c ON c.oid = k.conrelid
             JOIN pg_namespace n ON n.oid = c.relnamespace
             WHERE n.nspname IN ('public', 'phase0_shared') ORDER BY 1, 2, 3""",
+        "indexes": """SELECT n.nspname, c.relname, ic.relname, i.indexrelid, i.indrelid,
+            pg_get_indexdef(i.indexrelid), am.amname, i.indisunique, i.indisprimary,
+            i.indisexclusion, i.indimmediate, i.indisvalid, i.indisready, i.indislive,
+            i.indnullsnotdistinct, i.indnkeyatts, i.indnatts, i.indkey::smallint[],
+            i.indoption::smallint[], i.indclass::oid[], i.indcollation::oid[],
+            pg_get_expr(i.indexprs, i.indrelid), pg_get_expr(i.indpred, i.indrelid)
+            FROM pg_index i JOIN pg_class c ON c.oid = i.indrelid
+            JOIN pg_namespace n ON n.oid = c.relnamespace
+            JOIN pg_class ic ON ic.oid = i.indexrelid JOIN pg_am am ON am.oid = ic.relam
+            WHERE n.nspname IN ('public', 'phase0_shared') ORDER BY 1, 2, 3""",
+        "index_key_semantics": """SELECT n.nspname, c.relname, ic.relname, x.ord,
+            ns.nspname, oc.opcname, nt.nspname, t.typname, oc.opcdefault,
+            am.amname, nf.nspname, f.opfname,
+            nc.nspname, co.collname
+            FROM pg_index i JOIN pg_class c ON c.oid = i.indrelid
+            JOIN pg_namespace n ON n.oid = c.relnamespace
+            JOIN pg_class ic ON ic.oid = i.indexrelid
+            CROSS JOIN LATERAL unnest(i.indclass) WITH ORDINALITY x(oid, ord)
+            JOIN pg_opclass oc ON oc.oid = x.oid JOIN pg_namespace ns ON ns.oid = oc.opcnamespace
+            JOIN pg_type t ON t.oid = oc.opcintype JOIN pg_namespace nt ON nt.oid = t.typnamespace
+            JOIN pg_am am ON am.oid = oc.opcmethod JOIN pg_opfamily f ON f.oid = oc.opcfamily
+            JOIN pg_namespace nf ON nf.oid = f.opfnamespace
+            LEFT JOIN pg_collation co ON co.oid = i.indcollation[(x.ord - 1)::integer]
+            LEFT JOIN pg_namespace nc ON nc.oid = co.collnamespace
+            WHERE n.nspname IN ('public', 'phase0_shared') ORDER BY 1, 2, 3, 4""",
+        "column_slots": """SELECT n.nspname, c.relname, a.attnum, a.attname, a.attisdropped
+            FROM pg_attribute a JOIN pg_class c ON c.oid = a.attrelid
+            JOIN pg_namespace n ON n.oid = c.relnamespace
+            WHERE n.nspname IN ('public', 'phase0_shared') AND a.attnum > 0
+            ORDER BY 1, 2, 3""",
+        "collations": """SELECT n.nspname, c.collname, c.oid, c.collprovider,
+            c.collisdeterministic, c.collencoding, c.collcollate, c.collctype,
+            c.colliculocale, c.collversion
+            FROM pg_collation c JOIN pg_namespace n ON n.oid = c.collnamespace
+            WHERE n.nspname IN ('public', 'phase0_shared') ORDER BY 1, 2""",
         "types": """SELECT n.nspname, t.typname, t.typtype, t.oid
             FROM pg_type t JOIN pg_namespace n ON n.oid = t.typnamespace
             WHERE n.nspname IN ('public', 'phase0_shared') ORDER BY 1, 2""",
@@ -231,6 +279,177 @@ class Phase0MigrationPreservationTests(unittest.TestCase):
     def _version(self):
         with self.engine.connect() as connection:
             return list(connection.execute(sa.text("SELECT version_num FROM alembic_version")).scalars())
+
+    def _constraint_name(self, connection, table, kind, keys):
+        names = connection.execute(sa.text("""
+            SELECT k.conname FROM pg_constraint k
+            WHERE k.conrelid = to_regclass(:table) AND k.contype = :kind
+              AND ARRAY(SELECT a.attname::text FROM unnest(k.conkey) WITH ORDINALITY x(num, ord)
+                        JOIN pg_attribute a ON a.attrelid = k.conrelid AND a.attnum = x.num
+                        ORDER BY x.ord) = CAST(:keys AS text[])
+        """), {"table": "public." + table, "kind": kind, "keys": list(keys)}).scalars().all()
+        self.assertEqual(len(names), 1)
+        return connection.dialect.identifier_preparer.quote_identifier(names[0])
+
+    def _assert_shape_valid(self):
+        # Exercise the real comparator, with its original transaction/lock envelope.
+        before = self._state()
+        with self.engine.begin() as connection:
+            if not getattr(type(self), "_runtime_identity_emitted", False):
+                row = connection.execute(sa.text("""
+                    SELECT current_setting('server_version_num'), version(), e.extversion,
+                           en.nspname, tn.nspname, t.typname, d.deptype
+                    FROM pg_extension e JOIN pg_namespace en ON en.oid = e.extnamespace
+                    JOIN pg_depend d ON d.refclassid = 'pg_extension'::regclass
+                      AND d.refobjid = e.oid AND d.classid = 'pg_type'::regclass AND d.deptype = 'e'
+                    JOIN pg_type t ON t.oid = d.objid JOIN pg_namespace tn ON tn.oid = t.typnamespace
+                    WHERE e.extname = 'vector' AND t.typname = 'vector'
+                """)).one()
+                print(json.dumps({"phase0_runtime_identity": dict(zip(
+                    ("server_version_num", "version", "vector_extversion", "extension_namespace",
+                     "type_namespace", "type_name", "membership_deptype"), row))}, sort_keys=True), flush=True)
+                type(self)._runtime_identity_emitted = True
+            with Operations.context(MigrationContext.configure(connection)):
+                with self.revision._preservation_transaction():
+                    self.revision._lock_tables(self.revision._public_tables())
+                    self.revision._validate_post_upgrade_shape()
+        self.assertEqual(before, self._state())
+
+    def _assert_guard_refuses(self, category, table):
+        before = self._state()
+        ddl = []
+
+        def record(connection, cursor, statement, parameters, context, executemany):
+            if statement.lstrip().split(None, 1)[0].upper() in {"ALTER", "CREATE", "DROP", "TRUNCATE"}:
+                ddl.append(statement)
+
+        sa.event.listen(self.engine, "before_cursor_execute", record)
+        try:
+            with self.assertRaisesRegex(RuntimeError,
+                    f"^Phase-0 refuses unexpected post-upgrade {category} in {table}:"):
+                self._run("downgrade")
+        finally:
+            sa.event.remove(self.engine, "before_cursor_execute", record)
+        self.assertEqual(ddl, [], "The actual Alembic downgrade must refuse before reversal DDL")
+        self.assertEqual(before, self._state())
+        self.assertEqual(self._version(), [ROOT_REVISION])
+
+    def test_downgrade_accepts_generated_names_and_changed_physical_order(self):
+        self._run()
+        self._assert_shape_valid()
+        with self.engine.begin() as connection:
+            for table, kind, keys, new_name in (
+                ("patients", "f", ("practice_id",), "phase0_renamed_patient_fk"),
+                ("users", "u", ("email",), "phase0_renamed_email_uq"),
+            ):
+                name = self._constraint_name(connection, table, kind, keys)
+                connection.exec_driver_sql(f'ALTER TABLE public.{table} RENAME CONSTRAINT {name} TO {new_name}')
+            original = connection.exec_driver_sql("SELECT attnum FROM pg_attribute WHERE attrelid = 'public.practices'::regclass AND attname = 'abn'").scalar_one()
+            connection.exec_driver_sql("ALTER TABLE public.practices DROP COLUMN abn")
+            connection.exec_driver_sql("ALTER TABLE public.practices ADD COLUMN abn varchar(20)")
+            changed = connection.exec_driver_sql("SELECT attnum, atttypid, atttypmod, attnotnull, atthasdef FROM pg_attribute WHERE attrelid = 'public.practices'::regclass AND attname = 'abn'").one()
+            self.assertNotEqual(original, changed[0])
+            self.assertEqual(changed[1], connection.exec_driver_sql("SELECT 'pg_catalog.varchar'::regtype::oid").scalar_one())
+            self.assertEqual(tuple(changed[2:]), (24, False, False))
+            self.assertTrue(connection.exec_driver_sql(f"SELECT attisdropped FROM pg_attribute WHERE attrelid = 'public.practices'::regclass AND attnum = {original}").scalar_one())
+        self._assert_shape_valid()
+        self._run("downgrade")
+        self.assertEqual(self._version(), [])
+        self._run()
+        self._assert_shape_valid()
+        self.assertEqual(self._version(), [ROOT_REVISION])
+        self._run("downgrade")
+
+    def test_downgrade_refuses_column_set_and_record_changes(self):
+        for mutate, undo, observe, expected in (
+            ("ADD COLUMN phase0_extra text", "DROP COLUMN phase0_extra",
+             "SELECT count(*) FROM pg_attribute WHERE attrelid='public.practices'::regclass AND attname='phase0_extra' AND NOT attisdropped", 1),
+            ("ALTER COLUMN abn TYPE varchar(21)", "ALTER COLUMN abn TYPE varchar(20)",
+             "SELECT atttypmod FROM pg_attribute WHERE attrelid='public.practices'::regclass AND attname='abn'", 25),
+        ):
+            with self.subTest(mutation=mutate):
+                self._run()
+                self._assert_shape_valid()
+                with self.engine.begin() as connection:
+                    connection.exec_driver_sql("ALTER TABLE public.practices " + mutate)
+                    self.assertEqual(connection.exec_driver_sql(observe).scalar_one(), expected)
+                self._assert_guard_refuses("columns", "practices")
+                with self.engine.begin() as connection:
+                    connection.exec_driver_sql("ALTER TABLE public.practices " + undo)
+                self._assert_shape_valid()
+                self._run("downgrade")
+
+    def test_downgrade_refuses_column_collation_change(self):
+        self._run()
+        self._assert_shape_valid()
+        with self.engine.begin() as connection:
+            connection.exec_driver_sql('CREATE COLLATION public.phase0_test_collation FROM pg_catalog."C"')
+            connection.exec_driver_sql("ALTER TABLE public.practices ALTER COLUMN abn TYPE varchar(20) COLLATE public.phase0_test_collation")
+            self.assertTrue(connection.exec_driver_sql("SELECT a.attcollation <> t.typcollation FROM pg_attribute a JOIN pg_type t ON t.oid=a.atttypid WHERE a.attrelid='public.practices'::regclass AND a.attname='abn'").scalar_one())
+        self._assert_guard_refuses("columns", "practices")
+
+    def test_downgrade_refuses_fk_target_action_timing_and_validation(self):
+        for target, suffix, field, value in (
+            ("phase0_shared.practices", "", "confrelid::regclass::text", "phase0_shared.practices"),
+            ("public.practices", "ON DELETE CASCADE", "confdeltype", "c"),
+            ("public.practices", "DEFERRABLE INITIALLY DEFERRED", "condeferred", True),
+            ("public.practices", "NOT VALID", "convalidated", False),
+        ):
+            with self.subTest(target=target, suffix=suffix):
+                self._run()
+                self._assert_shape_valid()
+                with self.engine.begin() as connection:
+                    if target.startswith("phase0_shared"):
+                        connection.exec_driver_sql("CREATE SCHEMA phase0_shared")
+                        connection.exec_driver_sql("CREATE TABLE phase0_shared.practices(id uuid PRIMARY KEY)")
+                    name = self._constraint_name(connection, "appointment_types", "f", ("practice_id",))
+                    connection.exec_driver_sql(f"ALTER TABLE public.appointment_types DROP CONSTRAINT {name}")
+                    connection.exec_driver_sql(f"ALTER TABLE public.appointment_types ADD CONSTRAINT phase0_changed_fk FOREIGN KEY(practice_id) REFERENCES {target}(id) {suffix}")
+                    self.assertEqual(connection.exec_driver_sql(f"SELECT {field} FROM pg_constraint WHERE conrelid='public.appointment_types'::regclass AND conname='phase0_changed_fk'").scalar_one(), value)
+                self._assert_guard_refuses("constraints", "appointment_types")
+                with self.engine.begin() as connection:
+                    connection.exec_driver_sql("ALTER TABLE public.appointment_types DROP CONSTRAINT phase0_changed_fk")
+                    connection.exec_driver_sql("ALTER TABLE public.appointment_types ADD FOREIGN KEY(practice_id) REFERENCES public.practices(id)")
+                    if target.startswith("phase0_shared"):
+                        connection.exec_driver_sql("DROP TABLE phase0_shared.practices")
+                        connection.exec_driver_sql("DROP SCHEMA phase0_shared")
+                self._assert_shape_valid()
+                self._run("downgrade")
+
+    def test_downgrade_refuses_unique_constraint_timing_change(self):
+        self._run()
+        self._assert_shape_valid()
+        with self.engine.begin() as connection:
+            name = self._constraint_name(connection, "users", "u", ("email",))
+            connection.exec_driver_sql(f"ALTER TABLE public.users DROP CONSTRAINT {name}")
+            connection.exec_driver_sql("ALTER TABLE public.users ADD CONSTRAINT phase0_changed_uq UNIQUE(email) DEFERRABLE INITIALLY DEFERRED")
+            self.assertTrue(connection.exec_driver_sql("SELECT condeferred FROM pg_constraint WHERE conrelid='public.users'::regclass AND conname='phase0_changed_uq'").scalar_one())
+            self.assertFalse(connection.exec_driver_sql("SELECT indisunique FROM pg_index WHERE indexrelid='public.ix_users_email'::regclass").scalar_one())
+        self._assert_guard_refuses("constraints", "users")
+
+    def test_downgrade_refuses_standalone_index_set_and_order_changes(self):
+        for changed_order in (False, True):
+            with self.subTest(changed_order=changed_order):
+                self._run()
+                self._assert_shape_valid()
+                with self.engine.begin() as connection:
+                    if changed_order:
+                        connection.exec_driver_sql("DROP INDEX public.ix_schedule_overrides_practitioner_id_date")
+                        connection.exec_driver_sql("CREATE INDEX ix_schedule_overrides_practitioner_id_date ON public.schedule_overrides(date, practitioner_id)")
+                        keys = connection.exec_driver_sql("SELECT ARRAY(SELECT a.attname::text FROM unnest(i.indkey) WITH ORDINALITY x(num, ord) JOIN pg_attribute a ON a.attrelid=i.indrelid AND a.attnum=x.num ORDER BY x.ord) FROM pg_index i WHERE i.indexrelid='public.ix_schedule_overrides_practitioner_id_date'::regclass").scalar_one()
+                        self.assertEqual(keys, ["date", "practitioner_id"])
+                    else:
+                        connection.exec_driver_sql("CREATE INDEX ix_phase0_extra_practice_abn ON public.practices(abn)")
+                        self.assertFalse(connection.exec_driver_sql("SELECT EXISTS(SELECT 1 FROM pg_constraint WHERE contype IN ('p','u') AND conindid='public.ix_phase0_extra_practice_abn'::regclass)").scalar_one())
+                self._assert_guard_refuses("indexes", "schedule_overrides" if changed_order else "practices")
+                with self.engine.begin() as connection:
+                    if changed_order:
+                        connection.exec_driver_sql("DROP INDEX public.ix_schedule_overrides_practitioner_id_date")
+                        connection.exec_driver_sql("CREATE INDEX ix_schedule_overrides_practitioner_id_date ON public.schedule_overrides(practitioner_id, date)")
+                    else:
+                        connection.exec_driver_sql("DROP INDEX public.ix_phase0_extra_practice_abn")
+                self._assert_shape_valid()
+                self._run("downgrade")
 
     def test_fresh_cycle_repeats_and_preserves_unrelated_enum_and_domain(self):
         with self.engine.begin() as connection:
