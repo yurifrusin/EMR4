@@ -204,6 +204,13 @@ class AppointmentUpdate(BaseModel):
             raise ValueError("appointment_date and start_time_local must be supplied together")
         return self
 
+    @field_validator('practitioner_id', 'start_time', 'appointment_date', 'start_time_local', 'duration_minutes', mode="before")
+    @classmethod
+    def reject_explicit_null_required_fields(cls, value):
+        if value is None:
+            raise ValueError("Required appointment fields cannot be null; omit them to preserve their values")
+        return value
+
 
 class AppointmentStatusUpdate(BaseModel):
     status: AppointmentStatus
@@ -381,11 +388,19 @@ class AppointmentUpdateProposalIn(BaseModel):
     practitioner_id: Optional[uuid.UUID] = None
     appointment_type_id: Optional[uuid.UUID] = None
     location_id: Optional[uuid.UUID] = None
+    start_time: Optional[datetime] = None
     appointment_date: Optional[date] = None
     start_time_local: Optional[time] = None
     duration_minutes: Optional[int] = Field(default=None, gt=0, le=480)
     reason: Optional[str] = None
     notes: Optional[str] = None
+
+    @field_validator('practitioner_id', 'start_time', 'appointment_date', 'start_time_local', 'duration_minutes', mode="before")
+    @classmethod
+    def reject_explicit_null_required_fields(cls, value):
+        if value is None:
+            raise ValueError("Required appointment fields cannot be null; omit them to preserve their values")
+        return value
 
 
 class AppointmentUpdateCommand(BaseModel):

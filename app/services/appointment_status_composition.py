@@ -15,6 +15,12 @@ from dataclasses import dataclass
 from typing import Any, Callable, ContextManager, Mapping
 from uuid import UUID
 
+from sqlalchemy.exc import IntegrityError
+
+from app.services.appointment_conflicts import (
+    appointment_practice_transaction,
+    is_appointment_overlap_error,
+)
 from app.schemas.appointments import AppointmentConfirmStatusProposalOut
 from app.services.appointment_idempotency import hash_idempotency_key
 from app.services.appointment_status_physical import (
@@ -383,7 +389,7 @@ def compose_status_confirm(
             authenticated_session_id=server_ingress.session_id,
         )
         response_bytes: bytes | None = None
-        with transaction_factory(
+        with appointment_practice_transaction(db, server_ingress.practice_id), transaction_factory(
             db,
             practice_id=server_ingress.practice_id,
             target_appointment_id=request["target_appointment_id"],
@@ -460,6 +466,13 @@ def compose_status_confirm(
             json.loads(response_bytes),
             response_bytes,
         )
+    except IntegrityError as exc:
+        # The physical context has exited; confirm a complete rollback before
+        # interpreting the exact database constraint or returning a response.
+        db.rollback()
+        if is_appointment_overlap_error(exc):
+            return _blocked("appointment_conflict")
+        return _error(503, "status_confirm_transaction_unavailable", "The status confirmation did not commit.")
     except _LockedAdmissionStopped as exc:
         return _map_admission_stop(exc.admission)
     except StatusConfirmAuthorityRevoked:

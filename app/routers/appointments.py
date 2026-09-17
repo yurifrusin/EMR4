@@ -11,9 +11,14 @@ from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 from fastapi import APIRouter, Body, Depends, Header, HTTPException, Query, Response, status
 from fastapi.responses import JSONResponse
 from pydantic import ValidationError
-from sqlalchemy import or_
+from sqlalchemy import or_, text
+from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session, joinedload
 
+from app.services.appointment_conflicts import (
+    is_appointment_overlap_error,
+    set_appointment_practice_context,
+)
 from app.config import settings
 from app.dependencies import (
     get_command_session_factory,
@@ -160,7 +165,6 @@ _DELETE_CONFIRM_ACTION = get_diary_confirm_action(DiaryConfirmAction.delete)
 from app.services.ai.audit_store import persist_access_ai_audit_events
 from app.services.diary.temporal import (
     adjust_search_window_for_relation,
-    evaluate_raw_mutation_temporal_guard,
 )
 from app.services.appointment_idempotency import (
     AppointmentIdempotencyDecision,
@@ -553,6 +557,37 @@ def _as_practice_local(start_time: datetime, practice_tz: ZoneInfo) -> datetime:
     return start_time.astimezone(practice_tz)
 
 
+def _evaluate_raw_mutation_temporal_guard(
+    appointment_date: date_type,
+    canonical_start_time: datetime,
+    duration_minutes: int,
+    practice_tz: ZoneInfo,
+) -> Literal["ok", "past_date", "window_fully_past"]:
+    """Apply raw-mutation calendar and elapsed-time policy.
+
+    A prior clinic-local calendar date retains the established past-date
+    classification. For the clinic's current date, compare actual UTC instants
+    and add duration after conversion to UTC so a repeated-hour fold cannot
+    turn a future interval into an elapsed local wall-clock interval.
+    """
+    clinic_now = _clinic_local_now(practice_tz)
+    if appointment_date < clinic_now.date():
+        return "past_date"
+    if appointment_date == clinic_now.date():
+        start_utc = _as_practice_local(
+            canonical_start_time,
+            practice_tz,
+        ).astimezone(timezone.utc)
+        now_utc = _as_practice_local(
+            clinic_now,
+            practice_tz,
+        ).astimezone(timezone.utc)
+        window_end_utc = start_utc + timedelta(minutes=duration_minutes)
+        if window_end_utc <= now_utc:
+            return "window_fully_past"
+    return "ok"
+
+
 def _utc_from_local(
     appointment_date: date_type,
     start_time_local: time,
@@ -569,13 +604,28 @@ def _canonical_time_values(
     appointment_date: Optional[date_type] = None,
     start_time_local: Optional[time] = None,
 ) -> tuple[date_type, time, datetime]:
-    if appointment_date is not None and start_time_local is not None:
-        local_time = start_time_local.replace(tzinfo=None)
-        return appointment_date, local_time, _utc_from_local(appointment_date, local_time, practice_tz)
-
     if start_time is not None:
-        local_dt = _as_practice_local(start_time, practice_tz)
-        return local_dt.date(), local_dt.time().replace(tzinfo=None), local_dt.astimezone(timezone.utc)
+        # Resolve the instant first, including the existing naive-input mapping.
+        # Projecting back from UTC normalizes nonexistent local clock times.
+        instant = _as_practice_local(start_time, practice_tz).astimezone(timezone.utc)
+        local_dt = instant.astimezone(practice_tz)
+        local_time = local_dt.time().replace(tzinfo=None)
+        if (appointment_date is None) != (start_time_local is None):
+            raise HTTPException(status_code=422, detail="Local date and time must be supplied together with start_time")
+        if appointment_date is not None and (
+            appointment_date != local_dt.date()
+            or start_time_local.replace(tzinfo=None) != local_time
+        ):
+            raise HTTPException(status_code=422, detail="Local appointment coordinates disagree with start_time")
+        return local_dt.date(), local_time, instant
+
+    if appointment_date is not None and start_time_local is not None:
+        # Preserve the existing local-only instant mapping, then derive the
+        # coordinates actually represented by that instant before signing it.
+        # This also keeps spring-forward gap proposals round-trip consistent.
+        instant = _utc_from_local(appointment_date, start_time_local, practice_tz)
+        local_dt = instant.astimezone(practice_tz)
+        return local_dt.date(), local_dt.time().replace(tzinfo=None), instant
 
     raise HTTPException(
         status_code=status.HTTP_422_UNPROCESSABLE_CONTENT,
@@ -752,27 +802,27 @@ def _find_conflicting_appointment(
     duration_minutes: int,
     location_id: Optional[uuid.UUID] = None,
     exclude_id: Optional[uuid.UUID] = None,
+    start_time: Optional[datetime] = None,
 ) -> Optional[Appointment]:
+    # The advisory query mirrors the database interval; a location or calendar
+    # date never makes simultaneous work by the same practitioner permissible.
+    candidate_start = start_time if start_time is not None else _utc_from_local(
+        appointment_date, start_time_local, _practice_zoneinfo(db, practice_id)
+    )
+    if candidate_start.tzinfo is None:
+        candidate_start = _as_practice_local(candidate_start, _practice_zoneinfo(db, practice_id))
+    candidate_start = candidate_start.astimezone(timezone.utc)
+    candidate_end = candidate_start + timedelta(minutes=duration_minutes)
     q = db.query(Appointment).filter(
         Appointment.practice_id == practice_id,
         Appointment.practitioner_id == practitioner_id,
-        Appointment.appointment_date == appointment_date,
         Appointment.status.notin_(NON_BLOCKING_STATUSES),
+        Appointment.start_time < candidate_end,
+        Appointment.start_time + Appointment.duration_minutes * text("INTERVAL '1 minute'") > candidate_start,
     )
-    q = _filter_by_location(q, location_id, practice_id, db)
-    if exclude_id:
+    if exclude_id is not None:
         q = q.filter(Appointment.id != exclude_id)
-
-    candidate_start = _local_datetime(appointment_date, start_time_local)
-    for existing in q.all():
-        if _overlaps(
-            candidate_start,
-            duration_minutes,
-            _local_datetime(existing.appointment_date, existing.start_time_local),
-            existing.duration_minutes or 0,
-        ):
-            return existing
-    return None
+    return q.order_by(Appointment.start_time, Appointment.id).first()
 
 
 def _conflict_brief(conflict: Appointment) -> AppointmentConflictBrief:
@@ -801,6 +851,7 @@ def _raise_if_conflict(
     duration_minutes: int,
     location_id: Optional[uuid.UUID] = None,
     exclude_id: Optional[uuid.UUID] = None,
+    start_time: Optional[datetime] = None,
 ) -> None:
     conflict = _find_conflicting_appointment(
         db,
@@ -811,11 +862,13 @@ def _raise_if_conflict(
         duration_minutes,
         location_id=location_id,
         exclude_id=exclude_id,
+        start_time=start_time,
     )
     if conflict:
         raise HTTPException(
             status_code=status.HTTP_409_CONFLICT,
             detail={
+                "code": "appointment_conflict",
                 "message": "Appointment conflicts with an existing booking",
                 "conflicting_appointment_id": str(conflict.id),
                 "conflicting_start_time": conflict.start_time.isoformat(),
@@ -980,13 +1033,13 @@ def _create_appointment_from_body(
     practice_id = current_user.practice_id
     booked_by = current_user.id
     practice_tz = _practice_zoneinfo(db, practice_id)
-    values, appointment_date, start_time_local, _ = _canonical_create_values(body, practice_tz)
+    values, appointment_date, start_time_local, start_time = _canonical_create_values(body, practice_tz)
 
-    temporal_kind = evaluate_raw_mutation_temporal_guard(
+    temporal_kind = _evaluate_raw_mutation_temporal_guard(
         appointment_date,
-        start_time_local,
+        start_time,
         values["duration_minutes"],
-        _clinic_local_now(practice_tz),
+        practice_tz,
     )
     if temporal_kind == "past_date":
         raise HTTPException(
@@ -1012,6 +1065,7 @@ def _create_appointment_from_body(
         start_time_local,
         values["duration_minutes"],
         location_id=body.location_id,
+        start_time=values["start_time"],
     )
 
     appt = Appointment(
@@ -1019,30 +1073,40 @@ def _create_appointment_from_body(
         booked_by=booked_by,
         **values,
     )
-    db.add(appt)
-    db.flush()
-    appt_id = appt.id
-    _write_audit(
-        db,
-        practice_id=practice_id,
-        appointment_id=appt_id,
-        confirmed_by_user_id=current_user.id,
-        action=AppointmentAuditAction.create,
-        status_after=AppointmentStatus.Booked,
-        confirmed_warnings=confirmed_warnings,
-        audit_evidence=audit_evidence,
-        command_id=command_id,
-        bernie_session_id=bernie_session_id,
-    )
-    if commit:
-        db.commit()
-    out = AppointmentOut.model_validate(_get_appointment(appt_id, practice_id, db))
-    out.breaks_overlap = _get_break_overlaps(
-        db, practice_id, body.practitioner_id,
-        appointment_date, start_time_local, values["duration_minutes"],
-        location_id=body.location_id,
-    )
-    return out
+    try:
+        db.add(appt)
+        db.flush()
+        appt_id = appt.id
+        _write_audit(
+            db,
+            practice_id=practice_id,
+            appointment_id=appt_id,
+            confirmed_by_user_id=current_user.id,
+            action=AppointmentAuditAction.create,
+            status_after=AppointmentStatus.Booked,
+            confirmed_warnings=confirmed_warnings,
+            audit_evidence=audit_evidence,
+            command_id=command_id,
+            bernie_session_id=bernie_session_id,
+        )
+        if commit:
+            db.commit()
+            set_appointment_practice_context(db, practice_id)
+        out = AppointmentOut.model_validate(_get_appointment(appt_id, practice_id, db))
+        out.breaks_overlap = _get_break_overlaps(
+            db, practice_id, body.practitioner_id,
+            appointment_date, start_time_local, values["duration_minutes"],
+            location_id=body.location_id,
+        )
+        return out
+    except IntegrityError as exc:
+        db.rollback()
+        if not is_appointment_overlap_error(exc):
+            raise
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT,
+            detail={"code": "appointment_conflict", "message": "Appointment conflicts with an existing booking"},
+        ) from None
 
 
 # ── Appointment Types ─────────────────────────────────────────────────────────
@@ -1161,7 +1225,7 @@ def _build_create_appointment_proposal(
     current_user: Optional[User] = None,
 ) -> AppointmentCreateProposalOut:
     practice_tz = _practice_zoneinfo(db, practice_id)
-    values, appointment_date, start_time_local, _ = _canonical_create_values(body, practice_tz)
+    values, appointment_date, start_time_local, start_time = _canonical_create_values(body, practice_tz)
 
     if body.patient_id is not None:
         _ensure_patient(body.patient_id, practice_id, db)
@@ -1179,6 +1243,7 @@ def _build_create_appointment_proposal(
         start_time_local,
         values["duration_minutes"],
         location_id=body.location_id,
+        start_time=values["start_time"],
     )
     conflict_brief = _conflict_brief(conflict) if conflict else None
     if conflict:
@@ -1204,11 +1269,11 @@ def _build_create_appointment_proposal(
             message=f"This appointment overlaps {label}.",
         ))
 
-    temporal_kind = evaluate_raw_mutation_temporal_guard(
+    temporal_kind = _evaluate_raw_mutation_temporal_guard(
         appointment_date,
-        start_time_local,
+        start_time,
         values["duration_minutes"],
-        _clinic_local_now(practice_tz),
+        practice_tz,
     )
     if temporal_kind == "past_date":
         blocks.append(AppointmentProposalIssue(
@@ -1306,7 +1371,7 @@ def _block_create_confirmation(
         summary=_STAFF_CREATE_CONFIRM_ACTION.blocked_summary,
         appointment=None,
         warnings=warnings or [],
-        blocks=blocks,
+        blocks=sorted(blocks, key=lambda issue: issue.code != "appointment_conflict"),
         audit_evidence=audit_evidence or [],
     )
 
@@ -1798,15 +1863,25 @@ def confirm_create_proposal_route(
         *[issue.code for issue in revalidated.warnings],
         *body.confirmed_warnings,
     ]
-    appointment = _create_appointment_from_body(
-        create_body,
-        db,
-        current_user,
-        confirmed_warnings=confirmed_warnings,
-        audit_evidence=audit_evidence,
-        command_id=decision.record.id,
-        commit=False,
-    )
+    try:
+        appointment = _create_appointment_from_body(
+            create_body,
+            db,
+            current_user,
+            confirmed_warnings=confirmed_warnings,
+            audit_evidence=audit_evidence,
+            command_id=decision.record.id,
+            commit=False,
+        )
+    except HTTPException as exc:
+        if exc.status_code != 409 or not isinstance(exc.detail, dict) or exc.detail.get("code") != "appointment_conflict":
+            raise
+        db.rollback()
+        return _block_create_confirmation(
+            [_confirm_create_block("appointment_conflict", "This appointment overlaps an existing booking.")],
+            warnings=[*create_proposal.warnings, *revalidated.warnings],
+            audit_evidence=audit_evidence,
+        )
     audit = db.query(AppointmentAuditLog).filter(
         AppointmentAuditLog.command_id == decision.record.id,
     ).one()
@@ -1942,7 +2017,14 @@ def propose_update_appointment(
     reason = incoming.get("reason", appt.reason)
     notes = incoming.get("notes", appt.notes)
 
-    if "appointment_date" in incoming or "start_time_local" in incoming:
+    if "start_time" in incoming:
+        appointment_date, start_time_local, start_time = _canonical_time_values(
+            practice_tz,
+            start_time=incoming["start_time"],
+            appointment_date=incoming.get("appointment_date"),
+            start_time_local=incoming.get("start_time_local"),
+        )
+    elif "appointment_date" in incoming or "start_time_local" in incoming:
         new_date = incoming.get("appointment_date", appt.appointment_date)
         new_time_local = incoming.get("start_time_local", appt.start_time_local)
         appointment_date, start_time_local, start_time = _canonical_time_values(
@@ -1951,9 +2033,12 @@ def propose_update_appointment(
             start_time_local=new_time_local,
         )
     else:
-        appointment_date = appt.appointment_date
-        start_time_local = appt.start_time_local
-        start_time = appt.start_time
+        # Preserve the stored instant while deriving canonical proposal coordinates.
+        # Older rows may retain local clock values from a spring-forward gap.
+        appointment_date, start_time_local, start_time = _canonical_time_values(
+            practice_tz,
+            start_time=appt.start_time,
+        )
 
     warnings: list[AppointmentProposalIssue] = []
     blocks: list[AppointmentProposalIssue] = []
@@ -2004,6 +2089,7 @@ def propose_update_appointment(
         appointment_date, start_time_local, duration_minutes,
         location_id=location_id,
         exclude_id=appointment_id,
+        start_time=start_time,
     )
     conflict_brief = _conflict_brief(conflict) if conflict else None
     if conflict:
@@ -2025,12 +2111,12 @@ def propose_update_appointment(
             message=f"This appointment overlaps {label}.",
         ))
 
-    if "appointment_date" in incoming or "start_time_local" in incoming or "duration_minutes" in incoming:
-        temporal_kind = evaluate_raw_mutation_temporal_guard(
+    if {"start_time", "appointment_date", "start_time_local", "duration_minutes"} & incoming.keys():
+        temporal_kind = _evaluate_raw_mutation_temporal_guard(
             appointment_date,
-            start_time_local,
+            start_time,
             duration_minutes,
-            _clinic_local_now(practice_tz),
+            practice_tz,
         )
         if temporal_kind == "past_date":
             blocks.append(AppointmentProposalIssue(
@@ -2410,7 +2496,7 @@ def _block_bernie_update_confirmation(
         summary=_UPDATE_CONFIRM_ACTION.blocked_summary,
         appointment=None,
         warnings=warnings or [],
-        blocks=blocks,
+        blocks=sorted(blocks, key=lambda issue: issue.code != "appointment_conflict"),
         audit_evidence=audit_evidence or [],
     )
 
@@ -2516,6 +2602,7 @@ def confirm_update_proposal(
             practitioner_id=command.practitioner_id,
             appointment_type_id=command.appointment_type_id,
             location_id=command.location_id,
+            start_time=command.start_time,
             appointment_date=command.appointment_date,
             start_time_local=command.start_time_local,
             duration_minutes=command.duration_minutes,
@@ -2559,15 +2646,25 @@ def confirm_update_proposal(
     ]
     update_body = _update_body_from_command(command)
     update_body.confirmed_warnings = confirmed_warnings
-    appointment = _apply_appointment_update(
-        command.appointment_id,
-        update_body,
-        db,
-        current_user,
-        audit_evidence=audit_evidence,
-        command_id=command_id,
-        commit=commit,
-    )
+    try:
+        appointment = _apply_appointment_update(
+            command.appointment_id,
+            update_body,
+            db,
+            current_user,
+            audit_evidence=audit_evidence,
+            command_id=command_id,
+            commit=commit,
+        )
+    except HTTPException as exc:
+        if exc.status_code != 409 or not isinstance(exc.detail, dict) or exc.detail.get("code") != "appointment_conflict":
+            raise
+        db.rollback()
+        return _block_bernie_update_confirmation(
+            [_confirm_create_block("appointment_conflict", "This appointment overlaps an existing booking.")],
+            warnings=[*proposal.warnings, *revalidated.warnings],
+            audit_evidence=audit_evidence,
+        )
     return AppointmentConfirmUpdateProposalOut(
         safe=True,
         requires_confirmation=False,
@@ -2967,32 +3064,42 @@ def _apply_appointment_status_update(
     practice_id = current_user.practice_id
     appt = _get_appointment(appointment_id, practice_id, db)
     status_before_patch = appt.status
-    appt.status = body.status
-    if "status_reason_code" in body.model_fields_set:
-        appt.status_reason_code = body.status_reason_code
-    if "waiting_area_id" in body.model_fields_set:
-        if body.waiting_area_id is not None:
-            _ensure_waiting_area(body.waiting_area_id, practice_id, db)
-        appt.waiting_area_id = body.waiting_area_id
-    elif body.status in TERMINAL_STATUSES:
-        appt.waiting_area_id = None
-    _write_audit(
-        db,
-        practice_id=practice_id,
-        appointment_id=appointment_id,
-        confirmed_by_user_id=current_user.id,
-        action=AppointmentAuditAction.status_change,
-        status_before=status_before_patch,
-        status_after=body.status,
-        status_reason_code=body.status_reason_code,
-        confirmed_warnings=body.confirmed_warnings,
-        audit_evidence=audit_evidence,
-    )
-    if commit:
-        db.commit()
-    else:
-        db.flush()
-    return _get_appointment(appointment_id, practice_id, db)
+    try:
+        appt.status = body.status
+        if "status_reason_code" in body.model_fields_set:
+            appt.status_reason_code = body.status_reason_code
+        if "waiting_area_id" in body.model_fields_set:
+            if body.waiting_area_id is not None:
+                _ensure_waiting_area(body.waiting_area_id, practice_id, db)
+            appt.waiting_area_id = body.waiting_area_id
+        elif body.status in TERMINAL_STATUSES:
+            appt.waiting_area_id = None
+        _write_audit(
+            db,
+            practice_id=practice_id,
+            appointment_id=appointment_id,
+            confirmed_by_user_id=current_user.id,
+            action=AppointmentAuditAction.status_change,
+            status_before=status_before_patch,
+            status_after=body.status,
+            status_reason_code=body.status_reason_code,
+            confirmed_warnings=body.confirmed_warnings,
+            audit_evidence=audit_evidence,
+        )
+        if commit:
+            db.commit()
+            set_appointment_practice_context(db, practice_id)
+        else:
+            db.flush()
+        return _get_appointment(appointment_id, practice_id, db)
+    except IntegrityError as exc:
+        db.rollback()
+        if not is_appointment_overlap_error(exc):
+            raise
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT,
+            detail={"code": "appointment_conflict", "message": "Appointment conflicts with an existing booking"},
+        ) from None
 
 
 @router.post(
@@ -5252,13 +5359,16 @@ def _apply_appointment_update(
     location_id = values.get("location_id", appt.location_id)
     appointment_date = values.get("appointment_date", appt.appointment_date)
     start_time_local = values.get("start_time_local", appt.start_time_local)
+    start_time = appt.start_time
     duration_minutes = values.get("duration_minutes", appt.duration_minutes)
 
     if {"start_time", "appointment_date", "start_time_local"} & values.keys():
-        if "start_time" in values and not ({"appointment_date", "start_time_local"} & values.keys()):
+        if "start_time" in values:
             appointment_date, start_time_local, start_time = _canonical_time_values(
                 practice_tz,
                 start_time=values["start_time"],
+                appointment_date=values.get("appointment_date"),
+                start_time_local=values.get("start_time_local"),
             )
         else:
             appointment_date, start_time_local, start_time = _canonical_time_values(
@@ -5271,11 +5381,11 @@ def _apply_appointment_update(
         values["start_time"] = start_time
 
     if {"start_time", "appointment_date", "start_time_local", "duration_minutes"} & values.keys():
-        temporal_kind = evaluate_raw_mutation_temporal_guard(
+        temporal_kind = _evaluate_raw_mutation_temporal_guard(
             appointment_date,
-            start_time_local,
+            start_time,
             duration_minutes,
-            _clinic_local_now(practice_tz),
+            practice_tz,
         )
         if temporal_kind == "past_date":
             raise HTTPException(
@@ -5304,7 +5414,7 @@ def _apply_appointment_update(
     _ensure_appointment_type(appointment_type_id, practice_id, db)
     _ensure_location(location_id, practice_id, db)
     _ensure_waiting_area(values.get("waiting_area_id"), practice_id, db)
-    if {"practitioner_id", "start_time", "appointment_date", "start_time_local", "duration_minutes"} & values.keys():
+    if appt.status not in NON_BLOCKING_STATUSES and {"practitioner_id", "start_time", "appointment_date", "start_time_local", "duration_minutes"} & values.keys():
         _raise_if_conflict(
             db,
             practice_id,
@@ -5314,48 +5424,59 @@ def _apply_appointment_update(
             duration_minutes,
             location_id=location_id,
             exclude_id=appointment_id,
+            start_time=values.get("start_time", appt.start_time),
         )
 
-    for field, value in values.items():
-        setattr(appt, field, value)
-    audit = _write_audit(
-        db,
-        practice_id=practice_id,
-        appointment_id=appointment_id,
-        confirmed_by_user_id=current_user.id,
-        action=AppointmentAuditAction.update,
-        status_before=status_before_update,
-        confirmed_warnings=body.confirmed_warnings,
-        audit_evidence=audit_evidence,
-        command_id=command_id,
-    )
-    temporal_change = (
-        appt.start_time != start_before_update
-        or appt.duration_minutes != duration_before_update
-    )
-    if (
-        settings.reception_one_committed_event_runtime_enabled
-        and command_id is not None
-        and temporal_change
-    ):
-        record_appointment_rescheduled_event(
+    try:
+        for field, value in values.items():
+            setattr(appt, field, value)
+        audit = _write_audit(
             db,
-            appointment=appt,
-            audit=audit,
-            actor=current_user,
+            practice_id=practice_id,
+            appointment_id=appointment_id,
+            confirmed_by_user_id=current_user.id,
+            action=AppointmentAuditAction.update,
+            status_before=status_before_update,
+            confirmed_warnings=body.confirmed_warnings,
+            audit_evidence=audit_evidence,
             command_id=command_id,
         )
-    if commit:
-        db.commit()
-    else:
-        db.flush()
-    out = AppointmentOut.model_validate(_get_appointment(appointment_id, practice_id, db))
-    out.breaks_overlap = _get_break_overlaps(
-        db, practice_id, practitioner_id,
-        appointment_date, start_time_local, duration_minutes,
-        location_id=location_id,
-    )
-    return out
+        temporal_change = (
+            appt.start_time != start_before_update
+            or appt.duration_minutes != duration_before_update
+        )
+        if (
+            settings.reception_one_committed_event_runtime_enabled
+            and command_id is not None
+            and temporal_change
+        ):
+            record_appointment_rescheduled_event(
+                db,
+                appointment=appt,
+                audit=audit,
+                actor=current_user,
+                command_id=command_id,
+            )
+        if commit:
+            db.commit()
+            set_appointment_practice_context(db, practice_id)
+        else:
+            db.flush()
+        out = AppointmentOut.model_validate(_get_appointment(appointment_id, practice_id, db))
+        out.breaks_overlap = _get_break_overlaps(
+            db, practice_id, practitioner_id,
+            appointment_date, start_time_local, duration_minutes,
+            location_id=location_id,
+        )
+        return out
+    except IntegrityError as exc:
+        db.rollback()
+        if not is_appointment_overlap_error(exc):
+            raise
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT,
+            detail={"code": "appointment_conflict", "message": "Appointment conflicts with an existing booking"},
+        ) from None
 
 
 @router.put("/{appointment_id}", response_model=AppointmentOut)
@@ -7747,7 +7868,7 @@ def _block_bernie_create_confirmation(
         summary=_BERNIE_CREATE_CONFIRM_ACTION.blocked_summary,
         appointment=None,
         warnings=warnings or [],
-        blocks=blocks,
+        blocks=sorted(blocks, key=lambda issue: issue.code != "appointment_conflict"),
         audit_evidence=audit_evidence or [],
     )
 
@@ -7772,11 +7893,14 @@ def _append_unique_issue(
         issues.append(issue)
 
 
-def _same_create_command(
-    left: AppointmentCreateCommand,
-    right: AppointmentCreateCommand,
-) -> bool:
-    return left.model_dump() == right.model_dump()
+def _same_create_command(left: AppointmentCreateCommand, right: AppointmentCreateCommand) -> bool:
+    if left.start_time.utcoffset() is None or right.start_time.utcoffset() is None:
+        return False
+    left_payload = left.model_dump()
+    right_payload = right.model_dump()
+    left_payload["start_time"] = left.start_time.astimezone(timezone.utc)
+    right_payload["start_time"] = right.start_time.astimezone(timezone.utc)
+    return left_payload == right_payload
 
 
 def _create_body_from_command(command: AppointmentCreateCommand) -> AppointmentCreate:
@@ -7786,6 +7910,7 @@ def _create_body_from_command(command: AppointmentCreateCommand) -> AppointmentC
         practitioner_id=command.practitioner_id,
         appointment_type_id=command.appointment_type_id,
         location_id=command.location_id,
+        start_time=command.start_time,
         appointment_date=command.appointment_date,
         start_time_local=command.start_time_local,
         duration_minutes=command.duration_minutes,
@@ -8002,13 +8127,12 @@ def _bernie_update_signed_confirmation_payload(
 
 
 def _same_update_command(left: AppointmentUpdateCommand, right: AppointmentUpdateCommand) -> bool:
+    if left.start_time.utcoffset() is None or right.start_time.utcoffset() is None:
+        return False
     left_payload = _appointment_update_command_payload(left)
     right_payload = _appointment_update_command_payload(right)
-    # start_time is derived from appointment_date/start_time_local and can
-    # round-trip with equivalent timezone text differences. The editable local
-    # coordinates remain the revalidation authority.
-    left_payload.pop("start_time", None)
-    right_payload.pop("start_time", None)
+    left_payload["start_time"] = left.start_time.astimezone(timezone.utc).isoformat()
+    right_payload["start_time"] = right.start_time.astimezone(timezone.utc).isoformat()
     return left_payload == right_payload
 
 
@@ -8019,6 +8143,7 @@ def _update_body_from_command(command: AppointmentUpdateCommand) -> AppointmentU
         practitioner_id=command.practitioner_id,
         appointment_type_id=command.appointment_type_id,
         location_id=command.location_id,
+        start_time=command.start_time,
         appointment_date=command.appointment_date,
         start_time_local=command.start_time_local,
         duration_minutes=command.duration_minutes,
@@ -8516,16 +8641,26 @@ def confirm_bernie_create_proposal(
         *[issue.code for issue in revalidated.warnings],
         *body.confirmed_warnings,
     ]
-    appointment = _create_appointment_from_body(
-        create_body,
-        db,
-        current_user,
-        confirmed_warnings=confirmed_warnings,
-        audit_evidence=audit_evidence,
-        command_id=decision.record.id,
-        bernie_session_id=confirmation_session_id,
-        commit=False,
-    )
+    try:
+        appointment = _create_appointment_from_body(
+            create_body,
+            db,
+            current_user,
+            confirmed_warnings=confirmed_warnings,
+            audit_evidence=audit_evidence,
+            command_id=decision.record.id,
+            bernie_session_id=confirmation_session_id,
+            commit=False,
+        )
+    except HTTPException as exc:
+        if exc.status_code != 409 or not isinstance(exc.detail, dict) or exc.detail.get("code") != "appointment_conflict":
+            raise
+        db.rollback()
+        return _block_bernie_create_confirmation(
+            [_confirm_create_block("appointment_conflict", "This appointment overlaps an existing booking.")],
+            warnings=[*selection.warnings, *revalidated.warnings],
+            audit_evidence=audit_evidence,
+        )
     audit = db.query(AppointmentAuditLog).filter(
         AppointmentAuditLog.command_id == decision.record.id,
     ).one()

@@ -1,12 +1,12 @@
 import uuid
 import enum
-from datetime import timedelta
+from datetime import timedelta, timezone
 from sqlalchemy import (
     Column, String, Boolean, DateTime, Integer, BigInteger, SmallInteger,
     LargeBinary, Enum, ForeignKey, Date, Time, Index, CheckConstraint, UniqueConstraint,
-    ForeignKeyConstraint,
+    ForeignKeyConstraint, literal_column, text,
 )
-from sqlalchemy.dialects.postgresql import UUID, JSONB
+from sqlalchemy.dialects.postgresql import UUID, JSONB, ExcludeConstraint
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 from app.models.base import Base
@@ -58,8 +58,12 @@ class Appointment(Base):
     start_time = Column(DateTime(timezone=True), nullable=False)
     appointment_date = Column(Date, nullable=False)
     start_time_local = Column(Time, nullable=False)
-    duration_minutes = Column(Integer, default=15)
-    status = Column(Enum(AppointmentStatus), default=AppointmentStatus.Booked)
+    duration_minutes = Column(Integer, default=15, nullable=False)
+    status = Column(
+        Enum(AppointmentStatus),
+        default=AppointmentStatus.Booked,
+        nullable=False,
+    )
     reason = Column(String(500))
     notes = Column(String(1000))
     cancellation_reason = Column(String(500), nullable=True)
@@ -77,7 +81,12 @@ class Appointment(Base):
 
     @property
     def end_time(self):
-        return self.start_time + timedelta(minutes=self.duration_minutes or 0)
+        if self.start_time.utcoffset() is None:
+            return self.start_time + timedelta(minutes=self.duration_minutes)
+        return (
+            self.start_time.astimezone(timezone.utc)
+            + timedelta(minutes=self.duration_minutes)
+        ).astimezone(self.start_time.tzinfo)
 
     __table_args__ = (
         UniqueConstraint(
@@ -88,6 +97,42 @@ class Appointment(Base):
         CheckConstraint(
             "appointment_state_version >= 1",
             name="ck_appointments_state_version_positive",
+        ),
+        CheckConstraint(
+            "duration_minutes BETWEEN 1 AND 480",
+            name="ck_appointments_duration_minutes_1_480",
+        ),
+        CheckConstraint(
+            "pg_catalog.isfinite(start_time)",
+            name="ck_appointments_start_time_finite",
+        ),
+        CheckConstraint(
+            "pg_catalog.isfinite("
+            "(((start_time AT TIME ZONE 'UTC') + "
+            "duration_minutes * INTERVAL '1 minute') AT TIME ZONE 'UTC'))",
+            name="ck_appointments_end_time_finite",
+        ),
+        ExcludeConstraint(
+            ("practice_id", "="),
+            ("practitioner_id", "="),
+            (
+                literal_column(
+                    "pg_catalog.tstzrange("
+                    "start_time, "
+                    "(((start_time AT TIME ZONE 'UTC') + "
+                    "duration_minutes * INTERVAL '1 minute') "
+                    "AT TIME ZONE 'UTC'), "
+                    "'[)')"
+                ),
+                "&&",
+            ),
+            where=text(
+                "status IN ('Booked', 'Confirmed', 'Arrived', "
+                "'InConsult', 'Completed')"
+            ),
+            using="gist",
+            name="ex_appointments_practice_practitioner_no_overlap",
+            deferrable=False,
         ),
         Index("ix_appointments_practice_id", "practice_id"),
         Index("ix_appointments_patient_id", "patient_id"),
