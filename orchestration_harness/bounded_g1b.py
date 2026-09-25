@@ -792,16 +792,84 @@ OPERATION_PATHS.update(enable_g2_appointment_concurrency=G2_APPOINTMENT_MAINTENA
                        repair_g2_appointment_concurrency=G2_APPOINTMENT_PATHS)
 
 
+G2_PRODUCTION_PROFILE_BINDING_VERSION = "ariadne.bounded_g2_batch_binding.v11"
+G2_PRODUCTION_PROFILE_SCOPE_VERSION = "ariadne.g2_reviewed_batch_scope.v11"
+G2_PRODUCTION_PROFILE_CODE_PATHS = frozenset({
+    "orchestration_harness/bounded_g1b.py",
+    "orchestration_harness/raisa_policy.py",
+    "tests/test_bounded_g1b.py",
+})
+G2_PRODUCTION_PROFILE_PATHS = frozenset(raisa_policy.G2_PRODUCTION_PROFILE_PATHS)
+G2_PRODUCTION_PROFILE_ADDITIONS = frozenset({"tests/test_production_profile.py"})
+G2_PRODUCTION_PROFILE_MAINTENANCE_PATHS = G2_BATCH_CONTROL_PATHS | G2_PRODUCTION_PROFILE_CODE_PATHS
+G2_PRODUCTION_PROFILE_INSTRUCTIONS_SHA256 = "97d6ea223508d53ee704a0cc3ceec383e2eea9f3db764376b538e8341bee886e"
+G2_PRODUCTION_PROFILE_PREDECESSOR = {
+    "commit": "777e0170779e717123856b119ddb747db89e6aba",
+    "parent": "849e03a98d87cbded4ac8c67856b68ecc0f93f90",
+    "tree": "1c52c53b2baf83e80c7e3b11c958de8464053371",
+    "source_sha256": {
+        "orchestration_harness/bounded_g1b.py": "740c55df5e4baea0a793a193b2fd111b76196977458a53290998758af6547273",
+        "orchestration_harness/configuration_core.py": "f7ba7a80eb0a590f9fb71b864e6c1f9f43241d9f7d70a38da67a9243fea208e5",
+        "orchestration_harness/programme_admission.py": "ac816a8a79b2d8222fa357777c075950927e86cf30c8a5b25ffd08a474052181",
+        "orchestration_harness/raisa_policy.py": "8549950809fbf44e0af510f49140a741f9a9a7eef93e04e6cf4a57fd0bc36c23",
+        "tests/test_bounded_g1b.py": "5ec0cfa754631e9aa211452e00e3499a550edecf0a6c57f6a6cb319b5c656dce",
+    },
+}
+G2_PRODUCTION_PROFILE_PREDECESSOR_POLICY = {
+    AGENTS: G2_PRODUCTION_PROFILE_INSTRUCTIONS_SHA256,
+    STATE: "8543d8ba1f37f3b1686b4167cf03870e4651d2da122429f4de4591977e45b76d",
+    OVERLAY: "a40c5bc99a6ece93e008010ca578d867218677abaa6d6ff969b7df8a421bda57",
+    G2_SCOPE: "f83ec94b4fa641a3ce95a0212f45b009e4327f8d98c015358e86a69058e7160e",
+    GATES: "115a651a0b13156a591045638d1833a9a71347e7b1f7e694767eac49d2abc341",
+}
+G2_PRODUCTION_PROFILE_REPAIR_PINS = {
+    "app/config.py": "f0cafc21a88babd0d60d6ce30067a30d23b4030ad5dd4d26bb841096c62c1f2e",
+    "app/main.py": "43047906b436a3d6f2bc0dda32a1625977cd583f99c072b34f99c0039affd7bc",
+    "tests/test_consultation_audio_privacy.py": "71a6e2b9beaa7578a0c4dbbaa5a5c62d32d2645d3dcc659fbd0454c108a7a246",
+    "tests/test_production_profile.py": None,
+}
+G2_PRODUCTION_PROFILE_PUBLICATION_ACCEPTANCE = {
+    "path": "C:/Users/there/.codex/visualizations/2026/09/15/01a0a72f-a9bd-72f3-b259-0de184339a44/appointment-product-publication-effect-acceptance-v1.json",
+    "sha256": "5bb1069c8cd53e2cb4a13474f08ae04374150b124033557ea77398903c2d16f1",
+    "role": "opaque_historical_appointment_publication_acceptance_not_operation_authority",
+}
+G2_PRODUCTION_PROFILE_INVARIANT = {
+    "canonical_profiles": ["dev", "staging", "production"],
+    "non_development_cors_origins": [],
+    "non_development_interactive_docs_served": False,
+    "non_development_taskpane_served": False,
+    "non_development_bernie_fixture_router_included": False,
+    "machine_openapi_and_backend_api_retained": True,
+    "development_surfaces_preserved": True,
+    "browser_session_integration_claimed": False,
+}
+G2_PRODUCTION_PROFILE_LIMITS = (
+    "only the exact four production-profile product and test paths in this binding are eligible",
+    "the fixed test addition must be absent and the three existing paths must match their exact accepted preimages",
+    "staging and production retain the backend API and machine OpenAPI while excluding legacy taskpane, interactive docs, development fixtures and all cross-origin browser origins",
+    "the accepted appointment publication and every earlier latch remain historical and are never replayed or rewritten",
+    "one reviewed batch is eligible; operational multi-task acceptance remains false",
+    "admission grants no runtime, G2 completion, browser session integration, provider, real-data, protected-evidence or deployment acceptance",
+)
+G2_BATCH_KINDS = G2_BATCH_KINDS | {"enable_g2_production_profile", "repair_g2_production_profile"}
+G2_MAINTENANCE_KINDS = G2_MAINTENANCE_KINDS | {"enable_g2_production_profile"}
+OPERATION_PATHS.update(enable_g2_production_profile=G2_PRODUCTION_PROFILE_MAINTENANCE_PATHS,
+                       repair_g2_production_profile=G2_PRODUCTION_PROFILE_PATHS)
+
+
 def _batch_changes(binding: dict) -> dict:
     kind = binding.get("operation_kind")
     rows = binding.get("repair_sha256")
     appointment = binding.get("schema_version") == G2_APPOINTMENT_BINDING_VERSION
-    appointment_count = 7
+    production = binding.get("schema_version") == G2_PRODUCTION_PROFILE_BINDING_VERSION
+    maintenance = kind in G2_MAINTENANCE_KINDS
+    exact_count = (7 if appointment else
+                   6 if production and maintenance else
+                   4 if production else None)
     size_valid = (type(rows) is dict and
-                  (len(rows) == appointment_count if appointment else 1 <= len(rows) <= 6))
+                  (len(rows) == exact_count if exact_count is not None else 1 <= len(rows) <= 6))
     _need(kind in G2_BATCH_KINDS and size_valid,
           "bounded_g2_batch_changes_invalid")
-    maintenance = kind in G2_MAINTENANCE_KINDS
     catalogue = binding.get("schema_version") == G2_CATALOGUE_BINDING_VERSION
     instructions = binding.get("schema_version") == G2_INSTRUCTIONS_BINDING_VERSION
     migration = instructions or binding.get("schema_version") == G2_MIGRATION_BINDING_VERSION
@@ -818,9 +886,12 @@ def _batch_changes(binding: dict) -> dict:
           and (kind in {"enable_g2_consultation_atomicity", "repair_g2_consultation_atomicity"}) == atomicity
           and (kind in {"enable_g2_clinical_authority", "repair_g2_clinical_authority"}) == clinical
           and (kind in {"enable_g2_migration_downgrade_guard", "repair_g2_migration_downgrade_guard"}) == guard
-          and (kind in {"enable_g2_appointment_concurrency", "repair_g2_appointment_concurrency"}) == appointment,
+          and (kind in {"enable_g2_appointment_concurrency", "repair_g2_appointment_concurrency"}) == appointment
+          and (kind in {"enable_g2_production_profile", "repair_g2_production_profile"}) == production,
           "bounded_g2_batch_binding_version")
-    allowed = (G2_APPOINTMENT_MAINTENANCE_PATHS if maintenance and appointment
+    allowed = (G2_PRODUCTION_PROFILE_MAINTENANCE_PATHS if maintenance and production
+               else G2_PRODUCTION_PROFILE_PATHS if production
+               else G2_APPOINTMENT_MAINTENANCE_PATHS if maintenance and appointment
                else G2_APPOINTMENT_PATHS if appointment
                else G2_MIGRATION_GUARD_MAINTENANCE_PATHS if maintenance and guard
                else G2_MIGRATION_PATHS if guard
@@ -834,15 +905,20 @@ def _batch_changes(binding: dict) -> dict:
                else G2_PATIENT_PATHS if patient
                else G2_AUDIO_PATHS if audio else G2_MIGRATION_PATHS if migration
                else G2_CATALOGUE_PATHS if catalogue else G2_BATCH_PATHS)
-    _need(set(rows) <= allowed and (not (maintenance or guard or appointment) or set(rows) == allowed),
+    _need(set(rows) <= allowed and (not (maintenance or guard or appointment or production)
+                                    or set(rows) == allowed),
           "bounded_g2_batch_path_not_allowed")
     for path, row in rows.items():
         _keys(row, {"before_sha256", "after_sha256"}, "bounded_g2_batch_change_schema")
         if appointment and not maintenance:
             _need(row["before_sha256"] == G2_APPOINTMENT_REPAIR_PINS[path],
                   "bounded_g2_appointment_repair_preimage")
+        if production and not maintenance:
+            _need(row["before_sha256"] == G2_PRODUCTION_PROFILE_REPAIR_PINS[path],
+                  "bounded_g2_production_profile_repair_preimage")
         addition = (not maintenance and row["before_sha256"] is None
-                    and ((appointment and path in G2_APPOINTMENT_ADDITIONS)
+                    and ((production and path in G2_PRODUCTION_PROFILE_ADDITIONS)
+                         or (appointment and path in G2_APPOINTMENT_ADDITIONS)
                          or (migration and path == G2_MIGRATION_ADDITION)
                          or (audio and path == G2_AUDIO_ADDITION)
                          or (patient and path == G2_PATIENT_ADDITION)
@@ -863,7 +939,8 @@ def batch_input_paths(binding: dict) -> frozenset[str]:
                                          G2_INSTRUCTIONS_BINDING_VERSION, G2_AUDIO_BINDING_VERSION,
                                          G2_PATIENT_BINDING_VERSION, G2_ATOMICITY_BINDING_VERSION,
                                          G2_CLINICAL_BINDING_VERSION, G2_MIGRATION_GUARD_BINDING_VERSION,
-                                         G2_APPOINTMENT_BINDING_VERSION}:
+                                         G2_APPOINTMENT_BINDING_VERSION,
+                                         G2_PRODUCTION_PROFILE_BINDING_VERSION}:
         return G2_CATALOGUE_POLICY_PATHS | frozenset(changes)
     return G2_BATCH_INPUT_PATHS
 
@@ -875,6 +952,8 @@ def operation_effects(kind: str) -> frozenset[str]:
     if kind in {"repair_g2_batch", "repair_g2_audio_privacy", "repair_g2_patient_binding",
                 "repair_g2_consultation_atomicity", "repair_g2_clinical_authority"}:
         return G2_BATCH_EFFECTS
+    if kind == "repair_g2_production_profile":
+        return G2_BATCH_EFFECTS
     return frozenset({"repository_read"}) if kind == "assess_g1e" else EFFECTS
 
 
@@ -882,7 +961,8 @@ def operation_paths(kind: str, binding: dict | None = None) -> frozenset[str]:
     _need(type(kind) is str and kind in OPERATION_PATHS, "bounded_g1b_operation_kind")
     if kind in {"repair_g2_batch", "repair_g2_migration", "repair_g2_audio_privacy",
                 "repair_g2_patient_binding", "repair_g2_consultation_atomicity", "repair_g2_clinical_authority",
-                "repair_g2_migration_downgrade_guard", "repair_g2_appointment_concurrency"}:
+                "repair_g2_migration_downgrade_guard", "repair_g2_appointment_concurrency",
+                "repair_g2_production_profile"}:
         _need(type(binding) is dict and binding.get("operation_kind") == kind,
               "bounded_g2_batch_binding_required")
         return frozenset(_batch_changes(binding))
@@ -896,7 +976,8 @@ def _operation(kind: str, binding: dict | None = None) -> dict:
                 "transition_paths": G2_TRANSITION_PATHS, "scope_path": G2_SCOPE,
                 "transition": kind in G2_MAINTENANCE_KINDS, "batch": True,
                 "profile": G2_PROFILE, "gate": "G2",
-                "limits": G2_APPOINTMENT_LIMITS if binding.get("schema_version") == G2_APPOINTMENT_BINDING_VERSION
+                "limits": G2_PRODUCTION_PROFILE_LIMITS if binding.get("schema_version") == G2_PRODUCTION_PROFILE_BINDING_VERSION
+                else G2_APPOINTMENT_LIMITS if binding.get("schema_version") == G2_APPOINTMENT_BINDING_VERSION
                 else G2_MIGRATION_GUARD_LIMITS if binding.get("schema_version") == G2_MIGRATION_GUARD_BINDING_VERSION
                 else G2_CLINICAL_LIMITS if binding.get("schema_version") == G2_CLINICAL_BINDING_VERSION
                 else G2_ATOMICITY_LIMITS if binding.get("schema_version") == G2_ATOMICITY_BINDING_VERSION
@@ -2136,8 +2217,59 @@ def build_g2_appointment_scope(recorded_at: str, transition_base: str, controlle
     return scope
 
 
+def _g2_production_profile() -> dict:
+    """Return the exact V11 controller profile recognized by the real validator."""
+    return raisa_policy.g2_production_profile()
+
+
+def build_g2_production_profile_scope(recorded_at: str, transition_base: str,
+                                      controller_sources: dict) -> dict:
+    """Select the exact four-file serving-containment successor."""
+    _need(transition_base == G2_PRODUCTION_PROFILE_PREDECESSOR["commit"],
+          "bounded_g2_production_profile_transition_base")
+    sources = _digest_map(controller_sources, CONTROLLER_PATHS,
+                          "bounded_g2_production_profile_controller_paths")
+    historical_sources = copy.deepcopy(sources)
+    for path in G2_PRODUCTION_PROFILE_CODE_PATHS:
+        historical_sources[path] = G2_PRODUCTION_PROFILE_PREDECESSOR["source_sha256"][path]
+    scope = build_g2_appointment_scope(
+        recorded_at, G2_APPOINTMENT_PREDECESSOR["commit"], historical_sources)
+    _need(all(sources[path] == G2_PRODUCTION_PROFILE_PREDECESSOR["source_sha256"][path]
+              for path in CONTROLLER_PATHS - G2_PRODUCTION_PROFILE_CODE_PATHS),
+          "bounded_g2_production_profile_unchanged_controller_component")
+    scope["controller_source_sha256"] = copy.deepcopy(sources)
+    scope["transition_base_commit"] = transition_base
+    scope.update(
+        schema_version=G2_PRODUCTION_PROFILE_SCOPE_VERSION,
+        enable_operation="enable_g2_production_profile",
+        repair_operation="repair_g2_production_profile",
+        allowed_paths=sorted(G2_PRODUCTION_PROFILE_PATHS), maximum_changed_files=4,
+        allowed_additions=sorted(G2_PRODUCTION_PROFILE_ADDITIONS),
+        allowed_effects=sorted(G2_BATCH_EFFECTS),
+        forbidden_effects=_g2_production_profile()["forbidden_effects"],
+        production_profile_invariant=copy.deepcopy(G2_PRODUCTION_PROFILE_INVARIANT),
+        repair_preimage_sha256=copy.deepcopy(G2_PRODUCTION_PROFILE_REPAIR_PINS),
+        published_appointment_product_repair={
+            **{key: G2_PRODUCTION_PROFILE_PREDECESSOR[key]
+               for key in ("commit", "parent", "tree")},
+            "acceptance": copy.deepcopy(G2_PRODUCTION_PROFILE_PUBLICATION_ACCEPTANCE),
+        },
+        claim_limits=list(G2_PRODUCTION_PROFILE_LIMITS),
+    )
+    scope["current_operation"]["operation_id"] = "g2-production-profile-repair"
+    scope["current_operation"]["supersedes"] = {
+        "operation_id": "g2-appointment-concurrency-repair", "scope_path": G2_SCOPE,
+        "scope_commit": G2_PRODUCTION_PROFILE_PREDECESSOR["commit"],
+        "scope_sha256": G2_PRODUCTION_PROFILE_PREDECESSOR_POLICY[G2_SCOPE],
+        "historical_latch_preserved": True,
+    }
+    return scope
+
+
 def _validate_g2_batch_scope(scope: dict) -> None:
-    builder = (build_g2_appointment_scope if scope.get("schema_version") == G2_APPOINTMENT_SCOPE_VERSION
+    builder = (build_g2_production_profile_scope
+               if scope.get("schema_version") == G2_PRODUCTION_PROFILE_SCOPE_VERSION
+               else build_g2_appointment_scope if scope.get("schema_version") == G2_APPOINTMENT_SCOPE_VERSION
                else build_g2_migration_guard_scope if scope.get("schema_version") == G2_MIGRATION_GUARD_SCOPE_VERSION
                else build_g2_clinical_scope if scope.get("schema_version") == G2_CLINICAL_SCOPE_VERSION
                else build_g2_atomicity_scope if scope.get("schema_version") == G2_ATOMICITY_SCOPE_VERSION
@@ -2346,6 +2478,30 @@ def build_g2_appointment_transition(before: dict[str, bytes], scope: dict) -> di
             G2_SCOPE: scope_raw}
 
 
+def build_g2_production_profile_transition(before: dict[str, bytes], scope: dict) -> dict[str, bytes]:
+    """Replace the active G2 lane without changing AGENTS, gates or consumed history."""
+    _keys(before, G2_BATCH_CONTROL_PATHS, "bounded_g2_production_profile_transition_paths")
+    for path in G2_BATCH_CONTROL_PATHS:
+        _need(type(before[path]) is bytes
+              and _sha(before[path]) == G2_PRODUCTION_PROFILE_PREDECESSOR_POLICY[path],
+              "bounded_g2_production_profile_prior_policy_changed")
+    _need(scope.get("schema_version") == G2_PRODUCTION_PROFILE_SCOPE_VERSION,
+          "bounded_g2_production_profile_scope_version")
+    _validate_g2_batch_scope(scope)
+    state = _json(before[STATE])
+    overlay = _document(before[OVERLAY], OVERLAY)
+    scope_raw = _canonical(scope) + b"\n"
+    state["observed_at"] = scope["recorded_at"]
+    state["g2"].update(scope_sha256=_sha(scope_raw),
+                       current_operation=_json(_canonical(scope["current_operation"])))
+    state["task_selection"].update(
+        next_eligibility_condition="bounded_G2_production_profile_repair_active")
+    overlay["profiles"][G2_PROFILE] = _g2_production_profile()
+    return {STATE: (json.dumps(state, indent=2, ensure_ascii=False) + "\n").encode(),
+            OVERLAY: yaml.safe_dump(overlay, sort_keys=False, allow_unicode=True).encode(),
+            G2_SCOPE: scope_raw}
+
+
 def _batch_publication(target: Path, publication: dict, base: str) -> None:
     headers = trusted_git.run_git(target, "cat-file", "commit", publication["commit"]).split("\n\n", 1)[0].splitlines()
     _need([line for line in headers if line.startswith("parent ")] == ["parent " + publication["parent"]]
@@ -2410,7 +2566,8 @@ def _load_g2_batch_inputs(context, target, source, evidence_root, scratch, bindi
     clinical = binding["schema_version"] == G2_CLINICAL_BINDING_VERSION
     guard = binding["schema_version"] == G2_MIGRATION_GUARD_BINDING_VERSION
     appointment = binding["schema_version"] == G2_APPOINTMENT_BINDING_VERSION
-    post_audio = audio or patient or atomicity or clinical or guard or appointment
+    production = binding["schema_version"] == G2_PRODUCTION_PROFILE_BINDING_VERSION
+    post_audio = audio or patient or atomicity or clinical or guard or appointment or production
     version_kinds = {
         G2_BATCH_BINDING_VERSION: {"enable_g2_batches", "repair_g2_batch"},
         G2_CATALOGUE_BINDING_VERSION: {"extend_g2_catalogue", "repair_g2_batch"},
@@ -2422,6 +2579,7 @@ def _load_g2_batch_inputs(context, target, source, evidence_root, scratch, bindi
         G2_CLINICAL_BINDING_VERSION: {"enable_g2_clinical_authority", "repair_g2_clinical_authority"},
         G2_MIGRATION_GUARD_BINDING_VERSION: {"enable_g2_migration_downgrade_guard", "repair_g2_migration_downgrade_guard"},
         G2_APPOINTMENT_BINDING_VERSION: {"enable_g2_appointment_concurrency", "repair_g2_appointment_concurrency"},
+        G2_PRODUCTION_PROFILE_BINDING_VERSION: {"enable_g2_production_profile", "repair_g2_production_profile"},
     }
     _need(binding["operation_kind"] in version_kinds.get(binding["schema_version"], set()),
           "bounded_g2_batch_binding_version")
@@ -2434,6 +2592,9 @@ def _load_g2_batch_inputs(context, target, source, evidence_root, scratch, bindi
     if appointment and maintenance:
         _need(binding["base_commit"] == G2_APPOINTMENT_PREDECESSOR["commit"],
               "bounded_g2_appointment_transition_base")
+    if production and maintenance:
+        _need(binding["base_commit"] == G2_PRODUCTION_PROFILE_PREDECESSOR["commit"],
+              "bounded_g2_production_profile_transition_base")
     _need(type(binding["operation_id"]) is str and re.fullmatch(r"[a-z0-9][a-z0-9-]{1,79}", binding["operation_id"]),
           "bounded_g2_batch_operation_id")
     _need(binding["phase"] in {"development", "pre-push", "post-push"}, "bounded_g2_batch_phase")
@@ -2468,12 +2629,15 @@ def _load_g2_batch_inputs(context, target, source, evidence_root, scratch, bindi
           "bounded_g2_migration_guard_scope_binding_mismatch")
     _need((scope.get("schema_version") == G2_APPOINTMENT_SCOPE_VERSION) == appointment,
           "bounded_g2_appointment_scope_binding_mismatch")
+    _need((scope.get("schema_version") == G2_PRODUCTION_PROFILE_SCOPE_VERSION) == production,
+          "bounded_g2_production_profile_scope_binding_mismatch")
     _validate_g2_batch_scope(scope)
     frozen = {**FROZEN_PINS, COST: COST_PIN, SCOPE_PATH: G1B_BASELINE_PINS[SCOPE_PATH],
               G1C_SCOPE: G1C_BASELINE_PINS[G1C_SCOPE], G1D_SCOPE: G1D_BASELINE_PINS[G1D_SCOPE],
               G1E_SCOPE: G1E_BASELINE_PINS[G1E_SCOPE], **GOVERNOR_PINS, **PROVENANCE_DEPENDENCY_PINS,
               **PROVENANCE_PINS, **CONFIGURATION_LEAF_PINS,
-              AGENTS: (G2_APPOINTMENT_INSTRUCTIONS_SHA256 if appointment
+              AGENTS: (G2_PRODUCTION_PROFILE_INSTRUCTIONS_SHA256 if production
+                       else G2_APPOINTMENT_INSTRUCTIONS_SHA256 if appointment
                        else G2_MIGRATION_GUARD_INSTRUCTIONS_SHA256 if guard
                        else G2_AUDIO_INSTRUCTIONS_SHA256 if post_audio else
                        G2_INSTRUCTIONS_SHA256 if instructions else G2_INITIAL_POLICY_PINS[AGENTS]),
@@ -2501,7 +2665,7 @@ def _load_g2_batch_inputs(context, target, source, evidence_root, scratch, bindi
     if migration or post_audio:
         owner_path = raisa_policy.G2_MIGRATION_OWNER_RECORD
         evidence[owner_path] = read(evidence_root / owner_path, raisa_policy.G2_MIGRATION_OWNER_SHA256)
-    if clinical or guard or appointment:
+    if clinical or guard or appointment or production:
         owner_path = raisa_policy.G2_CLINICAL_OWNER_RECORD
         evidence[owner_path] = read(evidence_root / owner_path, raisa_policy.G2_CLINICAL_OWNER_SHA256)
     prior_policy = initial_policy
@@ -2548,7 +2712,7 @@ def _load_g2_batch_inputs(context, target, source, evidence_root, scratch, bindi
                 prior_policy[path] = raw
         _validate_g2_audio_trusted_git_publication(target, base)
         _validate_g2_audio_instructions_publication(target, base)
-    if patient or atomicity or clinical or guard or appointment:
+    if patient or atomicity or clinical or guard or appointment or production:
         _batch_publication(target, G2_PATIENT_PREDECESSOR, base)
         prior_policy = {}
         for path, digest in {**G2_PATIENT_PREDECESSOR_POLICY,
@@ -2558,7 +2722,7 @@ def _load_g2_batch_inputs(context, target, source, evidence_root, scratch, bindi
             if path in G2_PATIENT_PREDECESSOR_POLICY:
                 prior_policy[path] = raw
         _validate_g2_patient_audio_publication(target, base)
-    if atomicity or clinical or guard or appointment:
+    if atomicity or clinical or guard or appointment or production:
         _batch_publication(target, G2_ATOMICITY_PREDECESSOR, base)
         prior_policy = {}
         for path, digest in {**G2_ATOMICITY_PREDECESSOR_POLICY,
@@ -2568,7 +2732,7 @@ def _load_g2_batch_inputs(context, target, source, evidence_root, scratch, bindi
             if path in G2_ATOMICITY_PREDECESSOR_POLICY:
                 prior_policy[path] = raw
         _validate_g2_atomicity_patient_publication(target, base)
-    if clinical or guard or appointment:
+    if clinical or guard or appointment or production:
         _batch_publication(target, G2_CLINICAL_PREDECESSOR, base)
         prior_policy = {}
         for path, digest in {**G2_CLINICAL_PREDECESSOR_POLICY,
@@ -2578,7 +2742,7 @@ def _load_g2_batch_inputs(context, target, source, evidence_root, scratch, bindi
             if path in G2_CLINICAL_PREDECESSOR_POLICY:
                 prior_policy[path] = raw
         _validate_g2_clinical_atomicity_publication(target, base)
-    if guard or appointment:
+    if guard or appointment or production:
         _batch_publication(target, G2_MIGRATION_GUARD_PREDECESSOR, base)
         prior_policy = {}
         for path, digest in {**G2_MIGRATION_GUARD_PREDECESSOR_POLICY,
@@ -2588,7 +2752,7 @@ def _load_g2_batch_inputs(context, target, source, evidence_root, scratch, bindi
             _need(_sha(raw) == digest, "bounded_g2_migration_guard_predecessor_bytes_changed")
             if path in G2_MIGRATION_GUARD_PREDECESSOR_POLICY:
                 prior_policy[path] = raw
-    if appointment:
+    if appointment or production:
         _batch_publication(target, G2_APPOINTMENT_PREDECESSOR, base)
         prior_policy = {}
         for path, digest in {**G2_APPOINTMENT_PREDECESSOR_POLICY,
@@ -2598,13 +2762,30 @@ def _load_g2_batch_inputs(context, target, source, evidence_root, scratch, bindi
             _need(_sha(raw) == digest, "bounded_g2_appointment_predecessor_bytes_changed")
             if path in G2_APPOINTMENT_PREDECESSOR_POLICY:
                 prior_policy[path] = raw
+    if production:
+        _batch_publication(target, G2_PRODUCTION_PROFILE_PREDECESSOR, base)
+        prior_policy = {}
+        predecessor_pins = {
+            **G2_PRODUCTION_PROFILE_PREDECESSOR_POLICY,
+            **G2_PRODUCTION_PROFILE_PREDECESSOR["source_sha256"],
+            **{path: digest for path, digest in G2_PRODUCTION_PROFILE_REPAIR_PINS.items()
+               if digest is not None},
+        }
+        for path, digest in predecessor_pins.items():
+            raw = trusted_git.run_git_bytes(target, "cat-file", "blob",
+                G2_PRODUCTION_PROFILE_PREDECESSOR["commit"] + ":" + path)
+            _need(_sha(raw) == digest,
+                  "bounded_g2_production_profile_predecessor_bytes_changed")
+            if path in G2_PRODUCTION_PROFILE_PREDECESSOR_POLICY:
+                prior_policy[path] = raw
     base_payloads = {}
     for path in sorted(input_paths):
         if path in changes and changes[path]["before_sha256"] is None:
             # Only the fixed reviewed additions reach this branch. Empty bytes
             # are present blobs; absence requires a successful literal-path query.
             _need(trusted_git.run_git_bytes(target, "ls-tree", "-z", base, "--", path) == b"",
-                  "bounded_g2_appointment_addition_already_exists" if appointment
+                  "bounded_g2_production_profile_addition_already_exists" if production
+                  else "bounded_g2_appointment_addition_already_exists" if appointment
                   else "bounded_g2_atomicity_addition_already_exists" if atomicity
                   else "bounded_g2_patient_addition_already_exists" if patient
                   else "bounded_g2_audio_addition_already_exists" if audio
@@ -2623,7 +2804,8 @@ def _load_g2_batch_inputs(context, target, source, evidence_root, scratch, bindi
     _validate_installed_controller(controller)
     _batch_publication(target, controller, base)
     if maintenance:
-        expected_controller = (G2_APPOINTMENT_PREDECESSOR if appointment
+        expected_controller = (G2_PRODUCTION_PROFILE_PREDECESSOR if production
+                               else G2_APPOINTMENT_PREDECESSOR if appointment
                                else G2_MIGRATION_GUARD_PREDECESSOR if guard else G2_CLINICAL_PREDECESSOR if clinical
                                else G2_ATOMICITY_PREDECESSOR if atomicity
                                else G2_PATIENT_PREDECESSOR if patient else G2_AUDIO_PREDECESSOR if audio
@@ -2635,7 +2817,8 @@ def _load_g2_batch_inputs(context, target, source, evidence_root, scratch, bindi
         _need(controller == expected_controller and binding["activation_commit"] == expected_activation,
               "bounded_g2_batch_maintenance_predecessor")
         _need(scope["transition_base_commit"] == base, "bounded_g2_batch_maintenance_base")
-        prior_pins = (G2_APPOINTMENT_PREDECESSOR_POLICY if appointment
+        prior_pins = (G2_PRODUCTION_PROFILE_PREDECESSOR_POLICY if production
+                      else G2_APPOINTMENT_PREDECESSOR_POLICY if appointment
                       else G2_MIGRATION_GUARD_PREDECESSOR_POLICY if guard
                       else {**G2_CLINICAL_PREDECESSOR_POLICY, AGENTS: G2_AUDIO_INSTRUCTIONS_SHA256} if clinical
                       else {**G2_ATOMICITY_PREDECESSOR_POLICY, AGENTS: G2_AUDIO_INSTRUCTIONS_SHA256} if atomicity
@@ -2694,7 +2877,9 @@ def _load_g2_batch_inputs(context, target, source, evidence_root, scratch, bindi
 
 def _validate_g2_batch_loaded_policy(inputs):
     scope = _json(inputs.payloads[G2_SCOPE])
-    builder = (build_g2_appointment_transition if scope.get("schema_version") == G2_APPOINTMENT_SCOPE_VERSION
+    builder = (build_g2_production_profile_transition
+               if scope.get("schema_version") == G2_PRODUCTION_PROFILE_SCOPE_VERSION
+               else build_g2_appointment_transition if scope.get("schema_version") == G2_APPOINTMENT_SCOPE_VERSION
                else build_g2_migration_guard_transition if scope.get("schema_version") == G2_MIGRATION_GUARD_SCOPE_VERSION
                else build_g2_clinical_transition if scope.get("schema_version") == G2_CLINICAL_SCOPE_VERSION
                else build_g2_atomicity_transition if scope.get("schema_version") == G2_ATOMICITY_SCOPE_VERSION
