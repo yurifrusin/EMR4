@@ -3,13 +3,26 @@
 from __future__ import annotations
 
 import argparse
+import os
 import re
+import stat
+import sys
 from dataclasses import dataclass
 from pathlib import Path
 
 
-DEFAULT_SCAN_ROOTS = (Path("tests"), Path("docs"))
-SCAN_SUFFIXES = {".py", ".md", ".yaml", ".yml", ".json"}
+REPO_ROOT = Path(__file__).absolute().parents[1]
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
+
+from scripts.python_source_state import (  # noqa: E402
+    SourceStateError,
+    _literal_path,
+    load_source_state,
+)
+
+
+SCAN_SUFFIXES = {".py", ".md", ".yaml", ".yml", ".json", ".toml", ".txt"}
 RELEVANT_PATH_PARTS = {
     "h_series",
     "h-series",
@@ -97,9 +110,40 @@ class HistoricalDiaryLeakageLintError(ValueError):
 
 
 def lint_paths(paths: list[Path]) -> list[LeakageIssue]:
+    if type(paths) is not list or not paths:
+        raise SourceStateError("empty_literal_lint_selection")
     issues: list[LeakageIssue] = []
-    for path in _iter_scan_files(paths):
-        issues.extend(lint_text(path, path.read_text(encoding="utf-8-sig")))
+    seen: set[str] = set()
+    selected: list[Path] = []
+    for supplied in paths:
+        if not isinstance(supplied, Path):
+            raise SourceStateError("invalid_literal_lint_path")
+        raw = os.fspath(supplied).replace("\\", "/")
+        if supplied.is_absolute():
+            if raw.startswith("//"):
+                raise SourceStateError("invalid_literal_lint_path")
+            if re.match(r"[A-Za-z]:/", raw):
+                tail = raw[3:]
+            elif raw.startswith("/"):
+                tail = raw[1:]
+            else:
+                raise SourceStateError("invalid_literal_lint_path")
+            try:
+                _literal_path(tail)
+            except SourceStateError as exc:
+                raise SourceStateError("invalid_literal_lint_path") from exc
+        else:
+            _literal_path(raw)
+        path = supplied.absolute()
+        if path.suffix.lower() not in SCAN_SUFFIXES:
+            raise SourceStateError("unsupported_literal_lint_suffix")
+        key = str(path).casefold()
+        if key in seen:
+            raise SourceStateError("duplicate_literal_lint_path")
+        seen.add(key)
+        selected.append(path)
+    for path in selected:
+        issues.extend(lint_text(path, _read_regular_text(path)))
     return issues
 
 
@@ -179,17 +223,58 @@ def assert_no_leakage(paths: list[Path]) -> None:
         raise HistoricalDiaryLeakageLintError(issues)
 
 
-def _iter_scan_files(paths: list[Path]):
-    for path in paths:
-        if path.is_file():
-            if path.suffix.lower() in SCAN_SUFFIXES:
-                yield path
-            continue
-        if not path.is_dir():
-            continue
-        for candidate in path.rglob("*"):
-            if candidate.is_file() and candidate.suffix.lower() in SCAN_SUFFIXES:
-                yield candidate
+def _read_regular_text(path: Path) -> str:
+    """Read one named regular file; never expand a directory or redirection."""
+    components = [*reversed(path.parents), path]
+    before = []
+    for index, component in enumerate(components):
+        try:
+            row = component.lstat()
+        except OSError as exc:
+            raise SourceStateError("missing_literal_lint_path") from exc
+        if (stat.S_ISLNK(row.st_mode)
+                or getattr(row, "st_file_attributes", 0) & 0x400):
+            raise SourceStateError("literal_lint_redirection")
+        if not (stat.S_ISDIR(row.st_mode) if index < len(components) - 1
+                else stat.S_ISREG(row.st_mode)):
+            raise SourceStateError("literal_lint_not_regular")
+        before.append((row.st_dev, row.st_ino, row.st_mode, row.st_size,
+                       row.st_mtime_ns, row.st_ctime_ns,
+                       getattr(row, "st_file_attributes", 0),
+                       getattr(row, "st_reparse_tag", 0)))
+    if before[-1][3] > 4 * 1024 * 1024:
+        raise SourceStateError("literal_lint_file_too_large")
+    flags = os.O_RDONLY | getattr(os, "O_BINARY", 0) | getattr(os, "O_NOFOLLOW", 0)
+    try:
+        descriptor = os.open(path, flags)
+        with os.fdopen(descriptor, "rb") as handle:
+            opened = os.fstat(handle.fileno())
+            if (opened.st_dev, opened.st_ino, opened.st_mode, opened.st_size) != (
+                before[-1][0], before[-1][1], before[-1][2], before[-1][3]
+            ):
+                raise SourceStateError("literal_lint_file_replaced")
+            raw = handle.read(4 * 1024 * 1024 + 1)
+    except OSError as exc:
+        raise SourceStateError("literal_lint_unreadable") from exc
+    after = []
+    for component in components:
+        try:
+            row = component.lstat()
+        except OSError as exc:
+            raise SourceStateError("literal_lint_file_replaced") from exc
+        if (stat.S_ISLNK(row.st_mode)
+                or getattr(row, "st_file_attributes", 0) & 0x400):
+            raise SourceStateError("literal_lint_redirection")
+        after.append((row.st_dev, row.st_ino, row.st_mode, row.st_size,
+                      row.st_mtime_ns, row.st_ctime_ns,
+                      getattr(row, "st_file_attributes", 0),
+                      getattr(row, "st_reparse_tag", 0)))
+    if before != after or len(raw) != before[-1][3]:
+        raise SourceStateError("literal_lint_file_replaced")
+    try:
+        return raw.decode("utf-8-sig")
+    except UnicodeError as exc:
+        raise SourceStateError("literal_lint_decode_failed") from exc
 
 
 def _is_relevant_path(path: Path) -> bool:
@@ -211,13 +296,28 @@ def _line_windows(lines: list[str], *, size: int):
         yield index + 1, lines[index : index + size]
 
 
-def main() -> int:
+def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("paths", nargs="*", type=Path, default=list(DEFAULT_SCAN_ROOTS))
-    args = parser.parse_args()
-
-    assert_no_leakage(args.paths)
-    print("historical diary leakage lint safe")
+    parser.add_argument("--selection", required=True)
+    parser.add_argument("--selection-sha256", required=True)
+    args = parser.parse_args(argv)
+    try:
+        state = load_source_state(args.selection,
+                                  manifest_sha256=args.selection_sha256,
+                                  repo_root=REPO_ROOT)
+        issues = []
+        for path in state["phases"]["leakage"]:
+            try:
+                text = state["selected_bytes"][path].decode("utf-8-sig")
+            except UnicodeError as exc:
+                raise SourceStateError("literal_lint_decode_failed") from exc
+            issues.extend(lint_text(Path(path), text))
+        if issues:
+            raise HistoricalDiaryLeakageLintError(issues)
+    except (SourceStateError, HistoricalDiaryLeakageLintError) as exc:
+        print(f"[historical_diary_lint_failure] {exc}", file=sys.stderr)
+        return 1
+    print("historical diary leakage lint safe for literal selection")
     return 0
 
 

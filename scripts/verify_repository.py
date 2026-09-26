@@ -1,190 +1,114 @@
-"""Canonical, timeout-bounded repository verification entry point."""
+"""Build and run only a reviewed literal ordinary verification selection."""
 
 from __future__ import annotations
 
 import argparse
 from pathlib import Path
-import shutil
+import re
 import sys
 
-REPO_ROOT = Path(__file__).resolve().parents[1]
+
+REPO_ROOT = Path(__file__).absolute().parents[1]
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
-from scripts.verification_runtime import (
+from scripts.python_source_state import (  # noqa: E402
+    SourceStateError,
+    load_source_state,
+    validate_selection,
+)
+from scripts.verification_runtime import (  # noqa: E402
     TIMEOUT_SECONDS,
     VerificationCommand,
     run_commands,
 )
-from scripts.python_source_state import load_source_state
 
 
-SOURCE_STATE = load_source_state()
-RUFF_PATHS = SOURCE_STATE["ruff_paths"]
-
-FOCUSED_TESTS = [
-    "tests/test_agents_handover_archive.py",
-    "tests/test_api_spine_appointment_idempotency_model_migration.py",
-    "tests/test_api_spine_artifacts.py",
-    "tests/test_api_spine_external_read_model_current_surface_status.py",
-    "tests/test_api_spine_external_read_model_gap_inventory.py",
-    "tests/test_ariadne_orchestrator_preflight.py",
-    "tests/test_current_baton_consistency.py",
-    "tests/test_python_source_state.py",
-    "tests/test_raisa_agent_execution_surface_containment_gate_aes_c0.py",
-    "tests/test_raisa_agent_execution_surface_containment_gate_aes_c0_continuity.py",
-    "tests/test_raisa_agent_execution_surface_containment_gate_aes_c1.py",
-    "tests/test_raisa_agent_execution_surface_containment_gate_aes_c1_continuity.py",
-    "tests/test_raisa_agent_execution_surface_containment_gate_aes_c2.py",
-    "tests/test_raisa_agent_execution_surface_containment_gate_aes_c2_continuity.py",
-    "tests/test_raisa_agent_execution_surface_containment_gate_aes_c3.py",
-    "tests/test_raisa_agent_execution_surface_containment_gate_aes_c3_continuity.py",
-    "tests/test_raisa_agent_execution_surface_containment_gate_plan.py",
-    "tests/test_raisa_codebase_conformance_repair_continuity.py",
-    "tests/test_repository_maintenance.py",
-]
-
-CI_CORRECTNESS_TESTS = [
-    "tests/test_agents_handover_archive.py",
-    "tests/test_api_spine_artifacts.py",
-    "tests/test_api_spine_external_read_model_current_surface_status.py",
-    "tests/test_api_spine_external_read_model_gap_inventory.py",
-    "tests/test_ariadne_orchestrator_preflight.py",
-    "tests/test_current_baton_consistency.py",
-    "tests/test_python_source_state.py",
-    "tests/test_raisa_agent_execution_surface_containment_gate_aes_c0.py",
-    "tests/test_raisa_agent_execution_surface_containment_gate_aes_c0_continuity.py",
-    "tests/test_raisa_agent_execution_surface_containment_gate_aes_c1.py",
-    "tests/test_raisa_agent_execution_surface_containment_gate_aes_c1_continuity.py",
-    "tests/test_raisa_agent_execution_surface_containment_gate_aes_c2.py",
-    "tests/test_raisa_agent_execution_surface_containment_gate_aes_c2_continuity.py",
-    "tests/test_raisa_agent_execution_surface_containment_gate_aes_c3.py",
-    "tests/test_raisa_agent_execution_surface_containment_gate_aes_c3_continuity.py",
-    "tests/test_raisa_agent_execution_surface_containment_gate_plan.py",
-    "tests/test_raisa_codebase_conformance_repair_continuity.py",
-    "tests/test_repository_maintenance.py",
-]
+PROFILES = ("ci-correctness", "ci-lint", "ci-bandit", "ci-security")
+HEX64 = re.compile(r"[0-9a-f]{64}\Z")
 
 
-def _fast_commands() -> list[VerificationCommand]:
+def build_commands(profile: str, state: dict) -> list[VerificationCommand]:
+    """Build exact argv only; source bytes were authenticated by the loader."""
+    if profile not in PROFILES:
+        raise SourceStateError("unsupported_verification_profile")
+    validated = validate_selection({
+        key: value for key, value in state.items()
+        if key not in {"selected_bytes", "selection_path", "selection_sha256"}
+    })
+    selection = state.get("selection_path")
+    digest = state.get("selection_sha256")
+    if (type(selection) is not str or not selection
+            or not Path(selection).is_absolute()
+            or any(part in {".", ".."} for part in Path(selection).parts)
+            or type(digest) is not str
+            or HEX64.fullmatch(digest) is None):
+        raise SourceStateError("unbound_verification_selection")
     python = sys.executable
-    commands = [
-        VerificationCommand(
-            "Ruff ordinary product/infrastructure baseline",
-            [python, "-m", "ruff", "check", *RUFF_PATHS],
-            TIMEOUT_SECONDS["tool"],
-        ),
-        VerificationCommand(
-            "maintained Python source-state compilation",
-            [python, "scripts/python_source_state.py"],
-            TIMEOUT_SECONDS["tool"],
-        ),
-        VerificationCommand(
-            "focused API Spine, handover, receipt, and maintenance tests",
-            [python, "-m", "pytest", *FOCUSED_TESTS],
-            TIMEOUT_SECONDS["focused_tests"],
-        ),
-    ]
-    if shutil.which("node"):
-        commands.append(
-            VerificationCommand(
-                "Diary JavaScript syntax",
-                ["node", "--check", "docs/diary/diary.js"],
-                TIMEOUT_SECONDS["tool"],
-            )
-        )
-    commands.append(
-        VerificationCommand(
-            "Git whitespace",
-            ["git", "diff", "--check"],
-            TIMEOUT_SECONDS["tool"],
-        )
+    common = ["--selection", selection, "--selection-sha256", digest]
+    phases = validated["phases"]
+    configs = validated["configs"]
+    compile_command = VerificationCommand(
+        "selected Python 3.11 compilation",
+        [python, "-B", "scripts/python_source_state.py", *common,
+         "--require-target-runtime"],
+        TIMEOUT_SECONDS["tool"],
     )
-    return commands
+    ruff = VerificationCommand(
+        "selected Ruff E9/F401",
+        [python, "-B", "-m", "ruff", "check", "--config", configs["ruff"],
+         "--no-cache", *phases["ruff"]],
+        TIMEOUT_SECONDS["tool"],
+    )
+    leakage = VerificationCommand(
+        "selected historical diary leakage lint",
+        [python, "-B", "scripts/historical_diary_leakage_lint.py", *common],
+        TIMEOUT_SECONDS["tool"],
+    )
+    bandit = VerificationCommand(
+        "selected Bandit report and review gate",
+        [python, "-B", "scripts/security_bandit_gate.py", *common],
+        TIMEOUT_SECONDS["tool"],
+    )
+    pytest = VerificationCommand(
+        "selected ordinary correctness nodes",
+        [python, "-B", "-m", "pytest", "--noconftest", "-c", configs["pytest"],
+         "-o", "addopts=", "-p", "no:cacheprovider", *phases["tests"]],
+        TIMEOUT_SECONDS["focused_tests"],
+    )
+    if profile == "ci-correctness":
+        return [compile_command, ruff, leakage, pytest]
+    if profile == "ci-lint":
+        return [ruff, leakage]
+    if profile == "ci-bandit":
+        return [bandit]
+    return [ruff, leakage, bandit]
 
 
-def _lint_commands() -> list[VerificationCommand]:
-    python = sys.executable
-    return [
-        VerificationCommand(
-            "Ruff ordinary product/infrastructure baseline",
-            [python, "-m", "ruff", "check", *RUFF_PATHS],
-            TIMEOUT_SECONDS["tool"],
-        ),
-        VerificationCommand(
-            "historical diary leakage lint",
-            [python, "scripts/historical_diary_leakage_lint.py", "tests", "docs"],
-            TIMEOUT_SECONDS["tool"],
-        ),
-    ]
-
-
-def _correctness_commands() -> list[VerificationCommand]:
-    python = sys.executable
-    return [
-        VerificationCommand(
-            "maintained Python 3.11 source-state compilation",
-            [
-                python,
-                "scripts/python_source_state.py",
-                "--require-target-runtime",
-            ],
-            TIMEOUT_SECONDS["tool"],
-        ),
-        *_lint_commands(),
-        VerificationCommand(
-            "bounded static correctness and conformance tests",
-            [python, "-m", "pytest", "--noconftest", *CI_CORRECTNESS_TESTS],
-            TIMEOUT_SECONDS["focused_tests"],
-        ),
-    ]
-
-
-def _bandit_commands() -> list[VerificationCommand]:
-    return [
-        VerificationCommand(
-            "reviewed Bandit baseline",
-            [sys.executable, "scripts/security_bandit_gate.py"],
-            TIMEOUT_SECONDS["tool"],
-        )
-    ]
-
-
-def main() -> int:
+def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument(
-        "--profile",
-        choices=(
-            "fast",
-            "ci-correctness",
-            "ci-lint",
-            "ci-bandit",
-            "ci-security",
-            "migration",
-        ),
-        default="fast",
-    )
-    args = parser.parse_args()
-
-    if args.profile == "migration":
-        commands = [
-            VerificationCommand(
-                "disposable empty-database Alembic lifecycle",
-                [sys.executable, "scripts/verify_empty_database_migrations.py"],
-                TIMEOUT_SECONDS["full_tests"],
-            )
-        ]
-    elif args.profile == "ci-security":
-        commands = [*_lint_commands(), *_bandit_commands()]
-    elif args.profile == "ci-correctness":
-        commands = _correctness_commands()
-    elif args.profile == "ci-lint":
-        commands = _lint_commands()
-    elif args.profile == "ci-bandit":
-        commands = _bandit_commands()
-    else:
-        commands = _fast_commands()
-    return run_commands(commands, cwd=REPO_ROOT)
+    parser.add_argument("--profile", choices=PROFILES, required=True)
+    parser.add_argument("--selection", required=True)
+    parser.add_argument("--selection-sha256", required=True)
+    args = parser.parse_args(argv)
+    try:
+        state = load_source_state(args.selection,
+                                  manifest_sha256=args.selection_sha256,
+                                  repo_root=REPO_ROOT)
+        commands = build_commands(args.profile, state)
+    except SourceStateError as exc:
+        print(f"[verification_selection_failure] {exc}", file=sys.stderr)
+        return 2
+    # The reviewed parent supervisor must supply the clean base environment.
+    # These overlays close the named pytest/cache defaults within that boundary.
+    clean_overlays = {
+        "PYTEST_DISABLE_PLUGIN_AUTOLOAD": "1",
+        "PYTEST_ADDOPTS": "",
+        "PYTHONPATH": "",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "RUFF_NO_CACHE": "1",
+    }
+    return run_commands(commands, cwd=REPO_ROOT, env=clean_overlays)
 
 
 if __name__ == "__main__":

@@ -1,192 +1,314 @@
-"""Validate and compile the explicit maintained EMR4 Python source selection."""
+"""Authenticate one literal ordinary verification selection before reading its files."""
 
 from __future__ import annotations
 
 import argparse
+import copy
+import hashlib
 import json
-from pathlib import Path, PurePosixPath
+import os
+from pathlib import Path
+import re
+import stat
 import sys
-from typing import Any, Iterable
+from typing import Any
 
 
-ROOT = Path(__file__).resolve().parents[1]
+# These are lexical constants. Importing this module performs no source discovery.
+ROOT = Path(__file__).absolute().parents[1]
 DEFAULT_MANIFEST = ROOT / "orchestration/harness_settings/python_source_state.json"
-EXPECTED_SCHEMA = "emr4.python_source_state.v1"
-ENTRY_MODES = {"file", "recursive", "top_level"}
+EXPECTED_SCHEMA = "emr4.python_source_state.v2"
+SCOPE = "bounded_ordinary_verification"
+KINDS = frozenset({"source", "test", "config", "data", "import"})
+PHASES = ("compile", "ruff", "bandit", "leakage", "tests")
+CONFIGS = ("ruff", "bandit", "pytest")
+FORBIDDEN_TOKENS = ("holdout", "local_data", "historical-diary-trove")
+HEX64 = re.compile(r"[0-9a-f]{64}\Z")
+HEX40 = re.compile(r"[0-9a-f]{40}\Z")
+COMPONENT = re.compile(r"[A-Za-z0-9_][A-Za-z0-9_. -]*\Z")
+NODE_PART = re.compile(r"[A-Za-z_][A-Za-z0-9_]*\Z")
+DEVICE_NAMES = frozenset(
+    {"CON", "PRN", "AUX", "NUL"}
+    | {f"COM{number}" for number in range(1, 10)}
+    | {f"LPT{number}" for number in range(1, 10)}
+)
+MAX_BYTES = 4 * 1024 * 1024
 
 
 class SourceStateError(ValueError):
-    """Raised when source-state policy is incomplete or unsafe."""
+    """The literal selection or one authenticated input is invalid."""
 
 
-def _read_json(path: Path) -> dict[str, Any]:
-    try:
-        value = json.loads(path.read_text(encoding="utf-8"))
-    except (OSError, json.JSONDecodeError) as exc:
-        raise SourceStateError(f"source-state manifest is unreadable: {path}") from exc
-    if not isinstance(value, dict):
-        raise SourceStateError("source-state manifest must be a JSON object")
+def _need(condition: bool, reason: str) -> None:
+    if not condition:
+        raise SourceStateError(reason)
+
+
+def _keys(value: object, expected: set[str], reason: str) -> dict[str, Any]:
+    _need(type(value) is dict and set(value) == expected, reason)
     return value
 
 
-def _relative_path(raw: object) -> PurePosixPath:
-    if not isinstance(raw, str) or not raw:
-        raise SourceStateError("source-state paths must be non-empty strings")
-    if "\\" in raw or ":" in raw:
-        raise SourceStateError(f"source-state path is not repository-relative POSIX: {raw}")
-    path = PurePosixPath(raw)
-    if path.is_absolute() or any(part in {"", ".", ".."} for part in path.parts):
-        raise SourceStateError(f"source-state path escapes or is not normalized: {raw}")
-    if path.as_posix() != raw:
-        raise SourceStateError(f"source-state path escapes or is not normalized: {raw}")
-    return path
+def _strict_json(raw: bytes) -> Any:
+    def pairs(rows: list[tuple[str, Any]]) -> dict[str, Any]:
+        result: dict[str, Any] = {}
+        for key, value in rows:
+            _need(key not in result, "duplicate_selection_json_key")
+            result[key] = value
+        return result
 
+    def nonfinite(_: str) -> None:
+        raise SourceStateError("nonfinite_selection_json")
 
-def _is_within(path: PurePosixPath, root: PurePosixPath) -> bool:
-    return path == root or root in path.parents
-
-
-def _contains_forbidden_token(path: PurePosixPath, tokens: list[str]) -> bool:
-    return any(
-        token.lower() in part.lower()
-        for part in path.parts
-        for token in tokens
-    )
-
-
-def _ensure_within_repo(path: Path, repo_root: Path) -> None:
     try:
-        path.resolve(strict=False).relative_to(repo_root.resolve(strict=True))
-    except (OSError, ValueError) as exc:
-        raise SourceStateError(f"source-state path resolves outside repository: {path}") from exc
+        return json.loads(raw.decode("utf-8"), object_pairs_hook=pairs,
+                          parse_constant=nonfinite)
+    except (UnicodeError, json.JSONDecodeError) as exc:
+        raise SourceStateError("malformed_selection_json") from exc
 
 
-def _expand_entry(repo_root: Path, entry: dict[str, Any]) -> list[Path]:
-    path = _relative_path(entry.get("path"))
-    mode = entry.get("mode")
-    absolute = repo_root.joinpath(*path.parts)
-    _ensure_within_repo(absolute, repo_root)
-    if mode == "file":
-        if not absolute.is_file() or absolute.suffix != ".py":
-            raise SourceStateError(f"selected Python file is absent: {path.as_posix()}")
-        return [absolute]
-    if mode not in {"recursive", "top_level"}:
-        raise SourceStateError(f"unsupported source-state mode for {path}: {mode!r}")
-    if not absolute.is_dir():
-        raise SourceStateError(f"selected Python directory is absent: {path.as_posix()}")
-    iterator: Iterable[Path]
-    iterator = absolute.rglob("*.py") if mode == "recursive" else absolute.glob("*.py")
-    files = sorted(candidate for candidate in iterator if candidate.is_file())
-    if not files:
-        raise SourceStateError(f"selected Python directory is empty: {path.as_posix()}")
-    for candidate in files:
-        _ensure_within_repo(candidate, repo_root)
-    return files
+def _digest(value: object, reason: str) -> str:
+    _need(type(value) is str and HEX64.fullmatch(value) is not None, reason)
+    return value
 
 
-def load_source_state(
-    manifest_path: Path = DEFAULT_MANIFEST,
-    *,
-    repo_root: Path = ROOT,
-) -> dict[str, Any]:
-    manifest = _read_json(manifest_path)
-    required = {
-        "schema_version",
-        "target_python",
-        "allowed_states",
-        "forbidden_path_tokens",
-        "forbidden_recursive_roots",
-        "source_entries",
-        "verification_paths",
+def _literal_path(value: object) -> str:
+    _need(type(value) is str and 0 < len(value) <= 240, "invalid_literal_path")
+    _need(not value.startswith(("/", "-")) and "\\" not in value and ":" not in value,
+          "invalid_literal_path")
+    parts = value.split("/")
+    _need(all(
+        part not in {"", ".", ".."}
+        and COMPONENT.fullmatch(part) is not None
+        and not part.startswith("-")
+        and not part.endswith((" ", "."))
+        and "~" not in part
+        and part.split(".", 1)[0].rstrip(" .").upper() not in DEVICE_NAMES
+        and not any(token in part.casefold() for token in FORBIDDEN_TOKENS)
+        for part in parts
+    ), "invalid_literal_path")
+    return value
+
+
+def _test_node(value: object) -> tuple[str, str]:
+    _need(type(value) is str and len(value) <= 320, "invalid_test_node")
+    parts = value.split("::")
+    _need(len(parts) >= 2 and all(NODE_PART.fullmatch(part) for part in parts[1:])
+          and parts[-1].startswith("test_"), "invalid_test_node")
+    path = _literal_path(parts[0])
+    _need(path.startswith("tests/") and path.endswith(".py"), "invalid_test_node")
+    return path, value
+
+
+def _scope_sha256(files: dict[str, dict[str, str]], bandit_paths: list[str]) -> str:
+    pairs = [[path, files[path]["sha256"]] for path in sorted(bandit_paths)]
+    raw = json.dumps(pairs, ensure_ascii=False, separators=(",", ":")).encode("utf-8")
+    return hashlib.sha256(raw).hexdigest()
+
+
+def validate_selection(manifest: dict[str, Any]) -> dict[str, Any]:
+    """Validate all rows and references without touching the filesystem."""
+    m = _keys(manifest, {
+        "schema_version", "target_python", "scope", "source_commit", "source_tree",
+        "completeness", "files", "phases", "configs", "bandit_review",
+    }, "selection_keys")
+    _need(m["schema_version"] == EXPECTED_SCHEMA and m["target_python"] == "3.11"
+          and m["scope"] == SCOPE, "selection_identity")
+    _need(type(m["source_commit"]) is str and HEX40.fullmatch(m["source_commit"]) is not None
+          and type(m["source_tree"]) is str and HEX40.fullmatch(m["source_tree"]) is not None,
+          "selection_source_identity")
+    completeness = _keys(m["completeness"], {"repository_wide", "pending"},
+                         "completeness_keys")
+    pending = completeness["pending"]
+    _need(completeness["repository_wide"] is False and type(pending) is list and pending
+          and all(type(item) is str and 0 < len(item.strip()) <= 300 for item in pending)
+          and len({item.casefold() for item in pending}) == len(pending),
+          "bounded_completeness_required")
+
+    rows = m["files"]
+    _need(type(rows) is list and rows, "empty_file_selection")
+    files: dict[str, dict[str, str]] = {}
+    folded_paths: set[str] = set()
+    for row in rows:
+        item = _keys(row, {"path", "sha256", "kind"}, "file_row_keys")
+        path = _literal_path(item["path"])
+        digest = _digest(item["sha256"], "file_digest")
+        _need(type(item["kind"]) is str and item["kind"] in KINDS
+              and path.casefold() not in folded_paths,
+              "duplicate_or_unclassified_file")
+        folded_paths.add(path.casefold())
+        files[path] = {"path": path, "sha256": digest, "kind": item["kind"]}
+    prefixes: dict[str, str] = {}
+    for path in files:
+        parts = path.split("/")
+        for index in range(1, len(parts) + 1):
+            spelling = "/".join(parts[:index])
+            prior = prefixes.setdefault(spelling.casefold(), spelling)
+            _need(prior == spelling, "windows_component_alias")
+            if index < len(parts):
+                _need(spelling.casefold() not in folded_paths,
+                      "file_directory_collision")
+
+    phases = _keys(m["phases"], set(PHASES), "phase_keys")
+    phase_paths: dict[str, list[str]] = {}
+    test_nodes: list[str] = []
+    for phase in PHASES:
+        values = phases[phase]
+        _need(type(values) is list and values, "empty_phase")
+        seen: set[str] = set()
+        checked: list[str] = []
+        for value in values:
+            if phase == "tests":
+                path, node = _test_node(value)
+                checked.append(path)
+                test_nodes.append(node)
+                spelling = node
+            else:
+                spelling = _literal_path(value)
+                checked.append(spelling)
+            _need(spelling.casefold() not in seen, "duplicate_phase_entry")
+            seen.add(spelling.casefold())
+        phase_paths[phase] = checked
+
+    configs = _keys(m["configs"], set(CONFIGS), "config_keys")
+    config_paths = {key: _literal_path(configs[key]) for key in CONFIGS}
+    review = _keys(m["bandit_review"],
+                   {"status", "scope_sha256", "reviewed_findings"}, "bandit_review_keys")
+    _need(type(review["status"]) is str
+          and review["status"] in {"pending", "reviewed"}, "bandit_review_status")
+    _digest(review["scope_sha256"], "bandit_scope_digest")
+    findings = review["reviewed_findings"]
+    _need(type(findings) is list, "reviewed_findings")
+    fingerprints: set[tuple[str, str, int, str]] = set()
+    for row in findings:
+        item = _keys(row, {"path", "test_id", "line_number", "code_sha256"},
+                     "reviewed_finding_keys")
+        path = _literal_path(item["path"])
+        _need(type(item["test_id"]) is str and
+              re.fullmatch(r"B[0-9]{3}", item["test_id"]) is not None
+              and type(item["line_number"]) is int and item["line_number"] > 0,
+              "reviewed_finding_identity")
+        digest = _digest(item["code_sha256"], "reviewed_finding_digest")
+        fingerprint = (path, item["test_id"], item["line_number"], digest)
+        _need(fingerprint not in fingerprints, "duplicate_reviewed_finding")
+        fingerprints.add(fingerprint)
+
+    # Only after every lexical row is checked may relationships be checked.
+    used: set[str] = set(config_paths.values())
+    for phase, paths in phase_paths.items():
+        for path in paths:
+            _need(path in files, "unknown_phase_path")
+            if phase in {"compile", "ruff", "bandit"}:
+                _need(path.endswith(".py")
+                      and files[path]["kind"] in {"source", "test", "import"},
+                      "invalid_python_phase_path")
+            elif phase == "tests":
+                _need(files[path]["kind"] == "test", "invalid_test_phase_path")
+            else:
+                _need(Path(path).suffix.lower() in
+                      {".py", ".md", ".json", ".yaml", ".yml", ".toml", ".txt"},
+                      "invalid_text_phase_path")
+            used.add(path)
+    _need(all(path in files and files[path]["kind"] == "config"
+              for path in config_paths.values()), "invalid_config_reference")
+    _need(all(path in used or row["kind"] in {"import", "data"}
+              for path, row in files.items()), "unclassified_unused_file")
+    _need(all(row["path"] in phase_paths["bandit"] for row in findings),
+          "reviewed_finding_outside_scope")
+    _need(review["scope_sha256"] == _scope_sha256(files, phase_paths["bandit"]),
+          "bandit_scope_mismatch")
+    return copy.deepcopy(m)
+
+
+def _identity(path: Path, *, directory: bool) -> tuple[int, ...]:
+    try:
+        row = path.lstat()
+    except OSError as exc:
+        raise SourceStateError("missing_selected_component") from exc
+    redirected = getattr(row, "st_file_attributes", 0) & 0x400
+    _need(not stat.S_ISLNK(row.st_mode) and not redirected,
+          "selected_path_redirection")
+    _need(stat.S_ISDIR(row.st_mode) if directory else stat.S_ISREG(row.st_mode),
+          "selected_path_not_regular")
+    return (row.st_dev, row.st_ino, row.st_mode, row.st_nlink, row.st_size,
+            row.st_mtime_ns, row.st_ctime_ns,
+            getattr(row, "st_file_attributes", 0),
+            getattr(row, "st_reparse_tag", 0))
+
+
+def read_selected_bytes(repo_root: Path, relative_path: str,
+                        expected_sha256: str) -> bytes:
+    """Read one literal regular file through stable, non-redirected components."""
+    path = _literal_path(relative_path)
+    digest = _digest(expected_sha256, "selected_digest")
+    root = Path(repo_root).absolute()
+    parts = [*reversed(root.parents), root]
+    selected = root
+    for part in path.split("/"):
+        selected = selected / part
+        parts.append(selected)
+    before = [_identity(item, directory=index < len(parts) - 1)
+              for index, item in enumerate(parts)]
+    _need(before[-1][4] <= MAX_BYTES, "selected_file_too_large")
+    flags = os.O_RDONLY | getattr(os, "O_BINARY", 0) | getattr(os, "O_NOFOLLOW", 0)
+    try:
+        descriptor = os.open(selected, flags)
+        with os.fdopen(descriptor, "rb") as handle:
+            opened = os.fstat(handle.fileno())
+            _need((opened.st_dev, opened.st_ino, opened.st_mode, opened.st_size)
+                  == (before[-1][0], before[-1][1], before[-1][2], before[-1][4]),
+                  "selected_file_replaced")
+            raw = handle.read(MAX_BYTES + 1)
+    except OSError as exc:
+        raise SourceStateError("selected_file_unreadable") from exc
+    after = [_identity(item, directory=index < len(parts) - 1)
+             for index, item in enumerate(parts)]
+    _need(before == after and len(raw) == before[-1][4],
+          "selected_file_replaced")
+    _need(hashlib.sha256(raw).hexdigest() == digest, "selected_digest_mismatch")
+    return raw
+
+
+def _manifest_relative(manifest_path: str | Path, repo_root: Path) -> str:
+    root = Path(repo_root).absolute()
+    # Validate the supplied spelling before Path can normalize components or
+    # any lstat/open occurs. Absolute Windows paths are allowed only beneath root.
+    try:
+        supplied = os.fspath(manifest_path)
+    except TypeError as exc:
+        raise SourceStateError("invalid_manifest_argument") from exc
+    _need(type(supplied) is str and supplied and not supplied.startswith("\\\\"),
+          "invalid_manifest_argument")
+    raw = supplied.replace("\\", "/")
+    _need(not raw.startswith("//")
+          and not any(token in part.casefold()
+                      for part in raw.split("/") for token in FORBIDDEN_TOKENS),
+          "invalid_manifest_argument")
+    if re.match(r"[A-Za-z]:/", raw) or raw.startswith("/"):
+        prefix = root.as_posix().rstrip("/") + "/"
+        _need(raw.startswith(prefix), "manifest_outside_repository")
+        # Validate the exact suffix supplied by the caller before Path can
+        # collapse dot components or repeated separators.
+        return _literal_path(raw[len(prefix):])
+    _need("\\" not in supplied, "invalid_manifest_argument")
+    return _literal_path(raw)
+
+
+def load_source_state(manifest_path: str | Path, *, manifest_sha256: str,
+                      repo_root: Path = ROOT) -> dict[str, Any]:
+    """Authenticate the manifest, validate all rows, then read selected bytes."""
+    _digest(manifest_sha256, "manifest_digest")
+    relative = _manifest_relative(manifest_path, repo_root)
+    raw = read_selected_bytes(repo_root, relative, manifest_sha256)
+    manifest = _strict_json(raw)
+    state = validate_selection(manifest)
+    state["selection_path"] = str(Path(repo_root).absolute() / relative)
+    state["selection_sha256"] = manifest_sha256
+    state["selected_bytes"] = {
+        row["path"]: read_selected_bytes(repo_root, row["path"], row["sha256"])
+        for row in state["files"]
     }
-    if set(manifest) != required:
-        raise SourceStateError(
-            "source-state manifest keys must be exact; missing="
-            f"{sorted(required - set(manifest))}, extra={sorted(set(manifest) - required)}"
-        )
-    if manifest["schema_version"] != EXPECTED_SCHEMA:
-        raise SourceStateError("unexpected source-state schema version")
-    if manifest["target_python"] != "3.11":
-        raise SourceStateError("EMR4 maintained source target must remain Python 3.11")
-
-    allowed_states = manifest["allowed_states"]
-    if allowed_states != [
-        "mounted_current",
-        "mounted_default_off",
-        "accepted_unmounted",
-    ]:
-        raise SourceStateError("allowed maintained source states are not exact")
-    forbidden_tokens = manifest["forbidden_path_tokens"]
-    if not isinstance(forbidden_tokens, list) or not all(
-        isinstance(item, str) and item for item in forbidden_tokens
-    ):
-        raise SourceStateError("forbidden_path_tokens must be non-empty strings")
-    forbidden_roots = [
-        _relative_path(item) for item in manifest["forbidden_recursive_roots"]
-    ]
-
-    entries = manifest["source_entries"]
-    if not isinstance(entries, list) or not entries:
-        raise SourceStateError("source_entries must be a non-empty array")
-    selected: list[Path] = []
-    ruff_paths: list[str] = []
-    entry_paths: set[str] = set()
-    selected_paths: set[str] = set()
-
-    for entry in entries:
-        if not isinstance(entry, dict) or set(entry) != {"path", "mode", "state"}:
-            raise SourceStateError("each source entry must contain exact path/mode/state")
-        path = _relative_path(entry["path"])
-        path_text = path.as_posix()
-        if path_text in entry_paths:
-            raise SourceStateError(f"duplicate source entry: {path_text}")
-        entry_paths.add(path_text)
-        if entry["mode"] not in ENTRY_MODES:
-            raise SourceStateError(f"unsupported source-state mode: {entry['mode']!r}")
-        if entry["state"] not in allowed_states:
-            raise SourceStateError(f"unsupported maintained source state: {entry['state']!r}")
-        if _contains_forbidden_token(path, forbidden_tokens):
-            raise SourceStateError(f"forbidden source-state path token: {path_text}")
-        if entry["mode"] == "recursive" and any(
-            _is_within(root, path) or _is_within(path, root) for root in forbidden_roots
-        ):
-            raise SourceStateError(f"recursive selection reaches a closed root: {path_text}")
-
-        expanded = _expand_entry(repo_root, entry)
-        for absolute in expanded:
-            relative = absolute.relative_to(repo_root).as_posix()
-            if _contains_forbidden_token(PurePosixPath(relative), forbidden_tokens):
-                raise SourceStateError(f"expanded selection contains forbidden token: {relative}")
-            if relative in selected_paths:
-                raise SourceStateError(f"duplicate selected Python source: {relative}")
-            selected_paths.add(relative)
-            selected.append(absolute)
-        if entry["mode"] == "top_level":
-            ruff_paths.extend(
-                absolute.relative_to(repo_root).as_posix() for absolute in expanded
-            )
-        else:
-            ruff_paths.append(path_text)
-
-    verification_paths = []
-    for raw in manifest["verification_paths"]:
-        path = _relative_path(raw)
-        absolute = repo_root.joinpath(*path.parts)
-        _ensure_within_repo(absolute, repo_root)
-        if not absolute.is_file() or absolute.suffix != ".py":
-            raise SourceStateError(f"verification Python file is absent: {path.as_posix()}")
-        if _contains_forbidden_token(path, forbidden_tokens):
-            raise SourceStateError(f"verification path contains forbidden token: {path}")
-        verification_paths.append(path.as_posix())
-
-    return {
-        "schema_version": EXPECTED_SCHEMA,
-        "target_python": manifest["target_python"],
-        "source_files": sorted(selected, key=lambda item: item.as_posix()),
-        "ruff_paths": [*ruff_paths, *verification_paths],
-        "entry_count": len(entries),
-        "verification_count": len(verification_paths),
-    }
+    return state
 
 
 def require_target_runtime(target: str, *, version: tuple[int, int] | None = None) -> None:
@@ -194,46 +316,44 @@ def require_target_runtime(target: str, *, version: tuple[int, int] | None = Non
     expected = tuple(int(part) for part in target.split("."))
     if observed != expected:
         raise SourceStateError(
-            f"Python target runtime mismatch: expected {target}, observed {observed[0]}.{observed[1]}"
+            f"Python target runtime mismatch: expected {target}, observed "
+            f"{observed[0]}.{observed[1]}"
         )
 
 
 def compile_selected_sources(state: dict[str, Any]) -> None:
-    for path in state["source_files"]:
+    authenticated = state["selected_bytes"]
+    for path in state["phases"]["compile"]:
         try:
-            source = path.read_text(encoding="utf-8")
-            compile(source, str(path), "exec")
-        except (OSError, UnicodeError, SyntaxError) as exc:
-            raise SourceStateError(f"maintained Python source did not compile: {path}") from exc
+            compile(authenticated[path], path, "exec", dont_inherit=True)
+        except (KeyError, SyntaxError, ValueError) as exc:
+            raise SourceStateError(f"selected Python source did not compile: {path}") from exc
 
 
-def main() -> int:
+def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--manifest", type=Path, default=DEFAULT_MANIFEST)
+    parser.add_argument("--selection", required=True)
+    parser.add_argument("--selection-sha256", required=True)
     parser.add_argument("--require-target-runtime", action="store_true")
-    args = parser.parse_args()
+    args = parser.parse_args(argv)
     try:
-        state = load_source_state(args.manifest)
+        state = load_source_state(args.selection,
+                                  manifest_sha256=args.selection_sha256)
         if args.require_target_runtime:
             require_target_runtime(state["target_python"])
         compile_selected_sources(state)
     except SourceStateError as exc:
         print(f"[source_state_failure] {exc}", file=sys.stderr)
         return 1
-    print(
-        json.dumps(
-            {
-                "status": "passed",
-                "schema_version": state["schema_version"],
-                "target_python": state["target_python"],
-                "host_python": f"{sys.version_info.major}.{sys.version_info.minor}",
-                "source_file_count": len(state["source_files"]),
-                "verification_file_count": state["verification_count"],
-                "protected_paths_enumerated": False,
-            },
-            sort_keys=True,
-        )
-    )
+    print(json.dumps({
+        "status": "passed",
+        "schema_version": state["schema_version"],
+        "scope": state["scope"],
+        "target_python": state["target_python"],
+        "selected_compile_count": len(state["phases"]["compile"]),
+        "repository_wide": False,
+        "pending": state["completeness"]["pending"],
+    }, sort_keys=True))
     return 0
 
 
