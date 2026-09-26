@@ -3131,6 +3131,182 @@ class G2ProductionProfileSourceContractTests(unittest.TestCase):
                          "ariadne.bounded_g2_batch_binding.v10")
 
 
+class G2DependencySourceContractTests(unittest.TestCase):
+    """Pure V12 admission-format checks, unrelated to sealed holdouts."""
+
+    @staticmethod
+    def controller_sources():
+        sources = copy.deepcopy(b.G2_DEPENDENCY_PREDECESSOR["source_sha256"])
+        for path in b.G2_DEPENDENCY_CODE_PATHS:
+            sources[path] = "3" * 64
+        return sources
+
+    @staticmethod
+    def repair_binding():
+        rows = {
+            "requirements.txt": {
+                "before_sha256": b.G2_DEPENDENCY_REPAIR_PINS["requirements.txt"],
+                "after_sha256": b.G2_DEPENDENCY_REQUIREMENTS_AFTER_SHA256,
+            },
+            "tests/test_dependency_compatibility.py": {
+                "before_sha256": None, "after_sha256": "e" * 64,
+            },
+        }
+        return {"schema_version": b.G2_DEPENDENCY_BINDING_VERSION,
+                "operation_kind": "repair_g2_dependency_repair", "repair_sha256": rows}
+
+    @staticmethod
+    def maintenance_binding():
+        rows = {path: {"before_sha256": "1" * 64, "after_sha256": "2" * 64}
+                for path in b.G2_DEPENDENCY_MAINTENANCE_PATHS}
+        return {"schema_version": b.G2_DEPENDENCY_BINDING_VERSION,
+                "operation_kind": "enable_g2_dependency_repair", "repair_sha256": rows}
+
+    def assert_reason(self, reason, call):
+        with self.assertRaises(b.BoundedG1BError) as caught:
+            call()
+        self.assertEqual(caught.exception.reason_code, reason)
+
+    def build_scope(self):
+        return b.build_g2_dependency_scope(
+            "2026-09-26T04:00:00+00:00",
+            b.G2_DEPENDENCY_PREDECESSOR["commit"], self.controller_sources())
+
+    def test_v12_exact_predecessor_policy_publication_and_scope_lineage(self):
+        self.assertEqual(b.G2_DEPENDENCY_BINDING_VERSION,
+                         "ariadne.bounded_g2_batch_binding.v12")
+        self.assertEqual(b.G2_DEPENDENCY_SCOPE_VERSION,
+                         "ariadne.g2_reviewed_batch_scope.v12")
+        self.assertEqual({key: b.G2_DEPENDENCY_PREDECESSOR[key]
+                          for key in ("commit", "parent", "tree")}, {
+            "commit": "db55dc48ca128d96e70a2e6697fb297b75abba8c",
+            "parent": "ec0fecc87c169cd4fd5f2dcf2f4c028140ca178a",
+            "tree": "e497557f4f26bb8c4ffc1e8d65169530ba83ac95",
+        })
+        self.assertEqual(b.G2_DEPENDENCY_PREDECESSOR_POLICY[b.STATE],
+                         "8590911880f29cc1bddbe89fd56598e5ecd07a1dd73c7fd2d770ac3a86d8bf52")
+        self.assertEqual(b.G2_DEPENDENCY_PREDECESSOR_POLICY[b.OVERLAY],
+                         "16bb9055829b7373dd9385e2570a85b8664ab1d73a3a8a54d43533a1fa74482b")
+        self.assertEqual(b.G2_DEPENDENCY_PREDECESSOR_POLICY[b.G2_SCOPE],
+                         "d84f5baea02990ed7ebee083931af9b1e02d710f07370c4300a3da62424ec509")
+        scope = self.build_scope()
+        self.assertEqual(scope["transition_base_commit"],
+                         b.G2_DEPENDENCY_PREDECESSOR["commit"])
+        self.assertEqual(scope["published_production_profile_repair"], {
+            **{key: b.G2_DEPENDENCY_PREDECESSOR[key]
+               for key in ("commit", "parent", "tree")},
+            "acceptance": b.G2_DEPENDENCY_PUBLICATION_ACCEPTANCE,
+        })
+        self.assertEqual(scope["current_operation"]["supersedes"]["operation_id"],
+                         "g2-production-profile-repair")
+        self.assertTrue(scope["current_operation"]["supersedes"]["historical_latch_preserved"])
+
+    def test_only_six_file_maintenance_and_two_file_repair_shapes_are_valid(self):
+        self.assertEqual(b.G2_DEPENDENCY_MAINTENANCE_PATHS, {
+            b.STATE, b.OVERLAY, b.G2_SCOPE,
+            "orchestration_harness/bounded_g1b.py",
+            "orchestration_harness/raisa_policy.py",
+            "tests/test_bounded_g1b.py",
+        })
+        self.assertEqual(b.G2_DEPENDENCY_PATHS, {
+            "requirements.txt", "tests/test_dependency_compatibility.py",
+        })
+        self.assertEqual(b.G2_DEPENDENCY_ADDITIONS,
+                         {"tests/test_dependency_compatibility.py"})
+        self.assertEqual(set(b._batch_changes(self.maintenance_binding())),
+                         b.G2_DEPENDENCY_MAINTENANCE_PATHS)
+        self.assertEqual(set(b._batch_changes(self.repair_binding())),
+                         b.G2_DEPENDENCY_PATHS)
+        self.assertEqual(b.operation_effects("repair_g2_dependency_repair"),
+                         b.G2_DEPENDENCY_EFFECTS)
+
+    def test_real_profile_only_opens_dependency_effect_for_this_scope(self):
+        profile = b._g2_dependency_profile()
+        self.assertEqual(profile, rp.g2_dependency_repair_profile())
+        self.assertEqual(profile["scope_behavior"], "bounded_g2_dependency_repair")
+        self.assertEqual(profile["allowed_paths"], sorted(b.G2_DEPENDENCY_PATHS))
+        self.assertIn("dependency_change", profile["allowed_effects"])
+        self.assertNotIn("dependency_change", profile["forbidden_effects"])
+        self.assertIn("dependency_change", rp.g2_production_profile()["forbidden_effects"])
+        for effect in ("application_runtime", "provider_invocation", "integration", "deployment"):
+            self.assertNotIn(effect, profile["allowed_effects"])
+        scope = self.build_scope()
+        for field in ("execution_authorized", "g2_complete", "feature_work_eligible",
+                      "operational_multi_task_control_accepted"):
+            self.assertIs(scope[field], False)
+        self.assertEqual(scope["dependency_invariant"]["requirements_after_sha256"],
+                         b.G2_DEPENDENCY_REQUIREMENTS_AFTER_SHA256)
+        self.assertEqual(scope["repair_preimage_sha256"]["requirements.txt"],
+                         b.G2_DEPENDENCY_REQUIREMENTS_COMMITTED_BEFORE_SHA256)
+        self.assertEqual(scope["dependency_invariant"]["requirements_worktree_before_sha256"],
+                         b.G2_DEPENDENCY_REQUIREMENTS_WORKTREE_BEFORE_SHA256)
+
+    def test_committed_and_worktree_preimages_are_distinct_and_semantic_drift_rejected(self):
+        self.assertNotEqual(b.G2_DEPENDENCY_REQUIREMENTS_COMMITTED_BEFORE_SHA256,
+                            b.G2_DEPENDENCY_REQUIREMENTS_WORKTREE_BEFORE_SHA256)
+        binding = self.repair_binding()
+        binding["repair_sha256"]["requirements.txt"]["before_sha256"] = (
+            b.G2_DEPENDENCY_REQUIREMENTS_WORKTREE_BEFORE_SHA256)
+        self.assert_reason("bounded_g2_dependency_repair_preimage",
+                           lambda: b._batch_changes(binding))
+        binding = self.repair_binding()
+        binding["repair_sha256"]["requirements.txt"]["before_sha256"] = (
+            b._sha(b"cryptography==47.0.1\n"))
+        self.assert_reason("bounded_g2_dependency_repair_preimage",
+                           lambda: b._batch_changes(binding))
+
+    def test_schema_paths_preimage_candidate_and_addition_aliases_fail_closed(self):
+        binding = self.repair_binding()
+        binding["operation_kind"] = "repair_g2_production_profile"
+        self.assert_reason("bounded_g2_batch_binding_version",
+                           lambda: b._batch_changes(binding))
+        binding = self.repair_binding()
+        binding["repair_sha256"].pop("requirements.txt")
+        self.assert_reason("bounded_g2_batch_changes_invalid",
+                           lambda: b._batch_changes(binding))
+        binding = self.repair_binding()
+        binding["repair_sha256"]["app/unreviewed.py"] = binding["repair_sha256"].pop("requirements.txt")
+        self.assert_reason("bounded_g2_batch_path_not_allowed",
+                           lambda: b._batch_changes(binding))
+        binding = self.repair_binding()
+        binding["repair_sha256"]["requirements.txt"]["before_sha256"] = "0" * 64
+        self.assert_reason("bounded_g2_dependency_repair_preimage",
+                           lambda: b._batch_changes(binding))
+        binding = self.repair_binding()
+        binding["repair_sha256"]["requirements.txt"]["after_sha256"] = "0" * 64
+        self.assert_reason("bounded_g2_dependency_requirements_candidate",
+                           lambda: b._batch_changes(binding))
+        binding = self.repair_binding()
+        binding["repair_sha256"]["tests/test_dependency_compatibility.py"]["before_sha256"] = "0" * 64
+        self.assert_reason("bounded_g2_dependency_repair_preimage",
+                           lambda: b._batch_changes(binding))
+
+    def test_wrong_base_source_and_scope_authority_fail_closed(self):
+        self.assert_reason("bounded_g2_dependency_transition_base", lambda:
+            b.build_g2_dependency_scope(
+                "2026-09-26T04:00:00+00:00", "0" * 40, self.controller_sources()))
+        sources = self.controller_sources()
+        sources["orchestration_harness/configuration_core.py"] = "0" * 64
+        self.assert_reason("bounded_g2_batch_unchanged_controller_component", lambda:
+            b.build_g2_dependency_scope(
+                "2026-09-26T04:00:00+00:00",
+                b.G2_DEPENDENCY_PREDECESSOR["commit"], sources))
+        scope = self.build_scope()
+        for mutate in (
+            lambda s: s.update(execution_authorized=True),
+            lambda s: s["allowed_effects"].append("provider_invocation"),
+            lambda s: s["dependency_invariant"].update(
+                requirements_worktree_before_sha256="0" * 64),
+            lambda s: s["allowed_paths"].append("app/unreviewed.py"),
+            lambda s: s["current_operation"]["supersedes"].update(historical_latch_preserved=False),
+            lambda s: s.update(maximum_changed_files=3),
+        ):
+            changed = copy.deepcopy(scope)
+            mutate(changed)
+            self.assert_reason("bounded_g2_batch_scope_invalid",
+                               lambda: b._validate_g2_batch_scope(changed))
+
+
 class G2MigrationGuardFixture(G2ClinicalFixture):
     """Exact captured bytes with test-only V9 publication identity substitution.
 
@@ -3548,6 +3724,146 @@ class G2ProductionProfileFixture(G2AppointmentFixture):
         self.q.update(
             operation_id="authored-g2-production-profile-repair",
             operation_kind="repair_g2_production_profile",
+            phase="development", base_commit=base, base_tree=base_tree,
+            expected_head=base, expected_index_tree=tree, candidate_tree=tree,
+            activation_commit=self.activation,
+            installed_controller=copy.deepcopy(self.batch_controller),
+            repair_sha256=rows,
+        )
+        self.q["payload_sha256"] = {
+            path: b._sha((self.root / path).read_bytes())
+            for path in b.batch_input_paths(self.q)
+        }
+
+
+class G2DependencyFixture(G2ProductionProfileFixture):
+    """Exact current policy/source and requirements in an authored Git history.
+
+    Only commit identity is substituted. The earlier capsule remains unchanged;
+    this test does not claim the synthetic tree is the published repository tree.
+    """
+
+    def __init__(self, assets, stack):
+        super().__init__(assets, stack)
+        try:
+            self._prepare_dependency(assets, stack)
+        except BaseException:
+            self.close()
+            raise
+
+    def _prepare_dependency(self, assets, stack):
+        self.dependency_previous_policy = {
+            path: (assets / "g2-dependency-predecessor-policy" / path).read_bytes()
+            for path in b.G2_DEPENDENCY_PREDECESSOR_POLICY
+        }
+        self.dependency_previous_source = {
+            path: (assets / "g2-dependency-predecessor-source" / path).read_bytes()
+            for path in b.CONTROLLER_PATHS
+        }
+        self.dependency_worktree_before = (
+            assets / "g2-dependency-repair-before" / "requirements.txt"
+        ).read_bytes()
+        if b._sha(self.dependency_worktree_before) != b.G2_DEPENDENCY_REQUIREMENTS_WORKTREE_BEFORE_SHA256:
+            raise AssertionError("V12 fixture requires exact physical requirements preimage")
+        self.dependency_repair_before = {
+            "requirements.txt": self.dependency_worktree_before.replace(b"\r\n", b"\n"),
+        }
+        self.dependency_repair_after = (
+            assets / "g2-dependency-repair-after" / "requirements.txt"
+        ).read_bytes()
+        pins = {
+            **b.G2_DEPENDENCY_PREDECESSOR_POLICY,
+            **b.G2_DEPENDENCY_PREDECESSOR["source_sha256"],
+            "requirements.txt": b.G2_DEPENDENCY_REPAIR_PINS["requirements.txt"],
+        }
+        predecessor = {
+            **self.dependency_previous_policy,
+            **self.dependency_previous_source,
+            **self.dependency_repair_before,
+        }
+        if any(b._sha(raw) != pins[path] for path, raw in predecessor.items()):
+            raise AssertionError("V12 fixture requires exact current predecessor bytes")
+        if b._sha(self.dependency_repair_after) != b.G2_DEPENDENCY_REQUIREMENTS_AFTER_SHA256:
+            raise AssertionError("V12 fixture requires exact reviewed requirements candidate")
+        if (self.root / "tests/test_dependency_compatibility.py").exists():
+            raise AssertionError("V12 fixture requires absent compatibility-test addition")
+        # Retain a visible, inert product-test predecessor in the synthetic tree.
+        self.write("tests/test_production_profile.py",
+                   b'"""Authored prior production-profile test; never imported."""\n')
+        for path, raw in predecessor.items():
+            self.write(path, raw)
+        self.git("add", "--", *sorted({*predecessor, "tests/test_production_profile.py"}))
+        parent = self.git("rev-parse", "HEAD")
+        tree = self.git("write-tree")
+        base = self.git("commit-tree", tree, "-p", parent,
+                        "-m", "authored exact current dependency predecessor inputs")
+        self.git("update-ref", "--no-deref", "HEAD", base, parent)
+        # The commit contains LF bytes while the exact physical preimage is CRLF.
+        self.write("requirements.txt", self.dependency_worktree_before)
+        publication = copy.deepcopy(b.G2_DEPENDENCY_PREDECESSOR)
+        publication.update(commit=base, parent=parent, tree=tree)
+        stack.enter_context(patch.object(b, "G2_DEPENDENCY_PREDECESSOR", publication))
+        self.base = base
+        sources = {
+            path: b._sha((self.source / path).read_bytes())
+            for path in b.CONTROLLER_PATHS
+        }
+        self.batch_scope = b.build_g2_dependency_scope(
+            "2026-09-26T04:00:00+00:00", base, sources)
+        after = b.build_g2_dependency_transition(
+            {path: self.dependency_previous_policy[path]
+             for path in b.G2_BATCH_CONTROL_PATHS}, self.batch_scope)
+        after.update({
+            path: (self.source / path).read_bytes()
+            for path in b.G2_DEPENDENCY_CODE_PATHS
+        })
+        rows = {
+            path: {"before_sha256": b._sha((self.root / path).read_bytes()),
+                   "after_sha256": b._sha(raw)}
+            for path, raw in after.items()
+        }
+        for path, raw in after.items():
+            self.write(path, raw)
+        self.git("add", "--", *sorted(after))
+        candidate = self.git("write-tree")
+        self.q.update(
+            schema_version=b.G2_DEPENDENCY_BINDING_VERSION,
+            operation_id="authored-g2-dependency-enablement",
+            operation_kind="enable_g2_dependency_repair",
+            phase="development", base_commit=base, base_tree=tree,
+            expected_head=base, expected_index_tree=candidate,
+            candidate_tree=candidate, activation_commit=base,
+            installed_controller=copy.deepcopy(publication), repair_sha256=rows,
+            source_sha256={
+                path: b._sha((self.source / path).read_bytes())
+                for path in b.SOURCE_PATHS
+            },
+        )
+        self.q["payload_sha256"] = {
+            path: b._sha((self.root / path).read_bytes())
+            for path in b.batch_input_paths(self.q)
+        }
+
+    def prepare_dependency(self):
+        base = self.git("rev-parse", "HEAD")
+        base_tree = self.git("rev-parse", "HEAD^{tree}")
+        changes = {
+            "requirements.txt": self.dependency_repair_after,
+            "tests/test_dependency_compatibility.py":
+                b'"""Authored isolated compatibility addition; never imported."""\n',
+        }
+        rows = {
+            path: {"before_sha256": b.G2_DEPENDENCY_REPAIR_PINS[path],
+                   "after_sha256": b._sha(raw)}
+            for path, raw in changes.items()
+        }
+        for path, raw in changes.items():
+            self.write(path, raw)
+        self.git("add", "--", *sorted(changes))
+        tree = self.git("write-tree")
+        self.q.update(
+            operation_id="authored-g2-dependency-repair",
+            operation_kind="repair_g2_dependency_repair",
             phase="development", base_commit=base, base_tree=base_tree,
             expected_head=base, expected_index_tree=tree, candidate_tree=tree,
             activation_commit=self.activation,
@@ -6776,13 +7092,170 @@ def build_integration_suite(assets: Path) -> unittest.TestSuite:
             self.assert_denied("bounded_g2_production_profile_addition_already_exists")
 
 
+    class G2DependencyAdmissionTests(unittest.TestCase):
+        def setUp(self):
+            self.stack = ExitStack()
+            self.addCleanup(self.stack.close)
+            self.fx = G2DependencyFixture(assets, self.stack)
+            self.addCleanup(self.fx.close)
+            self.stack.enter_context(no_legacy_observation())
+            self.stack.enter_context(self.fx.component_history())
+
+        def observed_paths(self):
+            paths = b.G2_DEPENDENCY_MAINTENANCE_PATHS | b.G2_DEPENDENCY_PATHS
+            return {path: ((self.fx.root / path).read_bytes()
+                           if (self.fx.root / path).exists() else None)
+                    for path in paths}
+
+        def assert_admitted(self):
+            f = self.fx
+            context = f.context()
+            entrypoint = ("task_branch_commit" if f.q["phase"] == "development"
+                          else "task_branch_push")
+            for decision in (
+                pa.evaluate_programme_operation_admission(
+                    repo_root=f.root, manifest=f.manifest(context),
+                    entrypoint=entrypoint, phase=f.q["phase"], bounded_context=context),
+                pg.evaluate_pinned_programme_operation(
+                    gatekeeper_root=f.source, target_repo_root=f.root,
+                    manifest=f.manifest(context), entrypoint=entrypoint,
+                    phase=f.q["phase"], bounded_context=context),
+            ):
+                self.assertTrue(decision.policy_admitted, decision.reason_codes)
+                self.assertFalse(decision.execution_authorized)
+                self.assertEqual(decision.candidate_tree, f.q["candidate_tree"])
+
+        def assert_denied(self, reason):
+            before = self.observed_paths()
+            decision = self.fx.decision()
+            self.assertEqual(decision.reason_codes, (reason,))
+            self.assertFalse(decision.policy_admitted)
+            self.assertFalse(decision.execution_authorized)
+            self.assertEqual(self.observed_paths(), before)
+
+        def test_valid_enable_and_repair_compose_with_real_validator_and_loader(self):
+            f = self.fx
+            committed = b.trusted_git.run_git_bytes(
+                f.root, "cat-file", "blob", f.base + ":requirements.txt")
+            physical = (f.root / "requirements.txt").read_bytes()
+            self.assertEqual(b._sha(committed),
+                             b.G2_DEPENDENCY_REQUIREMENTS_COMMITTED_BEFORE_SHA256)
+            self.assertEqual(b._sha(physical),
+                             b.G2_DEPENDENCY_REQUIREMENTS_WORKTREE_BEFORE_SHA256)
+            self.assertEqual(physical.replace(b"\r\n", b"\n"), committed)
+            self.assertEqual(set(f.q["repair_sha256"]),
+                             b.G2_DEPENDENCY_MAINTENANCE_PATHS)
+            self.assertEqual(b._g2_dependency_profile(), rp.g2_dependency_repair_profile())
+            self.assert_admitted()
+            f.activate_batches()
+            self.assert_admitted()
+            f.prepare_dependency()
+            self.assertEqual(set(f.q["repair_sha256"]), b.G2_DEPENDENCY_PATHS)
+            self.assertEqual(
+                f.q["repair_sha256"]["requirements.txt"]["after_sha256"],
+                b.G2_DEPENDENCY_REQUIREMENTS_AFTER_SHA256)
+            self.assert_admitted()
+            report = pf.build_report(f.root, f.manifest(f.context()),
+                                     bounded_context=f.context())
+            self.assertEqual(report["status"], "policy_eligible")
+            self.assertIs(report["read_only"], True)
+            self.assertIs(report["execution_authorized"], False)
+            f.commit_current()
+            self.assert_admitted()
+
+        def test_real_configuration_validator_rejects_broader_dependency_profile(self):
+            f = self.fx
+            documents = {
+                Path(path).name: (f.root / path).read_bytes()
+                for path in b.CONFIGURATION_PATHS
+            }
+            expected = {name: b._sha(raw) for name, raw in documents.items()}
+            state = b._json((f.root / b.STATE).read_bytes())
+            agents = (f.root / b.AGENTS).read_text(encoding="utf-8")
+            rp.validate_recovery_configuration(
+                documents=documents, expected_sha256=expected,
+                agents_text=agents, state=state)
+            overlay = b._document((f.root / b.OVERLAY).read_bytes(), b.OVERLAY)
+            overlay["profiles"][b.G2_PROFILE]["allowed_paths"].append("app/unreviewed.py")
+            malformed = (json.dumps(overlay, indent=2, ensure_ascii=False) + "\n").encode()
+            documents[Path(b.OVERLAY).name] = malformed
+            expected[Path(b.OVERLAY).name] = b._sha(malformed)
+            with self.assertRaises(rp.RaisaPolicyError) as caught:
+                rp.validate_recovery_configuration(
+                    documents=documents, expected_sha256=expected,
+                    agents_text=agents, state=state)
+            self.assertEqual(caught.exception.reason_code,
+                             "configuration_g2_repair_profile_invalid")
+
+        def test_binding_kind_and_unreviewed_path_have_targeted_rejections(self):
+            f = self.fx
+            original = copy.deepcopy(f.q)
+            f.q["operation_kind"] = "enable_g2_production_profile"
+            self.assert_denied("bounded_g2_batch_binding_version")
+            f.q = copy.deepcopy(original)
+            f.q["repair_sha256"]["app/unreviewed.py"] = f.q["repair_sha256"].pop(b.STATE)
+            self.assert_denied("bounded_g2_batch_path_not_allowed")
+
+        def test_wrong_requirements_preimage_and_candidate_are_rejected(self):
+            f = self.fx
+            f.activate_batches()
+            f.prepare_dependency()
+            f.q["repair_sha256"]["requirements.txt"]["before_sha256"] = "0" * 64
+            self.assert_denied("bounded_g2_dependency_repair_preimage")
+            f.q["repair_sha256"]["requirements.txt"]["before_sha256"] = (
+                b.G2_DEPENDENCY_REPAIR_PINS["requirements.txt"])
+            f.q["repair_sha256"]["requirements.txt"]["after_sha256"] = "0" * 64
+            self.assert_denied("bounded_g2_dependency_requirements_candidate")
+
+        def test_committed_requirements_semantic_drift_rejected_before_effect(self):
+            f = self.fx
+            original = b.trusted_git.run_git_bytes
+            committed = original(f.root, "cat-file", "blob",
+                                 f.base + ":requirements.txt")
+            self.assertEqual(committed.count(b"cryptography==48.0.1"), 1)
+            changed = committed.replace(b"cryptography==48.0.1",
+                                        b"cryptography==47.0.1")
+
+            def drift(root, *args, **kwargs):
+                if root == f.root and args == (
+                        "cat-file", "blob", f.base + ":requirements.txt"):
+                    return changed
+                return original(root, *args, **kwargs)
+
+            with patch.object(b.trusted_git, "run_git_bytes", side_effect=drift):
+                self.assert_denied("bounded_g2_dependency_predecessor_bytes_changed")
+
+        def test_preexisting_fixed_compatibility_addition_is_rejected(self):
+            f = self.fx
+            f.activate_batches()
+            f.add_preexisting_addition_base("tests/test_dependency_compatibility.py")
+            f.prepare_dependency()
+            self.assert_denied("bounded_g2_dependency_addition_already_exists")
+
+        def test_source_digest_and_scope_authority_drift_are_rejected(self):
+            f = self.fx
+            source_path = "orchestration_harness/raisa_policy.py"
+            original = f.q["source_sha256"][source_path]
+            f.q["source_sha256"][source_path] = "0" * 64
+            self.assert_denied("bounded_g1b_input_digest_changed")
+            f.q["source_sha256"][source_path] = original
+            scope = b._json((f.root / b.G2_SCOPE).read_bytes())
+            scope["current_operation"]["supersedes"]["historical_latch_preserved"] = False
+            with self.assertRaises(b.BoundedG1BError) as caught:
+                b._validate_g2_batch_scope(scope)
+            self.assertEqual(caught.exception.reason_code,
+                             "bounded_g2_batch_scope_invalid")
+
+
     suite = unittest.defaultTestLoader.loadTestsFromTestCase(ClosedRequestTests)
     suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(G2MigrationGuardSourceContractTests))
     suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(G2AppointmentConcurrencySourceContractTests))
     suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(G2ProductionProfileSourceContractTests))
+    suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(G2DependencySourceContractTests))
     suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(G2MigrationGuardAdmissionTests))
     suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(G2AppointmentConcurrencyAdmissionTests))
     suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(G2ProductionProfileAdmissionTests))
+    suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(G2DependencyAdmissionTests))
     suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(G2AudioSourceContractTests))
     suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(G2PatientSourceContractTests))
     suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(G2AtomicitySourceContractTests))

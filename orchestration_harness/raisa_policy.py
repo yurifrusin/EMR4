@@ -1831,6 +1831,24 @@ def g2_production_profile() -> dict:
     return profile
 
 
+G2_DEPENDENCY_REPAIR_PATHS = (
+    'requirements.txt',
+    'tests/test_dependency_compatibility.py',
+)
+G2_DEPENDENCY_REPAIR_SCOPE_BEHAVIOR = 'bounded_g2_dependency_repair'
+
+
+def g2_dependency_repair_profile() -> dict:
+    """Only the exact dependency repair can use the dependency-change effect."""
+    profile = g2_batch_profile()
+    profile.update(scope_behavior=G2_DEPENDENCY_REPAIR_SCOPE_BEHAVIOR,
+                   allowed_paths=sorted(G2_DEPENDENCY_REPAIR_PATHS))
+    profile['allowed_effects'] = sorted({*profile['allowed_effects'], 'dependency_change'})
+    profile['forbidden_effects'] = [effect for effect in profile['forbidden_effects']
+                                    if effect != 'dependency_change']
+    return profile
+
+
 def g2_audio_privacy_profile() -> dict:
     """Only the four reviewed source paths; application and test runtimes stay separate."""
     profile = g2_batch_profile()
@@ -2240,7 +2258,9 @@ def validate_recovery_configuration(*, documents: dict[str, bytes], expected_sha
         raise RaisaPolicyError("configuration_assessment_profile_invalid")
     if state["active_profile"] == G2_PROFILE:
         profile = overlay["profiles"][G2_PROFILE]
-        expected = (g2_production_profile()
+        expected = (g2_dependency_repair_profile()
+                    if profile["scope_behavior"] == G2_DEPENDENCY_REPAIR_SCOPE_BEHAVIOR
+                    else g2_production_profile()
                     if profile["scope_behavior"] == G2_PRODUCTION_PROFILE_SCOPE_BEHAVIOR
                     else g2_appointment_concurrency_profile()
                     if profile["scope_behavior"] == G2_APPOINTMENT_CONCURRENCY_SCOPE_BEHAVIOR
