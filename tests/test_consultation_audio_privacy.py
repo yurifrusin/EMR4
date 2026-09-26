@@ -45,17 +45,165 @@ def response(*, content, status_code=200):
     return SimpleNamespace(content=content, status_code=status_code)
 
 
-def test_static_mount_is_removed_and_taskpane_is_retained():
-    tree = ast.parse((ROOT / "app/main.py").read_text(encoding="utf-8"))
-    mounts = []
-    for node in tree.body:
-        if isinstance(node, ast.Expr) and isinstance(node.value, ast.Call):
-            call = node.value
-            if isinstance(call.func, ast.Attribute) and call.func.attr == "mount":
-                mounts.append(ast.literal_eval(call.args[0]))
-    assert "/static" not in mounts
-    assert "/taskpane" in mounts
+def _assert_main_mount_structure(source):
+    """Whole-module serving-structure companion to the ASGI serving proofs.
+
+    Replaces the former top-level-only mount scan: a conditional, nested, or
+    otherwise non-top-level public static/audio mount must not escape
+    detection. Actual negative and positive serving behavior is proven by
+    ASGI requests in tests/test_production_profile.py; this test proves the
+    static structure: no mount exposes audio/upload/recording storage, and
+    the sole taskpane mount is structurally guarded by canonical dev
+    selection with the repository-derived source path.
+    """
+    tree = ast.parse(source)
+
+    def _is_mount_call(node):
+        return (
+            isinstance(node, ast.Call)
+            and isinstance(node.func, ast.Attribute)
+            and node.func.attr == "mount"
+        )
+
+    # Every .mount() call anywhere in the module: top level, nested, or
+    # conditional. mounts hidden inside a branch are collected as well.
+    mount_calls = [node for node in ast.walk(tree) if _is_mount_call(node)]
+    assert len(mount_calls) == 1, (
+        f"expected exactly one static mount, found {len(mount_calls)}"
+    )
+    assert all(call.args for call in mount_calls), "mount requires a path argument"
+    mount_paths = [ast.literal_eval(call.args[0]) for call in mount_calls]
+    assert "/static" not in mount_paths
+    assert mount_paths == ["/taskpane"], (
+        f"expected the sole mount to be /taskpane, found {mount_paths!r}"
+    )
+
+    # Preserved prohibition: the legacy static/audio literal must not appear
+    # anywhere in the serving module.
     assert not any(isinstance(n, ast.Constant) and n.value == "static/audio" for n in ast.walk(tree))
+
+    # No static mount anywhere exposes consultation audio, upload, or
+    # recording storage: neither the mount path nor the served directory may
+    # carry storage-like literals.
+    forbidden = ("audio", "upload", "recording")
+    for call in mount_calls:
+        literals = [
+            node.value for node in ast.walk(call)
+            if isinstance(node, ast.Constant) and isinstance(node.value, str)
+        ]
+        for literal in literals:
+            assert not any(mark in literal.lower() for mark in forbidden), (
+                f"static mount exposes storage-like literal {literal!r}"
+            )
+
+    # Canonical dev selection: exactly one
+    # `is_dev = settings.environment == "dev"` at module level.
+    def _is_canonical_dev_selection(node):
+        return (
+            isinstance(node, ast.Assign)
+            and len(node.targets) == 1
+            and isinstance(node.targets[0], ast.Name)
+            and node.targets[0].id == "is_dev"
+            and isinstance(node.value, ast.Compare)
+            and len(node.value.ops) == 1
+            and isinstance(node.value.ops[0], ast.Eq)
+            and isinstance(node.value.left, ast.Attribute)
+            and node.value.left.attr == "environment"
+            and isinstance(node.value.left.value, ast.Name)
+            and node.value.left.value.id == "settings"
+            and len(node.value.comparators) == 1
+            and isinstance(node.value.comparators[0], ast.Constant)
+            and node.value.comparators[0].value == "dev"
+        )
+
+    assert sum(1 for node in tree.body if _is_canonical_dev_selection(node)) == 1, (
+        'expected exactly one canonical is_dev = settings.environment == "dev" selection'
+    )
+    writes = [
+        node for node in ast.walk(tree)
+        if isinstance(node, ast.Name) and node.id == "is_dev"
+        and isinstance(node.ctx, (ast.Store, ast.Del))
+    ]
+    assert len(writes) == 1, "is_dev must have no later or alternative writes"
+
+    # The sole mount must sit inside `if is_dev:` with no fallback branch
+    # that could serve statically off-dev.
+    dev_guards = [
+        node for node in ast.walk(tree)
+        if isinstance(node, ast.If)
+        and isinstance(node.test, ast.Name)
+        and node.test.id == "is_dev"
+    ]
+    assert dev_guards, "expected the static mount to sit inside `if is_dev:`"
+    guarded_mount_ids = set()
+    for guard in dev_guards:
+        assert guard.orelse == [], (
+            "dev serving guard must not have a fallback branch"
+        )
+        guarded_mount_ids.update(
+            id(node) for node in ast.walk(guard) if _is_mount_call(node)
+        )
+    assert {id(call) for call in mount_calls} <= guarded_mount_ids, (
+        "every static mount must be inside `if is_dev:`"
+    )
+
+    # The /taskpane mount serves StaticFiles from the repository-derived
+    # source path REPO_ROOT / "EMR4 Sidebar" / "src" / "taskpane" with
+    # REPO_ROOT imported from app.config (no ambient working directory).
+    static_files = mount_calls[0].args[1]
+    assert (
+        isinstance(static_files, ast.Call)
+        and isinstance(static_files.func, ast.Name)
+        and static_files.func.id == "StaticFiles"
+    ), "expected the /taskpane mount to serve StaticFiles"
+    directory_args = [kw for kw in static_files.keywords if kw.arg == "directory"]
+    assert len(directory_args) == 1, "expected exactly one directory= argument"
+    directory_expr = directory_args[0].value
+    expected = ast.parse('str(REPO_ROOT / "EMR4 Sidebar" / "src" / "taskpane")', mode="eval").body
+    assert ast.dump(directory_expr, include_attributes=False) == ast.dump(expected, include_attributes=False), (
+        "taskpane directory must use the ordered repository-derived path"
+    )
+    assert any(
+        isinstance(node, ast.ImportFrom)
+        and node.module == "app.config"
+        and any(alias.name == "REPO_ROOT" for alias in node.names)
+        for node in ast.walk(tree)
+    ), "expected REPO_ROOT to come from app.config"
+
+
+def test_no_static_audio_storage_mount_and_taskpane_is_dev_guarded():
+    _assert_main_mount_structure((ROOT / "app/main.py").read_text(encoding="utf-8"))
+
+
+def test_mount_structure_oracle_rejects_later_dev_rebinding():
+    source = (ROOT / "app/main.py").read_text(encoding="utf-8")
+    assert 'is_dev = settings.environment == "dev"' in source
+    counterexample = source.replace(
+        'is_dev = settings.environment == "dev"',
+        'is_dev = settings.environment == "dev"\nis_dev = True',
+        1,
+    )
+    try:
+        _assert_main_mount_structure(counterexample)
+    except AssertionError as exc:
+        assert "is_dev must have no later or alternative writes" in str(exc)
+    else:
+        raise AssertionError("structural oracle accepted later is_dev rebinding")
+
+
+def test_mount_structure_oracle_rejects_reordered_taskpane_path():
+    source = (ROOT / "app/main.py").read_text(encoding="utf-8")
+    approved = 'REPO_ROOT / "EMR4 Sidebar" / "src" / "taskpane"'
+    assert approved in source
+    counterexample = source.replace(
+        approved, 'REPO_ROOT / "src" / "EMR4 Sidebar" / "taskpane"', 1
+    )
+    try:
+        _assert_main_mount_structure(counterexample)
+    except AssertionError as exc:
+        assert "ordered repository-derived path" in str(exc)
+    else:
+        raise AssertionError("structural oracle accepted reordered taskpane path")
 
 
 def test_retained_router_annotations_have_their_imports():

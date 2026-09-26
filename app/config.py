@@ -1,8 +1,11 @@
+import ipaddress
 import json
+import re
 from pathlib import Path
+from urllib.parse import urlsplit
 
 from pydantic_settings import BaseSettings
-from pydantic import model_validator
+from pydantic import Field, field_validator, model_validator
 from typing import Literal, Optional
 
 INSECURE_DEFAULT_SECRET = "change-me-in-production"
@@ -14,6 +17,27 @@ LIVE_BERNIE_INTERPRETER_PROVIDERS = {
     "vertex",
     "vertex_gemini",
 }
+
+# Canonical deployment profiles. The configured environment string is
+# normalized once (trim/lowercase) into exactly one of these values; blank,
+# unknown, and non-string values fail closed instead of falling through to
+# either dev or production-like behavior.
+CANONICAL_ENVIRONMENTS = ("dev", "staging", "production")
+
+# Preserved development CORS defaults. These apply only when the canonical
+# profile is dev and no explicit origin list was supplied.
+DEV_DEFAULT_CORS_ORIGINS = [
+    "https://yurifrusin.github.io",
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+]
+
+# Hosts permitted to use plain-http origins in development. These are the
+# loopback/localhost development forms; every other dev origin must be https.
+DEV_HTTP_HOSTS = frozenset({"localhost", "127.0.0.1", "[::1]"})
+
+_HOST_LABEL = r"[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?"
+_HOSTNAME_RE = re.compile(rf"(?:{_HOST_LABEL}\.)*{_HOST_LABEL}\.?")
 
 
 def assert_bernie_provider_allowed_by_runtime_gate(
@@ -51,8 +75,136 @@ def assert_bernie_provider_allowed_by_runtime_gate(
         )
 
 
+def _validate_dev_origin(origin: str) -> str:
+    """Validate one explicit development origin for credentialed CORS.
+
+    Returns the canonical browser-origin string used by the effective CORS
+    allow-list and duplicate detection. Raises ValueError for anything but a bare
+    scheme://host[:port] origin acceptable in development.
+    """
+    if not isinstance(origin, str):
+        raise ValueError(
+            "CORS origins must be strings, "
+            f"got {type(origin).__name__}: {origin!r}."
+        )
+    if origin == "" or origin.strip() != origin or any(ch.isspace() for ch in origin):
+        raise ValueError(
+            f"CORS origin must not be blank or contain whitespace: {origin!r}."
+        )
+    if "*" in origin:
+        raise ValueError(
+            "CORS origin must not contain a wildcard "
+            f"(allow_credentials=True forbids '*'): {origin!r}."
+        )
+    # urlsplit removes some leading controls and does not preserve the
+    # distinction between an absent and an empty query/fragment. Reject on
+    # the raw string before parsing so validation cannot erase bad input.
+    if any(ord(ch) < 32 or ord(ch) == 127 for ch in origin) or "?" in origin or "#" in origin or "\\" in origin:
+        raise ValueError(f"CORS origin contains a control or delimiter: {origin!r}.")
+    try:
+        parts = urlsplit(origin)
+    except ValueError as exc:
+        raise ValueError(f"CORS origin is malformed: {origin!r}.") from exc
+    scheme = parts.scheme.lower()
+    if scheme not in ("http", "https"):
+        raise ValueError(
+            "CORS origin must use the http or https scheme "
+            f"with an explicit host: {origin!r}."
+        )
+    if not parts.netloc or "@" in parts.netloc or parts.netloc.endswith(":"):
+        raise ValueError(
+            "CORS origin must be a bare scheme://host[:port] "
+            f"with no userinfo: {origin!r}."
+        )
+    if parts.path or parts.query or parts.fragment:
+        raise ValueError(
+            "CORS origin must not include a path, query, or fragment "
+            f"(including a trailing slash): {origin!r}."
+        )
+    bracketed = "[" in parts.netloc or "]" in parts.netloc
+    if bracketed and re.fullmatch(r"\[[0-9A-Fa-f:.]+\](?::[0-9]+)?", parts.netloc) is None:
+        raise ValueError(f"CORS origin bracketed host is malformed: {origin!r}.")
+    host = parts.hostname or ""
+    if not host:
+        raise ValueError(f"CORS origin must include a host: {origin!r}.")
+    try:
+        address = ipaddress.ip_address(host)
+    except ValueError:
+        if bracketed:
+            raise ValueError(f"CORS origin bracketed host must be IPv6: {origin!r}.")
+        if (_HOSTNAME_RE.fullmatch(host) is None or host.endswith(".")
+                or host.rsplit(".", 1)[-1].isdigit()
+                or any(label.lower().startswith("0x") for label in host.split("."))):
+            raise ValueError(f"CORS origin host is malformed or ambiguous: {origin!r}.")
+        canonical_host = host.lower()
+    else:
+        if isinstance(address, ipaddress.IPv6Address):
+            if not parts.netloc.startswith("[") or "%" in parts.netloc:
+                raise ValueError(f"CORS origin IPv6 host is malformed: {origin!r}.")
+            canonical_host = f"[{address.compressed}]"
+        else:
+            if bracketed:
+                raise ValueError(f"CORS origin bracketed host must be IPv6: {origin!r}.")
+            canonical_host = str(address)
+    try:
+        port = parts.port
+    except ValueError as exc:
+        raise ValueError(f"CORS origin port is malformed: {origin!r}.") from exc
+    if port is not None and (port < 1 or port > 65535):
+        raise ValueError(f"CORS origin port is malformed: {origin!r}.")
+    if scheme == "http" and canonical_host not in DEV_HTTP_HOSTS:
+        raise ValueError(
+            "http CORS origins are limited to the loopback/localhost "
+            f"development hosts; use https otherwise: {origin!r}."
+        )
+    default_port = 80 if scheme == "http" else 443
+    suffix = f":{port}" if port is not None and port != default_port else ""
+    return f"{scheme}://{canonical_host}{suffix}"
+
+
+def _resolve_cors_origins(
+    environment: str, configured: Optional[list[str]]
+) -> list[str]:
+    """Resolve the effective CORS allow-list for a canonical profile.
+
+    Omitted input (None) resolves to the preserved dev defaults in
+    development and to [] in staging/production. An explicit empty list is
+    accepted in every profile. An explicit nonempty dev list is validated
+    and stored in canonical browser-origin form; any nonempty staging/production list
+    is rejected. Nothing is silently discarded.
+    """
+    if configured is None:
+        if environment == "dev":
+            return list(DEV_DEFAULT_CORS_ORIGINS)
+        return []
+    if environment != "dev":
+        if len(configured) == 0:
+            return []
+        raise ValueError(
+            "The staging/production CORS allow-list is always empty; an "
+            "explicit nonempty cors_origins list is rejected "
+            f"(got {configured!r}). A nonempty non-development origin "
+            "requires a separately reviewed successor."
+        )
+    seen: set[str] = set()
+    effective = []
+    for origin in configured:
+        canonical = _validate_dev_origin(origin)
+        if canonical in seen:
+            raise ValueError(
+                "Duplicate CORS origin after canonical "
+                f"scheme/host comparison: {origin!r}."
+            )
+        seen.add(canonical)
+        effective.append(canonical)
+    return effective
+
+
 class Settings(BaseSettings):
-    # "dev" | "staging" | "production" — gates the fail-closed secret check below
+    # Canonical deployment profile: "dev" | "staging" | "production".
+    # Normalized once (trim/lowercase) by _canonicalize_environment; blank,
+    # unknown, and non-string values fail closed. Gates the fail-closed
+    # secret check below.
     environment: str = "dev"
 
     database_url: str = "postgresql://postgres:postgres@127.0.0.1:5434/gp_pms_dev"
@@ -64,13 +216,12 @@ class Settings(BaseSettings):
     algorithm: Literal["HS256"] = "HS256"
     access_token_expire_minutes: int = 480  # 8 hours
 
-    # CORS allow-list. Taskpane + Command Centre are served from GitHub Pages;
-    # localhost:3000 is the webpack dev-server. NEVER use "*" with credentials.
-    cors_origins: list[str] = [
-        "https://yurifrusin.github.io",
-        "http://localhost:3000",
-        "http://127.0.0.1:3000",
-    ]
+    # CORS allow-list (JSON-list environment representation preserved).
+    # The omitted default resolves after profile normalization to the dev
+    # defaults or []; explicit null is rejected. Explicit dev lists become
+    # canonical browser origins; any nonempty staging/production list is
+    # rejected. NEVER use "*" with credentials.
+    cors_origins: Optional[list[str]] = Field(default=None, validate_default=False)
 
     gcp_project: str = "scribe-emr4-dev"
     gcp_location: str = "australia-southeast1"
@@ -153,12 +304,62 @@ class Settings(BaseSettings):
         "extra": "ignore",
     }
 
+    @field_validator("environment", mode="before")
+    @classmethod
+    def _canonicalize_environment(cls, value):
+        """Normalize the configured profile once into its canonical form."""
+        if not isinstance(value, str):
+            raise ValueError(
+                "ENVIRONMENT must be one of 'dev', 'staging', 'production' "
+                f"(case-insensitive); got non-string value {value!r}."
+            )
+        canonical = value.strip().lower()
+        if canonical not in CANONICAL_ENVIRONMENTS:
+            raise ValueError(
+                "ENVIRONMENT must be one of 'dev', 'staging', 'production' "
+                f"(case-insensitive); got {value!r}."
+            )
+        return canonical
+
+    @classmethod
+    def settings_customise_sources(
+        cls, settings_cls, init_settings, env_settings,
+        dotenv_settings, file_secret_settings,
+    ):
+        # The environment sources discard a decoded JSON null. Reject that
+        # explicit input before it can become indistinguishable from omission.
+        # Inspect their already loaded values; preserve all original sources,
+        # their configuration and their normal precedence.
+        field = settings_cls.model_fields["cors_origins"]
+        for source in (env_settings, dotenv_settings):
+            raw, _, _ = source.get_field_value(field, "cors_origins")
+            if isinstance(raw, str) and raw.strip() == "null":
+                raise ValueError("Explicit null CORS_ORIGINS is not a list.")
+        return init_settings, env_settings, dotenv_settings, file_secret_settings
+
+    @field_validator("cors_origins", mode="before")
+    @classmethod
+    def _validate_raw_cors_list(cls, value):
+        # Only this omitted sentinel skips default validation; supplied null does not.
+        # This runs before Pydantic can turn bytes into strings.
+        if not isinstance(value, list) or any(not isinstance(item, str) for item in value):
+            raise ValueError("CORS_ORIGINS must be a JSON list of strings, not null or another type.")
+        return value
+
     @model_validator(mode="after")
     def _fail_closed_on_insecure_secret(self):
-        """Refuse to start outside dev if the JWT signing key is the public default.
-        The repo is AGPL/public, so a default secret_key means anyone can forge
-        tokens for any practice."""
-        if self.environment.lower() != "dev" and (
+        """Resolve profile CORS, then refuse to start on insecure non-dev config.
+
+        CORS resolution runs first so every profile observes its exact
+        effective allow-list; the pre-existing insecure-secret and Bernie
+        provider fail-closed checks below are preserved unchanged in meaning.
+        The environment value consumed here is the canonical profile produced
+        by _canonicalize_environment.
+        """
+        if "cors_origins" in self.model_fields_set and self.cors_origins is None:
+            raise ValueError("Explicit null CORS_ORIGINS is not a list.")
+        self.cors_origins = _resolve_cors_origins(self.environment, self.cors_origins)
+        if self.environment != "dev" and (
             not self.secret_key or self.secret_key == INSECURE_DEFAULT_SECRET
         ):
             raise RuntimeError(
