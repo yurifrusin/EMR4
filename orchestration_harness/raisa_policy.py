@@ -1868,6 +1868,21 @@ def g2_ci_selection_profile() -> dict:
     return profile
 
 
+G2_CI_MIGRATION_PATHS = (
+    'scripts/verify_empty_database_migrations.py',
+    'tests/test_repository_maintenance.py',
+)
+G2_CI_MIGRATION_SCOPE_BEHAVIOR = 'bounded_g2_ci_migration_repair'
+
+
+def g2_ci_migration_profile() -> dict:
+    """Only helper and tests; migration-schema changes and runtime stay closed."""
+    profile = g2_batch_profile()
+    profile.update(scope_behavior=G2_CI_MIGRATION_SCOPE_BEHAVIOR,
+                   allowed_paths=sorted(G2_CI_MIGRATION_PATHS))
+    return profile
+
+
 def g2_audio_privacy_profile() -> dict:
     """Only the four reviewed source paths; application and test runtimes stay separate."""
     profile = g2_batch_profile()
@@ -2277,7 +2292,9 @@ def validate_recovery_configuration(*, documents: dict[str, bytes], expected_sha
         raise RaisaPolicyError("configuration_assessment_profile_invalid")
     if state["active_profile"] == G2_PROFILE:
         profile = overlay["profiles"][G2_PROFILE]
-        expected = (g2_ci_selection_profile()
+        expected = (g2_ci_migration_profile()
+                    if profile["scope_behavior"] == G2_CI_MIGRATION_SCOPE_BEHAVIOR
+                    else g2_ci_selection_profile()
                     if profile["scope_behavior"] == G2_CI_SELECTION_SCOPE_BEHAVIOR
                     else g2_dependency_repair_profile()
                     if profile["scope_behavior"] == G2_DEPENDENCY_REPAIR_SCOPE_BEHAVIOR
