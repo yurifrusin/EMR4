@@ -295,13 +295,19 @@ def _manifest_relative(manifest_path: str | Path, repo_root: Path) -> str:
 
 
 def load_source_state(manifest_path: str | Path, *, manifest_sha256: str,
-                      repo_root: Path = ROOT) -> dict[str, Any]:
-    """Authenticate the manifest, validate all rows, then read selected bytes."""
+                      repo_root: Path = ROOT,
+                      require_complete: bool = False) -> dict[str, Any]:
+    """Authenticate the manifest and coverage before reading selected bytes."""
     _digest(manifest_sha256, "manifest_digest")
     relative = _manifest_relative(manifest_path, repo_root)
     raw = read_selected_bytes(repo_root, relative, manifest_sha256)
     manifest = _strict_json(raw)
     state = validate_selection(manifest)
+    if require_complete and (
+        state["completeness"]["repository_wide"] is not True
+        or state["completeness"]["pending"]
+    ):
+        raise SourceStateError("complete_ci_coverage_required")
     state["selection_path"] = str(Path(repo_root).absolute() / relative)
     state["selection_sha256"] = manifest_sha256
     state["selected_bytes"] = {

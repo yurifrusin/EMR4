@@ -901,3 +901,87 @@ def test_cli_bad_digest_fails_before_physical_observation_or_execution(
         assert verification.main(["--profile", "ci-lint", "--selection", str(path),
                                   "--selection-sha256", "bad"]) == 2
     assert "manifest_digest" in capsys.readouterr().err
+
+
+@pytest.mark.parametrize("profile", ("ci-correctness", "ci-lint", "ci-bandit", "ci-security"))
+def test_complete_ci_refuses_bounded_selection_before_source_reads_or_commands(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys, profile: str
+) -> None:
+    from scripts import python_source_state as source_state
+    from scripts import verify_repository as verification
+
+    root, path, digest, _manifest = _selection(tmp_path)
+    _assert_valid_control(root, path, digest)
+    monkeypatch.setattr(verification, "REPO_ROOT", root)
+    _allow_only_manifest_read(monkeypatch, source_state, root, digest)
+
+    def forbidden(*args, **kwargs):
+        raise AssertionError("incomplete coverage reached commands")
+
+    monkeypatch.setattr(verification, "build_commands", forbidden)
+    monkeypatch.setattr(verification, "run_commands", forbidden)
+    assert verification.main([
+        "--profile", profile, "--selection", str(path),
+        "--selection-sha256", digest, "--require-complete",
+    ]) == 2
+    assert "complete_ci_coverage_required" in capsys.readouterr().err
+
+
+@pytest.mark.parametrize("profile", ("ci-correctness", "ci-lint", "ci-bandit", "ci-security"))
+def test_bounded_ci_remains_available_with_authenticated_selection(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, profile: str
+) -> None:
+    from scripts import verify_repository as verification
+
+    root, path, digest, _manifest = _selection(tmp_path)
+    monkeypatch.setattr(verification, "REPO_ROOT", root)
+    calls = []
+
+    def simulated_commands(commands, *, cwd, env):
+        calls.append((commands, cwd, env))
+        return 19
+
+    monkeypatch.setattr(verification, "run_commands", simulated_commands)
+    assert verification.main([
+        "--profile", profile, "--selection", str(path),
+        "--selection-sha256", digest,
+    ]) == 19
+    assert len(calls) == 1 and calls[0][1] == root
+    assert calls[0][0] and all(command.argv for command in calls[0][0])
+    assert calls[0][2]["PYTEST_DISABLE_PLUGIN_AUTOLOAD"] == "1"
+
+
+@pytest.mark.parametrize("change,reason", (
+    ("claim_complete", "bounded_completeness_required"),
+    ("clear_pending", "bounded_completeness_required"),
+    ("bad_digest", "selected_digest_mismatch"),
+))
+def test_complete_ci_does_not_accept_claimed_or_unauthenticated_completeness(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys, change: str, reason: str
+) -> None:
+    from scripts import python_source_state as source_state
+    from scripts import verify_repository as verification
+
+    root, path, digest, manifest = _selection(tmp_path)
+    _assert_valid_control(root, path, digest)
+    if change == "claim_complete":
+        manifest["completeness"]["repository_wide"] = True
+    elif change == "clear_pending":
+        manifest["completeness"]["pending"] = []
+    if change != "bad_digest":
+        path, digest = _write_manifest(root, manifest)
+    else:
+        digest = "0" * 64
+    monkeypatch.setattr(verification, "REPO_ROOT", root)
+    _allow_only_manifest_read(monkeypatch, source_state, root, digest)
+
+    def forbidden(*args, **kwargs):
+        raise AssertionError("invalid complete request reached commands")
+
+    monkeypatch.setattr(verification, "build_commands", forbidden)
+    monkeypatch.setattr(verification, "run_commands", forbidden)
+    assert verification.main([
+        "--profile", "ci-correctness", "--selection", str(path),
+        "--selection-sha256", digest, "--require-complete",
+    ]) == 2
+    assert reason in capsys.readouterr().err

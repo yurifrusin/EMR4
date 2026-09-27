@@ -90,11 +90,16 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--profile", choices=PROFILES, required=True)
     parser.add_argument("--selection", required=True)
     parser.add_argument("--selection-sha256", required=True)
+    parser.add_argument(
+        "--require-complete", action="store_true",
+        help="Refuse bounded coverage before reading selected sources or running checks",
+    )
     args = parser.parse_args(argv)
     try:
         state = load_source_state(args.selection,
                                   manifest_sha256=args.selection_sha256,
-                                  repo_root=REPO_ROOT)
+                                  repo_root=REPO_ROOT,
+                                  require_complete=args.require_complete)
         commands = build_commands(args.profile, state)
     except SourceStateError as exc:
         print(f"[verification_selection_failure] {exc}", file=sys.stderr)
