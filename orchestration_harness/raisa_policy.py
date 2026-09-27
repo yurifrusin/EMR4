@@ -1902,6 +1902,26 @@ def g2_tenant_migration_profile() -> dict:
     return profile
 
 
+G2_TENANT_RELATIONSHIP_PATHS = (
+    'alembic/versions/a6b7c8d9e0f1_enforce_related_practice_refs.py',
+    'tests/test_tenant_relationships.py',
+    'tests/tenant_relationship_helpers.py',
+)
+G2_TENANT_RELATIONSHIP_SCOPE_BEHAVIOR = 'bounded_g2_tenant_relationship_repair'
+
+
+def g2_tenant_relationship_profile() -> dict:
+    """Only three fixed additions; migration runtime remains separately bound."""
+    profile = g2_batch_profile()
+    profile.update(scope_behavior=G2_TENANT_RELATIONSHIP_SCOPE_BEHAVIOR,
+                   allowed_paths=sorted(G2_TENANT_RELATIONSHIP_PATHS))
+    profile['allowed_effects'] = sorted(
+        (set(profile['allowed_effects']) - {'product_behavior_change'}) | {'migration_change'})
+    profile['forbidden_effects'] = sorted(
+        (set(profile['forbidden_effects']) - {'migration_change'}) | {'product_behavior_change'})
+    return profile
+
+
 def g2_audio_privacy_profile() -> dict:
     """Only the four reviewed source paths; application and test runtimes stay separate."""
     profile = g2_batch_profile()
@@ -2311,7 +2331,9 @@ def validate_recovery_configuration(*, documents: dict[str, bytes], expected_sha
         raise RaisaPolicyError("configuration_assessment_profile_invalid")
     if state["active_profile"] == G2_PROFILE:
         profile = overlay["profiles"][G2_PROFILE]
-        expected = (g2_tenant_migration_profile()
+        expected = (g2_tenant_relationship_profile()
+                    if profile["scope_behavior"] == G2_TENANT_RELATIONSHIP_SCOPE_BEHAVIOR
+                    else g2_tenant_migration_profile()
                     if profile["scope_behavior"] == G2_TENANT_MIGRATION_SCOPE_BEHAVIOR
                     else g2_ci_migration_profile()
                     if profile["scope_behavior"] == G2_CI_MIGRATION_SCOPE_BEHAVIOR
