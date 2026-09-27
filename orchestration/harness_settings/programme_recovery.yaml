@@ -1141,7 +1141,7 @@ profiles:
     - g2_confirmation_family_fixture_repair
     allowed_effects:
     - control_plane_edit
-    - migration_change
+    - product_behavior_change
     - repository_read
     - task_branch_commit
     - task_branch_push
@@ -1151,15 +1151,15 @@ profiles:
     - deployment
     - existing_clockwork_runtime_mutation
     - integration
+    - migration_change
     - pages
-    - product_behavior_change
     - protected_ref_movement
     - provider_invocation
     - real_data_access
     allowed_paths:
-    - alembic/versions/a6b7c8d9e0f1_enforce_related_practice_refs.py
-    - tests/tenant_relationship_helpers.py
-    - tests/test_tenant_relationships.py
+    - scripts/python_source_state.py
+    - scripts/verify_repository.py
+    - tests/test_python_source_state.py
     autonomous_task_selection: false
     feature_work_eligible: false
     product_work_eligible: false
@@ -1167,7 +1167,7 @@ profiles:
     deployment_eligible: false
     protected_ref_movement_eligible: false
     g2_eligible: true
-    scope_behavior: bounded_g2_tenant_relationship_repair
+    scope_behavior: bounded_g2_ci_completeness_repair
     scope_file: orchestration/programme/g2-baseline-repair-scope.json
     global_execution_defaults_unchanged: true
     closed_entrypoints:

@@ -1,6 +1,6 @@
 {
   "schema_version": "raisa-ariadne.programme-state.v2",
-  "observed_at": "2026-09-27T07:02:47+00:00",
+  "observed_at": "2026-09-27T09:45:40+00:00",
   "programme_name": "Raisa Medical Office and Ariadne Recovery & Convergence",
   "programme_mode": "recovery",
   "current_gate": "G2",
@@ -272,7 +272,7 @@
     "next_eligible_now": true,
     "next_tranche_started": false,
     "next_tranche_admission_requires_state_transition": false,
-    "next_eligibility_condition": "bounded_G2_tenant_relationship_repair_active"
+    "next_eligibility_condition": "bounded_G2_ci_completeness_repair_active"
   },
   "parallelism_efficacy": {
     "deepseek": {
@@ -976,18 +976,18 @@
   "g2": {
     "status": "active",
     "scope_path": "orchestration/programme/g2-baseline-repair-scope.json",
-    "scope_sha256": "74bcee3dec174930012edd2b34d8e098be4b2f16d8822bace2f96b4b6884f626",
+    "scope_sha256": "a0ad9df4ea4aa4768b934bee74f042ca0a92f7282941bb9b2cc0557d13d6a280",
     "current_operation": {
       "completion_accepted": false,
-      "operation_id": "g2-tenant-relationship-repair",
+      "operation_id": "g2-ci-completeness-repair",
       "profile": "G2_BASELINE_REPAIR_ACTIVE",
       "status": "active",
       "supersedes": {
         "historical_latch_preserved": true,
-        "operation_id": "g2-tenant-migration-repair",
-        "scope_commit": "7026ea069600471c1c0a7c7c4fd0d0b806184e4a",
+        "operation_id": "g2-tenant-relationship-repair",
+        "scope_commit": "1230bb8201d0fcca69777663c37a868d626b312f",
         "scope_path": "orchestration/programme/g2-baseline-repair-scope.json",
-        "scope_sha256": "7266cf18ed8bc881a6c589fbdbb8e953a9187c21922de1cfb9cb8bb56fe2c8ed"
+        "scope_sha256": "74bcee3dec174930012edd2b34d8e098be4b2f16d8822bace2f96b4b6884f626"
       },
       "task_class": "g2_confirmation_family_fixture_repair"
     },

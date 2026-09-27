@@ -1922,6 +1922,22 @@ def g2_tenant_relationship_profile() -> dict:
     return profile
 
 
+G2_CI_COMPLETENESS_PATHS = (
+    'scripts/python_source_state.py',
+    'scripts/verify_repository.py',
+    'tests/test_python_source_state.py',
+)
+G2_CI_COMPLETENESS_SCOPE_BEHAVIOR = 'bounded_g2_ci_completeness_repair'
+
+
+def g2_ci_completeness_profile() -> dict:
+    """Only three existing CI files; a complete-CI claim remains unaccepted."""
+    profile = g2_batch_profile()
+    profile.update(scope_behavior=G2_CI_COMPLETENESS_SCOPE_BEHAVIOR,
+                   allowed_paths=sorted(G2_CI_COMPLETENESS_PATHS))
+    return profile
+
+
 def g2_audio_privacy_profile() -> dict:
     """Only the four reviewed source paths; application and test runtimes stay separate."""
     profile = g2_batch_profile()
@@ -2331,7 +2347,9 @@ def validate_recovery_configuration(*, documents: dict[str, bytes], expected_sha
         raise RaisaPolicyError("configuration_assessment_profile_invalid")
     if state["active_profile"] == G2_PROFILE:
         profile = overlay["profiles"][G2_PROFILE]
-        expected = (g2_tenant_relationship_profile()
+        expected = (g2_ci_completeness_profile()
+                    if profile["scope_behavior"] == G2_CI_COMPLETENESS_SCOPE_BEHAVIOR
+                    else g2_tenant_relationship_profile()
                     if profile["scope_behavior"] == G2_TENANT_RELATIONSHIP_SCOPE_BEHAVIOR
                     else g2_tenant_migration_profile()
                     if profile["scope_behavior"] == G2_TENANT_MIGRATION_SCOPE_BEHAVIOR

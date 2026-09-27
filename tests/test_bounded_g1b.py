@@ -3855,6 +3855,132 @@ class G2TenantRelationshipSourceContractTests(unittest.TestCase):
                                lambda: b._validate_g2_batch_scope(scope))
 
 
+class G2CICompletenessSourceContractTests(unittest.TestCase):
+    """Pure V17 controls for exactly three existing guard updates."""
+
+    @staticmethod
+    def controller_sources():
+        sources = copy.deepcopy(b.G2_COMPLETENESS_PREDECESSOR["source_sha256"])
+        for path in b.G2_COMPLETENESS_CODE_PATHS:
+            sources[path] = "4" * 64
+        return sources
+
+    @staticmethod
+    def repair_binding():
+        return {
+            "schema_version": b.G2_COMPLETENESS_BINDING_VERSION,
+            "operation_kind": "repair_g2_ci_completeness",
+            "repair_sha256": {
+                path: {"before_sha256": b.G2_COMPLETENESS_REPAIR_PINS[path],
+                       "after_sha256": digest}
+                for path, digest in b.G2_COMPLETENESS_CANDIDATE_PINS.items()
+            },
+        }
+
+    @staticmethod
+    def maintenance_binding():
+        return {
+            "schema_version": b.G2_COMPLETENESS_BINDING_VERSION,
+            "operation_kind": "enable_g2_ci_completeness",
+            "repair_sha256": {
+                path: {"before_sha256": "1" * 64, "after_sha256": "2" * 64}
+                for path in b.G2_COMPLETENESS_MAINTENANCE_PATHS
+            },
+        }
+
+    def assert_reason(self, reason, call):
+        with self.assertRaises(b.BoundedG1BError) as caught:
+            call()
+        self.assertEqual(caught.exception.reason_code, reason)
+
+    def build_scope(self):
+        return b.build_g2_completeness_scope(
+            "2026-09-27T15:00:00+00:00", b.G2_COMPLETENESS_PREDECESSOR["commit"],
+            self.controller_sources())
+
+    def test_exact_three_updates_narrow_profile_and_effects(self):
+        self.assertEqual(set(b.G2_COMPLETENESS_PATHS), set(b.G2_COMPLETENESS_REPAIR_PINS))
+        self.assertEqual(set(b.G2_COMPLETENESS_PATHS), set(b.G2_COMPLETENESS_CANDIDATE_PINS))
+        self.assertEqual(set(b._batch_changes(self.repair_binding())), b.G2_COMPLETENESS_PATHS)
+        self.assertEqual(set(b._batch_changes(self.maintenance_binding())),
+                         b.G2_COMPLETENESS_MAINTENANCE_PATHS)
+        self.assertEqual(b.operation_paths("repair_g2_ci_completeness", self.repair_binding()),
+                         b.G2_COMPLETENESS_PATHS)
+        self.assertEqual(b.batch_input_paths(self.repair_binding()),
+                         b.G2_CATALOGUE_POLICY_PATHS | b.G2_COMPLETENESS_PATHS)
+        self.assertEqual(b.operation_effects("repair_g2_ci_completeness"), b.G2_BATCH_EFFECTS)
+        profile = b._g2_completeness_profile()
+        self.assertEqual(profile, rp.g2_ci_completeness_profile())
+        self.assertEqual(profile["allowed_paths"], sorted(b.G2_COMPLETENESS_PATHS))
+        for effect in ("dependency_change", "migration_change", "provider_invocation",
+                       "integration", "deployment"):
+            self.assertIn(effect, profile["forbidden_effects"])
+            self.assertNotIn(effect, profile["allowed_effects"])
+
+    def test_scope_retains_history_and_closures(self):
+        scope = self.build_scope()
+        b._validate_g2_batch_scope(scope)
+        self.assertEqual(scope["allowed_paths"], sorted(b.G2_COMPLETENESS_PATHS))
+        self.assertEqual(scope["allowed_additions"], [])
+        self.assertEqual(scope["maximum_changed_files"], 3)
+        self.assertEqual(scope["repair_preimage_sha256"], b.G2_COMPLETENESS_REPAIR_PINS)
+        self.assertIs(scope["ci_completeness_invariant"]["complete_ci_claimed"], False)
+        self.assertIs(scope["historical_relationship_invariant"]["migration_schema_changed"], True)
+        self.assertEqual(scope["published_relationship_repair"]["acceptance"],
+                         b.G2_COMPLETENESS_PUBLICATION_ACCEPTANCE)
+        self.assertEqual(scope["current_operation"]["supersedes"], {
+            "operation_id": "g2-tenant-relationship-repair", "scope_path": b.G2_SCOPE,
+            "scope_commit": b.G2_COMPLETENESS_PREDECESSOR["commit"],
+            "scope_sha256": b.G2_COMPLETENESS_PREDECESSOR_POLICY[b.G2_SCOPE],
+            "historical_latch_preserved": True,
+        })
+        for field in ("execution_authorized", "g2_complete", "feature_work_eligible",
+                      "operational_multi_task_control_accepted"):
+            self.assertIs(scope[field], False)
+
+    def test_wrong_version_count_path_preimage_and_digest_deny(self):
+        wrong = self.maintenance_binding()
+        wrong["schema_version"] = b.G2_RELATIONSHIP_BINDING_VERSION
+        self.assert_reason("bounded_g2_batch_binding_version", lambda: b._batch_changes(wrong))
+        path = "tests/test_python_source_state.py"
+        wrong = self.repair_binding()
+        wrong["repair_sha256"].pop(path)
+        self.assert_reason("bounded_g2_batch_changes_invalid", lambda: b._batch_changes(wrong))
+        wrong = self.repair_binding()
+        wrong["repair_sha256"]["tests/extra.py"] = wrong["repair_sha256"].pop(path)
+        self.assert_reason("bounded_g2_batch_path_not_allowed", lambda: b._batch_changes(wrong))
+        wrong = self.repair_binding()
+        wrong["repair_sha256"][path]["before_sha256"] = "0" * 64
+        self.assert_reason("bounded_g2_completeness_repair_preimage", lambda: b._batch_changes(wrong))
+        wrong = self.repair_binding()
+        wrong["repair_sha256"][path]["after_sha256"] = "0" * 64
+        self.assert_reason("bounded_g2_completeness_candidate_digest", lambda: b._batch_changes(wrong))
+
+    def test_wrong_base_history_and_scope_deny(self):
+        self.assert_reason("bounded_g2_completeness_transition_base", lambda:
+            b.build_g2_completeness_scope("2026-09-27T15:00:00+00:00", "0" * 40,
+                                          self.controller_sources()))
+        sources = self.controller_sources()
+        sources["orchestration_harness/configuration_core.py"] = "0" * 64
+        self.assert_reason("bounded_g2_batch_unchanged_controller_component", lambda:
+            b.build_g2_completeness_scope("2026-09-27T15:00:00+00:00",
+                                          b.G2_COMPLETENESS_PREDECESSOR["commit"], sources))
+        for mutate in (
+            lambda s: s.update(maximum_changed_files=2),
+            lambda s: s["allowed_additions"].append("tests/extra.py"),
+            lambda s: s["allowed_effects"].append("dependency_change"),
+            lambda s: s.update(g2_complete=True),
+            lambda s: s["ci_completeness_invariant"].update(complete_ci_claimed=True),
+            lambda s: s["current_operation"]["supersedes"].update(historical_latch_preserved=False),
+            lambda s: s["published_relationship_repair"]["acceptance"].update(sha256="0" * 64),
+            lambda s: s["historical_relationship_invariant"].update(migration_schema_changed=False),
+        ):
+            scope = self.build_scope()
+            mutate(scope)
+            self.assert_reason("bounded_g2_batch_scope_invalid",
+                               lambda: b._validate_g2_batch_scope(scope))
+
+
 class G2MigrationGuardFixture(G2ClinicalFixture):
     """Exact captured bytes with test-only V9 publication identity substitution.
 
@@ -4834,6 +4960,119 @@ class G2TenantRelationshipFixture(G2TenantMigrationFixture):
                        "after_sha256": b.G2_RELATIONSHIP_CANDIDATE_PINS[path]}
                 for path in b.G2_RELATIONSHIP_PATHS
             },
+        )
+        self.q["payload_sha256"] = {
+            p: b._sha((self.root / p).read_bytes()) for p in b.batch_input_paths(self.q)
+        }
+
+
+class G2CICompletenessFixture(G2TenantRelationshipFixture):
+    """Authored Git history with exact V17 ordinary predecessor bytes.
+
+    Synthetic commit IDs replace publication identities. This does not prove
+    real repository admission, complete CI, or any database/runtime authority.
+    """
+
+    def __init__(self, assets, stack):
+        super().__init__(assets, stack)
+        try:
+            self._prepare_completeness(assets, stack)
+        except BaseException:
+            self.close()
+            raise
+
+    def _prepare_completeness(self, assets, stack):
+        self.activate_batches()
+        self.prepare_relationship_repair()
+        self.commit_current()
+        predecessor = {}
+        for path in b.G2_COMPLETENESS_PREDECESSOR_POLICY:
+            predecessor[path] = (assets / "g2-completeness-predecessor-policy" / path).read_bytes()
+        for path in b.CONTROLLER_PATHS:
+            predecessor[path] = (assets / "g2-completeness-predecessor-source" / path).read_bytes()
+        for path in b.G2_COMPLETENESS_REPAIR_PINS:
+            predecessor[path] = (assets / "g2-completeness-predecessor-product" / path).read_bytes()
+        pins = {**b.G2_COMPLETENESS_PREDECESSOR_POLICY,
+                **b.G2_COMPLETENESS_PREDECESSOR["source_sha256"],
+                **b.G2_COMPLETENESS_REPAIR_PINS}
+        if set(predecessor) != set(pins) or any(
+                b._sha(raw) != pins[path] for path, raw in predecessor.items()):
+            raise AssertionError("V17 fixture requires exact ordinary predecessor bytes")
+        for path in b.G2_COMPLETENESS_PRESERVED_RELATIONSHIP_PINS:
+            raw = (self.root / path).read_bytes()
+            if b._sha(raw) != b.G2_COMPLETENESS_PRESERVED_RELATIONSHIP_PINS[path]:
+                raise AssertionError("V17 fixture requires accepted relationship products")
+        for path, raw in predecessor.items():
+            self.write(path, raw)
+        self.git("add", "--", *sorted(predecessor))
+        parent = self.git("rev-parse", "HEAD")
+        tree = self.git("write-tree")
+        base = self.git("commit-tree", tree, "-p", parent,
+                        "-m", "authored exact CI completeness predecessor inputs")
+        self.git("update-ref", "--no-deref", "HEAD", base, parent)
+        publication = copy.deepcopy(b.G2_COMPLETENESS_PREDECESSOR)
+        publication.update(commit=base, parent=parent, tree=tree)
+        stack.enter_context(patch.object(b, "G2_COMPLETENESS_PREDECESSOR", publication))
+        self.base = base
+        self.completeness_previous_policy = {p: predecessor[p] for p in b.G2_BATCH_CONTROL_PATHS}
+        sources = {p: b._sha((self.source / p).read_bytes()) for p in b.CONTROLLER_PATHS}
+        self.batch_scope = b.build_g2_completeness_scope(
+            "2026-09-27T15:00:00+00:00", base, sources)
+        after = b.build_g2_completeness_transition(
+            self.completeness_previous_policy, self.batch_scope)
+        after.update({p: (self.source / p).read_bytes()
+                      for p in b.G2_COMPLETENESS_CODE_PATHS})
+        rows = {p: {"before_sha256": b._sha((self.root / p).read_bytes()),
+                    "after_sha256": b._sha(raw)}
+                for p, raw in after.items()}
+        for path, raw in after.items():
+            self.write(path, raw)
+        self.git("add", "--", *sorted(after))
+        candidate = self.git("write-tree")
+        self.q.update(
+            schema_version=b.G2_COMPLETENESS_BINDING_VERSION,
+            operation_id="authored-g2-completeness-enablement",
+            operation_kind="enable_g2_ci_completeness",
+            phase="development", base_commit=base, base_tree=tree,
+            expected_head=base, expected_index_tree=candidate,
+            candidate_tree=candidate, activation_commit=base,
+            installed_controller=copy.deepcopy(publication), repair_sha256=rows,
+            source_sha256={p: b._sha((self.source / p).read_bytes()) for p in b.SOURCE_PATHS},
+        )
+        self.q["payload_sha256"] = {
+            p: b._sha((self.root / p).read_bytes()) for p in b.batch_input_paths(self.q)
+        }
+
+    def prepare_completeness_repair(self):
+        base = self.git("rev-parse", "HEAD")
+        base_tree = self.git("rev-parse", "HEAD^{tree}")
+        changes = {
+            path: (self.assets / "g2-completeness-candidate" / path).read_bytes()
+            for path in b.G2_COMPLETENESS_PATHS
+        }
+        if any(b._sha(raw) != b.G2_COMPLETENESS_CANDIDATE_PINS[path]
+               for path, raw in changes.items()):
+            raise AssertionError("V17 fixture requires exact reviewed guard candidate bytes")
+        rows = {
+            path: {"before_sha256": b._sha((self.root / path).read_bytes()),
+                   "after_sha256": b._sha(raw)}
+            for path, raw in changes.items()
+        }
+        if any(rows[path]["before_sha256"] != b.G2_COMPLETENESS_REPAIR_PINS[path]
+               for path in changes):
+            raise AssertionError("V17 fixture requires exact accepted guard preimages")
+        for path, raw in changes.items():
+            self.write(path, raw)
+        self.git("add", "--", *sorted(changes))
+        candidate = self.git("write-tree")
+        self.q.update(
+            operation_id="authored-g2-completeness-repair",
+            operation_kind="repair_g2_ci_completeness",
+            phase="development", base_commit=base, base_tree=base_tree,
+            expected_head=base, expected_index_tree=candidate,
+            candidate_tree=candidate, activation_commit=self.activation,
+            installed_controller=copy.deepcopy(self.batch_controller),
+            repair_sha256=rows,
         )
         self.q["payload_sha256"] = {
             p: b._sha((self.root / p).read_bytes()) for p in b.batch_input_paths(self.q)
@@ -8713,6 +8952,141 @@ def build_integration_suite(assets: Path) -> unittest.TestSuite:
             self.assertFalse(decision.execution_authorized)
 
 
+    class G2CICompletenessAdmissionTests(unittest.TestCase):
+        def setUp(self):
+            self.stack = ExitStack()
+            self.addCleanup(self.stack.close)
+            self.fx = G2CICompletenessFixture(assets, self.stack)
+            self.addCleanup(self.fx.close)
+            self.stack.enter_context(no_legacy_observation())
+            self.stack.enter_context(self.fx.component_history())
+
+        def observed_paths(self):
+            paths = b.G2_COMPLETENESS_MAINTENANCE_PATHS | b.G2_COMPLETENESS_PATHS
+            return {p: ((self.fx.root / p).read_bytes() if (self.fx.root / p).exists() else None)
+                    for p in paths}
+
+        def assert_admitted(self):
+            f = self.fx
+            context = f.context()
+            entrypoint = ("task_branch_commit" if f.q["phase"] == "development"
+                          else "task_branch_push")
+            for decision in (
+                pa.evaluate_programme_operation_admission(
+                    repo_root=f.root, manifest=f.manifest(context), entrypoint=entrypoint,
+                    phase=f.q["phase"], bounded_context=context),
+                pg.evaluate_pinned_programme_operation(
+                    gatekeeper_root=f.source, target_repo_root=f.root,
+                    manifest=f.manifest(context), entrypoint=entrypoint,
+                    phase=f.q["phase"], bounded_context=context),
+            ):
+                self.assertTrue(decision.policy_admitted, decision.reason_codes)
+                self.assertFalse(decision.execution_authorized)
+                self.assertEqual(decision.candidate_tree, f.q["candidate_tree"])
+
+        def assert_denied(self, reason):
+            before = self.observed_paths()
+            decision = self.fx.decision()
+            self.assertEqual(decision.reason_codes, (reason,))
+            self.assertFalse(decision.policy_admitted)
+            self.assertFalse(decision.execution_authorized)
+            self.assertEqual(self.observed_paths(), before)
+
+        def test_exact_enable_and_three_existing_updates_compose(self):
+            f = self.fx
+            before_state = b._json(f.completeness_previous_policy[b.STATE])
+            after_state = b._json((f.root / b.STATE).read_bytes())
+            for key in set(before_state) - {"observed_at", "g2", "task_selection"}:
+                self.assertEqual(after_state[key], before_state[key])
+            for key in set(before_state["g2"]) - {"scope_sha256", "current_operation"}:
+                self.assertEqual(after_state["g2"][key], before_state["g2"][key])
+            self.assertEqual(after_state["current_gate"], "G2")
+            self.assertFalse(after_state["g2"]["completion_accepted"])
+            self.assertFalse(after_state["feature_work_eligible"])
+            self.assertEqual(
+                b._document((f.root / b.OVERLAY).read_bytes(), b.OVERLAY)["profiles"][b.G2_PROFILE],
+                rp.g2_ci_completeness_profile())
+            self.assertEqual(set(f.q["repair_sha256"]), b.G2_COMPLETENESS_MAINTENANCE_PATHS)
+            self.assert_admitted()
+            f.activate_batches()
+            self.assert_admitted()
+            f.prepare_completeness_repair()
+            self.assertEqual(set(f.q["repair_sha256"]), b.G2_COMPLETENESS_PATHS)
+            self.assertTrue(all(row["before_sha256"] == b.G2_COMPLETENESS_REPAIR_PINS[path]
+                                for path, row in f.q["repair_sha256"].items()))
+            self.assert_admitted()
+            f.commit_current()
+            self.assert_admitted()
+
+        def test_wrong_version_count_scope_and_candidate_deny(self):
+            f = self.fx
+            original = copy.deepcopy(f.q)
+            f.q["schema_version"] = b.G2_RELATIONSHIP_BINDING_VERSION
+            self.assert_denied("bounded_g2_batch_binding_version")
+            f.q = copy.deepcopy(original)
+            f.q["repair_sha256"].pop(b.STATE)
+            self.assert_denied("bounded_g2_batch_changes_invalid")
+            f.q = copy.deepcopy(original)
+            scope = b._json((f.root / b.G2_SCOPE).read_bytes())
+            scope["ci_completeness_invariant"]["complete_ci_claimed"] = True
+            malformed = b._canonical(scope) + b"\n"
+            f.write(b.G2_SCOPE, malformed)
+            f.q["payload_sha256"][b.G2_SCOPE] = b._sha(malformed)
+            self.assert_denied("bounded_g2_batch_scope_invalid")
+            f.q = copy.deepcopy(original)
+            f.write(b.G2_SCOPE, b._canonical(self.fx.batch_scope) + b"\n")
+            f.activate_batches()
+            f.prepare_completeness_repair()
+            original = copy.deepcopy(f.q)
+            path = "tests/test_python_source_state.py"
+            f.q["repair_sha256"][path]["before_sha256"] = "0" * 64
+            self.assert_denied("bounded_g2_completeness_repair_preimage")
+            f.q = copy.deepcopy(original)
+            f.q["repair_sha256"][path]["after_sha256"] = "0" * 64
+            self.assert_denied("bounded_g2_completeness_candidate_digest")
+
+        def test_preserved_history_and_forbidden_effect_deny(self):
+            f = self.fx
+            f.activate_batches()
+            f.prepare_completeness_repair()
+            original = b.trusted_git.run_git_bytes
+            historical_path = "tests/tenant_relationship_helpers.py"
+
+            def drift(root, *args, **kwargs):
+                if root == f.root and args == (
+                        "cat-file", "blob", b.G2_COMPLETENESS_PREDECESSOR["commit"]
+                        + ":" + historical_path):
+                    return b"authored incorrect preserved relationship bytes"
+                return original(root, *args, **kwargs)
+
+            with patch.object(b.trusted_git, "run_git_bytes", side_effect=drift):
+                self.assert_denied("bounded_g2_completeness_predecessor_bytes_changed")
+            context = f.context()
+            manifest = f.manifest(context)
+            manifest["intended_side_effect_classes"].append("dependency_change")
+            decision = b.evaluate_bounded_g1b_operation(
+                context=context, manifest=manifest,
+                entrypoint="task_branch_commit", phase="development")
+            self.assertEqual(decision.reason_codes, ("bounded_g1b_manifest_binding_mismatch",))
+            self.assertFalse(decision.execution_authorized)
+
+        def test_stale_guard_preimage_in_selected_base_denied(self):
+            f = self.fx
+            f.activate_batches()
+            f.prepare_completeness_repair()
+            original = b.trusted_git.run_git_bytes
+            path = "scripts/python_source_state.py"
+
+            def drift(root, *args, **kwargs):
+                if root == f.root and args == (
+                        "cat-file", "blob", f.q["base_commit"] + ":" + path):
+                    return b"authored stale guard preimage"
+                return original(root, *args, **kwargs)
+
+            with patch.object(b.trusted_git, "run_git_bytes", side_effect=drift):
+                self.assert_denied("bounded_g2_batch_preimage_changed")
+
+
     suite = unittest.defaultTestLoader.loadTestsFromTestCase(ClosedRequestTests)
     suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(G2MigrationGuardSourceContractTests))
     suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(G2AppointmentConcurrencySourceContractTests))
@@ -8722,6 +9096,7 @@ def build_integration_suite(assets: Path) -> unittest.TestSuite:
     suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(G2CIMigrationSourceContractTests))
     suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(G2TenantMigrationSourceContractTests))
     suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(G2TenantRelationshipSourceContractTests))
+    suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(G2CICompletenessSourceContractTests))
     suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(G2MigrationGuardAdmissionTests))
     suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(G2AppointmentConcurrencyAdmissionTests))
     suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(G2ProductionProfileAdmissionTests))
@@ -8730,6 +9105,7 @@ def build_integration_suite(assets: Path) -> unittest.TestSuite:
     suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(G2CIMigrationAdmissionTests))
     suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(G2TenantMigrationAdmissionTests))
     suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(G2TenantRelationshipAdmissionTests))
+    suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(G2CICompletenessAdmissionTests))
     suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(G2AudioSourceContractTests))
     suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(G2PatientSourceContractTests))
     suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(G2AtomicitySourceContractTests))

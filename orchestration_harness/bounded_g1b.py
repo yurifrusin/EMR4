@@ -1142,7 +1142,70 @@ G2_RELATIONSHIP_LIMITS = (
 G2_BATCH_KINDS = G2_BATCH_KINDS | {"enable_g2_tenant_relationships", "repair_g2_tenant_relationships"}
 G2_MAINTENANCE_KINDS = G2_MAINTENANCE_KINDS | {"enable_g2_tenant_relationships"}
 OPERATION_PATHS.update(enable_g2_tenant_relationships=G2_RELATIONSHIP_MAINTENANCE_PATHS,
-                       repair_g2_tenant_relationships=G2_RELATIONSHIP_PATHS)
+                        repair_g2_tenant_relationships=G2_RELATIONSHIP_PATHS)
+
+
+G2_COMPLETENESS_BINDING_VERSION = "ariadne.bounded_g2_batch_binding.v17"
+G2_COMPLETENESS_SCOPE_VERSION = "ariadne.g2_reviewed_batch_scope.v17"
+G2_COMPLETENESS_CODE_PATHS = G2_BATCH_CODE_PATHS
+G2_COMPLETENESS_PATHS = frozenset(raisa_policy.G2_CI_COMPLETENESS_PATHS)
+G2_COMPLETENESS_MAINTENANCE_PATHS = G2_BATCH_CONTROL_PATHS | G2_COMPLETENESS_CODE_PATHS
+G2_COMPLETENESS_EFFECTS = G2_BATCH_EFFECTS
+G2_COMPLETENESS_PREDECESSOR = {
+    "commit": "1230bb8201d0fcca69777663c37a868d626b312f",
+    "parent": "3eb64c6a3783b50e69aa6224d37647421eeb6356",
+    "tree": "066494d6d6942ca8c0a739b0218f881223d72eb5",
+    "source_sha256": {
+        "orchestration_harness/bounded_g1b.py": "c8fe4b34da965335ab5aded61da87c5b7fc273c320edbaf78c8e4e923ae34bac",
+        "orchestration_harness/configuration_core.py": "f7ba7a80eb0a590f9fb71b864e6c1f9f43241d9f7d70a38da67a9243fea208e5",
+        "orchestration_harness/programme_admission.py": "ac816a8a79b2d8222fa357777c075950927e86cf30c8a5b25ffd08a474052181",
+        "orchestration_harness/raisa_policy.py": "1b3ccb52c73d650d2bcc72fa19c7f9a55dba06060a49dee762950c89553670d4",
+        "tests/test_bounded_g1b.py": "d6f09fb547f30e6463bb3565ad552dcd41ad223bf580a3cf679f3e6dc75930df",
+    },
+}
+G2_COMPLETENESS_PREDECESSOR_POLICY = {
+    AGENTS: "97d6ea223508d53ee704a0cc3ceec383e2eea9f3db764376b538e8341bee886e",
+    STATE: "4bb258ce435c50d765ac040401ae23d500aaaab1da4bbaa047078505b2e1bf1c",
+    OVERLAY: "52909e9830920ace93bcd00c3edf615401818322fe94658c003d95c140696b3b",
+    G2_SCOPE: "74bcee3dec174930012edd2b34d8e098be4b2f16d8822bace2f96b4b6884f626",
+    GATES: "115a651a0b13156a591045638d1833a9a71347e7b1f7e694767eac49d2abc341",
+}
+G2_COMPLETENESS_REPAIR_PINS = {
+    "scripts/python_source_state.py": "f7e77f2785dc1b405fdaa038acff494ad27a6a005754aa5ee43665dd92ad2aa5",
+    "scripts/verify_repository.py": "da5477e5036d10a7813d7d5384ebd66fe20c98aa3acf4a555d1f87112220cce3",
+    "tests/test_python_source_state.py": "6e17f4682b9ff65ae9aabab6b2d2b436d8496784acc3496c961e5bcdfb21ab29",
+}
+G2_COMPLETENESS_CANDIDATE_PINS = {
+    "scripts/python_source_state.py": "deda2e86f7a6cfc1f8da56e45dc420c896a24749324e326cfc54e576e11528de",
+    "scripts/verify_repository.py": "51d9e529c7f8846b0beb41cfacd95ae816577fffdb87f189b1739d64121ac8e5",
+    "tests/test_python_source_state.py": "3c7fdefb9aeae9defc1208948083533da3a8531f9664e4538ca3a781e223163d",
+}
+G2_COMPLETENESS_PRESERVED_RELATIONSHIP_PINS = dict(G2_RELATIONSHIP_CANDIDATE_PINS)
+G2_COMPLETENESS_PUBLICATION_ACCEPTANCE = {
+    "path": "C:/Users/there/.codex/visualizations/2026/09/15/01a0a72f-a9bd-72f3-b259-0de184339a44/ci-c-preparation-v1/tenant-relationship-repair-preparation-v1/product-publication-preparation-v1/independent-publication-effect-review-v1.json",
+    "sha256": "d3676fee74afcdd17f78333c23c6ca4f3d7e98d26fe3d5d39c575ccc7da982fa",
+    "role": "opaque_historical_relationship_publication_acceptance_not_operation_authority",
+}
+G2_COMPLETENESS_INVARIANT = {
+    "literal_file_count": 3,
+    "existing_files_changed": True,
+    "allowed_additions": [],
+    "candidate_sha256": dict(G2_COMPLETENESS_CANDIDATE_PINS),
+    "complete_ci_claimed": False,
+    "bounded_ci_remains_eligible": True,
+    "runtime_binding_separately_required": True,
+}
+G2_COMPLETENESS_LIMITS = (
+    "only three exact existing CI source and test files may change",
+    "a complete-CI claim without a complete ordinary source population must fail closed",
+    "bounded selected CI checks remain eligible without asserting repository-wide coverage",
+    "the accepted relationship publication and every earlier latch remain historical",
+    "admission grants no whole-CI success, database runtime, G2 completion, provider, real-data, protected-evidence or deployment acceptance",
+)
+G2_BATCH_KINDS = G2_BATCH_KINDS | {"enable_g2_ci_completeness", "repair_g2_ci_completeness"}
+G2_MAINTENANCE_KINDS = G2_MAINTENANCE_KINDS | {"enable_g2_ci_completeness"}
+OPERATION_PATHS.update(enable_g2_ci_completeness=G2_COMPLETENESS_MAINTENANCE_PATHS,
+                       repair_g2_ci_completeness=G2_COMPLETENESS_PATHS)
 
 
 def _batch_changes(binding: dict) -> dict:
@@ -1155,9 +1218,10 @@ def _batch_changes(binding: dict) -> dict:
     cim = binding.get("schema_version") == G2_CIM_BINDING_VERSION
     tenant = binding.get("schema_version") == G2_TENANT_BINDING_VERSION
     relationship = binding.get("schema_version") == G2_RELATIONSHIP_BINDING_VERSION
+    completeness = binding.get("schema_version") == G2_COMPLETENESS_BINDING_VERSION
     maintenance = kind in G2_MAINTENANCE_KINDS
-    exact_count = (6 if (dependency or ci or cim or tenant or relationship) and maintenance else
-                   3 if relationship else
+    exact_count = (6 if (dependency or ci or cim or tenant or relationship or completeness) and maintenance else
+                   3 if completeness or relationship else
                    2 if tenant else
                    2 if cim else
                    7 if ci else
@@ -1191,9 +1255,12 @@ def _batch_changes(binding: dict) -> dict:
            and (kind in {"enable_g2_ci_selection", "repair_g2_ci_selection"}) == ci
            and (kind in {"enable_g2_ci_migration", "repair_g2_ci_migration"}) == cim
            and (kind in {"enable_g2_tenant_migration", "repair_g2_tenant_migration"}) == tenant
-           and (kind in {"enable_g2_tenant_relationships", "repair_g2_tenant_relationships"}) == relationship,
-            "bounded_g2_batch_binding_version")
-    allowed = (G2_RELATIONSHIP_MAINTENANCE_PATHS if maintenance and relationship
+            and (kind in {"enable_g2_tenant_relationships", "repair_g2_tenant_relationships"}) == relationship
+            and (kind in {"enable_g2_ci_completeness", "repair_g2_ci_completeness"}) == completeness,
+             "bounded_g2_batch_binding_version")
+    allowed = (G2_COMPLETENESS_MAINTENANCE_PATHS if maintenance and completeness
+                else G2_COMPLETENESS_PATHS if completeness
+                else G2_RELATIONSHIP_MAINTENANCE_PATHS if maintenance and relationship
                 else G2_RELATIONSHIP_PATHS if relationship
                 else G2_TENANT_MAINTENANCE_PATHS if maintenance and tenant
                 else G2_TENANT_PATHS if tenant
@@ -1219,7 +1286,7 @@ def _batch_changes(binding: dict) -> dict:
                else G2_PATIENT_PATHS if patient
                else G2_AUDIO_PATHS if audio else G2_MIGRATION_PATHS if migration
                else G2_CATALOGUE_PATHS if catalogue else G2_BATCH_PATHS)
-    _need(set(rows) <= allowed and (not (maintenance or guard or appointment or production or dependency or ci or cim or tenant or relationship)
+    _need(set(rows) <= allowed and (not (maintenance or guard or appointment or production or dependency or ci or cim or tenant or relationship or completeness)
                                       or set(rows) == allowed),
           "bounded_g2_batch_path_not_allowed")
     for path, row in rows.items():
@@ -1243,6 +1310,11 @@ def _batch_changes(binding: dict) -> dict:
                   "bounded_g2_relationship_repair_preimage")
             _need(row["after_sha256"] == G2_RELATIONSHIP_CANDIDATE_PINS[path],
                   "bounded_g2_relationship_candidate_digest")
+        if completeness and not maintenance:
+            _need(row["before_sha256"] == G2_COMPLETENESS_REPAIR_PINS[path],
+                  "bounded_g2_completeness_repair_preimage")
+            _need(row["after_sha256"] == G2_COMPLETENESS_CANDIDATE_PINS[path],
+                  "bounded_g2_completeness_candidate_digest")
         if ci and not maintenance:
             _need(row["before_sha256"] == G2_CI_REPAIR_PINS[path],
                   "bounded_g2_ci_repair_preimage")
@@ -1282,7 +1354,8 @@ def batch_input_paths(binding: dict) -> frozenset[str]:
                                           G2_PRODUCTION_PROFILE_BINDING_VERSION,
                                           G2_DEPENDENCY_BINDING_VERSION,
                                           G2_CI_BINDING_VERSION, G2_CIM_BINDING_VERSION,
-                                           G2_TENANT_BINDING_VERSION, G2_RELATIONSHIP_BINDING_VERSION}:
+                                           G2_TENANT_BINDING_VERSION, G2_RELATIONSHIP_BINDING_VERSION,
+                                           G2_COMPLETENESS_BINDING_VERSION}:
         return G2_CATALOGUE_POLICY_PATHS | frozenset(changes)
     return G2_BATCH_INPUT_PATHS
 
@@ -1304,6 +1377,8 @@ def operation_effects(kind: str) -> frozenset[str]:
         return G2_TENANT_EFFECTS
     if kind == "repair_g2_tenant_relationships":
         return G2_RELATIONSHIP_EFFECTS
+    if kind == "repair_g2_ci_completeness":
+        return G2_COMPLETENESS_EFFECTS
     if kind == "repair_g2_ci_selection":
         return G2_CI_EFFECTS
     return frozenset({"repository_read"}) if kind == "assess_g1e" else EFFECTS
@@ -1316,7 +1391,7 @@ def operation_paths(kind: str, binding: dict | None = None) -> frozenset[str]:
                  "repair_g2_migration_downgrade_guard", "repair_g2_appointment_concurrency",
                  "repair_g2_production_profile", "repair_g2_dependency_repair",
                    "repair_g2_ci_selection", "repair_g2_tenant_migration",
-                   "repair_g2_tenant_relationships"}:
+                    "repair_g2_tenant_relationships", "repair_g2_ci_completeness"}:
         _need(type(binding) is dict and binding.get("operation_kind") == kind,
               "bounded_g2_batch_binding_required")
         return frozenset(_batch_changes(binding))
@@ -1330,7 +1405,8 @@ def _operation(kind: str, binding: dict | None = None) -> dict:
                 "transition_paths": G2_TRANSITION_PATHS, "scope_path": G2_SCOPE,
                 "transition": kind in G2_MAINTENANCE_KINDS, "batch": True,
                 "profile": G2_PROFILE, "gate": "G2",
-                  "limits": G2_RELATIONSHIP_LIMITS if binding.get("schema_version") == G2_RELATIONSHIP_BINDING_VERSION
+                  "limits": G2_COMPLETENESS_LIMITS if binding.get("schema_version") == G2_COMPLETENESS_BINDING_VERSION
+                  else G2_RELATIONSHIP_LIMITS if binding.get("schema_version") == G2_RELATIONSHIP_BINDING_VERSION
                   else G2_TENANT_LIMITS if binding.get("schema_version") == G2_TENANT_BINDING_VERSION
                   else G2_CIM_LIMITS if binding.get("schema_version") == G2_CIM_BINDING_VERSION
                  else G2_CI_LIMITS if binding.get("schema_version") == G2_CI_BINDING_VERSION
@@ -2869,8 +2945,59 @@ def build_g2_relationship_scope(recorded_at: str, transition_base: str,
     return scope
 
 
+def _g2_completeness_profile() -> dict:
+    """Return only the fixed V17 three-update CI profile."""
+    return raisa_policy.g2_ci_completeness_profile()
+
+
+def build_g2_completeness_scope(recorded_at: str, transition_base: str,
+                                controller_sources: dict) -> dict:
+    """Select three existing guard files after accepted relationship publication."""
+    _need(transition_base == G2_COMPLETENESS_PREDECESSOR["commit"],
+          "bounded_g2_completeness_transition_base")
+    sources = _digest_map(controller_sources, CONTROLLER_PATHS,
+                          "bounded_g2_completeness_controller_paths")
+    historical_sources = copy.deepcopy(sources)
+    for path in G2_COMPLETENESS_CODE_PATHS:
+        historical_sources[path] = G2_COMPLETENESS_PREDECESSOR["source_sha256"][path]
+    scope = build_g2_relationship_scope(
+        recorded_at, G2_RELATIONSHIP_PREDECESSOR["commit"], historical_sources)
+    _need(all(sources[path] == G2_COMPLETENESS_PREDECESSOR["source_sha256"][path]
+              for path in CONTROLLER_PATHS - G2_COMPLETENESS_CODE_PATHS),
+          "bounded_g2_completeness_unchanged_controller_component")
+    scope["historical_relationship_invariant"] = scope.pop("tenant_relationship_invariant")
+    scope["historical_relationship_operation"] = copy.deepcopy(scope["current_operation"])
+    scope["controller_source_sha256"] = copy.deepcopy(sources)
+    scope["transition_base_commit"] = transition_base
+    scope.update(
+        schema_version=G2_COMPLETENESS_SCOPE_VERSION,
+        enable_operation="enable_g2_ci_completeness",
+        repair_operation="repair_g2_ci_completeness",
+        allowed_paths=sorted(G2_COMPLETENESS_PATHS), maximum_changed_files=3,
+        allowed_additions=[],
+        allowed_effects=sorted(G2_COMPLETENESS_EFFECTS),
+        forbidden_effects=_g2_completeness_profile()["forbidden_effects"],
+        ci_completeness_invariant=copy.deepcopy(G2_COMPLETENESS_INVARIANT),
+        repair_preimage_sha256=copy.deepcopy(G2_COMPLETENESS_REPAIR_PINS),
+        published_relationship_repair={
+            **{key: G2_COMPLETENESS_PREDECESSOR[key] for key in ("commit", "parent", "tree")},
+            "acceptance": copy.deepcopy(G2_COMPLETENESS_PUBLICATION_ACCEPTANCE),
+        },
+        claim_limits=list(G2_COMPLETENESS_LIMITS),
+    )
+    scope["current_operation"]["operation_id"] = "g2-ci-completeness-repair"
+    scope["current_operation"]["supersedes"] = {
+        "operation_id": "g2-tenant-relationship-repair", "scope_path": G2_SCOPE,
+        "scope_commit": G2_COMPLETENESS_PREDECESSOR["commit"],
+        "scope_sha256": G2_COMPLETENESS_PREDECESSOR_POLICY[G2_SCOPE],
+        "historical_latch_preserved": True,
+    }
+    return scope
+
+
 def _validate_g2_batch_scope(scope: dict) -> None:
-    builder = (build_g2_relationship_scope if scope.get("schema_version") == G2_RELATIONSHIP_SCOPE_VERSION
+    builder = (build_g2_completeness_scope if scope.get("schema_version") == G2_COMPLETENESS_SCOPE_VERSION
+               else build_g2_relationship_scope if scope.get("schema_version") == G2_RELATIONSHIP_SCOPE_VERSION
                else build_g2_tenant_scope if scope.get("schema_version") == G2_TENANT_SCOPE_VERSION
                else build_g2_cim_scope if scope.get("schema_version") == G2_CIM_SCOPE_VERSION
                else build_g2_ci_scope if scope.get("schema_version") == G2_CI_SCOPE_VERSION
@@ -3227,7 +3354,8 @@ def _load_g2_batch_inputs(context, target, source, evidence_root, scratch, bindi
     cim = binding["schema_version"] == G2_CIM_BINDING_VERSION
     tenant = binding["schema_version"] == G2_TENANT_BINDING_VERSION
     relationship = binding["schema_version"] == G2_RELATIONSHIP_BINDING_VERSION
-    post_audio = audio or patient or atomicity or clinical or guard or appointment or production or dependency or ci or cim or tenant or relationship
+    completeness = binding["schema_version"] == G2_COMPLETENESS_BINDING_VERSION
+    post_audio = audio or patient or atomicity or clinical or guard or appointment or production or dependency or ci or cim or tenant or relationship or completeness
     version_kinds = {
         G2_BATCH_BINDING_VERSION: {"enable_g2_batches", "repair_g2_batch"},
         G2_CATALOGUE_BINDING_VERSION: {"extend_g2_catalogue", "repair_g2_batch"},
@@ -3245,6 +3373,7 @@ def _load_g2_batch_inputs(context, target, source, evidence_root, scratch, bindi
         G2_CIM_BINDING_VERSION: {"enable_g2_ci_migration", "repair_g2_ci_migration"},
         G2_TENANT_BINDING_VERSION: {"enable_g2_tenant_migration", "repair_g2_tenant_migration"},
         G2_RELATIONSHIP_BINDING_VERSION: {"enable_g2_tenant_relationships", "repair_g2_tenant_relationships"},
+        G2_COMPLETENESS_BINDING_VERSION: {"enable_g2_ci_completeness", "repair_g2_ci_completeness"},
     }
     _need(binding["operation_kind"] in version_kinds.get(binding["schema_version"], set()),
           "bounded_g2_batch_binding_version")
@@ -3269,6 +3398,9 @@ def _load_g2_batch_inputs(context, target, source, evidence_root, scratch, bindi
     if relationship and maintenance:
         _need(binding["base_commit"] == G2_RELATIONSHIP_PREDECESSOR["commit"],
               "bounded_g2_relationship_transition_base")
+    if completeness and maintenance:
+        _need(binding["base_commit"] == G2_COMPLETENESS_PREDECESSOR["commit"],
+              "bounded_g2_completeness_transition_base")
     if ci and maintenance:
         _need(binding["base_commit"] == G2_CI_PREDECESSOR["commit"],
               "bounded_g2_ci_transition_base")
@@ -3321,12 +3453,14 @@ def _load_g2_batch_inputs(context, target, source, evidence_root, scratch, bindi
           "bounded_g2_tenant_scope_binding_mismatch")
     _need((scope.get("schema_version") == G2_RELATIONSHIP_SCOPE_VERSION) == relationship,
           "bounded_g2_relationship_scope_binding_mismatch")
+    _need((scope.get("schema_version") == G2_COMPLETENESS_SCOPE_VERSION) == completeness,
+          "bounded_g2_completeness_scope_binding_mismatch")
     _validate_g2_batch_scope(scope)
     frozen = {**FROZEN_PINS, COST: COST_PIN, SCOPE_PATH: G1B_BASELINE_PINS[SCOPE_PATH],
               G1C_SCOPE: G1C_BASELINE_PINS[G1C_SCOPE], G1D_SCOPE: G1D_BASELINE_PINS[G1D_SCOPE],
               G1E_SCOPE: G1E_BASELINE_PINS[G1E_SCOPE], **GOVERNOR_PINS, **PROVENANCE_DEPENDENCY_PINS,
               **PROVENANCE_PINS, **CONFIGURATION_LEAF_PINS,
-                AGENTS: (G2_PRODUCTION_PROFILE_INSTRUCTIONS_SHA256 if production or dependency or ci or cim or tenant or relationship
+                 AGENTS: (G2_PRODUCTION_PROFILE_INSTRUCTIONS_SHA256 if production or dependency or ci or cim or tenant or relationship or completeness
                        else G2_APPOINTMENT_INSTRUCTIONS_SHA256 if appointment
                        else G2_MIGRATION_GUARD_INSTRUCTIONS_SHA256 if guard
                        else G2_AUDIO_INSTRUCTIONS_SHA256 if post_audio else
@@ -3355,7 +3489,7 @@ def _load_g2_batch_inputs(context, target, source, evidence_root, scratch, bindi
     if migration or post_audio:
         owner_path = raisa_policy.G2_MIGRATION_OWNER_RECORD
         evidence[owner_path] = read(evidence_root / owner_path, raisa_policy.G2_MIGRATION_OWNER_SHA256)
-    if clinical or guard or appointment or production or dependency or ci or cim or tenant or relationship:
+    if clinical or guard or appointment or production or dependency or ci or cim or tenant or relationship or completeness:
         owner_path = raisa_policy.G2_CLINICAL_OWNER_RECORD
         evidence[owner_path] = read(evidence_root / owner_path, raisa_policy.G2_CLINICAL_OWNER_SHA256)
     prior_policy = initial_policy
@@ -3432,7 +3566,7 @@ def _load_g2_batch_inputs(context, target, source, evidence_root, scratch, bindi
             if path in G2_CLINICAL_PREDECESSOR_POLICY:
                 prior_policy[path] = raw
         _validate_g2_clinical_atomicity_publication(target, base)
-    if guard or appointment or production or dependency or ci or cim or tenant or relationship:
+    if guard or appointment or production or dependency or ci or cim or tenant or relationship or completeness:
         _batch_publication(target, G2_MIGRATION_GUARD_PREDECESSOR, base)
         prior_policy = {}
         for path, digest in {**G2_MIGRATION_GUARD_PREDECESSOR_POLICY,
@@ -3442,7 +3576,7 @@ def _load_g2_batch_inputs(context, target, source, evidence_root, scratch, bindi
             _need(_sha(raw) == digest, "bounded_g2_migration_guard_predecessor_bytes_changed")
             if path in G2_MIGRATION_GUARD_PREDECESSOR_POLICY:
                 prior_policy[path] = raw
-    if appointment or production or dependency or ci or cim or tenant or relationship:
+    if appointment or production or dependency or ci or cim or tenant or relationship or completeness:
         _batch_publication(target, G2_APPOINTMENT_PREDECESSOR, base)
         prior_policy = {}
         for path, digest in {**G2_APPOINTMENT_PREDECESSOR_POLICY,
@@ -3452,7 +3586,7 @@ def _load_g2_batch_inputs(context, target, source, evidence_root, scratch, bindi
             _need(_sha(raw) == digest, "bounded_g2_appointment_predecessor_bytes_changed")
             if path in G2_APPOINTMENT_PREDECESSOR_POLICY:
                 prior_policy[path] = raw
-    if production or dependency or ci or cim or tenant or relationship:
+    if production or dependency or ci or cim or tenant or relationship or completeness:
         _batch_publication(target, G2_PRODUCTION_PROFILE_PREDECESSOR, base)
         prior_policy = {}
         predecessor_pins = {
@@ -3468,7 +3602,7 @@ def _load_g2_batch_inputs(context, target, source, evidence_root, scratch, bindi
                   "bounded_g2_production_profile_predecessor_bytes_changed")
             if path in G2_PRODUCTION_PROFILE_PREDECESSOR_POLICY:
                 prior_policy[path] = raw
-    if dependency or ci or cim or tenant or relationship:
+    if dependency or ci or cim or tenant or relationship or completeness:
         _batch_publication(target, G2_DEPENDENCY_PREDECESSOR, base)
         prior_policy = {}
         predecessor_pins = {
@@ -3483,7 +3617,7 @@ def _load_g2_batch_inputs(context, target, source, evidence_root, scratch, bindi
             _need(_sha(raw) == digest, "bounded_g2_dependency_predecessor_bytes_changed")
             if path in G2_DEPENDENCY_PREDECESSOR_POLICY:
                 prior_policy[path] = raw
-    if ci or cim or tenant or relationship:
+    if ci or cim or tenant or relationship or completeness:
         _batch_publication(target, G2_CI_PREDECESSOR, base)
         prior_policy = {}
         predecessor_pins = {**G2_CI_PREDECESSOR_POLICY,
@@ -3495,7 +3629,7 @@ def _load_g2_batch_inputs(context, target, source, evidence_root, scratch, bindi
             _need(_sha(raw) == digest, "bounded_g2_ci_predecessor_bytes_changed")
             if path in G2_CI_PREDECESSOR_POLICY:
                 prior_policy[path] = raw
-    if cim or tenant or relationship:
+    if cim or tenant or relationship or completeness:
         _batch_publication(target, G2_CIM_PREDECESSOR, base)
         prior_policy = {}
         predecessor_pins = {**G2_CIM_PREDECESSOR_POLICY,
@@ -3507,7 +3641,7 @@ def _load_g2_batch_inputs(context, target, source, evidence_root, scratch, bindi
             _need(_sha(raw) == digest, "bounded_g2_cim_predecessor_bytes_changed")
             if path in G2_CIM_PREDECESSOR_POLICY:
                 prior_policy[path] = raw
-    if tenant or relationship:
+    if tenant or relationship or completeness:
         _batch_publication(target, G2_TENANT_PREDECESSOR, base)
         prior_policy = {}
         predecessor_pins = {**G2_TENANT_PREDECESSOR_POLICY,
@@ -3518,7 +3652,7 @@ def _load_g2_batch_inputs(context, target, source, evidence_root, scratch, bindi
             _need(_sha(raw) == digest, "bounded_g2_tenant_predecessor_bytes_changed")
             if path in G2_TENANT_PREDECESSOR_POLICY:
                 prior_policy[path] = raw
-    if relationship:
+    if relationship or completeness:
         _batch_publication(target, G2_RELATIONSHIP_PREDECESSOR, base)
         prior_policy = {}
         predecessor_pins = {**G2_RELATIONSHIP_PREDECESSOR_POLICY,
@@ -3529,6 +3663,19 @@ def _load_g2_batch_inputs(context, target, source, evidence_root, scratch, bindi
                 G2_RELATIONSHIP_PREDECESSOR["commit"] + ":" + path)
             _need(_sha(raw) == digest, "bounded_g2_relationship_predecessor_bytes_changed")
             if path in G2_RELATIONSHIP_PREDECESSOR_POLICY:
+                prior_policy[path] = raw
+    if completeness:
+        _batch_publication(target, G2_COMPLETENESS_PREDECESSOR, base)
+        prior_policy = {}
+        predecessor_pins = {**G2_COMPLETENESS_PREDECESSOR_POLICY,
+                            **G2_COMPLETENESS_PREDECESSOR["source_sha256"],
+                            **G2_COMPLETENESS_PRESERVED_RELATIONSHIP_PINS,
+                            **G2_COMPLETENESS_REPAIR_PINS}
+        for path, digest in predecessor_pins.items():
+            raw = trusted_git.run_git_bytes(target, "cat-file", "blob",
+                G2_COMPLETENESS_PREDECESSOR["commit"] + ":" + path)
+            _need(_sha(raw) == digest, "bounded_g2_completeness_predecessor_bytes_changed")
+            if path in G2_COMPLETENESS_PREDECESSOR_POLICY:
                 prior_policy[path] = raw
     base_payloads = {}
     for path in sorted(input_paths):
@@ -3559,7 +3706,8 @@ def _load_g2_batch_inputs(context, target, source, evidence_root, scratch, bindi
     _validate_installed_controller(controller)
     _batch_publication(target, controller, base)
     if maintenance:
-        expected_controller = (G2_RELATIONSHIP_PREDECESSOR if relationship
+        expected_controller = (G2_COMPLETENESS_PREDECESSOR if completeness
+                                else G2_RELATIONSHIP_PREDECESSOR if relationship
                                else G2_TENANT_PREDECESSOR if tenant
                                else G2_CIM_PREDECESSOR if cim
                                else G2_CI_PREDECESSOR if ci
@@ -3577,7 +3725,8 @@ def _load_g2_batch_inputs(context, target, source, evidence_root, scratch, bindi
         _need(controller == expected_controller and binding["activation_commit"] == expected_activation,
               "bounded_g2_batch_maintenance_predecessor")
         _need(scope["transition_base_commit"] == base, "bounded_g2_batch_maintenance_base")
-        prior_pins = (G2_RELATIONSHIP_PREDECESSOR_POLICY if relationship
+        prior_pins = (G2_COMPLETENESS_PREDECESSOR_POLICY if completeness
+                       else G2_RELATIONSHIP_PREDECESSOR_POLICY if relationship
                       else G2_TENANT_PREDECESSOR_POLICY if tenant
                       else G2_CIM_PREDECESSOR_POLICY if cim
                       else G2_CI_PREDECESSOR_POLICY if ci
@@ -3709,9 +3858,33 @@ def build_g2_relationship_transition(before: dict[str, bytes], scope: dict) -> d
             G2_SCOPE: scope_raw}
 
 
+def build_g2_completeness_transition(before: dict[str, bytes], scope: dict) -> dict[str, bytes]:
+    """Activate only three existing guard updates; retain every G2 closure."""
+    _keys(before, G2_BATCH_CONTROL_PATHS, "bounded_g2_completeness_transition_paths")
+    for path in G2_BATCH_CONTROL_PATHS:
+        _need(type(before[path]) is bytes
+              and _sha(before[path]) == G2_COMPLETENESS_PREDECESSOR_POLICY[path],
+              "bounded_g2_completeness_prior_policy_changed")
+    _need(scope.get("schema_version") == G2_COMPLETENESS_SCOPE_VERSION,
+          "bounded_g2_completeness_scope_version")
+    _validate_g2_batch_scope(scope)
+    state = _json(before[STATE])
+    overlay = _document(before[OVERLAY], OVERLAY)
+    scope_raw = _canonical(scope) + b"\n"
+    state["observed_at"] = scope["recorded_at"]
+    state["g2"].update(scope_sha256=_sha(scope_raw),
+                       current_operation=_json(_canonical(scope["current_operation"])))
+    state["task_selection"].update(next_eligibility_condition="bounded_G2_ci_completeness_repair_active")
+    overlay["profiles"][G2_PROFILE] = _g2_completeness_profile()
+    return {STATE: (json.dumps(state, indent=2, ensure_ascii=False) + "\n").encode(),
+            OVERLAY: yaml.safe_dump(overlay, sort_keys=False, allow_unicode=True).encode(),
+            G2_SCOPE: scope_raw}
+
+
 def _validate_g2_batch_loaded_policy(inputs):
     scope = _json(inputs.payloads[G2_SCOPE])
-    builder = (build_g2_relationship_transition if scope.get("schema_version") == G2_RELATIONSHIP_SCOPE_VERSION
+    builder = (build_g2_completeness_transition if scope.get("schema_version") == G2_COMPLETENESS_SCOPE_VERSION
+               else build_g2_relationship_transition if scope.get("schema_version") == G2_RELATIONSHIP_SCOPE_VERSION
                else build_g2_tenant_transition if scope.get("schema_version") == G2_TENANT_SCOPE_VERSION
                else build_g2_cim_transition if scope.get("schema_version") == G2_CIM_SCOPE_VERSION
                else build_g2_ci_transition if scope.get("schema_version") == G2_CI_SCOPE_VERSION
