@@ -343,3 +343,165 @@ def test_certificate_pem_parsing(certificates):
     assert restored.fingerprint(hashes.SHA256()) == leaf.fingerprint(hashes.SHA256())
     with pytest.raises(ValueError):
         x509.load_pem_x509_certificate(b"not-a-PEM-certificate")
+
+
+
+# PyJWT 2.15.1 regression cases. Synthetic package boundaries only:
+# no application imports, configured-secret inspection, HTTP or provider calls.
+def _pyjwt2151_claims():
+    now = int(datetime.now(timezone.utc).timestamp())
+    return {
+        "sub": "00000000-0000-4000-8000-000000000001",
+        "practice_id": "00000000-0000-4000-8000-000000000002",
+        "role": "GP",
+        "exp": now + 3600,
+        "nbf": now - 120,
+        "iat": now - 120,
+    }
+
+
+@pytest.fixture
+def pyjwt2151_boundary():
+    # This guard does not replace external distribution/import/input binding.
+    assert jwt.__version__ == "2.15.1"
+
+
+def _pyjwt2151_sign_raw(payload, *, padded_segments=False):
+    import hashlib
+    import hmac
+
+    header = b'{"alg":"HS256","typ":"JWT","pad":"x"}'
+    encode = base64.urlsafe_b64encode
+
+    def segment(value):
+        encoded = encode(value)
+        return encoded if padded_segments else encoded.rstrip(b"=")
+
+    header_segment = segment(header)
+    payload_segment = segment(payload)
+    signing_input = header_segment + b"." + payload_segment
+    signature = hmac.new(HMAC_KEY, signing_input, hashlib.sha256).digest()
+    return (
+        signing_input + b"." + encode(signature).rstrip(b"=")
+    ).decode("ascii")
+
+
+def _pyjwt2151_valid_control():
+    claims = _pyjwt2151_claims()
+    valid = jwt.encode(claims, HMAC_KEY, algorithm="HS256")
+    assert jwt.decode(valid, HMAC_KEY, algorithms=["HS256"]) == claims
+    return claims, valid
+
+
+def test_pyjwt2151_signature_padding(pyjwt2151_boundary):
+    claims, valid = _pyjwt2151_valid_control()
+    header, payload, signature = valid.split(".")
+    padded_signature = signature + "=" * (-len(signature) % 4)
+    assert padded_signature != signature
+    padded = ".".join((header, payload, padded_signature))
+    assert jwt.decode(padded, HMAC_KEY, algorithms=["HS256"]) == claims
+
+
+def test_pyjwt2151_signed_header_payload_padding(pyjwt2151_boundary):
+    _pyjwt2151_valid_control()
+    claims = {**_pyjwt2151_claims(), "pad": "x"}
+    raw = json.dumps(claims, separators=(",", ":")).encode("utf-8")
+    if len(raw) % 3 == 0:
+        claims["pad"] = "xx"
+        raw = json.dumps(claims, separators=(",", ":")).encode("utf-8")
+    # Re-sign changed header/payload bytes; reusing an unpadded signature
+    # would test a signature mismatch rather than legitimate issuer padding.
+    padded = _pyjwt2151_sign_raw(raw, padded_segments=True)
+    header, payload, _ = padded.split(".")
+    assert header.endswith("=") and payload.endswith("=")
+    assert jwt.decode(padded, HMAC_KEY, algorithms=["HS256"]) == claims
+
+
+@pytest.mark.parametrize(
+    "mutation",
+    [
+        "signature-junk",
+        "header-junk",
+        "payload-junk",
+        "interior-padding",
+        "excess-padding",
+        "noncanonical-padbits",
+    ],
+)
+def test_pyjwt2151_compact_segment_rejection(pyjwt2151_boundary, mutation):
+    _, valid = _pyjwt2151_valid_control()
+    parts = valid.split(".")
+    if mutation == "signature-junk":
+        parts[2] += "!!!!"
+    elif mutation == "header-junk":
+        parts[0] += "!!!!"
+    elif mutation == "payload-junk":
+        parts[1] += "!!!!"
+    elif mutation == "interior-padding":
+        parts[2] = parts[2][:4] + "=" + parts[2][4:]
+    elif mutation == "excess-padding":
+        parts[2] += "===="
+    elif mutation == "noncanonical-padbits":
+        alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_"
+        last_index = alphabet.index(parts[2][-1])
+        assert last_index & 3 == 0
+        parts[2] = parts[2][:-1] + alphabet[last_index | 1]
+    else:
+        raise AssertionError("unknown compact-segment mutation")
+    changed = ".".join(parts)
+    assert changed != valid
+    with pytest.raises(jwt.exceptions.DecodeError) as rejection:
+        jwt.decode(changed, HMAC_KEY, algorithms=["HS256"])
+    # InvalidSignatureError subclasses DecodeError; it is not this oracle.
+    assert type(rejection.value) is jwt.exceptions.DecodeError
+    segment = (
+        "header" if mutation == "header-junk"
+        else "payload" if mutation == "payload-junk"
+        else "crypto"
+    )
+    assert str(rejection.value) == f"Invalid {segment} padding"
+
+
+@pytest.mark.parametrize(
+    "claim,value",
+    [
+        pytest.param("exp", [], id="exp-list"),
+        pytest.param("exp", {}, id="exp-object"),
+        pytest.param("exp", None, id="exp-null"),
+        pytest.param("nbf", [], id="nbf-list"),
+        pytest.param("nbf", {}, id="nbf-object"),
+        pytest.param("nbf", None, id="nbf-null"),
+        pytest.param("iat", [], id="iat-list"),
+        pytest.param("iat", {}, id="iat-object"),
+        pytest.param("iat", None, id="iat-null"),
+    ],
+)
+def test_pyjwt2151_numeric_date_rejection(pyjwt2151_boundary, claim, value):
+    claims, _ = _pyjwt2151_valid_control()
+    changed = jwt.encode({**claims, claim: value}, HMAC_KEY, algorithm="HS256")
+    error = (
+        jwt.exceptions.InvalidIssuedAtError
+        if claim == "iat"
+        else jwt.exceptions.DecodeError
+    )
+    with pytest.raises(error) as rejection:
+        jwt.decode(changed, HMAC_KEY, algorithms=["HS256"])
+    assert type(rejection.value) is error
+    assert isinstance(rejection.value, jwt.InvalidTokenError)
+
+
+def test_pyjwt2151_nested_payload_error(pyjwt2151_boundary):
+    _pyjwt2151_valid_control()
+    # Exact prospective capsule recursion limit; never change it in a test.
+    assert sys.getrecursionlimit() == 1000
+    depth = 1500
+    raw = b'{"nested":' + b"[" * depth + b"0" + b"]" * depth + b"}"
+    assert len(raw) < 4096
+    # Signing raw bytes avoids an encoder RecursionError masking the decoder.
+    signed = _pyjwt2151_sign_raw(raw)
+    with pytest.raises(jwt.exceptions.DecodeError) as rejection:
+        jwt.decode(signed, HMAC_KEY, algorithms=["HS256"])
+    assert type(rejection.value) is jwt.exceptions.DecodeError
+    assert str(rejection.value).startswith("Invalid payload string:")
+    assert isinstance(rejection.value, jwt.InvalidTokenError)
+
