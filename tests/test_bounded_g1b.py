@@ -9097,6 +9097,7 @@ def build_integration_suite(assets: Path) -> unittest.TestSuite:
     suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(G2TenantMigrationSourceContractTests))
     suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(G2TenantRelationshipSourceContractTests))
     suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(G2CICompletenessSourceContractTests))
+    suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(G2PyJWTSourceContractTests))
     suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(G2MigrationGuardAdmissionTests))
     suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(G2AppointmentConcurrencyAdmissionTests))
     suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(G2ProductionProfileAdmissionTests))
@@ -9125,3 +9126,150 @@ def build_integration_suite(assets: Path) -> unittest.TestSuite:
     suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(G2AtomicityAdmissionTests))
     suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(G2ClinicalAdmissionTests))
     return suite
+
+class G2PyJWTSourceContractTests(unittest.TestCase):
+    """New V18 source cases; not executed and not a replay of V12 evidence."""
+
+    @staticmethod
+    def sources():
+        result = copy.deepcopy(b.G2_PYJWT_PREDECESSOR["source_sha256"])
+        for path in b.G2_DEPENDENCY_CODE_PATHS:
+            result[path] = "3" * 64
+        return result
+
+    @staticmethod
+    def binding(maintenance=False):
+        if maintenance:
+            rows = {path: {"before_sha256": "1" * 64, "after_sha256": "2" * 64}
+                    for path in b.G2_DEPENDENCY_MAINTENANCE_PATHS}
+        else:
+            rows = {path: {"before_sha256": b.G2_PYJWT_REPAIR_PINS[path],
+                           "after_sha256": b.G2_PYJWT_CANDIDATE_PINS[path]}
+                    for path in b.G2_DEPENDENCY_PATHS}
+        return {"schema_version": b.G2_PYJWT_BINDING_VERSION,
+                "operation_kind": "enable_g2_pyjwt_repair" if maintenance else "repair_g2_pyjwt_repair",
+                "repair_sha256": rows}
+
+    def reason(self, reason, action):
+        with self.assertRaises(b.BoundedG1BError) as caught:
+            action()
+        self.assertEqual(caught.exception.reason_code, reason)
+
+    def scope(self):
+        return b.build_g2_pyjwt_scope("2026-10-01T00:00:00+00:00",
+                                     b.G2_PYJWT_PREDECESSOR["commit"], self.sources())
+
+    def test_exact_two_existing_afterimages(self):
+        self.assertEqual(b._batch_changes(self.binding()), self.binding()["repair_sha256"])
+        self.assertTrue(all(row["before_sha256"] is not None
+                            for row in self.binding()["repair_sha256"].values()))
+        self.assertEqual(b.operation_paths("repair_g2_pyjwt_repair", self.binding()),
+                         b.G2_DEPENDENCY_PATHS)
+
+    def test_exact_six_maintenance_paths(self):
+        self.assertEqual(set(b._batch_changes(self.binding(True))),
+                         b.G2_DEPENDENCY_MAINTENANCE_PATHS)
+        self.assertEqual(b.operation_paths("enable_g2_pyjwt_repair"),
+                         b.G2_DEPENDENCY_MAINTENANCE_PATHS)
+
+    def test_old_binding_cannot_alias_new_repair(self):
+        bad = self.binding()
+        bad["schema_version"] = b.G2_DEPENDENCY_BINDING_VERSION
+        self.reason("bounded_g2_batch_binding_version", lambda: b._batch_changes(bad))
+
+    def test_new_binding_cannot_alias_old_repair(self):
+        bad = self.binding()
+        bad["operation_kind"] = "repair_g2_dependency_repair"
+        self.reason("bounded_g2_batch_binding_version", lambda: b._batch_changes(bad))
+
+    def test_exact_current_preimage_rejection(self):
+        for path in b.G2_DEPENDENCY_PATHS:
+            with self.subTest(path=path):
+                bad = self.binding()
+                bad["repair_sha256"][path]["before_sha256"] = "a" * 64
+                self.reason("bounded_g2_dependency_repair_preimage",
+                            lambda: b._batch_changes(bad))
+
+    def test_both_afterimages_are_enforced(self):
+        for path in b.G2_DEPENDENCY_PATHS:
+            with self.subTest(path=path):
+                bad = self.binding()
+                bad["repair_sha256"][path]["after_sha256"] = "a" * 64
+                self.reason("bounded_g2_pyjwt_candidate", lambda: b._batch_changes(bad))
+
+    def test_no_addition_or_scope_substitution(self):
+        bad = self.binding()
+        bad["repair_sha256"]["tests/test_dependency_compatibility.py"]["before_sha256"] = None
+        self.reason("bounded_g2_dependency_repair_preimage", lambda: b._batch_changes(bad))
+        bad = self.binding()
+        bad["repair_sha256"]["unapproved.py"] = bad["repair_sha256"].pop("requirements.txt")
+        self.reason("bounded_g2_batch_path_not_allowed", lambda: b._batch_changes(bad))
+
+    def test_preserves_unfinished_ci_scope_and_all_prior_fields(self):
+        prior = copy.deepcopy(b.G2_PYJWT_PRIOR_CI_SCOPE)
+        scope = self.scope()
+        self.assertEqual(scope["preserved_incomplete_ci_scope"], prior)
+        self.assertFalse(scope["current_operation"]["completion_accepted"])
+        self.assertFalse(scope["current_operation"]["supersedes"]["predecessor_completion_accepted"])
+        self.assertTrue(scope["current_operation"]["supersedes"]["historical_latch_preserved"])
+        self.assertEqual(b.G2_PYJWT_PRIOR_CI_SCOPE, prior)
+        self.assertEqual(scope["dependency_invariant"]["candidate_sha256"],
+                         b.G2_PYJWT_CANDIDATE_PINS)
+        for flag in ("execution_authorized", "g2_complete", "feature_work_eligible"):
+            self.assertIs(scope[flag], False)
+
+    def test_no_mutable_preserved_scope_or_acceptance_forgery(self):
+        for mutate in (
+            lambda s: s["preserved_incomplete_ci_scope"]["current_operation"].update(completion_accepted=True),
+            lambda s: s["current_operation"].update(completion_accepted=True),
+            lambda s: s["dependency_invariant"].update(cryptography="48.0.1"),
+        ):
+            scope = self.scope()
+            mutate(scope)
+            self.reason("bounded_g2_batch_scope_invalid", lambda: b._validate_g2_batch_scope(scope))
+
+    def test_exact_predecessor_and_unchanged_helper_rejections(self):
+        self.reason("bounded_g2_pyjwt_transition_base",
+                    lambda: b.build_g2_pyjwt_scope("2026-10-01T00:00:00+00:00", "f" * 40, self.sources()))
+        bad = self.sources()
+        bad["orchestration_harness/configuration_core.py"] = "f" * 64
+        self.reason("bounded_g2_pyjwt_unchanged_controller_component",
+                    lambda: b.build_g2_pyjwt_scope("2026-10-01T00:00:00+00:00",
+                                                  b.G2_PYJWT_PREDECESSOR["commit"], bad))
+
+    def test_profile_only_opens_exact_dependency_scope(self):
+        profile = rp.g2_pyjwt_repair_profile()
+        self.assertEqual(profile["scope_behavior"], rp.G2_PYJWT_REPAIR_SCOPE_BEHAVIOR)
+        self.assertEqual(profile["allowed_paths"], sorted(b.G2_DEPENDENCY_PATHS))
+        self.assertEqual(profile["allowed_effects"], rp.g2_dependency_repair_profile()["allowed_effects"])
+        self.assertIn("dependency_change", profile["allowed_effects"])
+        for effect in ("application_runtime", "provider_invocation", "integration", "deployment"):
+            self.assertNotIn(effect, profile["allowed_effects"])
+
+    def test_consumed_v12_and_v17_constants_unchanged(self):
+        self.assertEqual(b.G2_DEPENDENCY_BINDING_VERSION, "ariadne.bounded_g2_batch_binding.v12")
+        self.assertEqual(b.G2_COMPLETENESS_BINDING_VERSION, "ariadne.bounded_g2_batch_binding.v17")
+        self.assertEqual(b.G2_DEPENDENCY_PREDECESSOR["commit"], "db55dc48ca128d96e70a2e6697fb297b75abba8c")
+        self.assertEqual(b.G2_COMPLETENESS_REPAIR_PINS,
+                         b.G2_PYJWT_PRIOR_CI_SCOPE["repair_preimage_sha256"])
+
+
+    def test_rejects_null_timestamp_before_scope_persistence(self):
+        self.reason("bounded_g2_pyjwt_timestamp",
+                    lambda: b.build_g2_pyjwt_scope(None, b.G2_PYJWT_PREDECESSOR["commit"], self.sources()))
+
+    def test_rejects_malformed_timestamp_with_bounded_reason(self):
+        for stamp in ("garbage", "2026-99-99T00:00:00Z", "", 123):
+            with self.subTest(stamp=stamp):
+                self.reason("bounded_g2_pyjwt_timestamp",
+                            lambda: b.build_g2_pyjwt_scope(stamp, b.G2_PYJWT_PREDECESSOR["commit"], self.sources()))
+
+    def test_rejects_naive_timestamp_and_accepts_explicit_offsets(self):
+        for stamp in ("2026-10-01", "2026-10-01T00:00:00"):
+            with self.subTest(stamp=stamp):
+                self.reason("bounded_g2_pyjwt_timestamp",
+                            lambda: b.build_g2_pyjwt_scope(stamp, b.G2_PYJWT_PREDECESSOR["commit"], self.sources()))
+        for stamp in ("2026-10-01T00:00:00Z", "2026-10-01T10:00:00+10:00"):
+            with self.subTest(stamp=stamp):
+                self.assertEqual(b.build_g2_pyjwt_scope(stamp, b.G2_PYJWT_PREDECESSOR["commit"], self.sources())["recorded_at"],
+                                 stamp)

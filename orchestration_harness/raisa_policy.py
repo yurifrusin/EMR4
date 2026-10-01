@@ -1848,6 +1848,15 @@ def g2_dependency_repair_profile() -> dict:
                                     if effect != 'dependency_change']
     return profile
 
+
+G2_PYJWT_REPAIR_SCOPE_BEHAVIOR = 'bounded_g2_pyjwt2151_repair'
+
+def g2_pyjwt_repair_profile() -> dict:
+    """Separate exact PyJWT operation; preserve old cryptography profile."""
+    profile = g2_dependency_repair_profile()
+    profile['scope_behavior'] = G2_PYJWT_REPAIR_SCOPE_BEHAVIOR
+    return profile
+
 G2_CI_SELECTION_PATHS = (
     'scripts/verify_repository.py',
     'scripts/python_source_state.py',
@@ -2347,7 +2356,9 @@ def validate_recovery_configuration(*, documents: dict[str, bytes], expected_sha
         raise RaisaPolicyError("configuration_assessment_profile_invalid")
     if state["active_profile"] == G2_PROFILE:
         profile = overlay["profiles"][G2_PROFILE]
-        expected = (g2_ci_completeness_profile()
+        expected = (g2_pyjwt_repair_profile()
+                    if profile["scope_behavior"] == G2_PYJWT_REPAIR_SCOPE_BEHAVIOR
+                    else g2_ci_completeness_profile()
                     if profile["scope_behavior"] == G2_CI_COMPLETENESS_SCOPE_BEHAVIOR
                     else g2_tenant_relationship_profile()
                     if profile["scope_behavior"] == G2_TENANT_RELATIONSHIP_SCOPE_BEHAVIOR
