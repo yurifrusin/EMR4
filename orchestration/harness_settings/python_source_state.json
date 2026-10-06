@@ -1,12 +1,12 @@
 {
   "bandit_review": {
     "reviewed_findings": [],
-    "scope_sha256": "460c867483083555250c3db2d78bd8f29f881f93c773a1818e12ee8a35eb40cf",
+    "scope_sha256": "7e5c7209bc2172992ecea215a9d905ee90e77a557fa79975ba4a9038b16d272b",
     "status": "reviewed"
   },
   "completeness": {
     "pending": [
-      "Whole ordinary population, import/data closure, application and migration coverage, and required CI acceptance remain pending."
+      "Bounded CI-A mechanisms only; application, migration, wider safety coverage and complete required CI/G2 acceptance remain pending."
     ],
     "repository_wide": false
   },
@@ -19,7 +19,7 @@
     {
       "kind": "config",
       "path": "pyproject.toml",
-      "sha256": "30e8165ef1dedc0178ec2e1beb553a74de0b9680aed51282807fb45a4f28cde2"
+      "sha256": "9ef54f57e34588c8db728e01a085a04939a609a54994170fc2a2e143a94be57c"
     },
     {
       "kind": "source",
@@ -29,7 +29,7 @@
     {
       "kind": "source",
       "path": "scripts/python_source_state.py",
-      "sha256": "f7e77f2785dc1b405fdaa038acff494ad27a6a005754aa5ee43665dd92ad2aa5"
+      "sha256": "deda2e86f7a6cfc1f8da56e45dc420c896a24749324e326cfc54e576e11528de"
     },
     {
       "kind": "source",
@@ -44,17 +44,17 @@
     {
       "kind": "source",
       "path": "scripts/verify_repository.py",
-      "sha256": "da5477e5036d10a7813d7d5384ebd66fe20c98aa3acf4a555d1f87112220cce3"
+      "sha256": "51d9e529c7f8846b0beb41cfacd95ae816577fffdb87f189b1739d64121ac8e5"
     },
     {
       "kind": "test",
       "path": "tests/test_python_source_state.py",
-      "sha256": "6e17f4682b9ff65ae9aabab6b2d2b436d8496784acc3496c961e5bcdfb21ab29"
+      "sha256": "3c7fdefb9aeae9defc1208948083533da3a8531f9664e4538ca3a781e223163d"
     },
     {
       "kind": "test",
       "path": "tests/test_repository_maintenance.py",
-      "sha256": "5e31ef3b71f04bf27dd5f09d9e0add39b614c3c78fb7293394e2b3daad99bbbb"
+      "sha256": "716db9f4bc24a8b114377820124e2a52f8150a74d93c4286c50a428716ecf800"
     }
   ],
   "phases": {
@@ -141,7 +141,7 @@
   },
   "schema_version": "emr4.python_source_state.v2",
   "scope": "bounded_ordinary_verification",
-  "source_commit": "aeae8084c3905fe250a2e7f58b78edd4e995e2f3",
-  "source_tree": "b7f41b6bd8ec425da205f033268e068262025010",
+  "source_commit": "47c1988b3ad6a3b4e4549c701e8dc222e3d69a24",
+  "source_tree": "574e3ab4bbc06d7234265aba2009ce8ae1d987fc",
   "target_python": "3.11"
 }

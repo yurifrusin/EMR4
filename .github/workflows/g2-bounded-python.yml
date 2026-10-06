@@ -1,0 +1,153 @@
+name: G2 bounded Python source checks
+
+"on":
+  push:
+    branches: [codex/raisa-ariadne-recovery-g0]
+    paths:
+      - .github/workflows/g2-bounded-python.yml
+      - orchestration/harness_settings/python_source_state.json
+
+permissions:
+  contents: read
+
+concurrency:
+  group: g2-bounded-python-recovery
+  cancel-in-progress: false
+
+jobs:
+  bounded:
+    name: Bounded CI-A mechanisms (subject 47c1988)
+    if: github.repository == 'yurifrusin/EMR4'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 33
+    env:
+      G2_RUN_COMMIT: ${{ github.sha }}
+      G2_SELECTION_SHA256: 41a7c82c925ab34e9055be7169e39d8b27a2fa7a834f4b07b49fdde0d8cf1f69
+      G2_SUBJECT_COMMIT: 47c1988b3ad6a3b4e4549c701e8dc222e3d69a24
+    steps:
+      - name: Select Python 3.11
+        id: python
+        timeout-minutes: 5
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: "3.11.17"
+          architecture: x64
+          check-latest: false
+
+      - name: Assemble only authenticated ordinary files
+        timeout-minutes: 5
+        shell: bash
+        run: |
+          set -euo pipefail
+          [[ "$G2_RUN_COMMIT" =~ ^[0-9a-f]{40}$ && "$GITHUB_RUN_ID" =~ ^[0-9]+$ ]]
+          [[ "$GITHUB_RUN_ATTEMPT" == 1 ]]
+          g2_root="$RUNNER_TEMP/emr4-g2-bounded-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT"
+          [[ ! -e "$g2_root" ]]
+          mkdir -m 755 "$g2_root"
+          mkdir -m 755 "$g2_root/subject"
+          printf 'G2_ROOT=%s\n' "$g2_root" >> "$GITHUB_ENV"
+          while read -r digest relative; do
+            mkdir -p "$g2_root/subject/$(dirname "$relative")"
+            env -i PATH=/usr/bin:/bin curl --fail --silent --show-error \
+              --proto '=https' --connect-timeout 5 --max-time 20 --max-filesize 1048576 \
+              "https://raw.githubusercontent.com/yurifrusin/EMR4/$G2_SUBJECT_COMMIT/$relative" \
+              -o "$g2_root/subject/$relative"
+            printf '%s  %s\n' "$digest" "$g2_root/subject/$relative" | sha256sum --check --status
+          done <<'FILES'
+          9ef54f57e34588c8db728e01a085a04939a609a54994170fc2a2e143a94be57c pyproject.toml
+          95c40e589cb5f53a63ebcf92914bfc68a01e473863cb815cec74844ad025bc49 scripts/historical_diary_leakage_lint.py
+          deda2e86f7a6cfc1f8da56e45dc420c896a24749324e326cfc54e576e11528de scripts/python_source_state.py
+          d59bac77fcf41750943c834160c0c6ecfb0cefc71fdaad521325cf0c82816dda scripts/security_bandit_gate.py
+          30751884d86499ffc65ca33944b8e861691657ff4d5694cd97e11fd0f24fe813 scripts/verification_runtime.py
+          51d9e529c7f8846b0beb41cfacd95ae816577fffdb87f189b1739d64121ac8e5 scripts/verify_repository.py
+          3c7fdefb9aeae9defc1208948083533da3a8531f9664e4538ca3a781e223163d tests/test_python_source_state.py
+          716db9f4bc24a8b114377820124e2a52f8150a74d93c4286c50a428716ecf800 tests/test_repository_maintenance.py
+          FILES
+          mkdir -p "$g2_root/subject/orchestration/harness_settings"
+          selection="$g2_root/subject/orchestration/harness_settings/python_source_state.json"
+          env -i PATH=/usr/bin:/bin curl --fail --silent --show-error \
+            --proto '=https' --connect-timeout 5 --max-time 20 --max-filesize 1048576 \
+            "https://raw.githubusercontent.com/yurifrusin/EMR4/$G2_RUN_COMMIT/orchestration/harness_settings/python_source_state.json" \
+            -o "$selection"
+          printf '%s  %s\n' "$G2_SELECTION_SHA256" "$selection" | sha256sum --check --status
+          printf 'workflow_commit=%s subject_commit=%s repository_wide=false\n' "$G2_RUN_COMMIT" "$G2_SUBJECT_COMMIT"
+
+      - name: Install only the pinned verification tools
+        timeout-minutes: 5
+        shell: bash
+        env:
+          G2_BASE_PYTHON: ${{ steps.python.outputs.python-path }}
+        run: |
+          set -euo pipefail
+          env -i PATH=/usr/bin:/bin "$G2_BASE_PYTHON" -I -B -m venv --copies --without-pip "$G2_ROOT/tools"
+          env -i PATH=/usr/bin:/bin PIP_CONFIG_FILE=/dev/null \
+            "$G2_BASE_PYTHON" -I -B -m pip --python "$G2_ROOT/tools/bin/python" \
+            --disable-pip-version-check --no-input install --no-cache-dir --only-binary=:all: \
+            --index-url https://pypi.org/simple \
+            ruff==0.15.22 bandit==1.9.4 pytest==9.1.1 PyYAML==6.0.3
+
+      - name: Record and freeze the tool and source inputs
+        timeout-minutes: 2
+        shell: bash
+        env:
+          G2_BASE_PYTHON: ${{ steps.python.outputs.python-path }}
+        run: |
+          set -euo pipefail
+          env -i PATH=/usr/bin:/bin "$G2_BASE_PYTHON" -I -S -B - "$G2_ROOT/tools" <<'PY'
+          import hashlib, importlib.metadata, json, pathlib, sys
+          assert sys.version_info[:3] == (3, 11, 17)
+          root = pathlib.Path(sys.argv[1])
+          site = root / "lib/python3.11/site-packages"
+          files = sorted(path for path in site.rglob("*") if path.is_file())
+          assert site.is_dir() and files
+          assert all(not path.is_symlink() for path in site.rglob("*"))
+          assert all(path.suffix != ".pth" and path.name not in {"sitecustomize.py", "usercustomize.py"} for path in files)
+          versions = {d.metadata["Name"].lower(): d.version for d in importlib.metadata.distributions(path=[str(site)])}
+          assert all(versions.get(name) == version for name, version in {
+              "ruff": "0.15.22", "bandit": "1.9.4", "pytest": "9.1.1", "pyyaml": "6.0.3"
+          }.items())
+          rows = [[str(path.relative_to(site)), hashlib.sha256(path.read_bytes()).hexdigest()] for path in files]
+          print(json.dumps({"python": sys.version, "python_executable_sha256": hashlib.sha256((root / "bin/python").read_bytes()).hexdigest(),
+              "installed_versions": versions, "site_file_count": len(rows),
+              "site_sha256": hashlib.sha256(json.dumps(rows, separators=(",", ":")).encode()).hexdigest()}, sort_keys=True))
+          PY
+          mkdir -m 700 "$G2_ROOT/scratch"
+          sudo -n chown -R root:root "$G2_ROOT/subject" "$G2_ROOT/tools"
+          sudo -n chmod -R a-w "$G2_ROOT/subject" "$G2_ROOT/tools"
+          sudo -n chown 65534:65534 "$G2_ROOT/scratch"
+
+      - name: Run the existing bounded verifier without external network
+        timeout-minutes: 14
+        shell: bash
+        run: |
+          set -euo pipefail
+          # Existing per-child allowances total 780s. One outer deadline includes
+          # namespace startup/exit; PID-namespace exit contains remaining children.
+          sudo -n /usr/bin/timeout --signal=TERM --kill-after=5s 810s \
+            /usr/bin/unshare --net --pid --fork --kill-child --mount-proc \
+            /bin/bash --noprofile --norc -euc '
+              mount -t tmpfs -o rw,noexec,nosuid,nodev,size=64m tmpfs /tmp
+              exec /usr/bin/setpriv --reuid=65534 --regid=65534 --clear-groups --no-new-privs \
+                /usr/bin/env -i PATH=/usr/bin:/bin HOME="$3" TMPDIR="$3" \
+                PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 \
+                PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 PYTEST_ADDOPTS= RUFF_NO_CACHE=1 \
+                /bin/bash --noprofile --norc -euc '\'' 
+                  cd "$2"
+                  "$1" -I -B scripts/verify_repository.py --profile ci-correctness \
+                    --selection orchestration/harness_settings/python_source_state.json --selection-sha256 "$3"
+                  "$1" -I -B scripts/verify_repository.py --profile ci-bandit \
+                    --selection orchestration/harness_settings/python_source_state.json --selection-sha256 "$3"
+                '\'' _ "$1" "$2" "$4"
+            ' _ "$G2_ROOT/tools/bin/python" "$G2_ROOT/subject" "$G2_ROOT/scratch" "$G2_SELECTION_SHA256" </dev/null
+
+      - name: Remove only this run's temporary inputs
+        if: always()
+        timeout-minutes: 1
+        shell: bash
+        run: |
+          set -euo pipefail
+          expected="$RUNNER_TEMP/emr4-g2-bounded-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT"
+          if [[ "${G2_ROOT:-}" == "$expected" && -d "$expected" && ! -L "$expected" ]]; then
+            sudo -n rm -rf -- "$expected"
+          fi
+
