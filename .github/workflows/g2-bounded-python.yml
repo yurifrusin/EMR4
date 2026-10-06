@@ -41,9 +41,9 @@ jobs:
           set -euo pipefail
           [[ "$G2_RUN_COMMIT" =~ ^[0-9a-f]{40}$ && "$GITHUB_RUN_ID" =~ ^[0-9]+$ ]]
           [[ "$GITHUB_RUN_ATTEMPT" == 1 ]]
-          g2_root="$RUNNER_TEMP/emr4-g2-bounded-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT"
-          [[ ! -e "$g2_root" ]]
-          mkdir -m 755 "$g2_root"
+          g2_root="/var/tmp/emr4-g2-bounded-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT"
+          [[ -d /var/tmp && ! -L /var/tmp && ! -e "$g2_root" && ! -L "$g2_root" ]]
+          mkdir -m 700 "$g2_root"
           mkdir -m 755 "$g2_root/subject"
           printf 'G2_ROOT=%s\n' "$g2_root" >> "$GITHUB_ENV"
           while read -r digest relative; do
@@ -115,6 +115,8 @@ jobs:
           sudo -n chown -R root:root "$G2_ROOT/subject" "$G2_ROOT/tools"
           sudo -n chmod -R a-w "$G2_ROOT/subject" "$G2_ROOT/tools"
           sudo -n chown 65534:65534 "$G2_ROOT/scratch"
+          sudo -n chown root:65534 "$G2_ROOT"
+          sudo -n chmod 750 "$G2_ROOT"
 
       - name: Run the existing bounded verifier without external network
         timeout-minutes: 14
@@ -133,6 +135,8 @@ jobs:
                 PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 PYTEST_ADDOPTS= RUFF_NO_CACHE=1 \
                 /bin/bash --noprofile --norc -euc '\'' 
                   cd "$2"
+                  [[ "$EUID" == 65534 && -r scripts/verify_repository.py && -x "$1" && -w "$HOME" ]]
+                  printf "isolated_uid=%s source_access=ok tool_access=ok scratch_access=ok\n" "$EUID"
                   "$1" -I -B scripts/verify_repository.py --profile ci-correctness \
                     --selection orchestration/harness_settings/python_source_state.json --selection-sha256 "$3"
                   "$1" -I -B scripts/verify_repository.py --profile ci-bandit \
@@ -146,8 +150,10 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          expected="$RUNNER_TEMP/emr4-g2-bounded-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT"
+          expected="/var/tmp/emr4-g2-bounded-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT"
           if [[ "${G2_ROOT:-}" == "$expected" && -d "$expected" && ! -L "$expected" ]]; then
             sudo -n rm -rf -- "$expected"
+            [[ ! -e "$expected" && ! -L "$expected" ]]
+            printf "owned_cleanup_absence=confirmed\n"
           fi
 
