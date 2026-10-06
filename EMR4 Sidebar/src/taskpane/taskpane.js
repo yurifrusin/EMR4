@@ -34,7 +34,64 @@ function isHostedSyntheticOnlyModeEnabled() {
 }
 
 // ─── STATE ──────────────────────────────────────────────────
-let token          = localStorage.getItem("emr4_token");
+function detectRestrictedBackendContext() {
+  try {
+    // Packaging provenance survives an absent or malformed hosting policy.
+    if (document.querySelector('meta[name="raisa-static-synthetic-only"]')) {
+      return true;
+    }
+    const hostname = window.location.hostname.toLowerCase();
+    if (
+      hostname.startsWith("raisa-office-web-dev-")
+      && (hostname.endsWith(".a.run.app")
+        || hostname.endsWith(".australia-southeast1.run.app"))
+    ) {
+      return true;
+    }
+    if ("RAISA_PUBLIC_HOSTING_POLICY" in window) {
+      const policy = window.RAISA_PUBLIC_HOSTING_POLICY;
+      const authorityFields = [
+        "provider_authority", "backend_authority", "credential_authority",
+        "microphone_authority", "command_authority",
+        "document_write_authority", "production_authority",
+      ];
+      // Only the exact ordinary checked-in sentinel does not declare a
+      // restricted host. A rejected policy cannot grant ordinary transport.
+      if (!policy || typeof policy !== "object" || Array.isArray(policy)
+        || Reflect.ownKeys(policy).length !== 11
+        || !["contract_version", "mode", "data_class", "expected_origin",
+          ...authorityFields].every(field =>
+          Object.prototype.hasOwnProperty.call(policy, field))
+        || policy.contract_version !== "raisa.public-hosting-policy.v1"
+        || policy.mode !== "disabled" || policy.data_class !== "none"
+        || policy.expected_origin !== ""
+        || !authorityFields.every(field => policy[field] === false)) {
+        return true;
+      }
+    }
+    return isReceptionOneCompanionDemoEnabled()
+      || isClinicianOneDocumentContextDemoEnabled();
+  } catch (_) {
+    return true;
+  }
+}
+
+// Once observed, a restricted page cannot downgrade to ordinary transport.
+let backendTransportRestricted = detectRestrictedBackendContext();
+
+function isBackendTransportRestricted() {
+  if (detectRestrictedBackendContext()) backendTransportRestricted = true;
+  return backendTransportRestricted;
+}
+
+function assertBackendTransportAllowed() {
+  if (isBackendTransportRestricted()) {
+    throw new Error("Backend access is unavailable in this synthetic-only view.");
+  }
+}
+
+let token          = null;
+let legacyBearerStorageCleared = clearLegacyBearerToken();
 let currentPatient = null;
 
 // Command Centre dialog handle
@@ -231,6 +288,7 @@ async function apiFetch(path, opts = {}) {
   headers["ngrok-skip-browser-warning"] = "1";
   let res;
   try {
+    assertBackendTransportAllowed();
     res = await fetch(API_BASE + path, { ...opts, headers });
   } catch (networkErr) {
     // Network-level failure (no response at all — ERR_CONNECTION_REFUSED etc.)
@@ -272,15 +330,38 @@ function showTab(tabName) {
 // AUTH
 // ═══════════════════════════════════════════════════════════
 
+function clearLegacyBearerToken() {
+  try {
+    localStorage.removeItem("emr4_token");
+    return true;
+  } catch (_) {
+    return false;
+  }
+}
+
 async function login() {
+  const errEl    = document.getElementById("login-error");
+  try {
+    assertBackendTransportAllowed();
+  } catch (error) {
+    token = null;
+    errEl.textContent = error.message;
+    errEl.classList.remove("hidden");
+    return;
+  }
   const email    = document.getElementById("login-email").value.trim();
   const password = document.getElementById("login-password").value;
-  const errEl    = document.getElementById("login-error");
   const btn      = document.getElementById("btn-login");
   errEl.classList.add("hidden");
   btn.disabled = true;
   btn.textContent = "Signing in…";
   try {
+    legacyBearerStorageCleared = clearLegacyBearerToken();
+    if (!legacyBearerStorageCleared) {
+      token = null;
+      throw new Error("Unable to clear a previous sign-in. Clear this site's browser data, then try again.");
+    }
+    assertBackendTransportAllowed();
     const form = new URLSearchParams({ username: email, password });
     const res  = await fetch(API_BASE + "/auth/login", {
       method: "POST",
@@ -295,8 +376,11 @@ async function login() {
       throw new Error(d.detail || "Login failed");
     }
     const data = await res.json();
+    if (isBackendTransportRestricted()) {
+      token = null;
+      assertBackendTransportAllowed();
+    }
     token = data.access_token;
-    localStorage.setItem("emr4_token", token);
     showView("view-app");
     initApp();
   } catch (e) {
@@ -313,8 +397,12 @@ function logout() {
   clearAudioSession();
   token = null;
   currentPatient = null;
-  localStorage.removeItem("emr4_token");
-  localStorage.removeItem("emr4_cc_patient_id");
+  legacyBearerStorageCleared = clearLegacyBearerToken();
+  try {
+    localStorage.removeItem("emr4_cc_patient_id");
+  } catch (_) {
+    // Storage cleanup must not prevent in-memory sign-out.
+  }
   consultStarted = false;
   if (backgroundSyncTimer) {
     clearInterval(backgroundSyncTimer);
@@ -725,6 +813,7 @@ async function getDocumentText() {
 }
 
 async function runBackgroundSync() {
+  if (isBackendTransportRestricted()) return;
   if (isRecording || isSyncing || commandCentreOpen) {
     updateSyncDebug({ fetch: isRecording ? "recording" : isSyncing ? "busy" : "cc-open" });
     return;
@@ -766,6 +855,7 @@ async function runBackgroundSync() {
     if (token) headers["Authorization"] = "Bearer " + token;
     const abort = new AbortController();
     timeoutId = setTimeout(() => abort.abort(), 45000);
+    assertBackendTransportAllowed();
     const res = await fetch(API_BASE + "/analyze-consultation", {
       method: "POST",
       headers,
@@ -943,6 +1033,7 @@ async function toggleRecording() {
 async function processAudio(context) {
   if (!audioIsCurrent(context)) return;
   try {
+    assertBackendTransportAllowed();
     const blob = new Blob(context.chunks, { type: "audio/webm" });
     context.chunks.length = 0;
     clearAudioPlayback();
@@ -958,6 +1049,7 @@ async function processAudio(context) {
     context.abort = new AbortController();
     const headers = {};
     if (token) headers["Authorization"] = "Bearer " + token;
+    assertBackendTransportAllowed();
     const res = await fetch(API_BASE + "/scribe-consultation", {
       method: "POST", headers, body: form, signal: context.abort.signal,
     });
@@ -1105,6 +1197,7 @@ async function handleKeystroke(type, index) {
     box.innerHTML = '<div class="autocomplete-searching">Searching…</div>';
     try {
       const endpoint = type === "mbs" ? "search-mbs" : "search-snomed";
+      assertBackendTransportAllowed();
       const res = await fetch(`${API_BASE}/${endpoint}?q=${encodeURIComponent(query)}`);
       renderSuggestions(await res.json(), type, index);
     } catch {
@@ -1212,6 +1305,10 @@ function finalizationOverridesSnapshot() {
 }
 
 async function approveAndFinalize() {
+  if (isBackendTransportRestricted()) {
+    setStatus("Backend access is unavailable in this synthetic-only view.");
+    return;
+  }
   if (!audioPatientId()) { setStatus("Select a patient before finalising the consultation."); return; }
   if (!token) { setStatus("Sign in before finalising the consultation."); return; }
   if (commandCentreOpen) { setStatus("Close Command Centre before finalising in the taskpane."); return; }
@@ -1253,6 +1350,7 @@ async function approveAndFinalize() {
       setStatus("Not saved. Consultation changed during confirmation; review it and confirm again.");
       return;
     }
+    assertBackendTransportAllowed();
     finalizationSubmission = { binding, snapshot };
     setStatus("Saving to database...");
     const res = await fetch(API_BASE + "/finalize", {
@@ -3122,6 +3220,7 @@ function _apptStatusClass(status) {
 // ═══════════════════════════════════════════════════════════
 
 function initApp() {
+  if (isBackendTransportRestricted()) { token = null; return; }
   setBanner(null);
   updateOpenFileButton();
   updatePatientEditButton();
@@ -3144,6 +3243,7 @@ function initApp() {
 }
 
 function _initPatientMode() {
+  if (isBackendTransportRestricted()) { token = null; return; }
   showTab("consult");
   setStatus("Ready.");
   updateSyncDebug({ fetch: "ready", textLen: 0, http: "-", result: "-", extract: "-" });
@@ -3412,6 +3512,10 @@ Office.onReady(info => {
   } else if (isClinicianOneDocumentContextDemoEnabled()) {
     showView("view-app");
     configureClinicianOneDocumentContext();
+  } else if (isBackendTransportRestricted()) {
+    token = null;
+    document.body.classList.add("clinician-one-context-demo");
+    showView("view-app");
   } else if (token) {
     showView("view-app");
     initApp();

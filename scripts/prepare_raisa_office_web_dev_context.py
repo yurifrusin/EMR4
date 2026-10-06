@@ -42,6 +42,24 @@ ROOT_FILES = ("Dockerfile", ".dockerignore", "server.mjs")
 PUBLIC_PATH_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._/-]*$")
 
 
+STATIC_SYNTHETIC_MARKER = '<meta name="raisa-static-synthetic-only" content="v1">'
+
+
+def mark_static_taskpane(html: str) -> str:
+    if html.count("<head>") != 1 or html.count("</head>") != 1:
+        raise ValueError("static taskpane must contain one exact head")
+    head_end = html.index("<head>") + len("<head>")
+    if html.index("</head>") < head_end or not re.fullmatch(
+        r"(?is)\s*<!doctype html>\s*<html(?:\s+[^>]*)?>\s*<head>",
+        html[:head_end],
+    ):
+        raise ValueError("static taskpane head prefix is not admitted")
+    if "raisa-static-synthetic-only" in html.lower():
+        raise ValueError("static taskpane already contains a restricted marker")
+    return html[:head_end] + STATIC_SYNTHETIC_MARKER + html[head_end:]
+
+
+
 def sha256(path: Path) -> str:
     digest = hashlib.sha256()
     with path.open("rb") as stream:
@@ -130,7 +148,14 @@ def prepare(output: Path, origin: str) -> dict:
         source = require_file(DIST_ROOT, relative)
         target = public / relative
         target.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copyfile(source, target)
+        if relative == "taskpane.html":
+            target.write_text(
+                mark_static_taskpane(source.read_text(encoding="utf-8")),
+                encoding="utf-8",
+                newline="\n",
+            )
+        else:
+            shutil.copyfile(source, target)
         copied.append(target)
     for relative in DIARY_FILES:
         source = require_file(DIARY_ROOT, relative)
