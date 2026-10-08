@@ -10,27 +10,42 @@ const BACKEND_URL = (window.location.port === "3000")
 const API_BASE    = BACKEND_URL + "/api/v1";
 const SESSION_ID  = "word_" + crypto.randomUUID().substring(0, 8);
 
+function readExactHostingPolicy() {
+  try {
+    const policy = window.RAISA_PUBLIC_HOSTING_POLICY;
+    if (!policy || typeof policy !== "object" || Array.isArray(policy)) return null;
+    const authorityFields = [
+      "provider_authority", "backend_authority", "credential_authority",
+      "microphone_authority", "command_authority",
+      "document_write_authority", "production_authority",
+    ];
+    const fields = ["contract_version", "mode", "data_class", "expected_origin",
+      ...authorityFields];
+    const descriptors = Object.getOwnPropertyDescriptors(policy);
+    // Read only exact own data properties; a policy getter cannot supply authority.
+    if (Reflect.ownKeys(descriptors).length !== fields.length
+      || !fields.every(field => Object.prototype.hasOwnProperty.call(descriptors, field)
+        && Object.prototype.hasOwnProperty.call(descriptors[field], "value"))) return null;
+    const values = Object.fromEntries(fields.map(field => [field, descriptors[field].value]));
+    if (values.contract_version !== "raisa.public-hosting-policy.v1"
+      || !authorityFields.every(field => values[field] === false)) return null;
+    return values;
+  } catch (_) {
+    return null;
+  }
+}
+
 function isHostedSyntheticOnlyModeEnabled() {
-  const policy = window.RAISA_PUBLIC_HOSTING_POLICY;
-  if (!policy || typeof policy !== "object") return false;
-  const exactFalseFields = [
-    "provider_authority",
-    "backend_authority",
-    "credential_authority",
-    "microphone_authority",
-    "command_authority",
-    "document_write_authority",
-    "production_authority",
-  ];
-  return (
-    policy.contract_version === "raisa.public-hosting-policy.v1"
-    && policy.mode === "public_https_development"
-    && policy.data_class === "authored_synthetic"
-    && policy.expected_origin === window.location.origin
-    && window.location.protocol === "https:"
-    && window.location.hostname.endsWith(".run.app")
-    && exactFalseFields.every(field => policy[field] === false)
-  );
+  try {
+    const policy = readExactHostingPolicy();
+    return !!policy && policy.mode === "public_https_development"
+      && policy.data_class === "authored_synthetic"
+      && policy.expected_origin === window.location.origin
+      && window.location.protocol === "https:"
+      && window.location.hostname.endsWith(".run.app");
+  } catch (_) {
+    return false;
+  }
 }
 
 // ─── STATE ──────────────────────────────────────────────────
@@ -49,23 +64,11 @@ function detectRestrictedBackendContext() {
       return true;
     }
     if ("RAISA_PUBLIC_HOSTING_POLICY" in window) {
-      const policy = window.RAISA_PUBLIC_HOSTING_POLICY;
-      const authorityFields = [
-        "provider_authority", "backend_authority", "credential_authority",
-        "microphone_authority", "command_authority",
-        "document_write_authority", "production_authority",
-      ];
+      const policy = readExactHostingPolicy();
       // Only the exact ordinary checked-in sentinel does not declare a
       // restricted host. A rejected policy cannot grant ordinary transport.
-      if (!policy || typeof policy !== "object" || Array.isArray(policy)
-        || Reflect.ownKeys(policy).length !== 11
-        || !["contract_version", "mode", "data_class", "expected_origin",
-          ...authorityFields].every(field =>
-          Object.prototype.hasOwnProperty.call(policy, field))
-        || policy.contract_version !== "raisa.public-hosting-policy.v1"
-        || policy.mode !== "disabled" || policy.data_class !== "none"
-        || policy.expected_origin !== ""
-        || !authorityFields.every(field => policy[field] === false)) {
+      if (!policy || policy.mode !== "disabled" || policy.data_class !== "none"
+        || policy.expected_origin !== "") {
         return true;
       }
     }
@@ -973,6 +976,11 @@ function clearAudioSession({ preservePlayback = false } = {}) {
 window.addEventListener("pagehide", () => clearAudioSession());
 
 async function toggleRecording() {
+  if (isBackendTransportRestricted()) {
+    clearAudioSession();
+    setStatus("Audio recording is unavailable in this synthetic-only view.");
+    return;
+  }
   if (audioStartPending) return;
   if (isRecording) {
     const context = audioContext;
@@ -995,10 +1003,19 @@ async function toggleRecording() {
   try {
     context.stream = await navigator.mediaDevices.getUserMedia({ audio: true });
     if (!audioIsCurrent(context)) { stopAudioTracks(context.stream); return; }
+    if (isBackendTransportRestricted()) {
+      clearAudioSession();
+      return;
+    }
     context.recorder = new MediaRecorder(context.stream);
     mediaRecorder = context.recorder;
     context.recorder.ondataavailable = event => {
-      if (audioIsCurrent(context) && event.data.size > 0) context.chunks.push(event.data);
+      if (!audioIsCurrent(context)) return;
+      if (isBackendTransportRestricted()) {
+        clearAudioSession();
+        return;
+      }
+      if (event.data.size > 0) context.chunks.push(event.data);
     };
     context.recorder.onerror = () => {
       stopAudioTracks(context.stream);
@@ -1054,8 +1071,10 @@ async function processAudio(context) {
       method: "POST", headers, body: form, signal: context.abort.signal,
     });
     if (!audioIsCurrent(context)) return;
+    assertBackendTransportAllowed();
     const data = await res.json();
     if (!audioIsCurrent(context)) return;
+    assertBackendTransportAllowed();
     if (!res.ok || !data || typeof data !== "object" || Array.isArray(data) || data.error) {
       throw new Error("Transcription failed");
     }
@@ -1068,16 +1087,21 @@ async function processAudio(context) {
     if (data.generated_clinical_note) {
       await Word.run(async ctx => {
         if (!audioIsCurrent(context)) return;
+        assertBackendTransportAllowed();
         ctx.document.body.insertParagraph(data.generated_clinical_note, Word.InsertLocation.end);
         await ctx.sync();
       });
     }
     if (!audioIsCurrent(context)) return;
+    assertBackendTransportAllowed();
     setStatus("✅ Audio scribe complete.");
     isLocked = true;
     updateLockUI();
   } catch {
-    if (audioIsCurrent(context)) setStatus("❌ Scribe failed.");
+    if (audioIsCurrent(context)) {
+      if (isBackendTransportRestricted()) clearAudioSession();
+      setStatus("❌ Scribe failed.");
+    }
   } finally {
     context.chunks.length = 0;
     stopAudioTracks(context.stream);
@@ -3516,6 +3540,13 @@ Office.onReady(info => {
     token = null;
     document.body.classList.add("clinician-one-context-demo");
     showView("view-app");
+    const card = document.getElementById("clinician-one-document-context");
+    if (card) {
+      card.classList.remove("hidden");
+      card.innerHTML = '<div class="clinician-one-context-kicker">Clinician One</div>'
+        + '<h2 id="clinician-one-context-title">Workspace unavailable</h2>'
+        + '<p role="alert">This workspace cannot be opened. Reload it or contact your administrator.</p>';
+    }
   } else if (token) {
     showView("view-app");
     initApp();
