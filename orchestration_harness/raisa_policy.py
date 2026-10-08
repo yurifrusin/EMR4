@@ -1849,6 +1849,21 @@ def g2_dependency_repair_profile() -> dict:
     return profile
 
 
+G2_TRANSPORT_REPAIR_PATHS = (
+    'EMR4 Sidebar/src/taskpane/taskpane.js',
+    'tests/taskpane_synthetic_transport.cjs',
+)
+G2_TRANSPORT_REPAIR_SCOPE_BEHAVIOR = 'bounded_g2_taskpane_transport_repair'
+
+
+def g2_transport_repair_profile() -> dict:
+    """Only the fixed transport repair; preserve all runtime/effect closures."""
+    profile = g2_batch_profile()
+    profile.update(scope_behavior=G2_TRANSPORT_REPAIR_SCOPE_BEHAVIOR,
+                   allowed_paths=sorted(G2_TRANSPORT_REPAIR_PATHS))
+    return profile
+
+
 G2_PYJWT_REPAIR_SCOPE_BEHAVIOR = 'bounded_g2_pyjwt2151_repair'
 
 def g2_pyjwt_repair_profile() -> dict:
@@ -2356,7 +2371,9 @@ def validate_recovery_configuration(*, documents: dict[str, bytes], expected_sha
         raise RaisaPolicyError("configuration_assessment_profile_invalid")
     if state["active_profile"] == G2_PROFILE:
         profile = overlay["profiles"][G2_PROFILE]
-        expected = (g2_pyjwt_repair_profile()
+        expected = (g2_transport_repair_profile()
+                    if profile["scope_behavior"] == G2_TRANSPORT_REPAIR_SCOPE_BEHAVIOR
+                    else g2_pyjwt_repair_profile()
                     if profile["scope_behavior"] == G2_PYJWT_REPAIR_SCOPE_BEHAVIOR
                     else g2_ci_completeness_profile()
                     if profile["scope_behavior"] == G2_CI_COMPLETENESS_SCOPE_BEHAVIOR

@@ -1256,7 +1256,78 @@ OPERATION_PATHS.update(enable_g2_pyjwt_repair=G2_DEPENDENCY_MAINTENANCE_PATHS,
                        repair_g2_pyjwt_repair=G2_DEPENDENCY_PATHS)
 
 
+# V19 is a new owner-directed fixed transport batch. Historical V18 remains
+# incomplete. These roots are installed reviewed controller constants, not
+# candidate-selected trust roots or runtime grants.
+G2_TRANSPORT_BINDING_VERSION = "ariadne.bounded_g2_batch_binding.v19"
+G2_TRANSPORT_SCOPE_VERSION = "ariadne.g2_reviewed_batch_scope.v19"
+G2_TRANSPORT_PATHS = frozenset(raisa_policy.G2_TRANSPORT_REPAIR_PATHS)
+G2_TRANSPORT_ADDITIONS = frozenset({"tests/taskpane_synthetic_transport.cjs"})
+G2_TRANSPORT_MAINTENANCE_PATHS = G2_BATCH_MAINTENANCE_PATHS
+G2_TRANSPORT_HISTORICAL_V18_SCOPE_COMMIT = "f233f3622c0c5c72448380c706e15b6efbc6be7e"
+G2_TRANSPORT_PREDECESSOR = {
+    "commit": "a276031269aaf285e13f36d6fc4a6b80b3915be4",
+    "parent": "f38bcbe65ddd8fb1f35f530b2c686cfcffab4ed3",
+    "tree": "e7970dd10133dbbf451f23e0f19e503d8d9b0ae8",
+    "source_sha256": {
+        "orchestration_harness/bounded_g1b.py": "07790594cd9eb8e8412f1702b66547437f522e5c03a6fae0bfd37cf7a33d18ed",
+        "orchestration_harness/raisa_policy.py": "ac42ecaeca273c0595d7e78ec322d8755d4d3935348023ac781937df470e1aa3",
+        "tests/test_bounded_g1b.py": "148644ab962048c7c02bd8e510327af6218c49b6c9dc8611f8c311bbe3037ac9",
+        "orchestration_harness/configuration_core.py": "f7ba7a80eb0a590f9fb71b864e6c1f9f43241d9f7d70a38da67a9243fea208e5",
+        "orchestration_harness/programme_admission.py": "ac816a8a79b2d8222fa357777c075950927e86cf30c8a5b25ffd08a474052181",
+    },
+}
+G2_TRANSPORT_PREDECESSOR_POLICY = {
+    AGENTS: "97d6ea223508d53ee704a0cc3ceec383e2eea9f3db764376b538e8341bee886e",
+    STATE: "a11297770c7c6eefac4b1aed5ed664fb147c4d94af08183938ee20d0374b8a4f",
+    OVERLAY: "faa8119cc3d7ba7547c16d4df6016c350b79cbf9cab4c47bd403f8f187fbcbd5",
+    G2_SCOPE: "b79e0619ea530ca3f5f8302f33885d2cd1da8afdc320fdee139c396901861cb0",
+    GATES: "115a651a0b13156a591045638d1833a9a71347e7b1f7e694767eac49d2abc341",
+}
+G2_TRANSPORT_REPAIR_PINS = {
+    "EMR4 Sidebar/src/taskpane/taskpane.js": "68ff085ed2a77ed756b775f034f5c89a83c5cd6a56c2544392699dc6b6d07f2f",
+    "tests/taskpane_synthetic_transport.cjs": None,
+}
+G2_TRANSPORT_OWNER_RECORD = "g2-owner-directive/owner-directive-20261008.txt"
+G2_TRANSPORT_OWNER_SHA256 = "5292b7c727de10f5dac9d6857745fac9c01bdeddeb19c7c8d07586e1cf43b406"
+G2_TRANSPORT_LIMITS = (
+    "only the taskpane transport source and named synthetic test are eligible",
+    "existing uncommitted taskpane repair must be preserved in the independently reviewed exact afterimage",
+    "V18 and every prior latch or consumed execution grant remain historical and unrenewed",
+    "admission grants no browser, application, database, provider, real-data, deployment or G2 acceptance",
+    "future ordinary G2 files require a new independently reviewed successor amendment, not in-place widening",
+)
+G2_BATCH_KINDS = G2_BATCH_KINDS | {"enable_g2_transport_repair", "repair_g2_transport_repair"}
+G2_MAINTENANCE_KINDS = G2_MAINTENANCE_KINDS | {"enable_g2_transport_repair"}
+OPERATION_PATHS.update(enable_g2_transport_repair=G2_TRANSPORT_MAINTENANCE_PATHS,
+                       repair_g2_transport_repair=G2_TRANSPORT_PATHS)
+
+
+def _transport_changes(binding: dict) -> dict:
+    kind, rows = binding.get("operation_kind"), binding.get("repair_sha256")
+    _need(binding.get("schema_version") == G2_TRANSPORT_BINDING_VERSION
+          and kind in {"enable_g2_transport_repair", "repair_g2_transport_repair"},
+          "bounded_g2_batch_binding_version")
+    maintenance = kind == "enable_g2_transport_repair"
+    allowed = G2_TRANSPORT_MAINTENANCE_PATHS if maintenance else G2_TRANSPORT_PATHS
+    _need(type(rows) is dict and len(rows) == len(allowed), "bounded_g2_batch_changes_invalid")
+    _need(set(rows) == allowed, "bounded_g2_batch_path_not_allowed")
+    for path, row in rows.items():
+        _keys(row, {"before_sha256", "after_sha256"}, "bounded_g2_batch_change_schema")
+        if not maintenance:
+            _need(row["before_sha256"] == G2_TRANSPORT_REPAIR_PINS[path],
+                  "bounded_g2_transport_repair_preimage")
+        addition = not maintenance and path in G2_TRANSPORT_ADDITIONS
+        digests = (row["after_sha256"],) if addition else row.values()
+        _need(all(type(v) is str and re.fullmatch(r"[0-9a-f]{64}", v) for v in digests)
+              and row["before_sha256"] != row["after_sha256"], "bounded_g2_batch_change_digest")
+    return rows
+
+
 def _batch_changes(binding: dict) -> dict:
+    if (binding.get("schema_version") == G2_TRANSPORT_BINDING_VERSION
+            or binding.get("operation_kind") in {"enable_g2_transport_repair", "repair_g2_transport_repair"}):
+        return _transport_changes(binding)
     kind = binding.get("operation_kind")
     rows = binding.get("repair_sha256")
     appointment = binding.get("schema_version") == G2_APPOINTMENT_BINDING_VERSION
@@ -1408,7 +1479,7 @@ def batch_input_paths(binding: dict) -> frozenset[str]:
                                           G2_DEPENDENCY_BINDING_VERSION,
                                           G2_CI_BINDING_VERSION, G2_CIM_BINDING_VERSION,
                                            G2_TENANT_BINDING_VERSION, G2_RELATIONSHIP_BINDING_VERSION,
-                                           G2_COMPLETENESS_BINDING_VERSION, G2_PYJWT_BINDING_VERSION}:
+                                           G2_COMPLETENESS_BINDING_VERSION, G2_PYJWT_BINDING_VERSION, G2_TRANSPORT_BINDING_VERSION}:
         return G2_CATALOGUE_POLICY_PATHS | frozenset(changes)
     return G2_BATCH_INPUT_PATHS
 
@@ -1420,7 +1491,7 @@ def operation_effects(kind: str) -> frozenset[str]:
     if kind in {"repair_g2_batch", "repair_g2_audio_privacy", "repair_g2_patient_binding",
                 "repair_g2_consultation_atomicity", "repair_g2_clinical_authority"}:
         return G2_BATCH_EFFECTS
-    if kind == "repair_g2_production_profile":
+    if kind in {"repair_g2_production_profile", "repair_g2_transport_repair"}:
         return G2_BATCH_EFFECTS
     if kind in {"repair_g2_dependency_repair", "repair_g2_pyjwt_repair"}:
         return G2_DEPENDENCY_EFFECTS
@@ -1442,7 +1513,7 @@ def operation_paths(kind: str, binding: dict | None = None) -> frozenset[str]:
     if kind in {"repair_g2_batch", "repair_g2_migration", "repair_g2_audio_privacy",
                 "repair_g2_patient_binding", "repair_g2_consultation_atomicity", "repair_g2_clinical_authority",
                  "repair_g2_migration_downgrade_guard", "repair_g2_appointment_concurrency",
-                 "repair_g2_production_profile", "repair_g2_dependency_repair", "repair_g2_pyjwt_repair",
+                 "repair_g2_production_profile", "repair_g2_dependency_repair", "repair_g2_pyjwt_repair", "repair_g2_transport_repair",
                    "repair_g2_ci_selection", "repair_g2_tenant_migration",
                     "repair_g2_tenant_relationships", "repair_g2_ci_completeness"}:
         _need(type(binding) is dict and binding.get("operation_kind") == kind,
@@ -1458,7 +1529,7 @@ def _operation(kind: str, binding: dict | None = None) -> dict:
                 "transition_paths": G2_TRANSITION_PATHS, "scope_path": G2_SCOPE,
                 "transition": kind in G2_MAINTENANCE_KINDS, "batch": True,
                 "profile": G2_PROFILE, "gate": "G2",
-                  "limits": G2_PYJWT_LIMITS if binding.get("schema_version") == G2_PYJWT_BINDING_VERSION
+                  "limits": G2_TRANSPORT_LIMITS if binding.get("schema_version") == G2_TRANSPORT_BINDING_VERSION else G2_PYJWT_LIMITS if binding.get("schema_version") == G2_PYJWT_BINDING_VERSION
                   else G2_COMPLETENESS_LIMITS if binding.get("schema_version") == G2_COMPLETENESS_BINDING_VERSION
                   else G2_RELATIONSHIP_LIMITS if binding.get("schema_version") == G2_RELATIONSHIP_BINDING_VERSION
                   else G2_TENANT_LIMITS if binding.get("schema_version") == G2_TENANT_BINDING_VERSION
@@ -3113,8 +3184,84 @@ def build_g2_pyjwt_transition(before: dict[str, bytes], scope: dict) -> dict[str
             OVERLAY: yaml.safe_dump(overlay, sort_keys=False, allow_unicode=True).encode(),
             G2_SCOPE: scope_raw}
 
+def _g2_transport_prior_scope() -> dict:
+    # Reconstruct only the already fixed ordinary V18 scope with its historical
+    # builder. This performs no filesystem load and creates no acceptance.
+    prior = build_g2_pyjwt_scope("2026-10-01T02:31:54.5397521Z",
+                               G2_PYJWT_PREDECESSOR["commit"],
+                               G2_TRANSPORT_PREDECESSOR["source_sha256"])
+    _need(_sha(_canonical(prior) + b"\n") == G2_TRANSPORT_PREDECESSOR_POLICY[G2_SCOPE],
+          "bounded_g2_transport_prior_scope_changed")
+    return prior
+
+
+def build_g2_transport_scope(recorded_at: str, transition_base: str,
+                             controller_sources: dict) -> dict:
+    """Fixed transport successor; preserve prior state and consumed authorities."""
+    _need(type(recorded_at) is str, "bounded_g2_transport_timestamp")
+    try:
+        stamp = datetime.fromisoformat(recorded_at)
+    except ValueError:
+        raise BoundedG1BError("bounded_g2_transport_timestamp") from None
+    _need(stamp.tzinfo is not None and stamp.utcoffset() is not None,
+          "bounded_g2_transport_timestamp")
+    _need(transition_base == G2_TRANSPORT_PREDECESSOR["commit"],
+          "bounded_g2_transport_transition_base")
+    sources = _digest_map(controller_sources, CONTROLLER_PATHS,
+                          "bounded_g2_transport_controller_paths")
+    _need(all(sources[path] == G2_TRANSPORT_PREDECESSOR["source_sha256"][path]
+              for path in CONTROLLER_PATHS - G2_BATCH_CODE_PATHS),
+          "bounded_g2_transport_unchanged_controller_component")
+    prior = _g2_transport_prior_scope()
+    scope = copy.deepcopy(prior)
+    scope.update(schema_version=G2_TRANSPORT_SCOPE_VERSION, recorded_at=recorded_at,
+        transition_base_commit=transition_base, controller_source_sha256=sources,
+        enable_operation="enable_g2_transport_repair", repair_operation="repair_g2_transport_repair",
+        allowed_paths=sorted(G2_TRANSPORT_PATHS), maximum_changed_files=2,
+        allowed_additions=sorted(G2_TRANSPORT_ADDITIONS), allowed_effects=sorted(G2_BATCH_EFFECTS),
+        forbidden_effects=raisa_policy.g2_transport_repair_profile()["forbidden_effects"],
+        repair_preimage_sha256=copy.deepcopy(G2_TRANSPORT_REPAIR_PINS),
+        preserved_incomplete_pyjwt_scope=prior, claim_limits=list(G2_TRANSPORT_LIMITS),
+        current_owner_directive={"owner": "Yuri", "record_path": G2_TRANSPORT_OWNER_RECORD,
+            "sha256": G2_TRANSPORT_OWNER_SHA256, "historical_authority_rewritten": False},
+        transport_invariant={"no_hosted_browser_bearer_storage": True,
+            "malformed_or_missing_hosting_policy_fails_closed": True,
+            "all_provider_transports_require_reviewed_gate": True,
+            "existing_uncommitted_changes_preserved_in_reviewed_afterimage": True,
+            "admission_grants_runtime_authority": False})
+    scope["current_operation"] = {
+        **copy.deepcopy(prior["current_operation"]),
+        "operation_id": "g2-taskpane-transport-repair",
+        "completion_accepted": False, "status": "active",
+        "supersedes": {"operation_id": prior["current_operation"]["operation_id"],
+            "scope_path": G2_SCOPE, "scope_commit": G2_TRANSPORT_HISTORICAL_V18_SCOPE_COMMIT,
+            "scope_sha256": G2_TRANSPORT_PREDECESSOR_POLICY[G2_SCOPE],
+            "historical_latch_preserved": True, "predecessor_completion_accepted": False}}
+    return scope
+
+
+def build_g2_transport_transition(before: dict[str, bytes], scope: dict) -> dict[str, bytes]:
+    """Three exact control afterimages; no gate, historical latch or grant change."""
+    _keys(before, G2_BATCH_CONTROL_PATHS, "bounded_g2_transport_transition_paths")
+    for path in G2_BATCH_CONTROL_PATHS:
+        _need(type(before[path]) is bytes and _sha(before[path]) == G2_TRANSPORT_PREDECESSOR_POLICY[path],
+              "bounded_g2_transport_prior_policy_changed")
+    _need(scope.get("schema_version") == G2_TRANSPORT_SCOPE_VERSION, "bounded_g2_transport_scope_version")
+    _validate_g2_batch_scope(scope)
+    state, overlay = _json(before[STATE]), _document(before[OVERLAY], OVERLAY)
+    scope_raw = _canonical(scope) + b"\n"
+    state["observed_at"] = scope["recorded_at"]
+    state["g2"].update(scope_sha256=_sha(scope_raw),
+                       current_operation=_json(_canonical(scope["current_operation"])))
+    state["task_selection"].update(next_eligibility_condition="bounded_G2_taskpane_transport_repair_active")
+    overlay["profiles"][G2_PROFILE] = raisa_policy.g2_transport_repair_profile()
+    return {STATE: (json.dumps(state, indent=2, ensure_ascii=False) + "\n").encode(),
+            OVERLAY: yaml.safe_dump(overlay, sort_keys=False, allow_unicode=True).encode(),
+            G2_SCOPE: scope_raw}
+
+
 def _validate_g2_batch_scope(scope: dict) -> None:
-    builder = (build_g2_pyjwt_scope if scope.get("schema_version") == G2_PYJWT_SCOPE_VERSION
+    builder = (build_g2_transport_scope if scope.get("schema_version") == G2_TRANSPORT_SCOPE_VERSION else build_g2_pyjwt_scope if scope.get("schema_version") == G2_PYJWT_SCOPE_VERSION
                else build_g2_completeness_scope if scope.get("schema_version") == G2_COMPLETENESS_SCOPE_VERSION
                else build_g2_relationship_scope if scope.get("schema_version") == G2_RELATIONSHIP_SCOPE_VERSION
                else build_g2_tenant_scope if scope.get("schema_version") == G2_TENANT_SCOPE_VERSION
@@ -3458,6 +3605,7 @@ def _load_g2_batch_inputs(context, target, source, evidence_root, scratch, bindi
                     "expected_head", "expected_index_tree", "candidate_tree", "source_sha256", "payload_sha256",
                     "activation_commit", "installed_controller", "repair_sha256"},
           "bounded_g2_batch_binding_schema")
+    transport = binding["schema_version"] == G2_TRANSPORT_BINDING_VERSION
     catalogue = binding["schema_version"] == G2_CATALOGUE_BINDING_VERSION
     instructions = binding["schema_version"] == G2_INSTRUCTIONS_BINDING_VERSION
     migration = instructions or binding["schema_version"] == G2_MIGRATION_BINDING_VERSION
@@ -3475,7 +3623,7 @@ def _load_g2_batch_inputs(context, target, source, evidence_root, scratch, bindi
     tenant = binding["schema_version"] == G2_TENANT_BINDING_VERSION
     relationship = binding["schema_version"] == G2_RELATIONSHIP_BINDING_VERSION
     completeness = binding["schema_version"] == G2_COMPLETENESS_BINDING_VERSION
-    post_audio = audio or patient or atomicity or clinical or guard or appointment or production or dependency or ci or cim or tenant or relationship or completeness
+    post_audio = transport or audio or patient or atomicity or clinical or guard or appointment or production or dependency or ci or cim or tenant or relationship or completeness
     version_kinds = {
         G2_BATCH_BINDING_VERSION: {"enable_g2_batches", "repair_g2_batch"},
         G2_CATALOGUE_BINDING_VERSION: {"extend_g2_catalogue", "repair_g2_batch"},
@@ -3495,12 +3643,16 @@ def _load_g2_batch_inputs(context, target, source, evidence_root, scratch, bindi
         G2_RELATIONSHIP_BINDING_VERSION: {"enable_g2_tenant_relationships", "repair_g2_tenant_relationships"},
         G2_COMPLETENESS_BINDING_VERSION: {"enable_g2_ci_completeness", "repair_g2_ci_completeness"},
         G2_PYJWT_BINDING_VERSION: {"enable_g2_pyjwt_repair", "repair_g2_pyjwt_repair"},
+        G2_TRANSPORT_BINDING_VERSION: {"enable_g2_transport_repair", "repair_g2_transport_repair"},
     }
     _need(binding["operation_kind"] in version_kinds.get(binding["schema_version"], set()),
           "bounded_g2_batch_binding_version")
     changes = _batch_changes(binding)
     input_paths = batch_input_paths(binding)
     maintenance = binding["operation_kind"] in G2_MAINTENANCE_KINDS
+    if transport and maintenance:
+        _need(binding["base_commit"] == G2_TRANSPORT_PREDECESSOR["commit"],
+              "bounded_g2_transport_transition_base")
     if guard and maintenance:
         _need(binding["base_commit"] == G2_MIGRATION_GUARD_PREDECESSOR["commit"],
               "bounded_g2_migration_guard_transition_base")
@@ -3576,12 +3728,14 @@ def _load_g2_batch_inputs(context, target, source, evidence_root, scratch, bindi
           "bounded_g2_relationship_scope_binding_mismatch")
     _need((scope.get("schema_version") == G2_COMPLETENESS_SCOPE_VERSION) == completeness,
           "bounded_g2_completeness_scope_binding_mismatch")
+    _need((scope.get("schema_version") == G2_TRANSPORT_SCOPE_VERSION) == transport,
+          "bounded_g2_transport_scope_binding_mismatch")
     _validate_g2_batch_scope(scope)
     frozen = {**FROZEN_PINS, COST: COST_PIN, SCOPE_PATH: G1B_BASELINE_PINS[SCOPE_PATH],
               G1C_SCOPE: G1C_BASELINE_PINS[G1C_SCOPE], G1D_SCOPE: G1D_BASELINE_PINS[G1D_SCOPE],
               G1E_SCOPE: G1E_BASELINE_PINS[G1E_SCOPE], **GOVERNOR_PINS, **PROVENANCE_DEPENDENCY_PINS,
               **PROVENANCE_PINS, **CONFIGURATION_LEAF_PINS,
-                 AGENTS: (G2_PRODUCTION_PROFILE_INSTRUCTIONS_SHA256 if production or dependency or ci or cim or tenant or relationship or completeness
+                 AGENTS: (G2_TRANSPORT_PREDECESSOR_POLICY[AGENTS] if transport else G2_PRODUCTION_PROFILE_INSTRUCTIONS_SHA256 if production or dependency or ci or cim or tenant or relationship or completeness
                        else G2_APPOINTMENT_INSTRUCTIONS_SHA256 if appointment
                        else G2_MIGRATION_GUARD_INSTRUCTIONS_SHA256 if guard
                        else G2_AUDIO_INSTRUCTIONS_SHA256 if post_audio else
@@ -3613,6 +3767,9 @@ def _load_g2_batch_inputs(context, target, source, evidence_root, scratch, bindi
     if clinical or guard or appointment or production or dependency or ci or cim or tenant or relationship or completeness:
         owner_path = raisa_policy.G2_CLINICAL_OWNER_RECORD
         evidence[owner_path] = read(evidence_root / owner_path, raisa_policy.G2_CLINICAL_OWNER_SHA256)
+    if transport:
+        evidence[G2_TRANSPORT_OWNER_RECORD] = read(evidence_root / G2_TRANSPORT_OWNER_RECORD,
+                                                  G2_TRANSPORT_OWNER_SHA256)
     prior_policy = initial_policy
     if catalogue or migration or post_audio:
         _batch_publication(target, G2_CATALOGUE_PREDECESSOR, base)
@@ -3809,6 +3966,16 @@ def _load_g2_batch_inputs(context, target, source, evidence_root, scratch, bindi
             _need(_sha(raw) == digest, "bounded_g2_pyjwt_predecessor_bytes_changed")
             if path in G2_PYJWT_PREDECESSOR_POLICY:
                 prior_policy[path] = raw
+    if transport:
+        _batch_publication(target, G2_TRANSPORT_PREDECESSOR, base)
+        prior_policy = {}
+        for path, digest in {**G2_TRANSPORT_PREDECESSOR_POLICY,
+                             **G2_TRANSPORT_PREDECESSOR["source_sha256"]}.items():
+            raw = trusted_git.run_git_bytes(target, "cat-file", "blob",
+                G2_TRANSPORT_PREDECESSOR["commit"] + ":" + path)
+            _need(_sha(raw) == digest, "bounded_g2_transport_predecessor_bytes_changed")
+            if path in G2_TRANSPORT_PREDECESSOR_POLICY:
+                prior_policy[path] = raw
     base_payloads = {}
     for path in sorted(input_paths):
         if path in changes and changes[path]["before_sha256"] is None:
@@ -3838,7 +4005,7 @@ def _load_g2_batch_inputs(context, target, source, evidence_root, scratch, bindi
     _validate_installed_controller(controller)
     _batch_publication(target, controller, base)
     if maintenance:
-        expected_controller = (G2_COMPLETENESS_PREDECESSOR if completeness
+        expected_controller = (G2_TRANSPORT_PREDECESSOR if transport else G2_COMPLETENESS_PREDECESSOR if completeness
                                 else G2_RELATIONSHIP_PREDECESSOR if relationship
                                else G2_TENANT_PREDECESSOR if tenant
                                else G2_CIM_PREDECESSOR if cim
@@ -3857,7 +4024,7 @@ def _load_g2_batch_inputs(context, target, source, evidence_root, scratch, bindi
         _need(controller == expected_controller and binding["activation_commit"] == expected_activation,
               "bounded_g2_batch_maintenance_predecessor")
         _need(scope["transition_base_commit"] == base, "bounded_g2_batch_maintenance_base")
-        prior_pins = (G2_COMPLETENESS_PREDECESSOR_POLICY if completeness
+        prior_pins = (G2_TRANSPORT_PREDECESSOR_POLICY if transport else G2_COMPLETENESS_PREDECESSOR_POLICY if completeness
                        else G2_RELATIONSHIP_PREDECESSOR_POLICY if relationship
                       else G2_TENANT_PREDECESSOR_POLICY if tenant
                       else G2_CIM_PREDECESSOR_POLICY if cim
@@ -4015,7 +4182,7 @@ def build_g2_completeness_transition(before: dict[str, bytes], scope: dict) -> d
 
 def _validate_g2_batch_loaded_policy(inputs):
     scope = _json(inputs.payloads[G2_SCOPE])
-    builder = (build_g2_pyjwt_transition if scope.get("schema_version") == G2_PYJWT_SCOPE_VERSION
+    builder = (build_g2_transport_transition if scope.get("schema_version") == G2_TRANSPORT_SCOPE_VERSION else build_g2_pyjwt_transition if scope.get("schema_version") == G2_PYJWT_SCOPE_VERSION
                else build_g2_completeness_transition if scope.get("schema_version") == G2_COMPLETENESS_SCOPE_VERSION
                else build_g2_relationship_transition if scope.get("schema_version") == G2_RELATIONSHIP_SCOPE_VERSION
                else build_g2_tenant_transition if scope.get("schema_version") == G2_TENANT_SCOPE_VERSION

@@ -9273,3 +9273,203 @@ class G2PyJWTSourceContractTests(unittest.TestCase):
             with self.subTest(stamp=stamp):
                 self.assertEqual(b.build_g2_pyjwt_scope(stamp, b.G2_PYJWT_PREDECESSOR["commit"], self.sources())["recorded_at"],
                                  stamp)
+
+class G2TransportSourceContractTests(unittest.TestCase):
+    """V19 pure contracts; historical classes and attempts retain their meaning."""
+
+    @staticmethod
+    def sources():
+        result = copy.deepcopy(b.G2_TRANSPORT_PREDECESSOR["source_sha256"])
+        for path in b.G2_BATCH_CODE_PATHS:
+            result[path] = "3" * 64
+        return result
+
+    @staticmethod
+    def binding(maintenance=False):
+        paths = b.G2_TRANSPORT_MAINTENANCE_PATHS if maintenance else b.G2_TRANSPORT_PATHS
+        return {
+            "schema_version": b.G2_TRANSPORT_BINDING_VERSION,
+            "operation_kind": "enable_g2_transport_repair" if maintenance else "repair_g2_transport_repair",
+            "repair_sha256": {path: {
+                "before_sha256": "1" * 64 if maintenance else b.G2_TRANSPORT_REPAIR_PINS[path],
+                "after_sha256": "2" * 64} for path in paths},
+        }
+
+    def reason(self, reason, action):
+        with self.assertRaises(b.BoundedG1BError) as caught:
+            action()
+        self.assertEqual(caught.exception.reason_code, reason)
+
+    def scope(self):
+        return b.build_g2_transport_scope("2026-10-08T00:00:00+00:00",
+                                         b.G2_TRANSPORT_PREDECESSOR["commit"], self.sources())
+
+    def test_remote_successor_anchor_and_historical_v18_linkage(self):
+        scope = self.scope()
+        self.assertEqual(b.G2_TRANSPORT_PREDECESSOR["commit"],
+                         "a276031269aaf285e13f36d6fc4a6b80b3915be4")
+        self.assertEqual(scope["transition_base_commit"],
+                         b.G2_TRANSPORT_PREDECESSOR["commit"])
+        self.assertEqual(scope["current_operation"]["supersedes"]["scope_commit"],
+                         b.G2_TRANSPORT_HISTORICAL_V18_SCOPE_COMMIT)
+        self.assertEqual(b.G2_TRANSPORT_HISTORICAL_V18_SCOPE_COMMIT,
+                         "f233f3622c0c5c72448380c706e15b6efbc6be7e")
+        self.assertEqual(scope["repair_preimage_sha256"]["EMR4 Sidebar/src/taskpane/taskpane.js"],
+                         "68ff085ed2a77ed756b775f034f5c89a83c5cd6a56c2544392699dc6b6d07f2f")
+        self.reason("bounded_g2_transport_transition_base", lambda:
+            b.build_g2_transport_scope("2026-10-08T00:00:00+00:00",
+                                       b.G2_TRANSPORT_HISTORICAL_V18_SCOPE_COMMIT,
+                                       self.sources()))
+        forged = self.binding()
+        forged["repair_sha256"]["EMR4 Sidebar/src/taskpane/taskpane.js"]["before_sha256"] = (
+            "8ed128aee7cac860d5f70918d32e7cde906531c1cad3c637d20987f485903b4c")
+        self.reason("bounded_g2_transport_repair_preimage", lambda:
+            b._batch_changes(forged))
+    def test_exact_repair_and_maintenance_subjects(self):
+        repair, maintenance = self.binding(), self.binding(True)
+        self.assertEqual(set(b._batch_changes(repair)), b.G2_TRANSPORT_PATHS)
+        self.assertEqual(set(b._batch_changes(maintenance)), b.G2_TRANSPORT_MAINTENANCE_PATHS)
+        self.assertEqual(b.operation_paths("repair_g2_transport_repair", repair), b.G2_TRANSPORT_PATHS)
+        self.assertEqual(b.operation_paths("enable_g2_transport_repair"), b.G2_BATCH_MAINTENANCE_PATHS)
+        self.assertEqual(b.batch_input_paths(repair), b.G2_CATALOGUE_POLICY_PATHS | b.G2_TRANSPORT_PATHS)
+        self.assertEqual(b.operation_effects("repair_g2_transport_repair"), b.G2_BATCH_EFFECTS)
+        self.assertIsNone(repair["repair_sha256"]["tests/taskpane_synthetic_transport.cjs"]["before_sha256"])
+        b._validate_g2_batch_scope(self.scope())
+
+    def test_wrong_existing_preimage_or_claimed_existing_addition(self):
+        for path in b.G2_TRANSPORT_PATHS:
+            bad = self.binding()
+            bad["repair_sha256"][path]["before_sha256"] = "a" * 64
+            self.reason("bounded_g2_transport_repair_preimage", lambda: b._batch_changes(bad))
+
+    def test_unknown_out_of_scope_or_incomplete_subject(self):
+        bad = self.binding()
+        bad["repair_sha256"]["unreviewed.py"] = bad["repair_sha256"].pop("tests/taskpane_synthetic_transport.cjs")
+        self.reason("bounded_g2_batch_path_not_allowed", lambda: b._batch_changes(bad))
+        bad = self.binding()
+        del bad["repair_sha256"]["tests/taskpane_synthetic_transport.cjs"]
+        self.reason("bounded_g2_batch_changes_invalid", lambda: b._batch_changes(bad))
+        bad = self.binding()
+        bad["operation_kind"] = "repair_g2_unknown"
+        self.reason("bounded_g2_batch_binding_version", lambda: b._batch_changes(bad))
+
+    def test_historical_versions_cannot_alias_transport_or_inverse(self):
+        bad = self.binding()
+        bad["schema_version"] = b.G2_PYJWT_BINDING_VERSION
+        self.reason("bounded_g2_batch_binding_version", lambda: b._batch_changes(bad))
+        bad = self.binding()
+        bad["operation_kind"] = "repair_g2_pyjwt_repair"
+        self.reason("bounded_g2_batch_binding_version", lambda: b._batch_changes(bad))
+
+    def test_malformed_afterimage_digests(self):
+        for digest in (None, "X" * 64, "a" * 63, 123):
+            bad = self.binding()
+            bad["repair_sha256"]["tests/taskpane_synthetic_transport.cjs"]["after_sha256"] = digest
+            self.reason("bounded_g2_batch_change_digest", lambda: b._batch_changes(bad))
+
+    def test_exact_predecessor_and_unchanged_trust_component(self):
+        self.reason("bounded_g2_transport_transition_base",
+                    lambda: b.build_g2_transport_scope("2026-10-08T00:00:00Z", "f" * 40, self.sources()))
+        for path in b.CONTROLLER_PATHS - b.G2_BATCH_CODE_PATHS:
+            bad = self.sources()
+            bad[path] = "f" * 64
+            self.reason("bounded_g2_transport_unchanged_controller_component",
+                        lambda: b.build_g2_transport_scope("2026-10-08T00:00:00Z",
+                                                         b.G2_TRANSPORT_PREDECESSOR["commit"], bad))
+
+    def test_authority_scope_and_forbidden_effect_mutations_fail(self):
+        for mutate in (
+            lambda s: s["current_owner_directive"].update(sha256="f" * 64),
+            lambda s: s["current_owner_directive"].update(record_path="unreviewed-owner.txt"),
+            lambda s: s["allowed_paths"].append("unreviewed.py"),
+            lambda s: s["allowed_effects"].append("provider_invocation"),
+            lambda s: s["forbidden_effects"].remove("deployment"),
+            lambda s: s.update(execution_authorized=True),
+            lambda s: s.update(g2_complete=True),
+        ):
+            bad = self.scope()
+            mutate(bad)
+            self.reason("bounded_g2_batch_scope_invalid", lambda: b._validate_g2_batch_scope(bad))
+
+    def test_v18_incomplete_and_all_historical_records_preserved(self):
+        prior = b._g2_transport_prior_scope()
+        original = copy.deepcopy(prior)
+        scope = self.scope()
+        self.assertEqual(scope["preserved_incomplete_pyjwt_scope"], original)
+        self.assertEqual(b._sha(b._canonical(prior) + b"\n"), b.G2_TRANSPORT_PREDECESSOR_POLICY[b.G2_SCOPE])
+        self.assertFalse(scope["current_operation"]["supersedes"]["predecessor_completion_accepted"])
+        self.assertTrue(scope["current_operation"]["supersedes"]["historical_latch_preserved"])
+        for key in ("preserved_incomplete_ci_scope", "owner_test_runtime_exception", "initial_scope",
+                    "initial_activation", "published_dependency_repair", "dependency_invariant"):
+            self.assertEqual(scope[key], original[key])
+        for flag in ("execution_authorized", "g2_complete", "feature_work_eligible",
+                     "operational_multi_task_control_accepted", "existing_clockwork_writers_activated"):
+            self.assertIs(scope[flag], False)
+        self.assertEqual(prior, original)
+        self.assertEqual(b.G2_PYJWT_BINDING_VERSION, "ariadne.bounded_g2_batch_binding.v18")
+        self.assertEqual(b.G2_PYJWT_REPAIR_PINS["requirements.txt"],
+                         "47d852c442ea25c041aa70fca5dff01846fd18f3eebfa3c7d288aec3e0a54b90")
+
+    def test_preserved_history_and_completion_forgery_rejected(self):
+        for mutate in (
+            lambda s: s["preserved_incomplete_pyjwt_scope"]["current_operation"].update(completion_accepted=True),
+            lambda s: s["current_operation"].update(completion_accepted=True),
+            lambda s: s["owner_test_runtime_exception"].update(execution_authorized=True),
+        ):
+            bad = self.scope()
+            mutate(bad)
+            self.reason("bounded_g2_batch_scope_invalid", lambda: b._validate_g2_batch_scope(bad))
+
+    def test_profile_preserves_effect_and_runtime_closures(self):
+        profile = rp.g2_transport_repair_profile()
+        self.assertEqual(profile["allowed_paths"], sorted(b.G2_TRANSPORT_PATHS))
+        self.assertEqual(profile["scope_behavior"], rp.G2_TRANSPORT_REPAIR_SCOPE_BEHAVIOR)
+        self.assertEqual(profile["allowed_effects"], rp.g2_batch_profile()["allowed_effects"])
+        self.assertEqual(profile["forbidden_effects"], rp.g2_batch_profile()["forbidden_effects"])
+        for effect in ("dependency_change", "migration_change", "provider_invocation",
+                       "real_data_access", "integration", "deployment", "protected_ref_movement"):
+            self.assertIn(effect, profile["forbidden_effects"])
+            self.assertNotIn(effect, b.operation_effects("repair_g2_transport_repair"))
+
+    def test_timestamp_is_typed_valid_and_timezone_bound(self):
+        for stamp in (None, 123, "", "garbage", "2026-10-08", "2026-10-08T00:00:00"):
+            self.reason("bounded_g2_transport_timestamp",
+                        lambda: b.build_g2_transport_scope(stamp, b.G2_TRANSPORT_PREDECESSOR["commit"], self.sources()))
+
+
+def build_g2_transport_suite(before: dict[str, bytes]) -> unittest.TestSuite:
+    """Only new V19 cases, using caller-supplied ordinary pinned control bytes.
+
+    This factory opens no files and does not invoke the historical integration
+    suite. Run only from a separately reviewed external ordinary source capsule.
+    """
+    class G2TransportTransitionTests(G2TransportSourceContractTests):
+        def test_exact_current_three_record_transition(self):
+            original = copy.deepcopy(before)
+            scope = self.scope()
+            after = b.build_g2_transport_transition(before, scope)
+            self.assertEqual(set(after), b.G2_BATCH_CONTROL_PATHS)
+            state_before, state_after = b._json(before[b.STATE]), b._json(after[b.STATE])
+            expected = copy.deepcopy(state_before)
+            expected["observed_at"] = scope["recorded_at"]
+            expected["g2"].update(scope_sha256=b._sha(after[b.G2_SCOPE]),
+                                  current_operation=copy.deepcopy(scope["current_operation"]))
+            expected["task_selection"]["next_eligibility_condition"] = "bounded_G2_taskpane_transport_repair_active"
+            self.assertEqual(state_after, expected)
+            self.assertEqual(b._json(after[b.G2_SCOPE]), scope)
+            overlay_before = b._document(before[b.OVERLAY], b.OVERLAY)
+            overlay_after = b._document(after[b.OVERLAY], b.OVERLAY)
+            overlay_before["profiles"][b.G2_PROFILE] = rp.g2_transport_repair_profile()
+            self.assertEqual(overlay_after, overlay_before)
+            self.assertIs(state_after["g2"]["completion_accepted"], False)
+            self.assertEqual(state_after["current_gate"], "G2")
+            self.assertEqual(before, original)
+
+        def test_wrong_control_preimage_rejected_before_transition(self):
+            for path in b.G2_BATCH_CONTROL_PATHS:
+                bad = copy.deepcopy(before)
+                bad[path] += b" "
+                self.reason("bounded_g2_transport_prior_policy_changed",
+                            lambda: b.build_g2_transport_transition(bad, self.scope()))
+
+    return unittest.defaultTestLoader.loadTestsFromTestCase(G2TransportTransitionTests)
