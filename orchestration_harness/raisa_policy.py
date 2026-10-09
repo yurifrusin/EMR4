@@ -1849,6 +1849,18 @@ def g2_dependency_repair_profile() -> dict:
     return profile
 
 
+G2_SIX_FILE_REPAIR_PATHS = ('app/routers/appointments.py', 'app/services/appointment_delete_composition.py', 'app/services/appointment_delete_physical.py', 'app/services/appointment_delete_product_adapter.py', 'tests/test_api_spine_status_confirm_idempotency_route_contract.py', 'tests/test_repository_maintenance.py')
+G2_SIX_FILE_REPAIR_SCOPE_BEHAVIOR = 'bounded_g2_six_file_confirmation_and_checker_repair'
+
+
+def g2_six_file_repair_profile() -> dict:
+    """Fixed six ordinary sources; same runtime, effect and protected closures."""
+    profile = g2_batch_profile()
+    profile.update(scope_behavior=G2_SIX_FILE_REPAIR_SCOPE_BEHAVIOR,
+                   allowed_paths=sorted(G2_SIX_FILE_REPAIR_PATHS))
+    return profile
+
+
 G2_TRANSPORT_REPAIR_PATHS = (
     'EMR4 Sidebar/src/taskpane/taskpane.js',
     'tests/taskpane_synthetic_transport.cjs',
@@ -2371,7 +2383,9 @@ def validate_recovery_configuration(*, documents: dict[str, bytes], expected_sha
         raise RaisaPolicyError("configuration_assessment_profile_invalid")
     if state["active_profile"] == G2_PROFILE:
         profile = overlay["profiles"][G2_PROFILE]
-        expected = (g2_transport_repair_profile()
+        expected = (g2_six_file_repair_profile()
+                    if profile["scope_behavior"] == G2_SIX_FILE_REPAIR_SCOPE_BEHAVIOR
+                    else g2_transport_repair_profile()
                     if profile["scope_behavior"] == G2_TRANSPORT_REPAIR_SCOPE_BEHAVIOR
                     else g2_pyjwt_repair_profile()
                     if profile["scope_behavior"] == G2_PYJWT_REPAIR_SCOPE_BEHAVIOR

@@ -9473,3 +9473,178 @@ def build_g2_transport_suite(before: dict[str, bytes]) -> unittest.TestSuite:
                             lambda: b.build_g2_transport_transition(bad, self.scope()))
 
     return unittest.defaultTestLoader.loadTestsFromTestCase(G2TransportTransitionTests)
+
+
+class G2SixFileSourceContractTests(unittest.TestCase):
+    """V20 fixed subject; pure tests do not load files or grant effects."""
+
+    @staticmethod
+    def sources():
+        result = copy.deepcopy(b.G2_SIX_PREDECESSOR["source_sha256"])
+        for path in b.G2_BATCH_CODE_PATHS:
+            result[path] = "3" * 64
+        return result
+
+    @staticmethod
+    def binding(maintenance=False):
+        return {
+            "schema_version": b.G2_SIX_BINDING_VERSION,
+            "operation_kind": "enable_g2_six_file_repair" if maintenance else "repair_g2_six_file_repair",
+            "repair_sha256": ({p: {"before_sha256": "1" * 64, "after_sha256": "2" * 64}
+                               for p in b.G2_SIX_MAINTENANCE_PATHS} if maintenance
+                              else copy.deepcopy(b.G2_SIX_REPAIR_PINS)),
+        }
+
+    def reason(self, reason, action):
+        with self.assertRaises(b.BoundedG1BError) as caught:
+            action()
+        self.assertEqual(caught.exception.reason_code, reason)
+
+    def scope(self):
+        return b.build_g2_six_file_scope("2026-10-09T00:00:00+00:00",
+                                        b.G2_SIX_PREDECESSOR["commit"], self.sources())
+
+    def test_exact_six_subject_and_separate_maintenance(self):
+        repair, maintenance = self.binding(), self.binding(True)
+        self.assertEqual(b._batch_changes(repair), b.G2_SIX_REPAIR_PINS)
+        self.assertEqual(set(b._batch_changes(maintenance)), b.G2_BATCH_MAINTENANCE_PATHS)
+        self.assertEqual(b.operation_paths("repair_g2_six_file_repair", repair), b.G2_SIX_PATHS)
+        self.assertEqual(b.operation_paths("enable_g2_six_file_repair"), b.G2_BATCH_MAINTENANCE_PATHS)
+        self.assertEqual(b.batch_input_paths(repair), b.G2_CATALOGUE_POLICY_PATHS | b.G2_SIX_PATHS)
+        self.assertEqual(len(b.G2_SIX_PATHS), 6)
+        self.assertEqual(self.scope()["repair_sha256"], b.G2_SIX_REPAIR_PINS)
+        b._validate_g2_batch_scope(self.scope())
+
+    def test_any_wrong_preimage_or_afterimage_is_rejected(self):
+        for path in b.G2_SIX_PATHS:
+            for key in ("before_sha256", "after_sha256"):
+                bad = self.binding()
+                bad["repair_sha256"][path][key] = "f" * 64
+                self.reason("bounded_g2_six_file_exact_subject", lambda: b._batch_changes(bad))
+
+    def test_unknown_incomplete_and_out_of_scope_subjects(self):
+        path = sorted(b.G2_SIX_PATHS)[0]
+        bad = self.binding()
+        bad["repair_sha256"]["unreviewed.py"] = bad["repair_sha256"].pop(path)
+        self.reason("bounded_g2_batch_path_not_allowed", lambda: b._batch_changes(bad))
+        bad = self.binding()
+        del bad["repair_sha256"][path]
+        self.reason("bounded_g2_batch_changes_invalid", lambda: b._batch_changes(bad))
+        bad = self.binding()
+        bad["operation_kind"] = "repair_g2_unknown"
+        self.reason("bounded_g2_batch_binding_version", lambda: b._batch_changes(bad))
+
+    def test_no_historical_version_alias_or_additions(self):
+        for version in (b.G2_TRANSPORT_BINDING_VERSION, b.G2_PYJWT_BINDING_VERSION):
+            bad = self.binding()
+            bad["schema_version"] = version
+            self.reason("bounded_g2_batch_binding_version", lambda: b._batch_changes(bad))
+        bad = self.binding()
+        bad["operation_kind"] = "repair_g2_transport_repair"
+        self.reason("bounded_g2_batch_binding_version", lambda: b._batch_changes(bad))
+        bad = self.binding()
+        bad["repair_sha256"][sorted(b.G2_SIX_PATHS)[0]]["before_sha256"] = None
+        self.reason("bounded_g2_batch_change_digest", lambda: b._batch_changes(bad))
+
+    def test_installed_predecessor_and_unchanged_trust_components(self):
+        self.assertEqual(b.G2_SIX_PREDECESSOR["commit"], "7d9edaa404d912b53316fe868cad4de0bbc8bf60")
+        self.reason("bounded_g2_six_file_transition_base", lambda:
+            b.build_g2_six_file_scope("2026-10-09T00:00:00Z", b.G2_TRANSPORT_PREDECESSOR["commit"], self.sources()))
+        for path in b.CONTROLLER_PATHS - b.G2_BATCH_CODE_PATHS:
+            bad = self.sources()
+            bad[path] = "f" * 64
+            self.reason("bounded_g2_six_file_unchanged_controller_component", lambda:
+                b.build_g2_six_file_scope("2026-10-09T00:00:00Z", b.G2_SIX_PREDECESSOR["commit"], bad))
+
+    def test_authority_exact_subject_and_forbidden_effect_mutations(self):
+        for mutate in (
+            lambda s: s["current_owner_directive"].update(sha256="f" * 64),
+            lambda s: s["allowed_paths"].append("unreviewed.py"),
+            lambda s: s["allowed_effects"].append("provider_invocation"),
+            lambda s: s["forbidden_effects"].remove("deployment"),
+            lambda s: s.update(repair_subject_sha256="f" * 64),
+            lambda s: s["repair_sha256"][sorted(b.G2_SIX_PATHS)[0]].update(after_sha256="f" * 64),
+            lambda s: s.update(execution_authorized=True),
+            lambda s: s.update(g2_complete=True),
+        ):
+            bad = self.scope()
+            mutate(bad)
+            self.reason("bounded_g2_batch_scope_invalid", lambda: b._validate_g2_batch_scope(bad))
+
+    def test_preserve_exact_v19_and_all_historical_consumption(self):
+        prior = b._g2_six_file_prior_scope()
+        original = copy.deepcopy(prior)
+        scope = self.scope()
+        self.assertEqual(b._sha(b._canonical(prior) + b"\n"), b.G2_SIX_PREDECESSOR_POLICY[b.G2_SCOPE])
+        self.assertEqual(scope["preserved_transport_scope"], original)
+        self.assertEqual(prior, original)
+        for key in ("preserved_incomplete_pyjwt_scope", "preserved_incomplete_ci_scope", "owner_test_runtime_exception",
+                    "initial_scope", "initial_activation", "published_dependency_repair", "dependency_invariant"):
+            self.assertEqual(scope[key], original[key])
+        for flag in ("execution_authorized", "g2_complete", "feature_work_eligible",
+                     "operational_multi_task_control_accepted", "existing_clockwork_writers_activated"):
+            self.assertIs(scope[flag], False)
+        self.assertFalse(scope["current_operation"]["completion_accepted"])
+        self.assertFalse(scope["current_operation"]["supersedes"]["predecessor_completion_accepted"])
+        self.assertEqual(b.G2_TRANSPORT_BINDING_VERSION, "ariadne.bounded_g2_batch_binding.v19")
+        self.assertEqual(b.G2_PYJWT_BINDING_VERSION, "ariadne.bounded_g2_batch_binding.v18")
+
+    def test_history_and_publication_forgery_rejected(self):
+        for mutate in (
+            lambda s: s["preserved_transport_scope"]["current_operation"].update(completion_accepted=True),
+            lambda s: s["current_operation"].update(completion_accepted=True),
+            lambda s: s["owner_test_runtime_exception"].update(execution_authorized=True),
+            lambda s: s["predecessor_publication_review_sha256"].update({"unreviewed.json": "f" * 64}),
+        ):
+            bad = self.scope()
+            mutate(bad)
+            self.reason("bounded_g2_batch_scope_invalid", lambda: b._validate_g2_batch_scope(bad))
+
+    def test_same_profile_effect_runtime_and_protected_closures(self):
+        profile = rp.g2_six_file_repair_profile()
+        self.assertEqual(profile["allowed_paths"], sorted(b.G2_SIX_PATHS))
+        self.assertEqual(profile["scope_behavior"], rp.G2_SIX_FILE_REPAIR_SCOPE_BEHAVIOR)
+        self.assertEqual(profile["allowed_effects"], rp.g2_batch_profile()["allowed_effects"])
+        self.assertEqual(profile["forbidden_effects"], rp.g2_batch_profile()["forbidden_effects"])
+        self.assertEqual(b.operation_effects("repair_g2_six_file_repair"), b.G2_BATCH_EFFECTS)
+        for effect in ("dependency_change", "migration_change", "provider_invocation", "real_data_access",
+                       "integration", "deployment", "protected_ref_movement"):
+            self.assertIn(effect, profile["forbidden_effects"])
+            self.assertNotIn(effect, b.operation_effects("repair_g2_six_file_repair"))
+
+    def test_typed_timezone_bound_timestamp(self):
+        for stamp in (None, 123, "", "garbage", "2026-10-09", "2026-10-09T00:00:00"):
+            self.reason("bounded_g2_six_file_timestamp", lambda:
+                b.build_g2_six_file_scope(stamp, b.G2_SIX_PREDECESSOR["commit"], self.sources()))
+
+
+def build_g2_six_file_suite(before: dict[str, bytes]) -> unittest.TestSuite:
+    """New pure cases with caller-provided exact ordinary control bytes only."""
+    class G2SixFileTransitionTests(G2SixFileSourceContractTests):
+        def test_exact_current_three_control_afterimages(self):
+            original = copy.deepcopy(before)
+            scope = self.scope()
+            after = b.build_g2_six_file_transition(before, scope)
+            self.assertEqual(set(after), b.G2_BATCH_CONTROL_PATHS)
+            expected = b._json(before[b.STATE])
+            expected["observed_at"] = scope["recorded_at"]
+            expected["g2"].update(scope_sha256=b._sha(after[b.G2_SCOPE]),
+                                  current_operation=copy.deepcopy(scope["current_operation"]))
+            expected["task_selection"]["next_eligibility_condition"] = "bounded_G2_six_file_repair_active"
+            self.assertEqual(b._json(after[b.STATE]), expected)
+            self.assertEqual(b._json(after[b.G2_SCOPE]), scope)
+            overlay = b._document(before[b.OVERLAY], b.OVERLAY)
+            overlay["profiles"][b.G2_PROFILE] = rp.g2_six_file_repair_profile()
+            self.assertEqual(b._document(after[b.OVERLAY], b.OVERLAY), overlay)
+            self.assertFalse(expected["g2"]["completion_accepted"])
+            self.assertEqual(expected["current_gate"], "G2")
+            self.assertEqual(before, original)
+
+        def test_all_wrong_control_preimages_rejected(self):
+            for path in b.G2_BATCH_CONTROL_PATHS:
+                bad = copy.deepcopy(before)
+                bad[path] += b" "
+                self.reason("bounded_g2_six_file_prior_policy_changed", lambda:
+                    b.build_g2_six_file_transition(bad, self.scope()))
+
+    return unittest.defaultTestLoader.loadTestsFromTestCase(G2SixFileTransitionTests)

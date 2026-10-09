@@ -1,6 +1,6 @@
 {
   "schema_version": "raisa-ariadne.programme-state.v2",
-  "observed_at": "2026-10-08T00:00:00+00:00",
+  "observed_at": "2026-10-09T00:00:00+00:00",
   "programme_name": "Raisa Medical Office and Ariadne Recovery & Convergence",
   "programme_mode": "recovery",
   "current_gate": "G2",
@@ -272,7 +272,7 @@
     "next_eligible_now": true,
     "next_tranche_started": false,
     "next_tranche_admission_requires_state_transition": false,
-    "next_eligibility_condition": "bounded_G2_taskpane_transport_repair_active"
+    "next_eligibility_condition": "bounded_G2_six_file_repair_active"
   },
   "parallelism_efficacy": {
     "deepseek": {
@@ -976,19 +976,19 @@
   "g2": {
     "status": "active",
     "scope_path": "orchestration/programme/g2-baseline-repair-scope.json",
-    "scope_sha256": "626fab356d8727b5fffa41126bf01ffe850ed50fef35caea5e8322d09dab262c",
+    "scope_sha256": "f30f74b6ae079743a47b6485069d63b675517fff47831014fa82dea069b3969c",
     "current_operation": {
       "completion_accepted": false,
-      "operation_id": "g2-taskpane-transport-repair",
+      "operation_id": "g2-six-file-confirmation-and-checker-repair",
       "profile": "G2_BASELINE_REPAIR_ACTIVE",
       "status": "active",
       "supersedes": {
         "historical_latch_preserved": true,
-        "operation_id": "g2-pyjwt2151-repair",
+        "operation_id": "g2-taskpane-transport-repair",
         "predecessor_completion_accepted": false,
-        "scope_commit": "f233f3622c0c5c72448380c706e15b6efbc6be7e",
+        "scope_commit": "7d9edaa404d912b53316fe868cad4de0bbc8bf60",
         "scope_path": "orchestration/programme/g2-baseline-repair-scope.json",
-        "scope_sha256": "b79e0619ea530ca3f5f8302f33885d2cd1da8afdc320fdee139c396901861cb0"
+        "scope_sha256": "626fab356d8727b5fffa41126bf01ffe850ed50fef35caea5e8322d09dab262c"
       },
       "task_class": "g2_confirmation_family_fixture_repair"
     },

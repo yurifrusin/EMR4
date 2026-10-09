@@ -1157,8 +1157,12 @@ profiles:
     - provider_invocation
     - real_data_access
     allowed_paths:
-    - EMR4 Sidebar/src/taskpane/taskpane.js
-    - tests/taskpane_synthetic_transport.cjs
+    - app/routers/appointments.py
+    - app/services/appointment_delete_composition.py
+    - app/services/appointment_delete_physical.py
+    - app/services/appointment_delete_product_adapter.py
+    - tests/test_api_spine_status_confirm_idempotency_route_contract.py
+    - tests/test_repository_maintenance.py
     autonomous_task_selection: false
     feature_work_eligible: false
     product_work_eligible: false
@@ -1166,7 +1170,7 @@ profiles:
     deployment_eligible: false
     protected_ref_movement_eligible: false
     g2_eligible: true
-    scope_behavior: bounded_g2_taskpane_transport_repair
+    scope_behavior: bounded_g2_six_file_confirmation_and_checker_repair
     scope_file: orchestration/programme/g2-baseline-repair-scope.json
     global_execution_defaults_unchanged: true
     closed_entrypoints:
