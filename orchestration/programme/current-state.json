@@ -1,12 +1,12 @@
 {
   "schema_version": "raisa-ariadne.programme-state.v2",
-  "observed_at": "2026-10-10T10:22:09.988234+00:00",
+  "observed_at": "2026-10-10T14:45:00+00:00",
   "programme_name": "Raisa Medical Office and Ariadne Recovery & Convergence",
-  "programme_mode": "recovery",
-  "current_gate": "G2",
-  "current_gate_status": "passed",
-  "active_correction": "G2",
-  "active_profile": "G2_ACCEPTED_CLOSED",
+  "programme_mode": "convergence",
+  "current_gate": "G3",
+  "current_gate_status": "active_bounded_offline_entry",
+  "active_correction": "G3",
+  "active_profile": "G3_OFFLINE_APPOINTMENT_ENTRY",
   "machine_authoritative": true,
   "feature_work_eligible": false,
   "product_work_eligible": false,
@@ -258,8 +258,10 @@
     "dependency_security": "recorded_R-012_feature_work_ineligible"
   },
   "task_selection": {
-    "autonomous_selection_enabled": false,
-    "allowed_task_kinds": [],
+    "autonomous_selection_enabled": true,
+    "allowed_task_kinds": [
+      "g3_offline_appointment_projection"
+    ],
     "blocked_task_kinds": [
       "product_feature",
       "g1a_untyped_or_out_of_scope",
@@ -271,10 +273,10 @@
     "admission_command": "python scripts/raisa_ariadne_recovery_preflight.py --task-manifest <path> --phase development",
     "out_of_gate_result": "blocked",
     "next_eligible_tranche": "G3",
-    "next_eligible_now": false,
-    "next_tranche_started": false,
-    "next_tranche_admission_requires_state_transition": true,
-    "next_eligibility_condition": "G2_accepted_G3_requires_separate_reviewed_admission"
+    "next_eligible_now": true,
+    "next_tranche_started": true,
+    "next_tranche_admission_requires_state_transition": false,
+    "next_eligibility_condition": "only_reviewed_offline_appointment_scope_no_wider_G3"
   },
   "parallelism_efficacy": {
     "deepseek": {
@@ -1000,5 +1002,13 @@
       "scope_sha256": "79766676a9c7ccf92b62266ed778140d534533dbe8050aae60c7de88252befd3",
       "prior_acceptance_sha256": "8baed2f2dbb2ad109e2ce64a0a0522db771e3e648557b60537582c1bba02eb17"
     }
+  },
+  "g3": {
+    "status": "active_bounded_offline_entry",
+    "scope_file": "orchestration/programme/g3-offline-appointment-scope.json",
+    "scope_sha256": "5041b35dde69ad58e46848927485e0fa586512623c498a229471dd40c6d5bc30",
+    "completion_accepted": false,
+    "product_runtime_authorized": false,
+    "broader_review_required_after_tranche": true
   }
 }

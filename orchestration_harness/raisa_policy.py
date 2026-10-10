@@ -33,6 +33,8 @@ G1D_PROFILE = "G1D_PROVENANCE_ACTIVE"
 G1E_PROFILE = "G1E_CONFIGURATION_CORE_ACTIVE"
 G2_PROFILE = "G2_BASELINE_REPAIR_ACTIVE"
 G2_CLOSED_PROFILE = "G2_ACCEPTED_CLOSED"
+G3_OFFLINE_PROFILE = "G3_OFFLINE_APPOINTMENT_ENTRY"
+G3_OFFLINE_PREAMBLE = "Gate G3 is active only for the separately admitted offline synthetic appointment-list projection"
 G1B_PREAMBLE = "Gate G1B is active only for bounded persistence, recovery, stale-lease protection and derived narrative"
 G1C_PREAMBLE = "Gate G1C is active only for the bounded recovery governor and its versioned persistence integration"
 G1D_PREAMBLE = "Gate G1D is active only for bounded observed provenance and independent local verification"
@@ -43,6 +45,7 @@ BOUNDED_PROFILE_PREAMBLES = MappingProxyType({
     G1B_PROFILE: G1B_PREAMBLE, G1C_PROFILE: G1C_PREAMBLE,
     G1D_PROFILE: G1D_PREAMBLE, G1E_PROFILE: G1E_PREAMBLE, G2_PROFILE: G2_PREAMBLE,
     G2_CLOSED_PROFILE: G2_CLOSED_PREAMBLE,
+    G3_OFFLINE_PROFILE: G3_OFFLINE_PREAMBLE,
 })
 
 ADMITTED_PROGRAMME_GATE = 'G0.8'
@@ -903,7 +906,8 @@ _SHAPE_79 = ("object", (
     ('G1E_CONFIGURATION_CORE_ACTIVE', _SHAPE_78),
     ('G2_BASELINE_REPAIR_ACTIVE', _G2_PROFILE_SHAPE),
     ('G2_ACCEPTED_CLOSED', _SHAPE_78),
-), ('G1E_CONFIGURATION_CORE_ACTIVE', 'G2_BASELINE_REPAIR_ACTIVE', 'G2_ACCEPTED_CLOSED'))
+    ('G3_OFFLINE_APPOINTMENT_ENTRY', _SHAPE_78),
+), ('G1E_CONFIGURATION_CORE_ACTIVE', 'G2_BASELINE_REPAIR_ACTIVE', 'G2_ACCEPTED_CLOSED', 'G3_OFFLINE_APPOINTMENT_ENTRY'))
 
 _SHAPE_80 = ("object", (
     ('expected_branch', _SHAPE_1),
@@ -1573,6 +1577,25 @@ def g2_accepted_closed_profile() -> dict:
                                     if effect not in profile['allowed_effects']]
     profile['closed_entrypoints'] = [entry for entry in profile['closed_entrypoints']
                                      if entry not in {'task_branch_commit', 'task_branch_push'}]
+    return profile
+
+
+
+def g3_offline_appointment_profile() -> dict:
+    """One offline read-only projection; no service or write authority."""
+    profile = g2_accepted_closed_profile()
+    profile.update(profile_kind='bounded_G3_offline_appointment_entry',
+        expected_current_gate='G3', expected_gate_status='active_bounded_offline_entry',
+        active_correction='G3', programme_gate='G3',
+        admitted_task_classes=['g3_offline_appointment_projection'],
+        allowed_effects=['control_plane_edit', 'product_behavior_change', 'repository_read',
+                        'task_branch_commit', 'task_branch_push'],
+        allowed_paths=sorted(['app/services/appointment_list_projection.py',
+            'tests/test_appointment_list_projection.py', 'docs/api-spine/appointment-list-projection-v1.md',
+            'docs/api-spine/appointment-list-projection-example-v1.json']),
+        scope_behavior='bounded_G3_offline_appointment_entry',
+        scope_file='orchestration/programme/g3-offline-appointment-scope.json')
+    profile['forbidden_effects'] = [x for x in profile['forbidden_effects'] if x not in profile['allowed_effects']]
     return profile
 
 
@@ -2433,6 +2456,17 @@ def validate_recovery_configuration(*, documents: dict[str, bytes], expected_sha
             raise RaisaPolicyError("configuration_calibration_semantics_invalid")
     if state["active_profile"] == G1E_PROFILE and overlay["profiles"][G1E_PROFILE] != configuration_profile():
         raise RaisaPolicyError("configuration_assessment_profile_invalid")
+    if state["active_profile"] == G3_OFFLINE_PROFILE:
+        if (overlay["profiles"][G3_OFFLINE_PROFILE] != g3_offline_appointment_profile()
+                or state["programme_mode"] != 'convergence' or state["current_gate"] != 'G3'
+                or state["current_gate_status"] != 'active_bounded_offline_entry'
+                or state["g2"]["completion_accepted"] is not True or state["g2"]["status"] != 'passed'
+                or state["feature_work_eligible"] is not False or state["product_work_eligible"] is not False
+                or state["g3"]["completion_accepted"] is not False
+                or state["g3"]["product_runtime_authorized"] is not False
+                or state["g3"]["broader_review_required_after_tranche"] is not True
+                or state["task_selection"]["allowed_task_kinds"] != ['g3_offline_appointment_projection']):
+            raise RaisaPolicyError("configuration_g3_offline_profile_invalid")
     if state["active_profile"] == G2_CLOSED_PROFILE:
         if (overlay["profiles"][G2_CLOSED_PROFILE] != g2_accepted_closed_profile()
                 or state["current_gate"] != 'G2' or state["current_gate_status"] != 'passed'

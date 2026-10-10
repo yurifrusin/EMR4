@@ -1,5 +1,5 @@
 # EMERGENCY RAISA/ARIADNE RECOVERY PRECEDENCE
-Gate G2 is accepted and closed; G3 implementation requires separate reviewed admission
+Gate G3 is active only for the separately admitted offline synthetic appointment-list projection
 Missing, malformed, stale, or contradictory programme state is a hard stop.
 
 # Identity-Specific Instruction Relay
@@ -197,3 +197,7 @@ Consult history only for a concrete dependency and within its evidence boundary.
 ## 10. Maintaining This File
 
 Update durable direction, authority, environment and next dependencies here; put chronology and test detail in the existing plan, matrix and checkpoint. Preserve superseded instructions and immutable evidence. A documentation refresh does not activate a gate, accept a candidate, move protected refs or authorise an external notification.
+
+## Authorized first G3 offline tranche
+
+G2 acceptance and qualifications remain preserved at 6fe523cdbd2e5a77c2746293269b2eaca52321ab. Only the separately admitted synthetic appointment-list projection, pure validator, deterministic fallback, worked example and direct tests are eligible. The coordinator manages justified finite corrections and verification renewals within the exact scope and resource ceilings, recording consumption and preserving independent review; new batch identifiers alone are not owner decisions. No application, database or browser service, provider, real data, protected evidence, protected-ref movement, deployment or new spending is permitted. Neither view gains write authority. Structural accessibility evidence is not rendered proof. Stop further implementation-scope expansion after this tranche for the broader architecture/product review. Use minimum adequate workers, GPT-6.1 Sol ceiling, no Astra or nested delegation.

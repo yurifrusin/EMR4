@@ -2691,7 +2691,227 @@ def _validate_g2_ci_reseal_loaded_policy(inputs):
 
 
 
+G3_BASE_POLICY = {'AGENTS.md': '85eb9e394ef566339f46be6de5ad6a713fd858758745cbeb545c198904effe93', 'orchestration/programme/current-state.json': 'e07ee27c674ecca04b56f544231625c7db6a58757152f080a0eaf62382076a9e', 'orchestration/programme/gates.yaml': '735a00f61616316239f0aa483ae77ee89d26f2a0e4e23e452ebba7b74e19e485', 'orchestration/harness_settings/programme_recovery.yaml': 'c3bddb569e4d742bbf0c44c6da51d5116f54ecc3d25b80521fce89b8e747d190', 'orchestration/programme/g2-closeout-scope.json': '79766676a9c7ccf92b62266ed778140d534533dbe8050aae60c7de88252befd3'}
+G3_BASE_SOURCE = {'orchestration_harness/configuration_core.py': 'f7ba7a80eb0a590f9fb71b864e6c1f9f43241d9f7d70a38da67a9243fea208e5', 'orchestration_harness/raisa_policy.py': '9fb5ce31aebf880a8dba0f7190be15813077b86faca794bb4c47772901c9e2bf', 'orchestration_harness/bounded_g1b.py': 'bb54f7283ba454cf705fed51275b9146bf299b7e86ae5059f0b41b83b9b9c284', 'orchestration_harness/trusted_git.py': '4a856bffe2b68d7c7e1875152629c9024a32679b59d9b1ed8301c368d41ff527', 'orchestration_harness/programme_admission.py': 'ac816a8a79b2d8222fa357777c075950927e86cf30c8a5b25ffd08a474052181', 'orchestration_harness/pinned_programme_gatekeeper.py': 'c1fea9a2849068ed8e87dbe1e7cec1cc7e762fa2bc8876fc32bbda80d226cf39', 'scripts/raisa_ariadne_recovery_preflight.py': 'edfd37b30673b8544d309b532c95b3fd7c20ff592880a8a0235dfde6cfc8e7e4', 'tests/test_bounded_g1b.py': 'bb1be86ca39232fea30c1ea84cdfb114428d57be0f8f67bf7e86daab0ba73bc5'}
+
+# First offline G3 entry. This is an exact prospective maintenance operation,
+# not permission to run an uninstalled product controller or a general framework.
+G3_BASE = {"commit": "6fe523cdbd2e5a77c2746293269b2eaca52321ab",
+           "parent": "57e3926d7774ad612164a2cd7ec2dfeef38dae27",
+           "tree": "cfb4cbe5f3dc0f1695ebeb0b4e49c72b63f31983"}
+G3_SCOPE = "orchestration/programme/g3-offline-appointment-scope.json"
+G3_TEST = "tests/test_g3_offline_entry.py"
+G3_CODE = frozenset({"orchestration_harness/bounded_g1b.py", "orchestration_harness/raisa_policy.py"})
+G3_PRODUCT = frozenset({"app/services/appointment_list_projection.py",
+    "tests/test_appointment_list_projection.py", "docs/api-spine/appointment-list-projection-v1.md",
+    "docs/api-spine/appointment-list-projection-example-v1.json"})
+G3_CONTROL = frozenset({STATE, GATES, OVERLAY, AGENTS, G3_SCOPE, G3_TEST}) | G3_CODE
+G3_BEFORE = frozenset({STATE, GATES, OVERLAY, AGENTS, G2_CLOSEOUT_SCOPE})
+G3_KINDS = frozenset({"enable_g3_entry", "implement_g3_offline_appointment"})
+G3_ACCEPTANCE_SHA = "4ebf522b60071410680dc9d17e32b3a8b34de9224a0e339e5f294d4aca0a21b4"
+G3_LIMITS = ("one offline authored-synthetic appointment-list projection only",
+    "admission is not runtime authorization or full G3 acceptance",
+    "no service, database, browser, provider, real data, protected evidence or write authority",
+    "stop scope expansion after this tranche for broader architecture/product review")
+OPERATION_PATHS.update(enable_g3_entry=G3_CONTROL, implement_g3_offline_appointment=G3_PRODUCT)
+
+
+def build_g3_entry_transition(before, scope):
+    """Only the exact accepted G2 afterimage can enter this bounded G3 scope."""
+    _keys(before, G3_BEFORE, "bounded_g3_before_paths")
+    _need(all(_sha(before[p]) == G3_BASE_POLICY[p] for p in before), "bounded_g3_preimage")
+    _keys(scope, {"schema_version", "recorded_at", "accepted_g2", "accepted_g2_review_sha256",
+        "source_sha256", "product_sha256", "allowed_paths", "allowed_effects", "runtime_limits",
+        "standing_delegation", "stop_after_tranche", "g3_completion_claimed"}, "bounded_g3_scope_schema")
+    _need(scope["schema_version"] == "ariadne.g3_offline_appointment_scope.v1"
+          and scope["accepted_g2"] == G3_BASE and scope["accepted_g2_review_sha256"] == G3_ACCEPTANCE_SHA,
+          "bounded_g3_accepted_base")
+    _need(type(scope["recorded_at"]) is str and datetime.fromisoformat(scope["recorded_at"]).tzinfo is not None,
+          "bounded_g3_timestamp")
+    _digest_map(scope["source_sha256"], SOURCE_PATHS | CONTROLLER_PATHS, "bounded_g3_sources")
+    _digest_map(scope["product_sha256"], G3_PRODUCT, "bounded_g3_product_paths")
+    _need(scope["allowed_paths"] == sorted(G3_PRODUCT)
+          and scope["allowed_effects"] == sorted(EFFECTS | {"product_behavior_change"})
+          and scope["runtime_limits"] == {"offline_only": True, "seconds_per_attempt": 300,
+              "memory_mib": 1024, "cpus": 1, "processes": 32}
+          and scope["standing_delegation"] == {
+              "routine_corrections_and_finite_renewals": True, "record_before_and_after": True,
+              "prior_consumption_preserved": True, "blind_retry": False,
+              "independent_review_for_changed_safety_scope_or_oracle": True,
+              "stop_on_containment_cleanup_or_repeated_no_progress": True}
+          and scope["stop_after_tranche"] == "broader_architecture_product_review"
+          and scope["g3_completion_claimed"] is False, "bounded_g3_scope_boundary")
+    state = _json(before[STATE])
+    _need(state["active_profile"] == raisa_policy.G2_CLOSED_PROFILE
+          and state["current_gate"] == "G2" and state["current_gate_status"] == "passed"
+          and state["g2"]["completion_accepted"] is True, "bounded_g3_g2_not_accepted")
+    # Historical G2/global observations and acceptance retain their exact meaning.
+    state.update(observed_at=scope["recorded_at"], programme_mode="convergence",
+        current_gate="G3", current_gate_status="active_bounded_offline_entry",
+        active_correction="G3", active_profile=raisa_policy.G3_OFFLINE_PROFILE)
+    state["task_selection"].update(autonomous_selection_enabled=True,
+        allowed_task_kinds=["g3_offline_appointment_projection"], next_eligible_now=True,
+        next_tranche_started=True, next_tranche_admission_requires_state_transition=False,
+        next_eligibility_condition="only_reviewed_offline_appointment_scope_no_wider_G3")
+    state["g3"] = {"status": "active_bounded_offline_entry", "scope_file": G3_SCOPE,
+        "scope_sha256": _sha(_canonical(scope) + b"\n"), "completion_accepted": False,
+        "product_runtime_authorized": False, "broader_review_required_after_tranche": True}
+    gates = _document(before[GATES], GATES)
+    g3 = next(g for g in gates["gates"] if g["id"] == "G3")
+    _need(g3["status"] == "blocked_pending_separate_admission", "bounded_g3_gate_preimage")
+    g3["status"] = "active_bounded_offline_entry"
+    overlay = _document(before[OVERLAY], OVERLAY)
+    overlay["active_profile"] = raisa_policy.G3_OFFLINE_PROFILE
+    _need(raisa_policy.G3_OFFLINE_PROFILE not in overlay["profiles"], "bounded_g3_profile_exists")
+    overlay["profiles"][raisa_policy.G3_OFFLINE_PROFILE] = raisa_policy.g3_offline_appointment_profile()
+    agents = before[AGENTS].decode("utf-8")
+    _need(agents.count(raisa_policy.G2_CLOSED_PREAMBLE) == 1, "bounded_g3_agents_preimage")
+    agents = agents.replace(raisa_policy.G2_CLOSED_PREAMBLE, raisa_policy.G3_OFFLINE_PREAMBLE, 1)
+    agents += ("\n## Authorized first G3 offline tranche\n\n"
+        "G2 acceptance and qualifications remain preserved at 6fe523cdbd2e5a77c2746293269b2eaca52321ab. "
+        "Only the separately admitted synthetic appointment-list projection, pure validator, deterministic fallback, "
+        "worked example and direct tests are eligible. The coordinator manages justified finite corrections and "
+        "verification renewals within the exact scope and resource ceilings, recording consumption and preserving "
+        "independent review; new batch identifiers alone are not owner decisions. No application, database or browser "
+        "service, provider, real data, protected evidence, protected-ref movement, deployment or new spending is permitted. "
+        "Neither view gains write authority. Structural accessibility evidence is not rendered proof. Stop further "
+        "implementation-scope expansion after this tranche for the broader architecture/product review. "
+        "Use minimum adequate workers, GPT-6.1 Sol ceiling, no Astra or nested delegation.\n")
+    return {STATE: (json.dumps(state, indent=2, ensure_ascii=False) + "\n").encode(),
+        GATES: yaml.safe_dump(gates, sort_keys=False, allow_unicode=True).encode(),
+        OVERLAY: yaml.safe_dump(overlay, sort_keys=False, allow_unicode=True).encode(),
+        AGENTS: agents.encode(), G3_SCOPE: _canonical(scope) + b"\n"}
+
+
+def _g3_review(read, row, subject, verdict):
+    _keys(row, {"path", "sha256"}, "bounded_g3_review_pin")
+    _need(type(row["path"]) is str and Path(row["path"]).is_absolute(), "bounded_g3_review_path")
+    _closeout_digest(row["sha256"])
+    review = _json(read(Path(row["path"]), row["sha256"]))
+    _need(review.get("reviewer_agent") == "/root/g3_entry_review"
+          and review.get("independent") is True and review.get("implementation_authorship") is False
+          and review.get("verdict") == verdict and review.get("blocking_findings") == []
+          and review.get("subject_sha256") == subject, "bounded_g3_independent_review")
+    return review
+
+
+def g3_review_subject(q):
+    return _sha(_canonical({k: q[k] for k in ("operation_kind", "base_commit", "base_tree",
+        "candidate_tree", "source_sha256", "payload_sha256", "repair_sha256")}))
+
+
+def _load_g3_inputs(context, target, source, evidence_root, scratch, q, read, snapshots):
+    _keys(q, {"schema_version", "operation_id", "operation_kind", "phase", "base_commit", "base_tree",
+        "expected_head", "expected_index_tree", "candidate_tree", "source_sha256", "payload_sha256",
+        "repair_sha256", "source_review", "g2_acceptance", "activation_acceptance"}, "bounded_g3_binding_schema")
+    _need(q["schema_version"] == "ariadne.g3_offline_operation_binding.v1"
+          and q["operation_kind"] in G3_KINDS, "bounded_g3_binding_version")
+    _need(type(q["operation_id"]) is str and re.fullmatch(r"[a-z0-9][a-z0-9-]{1,79}", q["operation_id"])
+          and q["phase"] in {"development", "pre-push", "post-push"}, "bounded_g3_phase")
+    for k in ("base_commit", "base_tree", "expected_head", "expected_index_tree", "candidate_tree"):
+        _need(type(q[k]) is str and re.fullmatch(r"[0-9a-f]{40}", q[k]), "bounded_g3_git_identity")
+    enable = q["operation_kind"] == "enable_g3_entry"
+    paths = G3_CONTROL if enable else G3_PRODUCT
+    sources = _digest_map(q["source_sha256"], SOURCE_PATHS | CONTROLLER_PATHS, "bounded_g3_source_paths")
+    _keys(q["repair_sha256"], paths, "bounded_g3_changed_paths")
+    for p, row in q["repair_sha256"].items():
+        _keys(row, {"before_sha256", "after_sha256"}, "bounded_g3_change_pair")
+        _closeout_digest(row["after_sha256"])
+        previous = (G3_BASE_POLICY.get(p) or G3_BASE_SOURCE.get(p)) if enable else None
+        _need(row["before_sha256"] == previous and row["after_sha256"] != previous,
+              "bounded_g3_change_preimage")
+        if previous is None:
+            _need(trusted_git.run_git(target, "ls-tree", q["base_commit"], "--", p) == "",
+                  "bounded_g3_addition_exists")
+        else:
+            _need(_sha(trusted_git.run_git_bytes(target, "cat-file", "blob", q["base_commit"] + ":" + p))
+                  == previous, "bounded_g3_committed_preimage")
+    if enable:
+        _need(q["base_commit"] == G3_BASE["commit"] and q["base_tree"] == G3_BASE["tree"]
+              and q["activation_acceptance"] is None, "bounded_g3_enable_base")
+    else:
+        _need(q["base_commit"] != G3_BASE["commit"], "bounded_g3_controller_not_installed")
+        headers = trusted_git.run_git(target, "cat-file", "commit", q["base_commit"]).split("\n\n", 1)[0].splitlines()
+        _need([x for x in headers if x.startswith("parent ")] == ["parent " + G3_BASE["commit"]]
+              and [x for x in headers if x.startswith("tree ")] == ["tree " + q["base_tree"]],
+              "bounded_g3_activation_parent_tree")
+        activation = _g3_review(read, q["activation_acceptance"], q["base_commit"], "PASS_G3_ENTRY_PUBLICATION_EFFECT")
+        _need(activation.get("tree") == q["base_tree"] and activation.get("protected_refs_unchanged") is True
+              and activation.get("same_attempt_remote_readback_verified") is True,
+              "bounded_g3_activation_effect")
+    for p, digest in sources.items():
+        raw = read(source / p, digest)
+        committed = trusted_git.run_git_bytes(target, "cat-file", "blob", q["base_commit"] + ":" + p)
+        _need(_sha(committed) == G3_BASE_SOURCE[p] if enable else committed == raw,
+              "bounded_g3_installed_source")
+        if enable and p not in G3_CODE:
+            _need(committed == raw, "bounded_g3_unchanged_source")
+        if enable and p in G3_CODE:
+            _need(digest == q["repair_sha256"][p]["after_sha256"], "bounded_g3_prospective_source")
+    _keys(q["g2_acceptance"], {"path", "sha256"}, "bounded_g3_g2_review_pin")
+    _need(q["g2_acceptance"]["sha256"] == G3_ACCEPTANCE_SHA, "bounded_g3_g2_review_digest")
+    accepted = _json(read(Path(q["g2_acceptance"]["path"]), G3_ACCEPTANCE_SHA))
+    judgment = accepted.get("final_g2_judgment")
+    _need(accepted.get("g2_complete") is True and accepted.get("g2_completion_accepted") is True
+          and type(judgment) is dict
+          and judgment.get("verdict") == "ACCEPT_EXACT_PUBLISHED_G2_COMPLETION"
+          and judgment.get("accepted") is True
+          and judgment.get("published_closeout_commit") == G3_BASE["commit"],
+          "bounded_g3_g2_review_acceptance")
+    inputs = CONFIGURATION_PATHS | G3_BEFORE | {G3_SCOPE} | paths | SOURCE_PATHS | CONTROLLER_PATHS
+    pins = _digest_map(q["payload_sha256"], inputs, "bounded_g3_payload_paths")
+    payloads = {p: read(target / p, digest) for p, digest in sorted(pins.items())}
+    before = {p: trusted_git.run_git_bytes(target, "cat-file", "blob", G3_BASE["commit"] + ":" + p)
+              for p in G3_BEFORE}
+    scope = _json(payloads[G3_SCOPE])
+    _need(scope["source_sha256"] == sources, "bounded_g3_scope_sources")
+    expected = build_g3_entry_transition(before, scope)
+    _need(all(payloads[p] == raw for p, raw in expected.items()), "bounded_g3_transition_delta")
+    for p in inputs - paths:
+        _need(trusted_git.run_git_bytes(target, "cat-file", "blob", q["base_commit"] + ":" + p) == payloads[p],
+              "bounded_g3_unowned_changed")
+    for p, pair in q["repair_sha256"].items():
+        _need(_sha(payloads[p]) == pair["after_sha256"], "bounded_g3_afterimage")
+    if not enable:
+        _need({p: r["after_sha256"] for p, r in q["repair_sha256"].items()} == scope["product_sha256"],
+              "bounded_g3_product_subject")
+    review = _g3_review(read, q["source_review"], g3_review_subject(q), "PASS_G3_EXACT_ADMISSION_SUBJECT")
+    attested = inputs - paths if q["phase"] == "development" else inputs
+    observation = trusted_git.attest_target_index(target, attested_paths=tuple(sorted(attested)),
+        expected_head=q["expected_head"], expected_index_tree=q["expected_index_tree"], scratch_parent=scratch)
+    _need(trusted_git.run_git(target, "rev-parse", q["base_commit"] + "^{tree}") == q["base_tree"],
+          "bounded_g3_base_tree_changed")
+    if q["phase"] == "development":
+        _need(q["expected_head"] == q["base_commit"] and q["expected_index_tree"] in
+              {q["base_tree"], q["candidate_tree"]}, "bounded_g3_development_binding")
+    else:
+        headers = trusted_git.run_git(target, "cat-file", "commit", q["expected_head"]).split("\n\n", 1)[0].splitlines()
+        _need([x for x in headers if x.startswith("parent ")] == ["parent " + q["base_commit"]]
+              and [x for x in headers if x.startswith("tree ")] == ["tree " + q["candidate_tree"]]
+              and q["expected_index_tree"] == q["candidate_tree"], "bounded_g3_committed_binding")
+    for path, snapshot in snapshots.items():
+        _need(trusted_git._read_regular_snapshot(path, maximum_bytes=2 * 1024 * 1024) == snapshot,
+              "bounded_g3_snapshot_drift")
+    return BoundedG1BInputs(q, before, payloads, {"source_review": review}, observation)
+
+
+def _validate_g3_loaded_policy(inputs):
+    expected = build_g3_entry_transition(inputs.before, _json(inputs.payloads[G3_SCOPE]))
+    _need(all(inputs.payloads[p] == raw for p, raw in expected.items()), "bounded_g3_transition_delta")
+    try:
+        configuration = raisa_policy.validate_recovery_configuration(
+            documents={Path(p).name: inputs.payloads[p] for p in CONFIGURATION_PATHS},
+            expected_sha256={Path(p).name: inputs.binding["payload_sha256"][p] for p in CONFIGURATION_PATHS},
+            agents_text=inputs.payloads[AGENTS].decode("utf-8"), state=_json(inputs.payloads[STATE]))
+    except (raisa_policy.RaisaPolicyError, configuration_core.ConfigurationError) as error:
+        raise BoundedG1BError(error.reason_code) from error
+    return expected, configuration
+
+
+
 def operation_effects(kind: str) -> frozenset[str]:
+    if kind == "implement_g3_offline_appointment":
+        return EFFECTS | {"product_behavior_change"}
     if kind == G2_CI_RESEAL_KIND:
         return EFFECTS
     if kind in {"repair_g2_migration", "repair_g2_migration_downgrade_guard",
@@ -2736,6 +2956,9 @@ def operation_paths(kind: str, binding: dict | None = None) -> frozenset[str]:
 
 def _operation(kind: str, binding: dict | None = None) -> dict:
     paths = operation_paths(kind, binding)
+    if kind in G3_KINDS:
+        return {"paths": paths, "g3_offline": True, "profile": raisa_policy.G3_OFFLINE_PROFILE,
+                "gate": "G3", "limits": G3_LIMITS}
     if kind == G2_CI_RESEAL_KIND:
         return {"paths": paths, "input_paths": G2_CLOSEOUT_ENABLE_INPUT_PATHS,
                 "transition_paths": frozenset({STATE, G2_SCOPE}), "scope_path": G2_SCOPE,
@@ -5579,6 +5802,8 @@ def load_bounded_g1b_inputs(context: BoundedG1BContext) -> BoundedG1BInputs:
         return snapshot[1]
 
     binding = _json(read(binding_path, context.expected_binding_sha256))
+    if binding.get("operation_kind") in G3_KINDS:
+        return _load_g3_inputs(context, target, source, evidence_root, scratch, binding, read, snapshots)
     if binding.get("operation_kind") == G2_CI_RESEAL_KIND:
         return _load_g2_ci_reseal_inputs(context, target, source, evidence_root, scratch,
                                          binding, read, snapshots)
@@ -5725,6 +5950,8 @@ def load_bounded_g1b_inputs(context: BoundedG1BContext) -> BoundedG1BInputs:
 
 def _validate_loaded_policy(inputs: BoundedG1BInputs) -> tuple[dict[str, bytes], configuration_core.ValidatedConfiguration | None]:
     operation = _operation(inputs.binding["operation_kind"], inputs.binding)
+    if operation.get("g3_offline"):
+        return _validate_g3_loaded_policy(inputs)
     if operation.get("ci_reseal"):
         return _validate_g2_ci_reseal_loaded_policy(inputs)
     if operation.get("ci_adoption"):
@@ -5827,7 +6054,7 @@ def bounded_g1b_report(*, context: BoundedG1BContext | None, manifest: object,
             "status": "assessment_pass" if decision.assessment_passed else "policy_eligible" if decision.policy_admitted else "blocked", "read_only": True,
             "phase": phase, "requested_entrypoint": entrypoint, "programme_mode": "recovery",
             "current_gate": decision.current_gate, "active_profile": decision.active_profile,
-            "feature_work_eligible": False, "global_gate": "g2_accepted_closed" if decision.policy_admitted and decision.active_profile == raisa_policy.G2_CLOSED_PROFILE else "red_repair_only", "execution_authorized": False,
+            "feature_work_eligible": False, "global_gate": "g3_bounded_offline_only" if decision.policy_admitted and decision.active_profile == raisa_policy.G3_OFFLINE_PROFILE else "g2_accepted_closed" if decision.policy_admitted and decision.active_profile == raisa_policy.G2_CLOSED_PROFILE else "red_repair_only", "execution_authorized": False,
             "reason_codes": list(decision.reason_codes), "failed_checks": list(decision.reason_codes),
             "candidate_tree": decision.candidate_tree, "binding_sha256": decision.binding_sha256,
             "observation_sha256": decision.observation_sha256, "claim_limits": list(decision.claim_limits),
