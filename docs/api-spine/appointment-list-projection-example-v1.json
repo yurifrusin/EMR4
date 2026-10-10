@@ -1,0 +1,97 @@
+{
+  "intent": "view_appointment_list",
+  "command": null,
+  "event": null,
+  "trusted_context": {
+    "tenant_id": "11111111-1111-4111-8111-111111111111",
+    "actor_id": "22222222-2222-4222-8222-222222222222",
+    "role": "reception",
+    "read_capability": "appointments.read",
+    "source_revision": 7,
+    "as_of": "2026-10-10T00:01:00Z"
+  },
+  "projection": {
+    "schema_version": "appointment.list_projection.v1",
+    "tenant_id": "11111111-1111-4111-8111-111111111111",
+    "actor_id": "22222222-2222-4222-8222-222222222222",
+    "role": "reception",
+    "source_revision": 7,
+    "captured_at": "2026-10-10T00:00:00Z",
+    "authority": "read_only",
+    "heading": "Appointments",
+    "columns": ["Start", "End", "Status", "Appointment"],
+    "items": [
+      {
+        "id": "33333333-3333-4333-8333-333333333333",
+        "practice_id": "11111111-1111-4111-8111-111111111111",
+        "start_time": "2026-10-10T01:00:00Z",
+        "end_time": "2026-10-10T01:15:00Z",
+        "status": "scheduled",
+        "display_label": "Appointment 1",
+        "accessibility_label": "Appointment 1; starts 2026-10-10T01:00:00Z; ends 2026-10-10T01:15:00Z; status scheduled",
+        "warnings": []
+      },
+      {
+        "id": "44444444-4444-4444-8444-444444444444",
+        "practice_id": "11111111-1111-4111-8111-111111111111",
+        "start_time": "2026-10-10T01:15:00Z",
+        "end_time": "2026-10-10T01:30:00Z",
+        "status": "scheduled",
+        "display_label": "Appointment 2",
+        "accessibility_label": "Appointment 2; starts 2026-10-10T01:15:00Z; ends 2026-10-10T01:30:00Z; status scheduled",
+        "warnings": []
+      }
+    ],
+    "warnings": ["TIME_UNCONFIRMED"]
+  },
+  "expected_normal_and_valid_fallback": {
+    "schema_version": "appointment.list_projection.v1",
+    "heading": "Appointments",
+    "columns": ["Start", "End", "Status", "Appointment"],
+    "items": [
+      {
+        "id": "33333333-3333-4333-8333-333333333333",
+        "practice_id": "11111111-1111-4111-8111-111111111111",
+        "start_time": "2026-10-10T01:00:00Z",
+        "end_time": "2026-10-10T01:15:00Z",
+        "status": "scheduled",
+        "display_label": "Appointment 1",
+        "accessibility_label": "Appointment 1; starts 2026-10-10T01:00:00Z; ends 2026-10-10T01:15:00Z; status scheduled",
+        "warnings": []
+      },
+      {
+        "id": "44444444-4444-4444-8444-444444444444",
+        "practice_id": "11111111-1111-4111-8111-111111111111",
+        "start_time": "2026-10-10T01:15:00Z",
+        "end_time": "2026-10-10T01:30:00Z",
+        "status": "scheduled",
+        "display_label": "Appointment 2",
+        "accessibility_label": "Appointment 2; starts 2026-10-10T01:15:00Z; ends 2026-10-10T01:30:00Z; status scheduled",
+        "warnings": []
+      }
+    ],
+    "warnings": ["TIME_UNCONFIRMED"],
+    "affordances": {"create": false, "update": false, "cancel": false, "confirm": false},
+    "read_only": true
+  },
+  "rejection_mutations": [
+    {"change": "schema_version to appointment.list_projection.v2", "normal_error": "VERSION_UNSUPPORTED"},
+    {"change": "source_revision to 8", "normal_error": "REVISION_MISMATCH"},
+    {"change": "captured_at to 2026-10-10T00:01:01Z", "normal_error": "FUTURE_PROJECTION"},
+    {"change": "captured_at to 2026-10-09T23:55:59Z", "normal_error": "STALE_PROJECTION"},
+    {"change": "add confirm_endpoint", "normal_error": "STRUCTURE_INVALID"},
+    {"change": "copy first item to end", "normal_error": "DUPLICATE_ID"},
+    {"change": "first display_label to Appointment MARY", "normal_error": "LABEL_INVALID"},
+    {"change": "remove first accessibility_label", "normal_error": "STRUCTURE_INVALID"}
+  ],
+  "expected_fallback_for_every_rejection": {
+    "schema_version": "appointment.list_projection.v1",
+    "heading": "Appointments",
+    "columns": ["Start", "End", "Status", "Appointment"],
+    "items": [],
+    "warnings": [],
+    "affordances": {"create": false, "update": false, "cancel": false, "confirm": false},
+    "read_only": true,
+    "unavailable_reason": "PROJECTION_UNAVAILABLE"
+  }
+}
