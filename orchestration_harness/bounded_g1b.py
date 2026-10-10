@@ -1855,6 +1855,35 @@ G2_CLOSEOUT_HELPER = "scripts/python_source_state.py"
 G2_CLOSEOUT_HELPER_SHA256 = "f430803e889b4c3aa0269e12dbff4d965eea2dec0917ac051d8d78225c67b61c"
 G2_CLOSEOUT_SOURCE_PATHS = SOURCE_PATHS | CONTROLLER_PATHS | {G2_CLOSEOUT_HELPER}
 G2_CLOSEOUT_INPUT_PATHS = G2_CATALOGUE_POLICY_PATHS | G2_CLOSEOUT_SOURCE_PATHS | G2_SIX_PATHS | G2_CLOSEOUT_PATHS
+G2_CI_RESEAL_KIND = "reseal_g2_complete_ci_workflow"
+G2_CI_RESEAL_BINDING_VERSION = "ariadne.g2_ci_workflow_reseal_binding.v1"
+G2_CI_RESEAL_PATHS = frozenset({STATE, G2_SCOPE}) | frozenset({
+    "orchestration_harness/bounded_g1b.py", "tests/test_bounded_g1b.py"})
+G2_CI_RESEAL_CODE_PATHS = frozenset({"orchestration_harness/bounded_g1b.py", "tests/test_bounded_g1b.py"})
+G2_CI_RESEAL_BASE = {"commit": "9339bf63bc935a36d8dc8a27b7731a3cf7f8b445",
+    "parent": "6f0ff52e9a4c95efa10bb475480cfb31245500e7",
+    "tree": "3048a0b438e21ff95e25081be2fad028ec7f48fe"}
+G2_CI_RESEAL_BEFORE = {STATE: "d2c5ffa60b7591d3b7cc054635957f250494deb69c7531f6e545f73e3e52be6f",
+    G2_SCOPE: "342dc1da1098505154630ae489aaebc97cf4342e8403ee6b0e0bdf80632827fb",
+    OVERLAY: "a67f862b86590fae335d0482d6e89b1ab991c75029da89490280e14e15768e4b",
+    GATES: "115a651a0b13156a591045638d1833a9a71347e7b1f7e694767eac49d2abc341",
+    AGENTS: "97d6ea223508d53ee704a0cc3ceec383e2eea9f3db764376b538e8341bee886e",
+    **{"orchestration_harness/bounded_g1b.py": "e72db832200b31c03cd9452b3112607d670b4b6db06d41e966ffaac8483635a2",
+       "tests/test_bounded_g1b.py": "b6e4e5596b427eef437257a80902175493fda20f815c53137b008b16cfb1cbb8"}}
+G2_CI_RESEAL_OLD_MANIFEST_SHA256 = "43347d327970acec761f1055627a1ea7a5dfe0728b5d9c69bdb0a2e9a7327e7d"
+G2_CI_RESEAL_NEW_MANIFEST_SHA256 = "06de999f1ba3279d41564e8b3eb4ac95cb9b41549b5195c15261289f16c8b89f"
+G2_CI_RESEAL_OLD_WORKFLOW_SHA256 = "23dcd6517ec1486ef7f93c3e63a2482f14b2a1512f4756f57d109898acee562e"
+G2_CI_RESEAL_NEW_WORKFLOW_SHA256 = "f6b631cd619aabf221b2b79b8024e3f7d8697ce85dca48bdc565276a235bdec3"
+G2_CI_RESEAL_INSTALLED_CONTROLLER = {**G2_CI_RESEAL_BASE, "source_sha256": {
+    "orchestration_harness/bounded_g1b.py": G2_CI_RESEAL_BEFORE["orchestration_harness/bounded_g1b.py"],
+    "tests/test_bounded_g1b.py": G2_CI_RESEAL_BEFORE["tests/test_bounded_g1b.py"],
+    "orchestration_harness/raisa_policy.py": "9fb5ce31aebf880a8dba0f7190be15813077b86faca794bb4c47772901c9e2bf",
+    "orchestration_harness/configuration_core.py": "f7ba7a80eb0a590f9fb71b864e6c1f9f43241d9f7d70a38da67a9243fea208e5",
+    "orchestration_harness/programme_admission.py": "ac816a8a79b2d8222fa357777c075950927e86cf30c8a5b25ffd08a474052181"}}
+G2_CI_RESEAL_LIMITS = ("exact published G2 CI workflow reseal and four-file controller maintenance only",
+    "G2 remains active; old admissions, scopes, latches and grants remain historical",
+    "no G3, feature, runtime, provider, protected-ref, integration or deployment authority")
+OPERATION_PATHS[G2_CI_RESEAL_KIND] = G2_CI_RESEAL_PATHS
 G2_CLOSEOUT_CI_ROWS = ("python_compile", "ruff_e9_f401", "historical_diary_leakage",
     "ordinary_test_collection_and_execution", "bandit_medium_high", "dependency_audit",
     "empty_and_populated_migrations", "application_safety_controls")
@@ -2332,6 +2361,66 @@ def build_g2_closeout_enable_transition(before, scope):
         OVERLAY: yaml.safe_dump(overlay, sort_keys=False, allow_unicode=True).encode(), G2_SCOPE: raw}
 
 
+def _validate_g2_ci_reseal_manifest_delta(old, new):
+    """Only the quoted workflow afterimage and its caller digest may differ."""
+    _validate_g2_ci_manifest(old)
+    _validate_g2_ci_manifest(new)
+    _need(_sha(_canonical(old)) == G2_CI_RESEAL_OLD_MANIFEST_SHA256,
+          "bounded_g2_ci_reseal_old_manifest")
+    _need(_sha(_canonical(new)) == G2_CI_RESEAL_NEW_MANIFEST_SHA256,
+          "bounded_g2_ci_reseal_new_manifest")
+    workflow = ".github/workflows/python-security.yml"
+    _need(old["changes"][workflow]["after_sha256"] == G2_CI_RESEAL_OLD_WORKFLOW_SHA256
+          and old["caller"]["workflow"]["sha256"] == G2_CI_RESEAL_OLD_WORKFLOW_SHA256,
+          "bounded_g2_ci_reseal_old_workflow")
+    expected = copy.deepcopy(old)
+    expected["changes"][workflow]["after_sha256"] = G2_CI_RESEAL_NEW_WORKFLOW_SHA256
+    expected["caller"]["workflow"]["sha256"] = G2_CI_RESEAL_NEW_WORKFLOW_SHA256
+    _need(_canonical(new) == _canonical(expected), "bounded_g2_ci_reseal_manifest_delta")
+
+
+def build_g2_ci_reseal_scope(before, recorded_at, controller_sources, ci_adoption):
+    """Exact prospective V21 scope successor; no CI payload or G2 gate transition."""
+    _keys(before, G2_CLOSEOUT_BEFORE_PATHS, "bounded_g2_ci_reseal_before_paths")
+    _need(all(_sha(before[p]) == G2_CI_RESEAL_BEFORE[p] for p in before),
+          "bounded_g2_ci_reseal_preimage")
+    _validate_g2_ci_installed_policy(before)
+    prior = _json(before[G2_SCOPE])
+    _need(prior["controller_source_sha256"] == G2_CI_RESEAL_INSTALLED_CONTROLLER["source_sha256"],
+          "bounded_g2_ci_reseal_controller_preimage")
+    try:
+        aware = type(recorded_at) is str and datetime.fromisoformat(recorded_at).tzinfo is not None
+    except ValueError:
+        aware = False
+    _need(aware, "bounded_g1b_timestamp_invalid")
+    sources = _digest_map(controller_sources, CONTROLLER_PATHS, "bounded_g2_ci_reseal_sources")
+    _need(all(sources[p] == G2_CI_RESEAL_INSTALLED_CONTROLLER["source_sha256"][p]
+              for p in CONTROLLER_PATHS - G2_CI_RESEAL_CODE_PATHS)
+          and all(sources[p] != G2_CI_RESEAL_INSTALLED_CONTROLLER["source_sha256"][p]
+                  for p in G2_CI_RESEAL_CODE_PATHS), "bounded_g2_ci_reseal_source_successor")
+    seal = _validate_g2_ci_seal(ci_adoption)
+    _validate_g2_ci_reseal_manifest_delta(prior["ci_adoption"]["manifest"], seal["manifest"])
+    scope = copy.deepcopy(prior)
+    scope.update(recorded_at=recorded_at, controller_source_sha256=sources,
+                 ci_adoption=copy.deepcopy(seal))
+    return scope
+
+
+def build_g2_ci_reseal_transition(before, scope):
+    prior_state = _json(before[STATE])
+    expected_scope = build_g2_ci_reseal_scope(before, scope.get("recorded_at"),
+        scope.get("controller_source_sha256"), scope.get("ci_adoption"))
+    _need(_canonical(scope) == _canonical(expected_scope), "bounded_g2_ci_reseal_scope")
+    scope_raw = _canonical(scope) + b"\n"
+    state = copy.deepcopy(prior_state)
+    state["observed_at"] = scope["recorded_at"]
+    state["g2"]["scope_sha256"] = _sha(scope_raw)
+    state_raw = (json.dumps(state, indent=2, ensure_ascii=False) + "\n").encode()
+    after = {**before, STATE: state_raw, G2_SCOPE: scope_raw}
+    _validate_g2_ci_installed_policy(after)
+    return {STATE: state_raw, G2_SCOPE: scope_raw}
+
+
 def _closeout_enable_changes(q):
     _keys(q["repair_sha256"], G2_CLOSEOUT_ENABLE_PATHS, "bounded_g2_closeout_enable_paths")
     for p, row in q["repair_sha256"].items():
@@ -2482,8 +2571,129 @@ def _validate_g2_closeout_enable_loaded_policy(inputs):
     return {p: inputs.payloads[p] for p in G2_TRANSITION_PATHS}, configuration
 
 
+def _g2_ci_reseal_changes(q):
+    _keys(q["repair_sha256"], G2_CI_RESEAL_PATHS, "bounded_g2_ci_reseal_paths")
+    for path, pair in q["repair_sha256"].items():
+        _keys(pair, {"before_sha256", "after_sha256"}, "bounded_g2_ci_reseal_pair")
+        _closeout_digest(pair["after_sha256"])
+        _need(pair["before_sha256"] == G2_CI_RESEAL_BEFORE[path]
+              and pair["after_sha256"] != pair["before_sha256"],
+              "bounded_g2_ci_reseal_preimage")
+        if path in G2_CI_RESEAL_CODE_PATHS:
+            _need(pair["after_sha256"] == q["source_sha256"][path],
+                  "bounded_g2_ci_reseal_executing_source")
+    return q["repair_sha256"]
+
+
+def _validate_g2_ci_reseal_scope_sources(scope, sources):
+    """Recorded controller identity must equal the authenticated executing source."""
+    _need(type(scope) is dict and scope.get("controller_source_sha256") ==
+          {path: sources[path] for path in CONTROLLER_PATHS},
+          "bounded_g2_ci_reseal_scope_sources")
+
+
+def _load_g2_ci_reseal_inputs(context, target, source, evidence_root, scratch, q, read, snapshots):
+    _keys(q, {"schema_version", "operation_id", "operation_kind", "phase", "base_commit", "base_tree",
+        "expected_head", "expected_index_tree", "candidate_tree", "source_sha256", "payload_sha256",
+        "installed_controller", "repair_sha256", "ci_adoption_seal_path", "ci_adoption_seal_sha256"},
+        "bounded_g2_ci_reseal_binding_schema")
+    _need(q["schema_version"] == G2_CI_RESEAL_BINDING_VERSION
+          and q["operation_kind"] == G2_CI_RESEAL_KIND,
+          "bounded_g2_ci_reseal_binding_version")
+    _need(type(q["operation_id"]) is str and re.fullmatch(r"[a-z0-9][a-z0-9-]{1,79}", q["operation_id"])
+          and q["phase"] in {"development", "pre-push", "post-push"}, "bounded_g2_ci_reseal_phase")
+    _need(q["base_commit"] == G2_CI_RESEAL_BASE["commit"]
+          and q["base_tree"] == G2_CI_RESEAL_BASE["tree"]
+          and all(type(q[k]) is str and re.fullmatch(r"[0-9a-f]{40}", q[k]) for k in
+                  ("expected_head", "expected_index_tree", "candidate_tree")),
+          "bounded_g2_ci_reseal_base")
+    _need(q["installed_controller"] == G2_CI_RESEAL_INSTALLED_CONTROLLER,
+          "bounded_g2_ci_reseal_installed_controller")
+    _validate_installed_controller(q["installed_controller"])
+    _batch_publication(target, q["installed_controller"], q["base_commit"])
+    sources = _digest_map(q["source_sha256"], SOURCE_PATHS | CONTROLLER_PATHS,
+                          "bounded_g2_ci_reseal_source_paths")
+    _need(sources["orchestration_harness/trusted_git.py"] ==
+          "4a856bffe2b68d7c7e1875152629c9024a32679b59d9b1ed8301c368d41ff527",
+          "bounded_g2_ci_reseal_trusted_git")
+    changes = _g2_ci_reseal_changes(q)
+    for path, digest in sources.items():
+        raw = read(source / path, digest)
+        previous = trusted_git.run_git_bytes(target, "cat-file", "blob", q["base_commit"] + ":" + path)
+        if path in G2_CI_RESEAL_CODE_PATHS:
+            _need(_sha(previous) == G2_CI_RESEAL_BEFORE[path], "bounded_g2_ci_reseal_source_preimage")
+        else:
+            _need(previous == raw, "bounded_g2_ci_reseal_unchanged_source")
+    before = {path: trusted_git.run_git_bytes(target, "cat-file", "blob", q["base_commit"] + ":" + path)
+              for path in G2_CLOSEOUT_BEFORE_PATHS}
+    _need(all(_sha(before[path]) == G2_CI_RESEAL_BEFORE[path] for path in before),
+          "bounded_g2_ci_reseal_preimage")
+    old_seal = _validate_g2_ci_installed_policy(before)
+    old_review = _json(read(Path(old_seal["review_path"]), old_seal["review_sha256"]))
+    _validate_g2_ci_scope_review(old_seal, old_review)
+    seal_path = Path(q["ci_adoption_seal_path"])
+    _need(seal_path.is_absolute() and seal_path != target and not seal_path.is_relative_to(target),
+          "bounded_g2_ci_reseal_seal_path")
+    _closeout_digest(q["ci_adoption_seal_sha256"])
+    seal = _json(read(seal_path, q["ci_adoption_seal_sha256"]))
+    _validate_g2_ci_seal(seal)
+    _validate_g2_ci_reseal_manifest_delta(old_seal["manifest"], seal["manifest"])
+    new_review = _json(read(Path(seal["review_path"]), seal["review_sha256"]))
+    _validate_g2_ci_scope_review(seal, new_review)
+    pins = _digest_map(q["payload_sha256"], G2_CLOSEOUT_ENABLE_INPUT_PATHS,
+                       "bounded_g2_ci_reseal_payload_paths")
+    payloads = {path: read(target / path, digest) for path, digest in sorted(pins.items())}
+    for path in G2_CLOSEOUT_ENABLE_INPUT_PATHS - G2_CI_RESEAL_PATHS:
+        _need(payloads[path] == trusted_git.run_git_bytes(target, "cat-file", "blob",
+              q["base_commit"] + ":" + path), "bounded_g2_ci_reseal_unowned_changed")
+    for path, pair in changes.items():
+        _need(_sha(payloads[path]) == pair["after_sha256"], "bounded_g2_ci_reseal_afterimage")
+    scope = _json(payloads[G2_SCOPE])
+    _validate_g2_ci_reseal_scope_sources(scope, sources)
+    _need(_canonical(scope["ci_adoption"]) == _canonical(seal),
+          "bounded_g2_ci_reseal_seal_binding")
+    expected = build_g2_ci_reseal_transition(before, scope)
+    _need(all(payloads[path] == raw for path, raw in expected.items()),
+          "bounded_g2_ci_reseal_policy_delta")
+    attested = G2_CLOSEOUT_ENABLE_INPUT_PATHS - G2_CI_RESEAL_PATHS if q["phase"] == "development" else G2_CLOSEOUT_ENABLE_INPUT_PATHS
+    observation = trusted_git.attest_target_index(target, attested_paths=tuple(sorted(attested)),
+        expected_head=q["expected_head"], expected_index_tree=q["expected_index_tree"], scratch_parent=scratch)
+    _need(trusted_git.run_git(target, "rev-parse", q["base_commit"] + "^{tree}") == q["base_tree"],
+          "bounded_g2_ci_reseal_base_tree")
+    if q["phase"] == "development":
+        _need(q["expected_head"] == q["base_commit"] and q["expected_index_tree"] in
+              {q["base_tree"], q["candidate_tree"]}, "bounded_g2_ci_reseal_development_binding")
+    else:
+        headers = trusted_git.run_git(target, "cat-file", "commit", q["expected_head"]).split("\n\n", 1)[0].splitlines()
+        _need([line for line in headers if line.startswith("parent ")] == ["parent " + q["base_commit"]]
+              and [line for line in headers if line.startswith("tree ")] == ["tree " + q["candidate_tree"]]
+              and q["expected_index_tree"] == q["candidate_tree"],
+              "bounded_g2_ci_reseal_committed_binding")
+    for path, snapshot in snapshots.items():
+        _need(trusted_git._read_regular_snapshot(path, maximum_bytes=2 * 1024 * 1024) == snapshot,
+              "bounded_g1b_snapshot_drift")
+    return BoundedG1BInputs(q, before, payloads,
+        {"old_scope_review": old_review, "new_scope_review": new_review}, observation)
+
+
+def _validate_g2_ci_reseal_loaded_policy(inputs):
+    expected = build_g2_ci_reseal_transition(inputs.before, _json(inputs.payloads[G2_SCOPE]))
+    _need(all(inputs.payloads[path] == raw for path, raw in expected.items()),
+          "bounded_g2_ci_reseal_policy_delta")
+    try:
+        configuration = raisa_policy.validate_recovery_configuration(
+            documents={Path(path).name: inputs.payloads[path] for path in CONFIGURATION_PATHS},
+            expected_sha256={Path(path).name: inputs.binding["payload_sha256"][path] for path in CONFIGURATION_PATHS},
+            agents_text=inputs.payloads[AGENTS].decode("utf-8"), state=_json(inputs.payloads[STATE]))
+    except (raisa_policy.RaisaPolicyError, configuration_core.ConfigurationError) as error:
+        raise BoundedG1BError(error.reason_code) from error
+    return {path: inputs.payloads[path] for path in (STATE, G2_SCOPE)}, configuration
+
+
 
 def operation_effects(kind: str) -> frozenset[str]:
+    if kind == G2_CI_RESEAL_KIND:
+        return EFFECTS
     if kind in {"repair_g2_migration", "repair_g2_migration_downgrade_guard",
                 "repair_g2_appointment_concurrency"}:
         return G2_MIGRATION_EFFECTS
@@ -2526,6 +2736,11 @@ def operation_paths(kind: str, binding: dict | None = None) -> frozenset[str]:
 
 def _operation(kind: str, binding: dict | None = None) -> dict:
     paths = operation_paths(kind, binding)
+    if kind == G2_CI_RESEAL_KIND:
+        return {"paths": paths, "input_paths": G2_CLOSEOUT_ENABLE_INPUT_PATHS,
+                "transition_paths": frozenset({STATE, G2_SCOPE}), "scope_path": G2_SCOPE,
+                "transition": False, "ci_reseal": True, "profile": G2_PROFILE, "gate": "G2",
+                "limits": G2_CI_RESEAL_LIMITS}
     if kind == G2_CLOSEOUT_CI_KIND:
         return {"paths": paths, "input_paths": G2_CATALOGUE_POLICY_PATHS | SOURCE_PATHS | CONTROLLER_PATHS | paths,
                 "transition_paths": G2_TRANSITION_PATHS, "scope_path": G2_SCOPE, "transition": False,
@@ -5364,6 +5579,9 @@ def load_bounded_g1b_inputs(context: BoundedG1BContext) -> BoundedG1BInputs:
         return snapshot[1]
 
     binding = _json(read(binding_path, context.expected_binding_sha256))
+    if binding.get("operation_kind") == G2_CI_RESEAL_KIND:
+        return _load_g2_ci_reseal_inputs(context, target, source, evidence_root, scratch,
+                                         binding, read, snapshots)
     if binding.get("operation_kind") == G2_CLOSEOUT_CI_KIND:
         return _load_g2_ci_adoption_inputs(context, target, source, evidence_root, scratch, binding, read, snapshots)
     if binding.get("operation_kind") == G2_CLOSEOUT_ENABLE_KIND:
@@ -5507,6 +5725,8 @@ def load_bounded_g1b_inputs(context: BoundedG1BContext) -> BoundedG1BInputs:
 
 def _validate_loaded_policy(inputs: BoundedG1BInputs) -> tuple[dict[str, bytes], configuration_core.ValidatedConfiguration | None]:
     operation = _operation(inputs.binding["operation_kind"], inputs.binding)
+    if operation.get("ci_reseal"):
+        return _validate_g2_ci_reseal_loaded_policy(inputs)
     if operation.get("ci_adoption"):
         return _validate_g2_ci_loaded_policy(inputs)
     if operation.get("closeout_enable"):

@@ -10183,3 +10183,102 @@ class G2CIAdoptionSourceContractTests(unittest.TestCase):
         bad = copy.deepcopy(approval); bad["ci_adoption"] = None
         self.reason("bounded_g2_ci_publication", lambda: b._validate_g2_closeout_approval(bad))
         self.assertNotIn("final_execution_review_sha256", approval)
+
+
+def build_g2_ci_reseal_suite(before: dict[str, bytes], reviewed_seal: dict,
+                             old_scope_review: dict, new_scope_review: dict) -> unittest.TestSuite:
+    """Focused contract over supplied pinned V21 bytes and independently reviewed seal."""
+    class G2CIResealTests(unittest.TestCase):
+        def reason(self, code, action):
+            with self.assertRaises(b.BoundedG1BError) as caught:
+                action()
+            self.assertEqual(caught.exception.reason_code, code)
+
+        def sources(self):
+            result = copy.deepcopy(b.G2_CI_RESEAL_INSTALLED_CONTROLLER["source_sha256"])
+            result["orchestration_harness/bounded_g1b.py"] = "1" * 64
+            result["tests/test_bounded_g1b.py"] = "2" * 64
+            return result
+
+        def scope(self):
+            return b.build_g2_ci_reseal_scope(before, "2026-10-10T12:00:00+10:00",
+                self.sources(), reviewed_seal)
+
+        def test_exact_predecessor_quote_only_delta_and_four_paths(self):
+            self.assertEqual(set(before), b.G2_CLOSEOUT_BEFORE_PATHS)
+            self.assertEqual(set(b.G2_CI_RESEAL_PATHS), {b.STATE, b.G2_SCOPE,
+                "orchestration_harness/bounded_g1b.py", "tests/test_bounded_g1b.py"})
+            old = b._json(before[b.G2_SCOPE])["ci_adoption"]
+            b._validate_g2_ci_scope_review(old, old_scope_review)
+            b._validate_g2_ci_scope_review(reviewed_seal, new_scope_review)
+            b._validate_g2_ci_reseal_manifest_delta(old["manifest"], reviewed_seal["manifest"])
+            after = b.build_g2_ci_reseal_transition(before, self.scope())
+            self.assertEqual(set(after), {b.STATE, b.G2_SCOPE})
+            state_before, state_after = b._json(before[b.STATE]), b._json(after[b.STATE])
+            expected_state = copy.deepcopy(state_before)
+            expected_state["observed_at"] = "2026-10-10T12:00:00+10:00"
+            expected_state["g2"]["scope_sha256"] = b._sha(after[b.G2_SCOPE])
+            self.assertEqual(state_after, expected_state)
+            scope_before, scope_after = b._json(before[b.G2_SCOPE]), b._json(after[b.G2_SCOPE])
+            for key in set(scope_before) - {"recorded_at", "controller_source_sha256", "ci_adoption"}:
+                self.assertEqual(scope_after[key], scope_before[key])
+            self.assertEqual(scope_after["ci_adoption"], reviewed_seal)
+            self.assertFalse(state_after["g2"]["completion_accepted"])
+            self.assertFalse(state_after["feature_work_eligible"])
+            self.assertFalse(state_after["product_work_eligible"])
+
+        def test_stale_control_or_unreviewed_seal_is_rejected(self):
+            for path in before:
+                bad = dict(before); bad[path] += b" "
+                self.reason("bounded_g2_ci_reseal_preimage", lambda:
+                    b.build_g2_ci_reseal_scope(bad, "2026-10-10T12:00:00+10:00",
+                        self.sources(), reviewed_seal))
+            self.reason("bounded_g2_ci_scope_review", lambda:
+                b._validate_g2_ci_scope_review(reviewed_seal, old_scope_review))
+
+        def test_other_pair_proof_and_authority_changes_are_rejected(self):
+            old = b._json(before[b.G2_SCOPE])["ci_adoption"]["manifest"]
+            for mutate in (
+                lambda m: m["changes"]["tests/test_consultation_audio_privacy.py"].update(after_sha256="f" * 64),
+                lambda m: m["proof_sha256"].pop(next(iter(m["proof_sha256"]))),
+                lambda m: m.update(product_subject_sha256="f" * 64),
+                lambda m: m["caller"].update(pin_authority_sha256="f" * 64)):
+                bad = copy.deepcopy(reviewed_seal["manifest"])
+                mutate(bad)
+                with self.assertRaises(b.BoundedG1BError):
+                    b._validate_g2_ci_reseal_manifest_delta(old, bad)
+
+        def test_candidate_source_identity_and_extra_paths_are_rejected(self):
+            scope = self.scope()
+            b._validate_g2_ci_reseal_scope_sources(scope, self.sources())
+            for path in b.G2_CI_RESEAL_CODE_PATHS:
+                bad_scope = copy.deepcopy(scope)
+                bad_scope["controller_source_sha256"][path] = "f" * 64
+                self.reason("bounded_g2_ci_reseal_scope_sources", lambda:
+                    b._validate_g2_ci_reseal_scope_sources(bad_scope, self.sources()))
+            bad_scope = copy.deepcopy(scope)
+            bad_scope["controller_source_sha256"]["unowned.py"] = "e" * 64
+            self.reason("bounded_g2_ci_reseal_scope_sources", lambda:
+                b._validate_g2_ci_reseal_scope_sources(bad_scope, self.sources()))
+            q = {"source_sha256": self.sources(), "repair_sha256": {
+                path: {"before_sha256": b.G2_CI_RESEAL_BEFORE[path],
+                       "after_sha256": self.sources()[path] if path in b.G2_CI_RESEAL_CODE_PATHS else "3" * 64}
+                for path in b.G2_CI_RESEAL_PATHS}}
+            self.assertEqual(set(b._g2_ci_reseal_changes(q)), b.G2_CI_RESEAL_PATHS)
+            bad = copy.deepcopy(q)
+            bad["repair_sha256"]["orchestration_harness/bounded_g1b.py"]["after_sha256"] = "4" * 64
+            self.reason("bounded_g2_ci_reseal_executing_source", lambda: b._g2_ci_reseal_changes(bad))
+            bad = copy.deepcopy(q)
+            bad["repair_sha256"]["app/main.py"] = {"before_sha256": "4" * 64, "after_sha256": "5" * 64}
+            self.reason("bounded_g2_ci_reseal_paths", lambda: b._g2_ci_reseal_changes(bad))
+
+        def test_scope_cannot_relabel_gate_or_history(self):
+            for mutate in (lambda s: s.update(g2_complete=True),
+                lambda s: s["current_operation"].update(completion_accepted=True),
+                lambda s: s["allowed_paths"].append("app/main.py"),
+                lambda s: s["preserved_six_file_scope"].update(schema_version="forged")):
+                bad = self.scope(); mutate(bad)
+                self.reason("bounded_g2_ci_reseal_scope", lambda:
+                    b.build_g2_ci_reseal_transition(before, bad))
+
+    return unittest.defaultTestLoader.loadTestsFromTestCase(G2CIResealTests)
