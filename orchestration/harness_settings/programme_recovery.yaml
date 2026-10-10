@@ -1131,17 +1131,16 @@ profiles:
     - task_branch_commit
     - task_branch_push
   G2_BASELINE_REPAIR_ACTIVE:
-    profile_kind: bounded_G2_reviewed_baseline_repair
+    profile_kind: bounded_G2_baseline_repair
     expected_programme_mode: recovery
     expected_current_gate: G2
     expected_gate_status: active
     active_correction: G2
     programme_gate: G2
     admitted_task_classes:
-    - g2_confirmation_family_fixture_repair
+    - g2_closeout_control_preparation
     allowed_effects:
     - control_plane_edit
-    - product_behavior_change
     - repository_read
     - task_branch_commit
     - task_branch_push
@@ -1153,16 +1152,106 @@ profiles:
     - integration
     - migration_change
     - pages
+    - product_behavior_change
     - protected_ref_movement
     - provider_invocation
     - real_data_access
     allowed_paths:
-    - app/routers/appointments.py
-    - app/services/appointment_delete_composition.py
-    - app/services/appointment_delete_physical.py
-    - app/services/appointment_delete_product_adapter.py
-    - tests/test_api_spine_status_confirm_idempotency_route_contract.py
-    - tests/test_repository_maintenance.py
+    - .github/workflows/python-security.yml
+    - AGENTS.md
+    - orchestration/harness_settings/programme_recovery.yaml
+    - orchestration/harness_settings/python_source_state.json
+    - orchestration/programme/current-state.json
+    - orchestration/programme/g2-closeout-evidence/ai14-attempt02.json
+    - orchestration/programme/g2-closeout-evidence/audio-current-component/attempt01-result.json
+    - orchestration/programme/g2-closeout-evidence/audio-current-component/independent-result-review.json
+    - orchestration/programme/g2-closeout-evidence/authority-anchor.json
+    - orchestration/programme/g2-closeout-evidence/bounded-selection.json
+    - orchestration/programme/g2-closeout-evidence/ci_b_88.json
+    - orchestration/programme/g2-closeout-evidence/clinical48/normalized.json
+    - orchestration/programme/g2-closeout-evidence/complete-evidence-acceptance.json
+    - orchestration/programme/g2-closeout-evidence/complete-selection.json
+    - orchestration/programme/g2-closeout-evidence/config-anchor.json
+    - orchestration/programme/g2-closeout-evidence/crypto_six.json
+    - orchestration/programme/g2-closeout-evidence/current49.json
+    - orchestration/programme/g2-closeout-evidence/delete_postclaim_one.json
+    - orchestration/programme/g2-closeout-evidence/first_write_five.json
+    - orchestration/programme/g2-closeout-evidence/green02.json
+    - orchestration/programme/g2-closeout-evidence/green_twentyeight.json
+    - orchestration/programme/g2-closeout-evidence/input_guards_ten.json
+    - orchestration/programme/g2-closeout-evidence/obligation-evidence.json
+    - orchestration/programme/g2-closeout-evidence/obligation-review-bindings.json
+    - orchestration/programme/g2-closeout-evidence/original_o1_30.json
+    - orchestration/programme/g2-closeout-evidence/population.json
+    - orchestration/programme/g2-closeout-evidence/product-push-review.json
+    - orchestration/programme/g2-closeout-evidence/pyjwt30.json
+    - orchestration/programme/g2-closeout-evidence/required-plan.json
+    - orchestration/programme/g2-closeout-evidence/residual_thirteen.json
+    - orchestration/programme/g2-closeout-evidence/role-facts/documentary_audio_current_component.json
+    - orchestration/programme/g2-closeout-evidence/role-facts/documentary_audio_source_safety.json
+    - orchestration/programme/g2-closeout-evidence/role-facts/documentary_auth2.json
+    - orchestration/programme/g2-closeout-evidence/role-facts/documentary_dependency_audit.json
+    - orchestration/programme/g2-closeout-evidence/role-facts/documentary_leakage_and_safety.json
+    - orchestration/programme/g2-closeout-evidence/role-facts/documentary_migration_paths.json
+    - orchestration/programme/g2-closeout-evidence/role-facts/documentary_mount_structure.json
+    - orchestration/programme/g2-closeout-evidence/role-facts/documentary_patient_component.json
+    - orchestration/programme/g2-closeout-evidence/role-facts/documentary_python_compile.json
+    - orchestration/programme/g2-closeout-evidence/role-facts/documentary_relationship1.json
+    - orchestration/programme/g2-closeout-evidence/role-facts/documentary_risk_six_findings.json
+    - orchestration/programme/g2-closeout-evidence/role-facts/documentary_ruff_e9_f401.json
+    - orchestration/programme/g2-closeout-evidence/role-facts/documentary_tenant22.json
+    - orchestration/programme/g2-closeout-evidence/role-facts/property_ai14_attempt02.json
+    - orchestration/programme/g2-closeout-evidence/role-facts/property_clinical48.json
+    - orchestration/programme/g2-closeout-evidence/role-facts/property_crypto_six.json
+    - orchestration/programme/g2-closeout-evidence/role-facts/property_green02.json
+    - orchestration/programme/g2-closeout-evidence/role-facts/property_green_twentyeight.json
+    - orchestration/programme/g2-closeout-evidence/role-facts/property_original_o1_30.json
+    - orchestration/programme/g2-closeout-evidence/role-facts/property_pyjwt30.json
+    - orchestration/programme/g2-closeout-evidence/role-facts/property_src2_current.json
+    - orchestration/programme/g2-closeout-evidence/role-facts/support_ci_b_88.json
+    - orchestration/programme/g2-closeout-evidence/role-facts/support_current49.json
+    - orchestration/programme/g2-closeout-evidence/role-facts/support_delete_postclaim_one.json
+    - orchestration/programme/g2-closeout-evidence/role-facts/support_first_write_five.json
+    - orchestration/programme/g2-closeout-evidence/role-facts/support_input_guards_ten.json
+    - orchestration/programme/g2-closeout-evidence/role-facts/support_residual_thirteen.json
+    - orchestration/programme/g2-closeout-evidence/role-facts/support_sibling_three.json
+    - orchestration/programme/g2-closeout-evidence/role-facts/support_state_receipt_nine.json
+    - orchestration/programme/g2-closeout-evidence/role-facts/support_static_status_current_subject_attempt03.json
+    - orchestration/programme/g2-closeout-evidence/role-facts/support_static_thirtyone.json
+    - orchestration/programme/g2-closeout-evidence/runtime-anchor.json
+    - orchestration/programme/g2-closeout-evidence/sibling_three.json
+    - orchestration/programme/g2-closeout-evidence/source-anchor.json
+    - orchestration/programme/g2-closeout-evidence/source-reviews/01be86c6c0fb5ffa87ab5c81f722a8c2ce4971b6fece6f5d876f3f07a5e067ac.json
+    - orchestration/programme/g2-closeout-evidence/source-reviews/14330885f5b33012b4acac3938609642bfbbde332b7939505c2d2c41c593aa4d.json
+    - orchestration/programme/g2-closeout-evidence/source-reviews/34fd9cfa146bbfcbdc1aecb8ff05f78e16390b5b156410e2da10bc324ea2eb45.json
+    - orchestration/programme/g2-closeout-evidence/source-reviews/36a00c074df6ec391e4b82fe6e1d964b5433cf0f8d690214e7bb7ff73fb30e7c.json
+    - orchestration/programme/g2-closeout-evidence/source-reviews/3ac00633f6e588d43d64d932f166f7210fccb4334653fdf1890a0fadafffc1d8.json
+    - orchestration/programme/g2-closeout-evidence/source-reviews/46ac796b2e2c6b014a126f9f842575c991d289ae49cd97eb15c39ee383ef985f.json
+    - orchestration/programme/g2-closeout-evidence/source-reviews/497dc2058390df4058b131f4057193c51fa1070f6af136271205d8f5d5c6194a.json
+    - orchestration/programme/g2-closeout-evidence/source-reviews/5d0661ea68d2292328cf5e034bb336bdd6728122767655244463cb35dc960cf4.json
+    - orchestration/programme/g2-closeout-evidence/source-reviews/66792638eb5246d856ce46bd47cdf525282c43823e828fddbbe1221e240ec75a.json
+    - orchestration/programme/g2-closeout-evidence/source-reviews/6f7e3a8a0be1d404f533c721be446076ac3758f5c009cbec74367f14964f6730.json
+    - orchestration/programme/g2-closeout-evidence/source-reviews/97af8e18a4751c77beb5e5d2bb48b3d19d039a43d2ed6d9727a59b94d53c180c.json
+    - orchestration/programme/g2-closeout-evidence/source-reviews/9dd968e88aaff5486ac26493fb5464bfdb6c6f826e315e77e59b68dfff9779e3.json
+    - orchestration/programme/g2-closeout-evidence/source-reviews/ada7181898726a64949f7a41ab035c7e8d43eb06e0f3574b46ce9ae0612bf228.json
+    - orchestration/programme/g2-closeout-evidence/source-reviews/cbc0d2589c8e125c2351fc1b063198bb05f42ef2ecdf9c5c5158d6e97a10e8c7.json
+    - orchestration/programme/g2-closeout-evidence/source-reviews/cc400049e60a520b3be0b266ba0e40533a1fb20e9d11aa90e898d6f87a65997b.json
+    - orchestration/programme/g2-closeout-evidence/source-reviews/current-context-and-reuse-v3.json
+    - orchestration/programme/g2-closeout-evidence/source-reviews/db5cc02222183dd7653d0c95a593e7be67bd3752b99e5f8be1b96b8b4d51b1cd.json
+    - orchestration/programme/g2-closeout-evidence/source-reviews/dbb6617cffa3cb490fecde329d1f7b79fe021e4bebf465cecc2a2d1d5711e4c6.json
+    - orchestration/programme/g2-closeout-evidence/source-reviews/eight-required-rows-evidence-contribution.md
+    - orchestration/programme/g2-closeout-evidence/source-reviews/f4b4c003db166b4426eb342c98d2e6dfb3552eed5b7d9f48f3d97f9f83435111.json
+    - orchestration/programme/g2-closeout-evidence/src2_current.json
+    - orchestration/programme/g2-closeout-evidence/state_receipt_nine.json
+    - orchestration/programme/g2-closeout-evidence/static_status_current_subject_attempt03.json
+    - orchestration/programme/g2-closeout-evidence/static_thirtyone.json
+    - orchestration/programme/g2-closeout-evidence/test-identity-map.json
+    - orchestration/programme/g2-closeout-evidence/trusted-context.json
+    - orchestration/programme/g2-closeout-scope.json
+    - orchestration/programme/gates.yaml
+    - pyproject.toml
+    - scripts/verify_repository.py
+    - tests/test_consultation_audio_privacy.py
     autonomous_task_selection: false
     feature_work_eligible: false
     product_work_eligible: false
@@ -1170,7 +1259,7 @@ profiles:
     deployment_eligible: false
     protected_ref_movement_eligible: false
     g2_eligible: true
-    scope_behavior: bounded_g2_six_file_confirmation_and_checker_repair
+    scope_behavior: bounded_g2_closeout_preparation
     scope_file: orchestration/programme/g2-baseline-repair-scope.json
     global_execution_defaults_unchanged: true
     closed_entrypoints:

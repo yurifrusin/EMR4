@@ -1,6 +1,6 @@
 {
   "schema_version": "raisa-ariadne.programme-state.v2",
-  "observed_at": "2026-10-09T00:00:00+00:00",
+  "observed_at": "2026-10-10T03:09:29.434558+00:00",
   "programme_name": "Raisa Medical Office and Ariadne Recovery & Convergence",
   "programme_mode": "recovery",
   "current_gate": "G2",
@@ -256,7 +256,8 @@
   "task_selection": {
     "autonomous_selection_enabled": false,
     "allowed_task_kinds": [
-      "g2_confirmation_family_fixture_repair"
+      "adopt_g2_complete_ci",
+      "accept_g2_closeout"
     ],
     "blocked_task_kinds": [
       "product_feature",
@@ -269,10 +270,10 @@
     "admission_command": "python scripts/raisa_ariadne_recovery_preflight.py --task-manifest <path> --phase development",
     "out_of_gate_result": "blocked",
     "next_eligible_tranche": "G2",
-    "next_eligible_now": true,
+    "next_eligible_now": false,
     "next_tranche_started": false,
     "next_tranche_admission_requires_state_transition": false,
-    "next_eligibility_condition": "bounded_G2_six_file_repair_active"
+    "next_eligibility_condition": "G2_closeout_requires_all12_complete_v3_and_final_independent_review"
   },
   "parallelism_efficacy": {
     "deepseek": {
@@ -976,19 +977,19 @@
   "g2": {
     "status": "active",
     "scope_path": "orchestration/programme/g2-baseline-repair-scope.json",
-    "scope_sha256": "f30f74b6ae079743a47b6485069d63b675517fff47831014fa82dea069b3969c",
+    "scope_sha256": "342dc1da1098505154630ae489aaebc97cf4342e8403ee6b0e0bdf80632827fb",
     "current_operation": {
       "completion_accepted": false,
-      "operation_id": "g2-six-file-confirmation-and-checker-repair",
+      "operation_id": "g2-closeout-control-preparation",
       "profile": "G2_BASELINE_REPAIR_ACTIVE",
       "status": "active",
       "supersedes": {
         "historical_latch_preserved": true,
-        "operation_id": "g2-taskpane-transport-repair",
+        "operation_id": "g2-six-file-confirmation-and-checker-repair",
         "predecessor_completion_accepted": false,
-        "scope_commit": "7d9edaa404d912b53316fe868cad4de0bbc8bf60",
+        "scope_commit": "6f0ff52e9a4c95efa10bb475480cfb31245500e7",
         "scope_path": "orchestration/programme/g2-baseline-repair-scope.json",
-        "scope_sha256": "626fab356d8727b5fffa41126bf01ffe850ed50fef35caea5e8322d09dab262c"
+        "scope_sha256": "f30f74b6ae079743a47b6485069d63b675517fff47831014fa82dea069b3969c"
       },
       "task_class": "g2_confirmation_family_fixture_repair"
     },

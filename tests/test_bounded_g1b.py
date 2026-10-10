@@ -9648,3 +9648,538 @@ def build_g2_six_file_suite(before: dict[str, bytes]) -> unittest.TestSuite:
                     b.build_g2_six_file_transition(bad, self.scope()))
 
     return unittest.defaultTestLoader.loadTestsFromTestCase(G2SixFileTransitionTests)
+
+
+class G2CloseoutSourceContractTests(unittest.TestCase):
+    """Authored normalization shapes; no actual acceptance or filesystem reads."""
+
+    @staticmethod
+    def approval(before):
+        evidence = "e" * 64
+        return {
+            "schema_version": "emr4.g2_prior_closeout_acceptance.v1", "verdict": "accepted",
+            "reviewer_agent": "/root/g2_admission_review", "implementer_ids": ["g2_scope_author"],
+            "independent": True, "implementation_authorship": False, "blocking_findings": [], "pending": [],
+            "product_subject_sha256": b.G2_SIX_SUBJECT_SHA256,
+            "product_publication": {"commit": "1" * 40, "parent": "2" * 40, "tree": "3" * 40},
+            "product_publication_review_sha256": evidence,
+            "prior_policy_sha256": {p: b._sha(raw) for p, raw in before.items()},
+            "ci_adoption": {"publication": {"commit": "7" * 40, "parent": "8" * 40, "tree": "9" * 40},
+                "manifest_sha256": (b._json(before[b.G2_SCOPE]).get("ci_adoption", {}).get("manifest_sha256")
+                    if before[b.G2_SCOPE].startswith(b"{") else None) or G2CIAdoptionSourceContractTests.seal()["manifest_sha256"],
+                "review_path": str(b.Path("/authored-synthetic/ci-publication-review.json").absolute()), "review_sha256": "a" * 64},
+            "complete_selection": {"path": "orchestration/programme/g2-closeout-evidence/complete.json", "sha256": "4" * 64},
+            "trusted_context": {"path": "orchestration/programme/g2-closeout-evidence/context.json", "sha256": "5" * 64},
+            "complete_context": {**{k: "6" * 64 for k in ("plan_sha256", "authority_sha256", "source_sha256",
+                "config_sha256", "runtime_sha256", "verifier_sha256")}, "result_id": "authored-closeout-fixture"},
+            "criteria": [{"id": cid, "verdict": "passed", "evidence_sha256": [evidence]} for cid in b.G2_CRITERIA],
+            "required_ci_map": {duty: ["check-" + str(i)] for i, duty in enumerate(b.G2_CLOSEOUT_CI_ROWS)},
+            "evidence_sha256": {"orchestration/programme/g2-closeout-evidence/prior-review.json": evidence},
+        }
+
+    def reason(self, reason, action):
+        with self.assertRaises(b.BoundedG1BError) as caught:
+            action()
+        self.assertEqual(caught.exception.reason_code, reason)
+
+    def test_fixed_five_path_kind_preserves_runtime_and_g3_closures(self):
+        self.assertEqual(b.operation_paths(b.G2_CLOSEOUT_KIND), b.G2_CLOSEOUT_PATHS)
+        self.assertEqual(len(b.G2_CLOSEOUT_PATHS), 5)
+        self.assertEqual(b.operation_effects(b.G2_CLOSEOUT_KIND), b.EFFECTS)
+        self.assertNotIn(b.G2_SCOPE, b.G2_CLOSEOUT_PATHS)
+        self.assertTrue(b.recognises_bounded_request({"operation_kind": b.G2_CLOSEOUT_KIND}))
+        for effect in ("product_behavior_change", "provider_invocation", "deployment", "integration", "protected_ref_movement"):
+            self.assertNotIn(effect, b.operation_effects(b.G2_CLOSEOUT_KIND))
+        self.reason("bounded_g1b_operation_kind", lambda: b.operation_paths("implement_g3"))
+
+    def test_all_twelve_and_eight_duties_and_acyclic_prior_acceptance(self):
+        approval = self.approval({p: b"fixture" for p in b.G2_CLOSEOUT_BEFORE_PATHS})
+        original = copy.deepcopy(approval)
+        scope = b.build_g2_closeout_scope("2026-10-09T00:00:00+00:00", "a" * 40, approval)
+        self.assertEqual(scope["criteria"], list(b.G2_CRITERIA))
+        self.assertEqual(scope["required_ci_rows"], list(b.G2_CLOSEOUT_CI_ROWS))
+        self.assertEqual(scope["prior_acceptance_sha256"], b._sha(b._canonical(approval)))
+        self.assertEqual(approval, original)
+        self.assertNotIn("final_execution_review_sha256", scope)
+        self.assertFalse(scope["g3_implementation_authorized"])
+        self.assertFalse(scope["execution_authorized"])
+
+    def test_pending_or_nonaccepted_prior_review_rejected(self):
+        for mutate in (lambda a: a.update(verdict="pending"), lambda a: a["pending"].append("CI"),
+                       lambda a: a["blocking_findings"].append("unresolved")):
+            bad = self.approval({p: b"fixture" for p in b.G2_CLOSEOUT_BEFORE_PATHS}); mutate(bad)
+            self.reason("bounded_g2_closeout_acceptance_pending", lambda: b._validate_g2_closeout_approval(bad))
+
+    def test_implementer_review_wrong_reviewer_and_authorship_rejected(self):
+        for mutate in (lambda a: a.update(reviewer_agent="/root/g2_scope_author"),
+                       lambda a: a.update(independent=False), lambda a: a.update(implementation_authorship=True),
+                       lambda a: a["implementer_ids"].append("/ROOT/G2_ADMISSION_REVIEW")):
+            bad = self.approval({p: b"fixture" for p in b.G2_CLOSEOUT_BEFORE_PATHS}); mutate(bad)
+            self.reason("bounded_g2_closeout_independence", lambda: b._validate_g2_closeout_approval(bad))
+
+    def test_canonical_reviewer_joins_only_fixed_proof_safe_identity(self):
+        approval = self.approval({p: b"fixture" for p in b.G2_CLOSEOUT_BEFORE_PATHS})
+        trusted = {"reviewers": ["g2_admission_review"], "implementers": ["g2_scope_author"]}
+        b._validate_g2_closeout_approval(approval)
+        b._validate_g2_closeout_trusted_roles(approval, trusted)
+        self.assertEqual(approval["reviewer_agent"], "/root/g2_admission_review")
+
+    def test_trusted_role_join_rejects_wrong_representation_and_self_review(self):
+        approval = self.approval({p: b"fixture" for p in b.G2_CLOSEOUT_BEFORE_PATHS})
+        for trusted in ({"reviewers": ["/root/g2_admission_review"], "implementers": ["g2_scope_author"]},
+                        {"reviewers": ["g2_scope_author"], "implementers": ["g2_scope_author"]},
+                        {"reviewers": ["g2_admission_review"], "implementers": ["/root/g2_scope_author"]}):
+            self.reason("bounded_g2_closeout_trusted_context",
+                        lambda: b._validate_g2_closeout_trusted_roles(approval, trusted))
+        approval["implementer_ids"].append("G2_ADMISSION_REVIEW")
+        self.reason("bounded_g2_closeout_trusted_context",
+                    lambda: b._validate_g2_closeout_trusted_roles(approval,
+                        {"reviewers": ["g2_admission_review"], "implementers": approval["implementer_ids"]}))
+
+    def test_missing_duplicate_or_wrong_criteria_not_accepted(self):
+        for mutate in (lambda a: a["criteria"].pop(), lambda a: a["criteria"].__setitem__(0, copy.deepcopy(a["criteria"][1])),
+                       lambda a: a["criteria"][0].update(id="weaker_replacement")):
+            bad = self.approval({p: b"fixture" for p in b.G2_CLOSEOUT_BEFORE_PATHS}); mutate(bad)
+            self.reason("bounded_g2_closeout_criteria", lambda: b._validate_g2_closeout_approval(bad))
+
+    def test_failed_or_unbound_criterion_rejected(self):
+        bad = self.approval({p: b"fixture" for p in b.G2_CLOSEOUT_BEFORE_PATHS})
+        bad["criteria"][0]["verdict"] = "qualified"
+        self.reason("bounded_g2_closeout_criterion_not_accepted", lambda: b._validate_g2_closeout_approval(bad))
+        bad["criteria"][0].update(verdict="passed", evidence_sha256=["f" * 64])
+        self.reason("bounded_g2_closeout_criterion_evidence_unbound", lambda: b._validate_g2_closeout_approval(bad))
+
+    def test_explicit_audit_exception_does_not_waive_other_criteria(self):
+        approval = self.approval({p: b"fixture" for p in b.G2_CLOSEOUT_BEFORE_PATHS})
+        row = next(r for r in approval["criteria"] if r["id"] == "dependency_audit_pass_or_explicit_exception")
+        row["verdict"] = "explicit_exception_accepted"
+        b._validate_g2_closeout_approval(approval)
+        approval["criteria"][0]["verdict"] = "explicit_exception_accepted"
+        self.reason("bounded_g2_closeout_criterion_not_accepted", lambda: b._validate_g2_closeout_approval(approval))
+
+    def test_missing_duty_or_empty_mapping_rejected(self):
+        approval = self.approval({p: b"fixture" for p in b.G2_CLOSEOUT_BEFORE_PATHS})
+        approval["required_ci_map"].pop(b.G2_CLOSEOUT_CI_ROWS[0])
+        self.reason("bounded_g2_closeout_ci_duties", lambda: b._validate_g2_closeout_approval(approval))
+        approval["required_ci_map"][b.G2_CLOSEOUT_CI_ROWS[0]] = []
+        self.reason("bounded_g2_closeout_ci_duties", lambda: b._validate_g2_closeout_approval(approval))
+
+    def test_other_product_or_unbound_publication_review_rejected(self):
+        bad = self.approval({p: b"fixture" for p in b.G2_CLOSEOUT_BEFORE_PATHS})
+        bad["product_subject_sha256"] = "f" * 64
+        self.reason("bounded_g2_closeout_product_subject", lambda: b._validate_g2_closeout_approval(bad))
+        bad["product_subject_sha256"] = b.G2_SIX_SUBJECT_SHA256
+        bad["product_publication_review_sha256"] = "f" * 64
+        self.reason("bounded_g2_closeout_publication_review_unbound", lambda: b._validate_g2_closeout_approval(bad))
+
+    def test_exact_timestamp_and_base_required(self):
+        approval = self.approval({p: b"fixture" for p in b.G2_CLOSEOUT_BEFORE_PATHS})
+        for stamp in (None, 123, "", "garbage", "2026-10-09", "2026-10-09T00:00:00"):
+            self.reason("bounded_g1b_timestamp_invalid", lambda: b.build_g2_closeout_scope(stamp, "a" * 40, approval))
+        self.reason("bounded_g1b_transition_base_invalid", lambda: b.build_g2_closeout_scope("2026-10-09T00:00:00Z", "f" * 64, approval))
+
+    def test_closed_profile_has_no_test_exception_or_g3_task(self):
+        profile = rp.g2_accepted_closed_profile()
+        self.assertEqual(profile["allowed_paths"], sorted(b.G2_CLOSEOUT_PATHS))
+        self.assertEqual(set(profile["allowed_effects"]), b.EFFECTS)
+        self.assertEqual(profile["expected_current_gate"], "G2")
+        self.assertEqual(profile["expected_gate_status"], "passed")
+        self.assertNotIn("owner_test_runtime_exception", profile)
+        for flag in ("feature_work_eligible", "product_work_eligible", "provider_calls_eligible",
+                     "deployment_eligible", "protected_ref_movement_eligible", "g2_eligible"):
+            self.assertIs(profile[flag], False)
+
+    def test_ninth_helper_is_kind_only_and_historical_source_closure_preserved(self):
+        self.assertEqual(b.G2_CLOSEOUT_SOURCE_PATHS, b.SOURCE_PATHS | b.CONTROLLER_PATHS | {b.G2_CLOSEOUT_HELPER})
+        self.assertEqual(len(b.G2_CLOSEOUT_SOURCE_PATHS), 9)
+        self.assertNotIn(b.G2_CLOSEOUT_HELPER, b.SOURCE_PATHS)
+        self.assertEqual(b.G2_CLOSEOUT_HELPER_SHA256, "f430803e889b4c3aa0269e12dbff4d965eea2dec0917ac051d8d78225c67b61c")
+
+
+def build_g2_closeout_suite(before: dict[str, bytes]) -> unittest.TestSuite:
+    """Caller supplies exact ordinary before5; accepted-looking rows are synthetic."""
+    class G2CloseoutTransitionTests(G2CloseoutSourceContractTests):
+        def scope(self, images=None):
+            return b.build_g2_closeout_scope("2026-10-09T00:00:00+00:00", "a" * 40,
+                                            self.approval(before if images is None else images))
+
+        def test_positive_exact_five_images_and_history_preservation(self):
+            original = copy.deepcopy(before)
+            scope = self.scope(); after = b.build_g2_closeout_transition(before, scope)
+            self.assertEqual(set(after), b.G2_CLOSEOUT_PATHS)
+            prior, state = b._json(before[b.STATE]), b._json(after[b.STATE])
+            # Every existing key/record is byte-semantic equal except declared closeout fields.
+            for key in prior:
+                if key not in {"observed_at", "current_gate_status", "active_profile", "g2", "global_checks", "task_selection"}:
+                    self.assertEqual(state[key], prior[key])
+            for key in prior["g2"]:
+                if key not in {"status", "completion_accepted"}:
+                    self.assertEqual(state["g2"][key], prior["g2"][key])
+            self.assertEqual(state["global_checks"]["pytest_collection"], prior["global_checks"]["pytest_collection"])
+            self.assertEqual(state["global_checks"]["python_security"], prior["global_checks"]["python_security"])
+            self.assertEqual(state["current_gate"], "G2")
+            self.assertFalse(state["task_selection"]["next_eligible_now"])
+            self.assertFalse(state["task_selection"]["next_tranche_started"])
+            self.assertTrue(state["task_selection"]["next_tranche_admission_requires_state_transition"])
+            gates = b._document(after[b.GATES], b.GATES)
+            g = {row["id"]: row for row in gates["gates"]}
+            self.assertEqual(g["G2"]["exit_checks"], list(b.G2_CRITERIA))
+            self.assertEqual(g["G3"]["status"], "blocked_pending_separate_admission")
+            self.assertEqual(before, original)
+
+        def test_every_wrong_before_image_fails_closed(self):
+            for path in before:
+                bad = copy.deepcopy(before); bad[path] += b" "
+                self.reason("bounded_g2_closeout_preimage", lambda: b.build_g2_closeout_transition(bad, self.scope()))
+
+        def test_scope_cannot_enable_g3_runtime_effect_or_drop_criterion(self):
+            for mutate in (lambda s: s.update(execution_authorized=True), lambda s: s.update(g3_implementation_authorized=True),
+                           lambda s: s["allowed_effects"].append("provider_invocation"), lambda s: s["allowed_paths"].append("extra.py"),
+                           lambda s: s["criteria"].pop()):
+                bad = self.scope(); mutate(bad)
+                self.reason("bounded_g2_closeout_scope", lambda: b.build_g2_closeout_transition(before, bad))
+
+        def test_contradictory_or_consumed_predecessor_cannot_reclose(self):
+            bad = copy.deepcopy(before); state = b._json(bad[b.STATE]); state["g2"]["completion_accepted"] = True
+            bad[b.STATE] = b._canonical(state)
+            self.reason("bounded_g2_closeout_predecessor", lambda: b.build_g2_closeout_transition(bad, self.scope(bad)))
+            bad = copy.deepcopy(before); gates = b._document(bad[b.GATES], b.GATES)
+            next(row for row in gates["gates"] if row["id"] == "G2")["exit_checks"].pop()
+            bad[b.GATES] = b.yaml.safe_dump(gates, sort_keys=False).encode()
+            self.reason("bounded_g2_closeout_gate_predecessor", lambda: b.build_g2_closeout_transition(bad, self.scope(bad)))
+
+    return unittest.defaultTestLoader.loadTestsFromTestCase(G2CloseoutTransitionTests)
+
+
+def build_g2_closeout_enable_suite(before: dict[str, bytes]) -> unittest.TestSuite:
+    """Exact ordinary V20 input bytes; future product publication is synthetic here."""
+    class G2CloseoutEnableTests(unittest.TestCase):
+        def reason(self, reason, action):
+            with self.assertRaises(b.BoundedG1BError) as caught:
+                action()
+            self.assertEqual(caught.exception.reason_code, reason)
+
+        def sources(self):
+            return {**b.G2_CLOSEOUT_V20_SOURCE,
+                **{p: str(i + 1) * 64 for i, p in enumerate(sorted(b.G2_BATCH_CODE_PATHS))}}
+
+        def publication(self):
+            return {"commit": "a" * 40, "parent": b.G2_CLOSEOUT_V20_PUBLICATION["commit"], "tree": "553497967c1aa51369e6bcef05eaf817e8ce123a"}
+
+        def scope(self, sources=None, publication=None):
+            return b.build_g2_closeout_enable_scope(before, "2026-10-09T00:00:00+00:00",
+                self.publication() if publication is None else publication,
+                self.sources() if sources is None else sources, G2CIAdoptionSourceContractTests.seal())
+
+        def test_install_scope_and_preserved_history_are_exact(self):
+            original = copy.deepcopy(before)
+            scope = self.scope()
+            self.assertEqual(scope["preserved_six_file_scope"], b._json(before[b.G2_SCOPE]))
+            self.assertEqual(scope["maintenance_paths"], sorted(b.G2_CLOSEOUT_ENABLE_PATHS))
+            self.assertEqual(scope["allowed_paths"], sorted(b.G2_CLOSEOUT_PATHS | set(G2CIAdoptionSourceContractTests.manifest()["changes"])))
+            self.assertEqual(scope["allowed_additions"], sorted({b.G2_CLOSEOUT_SCOPE} | set(G2CIAdoptionSourceContractTests.manifest()["proof_sha256"])))
+            self.assertEqual(scope["allowed_effects"], sorted(b.EFFECTS))
+            for key in ("initial_scope", "initial_activation", "owner_test_runtime_exception",
+                "preserved_transport_scope", "current_owner_directive", "dependency_invariant"):
+                self.assertEqual(scope[key], scope["preserved_six_file_scope"][key])
+            for key in ("g2_complete", "execution_authorized", "feature_work_eligible",
+                "existing_clockwork_writers_activated", "g3_implementation_authorized"):
+                self.assertIs(scope[key], False)
+            self.assertFalse(scope["current_operation"]["completion_accepted"])
+            self.assertEqual(before, original)
+
+        def test_transition_changes_only_scope_pointers_and_future_closed_kind(self):
+            after = b.build_g2_closeout_enable_transition(before, self.scope())
+            self.assertEqual(set(after), b.G2_BATCH_CONTROL_PATHS)
+            prior, state = b._json(before[b.STATE]), b._json(after[b.STATE])
+            for key in prior:
+                if key not in {"observed_at", "g2", "task_selection"}:
+                    self.assertEqual(state[key], prior[key])
+            for key in prior["g2"]:
+                if key not in {"scope_sha256", "current_operation"}:
+                    self.assertEqual(state["g2"][key], prior["g2"][key])
+            self.assertEqual(state["task_selection"]["allowed_task_kinds"], [b.G2_CLOSEOUT_CI_KIND, b.G2_CLOSEOUT_KIND])
+            self.assertFalse(state["task_selection"]["next_eligible_now"])
+            self.assertFalse(state["g2"]["completion_accepted"])
+            self.assertNotIn("acceptance", state["g2"])
+            overlay = b._document(after[b.OVERLAY], b.OVERLAY)
+            b.configuration_core.validate_shape(overlay, rp.POLICY_SCHEMAS["programme_recovery.yaml"][1])
+            overlay["profiles"][rp.G2_CLOSED_PROFILE] = rp.g2_accepted_closed_profile()
+            b.configuration_core.validate_shape(overlay, rp.POLICY_SCHEMAS["programme_recovery.yaml"][1])
+            # Appended acceptance/profile/schema works on the installed successor too.
+            installed = {**before, **after}
+            approval = G2CloseoutSourceContractTests.approval(installed)
+            closeout = b.build_g2_closeout_scope("2026-10-09T01:00:00+00:00", "c" * 40, approval)
+            closed = b.build_g2_closeout_transition(installed, closeout)
+            self.assertTrue(b._json(closed[b.STATE])["g2"]["completion_accepted"])
+            b.configuration_core.validate_shape(b._document(closed[b.OVERLAY], b.OVERLAY),
+                                                rp.POLICY_SCHEMAS["programme_recovery.yaml"][1])
+
+        def test_each_stale_before_image_is_refused(self):
+            for path in before:
+                bad = copy.deepcopy(before); bad[path] += b" "
+                self.reason("bounded_g2_closeout_enable_preimage", lambda:
+                    b.build_g2_closeout_enable_scope(bad, "2026-10-09T00:00:00Z", self.publication(), self.sources(), G2CIAdoptionSourceContractTests.seal()))
+            bad = dict(before); bad["extra.py"] = b"extra"
+            self.reason("bounded_g2_closeout_enable_before_paths", lambda:
+                b.build_g2_closeout_enable_scope(bad, "2026-10-09T00:00:00Z", self.publication(), self.sources(), G2CIAdoptionSourceContractTests.seal()))
+
+        def test_unknown_product_base_or_unchanged_source_cannot_install(self):
+            for publication in ({**self.publication(), "parent": "f" * 40},
+                {**self.publication(), "commit": b.G2_CLOSEOUT_V20_PUBLICATION["commit"]}):
+                self.reason("bounded_g2_closeout_enable_product_base", lambda: self.scope(publication=publication))
+            self.reason("bounded_g2_closeout_enable_source_successor", lambda: self.scope(sources=b.G2_CLOSEOUT_V20_SOURCE))
+            for path in b.CONTROLLER_PATHS - b.G2_BATCH_CODE_PATHS:
+                sources = self.sources(); sources[path] = "f" * 64
+                self.reason("bounded_g2_closeout_enable_unchanged_controller", lambda: self.scope(sources=sources))
+
+        def test_exact_scope_rejects_authority_history_effect_and_completion_forgery(self):
+            for mutate in (lambda s: s["current_owner_directive"].update(sha256="f" * 64),
+                lambda s: s["allowed_paths"].append("extra.py"),
+                lambda s: s["allowed_effects"].append("provider_invocation"),
+                lambda s: s["preserved_six_file_scope"]["current_operation"].update(completion_accepted=True),
+                lambda s: s["owner_test_runtime_exception"].update(execution_authorized=True),
+                lambda s: s.update(g2_complete=True), lambda s: s.update(g3_implementation_authorized=True)):
+                scope = self.scope(); mutate(scope)
+                self.reason("bounded_g2_closeout_enable_scope", lambda: b.build_g2_closeout_enable_transition(before, scope))
+
+        def test_exact_seven_pairs_must_bind_executing_three_afterimages(self):
+            q = {"source_sha256": self.sources(), "repair_sha256": {
+                p: {"before_sha256": b.G2_CLOSEOUT_V20_SOURCE[p] if p in b.G2_BATCH_CODE_PATHS else
+                        b.G2_CLOSEOUT_HELPER_PREIMAGE_SHA256 if p == b.G2_CLOSEOUT_HELPER else b.G2_CLOSEOUT_V20_POLICY[p],
+                    "after_sha256": self.sources()[p] if p in b.G2_BATCH_CODE_PATHS else
+                        b.G2_CLOSEOUT_HELPER_SHA256 if p == b.G2_CLOSEOUT_HELPER else "e" * 64}
+                for p in b.G2_CLOSEOUT_ENABLE_PATHS}}
+            self.assertEqual(set(b._closeout_enable_changes(q)), b.G2_CLOSEOUT_ENABLE_PATHS)
+            for path in b.G2_BATCH_CODE_PATHS:
+                bad = copy.deepcopy(q); bad["repair_sha256"][path]["after_sha256"] = "f" * 64
+                self.reason("bounded_g2_closeout_enable_executing_source", lambda: b._closeout_enable_changes(bad))
+            bad = copy.deepcopy(q); bad["repair_sha256"][b.G2_CLOSEOUT_HELPER]["after_sha256"] = "f" * 64
+            self.reason("bounded_g2_closeout_enable_helper", lambda: b._closeout_enable_changes(bad))
+            bad = copy.deepcopy(q); bad["repair_sha256"][b.AGENTS] = {"before_sha256": "1" * 64, "after_sha256": "2" * 64}
+            self.reason("bounded_g2_closeout_enable_paths", lambda: b._closeout_enable_changes(bad))
+
+        def test_installer_closure_profile_and_unknown_kind_remain_closed(self):
+            operation = b._operation(b.G2_CLOSEOUT_ENABLE_KIND)
+            self.assertEqual(operation["paths"], b.G2_CLOSEOUT_ENABLE_PATHS)
+            self.assertEqual(len(operation["paths"]), 7)
+            self.assertEqual(b.operation_effects(b.G2_CLOSEOUT_ENABLE_KIND), b.EFFECTS)
+            self.assertIn(b.G2_CLOSEOUT_HELPER, operation["input_paths"])
+            self.assertNotIn(b.G2_CLOSEOUT_HELPER, b.SOURCE_PATHS | b.CONTROLLER_PATHS)
+            self.assertEqual(len(b.SOURCE_PATHS | b.CONTROLLER_PATHS), 8)
+            self.reason("bounded_g1b_operation_kind", lambda: b.operation_paths("enable_arbitrary_closeout"))
+            profile = rp.g2_closeout_preparation_profile()
+            self.assertEqual(profile["owner_test_runtime_exception"], rp.g2_repair_profile()["owner_test_runtime_exception"])
+            self.assertEqual(set(profile["allowed_effects"]), b.EFFECTS)
+            for flag in ("feature_work_eligible", "product_work_eligible", "provider_calls_eligible",
+                "deployment_eligible", "protected_ref_movement_eligible"):
+                self.assertIs(profile[flag], False)
+            self.assertNotIn("product_behavior_change", profile["allowed_effects"])
+
+        def test_timestamp_and_digests_are_typed_and_aware(self):
+            for stamp in (None, 1, "", "invalid", "2026-10-09T00:00:00"):
+                self.reason("bounded_g1b_timestamp_invalid", lambda:
+                    b.build_g2_closeout_enable_scope(before, stamp, self.publication(), self.sources(), G2CIAdoptionSourceContractTests.seal()))
+            publication = self.publication(); publication["tree"] = "b" * 64
+            self.reason("bounded_g2_closeout_publication", lambda: self.scope(publication=publication))
+
+    return unittest.defaultTestLoader.loadTestsFromTestCase(G2CloseoutEnableTests)
+
+
+class G2CIAdoptionSourceContractTests(unittest.TestCase):
+    """All maps/reviews/publications here are authored shapes, not accepted records."""
+
+    @staticmethod
+    def manifest():
+        proof = {b.G2_CLOSEOUT_CI_PREFIX + name: digest for name, digest in
+            (("complete.json", "4" * 64), ("context.json", "5" * 64), ("prior-review.json", "e" * 64))}
+        changes = {
+            ".github/workflows/python-security.yml": {"before_sha256": "0f6f9354f7f814e08398c1d399406102f4d6c9bb0f72ad8a125ba902d179c322", "after_sha256": "c" * 64},
+            "orchestration/harness_settings/python_source_state.json": {"before_sha256": "1a064f5f94d7e98f5dc759cae937c4bdc11d7292990408f624aeb99821f9a8c7", "after_sha256": "d" * 64},
+            "tests/test_consultation_audio_privacy.py": {"before_sha256": "5dc75e3012512de4a0b5cf583293c653bdab27b0043c069cb1aa4018b079e0f4", "after_sha256": "8eef3db418dacd7eb10d00de2f2674b9bd5a5197243e81b786df545ec9d67014"},
+            **{p: {"before_sha256": None, "after_sha256": digest} for p, digest in proof.items()},
+        }
+        selection = {"path": b.G2_CLOSEOUT_CI_PREFIX + "complete.json", "sha256": "4" * 64}
+        context = {"path": b.G2_CLOSEOUT_CI_PREFIX + "context.json", "sha256": "5" * 64}
+        return {"schema_version": "emr4.g2_complete_ci_adoption_manifest.v1",
+            "operation_kind": b.G2_CLOSEOUT_CI_KIND, "product_subject_sha256": b.G2_SIX_SUBJECT_SHA256,
+            "changes": changes, "proof_sha256": proof,
+            "complete_selection": selection, "trusted_context": context,
+            "caller": {"workflow": {"path": ".github/workflows/python-security.yml", "sha256": "c" * 64},
+                "verifier": {"path": "scripts/verify_repository.py", "sha256": "01239f5459c9967cfceffc0201d969a77ec374db8887bf3149944dd93308c992"},
+                "selection": {"path": "orchestration/harness_settings/python_source_state.json", "sha256": "d" * 64},
+                "helper": {"path": b.G2_CLOSEOUT_HELPER, "sha256": b.G2_CLOSEOUT_HELPER_SHA256},
+                "pin_authority_sha256": "f" * 64,
+                "argv": ["python", "scripts/verify_repository.py", "--profile", "ci-complete", "--require-complete",
+                    "--selection", selection["path"], "--selection-sha256", selection["sha256"],
+                    "--trusted-context", context["path"], "--trusted-context-sha256", context["sha256"]]},
+            "stable_anchors": {"source_sha256": {"app/routers/appointments.py": "1" * 64},
+                "config_sha256": {"requirements-dev.txt": "2" * 64}, "tool_sha256": {"python": "3" * 64}}}
+
+    @classmethod
+    def seal(cls):
+        manifest = cls.manifest()
+        return {"manifest": manifest, "manifest_sha256": b._sha(b._canonical(manifest)),
+            "review_path": "C:/authored-synthetic/ci-scope-review.json", "review_sha256": "b" * 64}
+
+    @classmethod
+    def scope_review(cls):
+        seal = cls.seal()
+        return {"schema_version": "emr4.g2_complete_ci_adoption_scope_review.v1",
+            "verdict": "PASS_EXACT_G2_COMPLETE_CI_ADOPTION_SCOPE", "reviewer_agent": "/root/g2_admission_review",
+            "independent": True, "implementation_authorship": False, "blocking_findings": [],
+            "manifest_sha256": seal["manifest_sha256"], "ordinary_literal_paths": sorted(seal["manifest"]["changes"]),
+            "complete_context_anchors_acyclic": True, "caller_pin_authority_authenticated": True,
+            "caller_bytes_args_proofrefs_verified": True, "pin_authority_sha256": "f" * 64,
+            "complete_v3_proof_independently_accepted": True}
+
+    @classmethod
+    def publication(cls):
+        return {"publication": {"commit": "7" * 40, "parent": "8" * 40, "tree": "9" * 40},
+            "manifest_sha256": cls.seal()["manifest_sha256"],
+            "review_path": "C:/authored-synthetic/ci-push-review.json", "review_sha256": "a" * 64}
+
+    @classmethod
+    def publication_review(cls):
+        row = cls.publication()
+        return {"schema_version": "emr4.g2_complete_ci_push_effect_review.v1",
+            "verdict": "PASS_EXACT_G2_COMPLETE_CI_PUSH_EFFECT", "reviewer_agent": "/root/g2_admission_review",
+            "independent": True, "implementation_authorship": False, "blocking_findings": [],
+            "manifest_sha256": row["manifest_sha256"], **row["publication"],
+            "whole_inverse_scope_verified": True, "caller_bytes_args_proof_readback_verified": True,
+            "protected_refs_unchanged": True, "normal_nonforced_push": True,
+            "same_attempt_remote_readback_verified": True, "remote_after": {
+                "refs/heads/codex/raisa-ariadne-recovery-g0": row["publication"]["commit"],
+                "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+                "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602"}}
+
+    def reason(self, reason, action):
+        with self.assertRaises(b.BoundedG1BError) as caught:
+            action()
+        self.assertEqual(caught.exception.reason_code, reason)
+
+    def test_exact_sealed_paths_require_binding_and_no_runtime_effects(self):
+        manifest = self.manifest()
+        q = {"operation_kind": b.G2_CLOSEOUT_CI_KIND, "ci_manifest": manifest}
+        self.assertEqual(b.operation_paths(b.G2_CLOSEOUT_CI_KIND, q), frozenset(manifest["changes"]))
+        self.reason("bounded_g2_ci_binding_required", lambda: b.operation_paths(b.G2_CLOSEOUT_CI_KIND))
+        self.assertEqual(b.operation_effects(b.G2_CLOSEOUT_CI_KIND), b.EFFECTS)
+        self.assertFalse(b._operation(b.G2_CLOSEOUT_CI_KIND, q)["transition"])
+        self.assertNotIn(b.G2_SCOPE, manifest["changes"])
+
+    def test_missing_extra_unsafe_or_duplicate_paths_rejected(self):
+        bad = self.manifest(); bad["changes"].pop("tests/test_consultation_audio_privacy.py")
+        self.reason("bounded_g2_ci_changes", lambda: b._validate_g2_ci_manifest(bad))
+        for path in ("app/routers/appointments.py", "../outside.json", "orchestration/programme/g2-closeout-evidence/../secret.json"):
+            bad = self.manifest(); bad["changes"][path] = {"before_sha256": None, "after_sha256": "1" * 64}
+            self.reason("bounded_g2_ci_path", lambda: b._validate_g2_ci_manifest(bad))
+        bad = self.manifest(); p = b.G2_CLOSEOUT_CI_PREFIX + "complete.json"
+        bad["changes"][p.upper()] = copy.deepcopy(bad["changes"][p])
+        self.reason("bounded_g2_ci_path_alias", lambda: b._validate_g2_ci_manifest(bad))
+
+    def test_wrong_map_digest_or_changed_before_after_cannot_reuse_seal(self):
+        for mutate in (lambda s: s.update(manifest_sha256="f" * 64),
+            lambda s: s["manifest"]["changes"]["tests/test_consultation_audio_privacy.py"].update(before_sha256="f" * 64),
+            lambda s: s["manifest"]["changes"]["tests/test_consultation_audio_privacy.py"].update(after_sha256="f" * 64)):
+            bad = self.seal(); mutate(bad)
+            self.reason("bounded_g2_ci_seal", lambda: b._validate_g2_ci_seal(bad))
+
+    def test_recomputed_map_cannot_reuse_prior_independent_review(self):
+        bad = self.seal()
+        bad["manifest"]["changes"]["tests/test_consultation_audio_privacy.py"]["before_sha256"] = "f" * 64
+        bad["manifest_sha256"] = b._sha(b._canonical(bad["manifest"]))
+        self.reason("bounded_g2_ci_scope_review", lambda: b._validate_g2_ci_scope_review(bad, self.scope_review()))
+
+    def test_wrong_preimage_afterimage_and_absence_are_distinct(self):
+        m = self.manifest()
+        before = {p: row["before_sha256"] for p, row in m["changes"].items()}
+        after = {p: row["after_sha256"] for p, row in m["changes"].items()}
+        b._validate_g2_ci_pair_observations(m, before, after)
+        bad = dict(before); bad["tests/test_consultation_audio_privacy.py"] = "f" * 64
+        self.reason("bounded_g2_ci_preimage", lambda: b._validate_g2_ci_pair_observations(m, bad, after))
+        bad = dict(before); bad[m["complete_selection"]["path"]] = "f" * 64
+        self.reason("bounded_g2_ci_addition_exists", lambda: b._validate_g2_ci_pair_observations(m, bad, after))
+        bad = dict(after); bad["tests/test_consultation_audio_privacy.py"] = "f" * 64
+        self.reason("bounded_g2_ci_afterimage", lambda: b._validate_g2_ci_pair_observations(m, before, bad))
+        bad = dict(after); bad["extra.py"] = "f" * 64
+        self.reason("bounded_g2_ci_observed_paths", lambda: b._validate_g2_ci_pair_observations(m, before, bad))
+
+    def test_changed_caller_selection_helper_or_context_rejected(self):
+        for mutate, reason in (
+            (lambda m: m["caller"]["workflow"].update(sha256="1" * 64), "bounded_g2_ci_caller"),
+            (lambda m: m["caller"]["selection"].update(sha256="1" * 64), "bounded_g2_ci_caller"),
+            (lambda m: m["caller"]["helper"].update(sha256="1" * 64), "bounded_g2_ci_helper"),
+            (lambda m: m["trusted_context"].update(sha256="1" * 64), "bounded_g2_ci_complete"),
+            (lambda m: m["caller"]["argv"].__setitem__(3, "ci-correctness"), "bounded_g2_ci_complete_argv")):
+            bad = self.manifest(); mutate(bad)
+            self.reason(reason, lambda: b._validate_g2_ci_manifest(bad))
+        m = self.manifest()
+        step = {"name": "Complete Python correctness and Bandit gate", "env": {
+            "COMPLETE_SELECTION_SHA256": m["complete_selection"]["sha256"],
+            "TRUSTED_CONTEXT_SHA256": m["trusted_context"]["sha256"]}, "run":
+            'test -n "$COMPLETE_SELECTION_SHA256"\ntest -n "$TRUSTED_CONTEXT_SHA256"\n' + " ".join(m["caller"]["argv"])}
+        raw = b.yaml.safe_dump({"jobs": {"security": {"steps": [step]}}}).encode()
+        b._validate_g2_ci_caller_bytes(m, raw)
+        step["env"]["COMPLETE_SELECTION_SHA256"] = ""
+        raw = b.yaml.safe_dump({"jobs": {"security": {"steps": [step]}}}).encode()
+        self.reason("bounded_g2_ci_workflow_pins", lambda: b._validate_g2_ci_caller_bytes(m, raw))
+        step["env"]["COMPLETE_SELECTION_SHA256"] = m["complete_selection"]["sha256"]
+        step["run"] = step["run"].replace("--require-complete", "--do-not-require-complete")
+        raw = b.yaml.safe_dump({"jobs": {"security": {"steps": [step]}}}).encode()
+        self.reason("bounded_g2_ci_workflow_argv", lambda: b._validate_g2_ci_caller_bytes(m, raw))
+
+    def test_generated_policy_proof_and_caller_anchors_cannot_cycle(self):
+        for path in (b.G2_SCOPE, b.STATE, b.G2_CLOSEOUT_SCOPE,
+            b.G2_CLOSEOUT_CI_PREFIX + "context.json", ".github/workflows/python-security.yml"):
+            bad = self.manifest(); bad["stable_anchors"]["config_sha256"][path] = "1" * 64
+            self.reason("bounded_g2_ci_anchor_cycle", lambda: b._validate_g2_ci_manifest(bad))
+
+    def test_absent_core_or_unreferenced_proof_is_not_admitted(self):
+        bad = self.manifest(); bad["changes"]["tests/test_consultation_audio_privacy.py"]["before_sha256"] = None
+        self.reason("bounded_g2_ci_core_absent", lambda: b._validate_g2_ci_manifest(bad))
+        bad = self.manifest(); bad["changes"][b.G2_CLOSEOUT_CI_PREFIX + "unused.json"] = {
+            "before_sha256": None, "after_sha256": "1" * 64}
+        self.reason("bounded_g2_ci_unreferenced_payload", lambda: b._validate_g2_ci_manifest(bad))
+
+    def test_scope_judgment_requires_actual_independent_complete_and_pin_authority(self):
+        b._validate_g2_ci_scope_review(self.seal(), self.scope_review())
+        for mutate in (lambda r: r.update(reviewer_agent="/root/g2_scope_author"),
+            lambda r: r.update(implementation_authorship=True), lambda r: r.update(independent=False),
+            lambda r: r.update(complete_v3_proof_independently_accepted=False),
+            lambda r: r.update(caller_pin_authority_authenticated=False),
+            lambda r: r.update(complete_context_anchors_acyclic=False), lambda r: r["ordinary_literal_paths"].pop()):
+            bad = self.scope_review(); mutate(bad)
+            self.reason("bounded_g2_ci_scope_review", lambda: b._validate_g2_ci_scope_review(self.seal(), bad))
+
+    def test_adoption_absent_unaccepted_or_wrong_readback_cannot_close(self):
+        self.reason("bounded_g2_ci_publication", lambda: b._validate_g2_ci_publication(None))
+        b._validate_g2_ci_publication_review(self.publication(), self.publication_review())
+        for mutate in (lambda r: r.update(verdict="pending"), lambda r: r.update(independent=False),
+            lambda r: r.update(caller_bytes_args_proof_readback_verified=False),
+            lambda r: r.update(whole_inverse_scope_verified=False), lambda r: r.update(normal_nonforced_push=False),
+            lambda r: r["remote_after"].update({"refs/heads/master": "f" * 40}),
+            lambda r: r.update(manifest_sha256="f" * 64)):
+            bad = self.publication_review(); mutate(bad)
+            self.reason("bounded_g2_ci_publication_review", lambda: b._validate_g2_ci_publication_review(self.publication(), bad))
+
+    def test_profile_has_only_literal_sealed_union_and_keeps_consumed_runtime_record(self):
+        paths = sorted(b.G2_CLOSEOUT_PATHS | set(self.manifest()["changes"]))
+        profile = rp.g2_closeout_preparation_profile(paths)
+        self.assertEqual(profile["allowed_paths"], paths)
+        self.assertEqual(profile["owner_test_runtime_exception"], rp.g2_repair_profile()["owner_test_runtime_exception"])
+        self.assertEqual(set(profile["allowed_effects"]), b.EFFECTS)
+        self.assertFalse(profile["feature_work_eligible"])
+        self.assertFalse(profile["provider_calls_eligible"])
+        self.assertFalse(profile["product_work_eligible"])
+        with self.assertRaises(rp.RaisaPolicyError) as caught:
+            rp.g2_closeout_preparation_profile(sorted(set(paths) | {"app/main.py"}))
+        self.assertEqual(caught.exception.reason_code, "configuration_g2_ci_path_invalid")
+
+    def test_final_prior_approval_requires_adoption_but_keeps_twelve_eight_duties(self):
+        approval = G2CloseoutSourceContractTests.approval({p: b"fixture" for p in b.G2_CLOSEOUT_BEFORE_PATHS})
+        b._validate_g2_closeout_approval(approval)
+        self.assertEqual({r["id"] for r in approval["criteria"]}, set(b.G2_CRITERIA))
+        self.assertEqual(set(approval["required_ci_map"]), set(b.G2_CLOSEOUT_CI_ROWS))
+        bad = copy.deepcopy(approval); bad["ci_adoption"] = None
+        self.reason("bounded_g2_ci_publication", lambda: b._validate_g2_closeout_approval(bad))
+        self.assertNotIn("final_execution_review_sha256", approval)

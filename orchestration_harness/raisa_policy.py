@@ -32,14 +32,17 @@ G1C_PROFILE = "G1C_GOVERNOR_ACTIVE"
 G1D_PROFILE = "G1D_PROVENANCE_ACTIVE"
 G1E_PROFILE = "G1E_CONFIGURATION_CORE_ACTIVE"
 G2_PROFILE = "G2_BASELINE_REPAIR_ACTIVE"
+G2_CLOSED_PROFILE = "G2_ACCEPTED_CLOSED"
 G1B_PREAMBLE = "Gate G1B is active only for bounded persistence, recovery, stale-lease protection and derived narrative"
 G1C_PREAMBLE = "Gate G1C is active only for the bounded recovery governor and its versioned persistence integration"
 G1D_PREAMBLE = "Gate G1D is active only for bounded observed provenance and independent local verification"
 G1E_PREAMBLE = "Gate G1E is active only for read-only configuration and installed controller assessment"
 G2_PREAMBLE = "Gate G2 is active only for bounded baseline repair and separately reviewed isolated synthetic tests"
+G2_CLOSED_PREAMBLE = "Gate G2 is accepted and closed; G3 implementation requires separate reviewed admission"
 BOUNDED_PROFILE_PREAMBLES = MappingProxyType({
     G1B_PROFILE: G1B_PREAMBLE, G1C_PROFILE: G1C_PREAMBLE,
     G1D_PROFILE: G1D_PREAMBLE, G1E_PROFILE: G1E_PREAMBLE, G2_PROFILE: G2_PREAMBLE,
+    G2_CLOSED_PROFILE: G2_CLOSED_PREAMBLE,
 })
 
 ADMITTED_PROGRAMME_GATE = 'G0.8'
@@ -899,7 +902,8 @@ _SHAPE_79 = ("object", (
     ('G1D_PROVENANCE_ACTIVE', _SHAPE_77),
     ('G1E_CONFIGURATION_CORE_ACTIVE', _SHAPE_78),
     ('G2_BASELINE_REPAIR_ACTIVE', _G2_PROFILE_SHAPE),
-), ('G1E_CONFIGURATION_CORE_ACTIVE', 'G2_BASELINE_REPAIR_ACTIVE'))
+    ('G2_ACCEPTED_CLOSED', _SHAPE_78),
+), ('G1E_CONFIGURATION_CORE_ACTIVE', 'G2_BASELINE_REPAIR_ACTIVE', 'G2_ACCEPTED_CLOSED'))
 
 _SHAPE_80 = ("object", (
     ('expected_branch', _SHAPE_1),
@@ -1522,6 +1526,54 @@ _CONFIGURATION_PROFILE = {'profile_kind': 'bounded_G1E_configuration_assessment'
 
 def configuration_profile() -> dict:
     return copy.deepcopy(_CONFIGURATION_PROFILE)
+
+
+def g2_closeout_preparation_profile(allowed_paths=None) -> dict:
+    """Prior G2 runtime record retained; closeout still needs every acceptance input."""
+    profile = g2_repair_profile()
+    profile.update(scope_behavior='bounded_g2_closeout_preparation',
+        admitted_task_classes=['g2_closeout_control_preparation'],
+        allowed_paths=sorted(['AGENTS.md', 'orchestration/programme/current-state.json',
+            'orchestration/programme/gates.yaml', 'orchestration/harness_settings/programme_recovery.yaml',
+            'orchestration/programme/g2-closeout-scope.json']))
+    if allowed_paths is not None:
+        fixed = set(profile["allowed_paths"])
+        core = {".github/workflows/python-security.yml", "scripts/verify_repository.py",
+            "orchestration/harness_settings/python_source_state.json", "pyproject.toml",
+            "tests/test_consultation_audio_privacy.py"}
+        if (type(allowed_paths) is not list or not all(type(p) is str for p in allowed_paths)
+            or allowed_paths != sorted(set(allowed_paths))
+            or len({p.casefold() for p in allowed_paths}) != len(allowed_paths)
+            or not fixed <= set(allowed_paths)
+            or any(p not in fixed | core and not p.startswith("orchestration/programme/g2-closeout-evidence/")
+                   for p in allowed_paths)
+            or any("\\" in p or ":" in p or any(part in {"", ".", ".."} for part in p.split("/"))
+                   or any(ord(c) < 32 for c in p) for p in allowed_paths)):
+            raise RaisaPolicyError("configuration_g2_ci_path_invalid")
+        profile["allowed_paths"] = list(allowed_paths)
+    return profile
+
+
+def g2_accepted_closed_profile() -> dict:
+    """State-only accepted G2 closeout; no G3 or isolated-test runtime grant."""
+    profile = configuration_profile()
+    profile.update(
+        profile_kind='bounded_G2_accepted_closed', expected_current_gate='G2',
+        expected_gate_status='passed', active_correction='G2', programme_gate='G2',
+        admitted_task_classes=['g2_accepted_closeout'],
+        allowed_effects=['control_plane_edit', 'repository_read', 'task_branch_commit', 'task_branch_push'],
+        allowed_paths=sorted(['AGENTS.md', 'orchestration/programme/current-state.json',
+            'orchestration/programme/gates.yaml', 'orchestration/harness_settings/programme_recovery.yaml',
+            'orchestration/programme/g2-closeout-scope.json']),
+        scope_behavior='bounded_g2_accepted_closeout',
+        scope_file='orchestration/programme/g2-closeout-scope.json',
+        installed_controller_assessment_only=False,
+    )
+    profile['forbidden_effects'] = [effect for effect in profile['forbidden_effects']
+                                    if effect not in profile['allowed_effects']]
+    profile['closed_entrypoints'] = [entry for entry in profile['closed_entrypoints']
+                                     if entry not in {'task_branch_commit', 'task_branch_push'}]
+    return profile
 
 
 def g2_test_exception() -> dict:
@@ -2381,9 +2433,21 @@ def validate_recovery_configuration(*, documents: dict[str, bytes], expected_sha
             raise RaisaPolicyError("configuration_calibration_semantics_invalid")
     if state["active_profile"] == G1E_PROFILE and overlay["profiles"][G1E_PROFILE] != configuration_profile():
         raise RaisaPolicyError("configuration_assessment_profile_invalid")
+    if state["active_profile"] == G2_CLOSED_PROFILE:
+        if (overlay["profiles"][G2_CLOSED_PROFILE] != g2_accepted_closed_profile()
+                or state["current_gate"] != 'G2' or state["current_gate_status"] != 'passed'
+                or state["g2"]["status"] != 'passed' or state["g2"]["completion_accepted"] is not True
+                or state["feature_work_eligible"] is not False or state["product_work_eligible"] is not False
+                or state["task_selection"]["allowed_task_kinds"] != []
+                or state["task_selection"]["next_eligible_now"] is not False
+                or state["task_selection"]["next_tranche_started"] is not False
+                or state["task_selection"]["next_tranche_admission_requires_state_transition"] is not True):
+            raise RaisaPolicyError("configuration_g2_closed_profile_invalid")
     if state["active_profile"] == G2_PROFILE:
         profile = overlay["profiles"][G2_PROFILE]
-        expected = (g2_six_file_repair_profile()
+        expected = (g2_closeout_preparation_profile(profile["allowed_paths"])
+                    if profile["scope_behavior"] == 'bounded_g2_closeout_preparation'
+                    else g2_six_file_repair_profile()
                     if profile["scope_behavior"] == G2_SIX_FILE_REPAIR_SCOPE_BEHAVIOR
                     else g2_transport_repair_profile()
                     if profile["scope_behavior"] == G2_TRANSPORT_REPAIR_SCOPE_BEHAVIOR

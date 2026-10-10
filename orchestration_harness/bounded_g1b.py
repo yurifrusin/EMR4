@@ -1532,6 +1532,957 @@ def batch_input_paths(binding: dict) -> frozenset[str]:
     return G2_BATCH_INPUT_PATHS
 
 
+# A separately reviewed sealed manifest grants exact CI paths, never a prefix.
+G2_CLOSEOUT_CI_KIND = "adopt_g2_complete_ci"
+G2_CLOSEOUT_CI_BINDING_VERSION = "ariadne.g2_complete_ci_binding.v1"
+G2_CLOSEOUT_CI_PREFIX = "orchestration/programme/g2-closeout-evidence/"
+G2_CLOSEOUT_CI_CORE = frozenset({".github/workflows/python-security.yml",
+    "scripts/verify_repository.py", "orchestration/harness_settings/python_source_state.json",
+    "pyproject.toml", "tests/test_consultation_audio_privacy.py"})
+G2_CLOSEOUT_CI_REQUIRED_CHANGES = frozenset({".github/workflows/python-security.yml",
+    "orchestration/harness_settings/python_source_state.json", "tests/test_consultation_audio_privacy.py"})
+OPERATION_PATHS[G2_CLOSEOUT_CI_KIND] = frozenset()  # Actual paths require the sealed map.
+
+
+def _closeout_ci_path(path):
+    _need(type(path) is str and 0 < len(path) <= 512 and "\\" not in path
+          and not path.startswith("/") and ":" not in path
+          and all(part not in {"", ".", ".."} for part in path.split("/"))
+          and not any(ord(char) < 32 for char in path), "bounded_g2_ci_path")
+    _need(path in G2_CLOSEOUT_CI_CORE or path.startswith(G2_CLOSEOUT_CI_PREFIX),
+          "bounded_g2_ci_path")
+    return path
+
+
+def _validate_g2_ci_manifest(manifest):
+    """Shape only. Independent prior review and the installed seal authorize it."""
+    _keys(manifest, {"schema_version", "operation_kind", "product_subject_sha256", "changes",
+        "caller", "complete_selection", "trusted_context", "proof_sha256", "stable_anchors"},
+        "bounded_g2_ci_manifest_schema")
+    _need(manifest["schema_version"] == "emr4.g2_complete_ci_adoption_manifest.v1"
+          and manifest["operation_kind"] == G2_CLOSEOUT_CI_KIND
+          and manifest["product_subject_sha256"] == G2_SIX_SUBJECT_SHA256,
+          "bounded_g2_ci_manifest_subject")
+    changes = manifest["changes"]
+    _need(type(changes) is dict and G2_CLOSEOUT_CI_REQUIRED_CHANGES <= set(changes)
+          and len(changes) <= 263, "bounded_g2_ci_changes")
+    _need(all(type(p) is str for p in changes)
+          and len({p.casefold() for p in changes}) == len(changes), "bounded_g2_ci_path_alias")
+    for path, pair in changes.items():
+        _closeout_ci_path(path)
+        _keys(pair, {"before_sha256", "after_sha256"}, "bounded_g2_ci_pair")
+        _closeout_digest(pair["after_sha256"])
+        if pair["before_sha256"] is None:
+            _need(path.startswith(G2_CLOSEOUT_CI_PREFIX), "bounded_g2_ci_core_absent")
+        else:
+            _closeout_digest(pair["before_sha256"])
+            _need(pair["before_sha256"] != pair["after_sha256"], "bounded_g2_ci_unchanged_pair")
+    caller = _keys(manifest["caller"], {"workflow", "verifier", "selection", "helper", "argv",
+        "pin_authority_sha256"}, "bounded_g2_ci_caller")
+    for key, path in (("workflow", ".github/workflows/python-security.yml"),
+        ("verifier", "scripts/verify_repository.py"),
+        ("selection", "orchestration/harness_settings/python_source_state.json"),
+        ("helper", G2_CLOSEOUT_HELPER)):
+        _keys(caller[key], {"path", "sha256"}, "bounded_g2_ci_caller")
+        _need(caller[key]["path"] == path, "bounded_g2_ci_caller")
+        _closeout_digest(caller[key]["sha256"])
+        if path in changes:
+            _need(caller[key]["sha256"] == changes[path]["after_sha256"], "bounded_g2_ci_caller")
+    _need(caller["helper"]["sha256"] == G2_CLOSEOUT_HELPER_SHA256, "bounded_g2_ci_helper")
+    _need(caller["verifier"]["sha256"] ==
+          "01239f5459c9967cfceffc0201d969a77ec374db8887bf3149944dd93308c992",
+          "bounded_g2_ci_verifier")
+    _closeout_digest(caller["pin_authority_sha256"])
+    proof = manifest["proof_sha256"]
+    _need(type(proof) is dict and 0 < len(proof) <= 258
+          and all(type(p) is str for p in proof)
+          and len({p.casefold() for p in proof}) == len(proof), "bounded_g2_ci_proof")
+    for path, digest in proof.items():
+        _closeout_ci_path(path)
+        _need(path.startswith(G2_CLOSEOUT_CI_PREFIX), "bounded_g2_ci_proof")
+        _closeout_digest(digest)
+        _need(changes.get(path, {}).get("after_sha256") == digest, "bounded_g2_ci_proof")
+    _need({p for p in changes if p.startswith(G2_CLOSEOUT_CI_PREFIX)} == set(proof),
+          "bounded_g2_ci_unreferenced_payload")
+    for key in ("complete_selection", "trusted_context"):
+        ref = _keys(manifest[key], {"path", "sha256"}, "bounded_g2_ci_complete")
+        _need(proof.get(ref["path"]) == ref["sha256"], "bounded_g2_ci_complete")
+    selection, context = manifest["complete_selection"], manifest["trusted_context"]
+    _need(selection["path"] != context["path"], "bounded_g2_ci_complete")
+    _need(caller["argv"] == ["python", "scripts/verify_repository.py", "--profile", "ci-complete",
+        "--require-complete", "--selection", selection["path"], "--selection-sha256", selection["sha256"],
+        "--trusted-context", context["path"], "--trusted-context-sha256", context["sha256"]],
+        "bounded_g2_ci_complete_argv")
+    anchors = _keys(manifest["stable_anchors"], {"source_sha256", "config_sha256", "tool_sha256"},
+                    "bounded_g2_ci_anchors")
+    for key, rows in anchors.items():
+        _need(type(rows) is dict and rows and all(type(p) is str and p for p in rows),
+              "bounded_g2_ci_anchors")
+        for path, digest in rows.items():
+            _closeout_digest(digest)
+            if key != "tool_sha256":
+                _need(path not in changes and path not in G2_CLOSEOUT_BEFORE_PATHS
+                      and path not in G2_CLOSEOUT_PATHS and not path.startswith(G2_CLOSEOUT_CI_PREFIX),
+                      "bounded_g2_ci_anchor_cycle")
+    return manifest
+
+
+def _validate_g2_ci_seal(seal):
+    _keys(seal, {"manifest", "manifest_sha256", "review_path", "review_sha256"},
+          "bounded_g2_ci_seal")
+    _validate_g2_ci_manifest(seal["manifest"])
+    _closeout_digest(seal["manifest_sha256"])
+    _need(seal["manifest_sha256"] == _sha(_canonical(seal["manifest"])), "bounded_g2_ci_seal")
+    _need(type(seal["review_path"]) is str and Path(seal["review_path"]).is_absolute(),
+          "bounded_g2_ci_seal")
+    _closeout_digest(seal["review_sha256"])
+    return seal
+
+
+def _validate_g2_ci_scope_review(seal, review):
+    _validate_g2_ci_seal(seal)
+    _need(review.get("schema_version") == "emr4.g2_complete_ci_adoption_scope_review.v1"
+          and review.get("verdict") == "PASS_EXACT_G2_COMPLETE_CI_ADOPTION_SCOPE"
+          and review.get("reviewer_agent") == "/root/g2_admission_review"
+          and review.get("independent") is True and review.get("implementation_authorship") is False
+          and review.get("blocking_findings") == []
+          and review.get("manifest_sha256") == seal["manifest_sha256"]
+          and review.get("ordinary_literal_paths") == sorted(seal["manifest"]["changes"])
+          and review.get("complete_context_anchors_acyclic") is True
+          and review.get("complete_v3_proof_independently_accepted") is True
+          and review.get("caller_bytes_args_proofrefs_verified") is True
+          and review.get("pin_authority_sha256") == seal["manifest"]["caller"]["pin_authority_sha256"]
+          and review.get("caller_pin_authority_authenticated") is True,
+          "bounded_g2_ci_scope_review")
+
+
+def _validate_g2_ci_publication(approval):
+    """Normalized actual publication/readback judgment; never an inferred pass."""
+    row = _keys(approval, {"publication", "manifest_sha256", "review_path", "review_sha256"},
+                "bounded_g2_ci_publication")
+    _closeout_publication(row["publication"])
+    _closeout_digest(row["manifest_sha256"])
+    _closeout_digest(row["review_sha256"])
+    _need(type(row["review_path"]) is str and Path(row["review_path"]).is_absolute(),
+          "bounded_g2_ci_publication")
+    return row
+
+
+def _validate_g2_ci_pair_observations(manifest, before, after):
+    changes = _validate_g2_ci_manifest(manifest)["changes"]
+    _keys(before, set(changes), "bounded_g2_ci_observed_paths")
+    _keys(after, set(changes), "bounded_g2_ci_observed_paths")
+    for path, pair in changes.items():
+        if pair["before_sha256"] is None:
+            _need(before[path] is None, "bounded_g2_ci_addition_exists")
+        else:
+            _need(before[path] == pair["before_sha256"], "bounded_g2_ci_preimage")
+        _need(after[path] == pair["after_sha256"], "bounded_g2_ci_afterimage")
+
+
+def _validate_g2_ci_caller_bytes(manifest, workflow_raw):
+    """Exact existing workflow step form with literal nonempty parent-reviewed pins."""
+    _validate_g2_ci_manifest(manifest)
+    workflow = _document(workflow_raw, ".github/workflows/python-security.yml")
+    steps = workflow.get("jobs", {}).get("security", {}).get("steps")
+    _need(type(steps) is list, "bounded_g2_ci_workflow")
+    selected = [step for step in steps if type(step) is dict
+                and step.get("name") == "Complete Python correctness and Bandit gate"]
+    _need(len(selected) == 1, "bounded_g2_ci_workflow")
+    step = selected[0]
+    env = step.get("env")
+    _need(type(env) is dict and env.get("COMPLETE_SELECTION_SHA256") == manifest["complete_selection"]["sha256"]
+          and env.get("TRUSTED_CONTEXT_SHA256") == manifest["trusted_context"]["sha256"],
+          "bounded_g2_ci_workflow_pins")
+    run = step.get("run")
+    _need(type(run) is str, "bounded_g2_ci_workflow_argv")
+    lines = [line.strip() for line in run.replace("\\\n", " ").splitlines() if line.strip()]
+    _need(len(lines) == 3 and lines[:2] == ['test -n "$COMPLETE_SELECTION_SHA256"',
+          'test -n "$TRUSTED_CONTEXT_SHA256"'], "bounded_g2_ci_workflow_argv")
+    command = lines[2].replace('"$COMPLETE_SELECTION_SHA256"', env["COMPLETE_SELECTION_SHA256"])
+    command = command.replace('"$TRUSTED_CONTEXT_SHA256"', env["TRUSTED_CONTEXT_SHA256"])
+    _need(command.split() == manifest["caller"]["argv"], "bounded_g2_ci_workflow_argv")
+
+
+def _validate_g2_ci_publication_review(row, review):
+    _validate_g2_ci_publication(row)
+    _need(review.get("schema_version") == "emr4.g2_complete_ci_push_effect_review.v1"
+          and review.get("verdict") == "PASS_EXACT_G2_COMPLETE_CI_PUSH_EFFECT"
+          and review.get("reviewer_agent") == "/root/g2_admission_review"
+          and review.get("independent") is True and review.get("implementation_authorship") is False
+          and review.get("blocking_findings") == []
+          and review.get("manifest_sha256") == row["manifest_sha256"]
+          and all(review.get(k) == v for k, v in row["publication"].items())
+          and review.get("whole_inverse_scope_verified") is True
+          and review.get("caller_bytes_args_proof_readback_verified") is True
+          and review.get("protected_refs_unchanged") is True
+          and review.get("normal_nonforced_push") is True
+          and review.get("same_attempt_remote_readback_verified") is True
+          and review.get("remote_after") == {
+              "refs/heads/codex/raisa-ariadne-recovery-g0": row["publication"]["commit"],
+              "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+              "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602"},
+          "bounded_g2_ci_publication_review")
+
+
+def _validate_g2_ci_installed_policy(before):
+    _keys(before, G2_CLOSEOUT_BEFORE_PATHS, "bounded_g2_ci_before_paths")
+    state, gates, overlay = (_document(before[p], p) for p in (STATE, GATES, OVERLAY))
+    scope = _json(before[G2_SCOPE])
+    seal = _validate_g2_ci_seal(scope.get("ci_adoption"))
+    _need(scope.get("schema_version") == G2_CLOSEOUT_ENABLE_SCOPE_VERSION
+          and state["current_gate"] == "G2" and state["current_gate_status"] == "active"
+          and state["active_profile"] == G2_PROFILE and state["g2"]["status"] == "active"
+          and state["g2"]["completion_accepted"] is False and "acceptance" not in state["g2"]
+          and state["g2"]["scope_sha256"] == _sha(before[G2_SCOPE])
+          and state["g2"]["current_operation"] == scope["current_operation"]
+          and state["feature_work_eligible"] is False and state["product_work_eligible"] is False
+          and state["task_selection"]["allowed_task_kinds"] == [G2_CLOSEOUT_CI_KIND, G2_CLOSEOUT_KIND]
+          and overlay["active_profile"] == G2_PROFILE
+          and overlay["profiles"][G2_PROFILE] == raisa_policy.g2_closeout_preparation_profile(
+              sorted(G2_CLOSEOUT_PATHS | set(seal["manifest"]["changes"]))),
+          "bounded_g2_ci_policy")
+    by_id = {row["id"]: row for row in gates["gates"]}
+    _need(len(by_id) == len(gates["gates"]) and by_id["G2"]["exit_checks"] == list(G2_CRITERIA)
+          and by_id["G2"]["status"] == "active" and by_id["G3"]["status"] == "blocked_by_G2",
+          "bounded_g2_ci_gate")
+    return seal
+
+
+def _load_g2_ci_adoption_inputs(context, target, source, evidence_root, scratch, q, read, snapshots):
+    _keys(q, {"schema_version", "operation_id", "operation_kind", "phase", "base_commit", "base_tree",
+        "expected_head", "expected_index_tree", "candidate_tree", "source_sha256", "payload_sha256",
+        "installed_controller", "ci_manifest", "preparation_review_path", "preparation_review_sha256"},
+        "bounded_g2_ci_binding_schema")
+    _need(q["schema_version"] == G2_CLOSEOUT_CI_BINDING_VERSION
+          and q["operation_kind"] == G2_CLOSEOUT_CI_KIND, "bounded_g2_ci_binding_version")
+    _need(type(q["operation_id"]) is str and re.fullmatch(r"[a-z0-9][a-z0-9-]{1,79}", q["operation_id"])
+          and q["phase"] in {"development", "pre-push", "post-push"}, "bounded_g2_ci_phase")
+    _need(all(type(q[k]) is str and re.fullmatch(r"[0-9a-f]{40}", q[k]) for k in
+        ("base_commit", "base_tree", "candidate_tree", "expected_head", "expected_index_tree")),
+        "bounded_g2_ci_git_binding")
+    manifest = _validate_g2_ci_manifest(q["ci_manifest"])
+    paths = frozenset(manifest["changes"])
+    sources = _digest_map(q["source_sha256"], SOURCE_PATHS | CONTROLLER_PATHS, "bounded_g2_ci_sources")
+    _need(sources["orchestration_harness/trusted_git.py"] ==
+          "4a856bffe2b68d7c7e1875152629c9024a32679b59d9b1ed8301c368d41ff527", "bounded_g2_ci_sources")
+    _validate_installed_controller(q["installed_controller"])
+    _batch_publication(target, q["installed_controller"], q["base_commit"])
+    for p, digest in sources.items():
+        raw = read(source / p, digest)
+        _need(raw == trusted_git.run_git_bytes(target, "cat-file", "blob", q["base_commit"] + ":" + p),
+              "bounded_g2_ci_source_not_installed")
+        if p in CONTROLLER_PATHS:
+            _need(q["installed_controller"]["source_sha256"][p] == digest, "bounded_g2_ci_sources")
+    before = {p: trusted_git.run_git_bytes(target, "cat-file", "blob", q["base_commit"] + ":" + p)
+              for p in G2_CLOSEOUT_BEFORE_PATHS}
+    seal = _validate_g2_ci_installed_policy(before)
+    _need(_canonical(manifest) == _canonical(seal["manifest"]), "bounded_g2_ci_sealed_map_disagreement")
+    _validate_g2_ci_scope_review(seal, _json(read(Path(seal["review_path"]), seal["review_sha256"])))
+    required = G2_CATALOGUE_POLICY_PATHS | SOURCE_PATHS | CONTROLLER_PATHS | paths | {
+        ref["path"] for ref in manifest["caller"].values() if type(ref) is dict}
+    pins = _digest_map(q["payload_sha256"], required, "bounded_g2_ci_payload_paths")
+    payloads = {p: read(target / p, digest) for p, digest in sorted(pins.items())}
+    for p in required - paths:
+        _need(payloads[p] == trusted_git.run_git_bytes(target, "cat-file", "blob", q["base_commit"] + ":" + p),
+              "bounded_g2_ci_unowned_changed")
+    observed_before = {}
+    for p, pair in manifest["changes"].items():
+        if pair["before_sha256"] is None:
+            _need(trusted_git.run_git_bytes(target, "ls-tree", "-z", q["base_commit"], "--", p) == b"",
+                  "bounded_g2_ci_addition_exists")
+            observed_before[p] = None
+        else:
+            observed_before[p] = _sha(trusted_git.run_git_bytes(target, "cat-file", "blob", q["base_commit"] + ":" + p))
+    _validate_g2_ci_pair_observations(manifest, observed_before,
+                                    {p: _sha(payloads[p]) for p in paths})
+    for ref in manifest["caller"].values():
+        if type(ref) is dict:
+            _need(pins[ref["path"]] == ref["sha256"], "bounded_g2_ci_caller_readback")
+    _validate_g2_ci_caller_bytes(manifest, payloads[manifest["caller"]["workflow"]["path"]])
+    _need(type(q["preparation_review_path"]) is str and Path(q["preparation_review_path"]).is_absolute(),
+          "bounded_g2_ci_preparation_review")
+    _closeout_digest(q["preparation_review_sha256"])
+    review = _json(read(Path(q["preparation_review_path"]), q["preparation_review_sha256"]))
+    _need(review.get("schema_version") == "emr4.g2_complete_ci_preparation_effect_review.v1"
+          and review.get("verdict") == "PASS_EXACT_G2_COMPLETE_CI_PREPARATION_EFFECT"
+          and review.get("reviewer_agent") == "/root/g2_admission_review" and review.get("independent") is True
+          and review.get("implementation_authorship") is False and review.get("blocking_findings") == []
+          and review.get("manifest_sha256") == seal["manifest_sha256"]
+          and review.get("base_commit") == q["base_commit"] and review.get("base_tree") == q["base_tree"]
+          and review.get("candidate_tree") == q["candidate_tree"]
+          and review.get("whole_inverse_scope_verified") is True
+          and review.get("inverse_tree") == q["base_tree"], "bounded_g2_ci_preparation_review")
+    observation = trusted_git.attest_target_index(target,
+        attested_paths=tuple(sorted(required - paths if q["phase"] == "development" else required)),
+        expected_head=q["expected_head"], expected_index_tree=q["expected_index_tree"], scratch_parent=scratch)
+    _need(trusted_git.run_git(target, "rev-parse", q["base_commit"] + "^{tree}") == q["base_tree"],
+          "bounded_g2_ci_base_tree")
+    if q["phase"] == "development":
+        _need(q["expected_head"] == q["base_commit"] and q["expected_index_tree"] in
+              {q["base_tree"], q["candidate_tree"]}, "bounded_g2_ci_development_binding")
+    else:
+        headers = trusted_git.run_git(target, "cat-file", "commit", q["expected_head"]).split("\n\n", 1)[0].splitlines()
+        _need([x for x in headers if x.startswith("parent ")] == ["parent " + q["base_commit"]]
+              and [x for x in headers if x.startswith("tree ")] == ["tree " + q["candidate_tree"]]
+              and q["expected_index_tree"] == q["candidate_tree"], "bounded_g2_ci_committed_binding")
+    for path, snapshot in snapshots.items():
+        _need(trusted_git._read_regular_snapshot(path, maximum_bytes=2 * 1024 * 1024) == snapshot,
+              "bounded_g1b_snapshot_drift")
+    return BoundedG1BInputs(q, before, payloads, {"scope_review": seal, "preparation_review": review}, observation)
+
+
+def _validate_g2_ci_loaded_policy(inputs):
+    _validate_g2_ci_installed_policy(inputs.before)
+    try:
+        configuration = raisa_policy.validate_recovery_configuration(
+            documents={Path(p).name: inputs.payloads[p] for p in CONFIGURATION_PATHS},
+            expected_sha256={Path(p).name: inputs.binding["payload_sha256"][p] for p in CONFIGURATION_PATHS},
+            agents_text=inputs.payloads[AGENTS].decode("utf-8"), state=_json(inputs.payloads[STATE]))
+    except (raisa_policy.RaisaPolicyError, configuration_core.ConfigurationError) as error:
+        raise BoundedG1BError(error.reason_code) from error
+    return {p: inputs.payloads[p] for p in G2_TRANSITION_PATHS}, configuration
+
+
+# G2 closeout is a distinct state-only operation, never a G3 implementation grant.
+G2_CLOSEOUT_KIND = "accept_g2_closeout"
+G2_CLOSEOUT_BINDING_VERSION = "ariadne.g2_closeout_binding.v1"
+G2_CLOSEOUT_SCOPE_VERSION = "ariadne.g2_closeout_scope.v1"
+G2_CLOSEOUT_SCOPE = "orchestration/programme/g2-closeout-scope.json"
+G2_CLOSEOUT_PATHS = frozenset({STATE, GATES, OVERLAY, AGENTS, G2_CLOSEOUT_SCOPE})
+G2_CLOSEOUT_BEFORE_PATHS = frozenset({STATE, GATES, OVERLAY, AGENTS, G2_SCOPE})
+G2_CLOSEOUT_HELPER = "scripts/python_source_state.py"
+G2_CLOSEOUT_HELPER_SHA256 = "f430803e889b4c3aa0269e12dbff4d965eea2dec0917ac051d8d78225c67b61c"
+G2_CLOSEOUT_SOURCE_PATHS = SOURCE_PATHS | CONTROLLER_PATHS | {G2_CLOSEOUT_HELPER}
+G2_CLOSEOUT_INPUT_PATHS = G2_CATALOGUE_POLICY_PATHS | G2_CLOSEOUT_SOURCE_PATHS | G2_SIX_PATHS | G2_CLOSEOUT_PATHS
+G2_CLOSEOUT_CI_ROWS = ("python_compile", "ruff_e9_f401", "historical_diary_leakage",
+    "ordinary_test_collection_and_execution", "bandit_medium_high", "dependency_audit",
+    "empty_and_populated_migrations", "application_safety_controls")
+G2_CLOSEOUT_LIMITS = ("G2 accepted closeout only; G3 needs separate admission",
+    "no feature, runtime, provider, protected-ref, integration or deployment authority",
+    "historical operations, scopes, latches and consumed grants remain unchanged")
+OPERATION_PATHS[G2_CLOSEOUT_KIND] = G2_CLOSEOUT_PATHS
+BOUNDED_SCOPE_PATHS = BOUNDED_SCOPE_PATHS | {G2_CLOSEOUT_SCOPE}
+
+
+def _closeout_digest(value, reason="bounded_g2_closeout_digest"):
+    _need(type(value) is str and re.fullmatch(r"[0-9a-f]{64}", value) is not None, reason)
+    return value
+
+
+def _closeout_publication(value):
+    _keys(value, {"commit", "parent", "tree"}, "bounded_g2_closeout_publication")
+    _need(all(type(v) is str and re.fullmatch(r"[0-9a-f]{40}", v) for v in value.values()),
+          "bounded_g2_closeout_publication")
+    return value
+
+
+def _validate_g2_closeout_approval(approval):
+    """Authenticate the shape of prior independent judgments, not a new verdict."""
+    _keys(approval, {"schema_version", "verdict", "reviewer_agent", "implementer_ids",
+        "independent", "implementation_authorship", "blocking_findings", "pending",
+        "product_subject_sha256", "product_publication", "product_publication_review_sha256",
+        "prior_policy_sha256", "complete_selection", "trusted_context", "complete_context",
+        "criteria", "required_ci_map", "evidence_sha256", "ci_adoption"}, "bounded_g2_closeout_approval_schema")
+    _need(approval["schema_version"] == "emr4.g2_prior_closeout_acceptance.v1"
+          and approval["verdict"] == "accepted" and approval["pending"] == []
+          and approval["blocking_findings"] == [], "bounded_g2_closeout_acceptance_pending")
+    ids = approval["implementer_ids"]
+    _need(approval["reviewer_agent"] == "/root/g2_admission_review"
+          and approval["independent"] is True and approval["implementation_authorship"] is False
+          and type(ids) is list and ids and all(type(x) is str and x for x in ids)
+          and len(set(x.casefold() for x in ids)) == len(ids)
+          and approval["reviewer_agent"].casefold() not in {x.casefold() for x in ids},
+          "bounded_g2_closeout_independence")
+    _need(approval["product_subject_sha256"] == G2_SIX_SUBJECT_SHA256,
+          "bounded_g2_closeout_product_subject")
+    _closeout_publication(approval["product_publication"])
+    _closeout_digest(approval["product_publication_review_sha256"])
+    _digest_map(approval["prior_policy_sha256"], G2_CLOSEOUT_BEFORE_PATHS,
+                "bounded_g2_closeout_prior_policy")
+    for key in ("complete_selection", "trusted_context"):
+        _keys(approval[key], {"path", "sha256"}, "bounded_g2_closeout_complete_reference")
+        _closeout_digest(approval[key]["sha256"])
+    context = _keys(approval["complete_context"], {"plan_sha256", "authority_sha256", "source_sha256",
+        "config_sha256", "runtime_sha256", "verifier_sha256", "result_id"},
+        "bounded_g2_closeout_complete_context")
+    for key in context:
+        if key != "result_id":
+            _closeout_digest(context[key])
+    _need(type(context["result_id"]) is str and context["result_id"],
+          "bounded_g2_closeout_complete_context")
+    _validate_g2_ci_publication(approval["ci_adoption"])
+    evidence = approval["evidence_sha256"]
+    _need(type(evidence) is dict and 0 < len(evidence) <= 256,
+          "bounded_g2_closeout_evidence")
+    for digest in evidence.values():
+        _closeout_digest(digest)
+    _need(approval["product_publication_review_sha256"] in evidence.values(),
+          "bounded_g2_closeout_publication_review_unbound")
+    criteria = approval["criteria"]
+    _need(type(criteria) is list and len(criteria) == len(G2_CRITERIA),
+          "bounded_g2_closeout_criteria")
+    seen = set()
+    for row in criteria:
+        _keys(row, {"id", "verdict", "evidence_sha256"}, "bounded_g2_closeout_criterion_schema")
+        _need(row["id"] in G2_CRITERIA and row["id"] not in seen,
+              "bounded_g2_closeout_criteria")
+        _need(row["verdict"] == "passed" or (row["id"] == "dependency_audit_pass_or_explicit_exception"
+              and row["verdict"] == "explicit_exception_accepted"),
+              "bounded_g2_closeout_criterion_not_accepted")
+        _need(type(row["evidence_sha256"]) is list and row["evidence_sha256"]
+              and all(x in evidence.values() for x in row["evidence_sha256"]),
+              "bounded_g2_closeout_criterion_evidence_unbound")
+        seen.add(row["id"])
+    duties = approval["required_ci_map"]
+    _keys(duties, set(G2_CLOSEOUT_CI_ROWS), "bounded_g2_closeout_ci_duties")
+    _need(all(type(ids) is list and ids and all(type(x) is str and x for x in ids)
+              and len(ids) == len(set(ids)) for ids in duties.values()),
+          "bounded_g2_closeout_ci_duties")
+
+
+def _validate_g2_closeout_trusted_roles(approval, trusted):
+    """Join the fixed platform reviewer to its proof-safe identity only."""
+    _need(approval["reviewer_agent"] == "/root/g2_admission_review"
+          and "g2_admission_review" in trusted["reviewers"]
+          and set(trusted["implementers"]) == set(approval["implementer_ids"])
+          and "g2_admission_review" not in {x.casefold() for x in approval["implementer_ids"]},
+          "bounded_g2_closeout_trusted_context")
+
+
+def build_g2_closeout_scope(recorded_at, transition_base, approval):
+    """Pure scope of prior accepted evidence; final tree review stays external."""
+    _validate_g2_closeout_approval(approval)
+    try:
+        aware = type(recorded_at) is str and datetime.fromisoformat(recorded_at).tzinfo is not None
+    except ValueError:
+        aware = False
+    _need(aware, "bounded_g1b_timestamp_invalid")
+    _need(type(transition_base) is str and re.fullmatch(r"[0-9a-f]{40}", transition_base),
+          "bounded_g1b_transition_base_invalid")
+    return {"schema_version": G2_CLOSEOUT_SCOPE_VERSION, "recorded_at": recorded_at,
+        "transition_base_commit": transition_base, "operation_kind": G2_CLOSEOUT_KIND,
+        "allowed_paths": sorted(G2_CLOSEOUT_PATHS), "allowed_effects": sorted(EFFECTS),
+        "prior_acceptance_sha256": _sha(_canonical(approval)),
+        "prior_acceptance": copy.deepcopy(approval), "criteria": list(G2_CRITERIA),
+        "required_ci_rows": list(G2_CLOSEOUT_CI_ROWS), "g2_complete": True,
+        "g3_implementation_authorized": False, "execution_authorized": False,
+        "feature_work_eligible": False, "claim_limits": list(G2_CLOSEOUT_LIMITS)}
+
+
+def build_g2_closeout_transition(before, scope):
+    """Close G2 only; never consume or rewrite an earlier operation record."""
+    _keys(before, G2_CLOSEOUT_BEFORE_PATHS, "bounded_g2_closeout_before_paths")
+    expected = build_g2_closeout_scope(scope.get("recorded_at"), scope.get("transition_base_commit"),
+                                       scope.get("prior_acceptance"))
+    _need(_canonical(scope) == _canonical(expected), "bounded_g2_closeout_scope")
+    pins = scope["prior_acceptance"]["prior_policy_sha256"]
+    _need(all(type(before[p]) is bytes and _sha(before[p]) == pins[p] for p in before),
+          "bounded_g2_closeout_preimage")
+    state, gates, overlay = (_document(before[p], p) for p in (STATE, GATES, OVERLAY))
+    _need(state["programme_mode"] == "recovery" and state["current_gate"] == "G2" and state["current_gate_status"] == "active"
+          and state["active_profile"] == G2_PROFILE and state["g2"]["status"] == "active"
+          and state["g2"]["completion_accepted"] is False and "acceptance" not in state["g2"]
+          and state["g2"]["scope_sha256"] == _sha(before[G2_SCOPE])
+          and state["g2"]["current_operation"] == _json(before[G2_SCOPE])["current_operation"]
+          and state["feature_work_eligible"] is False and state["product_work_eligible"] is False,
+          "bounded_g2_closeout_predecessor")
+    by_id = {row["id"]: row for row in gates["gates"]}
+    _need(len(by_id) == len(gates["gates"]) and by_id["G2"]["exit_checks"] == list(G2_CRITERIA)
+          and by_id["G2"]["status"] == "active" and by_id["G3"]["status"] == "blocked_by_G2"
+          and gates["programme"]["current_gate"] == "G2"
+          and overlay["active_profile"] == G2_PROFILE,
+          "bounded_g2_closeout_gate_predecessor")
+    seal = _validate_g2_ci_installed_policy(before)
+    _need(scope["prior_acceptance"]["ci_adoption"]["manifest_sha256"] == seal["manifest_sha256"],
+          "bounded_g2_closeout_ci_adoption_unbound")
+    raw = _canonical(scope) + b"\n"
+    state.update(observed_at=scope["recorded_at"], current_gate_status="passed",
+                 active_profile=raisa_policy.G2_CLOSED_PROFILE)
+    state["g2"].update(status="passed", completion_accepted=True,
+        acceptance={"scope_path": G2_CLOSEOUT_SCOPE, "scope_sha256": _sha(raw),
+                    "prior_acceptance_sha256": scope["prior_acceptance_sha256"]})
+    state["global_checks"]["current_required_ci_acceptance"] = copy.deepcopy(
+        scope["prior_acceptance"]["complete_selection"])
+    state["global_checks"]["global_gate"] = "g2_accepted_closed"
+    state["task_selection"].update(allowed_task_kinds=[], next_eligible_tranche="G3",
+        next_eligible_now=False, next_tranche_started=False,
+        next_tranche_admission_requires_state_transition=True,
+        next_eligibility_condition="G2_accepted_G3_requires_separate_reviewed_admission")
+    gates["programme"].update(current_gate_status="passed", next_eligible_tranche="G3",
+                               prepared_at=scope["recorded_at"])
+    by_id["G2"]["status"] = "passed"
+    by_id["G3"]["status"] = "blocked_pending_separate_admission"
+    overlay["active_profile"] = raisa_policy.G2_CLOSED_PROFILE
+    overlay["profiles"][raisa_policy.G2_CLOSED_PROFILE] = raisa_policy.g2_accepted_closed_profile()
+    text = before[AGENTS].decode("utf-8")
+    _need(text.count(raisa_policy.G2_PREAMBLE) == 1, "bounded_g2_closeout_preamble")
+    text = text.replace(raisa_policy.G2_PREAMBLE, raisa_policy.G2_CLOSED_PREAMBLE, 1)
+    lines = text.splitlines(keepends=True)
+    positions = [i for i, line in enumerate(lines) if line.startswith("| Active programme gate |")]
+    _need(len(positions) == 1, "bounded_g2_closeout_instruction_row")
+    ending = "\r\n" if lines[positions[0]].endswith("\r\n") else "\n"
+    lines[positions[0]] = "| Active programme gate | G2 accepted and closed; G3 implementation requires separate reviewed admission. Runtime, providers and protected integration remain closed. |" + ending
+    return {STATE: (json.dumps(state, indent=2, ensure_ascii=False) + "\n").encode(),
+        GATES: yaml.safe_dump(gates, sort_keys=False, allow_unicode=True).encode(),
+        OVERLAY: yaml.safe_dump(overlay, sort_keys=False, allow_unicode=True).encode(),
+        AGENTS: "".join(lines).encode(), G2_CLOSEOUT_SCOPE: raw}
+
+
+def _load_closeout_helper(source, read):
+    """One additional closed-kind-only attested stdlib-only import; no discovery."""
+    import importlib.util
+    path = source / G2_CLOSEOUT_HELPER
+    raw = read(path, G2_CLOSEOUT_HELPER_SHA256)
+    spec = importlib.util.spec_from_file_location("_g2_closeout_complete_v3", path)
+    _need(spec is not None and spec.loader is not None, "bounded_g2_closeout_helper")
+    module = importlib.util.module_from_spec(spec)
+    exec(compile(raw, str(path), "exec", dont_inherit=True), module.__dict__)
+    return module
+
+
+def _load_g2_closeout_inputs(context, target, source, evidence_root, scratch, q, read, snapshots):
+    _keys(q, {"schema_version", "operation_id", "operation_kind", "phase", "base_commit", "base_tree",
+        "expected_head", "expected_index_tree", "candidate_tree", "source_sha256", "payload_sha256",
+        "prior_policy_sha256", "prior_acceptance_path", "prior_acceptance_sha256", "proof_sha256",
+        "installed_controller", "complete_source_sha256"}, "bounded_g2_closeout_binding_schema")
+    _need(q["schema_version"] == G2_CLOSEOUT_BINDING_VERSION and q["operation_kind"] == G2_CLOSEOUT_KIND,
+          "bounded_g2_closeout_binding_version")
+    _need(type(q["operation_id"]) is str and re.fullmatch(r"[a-z0-9][a-z0-9-]{1,79}", q["operation_id"]),
+          "bounded_g2_closeout_operation_id")
+    _need(q["phase"] in {"development", "pre-push", "post-push"}, "bounded_g2_closeout_phase")
+    _need(all(type(q[k]) is str and re.fullmatch(r"[0-9a-f]{40}", q[k]) for k in
+        ("base_commit", "base_tree", "candidate_tree", "expected_head", "expected_index_tree")),
+        "bounded_g2_closeout_git_binding")
+    source_pins = _digest_map(q["source_sha256"], G2_CLOSEOUT_SOURCE_PATHS, "bounded_g2_closeout_source_paths")
+    _need(source_pins[G2_CLOSEOUT_HELPER] == G2_CLOSEOUT_HELPER_SHA256
+          and source_pins["orchestration_harness/trusted_git.py"] ==
+          "4a856bffe2b68d7c7e1875152629c9024a32679b59d9b1ed8301c368d41ff527",
+          "bounded_g2_closeout_source_changed")
+    for path, digest in source_pins.items():
+        raw = read(source / path, digest)
+        _need(trusted_git.run_git_bytes(target, "cat-file", "blob", q["base_commit"] + ":" + path) == raw,
+              "bounded_g2_closeout_source_not_installed")
+    helper = _load_closeout_helper(source, read)
+    _validate_installed_controller(q["installed_controller"])
+    _batch_publication(target, q["installed_controller"], q["base_commit"])
+    for path, digest in q["installed_controller"]["source_sha256"].items():
+        _need(source_pins[path] == digest and _sha(trusted_git.run_git_bytes(target, "cat-file", "blob",
+            q["installed_controller"]["commit"] + ":" + path)) == digest,
+            "bounded_g2_closeout_controller_disagreement")
+    pins = _digest_map(q["payload_sha256"], G2_CLOSEOUT_INPUT_PATHS, "bounded_g2_closeout_payload_paths")
+    payloads = {p: read(target / p, digest) for p, digest in sorted(pins.items())}
+    before = {p: trusted_git.run_git_bytes(target, "cat-file", "blob", q["base_commit"] + ":" + p)
+              for p in G2_CLOSEOUT_BEFORE_PATHS}
+    _need(_digest_map(q["prior_policy_sha256"], G2_CLOSEOUT_BEFORE_PATHS,
+                     "bounded_g2_closeout_prior_policy") == {p: _sha(raw) for p, raw in before.items()},
+          "bounded_g2_closeout_preimage")
+    _need(trusted_git.run_git_bytes(target, "ls-tree", "-z", q["base_commit"], "--", G2_CLOSEOUT_SCOPE) == b"",
+          "bounded_g2_closeout_already_consumed")
+    for p in G2_CLOSEOUT_INPUT_PATHS - G2_CLOSEOUT_PATHS:
+        _need(trusted_git.run_git_bytes(target, "cat-file", "blob", q["base_commit"] + ":" + p) == payloads[p],
+              "bounded_g2_closeout_unowned_changed")
+    proof_pins = q["proof_sha256"]
+    _need(type(proof_pins) is dict and 0 < len(proof_pins) <= 258, "bounded_g2_closeout_proof_paths")
+    # The trusted caller's exact binding declares ordinary data paths before any read.
+    proof = {}
+    _need(len({p.casefold() for p in proof_pins if type(p) is str}) == len(proof_pins),
+          "bounded_g2_closeout_proof_path")
+    for p, digest in proof_pins.items():
+        helper._literal_path(p)
+        _closeout_digest(digest)
+        _need(p.startswith("orchestration/programme/g2-closeout-evidence/"),
+              "bounded_g2_closeout_proof_path")
+        proof[p] = read(target / p, digest)
+    # External prior judgment follows actual CI adoption. It cannot be an
+    # earlier CI payload which binds the policy containing that same map.
+    approval_path = q["prior_acceptance_path"]
+    _need(type(approval_path) is str and Path(approval_path).is_absolute(),
+          "bounded_g2_closeout_approval_unbound")
+    _closeout_digest(q["prior_acceptance_sha256"])
+    approval = _json(read(Path(approval_path), q["prior_acceptance_sha256"]))
+    _validate_g2_closeout_approval(approval)
+    _need(approval["prior_policy_sha256"] == q["prior_policy_sha256"], "bounded_g2_closeout_prior_policy")
+    seal = _validate_g2_ci_installed_policy(before)
+    _need(proof_pins == seal["manifest"]["proof_sha256"]
+          and approval["complete_selection"] == seal["manifest"]["complete_selection"]
+          and approval["trusted_context"] == seal["manifest"]["trusted_context"],
+          "bounded_g2_closeout_ci_proof_readback")
+    ci = _validate_g2_ci_publication(approval["ci_adoption"])
+    _need(ci["manifest_sha256"] == seal["manifest_sha256"], "bounded_g2_closeout_ci_adoption_unbound")
+    _validate_g2_ci_publication_review(ci, _json(read(Path(ci["review_path"]), ci["review_sha256"])))
+    _batch_publication(target, ci["publication"], q["base_commit"])
+    for p, pair in seal["manifest"]["changes"].items():
+        raw = read(target / p, pair["after_sha256"])
+        _need(raw == trusted_git.run_git_bytes(target, "cat-file", "blob", ci["publication"]["commit"] + ":" + p)
+              and raw == trusted_git.run_git_bytes(target, "cat-file", "blob", q["base_commit"] + ":" + p),
+              "bounded_g2_closeout_ci_payload_readback")
+    for ref in seal["manifest"]["caller"].values():
+        if type(ref) is dict:
+            raw = read(target / ref["path"], ref["sha256"])
+            _need(raw == trusted_git.run_git_bytes(target, "cat-file", "blob", ci["publication"]["commit"] + ":" + ref["path"])
+                  and raw == trusted_git.run_git_bytes(target, "cat-file", "blob", q["base_commit"] + ":" + ref["path"]),
+                  "bounded_g2_closeout_ci_caller_readback")
+    _validate_g2_ci_caller_bytes(seal["manifest"], read(target / seal["manifest"]["caller"]["workflow"]["path"],
+        seal["manifest"]["caller"]["workflow"]["sha256"]))
+    for p, digest in approval["evidence_sha256"].items():
+        _need(proof_pins.get(p) == digest, "bounded_g2_closeout_evidence_unbound")
+    # Authenticate the complete graph and bounded source allowlist before the
+    # unchanged complete-v3 loader can follow any reference. No discovery.
+    for key in ("complete_selection", "trusted_context"):
+        ref = approval[key]
+        _need(proof_pins.get(ref["path"]) == ref["sha256"], "bounded_g2_closeout_complete_unbound")
+    wrapper = _json(proof[approval["complete_selection"]["path"]])
+    _need(type(wrapper.get("artifacts")) is list and wrapper["artifacts"],
+          "bounded_g2_closeout_complete_unbound")
+    _need(all(type(row) is dict and proof_pins.get(row.get("path")) == row.get("sha256")
+              for row in wrapper["artifacts"]), "bounded_g2_closeout_complete_unbound")
+    selected = [row for row in wrapper["artifacts"] if row.get("id") == wrapper.get("bounded_selection")]
+    _need(len(selected) == 1, "bounded_g2_closeout_complete_unbound")
+    bounded = helper.validate_selection(_json(proof[selected[0]["path"]]))
+    selected_pins = {row["path"]: row["sha256"] for row in bounded["files"]}
+    _need(type(q["complete_source_sha256"]) is dict and q["complete_source_sha256"] == selected_pins,
+          "bounded_g2_closeout_complete_sources_unbound")
+    for p, digest in selected_pins.items():
+        helper._literal_path(p)
+        _need(p not in proof_pins and p not in G2_CLOSEOUT_PATHS,
+              "bounded_g2_closeout_proof_source_collision")
+        read(target / p, digest)
+    try:
+        trusted = helper.load_complete_context(approval["trusted_context"]["path"],
+            sha256=approval["trusted_context"]["sha256"], repo_root=target)
+        _need(trusted["context"] == approval["complete_context"],
+              "bounded_g2_closeout_trusted_context")
+        _validate_g2_closeout_trusted_roles(approval, trusted)
+        complete = helper.load_complete_selection(approval["complete_selection"]["path"],
+            selection_sha256=approval["complete_selection"]["sha256"], trusted_context=trusted, repo_root=target)
+    except helper.SourceStateError as error:
+        raise BoundedG1BError("bounded_g2_closeout_complete_" + str(error)) from error
+    _need({cid for ids in approval["required_ci_map"].values() for cid in ids} ==
+          {row["id"] for row in wrapper["required_checks"]}, "bounded_g2_closeout_ci_duties")
+    _need(complete["coverage"]["status"] == "authenticated_accepted_complete_evidence",
+          "bounded_g2_closeout_complete_not_accepted")
+    publication = approval["product_publication"]
+    _batch_publication(target, publication, q["base_commit"])
+    for p, pair in G2_SIX_REPAIR_PINS.items():
+        _need(_sha(payloads[p]) == pair["after_sha256"] and _sha(trusted_git.run_git_bytes(target,
+            "cat-file", "blob", publication["commit"] + ":" + p)) == pair["after_sha256"],
+            "bounded_g2_closeout_product_not_installed")
+    scope = _json(payloads[G2_CLOSEOUT_SCOPE])
+    _need(scope["prior_acceptance"] == approval and scope["transition_base_commit"] == q["base_commit"],
+          "bounded_g2_closeout_scope_disagreement")
+    expected = build_g2_closeout_transition(before, scope)
+    _need(all(payloads[p] == raw for p, raw in expected.items()), "bounded_g2_closeout_policy_delta")
+    attested = G2_CLOSEOUT_INPUT_PATHS - G2_CLOSEOUT_PATHS if q["phase"] == "development" else G2_CLOSEOUT_INPUT_PATHS
+    observation = trusted_git.attest_target_index(target, attested_paths=tuple(sorted(attested)),
+        expected_head=q["expected_head"], expected_index_tree=q["expected_index_tree"], scratch_parent=scratch)
+    _need(trusted_git.run_git(target, "rev-parse", q["base_commit"] + "^{tree}") == q["base_tree"],
+          "bounded_g2_closeout_base_tree")
+    if q["phase"] == "development":
+        _need(q["expected_head"] == q["base_commit"] and q["expected_index_tree"] in
+              {q["base_tree"], q["candidate_tree"]}, "bounded_g2_closeout_development_binding")
+    else:
+        headers = trusted_git.run_git(target, "cat-file", "commit", q["expected_head"]).split("\n\n", 1)[0].splitlines()
+        _need([x for x in headers if x.startswith("parent ")] == ["parent " + q["base_commit"]]
+              and [x for x in headers if x.startswith("tree ")] == ["tree " + q["candidate_tree"]]
+              and q["expected_index_tree"] == q["candidate_tree"], "bounded_g2_closeout_committed_binding")
+    for path, snapshot in snapshots.items():
+        _need(trusted_git._read_regular_snapshot(path, maximum_bytes=2 * 1024 * 1024) == snapshot,
+              "bounded_g1b_snapshot_drift")
+    return BoundedG1BInputs(q, before, payloads, proof, observation)
+
+
+def _validate_g2_closeout_loaded_policy(inputs):
+    after = {p: inputs.payloads[p] for p in G2_CLOSEOUT_PATHS}
+    expected = build_g2_closeout_transition(inputs.before, _json(after[G2_CLOSEOUT_SCOPE]))
+    _need(after == expected, "bounded_g2_closeout_policy_delta")
+    try:
+        configuration = raisa_policy.validate_recovery_configuration(
+            documents={Path(p).name: inputs.payloads[p] for p in CONFIGURATION_PATHS},
+            expected_sha256={Path(p).name: inputs.binding["payload_sha256"][p] for p in CONFIGURATION_PATHS},
+            agents_text=after[AGENTS].decode("utf-8"), state=_json(after[STATE]))
+    except (raisa_policy.RaisaPolicyError, configuration_core.ConfigurationError) as error:
+        raise BoundedG1BError(error.reason_code) from error
+    return after, configuration
+
+
+# Fixed V21 seven-path maintenance installer; old V20 builders and latches stay historical.
+G2_CLOSEOUT_ENABLE_KIND = "enable_g2_closeout_control"
+G2_CLOSEOUT_ENABLE_BINDING_VERSION = "ariadne.g2_closeout_enable_binding.v21"
+G2_CLOSEOUT_ENABLE_SCOPE_VERSION = "ariadne.g2_closeout_enable_scope.v21"
+G2_CLOSEOUT_ENABLE_PATHS = G2_BATCH_CODE_PATHS | G2_BATCH_CONTROL_PATHS | {G2_CLOSEOUT_HELPER}
+G2_CLOSEOUT_HELPER_PREIMAGE_SHA256 = "deda2e86f7a6cfc1f8da56e45dc420c896a24749324e326cfc54e576e11528de"
+G2_CLOSEOUT_ENABLE_INPUT_PATHS = G2_CATALOGUE_POLICY_PATHS | SOURCE_PATHS | CONTROLLER_PATHS | {G2_CLOSEOUT_HELPER}
+G2_CLOSEOUT_V20_PUBLICATION = {
+    "commit": "b5a1b76c578ccc9df9dbd8d27f1f933a06ef4211",
+    "parent": "7d9edaa404d912b53316fe868cad4de0bbc8bf60",
+    "tree": "474fd174067e079d97ddf447933730475132e6c8",
+}
+G2_CLOSEOUT_V20_SOURCE = {
+    "orchestration_harness/bounded_g1b.py": "ca77be8c6ac915b489cf027206d169801fe5715f80d52cd7087f06cc961d4c87",
+    "orchestration_harness/raisa_policy.py": "2575d02773ce740910cc30725041ee8e43ff430cb0b8a0ea4b0e0c7907ba20f8",
+    "tests/test_bounded_g1b.py": "1516efa540a571bcc2a673737faf52751903c1c6b3d61887ae17de5b91f972d8",
+    "orchestration_harness/configuration_core.py": "f7ba7a80eb0a590f9fb71b864e6c1f9f43241d9f7d70a38da67a9243fea208e5",
+    "orchestration_harness/programme_admission.py": "ac816a8a79b2d8222fa357777c075950927e86cf30c8a5b25ffd08a474052181",
+}
+G2_CLOSEOUT_V20_POLICY = {
+    STATE: "0905831ca51d16b14e7ae396737ad5b743102b69522a41b360b3d47513060874",
+    G2_SCOPE: "f30f74b6ae079743a47b6485069d63b675517fff47831014fa82dea069b3969c",
+    OVERLAY: "2b23f225682d3387188ad0321936dc27c22a1c282c10c084c2c2ffe8eb83f91d",
+    AGENTS: "97d6ea223508d53ee704a0cc3ceec383e2eea9f3db764376b538e8341bee886e",
+    GATES: "115a651a0b13156a591045638d1833a9a71347e7b1f7e694767eac49d2abc341",
+}
+G2_CLOSEOUT_V20_REVIEW_PINS = {
+    "commit": "e14cfd2529fd691ff0dcaf40fdf6ed4cb3a9a292068e615e3ac258db92ab7186",
+    "push": "29ee5e98bef25266fc0fcb26e83c5a86485e2a8d7f07dbd0ad86750fe0d7f400",
+}
+G2_CLOSEOUT_ENABLE_LIMITS = (
+    "fixed seven maintenance files only; product publication must precede installation",
+    "G2 remains active; prior scopes, latches and consumed grants remain historical",
+    "no closeout acceptance, G3, runtime, provider, protected or deployment authority",
+)
+OPERATION_PATHS[G2_CLOSEOUT_ENABLE_KIND] = G2_CLOSEOUT_ENABLE_PATHS
+
+
+def _closeout_enable_before(before):
+    _keys(before, G2_CLOSEOUT_BEFORE_PATHS, "bounded_g2_closeout_enable_before_paths")
+    _need(all(type(raw) is bytes and _sha(raw) == G2_CLOSEOUT_V20_POLICY[p]
+              for p, raw in before.items()), "bounded_g2_closeout_enable_preimage")
+    state, gates, overlay = (_document(before[p], p) for p in (STATE, GATES, OVERLAY))
+    prior = _json(before[G2_SCOPE])
+    _need(state["programme_mode"] == "recovery" and state["current_gate"] == "G2"
+          and state["current_gate_status"] == "active" and state["active_profile"] == G2_PROFILE
+          and state["g2"]["status"] == "active" and state["g2"]["completion_accepted"] is False
+          and "acceptance" not in state["g2"] and state["feature_work_eligible"] is False
+          and state["product_work_eligible"] is False
+          and state["g2"]["scope_sha256"] == _sha(before[G2_SCOPE])
+          and state["g2"]["current_operation"] == prior["current_operation"]
+          and prior["schema_version"] == G2_SIX_SCOPE_VERSION
+          and prior["repair_subject_sha256"] == G2_SIX_SUBJECT_SHA256,
+          "bounded_g2_closeout_enable_predecessor")
+    by_id = {row["id"]: row for row in gates["gates"]}
+    _need(len(by_id) == len(gates["gates"]) and by_id["G2"]["exit_checks"] == list(G2_CRITERIA)
+          and by_id["G2"]["status"] == "active" and by_id["G3"]["status"] == "blocked_by_G2"
+          and gates["programme"]["current_gate"] == "G2" and overlay["active_profile"] == G2_PROFILE
+          and overlay["profiles"][G2_PROFILE] == raisa_policy.g2_six_file_repair_profile(),
+          "bounded_g2_closeout_enable_gate_predecessor")
+    return state, overlay, prior
+
+
+def build_g2_closeout_enable_scope(before, recorded_at, product_publication, controller_sources, ci_adoption):
+    """Pure installer scope. Authored publication is not native publication proof."""
+    _, _, prior = _closeout_enable_before(before)
+    try:
+        aware = type(recorded_at) is str and datetime.fromisoformat(recorded_at).tzinfo is not None
+    except ValueError:
+        aware = False
+    _need(aware, "bounded_g1b_timestamp_invalid")
+    _closeout_publication(product_publication)
+    _need(product_publication["parent"] == G2_CLOSEOUT_V20_PUBLICATION["commit"]
+          and product_publication["tree"] == "553497967c1aa51369e6bcef05eaf817e8ce123a"
+          and product_publication["commit"] != product_publication["parent"],
+          "bounded_g2_closeout_enable_product_base")
+    sources = _digest_map(controller_sources, CONTROLLER_PATHS, "bounded_g2_closeout_enable_sources")
+    _need(all(sources[p] == G2_CLOSEOUT_V20_SOURCE[p] for p in CONTROLLER_PATHS - G2_BATCH_CODE_PATHS),
+          "bounded_g2_closeout_enable_unchanged_controller")
+    _need(all(sources[p] != G2_CLOSEOUT_V20_SOURCE[p] for p in G2_BATCH_CODE_PATHS),
+          "bounded_g2_closeout_enable_source_successor")
+    _validate_g2_ci_seal(ci_adoption)
+    scope = copy.deepcopy(prior)
+    scope.update(schema_version=G2_CLOSEOUT_ENABLE_SCOPE_VERSION, recorded_at=recorded_at,
+        transition_base_commit=product_publication["commit"], controller_source_sha256=sources,
+        enable_operation=G2_CLOSEOUT_ENABLE_KIND, repair_operation=G2_CLOSEOUT_KIND,
+        allowed_paths=sorted(G2_CLOSEOUT_PATHS | set(ci_adoption["manifest"]["changes"])),
+        maximum_changed_files=max(5, len(ci_adoption["manifest"]["changes"])),
+        allowed_additions=sorted({G2_CLOSEOUT_SCOPE} | {p for p, pair in ci_adoption["manifest"]["changes"].items()
+            if pair["before_sha256"] is None}), allowed_effects=sorted(EFFECTS),
+        ci_adoption=copy.deepcopy(ci_adoption),
+        forbidden_effects=raisa_policy.g2_closeout_preparation_profile()["forbidden_effects"],
+        preserved_six_file_scope=copy.deepcopy(prior),
+        installed_V20_publication=copy.deepcopy(G2_CLOSEOUT_V20_PUBLICATION),
+        product_publication=copy.deepcopy(product_publication),
+        maintenance_paths=sorted(G2_CLOSEOUT_ENABLE_PATHS),
+        maintenance_effects=sorted(EFFECTS),
+        closeout_helper={"path": G2_CLOSEOUT_HELPER, "before_sha256": G2_CLOSEOUT_HELPER_PREIMAGE_SHA256,
+            "after_sha256": G2_CLOSEOUT_HELPER_SHA256, "new_kind_only_import": True}, g2_complete=False,
+        g3_implementation_authorized=False, claim_limits=list(G2_CLOSEOUT_ENABLE_LIMITS))
+    scope["current_operation"] = {
+        **copy.deepcopy(prior["current_operation"]),
+        "operation_id": "g2-closeout-control-preparation", "status": "active",
+        "completion_accepted": False,
+        "supersedes": {"operation_id": prior["current_operation"]["operation_id"],
+            "scope_path": G2_SCOPE, "scope_commit": product_publication["commit"],
+            "scope_sha256": G2_CLOSEOUT_V20_POLICY[G2_SCOPE], "historical_latch_preserved": True,
+            "predecessor_completion_accepted": False}}
+    return scope
+
+
+def build_g2_closeout_enable_transition(before, scope):
+    state, overlay, _ = _closeout_enable_before(before)
+    expected = build_g2_closeout_enable_scope(before, scope.get("recorded_at"),
+        scope.get("product_publication"), scope.get("controller_source_sha256"), scope.get("ci_adoption"))
+    _need(_canonical(scope) == _canonical(expected), "bounded_g2_closeout_enable_scope")
+    raw = _canonical(scope) + b"\n"
+    state["observed_at"] = scope["recorded_at"]
+    state["g2"].update(scope_sha256=_sha(raw), current_operation=copy.deepcopy(scope["current_operation"]))
+    state["task_selection"].update(allowed_task_kinds=[G2_CLOSEOUT_CI_KIND, G2_CLOSEOUT_KIND], next_eligible_now=False,
+        next_eligibility_condition="G2_closeout_requires_all12_complete_v3_and_final_independent_review")
+    overlay["profiles"][G2_PROFILE] = raisa_policy.g2_closeout_preparation_profile(scope["allowed_paths"])
+    return {STATE: (json.dumps(state, indent=2, ensure_ascii=False) + "\n").encode(),
+        OVERLAY: yaml.safe_dump(overlay, sort_keys=False, allow_unicode=True).encode(), G2_SCOPE: raw}
+
+
+def _closeout_enable_changes(q):
+    _keys(q["repair_sha256"], G2_CLOSEOUT_ENABLE_PATHS, "bounded_g2_closeout_enable_paths")
+    for p, row in q["repair_sha256"].items():
+        _keys(row, {"before_sha256", "after_sha256"}, "bounded_g2_closeout_enable_pair")
+        _closeout_digest(row["before_sha256"])
+        _closeout_digest(row["after_sha256"])
+        expected = (G2_CLOSEOUT_V20_SOURCE[p] if p in G2_BATCH_CODE_PATHS
+                    else G2_CLOSEOUT_HELPER_PREIMAGE_SHA256 if p == G2_CLOSEOUT_HELPER
+                    else G2_CLOSEOUT_V20_POLICY[p])
+        _need(row["before_sha256"] == expected and row["before_sha256"] != row["after_sha256"],
+              "bounded_g2_closeout_enable_preimage")
+        if p == G2_CLOSEOUT_HELPER:
+            _need(row["after_sha256"] == G2_CLOSEOUT_HELPER_SHA256,
+                  "bounded_g2_closeout_enable_helper")
+        if p in G2_BATCH_CODE_PATHS:
+            _need(row["after_sha256"] == q["source_sha256"][p],
+                  "bounded_g2_closeout_enable_executing_source")
+    return q["repair_sha256"]
+
+
+def _load_g2_closeout_enable_inputs(context, target, source, evidence_root, scratch, q, read, snapshots):
+    _keys(q, {"schema_version", "operation_id", "operation_kind", "phase", "base_commit", "base_tree",
+        "expected_head", "expected_index_tree", "candidate_tree", "source_sha256", "payload_sha256",
+        "installed_controller", "repair_sha256", "product_publication", "publication_review_paths",
+        "product_publication_review_path", "product_publication_review_sha256"},
+        "bounded_g2_closeout_enable_binding_schema")
+    _need(q["schema_version"] == G2_CLOSEOUT_ENABLE_BINDING_VERSION
+          and q["operation_kind"] == G2_CLOSEOUT_ENABLE_KIND,
+          "bounded_g2_closeout_enable_binding_version")
+    _need(type(q["operation_id"]) is str and re.fullmatch(r"[a-z0-9][a-z0-9-]{1,79}", q["operation_id"]),
+          "bounded_g1b_operation_id")
+    _need(q["phase"] in {"development", "pre-push", "post-push"}, "bounded_g1b_phase")
+    _need(all(type(q[k]) is str and re.fullmatch(r"[0-9a-f]{40}", q[k]) for k in
+        ("base_commit", "base_tree", "expected_head", "expected_index_tree", "candidate_tree")),
+        "bounded_g2_closeout_enable_git_binding")
+    sources = _digest_map(q["source_sha256"], SOURCE_PATHS | CONTROLLER_PATHS,
+                          "bounded_g2_closeout_enable_source_paths")
+    _need(sources["orchestration_harness/trusted_git.py"] ==
+          "4a856bffe2b68d7c7e1875152629c9024a32679b59d9b1ed8301c368d41ff527",
+          "bounded_g2_closeout_enable_trusted_git")
+    changes = _closeout_enable_changes(q)
+    _need(q["installed_controller"] == {**G2_CLOSEOUT_V20_PUBLICATION, "source_sha256": G2_CLOSEOUT_V20_SOURCE},
+          "bounded_g2_closeout_enable_controller")
+    _batch_publication(target, q["installed_controller"], q["base_commit"])
+    for p, digest in sources.items():
+        raw = read(source / p, digest)
+        previous = trusted_git.run_git_bytes(target, "cat-file", "blob", q["base_commit"] + ":" + p)
+        if p in G2_BATCH_CODE_PATHS:
+            _need(_sha(previous) == G2_CLOSEOUT_V20_SOURCE[p], "bounded_g2_closeout_enable_source_preimage")
+        else:
+            _need(previous == raw, "bounded_g2_closeout_enable_unchanged_source")
+        if p in CONTROLLER_PATHS:
+            _need(_sha(trusted_git.run_git_bytes(target, "cat-file", "blob",
+                G2_CLOSEOUT_V20_PUBLICATION["commit"] + ":" + p)) == G2_CLOSEOUT_V20_SOURCE[p],
+                "bounded_g2_closeout_enable_controller")
+    publication = _closeout_publication(q["product_publication"])
+    _need(publication["commit"] == q["base_commit"] and publication["tree"] == q["base_tree"]
+          and publication["parent"] == G2_CLOSEOUT_V20_PUBLICATION["commit"],
+          "bounded_g2_closeout_enable_product_base")
+    _batch_publication(target, publication, q["base_commit"])
+    for p, row in G2_SIX_REPAIR_PINS.items():
+        _need(_sha(trusted_git.run_git_bytes(target, "cat-file", "blob",
+            q["base_commit"] + ":" + p)) == row["after_sha256"],
+            "bounded_g2_closeout_enable_product_not_published")
+    _keys(q["publication_review_paths"], {"commit", "push"}, "bounded_g2_closeout_enable_review_paths")
+    reviews = {}
+    for kind, pin in G2_CLOSEOUT_V20_REVIEW_PINS.items():
+        path = q["publication_review_paths"][kind]
+        _need(type(path) is str and Path(path).is_absolute(), "bounded_g2_closeout_enable_review_path")
+        row = _json(read(Path(path), pin))
+        _need(row.get("reviewer_agent") == "/root/g2_admission_review" and row.get("independent") is True
+              and row.get("implementation_authorship") is False and row.get("blocking_findings") == []
+              and row.get("verdict") == "PASS_ISOLATED_V20_MAINTENANCE_" + kind.upper() + "_EFFECT"
+              and all(row.get(k) == v for k, v in G2_CLOSEOUT_V20_PUBLICATION.items()),
+              "bounded_g2_closeout_enable_publication_review")
+        reviews[kind] = row
+    _closeout_digest(q["product_publication_review_sha256"])
+    product_path = q["product_publication_review_path"]
+    _need(type(product_path) is str and Path(product_path).is_absolute(), "bounded_g2_closeout_enable_review_path")
+    review = _json(read(Path(product_path), q["product_publication_review_sha256"]))
+    _need(review.get("reviewer_agent") == "/root/g2_admission_review" and review.get("independent") is True
+          and review.get("implementation_authorship") is False and review.get("blocking_findings") == []
+          and review.get("schema_version") == "emr4.isolated_six_product_push_effect_review.v1"
+          and review.get("verdict") == "PASS_ISOLATED_SIX_PRODUCT_PUSH_EFFECT"
+          and review.get("protected_refs_unchanged") is True and review.get("normal_nonforced_push") is True
+          and review.get("same_attempt_remote_readback_verified") is True
+          and review.get("index_sha256") == "27b9d88a270e51f9a09fa1b16e3f0dd5b076bb73e7f062c934f6fc444c08bbfd"
+          and type(review.get("result_sha256")) is str
+          and re.fullmatch(r"[0-9a-f]{64}", review["result_sha256"])
+          and review.get("remote_after") == {"refs/heads/codex/raisa-ariadne-recovery-g0": publication["commit"],
+              "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+              "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602"}
+          and all(review.get(k) == v for k, v in publication.items()),
+          "bounded_g2_closeout_enable_product_review")
+    pins = _digest_map(q["payload_sha256"], G2_CLOSEOUT_ENABLE_INPUT_PATHS,
+                       "bounded_g2_closeout_enable_payload_paths")
+    payloads = {p: read(target / p, digest) for p, digest in sorted(pins.items())}
+    before = {p: trusted_git.run_git_bytes(target, "cat-file", "blob", q["base_commit"] + ":" + p)
+              for p in G2_CLOSEOUT_BEFORE_PATHS}
+    _closeout_enable_before(before)
+    for p in G2_CLOSEOUT_ENABLE_INPUT_PATHS - G2_CLOSEOUT_ENABLE_PATHS:
+        _need(trusted_git.run_git_bytes(target, "cat-file", "blob", q["base_commit"] + ":" + p) == payloads[p],
+              "bounded_g2_closeout_enable_unowned_changed")
+    _need(_sha(trusted_git.run_git_bytes(target, "cat-file", "blob",
+        q["base_commit"] + ":" + G2_CLOSEOUT_HELPER)) == G2_CLOSEOUT_HELPER_PREIMAGE_SHA256,
+        "bounded_g2_closeout_enable_helper_preimage")
+    for p, row in changes.items():
+        _need(_sha(payloads[p]) == row["after_sha256"], "bounded_g2_closeout_enable_afterimage")
+    for p in G2_BATCH_CODE_PATHS:
+        _need(pins[p] == sources[p], "bounded_g2_closeout_enable_executing_source")
+    scope = _json(payloads[G2_SCOPE])
+    _need(scope["transition_base_commit"] == q["base_commit"] and scope["product_publication"] == publication
+          and scope["controller_source_sha256"] == {p: sources[p] for p in CONTROLLER_PATHS},
+          "bounded_g2_closeout_enable_scope_binding")
+    seal = _validate_g2_ci_seal(scope["ci_adoption"])
+    _validate_g2_ci_scope_review(seal, _json(read(Path(seal["review_path"]), seal["review_sha256"])))
+    expected = build_g2_closeout_enable_transition(before, scope)
+    _need(all(payloads[p] == raw for p, raw in expected.items()), "bounded_g2_closeout_enable_policy_delta")
+    attested = G2_CLOSEOUT_ENABLE_INPUT_PATHS - G2_CLOSEOUT_ENABLE_PATHS if q["phase"] == "development" else G2_CLOSEOUT_ENABLE_INPUT_PATHS
+    observation = trusted_git.attest_target_index(target, attested_paths=tuple(sorted(attested)),
+        expected_head=q["expected_head"], expected_index_tree=q["expected_index_tree"], scratch_parent=scratch)
+    _need(trusted_git.run_git(target, "rev-parse", q["base_commit"] + "^{tree}") == q["base_tree"],
+          "bounded_g1b_base_tree_changed")
+    if q["phase"] == "development":
+        _need(q["expected_head"] == q["base_commit"] and q["expected_index_tree"] in
+              {q["base_tree"], q["candidate_tree"]}, "bounded_g1b_development_binding")
+    else:
+        headers = trusted_git.run_git(target, "cat-file", "commit", q["expected_head"]).split("\n\n", 1)[0].splitlines()
+        _need([x for x in headers if x.startswith("parent ")] == ["parent " + q["base_commit"]]
+              and [x for x in headers if x.startswith("tree ")] == ["tree " + q["candidate_tree"]]
+              and q["expected_index_tree"] == q["candidate_tree"], "bounded_g1b_committed_binding")
+    for path, snapshot in snapshots.items():
+        _need(trusted_git._read_regular_snapshot(path, maximum_bytes=2 * 1024 * 1024) == snapshot,
+              "bounded_g1b_snapshot_drift")
+    return BoundedG1BInputs(q, before, payloads, reviews, observation)
+
+
+def _validate_g2_closeout_enable_loaded_policy(inputs):
+    expected = build_g2_closeout_enable_transition(inputs.before, _json(inputs.payloads[G2_SCOPE]))
+    _need(all(inputs.payloads[p] == raw for p, raw in expected.items()), "bounded_g2_closeout_enable_policy_delta")
+    try:
+        configuration = raisa_policy.validate_recovery_configuration(
+            documents={Path(p).name: inputs.payloads[p] for p in CONFIGURATION_PATHS},
+            expected_sha256={Path(p).name: inputs.binding["payload_sha256"][p] for p in CONFIGURATION_PATHS},
+            agents_text=inputs.payloads[AGENTS].decode("utf-8"), state=_json(inputs.payloads[STATE]))
+    except (raisa_policy.RaisaPolicyError, configuration_core.ConfigurationError) as error:
+        raise BoundedG1BError(error.reason_code) from error
+    return {p: inputs.payloads[p] for p in G2_TRANSITION_PATHS}, configuration
+
+
+
 def operation_effects(kind: str) -> frozenset[str]:
     if kind in {"repair_g2_migration", "repair_g2_migration_downgrade_guard",
                 "repair_g2_appointment_concurrency"}:
@@ -1567,11 +2518,28 @@ def operation_paths(kind: str, binding: dict | None = None) -> frozenset[str]:
         _need(type(binding) is dict and binding.get("operation_kind") == kind,
               "bounded_g2_batch_binding_required")
         return frozenset(_batch_changes(binding))
+    if kind == G2_CLOSEOUT_CI_KIND:
+        _need(type(binding) is dict and binding.get("operation_kind") == kind, "bounded_g2_ci_binding_required")
+        return frozenset(_validate_g2_ci_manifest(binding.get("ci_manifest"))["changes"])
     return OPERATION_PATHS[kind]
 
 
 def _operation(kind: str, binding: dict | None = None) -> dict:
     paths = operation_paths(kind, binding)
+    if kind == G2_CLOSEOUT_CI_KIND:
+        return {"paths": paths, "input_paths": G2_CATALOGUE_POLICY_PATHS | SOURCE_PATHS | CONTROLLER_PATHS | paths,
+                "transition_paths": G2_TRANSITION_PATHS, "scope_path": G2_SCOPE, "transition": False,
+                "ci_adoption": True, "profile": G2_PROFILE, "gate": "G2", "limits": G2_CLOSEOUT_LIMITS}
+    if kind == G2_CLOSEOUT_ENABLE_KIND:
+        return {"paths": paths, "input_paths": G2_CLOSEOUT_ENABLE_INPUT_PATHS,
+                "transition_paths": G2_TRANSITION_PATHS, "scope_path": G2_SCOPE,
+                "transition": True, "closeout_enable": True, "profile": G2_PROFILE,
+                "gate": "G2", "limits": G2_CLOSEOUT_ENABLE_LIMITS}
+    if kind == G2_CLOSEOUT_KIND:
+        return {"paths": paths, "input_paths": G2_CLOSEOUT_INPUT_PATHS,
+                "transition_paths": G2_CLOSEOUT_PATHS, "scope_path": G2_CLOSEOUT_SCOPE,
+                "transition": True, "closeout": True, "profile": raisa_policy.G2_CLOSED_PROFILE,
+                "gate": "G2", "limits": G2_CLOSEOUT_LIMITS}
     if kind in G2_BATCH_KINDS:
         return {"paths": paths, "input_paths": batch_input_paths(binding),
                 "transition_paths": G2_TRANSITION_PATHS, "scope_path": G2_SCOPE,
@@ -4396,6 +5364,14 @@ def load_bounded_g1b_inputs(context: BoundedG1BContext) -> BoundedG1BInputs:
         return snapshot[1]
 
     binding = _json(read(binding_path, context.expected_binding_sha256))
+    if binding.get("operation_kind") == G2_CLOSEOUT_CI_KIND:
+        return _load_g2_ci_adoption_inputs(context, target, source, evidence_root, scratch, binding, read, snapshots)
+    if binding.get("operation_kind") == G2_CLOSEOUT_ENABLE_KIND:
+        return _load_g2_closeout_enable_inputs(context, target, source, evidence_root, scratch,
+                                              binding, read, snapshots)
+    if binding.get("operation_kind") == G2_CLOSEOUT_KIND:
+        return _load_g2_closeout_inputs(context, target, source, evidence_root, scratch,
+                                       binding, read, snapshots)
     if type(binding.get("operation_kind")) is str and binding["operation_kind"] in G2_BATCH_KINDS:
         return _load_g2_batch_inputs(context, target, source, evidence_root, scratch,
                                      binding, read, snapshots)
@@ -4531,6 +5507,12 @@ def load_bounded_g1b_inputs(context: BoundedG1BContext) -> BoundedG1BInputs:
 
 def _validate_loaded_policy(inputs: BoundedG1BInputs) -> tuple[dict[str, bytes], configuration_core.ValidatedConfiguration | None]:
     operation = _operation(inputs.binding["operation_kind"], inputs.binding)
+    if operation.get("ci_adoption"):
+        return _validate_g2_ci_loaded_policy(inputs)
+    if operation.get("closeout_enable"):
+        return _validate_g2_closeout_enable_loaded_policy(inputs)
+    if operation.get("closeout"):
+        return _validate_g2_closeout_loaded_policy(inputs)
     if operation.get("batch"):
         return _validate_g2_batch_loaded_policy(inputs)
     after = {path: inputs.payloads[path] for path in operation["transition_paths"]}
@@ -4625,7 +5607,7 @@ def bounded_g1b_report(*, context: BoundedG1BContext | None, manifest: object,
             "status": "assessment_pass" if decision.assessment_passed else "policy_eligible" if decision.policy_admitted else "blocked", "read_only": True,
             "phase": phase, "requested_entrypoint": entrypoint, "programme_mode": "recovery",
             "current_gate": decision.current_gate, "active_profile": decision.active_profile,
-            "feature_work_eligible": False, "global_gate": "red_repair_only", "execution_authorized": False,
+            "feature_work_eligible": False, "global_gate": "g2_accepted_closed" if decision.policy_admitted and decision.active_profile == raisa_policy.G2_CLOSED_PROFILE else "red_repair_only", "execution_authorized": False,
             "reason_codes": list(decision.reason_codes), "failed_checks": list(decision.reason_codes),
             "candidate_tree": decision.candidate_tree, "binding_sha256": decision.binding_sha256,
             "observation_sha256": decision.observation_sha256, "claim_limits": list(decision.claim_limits),
