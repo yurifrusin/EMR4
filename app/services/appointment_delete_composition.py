@@ -17,6 +17,7 @@ from uuid import UUID
 
 from app.services.appointment_idempotency import hash_idempotency_key
 from app.services.appointment_delete_physical import (
+    DELETE_CONFIRM_BODY_CANONICALIZATION_VERSION,
     DELETE_CONFIRM_CANCELLATION_REASON_MAX,
     DELETE_CONFIRM_RECEIPT_VERSION,
     DELETE_CONFIRM_REASON_CODES,
@@ -518,23 +519,75 @@ def compose_delete_confirm(
         [DeleteConfirmPhysicalDecision, Mapping[str, Any]], DeleteConfirmEffectResult
     ],
     transaction_factory: TransactionFactory = delete_confirm_locked_transaction,
+    validated_body_hash: str | None = None,
+    deferred_admission_factory: Callable[
+        [], tuple[Mapping[str, Any], DeleteConfirmServerIngress, Mapping[str, Any]]
+    ] | None = None,
 ) -> DeleteConfirmCompositionResult:
     """Compose the admitted delete-only request without mounting the route."""
-    adapter_input = {
-        "structure": "valid",
-        "transport": copy.deepcopy(dict(transport)),
-        "server": server_ingress.as_adapter_mapping(),
-    }
+    deferred = deferred_admission_factory is not None
+    if not deferred:
+        adapter_input = {
+            "structure": "valid",
+            "transport": copy.deepcopy(dict(transport)),
+            "server": server_ingress.as_adapter_mapping(),
+        }
+        try:
+            admission = admission_adapter(adapter_input)
+        except (AttributeError, KeyError, TypeError, ValueError):
+            return _blocked("admission_input_invalid")
+        if admission.get("kind") != "kernel_request_ready":
+            return _map_admission_stop(admission)
     try:
-        admission = admission_adapter(adapter_input)
-    except (AttributeError, KeyError, TypeError, ValueError):
-        return _blocked("admission_input_invalid")
-    if admission.get("kind") != "kernel_request_ready":
-        return _map_admission_stop(admission)
-    try:
-        request = _validate_ready_request(admission, server_ingress)
+        request = None if deferred else _validate_ready_request(admission, server_ingress)
+        effective_transport = transport
+        canonicalization_version = 1
+        if deferred:
+            if not callable(deferred_admission_factory):
+                raise ValueError("deferred delete admission factory is invalid")
+            if (
+                not isinstance(validated_body_hash, str)
+                or len(validated_body_hash) != 64
+                or validated_body_hash != validated_body_hash.lower()
+            ):
+                raise ValueError("validated delete body hash is invalid")
+            bytes.fromhex(validated_body_hash)
+            key = transport["idempotency_key"]
+            target = transport["command"]["appointment_id"]
+            ledger_hash = validated_body_hash
+            canonicalization_version = DELETE_CONFIRM_BODY_CANONICALIZATION_VERSION
+        else:
+            if validated_body_hash is not None:
+                raise ValueError("full-body hash requires deferred delete admission")
+            key = request["idempotency_key"]
+            target = request["target_appointment_id"]
+            ledger_hash = request["request_digest"]
+
+        def resolve_admission() -> dict[str, Any]:
+            nonlocal request, effective_transport
+            if request is None:
+                prepared_transport, prepared_ingress, prepared_admission = (
+                    deferred_admission_factory()
+                )
+                if prepared_admission.get("kind") != "kernel_request_ready":
+                    raise _LockedAdmissionStopped(prepared_admission)
+                prepared_request = _validate_ready_request(
+                    prepared_admission, prepared_ingress
+                )
+                # The deferred proof cannot change the authenticated physical
+                # claim's identity, key, target or authority/session binding.
+                _validate_ready_request(prepared_admission, server_ingress)
+                if (
+                    prepared_request["idempotency_key"] != key
+                    or prepared_request["target_appointment_id"] != target
+                ):
+                    raise ValueError("deferred delete request changed claim binding")
+                request = prepared_request
+                effective_transport = prepared_transport
+            return request
+
         idempotency_key_hash = hash_idempotency_key(
-            request["idempotency_key"], idempotency_secret
+            key, idempotency_secret
         )
         session_digest = delete_confirm_session_binding_digest(
             secret=session_binding_secret,
@@ -543,24 +596,35 @@ def compose_delete_confirm(
             authenticated_session_id=server_ingress.session_id,
         )
         response_bytes: bytes | None = None
-        with transaction_factory(
-            db,
-            practice_id=server_ingress.practice_id,
-            target_appointment_id=request["target_appointment_id"],
-            actor_user_id=str(server_ingress.actor_id),
-            actor_role=server_ingress.actor_role,
-            idempotency_key_hash=idempotency_key_hash,
-            request_body_hash=request["request_digest"],
-            session_binding_digest=session_digest,
-            signed_authority_generation=request["authority_generation"],
-        ) as decision:
+        transaction_arguments = {
+            "practice_id": server_ingress.practice_id,
+            "target_appointment_id": target,
+            "actor_user_id": str(server_ingress.actor_id),
+            "actor_role": server_ingress.actor_role,
+            "idempotency_key_hash": idempotency_key_hash,
+            "request_body_hash": ledger_hash,
+            "session_binding_digest": session_digest,
+            "signed_authority_generation": server_ingress.authority_generation,
+        }
+        if deferred:
+            transaction_arguments.update(
+                request_body_canonicalization_version=canonicalization_version,
+                legacy_request_body_hash_factory=lambda: resolve_admission()["request_digest"],
+            )
+        with transaction_factory(db, **transaction_arguments) as decision:
             if decision.kind == "new_command":
+                request = resolve_admission()
+                locked_server = dict(
+                    locked_server_factory(decision.appointment, server_ingress)
+                )
+                if locked_server.get("kind") == "stopped":
+                    if locked_server.get("effect_authority") is not False:
+                        raise ValueError("locked admission stop has invalid authority")
+                    raise _LockedAdmissionStopped(locked_server)
                 locked_input = {
                     "structure": "valid",
-                    "transport": copy.deepcopy(dict(transport)),
-                    "server": dict(
-                        locked_server_factory(decision.appointment, server_ingress)
-                    ),
+                    "transport": copy.deepcopy(dict(effective_transport)),
+                    "server": locked_server,
                 }
                 try:
                     locked_admission = admission_adapter(locked_input)

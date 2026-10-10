@@ -16,6 +16,7 @@ from app.models.appointments import (
     AppointmentStatus,
 )
 from app.models.tenancy import User, UserRole
+from app.services.appointment_idempotency import sha256_canonical_json
 from app.schemas.appointments import (
     AppointmentDeleteProposalConfirmationIn,
     AppointmentDeleteProposalOut,
@@ -633,8 +634,36 @@ def _locked_server_factory(
     body: AppointmentDeleteProposalConfirmationIn,
     authenticated_user: User,
     evidence_secret: str,
+    authenticated_snapshot_factory: Callable[[], DeleteConfirmServerIngress] | None = None,
 ) -> Callable[[Any, DeleteConfirmServerIngress], Mapping[str, Any]]:
     def build(appointment: Any, ingress: DeleteConfirmServerIngress) -> Mapping[str, Any]:
+        if authenticated_snapshot_factory is not None:
+            # This branch is available only after the original signed snapshot
+            # and version binding passed unchanged admission on a new claim.
+            snapshot = authenticated_snapshot_factory()
+            if (
+                snapshot.evidence_status != "verified"
+                or snapshot.evidence_binding != "exact"
+                or snapshot.authority_current is not True
+                or snapshot.practice_id != ingress.practice_id
+                or snapshot.actor_id != ingress.actor_id
+                or snapshot.actor_role != ingress.actor_role
+                or snapshot.authority_generation != ingress.authority_generation
+                or snapshot.session_id != ingress.session_id
+                or str(appointment.id) != snapshot.current_state["appointment_id"]
+                or appointment.practice_id != snapshot.practice_id
+            ):
+                return _stop("signed_confirmation_evidence_invalid", "confirmation_required")
+            live_freshness = delete_proposal_freshness_id(
+                body.delete_proposal.command, appointment_delete_state(appointment)
+            )
+            if (
+                body.delete_proposal_freshness_id != live_freshness
+                or body.delete_proposal.delete_proposal_freshness_id != live_freshness
+            ):
+                # A valid original proof can be stale. It never becomes live
+                # effect authority merely because its original signature is valid.
+                return _stop("stale_delete_proposal_freshness_id", "stale_precondition")
         return _locked_server_ingress(
             body=body,
             authenticated_user=authenticated_user,
@@ -818,34 +847,78 @@ def compose_product_delete_confirm(
     if not isinstance(idempotency_key, str) or not idempotency_key.strip():
         return _error(409, "idempotency_key_required")
 
-    # ---- Stage C: transport and pre-command ingress ----
+    # ---- Stage C: typed body hash and server-owned claim identity only ----
     try:
-        transport = _transport(body, idempotency_key=idempotency_key)
-        ingress = _proposal_server_ingress(
-            body=body,
-            authenticated_user=authenticated_user,
-            session_reference=session_reference,
-            evidence_secret=evidence_secret,
-            proposal_version_binding=proposal_version_binding,
-            proposal_version_binding_secret=proposal_version_binding_secret,
+        if not isinstance(body, AppointmentDeleteProposalConfirmationIn):
+            raise _DeleteConfirmProposalBlocked("unsupported_delete_confirm_variant")
+        if not isinstance(body.delete_proposal, AppointmentDeleteProposalOut):
+            raise _DeleteConfirmProposalBlocked("unsupported_delete_confirm_variant")
+        validated_body_hash = sha256_canonical_json(body.model_dump(mode="json"))
+        transport = {
+            "idempotency_key": idempotency_key.strip(),
+            "command": delete_command_payload(body.delete_proposal.command),
+        }
+        ingress = DeleteConfirmServerIngress(
+            practice_id=authenticated_user.practice_id,
+            actor_id=authenticated_user.id,
+            actor_role=_enum_value(authenticated_user.role),
+            authority_generation=authority_generation,
+            session_id=session_reference,
+            authority_current=True,
+            current_state={"appointment_id": transport["command"]["appointment_id"]},
+            expected_freshness_id="",
+            evidence_status="deferred",
+            evidence_purpose=DELETE_CONFIRM_EVIDENCE_PURPOSE,
+            expected_evidence_purpose=DELETE_CONFIRM_EVIDENCE_PURPOSE,
+            evidence_binding="deferred",
         )
     except _DeleteConfirmProposalBlocked as exc:
         return _blocked(exc.reason)
     except (AttributeError, TypeError, ValueError):
         return _blocked("unsupported_delete_confirm_variant")
 
-    # ---- Stage D: pre-command admission gate ----
-    adapter_input = {
-        "structure": "valid",
-        "transport": copy.deepcopy(dict(transport)),
-        "server": ingress.as_adapter_mapping(),
-    }
-    try:
-        admission = delete_confirm_admission_adapter(adapter_input)
-    except (AttributeError, KeyError, TypeError, ValueError):
-        return _blocked("admission_input_invalid")
-    if admission.get("kind") != "kernel_request_ready":
-        return _map_admission_stop(admission)
+    # ---- Stage D: original admission deferred to new v2 or legacy v1 ----
+    authenticated_snapshot: DeleteConfirmServerIngress | None = None
+
+    def prepare_admission() -> tuple[
+        Mapping[str, Any], DeleteConfirmServerIngress, Mapping[str, Any]
+    ]:
+        nonlocal authenticated_snapshot
+        try:
+            if sha256_canonical_json(body.model_dump(mode="json")) != validated_body_hash:
+                return transport, ingress, _stop("validated_delete_body_changed")
+            prepared_transport = _transport(body, idempotency_key=idempotency_key)
+            prepared_ingress = _proposal_server_ingress(
+                body=body,
+                authenticated_user=authenticated_user,
+                session_reference=session_reference,
+                evidence_secret=evidence_secret,
+                proposal_version_binding=proposal_version_binding,
+                proposal_version_binding_secret=proposal_version_binding_secret,
+            )
+        except _DeleteConfirmProposalBlocked as exc:
+            return transport, ingress, _stop(exc.reason)
+        except (AttributeError, TypeError, ValueError):
+            return transport, ingress, _stop("unsupported_delete_confirm_variant")
+        adapter_input = {
+            "structure": "valid",
+            "transport": copy.deepcopy(dict(prepared_transport)),
+            "server": prepared_ingress.as_adapter_mapping(),
+        }
+        try:
+            admission = delete_confirm_admission_adapter(adapter_input)
+        except (AttributeError, KeyError, TypeError, ValueError):
+            admission = _stop("admission_input_invalid")
+        if admission.get("kind") == "kernel_request_ready":
+            authenticated_snapshot = prepared_ingress
+        return prepared_transport, prepared_ingress, admission
+
+    def original_snapshot() -> DeleteConfirmServerIngress:
+        if sha256_canonical_json(body.model_dump(mode="json")) != validated_body_hash:
+            raise ValueError("validated delete body changed after claim")
+        if authenticated_snapshot is None:
+            raise ValueError("authenticated original delete snapshot is unavailable")
+        return authenticated_snapshot
 
     # ---- Stage E: open the command session and compose ----
     try:
@@ -864,6 +937,7 @@ def compose_product_delete_confirm(
                 body=body,
                 authenticated_user=authenticated_user,
                 evidence_secret=evidence_secret,
+                authenticated_snapshot_factory=original_snapshot,
             ),
             stage_effect=_stage_effect(
                 db=command_db,
@@ -872,6 +946,8 @@ def compose_product_delete_confirm(
                 session_reference=session_reference,
             ),
             transaction_factory=_uuid_bound_transaction_factory(transaction_factory),
+            validated_body_hash=validated_body_hash,
+            deferred_admission_factory=prepare_admission,
         )
 
 

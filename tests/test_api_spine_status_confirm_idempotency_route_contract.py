@@ -1,3 +1,4 @@
+import ast
 from datetime import date, datetime, time, timezone
 from pathlib import Path
 
@@ -194,6 +195,125 @@ def test_status_confirm_contract_records_deepseek_family_selection_review():
     assert "DeepSeek" in text
 
 
+def _source_function(module, name):
+    return next(node for node in module.body
+                if isinstance(node, ast.FunctionDef) and node.name == name)
+
+
+def _source_call(function, name):
+    calls = [node for node in ast.walk(function)
+             if isinstance(node, ast.Call) and isinstance(node.func, ast.Name)
+             and node.func.id == name]
+    assert len(calls) == 1
+    return calls[0]
+
+
+def _assert_source_statement(nodes, source):
+    expected = ast.dump(ast.parse(source).body[0])
+    assert any(ast.dump(node) == expected for node in nodes)
+
+
+def _source_dict_value(mapping, key):
+    assert isinstance(mapping, ast.Dict)
+    return next(value for candidate, value in zip(mapping.keys, mapping.values)
+                if isinstance(candidate, ast.Constant) and candidate.value == key)
+
+
+def _source_keyword(call, name):
+    values = [keyword.value for keyword in call.keywords if keyword.arg == name]
+    assert len(values) == 1
+    return values[0]
+
+
+def _assert_delegated_delete_route_family(router_text):
+    router = ast.parse(router_text)
+    adapter = ast.parse(_read(ROOT / "app" / "services" / "appointment_delete_product_adapter.py"))
+    composition = ast.parse(_read(ROOT / "app" / "services" / "appointment_delete_composition.py"))
+    for module, source, imported in (
+        (router, "app.services.appointment_delete_product_adapter", "compose_product_delete_confirm"),
+        (adapter, "app.services.appointment_delete_composition", "compose_delete_confirm"),
+    ):
+        assert any(isinstance(node, ast.ImportFrom) and node.module == source
+                   and any(alias.name == imported and alias.asname is None for alias in node.names)
+                   for node in module.body)
+    for module in (adapter, composition):
+        _assert_source_statement(module.body, 'DELETE_CONFIRM_ROUTE_FAMILY = "delete-confirm"')
+
+    route = _source_function(router, "confirm_delete_proposal_route")
+    product_call = _source_call(route, "compose_product_delete_confirm")
+    assert ast.dump(product_call.args[0]) == ast.dump(ast.Name(id="body", ctx=ast.Load()))
+
+    product = _source_function(adapter, "compose_product_delete_confirm")
+    prepare = next(node for node in product.body
+                   if isinstance(node, ast.FunctionDef) and node.name == "prepare_admission")
+    _assert_source_statement(ast.walk(prepare),
+                             "prepared_transport = _transport(body, idempotency_key=idempotency_key)")
+    prepared_input = next(node.value for node in ast.walk(prepare)
+                          if isinstance(node, ast.Assign)
+                          and any(isinstance(target, ast.Name) and target.id == "adapter_input"
+                                  for target in node.targets))
+    assert ast.dump(_source_dict_value(prepared_input, "transport")) == ast.dump(
+        ast.parse("copy.deepcopy(dict(prepared_transport))", mode="eval").body)
+    _assert_source_statement(ast.walk(prepare),
+                             "admission = delete_confirm_admission_adapter(adapter_input)")
+    _assert_source_statement(prepare.body,
+                             "return prepared_transport, prepared_ingress, admission")
+    transport = _source_function(adapter, "_transport")
+    transport_result = next(node.value for node in transport.body if isinstance(node, ast.Return))
+    route_family = _source_dict_value(transport_result, "route_family")
+    assert isinstance(route_family, ast.Name) and route_family.id == "DELETE_CONFIRM_ROUTE_FAMILY"
+    compose_call = _source_call(product, "compose_delete_confirm")
+    assert any(isinstance(node, ast.Return) and node.value is compose_call
+               for node in ast.walk(product))
+    assert ast.dump(compose_call.args[0]) == ast.dump(ast.Name(id="transport", ctx=ast.Load()))
+    admission_adapter = _source_keyword(compose_call, "admission_adapter")
+    assert isinstance(admission_adapter, ast.Name)
+    assert admission_adapter.id == "delete_confirm_admission_adapter"
+    deferred_factory = _source_keyword(compose_call, "deferred_admission_factory")
+    assert isinstance(deferred_factory, ast.Name) and deferred_factory.id == prepare.name
+
+    compose = _source_function(composition, "compose_delete_confirm")
+    _assert_source_statement(ast.walk(compose),
+                             "request = None if deferred else _validate_ready_request(admission, server_ingress)")
+    resolve = next(node for node in ast.walk(compose)
+                   if isinstance(node, ast.FunctionDef) and node.name == "resolve_admission")
+    _assert_source_statement(ast.walk(resolve),
+                             "prepared_transport, prepared_ingress, prepared_admission = deferred_admission_factory()")
+    _assert_source_statement(ast.walk(resolve),
+                             "prepared_request = _validate_ready_request(prepared_admission, prepared_ingress)")
+    _assert_source_statement(ast.walk(resolve),
+                             "_validate_ready_request(prepared_admission, server_ingress)")
+    _assert_source_statement(ast.walk(resolve), "request = prepared_request")
+    _assert_source_statement(ast.walk(resolve), "effective_transport = prepared_transport")
+    _assert_source_statement(resolve.body, "return request")
+    new_command = next(node for node in ast.walk(compose)
+                       if isinstance(node, ast.If)
+                       and ast.dump(node.test) == ast.dump(
+                           ast.parse('decision.kind == "new_command"', mode="eval").body))
+    _assert_source_statement(new_command.body, "request = resolve_admission()")
+    locked_input = next(node.value for node in ast.walk(new_command)
+                        if isinstance(node, ast.Assign)
+                        and any(isinstance(target, ast.Name) and target.id == "locked_input"
+                                for target in node.targets))
+    assert ast.dump(_source_dict_value(locked_input, "transport")) == ast.dump(
+        ast.parse("copy.deepcopy(dict(effective_transport))", mode="eval").body)
+    _assert_source_statement(ast.walk(new_command),
+                             "locked_admission = admission_adapter(locked_input)")
+    _assert_source_statement(ast.walk(new_command),
+                             "locked_request = _validate_ready_request(locked_admission, server_ingress)")
+    validator = _source_function(composition, "_validate_ready_request")
+    expected = next(node.value for node in validator.body
+                    if isinstance(node, ast.Assign)
+                    and any(isinstance(target, ast.Name) and target.id == "expected"
+                            for target in node.targets))
+    family = _source_dict_value(expected, "route_family")
+    assert isinstance(family, ast.Name) and family.id == "DELETE_CONFIRM_ROUTE_FAMILY"
+    _assert_source_statement(validator.body,
+        'for field, value in expected.items():\n'
+        '    if request.get(field) != value:\n'
+        '        raise ValueError(f"admitted request disagrees with server-owned {field}")')
+
+
 def test_current_router_wires_status_confirm_idempotency_surface():
     router_text = _read(ROUTER)
     status_route = _route_body(
@@ -225,7 +345,7 @@ def test_current_router_wires_status_confirm_idempotency_surface():
     assert "_UPDATE_CONFIRM_ROUTE_FAMILY" in update_route
     assert "Header(" in delete_route
     assert "Idempotency-Key" in delete_route
-    assert "_DELETE_CONFIRM_ROUTE_FAMILY" in delete_route
+    _assert_delegated_delete_route_family(router_text)
 
 
 def test_existing_status_confirm_tests_cover_semantics_to_preserve():

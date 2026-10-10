@@ -5757,6 +5757,12 @@ def _apply_appointment_delete(
     )
     if commit:
         db.commit()
+        # Commit clears the transaction-local tenant context used by RLS.
+        # Rebind only the already authenticated, captured practice for readback.
+        db.execute(
+            text("SELECT set_config('app.current_practice_id', :practice_id, true)"),
+            {"practice_id": str(practice_id)},
+        )
     else:
         db.flush()
     return _get_appointment(appointment_id, practice_id, db)

@@ -15,7 +15,7 @@ import uuid
 from contextlib import contextmanager
 from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
-from typing import Iterator, Literal, Sequence
+from typing import Callable, Iterator, Literal, Sequence
 from uuid import UUID
 
 from sqlalchemy import func, select, text
@@ -34,6 +34,7 @@ from app.services.appointment_idempotency import _as_aware_utc
 DELETE_CONFIRM_OPERATION_ID = "confirmAppointmentDeleteProposal"
 DELETE_CONFIRM_ROUTE_FAMILY = "delete-confirm"
 DELETE_CONFIRM_RECEIPT_VERSION = 1
+DELETE_CONFIRM_BODY_CANONICALIZATION_VERSION = 2
 DELETE_CONFIRM_SESSION_DOMAIN = b"appointment-delete-session:v1"
 DELETE_CONFIRM_CAPABILITY = "appointment.cancel.confirm"
 DELETE_CONFIRM_GENERATION_MAX = 9223372036854775807
@@ -252,7 +253,9 @@ def _delete_receipt_v1_complete(record: AppointmentCommandIdempotency) -> bool:
         and record.operation_id == DELETE_CONFIRM_OPERATION_ID
         and record.route_family == DELETE_CONFIRM_ROUTE_FAMILY
         and record.result_kind == "confirmed_write"
-        and record.request_body_canonicalization_version == 1
+        and record.request_body_canonicalization_version in {
+            1, DELETE_CONFIRM_BODY_CANONICALIZATION_VERSION
+        }
         and isinstance(record.authority_generation, int)
         and record.authority_generation >= 1
         and isinstance(record.session_binding_digest, bytes)
@@ -290,6 +293,7 @@ def _delete_write_set_complete(
     pre_state_version: int,
     pre_status: object,
     waiting_area_before_id: UUID | None,
+    request_body_canonicalization_version: int = 1,
 ) -> bool:
     """Require the exact three-artifact delete write set before commit."""
     if audit is None or not _delete_receipt_v1_complete(record):
@@ -321,7 +325,8 @@ def _delete_write_set_complete(
         and record.authority_generation == signed_authority_generation
         and record.request_body_hash == request_body_hash
         and record.idempotency_key_hash == idempotency_key_hash
-        and record.request_body_canonicalization_version == 1
+        and record.request_body_canonicalization_version
+        == request_body_canonicalization_version
         and isinstance(record.session_binding_digest, bytes)
         and hmac.compare_digest(record.session_binding_digest, session_binding_digest)
         and record.pre_state_version == pre_state_version
@@ -363,6 +368,7 @@ def _bindings_match(
     request_body_hash: str,
     session_binding_digest: bytes,
     signed_authority_generation: int,
+    request_body_canonicalization_version: int = 1,
 ) -> bool:
     return bool(
         record.operation_id == DELETE_CONFIRM_OPERATION_ID
@@ -370,7 +376,8 @@ def _bindings_match(
         and record.actor_role == actor_role
         and record.target_appointment_id == target_appointment_id
         and record.request_body_hash == request_body_hash
-        and record.request_body_canonicalization_version == 1
+        and record.request_body_canonicalization_version
+        == request_body_canonicalization_version
         and record.authority_generation == signed_authority_generation
         and isinstance(record.session_binding_digest, bytes)
         and hmac.compare_digest(record.session_binding_digest, session_binding_digest)
@@ -422,6 +429,8 @@ def delete_confirm_locked_transaction(
     request_body_hash: str,
     session_binding_digest: bytes,
     signed_authority_generation: int,
+    request_body_canonicalization_version: int = 1,
+    legacy_request_body_hash_factory: Callable[[], str] | None = None,
 ) -> Iterator[DeleteConfirmPhysicalDecision]:
     """Compose, but do not mount, the accepted ordered transaction boundary.
 
@@ -457,6 +466,17 @@ def delete_confirm_locked_transaction(
         )
     _lowercase_sha256(idempotency_key_hash, "idempotency_key_hash")
     _lowercase_sha256(request_body_hash, "request_body_hash")
+    if (
+        isinstance(request_body_canonicalization_version, bool)
+        or not isinstance(request_body_canonicalization_version, int)
+        or request_body_canonicalization_version
+        not in {1, DELETE_CONFIRM_BODY_CANONICALIZATION_VERSION}
+    ):
+        raise ValueError("delete request canonicalization version is unsupported")
+    if legacy_request_body_hash_factory is not None and not callable(
+        legacy_request_body_hash_factory
+    ):
+        raise ValueError("legacy request digest factory is invalid")
     if (
         not isinstance(session_binding_digest, bytes)
         or len(session_binding_digest) != 32
@@ -548,7 +568,7 @@ def delete_confirm_locked_transaction(
                     route_family=DELETE_CONFIRM_ROUTE_FAMILY,
                     idempotency_key_hash=idempotency_key_hash,
                     request_body_hash=request_body_hash,
-                    request_body_canonicalization_version=1,
+                    request_body_canonicalization_version=request_body_canonicalization_version,
                     state="in_progress",
                     target_appointment_id=target_uuid,
                     session_binding_digest=session_binding_digest,
@@ -588,6 +608,23 @@ def delete_confirm_locked_transaction(
         pre_status = _enum_value(appointment.status)
         waiting_area_before_id = appointment.waiting_area_id
 
+        # Historical v1 hashes bind admitted kernel semantics, not the full
+        # validated body. Recompute them only through the original authenticated
+        # admission path; never relabel a row or infer retroactive body equality.
+        binding_hash = request_body_hash
+        binding_version = request_body_canonicalization_version
+        if (
+            not inserted
+            and record.request_body_canonicalization_version == 1
+            and request_body_canonicalization_version
+            == DELETE_CONFIRM_BODY_CANONICALIZATION_VERSION
+        ):
+            if legacy_request_body_hash_factory is None:
+                raise DeleteConfirmPhysicalError("legacy request validation unavailable")
+            binding_hash = legacy_request_body_hash_factory()
+            _lowercase_sha256(binding_hash, "legacy_request_body_hash")
+            binding_version = 1
+
         if inserted:
             decision = DeleteConfirmPhysicalDecision(
                 kind="new_command",
@@ -600,9 +637,10 @@ def delete_confirm_locked_transaction(
             record,
             actor_role=actor_role,
             target_appointment_id=target_uuid,
-            request_body_hash=request_body_hash,
+            request_body_hash=binding_hash,
             session_binding_digest=session_binding_digest,
             signed_authority_generation=signed_authority_generation,
+            request_body_canonicalization_version=binding_version,
         ):
             decision = DeleteConfirmPhysicalDecision(
                 kind="conflict",
@@ -688,6 +726,7 @@ def delete_confirm_locked_transaction(
                 pre_state_version=pre_state_version,
                 pre_status=pre_status,
                 waiting_area_before_id=waiting_area_before_id,
+                request_body_canonicalization_version=request_body_canonicalization_version,
             ):
                 raise DeleteConfirmScaffoldIncomplete(
                     "atomic delete-confirm v1 write set is incomplete"

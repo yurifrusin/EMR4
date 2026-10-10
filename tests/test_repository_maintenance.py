@@ -840,17 +840,39 @@ def test_scanner_clis_reject_bad_binding_before_loader_or_scanner(
 
 
 def test_phase0_migration_has_empty_bootstrap_and_symmetric_cleanup():
+    import ast
+
     source = (
         ROOT / "alembic/versions/d4787e8e3629_phase_0_baseline.py"
     ).read_text(encoding="utf-8")
-
     assert "emr4_phase0_empty_bootstrap_marker" in source
     assert "def _prepare_legacy_baseline()" in source
-    assert "Phase-0 legacy baseline is incomplete" in source
+    assert "Phase-0 refuses incomplete or unexpected legacy tables" in source
     assert "def _is_empty_database_bootstrap()" in source
-    assert 'op.drop_table("mbs_directory")' in source
-    assert 'op.drop_table("snomed_directory")' in source
-    assert "type_name.typtype = 'e'" in source
+
+    # Directory cleanup is now a loop restricted to an owned fresh bootstrap.
+    # PostgreSQL preservation behavior is covered by test_phase0_migration_preservation.
+    tree = ast.parse(source)
+    downgrade = next(node for node in tree.body
+                     if isinstance(node, ast.FunctionDef) and node.name == "downgrade")
+    drops = [node for node in ast.walk(downgrade)
+             if isinstance(node, ast.Call) and isinstance(node.func, ast.Attribute)
+             and isinstance(node.func.value, ast.Name) and node.func.value.id == "op"
+             and node.func.attr == "drop_table"]
+    assert len(drops) == 1
+    fresh_loops = [loop for branch in ast.walk(downgrade)
+                   if isinstance(branch, ast.If) and isinstance(branch.test, ast.Name)
+                   and branch.test.id == "fresh"
+                   for loop in branch.body if isinstance(loop, ast.For)
+                   and drops[0] in list(ast.walk(loop))]
+    assert len(fresh_loops) == 1
+    loop = fresh_loops[0]
+    assert {"mbs_directory", "snomed_directory"} <= set(ast.literal_eval(loop.iter))
+    assert isinstance(loop.target, ast.Name)
+    assert len(drops[0].args) == 1 and isinstance(drops[0].args[0], ast.Name)
+    assert drops[0].args[0].id == loop.target.id
+    assert [(kw.arg, ast.literal_eval(kw.value)) for kw in drops[0].keywords] == [("schema", "public")]
+    assert "t.typtype = 'e'" in source
 
 
 class _CiBIntSubclass(int):
