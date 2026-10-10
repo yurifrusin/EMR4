@@ -1,0 +1,441 @@
+{
+  "schema": "emr4.g2.sibling_postclaim_independent_result_review.v3",
+  "verdict": "PASS_SIBLING_POSTCLAIM_SCOPED_RESULT",
+  "reviewer_agent": "/root/g2_admission_review",
+  "independent": true,
+  "implementation_authorship": false,
+  "selected_model": "gpt-6.1-sol",
+  "selected_reasoning": "high",
+  "provider_resolved_settings_observable": false,
+  "descendants": 0,
+  "blocking_findings": [],
+  "passed": true,
+  "result_sha256": "78be74fec9e990e847104629a8297d54293d141d757dac68db6efe377b392636",
+  "execution_binding_sha256": "784a67d3d0c16fab497340e3dec3551dd9bae0b9369131aa9d545900a88e0078",
+  "execution_review_sha256": "c6ed617ea1f1db6378bb14833fe41598b75ef3e81dc1e29a5e03242e6e04316e",
+  "source_review_sha256": "536d95aaa0a6aceabb486a186e9ca3e32e44c0a26e403c6383a13f68149330a9",
+  "source_manifest_sha256": "64be652b67d8a4e9031b0c59b3e30e46b235b59eb9d53013c960d3356cfdbe79",
+  "source_binding_sha256": "6b4710c7df62c30ce79ad28de5e986677daedb23fbe6f19553d69a43153191b2",
+  "test_sha256": "c79beb824ad6b4c40ba6a268307f9f21164bc47985e93faf27c5f574ab2bc630",
+  "owner_extension_sha256": "7bbe572b361f1ae7dbc81514e617d6fc8eb714e177729626d1d06915a49108ce",
+  "actual_attempt": {
+    "native_attempt": 3,
+    "native_exit": 0,
+    "native_elapsed_seconds": 17.52422670001397,
+    "outer_elapsed_seconds": 16.167102335995878,
+    "child_elapsed_seconds": 14.311712,
+    "started_sha256": "262aeb3f5c5d9230cf724c28559222caa35988e56d12e36a22406f24d8a0d950",
+    "child_intent_sha256": "8d5be7830a6a6912338dbd8a411d3a5e8bd4cd47e4cf942a1dd007546b5319bb",
+    "child_result_sha256": "41dd4467a712d620fb26119b556169874a9d2f066dd4916df2eaadcdd877d93c",
+    "primary_sha256": "4617b02c319e0a2af37e6f2c96b630e69c2e5bedcbc85e420d38ad859649e8f7",
+    "actual_collection_runs": 1,
+    "actual_test_runs": 1,
+    "actual_reset_events": 3,
+    "pytest_cases": 3,
+    "passed_setup_call_teardown_phases": 9,
+    "collection_errors": 0,
+    "internal_errors": 0,
+    "deselected": 0,
+    "automatic_retry": false
+  },
+  "case_outcomes": {
+    "confirmation_current/test_sibling_postclaim_rejections.py::test_bernie_selection_mismatch_rejection_rolls_back_real_started_claim": {
+      "call": "passed",
+      "setup": "passed",
+      "teardown": "passed"
+    },
+    "confirmation_current/test_sibling_postclaim_rejections.py::test_staff_stale_freshness_rejection_rolls_back_real_started_claim": {
+      "call": "passed",
+      "setup": "passed",
+      "teardown": "passed"
+    },
+    "confirmation_current/test_sibling_postclaim_rejections.py::test_update_competing_appointment_rejection_rolls_back_real_started_claim": {
+      "call": "passed",
+      "setup": "passed",
+      "teardown": "passed"
+    }
+  },
+  "accepted_properties": [
+    {
+      "case": "confirmation_current/test_sibling_postclaim_rejections.py::test_staff_stale_freshness_rejection_rolls_back_real_started_claim",
+      "property": "Real native started/in_progress staff-create claim then stale_create_proposal_freshness_id targeted rejection; safeFalse/autonomyblocked, independently persisted appointment/audit/ledger snapshots unchanged and exact uncommitted claim absent after rollback."
+    },
+    {
+      "case": "confirmation_current/test_sibling_postclaim_rejections.py::test_bernie_selection_mismatch_rejection_rolls_back_real_started_claim",
+      "property": "Valid session-bound Bernie selection/create proposal then selection_create_proposal_mismatch targeted rejection; safeFalse/appointmentNone, real started claim rolled back, full persisted appointment/audit/ledger snapshots and Bernie session event count unchanged."
+    },
+    {
+      "case": "confirmation_current/test_sibling_postclaim_rejections.py::test_update_competing_appointment_rejection_rolls_back_real_started_claim",
+      "property": "Valid signed aware UTC update proposal overlaps independently committed same-practitioner competitor; exact update_proposal_revalidation_blocked plus appointment_conflict, safeFalse/autonomyblocked, real started claim rolled back, full persisted snapshots unchanged and both appointments remain Booked09:00/10:00."
+    }
+  ],
+  "instrumentation_qualification": "Exact source wrapper delegates to original claim function, demands decision.started/current in_progress row, independently verifies uncommitted invisibility and returns original decision without policy substitution or injected downstream error. After response each case requires exactly one observed claim and independently verifies its absence plus full persisted rows. Tests instrument observation; application writes and real PostgreSQL transactions remain current guarded source.",
+  "cleanup": {
+    "attached_process": {
+      "client_pid": 30256,
+      "client_closed": true,
+      "readers_closed": true,
+      "reader_errors": [],
+      "output_overflow": false,
+      "output_complete": true
+    },
+    "native_container": {
+      "container_id": "cbfc3869ba8eeb073c94683ca7f9064231af8756c67c07ce8e85d2ed4bf6228e",
+      "exit_code": 0,
+      "oom_killed": false,
+      "restart_count": 0,
+      "container_absent": true,
+      "created_volumes": false
+    },
+    "postgresql_stop": {
+      "database_stop_attempted": true,
+      "database_stopped": true
+    },
+    "process_attempts": [
+      {
+        "cleanup_attempted": false,
+        "launch_attempted": true,
+        "phase": "initdb",
+        "pid": 7,
+        "returncode": 0
+      },
+      {
+        "cleanup_attempted": false,
+        "launch_attempted": true,
+        "phase": "pg-start",
+        "pid": 20,
+        "returncode": 0
+      },
+      {
+        "cleanup_attempted": false,
+        "launch_attempted": true,
+        "phase": "tenant-child",
+        "pid": 30,
+        "returncode": 0
+      },
+      {
+        "cleanup_attempted": false,
+        "launch_attempted": true,
+        "phase": "pg-stop",
+        "pid": 63,
+        "returncode": 0
+      }
+    ],
+    "child_all_connections_closed": true,
+    "child_live_threads": [],
+    "child_threads_after_pytest": [],
+    "engine_disposal": {
+      "admin": {
+        "attempts": 1,
+        "checked_out_before_dispose": 0,
+        "status": "PASS"
+      },
+      "command": {
+        "attempts": 1,
+        "checked_out_before_dispose": 0,
+        "status": "PASS"
+      },
+      "global_app_engine": {
+        "attempts": 1,
+        "checked_out_before_dispose": 0,
+        "status": "PASS"
+      },
+      "observer": {
+        "attempts": 1,
+        "checked_out_before_dispose": 0,
+        "status": "PASS"
+      },
+      "request": {
+        "attempts": 1,
+        "checked_out_before_dispose": 0,
+        "status": "PASS"
+      }
+    },
+    "confirmation_lifecycle": {
+      "adapter_consumed": true,
+      "balanced_checkout_records": true,
+      "closed_lifetime_denials": 2,
+      "global_engine_never_used_by_case": true,
+      "global_engine_post_close_connect_denied": true,
+      "reset_attempts": 3,
+      "reset_budget_denied": true
+    },
+    "outside_cascade_final_counts_invariant": true,
+    "outside_cascade_initial_counts": {
+      "application_auth_audit_events": 0,
+      "application_auth_exchange_grants": 0,
+      "application_auth_parent_sessions": 0,
+      "application_auth_principal_generations": 0,
+      "application_auth_surface_sessions": 0,
+      "application_auth_synthetic_principal_truth": 0,
+      "application_identity_federation_admission_grants": 0,
+      "application_identity_federation_audit_events": 0,
+      "application_identity_federation_bindings": 0,
+      "application_identity_oidc_authorization_attempts": 0,
+      "mbs_directory": 0,
+      "snomed_directory": 0
+    },
+    "outside_cascade_final_counts": {
+      "application_auth_audit_events": 0,
+      "application_auth_exchange_grants": 0,
+      "application_auth_parent_sessions": 0,
+      "application_auth_principal_generations": 0,
+      "application_auth_surface_sessions": 0,
+      "application_auth_synthetic_principal_truth": 0,
+      "application_identity_federation_admission_grants": 0,
+      "application_identity_federation_audit_events": 0,
+      "application_identity_federation_bindings": 0,
+      "application_identity_oidc_authorization_attempts": 0,
+      "mbs_directory": 0,
+      "snomed_directory": 0
+    },
+    "fresh_owned_container_query": {
+      "returncode": 1,
+      "stdout": "[]\n",
+      "stderr": "Error response from daemon: No such container: emr4-g2-sibling-postclaim-20261009-attempt03\n"
+    },
+    "prestart_identity": {
+      "name": "/emr4-g2-sibling-postclaim-20261009-attempt03",
+      "container_id": "cbfc3869ba8eeb073c94683ca7f9064231af8756c67c07ce8e85d2ed4bf6228e",
+      "image_id": "sha256:192e420d4057bc851bb8db5af2495c35281fca92e56a76cec7f32cf8d3a6e1f9",
+      "host_mounts": [
+        {
+          "Type": "bind",
+          "Source": "C:\\Users\\there\\EMR4-migration\\20260911-v1\\current-control-repair-20260912-v1\\g2-completion-20261008-v1\\ordinary-applicability\\sibling-postclaim-execution-preparation-v3\\case",
+          "Target": "/case",
+          "ReadOnly": true
+        },
+        {
+          "Type": "bind",
+          "Source": "C:\\Users\\there\\EMR4-migration\\20260911-v1\\current-control-repair-20260912-v1\\g2-completion-20261008-v1\\ordinary-applicability\\sibling-postclaim-execution-preparation-v3\\capsule",
+          "Target": "/capsule",
+          "ReadOnly": true
+        }
+      ],
+      "host_tmpfs": {
+        "/run/g2": "rw,noexec,nosuid,nodev,size=536870912,mode=0700,uid=10001,gid=10001",
+        "/tmp": "rw,noexec,nosuid,nodev,size=33554432,mode=1777",
+        "/var/lib/postgresql/data": "ro,noexec,nosuid,nodev,size=1048576,mode=0000"
+      },
+      "runtime_mounts": [
+        {
+          "Type": "bind",
+          "Source": "C:\\Users\\there\\EMR4-migration\\20260911-v1\\current-control-repair-20260912-v1\\g2-completion-20261008-v1\\ordinary-applicability\\sibling-postclaim-execution-preparation-v3\\case",
+          "Destination": "/case",
+          "Mode": "",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "C:\\Users\\there\\EMR4-migration\\20260911-v1\\current-control-repair-20260912-v1\\g2-completion-20261008-v1\\ordinary-applicability\\sibling-postclaim-execution-preparation-v3\\capsule",
+          "Destination": "/capsule",
+          "Mode": "",
+          "RW": false,
+          "Propagation": "rprivate"
+        }
+      ],
+      "network_mode": "none",
+      "readonly_rootfs": true,
+      "state": {
+        "running": false,
+        "status": "created"
+      }
+    }
+  },
+  "guarded_source": {
+    "bound_loaded_module_count": 139,
+    "unbound_loaded_paths": [],
+    "denials": [],
+    "ipv6_advertised": false,
+    "source_case_rows": 140,
+    "current_ordinary_counterparts": 133,
+    "all_post_pins_unchanged": true,
+    "post_checks": 317,
+    "post_failures": [],
+    "post_utc": "2026-10-09T02:11:03.979912+00:00"
+  },
+  "durable_capture": {
+    "stdout_bytes": 9924,
+    "stdout_sha256": "fb403ff45e60006e74d79e7c95db1d5f6f72db28b8725aadbdb64cc7eda709f9",
+    "stderr_bytes": 0,
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "unique_sanitized_bundle": true,
+    "decoded_records": [
+      {
+        "bytes": 2659,
+        "name": "result.json",
+        "sha256": "4e49ed56397efae0da797b6aac73e59816c928abcb7021ca3ecfa763282ef489"
+      },
+      {
+        "bytes": 22134,
+        "name": "tenant-result.json",
+        "sha256": "41dd4467a712d620fb26119b556169874a9d2f066dd4916df2eaadcdd877d93c"
+      },
+      {
+        "bytes": 1111,
+        "name": "tenant-primary.json",
+        "sha256": "4617b02c319e0a2af37e6f2c96b630e69c2e5bedcbc85e420d38ad859649e8f7"
+      },
+      {
+        "bytes": 400,
+        "name": "child-intent.json",
+        "sha256": "8d5be7830a6a6912338dbd8a411d3a5e8bd4cd47e4cf942a1dd007546b5319bb"
+      },
+      {
+        "bytes": 624,
+        "name": "initdb-reserved.json",
+        "sha256": "6afbf678929f91cf97f7f94af79bc6e664eaa701e64d370332e3dd76ef188943"
+      },
+      {
+        "bytes": 603,
+        "name": "initdb-started.json",
+        "sha256": "4c6a38d98c213a8f48edddf114be2e6dbe7ee55eec1e40a0534e5970d176ded8"
+      },
+      {
+        "bytes": 101,
+        "name": "initdb-finished.json",
+        "sha256": "fe237158fbc22bed055dfcba5e0df8aa6b3e502e146bff857e348b900b219253"
+      },
+      {
+        "bytes": 520,
+        "name": "pg-start-reserved.json",
+        "sha256": "3c2d6c2caa6124415f859f12743c0879b0f70eb3542baf066236ae0e068bce4c"
+      },
+      {
+        "bytes": 500,
+        "name": "pg-start-started.json",
+        "sha256": "2ca9443f12a1157bfbf97008079858470f769f21c95817c6f52795a32c07da77"
+      },
+      {
+        "bytes": 103,
+        "name": "pg-start-finished.json",
+        "sha256": "3debd676f5f06b466daaeae041dbe213def66231c689c616ed0ecac623bd6828"
+      },
+      {
+        "bytes": 787,
+        "name": "tenant-child-reserved.json",
+        "sha256": "df9837ca246e5f0376df18f00d6715fa533b1f0ac11a7f5ab9927c936793a491"
+      },
+      {
+        "bytes": 767,
+        "name": "tenant-child-started.json",
+        "sha256": "0476aeaea02a0692956f711e85317dc78a0f539670022e19d32dff9e5e6be683"
+      },
+      {
+        "bytes": 106,
+        "name": "tenant-child-finished.json",
+        "sha256": "05c59de6f2acec2691e8ec337b5e5382242b086d2cfa3dc93b00509e5a614e47"
+      },
+      {
+        "bytes": 497,
+        "name": "pg-stop-reserved.json",
+        "sha256": "f9159ae6c77dbf93dddc0ffc0ab9d210b6fd8c91134acab84451309997cfcc2e"
+      },
+      {
+        "bytes": 477,
+        "name": "pg-stop-started.json",
+        "sha256": "9ae14523a9c5fc4d794673161f2d013bca3e58ce4a8b70af62fbe094996c4c8d"
+      },
+      {
+        "bytes": 102,
+        "name": "pg-stop-finished.json",
+        "sha256": "f05df0da835ac8ab4608e0a1a2e8aad3cb92468298fb32ee09da562ae30beaaa"
+      },
+      {
+        "bytes": 812,
+        "name": "initdb.log",
+        "sha256": "8c3f537a774885ba1b86d6fa60d25593ca48146fcbc912ee0a20600ccfbc5857"
+      },
+      {
+        "bytes": 52,
+        "name": "pg-start.log",
+        "sha256": "66afd0411ccc09366e99fdd99b85f21899c8d2d064f5835126859618802153ad"
+      },
+      {
+        "bytes": 0,
+        "name": "tenant-child.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "bytes": 56,
+        "name": "pg-stop.log",
+        "sha256": "ca19178a35ab4153b75b494963b66ce8243e1b94c173107c87b44d09db23652d"
+      },
+      {
+        "bytes": 1302,
+        "name": "postgresql.log",
+        "sha256": "646e430556578d9971b55b58f6a56e93dbc15257146360365b4987212c9cdb4c"
+      }
+    ],
+    "compressed_sha_and_length_and_all_records_verified": true,
+    "outer_equals_native_primary": true,
+    "child_primary_equals_durable_pytest_primary": true,
+    "complete": true,
+    "overflow": false,
+    "diagnostic_logs": {
+      "logs": [
+        {
+          "name": "initdb.log",
+          "raw_bytes_read": 812,
+          "retained_raw_byte_limit": 4194304,
+          "truncated": false
+        },
+        {
+          "name": "pg-start.log",
+          "raw_bytes_read": 52,
+          "retained_raw_byte_limit": 4194304,
+          "truncated": false
+        },
+        {
+          "name": "tenant-child.log",
+          "raw_bytes_read": 0,
+          "retained_raw_byte_limit": 4194304,
+          "truncated": false
+        },
+        {
+          "name": "pg-stop.log",
+          "raw_bytes_read": 56,
+          "retained_raw_byte_limit": 4194304,
+          "truncated": false
+        },
+        {
+          "name": "postgresql.log",
+          "raw_bytes_read": 1302,
+          "retained_raw_byte_limit": 4194304,
+          "truncated": false
+        }
+      ],
+      "status": "complete"
+    },
+    "captured_child_output": {
+      "diagnostics": "redacted structured primary and phase errors",
+      "raw_output_suppressed": true,
+      "retained_characters": 4750,
+      "truncated": false
+    }
+  },
+  "budget_disposition": {
+    "attempt03_final_allocation_consumed": true,
+    "total_native_attempts_consumed": 3,
+    "total_collection_reservations_consumed": 3,
+    "total_test_reservations_consumed": 3,
+    "actual_cumulative_collection_runs": 2,
+    "actual_cumulative_test_runs": 2,
+    "actual_cumulative_reset_events": 6,
+    "attempt02_actual_collection_test_reset": 0,
+    "all_old_grants_and_nonpass_records_unchanged": true,
+    "no_automatic_retry_or_further_execution_under_allocation": true
+  },
+  "support_evidence_limits": [
+    "Bootstrap/migration/grants/catalogue/connection guards are supporting isolation controls, not additional original-case credit.",
+    "Observed all five engines disposed with0checkouts, no live threads/connections, three reset events and exhaustion denial, balanced checkout records, global engine unused by case/post-close denied, final outside-cascade equality, PGstop and exact ownedcontainerabsence resolve prior cleanup uncertainty for this actual attempt.",
+    "Current case observations prove these three named rejection/rollback paths after real claim and before business writes. They do not prove arbitrary failures after business mutation, concurrent transaction interleavings or other variants.",
+    "Previous v1 failed update/cleanup uncertainty and v2 opaque precollection refusal are preserved; no retrospectively accepted cases or rewritten failures."
+  ],
+  "claim_limits": [
+    "Independent scoped acceptance of3current synthetic cases/9phases, not original97/allnamedtestcount/fullCI/G2completion/globalruntime or publication acceptance.",
+    "No accepted FIRST/delete/O1 counts transferred, no repeated native checks or retries, no protected/providers/realdata/publiclistener.",
+    "Reviewer performed only exact retained receipt/source/hash/static analysis, read-only ownedcontainerquery and assigned review write; no application/DB/test/collection/cleanup/Git effect."
+  ]
+}

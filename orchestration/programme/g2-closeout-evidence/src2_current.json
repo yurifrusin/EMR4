@@ -1,0 +1,64 @@
+{
+  "schema": "emr4.authenticated_cohort_support_projection.v1",
+  "cohort_id": "src2_current",
+  "collection": [
+    "confirmation_current/test_confirmation_state_receipt_two_failures.py::test_signed_non_session_bernie_replay_has_no_second_effect",
+    "confirmation_current/test_confirmation_state_receipt_two_failures.py::test_delete_replay_preserves_receipt_after_intervening_raw_soft_cancel"
+  ],
+  "phase_rows": [
+    {
+      "nodeid": "confirmation_current/test_confirmation_state_receipt_two_failures.py::test_signed_non_session_bernie_replay_has_no_second_effect",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_confirmation_state_receipt_two_failures.py::test_signed_non_session_bernie_replay_has_no_second_effect",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_confirmation_state_receipt_two_failures.py::test_signed_non_session_bernie_replay_has_no_second_effect",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_confirmation_state_receipt_two_failures.py::test_delete_replay_preserves_receipt_after_intervening_raw_soft_cancel",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_confirmation_state_receipt_two_failures.py::test_delete_replay_preserves_receipt_after_intervening_raw_soft_cancel",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_confirmation_state_receipt_two_failures.py::test_delete_replay_preserves_receipt_after_intervening_raw_soft_cancel",
+      "phase": "teardown",
+      "outcome": "passed"
+    }
+  ],
+  "source_primary": {
+    "path": "C:\\Users\\there\\EMR4-migration\\20260911-v1\\current-control-repair-20260912-v1\\g2-completion-20261008-v1\\ordinary-applicability\\confirmation-state-receipt-execution-preparation-v9\\decoded-reports\\tenant-primary.json",
+    "sha256": "e0bfa3bccc2f1e7c2f4afc6758d59ca2dd0c778cfb521938e8e0d1328d89a46b",
+    "collection_path": [
+      "collected"
+    ],
+    "reports_path": [
+      "reports"
+    ]
+  },
+  "source_result": {
+    "path": "C:\\Users\\there\\EMR4-migration\\20260911-v1\\current-control-repair-20260912-v1\\g2-completion-20261008-v1\\ordinary-applicability\\confirmation-state-receipt-execution-preparation-v9\\result.json",
+    "sha256": "19556c25ea730f08ea964b9df0b7adcbe029b0fa84cfe2125ff34714f3d39ca8"
+  },
+  "source_tenant_result": {
+    "path": "C:\\Users\\there\\EMR4-migration\\20260911-v1\\current-control-repair-20260912-v1\\g2-completion-20261008-v1\\ordinary-applicability\\confirmation-state-receipt-execution-preparation-v9\\decoded-reports\\tenant-result.json",
+    "sha256": "aa0791fa480c76378f0eab0d5d910298db5f5bc4e58932d707f510ce1a7aee86"
+  },
+  "result_review": {
+    "path": "C:\\Users\\there\\EMR4-migration\\20260911-v1\\current-control-repair-20260912-v1\\g2-completion-20261008-v1\\reviews\\confirmation-state-receipt-attempt05-result-review-v1.json",
+    "sha256": "497dc2058390df4058b131f4057193c51fa1070f6af136271205d8f5d5c6194a"
+  },
+  "qualification": "Exactly two independently accepted current SRC05 scenarios and six setup/call/teardown phases. SRC04 and original SRC9 raw11 NONPASS remain historical. No other current product or whole-suite acceptance.",
+  "population_membership_accepted": false
+}

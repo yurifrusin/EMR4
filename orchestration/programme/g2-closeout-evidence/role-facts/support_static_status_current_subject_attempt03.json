@@ -1,0 +1,26 @@
+{
+  "schema": "emr4.ci_c_documentary_role_facts.v2",
+  "check_id": "support_static_status_current_subject_attempt03",
+  "source_only_receipt": {
+    "kind": "exact_source_normalization",
+    "new_runtime_or_cleanup_effect": false,
+    "underlying_observation_sha256": "25e411dec6b46f0aeb1faec911b00923a650e81bef0bd1cac9649790d6e492fb",
+    "documentary_support_output_ids": [],
+    "public_basis_sha256_if_applicable": null,
+    "independent_review_sha256": "dbb6617cffa3cb490fecde329d1f7b79fe021e4bebf465cecc2a2d1d5711e4c6"
+  },
+  "cleanup": {
+    "kind": "attributed_reviewed_source_scope",
+    "review_sha256": "dbb6617cffa3cb490fecde329d1f7b79fe021e4bebf465cecc2a2d1d5711e4c6",
+    "new_cleanup_performed_by_this_document": false,
+    "historical_cleanup_claim": "only the facts explicitly accepted in the pinned independent review; unknown fields remain pending"
+  },
+  "relevance": {
+    "kind": "original_property_membership_and_scope",
+    "membership_review_sha256": "ebbf9d059f6bfd0864bf1d746ab53fac3de185b456901bd7c8e40b50f2c26565",
+    "safety_review_sha256_if_applicable": null,
+    "distinct_projection_fidelity_review_sha256": "cf0cf009402feacec0533623c0365457a5dcdf4dd630659c4f286a18850a5d4f"
+  },
+  "final_context": null,
+  "final_check_acceptance": null
+}

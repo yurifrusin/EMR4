@@ -1,0 +1,46 @@
+{
+  "schema": "emr4.g2.classification_and_static_cohort_disposition_review.v1",
+  "reviewer_agent": "/root/g2_admission_review",
+  "independent": true,
+  "implementation_authorship": false,
+  "selected_model": "gpt-6.1-sol",
+  "selected_reasoning": "high",
+  "blocking_findings": [],
+  "verdict": "PASS_BOUNDED_CLASSIFICATION_AND_STATIC31_NORMALIZATION",
+  "classification": {
+    "source_path": "C:/Users/there/.codex/visualizations/2026/09/15/01a0a730-27a3-7232-b633-71effda7283a/ci-c-required-population-v1/check-population.json",
+    "source_sha256": "9c35365623bdfdedff52b18ba8f620e0c572ededa68e614e762b313f8361d7f0",
+    "permitted_pointer": "/test_evidence/known_ordinary_test_source_roles",
+    "ordinary_module_candidates": 33,
+    "support_or_other_modules": 6,
+    "note": "Naming organizes metadata only. No static name rule excludes unittest methods or proves collection; all39 remain accounted.",
+    "owner_directive_sha256": "0e9028e102ca5e3a2a7594fde44271c389bf91e374d38f72d98cd2372484be85",
+    "packet_sha256": "d4797706a60983ac32efbebd86f5a3c45bfd81d198110ca74565fb96023ba72b",
+    "judgment": "Literal ordinary designations supply existing positive classification evidence under owner section3 for bounded AST declarations and pins of those exact39 roles plus five independently known ordinary routes. The note withholds name-based collection inference, not the explicit ordinary designation. This does not require a new global inventory manifest or runtime membership for each role.",
+    "boundary": "Nested ordinary_members/join/accounting projections were neither used nor inspected; prior denied whole nested accounting and O2/O6 reader/operator closures remain closed. Held tests/test_access_ai_service.py remains unknown and unopened. No adjacent or protected path inherits permission."
+  },
+  "static31": {
+    "cohort_path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/ordinary-applicability/confirmation-static31-qualified-cohort-v1.json",
+    "cohort_sha256": "320701c248236ef596a0b4c4bb8d970848e2950b875c05f02964374468c305cb",
+    "prior_review_sha256": "f249d6a4275769a0a5cff5c8463ab516d71e732cf5734ab3ea5aedfa42953942",
+    "original_batch_result_sha256": "d69ab0a53d11e88b1fe4928ab8ca1ffb33e4666b6a92b74045ef2a387f7809b9",
+    "original_test_capture_sha256": "9379d37f35a83ffd942396f431b41fff7c6c7d0601fcfda0c855372f95f3c4a9",
+    "verification": "Three source artifacts match size/hash; exactly one CI_SELECTION_RESULT marker. Exact ordered identity filtering of prior independently qualified31 nodes yields identical31 collected identities and93 reports. Each node has setup/call/teardown passed with wasxfail false. Excluded failed status node and its three unchanged reports exactly preserved; execution context equals raw capture.",
+    "checks_passed": 8,
+    "qualified_cases": 31,
+    "qualified_phases": 93,
+    "original_batch_cases": 32,
+    "original_batch_phases": 96,
+    "original_batch_passed": false,
+    "new_execution": false,
+    "excluded_call_outcome": "failed",
+    "normalization_accepted": true,
+    "prospective_product_applicability_accepted": false,
+    "qualification": "Adapted documentary/static contracts and qualified AST inventory alternatives. Their per-case outcomes retain prior qualified evidence with proven original cleanup/isolation. The normalization is not original whole-module execution, live callable inventory, product runtime or whole32 acceptance. Future changed subject requires a relevant source/property bridge or targeted new verification."
+  },
+  "scope_limits": [
+    "No collection/test/app/database/Git/network launch or source implementation by reviewer.",
+    "No new source-role contents read for this disposition, no nested accounting or held-file access.",
+    "No full97, global CI, G2 completion or prospective product acceptance."
+  ]
+}

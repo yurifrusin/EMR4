@@ -1,0 +1,57 @@
+{
+  "schema": "emr4.audio67.component_result.v1",
+  "status": "PASS",
+  "binding_sha256": "a902c751f6828c85f78bf64670f684471670bcb2f194617b35d0b08ccc1eb04a",
+  "review_path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/reviews/audio67-fixture-source-and-execution-review-v1.json",
+  "review_sha256": "663c5676bffa699e1f2db98a6e954af3a7f1d6d0de860414780af64def220fbc",
+  "ordinary_identity": "tests/test_consultation_audio_privacy.py::test_browser_audio_components_with_authored_adapters",
+  "subcheck_count": 67,
+  "expected_subchecks": 67,
+  "exact_ordered_subchecks": true,
+  "unique_names_required": false,
+  "pytest_collection_or_phases_executed": false,
+  "elapsed_seconds": 0.2541118000226561,
+  "exit_code": 0,
+  "timed_out": false,
+  "direct_child_reaped": true,
+  "launch_error": null,
+  "parse_error": null,
+  "stdout": {
+    "path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/ordinary-applicability/audio-ordinary-dom-fixture-candidate-v1/execution-v1/attempt01-stdout.txt",
+    "bytes": 4209,
+    "sha256": "53a4f3da942b911d341480c4ec61ad819e9a6f6c1edaf10d0364bab0cb7ec2b9"
+  },
+  "stderr": {
+    "path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/ordinary-applicability/audio-ordinary-dom-fixture-candidate-v1/execution-v1/attempt01-stderr.txt",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "stdout_truncated": false,
+  "stderr_truncated": false,
+  "pins_unchanged_after": true,
+  "environment": {
+    "SystemRoot": "C:/Windows",
+    "WINDIR": "C:/Windows",
+    "LANG": "C.UTF-8",
+    "TZ": "UTC"
+  },
+  "containment": {
+    "mechanism": "Independently reviewed exact source with authored VM collaborators; VM is not a security boundary. Closed child environment, shell=False, hidden direct Node child. subprocess.run kills/waits its direct child on timeout. No spawn API is used by reviewed program or target in its supplied context.",
+    "imports": [
+      "node:fs",
+      "node:vm",
+      "node:assert/strict"
+    ],
+    "file_reads": "Pinned program reads only exact pinned target; no project module import. Parent reads only binding, independent review and listed pinned inputs.",
+    "effects": "Authored synthetic fetch/media/Word/storage only; no browser, real device, application, database, provider, network or Git operation.",
+    "limits": "No hard CPU/memory/job/process caps asserted; one reviewed direct child,120s timeout,1s VM individual calls.",
+    "cleanup": "Direct child completes or timeout kills/reaps; evidence files retained; no disposable database/listener or child-created persistent fixtures."
+  },
+  "consumption": {
+    "attempt_reservations": 1,
+    "node_invocations": 1,
+    "collect_only": 0,
+    "database_resets": 0
+  },
+  "retry_remaining": 0
+}

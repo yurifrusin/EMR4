@@ -1,0 +1,133 @@
+{
+  "schema_version": "emr4.isolated_six_product_push_effect_review.v1",
+  "verdict": "PASS_ISOLATED_SIX_PRODUCT_PUSH_EFFECT",
+  "reviewer_agent": "/root/g2_admission_review",
+  "independent": true,
+  "implementation_authorship": false,
+  "blocking_findings": [],
+  "commit": "6f0ff52e9a4c95efa10bb475480cfb31245500e7",
+  "parent": "b5a1b76c578ccc9df9dbd8d27f1f933a06ef4211",
+  "tree": "553497967c1aa51369e6bcef05eaf817e8ce123a",
+  "index_sha256": "27b9d88a270e51f9a09fa1b16e3f0dd5b076bb73e7f062c934f6fc444c08bbfd",
+  "result_sha256": "6040461ba4e5dd6ee180a2aa182b37b381e893004e7f6356fda2bae53de5ebc2",
+  "remote_url": "https://github.com/yurifrusin/emr4",
+  "ref": "refs/heads/codex/raisa-ariadne-recovery-g0",
+  "remote_before": {
+    "refs/heads/codex/raisa-ariadne-recovery-g0": "b5a1b76c578ccc9df9dbd8d27f1f933a06ef4211",
+    "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+  },
+  "remote_after": {
+    "refs/heads/codex/raisa-ariadne-recovery-g0": "6f0ff52e9a4c95efa10bb475480cfb31245500e7",
+    "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+  },
+  "protected_refs_unchanged": true,
+  "normal_nonforced_push": true,
+  "same_attempt_remote_readback_verified": true,
+  "subject_sha256": "47a1f1546cc2c63d874336d358e27e28215d892b7de91ba78685b44c300f92fb",
+  "repair_subject_sha256": "65fc0f7e058da0e144bbacd6feac699a7ce69bedd27dc5806778238c1918b477",
+  "physical_payload_count": 42,
+  "predecessor_review": {
+    "path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/ordinary-applicability/g2-six-file-product-publication-final-v1/independent-push-effect-review-v1.json",
+    "sha256": "81e869f58bcec88757ec2d321fb63422047930b90e3badb1f6591da59ee33765",
+    "bytes": 14914,
+    "schema": "emr4.six_product_publication_push_effect_review.v1",
+    "verdict": "PASS_ISOLATED_SIX_PRODUCT_PUSH_EFFECT",
+    "preserved_unmodified": true
+  },
+  "source_basis": {
+    "publisher_path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/ordinary-applicability/g2-six-file-product-publication-final-v1/publish_isolated_six_product.bound.py",
+    "publisher_sha256": "3273b9bf1354c97f69b74ac0d6b5c2e035cfe02bef5bfae7ea75a7e0291065f8",
+    "controller_path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/ordinary-applicability/g2-closeout-maintenance-preparation-v4/after/orchestration_harness/bounded_g1b.py",
+    "controller_sha256": "e72db832200b31c03cd9452b3112607d670b4b6db06d41e966ffaac8483635a2",
+    "consumer": "_load_g2_closeout_enable_inputs lines2415-2427"
+  },
+  "same_attempt_evidence": [
+    {
+      "path": "C:/Users/there/EMR4-tools/g2-six-product-publish-v1/phase-push/result.json",
+      "bytes": 1236,
+      "sha256": "6040461ba4e5dd6ee180a2aa182b37b381e893004e7f6356fda2bae53de5ebc2"
+    },
+    {
+      "path": "C:/Users/there/EMR4-tools/g2-six-product-publish-v1/phase-push/intent.json",
+      "bytes": 233,
+      "sha256": "545f60963a99da50a772a3e95f6e0ee6e4b31e0265514db2804f54bba4fd410d"
+    },
+    {
+      "path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/ordinary-applicability/g2-six-file-product-publication-final-v1/push-supervision-v1/result.json",
+      "bytes": 535,
+      "sha256": "f13c73887d515b2cd7914e29ffd78cc5d2b5bc6f463e77f489c344cd8ed0504a"
+    },
+    {
+      "path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/ordinary-applicability/g2-six-file-product-publication-final-v1/push-supervision-v1/started.json",
+      "bytes": 838,
+      "sha256": "a95076a576217b23a9edd85bac5485914e2f18f0501526eb7b0d4b8ae3350155"
+    },
+    {
+      "path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/ordinary-applicability/g2-six-file-product-publication-final-v1/push-supervision-v1/stdout.txt",
+      "bytes": 1235,
+      "sha256": "609d78157b4c9df46655b75b3866b9dcf7de960a26a76245b81c72cd865e70de"
+    },
+    {
+      "path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/ordinary-applicability/g2-six-file-product-publication-final-v1/push-supervision-v1/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "C:/Users/there/EMR4-tools/g2-six-product-publish-v1/receipts/g2-six-isolated-product-push-20261009-v1/02-remote-lease.json",
+      "bytes": 1074,
+      "sha256": "432a6ce41bcf080a5dc922a43c7a95734729f69584c5ad65881057f910664eff"
+    },
+    {
+      "path": "C:/Users/there/EMR4-tools/g2-six-product-publish-v1/receipts/g2-six-isolated-product-push-20261009-v1/03-push-intent.json",
+      "bytes": 1072,
+      "sha256": "3c265e345f28c0832693d4a3b5bce45ec108eccf1348343249c23d1733dd5086"
+    },
+    {
+      "path": "C:/Users/there/EMR4-tools/g2-six-product-publish-v1/receipts/g2-six-isolated-product-push-20261009-v1/04-published.json",
+      "bytes": 1310,
+      "sha256": "8a8a62ea0fdf6fa7cd3413b8016000564ae4f6bce9dbd1926ba208ef6089556a"
+    },
+    {
+      "path": "C:/Users/there/EMR4-tools/g2-six-product-publish-v1/phase-commit/result.json",
+      "bytes": 816,
+      "sha256": "3f574d8e7c622043a8ebd90704a51098311c8b98cbdc3f7e600346b46bf2e477"
+    }
+  ],
+  "independent_judgment": {
+    "normal_nonforced_push": "The accepted immutable publisher has one push command with normal commit:ref refspec and no force/plus option. The accepted prior review independently traced this exact command and the same-attempt native receipt sequence; the successful unchanged result and published receipt support its actual effect.",
+    "same_attempt_remote_readback": "The authenticated native result and published receipt agree on recovery b5a before and exact product6f0 after, with protected master/handoff2e34 unchanged. This supplements the representation of an already accepted observation; no fresh remote query was made.",
+    "scope_and_cleanup": "The original review remains the substantive effect/preservation/cleanup acceptance. Its 42-path/six-change/whole-index limits, direct-child-only cleanup claim and retained raw independent_effect_accepted=false are preserved."
+  },
+  "related_consumers": {
+    "installer": "Requires schema_version, same verdict/independence, normal_nonforced_push and same_attempt_remote_readback_verified, protected remote map and exact commit/parent/tree/index/result fields; this supplement provides precisely those supported facts.",
+    "final_closeout_approval": "_validate_g2_closeout_approval binds product_publication_review_sha256 and requires that digest in the explicit evidence map; use this supplement consistently where that role is chosen, without rewriting historical original evidence.",
+    "future_ci_push_review": "_validate_g2_ci_publication_review requires its own genuine emr4.g2_complete_ci_push_effect_review.v1 evidence, whole_inverse_scope_verified and caller_bytes_args_proof_readback_verified. This product supplement cannot satisfy that future CI publication role."
+  },
+  "acceptance_limits": {
+    "exact_six_product_task_branch_publication_accepted": true,
+    "canonical_checkout_adoption_accepted": false,
+    "complete_ci_adoption_accepted": false,
+    "formal_twelve_criterion_G2_acceptance": false,
+    "g2_complete": false,
+    "feature_or_protected_integration_authority": false,
+    "remote_observation_is_same_attempt_not_permanent_future_lease": true
+  },
+  "budget": {
+    "one_authorized_push_consumed": true,
+    "remaining_this_push_grant": 0,
+    "automatic_retry": false,
+    "overall_seconds": 300,
+    "per_git_seconds": 45,
+    "commit_grant_previously_consumed_preserved": true
+  },
+  "reviewer_effects": {
+    "new_runtime_or_tests": 0,
+    "new_git_or_remote_commands": 0,
+    "new_push": 0,
+    "implementation_or_controller_changes": 0,
+    "original_review_rewritten": false
+  },
+  "supplement_purpose": "Independent documentary controller binding for the same already accepted product push. No new operation, acceptance scope, runtime observation, lease renewal or G2 completion is granted."
+}

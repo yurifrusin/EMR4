@@ -1,0 +1,26 @@
+{
+  "schema": "emr4.ci_c_documentary_role_facts.v1",
+  "check_id": "property_src2_current",
+  "source_only_receipt": {
+    "kind": "exact_source_normalization",
+    "new_runtime_or_cleanup_effect": false,
+    "underlying_observation_sha256": "8e4fb3214097df75119e5a8da959239975870859b4d484154c235c9cf81059ad",
+    "documentary_support_output_ids": [],
+    "public_basis_sha256_if_applicable": null,
+    "independent_review_sha256": "497dc2058390df4058b131f4057193c51fa1070f6af136271205d8f5d5c6194a"
+  },
+  "cleanup": {
+    "kind": "attributed_reviewed_source_scope",
+    "review_sha256": "497dc2058390df4058b131f4057193c51fa1070f6af136271205d8f5d5c6194a",
+    "new_cleanup_performed_by_this_document": false,
+    "historical_cleanup_claim": "SRC05 actual attempt cleanup accepted; SRC04 and prior NONPASS observations are not revised"
+  },
+  "relevance": {
+    "kind": "required_confirmation_property_and_exact_current_scenarios",
+    "required_domain_review_sha256": "8204370017342c32242b54e487cfb7900b6a8c2bd5fbf9eeff5e722379d5e312",
+    "src05_result_review_sha256": "497dc2058390df4058b131f4057193c51fa1070f6af136271205d8f5d5c6194a",
+    "final_current_source_relevance_review_sha256": null
+  },
+  "final_context": null,
+  "final_check_acceptance": null
+}

@@ -1,0 +1,73 @@
+{
+  "schema": "emr4.ci_c_ordinary_cohort_support_source.v1",
+  "status": "SOURCE_ONLY_NONOPERATIVE",
+  "cohort_id": "sibling_three",
+  "collection": [
+    "confirmation_current/test_sibling_postclaim_rejections.py::test_staff_stale_freshness_rejection_rolls_back_real_started_claim",
+    "confirmation_current/test_sibling_postclaim_rejections.py::test_bernie_selection_mismatch_rejection_rolls_back_real_started_claim",
+    "confirmation_current/test_sibling_postclaim_rejections.py::test_update_competing_appointment_rejection_rolls_back_real_started_claim"
+  ],
+  "phase_rows": [
+    {
+      "nodeid": "confirmation_current/test_sibling_postclaim_rejections.py::test_staff_stale_freshness_rejection_rolls_back_real_started_claim",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_sibling_postclaim_rejections.py::test_staff_stale_freshness_rejection_rolls_back_real_started_claim",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_sibling_postclaim_rejections.py::test_staff_stale_freshness_rejection_rolls_back_real_started_claim",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_sibling_postclaim_rejections.py::test_bernie_selection_mismatch_rejection_rolls_back_real_started_claim",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_sibling_postclaim_rejections.py::test_bernie_selection_mismatch_rejection_rolls_back_real_started_claim",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_sibling_postclaim_rejections.py::test_bernie_selection_mismatch_rejection_rolls_back_real_started_claim",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_sibling_postclaim_rejections.py::test_update_competing_appointment_rejection_rolls_back_real_started_claim",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_sibling_postclaim_rejections.py::test_update_competing_appointment_rejection_rolls_back_real_started_claim",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_sibling_postclaim_rejections.py::test_update_competing_appointment_rejection_rolls_back_real_started_claim",
+      "phase": "teardown",
+      "outcome": "passed"
+    }
+  ],
+  "provenance": {
+    "source_path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/ordinary-applicability/sibling-postclaim-execution-preparation-v3/decoded-reports/tenant-primary.json",
+    "source_sha256": "4617b02c319e0a2af37e6f2c96b630e69c2e5bedcbc85e420d38ad859649e8f7",
+    "independent_review_path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/reviews/sibling-postclaim-result-review-v3.json",
+    "independent_review_sha256": "14330885f5b33012b4acac3938609642bfbbde332b7939505c2d2c41c593aa4d",
+    "raw_outer_result_path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/ordinary-applicability/sibling-postclaim-execution-preparation-v3/result.json",
+    "raw_outer_result_sha256": "78be74fec9e990e847104629a8297d54293d141d757dac68db6efe377b392636",
+    "raw_batch_passed": null,
+    "raw_batch_nonpass_preserved": false,
+    "selected_from_larger_raw_result": false,
+    "keyed_report_source_normalized": true,
+    "qualified_subset_only": false,
+    "source_observation_sha256": "538c2f3e601cfc4e95fab5ecb2a5cd9efcbeb8e69c3e9f6801f7504a4bced667"
+  },
+  "accepted_population_test_ids": null,
+  "complete_v3_check_verdict": null
+}

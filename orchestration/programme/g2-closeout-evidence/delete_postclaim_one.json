@@ -1,0 +1,41 @@
+{
+  "schema": "emr4.ci_c_ordinary_cohort_support_source.v1",
+  "status": "SOURCE_ONLY_NONOPERATIVE",
+  "cohort_id": "delete_postclaim_one",
+  "collection": [
+    "confirmation_current/test_delete_postclaim_rollback_regression.py::test_postclaim_physical_failure_rolls_back_new_delete_claim"
+  ],
+  "phase_rows": [
+    {
+      "nodeid": "confirmation_current/test_delete_postclaim_rollback_regression.py::test_postclaim_physical_failure_rolls_back_new_delete_claim",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_delete_postclaim_rollback_regression.py::test_postclaim_physical_failure_rolls_back_new_delete_claim",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_delete_postclaim_rollback_regression.py::test_postclaim_physical_failure_rolls_back_new_delete_claim",
+      "phase": "teardown",
+      "outcome": "passed"
+    }
+  ],
+  "provenance": {
+    "source_path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/ordinary-applicability/regression-v3-execution-preparation/candidate-v4-fixture/decoded-reports/tenant-primary.json",
+    "source_sha256": "c3b18d39eb78816f7c634804a5033e1bbc41ca3ce63ac1dd38224a5624b9ce92",
+    "independent_review_path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/reviews/delete-postclaim-fixture-runtime-result-review-v1.json",
+    "independent_review_sha256": "01be86c6c0fb5ffa87ab5c81f722a8c2ce4971b6fece6f5d876f3f07a5e067ac",
+    "raw_outer_result_path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/ordinary-applicability/regression-v3-execution-preparation/candidate-v4-fixture/result.json",
+    "raw_outer_result_sha256": "41c8131a5f324788fcf6be4bda304fc356918c48372dc4aa0a0c3b54588e47d2",
+    "raw_batch_passed": null,
+    "raw_batch_nonpass_preserved": false,
+    "selected_from_larger_raw_result": false,
+    "keyed_report_source_normalized": true,
+    "qualified_subset_only": false,
+    "source_observation_sha256": "538c2f3e601cfc4e95fab5ecb2a5cd9efcbeb8e69c3e9f6801f7504a4bced667"
+  },
+  "accepted_population_test_ids": null,
+  "complete_v3_check_verdict": null
+}

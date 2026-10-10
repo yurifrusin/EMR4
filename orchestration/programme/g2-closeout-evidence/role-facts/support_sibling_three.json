@@ -1,0 +1,25 @@
+{
+  "schema": "emr4.ci_c_documentary_role_facts.v1",
+  "check_id": "support_sibling_three",
+  "source_only_receipt": {
+    "kind": "exact_source_normalization",
+    "new_runtime_or_cleanup_effect": false,
+    "underlying_observation_sha256": "03ba62be5726b10af87181b09bec43473de97aa5d5ee49f823d36e0db830c082",
+    "documentary_support_output_ids": [],
+    "public_basis_sha256_if_applicable": null,
+    "independent_review_sha256": "14330885f5b33012b4acac3938609642bfbbde332b7939505c2d2c41c593aa4d"
+  },
+  "cleanup": {
+    "kind": "attributed_reviewed_source_scope",
+    "review_sha256": "14330885f5b33012b4acac3938609642bfbbde332b7939505c2d2c41c593aa4d",
+    "new_cleanup_performed_by_this_document": false,
+    "historical_cleanup_claim": "only the facts explicitly accepted in the pinned independent review; unknown fields remain pending"
+  },
+  "relevance": {
+    "kind": "original_property_membership_and_scope",
+    "membership_review_sha256": "ebbf9d059f6bfd0864bf1d746ab53fac3de185b456901bd7c8e40b50f2c26565",
+    "safety_review_sha256_if_applicable": null
+  },
+  "final_context": null,
+  "final_check_acceptance": null
+}

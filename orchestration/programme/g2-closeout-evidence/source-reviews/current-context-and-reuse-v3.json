@@ -1,0 +1,595 @@
+{
+  "schema": "emr4.ci_c.final_current_context_and_reuse_review.v3",
+  "reviewer_task": "/root/g2_guard_review",
+  "independent": true,
+  "implementation_authorship": false,
+  "allocation": {
+    "model": "GPT-6.1 Sol",
+    "reasoning_effort": "high"
+  },
+  "verdict": "PASS_SCOPED_CURRENT_V4_CONTEXT_AND_ALL_31_QUALIFIED_REUSE_DECISIONS",
+  "source_only": true,
+  "execution_authorized": false,
+  "complete_graph_accepted": false,
+  "complete_caller_actual_result_accepted": false,
+  "g2_accepted": false,
+  "instruction_sha256": "66727cc146dc3e4fef42ed2bbc0a7165e771fff9a738b4665198bb63c98b2e0f",
+  "context": {
+    "plan_sha256": "e92c0fb7bbfc1de747d26efaa5fe055d1576ab4d056140dafd4e1d744825c4d8",
+    "authority_sha256": "29a530781f3e04574355b73206c590664534f7a6e0cbb9fc36f3c7d5d5a461d3",
+    "source_sha256": "a197e3d10dbf94d80e117f6269ba23cd6a9cce957afd7d7102e66c7aed630732",
+    "config_sha256": "320dd89320138207d160557795fd51c95f3d7a285c37ba5a6f5cf3b4c17fe0aa",
+    "runtime_sha256": "35700e2f9f7f108f9c5f1fcd707c7fbf628e925ece16d05dda1f60aeea855fdf",
+    "verifier_sha256": "f430803e889b4c3aa0269e12dbff4d965eea2dec0917ac051d8d78225c67b61c",
+    "result_id": "g2_complete_ci_current_context_20261010_v1"
+  },
+  "scope_profiles": [
+    "ci-correctness",
+    "ci-bandit"
+  ],
+  "input_pins": {
+    "prior_all31_relevance_review": {
+      "path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/reviews/ci-c-final-current-context-and-reuse-review-v2.json",
+      "sha256": "85585259a75179007d37663e595d464ea9cf7677dfe87b0f8143cc8e3f556718"
+    },
+    "candidate_context": {
+      "path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/ordinary-applicability/ci-c-final-context-candidate-v4/context-successor-candidate-v4.json",
+      "sha256": "b1c15229643649f820beb95967e5f6cfaa5e811add3e0d20b28101145981427f"
+    },
+    "source_anchor": {
+      "path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/ordinary-applicability/ci-c-final-context-candidate-v4/source-anchor-candidate-v4.json",
+      "sha256": "a197e3d10dbf94d80e117f6269ba23cd6a9cce957afd7d7102e66c7aed630732",
+      "bytes": 9203
+    },
+    "required_plan": {
+      "path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/ordinary-applicability/ci-c-final-context-candidate-v4/required-plan-candidate-v4.json",
+      "sha256": "e92c0fb7bbfc1de747d26efaa5fe055d1576ab4d056140dafd4e1d744825c4d8",
+      "bytes": 11869
+    },
+    "previous_anchor": {
+      "path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/ordinary-applicability/ci-c-final-context-candidate-v2/source-anchor-candidate-v2.json",
+      "sha256": "a4721ed1737a28e867e9dab5fdabd96e892a0b2bfd02285b20ea87be69918db0",
+      "bytes": 8407
+    },
+    "attempt01_result_review": {
+      "path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/reviews/controller-id-delta-attempt01-result-review-v1.json",
+      "sha256": "8d51ddc209065ed7f1a07ffd43273e8a12d80f2f390b009cff5013bbe9583755"
+    },
+    "attempt02_result_review": {
+      "path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/reviews/controller-id-delta-attempt02-result-review-v1.json",
+      "sha256": "373c545341fec4e2babd2f9cebe7b4dfbfeff2b60ce43cb70db4ef9c499d40ae"
+    },
+    "source_review": {
+      "path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/reviews/controller-id-delta-verification-source-review-v3.json",
+      "sha256": "70703d8f7ad85dbb19eff423507be8dafb5b2eca6ff1650fc212c996df867e76"
+    },
+    "unchanged_config_anchor": {
+      "path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/ordinary-applicability/ci-c-final-context-candidate-v1/config-anchor-candidate-v1.json",
+      "bytes": 2246,
+      "sha256": "320dd89320138207d160557795fd51c95f3d7a285c37ba5a6f5cf3b4c17fe0aa"
+    },
+    "unchanged_authority_anchor": {
+      "path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/ordinary-applicability/ci-c-final-context-candidate-v1/authority-anchor-candidate-v1.json",
+      "bytes": 1288,
+      "sha256": "29a530781f3e04574355b73206c590664534f7a6e0cbb9fc36f3c7d5d5a461d3"
+    },
+    "unchanged_runtime_anchor": {
+      "path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/ordinary-applicability/ci-c-runtime-identity-preparation-v2/runtime-identity-anchor-v1.json",
+      "bytes": 6787,
+      "sha256": "35700e2f9f7f108f9c5f1fcd707c7fbf628e925ece16d05dda1f60aeea855fdf"
+    },
+    "prior_runtime_result_review": {
+      "path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/reviews/ci-c-runtime-identity-and-ruff-attempt02-result-review-v1.json",
+      "bytes": 20968,
+      "sha256": "56555ef0585295447b4778520d2aa32311b6ea6c57f31bcce3d3e1fb0807ec6a"
+    },
+    "prior_source_policy_review": {
+      "path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/reviews/ci-c-current-composed-source-policy-relevance-review-v1.json",
+      "sha256": "df5a949df1828b2e275b7581db83dc800f80e105be1fc74c06c10e29beab3553"
+    }
+  },
+  "decisions": {
+    "historical_documentary_dimensions_accepted": true,
+    "all_31_row_specific_reuse_accepted": true,
+    "current_aggregate_context_meaning_accepted": true,
+    "can_be_external_relevance_support": true,
+    "no_new_original_product_property_gap": true,
+    "changed_controller_test_compile_Ruff_and_role_mapping_requirement_closed": true,
+    "positive_property_domain_unchanged": true,
+    "meaning": "This is a genuine independent prior-result relevance judgment for each of the31 named checks against a197/320dd/29a530/3570/f430 and the e92 required plan. It may be bound as external relevance support. It is not graph seal/acceptance, actual complete caller, native loader/install/effect or final G2 acceptance."
+  },
+  "verification": {
+    "literal_context_anchor_plan_prior_reviews_authenticated": true,
+    "only_two_of18_source_rows_changed": true,
+    "other16_rows_exactly_unchanged": true,
+    "baseline_config_exclusions_unchanged": true,
+    "two_changed_origin_hashes_equal_reviewed_and_executed_capsule_copies": true,
+    "plan_other_than_source_sha256_semantically_equals_prior_accepted_plan": true,
+    "all31_id_type_kind_test_ids_order_preserved": true,
+    "no_new_test_identity_or_cohort_added": true,
+    "unchanged_authority_config_runtime_hashes_rechecked": true
+  },
+  "delta_judgment": {
+    "controller": "New e72 role validator maps only canonical /root/g2_admission_review to proof-safe g2_admission_review; approved implementer sets must equal trusted safe IDs, and case-folded reviewer-as-implementer is denied. Existing approval canonical identity and f430 safe-ID grammar stay intact. Current positive reaches complete approval-shape validation and role join; prior accepted negative demands exact targeted refusal reasons. This narrow function evidence does not establish full-loader/native positive validity.",
+    "fixture": "b6e4 differs from accepted prior7345 by only portable authored ci_adoption.review_path using b.Path(...).absolute(). Source70703 independently proved entire-text equivalence and retained every assertion/helper/test. Absolute-path production check remains; no actual artifact is opened. Current positive and changed full test compile/lint PASS independently accepted373c.",
+    "source_origin": "Direct literal changed authored origin hashes e72/b6e4 equal reviewed source/consumed capsule bytes. Other16 anchor rows and source predicates are unchanged and retain855852/df5a independent correspondence. No canonical or published baseline composition is silently rewritten.",
+    "historical_source_provenance": "Source anchor accurately labels V3 compile/source judgments as historical exact-byte provenance and V4/V5 corrections separately. Source evidence ef249 and38b246 are coordinator-classified reported independent source pins; this task does not claim direct access to their unknown locators. Source70703 and actual8d51/373c provide this worker's independent changed-byte judgments.",
+    "same_property": "No application source, AI31 closure, signed confirmation/delete route, tenant/clinical migration, patient/audio, configuration, scanner reader or SHA256/archive/bootstrap body changed. Relevant obligations remain the same. Fixed proof reviewer equality and portable test path cannot authorize additional product writes or weaken safety acceptance."
+  },
+  "anchor_judgments": {
+    "authority": "29a530 is a meaningful stable G2 authority definition: AGENTS66727, ordinary state132cc/gates115a and frozen49548 plus df10 directive. This task verified canonical state/gates/config hash equality. Mutable CP/proof/generated state remains excluded. Prospective operation still requires its genuine finite grant and operative independent admission; this anchor does not change gates or certify a later transition.",
+    "config": "320dd accurately identifies canonical30e8 E9/F401 py311, Bandit no skips and required exclusions, selected pytest clean overlays and caller profile semantics. Canonical config hash still matches. Ordinary compile/Ruff/test/safety duties are not excluded merely because Bandit excludes tests/alembic. Exact selection/proof/workflow/derived control files are bound separately.",
+    "runtime": "3570 replaces the unsuitable publication-tools4b4 anchor. Accepted56555 establishes exact raw-object equality with same-attempt captured data, Python3.11.2, immutable image6fe, selected named executable/module/METADATA/RECORD identities and canonical Ruff actual invocation. PyYAML6.0.3/Bandit1.9.4/pytest9.1.1 are observed named installed identities, Ruff0.15.22 actually executed once. Their metadata is not proof other tools or all transitive behavior ran. No common runtime is fabricated across earlier Postgres/JWT/Node/scanner contexts.",
+    "source": "Accepted product baseline6f0/tree553 remains unchanged. Current anchora197 identifies explicit e72 controller and b6e4 test overrides with unchanged16 other literal inputs. Controller/helper/audio overlays are pending genuine installation/adoption; baseline tree is not claimed to contain them. Actual changed-source observations and final proof are kept outside stable source identity to avoid cycles."
+  },
+  "historical_tuple_semantics": {
+    "incorporated_review_sha256": "85585259a75179007d37663e595d464ea9cf7677dfe87b0f8143cc8e3f556718",
+    "meaning": "Unchanged original documentary dimension semantics/roles incorporated; no common runtime or minted runtime scalars."
+  },
+  "retained_scope_basis": {
+    "property_obligation_sha256": "ee0e12c3df616b427a1c39730b0dce8c12d066a87769512d21f740bd12507379",
+    "safety_relevance_sha256": "66792638eb5246d856ce46bd47cdf525282c43823e828fddbbe1221e240ec75a",
+    "domain_sha256": "8204370017342c32242b54e487cfb7900b6a8c2bd5fbf9eeff5e722379d5e312",
+    "meaning": "All qualified origin/result/property scopes in e425's authenticated input registry remain incorporated. No new direct original inspection is claimed."
+  },
+  "per_check_dispositions": [
+    {
+      "check_id": "property_original_o1_30",
+      "check_type": "test-linked",
+      "kind": "confirmation_family",
+      "disposition": "reused",
+      "relevance_accepted": true,
+      "decision": "ACCEPT_REUSED_PROPERTY",
+      "meaning": "Original isolated confirmation30 retains actor/practice/signature/freshness/admission duties; FIRST/sibling/current GREEN/SRC05 supply distinct real-route and changed-delete duties. No claim all original route modules ran.",
+      "historical_join": "Exact prior qualified row accepted855852 preserved.",
+      "delta_disposition": "ACCEPT_PRIOR_QUALIFIED_REUSE_IN_EXACT_V4_CONTEXT",
+      "delta_reason": "Exact product/helper/component closure unchanged by fixed reviewer mapping and portable authored fixture path; retain prior same-property judgment and limitations.",
+      "current_context_ref": "context",
+      "current_source_sha256": "a197e3d10dbf94d80e117f6269ba23cd6a9cce957afd7d7102e66c7aed630732"
+    },
+    {
+      "check_id": "property_pyjwt30",
+      "check_type": "test-linked",
+      "kind": "compatibility_crypto",
+      "disposition": "reused",
+      "relevance_accepted": true,
+      "decision": "ACCEPT_REUSED_PROPERTY",
+      "meaning": "Exact compatibility253be fixture correspondence and actual accepted PyJWT30 relations retain purpose. Preserve its own PyJWT/image version; no application login/provider or common-current-library execution claim.",
+      "historical_join": "Exact prior qualified row accepted855852 preserved.",
+      "delta_disposition": "ACCEPT_PRIOR_QUALIFIED_REUSE_IN_EXACT_V4_CONTEXT",
+      "delta_reason": "Exact product/helper/component closure unchanged by fixed reviewer mapping and portable authored fixture path; retain prior same-property judgment and limitations.",
+      "current_context_ref": "context",
+      "current_source_sha256": "a197e3d10dbf94d80e117f6269ba23cd6a9cce957afd7d7102e66c7aed630732"
+    },
+    {
+      "check_id": "property_crypto_six",
+      "check_type": "test-linked",
+      "kind": "compatibility_crypto",
+      "disposition": "reused",
+      "relevance_accepted": true,
+      "decision": "ACCEPT_REUSED_PROPERTY",
+      "meaning": "Actual six crypto relation cases discharge elected crypto duties, separate from unrelated PyJWT count. Preserve encrypted-key/certificate/Fernet relations and original tool version.",
+      "historical_join": "Exact prior qualified row accepted855852 preserved.",
+      "delta_disposition": "ACCEPT_PRIOR_QUALIFIED_REUSE_IN_EXACT_V4_CONTEXT",
+      "delta_reason": "Exact product/helper/component closure unchanged by fixed reviewer mapping and portable authored fixture path; retain prior same-property judgment and limitations.",
+      "current_context_ref": "context",
+      "current_source_sha256": "a197e3d10dbf94d80e117f6269ba23cd6a9cce957afd7d7102e66c7aed630732"
+    },
+    {
+      "check_id": "property_clinical48",
+      "check_type": "test-linked",
+      "kind": "clinical_safety",
+      "disposition": "reused",
+      "relevance_accepted": true,
+      "decision": "ACCEPT_REUSED_PROPERTY",
+      "meaning": "Accepted clinical48/144 plus ee0e reported74/74 ordinary source equality and public signed-input/helper correspondence retain consultation/actor/patient/draft/tenant properties; six delete changes do not replace its closure.",
+      "historical_join": "Exact prior qualified row accepted855852 preserved.",
+      "delta_disposition": "ACCEPT_PRIOR_QUALIFIED_REUSE_IN_EXACT_V4_CONTEXT",
+      "delta_reason": "Exact product/helper/component closure unchanged by fixed reviewer mapping and portable authored fixture path; retain prior same-property judgment and limitations.",
+      "current_context_ref": "context",
+      "current_source_sha256": "a197e3d10dbf94d80e117f6269ba23cd6a9cce957afd7d7102e66c7aed630732"
+    },
+    {
+      "check_id": "property_ai14_attempt02",
+      "check_type": "test-linked",
+      "kind": "ai_advisory",
+      "disposition": "reused",
+      "relevance_accepted": true,
+      "decision": "ACCEPT_REUSED_PROPERTY",
+      "meaning": "Actual14/42 FakeProvider access/entitlement/budget/role/PHI-audit frontier is accepted34fd9 and V8 fidelity. Controller/audio changes are outside app31 closure; advisory access is conjoined with clinical human attestation.",
+      "historical_join": "Exact prior qualified row accepted855852 preserved.",
+      "delta_disposition": "ACCEPT_PRIOR_QUALIFIED_REUSE_IN_EXACT_V4_CONTEXT",
+      "delta_reason": "Exact product/helper/component closure unchanged by fixed reviewer mapping and portable authored fixture path; retain prior same-property judgment and limitations.",
+      "current_context_ref": "context",
+      "current_source_sha256": "a197e3d10dbf94d80e117f6269ba23cd6a9cce957afd7d7102e66c7aed630732"
+    },
+    {
+      "check_id": "property_green_twentyeight",
+      "check_type": "test-linked",
+      "kind": "confirmation_delete",
+      "disposition": "reused",
+      "relevance_accepted": true,
+      "decision": "ACCEPT_QUALIFIED_REUSED_PROPERTY",
+      "meaning": "Exact three current delete afterimages preserve qualified28 v2/v1/priority/receipt/rollback predicates; router raw helper lies outside composition effects. Retain original29 NONPASS, excluded corruption case and absent old final outside comparison.",
+      "historical_join": "Exact prior qualified row accepted855852 preserved.",
+      "delta_disposition": "ACCEPT_PRIOR_QUALIFIED_REUSE_IN_EXACT_V4_CONTEXT",
+      "delta_reason": "Exact product/helper/component closure unchanged by fixed reviewer mapping and portable authored fixture path; retain prior same-property judgment and limitations.",
+      "current_context_ref": "context",
+      "current_source_sha256": "a197e3d10dbf94d80e117f6269ba23cd6a9cce957afd7d7102e66c7aed630732"
+    },
+    {
+      "check_id": "property_green02",
+      "check_type": "test-linked",
+      "kind": "confirmation_delete",
+      "disposition": "reused",
+      "relevance_accepted": true,
+      "decision": "ACCEPT_REUSED_PROPERTY",
+      "meaning": "Exact four product bytes/current audit preINSERT corruption establish503/full independent fresh-session rollback and accepted actual final outside invariance. Does not repair old cleanup reports.",
+      "historical_join": "Exact prior qualified row accepted855852 preserved.",
+      "delta_disposition": "ACCEPT_PRIOR_QUALIFIED_REUSE_IN_EXACT_V4_CONTEXT",
+      "delta_reason": "Exact product/helper/component closure unchanged by fixed reviewer mapping and portable authored fixture path; retain prior same-property judgment and limitations.",
+      "current_context_ref": "context",
+      "current_source_sha256": "a197e3d10dbf94d80e117f6269ba23cd6a9cce957afd7d7102e66c7aed630732"
+    },
+    {
+      "check_id": "support_current49",
+      "check_type": "standalone",
+      "kind": "ordinary_control_support",
+      "disposition": "reused",
+      "relevance_accepted": true,
+      "decision": "ACCEPT_REUSED_CONTROL_SUPPORT",
+      "meaning": "Accepted49 selected functions/121 parameterized cases authenticate proof/source/config refusal controls; no scanner/product outcome supplied. Maintenance159b preserves unrelated selected bodies; actual changed caller/proof operation remains separate.",
+      "historical_join": "Exact prior qualified row accepted855852 preserved.",
+      "delta_disposition": "ACCEPT_PRIOR_QUALIFIED_REUSE_IN_EXACT_V4_CONTEXT",
+      "delta_reason": "The new controller role join and two AST-selected methods are separately verified; this historical 49-function support remains its original selected-body result, not validation of the new full closeout loader.",
+      "current_context_ref": "context",
+      "current_source_sha256": "a197e3d10dbf94d80e117f6269ba23cd6a9cce957afd7d7102e66c7aed630732"
+    },
+    {
+      "check_id": "support_ci_b_88",
+      "check_type": "standalone",
+      "kind": "ordinary_control_support",
+      "disposition": "reused",
+      "relevance_accepted": true,
+      "decision": "ACCEPT_REUSED_CONTROL_SUPPORT",
+      "meaning": "Exact ordinary migration helperfaa325 source equality plus accepted88 synthetic supervision cases preserve literal endpoint/deadline/owned cleanup/refusal duties. No actual whole migration database execution inferred.",
+      "historical_join": "Exact prior qualified row accepted855852 preserved.",
+      "delta_disposition": "ACCEPT_PRIOR_QUALIFIED_REUSE_IN_EXACT_V4_CONTEXT",
+      "delta_reason": "Exact product/helper/component closure unchanged by fixed reviewer mapping and portable authored fixture path; retain prior same-property judgment and limitations.",
+      "current_context_ref": "context",
+      "current_source_sha256": "a197e3d10dbf94d80e117f6269ba23cd6a9cce957afd7d7102e66c7aed630732"
+    },
+    {
+      "check_id": "support_delete_postclaim_one",
+      "check_type": "standalone",
+      "kind": "ordinary_control_support",
+      "disposition": "reused",
+      "relevance_accepted": true,
+      "decision": "ACCEPT_REUSED_PROPERTY",
+      "meaning": "Retain accepted original pre-effect real-claim rollback. Current GREEN/source composition supplies changed delete authority/effects; never relabel original v1 as actual new-adapter execution.",
+      "historical_join": "Exact prior qualified row accepted855852 preserved.",
+      "delta_disposition": "ACCEPT_PRIOR_QUALIFIED_REUSE_IN_EXACT_V4_CONTEXT",
+      "delta_reason": "Exact product/helper/component closure unchanged by fixed reviewer mapping and portable authored fixture path; retain prior same-property judgment and limitations.",
+      "current_context_ref": "context",
+      "current_source_sha256": "a197e3d10dbf94d80e117f6269ba23cd6a9cce957afd7d7102e66c7aed630732"
+    },
+    {
+      "check_id": "support_first_write_five",
+      "check_type": "standalone",
+      "kind": "ordinary_control_support",
+      "disposition": "reused",
+      "relevance_accepted": true,
+      "decision": "ACCEPT_REUSED_PROPERTY",
+      "meaning": "Retain five first receipt/immediate-replay family duties. Unchanged nondelete functions and explicit current delete GREEN/SRC05 conjunction preserve intended property.",
+      "historical_join": "Exact prior qualified row accepted855852 preserved.",
+      "delta_disposition": "ACCEPT_PRIOR_QUALIFIED_REUSE_IN_EXACT_V4_CONTEXT",
+      "delta_reason": "Exact product/helper/component closure unchanged by fixed reviewer mapping and portable authored fixture path; retain prior same-property judgment and limitations.",
+      "current_context_ref": "context",
+      "current_source_sha256": "a197e3d10dbf94d80e117f6269ba23cd6a9cce957afd7d7102e66c7aed630732"
+    },
+    {
+      "check_id": "support_input_guards_ten",
+      "check_type": "standalone",
+      "kind": "ordinary_control_support",
+      "disposition": "reused",
+      "relevance_accepted": true,
+      "decision": "ACCEPT_REUSED_PROPERTY",
+      "meaning": "Schema/key/nondelete guards unchanged; current GREEN genuinely signedNone and deferredFalse targeted rollback supplies changed admission frontier. No exhaustive internal object mutation claim.",
+      "historical_join": "Exact prior qualified row accepted855852 preserved.",
+      "delta_disposition": "ACCEPT_PRIOR_QUALIFIED_REUSE_IN_EXACT_V4_CONTEXT",
+      "delta_reason": "Exact product/helper/component closure unchanged by fixed reviewer mapping and portable authored fixture path; retain prior same-property judgment and limitations.",
+      "current_context_ref": "context",
+      "current_source_sha256": "a197e3d10dbf94d80e117f6269ba23cd6a9cce957afd7d7102e66c7aed630732"
+    },
+    {
+      "check_id": "support_residual_thirteen",
+      "check_type": "standalone",
+      "kind": "ordinary_control_support",
+      "disposition": "reused",
+      "relevance_accepted": true,
+      "decision": "ACCEPT_REUSED_CONTROL_SUPPORT",
+      "meaning": "Retain canonical receipt/Phase0/proof refusal controls under original tested bodies/context. Does not certify new maintenance installation/native transition or fill product outcomes.",
+      "historical_join": "Exact prior qualified row accepted855852 preserved.",
+      "delta_disposition": "ACCEPT_PRIOR_QUALIFIED_REUSE_IN_EXACT_V4_CONTEXT",
+      "delta_reason": "New fixed reviewer join adds a separately exercised condition. Prior refusal bodies remain preserved; native installer/CI/closeout full-loader positives and targeted physical denials still require their own proof.",
+      "current_context_ref": "context",
+      "current_source_sha256": "a197e3d10dbf94d80e117f6269ba23cd6a9cce957afd7d7102e66c7aed630732"
+    },
+    {
+      "check_id": "support_sibling_three",
+      "check_type": "standalone",
+      "kind": "ordinary_control_support",
+      "disposition": "reused",
+      "relevance_accepted": true,
+      "decision": "ACCEPT_REUSED_PROPERTY",
+      "meaning": "Actual staff/Bernie/update started-claim refusals and rollback remain relevant on unchanged sibling paths, outside raw-delete readback correction.",
+      "historical_join": "Exact prior qualified row accepted855852 preserved.",
+      "delta_disposition": "ACCEPT_PRIOR_QUALIFIED_REUSE_IN_EXACT_V4_CONTEXT",
+      "delta_reason": "Exact product/helper/component closure unchanged by fixed reviewer mapping and portable authored fixture path; retain prior same-property judgment and limitations.",
+      "current_context_ref": "context",
+      "current_source_sha256": "a197e3d10dbf94d80e117f6269ba23cd6a9cce957afd7d7102e66c7aed630732"
+    },
+    {
+      "check_id": "support_static_thirtyone",
+      "check_type": "standalone",
+      "kind": "ordinary_control_support",
+      "disposition": "reused",
+      "relevance_accepted": true,
+      "decision": "ACCEPT_QUALIFIED_REUSED_PROPERTY",
+      "meaning": "31 unchanged source/document lexical predicates retain relevance; actual current delegated predicate comes from STATIC03. Preserve raw32 NONPASS and exact excluded old assertion.",
+      "historical_join": "Exact prior qualified row accepted855852 preserved.",
+      "delta_disposition": "ACCEPT_PRIOR_QUALIFIED_REUSE_IN_EXACT_V4_CONTEXT",
+      "delta_reason": "Exact product/helper/component closure unchanged by fixed reviewer mapping and portable authored fixture path; retain prior same-property judgment and limitations.",
+      "current_context_ref": "context",
+      "current_source_sha256": "a197e3d10dbf94d80e117f6269ba23cd6a9cce957afd7d7102e66c7aed630732"
+    },
+    {
+      "check_id": "support_state_receipt_nine",
+      "check_type": "standalone",
+      "kind": "ordinary_control_support",
+      "disposition": "reused",
+      "relevance_accepted": true,
+      "decision": "ACCEPT_QUALIFIED_REUSED_PROPERTY",
+      "meaning": "Six unchanged nondelete and three guarded delete no-effect predicates retain qualified correspondence; new SRC05 separately establishes old missing signed replay/raw readback duties. Preserve raw11 NONPASS.",
+      "historical_join": "Exact prior qualified row accepted855852 preserved.",
+      "delta_disposition": "ACCEPT_PRIOR_QUALIFIED_REUSE_IN_EXACT_V4_CONTEXT",
+      "delta_reason": "Exact product/helper/component closure unchanged by fixed reviewer mapping and portable authored fixture path; retain prior same-property judgment and limitations.",
+      "current_context_ref": "context",
+      "current_source_sha256": "a197e3d10dbf94d80e117f6269ba23cd6a9cce957afd7d7102e66c7aed630732"
+    },
+    {
+      "check_id": "support_static_status_current_subject_attempt03",
+      "check_type": "standalone",
+      "kind": "ordinary_control_support",
+      "disposition": "reused",
+      "relevance_accepted": true,
+      "decision": "ACCEPT_REUSED_PROPERTY",
+      "meaning": "Actual dbb6617 one-node/3-phase route-adapter-deferred/locked predicate supports canonical119c source adaptation. Projectioncf0 is fidelity provenance, not actual result review.",
+      "historical_join": "Exact prior qualified row accepted855852 preserved.",
+      "delta_disposition": "ACCEPT_PRIOR_QUALIFIED_REUSE_IN_EXACT_V4_CONTEXT",
+      "delta_reason": "Exact product/helper/component closure unchanged by fixed reviewer mapping and portable authored fixture path; retain prior same-property judgment and limitations.",
+      "current_context_ref": "context",
+      "current_source_sha256": "a197e3d10dbf94d80e117f6269ba23cd6a9cce957afd7d7102e66c7aed630732"
+    },
+    {
+      "check_id": "documentary_tenant22",
+      "check_type": "standalone",
+      "kind": "retained_safety_documentary",
+      "disposition": "reused",
+      "relevance_accepted": true,
+      "decision": "ACCEPT_REUSED_PROPERTY",
+      "meaning": "Accepted restricted application/observer/admin, six direct-practice-table RLS, patient HTTP and same-connection commit/rollback/rebind22/66 plus cleanup remain bounded; not universal tenant coverage.",
+      "historical_join": "Exact prior qualified row accepted855852 preserved.",
+      "delta_disposition": "ACCEPT_PRIOR_QUALIFIED_REUSE_IN_EXACT_V4_CONTEXT",
+      "delta_reason": "Exact product/helper/component closure unchanged by fixed reviewer mapping and portable authored fixture path; retain prior same-property judgment and limitations.",
+      "current_context_ref": "context",
+      "current_source_sha256": "a197e3d10dbf94d80e117f6269ba23cd6a9cce957afd7d7102e66c7aed630732"
+    },
+    {
+      "check_id": "documentary_relationship1",
+      "check_type": "standalone",
+      "kind": "retained_safety_documentary",
+      "disposition": "reused",
+      "relevance_accepted": true,
+      "decision": "ACCEPT_REUSED_PROPERTY",
+      "meaning": "Selected authoritative CP snapshot supports one lifecycle identity/three phases/18-edge migration conjunction and accepted cleanup. No direct original full receipt fidelity or additional identities minted.",
+      "historical_join": "Exact prior qualified row accepted855852 preserved.",
+      "delta_disposition": "ACCEPT_PRIOR_QUALIFIED_REUSE_IN_EXACT_V4_CONTEXT",
+      "delta_reason": "Exact product/helper/component closure unchanged by fixed reviewer mapping and portable authored fixture path; retain prior same-property judgment and limitations.",
+      "current_context_ref": "context",
+      "current_source_sha256": "a197e3d10dbf94d80e117f6269ba23cd6a9cce957afd7d7102e66c7aed630732"
+    },
+    {
+      "check_id": "documentary_auth2",
+      "check_type": "standalone",
+      "kind": "retained_safety_documentary",
+      "disposition": "reused",
+      "relevance_accepted": true,
+      "decision": "ACCEPT_REUSED_PROPERTY",
+      "meaning": "Two staging/production real-password/JWT/current-user duties/six phases and accepted disposal remain valid complementary production control evidence; H5 aggregateFAIL not promoted.",
+      "historical_join": "Exact prior qualified row accepted855852 preserved.",
+      "delta_disposition": "ACCEPT_PRIOR_QUALIFIED_REUSE_IN_EXACT_V4_CONTEXT",
+      "delta_reason": "Exact product/helper/component closure unchanged by fixed reviewer mapping and portable authored fixture path; retain prior same-property judgment and limitations.",
+      "current_context_ref": "context",
+      "current_source_sha256": "a197e3d10dbf94d80e117f6269ba23cd6a9cce957afd7d7102e66c7aed630732"
+    },
+    {
+      "check_id": "documentary_patient_component",
+      "check_type": "standalone",
+      "kind": "retained_safety_documentary",
+      "disposition": "reused",
+      "relevance_accepted": true,
+      "decision": "ACCEPT_REUSED_PROPERTY",
+      "meaning": "Exact retained patient schema/test correspondence and15 extracted unittest methods support explicit-patient property; no ASGI/application/database execution fabricated.",
+      "historical_join": "Exact prior qualified row accepted855852 preserved.",
+      "delta_disposition": "ACCEPT_PRIOR_QUALIFIED_REUSE_IN_EXACT_V4_CONTEXT",
+      "delta_reason": "Exact product/helper/component closure unchanged by fixed reviewer mapping and portable authored fixture path; retain prior same-property judgment and limitations.",
+      "current_context_ref": "context",
+      "current_source_sha256": "a197e3d10dbf94d80e117f6269ba23cd6a9cce957afd7d7102e66c7aed630732"
+    },
+    {
+      "check_id": "documentary_mount_structure",
+      "check_type": "standalone",
+      "kind": "retained_safety_documentary",
+      "disposition": "reused",
+      "relevance_accepted": true,
+      "decision": "ACCEPT_REUSED_PROPERTY",
+      "meaning": "Exact main/config/Bernie/profile source correspondence retains accepted three nondev-mount structural subchecks. Keep distinct source-only/extracted context and H5 limits.",
+      "historical_join": "Exact prior qualified row accepted855852 preserved.",
+      "delta_disposition": "ACCEPT_PRIOR_QUALIFIED_REUSE_IN_EXACT_V4_CONTEXT",
+      "delta_reason": "Exact product/helper/component closure unchanged by fixed reviewer mapping and portable authored fixture path; retain prior same-property judgment and limitations.",
+      "current_context_ref": "context",
+      "current_source_sha256": "a197e3d10dbf94d80e117f6269ba23cd6a9cce957afd7d7102e66c7aed630732"
+    },
+    {
+      "check_id": "documentary_audio_source_safety",
+      "check_type": "standalone",
+      "kind": "retained_safety_documentary",
+      "disposition": "reused",
+      "relevance_accepted": true,
+      "decision": "ACCEPT_REUSED_PROPERTY",
+      "meaning": "Unchanged named safety bodies plus accepted transport35 source7de6-to-d318 fallback-only bridge and exact d318 browser3 resolve bearer/restriction/async privacy. No real Office/media/backend guarantee.",
+      "historical_join": "Exact prior qualified row accepted855852 preserved.",
+      "delta_disposition": "ACCEPT_PRIOR_QUALIFIED_REUSE_IN_EXACT_V4_CONTEXT",
+      "delta_reason": "Exact product/helper/component closure unchanged by fixed reviewer mapping and portable authored fixture path; retain prior same-property judgment and limitations.",
+      "current_context_ref": "context",
+      "current_source_sha256": "a197e3d10dbf94d80e117f6269ba23cd6a9cce957afd7d7102e66c7aed630732"
+    },
+    {
+      "check_id": "documentary_dependency_audit",
+      "check_type": "standalone",
+      "kind": "public_qualified_documentary",
+      "disposition": "reused",
+      "relevance_accepted": true,
+      "decision": "ACCEPT_REUSED_PROPERTY",
+      "meaning": "Independently hash-checked current requirements523/420960 equals public accepted Oct1 required-root snapshot25roots/74versions. No age-only audit query, installed closure or fabricated version inventory needed.",
+      "historical_join": "Exact prior qualified row accepted855852 preserved.",
+      "delta_disposition": "ACCEPT_PRIOR_QUALIFIED_REUSE_IN_EXACT_V4_CONTEXT",
+      "delta_reason": "Exact product/helper/component closure unchanged by fixed reviewer mapping and portable authored fixture path; retain prior same-property judgment and limitations.",
+      "current_context_ref": "context",
+      "current_source_sha256": "a197e3d10dbf94d80e117f6269ba23cd6a9cce957afd7d7102e66c7aed630732"
+    },
+    {
+      "check_id": "documentary_migration_paths",
+      "check_type": "standalone",
+      "kind": "public_qualified_documentary",
+      "disposition": "reused",
+      "relevance_accepted": true,
+      "decision": "ACCEPT_REUSED_PROPERTY",
+      "meaning": "Distinct accepted fresh/owned inverse/populated preservation/unsafe refusal31+clinical48+tenant22+relationship1 conjunction, current433cd/0c5/faa/159b correspondence, retains required supported paths. No common compound runtime.",
+      "historical_join": "Exact prior qualified row accepted855852 preserved.",
+      "delta_disposition": "ACCEPT_PRIOR_QUALIFIED_REUSE_IN_EXACT_V4_CONTEXT",
+      "delta_reason": "Exact product/helper/component closure unchanged by fixed reviewer mapping and portable authored fixture path; retain prior same-property judgment and limitations.",
+      "current_context_ref": "context",
+      "current_source_sha256": "a197e3d10dbf94d80e117f6269ba23cd6a9cce957afd7d7102e66c7aed630732"
+    },
+    {
+      "check_id": "documentary_risk_six_findings",
+      "check_type": "standalone",
+      "kind": "public_qualified_documentary",
+      "disposition": "reused",
+      "relevance_accepted": true,
+      "decision": "ACCEPT_QUALIFIED_REUSED_PROPERTY_AND_CURRENT_SCOPED_SOURCE_CONTROLS",
+      "meaning": "Retain public four distinct B506 objects, B324, B102 and severity AND confidence gate. df5a independently establishes current SafeLoader/closed helper/SHA256/reader/caller source predicates; actual3570/56555 establishes immutable scanner image and named PyYAML/Bandit/tool identity. No original site map or current fingerprint is invented. Retain 215 split184+31/rawexit1 and18 undisposed metrics. This is not a new all-severity-clean scanner result; actual future parser/tool behavior remains separately tested by the bound caller.",
+      "historical_join": "Exact prior qualified row accepted855852 preserved.",
+      "delta_disposition": "ACCEPT_PRIOR_QUALIFIED_REUSE_IN_EXACT_V4_CONTEXT",
+      "delta_reason": "New fixed canonical-to-safe reviewer mapping neither changes SafeLoader/resource/hash/archive/bootstrap/scanner premises nor relaxes reviewer independence. Its positive and targeted negative observations are accepted separately. Historical six finding objects, severity AND confidence and18 metrics remain unchanged.",
+      "current_context_ref": "context",
+      "current_source_sha256": "a197e3d10dbf94d80e117f6269ba23cd6a9cce957afd7d7102e66c7aed630732"
+    },
+    {
+      "check_id": "documentary_leakage_and_safety",
+      "check_type": "standalone",
+      "kind": "public_qualified_documentary",
+      "disposition": "reused",
+      "relevance_accepted": true,
+      "decision": "ACCEPT_QUALIFIED_REUSED_CONJUNCTION_AND_CHANGED_SOURCE_CORRESPONDENCE",
+      "meaning": "Retain lexical294 and accepted clinical/tenant/patient/AI-human-attestation/AUTH/transport/audio/appointment conjunction. df5a closes explicit controller/helper/caller/audio source correspondence; a472 names exact baseline plus overlays. Preserve lexical rawexit1/CLI-null and H5/AUTH historical limits. No fresh237/H5/294 run or universal patient/Office/provider guarantee is implied.",
+      "historical_join": "Exact prior qualified row accepted855852 preserved.",
+      "delta_disposition": "ACCEPT_PRIOR_QUALIFIED_REUSE_IN_EXACT_V4_CONTEXT",
+      "delta_reason": "The current composed-source identity is now a197 with e72/b6e4 overlays. The new role join is fixed to the designated reviewer and equal safe implementer sets; case-folded self-review is rejected. The portable authored test scalar adds no production read/effect allowance. Existing application/clinical/transport predicates are untouched.",
+      "current_context_ref": "context",
+      "current_source_sha256": "a197e3d10dbf94d80e117f6269ba23cd6a9cce957afd7d7102e66c7aed630732"
+    },
+    {
+      "check_id": "documentary_audio_current_component",
+      "check_type": "standalone",
+      "kind": "retained_safety_component",
+      "disposition": "reused",
+      "relevance_accepted": true,
+      "decision": "ACCEPT_REUSED_PROPERTY_WITH_FIXTURE_ADOPTION_JOIN",
+      "meaning": "Accepted47a809 actual exactd318 target/corrected8eef fixture supplies one ordinary identity/67 ordered Node subchecks/65 distinct names/zero Python phases and direct-child cleanup. Bind eventual fixture bytes; no old67 current-runnable claim or rerun.",
+      "historical_join": "Exact prior qualified row accepted855852 preserved.",
+      "delta_disposition": "ACCEPT_PRIOR_QUALIFIED_REUSE_IN_EXACT_V4_CONTEXT",
+      "delta_reason": "Exact product/helper/component closure unchanged by fixed reviewer mapping and portable authored fixture path; retain prior same-property judgment and limitations.",
+      "current_context_ref": "context",
+      "current_source_sha256": "a197e3d10dbf94d80e117f6269ba23cd6a9cce957afd7d7102e66c7aed630732"
+    },
+    {
+      "check_id": "documentary_python_compile",
+      "check_type": "standalone",
+      "kind": "qualified_public_compile_documentary",
+      "disposition": "reused",
+      "relevance_accepted": true,
+      "decision": "ACCEPT_QUALIFIED_REUSED_PROPERTY_WITH_EXACT_SOURCE_SUPPLEMENTS",
+      "meaning": "Historical294/077905 compile remains documentary. Actual700577 fullfile3.11.2 compile closes exact V3 bounded1425/policy9fb/testd99/helperf430 gap. Current49 selected compilation and SRC05/GREEN actual imports, unchanged119c/159b and verification bodies, and Python-string-only audio addition supply the reviewed source-predicate conjunction. Runtime3570 observes a3.11.2 interpreter; it is not another compile result. No whole current-tree294 outcome.",
+      "historical_join": "Exact prior qualified row accepted855852 preserved.",
+      "delta_disposition": "ACCEPT_PRIOR_QUALIFIED_REUSE_IN_EXACT_V4_CONTEXT",
+      "delta_reason": "For current overlays, supplement historical700577 with attempt01/8d51 actual full e72 controller compilation and attempt02/373c actual full b6e4 test compilation, both Python3.11.2. Historical old d99 test compilation remains historical; no whole-current-tree compile or new result count claimed.",
+      "current_context_ref": "context",
+      "current_source_sha256": "a197e3d10dbf94d80e117f6269ba23cd6a9cce957afd7d7102e66c7aed630732"
+    },
+    {
+      "check_id": "documentary_ruff_e9_f401",
+      "check_type": "standalone",
+      "kind": "qualified_public_ruff_documentary",
+      "disposition": "reused",
+      "relevance_accepted": true,
+      "decision": "ACCEPT_QUALIFIED_REUSED_PROPERTY_WITH_ACTUAL_CANONICAL_CHANGED_SOURCE_SUPPLEMENT",
+      "meaning": "Historical canonical30e8 E9/F401 public294/077905 contribution and unchanged-source transfers remain. Actual56555 proves one Ruff0.15.22 executable invocation on exact V3 bounded1425/policy9fb/testd99 with explicit30e8 config/py311/no-cache, exit0, complete captures and accepted physical cleanup. This resolves df5a's concrete missing three-file predicate; no unobserved b02 provenance, F821 substitution, autofix or new whole294 claim.",
+      "historical_join": "Exact prior qualified row accepted855852 preserved.",
+      "delta_disposition": "ACCEPT_PRIOR_QUALIFIED_REUSE_IN_EXACT_V4_CONTEXT",
+      "delta_reason": "For current overlays, supplement56555 with actual8d51 canonical e72 controller Ruff and actual373c canonical b6e4 test Ruff. Same pinned image/tool/config30e8, no cache/fixes; unchanged policy9fb retains56555. The older test7345 lint remains historical. No repository/global lint claim.",
+      "current_context_ref": "context",
+      "current_source_sha256": "a197e3d10dbf94d80e117f6269ba23cd6a9cce957afd7d7102e66c7aed630732"
+    },
+    {
+      "check_id": "property_src2_current",
+      "check_type": "test-linked",
+      "kind": "confirmation_state_receipt",
+      "disposition": "reused",
+      "relevance_accepted": true,
+      "decision": "ACCEPT_REUSED_PROPERTY",
+      "meaning": "975 binding/195 actual result/497 independent review truthfully provide two required scenarios/six phases plus whole fixture/outside/physical cleanup on exact four product bytes; bb81 closes both source-readiness gaps. Reused relative to later complete verifier, never relabel original SRC04 PASS.",
+      "historical_join": "Exact prior qualified row accepted855852 preserved.",
+      "delta_disposition": "ACCEPT_PRIOR_QUALIFIED_REUSE_IN_EXACT_V4_CONTEXT",
+      "delta_reason": "Exact product/helper/component closure unchanged by fixed reviewer mapping and portable authored fixture path; retain prior same-property judgment and limitations.",
+      "current_context_ref": "context",
+      "current_source_sha256": "a197e3d10dbf94d80e117f6269ba23cd6a9cce957afd7d7102e66c7aed630732"
+    }
+  ],
+  "preserved_limits": [
+    "Original source32/GREEN29/SRC11 aggregate NONPASS and excluded cases remain unchanged; later SRC05/whole-outside invariance does not rewrite older cleanup reports.",
+    "Different PyJWT/images/Postgres/Node runtime contexts remain distinct documentary facts. New dimension hashes identify normalized documents, not invented runtime-produced scalars.",
+    "Audio remains one ordinary component/67 ordered subchecks/65 unique displaynames/zero Python phases; patient/mount extracted source-only evidence remains qualified.",
+    "Risk retains six distinct public findings/severity AND confidence and18 metrics. Metadata does not manufacture a new clean Bandit/parser/tool run.",
+    "Eight elected test-linked cohorts/23 standalone roles retain the accepted property membership.159 represented IDs are not a whole-repository denominator. Neither newly added controller method becomes an elected original product identity."
+  ],
+  "remaining_required_work": [
+    "Rebind/materialize the exact complete graph to e92/a197 with truthful prior-result and this genuine external relevance role, support used-set, identities/cohort phases/seal/wrapper/maps/trusted context; obtain independent whole-graph acceptance.",
+    "Obtain separately reviewed operative complete-caller binding/grant/preflight, then reconcile its actual commands, live named identity and owned cleanup. Current narrow result is not the complete caller.",
+    "Complete genuine native three-kind validation, controller/helper/audio/CI installation and exact publication/readback/adoption with real prerequisite reviews; authored isolated synthetic objects remain fixtures.",
+    "Required independent final G2/twelve-criterion acceptance remains separate. No original property rerun is required solely due age, count or this two-row source delta."
+  ],
+  "supersession": "Only replaces855852's current source/plan tuple and supplements changed-file compile/Ruff/positive role evidence. Every historical meaning, exclusion and remaining graph/caller/install/adoption boundary is preserved.",
+  "effects": {
+    "source_or_implementation_authored": false,
+    "native_runtime_queries": false,
+    "target_imports": false,
+    "tests": false,
+    "git": false,
+    "canonical_or_checkpoint_mutation": false,
+    "nested_delegation": false,
+    "owned_atomic_review_only": true
+  }
+}

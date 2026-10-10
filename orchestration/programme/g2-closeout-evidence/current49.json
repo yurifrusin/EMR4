@@ -1,0 +1,1961 @@
+{
+  "schema": "emr4.ci_c_ordinary_cohort_support_source.v1",
+  "status": "SOURCE_ONLY_NONOPERATIVE",
+  "cohort_id": "current49",
+  "collection": [
+    "tests/test_python_source_state.py::test_valid_v2_selection_compiles_authenticated_bytes_after_disk_change",
+    "tests/test_python_source_state.py::test_validate_selection_is_pure_for_valid_and_invalid_rows",
+    "tests/test_python_source_state.py::test_authenticated_invalid_syntax_rejects_without_executing_source",
+    "tests/test_python_source_state.py::test_authenticated_valid_source_is_compiled_but_never_executed",
+    "tests/test_python_source_state.py::test_invalid_file_rows_reject_before_any_selected_read[parent-escape]",
+    "tests/test_python_source_state.py::test_invalid_file_rows_reject_before_any_selected_read[absolute]",
+    "tests/test_python_source_state.py::test_invalid_file_rows_reject_before_any_selected_read[backslash]",
+    "tests/test_python_source_state.py::test_invalid_file_rows_reject_before_any_selected_read[glob]",
+    "tests/test_python_source_state.py::test_invalid_file_rows_reject_before_any_selected_read[option-like]",
+    "tests/test_python_source_state.py::test_invalid_file_rows_reject_before_any_selected_read[windows-device]",
+    "tests/test_python_source_state.py::test_invalid_file_rows_reject_before_any_selected_read[trailing-dot]",
+    "tests/test_python_source_state.py::test_invalid_file_rows_reject_before_any_selected_read[trailing-space]",
+    "tests/test_python_source_state.py::test_invalid_file_rows_reject_before_any_selected_read[prohibited-token]",
+    "tests/test_python_source_state.py::test_invalid_file_rows_reject_before_any_selected_read[malformed-digest]",
+    "tests/test_python_source_state.py::test_invalid_file_rows_reject_before_any_selected_read[unknown-kind]",
+    "tests/test_python_source_state.py::test_cross_references_reject_before_any_selected_read[duplicate-file]",
+    "tests/test_python_source_state.py::test_cross_references_reject_before_any_selected_read[case-alias]",
+    "tests/test_python_source_state.py::test_cross_references_reject_before_any_selected_read[duplicate-phase]",
+    "tests/test_python_source_state.py::test_cross_references_reject_before_any_selected_read[unknown-phase-path]",
+    "tests/test_python_source_state.py::test_cross_references_reject_before_any_selected_read[empty-phase]",
+    "tests/test_python_source_state.py::test_cross_references_reject_before_any_selected_read[unclassified-source]",
+    "tests/test_python_source_state.py::test_cross_references_reject_before_any_selected_read[unknown-config]",
+    "tests/test_python_source_state.py::test_cross_references_reject_before_any_selected_read[duplicate-test-node]",
+    "tests/test_python_source_state.py::test_cross_references_reject_before_any_selected_read[option-test-node]",
+    "tests/test_python_source_state.py::test_schema_and_provenance_reject_before_selected_read[schema]",
+    "tests/test_python_source_state.py::test_schema_and_provenance_reject_before_selected_read[missing-key]",
+    "tests/test_python_source_state.py::test_schema_and_provenance_reject_before_selected_read[extra-key]",
+    "tests/test_python_source_state.py::test_schema_and_provenance_reject_before_selected_read[source-commit]",
+    "tests/test_python_source_state.py::test_schema_and_provenance_reject_before_selected_read[source-tree]",
+    "tests/test_python_source_state.py::test_schema_and_provenance_reject_before_selected_read[repository-wide]",
+    "tests/test_python_source_state.py::test_schema_and_provenance_reject_before_selected_read[empty-pending]",
+    "tests/test_python_source_state.py::test_schema_and_provenance_reject_before_selected_read[scope-digest]",
+    "tests/test_python_source_state.py::test_manifest_digest_mismatch_rejects_before_target_read",
+    "tests/test_python_source_state.py::test_malformed_authenticated_manifest_is_rejected",
+    "tests/test_python_source_state.py::test_authenticated_json_rejects_ambiguous_or_nonfinite_values[duplicate-key]",
+    "tests/test_python_source_state.py::test_authenticated_json_rejects_ambiguous_or_nonfinite_values[nonfinite]",
+    "tests/test_python_source_state.py::test_missing_or_directory_manifest_is_rejected[missing]",
+    "tests/test_python_source_state.py::test_missing_or_directory_manifest_is_rejected[directory]",
+    "tests/test_python_source_state.py::test_manifest_argument_rejects_before_any_physical_observation[prohibited-token]",
+    "tests/test_python_source_state.py::test_manifest_argument_rejects_before_any_physical_observation[windows-device]",
+    "tests/test_python_source_state.py::test_manifest_argument_rejects_before_any_physical_observation[trailing-dot]",
+    "tests/test_python_source_state.py::test_manifest_argument_rejects_before_any_physical_observation[parent-escape]",
+    "tests/test_python_source_state.py::test_manifest_argument_rejects_before_any_physical_observation[glob]",
+    "tests/test_python_source_state.py::test_manifest_digest_argument_rejects_before_manifest_observation[empty]",
+    "tests/test_python_source_state.py::test_manifest_digest_argument_rejects_before_manifest_observation[uppercase]",
+    "tests/test_python_source_state.py::test_manifest_digest_argument_rejects_before_manifest_observation[short]",
+    "tests/test_python_source_state.py::test_manifest_digest_argument_rejects_before_manifest_observation[nondigest]",
+    "tests/test_python_source_state.py::test_selected_read_rejects_missing_or_directory_target[missing]",
+    "tests/test_python_source_state.py::test_selected_read_rejects_missing_or_directory_target[directory]",
+    "tests/test_python_source_state.py::test_selected_read_rejects_invalid_literal_before_physical_observation[glob]",
+    "tests/test_python_source_state.py::test_selected_read_rejects_invalid_literal_before_physical_observation[escape]",
+    "tests/test_python_source_state.py::test_selected_read_rejects_invalid_literal_before_physical_observation[device]",
+    "tests/test_python_source_state.py::test_selected_read_rejects_invalid_literal_before_physical_observation[trailing-dot]",
+    "tests/test_python_source_state.py::test_selected_read_rejects_invalid_literal_before_physical_observation[option-like]",
+    "tests/test_python_source_state.py::test_selected_read_rejects_changed_digest",
+    "tests/test_python_source_state.py::test_selected_read_rejects_component_redirection[leaf]",
+    "tests/test_python_source_state.py::test_selected_read_rejects_component_redirection[parent]",
+    "tests/test_python_source_state.py::test_target_runtime_keeps_exact_311_contract",
+    "tests/test_python_source_state.py::test_compiler_cli_rejects_unbound_selection_before_load[both-missing]",
+    "tests/test_python_source_state.py::test_compiler_cli_rejects_unbound_selection_before_load[digest-missing]",
+    "tests/test_python_source_state.py::test_compiler_cli_rejects_unbound_selection_before_load[path-missing]",
+    "tests/test_python_source_state.py::test_compiler_cli_bad_digest_fails_before_physical_observation",
+    "tests/test_python_source_state.py::test_imports_use_prefetched_code_without_observing_paths",
+    "tests/test_python_source_state.py::test_profile_commands_are_exact_pure_selected_argv",
+    "tests/test_python_source_state.py::test_command_builder_rejects_missing_provenance_and_unsupported_profile",
+    "tests/test_python_source_state.py::test_unbound_profiles_fail_before_selection_or_command_execution[fast]",
+    "tests/test_python_source_state.py::test_unbound_profiles_fail_before_selection_or_command_execution[migration]",
+    "tests/test_python_source_state.py::test_unbound_profiles_fail_before_selection_or_command_execution[unknown]",
+    "tests/test_python_source_state.py::test_cli_missing_selection_binding_fails_before_load[both-missing]",
+    "tests/test_python_source_state.py::test_cli_missing_selection_binding_fails_before_load[digest-missing]",
+    "tests/test_python_source_state.py::test_cli_missing_selection_binding_fails_before_load[path-missing]",
+    "tests/test_python_source_state.py::test_cli_bad_digest_fails_before_physical_observation_or_execution",
+    "tests/test_repository_maintenance.py::test_verification_runtime_labels_launcher_timeout",
+    "tests/test_repository_maintenance.py::test_verification_runtime_preserves_child_exit_code",
+    "tests/test_repository_maintenance.py::test_verification_runtime_stops_after_first_child_failure",
+    "tests/test_repository_maintenance.py::test_historical_diary_lint_allows_neutral_and_policy_context",
+    "tests/test_repository_maintenance.py::test_historical_diary_lint_rejects_specific_drift[test-name-promotion]",
+    "tests/test_repository_maintenance.py::test_historical_diary_lint_rejects_specific_drift[prose-promotion]",
+    "tests/test_repository_maintenance.py::test_historical_diary_lint_rejects_specific_drift[deterministic-uses-permission]",
+    "tests/test_repository_maintenance.py::test_historical_diary_lint_rejects_specific_drift[cross-line-neutral-promotion]",
+    "tests/test_repository_maintenance.py::test_historical_diary_lint_paths_reads_only_explicit_literal_files",
+    "tests/test_repository_maintenance.py::test_historical_diary_lint_paths_rejects_invalid_literals[missing]",
+    "tests/test_repository_maintenance.py::test_historical_diary_lint_paths_rejects_invalid_literals[directory]",
+    "tests/test_repository_maintenance.py::test_historical_diary_lint_paths_rejects_invalid_literals[duplicate]",
+    "tests/test_repository_maintenance.py::test_historical_diary_lint_paths_rejects_invalid_literals[glob]",
+    "tests/test_repository_maintenance.py::test_historical_diary_lint_paths_rejects_invalid_literals[redirection]",
+    "tests/test_repository_maintenance.py::test_historical_diary_lint_paths_rejects_invalid_literals[symlink]",
+    "tests/test_repository_maintenance.py::test_historical_diary_lint_paths_validates_all_rows_before_observation[late-reserved-ancestor]",
+    "tests/test_repository_maintenance.py::test_historical_diary_lint_paths_validates_all_rows_before_observation[late-duplicate]",
+    "tests/test_repository_maintenance.py::test_bandit_accepts_complete_exact_scope_and_reviewed_findings",
+    "tests/test_repository_maintenance.py::test_bandit_normalizes_dot_prefixed_metric_and_result_filenames",
+    "tests/test_repository_maintenance.py::test_bandit_rejects_canonical_and_dot_prefixed_metric_alias",
+    "tests/test_repository_maintenance.py::test_bandit_accepts_empty_filtered_results_with_ambiguous_marginals",
+    "tests/test_repository_maintenance.py::test_bandit_rejects_empty_results_when_marginals_prove_an_eligible_finding",
+    "tests/test_repository_maintenance.py::test_bandit_rejects_incomplete_or_mismatched_evidence[missing-metric]",
+    "tests/test_repository_maintenance.py::test_bandit_rejects_incomplete_or_mismatched_evidence[extra-metric]",
+    "tests/test_repository_maintenance.py::test_bandit_rejects_incomplete_or_mismatched_evidence[missing-rank]",
+    "tests/test_repository_maintenance.py::test_bandit_rejects_incomplete_or_mismatched_evidence[negative-rank]",
+    "tests/test_repository_maintenance.py::test_bandit_rejects_incomplete_or_mismatched_evidence[noninteger-rank]",
+    "tests/test_repository_maintenance.py::test_bandit_rejects_incomplete_or_mismatched_evidence[totals-mismatch]",
+    "tests/test_repository_maintenance.py::test_bandit_rejects_incomplete_or_mismatched_evidence[scanner-error]",
+    "tests/test_repository_maintenance.py::test_bandit_rejects_incomplete_or_mismatched_evidence[unexpected-finding]",
+    "tests/test_repository_maintenance.py::test_bandit_rejects_incomplete_or_mismatched_evidence[omitted-finding]",
+    "tests/test_repository_maintenance.py::test_bandit_rejects_incomplete_or_mismatched_evidence[mismatched-hash]",
+    "tests/test_repository_maintenance.py::test_bandit_rejects_incomplete_or_mismatched_evidence[duplicate-result]",
+    "tests/test_repository_maintenance.py::test_bandit_rejects_incomplete_or_mismatched_evidence[duplicate-review]",
+    "tests/test_repository_maintenance.py::test_bandit_rejects_incomplete_or_mismatched_evidence[result-outside-scope]",
+    "tests/test_repository_maintenance.py::test_bandit_rejects_unreviewed_findings",
+    "tests/test_repository_maintenance.py::test_bandit_rejects_reviewed_fingerprint_missing_from_complete_report",
+    "tests/test_repository_maintenance.py::test_bandit_rejects_inconsistent_or_failed_scanner_exit[success-with-findings]",
+    "tests/test_repository_maintenance.py::test_bandit_rejects_inconsistent_or_failed_scanner_exit[scanner-error-exit]",
+    "tests/test_repository_maintenance.py::test_bandit_parser_rejects_duplicate_raw_json_keys",
+    "tests/test_repository_maintenance.py::test_bandit_cli_scans_only_authenticated_literal_files",
+    "tests/test_repository_maintenance.py::test_bandit_cli_rejects_pending_review_before_scanner",
+    "tests/test_repository_maintenance.py::test_historical_diary_cli_uses_authenticated_literal_selection",
+    "tests/test_repository_maintenance.py::test_scanner_clis_require_explicit_selection_before_observation[bandit]",
+    "tests/test_repository_maintenance.py::test_scanner_clis_require_explicit_selection_before_observation[leakage]",
+    "tests/test_repository_maintenance.py::test_scanner_clis_reject_bad_binding_before_loader_or_scanner[bandit-bad-digest]",
+    "tests/test_repository_maintenance.py::test_scanner_clis_reject_bad_binding_before_loader_or_scanner[bandit-backslash-relative-path]",
+    "tests/test_repository_maintenance.py::test_scanner_clis_reject_bad_binding_before_loader_or_scanner[leakage-bad-digest]",
+    "tests/test_repository_maintenance.py::test_scanner_clis_reject_bad_binding_before_loader_or_scanner[leakage-backslash-relative-path]"
+  ],
+  "phase_rows": [
+    {
+      "nodeid": "tests/test_python_source_state.py::test_valid_v2_selection_compiles_authenticated_bytes_after_disk_change",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_valid_v2_selection_compiles_authenticated_bytes_after_disk_change",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_valid_v2_selection_compiles_authenticated_bytes_after_disk_change",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_validate_selection_is_pure_for_valid_and_invalid_rows",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_validate_selection_is_pure_for_valid_and_invalid_rows",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_validate_selection_is_pure_for_valid_and_invalid_rows",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_authenticated_invalid_syntax_rejects_without_executing_source",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_authenticated_invalid_syntax_rejects_without_executing_source",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_authenticated_invalid_syntax_rejects_without_executing_source",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_authenticated_valid_source_is_compiled_but_never_executed",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_authenticated_valid_source_is_compiled_but_never_executed",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_authenticated_valid_source_is_compiled_but_never_executed",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_invalid_file_rows_reject_before_any_selected_read[parent-escape]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_invalid_file_rows_reject_before_any_selected_read[parent-escape]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_invalid_file_rows_reject_before_any_selected_read[parent-escape]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_invalid_file_rows_reject_before_any_selected_read[absolute]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_invalid_file_rows_reject_before_any_selected_read[absolute]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_invalid_file_rows_reject_before_any_selected_read[absolute]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_invalid_file_rows_reject_before_any_selected_read[backslash]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_invalid_file_rows_reject_before_any_selected_read[backslash]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_invalid_file_rows_reject_before_any_selected_read[backslash]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_invalid_file_rows_reject_before_any_selected_read[glob]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_invalid_file_rows_reject_before_any_selected_read[glob]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_invalid_file_rows_reject_before_any_selected_read[glob]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_invalid_file_rows_reject_before_any_selected_read[option-like]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_invalid_file_rows_reject_before_any_selected_read[option-like]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_invalid_file_rows_reject_before_any_selected_read[option-like]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_invalid_file_rows_reject_before_any_selected_read[windows-device]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_invalid_file_rows_reject_before_any_selected_read[windows-device]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_invalid_file_rows_reject_before_any_selected_read[windows-device]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_invalid_file_rows_reject_before_any_selected_read[trailing-dot]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_invalid_file_rows_reject_before_any_selected_read[trailing-dot]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_invalid_file_rows_reject_before_any_selected_read[trailing-dot]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_invalid_file_rows_reject_before_any_selected_read[trailing-space]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_invalid_file_rows_reject_before_any_selected_read[trailing-space]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_invalid_file_rows_reject_before_any_selected_read[trailing-space]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_invalid_file_rows_reject_before_any_selected_read[prohibited-token]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_invalid_file_rows_reject_before_any_selected_read[prohibited-token]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_invalid_file_rows_reject_before_any_selected_read[prohibited-token]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_invalid_file_rows_reject_before_any_selected_read[malformed-digest]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_invalid_file_rows_reject_before_any_selected_read[malformed-digest]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_invalid_file_rows_reject_before_any_selected_read[malformed-digest]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_invalid_file_rows_reject_before_any_selected_read[unknown-kind]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_invalid_file_rows_reject_before_any_selected_read[unknown-kind]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_invalid_file_rows_reject_before_any_selected_read[unknown-kind]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_cross_references_reject_before_any_selected_read[duplicate-file]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_cross_references_reject_before_any_selected_read[duplicate-file]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_cross_references_reject_before_any_selected_read[duplicate-file]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_cross_references_reject_before_any_selected_read[case-alias]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_cross_references_reject_before_any_selected_read[case-alias]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_cross_references_reject_before_any_selected_read[case-alias]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_cross_references_reject_before_any_selected_read[duplicate-phase]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_cross_references_reject_before_any_selected_read[duplicate-phase]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_cross_references_reject_before_any_selected_read[duplicate-phase]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_cross_references_reject_before_any_selected_read[unknown-phase-path]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_cross_references_reject_before_any_selected_read[unknown-phase-path]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_cross_references_reject_before_any_selected_read[unknown-phase-path]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_cross_references_reject_before_any_selected_read[empty-phase]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_cross_references_reject_before_any_selected_read[empty-phase]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_cross_references_reject_before_any_selected_read[empty-phase]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_cross_references_reject_before_any_selected_read[unclassified-source]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_cross_references_reject_before_any_selected_read[unclassified-source]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_cross_references_reject_before_any_selected_read[unclassified-source]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_cross_references_reject_before_any_selected_read[unknown-config]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_cross_references_reject_before_any_selected_read[unknown-config]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_cross_references_reject_before_any_selected_read[unknown-config]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_cross_references_reject_before_any_selected_read[duplicate-test-node]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_cross_references_reject_before_any_selected_read[duplicate-test-node]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_cross_references_reject_before_any_selected_read[duplicate-test-node]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_cross_references_reject_before_any_selected_read[option-test-node]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_cross_references_reject_before_any_selected_read[option-test-node]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_cross_references_reject_before_any_selected_read[option-test-node]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_schema_and_provenance_reject_before_selected_read[schema]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_schema_and_provenance_reject_before_selected_read[schema]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_schema_and_provenance_reject_before_selected_read[schema]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_schema_and_provenance_reject_before_selected_read[missing-key]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_schema_and_provenance_reject_before_selected_read[missing-key]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_schema_and_provenance_reject_before_selected_read[missing-key]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_schema_and_provenance_reject_before_selected_read[extra-key]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_schema_and_provenance_reject_before_selected_read[extra-key]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_schema_and_provenance_reject_before_selected_read[extra-key]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_schema_and_provenance_reject_before_selected_read[source-commit]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_schema_and_provenance_reject_before_selected_read[source-commit]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_schema_and_provenance_reject_before_selected_read[source-commit]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_schema_and_provenance_reject_before_selected_read[source-tree]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_schema_and_provenance_reject_before_selected_read[source-tree]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_schema_and_provenance_reject_before_selected_read[source-tree]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_schema_and_provenance_reject_before_selected_read[repository-wide]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_schema_and_provenance_reject_before_selected_read[repository-wide]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_schema_and_provenance_reject_before_selected_read[repository-wide]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_schema_and_provenance_reject_before_selected_read[empty-pending]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_schema_and_provenance_reject_before_selected_read[empty-pending]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_schema_and_provenance_reject_before_selected_read[empty-pending]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_schema_and_provenance_reject_before_selected_read[scope-digest]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_schema_and_provenance_reject_before_selected_read[scope-digest]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_schema_and_provenance_reject_before_selected_read[scope-digest]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_manifest_digest_mismatch_rejects_before_target_read",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_manifest_digest_mismatch_rejects_before_target_read",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_manifest_digest_mismatch_rejects_before_target_read",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_malformed_authenticated_manifest_is_rejected",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_malformed_authenticated_manifest_is_rejected",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_malformed_authenticated_manifest_is_rejected",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_authenticated_json_rejects_ambiguous_or_nonfinite_values[duplicate-key]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_authenticated_json_rejects_ambiguous_or_nonfinite_values[duplicate-key]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_authenticated_json_rejects_ambiguous_or_nonfinite_values[duplicate-key]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_authenticated_json_rejects_ambiguous_or_nonfinite_values[nonfinite]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_authenticated_json_rejects_ambiguous_or_nonfinite_values[nonfinite]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_authenticated_json_rejects_ambiguous_or_nonfinite_values[nonfinite]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_missing_or_directory_manifest_is_rejected[missing]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_missing_or_directory_manifest_is_rejected[missing]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_missing_or_directory_manifest_is_rejected[missing]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_missing_or_directory_manifest_is_rejected[directory]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_missing_or_directory_manifest_is_rejected[directory]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_missing_or_directory_manifest_is_rejected[directory]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_manifest_argument_rejects_before_any_physical_observation[prohibited-token]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_manifest_argument_rejects_before_any_physical_observation[prohibited-token]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_manifest_argument_rejects_before_any_physical_observation[prohibited-token]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_manifest_argument_rejects_before_any_physical_observation[windows-device]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_manifest_argument_rejects_before_any_physical_observation[windows-device]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_manifest_argument_rejects_before_any_physical_observation[windows-device]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_manifest_argument_rejects_before_any_physical_observation[trailing-dot]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_manifest_argument_rejects_before_any_physical_observation[trailing-dot]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_manifest_argument_rejects_before_any_physical_observation[trailing-dot]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_manifest_argument_rejects_before_any_physical_observation[parent-escape]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_manifest_argument_rejects_before_any_physical_observation[parent-escape]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_manifest_argument_rejects_before_any_physical_observation[parent-escape]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_manifest_argument_rejects_before_any_physical_observation[glob]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_manifest_argument_rejects_before_any_physical_observation[glob]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_manifest_argument_rejects_before_any_physical_observation[glob]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_manifest_digest_argument_rejects_before_manifest_observation[empty]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_manifest_digest_argument_rejects_before_manifest_observation[empty]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_manifest_digest_argument_rejects_before_manifest_observation[empty]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_manifest_digest_argument_rejects_before_manifest_observation[uppercase]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_manifest_digest_argument_rejects_before_manifest_observation[uppercase]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_manifest_digest_argument_rejects_before_manifest_observation[uppercase]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_manifest_digest_argument_rejects_before_manifest_observation[short]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_manifest_digest_argument_rejects_before_manifest_observation[short]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_manifest_digest_argument_rejects_before_manifest_observation[short]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_manifest_digest_argument_rejects_before_manifest_observation[nondigest]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_manifest_digest_argument_rejects_before_manifest_observation[nondigest]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_manifest_digest_argument_rejects_before_manifest_observation[nondigest]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_selected_read_rejects_missing_or_directory_target[missing]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_selected_read_rejects_missing_or_directory_target[missing]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_selected_read_rejects_missing_or_directory_target[missing]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_selected_read_rejects_missing_or_directory_target[directory]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_selected_read_rejects_missing_or_directory_target[directory]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_selected_read_rejects_missing_or_directory_target[directory]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_selected_read_rejects_invalid_literal_before_physical_observation[glob]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_selected_read_rejects_invalid_literal_before_physical_observation[glob]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_selected_read_rejects_invalid_literal_before_physical_observation[glob]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_selected_read_rejects_invalid_literal_before_physical_observation[escape]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_selected_read_rejects_invalid_literal_before_physical_observation[escape]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_selected_read_rejects_invalid_literal_before_physical_observation[escape]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_selected_read_rejects_invalid_literal_before_physical_observation[device]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_selected_read_rejects_invalid_literal_before_physical_observation[device]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_selected_read_rejects_invalid_literal_before_physical_observation[device]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_selected_read_rejects_invalid_literal_before_physical_observation[trailing-dot]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_selected_read_rejects_invalid_literal_before_physical_observation[trailing-dot]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_selected_read_rejects_invalid_literal_before_physical_observation[trailing-dot]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_selected_read_rejects_invalid_literal_before_physical_observation[option-like]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_selected_read_rejects_invalid_literal_before_physical_observation[option-like]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_selected_read_rejects_invalid_literal_before_physical_observation[option-like]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_selected_read_rejects_changed_digest",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_selected_read_rejects_changed_digest",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_selected_read_rejects_changed_digest",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_selected_read_rejects_component_redirection[leaf]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_selected_read_rejects_component_redirection[leaf]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_selected_read_rejects_component_redirection[leaf]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_selected_read_rejects_component_redirection[parent]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_selected_read_rejects_component_redirection[parent]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_selected_read_rejects_component_redirection[parent]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_target_runtime_keeps_exact_311_contract",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_target_runtime_keeps_exact_311_contract",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_target_runtime_keeps_exact_311_contract",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_compiler_cli_rejects_unbound_selection_before_load[both-missing]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_compiler_cli_rejects_unbound_selection_before_load[both-missing]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_compiler_cli_rejects_unbound_selection_before_load[both-missing]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_compiler_cli_rejects_unbound_selection_before_load[digest-missing]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_compiler_cli_rejects_unbound_selection_before_load[digest-missing]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_compiler_cli_rejects_unbound_selection_before_load[digest-missing]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_compiler_cli_rejects_unbound_selection_before_load[path-missing]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_compiler_cli_rejects_unbound_selection_before_load[path-missing]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_compiler_cli_rejects_unbound_selection_before_load[path-missing]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_compiler_cli_bad_digest_fails_before_physical_observation",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_compiler_cli_bad_digest_fails_before_physical_observation",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_compiler_cli_bad_digest_fails_before_physical_observation",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_imports_use_prefetched_code_without_observing_paths",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_imports_use_prefetched_code_without_observing_paths",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_imports_use_prefetched_code_without_observing_paths",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_profile_commands_are_exact_pure_selected_argv",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_profile_commands_are_exact_pure_selected_argv",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_profile_commands_are_exact_pure_selected_argv",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_command_builder_rejects_missing_provenance_and_unsupported_profile",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_command_builder_rejects_missing_provenance_and_unsupported_profile",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_command_builder_rejects_missing_provenance_and_unsupported_profile",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_unbound_profiles_fail_before_selection_or_command_execution[fast]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_unbound_profiles_fail_before_selection_or_command_execution[fast]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_unbound_profiles_fail_before_selection_or_command_execution[fast]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_unbound_profiles_fail_before_selection_or_command_execution[migration]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_unbound_profiles_fail_before_selection_or_command_execution[migration]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_unbound_profiles_fail_before_selection_or_command_execution[migration]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_unbound_profiles_fail_before_selection_or_command_execution[unknown]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_unbound_profiles_fail_before_selection_or_command_execution[unknown]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_unbound_profiles_fail_before_selection_or_command_execution[unknown]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_cli_missing_selection_binding_fails_before_load[both-missing]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_cli_missing_selection_binding_fails_before_load[both-missing]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_cli_missing_selection_binding_fails_before_load[both-missing]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_cli_missing_selection_binding_fails_before_load[digest-missing]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_cli_missing_selection_binding_fails_before_load[digest-missing]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_cli_missing_selection_binding_fails_before_load[digest-missing]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_cli_missing_selection_binding_fails_before_load[path-missing]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_cli_missing_selection_binding_fails_before_load[path-missing]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_cli_missing_selection_binding_fails_before_load[path-missing]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_cli_bad_digest_fails_before_physical_observation_or_execution",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_cli_bad_digest_fails_before_physical_observation_or_execution",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_cli_bad_digest_fails_before_physical_observation_or_execution",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_verification_runtime_labels_launcher_timeout",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_verification_runtime_labels_launcher_timeout",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_verification_runtime_labels_launcher_timeout",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_verification_runtime_preserves_child_exit_code",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_verification_runtime_preserves_child_exit_code",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_verification_runtime_preserves_child_exit_code",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_verification_runtime_stops_after_first_child_failure",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_verification_runtime_stops_after_first_child_failure",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_verification_runtime_stops_after_first_child_failure",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_historical_diary_lint_allows_neutral_and_policy_context",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_historical_diary_lint_allows_neutral_and_policy_context",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_historical_diary_lint_allows_neutral_and_policy_context",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_historical_diary_lint_rejects_specific_drift[test-name-promotion]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_historical_diary_lint_rejects_specific_drift[test-name-promotion]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_historical_diary_lint_rejects_specific_drift[test-name-promotion]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_historical_diary_lint_rejects_specific_drift[prose-promotion]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_historical_diary_lint_rejects_specific_drift[prose-promotion]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_historical_diary_lint_rejects_specific_drift[prose-promotion]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_historical_diary_lint_rejects_specific_drift[deterministic-uses-permission]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_historical_diary_lint_rejects_specific_drift[deterministic-uses-permission]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_historical_diary_lint_rejects_specific_drift[deterministic-uses-permission]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_historical_diary_lint_rejects_specific_drift[cross-line-neutral-promotion]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_historical_diary_lint_rejects_specific_drift[cross-line-neutral-promotion]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_historical_diary_lint_rejects_specific_drift[cross-line-neutral-promotion]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_historical_diary_lint_paths_reads_only_explicit_literal_files",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_historical_diary_lint_paths_reads_only_explicit_literal_files",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_historical_diary_lint_paths_reads_only_explicit_literal_files",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_historical_diary_lint_paths_rejects_invalid_literals[missing]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_historical_diary_lint_paths_rejects_invalid_literals[missing]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_historical_diary_lint_paths_rejects_invalid_literals[missing]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_historical_diary_lint_paths_rejects_invalid_literals[directory]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_historical_diary_lint_paths_rejects_invalid_literals[directory]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_historical_diary_lint_paths_rejects_invalid_literals[directory]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_historical_diary_lint_paths_rejects_invalid_literals[duplicate]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_historical_diary_lint_paths_rejects_invalid_literals[duplicate]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_historical_diary_lint_paths_rejects_invalid_literals[duplicate]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_historical_diary_lint_paths_rejects_invalid_literals[glob]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_historical_diary_lint_paths_rejects_invalid_literals[glob]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_historical_diary_lint_paths_rejects_invalid_literals[glob]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_historical_diary_lint_paths_rejects_invalid_literals[redirection]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_historical_diary_lint_paths_rejects_invalid_literals[redirection]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_historical_diary_lint_paths_rejects_invalid_literals[redirection]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_historical_diary_lint_paths_rejects_invalid_literals[symlink]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_historical_diary_lint_paths_rejects_invalid_literals[symlink]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_historical_diary_lint_paths_rejects_invalid_literals[symlink]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_historical_diary_lint_paths_validates_all_rows_before_observation[late-reserved-ancestor]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_historical_diary_lint_paths_validates_all_rows_before_observation[late-reserved-ancestor]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_historical_diary_lint_paths_validates_all_rows_before_observation[late-reserved-ancestor]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_historical_diary_lint_paths_validates_all_rows_before_observation[late-duplicate]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_historical_diary_lint_paths_validates_all_rows_before_observation[late-duplicate]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_historical_diary_lint_paths_validates_all_rows_before_observation[late-duplicate]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_bandit_accepts_complete_exact_scope_and_reviewed_findings",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_bandit_accepts_complete_exact_scope_and_reviewed_findings",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_bandit_accepts_complete_exact_scope_and_reviewed_findings",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_bandit_normalizes_dot_prefixed_metric_and_result_filenames",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_bandit_normalizes_dot_prefixed_metric_and_result_filenames",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_bandit_normalizes_dot_prefixed_metric_and_result_filenames",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_bandit_rejects_canonical_and_dot_prefixed_metric_alias",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_bandit_rejects_canonical_and_dot_prefixed_metric_alias",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_bandit_rejects_canonical_and_dot_prefixed_metric_alias",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_bandit_accepts_empty_filtered_results_with_ambiguous_marginals",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_bandit_accepts_empty_filtered_results_with_ambiguous_marginals",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_bandit_accepts_empty_filtered_results_with_ambiguous_marginals",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_bandit_rejects_empty_results_when_marginals_prove_an_eligible_finding",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_bandit_rejects_empty_results_when_marginals_prove_an_eligible_finding",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_bandit_rejects_empty_results_when_marginals_prove_an_eligible_finding",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_bandit_rejects_incomplete_or_mismatched_evidence[missing-metric]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_bandit_rejects_incomplete_or_mismatched_evidence[missing-metric]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_bandit_rejects_incomplete_or_mismatched_evidence[missing-metric]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_bandit_rejects_incomplete_or_mismatched_evidence[extra-metric]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_bandit_rejects_incomplete_or_mismatched_evidence[extra-metric]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_bandit_rejects_incomplete_or_mismatched_evidence[extra-metric]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_bandit_rejects_incomplete_or_mismatched_evidence[missing-rank]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_bandit_rejects_incomplete_or_mismatched_evidence[missing-rank]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_bandit_rejects_incomplete_or_mismatched_evidence[missing-rank]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_bandit_rejects_incomplete_or_mismatched_evidence[negative-rank]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_bandit_rejects_incomplete_or_mismatched_evidence[negative-rank]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_bandit_rejects_incomplete_or_mismatched_evidence[negative-rank]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_bandit_rejects_incomplete_or_mismatched_evidence[noninteger-rank]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_bandit_rejects_incomplete_or_mismatched_evidence[noninteger-rank]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_bandit_rejects_incomplete_or_mismatched_evidence[noninteger-rank]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_bandit_rejects_incomplete_or_mismatched_evidence[totals-mismatch]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_bandit_rejects_incomplete_or_mismatched_evidence[totals-mismatch]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_bandit_rejects_incomplete_or_mismatched_evidence[totals-mismatch]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_bandit_rejects_incomplete_or_mismatched_evidence[scanner-error]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_bandit_rejects_incomplete_or_mismatched_evidence[scanner-error]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_bandit_rejects_incomplete_or_mismatched_evidence[scanner-error]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_bandit_rejects_incomplete_or_mismatched_evidence[unexpected-finding]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_bandit_rejects_incomplete_or_mismatched_evidence[unexpected-finding]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_bandit_rejects_incomplete_or_mismatched_evidence[unexpected-finding]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_bandit_rejects_incomplete_or_mismatched_evidence[omitted-finding]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_bandit_rejects_incomplete_or_mismatched_evidence[omitted-finding]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_bandit_rejects_incomplete_or_mismatched_evidence[omitted-finding]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_bandit_rejects_incomplete_or_mismatched_evidence[mismatched-hash]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_bandit_rejects_incomplete_or_mismatched_evidence[mismatched-hash]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_bandit_rejects_incomplete_or_mismatched_evidence[mismatched-hash]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_bandit_rejects_incomplete_or_mismatched_evidence[duplicate-result]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_bandit_rejects_incomplete_or_mismatched_evidence[duplicate-result]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_bandit_rejects_incomplete_or_mismatched_evidence[duplicate-result]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_bandit_rejects_incomplete_or_mismatched_evidence[duplicate-review]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_bandit_rejects_incomplete_or_mismatched_evidence[duplicate-review]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_bandit_rejects_incomplete_or_mismatched_evidence[duplicate-review]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_bandit_rejects_incomplete_or_mismatched_evidence[result-outside-scope]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_bandit_rejects_incomplete_or_mismatched_evidence[result-outside-scope]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_bandit_rejects_incomplete_or_mismatched_evidence[result-outside-scope]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_bandit_rejects_unreviewed_findings",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_bandit_rejects_unreviewed_findings",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_bandit_rejects_unreviewed_findings",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_bandit_rejects_reviewed_fingerprint_missing_from_complete_report",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_bandit_rejects_reviewed_fingerprint_missing_from_complete_report",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_bandit_rejects_reviewed_fingerprint_missing_from_complete_report",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_bandit_rejects_inconsistent_or_failed_scanner_exit[success-with-findings]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_bandit_rejects_inconsistent_or_failed_scanner_exit[success-with-findings]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_bandit_rejects_inconsistent_or_failed_scanner_exit[success-with-findings]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_bandit_rejects_inconsistent_or_failed_scanner_exit[scanner-error-exit]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_bandit_rejects_inconsistent_or_failed_scanner_exit[scanner-error-exit]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_bandit_rejects_inconsistent_or_failed_scanner_exit[scanner-error-exit]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_bandit_parser_rejects_duplicate_raw_json_keys",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_bandit_parser_rejects_duplicate_raw_json_keys",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_bandit_parser_rejects_duplicate_raw_json_keys",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_bandit_cli_scans_only_authenticated_literal_files",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_bandit_cli_scans_only_authenticated_literal_files",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_bandit_cli_scans_only_authenticated_literal_files",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_bandit_cli_rejects_pending_review_before_scanner",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_bandit_cli_rejects_pending_review_before_scanner",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_bandit_cli_rejects_pending_review_before_scanner",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_historical_diary_cli_uses_authenticated_literal_selection",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_historical_diary_cli_uses_authenticated_literal_selection",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_historical_diary_cli_uses_authenticated_literal_selection",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_scanner_clis_require_explicit_selection_before_observation[bandit]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_scanner_clis_require_explicit_selection_before_observation[bandit]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_scanner_clis_require_explicit_selection_before_observation[bandit]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_scanner_clis_require_explicit_selection_before_observation[leakage]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_scanner_clis_require_explicit_selection_before_observation[leakage]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_scanner_clis_require_explicit_selection_before_observation[leakage]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_scanner_clis_reject_bad_binding_before_loader_or_scanner[bandit-bad-digest]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_scanner_clis_reject_bad_binding_before_loader_or_scanner[bandit-bad-digest]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_scanner_clis_reject_bad_binding_before_loader_or_scanner[bandit-bad-digest]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_scanner_clis_reject_bad_binding_before_loader_or_scanner[bandit-backslash-relative-path]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_scanner_clis_reject_bad_binding_before_loader_or_scanner[bandit-backslash-relative-path]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_scanner_clis_reject_bad_binding_before_loader_or_scanner[bandit-backslash-relative-path]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_scanner_clis_reject_bad_binding_before_loader_or_scanner[leakage-bad-digest]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_scanner_clis_reject_bad_binding_before_loader_or_scanner[leakage-bad-digest]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_scanner_clis_reject_bad_binding_before_loader_or_scanner[leakage-bad-digest]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_scanner_clis_reject_bad_binding_before_loader_or_scanner[leakage-backslash-relative-path]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_scanner_clis_reject_bad_binding_before_loader_or_scanner[leakage-backslash-relative-path]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_scanner_clis_reject_bad_binding_before_loader_or_scanner[leakage-backslash-relative-path]",
+      "phase": "teardown",
+      "outcome": "passed"
+    }
+  ],
+  "provenance": {
+    "source_path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/ordinary-applicability/current49-preparation-v1/result.json",
+    "source_sha256": "1d1b950aa1e46c99b1b8d7ce0c11823dcc2f76ece655fa68dfefa77c4dc9b876",
+    "independent_review_path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/reviews/current49-result-review-v1.json",
+    "independent_review_sha256": "5d0661ea68d2292328cf5e034bb336bdd6728122767655244463cb35dc960cf4",
+    "raw_outer_result_path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/ordinary-applicability/current49-preparation-v1/result.json",
+    "raw_outer_result_sha256": "1d1b950aa1e46c99b1b8d7ce0c11823dcc2f76ece655fa68dfefa77c4dc9b876",
+    "raw_batch_passed": true,
+    "raw_batch_nonpass_preserved": false,
+    "selected_from_larger_raw_result": false,
+    "keyed_report_source_normalized": false,
+    "qualified_subset_only": false,
+    "source_observation_sha256": "538c2f3e601cfc4e95fab5ecb2a5cd9efcbeb8e69c3e9f6801f7504a4bced667"
+  },
+  "accepted_population_test_ids": null,
+  "complete_v3_check_verdict": null
+}

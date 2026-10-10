@@ -1,0 +1,505 @@
+{
+  "schema": "emr4.ci_c_ordinary_cohort_support_source.v1",
+  "status": "SOURCE_ONLY_NONOPERATIVE",
+  "cohort_id": "original_o1_30",
+  "collection": [
+    "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_require_idempotency_key_before_side_effects[staff_create]",
+    "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_require_idempotency_key_before_side_effects[bernie_create]",
+    "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_require_idempotency_key_before_side_effects[status]",
+    "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_require_idempotency_key_before_side_effects[update]",
+    "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_require_idempotency_key_before_side_effects[delete]",
+    "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_replay_same_key_same_body_without_second_side_effect[staff_create]",
+    "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_replay_same_key_same_body_without_second_side_effect[bernie_create]",
+    "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_replay_same_key_same_body_without_second_side_effect[status]",
+    "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_replay_same_key_same_body_without_second_side_effect[update]",
+    "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_replay_same_key_same_body_without_second_side_effect[delete]",
+    "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_conflict_same_key_different_body_without_side_effect[staff_create]",
+    "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_conflict_same_key_different_body_without_side_effect[bernie_create]",
+    "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_conflict_same_key_different_body_without_side_effect[status]",
+    "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_conflict_same_key_different_body_without_side_effect[update]",
+    "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_conflict_same_key_different_body_without_side_effect[delete]",
+    "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_fail_closed_for_non_replay_ledger_states[staff_create-in_progress-409-idempotency_key_in_progress]",
+    "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_fail_closed_for_non_replay_ledger_states[staff_create-stale_in_progress-409-idempotency_key_stale_in_progress]",
+    "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_fail_closed_for_non_replay_ledger_states[staff_create-failed_transient-503-idempotency_key_failed_transient]",
+    "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_fail_closed_for_non_replay_ledger_states[bernie_create-in_progress-409-idempotency_key_in_progress]",
+    "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_fail_closed_for_non_replay_ledger_states[bernie_create-stale_in_progress-409-idempotency_key_stale_in_progress]",
+    "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_fail_closed_for_non_replay_ledger_states[bernie_create-failed_transient-503-idempotency_key_failed_transient]",
+    "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_fail_closed_for_non_replay_ledger_states[status-in_progress-409-idempotency_key_in_progress]",
+    "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_fail_closed_for_non_replay_ledger_states[status-stale_in_progress-409-idempotency_key_stale_in_progress]",
+    "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_fail_closed_for_non_replay_ledger_states[status-failed_transient-503-idempotency_key_failed_transient]",
+    "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_fail_closed_for_non_replay_ledger_states[update-in_progress-409-idempotency_key_in_progress]",
+    "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_fail_closed_for_non_replay_ledger_states[update-stale_in_progress-409-idempotency_key_stale_in_progress]",
+    "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_fail_closed_for_non_replay_ledger_states[update-failed_transient-503-idempotency_key_failed_transient]",
+    "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_fail_closed_for_non_replay_ledger_states[delete-in_progress-409-idempotency_key_in_progress]",
+    "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_fail_closed_for_non_replay_ledger_states[delete-stale_in_progress-409-idempotency_key_stale_in_progress]",
+    "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_fail_closed_for_non_replay_ledger_states[delete-failed_transient-503-idempotency_key_failed_transient]"
+  ],
+  "phase_rows": [
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_require_idempotency_key_before_side_effects[staff_create]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_require_idempotency_key_before_side_effects[staff_create]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_require_idempotency_key_before_side_effects[staff_create]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_require_idempotency_key_before_side_effects[bernie_create]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_require_idempotency_key_before_side_effects[bernie_create]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_require_idempotency_key_before_side_effects[bernie_create]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_require_idempotency_key_before_side_effects[status]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_require_idempotency_key_before_side_effects[status]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_require_idempotency_key_before_side_effects[status]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_require_idempotency_key_before_side_effects[update]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_require_idempotency_key_before_side_effects[update]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_require_idempotency_key_before_side_effects[update]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_require_idempotency_key_before_side_effects[delete]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_require_idempotency_key_before_side_effects[delete]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_require_idempotency_key_before_side_effects[delete]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_replay_same_key_same_body_without_second_side_effect[staff_create]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_replay_same_key_same_body_without_second_side_effect[staff_create]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_replay_same_key_same_body_without_second_side_effect[staff_create]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_replay_same_key_same_body_without_second_side_effect[bernie_create]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_replay_same_key_same_body_without_second_side_effect[bernie_create]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_replay_same_key_same_body_without_second_side_effect[bernie_create]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_replay_same_key_same_body_without_second_side_effect[status]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_replay_same_key_same_body_without_second_side_effect[status]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_replay_same_key_same_body_without_second_side_effect[status]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_replay_same_key_same_body_without_second_side_effect[update]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_replay_same_key_same_body_without_second_side_effect[update]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_replay_same_key_same_body_without_second_side_effect[update]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_replay_same_key_same_body_without_second_side_effect[delete]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_replay_same_key_same_body_without_second_side_effect[delete]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_replay_same_key_same_body_without_second_side_effect[delete]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_conflict_same_key_different_body_without_side_effect[staff_create]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_conflict_same_key_different_body_without_side_effect[staff_create]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_conflict_same_key_different_body_without_side_effect[staff_create]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_conflict_same_key_different_body_without_side_effect[bernie_create]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_conflict_same_key_different_body_without_side_effect[bernie_create]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_conflict_same_key_different_body_without_side_effect[bernie_create]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_conflict_same_key_different_body_without_side_effect[status]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_conflict_same_key_different_body_without_side_effect[status]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_conflict_same_key_different_body_without_side_effect[status]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_conflict_same_key_different_body_without_side_effect[update]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_conflict_same_key_different_body_without_side_effect[update]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_conflict_same_key_different_body_without_side_effect[update]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_conflict_same_key_different_body_without_side_effect[delete]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_conflict_same_key_different_body_without_side_effect[delete]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_conflict_same_key_different_body_without_side_effect[delete]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_fail_closed_for_non_replay_ledger_states[staff_create-in_progress-409-idempotency_key_in_progress]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_fail_closed_for_non_replay_ledger_states[staff_create-in_progress-409-idempotency_key_in_progress]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_fail_closed_for_non_replay_ledger_states[staff_create-in_progress-409-idempotency_key_in_progress]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_fail_closed_for_non_replay_ledger_states[staff_create-stale_in_progress-409-idempotency_key_stale_in_progress]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_fail_closed_for_non_replay_ledger_states[staff_create-stale_in_progress-409-idempotency_key_stale_in_progress]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_fail_closed_for_non_replay_ledger_states[staff_create-stale_in_progress-409-idempotency_key_stale_in_progress]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_fail_closed_for_non_replay_ledger_states[staff_create-failed_transient-503-idempotency_key_failed_transient]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_fail_closed_for_non_replay_ledger_states[staff_create-failed_transient-503-idempotency_key_failed_transient]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_fail_closed_for_non_replay_ledger_states[staff_create-failed_transient-503-idempotency_key_failed_transient]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_fail_closed_for_non_replay_ledger_states[bernie_create-in_progress-409-idempotency_key_in_progress]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_fail_closed_for_non_replay_ledger_states[bernie_create-in_progress-409-idempotency_key_in_progress]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_fail_closed_for_non_replay_ledger_states[bernie_create-in_progress-409-idempotency_key_in_progress]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_fail_closed_for_non_replay_ledger_states[bernie_create-stale_in_progress-409-idempotency_key_stale_in_progress]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_fail_closed_for_non_replay_ledger_states[bernie_create-stale_in_progress-409-idempotency_key_stale_in_progress]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_fail_closed_for_non_replay_ledger_states[bernie_create-stale_in_progress-409-idempotency_key_stale_in_progress]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_fail_closed_for_non_replay_ledger_states[bernie_create-failed_transient-503-idempotency_key_failed_transient]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_fail_closed_for_non_replay_ledger_states[bernie_create-failed_transient-503-idempotency_key_failed_transient]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_fail_closed_for_non_replay_ledger_states[bernie_create-failed_transient-503-idempotency_key_failed_transient]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_fail_closed_for_non_replay_ledger_states[status-in_progress-409-idempotency_key_in_progress]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_fail_closed_for_non_replay_ledger_states[status-in_progress-409-idempotency_key_in_progress]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_fail_closed_for_non_replay_ledger_states[status-in_progress-409-idempotency_key_in_progress]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_fail_closed_for_non_replay_ledger_states[status-stale_in_progress-409-idempotency_key_stale_in_progress]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_fail_closed_for_non_replay_ledger_states[status-stale_in_progress-409-idempotency_key_stale_in_progress]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_fail_closed_for_non_replay_ledger_states[status-stale_in_progress-409-idempotency_key_stale_in_progress]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_fail_closed_for_non_replay_ledger_states[status-failed_transient-503-idempotency_key_failed_transient]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_fail_closed_for_non_replay_ledger_states[status-failed_transient-503-idempotency_key_failed_transient]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_fail_closed_for_non_replay_ledger_states[status-failed_transient-503-idempotency_key_failed_transient]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_fail_closed_for_non_replay_ledger_states[update-in_progress-409-idempotency_key_in_progress]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_fail_closed_for_non_replay_ledger_states[update-in_progress-409-idempotency_key_in_progress]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_fail_closed_for_non_replay_ledger_states[update-in_progress-409-idempotency_key_in_progress]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_fail_closed_for_non_replay_ledger_states[update-stale_in_progress-409-idempotency_key_stale_in_progress]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_fail_closed_for_non_replay_ledger_states[update-stale_in_progress-409-idempotency_key_stale_in_progress]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_fail_closed_for_non_replay_ledger_states[update-stale_in_progress-409-idempotency_key_stale_in_progress]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_fail_closed_for_non_replay_ledger_states[update-failed_transient-503-idempotency_key_failed_transient]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_fail_closed_for_non_replay_ledger_states[update-failed_transient-503-idempotency_key_failed_transient]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_fail_closed_for_non_replay_ledger_states[update-failed_transient-503-idempotency_key_failed_transient]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_fail_closed_for_non_replay_ledger_states[delete-in_progress-409-idempotency_key_in_progress]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_fail_closed_for_non_replay_ledger_states[delete-in_progress-409-idempotency_key_in_progress]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_fail_closed_for_non_replay_ledger_states[delete-in_progress-409-idempotency_key_in_progress]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_fail_closed_for_non_replay_ledger_states[delete-stale_in_progress-409-idempotency_key_stale_in_progress]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_fail_closed_for_non_replay_ledger_states[delete-stale_in_progress-409-idempotency_key_stale_in_progress]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_fail_closed_for_non_replay_ledger_states[delete-stale_in_progress-409-idempotency_key_stale_in_progress]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_fail_closed_for_non_replay_ledger_states[delete-failed_transient-503-idempotency_key_failed_transient]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_fail_closed_for_non_replay_ledger_states[delete-failed_transient-503-idempotency_key_failed_transient]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_fail_closed_for_non_replay_ledger_states[delete-failed_transient-503-idempotency_key_failed_transient]",
+      "phase": "teardown",
+      "outcome": "passed"
+    }
+  ],
+  "provenance": {
+    "source_path": "C:/Users/there/.codex/visualizations/2026/09/15/01a0a72f-a9bd-72f3-b259-0de184339a44/ci-c-preparation-v1/confirmation-family-runtime-v2/decoded-reports/tenant-primary.json",
+    "source_sha256": "7637ac03868e203eec6b552ea6b5f0612495d2777543494a1b62aa3d01098733",
+    "independent_review_path": "C:/Users/there/.codex/visualizations/2026/09/15/01a0a72f-a9bd-72f3-b259-0de184339a44/ci-c-preparation-v1/confirmation-family-runtime-v2/independent-effect-review-v1.json",
+    "independent_review_sha256": "46ac796b2e2c6b014a126f9f842575c991d289ae49cd97eb15c39ee383ef985f",
+    "raw_outer_result_path": "C:/Users/there/.codex/visualizations/2026/09/15/01a0a72f-a9bd-72f3-b259-0de184339a44/ci-c-preparation-v1/confirmation-family-runtime-v2/result.json",
+    "raw_outer_result_sha256": "8f8b0afd089e78b842bff165cf5b65fd083bbdab097790195e339f0c2c81805c",
+    "raw_batch_passed": null,
+    "raw_batch_nonpass_preserved": false,
+    "selected_from_larger_raw_result": false,
+    "keyed_report_source_normalized": true,
+    "qualified_subset_only": false,
+    "source_observation_sha256": "538c2f3e601cfc4e95fab5ecb2a5cd9efcbeb8e69c3e9f6801f7504a4bced667"
+  },
+  "accepted_population_test_ids": null,
+  "complete_v3_check_verdict": null
+}

@@ -1,0 +1,25 @@
+{
+  "schema": "emr4.ci_c_documentary_role_facts.v1",
+  "check_id": "support_residual_thirteen",
+  "source_only_receipt": {
+    "kind": "exact_source_normalization",
+    "new_runtime_or_cleanup_effect": false,
+    "underlying_observation_sha256": "02d5f365dbf960c637869b9a4c330a6f793679722792dca6c9cfc923456a84a5",
+    "documentary_support_output_ids": [],
+    "public_basis_sha256_if_applicable": null,
+    "independent_review_sha256": "cc400049e60a520b3be0b266ba0e40533a1fb20e9d11aa90e898d6f87a65997b"
+  },
+  "cleanup": {
+    "kind": "attributed_reviewed_source_scope",
+    "review_sha256": "cc400049e60a520b3be0b266ba0e40533a1fb20e9d11aa90e898d6f87a65997b",
+    "new_cleanup_performed_by_this_document": false,
+    "historical_cleanup_claim": "only the facts explicitly accepted in the pinned independent review; unknown fields remain pending"
+  },
+  "relevance": {
+    "kind": "original_property_membership_and_scope",
+    "membership_review_sha256": "ebbf9d059f6bfd0864bf1d746ab53fac3de185b456901bd7c8e40b50f2c26565",
+    "safety_review_sha256_if_applicable": null
+  },
+  "final_context": null,
+  "final_check_acceptance": null
+}

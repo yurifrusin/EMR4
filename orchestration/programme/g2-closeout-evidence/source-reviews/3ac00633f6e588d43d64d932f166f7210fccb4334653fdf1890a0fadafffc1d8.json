@@ -1,0 +1,557 @@
+{
+  "schema": "emr4.g2.confirmation_first_write_independent_result_review.v1",
+  "verdict": "PASS_CONFIRMATION_FIRST_WRITE_SCOPED_RESULT",
+  "reviewer_agent": "/root/g2_admission_review",
+  "independent": true,
+  "implementation_authorship": false,
+  "selected_model": "gpt-6.1-sol",
+  "selected_reasoning": "high",
+  "provider_resolved_settings_observable": false,
+  "descendants": 0,
+  "blocking_findings": [],
+  "accepted_scoped_attempt": true,
+  "result_sha256": "7bd157987a4c268c8287fad4ed214480383deead25390f1308818b61d2f154f1",
+  "binding_sha256": "ed73f76dbb4c0b52b0fdb3de94f65033051c83bffc4a2c37640ee493eb49062c",
+  "execution_review_sha256": "69a7d0f08fc9bf8c026a86539e5ce20ebdee84dfbb2610a0333be4a1e3877566",
+  "combined_source_review_sha256": "370921a006b16736b70473bd8d1de4175cf36d5561434ec21a5b3e5ac8cba6da",
+  "source_review_sha256": "e179e121670fb79f58fe519f2e3a1d3fb77732c156e35d1ae9de2b87f1f53e91",
+  "source_manifest_sha256": "12b2f760822d89da1be27bdcffb33f9fd579fd57cc5db32fec3b55d69cebb53f",
+  "source_binding_sha256": "a70887b979a3f23969c11c2d0d316566bdb7024695132268dfefd6d69db345ce",
+  "evidence_records": {
+    "result.json": {
+      "path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/ordinary-applicability/confirmation-first-write-execution-preparation-v1/result.json",
+      "sha256": "7bd157987a4c268c8287fad4ed214480383deead25390f1308818b61d2f154f1",
+      "bytes": 3734
+    },
+    "decoded-reports/result.json": {
+      "path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/ordinary-applicability/confirmation-first-write-execution-preparation-v1/decoded-reports/result.json",
+      "sha256": "26ef7ab80d38eaa13dbf10a9b1a862732f341f573c26e9232d6f9fb270bdd4eb",
+      "bytes": 2662
+    },
+    "decoded-reports/tenant-primary.json": {
+      "path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/ordinary-applicability/confirmation-first-write-execution-preparation-v1/decoded-reports/tenant-primary.json",
+      "sha256": "d042ca5b6a2ae417f47d8fbdb211d2a18defe334e58e9decee1ffc9bf1ab1a17",
+      "bytes": 1669
+    },
+    "decoded-reports/tenant-result.json": {
+      "path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/ordinary-applicability/confirmation-first-write-execution-preparation-v1/decoded-reports/tenant-result.json",
+      "sha256": "d5791cfae087c32eb5c298f6d42ff356bc87b75e0307f9e07b838252d7473d0a",
+      "bytes": 23031
+    },
+    "started.json": {
+      "path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/ordinary-applicability/confirmation-first-write-execution-preparation-v1/started.json",
+      "sha256": "8d98dd49ebb8570740b59b369104f9c37821f88cb52e86b6f488cf966f6d5dab",
+      "bytes": 269
+    }
+  },
+  "scope": {
+    "operation_id": "g2-confirmation-firstwrite-20261009-v1",
+    "attempt": 1,
+    "collection_attempts_consumed": 1,
+    "test_attempts_consumed": 1,
+    "reset_reservations_consumed": 5,
+    "automatic_retry": false,
+    "selected_cases": [
+      "confirmation_current/test_confirmation_first_write_receipts.py::test_staff_first_write_receipt_and_replay",
+      "confirmation_current/test_confirmation_first_write_receipts.py::test_bernie_first_write_linked_receipt_events_and_replay",
+      "confirmation_current/test_confirmation_first_write_receipts.py::test_status_first_write_persisted_receipt_and_byte_replay",
+      "confirmation_current/test_confirmation_first_write_receipts.py::test_update_first_write_persisted_fields_receipt_and_replay",
+      "confirmation_current/test_confirmation_first_write_receipts.py::test_delete_first_write_waiting_area_warning_private_receipt_and_replay"
+    ],
+    "expected_cases": 5,
+    "passed_cases": 5,
+    "setup_call_teardown_reports": 15,
+    "counts_transferred_from_other_batches": 0,
+    "additional_runtime_authority": false
+  },
+  "actual_outcome": {
+    "native_passed": true,
+    "native_elapsed_seconds": 17.860788000005414,
+    "outer_status": "PASS",
+    "outer_elapsed_seconds": 16.539459822000936,
+    "child_status": "PASS",
+    "child_elapsed_seconds": 14.876332,
+    "collection_errors": 0,
+    "deselected": 0,
+    "internal_errors": 0,
+    "diagnostics": [],
+    "reports": {
+      "confirmation_current/test_confirmation_first_write_receipts.py::test_bernie_first_write_linked_receipt_events_and_replay": {
+        "call": "passed",
+        "setup": "passed",
+        "teardown": "passed"
+      },
+      "confirmation_current/test_confirmation_first_write_receipts.py::test_delete_first_write_waiting_area_warning_private_receipt_and_replay": {
+        "call": "passed",
+        "setup": "passed",
+        "teardown": "passed"
+      },
+      "confirmation_current/test_confirmation_first_write_receipts.py::test_staff_first_write_receipt_and_replay": {
+        "call": "passed",
+        "setup": "passed",
+        "teardown": "passed"
+      },
+      "confirmation_current/test_confirmation_first_write_receipts.py::test_status_first_write_persisted_receipt_and_byte_replay": {
+        "call": "passed",
+        "setup": "passed",
+        "teardown": "passed"
+      },
+      "confirmation_current/test_confirmation_first_write_receipts.py::test_update_first_write_persisted_fields_receipt_and_replay": {
+        "call": "passed",
+        "setup": "passed",
+        "teardown": "passed"
+      }
+    },
+    "guard_denials": [],
+    "loaded_bound_module_count": 141,
+    "loaded_guard_paths_all_bound": true,
+    "endpoint": "127.0.0.1:55436",
+    "database": "g2_confirmation_firstwrite20261009a",
+    "run_id": "firstwrite20261009a"
+  },
+  "cleanup": {
+    "attached_process": {
+      "client_pid": 27848,
+      "client_closed": true,
+      "readers_closed": true,
+      "reader_errors": [],
+      "output_overflow": false,
+      "output_complete": true
+    },
+    "native": {
+      "container_id": "32f84506dadfa94944d9ca79a8f098ed19d514ec0a45d2d0f43c8577153752ce",
+      "exit_code": 0,
+      "oom_killed": false,
+      "restart_count": 0,
+      "container_absent": true,
+      "created_volumes": false
+    },
+    "outer": {
+      "database_stop_attempted": true,
+      "database_stopped": true
+    },
+    "phase_process_returncodes": [
+      {
+        "phase": "initdb",
+        "pid": 7,
+        "returncode": 0
+      },
+      {
+        "phase": "pg-start",
+        "pid": 20,
+        "returncode": 0
+      },
+      {
+        "phase": "tenant-child",
+        "pid": 30,
+        "returncode": 0
+      },
+      {
+        "phase": "pg-stop",
+        "pid": 67,
+        "returncode": 0
+      }
+    ],
+    "engines": {
+      "admin": {
+        "attempts": 1,
+        "checked_out_before_dispose": 0,
+        "status": "PASS"
+      },
+      "command": {
+        "attempts": 1,
+        "checked_out_before_dispose": 0,
+        "status": "PASS"
+      },
+      "global_app_engine": {
+        "attempts": 1,
+        "checked_out_before_dispose": 0,
+        "status": "PASS"
+      },
+      "observer": {
+        "attempts": 1,
+        "checked_out_before_dispose": 0,
+        "status": "PASS"
+      },
+      "request": {
+        "attempts": 1,
+        "checked_out_before_dispose": 0,
+        "status": "PASS"
+      }
+    },
+    "all_connections_closed": true,
+    "live_threads_after_pytest": [],
+    "threads_after_pytest": [],
+    "confirmation_lifecycle": {
+      "adapter_consumed": true,
+      "balanced_checkout_records": true,
+      "closed_lifetime_denials": 2,
+      "global_engine_never_used_by_case": true,
+      "global_engine_post_close_connect_denied": true,
+      "reset_attempts": 5,
+      "reset_budget_denied": true
+    },
+    "outside_cascade_counts_invariant": true,
+    "outside_cascade_initial_counts": {
+      "application_auth_audit_events": 0,
+      "application_auth_exchange_grants": 0,
+      "application_auth_parent_sessions": 0,
+      "application_auth_principal_generations": 0,
+      "application_auth_surface_sessions": 0,
+      "application_auth_synthetic_principal_truth": 0,
+      "application_identity_federation_admission_grants": 0,
+      "application_identity_federation_audit_events": 0,
+      "application_identity_federation_bindings": 0,
+      "application_identity_oidc_authorization_attempts": 0,
+      "mbs_directory": 0,
+      "snomed_directory": 0
+    },
+    "outside_cascade_final_counts": {
+      "application_auth_audit_events": 0,
+      "application_auth_exchange_grants": 0,
+      "application_auth_parent_sessions": 0,
+      "application_auth_principal_generations": 0,
+      "application_auth_surface_sessions": 0,
+      "application_auth_synthetic_principal_truth": 0,
+      "application_identity_federation_admission_grants": 0,
+      "application_identity_federation_audit_events": 0,
+      "application_identity_federation_bindings": 0,
+      "application_identity_oidc_authorization_attempts": 0,
+      "mbs_directory": 0,
+      "snomed_directory": 0
+    },
+    "fresh_container_absence": {
+      "returncode": 1,
+      "stdout": "[]\n",
+      "stderr": "Error response from daemon: No such container: emr4-g2-confirmation-firstwrite-20261009-v1\n",
+      "bytes": 94
+    },
+    "utc": "2026-10-08T18:19:58.147163+00:00"
+  },
+  "durable_capture_reconciliation": {
+    "captures": {
+      "stdout_bytes": 10024,
+      "stdout_sha256": "4c577f59c94e352da62de0be6e0bd31789e03e18ac2f90ad6034dfbde7195e2b",
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "bundle": {
+      "envelopes": 1,
+      "compressed_hash_match": true,
+      "uncompressed_size_match": true,
+      "rows_match": true,
+      "decoded_rows": [
+        {
+          "name": "result.json",
+          "bytes": 2662,
+          "sha256": "26ef7ab80d38eaa13dbf10a9b1a862732f341f573c26e9232d6f9fb270bdd4eb",
+          "row_hash_size_match": true,
+          "durable_bytes_equal": true
+        },
+        {
+          "name": "tenant-result.json",
+          "bytes": 23031,
+          "sha256": "d5791cfae087c32eb5c298f6d42ff356bc87b75e0307f9e07b838252d7473d0a",
+          "row_hash_size_match": true,
+          "durable_bytes_equal": true
+        },
+        {
+          "name": "tenant-primary.json",
+          "bytes": 1669,
+          "sha256": "d042ca5b6a2ae417f47d8fbdb211d2a18defe334e58e9decee1ffc9bf1ab1a17",
+          "row_hash_size_match": true,
+          "durable_bytes_equal": true
+        },
+        {
+          "name": "child-intent.json",
+          "bytes": 421,
+          "sha256": "6764db51d040e8a7279558879c661a6d17aeacbb8c7ed43f5e608e30c2c896ad",
+          "row_hash_size_match": true,
+          "durable_bytes_equal": true
+        },
+        {
+          "name": "initdb-reserved.json",
+          "bytes": 627,
+          "sha256": "3457d674f25ef4742105bf845b34afe56b34eb0780a3c183bf192daeb6d7936a",
+          "row_hash_size_match": true,
+          "durable_bytes_equal": true
+        },
+        {
+          "name": "initdb-started.json",
+          "bytes": 606,
+          "sha256": "54b9175194013a06ff02290be73b289476c2bb2543c4df9856c16de250f8bd01",
+          "row_hash_size_match": true,
+          "durable_bytes_equal": true
+        },
+        {
+          "name": "initdb-finished.json",
+          "bytes": 101,
+          "sha256": "fe237158fbc22bed055dfcba5e0df8aa6b3e502e146bff857e348b900b219253",
+          "row_hash_size_match": true,
+          "durable_bytes_equal": true
+        },
+        {
+          "name": "pg-start-reserved.json",
+          "bytes": 520,
+          "sha256": "3c2d6c2caa6124415f859f12743c0879b0f70eb3542baf066236ae0e068bce4c",
+          "row_hash_size_match": true,
+          "durable_bytes_equal": true
+        },
+        {
+          "name": "pg-start-started.json",
+          "bytes": 500,
+          "sha256": "2ca9443f12a1157bfbf97008079858470f769f21c95817c6f52795a32c07da77",
+          "row_hash_size_match": true,
+          "durable_bytes_equal": true
+        },
+        {
+          "name": "pg-start-finished.json",
+          "bytes": 103,
+          "sha256": "3debd676f5f06b466daaeae041dbe213def66231c689c616ed0ecac623bd6828",
+          "row_hash_size_match": true,
+          "durable_bytes_equal": true
+        },
+        {
+          "name": "tenant-child-reserved.json",
+          "bytes": 787,
+          "sha256": "155ca4aa0fe487b49f16a69ddc802127ec69aed5de9442d097a5a77030f395ac",
+          "row_hash_size_match": true,
+          "durable_bytes_equal": true
+        },
+        {
+          "name": "tenant-child-started.json",
+          "bytes": 767,
+          "sha256": "a3605cc06adb9202657f68a0e62fe43442da674d929a3aa929d90c4b37cba55f",
+          "row_hash_size_match": true,
+          "durable_bytes_equal": true
+        },
+        {
+          "name": "tenant-child-finished.json",
+          "bytes": 106,
+          "sha256": "05c59de6f2acec2691e8ec337b5e5382242b086d2cfa3dc93b00509e5a614e47",
+          "row_hash_size_match": true,
+          "durable_bytes_equal": true
+        },
+        {
+          "name": "pg-stop-reserved.json",
+          "bytes": 497,
+          "sha256": "f9159ae6c77dbf93dddc0ffc0ab9d210b6fd8c91134acab84451309997cfcc2e",
+          "row_hash_size_match": true,
+          "durable_bytes_equal": true
+        },
+        {
+          "name": "pg-stop-started.json",
+          "bytes": 477,
+          "sha256": "998f36577d7b42b041568f6558942e7d1c5422de394669eb33e26b77aa3411b0",
+          "row_hash_size_match": true,
+          "durable_bytes_equal": true
+        },
+        {
+          "name": "pg-stop-finished.json",
+          "bytes": 102,
+          "sha256": "16ca902d00b72dfdf06bfa6c74f4bbd22b15906ee5e94179f22a96566f7aa519",
+          "row_hash_size_match": true,
+          "durable_bytes_equal": true
+        },
+        {
+          "name": "initdb.log",
+          "bytes": 812,
+          "sha256": "8c3f537a774885ba1b86d6fa60d25593ca48146fcbc912ee0a20600ccfbc5857",
+          "row_hash_size_match": true,
+          "durable_bytes_equal": true
+        },
+        {
+          "name": "pg-start.log",
+          "bytes": 52,
+          "sha256": "66afd0411ccc09366e99fdd99b85f21899c8d2d064f5835126859618802153ad",
+          "row_hash_size_match": true,
+          "durable_bytes_equal": true
+        },
+        {
+          "name": "tenant-child.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "row_hash_size_match": true,
+          "durable_bytes_equal": true
+        },
+        {
+          "name": "pg-stop.log",
+          "bytes": 56,
+          "sha256": "ca19178a35ab4153b75b494963b66ce8243e1b94c173107c87b44d09db23652d",
+          "row_hash_size_match": true,
+          "durable_bytes_equal": true
+        },
+        {
+          "name": "postgresql.log",
+          "bytes": 1302,
+          "sha256": "4bbc50b9afce768da3414ec28fc384f80c54849b135e2dac2cba1fce99d2fbb5",
+          "row_hash_size_match": true,
+          "durable_bytes_equal": true
+        }
+      ]
+    },
+    "decoded_primary_json_equal_child_primary": true,
+    "decoded_outer_json_equal_native_primary": true,
+    "diagnostic_retention": {
+      "logs": [
+        {
+          "name": "initdb.log",
+          "raw_bytes_read": 812,
+          "retained_raw_byte_limit": 4194304,
+          "truncated": false
+        },
+        {
+          "name": "pg-start.log",
+          "raw_bytes_read": 52,
+          "retained_raw_byte_limit": 4194304,
+          "truncated": false
+        },
+        {
+          "name": "tenant-child.log",
+          "raw_bytes_read": 0,
+          "retained_raw_byte_limit": 4194304,
+          "truncated": false
+        },
+        {
+          "name": "pg-stop.log",
+          "raw_bytes_read": 56,
+          "retained_raw_byte_limit": 4194304,
+          "truncated": false
+        },
+        {
+          "name": "postgresql.log",
+          "raw_bytes_read": 1302,
+          "retained_raw_byte_limit": 4194304,
+          "truncated": false
+        }
+      ],
+      "status": "complete"
+    },
+    "child_output": {
+      "diagnostics": "redacted structured primary and phase errors",
+      "raw_output_suppressed": true,
+      "retained_characters": 4750,
+      "truncated": false
+    }
+  },
+  "source_preservation": {
+    "literal142_source_rows_match": true,
+    "current133_ordinary_physical_counterparts_match": true,
+    "nine_capsule_pins_and_launcher_manifest_upstream_combined_reviews_runtime_executables_match": true,
+    "post_source_pin_failures": [],
+    "exact_binding_review_governing_postpins": [
+      {
+        "path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/ordinary-applicability/confirmation-first-write-execution-preparation-v1/execution-binding.json",
+        "sha256": "ed73f76dbb4c0b52b0fdb3de94f65033051c83bffc4a2c37640ee493eb49062c",
+        "expected": "ed73f76dbb4c0b52b0fdb3de94f65033051c83bffc4a2c37640ee493eb49062c",
+        "match": true,
+        "regular_nonreparse": true
+      },
+      {
+        "path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/ordinary-applicability/confirmation-first-write-execution-preparation-v1/independent-execution-review-v1.json",
+        "sha256": "69a7d0f08fc9bf8c026a86539e5ce20ebdee84dfbb2610a0333be4a1e3877566",
+        "expected": "69a7d0f08fc9bf8c026a86539e5ce20ebdee84dfbb2610a0333be4a1e3877566",
+        "match": true,
+        "regular_nonreparse": true
+      },
+      {
+        "path": "C:/Users/there/EMR4/AGENTS.md",
+        "sha256": "97d6ea223508d53ee704a0cc3ceec383e2eea9f3db764376b538e8341bee886e",
+        "expected": "97d6ea223508d53ee704a0cc3ceec383e2eea9f3db764376b538e8341bee886e",
+        "match": true,
+        "regular_nonreparse": true
+      },
+      {
+        "path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/owner-directive-20261008.txt",
+        "sha256": "5292b7c727de10f5dac9d6857745fac9c01bdeddeb19c7c8d07586e1cf43b406",
+        "expected": "5292b7c727de10f5dac9d6857745fac9c01bdeddeb19c7c8d07586e1cf43b406",
+        "match": true,
+        "regular_nonreparse": true
+      },
+      {
+        "path": "C:/Users/there/EMR4-tools/a5-test2/audio/assets/evidence/g1e-evidence/isolated-test-contract.json",
+        "sha256": "49548a67c22720f5101b9bc1ae030ccf0884e00121a803cce132439154631386",
+        "expected": "49548a67c22720f5101b9bc1ae030ccf0884e00121a803cce132439154631386",
+        "match": true,
+        "regular_nonreparse": true
+      }
+    ],
+    "canonical_or_git_mutations_by_reviewer": false
+  },
+  "prestart_evidence": {
+    "sha256": "09887a55ad77f06880846041154187ac9f00626d16bdfcc115abdee64aef7af4",
+    "container_id": "32f84506dadfa94944d9ca79a8f098ed19d514ec0a45d2d0f43c8577153752ce",
+    "image_id": "sha256:192e420d4057bc851bb8db5af2495c35281fca92e56a76cec7f32cf8d3a6e1f9",
+    "name": "/emr4-g2-confirmation-firstwrite-20261009-v1",
+    "host_mounts": [
+      {
+        "Type": "bind",
+        "Source": "C:\\Users\\there\\EMR4-migration\\20260911-v1\\current-control-repair-20260912-v1\\g2-completion-20261008-v1\\ordinary-applicability\\confirmation-first-write-execution-preparation-v1\\case",
+        "Target": "/case",
+        "ReadOnly": true
+      },
+      {
+        "Type": "bind",
+        "Source": "C:\\Users\\there\\EMR4-migration\\20260911-v1\\current-control-repair-20260912-v1\\g2-completion-20261008-v1\\ordinary-applicability\\confirmation-first-write-execution-preparation-v1\\capsule",
+        "Target": "/capsule",
+        "ReadOnly": true
+      }
+    ],
+    "runtime_mounts": [
+      {
+        "Type": "bind",
+        "Source": "C:\\Users\\there\\EMR4-migration\\20260911-v1\\current-control-repair-20260912-v1\\g2-completion-20261008-v1\\ordinary-applicability\\confirmation-first-write-execution-preparation-v1\\case",
+        "Destination": "/case",
+        "Mode": "",
+        "RW": false,
+        "Propagation": "rprivate"
+      },
+      {
+        "Type": "bind",
+        "Source": "C:\\Users\\there\\EMR4-migration\\20260911-v1\\current-control-repair-20260912-v1\\g2-completion-20261008-v1\\ordinary-applicability\\confirmation-first-write-execution-preparation-v1\\capsule",
+        "Destination": "/capsule",
+        "Mode": "",
+        "RW": false,
+        "Propagation": "rprivate"
+      }
+    ],
+    "host_tmpfs": {
+      "/run/g2": "rw,noexec,nosuid,nodev,size=536870912,mode=0700,uid=10001,gid=10001",
+      "/tmp": "rw,noexec,nosuid,nodev,size=33554432,mode=1777",
+      "/var/lib/postgresql/data": "ro,noexec,nosuid,nodev,size=1048576,mode=0000"
+    },
+    "network_mode": "none",
+    "readonly_rootfs": true
+  },
+  "exercised_properties": [
+    {
+      "case": "staff",
+      "evidence": "Pinned current real create-confirm route test passed persisted appointment/audit/ledger growth and IDs, command receipt linkage, immediate JSON replay and full-row snapshot invariance."
+    },
+    {
+      "case": "bernie",
+      "evidence": "Pinned current selected Bernie confirmation test passed created appointment/audit/completed ledger linkage and receipt correlation, two ordered submitted/outcome events, session revision/event identity snapshot and immediate replay invariance."
+    },
+    {
+      "case": "status",
+      "evidence": "Pinned current status adapter test passed persisted Confirmed state, audit/ledger command joins, public stored appointment response and exact canonical public bytes equal first response and immediate replay."
+    },
+    {
+      "case": "update",
+      "evidence": "Pinned current update test passed UTC actual signed proposal persisted fields, command/audit/ledger linkage and unchanged appointment count, immediate JSON replay and full-row snapshot invariance."
+    },
+    {
+      "case": "delete",
+      "evidence": "Pinned current granted PATIENT_CANCELLED route test passed committed cancellation and waiting-area clearance warning/audit linkage, exact closed private six-field ledger receipt separately from public HTTP response, immediate replay invariance."
+    }
+  ],
+  "limitations": [
+    "Outcome means reviewed assertions ran successfully in one fresh isolated synthetic PostgreSQL/current route batch. Retained primary reports are pass/fail evidence; arbitrary row payloads were not independently serialized into this review.",
+    "Independent READ COMMITTED observer is accepted setup/admin credential usage, not a restricted-role privilege claim.",
+    "Bootstrap/migration/catalogue/connection-guard support checks receive no extra original case or repaired-failure counts; no whole65/97, transferred O1, full CI, G2 or feature acceptance.",
+    "Immediate replay with unchanged intervening state only: no later intervening mutation, contention, expiry/revocation, post-claim rejection/rollback or full negative-guard coverage. Prior sibling/residual/static NONPASS and exhausted budgets stay unchanged.",
+    "Bernie event identity/order/receipt linkage as asserted, not completeness of every event payload. Delete private receipt is deliberately distinct from public canonical response.",
+    "Container/cluster closed and client/readers reaped observed for this same attempt; no blanket OS exclusion or future runtime permission. No rerun/automatic retry.",
+    "Reviewer performed only exact read-only receipt/source/metadata/container-absence observations and wrote this assigned review; no application/test/DB/Git/publication or cleanup effects."
+  ]
+}

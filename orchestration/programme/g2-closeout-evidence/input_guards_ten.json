@@ -1,0 +1,185 @@
+{
+  "schema": "emr4.ci_c_ordinary_cohort_support_source.v1",
+  "status": "SOURCE_ONLY_NONOPERATIVE",
+  "cohort_id": "input_guards_ten",
+  "collection": [
+    "confirmation_current/test_confirmation_input_guards.py::test_malformed_proposal_has_no_persisted_effect[bernie]",
+    "confirmation_current/test_confirmation_input_guards.py::test_malformed_proposal_has_no_persisted_effect[status]",
+    "confirmation_current/test_confirmation_input_guards.py::test_malformed_proposal_has_no_persisted_effect[update]",
+    "confirmation_current/test_confirmation_input_guards.py::test_malformed_proposal_has_no_persisted_effect[delete]",
+    "confirmation_current/test_confirmation_input_guards.py::test_invalid_delete_reason_has_no_persisted_effect",
+    "confirmation_current/test_confirmation_input_guards.py::test_whitespace_key_has_no_persisted_effect[update]",
+    "confirmation_current/test_confirmation_input_guards.py::test_whitespace_key_has_no_persisted_effect[delete]",
+    "confirmation_current/test_confirmation_input_guards.py::test_unconfirmed_proposal_has_no_persisted_effect[status]",
+    "confirmation_current/test_confirmation_input_guards.py::test_unconfirmed_proposal_has_no_persisted_effect[update]",
+    "confirmation_current/test_confirmation_input_guards.py::test_unconfirmed_proposal_has_no_persisted_effect[delete]"
+  ],
+  "phase_rows": [
+    {
+      "nodeid": "confirmation_current/test_confirmation_input_guards.py::test_malformed_proposal_has_no_persisted_effect[bernie]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_confirmation_input_guards.py::test_malformed_proposal_has_no_persisted_effect[bernie]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_confirmation_input_guards.py::test_malformed_proposal_has_no_persisted_effect[bernie]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_confirmation_input_guards.py::test_malformed_proposal_has_no_persisted_effect[status]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_confirmation_input_guards.py::test_malformed_proposal_has_no_persisted_effect[status]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_confirmation_input_guards.py::test_malformed_proposal_has_no_persisted_effect[status]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_confirmation_input_guards.py::test_malformed_proposal_has_no_persisted_effect[update]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_confirmation_input_guards.py::test_malformed_proposal_has_no_persisted_effect[update]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_confirmation_input_guards.py::test_malformed_proposal_has_no_persisted_effect[update]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_confirmation_input_guards.py::test_malformed_proposal_has_no_persisted_effect[delete]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_confirmation_input_guards.py::test_malformed_proposal_has_no_persisted_effect[delete]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_confirmation_input_guards.py::test_malformed_proposal_has_no_persisted_effect[delete]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_confirmation_input_guards.py::test_invalid_delete_reason_has_no_persisted_effect",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_confirmation_input_guards.py::test_invalid_delete_reason_has_no_persisted_effect",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_confirmation_input_guards.py::test_invalid_delete_reason_has_no_persisted_effect",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_confirmation_input_guards.py::test_whitespace_key_has_no_persisted_effect[update]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_confirmation_input_guards.py::test_whitespace_key_has_no_persisted_effect[update]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_confirmation_input_guards.py::test_whitespace_key_has_no_persisted_effect[update]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_confirmation_input_guards.py::test_whitespace_key_has_no_persisted_effect[delete]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_confirmation_input_guards.py::test_whitespace_key_has_no_persisted_effect[delete]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_confirmation_input_guards.py::test_whitespace_key_has_no_persisted_effect[delete]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_confirmation_input_guards.py::test_unconfirmed_proposal_has_no_persisted_effect[status]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_confirmation_input_guards.py::test_unconfirmed_proposal_has_no_persisted_effect[status]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_confirmation_input_guards.py::test_unconfirmed_proposal_has_no_persisted_effect[status]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_confirmation_input_guards.py::test_unconfirmed_proposal_has_no_persisted_effect[update]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_confirmation_input_guards.py::test_unconfirmed_proposal_has_no_persisted_effect[update]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_confirmation_input_guards.py::test_unconfirmed_proposal_has_no_persisted_effect[update]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_confirmation_input_guards.py::test_unconfirmed_proposal_has_no_persisted_effect[delete]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_confirmation_input_guards.py::test_unconfirmed_proposal_has_no_persisted_effect[delete]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_confirmation_input_guards.py::test_unconfirmed_proposal_has_no_persisted_effect[delete]",
+      "phase": "teardown",
+      "outcome": "passed"
+    }
+  ],
+  "provenance": {
+    "source_path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/ordinary-applicability/confirmation-input-guards-execution-preparation-v1/decoded-reports/tenant-primary.json",
+    "source_sha256": "224c3f2d0b53a0021092a1079862e37b478fe4471ebd89f69757958497a83c12",
+    "independent_review_path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/reviews/confirmation-input-guards-result-review-v1.json",
+    "independent_review_sha256": "cbc0d2589c8e125c2351fc1b063198bb05f42ef2ecdf9c5c5158d6e97a10e8c7",
+    "raw_outer_result_path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/ordinary-applicability/confirmation-input-guards-execution-preparation-v1/result.json",
+    "raw_outer_result_sha256": "ddf028e12105fba128ab1486224751bebfaa5b1711b09eb4bc26ed54fb2fb574",
+    "raw_batch_passed": null,
+    "raw_batch_nonpass_preserved": false,
+    "selected_from_larger_raw_result": false,
+    "keyed_report_source_normalized": true,
+    "qualified_subset_only": false,
+    "source_observation_sha256": "538c2f3e601cfc4e95fab5ecb2a5cd9efcbeb8e69c3e9f6801f7504a4bced667"
+  },
+  "accepted_population_test_ids": null,
+  "complete_v3_check_verdict": null
+}

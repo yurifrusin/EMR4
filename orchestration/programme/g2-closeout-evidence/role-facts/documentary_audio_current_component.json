@@ -1,0 +1,25 @@
+{
+  "schema": "emr4.ci_c_documentary_role_facts.v1",
+  "check_id": "documentary_audio_current_component",
+  "source_only_receipt": {
+    "kind": "exact_source_normalization",
+    "new_runtime_or_cleanup_effect": false,
+    "underlying_observation_sha256": "5eb6306ed121a2501b9584097384f7d10c1773dc785876db52dd0cb8db38d11c",
+    "documentary_support_output_ids": [],
+    "public_basis_sha256_if_applicable": null,
+    "independent_review_sha256": "47a8092af1056bab599fb161e44ed89b351bb866c1ad37f48fc7bdfe9104b230"
+  },
+  "cleanup": {
+    "kind": "attributed_reviewed_source_scope",
+    "review_sha256": "47a8092af1056bab599fb161e44ed89b351bb866c1ad37f48fc7bdfe9104b230",
+    "new_cleanup_performed_by_this_document": false,
+    "historical_cleanup_claim": "only the facts explicitly accepted in the pinned independent review; unknown fields remain pending"
+  },
+  "relevance": {
+    "kind": "original_property_membership_and_scope",
+    "membership_review_sha256": "ebbf9d059f6bfd0864bf1d746ab53fac3de185b456901bd7c8e40b50f2c26565",
+    "safety_review_sha256_if_applicable": "66792638eb5246d856ce46bd47cdf525282c43823e828fddbbe1221e240ec75a"
+  },
+  "final_context": null,
+  "final_check_acceptance": null
+}

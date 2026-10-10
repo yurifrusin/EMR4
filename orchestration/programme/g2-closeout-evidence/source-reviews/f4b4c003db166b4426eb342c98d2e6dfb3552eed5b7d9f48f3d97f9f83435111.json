@@ -1,0 +1,212 @@
+{
+  "schema_version": "clinical_successor_independent_runtime_effect_review.v1",
+  "verdict": "BOUNDED_CLINICAL_SUCCESSOR_RUNTIME_ACCEPTED",
+  "reviewer_agent": "/root/resumption_activation_review",
+  "independent": true,
+  "blocking_findings": [],
+  "worker_allocation": {
+    "model": "gpt-6-astra",
+    "reasoning_effort": "high",
+    "retained_unchanged": true,
+    "provider_resolved_telemetry_available": false
+  },
+  "operation_id": "g2-ci-clinical-successor-a6b7-v1",
+  "binding_sha256": "467fcd27f93871f89ca11bc74cfebec39f41b9302b5a83c9df6bef5cf757538b",
+  "execution_review_sha256": "00d7d97746fc079cf086e3391c8afcc5395f0ecb5df32fa01ac1c722eb26ca59",
+  "result_sha256": "8b5e091d168051f9ffa5d11f657b07d0ff5fb3da7045e65616b9d1de403c0fd5",
+  "launcher_sha256": "7ae7eead920332702a60ea8a8bf92d8bf74a0a6c4781183a65f4f150ceac3dfc",
+  "evidence_sha256": {
+    "execution-binding.json": "467fcd27f93871f89ca11bc74cfebec39f41b9302b5a83c9df6bef5cf757538b",
+    "independent-execution-review-v1.json": "00d7d97746fc079cf086e3391c8afcc5395f0ecb5df32fa01ac1c722eb26ca59",
+    "result.json": "8b5e091d168051f9ffa5d11f657b07d0ff5fb3da7045e65616b9d1de403c0fd5",
+    "started.json": "3679a8b0a1ae1a0af46441aaf1d11d69d2fb107a4fd462c96cf015dde7491a6b",
+    "prestart-check.json": "1febb3004b165459692d6da373f8915352c19931f250ab379c578f57a26fc552",
+    "prestart-inspect.json": "e63ad67493d8ed0800735af3e5e153f0124f288419af76000e361c7f2acfb72a",
+    "decoded-reports/result.json": "60f3f4acfceb48c74a07f30a72a934d723856fb894f56ac2c68c71b151d8ffc0",
+    "decoded-reports/tenant-result.json": "987eaafc0fdfd196bfaf1e004159baaa1f8deda2abfe8ff82d7d8ac53881ce2a",
+    "decoded-reports/tenant-primary.json": "cac3a64d6d691fb4aa1642e3157eb3ed1b4654923afdd411d1cdcc28529c3766",
+    "container-stdout.txt": "230bd2634015e275e0ea5a673f2ad421b212b249bb841d10a94365da04cb761c",
+    "container-stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "source": {
+    "source_assembly_binding_sha256": "aea404f866f9a9a052e4d3403af427705510af3613c5100ce1481d456dad7ea0",
+    "source_binding_sha256": "15503c10f2d6562b143330f7df8cad1a2a5b9cc0d0c4068efc971626caaa332f",
+    "capsule_sha256": {
+      "expected-nodeids.json": "bedc616e3c133cb703b17cb90cad13003953b686ac6b5805de096133fa1537d0",
+      "outer-binding.json": "268b49951bf1a18c8831973b657b27f48d6f1dd293bf0e7e442291a5e1517eae",
+      "source-binding-v1.json": "15503c10f2d6562b143330f7df8cad1a2a5b9cc0d0c4068efc971626caaa332f",
+      "tenant-public.json": "a96778269bd35300b1404a3d572c82de14c45ae0be3b2c3bcef4d9ad4d31dc06",
+      "tenant_child.py": "b13a11d57bbe37f9c186246ba276754e5a4746447d8ed134e34bcfe126e1e670",
+      "tenant_outer.py": "bbc0db1716d81e4f6d85691d986a90d8900ae0f7c4b772055db23abf484eac5c",
+      "tenant_source_guard.py": "2af484413111f5eefd64d23111652040e751c8e3a4a50ae39799ce0724215fd2",
+      "tool-identities.json": "fe08990e1676398be380b5a4e8a88430cae8ae9ea9abf0ada0b9efbad3865498",
+      "toolchain-binding-v1.json": "904c2392bc07e2ad8f200425085bd265f6641ac1d443dadba15e96073ab93939"
+    },
+    "owned_case_files_rehashed": 77,
+    "capsule_files_rehashed": 9,
+    "recorded_import_paths_within_bound_case": true,
+    "unchanged_source_acceptance_reused": true,
+    "coordinator_prestart_current_repository_files_checked": 74,
+    "coordinator_prestart_instruction_and_state_pins_matched": true
+  },
+  "actual_result": {
+    "status": "PASS",
+    "invocations": 1,
+    "collections": 1,
+    "test_attempts": 1,
+    "automatic_retry": false,
+    "elapsed_seconds": 26.62682600005064,
+    "conservative_charged_seconds": 27,
+    "ordered_cases": 48,
+    "passing_phase_reports": 144,
+    "collection_errors": 0,
+    "internal_errors": 0,
+    "deselected": 0,
+    "guard_denials": 0,
+    "primary_preserved_before_cleanup": true,
+    "nested_primary_and_outer_match_retained_files": true,
+    "sanitized_bundle_files_verified": 21,
+    "bundle_compressed_digest_and_all_decoded_bytes_verified": true,
+    "stderr_empty": true
+  },
+  "actual_support": {
+    "migration_revision": "a6b7c8d9e0f1",
+    "bootstrap": {
+      "fresh_absence_verified": true,
+      "status": "PASS"
+    },
+    "grants": {
+      "actual_grants_read_back": true,
+      "status": "PASS"
+    },
+    "forced_rls_tables_checked": 6,
+    "validated_relationship_constraints": 18,
+    "catalogue_grants_and_cascade": {
+      "all_public_table_names_exact": true,
+      "outside_practice_cascade": [
+        "application_auth_audit_events",
+        "application_auth_exchange_grants",
+        "application_auth_parent_sessions",
+        "application_auth_principal_generations",
+        "application_auth_surface_sessions",
+        "application_auth_synthetic_principal_truth",
+        "application_identity_federation_admission_grants",
+        "application_identity_federation_audit_events",
+        "application_identity_federation_bindings",
+        "application_identity_oidc_authorization_attempts",
+        "mbs_directory",
+        "snomed_directory"
+      ],
+      "practice_cascade_tables": 52,
+      "public_table_owners_checked": 65,
+      "public_tables": 65,
+      "restricted_column_grants_checked": 759,
+      "restricted_table_grants_checked": 65,
+      "status": "PASS"
+    },
+    "connection_guards": {
+      "dirty_checkout_rejection": "clinical pooled connection retained tenant context",
+      "dirty_pool_explicitly_discarded": true,
+      "failed_checkout_balanced": true,
+      "fresh_checkout_clean": true,
+      "raw_guard_role_mismatch": "clinical physical connection identity mismatch",
+      "raw_guard_success": "PASS_ROLLED_BACK",
+      "reset_reservations_consumed": 0,
+      "status": "PASS",
+      "support_case_count": 0
+    },
+    "outside_cascade_counts_invariant": true,
+    "outside_cascade_initial_and_final_counts": {
+      "application_auth_audit_events": 0,
+      "application_auth_exchange_grants": 0,
+      "application_auth_parent_sessions": 0,
+      "application_auth_principal_generations": 0,
+      "application_auth_surface_sessions": 0,
+      "application_auth_synthetic_principal_truth": 0,
+      "application_identity_federation_admission_grants": 0,
+      "application_identity_federation_audit_events": 0,
+      "application_identity_federation_bindings": 0,
+      "application_identity_oidc_authorization_attempts": 0,
+      "mbs_directory": 0,
+      "snomed_directory": 0
+    },
+    "clinical_lifecycle": {
+      "adapter_consumed": true,
+      "balanced_checkout_records": true,
+      "closed_lifetime_denials": 2,
+      "global_engine_never_used_by_case": true,
+      "global_engine_post_close_connect_denied": true,
+      "reset_attempts": 48,
+      "reset_budget_denied": true
+    },
+    "support_checks_are_not_additional_clinical_cases": true
+  },
+  "actual_cleanup": {
+    "engine_disposal": {
+      "admin": {
+        "attempts": 1,
+        "checked_out_before_dispose": 0,
+        "status": "PASS"
+      },
+      "command": {
+        "attempts": 1,
+        "checked_out_before_dispose": 0,
+        "status": "PASS"
+      },
+      "global_app_engine": {
+        "attempts": 1,
+        "checked_out_before_dispose": 0,
+        "status": "PASS"
+      },
+      "observer": {
+        "attempts": 1,
+        "checked_out_before_dispose": 0,
+        "status": "PASS"
+      },
+      "request": {
+        "attempts": 1,
+        "checked_out_before_dispose": 0,
+        "status": "PASS"
+      }
+    },
+    "recorded_driver_connections": 17,
+    "all_recorded_driver_connections_closed": true,
+    "threads_after_pytest": [],
+    "guard_denials": [],
+    "postgresql_stop_receipt_returncode": 0,
+    "database_stopped": true,
+    "native_container": {
+      "container_id": "4444b80b83a20acedf6086d3cb6749fa1a180c9e64728c9ca15c485e015adcf7",
+      "exit_code": 0,
+      "oom_killed": false,
+      "restart_count": 0,
+      "container_absent": true,
+      "created_volumes": false
+    },
+    "attached_process": {
+      "client_pid": 21964,
+      "client_closed": true,
+      "readers_closed": true,
+      "reader_errors": [],
+      "output_overflow": false,
+      "output_complete": true
+    },
+    "cleanup_evidence_complete": true,
+    "effect_status_uncertain": false
+  },
+  "same_attempt_reconciliation": {
+    "started_and_result_bind_accepted_review": true,
+    "all_four_phase_processes_closed_zero": true,
+    "no_replay_performed": true,
+    "prestart_check_and_prestart_inspect_are_distinct_valid_artifacts": true,
+    "critical_reservation_may_be_reconciled_closed_by_coordinator": true
+  },
+  "limitations": [
+    "Accepts this one new synthetic clinical successor batch only. It does not accept whole CI, G2 completion, product publication, full application equivalence or any replay.",
+    "Real restricted request/command sessions and real narrow consultation routes with ErrorHandler were exercised; setup and whole-row observations remained explicitly privileged. Other app.main routers, GraphQL, CORS and shadow instrumentation were outside this case. No universal tenant or same-backend-PID P-to-Q guarantee is inferred.",
+    "The 12 outside-cascade tables had unchanged zero row counts in this disposable database. This is row-count evidence, not row-byte preservation or evidence on a populated outside-cascade workload. ACL checks cover the bound owners/schema/table/column/login predicates, not every PostgreSQL capability.",
+    "Source preparation, historical test-preservation evidence and unchanged reviewed containment are reused with their limits. Corrected unexecuted capsule history remains preserved; it consumed no runtime attempt.",
+    "Python import/audit guards and pinned installed-library startup are not a universal native-library sandbox. Native supervision retains post-capture metadata-output caps and direct-client/owned-container cleanup limits; no universal descendant-process guarantee is claimed.",
+    "Cleanup acceptance uses authenticated same-attempt retained reports and native post-removal readback; reviewer issued no fresh Docker, SQL, Git, import, test or runtime command. Coordinator prestart current-repository and instruction checks are labelled coordinator evidence."
+  ]
+}

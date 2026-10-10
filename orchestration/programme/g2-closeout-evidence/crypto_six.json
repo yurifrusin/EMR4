@@ -1,0 +1,121 @@
+{
+  "schema": "emr4.ci_c_ordinary_cohort_support_source.v1",
+  "status": "SOURCE_ONLY_NONOPERATIVE",
+  "cohort_id": "crypto_six",
+  "collection": [
+    "test_dependency_compatibility.py::test_fernet_rejection[wrong-key]",
+    "test_dependency_compatibility.py::test_fernet_rejection[tamper]",
+    "test_dependency_compatibility.py::test_encrypted_private_key_parsing",
+    "test_dependency_compatibility.py::test_certificate_rejection[untrusted-issuer]",
+    "test_dependency_compatibility.py::test_certificate_rejection[expired]",
+    "test_dependency_compatibility.py::test_certificate_pem_parsing"
+  ],
+  "phase_rows": [
+    {
+      "nodeid": "test_dependency_compatibility.py::test_fernet_rejection[wrong-key]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_fernet_rejection[wrong-key]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_fernet_rejection[wrong-key]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_fernet_rejection[tamper]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_fernet_rejection[tamper]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_fernet_rejection[tamper]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_encrypted_private_key_parsing",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_encrypted_private_key_parsing",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_encrypted_private_key_parsing",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_certificate_rejection[untrusted-issuer]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_certificate_rejection[untrusted-issuer]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_certificate_rejection[untrusted-issuer]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_certificate_rejection[expired]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_certificate_rejection[expired]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_certificate_rejection[expired]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_certificate_pem_parsing",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_certificate_pem_parsing",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_certificate_pem_parsing",
+      "phase": "teardown",
+      "outcome": "passed"
+    }
+  ],
+  "provenance": {
+    "source_path": "C:/Users/there/.codex/visualizations/2026/09/15/01a0a72f-a9bd-72f3-b259-0de184339a44/dependency-repair-v12-preparation/library-verification-v4/result.json",
+    "source_sha256": "2c47ceb3bbd870a7f48afdd2ad36febcb3bd96f256c99901e8edb96c9349f5cb",
+    "independent_review_path": "C:/Users/there/.codex/visualizations/2026/09/15/01a0a72f-a9bd-72f3-b259-0de184339a44/dependency-repair-v12-preparation/library-verification-v4/independent-result-review-v1.json",
+    "independent_review_sha256": "ada7181898726a64949f7a41ab035c7e8d43eb06e0f3574b46ce9ae0612bf228",
+    "raw_outer_result_path": "C:/Users/there/.codex/visualizations/2026/09/15/01a0a72f-a9bd-72f3-b259-0de184339a44/dependency-repair-v12-preparation/library-verification-v4/result.json",
+    "raw_outer_result_sha256": "2c47ceb3bbd870a7f48afdd2ad36febcb3bd96f256c99901e8edb96c9349f5cb",
+    "raw_batch_passed": true,
+    "raw_batch_nonpass_preserved": false,
+    "selected_from_larger_raw_result": true,
+    "keyed_report_source_normalized": false,
+    "qualified_subset_only": false,
+    "source_observation_sha256": "538c2f3e601cfc4e95fab5ecb2a5cd9efcbeb8e69c3e9f6801f7504a4bced667"
+  },
+  "accepted_population_test_ids": null,
+  "complete_v3_check_verdict": null
+}

@@ -1,0 +1,88 @@
+{
+  "schema": "emr4.ci_c.stable_config_anchor_candidate.v1",
+  "status": "PROPOSED_REPRESENTATION_PENDING_CURRENT_HOSTED_JOIN",
+  "pyproject": {
+    "path": "C:/Users/there/EMR4/pyproject.toml",
+    "bytes": 929,
+    "sha256": "30e8165ef1dedc0178ec2e1beb553a74de0b9680aed51282807fb45a4f28cde2"
+  },
+  "pytest_ini_options": {
+    "addopts": "-q --tb=short -p no:randomly",
+    "testpaths": [
+      "tests"
+    ]
+  },
+  "ruff": {
+    "target_version": "py311",
+    "select": [
+      "E9",
+      "F401"
+    ]
+  },
+  "bandit": {
+    "exclude_dirs": [
+      ".venv",
+      "tests",
+      "alembic"
+    ],
+    "skips": []
+  },
+  "selected_config_paths": {
+    "bandit": "pyproject.toml",
+    "pytest": "pyproject.toml",
+    "ruff": "pyproject.toml"
+  },
+  "profile_command_semantics": {
+    "complete_profiles": [
+      "ci-correctness",
+      "ci-bandit"
+    ],
+    "ci_correctness": [
+      "selected Python 3.11 compilation",
+      "selected Ruff E9/F401",
+      "selected historical diary leakage lint",
+      "selected ordinary correctness nodes"
+    ],
+    "ci_bandit": [
+      "selected Bandit report and review gate"
+    ],
+    "pytest_argv_prefix": [
+      "python",
+      "-B",
+      "-m",
+      "pytest",
+      "--noconftest",
+      "-c",
+      "pyproject.toml",
+      "-o",
+      "addopts=",
+      "-p",
+      "no:cacheprovider"
+    ],
+    "clean_environment_overlays": {
+      "PYTEST_DISABLE_PLUGIN_AUTOLOAD": "1",
+      "PYTEST_ADDOPTS": "",
+      "PYTHONPATH": "",
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "RUFF_NO_CACHE": "1"
+    }
+  },
+  "source_evidence": [
+    {
+      "path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/ordinary-applicability/g2-closeout-maintenance-preparation-v3/after/scripts/python_source_state.py",
+      "bytes": 48921,
+      "sha256": "f430803e889b4c3aa0269e12dbff4d965eea2dec0917ac051d8d78225c67b61c"
+    },
+    {
+      "path": "C:/Users/there/EMR4/scripts/verify_repository.py",
+      "bytes": 8009,
+      "sha256": "01239f5459c9967cfceffc0201d969a77ec374db8887bf3149944dd93308c992"
+    }
+  ],
+  "exclusions": [
+    "bounded selection file itself",
+    "workflow",
+    "proof artifacts",
+    "generated controller config/scope overlay"
+  ]
+}

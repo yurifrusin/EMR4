@@ -1,0 +1,21 @@
+{
+  "schema_version": "emr4.trusted_verification_context.v1",
+  "context": {
+    "plan_sha256": "e92c0fb7bbfc1de747d26efaa5fe055d1576ab4d056140dafd4e1d744825c4d8",
+    "authority_sha256": "29a530781f3e04574355b73206c590664534f7a6e0cbb9fc36f3c7d5d5a461d3",
+    "source_sha256": "a197e3d10dbf94d80e117f6269ba23cd6a9cce957afd7d7102e66c7aed630732",
+    "config_sha256": "320dd89320138207d160557795fd51c95f3d7a285c37ba5a6f5cf3b4c17fe0aa",
+    "runtime_sha256": "35700e2f9f7f108f9c5f1fcd707c7fbf628e925ece16d05dda1f60aeea855fdf",
+    "verifier_sha256": "f430803e889b4c3aa0269e12dbff4d965eea2dec0917ac051d8d78225c67b61c",
+    "result_id": "g2_complete_ci_current_context_20261010_v1"
+  },
+  "reviewers": [
+    "g2_admission_review"
+  ],
+  "implementers": [
+    "g2_coordinator",
+    "g2_evidence_author",
+    "g2_scope_author",
+    "g2_delegation_amendment"
+  ]
+}

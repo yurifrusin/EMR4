@@ -1,0 +1,105 @@
+{
+  "schema": "emr4.ci_c_ordinary_cohort_support_source.v1",
+  "status": "SOURCE_ONLY_NONOPERATIVE",
+  "cohort_id": "first_write_five",
+  "collection": [
+    "confirmation_current/test_confirmation_first_write_receipts.py::test_staff_first_write_receipt_and_replay",
+    "confirmation_current/test_confirmation_first_write_receipts.py::test_bernie_first_write_linked_receipt_events_and_replay",
+    "confirmation_current/test_confirmation_first_write_receipts.py::test_status_first_write_persisted_receipt_and_byte_replay",
+    "confirmation_current/test_confirmation_first_write_receipts.py::test_update_first_write_persisted_fields_receipt_and_replay",
+    "confirmation_current/test_confirmation_first_write_receipts.py::test_delete_first_write_waiting_area_warning_private_receipt_and_replay"
+  ],
+  "phase_rows": [
+    {
+      "nodeid": "confirmation_current/test_confirmation_first_write_receipts.py::test_staff_first_write_receipt_and_replay",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_confirmation_first_write_receipts.py::test_staff_first_write_receipt_and_replay",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_confirmation_first_write_receipts.py::test_staff_first_write_receipt_and_replay",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_confirmation_first_write_receipts.py::test_bernie_first_write_linked_receipt_events_and_replay",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_confirmation_first_write_receipts.py::test_bernie_first_write_linked_receipt_events_and_replay",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_confirmation_first_write_receipts.py::test_bernie_first_write_linked_receipt_events_and_replay",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_confirmation_first_write_receipts.py::test_status_first_write_persisted_receipt_and_byte_replay",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_confirmation_first_write_receipts.py::test_status_first_write_persisted_receipt_and_byte_replay",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_confirmation_first_write_receipts.py::test_status_first_write_persisted_receipt_and_byte_replay",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_confirmation_first_write_receipts.py::test_update_first_write_persisted_fields_receipt_and_replay",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_confirmation_first_write_receipts.py::test_update_first_write_persisted_fields_receipt_and_replay",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_confirmation_first_write_receipts.py::test_update_first_write_persisted_fields_receipt_and_replay",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_confirmation_first_write_receipts.py::test_delete_first_write_waiting_area_warning_private_receipt_and_replay",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_confirmation_first_write_receipts.py::test_delete_first_write_waiting_area_warning_private_receipt_and_replay",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_confirmation_first_write_receipts.py::test_delete_first_write_waiting_area_warning_private_receipt_and_replay",
+      "phase": "teardown",
+      "outcome": "passed"
+    }
+  ],
+  "provenance": {
+    "source_path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/ordinary-applicability/confirmation-first-write-execution-preparation-v1/decoded-reports/tenant-primary.json",
+    "source_sha256": "d042ca5b6a2ae417f47d8fbdb211d2a18defe334e58e9decee1ffc9bf1ab1a17",
+    "independent_review_path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/reviews/confirmation-first-write-result-review-v1.json",
+    "independent_review_sha256": "3ac00633f6e588d43d64d932f166f7210fccb4334653fdf1890a0fadafffc1d8",
+    "raw_outer_result_path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/ordinary-applicability/confirmation-first-write-execution-preparation-v1/result.json",
+    "raw_outer_result_sha256": "7bd157987a4c268c8287fad4ed214480383deead25390f1308818b61d2f154f1",
+    "raw_batch_passed": null,
+    "raw_batch_nonpass_preserved": false,
+    "selected_from_larger_raw_result": false,
+    "keyed_report_source_normalized": true,
+    "qualified_subset_only": false,
+    "source_observation_sha256": "538c2f3e601cfc4e95fab5ecb2a5cd9efcbeb8e69c3e9f6801f7504a4bced667"
+  },
+  "accepted_population_test_ids": null,
+  "complete_v3_check_verdict": null
+}

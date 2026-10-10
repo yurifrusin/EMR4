@@ -1,0 +1,117 @@
+{
+  "schema": "emr4.g2.qualified_src9_green28_normalization_review.v1",
+  "verdict": "PASS_EXACT_SRC9_GREEN28_QUALIFIED_COHORT_NORMALIZATION",
+  "reviewer_agent": "/root/g2_admission_review",
+  "independent": true,
+  "implementation_authorship": false,
+  "selected_model": "gpt-6.1-sol",
+  "selected_reasoning_effort": "high",
+  "provider_resolved_settings_observable": false,
+  "agents_sha256": "97d6ea223508d53ee704a0cc3ceec383e2eea9f3db764376b538e8341bee886e",
+  "blocking_findings": [],
+  "checks": {
+    "total": 34,
+    "failed": [],
+    "definition": "Authenticated both cohort artifacts and all twelve literal source-artifact length/hash pins; reproduced ordered all-three-phase-pass identity filters, exact flattened reports, uniqueness, original counts, exact excluded nodes/reports, original NONPASS and concrete/composite cleanup limitations."
+  },
+  "cohorts": [
+    {
+      "path": "C:\\Users\\there\\EMR4-migration\\20260911-v1\\current-control-repair-20260912-v1\\g2-completion-20261008-v1\\ordinary-applicability\\confirmation-state-receipt-nine-qualified-cohort-v1.json",
+      "sha256": "d70cbd88e97e1f98db5b1d0a960148fc5dac7491275e014a232f89f78d97f6c6",
+      "cases": 9,
+      "phases": 27,
+      "excluded_nodes": [
+        "confirmation_current/test_confirmation_state_receipt_residuals.py::test_signed_non_session_bernie_replay_has_no_second_effect",
+        "confirmation_current/test_confirmation_state_receipt_residuals.py::test_delete_replay_preserves_receipt_after_intervening_raw_soft_cancel"
+      ],
+      "original_independent_verdict": "NONPASS_STATE_RECEIPT_ATTEMPT02_RECONCILED_WITH_NINE_QUALIFIED_CASE_PASSES",
+      "source_artifacts": [
+        {
+          "path": "C:\\Users\\there\\EMR4-migration\\20260911-v1\\current-control-repair-20260912-v1\\g2-completion-20261008-v1\\ordinary-applicability\\confirmation-state-receipt-execution-preparation-v5\\result.json",
+          "bytes": 3847,
+          "sha256": "35301946acf1e7c2f29296cd4dbe7436be325727ff6748d7cf613d38554c12d8"
+        },
+        {
+          "path": "C:\\Users\\there\\EMR4-migration\\20260911-v1\\current-control-repair-20260912-v1\\g2-completion-20261008-v1\\ordinary-applicability\\confirmation-state-receipt-execution-preparation-v5\\decoded-reports\\tenant-primary.json",
+          "bytes": 4609,
+          "sha256": "f4494623ab45e518f383e3a27d5ccf993e9f9b6c6ef136014a7b6a7fa480b9f8"
+        },
+        {
+          "path": "C:\\Users\\there\\EMR4-migration\\20260911-v1\\current-control-repair-20260912-v1\\g2-completion-20261008-v1\\ordinary-applicability\\confirmation-state-receipt-execution-preparation-v5\\decoded-reports\\tenant-result.json",
+          "bytes": 25888,
+          "sha256": "c073321cfdf5693f5bb6dcee08ac6544532a8f60c37fa4d56e187f0d0f8b67e5"
+        },
+        {
+          "path": "C:\\Users\\there\\EMR4-migration\\20260911-v1\\current-control-repair-20260912-v1\\g2-completion-20261008-v1\\reviews\\confirmation-state-receipt-result-review-v2.json",
+          "bytes": 12246,
+          "sha256": "25206d2cf9ff851f2b16ecd7d9f0df7c0fe8e3ffbeb3a3fd42659981e51ceefd"
+        },
+        {
+          "path": "C:\\Users\\there\\EMR4-migration\\20260911-v1\\current-control-repair-20260912-v1\\g2-completion-20261008-v1\\ordinary-applicability\\confirmation-state-receipt-execution-preparation-v5\\execution-binding.json",
+          "bytes": 9896,
+          "sha256": "d8fe9de32994e393e600091ed0a96539f18bd7e4eae8276cbdbdd67360853572"
+        },
+        {
+          "path": "C:\\Users\\there\\EMR4-migration\\20260911-v1\\current-control-repair-20260912-v1\\g2-completion-20261008-v1\\ordinary-applicability\\confirmation-state-receipt-execution-preparation-v5\\capsule\\source-binding-v2.json",
+          "bytes": 33498,
+          "sha256": "d23f22849c72cd1e4a5841328ee39d38e28aca4ca69a1d2ebd1a373a40cb761f"
+        }
+      ]
+    },
+    {
+      "path": "C:\\Users\\there\\EMR4-migration\\20260911-v1\\current-control-repair-20260912-v1\\g2-completion-20261008-v1\\ordinary-applicability\\delete-contract-green-twentyeight-qualified-cohort-v1.json",
+      "sha256": "a0a7d5df2744752e6bc80a0a506536e90c12b25af8928ee8124e8392267c9ce5",
+      "cases": 28,
+      "phases": 84,
+      "excluded_nodes": [
+        "confirmation_current/test_delete_contract_properties.py::test_new_v2_staged_write_or_receipt_failure_rolls_back_everything[audit-warning]"
+      ],
+      "original_independent_verdict": "NONPASS_DELETE_CONTRACT_GREEN_ATTEMPT_RECONCILED_WITH_TWENTY_EIGHT_QUALIFIED_CASE_PASSES",
+      "source_artifacts": [
+        {
+          "path": "C:\\Users\\there\\EMR4-migration\\20260911-v1\\current-control-repair-20260912-v1\\g2-completion-20261008-v1\\ordinary-applicability\\delete-contract-green-execution-preparation-v2\\result.json",
+          "bytes": 3846,
+          "sha256": "3f8f85ef85a82888ed722ad6905878e7ea1cd618e898fc0f5c6b81598b56f414"
+        },
+        {
+          "path": "C:\\Users\\there\\EMR4-migration\\20260911-v1\\current-control-repair-20260912-v1\\g2-completion-20261008-v1\\ordinary-applicability\\delete-contract-green-execution-preparation-v2\\decoded-reports\\tenant-primary.json",
+          "bytes": 9588,
+          "sha256": "0ce06032c1941b96df519523d2d9e9571d06e98da64741dec720f46a59ea98d7"
+        },
+        {
+          "path": "C:\\Users\\there\\EMR4-migration\\20260911-v1\\current-control-repair-20260912-v1\\g2-completion-20261008-v1\\ordinary-applicability\\delete-contract-green-execution-preparation-v2\\decoded-reports\\tenant-result.json",
+          "bytes": 30320,
+          "sha256": "5f7e702c4703a84c4c161f099a473e27f3f78ed15a425a4db4d054029bed1ad4"
+        },
+        {
+          "path": "C:\\Users\\there\\EMR4-migration\\20260911-v1\\current-control-repair-20260912-v1\\g2-completion-20261008-v1\\reviews\\delete-contract-green-result-review-v1.json",
+          "bytes": 17507,
+          "sha256": "089b3908f93d473361071469586d5bf46d2ce50bb768de69f909e852c3d96fa3"
+        },
+        {
+          "path": "C:\\Users\\there\\EMR4-migration\\20260911-v1\\current-control-repair-20260912-v1\\g2-completion-20261008-v1\\ordinary-applicability\\delete-contract-green-execution-preparation-v2\\execution-binding.json",
+          "bytes": 12058,
+          "sha256": "49d2a40a5b037fa336f341b98750097c4a00b756954323ef74190b0d5ba009b3"
+        },
+        {
+          "path": "C:\\Users\\there\\EMR4-migration\\20260911-v1\\current-control-repair-20260912-v1\\g2-completion-20261008-v1\\ordinary-applicability\\delete-contract-green-execution-preparation-v2\\capsule\\source-binding-v2.json",
+          "bytes": 34018,
+          "sha256": "00072cb77ece264d068c342404c6520c431aa095b39cb111b15da71c2dc17069"
+        }
+      ]
+    }
+  ],
+  "accepted_scope": "Exact normalization of existing same-attempt qualified per-case observations only. SRC9 retains nine cases/27 passed phases from raw11 NONPASS; GREEN28 retains 28 cases/84 passed phases from raw29 NONPASS. Excluded failed nodes and their passing setup/teardown reports are preserved separately and receive no complete-case credit.",
+  "preserved_limits": {
+    "raw_batches_remain_nonpass": true,
+    "new_execution": false,
+    "physical_cleanup_already_accepted": true,
+    "composite_cleanup_refusals_preserved": true,
+    "final_outside_cascade_invariance_proved": false,
+    "current_or_future_changed_subject_applicability_accepted": false,
+    "whole_product_or_ci_or_g2_acceptance": false,
+    "additional_runtime_or_budget_authority": false
+  },
+  "derivation_note": "Cohort collected_cases names identify the retained subset of original collection; they do not claim a separately collected or executed nine/28 batch. Case and phase counts remain distinct. This review does not revalidate product semantics or establish relevance after source changes.",
+  "reviewer_actions": "Exact ordinary artifact reads and standard-library JSON/hash comparisons only; no target imports, tests, application/DB/Docker/Git/network effects, source amendments, cleanup or nested delegation."
+}

@@ -1,0 +1,158 @@
+{
+  "database": false,
+  "input_binding_sha256": "4c55e4f19ed1d560bcdc00c4540818046b236af39c1e68877391b9c7b01f632c",
+  "named_tool_observations": {
+    "PyYAML": {
+      "dist_info_directory": "/opt/g2-tools/lib/python3.11/site-packages/pyyaml-6.0.3.dist-info",
+      "distribution": "PyYAML",
+      "metadata": {
+        "bytes": 2351,
+        "literal_path": "/opt/g2-tools/lib/python3.11/site-packages/pyyaml-6.0.3.dist-info/METADATA",
+        "resolved_path": "/opt/g2-tools/lib/python3.11/site-packages/pyyaml-6.0.3.dist-info/METADATA",
+        "sha256": "03c3b415ed38d09faedc49360e930769b40c58f68585e6de00e2e4916a858d34"
+      },
+      "module": "yaml",
+      "module_origin": {
+        "bytes": 12311,
+        "literal_path": "/opt/g2-tools/lib/python3.11/site-packages/yaml/__init__.py",
+        "resolved_path": "/opt/g2-tools/lib/python3.11/site-packages/yaml/__init__.py",
+        "sha256": "b19dfcc333d6a75dfd73073901164507252f271b41d3b5f7d85510033a0547a7"
+      },
+      "record": {
+        "bytes": 1997,
+        "literal_path": "/opt/g2-tools/lib/python3.11/site-packages/pyyaml-6.0.3.dist-info/RECORD",
+        "resolved_path": "/opt/g2-tools/lib/python3.11/site-packages/pyyaml-6.0.3.dist-info/RECORD",
+        "sha256": "8ff0614605f9bae9608f57fc08530cc0611407ef71a97d48d32f4951cafbe93c"
+      },
+      "version": "6.0.3"
+    },
+    "bandit": {
+      "command_executable": {
+        "bytes": 170,
+        "literal_path": "/opt/g2-tools/bin/bandit",
+        "resolved_path": "/opt/g2-tools/bin/bandit",
+        "sha256": "b719f1fe976fca38a7f707576ea1d64d41235a59ca79c094ecf8e0c62acbd3cf"
+      },
+      "dist_info_directory": "/opt/g2-tools/lib/python3.11/site-packages/bandit-1.9.4.dist-info",
+      "distribution": "bandit",
+      "metadata": {
+        "bytes": 7101,
+        "literal_path": "/opt/g2-tools/lib/python3.11/site-packages/bandit-1.9.4.dist-info/METADATA",
+        "resolved_path": "/opt/g2-tools/lib/python3.11/site-packages/bandit-1.9.4.dist-info/METADATA",
+        "sha256": "a5cffbefaf54c51418e19cf5765ded49af20b27a25b8eb440f21d9db50c9ce9a"
+      },
+      "module": "bandit",
+      "module_origin": {
+        "bytes": 683,
+        "literal_path": "/opt/g2-tools/lib/python3.11/site-packages/bandit/__init__.py",
+        "resolved_path": "/opt/g2-tools/lib/python3.11/site-packages/bandit/__init__.py",
+        "sha256": "ca3a2ef11c721e9c7acc78d87016b8fc251f7cd60874444608fc7a3e2ac0a3ef"
+      },
+      "record": {
+        "bytes": 7158,
+        "literal_path": "/opt/g2-tools/lib/python3.11/site-packages/bandit-1.9.4.dist-info/RECORD",
+        "resolved_path": "/opt/g2-tools/lib/python3.11/site-packages/bandit-1.9.4.dist-info/RECORD",
+        "sha256": "c2b2b70b585e5d0cf3c1545449d2e5947039b27d63e8d04482e31de600580385"
+      },
+      "version": "1.9.4"
+    },
+    "pytest": {
+      "command_executable": {
+        "bytes": 187,
+        "literal_path": "/opt/g2-tools/bin/pytest",
+        "resolved_path": "/opt/g2-tools/bin/pytest",
+        "sha256": "83217a2c7bcfd54a0575baeab3d930fc631bfbc73e4d6d1a202cb9901df5da44"
+      },
+      "dist_info_directory": "/opt/g2-tools/lib/python3.11/site-packages/pytest-9.1.1.dist-info",
+      "distribution": "pytest",
+      "metadata": {
+        "bytes": 7586,
+        "literal_path": "/opt/g2-tools/lib/python3.11/site-packages/pytest-9.1.1.dist-info/METADATA",
+        "resolved_path": "/opt/g2-tools/lib/python3.11/site-packages/pytest-9.1.1.dist-info/METADATA",
+        "sha256": "c5d032518012789cabc870d46589aca3aeda36cf9fa4399ee88bda3d10438451"
+      },
+      "module": "pytest",
+      "module_origin": {
+        "bytes": 5644,
+        "literal_path": "/opt/g2-tools/lib/python3.11/site-packages/pytest/__init__.py",
+        "resolved_path": "/opt/g2-tools/lib/python3.11/site-packages/pytest/__init__.py",
+        "sha256": "ee37885c9583f843390684dfb496907f87a0905128e7a3cf4ad227f49ff34c2d"
+      },
+      "record": {
+        "bytes": 7484,
+        "literal_path": "/opt/g2-tools/lib/python3.11/site-packages/pytest-9.1.1.dist-info/RECORD",
+        "resolved_path": "/opt/g2-tools/lib/python3.11/site-packages/pytest-9.1.1.dist-info/RECORD",
+        "sha256": "54bb37a14356ef327c81908377c8af5ccdbdce3d84338cb3c320ddc1c8de1af4"
+      },
+      "version": "9.1.1"
+    },
+    "ruff": {
+      "command_executable": {
+        "bytes": 27832160,
+        "literal_path": "/opt/g2-tools/bin/ruff",
+        "resolved_path": "/opt/g2-tools/bin/ruff",
+        "sha256": "64aae5e444938e33121c3b940dff9b3d8ef8fc2a88c477e7f3a4fae2584a8fe8"
+      },
+      "dist_info_directory": "/opt/g2-tools/lib/python3.11/site-packages/ruff-0.15.22.dist-info",
+      "distribution": "ruff",
+      "metadata": {
+        "bytes": 26551,
+        "literal_path": "/opt/g2-tools/lib/python3.11/site-packages/ruff-0.15.22.dist-info/METADATA",
+        "resolved_path": "/opt/g2-tools/lib/python3.11/site-packages/ruff-0.15.22.dist-info/METADATA",
+        "sha256": "c6ed46ea59f2bf6f229c2e38005c342f31de495c3d6e62ae49043b227e2fa0aa"
+      },
+      "module": "ruff",
+      "module_origin": {
+        "bytes": 103,
+        "literal_path": "/opt/g2-tools/lib/python3.11/site-packages/ruff/__init__.py",
+        "resolved_path": "/opt/g2-tools/lib/python3.11/site-packages/ruff/__init__.py",
+        "sha256": "eba8a7f720d20a26214448eec4b4af01cfe0e717f6a773d870401e06cc10842d"
+      },
+      "record": {
+        "bytes": 889,
+        "literal_path": "/opt/g2-tools/lib/python3.11/site-packages/ruff-0.15.22.dist-info/RECORD",
+        "resolved_path": "/opt/g2-tools/lib/python3.11/site-packages/ruff-0.15.22.dist-info/RECORD",
+        "sha256": "029e92dd018d9f00398fcd329001f9b910ec1d67d6c8b0a7ca4a40f71522483b"
+      },
+      "version": "0.15.22"
+    }
+  },
+  "network": "none",
+  "operation_id": "ci-c-runtime-identity-20261010-v2",
+  "passed": true,
+  "python_executable": {
+    "bytes": 6834488,
+    "literal_path": "/opt/g2-tools/bin/python",
+    "resolved_path": "/usr/bin/python3.11",
+    "sha256": "6d972cf21be56fe3c947ab6ba257ff8d08c342dd2714442986791bd9a6dfabfe"
+  },
+  "python_version": [
+    3,
+    11,
+    2
+  ],
+  "ruff": {
+    "argv": [
+      "/opt/g2-tools/bin/ruff",
+      "check",
+      "--no-cache",
+      "--config",
+      "/case/pyproject.toml",
+      "orchestration_harness/bounded_g1b.py",
+      "orchestration_harness/raisa_policy.py",
+      "tests/test_bounded_g1b.py"
+    ],
+    "attempts": 1,
+    "config_sha256": "30e8165ef1dedc0178ec2e1beb553a74de0b9680aed51282807fb45a4f28cde2",
+    "exit_code": 0,
+    "selected_source_count": 3,
+    "stderr": "",
+    "stdout": "All checks passed!\n",
+    "target_imports": false
+  },
+  "schema": "emr4.ci_c.runtime_identity_result.v1",
+  "site_packages": "/opt/g2-tools/lib/python3.11/site-packages",
+  "target_imports": false,
+  "tests_executed": false,
+  "unavailable": {}
+}

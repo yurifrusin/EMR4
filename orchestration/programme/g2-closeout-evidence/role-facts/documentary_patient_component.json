@@ -1,0 +1,28 @@
+{
+  "schema": "emr4.ci_c_documentary_role_facts.v1",
+  "check_id": "documentary_patient_component",
+  "source_only_receipt": {
+    "kind": "exact_source_normalization",
+    "new_runtime_or_cleanup_effect": false,
+    "underlying_observation_sha256": null,
+    "documentary_support_output_ids": [
+      "component_mount_documentary",
+      "component_review_copy"
+    ],
+    "public_basis_sha256_if_applicable": null,
+    "independent_review_sha256": "66792638eb5246d856ce46bd47cdf525282c43823e828fddbbe1221e240ec75a"
+  },
+  "cleanup": {
+    "kind": "attributed_reviewed_source_scope",
+    "review_sha256": "66792638eb5246d856ce46bd47cdf525282c43823e828fddbbe1221e240ec75a",
+    "new_cleanup_performed_by_this_document": false,
+    "historical_cleanup_claim": "only the facts explicitly accepted in the pinned independent review; unknown fields remain pending"
+  },
+  "relevance": {
+    "kind": "original_property_membership_and_scope",
+    "membership_review_sha256": "ebbf9d059f6bfd0864bf1d746ab53fac3de185b456901bd7c8e40b50f2c26565",
+    "safety_review_sha256_if_applicable": "66792638eb5246d856ce46bd47cdf525282c43823e828fddbbe1221e240ec75a"
+  },
+  "final_context": null,
+  "final_check_acceptance": null
+}

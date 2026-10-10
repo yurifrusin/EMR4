@@ -1,0 +1,235 @@
+{
+  "schema": "emr4.g2.delete_contract_green_continuation_result_review.v2",
+  "verdict": "PASS_DELETE_CONTRACT_GREEN_CORRECTED_AUDIT_ROLLBACK_AND_CLEANUP",
+  "reviewer_agent": "/root/g2_admission_review",
+  "independent": true,
+  "implementation_authorship": false,
+  "blocking_findings": [],
+  "result_sha256": "ce3f92c5f8763a895c46db11836a05fd4cb29f2dd391f3bcfaef33c380e63af6",
+  "binding_sha256": "003cc7a11a62a72035f84f13c370dcbfdf9e1e2d8d78d459ae5b4362aafa27e6",
+  "execution_review_sha256": "9fcf32588a504056e7c49920a3f456ff17b2d4f021ddd83948f253ac521d028b",
+  "source_manifest_sha256": "1bed19c54cbc10d1e5d556e1a97847a5733cf4782f1c573fb1603975b8f6bc2c",
+  "source_binding_sha256": "2effeddb5fcbc91b6ca788f77fc6b02691def2de60bed6da4d43d63866500cb5",
+  "evidence": [
+    {
+      "path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/ordinary-applicability/delete-contract-green-execution-preparation-v5/result.json",
+      "sha256": "ce3f92c5f8763a895c46db11836a05fd4cb29f2dd391f3bcfaef33c380e63af6",
+      "bytes": 3734
+    },
+    {
+      "path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/ordinary-applicability/delete-contract-green-execution-preparation-v5/decoded-reports/result.json",
+      "sha256": "5dba5d0b2daa5534f75c5c642e3db1ddf4905b21bed220de0075ad9fa34ad897",
+      "bytes": 2662
+    },
+    {
+      "path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/ordinary-applicability/delete-contract-green-execution-preparation-v5/decoded-reports/tenant-primary.json",
+      "sha256": "b58efd7c272e59dc214caf605e791784cc5ecd206f007ef374d0b271ecb698ed",
+      "bytes": 469
+    },
+    {
+      "path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/ordinary-applicability/delete-contract-green-execution-preparation-v5/decoded-reports/tenant-result.json",
+      "sha256": "deebaaa1c3b37f6178598715e85f2280b45a14d1a4f0170dce5d09271b73a940",
+      "bytes": 21739
+    },
+    {
+      "path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/ordinary-applicability/delete-contract-green-execution-preparation-v5/container-stdout.txt",
+      "sha256": "87714df374f7e17e835e19d7ad87d9f3a914758c4b5ad3c78c57051ee5b71b90",
+      "bytes": 9896
+    },
+    {
+      "path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/ordinary-applicability/delete-contract-green-execution-preparation-v5/container-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    }
+  ],
+  "same_attempt": {
+    "native_session": 88187,
+    "native_chunk": "b1bc3a",
+    "final_chunk": "4c597f",
+    "native_exit_code": 0,
+    "elapsed_seconds": 15.890022800012957,
+    "operation_id": "g2-delete-contract-green-20261009-v1",
+    "attempt_ordinal": 2,
+    "one_native_collection_test_each_consumed": true,
+    "actual_collections": 1,
+    "actual_tests": 1,
+    "actual_resets": 1,
+    "cumulative_native_collection_test_reservations_each": 2,
+    "remaining_extension_attempts": 0,
+    "automatic_retry": false
+  },
+  "accepted_scope": {
+    "collected": [
+      "confirmation_current/test_delete_audit_warning_atomicity.py::test_new_v2_staged_write_or_receipt_failure_rolls_back_everything"
+    ],
+    "case_count": 1,
+    "passed_phase_count": 3,
+    "reports": {
+      "confirmation_current/test_delete_audit_warning_atomicity.py::test_new_v2_staged_write_or_receipt_failure_rolls_back_everything": {
+        "call": "passed",
+        "setup": "passed",
+        "teardown": "passed"
+      }
+    },
+    "all141_case_and9_capsule_postpins_match": true,
+    "launcher_postpin_matches": true,
+    "loaded_four_exact_candidate_rows": [
+      {
+        "bytes": 40192,
+        "path": "app/services/appointment_delete_product_adapter.py",
+        "sha256": "c3bbdb64e9e5d982ff672a9bbf028e2ba10ed5c37fba493e9677fd3931f18f90",
+        "source_path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/ordinary-applicability/confirmation-delete-ordering-repair-preparation-v1/after/app/services/appointment_delete_product_adapter.py"
+      },
+      {
+        "bytes": 32366,
+        "path": "app/services/appointment_delete_composition.py",
+        "sha256": "8215bd117d1a358066962f55630255c022d355d4ea3a160cf62dcc370a7f979c",
+        "source_path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/ordinary-applicability/confirmation-delete-ordering-repair-preparation-v1/after/app/services/appointment_delete_composition.py"
+      },
+      {
+        "bytes": 28614,
+        "path": "app/services/appointment_delete_physical.py",
+        "sha256": "061175cb371109fd57e39795a0748d0597d3fdbc34789796b5e811d6cdbc80ff",
+        "source_path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/ordinary-applicability/confirmation-delete-ordering-repair-preparation-v1/after/app/services/appointment_delete_physical.py"
+      },
+      {
+        "bytes": 349713,
+        "path": "app/routers/appointments.py",
+        "sha256": "9c9965871b622b16ab52900e50e86d650a04549d9fb1f2c5cefe2c8ae8788cef",
+        "source_path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/ordinary-applicability/raw-delete-context-repair-preparation-v1/after/app/routers/appointments.py"
+      }
+    ],
+    "same_attempt_bundle_file_count": 21,
+    "all_decoded_reports_authenticated_from_complete_native_stdout_bundle": true,
+    "physical_cleanup_accepted": true,
+    "final_outside_cascade_invariance_verified": true
+  },
+  "property_evidence": [
+    "Valid current UTC proposal, capability grant, PATIENT_CANCELLED and waiting-area warning baseline precede the command.",
+    "Fixture intercepts actual new audit add before INSERT and forwards the original stage/add; observed original warning is waiting_area_cleared and staged business state is Cancelled with waiting area removed.",
+    "A fresh-session complete snapshot equals the precommand snapshot; actual response is503 delete_confirm_transaction_unavailable, one audit staging observation, one physical new_command/version2 in_progress observation, and no provisional ledger visibility. These assertions all completed in the passed call."
+  ],
+  "cleanup": {
+    "native": {
+      "container_id": "5de2e67492d09bc6ef0243155af9fe3380123c0f554f63ce3689957f499f9ec6",
+      "exit_code": 0,
+      "oom_killed": false,
+      "restart_count": 0,
+      "container_absent": true,
+      "created_volumes": false
+    },
+    "attached_process": {
+      "client_pid": 26832,
+      "client_closed": true,
+      "readers_closed": true,
+      "reader_errors": [],
+      "output_overflow": false,
+      "output_complete": true
+    },
+    "outer_database": {
+      "database_stop_attempted": true,
+      "database_stopped": true
+    },
+    "engines": {
+      "admin": {
+        "attempts": 1,
+        "checked_out_before_dispose": 0,
+        "status": "PASS"
+      },
+      "command": {
+        "attempts": 1,
+        "checked_out_before_dispose": 0,
+        "status": "PASS"
+      },
+      "global_app_engine": {
+        "attempts": 1,
+        "checked_out_before_dispose": 0,
+        "status": "PASS"
+      },
+      "observer": {
+        "attempts": 1,
+        "checked_out_before_dispose": 0,
+        "status": "PASS"
+      },
+      "request": {
+        "attempts": 1,
+        "checked_out_before_dispose": 0,
+        "status": "PASS"
+      }
+    },
+    "all_connections_closed": true,
+    "live_threads_after_pytest": [],
+    "reset_budget_denial_verified": true,
+    "global_engine_postclose_denial_verified": true,
+    "outside_initial_counts": {
+      "application_auth_audit_events": 0,
+      "application_auth_exchange_grants": 0,
+      "application_auth_parent_sessions": 0,
+      "application_auth_principal_generations": 0,
+      "application_auth_surface_sessions": 0,
+      "application_auth_synthetic_principal_truth": 0,
+      "application_identity_federation_admission_grants": 0,
+      "application_identity_federation_audit_events": 0,
+      "application_identity_federation_bindings": 0,
+      "application_identity_oidc_authorization_attempts": 0,
+      "mbs_directory": 0,
+      "snomed_directory": 0
+    },
+    "outside_final_counts": {
+      "application_auth_audit_events": 0,
+      "application_auth_exchange_grants": 0,
+      "application_auth_parent_sessions": 0,
+      "application_auth_principal_generations": 0,
+      "application_auth_surface_sessions": 0,
+      "application_auth_synthetic_principal_truth": 0,
+      "application_identity_federation_admission_grants": 0,
+      "application_identity_federation_audit_events": 0,
+      "application_identity_federation_bindings": 0,
+      "application_identity_oidc_authorization_attempts": 0,
+      "mbs_directory": 0,
+      "snomed_directory": 0
+    },
+    "outside_counts_invariant": true,
+    "connection_guards": {
+      "dirty_checkout_rejection": "confirmation pooled connection retained tenant context",
+      "dirty_pool_explicitly_discarded": true,
+      "failed_checkout_balanced": true,
+      "fresh_checkout_clean": true,
+      "raw_guard_role_mismatch": "confirmation physical connection identity mismatch",
+      "raw_guard_success": "PASS_ROLLED_BACK",
+      "reset_reservations_consumed": 0,
+      "status": "PASS",
+      "support_case_count": 0
+    },
+    "no_additional_Docker_query_by_reviewer": true
+  },
+  "guard_and_isolation": {
+    "denials": [],
+    "loaded_count": 140,
+    "loopback_endpoint": "127.0.0.1:55443",
+    "database": "g2_confirmation_deletegreen20261009b",
+    "roles": {
+      "application": "g2_deletegreen_app_20261009b",
+      "container_network": "none",
+      "database": "g2_confirmation_deletegreen20261009b",
+      "host": "127.0.0.1",
+      "observer": "g2_deletegreen_observer_20261009b",
+      "port": 55443,
+      "public_application_listener": false,
+      "revision": "a6b7c8d9e0f1",
+      "run_id": "deletegreen20261009b",
+      "setup": "g2_deletegreen_admin_20261009b"
+    },
+    "image_id": "sha256:192e420d4057bc851bb8db5af2495c35281fca92e56a76cec7f32cf8d3a6e1f9",
+    "source_mounts_read_only": true,
+    "network": "none",
+    "public_application_listener": false,
+    "live_provider_or_real_data": false
+  },
+  "qualifications": [
+    "This accepts one corrected audit-warning corruption/rollback property on the exact four product afterimages, not all29 cases in a fresh run or all G2 criteria.",
+    "Previous GREEN29 raw NONPASS and28 qualified prior passes remain immutable and separate. This successful final outside-cascade comparison is prospective evidence; it does not backdate the earlier unobserved final comparison.",
+    "Mixed isolated source roles and authored corruption injection remain explicit. No canonical adoption, real native product admission, commit, push or G2 completion is granted.",
+    "Cleanup acceptance uses complete authenticated same-attempt native reports and the reviewed executable identity/cleanup checks; no runtime, test, import or cleanup action was performed by reviewer."
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "schema": "ci_b_independent_synthetic_result_review.v1",
+  "verdict": "ACCEPTED_BOUNDED_CI_MIGRATION_SOURCE_AND_SYNTHETIC_TEST_EVIDENCE",
+  "reviewer_agent": "/root/resumption_activation_review",
+  "independent": true,
+  "blocking_findings": [],
+  "configured_model": "gpt-6-astra",
+  "configured_reasoning_effort": "high",
+  "resolved_runtime_telemetry": "unavailable",
+  "operation_id": "g2-ci-migration-controls-20260927-v2",
+  "result_sha256": "6db63bd41c835f26add53810aa12a185420badbe6c3fbbc5b515b16dc9613854",
+  "binding_sha256": "37672ae1f9f058d42823efa844230b2fb4480e81d55aa8b80ebd896738adcefe",
+  "execution_review_sha256": "f29da4d1f899b3337c642acb020eaf040192097030ddfccb9db94b9a6b5f8a63",
+  "helper_sha256": "faa325724fe7d389a37bacd7519d0512e84fd0a9699a8af61182ab262d319704",
+  "tests_sha256": "716db9f4bc24a8b114377820124e2a52f8150a74d93c4286c50a428716ecf800",
+  "actual_result": {
+    "attempts": 1,
+    "collection_attempts": 1,
+    "execution_attempts": 1,
+    "automatic_retry": false,
+    "elapsed_seconds": 4.580453199916519,
+    "collected_cases": 88,
+    "executed_cases": 88,
+    "passed_cases": 88,
+    "passed_phase_reports": 264,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0,
+    "xfails": 0,
+    "guard_violations": 0,
+    "kernel_network_probe": "EPERM",
+    "native_exit_code_reported_by_coordinator": 0
+  },
+  "evidence_sha256": {
+    "result.json": "6db63bd41c835f26add53810aa12a185420badbe6c3fbbc5b515b16dc9613854",
+    "started.json": "5db3512a54866f69a5fd2356448cdd6bfc66b7f04c70bc84decb5391771300d5",
+    "collect-stdout.txt": "5d576edc5ddd545f509b5766ed57b0770ae261bfa0c5bb1545c20bd4a8fa283c",
+    "collect-stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "test-stdout.txt": "3125563a344002c34f9f3bc53941923440489cce717c97b2bd2954d9b3f73c2b",
+    "test-stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "prestart-inspect-collect.json": "60b164fa793031b5175e5d54b227b01e93e787dc23b8e787cbd567030220f41f",
+    "prestart-inspect-test.json": "319c14376cf6eb8cbe691335ae1cab9e64b9cb7592031588f9adec92a0e85b17",
+    "capsule/execution-binding.json": "37672ae1f9f058d42823efa844230b2fb4480e81d55aa8b80ebd896738adcefe",
+    "launch_once.py": "dcff30e2898de40cb27ee098074b5818706d74355e455743667c962592fd6c7e",
+    "independent-execution-review-v1.json": "f29da4d1f899b3337c642acb020eaf040192097030ddfccb9db94b9a6b5f8a63"
+  },
+  "closure": {
+    "owned_containers_absent": [
+      "emr4-ci-migration-20260927-v2-collect",
+      "emr4-ci-migration-20260927-v2-test"
+    ],
+    "created_volumes": false,
+    "volume_deletion_attempted": false,
+    "phase_clients_closed": true,
+    "phase_readers_closed": true,
+    "stdout_stderr_complete": true,
+    "stderr_empty": true,
+    "last_docker_client_pid": 32004,
+    "output_overflow": false,
+    "failure_or_uncertainty_reported": false
+  },
+  "verified": [
+    "Both raw stdout payloads exactly equal corresponding result payloads; phase stream hashes match, both stderr files empty.",
+    "Ordered collection and execution IDs equal exact approved 88-case list. Test reports are exactly ordered setup/call/teardown for each case, all passed with no xfail.",
+    "All eight suite hashes remain pinned; reported 13 versions equal approved binding. Capsule compile and selected leakage preflight both pass.",
+    "Both retained prestart snapshots bind exact suite read-only, immutable image, network none, read-only root and configured two tmpfs overlays; no runtime volume mounts. Same-attempt cleanup records both owned containers absent.",
+    "The optional org import probe was blocked in both phases; it was not a loaded import or effect violation.",
+    "Earlier v1 source rejection is preserved and unexecuted. No test/operator was replayed."
+  ],
+  "limits": [
+    "Synthetic DB-API and subprocess controls only; no real PostgreSQL, real Alembic child, application, provider or Windows native output validation.",
+    "Successful owned-container/readers closure follows retained same-attempt supervisor evidence; no fresh Docker inspection or independently stronger daemon/descendant claim.",
+    "Old 49 maintenance nodes remain unselected. This is not full-suite, live migration, publication or G2 acceptance.",
+    "Actual CI14 Git PREPARE is separate evidence to reconcile in admission review."
+  ]
+}

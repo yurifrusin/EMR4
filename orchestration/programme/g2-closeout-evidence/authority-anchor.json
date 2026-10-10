@@ -1,0 +1,35 @@
+{
+  "schema": "emr4.ci_c.stable_authority_anchor_candidate.v1",
+  "status": "PROPOSED_REPRESENTATION_PENDING_PARENT_AUTHENTICATION",
+  "sources": [
+    {
+      "path": "C:/Users/there/EMR4/AGENTS.md",
+      "bytes": 28366,
+      "sha256": "66727cc146dc3e4fef42ed2bbc0a7165e771fff9a738b4665198bb63c98b2e0f"
+    },
+    {
+      "path": "C:/Users/there/EMR4/orchestration/programme/current-state.json",
+      "bytes": 46996,
+      "sha256": "132cc1ac6f474ce9ee3412eead5c2efe399fa4f56dd67cd9ef1ea8de5b22a05d"
+    },
+    {
+      "path": "C:/Users/there/EMR4/orchestration/programme/gates.yaml",
+      "bytes": 21215,
+      "sha256": "115a651a0b13156a591045638d1833a9a71347e7b1f7e694767eac49d2abc341"
+    },
+    {
+      "path": "C:/Users/there/EMR4-tools/a5-test2/audio/assets/evidence/g1e-evidence/isolated-test-contract.json",
+      "bytes": 3876,
+      "sha256": "49548a67c22720f5101b9bc1ae030ccf0884e00121a803cce132439154631386"
+    }
+  ],
+  "gate": "G2 bounded baseline repair; complete CI and G2 completion unaccepted",
+  "owner_directive_sha256": "df10dcd91afccd9187a9e2239a3ff23d80247047e5e4941747a9e8b36967b93d",
+  "exclusions": [
+    "mutable coordinator checkpoint",
+    "workflow",
+    "derived selection",
+    "proof artifacts",
+    "generated controller state/scope/overlay"
+  ]
+}

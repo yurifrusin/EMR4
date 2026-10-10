@@ -1,0 +1,333 @@
+{
+  "schema": "emr4.g2.delete_postclaim_fixture_runtime_result_review.v1",
+  "verdict": "PASS_ONE_SCOPED_DELETE_POSTCLAIM_ROLLBACK_CASE_AND_OWNED_CLEANUP",
+  "reviewer_agent": "/root/g2_scope_author",
+  "reviewed_utc": "2026-10-08T14:09:24Z",
+  "independent_of_test_harness_and_binding_authorship": true,
+  "allocation": {
+    "retained_model": "gpt-6.1-sol",
+    "retained_reasoning": "high",
+    "provider_runtime_settings_verified": false,
+    "descendants": 0
+  },
+  "candidate_root": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/ordinary-applicability/regression-v3-execution-preparation/candidate-v4-fixture",
+  "operation_id": "g2-delete-postclaim-fixture-20261008-v3",
+  "binding_sha256": "838d1d2f8c732be78d740866f9877e5701943c902fab1e5cbe5b74320029af7f",
+  "execution_review_sha256": "49e2d0a011552bbe30806a47ab741efef14270fe14158927f6ad11046d3cca64",
+  "owner_extension_sha256": "45fb4d6b77d8608bb3f221f3c5337a7eb0d5733856b7068cdc5a4afe0768e528",
+  "source_review_sha256": "61feb1b11b17b13b9c20ce6c03ed68aa799e7017484896dfc74f5f83c6e3011c",
+  "exact_receipts": [
+    {
+      "path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/ordinary-applicability/regression-v3-execution-preparation/candidate-v4-fixture/result.json",
+      "bytes": 3731,
+      "sha256": "41c8131a5f324788fcf6be4bda304fc356918c48372dc4aa0a0c3b54588e47d2"
+    },
+    {
+      "path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/ordinary-applicability/regression-v3-execution-preparation/candidate-v4-fixture/decoded-reports/result.json",
+      "bytes": 2661,
+      "sha256": "249ee543c568c9a29c2d661067fe71e9a2d3990faaa25d2c9b37650df4c0be7b"
+    },
+    {
+      "path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/ordinary-applicability/regression-v3-execution-preparation/candidate-v4-fixture/decoded-reports/tenant-primary.json",
+      "bytes": 469,
+      "sha256": "c3b18d39eb78816f7c634804a5033e1bbc41ca3ce63ac1dd38224a5624b9ce92"
+    },
+    {
+      "path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/ordinary-applicability/regression-v3-execution-preparation/candidate-v4-fixture/decoded-reports/tenant-result.json",
+      "bytes": 21299,
+      "sha256": "01520656c834554e4780d7d1e7cfc20e8b2f4fc5c810d57255be202b76be0ef4"
+    },
+    {
+      "path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/ordinary-applicability/regression-v3-execution-preparation/candidate-v4-fixture/started.json",
+      "bytes": 270,
+      "sha256": "5886102b21d927708b1c77499a3018cf314e00cc9c9d0c4cb714e93d36f9500e"
+    }
+  ],
+  "source_test": {
+    "sha256": "7b451b1aca66939a1a8bfa1be65996da5569aa4773580dac49f2af8c6802dccd",
+    "bytes": 4015,
+    "loaded_path": "/case/tests/confirmation_current/test_delete_postclaim_rollback_regression.py"
+  },
+  "receipt_reconciliation": {
+    "pins": true,
+    "nativePassed": true,
+    "primarySingle": true,
+    "childPassed": true,
+    "cleanup": true,
+    "outside": true,
+    "one_attempt": true,
+    "native_primary_equals_decoded_outer": true,
+    "child_primary_equals_persisted_primary": true,
+    "primary_sha256_in_child_matches_exact_file": true,
+    "all_subject_hashes_match_assignment": true
+  },
+  "primary": {
+    "status": "PASS",
+    "exact_node": "confirmation_current/test_delete_postclaim_rollback_regression.py::test_postclaim_physical_failure_rolls_back_new_delete_claim",
+    "collected": 1,
+    "collection_attempts": 1,
+    "collection_errors": 0,
+    "internal_errors": 0,
+    "deselected": 0,
+    "exit_code": 0,
+    "setup": "passed",
+    "call": "passed",
+    "teardown": "passed",
+    "evidence_basis": "Exact persisted pytest reports plus previously independently reviewed source closure and still byte-identical executed test. Assertions are active under the fixed non-optimized isolated Python launch. Individual successful assertion values are inferred from test completion, not invented as separately logged measurements.",
+    "meaningful_oracles": [
+      "Valid real proposal supplies PATIENT_CANCELLED before evidence minting, with committed tenant capability grant.",
+      "Injected transaction factory calls real delete_confirm_locked_transaction, observes decision.kind new_command and decision.record.state in_progress, and appends one actual claim id.",
+      "Exactly one claim is observed; DeleteConfirmPhysicalError is injected while inside that real physical context, before yielding to business mutations.",
+      "HTTP503 and detail.code delete_confirm_transaction_unavailable.",
+      "Independent setup/admin session expires and refreshes the appointment; status remains AppointmentStatus.Booked.",
+      "Appointment, AppointmentAuditLog and AppointmentCommandIdempotency row-count tuple equals its pre-command snapshot."
+    ],
+    "row_counts_helper_sha256": "c2337dd86aed67810495dbb3ba6ad7e46315854b31bd7e75958861e49052f296",
+    "scope_limit": "Demonstrates rollback of a newly claimed in_progress command when failure occurs before business mutation. It does not exercise failure after business writes, sibling idempotency/replay cases, a full confirmation family, a whole suite, product activation, integration or publication."
+  },
+  "support_checks": {
+    "actual_support_case_count": 0,
+    "catalogue_grants_and_cascade": {
+      "all_public_table_names_exact": true,
+      "outside_practice_cascade": [
+        "application_auth_audit_events",
+        "application_auth_exchange_grants",
+        "application_auth_parent_sessions",
+        "application_auth_principal_generations",
+        "application_auth_surface_sessions",
+        "application_auth_synthetic_principal_truth",
+        "application_identity_federation_admission_grants",
+        "application_identity_federation_audit_events",
+        "application_identity_federation_bindings",
+        "application_identity_oidc_authorization_attempts",
+        "mbs_directory",
+        "snomed_directory"
+      ],
+      "practice_cascade_tables": 52,
+      "public_table_owners_checked": 65,
+      "public_tables": 65,
+      "restricted_column_grants_checked": 759,
+      "restricted_table_grants_checked": 65,
+      "status": "PASS"
+    },
+    "connection_guards": {
+      "dirty_checkout_rejection": "confirmation pooled connection retained tenant context",
+      "dirty_pool_explicitly_discarded": true,
+      "failed_checkout_balanced": true,
+      "fresh_checkout_clean": true,
+      "raw_guard_role_mismatch": "confirmation physical connection identity mismatch",
+      "raw_guard_success": "PASS_ROLLED_BACK",
+      "reset_reservations_consumed": 0,
+      "status": "PASS",
+      "support_case_count": 0
+    },
+    "outside_cascade_tables": 12,
+    "outside_cascade_initial_counts": {
+      "application_auth_audit_events": 0,
+      "application_auth_exchange_grants": 0,
+      "application_auth_parent_sessions": 0,
+      "application_auth_principal_generations": 0,
+      "application_auth_surface_sessions": 0,
+      "application_auth_synthetic_principal_truth": 0,
+      "application_identity_federation_admission_grants": 0,
+      "application_identity_federation_audit_events": 0,
+      "application_identity_federation_bindings": 0,
+      "application_identity_oidc_authorization_attempts": 0,
+      "mbs_directory": 0,
+      "snomed_directory": 0
+    },
+    "outside_cascade_final_counts": {
+      "application_auth_audit_events": 0,
+      "application_auth_exchange_grants": 0,
+      "application_auth_parent_sessions": 0,
+      "application_auth_principal_generations": 0,
+      "application_auth_surface_sessions": 0,
+      "application_auth_synthetic_principal_truth": 0,
+      "application_identity_federation_admission_grants": 0,
+      "application_identity_federation_audit_events": 0,
+      "application_identity_federation_bindings": 0,
+      "application_identity_oidc_authorization_attempts": 0,
+      "mbs_directory": 0,
+      "snomed_directory": 0
+    },
+    "outside_cascade_counts_invariant": true,
+    "qualification": "These setup/closure checks support this one case and add no original-failure or sibling test count. Prior failed attempts omitted final outside-cascade counts and retain that qualified cleanup finding; successful final counts do not rewrite those failures."
+  },
+  "cleanup": {
+    "status": "PASS_FOR_ACTUAL_OWNED_ATTEMPT",
+    "engine_disposal": {
+      "admin": {
+        "attempts": 1,
+        "checked_out_before_dispose": 0,
+        "status": "PASS"
+      },
+      "command": {
+        "attempts": 1,
+        "checked_out_before_dispose": 0,
+        "status": "PASS"
+      },
+      "global_app_engine": {
+        "attempts": 1,
+        "checked_out_before_dispose": 0,
+        "status": "PASS"
+      },
+      "observer": {
+        "attempts": 1,
+        "checked_out_before_dispose": 0,
+        "status": "PASS"
+      },
+      "request": {
+        "attempts": 1,
+        "checked_out_before_dispose": 0,
+        "status": "PASS"
+      }
+    },
+    "connections_observed": 14,
+    "all_connections_closed": true,
+    "live_threads_after_pytest": [],
+    "threads_after_pytest": [],
+    "confirmation_lifecycle": {
+      "adapter_consumed": true,
+      "balanced_checkout_records": true,
+      "closed_lifetime_denials": 2,
+      "global_engine_never_used_by_case": true,
+      "global_engine_post_close_connect_denied": true,
+      "reset_attempts": 1,
+      "reset_budget_denied": true
+    },
+    "database": "g2_confirmation_postclaim20261008c",
+    "database_endpoint": "127.0.0.1:55433",
+    "database_stop_attempted": true,
+    "database_stopped": true,
+    "native_container": {
+      "container_id": "0e6e4b121beec5ce29b3cd5d04651df079b4e7886b8050a60e9b5e6a57285d7a",
+      "exit_code": 0,
+      "oom_killed": false,
+      "restart_count": 0,
+      "container_absent": true,
+      "created_volumes": false
+    },
+    "attached_client": {
+      "client_pid": 25948,
+      "client_closed": true,
+      "readers_closed": true,
+      "reader_errors": [],
+      "output_overflow": false,
+      "output_complete": true
+    },
+    "outer_process_attempts": [
+      {
+        "cleanup_attempted": false,
+        "launch_attempted": true,
+        "phase": "initdb",
+        "pid": 7,
+        "returncode": 0
+      },
+      {
+        "cleanup_attempted": false,
+        "launch_attempted": true,
+        "phase": "pg-start",
+        "pid": 20,
+        "returncode": 0
+      },
+      {
+        "cleanup_attempted": false,
+        "launch_attempted": true,
+        "phase": "tenant-child",
+        "pid": 30,
+        "returncode": 0
+      },
+      {
+        "cleanup_attempted": false,
+        "launch_attempted": true,
+        "phase": "pg-stop",
+        "pid": 58,
+        "returncode": 0
+      }
+    ],
+    "all_outer_recorded_processes_returncode_zero": true,
+    "output_status": "complete",
+    "logs_truncated": false,
+    "captured_output_truncated": false,
+    "qualification": "Reconciles recorded owned process/database/container/client/readers/pools/connections/threads and count evidence. No new probes or claims about unrelated environments or every possible OS descendant."
+  },
+  "consumption": {
+    "same_failed_batch_continuation": true,
+    "final_authorized_attempt": true,
+    "prior": {
+      "collections": 2,
+      "elapsed_seconds": 30.473599200006,
+      "native_attempts": 2,
+      "tests": 2
+    },
+    "this_attempt": {
+      "collections": 1,
+      "tests": 1,
+      "native_attempts": 1,
+      "native_elapsed_seconds": 16.0029002000083,
+      "outer_elapsed_seconds": 14.184735289003584,
+      "child_elapsed_seconds": 12.485821
+    },
+    "cumulative": {
+      "collections": 3,
+      "tests": 3,
+      "native_attempts": 3,
+      "native_elapsed_seconds": 46.4764994000143
+    },
+    "final_additional_collection_and_test_consumed": true,
+    "remaining_authorized_collections": 0,
+    "remaining_authorized_tests": 0,
+    "automatic_retry": false,
+    "within_bound_budgets": true,
+    "no_replay_or_new_operation_authority": true
+  },
+  "prior_failure_preservation": {
+    "fresh_literal_hashes": [
+      {
+        "path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/ordinary-applicability/regression-v3-execution-preparation/candidate-v2/result.json",
+        "bytes": 3843,
+        "sha256": "d930e51b0bdbcbc852eecf854993bfa85163ab16a967f2f03d9fad582ee8a27a"
+      },
+      {
+        "path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/ordinary-applicability/regression-v3-execution-preparation/candidate-v3-diagnostic/result.json",
+        "bytes": 3844,
+        "sha256": "2be3ae9e54cc463df169e4a02bce97f60ddc9821853015f9b2eb0e51797d4a96"
+      },
+      {
+        "path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/reviews/delete-postclaim-runtime-result-review-v1.json",
+        "bytes": 17497,
+        "sha256": "fb8941bfe056cce2aab01189dae5cd9812ef80db8ebc3dcdc36122ac49e01d1d"
+      },
+      {
+        "path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/reviews/delete-postclaim-diagnostic-runtime-result-review-v1.json",
+        "bytes": 13823,
+        "sha256": "1ae4fff559909fd204022fb6f29182e9c840375d4a99fb2c435bdf550ca52dbf"
+      },
+      {
+        "path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/ordinary-applicability/regression-v3-execution-preparation/candidate-v4-fixture/execution-binding.json",
+        "bytes": 6507,
+        "sha256": "838d1d2f8c732be78d740866f9877e5701943c902fab1e5cbe5b74320029af7f"
+      },
+      {
+        "path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/ordinary-applicability/regression-v3-execution-preparation/candidate-v4-fixture/independent-execution-review-v1.json",
+        "bytes": 14339,
+        "sha256": "49e2d0a011552bbe30806a47ab741efef14270fe14158927f6ad11046d3cca64"
+      }
+    ],
+    "both_actual_failed_results_and_reviews_unchanged": true,
+    "earlier_block_reason_not_retroactively_claimed": true
+  },
+  "coverage_credit": {
+    "new_scoped_case_passed": 1,
+    "extra_support_case_credit": 0,
+    "original_failure_count_repaired_claim": 0,
+    "full_suite_credit": 0,
+    "sibling_case_credit": 0
+  },
+  "blocking_findings": [],
+  "reviewer_actions": {
+    "read_only_exact_receipts_test_and_helper_pins": true,
+    "owned_review_write_only": true,
+    "no_imports_tests_relaunch_Docker_probes_Git_or_canonical_edits": true
+  }
+}

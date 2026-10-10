@@ -1,0 +1,506 @@
+{
+  "schema": "emr4.ai14_independent_result_review.v1",
+  "verdict": "PASS_EXACT_OFFLINE_AI14_ATTEMPT02_RESULT_AND_CLEANUP",
+  "cleanup_verdict": "accepted",
+  "reviewer_agent": "/root/g2_admission_review",
+  "independent": true,
+  "implementation_authorship": false,
+  "blocking_findings": [],
+  "observed_utc": "2026-10-09T09:17:13.652886+00:00",
+  "operation_id": "g2-access-ai14-offline-20261009-v1",
+  "binding_sha256": "afd9dd7482400cdf8ba6dbf93901f70f2101e3ffe8f7299503ae5811dea939d6",
+  "execution_review_sha256": "4f571dd80ca3aeddd47dbc6532a2fe9b11e5f2f000748a03255c3fe564633a01",
+  "source_manifest_sha256": "24078bbf3bda30484eaccc49e275f43b4ef48eed31c4372087d42a7e20e2f15e",
+  "source_review_sha256": "d19a31593b107a3ca40a95cc759ea776235d22f01476ffa90e74c439225377f6",
+  "result_sha256": "34e6c9b01a8cc4b7cd19518cb6cb3e5b9caa5e49c1f7170d72cb5dca69770c46",
+  "receipts": {
+    "started.json": {
+      "path": "C:\\Users\\there\\EMR4-migration\\20260911-v1\\current-control-repair-20260912-v1\\g2-completion-20261008-v1\\ordinary-applicability\\access-ai-service-execution-preparation-v1\\offline-candidate-v4\\started.json",
+      "bytes": 185,
+      "sha256": "c63c0022eac7d52a7f46b0e6bb7e682576689ad7549823a0cdb0c0b3b8c81a42"
+    },
+    "result.json": {
+      "path": "C:\\Users\\there\\EMR4-migration\\20260911-v1\\current-control-repair-20260912-v1\\g2-completion-20261008-v1\\ordinary-applicability\\access-ai-service-execution-preparation-v1\\offline-candidate-v4\\result.json",
+      "bytes": 17624,
+      "sha256": "34e6c9b01a8cc4b7cd19518cb6cb3e5b9caa5e49c1f7170d72cb5dca69770c46"
+    },
+    "test-stdout.txt": {
+      "path": "C:\\Users\\there\\EMR4-migration\\20260911-v1\\current-control-repair-20260912-v1\\g2-completion-20261008-v1\\ordinary-applicability\\access-ai-service-execution-preparation-v1\\offline-candidate-v4\\test-stdout.txt",
+      "bytes": 11734,
+      "sha256": "0755ae8740c4fa35c2ed8d654f172c0dc4be57fb9bcf133227556e1f783f1a5e"
+    },
+    "test-stderr.txt": {
+      "path": "C:\\Users\\there\\EMR4-migration\\20260911-v1\\current-control-repair-20260912-v1\\g2-completion-20261008-v1\\ordinary-applicability\\access-ai-service-execution-preparation-v1\\offline-candidate-v4\\test-stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "actual_result": {
+    "native_attempt_ordinal": 2,
+    "native_reference": "Root aa6205, exit0, single authorized attempt; no in-flight session reported.",
+    "elapsed_seconds": 4.184456300019519,
+    "launcher_passed": true,
+    "failures": [],
+    "test_invocations": 1,
+    "separate_collect_only_invocations": 0,
+    "normal_collection_within_test_invocations": 1,
+    "pytest_exit": 0,
+    "collected_count": 14,
+    "exact_ordered_cases": [
+      "tests/test_access_ai_service.py::test_invocation_denies_before_provider_call_when_role_not_allowed",
+      "tests/test_access_ai_service.py::test_blocked_budgeted_invocation_records_budget_status_without_provider_call",
+      "tests/test_access_ai_service.py::test_successful_invocation_calls_provider_and_records_allowed_event",
+      "tests/test_access_ai_service.py::test_dry_run_records_allowed_event_without_provider_call",
+      "tests/test_access_ai_service.py::test_provider_failure_records_failure_event_without_raw_payload",
+      "tests/test_access_ai_service.py::test_audit_metadata_rejection_prevents_provider_call",
+      "tests/test_access_ai_service.py::TestBlockedEntitlementVariations::test_blocked_entitlement_method_not_allowed",
+      "tests/test_access_ai_service.py::TestBlockedEntitlementVariations::test_blocked_entitlement_environment_not_allowed",
+      "tests/test_access_ai_service.py::TestBlockedEntitlementVariations::test_blocked_entitlement_actor_disabled",
+      "tests/test_access_ai_service.py::TestBlockedEntitlementVariations::test_blocked_entitlement_has_cost_and_risk_tier_metadata",
+      "tests/test_access_ai_service.py::test_estimate_cost_never_calls_provider_when_blocked_by_entitlement",
+      "tests/test_access_ai_service.py::test_provider_failure_audit_events_have_no_phi_keys_in_metadata",
+      "tests/test_access_ai_service.py::test_budget_threshold_appears_for_capped_capability",
+      "tests/test_access_ai_service.py::test_blocked_entitlement_metadata_rejects_phi_keys"
+    ],
+    "setup_call_teardown_reports": [
+      {
+        "nodeid": "tests/test_access_ai_service.py::test_invocation_denies_before_provider_call_when_role_not_allowed",
+        "outcome": "passed",
+        "phase": "setup",
+        "wasxfail": false
+      },
+      {
+        "nodeid": "tests/test_access_ai_service.py::test_invocation_denies_before_provider_call_when_role_not_allowed",
+        "outcome": "passed",
+        "phase": "call",
+        "wasxfail": false
+      },
+      {
+        "nodeid": "tests/test_access_ai_service.py::test_invocation_denies_before_provider_call_when_role_not_allowed",
+        "outcome": "passed",
+        "phase": "teardown",
+        "wasxfail": false
+      },
+      {
+        "nodeid": "tests/test_access_ai_service.py::test_blocked_budgeted_invocation_records_budget_status_without_provider_call",
+        "outcome": "passed",
+        "phase": "setup",
+        "wasxfail": false
+      },
+      {
+        "nodeid": "tests/test_access_ai_service.py::test_blocked_budgeted_invocation_records_budget_status_without_provider_call",
+        "outcome": "passed",
+        "phase": "call",
+        "wasxfail": false
+      },
+      {
+        "nodeid": "tests/test_access_ai_service.py::test_blocked_budgeted_invocation_records_budget_status_without_provider_call",
+        "outcome": "passed",
+        "phase": "teardown",
+        "wasxfail": false
+      },
+      {
+        "nodeid": "tests/test_access_ai_service.py::test_successful_invocation_calls_provider_and_records_allowed_event",
+        "outcome": "passed",
+        "phase": "setup",
+        "wasxfail": false
+      },
+      {
+        "nodeid": "tests/test_access_ai_service.py::test_successful_invocation_calls_provider_and_records_allowed_event",
+        "outcome": "passed",
+        "phase": "call",
+        "wasxfail": false
+      },
+      {
+        "nodeid": "tests/test_access_ai_service.py::test_successful_invocation_calls_provider_and_records_allowed_event",
+        "outcome": "passed",
+        "phase": "teardown",
+        "wasxfail": false
+      },
+      {
+        "nodeid": "tests/test_access_ai_service.py::test_dry_run_records_allowed_event_without_provider_call",
+        "outcome": "passed",
+        "phase": "setup",
+        "wasxfail": false
+      },
+      {
+        "nodeid": "tests/test_access_ai_service.py::test_dry_run_records_allowed_event_without_provider_call",
+        "outcome": "passed",
+        "phase": "call",
+        "wasxfail": false
+      },
+      {
+        "nodeid": "tests/test_access_ai_service.py::test_dry_run_records_allowed_event_without_provider_call",
+        "outcome": "passed",
+        "phase": "teardown",
+        "wasxfail": false
+      },
+      {
+        "nodeid": "tests/test_access_ai_service.py::test_provider_failure_records_failure_event_without_raw_payload",
+        "outcome": "passed",
+        "phase": "setup",
+        "wasxfail": false
+      },
+      {
+        "nodeid": "tests/test_access_ai_service.py::test_provider_failure_records_failure_event_without_raw_payload",
+        "outcome": "passed",
+        "phase": "call",
+        "wasxfail": false
+      },
+      {
+        "nodeid": "tests/test_access_ai_service.py::test_provider_failure_records_failure_event_without_raw_payload",
+        "outcome": "passed",
+        "phase": "teardown",
+        "wasxfail": false
+      },
+      {
+        "nodeid": "tests/test_access_ai_service.py::test_audit_metadata_rejection_prevents_provider_call",
+        "outcome": "passed",
+        "phase": "setup",
+        "wasxfail": false
+      },
+      {
+        "nodeid": "tests/test_access_ai_service.py::test_audit_metadata_rejection_prevents_provider_call",
+        "outcome": "passed",
+        "phase": "call",
+        "wasxfail": false
+      },
+      {
+        "nodeid": "tests/test_access_ai_service.py::test_audit_metadata_rejection_prevents_provider_call",
+        "outcome": "passed",
+        "phase": "teardown",
+        "wasxfail": false
+      },
+      {
+        "nodeid": "tests/test_access_ai_service.py::TestBlockedEntitlementVariations::test_blocked_entitlement_method_not_allowed",
+        "outcome": "passed",
+        "phase": "setup",
+        "wasxfail": false
+      },
+      {
+        "nodeid": "tests/test_access_ai_service.py::TestBlockedEntitlementVariations::test_blocked_entitlement_method_not_allowed",
+        "outcome": "passed",
+        "phase": "call",
+        "wasxfail": false
+      },
+      {
+        "nodeid": "tests/test_access_ai_service.py::TestBlockedEntitlementVariations::test_blocked_entitlement_method_not_allowed",
+        "outcome": "passed",
+        "phase": "teardown",
+        "wasxfail": false
+      },
+      {
+        "nodeid": "tests/test_access_ai_service.py::TestBlockedEntitlementVariations::test_blocked_entitlement_environment_not_allowed",
+        "outcome": "passed",
+        "phase": "setup",
+        "wasxfail": false
+      },
+      {
+        "nodeid": "tests/test_access_ai_service.py::TestBlockedEntitlementVariations::test_blocked_entitlement_environment_not_allowed",
+        "outcome": "passed",
+        "phase": "call",
+        "wasxfail": false
+      },
+      {
+        "nodeid": "tests/test_access_ai_service.py::TestBlockedEntitlementVariations::test_blocked_entitlement_environment_not_allowed",
+        "outcome": "passed",
+        "phase": "teardown",
+        "wasxfail": false
+      },
+      {
+        "nodeid": "tests/test_access_ai_service.py::TestBlockedEntitlementVariations::test_blocked_entitlement_actor_disabled",
+        "outcome": "passed",
+        "phase": "setup",
+        "wasxfail": false
+      },
+      {
+        "nodeid": "tests/test_access_ai_service.py::TestBlockedEntitlementVariations::test_blocked_entitlement_actor_disabled",
+        "outcome": "passed",
+        "phase": "call",
+        "wasxfail": false
+      },
+      {
+        "nodeid": "tests/test_access_ai_service.py::TestBlockedEntitlementVariations::test_blocked_entitlement_actor_disabled",
+        "outcome": "passed",
+        "phase": "teardown",
+        "wasxfail": false
+      },
+      {
+        "nodeid": "tests/test_access_ai_service.py::TestBlockedEntitlementVariations::test_blocked_entitlement_has_cost_and_risk_tier_metadata",
+        "outcome": "passed",
+        "phase": "setup",
+        "wasxfail": false
+      },
+      {
+        "nodeid": "tests/test_access_ai_service.py::TestBlockedEntitlementVariations::test_blocked_entitlement_has_cost_and_risk_tier_metadata",
+        "outcome": "passed",
+        "phase": "call",
+        "wasxfail": false
+      },
+      {
+        "nodeid": "tests/test_access_ai_service.py::TestBlockedEntitlementVariations::test_blocked_entitlement_has_cost_and_risk_tier_metadata",
+        "outcome": "passed",
+        "phase": "teardown",
+        "wasxfail": false
+      },
+      {
+        "nodeid": "tests/test_access_ai_service.py::test_estimate_cost_never_calls_provider_when_blocked_by_entitlement",
+        "outcome": "passed",
+        "phase": "setup",
+        "wasxfail": false
+      },
+      {
+        "nodeid": "tests/test_access_ai_service.py::test_estimate_cost_never_calls_provider_when_blocked_by_entitlement",
+        "outcome": "passed",
+        "phase": "call",
+        "wasxfail": false
+      },
+      {
+        "nodeid": "tests/test_access_ai_service.py::test_estimate_cost_never_calls_provider_when_blocked_by_entitlement",
+        "outcome": "passed",
+        "phase": "teardown",
+        "wasxfail": false
+      },
+      {
+        "nodeid": "tests/test_access_ai_service.py::test_provider_failure_audit_events_have_no_phi_keys_in_metadata",
+        "outcome": "passed",
+        "phase": "setup",
+        "wasxfail": false
+      },
+      {
+        "nodeid": "tests/test_access_ai_service.py::test_provider_failure_audit_events_have_no_phi_keys_in_metadata",
+        "outcome": "passed",
+        "phase": "call",
+        "wasxfail": false
+      },
+      {
+        "nodeid": "tests/test_access_ai_service.py::test_provider_failure_audit_events_have_no_phi_keys_in_metadata",
+        "outcome": "passed",
+        "phase": "teardown",
+        "wasxfail": false
+      },
+      {
+        "nodeid": "tests/test_access_ai_service.py::test_budget_threshold_appears_for_capped_capability",
+        "outcome": "passed",
+        "phase": "setup",
+        "wasxfail": false
+      },
+      {
+        "nodeid": "tests/test_access_ai_service.py::test_budget_threshold_appears_for_capped_capability",
+        "outcome": "passed",
+        "phase": "call",
+        "wasxfail": false
+      },
+      {
+        "nodeid": "tests/test_access_ai_service.py::test_budget_threshold_appears_for_capped_capability",
+        "outcome": "passed",
+        "phase": "teardown",
+        "wasxfail": false
+      },
+      {
+        "nodeid": "tests/test_access_ai_service.py::test_blocked_entitlement_metadata_rejects_phi_keys",
+        "outcome": "passed",
+        "phase": "setup",
+        "wasxfail": false
+      },
+      {
+        "nodeid": "tests/test_access_ai_service.py::test_blocked_entitlement_metadata_rejects_phi_keys",
+        "outcome": "passed",
+        "phase": "call",
+        "wasxfail": false
+      },
+      {
+        "nodeid": "tests/test_access_ai_service.py::test_blocked_entitlement_metadata_rejects_phi_keys",
+        "outcome": "passed",
+        "phase": "teardown",
+        "wasxfail": false
+      }
+    ],
+    "phase_count": 42,
+    "phase_outcomes": "All14 have exactly setup/call/teardown passed, no xfail, no missing/duplicate/foreign rows.",
+    "guard_violations": [],
+    "blocked_imports": [
+      "org",
+      "org"
+    ],
+    "excluded_runtime_search_paths": [
+      "/usr/lib/python311.zip"
+    ],
+    "kernel_network_probe": "EPERM",
+    "effective_pytest_context": {
+      "active_plugin_names": [
+        "140310714460624",
+        "140310714461520",
+        "assertion",
+        "capture",
+        "capturemanager",
+        "debugging",
+        "doctest",
+        "faulthandler",
+        "fixtures",
+        "helpconfig",
+        "junitxml",
+        "legacypath",
+        "logging",
+        "main",
+        "mark",
+        "monkeypatch",
+        "pastebin",
+        "pytestconfig",
+        "python",
+        "recwarn",
+        "reports",
+        "runner",
+        "session",
+        "setuponly",
+        "setupplan",
+        "skipping",
+        "subtests",
+        "terminal",
+        "threadexception",
+        "tmpdir",
+        "unittest",
+        "unraisableexception",
+        "warnings"
+      ],
+      "addopts": [],
+      "config_path": "/suite/pyproject.toml",
+      "import_mode": "prepend",
+      "plugin_autoload_disabled": true,
+      "root": "/suite",
+      "testpaths": [
+        "tests"
+      ]
+    },
+    "application_unit_code_executed": true,
+    "database_or_live_provider_runtime_executed": false,
+    "first_party_authenticated_and_compiled": true,
+    "source_state_scanner_or_global_ci_acceptance": false
+  },
+  "verification": {
+    "single_unique_raw_AI14_RESULT_marker": true,
+    "raw_marker_payload_exactly_equals_durable_phase_payload": true,
+    "capture_hashes_equal_phase_and_last_observation": true,
+    "binding_and_review_equal_exclusive_started_intent": true,
+    "all33_literal_suite_pins_match_after_attempt": true,
+    "app31_config_and_assertions_unchanged": true,
+    "launcher_sha256": "85881a4bda512f2b6bace8b14b68d66c3bec0574991937186974278a2d63b7e2",
+    "runner_sha256": "2391f38be71141b689cbb4fb20f82c90522c0032e536209d65538ebba578a3a9",
+    "host_python_sha256": "03168c01b7b7491423350e82c26fee71f35b43694d1319d3c668bda6903a0c38",
+    "docker_sha256": "f12290b70e2a38db972bc5be5cd3424e7030321948ee810ba789af2dab75a7be",
+    "image_id": "sha256:192e420d4057bc851bb8db5af2495c35281fca92e56a76cec7f32cf8d3a6e1f9",
+    "toolchain_binding_sha256": "904c2392bc07e2ad8f200425085bd265f6641ac1d443dadba15e96073ab93939",
+    "observed_distribution_versions_equal_exact_binding": true,
+    "source_manifest_source_review_prior_evidence_and_authority_pins_match": true,
+    "regular_nonreparse_files_and_ancestors_stable_metadata": true,
+    "test_capture_stderr_bytes": 0,
+    "separate_collect_capture_files_absent": true,
+    "owned_docker_config_empty": true,
+    "no_reviewer_import_test_Git_Docker_or_runtime_probe": true
+  },
+  "cleanup": {
+    "verdict": "accepted",
+    "container_name": "emr4-access-ai14-20261009-v1-attempt02-test",
+    "phase_cleanup": {
+      "name": "emr4-access-ai14-20261009-v1-attempt02-test",
+      "container_absent": true,
+      "exit_code": 0,
+      "volume_cleanup": "not_attempted",
+      "preserved_volume_names": []
+    },
+    "final_cleanup": [
+      {
+        "name": "emr4-access-ai14-20261009-v1-attempt02-test",
+        "container_absent": true,
+        "volume_cleanup": "not_attempted"
+      }
+    ],
+    "evidence": "Authenticated actual launcher record and unchanged accepted cleanup source: owned name/image/binding-label verified before removal by inspected Id; stopped exit0 recorded, then exact name absence. No new reviewer Docker query and no broad inventory.",
+    "client_pid": 30468,
+    "client_closed": true,
+    "readers_closed": true,
+    "reader_errors": [],
+    "output_complete": true,
+    "output_overflow": false,
+    "captured_stdout_bytes": 11734,
+    "capture_limit_per_phase": 2097152,
+    "no_volume_names_observed": true,
+    "volume_cleanup": "not_attempted; no volume deletion claimed",
+    "owned_container_threads_and_processes": "Owned container is absent after process completion. This does not assert a separate Python-level thread/socketpair cleanup diagnostic that the runner does not record.",
+    "no_database_or_fixture_cleanup_claim": true,
+    "durable_outputs_retained": true
+  },
+  "property_scope": {
+    "original_current_test_source": "Exact unchanged owner-classified tests/test_access_ai_service.py under33-file isolated closure.",
+    "exercised": "Entitlement/role/environment/disabled-actor denial, denied estimates and budgets without provider call; allowed FakeProvider invocation/dry-run/failure recording; bounded cost/risk metadata and PHI-key rejection in audit metadata. These are the14 named unit scenarios and their actual assertions, not live provider behavior.",
+    "provider": "Injected synthetic FakeProvider only; live providers and external credentials/network remain excluded.",
+    "guards": "Unchanged no external network/process/import boundary, exact local AF_UNIX stream socketpair and narrow pthread exceptions; ZIP removal avoids unnecessary search while retaining outside-path open denial. Two org imports were blocked, not permitted.",
+    "normal_collection": "This new test invocation supplies a clean exact14 collection identity and42 passed reports; old unaccepted collection observation is not promoted to PASS."
+  },
+  "budget_accounting": {
+    "owner_extension": {
+      "checkpoint_path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/coordinator-checkpoint.json",
+      "checkpoint_key": "g2_ai14_test_only_owner_extension_20261009_v1",
+      "record_field": "finite_grant",
+      "operation_id": "g2-access-ai14-offline-20261009-v1",
+      "attempt_ordinal": 2,
+      "owner_reply": "Authorize this one test-only attempt (recommended)",
+      "owner_reply_source": "Direct user answer to request_user_input_async call_edff3f76713744be82aeb81d5f2cba99 question0",
+      "additional_native_attempts": 1,
+      "additional_separate_collection_attempts": 0,
+      "additional_test_attempts": 1,
+      "normal_collection_within_test_invocations": 1,
+      "automatic_retry": false,
+      "renewable": false,
+      "consumed": 0,
+      "prior_grant_preserved_consumed": true,
+      "prior_actual_native_collection_test": [
+        1,
+        1,
+        0
+      ],
+      "limits": {
+        "cpu": 1,
+        "memory_mib": 512,
+        "pids": 128,
+        "test_seconds": 300,
+        "cleanup_seconds": 30,
+        "total_seconds": 390,
+        "output_bytes_per_phase": 2097152,
+        "serial_active_environments": 1
+      },
+      "correction": "Remove only unnecessary /usr/lib/python311.zip import path; unchanged exact14/42phase and zero guard violation assertions; no separate collect-only retry.",
+      "source_review_sha256": "d19a31593b107a3ca40a95cc759ea776235d22f01476ffa90e74c439225377f6",
+      "prior_result_and_cleanup_review_sha256": "0ee290cb882a2da7f32e4ec35227a689f3eda2e0825b20083f3d25e76478a61a",
+      "source_judgment_is_not_owner_runtime_authority": true,
+      "final_independent_execution_review_required": true
+    },
+    "attempt02_native_consumed": 1,
+    "additional_separate_collect_only_consumed": 0,
+    "additional_test_consumed": 1,
+    "normal_collection_within_attempt02_test": 1,
+    "cumulative_native_attempts": 2,
+    "cumulative_separate_collect_only_invocations": 1,
+    "cumulative_test_invocations": 1,
+    "cumulative_pytest_collection_invocations_including_normal_test_collection": 2,
+    "initial_native_and_collection_consumed_unchanged": true,
+    "prior_initial_test_not_run": true,
+    "started_attempt1": "Per-launch exclusive single invocation marker; logical ordinal2 and bound prior consumption remain preserved.",
+    "automatic_retry": false,
+    "renewable": false,
+    "remaining_authorized_native_attempts": 0
+  },
+  "prior_failure": {
+    "result_path": "C:\\Users\\there\\EMR4-migration\\20260911-v1\\current-control-repair-20260912-v1\\g2-completion-20261008-v1\\ordinary-applicability\\access-ai-service-execution-preparation-v1\\offline-candidate-v2\\result.json",
+    "result_sha256": "172fb0095f27179b6277f1f619410eee75ccf174ec1dc4a5f78a1e571a251c51",
+    "review_sha256": "0ee290cb882a2da7f32e4ec35227a689f3eda2e0825b20083f3d25e76478a61a",
+    "NONPASS_and_denied_ZIP_open_preserved": true,
+    "no_case_pass_credit_from_attempt01": true
+  },
+  "reuse_limits": [
+    "Qualified actual exact14/42 cohort and physical cleanup may be reused where relevant source/runtime/config/selection/import inputs remain unchanged. Changed-subject applicability and normalized loader-linked adoption remain separate reviews.",
+    "No repository conftest/full-suite, provider integration, database/application listener, external network or real-data behavior proved.",
+    "No accepted global denominator, complete CI/source-state receipt, G2 completion, feature/runtime renewal, commit/push or protected integration granted.",
+    "Review records the already-consumed authorized attempt only; no repeat or source amendment."
+  ]
+}

@@ -1,6 +1,6 @@
 name: Python Security
 
-on:
+'on':
   push:
     branches:
       - master
@@ -28,16 +28,24 @@ jobs:
       - name: Install pinned verification tools
         run: pip install -r requirements-dev.txt
 
-      - name: Canonical Python 3.11 correctness and lint gates
-        run: python scripts/verify_repository.py --profile ci-correctness
+      - name: Complete Python correctness and Bandit gate
+        if: ${{ always() }}
+        env:
+          COMPLETE_SELECTION_SHA256: "22098e6d9c8b5d1fbbbef841668e2464d61b999a02f8abd63458d07de343a59e"
+          TRUSTED_CONTEXT_SHA256: "062bb65f9a50fa6db45a21d5602b7b44669b4640286489b457485b2719d1c4e6"
+        run: |
+          test -n "$COMPLETE_SELECTION_SHA256"
+          test -n "$TRUSTED_CONTEXT_SHA256"
+          python scripts/verify_repository.py \
+            --profile ci-complete \
+            --require-complete \
+            --selection orchestration/programme/g2-closeout-evidence/complete-selection.json \
+            --selection-sha256 "$COMPLETE_SELECTION_SHA256" \
+            --trusted-context orchestration/programme/g2-closeout-evidence/trusted-context.json \
+            --trusted-context-sha256 "$TRUSTED_CONTEXT_SHA256"
 
       - name: Dependency CVE scan (pip-audit)
         # Fails when known CVEs are found in requirements.txt.
         # To clear a finding after verifying it is not reachable or after
         # upgrading the dep, use: pip-audit -r requirements.txt --ignore-vuln <GHSA-ID>
         run: pip-audit -r requirements.txt --desc
-
-      - name: Static security analysis (Bandit)
-        if: ${{ always() }}
-        # Runs the exact reviewed baseline through the canonical entry point.
-        run: python scripts/verify_repository.py --profile ci-bandit

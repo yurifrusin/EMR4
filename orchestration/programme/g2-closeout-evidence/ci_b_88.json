@@ -1,0 +1,1433 @@
+{
+  "schema": "emr4.ci_c_ordinary_cohort_support_source.v1",
+  "status": "SOURCE_ONLY_NONOPERATIVE",
+  "cohort_id": "ci_b_88",
+  "collection": [
+    "tests/test_repository_maintenance.py::test_ci_b_config_accepts_explicit_literal_target_and_is_frozen",
+    "tests/test_repository_maintenance.py::test_ci_b_import_and_help_have_no_database_or_child_effects",
+    "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[hostname]",
+    "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[other-loopback]",
+    "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[url-host]",
+    "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[host-type]",
+    "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[host-subclass]",
+    "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[port-zero]",
+    "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[port-overflow]",
+    "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[port-bool]",
+    "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[port-coercion]",
+    "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[port-subclass]",
+    "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[role-syntax]",
+    "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[role-option]",
+    "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[role-subclass]",
+    "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[foreign-name]",
+    "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[uppercase-name]",
+    "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[system-id-syntax]",
+    "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[system-id-type]",
+    "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[system-id-subclass]",
+    "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[total-zero]",
+    "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[total-over-cap]",
+    "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[total-float]",
+    "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[total-nan]",
+    "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[total-subclass]",
+    "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[cleanup-under-five]",
+    "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[cleanup-not-less]",
+    "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[cleanup-float]",
+    "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[cleanup-subclass]",
+    "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[connect-zero]",
+    "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[connect-over-ten]",
+    "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[connect-bool]",
+    "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[connect-float]",
+    "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[connect-subclass]",
+    "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[statement-zero]",
+    "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[statement-over-cap]",
+    "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[statement-coercion]",
+    "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[statement-infinite]",
+    "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[statement-subclass]",
+    "tests/test_repository_maintenance.py::test_ci_b_rejects_wrong_config_object_before_database_import",
+    "tests/test_repository_maintenance.py::test_ci_b_connect_cap_must_fit_cleanup_reserve_before_runtime",
+    "tests/test_repository_maintenance.py::test_ci_b_ambient_pg_override_fails_before_database_import",
+    "tests/test_repository_maintenance.py::test_ci_b_full_lifecycle_has_bound_endpoint_order_and_owned_cleanup",
+    "tests/test_repository_maintenance.py::test_ci_b_precreate_refusal_has_no_create_drop_or_children[wrong-server]",
+    "tests/test_repository_maintenance.py::test_ci_b_precreate_refusal_has_no_create_drop_or_children[wrong-role]",
+    "tests/test_repository_maintenance.py::test_ci_b_precreate_refusal_has_no_create_drop_or_children[wrong-server-address]",
+    "tests/test_repository_maintenance.py::test_ci_b_precreate_refusal_has_no_create_drop_or_children[wrong-server-port]",
+    "tests/test_repository_maintenance.py::test_ci_b_precreate_refusal_has_no_create_drop_or_children[existing-target-name]",
+    "tests/test_repository_maintenance.py::test_ci_b_precreate_refusal_has_no_create_drop_or_children[admin-connect-error]",
+    "tests/test_repository_maintenance.py::test_ci_b_precreate_refusal_has_no_create_drop_or_children[precreate-absence-lookup-error]",
+    "tests/test_repository_maintenance.py::test_ci_b_unproven_creation_never_guesses_drop[create-acknowledgement-lost]",
+    "tests/test_repository_maintenance.py::test_ci_b_unproven_creation_never_guesses_drop[created-oid-missing]",
+    "tests/test_repository_maintenance.py::test_ci_b_unproven_creation_never_guesses_drop[created-owner-wrong]",
+    "tests/test_repository_maintenance.py::test_ci_b_public_user_tables_stop_primary_and_cleanup_owned_database[initial-tables]",
+    "tests/test_repository_maintenance.py::test_ci_b_public_user_tables_stop_primary_and_cleanup_owned_database[after-downgrade]",
+    "tests/test_repository_maintenance.py::test_ci_b_child_failure_retains_code_and_stops_remaining_children[upgrade]",
+    "tests/test_repository_maintenance.py::test_ci_b_child_failure_retains_code_and_stops_remaining_children[head-check]",
+    "tests/test_repository_maintenance.py::test_ci_b_child_failure_retains_code_and_stops_remaining_children[downgrade]",
+    "tests/test_repository_maintenance.py::test_ci_b_child_failure_retains_code_and_stops_remaining_children[reupgrade]",
+    "tests/test_repository_maintenance.py::test_ci_b_child_failure_retains_code_and_stops_remaining_children[reupgrade-check]",
+    "tests/test_repository_maintenance.py::test_ci_b_child_special_exit_codes_survive_cleanup[timeout-124]",
+    "tests/test_repository_maintenance.py::test_ci_b_child_special_exit_codes_survive_cleanup[negative-signal-code]",
+    "tests/test_repository_maintenance.py::test_ci_b_drop_uncertainty_is_reported_without_retry[cleanup-only]",
+    "tests/test_repository_maintenance.py::test_ci_b_drop_uncertainty_is_reported_without_retry[primary-and-cleanup]",
+    "tests/test_repository_maintenance.py::test_ci_b_cleanup_requires_same_server_role_oid_and_database_owner[server-replaced]",
+    "tests/test_repository_maintenance.py::test_ci_b_cleanup_requires_same_server_role_oid_and_database_owner[role-replaced]",
+    "tests/test_repository_maintenance.py::test_ci_b_cleanup_requires_same_server_role_oid_and_database_owner[same-name-role-oid-replaced]",
+    "tests/test_repository_maintenance.py::test_ci_b_cleanup_requires_same_server_role_oid_and_database_owner[address-replaced]",
+    "tests/test_repository_maintenance.py::test_ci_b_cleanup_requires_same_server_role_oid_and_database_owner[port-replaced]",
+    "tests/test_repository_maintenance.py::test_ci_b_cleanup_requires_same_server_role_oid_and_database_owner[database-oid-replaced]",
+    "tests/test_repository_maintenance.py::test_ci_b_cleanup_requires_same_server_role_oid_and_database_owner[database-owner-replaced]",
+    "tests/test_repository_maintenance.py::test_ci_b_drop_acknowledgement_needs_absence_readback",
+    "tests/test_repository_maintenance.py::test_ci_b_cleanup_absence_readback_error_preserves_uncertainty",
+    "tests/test_repository_maintenance.py::test_ci_b_primary_cutoff_stops_children_but_preserves_cleanup_reserve",
+    "tests/test_repository_maintenance.py::test_ci_b_total_deadline_exhaustion_leaves_cleanup_unresolved",
+    "tests/test_repository_maintenance.py::test_ci_b_deadline_recomputed_after_set_config_before_create",
+    "tests/test_repository_maintenance.py::test_ci_b_cleanup_deadline_before_drop_forbids_drop",
+    "tests/test_repository_maintenance.py::test_ci_b_connection_one_second_cap_refuses_before_connect",
+    "tests/test_repository_maintenance.py::test_ci_b_child_timeout_decreases_after_elapsed_primary_time",
+    "tests/test_repository_maintenance.py::test_ci_b_cli_bad_arguments_reject_without_effect_or_raw_marker[missing-required-binding]",
+    "tests/test_repository_maintenance.py::test_ci_b_cli_bad_arguments_reject_without_effect_or_raw_marker[nonnumeric-port-sanitized]",
+    "tests/test_repository_maintenance.py::test_ci_b_cli_bad_arguments_reject_without_effect_or_raw_marker[unknown-option-sanitized]",
+    "tests/test_repository_maintenance.py::test_ci_b_cli_valid_binding_reports_only_structured_outcome",
+    "tests/test_repository_maintenance.py::test_ci_b_cli_accepts_python_stdout_capture_and_suppresses_fd_output",
+    "tests/test_repository_maintenance.py::test_ci_b_cli_unhandled_verify_error_has_safe_json_and_restores_output",
+    "tests/test_repository_maintenance.py::test_ci_b_prior_server_limit_must_fit_before_next_set_config",
+    "tests/test_repository_maintenance.py::test_ci_b_public_table_sql_error_stops_children_but_cleans_up[initial-query-error]",
+    "tests/test_repository_maintenance.py::test_ci_b_public_table_sql_error_stops_children_but_cleans_up[post-downgrade-query-error]"
+  ],
+  "phase_rows": [
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_config_accepts_explicit_literal_target_and_is_frozen",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_config_accepts_explicit_literal_target_and_is_frozen",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_config_accepts_explicit_literal_target_and_is_frozen",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_import_and_help_have_no_database_or_child_effects",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_import_and_help_have_no_database_or_child_effects",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_import_and_help_have_no_database_or_child_effects",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[hostname]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[hostname]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[hostname]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[other-loopback]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[other-loopback]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[other-loopback]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[url-host]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[url-host]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[url-host]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[host-type]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[host-type]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[host-type]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[host-subclass]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[host-subclass]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[host-subclass]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[port-zero]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[port-zero]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[port-zero]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[port-overflow]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[port-overflow]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[port-overflow]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[port-bool]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[port-bool]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[port-bool]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[port-coercion]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[port-coercion]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[port-coercion]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[port-subclass]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[port-subclass]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[port-subclass]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[role-syntax]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[role-syntax]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[role-syntax]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[role-option]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[role-option]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[role-option]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[role-subclass]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[role-subclass]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[role-subclass]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[foreign-name]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[foreign-name]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[foreign-name]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[uppercase-name]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[uppercase-name]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[uppercase-name]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[system-id-syntax]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[system-id-syntax]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[system-id-syntax]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[system-id-type]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[system-id-type]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[system-id-type]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[system-id-subclass]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[system-id-subclass]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[system-id-subclass]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[total-zero]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[total-zero]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[total-zero]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[total-over-cap]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[total-over-cap]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[total-over-cap]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[total-float]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[total-float]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[total-float]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[total-nan]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[total-nan]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[total-nan]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[total-subclass]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[total-subclass]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[total-subclass]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[cleanup-under-five]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[cleanup-under-five]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[cleanup-under-five]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[cleanup-not-less]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[cleanup-not-less]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[cleanup-not-less]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[cleanup-float]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[cleanup-float]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[cleanup-float]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[cleanup-subclass]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[cleanup-subclass]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[cleanup-subclass]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[connect-zero]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[connect-zero]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[connect-zero]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[connect-over-ten]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[connect-over-ten]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[connect-over-ten]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[connect-bool]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[connect-bool]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[connect-bool]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[connect-float]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[connect-float]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[connect-float]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[connect-subclass]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[connect-subclass]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[connect-subclass]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[statement-zero]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[statement-zero]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[statement-zero]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[statement-over-cap]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[statement-over-cap]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[statement-over-cap]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[statement-coercion]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[statement-coercion]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[statement-coercion]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[statement-infinite]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[statement-infinite]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[statement-infinite]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[statement-subclass]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[statement-subclass]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_invalid_config_has_exact_reason_without_runtime_effect[statement-subclass]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_rejects_wrong_config_object_before_database_import",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_rejects_wrong_config_object_before_database_import",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_rejects_wrong_config_object_before_database_import",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_connect_cap_must_fit_cleanup_reserve_before_runtime",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_connect_cap_must_fit_cleanup_reserve_before_runtime",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_connect_cap_must_fit_cleanup_reserve_before_runtime",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_ambient_pg_override_fails_before_database_import",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_ambient_pg_override_fails_before_database_import",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_ambient_pg_override_fails_before_database_import",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_full_lifecycle_has_bound_endpoint_order_and_owned_cleanup",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_full_lifecycle_has_bound_endpoint_order_and_owned_cleanup",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_full_lifecycle_has_bound_endpoint_order_and_owned_cleanup",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_precreate_refusal_has_no_create_drop_or_children[wrong-server]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_precreate_refusal_has_no_create_drop_or_children[wrong-server]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_precreate_refusal_has_no_create_drop_or_children[wrong-server]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_precreate_refusal_has_no_create_drop_or_children[wrong-role]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_precreate_refusal_has_no_create_drop_or_children[wrong-role]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_precreate_refusal_has_no_create_drop_or_children[wrong-role]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_precreate_refusal_has_no_create_drop_or_children[wrong-server-address]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_precreate_refusal_has_no_create_drop_or_children[wrong-server-address]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_precreate_refusal_has_no_create_drop_or_children[wrong-server-address]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_precreate_refusal_has_no_create_drop_or_children[wrong-server-port]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_precreate_refusal_has_no_create_drop_or_children[wrong-server-port]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_precreate_refusal_has_no_create_drop_or_children[wrong-server-port]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_precreate_refusal_has_no_create_drop_or_children[existing-target-name]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_precreate_refusal_has_no_create_drop_or_children[existing-target-name]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_precreate_refusal_has_no_create_drop_or_children[existing-target-name]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_precreate_refusal_has_no_create_drop_or_children[admin-connect-error]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_precreate_refusal_has_no_create_drop_or_children[admin-connect-error]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_precreate_refusal_has_no_create_drop_or_children[admin-connect-error]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_precreate_refusal_has_no_create_drop_or_children[precreate-absence-lookup-error]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_precreate_refusal_has_no_create_drop_or_children[precreate-absence-lookup-error]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_precreate_refusal_has_no_create_drop_or_children[precreate-absence-lookup-error]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_unproven_creation_never_guesses_drop[create-acknowledgement-lost]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_unproven_creation_never_guesses_drop[create-acknowledgement-lost]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_unproven_creation_never_guesses_drop[create-acknowledgement-lost]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_unproven_creation_never_guesses_drop[created-oid-missing]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_unproven_creation_never_guesses_drop[created-oid-missing]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_unproven_creation_never_guesses_drop[created-oid-missing]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_unproven_creation_never_guesses_drop[created-owner-wrong]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_unproven_creation_never_guesses_drop[created-owner-wrong]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_unproven_creation_never_guesses_drop[created-owner-wrong]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_public_user_tables_stop_primary_and_cleanup_owned_database[initial-tables]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_public_user_tables_stop_primary_and_cleanup_owned_database[initial-tables]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_public_user_tables_stop_primary_and_cleanup_owned_database[initial-tables]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_public_user_tables_stop_primary_and_cleanup_owned_database[after-downgrade]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_public_user_tables_stop_primary_and_cleanup_owned_database[after-downgrade]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_public_user_tables_stop_primary_and_cleanup_owned_database[after-downgrade]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_child_failure_retains_code_and_stops_remaining_children[upgrade]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_child_failure_retains_code_and_stops_remaining_children[upgrade]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_child_failure_retains_code_and_stops_remaining_children[upgrade]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_child_failure_retains_code_and_stops_remaining_children[head-check]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_child_failure_retains_code_and_stops_remaining_children[head-check]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_child_failure_retains_code_and_stops_remaining_children[head-check]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_child_failure_retains_code_and_stops_remaining_children[downgrade]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_child_failure_retains_code_and_stops_remaining_children[downgrade]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_child_failure_retains_code_and_stops_remaining_children[downgrade]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_child_failure_retains_code_and_stops_remaining_children[reupgrade]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_child_failure_retains_code_and_stops_remaining_children[reupgrade]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_child_failure_retains_code_and_stops_remaining_children[reupgrade]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_child_failure_retains_code_and_stops_remaining_children[reupgrade-check]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_child_failure_retains_code_and_stops_remaining_children[reupgrade-check]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_child_failure_retains_code_and_stops_remaining_children[reupgrade-check]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_child_special_exit_codes_survive_cleanup[timeout-124]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_child_special_exit_codes_survive_cleanup[timeout-124]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_child_special_exit_codes_survive_cleanup[timeout-124]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_child_special_exit_codes_survive_cleanup[negative-signal-code]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_child_special_exit_codes_survive_cleanup[negative-signal-code]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_child_special_exit_codes_survive_cleanup[negative-signal-code]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_drop_uncertainty_is_reported_without_retry[cleanup-only]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_drop_uncertainty_is_reported_without_retry[cleanup-only]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_drop_uncertainty_is_reported_without_retry[cleanup-only]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_drop_uncertainty_is_reported_without_retry[primary-and-cleanup]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_drop_uncertainty_is_reported_without_retry[primary-and-cleanup]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_drop_uncertainty_is_reported_without_retry[primary-and-cleanup]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_cleanup_requires_same_server_role_oid_and_database_owner[server-replaced]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_cleanup_requires_same_server_role_oid_and_database_owner[server-replaced]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_cleanup_requires_same_server_role_oid_and_database_owner[server-replaced]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_cleanup_requires_same_server_role_oid_and_database_owner[role-replaced]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_cleanup_requires_same_server_role_oid_and_database_owner[role-replaced]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_cleanup_requires_same_server_role_oid_and_database_owner[role-replaced]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_cleanup_requires_same_server_role_oid_and_database_owner[same-name-role-oid-replaced]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_cleanup_requires_same_server_role_oid_and_database_owner[same-name-role-oid-replaced]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_cleanup_requires_same_server_role_oid_and_database_owner[same-name-role-oid-replaced]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_cleanup_requires_same_server_role_oid_and_database_owner[address-replaced]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_cleanup_requires_same_server_role_oid_and_database_owner[address-replaced]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_cleanup_requires_same_server_role_oid_and_database_owner[address-replaced]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_cleanup_requires_same_server_role_oid_and_database_owner[port-replaced]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_cleanup_requires_same_server_role_oid_and_database_owner[port-replaced]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_cleanup_requires_same_server_role_oid_and_database_owner[port-replaced]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_cleanup_requires_same_server_role_oid_and_database_owner[database-oid-replaced]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_cleanup_requires_same_server_role_oid_and_database_owner[database-oid-replaced]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_cleanup_requires_same_server_role_oid_and_database_owner[database-oid-replaced]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_cleanup_requires_same_server_role_oid_and_database_owner[database-owner-replaced]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_cleanup_requires_same_server_role_oid_and_database_owner[database-owner-replaced]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_cleanup_requires_same_server_role_oid_and_database_owner[database-owner-replaced]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_drop_acknowledgement_needs_absence_readback",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_drop_acknowledgement_needs_absence_readback",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_drop_acknowledgement_needs_absence_readback",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_cleanup_absence_readback_error_preserves_uncertainty",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_cleanup_absence_readback_error_preserves_uncertainty",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_cleanup_absence_readback_error_preserves_uncertainty",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_primary_cutoff_stops_children_but_preserves_cleanup_reserve",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_primary_cutoff_stops_children_but_preserves_cleanup_reserve",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_primary_cutoff_stops_children_but_preserves_cleanup_reserve",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_total_deadline_exhaustion_leaves_cleanup_unresolved",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_total_deadline_exhaustion_leaves_cleanup_unresolved",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_total_deadline_exhaustion_leaves_cleanup_unresolved",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_deadline_recomputed_after_set_config_before_create",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_deadline_recomputed_after_set_config_before_create",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_deadline_recomputed_after_set_config_before_create",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_cleanup_deadline_before_drop_forbids_drop",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_cleanup_deadline_before_drop_forbids_drop",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_cleanup_deadline_before_drop_forbids_drop",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_connection_one_second_cap_refuses_before_connect",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_connection_one_second_cap_refuses_before_connect",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_connection_one_second_cap_refuses_before_connect",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_child_timeout_decreases_after_elapsed_primary_time",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_child_timeout_decreases_after_elapsed_primary_time",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_child_timeout_decreases_after_elapsed_primary_time",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_cli_bad_arguments_reject_without_effect_or_raw_marker[missing-required-binding]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_cli_bad_arguments_reject_without_effect_or_raw_marker[missing-required-binding]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_cli_bad_arguments_reject_without_effect_or_raw_marker[missing-required-binding]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_cli_bad_arguments_reject_without_effect_or_raw_marker[nonnumeric-port-sanitized]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_cli_bad_arguments_reject_without_effect_or_raw_marker[nonnumeric-port-sanitized]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_cli_bad_arguments_reject_without_effect_or_raw_marker[nonnumeric-port-sanitized]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_cli_bad_arguments_reject_without_effect_or_raw_marker[unknown-option-sanitized]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_cli_bad_arguments_reject_without_effect_or_raw_marker[unknown-option-sanitized]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_cli_bad_arguments_reject_without_effect_or_raw_marker[unknown-option-sanitized]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_cli_valid_binding_reports_only_structured_outcome",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_cli_valid_binding_reports_only_structured_outcome",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_cli_valid_binding_reports_only_structured_outcome",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_cli_accepts_python_stdout_capture_and_suppresses_fd_output",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_cli_accepts_python_stdout_capture_and_suppresses_fd_output",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_cli_accepts_python_stdout_capture_and_suppresses_fd_output",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_cli_unhandled_verify_error_has_safe_json_and_restores_output",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_cli_unhandled_verify_error_has_safe_json_and_restores_output",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_cli_unhandled_verify_error_has_safe_json_and_restores_output",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_prior_server_limit_must_fit_before_next_set_config",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_prior_server_limit_must_fit_before_next_set_config",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_prior_server_limit_must_fit_before_next_set_config",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_public_table_sql_error_stops_children_but_cleans_up[initial-query-error]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_public_table_sql_error_stops_children_but_cleans_up[initial-query-error]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_public_table_sql_error_stops_children_but_cleans_up[initial-query-error]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_public_table_sql_error_stops_children_but_cleans_up[post-downgrade-query-error]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_public_table_sql_error_stops_children_but_cleans_up[post-downgrade-query-error]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_ci_b_public_table_sql_error_stops_children_but_cleans_up[post-downgrade-query-error]",
+      "phase": "teardown",
+      "outcome": "passed"
+    }
+  ],
+  "provenance": {
+    "source_path": "C:/Users/there/.codex/visualizations/2026/09/15/01a0a72f-a9bd-72f3-b259-0de184339a44/ci-b-preparation-v1/verification-v2/result.json",
+    "source_sha256": "6db63bd41c835f26add53810aa12a185420badbe6c3fbbc5b515b16dc9613854",
+    "independent_review_path": "C:/Users/there/.codex/visualizations/2026/09/15/01a0a72f-a9bd-72f3-b259-0de184339a44/ci-b-preparation-v1/verification-v2/independent-result-review-v1.json",
+    "independent_review_sha256": "db5cc02222183dd7653d0c95a593e7be67bd3752b99e5f8be1b96b8b4d51b1cd",
+    "raw_outer_result_path": "C:/Users/there/.codex/visualizations/2026/09/15/01a0a72f-a9bd-72f3-b259-0de184339a44/ci-b-preparation-v1/verification-v2/result.json",
+    "raw_outer_result_sha256": "6db63bd41c835f26add53810aa12a185420badbe6c3fbbc5b515b16dc9613854",
+    "raw_batch_passed": true,
+    "raw_batch_nonpass_preserved": false,
+    "selected_from_larger_raw_result": false,
+    "keyed_report_source_normalized": false,
+    "qualified_subset_only": false,
+    "source_observation_sha256": "538c2f3e601cfc4e95fab5ecb2a5cd9efcbeb8e69c3e9f6801f7504a4bced667"
+  },
+  "accepted_population_test_ids": null,
+  "complete_v3_check_verdict": null
+}

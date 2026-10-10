@@ -1,0 +1,930 @@
+{
+  "schema_version": "emr4.collected_test_identity_map.v1",
+  "rows": [
+    {
+      "id": "candidate_32d952e05fdd5c9b3c87",
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_require_idempotency_key_before_side_effects[staff_create]",
+      "cohort_id": "original_o1_30"
+    },
+    {
+      "id": "candidate_e3b94a6debd80cdbb10b",
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_require_idempotency_key_before_side_effects[bernie_create]",
+      "cohort_id": "original_o1_30"
+    },
+    {
+      "id": "candidate_c8b9ed532384e8695f11",
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_require_idempotency_key_before_side_effects[status]",
+      "cohort_id": "original_o1_30"
+    },
+    {
+      "id": "candidate_1e0a17b53bf4257c4dff",
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_require_idempotency_key_before_side_effects[update]",
+      "cohort_id": "original_o1_30"
+    },
+    {
+      "id": "candidate_263f11c7d88dbf4820b0",
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_require_idempotency_key_before_side_effects[delete]",
+      "cohort_id": "original_o1_30"
+    },
+    {
+      "id": "candidate_8dbf4bbfb5648cb598f4",
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_replay_same_key_same_body_without_second_side_effect[staff_create]",
+      "cohort_id": "original_o1_30"
+    },
+    {
+      "id": "candidate_7dc9fc39d22b0750d60b",
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_replay_same_key_same_body_without_second_side_effect[bernie_create]",
+      "cohort_id": "original_o1_30"
+    },
+    {
+      "id": "candidate_34430b06a95d7cf87112",
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_replay_same_key_same_body_without_second_side_effect[status]",
+      "cohort_id": "original_o1_30"
+    },
+    {
+      "id": "candidate_afb4e6d96e605dd27701",
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_replay_same_key_same_body_without_second_side_effect[update]",
+      "cohort_id": "original_o1_30"
+    },
+    {
+      "id": "candidate_4da4e65f634ed7da42e9",
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_replay_same_key_same_body_without_second_side_effect[delete]",
+      "cohort_id": "original_o1_30"
+    },
+    {
+      "id": "candidate_046cad9453f3d5411128",
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_conflict_same_key_different_body_without_side_effect[staff_create]",
+      "cohort_id": "original_o1_30"
+    },
+    {
+      "id": "candidate_bdc69dcddca58d84c003",
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_conflict_same_key_different_body_without_side_effect[bernie_create]",
+      "cohort_id": "original_o1_30"
+    },
+    {
+      "id": "candidate_3d8e86f0c8f806d71852",
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_conflict_same_key_different_body_without_side_effect[status]",
+      "cohort_id": "original_o1_30"
+    },
+    {
+      "id": "candidate_f58a13971608dfad96f8",
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_conflict_same_key_different_body_without_side_effect[update]",
+      "cohort_id": "original_o1_30"
+    },
+    {
+      "id": "candidate_22e6c07e63c1a6d5b4e4",
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_conflict_same_key_different_body_without_side_effect[delete]",
+      "cohort_id": "original_o1_30"
+    },
+    {
+      "id": "candidate_fa903e1aed6acce0fcf1",
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_fail_closed_for_non_replay_ledger_states[staff_create-in_progress-409-idempotency_key_in_progress]",
+      "cohort_id": "original_o1_30"
+    },
+    {
+      "id": "candidate_a6ccdfeb7ee84351a8fe",
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_fail_closed_for_non_replay_ledger_states[staff_create-stale_in_progress-409-idempotency_key_stale_in_progress]",
+      "cohort_id": "original_o1_30"
+    },
+    {
+      "id": "candidate_014827e1eb2fdf0d3801",
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_fail_closed_for_non_replay_ledger_states[staff_create-failed_transient-503-idempotency_key_failed_transient]",
+      "cohort_id": "original_o1_30"
+    },
+    {
+      "id": "candidate_0e42e58a0ead25851f97",
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_fail_closed_for_non_replay_ledger_states[bernie_create-in_progress-409-idempotency_key_in_progress]",
+      "cohort_id": "original_o1_30"
+    },
+    {
+      "id": "candidate_a3c1356eff9c0977b5f2",
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_fail_closed_for_non_replay_ledger_states[bernie_create-stale_in_progress-409-idempotency_key_stale_in_progress]",
+      "cohort_id": "original_o1_30"
+    },
+    {
+      "id": "candidate_0ab239536cb13cc9110d",
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_fail_closed_for_non_replay_ledger_states[bernie_create-failed_transient-503-idempotency_key_failed_transient]",
+      "cohort_id": "original_o1_30"
+    },
+    {
+      "id": "candidate_79151542158da06564dd",
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_fail_closed_for_non_replay_ledger_states[status-in_progress-409-idempotency_key_in_progress]",
+      "cohort_id": "original_o1_30"
+    },
+    {
+      "id": "candidate_2c19bc19921cc294813b",
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_fail_closed_for_non_replay_ledger_states[status-stale_in_progress-409-idempotency_key_stale_in_progress]",
+      "cohort_id": "original_o1_30"
+    },
+    {
+      "id": "candidate_3622bea6edf1f9f8b41a",
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_fail_closed_for_non_replay_ledger_states[status-failed_transient-503-idempotency_key_failed_transient]",
+      "cohort_id": "original_o1_30"
+    },
+    {
+      "id": "candidate_ff5194539c3a0eb93bd4",
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_fail_closed_for_non_replay_ledger_states[update-in_progress-409-idempotency_key_in_progress]",
+      "cohort_id": "original_o1_30"
+    },
+    {
+      "id": "candidate_4a82ade14193e6881642",
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_fail_closed_for_non_replay_ledger_states[update-stale_in_progress-409-idempotency_key_stale_in_progress]",
+      "cohort_id": "original_o1_30"
+    },
+    {
+      "id": "candidate_cb577725253ebd7c02c7",
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_fail_closed_for_non_replay_ledger_states[update-failed_transient-503-idempotency_key_failed_transient]",
+      "cohort_id": "original_o1_30"
+    },
+    {
+      "id": "candidate_8fa166cba25bcb93a1eb",
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_fail_closed_for_non_replay_ledger_states[delete-in_progress-409-idempotency_key_in_progress]",
+      "cohort_id": "original_o1_30"
+    },
+    {
+      "id": "candidate_bff900427fe77eb1fe03",
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_fail_closed_for_non_replay_ledger_states[delete-stale_in_progress-409-idempotency_key_stale_in_progress]",
+      "cohort_id": "original_o1_30"
+    },
+    {
+      "id": "candidate_76b10bda549549baccaf",
+      "nodeid": "confirmation_isolated/test_api_spine_confirmation_family_idempotency_integration.py::test_all_confirmation_families_fail_closed_for_non_replay_ledger_states[delete-failed_transient-503-idempotency_key_failed_transient]",
+      "cohort_id": "original_o1_30"
+    },
+    {
+      "id": "candidate_e8802a1dd47f202f4f6e",
+      "nodeid": "test_dependency_compatibility.py::test_hs256_rejection[wrong-key]",
+      "cohort_id": "pyjwt30"
+    },
+    {
+      "id": "candidate_b99de37187274189c197",
+      "nodeid": "test_dependency_compatibility.py::test_hs256_rejection[tamper]",
+      "cohort_id": "pyjwt30"
+    },
+    {
+      "id": "candidate_3074a77f91fb92621d12",
+      "nodeid": "test_dependency_compatibility.py::test_hs256_rejection[expired]",
+      "cohort_id": "pyjwt30"
+    },
+    {
+      "id": "candidate_678bc8b04c292412ec21",
+      "nodeid": "test_dependency_compatibility.py::test_hs256_rejection[algorithm]",
+      "cohort_id": "pyjwt30"
+    },
+    {
+      "id": "candidate_884abb7cfc0e79062d38",
+      "nodeid": "test_dependency_compatibility.py::test_authlib_rs256_rejection[wrong-key]",
+      "cohort_id": "pyjwt30"
+    },
+    {
+      "id": "candidate_99a9b52e59385964434f",
+      "nodeid": "test_dependency_compatibility.py::test_authlib_rs256_rejection[tamper]",
+      "cohort_id": "pyjwt30"
+    },
+    {
+      "id": "candidate_062d3abe2bb1e02f091a",
+      "nodeid": "test_dependency_compatibility.py::test_authlib_rs256_rejection[expired]",
+      "cohort_id": "pyjwt30"
+    },
+    {
+      "id": "candidate_56600f5d0805bc6a7d24",
+      "nodeid": "test_dependency_compatibility.py::test_authlib_rs256_rejection[nonce]",
+      "cohort_id": "pyjwt30"
+    },
+    {
+      "id": "candidate_da64c8168b016d06d663",
+      "nodeid": "test_dependency_compatibility.py::test_authlib_rs256_rejection[issuer]",
+      "cohort_id": "pyjwt30"
+    },
+    {
+      "id": "candidate_f52ac7cb163b3b5b6218",
+      "nodeid": "test_dependency_compatibility.py::test_authlib_rs256_rejection[audience]",
+      "cohort_id": "pyjwt30"
+    },
+    {
+      "id": "candidate_af94497ee592fcc5e690",
+      "nodeid": "test_dependency_compatibility.py::test_authlib_rs256_rejection[algorithm]",
+      "cohort_id": "pyjwt30"
+    },
+    {
+      "id": "candidate_467309e623c44881285e",
+      "nodeid": "test_dependency_compatibility.py::test_authlib_rs256_rejection[missing-nbf]",
+      "cohort_id": "pyjwt30"
+    },
+    {
+      "id": "candidate_0f1c01979650f035f70d",
+      "nodeid": "test_dependency_compatibility.py::test_pyjwt2151_signature_padding",
+      "cohort_id": "pyjwt30"
+    },
+    {
+      "id": "candidate_33db106a13732395e6bb",
+      "nodeid": "test_dependency_compatibility.py::test_pyjwt2151_signed_header_payload_padding",
+      "cohort_id": "pyjwt30"
+    },
+    {
+      "id": "candidate_1c63ea850c8616632d0e",
+      "nodeid": "test_dependency_compatibility.py::test_pyjwt2151_compact_segment_rejection[signature-junk]",
+      "cohort_id": "pyjwt30"
+    },
+    {
+      "id": "candidate_5c5df0429a10ad41705f",
+      "nodeid": "test_dependency_compatibility.py::test_pyjwt2151_compact_segment_rejection[header-junk]",
+      "cohort_id": "pyjwt30"
+    },
+    {
+      "id": "candidate_9069197d17a4efb3f44e",
+      "nodeid": "test_dependency_compatibility.py::test_pyjwt2151_compact_segment_rejection[payload-junk]",
+      "cohort_id": "pyjwt30"
+    },
+    {
+      "id": "candidate_ffddf6c9c9952d2c062b",
+      "nodeid": "test_dependency_compatibility.py::test_pyjwt2151_compact_segment_rejection[interior-padding]",
+      "cohort_id": "pyjwt30"
+    },
+    {
+      "id": "candidate_5902605b83f6b828751c",
+      "nodeid": "test_dependency_compatibility.py::test_pyjwt2151_compact_segment_rejection[excess-padding]",
+      "cohort_id": "pyjwt30"
+    },
+    {
+      "id": "candidate_dcf24eae484596a67452",
+      "nodeid": "test_dependency_compatibility.py::test_pyjwt2151_compact_segment_rejection[noncanonical-padbits]",
+      "cohort_id": "pyjwt30"
+    },
+    {
+      "id": "candidate_0d736b01d8857374d44d",
+      "nodeid": "test_dependency_compatibility.py::test_pyjwt2151_numeric_date_rejection[exp-list]",
+      "cohort_id": "pyjwt30"
+    },
+    {
+      "id": "candidate_fca1b5b184bc0801a80f",
+      "nodeid": "test_dependency_compatibility.py::test_pyjwt2151_numeric_date_rejection[exp-object]",
+      "cohort_id": "pyjwt30"
+    },
+    {
+      "id": "candidate_7c7b4f61dc952207c01a",
+      "nodeid": "test_dependency_compatibility.py::test_pyjwt2151_numeric_date_rejection[exp-null]",
+      "cohort_id": "pyjwt30"
+    },
+    {
+      "id": "candidate_0e1a08f48091bfbc200a",
+      "nodeid": "test_dependency_compatibility.py::test_pyjwt2151_numeric_date_rejection[nbf-list]",
+      "cohort_id": "pyjwt30"
+    },
+    {
+      "id": "candidate_3eef94e3503c6365d6e0",
+      "nodeid": "test_dependency_compatibility.py::test_pyjwt2151_numeric_date_rejection[nbf-object]",
+      "cohort_id": "pyjwt30"
+    },
+    {
+      "id": "candidate_77ef236bfcc9b1c71825",
+      "nodeid": "test_dependency_compatibility.py::test_pyjwt2151_numeric_date_rejection[nbf-null]",
+      "cohort_id": "pyjwt30"
+    },
+    {
+      "id": "candidate_a27e0e7430b533cf386a",
+      "nodeid": "test_dependency_compatibility.py::test_pyjwt2151_numeric_date_rejection[iat-list]",
+      "cohort_id": "pyjwt30"
+    },
+    {
+      "id": "candidate_40ee8a4727a89b64186a",
+      "nodeid": "test_dependency_compatibility.py::test_pyjwt2151_numeric_date_rejection[iat-object]",
+      "cohort_id": "pyjwt30"
+    },
+    {
+      "id": "candidate_4d3d81c2415f8ade3db0",
+      "nodeid": "test_dependency_compatibility.py::test_pyjwt2151_numeric_date_rejection[iat-null]",
+      "cohort_id": "pyjwt30"
+    },
+    {
+      "id": "candidate_f3e5fbe303b0c3b55030",
+      "nodeid": "test_dependency_compatibility.py::test_pyjwt2151_nested_payload_error",
+      "cohort_id": "pyjwt30"
+    },
+    {
+      "id": "candidate_7c9ae5d88c21d5353b2c",
+      "nodeid": "test_dependency_compatibility.py::test_fernet_rejection[wrong-key]",
+      "cohort_id": "crypto_six"
+    },
+    {
+      "id": "candidate_0e9903963a75545dcdd5",
+      "nodeid": "test_dependency_compatibility.py::test_fernet_rejection[tamper]",
+      "cohort_id": "crypto_six"
+    },
+    {
+      "id": "candidate_304e88b43583add2a054",
+      "nodeid": "test_dependency_compatibility.py::test_encrypted_private_key_parsing",
+      "cohort_id": "crypto_six"
+    },
+    {
+      "id": "candidate_7a334132bb28744f0e9c",
+      "nodeid": "test_dependency_compatibility.py::test_certificate_rejection[untrusted-issuer]",
+      "cohort_id": "crypto_six"
+    },
+    {
+      "id": "candidate_f1f47466dec363e0d1b2",
+      "nodeid": "test_dependency_compatibility.py::test_certificate_rejection[expired]",
+      "cohort_id": "crypto_six"
+    },
+    {
+      "id": "candidate_ef4f30ac4552ef55459b",
+      "nodeid": "test_dependency_compatibility.py::test_certificate_pem_parsing",
+      "cohort_id": "crypto_six"
+    },
+    {
+      "id": "candidate_5345f747c5a6cceff29a",
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_rejects_missing_or_malformed_patient_id_without_writes[missing-patient-id]",
+      "cohort_id": "clinical48"
+    },
+    {
+      "id": "candidate_c1c6ead787d21891cda9",
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_rejects_missing_or_malformed_patient_id_without_writes[malformed-patient-id]",
+      "cohort_id": "clinical48"
+    },
+    {
+      "id": "candidate_3986f369ac0f20a1cb41",
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_unknown_and_foreign_patient_are_generic_404_without_writes[unknown]",
+      "cohort_id": "clinical48"
+    },
+    {
+      "id": "candidate_25650c57e529d8366b05",
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_unknown_and_foreign_patient_are_generic_404_without_writes[foreign]",
+      "cohort_id": "clinical48"
+    },
+    {
+      "id": "candidate_cedaa9d61c0ace9e3e3f",
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_same_practice_persists_selected_patient_and_practice",
+      "cohort_id": "clinical48"
+    },
+    {
+      "id": "candidate_1f5abfeb5ea5233a4ebd",
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_requires_authentication",
+      "cohort_id": "clinical48"
+    },
+    {
+      "id": "candidate_ad5d0327f5cc7655e332",
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_analyze_rejects_finalized_payload_with_422",
+      "cohort_id": "clinical48"
+    },
+    {
+      "id": "candidate_7f980a0132cddedfbdd9",
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_draft_analyze_strips_save_markers_and_does_not_persist_clinical_records",
+      "cohort_id": "clinical48"
+    },
+    {
+      "id": "candidate_f73fae0d313b74db652f",
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_child_flush_failure_rolls_back_encounter_and_children[mbs-claim]",
+      "cohort_id": "clinical48"
+    },
+    {
+      "id": "candidate_cadf3196cfd2cd0e1561",
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_child_flush_failure_rolls_back_encounter_and_children[clinical-diagnosis]",
+      "cohort_id": "clinical48"
+    },
+    {
+      "id": "candidate_6762748801eb15435f6d",
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_child_flush_failure_rolls_back_encounter_and_children[prescription]",
+      "cohort_id": "clinical48"
+    },
+    {
+      "id": "candidate_0104b3b05cd8947a2e6d",
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_all_children_commit_once_with_linked_patient_and_practice",
+      "cohort_id": "clinical48"
+    },
+    {
+      "id": "candidate_c3a7da4a3d66a5029532",
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_requires_strict_boolean_attestation_without_writes[missing]",
+      "cohort_id": "clinical48"
+    },
+    {
+      "id": "candidate_3a2c6e3e2c2129b91ce0",
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_requires_strict_boolean_attestation_without_writes[string]",
+      "cohort_id": "clinical48"
+    },
+    {
+      "id": "candidate_536aa1426803ff503433",
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_requires_strict_boolean_attestation_without_writes[integer]",
+      "cohort_id": "clinical48"
+    },
+    {
+      "id": "candidate_1f4ae3efe14b4a7bb15b",
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_false_attestation_is_generic_403_before_writes",
+      "cohort_id": "clinical48"
+    },
+    {
+      "id": "candidate_838c3b69d91d4ff5ff77",
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_rejects_client_supplied_authority_fields[practitioner-id]",
+      "cohort_id": "clinical48"
+    },
+    {
+      "id": "candidate_e2ebf7ff2000c44898e1",
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_rejects_client_supplied_authority_fields[prescriber-id]",
+      "cohort_id": "clinical48"
+    },
+    {
+      "id": "candidate_42a3b9b0add065cc2f2c",
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_rejects_client_supplied_authority_fields[actor-user-id]",
+      "cohort_id": "clinical48"
+    },
+    {
+      "id": "candidate_352d4443fbd2254143cb",
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_rejects_client_supplied_authority_fields[role]",
+      "cohort_id": "clinical48"
+    },
+    {
+      "id": "candidate_0948599d784d6fd38b98",
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_rejects_non_gp_role_without_writes[receptionist]",
+      "cohort_id": "clinical48"
+    },
+    {
+      "id": "candidate_d3f52040736372ad06cc",
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_rejects_non_gp_role_without_writes[nurse]",
+      "cohort_id": "clinical48"
+    },
+    {
+      "id": "candidate_58106fb8710c854b53f3",
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_rejects_non_gp_role_without_writes[admin]",
+      "cohort_id": "clinical48"
+    },
+    {
+      "id": "candidate_e0ef1651d4d3aff5b076",
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_rejects_non_gp_role_without_writes[practice-owner]",
+      "cohort_id": "clinical48"
+    },
+    {
+      "id": "candidate_2cbe8558d57529fd44a8",
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_rechecks_fresh_user_and_practitioner_authority[inactive-user]",
+      "cohort_id": "clinical48"
+    },
+    {
+      "id": "candidate_8582b03416ed9d3bd5eb",
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_rechecks_fresh_user_and_practitioner_authority[changed-role]",
+      "cohort_id": "clinical48"
+    },
+    {
+      "id": "candidate_dac5d4d3b7643e1fe694",
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_rechecks_fresh_user_and_practitioner_authority[inactive-practitioner]",
+      "cohort_id": "clinical48"
+    },
+    {
+      "id": "candidate_d0d33c376a4148a824ec",
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_rechecks_fresh_user_and_practitioner_authority[missing-link]",
+      "cohort_id": "clinical48"
+    },
+    {
+      "id": "candidate_366e993330b9ce773e20",
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_rechecks_fresh_user_and_practitioner_authority[cross-practice-link]",
+      "cohort_id": "clinical48"
+    },
+    {
+      "id": "candidate_a11a63320bdc1fc88a5c",
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_audit_failure_rolls_back_all_clinical_rows[builder]",
+      "cohort_id": "clinical48"
+    },
+    {
+      "id": "candidate_50181e71254f13ee6f7b",
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_audit_failure_rolls_back_all_clinical_rows[store]",
+      "cohort_id": "clinical48"
+    },
+    {
+      "id": "candidate_aa8a13ffe25260a9d1d3",
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_audit_failure_rolls_back_all_clinical_rows[audit-flush]",
+      "cohort_id": "clinical48"
+    },
+    {
+      "id": "candidate_14c1fcbcaef7ac7b3725",
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_matching_replay_returns_exact_json_and_one_rowset",
+      "cohort_id": "clinical48"
+    },
+    {
+      "id": "candidate_3464f1a963ec61716918",
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_compatible_aliases_replay_same_canonical_hash",
+      "cohort_id": "clinical48"
+    },
+    {
+      "id": "candidate_29b406cbe79cf910c901",
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_changed_content_patient_and_context_are_same_generic_conflict",
+      "cohort_id": "clinical48"
+    },
+    {
+      "id": "candidate_74e4343b478e9af3b6e8",
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_different_gp_replay_is_generic_conflict",
+      "cohort_id": "clinical48"
+    },
+    {
+      "id": "candidate_abf0a69331f77ee8a25c",
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_corrupt_receipt_fails_closed_without_field_or_target_leak[attested-integer]",
+      "cohort_id": "clinical48"
+    },
+    {
+      "id": "candidate_e7d1bcd9e0cfb057ed36",
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_corrupt_receipt_fails_closed_without_field_or_target_leak[policy-version]",
+      "cohort_id": "clinical48"
+    },
+    {
+      "id": "candidate_4fc933e6e4bc1c10a361",
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_corrupt_receipt_fails_closed_without_field_or_target_leak[malformed-hash]",
+      "cohort_id": "clinical48"
+    },
+    {
+      "id": "candidate_7d64475681d5ac9208f7",
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_corrupt_receipt_fails_closed_without_field_or_target_leak[missing-target]",
+      "cohort_id": "clinical48"
+    },
+    {
+      "id": "candidate_3e9c2901eded8b3b55e6",
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_same_gp_overlapping_matching_commands_are_identical",
+      "cohort_id": "clinical48"
+    },
+    {
+      "id": "candidate_f2ad5773975b965f58f6",
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_different_gps_distinct_patients_same_command_race_is_bounded",
+      "cohort_id": "clinical48"
+    },
+    {
+      "id": "candidate_5aba46ed6779c9cd22e6",
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_rejects_invalid_command_or_context_without_writes[missing-command-uuid]",
+      "cohort_id": "clinical48"
+    },
+    {
+      "id": "candidate_ba0533140995de5a615e",
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_rejects_invalid_command_or_context_without_writes[malformed-command-uuid]",
+      "cohort_id": "clinical48"
+    },
+    {
+      "id": "candidate_401a72437e944061f56d",
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_rejects_invalid_command_or_context_without_writes[missing-document-context]",
+      "cohort_id": "clinical48"
+    },
+    {
+      "id": "candidate_4b179a2ea8887ed056c2",
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_rejects_invalid_command_or_context_without_writes[nonstring-document-context]",
+      "cohort_id": "clinical48"
+    },
+    {
+      "id": "candidate_f96717fddc9b2615b187",
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_rejects_unbound_or_mismatched_document_context_generically[unbound-patient-document]",
+      "cohort_id": "clinical48"
+    },
+    {
+      "id": "candidate_e179b7e444b1810c1d01",
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_rejects_unbound_or_mismatched_document_context_generically[mismatched-patient-document]",
+      "cohort_id": "clinical48"
+    },
+    {
+      "id": "candidate_553717c451d3bb943b2f",
+      "nodeid": "tests/test_access_ai_service.py::test_invocation_denies_before_provider_call_when_role_not_allowed",
+      "cohort_id": "ai14_attempt02"
+    },
+    {
+      "id": "candidate_a2684537d8bbb89bf213",
+      "nodeid": "tests/test_access_ai_service.py::test_blocked_budgeted_invocation_records_budget_status_without_provider_call",
+      "cohort_id": "ai14_attempt02"
+    },
+    {
+      "id": "candidate_c76d77218d59cc973baf",
+      "nodeid": "tests/test_access_ai_service.py::test_successful_invocation_calls_provider_and_records_allowed_event",
+      "cohort_id": "ai14_attempt02"
+    },
+    {
+      "id": "candidate_0136535bcef6044b23bc",
+      "nodeid": "tests/test_access_ai_service.py::test_dry_run_records_allowed_event_without_provider_call",
+      "cohort_id": "ai14_attempt02"
+    },
+    {
+      "id": "candidate_284212d11f8923b472d6",
+      "nodeid": "tests/test_access_ai_service.py::test_provider_failure_records_failure_event_without_raw_payload",
+      "cohort_id": "ai14_attempt02"
+    },
+    {
+      "id": "candidate_f447073cf025ddcf745d",
+      "nodeid": "tests/test_access_ai_service.py::test_audit_metadata_rejection_prevents_provider_call",
+      "cohort_id": "ai14_attempt02"
+    },
+    {
+      "id": "candidate_fcc3cf9d174aa6b11b55",
+      "nodeid": "tests/test_access_ai_service.py::TestBlockedEntitlementVariations::test_blocked_entitlement_method_not_allowed",
+      "cohort_id": "ai14_attempt02"
+    },
+    {
+      "id": "candidate_cbbb24a16b4ccead1435",
+      "nodeid": "tests/test_access_ai_service.py::TestBlockedEntitlementVariations::test_blocked_entitlement_environment_not_allowed",
+      "cohort_id": "ai14_attempt02"
+    },
+    {
+      "id": "candidate_0bc46dd125e08241dbdf",
+      "nodeid": "tests/test_access_ai_service.py::TestBlockedEntitlementVariations::test_blocked_entitlement_actor_disabled",
+      "cohort_id": "ai14_attempt02"
+    },
+    {
+      "id": "candidate_fd2cc44745742f146ae2",
+      "nodeid": "tests/test_access_ai_service.py::TestBlockedEntitlementVariations::test_blocked_entitlement_has_cost_and_risk_tier_metadata",
+      "cohort_id": "ai14_attempt02"
+    },
+    {
+      "id": "candidate_9c5f6f9a5e649e0bfd45",
+      "nodeid": "tests/test_access_ai_service.py::test_estimate_cost_never_calls_provider_when_blocked_by_entitlement",
+      "cohort_id": "ai14_attempt02"
+    },
+    {
+      "id": "candidate_72de07dcbc47ed28940b",
+      "nodeid": "tests/test_access_ai_service.py::test_provider_failure_audit_events_have_no_phi_keys_in_metadata",
+      "cohort_id": "ai14_attempt02"
+    },
+    {
+      "id": "candidate_4b06418784d424bf58a5",
+      "nodeid": "tests/test_access_ai_service.py::test_budget_threshold_appears_for_capped_capability",
+      "cohort_id": "ai14_attempt02"
+    },
+    {
+      "id": "candidate_c376ae8f735efe48c6d1",
+      "nodeid": "tests/test_access_ai_service.py::test_blocked_entitlement_metadata_rejects_phi_keys",
+      "cohort_id": "ai14_attempt02"
+    },
+    {
+      "id": "candidate_a2375b9791d1d7b85cb7",
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_occupied_changed_body_preserves_conflict_priority[warning]",
+      "cohort_id": "green_twentyeight"
+    },
+    {
+      "id": "candidate_13c7ee9f675b564e3179",
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_occupied_changed_body_preserves_conflict_priority[nested]",
+      "cohort_id": "green_twentyeight"
+    },
+    {
+      "id": "candidate_34c87c78e8d493deec05",
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_changed_waiting_area_preserves_stale_freshness_reason[clear-true]",
+      "cohort_id": "green_twentyeight"
+    },
+    {
+      "id": "candidate_dd9255cee71ebf3ea939",
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_changed_waiting_area_preserves_stale_freshness_reason[clear-false]",
+      "cohort_id": "green_twentyeight"
+    },
+    {
+      "id": "candidate_c18443943f6bacc7cf09",
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_different_key_after_delete_preserves_stale_freshness_reason",
+      "cohort_id": "green_twentyeight"
+    },
+    {
+      "id": "candidate_aaabb1959906471f8b6e",
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_real_v2_first_write_and_stored_byte_replay",
+      "cohort_id": "green_twentyeight"
+    },
+    {
+      "id": "candidate_9ca40e9c7f77929575e1",
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_v2_summary_only_body_change_conflicts_without_new_effect",
+      "cohort_id": "green_twentyeight"
+    },
+    {
+      "id": "candidate_0a30d0e14c43afc4e533",
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_supported_v2_occupied_state_is_not_reexecuted[in-progress]",
+      "cohort_id": "green_twentyeight"
+    },
+    {
+      "id": "candidate_e93fb10d435b7f7dd495",
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_supported_v2_occupied_state_is_not_reexecuted[stale-in-progress]",
+      "cohort_id": "green_twentyeight"
+    },
+    {
+      "id": "candidate_aa480a6c6b5eb7b6d511",
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_supported_v2_occupied_state_is_not_reexecuted[failed-transient]",
+      "cohort_id": "green_twentyeight"
+    },
+    {
+      "id": "candidate_48ef0b19fcd145b3d62b",
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_genuine_default_v1_completion_is_replayed_without_relabelling",
+      "cohort_id": "green_twentyeight"
+    },
+    {
+      "id": "candidate_626ccb234004d4a2d3b7",
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_default_v1_caller_cannot_replay_v2_record",
+      "cohort_id": "green_twentyeight"
+    },
+    {
+      "id": "candidate_34b764045483c93d7a54",
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_unknown_stored_body_version_fails_closed",
+      "cohort_id": "green_twentyeight"
+    },
+    {
+      "id": "candidate_ca4e2d3272a32add8ddb",
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_generic_completed_record_is_not_a_private_receipt[legacy-v1]",
+      "cohort_id": "green_twentyeight"
+    },
+    {
+      "id": "candidate_c355fc0cefdedaf267f4",
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_generic_completed_record_is_not_a_private_receipt[body-v2]",
+      "cohort_id": "green_twentyeight"
+    },
+    {
+      "id": "candidate_c27c08352c861c5c5cf4",
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_corrupt_completed_private_receipt_is_not_replayed[legacy-v1]",
+      "cohort_id": "green_twentyeight"
+    },
+    {
+      "id": "candidate_818f4bbe0c0753d7c4b4",
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_corrupt_completed_private_receipt_is_not_replayed[body-v2]",
+      "cohort_id": "green_twentyeight"
+    },
+    {
+      "id": "candidate_c65f8bf6bb479a7c09ad",
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_v1_occupied_fallback_requires_original_authenticated_proof[evidence-signature]",
+      "cohort_id": "green_twentyeight"
+    },
+    {
+      "id": "candidate_e4bcb59e65240df09194",
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_v1_occupied_fallback_requires_original_authenticated_proof[version-signature]",
+      "cohort_id": "green_twentyeight"
+    },
+    {
+      "id": "candidate_b09fd078f5ab7100aba6",
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_v2_occupied_binding_mismatch_cannot_replay_or_execute[session]",
+      "cohort_id": "green_twentyeight"
+    },
+    {
+      "id": "candidate_cd951b16729a75edd473",
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_v2_occupied_binding_mismatch_cannot_replay_or_execute[generation]",
+      "cohort_id": "green_twentyeight"
+    },
+    {
+      "id": "candidate_77fe0f1f063d42174924",
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_current_revoked_grant_blocks_completed_v2_replay",
+      "cohort_id": "green_twentyeight"
+    },
+    {
+      "id": "candidate_0764e8e31cb5e68409bc",
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_new_v2_invalid_admission_rolls_back_real_claim[warning]",
+      "cohort_id": "green_twentyeight"
+    },
+    {
+      "id": "candidate_d0afb6e1c0d159473804",
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_new_v2_invalid_admission_rolls_back_real_claim[evidence]",
+      "cohort_id": "green_twentyeight"
+    },
+    {
+      "id": "candidate_b387017a44a7371a9d2d",
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_new_v2_invalid_admission_rolls_back_real_claim[version]",
+      "cohort_id": "green_twentyeight"
+    },
+    {
+      "id": "candidate_8d7f93d8eabb93141b56",
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_new_v2_staged_write_or_receipt_failure_rolls_back_everything[private-shape]",
+      "cohort_id": "green_twentyeight"
+    },
+    {
+      "id": "candidate_50563d0eb389a6215b92",
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_new_v2_unconfirmed_valid_proposal_rolls_back_real_claim",
+      "cohort_id": "green_twentyeight"
+    },
+    {
+      "id": "candidate_235cd1fc8aed28801984",
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_new_v2_genuine_signed_none_reason_rolls_back_real_claim",
+      "cohort_id": "green_twentyeight"
+    },
+    {
+      "id": "candidate_a79cb5e184a00d80b50c",
+      "nodeid": "confirmation_current/test_delete_audit_warning_atomicity.py::test_new_v2_staged_write_or_receipt_failure_rolls_back_everything",
+      "cohort_id": "green02"
+    },
+    {
+      "id": "candidate_6a1d0b3be33d06a8278e",
+      "nodeid": "confirmation_current/test_confirmation_state_receipt_two_failures.py::test_signed_non_session_bernie_replay_has_no_second_effect",
+      "cohort_id": "src2_current"
+    },
+    {
+      "id": "candidate_5138fd81345897c2747e",
+      "nodeid": "confirmation_current/test_confirmation_state_receipt_two_failures.py::test_delete_replay_preserves_receipt_after_intervening_raw_soft_cancel",
+      "cohort_id": "src2_current"
+    }
+  ],
+  "cohorts": [
+    {
+      "id": "original_o1_30",
+      "collection_artifact": "cohort_original_o1_30",
+      "collection_path": [
+        "collection"
+      ],
+      "collection_node_key": null,
+      "result_artifact": "cohort_original_o1_30",
+      "result_path": [
+        "phase_rows"
+      ],
+      "result_layout": "phase-rows",
+      "result_node_key": "nodeid",
+      "result_phase_key": "phase",
+      "result_outcome_key": "outcome"
+    },
+    {
+      "id": "pyjwt30",
+      "collection_artifact": "cohort_pyjwt30",
+      "collection_path": [
+        "collection"
+      ],
+      "collection_node_key": null,
+      "result_artifact": "cohort_pyjwt30",
+      "result_path": [
+        "phase_rows"
+      ],
+      "result_layout": "phase-rows",
+      "result_node_key": "nodeid",
+      "result_phase_key": "phase",
+      "result_outcome_key": "outcome"
+    },
+    {
+      "id": "crypto_six",
+      "collection_artifact": "cohort_crypto_six",
+      "collection_path": [
+        "collection"
+      ],
+      "collection_node_key": null,
+      "result_artifact": "cohort_crypto_six",
+      "result_path": [
+        "phase_rows"
+      ],
+      "result_layout": "phase-rows",
+      "result_node_key": "nodeid",
+      "result_phase_key": "phase",
+      "result_outcome_key": "outcome"
+    },
+    {
+      "id": "clinical48",
+      "collection_artifact": "cohort_clinical48",
+      "collection_path": [
+        "collection"
+      ],
+      "collection_node_key": null,
+      "result_artifact": "cohort_clinical48",
+      "result_path": [
+        "phase_rows"
+      ],
+      "result_layout": "phase-rows",
+      "result_node_key": "nodeid",
+      "result_phase_key": "phase",
+      "result_outcome_key": "outcome"
+    },
+    {
+      "id": "ai14_attempt02",
+      "collection_artifact": "cohort_ai14_attempt02",
+      "collection_path": [
+        "collection"
+      ],
+      "collection_node_key": null,
+      "result_artifact": "cohort_ai14_attempt02",
+      "result_path": [
+        "phase_rows"
+      ],
+      "result_layout": "phase-rows",
+      "result_node_key": "nodeid",
+      "result_phase_key": "phase",
+      "result_outcome_key": "outcome"
+    },
+    {
+      "id": "green_twentyeight",
+      "collection_artifact": "cohort_green_twentyeight",
+      "collection_path": [
+        "collection"
+      ],
+      "collection_node_key": null,
+      "result_artifact": "cohort_green_twentyeight",
+      "result_path": [
+        "phase_rows"
+      ],
+      "result_layout": "phase-rows",
+      "result_node_key": "nodeid",
+      "result_phase_key": "phase",
+      "result_outcome_key": "outcome"
+    },
+    {
+      "id": "green02",
+      "collection_artifact": "cohort_green02",
+      "collection_path": [
+        "collection"
+      ],
+      "collection_node_key": null,
+      "result_artifact": "cohort_green02",
+      "result_path": [
+        "phase_rows"
+      ],
+      "result_layout": "phase-rows",
+      "result_node_key": "nodeid",
+      "result_phase_key": "phase",
+      "result_outcome_key": "outcome"
+    },
+    {
+      "id": "src2_current",
+      "collection_artifact": "cohort_src2_current",
+      "collection_path": [
+        "collection"
+      ],
+      "collection_node_key": null,
+      "result_artifact": "cohort_src2_current",
+      "result_path": [
+        "phase_rows"
+      ],
+      "result_layout": "phase-rows",
+      "result_node_key": "nodeid",
+      "result_phase_key": "phase",
+      "result_outcome_key": "outcome"
+    }
+  ]
+}

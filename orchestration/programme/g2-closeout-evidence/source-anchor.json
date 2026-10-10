@@ -1,0 +1,163 @@
+{
+  "schema": "emr4.ci_c.stable_composed_source_anchor.v4",
+  "status": "EXACT_BASELINE_PLUS_EXPLICIT_OVERLAYS_PENDING_INDEPENDENT_FINAL_CONTEXT_AND_INSTALLATION",
+  "definition": "This raw document identifies the published product baseline plus literal ordinary source overrides and source-predicate inputs. It does not assert every override is already contained in the baseline tree. Installation and final publication are separate exact effect joins. The V4 delta changes only reviewer representation and its two tests. The V3 compile/result pins remain historical exact-byte evidence; verification of the two changed files is a separate required judgment, not asserted by this source identity. V5 subsequently changes one authored approval-fixture path scalar to native absolute form; all test methods and controller behavior remain unchanged. Actual corrected-check results remain outside this stable source identity.",
+  "baseline": {
+    "commit": "6f0ff52e9a4c95efa10bb475480cfb31245500e7",
+    "parent": "b5a1b76c578ccc9df9dbd8d27f1f933a06ef4211",
+    "tree": "553497967c1aa51369e6bcef05eaf817e8ce123a",
+    "commit_effect_review_sha256": "585f16a4f32c4b32635348c152a6c4cc4c119d9604549bb0eca3845badefa395",
+    "push_actual_result_sha256": "6040461ba4e5dd6ee180a2aa182b37b381e893004e7f6356fda2bae53de5ebc2"
+  },
+  "literal_sources": [
+    {
+      "path": "app/routers/appointments.py",
+      "source_path": "C:/Users/there/EMR4-tools/g2-six-product-actual-v1/app/routers/appointments.py",
+      "bytes": 349713,
+      "sha256": "9c9965871b622b16ab52900e50e86d650a04549d9fb1f2c5cefe2c8ae8788cef",
+      "composition_role": "published_product"
+    },
+    {
+      "path": "app/services/appointment_delete_composition.py",
+      "source_path": "C:/Users/there/EMR4-tools/g2-six-product-actual-v1/app/services/appointment_delete_composition.py",
+      "bytes": 32366,
+      "sha256": "8215bd117d1a358066962f55630255c022d355d4ea3a160cf62dcc370a7f979c",
+      "composition_role": "published_product"
+    },
+    {
+      "path": "app/services/appointment_delete_physical.py",
+      "source_path": "C:/Users/there/EMR4-tools/g2-six-product-actual-v1/app/services/appointment_delete_physical.py",
+      "bytes": 28614,
+      "sha256": "061175cb371109fd57e39795a0748d0597d3fdbc34789796b5e811d6cdbc80ff",
+      "composition_role": "published_product"
+    },
+    {
+      "path": "app/services/appointment_delete_product_adapter.py",
+      "source_path": "C:/Users/there/EMR4-tools/g2-six-product-actual-v1/app/services/appointment_delete_product_adapter.py",
+      "bytes": 40192,
+      "sha256": "c3bbdb64e9e5d982ff672a9bbf028e2ba10ed5c37fba493e9677fd3931f18f90",
+      "composition_role": "published_product"
+    },
+    {
+      "path": "tests/test_api_spine_status_confirm_idempotency_route_contract.py",
+      "source_path": "C:/Users/there/EMR4-tools/g2-six-product-actual-v1/tests/test_api_spine_status_confirm_idempotency_route_contract.py",
+      "bytes": 24140,
+      "sha256": "119c1315551b8c50d1f3b4367d19ef6469bf2481fa18a810a9c637f3d870874e",
+      "composition_role": "published_product"
+    },
+    {
+      "path": "tests/test_repository_maintenance.py",
+      "source_path": "C:/Users/there/EMR4-tools/g2-six-product-actual-v1/tests/test_repository_maintenance.py",
+      "bytes": 89678,
+      "sha256": "159b7192299becf9b8815fab02edd9de99c604cf482b04eced6933acbaa392b7",
+      "composition_role": "published_product"
+    },
+    {
+      "path": "orchestration_harness/bounded_g1b.py",
+      "source_path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/ordinary-applicability/g2-closeout-maintenance-preparation-v4/after/orchestration_harness/bounded_g1b.py",
+      "bytes": 409150,
+      "sha256": "e72db832200b31c03cd9452b3112607d670b4b6db06d41e966ffaac8483635a2",
+      "composition_role": "controller_overlay_pending_installation"
+    },
+    {
+      "path": "orchestration_harness/raisa_policy.py",
+      "source_path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/ordinary-applicability/g2-closeout-maintenance-preparation-v3/after/orchestration_harness/raisa_policy.py",
+      "bytes": 102120,
+      "sha256": "9fb5ce31aebf880a8dba0f7190be15813077b86faca794bb4c47772901c9e2bf",
+      "composition_role": "controller_overlay_pending_installation"
+    },
+    {
+      "path": "tests/test_bounded_g1b.py",
+      "source_path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/ordinary-applicability/g2-closeout-maintenance-preparation-v5/after/tests/test_bounded_g1b.py",
+      "bytes": 579090,
+      "sha256": "b6e4e5596b427eef437257a80902175493fda20f815c53137b008b16cfb1cbb8",
+      "composition_role": "controller_overlay_pending_installation"
+    },
+    {
+      "path": "scripts/python_source_state.py",
+      "source_path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/ordinary-applicability/g2-closeout-maintenance-preparation-v3/after/scripts/python_source_state.py",
+      "bytes": 48921,
+      "sha256": "f430803e889b4c3aa0269e12dbff4d965eea2dec0917ac051d8d78225c67b61c",
+      "composition_role": "controller_overlay_pending_installation"
+    },
+    {
+      "path": "tests/test_consultation_audio_privacy.py",
+      "source_path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/ordinary-applicability/audio-ordinary-dom-fixture-candidate-v1/after/tests/test_consultation_audio_privacy.py",
+      "bytes": 47177,
+      "sha256": "8eef3db418dacd7eb10d00de2f2674b9bd5a5197243e81b786df545ec9d67014",
+      "composition_role": "fixture_overlay_pending_adoption"
+    },
+    {
+      "path": "scripts/historical_diary_leakage_lint.py",
+      "source_path": "C:/Users/there/EMR4/scripts/historical_diary_leakage_lint.py",
+      "bytes": 10630,
+      "sha256": "95c40e589cb5f53a63ebcf92914bfc68a01e473863cb815cec74844ad025bc49",
+      "composition_role": "explicit_verification_source"
+    },
+    {
+      "path": "scripts/security_bandit_gate.py",
+      "source_path": "C:/Users/there/EMR4/scripts/security_bandit_gate.py",
+      "bytes": 9345,
+      "sha256": "d59bac77fcf41750943c834160c0c6ecfb0cefc71fdaad521325cf0c82816dda",
+      "composition_role": "explicit_verification_source"
+    },
+    {
+      "path": "scripts/verification_runtime.py",
+      "source_path": "C:/Users/there/EMR4/scripts/verification_runtime.py",
+      "bytes": 1954,
+      "sha256": "30751884d86499ffc65ca33944b8e861691657ff4d5694cd97e11fd0f24fe813",
+      "composition_role": "explicit_verification_source"
+    },
+    {
+      "path": "scripts/verify_repository.py",
+      "source_path": "C:/Users/there/EMR4/scripts/verify_repository.py",
+      "bytes": 8009,
+      "sha256": "01239f5459c9967cfceffc0201d969a77ec374db8887bf3149944dd93308c992",
+      "composition_role": "explicit_verification_source"
+    },
+    {
+      "path": "tests/test_python_source_state.py",
+      "source_path": "C:/Users/there/EMR4/tests/test_python_source_state.py",
+      "bytes": 40299,
+      "sha256": "3c7fdefb9aeae9defc1208948083533da3a8531f9664e4538ca3a781e223163d",
+      "composition_role": "explicit_verification_source"
+    },
+    {
+      "path": "EMR4 Sidebar/src/taskpane/taskpane.js",
+      "source_path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/ordinary-applicability/ci-c-taskpane-relevance-source-v1/published.js",
+      "bytes": 142619,
+      "sha256": "d3186a618d22e2d85ba747292867ed4933de467b5fa2aa08a1c2b8dba00580f0",
+      "composition_role": "accepted_published_taskpane_source"
+    },
+    {
+      "path": "requirements.txt",
+      "source_path": "C:/Users/there/EMR4/requirements.txt",
+      "bytes": 523,
+      "sha256": "420960358508eb631081b578e972e22b42807e4fc58c362997620e4c4656d82b",
+      "composition_role": "accepted_dependency_root"
+    }
+  ],
+  "selected_config": {
+    "path": "pyproject.toml",
+    "sha256": "30e8165ef1dedc0178ec2e1beb553a74de0b9680aed51282807fb45a4f28cde2"
+  },
+  "source_evidence": {
+    "six_product_behavior": "bb81df54e8f41597b30414c402a1528318214b26f3cb21463baf8b61d1d272b6",
+    "v3_source_review": "a18c4d7e75e1b0fd2b524dff37843a4e20857354d2cf4b7ed377fd3fe201029b",
+    "actual_v3_python311_compile": "700577bb161c68f7574f0cecfc736ccbcbae65e895b0ea33a0d1c4506634e0b1",
+    "audio_fixture_outcome": "47a8092af1056bab599fb161e44ed89b351bb866c1ad37f48fc7bdfe9104b230",
+    "row_specific_reuse": "e425a5175f833b6de11bb3eacd9f8711ba0bf113218a9925e6782855a92dcb16",
+    "v4_identity_mapping_source_review": "ef249928489024b9fb40b50273631591ac4b545a3f1b97dca560c4d5882a84e0",
+    "v5_fixture_portability_source_review": "38b246301470f9bca23f31c5a984e6eec5dd2ccfb0b85d21bd55515252ea72c5"
+  },
+  "exclusions": [
+    "workflow",
+    "derived bounded selection",
+    "proof artifacts",
+    "generated state/scope/overlay",
+    "mutable coordinator checkpoint",
+    "future runtime outputs"
+  ],
+  "independent_acceptance": false,
+  "predecessor_source_anchor_sha256": "ca8e2256dfa43ffb1b3c8e45f2826515f446c6fd32853fa75311d9ce2ae0d623"
+}

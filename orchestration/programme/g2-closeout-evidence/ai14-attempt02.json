@@ -1,0 +1,256 @@
+{
+  "schema": "emr4.authenticated_cohort_support_projection.v1",
+  "cohort_id": "ai14_attempt02",
+  "collection": [
+    "tests/test_access_ai_service.py::test_invocation_denies_before_provider_call_when_role_not_allowed",
+    "tests/test_access_ai_service.py::test_blocked_budgeted_invocation_records_budget_status_without_provider_call",
+    "tests/test_access_ai_service.py::test_successful_invocation_calls_provider_and_records_allowed_event",
+    "tests/test_access_ai_service.py::test_dry_run_records_allowed_event_without_provider_call",
+    "tests/test_access_ai_service.py::test_provider_failure_records_failure_event_without_raw_payload",
+    "tests/test_access_ai_service.py::test_audit_metadata_rejection_prevents_provider_call",
+    "tests/test_access_ai_service.py::TestBlockedEntitlementVariations::test_blocked_entitlement_method_not_allowed",
+    "tests/test_access_ai_service.py::TestBlockedEntitlementVariations::test_blocked_entitlement_environment_not_allowed",
+    "tests/test_access_ai_service.py::TestBlockedEntitlementVariations::test_blocked_entitlement_actor_disabled",
+    "tests/test_access_ai_service.py::TestBlockedEntitlementVariations::test_blocked_entitlement_has_cost_and_risk_tier_metadata",
+    "tests/test_access_ai_service.py::test_estimate_cost_never_calls_provider_when_blocked_by_entitlement",
+    "tests/test_access_ai_service.py::test_provider_failure_audit_events_have_no_phi_keys_in_metadata",
+    "tests/test_access_ai_service.py::test_budget_threshold_appears_for_capped_capability",
+    "tests/test_access_ai_service.py::test_blocked_entitlement_metadata_rejects_phi_keys"
+  ],
+  "phase_rows": [
+    {
+      "nodeid": "tests/test_access_ai_service.py::test_invocation_denies_before_provider_call_when_role_not_allowed",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_access_ai_service.py::test_invocation_denies_before_provider_call_when_role_not_allowed",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_access_ai_service.py::test_invocation_denies_before_provider_call_when_role_not_allowed",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_access_ai_service.py::test_blocked_budgeted_invocation_records_budget_status_without_provider_call",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_access_ai_service.py::test_blocked_budgeted_invocation_records_budget_status_without_provider_call",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_access_ai_service.py::test_blocked_budgeted_invocation_records_budget_status_without_provider_call",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_access_ai_service.py::test_successful_invocation_calls_provider_and_records_allowed_event",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_access_ai_service.py::test_successful_invocation_calls_provider_and_records_allowed_event",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_access_ai_service.py::test_successful_invocation_calls_provider_and_records_allowed_event",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_access_ai_service.py::test_dry_run_records_allowed_event_without_provider_call",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_access_ai_service.py::test_dry_run_records_allowed_event_without_provider_call",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_access_ai_service.py::test_dry_run_records_allowed_event_without_provider_call",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_access_ai_service.py::test_provider_failure_records_failure_event_without_raw_payload",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_access_ai_service.py::test_provider_failure_records_failure_event_without_raw_payload",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_access_ai_service.py::test_provider_failure_records_failure_event_without_raw_payload",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_access_ai_service.py::test_audit_metadata_rejection_prevents_provider_call",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_access_ai_service.py::test_audit_metadata_rejection_prevents_provider_call",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_access_ai_service.py::test_audit_metadata_rejection_prevents_provider_call",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_access_ai_service.py::TestBlockedEntitlementVariations::test_blocked_entitlement_method_not_allowed",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_access_ai_service.py::TestBlockedEntitlementVariations::test_blocked_entitlement_method_not_allowed",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_access_ai_service.py::TestBlockedEntitlementVariations::test_blocked_entitlement_method_not_allowed",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_access_ai_service.py::TestBlockedEntitlementVariations::test_blocked_entitlement_environment_not_allowed",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_access_ai_service.py::TestBlockedEntitlementVariations::test_blocked_entitlement_environment_not_allowed",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_access_ai_service.py::TestBlockedEntitlementVariations::test_blocked_entitlement_environment_not_allowed",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_access_ai_service.py::TestBlockedEntitlementVariations::test_blocked_entitlement_actor_disabled",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_access_ai_service.py::TestBlockedEntitlementVariations::test_blocked_entitlement_actor_disabled",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_access_ai_service.py::TestBlockedEntitlementVariations::test_blocked_entitlement_actor_disabled",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_access_ai_service.py::TestBlockedEntitlementVariations::test_blocked_entitlement_has_cost_and_risk_tier_metadata",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_access_ai_service.py::TestBlockedEntitlementVariations::test_blocked_entitlement_has_cost_and_risk_tier_metadata",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_access_ai_service.py::TestBlockedEntitlementVariations::test_blocked_entitlement_has_cost_and_risk_tier_metadata",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_access_ai_service.py::test_estimate_cost_never_calls_provider_when_blocked_by_entitlement",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_access_ai_service.py::test_estimate_cost_never_calls_provider_when_blocked_by_entitlement",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_access_ai_service.py::test_estimate_cost_never_calls_provider_when_blocked_by_entitlement",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_access_ai_service.py::test_provider_failure_audit_events_have_no_phi_keys_in_metadata",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_access_ai_service.py::test_provider_failure_audit_events_have_no_phi_keys_in_metadata",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_access_ai_service.py::test_provider_failure_audit_events_have_no_phi_keys_in_metadata",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_access_ai_service.py::test_budget_threshold_appears_for_capped_capability",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_access_ai_service.py::test_budget_threshold_appears_for_capped_capability",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_access_ai_service.py::test_budget_threshold_appears_for_capped_capability",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_access_ai_service.py::test_blocked_entitlement_metadata_rejects_phi_keys",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_access_ai_service.py::test_blocked_entitlement_metadata_rejects_phi_keys",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_access_ai_service.py::test_blocked_entitlement_metadata_rejects_phi_keys",
+      "phase": "teardown",
+      "outcome": "passed"
+    }
+  ],
+  "source_primary": {
+    "path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/ordinary-applicability/access-ai-service-execution-preparation-v1/offline-candidate-v4/result.json",
+    "bytes": 17624,
+    "sha256": "34e6c9b01a8cc4b7cd19518cb6cb3e5b9caa5e49c1f7170d72cb5dca69770c46",
+    "collection_path": [
+      "phases",
+      0,
+      "payload",
+      "cases"
+    ],
+    "reports_path": [
+      "phases",
+      0,
+      "payload",
+      "reports"
+    ]
+  },
+  "result_review": {
+    "path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/reviews/ai14-offline-attempt02-result-review-v1.json",
+    "bytes": 22726,
+    "sha256": "34fd9cfa146bbfcbdc1aecb8ff05f78e16390b5b156410e2da10bc324ea2eb45"
+  },
+  "qualification": "Fourteen offline synthetic AI entitlement/audit/provider-fake scenarios and42 passed pytest phases. AI01 guarded collection NONPASS remains unchanged. No database/live provider/current global CI evidence.",
+  "population_membership_accepted": false
+}

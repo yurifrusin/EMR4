@@ -1,0 +1,490 @@
+{
+  "schema": "emr4.g2.residual_control_continuation_independent_result_review.v2",
+  "verdict": "PASS_RESIDUAL_CONTROL_CONTINUATION_SCOPED_RESULT",
+  "reviewer_agent": "/root/g2_admission_review",
+  "independent": true,
+  "implementation_authorship": false,
+  "selected_model": "gpt-6.1-sol",
+  "selected_reasoning": "high",
+  "provider_resolved_settings_observable": false,
+  "descendants": 0,
+  "blocking_findings": [],
+  "accepted_scoped_attempt": true,
+  "result_sha256": "640b65ab71bfb2ef3e7da88b9a6fcb065b8f2df9fd158e3e0b1795f313f90586",
+  "result_bytes": 20577,
+  "binding_sha256": "6781941a2c7a976c8482615bd0b382b7589481be10ff4eb569b7f524595cd3c5",
+  "execution_review_sha256": "305c78b1b9374735305be0610eb97b51910545af5cb7203b0943b2f7452d4e58",
+  "source_manifest_sha256": "c19110467ccdfbc6c855c71b6ab43a22a16b2bc702f600e28181560ec00efc99",
+  "source_review_sha256": "101d4ceb6977f4f97f96d8217b3e14090c583ea3f76d9c9e2bee34c024e0756f",
+  "owner_budget_extension_sha256": "30ef76efbe5839e7b1fdad9fec3ff4e975eedac03e07e51b81933b6aa367c572",
+  "owner_budget_delegation_sha256": "0e9028e102ca5e3a2a7594fde44271c389bf91e374d38f72d98cd2372484be85",
+  "prior_result_sha256": "0e7e694ddb530e697c268a39ced2753f81bbd2a344ac23658a0fd1a68c13d183",
+  "started_sha256": "d5e510ee5e4e2fab7ab8347c4b217ff436825613175a152869cfec0390aecc64",
+  "started": {
+    "binding_sha256": "6781941a2c7a976c8482615bd0b382b7589481be10ff4eb569b7f524595cd3c5",
+    "review_sha256": "305c78b1b9374735305be0610eb97b51910545af5cb7203b0943b2f7452d4e58",
+    "logical_batch": "g2-residual5-current-controls-20261009-v1",
+    "attempt": 2
+  },
+  "scope": {
+    "operation_id": "g2-residual5-current-controls-20261009-v1",
+    "attempt_identity": "attempt-02-after-consumed-collection",
+    "actual_native_attempt": 2,
+    "collection_attempts_this_continuation": 1,
+    "test_attempts_this_continuation": 1,
+    "collection_attempts_total_consumed": 2,
+    "test_attempts_total_consumed": 1,
+    "additional_test_allowance_granted": 0,
+    "original_unused_test_allowance_now_consumed": 1,
+    "automatic_retry": false,
+    "selected_cases": [
+      "tests/test_repository_maintenance.py::test_receipt_writer_emits_canonical_utf8_lf_bytes",
+      "tests/test_repository_maintenance.py::test_phase0_migration_has_empty_bootstrap_and_symmetric_cleanup",
+      "tests/test_python_source_state.py::test_complete_ci_refuses_bounded_selection_before_source_reads_or_commands[ci-correctness]",
+      "tests/test_python_source_state.py::test_complete_ci_refuses_bounded_selection_before_source_reads_or_commands[ci-lint]",
+      "tests/test_python_source_state.py::test_complete_ci_refuses_bounded_selection_before_source_reads_or_commands[ci-bandit]",
+      "tests/test_python_source_state.py::test_complete_ci_refuses_bounded_selection_before_source_reads_or_commands[ci-security]",
+      "tests/test_python_source_state.py::test_bounded_ci_remains_available_with_authenticated_selection[ci-correctness]",
+      "tests/test_python_source_state.py::test_bounded_ci_remains_available_with_authenticated_selection[ci-lint]",
+      "tests/test_python_source_state.py::test_bounded_ci_remains_available_with_authenticated_selection[ci-bandit]",
+      "tests/test_python_source_state.py::test_bounded_ci_remains_available_with_authenticated_selection[ci-security]",
+      "tests/test_python_source_state.py::test_complete_ci_does_not_accept_claimed_or_unauthenticated_completeness[claim_complete-bounded_completeness_required]",
+      "tests/test_python_source_state.py::test_complete_ci_does_not_accept_claimed_or_unauthenticated_completeness[clear_pending-bounded_completeness_required]",
+      "tests/test_python_source_state.py::test_complete_ci_does_not_accept_claimed_or_unauthenticated_completeness[bad_digest-selected_digest_mismatch]"
+    ],
+    "selected_definitions": 5,
+    "passed_cases": 13,
+    "setup_call_teardown_reports": 39
+  },
+  "actual_outcome": {
+    "passed": true,
+    "elapsed_seconds": 4.220750799999223,
+    "failures": [],
+    "collect_pytest_exit": 0,
+    "test_pytest_exit": 0,
+    "reports": [
+      {
+        "nodeid": "tests/test_repository_maintenance.py::test_receipt_writer_emits_canonical_utf8_lf_bytes",
+        "outcome": "passed",
+        "phase": "setup",
+        "wasxfail": false
+      },
+      {
+        "nodeid": "tests/test_repository_maintenance.py::test_receipt_writer_emits_canonical_utf8_lf_bytes",
+        "outcome": "passed",
+        "phase": "call",
+        "wasxfail": false
+      },
+      {
+        "nodeid": "tests/test_repository_maintenance.py::test_receipt_writer_emits_canonical_utf8_lf_bytes",
+        "outcome": "passed",
+        "phase": "teardown",
+        "wasxfail": false
+      },
+      {
+        "nodeid": "tests/test_repository_maintenance.py::test_phase0_migration_has_empty_bootstrap_and_symmetric_cleanup",
+        "outcome": "passed",
+        "phase": "setup",
+        "wasxfail": false
+      },
+      {
+        "nodeid": "tests/test_repository_maintenance.py::test_phase0_migration_has_empty_bootstrap_and_symmetric_cleanup",
+        "outcome": "passed",
+        "phase": "call",
+        "wasxfail": false
+      },
+      {
+        "nodeid": "tests/test_repository_maintenance.py::test_phase0_migration_has_empty_bootstrap_and_symmetric_cleanup",
+        "outcome": "passed",
+        "phase": "teardown",
+        "wasxfail": false
+      },
+      {
+        "nodeid": "tests/test_python_source_state.py::test_complete_ci_refuses_bounded_selection_before_source_reads_or_commands[ci-correctness]",
+        "outcome": "passed",
+        "phase": "setup",
+        "wasxfail": false
+      },
+      {
+        "nodeid": "tests/test_python_source_state.py::test_complete_ci_refuses_bounded_selection_before_source_reads_or_commands[ci-correctness]",
+        "outcome": "passed",
+        "phase": "call",
+        "wasxfail": false
+      },
+      {
+        "nodeid": "tests/test_python_source_state.py::test_complete_ci_refuses_bounded_selection_before_source_reads_or_commands[ci-correctness]",
+        "outcome": "passed",
+        "phase": "teardown",
+        "wasxfail": false
+      },
+      {
+        "nodeid": "tests/test_python_source_state.py::test_complete_ci_refuses_bounded_selection_before_source_reads_or_commands[ci-lint]",
+        "outcome": "passed",
+        "phase": "setup",
+        "wasxfail": false
+      },
+      {
+        "nodeid": "tests/test_python_source_state.py::test_complete_ci_refuses_bounded_selection_before_source_reads_or_commands[ci-lint]",
+        "outcome": "passed",
+        "phase": "call",
+        "wasxfail": false
+      },
+      {
+        "nodeid": "tests/test_python_source_state.py::test_complete_ci_refuses_bounded_selection_before_source_reads_or_commands[ci-lint]",
+        "outcome": "passed",
+        "phase": "teardown",
+        "wasxfail": false
+      },
+      {
+        "nodeid": "tests/test_python_source_state.py::test_complete_ci_refuses_bounded_selection_before_source_reads_or_commands[ci-bandit]",
+        "outcome": "passed",
+        "phase": "setup",
+        "wasxfail": false
+      },
+      {
+        "nodeid": "tests/test_python_source_state.py::test_complete_ci_refuses_bounded_selection_before_source_reads_or_commands[ci-bandit]",
+        "outcome": "passed",
+        "phase": "call",
+        "wasxfail": false
+      },
+      {
+        "nodeid": "tests/test_python_source_state.py::test_complete_ci_refuses_bounded_selection_before_source_reads_or_commands[ci-bandit]",
+        "outcome": "passed",
+        "phase": "teardown",
+        "wasxfail": false
+      },
+      {
+        "nodeid": "tests/test_python_source_state.py::test_complete_ci_refuses_bounded_selection_before_source_reads_or_commands[ci-security]",
+        "outcome": "passed",
+        "phase": "setup",
+        "wasxfail": false
+      },
+      {
+        "nodeid": "tests/test_python_source_state.py::test_complete_ci_refuses_bounded_selection_before_source_reads_or_commands[ci-security]",
+        "outcome": "passed",
+        "phase": "call",
+        "wasxfail": false
+      },
+      {
+        "nodeid": "tests/test_python_source_state.py::test_complete_ci_refuses_bounded_selection_before_source_reads_or_commands[ci-security]",
+        "outcome": "passed",
+        "phase": "teardown",
+        "wasxfail": false
+      },
+      {
+        "nodeid": "tests/test_python_source_state.py::test_bounded_ci_remains_available_with_authenticated_selection[ci-correctness]",
+        "outcome": "passed",
+        "phase": "setup",
+        "wasxfail": false
+      },
+      {
+        "nodeid": "tests/test_python_source_state.py::test_bounded_ci_remains_available_with_authenticated_selection[ci-correctness]",
+        "outcome": "passed",
+        "phase": "call",
+        "wasxfail": false
+      },
+      {
+        "nodeid": "tests/test_python_source_state.py::test_bounded_ci_remains_available_with_authenticated_selection[ci-correctness]",
+        "outcome": "passed",
+        "phase": "teardown",
+        "wasxfail": false
+      },
+      {
+        "nodeid": "tests/test_python_source_state.py::test_bounded_ci_remains_available_with_authenticated_selection[ci-lint]",
+        "outcome": "passed",
+        "phase": "setup",
+        "wasxfail": false
+      },
+      {
+        "nodeid": "tests/test_python_source_state.py::test_bounded_ci_remains_available_with_authenticated_selection[ci-lint]",
+        "outcome": "passed",
+        "phase": "call",
+        "wasxfail": false
+      },
+      {
+        "nodeid": "tests/test_python_source_state.py::test_bounded_ci_remains_available_with_authenticated_selection[ci-lint]",
+        "outcome": "passed",
+        "phase": "teardown",
+        "wasxfail": false
+      },
+      {
+        "nodeid": "tests/test_python_source_state.py::test_bounded_ci_remains_available_with_authenticated_selection[ci-bandit]",
+        "outcome": "passed",
+        "phase": "setup",
+        "wasxfail": false
+      },
+      {
+        "nodeid": "tests/test_python_source_state.py::test_bounded_ci_remains_available_with_authenticated_selection[ci-bandit]",
+        "outcome": "passed",
+        "phase": "call",
+        "wasxfail": false
+      },
+      {
+        "nodeid": "tests/test_python_source_state.py::test_bounded_ci_remains_available_with_authenticated_selection[ci-bandit]",
+        "outcome": "passed",
+        "phase": "teardown",
+        "wasxfail": false
+      },
+      {
+        "nodeid": "tests/test_python_source_state.py::test_bounded_ci_remains_available_with_authenticated_selection[ci-security]",
+        "outcome": "passed",
+        "phase": "setup",
+        "wasxfail": false
+      },
+      {
+        "nodeid": "tests/test_python_source_state.py::test_bounded_ci_remains_available_with_authenticated_selection[ci-security]",
+        "outcome": "passed",
+        "phase": "call",
+        "wasxfail": false
+      },
+      {
+        "nodeid": "tests/test_python_source_state.py::test_bounded_ci_remains_available_with_authenticated_selection[ci-security]",
+        "outcome": "passed",
+        "phase": "teardown",
+        "wasxfail": false
+      },
+      {
+        "nodeid": "tests/test_python_source_state.py::test_complete_ci_does_not_accept_claimed_or_unauthenticated_completeness[claim_complete-bounded_completeness_required]",
+        "outcome": "passed",
+        "phase": "setup",
+        "wasxfail": false
+      },
+      {
+        "nodeid": "tests/test_python_source_state.py::test_complete_ci_does_not_accept_claimed_or_unauthenticated_completeness[claim_complete-bounded_completeness_required]",
+        "outcome": "passed",
+        "phase": "call",
+        "wasxfail": false
+      },
+      {
+        "nodeid": "tests/test_python_source_state.py::test_complete_ci_does_not_accept_claimed_or_unauthenticated_completeness[claim_complete-bounded_completeness_required]",
+        "outcome": "passed",
+        "phase": "teardown",
+        "wasxfail": false
+      },
+      {
+        "nodeid": "tests/test_python_source_state.py::test_complete_ci_does_not_accept_claimed_or_unauthenticated_completeness[clear_pending-bounded_completeness_required]",
+        "outcome": "passed",
+        "phase": "setup",
+        "wasxfail": false
+      },
+      {
+        "nodeid": "tests/test_python_source_state.py::test_complete_ci_does_not_accept_claimed_or_unauthenticated_completeness[clear_pending-bounded_completeness_required]",
+        "outcome": "passed",
+        "phase": "call",
+        "wasxfail": false
+      },
+      {
+        "nodeid": "tests/test_python_source_state.py::test_complete_ci_does_not_accept_claimed_or_unauthenticated_completeness[clear_pending-bounded_completeness_required]",
+        "outcome": "passed",
+        "phase": "teardown",
+        "wasxfail": false
+      },
+      {
+        "nodeid": "tests/test_python_source_state.py::test_complete_ci_does_not_accept_claimed_or_unauthenticated_completeness[bad_digest-selected_digest_mismatch]",
+        "outcome": "passed",
+        "phase": "setup",
+        "wasxfail": false
+      },
+      {
+        "nodeid": "tests/test_python_source_state.py::test_complete_ci_does_not_accept_claimed_or_unauthenticated_completeness[bad_digest-selected_digest_mismatch]",
+        "outcome": "passed",
+        "phase": "call",
+        "wasxfail": false
+      },
+      {
+        "nodeid": "tests/test_python_source_state.py::test_complete_ci_does_not_accept_claimed_or_unauthenticated_completeness[bad_digest-selected_digest_mismatch]",
+        "outcome": "passed",
+        "phase": "teardown",
+        "wasxfail": false
+      }
+    ],
+    "guard_violations": [],
+    "optional_probe_blocked": [
+      "org"
+    ],
+    "effective_pytest_context": {
+      "active_plugin_names": [
+        "139691662918288",
+        "139691664939664",
+        "assertion",
+        "capture",
+        "capturemanager",
+        "debugging",
+        "doctest",
+        "faulthandler",
+        "fixtures",
+        "helpconfig",
+        "junitxml",
+        "legacypath",
+        "logging",
+        "main",
+        "mark",
+        "monkeypatch",
+        "pastebin",
+        "pytestconfig",
+        "python",
+        "recwarn",
+        "reports",
+        "runner",
+        "session",
+        "setuponly",
+        "setupplan",
+        "skipping",
+        "subtests",
+        "terminal",
+        "threadexception",
+        "tmpdir",
+        "unittest",
+        "unraisableexception",
+        "warnings"
+      ],
+      "addopts": [],
+      "config_path": "/suite/pyproject.toml",
+      "import_mode": "prepend",
+      "plugin_autoload_disabled": true,
+      "root": "/suite",
+      "testpaths": [
+        "tests"
+      ]
+    },
+    "python": "3.11.2 (main, May 12 2026, 05:17:27) [GCC 12.2.0]",
+    "versions": {
+      "authlib": "1.7.2",
+      "cffi": "2.1.1",
+      "cryptography": "50.0.1",
+      "iniconfig": "2.3.0",
+      "joserfc": "1.7.4",
+      "packaging": "26.3",
+      "pluggy": "1.6.0",
+      "pycparser": "3.0",
+      "pygments": "2.21.0",
+      "pyjwt": "2.13.0",
+      "pyopenssl": "26.4.0",
+      "pytest": "9.1.1",
+      "typing-extensions": "4.16.0"
+    },
+    "native_selected_source_authenticated_compiled": true,
+    "selected_leakage_passed": true,
+    "kernel_network_probe": "EPERM",
+    "application_or_database_executed": false
+  },
+  "source_post_readback": {
+    "root": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/ordinary-applicability/residual-current-controls-execution-preparation-v2",
+    "utc": "2026-10-09T01:52:22.636956+00:00",
+    "post_pin_failures": [],
+    "suite_rows": 13,
+    "capture_reconciliation": [
+      {
+        "phase": "collect",
+        "stdout_bytes": 4659,
+        "stdout_sha256": "b2542631eab79ea6bdd9bd3baec1f97b2ded687af49230b8645d73814cc9fd95",
+        "stdout_hash_match": true,
+        "stderr_bytes": 0,
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_hash_match": true,
+        "unique_marker": true,
+        "payload_equal_durable_result": true,
+        "exact_bound_cases": true,
+        "capture_below_2MiB": true,
+        "reports": 0
+      },
+      {
+        "phase": "test",
+        "stdout_bytes": 10956,
+        "stdout_sha256": "22130b6406804ad24993b5dd63322db30522701437e104d9122ca95bdc3907e5",
+        "stdout_hash_match": true,
+        "stderr_bytes": 0,
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_hash_match": true,
+        "unique_marker": true,
+        "payload_equal_durable_result": true,
+        "exact_bound_cases": true,
+        "capture_below_2MiB": true,
+        "reports": 39
+      }
+    ],
+    "closure_exact": true,
+    "reparse": [],
+    "owned_container_absence": [
+      {
+        "name": "emr4-residual5-20261009-attempt02-collect",
+        "returncode": 1,
+        "stdout": "[]\n",
+        "stderr": "Error response from daemon: No such container: emr4-residual5-20261009-attempt02-collect\n"
+      },
+      {
+        "name": "emr4-residual5-20261009-attempt02-test",
+        "returncode": 1,
+        "stdout": "[]\n",
+        "stderr": "Error response from daemon: No such container: emr4-residual5-20261009-attempt02-test\n"
+      }
+    ]
+  },
+  "cleanup": {
+    "phases": [
+      {
+        "phase": "collect",
+        "cleanup": {
+          "name": "emr4-residual5-20261009-attempt02-collect",
+          "container_absent": true,
+          "exit_code": 0,
+          "volume_cleanup": "not_attempted",
+          "preserved_volume_names": []
+        },
+        "client_closed": true,
+        "readers_closed": true,
+        "output_complete": true
+      },
+      {
+        "phase": "test",
+        "cleanup": {
+          "name": "emr4-residual5-20261009-attempt02-test",
+          "container_absent": true,
+          "exit_code": 0,
+          "volume_cleanup": "not_attempted",
+          "preserved_volume_names": []
+        },
+        "client_closed": true,
+        "readers_closed": true,
+        "output_complete": true
+      }
+    ],
+    "last_started_phase": {
+      "phase": "test",
+      "client_pid": 27992,
+      "client_closed": true,
+      "readers_closed": true,
+      "reader_errors": [],
+      "output_overflow": false,
+      "output_complete": true,
+      "stdout_sha256": "22130b6406804ad24993b5dd63322db30522701437e104d9122ca95bdc3907e5",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "final": [
+      {
+        "name": "emr4-residual5-20261009-attempt02-collect",
+        "container_absent": true,
+        "volume_cleanup": "not_attempted"
+      },
+      {
+        "name": "emr4-residual5-20261009-attempt02-test",
+        "container_absent": true,
+        "volume_cleanup": "not_attempted"
+      }
+    ]
+  },
+  "exercised_properties": [
+    "Canonical UTF8/LF receipt writer byte oracle uses exact actual writer definition isolated from legacy orchestrator import; source assertions and byte equality retained.",
+    "Current phase0 baseline migration AST structural bootstrap/symmetric cleanup invariants execute as source checks. No database migration ran in this offline batch; previously accepted focused migration behavior is separate evidence, not duplicated case count.",
+    "Complete CI correctly rejects bounded selection before source reads/commands for four CI modes; bounded authenticated selected CI remains available for those four modes.",
+    "Claimed completeness and cleared pending state are rejected with bounded_completeness_required; selected bad digest is rejected with selected_digest_mismatch. Observed parameter IDs including targeted reason suffixes are retained and strict equality passes."
+  ],
+  "history_preservation": "Prior one collection failed the exact-ID metadata guard and zero tests ran. Corrected three suffixes only; original assertions/all13capsule pins unchanged. Failed result0e7 remains NONPASS. This is one delegated extra collection and the original unused test executed, not a replacement of prior receipt or new test grant.",
+  "limits": [
+    "Five selected definitions produce13parameterized cases/39phases; phases and supporting compile/leakage checks are not additional scenarios or repaired original failures.",
+    "No globalCI/scannerBanditPASS/fullordinary/all97/G2/feature/DB/provider/publication acceptance. Static source checks and scoped writer execution are accurately distinguished from real application integration.",
+    "Both complete durable stream markers/hash/readbacks match recordedpayloads, stderr0/below2MiB/nooverflow, ownedcontainersabsent fresh, streamsclientsreadersclosed. Same-attempt13source/code/manifest/review/extension pins and closure unchanged.",
+    "Reviewer performed no candidate/test/collection/application/DB/Dockercreationorcleanup/Git/canonicalwrite; exact read-only evidence and owned-name queries only.",
+    "Finite extra collection allocation and original test allowance are consumed; no automatic retry or renewable grant."
+  ]
+}

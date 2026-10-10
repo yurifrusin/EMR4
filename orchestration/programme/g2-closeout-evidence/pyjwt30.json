@@ -1,0 +1,505 @@
+{
+  "schema": "emr4.ci_c_ordinary_cohort_support_source.v1",
+  "status": "SOURCE_ONLY_NONOPERATIVE",
+  "cohort_id": "pyjwt30",
+  "collection": [
+    "test_dependency_compatibility.py::test_hs256_rejection[wrong-key]",
+    "test_dependency_compatibility.py::test_hs256_rejection[tamper]",
+    "test_dependency_compatibility.py::test_hs256_rejection[expired]",
+    "test_dependency_compatibility.py::test_hs256_rejection[algorithm]",
+    "test_dependency_compatibility.py::test_authlib_rs256_rejection[wrong-key]",
+    "test_dependency_compatibility.py::test_authlib_rs256_rejection[tamper]",
+    "test_dependency_compatibility.py::test_authlib_rs256_rejection[expired]",
+    "test_dependency_compatibility.py::test_authlib_rs256_rejection[nonce]",
+    "test_dependency_compatibility.py::test_authlib_rs256_rejection[issuer]",
+    "test_dependency_compatibility.py::test_authlib_rs256_rejection[audience]",
+    "test_dependency_compatibility.py::test_authlib_rs256_rejection[algorithm]",
+    "test_dependency_compatibility.py::test_authlib_rs256_rejection[missing-nbf]",
+    "test_dependency_compatibility.py::test_pyjwt2151_signature_padding",
+    "test_dependency_compatibility.py::test_pyjwt2151_signed_header_payload_padding",
+    "test_dependency_compatibility.py::test_pyjwt2151_compact_segment_rejection[signature-junk]",
+    "test_dependency_compatibility.py::test_pyjwt2151_compact_segment_rejection[header-junk]",
+    "test_dependency_compatibility.py::test_pyjwt2151_compact_segment_rejection[payload-junk]",
+    "test_dependency_compatibility.py::test_pyjwt2151_compact_segment_rejection[interior-padding]",
+    "test_dependency_compatibility.py::test_pyjwt2151_compact_segment_rejection[excess-padding]",
+    "test_dependency_compatibility.py::test_pyjwt2151_compact_segment_rejection[noncanonical-padbits]",
+    "test_dependency_compatibility.py::test_pyjwt2151_numeric_date_rejection[exp-list]",
+    "test_dependency_compatibility.py::test_pyjwt2151_numeric_date_rejection[exp-object]",
+    "test_dependency_compatibility.py::test_pyjwt2151_numeric_date_rejection[exp-null]",
+    "test_dependency_compatibility.py::test_pyjwt2151_numeric_date_rejection[nbf-list]",
+    "test_dependency_compatibility.py::test_pyjwt2151_numeric_date_rejection[nbf-object]",
+    "test_dependency_compatibility.py::test_pyjwt2151_numeric_date_rejection[nbf-null]",
+    "test_dependency_compatibility.py::test_pyjwt2151_numeric_date_rejection[iat-list]",
+    "test_dependency_compatibility.py::test_pyjwt2151_numeric_date_rejection[iat-object]",
+    "test_dependency_compatibility.py::test_pyjwt2151_numeric_date_rejection[iat-null]",
+    "test_dependency_compatibility.py::test_pyjwt2151_nested_payload_error"
+  ],
+  "phase_rows": [
+    {
+      "nodeid": "test_dependency_compatibility.py::test_hs256_rejection[wrong-key]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_hs256_rejection[wrong-key]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_hs256_rejection[wrong-key]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_hs256_rejection[tamper]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_hs256_rejection[tamper]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_hs256_rejection[tamper]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_hs256_rejection[expired]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_hs256_rejection[expired]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_hs256_rejection[expired]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_hs256_rejection[algorithm]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_hs256_rejection[algorithm]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_hs256_rejection[algorithm]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_authlib_rs256_rejection[wrong-key]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_authlib_rs256_rejection[wrong-key]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_authlib_rs256_rejection[wrong-key]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_authlib_rs256_rejection[tamper]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_authlib_rs256_rejection[tamper]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_authlib_rs256_rejection[tamper]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_authlib_rs256_rejection[expired]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_authlib_rs256_rejection[expired]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_authlib_rs256_rejection[expired]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_authlib_rs256_rejection[nonce]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_authlib_rs256_rejection[nonce]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_authlib_rs256_rejection[nonce]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_authlib_rs256_rejection[issuer]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_authlib_rs256_rejection[issuer]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_authlib_rs256_rejection[issuer]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_authlib_rs256_rejection[audience]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_authlib_rs256_rejection[audience]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_authlib_rs256_rejection[audience]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_authlib_rs256_rejection[algorithm]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_authlib_rs256_rejection[algorithm]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_authlib_rs256_rejection[algorithm]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_authlib_rs256_rejection[missing-nbf]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_authlib_rs256_rejection[missing-nbf]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_authlib_rs256_rejection[missing-nbf]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_pyjwt2151_signature_padding",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_pyjwt2151_signature_padding",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_pyjwt2151_signature_padding",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_pyjwt2151_signed_header_payload_padding",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_pyjwt2151_signed_header_payload_padding",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_pyjwt2151_signed_header_payload_padding",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_pyjwt2151_compact_segment_rejection[signature-junk]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_pyjwt2151_compact_segment_rejection[signature-junk]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_pyjwt2151_compact_segment_rejection[signature-junk]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_pyjwt2151_compact_segment_rejection[header-junk]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_pyjwt2151_compact_segment_rejection[header-junk]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_pyjwt2151_compact_segment_rejection[header-junk]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_pyjwt2151_compact_segment_rejection[payload-junk]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_pyjwt2151_compact_segment_rejection[payload-junk]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_pyjwt2151_compact_segment_rejection[payload-junk]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_pyjwt2151_compact_segment_rejection[interior-padding]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_pyjwt2151_compact_segment_rejection[interior-padding]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_pyjwt2151_compact_segment_rejection[interior-padding]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_pyjwt2151_compact_segment_rejection[excess-padding]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_pyjwt2151_compact_segment_rejection[excess-padding]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_pyjwt2151_compact_segment_rejection[excess-padding]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_pyjwt2151_compact_segment_rejection[noncanonical-padbits]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_pyjwt2151_compact_segment_rejection[noncanonical-padbits]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_pyjwt2151_compact_segment_rejection[noncanonical-padbits]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_pyjwt2151_numeric_date_rejection[exp-list]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_pyjwt2151_numeric_date_rejection[exp-list]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_pyjwt2151_numeric_date_rejection[exp-list]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_pyjwt2151_numeric_date_rejection[exp-object]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_pyjwt2151_numeric_date_rejection[exp-object]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_pyjwt2151_numeric_date_rejection[exp-object]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_pyjwt2151_numeric_date_rejection[exp-null]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_pyjwt2151_numeric_date_rejection[exp-null]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_pyjwt2151_numeric_date_rejection[exp-null]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_pyjwt2151_numeric_date_rejection[nbf-list]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_pyjwt2151_numeric_date_rejection[nbf-list]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_pyjwt2151_numeric_date_rejection[nbf-list]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_pyjwt2151_numeric_date_rejection[nbf-object]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_pyjwt2151_numeric_date_rejection[nbf-object]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_pyjwt2151_numeric_date_rejection[nbf-object]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_pyjwt2151_numeric_date_rejection[nbf-null]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_pyjwt2151_numeric_date_rejection[nbf-null]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_pyjwt2151_numeric_date_rejection[nbf-null]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_pyjwt2151_numeric_date_rejection[iat-list]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_pyjwt2151_numeric_date_rejection[iat-list]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_pyjwt2151_numeric_date_rejection[iat-list]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_pyjwt2151_numeric_date_rejection[iat-object]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_pyjwt2151_numeric_date_rejection[iat-object]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_pyjwt2151_numeric_date_rejection[iat-object]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_pyjwt2151_numeric_date_rejection[iat-null]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_pyjwt2151_numeric_date_rejection[iat-null]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_pyjwt2151_numeric_date_rejection[iat-null]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_pyjwt2151_nested_payload_error",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_pyjwt2151_nested_payload_error",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_dependency_compatibility.py::test_pyjwt2151_nested_payload_error",
+      "phase": "teardown",
+      "outcome": "passed"
+    }
+  ],
+  "provenance": {
+    "source_path": "C:/Users/there/EMR4/.codex/successor-preparation/pyjwt2151-capsule-v2/result.json",
+    "source_sha256": "e7b632bbae596c3971aa49b7581dfee6d07e6156be123054679d2630009b2016",
+    "independent_review_path": "C:/Users/there/EMR4/.codex/successor-preparation/pyjwt2151-capsule-v2/independent-result-review-v1.json",
+    "independent_review_sha256": "36a00c074df6ec391e4b82fe6e1d964b5433cf0f8d690214e7bb7ff73fb30e7c",
+    "raw_outer_result_path": "C:/Users/there/EMR4/.codex/successor-preparation/pyjwt2151-capsule-v2/result.json",
+    "raw_outer_result_sha256": "e7b632bbae596c3971aa49b7581dfee6d07e6156be123054679d2630009b2016",
+    "raw_batch_passed": true,
+    "raw_batch_nonpass_preserved": false,
+    "selected_from_larger_raw_result": false,
+    "keyed_report_source_normalized": false,
+    "qualified_subset_only": false,
+    "source_observation_sha256": "538c2f3e601cfc4e95fab5ecb2a5cd9efcbeb8e69c3e9f6801f7504a4bced667"
+  },
+  "accepted_population_test_ids": null,
+  "complete_v3_check_verdict": null
+}

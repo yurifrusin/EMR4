@@ -1,0 +1,476 @@
+{
+  "schema": "emr4.ci_c_ordinary_cohort_support_source.v1",
+  "status": "SOURCE_ONLY_NONOPERATIVE",
+  "cohort_id": "green_twentyeight",
+  "collection": [
+    "confirmation_current/test_delete_contract_properties.py::test_occupied_changed_body_preserves_conflict_priority[warning]",
+    "confirmation_current/test_delete_contract_properties.py::test_occupied_changed_body_preserves_conflict_priority[nested]",
+    "confirmation_current/test_delete_contract_properties.py::test_changed_waiting_area_preserves_stale_freshness_reason[clear-true]",
+    "confirmation_current/test_delete_contract_properties.py::test_changed_waiting_area_preserves_stale_freshness_reason[clear-false]",
+    "confirmation_current/test_delete_contract_properties.py::test_different_key_after_delete_preserves_stale_freshness_reason",
+    "confirmation_current/test_delete_contract_properties.py::test_real_v2_first_write_and_stored_byte_replay",
+    "confirmation_current/test_delete_contract_properties.py::test_v2_summary_only_body_change_conflicts_without_new_effect",
+    "confirmation_current/test_delete_contract_properties.py::test_supported_v2_occupied_state_is_not_reexecuted[in-progress]",
+    "confirmation_current/test_delete_contract_properties.py::test_supported_v2_occupied_state_is_not_reexecuted[stale-in-progress]",
+    "confirmation_current/test_delete_contract_properties.py::test_supported_v2_occupied_state_is_not_reexecuted[failed-transient]",
+    "confirmation_current/test_delete_contract_properties.py::test_genuine_default_v1_completion_is_replayed_without_relabelling",
+    "confirmation_current/test_delete_contract_properties.py::test_default_v1_caller_cannot_replay_v2_record",
+    "confirmation_current/test_delete_contract_properties.py::test_unknown_stored_body_version_fails_closed",
+    "confirmation_current/test_delete_contract_properties.py::test_generic_completed_record_is_not_a_private_receipt[legacy-v1]",
+    "confirmation_current/test_delete_contract_properties.py::test_generic_completed_record_is_not_a_private_receipt[body-v2]",
+    "confirmation_current/test_delete_contract_properties.py::test_corrupt_completed_private_receipt_is_not_replayed[legacy-v1]",
+    "confirmation_current/test_delete_contract_properties.py::test_corrupt_completed_private_receipt_is_not_replayed[body-v2]",
+    "confirmation_current/test_delete_contract_properties.py::test_v1_occupied_fallback_requires_original_authenticated_proof[evidence-signature]",
+    "confirmation_current/test_delete_contract_properties.py::test_v1_occupied_fallback_requires_original_authenticated_proof[version-signature]",
+    "confirmation_current/test_delete_contract_properties.py::test_v2_occupied_binding_mismatch_cannot_replay_or_execute[session]",
+    "confirmation_current/test_delete_contract_properties.py::test_v2_occupied_binding_mismatch_cannot_replay_or_execute[generation]",
+    "confirmation_current/test_delete_contract_properties.py::test_current_revoked_grant_blocks_completed_v2_replay",
+    "confirmation_current/test_delete_contract_properties.py::test_new_v2_invalid_admission_rolls_back_real_claim[warning]",
+    "confirmation_current/test_delete_contract_properties.py::test_new_v2_invalid_admission_rolls_back_real_claim[evidence]",
+    "confirmation_current/test_delete_contract_properties.py::test_new_v2_invalid_admission_rolls_back_real_claim[version]",
+    "confirmation_current/test_delete_contract_properties.py::test_new_v2_staged_write_or_receipt_failure_rolls_back_everything[private-shape]",
+    "confirmation_current/test_delete_contract_properties.py::test_new_v2_unconfirmed_valid_proposal_rolls_back_real_claim",
+    "confirmation_current/test_delete_contract_properties.py::test_new_v2_genuine_signed_none_reason_rolls_back_real_claim"
+  ],
+  "phase_rows": [
+    {
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_occupied_changed_body_preserves_conflict_priority[warning]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_occupied_changed_body_preserves_conflict_priority[warning]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_occupied_changed_body_preserves_conflict_priority[warning]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_occupied_changed_body_preserves_conflict_priority[nested]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_occupied_changed_body_preserves_conflict_priority[nested]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_occupied_changed_body_preserves_conflict_priority[nested]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_changed_waiting_area_preserves_stale_freshness_reason[clear-true]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_changed_waiting_area_preserves_stale_freshness_reason[clear-true]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_changed_waiting_area_preserves_stale_freshness_reason[clear-true]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_changed_waiting_area_preserves_stale_freshness_reason[clear-false]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_changed_waiting_area_preserves_stale_freshness_reason[clear-false]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_changed_waiting_area_preserves_stale_freshness_reason[clear-false]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_different_key_after_delete_preserves_stale_freshness_reason",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_different_key_after_delete_preserves_stale_freshness_reason",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_different_key_after_delete_preserves_stale_freshness_reason",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_real_v2_first_write_and_stored_byte_replay",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_real_v2_first_write_and_stored_byte_replay",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_real_v2_first_write_and_stored_byte_replay",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_v2_summary_only_body_change_conflicts_without_new_effect",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_v2_summary_only_body_change_conflicts_without_new_effect",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_v2_summary_only_body_change_conflicts_without_new_effect",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_supported_v2_occupied_state_is_not_reexecuted[in-progress]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_supported_v2_occupied_state_is_not_reexecuted[in-progress]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_supported_v2_occupied_state_is_not_reexecuted[in-progress]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_supported_v2_occupied_state_is_not_reexecuted[stale-in-progress]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_supported_v2_occupied_state_is_not_reexecuted[stale-in-progress]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_supported_v2_occupied_state_is_not_reexecuted[stale-in-progress]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_supported_v2_occupied_state_is_not_reexecuted[failed-transient]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_supported_v2_occupied_state_is_not_reexecuted[failed-transient]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_supported_v2_occupied_state_is_not_reexecuted[failed-transient]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_genuine_default_v1_completion_is_replayed_without_relabelling",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_genuine_default_v1_completion_is_replayed_without_relabelling",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_genuine_default_v1_completion_is_replayed_without_relabelling",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_default_v1_caller_cannot_replay_v2_record",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_default_v1_caller_cannot_replay_v2_record",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_default_v1_caller_cannot_replay_v2_record",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_unknown_stored_body_version_fails_closed",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_unknown_stored_body_version_fails_closed",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_unknown_stored_body_version_fails_closed",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_generic_completed_record_is_not_a_private_receipt[legacy-v1]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_generic_completed_record_is_not_a_private_receipt[legacy-v1]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_generic_completed_record_is_not_a_private_receipt[legacy-v1]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_generic_completed_record_is_not_a_private_receipt[body-v2]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_generic_completed_record_is_not_a_private_receipt[body-v2]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_generic_completed_record_is_not_a_private_receipt[body-v2]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_corrupt_completed_private_receipt_is_not_replayed[legacy-v1]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_corrupt_completed_private_receipt_is_not_replayed[legacy-v1]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_corrupt_completed_private_receipt_is_not_replayed[legacy-v1]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_corrupt_completed_private_receipt_is_not_replayed[body-v2]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_corrupt_completed_private_receipt_is_not_replayed[body-v2]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_corrupt_completed_private_receipt_is_not_replayed[body-v2]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_v1_occupied_fallback_requires_original_authenticated_proof[evidence-signature]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_v1_occupied_fallback_requires_original_authenticated_proof[evidence-signature]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_v1_occupied_fallback_requires_original_authenticated_proof[evidence-signature]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_v1_occupied_fallback_requires_original_authenticated_proof[version-signature]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_v1_occupied_fallback_requires_original_authenticated_proof[version-signature]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_v1_occupied_fallback_requires_original_authenticated_proof[version-signature]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_v2_occupied_binding_mismatch_cannot_replay_or_execute[session]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_v2_occupied_binding_mismatch_cannot_replay_or_execute[session]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_v2_occupied_binding_mismatch_cannot_replay_or_execute[session]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_v2_occupied_binding_mismatch_cannot_replay_or_execute[generation]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_v2_occupied_binding_mismatch_cannot_replay_or_execute[generation]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_v2_occupied_binding_mismatch_cannot_replay_or_execute[generation]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_current_revoked_grant_blocks_completed_v2_replay",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_current_revoked_grant_blocks_completed_v2_replay",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_current_revoked_grant_blocks_completed_v2_replay",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_new_v2_invalid_admission_rolls_back_real_claim[warning]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_new_v2_invalid_admission_rolls_back_real_claim[warning]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_new_v2_invalid_admission_rolls_back_real_claim[warning]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_new_v2_invalid_admission_rolls_back_real_claim[evidence]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_new_v2_invalid_admission_rolls_back_real_claim[evidence]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_new_v2_invalid_admission_rolls_back_real_claim[evidence]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_new_v2_invalid_admission_rolls_back_real_claim[version]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_new_v2_invalid_admission_rolls_back_real_claim[version]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_new_v2_invalid_admission_rolls_back_real_claim[version]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_new_v2_staged_write_or_receipt_failure_rolls_back_everything[private-shape]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_new_v2_staged_write_or_receipt_failure_rolls_back_everything[private-shape]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_new_v2_staged_write_or_receipt_failure_rolls_back_everything[private-shape]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_new_v2_unconfirmed_valid_proposal_rolls_back_real_claim",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_new_v2_unconfirmed_valid_proposal_rolls_back_real_claim",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_new_v2_unconfirmed_valid_proposal_rolls_back_real_claim",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_new_v2_genuine_signed_none_reason_rolls_back_real_claim",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_new_v2_genuine_signed_none_reason_rolls_back_real_claim",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_delete_contract_properties.py::test_new_v2_genuine_signed_none_reason_rolls_back_real_claim",
+      "phase": "teardown",
+      "outcome": "passed"
+    }
+  ],
+  "provenance": {
+    "source_path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/ordinary-applicability/delete-contract-green-twentyeight-qualified-cohort-v1.json",
+    "source_sha256": "a0a7d5df2744752e6bc80a0a506536e90c12b25af8928ee8124e8392267c9ce5",
+    "independent_review_path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/reviews/qualified-src9-green28-normalization-review-v1.json",
+    "independent_review_sha256": "9dd968e88aaff5486ac26493fb5464bfdb6c6f826e315e77e59b68dfff9779e3",
+    "raw_outer_result_path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/ordinary-applicability/delete-contract-green-execution-preparation-v2/result.json",
+    "raw_outer_result_sha256": "3f8f85ef85a82888ed722ad6905878e7ea1cd618e898fc0f5c6b81598b56f414",
+    "raw_batch_passed": false,
+    "raw_batch_nonpass_preserved": true,
+    "selected_from_larger_raw_result": false,
+    "keyed_report_source_normalized": false,
+    "qualified_subset_only": true,
+    "source_observation_sha256": "538c2f3e601cfc4e95fab5ecb2a5cd9efcbeb8e69c3e9f6801f7504a4bced667",
+    "excluded_raw_nodes": [
+      "confirmation_current/test_delete_contract_properties.py::test_new_v2_staged_write_or_receipt_failure_rolls_back_everything[audit-warning]"
+    ]
+  },
+  "accepted_population_test_ids": null,
+  "complete_v3_check_verdict": null
+}

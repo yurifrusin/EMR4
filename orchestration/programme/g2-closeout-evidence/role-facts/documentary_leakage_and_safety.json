@@ -1,0 +1,33 @@
+{
+  "schema": "emr4.ci_c_documentary_role_facts.v7",
+  "check_id": "documentary_leakage_and_safety",
+  "source_only_receipt": {
+    "kind": "exact_source_normalization",
+    "new_runtime_or_cleanup_effect": false,
+    "underlying_observation_sha256": null,
+    "documentary_support_output_ids": [],
+    "public_basis_sha256_if_applicable": "7d45af14c43b83de4cc9732811984909da20c987f5bc88d75f53ca6d9933c488",
+    "independent_review_sha256": "ebbf9d059f6bfd0864bf1d746ab53fac3de185b456901bd7c8e40b50f2c26565"
+  },
+  "cleanup": {
+    "kind": "attributed_reviewed_source_scope",
+    "review_sha256": "ebbf9d059f6bfd0864bf1d746ab53fac3de185b456901bd7c8e40b50f2c26565",
+    "new_cleanup_performed_by_this_document": false,
+    "historical_cleanup_claim": "only the facts explicitly accepted in the pinned independent review; unknown fields remain pending"
+  },
+  "relevance": {
+    "kind": "original_property_membership_and_scope",
+    "membership_review_sha256": "ebbf9d059f6bfd0864bf1d746ab53fac3de185b456901bd7c8e40b50f2c26565",
+    "safety_review_sha256_if_applicable": null
+  },
+  "final_context": null,
+  "final_check_acceptance": null,
+  "required_appointment_database_conjunct": {
+    "retained_control_review_sha256": "554cc576d141e69c699b51510ee3dff95b4e014a1de1beaccdd2e24d9eebd643",
+    "static_nonreplacement_and_config_review_sha256": "8b0e27c32ee283b4c8d17f51b5f0f7c4d7d80d75890a8421dcd5ae43ac22c171",
+    "required_domain_review_sha256": "8204370017342c32242b54e487cfb7900b6a8c2bd5fbf9eeff5e722379d5e312",
+    "historical_earned_scope": "Original earned exclusion/interval/half-open adjacency, distinct-key create/update/reactivation contention, site/NULL-site/tenant/practitioner variants, database waits/rollback, transaction/RLS chronology and supported migration refusal; accepted static nonreplacement/config explanation only",
+    "current_final_source_config_runtime_join": null,
+    "all_237_or_new_pytest_phase_claim": false
+  }
+}

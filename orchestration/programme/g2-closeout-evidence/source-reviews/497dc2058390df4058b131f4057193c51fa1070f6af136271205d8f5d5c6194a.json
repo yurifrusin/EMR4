@@ -1,0 +1,267 @@
+{
+  "schema": "emr4.g2.confirmation_state_receipt_attempt05_result_review.v1",
+  "verdict": "PASS_CONFIRMATION_STATE_RECEIPT_ATTEMPT05_RESULT",
+  "reviewer_agent": "/root/g2_admission_review",
+  "independent": true,
+  "implementation_authorship": false,
+  "blocking_findings": [],
+  "binding_sha256": "975be22a2507b0f2189b1d5824107c214c6f85fc0231310584f4c4a3e55d8e9f",
+  "execution_review_sha256": "c4aeb0e7f47dfaffc779acbffc6914ab419be3a7e714d9ab9b426133f236a2c9",
+  "owner_extension_sha256": "f1b6c0f144f448047413f616baae1f5b467c2b500c389c28c58cb27659c06c7e",
+  "result_sha256": "19556c25ea730f08ea964b9df0b7adcbe029b0fa84cfe2125ff34714f3d39ca8",
+  "subject": {
+    "operation_id": "g2-confirmation-state-receipt-20261009-v1",
+    "attempt_ordinal": 5,
+    "source_binding_sha256": "3845c9fa5d246a09545b56816bd6d9b68bce42ab286df516c57dc4623ea55666",
+    "source_manifest_sha256": "dd83bbfe6a345edf0d40efff484ea723eb9b30216bdbf87b4fd42cc4d2ce6bc5",
+    "source_review_sha256": "8ccbaafe7063be164cce3ddb758fed88cedbd6e0e2202e09253b1baf084100f4",
+    "combined_source_review_sha256": "af338e14a95130456370261802cb9d9d1da2fef44abecf27d246e65ec523e927",
+    "launcher_sha256": "a01f11b2014e6b787ebc261041755eabd658b091683120c17ad6308504f45f82",
+    "image_id": "sha256:192e420d4057bc851bb8db5af2495c35281fca92e56a76cec7f32cf8d3a6e1f9",
+    "product_rows": [
+      {
+        "bytes": 40192,
+        "path": "app/services/appointment_delete_product_adapter.py",
+        "sha256": "c3bbdb64e9e5d982ff672a9bbf028e2ba10ed5c37fba493e9677fd3931f18f90",
+        "source_path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/ordinary-applicability/confirmation-delete-ordering-repair-preparation-v1/after/app/services/appointment_delete_product_adapter.py"
+      },
+      {
+        "bytes": 32366,
+        "path": "app/services/appointment_delete_composition.py",
+        "sha256": "8215bd117d1a358066962f55630255c022d355d4ea3a160cf62dcc370a7f979c",
+        "source_path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/ordinary-applicability/confirmation-delete-ordering-repair-preparation-v1/after/app/services/appointment_delete_composition.py"
+      },
+      {
+        "bytes": 28614,
+        "path": "app/services/appointment_delete_physical.py",
+        "sha256": "061175cb371109fd57e39795a0748d0597d3fdbc34789796b5e811d6cdbc80ff",
+        "source_path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/ordinary-applicability/confirmation-delete-ordering-repair-preparation-v1/after/app/services/appointment_delete_physical.py"
+      },
+      {
+        "bytes": 349713,
+        "path": "app/routers/appointments.py",
+        "sha256": "9c9965871b622b16ab52900e50e86d650a04549d9fb1f2c5cefe2c8ae8788cef",
+        "source_path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/ordinary-applicability/raw-delete-context-repair-preparation-v1/after/app/routers/appointments.py"
+      }
+    ],
+    "selected_nodes": [
+      "confirmation_current/test_confirmation_state_receipt_two_failures.py::test_signed_non_session_bernie_replay_has_no_second_effect",
+      "confirmation_current/test_confirmation_state_receipt_two_failures.py::test_delete_replay_preserves_receipt_after_intervening_raw_soft_cancel"
+    ],
+    "historical_baseline_identity_not_fresh_git": true
+  },
+  "authenticated_outputs": {
+    "started.json": {
+      "path": "C:\\Users\\there\\EMR4-migration\\20260911-v1\\current-control-repair-20260912-v1\\g2-completion-20261008-v1\\ordinary-applicability\\confirmation-state-receipt-execution-preparation-v9\\started.json",
+      "sha256": "c12fdf47450d129e601f722a70f639481f174f935930c63e00b25b5eee45efda",
+      "bytes": 272
+    },
+    "result.json": {
+      "path": "C:\\Users\\there\\EMR4-migration\\20260911-v1\\current-control-repair-20260912-v1\\g2-completion-20261008-v1\\ordinary-applicability\\confirmation-state-receipt-execution-preparation-v9\\result.json",
+      "sha256": "19556c25ea730f08ea964b9df0b7adcbe029b0fa84cfe2125ff34714f3d39ca8",
+      "bytes": 3736
+    },
+    "container-stdout.txt": {
+      "path": "C:\\Users\\there\\EMR4-migration\\20260911-v1\\current-control-repair-20260912-v1\\g2-completion-20261008-v1\\ordinary-applicability\\confirmation-state-receipt-execution-preparation-v9\\container-stdout.txt",
+      "sha256": "d318af994d5b511d88886befbb7c29f7b0b9a41838acbbb864fc01174eede8ff",
+      "bytes": 9992
+    },
+    "container-stderr.txt": {
+      "path": "C:\\Users\\there\\EMR4-migration\\20260911-v1\\current-control-repair-20260912-v1\\g2-completion-20261008-v1\\ordinary-applicability\\confirmation-state-receipt-execution-preparation-v9\\container-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "prestart-inspect.json": {
+      "path": "C:\\Users\\there\\EMR4-migration\\20260911-v1\\current-control-repair-20260912-v1\\g2-completion-20261008-v1\\ordinary-applicability\\confirmation-state-receipt-execution-preparation-v9\\prestart-inspect.json",
+      "sha256": "676c8b208e5a1a427e839f85938b17e0a37e5b96b5cb1dba9ede72ce621b502e",
+      "bytes": 1999
+    },
+    "decoded-reports/result.json": {
+      "path": "C:\\Users\\there\\EMR4-migration\\20260911-v1\\current-control-repair-20260912-v1\\g2-completion-20261008-v1\\ordinary-applicability\\confirmation-state-receipt-execution-preparation-v9\\decoded-reports\\result.json",
+      "sha256": "70881ddf092582d6ae75623f0732dd34057821198406cd7444814c7cf06d7528",
+      "bytes": 2664
+    },
+    "decoded-reports/tenant-primary.json": {
+      "path": "C:\\Users\\there\\EMR4-migration\\20260911-v1\\current-control-repair-20260912-v1\\g2-completion-20261008-v1\\ordinary-applicability\\confirmation-state-receipt-execution-preparation-v9\\decoded-reports\\tenant-primary.json",
+      "sha256": "e0bfa3bccc2f1e7c2f4afc6758d59ca2dd0c778cfb521938e8e0d1328d89a46b",
+      "bytes": 814
+    },
+    "decoded-reports/tenant-result.json": {
+      "path": "C:\\Users\\there\\EMR4-migration\\20260911-v1\\current-control-repair-20260912-v1\\g2-completion-20261008-v1\\ordinary-applicability\\confirmation-state-receipt-execution-preparation-v9\\decoded-reports\\tenant-result.json",
+      "sha256": "aa0791fa480c76378f0eab0d5d910298db5f5bc4e58932d707f510ce1a7aee86",
+      "bytes": 22375
+    }
+  },
+  "actual": {
+    "native_attempts": 1,
+    "collections": 1,
+    "tests": 1,
+    "cases": 2,
+    "phase_reports": 6,
+    "passed_phases": 6,
+    "failed_phases": 0,
+    "resets": 2,
+    "collection_errors": 0,
+    "internal_errors": 0,
+    "guard_denials": [],
+    "loaded_modules": 142,
+    "literal_source_files": 145,
+    "capsule_files": 9,
+    "elapsed_seconds": 17.031867000012426,
+    "outer_elapsed_seconds": 15.344145501992898,
+    "child_elapsed_seconds": 13.662795,
+    "reports": {
+      "confirmation_current/test_confirmation_state_receipt_two_failures.py::test_delete_replay_preserves_receipt_after_intervening_raw_soft_cancel": {
+        "call": "passed",
+        "setup": "passed",
+        "teardown": "passed"
+      },
+      "confirmation_current/test_confirmation_state_receipt_two_failures.py::test_signed_non_session_bernie_replay_has_no_second_effect": {
+        "call": "passed",
+        "setup": "passed",
+        "teardown": "passed"
+      }
+    }
+  },
+  "source_preservation": {
+    "literal_145_source_pins_verified": true,
+    "nine_capsule_pins_verified": true,
+    "host_python_and_docker_verified": true,
+    "every_loaded_case_path_in_literal_allowlist": true,
+    "four_candidate_product_modules_loaded_from_bound_case": true,
+    "bundle_21_rows_digest_and_decoded_byte_correspondence_verified": true
+  },
+  "cleanup": {
+    "verdict": "accepted",
+    "physical_cleanup_accepted": true,
+    "complete_current_attempt_cleanup_accepted": true,
+    "database_stopped": true,
+    "database_stop_returncode": 0,
+    "container": {
+      "container_id": "240b310d30c95dfef4a8c693dcd093b1d8c0fb960b973f998717cf0642acce72",
+      "exit_code": 0,
+      "oom_killed": false,
+      "restart_count": 0,
+      "container_absent": true,
+      "created_volumes": false
+    },
+    "attached_process": {
+      "client_pid": 33408,
+      "client_closed": true,
+      "readers_closed": true,
+      "reader_errors": [],
+      "output_overflow": false,
+      "output_complete": true
+    },
+    "all_connections_closed": true,
+    "live_threads": [],
+    "engines": {
+      "admin": {
+        "attempts": 1,
+        "checked_out_before_dispose": 0,
+        "status": "PASS"
+      },
+      "command": {
+        "attempts": 1,
+        "checked_out_before_dispose": 0,
+        "status": "PASS"
+      },
+      "global_app_engine": {
+        "attempts": 1,
+        "checked_out_before_dispose": 0,
+        "status": "PASS"
+      },
+      "observer": {
+        "attempts": 1,
+        "checked_out_before_dispose": 0,
+        "status": "PASS"
+      },
+      "request": {
+        "attempts": 1,
+        "checked_out_before_dispose": 0,
+        "status": "PASS"
+      }
+    },
+    "outside_cascade_comparison_observed": true,
+    "outside_cascade_counts_invariant": true,
+    "outside_cascade_initial_counts": {
+      "application_auth_audit_events": 0,
+      "application_auth_exchange_grants": 0,
+      "application_auth_parent_sessions": 0,
+      "application_auth_principal_generations": 0,
+      "application_auth_surface_sessions": 0,
+      "application_auth_synthetic_principal_truth": 0,
+      "application_identity_federation_admission_grants": 0,
+      "application_identity_federation_audit_events": 0,
+      "application_identity_federation_bindings": 0,
+      "application_identity_oidc_authorization_attempts": 0,
+      "mbs_directory": 0,
+      "snomed_directory": 0
+    },
+    "outside_cascade_final_counts": {
+      "application_auth_audit_events": 0,
+      "application_auth_exchange_grants": 0,
+      "application_auth_parent_sessions": 0,
+      "application_auth_principal_generations": 0,
+      "application_auth_surface_sessions": 0,
+      "application_auth_synthetic_principal_truth": 0,
+      "application_identity_federation_admission_grants": 0,
+      "application_identity_federation_audit_events": 0,
+      "application_identity_federation_bindings": 0,
+      "application_identity_oidc_authorization_attempts": 0,
+      "mbs_directory": 0,
+      "snomed_directory": 0
+    },
+    "reset_exhaustion_denied": true,
+    "closed_lifetime_denials": 2,
+    "balanced_checkouts": true
+  },
+  "properties": [
+    {
+      "node": "confirmation_current/test_confirmation_state_receipt_two_failures.py::test_signed_non_session_bernie_replay_has_no_second_effect",
+      "accepted": true,
+      "meaning": "Actual staff-review wrapper produces signed confirmation evidence with no session binding; confirmed_write first command persists one appointment/audit/completed receipt with command/audit/target joins; exact same-key replay preserves response JSON and full persisted snapshot."
+    },
+    {
+      "node": "confirmation_current/test_confirmation_state_receipt_two_failures.py::test_delete_replay_preserves_receipt_after_intervening_raw_soft_cancel",
+      "accepted": true,
+      "meaning": "Actual delete confirmation persists linked completed receipt; intervening raw tenant delete returns204 and yields cancelled appointment plus second audit; same-key confirmation replay returns original response JSON and preserves the full post-raw snapshot."
+    }
+  ],
+  "accounting": {
+    "current_grant_consumed": true,
+    "current_native": 1,
+    "current_collections": 1,
+    "current_tests": 1,
+    "current_resets": 2,
+    "cumulative_reserved": {
+      "native_attempts": 5,
+      "collections": 5,
+      "tests": 5
+    },
+    "cumulative_actual": {
+      "collections": 3,
+      "tests": 3,
+      "resets": 15
+    },
+    "prior_result_sha256": "e706300049403568132c0c5a8b396313eee6ec06f5660a1226a670c38d0414f1",
+    "prior_result_review_sha256": "e3bc1d9a0d375f35455ff46ddf009361e89ba8fa34a81e38dcd3fd242bc37da1",
+    "prior_nonpass_unchanged": true,
+    "no_prior_uncaptured_comparison_backdated": true,
+    "automatic_retry": false,
+    "current_grant_renewed": false
+  },
+  "limits": [
+    "Acceptance is for the exact two scenarios and four pinned product afterimages in this reviewed mixed synthetic closure. It is not whole-suite, global CI, product installation/publication or G2 completion acceptance.",
+    "The prior SRC04 and earlier NONPASS results, uncertainties and reserved-versus-actual accounting remain unchanged. Current final outside-cascade observation is a new actual successful-attempt fact, not a revision of an earlier report.",
+    "The report preserves sanitized structured evidence and assertions; it does not claim uncaptured HTTP bodies or all unexercised branches."
+  ],
+  "reviewer_effects": {
+    "runtime": 0,
+    "docker": 0,
+    "git": 0,
+    "target_imports": 0,
+    "tests": 0,
+    "candidate_or_checkpoint_writes": 0
+  }
+}

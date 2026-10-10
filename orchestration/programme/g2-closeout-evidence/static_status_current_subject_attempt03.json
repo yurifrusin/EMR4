@@ -1,0 +1,35 @@
+{
+  "schema": "emr4.ci_c_ordinary_cohort_support_source.v1",
+  "status": "SOURCE_ONLY_NONOPERATIVE",
+  "cohort_id": "static_status_current_subject_attempt03",
+  "collection": [
+    "tests/test_api_spine_status_confirm_idempotency_route_contract.py::test_current_router_wires_status_confirm_idempotency_surface"
+  ],
+  "phase_rows": [
+    {
+      "nodeid": "tests/test_api_spine_status_confirm_idempotency_route_contract.py::test_current_router_wires_status_confirm_idempotency_surface",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_status_confirm_idempotency_route_contract.py::test_current_router_wires_status_confirm_idempotency_surface",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_status_confirm_idempotency_route_contract.py::test_current_router_wires_status_confirm_idempotency_surface",
+      "phase": "teardown",
+      "outcome": "passed"
+    }
+  ],
+  "provenance": {
+    "raw_result_sha256": "2027ae40745614ccae929393aa400b91c1a4f526747d04d1224096f551dc1381",
+    "independent_result_review_sha256": "dbb6617cffa3cb490fecde329d1f7b79fe021e4bebf465cecc2a2d1d5711e4c6",
+    "current_subject_relevance_review_sha256": "1d45c9e864bf0b217a73a101096bbd05d46b179b15e3d323c02681ac6c76bf9d",
+    "source_manifest_sha256": "a40c3aa080a128298c09a001375c900b0f8eb5f184c07c1ff276b3433c13ad14",
+    "historical_static02_result_sha256": "1b54110b5223a394a68852d1982d6a90ffe6f95d9e851ad7c2938f619bebb007",
+    "historical_static02_is_distinct": true
+  },
+  "accepted_population_test_id": null,
+  "complete_v3_check_verdict": null
+}

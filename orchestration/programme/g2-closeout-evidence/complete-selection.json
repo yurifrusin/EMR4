@@ -1,0 +1,848 @@
+{
+  "schema_version": "emr4.complete_verification_selection.v3",
+  "context": {
+    "plan_sha256": "e92c0fb7bbfc1de747d26efaa5fe055d1576ab4d056140dafd4e1d744825c4d8",
+    "authority_sha256": "29a530781f3e04574355b73206c590664534f7a6e0cbb9fc36f3c7d5d5a461d3",
+    "source_sha256": "a197e3d10dbf94d80e117f6269ba23cd6a9cce957afd7d7102e66c7aed630732",
+    "config_sha256": "320dd89320138207d160557795fd51c95f3d7a285c37ba5a6f5cf3b4c17fe0aa",
+    "runtime_sha256": "35700e2f9f7f108f9c5f1fcd707c7fbf628e925ece16d05dda1f60aeea855fdf",
+    "verifier_sha256": "f430803e889b4c3aa0269e12dbff4d965eea2dec0917ac051d8d78225c67b61c",
+    "result_id": "g2_complete_ci_current_context_20261010_v1"
+  },
+  "bounded_selection": "bounded_selection",
+  "plan": "complete_plan",
+  "population": "complete_population",
+  "evidence": "complete_evidence",
+  "review_bindings": "complete_review_bindings",
+  "test_identity_map": "complete_identity",
+  "acceptance": "complete_acceptance",
+  "required_checks": [
+    {
+      "id": "property_original_o1_30",
+      "receipt": "role_fact_property_original_o1_30",
+      "result": "cohort_original_o1_30",
+      "cleanup": "role_fact_property_original_o1_30",
+      "result_review": "source_review_46ac796b2e2c6b01",
+      "prior_result": "cohort_original_o1_30",
+      "relevance_review": "current_context_relevance"
+    },
+    {
+      "id": "property_pyjwt30",
+      "receipt": "role_fact_property_pyjwt30",
+      "result": "cohort_pyjwt30",
+      "cleanup": "role_fact_property_pyjwt30",
+      "result_review": "source_review_36a00c074df6ec39",
+      "prior_result": "cohort_pyjwt30",
+      "relevance_review": "current_context_relevance"
+    },
+    {
+      "id": "property_crypto_six",
+      "receipt": "role_fact_property_crypto_six",
+      "result": "cohort_crypto_six",
+      "cleanup": "role_fact_property_crypto_six",
+      "result_review": "source_review_ada7181898726a64",
+      "prior_result": "cohort_crypto_six",
+      "relevance_review": "current_context_relevance"
+    },
+    {
+      "id": "property_clinical48",
+      "receipt": "role_fact_property_clinical48",
+      "result": "cohort_clinical48",
+      "cleanup": "role_fact_property_clinical48",
+      "result_review": "source_review_f4b4c003db166b44",
+      "prior_result": "cohort_clinical48",
+      "relevance_review": "current_context_relevance"
+    },
+    {
+      "id": "property_ai14_attempt02",
+      "receipt": "role_fact_property_ai14_attempt02",
+      "result": "cohort_ai14_attempt02",
+      "cleanup": "role_fact_property_ai14_attempt02",
+      "result_review": "source_review_34fd9cfa146bbfcb",
+      "prior_result": "cohort_ai14_attempt02",
+      "relevance_review": "current_context_relevance"
+    },
+    {
+      "id": "property_green_twentyeight",
+      "receipt": "role_fact_property_green_twentyeight",
+      "result": "cohort_green_twentyeight",
+      "cleanup": "role_fact_property_green_twentyeight",
+      "result_review": "source_review_9dd968e88aaff548",
+      "prior_result": "cohort_green_twentyeight",
+      "relevance_review": "current_context_relevance"
+    },
+    {
+      "id": "property_green02",
+      "receipt": "role_fact_property_green02",
+      "result": "cohort_green02",
+      "cleanup": "role_fact_property_green02",
+      "result_review": "source_review_6f7e3a8a0be1d404",
+      "prior_result": "cohort_green02",
+      "relevance_review": "current_context_relevance"
+    },
+    {
+      "id": "support_current49",
+      "receipt": "role_fact_support_current49",
+      "result": "cohort_current49",
+      "cleanup": "role_fact_support_current49",
+      "result_review": "source_review_5d0661ea68d22923",
+      "prior_result": "cohort_current49",
+      "relevance_review": "current_context_relevance"
+    },
+    {
+      "id": "support_ci_b_88",
+      "receipt": "role_fact_support_ci_b_88",
+      "result": "cohort_ci_b_88",
+      "cleanup": "role_fact_support_ci_b_88",
+      "result_review": "source_review_db5cc02222183dd7",
+      "prior_result": "cohort_ci_b_88",
+      "relevance_review": "current_context_relevance"
+    },
+    {
+      "id": "support_delete_postclaim_one",
+      "receipt": "role_fact_support_delete_postclaim_one",
+      "result": "cohort_delete_postclaim_one",
+      "cleanup": "role_fact_support_delete_postclaim_one",
+      "result_review": "source_review_01be86c6c0fb5ffa",
+      "prior_result": "cohort_delete_postclaim_one",
+      "relevance_review": "current_context_relevance"
+    },
+    {
+      "id": "support_first_write_five",
+      "receipt": "role_fact_support_first_write_five",
+      "result": "cohort_first_write_five",
+      "cleanup": "role_fact_support_first_write_five",
+      "result_review": "source_review_3ac00633f6e588d4",
+      "prior_result": "cohort_first_write_five",
+      "relevance_review": "current_context_relevance"
+    },
+    {
+      "id": "support_input_guards_ten",
+      "receipt": "role_fact_support_input_guards_ten",
+      "result": "cohort_input_guards_ten",
+      "cleanup": "role_fact_support_input_guards_ten",
+      "result_review": "source_review_cbc0d2589c8e125c",
+      "prior_result": "cohort_input_guards_ten",
+      "relevance_review": "current_context_relevance"
+    },
+    {
+      "id": "support_residual_thirteen",
+      "receipt": "role_fact_support_residual_thirteen",
+      "result": "cohort_residual_thirteen",
+      "cleanup": "role_fact_support_residual_thirteen",
+      "result_review": "source_review_cc400049e60a520b",
+      "prior_result": "cohort_residual_thirteen",
+      "relevance_review": "current_context_relevance"
+    },
+    {
+      "id": "support_sibling_three",
+      "receipt": "role_fact_support_sibling_three",
+      "result": "cohort_sibling_three",
+      "cleanup": "role_fact_support_sibling_three",
+      "result_review": "source_review_14330885f5b33012",
+      "prior_result": "cohort_sibling_three",
+      "relevance_review": "current_context_relevance"
+    },
+    {
+      "id": "support_static_thirtyone",
+      "receipt": "role_fact_support_static_thirtyone",
+      "result": "cohort_static_thirtyone",
+      "cleanup": "role_fact_support_static_thirtyone",
+      "result_review": "source_review_97af8e18a4751c77",
+      "prior_result": "cohort_static_thirtyone",
+      "relevance_review": "current_context_relevance"
+    },
+    {
+      "id": "support_state_receipt_nine",
+      "receipt": "role_fact_support_state_receipt_nine",
+      "result": "cohort_state_receipt_nine",
+      "cleanup": "role_fact_support_state_receipt_nine",
+      "result_review": "source_review_9dd968e88aaff548",
+      "prior_result": "cohort_state_receipt_nine",
+      "relevance_review": "current_context_relevance"
+    },
+    {
+      "id": "support_static_status_current_subject_attempt03",
+      "receipt": "role_fact_support_static_status_current_subject_attempt03",
+      "result": "cohort_static_status_current_subject_attempt03",
+      "cleanup": "role_fact_support_static_status_current_subject_attempt03",
+      "result_review": "source_review_dbb6617cffa3cb49",
+      "prior_result": "cohort_static_status_current_subject_attempt03",
+      "relevance_review": "current_context_relevance"
+    },
+    {
+      "id": "documentary_tenant22",
+      "receipt": "role_fact_documentary_tenant22",
+      "result": "role_fact_documentary_tenant22",
+      "cleanup": "role_fact_documentary_tenant22",
+      "result_review": "source_review_safety_review",
+      "prior_result": "role_fact_documentary_tenant22",
+      "relevance_review": "current_context_relevance"
+    },
+    {
+      "id": "documentary_relationship1",
+      "receipt": "role_fact_documentary_relationship1",
+      "result": "role_fact_documentary_relationship1",
+      "cleanup": "role_fact_documentary_relationship1",
+      "result_review": "source_review_safety_review",
+      "prior_result": "role_fact_documentary_relationship1",
+      "relevance_review": "current_context_relevance"
+    },
+    {
+      "id": "documentary_auth2",
+      "receipt": "role_fact_documentary_auth2",
+      "result": "role_fact_documentary_auth2",
+      "cleanup": "role_fact_documentary_auth2",
+      "result_review": "source_review_safety_review",
+      "prior_result": "role_fact_documentary_auth2",
+      "relevance_review": "current_context_relevance"
+    },
+    {
+      "id": "documentary_patient_component",
+      "receipt": "role_fact_documentary_patient_component",
+      "result": "role_fact_documentary_patient_component",
+      "cleanup": "role_fact_documentary_patient_component",
+      "result_review": "source_review_safety_review",
+      "prior_result": "role_fact_documentary_patient_component",
+      "relevance_review": "current_context_relevance"
+    },
+    {
+      "id": "documentary_mount_structure",
+      "receipt": "role_fact_documentary_mount_structure",
+      "result": "role_fact_documentary_mount_structure",
+      "cleanup": "role_fact_documentary_mount_structure",
+      "result_review": "source_review_safety_review",
+      "prior_result": "role_fact_documentary_mount_structure",
+      "relevance_review": "current_context_relevance"
+    },
+    {
+      "id": "documentary_audio_source_safety",
+      "receipt": "role_fact_documentary_audio_source_safety",
+      "result": "role_fact_documentary_audio_source_safety",
+      "cleanup": "role_fact_documentary_audio_source_safety",
+      "result_review": "source_review_safety_review",
+      "prior_result": "role_fact_documentary_audio_source_safety",
+      "relevance_review": "current_context_relevance"
+    },
+    {
+      "id": "documentary_dependency_audit",
+      "receipt": "role_fact_documentary_dependency_audit",
+      "result": "role_fact_documentary_dependency_audit",
+      "cleanup": "role_fact_documentary_dependency_audit",
+      "result_review": "accepted_public_eight_row_packet",
+      "prior_result": "role_fact_documentary_dependency_audit",
+      "relevance_review": "current_context_relevance"
+    },
+    {
+      "id": "documentary_migration_paths",
+      "receipt": "role_fact_documentary_migration_paths",
+      "result": "role_fact_documentary_migration_paths",
+      "cleanup": "role_fact_documentary_migration_paths",
+      "result_review": "accepted_public_eight_row_packet",
+      "prior_result": "role_fact_documentary_migration_paths",
+      "relevance_review": "current_context_relevance"
+    },
+    {
+      "id": "documentary_risk_six_findings",
+      "receipt": "role_fact_documentary_risk_six_findings",
+      "result": "role_fact_documentary_risk_six_findings",
+      "cleanup": "role_fact_documentary_risk_six_findings",
+      "result_review": "accepted_public_eight_row_packet",
+      "prior_result": "role_fact_documentary_risk_six_findings",
+      "relevance_review": "current_context_relevance"
+    },
+    {
+      "id": "documentary_leakage_and_safety",
+      "receipt": "role_fact_documentary_leakage_and_safety",
+      "result": "role_fact_documentary_leakage_and_safety",
+      "cleanup": "role_fact_documentary_leakage_and_safety",
+      "result_review": "accepted_public_eight_row_packet",
+      "prior_result": "role_fact_documentary_leakage_and_safety",
+      "relevance_review": "current_context_relevance"
+    },
+    {
+      "id": "documentary_audio_current_component",
+      "receipt": "role_fact_documentary_audio_current_component",
+      "result": "audio_current_result",
+      "cleanup": "audio_current_review",
+      "result_review": "audio_current_review",
+      "prior_result": "audio_current_result",
+      "relevance_review": "current_context_relevance"
+    },
+    {
+      "id": "documentary_python_compile",
+      "receipt": "role_fact_documentary_python_compile",
+      "result": "role_fact_documentary_python_compile",
+      "cleanup": "role_fact_documentary_python_compile",
+      "result_review": "accepted_public_eight_row_packet",
+      "prior_result": "role_fact_documentary_python_compile",
+      "relevance_review": "current_context_relevance"
+    },
+    {
+      "id": "documentary_ruff_e9_f401",
+      "receipt": "role_fact_documentary_ruff_e9_f401",
+      "result": "role_fact_documentary_ruff_e9_f401",
+      "cleanup": "role_fact_documentary_ruff_e9_f401",
+      "result_review": "accepted_public_eight_row_packet",
+      "prior_result": "role_fact_documentary_ruff_e9_f401",
+      "relevance_review": "current_context_relevance"
+    },
+    {
+      "id": "property_src2_current",
+      "receipt": "role_fact_property_src2_current",
+      "result": "cohort_src2_current",
+      "cleanup": "role_fact_property_src2_current",
+      "result_review": "source_review_src2_current",
+      "prior_result": "cohort_src2_current",
+      "relevance_review": "current_context_relevance"
+    }
+  ],
+  "artifacts": [
+    {
+      "id": "accepted_public_eight_row_packet",
+      "path": "orchestration/programme/g2-closeout-evidence/source-reviews/eight-required-rows-evidence-contribution.md",
+      "bytes": 20484,
+      "sha256": "7d45af14c43b83de4cc9732811984909da20c987f5bc88d75f53ca6d9933c488",
+      "role": "support"
+    },
+    {
+      "id": "audio_current_result",
+      "path": "orchestration/programme/g2-closeout-evidence/audio-current-component/attempt01-result.json",
+      "bytes": 2939,
+      "sha256": "5eb6306ed121a2501b9584097384f7d10c1773dc785876db52dd0cb8db38d11c",
+      "role": "support"
+    },
+    {
+      "id": "audio_current_review",
+      "path": "orchestration/programme/g2-closeout-evidence/audio-current-component/independent-result-review.json",
+      "bytes": 9797,
+      "sha256": "47a8092af1056bab599fb161e44ed89b351bb866c1ad37f48fc7bdfe9104b230",
+      "role": "support"
+    },
+    {
+      "id": "cohort_ai14_attempt02",
+      "path": "orchestration/programme/g2-closeout-evidence/ai14-attempt02.json",
+      "bytes": 10689,
+      "sha256": "9254b7954952356d83008d3066a4c84fc6f76c9568b5a76da2a69528d759d75a",
+      "role": "support"
+    },
+    {
+      "id": "cohort_ci_b_88",
+      "path": "orchestration/programme/g2-closeout-evidence/ci_b_88.json",
+      "bytes": 65616,
+      "sha256": "59a240ea7a4fba2bb5d663c070981fa0497db4a91c59d3295abf042ad3567a30",
+      "role": "support"
+    },
+    {
+      "id": "cohort_clinical48",
+      "path": "orchestration/programme/g2-closeout-evidence/clinical48/normalized.json",
+      "bytes": 37694,
+      "sha256": "67acb1113405d0f300cd34be03457cbac00fd6bdd095f9a7f3cf16d07c862f9c",
+      "role": "support"
+    },
+    {
+      "id": "cohort_crypto_six",
+      "path": "orchestration/programme/g2-closeout-evidence/crypto_six.json",
+      "bytes": 4734,
+      "sha256": "3dff6f88fb06334b6a14d794ce938305d9bbea9cd7ebb98aadad138d46587e46",
+      "role": "support"
+    },
+    {
+      "id": "cohort_current49",
+      "path": "orchestration/programme/g2-closeout-evidence/current49.json",
+      "bytes": 85157,
+      "sha256": "9ef010fb881bf3fdd86bdfa5432d8a09db382bb732da8d873328e3c320fae8a7",
+      "role": "support"
+    },
+    {
+      "id": "cohort_delete_postclaim_one",
+      "path": "orchestration/programme/g2-closeout-evidence/delete_postclaim_one.json",
+      "bytes": 2342,
+      "sha256": "5a146fd84452258be25f2697bd24a6160ccbf960161a1593c10fe10dbeef87c5",
+      "role": "support"
+    },
+    {
+      "id": "cohort_first_write_five",
+      "path": "orchestration/programme/g2-closeout-evidence/first_write_five.json",
+      "bytes": 5328,
+      "sha256": "09138d8f4a351d57c7d5e200964cbb6bc48f19c864301dfef242c65dd19af902",
+      "role": "support"
+    },
+    {
+      "id": "cohort_green02",
+      "path": "orchestration/programme/g2-closeout-evidence/green02.json",
+      "bytes": 1832,
+      "sha256": "fae458580bbdbfbd7f95e665cb14a1a8ca75f39cac40d36b977205a2a9d53224",
+      "role": "support"
+    },
+    {
+      "id": "cohort_green_twentyeight",
+      "path": "orchestration/programme/g2-closeout-evidence/green_twentyeight.json",
+      "bytes": 22929,
+      "sha256": "22c532fa789eba08c7cf27bd74e1e95c685d05ee2a757a49cb2faf937a1a0208",
+      "role": "support"
+    },
+    {
+      "id": "cohort_input_guards_ten",
+      "path": "orchestration/programme/g2-closeout-evidence/input_guards_ten.json",
+      "bytes": 8702,
+      "sha256": "e009aab5ab8c322ba04c8b60f621d805100892e105cf88410adb93a9bc7d8099",
+      "role": "support"
+    },
+    {
+      "id": "cohort_original_o1_30",
+      "path": "orchestration/programme/g2-closeout-evidence/original_o1_30.json",
+      "bytes": 33329,
+      "sha256": "69fe1f3b3dada2752a65596c667475d95b7195c5c5b5094c8accf726101f60c4",
+      "role": "support"
+    },
+    {
+      "id": "cohort_pyjwt30",
+      "path": "orchestration/programme/g2-closeout-evidence/pyjwt30.json",
+      "bytes": 18765,
+      "sha256": "86c3f1fed431bc08ed8f3962f23f119d2f011cc70e3a3fe0fef5cdead84d3d96",
+      "role": "support"
+    },
+    {
+      "id": "cohort_residual_thirteen",
+      "path": "orchestration/programme/g2-closeout-evidence/residual_thirteen.json",
+      "bytes": 11334,
+      "sha256": "02d5f365dbf960c637869b9a4c330a6f793679722792dca6c9cfc923456a84a5",
+      "role": "support"
+    },
+    {
+      "id": "cohort_sibling_three",
+      "path": "orchestration/programme/g2-closeout-evidence/sibling_three.json",
+      "bytes": 3882,
+      "sha256": "03ba62be5726b10af87181b09bec43473de97aa5d5ee49f823d36e0db830c082",
+      "role": "support"
+    },
+    {
+      "id": "cohort_src2_current",
+      "path": "orchestration/programme/g2-closeout-evidence/src2_current.json",
+      "bytes": 3479,
+      "sha256": "8e4fb3214097df75119e5a8da959239975870859b4d484154c235c9cf81059ad",
+      "role": "support"
+    },
+    {
+      "id": "cohort_state_receipt_nine",
+      "path": "orchestration/programme/g2-closeout-evidence/state_receipt_nine.json",
+      "bytes": 8984,
+      "sha256": "4ab42448c23d3ad8c4db568d255bc6ece5c94dc14bf38329ec669156fb179908",
+      "role": "support"
+    },
+    {
+      "id": "cohort_static_status_current_subject_attempt03",
+      "path": "orchestration/programme/g2-closeout-evidence/static_status_current_subject_attempt03.json",
+      "bytes": 1670,
+      "sha256": "25e411dec6b46f0aeb1faec911b00923a650e81bef0bd1cac9649790d6e492fb",
+      "role": "support"
+    },
+    {
+      "id": "cohort_static_thirtyone",
+      "path": "orchestration/programme/g2-closeout-evidence/static_thirtyone.json",
+      "bytes": 26187,
+      "sha256": "2c4d22fae0c706a6ab8f934b3c9189c4ff220f36c54d20eda07d3dd84027884d",
+      "role": "support"
+    },
+    {
+      "id": "role_fact_documentary_audio_current_component",
+      "path": "orchestration/programme/g2-closeout-evidence/role-facts/documentary_audio_current_component.json",
+      "bytes": 1206,
+      "sha256": "5d07dabdc9923f16b25741d75be043b70480df9944df7c125f2f7463ec3d9744",
+      "role": "support"
+    },
+    {
+      "id": "role_fact_documentary_audio_source_safety",
+      "path": "orchestration/programme/g2-closeout-evidence/role-facts/documentary_audio_source_safety.json",
+      "bytes": 1212,
+      "sha256": "befc4501b114359f0fc1c1c914cf605ef59847d31ccf8e32d84032624e86bbad",
+      "role": "support"
+    },
+    {
+      "id": "role_fact_documentary_auth2",
+      "path": "orchestration/programme/g2-closeout-evidence/role-facts/documentary_auth2.json",
+      "bytes": 1184,
+      "sha256": "6f81db57cd1c36392cd9414c14db319907d9c5ae9728deb3a6731095ba0e3347",
+      "role": "support"
+    },
+    {
+      "id": "role_fact_documentary_dependency_audit",
+      "path": "orchestration/programme/g2-closeout-evidence/role-facts/documentary_dependency_audit.json",
+      "bytes": 1137,
+      "sha256": "a9b43033c0b57ab5ad65a96dccace948ece249041635a42620598c8e18abafbf",
+      "role": "support"
+    },
+    {
+      "id": "role_fact_documentary_leakage_and_safety",
+      "path": "orchestration/programme/g2-closeout-evidence/role-facts/documentary_leakage_and_safety.json",
+      "bytes": 1951,
+      "sha256": "399bc9ec85efdb6b23e1bcdf38e89335ad82295f7109d6915e18e6600f6547c6",
+      "role": "support"
+    },
+    {
+      "id": "role_fact_documentary_migration_paths",
+      "path": "orchestration/programme/g2-closeout-evidence/role-facts/documentary_migration_paths.json",
+      "bytes": 1136,
+      "sha256": "d16239349bf31a5fd3482bbbe9422bfabc3337cd750417b19404fa28787eaaf4",
+      "role": "support"
+    },
+    {
+      "id": "role_fact_documentary_mount_structure",
+      "path": "orchestration/programme/g2-closeout-evidence/role-facts/documentary_mount_structure.json",
+      "bytes": 1204,
+      "sha256": "b7d4186ecd68f9e0926c04febdd8abfd6205af786da991d91bfb4e69421cf720",
+      "role": "support"
+    },
+    {
+      "id": "role_fact_documentary_patient_component",
+      "path": "orchestration/programme/g2-closeout-evidence/role-facts/documentary_patient_component.json",
+      "bytes": 1210,
+      "sha256": "39dc941f3ea4b5903e3ac7563037a95026ea18147f335e038ff4be149e0d1b6b",
+      "role": "support"
+    },
+    {
+      "id": "role_fact_documentary_python_compile",
+      "path": "orchestration/programme/g2-closeout-evidence/role-facts/documentary_python_compile.json",
+      "bytes": 1190,
+      "sha256": "c7a06074431387bad4320976a4dccf6496812e67e24866bb34f350e16d158855",
+      "role": "support"
+    },
+    {
+      "id": "role_fact_documentary_relationship1",
+      "path": "orchestration/programme/g2-closeout-evidence/role-facts/documentary_relationship1.json",
+      "bytes": 1206,
+      "sha256": "98b7361ecc91c4c535788b4f5f87d72903b657d5c20f91f8c264bda4aabe2f24",
+      "role": "support"
+    },
+    {
+      "id": "role_fact_documentary_risk_six_findings",
+      "path": "orchestration/programme/g2-closeout-evidence/role-facts/documentary_risk_six_findings.json",
+      "bytes": 1138,
+      "sha256": "fc0e03e87ebc6738143b451b34541fb355fecb5d626e9a83e8b2e47803dfc503",
+      "role": "support"
+    },
+    {
+      "id": "role_fact_documentary_ruff_e9_f401",
+      "path": "orchestration/programme/g2-closeout-evidence/role-facts/documentary_ruff_e9_f401.json",
+      "bytes": 1220,
+      "sha256": "9077c1a7813f2c3aa73720aab7da7b4d2bd2921d86c584b05371254c800ea67a",
+      "role": "support"
+    },
+    {
+      "id": "role_fact_documentary_tenant22",
+      "path": "orchestration/programme/g2-closeout-evidence/role-facts/documentary_tenant22.json",
+      "bytes": 1193,
+      "sha256": "8d8b708fd2ac0140bbe0780a20db45a150b24ccef349b8021fe25c499e73d004",
+      "role": "support"
+    },
+    {
+      "id": "role_fact_property_ai14_attempt02",
+      "path": "orchestration/programme/g2-closeout-evidence/role-facts/property_ai14_attempt02.json",
+      "bytes": 1132,
+      "sha256": "be4c70628e048c7189850361d8f5e9e4482924ae773beb88f8ecdbc5dc68fc70",
+      "role": "support"
+    },
+    {
+      "id": "role_fact_property_clinical48",
+      "path": "orchestration/programme/g2-closeout-evidence/role-facts/property_clinical48.json",
+      "bytes": 1128,
+      "sha256": "b8a2ada6fd53ea9af8a79607fbafae3b5d79e01ddea899d62eeba68580484702",
+      "role": "support"
+    },
+    {
+      "id": "role_fact_property_crypto_six",
+      "path": "orchestration/programme/g2-closeout-evidence/role-facts/property_crypto_six.json",
+      "bytes": 1128,
+      "sha256": "02bc21bf66249e3467633971fc50c1ec17cff9b9475a3cb2079abf9f9fef85e0",
+      "role": "support"
+    },
+    {
+      "id": "role_fact_property_green02",
+      "path": "orchestration/programme/g2-closeout-evidence/role-facts/property_green02.json",
+      "bytes": 1125,
+      "sha256": "86f418966766da032a2df357a1bde3a30351edaaf1cd026807ad1be46474a479",
+      "role": "support"
+    },
+    {
+      "id": "role_fact_property_green_twentyeight",
+      "path": "orchestration/programme/g2-closeout-evidence/role-facts/property_green_twentyeight.json",
+      "bytes": 1135,
+      "sha256": "ff5e4ff93a20c6a822ab28ad5527984597f7c6e9f0e209be38a7c9117612d066",
+      "role": "support"
+    },
+    {
+      "id": "role_fact_property_original_o1_30",
+      "path": "orchestration/programme/g2-closeout-evidence/role-facts/property_original_o1_30.json",
+      "bytes": 1132,
+      "sha256": "8f12e185da692e1b50f6eed0c6e4d39185972664c0b7980b1fdc7afaa895881d",
+      "role": "support"
+    },
+    {
+      "id": "role_fact_property_pyjwt30",
+      "path": "orchestration/programme/g2-closeout-evidence/role-facts/property_pyjwt30.json",
+      "bytes": 1125,
+      "sha256": "1e491ae22c7c7be2a21703a7f30195d0eb064250251e8e4a4bd700d46c357ef8",
+      "role": "support"
+    },
+    {
+      "id": "role_fact_property_src2_current",
+      "path": "orchestration/programme/g2-closeout-evidence/role-facts/property_src2_current.json",
+      "bytes": 1286,
+      "sha256": "ead1a98613cb2098a0233d8bfe6d08759cdaa8de6c6c86f0a72e7f523a7530e6",
+      "role": "support"
+    },
+    {
+      "id": "role_fact_support_ci_b_88",
+      "path": "orchestration/programme/g2-closeout-evidence/role-facts/support_ci_b_88.json",
+      "bytes": 1124,
+      "sha256": "43ef584717a08ee5733dc2ffb3fa73f821c0ee89f7697ade71c53debe87edc65",
+      "role": "support"
+    },
+    {
+      "id": "role_fact_support_current49",
+      "path": "orchestration/programme/g2-closeout-evidence/role-facts/support_current49.json",
+      "bytes": 1126,
+      "sha256": "6fc1e462f5623ca603008b74ce0a5c276fab9bc0b40f5f51ae8c47107291988c",
+      "role": "support"
+    },
+    {
+      "id": "role_fact_support_delete_postclaim_one",
+      "path": "orchestration/programme/g2-closeout-evidence/role-facts/support_delete_postclaim_one.json",
+      "bytes": 1137,
+      "sha256": "81a5ce90847105a5b0bdbcb4ed2b99ead9e6ffb0f9f822372071db6bc487e4ff",
+      "role": "support"
+    },
+    {
+      "id": "role_fact_support_first_write_five",
+      "path": "orchestration/programme/g2-closeout-evidence/role-facts/support_first_write_five.json",
+      "bytes": 1133,
+      "sha256": "833514fdefd71a885cb91af3db139a06711c89f0abc3ac7359d02bb2ab24041a",
+      "role": "support"
+    },
+    {
+      "id": "role_fact_support_input_guards_ten",
+      "path": "orchestration/programme/g2-closeout-evidence/role-facts/support_input_guards_ten.json",
+      "bytes": 1133,
+      "sha256": "e1a94f9022e7f491f97ac24787b00d08d61fe5874ab135351422ee76e5229680",
+      "role": "support"
+    },
+    {
+      "id": "role_fact_support_residual_thirteen",
+      "path": "orchestration/programme/g2-closeout-evidence/role-facts/support_residual_thirteen.json",
+      "bytes": 1134,
+      "sha256": "6fb711b281d4a818a94d34d9b14ce183c30cf04fa891eec53da0666480fbe9f1",
+      "role": "support"
+    },
+    {
+      "id": "role_fact_support_sibling_three",
+      "path": "orchestration/programme/g2-closeout-evidence/role-facts/support_sibling_three.json",
+      "bytes": 1130,
+      "sha256": "f42cc8bfefc6887b8c0f1acd8356e2221db07899504fd0e521417975704c9702",
+      "role": "support"
+    },
+    {
+      "id": "role_fact_support_state_receipt_nine",
+      "path": "orchestration/programme/g2-closeout-evidence/role-facts/support_state_receipt_nine.json",
+      "bytes": 1135,
+      "sha256": "34e5e8647ba7a8c435b5216325808e1f633cefa86db3ea03ea9d78e23e8153a3",
+      "role": "support"
+    },
+    {
+      "id": "role_fact_support_static_status_current_subject_attempt03",
+      "path": "orchestration/programme/g2-closeout-evidence/role-facts/support_static_status_current_subject_attempt03.json",
+      "bytes": 1274,
+      "sha256": "49d1cbc2db1e7b836d4ed4ebc9702304684297f02c72dfff122138a8eda84ca3",
+      "role": "support"
+    },
+    {
+      "id": "role_fact_support_static_thirtyone",
+      "path": "orchestration/programme/g2-closeout-evidence/role-facts/support_static_thirtyone.json",
+      "bytes": 1133,
+      "sha256": "c25a27de13751d14850dac88d0c12a52844dd0199495070924d187e26d90f17d",
+      "role": "support"
+    },
+    {
+      "id": "source_review_01be86c6c0fb5ffa",
+      "path": "orchestration/programme/g2-closeout-evidence/source-reviews/01be86c6c0fb5ffa87ab5c81f722a8c2ce4971b6fece6f5d876f3f07a5e067ac.json",
+      "bytes": 14839,
+      "sha256": "01be86c6c0fb5ffa87ab5c81f722a8c2ce4971b6fece6f5d876f3f07a5e067ac",
+      "role": "support"
+    },
+    {
+      "id": "source_review_14330885f5b33012",
+      "path": "orchestration/programme/g2-closeout-evidence/source-reviews/14330885f5b33012b4acac3938609642bfbbde332b7939505c2d2c41c593aa4d.json",
+      "bytes": 17889,
+      "sha256": "14330885f5b33012b4acac3938609642bfbbde332b7939505c2d2c41c593aa4d",
+      "role": "support"
+    },
+    {
+      "id": "source_review_34fd9cfa146bbfcb",
+      "path": "orchestration/programme/g2-closeout-evidence/source-reviews/34fd9cfa146bbfcbdc1aecb8ff05f78e16390b5b156410e2da10bc324ea2eb45.json",
+      "bytes": 22726,
+      "sha256": "34fd9cfa146bbfcbdc1aecb8ff05f78e16390b5b156410e2da10bc324ea2eb45",
+      "role": "support"
+    },
+    {
+      "id": "source_review_36a00c074df6ec39",
+      "path": "orchestration/programme/g2-closeout-evidence/source-reviews/36a00c074df6ec391e4b82fe6e1d964b5433cf0f8d690214e7bb7ff73fb30e7c.json",
+      "bytes": 17029,
+      "sha256": "36a00c074df6ec391e4b82fe6e1d964b5433cf0f8d690214e7bb7ff73fb30e7c",
+      "role": "support"
+    },
+    {
+      "id": "source_review_3ac00633f6e588d4",
+      "path": "orchestration/programme/g2-closeout-evidence/source-reviews/3ac00633f6e588d43d64d932f166f7210fccb4334653fdf1890a0fadafffc1d8.json",
+      "bytes": 23513,
+      "sha256": "3ac00633f6e588d43d64d932f166f7210fccb4334653fdf1890a0fadafffc1d8",
+      "role": "support"
+    },
+    {
+      "id": "source_review_46ac796b2e2c6b01",
+      "path": "orchestration/programme/g2-closeout-evidence/source-reviews/46ac796b2e2c6b014a126f9f842575c991d289ae49cd97eb15c39ee383ef985f.json",
+      "bytes": 12529,
+      "sha256": "46ac796b2e2c6b014a126f9f842575c991d289ae49cd97eb15c39ee383ef985f",
+      "role": "support"
+    },
+    {
+      "id": "source_review_5d0661ea68d22923",
+      "path": "orchestration/programme/g2-closeout-evidence/source-reviews/5d0661ea68d2292328cf5e034bb336bdd6728122767655244463cb35dc960cf4.json",
+      "bytes": 6611,
+      "sha256": "5d0661ea68d2292328cf5e034bb336bdd6728122767655244463cb35dc960cf4",
+      "role": "support"
+    },
+    {
+      "id": "source_review_6f7e3a8a0be1d404",
+      "path": "orchestration/programme/g2-closeout-evidence/source-reviews/6f7e3a8a0be1d404f533c721be446076ac3758f5c009cbec74367f14964f6730.json",
+      "bytes": 11380,
+      "sha256": "6f7e3a8a0be1d404f533c721be446076ac3758f5c009cbec74367f14964f6730",
+      "role": "support"
+    },
+    {
+      "id": "source_review_97af8e18a4751c77",
+      "path": "orchestration/programme/g2-closeout-evidence/source-reviews/97af8e18a4751c77beb5e5d2bb48b3d19d039a43d2ed6d9727a59b94d53c180c.json",
+      "bytes": 3898,
+      "sha256": "97af8e18a4751c77beb5e5d2bb48b3d19d039a43d2ed6d9727a59b94d53c180c",
+      "role": "support"
+    },
+    {
+      "id": "source_review_9dd968e88aaff548",
+      "path": "orchestration/programme/g2-closeout-evidence/source-reviews/9dd968e88aaff5486ac26493fb5464bfdb6c6f826e315e77e59b68dfff9779e3.json",
+      "bytes": 8006,
+      "sha256": "9dd968e88aaff5486ac26493fb5464bfdb6c6f826e315e77e59b68dfff9779e3",
+      "role": "support"
+    },
+    {
+      "id": "source_review_ada7181898726a64",
+      "path": "orchestration/programme/g2-closeout-evidence/source-reviews/ada7181898726a64949f7a41ab035c7e8d43eb06e0f3574b46ce9ae0612bf228.json",
+      "bytes": 4368,
+      "sha256": "ada7181898726a64949f7a41ab035c7e8d43eb06e0f3574b46ce9ae0612bf228",
+      "role": "support"
+    },
+    {
+      "id": "source_review_cbc0d2589c8e125c",
+      "path": "orchestration/programme/g2-closeout-evidence/source-reviews/cbc0d2589c8e125c2351fc1b063198bb05f42ef2ecdf9c5c5158d6e97a10e8c7.json",
+      "bytes": 26061,
+      "sha256": "cbc0d2589c8e125c2351fc1b063198bb05f42ef2ecdf9c5c5158d6e97a10e8c7",
+      "role": "support"
+    },
+    {
+      "id": "source_review_cc400049e60a520b",
+      "path": "orchestration/programme/g2-closeout-evidence/source-reviews/cc400049e60a520b3be0b266ba0e40533a1fb20e9d11aa90e898d6f87a65997b.json",
+      "bytes": 20902,
+      "sha256": "cc400049e60a520b3be0b266ba0e40533a1fb20e9d11aa90e898d6f87a65997b",
+      "role": "support"
+    },
+    {
+      "id": "source_review_db5cc02222183dd7",
+      "path": "orchestration/programme/g2-closeout-evidence/source-reviews/db5cc02222183dd7653d0c95a593e7be67bd3752b99e5f8be1b96b8b4d51b1cd.json",
+      "bytes": 4366,
+      "sha256": "db5cc02222183dd7653d0c95a593e7be67bd3752b99e5f8be1b96b8b4d51b1cd",
+      "role": "support"
+    },
+    {
+      "id": "source_review_dbb6617cffa3cb49",
+      "path": "orchestration/programme/g2-closeout-evidence/source-reviews/dbb6617cffa3cb490fecde329d1f7b79fe021e4bebf465cecc2a2d1d5711e4c6.json",
+      "bytes": 3527,
+      "sha256": "dbb6617cffa3cb490fecde329d1f7b79fe021e4bebf465cecc2a2d1d5711e4c6",
+      "role": "support"
+    },
+    {
+      "id": "source_review_f4b4c003db166b44",
+      "path": "orchestration/programme/g2-closeout-evidence/source-reviews/f4b4c003db166b4426eb342c98d2e6dfb3552eed5b7d9f48f3d97f9f83435111.json",
+      "bytes": 10146,
+      "sha256": "f4b4c003db166b4426eb342c98d2e6dfb3552eed5b7d9f48f3d97f9f83435111",
+      "role": "support"
+    },
+    {
+      "id": "source_review_safety_review",
+      "path": "orchestration/programme/g2-closeout-evidence/source-reviews/66792638eb5246d856ce46bd47cdf525282c43823e828fddbbe1221e240ec75a.json",
+      "bytes": 19173,
+      "sha256": "66792638eb5246d856ce46bd47cdf525282c43823e828fddbbe1221e240ec75a",
+      "role": "support"
+    },
+    {
+      "id": "source_review_src2_current",
+      "path": "orchestration/programme/g2-closeout-evidence/source-reviews/497dc2058390df4058b131f4057193c51fa1070f6af136271205d8f5d5c6194a.json",
+      "bytes": 13077,
+      "sha256": "497dc2058390df4058b131f4057193c51fa1070f6af136271205d8f5d5c6194a",
+      "role": "support"
+    },
+    {
+      "id": "complete_plan",
+      "path": "orchestration/programme/g2-closeout-evidence/required-plan.json",
+      "bytes": 11869,
+      "sha256": "e92c0fb7bbfc1de747d26efaa5fe055d1576ab4d056140dafd4e1d744825c4d8",
+      "role": "plan"
+    },
+    {
+      "id": "complete_population",
+      "path": "orchestration/programme/g2-closeout-evidence/population.json",
+      "bytes": 33216,
+      "sha256": "5d0ed12b511a49232b681bb653d78d403788ec0161a40a55a078760bc8eb2d3e",
+      "role": "population"
+    },
+    {
+      "id": "complete_identity",
+      "path": "orchestration/programme/g2-closeout-evidence/test-identity-map.json",
+      "bytes": 41201,
+      "sha256": "94fd28e56bad7af7a5c9574f2c8244ab3e661aa629e2f4235928b83301670668",
+      "role": "test_identity_map"
+    },
+    {
+      "id": "bounded_selection",
+      "path": "orchestration/programme/g2-closeout-evidence/bounded-selection.json",
+      "bytes": 8480,
+      "sha256": "4e7fb4b394a7fc5a0459f2b162cc0005195ce4131e22529ab7cb368504da4a2c",
+      "role": "selection"
+    },
+    {
+      "id": "current_context_relevance",
+      "path": "orchestration/programme/g2-closeout-evidence/source-reviews/current-context-and-reuse-v3.json",
+      "bytes": 45543,
+      "sha256": "08316584e3ddb04f7e93c1200d173ffc26e31e372bfd65e7656ac689bb3f4dc1",
+      "role": "support"
+    },
+    {
+      "id": "complete_evidence",
+      "path": "orchestration/programme/g2-closeout-evidence/obligation-evidence.json",
+      "bytes": 227608,
+      "sha256": "dfc9457c46ed7e16a298ab67c96d522719fbae0be72e3989a952ededb75ec11c",
+      "role": "evidence"
+    },
+    {
+      "id": "complete_review_bindings",
+      "path": "orchestration/programme/g2-closeout-evidence/obligation-review-bindings.json",
+      "bytes": 76744,
+      "sha256": "ef80140c876e2ae06fc0ef46b09d3e9f67ad55e585ecf95a220fe5ae3550d5a8",
+      "role": "review_bindings"
+    },
+    {
+      "id": "complete_acceptance",
+      "path": "orchestration/programme/g2-closeout-evidence/complete-evidence-acceptance.json",
+      "bytes": 32896,
+      "sha256": "77cd8161c158d0804c4bd98badcd8042b276986689a98d1935bebf74ca7b53b9",
+      "role": "acceptance"
+    }
+  ]
+}

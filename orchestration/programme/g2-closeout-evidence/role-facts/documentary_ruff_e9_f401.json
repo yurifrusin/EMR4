@@ -1,0 +1,31 @@
+{
+  "schema": "emr4.ci_c_documentary_role_facts.v7",
+  "check_id": "documentary_ruff_e9_f401",
+  "source_only_receipt": {
+    "kind": "qualified_retained_public_source_normalization",
+    "public_packet_sha256": "7d45af14c43b83de4cc9732811984909da20c987f5bc88d75f53ca6d9933c488",
+    "required_domain_review_sha256": "8204370017342c32242b54e487cfb7900b6a8c2bd5fbf9eeff5e722379d5e312",
+    "new_scan_compile_runtime_or_cleanup_effect": false
+  },
+  "result": {
+    "kind": "qualified_documentary_predicate",
+    "scope": "Public R4-R7 canonical E9/F401 retained ordinary294 and named afterimage only; isolated V3 three-file E9,F401,F821 result is supplemental, noncanonical configuration",
+    "support_artifact_ids": [
+      "accepted_public_eight_row_packet",
+      "source_v11_reconciliation",
+      "source_ruff_three_file_supplement"
+    ],
+    "current_final_source_config_runtime_binding": null
+  },
+  "cleanup": {
+    "kind": "source_only_no_new_effect",
+    "new_cleanup_performed": false,
+    "historical_cleanup_event_details": null
+  },
+  "review_status": {
+    "domain_approved": true,
+    "formal_criterion_or_complete_check_accepted": false
+  },
+  "final_context": null,
+  "final_check_acceptance": null
+}

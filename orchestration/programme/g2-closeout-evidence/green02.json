@@ -1,0 +1,40 @@
+{
+  "schema": "emr4.authenticated_cohort_support_projection.v1",
+  "cohort_id": "green02",
+  "collection": [
+    "confirmation_current/test_delete_audit_warning_atomicity.py::test_new_v2_staged_write_or_receipt_failure_rolls_back_everything"
+  ],
+  "phase_rows": [
+    {
+      "nodeid": "confirmation_current/test_delete_audit_warning_atomicity.py::test_new_v2_staged_write_or_receipt_failure_rolls_back_everything",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_delete_audit_warning_atomicity.py::test_new_v2_staged_write_or_receipt_failure_rolls_back_everything",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_delete_audit_warning_atomicity.py::test_new_v2_staged_write_or_receipt_failure_rolls_back_everything",
+      "phase": "teardown",
+      "outcome": "passed"
+    }
+  ],
+  "source_primary": {
+    "path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/ordinary-applicability/delete-contract-green-execution-preparation-v5/decoded-reports/tenant-primary.json",
+    "sha256": "b58efd7c272e59dc214caf605e791784cc5ecd206f007ef374d0b271ecb698ed",
+    "collection_path": [
+      "collected"
+    ],
+    "reports_path": [
+      "reports"
+    ]
+  },
+  "result_review": {
+    "path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/reviews/delete-contract-green-continuation-result-review-v2.json",
+    "sha256": "6f7e3a8a0be1d404f533c721be446076ac3758f5c009cbec74367f14964f6730"
+  },
+  "qualification": "One accepted current audit-warning rollback scenario/three pytest phases. Original GREEN29 NONPASS and qualified28 remain unchanged, separate origins.",
+  "population_membership_accepted": false
+}

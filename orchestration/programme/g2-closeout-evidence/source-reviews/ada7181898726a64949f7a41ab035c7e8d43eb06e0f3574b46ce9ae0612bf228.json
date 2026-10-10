@@ -1,0 +1,95 @@
+{
+  "schema": "dependency_library_independent_result_review.v1",
+  "verdict": "ACCEPTED_BOUNDED_LIBRARY_COMPATIBILITY_EVIDENCE",
+  "reviewer_agent": "/root/resumption_activation_review",
+  "blocking_findings": [],
+  "result_sha256": "2c47ceb3bbd870a7f48afdd2ad36febcb3bd96f256c99901e8edb96c9349f5cb",
+  "binding_sha256": "981c81c62d65f68a8140a8c997a47d7e9c8b3455f40277ade1c0cf7ce51e5c70",
+  "execution_review_sha256": "ddc62aa79c8d20e74e4c76fe78e7ef9a59fbdccbd38adafa7b0a508e5fd28814",
+  "launcher_sha256": "e27dc0c41b26c23eb1a8f942f4dcb027c45e5cc6399cb443a08af5a4f36a0d12",
+  "source_sha256": {
+    "run_tests.py": "e64b02394d93306de5cd243ab1bc1dfac6c1bb94ff7beb1ccc015bde9eca3e90",
+    "test_dependency_compatibility.py": "249eeeb3e506691cdcf608a5ef42671b6a5244a37aed55693bc541f73d78861b",
+    "pytest.ini": "713f986ee48be06ad4bff2a700d39514a9f69e34b3547af52366c0a274e30e5b"
+  },
+  "evidence_sha256": {
+    "started.json": "ec3cc5f290c72ff75a58e05d4900f58a1c8cae549f10145f1b2fbcdeb9e4a508",
+    "collect-stdout.txt": "530d16c7415f900d591ac278abfbf4117a91f423c65f049d195a4e6d305deefd",
+    "collect-stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "test-stdout.txt": "fde5d2801c717aaeabec5eb3a3972e9ef6f3008acb95dd2e10eb3afc33a88aa7",
+    "test-stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "prestart-inspect-collect.json": "8380c88fee81c50ef6295f5121b38e1c559a77a417d4e82e836decdab94db1e4",
+    "prestart-inspect-test.json": "c1f704c1c6829f5231c6f24924274bcfde706ca7e3d7f269adefffd8bc9dad31"
+  },
+  "actual_result": {
+    "operation_id": "g2-dependency-library-compatibility-20260926-v4",
+    "attempts": 1,
+    "automatic_retry": false,
+    "collected_cases": 18,
+    "executed_cases": 18,
+    "passed_cases": 18,
+    "passed_unique_phases": 54,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0,
+    "xfails": 0,
+    "guard_violations": 0,
+    "elapsed_seconds": 4.205719799967483,
+    "phase_container_exit_codes": [
+      0,
+      0
+    ],
+    "phase_clients_closed": true,
+    "phase_readers_closed": true,
+    "outputs_complete": true,
+    "stderr_empty": true,
+    "both_owned_containers_absent": true,
+    "v4_volume_mounts_observed": 0,
+    "volume_deletion_attempted": false
+  },
+  "runtime": {
+    "image_id": "sha256:192e420d4057bc851bb8db5af2495c35281fca92e56a76cec7f32cf8d3a6e1f9",
+    "versions": {
+      "authlib": "1.7.2",
+      "cffi": "2.1.1",
+      "cryptography": "50.0.1",
+      "iniconfig": "2.3.0",
+      "joserfc": "1.7.4",
+      "packaging": "26.3",
+      "pluggy": "1.6.0",
+      "pycparser": "3.0",
+      "pygments": "2.21.0",
+      "pyjwt": "2.13.0",
+      "pyopenssl": "26.4.0",
+      "pytest": "9.1.1",
+      "typing-extensions": "4.16.0"
+    },
+    "python": "3.11.2 (main, May 12 2026, 05:17:27) [GCC 12.2.0]",
+    "openssl": "OpenSSL 4.0.2 25 Aug 2026",
+    "kernel_network_probe": "EPERM",
+    "blocked_import_probes": [
+      "org",
+      "bcrypt"
+    ]
+  },
+  "cumulative_accounting": {
+    "operation_attempts": 4,
+    "started_collection_attempts": 3,
+    "completed_collections": 1,
+    "test_execution_attempts": 1,
+    "prior_failures_preserved": true
+  },
+  "limits": [
+    "Accepts only the 18 independently authored library positive/negative cases on the exact isolated image, with one successful collection and execution. Supporting phases are not extra test cases.",
+    "Optional org/bcrypt imports were denied and caught; neither package was loaded by those probes. This does not establish bcrypt or full 74-package compatibility.",
+    "Prestart snapshots and owner-bound cleanup establish no V4 volume mounts and both V4 containers absent. Earlier V1 storage residue remains unresolved with owner approval pending; this result neither clears that residue nor authorizes deletion.",
+    "No application/database/provider execution, all-repository compatibility, advisory exploitability/remediation, publication or G2 acceptance is inferred. Controller admission failure is a separate lane.",
+    "No rerun or Docker observation by reviewer. Exact persisted results were reconciled against the reviewed launcher and inputs; general daemon/descendant closure is not claimed."
+  ],
+  "allocation": {
+    "configured_model": "gpt-6-astra",
+    "configured_reasoning": "high",
+    "resolved_telemetry": "unavailable",
+    "descendants": 0
+  }
+}

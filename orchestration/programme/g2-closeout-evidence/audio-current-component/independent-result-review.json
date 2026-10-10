@@ -1,0 +1,138 @@
+{
+  "schema": "emr4.independent_audio67_fixture_attempt_result_review.v1",
+  "reviewer_task": "/root/g2_guard_review",
+  "verdict": "ACCEPTED_EXACT_AUDIO67_COMPONENT_RESULT_AND_DIRECT_CHILD_CLEANUP",
+  "accepted": true,
+  "pending": [],
+  "operation": "g2-audio-ordinary-dom-fixture-20261009-attempt01",
+  "binding_sha256": "a902c751f6828c85f78bf64670f684471670bcb2f194617b35d0b08ccc1eb04a",
+  "source_execution_review_sha256": "663c5676bffa699e1f2db98a6e954af3a7f1d6d0de860414780af64def220fbc",
+  "reviewer": {
+    "allocation": "GPT-6.1 Sol/high retained by root; provider-resolved settings unobservable",
+    "independence": "No source, fixture, launcher, grant or execution authorship. Reviewer reconciled literal completed-attempt data and unchanged independently reviewed inputs, and writes only this owned result review; no descendants."
+  },
+  "rehydration": "Current C:/Users/there/EMR4/AGENTS.md read first for this assignment; bounded worker role and shared closures retained.",
+  "authority_provenance": {
+    "source_binding_independently_accepted_before_launch": true,
+    "grant": "Coordinator reports exact initial finite grant recorded before this sole launch at existing checkpoint key g2_audio67_initial_finite_grant_20261009_v1.",
+    "checkpoint_predecessor_reported": "a378",
+    "checkpoint_after_grant_sha256_reported": "f4c7824c68732bea163320e806ba06fde99fe89820bc6a2653a3428034b75c23",
+    "verification_limit": "Grant/checkpoint timing and native chunk are trusted coordinator assignment observations, not an independent read/hash of the whole mutable checkpoint. This reviewer authenticated exact intent/result/source-review joins and actual captures; no broader checkpoint inventory is implied.",
+    "coordinator_native_observation": {
+      "chunk": "0e6a64",
+      "exit_code": 0,
+      "wall_seconds": 0.9389,
+      "in_flight": false
+    }
+  },
+  "verified_actual_artifacts": [
+    {
+      "path": "ordinary-applicability/audio-ordinary-dom-fixture-candidate-v1/execution-v1/attempt01-intent.json",
+      "bytes": 709,
+      "sha256": "1c106ce93bab1b652d0ce88c200431ec0300d6af0194994dfd7f083f1628d27c"
+    },
+    {
+      "path": "ordinary-applicability/audio-ordinary-dom-fixture-candidate-v1/execution-v1/attempt01-result.json",
+      "bytes": 2939,
+      "sha256": "5eb6306ed121a2501b9584097384f7d10c1773dc785876db52dd0cb8db38d11c"
+    },
+    {
+      "path": "ordinary-applicability/audio-ordinary-dom-fixture-candidate-v1/execution-v1/attempt01-stdout.txt",
+      "bytes": 4209,
+      "sha256": "53a4f3da942b911d341480c4ec61ad819e9a6f6c1edaf10d0364bab0cb7ec2b9"
+    },
+    {
+      "path": "ordinary-applicability/audio-ordinary-dom-fixture-candidate-v1/execution-v1/attempt01-stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "independent_reconciliation": {
+    "complete_intent_result_stdout_stderr_read": true,
+    "all_actual_artifact_sizes_and_hashes_match": true,
+    "intent_review_binding_join_exact": true,
+    "result_review_binding_join_exact": true,
+    "intent_budget_matches_reviewed_binding": true,
+    "intent_reserved_once": true,
+    "command_length": 29632,
+    "stdout_json_keys_exact": [
+      "passed",
+      "cases"
+    ],
+    "stdout_passed_boolean_true": true,
+    "stdout_ordered_case_sequence_matches_source_derived_expected": true,
+    "ordered_subchecks": 67,
+    "unique_display_names": 65,
+    "duplicate_preservation": "Three distinct scribe-error parameter variants intentionally share the display name scribe error cannot report success. All three occurrences are retained in exact order; no deduplication or unique-name requirement.",
+    "interpretation": "Complete source reviewed before launch appends each case name only after its awaited assertions finish; no suppressed failures or fabricated phase statuses were introduced. Exact unchanged embedded program and complete ordered output substantiate the actual67 subcheck result.",
+    "exit_code": 0,
+    "elapsed_node_seconds": 0.2541118000226561,
+    "timeout_seconds": 120,
+    "timed_out": false,
+    "launch_error": null,
+    "parse_error": null,
+    "stdout_truncated": false,
+    "stderr_truncated": false,
+    "stderr_empty": true,
+    "direct_child_reaped": true,
+    "all_eight_bound_input_hashes_and_sizes_independently_rechecked_unchanged": true,
+    "source_reuse": "Reused this reviewer's complete launcher/embedded program/target source judgment663c with fresh byte identities, rather than importing or evaluating source again. Source-only sole30-byte addition and whole-test inverse remain established."
+  },
+  "actual_source_context": {
+    "target_path": "ordinary-applicability/ci-c-taskpane-relevance-source-v1/published.js",
+    "target_sha256": "d3186a618d22e2d85ba747292867ed4933de467b5fa2aa08a1c2b8dba00580f0",
+    "fixture_after_path": "ordinary-applicability/audio-ordinary-dom-fixture-candidate-v1/after/tests/test_consultation_audio_privacy.py",
+    "fixture_after_sha256": "8eef3db418dacd7eb10d00de2f2674b9bd5a5197243e81b786df545ec9d67014",
+    "fixture_before_sha256": "5dc75e3012512de4a0b5cf583293c653bdab27b0043c069cb1aa4018b079e0f4",
+    "embedded_program_sha256": "a526df11e53c56f388a1429e4799ea3671e41a8a325d8d86a6af185863482317",
+    "expected_cases_sha256": "1a80a1c9f7a1efd0054fdcc0ffa650370535e4c3fc986177251d0a2fb2112bac",
+    "launcher_sha256": "94fe4623ff97e4383cb1d4a3cbfb3b95ec15dac86e4d2acb58fd1395a8b7f920",
+    "manifest_sha256": "940a2179f8971bca5bee967c8674ca77c18e64f7a8261bc57fb68db6bf9db4af",
+    "python_sha256": "03168c01b7b7491423350e82c26fee71f35b43694d1319d3c668bda6903a0c38",
+    "node_sha256": "3602f2bb1a10f2cbab4c36886218a33c1ab3db87290e73b033c46c77147d0237",
+    "child_environment": {
+      "SystemRoot": "C:/Windows",
+      "WINDIR": "C:/Windows",
+      "LANG": "C.UTF-8",
+      "TZ": "UTC"
+    }
+  },
+  "cleanup_acceptance": {
+    "accepted": true,
+    "basis": "Reviewed launcher uses hidden shellfalse subprocess.run with a direct child and pipe capture. Successful return exit0 implies direct child completion/wait; result records reapedtrue, no timeout/error, complete captures and post-run input hashes. The exact reviewed program/target in supplied collaborators has no descendant-spawn operation. These agree with coordinator's completed native exit0 observation.",
+    "scope": "Direct child/process/capture cleanup accepted through established component mechanism, not an independent OS process inventory or security-job audit. No actual database/listener/browser/device or child-created persistent fixture was launched; retained evidence files are intended outputs.",
+    "resource_limits": "No hard CPU/memory/job/process caps or kernel network denial are claimed. Source evaluation/run() calls use1s VM timeout; constant fixture-seeding call relies on outer120s subprocess timeout. Output limits are post-capture acceptance limits; neither stream was truncated. VM is not a security boundary."
+  },
+  "consumption": {
+    "attempt_reservations": 1,
+    "native_parent_launches_reported": 1,
+    "node_invocations": 1,
+    "collect_only": 0,
+    "database_resets": 0,
+    "retry_remaining": 0,
+    "no_rerun_or_new_grant": true
+  },
+  "accepted_property_effect": {
+    "ordinary_identity": "tests/test_consultation_audio_privacy.py::test_browser_audio_components_with_authored_adapters",
+    "identities_credited": 1,
+    "authored_subchecks_passed": 67,
+    "pytest_collection_or_phases_executed": false,
+    "pytest_phase_count": 0,
+    "finding": "The exact corrected inner Node program now successfully exercises its preserved ordinary privacy, playback/track/transcript cleanup, stale asynchronous work, Word association/range, attestation, command-payload/retry and concurrency assertions on exact publishedd318. Resolves the current component applicability gap identified in667926 for this staged fixture afterimage.",
+    "source_correction_only": "Ordinary DOM querySelector returning null for no packaging marker; no change to production restriction latch/guards or original assertions.",
+    "identity_limit": "Direct embedded verification is an actual component outcome for one ordinary Python test identity's inner assertion program. The outer pytest function, Python setup/call/teardown and other module tests were not executed.67 subchecks are not67 pytest cases or additional original repaired failures.",
+    "historical_preservation": "Old component/historical observations and prior source/output pins remain unchanged; this current distinct actual origin does not rewrite their dates or outcomes."
+  },
+  "remaining_scope_limits": [
+    "Staged fixture afterimage is not canonical adoption or publication. Its separately reviewed ordinary CI/test correction scope remains required after product6; no six-file product afterimage is altered.",
+    "No browser/real Office/media device/backend/application/DB/provider/real data/protected execution or universal clinical guarantee.",
+    "No new distinct ordinary completed-transcription Word-write positive is asserted here; the previously documented transport35 coverage limitation remains accurately scoped.",
+    "This accepts exact actual component result and direct-child cleanup only, not whole pytest/profile/CI, final required-population adoption, SRC2 obligations, complete-v3 or G2 acceptance."
+  ],
+  "reviewer_effects": {
+    "same_attempt_data_and_literal_source_metadata_only": true,
+    "no_execution_import_collection_rerun_git_shared_or_checkpoint_write": true,
+    "no_protected_raw_diary_secrets_provider_denied_original_alias_access": true,
+    "owned_result_review_only_written": true
+  }
+}

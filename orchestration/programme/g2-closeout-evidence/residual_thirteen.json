@@ -1,0 +1,233 @@
+{
+  "schema": "emr4.ci_c_ordinary_cohort_support_source.v1",
+  "status": "SOURCE_ONLY_NONOPERATIVE",
+  "cohort_id": "residual_thirteen",
+  "collection": [
+    "tests/test_repository_maintenance.py::test_receipt_writer_emits_canonical_utf8_lf_bytes",
+    "tests/test_repository_maintenance.py::test_phase0_migration_has_empty_bootstrap_and_symmetric_cleanup",
+    "tests/test_python_source_state.py::test_complete_ci_refuses_bounded_selection_before_source_reads_or_commands[ci-correctness]",
+    "tests/test_python_source_state.py::test_complete_ci_refuses_bounded_selection_before_source_reads_or_commands[ci-lint]",
+    "tests/test_python_source_state.py::test_complete_ci_refuses_bounded_selection_before_source_reads_or_commands[ci-bandit]",
+    "tests/test_python_source_state.py::test_complete_ci_refuses_bounded_selection_before_source_reads_or_commands[ci-security]",
+    "tests/test_python_source_state.py::test_bounded_ci_remains_available_with_authenticated_selection[ci-correctness]",
+    "tests/test_python_source_state.py::test_bounded_ci_remains_available_with_authenticated_selection[ci-lint]",
+    "tests/test_python_source_state.py::test_bounded_ci_remains_available_with_authenticated_selection[ci-bandit]",
+    "tests/test_python_source_state.py::test_bounded_ci_remains_available_with_authenticated_selection[ci-security]",
+    "tests/test_python_source_state.py::test_complete_ci_does_not_accept_claimed_or_unauthenticated_completeness[claim_complete-bounded_completeness_required]",
+    "tests/test_python_source_state.py::test_complete_ci_does_not_accept_claimed_or_unauthenticated_completeness[clear_pending-bounded_completeness_required]",
+    "tests/test_python_source_state.py::test_complete_ci_does_not_accept_claimed_or_unauthenticated_completeness[bad_digest-selected_digest_mismatch]"
+  ],
+  "phase_rows": [
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_receipt_writer_emits_canonical_utf8_lf_bytes",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_receipt_writer_emits_canonical_utf8_lf_bytes",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_receipt_writer_emits_canonical_utf8_lf_bytes",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_phase0_migration_has_empty_bootstrap_and_symmetric_cleanup",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_phase0_migration_has_empty_bootstrap_and_symmetric_cleanup",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_repository_maintenance.py::test_phase0_migration_has_empty_bootstrap_and_symmetric_cleanup",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_complete_ci_refuses_bounded_selection_before_source_reads_or_commands[ci-correctness]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_complete_ci_refuses_bounded_selection_before_source_reads_or_commands[ci-correctness]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_complete_ci_refuses_bounded_selection_before_source_reads_or_commands[ci-correctness]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_complete_ci_refuses_bounded_selection_before_source_reads_or_commands[ci-lint]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_complete_ci_refuses_bounded_selection_before_source_reads_or_commands[ci-lint]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_complete_ci_refuses_bounded_selection_before_source_reads_or_commands[ci-lint]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_complete_ci_refuses_bounded_selection_before_source_reads_or_commands[ci-bandit]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_complete_ci_refuses_bounded_selection_before_source_reads_or_commands[ci-bandit]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_complete_ci_refuses_bounded_selection_before_source_reads_or_commands[ci-bandit]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_complete_ci_refuses_bounded_selection_before_source_reads_or_commands[ci-security]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_complete_ci_refuses_bounded_selection_before_source_reads_or_commands[ci-security]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_complete_ci_refuses_bounded_selection_before_source_reads_or_commands[ci-security]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_bounded_ci_remains_available_with_authenticated_selection[ci-correctness]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_bounded_ci_remains_available_with_authenticated_selection[ci-correctness]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_bounded_ci_remains_available_with_authenticated_selection[ci-correctness]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_bounded_ci_remains_available_with_authenticated_selection[ci-lint]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_bounded_ci_remains_available_with_authenticated_selection[ci-lint]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_bounded_ci_remains_available_with_authenticated_selection[ci-lint]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_bounded_ci_remains_available_with_authenticated_selection[ci-bandit]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_bounded_ci_remains_available_with_authenticated_selection[ci-bandit]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_bounded_ci_remains_available_with_authenticated_selection[ci-bandit]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_bounded_ci_remains_available_with_authenticated_selection[ci-security]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_bounded_ci_remains_available_with_authenticated_selection[ci-security]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_bounded_ci_remains_available_with_authenticated_selection[ci-security]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_complete_ci_does_not_accept_claimed_or_unauthenticated_completeness[claim_complete-bounded_completeness_required]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_complete_ci_does_not_accept_claimed_or_unauthenticated_completeness[claim_complete-bounded_completeness_required]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_complete_ci_does_not_accept_claimed_or_unauthenticated_completeness[claim_complete-bounded_completeness_required]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_complete_ci_does_not_accept_claimed_or_unauthenticated_completeness[clear_pending-bounded_completeness_required]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_complete_ci_does_not_accept_claimed_or_unauthenticated_completeness[clear_pending-bounded_completeness_required]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_complete_ci_does_not_accept_claimed_or_unauthenticated_completeness[clear_pending-bounded_completeness_required]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_complete_ci_does_not_accept_claimed_or_unauthenticated_completeness[bad_digest-selected_digest_mismatch]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_complete_ci_does_not_accept_claimed_or_unauthenticated_completeness[bad_digest-selected_digest_mismatch]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_python_source_state.py::test_complete_ci_does_not_accept_claimed_or_unauthenticated_completeness[bad_digest-selected_digest_mismatch]",
+      "phase": "teardown",
+      "outcome": "passed"
+    }
+  ],
+  "provenance": {
+    "source_path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/ordinary-applicability/residual-current-controls-execution-preparation-v2/result.json",
+    "source_sha256": "640b65ab71bfb2ef3e7da88b9a6fcb065b8f2df9fd158e3e0b1795f313f90586",
+    "independent_review_path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/reviews/residual-controls-continuation-result-review-v2.json",
+    "independent_review_sha256": "cc400049e60a520b3be0b266ba0e40533a1fb20e9d11aa90e898d6f87a65997b",
+    "raw_outer_result_path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/ordinary-applicability/residual-current-controls-execution-preparation-v2/result.json",
+    "raw_outer_result_sha256": "640b65ab71bfb2ef3e7da88b9a6fcb065b8f2df9fd158e3e0b1795f313f90586",
+    "raw_batch_passed": true,
+    "raw_batch_nonpass_preserved": false,
+    "selected_from_larger_raw_result": false,
+    "keyed_report_source_normalized": false,
+    "qualified_subset_only": false,
+    "source_observation_sha256": "538c2f3e601cfc4e95fab5ecb2a5cd9efcbeb8e69c3e9f6801f7504a4bced667"
+  },
+  "accepted_population_test_ids": null,
+  "complete_v3_check_verdict": null
+}

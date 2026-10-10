@@ -1,0 +1,524 @@
+{
+  "schema": "emr4.ci_c_ordinary_cohort_support_source.v1",
+  "status": "SOURCE_ONLY_NONOPERATIVE",
+  "cohort_id": "static_thirtyone",
+  "collection": [
+    "tests/test_api_spine_staff_create_confirm_idempotency_route_contract.py::test_staff_create_confirm_route_test_contract_records_wired_scope",
+    "tests/test_api_spine_staff_create_confirm_idempotency_route_contract.py::test_router_keeps_staff_create_confirm_idempotency_surface_scoped",
+    "tests/test_api_spine_bernie_create_confirm_idempotency_route_contract.py::test_bernie_create_confirm_route_test_contract_records_scope",
+    "tests/test_api_spine_bernie_create_confirm_idempotency_route_contract.py::test_bernie_create_confirm_contract_lists_future_behavior_cases",
+    "tests/test_api_spine_bernie_create_confirm_idempotency_route_contract.py::test_bernie_create_confirm_contract_records_deepseek_session_event_review",
+    "tests/test_api_spine_bernie_create_confirm_idempotency_route_contract.py::test_current_router_wires_confirm_bernie_idempotency_surface",
+    "tests/test_api_spine_bernie_create_confirm_idempotency_route_contract.py::test_existing_bernie_confirm_tests_send_idempotency_keys",
+    "tests/test_api_spine_bernie_create_confirm_idempotency_route_contract.py::test_route_contract_test_inventory_matches_wired_surface",
+    "tests/test_api_spine_status_confirm_idempotency_route_contract.py::test_status_confirm_route_test_contract_records_scope",
+    "tests/test_api_spine_status_confirm_idempotency_route_contract.py::test_status_confirm_contract_lists_future_behavior_cases",
+    "tests/test_api_spine_status_confirm_idempotency_route_contract.py::test_status_confirm_contract_records_deepseek_family_selection_review",
+    "tests/test_api_spine_status_confirm_idempotency_route_contract.py::test_existing_status_confirm_tests_cover_semantics_to_preserve",
+    "tests/test_api_spine_status_confirm_idempotency_route_contract.py::test_status_confirm_metadata_boundary_is_documented",
+    "tests/test_api_spine_status_confirm_idempotency_route_contract.py::test_route_contract_test_inventory_matches_wired_surface",
+    "tests/test_api_spine_update_confirm_idempotency_route_contract.py::test_update_confirm_route_test_contract_records_scope",
+    "tests/test_api_spine_update_confirm_idempotency_route_contract.py::test_update_confirm_contract_lists_future_behavior_cases",
+    "tests/test_api_spine_update_confirm_idempotency_route_contract.py::test_update_confirm_contract_records_update_specific_gotchas",
+    "tests/test_api_spine_update_confirm_idempotency_route_contract.py::test_update_confirm_contract_records_deepseek_family_selection_review",
+    "tests/test_api_spine_update_confirm_idempotency_route_contract.py::test_update_confirm_contract_records_canonicalization_boundary",
+    "tests/test_api_spine_update_confirm_idempotency_route_contract.py::test_current_router_wires_update_confirm_idempotency_surface",
+    "tests/test_api_spine_update_confirm_idempotency_route_contract.py::test_current_router_keeps_proposal_delete_and_raw_update_out_of_scope",
+    "tests/test_api_spine_update_confirm_idempotency_route_contract.py::test_existing_update_confirm_tests_cover_semantics_to_preserve",
+    "tests/test_api_spine_update_confirm_idempotency_route_contract.py::test_route_contract_test_inventory_matches_wired_surface",
+    "tests/test_api_spine_delete_confirm_idempotency_route_contract.py::test_delete_confirm_route_test_contract_records_scope",
+    "tests/test_api_spine_delete_confirm_idempotency_route_contract.py::test_delete_confirm_contract_lists_future_behavior_cases",
+    "tests/test_api_spine_delete_confirm_idempotency_route_contract.py::test_delete_confirm_contract_records_delete_specific_gotchas",
+    "tests/test_api_spine_delete_confirm_idempotency_route_contract.py::test_delete_confirm_contract_records_deepseek_preflight_review",
+    "tests/test_api_spine_delete_confirm_idempotency_route_contract.py::test_current_router_wires_delete_confirm_idempotency_surface",
+    "tests/test_api_spine_delete_confirm_idempotency_route_contract.py::test_current_router_keeps_raw_and_proposal_delete_out_of_scope",
+    "tests/test_api_spine_delete_confirm_idempotency_route_contract.py::test_existing_delete_confirm_tests_cover_semantics_to_preserve",
+    "tests/test_api_spine_delete_confirm_idempotency_route_contract.py::test_route_contract_test_inventory_matches_wired_surface"
+  ],
+  "phase_rows": [
+    {
+      "nodeid": "tests/test_api_spine_staff_create_confirm_idempotency_route_contract.py::test_staff_create_confirm_route_test_contract_records_wired_scope",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_staff_create_confirm_idempotency_route_contract.py::test_staff_create_confirm_route_test_contract_records_wired_scope",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_staff_create_confirm_idempotency_route_contract.py::test_staff_create_confirm_route_test_contract_records_wired_scope",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_staff_create_confirm_idempotency_route_contract.py::test_router_keeps_staff_create_confirm_idempotency_surface_scoped",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_staff_create_confirm_idempotency_route_contract.py::test_router_keeps_staff_create_confirm_idempotency_surface_scoped",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_staff_create_confirm_idempotency_route_contract.py::test_router_keeps_staff_create_confirm_idempotency_surface_scoped",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_bernie_create_confirm_idempotency_route_contract.py::test_bernie_create_confirm_route_test_contract_records_scope",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_bernie_create_confirm_idempotency_route_contract.py::test_bernie_create_confirm_route_test_contract_records_scope",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_bernie_create_confirm_idempotency_route_contract.py::test_bernie_create_confirm_route_test_contract_records_scope",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_bernie_create_confirm_idempotency_route_contract.py::test_bernie_create_confirm_contract_lists_future_behavior_cases",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_bernie_create_confirm_idempotency_route_contract.py::test_bernie_create_confirm_contract_lists_future_behavior_cases",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_bernie_create_confirm_idempotency_route_contract.py::test_bernie_create_confirm_contract_lists_future_behavior_cases",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_bernie_create_confirm_idempotency_route_contract.py::test_bernie_create_confirm_contract_records_deepseek_session_event_review",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_bernie_create_confirm_idempotency_route_contract.py::test_bernie_create_confirm_contract_records_deepseek_session_event_review",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_bernie_create_confirm_idempotency_route_contract.py::test_bernie_create_confirm_contract_records_deepseek_session_event_review",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_bernie_create_confirm_idempotency_route_contract.py::test_current_router_wires_confirm_bernie_idempotency_surface",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_bernie_create_confirm_idempotency_route_contract.py::test_current_router_wires_confirm_bernie_idempotency_surface",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_bernie_create_confirm_idempotency_route_contract.py::test_current_router_wires_confirm_bernie_idempotency_surface",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_bernie_create_confirm_idempotency_route_contract.py::test_existing_bernie_confirm_tests_send_idempotency_keys",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_bernie_create_confirm_idempotency_route_contract.py::test_existing_bernie_confirm_tests_send_idempotency_keys",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_bernie_create_confirm_idempotency_route_contract.py::test_existing_bernie_confirm_tests_send_idempotency_keys",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_bernie_create_confirm_idempotency_route_contract.py::test_route_contract_test_inventory_matches_wired_surface",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_bernie_create_confirm_idempotency_route_contract.py::test_route_contract_test_inventory_matches_wired_surface",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_bernie_create_confirm_idempotency_route_contract.py::test_route_contract_test_inventory_matches_wired_surface",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_status_confirm_idempotency_route_contract.py::test_status_confirm_route_test_contract_records_scope",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_status_confirm_idempotency_route_contract.py::test_status_confirm_route_test_contract_records_scope",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_status_confirm_idempotency_route_contract.py::test_status_confirm_route_test_contract_records_scope",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_status_confirm_idempotency_route_contract.py::test_status_confirm_contract_lists_future_behavior_cases",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_status_confirm_idempotency_route_contract.py::test_status_confirm_contract_lists_future_behavior_cases",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_status_confirm_idempotency_route_contract.py::test_status_confirm_contract_lists_future_behavior_cases",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_status_confirm_idempotency_route_contract.py::test_status_confirm_contract_records_deepseek_family_selection_review",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_status_confirm_idempotency_route_contract.py::test_status_confirm_contract_records_deepseek_family_selection_review",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_status_confirm_idempotency_route_contract.py::test_status_confirm_contract_records_deepseek_family_selection_review",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_status_confirm_idempotency_route_contract.py::test_existing_status_confirm_tests_cover_semantics_to_preserve",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_status_confirm_idempotency_route_contract.py::test_existing_status_confirm_tests_cover_semantics_to_preserve",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_status_confirm_idempotency_route_contract.py::test_existing_status_confirm_tests_cover_semantics_to_preserve",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_status_confirm_idempotency_route_contract.py::test_status_confirm_metadata_boundary_is_documented",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_status_confirm_idempotency_route_contract.py::test_status_confirm_metadata_boundary_is_documented",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_status_confirm_idempotency_route_contract.py::test_status_confirm_metadata_boundary_is_documented",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_status_confirm_idempotency_route_contract.py::test_route_contract_test_inventory_matches_wired_surface",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_status_confirm_idempotency_route_contract.py::test_route_contract_test_inventory_matches_wired_surface",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_status_confirm_idempotency_route_contract.py::test_route_contract_test_inventory_matches_wired_surface",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_update_confirm_idempotency_route_contract.py::test_update_confirm_route_test_contract_records_scope",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_update_confirm_idempotency_route_contract.py::test_update_confirm_route_test_contract_records_scope",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_update_confirm_idempotency_route_contract.py::test_update_confirm_route_test_contract_records_scope",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_update_confirm_idempotency_route_contract.py::test_update_confirm_contract_lists_future_behavior_cases",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_update_confirm_idempotency_route_contract.py::test_update_confirm_contract_lists_future_behavior_cases",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_update_confirm_idempotency_route_contract.py::test_update_confirm_contract_lists_future_behavior_cases",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_update_confirm_idempotency_route_contract.py::test_update_confirm_contract_records_update_specific_gotchas",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_update_confirm_idempotency_route_contract.py::test_update_confirm_contract_records_update_specific_gotchas",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_update_confirm_idempotency_route_contract.py::test_update_confirm_contract_records_update_specific_gotchas",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_update_confirm_idempotency_route_contract.py::test_update_confirm_contract_records_deepseek_family_selection_review",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_update_confirm_idempotency_route_contract.py::test_update_confirm_contract_records_deepseek_family_selection_review",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_update_confirm_idempotency_route_contract.py::test_update_confirm_contract_records_deepseek_family_selection_review",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_update_confirm_idempotency_route_contract.py::test_update_confirm_contract_records_canonicalization_boundary",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_update_confirm_idempotency_route_contract.py::test_update_confirm_contract_records_canonicalization_boundary",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_update_confirm_idempotency_route_contract.py::test_update_confirm_contract_records_canonicalization_boundary",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_update_confirm_idempotency_route_contract.py::test_current_router_wires_update_confirm_idempotency_surface",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_update_confirm_idempotency_route_contract.py::test_current_router_wires_update_confirm_idempotency_surface",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_update_confirm_idempotency_route_contract.py::test_current_router_wires_update_confirm_idempotency_surface",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_update_confirm_idempotency_route_contract.py::test_current_router_keeps_proposal_delete_and_raw_update_out_of_scope",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_update_confirm_idempotency_route_contract.py::test_current_router_keeps_proposal_delete_and_raw_update_out_of_scope",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_update_confirm_idempotency_route_contract.py::test_current_router_keeps_proposal_delete_and_raw_update_out_of_scope",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_update_confirm_idempotency_route_contract.py::test_existing_update_confirm_tests_cover_semantics_to_preserve",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_update_confirm_idempotency_route_contract.py::test_existing_update_confirm_tests_cover_semantics_to_preserve",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_update_confirm_idempotency_route_contract.py::test_existing_update_confirm_tests_cover_semantics_to_preserve",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_update_confirm_idempotency_route_contract.py::test_route_contract_test_inventory_matches_wired_surface",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_update_confirm_idempotency_route_contract.py::test_route_contract_test_inventory_matches_wired_surface",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_update_confirm_idempotency_route_contract.py::test_route_contract_test_inventory_matches_wired_surface",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_delete_confirm_idempotency_route_contract.py::test_delete_confirm_route_test_contract_records_scope",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_delete_confirm_idempotency_route_contract.py::test_delete_confirm_route_test_contract_records_scope",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_delete_confirm_idempotency_route_contract.py::test_delete_confirm_route_test_contract_records_scope",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_delete_confirm_idempotency_route_contract.py::test_delete_confirm_contract_lists_future_behavior_cases",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_delete_confirm_idempotency_route_contract.py::test_delete_confirm_contract_lists_future_behavior_cases",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_delete_confirm_idempotency_route_contract.py::test_delete_confirm_contract_lists_future_behavior_cases",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_delete_confirm_idempotency_route_contract.py::test_delete_confirm_contract_records_delete_specific_gotchas",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_delete_confirm_idempotency_route_contract.py::test_delete_confirm_contract_records_delete_specific_gotchas",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_delete_confirm_idempotency_route_contract.py::test_delete_confirm_contract_records_delete_specific_gotchas",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_delete_confirm_idempotency_route_contract.py::test_delete_confirm_contract_records_deepseek_preflight_review",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_delete_confirm_idempotency_route_contract.py::test_delete_confirm_contract_records_deepseek_preflight_review",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_delete_confirm_idempotency_route_contract.py::test_delete_confirm_contract_records_deepseek_preflight_review",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_delete_confirm_idempotency_route_contract.py::test_current_router_wires_delete_confirm_idempotency_surface",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_delete_confirm_idempotency_route_contract.py::test_current_router_wires_delete_confirm_idempotency_surface",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_delete_confirm_idempotency_route_contract.py::test_current_router_wires_delete_confirm_idempotency_surface",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_delete_confirm_idempotency_route_contract.py::test_current_router_keeps_raw_and_proposal_delete_out_of_scope",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_delete_confirm_idempotency_route_contract.py::test_current_router_keeps_raw_and_proposal_delete_out_of_scope",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_delete_confirm_idempotency_route_contract.py::test_current_router_keeps_raw_and_proposal_delete_out_of_scope",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_delete_confirm_idempotency_route_contract.py::test_existing_delete_confirm_tests_cover_semantics_to_preserve",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_delete_confirm_idempotency_route_contract.py::test_existing_delete_confirm_tests_cover_semantics_to_preserve",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_delete_confirm_idempotency_route_contract.py::test_existing_delete_confirm_tests_cover_semantics_to_preserve",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_delete_confirm_idempotency_route_contract.py::test_route_contract_test_inventory_matches_wired_surface",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_delete_confirm_idempotency_route_contract.py::test_route_contract_test_inventory_matches_wired_surface",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "tests/test_api_spine_delete_confirm_idempotency_route_contract.py::test_route_contract_test_inventory_matches_wired_surface",
+      "phase": "teardown",
+      "outcome": "passed"
+    }
+  ],
+  "provenance": {
+    "source_path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/ordinary-applicability/confirmation-static31-qualified-cohort-v1.json",
+    "source_sha256": "320701c248236ef596a0b4c4bb8d970848e2950b875c05f02964374468c305cb",
+    "independent_review_path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/reviews/ordinary-classification-and-static31-normalization-review-v1.json",
+    "independent_review_sha256": "97af8e18a4751c77beb5e5d2bb48b3d19d039a43d2ed6d9727a59b94d53c180c",
+    "raw_outer_result_path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/ordinary-applicability/confirmation-static-execution-preparation-v1/result.json",
+    "raw_outer_result_sha256": "d69ab0a53d11e88b1fe4928ab8ca1ffb33e4666b6a92b74045ef2a387f7809b9",
+    "raw_batch_passed": false,
+    "raw_batch_nonpass_preserved": true,
+    "selected_from_larger_raw_result": false,
+    "keyed_report_source_normalized": false,
+    "qualified_subset_only": true,
+    "source_observation_sha256": "538c2f3e601cfc4e95fab5ecb2a5cd9efcbeb8e69c3e9f6801f7504a4bced667",
+    "excluded_raw_nodes": [
+      "tests/test_api_spine_status_confirm_idempotency_route_contract.py::test_current_router_wires_status_confirm_idempotency_surface"
+    ]
+  },
+  "accepted_population_test_ids": null,
+  "complete_v3_check_verdict": null
+}

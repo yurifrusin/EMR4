@@ -466,7 +466,7 @@ async function fixture({started=true}={}) {
     crypto:{randomUUID:()=> '00000000-0000-4000-8000-'+String(++uuidCounter).padStart(12,'0')},
     window:{location:{port:'',origin:'https://synthetic.invalid',protocol:'https:',hostname:'synthetic.invalid'},addEventListener(n,f){handlers[n]=f;},
       confirm(message){affirmations.push(message);return nextConfirm(message);}},
-    document:{getElementById:element,addEventListener(){}},
+    document:{getElementById:element,querySelector(){return null;},addEventListener(){}},
     localStorage:{getItem(){return null;},removeItem(){},setItem(){}},
     Office:{onReady(){},context:{document:{url:'https://synthetic.invalid/word/A'}}},
     Word:{InsertLocation:{end:'end',after:'after'},RangeLocation:{end:'end'},BuiltInStyleName:{heading1:'Heading1',normal:'Normal'},

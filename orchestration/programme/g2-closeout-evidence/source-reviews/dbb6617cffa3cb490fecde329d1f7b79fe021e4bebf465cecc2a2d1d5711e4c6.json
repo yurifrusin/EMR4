@@ -1,0 +1,76 @@
+{
+  "schema": "emr4.g2.confirmation_static_continuation_result_review.v3",
+  "verdict": "PASS_EXACT_CURRENT_SUBJECT_STATIC_SINGLE_NODE_RESULT",
+  "reviewer_agent": "/root/g2_admission_review",
+  "independent": true,
+  "implementation_authorship": false,
+  "selected_model": "gpt-6.1-sol",
+  "selected_reasoning": "high",
+  "blocking_findings": [],
+  "result_sha256": "2027ae40745614ccae929393aa400b91c1a4f526747d04d1224096f551dc1381",
+  "binding_sha256": "d4f4323ae95965e1fedc76bb7445311ac47e3cdfb213d972b6080c7d23c4da3a",
+  "execution_review_sha256": "40e99ea98bed066a3ab0c607a55e9516cdc3559bf8ac03e56d88f557ce7a1e73",
+  "source_review_sha256": "573ef1c98110f7ee4595106884353e0681801640f21bd3fb153dae7fbc137e59",
+  "selected_node": "tests/test_api_spine_status_confirm_idempotency_route_contract.py::test_current_router_wires_status_confirm_idempotency_surface",
+  "actual": {
+    "native_attempt": 3,
+    "collection_attempts": 1,
+    "test_attempts": 1,
+    "collected_cases": 1,
+    "passed_phase_reports": 3,
+    "elapsed_seconds": 3.974876199994469,
+    "failures": [],
+    "pytest_exit_collect": 0,
+    "pytest_exit_test": 0,
+    "guard_violations": [],
+    "optional_probe_blocked": [
+      "org"
+    ],
+    "network_probe": "EPERM",
+    "application_database_execution": false,
+    "current_pytest_context": "/suite/pyproject.toml; root/suite; prepend; addopts cleared; testpaths tests; plugin autoload disabled"
+  },
+  "captures": {
+    "collect_stdout_sha256": "3af436f79d7b0e6143f9fcac90379c04757fa8848670e3cd874a76ea57921ad3",
+    "test_stdout_sha256": "9d8c4cb63d0c4e7d41178c38a053857dedf77674d761172b6c303b97e9fadfd8",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "unique_markers_exact_result_payload": true,
+    "collect_bytes": 1911,
+    "test_bytes": 2410,
+    "below_2MiB": true,
+    "client_reader_closed_complete": true
+  },
+  "cleanup": {
+    "verdict": "accepted",
+    "both_exact_owned_containers_independently_absent": true,
+    "owned_ids": [
+      "db0a6d50045da331e67f065bdbe13ceb91ae435410420f1d437cf85fe3abf6a9",
+      "8aa57ed732fe01d69d8abcab16c2c41844195813d498218c1237ebf607a4a6ff"
+    ],
+    "prestart_network_none_readonly_no_volume": true,
+    "volume_cleanup": "not_attempted",
+    "client_readers_closed": true
+  },
+  "source_readback": {
+    "all42_capsule_pins_match": true,
+    "launcher_manifest_allocation_review_pins_match": true,
+    "authenticated_selected_compile_leakage_actual": true
+  },
+  "relevance": "This exact static node now exercises the accepted revised AST route→product adapter→prepared/deferred typed transport→new-command locked family validation on router9c996, adapterc3bb and composition8215. It supersedes only the old single-node input applicability; no product runtime outcome inferred.",
+  "budgets": {
+    "prior_consumed_collections": 2,
+    "prior_consumed_tests": 2,
+    "cumulative_collections_consumed": 3,
+    "cumulative_tests_consumed": 3,
+    "cumulative_native_attempts": 3,
+    "current_allocation_exhausted": true,
+    "automatic_retry": false,
+    "renewable": false
+  },
+  "limits": [
+    "Original32 NONPASS and separate31/93 qualified outcomes preserved; no full32 rerun or whole32 batch PASS.",
+    "Canonical119c helper transplant correspondence still requires source verification; this isolated result is not full original module execution.",
+    "No database/product effect, canonical adoption/publication, complete CI or G2 acceptance.",
+    "No rerun or allowance renewal."
+  ]
+}

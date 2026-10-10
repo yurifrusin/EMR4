@@ -1,0 +1,213 @@
+{
+  "schema": "emr4.independent_retained_safety_and_browser_source_relevance_review.v1",
+  "verdict": "PASS_QUALIFIED_SAFETY_SOURCE_RELEVANCE_AND_DOCUMENTARY_FIDELITY_ORDINARY_NODE_FIXTURE_CORRECTION_REQUIRED",
+  "reviewer": {
+    "task": "/root/g2_guard_review",
+    "allocation": "GPT-6.1 Sol/high retained by coordinator assignment; provider runtime settings unobservable",
+    "independence": "No implementation, projection, fixture, launcher or execution authoring. Literal source/data reads, comparisons and this owned review only; no descendants."
+  },
+  "scope": {
+    "source_only": true,
+    "execution_authority": false,
+    "population_adoption": false,
+    "complete_v3_acceptance": false,
+    "g2_acceptance": false,
+    "src2_obligation_resolved": false,
+    "product_six_file_subject_changed": false
+  },
+  "instruction_rehydration": {
+    "path": "C:/Users/there/EMR4/AGENTS.md",
+    "sha256": "97d6ea223508d53ee704a0cc3ceec383e2eea9f3db764376b538e8341bee886e",
+    "role": "Bounded worker, neither Host A nor Host B; shared rules and explicit root assignment only"
+  },
+  "supersession": {
+    "preserve_prior_reviews": [
+      {
+        "path": "reviews/ci-c-complete-proof-candidate-source-review-v2.json",
+        "sha256": "bc2d91fa928bf5a7f70db8d3b87e652641e91c36c4cbeb3678006617ed386a2e"
+      },
+      {
+        "path": "reviews/ci-c-complete-proof-candidate-source-review-v2-membership-addendum-v1.json",
+        "sha256": "7e4255b92905f2be1c8ef39b1f60037d8479d2a0f0325fa9d01980c452ec323c"
+      },
+      {
+        "path": "reviews/ci-c-complete-proof-candidate-source-review-v2-browser-bridge-addendum-v1.json",
+        "sha256": "3037132e526d13da22883e3a0e06525f26fb3905402a01c67e3060d72d92c07e"
+      }
+    ],
+    "affected_findings_only": "Resolves the explicitly pending published-taskpane safety predicate bridge using exact source bodies and accepted transport/browser origins. Qualifies retained Node67 applicability with a concrete ordinary fixture mismatch. Does not supersede source/context/adoption limits, SRC obligations or other property selection findings."
+  },
+  "verified_inputs": [
+    {
+      "path": "ordinary-applicability/ci-c-retained-safety-support-assets-v1/source-manifest-v1.json",
+      "bytes": 7690,
+      "sha256": "80f2a7d27a728d1a69576e8a98c0a07c0375558299e39efc2f7858e1eba082d7"
+    },
+    {
+      "path": "ordinary-applicability/ci-c-taskpane-relevance-source-v1/source-manifest-v1.json",
+      "bytes": 1538,
+      "sha256": "8e344a8512c912820ef925a62e3493ebbf5d5a1f8701712dfcf84790d10ab116"
+    },
+    {
+      "path": "ordinary-applicability/ci-c-taskpane-relevance-source-v1/before.js",
+      "bytes": 137797,
+      "sha256": "8ed128aee7cac860d5f70918d32e7cde906531c1cad3c637d20987f485903b4c"
+    },
+    {
+      "path": "ordinary-applicability/ci-c-taskpane-relevance-source-v1/published.js",
+      "bytes": 142619,
+      "sha256": "d3186a618d22e2d85ba747292867ed4933de467b5fa2aa08a1c2b8dba00580f0"
+    },
+    {
+      "path": "transport-candidate/EMR4 Sidebar/src/taskpane/taskpane.js",
+      "bytes": 142212,
+      "sha256": "7de6b69977e627080b9e44c1db299fd85553fc9277ed068b49a5c078a9d81673"
+    },
+    {
+      "path": "transport-candidate/tests/taskpane_synthetic_transport.cjs",
+      "bytes": 18140,
+      "sha256": "e42faa5a05c6ec538bf822f4edb90b35e2c9f38f6940ffd9fd884aea62304381"
+    },
+    {
+      "path": "reviews/transport-result-review-v1.json",
+      "bytes": 6341,
+      "sha256": "c780acc9c0cc85566d7e8a1857056ec2b567c2205f44284e5955d26c5e749198"
+    },
+    {
+      "path": "reviews/browser-result-review-v2.json",
+      "bytes": 6316,
+      "sha256": "bde30599ba80344acf9a999ad9ddbee6130419fec3a1b890dbce13ffefc1ac72"
+    },
+    {
+      "path": "reviews/browser-ui-correction-review-v2.json",
+      "sha256": "002c1853eb022c7fa92b7fdb450b33630f27b81d588efe916e16eb5f6e285c08"
+    },
+    {
+      "path": "transport-ui-candidate-v2/candidate-manifest.json",
+      "bytes": 1375,
+      "sha256": "982349a98002cc004a6d7777fc8d375e584969f606e658ad8e31303e4768e1ec"
+    },
+    {
+      "path": "ordinary-applicability/ci-c-retained-safety-seven-source-observation-v1.json",
+      "bytes": 3862,
+      "sha256": "5ba8cc7ab5d9dfd54e262266f3ded97ee95545cdddc3f49e66400200e84e905e"
+    },
+    {
+      "path": "ordinary-applicability/ci-c-retained-profile-patient-source-observation-v1.json",
+      "bytes": 1285,
+      "sha256": "8cc878aeccb893a33c4a26b2000ba5b57f9b563ed73d594d36ec029792f82d3b"
+    },
+    {
+      "path": "C:/Users/there/EMR4/tests/test_consultation_audio_privacy.py",
+      "bytes": 47147,
+      "sha256": "5dc75e3012512de4a0b5cf583293c653bdab27b0043c069cb1aa4018b079e0f4"
+    }
+  ],
+  "documentary_package": {
+    "identity_verification": "All five exact permitted current review inputs and all ten manifest outputs were independently size/hash checked; all match. Five review copies are byte-identical to their independently authenticated inputs. Four documentary projections and relationship CP snapshot were read substantively. No denied six-original audit/migration reads or transitive historical originals were made.",
+    "accepted_as": "Truthful proposed standalone documentary support for scoped accepted judgments, subject to final trusted context/role adoption. No new runtime outcomes or separate cleanup events are minted.",
+    "origins": [
+      {
+        "origin": "tenant22",
+        "review_sha256": "804c2bc7112b472357eb0c1fffdf069aadd603d1a84e42a4396b6528fd8b9c7d",
+        "documentary_sha256": "32dadab995c2c2487a13bedf784475fef785f8f8f267ee89530158e0b1687044",
+        "finding": "Faithfully retains accepted 22 synthetic scenarios/66 aggregate phases and accepted physical/fixture cleanup. Restricted login, observer/admin separation, missing/empty/foreign tenant rejection, six direct-practice-table RLS, patient HTTP and same-connection commit/rollback/rebind are scoped accepted properties. Does not infer broader relationship, universal tenant or live database behavior.",
+        "representation_limit": "Literal ordered node IDs and per-node phase payloads are absent from this permitted review. Documentary reuse need not invent them; a later choice to use a test-linked cohort must authenticate actual compatible rows separately."
+      },
+      {
+        "origin": "relationship1",
+        "source_snapshot_sha256": "e9ac3bdb3a2f525a0fc740088dee343c67c8d48e8108ec64224ad5769d6c314e",
+        "documentary_sha256": "8f4c88c8368d965bdf0eb50b4b158a663e4182dffc48c60dd54840d6aa301e5d",
+        "source_checkpoint_sha256_at_snapshot": "4882677b9e0dbbaa4d05c5809a13d73b9300f75f1b287cf94050fe6e02c5c459",
+        "finding": "Faithfully reflects the authenticated selected CP-derived record: one collected test_tenant_relationships.py::test_tenant_relationship_migration_lifecycle, three passed phases and accepted disposal/reader/client cleanup. The snapshot is coordinator-attested selected authoritative provenance; this reviewer authenticated its bytes and internal projection, not the complete historical CP or original primary/review file.",
+        "representation_limit": "One lifecycle scenario is one identity, not separate migration-call or edge cases. No inferred original file fidelity, new cleanup event, all-relationship or live-data guarantee. The later mutable checkpoint is not compared against the historical snapshot digest."
+      },
+      {
+        "origin": "AUTH2",
+        "review_sha256": "b3fd8c32d2cba79578b1edfd3451a8fa8f27a7455bd0dea55c0e22af3b2cccb2",
+        "documentary_sha256": "83434246da9dfc6faf141b4ab5b4ae0c2d03d28cbd7f9dd0bb9132172644c36d",
+        "finding": "Faithfully retains the exact two staging/production real-password/JWT/current-user-on-disposable-Postgres selectors, six aggregate passed phases and independently accepted fixture/physical cleanup. No raw per-selector phase payload is invented. This narrower accepted origin does not promote failed H5 or whole profile/browser/dev-host behavior."
+      },
+      {
+        "origin": "component_mount_profile_boundary",
+        "review_sha256s": [
+          "475abf53e7d841f8885ccfc63ce3e37cf39cc70522cc7007cb9b8879c6be42b7",
+          "748e2af1d00c051da2bb6e91aa63675a2e47868d6fed82eea41ac7cba4b27122",
+          "f36cfc3da1cbbfa2709086b78ea204657951ce31191196309f00b5a92f29d4b7"
+        ],
+        "documentary_sha256": "6cc3a94b028d20b61f3496ebed4c5b47fc365dda2e7e08c7250de07473a862e8",
+        "finding": "Faithfully distinguishes patient15 extracted Pydantic component observations, five retained common audio source functions, 67 authored Node subchecks within one ordinary function/spawn, and three reused mount structural subchecks. Preserves preparation-only review, aggregate H5 FAIL and unobserved final preserve-ownership/engine-capture predicate. No 67 pytest cases, three newly executed mount cases, current whole application or ASGI result is claimed.",
+        "required_qualification": "Retained Node67 is historical/component evidence and unchanged-source correspondence only. It must be joined to this review's current transport/browser origins and explicit fixture applicability finding; it is not a current runnable unchanged fixture or a new current PASS."
+      }
+    ],
+    "cleanup_role_consistency": "Actual tenant/relationship/AUTH cleanup judgments may serve their paired documentary cleanup/result-review roles without pretending duplicate independent events. Component/source reuse has no newly collected pytest fixture cleanup. Historical acceptance and final current-context adoption remain separate.",
+    "no_schema_driven_original_demand": "Standalone support sufficiency rests on these authenticated scoped public/ordinary judgments and source relevance. No unknown original byte fields are demanded solely for packaging. If elected test-linked, exact collected IDs and phase rows still must satisfy the existing enforced loader.",
+    "remaining_adoption_work": "Bind these exact documentary/support bytes, independently trusted acceptance and final plan/source/config/runtime/relevance context to the concrete complete-v3 role graph. Null historical tuples remain honest unavailable values; do not fabricate them or treat this source review as the final context/adoption verdict."
+  },
+  "current_source_bridge": {
+    "published_subject": "Exact d318 taskpane source at published b5a, preserved by the product six-file subject; observed canonical 68ff is not the tested/published subject of this judgment.",
+    "other_sources": "Authenticated coordinator literal observations 5ba8 and 8cc8 report canonical/published equality for app/main.py, app/config.py, app/routers/bernie_dev.py, taskpane HTML, runtime gate, audio test, production-profile test f83084cf3adafcbcbbcc2c1b42d054455947f8964e0b7ae7256c4d2c5197d635 and patient-binding test e18af8cba2c6197a57a9dbca1db4a5ec65b18bd25029736dbe09d7bd42623922. These are accepted coordinator observations, not a fresh reviewer Git comparison. Prior accepted inverse-six preserves those ordinary sources.",
+    "independent_function_comparison": {
+      "method": "Literal UTF-8 before/published source reads and exact complete top-level function text comparisons; no JavaScript evaluation or imports",
+      "exactly_unchanged": [
+        "audioPatientId",
+        "audioIsCurrent",
+        "stopAudioTracks",
+        "clearAudioPlayback",
+        "updateRecordingUI",
+        "clearAudioSession",
+        "wordDocumentContext",
+        "invalidateConsultationBinding",
+        "consultationCaptureIsCurrent",
+        "consultationIsCurrent",
+        "finalizationOverridesSnapshot",
+        "insertConsultHeader",
+        "getCurrentConsultText",
+        "insertNoteIntoWord"
+      ],
+      "changed_audio_finalization_functions": "toggleRecording, processAudio and approveAndFinalize preserve ordinary body predicates while adding restriction checks at entry and asynchronous boundaries, including microphone grant/chunk production, transcription response/JSON/Word callback and finalization dispatch. Stale patient/generation checks, data validation and final chunks/track cleanup remain present; restriction rejection clears audio state. No assertion or privacy rejection was weakened.",
+      "ordinary_positive_transfer_limit": "Preserved bodies support qualified same-property source reuse when real DOM and ordinary context remain unrestricted. This is not execution of the old fixture against d318 and does not supply the previously absent current normal-completed-transcription Word-write positive."
+    },
+    "bearer_and_hosting": "The old emr4_token localStorage initialization/write are removed. Token is in memory; expected legacy removal remains. Exact own data-property hosting policy validation, malformed/provenance refusal, monotonic restriction latch and pre-credential login guard replace permissive paths. Accepted transport35 independently exercises zero bearer-storage reads/writes with expected removal, restricted credentials, media and late Word refusal.",
+    "transport_to_final_source": "Independent literal comparison of accepted 7de6 and published d318 finds only the seven-line fixed unavailable-card fallback addition. Functional policy/transport/audio/finalization bodies are otherwise equal. Accepted source fallback review 002c agrees: fixed authored alert/title content introduces no backend, Word, microphone or credential effect.",
+    "current_distinct_origins": [
+      {
+        "origin": "transport35",
+        "review_sha256": "c780acc9c0cc85566d7e8a1857056ec2b567c2205f44284e5955d26c5e749198",
+        "finding": "Accepted exact 35 authored Node-VM collaborator cases on 7de6. Read teste42: valid ordinary API, recording/cleanup and seeded finalization positives plus strict policy/storage and delayed-media/JSON/Word negatives. The no-functional-change 7de6-to-d318 bridge retains their predicate relevance; this review does not claim a new d318 execution of those 35.",
+        "limits": "Synthetic collaborators; no real browser/Office/backend/device; normal completed-transcription Word-write positive absent."
+      },
+      {
+        "origin": "browser3",
+        "review_sha256": "bde30599ba80344acf9a999ad9ddbee6130419fec3a1b890dbce13ffefc1ac72",
+        "finding": "Accepted exact d318 raw source: ordinary intercepted synthetic request positive; six meaningful restricted guards with zero request/credential/microphone/Word effects; malformed policy fail-closed visible fallback. Browser/context/process/capture cleanup accepted.",
+        "limits": "Synthetic Office/media and intercepted backend, not clinical/device/provider runtime or all retained Node predicates."
+      }
+    ],
+    "safety_relevance_verdict": "PASS_QUALIFIED: source correspondence plus exact transport/browser origins resolves the taskpane bearer-storage, restriction, asynchronous privacy and browser-adapter source bridge for retained scoped safety judgments. No additional broad profile/browser runtime is required merely because the taskpane hash changed."
+  },
+  "precise_remaining_ordinary_test_obligation": {
+    "classification": "Fixture applicability correction needed for criterion1 if this original property-bearing ordinary identity is retained; not an observed production defect",
+    "path": "C:/Users/there/EMR4/tests/test_consultation_audio_privacy.py",
+    "before_sha256": "5dc75e3012512de4a0b5cf583293c653bdab27b0043c069cb1aa4018b079e0f4",
+    "selector": "tests/test_consultation_audio_privacy.py::test_browser_audio_components_with_authored_adapters",
+    "owned_fixture": "NODE_CHECKS fixture(), document stub at line467; program starts at line420 and original function at line824",
+    "source_finding": "The fixture supplies document.getElementById/addEventListener but no querySelector. d318 detectRestrictedBackendContext calls querySelector at line55 during initial evaluation, catches failure and returns true; line83 permanently latches restriction. Later token assignment does not clear it. startConsultation and its binding functions remain unchanged and can bind; toggleRecording and approveAndFinalize then reject the intended ordinary path, so the retained assertions cannot truthfully be advertised as a current runnable unchanged PASS.",
+    "minimal_source_correction": "Add only document.querySelector(){return null;} to model this existing ordinary fixture's absence of a synthetic-only packaging marker. Preserve synthetic.invalid origin, current patient/document binding, every assertion and all67 authored case expectations. Do not override the restriction latch, bypass production guards or change d318 to accommodate the stub.",
+    "smallest_verification": "After independent source/invocation admission, use the existing bounded component Node-only mechanism to run this exact corrected embedded NODE_CHECKS program against exact d318; require one successful authored report with all67 existing subchecks and complete owned process/capture cleanup. No application/Python module imports, DB, provider, Office/device or browser is needed. A targeted additional ordinary completed-transcription Word-write positive would close the existing transport35 coverage limitation if that positive is part of the selected obligation; do not pretend it already ran.",
+    "why_needed": "Source-correspondence and current same-property transport/browser alternatives settle scoped safety relevance but cannot manufacture a passing current required original ordinary test identity. The mismatch is concrete, not a rerun imposed by age or by67count. If this identity is instead explicitly excluded from the ordinary required population, the final selection must justify its covered property replacement; silent exclusion is not accepted.",
+    "batch_boundary": "May be a separately reviewed ordinary test-source correction after the product six-file publication. Does not pad, invalidate or silently mutate that exact six-file appointments/delete subject. This review authors no correction and grants no runtime."
+  },
+  "remaining_separate_work": [
+    "Independently adopt the actual property-selected ordinary population with supporting/excluded origin distinctions; no subtraction of439 observed IDs or static-definition denominator.",
+    "Resolve current SRC2/SRC04 property obligation under its separately reviewed authority/result; this review grants none.",
+    "Finalize trustworthy context and documentary role bindings before complete-v3 or G2 closeout acceptance."
+  ],
+  "reviewer_effects": {
+    "literal_source_data_reads_hashes_and_comparisons_only": true,
+    "owned_review_written_only": true,
+    "no_application_import_test_collection_execution_browser_database_git_or_checkpoint_effect": true,
+    "no_protected_or_raw_diary_secret_provider_denied_six_original_or_alias_access": true,
+    "data_tool_diagnostics": "One PowerShell comparison command failed parsing before any body ran; corrected data-only comparison succeeded. No source/runtime operation was repeated."
+  }
+}

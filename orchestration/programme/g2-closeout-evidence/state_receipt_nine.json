@@ -1,0 +1,173 @@
+{
+  "schema": "emr4.ci_c_ordinary_cohort_support_source.v1",
+  "status": "SOURCE_ONLY_NONOPERATIVE",
+  "cohort_id": "state_receipt_nine",
+  "collection": [
+    "confirmation_current/test_confirmation_state_receipt_residuals.py::test_stale_bernie_session_binding_has_no_persisted_effect",
+    "confirmation_current/test_confirmation_state_receipt_residuals.py::test_unsupported_waiting_area_status_variant_is_repeatable_without_effect",
+    "confirmation_current/test_confirmation_state_receipt_residuals.py::test_unsupported_status_variant_does_not_replay_completed_status_receipt",
+    "confirmation_current/test_confirmation_state_receipt_residuals.py::test_changed_update_warning_conflicts_before_occupied_state_without_effect",
+    "confirmation_current/test_confirmation_state_receipt_residuals.py::test_update_replay_preserves_receipt_after_intervening_raw_update",
+    "confirmation_current/test_confirmation_state_receipt_residuals.py::test_already_cancelled_delete_has_no_persisted_effect",
+    "confirmation_current/test_confirmation_state_receipt_residuals.py::test_missing_delete_target_has_no_persisted_effect",
+    "confirmation_current/test_confirmation_state_receipt_residuals.py::test_missing_signed_delete_evidence_has_no_persisted_effect",
+    "confirmation_current/test_confirmation_state_receipt_residuals.py::test_staff_proposal_only_has_no_persisted_effect_even_with_key"
+  ],
+  "phase_rows": [
+    {
+      "nodeid": "confirmation_current/test_confirmation_state_receipt_residuals.py::test_stale_bernie_session_binding_has_no_persisted_effect",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_confirmation_state_receipt_residuals.py::test_stale_bernie_session_binding_has_no_persisted_effect",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_confirmation_state_receipt_residuals.py::test_stale_bernie_session_binding_has_no_persisted_effect",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_confirmation_state_receipt_residuals.py::test_unsupported_waiting_area_status_variant_is_repeatable_without_effect",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_confirmation_state_receipt_residuals.py::test_unsupported_waiting_area_status_variant_is_repeatable_without_effect",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_confirmation_state_receipt_residuals.py::test_unsupported_waiting_area_status_variant_is_repeatable_without_effect",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_confirmation_state_receipt_residuals.py::test_unsupported_status_variant_does_not_replay_completed_status_receipt",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_confirmation_state_receipt_residuals.py::test_unsupported_status_variant_does_not_replay_completed_status_receipt",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_confirmation_state_receipt_residuals.py::test_unsupported_status_variant_does_not_replay_completed_status_receipt",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_confirmation_state_receipt_residuals.py::test_changed_update_warning_conflicts_before_occupied_state_without_effect",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_confirmation_state_receipt_residuals.py::test_changed_update_warning_conflicts_before_occupied_state_without_effect",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_confirmation_state_receipt_residuals.py::test_changed_update_warning_conflicts_before_occupied_state_without_effect",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_confirmation_state_receipt_residuals.py::test_update_replay_preserves_receipt_after_intervening_raw_update",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_confirmation_state_receipt_residuals.py::test_update_replay_preserves_receipt_after_intervening_raw_update",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_confirmation_state_receipt_residuals.py::test_update_replay_preserves_receipt_after_intervening_raw_update",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_confirmation_state_receipt_residuals.py::test_already_cancelled_delete_has_no_persisted_effect",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_confirmation_state_receipt_residuals.py::test_already_cancelled_delete_has_no_persisted_effect",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_confirmation_state_receipt_residuals.py::test_already_cancelled_delete_has_no_persisted_effect",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_confirmation_state_receipt_residuals.py::test_missing_delete_target_has_no_persisted_effect",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_confirmation_state_receipt_residuals.py::test_missing_delete_target_has_no_persisted_effect",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_confirmation_state_receipt_residuals.py::test_missing_delete_target_has_no_persisted_effect",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_confirmation_state_receipt_residuals.py::test_missing_signed_delete_evidence_has_no_persisted_effect",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_confirmation_state_receipt_residuals.py::test_missing_signed_delete_evidence_has_no_persisted_effect",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_confirmation_state_receipt_residuals.py::test_missing_signed_delete_evidence_has_no_persisted_effect",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_confirmation_state_receipt_residuals.py::test_staff_proposal_only_has_no_persisted_effect_even_with_key",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_confirmation_state_receipt_residuals.py::test_staff_proposal_only_has_no_persisted_effect_even_with_key",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "confirmation_current/test_confirmation_state_receipt_residuals.py::test_staff_proposal_only_has_no_persisted_effect_even_with_key",
+      "phase": "teardown",
+      "outcome": "passed"
+    }
+  ],
+  "provenance": {
+    "source_path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/ordinary-applicability/confirmation-state-receipt-nine-qualified-cohort-v1.json",
+    "source_sha256": "d70cbd88e97e1f98db5b1d0a960148fc5dac7491275e014a232f89f78d97f6c6",
+    "independent_review_path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/reviews/qualified-src9-green28-normalization-review-v1.json",
+    "independent_review_sha256": "9dd968e88aaff5486ac26493fb5464bfdb6c6f826e315e77e59b68dfff9779e3",
+    "raw_outer_result_path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/ordinary-applicability/confirmation-state-receipt-execution-preparation-v5/result.json",
+    "raw_outer_result_sha256": "35301946acf1e7c2f29296cd4dbe7436be325727ff6748d7cf613d38554c12d8",
+    "raw_batch_passed": false,
+    "raw_batch_nonpass_preserved": true,
+    "selected_from_larger_raw_result": false,
+    "keyed_report_source_normalized": false,
+    "qualified_subset_only": true,
+    "source_observation_sha256": "538c2f3e601cfc4e95fab5ecb2a5cd9efcbeb8e69c3e9f6801f7504a4bced667",
+    "excluded_raw_nodes": [
+      "confirmation_current/test_confirmation_state_receipt_residuals.py::test_signed_non_session_bernie_replay_has_no_second_effect",
+      "confirmation_current/test_confirmation_state_receipt_residuals.py::test_delete_replay_preserves_receipt_after_intervening_raw_soft_cancel"
+    ]
+  },
+  "accepted_population_test_ids": null,
+  "complete_v3_check_verdict": null
+}

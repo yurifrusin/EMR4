@@ -1,0 +1,781 @@
+{
+  "schema": "emr4.ci_c_clinical48_source_only_normalized.v1",
+  "status": "SOURCE_ONLY_PENDING_INDEPENDENT_PROJECTION_REVIEW",
+  "source_primary_sha256": "cac3a64d6d691fb4aa1642e3157eb3ed1b4654923afdd411d1cdcc28529c3766",
+  "original_result_review_sha256": "f4b4c003db166b4426eb342c98d2e6dfb3552eed5b7d9f48f3d97f9f83435111",
+  "current_source_relevance_review_sha256": "c09393473acbc63e559bc0dbd75d0055402b9542cdc4d67f0a60325f1078ed2c",
+  "collection": [
+    "test_consultation_finalize_atomicity_isolated.py::test_finalize_rejects_missing_or_malformed_patient_id_without_writes[missing-patient-id]",
+    "test_consultation_finalize_atomicity_isolated.py::test_finalize_rejects_missing_or_malformed_patient_id_without_writes[malformed-patient-id]",
+    "test_consultation_finalize_atomicity_isolated.py::test_finalize_unknown_and_foreign_patient_are_generic_404_without_writes[unknown]",
+    "test_consultation_finalize_atomicity_isolated.py::test_finalize_unknown_and_foreign_patient_are_generic_404_without_writes[foreign]",
+    "test_consultation_finalize_atomicity_isolated.py::test_finalize_same_practice_persists_selected_patient_and_practice",
+    "test_consultation_finalize_atomicity_isolated.py::test_finalize_requires_authentication",
+    "test_consultation_finalize_atomicity_isolated.py::test_analyze_rejects_finalized_payload_with_422",
+    "test_consultation_finalize_atomicity_isolated.py::test_draft_analyze_strips_save_markers_and_does_not_persist_clinical_records",
+    "test_consultation_finalize_atomicity_isolated.py::test_finalize_child_flush_failure_rolls_back_encounter_and_children[mbs-claim]",
+    "test_consultation_finalize_atomicity_isolated.py::test_finalize_child_flush_failure_rolls_back_encounter_and_children[clinical-diagnosis]",
+    "test_consultation_finalize_atomicity_isolated.py::test_finalize_child_flush_failure_rolls_back_encounter_and_children[prescription]",
+    "test_consultation_finalize_atomicity_isolated.py::test_finalize_all_children_commit_once_with_linked_patient_and_practice",
+    "test_consultation_finalize_atomicity_isolated.py::test_finalize_requires_strict_boolean_attestation_without_writes[missing]",
+    "test_consultation_finalize_atomicity_isolated.py::test_finalize_requires_strict_boolean_attestation_without_writes[string]",
+    "test_consultation_finalize_atomicity_isolated.py::test_finalize_requires_strict_boolean_attestation_without_writes[integer]",
+    "test_consultation_finalize_atomicity_isolated.py::test_finalize_false_attestation_is_generic_403_before_writes",
+    "test_consultation_finalize_atomicity_isolated.py::test_finalize_rejects_client_supplied_authority_fields[practitioner-id]",
+    "test_consultation_finalize_atomicity_isolated.py::test_finalize_rejects_client_supplied_authority_fields[prescriber-id]",
+    "test_consultation_finalize_atomicity_isolated.py::test_finalize_rejects_client_supplied_authority_fields[actor-user-id]",
+    "test_consultation_finalize_atomicity_isolated.py::test_finalize_rejects_client_supplied_authority_fields[role]",
+    "test_consultation_finalize_atomicity_isolated.py::test_finalize_rejects_non_gp_role_without_writes[receptionist]",
+    "test_consultation_finalize_atomicity_isolated.py::test_finalize_rejects_non_gp_role_without_writes[nurse]",
+    "test_consultation_finalize_atomicity_isolated.py::test_finalize_rejects_non_gp_role_without_writes[admin]",
+    "test_consultation_finalize_atomicity_isolated.py::test_finalize_rejects_non_gp_role_without_writes[practice-owner]",
+    "test_consultation_finalize_atomicity_isolated.py::test_finalize_rechecks_fresh_user_and_practitioner_authority[inactive-user]",
+    "test_consultation_finalize_atomicity_isolated.py::test_finalize_rechecks_fresh_user_and_practitioner_authority[changed-role]",
+    "test_consultation_finalize_atomicity_isolated.py::test_finalize_rechecks_fresh_user_and_practitioner_authority[inactive-practitioner]",
+    "test_consultation_finalize_atomicity_isolated.py::test_finalize_rechecks_fresh_user_and_practitioner_authority[missing-link]",
+    "test_consultation_finalize_atomicity_isolated.py::test_finalize_rechecks_fresh_user_and_practitioner_authority[cross-practice-link]",
+    "test_consultation_finalize_atomicity_isolated.py::test_finalize_audit_failure_rolls_back_all_clinical_rows[builder]",
+    "test_consultation_finalize_atomicity_isolated.py::test_finalize_audit_failure_rolls_back_all_clinical_rows[store]",
+    "test_consultation_finalize_atomicity_isolated.py::test_finalize_audit_failure_rolls_back_all_clinical_rows[audit-flush]",
+    "test_consultation_finalize_atomicity_isolated.py::test_finalize_matching_replay_returns_exact_json_and_one_rowset",
+    "test_consultation_finalize_atomicity_isolated.py::test_finalize_compatible_aliases_replay_same_canonical_hash",
+    "test_consultation_finalize_atomicity_isolated.py::test_finalize_changed_content_patient_and_context_are_same_generic_conflict",
+    "test_consultation_finalize_atomicity_isolated.py::test_finalize_different_gp_replay_is_generic_conflict",
+    "test_consultation_finalize_atomicity_isolated.py::test_finalize_corrupt_receipt_fails_closed_without_field_or_target_leak[attested-integer]",
+    "test_consultation_finalize_atomicity_isolated.py::test_finalize_corrupt_receipt_fails_closed_without_field_or_target_leak[policy-version]",
+    "test_consultation_finalize_atomicity_isolated.py::test_finalize_corrupt_receipt_fails_closed_without_field_or_target_leak[malformed-hash]",
+    "test_consultation_finalize_atomicity_isolated.py::test_finalize_corrupt_receipt_fails_closed_without_field_or_target_leak[missing-target]",
+    "test_consultation_finalize_atomicity_isolated.py::test_finalize_same_gp_overlapping_matching_commands_are_identical",
+    "test_consultation_finalize_atomicity_isolated.py::test_finalize_different_gps_distinct_patients_same_command_race_is_bounded",
+    "test_consultation_finalize_atomicity_isolated.py::test_finalize_rejects_invalid_command_or_context_without_writes[missing-command-uuid]",
+    "test_consultation_finalize_atomicity_isolated.py::test_finalize_rejects_invalid_command_or_context_without_writes[malformed-command-uuid]",
+    "test_consultation_finalize_atomicity_isolated.py::test_finalize_rejects_invalid_command_or_context_without_writes[missing-document-context]",
+    "test_consultation_finalize_atomicity_isolated.py::test_finalize_rejects_invalid_command_or_context_without_writes[nonstring-document-context]",
+    "test_consultation_finalize_atomicity_isolated.py::test_finalize_rejects_unbound_or_mismatched_document_context_generically[unbound-patient-document]",
+    "test_consultation_finalize_atomicity_isolated.py::test_finalize_rejects_unbound_or_mismatched_document_context_generically[mismatched-patient-document]"
+  ],
+  "phase_rows": [
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_rejects_missing_or_malformed_patient_id_without_writes[missing-patient-id]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_rejects_missing_or_malformed_patient_id_without_writes[missing-patient-id]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_rejects_missing_or_malformed_patient_id_without_writes[missing-patient-id]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_rejects_missing_or_malformed_patient_id_without_writes[malformed-patient-id]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_rejects_missing_or_malformed_patient_id_without_writes[malformed-patient-id]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_rejects_missing_or_malformed_patient_id_without_writes[malformed-patient-id]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_unknown_and_foreign_patient_are_generic_404_without_writes[unknown]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_unknown_and_foreign_patient_are_generic_404_without_writes[unknown]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_unknown_and_foreign_patient_are_generic_404_without_writes[unknown]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_unknown_and_foreign_patient_are_generic_404_without_writes[foreign]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_unknown_and_foreign_patient_are_generic_404_without_writes[foreign]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_unknown_and_foreign_patient_are_generic_404_without_writes[foreign]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_same_practice_persists_selected_patient_and_practice",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_same_practice_persists_selected_patient_and_practice",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_same_practice_persists_selected_patient_and_practice",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_requires_authentication",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_requires_authentication",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_requires_authentication",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_analyze_rejects_finalized_payload_with_422",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_analyze_rejects_finalized_payload_with_422",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_analyze_rejects_finalized_payload_with_422",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_draft_analyze_strips_save_markers_and_does_not_persist_clinical_records",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_draft_analyze_strips_save_markers_and_does_not_persist_clinical_records",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_draft_analyze_strips_save_markers_and_does_not_persist_clinical_records",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_child_flush_failure_rolls_back_encounter_and_children[mbs-claim]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_child_flush_failure_rolls_back_encounter_and_children[mbs-claim]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_child_flush_failure_rolls_back_encounter_and_children[mbs-claim]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_child_flush_failure_rolls_back_encounter_and_children[clinical-diagnosis]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_child_flush_failure_rolls_back_encounter_and_children[clinical-diagnosis]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_child_flush_failure_rolls_back_encounter_and_children[clinical-diagnosis]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_child_flush_failure_rolls_back_encounter_and_children[prescription]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_child_flush_failure_rolls_back_encounter_and_children[prescription]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_child_flush_failure_rolls_back_encounter_and_children[prescription]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_all_children_commit_once_with_linked_patient_and_practice",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_all_children_commit_once_with_linked_patient_and_practice",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_all_children_commit_once_with_linked_patient_and_practice",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_requires_strict_boolean_attestation_without_writes[missing]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_requires_strict_boolean_attestation_without_writes[missing]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_requires_strict_boolean_attestation_without_writes[missing]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_requires_strict_boolean_attestation_without_writes[string]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_requires_strict_boolean_attestation_without_writes[string]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_requires_strict_boolean_attestation_without_writes[string]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_requires_strict_boolean_attestation_without_writes[integer]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_requires_strict_boolean_attestation_without_writes[integer]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_requires_strict_boolean_attestation_without_writes[integer]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_false_attestation_is_generic_403_before_writes",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_false_attestation_is_generic_403_before_writes",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_false_attestation_is_generic_403_before_writes",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_rejects_client_supplied_authority_fields[practitioner-id]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_rejects_client_supplied_authority_fields[practitioner-id]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_rejects_client_supplied_authority_fields[practitioner-id]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_rejects_client_supplied_authority_fields[prescriber-id]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_rejects_client_supplied_authority_fields[prescriber-id]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_rejects_client_supplied_authority_fields[prescriber-id]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_rejects_client_supplied_authority_fields[actor-user-id]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_rejects_client_supplied_authority_fields[actor-user-id]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_rejects_client_supplied_authority_fields[actor-user-id]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_rejects_client_supplied_authority_fields[role]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_rejects_client_supplied_authority_fields[role]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_rejects_client_supplied_authority_fields[role]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_rejects_non_gp_role_without_writes[receptionist]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_rejects_non_gp_role_without_writes[receptionist]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_rejects_non_gp_role_without_writes[receptionist]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_rejects_non_gp_role_without_writes[nurse]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_rejects_non_gp_role_without_writes[nurse]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_rejects_non_gp_role_without_writes[nurse]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_rejects_non_gp_role_without_writes[admin]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_rejects_non_gp_role_without_writes[admin]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_rejects_non_gp_role_without_writes[admin]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_rejects_non_gp_role_without_writes[practice-owner]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_rejects_non_gp_role_without_writes[practice-owner]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_rejects_non_gp_role_without_writes[practice-owner]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_rechecks_fresh_user_and_practitioner_authority[inactive-user]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_rechecks_fresh_user_and_practitioner_authority[inactive-user]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_rechecks_fresh_user_and_practitioner_authority[inactive-user]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_rechecks_fresh_user_and_practitioner_authority[changed-role]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_rechecks_fresh_user_and_practitioner_authority[changed-role]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_rechecks_fresh_user_and_practitioner_authority[changed-role]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_rechecks_fresh_user_and_practitioner_authority[inactive-practitioner]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_rechecks_fresh_user_and_practitioner_authority[inactive-practitioner]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_rechecks_fresh_user_and_practitioner_authority[inactive-practitioner]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_rechecks_fresh_user_and_practitioner_authority[missing-link]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_rechecks_fresh_user_and_practitioner_authority[missing-link]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_rechecks_fresh_user_and_practitioner_authority[missing-link]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_rechecks_fresh_user_and_practitioner_authority[cross-practice-link]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_rechecks_fresh_user_and_practitioner_authority[cross-practice-link]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_rechecks_fresh_user_and_practitioner_authority[cross-practice-link]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_audit_failure_rolls_back_all_clinical_rows[builder]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_audit_failure_rolls_back_all_clinical_rows[builder]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_audit_failure_rolls_back_all_clinical_rows[builder]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_audit_failure_rolls_back_all_clinical_rows[store]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_audit_failure_rolls_back_all_clinical_rows[store]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_audit_failure_rolls_back_all_clinical_rows[store]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_audit_failure_rolls_back_all_clinical_rows[audit-flush]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_audit_failure_rolls_back_all_clinical_rows[audit-flush]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_audit_failure_rolls_back_all_clinical_rows[audit-flush]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_matching_replay_returns_exact_json_and_one_rowset",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_matching_replay_returns_exact_json_and_one_rowset",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_matching_replay_returns_exact_json_and_one_rowset",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_compatible_aliases_replay_same_canonical_hash",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_compatible_aliases_replay_same_canonical_hash",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_compatible_aliases_replay_same_canonical_hash",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_changed_content_patient_and_context_are_same_generic_conflict",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_changed_content_patient_and_context_are_same_generic_conflict",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_changed_content_patient_and_context_are_same_generic_conflict",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_different_gp_replay_is_generic_conflict",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_different_gp_replay_is_generic_conflict",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_different_gp_replay_is_generic_conflict",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_corrupt_receipt_fails_closed_without_field_or_target_leak[attested-integer]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_corrupt_receipt_fails_closed_without_field_or_target_leak[attested-integer]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_corrupt_receipt_fails_closed_without_field_or_target_leak[attested-integer]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_corrupt_receipt_fails_closed_without_field_or_target_leak[policy-version]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_corrupt_receipt_fails_closed_without_field_or_target_leak[policy-version]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_corrupt_receipt_fails_closed_without_field_or_target_leak[policy-version]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_corrupt_receipt_fails_closed_without_field_or_target_leak[malformed-hash]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_corrupt_receipt_fails_closed_without_field_or_target_leak[malformed-hash]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_corrupt_receipt_fails_closed_without_field_or_target_leak[malformed-hash]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_corrupt_receipt_fails_closed_without_field_or_target_leak[missing-target]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_corrupt_receipt_fails_closed_without_field_or_target_leak[missing-target]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_corrupt_receipt_fails_closed_without_field_or_target_leak[missing-target]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_same_gp_overlapping_matching_commands_are_identical",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_same_gp_overlapping_matching_commands_are_identical",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_same_gp_overlapping_matching_commands_are_identical",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_different_gps_distinct_patients_same_command_race_is_bounded",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_different_gps_distinct_patients_same_command_race_is_bounded",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_different_gps_distinct_patients_same_command_race_is_bounded",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_rejects_invalid_command_or_context_without_writes[missing-command-uuid]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_rejects_invalid_command_or_context_without_writes[missing-command-uuid]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_rejects_invalid_command_or_context_without_writes[missing-command-uuid]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_rejects_invalid_command_or_context_without_writes[malformed-command-uuid]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_rejects_invalid_command_or_context_without_writes[malformed-command-uuid]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_rejects_invalid_command_or_context_without_writes[malformed-command-uuid]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_rejects_invalid_command_or_context_without_writes[missing-document-context]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_rejects_invalid_command_or_context_without_writes[missing-document-context]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_rejects_invalid_command_or_context_without_writes[missing-document-context]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_rejects_invalid_command_or_context_without_writes[nonstring-document-context]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_rejects_invalid_command_or_context_without_writes[nonstring-document-context]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_rejects_invalid_command_or_context_without_writes[nonstring-document-context]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_rejects_unbound_or_mismatched_document_context_generically[unbound-patient-document]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_rejects_unbound_or_mismatched_document_context_generically[unbound-patient-document]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_rejects_unbound_or_mismatched_document_context_generically[unbound-patient-document]",
+      "phase": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_rejects_unbound_or_mismatched_document_context_generically[mismatched-patient-document]",
+      "phase": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_rejects_unbound_or_mismatched_document_context_generically[mismatched-patient-document]",
+      "phase": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "test_consultation_finalize_atomicity_isolated.py::test_finalize_rejects_unbound_or_mismatched_document_context_generically[mismatched-patient-document]",
+      "phase": "teardown",
+      "outcome": "passed"
+    }
+  ],
+  "accepted_required_membership": null,
+  "scope": "48 accepted historical synthetic clinical scenarios in their original execution context; 74 current ordinary source rows correspond. No new runtime or full application/G2 acceptance."
+}

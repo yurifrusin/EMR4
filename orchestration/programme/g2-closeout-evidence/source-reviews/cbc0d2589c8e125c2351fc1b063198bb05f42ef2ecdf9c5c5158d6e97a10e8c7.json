@@ -1,0 +1,657 @@
+{
+  "schema": "emr4.g2.confirmation_input_guards_independent_result_review.v1",
+  "verdict": "PASS_CONFIRMATION_INPUT_GUARDS_SCOPED_RESULT",
+  "reviewer_agent": "/root/g2_admission_review",
+  "independent": true,
+  "implementation_authorship": false,
+  "selected_model": "gpt-6.1-sol",
+  "selected_reasoning_effort": "high",
+  "provider_resolved_settings_observable": false,
+  "descendants": 0,
+  "blocking_findings": [],
+  "subject": {
+    "operation_id": "g2-confirmation-input-guards-20261009-v1",
+    "root": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/ordinary-applicability/confirmation-input-guards-execution-preparation-v1",
+    "binding_sha256": "28e7f85d13727b9970043b81fe941d3b23196edd4dc0c542e5068dafdfd3b69f",
+    "execution_review_sha256": "aec105b1324ea16725ed00062a903f581646b91c9270273ad8f3d22c608aa445",
+    "source_manifest_sha256": "01ff5888c8805448ddb1f605552e9a121e1ccc9d83c68b3f54134587cb9596ab",
+    "source_binding_sha256": "97dd34d8575dde5cbf6fb0d20c53f6efef454c627003ec026e64fdc4cc236ccd",
+    "author_source_review_sha256": "672ae4578a70b688effc4e70a4a938d7997c3d02a58e2d5a0363f96160ae1741",
+    "combined_source_review_sha256": "4644b53073e30dd9428c58068fc41e68091ae60af4e0bb4d6a0826c4ba1efe51",
+    "result_sha256": "ddf028e12105fba128ab1486224751bebfaa5b1711b09eb4bc26ed54fb2fb574",
+    "result_bytes": 3734
+  },
+  "actual": {
+    "native_attempts": 1,
+    "native_session": 99076,
+    "native_exit_code": 0,
+    "native_elapsed_seconds": 18.801737100002356,
+    "outer_elapsed_seconds": 17.712585061002756,
+    "child_elapsed_seconds": 16.065984,
+    "collection_attempts": 1,
+    "test_attempts": 1,
+    "reset_attempts": 10,
+    "cases": 10,
+    "passed_phases": 30,
+    "collection_errors": 0,
+    "internal_errors": 0,
+    "deselected": 0,
+    "automatic_retry": false,
+    "retry_authorized": false,
+    "primary": {
+      "collected": [
+        "confirmation_current/test_confirmation_input_guards.py::test_malformed_proposal_has_no_persisted_effect[bernie]",
+        "confirmation_current/test_confirmation_input_guards.py::test_malformed_proposal_has_no_persisted_effect[status]",
+        "confirmation_current/test_confirmation_input_guards.py::test_malformed_proposal_has_no_persisted_effect[update]",
+        "confirmation_current/test_confirmation_input_guards.py::test_malformed_proposal_has_no_persisted_effect[delete]",
+        "confirmation_current/test_confirmation_input_guards.py::test_invalid_delete_reason_has_no_persisted_effect",
+        "confirmation_current/test_confirmation_input_guards.py::test_whitespace_key_has_no_persisted_effect[update]",
+        "confirmation_current/test_confirmation_input_guards.py::test_whitespace_key_has_no_persisted_effect[delete]",
+        "confirmation_current/test_confirmation_input_guards.py::test_unconfirmed_proposal_has_no_persisted_effect[status]",
+        "confirmation_current/test_confirmation_input_guards.py::test_unconfirmed_proposal_has_no_persisted_effect[update]",
+        "confirmation_current/test_confirmation_input_guards.py::test_unconfirmed_proposal_has_no_persisted_effect[delete]"
+      ],
+      "collection_attempts": 1,
+      "collection_errors": 0,
+      "deselected": 0,
+      "diagnostics": [],
+      "exit_code": 0,
+      "internal_errors": 0,
+      "reports": {
+        "confirmation_current/test_confirmation_input_guards.py::test_invalid_delete_reason_has_no_persisted_effect": {
+          "call": "passed",
+          "setup": "passed",
+          "teardown": "passed"
+        },
+        "confirmation_current/test_confirmation_input_guards.py::test_malformed_proposal_has_no_persisted_effect[bernie]": {
+          "call": "passed",
+          "setup": "passed",
+          "teardown": "passed"
+        },
+        "confirmation_current/test_confirmation_input_guards.py::test_malformed_proposal_has_no_persisted_effect[delete]": {
+          "call": "passed",
+          "setup": "passed",
+          "teardown": "passed"
+        },
+        "confirmation_current/test_confirmation_input_guards.py::test_malformed_proposal_has_no_persisted_effect[status]": {
+          "call": "passed",
+          "setup": "passed",
+          "teardown": "passed"
+        },
+        "confirmation_current/test_confirmation_input_guards.py::test_malformed_proposal_has_no_persisted_effect[update]": {
+          "call": "passed",
+          "setup": "passed",
+          "teardown": "passed"
+        },
+        "confirmation_current/test_confirmation_input_guards.py::test_unconfirmed_proposal_has_no_persisted_effect[delete]": {
+          "call": "passed",
+          "setup": "passed",
+          "teardown": "passed"
+        },
+        "confirmation_current/test_confirmation_input_guards.py::test_unconfirmed_proposal_has_no_persisted_effect[status]": {
+          "call": "passed",
+          "setup": "passed",
+          "teardown": "passed"
+        },
+        "confirmation_current/test_confirmation_input_guards.py::test_unconfirmed_proposal_has_no_persisted_effect[update]": {
+          "call": "passed",
+          "setup": "passed",
+          "teardown": "passed"
+        },
+        "confirmation_current/test_confirmation_input_guards.py::test_whitespace_key_has_no_persisted_effect[delete]": {
+          "call": "passed",
+          "setup": "passed",
+          "teardown": "passed"
+        },
+        "confirmation_current/test_confirmation_input_guards.py::test_whitespace_key_has_no_persisted_effect[update]": {
+          "call": "passed",
+          "setup": "passed",
+          "teardown": "passed"
+        }
+      },
+      "status": "PASS"
+    },
+    "outer_process_attempts": [
+      {
+        "cleanup_attempted": false,
+        "launch_attempted": true,
+        "phase": "initdb",
+        "pid": 7,
+        "returncode": 0
+      },
+      {
+        "cleanup_attempted": false,
+        "launch_attempted": true,
+        "phase": "pg-start",
+        "pid": 20,
+        "returncode": 0
+      },
+      {
+        "cleanup_attempted": false,
+        "launch_attempted": true,
+        "phase": "tenant-child",
+        "pid": 30,
+        "returncode": 0
+      },
+      {
+        "cleanup_attempted": false,
+        "launch_attempted": true,
+        "phase": "pg-stop",
+        "pid": 77,
+        "returncode": 0
+      }
+    ]
+  },
+  "properties": [
+    {
+      "cases": 4,
+      "property": "Malformed proposal objects on Bernie/status/update/delete reject with the exact reviewed family-specific result and all persisted appointment/audit/ledger columns unchanged.",
+      "oracle": "Bernie200/safeFalse invalid_confirmation_payload with stored session revision/event IDs unchanged; typed status/update/delete422. Valid signed current baselines precede the one changed field."
+    },
+    {
+      "cases": 1,
+      "property": "Invalid nested delete status reason rejects422 with exact reviewed validation location and all persisted state unchanged.",
+      "oracle": "NOT_A_REASON changes only the nested reason; valid current grant/reason/proposal/version baseline retained."
+    },
+    {
+      "cases": 2,
+      "property": "Whitespace update/delete idempotency keys reject400/idempotency_key_required before persisted effects.",
+      "oracle": "Valid baseline differs only in key; full independently queried appointment/audit/ledger snapshots equal."
+    },
+    {
+      "cases": 3,
+      "property": "Explicit confirmation false on status/update/delete yields200/safeFalse/autonomyblocked with explicit_confirmation_required and no persisted effect.",
+      "oracle": "Valid signed baseline differs only in confirmation Boolean; all-column separate READ COMMITTED snapshot equality."
+    }
+  ],
+  "source_reconciliation": {
+    "post_observed_utc": "2026-10-09T02:29:28.591344+00:00",
+    "literal_checks": 344,
+    "failures": [],
+    "case_files": 142,
+    "current_ordinary_counterparts": 133,
+    "canonical_counterpart_qualification": "The336-check first pass checked132 app/alembic counterpart files. Separate exact alembic.ini readback supplies the133rd ordinary counterpart; its8a706 digest equals the reviewed source row. No blanket whole-repository physical claim.",
+    "capsule_files": 9,
+    "loaded_paths": 141,
+    "loaded_paths_outside_binding": [],
+    "source_and_governing_supplement": [
+      {
+        "path": "C:/Users/there/EMR4/alembic.ini",
+        "sha256": "8a70641ffa66bb1c228e16a62d8b7a2111810888819c9c662c17ea72e2d70b49",
+        "bytes": 5157
+      },
+      {
+        "path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/ordinary-applicability/confirmation-input-guards-execution-preparation-v1/execution-binding.json",
+        "sha256": "28e7f85d13727b9970043b81fe941d3b23196edd4dc0c542e5068dafdfd3b69f",
+        "bytes": 8267
+      },
+      {
+        "path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/ordinary-applicability/confirmation-input-guards-execution-preparation-v1/independent-execution-review-v1.json",
+        "sha256": "aec105b1324ea16725ed00062a903f581646b91c9270273ad8f3d22c608aa445",
+        "bytes": 9445
+      },
+      {
+        "path": "C:/Users/there/EMR4/AGENTS.md",
+        "sha256": "97d6ea223508d53ee704a0cc3ceec383e2eea9f3db764376b538e8341bee886e",
+        "bytes": 26938
+      },
+      {
+        "path": "C:/Users/there/EMR4/orchestration/programme/current-state.json",
+        "sha256": "132cc1ac6f474ce9ee3412eead5c2efe399fa4f56dd67cd9ef1ea8de5b22a05d",
+        "bytes": 46996
+      },
+      {
+        "path": "C:/Users/there/EMR4/orchestration/programme/gates.yaml",
+        "sha256": "115a651a0b13156a591045638d1833a9a71347e7b1f7e694767eac49d2abc341",
+        "bytes": 21215
+      },
+      {
+        "path": "C:/Users/there/EMR4/docs/programme/recovery-execution-plan-20260911.md",
+        "sha256": "8be5011bfc569e4f14c2face2fde33fbf146fd31bf8a0dbadec53f114515a5e8",
+        "bytes": 9949
+      },
+      {
+        "path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/g2-completion-20261008-v1/owner-directive-20261008.txt",
+        "sha256": "5292b7c727de10f5dac9d6857745fac9c01bdeddeb19c7c8d07586e1cf43b406",
+        "bytes": 5774
+      }
+    ],
+    "sanitized_bundle_records": 21,
+    "bundle_complete_unique_hash_verified": true,
+    "records": {
+      "result.json": {
+        "sha256": "ddf028e12105fba128ab1486224751bebfaa5b1711b09eb4bc26ed54fb2fb574",
+        "bytes": 3734
+      },
+      "decoded-reports/result.json": {
+        "sha256": "0b0e670071c0d1b95228bdc16bc94b06f5032bd5992450720e9ffbcaa269379f",
+        "bytes": 2662
+      },
+      "decoded-reports/tenant-primary.json": {
+        "sha256": "224c3f2d0b53a0021092a1079862e37b478fe4471ebd89f69757958497a83c12",
+        "bytes": 2972
+      },
+      "decoded-reports/tenant-result.json": {
+        "sha256": "cedb5169a9d4f7f5b4a371fe2ab4803464bca6a4ad41f1461458a71262c59649",
+        "bytes": 24330
+      },
+      "decoded-reports/child-intent.json": {
+        "sha256": "a285cfb5468d301e1e6b5670043530797333301f088892f47721d7337a043c79",
+        "bytes": 423
+      },
+      "prestart-inspect.json": {
+        "sha256": "e1ccc6b9f28ee9492db786eff1ac3e8b8a30d885ada0655af7600e73baa84045",
+        "bytes": 1987
+      },
+      "started.json": {
+        "sha256": "051bce2ce2fa813ec22aef729f7401f5fadd3a6ca8147188bb4095486a8e2670",
+        "bytes": 271
+      },
+      "container-stdout.txt": {
+        "sha256": "0c9256826d9180edaba4a700637ecc38105e39a4f51ae16d58ebc3f45e76ae4b",
+        "bytes": 10164
+      },
+      "container-stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      }
+    },
+    "bundle_pins": [
+      {
+        "name": "result.json",
+        "sha256": "0b0e670071c0d1b95228bdc16bc94b06f5032bd5992450720e9ffbcaa269379f",
+        "bytes": 2662
+      },
+      {
+        "name": "tenant-result.json",
+        "sha256": "cedb5169a9d4f7f5b4a371fe2ab4803464bca6a4ad41f1461458a71262c59649",
+        "bytes": 24330
+      },
+      {
+        "name": "tenant-primary.json",
+        "sha256": "224c3f2d0b53a0021092a1079862e37b478fe4471ebd89f69757958497a83c12",
+        "bytes": 2972
+      },
+      {
+        "name": "child-intent.json",
+        "sha256": "a285cfb5468d301e1e6b5670043530797333301f088892f47721d7337a043c79",
+        "bytes": 423
+      },
+      {
+        "name": "initdb-reserved.json",
+        "sha256": "5ae711d95ec32bee2b10468e36fac6b3505d50f266bd4da6ab4e23f723828ae5",
+        "bytes": 627
+      },
+      {
+        "name": "initdb-started.json",
+        "sha256": "6934b39be42c93f748bdf21d52f8a0616913d55e199b1c8bfd8c7339dd7d71f6",
+        "bytes": 606
+      },
+      {
+        "name": "initdb-finished.json",
+        "sha256": "fe237158fbc22bed055dfcba5e0df8aa6b3e502e146bff857e348b900b219253",
+        "bytes": 101
+      },
+      {
+        "name": "pg-start-reserved.json",
+        "sha256": "3c2d6c2caa6124415f859f12743c0879b0f70eb3542baf066236ae0e068bce4c",
+        "bytes": 520
+      },
+      {
+        "name": "pg-start-started.json",
+        "sha256": "2ca9443f12a1157bfbf97008079858470f769f21c95817c6f52795a32c07da77",
+        "bytes": 500
+      },
+      {
+        "name": "pg-start-finished.json",
+        "sha256": "3debd676f5f06b466daaeae041dbe213def66231c689c616ed0ecac623bd6828",
+        "bytes": 103
+      },
+      {
+        "name": "tenant-child-reserved.json",
+        "sha256": "be7856646fddfd6eab6adec7bdf7a1ae336f98ae30ad8cc7b3b913730741297c",
+        "bytes": 787
+      },
+      {
+        "name": "tenant-child-started.json",
+        "sha256": "6c0be5ef6c738c2d59c12ff637592980a7578cd7318fa56b16b11ef2eda07b9d",
+        "bytes": 767
+      },
+      {
+        "name": "tenant-child-finished.json",
+        "sha256": "05c59de6f2acec2691e8ec337b5e5382242b086d2cfa3dc93b00509e5a614e47",
+        "bytes": 106
+      },
+      {
+        "name": "pg-stop-reserved.json",
+        "sha256": "f9159ae6c77dbf93dddc0ffc0ab9d210b6fd8c91134acab84451309997cfcc2e",
+        "bytes": 497
+      },
+      {
+        "name": "pg-stop-started.json",
+        "sha256": "5a4a54443e8fa098e49c5de37cab94e42613cfb0e2a6d220ecd75f673fbccda5",
+        "bytes": 477
+      },
+      {
+        "name": "pg-stop-finished.json",
+        "sha256": "a442b531f18289170c1f8f3e43f41f117d75692f240486518054e552106caa29",
+        "bytes": 102
+      },
+      {
+        "name": "initdb.log",
+        "sha256": "8c3f537a774885ba1b86d6fa60d25593ca48146fcbc912ee0a20600ccfbc5857",
+        "bytes": 812
+      },
+      {
+        "name": "pg-start.log",
+        "sha256": "66afd0411ccc09366e99fdd99b85f21899c8d2d064f5835126859618802153ad",
+        "bytes": 52
+      },
+      {
+        "name": "tenant-child.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "name": "pg-stop.log",
+        "sha256": "ca19178a35ab4153b75b494963b66ce8243e1b94c173107c87b44d09db23652d",
+        "bytes": 56
+      },
+      {
+        "name": "postgresql.log",
+        "sha256": "bd51fe9c9e1b9b100ca1b1d40429c26e46e3560c9f5babb22012eb4bed840810",
+        "bytes": 1304
+      }
+    ]
+  },
+  "isolation": {
+    "prestart": {
+      "name": "/emr4-g2-confirmation-input-guards-20261009-v1",
+      "container_id": "897d342a457a841d632624908cda476cfd52ca391e33111f7b81c0f0b48ce885",
+      "image_id": "sha256:192e420d4057bc851bb8db5af2495c35281fca92e56a76cec7f32cf8d3a6e1f9",
+      "host_mounts": [
+        {
+          "Type": "bind",
+          "Source": "C:\\Users\\there\\EMR4-migration\\20260911-v1\\current-control-repair-20260912-v1\\g2-completion-20261008-v1\\ordinary-applicability\\confirmation-input-guards-execution-preparation-v1\\case",
+          "Target": "/case",
+          "ReadOnly": true
+        },
+        {
+          "Type": "bind",
+          "Source": "C:\\Users\\there\\EMR4-migration\\20260911-v1\\current-control-repair-20260912-v1\\g2-completion-20261008-v1\\ordinary-applicability\\confirmation-input-guards-execution-preparation-v1\\capsule",
+          "Target": "/capsule",
+          "ReadOnly": true
+        }
+      ],
+      "host_tmpfs": {
+        "/run/g2": "rw,noexec,nosuid,nodev,size=536870912,mode=0700,uid=10001,gid=10001",
+        "/tmp": "rw,noexec,nosuid,nodev,size=33554432,mode=1777",
+        "/var/lib/postgresql/data": "ro,noexec,nosuid,nodev,size=1048576,mode=0000"
+      },
+      "runtime_mounts": [
+        {
+          "Type": "bind",
+          "Source": "C:\\Users\\there\\EMR4-migration\\20260911-v1\\current-control-repair-20260912-v1\\g2-completion-20261008-v1\\ordinary-applicability\\confirmation-input-guards-execution-preparation-v1\\case",
+          "Destination": "/case",
+          "Mode": "",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "C:\\Users\\there\\EMR4-migration\\20260911-v1\\current-control-repair-20260912-v1\\g2-completion-20261008-v1\\ordinary-applicability\\confirmation-input-guards-execution-preparation-v1\\capsule",
+          "Destination": "/capsule",
+          "Mode": "",
+          "RW": false,
+          "Propagation": "rprivate"
+        }
+      ],
+      "network_mode": "none",
+      "readonly_rootfs": true,
+      "state": {
+        "running": false,
+        "status": "created"
+      }
+    },
+    "child_intent": {
+      "cluster_disposal_owner": "outer_supervisor",
+      "collection_attempts": 1,
+      "database": "g2_confirmation_inputguard20261009a",
+      "operation": "g2-confirmation-input-guards-20261009-v1",
+      "roles": {
+        "admin": "g2_inputguard_admin_20261009a",
+        "application": "g2_inputguard_app_20261009a",
+        "observer": "g2_inputguard_observer_20261009a"
+      },
+      "run_id": "inputguard20261009a",
+      "schema": "tenant-child-intent.v1",
+      "test_attempts": 1,
+      "whole_child_seconds": 600
+    },
+    "no_public_listener": true,
+    "network": "none; only isolated in-container loopback database127.0.0.1:55437",
+    "synthetic_fresh_database": true,
+    "source_and_capsule_readonly": true,
+    "provider_or_existing_db_access": false,
+    "guard_denials": [],
+    "private_credentials_not_retained": true,
+    "qualification": "Actual child runs reviewed application imports/migrations/tests; reviewer only reads receipts/source and exact owned metadata."
+  },
+  "cleanup": {
+    "accepted": true,
+    "engines": {
+      "admin": {
+        "attempts": 1,
+        "checked_out_before_dispose": 0,
+        "status": "PASS"
+      },
+      "command": {
+        "attempts": 1,
+        "checked_out_before_dispose": 0,
+        "status": "PASS"
+      },
+      "global_app_engine": {
+        "attempts": 1,
+        "checked_out_before_dispose": 0,
+        "status": "PASS"
+      },
+      "observer": {
+        "attempts": 1,
+        "checked_out_before_dispose": 0,
+        "status": "PASS"
+      },
+      "request": {
+        "attempts": 1,
+        "checked_out_before_dispose": 0,
+        "status": "PASS"
+      }
+    },
+    "lifecycle": {
+      "adapter_consumed": true,
+      "balanced_checkout_records": true,
+      "closed_lifetime_denials": 2,
+      "global_engine_never_used_by_case": true,
+      "global_engine_post_close_connect_denied": true,
+      "reset_attempts": 10,
+      "reset_budget_denied": true
+    },
+    "threads": {
+      "live": [],
+      "after": []
+    },
+    "all_connections_closed": true,
+    "support_checks": {
+      "catalogue_grants_and_cascade": {
+        "all_public_table_names_exact": true,
+        "outside_practice_cascade": [
+          "application_auth_audit_events",
+          "application_auth_exchange_grants",
+          "application_auth_parent_sessions",
+          "application_auth_principal_generations",
+          "application_auth_surface_sessions",
+          "application_auth_synthetic_principal_truth",
+          "application_identity_federation_admission_grants",
+          "application_identity_federation_audit_events",
+          "application_identity_federation_bindings",
+          "application_identity_oidc_authorization_attempts",
+          "mbs_directory",
+          "snomed_directory"
+        ],
+        "practice_cascade_tables": 52,
+        "public_table_owners_checked": 65,
+        "public_tables": 65,
+        "restricted_column_grants_checked": 759,
+        "restricted_table_grants_checked": 65,
+        "status": "PASS"
+      },
+      "connection_guards": {
+        "dirty_checkout_rejection": "confirmation pooled connection retained tenant context",
+        "dirty_pool_explicitly_discarded": true,
+        "failed_checkout_balanced": true,
+        "fresh_checkout_clean": true,
+        "raw_guard_role_mismatch": "confirmation physical connection identity mismatch",
+        "raw_guard_success": "PASS_ROLLED_BACK",
+        "reset_reservations_consumed": 0,
+        "status": "PASS",
+        "support_case_count": 0
+      },
+      "outside_cascade_counts_invariant": true,
+      "outside_cascade_final_counts": {
+        "application_auth_audit_events": 0,
+        "application_auth_exchange_grants": 0,
+        "application_auth_parent_sessions": 0,
+        "application_auth_principal_generations": 0,
+        "application_auth_surface_sessions": 0,
+        "application_auth_synthetic_principal_truth": 0,
+        "application_identity_federation_admission_grants": 0,
+        "application_identity_federation_audit_events": 0,
+        "application_identity_federation_bindings": 0,
+        "application_identity_oidc_authorization_attempts": 0,
+        "mbs_directory": 0,
+        "snomed_directory": 0
+      },
+      "outside_cascade_initial_counts": {
+        "application_auth_audit_events": 0,
+        "application_auth_exchange_grants": 0,
+        "application_auth_parent_sessions": 0,
+        "application_auth_principal_generations": 0,
+        "application_auth_surface_sessions": 0,
+        "application_auth_synthetic_principal_truth": 0,
+        "application_identity_federation_admission_grants": 0,
+        "application_identity_federation_audit_events": 0,
+        "application_identity_federation_bindings": 0,
+        "application_identity_oidc_authorization_attempts": 0,
+        "mbs_directory": 0,
+        "snomed_directory": 0
+      }
+    },
+    "postgresql_stop": {
+      "database_stop_attempted": true,
+      "database_stopped": true
+    },
+    "processes_closed": [
+      {
+        "cleanup_attempted": false,
+        "launch_attempted": true,
+        "phase": "initdb",
+        "pid": 7,
+        "returncode": 0
+      },
+      {
+        "cleanup_attempted": false,
+        "launch_attempted": true,
+        "phase": "pg-start",
+        "pid": 20,
+        "returncode": 0
+      },
+      {
+        "cleanup_attempted": false,
+        "launch_attempted": true,
+        "phase": "tenant-child",
+        "pid": 30,
+        "returncode": 0
+      },
+      {
+        "cleanup_attempted": false,
+        "launch_attempted": true,
+        "phase": "pg-stop",
+        "pid": 77,
+        "returncode": 0
+      }
+    ],
+    "attached_process": {
+      "client_pid": 29520,
+      "client_closed": true,
+      "readers_closed": true,
+      "reader_errors": [],
+      "output_overflow": false,
+      "output_complete": true
+    },
+    "native_container": {
+      "container_id": "897d342a457a841d632624908cda476cfd52ca391e33111f7b81c0f0b48ce885",
+      "exit_code": 0,
+      "oom_killed": false,
+      "restart_count": 0,
+      "container_absent": true,
+      "created_volumes": false
+    },
+    "independent_exact_container_readback": {
+      "container_id": "897d342a457a841d632624908cda476cfd52ca391e33111f7b81c0f0b48ce885",
+      "returncode": 1,
+      "stdout": "[]\n",
+      "stderr": "Error response from daemon: No such container: 897d342a457a841d632624908cda476cfd52ca391e33111f7b81c0f0b48ce885\n"
+    },
+    "diagnostic_retention": {
+      "logs": [
+        {
+          "name": "initdb.log",
+          "raw_bytes_read": 812,
+          "retained_raw_byte_limit": 4194304,
+          "truncated": false
+        },
+        {
+          "name": "pg-start.log",
+          "raw_bytes_read": 52,
+          "retained_raw_byte_limit": 4194304,
+          "truncated": false
+        },
+        {
+          "name": "tenant-child.log",
+          "raw_bytes_read": 0,
+          "retained_raw_byte_limit": 4194304,
+          "truncated": false
+        },
+        {
+          "name": "pg-stop.log",
+          "raw_bytes_read": 56,
+          "retained_raw_byte_limit": 4194304,
+          "truncated": false
+        },
+        {
+          "name": "postgresql.log",
+          "raw_bytes_read": 1304,
+          "retained_raw_byte_limit": 4194304,
+          "truncated": false
+        }
+      ],
+      "status": "complete"
+    },
+    "qualification": "All five engines disposed once with0checkout, lifecycle balanced, ten resets and exhaustion denied, outside-cascade counts unchanged, PG stop succeeded, exact recorded container absent, no volumes/OOM/restart, direct client/readers closed. No cleanup or runtime performed by reviewer."
+  },
+  "budget_disposition": {
+    "new_distinct_batch": true,
+    "native_attempts_consumed": 1,
+    "collection_attempts_consumed": 1,
+    "test_attempts_consumed": 1,
+    "reset_reservations_consumed": 10,
+    "additional_attempts_under_this_allocation": 0,
+    "no_automatic_renewal": true,
+    "prior_three_delegated_operations_not_reopened": true
+  },
+  "limits": [
+    "Scoped acceptance of these ten current synthetic scenarios and30phases only; no original failure-count transfer, O1/FIRST case duplication, complete97 population, globalCI or G2 completion.",
+    "Snapshots asserted in the passing case bodies establish persisted equality at the exercised boundary. No transient claim absence or post-business-write rollback is inferred.",
+    "Five disputed delete occupied/full-body/freshness properties remain separate and unaccepted; this successful input batch does not settle them.",
+    "Historical contract proposed flags and earlier failed attempts remain unchanged. No canonical source/gate/ref/publication effect accepted or performed here."
+  ]
+}
