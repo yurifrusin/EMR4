@@ -1,12 +1,12 @@
 {
   "schema_version": "raisa-ariadne.programme-state.v2",
-  "observed_at": "2026-10-10T07:40:42.436164+00:00",
+  "observed_at": "2026-10-10T10:22:09.988234+00:00",
   "programme_name": "Raisa Medical Office and Ariadne Recovery & Convergence",
   "programme_mode": "recovery",
   "current_gate": "G2",
-  "current_gate_status": "active",
+  "current_gate_status": "passed",
   "active_correction": "G2",
-  "active_profile": "G2_BASELINE_REPAIR_ACTIVE",
+  "active_profile": "G2_ACCEPTED_CLOSED",
   "machine_authoritative": true,
   "feature_work_eligible": false,
   "product_work_eligible": false,
@@ -243,8 +243,12 @@
       "drifted_table_count": 4,
       "g0_action": "record_and_contain_not_repair"
     },
-    "global_gate": "red_repair_only",
-    "feature_work_suspended": true
+    "global_gate": "g2_accepted_closed",
+    "feature_work_suspended": true,
+    "current_required_ci_acceptance": {
+      "path": "orchestration/programme/g2-closeout-evidence/complete-selection.json",
+      "sha256": "22098e6d9c8b5d1fbbbef841668e2464d61b999a02f8abd63458d07de343a59e"
+    }
   },
   "stop_ship_containment": {
     "destructive_migration": "recorded_R-001_no_migration_execution",
@@ -255,10 +259,7 @@
   },
   "task_selection": {
     "autonomous_selection_enabled": false,
-    "allowed_task_kinds": [
-      "adopt_g2_complete_ci",
-      "accept_g2_closeout"
-    ],
+    "allowed_task_kinds": [],
     "blocked_task_kinds": [
       "product_feature",
       "g1a_untyped_or_out_of_scope",
@@ -269,11 +270,11 @@
     ],
     "admission_command": "python scripts/raisa_ariadne_recovery_preflight.py --task-manifest <path> --phase development",
     "out_of_gate_result": "blocked",
-    "next_eligible_tranche": "G2",
+    "next_eligible_tranche": "G3",
     "next_eligible_now": false,
     "next_tranche_started": false,
-    "next_tranche_admission_requires_state_transition": false,
-    "next_eligibility_condition": "G2_closeout_requires_all12_complete_v3_and_final_independent_review"
+    "next_tranche_admission_requires_state_transition": true,
+    "next_eligibility_condition": "G2_accepted_G3_requires_separate_reviewed_admission"
   },
   "parallelism_efficacy": {
     "deepseek": {
@@ -975,7 +976,7 @@
     }
   },
   "g2": {
-    "status": "active",
+    "status": "passed",
     "scope_path": "orchestration/programme/g2-baseline-repair-scope.json",
     "scope_sha256": "8024461589f12fcbf9cec32d738a45ffc53e8127fd1b09ea00202b7fca8f6c05",
     "current_operation": {
@@ -993,6 +994,11 @@
       },
       "task_class": "g2_confirmation_family_fixture_repair"
     },
-    "completion_accepted": false
+    "completion_accepted": true,
+    "acceptance": {
+      "scope_path": "orchestration/programme/g2-closeout-scope.json",
+      "scope_sha256": "79766676a9c7ccf92b62266ed778140d534533dbe8050aae60c7de88252befd3",
+      "prior_acceptance_sha256": "8baed2f2dbb2ad109e2ce64a0a0522db771e3e648557b60537582c1bba02eb17"
+    }
   }
 }
