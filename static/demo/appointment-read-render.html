@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'none'; form-action 'none'; base-uri 'none'">
+  <title>Appointments · Synthetic read-only demo</title>
+  <link rel="stylesheet" href="appointment-read-render.css">
+  <script type="module" src="appointment-read-render.js"></script>
+</head>
+<body>
+  <div class="page">
+    <header class="site-header">
+      <div class="brand">Raisa</div>
+      <p class="header-note">Read-only appointment list</p>
+    </header>
+    <main>
+      <div class="page-heading">
+        <div>
+          <p class="eyebrow">Synthetic preview</p>
+          <h1>Appointments</h1>
+        </div>
+        <p class="authority-note">View only</p>
+      </div>
+      <section class="demo-controls" aria-label="Preview settings">
+        <label for="view-choice">View
+          <select id="view-choice" disabled>
+            <option value="list">List</option>
+            <option value="table">Table</option>
+          </select>
+        </label>
+        <label for="mode-choice">Mode
+          <select id="mode-choice" disabled>
+            <option value="normal">Normal</option>
+            <option value="fallback">Fallback</option>
+          </select>
+        </label>
+        <label for="scenario-choice">Scenario
+          <select id="scenario-choice" disabled>
+            <option value="accepted">Accepted snapshot</option>
+            <option value="rejected">Unavailable snapshot</option>
+          </select>
+        </label>
+      </section>
+      <p id="mode-indicator" class="mode-indicator" aria-live="polite">Awaiting validated synthetic snapshot</p>
+      <div id="appointment-render" class="appointment-render" aria-live="polite" aria-atomic="true">
+        <p class="empty-title">Appointment list unavailable</p>
+        <p class="empty-copy">No appointment information is shown.</p>
+      </div>
+      <noscript><p>JavaScript is required for this isolated preview.</p></noscript>
+    </main>
+    <footer>Synthetic appointment information · No booking actions</footer>
+  </div>
+</body>
+</html>
