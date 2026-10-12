@@ -1,12 +1,12 @@
 {
   "schema_version": "raisa-ariadne.programme-state.v2",
-  "observed_at": "2026-10-12T02:26:07.508268+00:00",
+  "observed_at": "2026-10-12T04:40:22.625932+00:00",
   "programme_name": "Raisa Medical Office and Ariadne Recovery & Convergence",
   "programme_mode": "convergence",
   "current_gate": "G3",
-  "current_gate_status": "active_bounded_contract_convergence",
+  "current_gate_status": "active_bounded_read_render",
   "active_correction": "G3",
-  "active_profile": "G3_APPOINTMENT_CONTRACT_CONVERGENCE",
+  "active_profile": "G3_APPOINTMENT_READ_RENDER",
   "machine_authoritative": true,
   "feature_work_eligible": false,
   "product_work_eligible": false,
@@ -260,7 +260,7 @@
   "task_selection": {
     "autonomous_selection_enabled": true,
     "allowed_task_kinds": [
-      "g3_appointment_contract_convergence"
+      "g3_appointment_read_render"
     ],
     "blocked_task_kinds": [
       "product_feature",
@@ -276,7 +276,7 @@
     "next_eligible_now": true,
     "next_tranche_started": true,
     "next_tranche_admission_requires_state_transition": false,
-    "next_eligibility_condition": "only_reviewed_appointment_contract_scope_no_service_effects"
+    "next_eligibility_condition": "only_reviewed_DB_free_read_render_with_separate_execution_binding"
   },
   "parallelism_efficacy": {
     "deepseek": {
@@ -1004,9 +1004,9 @@
     }
   },
   "g3": {
-    "status": "active_bounded_contract_convergence",
-    "scope_file": "orchestration/programme/g3-appointment-contract-convergence-scope.json",
-    "scope_sha256": "796505b95ae616eabcd0ed8bdf209f46fd826057fadbd4daf3cc0f9f087d10c8",
+    "status": "active_bounded_read_render",
+    "scope_file": "orchestration/programme/g3-appointment-read-render-scope.json",
+    "scope_sha256": "c671c5900c0b7c5aa162378e118008407920aa2dd6492670855a75f801d59636",
     "completion_accepted": false,
     "product_runtime_authorized": false,
     "broader_review_required_after_tranche": false

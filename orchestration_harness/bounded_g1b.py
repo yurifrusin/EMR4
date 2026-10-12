@@ -3152,7 +3152,231 @@ def _validate_g3_contract_loaded_policy(inputs):
 
 
 
+# Prospective DB-free read-render sibling; accepted G3/G3C functions remain unchanged.
+G3R_BASE = {'commit': 'd7b3064af078c729f86881318e273ef2e3bf7724', 'parent': 'b39615213240bb44f6880d87441ecdce6afe5aeb', 'tree': 'cef65cecbd86d3b31874c203085bec068a3a9a0d'}
+G3R_OWNER_SHA = G3C_OWNER_SHA
+G3R_PRIOR_ACCEPTANCE_SHA = '4f6efaf3b68fa46e2ec0e2207cde389a452c313ad65d8cd5fe0df01a775b032a'
+G3R_SCOPE = 'orchestration/programme/g3-appointment-read-render-scope.json'
+G3R_TEST = 'tests/test_g3_read_render_entry.py'
+G3R_CODE = G3C_CODE
+G3R_PRODUCT = frozenset(raisa_policy.G3_READ_RENDER_PRODUCT_PATHS)
+G3R_CONTROL = frozenset({STATE,GATES,OVERLAY,AGENTS,G3R_SCOPE,G3R_TEST}) | G3R_CODE
+G3R_BEFORE = frozenset(['AGENTS.md', 'orchestration/harness_settings/programme_recovery.yaml', 'orchestration/programme/current-state.json', 'orchestration/programme/g2-closeout-scope.json', 'orchestration/programme/g3-appointment-contract-convergence-scope.json', 'orchestration/programme/g3-offline-appointment-scope.json', 'orchestration/programme/gates.yaml'])
+G3R_KINDS = frozenset({"enable_g3_read_render","implement_g3_read_render"})
+G3R_RUNTIME_LIMITS = {'offline_only': True, 'loopback_static_browser_only': True, 'serializer_seconds': 300, 'browser_seconds': 900, 'memory_mib': 1536, 'cpus': 2, 'processes': 128, 'active_environments': 1, 'automatic_retry': False}
+G3R_LIMITS = ("DB-free synthetic read-render source only", "runtime requires exact independent launch binding", "mutation, application, database, audio, providers and protected effects remain closed", "G3 criterion review precedes G4 transition")
+G3R_BASE_POLICY = {'AGENTS.md': 'e7cb0116ec61936e9cc513d1194a39d28abd86a9282685cee4edef51dd83b402', 'orchestration/harness_settings/programme_recovery.yaml': 'a2ee3417a26a31dd861b51ac1308e7c2c56fb7d7751853014f9c805d3b878f49', 'orchestration/programme/current-state.json': '8b4086d7a1b4f3d3561577cf2e8bbee4f5f9e8b5f1c2b270d6528e4b40ffee22', 'orchestration/programme/g2-closeout-scope.json': '79766676a9c7ccf92b62266ed778140d534533dbe8050aae60c7de88252befd3', 'orchestration/programme/g3-appointment-contract-convergence-scope.json': '796505b95ae616eabcd0ed8bdf209f46fd826057fadbd4daf3cc0f9f087d10c8', 'orchestration/programme/g3-offline-appointment-scope.json': '5041b35dde69ad58e46848927485e0fa586512623c498a229471dd40c6d5bc30', 'orchestration/programme/gates.yaml': '4c6cc214445ab56a4c27d00dd8a8b56f03ddd16df962ac1a86f7186c7e48e850'}
+G3R_BASE_SOURCE = {'orchestration_harness/configuration_core.py': 'f7ba7a80eb0a590f9fb71b864e6c1f9f43241d9f7d70a38da67a9243fea208e5', 'orchestration_harness/raisa_policy.py': '2e421b1aa8d89ac94f71eb12713e10d9109838943ae8c1ba7778dbca1ee51c52', 'orchestration_harness/bounded_g1b.py': '56790a5d5313f35f96125e5b543a5d118ae0366ed93c1a40ad6b65bf7c869680', 'orchestration_harness/trusted_git.py': '4a856bffe2b68d7c7e1875152629c9024a32679b59d9b1ed8301c368d41ff527', 'orchestration_harness/programme_admission.py': 'ac816a8a79b2d8222fa357777c075950927e86cf30c8a5b25ffd08a474052181', 'orchestration_harness/pinned_programme_gatekeeper.py': 'c1fea9a2849068ed8e87dbe1e7cec1cc7e762fa2bc8876fc32bbda80d226cf39', 'scripts/raisa_ariadne_recovery_preflight.py': 'edfd37b30673b8544d309b532c95b3fd7c20ff592880a8a0235dfde6cfc8e7e4', 'tests/test_bounded_g1b.py': 'bb1be86ca39232fea30c1ea84cdfb114428d57be0f8f67bf7e86daab0ba73bc5'}
+G3R_PRODUCT_BEFORE = {}
+OPERATION_PATHS.update(enable_g3_read_render=G3R_CONTROL, implement_g3_read_render=G3R_PRODUCT)
+
+def build_g3_read_render_transition(before, scope):
+    """Only the exact accepted contract subject enters DB-free read-render verification."""
+    _keys(before, G3R_BEFORE, "bounded_g3_read_render_before_paths")
+    _need(all(_sha(before[p]) == G3R_BASE_POLICY[p] for p in before), "bounded_g3_read_render_preimage")
+    _keys(scope, {"schema_version", "recorded_at", "accepted_g2", "accepted_g2_review_sha256",
+        "source_sha256", "product_sha256", "allowed_paths", "allowed_effects", "runtime_limits",
+        "standing_delegation", "stop_after_tranche", "g3_completion_claimed",
+        "predecessor_acceptance", "owner_directive_sha256"}, "bounded_g3_read_render_scope_schema")
+    _need(scope["schema_version"] == "ariadne.g3_appointment_read_render_scope.v1"
+          and scope["accepted_g2"] == G3_BASE and scope["accepted_g2_review_sha256"] == G3_ACCEPTANCE_SHA,
+          "bounded_g3_read_render_accepted_base")
+    _need(scope["predecessor_acceptance"] == {**G3R_BASE, "review_sha256": G3R_PRIOR_ACCEPTANCE_SHA}
+          and scope["owner_directive_sha256"] == G3R_OWNER_SHA, "bounded_g3_read_render_owner_predecessor")
+    _need(type(scope["recorded_at"]) is str and datetime.fromisoformat(scope["recorded_at"]).tzinfo is not None,
+          "bounded_g3_read_render_timestamp")
+    _digest_map(scope["source_sha256"], SOURCE_PATHS | CONTROLLER_PATHS, "bounded_g3_read_render_sources")
+    _digest_map(scope["product_sha256"], G3R_PRODUCT, "bounded_g3_read_render_product_paths")
+    _need(scope["allowed_paths"] == sorted(G3R_PRODUCT)
+          and scope["allowed_effects"] == sorted(EFFECTS | {"product_behavior_change"})
+          and scope["runtime_limits"] == G3R_RUNTIME_LIMITS
+          and scope["standing_delegation"] == {
+              "routine_corrections_and_finite_renewals": True, "record_before_and_after": True,
+              "prior_consumption_preserved": True, "blind_retry": False,
+              "independent_review_for_changed_safety_scope_or_oracle": True,
+              "stop_on_containment_cleanup_or_repeated_no_progress": True}
+          and scope["stop_after_tranche"] == "criterion_level_G3_review_before_G4_runtime"
+          and scope["g3_completion_claimed"] is False, "bounded_g3_read_render_scope_boundary")
+    state = _json(before[STATE])
+    _need(state["active_profile"] == raisa_policy.G3_CONTRACT_PROFILE
+          and state["current_gate"] == "G3" and state["current_gate_status"] == "active_bounded_contract_convergence"
+          and state["g2"]["completion_accepted"] is True, "bounded_g3_read_render_g2_not_accepted")
+    # Historical G2/global observations and acceptance retain their exact meaning.
+    state.update(observed_at=scope["recorded_at"], programme_mode="convergence",
+        current_gate="G3", current_gate_status="active_bounded_read_render",
+        active_correction="G3", active_profile=raisa_policy.G3_READ_RENDER_PROFILE)
+    state["task_selection"].update(autonomous_selection_enabled=True,
+        allowed_task_kinds=["g3_appointment_read_render"], next_eligible_now=True,
+        next_tranche_started=True, next_tranche_admission_requires_state_transition=False,
+        next_eligibility_condition="only_reviewed_DB_free_read_render_with_separate_execution_binding")
+    state["g3"] = {"status": "active_bounded_read_render", "scope_file": G3R_SCOPE,
+        "scope_sha256": _sha(_canonical(scope) + b"\n"), "completion_accepted": False,
+        "product_runtime_authorized": False, "broader_review_required_after_tranche": False}
+    gates = _document(before[GATES], GATES)
+    g3 = next(g for g in gates["gates"] if g["id"] == "G3")
+    _need(g3["status"] == "active_bounded_contract_convergence", "bounded_g3_read_render_gate_preimage")
+    g3["status"] = "active_bounded_read_render"
+    gates["programme"].update(programme_mode="convergence", current_gate="G3",
+        current_gate_status="active_bounded_read_render")
+    _need(next(g for g in gates["gates"] if g["id"] == "G4")["status"] == "blocked_by_G3",
+          "bounded_g3_read_render_g4_closed")
+    overlay = _document(before[OVERLAY], OVERLAY)
+    overlay["active_profile"] = raisa_policy.G3_READ_RENDER_PROFILE
+    _need(raisa_policy.G3_READ_RENDER_PROFILE not in overlay["profiles"], "bounded_g3_read_render_profile_exists")
+    overlay["profiles"][raisa_policy.G3_READ_RENDER_PROFILE] = raisa_policy.g3_read_render_profile()
+    agents = before[AGENTS].decode("utf-8")
+    _need(agents.count(raisa_policy.G3_CONTRACT_PREAMBLE) == 1, "bounded_g3_read_render_agents_preimage")
+    agents = agents.replace(raisa_policy.G3_CONTRACT_PREAMBLE, raisa_policy.G3_READ_RENDER_PREAMBLE, 1)
+    prior_phase_sentence = 'Current executable admission is ONLY pure appointment contract convergence: no service, database, browser, command effect or audio capture until its separately reviewed activation.'
+    _need(agents.count(prior_phase_sentence) == 1, "bounded_g3_read_render_agents_phase_preimage")
+    agents = agents.replace(prior_phase_sentence, 'The earlier contract-convergence executable phase admitted only pure appointment contracts. Current G3 read-render source admission has a separate independently bound DB-free serializer and literal loopback browser exception; application, database, command and audio effects remain closed.', 1)
+    agents += "\n## Current DB-free G3 read-render tranche\n\nThis prospective owner-directed tranche supersedes the earlier pure-only executable phase. The separate G3_APPOINTMENT_READ_RENDER profile admits exact renderer sources and a reviewed DB-free synthetic serializer/loopback browser exception only. Every execution still requires exact independent binding, finite recorded budget and cleanup; source admission itself grants no runtime. The previous offline and contract profiles, G2 acceptance and their evidence qualifications remain unchanged. Application/database mutation, commands, providers, audio, real data, public exposure, protected refs and deployment remain closed in this tranche. Owned synthetic snapshot, screenshot and test-result artifact writes are permitted only by the exact reviewed verification binding. G3 completion remains false and G4 blocked. Standing Stage1 finite correction authority and worker ceiling continue unchanged.\n"
+    return {STATE: (json.dumps(state, indent=2, ensure_ascii=False) + "\n").encode(),
+        GATES: yaml.safe_dump(gates, sort_keys=False, allow_unicode=True).encode(),
+        OVERLAY: yaml.safe_dump(overlay, sort_keys=False, allow_unicode=True).encode(),
+        AGENTS: agents.encode(), G3R_SCOPE: _canonical(scope) + b"\n"}
+
+
+def _g3_read_render_review(read, row, subject, verdict):
+    _keys(row, {"path", "sha256"}, "bounded_g3_read_render_review_pin")
+    _need(type(row["path"]) is str and Path(row["path"]).is_absolute(), "bounded_g3_read_render_review_path")
+    _closeout_digest(row["sha256"])
+    review = _json(read(Path(row["path"]), row["sha256"]))
+    _need(review.get("reviewer_agent") == "/root/g3_entry_review"
+          and review.get("independent") is True and review.get("implementation_authorship") is False
+          and review.get("verdict") == verdict and review.get("blocking_findings") == []
+          and review.get("subject_sha256") == subject, "bounded_g3_read_render_independent_review")
+    return review
+
+
+def g3_read_render_review_subject(q):
+    return _sha(_canonical({k: q[k] for k in ("operation_kind", "base_commit", "base_tree",
+        "candidate_tree", "source_sha256", "payload_sha256", "repair_sha256")}))
+
+
+def _load_g3_read_render_inputs(context, target, source, evidence_root, scratch, q, read, snapshots):
+    _keys(q, {"schema_version", "operation_id", "operation_kind", "phase", "base_commit", "base_tree",
+        "expected_head", "expected_index_tree", "candidate_tree", "source_sha256", "payload_sha256",
+        "repair_sha256", "source_review", "g2_acceptance", "activation_acceptance", "predecessor_acceptance"}, "bounded_g3_read_render_binding_schema")
+    _need(q["schema_version"] == "ariadne.g3_appointment_read_render_operation_binding.v1"
+          and q["operation_kind"] in G3R_KINDS, "bounded_g3_read_render_binding_version")
+    _need(type(q["operation_id"]) is str and re.fullmatch(r"[a-z0-9][a-z0-9-]{1,79}", q["operation_id"])
+          and q["phase"] in {"development", "pre-push", "post-push"}, "bounded_g3_read_render_phase")
+    for k in ("base_commit", "base_tree", "expected_head", "expected_index_tree", "candidate_tree"):
+        _need(type(q[k]) is str and re.fullmatch(r"[0-9a-f]{40}", q[k]), "bounded_g3_read_render_git_identity")
+    enable = q["operation_kind"] == "enable_g3_read_render"
+    paths = G3R_CONTROL if enable else G3R_PRODUCT
+    sources = _digest_map(q["source_sha256"], SOURCE_PATHS | CONTROLLER_PATHS, "bounded_g3_read_render_source_paths")
+    _keys(q["repair_sha256"], paths, "bounded_g3_read_render_changed_paths")
+    for p, row in q["repair_sha256"].items():
+        _keys(row, {"before_sha256", "after_sha256"}, "bounded_g3_read_render_change_pair")
+        _closeout_digest(row["after_sha256"])
+        previous = (G3R_BASE_POLICY.get(p) or G3R_BASE_SOURCE.get(p)) if enable else G3R_PRODUCT_BEFORE.get(p)
+        _need(row["before_sha256"] == previous and row["after_sha256"] != previous,
+              "bounded_g3_read_render_change_preimage")
+        if previous is None:
+            _need(trusted_git.run_git(target, "ls-tree", q["base_commit"], "--", p) == "",
+                  "bounded_g3_read_render_addition_exists")
+        else:
+            _need(_sha(trusted_git.run_git_bytes(target, "cat-file", "blob", q["base_commit"] + ":" + p))
+                  == previous, "bounded_g3_read_render_committed_preimage")
+    if enable:
+        _need(q["base_commit"] == G3R_BASE["commit"] and q["base_tree"] == G3R_BASE["tree"]
+              and q["activation_acceptance"] is None, "bounded_g3_read_render_enable_base")
+    else:
+        _need(q["base_commit"] != G3R_BASE["commit"], "bounded_g3_read_render_controller_not_installed")
+        headers = trusted_git.run_git(target, "cat-file", "commit", q["base_commit"]).split("\n\n", 1)[0].splitlines()
+        _need([x for x in headers if x.startswith("parent ")] == ["parent " + G3R_BASE["commit"]]
+              and [x for x in headers if x.startswith("tree ")] == ["tree " + q["base_tree"]],
+              "bounded_g3_read_render_activation_parent_tree")
+        activation = _g3_read_render_review(read, q["activation_acceptance"], q["base_commit"], "PASS_G3_READ_RENDER_ENTRY_PUBLICATION_EFFECT")
+        _need(activation.get("tree") == q["base_tree"] and activation.get("protected_refs_unchanged") is True
+              and activation.get("same_attempt_remote_readback_verified") is True,
+              "bounded_g3_read_render_activation_effect")
+    _keys(q["predecessor_acceptance"], {"path", "sha256"}, "bounded_g3_read_render_predecessor_pin")
+    _need(q["predecessor_acceptance"]["sha256"] == G3R_PRIOR_ACCEPTANCE_SHA,
+          "bounded_g3_read_render_predecessor_digest")
+    prior = _g3_read_render_review(read, q["predecessor_acceptance"], G3R_BASE["commit"],
+                               "PASS_G3_CONTRACT_PRODUCT_PUBLICATION_EFFECT")
+    _need(prior.get("tree") == G3R_BASE["tree"]
+          and prior.get("protected_refs_unchanged") is True
+          and prior.get("same_attempt_remote_readback_verified") is True
+          and prior.get("qualified_pure_contract_acceptance") is True
+          and prior.get("full_g3_completion_accepted") is False,
+          "bounded_g3_read_render_predecessor_acceptance")
+    for p, digest in sources.items():
+        raw = read(source / p, digest)
+        committed = trusted_git.run_git_bytes(target, "cat-file", "blob", q["base_commit"] + ":" + p)
+        _need(_sha(committed) == G3R_BASE_SOURCE[p] if enable else committed == raw,
+              "bounded_g3_read_render_installed_source")
+        if enable and p not in G3R_CODE:
+            _need(committed == raw, "bounded_g3_read_render_unchanged_source")
+        if enable and p in G3R_CODE:
+            _need(digest == q["repair_sha256"][p]["after_sha256"], "bounded_g3_read_render_prospective_source")
+    _keys(q["g2_acceptance"], {"path", "sha256"}, "bounded_g3_read_render_g2_review_pin")
+    _need(q["g2_acceptance"]["sha256"] == G3_ACCEPTANCE_SHA, "bounded_g3_read_render_g2_review_digest")
+    accepted = _json(read(Path(q["g2_acceptance"]["path"]), G3_ACCEPTANCE_SHA))
+    judgment = accepted.get("final_g2_judgment")
+    _need(accepted.get("g2_complete") is True and accepted.get("g2_completion_accepted") is True
+          and type(judgment) is dict
+          and judgment.get("verdict") == "ACCEPT_EXACT_PUBLISHED_G2_COMPLETION"
+          and judgment.get("accepted") is True
+          and judgment.get("published_closeout_commit") == G3_BASE["commit"],
+          "bounded_g3_read_render_g2_review_acceptance")
+    inputs = CONFIGURATION_PATHS | G3R_BEFORE | {G3R_SCOPE} | paths | SOURCE_PATHS | CONTROLLER_PATHS
+    pins = _digest_map(q["payload_sha256"], inputs, "bounded_g3_read_render_payload_paths")
+    payloads = {p: read(target / p, digest) for p, digest in sorted(pins.items())}
+    before = {p: trusted_git.run_git_bytes(target, "cat-file", "blob", G3R_BASE["commit"] + ":" + p)
+              for p in G3R_BEFORE}
+    scope = _json(payloads[G3R_SCOPE])
+    _need(scope["source_sha256"] == sources, "bounded_g3_read_render_scope_sources")
+    expected = build_g3_read_render_transition(before, scope)
+    _need(all(payloads[p] == raw for p, raw in expected.items()), "bounded_g3_read_render_transition_delta")
+    for p in inputs - paths:
+        _need(trusted_git.run_git_bytes(target, "cat-file", "blob", q["base_commit"] + ":" + p) == payloads[p],
+              "bounded_g3_read_render_unowned_changed")
+    for p, pair in q["repair_sha256"].items():
+        _need(_sha(payloads[p]) == pair["after_sha256"], "bounded_g3_read_render_afterimage")
+    if not enable:
+        _need({p: r["after_sha256"] for p, r in q["repair_sha256"].items()} == scope["product_sha256"],
+              "bounded_g3_read_render_product_subject")
+    review = _g3_read_render_review(read, q["source_review"], g3_read_render_review_subject(q), "PASS_G3_READ_RENDER_EXACT_ADMISSION_SUBJECT")
+    attested = inputs - paths if q["phase"] == "development" else inputs
+    observation = trusted_git.attest_target_index(target, attested_paths=tuple(sorted(attested)),
+        expected_head=q["expected_head"], expected_index_tree=q["expected_index_tree"], scratch_parent=scratch)
+    _need(trusted_git.run_git(target, "rev-parse", q["base_commit"] + "^{tree}") == q["base_tree"],
+          "bounded_g3_read_render_base_tree_changed")
+    if q["phase"] == "development":
+        _need(q["expected_head"] == q["base_commit"] and q["expected_index_tree"] in
+              {q["base_tree"], q["candidate_tree"]}, "bounded_g3_read_render_development_binding")
+    else:
+        headers = trusted_git.run_git(target, "cat-file", "commit", q["expected_head"]).split("\n\n", 1)[0].splitlines()
+        _need([x for x in headers if x.startswith("parent ")] == ["parent " + q["base_commit"]]
+              and [x for x in headers if x.startswith("tree ")] == ["tree " + q["candidate_tree"]]
+              and q["expected_index_tree"] == q["candidate_tree"], "bounded_g3_read_render_committed_binding")
+    for path, snapshot in snapshots.items():
+        _need(trusted_git._read_regular_snapshot(path, maximum_bytes=2 * 1024 * 1024) == snapshot,
+              "bounded_g3_read_render_snapshot_drift")
+    return BoundedG1BInputs(q, before, payloads, {"source_review": review}, observation)
+
+
+def _validate_g3_read_render_loaded_policy(inputs):
+    expected = build_g3_read_render_transition(inputs.before, _json(inputs.payloads[G3R_SCOPE]))
+    _need(all(inputs.payloads[p] == raw for p, raw in expected.items()), "bounded_g3_read_render_transition_delta")
+    try:
+        configuration = raisa_policy.validate_recovery_configuration(
+            documents={Path(p).name: inputs.payloads[p] for p in CONFIGURATION_PATHS},
+            expected_sha256={Path(p).name: inputs.binding["payload_sha256"][p] for p in CONFIGURATION_PATHS},
+            agents_text=inputs.payloads[AGENTS].decode("utf-8"), state=_json(inputs.payloads[STATE]))
+    except (raisa_policy.RaisaPolicyError, configuration_core.ConfigurationError) as error:
+        raise BoundedG1BError(error.reason_code) from error
+    return expected, configuration
+
+
+
 def operation_effects(kind: str) -> frozenset[str]:
+    if kind == "implement_g3_read_render":
+        return EFFECTS | {"product_behavior_change"}
     if kind == "implement_g3_appointment_contracts":
         return EFFECTS | {"product_behavior_change"}
     if kind == "implement_g3_offline_appointment":
@@ -3201,6 +3425,8 @@ def operation_paths(kind: str, binding: dict | None = None) -> frozenset[str]:
 
 def _operation(kind: str, binding: dict | None = None) -> dict:
     paths = operation_paths(kind, binding)
+    if kind in G3R_KINDS:
+        return {"paths": paths, "g3_read_render": True, "profile": raisa_policy.G3_READ_RENDER_PROFILE, "gate": "G3", "limits": G3R_LIMITS}
     if kind in G3C_KINDS:
         return {"paths": paths, "g3_contract": True, "profile": raisa_policy.G3_CONTRACT_PROFILE,
                 "gate": "G3", "limits": G3C_LIMITS}
@@ -6050,6 +6276,8 @@ def load_bounded_g1b_inputs(context: BoundedG1BContext) -> BoundedG1BInputs:
         return snapshot[1]
 
     binding = _json(read(binding_path, context.expected_binding_sha256))
+    if binding.get("operation_kind") in G3R_KINDS:
+        return _load_g3_read_render_inputs(context, target, source, evidence_root, scratch, binding, read, snapshots)
     if binding.get("operation_kind") in G3C_KINDS:
         return _load_g3_contract_inputs(context, target, source, evidence_root, scratch, binding, read, snapshots)
     if binding.get("operation_kind") in G3_KINDS:
@@ -6200,6 +6428,8 @@ def load_bounded_g1b_inputs(context: BoundedG1BContext) -> BoundedG1BInputs:
 
 def _validate_loaded_policy(inputs: BoundedG1BInputs) -> tuple[dict[str, bytes], configuration_core.ValidatedConfiguration | None]:
     operation = _operation(inputs.binding["operation_kind"], inputs.binding)
+    if operation.get("g3_read_render"):
+        return _validate_g3_read_render_loaded_policy(inputs)
     if operation.get("g3_contract"):
         return _validate_g3_contract_loaded_policy(inputs)
     if operation.get("g3_offline"):
@@ -6306,7 +6536,7 @@ def bounded_g1b_report(*, context: BoundedG1BContext | None, manifest: object,
             "status": "assessment_pass" if decision.assessment_passed else "policy_eligible" if decision.policy_admitted else "blocked", "read_only": True,
             "phase": phase, "requested_entrypoint": entrypoint, "programme_mode": "recovery",
             "current_gate": decision.current_gate, "active_profile": decision.active_profile,
-            "feature_work_eligible": False, "global_gate": "g3_bounded_contract_only" if decision.policy_admitted and decision.active_profile == raisa_policy.G3_CONTRACT_PROFILE else "g3_bounded_offline_only" if decision.policy_admitted and decision.active_profile == raisa_policy.G3_OFFLINE_PROFILE else "g2_accepted_closed" if decision.policy_admitted and decision.active_profile == raisa_policy.G2_CLOSED_PROFILE else "red_repair_only", "execution_authorized": False,
+            "feature_work_eligible": False, "global_gate": "g3_bounded_read_render_only" if decision.policy_admitted and decision.active_profile == raisa_policy.G3_READ_RENDER_PROFILE else "g3_bounded_contract_only" if decision.policy_admitted and decision.active_profile == raisa_policy.G3_CONTRACT_PROFILE else "g3_bounded_offline_only" if decision.policy_admitted and decision.active_profile == raisa_policy.G3_OFFLINE_PROFILE else "g2_accepted_closed" if decision.policy_admitted and decision.active_profile == raisa_policy.G2_CLOSED_PROFILE else "red_repair_only", "execution_authorized": False,
             "reason_codes": list(decision.reason_codes), "failed_checks": list(decision.reason_codes),
             "candidate_tree": decision.candidate_tree, "binding_sha256": decision.binding_sha256,
             "observation_sha256": decision.observation_sha256, "claim_limits": list(decision.claim_limits),

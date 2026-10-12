@@ -6,7 +6,7 @@ programme:
   observed_public_master: 2e34bdad732fdab32fbf778280b3d3c70d66d602
   programme_mode: convergence
   current_gate: G3
-  current_gate_status: active_bounded_contract_convergence
+  current_gate_status: active_bounded_read_render
   feature_work_eligible: false
   clockwork_remote_visibility: source_branch_aligned_with_origin
   clockwork_local_state: preserved_exactly_at_03e6860394c39086ec1ffb3f2457acc5f7c8b5f9
@@ -543,7 +543,7 @@ gates:
   next_gate: G3
 - id: G3
   name: Projection-Native Constitutional Architecture
-  status: active_bounded_contract_convergence
+  status: active_bounded_read_render
   prerequisites:
   - G2
   programme_mode: convergence

@@ -33,6 +33,8 @@ G1D_PROFILE = "G1D_PROVENANCE_ACTIVE"
 G1E_PROFILE = "G1E_CONFIGURATION_CORE_ACTIVE"
 G2_PROFILE = "G2_BASELINE_REPAIR_ACTIVE"
 G2_CLOSED_PROFILE = "G2_ACCEPTED_CLOSED"
+G3_READ_RENDER_PROFILE = "G3_APPOINTMENT_READ_RENDER"
+G3_READ_RENDER_PREAMBLE = "Gate G3 is active only for separately admitted DB-free appointment read-render verification; mutation and provider effects remain closed"
 G3_CONTRACT_PROFILE = "G3_APPOINTMENT_CONTRACT_CONVERGENCE"
 G3_CONTRACT_PREAMBLE = "Gate G3 is active only for separately admitted appointment contract convergence; service effects remain closed"
 G3_OFFLINE_PROFILE = "G3_OFFLINE_APPOINTMENT_ENTRY"
@@ -49,6 +51,7 @@ BOUNDED_PROFILE_PREAMBLES = MappingProxyType({
     G2_CLOSED_PROFILE: G2_CLOSED_PREAMBLE,
     G3_OFFLINE_PROFILE: G3_OFFLINE_PREAMBLE,
     G3_CONTRACT_PROFILE: G3_CONTRACT_PREAMBLE,
+    G3_READ_RENDER_PROFILE: G3_READ_RENDER_PREAMBLE,
 })
 
 ADMITTED_PROGRAMME_GATE = 'G0.8'
@@ -885,6 +888,10 @@ _G2_PROFILE_SHAPE = ("object", tuple(
     if name != 'installed_controller_assessment_only'
 ) + (('owner_test_runtime_exception', _G2_EXCEPTION_SHAPE),), ())
 
+_G3_READ_RENDER_EXCEPTION_SHAPE = ("object", (('owner_directive_sha256', _SHAPE_1),('profile', _SHAPE_1),('independent_execution_binding_required', _SHAPE_2),('admission_grants_runtime_authority', _SHAPE_2),('literal_loopback_assets_only', _SHAPE_2),('application_database_commands_providers_audio_closed', _SHAPE_2),('active_environments', _SHAPE_26),('maximum_seconds', _SHAPE_26),('maximum_memory_mib', _SHAPE_26),('maximum_cpus', _SHAPE_26),('maximum_processes', _SHAPE_26),('automatic_retry', _SHAPE_2)), ())
+
+_G3_READ_RENDER_PROFILE_SHAPE = ("object", _SHAPE_78[1] + (("owner_read_render_runtime_exception", _G3_READ_RENDER_EXCEPTION_SHAPE),), ())
+
 _SHAPE_79 = ("object", (
     ('G0.8_FSMONITOR_CLOSURE', _SHAPE_72),
     ('G0_TO_G1A_STATE_TRANSITION', _SHAPE_72),
@@ -911,7 +918,8 @@ _SHAPE_79 = ("object", (
     ('G2_ACCEPTED_CLOSED', _SHAPE_78),
     ('G3_OFFLINE_APPOINTMENT_ENTRY', _SHAPE_78),
     ('G3_APPOINTMENT_CONTRACT_CONVERGENCE', _SHAPE_78),
-), ('G1E_CONFIGURATION_CORE_ACTIVE', 'G2_BASELINE_REPAIR_ACTIVE', 'G2_ACCEPTED_CLOSED', 'G3_OFFLINE_APPOINTMENT_ENTRY', 'G3_APPOINTMENT_CONTRACT_CONVERGENCE'))
+    ('G3_APPOINTMENT_READ_RENDER', _G3_READ_RENDER_PROFILE_SHAPE),
+), ('G1E_CONFIGURATION_CORE_ACTIVE', 'G2_BASELINE_REPAIR_ACTIVE', 'G2_ACCEPTED_CLOSED', 'G3_OFFLINE_APPOINTMENT_ENTRY', 'G3_APPOINTMENT_CONTRACT_CONVERGENCE', 'G3_APPOINTMENT_READ_RENDER'))
 
 _SHAPE_80 = ("object", (
     ('expected_branch', _SHAPE_1),
@@ -1615,6 +1623,15 @@ def g3_appointment_contract_profile() -> dict:
         allowed_paths=list(G3_CONTRACT_PRODUCT_PATHS),
         scope_behavior='bounded_G3_appointment_contract_convergence',
         scope_file='orchestration/programme/g3-appointment-contract-convergence-scope.json')
+    return profile
+
+
+G3_READ_RENDER_PRODUCT_PATHS = ['docs/api-spine/appointment-command-event-projection-linkage-v1.md', 'static/demo/appointment-read-render.css', 'static/demo/appointment-read-render.html', 'static/demo/appointment-read-render.js', 'tests/test_appointment_read_render_contract.py']
+
+def g3_read_render_profile() -> dict:
+    """A separate source profile; exact independent launch binding remains required."""
+    profile = g3_appointment_contract_profile()
+    profile.update(profile_kind="bounded_G3_appointment_read_render", expected_programme_mode="convergence", expected_gate_status="active_bounded_read_render", admitted_task_classes=["g3_appointment_read_render"], allowed_paths=list(G3_READ_RENDER_PRODUCT_PATHS), scope_behavior="bounded_G3_appointment_read_render", scope_file="orchestration/programme/g3-appointment-read-render-scope.json", owner_read_render_runtime_exception={'owner_directive_sha256': 'eaed1cf89b79c153ddf15ea23a95a9c90fd0a1c02ebfe919f6434ccb26b6e810', 'profile': 'db_free_synthetic_static_read_render', 'independent_execution_binding_required': True, 'admission_grants_runtime_authority': False, 'literal_loopback_assets_only': True, 'application_database_commands_providers_audio_closed': True, 'active_environments': 1, 'maximum_seconds': 900, 'maximum_memory_mib': 1536, 'maximum_cpus': 2, 'maximum_processes': 128, 'automatic_retry': False})
     return profile
 
 
@@ -2475,6 +2492,17 @@ def validate_recovery_configuration(*, documents: dict[str, bytes], expected_sha
             raise RaisaPolicyError("configuration_calibration_semantics_invalid")
     if state["active_profile"] == G1E_PROFILE and overlay["profiles"][G1E_PROFILE] != configuration_profile():
         raise RaisaPolicyError("configuration_assessment_profile_invalid")
+    if state["active_profile"] == G3_READ_RENDER_PROFILE:
+        if (overlay["profiles"][G3_READ_RENDER_PROFILE] != g3_read_render_profile()
+                or state["programme_mode"] != 'convergence' or state["current_gate"] != 'G3'
+                or state["current_gate_status"] != 'active_bounded_read_render'
+                or state["g2"]["completion_accepted"] is not True or state["g2"]["status"] != 'passed'
+                or state["feature_work_eligible"] is not False or state["product_work_eligible"] is not False
+                or state["g3"]["completion_accepted"] is not False
+                or state["g3"]["product_runtime_authorized"] is not False
+                or state["g3"]["broader_review_required_after_tranche"] is not False
+                or state["task_selection"]["allowed_task_kinds"] != ['g3_appointment_read_render']):
+            raise RaisaPolicyError("configuration_g3_read_render_profile_invalid")
     if state["active_profile"] == G3_CONTRACT_PROFILE:
         if (overlay["profiles"][G3_CONTRACT_PROFILE] != g3_appointment_contract_profile()
                 or state["programme_mode"] != 'convergence' or state["current_gate"] != 'G3'
