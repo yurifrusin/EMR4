@@ -3375,6 +3375,8 @@ def _validate_g3_read_render_loaded_policy(inputs):
 
 
 def operation_effects(kind: str) -> frozenset[str]:
+    if kind == "implement_g4_patient_request":
+        return EFFECTS | {"product_behavior_change", "migration_change"}
     if kind == "implement_g4_staff_move":
         return EFFECTS | {"product_behavior_change"}
     if kind == "implement_g3_read_render":
@@ -3427,6 +3429,10 @@ def operation_paths(kind: str, binding: dict | None = None) -> frozenset[str]:
 
 def _operation(kind: str, binding: dict | None = None) -> dict:
     paths = operation_paths(kind, binding)
+    if kind in G4_PATIENT_REQUEST_KINDS:
+        return {"paths": paths, "g4_patient_request": True,
+                "profile": raisa_policy.G4_PATIENT_REQUEST_PROFILE,
+                "gate": "G4", "limits": G4_PATIENT_REQUEST_LIMITS}
     if kind in G4_KINDS:
         return {"paths": paths, "g4_staff_move": True, "profile": raisa_policy.G4_STAFF_MOVE_PROFILE,
                 "gate": "G4", "limits": G4_LIMITS}
@@ -6281,6 +6287,9 @@ def load_bounded_g1b_inputs(context: BoundedG1BContext) -> BoundedG1BInputs:
         return snapshot[1]
 
     binding = _json(read(binding_path, context.expected_binding_sha256))
+    if binding.get("operation_kind") in G4_PATIENT_REQUEST_KINDS:
+        return _load_g4_patient_request_inputs(
+            context, target, source, evidence_root, scratch, binding, read, snapshots)
     if binding.get("operation_kind") in G4_KINDS:
         return _load_g4_inputs(context, target, source, evidence_root, scratch, binding, read, snapshots)
     if binding.get("operation_kind") in G3R_KINDS:
@@ -6435,6 +6444,8 @@ def load_bounded_g1b_inputs(context: BoundedG1BContext) -> BoundedG1BInputs:
 
 def _validate_loaded_policy(inputs: BoundedG1BInputs) -> tuple[dict[str, bytes], configuration_core.ValidatedConfiguration | None]:
     operation = _operation(inputs.binding["operation_kind"], inputs.binding)
+    if operation.get("g4_patient_request"):
+        return _validate_g4_patient_request_loaded_policy(inputs)
     if operation.get("g4_staff_move"):
         return _validate_g4_loaded_policy(inputs)
     if operation.get("g3_read_render"):
@@ -6545,7 +6556,7 @@ def bounded_g1b_report(*, context: BoundedG1BContext | None, manifest: object,
             "status": "assessment_pass" if decision.assessment_passed else "policy_eligible" if decision.policy_admitted else "blocked", "read_only": True,
             "phase": phase, "requested_entrypoint": entrypoint, "programme_mode": "recovery",
             "current_gate": decision.current_gate, "active_profile": decision.active_profile,
-            "feature_work_eligible": False, "global_gate": "g4_bounded_staff_move_only" if decision.policy_admitted and decision.active_profile == raisa_policy.G4_STAFF_MOVE_PROFILE else "g3_bounded_read_render_only" if decision.policy_admitted and decision.active_profile == raisa_policy.G3_READ_RENDER_PROFILE else "g3_bounded_contract_only" if decision.policy_admitted and decision.active_profile == raisa_policy.G3_CONTRACT_PROFILE else "g3_bounded_offline_only" if decision.policy_admitted and decision.active_profile == raisa_policy.G3_OFFLINE_PROFILE else "g2_accepted_closed" if decision.policy_admitted and decision.active_profile == raisa_policy.G2_CLOSED_PROFILE else "red_repair_only", "execution_authorized": False,
+            "feature_work_eligible": False, "global_gate": "g4_bounded_patient_request_only" if decision.policy_admitted and decision.active_profile == raisa_policy.G4_PATIENT_REQUEST_PROFILE else "g4_bounded_staff_move_only" if decision.policy_admitted and decision.active_profile == raisa_policy.G4_STAFF_MOVE_PROFILE else "g3_bounded_read_render_only" if decision.policy_admitted and decision.active_profile == raisa_policy.G3_READ_RENDER_PROFILE else "g3_bounded_contract_only" if decision.policy_admitted and decision.active_profile == raisa_policy.G3_CONTRACT_PROFILE else "g3_bounded_offline_only" if decision.policy_admitted and decision.active_profile == raisa_policy.G3_OFFLINE_PROFILE else "g2_accepted_closed" if decision.policy_admitted and decision.active_profile == raisa_policy.G2_CLOSED_PROFILE else "red_repair_only", "execution_authorized": False,
             "reason_codes": list(decision.reason_codes), "failed_checks": list(decision.reason_codes),
             "candidate_tree": decision.candidate_tree, "binding_sha256": decision.binding_sha256,
             "observation_sha256": decision.observation_sha256, "claim_limits": list(decision.claim_limits),
@@ -6604,6 +6615,466 @@ G4_PRODUCT_BEFORE = {
     "app/schemas/appointments.py": "5bfb530387beed9fef9475a03d0689cd6472aab2c25044f6c0eaec7469c3e9b9"}
 OPERATION_PATHS.update(enable_g4_staff_move=G4_CONTROL,
                        implement_g4_staff_move=G4_PRODUCT)
+
+
+# Separate request/create entry after independently accepted move-product
+# publication. The old G4 kinds and five move paths remain unchanged.
+G4_PATIENT_REQUEST_SCOPE = "orchestration/programme/g4-patient-request-entry-scope.json"
+G4_PATIENT_REQUEST_TEST = "tests/test_g4_patient_request_entry_preparation.py"
+G4_PATIENT_REQUEST_MIGRATION = (
+    "alembic/versions/b7c8d9e0f1a2_add_patient_request_staff_create.py")
+G4_PATIENT_REQUEST_SELECTED_BASE = {
+    "commit": "2081220f7dc37879837355b6328c415093fd7a29",
+    "tree": "2cc96207d6533fe26887942270ca932b05cd882a"}
+G4_PATIENT_REQUEST_SELECTED_MIGRATION_PARENT = "a6b7c8d9e0f1"
+G4_PATIENT_REQUEST_SELECTED_MAP_PATH = Path(
+    "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/demo-led-stage1-20261012-v2/stage1-patient-request-preparation-v1/migration-source-map-v1.json")
+G4_PATIENT_REQUEST_SELECTED_MAP_SHA256 = "02a500e4f7b130826269bd19ea937c0f7c73b77e4b7282e488f2820a38f387dc"
+G4_PATIENT_REQUEST_SELECTED_MAP_MANIFEST_SHA256 = "5d41a7f934e096f5969a3da004966f10c317c935066409d2cf57d8ec800be4b5"
+G4_PATIENT_REQUEST_MOVE_EFFECT_SHA256 = "a304d0443319b65ebbfd21d85073459cce56020eda5a66a1282151aeef212a0d"
+G4_PATIENT_REQUEST_MOVE_EFFECT_VERDICT = "PASS_G4_STAFF_MOVE_PRODUCT_PUSH_EFFECT"
+G4_PATIENT_REQUEST_MOVE_EFFECT_PATH = Path(
+    "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/demo-led-stage1-20261012-v2/g4-staff-move-product-publication-source-v5/independent-g4-staff-move-product-push-effect-review-v5.json")
+G4_PATIENT_REQUEST_CODE = frozenset({
+    "orchestration_harness/bounded_g1b.py", "orchestration_harness/raisa_policy.py"})
+G4_PATIENT_REQUEST_CONTROL = frozenset({
+    STATE, GATES, OVERLAY, AGENTS, G4_PATIENT_REQUEST_SCOPE,
+    G4_PATIENT_REQUEST_TEST}) | G4_PATIENT_REQUEST_CODE
+G4_PATIENT_REQUEST_PRODUCT = frozenset(raisa_policy.G4_PATIENT_REQUEST_PRODUCT_PATHS)
+G4_PATIENT_REQUEST_BEFORE = frozenset({STATE, GATES, OVERLAY, AGENTS, G4_SCOPE})
+G4_PATIENT_REQUEST_BASE_CONTROL = {
+    STATE: "e9f2b2824f119ad530808558ff56097f4889d43d304c08240a3433473da50e59",
+    GATES: "77f6b253cb66b8ee37c59f21d146dbdbc78c1fee8f7ccba72595d52c4cb57073",
+    OVERLAY: "bb1d8128cffd2bcb737a83afeb7d7ee1e07330597ca9e37166dc6dba4a5c9cf6",
+    AGENTS: "d0f06541bc2b893577066cbfebc35fdce2d9f37ef012931ac660573b68ffeeab",
+    "orchestration_harness/bounded_g1b.py":
+        "aa063136bf9aea4c839726e8e247376becb115bea0ff56e1b92d306cf0190041",
+    "orchestration_harness/raisa_policy.py":
+        "00e240beb22f0706adf452874a07afe562c8037ca68043f8304a3eb179fed200",
+    G4_PATIENT_REQUEST_SCOPE: None,
+    G4_PATIENT_REQUEST_TEST: None,
+}
+G4_PATIENT_REQUEST_KINDS = frozenset({
+    "enable_g4_patient_request", "implement_g4_patient_request"})
+G4_PATIENT_REQUEST_LIMITS = (
+    "published move-product commit and independent effect acceptance required",
+    "one exact synthetic request and staff-confirmed create tranche only",
+    "product effects require a separate independently reviewed execution binding",
+    "no patient principal, provider, audio, real data or protected effects")
+OPERATION_PATHS.update(
+    enable_g4_patient_request=G4_PATIENT_REQUEST_CONTROL,
+    implement_g4_patient_request=G4_PATIENT_REQUEST_PRODUCT)
+
+
+def _g4_patient_request_check_selected_map(mapping):
+    """Qualify only the pinned 32-file synthetic subset, never a global head."""
+    _need(type(mapping) is dict
+          and mapping.get("schema") == "emr4.stage1_patient_request_migration_source_map.v1"
+          and mapping.get("status") == "static_allowlist_mapping_only"
+          and mapping.get("source_origin") == "accepted_SRC05_v9_ordinary_case"
+          and mapping.get("source_manifest_sha256")
+              == G4_PATIENT_REQUEST_SELECTED_MAP_MANIFEST_SHA256
+          and mapping.get("base_commit") == "55b37a087c9ed3cf9b70ed0151803ad10da918d4"
+          and mapping.get("base_tree") == "e3d0d75d094708023315437ca17a4bff445c212a"
+          and mapping.get("source_rows") == 32
+          and mapping.get("allowlist_heads") == [G4_PATIENT_REQUEST_SELECTED_MIGRATION_PARENT],
+          "bounded_g4_patient_request_selected_map_identity")
+    rows = mapping.get("physical_rows")
+    edges = mapping.get("revision_edges")
+    _need(type(rows) is list and len(rows) == 32
+          and type(edges) is list and len(edges) == 32,
+          "bounded_g4_patient_request_selected_map_population")
+    revisions = []
+    inferred_edges = []
+    paths = []
+    for row in rows:
+        _need(type(row) is dict and type(row.get("path")) is str
+              and row["path"].startswith("alembic/versions/")
+              and row.get("physical_pin_status") == "match"
+              and row.get("expected_bytes") == row.get("observed_bytes")
+              and row.get("expected_sha256") == row.get("observed_sha256")
+              and type(row.get("revision")) is dict
+              and row["revision"].get("parsed") is True
+              and row["revision"].get("kind") == "string"
+              and type(row["revision"].get("value")) is str
+              and type(row.get("down_revision")) is dict
+              and row["down_revision"].get("parsed") is True,
+              "bounded_g4_patient_request_selected_map_row")
+        paths.append(row["path"])
+        revision = row["revision"]["value"]
+        revisions.append(revision)
+        down = row["down_revision"]["value"]
+        parents = down if type(down) is list else [down]
+        _need(all(parent is None or type(parent) is str for parent in parents),
+              "bounded_g4_patient_request_selected_map_parent_shape")
+        inferred_edges.extend((revision, parent) for parent in parents
+                              if parent is not None)
+    _need(len(set(paths)) == 32
+          and all(type(edge) is dict
+                  and type(edge.get("revision")) is str
+                  and type(edge.get("down_revision")) is str
+                  and edge.get("parent_in_allowlist") is True for edge in edges)
+          and sorted(inferred_edges) == sorted(
+              (edge["revision"], edge["down_revision"]) for edge in edges),
+          "bounded_g4_patient_request_selected_map_edges")
+    _need(revisions.count(G4_PATIENT_REQUEST_SELECTED_MIGRATION_PARENT) == 1
+          and revisions.count("b7c8d9e0f1a2") == 0
+          and sum(edge["revision"] == "i9j0k1l2m3n4" for edge in edges) == 2,
+          "bounded_g4_patient_request_selected_map_revision_unique")
+
+
+def _g4_patient_request_published_move_review(read, row, selected):
+    """Authenticate the actual product-push receipt without changing older review joins."""
+    _keys(row, {"path", "sha256"}, "bounded_g4_patient_request_move_review_row")
+    _need(Path(row["path"]) == G4_PATIENT_REQUEST_MOVE_EFFECT_PATH
+          and row["sha256"] == G4_PATIENT_REQUEST_MOVE_EFFECT_SHA256,
+          "bounded_g4_patient_request_move_review_pin")
+    review = _json(read(G4_PATIENT_REQUEST_MOVE_EFFECT_PATH, row["sha256"]))
+    recovery = "refs/heads/codex/raisa-ariadne-recovery-g0"
+    protected = "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    before = {recovery: "55b37a087c9ed3cf9b70ed0151803ad10da918d4",
+              "refs/heads/master": protected, "refs/heads/handoff/current": protected}
+    after = dict(before, **{recovery: selected["commit"]})
+    _need(review.get("schema") == "emr4.g4_staff_move_product_push_effect_review.v1"
+          and review.get("status") == "PASS"
+          and review.get("verdict") == G4_PATIENT_REQUEST_MOVE_EFFECT_VERDICT
+          and review.get("reviewer_agent") == "/root/g3_runtime_reviewer_sol"
+          and review.get("independent") is True
+          and review.get("implementation_authorship") is False
+          and review.get("blocking_findings") == []
+          and review.get("commit") == selected["commit"]
+          and review.get("tree") == selected["tree"]
+          and review.get("parent") == before[recovery]
+          and review.get("base") == before[recovery]
+          and review.get("result_sha256") ==
+              "6889ca931c831757d543dfc3cdea4a9f453dce54e156585aeeedfa473d495d77"
+          and review.get("published_ref") == recovery
+          and review.get("remote_url") == "https://github.com/yurifrusin/emr4"
+          and review.get("remote_before") == before
+          and review.get("remote_after") == after
+          and review.get("protected_refs_unchanged") is True
+          and review.get("same_attempt_remote_readback_verified") is True
+          and review.get("normal_nonforced_single_ref_push") is True
+          and review.get("canonical_writes") is False
+          and review.get("attempts_consumed_this_binding") == 1
+          and review.get("automatic_retry") is False,
+          "bounded_g4_patient_request_published_move_effect")
+    return review
+
+
+def _load_g4_patient_request_inputs(context, target, source, evidence_root,
+                                    scratch, q, read, snapshots):
+    _keys(q, {"schema_version", "operation_id", "operation_kind", "phase",
+        "base_commit", "base_tree", "expected_head", "expected_index_tree",
+        "candidate_tree", "source_sha256", "payload_sha256", "repair_sha256",
+        "source_review", "move_product_acceptance", "activation_acceptance"},
+        "bounded_g4_patient_request_binding_schema")
+    _need(q["schema_version"] == "ariadne.g4_patient_request_operation_binding.v1"
+          and q["operation_kind"] in G4_PATIENT_REQUEST_KINDS,
+          "bounded_g4_patient_request_binding_version")
+    _need(type(q["operation_id"]) is str and
+          re.fullmatch(r"[a-z0-9][a-z0-9-]{1,79}", q["operation_id"])
+          and q["phase"] in {"development", "pre-push", "post-push"},
+          "bounded_g4_patient_request_phase")
+    for key in ("base_commit", "base_tree", "expected_head",
+                "expected_index_tree", "candidate_tree"):
+        _need(type(q[key]) is str and re.fullmatch(r"[0-9a-f]{40}", q[key]),
+              "bounded_g4_patient_request_git_identity")
+    _need(G4_PATIENT_REQUEST_SELECTED_BASE is not None
+          and G4_PATIENT_REQUEST_SELECTED_MIGRATION_PARENT is not None
+          and G4_PATIENT_REQUEST_MOVE_EFFECT_SHA256 is not None
+          and G4_PATIENT_REQUEST_MOVE_EFFECT_VERDICT is not None,
+          "bounded_g4_patient_request_publication_or_parent_pending")
+    _need(G4_PATIENT_REQUEST_MIGRATION in G4_PATIENT_REQUEST_PRODUCT
+          and len(G4_PATIENT_REQUEST_PRODUCT) == 13,
+          "bounded_g4_patient_request_product_scope")
+    _need(type(G4_PATIENT_REQUEST_SELECTED_MIGRATION_PARENT) is str
+          and re.fullmatch(r"[a-z0-9]{12}", G4_PATIENT_REQUEST_SELECTED_MIGRATION_PARENT),
+          "bounded_g4_patient_request_selected_synthetic_migration_parent")
+    enable = q["operation_kind"] == "enable_g4_patient_request"
+    if not enable:
+        _g4_patient_request_check_selected_map(_json(read(
+            G4_PATIENT_REQUEST_SELECTED_MAP_PATH,
+            G4_PATIENT_REQUEST_SELECTED_MAP_SHA256)))
+    paths = G4_PATIENT_REQUEST_CONTROL if enable else G4_PATIENT_REQUEST_PRODUCT
+    sources = _digest_map(q["source_sha256"], SOURCE_PATHS | CONTROLLER_PATHS,
+                          "bounded_g4_patient_request_source_paths")
+    _keys(q["repair_sha256"], paths,
+          "bounded_g4_patient_request_changed_paths")
+    for path, row in q["repair_sha256"].items():
+        _keys(row, {"before_sha256", "after_sha256"},
+              "bounded_g4_patient_request_change_pair")
+        _closeout_digest(row["after_sha256"])
+        previous = G4_PATIENT_REQUEST_BASE_CONTROL[path] if enable else row["before_sha256"]
+        if previous is not None:
+            _closeout_digest(previous)
+        _need(row["before_sha256"] == previous and row["after_sha256"] != previous,
+              "bounded_g4_patient_request_change_preimage")
+        if previous is None:
+            _need(trusted_git.run_git(target, "ls-tree", q["base_commit"],
+                                      "--", path) == "",
+                  "bounded_g4_patient_request_addition_exists")
+        else:
+            _need(_sha(trusted_git.run_git_bytes(
+                target, "cat-file", "blob", q["base_commit"] + ":" + path))
+                == previous, "bounded_g4_patient_request_committed_preimage")
+    selected = G4_PATIENT_REQUEST_SELECTED_BASE
+    _need(set(selected) == {"commit", "tree"},
+          "bounded_g4_patient_request_selected_base_shape")
+    _need(all(type(selected[key]) is str and
+              re.fullmatch(r"[0-9a-f]{40}", selected[key])
+              for key in ("commit", "tree"))
+          and selected["commit"] != "55b37a087c9ed3cf9b70ed0151803ad10da918d4",
+          "bounded_g4_patient_request_published_product_base")
+    if enable:
+        _need(q["base_commit"] == selected["commit"]
+              and q["base_tree"] == selected["tree"]
+              and q["activation_acceptance"] is None,
+              "bounded_g4_patient_request_enable_base")
+    else:
+        _need(q["base_commit"] != selected["commit"],
+              "bounded_g4_patient_request_controller_not_installed")
+        headers = trusted_git.run_git(target, "cat-file", "commit",
+                                      q["base_commit"]).split("\n\n", 1)[0].splitlines()
+        _need([line for line in headers if line.startswith("parent ")]
+              == ["parent " + selected["commit"]]
+              and [line for line in headers if line.startswith("tree ")]
+              == ["tree " + q["base_tree"]],
+              "bounded_g4_patient_request_activation_parent_tree")
+        activation = _g4_operation_review(
+            read, q["activation_acceptance"], q["base_commit"],
+            "PASS_G4_PATIENT_REQUEST_ENTRY_PUBLICATION_EFFECT")
+        _need(activation.get("tree") == q["base_tree"]
+              and activation.get("protected_refs_unchanged") is True
+              and activation.get("same_attempt_remote_readback_verified") is True,
+              "bounded_g4_patient_request_activation_effect")
+    _keys(q["move_product_acceptance"], {"path", "sha256"},
+          "bounded_g4_patient_request_move_effect_row")
+    _need(q["move_product_acceptance"]["sha256"]
+          == G4_PATIENT_REQUEST_MOVE_EFFECT_SHA256,
+          "bounded_g4_patient_request_move_effect_pin")
+    move_effect = _g4_patient_request_published_move_review(
+        read, q["move_product_acceptance"], selected)
+    _need(move_effect.get("tree") == selected["tree"]
+          and move_effect.get("protected_refs_unchanged") is True
+          and move_effect.get("same_attempt_remote_readback_verified") is True,
+          "bounded_g4_patient_request_published_move_effect")
+    for path, digest in sources.items():
+        raw = read(source / path, digest)
+        committed = trusted_git.run_git_bytes(
+            target, "cat-file", "blob", q["base_commit"] + ":" + path)
+        if enable and path in G4_PATIENT_REQUEST_CODE:
+            _need(_sha(committed) == G4_PATIENT_REQUEST_BASE_CONTROL[path]
+                  and digest == q["repair_sha256"][path]["after_sha256"],
+                  "bounded_g4_patient_request_prospective_source")
+        else:
+            _need(committed == raw,
+                  "bounded_g4_patient_request_installed_source")
+    inputs = (CONFIGURATION_PATHS | G4_PATIENT_REQUEST_BEFORE
+              | {G4_PATIENT_REQUEST_SCOPE} | paths | SOURCE_PATHS | CONTROLLER_PATHS)
+    pins = _digest_map(q["payload_sha256"], inputs,
+                       "bounded_g4_patient_request_payload_paths")
+    payloads = {path: read(target / path, digest)
+                for path, digest in sorted(pins.items())}
+    if not enable:
+        migration_lines = [line.strip() for line in
+                           payloads[G4_PATIENT_REQUEST_MIGRATION].decode("utf-8").splitlines()]
+        _need(migration_lines.count("revision = 'b7c8d9e0f1a2'") == 1
+              and migration_lines.count(
+                  "down_revision = '" + G4_PATIENT_REQUEST_SELECTED_MIGRATION_PARENT + "'") == 1,
+              "bounded_g4_patient_request_migration_lineage")
+    before = {path: trusted_git.run_git_bytes(
+        target, "cat-file", "blob", selected["commit"] + ":" + path)
+              for path in G4_PATIENT_REQUEST_BEFORE}
+    _need(all(_sha(before[path]) == G4_PATIENT_REQUEST_BASE_CONTROL[path]
+              for path in (STATE, GATES, OVERLAY, AGENTS))
+          and _sha(before[G4_SCOPE])
+              == "e5c61f763f75781fba43a665cf0fcd2e03a3bae7bad1b540ec4532a375493246",
+          "bounded_g4_patient_request_published_control_preimages")
+    scope = _json(payloads[G4_PATIENT_REQUEST_SCOPE])
+    _need(scope["source_sha256"] == sources,
+          "bounded_g4_patient_request_scope_sources")
+    expected = build_g4_patient_request_transition(before, scope, move_effect)
+    _need(all(payloads[path] == raw for path, raw in expected.items()),
+          "bounded_g4_patient_request_transition_delta")
+    for path in inputs - paths:
+        _need(trusted_git.run_git_bytes(target, "cat-file", "blob",
+              q["base_commit"] + ":" + path) == payloads[path],
+              "bounded_g4_patient_request_unowned_changed")
+    for path, pair in q["repair_sha256"].items():
+        _need(_sha(payloads[path]) == pair["after_sha256"],
+              "bounded_g4_patient_request_afterimage")
+    source_review = _g4_operation_review(
+        read, q["source_review"], g4_patient_request_review_subject(q),
+        "PASS_G4_PATIENT_REQUEST_EXACT_ADMISSION_SUBJECT")
+    attested = inputs - paths if q["phase"] == "development" else inputs
+    observation = trusted_git.attest_target_index(
+        target, attested_paths=tuple(sorted(attested)),
+        expected_head=q["expected_head"], expected_index_tree=q["expected_index_tree"],
+        scratch_parent=scratch)
+    _need(trusted_git.run_git(target, "rev-parse", selected["commit"] + "^{tree}")
+          == selected["tree"], "bounded_g4_patient_request_base_tree_changed")
+    if q["phase"] == "development":
+        _need(q["expected_head"] == q["base_commit"]
+              and q["expected_index_tree"] in {q["base_tree"], q["candidate_tree"]},
+              "bounded_g4_patient_request_development_binding")
+    else:
+        headers = trusted_git.run_git(target, "cat-file", "commit",
+                                      q["expected_head"]).split("\n\n", 1)[0].splitlines()
+        _need([line for line in headers if line.startswith("parent ")]
+              == ["parent " + q["base_commit"]]
+              and [line for line in headers if line.startswith("tree ")]
+              == ["tree " + q["candidate_tree"]]
+              and q["expected_index_tree"] == q["candidate_tree"],
+              "bounded_g4_patient_request_committed_binding")
+    for path, snapshot in snapshots.items():
+        _need(trusted_git._read_regular_snapshot(path, maximum_bytes=2 * 1024 * 1024)
+              == snapshot, "bounded_g4_patient_request_snapshot_drift")
+    return BoundedG1BInputs(q, before, payloads,
+                            {"move_product_review": move_effect,
+                             "source_review": source_review}, observation)
+
+
+def _validate_g4_patient_request_loaded_policy(inputs):
+    expected = build_g4_patient_request_transition(
+        inputs.before, _json(inputs.payloads[G4_PATIENT_REQUEST_SCOPE]),
+        inputs.evidence["move_product_review"])
+    _need(all(inputs.payloads[path] == raw for path, raw in expected.items()),
+          "bounded_g4_patient_request_transition_delta")
+    try:
+        configuration = raisa_policy.validate_recovery_configuration(
+            documents={Path(path).name: inputs.payloads[path]
+                       for path in CONFIGURATION_PATHS},
+            expected_sha256={Path(path).name: inputs.binding["payload_sha256"][path]
+                             for path in CONFIGURATION_PATHS},
+            agents_text=inputs.payloads[AGENTS].decode("utf-8"),
+            state=_json(inputs.payloads[STATE]))
+    except (raisa_policy.RaisaPolicyError,
+            configuration_core.ConfigurationError) as error:
+        raise BoundedG1BError(error.reason_code) from error
+    return expected, configuration
+
+
+def g4_patient_request_review_subject(q):
+    return _sha(_canonical({key: q[key] for key in (
+        "operation_kind", "base_commit", "base_tree", "candidate_tree",
+        "source_sha256", "payload_sha256", "repair_sha256",
+        "move_product_acceptance")}))
+
+
+def build_g4_patient_request_transition(before, scope, move_effect):
+    """Exact prospective G4 request entry; runtime authority is separate."""
+    _keys(scope, {"schema_version", "selected_base",
+        "required_move_product_publication_effect_sha256", "selected_migration_parent",
+        "selected_migration_source_map",
+        "additive_migration_path", "allowed_paths", "allowed_effects",
+        "source_sha256", "product_sha256", "recorded_at", "active_profile",
+        "allowed_task_kind", "request_journey", "runtime_binding_required",
+        "admission_grants_runtime_authority", "excluded_effects"},
+        "bounded_g4_patient_request_scope_schema")
+    _need(scope["schema_version"] == "ariadne.g4_patient_request_entry_scope.v1"
+          and scope["selected_base"] == G4_PATIENT_REQUEST_SELECTED_BASE
+          and scope["required_move_product_publication_effect_sha256"]
+              == G4_PATIENT_REQUEST_MOVE_EFFECT_SHA256
+          and scope["selected_migration_parent"] == G4_PATIENT_REQUEST_SELECTED_MIGRATION_PARENT
+          and scope["selected_migration_source_map"] == {
+              "path": str(G4_PATIENT_REQUEST_SELECTED_MAP_PATH),
+              "sha256": G4_PATIENT_REQUEST_SELECTED_MAP_SHA256}
+          and scope["additive_migration_path"] == G4_PATIENT_REQUEST_MIGRATION,
+          "bounded_g4_patient_request_scope_pins")
+    _need(type(scope["recorded_at"]) is str and
+          datetime.fromisoformat(scope["recorded_at"]).tzinfo is not None,
+          "bounded_g4_patient_request_timestamp")
+    _digest_map(scope["source_sha256"], SOURCE_PATHS | CONTROLLER_PATHS,
+                "bounded_g4_patient_request_sources")
+    _need(scope["product_sha256"] is None
+          and scope["allowed_paths"] == sorted(G4_PATIENT_REQUEST_PRODUCT)
+          and scope["allowed_effects"] == sorted(
+              EFFECTS | {"product_behavior_change", "migration_change"})
+          and scope["active_profile"] == raisa_policy.G4_PATIENT_REQUEST_PROFILE
+          and scope["allowed_task_kind"] == "g4_patient_request_staff_create"
+          and scope["request_journey"]
+              == "synthetic_request_then_separate_staff_signed_create"
+          and scope["runtime_binding_required"] is True
+          and scope["admission_grants_runtime_authority"] is False
+          and scope["excluded_effects"] == [
+              "application_runtime_without_reviewed_binding",
+              "database_runtime_without_reviewed_binding",
+              "provider_invocation", "audio_capture_or_processing",
+              "real_data_access", "protected_ref_movement",
+              "deployment", "public_listener"],
+          "bounded_g4_patient_request_scope_boundary")
+    _need(move_effect.get("commit")
+          == G4_PATIENT_REQUEST_SELECTED_BASE["commit"]
+          and move_effect.get("tree") == G4_PATIENT_REQUEST_SELECTED_BASE["tree"]
+          and move_effect.get("protected_refs_unchanged") is True
+          and move_effect.get("same_attempt_remote_readback_verified") is True,
+          "bounded_g4_patient_request_move_publication")
+    state = _json(before[STATE])
+    gates = _document(before[GATES], GATES)
+    overlay = _document(before[OVERLAY], OVERLAY)
+    _need(state["current_gate"] == "G4"
+          and state["current_gate_status"] == "active_bounded_staff_move"
+          and state["active_profile"] == raisa_policy.G4_STAFF_MOVE_PROFILE
+          and state["g2"]["completion_accepted"] is True
+          and state["g3"]["completion_accepted"] is True
+          and state["g3"]["product_runtime_authorized"] is False
+          and state["feature_work_eligible"] is False
+          and state["product_work_eligible"] is False
+          and state["task_selection"]["allowed_task_kinds"]
+              == ["g4_seeded_staff_move"]
+          and next(g for g in gates["gates"] if g["id"] == "G4")["status"]
+              == "active_bounded_staff_move"
+          and overlay["active_profile"] == raisa_policy.G4_STAFF_MOVE_PROFILE
+          and overlay["profiles"][raisa_policy.G4_STAFF_MOVE_PROFILE]
+              == raisa_policy.g4_staff_move_profile()
+          and raisa_policy.G4_PATIENT_REQUEST_PROFILE not in overlay["profiles"],
+          "bounded_g4_patient_request_move_prestate")
+    state.update(observed_at=scope["recorded_at"],
+        current_gate_status="active_bounded_patient_request",
+        active_profile=raisa_policy.G4_PATIENT_REQUEST_PROFILE)
+    state["task_selection"].update(
+        allowed_task_kinds=["g4_patient_request_staff_create"],
+        next_eligible_tranche="G4", next_eligible_now=True,
+        next_tranche_started=True,
+        next_tranche_admission_requires_state_transition=False,
+        next_eligibility_condition=(
+            "only_reviewed_synthetic_patient_request_staff_create_with_separate_execution_binding"))
+    gates["programme"].update(
+        current_gate_status="active_bounded_patient_request",
+        next_eligible_tranche="G4")
+    next(g for g in gates["gates"] if g["id"] == "G4")["status"] = (
+        "active_bounded_patient_request")
+    overlay["active_profile"] = raisa_policy.G4_PATIENT_REQUEST_PROFILE
+    overlay["profiles"][raisa_policy.G4_PATIENT_REQUEST_PROFILE] = (
+        raisa_policy.g4_patient_request_profile())
+    agents = before[AGENTS].decode("utf-8")
+    _need(agents.count(raisa_policy.G4_STAFF_MOVE_PREAMBLE) == 1,
+          "bounded_g4_patient_request_agents_preimage")
+    agents = agents.replace(raisa_policy.G4_STAFF_MOVE_PREAMBLE,
+                            raisa_policy.G4_PATIENT_REQUEST_PREAMBLE, 1)
+    for old, new in (
+        ("## Current bounded G4 staff-move tranche",
+         "## Accepted bounded G4 staff-move tranche"),
+        ("This G4 profile permits source work for one seeded",
+         "The prior G4 profile permitted source work for one seeded"),
+        ("Patient request/create is a later separately scoped tranche.",
+         "Patient request/create requires this separate reviewed transition.")):
+        _need(agents.count(old) == 1,
+              "bounded_g4_patient_request_agents_phase_preimage")
+        agents = agents.replace(old, new, 1)
+    agents += ("\n## Current bounded G4 patient-request tranche\n\n"
+        "The seeded staff move is separately accepted for its exact published "
+        "subject. This profile permits source work for one synthetic patient "
+        "request and a separately staff-signed create using the existing "
+        "server-owned command and audit flow. It grants no application or "
+        "database runtime without a reviewed binding, and no patient principal, "
+        "provider, audio, real-data, deployment or protected-ref effect.\n")
+    return {STATE: (json.dumps(state, indent=2, ensure_ascii=False) + "\n").encode(),
+        GATES: yaml.safe_dump(gates, sort_keys=False, allow_unicode=True).encode(),
+        OVERLAY: yaml.safe_dump(overlay, sort_keys=False, allow_unicode=True).encode(),
+        AGENTS: agents.encode(),
+        G4_PATIENT_REQUEST_SCOPE: _canonical(scope) + b"\n"}
 
 
 def _g4_review(read, row, subject, verdict):

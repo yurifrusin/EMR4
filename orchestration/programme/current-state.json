@@ -1,12 +1,12 @@
 {
   "schema_version": "raisa-ariadne.programme-state.v2",
-  "observed_at": "2026-10-12T19:19:35+10:00",
+  "observed_at": "2026-10-13T02:51:39+10:00",
   "programme_name": "Raisa Medical Office and Ariadne Recovery & Convergence",
   "programme_mode": "convergence",
   "current_gate": "G4",
-  "current_gate_status": "active_bounded_staff_move",
+  "current_gate_status": "active_bounded_patient_request",
   "active_correction": "G4",
-  "active_profile": "G4_APPOINTMENT_STAFF_MOVE",
+  "active_profile": "G4_PATIENT_REQUEST_STAFF_CREATE",
   "machine_authoritative": true,
   "feature_work_eligible": false,
   "product_work_eligible": false,
@@ -260,7 +260,7 @@
   "task_selection": {
     "autonomous_selection_enabled": true,
     "allowed_task_kinds": [
-      "g4_seeded_staff_move"
+      "g4_patient_request_staff_create"
     ],
     "blocked_task_kinds": [
       "product_feature",
@@ -276,7 +276,7 @@
     "next_eligible_now": true,
     "next_tranche_started": true,
     "next_tranche_admission_requires_state_transition": false,
-    "next_eligibility_condition": "only_reviewed_seeded_staff_time_move_with_separate_execution_binding"
+    "next_eligibility_condition": "only_reviewed_synthetic_patient_request_staff_create_with_separate_execution_binding"
   },
   "parallelism_efficacy": {
     "deepseek": {

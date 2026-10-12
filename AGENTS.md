@@ -1,5 +1,5 @@
 # EMERGENCY RAISA/ARIADNE RECOVERY PRECEDENCE
-Gate G4 is active only for an exact separately admitted synthetic staff time move; patient request, providers and protected effects remain closed
+Gate G4 is active only for a separately admitted synthetic patient request and staff-confirmed create; providers, audio, real data and protected effects remain closed
 Missing, malformed, stale, or contradictory programme state is a hard stop.
 
 # Identity-Specific Instruction Relay
@@ -210,6 +210,10 @@ Owner directive eaed1cf89b79c153ddf15ea23a95a9c90fd0a1c02ebfe919f6434ccb26b6e810
 
 The prior owner-directed tranche superseded the earlier pure-only executable phase. The prior G3_APPOINTMENT_READ_RENDER profile admitted exact renderer sources and a reviewed DB-free synthetic serializer/loopback browser exception only. Every execution still requires exact independent binding, finite recorded budget and cleanup; source admission itself grants no runtime. The previous offline and contract profiles, G2 acceptance and their evidence qualifications remain unchanged. Application/database mutation, commands, providers, audio, real data, public exposure, protected refs and deployment remain closed in this tranche. Owned synthetic snapshot, screenshot and test-result artifact writes are permitted only by the exact reviewed verification binding. The synthetic read-only evidence required an independent six-criterion G3 acceptance before G4. Standing Stage1 finite correction authority and worker ceiling continue unchanged.
 
-## Current bounded G4 staff-move tranche
+## Accepted bounded G4 staff-move tranche
 
-The six G3 exit criteria are independently accepted for the exact synthetic read-only subject. This G4 profile permits source work for one seeded same-identity staff time-only signed move and server-owned readback, subject to separate execution binding and review. It grants no application, database, provider, audio, real-data, deployment or protected-ref effect. Patient request/create is a later separately scoped tranche.
+The six G3 exit criteria are independently accepted for the exact synthetic read-only subject. The prior G4 profile permitted source work for one seeded same-identity staff time-only signed move and server-owned readback, subject to separate execution binding and review. It grants no application, database, provider, audio, real-data, deployment or protected-ref effect. Patient request/create requires this separate reviewed transition.
+
+## Current bounded G4 patient-request tranche
+
+The seeded staff move is separately accepted for its exact published subject. This profile permits source work for one synthetic patient request and a separately staff-signed create using the existing server-owned command and audit flow. It grants no application or database runtime without a reviewed binding, and no patient principal, provider, audio, real-data, deployment or protected-ref effect.
