@@ -30,6 +30,7 @@ from app.schemas.appointments import (
     SlotSearchProposalOut,
 )
 from app.services.bernie.semantic_extraction import extract_semantics
+from app.services.appointment_lifecycle import LifecycleRejected, bureau_status
 
 
 CONTRACT_VERSION = "reception.one.bureau.plan-input.v1"
@@ -77,15 +78,11 @@ def _opaque_handle(
 
 
 def _safe_status(value: AppointmentStatus | str | None) -> str:
-    raw = value.value if isinstance(value, AppointmentStatus) else str(value or "")
-    normalized = raw.casefold()
-    if normalized == "arrived":
-        return "arrived"
-    if normalized == "completed":
-        return "completed"
-    if normalized in {"dna", "noshow", "no_show"}:
-        return "dna"
-    return "booked"
+    raw = value.value if isinstance(value, AppointmentStatus) else value
+    try:
+        return bureau_status(raw)
+    except LifecycleRejected:
+        raise ReceptionOneRuntimeError("unsupported_appointment_status") from None
 
 
 def _read_entities(

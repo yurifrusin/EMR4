@@ -403,6 +403,29 @@ class AppointmentUpdateProposalIn(BaseModel):
         return value
 
 
+class AppointmentMoveTimeIntentIn(BaseModel):
+    """Inert Stage 1 date/time-only proposal input, not an update command.
+
+    The future server adapter must supply authenticated current source facts to
+    the pure validator before using the existing update proposal route. Strict
+    extra-field rejection keeps identity, type, duration and location out of
+    the caller's requested delta.
+    """
+
+    model_config = ConfigDict(extra="forbid", strict=True)
+
+    schema_version: Literal["appointment.move_time_intent.v1"]
+    tenant_id: str
+    actor_id: str
+    role: Literal["reception"]
+    source_appointment_id: str
+    source_state_version: int = Field(ge=1)
+    source_revision: int = Field(ge=1)
+    target_date: str
+    target_start_local: str
+    authority: Literal["proposal_only"]
+
+
 class AppointmentUpdateCommand(BaseModel):
     appointment_id: uuid.UUID
     patient_id: Optional[uuid.UUID] = None
