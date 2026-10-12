@@ -251,6 +251,8 @@ class AppointmentOut(BaseModel):
     waiting_area_id: Optional[uuid.UUID] = None
     queue_position: Optional[int] = None
     created_at: datetime
+    # Database trigger-owned. A move readback requires this to be present.
+    appointment_state_version: Optional[int] = Field(default=None, ge=1)
     patient: Optional[PatientBrief] = None
     practitioner: PractitionerBrief
     appointment_type: Optional[AppointmentTypeOut] = None
@@ -426,6 +428,27 @@ class AppointmentMoveTimeIntentIn(BaseModel):
     authority: Literal["proposal_only"]
 
 
+class AppointmentMoveSignedBinding(BaseModel):
+    """Server-minted context attached only to a time-only update proposal."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    schema_version: Literal["appointment.move_signed_binding.v1"]
+    tenant_id: uuid.UUID
+    actor_id: uuid.UUID
+    role: Literal["reception"]
+    appointment_id: uuid.UUID
+    source_state_version: int = Field(ge=1)
+    source_revision: int = Field(ge=1)
+    authority_generation: int = Field(ge=1)
+    practice_timezone: Literal["Australia/Brisbane", "Australia/Sydney"]
+    captured_at: datetime
+    expires_at: datetime
+    target_date: date
+    target_start_local: time
+    target_start_time: datetime
+
+
 class AppointmentUpdateCommand(BaseModel):
     appointment_id: uuid.UUID
     patient_id: Optional[uuid.UUID] = None
@@ -458,6 +481,7 @@ class AppointmentUpdateProposalOut(BaseModel):
     update_proposal_freshness_id: Optional[str] = None
     signed_confirmation_evidence: Optional[dict[str, Any]] = None
     signed_confirmation_evidence_required: bool = False
+    move_binding: Optional[AppointmentMoveSignedBinding] = None
 
 
 class BernieUpdateProposalConfirmationIn(BaseModel):

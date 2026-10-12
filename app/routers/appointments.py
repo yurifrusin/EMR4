@@ -19,6 +19,8 @@ from app.services.appointment_conflicts import (
     is_appointment_overlap_error,
     set_appointment_practice_context,
 )
+from app.services.appointment_lifecycle import LifecycleRejected, validate_move_intent
+from app.services.appointment_list_read_adapter import render_singleton_appointment_readback
 from app.config import settings
 from app.dependencies import (
     get_command_session_factory,
@@ -44,6 +46,7 @@ from app.schemas.appointments import (
     AppointmentCreateProposalConfirmationIn,
     AppointmentUpdateProposalIn, AppointmentUpdateCommand, AppointmentUpdateProposalOut,
     AppointmentConfirmUpdateProposalOut, BernieUpdateProposalConfirmationIn,
+    AppointmentMoveTimeIntentIn, AppointmentMoveSignedBinding,
     AppointmentStatusProposalIn, AppointmentStatusCommand, AppointmentStatusProposalOut,
     AppointmentStatusProposalConfirmationIn, AppointmentConfirmStatusProposalOut,
     AppointmentWaitingAreaProposalIn, AppointmentWaitingAreaCommand, AppointmentWaitingAreaProposalOut,
@@ -1915,6 +1918,163 @@ def confirm_create_proposal_route(
     return response_body
 
 
+def _move_reception_user(
+    db: Session, current_user: User, *, lock: bool = False,
+) -> User:
+    query = db.query(User).filter(
+        User.id == current_user.id,
+        User.practice_id == current_user.practice_id,
+        User.is_active.is_(True),
+        User.role == UserRole.Receptionist,
+    )
+    if lock:
+        query = query.with_for_update()
+    user = query.populate_existing().one_or_none()
+    if user is None or type(user.authority_generation) is not int or user.authority_generation < 1:
+        raise HTTPException(status_code=403, detail={"code": "MOVE_ACTOR_UNAUTHORIZED"})
+    return user
+
+
+def _move_practice_timezone(
+    db: Session, practice_id: uuid.UUID, *, lock: bool = False,
+) -> ZoneInfo:
+    # This journey refuses an absent or unsupported practice zone; the broad
+    # legacy helper's fallback zone is intentionally not used for a move.
+    query = db.query(Practice).filter(Practice.id == practice_id)
+    if lock:
+        query = query.with_for_update()
+    practice = query.populate_existing().one_or_none()
+    name = practice.timezone if practice is not None else None
+    if name not in {"Australia/Brisbane", "Australia/Sydney"}:
+        raise HTTPException(status_code=422, detail={"code": "MOVE_TIMEZONE_UNSUPPORTED"})
+    try:
+        return ZoneInfo(name)
+    except ZoneInfoNotFoundError:
+        raise HTTPException(status_code=422, detail={"code": "MOVE_TIMEZONE_UNSUPPORTED"}) from None
+
+
+def _strict_move_instant(day: date_type, clock: time, zone: ZoneInfo) -> datetime:
+    local = datetime.combine(day, clock.replace(tzinfo=None))
+    candidates: set[datetime] = set()
+    for fold in (0, 1):
+        possible = local.replace(tzinfo=zone, fold=fold).astimezone(timezone.utc)
+        if possible.astimezone(zone).replace(tzinfo=None) == local:
+            candidates.add(possible)
+    if len(candidates) != 1:
+        code = "MOVE_LOCAL_TIME_NONEXISTENT" if not candidates else "MOVE_LOCAL_TIME_AMBIGUOUS"
+        raise HTTPException(status_code=422, detail={"code": code})
+    return candidates.pop()
+
+
+@router.post(
+    "/proposals/move-time/{appointment_id}",
+    response_model=AppointmentUpdateProposalOut,
+)
+def propose_seeded_move_time(
+    appointment_id: uuid.UUID,
+    body: AppointmentMoveTimeIntentIn,
+    idempotency_key: Optional[str] = Header(None, alias="Idempotency-Key"),
+    db: Session = Depends(get_db),
+    current_user: User = Depends(require_role(UserRole.Receptionist)),
+):
+    """Mint a time-only proposal through the existing update proposal path."""
+    user = _move_reception_user(db, current_user)
+    appt = _get_appointment(appointment_id, user.practice_id, db)
+    zone = _move_practice_timezone(db, user.practice_id)
+    version = appt.appointment_state_version
+    if type(version) is not int or version < 1:
+        raise HTTPException(status_code=409, detail={"code": "MOVE_SOURCE_VERSION_INVALID"})
+    captured = datetime.now(timezone.utc)
+    context = {
+        "tenant_id": str(user.practice_id),
+        "actor_id": str(user.id),
+        "role": "reception",
+        "move_capability": "appointments.move.propose",
+        # A single appointment is the complete source here. This is not a
+        # revision of an arbitrary diary list or an audit-row count.
+        "source_revision": version,
+        "selected_appointment_id": str(appt.id),
+        "selected_state_version": version,
+        "selected_status": appt.status.value,
+        "selected_date": appt.appointment_date.isoformat(),
+        "selected_start_local": appt.start_time_local.strftime("%H:%M"),
+        "patient_id": str(appt.patient_id) if appt.patient_id else None,
+        "practitioner_id": str(appt.practitioner_id),
+        "appointment_type_id": str(appt.appointment_type_id) if appt.appointment_type_id else None,
+        "location_id": str(appt.location_id) if appt.location_id else None,
+        "duration_minutes": appt.duration_minutes,
+        "practice_timezone": zone.key,
+        "captured_at": captured.strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "as_of": captured.strftime("%Y-%m-%dT%H:%M:%SZ"),
+    }
+    try:
+        intent = validate_move_intent(body.model_dump(mode="json"), context)
+    except LifecycleRejected as exc:
+        raise HTTPException(status_code=409, detail={"code": exc.code}) from None
+    active = db.query(Practitioner.id).filter(
+        Practitioner.id == appt.practitioner_id,
+        Practitioner.practice_id == user.practice_id,
+        Practitioner.is_active.is_(True),
+    ).first()
+    if active is None:
+        raise HTTPException(status_code=409, detail={"code": "MOVE_PRACTITIONER_INACTIVE"})
+    day = date_type.fromisoformat(intent.target_date)
+    clock = time.fromisoformat(intent.target_start_local)
+    instant = _strict_move_instant(day, clock, zone)
+    proposal = propose_update_appointment(
+        appointment_id=appointment_id,
+        body=AppointmentUpdateProposalIn(
+            appointment_date=day, start_time_local=clock, start_time=instant,
+        ),
+        idempotency_key=idempotency_key,
+        db=db,
+        current_user=user,
+    )
+    db.refresh(appt)
+    if appt.appointment_state_version != version:
+        raise HTTPException(status_code=409, detail={"code": "MOVE_SOURCE_CHANGED"})
+    if not proposal.safe:
+        return proposal
+    binding = AppointmentMoveSignedBinding(
+        schema_version="appointment.move_signed_binding.v1",
+        tenant_id=user.practice_id,
+        actor_id=user.id,
+        role="reception",
+        appointment_id=appointment_id,
+        source_state_version=version,
+        source_revision=version,
+        authority_generation=user.authority_generation,
+        practice_timezone=zone.key,
+        captured_at=captured,
+        expires_at=captured + timedelta(seconds=300),
+        target_date=day,
+        target_start_local=clock,
+        target_start_time=instant,
+    )
+    proposal.move_binding = binding
+    signed = _bernie_update_signed_confirmation_payload(
+        practice_id=user.practice_id,
+        staff_user_id=user.id,
+        turn_ref=None,
+        current_state=_appointment_update_state_payload(appt),
+        command=proposal.command,
+        update_proposal_freshness_id=proposal.update_proposal_freshness_id,
+        move_binding=binding,
+    )
+    proposal.signed_confirmation_evidence = mint_signed_confirmation_evidence(
+        signed, evidence_purpose=_UPDATE_CONFIRM_ACTION.evidence_purpose,
+    )
+    proposal.confirm_payload = {
+        "confirmed": False,
+        "update_proposal": _update_proposal_evidence_payload(proposal),
+        "confirmed_warnings": [issue.code for issue in proposal.warnings],
+        "update_proposal_freshness_id": proposal.update_proposal_freshness_id,
+        "signed_confirmation_evidence": proposal.signed_confirmation_evidence,
+        "signed_confirmation_evidence_required": True,
+    }
+    return proposal
+
+
 @router.post(
     "/proposals/update/confirm",
     response_model=AppointmentConfirmUpdateProposalOut,
@@ -1925,6 +2085,18 @@ def confirm_update_proposal_route(
     db: Session = Depends(get_db),
     current_user: User = Depends(require_role(*MUTATING_APPOINTMENT_ROLES)),
 ):
+    # A completed idempotency replay returns a historical receipt before the
+    # appointment lock. Recheck live actor access first for move receipts;
+    # replay is not a claim about the current appointment source.
+    if body.update_proposal.move_binding is not None:
+        live_user = _move_reception_user(db, current_user)
+        binding = body.update_proposal.move_binding
+        if (
+            binding.tenant_id != live_user.practice_id
+            or binding.actor_id != live_user.id
+            or binding.authority_generation != live_user.authority_generation
+        ):
+            raise HTTPException(status_code=403, detail={"code": "MOVE_ACTOR_CHANGED"})
     normalized_idempotency_key = _normalize_idempotency_key(idempotency_key)
     decision = claim_appointment_command(
         db,
@@ -2501,6 +2673,80 @@ def _block_bernie_update_confirmation(
     )
 
 
+def _move_binding_blocks(
+    binding: AppointmentMoveSignedBinding,
+    command: AppointmentUpdateCommand,
+    appt: Appointment,
+    db: Session,
+    current_user: User,
+) -> list[AppointmentProposalIssue]:
+    """Check server-owned source and actor facts inside the existing row lock."""
+    blocks: list[AppointmentProposalIssue] = []
+    actor = db.query(User).filter(
+        User.id == current_user.id,
+        User.practice_id == current_user.practice_id,
+        User.is_active.is_(True),
+        User.role == UserRole.Receptionist,
+    ).with_for_update().populate_existing().one_or_none()
+    if (
+        actor is None
+        or binding.tenant_id != current_user.practice_id
+        or binding.actor_id != current_user.id
+        or binding.role != "reception"
+        or binding.authority_generation != actor.authority_generation
+    ):
+        blocks.append(_confirm_create_block("move_actor_changed", "Move actor authority has changed."))
+    version = appt.appointment_state_version
+    if (
+        type(version) is not int or version < 1
+        or binding.appointment_id != appt.id
+        or binding.source_state_version != version
+        or binding.source_revision != version
+    ):
+        blocks.append(_confirm_create_block("move_source_changed", "Move source has changed."))
+    now = datetime.now(timezone.utc)
+    if (
+        binding.captured_at.tzinfo is None or binding.expires_at.tzinfo is None
+        or binding.captured_at > now or binding.expires_at <= now
+        or binding.expires_at - binding.captured_at != timedelta(seconds=300)
+    ):
+        blocks.append(_confirm_create_block("move_proposal_expired", "Move proposal has expired."))
+    if appt.status not in {AppointmentStatus.Booked, AppointmentStatus.Confirmed}:
+        blocks.append(_confirm_create_block("move_status_changed", "Appointment cannot be moved."))
+    active = db.query(Practitioner.id).filter(
+        Practitioner.id == appt.practitioner_id,
+        Practitioner.practice_id == current_user.practice_id,
+        Practitioner.is_active.is_(True),
+    ).with_for_update().first()
+    if active is None:
+        blocks.append(_confirm_create_block("move_practitioner_inactive", "Practitioner is inactive."))
+    source = _appointment_update_state_payload(appt)
+    proposed = _appointment_update_command_payload(command)
+    non_time = (
+        "patient_id", "patient_name_provisional", "practitioner_id",
+        "appointment_type_id", "location_id", "duration_minutes", "reason", "notes",
+    )
+    if (
+        any(proposed[key] != source[key] for key in non_time)
+        or command.appointment_date != binding.target_date
+        or command.start_time_local != binding.target_start_local
+        or command.start_time.utcoffset() is None
+        or binding.target_start_time.utcoffset() is None
+        or command.start_time.astimezone(timezone.utc) != binding.target_start_time.astimezone(timezone.utc)
+    ):
+        blocks.append(_confirm_create_block("move_delta_invalid", "Move must change time only."))
+    try:
+        zone = _move_practice_timezone(db, current_user.practice_id, lock=True)
+        if binding.practice_timezone != zone.key:
+            blocks.append(_confirm_create_block("move_timezone_changed", "Practice timezone has changed."))
+        expected = _strict_move_instant(binding.target_date, binding.target_start_local, zone)
+        if binding.target_start_time.astimezone(timezone.utc) != expected:
+            blocks.append(_confirm_create_block("move_target_changed", "Move target is invalid."))
+    except HTTPException:
+        blocks.append(_confirm_create_block("move_target_changed", "Move target is invalid."))
+    return blocks
+
+
 def confirm_update_proposal(
     body: BernieUpdateProposalConfirmationIn,
     db: Session,
@@ -2547,6 +2793,12 @@ def confirm_update_proposal(
         )
 
     current_state = _appointment_update_state_payload(current_appt)
+    if proposal.move_binding is not None:
+        if body.turn_ref is not None or body.session_binding is not None:
+            blocks.append(_confirm_create_block("move_context_invalid", "Move context is invalid."))
+        blocks.extend(_move_binding_blocks(
+            proposal.move_binding, command, current_appt, db, current_user,
+        ))
     reference_date = body.turn_ref.reference_date if body.turn_ref is not None else command.appointment_date
     expected_freshness_id = _compute_update_proposal_freshness_id(
         current_state=current_state,
@@ -2562,6 +2814,7 @@ def confirm_update_proposal(
         command=command,
         update_proposal_freshness_id=body.update_proposal_freshness_id,
         session_binding=effective_session_binding,
+        move_binding=proposal.move_binding,
     )
     ev_audit_tag, ev_blocks = verify_signed_confirmation_evidence_block(
         evidence=body.signed_confirmation_evidence,
@@ -2665,6 +2918,12 @@ def confirm_update_proposal(
             warnings=[*proposal.warnings, *revalidated.warnings],
             audit_evidence=audit_evidence,
         )
+    if proposal.move_binding is not None and (
+        appointment.id != proposal.move_binding.appointment_id
+        or appointment.appointment_state_version != proposal.move_binding.source_state_version + 1
+    ):
+        db.rollback()
+        raise HTTPException(status_code=409, detail={"code": "MOVE_READBACK_VERSION_MISMATCH"})
     return AppointmentConfirmUpdateProposalOut(
         safe=True,
         requires_confirmation=False,
@@ -5327,6 +5586,30 @@ def _resolve_bernie_interpretation_context(
     })
 
 
+@router.get("/readback/{appointment_id}")
+def readback_singleton_appointment(
+    appointment_id: uuid.UUID,
+    mode: Literal["normal", "fallback"] = Query("normal"),
+    db: Session = Depends(get_db),
+    current_user: User = Depends(require_role(UserRole.Receptionist)),
+):
+    """Authenticated, read-only singleton source; no command authority."""
+    user = _move_reception_user(db, current_user)
+    appt = _get_appointment(appointment_id, user.practice_id, db)
+    zone = _move_practice_timezone(db, user.practice_id)
+    try:
+        return render_singleton_appointment_readback(
+            appt,
+            tenant_id=str(user.practice_id),
+            actor_id=str(user.id),
+            practice_timezone=zone.key,
+            as_of=datetime.now(timezone.utc),
+            fallback=mode == "fallback",
+        )
+    except ValueError:
+        raise HTTPException(status_code=409, detail={"code": "READBACK_UNAVAILABLE"}) from None
+
+
 @router.get("/{appointment_id}", response_model=AppointmentOut)
 def get_appointment(
     appointment_id: uuid.UUID,
@@ -5462,6 +5745,9 @@ def _apply_appointment_update(
             set_appointment_practice_context(db, practice_id)
         else:
             db.flush()
+            # The database BEFORE UPDATE trigger owns the entity-version
+            # increment. Refresh after flush before constructing readback.
+            db.refresh(appt)
         out = AppointmentOut.model_validate(_get_appointment(appointment_id, practice_id, db))
         out.breaks_overlap = _get_break_overlaps(
             db, practice_id, practitioner_id,
@@ -8115,6 +8401,7 @@ def _bernie_update_signed_confirmation_payload(
     command: AppointmentUpdateCommand,
     update_proposal_freshness_id: Optional[str],
     session_binding: Optional[dict[str, Any]] = None,
+    move_binding: Optional[AppointmentMoveSignedBinding] = None,
 ) -> dict[str, object]:
     payload: dict[str, object] = {
         "practice_id": str(practice_id),
@@ -8129,6 +8416,8 @@ def _bernie_update_signed_confirmation_payload(
     }
     if session_binding is not None:
         payload["session_binding"] = session_binding
+    if move_binding is not None:
+        payload["move_binding"] = move_binding.model_dump(mode="json")
     return payload
 
 
