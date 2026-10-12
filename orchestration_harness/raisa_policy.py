@@ -33,6 +33,8 @@ G1D_PROFILE = "G1D_PROVENANCE_ACTIVE"
 G1E_PROFILE = "G1E_CONFIGURATION_CORE_ACTIVE"
 G2_PROFILE = "G2_BASELINE_REPAIR_ACTIVE"
 G2_CLOSED_PROFILE = "G2_ACCEPTED_CLOSED"
+G3_CONTRACT_PROFILE = "G3_APPOINTMENT_CONTRACT_CONVERGENCE"
+G3_CONTRACT_PREAMBLE = "Gate G3 is active only for separately admitted appointment contract convergence; service effects remain closed"
 G3_OFFLINE_PROFILE = "G3_OFFLINE_APPOINTMENT_ENTRY"
 G3_OFFLINE_PREAMBLE = "Gate G3 is active only for the separately admitted offline synthetic appointment-list projection"
 G1B_PREAMBLE = "Gate G1B is active only for bounded persistence, recovery, stale-lease protection and derived narrative"
@@ -46,6 +48,7 @@ BOUNDED_PROFILE_PREAMBLES = MappingProxyType({
     G1D_PROFILE: G1D_PREAMBLE, G1E_PROFILE: G1E_PREAMBLE, G2_PROFILE: G2_PREAMBLE,
     G2_CLOSED_PROFILE: G2_CLOSED_PREAMBLE,
     G3_OFFLINE_PROFILE: G3_OFFLINE_PREAMBLE,
+    G3_CONTRACT_PROFILE: G3_CONTRACT_PREAMBLE,
 })
 
 ADMITTED_PROGRAMME_GATE = 'G0.8'
@@ -907,7 +910,8 @@ _SHAPE_79 = ("object", (
     ('G2_BASELINE_REPAIR_ACTIVE', _G2_PROFILE_SHAPE),
     ('G2_ACCEPTED_CLOSED', _SHAPE_78),
     ('G3_OFFLINE_APPOINTMENT_ENTRY', _SHAPE_78),
-), ('G1E_CONFIGURATION_CORE_ACTIVE', 'G2_BASELINE_REPAIR_ACTIVE', 'G2_ACCEPTED_CLOSED', 'G3_OFFLINE_APPOINTMENT_ENTRY'))
+    ('G3_APPOINTMENT_CONTRACT_CONVERGENCE', _SHAPE_78),
+), ('G1E_CONFIGURATION_CORE_ACTIVE', 'G2_BASELINE_REPAIR_ACTIVE', 'G2_ACCEPTED_CLOSED', 'G3_OFFLINE_APPOINTMENT_ENTRY', 'G3_APPOINTMENT_CONTRACT_CONVERGENCE'))
 
 _SHAPE_80 = ("object", (
     ('expected_branch', _SHAPE_1),
@@ -1596,6 +1600,21 @@ def g3_offline_appointment_profile() -> dict:
         scope_behavior='bounded_G3_offline_appointment_entry',
         scope_file='orchestration/programme/g3-offline-appointment-scope.json')
     profile['forbidden_effects'] = [x for x in profile['forbidden_effects'] if x not in profile['allowed_effects']]
+    return profile
+
+
+G3_CONTRACT_PRODUCT_PATHS = ['app/schemas/appointments.py', 'app/services/appointment_lifecycle.py', 'app/services/appointment_list_projection.py', 'app/services/reception_one_proposal_runtime.py', 'docs/api-spine/stage1-appointment-contract-example-v1.json', 'docs/api-spine/stage1-appointment-contracts-v1.md', 'docs/programme/demo-led-appointment-plan-v2.md', 'tests/test_appointment_list_projection.py', 'tests/test_stage1_appointment_contracts.py']
+
+
+def g3_appointment_contract_profile() -> dict:
+    """Pure appointment convergence only. Runtime needs later reviewed admission."""
+    profile = g3_offline_appointment_profile()
+    profile.update(profile_kind='bounded_G3_appointment_contract_convergence',
+        expected_gate_status='active_bounded_contract_convergence',
+        admitted_task_classes=['g3_appointment_contract_convergence'],
+        allowed_paths=list(G3_CONTRACT_PRODUCT_PATHS),
+        scope_behavior='bounded_G3_appointment_contract_convergence',
+        scope_file='orchestration/programme/g3-appointment-contract-convergence-scope.json')
     return profile
 
 
@@ -2456,6 +2475,17 @@ def validate_recovery_configuration(*, documents: dict[str, bytes], expected_sha
             raise RaisaPolicyError("configuration_calibration_semantics_invalid")
     if state["active_profile"] == G1E_PROFILE and overlay["profiles"][G1E_PROFILE] != configuration_profile():
         raise RaisaPolicyError("configuration_assessment_profile_invalid")
+    if state["active_profile"] == G3_CONTRACT_PROFILE:
+        if (overlay["profiles"][G3_CONTRACT_PROFILE] != g3_appointment_contract_profile()
+                or state["programme_mode"] != 'convergence' or state["current_gate"] != 'G3'
+                or state["current_gate_status"] != 'active_bounded_contract_convergence'
+                or state["g2"]["completion_accepted"] is not True or state["g2"]["status"] != 'passed'
+                or state["feature_work_eligible"] is not False or state["product_work_eligible"] is not False
+                or state["g3"]["completion_accepted"] is not False
+                or state["g3"]["product_runtime_authorized"] is not False
+                or state["g3"]["broader_review_required_after_tranche"] is not False
+                or state["task_selection"]["allowed_task_kinds"] != ['g3_appointment_contract_convergence']):
+            raise RaisaPolicyError("configuration_g3_contract_profile_invalid")
     if state["active_profile"] == G3_OFFLINE_PROFILE:
         if (overlay["profiles"][G3_OFFLINE_PROFILE] != g3_offline_appointment_profile()
                 or state["programme_mode"] != 'convergence' or state["current_gate"] != 'G3'
