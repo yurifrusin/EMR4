@@ -8,7 +8,7 @@ from datetime import date as date_type, datetime, time, timedelta, timezone
 from collections.abc import Callable
 from typing import Any, Literal, Optional
 from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
-from fastapi import APIRouter, Body, Depends, Header, HTTPException, Query, Response, status
+from fastapi import APIRouter, Body, Depends, Header, HTTPException, Query, Request, Response, status
 from fastapi.responses import JSONResponse
 from pydantic import ValidationError
 from sqlalchemy import or_, text
@@ -30,6 +30,14 @@ from app.dependencies import (
     require_role,
 )
 from app.models.patients import Patient
+from app.models.patient_requests import PatientBookingRequest
+from app.schemas.patient_requests import (
+    PatientRequestSubmissionIn, PatientRequestVersionIn, PatientRequestOption,
+    PatientRequestReadback, StaffRequestProposalIn, StaffRequestReadback,
+)
+from app.services.patient_request_service import (
+    require_patient_request, request_options, submit_request, patient_readback,
+)
 from app.models.tenancy import User, UserRole, Practitioner, Practice, PracticeLocation
 from app.models.appointments import (
     Appointment, AppointmentType, AppointmentStatus,
@@ -1203,6 +1211,219 @@ def propose_create_appointment(
     return _build_create_appointment_proposal(body, db, current_user.practice_id, current_user=current_user)
 
 
+def _request_feature_open(practice_id: uuid.UUID | None = None):
+    try:
+        configured = uuid.UUID(settings.stage1_patient_request_practice_id)
+        patient = uuid.UUID(settings.stage1_patient_request_patient_id)
+    except (ValueError, AttributeError):
+        configured = patient = None
+    if (
+        settings.environment != "dev" or not settings.stage1_patient_request_enabled
+        or configured is None or patient is None
+        or len(settings.secret_key.encode("utf-8")) < 32
+        or (practice_id is not None and practice_id != configured)
+    ):
+        raise HTTPException(status_code=404, detail={"code": "REQUEST_UNAVAILABLE"})
+    return configured, patient
+
+
+def _request_loopback(request: Request):
+    if request.client is None or request.client.host not in {"127.0.0.1", "::1", "testclient"}:
+        raise HTTPException(status_code=404, detail={"code": "REQUEST_UNAVAILABLE"})
+
+
+def _request_receptionist(db: Session, current_user: User) -> User:
+    _request_feature_open(current_user.practice_id)
+    actor = db.query(User).filter(
+        User.id == current_user.id,
+        User.practice_id == current_user.practice_id,
+        User.is_active.is_(True),
+        User.role == UserRole.Receptionist,
+    ).with_for_update().populate_existing().one_or_none()
+    if actor is None or type(actor.authority_generation) is not int or actor.authority_generation < 1:
+        raise HTTPException(status_code=403, detail={"code": "REQUEST_STAFF_UNAUTHORIZED"})
+    return actor
+
+
+def _staff_request_row(db: Session, request_id: uuid.UUID, practice_id: uuid.UUID, *, lock=False):
+    set_appointment_practice_context(db, practice_id)
+    query = db.query(PatientBookingRequest).filter(
+        PatientBookingRequest.id == request_id,
+        PatientBookingRequest.practice_id == practice_id,
+    )
+    if lock:
+        query = query.with_for_update()
+    row = query.populate_existing().one_or_none()
+    if row is None or row.patient_id != uuid.UUID(settings.stage1_patient_request_patient_id):
+        raise HTTPException(status_code=404, detail={"code": "REQUEST_UNAVAILABLE"})
+    return row
+
+
+def _request_option_within_preference(
+    row: PatientBookingRequest, start_utc: datetime,
+    duration_minutes: int, selected_date: date_type,
+) -> bool:
+    """Compare full local datetimes so an end after midnight cannot wrap."""
+    try:
+        zone = ZoneInfo(row.practice_timezone)
+    except ZoneInfoNotFoundError:
+        return False
+    if start_utc.tzinfo is None or duration_minutes < 1:
+        return False
+    local_start = start_utc.astimezone(zone)
+    local_end = (start_utc + timedelta(minutes=duration_minutes)).astimezone(zone)
+    if row.preference_date != selected_date or row.earliest_local is None or row.latest_local is None:
+        return False
+    return (
+        local_start.date() == selected_date
+        and local_end.date() == selected_date
+        and local_start.time().replace(tzinfo=None) >= row.earliest_local
+        and local_end.replace(tzinfo=None) <= datetime.combine(selected_date, row.latest_local)
+    )
+
+
+@router.get("/patient-requests/{request_id}/options", response_model=list[PatientRequestOption])
+def patient_request_options_route(
+    request_id: uuid.UUID, request: Request,
+    request_version: int = Query(..., ge=1),
+    bearer: str | None = Header(None, alias="X-Patient-Request-Capability"),
+    db: Session = Depends(get_db),
+):
+    _request_loopback(request)
+    row = require_patient_request(db, request_id, bearer, options=True)
+    if row.request_version != request_version:
+        raise HTTPException(status_code=409, detail={"code": "REQUEST_STALE"})
+    return request_options(row, datetime.now(timezone.utc))
+
+
+@router.post("/patient-requests/{request_id}/submit")
+def patient_request_submit_route(
+    request_id: uuid.UUID, body: PatientRequestSubmissionIn, request: Request,
+    bearer: str | None = Header(None, alias="X-Patient-Request-Capability"),
+    idempotency_key: str | None = Header(None, alias="Idempotency-Key"),
+    db: Session = Depends(get_db),
+):
+    _request_loopback(request)
+    row = require_patient_request(db, request_id, bearer, write=True, lock=True)
+    return submit_request(db, row, body.model_dump(mode="json"), idempotency_key or "")
+
+
+@router.get("/patient-requests/{request_id}", response_model=PatientRequestReadback)
+def patient_request_read_route(
+    request_id: uuid.UUID, request: Request,
+    bearer: str | None = Header(None, alias="X-Patient-Request-Capability"),
+    db: Session = Depends(get_db),
+):
+    _request_loopback(request)
+    row = require_patient_request(db, request_id, bearer)
+    return patient_readback(db, row)
+
+
+@router.post("/patient-requests/{request_id}/cancel", response_model=PatientRequestReadback)
+def patient_request_cancel_route(
+    request_id: uuid.UUID, body: PatientRequestVersionIn, request: Request,
+    bearer: str | None = Header(None, alias="X-Patient-Request-Capability"),
+    db: Session = Depends(get_db),
+):
+    _request_loopback(request)
+    row = require_patient_request(db, request_id, bearer, write=True, lock=True)
+    if row.request_version != body.request_version or row.state not in {"draft", "submitted"}:
+        db.rollback()
+        raise HTTPException(status_code=409, detail={"code": "REQUEST_STALE"})
+    row.state = "cancelled"
+    row.cancelled_at = datetime.now(timezone.utc)
+    row.request_version += 1
+    db.commit()
+    return patient_readback(db, row)
+
+
+@router.get("/staff/patient-requests/{request_id}", response_model=StaffRequestReadback)
+def staff_request_read_route(
+    request_id: uuid.UUID, request: Request, db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    _request_loopback(request)
+    actor = _request_receptionist(db, current_user)
+    row = _staff_request_row(db, request_id, actor.practice_id)
+    return StaffRequestReadback(
+        request_id=row.id, patient_id=row.patient_id, state=row.state,
+        request_version=row.request_version, preference_date=row.preference_date,
+        earliest_local=row.earliest_local, latest_local=row.latest_local,
+        practice_timezone=row.practice_timezone,
+        booked_appointment_id=row.booked_appointment_id,
+    )
+
+
+@router.post("/staff/patient-requests/{request_id}/proposals/create", response_model=AppointmentCreateProposalOut)
+def staff_request_create_proposal_route(
+    request_id: uuid.UUID, body: StaffRequestProposalIn, request: Request,
+    db: Session = Depends(get_db), current_user: User = Depends(get_current_user),
+):
+    _request_loopback(request)
+    actor = _request_receptionist(db, current_user)
+    row = _staff_request_row(db, request_id, actor.practice_id)
+    now = datetime.now(timezone.utc)
+    if (
+        row.state != "submitted" or row.request_version != body.request_version
+        or now >= row.capability_expires_at or row.preference_date != body.selected.date
+        or row.practice_timezone != body.selected.zone
+        or row.earliest_local > body.selected.local_time
+        or body.selected.local_time.second != 0
+        or body.selected.local_time.microsecond != 0
+        or not any(
+            option["date"] == body.selected.date.isoformat()
+            and option["local_time"] == body.selected.local_time.strftime("%H:%M")
+            and option["zone"] == body.selected.zone
+            for option in request_options(row, now)
+        )
+    ):
+        raise HTTPException(status_code=409, detail={"code": "REQUEST_STALE"})
+    start = _strict_move_instant(body.selected.date, body.selected.local_time, ZoneInfo(row.practice_timezone))
+    if not _request_option_within_preference(
+        row, start, row.duration_minutes, body.selected.date,
+    ):
+        raise HTTPException(status_code=409, detail={"code": "REQUEST_OPTION_OUTSIDE_PREFERENCE"})
+    create_body = AppointmentCreate(
+        patient_id=row.patient_id, practitioner_id=row.practitioner_id,
+        appointment_type_id=row.appointment_type_id, location_id=row.location_id,
+        appointment_date=body.selected.date, start_time_local=body.selected.local_time,
+        start_time=start, duration_minutes=row.duration_minutes, reason="follow_up",
+    )
+    proposal = _build_create_appointment_proposal(create_body, db, actor.practice_id, current_user=actor)
+    if not proposal.safe:
+        return proposal
+    marker = {
+        "purpose": "stage1.patient_request.staff_create.v1",
+        "request_id": str(row.id), "request_version": row.request_version,
+        "practice_id": str(row.practice_id), "patient_id": str(row.patient_id),
+        "selected_date": body.selected.date.isoformat(),
+        "selected_local_time": body.selected.local_time.strftime("%H:%M"),
+        "selected_zone": row.practice_timezone, "selected_start_utc": start.isoformat(),
+        "captured_at": now.isoformat(),
+        "offer_expires_at": min(now + timedelta(minutes=5), row.capability_expires_at).isoformat(),
+        "staff_actor_id": str(actor.id), "authority_generation": actor.authority_generation,
+    }
+    proposal.patient_request_binding = marker
+    signed_payload = _staff_create_signed_confirmation_payload(
+        practice_id=actor.practice_id, staff_user_id=actor.id,
+        command=proposal.command,
+        create_proposal_freshness_id=proposal.create_proposal_freshness_id,
+        patient_request_binding=marker,
+    )
+    evidence = mint_signed_confirmation_evidence(
+        signed_payload, evidence_purpose=_STAFF_CREATE_CONFIRM_ACTION.evidence_purpose,
+    )
+    proposal.signed_confirmation_evidence = evidence
+    proposal.confirm_payload = {
+        "confirmed": False, "create_proposal": _create_proposal_evidence_payload(proposal),
+        "confirmed_warnings": [issue.code for issue in proposal.warnings],
+        "create_proposal_freshness_id": proposal.create_proposal_freshness_id,
+        "signed_confirmation_evidence": evidence,
+        "signed_confirmation_evidence_required": True,
+    }
+    return proposal
+
+
 def _normalize_proposal_idempotency_key(raw_key: Optional[str], route_label: str) -> str:
     """Shared proposal-only Idempotency-Key syntactic validator.
 
@@ -1739,6 +1960,49 @@ def confirm_create_proposal_route(
     current_user: User = Depends(require_role(*MUTATING_APPOINTMENT_ROLES)),
 ):
     normalized_idempotency_key = _normalize_idempotency_key(idempotency_key)
+    request_binding = body.create_proposal.patient_request_binding
+    request_actor = None
+    if request_binding is not None:
+        request_actor = _request_receptionist(db, current_user)
+        if (
+            type(request_binding) is not dict
+            or set(request_binding) != {
+                "purpose", "request_id", "request_version", "practice_id", "patient_id",
+                "selected_date", "selected_local_time", "selected_zone", "selected_start_utc",
+                "captured_at", "offer_expires_at", "staff_actor_id", "authority_generation",
+            }
+            or request_binding["purpose"] != "stage1.patient_request.staff_create.v1"
+            or request_binding["practice_id"] != str(request_actor.practice_id)
+            or request_binding["staff_actor_id"] != str(request_actor.id)
+            or request_binding["authority_generation"] != request_actor.authority_generation
+            or type(request_binding["request_version"]) is not int
+            or request_binding["request_version"] < 1
+            or request_binding["patient_id"] != str(body.create_proposal.command.patient_id)
+        ):
+            db.rollback()
+            raise HTTPException(status_code=409, detail={"code": "REQUEST_BINDING_INVALID"})
+        early_payload = _staff_create_signed_confirmation_payload(
+            practice_id=request_actor.practice_id, staff_user_id=request_actor.id,
+            command=body.create_proposal.command,
+            create_proposal_freshness_id=(
+                body.create_proposal_freshness_id or body.create_proposal.create_proposal_freshness_id
+            ), patient_request_binding=request_binding,
+        )
+        _, early_blocks = verify_signed_confirmation_evidence_block(
+            evidence=body.signed_confirmation_evidence,
+            evidence_required=True,
+            expected_payload=early_payload,
+            expected_purpose=_STAFF_CREATE_CONFIRM_ACTION.evidence_purpose,
+            block_builder=_confirm_create_block,
+            audit_tag="request_signed_confirmation_evidence_verified",
+            missing_message="Request-bound staff confirmation requires signed evidence.",
+        )
+        if early_blocks:
+            db.rollback()
+            return _block_create_confirmation(early_blocks)
+    claim_body = body.model_dump(mode="json")
+    if request_binding is None:
+        claim_body["create_proposal"].pop("patient_request_binding", None)
     decision = claim_appointment_command(
         db,
         practice_id=current_user.practice_id,
@@ -1747,10 +2011,71 @@ def confirm_create_proposal_route(
         operation_id=_STAFF_CREATE_CONFIRM_OPERATION_ID,
         route_family=_STAFF_CREATE_CONFIRM_ROUTE_FAMILY,
         raw_idempotency_key=normalized_idempotency_key,
-        request_body=body.model_dump(mode="json"),
+        request_body=claim_body,
         secret=_staff_create_confirm_idempotency_secret(),
         stale_after=_STAFF_CREATE_CONFIRM_IDEMPOTENCY_STALE_AFTER,
     )
+    request_row = None
+    if request_binding is not None:
+        try:
+            request_id = uuid.UUID(request_binding["request_id"])
+        except (ValueError, AttributeError, TypeError):
+            db.rollback()
+            raise HTTPException(status_code=409, detail={"code": "REQUEST_BINDING_INVALID"}) from None
+        request_row = _staff_request_row(db, request_id, current_user.practice_id, lock=True)
+        exact_booked_replay = (
+            decision.kind == "replay"
+            and request_row.state == "booked"
+            and request_row.booked_command_id == decision.record.id
+            and request_row.booked_appointment_id == decision.record.target_appointment_id
+            and decision.record.state == "completed"
+            and decision.record.result_kind == "confirmed_write"
+            and request_row.request_version == request_binding["request_version"] + 1
+        )
+        if decision.kind == "replay" and not exact_booked_replay:
+            db.rollback()
+            raise HTTPException(status_code=409, detail={"code": "REQUEST_REPLAY_MISMATCH"})
+        if decision.kind == "replay":
+            receipt = dict(decision.response_body_json or {})
+            receipt["historical_receipt"] = True
+            db.rollback()
+            return JSONResponse(status_code=decision.response_status_code or 200, content=receipt)
+        if decision.kind == "started":
+            try:
+                offer_expiry = datetime.fromisoformat(request_binding["offer_expires_at"])
+                captured = datetime.fromisoformat(request_binding["captured_at"])
+                selected = datetime.fromisoformat(request_binding["selected_start_utc"])
+            except (ValueError, AttributeError, TypeError):
+                db.rollback()
+                raise HTTPException(status_code=409, detail={"code": "REQUEST_BINDING_INVALID"}) from None
+            if (
+                offer_expiry.tzinfo is None or captured.tzinfo is None
+                or selected.tzinfo is None
+                or selected.utcoffset() != timedelta(0)
+                or offer_expiry <= captured
+                or offer_expiry > captured + timedelta(minutes=5)
+                or request_row.state != "submitted"
+                or request_row.request_version != request_binding["request_version"]
+                or request_row.patient_id != body.create_proposal.command.patient_id
+                or request_row.preference_date.isoformat() != request_binding["selected_date"]
+                or request_row.practice_timezone != request_binding["selected_zone"]
+                or body.create_proposal.command.start_time != selected
+                or body.create_proposal.command.start_time_local.strftime("%H:%M") != request_binding["selected_local_time"]
+                or not _request_option_within_preference(
+                    request_row, body.create_proposal.command.start_time,
+                    request_row.duration_minutes,
+                    body.create_proposal.command.appointment_date,
+                )
+                or request_row.practitioner_id != body.create_proposal.command.practitioner_id
+                or request_row.appointment_type_id != body.create_proposal.command.appointment_type_id
+                or request_row.location_id != body.create_proposal.command.location_id
+                or request_row.duration_minutes != body.create_proposal.command.duration_minutes
+                or captured > datetime.now(timezone.utc)
+                or offer_expiry <= datetime.now(timezone.utc)
+                or datetime.now(timezone.utc) >= request_row.capability_expires_at
+            ):
+                db.rollback()
+                raise HTTPException(status_code=409, detail={"code": "REQUEST_STALE"})
     mapped_decision = _handle_create_confirm_idempotency_decision(decision)
     if mapped_decision is not None:
         return mapped_decision
@@ -1785,6 +2110,7 @@ def confirm_create_proposal_route(
         staff_user_id=current_user.id,
         command=create_proposal.command,
         create_proposal_freshness_id=submitted_freshness_id,
+        patient_request_binding=request_binding,
     )
     ev_audit_tag, ev_blocks = verify_signed_confirmation_evidence_block(
         evidence=body.signed_confirmation_evidence,
@@ -1914,6 +2240,13 @@ def confirm_create_proposal_route(
         target_appointment_id=appointment.id,
         audit_log_id=audit.id,
     )
+    if request_row is not None:
+        request_row.state = "booked"
+        request_row.booked_appointment_id = appointment.id
+        request_row.booked_command_id = decision.record.id
+        request_row.booked_at = datetime.now(timezone.utc)
+        request_row.request_version += 1
+        db.flush()
     db.commit()
     return response_body
 
@@ -8249,14 +8582,19 @@ def _staff_create_signed_confirmation_payload(
     staff_user_id: uuid.UUID,
     command: AppointmentCreateCommand,
     create_proposal_freshness_id: Optional[str],
+    patient_request_binding: Optional[dict[str, Any]] = None,
 ) -> dict[str, object]:
-    return {
+    payload = {
         "practice_id": str(practice_id),
         "staff_user_id": str(staff_user_id),
         "reference_date": command.appointment_date.isoformat(),
         "command": _appointment_create_command_payload(command),
         "create_proposal_freshness_id": create_proposal_freshness_id,
     }
+    if patient_request_binding is not None:
+        payload["purpose"] = "stage1.patient_request.staff_create.v1"
+        payload["patient_request_binding"] = patient_request_binding
+    return payload
 
 
 _CREATE_CONFIRM_METADATA_FIELDS = {
@@ -8269,7 +8607,10 @@ _CREATE_CONFIRM_METADATA_FIELDS = {
 
 
 def _create_proposal_evidence_payload(proposal: AppointmentCreateProposalOut) -> dict[str, Any]:
-    return proposal.model_dump(mode="json", exclude=_CREATE_CONFIRM_METADATA_FIELDS)
+    payload = proposal.model_dump(mode="json", exclude=_CREATE_CONFIRM_METADATA_FIELDS)
+    if payload.get("patient_request_binding") is None:
+        payload.pop("patient_request_binding", None)
+    return payload
 
 
 def _create_command_matches_selected_candidate(

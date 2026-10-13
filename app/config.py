@@ -288,6 +288,11 @@ class Settings(BaseSettings):
     #   "off"    - suppress both raw_compat_* tags and deprecation headers.
     appointment_raw_compat_mode: Literal["audit", "header", "off"] = "audit"
 
+    # Isolated, preseeded synthetic patient capability. No public enrollment.
+    stage1_patient_request_enabled: bool = False
+    stage1_patient_request_practice_id: str = ""
+    stage1_patient_request_patient_id: str = ""
+
     # Patient file storage. Point this at a OneDrive-synced folder so generated
     # .docx files are immediately accessible via Word Online. The backend creates
     # the directory if it doesn't exist. Production: a SharePoint/Graph path or

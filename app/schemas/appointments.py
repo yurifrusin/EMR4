@@ -314,6 +314,7 @@ class AppointmentCreateProposalOut(BaseModel):
     create_proposal_freshness_id: Optional[str] = None
     signed_confirmation_evidence: Optional[dict[str, Any]] = None
     signed_confirmation_evidence_required: bool = False
+    patient_request_binding: Optional[dict[str, Any]] = None
 
 
 class AppointmentCreateProposalConfirmationIn(BaseModel):

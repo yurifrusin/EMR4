@@ -1,6 +1,7 @@
 from app.models.base import Base
 from app.models.tenancy import Practice, PracticeLocation, User, Practitioner
 from app.models.patients import Patient
+from app.models.patient_requests import PatientBookingRequest
 from app.models.clinical import (
     Encounter, ClinicalDiagnosis, Prescription,
     Allergy, Immunisation, PatientHistory, ConsentForm, ClinicalImage,
@@ -41,6 +42,7 @@ __all__ = [
     "Base",
     "Practice", "PracticeLocation", "User", "Practitioner",
     "Patient",
+    "PatientBookingRequest",
     "Encounter", "ClinicalDiagnosis", "Prescription",
     "Allergy", "Immunisation", "PatientHistory", "ConsentForm", "ClinicalImage",
     "CarePlan",

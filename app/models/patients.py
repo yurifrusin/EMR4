@@ -1,6 +1,6 @@
 import uuid
 from sqlalchemy import (
-    Column, String, Date, Boolean, DateTime, ForeignKey, Index,
+    Column, String, Date, Boolean, DateTime, ForeignKey, Index, UniqueConstraint,
 )
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import relationship
@@ -46,6 +46,7 @@ class Patient(Base):
     practice = relationship("Practice")
 
     __table_args__ = (
+        UniqueConstraint("practice_id", "id", name="uq_patients_practice_id_id"),
         Index("ix_patients_practice_id", "practice_id"),
         Index("ix_patients_last_name", "last_name"),
         Index("ix_patients_medicare_number", "medicare_number"),

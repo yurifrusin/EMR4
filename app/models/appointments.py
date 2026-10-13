@@ -312,6 +312,10 @@ class AppointmentCommandIdempotency(Base):
             name="uq_appt_cmd_idem_practice_id_id",
         ),
         UniqueConstraint(
+            "practice_id", "id", "target_appointment_id",
+            name="uq_appt_cmd_idem_practice_id_target",
+        ),
+        UniqueConstraint(
             "practice_id",
             "actor_user_id",
             "operation_id",
