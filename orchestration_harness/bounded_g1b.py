@@ -3375,6 +3375,8 @@ def _validate_g3_read_render_loaded_policy(inputs):
 
 
 def operation_effects(kind: str) -> frozenset[str]:
+    if kind == "implement_g4_staff_move":
+        return EFFECTS | {"product_behavior_change"}
     if kind == "implement_g3_read_render":
         return EFFECTS | {"product_behavior_change"}
     if kind == "implement_g3_appointment_contracts":
@@ -3425,6 +3427,9 @@ def operation_paths(kind: str, binding: dict | None = None) -> frozenset[str]:
 
 def _operation(kind: str, binding: dict | None = None) -> dict:
     paths = operation_paths(kind, binding)
+    if kind in G4_KINDS:
+        return {"paths": paths, "g4_staff_move": True, "profile": raisa_policy.G4_STAFF_MOVE_PROFILE,
+                "gate": "G4", "limits": G4_LIMITS}
     if kind in G3R_KINDS:
         return {"paths": paths, "g3_read_render": True, "profile": raisa_policy.G3_READ_RENDER_PROFILE, "gate": "G3", "limits": G3R_LIMITS}
     if kind in G3C_KINDS:
@@ -6276,6 +6281,8 @@ def load_bounded_g1b_inputs(context: BoundedG1BContext) -> BoundedG1BInputs:
         return snapshot[1]
 
     binding = _json(read(binding_path, context.expected_binding_sha256))
+    if binding.get("operation_kind") in G4_KINDS:
+        return _load_g4_inputs(context, target, source, evidence_root, scratch, binding, read, snapshots)
     if binding.get("operation_kind") in G3R_KINDS:
         return _load_g3_read_render_inputs(context, target, source, evidence_root, scratch, binding, read, snapshots)
     if binding.get("operation_kind") in G3C_KINDS:
@@ -6428,6 +6435,8 @@ def load_bounded_g1b_inputs(context: BoundedG1BContext) -> BoundedG1BInputs:
 
 def _validate_loaded_policy(inputs: BoundedG1BInputs) -> tuple[dict[str, bytes], configuration_core.ValidatedConfiguration | None]:
     operation = _operation(inputs.binding["operation_kind"], inputs.binding)
+    if operation.get("g4_staff_move"):
+        return _validate_g4_loaded_policy(inputs)
     if operation.get("g3_read_render"):
         return _validate_g3_read_render_loaded_policy(inputs)
     if operation.get("g3_contract"):
@@ -6536,10 +6545,378 @@ def bounded_g1b_report(*, context: BoundedG1BContext | None, manifest: object,
             "status": "assessment_pass" if decision.assessment_passed else "policy_eligible" if decision.policy_admitted else "blocked", "read_only": True,
             "phase": phase, "requested_entrypoint": entrypoint, "programme_mode": "recovery",
             "current_gate": decision.current_gate, "active_profile": decision.active_profile,
-            "feature_work_eligible": False, "global_gate": "g3_bounded_read_render_only" if decision.policy_admitted and decision.active_profile == raisa_policy.G3_READ_RENDER_PROFILE else "g3_bounded_contract_only" if decision.policy_admitted and decision.active_profile == raisa_policy.G3_CONTRACT_PROFILE else "g3_bounded_offline_only" if decision.policy_admitted and decision.active_profile == raisa_policy.G3_OFFLINE_PROFILE else "g2_accepted_closed" if decision.policy_admitted and decision.active_profile == raisa_policy.G2_CLOSED_PROFILE else "red_repair_only", "execution_authorized": False,
+            "feature_work_eligible": False, "global_gate": "g4_bounded_staff_move_only" if decision.policy_admitted and decision.active_profile == raisa_policy.G4_STAFF_MOVE_PROFILE else "g3_bounded_read_render_only" if decision.policy_admitted and decision.active_profile == raisa_policy.G3_READ_RENDER_PROFILE else "g3_bounded_contract_only" if decision.policy_admitted and decision.active_profile == raisa_policy.G3_CONTRACT_PROFILE else "g3_bounded_offline_only" if decision.policy_admitted and decision.active_profile == raisa_policy.G3_OFFLINE_PROFILE else "g2_accepted_closed" if decision.policy_admitted and decision.active_profile == raisa_policy.G2_CLOSED_PROFILE else "red_repair_only", "execution_authorized": False,
             "reason_codes": list(decision.reason_codes), "failed_checks": list(decision.reason_codes),
             "candidate_tree": decision.candidate_tree, "binding_sha256": decision.binding_sha256,
             "observation_sha256": decision.observation_sha256, "claim_limits": list(decision.claim_limits),
             "policy_eligible": decision.policy_admitted, "assessment_passed": decision.assessment_passed,
             "configuration_sha256": decision.configuration_sha256,
             "configuration_document_count": 10 if decision.assessment_passed else None, "checks": []}
+G4_STAFF_MOVE_PREPARATION_SCOPE = "orchestration/programme/g4-staff-move-entry-scope.json"
+G4_STAFF_MOVE_SELECTED_BASE = {
+    "commit": "7454d7024d800bd0be24e719e86b79b0ad82e9a3",
+    "tree": "3882159038b5d2eb9e7b40848c4883c34d964285",
+}
+G4_STAFF_MOVE_PREIMAGES = {
+    AGENTS: "19cc1da5b5fa2bd9def8797c04be298585d43c93c909666dc959fc583377b3b6",
+    STATE: "2a3d4bbd6d49ee6cf9d3ad9d9d1680fdfc8fac07cd51574c27472e80c1e032e8",
+    GATES: "1844021bdef821fe2f4a5aba8f5be220ed52816df9a1a2d8554d8b9d2614e80d",
+    OVERLAY: "5549beca8820a831e57f616251f8ba4f04cd2abf39670a4b6ff383a98a401b00",
+}
+
+
+G4_SCOPE = G4_STAFF_MOVE_PREPARATION_SCOPE
+G4_TEST = "tests/test_g4_staff_move_entry_preparation.py"
+G4_CODE = G3R_CODE
+G4_PRODUCT = frozenset(raisa_policy.G4_STAFF_MOVE_PRODUCT_PATHS)
+G4_CONTROL = frozenset({STATE, GATES, OVERLAY, AGENTS, G4_SCOPE, G4_TEST}) | G4_CODE
+G4_BEFORE = G3R_BEFORE | frozenset({G3R_SCOPE})
+G4_KINDS = frozenset({"enable_g4_staff_move", "implement_g4_staff_move"})
+G4_LIMITS = ("one seeded same-identity staff time-only move source tranche",
+    "G3 six-criterion acceptance is a prerequisite, not a runtime grant",
+    "product effect requires separate independent execution binding",
+    "patient request/create, providers, audio, real data and protected effects remain closed")
+G4_REVIEW_SHA = "cad32b0bce4f7924459dafd1ff1971a73198784c5742afd0baa5efa67031b256"
+G4_REVIEW_SUBJECT = {
+    "commit": G4_STAFF_MOVE_SELECTED_BASE["commit"],
+    "tree": G4_STAFF_MOVE_SELECTED_BASE["tree"],
+    "parent": "04dedcfd488b30b1a65ba7f68a0d2b182a0b810e",
+    "publication_review_sha256": "96590661f4274d366aaed1443d89e30e18482e8fca96a59f7c947a6ec832e0df",
+}
+G4_CRITERIA = frozenset({
+    "versioned_intent_command_event_and_projection_schemas",
+    "constrained_projection_grammar", "risk_and_confirmation_contract",
+    "provider_free_validated_read_only_projection",
+    "invalid_stale_overprivileged_and_inaccessible_projections_rejected",
+    "stable_fallback_renders_same_semantics",
+})
+G4_BASE_POLICY = {**G4_STAFF_MOVE_PREIMAGES,
+    G2_CLOSEOUT_SCOPE: G3R_BASE_POLICY[G2_CLOSEOUT_SCOPE],
+    G3C_SCOPE: G3R_BASE_POLICY[G3C_SCOPE],
+    G3_SCOPE: G3R_BASE_POLICY[G3_SCOPE],
+    G3R_SCOPE: "c671c5900c0b7c5aa162378e118008407920aa2dd6492670855a75f801d59636"}
+G4_BASE_SOURCE = {"orchestration_harness/bounded_g1b.py":
+    "363fc54c9365f36a6f1c8cd63025fd7559047887f279ef4611eed267f806b97d",
+    "orchestration_harness/raisa_policy.py":
+    "c9b279d5642b2e1c707fb8e59eb46683312841615f4a57a10cd3eb929680edbf"}
+G4_PRODUCT_BEFORE = {
+    "app/routers/appointments.py": "9c9965871b622b16ab52900e50e86d650a04549d9fb1f2c5cefe2c8ae8788cef",
+    "app/schemas/appointments.py": "5bfb530387beed9fef9475a03d0689cd6472aab2c25044f6c0eaec7469c3e9b9"}
+OPERATION_PATHS.update(enable_g4_staff_move=G4_CONTROL,
+                       implement_g4_staff_move=G4_PRODUCT)
+
+
+def _g4_review(read, row, subject, verdict):
+    _keys(row, {"path", "sha256"}, "bounded_g4_review_pin")
+    _need(type(row["path"]) is str and Path(row["path"]).is_absolute(), "bounded_g4_review_path")
+    _closeout_digest(row["sha256"])
+    review = _json(read(Path(row["path"]), row["sha256"]))
+    _need(review.get("reviewer_agent") == "/root/g3_entry_review"
+          and review.get("independent") is True
+          and review.get("implementation_authorship") is False
+          and review.get("verdict") == verdict
+          and review.get("blocking_findings") == []
+          and review.get("subject") == subject, "bounded_g4_independent_review")
+    return review
+
+
+def _g4_g3_completion(read, row):
+    _need(type(row) is dict and row.get("sha256") == G4_REVIEW_SHA,
+          "bounded_g4_g3_review_digest")
+    review = _g4_review(read, row, G4_REVIEW_SUBJECT, "PASS_G3_CRITERION_ACCEPTANCE")
+    _need(review.get("schema") == "emr4.g3_final_criterion_review.v1"
+          and review.get("full_g3_accepted") is True,
+          "bounded_g4_g3_not_accepted")
+    _keys(review.get("criterion_assessment"), G4_CRITERIA,
+          "bounded_g4_six_criteria")
+    evidence = review.get("accepted_evidence")
+    _need(type(evidence) is dict and evidence, "bounded_g4_criterion_evidence")
+    for criterion in review["criterion_assessment"].values():
+        _keys(criterion, {"accepted", "evidence", "qualification"},
+              "bounded_g4_criterion_row")
+        _need(criterion["accepted"] is True
+              and type(criterion["evidence"]) is list and criterion["evidence"]
+              and all(type(k) is str and k in evidence for k in criterion["evidence"])
+              and type(criterion["qualification"]) is str and criterion["qualification"],
+              "bounded_g4_criterion_unaccepted")
+    _need(review.get("governing_inputs", {}).get("current_state_sha256") == G4_BASE_POLICY[STATE]
+          and review["governing_inputs"].get("gates_sha256") == G4_BASE_POLICY[GATES]
+          and review["governing_inputs"].get("g3_status_at_review") == "active_bounded_read_render"
+          and review["governing_inputs"].get("g4_status_at_review") == "blocked_by_G3"
+          and review.get("limits", {}).get("g4_transition_or_journey_accepted") is False
+          and review["limits"].get("create_or_move_command_effect_accepted") is False,
+          "bounded_g4_review_limit")
+    return review
+
+
+def _g4_operation_review(read, row, subject_sha256, verdict):
+    _keys(row, {"path", "sha256"}, "bounded_g4_operation_review_pin")
+    _need(type(row["path"]) is str and Path(row["path"]).is_absolute(),
+          "bounded_g4_operation_review_path")
+    _closeout_digest(row["sha256"])
+    review = _json(read(Path(row["path"]), row["sha256"]))
+    _need(review.get("reviewer_agent") == "/root/g3_runtime_reviewer_sol"
+          and review.get("independent") is True
+          and review.get("implementation_authorship") is False
+          and review.get("verdict") == verdict
+          and review.get("blocking_findings") == []
+          and review.get("subject_sha256") == subject_sha256,
+          "bounded_g4_operation_independent_review")
+    return review
+
+
+def build_g4_staff_move_transition(before, scope, review):
+    """Proposed afterimages only; review bytes are independently pinned by the loader."""
+    _need(type(review) is dict
+          and review.get("schema") == "emr4.g3_final_criterion_review.v1"
+          and review.get("verdict") == "PASS_G3_CRITERION_ACCEPTANCE"
+          and review.get("reviewer_agent") == "/root/g3_entry_review"
+          and review.get("independent") is True
+          and review.get("implementation_authorship") is False
+          and review.get("blocking_findings") == []
+          and review.get("subject") == G4_REVIEW_SUBJECT
+          and review.get("full_g3_accepted") is True,
+          "bounded_g4_g3_acceptance_pending")
+    _keys(review.get("criterion_assessment"), G4_CRITERIA,
+          "bounded_g4_six_criteria")
+    _need(all(type(row) is dict and row.get("accepted") is True
+              for row in review["criterion_assessment"].values()),
+          "bounded_g4_criterion_unaccepted")
+    _keys(before, G4_BEFORE, "bounded_g4_before_paths")
+    _need(all(_sha(before[p]) == G4_BASE_POLICY[p] for p in before),
+          "bounded_g4_preimage_drift")
+    _keys(scope, {"schema_version", "recorded_at", "selected_base",
+        "owner_directive_sha256", "required_g3_completion_acceptance_sha256",
+        "source_sha256", "product_sha256", "allowed_paths", "allowed_effects",
+        "runtime_binding_required", "admission_grants_runtime_authority",
+        "first_journey", "next_journey", "excluded_effects"},
+        "bounded_g4_scope_shape")
+    _need(scope["schema_version"] == "ariadne.g4_staff_move_entry_scope.v1"
+          and scope["selected_base"] == G4_STAFF_MOVE_SELECTED_BASE
+          and scope["owner_directive_sha256"] == G3R_OWNER_SHA
+          and scope["required_g3_completion_acceptance_sha256"] == G4_REVIEW_SHA
+          and review.get("full_g3_accepted") is True,
+          "bounded_g4_scope_review")
+    _need(type(scope["recorded_at"]) is str and
+          datetime.fromisoformat(scope["recorded_at"]).tzinfo is not None,
+          "bounded_g4_timestamp")
+    _digest_map(scope["source_sha256"], SOURCE_PATHS | CONTROLLER_PATHS,
+                "bounded_g4_sources")
+    # The entry admits the exact product path vocabulary, not product runtime.
+    # Product afterimages are later pinned by their own reviewed operation.
+    _need(scope["product_sha256"] is None, "bounded_g4_product_not_separately_bound")
+    _need(scope["allowed_paths"] == sorted(G4_PRODUCT)
+          and scope["allowed_effects"] == sorted(EFFECTS | {"product_behavior_change"})
+          and scope["runtime_binding_required"] is True
+          and scope["admission_grants_runtime_authority"] is False
+          and scope["first_journey"] == "seeded_same_id_staff_time_only_signed_update"
+          and scope["next_journey"] == "separately_scoped_patient_request_staff_confirmed_create"
+          and scope["excluded_effects"] == [
+              "application_runtime_without_reviewed_binding",
+              "database_runtime_without_reviewed_binding", "provider_invocation",
+              "audio_capture_or_processing", "real_data_access",
+              "protected_ref_movement", "deployment", "public_listener"],
+          "bounded_g4_scope_boundary")
+    state = _json(before[STATE])
+    gates = _document(before[GATES], GATES)
+    overlay = _document(before[OVERLAY], OVERLAY)
+    _need(state["current_gate"] == "G3"
+          and state["current_gate_status"] == "active_bounded_read_render"
+          and state["active_profile"] == raisa_policy.G3_READ_RENDER_PROFILE
+          and state["g2"]["completion_accepted"] is True
+          and state["g3"]["completion_accepted"] is False
+          and state["g3"]["product_runtime_authorized"] is False
+          and next(g for g in gates["gates"] if g["id"] == "G3")["status"]
+              == "active_bounded_read_render"
+          and next(g for g in gates["gates"] if g["id"] == "G4")["status"]
+              == "blocked_by_G3"
+          and overlay["active_profile"] == raisa_policy.G3_READ_RENDER_PROFILE
+          and raisa_policy.G4_STAFF_MOVE_PROFILE not in overlay["profiles"],
+          "bounded_g4_current_g3_state")
+    _need(frozenset(next(g for g in gates["gates"] if g["id"] == "G3")["exit_checks"])
+          == G4_CRITERIA, "bounded_g4_gate_criteria_drift")
+    state.update(observed_at=scope["recorded_at"], current_gate="G4",
+        current_gate_status="active_bounded_staff_move", active_correction="G4",
+        active_profile=raisa_policy.G4_STAFF_MOVE_PROFILE)
+    state["g3"]["status"] = "passed"
+    state["g3"]["completion_accepted"] = True
+    state["task_selection"].update(
+        allowed_task_kinds=["g4_seeded_staff_move"], next_eligible_tranche="G4",
+        next_eligible_now=True, next_tranche_started=True,
+        next_tranche_admission_requires_state_transition=False,
+        next_eligibility_condition="only_reviewed_seeded_staff_time_move_with_separate_execution_binding")
+    gates["programme"].update(current_gate="G4",
+        current_gate_status="active_bounded_staff_move", next_eligible_tranche="G4")
+    next(g for g in gates["gates"] if g["id"] == "G3")["status"] = "passed"
+    next(g for g in gates["gates"] if g["id"] == "G4")["status"] = "active_bounded_staff_move"
+    overlay["active_profile"] = raisa_policy.G4_STAFF_MOVE_PROFILE
+    overlay["profiles"][raisa_policy.G4_STAFF_MOVE_PROFILE] = raisa_policy.g4_staff_move_profile()
+    agents = before[AGENTS].decode("utf-8")
+    _need(agents.count(raisa_policy.G3_READ_RENDER_PREAMBLE) == 1,
+          "bounded_g4_agents_preimage")
+    agents = agents.replace(raisa_policy.G3_READ_RENDER_PREAMBLE,
+                            raisa_policy.G4_STAFF_MOVE_PREAMBLE, 1)
+    for old, new in (
+        ("## Current DB-free G3 read-render tranche", "## Accepted DB-free G3 read-render tranche"),
+        ("This prospective owner-directed tranche supersedes", "The prior owner-directed tranche superseded"),
+        ("The separate G3_APPOINTMENT_READ_RENDER profile admits", "The prior G3_APPOINTMENT_READ_RENDER profile admitted"),
+        ("G3 completion remains false and G4 blocked.",
+         "The synthetic read-only evidence required an independent six-criterion G3 acceptance before G4.")):
+        _need(agents.count(old) == 1, "bounded_g4_agents_phase_preimage")
+        agents = agents.replace(old, new, 1)
+    agents += ("\n## Current bounded G4 staff-move tranche\n\nThe six G3 exit criteria are "
+        "independently accepted for the exact synthetic read-only subject. This G4 profile "
+        "permits source work for one seeded same-identity staff time-only signed move and "
+        "server-owned readback, subject to separate execution binding and review. It grants "
+        "no application, database, provider, audio, real-data, deployment or protected-ref "
+        "effect. Patient request/create is a later separately scoped tranche.\n")
+    return {STATE: (json.dumps(state, indent=2, ensure_ascii=False) + "\n").encode(),
+        GATES: yaml.safe_dump(gates, sort_keys=False, allow_unicode=True).encode(),
+        OVERLAY: yaml.safe_dump(overlay, sort_keys=False, allow_unicode=True).encode(),
+        AGENTS: agents.encode(), G4_SCOPE: _canonical(scope) + b"\n"}
+
+
+def g4_staff_move_review_subject(q):
+    return _sha(_canonical({k: q[k] for k in ("operation_kind", "base_commit",
+        "base_tree", "candidate_tree", "source_sha256", "payload_sha256",
+        "repair_sha256", "g3_completion_acceptance")}))
+
+
+def _load_g4_inputs(context, target, source, evidence_root, scratch, q, read, snapshots):
+    _keys(q, {"schema_version", "operation_id", "operation_kind", "phase",
+        "base_commit", "base_tree", "expected_head", "expected_index_tree",
+        "candidate_tree", "source_sha256", "payload_sha256", "repair_sha256",
+        "source_review", "g3_completion_acceptance", "activation_acceptance"},
+        "bounded_g4_binding_schema")
+    _need(q["schema_version"] == "ariadne.g4_staff_move_operation_binding.v1"
+          and q["operation_kind"] in G4_KINDS, "bounded_g4_binding_version")
+    _need(type(q["operation_id"]) is str and
+          re.fullmatch(r"[a-z0-9][a-z0-9-]{1,79}", q["operation_id"])
+          and q["phase"] in {"development", "pre-push", "post-push"},
+          "bounded_g4_phase")
+    for key in ("base_commit", "base_tree", "expected_head",
+                "expected_index_tree", "candidate_tree"):
+        _need(type(q[key]) is str and re.fullmatch(r"[0-9a-f]{40}", q[key]),
+              "bounded_g4_git_identity")
+    enable = q["operation_kind"] == "enable_g4_staff_move"
+    paths = G4_CONTROL if enable else G4_PRODUCT
+    sources = _digest_map(q["source_sha256"], SOURCE_PATHS | CONTROLLER_PATHS,
+                          "bounded_g4_source_paths")
+    _keys(q["repair_sha256"], paths, "bounded_g4_changed_paths")
+    for path, row in q["repair_sha256"].items():
+        _keys(row, {"before_sha256", "after_sha256"}, "bounded_g4_change_pair")
+        _closeout_digest(row["after_sha256"])
+        previous = ((G4_BASE_POLICY.get(path) or G4_BASE_SOURCE.get(path))
+                    if enable else G4_PRODUCT_BEFORE.get(path))
+        _need(row["before_sha256"] == previous and row["after_sha256"] != previous,
+              "bounded_g4_change_preimage")
+        if previous is None:
+            _need(trusted_git.run_git(target, "ls-tree", q["base_commit"], "--", path) == "",
+                  "bounded_g4_addition_exists")
+        else:
+            _need(_sha(trusted_git.run_git_bytes(
+                target, "cat-file", "blob", q["base_commit"] + ":" + path)) == previous,
+                "bounded_g4_committed_preimage")
+    if enable:
+        _need(q["base_commit"] == G4_STAFF_MOVE_SELECTED_BASE["commit"]
+              and q["base_tree"] == G4_STAFF_MOVE_SELECTED_BASE["tree"]
+              and q["activation_acceptance"] is None, "bounded_g4_enable_base")
+    else:
+        _need(q["base_commit"] != G4_STAFF_MOVE_SELECTED_BASE["commit"],
+              "bounded_g4_controller_not_installed")
+        headers = trusted_git.run_git(target, "cat-file", "commit",
+                                      q["base_commit"]).split("\n\n", 1)[0].splitlines()
+        _need([line for line in headers if line.startswith("parent ")]
+              == ["parent " + G4_STAFF_MOVE_SELECTED_BASE["commit"]]
+              and [line for line in headers if line.startswith("tree ")]
+              == ["tree " + q["base_tree"]], "bounded_g4_activation_parent_tree")
+        activation = _g4_operation_review(
+            read, q["activation_acceptance"], q["base_commit"],
+            "PASS_G4_STAFF_MOVE_ENTRY_PUBLICATION_EFFECT")
+        _need(activation.get("tree") == q["base_tree"]
+              and activation.get("protected_refs_unchanged") is True
+              and activation.get("same_attempt_remote_readback_verified") is True,
+              "bounded_g4_activation_effect")
+    review = _g4_g3_completion(read, q["g3_completion_acceptance"])
+    for path, digest in sources.items():
+        raw = read(source / path, digest)
+        committed = trusted_git.run_git_bytes(target, "cat-file", "blob",
+                                               q["base_commit"] + ":" + path)
+        if enable and path in G4_CODE:
+            _need(_sha(committed) == G4_BASE_SOURCE[path]
+                  and digest == q["repair_sha256"][path]["after_sha256"],
+                  "bounded_g4_prospective_source")
+        else:
+            _need(committed == raw, "bounded_g4_installed_source")
+    inputs = CONFIGURATION_PATHS | G4_BEFORE | {G4_SCOPE} | paths | SOURCE_PATHS | CONTROLLER_PATHS
+    pins = _digest_map(q["payload_sha256"], inputs, "bounded_g4_payload_paths")
+    payloads = {path: read(target / path, digest) for path, digest in sorted(pins.items())}
+    before = {path: trusted_git.run_git_bytes(
+        target, "cat-file", "blob", G4_STAFF_MOVE_SELECTED_BASE["commit"] + ":" + path)
+              for path in G4_BEFORE}
+    scope = _json(payloads[G4_SCOPE])
+    _need(scope["source_sha256"] == sources, "bounded_g4_scope_sources")
+    expected = build_g4_staff_move_transition(before, scope, review)
+    _need(all(payloads[path] == raw for path, raw in expected.items()),
+          "bounded_g4_transition_delta")
+    for path in inputs - paths:
+        _need(trusted_git.run_git_bytes(target, "cat-file", "blob",
+                                        q["base_commit"] + ":" + path) == payloads[path],
+              "bounded_g4_unowned_changed")
+    for path, pair in q["repair_sha256"].items():
+        _need(_sha(payloads[path]) == pair["after_sha256"],
+              "bounded_g4_afterimage")
+    if not enable:
+        _need(scope["product_sha256"] is None,
+              "bounded_g4_product_not_separately_bound")
+    source_review = _g4_operation_review(
+        read, q["source_review"], g4_staff_move_review_subject(q),
+        "PASS_G4_STAFF_MOVE_EXACT_ADMISSION_SUBJECT")
+    attested = inputs - paths if q["phase"] == "development" else inputs
+    observation = trusted_git.attest_target_index(
+        target, attested_paths=tuple(sorted(attested)),
+        expected_head=q["expected_head"], expected_index_tree=q["expected_index_tree"],
+        scratch_parent=scratch)
+    _need(trusted_git.run_git(target, "rev-parse",
+                              q["base_commit"] + "^{tree}") == q["base_tree"],
+          "bounded_g4_base_tree_changed")
+    if q["phase"] == "development":
+        _need(q["expected_head"] == q["base_commit"]
+              and q["expected_index_tree"] in {q["base_tree"], q["candidate_tree"]},
+              "bounded_g4_development_binding")
+    else:
+        headers = trusted_git.run_git(target, "cat-file", "commit",
+                                      q["expected_head"]).split("\n\n", 1)[0].splitlines()
+        _need([line for line in headers if line.startswith("parent ")]
+              == ["parent " + q["base_commit"]]
+              and [line for line in headers if line.startswith("tree ")]
+              == ["tree " + q["candidate_tree"]]
+              and q["expected_index_tree"] == q["candidate_tree"],
+              "bounded_g4_committed_binding")
+    for path, snapshot in snapshots.items():
+        _need(trusted_git._read_regular_snapshot(
+            path, maximum_bytes=2 * 1024 * 1024) == snapshot,
+            "bounded_g4_snapshot_drift")
+    return BoundedG1BInputs(q, before, payloads,
+                            {"g3_completion_review": review,
+                             "source_review": source_review}, observation)
+
+
+def _validate_g4_loaded_policy(inputs):
+    expected = build_g4_staff_move_transition(
+        inputs.before, _json(inputs.payloads[G4_SCOPE]),
+        inputs.evidence["g3_completion_review"])
+    _need(all(inputs.payloads[path] == raw for path, raw in expected.items()),
+          "bounded_g4_transition_delta")
+    try:
+        configuration = raisa_policy.validate_recovery_configuration(
+            documents={Path(path).name: inputs.payloads[path]
+                       for path in CONFIGURATION_PATHS},
+            expected_sha256={Path(path).name: inputs.binding["payload_sha256"][path]
+                             for path in CONFIGURATION_PATHS},
+            agents_text=inputs.payloads[AGENTS].decode("utf-8"),
+            state=_json(inputs.payloads[STATE]))
+    except (raisa_policy.RaisaPolicyError,
+            configuration_core.ConfigurationError) as error:
+        raise BoundedG1BError(error.reason_code) from error
+    return expected, configuration

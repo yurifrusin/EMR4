@@ -35,6 +35,8 @@ G2_PROFILE = "G2_BASELINE_REPAIR_ACTIVE"
 G2_CLOSED_PROFILE = "G2_ACCEPTED_CLOSED"
 G3_READ_RENDER_PROFILE = "G3_APPOINTMENT_READ_RENDER"
 G3_READ_RENDER_PREAMBLE = "Gate G3 is active only for separately admitted DB-free appointment read-render verification; mutation and provider effects remain closed"
+G4_STAFF_MOVE_PROFILE = "G4_APPOINTMENT_STAFF_MOVE"
+G4_STAFF_MOVE_PREAMBLE = "Gate G4 is active only for an exact separately admitted synthetic staff time move; patient request, providers and protected effects remain closed"
 G3_CONTRACT_PROFILE = "G3_APPOINTMENT_CONTRACT_CONVERGENCE"
 G3_CONTRACT_PREAMBLE = "Gate G3 is active only for separately admitted appointment contract convergence; service effects remain closed"
 G3_OFFLINE_PROFILE = "G3_OFFLINE_APPOINTMENT_ENTRY"
@@ -52,6 +54,7 @@ BOUNDED_PROFILE_PREAMBLES = MappingProxyType({
     G3_OFFLINE_PROFILE: G3_OFFLINE_PREAMBLE,
     G3_CONTRACT_PROFILE: G3_CONTRACT_PREAMBLE,
     G3_READ_RENDER_PROFILE: G3_READ_RENDER_PREAMBLE,
+    G4_STAFF_MOVE_PROFILE: G4_STAFF_MOVE_PREAMBLE,
 })
 
 ADMITTED_PROGRAMME_GATE = 'G0.8'
@@ -919,7 +922,8 @@ _SHAPE_79 = ("object", (
     ('G3_OFFLINE_APPOINTMENT_ENTRY', _SHAPE_78),
     ('G3_APPOINTMENT_CONTRACT_CONVERGENCE', _SHAPE_78),
     ('G3_APPOINTMENT_READ_RENDER', _G3_READ_RENDER_PROFILE_SHAPE),
-), ('G1E_CONFIGURATION_CORE_ACTIVE', 'G2_BASELINE_REPAIR_ACTIVE', 'G2_ACCEPTED_CLOSED', 'G3_OFFLINE_APPOINTMENT_ENTRY', 'G3_APPOINTMENT_CONTRACT_CONVERGENCE', 'G3_APPOINTMENT_READ_RENDER'))
+    ('G4_APPOINTMENT_STAFF_MOVE', _SHAPE_78),
+), ('G1E_CONFIGURATION_CORE_ACTIVE', 'G2_BASELINE_REPAIR_ACTIVE', 'G2_ACCEPTED_CLOSED', 'G3_OFFLINE_APPOINTMENT_ENTRY', 'G3_APPOINTMENT_CONTRACT_CONVERGENCE', 'G3_APPOINTMENT_READ_RENDER', 'G4_APPOINTMENT_STAFF_MOVE'))
 
 _SHAPE_80 = ("object", (
     ('expected_branch', _SHAPE_1),
@@ -1632,6 +1636,35 @@ def g3_read_render_profile() -> dict:
     """A separate source profile; exact independent launch binding remains required."""
     profile = g3_appointment_contract_profile()
     profile.update(profile_kind="bounded_G3_appointment_read_render", expected_programme_mode="convergence", expected_gate_status="active_bounded_read_render", admitted_task_classes=["g3_appointment_read_render"], allowed_paths=list(G3_READ_RENDER_PRODUCT_PATHS), scope_behavior="bounded_G3_appointment_read_render", scope_file="orchestration/programme/g3-appointment-read-render-scope.json", owner_read_render_runtime_exception={'owner_directive_sha256': 'eaed1cf89b79c153ddf15ea23a95a9c90fd0a1c02ebfe919f6434ccb26b6e810', 'profile': 'db_free_synthetic_static_read_render', 'independent_execution_binding_required': True, 'admission_grants_runtime_authority': False, 'literal_loopback_assets_only': True, 'application_database_commands_providers_audio_closed': True, 'active_environments': 1, 'maximum_seconds': 900, 'maximum_memory_mib': 1536, 'maximum_cpus': 2, 'maximum_processes': 128, 'automatic_retry': False})
+    return profile
+
+
+# Prospective G4 profile. The bounded operation loader still requires an exact
+# independent six-criterion G3 acceptance before any transition can be selected.
+G4_STAFF_MOVE_PRODUCT_PATHS = [
+    'app/routers/appointments.py',
+    'app/schemas/appointments.py',
+    'app/services/appointment_list_read_adapter.py',
+    'tests/test_stage1_staff_move.py',
+    'tests/test_stage1_appointment_readback.py',
+]
+
+
+def g4_staff_move_profile() -> dict:
+    """Small first G4 source scope; execution requires a separate reviewed grant."""
+    profile = g3_appointment_contract_profile()
+    profile.update(
+        profile_kind='bounded_G4_appointment_staff_move',
+        expected_programme_mode='convergence',
+        expected_current_gate='G4',
+        expected_gate_status='active_bounded_staff_move',
+        active_correction='G4',
+        programme_gate='G4',
+        admitted_task_classes=['g4_seeded_staff_move'],
+        allowed_paths=list(G4_STAFF_MOVE_PRODUCT_PATHS),
+        scope_behavior='bounded_G4_appointment_staff_move',
+        scope_file='orchestration/programme/g4-staff-move-entry-scope.json',
+    )
     return profile
 
 
@@ -2503,6 +2536,16 @@ def validate_recovery_configuration(*, documents: dict[str, bytes], expected_sha
                 or state["g3"]["broader_review_required_after_tranche"] is not False
                 or state["task_selection"]["allowed_task_kinds"] != ['g3_appointment_read_render']):
             raise RaisaPolicyError("configuration_g3_read_render_profile_invalid")
+    if state["active_profile"] == G4_STAFF_MOVE_PROFILE:
+        if (overlay["profiles"][G4_STAFF_MOVE_PROFILE] != g4_staff_move_profile()
+                or state["programme_mode"] != 'convergence' or state["current_gate"] != 'G4'
+                or state["current_gate_status"] != 'active_bounded_staff_move'
+                or state["g2"]["completion_accepted"] is not True or state["g2"]["status"] != 'passed'
+                or state["feature_work_eligible"] is not False or state["product_work_eligible"] is not False
+                or state["g3"]["completion_accepted"] is not True
+                or state["g3"]["product_runtime_authorized"] is not False
+                or state["task_selection"]["allowed_task_kinds"] != ['g4_seeded_staff_move']):
+            raise RaisaPolicyError("configuration_g4_staff_move_profile_invalid")
     if state["active_profile"] == G3_CONTRACT_PROFILE:
         if (overlay["profiles"][G3_CONTRACT_PROFILE] != g3_appointment_contract_profile()
                 or state["programme_mode"] != 'convergence' or state["current_gate"] != 'G3'
