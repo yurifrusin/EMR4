@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; form-action 'self'; base-uri 'none'">
+  <title>Raisa · Appointment request</title>
+  <link rel="stylesheet" href="stage1-interactive.css">
+  <script type="module" src="stage1-interactive.js"></script>
+</head>
+<body>
+  <a class="skip" href="#work">Skip to appointment task</a>
+  <div class="page">
+    <header class="site-header"><strong class="brand">Raisa</strong><span>Fictional practice · synthetic demo</span></header>
+    <main id="work">
+      <div class="heading"><div><p class="eyebrow">Appointment desk</p><h1 id="title">Loading your task</h1></div><p class="badge" id="role">Session check</p></div>
+      <p class="intro" id="intro">Checking the local demo session. No appointment action is available yet.</p>
+      <p class="clock" id="clock"></p>
+      <div class="status" id="status" role="status" aria-live="polite" aria-atomic="true">Waiting for a verified session.</div>
+      <div class="actions"><button type="button" id="spoken-reply" class="secondary" disabled>Speak verified reply</button></div>
+      <p class="hint" id="spoken-availability">Spoken replies unavailable. Read the reply here.</p>
+      <button type="button" id="reconcile" class="secondary" hidden>Check original action</button>
+
+      <section class="panel" id="patient" hidden aria-labelledby="patient-title">
+        <div class="panel-head"><div><p class="eyebrow">Patient view</p><h2 id="patient-title">Request a follow-up</h2></div><span class="step">Request only · no slot held</span></div>
+        <p>Tell Reception One when you can come. A staff member will confirm the booking.</p>
+        <label for="patient-words">Your request</label>
+        <textarea id="patient-words" rows="2" maxlength="500" placeholder="I need a follow-up with Dr Rao next Thursday after 2 pm."></textarea>
+        <p class="hint">Text is editable. Suggested details below are a deterministic example, not live AI interpretation.</p>
+        <div class="fields">
+          <label>Preferred date <input id="request-date" type="date" required></label>
+          <label>Earliest time <input id="request-earliest" type="time" required></label>
+          <label>Latest time <input id="request-latest" type="time" required></label>
+        </div>
+        <p class="hint" id="request-options-note"></p>
+        <p class="fact">Reason: follow-up <span aria-hidden="true">·</span> <span class="zone"></span></p>
+        <div class="actions"><button type="button" id="request-review">Review request</button><button type="button" id="patient-refresh" class="secondary">Refresh outcome</button></div>
+        <div id="request-review-box" class="review" hidden>
+          <h3>Check your request</h3><p id="request-summary"></p>
+          <p>Submitting sends a request to staff. Availability can change before a booking is confirmed.</p>
+          <div class="actions"><button type="button" id="request-submit">Send request</button><button type="button" id="request-edit" class="secondary">Edit details</button></div>
+        </div>
+        <div id="patient-outcome" class="outcome"></div>
+      </section>
+
+      <section class="panel" id="staff" hidden aria-labelledby="staff-title">
+        <div class="panel-head"><div><p class="eyebrow">Reception One</p><h2 id="staff-title">Today's appointment task</h2></div><span class="step">Staff confirmation required</span></div>
+        <div id="staff-request" class="fact-card"></div>
+        <div class="actions"><button type="button" id="staff-refresh" class="secondary">Refresh current facts</button></div>
+        <div id="staff-offers" class="offers" aria-label="Current appointment options"></div>
+        <div id="create-review" class="review" hidden><h3>Confirm new appointment</h3><p id="create-summary"></p><p class="unchanged">The request remains a separate historical fact. This action creates one appointment only after fresh server validation.</p><div class="actions"><button type="button" id="create-confirm">Confirm booking</button><button type="button" id="create-cancel" class="secondary">Cancel review</button></div></div>
+        <div id="diary" class="diary" aria-label="Current appointment"></div>
+        <div id="move-area" hidden>
+          <h3>Move this appointment</h3>
+          <label for="move-words">Staff instruction</label><textarea id="move-words" rows="2" maxlength="500" placeholder="Move Alex's existing follow-up to next Thursday afternoon."></textarea>
+          <p class="hint">Choose the exact current appointment and time. Text does not confer authority or execute a move.</p>
+          <div class="fields"><label>New date <input id="move-date" type="date" required></label><label>New time <input id="move-time" type="time" required></label></div>
+          <div class="actions"><button type="button" id="move-propose">Review move</button></div>
+          <div id="move-review" class="review" hidden><h3>Confirm time-only move</h3><div id="move-summary"></div><div class="actions"><button type="button" id="move-confirm">Confirm move</button><button type="button" id="move-cancel" class="secondary">Cancel review</button></div></div>
+        </div>
+        <div id="staff-outcome" class="outcome"></div>
+      </section>
+
+      <section class="panel modality" aria-labelledby="voice-title">
+        <div class="panel-head"><div><p class="eyebrow">Modality</p><h2 id="voice-title">Speak or type</h2></div><span class="step" id="voice-availability">Voice unavailable · type instead</span></div>
+        <p>Start local dictation only when you choose. A transcript appears in the editable request or staff instruction field; it never sends a request or confirms an appointment.</p>
+        <div class="actions"><button type="button" id="voice-toggle" disabled aria-describedby="voice-note">Start talking</button><button type="button" id="voice-cancel" class="secondary" hidden>Cancel dictation</button></div>
+        <p class="hint" id="voice-note" role="status" aria-live="polite" aria-atomic="true">Local voice is not qualified. Type instead.</p>
+      </section>
+    </main>
+    <footer>Synthetic demonstration · Current facts and actions require the local reviewed server adapter.</footer>
+  </div>
+</body>
+</html>
