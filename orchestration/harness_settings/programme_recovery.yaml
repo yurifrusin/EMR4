@@ -26,7 +26,7 @@ required_before:
 - protected_ref_operation
 - deployment
 missing_or_invalid_state: hard_stop
-active_profile: G4_PATIENT_REQUEST_STAFF_CREATE
+active_profile: G4_STAGE1_LOCAL_INTERACTIVE
 profiles:
   G0.8_FSMONITOR_CLOSURE:
     profile_kind: controller_maintenance
@@ -1602,6 +1602,64 @@ profiles:
     g2_eligible: false
     scope_behavior: bounded_G4_patient_request_staff_create
     scope_file: orchestration/programme/g4-patient-request-entry-scope.json
+    installed_controller_assessment_only: false
+    global_execution_defaults_unchanged: true
+    closed_entrypoints:
+    - worker_dispatch
+    - provider_invocation
+    - clockwork_tick_mutation
+    - clockwork_closeout_mutation
+    - integration
+    - protected_ref_operation
+    - deployment
+  G4_STAGE1_LOCAL_INTERACTIVE:
+    profile_kind: bounded_G4_stage1_local_interactive
+    expected_programme_mode: convergence
+    expected_current_gate: G4
+    expected_gate_status: active_bounded_stage1_interactive
+    active_correction: G4
+    programme_gate: G4
+    admitted_task_classes:
+    - g4_stage1_local_interactive
+    allowed_effects:
+    - control_plane_edit
+    - product_behavior_change
+    - repository_read
+    - task_branch_commit
+    - task_branch_push
+    forbidden_effects:
+    - autonomous_worker_dispatch
+    - dependency_change
+    - deployment
+    - existing_clockwork_runtime_mutation
+    - integration
+    - migration_change
+    - pages
+    - protected_ref_movement
+    - provider_invocation
+    - real_data_access
+    allowed_paths:
+    - static/demo/stage1-interactive.html
+    - static/demo/stage1-interactive.css
+    - static/demo/stage1-interactive.js
+    - static/demo/stage1-local-voice.js
+    - stage1_demo_adapter_core.py
+    - stage1_demo_http.py
+    - stage1_demo_voice.py
+    - tests/test_stage1_demo_adapter_core.py
+    - tests/test_stage1_demo_http.py
+    - tests/test_stage1_demo_voice.py
+    - tests/test_stage1_spoken_reply_source.py
+    - docs/demo/stage1-local-demo.md
+    autonomous_task_selection: false
+    feature_work_eligible: false
+    product_work_eligible: false
+    provider_calls_eligible: false
+    deployment_eligible: false
+    protected_ref_movement_eligible: false
+    g2_eligible: false
+    scope_behavior: bounded_G4_stage1_local_interactive
+    scope_file: orchestration/programme/g4-stage1-interactive-entry-scope.json
     installed_controller_assessment_only: false
     global_execution_defaults_unchanged: true
     closed_entrypoints:

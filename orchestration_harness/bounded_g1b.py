@@ -3375,6 +3375,8 @@ def _validate_g3_read_render_loaded_policy(inputs):
 
 
 def operation_effects(kind: str) -> frozenset[str]:
+    if kind == "implement_g4_stage1_interactive":
+        return EFFECTS | {"product_behavior_change"}
     if kind == "implement_g4_patient_request":
         return EFFECTS | {"product_behavior_change", "migration_change"}
     if kind == "implement_g4_staff_move":
@@ -3429,6 +3431,10 @@ def operation_paths(kind: str, binding: dict | None = None) -> frozenset[str]:
 
 def _operation(kind: str, binding: dict | None = None) -> dict:
     paths = operation_paths(kind, binding)
+    if kind in G4_STAGE1_INTERACTIVE_KINDS:
+        return {"paths": paths, "g4_stage1_interactive": True,
+                "profile": raisa_policy.G4_STAGE1_INTERACTIVE_PROFILE,
+                "gate": "G4", "limits": G4_STAGE1_INTERACTIVE_LIMITS}
     if kind in G4_PATIENT_REQUEST_KINDS:
         return {"paths": paths, "g4_patient_request": True,
                 "profile": raisa_policy.G4_PATIENT_REQUEST_PROFILE,
@@ -6287,6 +6293,9 @@ def load_bounded_g1b_inputs(context: BoundedG1BContext) -> BoundedG1BInputs:
         return snapshot[1]
 
     binding = _json(read(binding_path, context.expected_binding_sha256))
+    if binding.get("operation_kind") in G4_STAGE1_INTERACTIVE_KINDS:
+        return _load_g4_stage1_interactive_inputs(
+            context, target, source, evidence_root, scratch, binding, read, snapshots)
     if binding.get("operation_kind") in G4_PATIENT_REQUEST_KINDS:
         return _load_g4_patient_request_inputs(
             context, target, source, evidence_root, scratch, binding, read, snapshots)
@@ -6444,6 +6453,8 @@ def load_bounded_g1b_inputs(context: BoundedG1BContext) -> BoundedG1BInputs:
 
 def _validate_loaded_policy(inputs: BoundedG1BInputs) -> tuple[dict[str, bytes], configuration_core.ValidatedConfiguration | None]:
     operation = _operation(inputs.binding["operation_kind"], inputs.binding)
+    if operation.get("g4_stage1_interactive"):
+        return _validate_g4_stage1_interactive_loaded_policy(inputs)
     if operation.get("g4_patient_request"):
         return _validate_g4_patient_request_loaded_policy(inputs)
     if operation.get("g4_staff_move"):
@@ -7391,3 +7402,494 @@ def _validate_g4_loaded_policy(inputs):
             configuration_core.ConfigurationError) as error:
         raise BoundedG1BError(error.reason_code) from error
     return expected, configuration
+
+
+# Distinct G4 Stage 1 source route. The backend product is still unpublished:
+# the two required literal identities remain None, and the loader fails
+# before reading target contents or making a controller/Git observation.
+G4_STAGE1_INTERACTIVE_SCOPE = "orchestration/programme/g4-stage1-interactive-entry-scope.json"
+G4_STAGE1_INTERACTIVE_TEST = "tests/test_g4_stage1_interactive_entry_preparation.py"
+G4_STAGE1_INTERACTIVE_CODE = frozenset({
+    "orchestration_harness/bounded_g1b.py",
+    "orchestration_harness/raisa_policy.py"})
+G4_STAGE1_INTERACTIVE_CONTROL = frozenset({
+    STATE, GATES, OVERLAY, AGENTS, G4_STAGE1_INTERACTIVE_SCOPE,
+    G4_STAGE1_INTERACTIVE_TEST}) | G4_STAGE1_INTERACTIVE_CODE
+G4_STAGE1_INTERACTIVE_PRODUCT = frozenset(
+    raisa_policy.G4_STAGE1_INTERACTIVE_PRODUCT_PATHS)
+G4_STAGE1_INTERACTIVE_BEFORE = frozenset({
+    STATE, GATES, OVERLAY, AGENTS, G4_PATIENT_REQUEST_SCOPE})
+G4_STAGE1_INTERACTIVE_BASE_CONTROL = {
+    STATE: "fc68c88b7a551532b9cef7d7cc3ff496cf91344cd2ab78e44130ec9d5c4eb1c9",
+    GATES: "e6cfdf184c17fbe0760728347e6de1e4199b3b2bc3f4e21699d330f3c8d09159",
+    OVERLAY: "6f5add86583cf3f0d8e4e5f078892cbc1116942960332fca6674eec1e7b9e104",
+    AGENTS: "8d3a7feacfbc53e17a657f32def7212a6bc1bdad7b85f27766c6d24761492450",
+    "orchestration_harness/bounded_g1b.py":
+        "30c3b267401894f0ab105e3220072954f96f39b9879529257d616e2eb0c7e3a8",
+    "orchestration_harness/raisa_policy.py":
+        "30104e1b395d4d85922f1b039a9ac6e8d6cbe27ad1862d17ee928350b3f88654",
+    G4_STAGE1_INTERACTIVE_SCOPE: None,
+    G4_STAGE1_INTERACTIVE_TEST: None,
+}
+G4_STAGE1_INTERACTIVE_KINDS = frozenset({
+    "enable_g4_stage1_interactive", "implement_g4_stage1_interactive"})
+G4_STAGE1_INTERACTIVE_LIMITS = (
+    "published patient product and independent effect acceptance required",
+    "twelve exact local synthetic interface source files only",
+    "entry admission grants no app, DB, browser, microphone or child execution",
+    "one synthetic WAV qualification needs separately reviewed source and launch",
+    "voice result is required only for later separately reviewed activation",
+    "no provider, real data, public listener, deployment or protected effects")
+G4_STAGE1_INTERACTIVE_SELECTED_BASE = {
+    "commit": "91cd4898ed4f8a066a03d5af88661f92f4cb2b8e",
+    "tree": "74d51d82b9ea191a6125609cd2bc2b36656a7443"}
+G4_STAGE1_INTERACTIVE_BACKEND_EFFECT_SHA256 = (
+    "d1b4220d8f2cb476f45ed1a5468b160f920f7ff1413dda102ccbcc1cf0c330a3")
+G4_STAGE1_INTERACTIVE_BACKEND_EFFECT_VERDICT = (
+    "PASS_G4_PATIENT_REQUEST_PRODUCT_PUSH_EFFECT")
+G4_STAGE1_INTERACTIVE_BACKEND_EFFECT_PATH = Path(
+    "C:/Users/there/EMR4-migration/20260911-v1/"
+    "current-control-repair-20260912-v1/demo-led-stage1-20261012-v2/"
+    "g4-patient-request-product-publication-source-v6/"
+    "independent-g4-patient-request-product-push-effect-review-v6.json")
+G4_STAGE1_INTERACTIVE_BACKEND_REF = (
+    "refs/heads/codex/raisa-ariadne-recovery-g0")
+G4_STAGE1_INTERACTIVE_BACKEND_URL = "https://github.com/yurifrusin/emr4"
+G4_STAGE1_INTERACTIVE_BACKEND_BASE = "b825163676b8c4f30cf15f78eedcee9fe0764f67"
+G4_STAGE1_INTERACTIVE_BACKEND_RESULT_SHA256 = (
+    "ee626f8e40c921f1ac2e5ed4cf57cd98b72647e0c627c63141190668e8bececf")
+G4_STAGE1_INTERACTIVE_BACKEND_READBACK = {
+    "path": "C:/Users/there/EMR4-tools/g4-patient-request-product-publication-work-v6/"
+            "receipts/g4-patient-request-product-push-v6/06-published.json",
+    "sha256": "dc654841b94c0343da4eb612237df88916b86393f782e54dbf7aeef31d0e6c0b"}
+G4_STAGE1_INTERACTIVE_UI_SOURCE_BINDING_SHA256 = (
+    "6c0ff3fa04a21dbb9ad2d3d757d57f16449516e7099364a6febe22bc8a3c544a")
+G4_STAGE1_INTERACTIVE_UI_SOURCE_REVIEW_SHA256 = (
+    "cf3f4c56403465950919b271365e834476e1f7a03d109cfc98ef1a3a908f1615")
+G4_STAGE1_INTERACTIVE_CHILD_SOURCE_BINDING_SHA256 = (
+    "3daaa5fa200501f5ae64aace7f4ffe5bf250447a9fb5582370c75eded4182a36")
+G4_STAGE1_INTERACTIVE_CHILD_SOURCE_REVIEW_SHA256 = (
+    "6785095aa71caf70701b8c311a8a4785c5bbaebdeb1c27a624be93aae2bc17cc")
+OPERATION_PATHS.update(
+    enable_g4_stage1_interactive=G4_STAGE1_INTERACTIVE_CONTROL,
+    implement_g4_stage1_interactive=G4_STAGE1_INTERACTIVE_PRODUCT)
+
+
+def g4_stage1_interactive_review_subject(q):
+    return _sha(_canonical({key: q[key] for key in (
+        "operation_kind", "base_commit", "base_tree", "candidate_tree",
+        "source_sha256", "payload_sha256", "repair_sha256",
+        "patient_product_acceptance")}))
+
+
+def _g4_stage1_interactive_backend_review(read, row, selected):
+    _keys(row, {"path", "sha256"}, "bounded_g4_stage1_backend_review_row")
+    _need(G4_STAGE1_INTERACTIVE_BACKEND_EFFECT_PATH is not None
+          and Path(row["path"]) == G4_STAGE1_INTERACTIVE_BACKEND_EFFECT_PATH
+          and row["sha256"] == G4_STAGE1_INTERACTIVE_BACKEND_EFFECT_SHA256,
+          "bounded_g4_stage1_backend_effect_pin")
+    review = _json(read(Path(row["path"]), row["sha256"]))
+    ref = G4_STAGE1_INTERACTIVE_BACKEND_REF
+    protected = "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    _need(review.get("schema") == "emr4.g4_patient_request_product_push_effect_review.v1"
+          and review.get("status") == "PASS"
+          and review.get("verdict") == G4_STAGE1_INTERACTIVE_BACKEND_EFFECT_VERDICT
+          and review.get("reviewer_agent") == "/root/g3_runtime_reviewer_sol"
+          and review.get("independent") is True
+          and review.get("implementation_authorship") is False
+          and review.get("blocking_findings") == []
+          and review.get("commit") == selected["commit"]
+          and review.get("tree") == selected["tree"]
+          and review.get("base") == G4_STAGE1_INTERACTIVE_BACKEND_BASE
+          and review.get("published_ref") == ref
+          and review.get("remote_url") == G4_STAGE1_INTERACTIVE_BACKEND_URL
+          and review.get("result_sha256") == G4_STAGE1_INTERACTIVE_BACKEND_RESULT_SHA256
+          and review.get("existing_published_readback_receipt")
+              == G4_STAGE1_INTERACTIVE_BACKEND_READBACK
+          and review.get("remote_before") == {
+              ref: G4_STAGE1_INTERACTIVE_BACKEND_BASE,
+              "refs/heads/master": protected,
+              "refs/heads/handoff/current": protected}
+          and review.get("remote_after") == {
+              ref: selected["commit"],
+              "refs/heads/master": protected,
+              "refs/heads/handoff/current": protected}
+          and review.get("protected_refs_unchanged") is True
+          and review.get("same_attempt_remote_readback_verified") is True
+          and review.get("same_attempt", {}).get("push_attempted") is True
+          and review.get("same_attempt", {}).get("commit_attempted") is False,
+          "bounded_g4_stage1_backend_publication")
+    return review
+
+
+def _load_g4_stage1_interactive_inputs(context, target, source, evidence_root,
+                                       scratch, q, read, snapshots):
+    _keys(q, {"schema_version", "operation_id", "operation_kind", "phase",
+        "base_commit", "base_tree", "expected_head", "expected_index_tree",
+        "candidate_tree", "source_sha256", "payload_sha256", "repair_sha256",
+        "source_review", "patient_product_acceptance", "activation_acceptance"},
+        "bounded_g4_stage1_interactive_binding_schema")
+    _need(q["schema_version"] == "ariadne.g4_stage1_interactive_operation_binding.v1"
+          and q["operation_kind"] in G4_STAGE1_INTERACTIVE_KINDS
+          and type(q["operation_id"]) is str
+          and re.fullmatch(r"[a-z0-9][a-z0-9-]{1,79}", q["operation_id"])
+          and q["phase"] in {"development", "pre-push", "post-push"},
+          "bounded_g4_stage1_interactive_binding_version")
+    for key in ("base_commit", "base_tree", "expected_head",
+                "expected_index_tree", "candidate_tree"):
+        _need(type(q[key]) is str and re.fullmatch(r"[0-9a-f]{40}", q[key]),
+              "bounded_g4_stage1_interactive_git_identity")
+    _need(G4_STAGE1_INTERACTIVE_SELECTED_BASE is not None
+          and G4_STAGE1_INTERACTIVE_BACKEND_EFFECT_SHA256 is not None
+          and G4_STAGE1_INTERACTIVE_BACKEND_EFFECT_VERDICT is not None
+          and G4_STAGE1_INTERACTIVE_BACKEND_EFFECT_PATH is not None,
+          "bounded_g4_stage1_interactive_backend_publication_pending")
+    selected = G4_STAGE1_INTERACTIVE_SELECTED_BASE
+    _keys(selected, {"commit", "tree"},
+          "bounded_g4_stage1_interactive_selected_base")
+    _need(all(type(selected[key]) is str
+              and re.fullmatch(r"[0-9a-f]{40}", selected[key])
+              for key in ("commit", "tree")),
+          "bounded_g4_stage1_interactive_base_identity")
+    backend = _g4_stage1_interactive_backend_review(
+        read, q["patient_product_acceptance"], selected)
+    enable = q["operation_kind"] == "enable_g4_stage1_interactive"
+    paths = (G4_STAGE1_INTERACTIVE_CONTROL if enable
+             else G4_STAGE1_INTERACTIVE_PRODUCT)
+    sources = _digest_map(q["source_sha256"], SOURCE_PATHS | CONTROLLER_PATHS,
+                          "bounded_g4_stage1_interactive_sources")
+    _keys(q["repair_sha256"], paths,
+          "bounded_g4_stage1_interactive_changed_paths")
+    for path, pair in q["repair_sha256"].items():
+        _keys(pair, {"before_sha256", "after_sha256"},
+              "bounded_g4_stage1_interactive_change_pair")
+        _closeout_digest(pair["after_sha256"])
+        previous = (G4_STAGE1_INTERACTIVE_BASE_CONTROL[path] if enable
+                    else pair["before_sha256"])
+        if previous is not None:
+            _closeout_digest(previous)
+        _need(pair["before_sha256"] == previous
+              and pair["after_sha256"] != previous,
+              "bounded_g4_stage1_interactive_change_preimage")
+        if previous is None:
+            _need(trusted_git.run_git(target, "ls-tree", q["base_commit"],
+                                      "--", path) == "",
+                  "bounded_g4_stage1_interactive_addition_exists")
+        else:
+            _need(_sha(trusted_git.run_git_bytes(
+                target, "cat-file", "blob", q["base_commit"] + ":" + path))
+                == previous, "bounded_g4_stage1_interactive_committed_preimage")
+    if enable:
+        _need(q["base_commit"] == selected["commit"]
+              and q["base_tree"] == selected["tree"]
+              and q["activation_acceptance"] is None,
+              "bounded_g4_stage1_interactive_enable_base")
+    else:
+        headers = trusted_git.run_git(target, "cat-file", "commit",
+                                      q["base_commit"]).split("\n\n", 1)[0].splitlines()
+        _need([line for line in headers if line.startswith("parent ")]
+              == ["parent " + selected["commit"]]
+              and [line for line in headers if line.startswith("tree ")]
+              == ["tree " + q["base_tree"]],
+              "bounded_g4_stage1_interactive_activation_parent")
+        activation = _g4_operation_review(
+            read, q["activation_acceptance"], q["base_commit"],
+            "PASS_G4_STAGE1_INTERACTIVE_ENTRY_PUBLICATION_EFFECT")
+        _need(activation.get("tree") == q["base_tree"]
+              and activation.get("protected_refs_unchanged") is True
+              and activation.get("same_attempt_remote_readback_verified") is True,
+              "bounded_g4_stage1_interactive_activation_effect")
+    for path, digest in sources.items():
+        raw = read(source / path, digest)
+        committed = trusted_git.run_git_bytes(
+            target, "cat-file", "blob", q["base_commit"] + ":" + path)
+        if enable and path in G4_STAGE1_INTERACTIVE_CODE:
+            _need(_sha(committed) == G4_STAGE1_INTERACTIVE_BASE_CONTROL[path]
+                  and digest == q["repair_sha256"][path]["after_sha256"],
+                  "bounded_g4_stage1_interactive_prospective_source")
+        else:
+            _need(committed == raw,
+                  "bounded_g4_stage1_interactive_installed_source")
+    inputs = (CONFIGURATION_PATHS | G4_STAGE1_INTERACTIVE_BEFORE
+              | {G4_STAGE1_INTERACTIVE_SCOPE} | paths
+              | SOURCE_PATHS | CONTROLLER_PATHS)
+    pins = _digest_map(q["payload_sha256"], inputs,
+                       "bounded_g4_stage1_interactive_payload_paths")
+    payloads = {path: read(target / path, digest)
+                for path, digest in sorted(pins.items())}
+    before = {path: trusted_git.run_git_bytes(
+        target, "cat-file", "blob", selected["commit"] + ":" + path)
+              for path in G4_STAGE1_INTERACTIVE_BEFORE}
+    _need(all(_sha(before[path]) == G4_STAGE1_INTERACTIVE_BASE_CONTROL[path]
+              for path in (STATE, GATES, OVERLAY, AGENTS)),
+          "bounded_g4_stage1_interactive_control_preimages")
+    scope = _json(payloads[G4_STAGE1_INTERACTIVE_SCOPE])
+    _need(scope["source_sha256"] == sources,
+          "bounded_g4_stage1_interactive_scope_sources")
+    _g4_stage1_interactive_source_reviews(read, scope)
+    expected = build_g4_stage1_interactive_transition(before, scope, backend)
+    _need(all(payloads[path] == raw for path, raw in expected.items()),
+          "bounded_g4_stage1_interactive_transition_delta")
+    for path in inputs - paths:
+        _need(trusted_git.run_git_bytes(target, "cat-file", "blob",
+              q["base_commit"] + ":" + path) == payloads[path],
+              "bounded_g4_stage1_interactive_unowned_changed")
+    for path, pair in q["repair_sha256"].items():
+        _need(_sha(payloads[path]) == pair["after_sha256"],
+              "bounded_g4_stage1_interactive_afterimage")
+    source_review = _g4_operation_review(
+        read, q["source_review"], g4_stage1_interactive_review_subject(q),
+        "PASS_G4_STAGE1_INTERACTIVE_EXACT_ADMISSION_SUBJECT")
+    attested = inputs - paths if q["phase"] == "development" else inputs
+    observation = trusted_git.attest_target_index(
+        target, attested_paths=tuple(sorted(attested)),
+        expected_head=q["expected_head"],
+        expected_index_tree=q["expected_index_tree"], scratch_parent=scratch)
+    _need(trusted_git.run_git(target, "rev-parse", selected["commit"] + "^{tree}")
+          == selected["tree"], "bounded_g4_stage1_interactive_base_tree_changed")
+    if q["phase"] == "development":
+        _need(q["expected_head"] == q["base_commit"]
+              and q["expected_index_tree"] in {q["base_tree"], q["candidate_tree"]},
+              "bounded_g4_stage1_interactive_development_binding")
+    else:
+        headers = trusted_git.run_git(target, "cat-file", "commit",
+                                      q["expected_head"]).split("\n\n", 1)[0].splitlines()
+        _need([line for line in headers if line.startswith("parent ")]
+              == ["parent " + q["base_commit"]]
+              and [line for line in headers if line.startswith("tree ")]
+              == ["tree " + q["candidate_tree"]]
+              and q["expected_index_tree"] == q["candidate_tree"],
+              "bounded_g4_stage1_interactive_committed_binding")
+    for path, snapshot in snapshots.items():
+        _need(trusted_git._read_regular_snapshot(
+            path, maximum_bytes=2 * 1024 * 1024) == snapshot,
+            "bounded_g4_stage1_interactive_snapshot_drift")
+    return BoundedG1BInputs(q, before, payloads,
+                            {"backend_review": backend,
+                             "source_review": source_review}, observation)
+
+
+def _validate_g4_stage1_interactive_loaded_policy(inputs):
+    expected = build_g4_stage1_interactive_transition(
+        inputs.before, _json(inputs.payloads[G4_STAGE1_INTERACTIVE_SCOPE]),
+        inputs.evidence["backend_review"])
+    _need(all(inputs.payloads[path] == raw for path, raw in expected.items()),
+          "bounded_g4_stage1_interactive_transition_delta")
+    try:
+        configuration = raisa_policy.validate_recovery_configuration(
+            documents={Path(path).name: inputs.payloads[path]
+                       for path in CONFIGURATION_PATHS},
+            expected_sha256={Path(path).name: inputs.binding["payload_sha256"][path]
+                             for path in CONFIGURATION_PATHS},
+            agents_text=inputs.payloads[AGENTS].decode("utf-8"),
+            state=_json(inputs.payloads[STATE]))
+    except (raisa_policy.RaisaPolicyError,
+            configuration_core.ConfigurationError) as error:
+        raise BoundedG1BError(error.reason_code) from error
+    return expected, configuration
+
+
+def _g4_stage1_interactive_source_reviews(read, scope):
+    """Authenticate the reviewed UI source and one-WAV child SOURCE only."""
+    rows = (
+         ("interactive_source_binding",
+          "stage1-interactive-source-preparation-v9/source-binding-DRAFT-v9.json",
+         G4_STAGE1_INTERACTIVE_UI_SOURCE_BINDING_SHA256),
+        ("interactive_source_review",
+          "stage1-interactive-source-preparation-v9/"
+          "independent-stage1-ui-v9-source-assembly-review-v1.json",
+         G4_STAGE1_INTERACTIVE_UI_SOURCE_REVIEW_SHA256),
+        ("child_source_binding",
+         "stage1-offline-voice-child-qualification-source-v5/"
+         "source-binding-DRAFT-v5.json",
+         G4_STAGE1_INTERACTIVE_CHILD_SOURCE_BINDING_SHA256),
+        ("child_source_review",
+         "stage1-offline-voice-child-qualification-source-v5/"
+         "independent-voice-container-source-review-v3.json",
+         G4_STAGE1_INTERACTIVE_CHILD_SOURCE_REVIEW_SHA256),
+    )
+    values = {}
+    root = Path(
+        "C:/Users/there/EMR4-migration/20260911-v1/"
+        "current-control-repair-20260912-v1/demo-led-stage1-20261012-v2")
+    for key, suffix, digest in rows:
+        row = scope[key]
+        _keys(row, {"path", "sha256"},
+              "bounded_g4_stage1_interactive_reviewed_source_row")
+        _need(Path(row["path"]) == root / suffix and row["sha256"] == digest,
+              "bounded_g4_stage1_interactive_reviewed_source_pin")
+        values[key] = _json(read(Path(row["path"]), digest))
+    ui_binding = values["interactive_source_binding"]
+    ui_review = values["interactive_source_review"]
+    expected_product = {("docs/demo/stage1-local-demo.md" if row["path"] == "README.md"
+                         else row["path"]): row["after_sha256"]
+                        for row in ui_binding["afterimages"]}
+    _need(ui_binding.get("schema") == "emr4.stage1_interactive_source_preparation.v9"
+          and ui_binding.get("product_afterimage_count") == 12
+          and ui_binding.get("voice_activation") is False
+          and ui_binding.get("qualified_local_voice_identity") is None
+          and ui_binding.get("qualified_browser_profile_review_sha256") is None
+          and len(ui_binding["afterimages"]) == 12
+          and len(expected_product) == 12
+          and set(expected_product) == G4_STAGE1_INTERACTIVE_PRODUCT
+          and ui_review.get("schema") == "emr4.stage1_ui_v9_source_assembly_review.v1"
+          and ui_review.get("status") == "PASS_QUALIFIED_MECHANICAL_SOURCE_ASSEMBLY"
+          and ui_review.get("reviewer_role") == (
+              "independent mechanical source-assembly reviewer; no v9 source authorship")
+          and ui_review.get("subject", {}).get("source_binding_sha256")
+              == G4_STAGE1_INTERACTIVE_UI_SOURCE_BINDING_SHA256
+          and ui_review.get("subject", {}).get("product_afterimage_count") == 12
+          and len(ui_review["subject"]["afterimages"]) == 12
+          and {("docs/demo/stage1-local-demo.md" if row["path"] == "README.md"
+                 else row["path"]): row["sha256"]
+               for row in ui_review["subject"]["afterimages"]} == expected_product
+          and ui_review.get("checks", {}).get(
+              "all_12_afterimage_sha256_and_byte_lengths_matched") is True
+          and ui_review.get("checks", {}).get("manifest_counts_and_path_join_matched") is True
+          and ui_review.get("verification_limits", {}).get(
+              "runtime_or_semantic_safety_acceptance") is False
+          and values["child_source_review"].get("verdict")
+              == "PASS_BOUNDED_V5_OFFLINE_VOICE_CONTAINER_SOURCE"
+          and values["child_source_review"].get("independent") is True
+          and values["child_source_review"].get("implementation_authorship") is False
+          and values["child_source_review"].get("blocking_findings") == []
+          and values["child_source_review"].get("source_binding_sha256")
+              == G4_STAGE1_INTERACTIVE_CHILD_SOURCE_BINDING_SHA256,
+          "bounded_g4_stage1_interactive_source_reviews")
+    return values
+
+
+def build_g4_stage1_interactive_transition(before, scope, backend):
+    """Exact proposed control afterimages; execution remains separately bound."""
+    _keys(before, G4_STAGE1_INTERACTIVE_BEFORE,
+          "bounded_g4_stage1_interactive_before_paths")
+    _keys(scope, {"schema_version", "recorded_at", "selected_base",
+        "required_patient_product_publication_effect_sha256",
+        "interactive_source_binding", "interactive_source_review",
+        "child_source_binding", "child_source_review",
+        "child_qualification_mode", "child_execution_result",
+        "voice_activation", "source_sha256", "product_sha256",
+        "allowed_paths", "allowed_effects", "active_profile",
+        "allowed_task_kind", "runtime_binding_required",
+        "admission_grants_runtime_authority", "demo_document_source",
+        "demo_document_target", "excluded_effects"},
+        "bounded_g4_stage1_interactive_scope_schema")
+    _need(scope["schema_version"] ==
+          "ariadne.g4_stage1_interactive_entry_scope.v1"
+          and scope["selected_base"] == G4_STAGE1_INTERACTIVE_SELECTED_BASE
+          and scope["required_patient_product_publication_effect_sha256"]
+              == G4_STAGE1_INTERACTIVE_BACKEND_EFFECT_SHA256
+          and type(scope["recorded_at"]) is str
+          and datetime.fromisoformat(scope["recorded_at"]).tzinfo is not None,
+          "bounded_g4_stage1_interactive_scope_pins")
+    _digest_map(scope["source_sha256"], SOURCE_PATHS | CONTROLLER_PATHS,
+                "bounded_g4_stage1_interactive_source_map")
+    _need(scope["product_sha256"] is None
+          and scope["allowed_paths"] == sorted(G4_STAGE1_INTERACTIVE_PRODUCT)
+          and scope["allowed_effects"] == sorted(
+              EFFECTS | {"product_behavior_change"})
+          and scope["active_profile"] ==
+              raisa_policy.G4_STAGE1_INTERACTIVE_PROFILE
+          and scope["allowed_task_kind"] == "g4_stage1_local_interactive"
+          and scope["child_qualification_mode"] ==
+              "one_reviewed_synthetic_wav_with_separate_execution_binding"
+          and scope["child_execution_result"] is None
+          and scope["voice_activation"] is False
+          and scope["runtime_binding_required"] is True
+          and scope["admission_grants_runtime_authority"] is False
+          and scope["demo_document_source"] == "README.md"
+          and scope["demo_document_target"] == "docs/demo/stage1-local-demo.md"
+          and scope["excluded_effects"] == [
+              "unreviewed_application_or_database_runtime",
+              "unreviewed_browser_or_microphone_runtime",
+              "unreviewed_voice_child_or_network_egress",
+              "provider_invocation", "real_data_access",
+              "protected_ref_movement", "deployment", "public_listener"],
+          "bounded_g4_stage1_interactive_scope_boundary")
+    _need(G4_STAGE1_INTERACTIVE_SELECTED_BASE is not None
+          and G4_STAGE1_INTERACTIVE_BACKEND_EFFECT_SHA256 is not None
+          and type(backend) is dict
+          and backend.get("commit") ==
+              G4_STAGE1_INTERACTIVE_SELECTED_BASE["commit"]
+          and backend.get("tree") ==
+              G4_STAGE1_INTERACTIVE_SELECTED_BASE["tree"]
+          and backend.get("protected_refs_unchanged") is True
+          and backend.get("same_attempt_remote_readback_verified") is True,
+          "bounded_g4_stage1_interactive_backend_pending")
+    _need(all(_sha(before[p]) == G4_STAGE1_INTERACTIVE_BASE_CONTROL[p]
+              for p in (STATE, GATES, OVERLAY, AGENTS)),
+          "bounded_g4_stage1_interactive_control_prestate")
+    state = _json(before[STATE])
+    gates = _document(before[GATES], GATES)
+    overlay = _document(before[OVERLAY], OVERLAY)
+    _need(state["current_gate"] == "G4"
+          and state["current_gate_status"] == "active_bounded_patient_request"
+          and state["active_profile"] ==
+              raisa_policy.G4_PATIENT_REQUEST_PROFILE
+          and state["g2"]["completion_accepted"] is True
+          and state["g3"]["completion_accepted"] is True
+          and state["feature_work_eligible"] is False
+          and state["product_work_eligible"] is False
+          and state["task_selection"]["allowed_task_kinds"] ==
+              ["g4_patient_request_staff_create"]
+          and next(g for g in gates["gates"] if g["id"] == "G4")["status"]
+              == "active_bounded_patient_request"
+          and overlay["active_profile"] ==
+              raisa_policy.G4_PATIENT_REQUEST_PROFILE
+          and overlay["profiles"][raisa_policy.G4_PATIENT_REQUEST_PROFILE]
+              == raisa_policy.g4_patient_request_profile()
+          and raisa_policy.G4_STAGE1_INTERACTIVE_PROFILE not in overlay["profiles"],
+          "bounded_g4_stage1_interactive_prestate")
+    state.update(observed_at=scope["recorded_at"],
+        current_gate_status="active_bounded_stage1_interactive",
+        active_profile=raisa_policy.G4_STAGE1_INTERACTIVE_PROFILE)
+    state["task_selection"].update(
+        allowed_task_kinds=["g4_stage1_local_interactive"],
+        next_eligible_tranche="G4", next_eligible_now=True,
+        next_tranche_started=True,
+        next_tranche_admission_requires_state_transition=False,
+        next_eligibility_condition=(
+            "only_reviewed_local_synthetic_staff_move_and_patient_request_"
+            "text_interface_with_separate_execution_bindings"))
+    gates["programme"].update(
+        current_gate_status="active_bounded_stage1_interactive",
+        next_eligible_tranche="G4")
+    next(g for g in gates["gates"] if g["id"] == "G4")["status"] = (
+        "active_bounded_stage1_interactive")
+    overlay["active_profile"] = raisa_policy.G4_STAGE1_INTERACTIVE_PROFILE
+    overlay["profiles"][raisa_policy.G4_STAGE1_INTERACTIVE_PROFILE] = (
+        raisa_policy.g4_stage1_interactive_profile())
+    agents = before[AGENTS].decode("utf-8")
+    _need(agents.count(raisa_policy.G4_PATIENT_REQUEST_PREAMBLE) == 1,
+          "bounded_g4_stage1_interactive_agents_preimage")
+    agents = agents.replace(raisa_policy.G4_PATIENT_REQUEST_PREAMBLE,
+                            raisa_policy.G4_STAGE1_INTERACTIVE_PREAMBLE, 1)
+    agents += ("\n## Current bounded G4 Stage 1 local interactive tranche\n\n"
+        "The staff move and patient request/create backends require their own "
+        "exact accepted publication and runtime evidence. This profile admits "
+        "only the reviewed local synthetic text interface for both journeys. "
+        "Voice remains disabled; one synthetic WAV child qualification needs "
+        "a separate reviewed source and execution binding. Its accepted "
+        "result is required for a later reviewed voice activation, not entry. "
+        "Every app, DB, browser or microphone session needs its own finite "
+        "binding and independent effect review. No provider, real-data, "
+        "public-listener, deployment or protected effect is authorised.\n")
+    agents += ("\nOwner outcome-reliability direction supplements both synthetic "
+        "appointment journeys and genuine voice requirements. Prepare one "
+        "small outcome-evaluation driver using independently reviewed ordinary "
+        "scenarios and an outcome grader, and a compact optional Reliability "
+        "Lab in the existing demo. Use standing finite budgets only through "
+        "separate reviewed bindings; preserve protected evidence, real-data, "
+        "provider/audio-processing, public-exposure and protected-ref "
+        "exclusions. The actual-model lane remains NOT_RUN until its exact "
+        "route, data, purpose, retention, calls and budget are separately "
+        "authorized and admitted. The UI admission remains limited to twelve "
+        "reviewed UI paths and grants no evaluation, model, browser, audio, "
+        "application or database runtime.\n")
+    return {
+        STATE: (json.dumps(state, indent=2, ensure_ascii=False) + "\n").encode(),
+        GATES: yaml.safe_dump(gates, sort_keys=False, allow_unicode=True).encode(),
+        OVERLAY: yaml.safe_dump(overlay, sort_keys=False, allow_unicode=True).encode(),
+        AGENTS: agents.encode(),
+        G4_STAGE1_INTERACTIVE_SCOPE: _canonical(scope) + b"\n",
+    }

@@ -39,6 +39,8 @@ G4_STAFF_MOVE_PROFILE = "G4_APPOINTMENT_STAFF_MOVE"
 G4_STAFF_MOVE_PREAMBLE = "Gate G4 is active only for an exact separately admitted synthetic staff time move; patient request, providers and protected effects remain closed"
 G4_PATIENT_REQUEST_PROFILE = "G4_PATIENT_REQUEST_STAFF_CREATE"
 G4_PATIENT_REQUEST_PREAMBLE = "Gate G4 is active only for a separately admitted synthetic patient request and staff-confirmed create; providers, audio, real data and protected effects remain closed"
+G4_STAGE1_INTERACTIVE_PROFILE = "G4_STAGE1_LOCAL_INTERACTIVE"
+G4_STAGE1_INTERACTIVE_PREAMBLE = "Gate G4 permits separately admitted local synthetic staff-move and patient-request text interaction only; voice qualification and each app, DB, browser or microphone effect require separate reviewed bindings"
 G3_CONTRACT_PROFILE = "G3_APPOINTMENT_CONTRACT_CONVERGENCE"
 G3_CONTRACT_PREAMBLE = "Gate G3 is active only for separately admitted appointment contract convergence; service effects remain closed"
 G3_OFFLINE_PROFILE = "G3_OFFLINE_APPOINTMENT_ENTRY"
@@ -58,6 +60,7 @@ BOUNDED_PROFILE_PREAMBLES = MappingProxyType({
     G3_READ_RENDER_PROFILE: G3_READ_RENDER_PREAMBLE,
     G4_STAFF_MOVE_PROFILE: G4_STAFF_MOVE_PREAMBLE,
     G4_PATIENT_REQUEST_PROFILE: G4_PATIENT_REQUEST_PREAMBLE,
+    G4_STAGE1_INTERACTIVE_PROFILE: G4_STAGE1_INTERACTIVE_PREAMBLE,
 })
 
 ADMITTED_PROGRAMME_GATE = 'G0.8'
@@ -927,7 +930,8 @@ _SHAPE_79 = ("object", (
     ('G3_APPOINTMENT_READ_RENDER', _G3_READ_RENDER_PROFILE_SHAPE),
     ('G4_APPOINTMENT_STAFF_MOVE', _SHAPE_78),
     ('G4_PATIENT_REQUEST_STAFF_CREATE', _SHAPE_78),
-), ('G1E_CONFIGURATION_CORE_ACTIVE', 'G2_BASELINE_REPAIR_ACTIVE', 'G2_ACCEPTED_CLOSED', 'G3_OFFLINE_APPOINTMENT_ENTRY', 'G3_APPOINTMENT_CONTRACT_CONVERGENCE', 'G3_APPOINTMENT_READ_RENDER', 'G4_APPOINTMENT_STAFF_MOVE', 'G4_PATIENT_REQUEST_STAFF_CREATE'))
+    ('G4_STAGE1_LOCAL_INTERACTIVE', _SHAPE_78),
+), ('G1E_CONFIGURATION_CORE_ACTIVE', 'G2_BASELINE_REPAIR_ACTIVE', 'G2_ACCEPTED_CLOSED', 'G3_OFFLINE_APPOINTMENT_ENTRY', 'G3_APPOINTMENT_CONTRACT_CONVERGENCE', 'G3_APPOINTMENT_READ_RENDER', 'G4_APPOINTMENT_STAFF_MOVE', 'G4_PATIENT_REQUEST_STAFF_CREATE', 'G4_STAGE1_LOCAL_INTERACTIVE'))
 
 _SHAPE_80 = ("object", (
     ('expected_branch', _SHAPE_1),
@@ -1706,6 +1710,36 @@ def g4_patient_request_profile() -> dict:
     profile['allowed_effects'] = sorted({*profile['allowed_effects'], 'migration_change'})
     profile['forbidden_effects'] = [effect for effect in profile['forbidden_effects']
                                     if effect not in profile['allowed_effects']]
+    return profile
+
+
+G4_STAGE1_INTERACTIVE_PRODUCT_PATHS = (
+    "static/demo/stage1-interactive.html",
+    "static/demo/stage1-interactive.css",
+    "static/demo/stage1-interactive.js",
+    "static/demo/stage1-local-voice.js",
+    "stage1_demo_adapter_core.py",
+    "stage1_demo_http.py",
+    "stage1_demo_voice.py",
+    "tests/test_stage1_demo_adapter_core.py",
+    "tests/test_stage1_demo_http.py",
+    "tests/test_stage1_demo_voice.py",
+    "tests/test_stage1_spoken_reply_source.py",
+    "docs/demo/stage1-local-demo.md",
+)
+
+
+def g4_stage1_interactive_profile() -> dict:
+    """Distinct source scope; no execution authority follows admission."""
+    profile = g4_staff_move_profile()
+    profile.update(
+        profile_kind="bounded_G4_stage1_local_interactive",
+        expected_gate_status="active_bounded_stage1_interactive",
+        admitted_task_classes=["g4_stage1_local_interactive"],
+        allowed_paths=list(G4_STAGE1_INTERACTIVE_PRODUCT_PATHS),
+        scope_behavior="bounded_G4_stage1_local_interactive",
+        scope_file="orchestration/programme/g4-stage1-interactive-entry-scope.json",
+    )
     return profile
 
 
@@ -2597,6 +2631,16 @@ def validate_recovery_configuration(*, documents: dict[str, bytes], expected_sha
                 or state["g3"]["product_runtime_authorized"] is not False
                 or state["task_selection"]["allowed_task_kinds"] != ["g4_patient_request_staff_create"]):
             raise RaisaPolicyError("configuration_g4_patient_request_profile_invalid")
+    if state["active_profile"] == G4_STAGE1_INTERACTIVE_PROFILE:
+        if (overlay["profiles"].get(G4_STAGE1_INTERACTIVE_PROFILE) != g4_stage1_interactive_profile()
+                or state["programme_mode"] != "convergence" or state["current_gate"] != "G4"
+                or state["current_gate_status"] != "active_bounded_stage1_interactive"
+                or state["g2"]["completion_accepted"] is not True or state["g2"]["status"] != "passed"
+                or state["feature_work_eligible"] is not False or state["product_work_eligible"] is not False
+                or state["g3"]["completion_accepted"] is not True
+                or state["g3"]["product_runtime_authorized"] is not False
+                or state["task_selection"]["allowed_task_kinds"] != ["g4_stage1_local_interactive"]):
+            raise RaisaPolicyError("configuration_g4_stage1_interactive_profile_invalid")
     if state["active_profile"] == G3_CONTRACT_PROFILE:
         if (overlay["profiles"][G3_CONTRACT_PROFILE] != g3_appointment_contract_profile()
                 or state["programme_mode"] != 'convergence' or state["current_gate"] != 'G3'

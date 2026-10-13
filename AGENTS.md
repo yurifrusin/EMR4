@@ -1,5 +1,5 @@
 # EMERGENCY RAISA/ARIADNE RECOVERY PRECEDENCE
-Gate G4 is active only for a separately admitted synthetic patient request and staff-confirmed create; providers, audio, real data and protected effects remain closed
+Gate G4 permits separately admitted local synthetic staff-move and patient-request text interaction only; voice qualification and each app, DB, browser or microphone effect require separate reviewed bindings
 Missing, malformed, stale, or contradictory programme state is a hard stop.
 
 # Identity-Specific Instruction Relay
@@ -217,3 +217,9 @@ The six G3 exit criteria are independently accepted for the exact synthetic read
 ## Current bounded G4 patient-request tranche
 
 The seeded staff move is separately accepted for its exact published subject. This profile permits source work for one synthetic patient request and a separately staff-signed create using the existing server-owned command and audit flow. It grants no application or database runtime without a reviewed binding, and no patient principal, provider, audio, real-data, deployment or protected-ref effect.
+
+## Current bounded G4 Stage 1 local interactive tranche
+
+The staff move and patient request/create backends require their own exact accepted publication and runtime evidence. This profile admits only the reviewed local synthetic text interface for both journeys. Voice remains disabled; one synthetic WAV child qualification needs a separate reviewed source and execution binding. Its accepted result is required for a later reviewed voice activation, not entry. Every app, DB, browser or microphone session needs its own finite binding and independent effect review. No provider, real-data, public-listener, deployment or protected effect is authorised.
+
+Owner outcome-reliability direction supplements both synthetic appointment journeys and genuine voice requirements. Prepare one small outcome-evaluation driver using independently reviewed ordinary scenarios and an outcome grader, and a compact optional Reliability Lab in the existing demo. Use standing finite budgets only through separate reviewed bindings; preserve protected evidence, real-data, provider/audio-processing, public-exposure and protected-ref exclusions. The actual-model lane remains NOT_RUN until its exact route, data, purpose, retention, calls and budget are separately authorized and admitted. The UI admission remains limited to twelve reviewed UI paths and grants no evaluation, model, browser, audio, application or database runtime.
