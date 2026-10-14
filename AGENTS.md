@@ -1,5 +1,5 @@
 # EMERGENCY RAISA/ARIADNE RECOVERY PRECEDENCE
-Gate G4 permits separately admitted local synthetic staff-move and patient-request text interaction only; voice qualification and each app, DB, browser or microphone effect require separate reviewed bindings
+Gate G4 permits only the separately reviewed local synthetic Stage 1 reliability and interactive voice source successor; every app, DB, browser, microphone or child execution requires its own finite binding
 Missing, malformed, stale, or contradictory programme state is a hard stop.
 
 # Identity-Specific Instruction Relay
@@ -223,3 +223,7 @@ The seeded staff move is separately accepted for its exact published subject. Th
 The staff move and patient request/create backends require their own exact accepted publication and runtime evidence. This profile admits only the reviewed local synthetic text interface for both journeys. Voice remains disabled; one synthetic WAV child qualification needs a separate reviewed source and execution binding. Its accepted result is required for a later reviewed voice activation, not entry. Every app, DB, browser or microphone session needs its own finite binding and independent effect review. No provider, real-data, public-listener, deployment or protected effect is authorised.
 
 Owner outcome-reliability direction supplements both synthetic appointment journeys and genuine voice requirements. Prepare one small outcome-evaluation driver using independently reviewed ordinary scenarios and an outcome grader, and a compact optional Reliability Lab in the existing demo. Use standing finite budgets only through separate reviewed bindings; preserve protected evidence, real-data, provider/audio-processing, public-exposure and protected-ref exclusions. The actual-model lane remains NOT_RUN until its exact route, data, purpose, retention, calls and budget are separately authorized and admitted. The UI admission remains limited to twelve reviewed UI paths and grants no evaluation, model, browser, audio, application or database runtime.
+
+## Current bounded G4 Stage 1 source successor
+
+Only the exact independently reviewed synthetic Reliability Lab and offline interactive voice source afterimages are eligible. The accepted UI12 publication and Native08 generated-silence result remain historical dependencies, not voice acceptance. Every app, DB, browser, microphone, model or child effect requires separate finite review and execution authority. No real data, provider, public listener, deployment or protected effect is authorized.

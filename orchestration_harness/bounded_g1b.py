@@ -3375,6 +3375,8 @@ def _validate_g3_read_render_loaded_policy(inputs):
 
 
 def operation_effects(kind: str) -> frozenset[str]:
+    if kind == "implement_g4_stage1_successor":
+        return EFFECTS | {"product_behavior_change"}
     if kind == "implement_g4_stage1_interactive":
         return EFFECTS | {"product_behavior_change"}
     if kind == "implement_g4_patient_request":
@@ -3414,6 +3416,16 @@ def operation_effects(kind: str) -> frozenset[str]:
 
 def operation_paths(kind: str, binding: dict | None = None) -> frozenset[str]:
     _need(type(kind) is str and kind in OPERATION_PATHS, "bounded_g1b_operation_kind")
+    if kind == "implement_g4_stage1_successor":
+        _need(type(binding) is dict
+              and binding.get("operation_kind") == kind
+              and type(binding.get("repair_sha256")) is dict,
+              "bounded_g4_stage1_successor_binding_required")
+        selected = frozenset(binding["repair_sha256"])
+        _need(selected == set(G4_STAGE1_SUCCESSOR_PRODUCT_AFTERIMAGES)
+              and selected <= G4_STAGE1_SUCCESSOR_PRODUCT,
+              "bounded_g4_stage1_successor_changed_paths")
+        return selected
     if kind in {"repair_g2_batch", "repair_g2_migration", "repair_g2_audio_privacy",
                 "repair_g2_patient_binding", "repair_g2_consultation_atomicity", "repair_g2_clinical_authority",
                  "repair_g2_migration_downgrade_guard", "repair_g2_appointment_concurrency",
@@ -3431,6 +3443,10 @@ def operation_paths(kind: str, binding: dict | None = None) -> frozenset[str]:
 
 def _operation(kind: str, binding: dict | None = None) -> dict:
     paths = operation_paths(kind, binding)
+    if kind in G4_STAGE1_SUCCESSOR_KINDS:
+        return {"paths": paths, "g4_stage1_successor": True,
+                "profile": raisa_policy.G4_STAGE1_SUCCESSOR_PROFILE,
+                "gate": "G4", "limits": G4_STAGE1_SUCCESSOR_LIMITS}
     if kind in G4_STAGE1_INTERACTIVE_KINDS:
         return {"paths": paths, "g4_stage1_interactive": True,
                 "profile": raisa_policy.G4_STAGE1_INTERACTIVE_PROFILE,
@@ -6293,6 +6309,9 @@ def load_bounded_g1b_inputs(context: BoundedG1BContext) -> BoundedG1BInputs:
         return snapshot[1]
 
     binding = _json(read(binding_path, context.expected_binding_sha256))
+    if binding.get("operation_kind") in G4_STAGE1_SUCCESSOR_KINDS:
+        return _load_g4_stage1_successor_inputs(
+            context, target, source, evidence_root, scratch, binding, read, snapshots)
     if binding.get("operation_kind") in G4_STAGE1_INTERACTIVE_KINDS:
         return _load_g4_stage1_interactive_inputs(
             context, target, source, evidence_root, scratch, binding, read, snapshots)
@@ -6453,6 +6472,8 @@ def load_bounded_g1b_inputs(context: BoundedG1BContext) -> BoundedG1BInputs:
 
 def _validate_loaded_policy(inputs: BoundedG1BInputs) -> tuple[dict[str, bytes], configuration_core.ValidatedConfiguration | None]:
     operation = _operation(inputs.binding["operation_kind"], inputs.binding)
+    if operation.get("g4_stage1_successor"):
+        return _validate_g4_stage1_successor_loaded_policy(inputs)
     if operation.get("g4_stage1_interactive"):
         return _validate_g4_stage1_interactive_loaded_policy(inputs)
     if operation.get("g4_patient_request"):
@@ -7474,6 +7495,103 @@ OPERATION_PATHS.update(
     enable_g4_stage1_interactive=G4_STAGE1_INTERACTIVE_CONTROL,
     implement_g4_stage1_interactive=G4_STAGE1_INTERACTIVE_PRODUCT)
 
+# New source-only successor. Its Lab/voice evidence and eight product hashes
+# are exact; the transition scope and control afterimages are still incomplete.
+G4_STAGE1_SUCCESSOR_SCOPE = "orchestration/programme/g4-stage1-successor-entry-scope.json"
+G4_STAGE1_SUCCESSOR_TEST = "tests/test_g4_stage1_successor_entry.py"
+G4_STAGE1_SUCCESSOR_CODE = frozenset({
+    "orchestration_harness/bounded_g1b.py",
+    "orchestration_harness/raisa_policy.py"})
+G4_STAGE1_SUCCESSOR_CONTROL = frozenset({
+    STATE, OVERLAY, AGENTS, G4_STAGE1_SUCCESSOR_SCOPE,
+    G4_STAGE1_SUCCESSOR_TEST}) | G4_STAGE1_SUCCESSOR_CODE
+G4_STAGE1_SUCCESSOR_PRODUCT = frozenset(
+    raisa_policy.G4_STAGE1_SUCCESSOR_PRODUCT_PATHS)
+G4_STAGE1_SUCCESSOR_REQUIRED_PRODUCT = frozenset({
+    "docs/demo/stage1-reliability-results.json",
+    "tests/test_stage1_reliability_lab.py",
+    "run_container_child_once.py",
+    "tests/test_stage1_contained_voice_adapter.py"})
+G4_STAGE1_SUCCESSOR_KINDS = frozenset({
+    "enable_g4_stage1_successor", "implement_g4_stage1_successor"})
+G4_STAGE1_SUCCESSOR_LIMITS = (
+    "exact reviewed successor source paths and afterimages only",
+    "entry admission grants no application, DB, browser, microphone, model or voice child execution",
+    "Native08 qualifies one historical generated-silence child only",
+    "patient and staff interactive clips require a separate finite two-slot execution binding",
+    "no provider, real data, public listener, deployment or protected effects")
+G4_STAGE1_SUCCESSOR_BASE = {
+    "commit": "caa0d7c16e0b33bd00ad45e428c347497815cba2",
+    "tree": "56d1d739c56207e29cf199765f7f139f14ce94b0"}
+G4_STAGE1_SUCCESSOR_BASE_CONTROL = {
+    STATE: "53d41edf09dcbea2039137a63472cfcc104159e04921d909f131cff86237d509",
+    GATES: "16206eaa4ee6af4785d9c2bff9e68c9e277da88eda714fc85b5227394d03228d",
+    OVERLAY: "ca14354c0b9b5b7a2d140a4cb527c414c6e07c8d4bfeeacf7f6862669e57197d",
+    AGENTS: "9b0fe23bd8a1aa48c3106ef2561f9cdfd35d0e6351d4e17d02b43aea5ed4bdf0",
+    "orchestration_harness/bounded_g1b.py":
+        "206d978b25044fbff4d890acbcf4b9b6947a3761a1886089606175f473fa70b8",
+    "orchestration_harness/raisa_policy.py":
+        "27bb14b6f22a557d27a5994e213f65cec4a2a398c75ec661ae45c45ab77a4895",
+    G4_STAGE1_SUCCESSOR_SCOPE: None,
+    G4_STAGE1_SUCCESSOR_TEST: None,
+}
+G4_STAGE1_SUCCESSOR_UI12_EFFECT_SHA256 = (
+    "7453f0a1819cf350464687599be78477d8d0cccde072b322cf6539bfdad476df")
+G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT = Path(
+    "C:/Users/there/EMR4-migration/20260911-v1/"
+    "current-control-repair-20260912-v1/demo-led-stage1-20261012-v2")
+G4_STAGE1_SUCCESSOR_COMBINED_SOURCE_PATH = (
+    G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT /
+    "stage1-interactive-successor-entry-source-v5/"
+    "combined-product-source-binding-INERT-v5.json")
+G4_STAGE1_SUCCESSOR_COMBINED_SOURCE_SHA256 = (
+    "a5b7f14c1be32d0877c45dd15cbbffe8ce9049b0f38669ad6ff6423f77f97d12")
+G4_STAGE1_SUCCESSOR_LAB_REVIEW_PATH = (
+    G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT /
+    "stage1-reliability-lab-source-v7/independent-source-review-v7.json")
+G4_STAGE1_SUCCESSOR_LAB_REVIEW_SHA256 = (
+    "b0030c1196817ffa63f8f2478d25c55a6defefc6acea06d1eb902c399a4e90a7")
+G4_STAGE1_SUCCESSOR_VOICE_REVIEW_PATH = (
+    G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT /
+    "stage1-voice-interactive-seam-source-v4/independent-source-review-v4.json")
+G4_STAGE1_SUCCESSOR_VOICE_REVIEW_SHA256 = (
+    "cd5c9fa4d768bd1adf74c9ac586fc3de0916ccf6418a82666fbd8c93c73a60f3")
+G4_STAGE1_SUCCESSOR_PRODUCT_AFTERIMAGES = {
+    "docs/demo/stage1-reliability-results.json":
+        "51ef618862352719a331237d286297dba2f4c0e6155d19c6d397ac141bfd3065",
+    "stage1_demo_http.py":
+        "11281066380016df885d24b34118931da53dabbb14e7792d2b4da1031cea8c37",
+    "static/demo/stage1-interactive.html":
+        "d02d75d1aae8d7faaa598cfb0a599c8f133984fb868bcd8cdefa5a029d740223",
+    "static/demo/stage1-interactive.js":
+        "3f24d7c44d4445b4c0ba1806d0de0c4b00d82793b995ccf78a054de52dfba790",
+    "tests/test_stage1_reliability_lab.py":
+        "35c28ccd5ee88926a71c5e2c0145a30e61d2071c77fd811b757786126f07fe4e",
+    "run_container_child_once.py":
+        "810ff65f1c7a71d85ed2c9924037f8173e85794320b2fba88e85eb209bc77529",
+    "stage1_demo_voice.py":
+        "6eff644c50800dde001901c1fe0ac3a670feb01d4d44f38546283ce1f17c59ea",
+    "tests/test_stage1_contained_voice_adapter.py":
+        "78c08ff6348ea990fafa8d0df0bafcd1dacf4759b0d89be3f567c4cc00a5cf71",
+}
+G4_STAGE1_SUCCESSOR_PRODUCT_PREIMAGES = {
+    "docs/demo/stage1-reliability-results.json": None,
+    "stage1_demo_http.py":
+        "2ef5bc228d056067566a2909d797b117a3c6228941f8e25b2a9111c91f3cae3a",
+    "static/demo/stage1-interactive.html":
+        "8b052201f26691ad80dfb1a50a9a8a4eae17a67b35a1da2871df9b4cacc5286a",
+    "static/demo/stage1-interactive.js":
+        "c15d97f29470fa8cf2813cc368eb2b206dfe44fa6b880945674752b5eec82fe4",
+    "tests/test_stage1_reliability_lab.py": None,
+    "run_container_child_once.py": None,
+    "stage1_demo_voice.py":
+        "eec1f4f37d1675b6719643fd03aebe0f16892ad8f29ef72260935e238627335a",
+    "tests/test_stage1_contained_voice_adapter.py": None,
+}
+OPERATION_PATHS.update(
+    enable_g4_stage1_successor=G4_STAGE1_SUCCESSOR_CONTROL,
+    implement_g4_stage1_successor=G4_STAGE1_SUCCESSOR_PRODUCT)
+
 
 def g4_stage1_interactive_review_subject(q):
     return _sha(_canonical({key: q[key] for key in (
@@ -7893,3 +8011,510 @@ def build_g4_stage1_interactive_transition(before, scope, backend):
         AGENTS: agents.encode(),
         G4_STAGE1_INTERACTIVE_SCOPE: _canonical(scope) + b"\n",
     }
+
+
+def g4_stage1_successor_review_subject(q):
+    return _sha(_canonical({key: q[key] for key in (
+        "operation_kind", "base_commit", "base_tree", "candidate_tree",
+        "source_sha256", "payload_sha256", "repair_sha256",
+        "ui12_publication_review", "lab_source_review", "voice_source_review",
+        "combined_product_source_binding")}))
+
+
+def _g4_stage1_successor_review(read, row, pinned, verdict, subject=None):
+    _keys(row, {"path", "sha256"}, "bounded_g4_stage1_successor_review_row")
+    _closeout_digest(row["sha256"])
+    _need(type(row["path"]) is str and Path(row["path"]).is_absolute()
+          and (pinned is None or row["sha256"] == pinned),
+          "bounded_g4_stage1_successor_review_pin")
+    review = _json(read(Path(row["path"]), row["sha256"]))
+    _need(review.get("independent") is True
+          and review.get("implementation_authorship") is False
+          and review.get("blocking_findings") == []
+          and review.get("verdict") == verdict
+          and type(review.get("reviewer_agent")) is str
+          and review["reviewer_agent"].startswith("/root/")
+          and (subject is None or review.get("subject_sha256") == subject),
+          "bounded_g4_stage1_successor_independent_review")
+    return review
+
+
+def _g4_stage1_successor_source_evidence(read, lab, voice, combined):
+    """Reconcile the two accepted source-only reviews to the exact eight files."""
+    lab_paths = frozenset({
+        "docs/demo/stage1-reliability-results.json",
+        "stage1_demo_http.py", "static/demo/stage1-interactive.html",
+        "static/demo/stage1-interactive.js",
+        "tests/test_stage1_reliability_lab.py"})
+    voice_paths = frozenset(G4_STAGE1_SUCCESSOR_PRODUCT_AFTERIMAGES) - lab_paths
+    _need(lab.get("schema") == "emr4.stage1_reliability_lab_source_review.v7"
+          and lab.get("status") == "PASS_SOURCE_ONLY"
+          and lab.get("verdict") == "PASS_SOURCE_ONLY"
+          and lab.get("independent") is True
+          and lab.get("implementation_authorship") is False
+          and lab.get("source_accepted") is True
+          and lab.get("execution_authorized") is False
+          and lab.get("publication_authorized") is False
+          and lab.get("tests_executed") is False
+          and lab.get("runtime_effect") is False
+          and lab.get("blocking_findings") == []
+          and lab.get("reviewer_agent") == "/root/stage1_ui21_launch_review"
+          and lab.get("source_binding_sha256")
+              == "0845cb532ae78184922496313fc84ce58d55b7cc5a8e8ac9c5902687fbffe9dd"
+          and lab.get("source_binding_bytes") == 4432
+          and lab.get("predecessor_v6_source_review_sha256")
+              == "bee2f1a65682b0add35cad7f2811854b1a07c2a30d26306e645fa12727383bb8"
+          and lab.get("predecessor_v6_status") == "NONPASS_SOURCE_ONLY"
+          and lab.get("authored_catalog_sha256")
+              == "792b8d4cb627b721f607d1548b757f0b1960b2a2aa0b1592cd3674bc71bb071e"
+          and lab.get("authored_catalog_bytes") == 56319
+          and lab.get("report_sha256")
+              == G4_STAGE1_SUCCESSOR_PRODUCT_AFTERIMAGES[
+                  "docs/demo/stage1-reliability-results.json"]
+          and lab.get("report_bytes") == 7806
+          and lab.get("base_product_head") == G4_STAGE1_SUCCESSOR_BASE["commit"]
+          and lab.get("base_product_tree") == G4_STAGE1_SUCCESSOR_BASE["tree"]
+          and lab.get("proposed_product_sha256") == {
+              path: G4_STAGE1_SUCCESSOR_PRODUCT_AFTERIMAGES[path]
+              for path in lab_paths},
+          "bounded_g4_stage1_successor_lab_source_review")
+    lab_binding_path = (G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT /
+        "stage1-reliability-lab-source-v7/source-binding-INERT-v7.json")
+    lab_binding = _json(read(
+        lab_binding_path,
+        "0845cb532ae78184922496313fc84ce58d55b7cc5a8e8ac9c5902687fbffe9dd"))
+    _need(lab_binding.get("schema")
+              == "emr4.stage1_reliability_lab_source_binding.v7"
+          and lab_binding.get("status")
+              == "INERT_SOURCE_ONLY_PENDING_INDEPENDENT_V7_REVIEW"
+          and lab_binding.get("operative") is False
+          and lab_binding.get("attempts") == 0
+          and lab_binding.get("tests_executed") is False
+          and lab_binding.get("runtime_authorized") is False
+          and lab_binding.get("report_evidence_through")
+              == "NATIVE08_REVIEWED_PRE_DOCKER"
+          and lab_binding.get("authored_catalog_v4_sha256")
+              == lab["authored_catalog_sha256"]
+          and lab_binding.get("authored_catalog_v4_bytes") == 56319
+          and lab_binding.get("owned_product_afterimages") == {
+              path: {"sha256": G4_STAGE1_SUCCESSOR_PRODUCT_AFTERIMAGES[path],
+                     "bytes": lab["product_bytes"][path]}
+              for path in lab_paths},
+          "bounded_g4_stage1_successor_lab_binding")
+    subject = voice.get("subject")
+    _need(voice.get("schema")
+              == "emr4.stage1_interactive_voice_independent_source_review.v4"
+          and voice.get("status") == "PASS_SOURCE_ONLY"
+          and voice.get("verdict") == "PASS_SOURCE_ONLY"
+          and voice.get("independent") is True
+          and voice.get("implementation_authorship") is False
+          and voice.get("source_accepted") is True
+          and voice.get("execution_authorized") is False
+          and voice.get("runtime_attempts_authorized") == 0
+          and voice.get("actual_spoken_journeys_accepted") == 0
+          and voice.get("tests_executed") is False
+          and voice.get("runtime_effect") is False
+          and voice.get("blocking_findings") == []
+          and voice.get("reviewer") == "/root/stage1_ui30_independent_review"
+          and type(subject) is dict
+          and subject.get("product_base_commit")
+              == G4_STAGE1_SUCCESSOR_BASE["commit"]
+          and subject.get("product_base_tree")
+              == G4_STAGE1_SUCCESSOR_BASE["tree"]
+          and subject.get("inert_binding_sha256")
+              == "6f09279435e316dc53f306b2bcce4d1a199d4bc45409825f1dc8454ce749f754"
+          and subject.get("lower_runner_sha256")
+              == G4_STAGE1_SUCCESSOR_PRODUCT_AFTERIMAGES["run_container_child_once.py"]
+          and subject.get("voice_afterimage_sha256")
+              == G4_STAGE1_SUCCESSOR_PRODUCT_AFTERIMAGES["stage1_demo_voice.py"]
+          and subject.get("direct_test_sha256")
+              == G4_STAGE1_SUCCESSOR_PRODUCT_AFTERIMAGES[
+                  "tests/test_stage1_contained_voice_adapter.py"],
+          "bounded_g4_stage1_successor_voice_source_review")
+    _need(combined.get("schema")
+              == "emr4.stage1_interactive_successor_combined_product_source.v1"
+          and combined.get("status")
+              == "INERT_SOURCE_ONLY_PENDING_COMBINED_ADMISSION_REVIEW"
+          and combined.get("operative") is False
+          and combined.get("attempts") == 0
+          and combined.get("base_commit") == G4_STAGE1_SUCCESSOR_BASE["commit"]
+          and combined.get("base_tree") == G4_STAGE1_SUCCESSOR_BASE["tree"]
+          and combined.get("afterimage_count") == 8
+          and combined.get("required_new_paths")
+              == sorted(G4_STAGE1_SUCCESSOR_REQUIRED_PRODUCT)
+          and type(combined.get("afterimages")) is dict
+          and set(combined["afterimages"])
+              == set(G4_STAGE1_SUCCESSOR_PRODUCT_AFTERIMAGES)
+          and combined.get("lab_source_binding", {}).get("sha256")
+              == lab["source_binding_sha256"]
+          and combined.get("voice_source_binding", {}).get("sha256")
+              == subject["inert_binding_sha256"]
+          and combined.get("voice_activation") is False
+          and combined.get("admission_grants_runtime_authority") is False
+          and combined.get("source_reviews_required") is True
+          and combined.get("control_admission_required") is True
+          and combined.get("tests") == "NOT_RUN"
+          and combined.get("native07") == "NONPASS_PRESERVED",
+          "bounded_g4_stage1_successor_combined_binding")
+    for path, row in combined["afterimages"].items():
+        lane = "lab" if path in lab_paths else "voice"
+        directory = ("stage1-reliability-lab-source-v7" if lane == "lab"
+                     else "stage1-voice-interactive-seam-source-v4")
+        _need(type(row) is dict
+              and set(row) == {
+                  "source", "after_sha256", "bytes", "owner",
+                  "review_lane", "before_sha256"}
+              and row["review_lane"] == lane
+              and Path(row["source"])
+                  == G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT / directory / path
+              and row["after_sha256"]
+                  == G4_STAGE1_SUCCESSOR_PRODUCT_AFTERIMAGES[path]
+              and row["before_sha256"]
+                  == G4_STAGE1_SUCCESSOR_PRODUCT_PREIMAGES[path]
+              and (lane != "lab" or row["bytes"] == lab["product_bytes"][path])
+              and type(row["bytes"]) is int and 0 < row["bytes"] <= 2 * 1024 * 1024,
+              "bounded_g4_stage1_successor_combined_afterimage")
+        source_raw = read(Path(row["source"]), row["after_sha256"])
+        _need(len(source_raw) == row["bytes"],
+              "bounded_g4_stage1_successor_source_bytes")
+        if path == "docs/demo/stage1-reliability-results.json":
+            report = _json(source_raw)
+            _need(report.get("schema")
+                      == "emr4.stage1_reliability_progress_report.v2"
+                  and report.get("evidence_through")
+                      == "NATIVE08_REVIEWED_PRE_DOCKER"
+                  and report.get("authored_catalog_sha256")
+                      == lab["authored_catalog_sha256"]
+                  and report.get("whole_journey_grade") == "UNKNOWN"
+                  and report.get("genuine_ptt_voice") == "NOT_RUN",
+                  "bounded_g4_stage1_successor_lab_report_scope")
+
+
+def build_g4_stage1_successor_transition(before, scope, ui12):
+    """Exact same-G4 control transition; source entry grants no runtime."""
+    _keys(before, {STATE, GATES, OVERLAY, AGENTS},
+          "bounded_g4_stage1_successor_before")
+    _keys(scope, {"schema_version", "recorded_at", "selected_base",
+        "ui12_publication_review", "lab_source_review", "voice_source_review",
+        "combined_product_source_binding",
+        "source_sha256", "product_sha256", "allowed_paths", "allowed_effects",
+        "active_profile", "allowed_task_kind", "runtime_binding_required",
+        "admission_grants_runtime_authority", "voice_activation",
+        "native08_dependency_only", "excluded_effects"},
+        "bounded_g4_stage1_successor_scope_schema")
+    _need(scope["schema_version"] == "ariadne.g4_stage1_successor_entry_scope.v1"
+          and scope["selected_base"] == G4_STAGE1_SUCCESSOR_BASE
+          and type(scope["recorded_at"]) is str
+          and datetime.fromisoformat(scope["recorded_at"]).tzinfo is not None
+          and scope["allowed_paths"] == sorted(G4_STAGE1_SUCCESSOR_PRODUCT)
+          and scope["allowed_effects"] == sorted(EFFECTS | {"product_behavior_change"})
+          and scope["active_profile"] == raisa_policy.G4_STAGE1_SUCCESSOR_PROFILE
+          and scope["allowed_task_kind"] == "g4_stage1_local_successor"
+          and scope["runtime_binding_required"] is True
+          and scope["admission_grants_runtime_authority"] is False
+          and scope["voice_activation"] is False
+          and scope["native08_dependency_only"] is True
+          and scope["excluded_effects"] == [
+              "unreviewed_application_or_database_runtime",
+              "unreviewed_browser_or_microphone_runtime",
+              "unreviewed_voice_child_or_network_egress",
+              "provider_invocation", "real_data_access",
+              "protected_ref_movement", "deployment", "public_listener"],
+          "bounded_g4_stage1_successor_scope_boundary")
+    for key, expected_path, expected_sha in (
+        ("lab_source_review", G4_STAGE1_SUCCESSOR_LAB_REVIEW_PATH,
+         G4_STAGE1_SUCCESSOR_LAB_REVIEW_SHA256),
+        ("voice_source_review", G4_STAGE1_SUCCESSOR_VOICE_REVIEW_PATH,
+         G4_STAGE1_SUCCESSOR_VOICE_REVIEW_SHA256),
+        ("combined_product_source_binding",
+         G4_STAGE1_SUCCESSOR_COMBINED_SOURCE_PATH,
+         G4_STAGE1_SUCCESSOR_COMBINED_SOURCE_SHA256)):
+        _keys(scope[key], {"path", "sha256"},
+              "bounded_g4_stage1_successor_scope_review_row")
+        _need(Path(scope[key]["path"]) == expected_path
+              and scope[key]["sha256"] == expected_sha,
+              "bounded_g4_stage1_successor_scope_review_pin")
+    product = scope["product_sha256"]
+    _need(type(product) is dict
+          and product == G4_STAGE1_SUCCESSOR_PRODUCT_AFTERIMAGES
+          and set(product) <= G4_STAGE1_SUCCESSOR_PRODUCT
+          and all(type(value) is str and re.fullmatch(r"[0-9a-f]{64}", value)
+                  for value in product.values()),
+          "bounded_g4_stage1_successor_required_product")
+    _need(type(ui12) is dict
+          and ui12.get("commit") == G4_STAGE1_SUCCESSOR_BASE["commit"]
+          and ui12.get("tree") == G4_STAGE1_SUCCESSOR_BASE["tree"]
+          and ui12.get("protected_refs_unchanged") is True
+          and ui12.get("same_attempt_remote_readback_verified") is True,
+          "bounded_g4_stage1_successor_base_publication")
+    _need(all(_sha(before[path]) == G4_STAGE1_SUCCESSOR_BASE_CONTROL[path]
+              for path in before),
+          "bounded_g4_stage1_successor_preimage")
+    state = _json(before[STATE])
+    gates = _document(before[GATES], GATES)
+    overlay = _document(before[OVERLAY], OVERLAY)
+    _need(state["current_gate"] == "G4"
+          and state["current_gate_status"] == "active_bounded_stage1_interactive"
+          and state["active_profile"] == raisa_policy.G4_STAGE1_INTERACTIVE_PROFILE
+          and state["g2"]["completion_accepted"] is True
+          and state["g3"]["completion_accepted"] is True
+          and state["feature_work_eligible"] is False
+          and state["product_work_eligible"] is False
+          and state["task_selection"]["allowed_task_kinds"] == ["g4_stage1_local_interactive"]
+          and next(g for g in gates["gates"] if g["id"] == "G4")["status"]
+              == "active_bounded_stage1_interactive"
+          and overlay["active_profile"] == raisa_policy.G4_STAGE1_INTERACTIVE_PROFILE
+          and overlay["profiles"][raisa_policy.G4_STAGE1_INTERACTIVE_PROFILE]
+              == raisa_policy.g4_stage1_interactive_profile()
+          and raisa_policy.G4_STAGE1_SUCCESSOR_PROFILE not in overlay["profiles"],
+          "bounded_g4_stage1_successor_prestate")
+    state["observed_at"] = scope["recorded_at"]
+    state["active_profile"] = raisa_policy.G4_STAGE1_SUCCESSOR_PROFILE
+    state["task_selection"]["allowed_task_kinds"] = ["g4_stage1_local_successor"]
+    state["task_selection"]["next_eligibility_condition"] = (
+        "only_exact_reviewed_stage1_reliability_and_interactive_voice_source;"
+        "all_runtime_effects_require_separate_finite_binding")
+    overlay["active_profile"] = raisa_policy.G4_STAGE1_SUCCESSOR_PROFILE
+    overlay["profiles"][raisa_policy.G4_STAGE1_SUCCESSOR_PROFILE] = (
+        raisa_policy.g4_stage1_successor_profile())
+    agents = before[AGENTS].decode("utf-8")
+    _need(agents.count(raisa_policy.G4_STAGE1_INTERACTIVE_PREAMBLE) == 1,
+          "bounded_g4_stage1_successor_agents_preimage")
+    agents = agents.replace(raisa_policy.G4_STAGE1_INTERACTIVE_PREAMBLE,
+                            raisa_policy.G4_STAGE1_SUCCESSOR_PREAMBLE, 1)
+    agents += ("\n## Current bounded G4 Stage 1 source successor\n\n"
+        "Only the exact independently reviewed synthetic Reliability Lab and "
+        "offline interactive voice source afterimages are eligible. The "
+        "accepted UI12 publication and Native08 generated-silence result "
+        "remain historical dependencies, not voice acceptance. Every app, "
+        "DB, browser, microphone, model or child effect requires separate "
+        "finite review and execution authority. No real data, provider, "
+        "public listener, deployment or protected effect is authorized.\n")
+    return {
+        STATE: (json.dumps(state, indent=2, ensure_ascii=False) + "\n").encode(),
+        OVERLAY: yaml.safe_dump(overlay, sort_keys=False, allow_unicode=True).encode(),
+        AGENTS: agents.encode(),
+        G4_STAGE1_SUCCESSOR_SCOPE: _canonical(scope) + b"\n",
+    }
+
+
+def _load_g4_stage1_successor_inputs(context, target, source, evidence_root,
+                                     scratch, q, read, snapshots):
+    _keys(q, {"schema_version", "operation_id", "operation_kind", "phase",
+        "base_commit", "base_tree", "expected_head", "expected_index_tree",
+        "candidate_tree", "source_sha256", "payload_sha256", "repair_sha256",
+        "source_review", "ui12_publication_review", "lab_source_review",
+        "voice_source_review", "combined_product_source_binding",
+        "activation_acceptance"},
+        "bounded_g4_stage1_successor_binding_schema")
+    _need(q["schema_version"] == "ariadne.g4_stage1_successor_operation_binding.v1"
+          and q["operation_kind"] in G4_STAGE1_SUCCESSOR_KINDS
+          and type(q["operation_id"]) is str
+          and re.fullmatch(r"[a-z0-9][a-z0-9-]{1,79}", q["operation_id"])
+          and q["phase"] in {"development", "pre-push", "post-push"},
+          "bounded_g4_stage1_successor_binding_version")
+    for key in ("base_commit", "base_tree", "expected_head",
+                "expected_index_tree", "candidate_tree"):
+        _need(type(q[key]) is str and re.fullmatch(r"[0-9a-f]{40}", q[key]),
+              "bounded_g4_stage1_successor_git_identity")
+    # All caller-supplied source evidence paths are checked against literals
+    # before any corresponding file content is read.
+    ui_path = Path(
+        "C:/Users/there/EMR4-migration/20260911-v1/"
+        "current-control-repair-20260912-v1/demo-led-stage1-20261012-v2/"
+        "stage1-interactive-product-publication-source-v2/"
+        "independent-stage1-interactive-product-push-effect-review-v2.json")
+    _keys(q["ui12_publication_review"], {"path", "sha256"},
+          "bounded_g4_stage1_successor_ui12_review_row")
+    _need(Path(q["ui12_publication_review"]["path"]) == ui_path
+          and q["ui12_publication_review"]["sha256"]
+              == G4_STAGE1_SUCCESSOR_UI12_EFFECT_SHA256,
+          "bounded_g4_stage1_successor_ui12_review_pin")
+    ui12 = _json(read(ui_path, G4_STAGE1_SUCCESSOR_UI12_EFFECT_SHA256))
+    _need(ui12.get("status") == "PASS"
+          and ui12.get("verdict") == "PASS_G4_STAGE1_INTERACTIVE_PRODUCT_PUBLICATION_EFFECT"
+          and ui12.get("independent") is True
+          and ui12.get("implementation_authorship") is False
+          and ui12.get("blocking_findings") == []
+          and ui12.get("published_ref") == G4_STAGE1_INTERACTIVE_BACKEND_REF
+          and ui12.get("commit") == G4_STAGE1_SUCCESSOR_BASE["commit"]
+          and ui12.get("tree") == G4_STAGE1_SUCCESSOR_BASE["tree"]
+          and ui12.get("remote_after") == G4_STAGE1_SUCCESSOR_BASE["commit"],
+          "bounded_g4_stage1_successor_ui12_publication")
+    for key, expected_path, expected_sha in (
+        ("lab_source_review", G4_STAGE1_SUCCESSOR_LAB_REVIEW_PATH,
+         G4_STAGE1_SUCCESSOR_LAB_REVIEW_SHA256),
+        ("voice_source_review", G4_STAGE1_SUCCESSOR_VOICE_REVIEW_PATH,
+         G4_STAGE1_SUCCESSOR_VOICE_REVIEW_SHA256),
+        ("combined_product_source_binding",
+         G4_STAGE1_SUCCESSOR_COMBINED_SOURCE_PATH,
+         G4_STAGE1_SUCCESSOR_COMBINED_SOURCE_SHA256)):
+        _keys(q[key], {"path", "sha256"},
+              "bounded_g4_stage1_successor_literal_evidence_row")
+        _need(type(q[key]["path"]) is str
+              and Path(q[key]["path"]) == expected_path
+              and q[key]["sha256"] == expected_sha,
+              "bounded_g4_stage1_successor_literal_evidence_pin")
+    lab = _json(read(G4_STAGE1_SUCCESSOR_LAB_REVIEW_PATH,
+                     G4_STAGE1_SUCCESSOR_LAB_REVIEW_SHA256))
+    voice = _json(read(G4_STAGE1_SUCCESSOR_VOICE_REVIEW_PATH,
+                       G4_STAGE1_SUCCESSOR_VOICE_REVIEW_SHA256))
+    combined = _json(read(G4_STAGE1_SUCCESSOR_COMBINED_SOURCE_PATH,
+                          G4_STAGE1_SUCCESSOR_COMBINED_SOURCE_SHA256))
+    _g4_stage1_successor_source_evidence(read, lab, voice, combined)
+    enable = q["operation_kind"] == "enable_g4_stage1_successor"
+    paths = (G4_STAGE1_SUCCESSOR_CONTROL if enable
+             else operation_paths(q["operation_kind"], q))
+    sources = _digest_map(q["source_sha256"], SOURCE_PATHS | CONTROLLER_PATHS,
+                          "bounded_g4_stage1_successor_sources")
+    _keys(q["repair_sha256"], paths,
+          "bounded_g4_stage1_successor_changed_paths")
+    for path, pair in q["repair_sha256"].items():
+        _keys(pair, {"before_sha256", "after_sha256"},
+              "bounded_g4_stage1_successor_change_pair")
+        _closeout_digest(pair["after_sha256"])
+        previous = (G4_STAGE1_SUCCESSOR_BASE_CONTROL[path] if enable
+                    else G4_STAGE1_SUCCESSOR_PRODUCT_PREIMAGES[path])
+        if previous is not None:
+            _closeout_digest(previous)
+        _need(pair["before_sha256"] == previous
+              and pair["after_sha256"] != previous
+              and (enable or pair["after_sha256"]
+                   == G4_STAGE1_SUCCESSOR_PRODUCT_AFTERIMAGES[path]),
+              "bounded_g4_stage1_successor_change_preimage")
+        if previous is None:
+            _need(trusted_git.run_git(target, "ls-tree", q["base_commit"],
+                                      "--", path) == "",
+                  "bounded_g4_stage1_successor_addition_exists")
+        else:
+            _need(_sha(trusted_git.run_git_bytes(
+                target, "cat-file", "blob", q["base_commit"] + ":" + path))
+                == previous,
+                "bounded_g4_stage1_successor_committed_preimage")
+    if enable:
+        _need(q["base_commit"] == G4_STAGE1_SUCCESSOR_BASE["commit"]
+              and q["base_tree"] == G4_STAGE1_SUCCESSOR_BASE["tree"]
+              and q["activation_acceptance"] is None,
+              "bounded_g4_stage1_successor_enable_base")
+    else:
+        headers = trusted_git.run_git(target, "cat-file", "commit",
+                                      q["base_commit"]).split("\n\n", 1)[0].splitlines()
+        _need([line for line in headers if line.startswith("parent ")]
+              == ["parent " + G4_STAGE1_SUCCESSOR_BASE["commit"]]
+              and [line for line in headers if line.startswith("tree ")]
+              == ["tree " + q["base_tree"]],
+              "bounded_g4_stage1_successor_activation_parent")
+        activation = _g4_stage1_successor_review(
+            read, q["activation_acceptance"],
+            None,
+            "PASS_G4_STAGE1_SUCCESSOR_ENTRY_PUBLICATION_EFFECT",
+            q["base_commit"])
+        _need(activation.get("tree") == q["base_tree"]
+              and activation.get("protected_refs_unchanged") is True
+              and activation.get("same_attempt_remote_readback_verified") is True,
+              "bounded_g4_stage1_successor_activation_effect")
+    for path, digest in sources.items():
+        raw = read(source / path, digest)
+        committed = trusted_git.run_git_bytes(
+            target, "cat-file", "blob", q["base_commit"] + ":" + path)
+        if enable and path in G4_STAGE1_SUCCESSOR_CODE:
+            _need(_sha(committed) == G4_STAGE1_SUCCESSOR_BASE_CONTROL[path]
+                  and digest == q["repair_sha256"][path]["after_sha256"],
+                  "bounded_g4_stage1_successor_prospective_source")
+        else:
+            _need(committed == raw,
+                  "bounded_g4_stage1_successor_installed_source")
+    inputs = (CONFIGURATION_PATHS | {STATE, GATES, OVERLAY, AGENTS,
+              G4_STAGE1_INTERACTIVE_SCOPE, G4_STAGE1_SUCCESSOR_SCOPE}
+              | paths | SOURCE_PATHS | CONTROLLER_PATHS)
+    pins = _digest_map(q["payload_sha256"], inputs,
+                       "bounded_g4_stage1_successor_payload_paths")
+    payloads = {path: read(target / path, digest)
+                for path, digest in sorted(pins.items())}
+    before = {path: trusted_git.run_git_bytes(
+        target, "cat-file", "blob",
+        G4_STAGE1_SUCCESSOR_BASE["commit"] + ":" + path)
+        for path in (STATE, GATES, OVERLAY, AGENTS)}
+    _need(all(_sha(before[path]) == G4_STAGE1_SUCCESSOR_BASE_CONTROL[path]
+              for path in before),
+          "bounded_g4_stage1_successor_control_preimages")
+    scope = _json(payloads[G4_STAGE1_SUCCESSOR_SCOPE])
+    _need(scope["source_sha256"] == sources
+          and scope["ui12_publication_review"] == q["ui12_publication_review"]
+          and scope["lab_source_review"] == q["lab_source_review"]
+          and scope["voice_source_review"] == q["voice_source_review"]
+          and scope["combined_product_source_binding"]
+              == q["combined_product_source_binding"],
+          "bounded_g4_stage1_successor_scope_sources")
+    expected = build_g4_stage1_successor_transition(before, scope, ui12)
+    _need(all(payloads[path] == raw for path, raw in expected.items()),
+          "bounded_g4_stage1_successor_transition_delta")
+    if not enable:
+        _need(scope["product_sha256"] == {
+            path: pair["after_sha256"]
+            for path, pair in q["repair_sha256"].items()}
+            == G4_STAGE1_SUCCESSOR_PRODUCT_AFTERIMAGES,
+            "bounded_g4_stage1_successor_product_map")
+    for path in inputs - paths:
+        _need(trusted_git.run_git_bytes(target, "cat-file", "blob",
+              q["base_commit"] + ":" + path) == payloads[path],
+              "bounded_g4_stage1_successor_unowned_changed")
+    for path, pair in q["repair_sha256"].items():
+        _need(_sha(payloads[path]) == pair["after_sha256"],
+              "bounded_g4_stage1_successor_afterimage")
+    source_review = _g4_stage1_successor_review(
+        read, q["source_review"], None,
+        "PASS_G4_STAGE1_SUCCESSOR_EXACT_ADMISSION_SUBJECT",
+        g4_stage1_successor_review_subject(q))
+    attested = inputs - paths if q["phase"] == "development" else inputs
+    observation = trusted_git.attest_target_index(
+        target, attested_paths=tuple(sorted(attested)),
+        expected_head=q["expected_head"],
+        expected_index_tree=q["expected_index_tree"], scratch_parent=scratch)
+    _need(trusted_git.run_git(
+        target, "rev-parse",
+        G4_STAGE1_SUCCESSOR_BASE["commit"] + "^{tree}")
+        == G4_STAGE1_SUCCESSOR_BASE["tree"],
+        "bounded_g4_stage1_successor_base_tree_changed")
+    if q["phase"] == "development":
+        _need(q["expected_head"] == q["base_commit"]
+              and q["expected_index_tree"] in {q["base_tree"], q["candidate_tree"]},
+              "bounded_g4_stage1_successor_development_binding")
+    else:
+        headers = trusted_git.run_git(target, "cat-file", "commit",
+                                      q["expected_head"]).split("\n\n", 1)[0].splitlines()
+        _need([line for line in headers if line.startswith("parent ")]
+              == ["parent " + q["base_commit"]]
+              and [line for line in headers if line.startswith("tree ")]
+              == ["tree " + q["candidate_tree"]]
+              and q["expected_index_tree"] == q["candidate_tree"],
+              "bounded_g4_stage1_successor_committed_binding")
+    for path, snapshot in snapshots.items():
+        _need(trusted_git._read_regular_snapshot(
+            path, maximum_bytes=2 * 1024 * 1024) == snapshot,
+            "bounded_g4_stage1_successor_snapshot_drift")
+    return BoundedG1BInputs(q, before, payloads,
+                            {"ui12": ui12, "lab_review": lab,
+                             "voice_review": voice, "combined": combined,
+                             "source_review": source_review}, observation)
+
+
+def _validate_g4_stage1_successor_loaded_policy(inputs):
+    expected = build_g4_stage1_successor_transition(
+        inputs.before,
+        _json(inputs.payloads[G4_STAGE1_SUCCESSOR_SCOPE]),
+        inputs.evidence["ui12"])
+    _need(all(inputs.payloads[path] == raw for path, raw in expected.items()),
+          "bounded_g4_stage1_successor_transition_delta")
+    try:
+        configuration = raisa_policy.validate_recovery_configuration(
+            documents={Path(path).name: inputs.payloads[path]
+                       for path in CONFIGURATION_PATHS},
+            expected_sha256={Path(path).name: inputs.binding["payload_sha256"][path]
+                             for path in CONFIGURATION_PATHS},
+            agents_text=inputs.payloads[AGENTS].decode("utf-8"),
+            state=_json(inputs.payloads[STATE]))
+    except (raisa_policy.RaisaPolicyError,
+            configuration_core.ConfigurationError) as error:
+        raise BoundedG1BError(error.reason_code) from error
+    return expected, configuration
