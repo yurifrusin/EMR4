@@ -35,6 +35,142 @@ function facts(root, rows) {
   }
   root.append(dl);
 }
+let labLoaded = false;
+function labParagraph(root, value) {
+  const p = document.createElement("p"); p.textContent = value; root.append(p);
+}
+function labCounts(part) {
+  if (!part || part.status === "NOT_APPLICABLE") return "Not applicable to this group";
+  return `${part.denominator} eligible episode(s): ${part.counts.CONTAINED} contained, ${part.counts.RECOVERED_BY_OBSERVED_HUMAN} recovered by observed human action, ${part.counts.NOT_CONTAINED} not contained, ${part.counts.UNRESOLVED} unresolved, ${part.counts.OUTCOME_CORRECT_CAUSE_UNRESOLVED} correct outcome with cause unresolved`;
+}
+function displayNative04(root, native) {
+  if (!native || native.schema !== "emr4.stage1_reliability_native04_view.v1" ||
+      native.qualification !== "EXTERNALLY_REVIEWED_RESULT_DELIVERY_ONLY") return;
+  const heading = document.createElement("h3");
+  heading.textContent = "Two observed synthetic controls"; root.append(heading);
+  labParagraph(root, `Native04 delivered two bounded projections with an independent effect review (${native.effect_review_sha256}). Internal source origin: ${native.source_origin}; internal runtime binding: ${native.internal_runtime_binding}; internal grade: ${native.internal_grade}. This does not establish a whole-journey grade.`);
+  labParagraph(root, `Catalog dispositions: ${native.current_controls} current controls, ${native.qualified_reused_boundaries} qualified reused boundaries, ${native.not_run_catalog_cases} NOT_RUN. Reused boundaries are not new episodes. New unique case coverage from this delivery: ${native.new_unique_case_coverage}. The two controls had ${native.phase_reports_for_two_controls} setup/call/teardown reports.`);
+  const appointment = value => value ? `${value.date} ${value.start_local} · ${value.status}` : "None observed";
+  for (const control of native.controls) {
+    const card = document.createElement("div"); card.className = "fact-card";
+    const title = document.createElement("h4");
+    title.textContent = `${control.case_id} · ${control.journey} valid control`; card.append(title);
+    const body = document.createElement("div");
+    facts(body, [
+      ["Before", `${control.before.appointment_count} appointment(s); request ${control.before.request_state ?? "not reported"}; selected appointment ${appointment(control.before.appointment)}`],
+      ["After", `${control.after.appointment_count} appointment(s); request ${control.after.request_state ?? "not reported"}; selected appointment ${appointment(control.after.appointment)}`],
+      ["Observed command and audit", `${control.new_command_count} command, ${control.new_audit_count} audit record`],
+      ["Readback", `current ${control.current_readback}; patient ${control.patient_readback}; source ${control.source_readback}`],
+      ["Qualification", `grade ${control.grade}; display ${control.display}`],
+      ["Request, proposal and validation detail", "Absent from the delivered projection; catalog expectations are not observed results."],
+    ]);
+    card.append(body); root.append(card);
+  }
+  labParagraph(root, `Actual model: ${native.actual_model}; voice: ${native.voice}. No inference or episode runs when this view opens.`);
+}
+function displayLabProgress(root, progress) {
+  if (!progress || progress.schema !== "emr4.stage1_reliability_progress_view.v2") return;
+  const heading = document.createElement("h3");
+  heading.textContent = "What the bounded evidence covers"; root.append(heading);
+  const dispositions = progress.baseline_dispositions;
+  labParagraph(root, `This report includes reviewed attempts through Native08. The authored catalog has ${progress.catalog_cases} distinct cases in ${progress.catalog_families} families. Its prior evidence review classified ${dispositions.current_controls} current controls, ${dispositions.qualified_reused_boundaries} reused boundaries and ${dispositions.not_run} NOT_RUN cases. Test attempts, phase reports and delivered records below are separate counts; they do not increase catalog coverage.`);
+  for (const attempt of progress.attempts) {
+    const card = document.createElement("div"); card.className = "fact-card";
+    const title = document.createElement("h4"); title.textContent = attempt.name; card.append(title);
+    const body = document.createElement("div");
+    facts(body, [
+      ["Reviewed status", attempt.status.replaceAll("_", " ")],
+      ["Selected test instances", attempt.selected_test_instances],
+      ["Setup, call and teardown reports", attempt.phase_reports],
+      ["Delivered selected records", attempt.delivered_selected_records],
+      ["Selected cases and call phases", attempt.cases.length ?
+        attempt.cases.map(item => `${item.case_id}: ${item.call_phase}`).join("; ") :
+        "No selected test began"],
+    ]);
+    card.append(body); root.append(card);
+  }
+  labParagraph(root, "Native05 and Native07 each attempted the two lost-response selected tests. In each batch CREATE's call failed and MOVE's call passed, but neither batch delivered an accepted selected episode record; the failed CREATE grade-reason set was not retained. A passing test phase is not a whole-journey grade. Native06 and Native08 stopped before Docker and before any test. None of these runs supplies a graded disturbance episode.");
+  const labels = {
+    "create-valid-01": "Valid create control",
+    "move-valid-timeonly-01": "Valid time-only move control",
+    "move-attempted-identity-change-05": "Attempted identity change",
+    "move-stale-expired-authority-06": "Stale or expired authority",
+    "move-source-cancelled-08": "Cancelled source",
+    "move-duplicate-lost-response-10": "Completed replay without response loss",
+  };
+  for (const example of progress.worked_examples) {
+    const card = document.createElement("div"); card.className = "fact-card";
+    const title = document.createElement("h4");
+    title.textContent = `${labels[example.case_id] ?? example.case_id} · ${example.evidence_kind === "NATIVE04_DELIVERED_CONTROL" ? "delivered control" : "reused boundary"}`; card.append(title);
+    const body = document.createElement("div");
+    facts(body, [
+      ["Authored request", example.authored_request],
+      ["Authored proposal expectation", example.authored_expected_proposal],
+      ["Observed proposal", example.proposal_observation.replaceAll("_", " ")],
+      ["Observed validation", example.actual_validation.replaceAll("_", " ")],
+      ["Before", example.before_after.before.replaceAll("_", " ")],
+      ["After", example.before_after.after.replaceAll("_", " ")],
+      ["Readback", example.readback.replaceAll("_", " ")],
+      ["Command and audit", example.command_audit.replaceAll("_", " ")],
+      ["Outcome", example.outcome.replaceAll("_", " ")],
+    ]);
+    card.append(body); root.append(card);
+  }
+  labParagraph(root, `Whole-journey grade: ${progress.whole_journey_grade}. Display and disclosure: ${progress.display}, ${progress.disclosure}. Actual model: ${progress.actual_model}; M1 model binding: ${progress.m1_model_binding}; generated-silence voice: ${progress.generated_silence_voice}; genuine push-to-talk voice: ${progress.genuine_ptt_voice}. No inference or evaluation runs when this view opens.`);
+}
+function displayLab(view) {
+  const root = $("reliability-lab-content"); root.replaceChildren();
+  if (!view || !["emr4.stage1_reliability_lab_view.v1",
+                  "emr4.stage1_reliability_lab_view.v2",
+                  "emr4.stage1_reliability_lab_view.v3"].includes(view.schema)) {
+    labParagraph(root, "Report unavailable. No evaluation result is shown."); return;
+  }
+  if (view.status === "NOT_RUN") {
+    labParagraph(root, "NOT_RUN · No aggregate outcome report is bound to this demo session.");
+    labParagraph(root, view.native04 ?
+      "The aggregate grader is NOT_RUN here. Two separately reviewed control projections are shown below; they do not supply a whole-journey grade." :
+      "Catalog: 16 authored cases across 11 families. None are counted as executed episodes here.");
+    if (view.native04) displayNative04(root, view.native04);
+    if (view.progress) displayLabProgress(root, view.progress);
+    return;
+  }
+  labParagraph(root, `Source: ${view.source_schema} · ${view.origin}. Catalog: ${view.catalog_sha256}. External runtime qualification: ${view.external_runtime_qualification}. Actual model: ${view.actual_model}. Voice: ${view.voice}.`);
+  labParagraph(root, `Catalog: ${view.catalog_cases} authored cases across ${view.catalog_families} families. Selected records: ${view.records}; unrun: ${view.unrun}; supplied-record grades: ${view.groups.reduce((count, group) => count + group.episodes, 0)}.`);
+  labParagraph(root, `Canonical linkage nonpass: ${view.canonical_link_nonpass}. Patient readback unresolved: ${view.unresolved_patient_readback}. Singleton readback unresolved: ${view.unresolved_singleton_readback}. These counts are not pooled into a risk rate.`);
+  if (view.status === "BOUND_UNGRADED") labParagraph(root, "A versioned report is bound, but no episode has an eligible supplied-record grade. Reported nonpass and unresolved records remain visible above; outcome and measurement grades are NOT_RUN / not measured.");
+  for (const group of view.groups) {
+    const card = document.createElement("div"); card.className = "fact-card";
+    const title = document.createElement("h3"); title.textContent = `${group.set_kind} · ${group.journey} · ${group.channel}`; card.append(title);
+    const body = document.createElement("div");
+    facts(body, [
+      ["Evidence", `${group.evidence_class}; ${group.boundaries.length ? group.boundaries.join(", ") : "no boundary mode"}`],
+      ["Unique cases", group.unique_cases], ["Unique families", group.unique_families],
+      ["Episodes", group.episodes], ["Repeat trials", group.repeat_trials],
+      ["Final outcomes", `${group.final_outcomes.CORRECT} correct, ${group.final_outcomes.INCORRECT} incorrect, ${group.final_outcomes.UNKNOWN} unknown`],
+      ["Known observations", `${group.counts.eligible_attempts} eligible attempts, ${group.counts.actual_commits} actual commits, ${group.counts.model_error_episodes} model error episodes`],
+      ["Missing observations", `${group.missing_count_observations.eligible_attempts} eligible-attempt, ${group.missing_count_observations.actual_commits} commit, ${group.missing_count_observations.model_error_episodes} model-error counts missing`],
+      ["Natural error containment", labCounts(group.natural_error_containment)],
+      ["Deliberate challenge containment", labCounts(group.deliberate_challenge_containment)],
+      ["Latency", group.latency], ["Cost", group.cost],
+    ]);
+    card.append(body);
+    root.append(card);
+  }
+  labParagraph(root, "Worked appointment examples: not available in the bound summary. No raw request, proposal, confirmation token, audit record or recording is exposed here.");
+  if (view.native04) displayNative04(root, view.native04);
+  if (view.progress) displayLabProgress(root, view.progress);
+}
+$("reliability-lab").addEventListener("toggle", async () => {
+  if (!$("reliability-lab").open || labLoaded || state.session?.persona !== "staff") return;
+  labLoaded = true;
+  text("reliability-lab-content", "Reading the bound local report…");
+  try {
+    const response = await fetch("/demo/stage1/reliability", {
+      method: "GET", credentials: "same-origin", cache: "no-store", redirect: "error" });
+    if (!response.ok) throw new Error("unavailable");
+    displayLab(await response.json());
+  } catch (_) { text("reliability-lab-content", "Report unavailable. No evaluation was started."); }
+});
 function clearPending() {
   spoken?.stop();
   state.create = state.move = state.offer = null;

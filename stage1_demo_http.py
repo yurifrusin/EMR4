@@ -12,6 +12,9 @@ from dataclasses import dataclass, field
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 import asyncio
+import hashlib
+import json
+import math
 import re
 import secrets
 from typing import Any
@@ -23,7 +26,8 @@ import httpx
 
 from stage1_demo_adapter_core import AdapterRejected, MAX_BODY_BYTES, SessionBinding, admit_action
 from stage1_demo_voice import (MAX_WAV_BYTES, VoiceInputRejected, VoiceRecognitionUnavailable,
-                               VoiceRuntimeBinding, run_local_recognizer, target_for_persona,
+                               ContainedVoiceRuntimeBinding, VoiceRuntimeBinding,
+                               run_local_recognizer, target_for_persona,
                                validate_wav)
 
 
@@ -31,6 +35,522 @@ BASE = "/api/v1/appointments"
 COOKIE = "stage1_demo_session"
 STATIC = Path(__file__).parent / "static" / "demo"
 LOCAL_MINUTE = re.compile(r"(?:[01]\d|2[0-3]):[0-5]\d(?::00(?:\.0+)?)?\Z")
+LAB_CATALOG_SHA = "8cc1ae403b898aecc8dca8f25e5f2c209b272c5a4fac6231e96f8e6ef238cf43"
+LAB_SOURCE_SCHEMA = "emr4.stage1_outcome_integrated_seam_report.v1"
+LAB_GRADE_SCHEMA = "emr4.appointment_outcome_report.v4"
+NATIVE04_INPUTS = {
+    "result": (25515, "857e3e0243476ba4b2a6024ae613f4598c7c2d321685ab2a500b754ffd363167"),
+    "primary": (3457, "76a83146a5179dd9514c649ccb2c57a00a6cdd184dd7ce4e0605f02b7c470672"),
+    "effect_review": (8060, "b8bb1b6e2de75bf0a5376c61287116564e8147bbada3149a5c25810c2bc30d06"),
+    "existing_review": (10025, "909d7e8f51b2c3e2009c665194fc3219fa629cd564da296ec6ec14b7e60c0e70"),
+}
+LAB_PROGRESS_NATIVE07_EFFECT_SHA = "5bd59db323eb4da71b7b80ebf66aea88a3ef86fecd198b373523a58558103af7"
+LAB_PROGRESS_NATIVE08_EFFECT_SHA = "62c2072574a9ded109d756a417810013068553554828e0cdf0c091de7dd2eb82"
+LAB_PROGRESS_REPORT_SHA = "51ef618862352719a331237d286297dba2f4c0e6155d19c6d397ac141bfd3065"
+LAB_WORKED_EXAMPLE_SHA = (
+    "bb45fb0422d42c3bc2ad550c1833a3ead0237e2322cd236e372b70aaf40fb1ed",
+    "1518da04fbfe56c0118091f3c868d773ed1dff98ac7716f58556d66bb99029c5",
+    "2109fe40826f5ffd2b17703edaffb94cad5601501191bda2ee6abaaf4b2e9a1e",
+    "aa66c550708842263910e7f305ede2261d173959fd342ab77698dbf616dbbfa8",
+)
+
+
+def project_lab_progress(raw: bytes | None, digest: str | None) -> dict[str, Any] | None:
+    """Expose one exact startup-bound, closed projection; never open report paths."""
+    if raw is None and digest is None:
+        return None
+    if (type(raw) is not bytes or not 1 <= len(raw) <= 16384 or
+            type(digest) is not str or len(digest) != 64 or
+            hashlib.sha256(raw).hexdigest() != digest or
+            digest != LAB_PROGRESS_REPORT_SHA or
+            LAB_PROGRESS_NATIVE07_EFFECT_SHA is None):
+        raise ValueError("LAB_PROGRESS_BINDING_INVALID")
+
+    def unique(items: list[tuple[str, Any]]) -> dict[str, Any]:
+        result: dict[str, Any] = {}
+        for key, value in items:
+            if key in result:
+                raise ValueError("LAB_PROGRESS_DUPLICATE_KEY")
+            result[key] = value
+        return result
+
+    try:
+        report = json.loads(raw.decode("utf-8"), object_pairs_hook=unique)
+    except (UnicodeError, json.JSONDecodeError):
+        raise ValueError("LAB_PROGRESS_JSON_INVALID") from None
+    fixed = {"schema", "status", "catalog_sha256", "catalog_cases",
+             "catalog_families", "baseline_dispositions", "attempts",
+             "reused_examples", "worked_examples", "authored_catalog_sha256",
+             "evidence_through", "native04_primary_sha256", "native04_result_sha256",
+             "request_detail", "proposal_detail", "actual_model",
+             "m1_model_binding", "generated_silence_voice", "genuine_ptt_voice",
+             "whole_journey_grade", "display", "disclosure"}
+    if (type(report) is not dict or set(report) != fixed or
+            report["schema"] != "emr4.stage1_reliability_progress_report.v2" or
+            report["status"] != "REVIEWED_NONPASS_EFFECT_ACCOUNTING" or
+            report["catalog_sha256"] != LAB_CATALOG_SHA or
+            report["authored_catalog_sha256"] != "792b8d4cb627b721f607d1548b757f0b1960b2a2aa0b1592cd3674bc71bb071e" or
+            report["evidence_through"] != "NATIVE08_REVIEWED_PRE_DOCKER" or
+            report["native04_primary_sha256"] != NATIVE04_INPUTS["primary"][1] or
+            report["native04_result_sha256"] != NATIVE04_INPUTS["result"][1] or
+            report["catalog_cases"] != 16 or report["catalog_families"] != 11 or
+            report["baseline_dispositions"] != {"current_controls": 2,
+                "qualified_reused_boundaries": 4, "not_run": 10} or
+            any(report[key] != value for key, value in {
+                "request_detail": "NOT_IN_DELIVERED_PROJECTION",
+                "proposal_detail": "NOT_IN_DELIVERED_PROJECTION",
+                "actual_model": "NOT_RUN",
+                "m1_model_binding": "OPEN",
+                "generated_silence_voice": "NOT_RUN_AS_SPEECH_TEST",
+                "genuine_ptt_voice": "NOT_RUN",
+                "whole_journey_grade": "UNKNOWN", "display": "NOT_OBSERVED",
+                "disclosure": "NOT_OBSERVED"}.items())):
+        raise ValueError("LAB_PROGRESS_UNSUPPORTED_REPORT")
+    attempts = report["attempts"]
+    expected_attempts = (
+        ("Native04", "DELIVERED_VALID_CONTROLS", 2, 6, 2,
+         NATIVE04_INPUTS["effect_review"][1]),
+        ("Native05", "NONPASS_NO_DELIVERED_SELECTED_RECORDS", 2, 6, 0,
+         "c881ce80f6d14df14b2bd1613f2d02a7433752e2ff165aafebfed01ab0700f20"),
+        ("Native06", "PRE_DOCKER_LAUNCH_FAILURE", 0, 0, 0,
+         "003f06377fa76362325a6ecbcad1a6ce7983ee96c648b45c8e4d5454513f0899"))
+    keys = {"name", "status", "selected_test_instances", "phase_reports",
+            "delivered_selected_records", "cases", "effect_review_sha256"}
+    if (type(attempts) is not list or len(attempts) != 5 or
+            any(type(item) is not dict or set(item) != keys for item in attempts)):
+        raise ValueError("LAB_PROGRESS_ATTEMPTS_INVALID")
+    for item, expected in zip(attempts[:3], expected_attempts):
+        if (any(type(item[key]) is not int for key in ("selected_test_instances",
+                "phase_reports", "delivered_selected_records")) or
+                tuple(item[key] for key in ("name", "status", "selected_test_instances",
+                 "phase_reports", "delivered_selected_records", "effect_review_sha256")) != expected):
+            raise ValueError("LAB_PROGRESS_ATTEMPTS_INVALID")
+    valid_cases = {"Native04": (("create-valid-01", "PASSED"),
+                                ("move-valid-timeonly-01", "PASSED")),
+                   "Native05": (("create-duplicate-lost-response-09", "FAILED"),
+                                ("move-duplicate-lost-response-10", "PASSED")),
+                   "Native06": (),
+                   "Native08": (),
+                   "Native07": (("create-duplicate-lost-response-09", "FAILED"),
+                                ("move-duplicate-lost-response-10", "PASSED"))}
+    for item in attempts:
+        cases = item["cases"]
+        if (type(item["name"]) is not str or item["name"] not in valid_cases or
+                type(cases) is not list or len(cases) != len(valid_cases[item["name"]]) or
+                any(type(case) is not dict or set(case) != {"case_id", "call_phase"}
+                    for case in cases) or
+                tuple((case["case_id"], case["call_phase"]) for case in cases) !=
+                    valid_cases[item["name"]]):
+            raise ValueError("LAB_PROGRESS_CASE_PHASES_INVALID")
+    native07 = attempts[3]
+    if (native07["name"] != "Native07" or
+            native07["effect_review_sha256"] != LAB_PROGRESS_NATIVE07_EFFECT_SHA or
+            native07["status"] != "NONPASS_NO_DELIVERED_SELECTED_RECORDS" or
+            tuple(native07[key] for key in ("selected_test_instances", "phase_reports",
+                            "delivered_selected_records")) != (2, 6, 0) or
+            any(type(native07[key]) is not int for key in
+                ("selected_test_instances", "phase_reports", "delivered_selected_records"))):
+        raise ValueError("LAB_PROGRESS_NATIVE07_INVALID")
+    native08 = attempts[4]
+    if (native08["name"] != "Native08" or
+            native08["effect_review_sha256"] != LAB_PROGRESS_NATIVE08_EFFECT_SHA or
+            native08["status"] != "PRE_DOCKER_LAUNCH_FAILURE" or
+            tuple(native08[key] for key in ("selected_test_instances", "phase_reports",
+                            "delivered_selected_records")) != (0, 0, 0) or
+            any(type(native08[key]) is not int for key in
+                ("selected_test_instances", "phase_reports", "delivered_selected_records"))):
+        raise ValueError("LAB_PROGRESS_NATIVE08_INVALID")
+    examples = report["reused_examples"]
+    expected_examples = (
+        ("move-attempted-identity-change-05", "NON_TIME_PAYLOAD_CHANGE",
+         "HTTP_422_WITH_UNCHANGED_SNAPSHOT", "UNCHANGED_SNAPSHOT_DETAILS_NOT_DELIVERED"),
+        ("move-stale-expired-authority-06", "STALE_OR_EXPIRED_AUTHORITY",
+         "SEPARATE_REFUSAL_TESTS", "NOT_IN_DELIVERED_PROJECTION"),
+        ("move-source-cancelled-08", "CANCELLED_SOURCE",
+         "REJECTED_WITH_UNCHANGED_SNAPSHOT", "UNCHANGED_SNAPSHOT_DETAILS_NOT_DELIVERED"),
+        ("move-duplicate-lost-response-10", "COMPLETED_REPLAY_WITHOUT_LOST_RESPONSE",
+         "EQUAL_RESPONSE_UNCHANGED_SNAPSHOT_AND_CHANGED_BODY_CONFLICT",
+         "UNCHANGED_SNAPSHOT_DETAILS_NOT_DELIVERED"))
+    example_keys = {"case_id", "disturbance", "actual_validation", "before_after", "outcome"}
+    if (type(examples) is not list or len(examples) != 4 or
+            any(type(item) is not dict or set(item) != example_keys or
+                tuple(item[key] for key in ("case_id", "disturbance",
+                      "actual_validation", "before_after")) != expected or
+                item["outcome"] != "QUALIFIED_REUSED_BOUNDARY_ONLY"
+                for item, expected in zip(examples, expected_examples))):
+        raise ValueError("LAB_PROGRESS_EXAMPLES_INVALID")
+    worked = report["worked_examples"]
+    worked_keys = {"case_id", "evidence_kind", "authored_request",
+                   "authored_expected_proposal", "proposal_observation",
+                   "actual_validation", "before_after", "readback", "command_audit",
+                   "outcome"}
+    worked_ids = ("create-valid-01", "move-valid-timeonly-01",
+                  "move-attempted-identity-change-05", "move-source-cancelled-08")
+    if (type(worked) is not list or len(worked) != 4 or
+            any(type(item) is not dict or set(item) != worked_keys or
+                item["case_id"] != case_id or
+                type(item["before_after"]) is not dict or
+                set(item["before_after"]) != {"before", "after"} or
+                hashlib.sha256(json.dumps(item, sort_keys=True, separators=(",", ":"),
+                    ensure_ascii=True).encode()).hexdigest() != expected_sha
+                for item, case_id, expected_sha in zip(worked, worked_ids,
+                                                       LAB_WORKED_EXAMPLE_SHA))):
+        raise ValueError("LAB_PROGRESS_WORKED_EXAMPLES_INVALID")
+    return {"schema": "emr4.stage1_reliability_progress_view.v2",
+            "catalog_cases": 16, "catalog_families": 11,
+            "authored_catalog_sha256": report["authored_catalog_sha256"],
+            "evidence_through": report["evidence_through"],
+            "baseline_dispositions": report["baseline_dispositions"],
+            "attempts": attempts, "reused_examples": examples,
+            "worked_examples": worked,
+            "request_detail": report["request_detail"],
+            "proposal_detail": report["proposal_detail"],
+            "actual_model": "NOT_RUN", "m1_model_binding": "OPEN",
+            "generated_silence_voice": "NOT_RUN_AS_SPEECH_TEST",
+            "genuine_ptt_voice": "NOT_RUN",
+            "whole_journey_grade": "UNKNOWN", "display": "NOT_OBSERVED",
+            "disclosure": "NOT_OBSERVED"}
+
+
+def _lab_count(value: Any) -> bool:
+    return type(value) is int and 0 <= value <= 10000
+
+
+def _lab_counts(value: Any, keys: set[str]) -> dict[str, int]:
+    if (type(value) is not dict or set(value) != keys or
+            any(not _lab_count(item) for item in value.values())):
+        raise ValueError("LAB_REPORT_UNSAFE_COUNTS")
+    return value
+
+
+def _lab_label(value: Any) -> str:
+    if type(value) is not str or re.fullmatch(r"[A-Za-z0-9_./-]{1,64}", value) is None:
+        raise ValueError("LAB_REPORT_UNSAFE_LABEL")
+    return value
+
+
+def project_reliability_lab(raw: bytes | None, digest: str | None) -> dict[str, Any]:
+    """Project one startup-bound report; never return records or authority-bearing fields."""
+    empty = {"schema": "emr4.stage1_reliability_lab_view.v1", "status": "NOT_RUN",
+             "origin": "NOT_BOUND", "source_schema": None,
+             "catalog_sha256": LAB_CATALOG_SHA,
+             "catalog_cases": 16, "catalog_families": 11,
+             "groups": [], "actual_model": "NOT_RUN", "voice": "NOT_RUN",
+             "external_runtime_qualification": "NOT_BOUND",
+             "worked_examples": "NOT_AVAILABLE_IN_BOUND_REPORT"}
+    if raw is None and digest is None:
+        return empty
+    if (type(raw) is not bytes or not 0 < len(raw) <= 131072 or
+            type(digest) is not str or re.fullmatch(r"[0-9a-f]{64}", digest) is None or
+            hashlib.sha256(raw).hexdigest() != digest):
+        raise ValueError("LAB_REPORT_BINDING_INVALID")
+    def unique_object(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
+        result = {}
+        for key, item in pairs:
+            if key in result:
+                raise ValueError("LAB_REPORT_DUPLICATE_KEY")
+            result[key] = item
+        return result
+    try:
+        value = json.loads(raw, object_pairs_hook=unique_object)
+    except (UnicodeDecodeError, json.JSONDecodeError):
+        raise ValueError("LAB_REPORT_JSON_INVALID") from None
+    if (type(value) is not dict or set(value) != {
+            "schema", "origin", "catalog_sha256", "catalog_cases",
+            "catalog_assessment_cases", "catalog_challenge_cases", "catalog_families",
+            "selected_case_capacity", "records", "unrun_baseline_or_model",
+            "canonical_link_nonpass", "unresolved_patient_readback",
+            "unresolved_singleton_readback", "supplied_record_grades",
+            "grader_report", "actual_model", "voice", "external_runtime_qualification"} or
+            value.get("schema") != LAB_SOURCE_SCHEMA or
+            value.get("origin") != "UNQUALIFIED_SOURCE_SEAM" or
+            value.get("catalog_sha256") != LAB_CATALOG_SHA or
+            value.get("catalog_cases") != 16 or
+            value.get("catalog_assessment_cases") != 6 or
+            value.get("catalog_challenge_cases") != 10 or
+            value.get("catalog_families") != 11 or
+            value.get("selected_case_capacity") != 2 or
+            value.get("actual_model") != "NOT_RUN" or value.get("voice") != "NOT_RUN" or
+            value.get("external_runtime_qualification") != "NOT_BOUND" or
+            not _lab_count(value.get("records")) or value["records"] > 2 or
+            not _lab_count(value.get("supplied_record_grades")) or
+            value["supplied_record_grades"] > value["records"] or
+            any(not _lab_count(value.get(key)) or value[key] > value["records"]
+                for key in ("unrun_baseline_or_model", "canonical_link_nonpass",
+                    "unresolved_patient_readback", "unresolved_singleton_readback"))):
+        raise ValueError("LAB_REPORT_UNSUPPORTED_SOURCE")
+    report = value.get("grader_report")
+    if value["supplied_record_grades"] == 0:
+        if report is not None:
+            raise ValueError("LAB_REPORT_GRADE_MISMATCH")
+        return {**empty, "status": "BOUND_UNGRADED",
+                "origin": "UNQUALIFIED_SOURCE_SEAM",
+                "source_schema": LAB_SOURCE_SCHEMA,
+                "records": value["records"], "unrun": value["unrun_baseline_or_model"],
+                "canonical_link_nonpass": value["canonical_link_nonpass"],
+                "unresolved_patient_readback": value["unresolved_patient_readback"],
+                "unresolved_singleton_readback": value["unresolved_singleton_readback"]}
+    if (type(report) is not dict or set(report) != {"schema", "groups", "warning"} or
+            report.get("schema") != LAB_GRADE_SCHEMA or
+            report.get("warning") !=
+                "Descriptive synthetic evidence only; groups are not pooled into a risk rate or confidence claim." or
+            type(report.get("groups")) is not list or not 1 <= len(report["groups"]) <= 2):
+        raise ValueError("LAB_REPORT_GRADE_VERSION")
+    groups = []
+    outcome_keys = {"CORRECT", "INCORRECT", "UNKNOWN"}
+    containment_keys = {"CONTAINED", "RECOVERED_BY_OBSERVED_HUMAN",
+        "OUTCOME_CORRECT_CAUSE_UNRESOLVED", "NOT_CONTAINED", "UNRESOLVED"}
+    proposal_keys = {"CORRECT", "WRONG_PROPOSAL", "WRONG_BUT_PERMITTED_EXPOSED",
+        "CORRECT_NO_PROPOSAL", "CORRECT_CLARIFICATION", "CORRECT_OPTIONS_ONLY",
+        "CORRECT_RECONCILIATION", "MISSING_PROPOSAL", "UNKNOWN"}
+    for group in report["groups"]:
+        if (type(group) is not dict or set(group) != {
+                "catalog_sha256", "set_kind", "journey", "channel", "boundaries",
+                "evidence_class", "configuration", "unique_cases", "unique_families",
+                "episodes", "repeat_trials", "counts", "missing_count_observations",
+                "final_outcomes", "semantic_proposals", "wrong_proposals_reaching_review",
+                "proposal_review_observation_missing", "natural_error_containment",
+                "deliberate_challenge_containment", "measured_latency_ms",
+                "measured_cost_usd"}):
+            raise ValueError("LAB_REPORT_GROUP_INVALID")
+        for key in ("set_kind", "journey", "channel", "evidence_class"):
+            _lab_label(group.get(key))
+        if (group.get("catalog_sha256") != LAB_CATALOG_SHA or
+                group["set_kind"] not in {"assessment", "challenge"} or
+                group["journey"] not in {"create", "move"} or
+                group["channel"] not in {"text", "voice"} or
+                group["evidence_class"] != "SOURCE_ONLY_SUPPLIED_RECORD" or
+                type(group.get("configuration")) is not dict or
+                type(group.get("semantic_proposals")) is not dict or
+                not _lab_count(group.get("wrong_proposals_reaching_review")) or
+                not _lab_count(group.get("proposal_review_observation_missing")) or
+                type(group.get("measured_latency_ms")) is not list or
+                type(group.get("measured_cost_usd")) is not list or
+                len(group["measured_latency_ms"]) > 2 or
+                len(group["measured_cost_usd"]) > 2 or
+                any(type(item) not in (int, float) or not math.isfinite(item) or
+                    item < 0 for item in group["measured_latency_ms"] +
+                    group["measured_cost_usd"]) or
+                not _lab_count(group.get("unique_cases")) or
+                not _lab_count(group.get("unique_families")) or
+                not _lab_count(group.get("episodes")) or
+                not _lab_count(group.get("repeat_trials")) or
+                not 1 <= group["episodes"] <= 2 or
+                not 1 <= group["unique_cases"] <= group["episodes"] or
+                not 1 <= group["unique_families"] <= group["episodes"] or
+                group["repeat_trials"] > group["episodes"] or
+                type(group.get("boundaries")) is not list or
+                any(type(boundary) is not str or boundary not in
+                    {"actual_model", "integrated", "error_injection"}
+                    for boundary in group["boundaries"])):
+            raise ValueError("LAB_REPORT_GROUP_SCOPE")
+        outcomes = _lab_counts(group.get("final_outcomes"), outcome_keys)
+        proposals = _lab_counts(group.get("semantic_proposals"), proposal_keys)
+        aggregate_counts = _lab_counts(group.get("counts"),
+            {"eligible_attempts", "actual_commits", "model_error_episodes"})
+        if (sum(outcomes.values()) != group["episodes"] or
+                sum(proposals.values()) != group["episodes"] or
+                group["wrong_proposals_reaching_review"] > group["episodes"] or
+                group["proposal_review_observation_missing"] > group["episodes"]):
+            raise ValueError("LAB_REPORT_OUTCOME_COUNT")
+        missing = _lab_counts(group.get("missing_count_observations"),
+            {"eligible_attempts", "actual_commits", "model_error_episodes"})
+        if any(item > group["episodes"] for item in missing.values()):
+            raise ValueError("LAB_REPORT_MISSING_COUNT")
+        containment = {}
+        for key in ("natural_error_containment", "deliberate_challenge_containment"):
+            part = group.get(key)
+            if (type(part) is not dict or set(part) != {"denominator", "status", "counts"} or
+                    not _lab_count(part.get("denominator")) or
+                    part["denominator"] > group["episodes"] or
+                    part.get("status") != ("DESCRIPTIVE_COUNTS" if part["denominator"]
+                         else "NOT_APPLICABLE")):
+                raise ValueError("LAB_REPORT_CONTAINMENT_SCOPE")
+            part_counts = _lab_counts(part.get("counts"), containment_keys)
+            if sum(part_counts.values()) != part["denominator"]:
+                raise ValueError("LAB_REPORT_CONTAINMENT_COUNT")
+            containment[key] = {"denominator": part["denominator"],
+                "status": part["status"], "counts": part_counts}
+        groups.append({"set_kind": group["set_kind"], "journey": group["journey"],
+            "channel": group["channel"], "evidence_class": group["evidence_class"],
+            "boundaries": group["boundaries"],
+            "unique_cases": group["unique_cases"],
+            "unique_families": group["unique_families"],
+            "episodes": group["episodes"], "repeat_trials": group["repeat_trials"],
+            "final_outcomes": outcomes, "counts": aggregate_counts,
+            "missing_count_observations": missing,
+            **containment,
+            "latency": "NOT_MEASURED" if not group.get("measured_latency_ms") else "MEASURED_VALUES_WITHHELD",
+            "cost": "NOT_MEASURED" if not group.get("measured_cost_usd") else "MEASURED_VALUES_WITHHELD"})
+    if sum(group["episodes"] for group in groups) != value["supplied_record_grades"]:
+        raise ValueError("LAB_REPORT_EPISODE_COUNT")
+    return {**empty, "status": "SUPPLIED_RECORD_GRADES_ONLY",
+        "origin": "UNQUALIFIED_SOURCE_SEAM", "source_schema": LAB_SOURCE_SCHEMA,
+        "records": value["records"],
+        "unrun": value["unrun_baseline_or_model"],
+        "canonical_link_nonpass": value["canonical_link_nonpass"],
+        "unresolved_patient_readback": value["unresolved_patient_readback"],
+        "unresolved_singleton_readback": value["unresolved_singleton_readback"],
+        "groups": groups}
+
+
+def project_native04_controls(result_raw: bytes | None, primary_raw: bytes | None,
+                              effect_raw: bytes | None,
+                              existing_raw: bytes | None) -> dict[str, Any] | None:
+    """Project four exact startup-bound ordinary records; expose no raw records."""
+    supplied = (result_raw, primary_raw, effect_raw, existing_raw)
+    if all(item is None for item in supplied):
+        return None
+    if any(item is None for item in supplied):
+        raise ValueError("LAB_NATIVE04_BINDING_INCOMPLETE")
+
+    def unique_object(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
+        value = {}
+        for key, item in pairs:
+            if key in value:
+                raise ValueError("LAB_NATIVE04_DUPLICATE_KEY")
+            value[key] = item
+        return value
+
+    decoded = {}
+    for name, raw in zip(NATIVE04_INPUTS, supplied):
+        size, digest = NATIVE04_INPUTS[name]
+        if (type(raw) is not bytes or len(raw) != size or
+                hashlib.sha256(raw).hexdigest() != digest):
+            raise ValueError("LAB_NATIVE04_PIN_MISMATCH")
+        try:
+            decoded[name] = json.loads(raw, object_pairs_hook=unique_object)
+        except (UnicodeDecodeError, json.JSONDecodeError):
+            raise ValueError("LAB_NATIVE04_JSON_INVALID") from None
+
+    result, primary = decoded["result"], decoded["primary"]
+    effect, existing = decoded["effect_review"], decoded["existing_review"]
+    if (type(result) is not dict or result.get("schema") != "stage1-child-result.v1" or
+            result.get("status") != "PASS" or result.get("primary") != primary or
+            result.get("primary_sha256") != NATIVE04_INPUTS["primary"][1] or
+            type(primary) is not dict or primary.get("status") != "PASS" or
+            primary.get("collection_attempts") != 1 or
+            primary.get("collection_errors") != 0 or
+            primary.get("internal_errors") != 0 or
+            primary.get("collected") != [
+                "test_stage1_outcome_matched_create.py::test_fictional_create_valid_01_canonical_request_confirm_readback",
+                "test_stage1_outcome_matched_move.py::test_move_valid_timeonly_01_canonical_signed_confirm_and_readback"] or
+            type(effect) is not dict or
+            effect.get("schema") != "emr4.stage1_outcome_result_delivery_effect_review.v2" or
+            effect.get("verdict") !=
+                "PASS_NATIVE04_TWO_SYNTHETIC_CASES_DELIVERED_BOUNDED_EPISODE_PROJECTION_AND_CLEANUP" or
+            effect.get("independent") is not True or
+            effect.get("implementation_authorship") is not False or
+            effect.get("decoded_stage1_result_sha256") != NATIVE04_INPUTS["result"][1] or
+            effect.get("decoded_stage1_primary_sha256") != NATIVE04_INPUTS["primary"][1] or
+            effect.get("reviewed_effect", {}).get("delivered_versioned_episode_records") != 2 or
+            effect.get("reviewed_effect", {}).get("phase_reports") != 6 or
+            effect.get("reviewed_effect", {}).get("cases") != primary["collected"] or
+            effect.get("reviewed_effect", {}).get("new_unique_case_coverage") != 0 or
+            type(existing) is not dict or
+            existing.get("schema") != "emr4.stage1_outcome_existing_evidence_review.v1" or
+            existing.get("catalogue", {}).get("sha256") != LAB_CATALOG_SHA):
+        raise ValueError("LAB_NATIVE04_PROVENANCE_INVALID")
+    dispositions = existing.get("case_dispositions")
+    if (type(dispositions) is not list or len(dispositions) != 16 or
+            len({item.get("case_id") for item in dispositions if type(item) is dict}) != 16):
+        raise ValueError("LAB_NATIVE04_CASE_DISPOSITIONS")
+    counts = {kind: sum(item.get("disposition") == kind for item in dispositions)
+              for kind in ("CURRENT_INTEGRATED_EVIDENCE",
+                           "QUALIFIED_REUSED_BOUNDARY_EVIDENCE", "NOT_RUN")}
+    if counts != {"CURRENT_INTEGRATED_EVIDENCE": 2,
+                  "QUALIFIED_REUSED_BOUNDARY_EVIDENCE": 4, "NOT_RUN": 10}:
+        raise ValueError("LAB_NATIVE04_CASE_DISPOSITIONS")
+
+    selected = primary.get("selected_results")
+    if (type(selected) is not dict or
+            selected.get("schema") != "emr4.stage1_outcome_selected_results.v1" or
+            selected.get("status") != "SOURCE_PROJECTION_ONLY" or
+            selected.get("origin") != "UNQUALIFIED_SOURCE_SEAM" or
+            selected.get("summary") != {
+                "episode_count": 2, "external_runtime_qualification": "NOT_BOUND",
+                "final_grade": "UNKNOWN", "model": "NOT_RUN",
+                "phase_reports": None, "voice": "NOT_RUN"} or
+            type(selected.get("episodes")) is not list or
+            len(selected["episodes"]) != 2):
+        raise ValueError("LAB_NATIVE04_SOURCE_PROJECTION")
+
+    def appointment(value: Any) -> dict[str, Any] | None:
+        if value is None:
+            return None
+        if (type(value) is not dict or set(value) !=
+                {"date", "start_local", "state_version", "status"} or
+                type(value["date"]) is not str or
+                re.fullmatch(r"20\d{2}-\d{2}-\d{2}", value["date"]) is None or
+                type(value["start_local"]) is not str or
+                re.fullmatch(r"(?:[01]\d|2[0-3]):[0-5]\d", value["start_local"]) is None or
+                not _lab_count(value["state_version"]) or
+                value["status"] != "Booked"):
+            raise ValueError("LAB_NATIVE04_APPOINTMENT")
+        return {"date": value["date"], "start_local": value["start_local"],
+                "status": "Booked"}
+
+    controls = []
+    expected = (("create-valid-01", "create"),
+                ("move-valid-timeonly-01", "move"))
+    for episode, (case_id, journey) in zip(selected["episodes"], expected):
+        if (type(episode) is not dict or episode.get("case_id") != case_id or
+                episode.get("journey") != journey or
+                episode.get("mode") != "integrated" or
+                episode.get("channel") != "text" or
+                episode.get("repeat") != 1 or
+                type(episode.get("observed")) is not dict):
+            raise ValueError("LAB_NATIVE04_CONTROL_IDENTITY")
+        observed = episode["observed"]
+        before, after = observed.get("before"), observed.get("after")
+        if (observed.get("status") != "SUPPLIED_RECORD_GRADED" or
+                observed.get("grade") != "UNKNOWN" or
+                observed.get("attempted") is not True or
+                observed.get("display") != "NOT_OBSERVED" or
+                observed.get("confirmation_human") != "UNKNOWN" or
+                observed.get("canonical_link_issue_codes") != [] or
+                observed.get("latency_ms") is not None or
+                observed.get("usage") is not None or
+                type(before) is not dict or type(after) is not dict or
+                set(before) != {"appointment_count", "request_state", "selected_appointment"} or
+                set(after) != set(before) or
+                not _lab_count(before["appointment_count"]) or
+                not _lab_count(after["appointment_count"]) or
+                before["appointment_count"] > 2 or after["appointment_count"] > 2 or
+                before["request_state"] not in (None, "submitted", "booked") or
+                after["request_state"] not in (None, "submitted", "booked") or
+                observed.get("new_command_count") != 1 or
+                observed.get("new_audit_count") != 1 or
+                observed.get("current_readback") not in ("TRUE", "UNKNOWN") or
+                observed.get("patient_readback") not in ("TRUE", "UNKNOWN") or
+                observed.get("source_readback") not in ("TRUE", "UNKNOWN")):
+            raise ValueError("LAB_NATIVE04_CONTROL_OBSERVATION")
+        controls.append({"case_id": case_id, "journey": journey,
+            "before": {"appointment_count": before["appointment_count"],
+                       "request_state": before["request_state"],
+                       "appointment": appointment(before["selected_appointment"])},
+            "after": {"appointment_count": after["appointment_count"],
+                      "request_state": after["request_state"],
+                      "appointment": appointment(after["selected_appointment"])},
+            "new_command_count": 1, "new_audit_count": 1,
+            "current_readback": observed["current_readback"],
+            "patient_readback": observed["patient_readback"],
+            "source_readback": observed["source_readback"],
+            "grade": "UNKNOWN", "display": "NOT_OBSERVED",
+            "request_detail": "NOT_IN_DELIVERED_PROJECTION",
+            "proposal_detail": "NOT_IN_DELIVERED_PROJECTION",
+            "validation_detail": "NOT_IN_DELIVERED_PROJECTION"})
+    return {"schema": "emr4.stage1_reliability_native04_view.v1",
+        "qualification": "EXTERNALLY_REVIEWED_RESULT_DELIVERY_ONLY",
+        "effect_review_sha256": NATIVE04_INPUTS["effect_review"][1],
+        "source_origin": "UNQUALIFIED_SOURCE_SEAM",
+        "internal_runtime_binding": "NOT_BOUND", "internal_grade": "UNKNOWN",
+        "actual_model": "NOT_RUN", "voice": "NOT_RUN",
+        "current_controls": counts["CURRENT_INTEGRATED_EVIDENCE"],
+        "qualified_reused_boundaries": counts["QUALIFIED_REUSED_BOUNDARY_EVIDENCE"],
+        "not_run_catalog_cases": counts["NOT_RUN"],
+        "new_unique_case_coverage": 0, "phase_reports_for_two_controls": 6,
+        "controls": controls}
 
 
 def local_minute(value: Any) -> str | None:
@@ -70,7 +590,21 @@ class DemoConfig:
     request_capabilities: dict[str, str] = field(repr=False)
     # None until actual local installation, model and execution evidence are
     # independently bound by the trusted isolated harness.
-    voice_runtime: VoiceRuntimeBinding | None = field(default=None, repr=False)
+    voice_runtime: VoiceRuntimeBinding | ContainedVoiceRuntimeBinding | None = field(
+        default=None, repr=False)
+    # One optional, trusted startup-supplied versioned report. No HTTP upload,
+    # caller path, evaluator or runtime measurement is created by this bridge.
+    reliability_report_bytes: bytes | None = field(default=None, repr=False)
+    reliability_report_sha256: str | None = field(default=None, repr=False)
+    # Optional exact Native04 delivered projections and independent reviews.
+    # The trusted startup supplies bytes; this bridge never opens their paths.
+    reliability_native04_result_bytes: bytes | None = field(default=None, repr=False)
+    reliability_native04_primary_bytes: bytes | None = field(default=None, repr=False)
+    reliability_native04_effect_review_bytes: bytes | None = field(default=None, repr=False)
+    reliability_existing_evidence_review_bytes: bytes | None = field(default=None, repr=False)
+    # One pinned, pre-projected progress report. No report path or client data is read.
+    reliability_progress_report_bytes: bytes | None = field(default=None, repr=False)
+    reliability_progress_report_sha256: str | None = field(default=None, repr=False)
 
 
 @dataclass(repr=False)
@@ -102,6 +636,24 @@ class DemoIssuer:
                 or any(config.request_capabilities[s.request_id] != s.patient_capability for s in patient_seeds)):
             raise ValueError("DEMO_SEEDS_INVALID")
         self.config = config
+        self.lab_view = project_reliability_lab(
+            config.reliability_report_bytes, config.reliability_report_sha256)
+        native04 = project_native04_controls(
+            config.reliability_native04_result_bytes,
+            config.reliability_native04_primary_bytes,
+            config.reliability_native04_effect_review_bytes,
+            config.reliability_existing_evidence_review_bytes)
+        if native04 is not None:
+            self.lab_view = {**self.lab_view,
+                "schema": "emr4.stage1_reliability_lab_view.v2",
+                "native04": native04}
+        progress = project_lab_progress(
+            config.reliability_progress_report_bytes,
+            config.reliability_progress_report_sha256)
+        if progress is not None:
+            self.lab_view = {**self.lab_view,
+                "schema": "emr4.stage1_reliability_lab_view.v3",
+                "progress": progress}
         self._sessions: dict[str, _Session] = {}
         self._initial_booking: dict[str, dict[str, str]] = {}
         for seed in config.seeds:
@@ -347,10 +899,21 @@ def create_stage1_demo_app(config: DemoConfig) -> tuple[FastAPI, DemoIssuer]:
     async def session_route(request: Request):
         local(request)
         session = issuer.session_for(request)
-        voice_ready = config.voice_runtime is not None and config.voice_runtime.ready()
+        voice_ready = (config.voice_runtime is not None and
+            (config.voice_runtime.ready(session.binding.persona)
+             if isinstance(config.voice_runtime, ContainedVoiceRuntimeBinding)
+             else config.voice_runtime.ready()))
         return no_store({"persona": session.binding.persona, "csrf": session.binding.csrf,
             "zone": config.timezone, "demo_clock": config.demo_clock,
             "voice_available": voice_ready, "voice_nonce": session.voice_nonce if voice_ready else None})
+
+    @app.get("/demo/stage1/reliability")
+    async def reliability_route(request: Request):
+        local(request)
+        session = issuer.session_for(request)
+        if session.binding.persona != "staff" or not session.staff_bearer:
+            raise HTTPException(status_code=404, detail="LAB_UNAVAILABLE")
+        return no_store(issuer.lab_view)
 
     @app.get("/demo/stage1/")
     async def page(request: Request):
@@ -370,7 +933,9 @@ def create_stage1_demo_app(config: DemoConfig) -> tuple[FastAPI, DemoIssuer]:
         local(request)
         session = issuer.session_for(request)
         binding = config.voice_runtime
-        if binding is None or not binding.ready():
+        if binding is None or not (binding.ready(session.binding.persona)
+                if isinstance(binding, ContainedVoiceRuntimeBinding)
+                else binding.ready()):
             return no_store({"error": "VOICE_UNAVAILABLE"}, 503)
         target = target_for_persona(session.binding.persona)
         if (request.headers.get("origin") != config.listener_origin
@@ -400,7 +965,11 @@ def create_stage1_demo_app(config: DemoConfig) -> tuple[FastAPI, DemoIssuer]:
             return no_store({"error": "VOICE_BUSY"}, 429)
         try:
             async with voice_lock:
-                transcript = await asyncio.to_thread(run_local_recognizer, raw, binding)
+                if isinstance(binding, ContainedVoiceRuntimeBinding):
+                    transcript = await asyncio.to_thread(
+                        run_local_recognizer, raw, binding, session.binding.persona)
+                else:
+                    transcript = await asyncio.to_thread(run_local_recognizer, raw, binding)
         except (VoiceInputRejected, VoiceRecognitionUnavailable):
             return no_store({"error": "VOICE_RECOGNITION_UNAVAILABLE"}, 503)
         if (datetime.now(timezone.utc) >= session.expires_at

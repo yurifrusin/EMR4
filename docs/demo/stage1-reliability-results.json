@@ -1,0 +1,191 @@
+{
+  "schema": "emr4.stage1_reliability_progress_report.v2",
+  "status": "REVIEWED_NONPASS_EFFECT_ACCOUNTING",
+  "catalog_sha256": "8cc1ae403b898aecc8dca8f25e5f2c209b272c5a4fac6231e96f8e6ef238cf43",
+  "catalog_cases": 16,
+  "catalog_families": 11,
+  "baseline_dispositions": {
+    "current_controls": 2,
+    "qualified_reused_boundaries": 4,
+    "not_run": 10
+  },
+  "attempts": [
+    {
+      "name": "Native04",
+      "status": "DELIVERED_VALID_CONTROLS",
+      "selected_test_instances": 2,
+      "phase_reports": 6,
+      "delivered_selected_records": 2,
+      "cases": [
+        {
+          "case_id": "create-valid-01",
+          "call_phase": "PASSED"
+        },
+        {
+          "case_id": "move-valid-timeonly-01",
+          "call_phase": "PASSED"
+        }
+      ],
+      "effect_review_sha256": "b8bb1b6e2de75bf0a5376c61287116564e8147bbada3149a5c25810c2bc30d06"
+    },
+    {
+      "name": "Native05",
+      "status": "NONPASS_NO_DELIVERED_SELECTED_RECORDS",
+      "selected_test_instances": 2,
+      "phase_reports": 6,
+      "delivered_selected_records": 0,
+      "cases": [
+        {
+          "case_id": "create-duplicate-lost-response-09",
+          "call_phase": "FAILED"
+        },
+        {
+          "case_id": "move-duplicate-lost-response-10",
+          "call_phase": "PASSED"
+        }
+      ],
+      "effect_review_sha256": "c881ce80f6d14df14b2bd1613f2d02a7433752e2ff165aafebfed01ab0700f20"
+    },
+    {
+      "name": "Native06",
+      "status": "PRE_DOCKER_LAUNCH_FAILURE",
+      "selected_test_instances": 0,
+      "phase_reports": 0,
+      "delivered_selected_records": 0,
+      "cases": [],
+      "effect_review_sha256": "003f06377fa76362325a6ecbcad1a6ce7983ee96c648b45c8e4d5454513f0899"
+    },
+    {
+      "name": "Native07",
+      "status": "NONPASS_NO_DELIVERED_SELECTED_RECORDS",
+      "selected_test_instances": 2,
+      "phase_reports": 6,
+      "delivered_selected_records": 0,
+      "cases": [
+        {
+          "case_id": "create-duplicate-lost-response-09",
+          "call_phase": "FAILED"
+        },
+        {
+          "case_id": "move-duplicate-lost-response-10",
+          "call_phase": "PASSED"
+        }
+      ],
+      "effect_review_sha256": "5bd59db323eb4da71b7b80ebf66aea88a3ef86fecd198b373523a58558103af7"
+    },
+    {
+      "name": "Native08",
+      "status": "PRE_DOCKER_LAUNCH_FAILURE",
+      "selected_test_instances": 0,
+      "phase_reports": 0,
+      "delivered_selected_records": 0,
+      "cases": [],
+      "effect_review_sha256": "62c2072574a9ded109d756a417810013068553554828e0cdf0c091de7dd2eb82"
+    }
+  ],
+  "reused_examples": [
+    {
+      "case_id": "move-attempted-identity-change-05",
+      "disturbance": "NON_TIME_PAYLOAD_CHANGE",
+      "actual_validation": "HTTP_422_WITH_UNCHANGED_SNAPSHOT",
+      "before_after": "UNCHANGED_SNAPSHOT_DETAILS_NOT_DELIVERED",
+      "outcome": "QUALIFIED_REUSED_BOUNDARY_ONLY"
+    },
+    {
+      "case_id": "move-stale-expired-authority-06",
+      "disturbance": "STALE_OR_EXPIRED_AUTHORITY",
+      "actual_validation": "SEPARATE_REFUSAL_TESTS",
+      "before_after": "NOT_IN_DELIVERED_PROJECTION",
+      "outcome": "QUALIFIED_REUSED_BOUNDARY_ONLY"
+    },
+    {
+      "case_id": "move-source-cancelled-08",
+      "disturbance": "CANCELLED_SOURCE",
+      "actual_validation": "REJECTED_WITH_UNCHANGED_SNAPSHOT",
+      "before_after": "UNCHANGED_SNAPSHOT_DETAILS_NOT_DELIVERED",
+      "outcome": "QUALIFIED_REUSED_BOUNDARY_ONLY"
+    },
+    {
+      "case_id": "move-duplicate-lost-response-10",
+      "disturbance": "COMPLETED_REPLAY_WITHOUT_LOST_RESPONSE",
+      "actual_validation": "EQUAL_RESPONSE_UNCHANGED_SNAPSHOT_AND_CHANGED_BODY_CONFLICT",
+      "before_after": "UNCHANGED_SNAPSHOT_DETAILS_NOT_DELIVERED",
+      "outcome": "QUALIFIED_REUSED_BOUNDARY_ONLY"
+    }
+  ],
+  "request_detail": "NOT_IN_DELIVERED_PROJECTION",
+  "proposal_detail": "NOT_IN_DELIVERED_PROJECTION",
+  "actual_model": "NOT_RUN",
+  "m1_model_binding": "OPEN",
+  "generated_silence_voice": "NOT_RUN_AS_SPEECH_TEST",
+  "genuine_ptt_voice": "NOT_RUN",
+  "whole_journey_grade": "UNKNOWN",
+  "display": "NOT_OBSERVED",
+  "disclosure": "NOT_OBSERVED",
+  "authored_catalog_sha256": "792b8d4cb627b721f607d1548b757f0b1960b2a2aa0b1592cd3674bc71bb071e",
+  "evidence_through": "NATIVE08_REVIEWED_PRE_DOCKER",
+  "native04_primary_sha256": "76a83146a5179dd9514c649ccb2c57a00a6cdd184dd7ce4e0605f02b7c470672",
+  "native04_result_sha256": "857e3e0243476ba4b2a6024ae613f4598c7c2d321685ab2a500b754ffd363167",
+  "worked_examples": [
+    {
+      "case_id": "create-valid-01",
+      "evidence_kind": "NATIVE04_DELIVERED_CONTROL",
+      "authored_request": "Alex requests a follow-up with Dr Rao on Thursday 2026-10-15 at or after 14:00; staff confirms 14:30.",
+      "authored_expected_proposal": "Expected request then staff confirm; 2026-10-15 14:30",
+      "proposal_observation": "NOT_IN_DELIVERED_PROJECTION",
+      "actual_validation": "CALL_PASSED_SOURCE_PROJECTION_GRADE_UNKNOWN",
+      "before_after": {
+        "before": "appointments 0; request submitted",
+        "after": "appointments 1; request booked; 2026-10-15 14:30; Booked; version 1"
+      },
+      "readback": "CURRENT_UNKNOWN_PATIENT_TRUE_SOURCE_UNKNOWN",
+      "outcome": "DELIVERED_SOURCE_PROJECTION_EXTERNAL_RUNTIME_QUALIFIED_GRADE_UNKNOWN",
+      "command_audit": "ONE_COMMAND_ONE_AUDIT_IN_DELIVERED_PROJECTION"
+    },
+    {
+      "case_id": "move-valid-timeonly-01",
+      "evidence_kind": "NATIVE04_DELIVERED_CONTROL",
+      "authored_request": "Move this exact existing follow-up to Thursday 2026-10-15 at 14:30.",
+      "authored_expected_proposal": "Expected time only move review then confirm; 2026-10-15 14:30",
+      "proposal_observation": "NOT_IN_DELIVERED_PROJECTION",
+      "actual_validation": "CALL_PASSED_SOURCE_PROJECTION_GRADE_UNKNOWN",
+      "before_after": {
+        "before": "appointments 1; 2026-10-14 15:00; Booked; version 7",
+        "after": "appointments 1; 2026-10-15 14:30; Booked; version 8"
+      },
+      "readback": "CURRENT_TRUE_PATIENT_UNKNOWN_SOURCE_TRUE",
+      "outcome": "DELIVERED_SOURCE_PROJECTION_EXTERNAL_RUNTIME_QUALIFIED_GRADE_UNKNOWN",
+      "command_audit": "ONE_COMMAND_ONE_AUDIT_IN_DELIVERED_PROJECTION"
+    },
+    {
+      "case_id": "move-attempted-identity-change-05",
+      "evidence_kind": "QUALIFIED_REUSED_BOUNDARY",
+      "authored_request": "Time-only move of selected appointment.",
+      "authored_expected_proposal": "NOT_IN_DELIVERED_PROJECTION",
+      "proposal_observation": "NOT_IN_DELIVERED_PROJECTION",
+      "actual_validation": "HTTP_422_WITH_UNCHANGED_SNAPSHOT",
+      "before_after": {
+        "before": "UNCHANGED_SNAPSHOT_DETAILS_NOT_DELIVERED",
+        "after": "UNCHANGED_SNAPSHOT_DETAILS_NOT_DELIVERED"
+      },
+      "readback": "NOT_IN_DELIVERED_PROJECTION",
+      "outcome": "QUALIFIED_REUSED_BOUNDARY_ONLY",
+      "command_audit": "NOT_IN_DELIVERED_PROJECTION"
+    },
+    {
+      "case_id": "move-source-cancelled-08",
+      "evidence_kind": "QUALIFIED_REUSED_BOUNDARY",
+      "authored_request": "Move an existing active appointment; a cancelled record is not an active appointment to move.",
+      "authored_expected_proposal": "NOT_IN_DELIVERED_PROJECTION",
+      "proposal_observation": "NOT_IN_DELIVERED_PROJECTION",
+      "actual_validation": "REJECTED_WITH_UNCHANGED_SNAPSHOT",
+      "before_after": {
+        "before": "UNCHANGED_SNAPSHOT_DETAILS_NOT_DELIVERED",
+        "after": "UNCHANGED_SNAPSHOT_DETAILS_NOT_DELIVERED"
+      },
+      "readback": "NOT_IN_DELIVERED_PROJECTION",
+      "outcome": "QUALIFIED_REUSED_BOUNDARY_ONLY",
+      "command_audit": "NOT_IN_DELIVERED_PROJECTION"
+    }
+  ]
+}

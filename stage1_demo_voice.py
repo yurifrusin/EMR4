@@ -7,7 +7,7 @@ model and execution receipts before a VoiceRuntimeBinding can become ready.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 import hashlib
 import io
 import json
@@ -16,6 +16,8 @@ from pathlib import Path
 import re
 import subprocess
 import tempfile
+import threading
+from types import ModuleType
 import wave
 
 
@@ -33,6 +35,12 @@ MODEL_RESULT_SHA256 = "a45b6e8ef1dbee94d5931be31895e436300538374892ead513c543f78
 # An independently accepted child-execution receipt is not available. A later
 # reviewed source amendment must pin it explicitly before ready() can succeed.
 EXECUTION_ACCEPTANCE_SHA256: str | None = None
+# Native08 accepted one generated-silence child and its cleanup. Interactive
+# clips still need their own reviewed source, execution and finite grant.
+NATIVE08_EFFECT_REVIEW_SHA256 = "818f7069444cdbed12c5baf1608bb4ccfa44b936b5db7e33182fad7af1b3b1c2"
+CONTAINED_RUNNER_PATH = Path("C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/demo-led-stage1-20261012-v2/stage1-voice-interactive-seam-source-v4/run_container_child_once.py")
+CONTAINED_RUNNER_SHA256 = "810ff65f1c7a71d85ed2c9924037f8173e85794320b2fba88e85eb209bc77529"
+INTERACTIVE_EXECUTION_ACCEPTANCE_SHA256: str | None = None
 SELECTED_RECOGNIZER_PATH = Path("C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/demo-led-stage1-20261012-v2/stage1-offline-voice-preparation-v1/recognize_wav.py")
 NATIVE_FILES = (
     ("vosk/libgcc_s_seh-1.dll", "201bf8a54ebb490f93ea4beb20740a483bf67036b90b5720f32d0c746a72d1e9"),
@@ -69,6 +77,23 @@ class VoiceInputRejected(ValueError):
 
 class VoiceRecognitionUnavailable(RuntimeError):
     pass
+
+
+class _OneClipClaim:
+    def __init__(self) -> None:
+        self._lock = threading.Lock()
+        self._used = False
+
+    def available(self) -> bool:
+        with self._lock:
+            return not self._used
+
+    def claim(self) -> bool:
+        with self._lock:
+            if self._used:
+                return False
+            self._used = True
+            return True
 
 
 @dataclass(frozen=True, repr=False)
@@ -114,6 +139,57 @@ class VoiceRuntimeBinding:
             return False
 
 
+@dataclass(frozen=True, repr=False)
+class ContainedVoiceRuntimeBinding:
+    """Trusted harness bridge to the already bounded offline child runner.
+
+    The host must import the exact pinned lower module and provide its own
+    separately reviewed interactive ExecutionBinding. Native08 by itself
+    cannot make this ready.
+    """
+
+    runner_module: ModuleType
+    patient_child_binding: object
+    staff_child_binding: object
+    interactive_execution_acceptance_sha256: str
+    _patient_claim: _OneClipClaim = field(default_factory=_OneClipClaim, init=False,
+                                          repr=False, compare=False)
+    _staff_claim: _OneClipClaim = field(default_factory=_OneClipClaim, init=False,
+                                        repr=False, compare=False)
+
+    def slot(self, persona: str) -> tuple[object, _OneClipClaim] | None:
+        if persona == "patient":
+            return self.patient_child_binding, self._patient_claim
+        if persona == "staff":
+            return self.staff_child_binding, self._staff_claim
+        return None
+
+    def ready(self, persona: str) -> bool:
+        selected = self.slot(persona)
+        if (selected is None or not selected[1].available() or
+                INTERACTIVE_EXECUTION_ACCEPTANCE_SHA256 is None or
+                SHA256.fullmatch(INTERACTIVE_EXECUTION_ACCEPTANCE_SHA256) is None or
+                self.interactive_execution_acceptance_sha256 !=
+                INTERACTIVE_EXECUTION_ACCEPTANCE_SHA256):
+            return False
+        try:
+            module = self.runner_module
+            child = selected[0]
+            return (type(module) is ModuleType and
+                    Path(module.__file__) == CONTAINED_RUNNER_PATH and
+                    _matches(CONTAINED_RUNNER_PATH, CONTAINED_RUNNER_SHA256) and
+                    type(child) is module.ExecutionBinding and
+                    child.mode == "interactive-voice" and
+                    child.interactive_slot == persona and
+                    child.child_effect_review_sha256 == NATIVE08_EFFECT_REVIEW_SHA256 and
+                    module.CHILD_EFFECT_REVIEW_SHA256 == NATIVE08_EFFECT_REVIEW_SHA256 and
+                    self.patient_child_binding.finite_grant_sha256 ==
+                    self.staff_child_binding.finite_grant_sha256 and
+                    callable(module.run_once) and child.ready() is True)
+        except (AttributeError, OSError, TypeError, ValueError):
+            return False
+
+
 def target_for_persona(persona: str) -> str | None:
     return {"patient": "patient-words", "staff": "move-words"}.get(persona)
 
@@ -134,8 +210,25 @@ def validate_wav(raw: bytes) -> None:
         raise VoiceInputRejected("WAV_INVALID") from exc
 
 
-def run_local_recognizer(raw: bytes, binding: VoiceRuntimeBinding) -> str:
+def run_local_recognizer(raw: bytes,
+                         binding: VoiceRuntimeBinding | ContainedVoiceRuntimeBinding,
+                         persona: str | None = None) -> str:
     validate_wav(raw)
+    if isinstance(binding, ContainedVoiceRuntimeBinding):
+        selected = binding.slot(persona) if isinstance(persona, str) else None
+        if selected is None or not binding.ready(persona) or not selected[1].claim():
+            raise VoiceRecognitionUnavailable("VOICE_RUNTIME_UNQUALIFIED")
+        try:
+            # run_once returns only after its owned child has exited and the
+            # exact container cleanup is verified. Its transcript is advisory.
+            transcript = binding.runner_module.run_once(raw, selected[0])
+        except (OSError, ValueError, RuntimeError) as exc:
+            raise VoiceRecognitionUnavailable("VOICE_RECOGNITION_UNAVAILABLE") from exc
+        if not isinstance(transcript, str) or len(transcript) > 500:
+            raise VoiceRecognitionUnavailable("VOICE_RESULT_UNAVAILABLE")
+        return transcript.strip()
+    if not isinstance(binding, VoiceRuntimeBinding):
+        raise VoiceRecognitionUnavailable("VOICE_RUNTIME_UNQUALIFIED")
     if not binding.ready():
         raise VoiceRecognitionUnavailable("VOICE_RUNTIME_UNQUALIFIED")
     system_root = os.environ.get("SystemRoot")
