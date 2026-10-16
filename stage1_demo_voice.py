@@ -38,9 +38,8 @@ EXECUTION_ACCEPTANCE_SHA256: str | None = None
 # Native08 accepted one generated-silence child and its cleanup. Interactive
 # clips still need their own reviewed source, execution and finite grant.
 NATIVE08_EFFECT_REVIEW_SHA256 = "818f7069444cdbed12c5baf1608bb4ccfa44b936b5db7e33182fad7af1b3b1c2"
-CONTAINED_RUNNER_PATH = Path("C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/demo-led-stage1-20261012-v2/stage1-voice-interactive-seam-source-v4/run_container_child_once.py")
-CONTAINED_RUNNER_SHA256 = "810ff65f1c7a71d85ed2c9924037f8173e85794320b2fba88e85eb209bc77529"
-INTERACTIVE_EXECUTION_ACCEPTANCE_SHA256: str | None = None
+CONTAINED_RUNNER_PATH = Path("C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/demo-led-stage1-20261012-v2/stage1-voice-external-binding-source-v2/run_container_child_once.py")
+CONTAINED_RUNNER_SHA256 = "9d389874d11223323f3ea9c31cc87e30ab1611f8b1f815820ca9d8aa44a264b5"
 SELECTED_RECOGNIZER_PATH = Path("C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/demo-led-stage1-20261012-v2/stage1-offline-voice-preparation-v1/recognize_wav.py")
 NATIVE_FILES = (
     ("vosk/libgcc_s_seh-1.dll", "201bf8a54ebb490f93ea4beb20740a483bf67036b90b5720f32d0c746a72d1e9"),
@@ -139,19 +138,53 @@ class VoiceRuntimeBinding:
             return False
 
 
+_NATIVE_ISSUER = object()
+
+
+class _TrustedNativeVoiceCapability:
+    """Process-local capability installed only by the reviewed native entry.
+
+    The callbacks must verify the live session and durably consume the named
+    grant slot before returning a lower TrustedLaunchAuthority. This class
+    cannot authenticate its own installer; it is never exposed to HTTP data.
+    """
+
+    __slots__ = ("scope_current", "consume_and_authorize", "_issuer")
+
+    def __init__(self, scope_current, consume_and_authorize, issuer):
+        if (issuer is not _NATIVE_ISSUER or not callable(scope_current)
+                or not callable(consume_and_authorize)):
+            raise VoiceRecognitionUnavailable("VOICE_RUNTIME_UNQUALIFIED")
+        self.scope_current = scope_current
+        self.consume_and_authorize = consume_and_authorize
+        self._issuer = issuer
+
+
+def _from_reviewed_native_entry(runner_module: ModuleType,
+                                patient_child_binding: object,
+                                staff_child_binding: object,
+                                scope_current,
+                                consume_and_authorize):
+    """Native-only configuration seam; external review must authenticate caller.
+
+    The caller validates exact upper/lower source, imported module and callable,
+    independent reviews, finite grant, Native08, and durable two-slot checkpoint.
+    No HTTP field or caller-constructed ExecutionBinding proves those facts.
+    """
+    capability = _TrustedNativeVoiceCapability(
+        scope_current, consume_and_authorize, _NATIVE_ISSUER)
+    return ContainedVoiceRuntimeBinding(
+        runner_module, patient_child_binding, staff_child_binding, capability)
+
+
 @dataclass(frozen=True, repr=False)
 class ContainedVoiceRuntimeBinding:
-    """Trusted harness bridge to the already bounded offline child runner.
-
-    The host must import the exact pinned lower module and provide its own
-    separately reviewed interactive ExecutionBinding. Native08 by itself
-    cannot make this ready.
-    """
+    """Default-closed bridge to the exact reviewed V2 lower runner."""
 
     runner_module: ModuleType
     patient_child_binding: object
     staff_child_binding: object
-    interactive_execution_acceptance_sha256: str
+    _native_capability: _TrustedNativeVoiceCapability | None = None
     _patient_claim: _OneClipClaim = field(default_factory=_OneClipClaim, init=False,
                                           repr=False, compare=False)
     _staff_claim: _OneClipClaim = field(default_factory=_OneClipClaim, init=False,
@@ -166,11 +199,10 @@ class ContainedVoiceRuntimeBinding:
 
     def ready(self, persona: str) -> bool:
         selected = self.slot(persona)
-        if (selected is None or not selected[1].available() or
-                INTERACTIVE_EXECUTION_ACCEPTANCE_SHA256 is None or
-                SHA256.fullmatch(INTERACTIVE_EXECUTION_ACCEPTANCE_SHA256) is None or
-                self.interactive_execution_acceptance_sha256 !=
-                INTERACTIVE_EXECUTION_ACCEPTANCE_SHA256):
+        capability = self._native_capability
+        if (selected is None or not selected[1].available()
+                or type(capability) is not _TrustedNativeVoiceCapability
+                or capability._issuer is not _NATIVE_ISSUER):
             return False
         try:
             module = self.runner_module
@@ -185,8 +217,9 @@ class ContainedVoiceRuntimeBinding:
                     module.CHILD_EFFECT_REVIEW_SHA256 == NATIVE08_EFFECT_REVIEW_SHA256 and
                     self.patient_child_binding.finite_grant_sha256 ==
                     self.staff_child_binding.finite_grant_sha256 and
-                    callable(module.run_once) and child.ready() is True)
-        except (AttributeError, OSError, TypeError, ValueError):
+                    callable(module.run_once) and
+                    capability.scope_current(persona) is True)
+        except (AttributeError, OSError, TypeError, ValueError, RuntimeError):
             return False
 
 
@@ -219,10 +252,26 @@ def run_local_recognizer(raw: bytes,
         if selected is None or not binding.ready(persona) or not selected[1].claim():
             raise VoiceRecognitionUnavailable("VOICE_RUNTIME_UNQUALIFIED")
         try:
+            # The native callback alone establishes the reviewed launch and
+            # durable named-slot consumption before any lower child effect.
+            capability = binding._native_capability
+            if (type(capability) is not _TrustedNativeVoiceCapability
+                    or capability.scope_current(persona) is not True):
+                raise VoiceRecognitionUnavailable("VOICE_RUNTIME_UNQUALIFIED")
+            authority = capability.consume_and_authorize(persona, selected[0])
+            module = binding.runner_module
+            if (type(authority) is not module.TrustedLaunchAuthority
+                    or authority.durable_consumption_confirmed is not True
+                    or authority.durable_consumption_slot != persona
+                    or authority.durable_consumption_grant_sha256 !=
+                       selected[0].finite_grant_sha256
+                    or selected[0].ready(authority) is not True):
+                raise VoiceRecognitionUnavailable("VOICE_RUNTIME_UNQUALIFIED")
             # run_once returns only after its owned child has exited and the
-            # exact container cleanup is verified. Its transcript is advisory.
-            transcript = binding.runner_module.run_once(raw, selected[0])
-        except (OSError, ValueError, RuntimeError) as exc:
+            # exact container cleanup is verified. Its text is advisory.
+            transcript = module.run_once(
+                raw, selected[0], launch_authority=authority)
+        except (AttributeError, OSError, TypeError, ValueError, RuntimeError) as exc:
             raise VoiceRecognitionUnavailable("VOICE_RECOGNITION_UNAVAILABLE") from exc
         if not isinstance(transcript, str) or len(transcript) > 500:
             raise VoiceRecognitionUnavailable("VOICE_RESULT_UNAVAILABLE")

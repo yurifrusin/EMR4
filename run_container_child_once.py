@@ -1,9 +1,9 @@
 """Prospective finite two-slot interactive voice child. No admission.
 
-The controller must publish and independently review a successor with literal
-admission constants below and a finite grant expressly covering patient and
-staff slots. In-process assignment of these constants is not admission.
-This file neither imports a model nor runs Docker when imported.
+The trusted native entry must supply exact frozen external binding and
+independent-review pins, after durable coordinator grant consumption. A client
+request or in-process assignment cannot supply launch authority. This file
+neither imports a model nor runs Docker when imported.
 """
 
 from __future__ import annotations
@@ -15,6 +15,7 @@ import json
 import os
 from pathlib import Path
 from pathlib import PurePosixPath
+import re
 import secrets
 import stat
 import subprocess
@@ -31,14 +32,17 @@ CAPSULE_ROOT = Path("C:/Users/there/EMR4-migration/20260911-v1/current-control-r
 OUTPUT_ROOT = Path("C:/Users/there/EMR4-tools/stage1-offline-voice-container-child-v1")
 CAPSULE_MANIFEST_SHA256 = "29cd4d946438a5d60a2bccc2d17ac12277b1a5d26d6b71f81ab8b819449ec87c"
 CHILD_SCRIPT_SHA256 = "7889826df90b724eb1e43fc1ef7cc25d62db99342bd4e32a82ab6f5c6a52bd43"
-# These stay closed in this candidate. A later exact reviewed source successor
-# must bind Docker/profile/source/execution/two-slot grant/Native08 receipts.
-DOCKER_SHA256: str | None = None
-PROFILE_ADMISSION_SHA256: str | None = None
-SOURCE_REVIEW_SHA256: str | None = None
-EXECUTION_REVIEW_SHA256: str | None = None
-FINITE_GRANT_SHA256: str | None = None
-CHILD_EFFECT_REVIEW_SHA256: str | None = None
+STAGE1_ROOT = MIGRATION_ROOT / "20260911-v1/current-control-repair-20260912-v1/demo-led-stage1-20261012-v2"
+SOURCE_ROOT = STAGE1_ROOT / "stage1-voice-external-binding-source-v2"
+RUNNER_PATH = SOURCE_ROOT / "run_container_child_once.py"
+RUNNER_BYTES = 30852  # Frozen body size; no self-referential body digest.
+LAUNCH_BINDING_PATH = SOURCE_ROOT / "interactive-voice-binding-v2.json"
+LAUNCH_REVIEW_PATH = SOURCE_ROOT / "independent-voice-binding-review-v2.json"
+NATIVE08_EFFECT_REVIEW_SHA256 = "818f7069444cdbed12c5baf1608bb4ccfa44b936b5db7e33182fad7af1b3b1c2"
+# Factual dependency pin retained for the old inert upper adapter. This is
+# never sufficient for launch; Q/R and durable consumption are still required.
+CHILD_EFFECT_REVIEW_SHA256 = NATIVE08_EFFECT_REVIEW_SHA256
+SHA256_PATTERN = re.compile(r"[0-9a-f]{64}\Z")
 MAX_WAV = 512 * 1024
 MAX_STDOUT = 4096
 MAX_STDERR = 4096
@@ -62,6 +66,19 @@ class ChildUnavailable(RuntimeError):
 
 
 @dataclass(frozen=True, repr=False)
+class TrustedLaunchAuthority:
+    """Values pinned by the reviewed native entry, never parsed from HTTP."""
+
+    binding_path: Path
+    binding_sha256: str
+    review_path: Path
+    review_sha256: str
+    durable_consumption_confirmed: bool
+    durable_consumption_grant_sha256: str
+    durable_consumption_slot: str
+
+
+@dataclass(frozen=True, repr=False)
 class ExecutionBinding:
     docker_executable: Path
     docker_sha256: str
@@ -75,14 +92,15 @@ class ExecutionBinding:
     child_effect_review_sha256: str | None = None
     interactive_slot: str | None = None  # finite patient/staff grant slots
 
-    def ready(self) -> bool:
+    def ready(self, launch_authority: TrustedLaunchAuthority | None = None) -> bool:
         # The prior qualification runner and consumed grant are separate.
         try:
-            return self._ready_checked()
-        except (OSError, ValueError):
+            return self._ready_checked(launch_authority)
+        except (OSError, ValueError, KeyError, TypeError, ChildUnavailable,
+                UnicodeError):
             return False
 
-    def _ready_checked(self) -> bool:
+    def _ready_checked(self, launch_authority: TrustedLaunchAuthority | None) -> bool:
         common = (self.mode == "interactive-voice"
                   and self.docker_executable == DOCKER_PATH
                   and self.capsule_root == CAPSULE_ROOT
@@ -90,21 +108,10 @@ class ExecutionBinding:
                   and not _reparse(self.docker_executable)
                   and not _reparse(self.capsule_root)
                   and not _reparse(self.owned_output_root)
-                  and DOCKER_SHA256 is not None
-                  and self.docker_sha256 == DOCKER_SHA256
-                  and PROFILE_ADMISSION_SHA256 is not None
-                  and self.stage1_profile_sha256 == PROFILE_ADMISSION_SHA256
-                  and SOURCE_REVIEW_SHA256 is not None
-                  and self.source_review_sha256 == SOURCE_REVIEW_SHA256
-                  and EXECUTION_REVIEW_SHA256 is not None
-                  and self.execution_review_sha256 == EXECUTION_REVIEW_SHA256
-                  and FINITE_GRANT_SHA256 is not None
-                  and self.finite_grant_sha256 == FINITE_GRANT_SHA256)
+                  and self.interactive_slot in ("patient", "staff"))
         if not common:
             return False
-        return (CHILD_EFFECT_REVIEW_SHA256 is not None
-                and self.child_effect_review_sha256 == CHILD_EFFECT_REVIEW_SHA256
-                and self.interactive_slot in ("patient", "staff"))
+        return _reviewed_launch_matches(self, launch_authority)
 
 
 def sha(path: Path) -> str:
@@ -134,6 +141,154 @@ def _literal_directory_chain(approved_root: Path, selected: Path) -> None:
         details = current.stat(follow_symlinks=False)
         if _reparse(current) or not stat.S_ISDIR(details.st_mode):
             raise ChildUnavailable("VOICE_DIRECTORY_REPARSE_OR_INVALID")
+
+
+def _checked_pinned_bytes(path: Path, expected_sha256: str, maximum: int,
+                          exact_bytes: int | None = None) -> bytes:
+    if (not isinstance(path, Path) or not path.is_absolute()
+            or ".." in path.parts or not path.is_relative_to(STAGE1_ROOT)
+            or type(expected_sha256) is not str
+            or SHA256_PATTERN.fullmatch(expected_sha256) is None
+            or type(maximum) is not int or not 1 <= maximum <= 65536
+            or (exact_bytes is not None and
+                (type(exact_bytes) is not int or not 1 <= exact_bytes <= maximum))):
+        raise ValueError("VOICE_LAUNCH_PIN_INVALID")
+    _literal_directory_chain(MIGRATION_ROOT, path.parent)
+    before = path.stat(follow_symlinks=False)
+    if (_reparse(path) or not stat.S_ISREG(before.st_mode)
+            or not 1 <= before.st_size <= maximum or not before.st_ino
+            or (exact_bytes is not None and before.st_size != exact_bytes)):
+        raise ValueError("VOICE_LAUNCH_PIN_INVALID")
+    with path.open("rb") as stream:
+        opened = os.fstat(stream.fileno())
+        if (not stat.S_ISREG(opened.st_mode)
+                or getattr(opened, "st_file_attributes", 0)
+                & getattr(stat, "FILE_ATTRIBUTE_REPARSE_POINT", 0)
+                or (opened.st_dev, opened.st_ino) !=
+                   (before.st_dev, before.st_ino)
+                or not 1 <= opened.st_size <= maximum
+                or (exact_bytes is not None and opened.st_size != exact_bytes)):
+            raise ValueError("VOICE_LAUNCH_PIN_INVALID")
+        raw = stream.read(maximum + 1)
+        after_handle = os.fstat(stream.fileno())
+    after_path = path.stat(follow_symlinks=False)
+    _literal_directory_chain(MIGRATION_ROOT, path.parent)
+    if (_reparse(path) or not stat.S_ISREG(after_path.st_mode)
+            or len(raw) > maximum or len(raw) != after_handle.st_size
+            or (exact_bytes is not None and len(raw) != exact_bytes)
+            or (after_handle.st_dev, after_handle.st_ino) !=
+               (before.st_dev, before.st_ino)
+            or (after_path.st_dev, after_path.st_ino) !=
+               (before.st_dev, before.st_ino)
+            or after_path.st_size != len(raw)
+            or hashlib.sha256(raw).hexdigest() != expected_sha256):
+        raise ValueError("VOICE_LAUNCH_PIN_DRIFT")
+    return raw
+
+
+def _pinned_launch_json(path: Path, expected_sha256: str) -> dict:
+    if not isinstance(path, Path) or path not in (
+            LAUNCH_BINDING_PATH, LAUNCH_REVIEW_PATH):
+        raise ValueError("VOICE_LAUNCH_PATH_UNREVIEWED")
+    raw = _checked_pinned_bytes(path, expected_sha256, 16384)
+
+    def unique_object(pairs):
+        row = {}
+        for key, value in pairs:
+            if key in row:
+                raise ValueError("VOICE_LAUNCH_DUPLICATE_KEY")
+            row[key] = value
+        return row
+
+    result = json.loads(raw, object_pairs_hook=unique_object)
+    if type(result) is not dict:
+        raise ValueError("VOICE_LAUNCH_SCHEMA_INVALID")
+    return result
+
+
+def _reviewed_launch_matches(binding: ExecutionBinding,
+                             launch: TrustedLaunchAuthority | None) -> bool:
+    # The native entry alone supplies these expected digests and records its
+    # durable grant consumption before invoking run_once. This validator
+    # checks their exact relationship; it cannot authenticate an HTTP caller.
+    if (type(launch) is not TrustedLaunchAuthority
+            or launch.durable_consumption_confirmed is not True
+            or launch.durable_consumption_grant_sha256 != binding.finite_grant_sha256
+            or launch.durable_consumption_slot != binding.interactive_slot
+            or launch.binding_path == launch.review_path):
+        return False
+    q = _pinned_launch_json(launch.binding_path, launch.binding_sha256)
+    r = _pinned_launch_json(launch.review_path, launch.review_sha256)
+    required_q = {
+        "schema", "operative", "mode", "attempts", "automatic_retry", "slots",
+        "runner_path", "runner_sha256", "docker_executable", "docker_sha256",
+        "image_id", "capsule_root", "capsule_manifest_sha256",
+        "child_script_sha256", "owned_output_root", "stage1_profile_sha256",
+        "child_effect_review_sha256", "durable_consumption_required",
+    }
+    if set(q) != required_q:
+        return False
+    digests = (
+        "runner_sha256", "docker_sha256", "stage1_profile_sha256",
+        "child_effect_review_sha256",
+    )
+    if any(type(q[key]) is not str or SHA256_PATTERN.fullmatch(q[key]) is None
+           for key in digests):
+        return False
+    if any(type(value) is not str or SHA256_PATTERN.fullmatch(value) is None
+           for value in (binding.source_review_sha256,
+                         binding.execution_review_sha256,
+                         binding.finite_grant_sha256)):
+        return False
+    if (type(q["runner_path"]) is not str
+            or Path(q["runner_path"]) != RUNNER_PATH
+            or ".." in Path(q["runner_path"]).parts):
+        return False
+    _checked_pinned_bytes(RUNNER_PATH, q["runner_sha256"],
+                          RUNNER_BYTES, RUNNER_BYTES)
+    if (q["schema"] != "emr4.stage1_interactive_voice_external_binding.v1"
+            or q["operative"] is not True
+            or q["mode"] != "interactive-voice"
+            or type(q["attempts"]) is not int or q["attempts"] != 2
+            or q["automatic_retry"] is not False
+            or q["slots"] != ["patient", "staff"]
+            or q["durable_consumption_required"] is not True
+            or type(q["docker_executable"]) is not str
+            or Path(q["docker_executable"]) != DOCKER_PATH
+            or q["docker_sha256"] != binding.docker_sha256
+            or q["image_id"] != IMAGE_ID
+            or type(q["capsule_root"]) is not str
+            or Path(q["capsule_root"]) != CAPSULE_ROOT
+            or q["capsule_manifest_sha256"] != CAPSULE_MANIFEST_SHA256
+            or q["child_script_sha256"] != CHILD_SCRIPT_SHA256
+            or type(q["owned_output_root"]) is not str
+            or Path(q["owned_output_root"]) != OUTPUT_ROOT
+            or q["stage1_profile_sha256"] != binding.stage1_profile_sha256
+            or q["child_effect_review_sha256"] != NATIVE08_EFFECT_REVIEW_SHA256
+            or binding.child_effect_review_sha256 != NATIVE08_EFFECT_REVIEW_SHA256):
+        return False
+    if (type(r.get("independent")) is not bool
+            or type(r.get("implementation_authorship")) is not bool
+            or type(r.get("attempts")) is not int
+            or type(r.get("durable_consumption_required")) is not bool):
+        return False
+    return r == {
+        "schema": "emr4.stage1_interactive_voice_external_binding_review.v1",
+        "verdict": "PASS_STAGE1_INTERACTIVE_VOICE_EXTERNAL_BINDING",
+        "independent": True,
+        "implementation_authorship": False,
+        "blocking_findings": [],
+        "binding_sha256": launch.binding_sha256,
+        "runner_sha256": q["runner_sha256"],
+        "source_review_sha256": binding.source_review_sha256,
+        "execution_review_sha256": binding.execution_review_sha256,
+        "finite_grant_sha256": binding.finite_grant_sha256,
+        "child_effect_review_sha256": NATIVE08_EFFECT_REVIEW_SHA256,
+        "mode": "interactive-voice",
+        "attempts": 2,
+        "slots": ["patient", "staff"],
+        "durable_consumption_required": True,
+    }
 
 
 def _exact_capsule_tree(root: Path, expected_files: set[str]) -> None:
@@ -345,19 +500,21 @@ def _stream(docker: Path, cid: str, raw: bytes, env: dict[str, str]) -> bytes:
         process.wait(timeout=5)
 
 
-def run_once(raw: bytes, binding: ExecutionBinding) -> str:
-    """One effect only. Returned text is advisory and never a command."""
+def run_once(raw: bytes, binding: ExecutionBinding, *,
+             launch_authority: TrustedLaunchAuthority | None = None) -> str:
+    """One effect only, after a trusted entry supplies reviewed launch pins."""
     if not _RUN_LOCK.acquire(blocking=False):
         raise ChildUnavailable("VOICE_CHILD_ALREADY_ACTIVE")
     try:
-        return _run_once_locked(raw, binding)
+        return _run_once_locked(raw, binding, launch_authority)
     finally:
         _RUN_LOCK.release()
 
 
-def _run_once_locked(raw: bytes, binding: ExecutionBinding) -> str:
+def _run_once_locked(raw: bytes, binding: ExecutionBinding,
+                     launch_authority: TrustedLaunchAuthority | None) -> str:
     validate_wav(raw)
-    if not binding.ready():
+    if type(binding) is not ExecutionBinding or not binding.ready(launch_authority):
         raise ChildUnavailable("VOICE_EXECUTION_NOT_ADMITTED")
     # _RUN_LOCK covers this process-wide claim. Reconstructing a binding
     # cannot reuse either slot under the reviewed finite two-slot grant.
@@ -382,6 +539,9 @@ def _run_once_locked(raw: bytes, binding: ExecutionBinding) -> str:
     # resolve() call may turn a same-path junction into apparent identity.
     _literal_directory_chain(TOOLS_ROOT, binding.owned_output_root)
     _literal_directory_chain(TOOLS_ROOT, docker_config)
+    # The trusted entry freezes Q/R; check again before the first effect.
+    if not _reviewed_launch_matches(binding, launch_authority):
+        raise ChildUnavailable("VOICE_EXECUTION_NOT_ADMITTED")
     system_root = os.environ.get("SystemRoot")
     if not system_root:
         raise ChildUnavailable("VOICE_SYSTEM_ROOT_UNAVAILABLE")
