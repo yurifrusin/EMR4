@@ -1094,7 +1094,8 @@ def create_stage1_demo_app(config: DemoConfig) -> tuple[FastAPI, DemoIssuer]:
                 "source_state_version": appt["state_version"], "source_revision": appt["state_version"],
                 "target_date": body["target_date"], "target_start_local": body["target_start_local"],
                 "authority": "proposal_only"}
-            proposal = await backend("POST", f"/proposals/move-time/{appt['ref']}", session, body=payload)
+            proposal_key = "stage1-move-proposal-" + secrets.token_urlsafe(24)
+            proposal = await backend("POST", f"/proposals/move-time/{appt['ref']}", session, body=payload, key=proposal_key)
             if proposal.get("safe") is not True or not isinstance(proposal.get("confirm_payload"), dict):
                 return no_store({"safe": False})
             ref = secrets.token_urlsafe(24)
