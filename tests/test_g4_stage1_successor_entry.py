@@ -105,7 +105,9 @@ def test_path_selection_is_exact_and_old_profile_is_preserved():
 # Current v2 correction tests. The v1 tests above retain the frozen prestate and
 # frozen afterimages of their own accepted transition.
 def _correction_scope():
-    return json.loads((Path(__file__).parents[1] / bounded_g1b.G4_STAGE1_SUCCESSOR_SCOPE).read_bytes())
+    raw = (Path("C:/Users/there/EMR4-tools/g4-stage1-header-control-actual-v1") / bounded_g1b.G4_STAGE1_SUCCESSOR_SCOPE).read_bytes()
+    assert hashlib.sha256(raw).hexdigest() == "21a77991d10acf9cb62bea845bfeeb51b23cc4b5804edde578528f883203b1e5"
+    return json.loads(raw)
 
 def test_header_correction_scope_and_literal_operations():
     scope = _correction_scope()
@@ -206,3 +208,259 @@ def test_header_source_review_uses_actual_split_blocker_schema():
         with pytest.raises(bounded_g1b.BoundedG1BError) as caught:
             bounded_g1b._g4_header_product_source_acceptance(changed)
         assert caught.value.reason_code == "bounded_g4_header_product_source_acceptance"
+
+
+# Dormant v3 voice source: exercise the narrow validators, not runtime authority.
+def _voice_scope():
+    return json.loads((Path(__file__).parents[1] / bounded_g1b.G4_STAGE1_SUCCESSOR_SCOPE).read_bytes())
+
+
+def _voice_binding(kind="enable_g4_stage1_successor"):
+    scope = _voice_scope()
+    paths = (bounded_g1b.G4_VOICE_CONTROL if kind.startswith("enable_")
+             else bounded_g1b.G4_VOICE_PRODUCT)
+    return {"schema_version": bounded_g1b.G4_VOICE_BINDING_SCHEMA,
+            "operation_id": "voice-source-enable-development",
+            "operation_kind": kind, "phase": "development",
+            "base_commit": bounded_g1b.G4_VOICE_BASE["commit"],
+            "base_tree": bounded_g1b.G4_VOICE_BASE["tree"],
+            "expected_head": bounded_g1b.G4_VOICE_BASE["commit"],
+            "expected_index_tree": bounded_g1b.G4_VOICE_BASE["tree"],
+            "candidate_tree": "a" * 40, "source_sha256": scope["source_sha256"],
+            "payload_sha256": {bounded_g1b.G4_STAGE1_SUCCESSOR_SCOPE: "b" * 64},
+            "repair_sha256": {p: {"before_sha256": bounded_g1b.G4_VOICE_PREIMAGES[p],
+                                  "after_sha256": "c" * 64} for p in paths},
+            "source_review": None,
+            "predecessor_publication": scope["predecessor_publication"],
+            "correction_source_review": scope["correction_source_review"],
+            "activation_acceptance": None}
+
+
+def test_voice_v3_exact_three_path_dispatch_preserves_legacy_schemas():
+    scope = _voice_scope()
+    assert bounded_g1b.validate_g4_voice_source_scope(scope) == scope["source_sha256"]
+    for kind, paths in (("enable_g4_stage1_successor", bounded_g1b.G4_VOICE_CONTROL),
+                        ("implement_g4_stage1_successor", bounded_g1b.G4_VOICE_PRODUCT)):
+        q = _voice_binding(kind)
+        assert bounded_g1b.operation_paths(kind, q) == paths
+        assert len(paths) == 3
+        operation = bounded_g1b._operation(kind, q)
+        assert operation["g4_voice_source"] is True
+        assert operation["gate"] == "G4"
+        assert operation["profile"] == raisa_policy.G4_STAGE1_SUCCESSOR_PROFILE
+        assert "g4_header_correction" not in operation
+    assert bounded_g1b.G4_HEADER_BINDING_SCHEMA.endswith(".v2")
+    assert bounded_g1b.G4_HEADER_PRODUCT == {"stage1_demo_http.py"}
+
+
+@pytest.mark.parametrize("change", [
+    {"schema_version": bounded_g1b.G4_HEADER_SCOPE_SCHEMA},
+    {"selected_base": bounded_g1b.G4_HEADER_BASE},
+    {"selected_base": {"commit": bounded_g1b.G4_VOICE_BASE["commit"], "tree": "0" * 40}},
+    {"voice_activation": True}, {"runtime_binding_required": False},
+    {"admission_grants_runtime_authority": True}, {"native08_dependency_only": False},
+    {"allowed_paths": ["stage1_demo_http.py"]},
+    {"allowed_effects": ["provider_invocation"]}, {"recorded_at": None},
+    {"recorded_at": "malformed"}, {"recorded_at": "2026-10-17T00:00:00"},
+])
+def test_voice_scope_rejects_stale_or_wider_contract(change):
+    scope = _voice_scope()
+    scope.update(change)
+    with pytest.raises(bounded_g1b.BoundedG1BError) as caught:
+        bounded_g1b.validate_g4_voice_source_scope(scope)
+    assert caught.value.reason_code == "bounded_g4_voice_scope_boundary"
+
+
+def test_voice_scope_rejects_extra_keys_product_replacement_and_source_drift():
+    scope = _voice_scope()
+    for mutate, reason in (
+        (lambda s: s.update(extra=True), "bounded_g4_voice_scope_schema"),
+        (lambda s: s["product_sha256"].update({"stage1_demo_voice.py": "0" * 64}),
+         "bounded_g4_voice_product_map"),
+        (lambda s: s["source_sha256"].update({"orchestration_harness/trusted_git.py": "0" * 64}),
+         "bounded_g4_voice_source_vector"),
+        (lambda s: s["control_sha256"].update({bounded_g1b.G4_VOICE_CODE: "0" * 64}),
+         "bounded_g4_voice_source_vector"),
+        (lambda s: s["predecessor_publication"].update(sha256="0" * 64),
+         "bounded_g4_voice_literal_evidence"),
+        (lambda s: s["correction_source_review"].update(path="C:/substitute.json"),
+         "bounded_g4_voice_source_review_pin"),
+    ):
+        changed = copy.deepcopy(scope)
+        mutate(changed)
+        with pytest.raises(bounded_g1b.BoundedG1BError) as caught:
+            bounded_g1b.validate_g4_voice_source_scope(changed)
+        assert caught.value.reason_code == reason
+
+
+@pytest.mark.parametrize("kind", ["enable_g4_stage1_successor", "implement_g4_stage1_successor"])
+def test_voice_dispatch_rejects_any_extra_or_missing_path(kind):
+    for extra in (True, False):
+        q = _voice_binding(kind)
+        if extra:
+            q["repair_sha256"]["app/main.py"] = {}
+        else:
+            q["repair_sha256"].pop(next(iter(q["repair_sha256"])))
+        with pytest.raises(bounded_g1b.BoundedG1BError) as caught:
+            bounded_g1b.operation_paths(kind, q)
+        assert caught.value.reason_code == "bounded_g4_voice_changed_paths"
+
+
+@pytest.mark.parametrize("field", [
+    "schema_version", "operation_id", "operation_kind", "phase", "base_commit",
+    "base_tree", "expected_head", "expected_index_tree", "candidate_tree",
+    "source_sha256", "payload_sha256", "repair_sha256", "predecessor_publication",
+    "correction_source_review", "activation_acceptance",
+])
+def test_voice_exact_subject_changes_for_every_authority_bearing_field(field):
+    q = _voice_binding()
+    before = bounded_g1b.g4_voice_source_review_subject(q)
+    changed = copy.deepcopy(q)
+    changed[field] = {"substituted": True} if isinstance(q[field], dict) else "substituted"
+    assert bounded_g1b.g4_voice_source_review_subject(changed) != before
+    q["source_review"] = {"path": "not-in-self-referential-subject", "sha256": "d" * 64}
+    assert bounded_g1b.g4_voice_source_review_subject(q) == before
+
+
+def test_voice_product_review_requires_exact_map_and_independent_named_reviewer():
+    review = {"schema": "emr4.stage1_voice_current_product_source_review.v1",
+              "verdict": "PASS_SOURCE_ONLY", "reviewer_agent": "/root/voice_entry_scope_review",
+              "independent": True, "implementation_authorship": False,
+              "blocking_findings": [], "product_sha256": dict(bounded_g1b.G4_VOICE_AFTER)}
+    bounded_g1b._g4_voice_product_source_acceptance(review)
+    for field, value in (("reviewer_agent", "/root/author"), ("independent", False),
+                         ("implementation_authorship", True), ("blocking_findings", ["blocker"]),
+                         ("product_sha256", {}), ("verdict", "PENDING")):
+        changed = copy.deepcopy(review)
+        changed[field] = value
+        with pytest.raises(bounded_g1b.BoundedG1BError) as caught:
+            bounded_g1b._g4_voice_product_source_acceptance(changed)
+        assert caught.value.reason_code == "bounded_g4_voice_product_source_acceptance"
+
+
+@pytest.mark.parametrize("kind", ["enable_g4_stage1_successor", "implement_g4_stage1_successor"])
+@pytest.mark.parametrize("phase", ["development", "pre-push", "post-push"])
+def test_voice_subject_review_rejects_swapped_subject_reviewer_and_operation_path(kind, phase):
+    q = _voice_binding(kind)
+    q["phase"] = phase
+    subject = bounded_g1b.g4_voice_source_review_subject(q)
+    root = bounded_g1b.G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT
+    operation = "enable" if kind.startswith("enable_") else "implement"
+    suffix = "" if phase == "development" else "-" + phase
+    path = root / ("stage1-voice-current-entry-source-v1/independent-" + operation
+                   + suffix + "-exact-subject-review-v1.json")
+    row = {"path": str(path), "sha256": "a" * 64}
+    verdict = "PASS_G4_STAGE1_VOICE_SOURCE_EXACT_ADMISSION_SUBJECT"
+    review = {"schema": "emr4.g4_operation_review.v1", "status": "PASS", "verdict": verdict,
+              "independent": True, "implementation_authorship": False, "blocking_findings": [],
+              "reviewer_agent": "/root/voice_entry_scope_review", "subject_sha256": subject}
+    reads = []
+    def read(path, digest):
+        reads.append((path, digest))
+        return json.dumps(review_body).encode()
+    def check(value, selected_kind=kind, selected_phase=phase):
+        nonlocal review_body
+        review_body = value
+        return bounded_g1b._g4_voice_subject_review(
+            read, row, root, subject, verdict, selected_kind, selected_phase)
+    review_body = review
+    assert check(review) == review
+    assert reads == [(path, row["sha256"])]
+    for field, value in (("subject_sha256", "0" * 64), ("reviewer_agent", "/root/author"),
+                         ("independent", False), ("implementation_authorship", True),
+                         ("blocking_findings", ["blocker"]), ("status", "PENDING")):
+        changed = copy.deepcopy(review)
+        changed[field] = value
+        with pytest.raises(bounded_g1b.BoundedG1BError) as caught:
+            check(changed)
+        assert caught.value.reason_code == "bounded_g4_voice_independent_subject"
+    other_kind = ("implement_g4_stage1_successor" if kind.startswith("enable_")
+                  else "enable_g4_stage1_successor")
+    for selected_kind, selected_phase, reason in (
+        (other_kind, phase, "bounded_g4_voice_review_path"),
+        ("unknown", phase, "bounded_g4_voice_review_kind"),
+        (kind, "unknown", "bounded_g4_voice_review_phase"),
+        (kind, None, "bounded_g4_voice_review_phase"),
+        *((kind, other_phase, "bounded_g4_voice_review_path")
+          for other_phase in ("development", "pre-push", "post-push") if other_phase != phase),
+    ):
+        reads.clear()
+        with pytest.raises(bounded_g1b.BoundedG1BError) as caught:
+            check(review, selected_kind, selected_phase)
+        assert caught.value.reason_code == reason
+        assert reads == []
+
+
+def test_voice_six_phase_kind_subjects_remain_distinct_and_bind_head_and_index():
+    subjects = set()
+    for kind in ("enable_g4_stage1_successor", "implement_g4_stage1_successor"):
+        for phase in ("development", "pre-push", "post-push"):
+            q = _voice_binding(kind)
+            q["phase"] = phase
+            subject = bounded_g1b.g4_voice_source_review_subject(q)
+            subjects.add(subject)
+            for field in ("expected_head", "expected_index_tree"):
+                changed = copy.deepcopy(q)
+                changed[field] = "0" * 40
+                assert bounded_g1b.g4_voice_source_review_subject(changed) != subject
+    assert len(subjects) == 6
+
+
+def test_voice_control_publication_effect_review_keeps_its_fixed_path():
+    root = bounded_g1b.G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT
+    path = root / "stage1-voice-current-entry-source-v1/independent-voice-control-push-effect-review-v1.json"
+    row = {"path": str(path), "sha256": "a" * 64}
+    verdict = "PASS_G4_STAGE1_VOICE_SOURCE_CONTROL_PUBLICATION_EFFECT"
+    subject = "c" * 40
+    review = {"schema": "emr4.g4_operation_review.v1", "status": "PASS", "verdict": verdict,
+              "independent": True, "implementation_authorship": False, "blocking_findings": [],
+              "reviewer_agent": "/root/voice_entry_scope_review", "subject_sha256": subject}
+    reads = []
+    def read(selected_path, digest):
+        reads.append((selected_path, digest))
+        return json.dumps(review).encode()
+    assert bounded_g1b._g4_voice_subject_review(read, row, root, subject, verdict) == review
+    assert reads == [(path, row["sha256"])]
+
+
+def test_voice_change_pair_rejects_wrong_preimage_afterimage_and_pair_shape():
+    for path, after in bounded_g1b.G4_VOICE_AFTER.items():
+        before = bounded_g1b.G4_VOICE_PREIMAGES[path]
+        pair = {"before_sha256": before, "after_sha256": after}
+        assert bounded_g1b._g4_voice_change_pair(path, pair, after) == before
+        for field in ("before_sha256", "after_sha256"):
+            changed = dict(pair)
+            changed[field] = "0" * 64
+            with pytest.raises(bounded_g1b.BoundedG1BError) as caught:
+                bounded_g1b._g4_voice_change_pair(path, changed, after)
+            assert caught.value.reason_code == "bounded_g4_voice_change_preimage"
+        pair["extra"] = True
+        with pytest.raises(bounded_g1b.BoundedG1BError) as caught:
+            bounded_g1b._g4_voice_change_pair(path, pair, after)
+        assert caught.value.reason_code == "bounded_g4_voice_change_pair"
+
+
+def test_voice_activation_requires_exact_control_publication_effect():
+    q = {"base_commit": "c" * 40, "base_tree": "d" * 40}
+    receipt = {"tree": q["base_tree"], "base": bounded_g1b.G4_VOICE_BASE["commit"],
+               "commit": q["base_commit"], "candidate": "control", "phase": "push",
+               "published_ref": bounded_g1b.G4_STAGE1_INTERACTIVE_BACKEND_REF,
+               "whole_inverse_verified_same_attempt": True,
+               "protected_refs_unchanged": True, "same_attempt_remote_readback_verified": True}
+    bounded_g1b._g4_voice_activation_acceptance(receipt, q)
+    for key in receipt:
+        changed = copy.deepcopy(receipt)
+        changed[key] = False if receipt[key] is True else "substituted"
+        with pytest.raises(bounded_g1b.BoundedG1BError) as caught:
+            bounded_g1b._g4_voice_activation_acceptance(changed, q)
+        assert caught.value.reason_code == "bounded_g4_voice_activation_acceptance"
+
+
+def test_voice_loaded_policy_rejects_configuration_drift_before_configuration_loading():
+    scope = _voice_scope()
+    payloads = {bounded_g1b.G4_STAGE1_SUCCESSOR_SCOPE: bounded_g1b._canonical(scope) + b"\n"}
+    payloads.update({path: b"changed" for path in bounded_g1b.G4_VOICE_BASE_CONFIG})
+    inputs = bounded_g1b.BoundedG1BInputs({}, {}, payloads, {"scope": scope}, None)
+    with pytest.raises(bounded_g1b.BoundedG1BError) as caught:
+        bounded_g1b._validate_g4_voice_source_loaded_policy(inputs)
+    assert caught.value.reason_code == "bounded_g4_voice_configuration_unchanged"
