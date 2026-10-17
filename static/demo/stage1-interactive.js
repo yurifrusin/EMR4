@@ -1,15 +1,74 @@
 // Source-only UI. The same-origin adapter contract is specified beside this file.
 // No demo identity, capability, signed proposal, or staff credential is kept by the browser.
-import { initLocalVoice, initSpokenReply } from "./stage1-local-voice.js";
+import { initLocalVoice, initSpokenReply, createManualIntentHandoff } from "./stage1-local-voice.js";
 const $ = id => document.getElementById(id);
 const state = { session: null, request: null, appointment: null, offer: null,
-  create: null, move: null, pendingKey: null, generation: 0, busy: false };
+  create: null, move: null, pendingKey: null, generation: 0, busy: false, requestReview: null, moveReview: null };
 const text = (id, value) => { $(id).textContent = value == null ? "" : String(value); };
 const show = (id, visible) => { $(id).hidden = !visible; };
 let spoken = null;
 const status = message => { spoken?.stop(); text("status", message); };
 const dateTime = (date, clock, zone) => `${date} at ${clock} ${zone}`;
 const uuid = () => crypto.randomUUID();
+
+const intentHandoffs={request:createManualIntentHandoff(),move:createManualIntentHandoff()};
+let localVoice=null;
+const intentKind=()=>state.session?.persona==="patient"?"request":"move";
+function intentSnapshot(kind) {
+  return {kind,scope:state.session?state.session.persona+":"+state.session.csrf:"",
+    request_id:state.request?.request_id,request_version:state.request?.request_version,
+    appointment_ref:kind==="move"?state.appointment?.ref:null,
+    appointment_version:kind==="move"?state.appointment?.state_version:null,
+    words:$(kind==="request"?"patient-words":"move-words").value,
+    fields:kind==="request"?{date:$("request-date").value,
+      earliest_local:$("request-earliest").value,latest_local:$("request-latest").value}:
+      {date:$("move-date").value,local_time:$("move-time").value}};
+}
+function selectedVoiceTarget() {
+  const value=intentSnapshot(intentKind());
+  if(!["patient","staff"].includes(state.session?.persona) || typeof value.request_id!=="string" || !value.request_id ||
+      !Number.isSafeInteger(value.request_version) ||
+      (value.kind==="move" && (typeof value.appointment_ref!=="string" || !value.appointment_ref ||
+        !Number.isSafeInteger(value.appointment_version))))return null;
+  return JSON.stringify([value.kind,value.scope,value.request_id,value.request_version,
+    value.appointment_ref,value.appointment_version]);
+}
+function currentVoiceTarget() {
+  const selected=selectedVoiceTarget();
+  return selected?selected+":"+intentHandoffs[intentKind()].revision():null;
+}
+function renderMapping(kind) {
+  const check=$(kind+"-mapping-ack"),info=intentHandoffs[kind].inspect(intentSnapshot(kind));
+  $(kind+"-mapping").hidden=!info.required;
+  check.disabled=!info.supported || Boolean(localVoice && !localVoice.isIdle());
+  check.checked=info.acknowledged;
+  text(kind+"-mapping-status",!info.required?"Structured details only. No note needs mapping.":
+    !info.supported?"Complete the current structured details before checking the note.":
+    info.acknowledged?"Your check is recorded for these words, target and details. This does not verify their meaning.":
+    "Transfer or correct the note's meaning in the structured details, then check that they match.");
+}
+function invalidateIntent(kind, cancelCapture=true) {
+  intentHandoffs[kind].invalidate();
+  if(kind==="request"){state.requestReview=null;show("request-review-box",false);}
+  else clearPending();
+  renderMapping(kind);
+  if(cancelCapture)localVoice?.invalidateTarget();
+}
+function acceptMapping(kind) {
+  const check=$(kind+"-mapping-ack");
+  if(localVoice && !localVoice.isIdle()){
+    check.checked=false;status("Finish or cancel dictation before checking the mapped details.");return;
+  }
+  if(!check.checked){invalidateIntent(kind);return;}
+  try{intentHandoffs[kind].acknowledge(intentSnapshot(kind));}
+  catch(_){check.checked=false;status("Complete the current details and check the editable note before review.");}
+  renderMapping(kind);
+}
+function requireMappedReview(kind) {
+  if(localVoice && !localVoice.isIdle())throw new Error("Finish or cancel dictation before review.");
+  try{return intentHandoffs[kind].review(intentSnapshot(kind));}
+  catch(_){throw new Error("Check that the current editable note matches these structured details before review.");}
+}
 
 async function api(method, action, body, key) {
   if (!state.session) throw new Error("No verified demo session.");
@@ -19,6 +78,9 @@ async function api(method, action, body, key) {
     body: JSON.stringify({ method, action, body, idempotency_key: key || null }),
   });
   if (!response.ok) {
+    if (response.status === 401 || response.status === 403) {
+      state.session=null;invalidateIntent("request");invalidateIntent("move");
+    }
     if (response.status === 409) throw new Error("Current facts changed. Refresh and review again.");
     throw new Error("The action could not be verified. Refresh current facts before another action.");
   }
@@ -173,11 +235,13 @@ $("reliability-lab").addEventListener("toggle", async () => {
 });
 function clearPending() {
   spoken?.stop();
-  state.create = state.move = state.offer = null;
+  state.create = state.move = state.offer = state.moveReview = null;
   show("create-review", false); show("move-review", false);
 }
 function displayRequest(request, original, options = []) {
+  const previousTarget=selectedVoiceTarget();
   state.request = request;
+  if(previousTarget!==selectedVoiceTarget())invalidateIntent("request");
   if (!request) { text("patient-outcome", "Request unavailable."); return; }
   if (request.state === "draft" && Array.isArray(options) && options.length) {
     const dates = [...new Set(options.map(option => option.date))].sort();
@@ -196,11 +260,13 @@ function displayRequest(request, original, options = []) {
       ? "Request received. Reception One has not confirmed a booking. No time is reserved."
       : request.state === "draft" ? "Draft request. Review and send when ready." : `Request state: ${request.state}.`;
   text("patient-outcome", message);
+  renderMapping("request");
 }
 function displayStaff(data) {
   if (!data || !data.request) { text("staff-request", "Request unavailable."); return; }
   state.request = data.request;
   state.appointment = data.appointment || null;
+  invalidateIntent("move");
   const r = data.request;
   facts($("staff-request"), [
     ["Request", r.state], ["Source", "Synthetic patient web text"],
@@ -230,6 +296,7 @@ function displayStaff(data) {
   if (!data.options?.length && r.state === "submitted") text("staff-outcome", "No current option is available. Offer an alternative through the reviewed backend flow.");
 }
 async function refresh() {
+  invalidateIntent("request");invalidateIntent("move");
   clearPending(); state.pendingKey = null; const generation = ++state.generation;
   status("Refreshing current facts…");
   try {
@@ -251,14 +318,20 @@ function requestFields() {
   return { date, earliest_local, latest_local };
 }
 function reviewRequest() {
+  state.requestReview=null;show("request-review-box",false);
   try {
     const value = requestFields();
     if (!state.request || state.request.state !== "draft") throw new Error("Refresh the draft request before submitting.");
+    state.requestReview=requireMappedReview("request");
     text("request-summary", `Follow-up on ${value.date}, between ${value.earliest_local} and ${value.latest_local} ${state.session.zone}. No booking is being made yet.`);
     show("request-review-box", true); $("request-submit").focus();
   } catch (error) { status(error.message); }
 }
 async function submitRequest() {
+  if((localVoice && !localVoice.isIdle()) ||
+      !intentHandoffs.request.isReviewCurrent(intentSnapshot("request"),state.requestReview)){
+    show("request-review-box",false);status("Review the current mapped details before sending the request.");return;
+  }
   try {
     if (state.busy) return;
     const value = requestFields();
@@ -306,9 +379,13 @@ async function reviewMove() {
   if (!appointment || !date || !local_time) { status("Select a current appointment, new date and time."); return; }
   status("Checking the exact appointment and proposed time…");
   try {
+    const mappedReview=requireMappedReview("move");
     const result = await api("read", "propose_move", { appointment_ref: appointment.ref,
       source_state_version: appointment.state_version, target_date: date, target_start_local: local_time });
+    if(!intentHandoffs.move.isReviewCurrent(intentSnapshot("move"),mappedReview))
+      throw new Error("The note, selected appointment or details changed. Review them again.");
     if (!result.safe || !result.proposal_ref) throw new Error("Move unavailable. Refresh the appointment.");
+    state.moveReview=mappedReview;
     state.move = result.proposal_ref;
     facts($("move-summary"), [["Before", dateTime(appointment.date, appointment.start_local, appointment.zone)],
       ["After", dateTime(date, local_time, appointment.zone)], ["Patient unchanged", appointment.patient_label],
@@ -319,6 +396,10 @@ async function reviewMove() {
 }
 async function confirmMove() {
   if (!state.move || state.busy) return;
+  if((localVoice && !localVoice.isIdle()) ||
+      !intentHandoffs.move.isReviewCurrent(intentSnapshot("move"),state.moveReview)){
+    clearPending();status("Review the current mapped move before confirming.");return;
+  }
   const before = state.appointment;
   state.busy = true; const key = state.pendingKey || uuid(); state.pendingKey = key;
   status("Confirming move and checking the same appointment…");
@@ -344,16 +425,17 @@ async function confirmMove() {
 }
 
 $("request-review").addEventListener("click", reviewRequest);
-$("request-edit").addEventListener("click", () => { spoken?.stop(); show("request-review-box", false); $("request-date").focus(); });
+$("request-edit").addEventListener("click", () => { invalidateIntent("request"); spoken?.stop(); show("request-review-box", false); $("request-date").focus(); });
 $("request-submit").addEventListener("click", submitRequest);
 $("patient-refresh").addEventListener("click", refresh);
 $("staff-refresh").addEventListener("click", refresh);
 $("create-confirm").addEventListener("click", confirmCreate);
-$("create-cancel").addEventListener("click", () => { clearPending(); $("staff-offers").querySelector("button")?.focus(); });
+$("create-cancel").addEventListener("click", () => { invalidateIntent("move"); clearPending(); $("staff-offers").querySelector("button")?.focus(); });
 $("move-propose").addEventListener("click", reviewMove);
 $("move-confirm").addEventListener("click", confirmMove);
-$("move-cancel").addEventListener("click", () => { clearPending(); $("move-date").focus(); });
+$("move-cancel").addEventListener("click", () => { invalidateIntent("move"); clearPending(); $("move-date").focus(); });
 $("reconcile").addEventListener("click", async () => {
+  invalidateIntent("request");invalidateIntent("move");
   status("Checking the original action with its existing command key…");
   try {
     const result = await api("read", "reconcile", null);
@@ -362,8 +444,9 @@ $("reconcile").addEventListener("click", async () => {
     status(result.uncertain === true ? "Outcome remains uncertain; no new action was started." : "Original action reconciled; current facts refreshed.");
   } catch (_) { show("reconcile", true); status("Original action remains uncertain. No new action was started."); }
 });
-for (const id of ["request-date", "request-earliest", "request-latest", "patient-words"]) $(id).addEventListener("input", () => show("request-review-box", false));
-for (const id of ["move-date", "move-time", "move-words"]) $(id).addEventListener("input", () => { state.move = null; show("move-review", false); });
+for (const id of ["request-date", "request-earliest", "request-latest", "patient-words"]) $(id).addEventListener("input", () => invalidateIntent("request"));
+for (const id of ["move-date", "move-time", "move-words"]) $(id).addEventListener("input", () => invalidateIntent("move"));
+for(const kind of ["request","move"]) $(kind+"-mapping-ack").addEventListener("change",()=>acceptMapping(kind));
 
 try {
   const response = await fetch("/demo/stage1/session", { credentials: "same-origin", cache: "no-store", redirect: "error" });
@@ -379,6 +462,11 @@ try {
   document.querySelectorAll(".zone").forEach(node => { node.textContent = session.zone; });
   show("patient", session.persona === "patient"); show("staff", session.persona === "staff");
   spoken = initSpokenReply(() => state.session);
-  initLocalVoice(() => state.session, () => spoken?.stop());
+  localVoice=initLocalVoice(() => state.session, () => {
+    spoken?.stop();invalidateIntent(intentKind(),false);
+  }, currentVoiceTarget, () => invalidateIntent(intentKind(),false), () => {
+    renderMapping("request");renderMapping("move");
+  });
+  renderMapping("request");renderMapping("move");
   await refresh();
 } catch (error) { status(error.message); }

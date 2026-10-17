@@ -5,6 +5,73 @@ const targetFor = persona => persona === "patient" ? "patient-words" :
   persona === "staff" ? "move-words" : null;
 const scopeOf = session => session && `${session.persona}:${session.csrf}`;
 
+// BEGIN MANUAL_INTENT_HANDOFF_V1: bounded UI state, not semantic verification.
+function manualIntentKey(value) {
+  const names=["kind","scope","request_id","request_version","appointment_ref","appointment_version","words","fields"];
+  if (!value || typeof value!=="object" || Array.isArray(value) ||
+      Object.keys(value).sort().join(",")!==names.sort().join(",") ||
+      !["request","move"].includes(value.kind) ||
+      typeof value.scope!=="string" || !value.scope || value.scope.length>4096 ||
+      !value.scope.startsWith(value.kind==="request"?"patient:":"staff:") ||
+      value.scope.length<=(value.kind==="request"?8:6) ||
+      typeof value.request_id!=="string" || !value.request_id || value.request_id.length>200 ||
+      !Number.isSafeInteger(value.request_version) || value.request_version<0 ||
+      typeof value.words!=="string" || value.words.length>500 ||
+      !value.fields || typeof value.fields!=="object" || Array.isArray(value.fields)) return null;
+  const clock=v=>typeof v==="string" && v.length===5 && /^(?:[01]\d|2[0-3]):[0-5]\d$/.test(v);
+  const date=v=>typeof v==="string" && v.length===10 && /^\d{4}-\d{2}-\d{2}$/.test(v);
+  let fields;
+  if (value.kind==="request") {
+    if (value.appointment_ref!==null || value.appointment_version!==null ||
+        Object.keys(value.fields).sort().join(",")!=="date,earliest_local,latest_local" ||
+        !date(value.fields.date) || !clock(value.fields.earliest_local) || !clock(value.fields.latest_local) ||
+        value.fields.earliest_local>=value.fields.latest_local) return null;
+    fields=[value.fields.date,value.fields.earliest_local,value.fields.latest_local];
+  } else {
+    if (typeof value.appointment_ref!=="string" || !value.appointment_ref || value.appointment_ref.length>200 ||
+        !Number.isSafeInteger(value.appointment_version) || value.appointment_version<0 ||
+        Object.keys(value.fields).sort().join(",")!=="date,local_time" ||
+        !date(value.fields.date) || !clock(value.fields.local_time)) return null;
+    fields=[value.fields.date,value.fields.local_time];
+  }
+  return JSON.stringify([value.kind,value.scope,value.request_id,value.request_version,
+    value.appointment_ref,value.appointment_version,value.words,...fields]);
+}
+export function createManualIntentHandoff() {
+  let revision=0, current=null, acknowledged=null;
+  const update=value=>{
+    const key=manualIntentKey(value);
+    if(key!==current){current=key;acknowledged=null;revision++;}
+    return key;
+  };
+  const matched=value=>{
+    const key=update(value);
+    return key!==null && (!value.words.trim() || acknowledged===revision);
+  };
+  return Object.freeze({
+    revision:()=>revision,
+    invalidate:()=>{acknowledged=null;revision++;},
+    inspect:value=>{const key=update(value);return {
+      supported:key!==null,required:typeof value?.words==="string"&&Boolean(value.words.trim()),
+      acknowledged:key!==null&&acknowledged===revision,revision};},
+    acknowledge:value=>{
+      if(update(value)===null || !value.words.trim())throw new Error("MAPPING_UNSUPPORTED");
+      acknowledged=revision;return revision;
+    },
+    review:value=>{
+      if(!matched(value))throw new Error("MAPPING_REQUIRED");
+      return Object.freeze({revision,key:current});
+    },
+    isReviewCurrent:(value,review)=>matched(value)&&Boolean(review)&&
+      review.revision===revision&&review.key===current,
+  });
+}
+function sameVoiceTarget(expected, actual) {
+  return typeof expected==="string" && expected.length>0 && expected.length<=4096 &&
+    typeof actual==="string" && expected===actual;
+}
+// END MANUAL_INTENT_HANDOFF_V1
+
 function wavFromPcm(chunks, samples) {
   if (!samples || samples > MAX_SAMPLES) throw new Error("No bounded recording was captured.");
   const bytes = 44 + samples * 2;
@@ -32,7 +99,7 @@ async function readSession({ signal } = {}) {
   return response.json();
 }
 
-export function initLocalVoice(getSession, onStart = () => {}) {
+export function initLocalVoice(getSession, onStart = () => {}, getTarget = () => null, onInvalidate = () => {}, onPhaseChange = () => {}) {
   const button = document.getElementById("voice-toggle");
   const cancelButton = document.getElementById("voice-cancel");
   const note = document.getElementById("voice-note");
@@ -42,16 +109,18 @@ export function initLocalVoice(getSession, onStart = () => {}) {
   const initial = getSession();
   const originScope = scopeOf(initial);
   const target = targetFor(initial?.persona);
+  const readTarget=()=>{const value=getTarget();return sameVoiceTarget(value,value)?value:null;};
   const supported = Boolean(navigator.mediaDevices?.getUserMedia && window.AudioContext);
   const available = Boolean(initial?.voice_available && initial?.voice_nonce && target && supported);
 
   function paint() {
-    button.disabled = !available;
+    button.disabled = !available || !readTarget();
     button.textContent = voice.phase === "recording" ? "Stop talking" :
       voice.phase === "requesting" ? "Cancel microphone request" :
       voice.phase === "transcribing" ? "Cancel transcription" : "Start talking";
     cancelButton.hidden = voice.phase === "idle";
-    label.textContent = available ? "Local voice bound" : "Voice unavailable · type instead";
+    label.textContent = available && readTarget() ? "Local voice bound" : "Voice unavailable · type instead";
+    onPhaseChange();
   }
   async function closeCapture(capture) {
     if (!capture) return;
@@ -65,8 +134,9 @@ export function initLocalVoice(getSession, onStart = () => {}) {
     ++voice.epoch;
     const capture = voice.capture; voice.capture = null;
     voice.abort?.abort(); voice.abort = null;
-    voice.phase = "idle"; paint();
+    voice.phase = "idle";
     void closeCapture(capture);
+    onInvalidate();paint();
     voiceStatus("Dictation cancelled. You can type instead.");
   }
   async function finish() {
@@ -74,7 +144,7 @@ export function initLocalVoice(getSession, onStart = () => {}) {
     const capture = voice.capture, ticket = capture.ticket;
     voice.capture = null; voice.phase = "transcribing"; paint();
     await closeCapture(capture);
-    if (ticket !== voice.epoch || document.hidden) {
+    if (ticket !== voice.epoch || document.hidden || !sameVoiceTarget(capture.selection,readTarget())) {
       if (ticket === voice.epoch) cancel();
       return;
     }
@@ -93,8 +163,11 @@ export function initLocalVoice(getSession, onStart = () => {}) {
       const current = await readSession();
       if (ticket !== voice.epoch || document.hidden ||
           scopeOf(current) !== capture.scope ||
-          scopeOf(getSession()) !== capture.scope || result.target !== capture.target ||
-          typeof result.text !== "string" || result.text.length > 500) return;
+          scopeOf(getSession()) !== capture.scope || !sameVoiceTarget(capture.selection,readTarget()) ||
+          result.target !== capture.target || typeof result.text !== "string" || result.text.length > 500) {
+        if(ticket===voice.epoch)cancel();
+        return;
+      }
       const field = document.getElementById(capture.target);
       if (!field || field.disabled) return;
       const transcript = result.text.trim();
@@ -115,7 +188,9 @@ export function initLocalVoice(getSession, onStart = () => {}) {
   }
   async function start() {
     if (!available || voice.phase !== "idle" || document.hidden) return;
-    onStart(); // New input supersedes any queued/current spoken reply.
+    onStart(); // New input supersedes the old mapped review and spoken reply.
+    const selection=readTarget();
+    if(!selection)return;
     const ticket = ++voice.epoch;
     voice.phase = "requesting"; paint();
     voiceStatus("Checking local session before asking for microphone permission…");
@@ -124,13 +199,14 @@ export function initLocalVoice(getSession, onStart = () => {}) {
       const fresh = await readSession();
       if (ticket !== voice.epoch || document.hidden ||
           scopeOf(fresh) !== originScope ||
-          scopeOf(getSession()) !== originScope || !fresh.voice_available || !fresh.voice_nonce)
+          scopeOf(getSession()) !== originScope || !sameVoiceTarget(selection,readTarget()) ||
+          !fresh.voice_available || !fresh.voice_nonce)
         throw new Error("Local session changed.");
       // This is reached only from a deliberate button action.
       stream = await navigator.mediaDevices.getUserMedia({
         audio: { channelCount: 1, sampleRate: 16000, echoCancellation: true }, video: false,
       });
-      if (ticket !== voice.epoch || document.hidden) {
+      if (ticket !== voice.epoch || document.hidden || !sameVoiceTarget(selection,readTarget())) {
         stream.getTracks().forEach(track => track.stop());
         if (ticket === voice.epoch) cancel();
         return;
@@ -138,17 +214,17 @@ export function initLocalVoice(getSession, onStart = () => {}) {
       context = new AudioContext({ sampleRate: 16000 });
       if (context.sampleRate !== 16000) throw new Error("16 kHz capture is unavailable.");
       await context.resume();
-      if (ticket !== voice.epoch || document.hidden)
+      if (ticket !== voice.epoch || document.hidden || !sameVoiceTarget(selection,readTarget()))
         throw new Error("Dictation was cancelled.");
       const source = context.createMediaStreamSource(stream);
       const processor = context.createScriptProcessor(4096, 1, 1);
       const silent = context.createGain(); silent.gain.value = 0;
       const capture = { ticket, stream, context, source, processor, silent,
         chunks: [], samples: 0, nonce: fresh.voice_nonce, csrf: fresh.csrf,
-        scope: originScope, target, timer: null };
+        scope: originScope, target, selection, timer: null };
       processor.onaudioprocess = event => {
         if (ticket !== voice.epoch || voice.phase !== "recording") return;
-        if (document.hidden) { cancel(); return; }
+        if (document.hidden || !sameVoiceTarget(capture.selection,readTarget())) { cancel(); return; }
         const input = event.inputBuffer.getChannelData(0);
         const take = Math.min(input.length, MAX_SAMPLES - capture.samples);
         const chunk = new Int16Array(take);
@@ -188,6 +264,9 @@ export function initLocalVoice(getSession, onStart = () => {}) {
   window.addEventListener("pagehide", cancel);
   paint();
   if (available) voiceStatus("Start talking requests microphone permission. Transcript stays editable; nothing is submitted automatically.");
+  return Object.freeze({isIdle:()=>voice.phase==="idle",invalidateTarget:()=>{
+    if(voice.phase!=="idle")cancel();else paint();
+  }});
 }
 
 // A browser voice is not qualified by being installed, marked default, or
