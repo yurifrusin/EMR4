@@ -19,6 +19,7 @@ def test_reviewed_progress_keeps_attempts_distinct_from_delivered_episodes():
     view = lab.project_lab_progress(raw, digest)
     assert view["baseline_dispositions"] == {
         "current_controls": 2, "qualified_reused_boundaries": 4, "not_run": 10}
+    assert view["report_basis"] == "STARTUP_PINNED_AUTHORED_REPORT"
     assert [(attempt["name"], attempt["selected_test_instances"],
              attempt["phase_reports"], attempt["delivered_selected_records"])
             for attempt in view["attempts"]] == [
@@ -65,7 +66,7 @@ def test_failed_test_cannot_be_relabelled_as_delivered_record(monkeypatch):
     altered = json.dumps(report, separators=(",", ":")).encode("utf-8")
     digest = hashlib.sha256(altered).hexdigest()
     monkeypatch.setattr(lab, "LAB_PROGRESS_REPORT_SHA", digest)
-    with pytest.raises(ValueError, match="LAB_PROGRESS_NATIVE07_INVALID"):
+    with pytest.raises(ValueError, match="LAB_PROGRESS_HISTORICAL_PREFIX_INVALID"):
         lab.project_lab_progress(altered, digest)
 
 
@@ -75,5 +76,105 @@ def test_authored_expectation_cannot_be_relabelled_as_observed_proposal(monkeypa
     altered = json.dumps(report, separators=(",", ":")).encode("utf-8")
     digest = hashlib.sha256(altered).hexdigest()
     monkeypatch.setattr(lab, "LAB_PROGRESS_REPORT_SHA", digest)
-    with pytest.raises(ValueError, match="LAB_PROGRESS_WORKED_EXAMPLES_INVALID"):
+    with pytest.raises(ValueError, match="LAB_PROGRESS_HISTORICAL_PREFIX_INVALID"):
+        lab.project_lab_progress(altered, digest)
+
+
+def _project_changed(monkeypatch, report):
+    raw = json.dumps(report, separators=(",", ":")).encode("utf-8")
+    digest = hashlib.sha256(raw).hexdigest()
+    monkeypatch.setattr(lab, "LAB_PROGRESS_REPORT_SHA", digest)
+    return lab.project_lab_progress(raw, digest)
+
+
+def test_future_authored_report_shape_requires_a_new_bound_digest(monkeypatch):
+    report = json.loads(REPORT.read_text(encoding="utf-8"))
+    report["attempts"].append({"name": "Native09", "status": "PRE_DOCKER_LAUNCH_FAILURE",
+        "selected_test_instances": 0, "phase_reports": 0,
+        "delivered_selected_records": 0, "cases": [], "effect_review_sha256": "a" * 64})
+    report["evidence_through"] = "NATIVE09_REVIEWED_PRE_DOCKER"
+    view = _project_changed(monkeypatch, report)
+    assert view["attempts"][-1]["name"] == "Native09"
+    assert view["baseline_dispositions"]["not_run"] == 10
+
+
+@pytest.mark.parametrize("index,field,value", [
+    (0, "effect_review_sha256", "a" * 64),
+    (1, "delivered_selected_records", 1),
+    (2, "status", "DELIVERED_VALID_CONTROLS"),
+    (3, "phase_reports", 0),
+    (4, "name", "Native99"),
+])
+def test_all_historical_attempts_remain_immutable(monkeypatch, index, field, value):
+    report = json.loads(REPORT.read_text(encoding="utf-8"))
+    report["attempts"][index][field] = value
+    with pytest.raises(ValueError, match="LAB_PROGRESS_HISTORICAL_PREFIX_INVALID"):
+        _project_changed(monkeypatch, report)
+
+
+def _future_report():
+    report = json.loads(REPORT.read_text(encoding="utf-8"))
+    report["attempts"].append({"name": "Native09", "status": "DELIVERED_VALID_CONTROLS",
+        "selected_test_instances": 1, "phase_reports": 3,
+        "delivered_selected_records": 1,
+        "cases": [{"case_id": "create-new-control-11", "call_phase": "PASSED"}],
+        "effect_review_sha256": "a" * 64})
+    report["baseline_dispositions"] = {"current_controls": 3,
+        "qualified_reused_boundaries": 4, "not_run": 9}
+    report["evidence_through"] = "NATIVE09_REVIEWED_POST_DOCKER"
+    return report
+
+
+def test_future_counts_must_match_phase_and_evidence_cursor(monkeypatch):
+    report = _future_report()
+    assert _project_changed(monkeypatch, report)["baseline_dispositions"]["current_controls"] == 3
+    report["attempts"][-1]["phase_reports"] = 0
+    with pytest.raises(ValueError, match="LAB_PROGRESS_ATTEMPTS_INVALID"):
+        _project_changed(monkeypatch, report)
+    report["attempts"][-1]["phase_reports"] = 3
+    report["evidence_through"] = "NATIVE08_REVIEWED_PRE_DOCKER"
+    with pytest.raises(ValueError, match="LAB_PROGRESS_EVIDENCE_CURSOR_INVALID"):
+        _project_changed(monkeypatch, report)
+
+
+def test_zero_execution_cannot_claim_delivered_or_new_worked_class(monkeypatch):
+    report = _future_report()
+    report["attempts"][-1].update({"selected_test_instances": 0,
+        "phase_reports": 0, "delivered_selected_records": 0, "cases": []})
+    report["baseline_dispositions"]["current_controls"] = 2
+    report["baseline_dispositions"]["not_run"] = 10
+    with pytest.raises(ValueError, match="LAB_PROGRESS_ATTEMPTS_INVALID"):
+        _project_changed(monkeypatch, report)
+    report = _future_report()
+    worked = dict(report["worked_examples"][2])
+    worked["case_id"] = "create-new-control-11"
+    worked["actual_validation"] = "REVIEWED_CALL_PASSED_GRADE_UNKNOWN"
+    worked["readback"] = "REVIEWED_SCOPED_READBACK"
+    worked["command_audit"] = "REVIEWED_ONE_COMMAND_ONE_AUDIT"
+    report["worked_examples"].append(worked)
+    with pytest.raises(ValueError, match="LAB_PROGRESS_WORKED_CLASS_INVALID"):
+        _project_changed(monkeypatch, report)
+
+
+@pytest.mark.parametrize("change", [
+    lambda r: r["attempts"][4].update({"name": "Native04"}),
+    lambda r: r["attempts"][4].update({"selected_test_instances": True}),
+    lambda r: r["attempts"][3]["cases"][0].update({"call_phase": "SUCCESS"}),
+    lambda r: r["reused_examples"][0].update({"before_after": "<script>"}),
+    lambda r: r["worked_examples"][0].update({"authored_request": "<script>"}),
+])
+def test_malformed_or_unsafe_reviewed_report_refused(monkeypatch, change):
+    report = json.loads(REPORT.read_text(encoding="utf-8"))
+    change(report)
+    with pytest.raises(ValueError, match="LAB_PROGRESS_"):
+        _project_changed(monkeypatch, report)
+
+
+def test_duplicate_json_key_refused_even_with_matching_pin(monkeypatch):
+    raw = REPORT.read_bytes()
+    altered = raw.replace(b'"schema": "emr4.stage1_reliability_progress_report.v2",',
+        b'"schema": "emr4.stage1_reliability_progress_report.v2", "schema": "fake",', 1)
+    digest = hashlib.sha256(altered).hexdigest()
+    monkeypatch.setattr(lab, "LAB_PROGRESS_REPORT_SHA", digest)
+    with pytest.raises(ValueError, match="LAB_PROGRESS_DUPLICATE_KEY"):
         lab.project_lab_progress(altered, digest)

@@ -1,5 +1,4 @@
 """Authored source-only DOM/synthesis mock; deliberately not run in preparation."""
-import base64
 from pathlib import Path
 import shutil
 import subprocess
@@ -11,19 +10,21 @@ def test_spoken_reply_requires_exact_local_voice_and_fresh_visible_result():
     node = shutil.which("node")
     if not node:
         pytest.skip("Node needed for a later independently admitted mock run")
-    source = (Path(__file__).resolve().parents[1] / "static" / "demo" /
-              "stage1-local-voice.js").read_text(encoding="utf-8")
+    source_path = (Path(__file__).resolve().parents[1] / "static" / "demo" /
+                   "stage1-local-voice.js")
+    source = source_path.read_text(encoding="utf-8")
     assert "const QUALIFIED_LOCAL_SPEECH_VOICE = null;" in source
-    qualified = source.replace(
-        "const QUALIFIED_LOCAL_SPEECH_VOICE = null;",
-        'const QUALIFIED_LOCAL_SPEECH_VOICE = {voiceURI:"local:test", name:"Local Test", lang:"en-AU"};',
-    )
     script = r"""
 import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
 const tick = () => new Promise(resolve => setImmediate(resolve));
+const original = readFileSync(process.argv[1], 'utf8');
+const qualified = original.replace(
+  'const QUALIFIED_LOCAL_SPEECH_VOICE = null;',
+  'const QUALIFIED_LOCAL_SPEECH_VOICE = {voiceURI:"local:test", name:"Local Test", lang:"en-AU"};');
+assert.notEqual(qualified, original);
 const load = async raw => (await import('data:text/javascript;base64,' +
-  Buffer.from(raw, 'base64').toString('base64'))).initSpokenReply;
-const original = process.argv[1], qualified = process.argv[2];
+  Buffer.from(raw, 'utf8').toString('base64'))).initSpokenReply;
 function harness(local = true) {
   const elements = Object.fromEntries(['spoken-reply','spoken-availability','status'].map(id =>
     [id, {id,disabled:false,textContent:'',listeners:{},
@@ -118,7 +119,5 @@ function harness(local = true) {
   h.calls.speak[0].onerror(); assert.equal(h.calls.speak.length,1);
 }
 """
-    before = base64.b64encode(source.encode()).decode()
-    after = base64.b64encode(qualified.encode()).decode()
-    subprocess.run([node, "--input-type=module", "-e", script, before, after],
+    subprocess.run([node, "--input-type=module", "-e", script, str(source_path)],
                    check=True, capture_output=True, text=True, timeout=15)

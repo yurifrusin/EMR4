@@ -25,6 +25,7 @@ from fastapi.responses import FileResponse, JSONResponse
 import httpx
 
 from stage1_demo_adapter_core import AdapterRejected, MAX_BODY_BYTES, SessionBinding, admit_action
+from stage1_demo_intent import interpret_words, IntentRejected
 from stage1_demo_voice import (MAX_WAV_BYTES, VoiceInputRejected, VoiceRecognitionUnavailable,
                                ContainedVoiceRuntimeBinding, VoiceRuntimeBinding,
                                run_local_recognizer, target_for_persona,
@@ -44,31 +45,26 @@ NATIVE04_INPUTS = {
     "effect_review": (8060, "b8bb1b6e2de75bf0a5376c61287116564e8147bbada3149a5c25810c2bc30d06"),
     "existing_review": (10025, "909d7e8f51b2c3e2009c665194fc3219fa629cd564da296ec6ec14b7e60c0e70"),
 }
-LAB_PROGRESS_NATIVE07_EFFECT_SHA = "5bd59db323eb4da71b7b80ebf66aea88a3ef86fecd198b373523a58558103af7"
-LAB_PROGRESS_NATIVE08_EFFECT_SHA = "62c2072574a9ded109d756a417810013068553554828e0cdf0c091de7dd2eb82"
 LAB_PROGRESS_REPORT_SHA = "51ef618862352719a331237d286297dba2f4c0e6155d19c6d397ac141bfd3065"
-LAB_WORKED_EXAMPLE_SHA = (
-    "bb45fb0422d42c3bc2ad550c1833a3ead0237e2322cd236e372b70aaf40fb1ed",
-    "1518da04fbfe56c0118091f3c868d773ed1dff98ac7716f58556d66bb99029c5",
-    "2109fe40826f5ffd2b17703edaffb94cad5601501191bda2ee6abaaf4b2e9a1e",
-    "aa66c550708842263910e7f305ede2261d173959fd342ab77698dbf616dbbfa8",
-)
-
-
+LAB_PROGRESS_HISTORICAL_PREFIX_SHA = "68a797992a13809c0589e8fcfa58b392eadb824672437b7ef1d9ba2c3b70edbe"
 def project_lab_progress(raw: bytes | None, digest: str | None) -> dict[str, Any] | None:
-    """Expose one exact startup-bound, closed projection; never open report paths."""
+    """Closed projection of one trusted startup-pinned authored progress report.
+
+    The immutable prefix freezes all five historical attempts and their worked
+    examples. Later attempts are data in a separately reviewed report, pinned
+    once at startup; a digest or effect-review SHA alone is not acceptance.
+    Native04 provenance remains independently checked below.
+    """
     if raw is None and digest is None:
         return None
-    if (type(raw) is not bytes or not 1 <= len(raw) <= 16384 or
-            type(digest) is not str or len(digest) != 64 or
-            hashlib.sha256(raw).hexdigest() != digest or
-            digest != LAB_PROGRESS_REPORT_SHA or
-            LAB_PROGRESS_NATIVE07_EFFECT_SHA is None):
+    if (type(raw) is not bytes or not 1 <= len(raw) <= 65536 or
+            type(digest) is not str or digest != LAB_PROGRESS_REPORT_SHA or
+            hashlib.sha256(raw).hexdigest() != digest):
         raise ValueError("LAB_PROGRESS_BINDING_INVALID")
 
-    def unique(items: list[tuple[str, Any]]) -> dict[str, Any]:
+    def unique(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
         result: dict[str, Any] = {}
-        for key, value in items:
+        for key, value in pairs:
             if key in result:
                 raise ValueError("LAB_PROGRESS_DUPLICATE_KEY")
             result[key] = value
@@ -87,129 +83,194 @@ def project_lab_progress(raw: bytes | None, digest: str | None) -> dict[str, Any
              "whole_journey_grade", "display", "disclosure"}
     if (type(report) is not dict or set(report) != fixed or
             report["schema"] != "emr4.stage1_reliability_progress_report.v2" or
-            report["status"] != "REVIEWED_NONPASS_EFFECT_ACCOUNTING" or
+            type(report["status"]) is not str or
+            report["status"] not in {"REVIEWED_NONPASS_EFFECT_ACCOUNTING",
+                                      "REVIEWED_PARTIAL_EFFECT_ACCOUNTING",
+                                      "REVIEWED_COMPLETE_EFFECT_ACCOUNTING"} or
             report["catalog_sha256"] != LAB_CATALOG_SHA or
-            report["authored_catalog_sha256"] != "792b8d4cb627b721f607d1548b757f0b1960b2a2aa0b1592cd3674bc71bb071e" or
-            report["evidence_through"] != "NATIVE08_REVIEWED_PRE_DOCKER" or
             report["native04_primary_sha256"] != NATIVE04_INPUTS["primary"][1] or
             report["native04_result_sha256"] != NATIVE04_INPUTS["result"][1] or
             report["catalog_cases"] != 16 or report["catalog_families"] != 11 or
-            report["baseline_dispositions"] != {"current_controls": 2,
-                "qualified_reused_boundaries": 4, "not_run": 10} or
-            any(report[key] != value for key, value in {
-                "request_detail": "NOT_IN_DELIVERED_PROJECTION",
-                "proposal_detail": "NOT_IN_DELIVERED_PROJECTION",
-                "actual_model": "NOT_RUN",
-                "m1_model_binding": "OPEN",
-                "generated_silence_voice": "NOT_RUN_AS_SPEECH_TEST",
-                "genuine_ptt_voice": "NOT_RUN",
-                "whole_journey_grade": "UNKNOWN", "display": "NOT_OBSERVED",
-                "disclosure": "NOT_OBSERVED"}.items())):
+            type(report["authored_catalog_sha256"]) is not str or
+            re.fullmatch(r"[0-9a-f]{64}", report["authored_catalog_sha256"]) is None or
+            type(report["evidence_through"]) is not str or
+            re.fullmatch(r"NATIVE[0-9]{2,3}_REVIEWED_[A-Z_]{1,48}", report["evidence_through"]) is None):
         raise ValueError("LAB_PROGRESS_UNSUPPORTED_REPORT")
+    dispositions = report["baseline_dispositions"]
+    if (type(dispositions) is not dict or set(dispositions) !=
+            {"current_controls", "qualified_reused_boundaries", "not_run"} or
+            any(type(value) is not int or not 0 <= value <= 16
+                for value in dispositions.values()) or
+            sum(dispositions.values()) != 16 or
+            (report["status"] == "REVIEWED_COMPLETE_EFFECT_ACCOUNTING" and
+             dispositions["not_run"] != 0)):
+        raise ValueError("LAB_PROGRESS_DISPOSITIONS_INVALID")
     attempts = report["attempts"]
-    expected_attempts = (
-        ("Native04", "DELIVERED_VALID_CONTROLS", 2, 6, 2,
-         NATIVE04_INPUTS["effect_review"][1]),
-        ("Native05", "NONPASS_NO_DELIVERED_SELECTED_RECORDS", 2, 6, 0,
-         "c881ce80f6d14df14b2bd1613f2d02a7433752e2ff165aafebfed01ab0700f20"),
-        ("Native06", "PRE_DOCKER_LAUNCH_FAILURE", 0, 0, 0,
-         "003f06377fa76362325a6ecbcad1a6ce7983ee96c648b45c8e4d5454513f0899"))
-    keys = {"name", "status", "selected_test_instances", "phase_reports",
-            "delivered_selected_records", "cases", "effect_review_sha256"}
-    if (type(attempts) is not list or len(attempts) != 5 or
-            any(type(item) is not dict or set(item) != keys for item in attempts)):
-        raise ValueError("LAB_PROGRESS_ATTEMPTS_INVALID")
-    for item, expected in zip(attempts[:3], expected_attempts):
-        if (any(type(item[key]) is not int for key in ("selected_test_instances",
-                "phase_reports", "delivered_selected_records")) or
-                tuple(item[key] for key in ("name", "status", "selected_test_instances",
-                 "phase_reports", "delivered_selected_records", "effect_review_sha256")) != expected):
-            raise ValueError("LAB_PROGRESS_ATTEMPTS_INVALID")
-    valid_cases = {"Native04": (("create-valid-01", "PASSED"),
-                                ("move-valid-timeonly-01", "PASSED")),
-                   "Native05": (("create-duplicate-lost-response-09", "FAILED"),
-                                ("move-duplicate-lost-response-10", "PASSED")),
-                   "Native06": (),
-                   "Native08": (),
-                   "Native07": (("create-duplicate-lost-response-09", "FAILED"),
-                                ("move-duplicate-lost-response-10", "PASSED"))}
-    for item in attempts:
-        cases = item["cases"]
-        if (type(item["name"]) is not str or item["name"] not in valid_cases or
-                type(cases) is not list or len(cases) != len(valid_cases[item["name"]]) or
-                any(type(case) is not dict or set(case) != {"case_id", "call_phase"}
-                    for case in cases) or
-                tuple((case["case_id"], case["call_phase"]) for case in cases) !=
-                    valid_cases[item["name"]]):
-            raise ValueError("LAB_PROGRESS_CASE_PHASES_INVALID")
-    native07 = attempts[3]
-    if (native07["name"] != "Native07" or
-            native07["effect_review_sha256"] != LAB_PROGRESS_NATIVE07_EFFECT_SHA or
-            native07["status"] != "NONPASS_NO_DELIVERED_SELECTED_RECORDS" or
-            tuple(native07[key] for key in ("selected_test_instances", "phase_reports",
-                            "delivered_selected_records")) != (2, 6, 0) or
-            any(type(native07[key]) is not int for key in
-                ("selected_test_instances", "phase_reports", "delivered_selected_records"))):
-        raise ValueError("LAB_PROGRESS_NATIVE07_INVALID")
-    native08 = attempts[4]
-    if (native08["name"] != "Native08" or
-            native08["effect_review_sha256"] != LAB_PROGRESS_NATIVE08_EFFECT_SHA or
-            native08["status"] != "PRE_DOCKER_LAUNCH_FAILURE" or
-            tuple(native08[key] for key in ("selected_test_instances", "phase_reports",
-                            "delivered_selected_records")) != (0, 0, 0) or
-            any(type(native08[key]) is not int for key in
-                ("selected_test_instances", "phase_reports", "delivered_selected_records"))):
-        raise ValueError("LAB_PROGRESS_NATIVE08_INVALID")
     examples = report["reused_examples"]
-    expected_examples = (
-        ("move-attempted-identity-change-05", "NON_TIME_PAYLOAD_CHANGE",
-         "HTTP_422_WITH_UNCHANGED_SNAPSHOT", "UNCHANGED_SNAPSHOT_DETAILS_NOT_DELIVERED"),
-        ("move-stale-expired-authority-06", "STALE_OR_EXPIRED_AUTHORITY",
-         "SEPARATE_REFUSAL_TESTS", "NOT_IN_DELIVERED_PROJECTION"),
-        ("move-source-cancelled-08", "CANCELLED_SOURCE",
-         "REJECTED_WITH_UNCHANGED_SNAPSHOT", "UNCHANGED_SNAPSHOT_DETAILS_NOT_DELIVERED"),
-        ("move-duplicate-lost-response-10", "COMPLETED_REPLAY_WITHOUT_LOST_RESPONSE",
-         "EQUAL_RESPONSE_UNCHANGED_SNAPSHOT_AND_CHANGED_BODY_CONFLICT",
-         "UNCHANGED_SNAPSHOT_DETAILS_NOT_DELIVERED"))
-    example_keys = {"case_id", "disturbance", "actual_validation", "before_after", "outcome"}
-    if (type(examples) is not list or len(examples) != 4 or
-            any(type(item) is not dict or set(item) != example_keys or
-                tuple(item[key] for key in ("case_id", "disturbance",
-                      "actual_validation", "before_after")) != expected or
-                item["outcome"] != "QUALIFIED_REUSED_BOUNDARY_ONLY"
-                for item, expected in zip(examples, expected_examples))):
-        raise ValueError("LAB_PROGRESS_EXAMPLES_INVALID")
     worked = report["worked_examples"]
+    if (type(attempts) is not list or len(attempts) < 5 or
+            type(examples) is not list or len(examples) < 4 or
+            type(worked) is not list or len(worked) < 4):
+        raise ValueError("LAB_PROGRESS_HISTORICAL_PREFIX_INVALID")
+    historical = {"attempts": attempts[:5], "reused_examples": examples[:4],
+                  "worked_examples": worked[:4]}
+    historical_bytes = json.dumps(historical, sort_keys=True, separators=(",", ":"),
+                                  ensure_ascii=True).encode("utf-8")
+    if hashlib.sha256(historical_bytes).hexdigest() != LAB_PROGRESS_HISTORICAL_PREFIX_SHA:
+        raise ValueError("LAB_PROGRESS_HISTORICAL_PREFIX_INVALID")
+    attempt_keys = {"name", "status", "selected_test_instances", "phase_reports",
+                    "delivered_selected_records", "cases", "effect_review_sha256"}
+    statuses = {"DELIVERED_VALID_CONTROLS", "PARTIAL_DELIVERED_CONTROLS",
+                "NONPASS_NO_DELIVERED_SELECTED_RECORDS", "PRE_DOCKER_LAUNCH_FAILURE"}
+    phases = {"PASSED", "FAILED", "NOT_RUN"}
+    if len(attempts) > 32:
+        raise ValueError("LAB_PROGRESS_ATTEMPTS_INVALID")
+    seen_attempts: set[str] = set()
+    delivered_ids: set[str] = set()
+    for attempt in attempts:
+        if (type(attempt) is not dict or set(attempt) != attempt_keys or
+                type(attempt["name"]) is not str or
+                re.fullmatch(r"Native[0-9]{2,3}", attempt["name"]) is None or
+                attempt["name"] in seen_attempts or type(attempt["status"]) is not str or
+                attempt["status"] not in statuses or
+                type(attempt["effect_review_sha256"]) is not str or
+                re.fullmatch(r"[0-9a-f]{64}", attempt["effect_review_sha256"]) is None or
+                any(type(attempt[key]) is not int or not 0 <= attempt[key] <= 32
+                    for key in ("selected_test_instances", "phase_reports",
+                                "delivered_selected_records")) or
+                type(attempt["cases"]) is not list or
+                len(attempt["cases"]) != attempt["selected_test_instances"] or
+                attempt["phase_reports"] > 3 * attempt["selected_test_instances"] or
+                attempt["delivered_selected_records"] > attempt["selected_test_instances"] or
+                (attempt["status"] == "DELIVERED_VALID_CONTROLS" and
+                 attempt["selected_test_instances"] == 0) or
+                (attempt["status"] == "NONPASS_NO_DELIVERED_SELECTED_RECORDS" and
+                 attempt["selected_test_instances"] == 0)):
+            raise ValueError("LAB_PROGRESS_ATTEMPTS_INVALID")
+        seen_attempts.add(attempt["name"])
+        seen_cases: set[str] = set()
+        passed: set[str] = set()
+        for case in attempt["cases"]:
+            if (type(case) is not dict or set(case) != {"case_id", "call_phase"} or
+                    type(case["case_id"]) is not str or
+                    re.fullmatch(r"[a-z0-9-]{1,64}", case["case_id"]) is None or
+                    case["case_id"] in seen_cases or
+                    type(case["call_phase"]) is not str or case["call_phase"] not in phases):
+                raise ValueError("LAB_PROGRESS_CASE_PHASES_INVALID")
+            seen_cases.add(case["case_id"])
+            if case["call_phase"] == "PASSED":
+                passed.add(case["case_id"])
+        if (attempt["delivered_selected_records"] > len(passed) or
+                (passed and attempt["phase_reports"] < len(passed)) or
+                (attempt["status"] == "DELIVERED_VALID_CONTROLS" and
+                 (attempt["delivered_selected_records"] != len(passed) or
+                  len(passed) != len(attempt["cases"]))) or
+                (attempt["status"] == "PARTIAL_DELIVERED_CONTROLS" and
+                 not 0 < attempt["delivered_selected_records"] < len(attempt["cases"])) or
+                (attempt["status"] in {"NONPASS_NO_DELIVERED_SELECTED_RECORDS",
+                                       "PRE_DOCKER_LAUNCH_FAILURE"} and
+                 attempt["delivered_selected_records"] != 0) or
+                (attempt["status"] == "PRE_DOCKER_LAUNCH_FAILURE" and
+                 (attempt["selected_test_instances"] or attempt["phase_reports"]))):
+            raise ValueError("LAB_PROGRESS_ATTEMPTS_INVALID")
+        if attempt["status"] == "DELIVERED_VALID_CONTROLS":
+            delivered_ids.update(passed)
+        elif attempt["status"] == "PARTIAL_DELIVERED_CONTROLS":
+            # The aggregate is insufficient to identify which passed call was
+            # delivered; do not count it as a current named control here.
+            pass
+    if (attempts[0]["name"] != "Native04" or
+            attempts[0]["effect_review_sha256"] != NATIVE04_INPUTS["effect_review"][1] or
+            attempts[0]["delivered_selected_records"] != 2 or
+            attempts[0]["cases"] != [
+                {"case_id": "create-valid-01", "call_phase": "PASSED"},
+                {"case_id": "move-valid-timeonly-01", "call_phase": "PASSED"}] or
+            len(delivered_ids) != dispositions["current_controls"]):
+        raise ValueError("LAB_PROGRESS_PROVENANCE_INVALID")
+    if not report["evidence_through"].startswith(attempts[-1]["name"].upper() + "_REVIEWED_"):
+        raise ValueError("LAB_PROGRESS_EVIDENCE_CURSOR_INVALID")
+    example_keys = {"case_id", "disturbance", "actual_validation", "before_after", "outcome"}
+    if (type(examples) is not list or len(examples) != dispositions["qualified_reused_boundaries"] or
+            len(examples) > 16):
+        raise ValueError("LAB_PROGRESS_EXAMPLES_INVALID")
+    seen_examples: set[str] = set()
+    for example in examples:
+        if (type(example) is not dict or set(example) != example_keys or
+                any(type(value) is not str or re.fullmatch(r"[A-Za-z0-9_-]{1,96}", value) is None
+                    for value in example.values()) or
+                example["case_id"] in seen_examples or
+                example["case_id"] in delivered_ids or
+                example["outcome"] != "QUALIFIED_REUSED_BOUNDARY_ONLY"):
+            raise ValueError("LAB_PROGRESS_EXAMPLES_INVALID")
+        seen_examples.add(example["case_id"])
+    for example in examples[4:]:
+        if (example["actual_validation"] not in
+                {"REVIEWED_REFUSAL_UNCHANGED_SNAPSHOT", "SEPARATE_REFUSAL_TESTS"} or
+                example["before_after"] not in
+                {"REVIEWED_UNCHANGED_SNAPSHOT", "NOT_IN_DELIVERED_PROJECTION"}):
+            raise ValueError("LAB_PROGRESS_EXAMPLES_INVALID")
     worked_keys = {"case_id", "evidence_kind", "authored_request",
                    "authored_expected_proposal", "proposal_observation",
                    "actual_validation", "before_after", "readback", "command_audit",
                    "outcome"}
-    worked_ids = ("create-valid-01", "move-valid-timeonly-01",
-                  "move-attempted-identity-change-05", "move-source-cancelled-08")
-    if (type(worked) is not list or len(worked) != 4 or
-            any(type(item) is not dict or set(item) != worked_keys or
-                item["case_id"] != case_id or
+    if type(worked) is not list or len(worked) > 16:
+        raise ValueError("LAB_PROGRESS_WORKED_EXAMPLES_INVALID")
+    seen_worked: set[str] = set()
+    for index, item in enumerate(worked):
+        if (type(item) is not dict or set(item) != worked_keys or
                 type(item["before_after"]) is not dict or
                 set(item["before_after"]) != {"before", "after"} or
-                hashlib.sha256(json.dumps(item, sort_keys=True, separators=(",", ":"),
-                    ensure_ascii=True).encode()).hexdigest() != expected_sha
-                for item, case_id, expected_sha in zip(worked, worked_ids,
-                                                       LAB_WORKED_EXAMPLE_SHA))):
-        raise ValueError("LAB_PROGRESS_WORKED_EXAMPLES_INVALID")
+                type(item["case_id"]) is not str or item["case_id"] in seen_worked or
+                item["case_id"] not in delivered_ids | seen_examples or
+                any(type(value) is not str or
+                    re.fullmatch(r"[A-Za-z0-9 .,:;/'()_+\-]{1,512}", value) is None
+                    for key, value in item.items() if key != "before_after") or
+                any(type(value) is not str or
+                    re.fullmatch(r"[A-Za-z0-9 .,:;/'()_+\-]{1,512}", value) is None
+                    for value in item["before_after"].values()) or
+                item["proposal_observation"] not in
+                    {"NOT_IN_DELIVERED_PROJECTION", "OBSERVED_IN_REVIEWED_RECORD"}):
+            raise ValueError("LAB_PROGRESS_WORKED_EXAMPLES_INVALID")
+        current = item["case_id"] in delivered_ids
+        if ((current and (item["evidence_kind"] not in
+                         {"NATIVE04_DELIVERED_CONTROL", "CURRENT_DELIVERED_CONTROL"} or
+                         item["outcome"] not in
+                         {"DELIVERED_SOURCE_PROJECTION_EXTERNAL_RUNTIME_QUALIFIED_GRADE_UNKNOWN",
+                          "CURRENT_DELIVERED_CONTROL_GRADE_UNKNOWN"})) or
+                (not current and (item["evidence_kind"] != "QUALIFIED_REUSED_BOUNDARY" or
+                                  item["outcome"] != "QUALIFIED_REUSED_BOUNDARY_ONLY")) or
+                (item["evidence_kind"] == "NATIVE04_DELIVERED_CONTROL" and
+                 item["case_id"] not in {"create-valid-01", "move-valid-timeonly-01"})):
+            raise ValueError("LAB_PROGRESS_WORKED_CLASS_INVALID")
+        if index >= 4 and (item["actual_validation"] not in
+                {"REVIEWED_CALL_PASSED_GRADE_UNKNOWN", "REVIEWED_REFUSAL_UNCHANGED_SNAPSHOT"} or
+                item["readback"] not in
+                {"REVIEWED_SCOPED_READBACK", "NOT_IN_DELIVERED_PROJECTION"} or
+                item["command_audit"] not in
+                {"REVIEWED_ONE_COMMAND_ONE_AUDIT", "NOT_IN_DELIVERED_PROJECTION"}):
+            raise ValueError("LAB_PROGRESS_WORKED_CLASS_INVALID")
+        seen_worked.add(item["case_id"])
+    field_values = {"request_detail": {"NOT_IN_DELIVERED_PROJECTION", "REVIEWED"},
+                    "proposal_detail": {"NOT_IN_DELIVERED_PROJECTION", "REVIEWED"},
+                    "actual_model": {"NOT_RUN", "REVIEWED"},
+                    "m1_model_binding": {"OPEN", "REVIEWED"},
+                    "generated_silence_voice": {"NOT_RUN_AS_SPEECH_TEST", "REVIEWED"},
+                    "genuine_ptt_voice": {"NOT_RUN", "REVIEWED"},
+                    "whole_journey_grade": {"UNKNOWN", "REVIEWED"},
+                    "display": {"NOT_OBSERVED", "REVIEWED"},
+                    "disclosure": {"NOT_OBSERVED", "REVIEWED"}}
+    if any(type(report[key]) is not str or report[key] not in allowed
+           for key, allowed in field_values.items()):
+        raise ValueError("LAB_PROGRESS_STATUS_INVALID")
     return {"schema": "emr4.stage1_reliability_progress_view.v2",
-            "catalog_cases": 16, "catalog_families": 11,
+            "report_basis": "STARTUP_PINNED_AUTHORED_REPORT",
+            "catalog_cases": report["catalog_cases"],
+            "catalog_families": report["catalog_families"],
             "authored_catalog_sha256": report["authored_catalog_sha256"],
             "evidence_through": report["evidence_through"],
-            "baseline_dispositions": report["baseline_dispositions"],
-            "attempts": attempts, "reused_examples": examples,
-            "worked_examples": worked,
-            "request_detail": report["request_detail"],
-            "proposal_detail": report["proposal_detail"],
-            "actual_model": "NOT_RUN", "m1_model_binding": "OPEN",
-            "generated_silence_voice": "NOT_RUN_AS_SPEECH_TEST",
-            "genuine_ptt_voice": "NOT_RUN",
-            "whole_journey_grade": "UNKNOWN", "display": "NOT_OBSERVED",
-            "disclosure": "NOT_OBSERVED"}
+            "baseline_dispositions": dispositions, "attempts": attempts,
+            "reused_examples": examples, "worked_examples": worked,
+            **{key: report[key] for key in field_values}}
 
 
 def _lab_count(value: Any) -> bool:
@@ -731,8 +792,12 @@ def create_stage1_demo_app(config: DemoConfig) -> tuple[FastAPI, DemoIssuer]:
             # A current-authority refusal is definitive, never a lost reply.
             # Keep its body opaque and consistent with other stale/denied
             # backend outcomes at this demo boundary.
-            raise HTTPException(status_code=409 if response.status_code in {400, 401, 403, 404, 409, 422} else 503,
-                                detail="BACKEND_ACTION_UNAVAILABLE")
+            status = {400: 400, 401: 403, 403: 403, 404: 404,
+                      409: 409, 422: 422}.get(response.status_code, 503)
+            detail = {400: "BACKEND_VALIDATION_INVALID", 422: "BACKEND_VALIDATION_INVALID",
+                      403: "BACKEND_ACCESS_DENIED", 404: "BACKEND_RESOURCE_UNAVAILABLE",
+                      409: "BACKEND_STATE_CHANGED", 503: "BACKEND_OUTCOME_UNCERTAIN"}[status]
+            raise HTTPException(status_code=status, detail=detail)
         try:
             return response.json()
         except ValueError:
@@ -928,6 +993,43 @@ def create_stage1_demo_app(config: DemoConfig) -> tuple[FastAPI, DemoIssuer]:
             raise HTTPException(status_code=404)
         return FileResponse(STATIC / asset, headers={"Cache-Control": "no-store"})
 
+    @app.post("/demo/stage1/interpret")
+    async def interpret_route(request: Request):
+        local(request)
+        session = issuer.session_for(request)
+        if (request.headers.get("origin") != config.listener_origin or
+                request.headers.get("content-type") != "application/json" or
+                not secrets.compare_digest(request.headers.get("x-csrf-token", ""),
+                                           session.binding.csrf)):
+            raise HTTPException(status_code=403, detail="INTENT_SCOPE_UNAVAILABLE")
+        parts: list[bytes] = []
+        size = 0
+        async for chunk in request.stream():
+            size += len(chunk)
+            if size > MAX_BODY_BYTES:
+                raise HTTPException(status_code=413, detail="BODY_TOO_LARGE")
+            parts.append(chunk)
+        def unique(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
+            result: dict[str, Any] = {}
+            for key, value in pairs:
+                if key in result:
+                    raise ValueError("DUPLICATE_FIELD")
+                result[key] = value
+            return result
+        try:
+            body = json.loads(b"".join(parts).decode("utf-8"), object_pairs_hook=unique)
+        except (UnicodeError, ValueError):
+            raise HTTPException(status_code=400, detail="INTENT_BODY_INVALID") from None
+        if type(body) is not dict or set(body) != {"kind", "words"}:
+            raise HTTPException(status_code=400, detail="INTENT_BODY_INVALID")
+        try:
+            proposal = interpret_words(body["kind"], body["words"],
+                persona=session.binding.persona, demo_clock=config.demo_clock,
+                timezone=config.timezone)
+        except IntentRejected:
+            raise HTTPException(status_code=400, detail="INTENT_BODY_INVALID") from None
+        return no_store(proposal)
+
     @app.post("/demo/stage1/voice")
     async def voice_route(request: Request):
         local(request)
@@ -946,9 +1048,7 @@ def create_stage1_demo_app(config: DemoConfig) -> tuple[FastAPI, DemoIssuer]:
                 or not secrets.compare_digest(request.headers.get("x-voice-nonce", ""),
                                                session.voice_nonce)):
             return no_store({"error": "VOICE_SCOPE_UNAVAILABLE"}, 403)
-        # A nonce authorises exactly one bounded clip, never a domain action.
-        session.voice_nonce = secrets.token_urlsafe(24)
-        next_nonce = session.voice_nonce
+        presented_nonce = request.headers.get("x-voice-nonce", "")
         parts: list[bytes] = []
         size = 0
         async for chunk in request.stream():
@@ -965,6 +1065,13 @@ def create_stage1_demo_app(config: DemoConfig) -> tuple[FastAPI, DemoIssuer]:
             return no_store({"error": "VOICE_BUSY"}, 429)
         try:
             async with voice_lock:
+                # Recheck inside the lock: two clips can pass the initial check
+                # before either obtains it. Only an accepted clip consumes nonce.
+                if (not secrets.compare_digest(presented_nonce, session.voice_nonce)
+                        or issuer.session_for(request) is not session):
+                    return no_store({"error": "VOICE_SESSION_CHANGED"}, 409)
+                session.voice_nonce = secrets.token_urlsafe(24)
+                next_nonce = session.voice_nonce
                 if isinstance(binding, ContainedVoiceRuntimeBinding):
                     transcript = await asyncio.to_thread(
                         run_local_recognizer, raw, binding, session.binding.persona)

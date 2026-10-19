@@ -12,6 +12,8 @@ const dateTime = (date, clock, zone) => `${date} at ${clock} ${zone}`;
 const uuid = () => crypto.randomUUID();
 
 const intentHandoffs={request:createManualIntentHandoff(),move:createManualIntentHandoff()};
+const interpretedNotes={request:null,move:null};
+const interpretationGeneration={request:0,move:0};
 let localVoice=null;
 const intentKind=()=>state.session?.persona==="patient"?"request":"move";
 function intentSnapshot(kind) {
@@ -37,17 +39,65 @@ function currentVoiceTarget() {
   const selected=selectedVoiceTarget();
   return selected?selected+":"+intentHandoffs[intentKind()].revision():null;
 }
+
+function hasCurrentInterpretation(kind) {
+  const snapshot=intentSnapshot(kind);
+  return !snapshot.words.trim() || interpretedNotes[kind]===JSON.stringify(snapshot);
+}
+async function suggestFromWords(kind) {
+  if(!state.session || kind!==intentKind() || (localVoice && !localVoice.isIdle())) {
+    status("Finish or cancel dictation in the current session before suggesting details.");return;
+  }
+  const words=intentSnapshot(kind).words;
+  if(!words.trim()){status("Type or dictate a note, or use the structured controls with the note blank.");return;}
+  invalidateIntent(kind,false);
+  const generation=interpretationGeneration[kind],before=JSON.stringify(intentSnapshot(kind));
+  status("Interpreting your words locally. No request or appointment is being changed…");
+  try {
+    const response=await fetch("/demo/stage1/interpret",{method:"POST",credentials:"same-origin",cache:"no-store",redirect:"error",
+      headers:{"Content-Type":"application/json","X-CSRF-Token":state.session.csrf},body:JSON.stringify({kind,words})});
+    if(!response.ok)throw new Error("The note could not be interpreted in this session. Refresh or use structured details.");
+    const result=await response.json();
+    if(generation!==interpretationGeneration[kind] || before!==JSON.stringify(intentSnapshot(kind)) ||
+        (localVoice && !localVoice.isIdle()))return;
+    if(!result || result.schema!=="emr4.stage1_word_interpretation.v1" || result.kind!==kind ||
+        result.method!=="DETERMINISTIC_LOCAL" || !["PROPOSED","CLARIFICATION"].includes(result.status) ||
+        !Array.isArray(result.missing) || !result.fields || typeof result.fields!=="object" || Array.isArray(result.fields))
+      throw new Error("The suggested details could not be verified. Clarify the note or use structured details.");
+    if(result.status!=="PROPOSED"){
+      status("Please clarify the note with one date and an exact time or a bounded preferred window. No details were adopted.");return;
+    }
+    const keys=kind==="request"?["date","earliest_local","latest_local"]:["target_date","target_start_local"];
+    const fields=result.fields,date=fields[kind==="request"?"date":"target_date"];
+    const clocks=kind==="request"?[fields.earliest_local,fields.latest_local]:[fields.target_start_local];
+    if(Object.keys(fields).sort().join("|")!==keys.sort().join("|") || result.missing.length ||
+        typeof date!=="string" || !/^\d{4}-\d{2}-\d{2}$/.test(date) ||
+        clocks.some(value=>typeof value!=="string" || !/^(?:[01]\d|2[0-3]):[0-5]\d$/.test(value)) ||
+        (kind==="request" && fields.earliest_local>=fields.latest_local))
+      throw new Error("The suggested date or time is incomplete. Clarify the note before review.");
+    if(kind==="request"){
+      $("request-date").value=date;$("request-earliest").value=fields.earliest_local;$("request-latest").value=fields.latest_local;
+    }else{$("move-date").value=date;$("move-time").value=fields.target_start_local;}
+    invalidateIntent(kind,false);
+    interpretedNotes[kind]=JSON.stringify(intentSnapshot(kind));
+    renderMapping(kind);
+    status("Local deterministic interpretation suggested these details. Check them against your words, then review. Nothing has been sent or confirmed.");
+  }catch(error){if(generation===interpretationGeneration[kind])status(error.message);}
+}
+
 function renderMapping(kind) {
   const check=$(kind+"-mapping-ack"),info=intentHandoffs[kind].inspect(intentSnapshot(kind));
   $(kind+"-mapping").hidden=!info.required;
-  check.disabled=!info.supported || Boolean(localVoice && !localVoice.isIdle());
+  check.disabled=!info.supported || !hasCurrentInterpretation(kind) || Boolean(localVoice && !localVoice.isIdle());
   check.checked=info.acknowledged;
   text(kind+"-mapping-status",!info.required?"Structured details only. No note needs mapping.":
     !info.supported?"Complete the current structured details before checking the note.":
     info.acknowledged?"Your check is recorded for these words, target and details. This does not verify their meaning.":
-    "Transfer or correct the note's meaning in the structured details, then check that they match.");
+    !hasCurrentInterpretation(kind)?"Use Suggest details from words. Clarify the note if it cannot be interpreted.":
+    "Check the suggested details against your words before reviewing.");
 }
 function invalidateIntent(kind, cancelCapture=true) {
+  interpretedNotes[kind]=null;interpretationGeneration[kind]++;
   intentHandoffs[kind].invalidate();
   if(kind==="request"){state.requestReview=null;show("request-review-box",false);}
   else clearPending();
@@ -59,15 +109,24 @@ function acceptMapping(kind) {
   if(localVoice && !localVoice.isIdle()){
     check.checked=false;status("Finish or cancel dictation before checking the mapped details.");return;
   }
+  if(!hasCurrentInterpretation(kind)){check.checked=false;status("Suggest details from the current words before checking them.");return;}
   if(!check.checked){invalidateIntent(kind);return;}
   try{intentHandoffs[kind].acknowledge(intentSnapshot(kind));}
   catch(_){check.checked=false;status("Complete the current details and check the editable note before review.");}
   renderMapping(kind);
 }
 function requireMappedReview(kind) {
+  if(!hasCurrentInterpretation(kind))throw new Error("Use Suggest details from words and check the proposal before review.");
   if(localVoice && !localVoice.isIdle())throw new Error("Finish or cancel dictation before review.");
   try{return intentHandoffs[kind].review(intentSnapshot(kind));}
   catch(_){throw new Error("Check that the current editable note matches these structured details before review.");}
+}
+
+
+function showWriteFailure(error,subject) {
+  const definitive=error?.status===400 || error?.status===401 || error?.status===403 || error?.status===422;
+  if(definitive){state.pendingKey=null;show("reconcile",false);status(error.message);}
+  else {show("reconcile",true);status(subject+" outcome uncertain. Check the original action before another confirmation.");}
 }
 
 async function api(method, action, body, key) {
@@ -81,8 +140,13 @@ async function api(method, action, body, key) {
     if (response.status === 401 || response.status === 403) {
       state.session=null;invalidateIntent("request");invalidateIntent("move");
     }
-    if (response.status === 409) throw new Error("Current facts changed. Refresh and review again.");
-    throw new Error("The action could not be verified. Refresh current facts before another action.");
+    const message=response.status===400 || response.status===422
+      ? "Check the date, time and required details. The submitted details were not accepted."
+      : response.status===409 ? "Current facts changed. Refresh and review again."
+      : response.status===404 ? "This request or appointment is unavailable in the current session."
+      : response.status===401 || response.status===403 ? "This session cannot perform that action. Refresh the session."
+      : "The action could not be verified. Check the original action before another confirmation.";
+    const error=new Error(message);error.status=response.status;throw error;
   }
   return response.json();
 }
@@ -135,7 +199,7 @@ function displayLabProgress(root, progress) {
   const heading = document.createElement("h3");
   heading.textContent = "What the bounded evidence covers"; root.append(heading);
   const dispositions = progress.baseline_dispositions;
-  labParagraph(root, `This report includes reviewed attempts through Native08. The authored catalog has ${progress.catalog_cases} distinct cases in ${progress.catalog_families} families. Its prior evidence review classified ${dispositions.current_controls} current controls, ${dispositions.qualified_reused_boundaries} reused boundaries and ${dispositions.not_run} NOT_RUN cases. Test attempts, phase reports and delivered records below are separate counts; they do not increase catalog coverage.`);
+  labParagraph(root, `Bound evidence marker: ${progress.evidence_through}. The authored catalog has ${progress.catalog_cases} distinct cases in ${progress.catalog_families} families. Its prior evidence review classified ${dispositions.current_controls} current controls, ${dispositions.qualified_reused_boundaries} reused boundaries and ${dispositions.not_run} NOT_RUN cases. Test attempts, phase reports and delivered records below are separate counts; they do not increase catalog coverage.`);
   for (const attempt of progress.attempts) {
     const card = document.createElement("div"); card.className = "fact-card";
     const title = document.createElement("h4"); title.textContent = attempt.name; card.append(title);
@@ -163,7 +227,7 @@ function displayLabProgress(root, progress) {
   for (const example of progress.worked_examples) {
     const card = document.createElement("div"); card.className = "fact-card";
     const title = document.createElement("h4");
-    title.textContent = `${labels[example.case_id] ?? example.case_id} · ${example.evidence_kind === "NATIVE04_DELIVERED_CONTROL" ? "delivered control" : "reused boundary"}`; card.append(title);
+    title.textContent = `${labels[example.case_id] ?? example.case_id} · ${["NATIVE04_DELIVERED_CONTROL", "CURRENT_DELIVERED_CONTROL"].includes(example.evidence_kind) ? "delivered control" : "reused boundary"}`; card.append(title);
     const body = document.createElement("div");
     facts(body, [
       ["Authored request", example.authored_request],
@@ -341,7 +405,7 @@ async function submitRequest() {
       reason_code: "follow_up" }, key);
     state.pendingKey = null; show("request-review-box", false); displayRequest(result.request, result.original_booking, result.options);
     status("Request result read back from the server.");
-  } catch (_) { show("reconcile", true); status("Submission outcome uncertain. Check the original action before another request."); }
+  } catch (error) { showWriteFailure(error,"Submission"); }
   finally { state.busy = false; }
 }
 async function reviewCreate(option) {
@@ -370,7 +434,7 @@ async function confirmCreate() {
       throw new Error("Booking readback did not match the command result.");
     const message = `Booking confirmed for ${dateTime(current.appointment.date, current.appointment.start_local, current.appointment.zone)}. You can still view the original request.`;
     status(message); spoken?.offer(message);
-  } catch (_) { clearPending(); show("reconcile", true); status("Booking outcome uncertain. Check the original action before another confirmation."); }
+  } catch (error) { clearPending();showWriteFailure(error,"Booking"); }
   finally { state.busy = false; }
 }
 async function reviewMove() {
@@ -420,17 +484,19 @@ async function confirmMove() {
       throw new Error("The same appointment and unchanged details were not verified.");
     const message = `The same appointment was moved to ${dateTime(current.appointment.date, current.appointment.start_local, current.appointment.zone)}.`;
     status(message); spoken?.offer(message);
-  } catch (_) { clearPending(); show("reconcile", true); status("Move outcome uncertain. Check the original action before another confirmation."); }
+  } catch (error) { clearPending();showWriteFailure(error,"Move"); }
   finally { state.busy = false; }
 }
 
+$("request-suggest").addEventListener("click",()=>suggestFromWords("request"));
+$("move-suggest").addEventListener("click",()=>suggestFromWords("move"));
 $("request-review").addEventListener("click", reviewRequest);
 $("request-edit").addEventListener("click", () => { invalidateIntent("request"); spoken?.stop(); show("request-review-box", false); $("request-date").focus(); });
 $("request-submit").addEventListener("click", submitRequest);
 $("patient-refresh").addEventListener("click", refresh);
 $("staff-refresh").addEventListener("click", refresh);
 $("create-confirm").addEventListener("click", confirmCreate);
-$("create-cancel").addEventListener("click", () => { invalidateIntent("move"); clearPending(); $("staff-offers").querySelector("button")?.focus(); });
+$("create-cancel").addEventListener("click", () => { clearPending(); $("staff-offers").querySelector("button")?.focus(); });
 $("move-propose").addEventListener("click", reviewMove);
 $("move-confirm").addEventListener("click", confirmMove);
 $("move-cancel").addEventListener("click", () => { invalidateIntent("move"); clearPending(); $("move-date").focus(); });

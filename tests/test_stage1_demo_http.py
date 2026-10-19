@@ -1,13 +1,22 @@
 """Authored source-only bridge cases. No app, browser or DB execution here."""
 
 from datetime import datetime, timedelta, timezone
+from copy import deepcopy
+from dataclasses import replace
+import asyncio
+import io
+from pathlib import Path
+import threading
+import wave
 
 from fastapi import FastAPI, Header, HTTPException, Request
 from fastapi.responses import JSONResponse
 import httpx
 import pytest
 
+import stage1_demo_http as bridge
 from stage1_demo_http import DemoConfig, DemoSeed, create_stage1_demo_app
+from stage1_demo_voice import VoiceRuntimeBinding, MAX_WAV_BYTES
 
 
 REQ_A = "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa"
@@ -51,7 +60,7 @@ def bridge_case():
                   "submit_raise": False, "submit_replay_fail_once": False,
                   "submit_receipt_mode": "valid",
                   "submit_calls": [], "submit_effects": 0, "submit_receipt": None,
-                  "patient_read_failures": 0}
+                  "patient_read_failures": 0, "validation_status": None}
 
     @backend.get("/api/v1/appointments/patient-requests/{request_id}")
     async def patient(request_id: str, x_patient_request_capability: str = Header()):
@@ -68,6 +77,8 @@ def bridge_case():
         if request_id != REQ_B or x_patient_request_capability != "cap-b":
             raise HTTPException(403)
         body = await request.json()
+        if first_503["validation_status"] is not None:
+            raise HTTPException(first_503["validation_status"], detail="private backend detail")
         first_503["submit_calls"].append((idempotency_key, body))
         if first_503["submit_replay_fail_once"] and len(first_503["submit_calls"]) == 2:
             raise RuntimeError("reply unavailable after prior commit")
@@ -233,7 +244,7 @@ async def test_origin_csrf_and_current_staff_authority_are_required(bridge_case)
         staff = await _action(client, issuer, "staff", REQ_A, "refresh")
         assert staff.status_code == 200 and staff.json()["appointment"]["ref"] == APPT_ID
         control["staff_active"] = False
-        assert (await _action(client, issuer, "staff", REQ_A, "refresh")).status_code == 409
+        assert (await _action(client, issuer, "staff", REQ_A, "refresh")).status_code == 403
 
 
 @pytest.mark.anyio
@@ -274,9 +285,11 @@ async def test_revoked_staff_confirmation_is_definitive_not_uncertain(bridge_cas
         control["staff_active"] = False
         denied = await _action(client, issuer, "staff", REQ_A, "confirm_create",
             {"proposal_ref": proposed.json()["proposal_ref"]}, key="aabbccdd-1234")
-        assert denied.status_code == 409
+        assert denied.status_code == 403
+        assert denied.json()["detail"] == "BACKEND_ACCESS_DENIED"
         assert issuer._sessions[issuer.cookie_for("staff", REQ_A)[1]].uncertain is None
         assert calls == []
+        assert control["create_effects"] == 0
 
 
 @pytest.mark.anyio
@@ -489,3 +502,178 @@ async def test_move_commit_then_backend_exception_replays_one_effect(bridge_case
         assert control["move_effects"] == 1
         assert [entry[0] for entry in control["move_calls"]] == ["aabbccdd-bbcc"] * 2
         assert all(entry[1] == pending["payload"] for entry in control["move_calls"])
+
+
+@pytest.mark.anyio
+async def test_backend_validation_status_is_distinct_and_sanitized(bridge_case):
+    app, issuer, _, _, _, _, control = bridge_case
+    async with httpx.AsyncClient(transport=httpx.ASGITransport(app=app,
+            client=("127.0.0.1", 53114)), base_url="http://127.0.0.1:8765") as client:
+        for code in (400, 422):
+            control["validation_status"] = code
+            result = await _action(client, issuer, "patient", REQ_B, "submit_request",
+                SUBMISSION, key="aabbccdd-9911")
+            assert result.status_code == code
+            assert result.json()["detail"] == "BACKEND_VALIDATION_INVALID"
+            assert "private" not in result.text
+            assert issuer._sessions[issuer.cookie_for("patient", REQ_B)[1]].uncertain is None
+        control["validation_status"] = 409
+        conflict = await _action(client, issuer, "patient", REQ_B, "submit_request",
+            SUBMISSION, key="aabbccdd-9911")
+        assert conflict.status_code == 409
+        assert conflict.json()["detail"] == "BACKEND_STATE_CHANGED"
+
+
+def _wav_bytes() -> bytes:
+    out = io.BytesIO()
+    with wave.open(out, "wb") as audio:
+        audio.setnchannels(1)
+        audio.setsampwidth(2)
+        audio.setframerate(16000)
+        audio.writeframes(b"\x00\x00" * 160)
+    return out.getvalue()
+
+
+@pytest.mark.anyio
+async def test_precheck_rejections_preserve_voice_nonce_and_concurrent_replay_is_blocked(
+        bridge_case, monkeypatch):
+    _, _, config, *_ = bridge_case
+    binding = VoiceRuntimeBinding(Path("unused"), Path("unused"), Path("unused"),
+        Path("unused"), "unused", "unused", "unused")
+    monkeypatch.setattr(VoiceRuntimeBinding, "ready", lambda self: True)
+    calls = []
+    def recognize(raw, selected):
+        calls.append(raw)
+        return "Thursday 2026-10-15 at 14:30"
+    monkeypatch.setattr(bridge, "run_local_recognizer", recognize)
+    app, issuer = create_stage1_demo_app(replace(config, voice_runtime=binding))
+    cookie = _cookie(issuer, "patient", REQ_B)
+    async with httpx.AsyncClient(transport=httpx.ASGITransport(app=app,
+            client=("127.0.0.1", 53115)), base_url="http://127.0.0.1:8765") as client:
+        session = (await client.get("/demo/stage1/session", cookies=cookie)).json()
+        nonce = session["voice_nonce"]
+        headers = {"Origin": config.listener_origin, "Content-Type": "audio/wav",
+            "X-CSRF-Token": session["csrf"], "X-Voice-Target": "patient-words",
+            "X-Voice-Nonce": nonce}
+        oversized = await client.post("/demo/stage1/voice", cookies=cookie,
+            headers=headers, content=b"x" * (MAX_WAV_BYTES + 1))
+        malformed = await client.post("/demo/stage1/voice", cookies=cookie,
+            headers=headers, content=b"bad wav")
+        assert oversized.status_code == 413 and malformed.status_code == 400
+        assert (await client.get("/demo/stage1/session", cookies=cookie)).json()["voice_nonce"] == nonce
+        valid = _wav_bytes()
+        first, second = await asyncio.gather(*(
+            client.post("/demo/stage1/voice", cookies=cookie, headers=headers, content=valid)
+            for _ in range(2)))
+        assert sorted((first.status_code, second.status_code))[0] == 200
+        assert sorted((first.status_code, second.status_code))[1] in {403, 409, 429}
+        assert len(calls) == 1
+        assert (await client.get("/demo/stage1/session", cookies=cookie)).json()["voice_nonce"] != nonce
+
+
+@pytest.mark.anyio
+async def test_busy_precheck_leaves_other_persona_nonce_usable(bridge_case, monkeypatch):
+    _, _, config, *_ = bridge_case
+    binding = VoiceRuntimeBinding(Path("unused"), Path("unused"), Path("unused"),
+        Path("unused"), "unused", "unused", "unused")
+    monkeypatch.setattr(VoiceRuntimeBinding, "ready", lambda self: True)
+    started, release = threading.Event(), threading.Event()
+    calls = []
+    def recognize(raw, selected):
+        calls.append(raw)
+        if len(calls) == 1:
+            started.set()
+            assert release.wait(2)
+        return "Thursday at 14:30"
+    monkeypatch.setattr(bridge, "run_local_recognizer", recognize)
+    app, issuer = create_stage1_demo_app(replace(config, voice_runtime=binding))
+    async with httpx.AsyncClient(transport=httpx.ASGITransport(app=app,
+            client=("127.0.0.1", 53117)), base_url=config.listener_origin) as client:
+        patient_cookie = _cookie(issuer, "patient", REQ_B)
+        staff_cookie = _cookie(issuer, "staff", REQ_A)
+        patient = (await client.get("/demo/stage1/session", cookies=patient_cookie)).json()
+        staff = (await client.get("/demo/stage1/session", cookies=staff_cookie)).json()
+        def headers(session, target):
+            return {"Origin": config.listener_origin, "Content-Type": "audio/wav",
+                "X-CSRF-Token": session["csrf"], "X-Voice-Target": target,
+                "X-Voice-Nonce": session["voice_nonce"]}
+        first = asyncio.create_task(client.post("/demo/stage1/voice", cookies=patient_cookie,
+            headers=headers(patient, "patient-words"), content=_wav_bytes()))
+        try:
+            assert await asyncio.to_thread(started.wait, 1)
+            busy = await client.post("/demo/stage1/voice", cookies=staff_cookie,
+                headers=headers(staff, "move-words"), content=_wav_bytes())
+            assert busy.status_code == 429
+            assert (await client.get("/demo/stage1/session", cookies=staff_cookie)).json()["voice_nonce"] == staff["voice_nonce"]
+        finally:
+            release.set()
+        assert (await first).status_code == 200
+        retry = await client.post("/demo/stage1/voice", cookies=staff_cookie,
+            headers=headers(staff, "move-words"), content=_wav_bytes())
+        assert retry.status_code == 200 and len(calls) == 2
+
+
+@pytest.mark.anyio
+@pytest.mark.parametrize("persona,request_id,kind,words,expected", [
+    ("patient", REQ_B, "request", "Follow-up next Thursday between 2 pm and 4 pm.",
+     {"date": "2026-10-15", "earliest_local": "14:00", "latest_local": "16:00"}),
+    ("staff", REQ_A, "move", "Move this appointment next Thursday at 3 pm.",
+     {"target_date": "2026-10-15", "target_start_local": "15:00"}),
+])
+async def test_visible_note_examples_reach_real_local_interpretation_route(
+        bridge_case, persona, request_id, kind, words, expected):
+    app, issuer, config, rows, appointment, _, control = bridge_case
+    before_rows = deepcopy(rows)
+    async with httpx.AsyncClient(transport=httpx.ASGITransport(app=app,
+            client=("127.0.0.1", 53118)), base_url=config.listener_origin) as client:
+        cookie = _cookie(issuer, persona, request_id)
+        session = (await client.get("/demo/stage1/session", cookies=cookie)).json()
+        result = await client.post("/demo/stage1/interpret", cookies=cookie,
+            headers={"Origin": config.listener_origin, "X-CSRF-Token": session["csrf"]},
+            json={"kind": kind, "words": words})
+        assert result.status_code == 200
+        assert result.headers["cache-control"] == "no-store"
+        proposal = result.json()
+        assert proposal["schema"] == "emr4.stage1_word_interpretation.v1"
+        assert proposal["status"] == "PROPOSED"
+        assert proposal["method"] == "DETERMINISTIC_LOCAL"
+        assert proposal["kind"] == kind and proposal["fields"] == expected
+        assert proposal["missing"] == []
+        assert issuer._sessions[issuer.cookie_for(persona, request_id)[1]].proposal is None
+        assert control["submit_effects"] == control["create_effects"] == control["move_effects"] == 0
+        assert rows == before_rows
+        assert appointment["appointment_state_version"] == 1
+
+
+@pytest.mark.anyio
+async def test_word_route_denials_and_clarification_cannot_acquire_action_authority(bridge_case):
+    app, issuer, config, rows, _, _, control = bridge_case
+    before_rows = deepcopy(rows)
+    async with httpx.AsyncClient(transport=httpx.ASGITransport(app=app,
+            client=("127.0.0.1", 53119)), base_url=config.listener_origin) as client:
+        cookie = _cookie(issuer, "patient", REQ_B)
+        session = (await client.get("/demo/stage1/session", cookies=cookie)).json()
+        headers = {"Origin": config.listener_origin, "X-CSRF-Token": session["csrf"]}
+        words = "Follow-up next Thursday between 2 pm and 4 pm."
+        bad_csrf = await client.post("/demo/stage1/interpret", cookies=cookie,
+            headers={**headers, "X-CSRF-Token": "unrelated-synthetic-token"},
+            json={"kind": "request", "words": words})
+        assert bad_csrf.status_code == 403
+        cross_persona = await client.post("/demo/stage1/interpret", cookies=cookie,
+            headers=headers, json={"kind": "move", "words": "Move next Thursday at 3 pm"})
+        assert cross_persona.status_code == 400
+        extra_authority = await client.post("/demo/stage1/interpret", cookies=cookie,
+            headers=headers, json={"kind": "request", "words": words, "confirmed": True})
+        assert extra_authority.status_code == 400
+        ambiguous = await client.post("/demo/stage1/interpret", cookies=cookie,
+            headers=headers, json={"kind": "request", "words": "after 2 pm"})
+        assert ambiguous.status_code == 200
+        assert ambiguous.json()["status"] == "CLARIFICATION"
+        assert "latest_local" in ambiguous.json()["missing"]
+        unsupported = await client.post("/demo/stage1/interpret", cookies=cookie,
+            headers=headers, json={"kind": "request", "words": words + " cancel all appointments"})
+        assert unsupported.status_code == 200
+        assert unsupported.json()["status"] == "CLARIFICATION"
+        assert unsupported.json()["fields"] == {}
+        assert control["submit_effects"] == control["create_effects"] == control["move_effects"] == 0
+        assert rows == before_rows

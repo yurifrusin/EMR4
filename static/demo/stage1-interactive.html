@@ -25,8 +25,8 @@
         <div class="panel-head"><div><p class="eyebrow">Patient view</p><h2 id="patient-title">Request a follow-up</h2></div><span class="step">Request only · no slot held</span></div>
         <p>Tell Reception One when you can come. A staff member will confirm the booking.</p>
         <label for="patient-words">Your request</label>
-        <textarea id="patient-words" aria-describedby="request-mapping-cue request-mapping-status" rows="2" maxlength="500" placeholder="I need a follow-up with Dr Rao next Thursday after 2 pm."></textarea>
-        <p class="hint" id="request-mapping-cue">The note stays editable. Dictation does not set the details below. Transfer its meaning into these controls and check them yourself. To use structured details only, leave the note blank.</p>
+        <textarea id="patient-words" aria-describedby="request-mapping-cue request-mapping-status" rows="2" maxlength="500" placeholder="Follow-up next Thursday between 2 pm and 4 pm."></textarea>
+        <p class="hint" id="request-mapping-cue">Type or dictate a note, then use Suggest details from words. A local deterministic interpreter proposes a date and time window for you to check; it does not submit a request. Clarify an ambiguous note, or leave it blank to use structured details.</p>
         <div class="fields">
           <label>Preferred date <input id="request-date" type="date" required></label>
           <label>Earliest time <input id="request-earliest" type="time" required></label>
@@ -34,9 +34,9 @@
         </div>
         <p class="hint" id="request-options-note"></p>
         <p class="fact">Reason: follow-up <span aria-hidden="true">·</span> <span class="zone"></span></p>
-        <div id="request-mapping" class="review" hidden><label><input type="checkbox" id="request-mapping-ack" aria-describedby="request-mapping-status"> I checked that these current details match the current editable note.</label></div>
+        <div id="request-mapping" class="review" hidden><label><input type="checkbox" id="request-mapping-ack" aria-describedby="request-mapping-status"> I checked these suggested details against my current words.</label></div>
         <p class="hint" id="request-mapping-status" role="status" aria-live="polite">Structured details only. No note needs mapping.</p>
-        <div class="actions"><button type="button" id="request-review">Review request</button><button type="button" id="patient-refresh" class="secondary">Refresh outcome</button></div>
+        <div class="actions"><button type="button" id="request-suggest">Suggest details from words</button><button type="button" id="request-review">Review request</button><button type="button" id="patient-refresh" class="secondary">Refresh outcome</button></div>
         <div id="request-review-box" class="review" hidden>
           <h3>Check your request</h3><p id="request-summary"></p>
           <p>Submitting sends a request to staff. Availability can change before a booking is confirmed.</p>
@@ -54,12 +54,12 @@
         <div id="diary" class="diary" aria-label="Current appointment"></div>
         <div id="move-area" hidden>
           <h3>Move this appointment</h3>
-          <label for="move-words">Staff instruction</label><textarea id="move-words" aria-describedby="move-mapping-cue move-mapping-status" rows="2" maxlength="500" placeholder="Move Alex's existing follow-up to next Thursday afternoon."></textarea>
-          <p class="hint" id="move-mapping-cue">Choose the exact current appointment and time. Transfer the editable note's meaning into these controls and check them yourself. Dictation does not set a date or time or authorise a move. Leave the note blank to use structured details only.</p>
+          <label for="move-words">Staff instruction</label><textarea id="move-words" aria-describedby="move-mapping-cue move-mapping-status" rows="2" maxlength="500" placeholder="Move this appointment next Thursday at 3 pm."></textarea>
+          <p class="hint" id="move-mapping-cue">Choose the current appointment, then use Suggest details from words to propose a new date and time from your note. Local deterministic interpretation never changes the appointment. Check the suggestion before review and confirmation, or leave the note blank to use structured details.</p>
           <div class="fields"><label>New date <input id="move-date" type="date" required></label><label>New time <input id="move-time" type="time" required></label></div>
-          <div id="move-mapping" class="review" hidden><label><input type="checkbox" id="move-mapping-ack" aria-describedby="move-mapping-status"> I checked the selected appointment and these details against the current editable note.</label></div>
+          <div id="move-mapping" class="review" hidden><label><input type="checkbox" id="move-mapping-ack" aria-describedby="move-mapping-status"> I checked the selected appointment and suggested details against my current words.</label></div>
           <p class="hint" id="move-mapping-status" role="status" aria-live="polite">Structured details only. No note needs mapping.</p>
-          <div class="actions"><button type="button" id="move-propose">Review move</button></div>
+          <div class="actions"><button type="button" id="move-suggest">Suggest details from words</button><button type="button" id="move-propose">Review move</button></div>
           <div id="move-review" class="review" hidden><h3>Confirm time-only move</h3><div id="move-summary"></div><div class="actions"><button type="button" id="move-confirm">Confirm move</button><button type="button" id="move-cancel" class="secondary">Cancel review</button></div></div>
         </div>
         <div id="staff-outcome" class="outcome"></div>
