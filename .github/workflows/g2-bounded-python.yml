@@ -16,14 +16,14 @@ concurrency:
 
 jobs:
   bounded:
-    name: Bounded CI-A mechanisms (subject 47c1988)
+    name: Bounded Python mechanisms (subject 74dd524)
     if: github.repository == 'yurifrusin/EMR4'
     runs-on: ubuntu-24.04
     timeout-minutes: 33
     env:
       G2_RUN_COMMIT: ${{ github.sha }}
-      G2_SELECTION_SHA256: 41a7c82c925ab34e9055be7169e39d8b27a2fa7a834f4b07b49fdde0d8cf1f69
-      G2_SUBJECT_COMMIT: 47c1988b3ad6a3b4e4549c701e8dc222e3d69a24
+      G2_SELECTION_SHA256: 4e7fb4b394a7fc5a0459f2b162cc0005195ce4131e22529ab7cb368504da4a2c
+      G2_SUBJECT_COMMIT: 74dd5242a7f2a953f6942d9a043d469c95f74a9c
     steps:
       - name: Select Python 3.11
         id: python
@@ -54,14 +54,14 @@ jobs:
               -o "$g2_root/subject/$relative"
             printf '%s  %s\n' "$digest" "$g2_root/subject/$relative" | sha256sum --check --status
           done <<'FILES'
-          9ef54f57e34588c8db728e01a085a04939a609a54994170fc2a2e143a94be57c pyproject.toml
+          30e8165ef1dedc0178ec2e1beb553a74de0b9680aed51282807fb45a4f28cde2 pyproject.toml
           95c40e589cb5f53a63ebcf92914bfc68a01e473863cb815cec74844ad025bc49 scripts/historical_diary_leakage_lint.py
-          deda2e86f7a6cfc1f8da56e45dc420c896a24749324e326cfc54e576e11528de scripts/python_source_state.py
+          f430803e889b4c3aa0269e12dbff4d965eea2dec0917ac051d8d78225c67b61c scripts/python_source_state.py
           d59bac77fcf41750943c834160c0c6ecfb0cefc71fdaad521325cf0c82816dda scripts/security_bandit_gate.py
           30751884d86499ffc65ca33944b8e861691657ff4d5694cd97e11fd0f24fe813 scripts/verification_runtime.py
-          51d9e529c7f8846b0beb41cfacd95ae816577fffdb87f189b1739d64121ac8e5 scripts/verify_repository.py
+          01239f5459c9967cfceffc0201d969a77ec374db8887bf3149944dd93308c992 scripts/verify_repository.py
           3c7fdefb9aeae9defc1208948083533da3a8531f9664e4538ca3a781e223163d tests/test_python_source_state.py
-          716db9f4bc24a8b114377820124e2a52f8150a74d93c4286c50a428716ecf800 tests/test_repository_maintenance.py
+          159b7192299becf9b8815fab02edd9de99c604cf482b04eced6933acbaa392b7 tests/test_repository_maintenance.py
           FILES
           mkdir -p "$g2_root/subject/orchestration/harness_settings"
           selection="$g2_root/subject/orchestration/harness_settings/python_source_state.json"
