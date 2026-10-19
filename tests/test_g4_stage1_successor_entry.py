@@ -750,8 +750,16 @@ def test_handoff_only_new_test_accepts_absent_preimage():
 
 # Prospective v5 audit correction. These checks do not execute an operation.
 def _audit_scope():
-    path = Path(__file__).resolve().parents[1] / bounded_g1b.G4_STAGE1_SUCCESSOR_SCOPE
-    return json.loads(path.read_bytes())
+    path = Path("C:/Users/there/EMR4-migration/20260911-v1/"
+                "current-control-repair-20260912-v1/demo-led-stage1-20261012-v2/"
+                "midstream-audit-correction-source-v1/control-admission-source-v1/"
+                "correction-v6/candidate-source/orchestration/programme/"
+                "g4-stage1-successor-entry-scope.json")
+    raw = path.read_bytes()
+    assert len(raw) == 5871
+    assert bounded_g1b._sha(raw) == (
+        "464f388a07fcc6eaa20090a9dc844a8709500cb5ad7c9ae305ed0ce92af1924d")
+    return json.loads(raw)
 
 
 def _audit_binding(kind):
@@ -787,8 +795,8 @@ def test_audit_scope_exact_nine_and_frozen_control_profile():
     assert scope["product_sha256"]["stage1_demo_http.py"] == "81628d878d86465734a955f945e05ac31797338b6697889670e50c91ff74268c"
     assert scope["product_sha256"]["tests/test_stage1_voice_intent_handoff.cjs"] == "e0e54bafd8a94bd10bbdc382f255c482554279349f06e6a33a5a77d25de34667"
     assert scope["correction_source_review"] == {
-        "path": str(bounded_g1b.G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT /
-                    "midstream-audit-correction-source-v1/independent-product-source-review-v4.json"),
+        "path": (bounded_g1b.G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT /
+                    "midstream-audit-correction-source-v1/independent-product-source-review-v4.json").as_posix(),
         "sha256": "d17b9a91e918033ad85610ae8ac122e311bd01fa2bb952663792f7887e51dfde"}
     assert set(scope["control_sha256"]) == {bounded_g1b.G4_AUDIT_CODE,
                                             bounded_g1b.G4_STAGE1_SUCCESSOR_TEST}
@@ -977,3 +985,178 @@ def test_audit_activation_requires_exact_independent_control_publication_effect(
         with pytest.raises(bounded_g1b.BoundedG1BError) as caught:
             bounded_g1b._g4_audit_activation_acceptance(changed, q)
         assert caught.value.reason_code == "bounded_g4_audit_activation_acceptance"
+
+
+# Current G4 CI maintenance checks are source only; no operation runs here.
+def _ci_scope():
+    return json.loads((Path(__file__).parents[1] /
+        bounded_g1b.G4_STAGE1_SUCCESSOR_SCOPE).read_text(encoding="utf-8"))
+
+
+def _ci_binding(stage):
+    paths = (bounded_g1b.G4_CI_CONTROL if stage == "enable"
+             else {bounded_g1b.G4_CI_WORKFLOW})
+    return {"schema_version": bounded_g1b.G4_CI_BINDING_SCHEMA,
+            "operation_kind": bounded_g1b.G4_CI_KIND, "stage": stage,
+            "repair_sha256": {p: {"before_sha256": bounded_g1b.G4_CI_PREIMAGES[p],
+                                  "after_sha256": "a" * 64} for p in paths}}
+
+
+def test_ci_maintenance_exact_paths_and_effects():
+    for stage, paths in (("enable", bounded_g1b.G4_CI_CONTROL),
+                         ("apply", frozenset({bounded_g1b.G4_CI_WORKFLOW}))):
+        q = _ci_binding(stage)
+        assert bounded_g1b.operation_paths(bounded_g1b.G4_CI_KIND, q) == paths
+        assert bounded_g1b._operation(bounded_g1b.G4_CI_KIND, q)["g4_ci_maintenance"] is True
+        assert bounded_g1b.operation_effects(bounded_g1b.G4_CI_KIND) == bounded_g1b.EFFECTS
+        for mutation in (lambda row: row["repair_sha256"].pop(next(iter(row["repair_sha256"]))),
+                         lambda row: row["repair_sha256"].update({"AGENTS.md": {}})):
+            changed = copy.deepcopy(q)
+            mutation(changed)
+            with pytest.raises(bounded_g1b.BoundedG1BError) as caught:
+                bounded_g1b.operation_paths(bounded_g1b.G4_CI_KIND, changed)
+            assert caught.value.reason_code == "bounded_g4_ci_changed_paths"
+    assert "product_behavior_change" in bounded_g1b.operation_effects(
+        "implement_g4_stage1_successor")
+
+
+def test_ci_maintenance_scope_exact_product_and_workflow():
+    scope = _ci_scope()
+    bounded_g1b.validate_g4_ci_maintenance_scope(scope)
+    assert scope["selected_base"] == bounded_g1b.G4_CI_BASE
+    assert scope["predecessor_publication"] == bounded_g1b.G4_CI_PRODUCT_PUBLICATION
+    assert scope["ci_maintenance"]["workflow_after_sha256"] == bounded_g1b.G4_CI_WORKFLOW_AFTER
+    for field, value in (
+        ("selected_base", {"commit": "0" * 40, "tree": "0" * 40}),
+        ("allowed_paths", ["AGENTS.md"]), ("allowed_effects", ["repository_read"]),
+        ("predecessor_publication", {"path": "other", "sha256": "0" * 64})):
+        changed = copy.deepcopy(scope)
+        changed[field] = value
+        with pytest.raises(bounded_g1b.BoundedG1BError):
+            bounded_g1b.validate_g4_ci_maintenance_scope(changed)
+    for field in ("workflow_before_sha256", "workflow_after_sha256",
+                  "source_subject_commit", "selection_sha256"):
+        changed = copy.deepcopy(scope)
+        changed["ci_maintenance"][field] = "0" * (40 if field.endswith("commit") else 64)
+        with pytest.raises(bounded_g1b.BoundedG1BError) as caught:
+            bounded_g1b.validate_g4_ci_maintenance_scope(changed)
+        assert caught.value.reason_code == "bounded_g4_ci_workflow_identity"
+
+
+def test_ci_maintenance_preimages_and_review_subject_are_exact():
+    for path in (*sorted(bounded_g1b.G4_CI_CONTROL), bounded_g1b.G4_CI_WORKFLOW):
+        pair = {"before_sha256": bounded_g1b.G4_CI_PREIMAGES[path],
+                "after_sha256": "a" * 64}
+        bounded_g1b._g4_ci_pair(path, pair, "a" * 64)
+        changed = dict(pair, before_sha256="0" * 64)
+        with pytest.raises(bounded_g1b.BoundedG1BError) as caught:
+            bounded_g1b._g4_ci_pair(path, changed, "a" * 64)
+        assert caught.value.reason_code == "bounded_g4_ci_change_preimage"
+    q = {k: "a" for k in ("schema_version", "operation_id", "operation_kind",
+                         "stage", "phase", "base_commit", "base_tree", "expected_head",
+                         "expected_index_tree", "candidate_tree", "source_sha256",
+                         "payload_sha256", "repair_sha256", "predecessor_scope",
+                         "predecessor_publication", "route_opinion", "activation_acceptance")}
+    subject = bounded_g1b.g4_ci_review_subject(q)
+    for key in q:
+        changed = dict(q, **{key: "changed"})
+        assert bounded_g1b.g4_ci_review_subject(changed) != subject
+    q["source_review"] = {"path": "excluded", "sha256": "b" * 64}
+    assert bounded_g1b.g4_ci_review_subject(q) == subject
+
+
+def test_ci_maintenance_product_receipt_checks_actual_abi():
+    row = bounded_g1b.G4_CI_PRODUCT_PUBLICATION
+    raw = Path(row["path"]).read_bytes()
+    assert len(raw) == 30664 and bounded_g1b._sha(raw) == row["sha256"]
+    good = json.loads(raw)
+    bounded_g1b._g4_ci_product_publication(good)
+    for key in ("candidate_tree", "result_sha256",
+                "same_attempt_remote_readback_verified",
+                "audio_recording_accepted", "rendered_accessibility_accepted",
+                "g4_completion_accepted"):
+        changed = copy.deepcopy(good)
+        changed[key] = (not good[key] if type(good[key]) is bool else "0" * 40)
+        with pytest.raises(bounded_g1b.BoundedG1BError) as caught:
+            bounded_g1b._g4_ci_product_publication(changed)
+        assert caught.value.reason_code == "bounded_g4_ci_product_publication"
+        absent = copy.deepcopy(good)
+        del absent[key]
+        with pytest.raises(bounded_g1b.BoundedG1BError) as caught:
+            bounded_g1b._g4_ci_product_publication(absent)
+        assert caught.value.reason_code == "bounded_g4_ci_product_publication"
+
+
+def test_ci_maintenance_activation_requires_exact_reviewed_enable_effect():
+    q = {"base_commit": "c" * 40, "base_tree": "d" * 40,
+         "payload_sha256": {p: "a" * 64 for p in bounded_g1b.G4_CI_CONTROL}}
+    good = {"schema": "emr4.g4_operation_review.v1", "status": "PASS",
+            "verdict": "PASS_G4_STAGE1_CI_MAINTENANCE_CONTROL_PUBLICATION_EFFECT",
+            "reviewer_agent": "/root/audit_admission_route_review",
+            "independent": True, "implementation_authorship": False,
+            "blocking_findings": [], "operation_kind": bounded_g1b.G4_CI_KIND,
+            "candidate": "control", "stage": "enable", "phase": "push",
+            "base": bounded_g1b.G4_CI_BASE["commit"], "commit": q["base_commit"],
+            "candidate_tree": q["base_tree"],
+            "published_ref": bounded_g1b.G4_STAGE1_INTERACTIVE_BACKEND_REF,
+            "control_sha256": q["payload_sha256"],
+            "source_publication_accepted": True, "control_activation_accepted": True,
+            "same_attempt_remote_readback_verified": True,
+            "protected_refs_unchanged": True,
+            "whole_inverse_verified_same_attempt": True}
+    bounded_g1b._g4_ci_activation_acceptance(good, q)
+    for key in ("verdict", "reviewer_agent", "operation_kind", "candidate",
+                "stage", "phase", "published_ref", "control_sha256",
+                "source_publication_accepted", "control_activation_accepted"):
+        wrong = copy.deepcopy(good)
+        wrong[key] = False if type(good[key]) is bool else "substituted"
+        with pytest.raises(bounded_g1b.BoundedG1BError) as caught:
+            bounded_g1b._g4_ci_activation_acceptance(wrong, q)
+        assert caught.value.reason_code == "bounded_g4_ci_activation_acceptance"
+        missing = copy.deepcopy(good)
+        del missing[key]
+        with pytest.raises(bounded_g1b.BoundedG1BError) as caught:
+            bounded_g1b._g4_ci_activation_acceptance(missing, q)
+        assert caught.value.reason_code == "bounded_g4_ci_activation_acceptance"
+
+
+@pytest.mark.parametrize("stage", ["enable", "apply"])
+@pytest.mark.parametrize("phase", ["development", "pre-push", "post-push"])
+def test_ci_maintenance_review_six_exact_slots_and_refusals(stage, phase):
+    q = {k: "a" for k in ("schema_version", "operation_id", "operation_kind",
+                         "stage", "phase", "base_commit", "base_tree", "expected_head",
+                         "expected_index_tree", "candidate_tree", "source_sha256",
+                         "payload_sha256", "repair_sha256", "predecessor_scope",
+                         "predecessor_publication", "route_opinion", "activation_acceptance")}
+    q["stage"], q["phase"] = stage, phase
+    subject = bounded_g1b.g4_ci_review_subject(q)
+    suffix = "" if phase == "development" else "-" + phase
+    path = (bounded_g1b.G4_CI_EVIDENCE / "ci-maintenance-control-source-v1" /
+            f"independent-{stage}{suffix}-exact-subject-review-v1.json")
+    row = {"path": str(path), "sha256": "a" * 64}
+    review = {"schema": "emr4.g4_operation_review.v1", "status": "PASS",
+              "verdict": "PASS_G4_STAGE1_CI_MAINTENANCE_EXACT_ADMISSION_SUBJECT",
+              "independent": True, "implementation_authorship": False,
+              "blocking_findings": [], "reviewer_agent": "/root/audit_admission_route_review",
+              "subject_sha256": subject}
+    def read(selected, digest):
+        assert (selected, digest) == (path, row["sha256"])
+        return json.dumps(review).encode()
+    assert bounded_g1b._g4_ci_review(
+        read, row, bounded_g1b.G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT,
+        subject, stage, phase) == review
+    wrong_row = dict(row, path=str(path.with_name("unexpected.json")))
+    with pytest.raises(bounded_g1b.BoundedG1BError) as caught:
+        bounded_g1b._g4_ci_review(read, wrong_row,
+            bounded_g1b.G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT, subject, stage, phase)
+    assert caught.value.reason_code == "bounded_g4_ci_review_path"
+    for key, value in (("independent", False),
+                       ("implementation_authorship", True),
+                       ("reviewer_agent", "/root/author"),
+                       ("subject_sha256", "0" * 64)):
+        changed = dict(review, **{key: value})
+        with pytest.raises(bounded_g1b.BoundedG1BError) as caught:
+            bounded_g1b._g4_ci_review(
+                lambda _p, _d: json.dumps(changed).encode(), row,
+                bounded_g1b.G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT, subject, stage, phase)
+        assert caught.value.reason_code == "bounded_g4_ci_independent_subject"

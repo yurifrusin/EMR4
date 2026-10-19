@@ -3375,6 +3375,8 @@ def _validate_g3_read_render_loaded_policy(inputs):
 
 
 def operation_effects(kind: str) -> frozenset[str]:
+    if kind == G4_CI_KIND:
+        return EFFECTS
     if kind == "implement_g4_stage1_successor":
         return EFFECTS | {"product_behavior_change"}
     if kind == "implement_g4_stage1_interactive":
@@ -3416,6 +3418,8 @@ def operation_effects(kind: str) -> frozenset[str]:
 
 def operation_paths(kind: str, binding: dict | None = None) -> frozenset[str]:
     _need(type(kind) is str and kind in OPERATION_PATHS, "bounded_g1b_operation_kind")
+    if kind == G4_CI_KIND:
+        return _g4_ci_paths(binding)
     if kind in G4_STAGE1_SUCCESSOR_KINDS and _is_g4_audit_binding(binding):
         return _g4_audit_paths(kind, binding)
     if kind in G4_STAGE1_SUCCESSOR_KINDS and _is_g4_handoff_binding(binding):
@@ -3451,6 +3455,10 @@ def operation_paths(kind: str, binding: dict | None = None) -> frozenset[str]:
 
 def _operation(kind: str, binding: dict | None = None) -> dict:
     paths = operation_paths(kind, binding)
+    if kind == G4_CI_KIND:
+        return {"paths": paths, "g4_ci_maintenance": True,
+                "profile": raisa_policy.G4_STAGE1_SUCCESSOR_PROFILE,
+                "gate": "G4", "limits": G4_CI_LIMITS}
     if kind in G4_STAGE1_SUCCESSOR_KINDS and _is_g4_audit_binding(binding):
         return {"paths": paths, "g4_audit_source": True,
                 "profile": raisa_policy.G4_STAGE1_SUCCESSOR_PROFILE,
@@ -6333,6 +6341,9 @@ def load_bounded_g1b_inputs(context: BoundedG1BContext) -> BoundedG1BInputs:
         return snapshot[1]
 
     binding = _json(read(binding_path, context.expected_binding_sha256))
+    if binding.get("operation_kind") == G4_CI_KIND:
+        return _load_g4_ci_inputs(
+            context, target, source, evidence_root, scratch, binding, read, snapshots)
     if binding.get("operation_kind") in G4_STAGE1_SUCCESSOR_KINDS and _is_g4_audit_binding(binding):
         return _load_g4_audit_source_inputs(
             context, target, source, evidence_root, scratch, binding, read, snapshots)
@@ -6508,6 +6519,8 @@ def load_bounded_g1b_inputs(context: BoundedG1BContext) -> BoundedG1BInputs:
 
 def _validate_loaded_policy(inputs: BoundedG1BInputs) -> tuple[dict[str, bytes], configuration_core.ValidatedConfiguration | None]:
     operation = _operation(inputs.binding["operation_kind"], inputs.binding)
+    if operation.get("g4_ci_maintenance"):
+        return _validate_g4_ci_loaded_policy(inputs)
     if operation.get("g4_audit_source"):
         return _validate_g4_audit_source_loaded_policy(inputs)
     if operation.get("g4_handoff_source"):
@@ -10016,3 +10029,387 @@ def _validate_g4_audit_source_loaded_policy(inputs):
     except (raisa_policy.RaisaPolicyError, configuration_core.ConfigurationError) as error:
         raise BoundedG1BError(error.reason_code) from error
     return {G4_STAGE1_SUCCESSOR_SCOPE: _canonical(scope) + b"\n"}, configuration
+
+
+# Current G4 CI maintenance. The historical successor schemas remain frozen.
+G4_CI_KIND = "maintain_g4_stage1_ci_workflow"
+G4_CI_BINDING_SCHEMA = "ariadne.g4_stage1_ci_maintenance_operation_binding.v1"
+G4_CI_SCOPE_SCHEMA = "ariadne.g4_stage1_successor_entry_scope.v6"
+G4_CI_WORKFLOW = ".github/workflows/g2-bounded-python.yml"
+G4_CI_CONTROL = frozenset({G4_AUDIT_CODE, G4_STAGE1_SUCCESSOR_SCOPE,
+                           G4_STAGE1_SUCCESSOR_TEST})
+G4_CI_WORKFLOW_BEFORE = "506065c5e31f1d54a9f4149a9bbb277a7c1513d09ae66e43e4fb45d3f8d1dcb6"
+G4_CI_WORKFLOW_AFTER = "06502d68b016fba75fb0aab98e8903d52c124b4cf5d40bc5245e3528437ddff9"
+G4_CI_SOURCE_SUBJECT = "74dd5242a7f2a953f6942d9a043d469c95f74a9c"
+G4_CI_SELECTION = "4e7fb4b394a7fc5a0459f2b162cc0005195ce4131e22529ab7cb368504da4a2c"
+G4_CI_BASE = {"commit": "99c6e4f9c2ef7817d0277597f03cd05cbb209c00",
+              "tree": "fbbc5a66845998d480910fcb25580fe8d1c44eb9"}
+G4_CI_EVIDENCE = G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT / "midstream-audit-correction-source-v1"
+G4_CI_PREDECESSOR_SCOPE = {
+    "path": (G4_CI_EVIDENCE / "control-admission-source-v1/correction-v6/candidate-source/"
+             "orchestration/programme/g4-stage1-successor-entry-scope.json").as_posix(),
+    "sha256": "464f388a07fcc6eaa20090a9dc844a8709500cb5ad7c9ae305ed0ce92af1924d"}
+G4_CI_PRODUCT_PUBLICATION = {
+    "path": (G4_CI_EVIDENCE / "product-publication-source-v3/"
+             "independent-stage1-midstream-audit-product-push-effect-review-v1.json").as_posix(),
+    "sha256": "7c9f0c988d1a870dfcf24111641fcb380bb688b99cd29c4f38e54ea9f2876ba2"}
+G4_CI_ROUTE_OPINION = {
+    "path": (G4_CI_EVIDENCE / "independent-ci-maintenance-route-review-v1.json").as_posix(),
+    "sha256": "cbc5e23261710dfb372112923826c1adc270c51a4dfc026beae5539acc0c02f6"}
+G4_CI_WORKFLOW_CANDIDATE = {
+    "path": (G4_CI_EVIDENCE / "correction-v2/candidate-source/"
+             ".github/workflows/g2-bounded-python.yml").as_posix(),
+    "sha256": G4_CI_WORKFLOW_AFTER}
+G4_CI_PREIMAGES = {
+    G4_AUDIT_CODE: "37f8311ac1cdf6ce25243c0271c7e7438e8a0167362be9f7f6f1a4499090524b",
+    G4_STAGE1_SUCCESSOR_SCOPE: G4_CI_PREDECESSOR_SCOPE["sha256"],
+    G4_STAGE1_SUCCESSOR_TEST: "1deeba90e0088f206a6d74568b437d8df691daf9e1af3b5c617ce19ee35b8881",
+    G4_CI_WORKFLOW: G4_CI_WORKFLOW_BEFORE}
+G4_CI_LIMITS = ("one exact current G4 bounded workflow maintenance source only",
+                "admission does not grant automatic hosted workflow execution",
+                "G2 remains accepted closed; no whole-suite or G4 completion claim",
+                "no application, database, browser, audio, provider or protected runtime")
+G4_CI_BINDING_KEYS = {
+    "schema_version", "operation_id", "operation_kind", "stage", "phase",
+    "base_commit", "base_tree", "expected_head", "expected_index_tree",
+    "candidate_tree", "source_sha256", "payload_sha256", "repair_sha256",
+    "source_review", "predecessor_scope", "predecessor_publication",
+    "route_opinion", "activation_acceptance"}
+G4_CI_SCOPE_KEYS = G4_AUDIT_SCOPE_KEYS | {"ci_maintenance"}
+G4_CI_DETAILS_KEYS = {
+    "workflow_path", "workflow_before_sha256", "workflow_after_sha256",
+    "source_subject_commit", "selection_sha256", "route_opinion",
+    "workflow_candidate"}
+OPERATION_PATHS[G4_CI_KIND] = G4_CI_CONTROL | {G4_CI_WORKFLOW}
+
+
+def _g4_ci_paths(binding):
+    _need(type(binding) is dict
+          and binding.get("schema_version") == G4_CI_BINDING_SCHEMA
+          and binding.get("operation_kind") == G4_CI_KIND
+          and binding.get("stage") in {"enable", "apply"}
+          and type(binding.get("repair_sha256")) is dict,
+          "bounded_g4_ci_binding_kind")
+    paths = G4_CI_CONTROL if binding["stage"] == "enable" else frozenset({G4_CI_WORKFLOW})
+    _need(set(binding["repair_sha256"]) == paths, "bounded_g4_ci_changed_paths")
+    return paths
+
+
+def validate_g4_ci_maintenance_scope(scope):
+    _keys(scope, G4_CI_SCOPE_KEYS, "bounded_g4_ci_scope_schema")
+    _need(scope["schema_version"] == G4_CI_SCOPE_SCHEMA
+          and scope["selected_base"] == G4_CI_BASE
+          and _g4_audit_timestamp(scope["recorded_at"])
+          and scope["active_profile"] == raisa_policy.G4_STAGE1_SUCCESSOR_PROFILE
+          and scope["allowed_task_kind"] == "g4_stage1_local_successor"
+          and scope["allowed_paths"] == [G4_CI_WORKFLOW]
+          and scope["allowed_effects"] == sorted(EFFECTS)
+          and scope["runtime_binding_required"] is True
+          and scope["admission_grants_runtime_authority"] is False
+          and scope["voice_activation"] is False
+          and scope["native08_dependency_only"] is True
+          and scope["excluded_effects"] == [
+              "unreviewed_application_or_database_runtime",
+              "unreviewed_browser_or_microphone_runtime",
+              "unreviewed_voice_child_or_network_egress", "provider_invocation",
+              "real_data_access", "protected_ref_movement", "deployment",
+              "public_listener"]
+          and scope["product_sha256"] == G4_AUDIT_AFTER,
+          "bounded_g4_ci_scope_boundary")
+    _g4_audit_row(scope["entry_route_opinion"], G4_AUDIT_ROUTE_REVIEW,
+                  "bounded_g4_ci_historical_route")
+    _g4_audit_source_review_row(scope["correction_source_review"])
+    for key, path, sha in (
+        ("ui12_publication_review", G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT /
+         "stage1-interactive-product-publication-source-v2/independent-stage1-interactive-product-push-effect-review-v2.json",
+         G4_STAGE1_SUCCESSOR_UI12_EFFECT_SHA256),
+        ("lab_source_review", G4_STAGE1_SUCCESSOR_LAB_REVIEW_PATH,
+         G4_STAGE1_SUCCESSOR_LAB_REVIEW_SHA256),
+        ("voice_source_review", G4_STAGE1_SUCCESSOR_VOICE_REVIEW_PATH,
+         G4_STAGE1_SUCCESSOR_VOICE_REVIEW_SHA256),
+        ("combined_product_source_binding", G4_STAGE1_SUCCESSOR_COMBINED_SOURCE_PATH,
+         G4_STAGE1_SUCCESSOR_COMBINED_SOURCE_SHA256)):
+        _keys(scope[key], {"path", "sha256"}, "bounded_g4_ci_historical_row")
+        _need(Path(scope[key]["path"]) == path and scope[key]["sha256"] == sha,
+              "bounded_g4_ci_historical_row")
+    _g4_audit_row(scope["predecessor_scope"], G4_CI_PREDECESSOR_SCOPE,
+                  "bounded_g4_ci_predecessor_scope")
+    _g4_audit_row(scope["predecessor_publication"], G4_CI_PRODUCT_PUBLICATION,
+                  "bounded_g4_ci_product_publication_pin")
+    details = scope["ci_maintenance"]
+    _keys(details, G4_CI_DETAILS_KEYS, "bounded_g4_ci_details_schema")
+    _need(details["workflow_path"] == G4_CI_WORKFLOW
+          and details["workflow_before_sha256"] == G4_CI_WORKFLOW_BEFORE
+          and details["workflow_after_sha256"] == G4_CI_WORKFLOW_AFTER
+          and details["source_subject_commit"] == G4_CI_SOURCE_SUBJECT
+          and details["selection_sha256"] == G4_CI_SELECTION,
+          "bounded_g4_ci_workflow_identity")
+    _g4_audit_row(details["route_opinion"], G4_CI_ROUTE_OPINION,
+                  "bounded_g4_ci_route_pin")
+    _g4_audit_row(details["workflow_candidate"], G4_CI_WORKFLOW_CANDIDATE,
+                  "bounded_g4_ci_workflow_candidate_pin")
+    sources = _digest_map(scope["source_sha256"], SOURCE_PATHS | CONTROLLER_PATHS,
+                          "bounded_g4_ci_sources")
+    control = _digest_map(scope["control_sha256"],
+                          {G4_AUDIT_CODE, G4_STAGE1_SUCCESSOR_TEST},
+                          "bounded_g4_ci_control_sources")
+    _need(sources[G4_AUDIT_CODE] == control[G4_AUDIT_CODE]
+          and all(sources[path] == digest
+                  for path, digest in G4_AUDIT_ORIGINAL_SOURCES.items()
+                  if path != G4_AUDIT_CODE),
+          "bounded_g4_ci_source_vector")
+    return sources
+
+
+def g4_ci_review_subject(q):
+    return _sha(_canonical({key: q[key] for key in (
+        "schema_version", "operation_id", "operation_kind", "stage", "phase",
+        "base_commit", "base_tree", "expected_head", "expected_index_tree",
+        "candidate_tree", "source_sha256", "payload_sha256", "repair_sha256",
+        "predecessor_scope", "predecessor_publication", "route_opinion",
+        "activation_acceptance")}))
+
+
+def _g4_ci_pair(path, pair, expected_after):
+    _keys(pair, {"before_sha256", "after_sha256"}, "bounded_g4_ci_change_pair")
+    _closeout_digest(pair["before_sha256"])
+    _closeout_digest(pair["after_sha256"])
+    _need(pair["before_sha256"] == G4_CI_PREIMAGES[path]
+          and pair["after_sha256"] == expected_after
+          and pair["before_sha256"] != pair["after_sha256"],
+          "bounded_g4_ci_change_preimage")
+
+
+def _g4_ci_review(read, row, evidence_root, subject, stage, phase):
+    _keys(row, {"path", "sha256"}, "bounded_g4_ci_review_row")
+    _closeout_digest(row["sha256"])
+    suffix = "" if phase == "development" else "-" + phase
+    path = G4_CI_EVIDENCE / "ci-maintenance-control-source-v1" / (
+        "independent-" + stage + suffix + "-exact-subject-review-v1.json")
+    selected = Path(row["path"])
+    _need(selected == path and selected.is_absolute()
+          and selected.is_relative_to(evidence_root) and ".." not in selected.parts,
+          "bounded_g4_ci_review_path")
+    review = _json(read(selected, row["sha256"]))
+    _need(review.get("schema") == "emr4.g4_operation_review.v1"
+          and review.get("status") == "PASS"
+          and review.get("verdict") == "PASS_G4_STAGE1_CI_MAINTENANCE_EXACT_ADMISSION_SUBJECT"
+          and review.get("independent") is True
+          and review.get("implementation_authorship") is False
+          and review.get("blocking_findings") == []
+          and review.get("reviewer_agent") == "/root/audit_admission_route_review"
+          and review.get("subject_sha256") == subject,
+          "bounded_g4_ci_independent_subject")
+    return review
+
+
+def _g4_ci_product_publication(review):
+    _need(review.get("schema") == "emr4.g4_operation_review.v1"
+          and review.get("status") == "PASS"
+          and review.get("verdict") == "PASS_G4_STAGE1_AUDIT_PRODUCT_PUBLICATION_EFFECT"
+          and review.get("reviewer_agent") == "/root/audit_admission_route_review"
+          and review.get("independent") is True
+          and review.get("implementation_authorship") is False
+          and review.get("blocking_findings") == []
+          and review.get("candidate") == "product"
+          and review.get("phase") == "push"
+          and review.get("commit") == G4_CI_BASE["commit"]
+          and review.get("base") == "2d143990e2ad0999296b8b4e8f9e857a636d7ec9"
+          and review.get("base_tree") == "89a5d5b33f63a46f9d805c829411eec7f7849cb6"
+          and review.get("candidate_tree") == G4_CI_BASE["tree"]
+          and review.get("result_sha256") == "27fbd1f7c23e184a9ac1a54ec8729efb2a3218734406e10a41be1e703aec2c7b"
+          and review.get("published_ref") == G4_STAGE1_INTERACTIVE_BACKEND_REF
+          and all(review.get(key) is True for key in (
+              "source_publication_accepted", "repair_subject_publication_accepted",
+              "focused_verification_evidence_accepted",
+              "same_attempt_remote_readback_verified", "protected_refs_unchanged",
+              "whole_inverse_verified_same_attempt"))
+          and all(review.get(key) is False for key in (
+              "m1_accepted", "runtime_accepted", "browser_accepted",
+              "audio_recording_accepted", "rendered_accessibility_accepted",
+              "g4_completion_accepted")),
+          "bounded_g4_ci_product_publication")
+    return review
+
+
+def _g4_ci_activation_acceptance(activation, q):
+    _need(activation.get("schema") == "emr4.g4_operation_review.v1"
+          and activation.get("status") == "PASS"
+          and activation.get("verdict") ==
+              "PASS_G4_STAGE1_CI_MAINTENANCE_CONTROL_PUBLICATION_EFFECT"
+          and activation.get("reviewer_agent") == "/root/audit_admission_route_review"
+          and activation.get("independent") is True
+          and activation.get("implementation_authorship") is False
+          and activation.get("blocking_findings") == []
+          and activation.get("operation_kind") == G4_CI_KIND
+          and activation.get("candidate") == "control"
+          and activation.get("stage") == "enable"
+          and activation.get("phase") == "push"
+          and activation.get("base") == G4_CI_BASE["commit"]
+          and activation.get("commit") == q["base_commit"]
+          and activation.get("candidate_tree") == q["base_tree"]
+          and activation.get("published_ref") == G4_STAGE1_INTERACTIVE_BACKEND_REF
+          and activation.get("control_sha256") ==
+              {path: q["payload_sha256"][path] for path in G4_CI_CONTROL}
+          and activation.get("source_publication_accepted") is True
+          and activation.get("control_activation_accepted") is True
+          and activation.get("same_attempt_remote_readback_verified") is True
+          and activation.get("protected_refs_unchanged") is True
+          and activation.get("whole_inverse_verified_same_attempt") is True,
+          "bounded_g4_ci_activation_acceptance")
+    return activation
+
+
+def _load_g4_ci_inputs(context, target, source, evidence_root, scratch,
+                       q, read, snapshots):
+    _keys(q, G4_CI_BINDING_KEYS, "bounded_g4_ci_binding_schema")
+    _need(q["schema_version"] == G4_CI_BINDING_SCHEMA
+          and q["operation_kind"] == G4_CI_KIND
+          and type(q["operation_id"]) is str
+          and re.fullmatch(r"[a-z0-9][a-z0-9-]{1,79}", q["operation_id"])
+          and q["phase"] in {"development", "pre-push", "post-push"},
+          "bounded_g4_ci_binding_version")
+    for key in ("base_commit", "base_tree", "expected_head",
+                "expected_index_tree", "candidate_tree"):
+        _need(type(q[key]) is str and re.fullmatch(r"[0-9a-f]{40}", q[key]),
+              "bounded_g4_ci_git_identity")
+    paths = _g4_ci_paths(q)
+    _g4_audit_row(q["predecessor_scope"], G4_CI_PREDECESSOR_SCOPE,
+                  "bounded_g4_ci_predecessor_scope")
+    _g4_audit_row(q["predecessor_publication"], G4_CI_PRODUCT_PUBLICATION,
+                  "bounded_g4_ci_product_publication_pin")
+    _g4_audit_row(q["route_opinion"], G4_CI_ROUTE_OPINION,
+                  "bounded_g4_ci_route_pin")
+    publication = _g4_ci_product_publication(_json(read(
+        Path(G4_CI_PRODUCT_PUBLICATION["path"]), G4_CI_PRODUCT_PUBLICATION["sha256"])))
+    route = _json(read(Path(G4_CI_ROUTE_OPINION["path"]),
+                       G4_CI_ROUTE_OPINION["sha256"]))
+    _need(route.get("schema") == "emr4.stage1_ci_maintenance_route_opinion.v1"
+          and route.get("status") == "SOURCE_MAINTENANCE_ROUTE_OPINION_ONLY"
+          and route.get("implementation_authorship") is False
+          and route.get("authorizes_commit_push_or_hosted_execution") is False,
+          "bounded_g4_ci_route_opinion")
+    _need(_sha(trusted_git.run_git_bytes(target, "cat-file", "blob",
+          G4_CI_BASE["commit"] + ":" + G4_STAGE1_SUCCESSOR_SCOPE))
+          == G4_CI_PREDECESSOR_SCOPE["sha256"],
+          "bounded_g4_ci_predecessor_scope_bytes")
+    _need(trusted_git.run_git(target, "rev-parse",
+          G4_CI_BASE["commit"] + "^{tree}") == G4_CI_BASE["tree"],
+          "bounded_g4_ci_product_base_tree")
+    if q["stage"] == "enable":
+        _need(q["base_commit"] == G4_CI_BASE["commit"]
+              and q["base_tree"] == G4_CI_BASE["tree"]
+              and q["activation_acceptance"] is None,
+              "bounded_g4_ci_enable_base")
+    else:
+        row = q["activation_acceptance"]
+        _keys(row, {"path", "sha256"}, "bounded_g4_ci_activation_row")
+        path = G4_CI_EVIDENCE / "ci-maintenance-control-source-v1" / (
+            "independent-ci-maintenance-control-push-effect-review-v1.json")
+        _need(Path(row["path"]) == path and path.is_relative_to(evidence_root),
+              "bounded_g4_ci_activation_path")
+        activation = _json(read(path, row["sha256"]))
+        _g4_ci_activation_acceptance(activation, q)
+        headers = trusted_git.run_git(target, "cat-file", "commit",
+                                      q["base_commit"]).split("\n\n", 1)[0].splitlines()
+        _need([h for h in headers if h.startswith("parent ")]
+              == ["parent " + G4_CI_BASE["commit"]]
+              and [h for h in headers if h.startswith("tree ")]
+              == ["tree " + q["base_tree"]],
+              "bounded_g4_ci_activation_parent")
+    sources = _digest_map(q["source_sha256"], SOURCE_PATHS | CONTROLLER_PATHS,
+                           "bounded_g4_ci_sources")
+    inputs = (CONFIGURATION_PATHS | {STATE, GATES, OVERLAY, AGENTS,
+              G4_STAGE1_INTERACTIVE_SCOPE, G4_STAGE1_SUCCESSOR_SCOPE,
+              G4_STAGE1_SUCCESSOR_TEST, G4_CI_WORKFLOW}
+              | SOURCE_PATHS | CONTROLLER_PATHS)
+    pins = _digest_map(q["payload_sha256"], inputs, "bounded_g4_ci_payload_paths")
+    payloads = {path: read(target / path, digest) for path, digest in sorted(pins.items())}
+    scope = _json(payloads[G4_STAGE1_SUCCESSOR_SCOPE])
+    validate_g4_ci_maintenance_scope(scope)
+    _need(scope["source_sha256"] == sources
+          and scope["predecessor_scope"] == q["predecessor_scope"]
+          and scope["predecessor_publication"] == q["predecessor_publication"]
+          and scope["ci_maintenance"]["route_opinion"] == q["route_opinion"]
+          and payloads[G4_STAGE1_SUCCESSOR_SCOPE] == _canonical(scope) + b"\n",
+          "bounded_g4_ci_scope_sources")
+    _need(all(_sha(payloads[p]) == d for p, d in scope["control_sha256"].items()),
+          "bounded_g4_ci_control_afterimages")
+    for path, digest in sources.items():
+        source_body = read(source / path, digest)
+        committed = trusted_git.run_git_bytes(target, "cat-file", "blob",
+                                                q["base_commit"] + ":" + path)
+        if q["stage"] == "enable" and path == G4_AUDIT_CODE:
+            _need(_sha(committed) == G4_CI_PREIMAGES[path]
+                  and digest == q["repair_sha256"][path]["after_sha256"],
+                  "bounded_g4_ci_prospective_source")
+        else:
+            _need(source_body == committed, "bounded_g4_ci_installed_source")
+    for path, pair in q["repair_sha256"].items():
+        expected_after = (pins[path] if q["stage"] == "enable" else G4_CI_WORKFLOW_AFTER)
+        _g4_ci_pair(path, pair, expected_after)
+        _need(_sha(trusted_git.run_git_bytes(target, "cat-file", "blob",
+              q["base_commit"] + ":" + path)) == G4_CI_PREIMAGES[path],
+              "bounded_g4_ci_committed_preimage")
+        _need(_sha(payloads[path]) == expected_after,
+              "bounded_g4_ci_committed_afterimage")
+    if q["stage"] == "apply":
+        _need(_sha(read(Path(G4_CI_WORKFLOW_CANDIDATE["path"]),
+                        G4_CI_WORKFLOW_AFTER)) == G4_CI_WORKFLOW_AFTER
+              and payloads[G4_CI_WORKFLOW] == read(source / G4_CI_WORKFLOW,
+                                                     G4_CI_WORKFLOW_AFTER),
+              "bounded_g4_ci_workflow_source")
+    before = {path: trusted_git.run_git_bytes(target, "cat-file", "blob",
+              G4_CI_BASE["commit"] + ":" + path)
+              for path in (STATE, GATES, OVERLAY, AGENTS)}
+    _need(all(_sha(before[p]) == digest and payloads[p] == before[p]
+              for p, digest in G4_AUDIT_BASE_CONFIG.items()),
+          "bounded_g4_ci_configuration_unchanged")
+    for path in inputs - paths:
+        _need(trusted_git.run_git_bytes(target, "cat-file", "blob",
+              q["base_commit"] + ":" + path) == payloads[path],
+              "bounded_g4_ci_unowned_changed")
+    review = _g4_ci_review(read, q["source_review"], evidence_root,
+                           g4_ci_review_subject(q), q["stage"], q["phase"])
+    attested = inputs - paths if q["phase"] == "development" else inputs
+    observation = trusted_git.attest_target_index(
+        target, attested_paths=tuple(sorted(attested)),
+        expected_head=q["expected_head"], expected_index_tree=q["expected_index_tree"],
+        scratch_parent=scratch)
+    if q["phase"] == "development":
+        _need(q["expected_head"] == q["base_commit"]
+              and q["expected_index_tree"] in {q["base_tree"], q["candidate_tree"]},
+              "bounded_g4_ci_development_binding")
+    else:
+        headers = trusted_git.run_git(target, "cat-file", "commit",
+                                      q["expected_head"]).split("\n\n", 1)[0].splitlines()
+        _need([h for h in headers if h.startswith("parent ")]
+              == ["parent " + q["base_commit"]]
+              and [h for h in headers if h.startswith("tree ")]
+              == ["tree " + q["candidate_tree"]]
+              and q["expected_index_tree"] == q["candidate_tree"],
+              "bounded_g4_ci_committed_binding")
+    for path, snapshot in snapshots.items():
+        _need(trusted_git._read_regular_snapshot(path, maximum_bytes=2 * 1024 * 1024)
+              == snapshot, "bounded_g4_ci_snapshot_drift")
+    return BoundedG1BInputs(q, before, payloads,
+        {"scope": scope, "publication": publication, "route": route,
+         "source_review": review}, observation)
+
+
+def _validate_g4_ci_loaded_policy(inputs):
+    scope = inputs.evidence["scope"]
+    validate_g4_ci_maintenance_scope(scope)
+    _need(inputs.payloads[G4_STAGE1_SUCCESSOR_SCOPE] == _canonical(scope) + b"\n",
+          "bounded_g4_ci_scope_bytes")
+    try:
+        configuration = raisa_policy.validate_recovery_configuration(
+            documents={Path(path).name: inputs.payloads[path] for path in CONFIGURATION_PATHS},
+            expected_sha256={Path(path).name: inputs.binding["payload_sha256"][path]
+                             for path in CONFIGURATION_PATHS},
+            agents_text=inputs.payloads[AGENTS].decode("utf-8"),
+            state=_json(inputs.payloads[STATE]))
+    except (raisa_policy.RaisaPolicyError, configuration_core.ConfigurationError) as error:
+        raise BoundedG1BError(error.reason_code) from error
+    path = G4_STAGE1_SUCCESSOR_SCOPE if inputs.binding["stage"] == "enable" else G4_CI_WORKFLOW
+    return {path: inputs.payloads[path]}, configuration
