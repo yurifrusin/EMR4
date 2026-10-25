@@ -6,6 +6,7 @@ import copy
 import json
 import os
 import re
+import subprocess
 from datetime import date, datetime, timedelta
 from pathlib import Path
 from typing import Any, NoReturn
@@ -18,12 +19,16 @@ from orchestration_harness.governance_live_adoption import (
     AdoptionRejection,
     CANONICAL_KEYS,
     COMMAND_VERSION,
+    GENERATION_VERSION,
     METADATA_NAMES,
+    OWNERSHIP_VERSION,
+    POINTER_VERSION,
     WRITER,
     _all_keys,
     _assert_git_state,
     _canonical_paths_match_source,
     _exact,
+    _git,
     _git_bytes,
     _hash_bytes,
     _hash_json,
@@ -76,11 +81,50 @@ PAUSE_TERMINAL_REASON = "explicit_user_pause"
 PREPARED_VERSION = "ariadne.governance_live_tick_prepared_generation.v1"
 GENERATION_VERSION = "ariadne.governance_live_tick_generation.v1"
 TRANSACTION_VERSION = "ariadne.governance_live_tick_transaction.v1"
+G4_ORIENTATION_INTENT_VERSION = "ariadne.g4_emr4_compass_orientation_intent.v1"
+G4_ORIENTATION_EVENT = "g4_reorientation"
+G4_ORIENTATION_OPERATION = "g4-emr4-compass-reconnection"
+G4_ORIENTATION_NODE = "g4-emr4-recovery-orientation"
+G4_ORIENTATION_HEAD = "6bdf6a2fcd69dc937f1844c59a4296d0c1b8bde9"
+G4_ORIENTATION_TREE = "68a0bb411e430ed0571b6f39b00d99b7010823d7"
+G4_STATE_SHA256 = "f32ea528d9efab7e45df9d4ce4770dc9094483641d332ebee052ec436634388b"
+G4_GATES_SHA256 = "16206eaa4ee6af4785d9c2bff9e68c9e277da88eda714fc85b5227394d03228d"
+G4_ORIENTATION_ACCEPTANCE = (
+    "orchestration/agent_inbox/codex/g4-emr4-compass-reconnection-acceptance.md"
+)
+G4_OLD_CANONICAL_SHA256S = {
+    "continuity": "3afcbe15dcdc92d47f6ecf20e2dbe941e74fe57938c73be6bf52c13239889275",
+    "compass": "a524fee81c1d7f2aed2a1d81fbb857e6396b4a3c93a02f6091a54e023f9f8584",
+    "compass_markdown": "d1d1c2318be7eb3adc58277a700955b231727fed6b3bf3013b4b50ed1b2b8671",
+    "active_latch": "69ab7808aac16ba84b6c385b3378483e17fb7b665f84a3d60d1e3054bdba0366",
+    "error_register": "be85e1a14b5c1947dd548320edc7923462c0791ba96c9c54e6cb79ba4aca6165",
+    "pattern_report": "6fcd53a0a99a03222c7cdeeff607355b6f0cf382b0b47d306f56b14cd14fb7fc",
+    "current_baton": "9426913facc3809dee4230820695c3ab067e1adafa3931ca09fb27e890e047ba",
+}
+G4_ACTUAL_CANONICAL_SHA256S = {
+    **G4_OLD_CANONICAL_SHA256S,
+    "active_latch": "f1bc5b3545293834365b7992882ebc09e6c83ccd63687c28fd443ac049e2e437",
+    "current_baton": "f2c078d3877ac8a7659a614a049021df6d211d7a61934be927268f56b4b36a62",
+}
+G4_OLD_METADATA_SHA256S = {
+    "command-manifest.json": "305d31d03e34deee606abee94a436ffd30ca2b4d8a7817ec71b61908ec29c1ec",
+    "transaction.json": "28023f3c35a2e3a141adc7a8fd74dd3221a7a1d3126010ca81cec771b7ef1df6",
+    "ownership.json": "e78320a1b0d2f61041cd9d8cac1ed4f98d2bbdf7c3b94891a48d123589d8dee9",
+}
+G4_OLD_GENERATION_SHA256 = "57d4208fdcc92c28f3abf15610af76daf0aae71f5e95b8a96f7f420c6cdb261b"
+G4_OLD_POINTER_SHA256 = "30bbd710351c5e72391f339e83e4bff95c6000ae231ecd8ebd4032d080a30ab5"
+G4_OLD_GENERATION_ID = "gen-1f0a9311721de5c258d2cefc8c1f73ab753c94eacd06513aa87bc50f043c1206"
 POINTER_NAME = "current.json"
 GENERATION_NAME = "generation-manifest.json"
 PREDECESSOR_METADATA_NAMES = (*METADATA_NAMES, GENERATION_NAME)
 HEX40 = re.compile(r"^[0-9a-f]{40}$")
 HEX64 = re.compile(r"^[0-9a-f]{64}$")
+G4_ABSENT_LOCAL_REFS = (
+    "refs/heads/master",
+    "refs/heads/handoff/current",
+    "refs/remotes/origin/master",
+    "refs/remotes/origin/handoff/current",
+)
 IDENTIFIER = re.compile(r"^[a-z][a-z0-9._-]{0,127}$")
 INCIDENT_TRANCHE = re.compile(r"^[a-z0-9][a-z0-9-]*$")
 INCIDENT_RESOURCE = re.compile(r"^[a-z0-9][a-z0-9-]*$")
@@ -3156,6 +3200,8 @@ def validate_prepared_tick(
         },
         "tick_prepared_keys",
     )
+    if isinstance(row.get("intent"), dict) and row["intent"].get("schema_version") == G4_ORIENTATION_INTENT_VERSION:
+        return _validate_g4_orientation_prepared(repo_root, row)
     if row["schema_version"] != PREPARED_VERSION:
         _reject("tick_prepared_version")
     contract = validate_contract(row["contract"])
@@ -3397,13 +3443,102 @@ def validate_prepared_tick(
     return row
 
 
+def _validate_g4_selected_live_state(
+    repo_root: Path, contract: dict[str, Any], generation: dict[str, Any]
+) -> dict[str, Any]:
+    """Read the G4-selected surfaces without the legacy updater inventory."""
+
+    head = _assert_g4_git_state(repo_root, contract)
+    root = _clockwork_root(repo_root, contract)
+    pointer = _exact(_load(root / POINTER_NAME), {
+        "schema_version", "phase", "selected_generation_id", "selected_bundle_sha256",
+        "previous_generation_id", "previous_source_commit", "lease_sequence", "writer",
+    }, "g4_orientation_live_pointer_keys")
+    if (
+        pointer["schema_version"] != POINTER_VERSION
+        or pointer["phase"] != "clockwork_active"
+        or pointer["writer"] != WRITER
+        or pointer["selected_generation_id"] != generation.get("generation_id")
+        or pointer["selected_bundle_sha256"] != generation.get("bundle_sha256")
+        or pointer["previous_generation_id"] != G4_OLD_GENERATION_ID
+        or pointer["previous_source_commit"] != G4_ORIENTATION_HEAD
+        or pointer["lease_sequence"] != 248
+        or generation.get("schema_version") != GENERATION_VERSION
+        or set(generation) != {
+            "schema_version", "generation_id", "bundle_sha256", "source_commit",
+            "previous_generation", "canonical_sha256s", "metadata_sha256s",
+            "g4_orientation",
+        }
+        or not isinstance(generation.get("source_commit"), str)
+        or HEX40.fullmatch(generation["source_commit"]) is None
+        or not isinstance(generation.get("bundle_sha256"), str)
+        or HEX64.fullmatch(generation["bundle_sha256"]) is None
+        or generation.get("generation_id") != "gen-" + generation["bundle_sha256"]
+    ):
+        _reject("g4_orientation_live_pointer")
+    try:
+        _git(repo_root, "merge-base", "--is-ancestor", generation["source_commit"], head)
+    except AdoptionRejection:
+        _reject("g4_orientation_live_source_not_ancestor")
+    canonical = {
+        key: (repo_root / relative).read_bytes()
+        for key, relative in contract["canonical_paths"].items()
+    }
+    metadata = {name: (root / name).read_bytes() for name in METADATA_NAMES}
+    canonical_sha256s = {key: _hash_bytes(raw) for key, raw in canonical.items()}
+    metadata_sha256s = {name: _hash_bytes(raw) for name, raw in metadata.items()}
+    if (
+        canonical_sha256s != generation.get("canonical_sha256s")
+        or metadata_sha256s != generation.get("metadata_sha256s")
+        or metadata_sha256s.get("ownership.json")
+        != G4_OLD_METADATA_SHA256S["ownership.json"]
+        or generation.get("bundle_sha256") != _hash_json({
+            "canonical": canonical_sha256s, "metadata": metadata_sha256s,
+        })
+    ):
+        _reject("g4_orientation_live_physical_images")
+    ownership = json.loads(metadata["ownership.json"].decode("utf-8"))
+    if (
+        ownership.get("schema_version") != OWNERSHIP_VERSION
+        or ownership.get("phase") != "clockwork_active"
+        or not isinstance(ownership.get("surface_owners"), dict)
+        or set(ownership["surface_owners"]) != set(CANONICAL_KEYS) | {
+            "command_manifest", "transaction", "ownership",
+        }
+        or set(ownership["surface_owners"].values()) != {WRITER}
+        or not isinstance(ownership.get("legacy_writers"), dict)
+        or set(ownership["legacy_writers"]) != {
+            "bespoke_continuity_updater", "manual_baton_editor",
+            "manual_latch_editor", "manual_register_fixture_editor",
+        }
+        or set(ownership["legacy_writers"].values()) != {"retired"}
+    ):
+        _reject("g4_orientation_live_ownership")
+    return {
+        "schema_version": "ariadne.governance_live_state.v1",
+        "status": "passed", "head": head,
+        "source_commit": generation["source_commit"],
+        "generation_id": generation["generation_id"],
+        "bundle_sha256": generation["bundle_sha256"],
+        "previous_generation_id": pointer["previous_generation_id"],
+        "previous_source_commit": pointer["previous_source_commit"],
+        "clockwork_owned_surfaces": len(ownership["surface_owners"]),
+        "dual_owned_surfaces": 0,
+        "retired_legacy_writer_classes": len(ownership["legacy_writers"]),
+        "canonical_drift": 0, "lease_sequence": pointer["lease_sequence"],
+    }
+
+
 def validate_tick_live_state(
     repo_root: Path, contract_value: object
 ) -> dict[str, Any]:
     contract = validate_contract(contract_value)
-    base = validate_live_state(repo_root, contract)
     root = _clockwork_root(repo_root, contract)
     generation = _load(root / GENERATION_NAME)
+    if generation.get("g4_orientation") is not None:
+        base = _validate_g4_selected_live_state(repo_root, contract, generation)
+        return _validate_g4_orientation_live(repo_root, contract, base, generation)
+    base = validate_live_state(repo_root, contract)
     pointer = _load(root / POINTER_NAME)
     transaction = _exact(
         _load(root / "transaction.json"),
@@ -3630,12 +3765,108 @@ def _write_lease(path: Path, *, operation_id: str, source: str, pointer: dict[st
         )
 
 
+def _g4_effect_images(
+    repo_root: Path, contract: dict[str, Any], canonical: dict[str, bytes],
+    metadata: dict[str, bytes], pointer: dict[str, Any],
+) -> tuple[dict[str, str], dict[str, str]]:
+    root = _clockwork_root(repo_root, contract)
+    after_bytes = {
+        **{relative: canonical[key] for key, relative in contract["canonical_paths"].items()},
+        **{f"{contract['clockwork_root']}/{name}": raw
+           for name, raw in metadata.items()},
+        f"{contract['clockwork_root']}/{POINTER_NAME}":
+            _json_text(pointer).encode("utf-8"),
+    }
+    if len(after_bytes) != 12:
+        _reject("g4_orientation_effect_surface_set")
+    before = {relative: _hash_bytes((repo_root / relative).read_bytes())
+              for relative in after_bytes}
+    after = {relative: _hash_bytes(raw) for relative, raw in after_bytes.items()}
+    return before, after
+
+
+def _verify_g4_effect_manifest_images(
+    repo_root: Path, prepared: dict[str, Any], manifest: dict[str, Any]
+) -> None:
+    contract = prepared["contract"]
+    metadata = {
+        **prepared["metadata"],
+        GENERATION_NAME: _json_text(prepared["generation_manifest"]).encode("utf-8"),
+    }
+    before, after = _g4_effect_images(repo_root, contract, prepared["canonical"],
+        metadata, prepared["pointer"])
+    intent_path = repo_root / (
+        "orchestration/continuity/g4-emr4-compass-reconnection/orientation-intent.json"
+    )
+    if (
+        manifest.get("before_sha256") != before
+        or manifest.get("after_sha256") != after
+        or manifest.get("lease_before") != 247
+        or manifest.get("lease_after") != 248
+        or manifest.get("mode") != "reorient"
+        or manifest.get("stage") != "reconcile"
+        or manifest.get("operation_id") != G4_ORIENTATION_OPERATION
+        or manifest.get("source_commit") != prepared["source_commit"]
+        or manifest.get("source_tree") != _git(repo_root, "rev-parse", "HEAD^{tree}")
+        or manifest.get("intent_sha256") != _hash_bytes(intent_path.read_bytes())
+    ):
+        _reject("g4_orientation_effect_manifest_images")
+
+
+def _verify_g4_rollback_manifest_images(
+    repo_root: Path, recovery_prepared: dict[str, Any], manifest: dict[str, Any]
+) -> None:
+    before, after = _g4_effect_images(
+        repo_root, recovery_prepared["contract"], recovery_prepared["canonical"],
+        recovery_prepared["metadata"], recovery_prepared["pointer"],
+    )
+    intent_path = repo_root / (
+        "orchestration/continuity/g4-emr4-compass-reconnection/orientation-intent.json"
+    )
+    if (
+        manifest.get("before_sha256") != before
+        or manifest.get("after_sha256") != after
+        or manifest.get("lease_before") != 248
+        or manifest.get("lease_after") != 249
+        or manifest.get("mode") != "rollback"
+        or manifest.get("stage") != "reconcile"
+        or manifest.get("operation_id") != G4_ORIENTATION_OPERATION
+        or manifest.get("source_commit") != _git(repo_root, "rev-parse", "HEAD")
+        or manifest.get("source_tree") != _git(repo_root, "rev-parse", "HEAD^{tree}")
+        or manifest.get("intent_sha256") != _hash_bytes(intent_path.read_bytes())
+    ):
+        _reject("g4_orientation_rollback_manifest_images")
+
+
+def _verify_g4_committed_images(
+    repo_root: Path, contract: dict[str, Any], manifest: dict[str, Any]
+) -> None:
+    expected_paths = {
+        *contract["canonical_paths"].values(),
+        *(f"{contract['clockwork_root']}/{name}"
+          for name in PREDECESSOR_METADATA_NAMES),
+        f"{contract['clockwork_root']}/{POINTER_NAME}",
+    }
+    expected = manifest.get("after_sha256")
+    if (
+        not isinstance(expected, dict)
+        or set(expected) != expected_paths
+        or len(expected_paths) != 12
+        or {relative: _hash_bytes((repo_root / relative).read_bytes())
+            for relative in expected_paths} != expected
+    ):
+        _reject("g4_orientation_committed_image_readback")
+
+
 def publish_tick_generation(
     repo_root: Path,
     prepared_value: object,
     *,
     writer_id: str,
     fail_at: str | None = None,
+    g4_effect_checker: Any = None,
+    g4_effect_context: Any = None,
+    g4_effect_manifest: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Publish one prepared tick, committing only when the pointer is replaced."""
 
@@ -3643,7 +3874,11 @@ def publish_tick_generation(
     contract = prepared["contract"]
     if writer_id != WRITER:
         _reject("tick_writer_not_clockwork")
-    _assert_git_state(repo_root, contract, prepared["source_commit"])
+    is_g4 = prepared["intent"]["schema_version"] == G4_ORIENTATION_INTENT_VERSION
+    if is_g4:
+        _assert_g4_git_state(repo_root, contract, prepared["source_commit"])
+    else:
+        _assert_git_state(repo_root, contract, prepared["source_commit"])
     root = _clockwork_root(repo_root, contract)
     pointer_path = root / POINTER_NAME
     current_pointer = _load(pointer_path)
@@ -3653,14 +3888,21 @@ def publish_tick_generation(
         return validate_tick_live_state(repo_root, contract)
     if current_pointer != prepared["base_pointer"]:
         _reject("tick_stale_predecessor")
-    _assert_clean_predecessor(repo_root, contract, prepared["source_commit"])
+    if is_g4:
+        if not callable(g4_effect_checker) or g4_effect_context is None or g4_effect_manifest is None:
+            _reject("g4_orientation_effect_admission_required")
+        _verify_g4_effect_manifest_images(repo_root, prepared, g4_effect_manifest)
+        decision = g4_effect_checker(
+            context=g4_effect_context, manifest=g4_effect_manifest,
+            prepared=prepared, phase="effect"
+        )
+        if not getattr(decision, "execution_authorized", False):
+            _reject("g4_orientation_effect_not_authorized")
+    if prepared["intent"]["schema_version"] == G4_ORIENTATION_INTENT_VERSION:
+        _g4_orientation_baseline(repo_root, contract, prepared["intent"])
+    else:
+        _assert_clean_predecessor(repo_root, contract, prepared["source_commit"])
     lease_path = root / "writer.lock"
-    _write_lease(
-        lease_path,
-        operation_id=_intent_operation_id(prepared["intent"]),
-        source=prepared["source_commit"],
-        pointer=prepared["pointer"],
-    )
     canonical_targets = {
         key: repo_root / relative for key, relative in contract["canonical_paths"].items()
     }
@@ -3669,12 +3911,31 @@ def publish_tick_generation(
         GENERATION_NAME: _json_text(prepared["generation_manifest"]).encode("utf-8"),
     }
     metadata_targets = {name: root / name for name in metadata_values}
-    original_canonical = {key: path.read_bytes() for key, path in canonical_targets.items()}
-    original_metadata = {name: path.read_bytes() for name, path in metadata_targets.items()}
-    original_pointer = pointer_path.read_bytes()
     staged: dict[str, Path] = {}
+    acquired = False
+    snapshots_complete = False
     committed = False
     try:
+        _write_lease(
+            lease_path,
+            operation_id=_intent_operation_id(prepared["intent"]),
+            source=prepared["source_commit"],
+            pointer=prepared["pointer"],
+        )
+        acquired = True
+        if is_g4:
+            _assert_g4_git_state(repo_root, contract, prepared["source_commit"])
+            _verify_g4_effect_manifest_images(repo_root, prepared, g4_effect_manifest)
+            decision = g4_effect_checker(
+                context=g4_effect_context, manifest=g4_effect_manifest,
+                prepared=prepared, phase="effect"
+            )
+            if not getattr(decision, "execution_authorized", False):
+                _reject("g4_orientation_effect_not_authorized")
+        original_canonical = {key: path.read_bytes() for key, path in canonical_targets.items()}
+        original_metadata = {name: path.read_bytes() for name, path in metadata_targets.items()}
+        original_pointer = pointer_path.read_bytes()
+        snapshots_complete = True
         for key, target in canonical_targets.items():
             staged[f"canonical:{key}"] = _write_temp(target, prepared["canonical"][key])
         for name, target in metadata_targets.items():
@@ -3699,11 +3960,13 @@ def publish_tick_generation(
         os.replace(staged.pop("pointer"), pointer_path)
         committed = True
         state = validate_tick_live_state(repo_root, contract)
+        if is_g4:
+            _verify_g4_committed_images(repo_root, contract, g4_effect_manifest)
         if fail_at == "after_pointer_replace":
             raise CommittedClockworkTick("injected_tick_postcommit_failure")
         return state
     except BaseException:
-        if not committed:
+        if not committed and snapshots_complete:
             for key, target in canonical_targets.items():
                 target.write_bytes(original_canonical[key])
             for name, target in metadata_targets.items():
@@ -3721,7 +3984,8 @@ def publish_tick_generation(
     finally:
         for path in staged.values():
             path.unlink(missing_ok=True)
-        lease_path.unlink(missing_ok=True)
+        if acquired:
+            lease_path.unlink(missing_ok=True)
 
 
 def rollback_tick_generation(
@@ -3734,6 +3998,8 @@ def rollback_tick_generation(
         _reject("tick_writer_not_clockwork")
     state = validate_tick_live_state(repo_root, contract)
     root = _clockwork_root(repo_root, contract)
+    if _load(root / GENERATION_NAME).get("g4_orientation") is not None:
+        _reject("g4_orientation_explicit_rollback_required")
     pointer_path = root / POINTER_NAME
     pointer = _load(pointer_path)
     source = pointer["previous_source_commit"]
@@ -3789,3 +4055,750 @@ def rollback_tick_generation(
         raise
     finally:
         lease_path.unlink(missing_ok=True)
+
+
+def validate_g4_orientation_intent(value: object) -> dict[str, Any]:
+    """Admit only the named, observed two-drift G4 recovery baseline."""
+
+    row = _exact(value, {
+        "schema_version", "operation_id", "observed_baseline_commit", "observed_baseline_tree",
+        "programme_state_sha256", "programme_gates_sha256",
+        "previous_generation_id", "previous_bundle_sha256", "lease_sequence",
+        "old_canonical_sha256s", "actual_canonical_sha256s",
+        "metadata_sha256s", "generation_manifest_sha256", "pointer_sha256",
+        "orientation_date", "acceptance_path",
+    }, "g4_orientation_intent_keys")
+    if (
+        row["schema_version"] != G4_ORIENTATION_INTENT_VERSION
+        or row["operation_id"] != G4_ORIENTATION_OPERATION
+        or row["observed_baseline_commit"] != G4_ORIENTATION_HEAD
+        or row["observed_baseline_tree"] != G4_ORIENTATION_TREE
+        or row["programme_state_sha256"] != G4_STATE_SHA256
+        or row["programme_gates_sha256"] != G4_GATES_SHA256
+        or row["previous_generation_id"] != G4_OLD_GENERATION_ID
+        or row["previous_bundle_sha256"] != G4_OLD_GENERATION_ID[4:]
+        or row["lease_sequence"] != 247
+        or row["old_canonical_sha256s"] != G4_OLD_CANONICAL_SHA256S
+        or row["actual_canonical_sha256s"] != G4_ACTUAL_CANONICAL_SHA256S
+        or row["metadata_sha256s"] != G4_OLD_METADATA_SHA256S
+        or row["generation_manifest_sha256"] != G4_OLD_GENERATION_SHA256
+        or row["pointer_sha256"] != G4_OLD_POINTER_SHA256
+        or row["acceptance_path"] != G4_ORIENTATION_ACCEPTANCE
+        or row["orientation_date"] != "2026-10-25"
+    ):
+        _reject("g4_orientation_intent_pin")
+    return row
+
+
+def _assert_g4_git_state(
+    repo_root: Path, contract: dict[str, Any], expected_source: str | None = None
+) -> str:
+    """Check the reviewed isolated checkout topology without changing generic policy."""
+
+    source = _git(repo_root, "rev-parse", "HEAD")
+    tree = _git(repo_root, "rev-parse", "HEAD^{tree}")
+    if (
+        HEX40.fullmatch(source) is None
+        or HEX40.fullmatch(tree) is None
+        or (expected_source is not None and source != expected_source)
+    ):
+        _reject("g4_orientation_source_head_tree")
+    for ref in G4_ABSENT_LOCAL_REFS:
+        observed = subprocess.run(
+            ["git", "show-ref", "--verify", "--quiet", ref],
+            cwd=repo_root, capture_output=True, check=False,
+        )
+        if observed.returncode != 1:
+            _reject("g4_orientation_local_protected_ref_topology:" + ref)
+    _git(repo_root, "merge-base", "--is-ancestor", contract["required_ancestor"], source)
+    _git(repo_root, "merge-base", "--is-ancestor", contract["accepted_rehearsal_source"], source)
+    _git(repo_root, "merge-base", "--is-ancestor", G4_ORIENTATION_HEAD, source)
+    return source
+
+
+def _g4_orientation_baseline(
+    repo_root: Path, contract: dict[str, Any], intent: dict[str, Any]
+) -> tuple[dict[str, bytes], dict[str, bytes], dict[str, Any]]:
+    """Require every current preimage, including the two declared divergences."""
+
+    executing_head = _assert_g4_git_state(repo_root, contract)
+    if _git(repo_root, "rev-parse", G4_ORIENTATION_HEAD + "^{tree}") != G4_ORIENTATION_TREE:
+        _reject("g4_orientation_source_tree")
+    for relative, expected in (
+        ("orchestration/programme/current-state.json", G4_STATE_SHA256),
+        ("orchestration/programme/gates.yaml", G4_GATES_SHA256),
+    ):
+        if _hash_bytes((repo_root / relative).read_bytes()) != expected:
+            _reject("g4_orientation_programme_pin")
+    source = _source_bytes(repo_root, contract, G4_ORIENTATION_HEAD)
+    if {key: _hash_bytes(raw) for key, raw in source.items()} != G4_ACTUAL_CANONICAL_SHA256S:
+        _reject("g4_orientation_source_canonical")
+    current = {
+        key: (repo_root / relative).read_bytes()
+        for key, relative in contract["canonical_paths"].items()
+    }
+    if current != source:
+        _reject("g4_orientation_physical_canonical")
+    root = _clockwork_root(repo_root, contract)
+    metadata = {name: (root / name).read_bytes() for name in PREDECESSOR_METADATA_NAMES}
+    if {name: _hash_bytes(metadata[name]) for name in METADATA_NAMES} != G4_OLD_METADATA_SHA256S:
+        _reject("g4_orientation_metadata_third_drift")
+    if _hash_bytes(metadata[GENERATION_NAME]) != G4_OLD_GENERATION_SHA256:
+        _reject("g4_orientation_generation_drift")
+    pointer_raw = (root / POINTER_NAME).read_bytes()
+    if _hash_bytes(pointer_raw) != G4_OLD_POINTER_SHA256:
+        _reject("g4_orientation_pointer_drift")
+    generation = json.loads(metadata[GENERATION_NAME].decode("utf-8"))
+    pointer = json.loads(pointer_raw.decode("utf-8"))
+    source_pointer = _source_pointer(repo_root, contract, G4_ORIENTATION_HEAD)
+    if (
+        generation.get("canonical_sha256s") != G4_OLD_CANONICAL_SHA256S
+        or generation.get("metadata_sha256s") != G4_OLD_METADATA_SHA256S
+        or generation.get("generation_id") != G4_OLD_GENERATION_ID
+        or pointer != source_pointer
+        or pointer.get("selected_generation_id") != G4_OLD_GENERATION_ID
+        or pointer.get("selected_bundle_sha256") != G4_OLD_GENERATION_ID[4:]
+        or pointer.get("lease_sequence") != 247
+        or pointer.get("phase") != "clockwork_active"
+        or pointer.get("writer") != WRITER
+    ):
+        _reject("g4_orientation_predecessor_identity")
+    latch = validate_active_operation(json.loads(current["active_latch"].decode("utf-8")))
+    if latch.get("operation_id") != "g1b2-pure-journal-replay-kernel" or latch.get("status") != "in_progress":
+        _reject("g4_orientation_latch_identity")
+    return current, metadata, pointer
+
+
+def _g4_orientation_projections(
+    repo_root: Path, current: dict[str, bytes], intent: dict[str, Any],
+    *, source_head: str,
+) -> dict[str, bytes]:
+    if not isinstance(source_head, str) or HEX40.fullmatch(source_head) is None:
+        _reject("g4_orientation_projection_source_head")
+    graph = json.loads(current["continuity"].decode("utf-8"))
+    compass = json.loads(current["compass"].decode("utf-8"))
+    old_position = compass["current_position"]["node_id"]
+    parent = "ariadne-provider-free-clockwork-live-canonical-adoption-retirement"
+    if (
+        old_position != "raisa-provider-free-read-only-waiting-area-movement-command-family-readiness-review"
+        or not any(node.get("id") == parent and node.get("status") == "accepted"
+                   and node.get("kind") == "foundation" for node in graph["nodes"])
+        or not any(step.get("node_id") == parent for step in compass["journey"])
+        or graph.get("graph_revision") != 462
+        or compass.get("map_revision") != 444
+        or any(node.get("id") == G4_ORIENTATION_NODE for node in graph["nodes"])
+    ):
+        _reject("g4_orientation_graph_baseline")
+    stamp = intent["orientation_date"]
+    acceptance = intent["acceptance_path"]
+    graph = copy.deepcopy(graph)
+    compass = copy.deepcopy(compass)
+    graph["nodes"].append({
+        "id": G4_ORIENTATION_NODE,
+        "title": "G4 EMR4 recovery and Compass reorientation",
+        "kind": "tooling",
+        "relationships": [{"node_id": parent, "relation": "builds_on"}],
+        "authority": {"authorized_openings": [], "notes": [
+            "Owner redirected accepted governance work to current G4 Stage 1 recovery.",
+            "The prior waiting-area node is retained as navigation history, not a product ancestor.",
+            "This orientation is not M1 product acceptance or a G1B2 closeout."
+        ]},
+        "decisions": [{"id": "record-current-g4-recovery-orientation", "source":
+            "docs/ariadne-g4-compass-reconnection.md", "status": "accepted",
+            "summary": "Reflect qualified G2/G3 acceptance and partial G4 M1 without changing product authority."}],
+        "claim_scope": ["Accepted governance orientation only; product M1 remains partial."],
+        "contract_evidence": [],
+        "evidence": {
+            "plans": ["docs/ariadne-g4-compass-reconnection.md"],
+            "acceptances": [acceptance], "receipts": [],
+            "tests": ["tests/test_ariadne_g4_orientation.py"],
+            "closeouts": [], "findings": [
+                "orchestration/continuity/g4-emr4-compass-reconnection/orientation-intent.json"
+            ],
+        },
+        "unresolved_gates": ["G4 M1 remains partial; app, database and browser effects require exact finite bindings."],
+        "status": "accepted", "created_at": stamp, "updated_at": stamp,
+        "coordinates": {"git_ref": "codex/raisa-ariadne-recovery-g0",
+            "source_head": source_head, "thread_id": None,
+            "worktree_role": "integration"},
+    })
+    graph["graph_revision"] += 1
+    graph["updated_at"] = stamp
+    compass["journey"].append({
+        "node_id": G4_ORIENTATION_NODE, "lineage_parent": parent,
+        "strategic_role": "Reconnect the accepted governance map to current G4 Stage 1 recovery.",
+        "outcome": "G2 and G3 remain accepted with qualifications; G4 M1 remains partial.",
+        "evidence": ["docs/ariadne-g4-compass-reconnection.md", acceptance],
+    })
+    compass["current_position"] = {
+        "node_id": G4_ORIENTATION_NODE,
+        "strategic_role": "Track the current Stage 1 recovery sequence without granting product acceptance.",
+        "why_now": "Owner redirected work from the stale G1B2 waiting-area position.",
+        "outcome": "Ariadne records accepted governance direction and the partial G4 M1 state.",
+        "unlocks": ["Scoped, separately admitted Stage 1 continuation."],
+        "does_not_solve": ["M1 product acceptance, protected integration or runtime authority."],
+        "evidence": ["docs/ariadne-g4-compass-reconnection.md", acceptance],
+    }
+    compass["orientation_statement"] = (
+        "Current work is G4 Stage 1 recovery: G2 and G3 are accepted with qualifications; "
+        "M1 is partial and remains subject to exact admission and independent acceptance."
+    )
+    compass["programme"] = {
+        "id": "raisa-g4-stage1-recovery", "title": "Raisa G4 Stage 1 recovery",
+        "master_plan_phase": "G4 Stage 1",
+        "summary": "Restore the accepted local synthetic development path while preserving qualified G2/G3 acceptance and unresolved G4 M1.",
+        "evidence": ["docs/programme/raisa-ariadne-recovery-programme.md",
+            "docs/ariadne-g4-compass-reconnection.md"],
+    }
+    deferred_reception_decisions = {
+        "reception-one-delete-confirm-physical-design-architecture": (
+            "The delete-confirm physical design decision remains useful future work; "
+            "the current M1 route first proves request, book and same-appointment move."
+        ),
+        "reception-one-appointment-cancellation-direction": (
+            "The cancellation direction remains useful future work; the current M1 route "
+            "first proves request, book and same-appointment move."
+        ),
+    }
+    seen_reception_decisions = set()
+    for horizon in compass["decision_horizon"]:
+        if horizon["id"] in deferred_reception_decisions:
+            if horizon["status"] != "active":
+                _reject("g4_orientation_horizon_status:" + horizon["id"])
+            seen_reception_decisions.add(horizon["id"])
+            horizon["status"] = "deferred"
+            compass["map_limits"].append(
+                horizon["id"] + ": " + deferred_reception_decisions[horizon["id"]]
+            )
+    if seen_reception_decisions != set(deferred_reception_decisions):
+        _reject("g4_orientation_expected_reception_horizons_missing")
+    compass["decision_horizon"].append({
+        "id": "g4-stage1-m1-integration",
+        "title": "G4 Stage 1 appointment journey and shared channel integration",
+        "status": "active",
+        "strategic_question": (
+            "After Compass recovery and review of known capability dispositions, how do the existing "
+            "Bureau compose, context and proofreader seams support request, book and same-appointment "
+            "move through calm visible Diary and intent projections, a full Diary prompt, and a shared "
+            "text/voice lifecycle with independently checked outcome reliability?"
+        ),
+        "why_it_matters": (
+            "G2 and G3 are accepted with qualifications, but G4 M1 is partial. The current compose "
+            "route and same-date move client are narrower than the required contextual appointment "
+            "journeys; the remaining integration must retain server-owned decisions and human confirmation."
+        ),
+        "prerequisites": [
+            "Complete the reviewed Compass recovery and use the pinned 18-domain capability dispositions as navigation, not product acceptance.",
+            "Integrate the existing Bureau compose/context/proofreader seams for request, book and same-appointment move, including the currently missing date-changing move semantics.",
+            "Keep Diary and intent projections visible and calm, with a full Diary prompt and the same domain lifecycle for web text and push-to-talk voice.",
+            "Check actual commands and outcomes against independently derived expectations, including reliability and accessible non-AI fallback.",
+            "Use exact current G4 admission, finite effect bindings and independent acceptance for each product effect.",
+            "Keep real data, providers, deployment and protected integration closed.",
+        ],
+        "boundary_changes": [],
+        "evidence": ["docs/ariadne-g4-compass-reconnection.md"],
+    })
+    compass["map_limits"].append(
+        "All other decision and programme-support horizon statuses are preserved, including the active Raisa Practice Context Fabric. The new G4 sequence is navigation only and grants no product acceptance or runtime authority."
+    )
+    compass["map_revision"] += 1
+    compass["source_graph_revision"] = graph["graph_revision"]
+    compass["updated_at"] = stamp
+    report = ariadne_compass.build_compass_report(
+        compass, graph, repo_root=repo_root, require_evidence_files=False
+    )
+    if report["status"] != "passed":
+        _reject("g4_orientation_compass:" + ",".join(report["reasons"]))
+    result = dict(current)
+    result["continuity"] = _json_text(graph).encode("utf-8")
+    result["compass"] = _json_text(compass).encode("utf-8")
+    result["compass_markdown"] = ariadne_compass.render_markdown(report).encode("utf-8")
+    return result
+
+
+def build_g4_orientation_generation(
+    repo_root: Path, contract_value: object, intent_value: object
+) -> dict[str, Any]:
+    """Prepare the single G4 recovery generation without moving the G1B2 latch."""
+
+    contract = validate_contract(contract_value)
+    intent = validate_g4_orientation_intent(intent_value)
+    current, prior_metadata, base_pointer = _g4_orientation_baseline(repo_root, contract, intent)
+    executing_head = _assert_g4_git_state(repo_root, contract)
+    canonical = _g4_orientation_projections(
+        repo_root, current, intent, source_head=executing_head,
+    )
+    if any(canonical[key] != current[key] for key in (
+        "active_latch", "current_baton", "error_register", "pattern_report"
+    )):
+        _reject("g4_orientation_preservation")
+    intent_sha = tc.sha256(intent)
+    transaction_id = "txn-" + tc.sha256({
+        "g4_orientation_intent": intent_sha, "head": executing_head
+    })[7:31]
+    journal_id = "journal-" + transaction_id[4:]
+    events: list[dict[str, Any]] = []
+    previous = tc.ZERO_DIGEST
+    for event_type, payload in (
+        ("g4-orientation-intent-accepted", {"intent_sha256": intent_sha}),
+        ("observed-two-drift-baseline-bound", {
+            "old_canonical_sha256s": G4_OLD_CANONICAL_SHA256S,
+            "actual_canonical_sha256s": G4_ACTUAL_CANONICAL_SHA256S,
+        }),
+        ("g4-orientation-projected", {"node_id": G4_ORIENTATION_NODE,
+            "g2_g3": "qualified_accepted", "g4_m1": "partial"}),
+        ("transaction-prepared", {"publication_mode":
+            "lease_bound_pointer_last_live_tick"}),
+    ):
+        event = tc._event(
+            journal_id=journal_id, transaction_id=transaction_id,
+            operation_id=G4_ORIENTATION_OPERATION, sequence=len(events) + 1,
+            previous=previous, event_type=event_type, payload=payload,
+        )
+        events.append(event)
+        previous = event["event_sha256"]
+    tc.validate_event_chain(events)
+    source_latch = validate_active_operation(json.loads(current["active_latch"].decode("utf-8")))
+    transaction = {
+        "schema_version": TRANSACTION_VERSION,
+        "operation_id": G4_ORIENTATION_OPERATION,
+        "transaction_id": transaction_id,
+        "source_commit": executing_head,
+        "previous_source_commit": G4_ORIENTATION_HEAD,
+        "previous_generation_id": G4_OLD_GENERATION_ID,
+        "previous_bundle_sha256": G4_OLD_GENERATION_ID[4:],
+        "previous_canonical_sha256s": G4_ACTUAL_CANONICAL_SHA256S,
+        "previous_metadata_sha256s": {
+            name: _hash_bytes(raw) for name, raw in prior_metadata.items()
+        },
+        "projection_sha256s": {
+            "graph": tc.sha256(json.loads(canonical["continuity"].decode("utf-8"))),
+            "compass": tc.sha256(json.loads(canonical["compass"].decode("utf-8"))),
+            "latch": tc.sha256(source_latch),
+        },
+        "journal": events,
+        "publication_mode": "lease_bound_pointer_last_live_tick",
+        "event_kind": G4_ORIENTATION_EVENT,
+        "next_boundaries_sha256": tc.sha256(source_latch["protected_boundaries"]),
+        "register_bytes_preserved": True,
+        "pattern_bytes_preserved": True,
+    }
+    command_manifest = {
+        "schema_version": "ariadne.g4_emr4_compass_command_manifest.v1",
+        "profile": "g4_recovery_governance_orientation_only",
+        "operation_id": G4_ORIENTATION_OPERATION,
+        "source_commit": executing_head,
+        "intent_sha256": intent_sha,
+        "effect_boundary": "separately_reviewed_g4_reconcile_binding_required",
+    }
+    metadata = {
+        "command-manifest.json": _json_text(command_manifest).encode("utf-8"),
+        "transaction.json": _json_text(transaction).encode("utf-8"),
+        "ownership.json": prior_metadata["ownership.json"],
+    }
+    canonical_sha256s = {key: _hash_bytes(raw) for key, raw in canonical.items()}
+    metadata_sha256s = {key: _hash_bytes(raw) for key, raw in metadata.items()}
+    bundle_sha = _hash_json({"canonical": canonical_sha256s, "metadata": metadata_sha256s})
+    generation = {
+        "schema_version": GENERATION_VERSION,
+        "generation_id": "gen-" + bundle_sha,
+        "bundle_sha256": bundle_sha,
+        "source_commit": executing_head,
+        "previous_generation": {
+            "generation_id": G4_OLD_GENERATION_ID,
+            "source_commit": G4_ORIENTATION_HEAD,
+            "bundle_sha256": G4_OLD_GENERATION_ID[4:],
+            "canonical_sha256s": G4_ACTUAL_CANONICAL_SHA256S,
+            "metadata_sha256s": {
+                name: _hash_bytes(raw) for name, raw in prior_metadata.items()
+            },
+            "pointer_sha256": G4_OLD_POINTER_SHA256,
+        },
+        "canonical_sha256s": canonical_sha256s,
+        "metadata_sha256s": metadata_sha256s,
+        "g4_orientation": {"intent_sha256": intent_sha,
+            "observed_baseline_sha256s": G4_ACTUAL_CANONICAL_SHA256S,
+            "recorded_generation_sha256s": G4_OLD_CANONICAL_SHA256S},
+    }
+    pointer = {
+        **base_pointer,
+        "selected_generation_id": generation["generation_id"],
+        "selected_bundle_sha256": generation["bundle_sha256"],
+        "previous_generation_id": G4_OLD_GENERATION_ID,
+        "previous_source_commit": G4_ORIENTATION_HEAD,
+        "lease_sequence": base_pointer["lease_sequence"] + 1,
+    }
+    prepared = {
+        "schema_version": PREPARED_VERSION,
+        "contract": contract, "intent": intent,
+        "source_commit": executing_head,
+        "base_pointer": base_pointer, "canonical": canonical,
+        "metadata": metadata, "generation_manifest": generation,
+        "pointer": pointer,
+    }
+    validate_prepared_tick(repo_root, prepared)
+    return prepared
+
+
+def _validate_g4_orientation_prepared(repo_root: Path, row: dict[str, Any]) -> dict[str, Any]:
+    if row["schema_version"] != PREPARED_VERSION:
+        _reject("g4_orientation_prepared_version")
+    contract = validate_contract(row["contract"])
+    intent = validate_g4_orientation_intent(row["intent"])
+    current, prior_metadata, base_pointer = _g4_orientation_baseline(repo_root, contract, intent)
+    executing_head = _assert_g4_git_state(repo_root, contract)
+    if row["source_commit"] != executing_head or row["base_pointer"] != base_pointer:
+        _reject("g4_orientation_prepared_source")
+    canonical = row["canonical"]
+    metadata = row["metadata"]
+    if set(canonical) != set(CANONICAL_KEYS) or set(metadata) != set(METADATA_NAMES):
+        _reject("g4_orientation_prepared_files")
+    if canonical != _g4_orientation_projections(
+        repo_root, current, intent, source_head=executing_head,
+    ):
+        _reject("g4_orientation_prepared_projection")
+    generation = row["generation_manifest"]
+    pointer = row["pointer"]
+    canonical_sha = {key: _hash_bytes(raw) for key, raw in canonical.items()}
+    metadata_sha = {key: _hash_bytes(raw) for key, raw in metadata.items()}
+    bundle_sha = _hash_json({"canonical": canonical_sha, "metadata": metadata_sha})
+    prior = generation.get("previous_generation")
+    if (
+        generation.get("schema_version") != GENERATION_VERSION
+        or generation.get("source_commit") != executing_head
+        or generation.get("canonical_sha256s") != canonical_sha
+        or generation.get("metadata_sha256s") != metadata_sha
+        or generation.get("bundle_sha256") != bundle_sha
+        or generation.get("generation_id") != "gen-" + bundle_sha
+        or not isinstance(prior, dict)
+        or prior.get("generation_id") != G4_OLD_GENERATION_ID
+        or prior.get("bundle_sha256") != G4_OLD_GENERATION_ID[4:]
+        or prior.get("source_commit") != G4_ORIENTATION_HEAD
+        or prior.get("canonical_sha256s") != G4_ACTUAL_CANONICAL_SHA256S
+        or prior.get("metadata_sha256s") != {
+            name: _hash_bytes(raw) for name, raw in prior_metadata.items()}
+        or prior.get("pointer_sha256") != G4_OLD_POINTER_SHA256
+        or generation.get("g4_orientation") != {
+            "intent_sha256": tc.sha256(intent),
+            "observed_baseline_sha256s": G4_ACTUAL_CANONICAL_SHA256S,
+            "recorded_generation_sha256s": G4_OLD_CANONICAL_SHA256S,
+        }
+        or pointer != {
+            **base_pointer,
+            "selected_generation_id": "gen-" + bundle_sha,
+            "selected_bundle_sha256": bundle_sha,
+            "previous_generation_id": G4_OLD_GENERATION_ID,
+            "previous_source_commit": G4_ORIENTATION_HEAD,
+            "lease_sequence": 248,
+        }
+    ):
+        _reject("g4_orientation_prepared_identity")
+    transaction = _exact(json.loads(metadata["transaction.json"].decode("utf-8")),
+        TRANSACTION_KEYS, "g4_orientation_transaction_keys")
+    command = json.loads(metadata["command-manifest.json"].decode("utf-8"))
+    latch = validate_active_operation(json.loads(current["active_latch"].decode("utf-8")))
+    if (
+        metadata["ownership.json"] != prior_metadata["ownership.json"]
+        or command != {
+            "schema_version": "ariadne.g4_emr4_compass_command_manifest.v1",
+            "profile": "g4_recovery_governance_orientation_only",
+            "operation_id": G4_ORIENTATION_OPERATION,
+            "source_commit": executing_head,
+            "intent_sha256": tc.sha256(intent),
+            "effect_boundary": "separately_reviewed_g4_reconcile_binding_required",
+        }
+        or transaction["event_kind"] != G4_ORIENTATION_EVENT
+        or transaction["operation_id"] != G4_ORIENTATION_OPERATION
+        or transaction["source_commit"] != executing_head
+        or transaction["previous_source_commit"] != G4_ORIENTATION_HEAD
+        or transaction["previous_generation_id"] != G4_OLD_GENERATION_ID
+        or transaction["previous_bundle_sha256"] != G4_OLD_GENERATION_ID[4:]
+        or transaction["previous_canonical_sha256s"] != G4_ACTUAL_CANONICAL_SHA256S
+        or transaction["previous_metadata_sha256s"] != prior["metadata_sha256s"]
+        or transaction["next_boundaries_sha256"] != tc.sha256(latch["protected_boundaries"])
+        or transaction["projection_sha256s"] != {
+            "graph": tc.sha256(json.loads(canonical["continuity"].decode("utf-8"))),
+            "compass": tc.sha256(json.loads(canonical["compass"].decode("utf-8"))),
+            "latch": tc.sha256(latch),
+        }
+        or not transaction["register_bytes_preserved"]
+        or not transaction["pattern_bytes_preserved"]
+        or transaction["publication_mode"] != "lease_bound_pointer_last_live_tick"
+    ):
+        _reject("g4_orientation_prepared_semantics")
+    tc.validate_event_chain(transaction["journal"])
+    if (
+        transaction["journal"][0]["payload"].get("intent_sha256") != tc.sha256(intent)
+        or transaction["journal"][0]["operation_id"] != G4_ORIENTATION_OPERATION
+        or transaction["journal"][-1]["transaction_id"] != transaction["transaction_id"]
+    ):
+        _reject("g4_orientation_prepared_journal")
+    return row
+
+
+def _assert_g4_orientation_command_bytes(
+    raw: bytes, source_commit: str, intent_sha256: str
+) -> None:
+    expected = {
+        "schema_version": "ariadne.g4_emr4_compass_command_manifest.v1",
+        "profile": "g4_recovery_governance_orientation_only",
+        "operation_id": G4_ORIENTATION_OPERATION,
+        "source_commit": source_commit,
+        "intent_sha256": intent_sha256,
+        "effect_boundary": "separately_reviewed_g4_reconcile_binding_required",
+    }
+    if raw != _json_text(expected).encode("utf-8"):
+        _reject("g4_orientation_live_command_bytes")
+
+
+def _validate_g4_orientation_live(
+    repo_root: Path, contract: dict[str, Any], base: dict[str, Any],
+    generation: dict[str, Any],
+) -> dict[str, Any]:
+    """Read back the committed G4 generation without re-admitting the old latch."""
+
+    root = _clockwork_root(repo_root, contract)
+    pointer = _load(root / POINTER_NAME)
+    intent = validate_g4_orientation_intent(_load(
+        repo_root / "orchestration/continuity/g4-emr4-compass-reconnection/orientation-intent.json"
+    ))
+    prior = generation.get("previous_generation")
+    transaction = _exact(_load(root / "transaction.json"), TRANSACTION_KEYS,
+        "g4_orientation_live_transaction_keys")
+    _assert_g4_orientation_command_bytes(
+        (root / "command-manifest.json").read_bytes(),
+        generation["source_commit"], tc.sha256(intent),
+    )
+    source = _source_bytes(repo_root, contract, G4_ORIENTATION_HEAD)
+    canonical = {
+        key: (repo_root / relative).read_bytes()
+        for key, relative in contract["canonical_paths"].items()
+    }
+    expected = _g4_orientation_projections(
+        repo_root, source, intent, source_head=generation["source_commit"],
+    )
+    if (
+        canonical != expected
+        or pointer.get("previous_generation_id") != G4_OLD_GENERATION_ID
+        or pointer.get("previous_source_commit") != G4_ORIENTATION_HEAD
+        or pointer.get("lease_sequence") != 248
+        or generation.get("g4_orientation") != {
+            "intent_sha256": tc.sha256(intent),
+            "observed_baseline_sha256s": G4_ACTUAL_CANONICAL_SHA256S,
+            "recorded_generation_sha256s": G4_OLD_CANONICAL_SHA256S,
+        }
+        or not isinstance(prior, dict)
+        or prior.get("generation_id") != G4_OLD_GENERATION_ID
+        or prior.get("source_commit") != G4_ORIENTATION_HEAD
+        or prior.get("bundle_sha256") != G4_OLD_GENERATION_ID[4:]
+        or prior.get("canonical_sha256s") != G4_ACTUAL_CANONICAL_SHA256S
+        or prior.get("metadata_sha256s") != {
+            **G4_OLD_METADATA_SHA256S,
+            GENERATION_NAME: G4_OLD_GENERATION_SHA256,
+        }
+        or prior.get("pointer_sha256") != G4_OLD_POINTER_SHA256
+        or {key: _hash_bytes(raw) for key, raw in source.items()}
+        != G4_ACTUAL_CANONICAL_SHA256S
+        or _hash_bytes(_git_bytes(
+            repo_root, G4_ORIENTATION_HEAD,
+            f"{contract['clockwork_root']}/{POINTER_NAME}",
+        )) != G4_OLD_POINTER_SHA256
+        or transaction["event_kind"] != G4_ORIENTATION_EVENT
+        or transaction["operation_id"] != G4_ORIENTATION_OPERATION
+        or transaction["source_commit"] != generation["source_commit"]
+        or transaction["previous_source_commit"] != G4_ORIENTATION_HEAD
+        or transaction["previous_canonical_sha256s"] != G4_ACTUAL_CANONICAL_SHA256S
+        or transaction["previous_metadata_sha256s"] != prior["metadata_sha256s"]
+        or transaction["projection_sha256s"] != {
+            "graph": tc.sha256(json.loads(canonical["continuity"].decode("utf-8"))),
+            "compass": tc.sha256(json.loads(canonical["compass"].decode("utf-8"))),
+            "latch": tc.sha256(json.loads(canonical["active_latch"].decode("utf-8"))),
+        }
+    ):
+        _reject("g4_orientation_live_semantics")
+    tc.validate_event_chain(transaction["journal"])
+    if transaction["journal"][0]["payload"].get("intent_sha256") != tc.sha256(intent):
+        _reject("g4_orientation_live_intent")
+    return {
+        **base, "schema_version": "ariadne.governance_live_tick_state.v1",
+        "operation_id": G4_ORIENTATION_OPERATION,
+        "event_kind": G4_ORIENTATION_EVENT,
+        "previous_generation_id": G4_OLD_GENERATION_ID,
+        "previous_metadata_files": len(PREDECESSOR_METADATA_NAMES),
+    }
+
+
+def validate_g4_recovery_baseline(
+    repo_root: Path, contract_value: object
+) -> dict[str, Any]:
+    """Read the contained inverse state without calling it a clean generation."""
+
+    contract = validate_contract(contract_value)
+    executing_head = _assert_g4_git_state(repo_root, contract)
+    source = _source_bytes(repo_root, contract, G4_ORIENTATION_HEAD)
+    metadata = _source_metadata(repo_root, contract, G4_ORIENTATION_HEAD)
+    source_pointer = _source_pointer(repo_root, contract, G4_ORIENTATION_HEAD)
+    root = _clockwork_root(repo_root, contract)
+    pointer = _load(root / POINTER_NAME)
+    expected_pointer = {**source_pointer, "phase": "recovery_baseline", "lease_sequence": 249}
+    physical_canonical = {
+        key: (repo_root / relative).read_bytes()
+        for key, relative in contract["canonical_paths"].items()
+    }
+    physical_metadata = {
+        name: (root / name).read_bytes() for name in PREDECESSOR_METADATA_NAMES
+    }
+    if (
+        pointer != expected_pointer
+        or physical_canonical != source
+        or physical_metadata != metadata
+        or {key: _hash_bytes(raw) for key, raw in source.items()}
+        != G4_ACTUAL_CANONICAL_SHA256S
+        or {name: _hash_bytes(metadata[name]) for name in METADATA_NAMES}
+        != G4_OLD_METADATA_SHA256S
+        or _hash_bytes(metadata[GENERATION_NAME]) != G4_OLD_GENERATION_SHA256
+        or _hash_bytes(_git_bytes(
+            repo_root, G4_ORIENTATION_HEAD,
+            f"{contract['clockwork_root']}/{POINTER_NAME}",
+        )) != G4_OLD_POINTER_SHA256
+    ):
+        _reject("g4_orientation_recovery_baseline_drift")
+    generation = json.loads(metadata[GENERATION_NAME].decode("utf-8"))
+    if (
+        generation.get("generation_id") != G4_OLD_GENERATION_ID
+        or generation.get("canonical_sha256s") != G4_OLD_CANONICAL_SHA256S
+        or generation.get("metadata_sha256s") != G4_OLD_METADATA_SHA256S
+    ):
+        _reject("g4_orientation_recovery_generation_identity")
+    return {
+        "schema_version": "ariadne.g4_compass_recovery_baseline.v1",
+        "status": "contained_recovery_baseline",
+        "source_commit": executing_head,
+        "observed_baseline_commit": G4_ORIENTATION_HEAD,
+        "selected_generation_id": G4_OLD_GENERATION_ID,
+        "lease_sequence": 249,
+        "byte_exact": True,
+        "strict_generation_consistent": False,
+        "forward_route": "fresh_reviewed_g4_reconciliation_from_lease_249",
+    }
+
+
+def rollback_g4_orientation_generation(
+    repo_root: Path, contract_value: object, *, writer_id: str,
+    g4_effect_checker: Any = None, g4_effect_context: Any = None,
+    g4_effect_manifest: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    """Restore the observed HEAD baseline, retaining the original two-drift record."""
+
+    contract = validate_contract(contract_value)
+    if writer_id != WRITER:
+        _reject("tick_writer_not_clockwork")
+    state = validate_tick_live_state(repo_root, contract)
+    if state["event_kind"] != G4_ORIENTATION_EVENT:
+        _reject("g4_orientation_rollback_wrong_generation")
+    root = _clockwork_root(repo_root, contract)
+    pointer_path = root / POINTER_NAME
+    pointer = _load(pointer_path)
+    source = G4_ORIENTATION_HEAD
+    previous_canonical = _source_bytes(repo_root, contract, source)
+    previous_metadata = _source_metadata(repo_root, contract, source)
+    previous_pointer = _source_pointer(repo_root, contract, source)
+    if (
+        {key: _hash_bytes(raw) for key, raw in previous_canonical.items()}
+        != G4_ACTUAL_CANONICAL_SHA256S
+        or {name: _hash_bytes(previous_metadata[name]) for name in METADATA_NAMES}
+        != G4_OLD_METADATA_SHA256S
+        or _hash_bytes(previous_metadata[GENERATION_NAME]) != G4_OLD_GENERATION_SHA256
+        or pointer["lease_sequence"] != 248
+    ):
+        _reject("g4_orientation_rollback_baseline")
+    restored_pointer = {**previous_pointer, "phase": "recovery_baseline", "lease_sequence": 249}
+    recovery_prepared = {
+        "contract": contract, "canonical": previous_canonical,
+        "metadata": previous_metadata, "pointer": restored_pointer,
+    }
+    if not callable(g4_effect_checker) or g4_effect_context is None or g4_effect_manifest is None:
+        _reject("g4_orientation_rollback_admission_required")
+    _verify_g4_rollback_manifest_images(repo_root, recovery_prepared, g4_effect_manifest)
+    decision = g4_effect_checker(
+        context=g4_effect_context, manifest=g4_effect_manifest,
+        prepared=recovery_prepared, phase="rollback"
+    )
+    if not getattr(decision, "execution_authorized", False):
+        _reject("g4_orientation_rollback_not_authorized")
+    lease_path = root / "writer.lock"
+    canonical_targets = {
+        key: repo_root / relative for key, relative in contract["canonical_paths"].items()
+    }
+    metadata_targets = {name: root / name for name in PREDECESSOR_METADATA_NAMES}
+    staged: dict[str, Path] = {}
+    acquired = False
+    snapshots_complete = False
+    committed = False
+    try:
+        _write_lease(
+            lease_path, operation_id=G4_ORIENTATION_OPERATION,
+            source=state["source_commit"],
+            pointer={**restored_pointer, "previous_generation_id": G4_OLD_GENERATION_ID},
+        )
+        acquired = True
+        _assert_g4_git_state(repo_root, contract, state["head"])
+        _verify_g4_rollback_manifest_images(repo_root, recovery_prepared, g4_effect_manifest)
+        decision = g4_effect_checker(
+            context=g4_effect_context, manifest=g4_effect_manifest,
+            prepared=recovery_prepared, phase="rollback"
+        )
+        if not getattr(decision, "execution_authorized", False):
+            _reject("g4_orientation_rollback_not_authorized")
+        current_canonical = {key: path.read_bytes() for key, path in canonical_targets.items()}
+        current_metadata = {name: path.read_bytes() for name, path in metadata_targets.items()}
+        current_pointer = pointer_path.read_bytes()
+        snapshots_complete = True
+        for key, target in canonical_targets.items():
+            staged[f"canonical:{key}"] = _write_temp(target, previous_canonical[key])
+        for name, target in metadata_targets.items():
+            staged[f"metadata:{name}"] = _write_temp(target, previous_metadata[name])
+        staged["pointer"] = _write_temp(pointer_path, _json_text(restored_pointer).encode("utf-8"))
+        for key, target in canonical_targets.items():
+            os.replace(staged.pop(f"canonical:{key}"), target)
+        for name, target in metadata_targets.items():
+            os.replace(staged.pop(f"metadata:{name}"), target)
+        os.replace(staged.pop("pointer"), pointer_path)
+        committed = True
+        validated = validate_g4_recovery_baseline(repo_root, contract)
+        _verify_g4_committed_images(repo_root, contract, g4_effect_manifest)
+        return {
+            "schema_version": "ariadne.governance_live_tick_rollback.v1",
+            "status": "contained_recovery_baseline",
+            "rolled_back_from_generation_id": state["generation_id"],
+            "selected_generation_id": G4_OLD_GENERATION_ID,
+            "previous_source_commit": source, "lease_sequence": 249,
+            "byte_exact": validated["byte_exact"],
+            "restored_baseline": "observed_head_two_drift",
+            "forward_route": "fresh_reviewed_g4_reconciliation_from_lease_249",
+        }
+    except BaseException as error:
+        if not committed and snapshots_complete:
+            for key, target in canonical_targets.items():
+                target.write_bytes(current_canonical[key])
+            for name, target in metadata_targets.items():
+                target.write_bytes(current_metadata[name])
+            pointer_path.write_bytes(current_pointer)
+            if (
+                any(target.read_bytes() != current_canonical[key]
+                    for key, target in canonical_targets.items())
+                or any(target.read_bytes() != current_metadata[name]
+                    for name, target in metadata_targets.items())
+                or pointer_path.read_bytes() != current_pointer
+            ):
+                _reject("g4_orientation_rollback_precommit_restore_failed")
+        if committed:
+            raise CommittedClockworkTick(
+                "g4_orientation_rollback_committed_readback_uncertain"
+            ) from error
+        raise
+    finally:
+        for temporary in staged.values():
+            temporary.unlink(missing_ok=True)
+        if acquired:
+            lease_path.unlink(missing_ok=True)

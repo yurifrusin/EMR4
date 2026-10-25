@@ -269,7 +269,8 @@ def validate_compass(
                 errors.append(f"current_position_not_journey_terminal:{current_id}")
             if not graph_errors:
                 current_audit = continuity.audit_graph(
-                    graph, repo_root=repo_root, node_id=current_id
+                    graph, repo_root=repo_root, node_id=current_id,
+                    require_evidence_files=require_evidence_files,
                 )
                 for reason in current_audit.get("reasons", []):
                     errors.append(f"current_position_continuity:{reason}")

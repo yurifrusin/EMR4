@@ -4,9 +4,11 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import importlib.util
 import json
 import subprocess
 import sys
+from contextlib import contextmanager
 from pathlib import Path
 from typing import Any
 
@@ -28,14 +30,18 @@ from orchestration_harness.governance_clockwork_tick import (
     build_pause_tick_generation,
     build_user_decision_tick_generation,
     build_tick_generation,
+    build_g4_orientation_generation,
     build_blocked_tick_generation,
     materialize_semantic_evidence_headers,
     publish_tick_generation,
     rollback_tick_generation,
+    rollback_g4_orientation_generation,
     validate_blocked_tick_intent,
     validate_checkpoint_tick_intent,
     validate_pause_tick_intent,
     validate_tick_live_state,
+    validate_g4_orientation_intent,
+    validate_g4_recovery_baseline,
     validate_user_decision_tick_intent,
 )
 from orchestration_harness.governance_live_adoption import validate_contract
@@ -47,6 +53,8 @@ from orchestration_harness.programme_admission import (
 
 
 CONTRACT = ROOT / "orchestration/continuity/ariadne-provider-free-clockwork-live-canonical-adoption-retirement/contract.json"
+G4_ORIENTATION_INTENT = ROOT / "orchestration/continuity/g4-emr4-compass-reconnection/orientation-intent.json"
+G4_CONTROLLER_RELATIVE = "orchestration_harness/bounded_g1b.py"
 TRANSACTION_FACTS_VERSION = "ariadne.governance_command_transaction_facts.v1"
 SEMANTIC_VERIFICATION_FACTS_VERSION = (
     "ariadne.governance_semantic_verification_facts.v1"
@@ -66,6 +74,117 @@ def _load(path: Path) -> dict:
     if not isinstance(value, dict):
         raise ValueError(f"object_required:{path}")
     return value
+
+
+@contextmanager
+def _g4_external_controller(source_root: Path):
+    """Bind published external controller/writer modules during one G4 command."""
+
+    import orchestration_harness as package
+
+    names = (
+        "configuration_core", "raisa_policy", "trusted_git",
+        "governance_clockwork_tick", "bounded_g1b",
+    )
+    selected: dict[str, Path] = {}
+    for name in names:
+        relative = f"orchestration_harness/{name}.py"
+        path = (source_root / relative).resolve(strict=True)
+        raw = path.read_bytes()
+        installed = subprocess.run(
+            ["git", "show", f"HEAD:{relative}"], cwd=ROOT,
+            check=True, capture_output=True,
+        ).stdout
+        if raw != installed:
+            raise ValueError(f"g4_controller_external_source_mismatch:{relative}")
+        selected[name] = path
+    missing = object()
+    original = {name: getattr(package, name, missing) for name in names}
+    original_aliases = {
+        f"_ariadne_external_{name}":
+            sys.modules.get(f"_ariadne_external_{name}", missing)
+        for name in names
+    }
+    loaded: dict[str, Any] = {}
+    try:
+        for name in names:
+            alias = f"_ariadne_external_{name}"
+            spec = importlib.util.spec_from_file_location(alias, selected[name])
+            if spec is None or spec.loader is None:
+                raise ValueError(f"g4_controller_external_source_unloadable:{name}")
+            module = importlib.util.module_from_spec(spec)
+            sys.modules[alias] = module
+            spec.loader.exec_module(module)
+            loaded[name] = module
+            setattr(package, name, module)
+        controller = loaded["bounded_g1b"]
+        if any(
+            getattr(controller, name).__file__ != str(selected[name])
+            for name in ("configuration_core", "raisa_policy", "trusted_git")
+        ):
+            raise ValueError("g4_controller_external_dependency_origin")
+        yield controller
+    finally:
+        for name, previous in original.items():
+            if previous is missing:
+                delattr(package, name)
+            else:
+                setattr(package, name, previous)
+        for alias, previous in original_aliases.items():
+            if previous is missing:
+                sys.modules.pop(alias, None)
+            else:
+                sys.modules[alias] = previous
+
+
+def _g4_command(arguments: argparse.Namespace, contract: dict) -> dict:
+    intent = validate_g4_orientation_intent(_load(G4_ORIENTATION_INTENT))
+    if arguments.check_g4:
+        pointer_path = ROOT / contract["clockwork_root"] / "current.json"
+        if _load(pointer_path).get("phase") == "recovery_baseline":
+            return validate_g4_recovery_baseline(ROOT, contract)
+        generation_path = ROOT / contract["clockwork_root"] / "generation-manifest.json"
+        if _load(generation_path).get("g4_orientation") is not None:
+            state = validate_tick_live_state(ROOT, contract)
+            return _command_result(state, _idempotent_transaction_facts(state))
+        prepared = build_g4_orientation_generation(ROOT, contract, intent)
+        return _command_result(
+            {"schema_version": "ariadne.g4_compass_orientation_dry_run.v1",
+             "status": "passed", "source_commit": prepared["source_commit"],
+             "generation_id": prepared["generation_manifest"]["generation_id"],
+             "bundle_sha256": prepared["generation_manifest"]["bundle_sha256"],
+             "previous_generation_id": prepared["base_pointer"]["selected_generation_id"],
+             "lease_sequence": prepared["base_pointer"]["lease_sequence"]},
+            _prepared_transaction_facts(prepared, published=False),
+        )
+    required = (
+        "controller_source_root", "evidence_root", "scratch_root",
+        "effect_binding", "effect_binding_sha256", "effect_manifest",
+    )
+    if any(getattr(arguments, key) is None for key in required):
+        raise ValueError("g4_effect_exact_context_required")
+    with _g4_external_controller(arguments.controller_source_root) as module:
+        context = module.BoundedG1BContext(
+            target_root=ROOT, source_root=arguments.controller_source_root,
+            evidence_root=arguments.evidence_root, scratch_root=arguments.scratch_root,
+            binding_path=arguments.effect_binding,
+            expected_binding_sha256=arguments.effect_binding_sha256,
+        )
+        manifest = _load(arguments.effect_manifest)
+        if arguments.reorient_g4:
+            prepared = build_g4_orientation_generation(ROOT, contract, intent)
+            state = publish_tick_generation(
+                ROOT, prepared, writer_id="clockwork",
+                g4_effect_checker=module.require_g4_compass_reconciliation_effect,
+                g4_effect_context=context, g4_effect_manifest=manifest,
+            )
+            return _command_result(state, _prepared_transaction_facts(prepared, published=True))
+        rollback = rollback_g4_orientation_generation(
+            ROOT, contract, writer_id="clockwork",
+            g4_effect_checker=module.require_g4_compass_reconciliation_effect,
+            g4_effect_context=context, g4_effect_manifest=manifest,
+        )
+        return _command_result(rollback, _rollback_transaction_facts(rollback))
 
 
 def _intent_path(raw: Path) -> Path:
@@ -597,9 +716,25 @@ def main(argv: list[str] | None = None) -> int:
     mode.add_argument("--publish", action="store_true")
     mode.add_argument("--rollback", action="store_true")
     mode.add_argument("--prepare-evidence", action="store_true")
+    mode.add_argument("--check-g4", action="store_true")
+    mode.add_argument("--reorient-g4", action="store_true")
+    mode.add_argument("--rollback-g4", action="store_true")
     parser.add_argument("--intent", type=Path)
     parser.add_argument("--programme-task-manifest", type=Path)
+    parser.add_argument("--controller-source-root", type=Path)
+    parser.add_argument("--evidence-root", type=Path)
+    parser.add_argument("--scratch-root", type=Path)
+    parser.add_argument("--effect-binding", type=Path)
+    parser.add_argument("--effect-binding-sha256")
+    parser.add_argument("--effect-manifest", type=Path)
     arguments = parser.parse_args(argv)
+    if arguments.check_g4 or arguments.reorient_g4 or arguments.rollback_g4:
+        if arguments.intent is not None or arguments.programme_task_manifest is not None:
+            parser.error("G4 orientation uses its frozen intent and separate exact effect binding")
+        contract = validate_contract(_load(CONTRACT))
+        result = _g4_command(arguments, contract)
+        print(json.dumps(result, indent=2, ensure_ascii=False))
+        return 0
     if arguments.publish or arguments.rollback or arguments.prepare_evidence:
         require_programme_admission(
             repo_root=ROOT,

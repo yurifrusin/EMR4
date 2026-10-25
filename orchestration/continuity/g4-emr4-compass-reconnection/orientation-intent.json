@@ -1,0 +1,38 @@
+{
+  "schema_version": "ariadne.g4_emr4_compass_orientation_intent.v1",
+  "operation_id": "g4-emr4-compass-reconnection",
+  "observed_baseline_commit": "6bdf6a2fcd69dc937f1844c59a4296d0c1b8bde9",
+  "observed_baseline_tree": "68a0bb411e430ed0571b6f39b00d99b7010823d7",
+  "programme_state_sha256": "f32ea528d9efab7e45df9d4ce4770dc9094483641d332ebee052ec436634388b",
+  "programme_gates_sha256": "16206eaa4ee6af4785d9c2bff9e68c9e277da88eda714fc85b5227394d03228d",
+  "previous_generation_id": "gen-1f0a9311721de5c258d2cefc8c1f73ab753c94eacd06513aa87bc50f043c1206",
+  "previous_bundle_sha256": "1f0a9311721de5c258d2cefc8c1f73ab753c94eacd06513aa87bc50f043c1206",
+  "lease_sequence": 247,
+  "old_canonical_sha256s": {
+    "continuity": "3afcbe15dcdc92d47f6ecf20e2dbe941e74fe57938c73be6bf52c13239889275",
+    "compass": "a524fee81c1d7f2aed2a1d81fbb857e6396b4a3c93a02f6091a54e023f9f8584",
+    "compass_markdown": "d1d1c2318be7eb3adc58277a700955b231727fed6b3bf3013b4b50ed1b2b8671",
+    "active_latch": "69ab7808aac16ba84b6c385b3378483e17fb7b665f84a3d60d1e3054bdba0366",
+    "error_register": "be85e1a14b5c1947dd548320edc7923462c0791ba96c9c54e6cb79ba4aca6165",
+    "pattern_report": "6fcd53a0a99a03222c7cdeeff607355b6f0cf382b0b47d306f56b14cd14fb7fc",
+    "current_baton": "9426913facc3809dee4230820695c3ab067e1adafa3931ca09fb27e890e047ba"
+  },
+  "actual_canonical_sha256s": {
+    "continuity": "3afcbe15dcdc92d47f6ecf20e2dbe941e74fe57938c73be6bf52c13239889275",
+    "compass": "a524fee81c1d7f2aed2a1d81fbb857e6396b4a3c93a02f6091a54e023f9f8584",
+    "compass_markdown": "d1d1c2318be7eb3adc58277a700955b231727fed6b3bf3013b4b50ed1b2b8671",
+    "active_latch": "f1bc5b3545293834365b7992882ebc09e6c83ccd63687c28fd443ac049e2e437",
+    "error_register": "be85e1a14b5c1947dd548320edc7923462c0791ba96c9c54e6cb79ba4aca6165",
+    "pattern_report": "6fcd53a0a99a03222c7cdeeff607355b6f0cf382b0b47d306f56b14cd14fb7fc",
+    "current_baton": "f2c078d3877ac8a7659a614a049021df6d211d7a61934be927268f56b4b36a62"
+  },
+  "metadata_sha256s": {
+    "command-manifest.json": "305d31d03e34deee606abee94a436ffd30ca2b4d8a7817ec71b61908ec29c1ec",
+    "transaction.json": "28023f3c35a2e3a141adc7a8fd74dd3221a7a1d3126010ca81cec771b7ef1df6",
+    "ownership.json": "e78320a1b0d2f61041cd9d8cac1ed4f98d2bbdf7c3b94891a48d123589d8dee9"
+  },
+  "generation_manifest_sha256": "57d4208fdcc92c28f3abf15610af76daf0aae71f5e95b8a96f7f420c6cdb261b",
+  "pointer_sha256": "30bbd710351c5e72391f339e83e4bff95c6000ae231ecd8ebd4032d080a30ab5",
+  "orientation_date": "2026-10-25",
+  "acceptance_path": "orchestration/agent_inbox/codex/g4-emr4-compass-reconnection-acceptance.md"
+}
