@@ -99,7 +99,95 @@ def test_path_selection_is_exact_and_old_profile_is_preserved():
         with pytest.raises(bounded_g1b.BoundedG1BError):
             bounded_g1b.operation_paths("implement_g4_stage1_successor", invalid)
     assert len(raisa_policy.g4_stage1_interactive_profile()["allowed_paths"]) == 12
-    assert len(raisa_policy.g4_stage1_successor_profile()["allowed_paths"]) == 16
+    assert set(bounded_g1b.G4_STAGE1_SUCCESSOR_PRODUCT_AFTERIMAGES) <= set(
+        raisa_policy.g4_stage1_successor_profile()["allowed_paths"])
+    assert len(raisa_policy.g4_stage1_successor_profile()["allowed_paths"]) == 22
+
+
+def _intention_scope():
+    path = (Path(__file__).resolve().parents[1] /
+            bounded_g1b.G4_STAGE1_SUCCESSOR_SCOPE)
+    return json.loads(path.read_bytes())
+
+
+def test_intention_diary_scope_exact_and_ci_scope_separate():
+    scope = _intention_scope()
+    bounded_g1b.validate_g4_intent_scope(scope)
+    assert scope["allowed_paths"] == sorted(bounded_g1b.G4_INTENT_PRODUCT)
+    assert scope["product_sha256"] == bounded_g1b.G4_INTENT_PRODUCT_SHA
+    assert scope["admission_grants_runtime_authority"] is False
+    assert bounded_g1b.G4_CI_WORKFLOW not in scope["allowed_paths"]
+    for field, bad in (("allowed_paths", ["app/main.py"]),
+                       ("allowed_effects", ["provider_invocation"]),
+                       ("admission_grants_runtime_authority", True),
+                       ("runtime_binding_required", False),
+                       ("voice_activation", True),
+                       ("selected_base", {"commit": "0" * 40, "tree": "0" * 40})):
+        changed = copy.deepcopy(scope)
+        changed[field] = bad
+        with pytest.raises(bounded_g1b.BoundedG1BError):
+            bounded_g1b.validate_g4_intent_scope(changed)
+
+
+def test_intention_diary_enable_apply_paths_are_exact():
+    for kind, stage, expected in (
+        ("enable_g4_stage1_successor", "enable", bounded_g1b.G4_INTENT_CONTROL),
+        ("implement_g4_stage1_successor", "apply", bounded_g1b.G4_INTENT_PRODUCT),
+    ):
+        binding = {"schema_version": bounded_g1b.G4_INTENT_SCHEMA,
+                   "operation_kind": kind, "stage": stage,
+                   "repair_sha256": {p: {} for p in expected}}
+        assert bounded_g1b.operation_paths(kind, binding) == expected
+        for paths in (set(expected) - {next(iter(expected))},
+                      set(expected) | {"app/main.py"}):
+            changed = copy.deepcopy(binding)
+            changed["repair_sha256"] = {p: {} for p in paths}
+            with pytest.raises(bounded_g1b.BoundedG1BError):
+                bounded_g1b.operation_paths(kind, changed)
+        changed = copy.deepcopy(binding)
+        changed["stage"] = "apply" if stage == "enable" else "enable"
+        with pytest.raises(bounded_g1b.BoundedG1BError):
+            bounded_g1b.operation_paths(kind, changed)
+
+
+def test_ci_and_intention_review_verdicts_remain_separate():
+    subject = "b" * 64
+    ci_path = (bounded_g1b.G4_CI_EVIDENCE /
+               "ci-maintenance-control-source-v1/"
+               "independent-enable-exact-subject-review-v1.json")
+    intent_path = (bounded_g1b.G4_INTENT_ROOT / "admission-source-v4/"
+                   "independent-enable-development-subject-review-v2.json")
+    cases = (
+        (bounded_g1b._g4_ci_review, ci_path, "enable", "development",
+         "PASS_G4_STAGE1_CI_MAINTENANCE_EXACT_ADMISSION_SUBJECT",
+         "/root/audit_admission_route_review"),
+        (bounded_g1b._g4_intent_review, intent_path, "enable", "development",
+         "PASS_G4_STAGE1_INTENTION_DIARY_EXACT_ADMISSION_SUBJECT",
+         "/root/frontier18_exact_metadata_review"),
+    )
+    for validator, path, stage, phase, verdict, actor in cases:
+        row = {"path": path.as_posix(), "sha256": "a" * 64}
+        review = {"schema": "emr4.g4_operation_review.v1", "status": "PASS",
+                  "verdict": verdict, "subject_sha256": subject,
+                  "independent": True, "implementation_authorship": False,
+                  "blocking_findings": [], "reviewer_agent": actor,
+                  "stage": stage, "phase": phase}
+        def read(_path, _digest):
+            return json.dumps(review).encode()
+        assert validator(read, row, bounded_g1b.G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT,
+                         subject, stage, phase) == review
+        for field, bad in (("verdict", "PASS_OTHER_ROUTE"),
+                           ("independent", False),
+                           ("implementation_authorship", True),
+                           ("subject_sha256", "0" * 64)):
+            changed = copy.deepcopy(review)
+            changed[field] = bad
+            def rejected_read(_path, _digest):
+                return json.dumps(changed).encode()
+            with pytest.raises(bounded_g1b.BoundedG1BError):
+                validator(rejected_read, row,
+                          bounded_g1b.G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT,
+                          subject, stage, phase)
 
 
 # Current v2 correction tests. The v1 tests above retain the frozen prestate and

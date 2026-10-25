@@ -3420,6 +3420,8 @@ def operation_paths(kind: str, binding: dict | None = None) -> frozenset[str]:
     _need(type(kind) is str and kind in OPERATION_PATHS, "bounded_g1b_operation_kind")
     if kind == G4_CI_KIND:
         return _g4_ci_paths(binding)
+    if kind in G4_STAGE1_SUCCESSOR_KINDS and _is_g4_intent_binding(binding):
+        return _g4_intent_paths(kind, binding)
     if kind in G4_STAGE1_SUCCESSOR_KINDS and _is_g4_audit_binding(binding):
         return _g4_audit_paths(kind, binding)
     if kind in G4_STAGE1_SUCCESSOR_KINDS and _is_g4_handoff_binding(binding):
@@ -3459,6 +3461,10 @@ def _operation(kind: str, binding: dict | None = None) -> dict:
         return {"paths": paths, "g4_ci_maintenance": True,
                 "profile": raisa_policy.G4_STAGE1_SUCCESSOR_PROFILE,
                 "gate": "G4", "limits": G4_CI_LIMITS}
+    if kind in G4_STAGE1_SUCCESSOR_KINDS and _is_g4_intent_binding(binding):
+        return {"paths": paths, "g4_intent_diary_source": True,
+                "profile": raisa_policy.G4_STAGE1_SUCCESSOR_PROFILE,
+                "gate": "G4", "limits": G4_STAGE1_SUCCESSOR_LIMITS}
     if kind in G4_STAGE1_SUCCESSOR_KINDS and _is_g4_audit_binding(binding):
         return {"paths": paths, "g4_audit_source": True,
                 "profile": raisa_policy.G4_STAGE1_SUCCESSOR_PROFILE,
@@ -6344,6 +6350,9 @@ def load_bounded_g1b_inputs(context: BoundedG1BContext) -> BoundedG1BInputs:
     if binding.get("operation_kind") == G4_CI_KIND:
         return _load_g4_ci_inputs(
             context, target, source, evidence_root, scratch, binding, read, snapshots)
+    if binding.get("operation_kind") in G4_STAGE1_SUCCESSOR_KINDS and _is_g4_intent_binding(binding):
+        return _load_g4_intent_inputs(
+            context, target, source, evidence_root, scratch, binding, read, snapshots)
     if binding.get("operation_kind") in G4_STAGE1_SUCCESSOR_KINDS and _is_g4_audit_binding(binding):
         return _load_g4_audit_source_inputs(
             context, target, source, evidence_root, scratch, binding, read, snapshots)
@@ -6521,6 +6530,8 @@ def _validate_loaded_policy(inputs: BoundedG1BInputs) -> tuple[dict[str, bytes],
     operation = _operation(inputs.binding["operation_kind"], inputs.binding)
     if operation.get("g4_ci_maintenance"):
         return _validate_g4_ci_loaded_policy(inputs)
+    if operation.get("g4_intent_diary_source"):
+        return _validate_g4_intent_loaded_policy(inputs)
     if operation.get("g4_audit_source"):
         return _validate_g4_audit_source_loaded_policy(inputs)
     if operation.get("g4_handoff_source"):
@@ -10413,3 +10424,292 @@ def _validate_g4_ci_loaded_policy(inputs):
         raise BoundedG1BError(error.reason_code) from error
     path = G4_STAGE1_SUCCESSOR_SCOPE if inputs.binding["stage"] == "enable" else G4_CI_WORKFLOW
     return {path: inputs.payloads[path]}, configuration
+
+
+# Intention-led Stage 1 source successor. This is separate from the accepted
+# CI-maintenance schema and retains the same G4 profile and finite-effect gates.
+G4_INTENT_SCHEMA = "ariadne.g4_stage1_intention_diary_operation_binding.v1"
+G4_INTENT_SCOPE_SCHEMA = "ariadne.g4_stage1_successor_entry_scope.v7"
+G4_INTENT_BASE = {"commit": "1a0a0e2c5f58c342f901258455b6bf4f4d76211e",
+                  "tree": "762358ce3ce53c488e66d0fbb1c7a6d22413a893"}
+G4_INTENT_ROOT = G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT / (
+    "stage1-mock-voice-database-integration-v1/interactive-runtime-v1/"
+    "reception-intent-ui-v1")
+G4_INTENT_VECTOR = G4_INTENT_ROOT / "diary-read-reconnection-v1/product-vector-v2.json"
+G4_INTENT_VECTOR_SHA = "1c0f7b5143bd1537ba9d2d75d2705b10b5e4478aa5e5b0dcf3c0d45e5efa424d"
+G4_INTENT_MAPPING = G4_INTENT_ROOT / "diary-read-reconnection-v1/independent-product-mapping-review-v2.json"
+G4_INTENT_MAPPING_SHA = "58ab44fc0074b4531b58418f6bc603e9084d6a3f320657d29177a0a49356dde4"
+G4_INTENT_CONTROL = frozenset({G4_AUDIT_CODE, "orchestration_harness/raisa_policy.py",
+    OVERLAY, G4_STAGE1_SUCCESSOR_SCOPE, G4_STAGE1_SUCCESSOR_TEST})
+G4_INTENT_PRODUCT_SHA = {
+    "static/demo/stage1-interactive.html": "742552903fc4f54129f77d0252531f625e7c73a30867a59033194e3f93970cf2",
+    "static/demo/stage1-interactive.css": "0b4fa9567066038baf6da5112fe552c6837e973168739ee27a89a0c24c9a94f7",
+    "static/demo/stage1-interactive.js": "286c708d5c79b47232c52e898c9a4f9a7547ba9109599e6dab857b7d59da7cd0",
+    "static/demo/stage1-diary-view.js": "c7c890b0ed0fed2f2d3ce092ef94a931435356de4853c94390cf39d89a04e862",
+    "stage1_demo_http.py": "3ac8119fcbcea76465261089e5e925d8d40d53ea672778b860b88c8bd17c58f9",
+    "stage1_demo_adapter_core.py": "6b3dcdf5e4eebd3fe0225d7dc71b4ca569973b65e8fe0540ffc4e1f97b068716",
+    "stage1_staff_diary_read.py": "90378fabd002609ba85bc19616df1e2d8225e6abc76d7d5bc393ef01f1f29dfb",
+    "stage1_diary_route_guard.py": "93f8d44eebc9d7a85217367ca7fda52b2cda483aa727cd15066764927c8bc9c2",
+    "tests/test_stage1_staff_diary_read.py": "6257560fd813711b6d734a7d893f548b4f4b0e6ec07379cf985feb0dc05b9a78",
+    "tests/test_stage1_intent_confirmation.cjs": "d122b7afc56bbd094c5463b85dc4e94350fdf62a0c88a036bba0e567efc7d1b0",
+    "tests/test_stage1_diary_view.cjs": "17bc7d8629bfad89817e879c1a5fbeaea9943c1455e4c0877473e6343d1ef2da",
+}
+G4_INTENT_PRODUCT = frozenset(G4_INTENT_PRODUCT_SHA)
+G4_INTENT_BINDING_KEYS = {
+    "schema_version", "operation_id", "operation_kind", "stage", "phase",
+    "base_commit", "base_tree", "expected_head", "expected_index_tree",
+    "candidate_tree", "source_sha256", "payload_sha256", "repair_sha256",
+    "source_review", "activation_acceptance", "product_vector",
+    "mapping_review"}
+G4_INTENT_SCOPE_KEYS = {
+    "schema_version", "recorded_at", "selected_base", "active_profile",
+    "allowed_task_kind", "allowed_paths", "allowed_effects", "runtime_binding_required",
+    "admission_grants_runtime_authority", "voice_activation", "excluded_effects",
+    "source_sha256", "control_sha256", "product_sha256", "product_vector",
+    "mapping_review", "predecessor_scope"}
+
+
+def _is_g4_intent_binding(binding):
+    return type(binding) is dict and binding.get("schema_version") == G4_INTENT_SCHEMA
+
+
+def _g4_intent_paths(kind, binding):
+    _need(kind in G4_STAGE1_SUCCESSOR_KINDS and _is_g4_intent_binding(binding)
+          and binding.get("operation_kind") == kind
+          and binding.get("stage") in {"enable", "apply"}
+          and ((kind == "enable_g4_stage1_successor") == (binding["stage"] == "enable"))
+          and type(binding.get("repair_sha256")) is dict,
+          "bounded_g4_intent_binding_kind")
+    paths = G4_INTENT_CONTROL if binding["stage"] == "enable" else G4_INTENT_PRODUCT
+    _need(set(binding["repair_sha256"]) == paths, "bounded_g4_intent_changed_paths")
+    return paths
+
+
+def g4_intent_review_subject(q):
+    return _sha(_canonical({key: q[key] for key in (
+        "schema_version", "operation_id", "operation_kind", "stage", "phase",
+        "base_commit", "base_tree", "expected_head", "expected_index_tree",
+        "candidate_tree", "source_sha256", "payload_sha256", "repair_sha256",
+        "activation_acceptance", "product_vector", "mapping_review")}))
+
+
+def validate_g4_intent_scope(scope):
+    _keys(scope, G4_INTENT_SCOPE_KEYS, "bounded_g4_intent_scope_schema")
+    _need(scope["schema_version"] == G4_INTENT_SCOPE_SCHEMA
+          and scope["selected_base"] == G4_INTENT_BASE
+          and _g4_audit_timestamp(scope["recorded_at"])
+          and scope["active_profile"] == raisa_policy.G4_STAGE1_SUCCESSOR_PROFILE
+          and scope["allowed_task_kind"] == "g4_stage1_local_successor"
+          and scope["allowed_paths"] == sorted(G4_INTENT_PRODUCT)
+          and scope["allowed_effects"] == sorted(EFFECTS | {"product_behavior_change"})
+          and scope["runtime_binding_required"] is True
+          and scope["admission_grants_runtime_authority"] is False
+          and scope["voice_activation"] is False
+          and scope["excluded_effects"] == [
+              "unreviewed_application_or_database_runtime",
+              "unreviewed_browser_or_microphone_runtime",
+              "unreviewed_voice_child_or_network_egress", "provider_invocation",
+              "real_data_access", "protected_ref_movement", "deployment",
+              "public_listener"]
+          and scope["product_sha256"] == G4_INTENT_PRODUCT_SHA
+          and scope["product_vector"] == {"path": G4_INTENT_VECTOR.as_posix(),
+                                           "sha256": G4_INTENT_VECTOR_SHA}
+          and scope["mapping_review"] == {"path": G4_INTENT_MAPPING.as_posix(),
+                                           "sha256": G4_INTENT_MAPPING_SHA}
+          and scope["predecessor_scope"] == {"sha256": "fc937c2e1f309ef0b0a2335af0768d88a00e1ae337acf6e86cd9c2218d70b9c6"},
+          "bounded_g4_intent_scope_boundary")
+    sources = _digest_map(scope["source_sha256"], SOURCE_PATHS | CONTROLLER_PATHS,
+                          "bounded_g4_intent_sources")
+    control = _digest_map(scope["control_sha256"],
+                          G4_INTENT_CONTROL - {G4_STAGE1_SUCCESSOR_SCOPE},
+                          "bounded_g4_intent_control_sources")
+    _need(all(sources[p] == control[p] for p in (G4_AUDIT_CODE,
+              "orchestration_harness/raisa_policy.py")),
+          "bounded_g4_intent_source_vector")
+    return sources
+
+
+def _g4_intent_review(read, row, evidence_root, subject, stage, phase):
+    _keys(row, {"path", "sha256"}, "bounded_g4_intent_review_row")
+    path = G4_INTENT_ROOT / "admission-source-v4" / (
+        "independent-" + stage + "-" + phase + "-subject-review-v2.json")
+    _need(Path(row["path"]) == path and path.is_relative_to(evidence_root),
+          "bounded_g4_intent_review_path")
+    review = _json(read(path, row["sha256"]))
+    _need(review.get("schema") == "emr4.g4_operation_review.v1"
+          and review.get("status") == "PASS"
+          and review.get("verdict") == "PASS_G4_STAGE1_INTENTION_DIARY_EXACT_ADMISSION_SUBJECT"
+          and review.get("subject_sha256") == subject
+          and review.get("independent") is True
+          and review.get("implementation_authorship") is False
+          and review.get("blocking_findings") == []
+          and review.get("reviewer_agent") == "/root/frontier18_exact_metadata_review"
+          and review.get("stage") == stage and review.get("phase") == phase,
+          "bounded_g4_intent_independent_subject")
+    return review
+
+
+def _load_g4_intent_inputs(context, target, source, evidence_root, scratch,
+                           q, read, snapshots):
+    _keys(q, G4_INTENT_BINDING_KEYS, "bounded_g4_intent_binding_schema")
+    _need(_is_g4_intent_binding(q) and q["phase"] in {"development", "pre-push", "post-push"}
+          and type(q["operation_id"]) is str
+          and re.fullmatch(r"[a-z0-9][a-z0-9-]{1,79}", q["operation_id"]),
+          "bounded_g4_intent_binding_version")
+    for key in ("base_commit", "base_tree", "expected_head",
+                "expected_index_tree", "candidate_tree"):
+        _need(type(q[key]) is str and re.fullmatch(r"[0-9a-f]{40}", q[key]),
+              "bounded_g4_intent_git_identity")
+    paths = _g4_intent_paths(q["operation_kind"], q)
+    _need(q["product_vector"] == {"path": G4_INTENT_VECTOR.as_posix(),
+                                    "sha256": G4_INTENT_VECTOR_SHA}
+          and q["mapping_review"] == {"path": G4_INTENT_MAPPING.as_posix(),
+                                        "sha256": G4_INTENT_MAPPING_SHA},
+          "bounded_g4_intent_product_pins")
+    vector = _json(read(G4_INTENT_VECTOR, G4_INTENT_VECTOR_SHA))
+    _need(vector.get("selected_base") == G4_INTENT_BASE
+          and {entry["target"]: entry["sha256"] for entry in vector["entries"]}
+              == G4_INTENT_PRODUCT_SHA
+          and len(vector["entries"]) == len(G4_INTENT_PRODUCT),
+          "bounded_g4_intent_vector")
+    mapping = _json(read(G4_INTENT_MAPPING, G4_INTENT_MAPPING_SHA))
+    _need(mapping.get("schema") == "emr4.stage1_intention_ui_product_mapping_review.v1"
+          and mapping.get("verdict") == "PREPARED_SOURCE_MAPPING_ONLY"
+          and mapping.get("product_vector_sha256") == G4_INTENT_VECTOR_SHA
+          and mapping.get("reviewer_agent") == "/root/frontier18_exact_metadata_review"
+          and mapping.get("physical_target_rows_checked") == len(G4_INTENT_PRODUCT)
+          and mapping.get("independent") is True
+          and mapping.get("implementation_authorship") is False
+          and mapping.get("blocking_findings") == [],
+          "bounded_g4_intent_mapping_source_only")
+    _need(_sha(trusted_git.run_git_bytes(target, "cat-file", "blob",
+          G4_INTENT_BASE["commit"] + ":" + G4_STAGE1_SUCCESSOR_SCOPE))
+          == "fc937c2e1f309ef0b0a2335af0768d88a00e1ae337acf6e86cd9c2218d70b9c6"
+          and trusted_git.run_git(target, "rev-parse",
+              G4_INTENT_BASE["commit"] + "^{tree}") == G4_INTENT_BASE["tree"],
+          "bounded_g4_intent_predecessor")
+    if q["stage"] == "enable":
+        _need(q["base_commit"] == G4_INTENT_BASE["commit"]
+              and q["base_tree"] == G4_INTENT_BASE["tree"]
+              and q["activation_acceptance"] is None,
+              "bounded_g4_intent_enable_base")
+    else:
+        _keys(q["activation_acceptance"], {"path", "sha256"},
+              "bounded_g4_intent_activation_row")
+        activation_path = G4_INTENT_ROOT / "admission-source-v4/independent-enable-push-effect-review-v1.json"
+        _need(Path(q["activation_acceptance"]["path"]) == activation_path,
+              "bounded_g4_intent_activation_path")
+        activation = _json(read(activation_path, q["activation_acceptance"]["sha256"]))
+        _need(activation.get("status") == "PASS"
+              and activation.get("verdict") == "PASS_G4_STAGE1_INTENTION_DIARY_CONTROL_PUBLICATION_EFFECT"
+              and activation.get("reviewer_agent") == "/root/frontier18_exact_metadata_review"
+              and activation.get("independent") is True
+              and activation.get("implementation_authorship") is False
+              and activation.get("blocking_findings") == []
+              and activation.get("stage") == "enable"
+              and activation.get("phase") == "push"
+              and activation.get("base") == G4_INTENT_BASE["commit"]
+              and activation.get("commit") == q["base_commit"]
+              and activation.get("candidate_tree") == q["base_tree"]
+              and activation.get("control_activation_accepted") is True
+              and activation.get("same_attempt_remote_readback_verified") is True
+              and activation.get("protected_refs_unchanged") is True
+              and activation.get("whole_inverse_verified_same_attempt") is True
+              and activation.get("published_ref") == G4_STAGE1_INTERACTIVE_BACKEND_REF,
+              "bounded_g4_intent_activation_acceptance")
+        headers = trusted_git.run_git(target, "cat-file", "commit",
+                                      q["base_commit"]).split("\n\n", 1)[0].splitlines()
+        _need([h for h in headers if h.startswith("parent ")]
+              == ["parent " + G4_INTENT_BASE["commit"]]
+              and [h for h in headers if h.startswith("tree ")]
+              == ["tree " + q["base_tree"]],
+              "bounded_g4_intent_activation_parent")
+    sources = _digest_map(q["source_sha256"], SOURCE_PATHS | CONTROLLER_PATHS,
+                          "bounded_g4_intent_sources")
+    inputs = (CONFIGURATION_PATHS | {STATE, GATES, OVERLAY, AGENTS,
+              G4_STAGE1_INTERACTIVE_SCOPE, G4_STAGE1_SUCCESSOR_SCOPE,
+              G4_STAGE1_SUCCESSOR_TEST, G4_CI_WORKFLOW}
+              | SOURCE_PATHS | CONTROLLER_PATHS | (G4_INTENT_PRODUCT if q["stage"] == "apply" else set()))
+    pins = _digest_map(q["payload_sha256"], inputs, "bounded_g4_intent_payload_paths")
+    payloads = {path: read(target / path, digest) for path, digest in sorted(pins.items())}
+    scope = _json(payloads[G4_STAGE1_SUCCESSOR_SCOPE])
+    validate_g4_intent_scope(scope)
+    _need(scope["source_sha256"] == sources
+          and scope["product_vector"] == q["product_vector"]
+          and scope["mapping_review"] == q["mapping_review"]
+          and payloads[G4_STAGE1_SUCCESSOR_SCOPE] == _canonical(scope) + b"\n"
+          and all(_sha(payloads[p]) == d for p, d in scope["control_sha256"].items()),
+          "bounded_g4_intent_scope_sources")
+    for path, digest in sources.items():
+        candidate = read(source / path, digest)
+        if q["stage"] == "enable" and path in G4_INTENT_CONTROL:
+            _need(candidate == payloads[path], "bounded_g4_intent_control_candidate")
+        else:
+            _need(candidate == trusted_git.run_git_bytes(
+                target, "cat-file", "blob", q["base_commit"] + ":" + path),
+                "bounded_g4_intent_installed_source")
+    for path, pair in q["repair_sha256"].items():
+        _keys(pair, {"before_sha256", "after_sha256"}, "bounded_g4_intent_change_pair")
+        committed = trusted_git.run_git_bytes(target, "ls-tree", "-z",
+                                               q["base_commit"], "--", path)
+        previous = (_sha(trusted_git.run_git_bytes(target, "cat-file", "blob",
+                    q["base_commit"] + ":" + path)) if committed else None)
+        expected = pins[path] if q["stage"] == "enable" else G4_INTENT_PRODUCT_SHA[path]
+        _need(pair == {"before_sha256": previous, "after_sha256": expected}
+              and previous != expected and _sha(payloads[path]) == expected,
+              "bounded_g4_intent_change_preimage")
+        if q["stage"] == "apply":
+            entry = next(x for x in vector["entries"] if x["target"] == path)
+            _need(payloads[path] == read(Path(entry["path"]), expected)
+                  and payloads[path] == read(source / path, expected),
+                  "bounded_g4_intent_product_source")
+    for path in inputs - paths:
+        _need(trusted_git.run_git_bytes(target, "cat-file", "blob",
+              q["base_commit"] + ":" + path) == payloads[path],
+              "bounded_g4_intent_unowned_change")
+    review = _g4_intent_review(read, q["source_review"], evidence_root,
+                               g4_intent_review_subject(q), q["stage"], q["phase"])
+    attested = inputs - paths if q["phase"] == "development" else inputs
+    observation = trusted_git.attest_target_index(
+        target, attested_paths=tuple(sorted(attested)),
+        expected_head=q["expected_head"], expected_index_tree=q["expected_index_tree"],
+        scratch_parent=scratch)
+    if q["phase"] == "development":
+        _need(q["expected_head"] == q["base_commit"]
+              and q["expected_index_tree"] in {q["base_tree"], q["candidate_tree"]},
+              "bounded_g4_intent_development_binding")
+    else:
+        headers = trusted_git.run_git(target, "cat-file", "commit",
+                                      q["expected_head"]).split("\n\n", 1)[0].splitlines()
+        _need([h for h in headers if h.startswith("parent ")] == ["parent " + q["base_commit"]]
+              and [h for h in headers if h.startswith("tree ")] == ["tree " + q["candidate_tree"]]
+              and q["expected_index_tree"] == q["candidate_tree"],
+              "bounded_g4_intent_committed_binding")
+    for path, snapshot in snapshots.items():
+        _need(trusted_git._read_regular_snapshot(path, maximum_bytes=2 * 1024 * 1024)
+              == snapshot, "bounded_g4_intent_snapshot_drift")
+    before = {path: trusted_git.run_git_bytes(target, "cat-file", "blob",
+              G4_INTENT_BASE["commit"] + ":" + path)
+              for path in (STATE, GATES, OVERLAY, AGENTS)}
+    _need(all(payloads[p] == before[p] for p in (STATE, GATES, AGENTS)),
+          "bounded_g4_intent_state_unchanged")
+    return BoundedG1BInputs(q, before, payloads,
+        {"scope": scope, "vector": vector, "mapping": mapping, "review": review},
+        observation)
+
+
+def _validate_g4_intent_loaded_policy(inputs):
+    scope = inputs.evidence["scope"]
+    validate_g4_intent_scope(scope)
+    try:
+        configuration = raisa_policy.validate_recovery_configuration(
+            documents={Path(path).name: inputs.payloads[path] for path in CONFIGURATION_PATHS},
+            expected_sha256={Path(path).name: inputs.binding["payload_sha256"][path]
+                             for path in CONFIGURATION_PATHS},
+            agents_text=inputs.payloads[AGENTS].decode("utf-8"),
+            state=_json(inputs.payloads[STATE]))
+    except (raisa_policy.RaisaPolicyError, configuration_core.ConfigurationError) as error:
+        raise BoundedG1BError(error.reason_code) from error
+    selected = (G4_INTENT_CONTROL if inputs.binding["stage"] == "enable"
+                else G4_INTENT_PRODUCT)
+    return {path: inputs.payloads[path] for path in selected}, configuration

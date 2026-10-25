@@ -1749,6 +1749,12 @@ def g4_stage1_interactive_profile() -> dict:
 
 G4_STAGE1_SUCCESSOR_PRODUCT_PATHS = (
     *G4_STAGE1_INTERACTIVE_PRODUCT_PATHS,
+    "static/demo/stage1-diary-view.js",
+    "stage1_staff_diary_read.py",
+    "stage1_diary_route_guard.py",
+    "tests/test_stage1_staff_diary_read.py",
+    "tests/test_stage1_intent_confirmation.cjs",
+    "tests/test_stage1_diary_view.cjs",
     "docs/demo/stage1-reliability-results.json",
     "tests/test_stage1_reliability_lab.py",
     "run_container_child_once.py",

@@ -1709,6 +1709,12 @@ profiles:
     - tests/test_stage1_demo_voice.py
     - tests/test_stage1_spoken_reply_source.py
     - docs/demo/stage1-local-demo.md
+    - static/demo/stage1-diary-view.js
+    - stage1_staff_diary_read.py
+    - stage1_diary_route_guard.py
+    - tests/test_stage1_staff_diary_read.py
+    - tests/test_stage1_intent_confirmation.cjs
+    - tests/test_stage1_diary_view.cjs
     - docs/demo/stage1-reliability-results.json
     - tests/test_stage1_reliability_lab.py
     - run_container_child_once.py
