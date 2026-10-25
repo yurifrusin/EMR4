@@ -3425,6 +3425,8 @@ def operation_paths(kind: str, binding: dict | None = None) -> frozenset[str]:
         return _g4_compass_entry_paths(binding)
     if kind == G4_CI_KIND:
         return _g4_ci_paths(binding)
+    if kind in G4_STAGE1_SUCCESSOR_KINDS and _is_g4_bureau_binding(binding):
+        return _g4_bureau_paths(kind, binding)
     if kind in G4_STAGE1_SUCCESSOR_KINDS and _is_g4_intent_binding(binding):
         return _g4_intent_paths(kind, binding)
     if kind in G4_STAGE1_SUCCESSOR_KINDS and _is_g4_audit_binding(binding):
@@ -3470,6 +3472,10 @@ def _operation(kind: str, binding: dict | None = None) -> dict:
         return {"paths": paths, "g4_ci_maintenance": True,
                 "profile": raisa_policy.G4_STAGE1_SUCCESSOR_PROFILE,
                 "gate": "G4", "limits": G4_CI_LIMITS}
+    if kind in G4_STAGE1_SUCCESSOR_KINDS and _is_g4_bureau_binding(binding):
+        return {"paths": paths, "g4_selected_bureau_source": True,
+                "profile": raisa_policy.G4_STAGE1_SUCCESSOR_PROFILE,
+                "gate": "G4", "limits": G4_STAGE1_SUCCESSOR_LIMITS}
     if kind in G4_STAGE1_SUCCESSOR_KINDS and _is_g4_intent_binding(binding):
         return {"paths": paths, "g4_intent_diary_source": True,
                 "profile": raisa_policy.G4_STAGE1_SUCCESSOR_PROFILE,
@@ -6370,6 +6376,9 @@ def load_bounded_g1b_inputs(context: BoundedG1BContext) -> BoundedG1BInputs:
     if binding.get("operation_kind") == G4_CI_KIND:
         return _load_g4_ci_inputs(
             context, target, source, evidence_root, scratch, binding, read, snapshots)
+    if binding.get("operation_kind") in G4_STAGE1_SUCCESSOR_KINDS and _is_g4_bureau_binding(binding):
+        return _load_g4_bureau_inputs(
+            context, target, source, evidence_root, scratch, binding, read, snapshots)
     if binding.get("operation_kind") in G4_STAGE1_SUCCESSOR_KINDS and _is_g4_intent_binding(binding):
         return _load_g4_intent_inputs(
             context, target, source, evidence_root, scratch, binding, read, snapshots)
@@ -6552,6 +6561,8 @@ def _validate_loaded_policy(inputs: BoundedG1BInputs) -> tuple[dict[str, bytes],
         return _validate_g4_compass_entry_loaded_policy(inputs)
     if operation.get("g4_ci_maintenance"):
         return _validate_g4_ci_loaded_policy(inputs)
+    if operation.get("g4_selected_bureau_source"):
+        return _validate_g4_bureau_loaded_policy(inputs)
     if operation.get("g4_intent_diary_source"):
         return _validate_g4_intent_loaded_policy(inputs)
     if operation.get("g4_audit_source"):
@@ -10736,6 +10747,297 @@ def _validate_g4_intent_loaded_policy(inputs):
                 else G4_INTENT_PRODUCT)
     return {path: inputs.payloads[path] for path in selected}, configuration
 
+
+G4_BUREAU_SCHEMA = "ariadne.g4_stage1_selected_bureau_operation_binding.v1"
+G4_BUREAU_SCOPE_SCHEMA = "ariadne.g4_stage1_successor_entry_scope.v8"
+G4_BUREAU_BASE = {"commit": "f592e4d99c34243996f6bf5674432b2eb6f857f0",
+                  "tree": "8e27672aea4ec340b2c58f17cae87b0c39a4c38f"}
+G4_BUREAU_ROOT = G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT / "selected-context-bureau-successor-v1"
+G4_BUREAU_VECTOR = Path("C:/Users/there/EMR4-tools/selected-context-bureau-candidate-v2/product-vector-v2.json")
+G4_BUREAU_VECTOR_SHA = "8973bb9bd9d2431d3bcda3c1ff0698df5703dc1de709bf63991690050fa6096c"
+G4_BUREAU_MAPPING = Path("C:/Users/there/EMR4-tools/selected-context-bureau-candidate-v2/independent-combined-source-mapping-binding-v2.json")
+G4_BUREAU_MAPPING_SHA = "95d274ddcc574bb4af67e114549fe3d5caed8444727945fd6ff9ae615acdf5e1"
+G4_BUREAU_CONTROL = frozenset({G4_AUDIT_CODE, "orchestration_harness/raisa_policy.py",
+    OVERLAY, G4_STAGE1_SUCCESSOR_SCOPE, G4_STAGE1_SUCCESSOR_TEST})
+G4_BUREAU_PRODUCT_SHA = {
+    "app/services/reception_one_proposal_runtime.py": "2e3687de5cce383351e6bb59ea37bd13653c2a1349fae1b6bbcc0ddce6fb1fcb",
+    "scripts/reception_one_bureau_typed_plan_protocol.py": "406a5b8bcaa282b68699709203342d8e108936b83644c9e7b7e0359a38bae19d",
+    "orchestration/continuity/reception-one-bureau-typed-plan-protocol/operator-catalog.json": "fb964208477f12f084aac8750fe25e7f2c5a5d648ab62d29f521ee5d8019f579",
+    "tests/test_reception_one_selected_context.py": "1ea15b944da52c7b07a7040c00d3b09cae5a1cec727abc645920f80296902a55",
+    "stage1_demo_http.py": "c594c1c0bfac72c63934b64c76d3f767ad9f5e1f1c3508eb5ad2d236de9b0528",
+    "static/demo/stage1-interactive.js": "ccfcb327b82642017760be66e3fcaa2416f4258113d924d713fb3eb3252d2eca",
+    "tests/test_stage1_bureau_projection.py": "dd9e44ecf02b3c276a33c325dd4d99639efb47fca08f5388afcfe38835e01493",
+    "tests/test_stage1_bureau_suggestion.cjs": "3e5e580240a98425429db3772116515607b6bfb87af5f4a52dfd46ef38ffef7c",
+}
+G4_BUREAU_PRODUCT = frozenset(G4_BUREAU_PRODUCT_SHA)
+G4_BUREAU_BINDING_KEYS = {
+    "schema_version", "operation_id", "operation_kind", "stage", "phase",
+    "base_commit", "base_tree", "expected_head", "expected_index_tree",
+    "candidate_tree", "source_sha256", "payload_sha256", "repair_sha256",
+    "source_review", "activation_acceptance", "product_vector",
+    "mapping_review"}
+G4_BUREAU_SCOPE_KEYS = {
+    "schema_version", "recorded_at", "selected_base", "active_profile",
+    "allowed_task_kind", "allowed_paths", "allowed_effects", "runtime_binding_required",
+    "admission_grants_runtime_authority", "voice_activation", "excluded_effects",
+    "source_sha256", "control_sha256", "product_sha256", "product_vector",
+    "mapping_review", "predecessor_scope"}
+
+
+def _is_g4_bureau_binding(binding):
+    return type(binding) is dict and binding.get("schema_version") == G4_BUREAU_SCHEMA
+
+
+def _g4_bureau_paths(kind, binding):
+    _need(kind in G4_STAGE1_SUCCESSOR_KINDS and _is_g4_bureau_binding(binding)
+          and binding.get("operation_kind") == kind
+          and binding.get("stage") in {"enable", "apply"}
+          and ((kind == "enable_g4_stage1_successor") == (binding["stage"] == "enable"))
+          and type(binding.get("repair_sha256")) is dict,
+          "bounded_g4_bureau_binding_kind")
+    paths = G4_BUREAU_CONTROL if binding["stage"] == "enable" else G4_BUREAU_PRODUCT
+    _need(set(binding["repair_sha256"]) == paths, "bounded_g4_bureau_changed_paths")
+    return paths
+
+
+def g4_bureau_review_subject(q):
+    return _sha(_canonical({key: q[key] for key in (
+        "schema_version", "operation_id", "operation_kind", "stage", "phase",
+        "base_commit", "base_tree", "expected_head", "expected_index_tree",
+        "candidate_tree", "source_sha256", "payload_sha256", "repair_sha256",
+        "activation_acceptance", "product_vector", "mapping_review")}))
+
+
+def validate_g4_bureau_scope(scope):
+    _keys(scope, G4_BUREAU_SCOPE_KEYS, "bounded_g4_bureau_scope_schema")
+    _need(G4_BUREAU_VECTOR_SHA != "0" * 64
+          and G4_BUREAU_MAPPING_SHA != "0" * 64,
+          "bounded_g4_bureau_inputs_unfrozen")
+    _need(scope["schema_version"] == G4_BUREAU_SCOPE_SCHEMA
+          and scope["selected_base"] == G4_BUREAU_BASE
+          and _g4_audit_timestamp(scope["recorded_at"])
+          and scope["active_profile"] == raisa_policy.G4_STAGE1_SUCCESSOR_PROFILE
+          and scope["allowed_task_kind"] == "g4_stage1_local_successor"
+          and scope["allowed_paths"] == sorted(G4_BUREAU_PRODUCT)
+          and scope["allowed_effects"] == sorted(EFFECTS | {"product_behavior_change"})
+          and scope["runtime_binding_required"] is True
+          and scope["admission_grants_runtime_authority"] is False
+          and scope["voice_activation"] is False
+          and scope["excluded_effects"] == [
+              "unreviewed_application_or_database_runtime",
+              "unreviewed_browser_or_microphone_runtime",
+              "unreviewed_voice_child_or_network_egress", "provider_invocation",
+              "real_data_access", "protected_ref_movement", "deployment",
+              "public_listener"]
+          and scope["product_sha256"] == G4_BUREAU_PRODUCT_SHA
+          and scope["product_vector"] == {"path": G4_BUREAU_VECTOR.as_posix(),
+                                           "sha256": G4_BUREAU_VECTOR_SHA}
+          and scope["mapping_review"] == {"path": G4_BUREAU_MAPPING.as_posix(),
+                                           "sha256": G4_BUREAU_MAPPING_SHA}
+          and scope["predecessor_scope"] == {"sha256": "f2c85be2e803cf1d051de692d09de4eb98789aa1ce47964c8990146f0f29a607"},
+          "bounded_g4_bureau_scope_boundary")
+    sources = _digest_map(scope["source_sha256"], SOURCE_PATHS | CONTROLLER_PATHS,
+                          "bounded_g4_bureau_sources")
+    control = _digest_map(scope["control_sha256"],
+                          G4_BUREAU_CONTROL - {G4_STAGE1_SUCCESSOR_SCOPE},
+                          "bounded_g4_bureau_control_sources")
+    _need(all(sources[p] == control[p] for p in (G4_AUDIT_CODE,
+              "orchestration_harness/raisa_policy.py")),
+          "bounded_g4_bureau_source_vector")
+    return sources
+
+
+def _g4_bureau_review(read, row, evidence_root, subject, stage, phase):
+    _keys(row, {"path", "sha256"}, "bounded_g4_bureau_review_row")
+    path = G4_BUREAU_ROOT / "entry-admission-v1" / (
+        "independent-" + stage + "-" + phase + "-subject-review-v1.json")
+    _need(Path(row["path"]) == path and path.is_relative_to(evidence_root),
+          "bounded_g4_bureau_review_path")
+    review = _json(read(path, row["sha256"]))
+    _need(review.get("schema") == "emr4.g4_operation_review.v1"
+          and review.get("status") == "PASS"
+          and review.get("verdict") == "PASS_G4_STAGE1_SELECTED_BUREAU_EXACT_ADMISSION_SUBJECT"
+          and review.get("subject_sha256") == subject
+          and review.get("independent") is True
+          and review.get("implementation_authorship") is False
+          and review.get("blocking_findings") == []
+          and type(review.get("reviewer_agent")) is str
+           and review["reviewer_agent"] not in {"", "/root/selected_bureau_entry_author"}
+          and review.get("stage") == stage and review.get("phase") == phase,
+          "bounded_g4_bureau_independent_subject")
+    return review
+
+
+def _load_g4_bureau_inputs(context, target, source, evidence_root, scratch,
+                           q, read, snapshots):
+    _keys(q, G4_BUREAU_BINDING_KEYS, "bounded_g4_bureau_binding_schema")
+    _need(_is_g4_bureau_binding(q) and q["phase"] in {"development", "pre-push", "post-push"}
+          and type(q["operation_id"]) is str
+          and re.fullmatch(r"[a-z0-9][a-z0-9-]{1,79}", q["operation_id"]),
+          "bounded_g4_bureau_binding_version")
+    for key in ("base_commit", "base_tree", "expected_head",
+                "expected_index_tree", "candidate_tree"):
+        _need(type(q[key]) is str and re.fullmatch(r"[0-9a-f]{40}", q[key]),
+              "bounded_g4_bureau_git_identity")
+    paths = _g4_bureau_paths(q["operation_kind"], q)
+    _need(q["product_vector"] == {"path": G4_BUREAU_VECTOR.as_posix(),
+                                    "sha256": G4_BUREAU_VECTOR_SHA}
+          and q["mapping_review"] == {"path": G4_BUREAU_MAPPING.as_posix(),
+                                        "sha256": G4_BUREAU_MAPPING_SHA},
+          "bounded_g4_bureau_product_pins")
+    _need(G4_BUREAU_VECTOR_SHA != "0" * 64
+          and G4_BUREAU_MAPPING_SHA != "0" * 64,
+          "bounded_g4_bureau_inputs_unfrozen")
+    vector = _json(read(G4_BUREAU_VECTOR, G4_BUREAU_VECTOR_SHA))
+    _need(vector.get("selected_base") == G4_BUREAU_BASE
+          and {entry["target"]: entry["sha256"] for entry in vector["entries"]}
+              == G4_BUREAU_PRODUCT_SHA
+          and len(vector["entries"]) == len(G4_BUREAU_PRODUCT),
+          "bounded_g4_bureau_vector")
+    mapping = _json(read(G4_BUREAU_MAPPING, G4_BUREAU_MAPPING_SHA))
+    _need(mapping.get("schema") == "emr4.stage1_selected_bureau_combined_source_mapping_review.v1"
+          and mapping.get("status") == "PASS"
+           and mapping.get("verdict") == "PASS_G4_STAGE1_SELECTED_BUREAU_EXACT_MAPPING"
+          and mapping.get("product_vector_sha256") == G4_BUREAU_VECTOR_SHA
+          and type(mapping.get("reviewer_agent")) is str
+           and mapping["reviewer_agent"] not in {"", "/root/selected_bureau_entry_author"}
+          and mapping.get("physical_target_rows_checked") == len(G4_BUREAU_PRODUCT)
+          and mapping.get("independent") is True
+          and mapping.get("implementation_authorship") is False
+          and mapping.get("blocking_findings") == [],
+          "bounded_g4_bureau_mapping_source_only")
+    _need(_sha(trusted_git.run_git_bytes(target, "cat-file", "blob",
+          G4_BUREAU_BASE["commit"] + ":" + G4_STAGE1_SUCCESSOR_SCOPE))
+          == "f2c85be2e803cf1d051de692d09de4eb98789aa1ce47964c8990146f0f29a607"
+          and trusted_git.run_git(target, "rev-parse",
+              G4_BUREAU_BASE["commit"] + "^{tree}") == G4_BUREAU_BASE["tree"],
+          "bounded_g4_bureau_predecessor")
+    if q["stage"] == "enable":
+        _need(q["base_commit"] == G4_BUREAU_BASE["commit"]
+              and q["base_tree"] == G4_BUREAU_BASE["tree"]
+              and q["activation_acceptance"] is None,
+              "bounded_g4_bureau_enable_base")
+    else:
+        _keys(q["activation_acceptance"], {"path", "sha256"},
+              "bounded_g4_bureau_activation_row")
+        activation_path = G4_BUREAU_ROOT / "entry-admission-v1/independent-enable-push-effect-review-v1.json"
+        _need(Path(q["activation_acceptance"]["path"]) == activation_path,
+              "bounded_g4_bureau_activation_path")
+        activation = _json(read(activation_path, q["activation_acceptance"]["sha256"]))
+        _need(activation.get("status") == "PASS"
+              and activation.get("verdict") == "PASS_G4_STAGE1_SELECTED_BUREAU_CONTROL_PUBLICATION_EFFECT"
+              and type(activation.get("reviewer_agent")) is str
+               and activation["reviewer_agent"] not in {"", "/root/selected_bureau_entry_author"}
+              and activation.get("independent") is True
+              and activation.get("implementation_authorship") is False
+              and activation.get("blocking_findings") == []
+              and activation.get("stage") == "enable"
+              and activation.get("phase") == "push"
+              and activation.get("base") == G4_BUREAU_BASE["commit"]
+              and activation.get("commit") == q["base_commit"]
+              and activation.get("candidate_tree") == q["base_tree"]
+              and activation.get("control_activation_accepted") is True
+              and activation.get("same_attempt_remote_readback_verified") is True
+              and activation.get("protected_refs_unchanged") is True
+              and activation.get("whole_inverse_verified_same_attempt") is True
+              and activation.get("published_ref") == G4_STAGE1_INTERACTIVE_BACKEND_REF,
+              "bounded_g4_bureau_activation_acceptance")
+        headers = trusted_git.run_git(target, "cat-file", "commit",
+                                      q["base_commit"]).split("\n\n", 1)[0].splitlines()
+        _need([h for h in headers if h.startswith("parent ")]
+              == ["parent " + G4_BUREAU_BASE["commit"]]
+              and [h for h in headers if h.startswith("tree ")]
+              == ["tree " + q["base_tree"]],
+              "bounded_g4_bureau_activation_parent")
+    sources = _digest_map(q["source_sha256"], SOURCE_PATHS | CONTROLLER_PATHS,
+                          "bounded_g4_bureau_sources")
+    inputs = (CONFIGURATION_PATHS | {STATE, GATES, OVERLAY, AGENTS,
+              G4_STAGE1_INTERACTIVE_SCOPE, G4_STAGE1_SUCCESSOR_SCOPE,
+              G4_STAGE1_SUCCESSOR_TEST, G4_CI_WORKFLOW}
+              | SOURCE_PATHS | CONTROLLER_PATHS | (G4_BUREAU_PRODUCT if q["stage"] == "apply" else set()))
+    pins = _digest_map(q["payload_sha256"], inputs, "bounded_g4_bureau_payload_paths")
+    payloads = {path: read(target / path, digest) for path, digest in sorted(pins.items())}
+    scope = _json(payloads[G4_STAGE1_SUCCESSOR_SCOPE])
+    validate_g4_bureau_scope(scope)
+    _need(scope["source_sha256"] == sources
+          and scope["product_vector"] == q["product_vector"]
+          and scope["mapping_review"] == q["mapping_review"]
+          and payloads[G4_STAGE1_SUCCESSOR_SCOPE] == _canonical(scope) + b"\n"
+          and all(_sha(payloads[p]) == d for p, d in scope["control_sha256"].items()),
+          "bounded_g4_bureau_scope_sources")
+    for path, digest in sources.items():
+        candidate = read(source / path, digest)
+        if q["stage"] == "enable" and path in G4_BUREAU_CONTROL:
+            _need(candidate == payloads[path], "bounded_g4_bureau_control_candidate")
+        else:
+            _need(candidate == trusted_git.run_git_bytes(
+                target, "cat-file", "blob", q["base_commit"] + ":" + path),
+                "bounded_g4_bureau_installed_source")
+    for path, pair in q["repair_sha256"].items():
+        _keys(pair, {"before_sha256", "after_sha256"}, "bounded_g4_bureau_change_pair")
+        committed = trusted_git.run_git_bytes(target, "ls-tree", "-z",
+                                               q["base_commit"], "--", path)
+        previous = (_sha(trusted_git.run_git_bytes(target, "cat-file", "blob",
+                    q["base_commit"] + ":" + path)) if committed else None)
+        expected = pins[path] if q["stage"] == "enable" else G4_BUREAU_PRODUCT_SHA[path]
+        _need(pair == {"before_sha256": previous, "after_sha256": expected}
+              and previous != expected and _sha(payloads[path]) == expected,
+              "bounded_g4_bureau_change_preimage")
+        if q["stage"] == "apply":
+            entry = next(x for x in vector["entries"] if x["target"] == path)
+            _need(payloads[path] == read(Path(entry["path"]), expected)
+                  and payloads[path] == read(source / path, expected),
+                  "bounded_g4_bureau_product_source")
+    for path in inputs - paths:
+        _need(trusted_git.run_git_bytes(target, "cat-file", "blob",
+              q["base_commit"] + ":" + path) == payloads[path],
+              "bounded_g4_bureau_unowned_change")
+    review = _g4_bureau_review(read, q["source_review"], evidence_root,
+                               g4_bureau_review_subject(q), q["stage"], q["phase"])
+    attested = inputs - paths if q["phase"] == "development" else inputs
+    observation = trusted_git.attest_target_index(
+        target, attested_paths=tuple(sorted(attested)),
+        expected_head=q["expected_head"], expected_index_tree=q["expected_index_tree"],
+        scratch_parent=scratch)
+    if q["phase"] == "development":
+        _need(q["expected_head"] == q["base_commit"]
+              and q["expected_index_tree"] in {q["base_tree"], q["candidate_tree"]},
+              "bounded_g4_bureau_development_binding")
+    else:
+        headers = trusted_git.run_git(target, "cat-file", "commit",
+                                      q["expected_head"]).split("\n\n", 1)[0].splitlines()
+        _need([h for h in headers if h.startswith("parent ")] == ["parent " + q["base_commit"]]
+              and [h for h in headers if h.startswith("tree ")] == ["tree " + q["candidate_tree"]]
+              and q["expected_index_tree"] == q["candidate_tree"],
+              "bounded_g4_bureau_committed_binding")
+    for path, snapshot in snapshots.items():
+        _need(trusted_git._read_regular_snapshot(path, maximum_bytes=2 * 1024 * 1024)
+              == snapshot, "bounded_g4_bureau_snapshot_drift")
+    before = {path: trusted_git.run_git_bytes(target, "cat-file", "blob",
+              G4_BUREAU_BASE["commit"] + ":" + path)
+              for path in (STATE, GATES, OVERLAY, AGENTS)}
+    _need(all(payloads[p] == before[p] for p in (STATE, GATES, AGENTS)),
+          "bounded_g4_bureau_state_unchanged")
+    return BoundedG1BInputs(q, before, payloads,
+        {"scope": scope, "vector": vector, "mapping": mapping, "review": review},
+        observation)
+
+
+def _validate_g4_bureau_loaded_policy(inputs):
+    scope = inputs.evidence["scope"]
+    validate_g4_bureau_scope(scope)
+    try:
+        configuration = raisa_policy.validate_recovery_configuration(
+            documents={Path(path).name: inputs.payloads[path] for path in CONFIGURATION_PATHS},
+            expected_sha256={Path(path).name: inputs.binding["payload_sha256"][path]
+                             for path in CONFIGURATION_PATHS},
+            agents_text=inputs.payloads[AGENTS].decode("utf-8"),
+            state=_json(inputs.payloads[STATE]))
+    except (raisa_policy.RaisaPolicyError, configuration_core.ConfigurationError) as error:
+        raise BoundedG1BError(error.reason_code) from error
+    selected = (G4_BUREAU_CONTROL if inputs.binding["stage"] == "enable"
+                else G4_BUREAU_PRODUCT)
+    return {path: inputs.payloads[path] for path in selected}, configuration
 
 # A separate G4 source-entry operation. The active successor profile and its v7
 # Diary scope stay unchanged. This admits reviewed source edits, never a tick.

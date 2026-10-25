@@ -1,5 +1,6 @@
 """Focused successor policy checks using the exact permitted UI12 prestate."""
 import copy
+import base64
 import hashlib
 import json
 from pathlib import Path
@@ -101,13 +102,117 @@ def test_path_selection_is_exact_and_old_profile_is_preserved():
     assert len(raisa_policy.g4_stage1_interactive_profile()["allowed_paths"]) == 12
     assert set(bounded_g1b.G4_STAGE1_SUCCESSOR_PRODUCT_AFTERIMAGES) <= set(
         raisa_policy.g4_stage1_successor_profile()["allowed_paths"])
-    assert len(raisa_policy.g4_stage1_successor_profile()["allowed_paths"]) == 22
+    assert len(raisa_policy.g4_stage1_successor_profile()["allowed_paths"]) == 28
 
 
 def _intention_scope():
+    raw = base64.b64decode(
+        "eyJhY3RpdmVfcHJvZmlsZSI6Ikc0X1NUQUdFMV9MT0NBTF9TVUNDRVNTT1IiLCJhZG1pc3Npb25fZ3JhbnRzX3J1bnRpbWVfYXV0"
+        "aG9yaXR5IjpmYWxzZSwiYWxsb3dlZF9lZmZlY3RzIjpbImNvbnRyb2xfcGxhbmVfZWRpdCIsInByb2R1Y3RfYmVoYXZpb3JfY2hh"
+        "bmdlIiwicmVwb3NpdG9yeV9yZWFkIiwidGFza19icmFuY2hfY29tbWl0IiwidGFza19icmFuY2hfcHVzaCJdLCJhbGxvd2VkX3Bh"
+        "dGhzIjpbInN0YWdlMV9kZW1vX2FkYXB0ZXJfY29yZS5weSIsInN0YWdlMV9kZW1vX2h0dHAucHkiLCJzdGFnZTFfZGlhcnlfcm91"
+        "dGVfZ3VhcmQucHkiLCJzdGFnZTFfc3RhZmZfZGlhcnlfcmVhZC5weSIsInN0YXRpYy9kZW1vL3N0YWdlMS1kaWFyeS12aWV3Lmpz"
+        "Iiwic3RhdGljL2RlbW8vc3RhZ2UxLWludGVyYWN0aXZlLmNzcyIsInN0YXRpYy9kZW1vL3N0YWdlMS1pbnRlcmFjdGl2ZS5odG1s"
+        "Iiwic3RhdGljL2RlbW8vc3RhZ2UxLWludGVyYWN0aXZlLmpzIiwidGVzdHMvdGVzdF9zdGFnZTFfZGlhcnlfdmlldy5janMiLCJ0"
+        "ZXN0cy90ZXN0X3N0YWdlMV9pbnRlbnRfY29uZmlybWF0aW9uLmNqcyIsInRlc3RzL3Rlc3Rfc3RhZ2UxX3N0YWZmX2RpYXJ5X3Jl"
+        "YWQucHkiXSwiYWxsb3dlZF90YXNrX2tpbmQiOiJnNF9zdGFnZTFfbG9jYWxfc3VjY2Vzc29yIiwiY29udHJvbF9zaGEyNTYiOnsi"
+        "b3JjaGVzdHJhdGlvbi9oYXJuZXNzX3NldHRpbmdzL3Byb2dyYW1tZV9yZWNvdmVyeS55YW1sIjoiNTNhOGM1NzI1MWY4ZmY3M2Nm"
+        "ZjI1OGY5NWFiYTJlY2ZmNDFlYTgwNTIzNWIwODM4YmU0YzBiY2ZlODQ3MWE4NiIsIm9yY2hlc3RyYXRpb25faGFybmVzcy9ib3Vu"
+        "ZGVkX2cxYi5weSI6IjY0NGVhNWVkMWI0NDg3Y2Y2YmNlMDkwZjVjMDk3ODZlODljNzQyYTdmZTY0Nzg3OTMyOGRjMTljY2MyYTBi"
+        "MmMiLCJvcmNoZXN0cmF0aW9uX2hhcm5lc3MvcmFpc2FfcG9saWN5LnB5IjoiMTBlZTg4NGEwNGYwMzM5MzI3ZDM2NTNmYjMyMzFi"
+        "MDNlMDhiMDY0MTYxYjIyM2JlZTE1NWE3NDM4YTRjZWY0MSIsInRlc3RzL3Rlc3RfZzRfc3RhZ2UxX3N1Y2Nlc3Nvcl9lbnRyeS5w"
+        "eSI6IjA1MTg0YzA2NWUyNmFkYmM2YzA1OTYwMGU1OWJhZTAxNjBmMjQ4OTM2NTY0MjljODk4MjJkYTRhYzVlMWI1MGEifSwiZXhj"
+        "bHVkZWRfZWZmZWN0cyI6WyJ1bnJldmlld2VkX2FwcGxpY2F0aW9uX29yX2RhdGFiYXNlX3J1bnRpbWUiLCJ1bnJldmlld2VkX2Jy"
+        "b3dzZXJfb3JfbWljcm9waG9uZV9ydW50aW1lIiwidW5yZXZpZXdlZF92b2ljZV9jaGlsZF9vcl9uZXR3b3JrX2VncmVzcyIsInBy"
+        "b3ZpZGVyX2ludm9jYXRpb24iLCJyZWFsX2RhdGFfYWNjZXNzIiwicHJvdGVjdGVkX3JlZl9tb3ZlbWVudCIsImRlcGxveW1lbnQi"
+        "LCJwdWJsaWNfbGlzdGVuZXIiXSwibWFwcGluZ19yZXZpZXciOnsicGF0aCI6IkM6L1VzZXJzL3RoZXJlL0VNUjQtbWlncmF0aW9u"
+        "LzIwMjYwOTExLXYxL2N1cnJlbnQtY29udHJvbC1yZXBhaXItMjAyNjA5MTItdjEvZGVtby1sZWQtc3RhZ2UxLTIwMjYxMDEyLXYy"
+        "L3N0YWdlMS1tb2NrLXZvaWNlLWRhdGFiYXNlLWludGVncmF0aW9uLXYxL2ludGVyYWN0aXZlLXJ1bnRpbWUtdjEvcmVjZXB0aW9u"
+        "LWludGVudC11aS12MS9kaWFyeS1yZWFkLXJlY29ubmVjdGlvbi12MS9pbmRlcGVuZGVudC1wcm9kdWN0LW1hcHBpbmctcmV2aWV3"
+        "LXYyLmpzb24iLCJzaGEyNTYiOiI1OGFiNDRmYzAwNzRiNDUzMWI1ODQxOGY2YmM2MDNlOTA4NGQ2YTNmMzIwNjU3ZDI5MTc3YTBh"
+        "NDkzNTZkZGU0In0sInByZWRlY2Vzc29yX3Njb3BlIjp7InNoYTI1NiI6ImZjOTM3YzJlMWYzMDllZjBiMGEyMzM1YWYwNzY4ZDg4"
+        "YTAwZTFhZTMzN2FjZjZlODZjZDljMjIxOGQ3MGI5YzYifSwicHJvZHVjdF9zaGEyNTYiOnsic3RhZ2UxX2RlbW9fYWRhcHRlcl9j"
+        "b3JlLnB5IjoiNmIzZGNkZjVlNGVlYmQzZmUwMjI1ZDdkYzcxYjRjYTU2OTk3M2I2NWU4ZmUwNTQwZmZjNGUxZjk3YjA2ODcxNiIs"
+        "InN0YWdlMV9kZW1vX2h0dHAucHkiOiIzYWM4MTE5ZmNiY2VhNzY0NjUyNjEwODllNWU5MjVkOGQ0MGQ1M2VhNjcyNzc4Yjg2MGI4"
+        "OGM4YmQxN2M1OGY5Iiwic3RhZ2UxX2RpYXJ5X3JvdXRlX2d1YXJkLnB5IjoiOTNmOGQ0NGVlYmM5ZDdhODUyMTczNjdjYTdmZGE1"
+        "MmIyY2RhNDgzYWE3MjdjZDE1MDY2NzY0OTI3YzhiYzljMiIsInN0YWdlMV9zdGFmZl9kaWFyeV9yZWFkLnB5IjoiOTAzNzhmYWJk"
+        "MDAyNjA5YmE4NWJjMTk2MTZkZjFlMmQ4MjI1ZTZhYmM3NmQ3ZDViYzM5M2VmMDFmMWYyOWRmYiIsInN0YXRpYy9kZW1vL3N0YWdl"
+        "MS1kaWFyeS12aWV3LmpzIjoiYzdjODkwYjBlZDBmZWQyZjJkM2NlMDkyZWY5NGE5MzE0MzUzNTZkZTQ4NTNjOTQzOTBjZjM5ZDg5"
+        "YTA0ZTg2MiIsInN0YXRpYy9kZW1vL3N0YWdlMS1pbnRlcmFjdGl2ZS5jc3MiOiIwYjRmYTk1NjcwNjYwMzhiYWY2ZGE1MTEyZmU1"
+        "NTJjNjgzN2U5NzMxNjg3MzllZTI3YTg5YTBjMjRjOWE5NGY3Iiwic3RhdGljL2RlbW8vc3RhZ2UxLWludGVyYWN0aXZlLmh0bWwi"
+        "OiI3NDI1NTI5MDNmYzRmNTQxMjlmNzdkMDI1MjUzMWY2MjVlN2M3M2EzMDg2N2E1OTAzMzE5NGUzZjkzOTcwY2YyIiwic3RhdGlj"
+        "L2RlbW8vc3RhZ2UxLWludGVyYWN0aXZlLmpzIjoiMjg2YzcwOGQ1Yzc5YjQ3MjMyYzUyZTg5OGM5YTRmOWE3NTQ3YmE5MTA5NTk5"
+        "ZTZkYWI4NTdiN2Q1OWRhN2NkMCIsInRlc3RzL3Rlc3Rfc3RhZ2UxX2RpYXJ5X3ZpZXcuY2pzIjoiMTdiYzdkODYyOWJmYWQ4OTgx"
+        "N2U4NzljMWE1ZmJlYWVhOTk0M2MxNDU1ZTRjMDg3NzQ3M2U2MzQzZDFlZjJkYSIsInRlc3RzL3Rlc3Rfc3RhZ2UxX2ludGVudF9j"
+        "b25maXJtYXRpb24uY2pzIjoiZDEyMmI3YWZjNTZiYmQwOTRjNTQ2M2I4NWRjNGU5NDM1MGZkZjYyYTBjODhhMDM2YmJhMGU1Njdl"
+        "ZmM3ZDFiMCIsInRlc3RzL3Rlc3Rfc3RhZ2UxX3N0YWZmX2RpYXJ5X3JlYWQucHkiOiI2MjU3NTYwZmQ4MTM3MTFiNmQ3MzRhN2Q4"
+        "OTNmNTQ4YjRmNGIwZTZlYzA3Mzc5Y2Y5ODVmZWIwZGMwNWI5YTc4In0sInByb2R1Y3RfdmVjdG9yIjp7InBhdGgiOiJDOi9Vc2Vy"
+        "cy90aGVyZS9FTVI0LW1pZ3JhdGlvbi8yMDI2MDkxMS12MS9jdXJyZW50LWNvbnRyb2wtcmVwYWlyLTIwMjYwOTEyLXYxL2RlbW8t"
+        "bGVkLXN0YWdlMS0yMDI2MTAxMi12Mi9zdGFnZTEtbW9jay12b2ljZS1kYXRhYmFzZS1pbnRlZ3JhdGlvbi12MS9pbnRlcmFjdGl2"
+        "ZS1ydW50aW1lLXYxL3JlY2VwdGlvbi1pbnRlbnQtdWktdjEvZGlhcnktcmVhZC1yZWNvbm5lY3Rpb24tdjEvcHJvZHVjdC12ZWN0"
+        "b3ItdjIuanNvbiIsInNoYTI1NiI6IjFjMGY3YjUxNDNiZDE1MzdiYTlkMmQ3NWQyNzA1YjEwYjVlNDQ3OGFhNWU1YjBkY2YzYzBk"
+        "NDVlNWVmYTQyNGQifSwicmVjb3JkZWRfYXQiOiIyMDI2LTEwLTI0VDEyOjQ4OjE1Ljc1Nzg2MyswMDowMCIsInJ1bnRpbWVfYmlu"
+        "ZGluZ19yZXF1aXJlZCI6dHJ1ZSwic2NoZW1hX3ZlcnNpb24iOiJhcmlhZG5lLmc0X3N0YWdlMV9zdWNjZXNzb3JfZW50cnlfc2Nv"
+        "cGUudjciLCJzZWxlY3RlZF9iYXNlIjp7ImNvbW1pdCI6IjFhMGEwZTJjNWY1OGMzNDJmOTAxMjU4NDU1YjZiZjRmNGQ3NjIxMWUi"
+        "LCJ0cmVlIjoiNzYyMzU4Y2UzY2U1M2M0ODhlNjZkMGZiYjFjN2E2ZDIyNDEzYTg5MyJ9LCJzb3VyY2Vfc2hhMjU2Ijp7Im9yY2hl"
+        "c3RyYXRpb25faGFybmVzcy9ib3VuZGVkX2cxYi5weSI6IjY0NGVhNWVkMWI0NDg3Y2Y2YmNlMDkwZjVjMDk3ODZlODljNzQyYTdm"
+        "ZTY0Nzg3OTMyOGRjMTljY2MyYTBiMmMiLCJvcmNoZXN0cmF0aW9uX2hhcm5lc3MvY29uZmlndXJhdGlvbl9jb3JlLnB5IjoiZjdi"
+        "YTdhODBlYjBhNTkwZjlmYjcxYjg2NGU2YzFmOWY0MzI0MWQ5ZjdkNzBhMzhkYTY3YTkyNDNmZWEyMDhlNSIsIm9yY2hlc3RyYXRp"
+        "b25faGFybmVzcy9waW5uZWRfcHJvZ3JhbW1lX2dhdGVrZWVwZXIucHkiOiJjMWZlYTlhMjg0OTA2OGVkOGU4N2RiZTFlN2NlYzFj"
+        "YzdlNzYyZmEyYmM4ODc2ZmMzMmJiZGE4MGQyMjZjZjM5Iiwib3JjaGVzdHJhdGlvbl9oYXJuZXNzL3Byb2dyYW1tZV9hZG1pc3Np"
+        "b24ucHkiOiJhYzgxNmE4YTc5YjJkODIyMmZhMzU3Nzc3YzA3NTk1MDkyN2U4NmNmMzBjOGE1YjI1ZmZkMDhhNDc0MDUyMTgxIiwi"
+        "b3JjaGVzdHJhdGlvbl9oYXJuZXNzL3JhaXNhX3BvbGljeS5weSI6IjEwZWU4ODRhMDRmMDMzOTMyN2QzNjUzZmIzMjMxYjAzZTA4"
+        "YjA2NDE2MWIyMjNiZWUxNTVhNzQzOGE0Y2VmNDEiLCJvcmNoZXN0cmF0aW9uX2hhcm5lc3MvdHJ1c3RlZF9naXQucHkiOiI0YTg1"
+        "NmJmZmUyYjY4ZDdjN2UxODc1MTUyNjI5YzkwMjRhMzI2NzliNTlkOWIxZWQ4MzAxYzM2OGQ0MWZmNTI3Iiwic2NyaXB0cy9yYWlz"
+        "YV9hcmlhZG5lX3JlY292ZXJ5X3ByZWZsaWdodC5weSI6ImVkZmQzN2IzMDY3M2I4NTQ0ZDMwOWI1MzJjOTViM2ZkN2MyMGZmNTky"
+        "ODgwYThhMDIzNWRmZGU2Y2ZjOGU3ZTQiLCJ0ZXN0cy90ZXN0X2JvdW5kZWRfZzFiLnB5IjoiYmIxYmU4NmNhMzkyMzJmZWEzMGMx"
+        "ZWE4NGNkZmIxMTQ0MjhkNTdiZTBmOGY2N2JmN2U4NmRhYWIwYmE3M2JjNSJ9LCJ2b2ljZV9hY3RpdmF0aW9uIjpmYWxzZX0K"
+    )
+    assert hashlib.sha256(raw).hexdigest() == "f2c85be2e803cf1d051de692d09de4eb98789aa1ce47964c8990146f0f29a607"
+    return json.loads(raw)
+
+
+def _bureau_scope():
     path = (Path(__file__).resolve().parents[1] /
             bounded_g1b.G4_STAGE1_SUCCESSOR_SCOPE)
     return json.loads(path.read_bytes())
+
+
+def test_selected_bureau_successor_exact_paths_and_unfrozen_inputs():
+    scope = _bureau_scope()
+    assert bounded_g1b.G4_INTENT_SCOPE_SCHEMA == "ariadne.g4_stage1_successor_entry_scope.v7"
+    assert bounded_g1b.G4_BUREAU_SCOPE_SCHEMA == "ariadne.g4_stage1_successor_entry_scope.v8"
+    assert bounded_g1b.G4_BUREAU_BASE == {
+        "commit": "f592e4d99c34243996f6bf5674432b2eb6f857f0",
+        "tree": "8e27672aea4ec340b2c58f17cae87b0c39a4c38f",
+    }
+    expected = set(bounded_g1b.G4_BUREAU_PRODUCT_SHA)
+    assert len(expected) == 8
+    assert scope["allowed_paths"] == sorted(expected)
+    assert set(raisa_policy.g4_stage1_successor_profile()["allowed_paths"]) >= expected
+    assert scope["runtime_binding_required"] is True
+    assert scope["admission_grants_runtime_authority"] is False
+    assert scope["voice_activation"] is False
+    for kind, stage, paths in (
+        ("enable_g4_stage1_successor", "enable", bounded_g1b.G4_BUREAU_CONTROL),
+        ("implement_g4_stage1_successor", "apply", bounded_g1b.G4_BUREAU_PRODUCT),
+    ):
+        binding = {"schema_version": bounded_g1b.G4_BUREAU_SCHEMA,
+                   "operation_kind": kind, "stage": stage,
+                   "repair_sha256": {path: {} for path in paths}}
+        assert bounded_g1b.operation_paths(kind, binding) == paths
+        assert bounded_g1b._operation(kind, binding)["g4_selected_bureau_source"] is True
+        changed = copy.deepcopy(binding)
+        changed["repair_sha256"]["app/main.py"] = {}
+        with pytest.raises(bounded_g1b.BoundedG1BError):
+            bounded_g1b.operation_paths(kind, changed)
+    if (bounded_g1b.G4_BUREAU_VECTOR_SHA == "0" * 64
+            or bounded_g1b.G4_BUREAU_MAPPING_SHA == "0" * 64):
+        with pytest.raises(bounded_g1b.BoundedG1BError) as caught:
+            bounded_g1b.validate_g4_bureau_scope(scope)
+        assert caught.value.reason_code == "bounded_g4_bureau_inputs_unfrozen"
+    else:
+        bounded_g1b.validate_g4_bureau_scope(scope)
 
 
 def test_intention_diary_scope_exact_and_ci_scope_separate():
@@ -1077,8 +1182,97 @@ def test_audit_activation_requires_exact_independent_control_publication_effect(
 
 # Current G4 CI maintenance checks are source only; no operation runs here.
 def _ci_scope():
-    return json.loads((Path(__file__).parents[1] /
-        bounded_g1b.G4_STAGE1_SUCCESSOR_SCOPE).read_text(encoding="utf-8"))
+    raw = base64.b64decode(
+        "eyJhY3RpdmVfcHJvZmlsZSI6Ikc0X1NUQUdFMV9MT0NBTF9TVUNDRVNTT1IiLCJhZG1pc3Npb25fZ3JhbnRzX3J1bnRpbWVfYXV0"
+        "aG9yaXR5IjpmYWxzZSwiYWxsb3dlZF9lZmZlY3RzIjpbImNvbnRyb2xfcGxhbmVfZWRpdCIsInJlcG9zaXRvcnlfcmVhZCIsInRh"
+        "c2tfYnJhbmNoX2NvbW1pdCIsInRhc2tfYnJhbmNoX3B1c2giXSwiYWxsb3dlZF9wYXRocyI6WyIuZ2l0aHViL3dvcmtmbG93cy9n"
+        "Mi1ib3VuZGVkLXB5dGhvbi55bWwiXSwiYWxsb3dlZF90YXNrX2tpbmQiOiJnNF9zdGFnZTFfbG9jYWxfc3VjY2Vzc29yIiwiY2lf"
+        "bWFpbnRlbmFuY2UiOnsicm91dGVfb3BpbmlvbiI6eyJwYXRoIjoiQzovVXNlcnMvdGhlcmUvRU1SNC1taWdyYXRpb24vMjAyNjA5"
+        "MTEtdjEvY3VycmVudC1jb250cm9sLXJlcGFpci0yMDI2MDkxMi12MS9kZW1vLWxlZC1zdGFnZTEtMjAyNjEwMTItdjIvbWlkc3Ry"
+        "ZWFtLWF1ZGl0LWNvcnJlY3Rpb24tc291cmNlLXYxL2luZGVwZW5kZW50LWNpLW1haW50ZW5hbmNlLXJvdXRlLXJldmlldy12MS5q"
+        "c29uIiwic2hhMjU2IjoiY2JjNWUyMzI2MTcxMGRmYjM3MjExMjkyMzgyNmMxYWRjMjcwYzUxYTRkZmMwMjZiZWFlNTUzOWFjYzBj"
+        "MDJmNiJ9LCJzZWxlY3Rpb25fc2hhMjU2IjoiNGU3ZmI0YjM5NGE3ZmM1YTA0NTlmMmIxNjJjYzAwMDUxOTVjZTQxMzFlMjI1Mjlh"
+        "YjdjYjM2ODUwNGRhNGEyYyIsInNvdXJjZV9zdWJqZWN0X2NvbW1pdCI6Ijc0ZGQ1MjQyYTdmMmE5NTNmNjk0MmQ5YTA0M2Q0Njlj"
+        "OTVmNzRhOWMiLCJ3b3JrZmxvd19hZnRlcl9zaGEyNTYiOiIwNjUwMmQ2OGIwMTZmYmE3NWZiMGFhYjk4ZTg5MDNkNTJjMTI0YjRj"
+        "ZjVkNDBiYzUyNDVlMzUyODQzN2RkZmY5Iiwid29ya2Zsb3dfYmVmb3JlX3NoYTI1NiI6IjUwNjA2NWM1ZTMxZjFkNTRhOWY0MTQ5"
+        "YTliYmIyNzdhN2MxNTEzZDA5YWU2NmU0M2U0ZmI0NWQzZjhkMWRjYjYiLCJ3b3JrZmxvd19jYW5kaWRhdGUiOnsicGF0aCI6IkM6"
+        "L1VzZXJzL3RoZXJlL0VNUjQtbWlncmF0aW9uLzIwMjYwOTExLXYxL2N1cnJlbnQtY29udHJvbC1yZXBhaXItMjAyNjA5MTItdjEv"
+        "ZGVtby1sZWQtc3RhZ2UxLTIwMjYxMDEyLXYyL21pZHN0cmVhbS1hdWRpdC1jb3JyZWN0aW9uLXNvdXJjZS12MS9jb3JyZWN0aW9u"
+        "LXYyL2NhbmRpZGF0ZS1zb3VyY2UvLmdpdGh1Yi93b3JrZmxvd3MvZzItYm91bmRlZC1weXRob24ueW1sIiwic2hhMjU2IjoiMDY1"
+        "MDJkNjhiMDE2ZmJhNzVmYjBhYWI5OGU4OTAzZDUyYzEyNGI0Y2Y1ZDQwYmM1MjQ1ZTM1Mjg0MzdkZGZmOSJ9LCJ3b3JrZmxvd19w"
+        "YXRoIjoiLmdpdGh1Yi93b3JrZmxvd3MvZzItYm91bmRlZC1weXRob24ueW1sIn0sImNvbWJpbmVkX3Byb2R1Y3Rfc291cmNlX2Jp"
+        "bmRpbmciOnsicGF0aCI6IkM6XFxVc2Vyc1xcdGhlcmVcXEVNUjQtbWlncmF0aW9uXFwyMDI2MDkxMS12MVxcY3VycmVudC1jb250"
+        "cm9sLXJlcGFpci0yMDI2MDkxMi12MVxcZGVtby1sZWQtc3RhZ2UxLTIwMjYxMDEyLXYyXFxzdGFnZTEtaW50ZXJhY3RpdmUtc3Vj"
+        "Y2Vzc29yLWVudHJ5LXNvdXJjZS12NVxcY29tYmluZWQtcHJvZHVjdC1zb3VyY2UtYmluZGluZy1JTkVSVC12NS5qc29uIiwic2hh"
+        "MjU2IjoiYTViN2YxNGMxYmUzMmQwODc3YzQ1ZGQxNWNiYmZmZThjZTkwNDliMGYzODY2OWFkNmZmNjQyM2Y3N2Y5N2QxMiJ9LCJj"
+        "b250cm9sX3NoYTI1NiI6eyJvcmNoZXN0cmF0aW9uX2hhcm5lc3MvYm91bmRlZF9nMWIucHkiOiI4NjVjNWQ0YWI1OTg0NjY0Y2M1"
+        "OGM4ZDNiNTU4MjhkMDQ2NDBjNGRlZjgwZjhlMmRmNDVkNDEzNzUzODIzYTBjIiwidGVzdHMvdGVzdF9nNF9zdGFnZTFfc3VjY2Vz"
+        "c29yX2VudHJ5LnB5IjoiNTY2ZjUzMWE0YTI0ODU5NWM0OGYxOTJmYjA5ZjRjMGU0M2VmYTdlOGYwODVlYzhkZjk2NjEyMTAzNjM0"
+        "ZjM4MyJ9LCJjb3JyZWN0aW9uX3NvdXJjZV9yZXZpZXciOnsicGF0aCI6IkM6L1VzZXJzL3RoZXJlL0VNUjQtbWlncmF0aW9uLzIw"
+        "MjYwOTExLXYxL2N1cnJlbnQtY29udHJvbC1yZXBhaXItMjAyNjA5MTItdjEvZGVtby1sZWQtc3RhZ2UxLTIwMjYxMDEyLXYyL21p"
+        "ZHN0cmVhbS1hdWRpdC1jb3JyZWN0aW9uLXNvdXJjZS12MS9pbmRlcGVuZGVudC1wcm9kdWN0LXNvdXJjZS1yZXZpZXctdjQuanNv"
+        "biIsInNoYTI1NiI6ImQxN2I5YTkxZTkxODAzM2FkODU2MTBhZThhYzEyMmUzMTFiZDAxZmEyYmI5NTI2NjM3OTJmNzg4N2U1MWRm"
+        "ZGUifSwiZW50cnlfcm91dGVfb3BpbmlvbiI6eyJwYXRoIjoiQzovVXNlcnMvdGhlcmUvRU1SNC1taWdyYXRpb24vMjAyNjA5MTEt"
+        "djEvY3VycmVudC1jb250cm9sLXJlcGFpci0yMDI2MDkxMi12MS9kZW1vLWxlZC1zdGFnZTEtMjAyNjEwMTItdjIvbWlkc3RyZWFt"
+        "LWF1ZGl0LWNvcnJlY3Rpb24tc291cmNlLXYxL2luZGVwZW5kZW50LWVudHJ5LXJvdXRlLXJldmlldy12MS5qc29uIiwic2hhMjU2"
+        "IjoiODE2OGMyM2YwNmI0NjZlNDI0Mjc3YjFiMWRmYTI3NGM1NjEwN2YzZGNkOTY1MmE4NDJjMzllMTZmZTEyYTY3YyJ9LCJleGNs"
+        "dWRlZF9lZmZlY3RzIjpbInVucmV2aWV3ZWRfYXBwbGljYXRpb25fb3JfZGF0YWJhc2VfcnVudGltZSIsInVucmV2aWV3ZWRfYnJv"
+        "d3Nlcl9vcl9taWNyb3Bob25lX3J1bnRpbWUiLCJ1bnJldmlld2VkX3ZvaWNlX2NoaWxkX29yX25ldHdvcmtfZWdyZXNzIiwicHJv"
+        "dmlkZXJfaW52b2NhdGlvbiIsInJlYWxfZGF0YV9hY2Nlc3MiLCJwcm90ZWN0ZWRfcmVmX21vdmVtZW50IiwiZGVwbG95bWVudCIs"
+        "InB1YmxpY19saXN0ZW5lciJdLCJsYWJfc291cmNlX3JldmlldyI6eyJwYXRoIjoiQzpcXFVzZXJzXFx0aGVyZVxcRU1SNC1taWdy"
+        "YXRpb25cXDIwMjYwOTExLXYxXFxjdXJyZW50LWNvbnRyb2wtcmVwYWlyLTIwMjYwOTEyLXYxXFxkZW1vLWxlZC1zdGFnZTEtMjAy"
+        "NjEwMTItdjJcXHN0YWdlMS1yZWxpYWJpbGl0eS1sYWItc291cmNlLXY3XFxpbmRlcGVuZGVudC1zb3VyY2UtcmV2aWV3LXY3Lmpz"
+        "b24iLCJzaGEyNTYiOiJiMDAzMGMxMTk2ODE3ZmZhNjNmOGYyNDc4ZDI1YzU1YTZkZWZlZmM2YWNlYTA2ZDFlYjkwMmMzOTlhNGU5"
+        "MGE3In0sIm5hdGl2ZTA4X2RlcGVuZGVuY3lfb25seSI6dHJ1ZSwicHJlZGVjZXNzb3JfcHVibGljYXRpb24iOnsicGF0aCI6IkM6"
+        "L1VzZXJzL3RoZXJlL0VNUjQtbWlncmF0aW9uLzIwMjYwOTExLXYxL2N1cnJlbnQtY29udHJvbC1yZXBhaXItMjAyNjA5MTItdjEv"
+        "ZGVtby1sZWQtc3RhZ2UxLTIwMjYxMDEyLXYyL21pZHN0cmVhbS1hdWRpdC1jb3JyZWN0aW9uLXNvdXJjZS12MS9wcm9kdWN0LXB1"
+        "YmxpY2F0aW9uLXNvdXJjZS12My9pbmRlcGVuZGVudC1zdGFnZTEtbWlkc3RyZWFtLWF1ZGl0LXByb2R1Y3QtcHVzaC1lZmZlY3Qt"
+        "cmV2aWV3LXYxLmpzb24iLCJzaGEyNTYiOiI3YzlmMGM5ODhkMWE4NzBkZmNmMjQxMTE2NDFmY2IzODBiYjY4OGI5OWNkMjljNGYz"
+        "OGU1NGVhOWYyODc2YmEyIn0sInByZWRlY2Vzc29yX3Njb3BlIjp7InBhdGgiOiJDOi9Vc2Vycy90aGVyZS9FTVI0LW1pZ3JhdGlv"
+        "bi8yMDI2MDkxMS12MS9jdXJyZW50LWNvbnRyb2wtcmVwYWlyLTIwMjYwOTEyLXYxL2RlbW8tbGVkLXN0YWdlMS0yMDI2MTAxMi12"
+        "Mi9taWRzdHJlYW0tYXVkaXQtY29ycmVjdGlvbi1zb3VyY2UtdjEvY29udHJvbC1hZG1pc3Npb24tc291cmNlLXYxL2NvcnJlY3Rp"
+        "b24tdjYvY2FuZGlkYXRlLXNvdXJjZS9vcmNoZXN0cmF0aW9uL3Byb2dyYW1tZS9nNC1zdGFnZTEtc3VjY2Vzc29yLWVudHJ5LXNj"
+        "b3BlLmpzb24iLCJzaGEyNTYiOiI0NjRmMzg4YTA3ZmNjNmVhYTIwMDkwYTlkYzg0NGE4NzA5NTAwY2I1YWQ3YzlhZTMwNWVkMGNl"
+        "OTJhZjE5MjRkIn0sInByb2R1Y3Rfc2hhMjU2Ijp7InN0YWdlMV9kZW1vX2h0dHAucHkiOiI4MTYyOGQ4NzhkODY0NjU3MzRhOTU1"
+        "Zjk0NWUwNWFjMzE3OTczMzhiNjY5Nzg4OTY3MGU1MGM5MWZmNzQyNjhjIiwic3RhZ2UxX2RlbW9faW50ZW50LnB5IjoiOGQxZWUw"
+        "ZDEzN2E0MGNiYWRjZGM4OTdkYjZmZWRlNDAzZGIyNGUzOTU0YmY5MGFmNDM3ZGU0NDVjOWRhMWRhZiIsInN0YXRpYy9kZW1vL3N0"
+        "YWdlMS1pbnRlcmFjdGl2ZS5odG1sIjoiZTE0YzcyNTcwOWFkOWIwNmI5OWU2OWYzMzY3MTllZTA5NWJhN2FhMWYzMjEzY2ZjNWYy"
+        "NmQ4Mjk1Y2NjNGM4MCIsInN0YXRpYy9kZW1vL3N0YWdlMS1pbnRlcmFjdGl2ZS5qcyI6Ijk4OTMwZmM2YmZkMWJjY2VjODIzYmZk"
+        "MzQzZWUyOTEzMDg1Y2MyMjAzNjk1MmNiM2FlYTlmNmM1NDAxYzMxZTgiLCJ0ZXN0cy90ZXN0X3N0YWdlMV9kZW1vX2h0dHAucHki"
+        "OiJmNWYxNzMxZTc3MzM1NTZmMGU0YmFiNDM4Nzk1YWMzMDZjOGZlZjRlNTQyNjRjZWFmNWUzYzUyZGMyYjhlODVhIiwidGVzdHMv"
+        "dGVzdF9zdGFnZTFfZGVtb19pbnRlbnQucHkiOiIwNzIyMGEyOGQwYzMzNmRhZTdlMzI3Mzg4NjIyMWVlNjZhZWNjMjVkNzM3MzY0"
+        "MTA0Mjk3OWQ3MjQ2M2IwNzIwIiwidGVzdHMvdGVzdF9zdGFnZTFfcmVsaWFiaWxpdHlfbGFiLnB5IjoiOGJlOTI2NjgxYzYwNDdh"
+        "ODU3ZGIzMmU1YmQ4ZGFkNmVkOTgyNmFiMWY1M2Y5MGJkYTRhZGFmNTY1NTIxNDk4YyIsInRlc3RzL3Rlc3Rfc3RhZ2UxX3Nwb2tl"
+        "bl9yZXBseV9zb3VyY2UucHkiOiI4NTA5Y2ZkZjAyNDY2MDBkMDQ3NTMwY2YwMDY2Yjk0ZGNjZDc1NTQ2MTJhMzQ4ZjhhNDVkMTQ4"
+        "MWJlOTFjNmIyIiwidGVzdHMvdGVzdF9zdGFnZTFfdm9pY2VfaW50ZW50X2hhbmRvZmYuY2pzIjoiZTBlNTRiYWZkOGE5NGJkMTBi"
+        "YmRjMzgyZjI1NWM0ODI1NTQyNzkzNDlmMDZlNmEzM2E1YTc3ZDI1ZGUzNDY2NyJ9LCJyZWNvcmRlZF9hdCI6IjIwMjYtMTAtMTlU"
+        "MDc6MTA6NTMuMzY5NDAyKzAwOjAwIiwicnVudGltZV9iaW5kaW5nX3JlcXVpcmVkIjp0cnVlLCJzY2hlbWFfdmVyc2lvbiI6ImFy"
+        "aWFkbmUuZzRfc3RhZ2UxX3N1Y2Nlc3Nvcl9lbnRyeV9zY29wZS52NiIsInNlbGVjdGVkX2Jhc2UiOnsiY29tbWl0IjoiOTljNmU0"
+        "ZjljMmVmNzgxN2QwMjc3NTk3ZjAzY2QwNWNiYjIwOWMwMCIsInRyZWUiOiJmYmJjNWE2Njg0NTk5OGQ0ODA5MTBmY2IyNTU4MGZl"
+        "OGQxYzQ0ZWI5In0sInNvdXJjZV9zaGEyNTYiOnsib3JjaGVzdHJhdGlvbl9oYXJuZXNzL2JvdW5kZWRfZzFiLnB5IjoiODY1YzVk"
+        "NGFiNTk4NDY2NGNjNThjOGQzYjU1ODI4ZDA0NjQwYzRkZWY4MGY4ZTJkZjQ1ZDQxMzc1MzgyM2EwYyIsIm9yY2hlc3RyYXRpb25f"
+        "aGFybmVzcy9jb25maWd1cmF0aW9uX2NvcmUucHkiOiJmN2JhN2E4MGViMGE1OTBmOWZiNzFiODY0ZTZjMWY5ZjQzMjQxZDlmN2Q3"
+        "MGEzOGRhNjdhOTI0M2ZlYTIwOGU1Iiwib3JjaGVzdHJhdGlvbl9oYXJuZXNzL3Bpbm5lZF9wcm9ncmFtbWVfZ2F0ZWtlZXBlci5w"
+        "eSI6ImMxZmVhOWEyODQ5MDY4ZWQ4ZTg3ZGJlMWU3Y2VjMWNjN2U3NjJmYTJiYzg4NzZmYzMyYmJkYTgwZDIyNmNmMzkiLCJvcmNo"
+        "ZXN0cmF0aW9uX2hhcm5lc3MvcHJvZ3JhbW1lX2FkbWlzc2lvbi5weSI6ImFjODE2YThhNzliMmQ4MjIyZmEzNTc3NzdjMDc1OTUw"
+        "OTI3ZTg2Y2YzMGM4YTViMjVmZmQwOGE0NzQwNTIxODEiLCJvcmNoZXN0cmF0aW9uX2hhcm5lc3MvcmFpc2FfcG9saWN5LnB5Ijoi"
+        "ZGIxOTcxNDczM2U3MGU2ZDU1YjIyMTQ0OGNjMmZlMGU4ZDYwNjVjM2ZlNDBhMzU5MDhmZWJiMGUxYjc0YmI4MyIsIm9yY2hlc3Ry"
+        "YXRpb25faGFybmVzcy90cnVzdGVkX2dpdC5weSI6IjRhODU2YmZmZTJiNjhkN2M3ZTE4NzUxNTI2MjljOTAyNGEzMjY3OWI1OWQ5"
+        "YjFlZDgzMDFjMzY4ZDQxZmY1MjciLCJzY3JpcHRzL3JhaXNhX2FyaWFkbmVfcmVjb3ZlcnlfcHJlZmxpZ2h0LnB5IjoiZWRmZDM3"
+        "YjMwNjczYjg1NDRkMzA5YjUzMmM5NWIzZmQ3YzIwZmY1OTI4ODBhOGEwMjM1ZGZkZTZjZmM4ZTdlNCIsInRlc3RzL3Rlc3RfYm91"
+        "bmRlZF9nMWIucHkiOiJiYjFiZTg2Y2EzOTIzMmZlYTMwYzFlYTg0Y2RmYjExNDQyOGQ1N2JlMGY4ZjY3YmY3ZTg2ZGFhYjBiYTcz"
+        "YmM1In0sInVpMTJfcHVibGljYXRpb25fcmV2aWV3Ijp7InBhdGgiOiJDOi9Vc2Vycy90aGVyZS9FTVI0LW1pZ3JhdGlvbi8yMDI2"
+        "MDkxMS12MS9jdXJyZW50LWNvbnRyb2wtcmVwYWlyLTIwMjYwOTEyLXYxL2RlbW8tbGVkLXN0YWdlMS0yMDI2MTAxMi12Mi9zdGFn"
+        "ZTEtaW50ZXJhY3RpdmUtcHJvZHVjdC1wdWJsaWNhdGlvbi1zb3VyY2UtdjIvaW5kZXBlbmRlbnQtc3RhZ2UxLWludGVyYWN0aXZl"
+        "LXByb2R1Y3QtcHVzaC1lZmZlY3QtcmV2aWV3LXYyLmpzb24iLCJzaGEyNTYiOiI3NDUzZjBhMTgxOWNmMzUwNDY0Njg3NTk5YmU3"
+        "ODQ3N2Q4ZDBjY2NkZTA3MmIzMjJjZjY1MzliZmRhZDQ3NmRmIn0sInZvaWNlX2FjdGl2YXRpb24iOmZhbHNlLCJ2b2ljZV9zb3Vy"
+        "Y2VfcmV2aWV3Ijp7InBhdGgiOiJDOi9Vc2Vycy90aGVyZS9FTVI0LW1pZ3JhdGlvbi8yMDI2MDkxMS12MS9jdXJyZW50LWNvbnRy"
+        "b2wtcmVwYWlyLTIwMjYwOTEyLXYxL2RlbW8tbGVkLXN0YWdlMS0yMDI2MTAxMi12Mi9zdGFnZTEtdm9pY2UtaW50ZXJhY3RpdmUt"
+        "c2VhbS1zb3VyY2UtdjQvaW5kZXBlbmRlbnQtc291cmNlLXJldmlldy12NC5qc29uIiwic2hhMjU2IjoiY2Q1YzlmYTRkNzY4YmQx"
+        "YWRmNzRjOWFjNTg2ZmMzZGUwOTE2Y2NmNjQxOGE4MjY2NmZiZDhjOTNjNzNhNjBmMyJ9fQo="
+    )
+    assert hashlib.sha256(raw).hexdigest() == "fc937c2e1f309ef0b0a2335af0768d88a00e1ae337acf6e86cd9c2218d70b9c6"
+    return json.loads(raw)
 
 
 def _ci_binding(stage):
@@ -1248,3 +1442,325 @@ def test_ci_maintenance_review_six_exact_slots_and_refusals(stage, phase):
                 lambda _p, _d: json.dumps(changed).encode(), row,
                 bounded_g1b.G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT, subject, stage, phase)
         assert caught.value.reason_code == "bounded_g4_ci_independent_subject"
+
+
+def test_selected_bureau_v8_scope_rejects_exact_boundary_changes():
+    scope = _bureau_scope()
+    bounded_g1b.validate_g4_bureau_scope(scope)
+    assert scope["allowed_paths"] == sorted(bounded_g1b.G4_BUREAU_PRODUCT)
+    assert scope["product_sha256"] == bounded_g1b.G4_BUREAU_PRODUCT_SHA
+    assert scope["product_vector"] == {
+        "path": bounded_g1b.G4_BUREAU_VECTOR.as_posix(),
+        "sha256": bounded_g1b.G4_BUREAU_VECTOR_SHA}
+    assert scope["mapping_review"] == {
+        "path": bounded_g1b.G4_BUREAU_MAPPING.as_posix(),
+        "sha256": bounded_g1b.G4_BUREAU_MAPPING_SHA}
+    assert scope["admission_grants_runtime_authority"] is False
+    assert scope["runtime_binding_required"] is True
+    assert scope["voice_activation"] is False
+    mutations = (
+        ("selected_base", {"commit": "0" * 40, "tree": "0" * 40}),
+        ("allowed_paths", sorted(set(scope["allowed_paths"]) | {"app/main.py"})),
+        ("allowed_paths", scope["allowed_paths"][:-1]),
+        ("allowed_effects", sorted(set(scope["allowed_effects"]) | {"provider_invocation"})),
+        ("excluded_effects", scope["excluded_effects"][:-1]),
+        ("runtime_binding_required", False),
+        ("admission_grants_runtime_authority", True),
+        ("voice_activation", True),
+    )
+    for field, value in mutations:
+        changed = copy.deepcopy(scope)
+        changed[field] = value
+        with pytest.raises(bounded_g1b.BoundedG1BError) as caught:
+            bounded_g1b.validate_g4_bureau_scope(changed)
+        assert caught.value.reason_code == "bounded_g4_bureau_scope_boundary"
+    for field, item in (
+        ("product_sha256", next(iter(scope["product_sha256"]))),
+        ("product_vector", "sha256"),
+        ("mapping_review", "path"),
+    ):
+        changed = copy.deepcopy(scope)
+        changed[field][item] = "0" * 64 if item != "path" else "other.json"
+        with pytest.raises(bounded_g1b.BoundedG1BError) as caught:
+            bounded_g1b.validate_g4_bureau_scope(changed)
+        assert caught.value.reason_code == "bounded_g4_bureau_scope_boundary"
+
+
+def test_selected_bureau_v8_all_six_phase_subjects_and_independence():
+    scope = _bureau_scope()
+    subjects = {}
+    for stage, kind in (("enable", "enable_g4_stage1_successor"),
+                        ("apply", "implement_g4_stage1_successor")):
+        for phase in ("development", "pre-push", "post-push"):
+            q = {
+                "schema_version": bounded_g1b.G4_BUREAU_SCHEMA,
+                "operation_id": "selected-bureau-source",
+                "operation_kind": kind, "stage": stage, "phase": phase,
+                "base_commit": "a" * 40, "base_tree": "b" * 40,
+                "expected_head": "c" * 40, "expected_index_tree": "d" * 40,
+                "candidate_tree": "e" * 40,
+                "source_sha256": scope["source_sha256"],
+                "payload_sha256": {},
+                "repair_sha256": {p: {} for p in (
+                    bounded_g1b.G4_BUREAU_CONTROL if stage == "enable"
+                    else bounded_g1b.G4_BUREAU_PRODUCT)},
+                "activation_acceptance": None if stage == "enable" else {
+                    "path": "review.json", "sha256": "f" * 64},
+                "product_vector": scope["product_vector"],
+                "mapping_review": scope["mapping_review"],
+            }
+            subject = bounded_g1b.g4_bureau_review_subject(q)
+            subjects[stage, phase] = subject
+            for field, replacement in (
+                ("stage", "apply" if stage == "enable" else "enable"),
+                ("phase", "post-push" if phase != "post-push" else "development"),
+                ("expected_head", "1" * 40),
+                ("expected_index_tree", "2" * 40),
+                ("candidate_tree", "3" * 40),
+                ("operation_id", "other-operation"),
+            ):
+                changed = copy.deepcopy(q)
+                changed[field] = replacement
+                assert bounded_g1b.g4_bureau_review_subject(changed) != subject
+            path = (bounded_g1b.G4_BUREAU_ROOT / "entry-admission-v1" /
+                    f"independent-{stage}-{phase}-subject-review-v1.json")
+            review = {
+                "schema": "emr4.g4_operation_review.v1",
+                "status": "PASS",
+                "verdict": "PASS_G4_STAGE1_SELECTED_BUREAU_EXACT_ADMISSION_SUBJECT",
+                "subject_sha256": subject, "independent": True,
+                "implementation_authorship": False, "blocking_findings": [],
+                "reviewer_agent": "/root/selected_bureau_entry_review",
+                "stage": stage, "phase": phase,
+            }
+            raw = json.dumps(review, sort_keys=True).encode()
+            row = {"path": path.as_posix(),
+                   "sha256": hashlib.sha256(raw).hexdigest()}
+            def read(selected, digest):
+                assert (selected, digest) == (path, row["sha256"])
+                return raw
+            assert bounded_g1b._g4_bureau_review(
+                read, row, bounded_g1b.G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT,
+                subject, stage, phase) == review
+            wrong_row = dict(row, path=str(path.with_name("swapped.json")))
+            with pytest.raises(bounded_g1b.BoundedG1BError) as caught:
+                bounded_g1b._g4_bureau_review(
+                    read, wrong_row, bounded_g1b.G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT,
+                    subject, stage, phase)
+            assert caught.value.reason_code == "bounded_g4_bureau_review_path"
+            for field, value in (
+                ("subject_sha256", "0" * 64),
+                ("stage", "apply" if stage == "enable" else "enable"),
+                ("phase", "post-push" if phase != "post-push" else "development"),
+                ("independent", False),
+                ("implementation_authorship", True),
+                ("reviewer_agent", "/root/selected_bureau_entry_author"),
+            ):
+                changed = dict(review, **{field: value})
+                changed_raw = json.dumps(changed, sort_keys=True).encode()
+                changed_row = dict(row, sha256=hashlib.sha256(changed_raw).hexdigest())
+                with pytest.raises(bounded_g1b.BoundedG1BError) as caught:
+                    bounded_g1b._g4_bureau_review(
+                        lambda _p, _d: changed_raw, changed_row,
+                        bounded_g1b.G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT,
+                        subject, stage, phase)
+                assert caught.value.reason_code == "bounded_g4_bureau_independent_subject"
+    assert len(set(subjects.values())) == 6
+
+
+def test_selected_bureau_v8_apply_requires_exact_enable_effect(monkeypatch):
+    # The selected ordinary evidence bytes are embedded; no repository loader runs.
+    vector_raw = base64.b64decode(
+        "ew0KICAic2NoZW1hIjogImVtcjQuc3RhZ2UxX3NlbGVjdGVkX2J1cmVhdV9wcm9kdWN0X3ZlY3Rvci52MSIsDQogICJzdGF0dXMi"
+        "OiAiUFJFUEFSRURfTk9UX0FETUlUVEVEX09SX0VYRUNVVEVEIiwNCiAgInNlbGVjdGVkX2Jhc2UiOiB7DQogICAgImNvbW1pdCI6"
+        "ICJmNTkyZTRkOTljMzQyNDM5OTZmNmJmNTY3NDQzMmIyZWI2Zjg1N2YwIiwNCiAgICAidHJlZSI6ICI4ZTI3NjcyYWVhNGVjMzQw"
+        "YjJjNThmMTdjYWU4N2IwYzM5YTRjMzhmIg0KICB9LA0KICAicHJlZGVjZXNzb3Jfc2NvcGVfc2hhMjU2IjogImYyYzg1YmUyZTgw"
+        "M2NmMWQwNTFkZTY5MmQwOWRlNGViOTg3ODlhYTFjZTQ3OTY0Yzg5OTAxNDZmMGYyOWE2MDciLA0KICAiZW50cmllcyI6IFsNCiAg"
+        "ICB7DQogICAgICAidGFyZ2V0IjogImFwcC9zZXJ2aWNlcy9yZWNlcHRpb25fb25lX3Byb3Bvc2FsX3J1bnRpbWUucHkiLA0KICAg"
+        "ICAgInBhdGgiOiAiQzovVXNlcnMvdGhlcmUvRU1SNC10b29scy9zZWxlY3RlZC1jb250ZXh0LWJ1cmVhdS1jYW5kaWRhdGUtdjIv"
+        "YXBwL3NlcnZpY2VzL3JlY2VwdGlvbl9vbmVfcHJvcG9zYWxfcnVudGltZS5weSIsDQogICAgICAiYnl0ZXMiOiAyNzYwMywNCiAg"
+        "ICAgICJzaGEyNTYiOiAiMmUzNjg3ZGU1Y2NlMzgzMzUxZTZiYjU5ZWEzN2JkMTM2NTNjMmExMzQ5ZmFlMWI2YmJjYzBkZGNlNmZi"
+        "MWZjYiIsDQogICAgICAiYmVmb3JlX3NoYTI1NiI6ICIxM2ExZjAzMDU1ZjRmNGMxYTZhZTg2OTM1M2RhYmZkZjk2OWZhODI2Yzhm"
+        "Y2YwNDFmMDU4NmE1MWMwOGYxOWZlIg0KICAgIH0sDQogICAgew0KICAgICAgInRhcmdldCI6ICJzY3JpcHRzL3JlY2VwdGlvbl9v"
+        "bmVfYnVyZWF1X3R5cGVkX3BsYW5fcHJvdG9jb2wucHkiLA0KICAgICAgInBhdGgiOiAiQzovVXNlcnMvdGhlcmUvRU1SNC10b29s"
+        "cy9zZWxlY3RlZC1jb250ZXh0LWJ1cmVhdS1jYW5kaWRhdGUtdjIvc2NyaXB0cy9yZWNlcHRpb25fb25lX2J1cmVhdV90eXBlZF9w"
+        "bGFuX3Byb3RvY29sLnB5IiwNCiAgICAgICJieXRlcyI6IDU5MjcwLA0KICAgICAgInNoYTI1NiI6ICI0MDZhNWI4YmNhYTI4MmI2"
+        "ODY5OTcwOTIwMzM0MmQ4ZTEwODkzNmI4MzY0NGM5ZTdiN2UwMzU5YTM4YmFlMTlkIiwNCiAgICAgICJiZWZvcmVfc2hhMjU2Ijog"
+        "IjJhYjdlNTMxNTkzYTZlMThhMDg5MWM2ZDVlMDU2MTIzMTdjMTMyMTlkYjU1NWJmY2NiNTVkNDU0MWUwNjU3ZTIiDQogICAgfSwN"
+        "CiAgICB7DQogICAgICAidGFyZ2V0IjogIm9yY2hlc3RyYXRpb24vY29udGludWl0eS9yZWNlcHRpb24tb25lLWJ1cmVhdS10eXBl"
+        "ZC1wbGFuLXByb3RvY29sL29wZXJhdG9yLWNhdGFsb2cuanNvbiIsDQogICAgICAicGF0aCI6ICJDOi9Vc2Vycy90aGVyZS9FTVI0"
+        "LXRvb2xzL3NlbGVjdGVkLWNvbnRleHQtYnVyZWF1LWNhbmRpZGF0ZS12Mi9vcmNoZXN0cmF0aW9uL2NvbnRpbnVpdHkvcmVjZXB0"
+        "aW9uLW9uZS1idXJlYXUtdHlwZWQtcGxhbi1wcm90b2NvbC9vcGVyYXRvci1jYXRhbG9nLmpzb24iLA0KICAgICAgImJ5dGVzIjog"
+        "ODQzOSwNCiAgICAgICJzaGEyNTYiOiAiZmI5NjQyMDg0NzdmMTJmMDg0YWFjODc1MGZlMjVlN2YyYzVhNWQ2NDhhYjYyZDI5ZjUy"
+        "MWVlNWQ4MDE5ZjU3OSIsDQogICAgICAiYmVmb3JlX3NoYTI1NiI6ICJmZTJkNTc1MjQzOGU2OTVmODk2MGUzM2FhYTdmMTVhN2I2"
+        "MWYzZDRhMmM1M2ZkNjNiZTM3OTc3MTVlMzUwYmFjIg0KICAgIH0sDQogICAgew0KICAgICAgInRhcmdldCI6ICJ0ZXN0cy90ZXN0"
+        "X3JlY2VwdGlvbl9vbmVfc2VsZWN0ZWRfY29udGV4dC5weSIsDQogICAgICAicGF0aCI6ICJDOi9Vc2Vycy90aGVyZS9FTVI0LXRv"
+        "b2xzL3NlbGVjdGVkLWNvbnRleHQtYnVyZWF1LWNhbmRpZGF0ZS12Mi90ZXN0cy90ZXN0X3JlY2VwdGlvbl9vbmVfc2VsZWN0ZWRf"
+        "Y29udGV4dC5weSIsDQogICAgICAiYnl0ZXMiOiAxMzI3OCwNCiAgICAgICJzaGEyNTYiOiAiMWVhMTViOTQ0ZGE1MmM3YjA3YTcw"
+        "NDBjMDBkM2IwOWNhZTVhMWNlYzcyN2FiYzY0NTkyMGY4MDI5NjkwMmE1NSIsDQogICAgICAiYmVmb3JlX3NoYTI1NiI6IG51bGwN"
+        "CiAgICB9LA0KICAgIHsNCiAgICAgICJ0YXJnZXQiOiAic3RhZ2UxX2RlbW9faHR0cC5weSIsDQogICAgICAicGF0aCI6ICJDOi9V"
+        "c2Vycy90aGVyZS9FTVI0LXRvb2xzL3NlbGVjdGVkLWNvbnRleHQtc3RhZ2UxLWJyaWRnZS1jYW5kaWRhdGUtdjIvc3RhZ2UxX2Rl"
+        "bW9faHR0cC5weSIsDQogICAgICAiYnl0ZXMiOiAxMDI2NDksDQogICAgICAic2hhMjU2IjogImM1OTRjMWMwYmZhYzcyYzYzOTM0"
+        "YjY0Yzc2ZDNmNzY3YWQ5ZjVlMWYxYzM1MDhlYjVhZDJkMjM2ZGU5YjA1MjgiLA0KICAgICAgImJlZm9yZV9zaGEyNTYiOiAiM2Fj"
+        "ODExOWZjYmNlYTc2NDY1MjYxMDg5ZTVlOTI1ZDhkNDBkNTNlYTY3Mjc3OGI4NjBiODhjOGJkMTdjNThmOSINCiAgICB9LA0KICAg"
+        "IHsNCiAgICAgICJ0YXJnZXQiOiAic3RhdGljL2RlbW8vc3RhZ2UxLWludGVyYWN0aXZlLmpzIiwNCiAgICAgICJwYXRoIjogIkM6"
+        "L1VzZXJzL3RoZXJlL0VNUjQtdG9vbHMvc2VsZWN0ZWQtY29udGV4dC1zdGFnZTEtYnJpZGdlLWNhbmRpZGF0ZS12Mi9zdGF0aWMv"
+        "ZGVtby9zdGFnZTEtaW50ZXJhY3RpdmUuanMiLA0KICAgICAgImJ5dGVzIjogNDc5MjcsDQogICAgICAic2hhMjU2IjogImNjZmNi"
+        "MzI3YjgyNjQyMDE3NzYwYmU2NmUzZmNhYTI0MTZmNDI1ODExM2Q5MjRkNzEzZmIzZWIzMjUyZDJlY2EiLA0KICAgICAgImJlZm9y"
+        "ZV9zaGEyNTYiOiAiMjg2YzcwOGQ1Yzc5YjQ3MjMyYzUyZTg5OGM5YTRmOWE3NTQ3YmE5MTA5NTk5ZTZkYWI4NTdiN2Q1OWRhN2Nk"
+        "MCINCiAgICB9LA0KICAgIHsNCiAgICAgICJ0YXJnZXQiOiAidGVzdHMvdGVzdF9zdGFnZTFfYnVyZWF1X3Byb2plY3Rpb24ucHki"
+        "LA0KICAgICAgInBhdGgiOiAiQzovVXNlcnMvdGhlcmUvRU1SNC10b29scy9zZWxlY3RlZC1jb250ZXh0LXN0YWdlMS1icmlkZ2Ut"
+        "Y2FuZGlkYXRlLXYyL3Rlc3RzL3Rlc3Rfc3RhZ2UxX2J1cmVhdV9wcm9qZWN0aW9uLnB5IiwNCiAgICAgICJieXRlcyI6IDYyNTQs"
+        "DQogICAgICAic2hhMjU2IjogImRkOWU0NGVjZjAyYjNjMjc2YTMzYzMyNWRkNGQ5OTYzOWVmYjQ3ZmNhMDhmNTM4OGFmY2ZlMzg4"
+        "MzVlMDE0OTMiLA0KICAgICAgImJlZm9yZV9zaGEyNTYiOiBudWxsDQogICAgfSwNCiAgICB7DQogICAgICAidGFyZ2V0IjogInRl"
+        "c3RzL3Rlc3Rfc3RhZ2UxX2J1cmVhdV9zdWdnZXN0aW9uLmNqcyIsDQogICAgICAicGF0aCI6ICJDOi9Vc2Vycy90aGVyZS9FTVI0"
+        "LXRvb2xzL3NlbGVjdGVkLWNvbnRleHQtc3RhZ2UxLWJyaWRnZS1jYW5kaWRhdGUtdjIvdGVzdHMvdGVzdF9zdGFnZTFfYnVyZWF1"
+        "X3N1Z2dlc3Rpb24uY2pzIiwNCiAgICAgICJieXRlcyI6IDM5MzcsDQogICAgICAic2hhMjU2IjogIjNlNWU1ODAyNDBhOTg0MjU0"
+        "MjlkYjM3NzIxMTY1MTU2MDdiNmJmYjg3YWY1ZjRhNTJkZmQ0NmVmMzhmZmVmN2MiLA0KICAgICAgImJlZm9yZV9zaGEyNTYiOiBu"
+        "dWxsDQogICAgfQ0KICBdLA0KICAic291cmNlX3Jldmlld19xdWFsaWZpY2F0aW9uIjogIkNvcnJlY3RlZCBwcm9zcGVjdGl2ZSBl"
+        "aWdodC1maWxlIFYyIHNvdXJjZSBzdWJqZWN0LiBSZXNvbHZlcyBuYW1lZCBWMSByZXZpZXcgZmluZGluZ3M7IGluZGVwZW5kZW50"
+        "IHRhcmdldGVkIHJldmlldyBwZW5kaW5nLiBObyBwcm9kdWN0IGFwcGxpY2F0aW9uLCBhZG1pc3Npb24sIHJ1bnRpbWUgb3IgdGVz"
+        "dCBleGVjdXRpb24uIiwNCiAgImludGVuZGVkX2ludmFyaWFudCI6ICJFeGlzdGluZyBCdXJlYXUvY29udGV4dC9wcm9vZnJlYWRl"
+        "ciBwcmVwYXJlcyBzdGFmZiBzZWxlY3RlZCBtb3ZlOyBvcmlnaW5hbCB3b3JkcyBwcmVzZXJ2ZWQ7IGNvbmZsaWN0cyBjbGFyaWZ5"
+        "OyBleGFjdCBjdXJyZW50IElEL3ZlcnNpb24gY2hlY2tlZDsgb25lIGNsZWFuIG9wdGlvbiBlbnRlcnMgZXhpc3Rpbmcgc2lnbmVk"
+        "IHByb3Bvc2FsL2h1bWFuIGNvbmZpcm0vaWRlbXBvdGVuY3kvcmVhZGJhY2siLA0KICAiZXhjbHVkZWRfZWZmZWN0cyI6IFsNCiAg"
+        "ICAicHJvdmlkZXJzIiwNCiAgICAicmVhbCBkYXRhIiwNCiAgICAicHVibGljIGxpc3RlbmVyIiwNCiAgICAicHJvZHVjdCBydW50"
+        "aW1lIiwNCiAgICAicHJvdGVjdGVkIHJlZiBtb3ZlbWVudCIsDQogICAgImRlcGxveW1lbnQiLA0KICAgICJzcGVuZGluZyBleHBh"
+        "bnNpb24iDQogIF0sDQogICJsaW1pdGF0aW9ucyI6IFsNCiAgICAiRGV0ZXJtaW5pc3RpYyBwYXRoLCBub3QgY29udGV4dHVhbCBM"
+        "TE0gYWNjZXB0YW5jZSIsDQogICAgIk9ubHkgb25lIHVuYW1iaWd1b3VzIGNsZWFuIGNhbmRpZGF0ZTsgbXVsdGlwbGUgb3B0aW9u"
+        "cyBvciB1bmtub3duIHdhcm5pbmdzIGNsYXJpZnkiLA0KICAgICJCYWNrZW5kIHVuaXQgc291cmNlIGluY2x1ZGVzIGZha2Ugc2Nv"
+        "cGVkIE9STSBxdWVyeSBvYnNlcnZhdGlvbnMsIG5vdCBkYXRhYmFzZSBpc29sYXRpb24gcHJvb2YiLA0KICAgICJFbnRyeS1lbmFi"
+        "bGVtZW50LCB0ZXN0IGJpbmRpbmcsIGFwcGxpY2F0aW9uIGFuZCBydW50aW1lIGFjY2VwdGFuY2UgcmVtYWluIHNlcGFyYXRlIg0K"
+        "ICBdLA0KICAiY29ycmVjdGlvbl9vZl9yZXZpZXdfc2hhMjU2IjogImIyYzg2Y2U3YzEzZmZkNzY1MGQ0YjYwOTQyN2FlYWU3OGEz"
+        "YmQxNzE0YWZmZmZmYzgyZjA1YjJmMTdiNjEyNjUiDQp9"
+    )
+    mapping_raw = base64.b64decode(
+        "ewogICJzY2hlbWEiOiAiZW1yNC5zdGFnZTFfc2VsZWN0ZWRfYnVyZWF1X2NvbWJpbmVkX3NvdXJjZV9tYXBwaW5nX3Jldmlldy52"
+        "MSIsCiAgInN0YXR1cyI6ICJQQVNTIiwKICAidmVyZGljdCI6ICJQQVNTX0c0X1NUQUdFMV9TRUxFQ1RFRF9CVVJFQVVfRVhBQ1Rf"
+        "TUFQUElORyIsCiAgInJldmlld2VyX2FnZW50IjogIi9yb290L3NlbGVjdGVkX2NvbnRleHRfZGVzaWduX3JldmlldyIsCiAgImlu"
+        "ZGVwZW5kZW50IjogdHJ1ZSwKICAiaW1wbGVtZW50YXRpb25fYXV0aG9yc2hpcCI6IGZhbHNlLAogICJwcm9kdWN0X3ZlY3Rvcl9z"
+        "aGEyNTYiOiAiODk3M2JiOWJkOWQyNDMxZDNiY2RhM2MxZmYwNjk4ZGY1NzAzZGMxZGU3MDliZjYzOTkxNjkwMDUwZmE2MDk2YyIs"
+        "CiAgInBoeXNpY2FsX3RhcmdldF9yb3dzX2NoZWNrZWQiOiA4LAogICJibG9ja2luZ19maW5kaW5ncyI6IFtdLAogICJuYXJyYXRp"
+        "dmVfcmV2aWV3IjogewogICAgInBhdGgiOiAiQzovVXNlcnMvdGhlcmUvRU1SNC10b29scy9zZWxlY3RlZC1jb250ZXh0LWJ1cmVh"
+        "dS1jYW5kaWRhdGUtdjIvaW5kZXBlbmRlbnQtY29tYmluZWQtc291cmNlLW1hcHBpbmctcmV2aWV3LXYyLmpzb24iLAogICAgInNo"
+        "YTI1NiI6ICIyNjI4MzU5NDlmYzY5ZTJiN2JmZmJiOGRlNjlmMTJhYTdjYWI0NDU4ZjM2ZTdkODM2NjExOGE4MjFhNTFmZTg1Igog"
+        "IH0sCiAgInF1YWxpZmljYXRpb24iOiAiSW5kZXBlbmRlbnQgZXhhY3QtZWlnaHQtc291cmNlIG1hcHBpbmcganVkZ21lbnQgb25s"
+        "eS4gTm8gcHJvZHVjdCBlbnRyeSBhZG1pc3Npb24sIGV4ZWN1dGFibGUgYWNjZXB0YW5jZSwgdGVzdCByZXN1bHQsIGFwcGxpY2F0"
+        "aW9uLCBpbnRlZ3JhdGVkIGpvdXJuZXkgcHJvb2Ygb3IgY29udGV4dHVhbCBMTE0gYWNjZXB0YW5jZSBmb2xsb3dzLiIKfQo="
+    )
+    assert hashlib.sha256(vector_raw).hexdigest() == bounded_g1b.G4_BUREAU_VECTOR_SHA
+    assert hashlib.sha256(mapping_raw).hexdigest() == bounded_g1b.G4_BUREAU_MAPPING_SHA
+    predecessor_raw = bounded_g1b._canonical(_intention_scope()) + b"\n"
+    assert hashlib.sha256(predecessor_raw).hexdigest() == (
+        "f2c85be2e803cf1d051de692d09de4eb98789aa1ce47964c8990146f0f29a607")
+    scope = _bureau_scope()
+    target = Path("C:/synthetic-bureau-target")
+    source = Path("C:/synthetic-bureau-source")
+    activation_path = (bounded_g1b.G4_BUREAU_ROOT / "entry-admission-v1" /
+                       "independent-enable-push-effect-review-v1.json")
+    product_inputs = (
+        bounded_g1b.CONFIGURATION_PATHS |
+        {bounded_g1b.STATE, bounded_g1b.GATES, bounded_g1b.OVERLAY,
+         bounded_g1b.AGENTS, bounded_g1b.G4_STAGE1_INTERACTIVE_SCOPE,
+         bounded_g1b.G4_STAGE1_SUCCESSOR_SCOPE,
+         bounded_g1b.G4_STAGE1_SUCCESSOR_TEST, bounded_g1b.G4_CI_WORKFLOW} |
+        bounded_g1b.SOURCE_PATHS | bounded_g1b.CONTROLLER_PATHS |
+        bounded_g1b.G4_BUREAU_PRODUCT)
+    q = {
+        "schema_version": bounded_g1b.G4_BUREAU_SCHEMA,
+        "operation_id": "selected-bureau-apply-source",
+        "operation_kind": "implement_g4_stage1_successor",
+        "stage": "apply", "phase": "development",
+        "base_commit": "b" * 40, "base_tree": "c" * 40,
+        "expected_head": "d" * 40, "expected_index_tree": "e" * 40,
+        "candidate_tree": "f" * 40,
+        "source_sha256": scope["source_sha256"],
+        "payload_sha256": {path: "a" * 64 for path in product_inputs},
+        "repair_sha256": {path: {} for path in bounded_g1b.G4_BUREAU_PRODUCT},
+        "source_review": {"path": "unused-before-product-inputs", "sha256": "a" * 64},
+        "activation_acceptance": {},
+        "product_vector": scope["product_vector"],
+        "mapping_review": scope["mapping_review"],
+    }
+    accepted = {
+        "status": "PASS",
+        "verdict": "PASS_G4_STAGE1_SELECTED_BUREAU_CONTROL_PUBLICATION_EFFECT",
+        "reviewer_agent": "/root/selected_bureau_entry_review",
+        "independent": True, "implementation_authorship": False,
+        "blocking_findings": [], "stage": "enable", "phase": "push",
+        "base": bounded_g1b.G4_BUREAU_BASE["commit"],
+        "commit": q["base_commit"], "candidate_tree": q["base_tree"],
+        "control_activation_accepted": True,
+        "same_attempt_remote_readback_verified": True,
+        "protected_refs_unchanged": True,
+        "whole_inverse_verified_same_attempt": True,
+        "published_ref": bounded_g1b.G4_STAGE1_INTERACTIVE_BACKEND_REF,
+    }
+    def fake_git_bytes(_target, *args):
+        assert args == ("cat-file", "blob",
+                        bounded_g1b.G4_BUREAU_BASE["commit"] + ":" +
+                        bounded_g1b.G4_STAGE1_SUCCESSOR_SCOPE)
+        return predecessor_raw
+    def fake_git(_target, *args):
+        if args == ("rev-parse", bounded_g1b.G4_BUREAU_BASE["commit"] + "^{tree}"):
+            return bounded_g1b.G4_BUREAU_BASE["tree"]
+        assert args == ("cat-file", "commit", q["base_commit"])
+        return ("tree " + q["base_tree"] + "\nparent " +
+                bounded_g1b.G4_BUREAU_BASE["commit"] + "\n\nsynthetic")
+    monkeypatch.setattr(bounded_g1b.trusted_git, "run_git_bytes", fake_git_bytes)
+    monkeypatch.setattr(bounded_g1b.trusted_git, "run_git", fake_git)
+    reached_product_inputs = []
+    class ProductInputReached(Exception):
+        pass
+    def attempt(receipt, *, row_path=activation_path, row_sha=None):
+        reached_product_inputs.clear()
+        raw = json.dumps(receipt, sort_keys=True).encode()
+        pin = hashlib.sha256(raw).hexdigest() if row_sha is None else row_sha
+        selected_q = copy.deepcopy(q)
+        selected_q["activation_acceptance"] = {
+            "path": row_path.as_posix(), "sha256": pin}
+        def read(path, digest):
+            if path == bounded_g1b.G4_BUREAU_VECTOR:
+                data = vector_raw
+            elif path == bounded_g1b.G4_BUREAU_MAPPING:
+                data = mapping_raw
+            elif path == activation_path:
+                data = raw
+            elif path.is_relative_to(target):
+                reached_product_inputs.append(path)
+                raise ProductInputReached()
+            else:
+                raise AssertionError(f"unexpected synthetic read: {path}")
+            if hashlib.sha256(data).hexdigest() != digest:
+                raise bounded_g1b.BoundedG1BError(
+                    "bounded_g1b_input_digest_changed")
+            return data
+        return bounded_g1b._load_g4_bureau_inputs(
+            None, target, source,
+            bounded_g1b.G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT,
+            Path("C:/synthetic-bureau-scratch"), selected_q, read, {})
+    with pytest.raises(ProductInputReached):
+        attempt(accepted)
+    assert reached_product_inputs
+    for receipt, row_path, row_sha, reason in (
+        (accepted, activation_path.with_name("swapped.json"), None,
+         "bounded_g4_bureau_activation_path"),
+        (accepted, activation_path, "0" * 64,
+         "bounded_g1b_input_digest_changed"),
+        *(
+            (dict(accepted, **{field: value}), activation_path, None,
+             "bounded_g4_bureau_activation_acceptance")
+            for field, value in (
+                ("base", "0" * 40),
+                ("commit", "0" * 40),
+                ("candidate_tree", "0" * 40),
+                ("same_attempt_remote_readback_verified", False),
+                ("protected_refs_unchanged", False),
+                ("whole_inverse_verified_same_attempt", False),
+            )
+        ),
+    ):
+        with pytest.raises(bounded_g1b.BoundedG1BError) as caught:
+            attempt(receipt, row_path=row_path, row_sha=row_sha)
+        assert caught.value.reason_code == reason
+        assert reached_product_inputs == []

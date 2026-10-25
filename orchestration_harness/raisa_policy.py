@@ -1759,6 +1759,12 @@ G4_STAGE1_SUCCESSOR_PRODUCT_PATHS = (
     "tests/test_stage1_reliability_lab.py",
     "run_container_child_once.py",
     "tests/test_stage1_contained_voice_adapter.py",
+    "app/services/reception_one_proposal_runtime.py",
+    "scripts/reception_one_bureau_typed_plan_protocol.py",
+    "orchestration/continuity/reception-one-bureau-typed-plan-protocol/operator-catalog.json",
+    "tests/test_reception_one_selected_context.py",
+    "tests/test_stage1_bureau_projection.py",
+    "tests/test_stage1_bureau_suggestion.cjs",
 )
 
 
