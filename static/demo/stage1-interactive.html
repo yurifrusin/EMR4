@@ -4,80 +4,138 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; form-action 'self'; base-uri 'none'">
-  <title>Raisa · Appointment request</title>
+  <title>Raisa · Reception One</title>
   <link rel="stylesheet" href="stage1-interactive.css">
   <script type="module" src="stage1-interactive.js"></script>
 </head>
 <body>
-  <a class="skip" href="#work">Skip to appointment task</a>
-  <div class="page">
-    <header class="site-header"><strong class="brand">Raisa</strong><span>Fictional practice · synthetic demo</span></header>
+  <a class="skip" href="#work">Skip to your task</a>
+  <div class="shell">
+    <header class="site-header">
+      <a class="brand" href="#work" aria-label="Raisa, your workspace"><span class="brand-mark" aria-hidden="true">r</span>raisa<span class="brand-divider" aria-hidden="true"></span><span class="workspace-name">Reception One</span></a>
+      <div class="session-context"><span class="demo-label">Fictional practice · synthetic demo</span><span id="role">Checking session</span></div>
+    </header>
     <main id="work">
-      <div class="heading"><div><p class="eyebrow">Appointment desk</p><h1 id="title">Loading your task</h1></div><p class="badge" id="role">Session check</p></div>
-      <p class="intro" id="intro">Checking the local demo session. No appointment action is available yet.</p>
-      <p class="clock" id="clock"></p>
-      <div class="status" id="status" role="status" aria-live="polite" aria-atomic="true">Waiting for a verified session.</div>
-      <div class="actions"><button type="button" id="spoken-reply" class="secondary" disabled>Speak verified reply</button></div>
-      <p class="hint" id="spoken-availability">Spoken replies unavailable. Read the reply here.</p>
-      <button type="button" id="reconcile" class="secondary" hidden>Check original action</button>
+      <div class="workspace-heading">
+        <div><h1 id="title">Your appointment workspace</h1><p id="intro" class="intro">Checking your session…</p></div>
+        <div class="view-switch" id="view-switch" hidden aria-label="Appointment views">
+          <button type="button" id="focus-view" class="view-button" aria-pressed="true">Current task</button>
+          <button type="button" id="grid-view" class="view-button" aria-pressed="false">Weekly appointments</button>
+        </div>
+      </div>
+      <details id="view-prompt" class="view-prompt" hidden>
+        <summary>Ask for a view</summary>
+        <form id="view-prompt-form">
+          <label for="view-prompt-words">Which view would help?</label>
+          <div class="view-prompt-fields"><input id="view-prompt-words" type="text" maxlength="80" placeholder="Show me the diary" autocomplete="off"><button type="submit" class="quiet">Show view</button></div>
+          <p id="view-prompt-status" class="helper" role="status" aria-live="polite">Try “Show me the diary” or “Back to my task”. Your appointment words stay as they are.</p>
+        </form>
+      </details>
+      <div class="feedback" aria-label="Current result">
+        <p id="status" role="status" aria-live="polite" aria-atomic="true">Waiting for your session.</p>
+        <div class="feedback-actions"><button type="button" id="continue-demo" class="quiet" hidden>Continue demo</button><button type="button" id="reconcile" class="quiet" hidden>Check original action</button></div>
+      </div>
 
-      <section class="panel" id="patient" hidden aria-labelledby="patient-title">
-        <div class="panel-head"><div><p class="eyebrow">Patient view</p><h2 id="patient-title">Request a follow-up</h2></div><span class="step">Request only · no slot held</span></div>
-        <p>Tell Reception One when you can come. A staff member will confirm the booking.</p>
-        <label for="patient-words">Your request</label>
-        <textarea id="patient-words" aria-describedby="request-mapping-cue request-mapping-status" rows="2" maxlength="500" placeholder="Follow-up next Thursday between 2 pm and 4 pm."></textarea>
-        <p class="hint" id="request-mapping-cue">Type or dictate a note, then use Suggest details from words. A local deterministic interpreter proposes a date and time window for you to check; it does not submit a request. Clarify an ambiguous note, or leave it blank to use structured details.</p>
-        <div class="fields">
-          <label>Preferred date <input id="request-date" type="date" required></label>
-          <label>Earliest time <input id="request-earliest" type="time" required></label>
-          <label>Latest time <input id="request-latest" type="time" required></label>
-        </div>
-        <p class="hint" id="request-options-note"></p>
-        <p class="fact">Reason: follow-up <span aria-hidden="true">·</span> <span class="zone"></span></p>
-        <div id="request-mapping" class="review" hidden><label><input type="checkbox" id="request-mapping-ack" aria-describedby="request-mapping-status"> I checked these suggested details against my current words.</label></div>
-        <p class="hint" id="request-mapping-status" role="status" aria-live="polite">Structured details only. No note needs mapping.</p>
-        <div class="actions"><button type="button" id="request-suggest">Suggest details from words</button><button type="button" id="request-review">Review request</button><button type="button" id="patient-refresh" class="secondary">Refresh outcome</button></div>
-        <div id="request-review-box" class="review" hidden>
-          <h3>Check your request</h3><p id="request-summary"></p>
-          <p>Submitting sends a request to staff. Availability can change before a booking is confirmed.</p>
-          <div class="actions"><button type="button" id="request-submit">Send request</button><button type="button" id="request-edit" class="secondary">Edit details</button></div>
-        </div>
-        <div id="patient-outcome" class="outcome"></div>
+      <div id="focus-workspace" class="focus-workspace">
+        <section id="patient" class="task" hidden aria-labelledby="patient-title">
+          <div class="task-heading"><h2 id="patient-title">When would you like to come in?</h2><span class="supporting">A request, then staff confirmation</span></div>
+          <div id="request-entry">
+          <label for="patient-words" class="composer-label">Tell Raisa what you need</label>
+          <textarea id="patient-words" class="intent-input" rows="3" maxlength="500" aria-describedby="request-mapping-cue request-mapping-status" placeholder="I'd like a follow-up on Sunday between four and five pm."></textarea>
+          <p id="request-mapping-cue" class="helper">Speak or type. You can change the suggested details before sending.</p>
+          <div id="patient-voice-slot" class="voice-slot"></div>
+          <div class="primary-actions"><button type="button" id="request-suggest">Prepare request <span aria-hidden="true">↗</span></button></div>
+          <p id="request-mapping-status" class="helper" role="status" aria-live="polite"></p>
+          <details id="request-structured" class="disclosure">
+            <summary>Enter or edit date and time</summary>
+            <div class="fields">
+              <label>Preferred date<input id="request-date" type="date" required></label>
+              <label>From<input id="request-earliest" type="time" required></label>
+              <label>To<input id="request-latest" type="time" required></label>
+            </div>
+            <p id="request-options-note" class="helper"></p>
+            <p class="helper">Follow-up · <span class="zone"></span>. A request does not reserve a time.</p>
+            <button type="button" id="request-review" class="quiet">Review edited details</button>
+          </details>
+          </div>
+          <section id="request-review-box" class="proposal" hidden aria-labelledby="request-review-title">
+            <p class="proposal-label">Your proposed request</p><h3 id="request-review-title">Does this look right?</h3>
+            <p id="request-summary" class="proposal-summary"></p><blockquote id="request-words-review"></blockquote>
+            <p class="helper">Send this request to Reception One? Your confirmation checks these details against your words. A booking still needs staff confirmation.</p>
+            <div class="actions"><button type="button" id="request-submit">Send request</button><button type="button" id="request-edit" class="quiet">Change details</button></div>
+          </section>
+          <div id="patient-outcome" class="outcome" aria-live="polite"></div>
+          <button type="button" id="patient-refresh" class="text-button">Check request status</button>
+        </section>
+
+        <section id="staff" class="task" hidden aria-labelledby="staff-title">
+          <div class="task-heading"><h2 id="staff-title">One appointment, in focus</h2><button type="button" id="staff-refresh" class="text-button">Refresh facts</button></div>
+          <div id="staff-request" class="request-context"></div>
+          <div id="staff-offers" class="offers" aria-label="Current appointment options"></div>
+          <section id="create-review" class="proposal" hidden aria-labelledby="create-review-title">
+            <p class="proposal-label">Proposed booking</p><h3 id="create-review-title">Ready to book?</h3><p id="create-summary" class="proposal-summary"></p>
+            <p class="helper">Your confirmation creates the booking after the server checks the request and availability again.</p>
+            <div class="actions"><button type="button" id="create-confirm">Confirm booking</button><button type="button" id="create-cancel" class="quiet">Back</button></div>
+          </section>
+          <div id="diary" class="appointment-context" aria-label="Current appointment"></div>
+          <div id="move-area" hidden>
+            <div id="move-entry">
+            <label for="move-words" class="composer-label">What would you like to change?</label>
+            <textarea id="move-words" class="intent-input" rows="3" maxlength="500" aria-describedby="move-mapping-cue move-mapping-status" placeholder="Move this appointment to Thursday at three pm."></textarea>
+            <p id="move-mapping-cue" class="helper">Speak or type. Raisa will prepare the change for you to check.</p>
+            <div id="staff-voice-slot" class="voice-slot"></div>
+            <div class="primary-actions"><button type="button" id="move-suggest">Prepare move <span aria-hidden="true">↗</span></button></div>
+            <p id="move-mapping-status" class="helper" role="status" aria-live="polite"></p>
+            <details id="move-structured" class="disclosure">
+              <summary>Enter or edit date and time</summary>
+              <div class="fields two-fields"><label>New date<input id="move-date" type="date" required></label><label>New time<input id="move-time" type="time" required></label></div>
+              <button type="button" id="move-propose" class="quiet">Review edited details</button>
+            </details>
+            </div>
+            <section id="move-review" class="proposal" hidden aria-labelledby="move-review-title">
+              <p class="proposal-label">Proposed change</p><h3 id="move-review-title">Keep the appointment. Change the time.</h3><div id="move-summary"></div>
+              <p class="helper">Confirm that this is the appointment and time you mean. Availability is checked again when you confirm.</p>
+              <div class="actions"><button type="button" id="move-confirm">Confirm move</button><button type="button" id="move-cancel" class="quiet">Change details</button></div>
+            </section>
+          </div>
+          <div id="staff-outcome" class="outcome" aria-live="polite"></div>
+        </section>
+
+        <aside class="workspace-aside" aria-labelledby="aside-title">
+          <div class="aside-art" aria-hidden="true"><div class="art-orbit"></div><div class="art-sheet"><span></span><span></span><span></span><i></i></div><div class="art-focus"></div></div>
+          <h2 id="aside-title">The right view for the task.</h2>
+          <p>Your current appointment stays in focus. Ask for the diary whenever you need a wider view of the selected week.</p>
+          <p class="aside-note">Suggestions are separate from bookings. You always confirm a change.</p>
+        </aside>
+      </div>
+
+      <section id="diary-workspace" class="diary-workspace" hidden aria-labelledby="diary-heading">
+        <div class="diary-heading"><div><h2 id="diary-heading">Weekly appointments</h2><p id="diary-window" class="helper">Appointments in this seven-day view</p></div><div class="actions"><button id="diary-refresh" type="button" class="quiet">Refresh diary</button><button id="diary-list-toggle" type="button" class="text-button" aria-pressed="false">List view</button></div></div>
+        <p id="diary-status" class="helper" role="status" aria-live="polite">Open the diary to read its current appointments.</p>
+        <div id="diary-grid" class="diary-grid-scroll" tabindex="0" aria-label="Weekly appointment grid"></div>
+        <div id="diary-list" class="diary-list" hidden></div>
+        <p class="helper diary-caution">Appointments for the dates shown. Rosters and breaks are not included; blank space does not establish availability.</p>
       </section>
 
-      <section class="panel" id="staff" hidden aria-labelledby="staff-title">
-        <div class="panel-head"><div><p class="eyebrow">Reception One</p><h2 id="staff-title">Today's appointment task</h2></div><span class="step">Staff confirmation required</span></div>
-        <div id="staff-request" class="fact-card"></div>
-        <div class="actions"><button type="button" id="staff-refresh" class="secondary">Refresh current facts</button></div>
-        <div id="staff-offers" class="offers" aria-label="Current appointment options"></div>
-        <div id="create-review" class="review" hidden><h3>Confirm new appointment</h3><p id="create-summary"></p><p class="unchanged">The request remains a separate historical fact. This action creates one appointment only after fresh server validation.</p><div class="actions"><button type="button" id="create-confirm">Confirm booking</button><button type="button" id="create-cancel" class="secondary">Cancel review</button></div></div>
-        <div id="diary" class="diary" aria-label="Current appointment"></div>
-        <div id="move-area" hidden>
-          <h3>Move this appointment</h3>
-          <label for="move-words">Staff instruction</label><textarea id="move-words" aria-describedby="move-mapping-cue move-mapping-status" rows="2" maxlength="500" placeholder="Move this appointment next Thursday at 3 pm."></textarea>
-          <p class="hint" id="move-mapping-cue">Choose the current appointment, then use Suggest details from words to propose a new date and time from your note. Local deterministic interpretation never changes the appointment. Check the suggestion before review and confirmation, or leave the note blank to use structured details.</p>
-          <div class="fields"><label>New date <input id="move-date" type="date" required></label><label>New time <input id="move-time" type="time" required></label></div>
-          <div id="move-mapping" class="review" hidden><label><input type="checkbox" id="move-mapping-ack" aria-describedby="move-mapping-status"> I checked the selected appointment and suggested details against my current words.</label></div>
-          <p class="hint" id="move-mapping-status" role="status" aria-live="polite">Structured details only. No note needs mapping.</p>
-          <div class="actions"><button type="button" id="move-suggest">Suggest details from words</button><button type="button" id="move-propose">Review move</button></div>
-          <div id="move-review" class="review" hidden><h3>Confirm time-only move</h3><div id="move-summary"></div><div class="actions"><button type="button" id="move-confirm">Confirm move</button><button type="button" id="move-cancel" class="secondary">Cancel review</button></div></div>
-        </div>
-        <div id="staff-outcome" class="outcome"></div>
-        <details id="reliability-lab" class="review">
-          <summary>Reliability Lab · optional evidence view</summary>
-          <p class="hint">Local synthetic evidence only. Opening this view reads one bound report; it does not run a case or check a live appointment.</p>
-          <div id="reliability-lab-content" role="status" aria-live="polite">Not opened. No evaluation has been started here.</div>
-        </details>
+      <section id="voice-controls" class="voice-controls" aria-label="Dictation controls">
+        <div class="voice-actions"><button type="button" id="voice-toggle" class="quiet" disabled aria-describedby="voice-note">Start talking</button><button type="button" id="voice-cancel" class="text-button" hidden>Cancel dictation</button><span id="voice-availability" class="helper">Voice unavailable · type instead</span></div>
+        <p id="voice-note" class="helper" role="status" aria-live="polite" aria-atomic="true">Type your request while local voice is unavailable.</p>
       </section>
 
-      <section class="panel modality" aria-labelledby="voice-title">
-        <div class="panel-head"><div><p class="eyebrow">Modality</p><h2 id="voice-title">Speak or type</h2></div><span class="step" id="voice-availability">Voice unavailable · type instead</span></div>
-        <p>Start local dictation only when you choose. A transcript appears in the editable request or staff instruction field; it never sends a request or confirms an appointment.</p>
-        <div class="actions"><button type="button" id="voice-toggle" disabled aria-describedby="voice-note">Start talking</button><button type="button" id="voice-cancel" class="secondary" hidden>Cancel dictation</button></div>
-        <p class="hint" id="voice-note" role="status" aria-live="polite" aria-atomic="true">Local voice is not qualified. Type instead.</p>
-      </section>
+      <details class="disclosure supporting-details" id="session-details">
+        <summary>Context and details</summary>
+        <p id="clock" class="helper"></p><p id="mock-identity" class="helper" hidden></p>
+        <div id="staff-request-details"></div><div id="diary-details"></div>
+        <p class="helper">This demonstration interprets a bounded set of date and time phrases locally. It does not use a live AI provider or a real PRODA sign-in.</p>
+        <button type="button" id="spoken-reply" class="quiet" disabled>Speak verified reply</button><p id="spoken-availability" class="helper">Spoken replies unavailable. Read the reply here.</p>
+      </details>
+      <details id="reliability-lab" class="disclosure supporting-details">
+        <summary>How this demonstration is checked</summary>
+        <p class="helper">Reviewed synthetic evidence. Opening this view does not run a test or check a live appointment.</p>
+        <div id="reliability-lab-content" role="status" aria-live="polite">Not opened.</div>
+      </details>
     </main>
-    <footer>Synthetic demonstration · Current facts and actions require the local reviewed server adapter.</footer>
+    <footer><span>Raisa · A quieter way to work.</span><span>Synthetic demonstration · <span class="zone"></span></span></footer>
   </div>
 </body>
 </html>

@@ -17,7 +17,7 @@ from typing import Any, Literal
 MAX_BODY_BYTES = 4096
 ALLOWED_ACTIONS = {
     "patient": frozenset({"refresh", "reconcile", "submit_request"}),
-    "staff": frozenset({"refresh", "reconcile", "propose_create", "confirm_create", "propose_move", "confirm_move"}),
+    "staff": frozenset({"refresh", "diary", "reconcile", "propose_create", "confirm_create", "propose_move", "confirm_move"}),
 }
 
 
@@ -101,9 +101,9 @@ def admit_action(
     action, method, payload, key = (raw[name] for name in ("action", "method", "body", "idempotency_key"))
     if type(action) is not str or action not in ALLOWED_ACTIONS[binding.persona]:
         raise AdapterRejected("ACTION_UNAVAILABLE")
-    if method != ("read" if action in {"refresh", "reconcile", "propose_create", "propose_move"} else "write"):
+    if method != ("read" if action in {"refresh", "diary", "reconcile", "propose_create", "propose_move"} else "write"):
         raise AdapterRejected("METHOD_INVALID")
-    if action in {"refresh", "reconcile"}:
+    if action in {"refresh", "diary", "reconcile"}:
         if payload is not None or key is not None:
             raise AdapterRejected("BODY_INVALID")
     elif type(payload) is not dict:

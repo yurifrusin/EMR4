@@ -1,11 +1,26 @@
 // Source-only UI. The same-origin adapter contract is specified beside this file.
 // No demo identity, capability, signed proposal, or staff credential is kept by the browser.
 import { initLocalVoice, initSpokenReply, createManualIntentHandoff } from "./stage1-local-voice.js";
+import { initDiaryView } from "./stage1-diary-view.js";
 const $ = id => document.getElementById(id);
 const state = { session: null, request: null, appointment: null, offer: null,
-  create: null, move: null, pendingKey: null, generation: 0, busy: false, requestReview: null, moveReview: null };
+  create: null, move: null, pendingKey: null, requestUncertain: false, generation: 0,
+  proposalGeneration: 0, busy: false, staffUncertain: false, requestReview: null, moveReview: null };
 const text = (id, value) => { $(id).textContent = value == null ? "" : String(value); };
-const show = (id, visible) => { $(id).hidden = !visible; };
+const show = (id, visible) => {
+  $(id).hidden = !visible;
+  // Keep exact fields in the DOM for snapshot checks while the proposal takes
+  // visual focus. Hiding an editor neither acknowledges it nor alters state.
+  if(id==="request-review-box")$("request-entry").hidden=visible ||
+    Boolean(state.request && state.request.state!=="draft");
+  if(id==="move-review"){
+    $("move-entry").hidden=visible;$("diary").hidden=visible;
+    $("staff-request").hidden=visible || state.request?.state==="booked";
+  }
+  if(id==="create-review"){
+    $("staff-offers").hidden=visible;$("staff-request").hidden=visible || state.request?.state==="booked";
+  }
+};
 let spoken = null;
 const status = message => { spoken?.stop(); text("status", message); };
 const dateTime = (date, clock, zone) => `${date} at ${clock} ${zone}`;
@@ -15,6 +30,21 @@ const intentHandoffs={request:createManualIntentHandoff(),move:createManualInten
 const interpretedNotes={request:null,move:null};
 const interpretationGeneration={request:0,move:0};
 let localVoice=null;
+let diaryView=null;
+let authPromptTimer=null;
+function armAuthPrompt() {
+  clearTimeout(authPromptTimer);
+  if(state.session?.persona!=="staff")return;
+  const tokenEnd=Date.parse(state.session.mock_token_expires_at||"");
+  const windowEnd=Date.parse(state.session.human_window_ends_at||"");
+  if(!Number.isFinite(tokenEnd)||!Number.isFinite(windowEnd))return;
+  const check=()=>{
+    if(Date.now()>=windowEnd){show("continue-demo",false);status("The recording window has ended. Your editable words remain on this page.");return;}
+    if(Date.now()>=tokenEnd){show("continue-demo",true);status("Mock organisation access expired. Your words remain editable. Select Continue demo before another staff action.");return;}
+    authPromptTimer=setTimeout(check,Math.max(1000,Math.min(tokenEnd-Date.now(),60000)));
+  };
+  check();
+}
 const intentKind=()=>state.session?.persona==="patient"?"request":"move";
 function intentSnapshot(kind) {
   return {kind,scope:state.session?state.session.persona+":"+state.session.csrf:"",
@@ -49,7 +79,10 @@ async function suggestFromWords(kind) {
     status("Finish or cancel dictation in the current session before suggesting details.");return;
   }
   const words=intentSnapshot(kind).words;
-  if(!words.trim()){status("Type or dictate a note, or use the structured controls with the note blank.");return;}
+  if(!words.trim()){
+    if(kind==="request")reviewRequest();else await reviewMove();
+    return;
+  }
   invalidateIntent(kind,false);
   const generation=interpretationGeneration[kind],before=JSON.stringify(intentSnapshot(kind));
   status("Interpreting your words locally. No request or appointment is being changed…");
@@ -65,7 +98,9 @@ async function suggestFromWords(kind) {
         !Array.isArray(result.missing) || !result.fields || typeof result.fields!=="object" || Array.isArray(result.fields))
       throw new Error("The suggested details could not be verified. Clarify the note or use structured details.");
     if(result.status!=="PROPOSED"){
-      status("Please clarify the note with one date and an exact time or a bounded preferred window. No details were adopted.");return;
+      status(result.message==="DATE_NOT_CURRENTLY_OFFERED"
+        ?"That date is not currently offered. Check the offered dates, clarify your words, and suggest again. No details were adopted."
+        :"Please clarify the note with one date and an exact time or a bounded preferred window. No details were adopted.");return;
     }
     const keys=kind==="request"?["date","earliest_local","latest_local"]:["target_date","target_start_local"];
     const fields=result.fields,date=fields[kind==="request"?"date":"target_date"];
@@ -81,20 +116,16 @@ async function suggestFromWords(kind) {
     invalidateIntent(kind,false);
     interpretedNotes[kind]=JSON.stringify(intentSnapshot(kind));
     renderMapping(kind);
-    status("Local deterministic interpretation suggested these details. Check them against your words, then review. Nothing has been sent or confirmed.");
+    // Interpretation changes only editable fields. The following step prepares
+    // an exact visible review; it never writes or acknowledges the mapping.
+    if(kind==="request")reviewRequest();else await reviewMove();
   }catch(error){if(generation===interpretationGeneration[kind])status(error.message);}
 }
 
 function renderMapping(kind) {
-  const check=$(kind+"-mapping-ack"),info=intentHandoffs[kind].inspect(intentSnapshot(kind));
-  $(kind+"-mapping").hidden=!info.required;
-  check.disabled=!info.supported || !hasCurrentInterpretation(kind) || Boolean(localVoice && !localVoice.isIdle());
-  check.checked=info.acknowledged;
-  text(kind+"-mapping-status",!info.required?"Structured details only. No note needs mapping.":
-    !info.supported?"Complete the current structured details before checking the note.":
-    info.acknowledged?"Your check is recorded for these words, target and details. This does not verify their meaning.":
-    !hasCurrentInterpretation(kind)?"Use Suggest details from words. Clarify the note if it cannot be interpreted.":
-    "Check the suggested details against your words before reviewing.");
+  const info=intentHandoffs[kind].inspect(intentSnapshot(kind));
+  text(kind+"-mapping-status",info.required && !hasCurrentInterpretation(kind)
+    ?"Prepare a suggestion from your words, or enter the date and time below.":"");
 }
 function invalidateIntent(kind, cancelCapture=true) {
   interpretedNotes[kind]=null;interpretationGeneration[kind]++;
@@ -104,29 +135,51 @@ function invalidateIntent(kind, cancelCapture=true) {
   renderMapping(kind);
   if(cancelCapture)localVoice?.invalidateTarget();
 }
-function acceptMapping(kind) {
-  const check=$(kind+"-mapping-ack");
-  if(localVoice && !localVoice.isIdle()){
-    check.checked=false;status("Finish or cancel dictation before checking the mapped details.");return;
-  }
-  if(!hasCurrentInterpretation(kind)){check.checked=false;status("Suggest details from the current words before checking them.");return;}
-  if(!check.checked){invalidateIntent(kind);return;}
-  try{intentHandoffs[kind].acknowledge(intentSnapshot(kind));}
-  catch(_){check.checked=false;status("Complete the current details and check the editable note before review.");}
-  renderMapping(kind);
+function canConfirmPrepared(prepared, snapshot, generation, busy, uncertain, voiceIdle) {
+  return Boolean(prepared) && !busy && !uncertain && voiceIdle &&
+    prepared.snapshot===JSON.stringify(snapshot) && prepared.generation===generation;
 }
-function requireMappedReview(kind) {
-  if(!hasCurrentInterpretation(kind))throw new Error("Use Suggest details from words and check the proposal before review.");
-  if(localVoice && !localVoice.isIdle())throw new Error("Finish or cancel dictation before review.");
-  try{return intentHandoffs[kind].review(intentSnapshot(kind));}
-  catch(_){throw new Error("Check that the current editable note matches these structured details before review.");}
+function finalHumanReview(kind, prepared, uncertain=false) {
+  const snapshot=intentSnapshot(kind);
+  if(!canConfirmPrepared(prepared,snapshot,interpretationGeneration[kind],state.busy,
+      uncertain,!localVoice || localVoice.isIdle()) || !hasCurrentInterpretation(kind))
+    throw new Error("The prepared details changed. Prepare and check them again before confirming.");
+  const handoff=intentHandoffs[kind];
+  try {
+    // This exact final button click is the human acknowledgement for a note.
+    // Blank notes use the existing structured-only review path.
+    if(snapshot.words.trim())handoff.acknowledge(snapshot);
+    const review=handoff.review(snapshot);
+    if(!handoff.isReviewCurrent(snapshot,review))throw new Error("stale");
+    return review;
+  } catch (_) {
+    throw new Error("The current words, target and details need a fresh review.");
+  }
 }
 
 
 function showWriteFailure(error,subject) {
+  if(error?.reauth){show("continue-demo",true);status("Mock organisation access expired. Continue demo, then review and choose the action again. Your words and original command key remain here.");return;}
   const definitive=error?.status===400 || error?.status===401 || error?.status===403 || error?.status===422;
-  if(definitive){state.pendingKey=null;show("reconcile",false);status(error.message);}
-  else {show("reconcile",true);status(subject+" outcome uncertain. Check the original action before another confirmation.");}
+  if(definitive){
+    state.pendingKey=null;
+    if(state.session?.persona==="staff")state.staffUncertain=false;
+    if(subject==="Submission"){
+      state.requestUncertain=false;
+      show("request-review-box",false);
+      text("patient-outcome",`Request was rejected: ${error.message}`);
+    }
+    show("reconcile",false);status(error.message);
+  }
+  else {
+    if(state.session?.persona==="staff")state.staffUncertain=true;
+    if(subject==="Submission"){
+      state.requestUncertain=true;
+      show("request-review-box",false);
+      text("patient-outcome","Submission outcome unverified. Check the original action before another confirmation. The current request state is not verified.");
+    }
+    show("reconcile",true);status(subject+" outcome uncertain. Check the original action before another confirmation.");
+  }
 }
 
 async function api(method, action, body, key) {
@@ -137,16 +190,19 @@ async function api(method, action, body, key) {
     body: JSON.stringify({ method, action, body, idempotency_key: key || null }),
   });
   if (!response.ok) {
-    if (response.status === 401 || response.status === 403) {
-      state.session=null;invalidateIntent("request");invalidateIntent("move");
-    }
+    const detail=(await response.json().catch(()=>null))?.detail;
+    if(detail==="MOCK_STAFF_SESSION_EXPIRED")show("continue-demo",true);
+    if(detail==="DEMO_HUMAN_WINDOW_ENDED")show("continue-demo",false);
     const message=response.status===400 || response.status===422
       ? "Check the date, time and required details. The submitted details were not accepted."
       : response.status===409 ? "Current facts changed. Refresh and review again."
       : response.status===404 ? "This request or appointment is unavailable in the current session."
-      : response.status===401 || response.status===403 ? "This session cannot perform that action. Refresh the session."
+      : detail==="MOCK_STAFF_SESSION_EXPIRED" ? "Mock organisation access expired. Continue demo; your editable words remain here."
+      : detail==="DEMO_HUMAN_WINDOW_ENDED" ? "The recording window has ended. Your editable words remain on this page."
+      : response.status===401 || response.status===403 ? "This session cannot perform that action."
       : "The action could not be verified. Check the original action before another confirmation.";
-    const error=new Error(message);error.status=response.status;throw error;
+    const error=new Error(message);error.status=response.status;
+    error.reauth=detail==="MOCK_STAFF_SESSION_EXPIRED";throw error;
   }
   return response.json();
 }
@@ -299,12 +355,15 @@ $("reliability-lab").addEventListener("toggle", async () => {
 });
 function clearPending() {
   spoken?.stop();
+  state.proposalGeneration++;
   state.create = state.move = state.offer = state.moveReview = null;
   show("create-review", false); show("move-review", false);
 }
-function displayRequest(request, original, options = []) {
+function displayRequest(request, original, options = [], uncertain = false) {
   const previousTarget=selectedVoiceTarget();
   state.request = request;
+  if (uncertain === true) state.requestUncertain = true;
+  else if (uncertain === false) state.requestUncertain = false;
   if(previousTarget!==selectedVoiceTarget())invalidateIntent("request");
   if (!request) { text("patient-outcome", "Request unavailable."); return; }
   if (request.state === "draft" && Array.isArray(options) && options.length) {
@@ -316,7 +375,9 @@ function displayRequest(request, original, options = []) {
     text("request-options-note", `Request dates currently offered: ${dates.join(", ")}. These are request choices, not reserved appointments.`);
   }
   const booked = request.state === "booked" && request.booked_appointment_id && request.booked_start_time;
-  const message = booked
+  const message = state.requestUncertain
+    ? "Submission outcome unverified. Check the original action before another confirmation. The current request state is not verified."
+    : booked
     ? `This request led to a booking. ${original?.source === "completed_create_command_result" ?
       `Original booking result: ${dateTime(original.date, original.start_local, original.zone)}. ` :
       "The original booking command result is unavailable in this demo session. "}Current appointment time from readback: ${request.booked_start_time}. Current status: ${request.booked_status}.`
@@ -324,19 +385,26 @@ function displayRequest(request, original, options = []) {
       ? "Request received. Reception One has not confirmed a booking. No time is reserved."
       : request.state === "draft" ? "Draft request. Review and send when ready." : `Request state: ${request.state}.`;
   text("patient-outcome", message);
+  $("request-entry").hidden=request.state!=="draft" || !$("request-review-box").hidden;
+  if (state.requestUncertain) show("request-review-box", false);
   renderMapping("request");
 }
 function displayStaff(data) {
   if (!data || !data.request) { text("staff-request", "Request unavailable."); return; }
   state.request = data.request;
   state.appointment = data.appointment || null;
+  if(data.uncertain===true)state.staffUncertain=true;
+  else if(data.uncertain===false)state.staffUncertain=false;
   invalidateIntent("move");
   const r = data.request;
+  $("staff-request").hidden=r.state==="booked";
   facts($("staff-request"), [
-    ["Request", r.state], ["Source", "Synthetic patient web text"],
-    ["Identity", "Fictional demo session; no real patient identity"],
+    ["Request", r.state],
     ["Preference", r.preference_date && r.earliest_local && r.latest_local
-      ? `${r.preference_date}, ${r.earliest_local}–${r.latest_local} ${r.practice_timezone}` : "Not submitted"],
+      ? `${r.preference_date}, ${r.earliest_local}–${r.latest_local} ${r.practice_timezone}` : "Not submitted"]]);
+  facts($("staff-request-details"), [
+    ["Source", "Synthetic patient web text"],
+    ["Identity", "Fictional demo session; no real patient identity"],
     ["Request version", r.request_version],
     ["Original booking result", data.original_booking?.source === "completed_create_command_result"
       ? dateTime(data.original_booking.date, data.original_booking.start_local, data.original_booking.zone)
@@ -346,10 +414,11 @@ function displayStaff(data) {
   show("move-area", Boolean(appt));
   if (appt) {
     facts($("diary"), [["Current appointment", dateTime(appt.date, appt.start_local, appt.zone)],
-      ["Status", appt.status], ["Patient", appt.patient_label], ["Practitioner", appt.practitioner_label],
-      ["Type", appt.type_label], ["Duration", `${appt.duration_minutes} minutes`], ["Location", appt.location_label],
-      ["State version", appt.state_version]]);
-  } else $("diary").replaceChildren();
+      ["Patient", appt.patient_label], ["Practitioner", appt.practitioner_label],
+      ["Type", appt.type_label], ["Duration", `${appt.duration_minutes} minutes`]]);
+    facts($("diary-details"), [["Status", appt.status], ["Location", appt.location_label],
+      ["Appointment version", appt.state_version], ["Appointment reference", appt.ref]]);
+  } else {$("diary").replaceChildren();$("diary-details").replaceChildren();}
   const offers = $("staff-offers"); offers.replaceChildren();
   if (Array.isArray(data.options)) for (const option of data.options) {
     const row = document.createElement("div"); row.className = "offer";
@@ -358,18 +427,30 @@ function displayStaff(data) {
     button.addEventListener("click", () => reviewCreate(option)); row.append(label, button); offers.append(row);
   }
   if (!data.options?.length && r.state === "submitted") text("staff-outcome", "No current option is available. Offer an alternative through the reviewed backend flow.");
+  document.dispatchEvent(new CustomEvent("raisa:staff-facts", {detail:{
+    request_state:r.state,appointment_ref:appt?.ref||null,
+    appointment_version:appt?.state_version??null}}));
 }
 async function refresh() {
+  if (state.session?.persona === "patient" && state.busy) {
+    status("Wait for the current submission result before refreshing.");
+    return null;
+  }
   invalidateIntent("request");invalidateIntent("move");
-  clearPending(); state.pendingKey = null; const generation = ++state.generation;
+  clearPending(); const generation = ++state.generation;
   status("Refreshing current facts…");
   try {
     const result = await api("read", "refresh", null);
     if (generation !== state.generation) return;
-    if (state.session.persona === "patient") displayRequest(result.request, result.original_booking, result.options);
+    if (state.session.persona === "patient") displayRequest(result.request, result.original_booking, result.options, result.uncertain);
     else displayStaff(result);
-    show("reconcile", result.uncertain === true);
-    status(result.uncertain === true ? "An earlier action is still uncertain. Check that original action before any new confirmation." :
+    // A staff confirmation keeps its original key until this caller verifies
+    // the matching appointment readback below. Other definitive reads clear it.
+    if (result.uncertain === false && !(state.session.persona==="staff" && state.busy))
+      state.pendingKey = null;
+    const uncertain=state.session.persona==="staff"?state.staffUncertain:state.requestUncertain;
+    show("reconcile", uncertain);
+    status(uncertain ? "An earlier action is still uncertain. Check that original action before any new confirmation." :
       "Current facts loaded. Check the practice date and time before acting.");
     return result;
   } catch (error) { status(error.message); return null; }
@@ -384,34 +465,56 @@ function requestFields() {
 function reviewRequest() {
   state.requestReview=null;show("request-review-box",false);
   try {
+    if (state.requestUncertain) throw new Error("Check the original action before reviewing or sending another request.");
     const value = requestFields();
     if (!state.request || state.request.state !== "draft") throw new Error("Refresh the draft request before submitting.");
-    state.requestReview=requireMappedReview("request");
-    text("request-summary", `Follow-up on ${value.date}, between ${value.earliest_local} and ${value.latest_local} ${state.session.zone}. No booking is being made yet.`);
+    const snapshot=intentSnapshot("request");
+    if(!intentHandoffs.request.inspect(snapshot).supported || !hasCurrentInterpretation("request") ||
+        (localVoice && !localVoice.isIdle()))
+      throw new Error("Check the current suggested or structured details before preparing the request.");
+    state.requestReview={snapshot:JSON.stringify(snapshot),generation:interpretationGeneration.request};
+    text("request-summary", `Follow-up · ${value.date} · ${value.earliest_local}–${value.latest_local} ${state.session.zone}`);
+    text("request-words-review",snapshot.words.trim());
+    $("request-words-review").hidden=!snapshot.words.trim();
     show("request-review-box", true); $("request-submit").focus();
-  } catch (error) { status(error.message); }
+    status("Your request is ready to review. Nothing has been sent.");
+  } catch (error) { $("request-structured").open=true;status(error.message); }
 }
 async function submitRequest() {
-  if((localVoice && !localVoice.isIdle()) ||
-      !intentHandoffs.request.isReviewCurrent(intentSnapshot("request"),state.requestReview)){
-    show("request-review-box",false);status("Review the current mapped details before sending the request.");return;
+  if(state.requestUncertain){
+    show("request-review-box",false);
+    status("Check the original action before sending another request.");
+    return;
   }
+  let value;
+  try { finalHumanReview("request",state.requestReview,state.requestUncertain);value=requestFields(); }
+  catch(error){show("request-review-box",false);status(error.message);return;}
   try {
     if (state.busy) return;
-    const value = requestFields();
+    state.requestReview=null;
     const key = state.pendingKey || uuid(); state.pendingKey = key; state.busy = true;
     status("Sending request…");
+    text("patient-outcome", "Sending request… No booking is being made yet.");
     const result = await api("write", "submit_request", { ...value, request_version: state.request.request_version,
       reason_code: "follow_up" }, key);
     state.pendingKey = null; show("request-review-box", false); displayRequest(result.request, result.original_booking, result.options);
     status("Request result read back from the server.");
-  } catch (error) { showWriteFailure(error,"Submission"); }
+  } catch (error) {
+    if (error?.status !== 400 && error?.status !== 401 && error?.status !== 403 && error?.status !== 422) {
+      show("request-review-box", false);
+      text("patient-outcome", "Submission outcome unverified. Check the original action before another confirmation. The current request state is not verified.");
+    }
+    showWriteFailure(error,"Submission");
+  }
   finally { state.busy = false; }
 }
 async function reviewCreate(option) {
+  if(state.staffUncertain || state.busy){status("Check the original action before preparing another booking.");return;}
   clearPending(); status("Checking this time against current request and availability…");
+  const proposalGeneration=state.proposalGeneration,requestVersion=state.request?.request_version;
   try {
     const result = await api("read", "propose_create", { request_version: state.request.request_version, selected: option });
+    if(proposalGeneration!==state.proposalGeneration || state.request?.request_version!==requestVersion)return;
     if (!result.safe || !result.proposal_ref) throw new Error("This option is unavailable. Refresh current facts.");
     state.create = result.proposal_ref;
     text("create-summary", `Create a follow-up for ${result.patient_label} with ${result.practitioner_label} on ${dateTime(option.date, option.local_time, option.zone)}. This is a fresh proposal, not a booking.`);
@@ -420,11 +523,12 @@ async function reviewCreate(option) {
 }
 async function confirmCreate() {
   if (!state.create || state.busy) return;
+  if(state.staffUncertain){status("Check the original action before confirming another booking.");return;}
   state.busy = true; const key = state.pendingKey || uuid(); state.pendingKey = key;
   status("Confirming booking and checking committed readback…");
   try {
     const result = await api("write", "confirm_create", { proposal_ref: state.create }, key);
-    state.pendingKey = null; clearPending();
+    clearPending();
     if (result.outcome !== "committed" || !result.appointment) throw new Error("No verified booking readback.");
     const current = await refresh();
     if (!current?.appointment || !current.appointment.zone ||
@@ -432,44 +536,58 @@ async function confirmCreate() {
         current.appointment.date !== result.appointment.date ||
         current.appointment.start_local !== result.appointment.start_local)
       throw new Error("Booking readback did not match the command result.");
+    state.pendingKey = null;
     const message = `Booking confirmed for ${dateTime(current.appointment.date, current.appointment.start_local, current.appointment.zone)}. You can still view the original request.`;
     status(message); spoken?.offer(message);
-  } catch (error) { clearPending();showWriteFailure(error,"Booking"); }
+  } catch (error) { if(!error?.reauth)clearPending();showWriteFailure(error,"Booking"); }
   finally { state.busy = false; }
 }
 async function reviewMove() {
+  if(state.staffUncertain || state.busy){status("Check the original action before preparing another move.");return;}
   clearPending();
   const appointment = state.appointment, date = $("move-date").value, local_time = $("move-time").value;
-  if (!appointment || !date || !local_time) { status("Select a current appointment, new date and time."); return; }
+  if (!appointment || !date || !local_time) { $("move-structured").open=true;status("Select a current appointment, new date and time."); return; }
+  const snapshot=intentSnapshot("move"),generation=interpretationGeneration.move,
+    proposalGeneration=state.proposalGeneration;
+  if(!intentHandoffs.move.inspect(snapshot).supported || !hasCurrentInterpretation("move") ||
+      (localVoice && !localVoice.isIdle())){
+    status("Check the current suggested or structured move details before preparing the proposal.");return;
+  }
   status("Checking the exact appointment and proposed time…");
   try {
-    const mappedReview=requireMappedReview("move");
     const result = await api("read", "propose_move", { appointment_ref: appointment.ref,
       source_state_version: appointment.state_version, target_date: date, target_start_local: local_time });
-    if(!intentHandoffs.move.isReviewCurrent(intentSnapshot("move"),mappedReview))
-      throw new Error("The note, selected appointment or details changed. Review them again.");
+    if(proposalGeneration!==state.proposalGeneration || generation!==interpretationGeneration.move ||
+        JSON.stringify(intentSnapshot("move"))!==JSON.stringify(snapshot) ||
+        state.appointment?.ref!==appointment.ref ||
+        state.appointment?.state_version!==appointment.state_version ||
+        (localVoice && !localVoice.isIdle()))return;
     if (!result.safe || !result.proposal_ref) throw new Error("Move unavailable. Refresh the appointment.");
-    state.moveReview=mappedReview;
+    state.moveReview={snapshot:JSON.stringify(snapshot),generation,proposalGeneration};
     state.move = result.proposal_ref;
-    facts($("move-summary"), [["Before", dateTime(appointment.date, appointment.start_local, appointment.zone)],
-      ["After", dateTime(date, local_time, appointment.zone)], ["Patient unchanged", appointment.patient_label],
-      ["Practitioner unchanged", appointment.practitioner_label], ["Type unchanged", appointment.type_label],
-      ["Duration unchanged", `${appointment.duration_minutes} minutes`], ["Location unchanged", appointment.location_label]]);
-    show("move-review", true); $("move-confirm").focus(); status("Review the time-only move. The original appointment has not changed.");
+    facts($("move-summary"), [["Instruction", snapshot.words.trim()||"No note; structured details only"],
+      ["Before", dateTime(appointment.date, appointment.start_local, appointment.zone)],
+      ["After", dateTime(date, local_time, appointment.zone)]]);
+    const unchanged=document.createElement("p");unchanged.className="helper";
+    unchanged.textContent=`Unchanged: ${appointment.patient_label} · ${appointment.practitioner_label} · ${appointment.type_label} · ${appointment.duration_minutes} minutes · ${appointment.location_label}.`;
+    $("move-summary").append(unchanged);
+    show("move-review", true); $("move-confirm").focus(); status("Your proposed move is ready. The appointment has not changed yet.");
   } catch (error) { status(error.message); }
 }
 async function confirmMove() {
   if (!state.move || state.busy) return;
-  if((localVoice && !localVoice.isIdle()) ||
-      !intentHandoffs.move.isReviewCurrent(intentSnapshot("move"),state.moveReview)){
-    clearPending();status("Review the current mapped move before confirming.");return;
-  }
+  if(state.staffUncertain){status("Check the original action before confirming another move.");return;}
+  try {
+    if(state.moveReview?.proposalGeneration!==state.proposalGeneration)throw new Error("stale");
+    finalHumanReview("move",state.moveReview,state.staffUncertain);
+  } catch (_) {clearPending();status("The prepared move changed. Check a fresh proposal before confirming.");return;}
   const before = state.appointment;
+  state.moveReview=null;
   state.busy = true; const key = state.pendingKey || uuid(); state.pendingKey = key;
   status("Confirming move and checking the same appointment…");
   try {
     const result = await api("write", "confirm_move", { proposal_ref: state.move }, key);
-    state.pendingKey = null; clearPending();
+    clearPending();
     if (result.outcome !== "committed" || !result.appointment) throw new Error("No verified move readback.");
     const current = await refresh();
     if (!current?.appointment || !current.appointment.zone ||
@@ -482,16 +600,17 @@ async function confirmMove() {
         ["patient_label", "practitioner_label", "type_label", "duration_minutes", "location_label"]
           .some(field => current.appointment[field] !== before[field]))
       throw new Error("The same appointment and unchanged details were not verified.");
+    state.pendingKey = null;
     const message = `The same appointment was moved to ${dateTime(current.appointment.date, current.appointment.start_local, current.appointment.zone)}.`;
     status(message); spoken?.offer(message);
-  } catch (error) { clearPending();showWriteFailure(error,"Move"); }
+  } catch (error) { if(!error?.reauth)clearPending();showWriteFailure(error,"Move"); }
   finally { state.busy = false; }
 }
 
 $("request-suggest").addEventListener("click",()=>suggestFromWords("request"));
 $("move-suggest").addEventListener("click",()=>suggestFromWords("move"));
 $("request-review").addEventListener("click", reviewRequest);
-$("request-edit").addEventListener("click", () => { invalidateIntent("request"); spoken?.stop(); show("request-review-box", false); $("request-date").focus(); });
+$("request-edit").addEventListener("click", () => { invalidateIntent("request"); spoken?.stop(); show("request-review-box", false); $("request-structured").open=true; $("request-date").focus(); });
 $("request-submit").addEventListener("click", submitRequest);
 $("patient-refresh").addEventListener("click", refresh);
 $("staff-refresh").addEventListener("click", refresh);
@@ -499,20 +618,54 @@ $("create-confirm").addEventListener("click", confirmCreate);
 $("create-cancel").addEventListener("click", () => { clearPending(); $("staff-offers").querySelector("button")?.focus(); });
 $("move-propose").addEventListener("click", reviewMove);
 $("move-confirm").addEventListener("click", confirmMove);
-$("move-cancel").addEventListener("click", () => { invalidateIntent("move"); clearPending(); $("move-date").focus(); });
+$("move-cancel").addEventListener("click", () => { invalidateIntent("move"); clearPending(); $("move-structured").open=true; $("move-date").focus(); });
 $("reconcile").addEventListener("click", async () => {
+  if (state.busy) {
+    status("Wait for the current action result before checking the original action.");
+    return;
+  }
   invalidateIntent("request");invalidateIntent("move");
   status("Checking the original action with its existing command key…");
   try {
     const result = await api("read", "reconcile", null);
-    if (state.session.persona === "patient") displayRequest(result.request, result.original_booking, result.options); else displayStaff(result);
-    show("reconcile", result.uncertain === true);
-    status(result.uncertain === true ? "Outcome remains uncertain; no new action was started." : "Original action reconciled; current facts refreshed.");
-  } catch (_) { show("reconcile", true); status("Original action remains uncertain. No new action was started."); }
+    if (state.session.persona === "patient") displayRequest(result.request, result.original_booking, result.options, result.uncertain); else displayStaff(result);
+    if (result.uncertain === false) state.pendingKey = null;
+    const uncertain=state.session.persona==="staff"?state.staffUncertain:state.requestUncertain;
+    show("reconcile", uncertain);
+    status(uncertain ? "Outcome remains uncertain; no new action was started." : "Original action reconciled; current facts refreshed.");
+  } catch (_) {
+    if(state.session?.persona==="staff")state.staffUncertain=true;
+    else state.requestUncertain=true;
+    show("request-review-box",false);
+    show("reconcile", true);
+    if(state.session?.persona==="patient")text("patient-outcome","Submission outcome unverified. Check the original action before another confirmation. The current request state is not verified.");
+    status("Original action remains uncertain. No new action was started.");
+  }
+});
+$("continue-demo").addEventListener("click", async () => {
+  if(state.session?.persona!=="staff" || state.busy)return;
+  $("continue-demo").disabled=true;
+  status("Checking current synthetic organisation access for this same staff session…");
+  try {
+    const response=await fetch("/demo/stage1/continue",{method:"POST",credentials:"same-origin",
+      cache:"no-store",redirect:"error",headers:{"Content-Type":"application/json",
+        "X-CSRF-Token":state.session.csrf},body:"{}"});
+    if(!response.ok)throw new Error(response.status===403?
+      "Current mock organisation access or the recording window is unavailable. Your words remain editable.":
+      "This session could not continue. Your words remain editable.");
+    const result=await response.json();
+    if(result?.continued!==true || typeof result.mock_token_expires_at!=="string" ||
+        result.human_window_ends_at!==state.session.human_window_ends_at)
+      throw new Error("Continuation response could not be verified. Your words remain editable.");
+    state.session.mock_token_expires_at=result.mock_token_expires_at;
+    show("continue-demo",false);
+    armAuthPrompt();
+    status("Mock organisation access checked for the same staff session. Review your words and current facts before choosing an action. No command was repeated.");
+  }catch(error){status(error.message);}
+  finally{$("continue-demo").disabled=false;}
 });
 for (const id of ["request-date", "request-earliest", "request-latest", "patient-words"]) $(id).addEventListener("input", () => invalidateIntent("request"));
 for (const id of ["move-date", "move-time", "move-words"]) $(id).addEventListener("input", () => invalidateIntent("move"));
-for(const kind of ["request","move"]) $(kind+"-mapping-ack").addEventListener("change",()=>acceptMapping(kind));
 
 try {
   const response = await fetch("/demo/stage1/session", { credentials: "same-origin", cache: "no-store", redirect: "error" });
@@ -521,12 +674,24 @@ try {
   if (!session || !["patient", "staff"].includes(session.persona) || !session.csrf || !session.zone || !session.demo_clock)
     throw new Error("The local demo session is incomplete.");
   state.session = session;
+  if (session.persona === "staff") {
+    const identity = session.mock_identity;
+    if (!identity || identity.mode !== "synthetic_mock" || identity.mock !== true ||
+        identity.status !== "active" || typeof identity.user_label !== "string" ||
+        !identity.user_label || identity.user_label.length > 80)
+      throw new Error("Current mock organisation access could not be verified. No appointment action is available.");
+    text("mock-identity", `${identity.user_label} · Synthetic organisation access checked. Backend permissions and your confirmation are still required. This is not a real PRODA sign-in.`);
+    show("mock-identity", true);
+    armAuthPrompt();
+  }
   text("role", session.persona === "patient" ? "Alex · patient request" : "Reception One · staff");
-  text("title", session.persona === "patient" ? "Ask for a follow-up" : "Review and confirm appointments");
-  text("intro", session.persona === "patient" ? "Choose a preferred time. Reception One will review it before any booking exists." : "Review the current request, confirm a new booking, then move the same appointment if needed.");
-  text("clock", `Fixed demonstration clock: ${session.demo_clock} · Practice timezone: ${session.zone}`);
+  text("title", session.persona === "patient" ? "When would you like to come in?" : "How can I help with your appointments?");
+  text("intro", session.persona === "patient" ? "Tell Reception One when you prefer to come. A request does not reserve a time." : "Review the current request and appointment, then choose what you want to do.");
+  text("clock", `Practice clock when this page loaded: ${session.demo_clock} · Practice timezone: ${session.zone}`);
   document.querySelectorAll(".zone").forEach(node => { node.textContent = session.zone; });
   show("patient", session.persona === "patient"); show("staff", session.persona === "staff");
+  if(session.persona==="staff")diaryView=initDiaryView({load:()=>api("read","diary",null)});
+  document.dispatchEvent(new CustomEvent("raisa:session-ready", {detail:{persona:session.persona,zone:session.zone}}));
   spoken = initSpokenReply(() => state.session);
   localVoice=initLocalVoice(() => state.session, () => {
     spoken?.stop();invalidateIntent(intentKind(),false);

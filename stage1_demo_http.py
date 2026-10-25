@@ -9,7 +9,7 @@ public role/bootstrap endpoint. No application modules are imported here.
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from datetime import datetime, timedelta, timezone
+from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 import asyncio
 import hashlib
@@ -17,7 +17,7 @@ import json
 import math
 import re
 import secrets
-from typing import Any
+from typing import Any, Awaitable, Callable
 import uuid
 
 from fastapi import FastAPI, HTTPException, Request
@@ -25,16 +25,21 @@ from fastapi.responses import FileResponse, JSONResponse
 import httpx
 
 from stage1_demo_adapter_core import AdapterRejected, MAX_BODY_BYTES, SessionBinding, admit_action
+from stage1_staff_diary_read import list_path, render_staff_diary_read, unavailable as diary_unavailable
 from stage1_demo_intent import interpret_words, IntentRejected
 from stage1_demo_voice import (MAX_WAV_BYTES, VoiceInputRejected, VoiceRecognitionUnavailable,
-                               ContainedVoiceRuntimeBinding, VoiceRuntimeBinding,
+                               ContainedVoiceRuntimeBinding, SpeechComponentVoiceBinding,
+                               VoiceRuntimeBinding,
                                run_local_recognizer, target_for_persona,
                                validate_wav)
+from stage1_mock_org_bridge import StaffMockBinding, StaffMockDenied
 
 
 BASE = "/api/v1/appointments"
 COOKIE = "stage1_demo_session"
 STATIC = Path(__file__).parent / "static" / "demo"
+UI_VIEW = STATIC
+UI_CONTROLLER = STATIC
 LOCAL_MINUTE = re.compile(r"(?:[01]\d|2[0-3]):[0-5]\d(?::00(?:\.0+)?)?\Z")
 LAB_CATALOG_SHA = "8cc1ae403b898aecc8dca8f25e5f2c209b272c5a4fac6231e96f8e6ef238cf43"
 LAB_SOURCE_SCHEMA = "emr4.stage1_outcome_integrated_seam_report.v1"
@@ -651,7 +656,7 @@ class DemoConfig:
     request_capabilities: dict[str, str] = field(repr=False)
     # None until actual local installation, model and execution evidence are
     # independently bound by the trusted isolated harness.
-    voice_runtime: VoiceRuntimeBinding | ContainedVoiceRuntimeBinding | None = field(
+    voice_runtime: VoiceRuntimeBinding | ContainedVoiceRuntimeBinding | SpeechComponentVoiceBinding | None = field(
         default=None, repr=False)
     # One optional, trusted startup-supplied versioned report. No HTTP upload,
     # caller path, evaluator or runtime measurement is created by this bridge.
@@ -666,6 +671,21 @@ class DemoConfig:
     # One pinned, pre-projected progress report. No report path or client data is read.
     reliability_progress_report_bytes: bytes | None = field(default=None, repr=False)
     reliability_progress_report_sha256: str | None = field(default=None, repr=False)
+    # Trusted fixture only. The admitted mock integration must supply this;
+    # None retains the canonical bridge's pre-integration behaviour.
+    staff_mock_auth: StaffMockBinding | None = field(default=None, repr=False)
+    # Absolute end of the trusted staff recording window; never extended by
+    # token continuation. Required when staff_mock_auth is supplied.
+    staff_human_window_ends_at: datetime | None = field(default=None, repr=False)
+    # Only the separately reviewed owner-paced synthetic fixture opts in.
+    owner_paced_window_seconds: int | None = None
+    # Alternative trusted startup binding for the one isolated backend.
+    # A request cannot choose this origin; ASGI and HTTP are exclusive.
+    backend_loopback_origin: str | None = field(default=None, repr=False)
+    # Supplied only by the trusted launcher for its reviewed owned-container
+    # transport; no browser request can select or replace this callable.
+    backend_exec_exchange: Callable[..., Awaitable[httpx.Response]] | None = field(
+        default=None, repr=False)
 
 
 @dataclass(repr=False)
@@ -674,6 +694,8 @@ class _Session:
     staff_bearer: str | None
     seeded_appointment_id: str | None
     expires_at: datetime
+    staff_mock_token: str | None = field(default=None, repr=False)
+    staff_mock_expires_at: datetime | None = field(default=None, repr=False)
     proposal: dict[str, Any] | None = None
     uncertain: dict[str, Any] | None = None
     voice_nonce: str = field(default_factory=lambda: secrets.token_urlsafe(24), repr=False)
@@ -683,6 +705,21 @@ class DemoIssuer:
     """Trusted harness handle, not an HTTP endpoint or client role selector."""
 
     def __init__(self, config: DemoConfig):
+        if (config.backend_exec_exchange is not None and
+                (not callable(config.backend_exec_exchange)
+                 or config.backend_loopback_origin is None
+                 or config.backend_app is not None)):
+            raise ValueError("DEMO_BACKEND_BINDING_INVALID")
+        if config.backend_loopback_origin is None:
+            if config.backend_app is None:
+                raise ValueError("DEMO_BACKEND_BINDING_INVALID")
+        else:
+            origin = config.backend_loopback_origin
+            match = (re.fullmatch(r"http://127\.0\.0\.1:([1-9][0-9]{0,4})", origin)
+                     if type(origin) is str else None)
+            if (config.backend_app is not None or match is None
+                    or int(match.group(1)) > 65535):
+                raise ValueError("DEMO_BACKEND_BINDING_INVALID")
         if (config.profile != "STAGE1_SYNTHETIC_DEMO" or config.environment != "dev"
                 or not config.listener_origin.startswith("http://127.0.0.1:")
                 or not config.seeds or len(config.seeds) > 3):
@@ -696,6 +733,34 @@ class DemoIssuer:
                 or set(config.request_capabilities) != {s.request_id for s in patient_seeds}
                 or any(config.request_capabilities[s.request_id] != s.patient_capability for s in patient_seeds)):
             raise ValueError("DEMO_SEEDS_INVALID")
+        if config.staff_mock_auth is not None:
+            fixed = config.staff_mock_auth
+            now = datetime.now(timezone.utc)
+            window_end = config.staff_human_window_ends_at
+            limit = (86400 if config.owner_paced_window_seconds == 86400
+                     else 3600 if config.owner_paced_window_seconds is None else 0)
+            if (limit == 0 or
+                    (limit == 86400 and config.timezone != "Australia/Brisbane") or
+                    type(window_end) is not datetime or
+                    window_end.tzinfo is None or
+                    window_end.utcoffset() != timedelta(0) or
+                    not now < window_end <= now + timedelta(seconds=limit)):
+                raise ValueError("MOCK_HUMAN_WINDOW_INVALID")
+            if (fixed.practice_id != config.practice_id or
+                    fixed.staff_user_id != staff_seeds[0].staff_user_id):
+                raise ValueError("MOCK_STAFF_BINDING_INVALID")
+            try:
+                fixed.require(practice_id=config.practice_id,
+                              staff_user_id=staff_seeds[0].staff_user_id,
+                              scope="demo:use")
+                fixed.require(practice_id=config.practice_id,
+                              staff_user_id=staff_seeds[0].staff_user_id,
+                              scope="proposal:create")
+            except StaffMockDenied as exc:
+                raise ValueError("MOCK_STAFF_BINDING_INVALID") from exc
+        elif (config.staff_human_window_ends_at is not None or
+              config.owner_paced_window_seconds is not None):
+            raise ValueError("MOCK_HUMAN_WINDOW_INVALID")
         self.config = config
         self.lab_view = project_reliability_lab(
             config.reliability_report_bytes, config.reliability_report_sha256)
@@ -717,6 +782,21 @@ class DemoIssuer:
                 "progress": progress}
         self._sessions: dict[str, _Session] = {}
         self._initial_booking: dict[str, dict[str, str]] = {}
+        # Fixed staff journey only. These flags are set after existing typed
+        # receipt/readback checks, and are never supplied by an HTTP caller.
+        self._live_request_id = staff_seeds[0].request_id
+        self._live_outcomes = {
+            "request_submitted_verified": False,
+            "booking_confirmed_verified": False,
+            "move_confirmed_verified": False,
+        }
+        # Fixed, identifier-free shutdown diagnostic for the live request.
+        # A read-only state observation never proves the original command.
+        self._submit_diagnostic = {
+            "submit_stage": "NONE",
+            "submit_category": "NONE",
+            "observed_request_state": "UNAVAILABLE",
+        }
         for seed in config.seeds:
             token = secrets.token_urlsafe(32)
             binding = SessionBinding(
@@ -726,8 +806,14 @@ class DemoIssuer:
                 patient_capability=seed.patient_capability,
                 staff_user_id=seed.staff_user_id if seed.persona == "staff" else None,
             )
+            mock_token = config.staff_mock_auth.token if seed.persona == "staff" and config.staff_mock_auth else None
+            mock_expiry = config.staff_mock_auth.expiry_for(mock_token) if mock_token else None
+            session_end = (config.staff_human_window_ends_at
+                           if config.owner_paced_window_seconds == 86400
+                           else datetime.now(timezone.utc) + timedelta(hours=2))
             self._sessions[token] = _Session(binding, seed.staff_bearer,
-                seed.seeded_appointment_id, datetime.now(timezone.utc) + timedelta(hours=2))
+                seed.seeded_appointment_id, session_end,
+                staff_mock_token=mock_token, staff_mock_expires_at=mock_expiry)
 
     def cookie_for(self, persona: str, request_id: str) -> tuple[str, str]:
         """Return name/value only to the reviewed local harness; do not log it."""
@@ -737,26 +823,85 @@ class DemoIssuer:
                 return COOKIE, token
         raise ValueError("SESSION_NOT_CONFIGURED")
 
+    def live_outcome_summary(self) -> dict[str, bool]:
+        """Trusted shutdown projection; no appointment or session identifiers."""
+        return {name: value is True for name, value in self._live_outcomes.items()}
+
+    def submit_diagnostic_summary(self) -> dict[str, str]:
+        """Trusted fixed-enum projection; no command key, payload or patient data."""
+        return dict(self._submit_diagnostic)
+
     def issue_cookie(self, response: JSONResponse, persona: str, request_id: str) -> None:
         """Trusted fixture calls this out of band; no public issuance route."""
         name, value = self.cookie_for(persona, request_id)
-        response.set_cookie(name, value, max_age=7200, httponly=True,
+        response.set_cookie(name, value,
+                            max_age=86400 if self.config.owner_paced_window_seconds == 86400 else 7200,
+                            httponly=True,
                             samesite="strict", secure=False, path="/demo/stage1")
 
-    def session_for(self, request: Request) -> _Session:
+    def cookie_session_for(self, request: Request) -> _Session:
         token = request.cookies.get(COOKIE)
         session = self._sessions.get(token or "")
         if session is None or datetime.now(timezone.utc) >= session.expires_at:
             raise HTTPException(status_code=404, detail="DEMO_SESSION_UNAVAILABLE")
+        if (session.binding.persona == "staff" and
+                self.config.staff_human_window_ends_at is not None and
+                datetime.now(timezone.utc) >= self.config.staff_human_window_ends_at):
+            raise HTTPException(status_code=403, detail="DEMO_HUMAN_WINDOW_ENDED")
         return session
+
+    def session_for(self, request: Request) -> _Session:
+        session = self.cookie_session_for(request)
+        self.require_staff(session)
+        return session
+
+    def require_staff(self, session: _Session, scope: str = "demo:use") -> None:
+        if session.binding.persona != "staff" or self.config.staff_mock_auth is None:
+            return
+        if (self.config.staff_human_window_ends_at is None or
+                datetime.now(timezone.utc) >= self.config.staff_human_window_ends_at):
+            raise HTTPException(status_code=403, detail="DEMO_HUMAN_WINDOW_ENDED")
+        if (session.staff_mock_token is None or session.staff_mock_expires_at is None or
+                datetime.now(timezone.utc) >= session.staff_mock_expires_at):
+            raise HTTPException(status_code=403, detail="MOCK_STAFF_SESSION_EXPIRED")
+        try:
+            self.config.staff_mock_auth.require(
+                practice_id=session.binding.practice_id,
+                staff_user_id=session.binding.staff_user_id or "", scope=scope,
+                token=session.staff_mock_token)
+        except StaffMockDenied:
+            raise HTTPException(status_code=403, detail="MOCK_STAFF_UNAVAILABLE") from None
+
+
+def _owner_paced_practice_clock(now: datetime) -> str:
+    if (type(now) is not datetime or now.tzinfo is None or
+            now.utcoffset() != timedelta(0)):
+        raise ValueError("DEMO_CLOCK_BOUNDARY_INVALID")
+    # The selected synthetic practice uses Brisbane's fixed UTC+10 offset.
+    return now.astimezone(timezone(timedelta(hours=10))).strftime("%Y-%m-%d %H:%M")
 
 
 def create_stage1_demo_app(config: DemoConfig) -> tuple[FastAPI, DemoIssuer]:
+    def practice_clock() -> str:
+        if config.owner_paced_window_seconds == 86400:
+            return _owner_paced_practice_clock(datetime.now(timezone.utc))
+        return config.demo_clock
     """Create an isolated loopback ASGI app; caller owns listener binding."""
     issuer = DemoIssuer(config)
+    def mark_submit(session: _Session, stage: str, category: str) -> None:
+        if (session.binding.persona == "patient" and
+                session.binding.request_id == issuer._live_request_id):
+            issuer._submit_diagnostic["submit_stage"] = stage
+            issuer._submit_diagnostic["submit_category"] = category
     app = FastAPI(title="Stage 1 synthetic local demo", docs_url=None, redoc_url=None,
                   openapi_url=None)
     voice_lock = asyncio.Lock()
+
+    class _StaffMockChangedAfterDispatch(HTTPException):
+        """An awaited backend request may already have applied its effect."""
+
+        def __init__(self) -> None:
+            super().__init__(status_code=503, detail="MOCK_STAFF_OUTCOME_UNAVAILABLE")
 
     def local(request: Request) -> None:
         server = request.scope.get("server")
@@ -770,6 +915,22 @@ def create_stage1_demo_app(config: DemoConfig) -> tuple[FastAPI, DemoIssuer]:
         return JSONResponse(data, status_code=code,
             headers={"Cache-Control": "no-store", "X-Content-Type-Options": "nosniff"})
 
+    async def _backend_exchange(method: str, path: str, *, headers: dict[str, str],
+                                body=None, params=None) -> httpx.Response:
+        # Every caller supplies an internal fixed-route suffix; the URL is
+        # always relative to the one trusted startup-bound backend origin.
+        if config.backend_exec_exchange is not None:
+            return await config.backend_exec_exchange(
+                method, BASE + path, headers=headers, body=body, params=params)
+        transport = (httpx.ASGITransport(app=config.backend_app,
+            client=("127.0.0.1", 12345), raise_app_exceptions=False)
+            if config.backend_loopback_origin is None else None)
+        origin = config.backend_loopback_origin or "http://127.0.0.1"
+        async with httpx.AsyncClient(transport=transport, base_url=origin,
+                follow_redirects=False, trust_env=False, timeout=10) as client:
+            return await client.request(method, BASE + path, headers=headers,
+                                        json=body, params=params)
+
     async def backend(method: str, path: str, session: _Session, *, body=None,
                       key: str | None = None, patient: bool = False) -> Any:
         headers = {"Cache-Control": "no-store"}
@@ -779,15 +940,19 @@ def create_stage1_demo_app(config: DemoConfig) -> tuple[FastAPI, DemoIssuer]:
                 raise HTTPException(status_code=404, detail="REQUEST_UNAVAILABLE")
             headers["X-Patient-Request-Capability"] = capability
         else:
+            scope = "proposal:create" if method == "POST" else "demo:use"
+            issuer.require_staff(session, scope)
             if not session.staff_bearer:
                 raise HTTPException(status_code=403, detail="STAFF_UNAVAILABLE")
             headers["Authorization"] = "Bearer " + session.staff_bearer
         if key:
             headers["Idempotency-Key"] = key
-        async with httpx.AsyncClient(transport=httpx.ASGITransport(app=config.backend_app,
-                client=("127.0.0.1", 12345), raise_app_exceptions=False), base_url="http://127.0.0.1",
-                follow_redirects=False, timeout=10) as client:
-            response = await client.request(method, BASE + path, headers=headers, json=body)
+        response = await _backend_exchange(method, path, headers=headers, body=body)
+        if not patient:
+            try:
+                issuer.require_staff(session, scope)
+            except HTTPException:
+                raise _StaffMockChangedAfterDispatch() from None
         if response.status_code >= 400:
             # A current-authority refusal is definitive, never a lost reply.
             # Keep its body opaque and consistent with other stale/denied
@@ -846,7 +1011,15 @@ def create_stage1_demo_app(config: DemoConfig) -> tuple[FastAPI, DemoIssuer]:
 
     async def refreshed(session: _Session) -> dict[str, Any]:
         if session.binding.persona == "patient":
+            if session.binding.request_id == issuer._live_request_id:
+                issuer._submit_diagnostic["observed_request_state"] = "UNAVAILABLE"
             request = await patient_read(session)
+            if session.binding.request_id == issuer._live_request_id:
+                state = request.get("state") if type(request) is dict else None
+                issuer._submit_diagnostic["observed_request_state"] = (
+                    state.upper() if type(state) is str and
+                    state in {"draft", "submitted", "booked"}
+                    else "OTHER")
             options = (await backend("GET", f"/patient-requests/{session.binding.request_id}/options"
                        f"?request_version={request['request_version']}", session, patient=True)
                        if request.get("state") == "draft" else [])
@@ -857,17 +1030,17 @@ def create_stage1_demo_app(config: DemoConfig) -> tuple[FastAPI, DemoIssuer]:
         request = await staff_request(session)
         options: list[dict[str, Any]] = []
         if request.get("state") == "submitted":
+            issuer.require_staff(session)
             capability = config.request_capabilities.get(session.binding.request_id)
             if not capability:
                 raise HTTPException(status_code=404, detail="REQUEST_UNAVAILABLE")
             # Dedicated request capability belongs to trusted fixture, not the
             # staff browser session. Backend is the only option source.
-            async with httpx.AsyncClient(transport=httpx.ASGITransport(app=config.backend_app,
-                    client=("127.0.0.1", 12345), raise_app_exceptions=False), base_url="http://127.0.0.1",
-                    follow_redirects=False, timeout=10) as client:
-                response = await client.get(BASE + f"/patient-requests/{session.binding.request_id}/options",
-                    params={"request_version": request["request_version"]},
-                    headers={"X-Patient-Request-Capability": capability})
+            response = await _backend_exchange("GET",
+                f"/patient-requests/{session.binding.request_id}/options",
+                params={"request_version": request["request_version"]},
+                headers={"X-Patient-Request-Capability": capability})
+            issuer.require_staff(session)
             if response.status_code == 200:
                 options = response.json()
         appointment_id = request.get("booked_appointment_id") or session.seeded_appointment_id
@@ -928,6 +1101,8 @@ def create_stage1_demo_app(config: DemoConfig) -> tuple[FastAPI, DemoIssuer]:
             "start_local": current["start_local"], "zone": current["zone"],
             "source": "completed_create_command_result",
         }
+        if session.binding.request_id == issuer._live_request_id:
+            issuer._live_outcomes["booking_confirmed_verified"] = True
         return current
 
     async def verified_submission(session: _Session, result: Any,
@@ -941,8 +1116,14 @@ def create_stage1_demo_app(config: DemoConfig) -> tuple[FastAPI, DemoIssuer]:
                 result.get("state") != "submitted" or
                 type(result.get("request_version")) is not int or
                 result["request_version"] != expected_version):
+            mark_submit(session, "BACKEND_RESPONSE", "RECEIPT_MISMATCH")
             raise HTTPException(status_code=409, detail="REQUEST_RECEIPT_MISMATCH")
-        snapshot = await refreshed(session)
+        mark_submit(session, "RECEIPT_VALIDATED", "READBACK_PENDING")
+        try:
+            snapshot = await refreshed(session)
+        except Exception:
+            mark_submit(session, "RECEIPT_VALIDATED", "READBACK_UNAVAILABLE")
+            raise
         current = snapshot["request"]
         if (current.get("request_id") != session.binding.request_id or
                 current.get("state") not in {"submitted", "booked"} or
@@ -951,14 +1132,63 @@ def create_stage1_demo_app(config: DemoConfig) -> tuple[FastAPI, DemoIssuer]:
                 current.get("preference_date") != payload["date"] or
                 local_minute(current.get("earliest_local")) != payload["earliest_local"] or
                 local_minute(current.get("latest_local")) != payload["latest_local"]):
+            mark_submit(session, "RECEIPT_VALIDATED", "READBACK_MISMATCH")
             raise HTTPException(status_code=409, detail="REQUEST_READBACK_MISMATCH")
+        mark_submit(session, "READBACK_VERIFIED", "VERIFIED")
         return snapshot
 
     async def uncertain_snapshot(session: _Session) -> JSONResponse:
+        def require_pending_staff() -> None:
+            if session.binding.persona == "staff":
+                try:
+                    issuer.require_staff(session, "proposal:create")
+                except HTTPException:
+                    raise HTTPException(status_code=503,
+                        detail="COMMAND_OUTCOME_UNCERTAIN") from None
+        require_pending_staff()
         try:
-            return no_store({**(await refreshed(session)), "uncertain": True})
+            snapshot = await refreshed(session)
         except HTTPException:
+            require_pending_staff()
             return no_store({"uncertain": True})
+        require_pending_staff()
+        return no_store({**snapshot, "uncertain": True})
+
+    @app.post("/demo/stage1/continue")
+    async def continue_staff_route(request: Request):
+        """Human-selected continuation of this fixed synthetic staff fixture."""
+        local(request)
+        session = issuer.cookie_session_for(request)
+        fixed = config.staff_mock_auth
+        if (session.binding.persona != "staff" or fixed is None or
+                session.binding.practice_id != fixed.practice_id or
+                session.binding.staff_user_id != fixed.staff_user_id):
+            raise HTTPException(status_code=404, detail="DEMO_SESSION_UNAVAILABLE")
+        if (request.headers.get("origin") != config.listener_origin or
+                request.headers.get("content-type") != "application/json" or
+                not secrets.compare_digest(request.headers.get("x-csrf-token", ""),
+                                           session.binding.csrf)):
+            raise HTTPException(status_code=403, detail="DEMO_CONTINUATION_UNAVAILABLE")
+        parts: list[bytes] = []
+        size = 0
+        async for chunk in request.stream():
+            size += len(chunk)
+            if size > 2:
+                raise HTTPException(status_code=400, detail="DEMO_CONTINUATION_INVALID")
+            parts.append(chunk)
+        if b"".join(parts) != b"{}":
+            raise HTTPException(status_code=400, detail="DEMO_CONTINUATION_INVALID")
+        issuer.cookie_session_for(request)
+        try:
+            new_token, new_expiry = fixed.issue_current()
+        except StaffMockDenied:
+            raise HTTPException(status_code=403, detail="MOCK_STAFF_UNAVAILABLE") from None
+        issuer.cookie_session_for(request)
+        session.staff_mock_token = new_token
+        session.staff_mock_expires_at = new_expiry
+        return no_store({"continued": True,
+            "mock_token_expires_at": new_expiry.isoformat(),
+            "human_window_ends_at": config.staff_human_window_ends_at.isoformat()})
 
     @app.get("/demo/stage1/session")
     async def session_route(request: Request):
@@ -966,11 +1196,18 @@ def create_stage1_demo_app(config: DemoConfig) -> tuple[FastAPI, DemoIssuer]:
         session = issuer.session_for(request)
         voice_ready = (config.voice_runtime is not None and
             (config.voice_runtime.ready(session.binding.persona)
-             if isinstance(config.voice_runtime, ContainedVoiceRuntimeBinding)
+             if isinstance(config.voice_runtime, (ContainedVoiceRuntimeBinding, SpeechComponentVoiceBinding))
              else config.voice_runtime.ready()))
+        mock_identity = (config.staff_mock_auth.projected_identity()
+            if session.binding.persona == "staff" and config.staff_mock_auth is not None else None)
         return no_store({"persona": session.binding.persona, "csrf": session.binding.csrf,
-            "zone": config.timezone, "demo_clock": config.demo_clock,
-            "voice_available": voice_ready, "voice_nonce": session.voice_nonce if voice_ready else None})
+            "zone": config.timezone, "demo_clock": practice_clock(),
+            "voice_available": voice_ready, "voice_nonce": session.voice_nonce if voice_ready else None,
+            "mock_identity": mock_identity,
+            "mock_token_expires_at": session.staff_mock_expires_at.isoformat()
+                if session.binding.persona == "staff" and session.staff_mock_expires_at else None,
+            "human_window_ends_at": config.staff_human_window_ends_at.isoformat()
+                if session.binding.persona == "staff" and config.staff_human_window_ends_at else None})
 
     @app.get("/demo/stage1/reliability")
     async def reliability_route(request: Request):
@@ -983,15 +1220,21 @@ def create_stage1_demo_app(config: DemoConfig) -> tuple[FastAPI, DemoIssuer]:
     @app.get("/demo/stage1/")
     async def page(request: Request):
         local(request); issuer.session_for(request)
-        return FileResponse(STATIC / "stage1-interactive.html", headers={"Cache-Control": "no-store"})
+        return FileResponse(UI_VIEW / "stage1-interactive.html",
+                            headers={"Cache-Control": "no-store"})
 
     @app.get("/demo/stage1/{asset}")
     async def asset(request: Request, asset: str):
         local(request); issuer.session_for(request)
-        if asset not in {"stage1-interactive.css", "stage1-interactive.js",
-                         "stage1-local-voice.js"}:
+        paths = {
+            "stage1-interactive.css": UI_VIEW / "stage1-interactive.css",
+            "stage1-interactive.js": UI_CONTROLLER / "stage1-interactive.js",
+            "stage1-diary-view.js": UI_VIEW / "stage1-diary-view.js",
+            "stage1-local-voice.js": STATIC / "stage1-local-voice.js",
+        }
+        if asset not in paths:
             raise HTTPException(status_code=404)
-        return FileResponse(STATIC / asset, headers={"Cache-Control": "no-store"})
+        return FileResponse(paths[asset], headers={"Cache-Control": "no-store"})
 
     @app.post("/demo/stage1/interpret")
     async def interpret_route(request: Request):
@@ -1009,6 +1252,7 @@ def create_stage1_demo_app(config: DemoConfig) -> tuple[FastAPI, DemoIssuer]:
             if size > MAX_BODY_BYTES:
                 raise HTTPException(status_code=413, detail="BODY_TOO_LARGE")
             parts.append(chunk)
+        issuer.session_for(request)
         def unique(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
             result: dict[str, Any] = {}
             for key, value in pairs:
@@ -1024,10 +1268,24 @@ def create_stage1_demo_app(config: DemoConfig) -> tuple[FastAPI, DemoIssuer]:
             raise HTTPException(status_code=400, detail="INTENT_BODY_INVALID")
         try:
             proposal = interpret_words(body["kind"], body["words"],
-                persona=session.binding.persona, demo_clock=config.demo_clock,
+                persona=session.binding.persona, demo_clock=practice_clock(),
                 timezone=config.timezone)
         except IntentRejected:
             raise HTTPException(status_code=400, detail="INTENT_BODY_INVALID") from None
+        if body["kind"] == "request" and proposal["status"] == "PROPOSED":
+            current = await patient_read(session)
+            offered = []
+            if current.get("state") == "draft":
+                offered = await backend("GET",
+                    f"/patient-requests/{session.binding.request_id}/options"
+                    f"?request_version={current['request_version']}",
+                    session, patient=True)
+            if (type(offered) is not list or
+                    proposal["fields"]["date"] not in
+                    {option.get("date") for option in offered if type(option) is dict}):
+                proposal = {**proposal, "status": "CLARIFICATION", "fields": {},
+                    "missing": ["date", "earliest_local", "latest_local"],
+                    "message": "DATE_NOT_CURRENTLY_OFFERED"}
         return no_store(proposal)
 
     @app.post("/demo/stage1/voice")
@@ -1036,7 +1294,7 @@ def create_stage1_demo_app(config: DemoConfig) -> tuple[FastAPI, DemoIssuer]:
         session = issuer.session_for(request)
         binding = config.voice_runtime
         if binding is None or not (binding.ready(session.binding.persona)
-                if isinstance(binding, ContainedVoiceRuntimeBinding)
+                if isinstance(binding, (ContainedVoiceRuntimeBinding, SpeechComponentVoiceBinding))
                 else binding.ready()):
             return no_store({"error": "VOICE_UNAVAILABLE"}, 503)
         target = target_for_persona(session.binding.persona)
@@ -1056,6 +1314,7 @@ def create_stage1_demo_app(config: DemoConfig) -> tuple[FastAPI, DemoIssuer]:
             if size > MAX_WAV_BYTES:
                 return no_store({"error": "VOICE_TOO_LARGE"}, 413)
             parts.append(chunk)
+        issuer.session_for(request)
         raw = b"".join(parts)
         try:
             validate_wav(raw)
@@ -1072,7 +1331,7 @@ def create_stage1_demo_app(config: DemoConfig) -> tuple[FastAPI, DemoIssuer]:
                     return no_store({"error": "VOICE_SESSION_CHANGED"}, 409)
                 session.voice_nonce = secrets.token_urlsafe(24)
                 next_nonce = session.voice_nonce
-                if isinstance(binding, ContainedVoiceRuntimeBinding):
+                if isinstance(binding, (ContainedVoiceRuntimeBinding, SpeechComponentVoiceBinding)):
                     transcript = await asyncio.to_thread(
                         run_local_recognizer, raw, binding, session.binding.persona)
                 else:
@@ -1096,6 +1355,7 @@ def create_stage1_demo_app(config: DemoConfig) -> tuple[FastAPI, DemoIssuer]:
             if size > MAX_BODY_BYTES:
                 raise HTTPException(status_code=413, detail="BODY_TOO_LARGE")
             parts.append(chunk)
+        issuer.session_for(request)
         raw = b"".join(parts)
         try:
             admitted = admit_action(profile=config.profile, enabled=True,
@@ -1107,8 +1367,44 @@ def create_stage1_demo_app(config: DemoConfig) -> tuple[FastAPI, DemoIssuer]:
         except AdapterRejected:
             raise HTTPException(status_code=403, detail="DEMO_ACTION_UNAVAILABLE") from None
         action, body, key = admitted.action, admitted.body, admitted.idempotency_key
+        if session.binding.persona == "staff" and action in {
+                "propose_create", "propose_move", "confirm_create", "confirm_move",
+                "reconcile"}:
+            issuer.require_staff(session, "proposal:create")
         if action == "refresh":
             return no_store({**(await refreshed(session)), "uncertain": session.uncertain is not None})
+        if action == "diary":
+            # Fixed synthetic Receptionist only. Startup verifies this user's
+            # bearer role and seeds the same active user in the owned database.
+            fixed = config.staff_mock_auth
+            if (session.binding.persona != "staff" or fixed is None
+                    or not session.staff_bearer or not session.binding.staff_user_id
+                    or session.binding.practice_id != config.practice_id
+                    or fixed.staff_user_id != session.binding.staff_user_id
+                    or fixed.practice_id != config.practice_id):
+                return no_store(diary_unavailable())
+            issuer.require_staff(session, "demo:use")
+            first = date.fromisoformat(practice_clock()[:10])
+            last = first + timedelta(days=7)
+            try:
+                path = list_path(first.isoformat(), last.isoformat(), config.timezone)
+                response = await _backend_exchange("GET", path.removeprefix(BASE),
+                    headers={"Authorization": "Bearer " + session.staff_bearer,
+                             "Cache-Control": "no-store"})
+                captured_at = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+                issuer.require_staff(session, "demo:use")
+                result = render_staff_diary_read(
+                    response.content, status_code=response.status_code,
+                    content_type=response.headers.get("content-type", ""),
+                    tenant_id=config.practice_id,
+                    actor_id=session.binding.staff_user_id,
+                    authenticated_role="Receptionist",
+                    date_from=first.isoformat(), date_to=last.isoformat(),
+                    practice_timezone=config.timezone, captured_at=captured_at,
+                    as_of=captured_at)
+            except (httpx.TimeoutException, httpx.TransportError, ValueError):
+                result = diary_unavailable()
+            return no_store(result)
         if action == "reconcile":
             pending = session.uncertain
             if pending is None:
@@ -1120,11 +1416,25 @@ def create_stage1_demo_app(config: DemoConfig) -> tuple[FastAPI, DemoIssuer]:
             path = (f"/patient-requests/{session.binding.request_id}/submit" if family == "submit_request"
                     else "/proposals/create/confirm" if family == "create"
                     else "/proposals/update/confirm")
+            if family == "submit_request":
+                mark_submit(session, "DISPATCH_ATTEMPTED", "IN_PROGRESS")
             try:
                 result = await backend("POST", path, session, body=pending["payload"],
                     key=pending["key"], patient=family == "submit_request")
             except (httpx.TimeoutException, httpx.TransportError):
+                if family == "submit_request":
+                    mark_submit(session, "DISPATCH_ATTEMPTED", "TRANSPORT_UNCERTAIN")
                 return await uncertain_snapshot(session)
+            except _StaffMockChangedAfterDispatch:
+                raise HTTPException(status_code=503, detail="COMMAND_OUTCOME_UNCERTAIN") from None
+            except HTTPException as exc:
+                if family == "submit_request":
+                    mark_submit(session, "BACKEND_RESPONSE",
+                        "BACKEND_NONDEFINITIVE" if exc.status_code == 503
+                        else "BACKEND_REJECTED")
+                raise
+            if family == "submit_request":
+                mark_submit(session, "BACKEND_RESPONSE", "RECEIPT_PENDING")
             if family != "submit_request" and (result.get("safe") is not True
                     or not isinstance(result.get("appointment"), dict)):
                 return await uncertain_snapshot(session)
@@ -1149,6 +1459,13 @@ def create_stage1_demo_app(config: DemoConfig) -> tuple[FastAPI, DemoIssuer]:
                     if family == "submit_request" else await refreshed(session))
             except HTTPException:
                 return await uncertain_snapshot(session)
+            if session.binding.request_id == issuer._live_request_id:
+                if family == "submit_request":
+                    issuer._live_outcomes["request_submitted_verified"] = True
+                elif (family == "move" and
+                      issuer._initial_booking.get(session.binding.request_id, {}).get(
+                          "appointment_id") == pending["appointment_id"]):
+                    issuer._live_outcomes["move_confirmed_verified"] = True
             session.uncertain = None
             session.proposal = None
             return no_store({**snapshot, "uncertain": False})
@@ -1160,18 +1477,26 @@ def create_stage1_demo_app(config: DemoConfig) -> tuple[FastAPI, DemoIssuer]:
             payload = {**body, "schema_version": "patient.request_submission.v1",
                 "request_id": session.binding.request_id, "authority": "request_only"}
             pending = {"family": "submit_request", "key": key, "payload": payload}
+            mark_submit(session, "DISPATCH_ATTEMPTED", "IN_PROGRESS")
             try:
                 result = await backend("POST", f"/patient-requests/{session.binding.request_id}/submit",
                     session, body=payload, key=key, patient=True)
             except (httpx.TimeoutException, httpx.TransportError):
+                mark_submit(session, "DISPATCH_ATTEMPTED", "TRANSPORT_UNCERTAIN")
                 session.uncertain = pending
                 raise HTTPException(status_code=503, detail="COMMAND_OUTCOME_UNCERTAIN") from None
             except HTTPException as exc:
                 if exc.status_code == 503:
+                    mark_submit(session, "BACKEND_RESPONSE", "BACKEND_NONDEFINITIVE")
                     session.uncertain = pending
+                else:
+                    mark_submit(session, "BACKEND_RESPONSE", "BACKEND_REJECTED")
                 raise
+            mark_submit(session, "BACKEND_RESPONSE", "RECEIPT_PENDING")
             session.uncertain = pending
             snapshot = await verified_submission(session, result, payload)
+            if session.binding.request_id == issuer._live_request_id:
+                issuer._live_outcomes["request_submitted_verified"] = True
             response = no_store(snapshot)
             session.uncertain = None
             return response
@@ -1228,6 +1553,9 @@ def create_stage1_demo_app(config: DemoConfig) -> tuple[FastAPI, DemoIssuer]:
             except (httpx.TimeoutException, httpx.TransportError):
                 session.uncertain = pending
                 raise HTTPException(status_code=503, detail="COMMAND_OUTCOME_UNCERTAIN") from None
+            except _StaffMockChangedAfterDispatch:
+                session.uncertain = pending
+                raise HTTPException(status_code=503, detail="COMMAND_OUTCOME_UNCERTAIN") from None
             except HTTPException as exc:
                 if exc.status_code == 503:
                     session.uncertain = pending
@@ -1247,6 +1575,10 @@ def create_stage1_demo_app(config: DemoConfig) -> tuple[FastAPI, DemoIssuer]:
                 raise HTTPException(status_code=409, detail="COMMITTED_READBACK_MISMATCH")
             if family == "create":
                 await record_initial_create(session, result)
+            elif (session.binding.request_id == issuer._live_request_id and
+                  issuer._initial_booking.get(session.binding.request_id, {}).get(
+                      "appointment_id") == result_id):
+                issuer._live_outcomes["move_confirmed_verified"] = True
             response = no_store({"outcome": "committed", "appointment": current})
             session.uncertain = None
             session.proposal = None
