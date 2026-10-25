@@ -173,10 +173,65 @@ def _intention_scope():
 
 
 def _bureau_scope():
-    path = (Path(__file__).resolve().parents[1] /
-            bounded_g1b.G4_STAGE1_SUCCESSOR_SCOPE)
-    return json.loads(path.read_bytes())
-
+    # Accepted V8 fixture stays immutable when this checkout installs V9 scope.
+    raw = base64.b64decode(
+        "eyJhY3RpdmVfcHJvZmlsZSI6Ikc0X1NUQUdFMV9MT0NBTF9TVUNDRVNTT1IiLCJhZG1pc3Npb25fZ3JhbnRzX3J1bnRpbWVfYXV0"
+        "aG9yaXR5IjpmYWxzZSwiYWxsb3dlZF9lZmZlY3RzIjpbImNvbnRyb2xfcGxhbmVfZWRpdCIsInByb2R1Y3RfYmVoYXZpb3JfY2hh"
+        "bmdlIiwicmVwb3NpdG9yeV9yZWFkIiwidGFza19icmFuY2hfY29tbWl0IiwidGFza19icmFuY2hfcHVzaCJdLCJhbGxvd2VkX3Bh"
+        "dGhzIjpbImFwcC9zZXJ2aWNlcy9yZWNlcHRpb25fb25lX3Byb3Bvc2FsX3J1bnRpbWUucHkiLCJvcmNoZXN0cmF0aW9uL2NvbnRp"
+        "bnVpdHkvcmVjZXB0aW9uLW9uZS1idXJlYXUtdHlwZWQtcGxhbi1wcm90b2NvbC9vcGVyYXRvci1jYXRhbG9nLmpzb24iLCJzY3Jp"
+        "cHRzL3JlY2VwdGlvbl9vbmVfYnVyZWF1X3R5cGVkX3BsYW5fcHJvdG9jb2wucHkiLCJzdGFnZTFfZGVtb19odHRwLnB5Iiwic3Rh"
+        "dGljL2RlbW8vc3RhZ2UxLWludGVyYWN0aXZlLmpzIiwidGVzdHMvdGVzdF9yZWNlcHRpb25fb25lX3NlbGVjdGVkX2NvbnRleHQu"
+        "cHkiLCJ0ZXN0cy90ZXN0X3N0YWdlMV9idXJlYXVfcHJvamVjdGlvbi5weSIsInRlc3RzL3Rlc3Rfc3RhZ2UxX2J1cmVhdV9zdWdn"
+        "ZXN0aW9uLmNqcyJdLCJhbGxvd2VkX3Rhc2tfa2luZCI6Imc0X3N0YWdlMV9sb2NhbF9zdWNjZXNzb3IiLCJjb250cm9sX3NoYTI1"
+        "NiI6eyJvcmNoZXN0cmF0aW9uL2hhcm5lc3Nfc2V0dGluZ3MvcHJvZ3JhbW1lX3JlY292ZXJ5LnlhbWwiOiJhMjU3ODk0YTY2Njdj"
+        "NGNkZGUyODBlZjVlYzE3Y2RjYzA1NTlkZDc3MDA5MmIyZGVjZDI3NmFiNDJkYzNiZDMyIiwib3JjaGVzdHJhdGlvbl9oYXJuZXNz"
+        "L2JvdW5kZWRfZzFiLnB5IjoiYWE3NDk3OWVmNzM2OWU2OGNiNmUzM2NhZGYyOWU3YmU0NTEzNzBiZTRlYTZhZjZjOTZkZDBlMjlk"
+        "N2ViMGY5MyIsIm9yY2hlc3RyYXRpb25faGFybmVzcy9yYWlzYV9wb2xpY3kucHkiOiIwZjkxM2EzNTFlNDA3N2ZhMmU4NjM2YmNj"
+        "OTE2OWY0MmYwZDQ1YjlhNmNlMjU0NjlhNzM5NjNmY2ViYmIxY2FjIiwidGVzdHMvdGVzdF9nNF9zdGFnZTFfc3VjY2Vzc29yX2Vu"
+        "dHJ5LnB5IjoiMGZjNmM3ODBlYmRjY2RkOTQ2ZGJhNWI2YjFmYmRiOTdkMWMzM2MzMzRmMTg3MTJkODBiNGQzMTEyODMyZTY5YiJ9"
+        "LCJleGNsdWRlZF9lZmZlY3RzIjpbInVucmV2aWV3ZWRfYXBwbGljYXRpb25fb3JfZGF0YWJhc2VfcnVudGltZSIsInVucmV2aWV3"
+        "ZWRfYnJvd3Nlcl9vcl9taWNyb3Bob25lX3J1bnRpbWUiLCJ1bnJldmlld2VkX3ZvaWNlX2NoaWxkX29yX25ldHdvcmtfZWdyZXNz"
+        "IiwicHJvdmlkZXJfaW52b2NhdGlvbiIsInJlYWxfZGF0YV9hY2Nlc3MiLCJwcm90ZWN0ZWRfcmVmX21vdmVtZW50IiwiZGVwbG95"
+        "bWVudCIsInB1YmxpY19saXN0ZW5lciJdLCJtYXBwaW5nX3JldmlldyI6eyJwYXRoIjoiQzovVXNlcnMvdGhlcmUvRU1SNC10b29s"
+        "cy9zZWxlY3RlZC1jb250ZXh0LWJ1cmVhdS1jYW5kaWRhdGUtdjIvaW5kZXBlbmRlbnQtY29tYmluZWQtc291cmNlLW1hcHBpbmct"
+        "YmluZGluZy12Mi5qc29uIiwic2hhMjU2IjoiOTVkMjc0ZGRjYzU3NGJiNGFmNjdlMTE0NTQ5ZmUzZDVjYWVkODQ0NDcyNzk0NWZk"
+        "NmZmOWFlNjE1YWNkZjVlMSJ9LCJwcmVkZWNlc3Nvcl9zY29wZSI6eyJzaGEyNTYiOiJmMmM4NWJlMmU4MDNjZjFkMDUxZGU2OTJk"
+        "MDlkZTRlYjk4Nzg5YWExY2U0Nzk2NGM4OTkwMTQ2ZjBmMjlhNjA3In0sInByb2R1Y3Rfc2hhMjU2Ijp7ImFwcC9zZXJ2aWNlcy9y"
+        "ZWNlcHRpb25fb25lX3Byb3Bvc2FsX3J1bnRpbWUucHkiOiIyZTM2ODdkZTVjY2UzODMzNTFlNmJiNTllYTM3YmQxMzY1M2MyYTEz"
+        "NDlmYWUxYjZiYmNjMGRkY2U2ZmIxZmNiIiwib3JjaGVzdHJhdGlvbi9jb250aW51aXR5L3JlY2VwdGlvbi1vbmUtYnVyZWF1LXR5"
+        "cGVkLXBsYW4tcHJvdG9jb2wvb3BlcmF0b3ItY2F0YWxvZy5qc29uIjoiZmI5NjQyMDg0NzdmMTJmMDg0YWFjODc1MGZlMjVlN2Yy"
+        "YzVhNWQ2NDhhYjYyZDI5ZjUyMWVlNWQ4MDE5ZjU3OSIsInNjcmlwdHMvcmVjZXB0aW9uX29uZV9idXJlYXVfdHlwZWRfcGxhbl9w"
+        "cm90b2NvbC5weSI6IjQwNmE1YjhiY2FhMjgyYjY4Njk5NzA5MjAzMzQyZDhlMTA4OTM2YjgzNjQ0YzllN2I3ZTAzNTlhMzhiYWUx"
+        "OWQiLCJzdGFnZTFfZGVtb19odHRwLnB5IjoiYzU5NGMxYzBiZmFjNzJjNjM5MzRiNjRjNzZkM2Y3NjdhZDlmNWUxZjFjMzUwOGVi"
+        "NWFkMmQyMzZkZTliMDUyOCIsInN0YXRpYy9kZW1vL3N0YWdlMS1pbnRlcmFjdGl2ZS5qcyI6ImNjZmNiMzI3YjgyNjQyMDE3NzYw"
+        "YmU2NmUzZmNhYTI0MTZmNDI1ODExM2Q5MjRkNzEzZmIzZWIzMjUyZDJlY2EiLCJ0ZXN0cy90ZXN0X3JlY2VwdGlvbl9vbmVfc2Vs"
+        "ZWN0ZWRfY29udGV4dC5weSI6IjFlYTE1Yjk0NGRhNTJjN2IwN2E3MDQwYzAwZDNiMDljYWU1YTFjZWM3MjdhYmM2NDU5MjBmODAy"
+        "OTY5MDJhNTUiLCJ0ZXN0cy90ZXN0X3N0YWdlMV9idXJlYXVfcHJvamVjdGlvbi5weSI6ImRkOWU0NGVjZjAyYjNjMjc2YTMzYzMy"
+        "NWRkNGQ5OTYzOWVmYjQ3ZmNhMDhmNTM4OGFmY2ZlMzg4MzVlMDE0OTMiLCJ0ZXN0cy90ZXN0X3N0YWdlMV9idXJlYXVfc3VnZ2Vz"
+        "dGlvbi5janMiOiIzZTVlNTgwMjQwYTk4NDI1NDI5ZGIzNzcyMTE2NTE1NjA3YjZiZmI4N2FmNWY0YTUyZGZkNDZlZjM4ZmZlZjdj"
+        "In0sInByb2R1Y3RfdmVjdG9yIjp7InBhdGgiOiJDOi9Vc2Vycy90aGVyZS9FTVI0LXRvb2xzL3NlbGVjdGVkLWNvbnRleHQtYnVy"
+        "ZWF1LWNhbmRpZGF0ZS12Mi9wcm9kdWN0LXZlY3Rvci12Mi5qc29uIiwic2hhMjU2IjoiODk3M2JiOWJkOWQyNDMxZDNiY2RhM2Mx"
+        "ZmYwNjk4ZGY1NzAzZGMxZGU3MDliZjYzOTkxNjkwMDUwZmE2MDk2YyJ9LCJyZWNvcmRlZF9hdCI6IjIwMjYtMTAtMjVUMTQ6NTk6"
+        "MTQrMDA6MDAiLCJydW50aW1lX2JpbmRpbmdfcmVxdWlyZWQiOnRydWUsInNjaGVtYV92ZXJzaW9uIjoiYXJpYWRuZS5nNF9zdGFn"
+        "ZTFfc3VjY2Vzc29yX2VudHJ5X3Njb3BlLnY4Iiwic2VsZWN0ZWRfYmFzZSI6eyJjb21taXQiOiJmNTkyZTRkOTljMzQyNDM5OTZm"
+        "NmJmNTY3NDQzMmIyZWI2Zjg1N2YwIiwidHJlZSI6IjhlMjc2NzJhZWE0ZWMzNDBiMmM1OGYxN2NhZTg3YjBjMzlhNGMzOGYifSwi"
+        "c291cmNlX3NoYTI1NiI6eyJvcmNoZXN0cmF0aW9uX2hhcm5lc3MvYm91bmRlZF9nMWIucHkiOiJhYTc0OTc5ZWY3MzY5ZTY4Y2I2"
+        "ZTMzY2FkZjI5ZTdiZTQ1MTM3MGJlNGVhNmFmNmM5NmRkMGUyOWQ3ZWIwZjkzIiwib3JjaGVzdHJhdGlvbl9oYXJuZXNzL2NvbmZp"
+        "Z3VyYXRpb25fY29yZS5weSI6ImY3YmE3YTgwZWIwYTU5MGY5ZmI3MWI4NjRlNmMxZjlmNDMyNDFkOWY3ZDcwYTM4ZGE2N2E5MjQz"
+        "ZmVhMjA4ZTUiLCJvcmNoZXN0cmF0aW9uX2hhcm5lc3MvcGlubmVkX3Byb2dyYW1tZV9nYXRla2VlcGVyLnB5IjoiYzFmZWE5YTI4"
+        "NDkwNjhlZDhlODdkYmUxZTdjZWMxY2M3ZTc2MmZhMmJjODg3NmZjMzJiYmRhODBkMjI2Y2YzOSIsIm9yY2hlc3RyYXRpb25faGFy"
+        "bmVzcy9wcm9ncmFtbWVfYWRtaXNzaW9uLnB5IjoiYWM4MTZhOGE3OWIyZDgyMjJmYTM1Nzc3N2MwNzU5NTA5MjdlODZjZjMwYzhh"
+        "NWIyNWZmZDA4YTQ3NDA1MjE4MSIsIm9yY2hlc3RyYXRpb25faGFybmVzcy9yYWlzYV9wb2xpY3kucHkiOiIwZjkxM2EzNTFlNDA3"
+        "N2ZhMmU4NjM2YmNjOTE2OWY0MmYwZDQ1YjlhNmNlMjU0NjlhNzM5NjNmY2ViYmIxY2FjIiwib3JjaGVzdHJhdGlvbl9oYXJuZXNz"
+        "L3RydXN0ZWRfZ2l0LnB5IjoiNGE4NTZiZmZlMmI2OGQ3YzdlMTg3NTE1MjYyOWM5MDI0YTMyNjc5YjU5ZDliMWVkODMwMWMzNjhk"
+        "NDFmZjUyNyIsInNjcmlwdHMvcmFpc2FfYXJpYWRuZV9yZWNvdmVyeV9wcmVmbGlnaHQucHkiOiJlZGZkMzdiMzA2NzNiODU0NGQz"
+        "MDliNTMyYzk1YjNmZDdjMjBmZjU5Mjg4MGE4YTAyMzVkZmRlNmNmYzhlN2U0IiwidGVzdHMvdGVzdF9ib3VuZGVkX2cxYi5weSI6"
+        "ImJiMWJlODZjYTM5MjMyZmVhMzBjMWVhODRjZGZiMTE0NDI4ZDU3YmUwZjhmNjdiZjdlODZkYWFiMGJhNzNiYzUifSwidm9pY2Vf"
+        "YWN0aXZhdGlvbiI6ZmFsc2V9Cg=="
+    )
+    assert hashlib.sha256(raw).hexdigest() == "25878fe3ae6e0b159edd73a5a789ba3b8f24074d5f70c49577342c0cea919666"
+    return json.loads(raw)
 
 def test_selected_bureau_successor_exact_paths_and_unfrozen_inputs():
     scope = _bureau_scope()
@@ -1764,3 +1819,353 @@ def test_selected_bureau_v8_apply_requires_exact_enable_effect(monkeypatch):
             attempt(receipt, row_path=row_path, row_sha=row_sha)
         assert caught.value.reason_code == reason
         assert reached_product_inputs == []
+
+
+def _bureau_v9_scope():
+    path = Path(__file__).resolve().parents[1] / bounded_g1b.G4_STAGE1_SUCCESSOR_SCOPE
+    return json.loads(path.read_bytes())
+
+
+def test_selected_bureau_v9_scope_exact_nine_and_rejects_widening():
+    scope = _bureau_v9_scope()
+    bounded_g1b.validate_g4_bureau_v9_scope(scope)
+    assert scope["schema_version"] == bounded_g1b.G4_BUREAU_V9_SCOPE_SCHEMA
+    assert scope["selected_base"] == bounded_g1b.G4_BUREAU_V9_BASE
+    assert scope["allowed_paths"] == sorted(bounded_g1b.G4_BUREAU_V9_PRODUCT)
+    assert scope["product_sha256"] == bounded_g1b.G4_BUREAU_V9_PRODUCT_SHA
+    assert scope["predecessor_scope"] == {
+        "sha256": "25878fe3ae6e0b159edd73a5a789ba3b8f24074d5f70c49577342c0cea919666"}
+    assert scope["admission_grants_runtime_authority"] is False
+    assert scope["runtime_binding_required"] is True
+    for field, value in (
+        ("allowed_paths", sorted(set(scope["allowed_paths"]) | {"app/main.py"})),
+        ("allowed_paths", scope["allowed_paths"][:-1]),
+        ("allowed_effects", sorted(set(scope["allowed_effects"]) | {"provider_invocation"})),
+        ("runtime_binding_required", False),
+        ("admission_grants_runtime_authority", True),
+        ("product_vector", {"path": "other.json", "sha256": "0" * 64}),
+        ("mapping_review", {"path": "other.json", "sha256": "0" * 64}),
+        ("predecessor_scope", {"sha256": "0" * 64}),
+    ):
+        changed = copy.deepcopy(scope)
+        changed[field] = value
+        with pytest.raises(bounded_g1b.BoundedG1BError) as caught:
+            bounded_g1b.validate_g4_bureau_v9_scope(changed)
+        assert caught.value.reason_code == "bounded_g4_bureau_v9_scope_boundary"
+
+
+def test_selected_bureau_v9_dispatch_exact_nine_and_preserves_v8():
+    for stage, kind, expected in (
+        ("enable", "enable_g4_stage1_successor", bounded_g1b.G4_BUREAU_V9_CONTROL),
+        ("apply", "implement_g4_stage1_successor", bounded_g1b.G4_BUREAU_V9_PRODUCT),
+    ):
+        q = {"schema_version": bounded_g1b.G4_BUREAU_V9_SCHEMA,
+             "operation_kind": kind, "stage": stage,
+             "repair_sha256": {p: {} for p in expected}}
+        assert bounded_g1b.operation_paths(kind, q) == expected
+        for changed_paths in (set(expected) - {next(iter(expected))},
+                              set(expected) | {"app/main.py"}):
+            changed = dict(q, repair_sha256={p: {} for p in changed_paths})
+            with pytest.raises(bounded_g1b.BoundedG1BError) as caught:
+                bounded_g1b.operation_paths(kind, changed)
+            assert caught.value.reason_code == "bounded_g4_bureau_v9_changed_paths"
+    old = {"schema_version": bounded_g1b.G4_BUREAU_SCHEMA,
+           "operation_kind": "implement_g4_stage1_successor", "stage": "apply",
+           "repair_sha256": {p: {} for p in bounded_g1b.G4_BUREAU_PRODUCT}}
+    assert bounded_g1b.operation_paths(old["operation_kind"], old) == bounded_g1b.G4_BUREAU_PRODUCT
+
+
+def test_selected_bureau_v9_all_six_phase_subjects_and_independence():
+    scope = _bureau_v9_scope()
+    subjects = {}
+    for stage, kind in (("enable", "enable_g4_stage1_successor"),
+                        ("apply", "implement_g4_stage1_successor")):
+        for phase in ("development", "pre-push", "post-push"):
+            q = {
+                "schema_version": bounded_g1b.G4_BUREAU_V9_SCHEMA,
+                "operation_id": "selected-bureau-source",
+                "operation_kind": kind, "stage": stage, "phase": phase,
+                "base_commit": "a" * 40, "base_tree": "b" * 40,
+                "expected_head": "c" * 40, "expected_index_tree": "d" * 40,
+                "candidate_tree": "e" * 40,
+                "source_sha256": scope["source_sha256"],
+                "payload_sha256": {},
+                "repair_sha256": {p: {} for p in (
+                    bounded_g1b.G4_BUREAU_V9_CONTROL if stage == "enable"
+                    else bounded_g1b.G4_BUREAU_V9_PRODUCT)},
+                "activation_acceptance": None if stage == "enable" else {
+                    "path": "review.json", "sha256": "f" * 64},
+                "product_vector": scope["product_vector"],
+                "mapping_review": scope["mapping_review"],
+            }
+            subject = bounded_g1b.g4_bureau_v9_review_subject(q)
+            subjects[stage, phase] = subject
+            for field, replacement in (
+                ("stage", "apply" if stage == "enable" else "enable"),
+                ("phase", "post-push" if phase != "post-push" else "development"),
+                ("expected_head", "1" * 40),
+                ("expected_index_tree", "2" * 40),
+                ("candidate_tree", "3" * 40),
+                ("operation_id", "other-operation"),
+            ):
+                changed = copy.deepcopy(q)
+                changed[field] = replacement
+                assert bounded_g1b.g4_bureau_v9_review_subject(changed) != subject
+            path = (bounded_g1b.G4_BUREAU_V9_ROOT / "entry-admission-v1" /
+                    f"independent-{stage}-{phase}-subject-review-v1.json")
+            review = {
+                "schema": "emr4.g4_operation_review.v1",
+                "status": "PASS",
+                "verdict": "PASS_G4_STAGE1_SELECTED_BUREAU_V9_EXACT_ADMISSION_SUBJECT",
+                "subject_sha256": subject, "independent": True,
+                "implementation_authorship": False, "blocking_findings": [],
+                "reviewer_agent": "/root/selected_bureau_entry_review",
+                "stage": stage, "phase": phase,
+            }
+            raw = json.dumps(review, sort_keys=True).encode()
+            row = {"path": path.as_posix(),
+                   "sha256": hashlib.sha256(raw).hexdigest()}
+            def read(selected, digest):
+                assert (selected, digest) == (path, row["sha256"])
+                return raw
+            assert bounded_g1b._g4_bureau_v9_review(
+                read, row, bounded_g1b.G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT,
+                subject, stage, phase) == review
+            wrong_row = dict(row, path=str(path.with_name("swapped.json")))
+            with pytest.raises(bounded_g1b.BoundedG1BError) as caught:
+                bounded_g1b._g4_bureau_v9_review(
+                    read, wrong_row, bounded_g1b.G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT,
+                    subject, stage, phase)
+            assert caught.value.reason_code == "bounded_g4_bureau_v9_review_path"
+            for field, value in (
+                ("subject_sha256", "0" * 64),
+                ("stage", "apply" if stage == "enable" else "enable"),
+                ("phase", "post-push" if phase != "post-push" else "development"),
+                ("independent", False),
+                ("implementation_authorship", True),
+                ("reviewer_agent", "/root/selected_bureau_entry_author"),
+            ):
+                changed = dict(review, **{field: value})
+                changed_raw = json.dumps(changed, sort_keys=True).encode()
+                changed_row = dict(row, sha256=hashlib.sha256(changed_raw).hexdigest())
+                with pytest.raises(bounded_g1b.BoundedG1BError) as caught:
+                    bounded_g1b._g4_bureau_v9_review(
+                        lambda _p, _d: changed_raw, changed_row,
+                        bounded_g1b.G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT,
+                        subject, stage, phase)
+                assert caught.value.reason_code == "bounded_g4_bureau_v9_independent_subject"
+    assert len(set(subjects.values())) == 6
+
+
+
+
+def test_selected_bureau_v9_apply_requires_exact_enable_effect(monkeypatch):
+    # The selected ordinary evidence bytes are embedded; no repository loader runs.
+    vector_raw = base64.b64decode(
+        "ewogICJzY2hlbWEiOiAiZW1yNC5zdGFnZTFfc2VsZWN0ZWRfYnVyZWF1X3Byb2R1Y3RfdmVjdG9yLnYxIiwKICAic3RhdHVzIjog"
+        "IkNPUlJFQ1RFRF9TT1VSQ0VfUFJFUEFSQVRJT05fTk9UX0FETUlUVEVEIiwKICAic2VsZWN0ZWRfYmFzZSI6IHsKICAgICJjb21t"
+        "aXQiOiAiMjQzMWQ0MWEzZGYyZDUwYzc3YTU2MTBjYTBiMGU5MjQ0MDc1ZWU2ZiIsCiAgICAidHJlZSI6ICJjMTQxNmM4NWIzYmZk"
+        "ZTAwODQ1NmI2ZGI2YzAyOThiZDllODYyODk2IgogIH0sCiAgInByZWRlY2Vzc29yX3Njb3BlX3NoYTI1NiI6ICIyNTg3OGZlM2Fl"
+        "NmUwYjE1OWVkZDczYTVhNzg5YmEzYjhmMjQwNzRkNWY3MGM0OTU3NzM0MmMwY2VhOTE5NjY2IiwKICAiZW50cmllcyI6IFsKICAg"
+        "IHsKICAgICAgInRhcmdldCI6ICJhcHAvc2VydmljZXMvcmVjZXB0aW9uX29uZV9wcm9wb3NhbF9ydW50aW1lLnB5IiwKICAgICAg"
+        "InBhdGgiOiAiQzovVXNlcnMvdGhlcmUvRU1SNC10b29scy9zZWxlY3RlZC1jb250ZXh0LWJ1cmVhdS1jYW5kaWRhdGUtdjMvYXBw"
+        "L3NlcnZpY2VzL3JlY2VwdGlvbl9vbmVfcHJvcG9zYWxfcnVudGltZS5weSIsCiAgICAgICJieXRlcyI6IDI3NjAzLAogICAgICAi"
+        "c2hhMjU2IjogIjJlMzY4N2RlNWNjZTM4MzM1MWU2YmI1OWVhMzdiZDEzNjUzYzJhMTM0OWZhZTFiNmJiY2MwZGRjZTZmYjFmY2Ii"
+        "LAogICAgICAiYmVmb3JlX3NoYTI1NiI6ICIxM2ExZjAzMDU1ZjRmNGMxYTZhZTg2OTM1M2RhYmZkZjk2OWZhODI2YzhmY2YwNDFm"
+        "MDU4NmE1MWMwOGYxOWZlIgogICAgfSwKICAgIHsKICAgICAgInRhcmdldCI6ICJzY3JpcHRzL3JlY2VwdGlvbl9vbmVfYnVyZWF1"
+        "X3R5cGVkX3BsYW5fcHJvdG9jb2wucHkiLAogICAgICAicGF0aCI6ICJDOi9Vc2Vycy90aGVyZS9FTVI0LXRvb2xzL3NlbGVjdGVk"
+        "LWNvbnRleHQtYnVyZWF1LWNhbmRpZGF0ZS12My9zY3JpcHRzL3JlY2VwdGlvbl9vbmVfYnVyZWF1X3R5cGVkX3BsYW5fcHJvdG9j"
+        "b2wucHkiLAogICAgICAiYnl0ZXMiOiA1OTU2NCwKICAgICAgInNoYTI1NiI6ICJkYmEzYmQ1N2U4ODdkOTJlOWEzZDcxYjg2N2E3"
+        "ZmI3MjhjMzYzNjVmZGRlZTA4MmIxNzBlNTU3MWU2ZTVhNGQwIiwKICAgICAgImJlZm9yZV9zaGEyNTYiOiAiMmFiN2U1MzE1OTNh"
+        "NmUxOGEwODkxYzZkNWUwNTYxMjMxN2MxMzIxOWRiNTU1YmZjY2I1NWQ0NTQxZTA2NTdlMiIKICAgIH0sCiAgICB7CiAgICAgICJ0"
+        "YXJnZXQiOiAib3JjaGVzdHJhdGlvbi9jb250aW51aXR5L3JlY2VwdGlvbi1vbmUtYnVyZWF1LXR5cGVkLXBsYW4tcHJvdG9jb2wv"
+        "b3BlcmF0b3ItY2F0YWxvZy5qc29uIiwKICAgICAgInBhdGgiOiAiQzovVXNlcnMvdGhlcmUvRU1SNC10b29scy9zZWxlY3RlZC1j"
+        "b250ZXh0LWJ1cmVhdS1jYW5kaWRhdGUtdjMvb3JjaGVzdHJhdGlvbi9jb250aW51aXR5L3JlY2VwdGlvbi1vbmUtYnVyZWF1LXR5"
+        "cGVkLXBsYW4tcHJvdG9jb2wvb3BlcmF0b3ItY2F0YWxvZy5qc29uIiwKICAgICAgImJ5dGVzIjogODQzOSwKICAgICAgInNoYTI1"
+        "NiI6ICJmYjk2NDIwODQ3N2YxMmYwODRhYWM4NzUwZmUyNWU3ZjJjNWE1ZDY0OGFiNjJkMjlmNTIxZWU1ZDgwMTlmNTc5IiwKICAg"
+        "ICAgImJlZm9yZV9zaGEyNTYiOiAiZmUyZDU3NTI0MzhlNjk1Zjg5NjBlMzNhYWE3ZjE1YTdiNjFmM2Q0YTJjNTNmZDYzYmUzNzk3"
+        "NzE1ZTM1MGJhYyIKICAgIH0sCiAgICB7CiAgICAgICJ0YXJnZXQiOiAidGVzdHMvdGVzdF9yZWNlcHRpb25fb25lX3NlbGVjdGVk"
+        "X2NvbnRleHQucHkiLAogICAgICAicGF0aCI6ICJDOi9Vc2Vycy90aGVyZS9FTVI0LXRvb2xzL3NlbGVjdGVkLWNvbnRleHQtYnVy"
+        "ZWF1LWNhbmRpZGF0ZS12My90ZXN0cy90ZXN0X3JlY2VwdGlvbl9vbmVfc2VsZWN0ZWRfY29udGV4dC5weSIsCiAgICAgICJieXRl"
+        "cyI6IDEzMjc5LAogICAgICAic2hhMjU2IjogImVjNjJlYTk1MmZlNzFmMTkyODQ2ZDAwZDE1ZTUzYjVjZWM4MDlkOTNlMzZmNzEx"
+        "YmJmZGVjZTljN2M1OGE5MDUiLAogICAgICAiYmVmb3JlX3NoYTI1NiI6IG51bGwKICAgIH0sCiAgICB7CiAgICAgICJ0YXJnZXQi"
+        "OiAic3RhZ2UxX2RlbW9faHR0cC5weSIsCiAgICAgICJwYXRoIjogIkM6L1VzZXJzL3RoZXJlL0VNUjQtdG9vbHMvc2VsZWN0ZWQt"
+        "Y29udGV4dC1idXJlYXUtY2FuZGlkYXRlLXYzL3N0YWdlMV9kZW1vX2h0dHAucHkiLAogICAgICAiYnl0ZXMiOiAxMDI2NDksCiAg"
+        "ICAgICJzaGEyNTYiOiAiYzU5NGMxYzBiZmFjNzJjNjM5MzRiNjRjNzZkM2Y3NjdhZDlmNWUxZjFjMzUwOGViNWFkMmQyMzZkZTli"
+        "MDUyOCIsCiAgICAgICJiZWZvcmVfc2hhMjU2IjogIjNhYzgxMTlmY2JjZWE3NjQ2NTI2MTA4OWU1ZTkyNWQ4ZDQwZDUzZWE2NzI3"
+        "NzhiODYwYjg4YzhiZDE3YzU4ZjkiCiAgICB9LAogICAgewogICAgICAidGFyZ2V0IjogInN0YXRpYy9kZW1vL3N0YWdlMS1pbnRl"
+        "cmFjdGl2ZS5qcyIsCiAgICAgICJwYXRoIjogIkM6L1VzZXJzL3RoZXJlL0VNUjQtdG9vbHMvc2VsZWN0ZWQtY29udGV4dC1idXJl"
+        "YXUtY2FuZGlkYXRlLXYzL3N0YXRpYy9kZW1vL3N0YWdlMS1pbnRlcmFjdGl2ZS5qcyIsCiAgICAgICJieXRlcyI6IDQ3OTI3LAog"
+        "ICAgICAic2hhMjU2IjogImNjZmNiMzI3YjgyNjQyMDE3NzYwYmU2NmUzZmNhYTI0MTZmNDI1ODExM2Q5MjRkNzEzZmIzZWIzMjUy"
+        "ZDJlY2EiLAogICAgICAiYmVmb3JlX3NoYTI1NiI6ICIyODZjNzA4ZDVjNzliNDcyMzJjNTJlODk4YzlhNGY5YTc1NDdiYTkxMDk1"
+        "OTllNmRhYjg1N2I3ZDU5ZGE3Y2QwIgogICAgfSwKICAgIHsKICAgICAgInRhcmdldCI6ICJ0ZXN0cy90ZXN0X3N0YWdlMV9idXJl"
+        "YXVfcHJvamVjdGlvbi5weSIsCiAgICAgICJwYXRoIjogIkM6L1VzZXJzL3RoZXJlL0VNUjQtdG9vbHMvc2VsZWN0ZWQtY29udGV4"
+        "dC1idXJlYXUtY2FuZGlkYXRlLXYzL3Rlc3RzL3Rlc3Rfc3RhZ2UxX2J1cmVhdV9wcm9qZWN0aW9uLnB5IiwKICAgICAgImJ5dGVz"
+        "IjogNjI1NCwKICAgICAgInNoYTI1NiI6ICJkZDllNDRlY2YwMmIzYzI3NmEzM2MzMjVkZDRkOTk2MzllZmI0N2ZjYTA4ZjUzODhh"
+        "ZmNmZTM4ODM1ZTAxNDkzIiwKICAgICAgImJlZm9yZV9zaGEyNTYiOiBudWxsCiAgICB9LAogICAgewogICAgICAidGFyZ2V0Ijog"
+        "InRlc3RzL3Rlc3Rfc3RhZ2UxX2J1cmVhdV9zdWdnZXN0aW9uLmNqcyIsCiAgICAgICJwYXRoIjogIkM6L1VzZXJzL3RoZXJlL0VN"
+        "UjQtdG9vbHMvc2VsZWN0ZWQtY29udGV4dC1idXJlYXUtY2FuZGlkYXRlLXYzL3Rlc3RzL3Rlc3Rfc3RhZ2UxX2J1cmVhdV9zdWdn"
+        "ZXN0aW9uLmNqcyIsCiAgICAgICJieXRlcyI6IDM5MzcsCiAgICAgICJzaGEyNTYiOiAiM2U1ZTU4MDI0MGE5ODQyNTQyOWRiMzc3"
+        "MjExNjUxNTYwN2I2YmZiODdhZjVmNGE1MmRmZDQ2ZWYzOGZmZWY3YyIsCiAgICAgICJiZWZvcmVfc2hhMjU2IjogbnVsbAogICAg"
+        "fSwKICAgIHsKICAgICAgInRhcmdldCI6ICJvcmNoZXN0cmF0aW9uL2NvbnRpbnVpdHkvcmVjZXB0aW9uLW9uZS1idXJlYXUtdHlw"
+        "ZWQtcGxhbi1wcm90b2NvbC9wbGFuLXJldmlldy5zY2hlbWEuanNvbiIsCiAgICAgICJwYXRoIjogIkM6L1VzZXJzL3RoZXJlL0VN"
+        "UjQtdG9vbHMvc2VsZWN0ZWQtY29udGV4dC1idXJlYXUtY2FuZGlkYXRlLXYzL29yY2hlc3RyYXRpb24vY29udGludWl0eS9yZWNl"
+        "cHRpb24tb25lLWJ1cmVhdS10eXBlZC1wbGFuLXByb3RvY29sL3BsYW4tcmV2aWV3LnNjaGVtYS5qc29uIiwKICAgICAgImJlZm9y"
+        "ZV9zaGEyNTYiOiAiMmM2N2NhODFhNzFmZTgzNDQ2YWZkODI0ZjYwOTZhOGIwMGExMDdlMzkyNmE0MzU1OTRhMzdlNTdlMGFmZWZm"
+        "NyIsCiAgICAgICJieXRlcyI6IDQ4MzYsCiAgICAgICJzaGEyNTYiOiAiNDZlMDMzZjFhMDRkNTEwMTg0ZjJiOGU0NjBjNjQxMjc4"
+        "ZGM0ZjkzNmUxNjZjZDk5NjJhMWY0OGNmNjJjNWYxNCIKICAgIH0KICBdLAogICJzb3VyY2VfcmV2aWV3X3F1YWxpZmljYXRpb24i"
+        "OiAiTmluZS1maWxlIGNvcnJlY3RlZCBzb3VyY2UgcHJlcGFyYXRpb24gYWZ0ZXIgc291cmNlMDEgTk9OUEFTUzsgY2Fub25pY2Fs"
+        "IHR3by1jb2RlIHNjaGVtYSBjb21wbGV0aW9uLCBwcmVjaXNlIG9wZXJhdGlvbiByZWplY3Rpb24gcmVhc29uLCBwaHlzaWNhbCBC"
+        "b29rZWQgZml4dHVyZS4gUHJpb3Igc291cmNlIGFuZCBmYWlsZWQgZXZpZGVuY2UgcHJlc2VydmVkLiBSZXF1aXJlcyByZW5ld2Vk"
+        "IGV4YWN0IGVudHJ5IGJpbmRpbmdzIGJlZm9yZSBwcm9kdWN0IGFwcGxpY2F0aW9uOyBpc29sYXRlZCBzb3VyY2Utb25seSB2ZXJp"
+        "ZmljYXRpb24gaXMgc2VwYXJhdGVseSBzY29wZWQuIiwKICAiaW50ZW5kZWRfaW52YXJpYW50IjogIkV4aXN0aW5nIEJ1cmVhdS9j"
+        "b250ZXh0L3Byb29mcmVhZGVyIHByZXBhcmVzIHN0YWZmIHNlbGVjdGVkIG1vdmU7IG9yaWdpbmFsIHdvcmRzIHByZXNlcnZlZDsg"
+        "Y29uZmxpY3RzIGNsYXJpZnk7IGV4YWN0IGN1cnJlbnQgSUQvdmVyc2lvbiBjaGVja2VkOyBvbmUgY2xlYW4gb3B0aW9uIGVudGVy"
+        "cyBleGlzdGluZyBzaWduZWQgcHJvcG9zYWwvaHVtYW4gY29uZmlybS9pZGVtcG90ZW5jeS9yZWFkYmFjayIsCiAgImV4Y2x1ZGVk"
+        "X2VmZmVjdHMiOiBbCiAgICAicHJvdmlkZXJzIiwKICAgICJyZWFsIGRhdGEiLAogICAgInB1YmxpYyBsaXN0ZW5lciIsCiAgICAi"
+        "cHJvZHVjdCBydW50aW1lIiwKICAgICJwcm90ZWN0ZWQgcmVmIG1vdmVtZW50IiwKICAgICJkZXBsb3ltZW50IiwKICAgICJzcGVu"
+        "ZGluZyBleHBhbnNpb24iCiAgXSwKICAibGltaXRhdGlvbnMiOiBbCiAgICAiRGV0ZXJtaW5pc3RpYyBwYXRoLCBub3QgY29udGV4"
+        "dHVhbCBMTE0gYWNjZXB0YW5jZSIsCiAgICAiT25seSBvbmUgdW5hbWJpZ3VvdXMgY2xlYW4gY2FuZGlkYXRlOyBtdWx0aXBsZSBv"
+        "cHRpb25zIG9yIHVua25vd24gd2FybmluZ3MgY2xhcmlmeSIsCiAgICAiQmFja2VuZCB1bml0IHNvdXJjZSBpbmNsdWRlcyBmYWtl"
+        "IHNjb3BlZCBPUk0gcXVlcnkgb2JzZXJ2YXRpb25zLCBub3QgZGF0YWJhc2UgaXNvbGF0aW9uIHByb29mIiwKICAgICJFbnRyeS1l"
+        "bmFibGVtZW50LCB0ZXN0IGJpbmRpbmcsIGFwcGxpY2F0aW9uIGFuZCBydW50aW1lIGFjY2VwdGFuY2UgcmVtYWluIHNlcGFyYXRl"
+        "IgogIF0sCiAgImNvcnJlY3Rpb25fb2ZfcmV2aWV3X3NoYTI1NiI6ICJiMmM4NmNlN2MxM2ZmZDc2NTBkNGI2MDk0MjdhZWFlNzhh"
+        "M2JkMTcxNGFmZmZmZmM4MmYwNWIyZjE3YjYxMjY1IiwKICAiY29ycmVjdGlvbl9vZl9zb3VyY2VfcmVzdWx0X3NoYTI1NiI6ICIy"
+        "ZmMzYjI0MWExNzAwMjM4ZjNhZmE4ZmVjYmZiYWM2MTA3ZmE3YmVkYTE5OTc5ZGI0Mzc1NTk0MjFlM2Q2MTQ5Igp9Cg=="
+    )
+    mapping_raw = base64.b64decode(
+        "ewogICJzY2hlbWEiOiAiZW1yNC5zdGFnZTFfc2VsZWN0ZWRfYnVyZWF1X2NvbWJpbmVkX3NvdXJjZV9tYXBwaW5nX3Jldmlldy52"
+        "MSIsCiAgInN0YXR1cyI6ICJQQVNTIiwKICAidmVyZGljdCI6ICJQQVNTX0c0X1NUQUdFMV9TRUxFQ1RFRF9CVVJFQVVfRVhBQ1Rf"
+        "TUFQUElORyIsCiAgInJldmlld2VyX2FnZW50IjogIi9yb290L2J1cmVhdV9jb3JyZWN0aW9uX3JldmlldyIsCiAgImluZGVwZW5k"
+        "ZW50IjogdHJ1ZSwKICAiaW1wbGVtZW50YXRpb25fYXV0aG9yc2hpcCI6IGZhbHNlLAogICJwcm9kdWN0X3ZlY3Rvcl9zaGEyNTYi"
+        "OiAiMmE5N2EyNDQxM2RiNTEyYWQ4MzQ1OTEwNjZhZDk2YTYyYTY2NDc1ZDc4ZThjMmMwMjk0MTE1NTM3ZWU2ZDkxNyIsCiAgInBo"
+        "eXNpY2FsX3RhcmdldF9yb3dzX2NoZWNrZWQiOiA5LAogICJibG9ja2luZ19maW5kaW5ncyI6IFtdLAogICJuYXJyYXRpdmVfcmV2"
+        "aWV3IjogewogICAgInBhdGgiOiAiQzovVXNlcnMvdGhlcmUvRU1SNC10b29scy9zZWxlY3RlZC1jb250ZXh0LWJ1cmVhdS1jYW5k"
+        "aWRhdGUtdjMvaW5kZXBlbmRlbnQtY29tYmluZWQtc291cmNlLW1hcHBpbmctcmV2aWV3LXYzLmpzb24iLAogICAgInNoYTI1NiI6"
+        "ICJmZDVlNTQzY2JhNDJhNjVjYWFiOTY4YjNmNTY1ZTAwZTk0MmJkOWVhMjkyODVmMWIxZDRlZjc3ZWEzMjczZjc3IgogIH0sCiAg"
+        "InF1YWxpZmljYXRpb24iOiAiSW5kZXBlbmRlbnQgZXhhY3QtbmluZS1zb3VyY2UgbWFwcGluZyBqdWRnbWVudCBvbmx5LiBUaGUg"
+        "VjggcHJvZHVjdCBlbnRyeSBzY29wZSBzdGlsbCBwaW5zIGVpZ2h0IFYyIGZpbGVzIGFuZCBjYW5ub3QgYWRtaXQgVjMgc2NoZW1h"
+        "IGFwcGxpY2F0aW9uOyByZW5ldyBleGFjdCBlbnRyeSBzY29wZSBhbmQgYmluZGluZ3MgZmlyc3QuIFRoZSBjb3JyZWN0ZWQgaXNv"
+        "bGF0ZWQgc291cmNlLXRlc3QgY2Fwc3VsZSBtYXkgcmVjZWl2ZSBhIHNlcGFyYXRlbHkgcmV2aWV3ZWQgZmluaXRlIHNvdXJjZS1v"
+        "bmx5IGJpbmRpbmcsIGJ1dCBpdHMgY3VycmVudCByZWFkeV9mb3JfZXhlY3V0aW9uPWZhbHNlIHRlbXBsYXRlIGlzIG5vdCBhIGdy"
+        "YW50IG9yIHRlc3QgcmVzdWx0LiBObyBwcm9kdWN0IGFwcGxpY2F0aW9uLCBleGVjdXRhYmxlIGFjY2VwdGFuY2UsIGludGVncmF0"
+        "ZWQgam91cm5leSBwcm9vZiBvciBjb250ZXh0dWFsIExMTSBhY2NlcHRhbmNlIGZvbGxvd3MuIgp9Cg=="
+    )
+    assert hashlib.sha256(vector_raw).hexdigest() == bounded_g1b.G4_BUREAU_V9_VECTOR_SHA
+    assert hashlib.sha256(mapping_raw).hexdigest() == bounded_g1b.G4_BUREAU_V9_MAPPING_SHA
+    predecessor_raw = bounded_g1b._canonical(_bureau_scope()) + b"\n"
+    assert hashlib.sha256(predecessor_raw).hexdigest() == (
+        "25878fe3ae6e0b159edd73a5a789ba3b8f24074d5f70c49577342c0cea919666")
+    scope = _bureau_v9_scope()
+    target = Path("C:/synthetic-bureau-target")
+    source = Path("C:/synthetic-bureau-source")
+    activation_path = (bounded_g1b.G4_BUREAU_V9_ROOT / "entry-admission-v1" /
+                       "independent-enable-push-effect-review-v1.json")
+    product_inputs = (
+        bounded_g1b.CONFIGURATION_PATHS |
+        {bounded_g1b.STATE, bounded_g1b.GATES, bounded_g1b.OVERLAY,
+         bounded_g1b.AGENTS, bounded_g1b.G4_STAGE1_INTERACTIVE_SCOPE,
+         bounded_g1b.G4_STAGE1_SUCCESSOR_SCOPE,
+         bounded_g1b.G4_STAGE1_SUCCESSOR_TEST, bounded_g1b.G4_CI_WORKFLOW} |
+        bounded_g1b.SOURCE_PATHS | bounded_g1b.CONTROLLER_PATHS |
+        bounded_g1b.G4_BUREAU_V9_PRODUCT)
+    q = {
+        "schema_version": bounded_g1b.G4_BUREAU_V9_SCHEMA,
+        "operation_id": "selected-bureau-apply-source",
+        "operation_kind": "implement_g4_stage1_successor",
+        "stage": "apply", "phase": "development",
+        "base_commit": "b" * 40, "base_tree": "c" * 40,
+        "expected_head": "d" * 40, "expected_index_tree": "e" * 40,
+        "candidate_tree": "f" * 40,
+        "source_sha256": scope["source_sha256"],
+        "payload_sha256": {path: "a" * 64 for path in product_inputs},
+        "repair_sha256": {path: {} for path in bounded_g1b.G4_BUREAU_V9_PRODUCT},
+        "source_review": {"path": "unused-before-product-inputs", "sha256": "a" * 64},
+        "activation_acceptance": {},
+        "product_vector": scope["product_vector"],
+        "mapping_review": scope["mapping_review"],
+    }
+    accepted = {
+        "status": "PASS",
+        "verdict": "PASS_G4_STAGE1_SELECTED_BUREAU_V9_CONTROL_PUBLICATION_EFFECT",
+        "reviewer_agent": "/root/selected_bureau_entry_review",
+        "independent": True, "implementation_authorship": False,
+        "blocking_findings": [], "stage": "enable", "phase": "push",
+        "base": bounded_g1b.G4_BUREAU_V9_BASE["commit"],
+        "commit": q["base_commit"], "candidate_tree": q["base_tree"],
+        "control_activation_accepted": True,
+        "same_attempt_remote_readback_verified": True,
+        "protected_refs_unchanged": True,
+        "whole_inverse_verified_same_attempt": True,
+        "published_ref": bounded_g1b.G4_STAGE1_INTERACTIVE_BACKEND_REF,
+    }
+    def fake_git_bytes(_target, *args):
+        assert args == ("cat-file", "blob",
+                        bounded_g1b.G4_BUREAU_V9_BASE["commit"] + ":" +
+                        bounded_g1b.G4_STAGE1_SUCCESSOR_SCOPE)
+        return predecessor_raw
+    def fake_git(_target, *args):
+        if args == ("rev-parse", bounded_g1b.G4_BUREAU_V9_BASE["commit"] + "^{tree}"):
+            return bounded_g1b.G4_BUREAU_V9_BASE["tree"]
+        assert args == ("cat-file", "commit", q["base_commit"])
+        return ("tree " + q["base_tree"] + "\nparent " +
+                bounded_g1b.G4_BUREAU_V9_BASE["commit"] + "\n\nsynthetic")
+    monkeypatch.setattr(bounded_g1b.trusted_git, "run_git_bytes", fake_git_bytes)
+    monkeypatch.setattr(bounded_g1b.trusted_git, "run_git", fake_git)
+    reached_product_inputs = []
+    class ProductInputReached(Exception):
+        pass
+    def attempt(receipt, *, row_path=activation_path, row_sha=None):
+        reached_product_inputs.clear()
+        raw = json.dumps(receipt, sort_keys=True).encode()
+        pin = hashlib.sha256(raw).hexdigest() if row_sha is None else row_sha
+        selected_q = copy.deepcopy(q)
+        selected_q["activation_acceptance"] = {
+            "path": row_path.as_posix(), "sha256": pin}
+        def read(path, digest):
+            if path == bounded_g1b.G4_BUREAU_V9_VECTOR:
+                data = vector_raw
+            elif path == bounded_g1b.G4_BUREAU_V9_MAPPING:
+                data = mapping_raw
+            elif path == activation_path:
+                data = raw
+            elif path.is_relative_to(target):
+                reached_product_inputs.append(path)
+                raise ProductInputReached()
+            else:
+                raise AssertionError(f"unexpected synthetic read: {path}")
+            if hashlib.sha256(data).hexdigest() != digest:
+                raise bounded_g1b.BoundedG1BError(
+                    "bounded_g1b_input_digest_changed")
+            return data
+        return bounded_g1b._load_g4_bureau_v9_inputs(
+            None, target, source,
+            bounded_g1b.G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT,
+            Path("C:/synthetic-bureau-scratch"), selected_q, read, {})
+    with pytest.raises(ProductInputReached):
+        attempt(accepted)
+    assert reached_product_inputs
+    for receipt, row_path, row_sha, reason in (
+        (accepted, activation_path.with_name("swapped.json"), None,
+         "bounded_g4_bureau_v9_activation_path"),
+        (accepted, activation_path, "0" * 64,
+         "bounded_g1b_input_digest_changed"),
+        *(
+            (dict(accepted, **{field: value}), activation_path, None,
+             "bounded_g4_bureau_v9_activation_acceptance")
+            for field, value in (
+                ("base", "0" * 40),
+                ("commit", "0" * 40),
+                ("candidate_tree", "0" * 40),
+                ("same_attempt_remote_readback_verified", False),
+                ("protected_refs_unchanged", False),
+                ("whole_inverse_verified_same_attempt", False),
+            )
+        ),
+    ):
+        with pytest.raises(bounded_g1b.BoundedG1BError) as caught:
+            attempt(receipt, row_path=row_path, row_sha=row_sha)
+        assert caught.value.reason_code == reason
+        assert reached_product_inputs == []
+
+
