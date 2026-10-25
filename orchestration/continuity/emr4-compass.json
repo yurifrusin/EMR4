@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 444,
-  "updated_at": "2026-08-24T19:10:37.5579771+10:00",
-  "source_graph_revision": 462,
-  "orientation_statement": "The review is accepted and the engine pauses before the unmounted waiting-area-confirm architecture successor, as Yuri instructed.",
+  "map_revision": 445,
+  "updated_at": "2026-10-25",
+  "source_graph_revision": 463,
+  "orientation_statement": "Current work is G4 Stage 1 recovery: G2 and G3 are accepted with qualifications; M1 is partial and remains subject to exact admission and independent acceptance.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -15,14 +15,13 @@
     ]
   },
   "programme": {
-    "id": "reception-one",
-    "title": "Reception One scheduling intelligence",
-    "master_plan_phase": "Phase 2B — Bernie Receptionist Copilot",
-    "summary": "Reception One is the current internal receptionist-copilot programme. Its purpose is to let staff express scheduling intent, see the relevant projection of one authoritative Diary, prepare safe proposals and understand committed changes while the backend retains identity, availability, conflict, write and audit authority.",
+    "id": "raisa-g4-stage1-recovery",
+    "title": "Raisa G4 Stage 1 recovery",
+    "master_plan_phase": "G4 Stage 1",
+    "summary": "Restore the accepted local synthetic development path while preserving qualified G2/G3 acceptance and unresolved G4 M1.",
     "evidence": [
-      "implementation_plan.md",
-      "docs/bernie-current-strategic-transition-review.md",
-      "docs/bernie-conversational-diary-north-star.md"
+      "docs/programme/raisa-ariadne-recovery-programme.md",
+      "docs/ariadne-g4-compass-reconnection.md"
     ]
   },
   "journey": [
@@ -5577,31 +5576,39 @@
         "docs/raisa-provider-free-read-only-waiting-area-movement-command-family-readiness-review-plan.md",
         "orchestration/continuity/raisa-provider-free-read-only-waiting-area-movement-command-family-readiness-review/report.md"
       ]
+    },
+    {
+      "node_id": "g4-emr4-recovery-orientation",
+      "lineage_parent": "ariadne-provider-free-clockwork-live-canonical-adoption-retirement",
+      "strategic_role": "Reconnect the accepted governance map to current G4 Stage 1 recovery.",
+      "outcome": "G2 and G3 remain accepted with qualifications; G4 M1 remains partial.",
+      "evidence": [
+        "docs/ariadne-g4-compass-reconnection.md",
+        "orchestration/agent_inbox/codex/g4-emr4-compass-reconnection-acceptance.md"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "raisa-provider-free-read-only-waiting-area-movement-command-family-readiness-review",
-    "strategic_role": "Hold a precise unmounted architecture successor for the missing waiting-area movement family.",
-    "why_now": "The proposal and human confirmation interaction exist, while confirmation authority, transaction and delivery remain deliberately absent.",
-    "outcome": "Five foundations can be reused and seven controls must be designed together before implementation or mounting.",
+    "node_id": "g4-emr4-recovery-orientation",
+    "strategic_role": "Track the current Stage 1 recovery sequence without granting product acceptance.",
+    "why_now": "Owner redirected work from the stale G1B2 waiting-area position.",
+    "outcome": "Ariadne records accepted governance direction and the partial G4 M1 state.",
     "unlocks": [
-      "A future unmounted architecture can specify one family-qualified movement transaction without overlapping check-in or status."
+      "Scoped, separately admitted Stage 1 continuation."
     ],
     "does_not_solve": [
-      "No waiting-area write path, route, API Spine operation, client convergence, runtime or ordinary activation is opened."
+      "M1 product acceptance, protected integration or runtime authority."
     ],
     "evidence": [
-      "orchestration/continuity/raisa-provider-free-read-only-waiting-area-movement-command-family-readiness-review/evidence.json",
-      "orchestration/continuity/raisa-provider-free-read-only-waiting-area-movement-command-family-readiness-review/report.md",
-      "docs/raisa-provider-free-read-only-waiting-area-movement-command-family-readiness-review-closeout.md",
-      "orchestration/agent_inbox/codex/raisa-provider-free-read-only-waiting-area-movement-command-family-readiness-review-sol-acceptance.md"
+      "docs/ariadne-g4-compass-reconnection.md",
+      "orchestration/agent_inbox/codex/g4-emr4-compass-reconnection-acceptance.md"
     ]
   },
   "decision_horizon": [
     {
       "id": "reception-one-delete-confirm-physical-design-architecture",
       "title": "Reception One delete-confirm physical-design architecture",
-      "status": "active",
+      "status": "deferred",
       "strategic_question": "What is the smallest declarative additive design that realizes all five representability gaps without mounting the command?",
       "why_it_matters": "The exact authority fence, receipt, audit and transaction order must be frozen before inert DDL or disposable PostgreSQL behavior work.",
       "prerequisites": [
@@ -5621,7 +5628,7 @@
     {
       "id": "reception-one-appointment-cancellation-direction",
       "title": "Reception One appointment cancellation direction",
-      "status": "active",
+      "status": "deferred",
       "strategic_question": "Cancellation is selected and physically representable; how should its exact design cross the remaining database and product gates?",
       "why_it_matters": "The destructive action must retain one backend authority path from physical representation through Reception One composition.",
       "prerequisites": [
@@ -5681,6 +5688,25 @@
       "evidence": [
         "docs/bernie-reception-one-availability-reconciliation-closeout.md",
         "docs/bernie-intent-projected-event-aware-diary-design.md"
+      ]
+    },
+    {
+      "id": "g4-stage1-m1-integration",
+      "title": "G4 Stage 1 appointment journey and shared channel integration",
+      "status": "active",
+      "strategic_question": "After Compass recovery and review of known capability dispositions, how do the existing Bureau compose, context and proofreader seams support request, book and same-appointment move through calm visible Diary and intent projections, a full Diary prompt, and a shared text/voice lifecycle with independently checked outcome reliability?",
+      "why_it_matters": "G2 and G3 are accepted with qualifications, but G4 M1 is partial. The current compose route and same-date move client are narrower than the required contextual appointment journeys; the remaining integration must retain server-owned decisions and human confirmation.",
+      "prerequisites": [
+        "Complete the reviewed Compass recovery and use the pinned 18-domain capability dispositions as navigation, not product acceptance.",
+        "Integrate the existing Bureau compose/context/proofreader seams for request, book and same-appointment move, including the currently missing date-changing move semantics.",
+        "Keep Diary and intent projections visible and calm, with a full Diary prompt and the same domain lifecycle for web text and push-to-talk voice.",
+        "Check actual commands and outcomes against independently derived expectations, including reliability and accessible non-AI fallback.",
+        "Use exact current G4 admission, finite effect bindings and independent acceptance for each product effect.",
+        "Keep real data, providers, deployment and protected integration closed."
+      ],
+      "boundary_changes": [],
+      "evidence": [
+        "docs/ariadne-g4-compass-reconnection.md"
       ]
     }
   ],
@@ -7808,6 +7834,9 @@
     "The decision horizon records candidates and gates. It neither recommends a winner nor grants authority.",
     "The accepted readiness re-review does not mount or authorise the status-confirm route; four product-adapter blockers remain.",
     "The accepted product adapter is unmounted and authored-synthetic; real PostgreSQL and HTTP behavior remain unproved.",
-    "The accepted PostgreSQL product-adapter integration is serial, disposable, authored-synthetic and off-route; HTTP and UI behavior remain unproved."
+    "The accepted PostgreSQL product-adapter integration is serial, disposable, authored-synthetic and off-route; HTTP and UI behavior remain unproved.",
+    "reception-one-delete-confirm-physical-design-architecture: The delete-confirm physical design decision remains useful future work; the current M1 route first proves request, book and same-appointment move.",
+    "reception-one-appointment-cancellation-direction: The cancellation direction remains useful future work; the current M1 route first proves request, book and same-appointment move.",
+    "All other decision and programme-support horizon statuses are preserved, including the active Raisa Practice Context Fabric. The new G4 sequence is navigation only and grants no product acceptance or runtime authority."
   ]
 }

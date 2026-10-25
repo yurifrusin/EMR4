@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> The review is accepted and the engine pauses before the unmounted waiting-area-confirm architecture successor, as Yuri instructed.
+> Current work is G4 Stage 1 recovery: G2 and G3 are accepted with qualifications; M1 is partial and remains subject to exact admission and independent acceptance.
 
 ## North star
 
@@ -10,9 +10,9 @@ EMR4 joins a Word-centred clinical workspace and a native browser Diary to a Fas
 
 ## Programme position
 
-**Reception One scheduling intelligence** — Phase 2B — Bernie Receptionist Copilot
+**Raisa G4 Stage 1 recovery** — G4 Stage 1
 
-Reception One is the current internal receptionist-copilot programme. Its purpose is to let staff express scheduling intent, see the relevant projection of one authoritative Diary, prepare safe proposals and understand committed changes while the backend retains identity, availability, conflict, write and audit authority.
+Restore the accepted local synthetic development path while preserving qualified G2/G3 acceptance and unresolved G4 M1.
 
 ## Journey so far
 
@@ -694,22 +694,24 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    Both transitions already fail closed; no product repair or further canonical check-in temporal rehearsal is justified. Lineage parent: `raisa-provider-free-read-only-authored-synthetic-time-ordered-canonical-check-in-context-operational-evidence-gap-review`.
 339. **Separate explicit waiting-area movement from dedicated arrival/check-in and general status authority. — Raisa provider-free read-only waiting-area movement command-family readiness review**
    The exact missing sibling command boundary is known without widening any accepted product path. Lineage parent: `raisa-provider-free-database-backed-default-off-canonical-check-in-post-proposal-revalidation-rehearsal`.
+340. **Reconnect the accepted governance map to current G4 Stage 1 recovery. — G4 EMR4 recovery and Compass reorientation**
+   G2 and G3 remain accepted with qualifications; G4 M1 remains partial. Lineage parent: `ariadne-provider-free-clockwork-live-canonical-adoption-retirement`.
 
 ## Current position
 
-**Hold a precise unmounted architecture successor for the missing waiting-area movement family. — Raisa provider-free read-only waiting-area movement command-family readiness review**
+**Track the current Stage 1 recovery sequence without granting product acceptance. — G4 EMR4 recovery and Compass reorientation**
 
-**Why this proof came next:** The proposal and human confirmation interaction exist, while confirmation authority, transaction and delivery remain deliberately absent.
+**Why this proof came next:** Owner redirected work from the stale G1B2 waiting-area position.
 
-Five foundations can be reused and seven controls must be designed together before implementation or mounting.
+Ariadne records accepted governance direction and the partial G4 M1 state.
 
 ### What this unlocks
 
-- A future unmounted architecture can specify one family-qualified movement transaction without overlapping check-in or status.
+- Scoped, separately admitted Stage 1 continuation.
 
 ### What it does not solve
 
-- No waiting-area write path, route, API Spine operation, client convergence, runtime or ordinary activation is opened.
+- M1 product acceptance, protected integration or runtime authority.
 
 ## Continuity and authority
 
@@ -718,7 +720,7 @@ Five foundations can be reused and seven controls must be designed together befo
 
 ## Product decision horizon
 
-### Reception One delete-confirm physical-design architecture — active
+### Reception One delete-confirm physical-design architecture — deferred
 
 What is the smallest declarative additive design that realizes all five representability gaps without mounting the command?
 
@@ -730,7 +732,7 @@ Prerequisites:
 - Remain provider-free, authored-synthetic, declarative and unmounted.
 - Preserve current-authority non-disclosure, exact lock order, reasons, version advance, atomic artifacts and separate readback.
 
-### Reception One appointment cancellation direction — active
+### Reception One appointment cancellation direction — deferred
 
 Cancellation is selected and physically representable; how should its exact design cross the remaining database and product gates?
 
@@ -765,6 +767,21 @@ Prerequisites:
 
 - A fresh Yuri authority decision naming the exact event family and product value.
 - A bounded event, fresh-read, relevance, privacy, deduplication and evidence plan.
+
+### G4 Stage 1 appointment journey and shared channel integration — active
+
+After Compass recovery and review of known capability dispositions, how do the existing Bureau compose, context and proofreader seams support request, book and same-appointment move through calm visible Diary and intent projections, a full Diary prompt, and a shared text/voice lifecycle with independently checked outcome reliability?
+
+G2 and G3 are accepted with qualifications, but G4 M1 is partial. The current compose route and same-date move client are narrower than the required contextual appointment journeys; the remaining integration must retain server-owned decisions and human confirmation.
+
+Prerequisites:
+
+- Complete the reviewed Compass recovery and use the pinned 18-domain capability dispositions as navigation, not product acceptance.
+- Integrate the existing Bureau compose/context/proofreader seams for request, book and same-appointment move, including the currently missing date-changing move semantics.
+- Keep Diary and intent projections visible and calm, with a full Diary prompt and the same domain lifecycle for web text and push-to-talk voice.
+- Check actual commands and outcomes against independently derived expectations, including reliability and accessible non-AI fallback.
+- Use exact current G4 admission, finite effect bindings and independent acceptance for each product effect.
+- Keep real data, providers, deployment and protected integration closed.
 
 ## Programme-support horizon
 
@@ -1165,6 +1182,9 @@ Prerequisites:
 - The accepted readiness re-review does not mount or authorise the status-confirm route; four product-adapter blockers remain.
 - The accepted product adapter is unmounted and authored-synthetic; real PostgreSQL and HTTP behavior remain unproved.
 - The accepted PostgreSQL product-adapter integration is serial, disposable, authored-synthetic and off-route; HTTP and UI behavior remain unproved.
+- reception-one-delete-confirm-physical-design-architecture: The delete-confirm physical design decision remains useful future work; the current M1 route first proves request, book and same-appointment move.
+- reception-one-appointment-cancellation-direction: The cancellation direction remains useful future work; the current M1 route first proves request, book and same-appointment move.
+- All other decision and programme-support horizon statuses are preserved, including the active Raisa Practice Context Fabric. The new G4 sequence is navigation only and grants no product acceptance or runtime authority.
 
 ## Evidence index
 
@@ -1312,6 +1332,7 @@ Prerequisites:
 - `docs/ariadne-current-node-closeout-timestamp-guard-repair-closeout.md`
 - `docs/ariadne-deepseek-in-cell-generated-draft-rehearsal-closeout.md`
 - `docs/ariadne-deepseek-in-cell-generated-draft-rehearsal-plan.md`
+- `docs/ariadne-g4-compass-reconnection.md`
 - `docs/ariadne-gemini-provider-blocked-request-contract-diagnostic-closeout.md`
 - `docs/ariadne-gemini-repaired-request-attempt4-closeout.md`
 - `docs/ariadne-gemini-repaired-request-attempt4-plan.md`
@@ -1362,7 +1383,6 @@ Prerequisites:
 - `docs/ariadne-vertex-sydney-gemini-25-repaired-request-run-closeout.md`
 - `docs/ariadne-vertex-sydney-gemini-25-repaired-request-run-plan.md`
 - `docs/bernie-conversational-diary-north-star.md`
-- `docs/bernie-current-strategic-transition-review.md`
 - `docs/bernie-fluid-meta-grid-concept-closeout.md`
 - `docs/bernie-fluid-meta-grid-concept-design.md`
 - `docs/bernie-functional-meta-grid-client-closeout.md`
@@ -1527,6 +1547,7 @@ Prerequisites:
 - `docs/emr4-model-required-bureau-provider-free-successor-lanes.md`
 - `docs/emr4-rayleen-davida-controlled-recovery-development-plan.md`
 - `docs/model-required-bureau-a5-b4-a5-worker-recovery-lease.md`
+- `docs/programme/raisa-ariadne-recovery-programme.md`
 - `docs/raisa-agent-execution-surface-containment-gate-aes-c0-architecture.md`
 - `docs/raisa-agent-execution-surface-containment-gate-aes-c0-closeout.md`
 - `docs/raisa-agent-execution-surface-containment-gate-aes-c0-plan.md`
@@ -1773,7 +1794,6 @@ Prerequisites:
 - `docs/raisa-provider-free-read-only-unmounted-delete-confirm-physical-representability-review-closeout.md`
 - `docs/raisa-provider-free-read-only-unmounted-delete-confirm-physical-representability-review-plan.md`
 - `docs/raisa-provider-free-read-only-unmounted-delete-confirm-physical-representability-review.md`
-- `docs/raisa-provider-free-read-only-waiting-area-movement-command-family-readiness-review-closeout.md`
 - `docs/raisa-provider-free-read-only-waiting-area-movement-command-family-readiness-review-plan.md`
 - `docs/raisa-provider-free-session-practitioner-directory-read-bridge-closeout.md`
 - `docs/raisa-provider-free-session-practitioner-directory-read-bridge-design.md`
@@ -2290,6 +2310,7 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/deepseek-native-harness-traceability-package-preflight-evidence.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-traceability-pre-dispatch-receipt.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-traceability-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/g4-emr4-compass-reconnection-acceptance.md`
 - `orchestration/agent_inbox/codex/model-required-bureau-a3-b3-request-contract-recovery-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/model-required-bureau-a5-b4-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/model-required-bureau-c3-d3-sol-acceptance.md`
@@ -2578,7 +2599,6 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review-precommit-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review-sol-acceptance.md`
-- `orchestration/agent_inbox/codex/raisa-provider-free-read-only-waiting-area-movement-command-family-readiness-review-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-provider-free-status-confirm-http-route-convergence-postcompaction-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-status-confirm-http-route-convergence-precommit-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-status-confirm-http-route-convergence-preplanning-receipt.json`
@@ -3271,7 +3291,6 @@ Prerequisites:
 - `orchestration/continuity/raisa-provider-free-read-only-unmounted-delete-confirm-physical-representability-review/provider-free-review-evidence.json`
 - `orchestration/continuity/raisa-provider-free-read-only-unmounted-delete-confirm-physical-representability-review/provider-free-review-evidence.schema.json`
 - `orchestration/continuity/raisa-provider-free-read-only-unmounted-delete-confirm-physical-representability-review/review-contract.json`
-- `orchestration/continuity/raisa-provider-free-read-only-waiting-area-movement-command-family-readiness-review/evidence.json`
 - `orchestration/continuity/raisa-provider-free-read-only-waiting-area-movement-command-family-readiness-review/report.md`
 - `orchestration/continuity/raisa-provider-free-session-practitioner-directory-read-bridge/live-local-http-backend-postgres-directory-evidence.json`
 - `orchestration/continuity/raisa-provider-free-status-confirm-http-route-convergence/provider-free-http-postgresql-evidence.json`
@@ -4049,4 +4068,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 444; continuity graph revision 462._
+_Compass map revision 445; continuity graph revision 463._

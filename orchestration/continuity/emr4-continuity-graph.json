@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 462,
+  "graph_revision": 463,
   "harvests": [],
   "nodes": [
     {
@@ -37500,9 +37500,68 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "g4-emr4-recovery-orientation",
+      "title": "G4 EMR4 recovery and Compass reorientation",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "ariadne-provider-free-clockwork-live-canonical-adoption-retirement",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Owner redirected accepted governance work to current G4 Stage 1 recovery.",
+          "The prior waiting-area node is retained as navigation history, not a product ancestor.",
+          "This orientation is not M1 product acceptance or a G1B2 closeout."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "record-current-g4-recovery-orientation",
+          "source": "docs/ariadne-g4-compass-reconnection.md",
+          "status": "accepted",
+          "summary": "Reflect qualified G2/G3 acceptance and partial G4 M1 without changing product authority."
+        }
+      ],
+      "claim_scope": [
+        "Accepted governance orientation only; product M1 remains partial."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/ariadne-g4-compass-reconnection.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/g4-emr4-compass-reconnection-acceptance.md"
+        ],
+        "receipts": [],
+        "tests": [
+          "tests/test_ariadne_g4_orientation.py"
+        ],
+        "closeouts": [],
+        "findings": [
+          "orchestration/continuity/g4-emr4-compass-reconnection/orientation-intent.json"
+        ]
+      },
+      "unresolved_gates": [
+        "G4 M1 remains partial; app, database and browser effects require exact finite bindings."
+      ],
+      "status": "accepted",
+      "created_at": "2026-10-25",
+      "updated_at": "2026-10-25",
+      "coordinates": {
+        "git_ref": "codex/raisa-ariadne-recovery-g0",
+        "source_head": "c417340e1d15b9ed45815648d3fdd6203e05f154",
+        "thread_id": null,
+        "worktree_role": "integration"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-24T19:10:37.5579771+10:00"
+  "updated_at": "2026-10-25"
 }
