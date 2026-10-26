@@ -3376,6 +3376,8 @@ def _validate_g3_read_render_loaded_policy(inputs):
 
 
 def operation_effects(kind: str) -> frozenset[str]:
+    if kind == "g4_compass_gpms_goal_update_entry":
+        return EFFECTS
     if kind == "g4_emr4_compass_reconnection_entry":
         return EFFECTS | {"product_behavior_change"}
     if kind == G4_CI_KIND:
@@ -3421,6 +3423,8 @@ def operation_effects(kind: str) -> frozenset[str]:
 
 def operation_paths(kind: str, binding: dict | None = None) -> frozenset[str]:
     _need(type(kind) is str and kind in OPERATION_PATHS, "bounded_g1b_operation_kind")
+    if kind == G4_GOAL_ENTRY_KIND:
+        return _g4_goal_entry_paths(binding)
     if kind == G4_COMPASS_ENTRY_KIND:
         return _g4_compass_entry_paths(binding)
     if kind == G4_CI_KIND:
@@ -3468,6 +3472,10 @@ def operation_paths(kind: str, binding: dict | None = None) -> frozenset[str]:
 
 def _operation(kind: str, binding: dict | None = None) -> dict:
     paths = operation_paths(kind, binding)
+    if kind == G4_GOAL_ENTRY_KIND:
+        return {"paths": paths, "g4_goal_entry_source": True,
+                "profile": raisa_policy.G4_STAGE1_SUCCESSOR_PROFILE,
+                "gate": "G4", "limits": G4_GOAL_ENTRY_LIMITS}
     if kind == G4_COMPASS_ENTRY_KIND:
         return {"paths": paths, "g4_compass_entry_source": True,
                 "profile": raisa_policy.G4_STAGE1_SUCCESSOR_PROFILE,
@@ -6377,6 +6385,13 @@ def load_bounded_g1b_inputs(context: BoundedG1BContext) -> BoundedG1BInputs:
         return snapshot[1]
 
     binding = _json(read(binding_path, context.expected_binding_sha256))
+    if binding.get("operation_kind") == G4_GOAL_ENTRY_KIND:
+        if binding.get("stage") == "publish":
+            large_input_caps = G4_GOAL_EFFECT_LARGE_INPUT_CAPS
+            return _load_g4_goal_publish_inputs(
+                context, target, source, evidence_root, scratch, binding, read, snapshots)
+        return _load_g4_goal_entry_inputs(
+            context, target, source, evidence_root, scratch, binding, read, snapshots)
     if (binding.get("operation_kind") == G4_COMPASS_ENTRY_KIND
             and binding.get("stage") == "publish"):
         large_input_caps = G4_COMPASS_EFFECT_LARGE_INPUT_CAPS
@@ -6575,6 +6590,8 @@ def load_bounded_g1b_inputs(context: BoundedG1BContext) -> BoundedG1BInputs:
 
 def _validate_loaded_policy(inputs: BoundedG1BInputs) -> tuple[dict[str, bytes], configuration_core.ValidatedConfiguration | None]:
     operation = _operation(inputs.binding["operation_kind"], inputs.binding)
+    if operation.get("g4_goal_entry_source"):
+        return _validate_g4_goal_entry_loaded_policy(inputs)
     if operation.get("g4_compass_entry_source"):
         return _validate_g4_compass_entry_loaded_policy(inputs)
     if operation.get("g4_ci_maintenance"):
@@ -12441,6 +12458,898 @@ def require_g4_compass_reconciliation_effect(*, context: BoundedG1BContext,
                          "lease_before": q["lease_before"]})),
         execution_authorized=True, claim_limits=(
             "one reviewed 12-surface Clockwork reconciliation effect",
+            "pointer replacement last; exact under-lock recheck required",
+            "generic Clockwork tick and providers remain closed"),
+        current_gate="G4", active_profile=raisa_policy.G4_STAGE1_SUCCESSOR_PROFILE)
+
+
+# Additive, separately scoped GPMS goal-only route. Historical branches above remain intact.
+# A separate G4 source-entry operation. The active successor profile and its v10
+# successor scope stay unchanged. This admits reviewed source edits, never a tick.
+G4_GOAL_ENTRY_KIND = "g4_compass_gpms_goal_update_entry"
+G4_GOAL_ENTRY_SCHEMA = "ariadne.g4_compass_gpms_goal_entry.v1"
+G4_GOAL_ENTRY_SCOPE = "orchestration/programme/g4-compass-gpms-goal-entry-scope.json"
+G4_GOAL_ENTRY_TEST = "tests/test_g4_compass_goal_entry.py"
+G4_GOAL_ENTRY_BASE = {
+    "commit": "b1dca5ad1f1c0cd13dc6b739d1d5c2755c0c5abd",
+    "tree": "cbe0ca703761ce5edc4a9279ff2ddb7b9b56b231"}
+G4_GOAL_ENTRY_PREDECESSOR_SHA = "9ccdcf5836ffad8897fca684e3767d082a80eeb88f15b9133364c0e32c0d5a9e"
+G4_GOAL_ENTRY_CONTROL = frozenset({G4_AUDIT_CODE, G4_GOAL_ENTRY_SCOPE,
+                                      G4_GOAL_ENTRY_TEST})
+G4_GOAL_ENTRY_SOURCE = frozenset({
+    "orchestration_harness/governance_clockwork_tick.py",
+    "orchestration_harness/governance_goal_tick.py",
+    "orchestration_harness/governance_goal_update.py",
+    "orchestration_harness/governance_live_adoption.py",
+    "scripts/ariadne_governance_clockwork_tick.py",
+    "scripts/ariadne_compass.py",
+    "tests/test_governance_goal_tick.py",
+    "tests/test_governance_goal_update.py",
+    "orchestration/continuity/compass-gpms-goal-update/goal-intent.json",
+    "orchestration/continuity/compass-gpms-goal-update/gpms-goal-update-payload-v2.json",
+    "orchestration/continuity/compass-gpms-goal-update/capability-dispositions-v1.json"})
+# Exact b1dca/cbe source observations; null means recorded selected-path absence,
+# never physical absence or an unresolved preimage.
+G4_GOAL_SOURCE_PREIMAGES = {
+    "orchestration_harness/governance_clockwork_tick.py": "fd3f8e712cac9daa6c3beff020401277e6450d147a49bafebccc841dd5259ee6",
+    "orchestration_harness/governance_live_adoption.py": "7020024a21f7f8a5a6c907202f57718537c8e63e76972b37ec71dd759a64949d",
+    "scripts/ariadne_governance_clockwork_tick.py": "a483cd75677bd3b11babb8b7e01fa3578cb46ce437f4d2ae68807cfe957a11e9",
+    "scripts/ariadne_compass.py": "09a31c1c69030a8b068dc6fda610164dc9337aad0cc73cf3b54f0a385023726b",
+    "orchestration_harness/governance_goal_tick.py": None,
+    "orchestration_harness/governance_goal_update.py": None,
+    "tests/test_governance_goal_tick.py": None,
+    "tests/test_governance_goal_update.py": None,
+    "orchestration/continuity/compass-gpms-goal-update/goal-intent.json": None,
+    "orchestration/continuity/compass-gpms-goal-update/gpms-goal-update-payload-v2.json": None,
+    "orchestration/continuity/compass-gpms-goal-update/capability-dispositions-v1.json": None,
+}
+G4_GOAL_IMPLEMENTATION_AUTHORS = frozenset({
+    "/root", "/root/backend_attempt3_source_prepare",
+    "/root/backend_guard_diagnostic_source"})
+
+
+def _g4_goal_reviewer(review):
+    return (type(review.get("reviewer_agent")) is str
+            and review["reviewer_agent"].startswith("/root/")
+            and review["reviewer_agent"] not in G4_GOAL_IMPLEMENTATION_AUTHORS)
+
+
+G4_GOAL_ENTRY_LIMITS = (
+    "exact reviewed control, source and reconciled-output path sets only",
+    "source entry cannot run Clockwork; publish admits verified physical afterimages",
+    "generic clockwork tick and closeout remain closed",
+    "no application, database, browser, microphone, provider or protected runtime")
+G4_GOAL_ENTRY_BINDING_KEYS = {
+    "schema_version", "operation_id", "operation_kind", "stage", "phase",
+    "base_commit", "base_tree", "expected_head", "expected_index_tree",
+    "candidate_tree", "source_sha256", "payload_sha256", "repair_sha256", "source_preimages",
+    "source_review", "activation_acceptance"}
+G4_GOAL_ENTRY_SCOPE_KEYS = {
+    "schema_version", "recorded_at", "selected_base", "active_profile",
+    "predecessor_scope_sha256", "control_paths", "source_paths",
+    "allowed_effects", "closed_entrypoints", "canonical_effects_authorized",
+    "runtime_authorized", "source_sha256", "control_sha256", "goal_source_sha256", "goal_source_preimages"}
+OPERATION_PATHS[G4_GOAL_ENTRY_KIND] = (
+    G4_GOAL_ENTRY_CONTROL | G4_GOAL_ENTRY_SOURCE)
+
+
+def _g4_goal_entry_paths(q):
+    _need(type(q) is dict and q.get("schema_version") == G4_GOAL_ENTRY_SCHEMA
+          and q.get("operation_kind") == G4_GOAL_ENTRY_KIND
+          and q.get("stage") in {"enable", "apply", "publish"}
+          and type(q.get("repair_sha256")) is dict,
+          "bounded_g4_goal_entry_binding_kind")
+    scope = (G4_GOAL_ENTRY_CONTROL if q["stage"] == "enable"
+             else G4_GOAL_ENTRY_SOURCE if q["stage"] == "apply"
+             else G4_GOAL_EFFECT_OUTPUTS)
+    paths = frozenset(q["repair_sha256"])
+    _need((paths == scope if q["stage"] == "enable"
+           else bool(paths) and paths <= scope),
+          "bounded_g4_goal_entry_changed_paths")
+    return paths
+
+
+def validate_g4_goal_entry_scope(scope):
+    _keys(scope, G4_GOAL_ENTRY_SCOPE_KEYS,
+          "bounded_g4_goal_entry_scope_schema")
+    _need(scope["schema_version"] == G4_GOAL_ENTRY_SCHEMA
+          and _g4_audit_timestamp(scope["recorded_at"])
+          and scope["selected_base"] == G4_GOAL_ENTRY_BASE
+          and scope["active_profile"] == raisa_policy.G4_STAGE1_SUCCESSOR_PROFILE
+          and scope["predecessor_scope_sha256"] == G4_GOAL_ENTRY_PREDECESSOR_SHA
+          and scope["control_paths"] == sorted(G4_GOAL_ENTRY_CONTROL)
+          and scope["source_paths"] == sorted(G4_GOAL_ENTRY_SOURCE)
+          and scope["goal_source_preimages"] == G4_GOAL_SOURCE_PREIMAGES
+          and scope["allowed_effects"] == sorted(EFFECTS)
+          and scope["closed_entrypoints"] == ["clockwork_closeout_mutation",
+                                               "clockwork_tick_mutation"]
+          and scope["canonical_effects_authorized"] is False
+          and scope["runtime_authorized"] is False,
+          "bounded_g4_goal_entry_scope_boundary")
+    sources = _digest_map(scope["source_sha256"],
+                          SOURCE_PATHS | CONTROLLER_PATHS,
+                          "bounded_g4_goal_entry_sources")
+    controls = _digest_map(scope["control_sha256"],
+                           G4_GOAL_ENTRY_CONTROL - {G4_GOAL_ENTRY_SCOPE},
+                           "bounded_g4_goal_entry_controls")
+    _need(sources[G4_AUDIT_CODE] == controls[G4_AUDIT_CODE],
+          "bounded_g4_goal_entry_controller_pin")
+    _digest_map(scope["goal_source_sha256"], G4_GOAL_ENTRY_SOURCE,
+                "bounded_g4_goal_scope_exact_source_map")
+    return sources
+
+
+def g4_goal_entry_review_subject(q):
+    keys = (
+        "schema_version", "operation_id", "operation_kind", "stage", "phase",
+        "base_commit", "base_tree", "expected_head", "expected_index_tree",
+        "candidate_tree", "source_sha256", "payload_sha256", "repair_sha256", "source_preimages",
+        "activation_acceptance")
+    if q["stage"] == "publish":
+        keys += ("effect_binding", "effect_result", "effect_result_review",
+                 "publication_lease")
+    return _sha(_canonical({key: q[key] for key in keys}))
+
+
+def _g4_goal_entry_review(read, row, evidence_root, q):
+    _keys(row, {"path", "sha256"}, "bounded_g4_goal_entry_review_row")
+    expected = (evidence_root / "compass-gpms-goal-entry" /
+                ("independent-" + q["stage"] + "-" + q["phase"] +
+                 "-subject-review-v1.json"))
+    _need(Path(row["path"]) == expected,
+          "bounded_g4_goal_entry_review_path")
+    review = _json(read(expected, row["sha256"]))
+    verdict = ("PASS_G4_GOAL_RECONCILED_OUTPUT_PUBLICATION_SUBJECT"
+               if q["stage"] == "publish"
+               else "PASS_G4_GOAL_ENTRY_EXACT_SOURCE_SUBJECT")
+    _need(review.get("schema") == "emr4.g4_operation_review.v1"
+          and review.get("status") == "PASS"
+          and review.get("verdict") == verdict
+          and review.get("subject_sha256") == g4_goal_entry_review_subject(q)
+          and review.get("stage") == q["stage"]
+          and review.get("phase") == q["phase"]
+          and _g4_goal_reviewer(review)
+          and review.get("independent") is True
+          and review.get("implementation_authorship") is False
+          and review.get("blocking_findings") == [],
+          "bounded_g4_goal_entry_independent_review")
+    return review
+
+
+def _g4_goal_committed_preimage(target, base, path):
+    """Only a named ordinary regular blob or exact selected-path absence is valid."""
+    _need(path in G4_GOAL_ENTRY_SOURCE | G4_GOAL_ENTRY_CONTROL,
+          "bounded_g4_goal_preimage_path")
+    entry = trusted_git.run_git_bytes(target, "ls-tree", "-z", base, "--", path)
+    if entry == b"":
+        return None
+    _need(entry.endswith(b"\0") and entry.count(b"\0") == 1,
+          "bounded_g4_goal_preimage_population")
+    fields = entry[:-1].split(b"\t")
+    _need(len(fields) == 2 and fields[1] == path.encode("utf-8"),
+          "bounded_g4_goal_preimage_selected_path")
+    match = re.fullmatch(rb"(?:100644|100755) blob ([0-9a-f]{40})", fields[0])
+    _need(match is not None, "bounded_g4_goal_preimage_not_ordinary_blob")
+    return trusted_git.run_git_bytes(target, "cat-file", "blob", match.group(1).decode("ascii"))
+
+
+def _g4_goal_source_preimages(target, q):
+    declared = _keys(q["source_preimages"], G4_GOAL_ENTRY_SOURCE,
+                     "bounded_g4_goal_source_preimages_set")
+    actual = {}
+    for path in sorted(G4_GOAL_ENTRY_SOURCE):
+        row = _keys(declared[path], {"classification", "sha256"},
+                    "bounded_g4_goal_source_preimage_schema")
+        known = (q["payload_sha256"][path] if q["stage"] == "publish"
+                 else G4_GOAL_SOURCE_PREIMAGES[path])
+        known_row = ({"classification": "selected_path_absent", "sha256": None}
+                     if known is None else {"classification": "existing_ordinary", "sha256": known})
+        _need(row == known_row, "bounded_g4_goal_source_preimage_declaration")
+        raw = _g4_goal_committed_preimage(target, q["base_commit"], path)
+        expected = ({"classification": "selected_path_absent", "sha256": None}
+                    if raw is None else
+                    {"classification": "existing_ordinary", "sha256": _sha(raw)})
+        _need(row == expected, "bounded_g4_goal_source_preimage_unresolved_or_changed")
+        actual[path] = raw
+    return actual
+
+def _load_g4_goal_entry_inputs(context, target, source, evidence_root,
+                                  scratch, q, read, snapshots):
+    _keys(q, G4_GOAL_ENTRY_BINDING_KEYS,
+          "bounded_g4_goal_entry_binding_schema")
+    _need(q["schema_version"] == G4_GOAL_ENTRY_SCHEMA
+          and q["operation_kind"] == G4_GOAL_ENTRY_KIND
+          and q["phase"] in {"development", "pre-push", "post-push"}
+          and type(q["operation_id"]) is str
+          and q["operation_id"] == "compass-gpms-goal-update-v1",
+          "bounded_g4_goal_entry_binding_version")
+    paths = _g4_goal_entry_paths(q)
+    for key in ("base_commit", "base_tree", "expected_head",
+                "expected_index_tree", "candidate_tree"):
+        _need(type(q[key]) is str and re.fullmatch(r"[0-9a-f]{40}", q[key]),
+              "bounded_g4_goal_entry_git_identity")
+    _need(trusted_git.run_git(target, "rev-parse",
+          G4_GOAL_ENTRY_BASE["commit"] + "^{tree}")
+          == G4_GOAL_ENTRY_BASE["tree"],
+          "bounded_g4_goal_entry_accepted_base")
+    if q["stage"] == "enable":
+        _need(q["base_commit"] == G4_GOAL_ENTRY_BASE["commit"]
+              and q["base_tree"] == G4_GOAL_ENTRY_BASE["tree"]
+              and q["activation_acceptance"] is None,
+              "bounded_g4_goal_entry_enable_base")
+    else:
+        row = q["activation_acceptance"]
+        _keys(row, {"path", "sha256"},
+              "bounded_g4_goal_entry_activation_row")
+        expected = (evidence_root / "compass-gpms-goal-entry" /
+                    "independent-enable-push-effect-review-v1.json")
+        _need(Path(row["path"]) == expected,
+              "bounded_g4_goal_entry_activation_path")
+        accepted = _json(read(expected, row["sha256"]))
+        _need(accepted.get("status") == "PASS"
+              and accepted.get("verdict") == "PASS_G4_GOAL_ENTRY_CONTROL_PUBLICATION_EFFECT"
+              and accepted.get("independent") is True
+              and accepted.get("implementation_authorship") is False
+              and accepted.get("blocking_findings") == []
+              and _g4_goal_reviewer(accepted)
+              and accepted.get("base") == G4_GOAL_ENTRY_BASE["commit"]
+              and accepted.get("commit") == q["base_commit"]
+              and accepted.get("candidate_tree") == q["base_tree"]
+              and accepted.get("control_activation_accepted") is True
+              and accepted.get("same_attempt_remote_readback_verified") is True
+              and accepted.get("protected_refs_unchanged") is True
+              and accepted.get("whole_inverse_verified_same_attempt") is True
+              and accepted.get("published_ref") == G4_STAGE1_INTERACTIVE_BACKEND_REF,
+              "bounded_g4_goal_entry_activation_acceptance")
+        headers = trusted_git.run_git(target, "cat-file", "commit",
+                                      q["base_commit"]).split("\n\n", 1)[0].splitlines()
+        _need([h for h in headers if h.startswith("parent ")]
+              == ["parent " + G4_GOAL_ENTRY_BASE["commit"]]
+              and [h for h in headers if h.startswith("tree ")]
+              == ["tree " + q["base_tree"]],
+              "bounded_g4_goal_entry_activation_parent")
+    source_before = _g4_goal_source_preimages(target, q)
+    sources = _digest_map(q["source_sha256"], SOURCE_PATHS | CONTROLLER_PATHS,
+                          "bounded_g4_goal_entry_sources")
+    inputs = (CONFIGURATION_PATHS | {STATE, GATES, OVERLAY, AGENTS,
+              G4_STAGE1_INTERACTIVE_SCOPE, G4_STAGE1_SUCCESSOR_SCOPE,
+              G4_STAGE1_SUCCESSOR_TEST, G4_GOAL_ENTRY_SCOPE,
+              G4_GOAL_ENTRY_TEST} | SOURCE_PATHS | CONTROLLER_PATHS |
+              (G4_GOAL_ENTRY_SOURCE if q["stage"] == "apply" else set()))
+    pins = _digest_map(q["payload_sha256"], inputs,
+                       "bounded_g4_goal_entry_payload_paths")
+    payloads = {p: read(target / p, digest) for p, digest in sorted(pins.items())}
+    scope = _json(payloads[G4_GOAL_ENTRY_SCOPE])
+    validate_g4_goal_entry_scope(scope)
+    _need(scope["source_sha256"] == sources
+          and payloads[G4_GOAL_ENTRY_SCOPE] == _canonical(scope) + b"\n"
+          and all(_sha(payloads[p]) == digest
+                  for p, digest in scope["control_sha256"].items()),
+          "bounded_g4_goal_entry_scope_sources")
+    _need(_sha(payloads[G4_STAGE1_SUCCESSOR_SCOPE])
+          == G4_GOAL_ENTRY_PREDECESSOR_SHA,
+          "bounded_g4_goal_entry_v10_preserved")
+    if q["stage"] == "apply":
+        _need(all(pins[p] == scope["goal_source_sha256"][p]
+                  for p in G4_GOAL_ENTRY_SOURCE),
+              "bounded_g4_goal_exact_candidate_source_map")
+        actual = set()
+        for path in G4_GOAL_ENTRY_SOURCE:
+            previous = source_before[path]
+
+            if previous != payloads[path]:
+                actual.add(path)
+        _need(set(q["repair_sha256"]) == actual,
+              "bounded_g4_goal_entry_actual_changed_subset")
+    for path, digest in sources.items():
+        candidate = read(source / path, digest)
+        if q["stage"] == "enable" and path == G4_AUDIT_CODE:
+            _need(candidate == payloads[path],
+                  "bounded_g4_goal_entry_control_candidate")
+        else:
+            _need(candidate == trusted_git.run_git_bytes(
+                  target, "cat-file", "blob", q["base_commit"] + ":" + path),
+                  "bounded_g4_goal_entry_installed_source")
+    for path, pair in q["repair_sha256"].items():
+        _keys(pair, {"before_sha256", "after_sha256"},
+              "bounded_g4_goal_entry_change_pair")
+        previous_raw = _g4_goal_committed_preimage(target, q["base_commit"], path)
+        previous = None if previous_raw is None else _sha(previous_raw)
+
+        expected = pins[path]
+        _need(pair == {"before_sha256": previous,
+                       "after_sha256": expected}
+              and previous != expected and _sha(payloads[path]) == expected,
+              "bounded_g4_goal_entry_change_preimage")
+        if q["stage"] == "apply":
+            _need(payloads[path] == read(source / path, expected),
+                  "bounded_g4_goal_entry_writer_source")
+    for path in inputs - paths:
+        _need(trusted_git.run_git_bytes(target, "cat-file", "blob",
+              q["base_commit"] + ":" + path) == payloads[path],
+              "bounded_g4_goal_entry_unowned_change")
+    review = _g4_goal_entry_review(read, q["source_review"], evidence_root, q)
+    attested = inputs - paths if q["phase"] == "development" else inputs
+    observation = trusted_git.attest_target_index(
+        target, attested_paths=tuple(sorted(attested)),
+        expected_head=q["expected_head"],
+        expected_index_tree=q["expected_index_tree"], scratch_parent=scratch)
+    if q["phase"] == "development":
+        _need(q["expected_head"] == q["base_commit"]
+              and q["expected_index_tree"] in {q["base_tree"], q["candidate_tree"]},
+              "bounded_g4_goal_entry_development_binding")
+    else:
+        headers = trusted_git.run_git(target, "cat-file", "commit",
+                                      q["expected_head"]).split("\n\n", 1)[0].splitlines()
+        _need([h for h in headers if h.startswith("parent ")]
+              == ["parent " + q["base_commit"]]
+              and [h for h in headers if h.startswith("tree ")]
+              == ["tree " + q["candidate_tree"]]
+              and q["expected_index_tree"] == q["candidate_tree"],
+              "bounded_g4_goal_entry_committed_binding")
+    for path, snapshot in snapshots.items():
+        _need(trusted_git._read_regular_snapshot(path, maximum_bytes=2 * 1024 * 1024)
+              == snapshot, "bounded_g4_goal_entry_snapshot_drift")
+    before = {p: trusted_git.run_git_bytes(target, "cat-file", "blob",
+              G4_GOAL_ENTRY_BASE["commit"] + ":" + p)
+              for p in (STATE, GATES, OVERLAY, AGENTS)}
+    _need(all(payloads[p] == before[p] for p in before),
+          "bounded_g4_goal_entry_programme_unchanged")
+    return BoundedG1BInputs(q, before, payloads,
+                            {"scope": scope, "review": review}, observation)
+
+
+def _validate_g4_goal_entry_loaded_policy(inputs):
+    validate_g4_goal_entry_scope(inputs.evidence["scope"])
+    try:
+        configuration = raisa_policy.validate_recovery_configuration(
+            documents={Path(p).name: inputs.payloads[p]
+                       for p in CONFIGURATION_PATHS},
+            expected_sha256={Path(p).name: inputs.binding["payload_sha256"][p]
+                             for p in CONFIGURATION_PATHS},
+            agents_text=inputs.payloads[AGENTS].decode("utf-8"),
+            state=_json(inputs.payloads[STATE]))
+    except (raisa_policy.RaisaPolicyError,
+            configuration_core.ConfigurationError) as error:
+        raise BoundedG1BError(error.reason_code) from error
+    selected = (G4_GOAL_ENTRY_CONTROL if inputs.binding["stage"] == "enable"
+                else G4_GOAL_ENTRY_SOURCE if inputs.binding["stage"] == "apply"
+                else _g4_goal_entry_paths(inputs.binding))
+    return {p: inputs.payloads[p] for p in selected}, configuration
+
+
+G4_GOAL_PUBLISH_KEYS = G4_GOAL_ENTRY_BINDING_KEYS | {
+    "effect_binding", "effect_result", "effect_result_review", "publication_lease"}
+
+
+def _load_g4_goal_publish_inputs(context, target, source, evidence_root,
+                                    scratch, q, read, snapshots):
+    """Admit only the changed subset of the 12 verified goal-only update images."""
+    _keys(q, G4_GOAL_PUBLISH_KEYS,
+          "bounded_g4_goal_publish_binding_schema")
+    _need(q["schema_version"] == G4_GOAL_ENTRY_SCHEMA
+          and q["operation_kind"] == G4_GOAL_ENTRY_KIND
+          and q["stage"] == "publish"
+          and q["phase"] in {"development", "pre-push", "post-push"}
+          and type(q["operation_id"]) is str
+          and q["operation_id"] == "compass-gpms-goal-update-v1",
+          "bounded_g4_goal_publish_binding_version")
+    paths = _g4_goal_entry_paths(q)
+    for key in ("base_commit", "base_tree", "expected_head",
+                "expected_index_tree", "candidate_tree"):
+        _need(type(q[key]) is str and re.fullmatch(r"[0-9a-f]{40}", q[key]),
+              "bounded_g4_goal_publish_git_identity")
+    _need(trusted_git.run_git(target, "rev-parse",
+          q["base_commit"] + "^{tree}") == q["base_tree"],
+          "bounded_g4_goal_publish_base_tree")
+    for ref in G4_GOAL_LOCAL_PROTECTED:
+        status, output = trusted_git.run_git_optional_bytes(
+            target, "show-ref", "--verify", "--quiet", ref)
+        _need(status == 1 and output == b"",
+              "bounded_g4_goal_publish_local_protected_alias")
+    root = evidence_root / "compass-gpms-goal-entry"
+    source_pub_path = root / "independent-apply-push-effect-review-v1.json"
+    source_pub = _json(_g4_goal_effect_row(
+        read, q["activation_acceptance"], source_pub_path,
+        "bounded_g4_goal_publish_source_publication"))
+    _need(source_pub.get("status") == "PASS"
+          and source_pub.get("verdict")
+              == "PASS_G4_GOAL_ENTRY_SOURCE_PUBLICATION_EFFECT"
+          and _g4_goal_reviewer(source_pub)
+          and source_pub.get("independent") is True
+          and source_pub.get("implementation_authorship") is False
+          and source_pub.get("blocking_findings") == []
+          and source_pub.get("source_publication_accepted") is True
+          and source_pub.get("source_paths") == sorted(G4_GOAL_ENTRY_SOURCE)
+          and type(q["payload_sha256"]) is dict
+          and source_pub.get("source_sha256") == {
+              p: q["payload_sha256"].get(p)
+              for p in G4_GOAL_ENTRY_SOURCE}
+          and source_pub.get("commit") == q["base_commit"]
+          and source_pub.get("candidate_tree") == q["base_tree"]
+          and source_pub.get("same_attempt_remote_readback_verified") is True
+          and source_pub.get("protected_refs_unchanged") is True
+          and source_pub.get("whole_inverse_verified_same_attempt") is True
+          and _g4_goal_source_publication_refs(target, source_pub,
+                                                  q["base_commit"])
+          and source_pub.get("published_ref") == G4_STAGE1_INTERACTIVE_BACKEND_REF,
+          "bounded_g4_goal_publish_source_accepted")
+    effect_path = root / "effect-binding.json"
+    effect_q = _json(_g4_goal_effect_row(
+        read, q["effect_binding"], effect_path,
+        "bounded_g4_goal_publish_effect_binding"))
+    _keys(effect_q, G4_GOAL_EFFECT_BINDING_KEYS,
+          "bounded_g4_goal_publish_effect_schema")
+    _need(effect_q["schema_version"] == G4_GOAL_EFFECT_BINDING_SCHEMA
+          and effect_q["operation_kind"] == G4_GOAL_ENTRY_KIND
+          and effect_q["stage"] == "goal_update"
+          and effect_q["phase"] == "effect" and effect_q["mode"] == "publish"
+          and effect_q["source_commit"] == q["base_commit"]
+          and effect_q["source_tree"] == q["base_tree"],
+          "bounded_g4_goal_publish_successful_forward_only")
+    result_path = root / "effect-result.json"
+    result = _json(_g4_goal_effect_row(
+        read, q["effect_result"], result_path,
+        "bounded_g4_goal_publish_result_row"))
+    _need(result.get("schema_version") == "ariadne.governance_live_tick_state.v1"
+          and result.get("status") == "passed"
+          and result.get("source_commit") == q["base_commit"]
+          and result.get("lease_sequence") == effect_q["lease_after"]
+          and result.get("event_kind") == "goal_update"
+          and result.get("operation_id") == "compass-gpms-goal-update-v1"
+          and result.get("canonical_drift") == 0
+          and result.get("dual_owned_surfaces") == 0,
+          "bounded_g4_goal_publish_successful_readback")
+    review_path = root / "independent-effect-readback-review-v1.json"
+    review = _json(_g4_goal_effect_row(
+        read, q["effect_result_review"], review_path,
+        "bounded_g4_goal_publish_readback_review_row"))
+    _need(review.get("status") == "PASS"
+          and review.get("verdict")
+              == "PASS_G4_GOAL_REORIENTATION_EFFECT_READBACK"
+          and _g4_goal_reviewer(review)
+          and review.get("independent") is True
+          and review.get("implementation_authorship") is False
+          and review.get("blocking_findings") == []
+          and review.get("effect_binding_sha256") == q["effect_binding"]["sha256"]
+          and review.get("effect_result_sha256") == q["effect_result"]["sha256"]
+          and review.get("after_sha256") == effect_q["after_sha256"],
+          "bounded_g4_goal_publish_independent_readback")
+    lease_path = root / "publication-lease-v1.json"
+    lease = _json(_g4_goal_effect_row(
+        read, q["publication_lease"], lease_path,
+        "bounded_g4_goal_publish_lease_row"))
+    _need(lease.get("schema") == "emr4.g4_goal_publication_lease.v1"
+          and lease.get("status") == "READY"
+          and lease.get("base_commit") == q["base_commit"]
+          and lease.get("base_tree") == q["base_tree"]
+          and lease.get("target_ref") == G4_STAGE1_INTERACTIVE_BACKEND_REF
+          and lease.get("recovery_ref_before") == q["base_commit"]
+          and lease.get("protected_remote_refs") == G4_GOAL_REMOTE_PROTECTED
+          and lease.get("maximum_publication_attempts") == 1
+          and lease.get("consumed_publication_attempts") == 0,
+          "bounded_g4_goal_publish_finite_lease")
+    source_before = _g4_goal_source_preimages(target, q)
+    sources = _digest_map(q["source_sha256"], SOURCE_PATHS | CONTROLLER_PATHS,
+                          "bounded_g4_goal_publish_sources")
+    inputs = (CONFIGURATION_PATHS | {STATE, GATES, OVERLAY, AGENTS,
+              G4_STAGE1_INTERACTIVE_SCOPE, G4_STAGE1_SUCCESSOR_SCOPE,
+              G4_STAGE1_SUCCESSOR_TEST, G4_GOAL_ENTRY_SCOPE,
+              G4_GOAL_ENTRY_TEST} | SOURCE_PATHS | CONTROLLER_PATHS |
+              G4_GOAL_ENTRY_SOURCE | G4_GOAL_EFFECT_OUTPUTS)
+    pins = _digest_map(q["payload_sha256"], inputs,
+                       "bounded_g4_goal_publish_payload_paths")
+    payloads = {p: read(target / p, digest) for p, digest in sorted(pins.items())}
+    scope = _json(payloads[G4_GOAL_ENTRY_SCOPE])
+    validate_g4_goal_entry_scope(scope)
+    _need(scope["source_sha256"] == sources
+          and all(_sha(payloads[p]) == scope["goal_source_sha256"][p]
+                  for p in G4_GOAL_ENTRY_SOURCE)
+          and _sha(payloads[G4_STAGE1_SUCCESSOR_SCOPE])
+              == G4_GOAL_ENTRY_PREDECESSOR_SHA,
+          "bounded_g4_goal_publish_scope_preserved")
+    for path, digest in sources.items():
+        raw = read(source / path, digest)
+        _need(raw == payloads[path]
+              and raw == trusted_git.run_git_bytes(
+                  target, "cat-file", "blob", q["base_commit"] + ":" + path),
+              "bounded_g4_goal_publish_installed_controller")
+    before = _digest_map(effect_q["before_sha256"], G4_GOAL_EFFECT_OUTPUTS,
+                         "bounded_g4_goal_publish_before_set")
+    after = _digest_map(effect_q["after_sha256"], G4_GOAL_EFFECT_OUTPUTS,
+                        "bounded_g4_goal_publish_after_set")
+    _need(all(_sha(payloads[p]) == after[p] for p in G4_GOAL_EFFECT_OUTPUTS)
+          and all(before[p] == after[p] for p in G4_GOAL_PRESERVED_OUTPUTS),
+          "bounded_g4_goal_publish_physical_afterimages")
+    changed = {p for p in G4_GOAL_EFFECT_OUTPUTS if before[p] != after[p]}
+    _need(paths == changed and set(q["repair_sha256"]) == changed,
+          "bounded_g4_goal_publish_actual_changed_subset")
+    for path in G4_GOAL_EFFECT_OUTPUTS:
+        committed = trusted_git.run_git_bytes(target, "cat-file", "blob",
+                                             q["base_commit"] + ":" + path)
+        _need(_sha(committed) == before[path],
+              "bounded_g4_goal_publish_committed_preimage")
+    for path in changed:
+        _keys(q["repair_sha256"][path],
+              {"before_sha256", "after_sha256"},
+              "bounded_g4_goal_publish_change_pair")
+        _need(q["repair_sha256"][path] == {
+              "before_sha256": before[path], "after_sha256": after[path]},
+              "bounded_g4_goal_publish_change_digest")
+    for path in inputs - paths:
+        _need(trusted_git.run_git_bytes(target, "cat-file", "blob",
+              q["base_commit"] + ":" + path) == payloads[path],
+              "bounded_g4_goal_publish_unowned_change")
+    source_review = _g4_goal_entry_review(
+        read, q["source_review"], evidence_root, q)
+    attested = inputs - paths if q["phase"] == "development" else inputs
+    observation = trusted_git.attest_target_index(
+        target, attested_paths=tuple(sorted(attested)),
+        expected_head=q["expected_head"],
+        expected_index_tree=q["expected_index_tree"], scratch_parent=scratch)
+    if q["phase"] == "development":
+        _need(q["expected_head"] == q["base_commit"]
+              and q["expected_index_tree"] in {q["base_tree"], q["candidate_tree"]},
+              "bounded_g4_goal_publish_development_binding")
+    else:
+        headers = trusted_git.run_git(target, "cat-file", "commit",
+                                      q["expected_head"]).split("\n\n", 1)[0].splitlines()
+        _need([h for h in headers if h.startswith("parent ")]
+              == ["parent " + q["base_commit"]]
+              and [h for h in headers if h.startswith("tree ")]
+              == ["tree " + q["candidate_tree"]]
+              and q["expected_index_tree"] == q["candidate_tree"],
+              "bounded_g4_goal_publish_committed_binding")
+    for path, snapshot in snapshots.items():
+        relative = path.relative_to(target).as_posix() if path.is_relative_to(target) else None
+        maximum = G4_GOAL_EFFECT_LARGE_INPUT_CAPS.get(relative, 2 * 1024 * 1024)
+        _need(trusted_git._read_regular_snapshot(path, maximum_bytes=maximum)
+              == snapshot, "bounded_g4_goal_publish_snapshot_drift")
+    original = {p: trusted_git.run_git_bytes(target, "cat-file", "blob",
+                q["base_commit"] + ":" + p) for p in (STATE, GATES, OVERLAY, AGENTS)}
+    _need(all(payloads[p] == original[p] for p in (STATE, GATES, OVERLAY, AGENTS)),
+          "bounded_g4_goal_publish_programme_unchanged")
+    return BoundedG1BInputs(q, original, payloads,
+                            {"scope": scope, "effect": effect_q,
+                             "result": result, "review": review,
+                             "source_review": source_review}, observation)
+
+
+# An additive effect gate for the separately reviewed goal-only writer. It does
+# not change the generic clockwork_tick_mutation entrypoint or G4 profile.
+G4_GOAL_EFFECT_MANIFEST_SCHEMA = "ariadne.g4_compass_goal_update_effect_manifest.v1"
+G4_GOAL_EFFECT_BINDING_SCHEMA = "ariadne.g4_compass_goal_update_effect_binding.v1"
+G4_GOAL_EFFECT_INTENT = (
+    "orchestration/continuity/compass-gpms-goal-update/goal-intent.json")
+G4_GOAL_EFFECT_ACCEPTANCE = (
+    "orchestration/continuity/compass-gpms-goal-update/goal-intent.json")
+G4_GOAL_EFFECT_OUTPUTS = frozenset({
+    "orchestration/continuity/emr4-continuity-graph.json",
+    "orchestration/continuity/emr4-compass.json",
+    "docs/ariadne-compass-current.md",
+    "orchestration/continuity/ariadne-active-operation-latch/current.json",
+    "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json",
+    "orchestration/continuity/ariadne-agent-error-register/pattern-report.json",
+    "AGENTS.md",
+    "orchestration/continuity/ariadne-governance-clockwork/command-manifest.json",
+    "orchestration/continuity/ariadne-governance-clockwork/transaction.json",
+    "orchestration/continuity/ariadne-governance-clockwork/ownership.json",
+    "orchestration/continuity/ariadne-governance-clockwork/generation-manifest.json",
+    "orchestration/continuity/ariadne-governance-clockwork/current.json"})
+G4_GOAL_EFFECT_LARGE_INPUT_CAPS = {
+    "orchestration/continuity/emr4-continuity-graph.json": 4 * 1024 * 1024,
+    "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json":
+        4 * 1024 * 1024}
+G4_GOAL_LOCAL_PROTECTED = (
+    "refs/heads/master", "refs/heads/handoff/current",
+    "refs/remotes/origin/master", "refs/remotes/origin/handoff/current")
+G4_GOAL_REMOTE_PROTECTED = {
+    "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602"}
+G4_GOAL_EFFECT_BINDING_KEYS = {
+    "schema_version", "operation_kind", "operation_id", "stage", "phase", "mode",
+    "source_commit", "source_tree", "source_sha256", "controller_sha256",
+    "intent_sha256", "authority_sha256",
+    "goal_intent_source", "source_publication", "effect_grant", "effect_review",
+    "before_sha256", "after_sha256", "lease_before", "lease_after"}
+G4_GOAL_EFFECT_MANIFEST_KEYS = {
+    "schema_version", "operation_id", "stage", "mode",
+    "source_commit", "source_tree", "intent_sha256",
+    "before_sha256", "after_sha256", "lease_before", "lease_after"}
+G4_GOAL_PRESERVED_OUTPUTS = frozenset({
+    "orchestration/continuity/emr4-continuity-graph.json",
+    "orchestration/continuity/ariadne-active-operation-latch/current.json",
+    "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json",
+    "orchestration/continuity/ariadne-agent-error-register/pattern-report.json",
+    "AGENTS.md",
+    "orchestration/continuity/ariadne-governance-clockwork/ownership.json"})
+
+def g4_goal_effect_review_subject(q):
+    return _sha(_canonical({key: q[key] for key in
+        G4_GOAL_EFFECT_BINDING_KEYS - {"effect_review"}}))
+
+
+def _g4_goal_effect_row(read, row, expected_path, reason):
+    _keys(row, {"path", "sha256"}, reason)
+    _need(Path(row["path"]) == expected_path, reason)
+    return read(expected_path, row["sha256"])
+
+
+def _g4_goal_source_publication_refs(target, publication, source_commit):
+    recovery = G4_STAGE1_INTERACTIVE_BACKEND_REF
+    protected = G4_GOAL_REMOTE_PROTECTED
+    before = publication.get("remote_before")
+    after = publication.get("remote_after")
+    if (type(before) is not dict or type(after) is not dict
+            or set(before) != set(protected) | {recovery}
+            or set(after) != set(protected) | {recovery}
+            or any(before[ref] != digest or after[ref] != digest
+                   for ref, digest in protected.items())
+            or after[recovery] != source_commit):
+        return False
+    headers = trusted_git.run_git(target, "cat-file", "commit",
+                                  source_commit).split("\n\n", 1)[0].splitlines()
+    parent = [line[7:] for line in headers if line.startswith("parent ")]
+    return (len(parent) == 1 and publication.get("base") == parent[0]
+            and before[recovery] == parent[0])
+
+
+def _g4_goal_effect_contract(q, manifest):
+    """Pure exact ABI/image/lease validation shared by the real effect hook."""
+    _keys(q, G4_GOAL_EFFECT_BINDING_KEYS, "bounded_g4_goal_effect_binding_schema")
+    _need(q["schema_version"] == G4_GOAL_EFFECT_BINDING_SCHEMA
+          and q["operation_kind"] == G4_GOAL_ENTRY_KIND
+          and q["stage"] == "goal_update" and q["phase"] == "effect"
+          and q["mode"] == "publish"
+          and q["operation_id"] == "compass-gpms-goal-update-v1",
+          "bounded_g4_goal_effect_binding_version")
+    _need(all(type(q[k]) is str and re.fullmatch(r"[0-9a-f]{40}", q[k])
+              for k in ("source_commit", "source_tree")),
+          "bounded_g4_goal_effect_source_identity")
+    _need(type(q["lease_before"]) is int and q["lease_before"] >= 0
+          and type(q["lease_after"]) is int and q["lease_after"] == q["lease_before"] + 1,
+          "bounded_g4_goal_effect_lease")
+    sources = _digest_map(q["source_sha256"], G4_GOAL_ENTRY_SOURCE,
+                          "bounded_g4_goal_effect_sources")
+    _need(q["intent_sha256"] == sources[G4_GOAL_EFFECT_INTENT],
+          "bounded_g4_goal_effect_intent_pin")
+    before = _digest_map(q["before_sha256"], G4_GOAL_EFFECT_OUTPUTS,
+                         "bounded_g4_goal_effect_before_set")
+    after = _digest_map(q["after_sha256"], G4_GOAL_EFFECT_OUTPUTS,
+                        "bounded_g4_goal_effect_after_set")
+    _need(all(before[p] == after[p] for p in G4_GOAL_PRESERVED_OUTPUTS)
+          and before["orchestration/continuity/emr4-compass.json"]
+              != after["orchestration/continuity/emr4-compass.json"]
+          and before["orchestration/continuity/ariadne-governance-clockwork/current.json"]
+              != after["orchestration/continuity/ariadne-governance-clockwork/current.json"],
+          "bounded_g4_goal_effect_changed_set")
+    _keys(manifest, G4_GOAL_EFFECT_MANIFEST_KEYS, "bounded_g4_goal_effect_manifest_schema")
+    expected = {key: q[key] for key in G4_GOAL_EFFECT_MANIFEST_KEYS if key != "schema_version"}
+    expected["schema_version"] = G4_GOAL_EFFECT_MANIFEST_SCHEMA
+    _need(_canonical(manifest) == _canonical(expected),
+          "bounded_g4_goal_effect_manifest_mismatch")
+    return before, after
+
+
+def _g4_goal_validate_effect_grant(grant, q):
+    """A root-issued finite grant binds this source, intent, scope and exact effect."""
+    _need(grant.get("schema") == "emr4.g4_goal_finite_effect_grant.v1"
+          and grant.get("issuer") == "/root" and grant.get("status") == "READY"
+          and grant.get("operation_id") == q["operation_id"] and grant.get("mode") == q["mode"]
+          and grant.get("source_commit") == q["source_commit"]
+          and grant.get("source_tree") == q["source_tree"]
+          and grant.get("intent_sha256") == q["intent_sha256"]
+          and grant.get("scope_sha256") == q["authority_sha256"][G4_GOAL_ENTRY_SCOPE]
+          and grant.get("before_sha256") == q["before_sha256"]
+          and grant.get("after_sha256") == q["after_sha256"]
+          and type(grant.get("lease_before")) is int
+          and type(grant.get("lease_after")) is int
+          and grant.get("lease_before") == q["lease_before"]
+          and grant.get("lease_after") == q["lease_after"]
+          and type(grant.get("maximum_effect_attempts")) is int
+          and grant["maximum_effect_attempts"] == 1
+          and type(grant.get("consumed_effect_attempts")) is int
+          and grant["consumed_effect_attempts"] == 0 and grant.get("automatic_retry") is False
+          and grant.get("effect_classes") == ["existing_clockwork_runtime_mutation"]
+          and type(grant.get("expires_at")) is str
+          and datetime.fromisoformat(grant["expires_at"]).tzinfo is not None
+          and datetime.now(timezone.utc) < datetime.fromisoformat(grant["expires_at"]),
+          "bounded_g4_goal_effect_finite_grant")
+
+def require_g4_compass_goal_update_effect(*, context: BoundedG1BContext,
+                                              manifest: dict, prepared: dict,
+                                              phase: str = "effect"):
+    """Require an exact reviewed goal-only publication before each write."""
+    _need(type(context) is BoundedG1BContext and phase == "effect",
+          "bounded_g4_goal_effect_context")
+    for path in (context.target_root, context.source_root, context.evidence_root,
+                 context.scratch_root, context.binding_path):
+        trusted_git._validate_path_components(path.absolute())
+    target, source, evidence, scratch = (p.resolve(strict=True) for p in
+                                (context.target_root, context.source_root,
+                                 context.evidence_root, context.scratch_root))
+    _need(all(p != target and not p.is_relative_to(target)
+              and not target.is_relative_to(p) for p in (source, evidence, scratch)),
+          "bounded_g4_goal_effect_external_roots")
+    _need(scratch != source and not scratch.is_relative_to(source)
+          and not source.is_relative_to(scratch),
+          "bounded_g4_goal_effect_scratch_separation")
+    administration = trusted_git._physical_git_administration(target)
+    _need(all(not p.is_relative_to(administration["gitdir"])
+              and not p.is_relative_to(administration["commondir"])
+              for p in (source, evidence)),
+          "bounded_g4_goal_effect_git_separation")
+    _need(Path(__file__).resolve() == source / G4_AUDIT_CODE
+          and Path(trusted_git.__file__).resolve()
+              == source / "orchestration_harness/trusted_git.py"
+          and Path(configuration_core.__file__).resolve()
+              == source / "orchestration_harness/configuration_core.py"
+          and Path(raisa_policy.__file__).resolve()
+              == source / "orchestration_harness/raisa_policy.py",
+          "bounded_g4_goal_effect_source_isolation")
+    binding_path = context.binding_path.resolve(strict=True)
+    _need(not binding_path.is_relative_to(target)
+          and not binding_path.is_relative_to(administration["gitdir"])
+          and not binding_path.is_relative_to(administration["commondir"]),
+          "bounded_g4_goal_effect_binding_separation")
+
+    def read(path, digest):
+        rel = path.relative_to(target).as_posix() if path.is_relative_to(target) else None
+        cap = G4_GOAL_EFFECT_LARGE_INPUT_CAPS.get(rel, 2 * 1024 * 1024)
+        raw = trusted_git._read_regular_snapshot(path, maximum_bytes=cap)[1]
+        _need(_sha(raw) == digest, "bounded_g4_goal_effect_digest")
+        return raw
+
+    q = _json(read(binding_path, context.expected_binding_sha256))
+    before, after = _g4_goal_effect_contract(q, manifest)
+    _need(type(q["source_commit"]) is str
+          and re.fullmatch(r"[0-9a-f]{40}", q["source_commit"])
+          and type(q["source_tree"]) is str
+          and re.fullmatch(r"[0-9a-f]{40}", q["source_tree"])
+          and trusted_git.run_git(target, "rev-parse", "HEAD") == q["source_commit"]
+          and trusted_git.run_git(target, "rev-parse", "HEAD^{tree}") == q["source_tree"],
+          "bounded_g4_goal_effect_source_identity")
+    for ref in G4_GOAL_LOCAL_PROTECTED:
+        status, output = trusted_git.run_git_optional_bytes(
+            target, "show-ref", "--verify", "--quiet", ref)
+        _need(status == 1 and output == b"",
+              "bounded_g4_goal_effect_local_protected_alias")
+    sources = _digest_map(q["source_sha256"], G4_GOAL_ENTRY_SOURCE,
+                          "bounded_g4_goal_effect_sources")
+    _need(type(q["controller_sha256"]) is str
+          and re.fullmatch(r"[0-9a-f]{64}", q["controller_sha256"]),
+          "bounded_g4_goal_effect_controller_digest")
+    controller = read(source / G4_AUDIT_CODE, q["controller_sha256"])
+    _need(controller == read(target / G4_AUDIT_CODE, q["controller_sha256"])
+          and controller == trusted_git.run_git_bytes(
+              target, "cat-file", "blob",
+              q["source_commit"] + ":" + G4_AUDIT_CODE),
+          "bounded_g4_goal_effect_installed_controller")
+    _need(q["intent_sha256"] == sources[G4_GOAL_EFFECT_INTENT],
+          "bounded_g4_goal_effect_intent_pin")
+    for path, digest in sources.items():
+        raw = read(target / path, digest)
+        _need(raw == read(source / path, digest)
+              and raw == trusted_git.run_git_bytes(
+              target, "cat-file", "blob", q["source_commit"] + ":" + path),
+              "bounded_g4_goal_effect_installed_source")
+    writer_path = "orchestration_harness/governance_clockwork_tick.py"
+    _need(read(source / writer_path, sources[writer_path])
+          == read(target / writer_path, sources[writer_path]),
+          "bounded_g4_goal_effect_external_writer_source")
+    authority = _digest_map(q["authority_sha256"],
+                            frozenset({STATE, GATES, OVERLAY,
+                                       G4_STAGE1_SUCCESSOR_SCOPE, G4_GOAL_ENTRY_SCOPE}),
+                            "bounded_g4_goal_effect_authority_set")
+    _need(authority[G4_STAGE1_SUCCESSOR_SCOPE]
+          == G4_GOAL_ENTRY_PREDECESSOR_SHA,
+          "bounded_g4_goal_effect_v10_scope")
+    for path, digest in authority.items():
+        raw = read(target / path, digest)
+        _need(raw == trusted_git.run_git_bytes(
+              target, "cat-file", "blob", q["source_commit"] + ":" + path),
+              "bounded_g4_goal_effect_installed_authority")
+    scope = _json(read(target / G4_GOAL_ENTRY_SCOPE, authority[G4_GOAL_ENTRY_SCOPE]))
+    validate_g4_goal_entry_scope(scope)
+    _need(scope["goal_source_sha256"] == sources
+          and scope["source_sha256"][G4_AUDIT_CODE] == q["controller_sha256"],
+          "bounded_g4_goal_effect_dedicated_scope")
+    for path, digest in scope["source_sha256"].items():
+        raw = read(source / path, digest)
+        _need(raw == read(target / path, digest)
+              and raw == trusted_git.run_git_bytes(target, "cat-file", "blob",
+                    q["source_commit"] + ":" + path),
+              "bounded_g4_goal_effect_installed_controller_closure")
+    state = _json(read(target / STATE, authority[STATE]))
+    _need(state.get("active_profile") == raisa_policy.G4_STAGE1_SUCCESSOR_PROFILE
+          and state.get("current_gate") == "G4"
+          and state.get("active_correction") == "G4"
+          and state.get("programme_mode") == "convergence"
+          and state.get("g2", {}).get("completion_accepted") is True
+          and state.get("g3", {}).get("completion_accepted") is True,
+          "bounded_g4_goal_effect_current_g4")
+    gates = _document(read(target / GATES, authority[GATES]), GATES)
+    _need(gates.get("programme", {}).get("current_gate") == "G4"
+          and gates["programme"].get("current_gate_status") == state.get("current_gate_status")
+          and state.get("feature_work_eligible") is False
+          and gates["programme"].get("feature_work_eligible") is False,
+          "bounded_g4_goal_effect_gate_contradiction")
+    for path, digest in before.items():
+        raw = read(target / path, digest)
+        _need(raw == trusted_git.run_git_bytes(
+              target, "cat-file", "blob", q["source_commit"] + ":" + path),
+              "bounded_g4_goal_effect_committed_preimage")
+    pointer = _json(read(target / "orchestration/continuity/ariadne-governance-clockwork/current.json",
+                         before["orchestration/continuity/ariadne-governance-clockwork/current.json"]))
+    _need(pointer.get("lease_sequence") == q["lease_before"],
+          "bounded_g4_goal_effect_current_lease")
+    acceptance = _g4_goal_effect_row(
+        read, q["goal_intent_source"], target / G4_GOAL_EFFECT_ACCEPTANCE,
+        "bounded_g4_goal_effect_acceptance_source")
+    _need(acceptance != b""
+          and q["goal_intent_source"]["sha256"]
+              == sources[G4_GOAL_EFFECT_ACCEPTANCE],
+          "bounded_g4_goal_effect_acceptance_pin")
+    publication_path = (evidence / "compass-gpms-goal-entry" /
+                        "independent-apply-push-effect-review-v1.json")
+    publication = _json(_g4_goal_effect_row(
+        read, q["source_publication"], publication_path,
+        "bounded_g4_goal_effect_source_publication"))
+    _need(publication.get("status") == "PASS"
+          and publication.get("verdict")
+              == "PASS_G4_GOAL_ENTRY_SOURCE_PUBLICATION_EFFECT"
+          and _g4_goal_reviewer(publication)
+          and publication.get("independent") is True
+          and publication.get("implementation_authorship") is False
+          and publication.get("blocking_findings") == []
+          and publication.get("source_publication_accepted") is True
+          and publication.get("source_paths") == sorted(G4_GOAL_ENTRY_SOURCE)
+          and publication.get("source_sha256") == sources
+          and publication.get("commit") == q["source_commit"]
+          and publication.get("candidate_tree") == q["source_tree"]
+          and publication.get("same_attempt_remote_readback_verified") is True
+          and publication.get("protected_refs_unchanged") is True
+          and publication.get("whole_inverse_verified_same_attempt") is True
+          and _g4_goal_source_publication_refs(target, publication,
+                                                  q["source_commit"])
+          and publication.get("published_ref") == G4_STAGE1_INTERACTIVE_BACKEND_REF,
+          "bounded_g4_goal_effect_source_publication_result")
+    grant_path = evidence / "compass-gpms-goal-entry" / (
+        "finite-" + phase + "-grant-v1.json")
+    grant = _json(_g4_goal_effect_row(
+        read, q["effect_grant"], grant_path,
+        "bounded_g4_goal_effect_grant_row"))
+    _g4_goal_validate_effect_grant(grant, q)
+    review_path = evidence / "compass-gpms-goal-entry" / (
+        "independent-" + phase + "-subject-review-v1.json")
+    review = _json(_g4_goal_effect_row(
+        read, q["effect_review"], review_path,
+        "bounded_g4_goal_effect_review_row"))
+    _need(review.get("schema") == "emr4.g4_operation_review.v1"
+          and review.get("status") == "PASS"
+          and review.get("verdict") == "PASS_G4_GOAL_UPDATE_EFFECT_EXACT_SUBJECT"
+          and review.get("subject_sha256") == g4_goal_effect_review_subject(q)
+          and _g4_goal_reviewer(review)
+          and review.get("independent") is True
+          and review.get("implementation_authorship") is False
+          and review.get("blocking_findings") == [],
+          "bounded_g4_goal_effect_independent_review")
+    from orchestration_harness import governance_goal_tick as goal_writer
+    _need(Path(goal_writer.__file__).resolve()
+              == source / "orchestration_harness/governance_goal_tick.py"
+          and Path(goal_writer.tick.__file__).resolve() == source / writer_path
+          and Path(goal_writer.goals.__file__).resolve()
+              == source / "orchestration_harness/governance_goal_update.py",
+          "bounded_g4_goal_effect_writer_import")
+    validated = goal_writer.validate_prepared(target, prepared)
+    goal_writer.verify_effect(target, validated, manifest)
+    return BoundedG1BDecision(
+        True, (), "g4_compass_goal_update_effect", phase,
+        q["operation_id"], q["source_tree"], context.expected_binding_sha256,
+        _sha(_canonical({"before": before, "after": after,
+                         "lease_before": q["lease_before"]})),
+        execution_authorized=True, claim_limits=(
+            "one reviewed goal-only 12-surface Clockwork effect",
             "pointer replacement last; exact under-lock recheck required",
             "generic Clockwork tick and providers remain closed"),
         current_gate="G4", active_profile=raisa_policy.G4_STAGE1_SUCCESSOR_PROFILE)
