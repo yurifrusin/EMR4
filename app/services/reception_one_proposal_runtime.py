@@ -578,6 +578,7 @@ def build_slot_search_input(
         date_to=date.fromisoformat(str(appointment_date)),
         earliest_time=time.fromisoformat(str(earliest)) if earliest else None,
         latest_time=time.fromisoformat(str(latest)) if latest else None,
+        temporal_relation=extraction.temporal_relation,
         duration_minutes=int(duration),
         limit=20,
     )
@@ -746,6 +747,28 @@ def proofread_provider_blocked_plan(
                 frame,
                 planner_class="deterministic_semantic_adapter",
                 goal=bounded_goal,
+            )
+            candidate["steps"] = [
+                {
+                    "id": "step-clarification",
+                    "operator": "request_clarification",
+                    "args": {},
+                }
+            ]
+        # The typed slot operator raises on an empty authoritative read.
+        # For an exact move with no matching slot, use the existing reviewed
+        # clarification step rather than executing a candidate-free move.
+        extraction = typed_plan.extraction_for(frame)
+        if (
+            plan is None
+            and extraction.intended_action == "move"
+            and extraction.temporal_relation == "exact"
+            and not frame["context"]["candidate_slots"]
+        ):
+            candidate = typed_plan.base_plan(
+                frame,
+                planner_class="deterministic_semantic_adapter",
+                goal="move",
             )
             candidate["steps"] = [
                 {

@@ -6675,6 +6675,16 @@ def _build_slot_search_proposal(
 
     effective_to = body.date_to if body.date_to is not None else body.date_from
 
+    # An exact time is one point, unlike the existing half-open range. Require
+    # the interpreter's point bounds to agree before changing slot selection.
+    exact_time = body.temporal_relation == "exact"
+    if exact_time and (
+        body.earliest_time is None
+        or body.latest_time is None
+        or body.earliest_time != body.latest_time
+    ):
+        raise HTTPException(status_code=422, detail={"code": "SLOT_EXACT_TIME_INCONSISTENT"})
+
     if blocks:
         return SlotSearchProposalOut(
             safe=False,
@@ -6705,11 +6715,16 @@ def _build_slot_search_proposal(
             slot_time_local = slot_start.time()
 
             # Apply optional time-of-day window
-            if body.earliest_time is not None and slot_time_local < body.earliest_time:
-                slot_start += timedelta(minutes=slot_mins)
-                continue
-            if body.latest_time is not None and slot_time_local >= body.latest_time:
-                break
+            if exact_time:
+                if slot_time_local != body.earliest_time:
+                    slot_start += timedelta(minutes=slot_mins)
+                    continue
+            else:
+                if body.earliest_time is not None and slot_time_local < body.earliest_time:
+                    slot_start += timedelta(minutes=slot_mins)
+                    continue
+                if body.latest_time is not None and slot_time_local >= body.latest_time:
+                    break
 
             conflict = _find_conflicting_appointment(
                 db,
