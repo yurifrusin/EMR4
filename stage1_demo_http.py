@@ -623,6 +623,85 @@ def local_minute(value: Any) -> str | None:
     return value[:5] if isinstance(value, str) and LOCAL_MINUTE.fullmatch(value) else None
 
 
+def project_bureau_move(reply: Any, current: dict[str, Any],
+                        correlation_id: str) -> dict[str, str] | None:
+    """Project one clean Bureau option into editable fields, without authority.
+
+    Multiple options need an explicit choice; the Bureau's first-slot summary
+    is not such a choice. Rejected reply content is never returned to the UI.
+    The later move proposal still rechecks the original appointment/version.
+    Bureau display labels are never used as identity evidence or rendered;
+    the screen keeps the current server-verified appointment's identity.
+    """
+    if type(reply) is not dict or any(reply.get(key) != value for key, value in {
+            "contract_version": "reception.one.product-context-proposal.v1",
+            "result": "proposal_ready", "planner_mode": "deterministic",
+            "data_class": "authored_synthetic", "correlation_id": correlation_id,
+            "operation_id": "proposeAppointmentUpdate"}.items()):
+        return None
+    if (any(reply.get(key) is not True for key in (
+                "safe", "requires_confirmation", "proposal_only", "database_reads_performed"))
+            or any(reply.get(key) is not False for key in (
+                "write_performed", "confirmation_performed", "model_database_access",
+                "legacy_interpreter_gate_changed"))
+            or type(reply.get("provider_calls")) is not int or reply["provider_calls"] != 0):
+        return None
+    notices = reply.get("warning_codes")
+    required_notices = {"staff_confirmation_required", "staff_selection_required"}
+    if (type(notices) is not list or len(notices) > 20
+            or any(type(code) is not str for code in notices)
+            or len(set(notices)) != len(notices)
+            or not required_notices <= set(notices)
+            or not set(notices) <= required_notices | {"no_reservation"}):
+        return None
+    review = reply.get("review")
+    revision = reply.get("context_revision")
+    if (type(revision) is not int or revision < 1 or type(review) is not dict
+            or review.get("disposition") != "admit"
+            or type(review.get("context_revision")) is not int
+            or review.get("context_revision") != revision):
+        return None
+    selected = reply.get("selected_appointment")
+    if (type(selected) is not dict or current.get("status") != "booked"
+            or selected.get("appointment_date") != current.get("date")
+            or local_minute(selected.get("start_time_local")) != current.get("start_local")
+            or selected.get("status") != current.get("status")
+            or type(selected.get("duration_minutes")) is not int
+            or selected["duration_minutes"] != current.get("duration_minutes")):
+        return None
+    slots = reply.get("candidate_slots")
+    adapter = reply.get("adapter_review")
+    if (type(slots) is not list or len(slots) != 1 or type(slots[0]) is not dict
+            or type(adapter) is not dict or adapter.get("adapter_kind") != "update_proposal"
+            or any(adapter.get(key) is not True for key in (
+                "performed", "safe", "freshness_verified"))
+            or any(adapter.get(key) is not False for key in (
+                "confirmation_evidence_released", "write_performed"))
+            or adapter.get("warning_codes") not in ([], ["no_reservation"])
+            or adapter.get("block_codes") != []
+            or type(adapter.get("candidate_count")) is not int
+            or adapter["candidate_count"] != 1):
+        return None
+    slot = slots[0]
+    target_date = reply.get("proposed_appointment_date")
+    target_time = local_minute(reply.get("proposed_start_time_local"))
+    duration = reply.get("proposed_duration_minutes")
+    try:
+        if type(target_date) is not str or date.fromisoformat(target_date).isoformat() != target_date:
+            return None
+    except ValueError:
+        return None
+    if (not target_time or slot.get("appointment_date") != target_date
+            or local_minute(slot.get("start_time_local")) != target_time
+            or type(duration) is not int or not 5 <= duration <= 180
+            or duration != current.get("duration_minutes")
+            or type(slot.get("duration_minutes")) is not int
+            or slot["duration_minutes"] != duration
+            or slot.get("warning_codes") not in ([], ["no_reservation"])):
+        return None
+    return {"target_date": target_date, "target_start_local": target_time}
+
+
 @dataclass(frozen=True, repr=False)
 class DemoSeed:
     persona: str
@@ -1264,7 +1343,44 @@ def create_stage1_demo_app(config: DemoConfig) -> tuple[FastAPI, DemoIssuer]:
             body = json.loads(b"".join(parts).decode("utf-8"), object_pairs_hook=unique)
         except (UnicodeError, ValueError):
             raise HTTPException(status_code=400, detail="INTENT_BODY_INVALID") from None
-        if type(body) is not dict or set(body) != {"kind", "words"}:
+        if type(body) is not dict:
+            raise HTTPException(status_code=400, detail="INTENT_BODY_INVALID")
+        if body.get("kind") == "move":
+            if (session.binding.persona != "staff" or set(body) != {
+                    "kind", "words", "appointment_ref", "source_state_version"}
+                    or type(body["words"]) is not str or not body["words"].strip()
+                    or len(body["words"]) > 512
+                    or type(body["appointment_ref"]) is not str
+                    or type(body["source_state_version"]) is not int
+                    or body["source_state_version"] < 1):
+                raise HTTPException(status_code=400, detail="INTENT_BODY_INVALID")
+            issuer.require_staff(session, "proposal:create")
+            fresh = await refreshed(session)
+            current = fresh.get("appointment")
+            if (type(current) is not dict or current.get("ref") != body["appointment_ref"]
+                    or current.get("state_version") != body["source_state_version"]):
+                raise HTTPException(status_code=409, detail="APPOINTMENT_STATE_CHANGED")
+            correlation_id = str(uuid.uuid4())
+            try:
+                reply = await backend("POST", "/proposals/reception-one/compose", session,
+                    body={"contract_version": "reception.one.product-context-request.v1",
+                          "instruction": body["words"], "reference_date": practice_clock()[:10],
+                          "surface_id": "diary-main", "correlation_id": correlation_id,
+                          "data_class": "authored_synthetic",
+                          "selected_appointment_id": current["ref"],
+                          "planner_mode": "deterministic"})
+            except _StaffMockChangedAfterDispatch:
+                raise HTTPException(status_code=403, detail="MOCK_STAFF_SESSION_EXPIRED") from None
+            issuer.session_for(request)
+            issuer.require_staff(session, "proposal:create")
+            fields = project_bureau_move(reply, current, correlation_id)
+            return no_store({"schema": "emr4.stage1_word_interpretation.v1", "kind": "move",
+                "method": "BUREAU_DETERMINISTIC", "status": "PROPOSED" if fields else "CLARIFICATION",
+                "fields": fields or {}, "missing": [] if fields else ["target_date", "target_start_local"],
+                "selection": {"appointment_ref": current["ref"],
+                              "source_state_version": current["state_version"]},
+                "message": "BUREAU_REVIEWED_MOVE" if fields else "CLARIFY_SELECTED_MOVE"})
+        if set(body) != {"kind", "words"} or body.get("kind") != "request":
             raise HTTPException(status_code=400, detail="INTENT_BODY_INVALID")
         try:
             proposal = interpret_words(body["kind"], body["words"],

@@ -188,6 +188,8 @@
             "effect_escalation",
             "forbidden_operator",
             "semantic_action_mismatch",
+            "selected_identity_conflict",
+            "selected_operation_mismatch",
             "clarification_required",
             "revision_budget_exhausted",
             "authority_boundary_open"

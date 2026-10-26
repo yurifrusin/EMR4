@@ -7,6 +7,7 @@ import argparse
 import copy
 import hashlib
 import json
+import re
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
@@ -63,6 +64,12 @@ PROPOSAL_OPERATIONS = {
     "resize": "proposeAppointmentUpdate",
     "cancel": "proposeAppointmentDelete",
     "status_change": "proposeAppointmentStatus",
+}
+SELECTED_PROPOSAL_FAMILIES = {
+    "prepare_move_proposal": "move",
+    "prepare_resize_proposal": "resize",
+    "prepare_cancel_proposal": "cancel",
+    "prepare_status_proposal": "status_change",
 }
 BOUNDARY = {
     "write_performed": False,
@@ -155,6 +162,104 @@ def expand_case(cases_document: dict[str, Any], case: dict[str, Any]) -> dict[st
 
 def extraction_for(frame: dict[str, Any]) -> SemanticExtraction:
     return extract_semantics(frame["utterances"], frame["reference_date"])
+
+
+_SELECTED_MOVE_WORDS = re.compile(
+    r"(?:please\s+)?(?:move|shift|reschedule)\s+"
+    r"(?:this|the selected)\s+appointment\s+to\s+"
+    r"(?P<date>[a-z0-9]+(?:\s+[a-z0-9]+){0,2})\s+at\s+"
+    r"(?P<time>[a-z0-9:. ]+?)"
+    r"(?:\s+please)?[.!?]?",
+    re.I,
+)
+
+
+def _spoken_refs(frame: dict[str, Any], kind: str) -> set[str]:
+    """Retain every known full-name match, including pre-selection matches."""
+    rows = frame["context"]["patients" if kind == "patient" else "practitioners"]
+    result: set[str] = set()
+    for row in rows:
+        terms = [row["display"]]
+        if kind == "practitioner":
+            terms.extend(alias for alias in row["aliases"] if alias.casefold().startswith("dr "))
+        for term in terms:
+            if any(
+                re.search(r"(?<!\w)" + re.escape(term) + r"(?!\w)", utterance, re.I)
+                for utterance in frame["utterances"]
+            ):
+                result.add(row["id"])
+                break
+    return result
+
+
+def _unresolved_person_cue(frame: dict[str, Any]) -> bool:
+    """Fail closed on a remaining named or possessive person cue."""
+    remaining = " ".join(frame["utterances"])
+    terms = [
+        row["display"]
+        for row in frame["context"]["patients"]
+    ] + [
+        term
+        for row in frame["context"]["practitioners"]
+        for term in [row["display"], *row["aliases"]]
+        if term.casefold().startswith("dr ")
+    ]
+    for term in sorted(set(terms), key=len, reverse=True):
+        remaining = re.sub(
+            r"(?<!\w)(?:(?:for|with|patient|doctor)\s+)?"
+            + re.escape(term) + r"(?!\w)",
+            " ",
+            remaining,
+            flags=re.I,
+        )
+    return bool(
+        re.search(r"\b(?:for|with|patient|doctor|dr)\s+(?:dr\s+)?[a-z][a-z'-]*\b", remaining, re.I)
+        or re.search(r"\b[a-z][a-z'-]*['’]s\s+(?:appointment|booking)\b", remaining, re.I)
+    )
+
+
+def selected_move_subject(frame: dict[str, Any], extraction: SemanticExtraction) -> str | None:
+    """Classify only a uniquely grounded selected-row move subject."""
+    selected = frame["context"].get("selected_appointment")
+    if selected is None or extraction.intended_action != "move":
+        return None
+    if extraction.action_negated or extraction.requires_clarification or extraction.authority_claim != "read":
+        return None
+    if not extraction.normalized_values.get("appointment_date") or not extraction.normalized_values.get("earliest_time"):
+        return None
+    patient_semantics = extraction.entity_semantics.get("patient", "omitted")
+    practitioner_semantics = extraction.entity_semantics.get("practitioner", "omitted")
+    if patient_semantics in {"ambiguous", "negated", "corrected"} or practitioner_semantics in {"ambiguous", "negated", "corrected"}:
+        return None
+    patient_refs = _spoken_refs(frame, "patient")
+    practitioner_refs = _spoken_refs(frame, "practitioner")
+    if patient_refs - {selected["patient_ref"]} or practitioner_refs - {selected["practitioner_ref"]}:
+        return None
+    if patient_semantics == "exact":
+        if patient_refs != {selected["patient_ref"]}:
+            return None
+        if practitioner_semantics == "exact" and practitioner_refs != {selected["practitioner_ref"]}:
+            return None
+        if _unresolved_person_cue(frame):
+            return None
+        return "named"
+    if patient_semantics != "omitted" or practitioner_semantics != "omitted":
+        return None
+    if patient_refs or practitioner_refs or len(frame["utterances"]) != 1:
+        return None
+    if _unresolved_person_cue(frame):
+        return None
+    match = _SELECTED_MOVE_WORDS.fullmatch(frame["utterances"][0].strip())
+    if match is None or not extraction.normalized_turns:
+        return None
+    spoken_time = match.group("time").strip().casefold()
+    normalized_time = extraction.normalized_values.get("earliest_time")
+    if not any(
+        fragment.strip().casefold() == spoken_time and value == normalized_time
+        for fragment, value in extraction.normalized_turns[0].time_forms.items()
+    ):
+        return None
+    return "selected_only"
 
 
 def semantic_value(
@@ -324,11 +429,6 @@ def deterministic_plan(frame: dict[str, Any]) -> dict[str, Any]:
         planner_class="deterministic_semantic_adapter",
         goal=goal,
     )
-    patient_step = {
-        "id": "step-patient",
-        "operator": "resolve_patient_reference",
-        "args": {"mention": mention_binding(frame, "patient")},
-    }
     if goal == "clarification":
         plan["steps"] = [
             {
@@ -338,6 +438,20 @@ def deterministic_plan(frame: dict[str, Any]) -> dict[str, Any]:
             }
         ]
         return plan
+
+    selected_subject = selected_move_subject(frame, extraction) if goal == "move" else None
+    if goal == "move" and selected_subject is None:
+        plan["steps"] = [{"id": "step-clarification", "operator": "request_clarification", "args": {}}]
+        return plan
+    patient_step = (
+        {
+            "id": "step-patient",
+            "operator": "resolve_patient_reference",
+            "args": {"mention": mention_binding(frame, "patient")},
+        }
+        if selected_subject != "selected_only"
+        else None
+    )
 
     if goal == "create":
         plan["steps"] = [
@@ -381,12 +495,12 @@ def deterministic_plan(frame: dict[str, Any]) -> dict[str, Any]:
         return plan
 
     selected_steps = [
-        patient_step,
+        *([patient_step] if patient_step is not None else []),
         {
             "id": "step-selected",
             "operator": "read_selected_appointment",
             "args": {
-                "patient": step_binding("step-patient", "patient"),
+                **({"patient": step_binding("step-patient", "patient")} if patient_step is not None else {}),
                 "appointment": context_binding("selected_appointment"),
             },
         },
@@ -795,6 +909,82 @@ def proofread_plan(
         if not checks["semantic_action_consistent"]:
             violations.append(_violation("$.goal", "semantic_action_mismatch"))
 
+    move_steps = any(
+        isinstance(step, dict) and step.get("operator") == "prepare_move_proposal"
+        for step in step_list
+    )
+    if normalized.get("goal") == "move" or move_steps:
+        subject = selected_move_subject(frame, extraction)
+        selected_reads = [
+            step for step in step_list
+            if isinstance(step, dict) and step.get("operator") == "read_selected_appointment"
+        ]
+        patient_arg_matches_mode = all(
+            isinstance(step.get("args"), dict)
+            and ("patient" in step["args"]) == (subject == "named")
+            for step in selected_reads
+        )
+        if (
+            subject is None
+            or move_steps != (normalized.get("goal") == "move")
+            or not patient_arg_matches_mode
+            or not selected_reads
+        ):
+            checks["semantic_action_consistent"] = False
+            clarification_step = (
+                planner_class == "deterministic_semantic_adapter"
+                and len(step_list) == 1
+                and isinstance(step_list[0], dict)
+                and step_list[0].get("operator") == "request_clarification"
+            )
+            if clarification_step:
+                violations.append(_violation("$.goal", "clarification_required"))
+            else:
+                if subject is None or not patient_arg_matches_mode or not selected_reads:
+                    violations.append(_violation("$.goal", "selected_identity_conflict"))
+                if move_steps != (normalized.get("goal") == "move"):
+                    violations.append(_violation("$.goal", "selected_operation_mismatch"))
+
+    selected_family_steps = [
+        step for step in step_list
+        if isinstance(step, dict) and step.get("operator") in SELECTED_PROPOSAL_FAMILIES
+    ]
+    selected_reads = [
+        step for step in step_list
+        if isinstance(step, dict) and step.get("operator") == "read_selected_appointment"
+    ]
+    selected_context_binding = any(
+        isinstance(binding, dict)
+        and binding.get("kind") == "context_ref"
+        and binding.get("field") == "selected_appointment"
+        for step in step_list if isinstance(step, dict)
+        for binding in (
+            step.get("args") if isinstance(step.get("args"), dict) else {}
+        ).values()
+    )
+    if selected_family_steps or selected_reads or selected_context_binding:
+        family = (
+            SELECTED_PROPOSAL_FAMILIES[selected_family_steps[0]["operator"]]
+            if len(selected_family_steps) == 1 else None
+        )
+        selected_family_consistent = (
+            family is not None
+            and step_list[-1] is selected_family_steps[0]
+            and normalized.get("goal") == family == extraction.intended_action
+            and extraction.authority_claim == "read"
+            and not extraction.requires_clarification
+            and not extraction.action_negated
+            and bool(selected_reads)
+            and all(
+                isinstance(step.get("args"), dict)
+                and ("patient" in step["args"] or family == "move")
+                for step in selected_reads
+            )
+        )
+        if not selected_family_consistent:
+            checks["semantic_action_consistent"] = False
+            violations.append(_violation("$.goal", "selected_operation_mismatch"))
+
     authority = frame.get("authority", {})
     checks["authority_boundary_closed"] = authority == {
         "effect_ceiling": "proposal_only",
@@ -832,6 +1022,8 @@ def proofread_plan(
         "effect_escalation",
         "forbidden_operator",
         "semantic_action_mismatch",
+        "selected_identity_conflict",
+        "selected_operation_mismatch",
         "authority_boundary_open",
     }
     if not violations:
@@ -972,7 +1164,7 @@ def execute_operator(
         return {"date": args["date"]}
     if operator_id == "read_selected_appointment":
         appointment = args["appointment"]
-        if appointment["patient_ref"] != args["patient"]:
+        if "patient" in args and appointment["patient_ref"] != args["patient"]:
             raise ValueError("selected appointment patient binding failed closed")
         return {
             "appointment": appointment,

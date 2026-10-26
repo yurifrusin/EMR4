@@ -74,7 +74,7 @@
         {
           "name": "patient",
           "type": "patient_ref",
-          "required": true
+          "required": false
         },
         {
           "name": "appointment",

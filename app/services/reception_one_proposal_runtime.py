@@ -275,6 +275,9 @@ def _read_selected_appointment(
     appointment_id: uuid.UUID,
     handle_key: bytes,
     handle_map: dict[str, uuid.UUID],
+    patients: list[dict[str, Any]],
+    practitioners: list[dict[str, Any]],
+    allow_unmentioned_parties: bool,
 ) -> dict[str, Any]:
     appointment = (
         db.query(Appointment)
@@ -286,13 +289,54 @@ def _read_selected_appointment(
     )
     if appointment is None:
         raise ReceptionOneRuntimeError("selected_appointment_not_found")
+    patient = (
+        db.query(Patient)
+        .filter(Patient.id == appointment.patient_id, Patient.practice_id == practice_id)
+        .first()
+    )
+    practitioner = (
+        db.query(Practitioner)
+        .filter(
+            Practitioner.id == appointment.practitioner_id,
+            Practitioner.practice_id == practice_id,
+            Practitioner.is_active.is_(True),
+        )
+        .first()
+    )
+    if patient is None or getattr(patient, "is_active", True) is not True:
+        raise ReceptionOneRuntimeError("selected_patient_unavailable")
+    if practitioner is None:
+        raise ReceptionOneRuntimeError("selected_practitioner_unavailable")
     reverse_handles = {value: key for key, value in handle_map.items()}
     patient_ref = reverse_handles.get(appointment.patient_id)
     practitioner_ref = reverse_handles.get(appointment.practitioner_id)
-    if patient_ref is None or practitioner_ref is None:
+    if (patient_ref is None or practitioner_ref is None) and not allow_unmentioned_parties:
         raise ReceptionOneRuntimeError(
             "selected_appointment_not_grounded_in_instruction"
         )
+    if patient_ref is None:
+        if len(patients) >= 8:
+            raise ReceptionOneRuntimeError("selected_context_entity_limit")
+        patient_ref = _opaque_handle("patient", patient.id, handle_key=handle_key)
+        patients.append({
+            "id": patient_ref,
+            "display": f"{patient.first_name} {patient.last_name}".strip(),
+            "aliases": [patient.first_name],
+        })
+        handle_map[patient_ref] = patient.id
+    if practitioner_ref is None:
+        if len(practitioners) >= 8:
+            raise ReceptionOneRuntimeError("selected_context_entity_limit")
+        practitioner_ref = _opaque_handle("practitioner", practitioner.id, handle_key=handle_key)
+        practitioners.append({
+            "id": practitioner_ref,
+            "display": f"Dr {practitioner.last_name}".strip(),
+            "aliases": [
+                f"Dr {practitioner.first_name} {practitioner.last_name}".strip(),
+                practitioner.last_name,
+            ],
+        })
+        handle_map[practitioner_ref] = practitioner.id
     appointment_handle = _opaque_handle(
         "appointment",
         appointment.id,
@@ -377,6 +421,9 @@ def build_product_context_frame(
             appointment_id=selected_appointment_id,
             handle_key=effective_handle_key,
             handle_map=handle_map,
+            patients=patients,
+            practitioners=practitioners,
+            allow_unmentioned_parties=extraction.intended_action == "move",
         )
         if selected_appointment_id is not None
         else None
@@ -386,6 +433,14 @@ def build_product_context_frame(
         if len(practitioners) == 1
         else "synthetic-practitioner-unresolved"
     )
+    selected_subject = typed_plan.selected_move_subject(
+        {"utterances": [instruction], "context": {
+            "patients": patients,
+            "practitioners": practitioners,
+            "selected_appointment": selected_appointment,
+        }},
+        extraction,
+    ) if extraction.intended_action == "move" else None
     candidate_slots = (
         _slot_context(
             slot_proposal,
@@ -400,6 +455,7 @@ def build_product_context_frame(
             ),
         )
         if len(practitioners) == 1
+        and (extraction.intended_action != "move" or selected_subject is not None)
         else []
     )
     safe_context = {
@@ -486,17 +542,19 @@ def build_slot_search_input(
     is_squeeze = typed_plan.is_squeeze_in_request(frame)
     if extraction.intended_action not in {"create", "move"} and not is_squeeze:
         return None
-    if len(practitioners) != 1 or len(patients) != 1:
-        return None
     selected = frame["context"].get("selected_appointment")
-    practitioner_handle = practitioners[0]["id"]
-    patient_handle = patients[0]["id"]
-    duration_default = frame["context"]["default_duration_minutes"]
     if extraction.intended_action == "move":
-        if selected is None:
+        if selected is None or typed_plan.selected_move_subject(frame, extraction) is None:
             return None
         practitioner_handle = selected["practitioner_ref"]
         patient_handle = selected["patient_ref"]
+    else:
+        if len(practitioners) != 1 or len(patients) != 1:
+            return None
+        practitioner_handle = practitioners[0]["id"]
+        patient_handle = patients[0]["id"]
+    duration_default = frame["context"]["default_duration_minutes"]
+    if extraction.intended_action == "move":
         duration_default = selected["duration_minutes"]
     practitioner_id = handle_map.get(practitioner_handle)
     patient_id = handle_map.get(patient_handle)

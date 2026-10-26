@@ -78,25 +78,35 @@ async function suggestFromWords(kind) {
   if(!state.session || kind!==intentKind() || (localVoice && !localVoice.isIdle())) {
     status("Finish or cancel dictation in the current session before suggesting details.");return;
   }
-  const words=intentSnapshot(kind).words;
+  const selected=intentSnapshot(kind),words=selected.words;
   if(!words.trim()){
     if(kind==="request")reviewRequest();else await reviewMove();
     return;
   }
+  if(kind==="move" && (typeof selected.appointment_ref!=="string" || !selected.appointment_ref ||
+      !Number.isSafeInteger(selected.appointment_version) || selected.appointment_version<1)){
+    status("Choose the current appointment before preparing a change.");return;
+  }
   invalidateIntent(kind,false);
   const generation=interpretationGeneration[kind],before=JSON.stringify(intentSnapshot(kind));
-  status("Interpreting your words locally. No request or appointment is being changed…");
+  status(kind==="move"?"Raisa is preparing the selected appointment change for review…":
+    "Interpreting your words locally. No request or appointment is being changed…");
   try {
     const response=await fetch("/demo/stage1/interpret",{method:"POST",credentials:"same-origin",cache:"no-store",redirect:"error",
-      headers:{"Content-Type":"application/json","X-CSRF-Token":state.session.csrf},body:JSON.stringify({kind,words})});
+      headers:{"Content-Type":"application/json","X-CSRF-Token":state.session.csrf},body:JSON.stringify(kind==="move"
+        ?{kind,words,appointment_ref:selected.appointment_ref,source_state_version:selected.appointment_version}:{kind,words})});
     if(!response.ok)throw new Error("The note could not be interpreted in this session. Refresh or use structured details.");
     const result=await response.json();
     if(generation!==interpretationGeneration[kind] || before!==JSON.stringify(intentSnapshot(kind)) ||
         (localVoice && !localVoice.isIdle()))return;
     if(!result || result.schema!=="emr4.stage1_word_interpretation.v1" || result.kind!==kind ||
-        result.method!=="DETERMINISTIC_LOCAL" || !["PROPOSED","CLARIFICATION"].includes(result.status) ||
+        result.method!==(kind==="move"?"BUREAU_DETERMINISTIC":"DETERMINISTIC_LOCAL") ||
+        !["PROPOSED","CLARIFICATION"].includes(result.status) ||
         !Array.isArray(result.missing) || !result.fields || typeof result.fields!=="object" || Array.isArray(result.fields))
       throw new Error("The suggested details could not be verified. Clarify the note or use structured details.");
+    if(kind==="move" && (!result.selection || result.selection.appointment_ref!==selected.appointment_ref ||
+        result.selection.source_state_version!==selected.appointment_version))
+      throw new Error("The selected appointment changed. Refresh and prepare the change again.");
     if(result.status!=="PROPOSED"){
       status(result.message==="DATE_NOT_CURRENTLY_OFFERED"
         ?"That date is not currently offered. Check the offered dates, clarify your words, and suggest again. No details were adopted."
@@ -569,7 +579,7 @@ async function reviewMove() {
       ["Before", dateTime(appointment.date, appointment.start_local, appointment.zone)],
       ["After", dateTime(date, local_time, appointment.zone)]]);
     const unchanged=document.createElement("p");unchanged.className="helper";
-    unchanged.textContent=`Unchanged: ${appointment.patient_label} · ${appointment.practitioner_label} · ${appointment.type_label} · ${appointment.duration_minutes} minutes · ${appointment.location_label}.`;
+    unchanged.textContent=`Unchanged: ${appointment.patient_label} · ${appointment.practitioner_label} · ${appointment.type_label} · ${appointment.duration_minutes} minutes · ${appointment.location_label}. Review this time before choosing Confirm move. The proposed time is not held.`;
     $("move-summary").append(unchanged);
     show("move-review", true); $("move-confirm").focus(); status("Your proposed move is ready. The appointment has not changed yet.");
   } catch (error) { status(error.message); }
