@@ -1,12 +1,12 @@
 # Ariadne Compass — EMR4
 
-> Current work is G4 Stage 1 recovery: G2 and G3 are accepted with qualifications; M1 is partial and remains subject to exact admission and independent acceptance.
+> Commercial, self-service, multi-practice modular GPMSaaS: Reception One appointments and Diary first. G2 and G3 remain accepted with existing qualifications; G4 M1 remains partial. The roadmap records direction and dependencies only; current admission controls work.
 
 ## North star
 
-**A complete AI-native Australian general-practice management system**
+**Commercial, self-service, multi-practice modular GPMSaaS**
 
-EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.
+Initial customer outcome: Reception One appointments and Diary for a new doctor and partner administrator. AI proposes typed plans; deterministic backend policy and authorized people decide effects. Calm intent-first Bureau. Full Diary one prompt away, with actual appointment projection scope stated honestly. Preserve an accessible AI-off path with the same command semantics. Demonstrate significant measured reception-efficiency improvement; derive measures from the workflow and baseline rather than invent thresholds. Pilot is excluded. Reuse applicable accepted prior work while preserving exact maturity, evidence qualifications, unknowns, and explicit deferrals. Proposed roadmap classifications do not assert readiness, integration, acceptance, or authorization.
 
 ## Programme position
 
@@ -783,6 +783,21 @@ Prerequisites:
 - Use exact current G4 admission, finite effect bindings and independent acceptance for each product effect.
 - Keep real data, providers, deployment and protected integration closed.
 
+### Confirmed commercial GPMSaaS goal and dependency roadmap — active
+
+How does admitted Reception One work advance the confirmed commercial service goal while preserving current dependencies, maturity and deferrals?
+
+Owner-goal and dependency roadmap only. The 18 original capability dispositions, maturity, unknowns and deferrals remain qualified navigation. G2/G3 acceptance is preserved; M1 remains partial and G5 blocked. No recommendation, selection, dispatch, gate transition, acceptance, model/provider, real-data, deployment, protected-ref, runtime or spending expansion follows.
+
+Prerequisites:
+
+- 1. Finish the currently admitted Bureau integration: Advance the existing request, book, and same-appointment move journey through current admitted work, with current backend authority, typed proposal/proofreader, authorized human confirmation, deterministic write, audit, and readback. Dependencies: Current G4 Stage 1 admission and checkpoint; Existing G2/G3 acceptance with qualifications retained. Qualification: Latest published Bureau source commit b1dca5ad1f1c0cd13dc6b739d1d5c2755c0c5abd/tree cbe0ca703761ce5edc4a9279ff2ddb7b9b56b231 is source publication only. Both native backend attempts are aggregate NONPASS despite two methods and six passing phases per attempt. Not M1 acceptance. Follow current checkpoint and scope.
+- 2. Update Compass with the confirmed goal and dependency roadmap: Prepare exact goal/orientation source data and review it for the existing Compass/Clockwork route, preserving the 18 source dispositions and qualifications. Dependencies: Exact current Compass route and scope review; Applicable separate admission and Clockwork sole-writer controls. Qualification: Accepted Compass baseline f592e4d99c34243996f6bf5674432b2eb6f857f0/tree 8e27672aea4ec340b2c58f17cae87b0c39a4c38f is a prior accepted orientation. This payload is unpublished and is not accepted Clockwork input. Requires current-route reconciliation and applicable exact scope, independent review, and publication/readback before any canonical update.
+- 3. Make read-only recommendations part of the normal coordinator route: Use confirmed goals, accepted source/evidence, capability dependencies, and current admitted scope to recommend one bounded user outcome, rationale, prior art, completion evidence, limits, and deferrals. Dependencies: Reviewed goal/roadmap source update; Current structured programme state and checkpoint. Qualification: Recommendation is read-only and advisory. Coordinator and existing controls select work. No automatic dispatch, execution, gate change, or acceptance is implemented or authorized.
+- 4. Complete joined M1 calm contextual intent and Diary experience: Deliver honest bounded Diary projection with full Diary one prompt away, meaningful contextual intent for the two appointment journeys, human-confirmed writes, an accessible AI-off path with the same semantics, and measured reception-efficiency evidence. Dependencies: Admitted Bureau/backend integration; Current read scope and provenance; Independent correctness, usability, accessibility, and efficiency evidence. Qualification: M1 remains partial. Preserve source qualifications, projection limits, open accessibility/usability and contextual-evidence needs, and exact runtime/admission boundaries. No fabricated efficiency threshold.
+- 5. Assess and build commercial service foundations: Scope multi-practice accounts, practice setup, roles, operations, export/restore, and Sydney hosting/recovery dependencies for the commercial service. Dependencies: Joined M1 and concrete commercial requirements; Existing Sydney cost/recovery plan; Separate scoped product and operational decisions. Qualification: Sydney cost/recovery planning is already recorded; link and reuse the existing coordinator-checkpoint record by its qualified navigation name, without rereading the large checkpoint or repeating research. Any implementation, production identity, provider, real-data, deployment, or spending expansion needs applicable separate authority. Existing Sydney plan navigation: C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/coordinator-checkpoint.json#stage1_midstream_audit_correction_v1.recording_preparation.usable_reception_one_direction_v1.production_hosting_recommendation.costed_sydney_plan_v1. Mutable navigation pointer only; not acceptance or cloud-effect authority.
+- 6. Extend later companion and healthcare modules through the same authority: Consider Word/companion, administration, email, migrations, broader healthcare workflows, and generative UI as later separately scoped modules using the same backend authority and honest deferrals. Dependencies: Commercial foundation and ownership boundaries; Module-specific contracts, admission, and acceptance. Qualification: No module is activated by this roadmap. Preserve original exact maturity and do not infer provider, real-data, deployment, IAM, or expanded command authority.
+
 ## Programme-support horizon
 
 ### Ariadne workflow-executive maturation — candidate
@@ -1185,6 +1200,7 @@ Prerequisites:
 - reception-one-delete-confirm-physical-design-architecture: The delete-confirm physical design decision remains useful future work; the current M1 route first proves request, book and same-appointment move.
 - reception-one-appointment-cancellation-direction: The cancellation direction remains useful future work; the current M1 route first proves request, book and same-appointment move.
 - All other decision and programme-support horizon statuses are preserved, including the active Raisa Practice Context Fabric. The new G4 sequence is navigation only and grants no product acceptance or runtime authority.
+- Owner-goal and dependency roadmap only. The 18 original capability dispositions, maturity, unknowns and deferrals remain qualified navigation. G2/G3 acceptance is preserved; M1 remains partial and G5 blocked. No recommendation, selection, dispatch, gate transition, acceptance, model/provider, real-data, deployment, protected-ref, runtime or spending expansion follows.
 
 ## Evidence index
 
@@ -2956,6 +2972,7 @@ Prerequisites:
 - `orchestration/continuity/clinician-one-word-desktop-selection-check/desktop-selection-evidence.json`
 - `orchestration/continuity/clinician-one-word-desktop-selection-check/final-residue-evidence.json`
 - `orchestration/continuity/clinician-one-word-desktop-selection-check/manifest.xml`
+- `orchestration/continuity/compass-gpms-goal-update/gpms-goal-update-payload-v2.json`
 - `orchestration/continuity/deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission/profile-family.schema.json`
 - `orchestration/continuity/deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission/profile-family.yaml`
 - `orchestration/continuity/deepseek-native-harness-pragmatic-development-adoption-review-and-plan/efficacy-reading.json`
@@ -4068,4 +4085,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 445; continuity graph revision 463._
+_Compass map revision 446; continuity graph revision 463._

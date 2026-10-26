@@ -1,8 +1,8 @@
 {
-  "schema_version": "ariadne.g4_emr4_compass_command_manifest.v1",
-  "profile": "g4_recovery_governance_orientation_only",
-  "operation_id": "g4-emr4-compass-reconnection",
-  "source_commit": "c417340e1d15b9ed45815648d3fdd6203e05f154",
-  "intent_sha256": "sha256:f930ff4b8f26e731f209bfbdbc3824d7d93733de2115bdf2b0eda1238eb13ff1",
-  "effect_boundary": "separately_reviewed_g4_reconcile_binding_required"
+  "schema_version": "ariadne.goal_update_command_manifest.v1",
+  "profile": "goal_roadmap_only",
+  "operation_id": "compass-gpms-goal-update-v1",
+  "source_commit": "b593749886091bd7fb506de0c1d27508bee50b10",
+  "intent_sha256": "sha256:d29b15e322f4d6e21ea887fc4e9ed773fe99dc467fae77e6151b12022eebb35d",
+  "effect_boundary": "separate_exact_goal_update_effect_admission_required"
 }

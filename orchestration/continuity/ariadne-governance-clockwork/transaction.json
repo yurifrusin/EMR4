@@ -1,110 +1,92 @@
 {
   "schema_version": "ariadne.governance_live_tick_transaction.v1",
-  "operation_id": "g4-emr4-compass-reconnection",
-  "transaction_id": "txn-12203c2cdb24a78f884582dd",
-  "source_commit": "c417340e1d15b9ed45815648d3fdd6203e05f154",
-  "previous_source_commit": "6bdf6a2fcd69dc937f1844c59a4296d0c1b8bde9",
-  "previous_generation_id": "gen-1f0a9311721de5c258d2cefc8c1f73ab753c94eacd06513aa87bc50f043c1206",
-  "previous_bundle_sha256": "1f0a9311721de5c258d2cefc8c1f73ab753c94eacd06513aa87bc50f043c1206",
+  "event_kind": "goal_update",
+  "operation_id": "compass-gpms-goal-update-v1",
+  "transaction_id": "txn-9b9150c04ce74eeec146c672",
+  "source_commit": "b593749886091bd7fb506de0c1d27508bee50b10",
+  "previous_source_commit": "b593749886091bd7fb506de0c1d27508bee50b10",
+  "previous_generation_id": "gen-f1a36949d9af1ff91ec3355266b496098babeec96b12e4c16602cfc21ab83d24",
+  "previous_bundle_sha256": "f1a36949d9af1ff91ec3355266b496098babeec96b12e4c16602cfc21ab83d24",
   "previous_canonical_sha256s": {
-    "continuity": "3afcbe15dcdc92d47f6ecf20e2dbe941e74fe57938c73be6bf52c13239889275",
-    "compass": "a524fee81c1d7f2aed2a1d81fbb857e6396b4a3c93a02f6091a54e023f9f8584",
-    "compass_markdown": "d1d1c2318be7eb3adc58277a700955b231727fed6b3bf3013b4b50ed1b2b8671",
+    "continuity": "9687abb42916144c202dadcd25079c31e0c7147ef24863b3aaf5c6357628d059",
+    "compass": "858e91e071732cf91896f62c47a8f3c19b66b2ea1f4dc9fe2eefb0275027f870",
+    "compass_markdown": "e0f55579850e26de001d24371ac8c71fe51df3170569f0fe8ebea22127d1f169",
     "active_latch": "f1bc5b3545293834365b7992882ebc09e6c83ccd63687c28fd443ac049e2e437",
     "error_register": "be85e1a14b5c1947dd548320edc7923462c0791ba96c9c54e6cb79ba4aca6165",
     "pattern_report": "6fcd53a0a99a03222c7cdeeff607355b6f0cf382b0b47d306f56b14cd14fb7fc",
     "current_baton": "f2c078d3877ac8a7659a614a049021df6d211d7a61934be927268f56b4b36a62"
   },
   "previous_metadata_sha256s": {
-    "command-manifest.json": "305d31d03e34deee606abee94a436ffd30ca2b4d8a7817ec71b61908ec29c1ec",
-    "transaction.json": "28023f3c35a2e3a141adc7a8fd74dd3221a7a1d3126010ca81cec771b7ef1df6",
+    "command-manifest.json": "af3797b7775c4f2089cf7313750b442d57011a60030b61d76062089b9fbe2ce3",
+    "transaction.json": "62d7c0a535d8ba021918196f315693ae1a9e40ef7a631d9c04d61947811b87cc",
     "ownership.json": "e78320a1b0d2f61041cd9d8cac1ed4f98d2bbdf7c3b94891a48d123589d8dee9",
-    "generation-manifest.json": "57d4208fdcc92c28f3abf15610af76daf0aae71f5e95b8a96f7f420c6cdb261b"
+    "generation-manifest.json": "c6a4e5641f44f4be18e982cb0425f2c08fd4e37d2e6e49acb4574c8a1668a491"
   },
   "projection_sha256s": {
     "graph": "sha256:cc8b8022e96642f6cf65c4f9758d70a540785451ce5aab24c40ed0f9b0e98fdc",
-    "compass": "sha256:f0f0382b45bc1001ea782821307e507b4bca1b4062af2a4ea31be0875d508811",
+    "compass": "sha256:e9f1a5dacc22d628666e2064adb60db864a506392e656272fa11c611d2d88f3e",
     "latch": "sha256:aa49b753f3162a9853f82d06cb33c7d628e480d9adba9dc087506bf207aff4db"
   },
   "journal": [
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-12203c2cdb24a78f884582dd",
-      "transaction_id": "txn-12203c2cdb24a78f884582dd",
-      "operation_id": "g4-emr4-compass-reconnection",
+      "journal_id": "journal-9b9150c04ce74eeec146c672",
+      "transaction_id": "txn-9b9150c04ce74eeec146c672",
+      "operation_id": "compass-gpms-goal-update-v1",
       "sequence": 1,
       "previous_event_sha256": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
-      "event_type": "g4-orientation-intent-accepted",
+      "event_type": "goal-update-intent-accepted",
       "actor": "gpt-sol",
       "payload": {
-        "intent_sha256": "sha256:f930ff4b8f26e731f209bfbdbc3824d7d93733de2115bdf2b0eda1238eb13ff1"
+        "intent_sha256": "sha256:d29b15e322f4d6e21ea887fc4e9ed773fe99dc467fae77e6151b12022eebb35d"
       },
-      "event_sha256": "sha256:141218436b6d98e3f0bf4d2a8127f77af5efb4a0c7bf63484410f67e73ef520f"
+      "event_sha256": "sha256:a09c8273f12455bcd2b69d85a4bb900480fdc070d09c0c8da4e4dbc82aa7592f"
     },
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-12203c2cdb24a78f884582dd",
-      "transaction_id": "txn-12203c2cdb24a78f884582dd",
-      "operation_id": "g4-emr4-compass-reconnection",
+      "journal_id": "journal-9b9150c04ce74eeec146c672",
+      "transaction_id": "txn-9b9150c04ce74eeec146c672",
+      "operation_id": "compass-gpms-goal-update-v1",
       "sequence": 2,
-      "previous_event_sha256": "sha256:141218436b6d98e3f0bf4d2a8127f77af5efb4a0c7bf63484410f67e73ef520f",
-      "event_type": "observed-two-drift-baseline-bound",
+      "previous_event_sha256": "sha256:a09c8273f12455bcd2b69d85a4bb900480fdc070d09c0c8da4e4dbc82aa7592f",
+      "event_type": "goal-update-predecessor-bound",
       "actor": "gpt-sol",
       "payload": {
-        "old_canonical_sha256s": {
-          "continuity": "3afcbe15dcdc92d47f6ecf20e2dbe941e74fe57938c73be6bf52c13239889275",
-          "compass": "a524fee81c1d7f2aed2a1d81fbb857e6396b4a3c93a02f6091a54e023f9f8584",
-          "compass_markdown": "d1d1c2318be7eb3adc58277a700955b231727fed6b3bf3013b4b50ed1b2b8671",
-          "active_latch": "69ab7808aac16ba84b6c385b3378483e17fb7b665f84a3d60d1e3054bdba0366",
-          "error_register": "be85e1a14b5c1947dd548320edc7923462c0791ba96c9c54e6cb79ba4aca6165",
-          "pattern_report": "6fcd53a0a99a03222c7cdeeff607355b6f0cf382b0b47d306f56b14cd14fb7fc",
-          "current_baton": "9426913facc3809dee4230820695c3ab067e1adafa3931ca09fb27e890e047ba"
-        },
-        "actual_canonical_sha256s": {
-          "continuity": "3afcbe15dcdc92d47f6ecf20e2dbe941e74fe57938c73be6bf52c13239889275",
-          "compass": "a524fee81c1d7f2aed2a1d81fbb857e6396b4a3c93a02f6091a54e023f9f8584",
-          "compass_markdown": "d1d1c2318be7eb3adc58277a700955b231727fed6b3bf3013b4b50ed1b2b8671",
-          "active_latch": "f1bc5b3545293834365b7992882ebc09e6c83ccd63687c28fd443ac049e2e437",
-          "error_register": "be85e1a14b5c1947dd548320edc7923462c0791ba96c9c54e6cb79ba4aca6165",
-          "pattern_report": "6fcd53a0a99a03222c7cdeeff607355b6f0cf382b0b47d306f56b14cd14fb7fc",
-          "current_baton": "f2c078d3877ac8a7659a614a049021df6d211d7a61934be927268f56b4b36a62"
-        }
+        "pointer_sha256": "53c23da84a69c5c322f21bebb1c52f9e68cdb91aa617b03eaed2e7d11044db37"
       },
-      "event_sha256": "sha256:818593ae956b60049394ab61b07477980758aafac9941af0a75eb4538975213e"
+      "event_sha256": "sha256:2f94f7575930d24ea58ce3b7ddca760e0d914d9696220d07ff12941f8bd7040d"
     },
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-12203c2cdb24a78f884582dd",
-      "transaction_id": "txn-12203c2cdb24a78f884582dd",
-      "operation_id": "g4-emr4-compass-reconnection",
+      "journal_id": "journal-9b9150c04ce74eeec146c672",
+      "transaction_id": "txn-9b9150c04ce74eeec146c672",
+      "operation_id": "compass-gpms-goal-update-v1",
       "sequence": 3,
-      "previous_event_sha256": "sha256:818593ae956b60049394ab61b07477980758aafac9941af0a75eb4538975213e",
-      "event_type": "g4-orientation-projected",
+      "previous_event_sha256": "sha256:2f94f7575930d24ea58ce3b7ddca760e0d914d9696220d07ff12941f8bd7040d",
+      "event_type": "goal-update-projected",
       "actor": "gpt-sol",
       "payload": {
-        "node_id": "g4-emr4-recovery-orientation",
-        "g2_g3": "qualified_accepted",
-        "g4_m1": "partial"
+        "goal_roadmap_only": true,
+        "dispatch_enabled": false
       },
-      "event_sha256": "sha256:f7e0bc75946a88132a88e89d32ac55114d3514c1a1f9bfa818d0f47899c7b66b"
+      "event_sha256": "sha256:4617994f0acf8eee9772827644bb458e54154eb062e2a34bb58305ee2511ff19"
     },
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-12203c2cdb24a78f884582dd",
-      "transaction_id": "txn-12203c2cdb24a78f884582dd",
-      "operation_id": "g4-emr4-compass-reconnection",
+      "journal_id": "journal-9b9150c04ce74eeec146c672",
+      "transaction_id": "txn-9b9150c04ce74eeec146c672",
+      "operation_id": "compass-gpms-goal-update-v1",
       "sequence": 4,
-      "previous_event_sha256": "sha256:f7e0bc75946a88132a88e89d32ac55114d3514c1a1f9bfa818d0f47899c7b66b",
+      "previous_event_sha256": "sha256:4617994f0acf8eee9772827644bb458e54154eb062e2a34bb58305ee2511ff19",
       "event_type": "transaction-prepared",
       "actor": "gpt-sol",
       "payload": {
         "publication_mode": "lease_bound_pointer_last_live_tick"
       },
-      "event_sha256": "sha256:4296c6766a1293e46eac120fd7efb7aefd0ad87ae5f8d4351d879bbb70c8b379"
+      "event_sha256": "sha256:260024d5d3cb49c3fdbf9d988554d1aa16c4c970f37bb381eb835cc951b80f63"
     }
   ],
   "publication_mode": "lease_bound_pointer_last_live_tick",
-  "event_kind": "g4_reorientation",
   "next_boundaries_sha256": "sha256:35ce1f7d2e34d1d1b4893b95288cb10e1cd4671c741b9f43273e4f001e180512",
   "register_bytes_preserved": true,
   "pattern_bytes_preserved": true
