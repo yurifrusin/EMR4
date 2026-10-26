@@ -1,0 +1,699 @@
+{
+  "schema": "emr4.compass_gpms_goal_update_payload.v1",
+  "status": "AUTHORED_PROPOSAL_NOT_ACCEPTED_NOT_ADMITTED",
+  "purpose": "Source-data preparation for a reviewed owner-goal and roadmap update; this payload is not canonical Compass input until reconciled with the current route and exact scope.",
+  "owner_confirmed_goal": {
+    "product": "Commercial, self-service, multi-practice modular GPMSaaS",
+    "initial_customer_outcome": "Reception One appointments and Diary for a new doctor and partner administrator",
+    "pilot": "EXCLUDED",
+    "product_principles": [
+      "AI proposes typed plans; deterministic backend policy and authorized people decide effects.",
+      "Calm intent-first Bureau.",
+      "Full Diary one prompt away, with actual appointment projection scope stated honestly.",
+      "Preserve an accessible AI-off path with the same command semantics.",
+      "Demonstrate significant measured reception-efficiency improvement; derive measures from the workflow and baseline rather than invent thresholds."
+    ],
+    "reuse_rule": "Reuse applicable accepted prior work while preserving exact maturity, evidence qualifications, unknowns, and explicit deferrals. Proposed roadmap classifications do not assert readiness, integration, acceptance, or authorization."
+  },
+  "roadmap": [
+    {
+      "step": 1,
+      "title": "Finish the currently admitted Bureau integration",
+      "outcome": "Advance the existing request, book, and same-appointment move journey through current admitted work, with current backend authority, typed proposal/proofreader, authorized human confirmation, deterministic write, audit, and readback.",
+      "qualification": "Latest published Bureau source commit b1dca5ad1f1c0cd13dc6b739d1d5c2755c0c5abd/tree cbe0ca703761ce5edc4a9279ff2ddb7b9b56b231 is source publication only. Both native backend attempts are aggregate NONPASS despite two methods and six passing phases per attempt. Not M1 acceptance. Follow current checkpoint and scope.",
+      "depends_on": [
+        "Current G4 Stage 1 admission and checkpoint",
+        "Existing G2/G3 acceptance with qualifications retained"
+      ]
+    },
+    {
+      "step": 2,
+      "title": "Update Compass with the confirmed goal and dependency roadmap",
+      "outcome": "Prepare exact goal/orientation source data and review it for the existing Compass/Clockwork route, preserving the 18 source dispositions and qualifications.",
+      "qualification": "Accepted Compass baseline f592e4d99c34243996f6bf5674432b2eb6f857f0/tree 8e27672aea4ec340b2c58f17cae87b0c39a4c38f is a prior accepted orientation. This payload is unpublished and is not accepted Clockwork input. Requires current-route reconciliation and applicable exact scope, independent review, and publication/readback before any canonical update.",
+      "depends_on": [
+        "Exact current Compass route and scope review",
+        "Applicable separate admission and Clockwork sole-writer controls"
+      ]
+    },
+    {
+      "step": 3,
+      "title": "Make read-only recommendations part of the normal coordinator route",
+      "outcome": "Use confirmed goals, accepted source/evidence, capability dependencies, and current admitted scope to recommend one bounded user outcome, rationale, prior art, completion evidence, limits, and deferrals.",
+      "qualification": "Recommendation is read-only and advisory. Coordinator and existing controls select work. No automatic dispatch, execution, gate change, or acceptance is implemented or authorized.",
+      "depends_on": [
+        "Reviewed goal/roadmap source update",
+        "Current structured programme state and checkpoint"
+      ]
+    },
+    {
+      "step": 4,
+      "title": "Complete joined M1 calm contextual intent and Diary experience",
+      "outcome": "Deliver honest bounded Diary projection with full Diary one prompt away, meaningful contextual intent for the two appointment journeys, human-confirmed writes, an accessible AI-off path with the same semantics, and measured reception-efficiency evidence.",
+      "qualification": "M1 remains partial. Preserve source qualifications, projection limits, open accessibility/usability and contextual-evidence needs, and exact runtime/admission boundaries. No fabricated efficiency threshold.",
+      "depends_on": [
+        "Admitted Bureau/backend integration",
+        "Current read scope and provenance",
+        "Independent correctness, usability, accessibility, and efficiency evidence"
+      ]
+    },
+    {
+      "step": 5,
+      "title": "Assess and build commercial service foundations",
+      "outcome": "Scope multi-practice accounts, practice setup, roles, operations, export/restore, and Sydney hosting/recovery dependencies for the commercial service.",
+      "qualification": "Sydney cost/recovery planning is already recorded; link and reuse the existing coordinator-checkpoint record by its qualified navigation name, without rereading the large checkpoint or repeating research. Any implementation, production identity, provider, real-data, deployment, or spending expansion needs applicable separate authority.",
+      "depends_on": [
+        "Joined M1 and concrete commercial requirements",
+        "Existing Sydney cost/recovery plan",
+        "Separate scoped product and operational decisions"
+      ],
+      "sydney_plan_checkpoint_reference": {
+        "checkpoint_path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/coordinator-checkpoint.json",
+        "qualified_navigation_name": "stage1_midstream_audit_correction_v1.recording_preparation.usable_reception_one_direction_v1.production_hosting_recommendation.costed_sydney_plan_v1",
+        "qualification": "Mutable navigation pointer only; not acceptance or cloud-effect authority."
+      }
+    },
+    {
+      "step": 6,
+      "title": "Extend later companion and healthcare modules through the same authority",
+      "outcome": "Consider Word/companion, administration, email, migrations, broader healthcare workflows, and generative UI as later separately scoped modules using the same backend authority and honest deferrals.",
+      "qualification": "No module is activated by this roadmap. Preserve original exact maturity and do not infer provider, real-data, deployment, IAM, or expanded command authority.",
+      "depends_on": [
+        "Commercial foundation and ownership boundaries",
+        "Module-specific contracts, admission, and acceptance"
+      ]
+    }
+  ],
+  "capability_dispositions": {
+    "source_path": "C:\\Users\\there\\EMR4-tools\\compass-g4-reconnection-candidate-v1\\capability-dispositions-v1.json",
+    "source_sha256": "e3329845dcdd49b0141c0fd1bbea5ca8749f8d3f68c713e9520c199688555e36",
+    "source_bytes": 45104,
+    "qualification": "Source domain fields are copied with original values intact. Added proposed_roadmap_classification and proposed_roadmap_role fields express planning only; they do not alter original maturity, status, or qualification.",
+    "domain_count": 18,
+    "domains": [
+      {
+        "id": "ariadne-continuity-compass-clockwork",
+        "name": "Ariadne continuity, Compass, and Clockwork governance",
+        "m1_foundation_or_experience": "Restore Compass as the first alignment deliverable: a concise deterministic orientation that names accepted lineage, current successor, current pause, useful capability anchors, and bounded horizon. Keep Continuity DAG as product memory/navigation. Preserve Clockwork's accepted sole-writer, pointer-last publication, rollback, and readback semantics.",
+        "future_or_reference": "Compass is not an actuator or acceptance source. DAG edges do not confer acceptance, dispatch, or ref authority. Do not reuse retired direct updater classes. Exact writer/source/scope reconciliation and a reviewed orientation scope are prerequisites for any future graph/map edit or render.",
+        "maturity_and_integration": "Canonical writer adoption is accepted history. Current selected actual source shows graph462/map444 with old waiting-area orientation and G1B2 latch. Current G4 instruction/state are preserved. The external candidate is not yet admitted, executed or published.",
+        "uncertainties_and_dependencies": [
+          "Current exact6bdf source has two declared predecessor drifts:AGENTS and active latch; other5canonical+3metadata match old Clockwork generation. A normal tick must reject until reviewed recovery reconciliation.",
+          "Append an evidence-backed governance-orientation relation; do not invent product ancestry or close old G1B2/M1 work.",
+          "Current owner-approved sequence restores Compass first; G2/G3 qualifications and incomplete G4/M1 criteria remain visible."
+        ],
+        "anchors": [
+          {
+            "path": "docs/ariadne-continuity-engine-increment1-closeout.md",
+            "sha256": "a363c216b34b34ccec080006c8d1fd8c44ad4395a07de90d23d19e48bb6e9035",
+            "role": "continuity lineage design and closeout"
+          },
+          {
+            "path": "docs/ariadne-compass-increment2-closeout.md",
+            "sha256": "6d067c0089719eae1a78d1bdeffe0289ac621db41b61c089a1112121f704b9c1",
+            "role": "Compass design and closeout"
+          },
+          {
+            "path": "docs/ariadne-provider-free-clockwork-live-canonical-adoption-retirement-closeout.md",
+            "sha256": "c6e0cd7f0a10f389d6561ff5ea220e60aef7abe9046fa2da64a0845e6af1b0c2",
+            "role": "accepted canonical writer adoption and retirement"
+          },
+          {
+            "path": "docs/ariadne-compass-current.md",
+            "sha256": "d1d1c2318be7eb3adc58277a700955b231727fed6b3bf3013b4b50ed1b2b8671",
+            "role": "historical rendered orientation; report says stale"
+          }
+        ],
+        "proposed_roadmap_classification": "proposed_reuse",
+        "proposed_roadmap_role": "Preserve accepted Compass orientation and Clockwork sole-writer semantics; prepare owner-goal update only through a separately scoped reviewed route. No task dispatch or acceptance authority."
+      },
+      {
+        "id": "g1-controller-and-risk-workflow",
+        "name": "Recovery controller, risk-weighted workflow, and active-operation continuity",
+        "m1_foundation_or_experience": "Keep state/gate precedence, canonical verdict separation, finite governor, provenance/independence, configuration/core-adapter boundaries, baseline-first semantic freeze, targeted rerun union, and no replay of consumed attempts. Use current source vocabulary and existing checkpoint.",
+        "future_or_reference": "Native Codex worker/worktree coordination may support ordinary work but never replaces project admission, independent acceptance, or the accepted governance writer. No new supervisory framework or redundant receipt system.",
+        "maturity_and_integration": "G1 controls and risk-weighted reform are accepted/recorded; active-operation latch is procedural. AGENTS continuity instructions do not install an automatic hook and cannot intercept host final-channel output.",
+        "uncertainties_and_dependencies": [
+          "Current G4 authority is controlled by current product structured state, gate and scope; this source does not independently validate them.",
+          "Do not reopen accepted G1/G2/G3 evidence for freshness."
+        ],
+        "anchors": [
+          {
+            "path": "docs/ariadne-risk-weighted-workflow-reform-closeout.md",
+            "sha256": "8ca7bad7f6b1d37c42cd79c597cac3451fffa3e4529093a321ca9e39585399bb",
+            "role": "risk-weighted workflow"
+          },
+          {
+            "path": "docs/ariadne-postcompaction-active-operation-latch-closeout.md",
+            "sha256": "38ebbe5beee8dd0490c5d16825e892ed6c48acb851dd73034b6ab83d9f28b4fa",
+            "role": "continuity and no-replay rule"
+          },
+          {
+            "path": "docs/programme/raisa-ariadne-recovery-programme.md",
+            "sha256": "921c8fe5f7722b5d0368cd4b144d33023c6e9724adf147d5396d83c7db14880f",
+            "role": "governing programme source pinned by coverage"
+          }
+        ],
+        "proposed_roadmap_classification": "proposed_reuse",
+        "proposed_roadmap_role": "Reuse current structured-state, evidence qualification, independence, and no-replay controls in coordinator planning; do not add a parallel controller."
+      },
+      {
+        "id": "appointment-truth-and-command-boundary",
+        "name": "Appointment truth, command, confirmation, and audit",
+        "m1_foundation_or_experience": "Keep the backend as sole appointment mutation authority with tenant/actor checks, signed proposal, explicit human confirmation, entity version, idempotency, conflict protection, transaction/audit, and readback. M1 experience centers on request, staff confirmation, and same-appointment time-only move.",
+        "future_or_reference": "No UI-owned writes, second appointment store, or expanded action family by implication. Broader status/duration/practitioner edits and cancellation are preserved lineage, not automatic M1 scope.",
+        "maturity_and_integration": "Named current backend source blobs were matched to the report's Q25 copied integration and accepted G2/bounded Stage1 records. Latest human36 outcome has request/booked, two clean ASR receipts, a second ASR error with owner screenshot, and no verified move. G4 M1 remains incomplete.",
+        "uncertainties_and_dependencies": [
+          "Use latest typed35/read-list29/voice30 evidence as supplied; do not carry forward old Q25 route-omission claim as current.",
+          "The human36 move is unverified; browser audit incomplete although physical cleanup was observed.",
+          "Current runtime evidence does not by itself establish broad concurrency, production identity, or clinical authorization."
+        ],
+        "anchors": [
+          {
+            "path": "app/routers/appointments.py",
+            "role": "selected current Git blob; symbols/ranges only",
+            "git_blob": "2f376ce113e0ff2dc8ded043ad01a8631e754a62"
+          },
+          {
+            "path": "app/schemas/appointments.py",
+            "role": "selected current Git blob; symbols/ranges only",
+            "git_blob": "ee485b043e69e961d3cefd389a83eeff96796ce7"
+          },
+          {
+            "path": "app/services/appointment_idempotency.py",
+            "role": "selected current Git blob; symbols/ranges only",
+            "git_blob": "519128b280b95e4d7f2f0342c905ae5311398988"
+          },
+          {
+            "path": "app/services/appointment_conflicts.py",
+            "role": "selected current Git blob; symbols/ranges only",
+            "git_blob": "fd4c0e6f12415769d0fa82a81068256aa815070f"
+          },
+          {
+            "path": "app/services/diary/confirm_actions.py",
+            "role": "selected current Git blob; symbols/ranges only",
+            "git_blob": "e54f014c9bfe00d5a1eda1cc85148fceacf6ff71"
+          }
+        ],
+        "proposed_roadmap_classification": "proposed_reuse",
+        "proposed_roadmap_role": "Use the existing backend-owned signed proposal, authorized confirmation, deterministic write, audit, and readback boundary for the initial appointment journey, subject to current admission and evidence."
+      },
+      {
+        "id": "diary-list-projection-and-read-scope",
+        "name": "Diary read model, projection completeness, and provenance",
+        "m1_foundation_or_experience": "Present an honest bounded appointment projection with trustworthy read provenance, completeness/count and freshness labels; use entity versions for commands; blank space must not imply availability. Keep normal/fallback output typed and backend-derived.",
+        "future_or_reference": "Full roster, rooms/resources, breaks, and availability remain beyond the bounded current list unless separately integrated. Capture UUID/revision 1 is not a durable multi-user list revision or mutation precondition.",
+        "maturity_and_integration": "The report's old Q25 snapshot was 7 days and at most 32 appointments, not a complete Diary. Latest supplied read/list result is fixed and accepted as run 29; it supersedes the report's old missing-route observation. Current completeness semantics still need explicit product evidence.",
+        "uncertainties_and_dependencies": [
+          "Coverage of all needed rows and a stable list revision/complete count are unresolved in the reconciliation.",
+          "The two historical literal API Spine paths were absent and not read at those locations; current Git source bindings were separately pinned.",
+          "No new browser or runtime check was performed for this disposition."
+        ],
+        "anchors": [
+          {
+            "path": "app/services/appointment_list_projection.py",
+            "role": "selected current Git blob; symbols/ranges only",
+            "git_blob": "76a6d621a01e9e66e3319147c65d883a0702773f"
+          },
+          {
+            "path": "docs/api-spine/appointment-list-projection-v1.md",
+            "role": "selected current Git blob; contract source",
+            "git_blob": "dcd03b91dfe4ef72ad9e5c771bbbd9bfe8f42b99"
+          },
+          {
+            "path": "docs/api-spine/appointment-read-model-route-inventory.md",
+            "role": "selected current Git blob; route inventory",
+            "git_blob": "617e0e5241acb13aeaa8e64fead31b5ff57c730c"
+          },
+          {
+            "path": "docs/diary/meta-grid.js",
+            "role": "selected current Git blob; not integrated into old Q25 adapter",
+            "git_blob": "3e9067395ea753ba302e20993531fd6e1fefedaa"
+          }
+        ],
+        "proposed_roadmap_classification": "proposed_reuse",
+        "proposed_roadmap_role": "Reuse the bounded typed Diary projection with truthful scope, count, provenance, freshness, and full-Diary escape; preserve known completeness limits."
+      },
+      {
+        "id": "intent-projected-diary-and-refinement",
+        "name": "Intent-projected Diary, contextual refinement, and selected actions",
+        "m1_foundation_or_experience": "Reuse intent grammar and interaction invariants where they support the narrow booking/time-move experience: overview, practitioner focus, patient timeline, availability, aligned comparison, selection, proposal review, clarification, scope-preserving refinement, interruption reconciliation, occupied-slot invalidation, stale Back and late-result handling.",
+        "future_or_reference": "Combined patient/practitioner/date/time/duration, 'tomorrow instead', after-time refinements, multi-change editor, status/duration/practitioner actions, and dedicated cancellation remain reconnection candidates or later scope; no automatic M1 expansion.",
+        "maturity_and_integration": "Earlier meta-grid work is functional prior art with some genuine local read/proposal proofs. Selected-action route-intercepted client evidence is not equivalent to database proof. Current meta-grid source exists in Git but is not integrated into the Q25 path described by the old report.",
+        "uncertainties_and_dependencies": [
+          "Map interaction contracts through a reviewed adapter to current signed backend commands.",
+          "Preserve cancellation convergence to dedicated delete proposal/confirm; do not revive status fallback.",
+          "The latest current integrated experience is bounded by the supplied human36 status."
+        ],
+        "anchors": [
+          {
+            "path": "docs/bernie-intent-projected-event-aware-diary-design.md",
+            "sha256": "599732b3f86089716977aacd341445196efe9e570a24ef0faf02d32037e4e814",
+            "role": "intent-projected Diary design"
+          },
+          {
+            "path": "docs/bernie-functional-meta-grid-client-closeout.md",
+            "sha256": "a2dd41c336ed308fd2ac364f08489353d40a847060a46b30f7c2b342e5da89f6",
+            "role": "functional meta-grid prior work"
+          },
+          {
+            "path": "docs/bernie-reception-one-integrated-bureau-closeout.md",
+            "sha256": "5ac1d779064645ed6cf3cb2db079c7a7b5e4622636a664620038ed74049bf4ca",
+            "role": "integrated Bureau lineage"
+          },
+          {
+            "path": "docs/raisa-reception-one-selected-appointment-time-reschedule-composition-closeout.md",
+            "sha256": "48cf8901d9e44c367e7677d18858c331a62ff10f789957ec940a5d9362241285",
+            "role": "selected time move prior composition"
+          },
+          {
+            "path": "docs/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-closeout.md",
+            "sha256": "d2e22c3ce652084590b8f5c4dd104430aaaa1565632fccfba30483a0b2a04e6d",
+            "role": "cancellation convergence lineage"
+          }
+        ],
+        "proposed_roadmap_classification": "proposed_reuse",
+        "proposed_roadmap_role": "Reconnect only intent grammar and contextual refinements needed for request, book, and same-appointment move; do not infer broader action scope or implementation readiness."
+      },
+      {
+        "id": "bureau-experience-and-accessibility",
+        "name": "Bureau interaction, presentation, accessibility, and fallback",
+        "m1_foundation_or_experience": "Adapt the later modeless Bureau sheet over a visible Diary: compact/expanded states, date-first verified answer, one primary action, essential human confirmation, progressive disclosure, close/return/Escape/focus restoration, scope/trail, safe draft discard, and a full-Diary escape. Keep diagnostics and provenance available on demand. Validate typed input before normal and fallback representation; fallback carries no write authority.",
+        "future_or_reference": "Visual styling remains subject to owner preference. No broad diagnostic UI or extra action families merely because historical prototypes contain them.",
+        "maturity_and_integration": "The July 29 Bureau direction is a historical authored-synthetic prototype. Internal walkthrough was promising_needs_revision from one owner, not representative staff or current rendered acceptance. Structural accessibility evidence is not rendered accessibility proof. Latest supplied browser audit remains incomplete.",
+        "uncertainties_and_dependencies": [
+          "Rendered accessibility, focus behavior, keyboard behavior and current integrated browser audit remain unresolved.",
+          "M1 experience must preserve accessible non-AI path with same command semantics.",
+          "Do not claim human36 browser acceptance from observed physical cleanup."
+        ],
+        "anchors": [
+          {
+            "path": "docs/bernie-reception-one-holistic-bureau-direction.md",
+            "sha256": "4beacba53273eddf5f2e76f17e44db8471f3c1a81a74e004614ea2387f8611bc",
+            "role": "Bureau interaction direction"
+          },
+          {
+            "path": "docs/bernie-reception-one-yuri-internal-walkthrough-closeout.md",
+            "sha256": "0487679d03d937fcaab9b8cbdc0c50c7be5c1411265eac6c3dcf43f2fcdca55c",
+            "role": "single-owner prototype walkthrough"
+          },
+          {
+            "path": "docs/bernie-reception-one-bureau-typed-plan-protocol-closeout.md",
+            "sha256": "864bd456c0a9a58a69fd2012ed694d829e5f64cd88409cbf8599ddf0292f7018",
+            "role": "typed plan protocol"
+          },
+          {
+            "path": "docs/raisa-authority-kernel-reference-client-adapter-seam.md",
+            "sha256": "4ca412ce7ed51b3498c21731449bc7e69f116eb5252ac6b47f6a8e35c3aa4e22",
+            "role": "reference-client seam"
+          }
+        ],
+        "proposed_roadmap_classification": "proposed_reuse",
+        "proposed_roadmap_role": "Reuse calm intent-first Bureau interaction and accessible non-AI path as design lineage; current Bureau source publication and NONPASS attempts remain qualified evidence, not M1 acceptance."
+      },
+      {
+        "id": "events-and-source-freshness",
+        "name": "Events, freshness, and conditional commands",
+        "m1_foundation_or_experience": "Preserve source-owned truth, fresh source check/command fence, and the rule that events or cues trigger reads rather than supplying facts or commands. Reconcile selections after changes and reject stale proposals.",
+        "future_or_reference": "Durable watcher/event infrastructure is an extension, not prerequisite to each safe command. Native task messaging is not the product event bus.",
+        "maturity_and_integration": "Source-owned-truth reorientation and later event/cue durability work are lineage; Synaptic is a default-deny typed-routing protocol without live feed/mailbox/database. The report did not establish live event integration.",
+        "uncertainties_and_dependencies": [
+          "Current UI must bind freshness to exact backend versions/provenance.",
+          "No live event route was run or reviewed in this report."
+        ],
+        "anchors": [
+          {
+            "path": "docs/raisa-context-fabric-source-owned-truth-conditional-command-reorientation-closeout.md",
+            "sha256": "a576c14270277ab823b4125fdb041befa6b5eb5397f2106f5e21e92b9c1d1325",
+            "role": "conditional command/source truth"
+          },
+          {
+            "path": "docs/ariadne-synaptic-event-router-protocol-closeout.md",
+            "sha256": "e1049f424f410f9286931a89cddcc5c092ef76f60ebe575fd9fbaf16d89969b8",
+            "role": "typed routing protocol, no live transport"
+          }
+        ],
+        "proposed_roadmap_classification": "proposed_reuse",
+        "proposed_roadmap_role": "Retain source freshness and conditional-command invariants; cues trigger fresh reads and never supply authority."
+      },
+      {
+        "id": "context-fabric-and-memory",
+        "name": "Context Fabric, Bureau memory, and minimisation",
+        "m1_foundation_or_experience": "Carry context minimisation and separation of current/history/private session/lossy memory; use expiring frames, same-packet reconstruction and bilateral grants only where a concrete M1 seam requires them.",
+        "future_or_reference": "A universal Context Fabric runtime, broad memory weave, or temporal retrieval system is not an M1 prerequisite. Keep mostly pure/unmounted evidence as reference until an integrated dependency is demonstrated.",
+        "maturity_and_integration": "The reconciliation found contracts and mostly pure, unmounted evidence; it did not establish a universal mounted runtime or current end-to-end product integration.",
+        "uncertainties_and_dependencies": [
+          "Any later adapter must preserve minimisation, expiry, provenance, destination/effect separation, and backend command authority.",
+          "Do not infer runtime readiness from design closeouts."
+        ],
+        "anchors": [
+          {
+            "path": "docs/raisa-provider-free-practice-context-fabric-bureau-memory-contract-closeout.md",
+            "sha256": "03e7b3fc5ebc40b2399bc3e8123fa8387d306f9382123f3052605d27d0de31b0",
+            "role": "memory contract"
+          },
+          {
+            "path": "docs/raisa-provider-free-practice-context-fabric-current-operational-weave-closeout.md",
+            "sha256": "8e952253d5258c1e0627d55f910a5ce61fc2ee40f90edf491cc762eeee462e0f",
+            "role": "operational weave lineage"
+          },
+          {
+            "path": "docs/raisa-provider-free-practice-context-fabric-intent-shaped-temporal-retrieval-rehearsal-closeout.md",
+            "sha256": "ce411ee3f055be8034aa3fa3c12c7f70148b4b346aae1cd3cd3f54e5052fc573",
+            "role": "unmounted retrieval rehearsal"
+          }
+        ],
+        "proposed_roadmap_classification": "proposed_reuse",
+        "proposed_roadmap_role": "Reuse only the active, concrete contextual projection and minimization contracts; universal Context Fabric runtime remains unnecessary absent a demonstrated dependency."
+      },
+      {
+        "id": "ontology-and-location-resource-meaning",
+        "name": "Tenant, location, room, resource, view, waiting-area, attendance, and identity ontology",
+        "m1_foundation_or_experience": "Keep practice tenant, physical location, room, resource, column, view group, waiting area, attendance, and identity distinct in current read/command semantics; narrow views must not redefine them.",
+        "future_or_reference": "Richer resource administration and waiting-area operations are later role-specific work, not M1 scope additions.",
+        "maturity_and_integration": "The reconciliation records the semantic distinctions as architecture and selected design lineage; it did not audit full cross-domain implementation or all transitive imports.",
+        "uncertainties_and_dependencies": [
+          "Preserve ontology across current API and rendered labels.",
+          "Complete clinical/admin implementation remains explicitly unreviewed."
+        ],
+        "anchors": [
+          {
+            "path": "orchestration/location_diary_view_review.md",
+            "sha256": "a781ec9a12e83b4c4079e691968818ff8c82791ae74561e9c5b57c6d125266d4",
+            "role": "location/Diary view review"
+          },
+          {
+            "path": "orchestration/resource_admin_bernie_tool_design.md",
+            "sha256": "5080e5c26566353dee9b33f0f881bb50a724f7a7252c4b9f1e95bb40d224f87a",
+            "role": "resource administration design"
+          }
+        ],
+        "proposed_roadmap_classification": "proposed_reuse",
+        "proposed_roadmap_role": "Preserve distinct tenant, practice, location, room, resource, view, attendance, waiting-area, and identity meanings in product planning and contracts."
+      },
+      {
+        "id": "authentication-federation-proda",
+        "name": "Authentication, session federation, role boundaries, and PRODA",
+        "m1_foundation_or_experience": "Keep identity and authorization backend-owned; a demo/mock identity must be clearly qualified and cannot itself authorize clinical or appointment actions. Preserve explicit actor, role, tenant, confirmation, audit, expiry, revocation, and cross-surface reconciliation semantics.",
+        "future_or_reference": "Real OIDC/provider compatibility, PRODA, real-person enrollment, external identity transport, or production IAM are future and closed to this M1 work. The corrected OIDC design is MSAL flow mechanics plus Authlib/JOSE raw-token verification, not the superseded MSAL-only verifier proposal.",
+        "maturity_and_integration": "Prior work spans architecture, synthetic in-memory primitives, durable local session/exchange/audit, default-off transport, and offline OIDC lineage; some has authored-synthetic FastAPI/PostgreSQL evidence and some is architecture-only. No real-provider qualification follows.",
+        "uncertainties_and_dependencies": [
+          "Exact compatibility and current dependency qualification are future review needs.",
+          "No provider grant or credential may be inferred from historical evidence."
+        ],
+        "anchors": [
+          {
+            "path": "docs/raisa-shared-application-auth-runtime-foundation-closeout.md",
+            "sha256": "22a18a67693d011588465f78b7f4d1d1a22345b54fae345e1a9fe4663471b102",
+            "role": "auth runtime foundation"
+          },
+          {
+            "path": "docs/raisa-shared-application-auth-postgresql-persistence-closeout.md",
+            "sha256": "da18d4c5f856d35b08222e554aa892ed5c457d24eee1b24ce07c75fd07fa5352",
+            "role": "durable local persistence"
+          },
+          {
+            "path": "docs/raisa-two-component-oidc-verifier-architecture-revision-closeout.md",
+            "sha256": "06f47879d9439e81a35af1494894bd6cb25b299f6fb670db74d85c0d51567bf1",
+            "role": "superseding verifier architecture correction"
+          },
+          {
+            "path": "docs/raisa-provider-free-oidc-admission-grant-redemption-bridge-closeout.md",
+            "sha256": "65458506725a81b2940d2df959a6d15d3cbf816e25295e43884d81b22d2e9a22",
+            "role": "provider-free session bridge"
+          }
+        ],
+        "proposed_roadmap_classification": "needs_assessment",
+        "proposed_roadmap_role": "Assess commercial account, practice, role, and identity requirements as separately scoped work; real OIDC/provider/PRODA paths remain future and closed until separately admitted."
+      },
+      {
+        "id": "word-clinician-one",
+        "name": "Word Online and Clinician One companion",
+        "m1_foundation_or_experience": "Preserve separate Office client seams, host-capability/context contracts, contextual launch, session-loss reconciliation, and compact companion interaction where they inform the wider product architecture.",
+        "future_or_reference": "A complete clinical workspace, broad Office deployment, or general authenticated Word Online integration is not part of the current bounded M1 diary journey.",
+        "maturity_and_integration": "Evidence consists of limited installed Word and specific Word Online observations plus selected closeouts; it does not prove a complete clinical workspace or general deployment.",
+        "uncertainties_and_dependencies": [
+          "Current host/session compatibility and rendered workflow require separate bounded qualification.",
+          "No live Office/provider permission follows from prior observations."
+        ],
+        "anchors": [
+          {
+            "path": "docs/raisa-word-online-authenticated-companion-verification-closeout.md",
+            "sha256": "cfa84960ce06f319c604b78ac63e941e608a998c149849c323e917b9793655eb",
+            "role": "specific Word Online companion verification"
+          },
+          {
+            "path": "docs/bernie-reception-one-word-hybrid-contextual-launch-closeout.md",
+            "sha256": "f8f99304fc78706eb2a1f18b5b287d92e3f9010cff07a745d00dac325e0cb640",
+            "role": "contextual launch lineage"
+          },
+          {
+            "path": "docs/bernie-reception-one-word-compact-companion-shell-closeout.md",
+            "sha256": "a673beba6525096263e52d46dcde84c5e1b91e184403f7bfc4ece57b892bbf04",
+            "role": "compact companion shell"
+          }
+        ],
+        "proposed_roadmap_classification": "retained_future",
+        "proposed_roadmap_role": "Preserve Word Online and companion seams as future context; no current complete clinical workspace or Office deployment is implied."
+      },
+      {
+        "id": "davida-administration",
+        "name": "Davida practice administration",
+        "m1_foundation_or_experience": "Retain practice-scoped directory/location read semantics as a future integration seam; no M1 administrative apply or IAM expansion.",
+        "future_or_reference": "Default-location changes and administrative writes need their own explicit command, authority and acceptance scope.",
+        "maturity_and_integration": "Practice-scoped active directory/location read has local synthetic PostgreSQL evidence; default-location dry run was unmounted. These are bounded proofs, not administrative write integration.",
+        "uncertainties_and_dependencies": [
+          "Full admin implementation was not reviewed.",
+          "Keep location and identity authority distinct."
+        ],
+        "anchors": [
+          {
+            "path": "docs/davida-provider-free-practice-administration-pure-read-closeout.md",
+            "sha256": "98ec49f8915c864ad05e96899a2f42728dedd5d5484be8b426e8944b87ab7a23",
+            "role": "bounded practice administration read"
+          },
+          {
+            "path": "docs/davida-provider-free-practice-administration-default-location-dry-run-closeout.md",
+            "sha256": "8c867d9cce2015a1b9bb9df5b1bd721dcc6bdf0f6793fd991b9136f0394a6063",
+            "role": "unmounted default-location dry run"
+          }
+        ],
+        "proposed_roadmap_classification": "needs_assessment",
+        "proposed_roadmap_role": "Assess account/practice setup, administration, operations, and export/restore needs against the existing directory/location seams; no administrative write or IAM expansion is implied."
+      },
+      {
+        "id": "rayleen-waiting-room",
+        "name": "Rayleen waiting room and arrival semantics",
+        "m1_foundation_or_experience": "Preserve shared read/command contracts and distinguish arrival identity/attention from waiting-area location, attendance, and booking confirmation.",
+        "future_or_reference": "Waiting-room check-in and default-location descendants remain future role-specific experience, not a synonym for Diary booking or M1 confirmation.",
+        "maturity_and_integration": "Historical bounded product-read/UI and check-in/default-location descendants exist; a Context Fabric generation rehearsal was unmounted. No current end-to-end waiting-room integration established.",
+        "uncertainties_and_dependencies": [
+          "Cross-domain implementation was not fully inspected.",
+          "Avoid treating an unmounted rehearsal as runtime proof."
+        ],
+        "anchors": [
+          {
+            "path": "docs/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-fresh-generation-rehearsal-closeout.md",
+            "sha256": "7f17d1bc884613849e59673c01496238510bcd4a96d154f772c210f686baf1c7",
+            "role": "unmounted waiting-room context rehearsal"
+          },
+          {
+            "path": "docs/raisa-provider-free-native-diary-application-session-practitioner-reconciliation-closeout.md",
+            "sha256": "4a92f3fd30e9c399aeab6ba8b2c56639f16b3fd0a4ad345de8159ae97680e99b",
+            "role": "practitioner session reconciliation"
+          }
+        ],
+        "proposed_roadmap_classification": "retained_future",
+        "proposed_roadmap_role": "Retain waiting-room and arrival semantics for later role-specific work; do not merge them with appointment confirmation or M1 Diary scope."
+      },
+      {
+        "id": "clinical-pms-and-patient-interaction",
+        "name": "Patient interaction and wider clinical PMS",
+        "m1_foundation_or_experience": "Maintain channel-neutral patient interaction and server-owned clinical authority as architectural foundations; current M1 stays bounded to the appointment journey and Diary.",
+        "future_or_reference": "Patient files, encounters, results/referrals, prescribing, billing, scribe, and practice knowledge are future product directions. Historical plan phases and source inventories are not completion evidence or current authorization.",
+        "maturity_and_integration": "Accepted channel-neutral architecture exists; complete clinical/admin implementation and all transitive imports were not audited. No broad clinical workflow integration is established by this reconciliation.",
+        "uncertainties_and_dependencies": [
+          "Each clinical workflow needs its own command/read, authorization, audit, tenant and concurrency boundaries.",
+          "Real clinical data and providers remain outside the current work."
+        ],
+        "anchors": [
+          {
+            "path": "docs/raisa-channel-neutral-patient-interaction-foundation-closeout.md",
+            "sha256": "ed7ae15cf764a0b3b4f7053b56b6f4c5015dbe3c5953a3b43544bc19230557e7",
+            "role": "channel-neutral patient interaction architecture"
+          },
+          {
+            "path": "implementation_plan.md",
+            "sha256": "0d28e5576cfec23c7c87ecb814378194b452c966c8da1d951bb70ec8363b8c7e",
+            "role": "wider product blueprint; historical phase labels are not completion proof"
+          }
+        ],
+        "proposed_roadmap_classification": "retained_future",
+        "proposed_roadmap_role": "Keep broader healthcare and clinical PMS capabilities as later independently scoped modules; no real clinical data or workflow authority follows."
+      },
+      {
+        "id": "model-text-proofreader-and-provider-history",
+        "name": "Model text, proofreader, and provider history",
+        "m1_foundation_or_experience": "Reconnect the actual existing Bureau planning, contextual interpretation, typed proposal and deterministic proofreader seams for the two M1 journeys. The owner requires meaningful contextual intelligence; the current narrow deterministic interpreter is not the whole Bureau or sufficient evidence of that requirement. AI remains advisory; source validation, deterministic policy and human confirmation own final effects.",
+        "future_or_reference": "Broader provider compositions and action families remain future. Any current model binding requires exact provider/runtime/data/resource qualification before execution; closed historical grants do not reopen. Record actual model work as NOT_RUN until qualified, not implicitly satisfied by typed or injected tests.",
+        "maturity_and_integration": "The report records incomparable historical tasks: T3R7 valid-normalization followed by invalid JSON; model-text schema/source-reference failures and one deterministic-proofreader candidate; v6.8 24/24 on reused synthetic cohort; typed-language six-family regression with two invalid-output-index calls and no proposal; one occupied resize proposal without DB mutation; AES-C5 one bounded synthetic directory read/inference/inert typed release. These do not prove current model qualification or product reliability.",
+        "uncertainties_and_dependencies": [
+          "All grants/calls remain consumed; no retry or silent fallback.",
+          "No raw prompts, tokens, protected cases, or patient data are to be retrieved for this synthesis.",
+          "Provider task, grammar, privacy/location, bounded resources, no-fallback, and independent review need future qualification."
+        ],
+        "anchors": [
+          {
+            "path": "docs/bernie-t3r7-vertex-sydney-live-closeout.md",
+            "sha256": "d7c4ed41608a823b978dac4ecff92efdd244c27e2fa61bb201fa50b4cff5cf43",
+            "role": "historical T3R7 task result"
+          },
+          {
+            "path": "docs/bernie-reception-one-bureau-model-text-lane-provider-blocked-closeout.md",
+            "sha256": "8f64e5e91541635db064c3ad6197903deb1ff8957963eae1233c9764ca2a1759",
+            "role": "model-text lane failure history"
+          },
+          {
+            "path": "docs/bernie-reception-one-receptionist-first-v68-closeout.md",
+            "sha256": "a275482692ba62a56eb2f3ca0d6029ab4d20b211f3c265eeeedf9ed811afe3c6",
+            "role": "reused synthetic development cohort result"
+          },
+          {
+            "path": "docs/bernie-reception-one-shared-typed-language-closeout.md",
+            "sha256": "d9e0bb3a6b34728ef538bbaab0463d9215485830f5310dc53dcf8b32cc538efd",
+            "role": "typed-language proof and rejected provider calls"
+          },
+          {
+            "path": "docs/raisa-agent-execution-surface-containment-gate-aes-c5-product-runtime-admission-closeout.md",
+            "sha256": "34851e465dfdd625aa69e5efff406407cee72d3d2870efa00af85c0f9cab58d7",
+            "role": "bounded synthetic broker evidence; not reusable grant"
+          }
+        ],
+        "proposed_roadmap_classification": "proposed_reuse",
+        "proposed_roadmap_role": "Reconnect typed planning and deterministic proofreader seams only within current admission; contextual intelligence remains an M1 need, while external provider lanes stay closed and historical results remain qualified."
+      },
+      {
+        "id": "ariadne-sandbox-workers-isolation-recovery",
+        "name": "Sandbox DAG, cognitive work cell, native workers, isolation, and recovery",
+        "m1_foundation_or_experience": "Keep coarse interpretation/fine authority separation, exact provenance, independently owned recovery, safe containment lessons, and current native worker coordination as distinct mechanisms. Preserve honest stage/tool/session diagnostics and zero-call accounting.",
+        "future_or_reference": "Sandbox DAG was a 13-node/message synthetic protocol with no sandbox transport; Synaptic had no live transport; one isolation rehearsal reproduced scripted tape in a consumed bounded container and had no adaptive provider agent. Do not activate these for ordinary dispatch or equate Git worktrees with product isolation. Archive obsolete pool/threshold/retry recipes and unfinished DeepSeek route as trial history.",
+        "maturity_and_integration": "Protocols, scripts, and rehearsals are prior art; they are not equivalent to live infrastructure. DeepSeek generic trace was partial (6 steps/8 tools, 4/4 small tests but missing required summary); EMR4 native attempts 004/005 failed before first provider call and were consumed.",
+        "uncertainties_and_dependencies": [
+          "Native worker output does not independently validate product proposals or acceptance.",
+          "No retry/resume grant follows from historical launcher failures.",
+          "Use supported current coordination and applicable project admission separately."
+        ],
+        "anchors": [
+          {
+            "path": "docs/ariadne-sandbox-dag-fork-closeout.md",
+            "sha256": "737620b4f1368cb0087076257ae39d2f731d8808ef7ac5b95098cbaf58537b67",
+            "role": "synthetic protocol only"
+          },
+          {
+            "path": "docs/ariadne-bounded-cognitive-work-cell-protocol-closeout.md",
+            "sha256": "4ba879e571fdf8d25d03837f8a391ce304d589a48a3f148ceeffa1a9e242a856",
+            "role": "draft/egress boundary protocol"
+          },
+          {
+            "path": "docs/ariadne-real-isolation-rehearsal-closeout.md",
+            "sha256": "e45d5c1c813ec29910901cdb7e22bedac400bb175cd58d653f9e98dd7a7ccc1d",
+            "role": "single consumed scripted isolation rehearsal"
+          },
+          {
+            "path": "docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-closeout.md",
+            "sha256": "6364f8500a93cf899d577b7fd0460a3c19533127d0ecf08c418366e640d864d9",
+            "role": "consumed pre-provider launcher failure"
+          },
+          {
+            "path": "docs/deepseek-native-harness-authored-synthetic-agentic-coding-traceability-rehearsal-closeout.md",
+            "sha256": "4ebf049b073f859cc7fbeb21fcaba9dbf4e44190b9ffa656b482f5c0fee992d0",
+            "role": "partial generic traceability rehearsal"
+          }
+        ],
+        "proposed_roadmap_classification": "retained_future",
+        "proposed_roadmap_role": "Retain provenance and recovery lessons as governance context; do not activate historical sandbox/provider harnesses or treat ordinary task dispatch as product isolation."
+      },
+      {
+        "id": "voice-and-outcome-experience",
+        "name": "Voice, shared channel adapters and bureau-level outcomes",
+        "m1_foundation_or_experience": "Use web text and push-to-talk through the same Bureau/domain lifecycle. Keep recognized text editable, contextual proposals inspectable and writes human-confirmed. Calm interface, optional muted chime and any spoken reply describe verified bureau outcomes, never a model claim of authority.",
+        "uncertainties_and_dependencies": [
+          "Integrate existing shared modality/source-provenance seams; distinguish acoustic capture, recognition, contextual meaning and confirmed database outcome.",
+          "No new human recording or service launch follows from this map. Preserve valid preparation until needed."
+        ],
+        "future_or_reference": "Email is the next preferred channel using that same lifecycle; broader telephone/SMS/continuous listening are later scope.",
+        "anchors": [
+          {
+            "role": "Selected reconciliation modality/channel directions; current outcomes qualified by existing checkpoint",
+            "path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/demo-led-stage1-20261012-v2/stage1-mock-voice-database-integration-v1/interactive-runtime-v1/reception-intent-ui-v1/deep-foundation-reconciliation-v1/reconciliation.md",
+            "sha256": "2e4d7d7c110287b00d61572306f1b21e8c8842229ac9af6e29dd217da1e59257"
+          }
+        ],
+        "maturity_and_integration": "Human36 verified two recognition receipts and request/book effects; move unverified, browser audit incomplete. Readiness30 proves passive controls only. No full acoustic or spoken-reply acceptance follows.",
+        "proposed_roadmap_classification": "proposed_reuse",
+        "proposed_roadmap_role": "Keep web text and push-to-talk on one domain lifecycle with editable recognition, inspectable proposal, human confirmation, and verified outcomes; microphone/runtime effects remain separately controlled."
+      },
+      {
+        "id": "outcome-reliability-and-independent-expectations",
+        "name": "Outcome reliability, independent expectations and compact lab",
+        "m1_foundation_or_experience": "Reuse the existing driver/report/lab for the two journeys with independently derived expected outcomes. Exercise actual shared commands, not a second scheduling engine; separate natural interpretation errors, injected faults, typed/manual corrections, uncertainty and human burden.",
+        "uncertainties_and_dependencies": [
+          "Actual model observation, fault injection, replay and integrated runtime results must be separately labelled.",
+          "M1 acceptance stays open while substantive contextual/Bureau/voice/review requirements remain unresolved."
+        ],
+        "future_or_reference": "No new benchmark platform, favourable-score mandate,3000-case campaign or protected holdout cycle. Broader evaluations follow real product scope.",
+        "anchors": [
+          {
+            "role": "Existing reconciliation and latest checkpoint qualification; governing owner outcome-reliability directive remains controlling",
+            "path": "C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/demo-led-stage1-20261012-v2/stage1-mock-voice-database-integration-v1/interactive-runtime-v1/reception-intent-ui-v1/deep-foundation-reconciliation-v1/reconciliation.md",
+            "sha256": "2e4d7d7c110287b00d61572306f1b21e8c8842229ac9af6e29dd217da1e59257"
+          }
+        ],
+        "maturity_and_integration": "Typed35 has qualified accepted28assertions; that is not28scenarios or acoustic acceptance. Human36 is incomplete. Existing accepted G2/G3 and relevant runtime evidence are reused with qualifications.",
+        "proposed_roadmap_classification": "proposed_reuse",
+        "proposed_roadmap_role": "Reuse existing driver/report/lab with independently derived expectations for actual command outcomes; retain distinctions among source-only evidence, NONPASS attempts, and product acceptance."
+      }
+    ]
+  },
+  "evidence_sources": [
+    {
+      "role": "Reviewed planning contract",
+      "path": "C:\\Users\\there\\EMR4-tools\\compass-gpms-goal-steering-preparation-v1\\goal-update-and-selection-contract.draft-v2.json",
+      "sha256": "38043acaa9ba3dabbdf7fe1afc9df7dd4745a534e7a64cf7c44eb5d47ac23cc4",
+      "bytes": 7807
+    },
+    {
+      "role": "Independent planning-contract review",
+      "path": "C:\\Users\\there\\EMR4-tools\\compass-gpms-goal-steering-preparation-v1\\independent-planning-contract-review-v2.json",
+      "sha256": "c18db1dc3dce40c7bf3fae401bcdb4522bde3a1f9afd50bbb003972a700606cd",
+      "bytes": 2916,
+      "verdict": "PASS_EXACT_PLANNING_DRAFT_AFTERIMAGE",
+      "limitations": "Planning draft afterimage only; no canonical update, admission, dispatch, implementation acceptance, gate transition, execution grant, or product acceptance."
+    },
+    {
+      "role": "Accepted Compass orientation baseline",
+      "commit": "f592e4d99c34243996f6bf5674432b2eb6f857f0",
+      "tree": "8e27672aea4ec340b2c58f17cae87b0c39a4c38f",
+      "qualification": "Accepted orientation/publication/readback, distinct from this unpublished payload and from product test acceptance."
+    },
+    {
+      "role": "Latest Bureau source publication",
+      "commit": "b1dca5ad1f1c0cd13dc6b739d1d5c2755c0c5abd",
+      "tree": "cbe0ca703761ce5edc4a9279ff2ddb7b9b56b231",
+      "qualification": "Source publication only; both native backend attempts aggregate NONPASS; not M1 acceptance."
+    }
+  ],
+  "programme_posture": {
+    "g4_stage1": "Current admitted scope unchanged; exact structured state and checkpoint control work.",
+    "g2_g3": "Accepted with existing qualifications; no freshness rerun.",
+    "g5": "Blocked.",
+    "goal_effect": "Strategic goal and roadmap data grant no new runtime or execution authority."
+  },
+  "limits": [
+    "No canonical graph, map, Compass, report, AGENTS.md, or checkpoint edit.",
+    "No runtime, product execution, dispatch, publication, gate transition, or acceptance.",
+    "No provider, real-patient-data, protected-evidence, deployment, or IAM effect.",
+    "No invented thresholds, new holdouts, or whole-repository access.",
+    "This authored payload is not accepted Clockwork input schema until reviewed and adapted through the current route."
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "schema_version": "ariadne.governance_goal_only_intent.v1",
+  "operation_id": "compass-gpms-goal-update-v1",
+  "recorded_at": "2026-10-26T00:00:00+00:00",
+  "payload_sha256": "7041236ef65b70e77d12bd7112c7bd9da0a83c6e9bf61865fdfd6a3defff056c",
+  "capability_dispositions_sha256": "e3329845dcdd49b0141c0fd1bbea5ca8749f8d3f68c713e9520c199688555e36",
+  "effect": "goal_roadmap_only",
+  "recommendation_selection_dispatch": "unchanged_not_enabled"
+}

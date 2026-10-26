@@ -82,6 +82,7 @@ PREPARED_VERSION = "ariadne.governance_live_tick_prepared_generation.v1"
 GENERATION_VERSION = "ariadne.governance_live_tick_generation.v1"
 TRANSACTION_VERSION = "ariadne.governance_live_tick_transaction.v1"
 G4_ORIENTATION_INTENT_VERSION = "ariadne.g4_emr4_compass_orientation_intent.v1"
+GOAL_UPDATE_INTENT_VERSION = "ariadne.governance_goal_only_intent.v1"
 G4_ORIENTATION_EVENT = "g4_reorientation"
 G4_ORIENTATION_OPERATION = "g4-emr4-compass-reconnection"
 G4_ORIENTATION_NODE = "g4-emr4-recovery-orientation"
@@ -3200,6 +3201,9 @@ def validate_prepared_tick(
         },
         "tick_prepared_keys",
     )
+    if isinstance(row.get("intent"), dict) and row["intent"].get("schema_version") == GOAL_UPDATE_INTENT_VERSION:
+        from orchestration_harness import governance_goal_tick
+        return governance_goal_tick.validate_prepared(repo_root, row)
     if isinstance(row.get("intent"), dict) and row["intent"].get("schema_version") == G4_ORIENTATION_INTENT_VERSION:
         return _validate_g4_orientation_prepared(repo_root, row)
     if row["schema_version"] != PREPARED_VERSION:
@@ -3535,6 +3539,9 @@ def validate_tick_live_state(
     contract = validate_contract(contract_value)
     root = _clockwork_root(repo_root, contract)
     generation = _load(root / GENERATION_NAME)
+    if generation.get("goal_update") is not None:
+        from orchestration_harness import governance_goal_tick
+        return governance_goal_tick.validate_live(repo_root, contract, generation)
     if generation.get("g4_orientation") is not None:
         base = _validate_g4_selected_live_state(repo_root, contract, generation)
         return _validate_g4_orientation_live(repo_root, contract, base, generation)
@@ -3867,15 +3874,34 @@ def publish_tick_generation(
     g4_effect_checker: Any = None,
     g4_effect_context: Any = None,
     g4_effect_manifest: dict[str, Any] | None = None,
+    goal_effect_checker: Any = None,
+    goal_effect_context: Any = None,
+    goal_effect_manifest: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Publish one prepared tick, committing only when the pointer is replaced."""
 
+    is_goal = (isinstance(prepared_value, dict)
+        and isinstance(prepared_value.get("intent"), dict)
+        and prepared_value["intent"].get("schema_version") == GOAL_UPDATE_INTENT_VERSION)
+    if is_goal:
+        from orchestration_harness import governance_goal_tick
+        selected_contract = validate_contract(prepared_value["contract"])
+        selected = _load(_clockwork_root(repo_root, selected_contract) / POINTER_NAME)
+        if selected.get("selected_generation_id") == prepared_value.get("pointer", {}).get("selected_generation_id"):
+            return governance_goal_tick.idempotent_readback(repo_root, prepared_value, writer_id)
     prepared = validate_prepared_tick(repo_root, prepared_value)
     contract = prepared["contract"]
     if writer_id != WRITER:
         _reject("tick_writer_not_clockwork")
     is_g4 = prepared["intent"]["schema_version"] == G4_ORIENTATION_INTENT_VERSION
-    if is_g4:
+    is_scoped = is_g4 or is_goal
+    if is_goal:
+        effect_checker, effect_context, effect_manifest = goal_effect_checker, goal_effect_context, goal_effect_manifest
+        verify_effect = governance_goal_tick.verify_effect
+    else:
+        effect_checker, effect_context, effect_manifest = g4_effect_checker, g4_effect_context, g4_effect_manifest
+        verify_effect = _verify_g4_effect_manifest_images
+    if is_scoped:
         _assert_g4_git_state(repo_root, contract, prepared["source_commit"])
     else:
         _assert_git_state(repo_root, contract, prepared["source_commit"])
@@ -3888,18 +3914,21 @@ def publish_tick_generation(
         return validate_tick_live_state(repo_root, contract)
     if current_pointer != prepared["base_pointer"]:
         _reject("tick_stale_predecessor")
-    if is_g4:
-        if not callable(g4_effect_checker) or g4_effect_context is None or g4_effect_manifest is None:
-            _reject("g4_orientation_effect_admission_required")
-        _verify_g4_effect_manifest_images(repo_root, prepared, g4_effect_manifest)
-        decision = g4_effect_checker(
-            context=g4_effect_context, manifest=g4_effect_manifest,
+    if is_scoped:
+        if not callable(effect_checker) or effect_context is None or effect_manifest is None:
+            _reject("goal_update_effect_admission_required" if is_goal else "g4_orientation_effect_admission_required")
+        verify_effect(repo_root, prepared, effect_manifest)
+        decision = effect_checker(
+            context=effect_context, manifest=effect_manifest,
             prepared=prepared, phase="effect"
         )
-        if not getattr(decision, "execution_authorized", False):
-            _reject("g4_orientation_effect_not_authorized")
+        if ((is_goal and getattr(decision, "execution_authorized", False) is not True)
+                or (not is_goal and not getattr(decision, "execution_authorized", False))):
+            _reject("goal_update_effect_not_authorized" if is_goal else "g4_orientation_effect_not_authorized")
     if prepared["intent"]["schema_version"] == G4_ORIENTATION_INTENT_VERSION:
         _g4_orientation_baseline(repo_root, contract, prepared["intent"])
+    elif is_goal:
+        governance_goal_tick.baseline(repo_root, contract, prepared["source_commit"])
     else:
         _assert_clean_predecessor(repo_root, contract, prepared["source_commit"])
     lease_path = root / "writer.lock"
@@ -3923,15 +3952,16 @@ def publish_tick_generation(
             pointer=prepared["pointer"],
         )
         acquired = True
-        if is_g4:
+        if is_scoped:
             _assert_g4_git_state(repo_root, contract, prepared["source_commit"])
-            _verify_g4_effect_manifest_images(repo_root, prepared, g4_effect_manifest)
-            decision = g4_effect_checker(
-                context=g4_effect_context, manifest=g4_effect_manifest,
+            verify_effect(repo_root, prepared, effect_manifest)
+            decision = effect_checker(
+                context=effect_context, manifest=effect_manifest,
                 prepared=prepared, phase="effect"
             )
-            if not getattr(decision, "execution_authorized", False):
-                _reject("g4_orientation_effect_not_authorized")
+            if ((is_goal and getattr(decision, "execution_authorized", False) is not True)
+                    or (not is_goal and not getattr(decision, "execution_authorized", False))):
+                _reject("goal_update_effect_not_authorized" if is_goal else "g4_orientation_effect_not_authorized")
         original_canonical = {key: path.read_bytes() for key, path in canonical_targets.items()}
         original_metadata = {name: path.read_bytes() for name, path in metadata_targets.items()}
         original_pointer = pointer_path.read_bytes()
@@ -3960,8 +3990,8 @@ def publish_tick_generation(
         os.replace(staged.pop("pointer"), pointer_path)
         committed = True
         state = validate_tick_live_state(repo_root, contract)
-        if is_g4:
-            _verify_g4_committed_images(repo_root, contract, g4_effect_manifest)
+        if is_scoped:
+            _verify_g4_committed_images(repo_root, contract, effect_manifest)
         if fail_at == "after_pointer_replace":
             raise CommittedClockworkTick("injected_tick_postcommit_failure")
         return state
@@ -4000,6 +4030,8 @@ def rollback_tick_generation(
     root = _clockwork_root(repo_root, contract)
     if _load(root / GENERATION_NAME).get("g4_orientation") is not None:
         _reject("g4_orientation_explicit_rollback_required")
+    if _load(root / GENERATION_NAME).get("goal_update") is not None:
+        _reject("goal_update_separate_bound_inverse_required")
     pointer_path = root / POINTER_NAME
     pointer = _load(pointer_path)
     source = pointer["previous_source_commit"]

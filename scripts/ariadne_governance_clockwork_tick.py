@@ -77,7 +77,7 @@ def _load(path: Path) -> dict:
 
 
 @contextmanager
-def _g4_external_controller(source_root: Path):
+def _g4_external_controller(source_root: Path, *, goal_update: bool = False):
     """Bind published external controller/writer modules during one G4 command."""
 
     import orchestration_harness as package
@@ -86,6 +86,10 @@ def _g4_external_controller(source_root: Path):
         "configuration_core", "raisa_policy", "trusted_git",
         "governance_clockwork_tick", "bounded_g1b",
     )
+    if goal_update:
+        names = ("configuration_core", "raisa_policy", "trusted_git",
+                 "governance_goal_update", "governance_clockwork_tick",
+                 "governance_goal_tick", "bounded_g1b")
     selected: dict[str, Path] = {}
     for name in names:
         relative = f"orchestration_harness/{name}.py"
@@ -123,6 +127,11 @@ def _g4_external_controller(source_root: Path):
             for name in ("configuration_core", "raisa_policy", "trusted_git")
         ):
             raise ValueError("g4_controller_external_dependency_origin")
+        if goal_update and (
+            loaded["governance_goal_tick"].tick is not loaded["governance_clockwork_tick"]
+            or loaded["governance_goal_tick"].goals is not loaded["governance_goal_update"]
+        ):
+            raise ValueError("goal_update_external_dependency_origin")
         yield controller
     finally:
         for name, previous in original.items():
@@ -185,6 +194,50 @@ def _g4_command(arguments: argparse.Namespace, contract: dict) -> dict:
             g4_effect_context=context, g4_effect_manifest=manifest,
         )
         return _command_result(rollback, _rollback_transaction_facts(rollback))
+
+
+def _goal_update_command(arguments: argparse.Namespace, contract: dict) -> dict:
+    from orchestration_harness import governance_goal_tick as goal
+    from orchestration_harness import governance_goal_update as goals
+
+    if arguments.intent is not None or arguments.programme_task_manifest is not None:
+        raise ValueError("goal_update_uses_installed_intent_and_separate_exact_admission")
+    intent = goal._intent(_load(ROOT / goal.INTENT_PATH))
+    generation = _load(ROOT / contract["clockwork_root"] / "generation-manifest.json")
+    if generation.get("goal_update") is not None:
+        state = validate_tick_live_state(ROOT, contract)
+        if generation["goal_update"].get("intent") != intent:
+            raise ValueError("goal_update_idempotent_intent_collision")
+        return _command_result(state, _idempotent_transaction_facts(state))
+    if arguments.check_goal_update:
+        prepared = goal.build(ROOT, contract, intent)
+        return _command_result({"schema_version": "ariadne.goal_update_dry_run.v1",
+            "status": "passed", "source_commit": prepared["source_commit"],
+            "generation_id": prepared["generation_manifest"]["generation_id"],
+            "bundle_sha256": prepared["generation_manifest"]["bundle_sha256"],
+            "previous_generation_id": prepared["base_pointer"]["selected_generation_id"],
+            "lease_sequence": prepared["pointer"]["lease_sequence"]},
+            _prepared_transaction_facts(prepared, published=False))
+    required = ("controller_source_root", "evidence_root", "scratch_root",
+                "effect_binding", "effect_binding_sha256", "effect_manifest")
+    if any(getattr(arguments, key) is None for key in required):
+        raise ValueError("goal_update_exact_effect_context_required")
+    with _g4_external_controller(arguments.controller_source_root, goal_update=True) as module:
+        checker = getattr(module, "require_g4_compass_goal_update_effect", None)
+        if not callable(checker):
+            raise ValueError("goal_update_external_effect_admission_not_installed")
+        context = module.BoundedG1BContext(target_root=ROOT,
+            source_root=arguments.controller_source_root, evidence_root=arguments.evidence_root,
+            scratch_root=arguments.scratch_root, binding_path=arguments.effect_binding,
+            expected_binding_sha256=arguments.effect_binding_sha256)
+        from orchestration_harness import governance_clockwork_tick as writer
+        # The package-bound event adapter uses the same published external core.
+        from orchestration_harness import governance_goal_tick as external_goal
+        prepared = external_goal.build(ROOT, contract, intent)
+        state = writer.publish_tick_generation(ROOT, prepared, writer_id="clockwork",
+            goal_effect_checker=checker, goal_effect_context=context,
+            goal_effect_manifest=_load(arguments.effect_manifest))
+        return _command_result(state, _prepared_transaction_facts(prepared, published=True))
 
 
 def _intent_path(raw: Path) -> Path:
@@ -719,6 +772,8 @@ def main(argv: list[str] | None = None) -> int:
     mode.add_argument("--check-g4", action="store_true")
     mode.add_argument("--reorient-g4", action="store_true")
     mode.add_argument("--rollback-g4", action="store_true")
+    mode.add_argument("--check-goal-update", action="store_true")
+    mode.add_argument("--publish-goal-update", action="store_true")
     parser.add_argument("--intent", type=Path)
     parser.add_argument("--programme-task-manifest", type=Path)
     parser.add_argument("--controller-source-root", type=Path)
@@ -728,6 +783,11 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--effect-binding-sha256")
     parser.add_argument("--effect-manifest", type=Path)
     arguments = parser.parse_args(argv)
+    if arguments.check_goal_update or arguments.publish_goal_update:
+        contract = validate_contract(_load(CONTRACT))
+        result = _goal_update_command(arguments, contract)
+        print(json.dumps(result, indent=2, ensure_ascii=False))
+        return 0
     if arguments.check_g4 or arguments.reorient_g4 or arguments.rollback_g4:
         if arguments.intent is not None or arguments.programme_task_manifest is not None:
             parser.error("G4 orientation uses its frozen intent and separate exact effect binding")
