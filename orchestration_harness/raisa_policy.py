@@ -1760,6 +1760,7 @@ G4_STAGE1_SUCCESSOR_PRODUCT_PATHS = (
     "run_container_child_once.py",
     "tests/test_stage1_contained_voice_adapter.py",
     "app/services/reception_one_proposal_runtime.py",
+    "app/routers/appointments.py",
     "scripts/reception_one_bureau_typed_plan_protocol.py",
     "orchestration/continuity/reception-one-bureau-typed-plan-protocol/operator-catalog.json",
     "orchestration/continuity/reception-one-bureau-typed-plan-protocol/plan-review.schema.json",

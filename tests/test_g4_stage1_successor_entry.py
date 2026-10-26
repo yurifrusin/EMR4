@@ -1822,8 +1822,306 @@ def test_selected_bureau_v8_apply_requires_exact_enable_effect(monkeypatch):
 
 
 def _bureau_v9_scope():
-    path = Path(__file__).resolve().parents[1] / bounded_g1b.G4_STAGE1_SUCCESSOR_SCOPE
-    return json.loads(path.read_bytes())
+    # Frozen accepted V9 scope; the active scope is V10 after enablement.
+    raw = base64.b64decode(
+        "eyJhY3RpdmVfcHJvZmlsZSI6Ikc0X1NUQUdFMV9MT0NBTF9TVUNDRVNTT1IiLCJhZG1pc3Npb25fZ3JhbnRzX3J1bnRpbWVfYXV0aG9yaXR5IjpmYWxzZSwiYWxsb3dlZF9lZmZlY3RzIjpbImNvbnRyb2xfcGxhbmVfZWRpdCIsInByb2R1Y3RfYmVoYXZpb3JfY2hhbmdlIiwicmVwb3NpdG9yeV9yZWFkIiwidGFza19icmFuY2hfY29tbWl0IiwidGFza19icmFuY2hfcHVzaCJdLCJhbGxvd2VkX3BhdGhzIjpbImFwcC9zZXJ2aWNlcy9yZWNlcHRpb25fb25lX3Byb3Bvc2FsX3J1bnRpbWUucHkiLCJvcmNoZXN0cmF0aW9uL2NvbnRpbnVpdHkvcmVjZXB0aW9uLW9uZS1idXJlYXUtdHlwZWQtcGxhbi1wcm90b2NvbC9vcGVyYXRvci1jYXRhbG9nLmpzb24iLCJvcmNoZXN0cmF0aW9uL2NvbnRpbnVpdHkvcmVjZXB0aW9uLW9uZS1idXJlYXUtdHlwZWQtcGxhbi1wcm90b2NvbC9wbGFuLXJldmlldy5zY2hlbWEuanNvbiIsInNjcmlwdHMvcmVjZXB0aW9uX29uZV9idXJlYXVfdHlwZWRfcGxhbl9wcm90b2NvbC5weSIsInN0YWdlMV9kZW1vX2h0dHAucHkiLCJzdGF0aWMvZGVtby9zdGFnZTEtaW50ZXJhY3RpdmUuanMiLCJ0ZXN0cy90ZXN0X3JlY2VwdGlvbl9vbmVfc2VsZWN0ZWRfY29udGV4dC5weSIsInRlc3RzL3Rlc3Rfc3RhZ2UxX2J1cmVhdV9wcm9qZWN0aW9uLnB5IiwidGVzdHMvdGVzdF9zdGFnZTFfYnVyZWF1X3N1Z2dlc3Rpb24uY2pzIl0sImFsbG93ZWRfdGFza19raW5kIjoiZzRfc3RhZ2UxX2xvY2FsX3N1Y2Nlc3NvciIsImNvbnRyb2xfc2hhMjU2Ijp7Im9yY2hlc3RyYXRpb24vaGFybmVzc19zZXR0aW5ncy9wcm9ncmFtbWVfcmVjb3ZlcnkueWFtbCI6IjU0OTY1YTFmMmViNDc4N2E5N2I5Y2NhZGUwYjVlYmJmY2MwMmIwODljYjVjMTM2YWU1ZmExODY1ZWU2MjYxMTMiLCJvcmNoZXN0cmF0aW9uX2hhcm5lc3MvYm91bmRlZF9nMWIucHkiOiJmNmUxYmFiNDllMGE3MTkxMzlhNWFmNTUyNGZhMDNlMjQ1N2M4YmNmMzhlY2MzZTk4Yzk1YjhiOWFmMmQ5YTdkIiwib3JjaGVzdHJhdGlvbl9oYXJuZXNzL3JhaXNhX3BvbGljeS5weSI6Ijc3ZWU4MzVhY2E0NjYyNTYxNjZhMzk5Njc1ZDI1M2IzZDM2YmFjZjdjN2U4OTZmNTUyZWFjMjhhNmI5NzlhNzYiLCJ0ZXN0cy90ZXN0X2c0X3N0YWdlMV9zdWNjZXNzb3JfZW50cnkucHkiOiJlZmRhNTkzODUyNzdmNDJmZGFlODNmNTM1MWI3ZGJiZWNkOWI2ZWFjMTQ3ZjViY2VhMTk2ZTkwMDk5YzkzNDI2In0sImV4Y2x1ZGVkX2VmZmVjdHMiOlsidW5yZXZpZXdlZF9hcHBsaWNhdGlvbl9vcl9kYXRhYmFzZV9ydW50aW1lIiwidW5yZXZpZXdlZF9icm93c2VyX29yX21pY3JvcGhvbmVfcnVudGltZSIsInVucmV2aWV3ZWRfdm9pY2VfY2hpbGRfb3JfbmV0d29ya19lZ3Jlc3MiLCJwcm92aWRlcl9pbnZvY2F0aW9uIiwicmVhbF9kYXRhX2FjY2VzcyIsInByb3RlY3RlZF9yZWZfbW92ZW1lbnQiLCJkZXBsb3ltZW50IiwicHVibGljX2xpc3RlbmVyIl0sIm1hcHBpbmdfcmV2aWV3Ijp7InBhdGgiOiJDOi9Vc2Vycy90aGVyZS9FTVI0LXRvb2xzL3NlbGVjdGVkLWNvbnRleHQtYnVyZWF1LWNhbmRpZGF0ZS12My9pbmRlcGVuZGVudC1jb21iaW5lZC1zb3VyY2UtbWFwcGluZy1iaW5kaW5nLXYzLmpzb24iLCJzaGEyNTYiOiI3NDRhNGM4NWNmNWJjYTg0NTZkMjgwZWExMjBiOTE3YTlhYzVlZjAxYTlhMTUzNGM5OWU3NmI2NjYzMTkzZjA1In0sInByZWRlY2Vzc29yX3Njb3BlIjp7InNoYTI1NiI6IjI1ODc4ZmUzYWU2ZTBiMTU5ZWRkNzNhNWE3ODliYTNiOGYyNDA3NGQ1ZjcwYzQ5NTc3MzQyYzBjZWE5MTk2NjYifSwicHJvZHVjdF9zaGEyNTYiOnsiYXBwL3NlcnZpY2VzL3JlY2VwdGlvbl9vbmVfcHJvcG9zYWxfcnVudGltZS5weSI6IjJlMzY4N2RlNWNjZTM4MzM1MWU2YmI1OWVhMzdiZDEzNjUzYzJhMTM0OWZhZTFiNmJiY2MwZGRjZTZmYjFmY2IiLCJvcmNoZXN0cmF0aW9uL2NvbnRpbnVpdHkvcmVjZXB0aW9uLW9uZS1idXJlYXUtdHlwZWQtcGxhbi1wcm90b2NvbC9vcGVyYXRvci1jYXRhbG9nLmpzb24iOiJmYjk2NDIwODQ3N2YxMmYwODRhYWM4NzUwZmUyNWU3ZjJjNWE1ZDY0OGFiNjJkMjlmNTIxZWU1ZDgwMTlmNTc5Iiwib3JjaGVzdHJhdGlvbi9jb250aW51aXR5L3JlY2VwdGlvbi1vbmUtYnVyZWF1LXR5cGVkLXBsYW4tcHJvdG9jb2wvcGxhbi1yZXZpZXcuc2NoZW1hLmpzb24iOiI0NmUwMzNmMWEwNGQ1MTAxODRmMmI4ZTQ2MGM2NDEyNzhkYzRmOTM2ZTE2NmNkOTk2MmExZjQ4Y2Y2MmM1ZjE0Iiwic2NyaXB0cy9yZWNlcHRpb25fb25lX2J1cmVhdV90eXBlZF9wbGFuX3Byb3RvY29sLnB5IjoiZGJhM2JkNTdlODg3ZDkyZTlhM2Q3MWI4NjdhN2ZiNzI4YzM2MzY1ZmRkZWUwODJiMTcwZTU1NzFlNmU1YTRkMCIsInN0YWdlMV9kZW1vX2h0dHAucHkiOiJjNTk0YzFjMGJmYWM3MmM2MzkzNGI2NGM3NmQzZjc2N2FkOWY1ZTFmMWMzNTA4ZWI1YWQyZDIzNmRlOWIwNTI4Iiwic3RhdGljL2RlbW8vc3RhZ2UxLWludGVyYWN0aXZlLmpzIjoiY2NmY2IzMjdiODI2NDIwMTc3NjBiZTY2ZTNmY2FhMjQxNmY0MjU4MTEzZDkyNGQ3MTNmYjNlYjMyNTJkMmVjYSIsInRlc3RzL3Rlc3RfcmVjZXB0aW9uX29uZV9zZWxlY3RlZF9jb250ZXh0LnB5IjoiZWM2MmVhOTUyZmU3MWYxOTI4NDZkMDBkMTVlNTNiNWNlYzgwOWQ5M2UzNmY3MTFiYmZkZWNlOWM3YzU4YTkwNSIsInRlc3RzL3Rlc3Rfc3RhZ2UxX2J1cmVhdV9wcm9qZWN0aW9uLnB5IjoiZGQ5ZTQ0ZWNmMDJiM2MyNzZhMzNjMzI1ZGQ0ZDk5NjM5ZWZiNDdmY2EwOGY1Mzg4YWZjZmUzODgzNWUwMTQ5MyIsInRlc3RzL3Rlc3Rfc3RhZ2UxX2J1cmVhdV9zdWdnZXN0aW9uLmNqcyI6IjNlNWU1ODAyNDBhOTg0MjU0MjlkYjM3NzIxMTY1MTU2MDdiNmJmYjg3YWY1ZjRhNTJkZmQ0NmVmMzhmZmVmN2MifSwicHJvZHVjdF92ZWN0b3IiOnsicGF0aCI6IkM6L1VzZXJzL3RoZXJlL0VNUjQtdG9vbHMvc2VsZWN0ZWQtY29udGV4dC1idXJlYXUtY2FuZGlkYXRlLXYzL3Byb2R1Y3QtdmVjdG9yLXYzLmpzb24iLCJzaGEyNTYiOiIyYTk3YTI0NDEzZGI1MTJhZDgzNDU5MTA2NmFkOTZhNjJhNjY0NzVkNzhlOGMyYzAyOTQxMTU1MzdlZTZkOTE3In0sInJlY29yZGVkX2F0IjoiMjAyNi0xMC0yNVQxNDo1OToxNCswMDowMCIsInJ1bnRpbWVfYmluZGluZ19yZXF1aXJlZCI6dHJ1ZSwic2NoZW1hX3ZlcnNpb24iOiJhcmlhZG5lLmc0X3N0YWdlMV9zdWNjZXNzb3JfZW50cnlfc2NvcGUudjkiLCJzZWxlY3RlZF9iYXNlIjp7ImNvbW1pdCI6IjI0MzFkNDFhM2RmMmQ1MGM3N2E1NjEwY2EwYjBlOTI0NDA3NWVlNmYiLCJ0cmVlIjoiYzE0MTZjODViM2JmZGUwMDg0NTZiNmRiNmMwMjk4YmQ5ZTg2Mjg5NiJ9LCJzb3VyY2Vfc2hhMjU2Ijp7Im9yY2hlc3RyYXRpb25faGFybmVzcy9ib3VuZGVkX2cxYi5weSI6ImY2ZTFiYWI0OWUwYTcxOTEzOWE1YWY1NTI0ZmEwM2UyNDU3YzhiY2YzOGVjYzNlOThjOTViOGI5YWYyZDlhN2QiLCJvcmNoZXN0cmF0aW9uX2hhcm5lc3MvY29uZmlndXJhdGlvbl9jb3JlLnB5IjoiZjdiYTdhODBlYjBhNTkwZjlmYjcxYjg2NGU2YzFmOWY0MzI0MWQ5ZjdkNzBhMzhkYTY3YTkyNDNmZWEyMDhlNSIsIm9yY2hlc3RyYXRpb25faGFybmVzcy9waW5uZWRfcHJvZ3JhbW1lX2dhdGVrZWVwZXIucHkiOiJjMWZlYTlhMjg0OTA2OGVkOGU4N2RiZTFlN2NlYzFjYzdlNzYyZmEyYmM4ODc2ZmMzMmJiZGE4MGQyMjZjZjM5Iiwib3JjaGVzdHJhdGlvbl9oYXJuZXNzL3Byb2dyYW1tZV9hZG1pc3Npb24ucHkiOiJhYzgxNmE4YTc5YjJkODIyMmZhMzU3Nzc3YzA3NTk1MDkyN2U4NmNmMzBjOGE1YjI1ZmZkMDhhNDc0MDUyMTgxIiwib3JjaGVzdHJhdGlvbl9oYXJuZXNzL3JhaXNhX3BvbGljeS5weSI6Ijc3ZWU4MzVhY2E0NjYyNTYxNjZhMzk5Njc1ZDI1M2IzZDM2YmFjZjdjN2U4OTZmNTUyZWFjMjhhNmI5NzlhNzYiLCJvcmNoZXN0cmF0aW9uX2hhcm5lc3MvdHJ1c3RlZF9naXQucHkiOiI0YTg1NmJmZmUyYjY4ZDdjN2UxODc1MTUyNjI5YzkwMjRhMzI2NzliNTlkOWIxZWQ4MzAxYzM2OGQ0MWZmNTI3Iiwic2NyaXB0cy9yYWlzYV9hcmlhZG5lX3JlY292ZXJ5X3ByZWZsaWdodC5weSI6ImVkZmQzN2IzMDY3M2I4NTQ0ZDMwOWI1MzJjOTViM2ZkN2MyMGZmNTkyODgwYThhMDIzNWRmZGU2Y2ZjOGU3ZTQiLCJ0ZXN0cy90ZXN0X2JvdW5kZWRfZzFiLnB5IjoiYmIxYmU4NmNhMzkyMzJmZWEzMGMxZWE4NGNkZmIxMTQ0MjhkNTdiZTBmOGY2N2JmN2U4NmRhYWIwYmE3M2JjNSJ9LCJ2b2ljZV9hY3RpdmF0aW9uIjpmYWxzZX0K"
+    )
+    assert hashlib.sha256(raw).hexdigest() == "0170edc2fcbec1849256c0c8d036aa079c1d5b96dfb05f03349aec5ba2588a7d"
+    return json.loads(raw)
+
+
+def test_exact_time_successor_is_two_existing_paths_and_requires_acceptance(monkeypatch):
+    scope_path = Path(__file__).resolve().parents[1] / bounded_g1b.G4_STAGE1_SUCCESSOR_SCOPE
+    scope = json.loads(scope_path.read_bytes())
+    bounded_g1b.validate_g4_exact_time_scope(scope)
+    assert scope["allowed_paths"] == sorted(bounded_g1b.G4_EXACT_TIME_PRODUCT)
+    assert set(scope["allowed_paths"]) == {
+        "app/services/reception_one_proposal_runtime.py",
+        "app/routers/appointments.py",
+    }
+    assert scope["selected_base"] == bounded_g1b.G4_EXACT_TIME_BASE
+    assert scope["admission_grants_runtime_authority"] is False
+    for changed_field, changed_value in (
+        ("selected_base", {"commit": "0" * 40, "tree": "0" * 40}),
+        ("allowed_paths", scope["allowed_paths"] + ["app/other.py"]),
+        ("product_sha256", {**scope["product_sha256"],
+                            "app/routers/appointments.py": "0" * 64}),
+        ("mapping_review", None),
+    ):
+        changed = copy.deepcopy(scope)
+        changed[changed_field] = changed_value
+        with pytest.raises(bounded_g1b.BoundedG1BError) as caught:
+            bounded_g1b.validate_g4_exact_time_scope(changed)
+        assert caught.value.reason_code == "bounded_g4_exact_time_scope_boundary"
+
+    for stage, kind, paths in (
+        ("enable", "enable_g4_stage1_successor", bounded_g1b.G4_EXACT_TIME_CONTROL),
+        ("apply", "implement_g4_stage1_successor", bounded_g1b.G4_EXACT_TIME_PRODUCT),
+    ):
+        q = {"schema_version": bounded_g1b.G4_EXACT_TIME_SCHEMA,
+             "operation_kind": kind, "stage": stage,
+             "repair_sha256": {p: {} for p in paths}}
+        assert bounded_g1b.operation_paths(kind, q) == paths
+        for replacement in (set(paths) | {"app/other.py"}, set(paths) - {next(iter(paths))}):
+            with pytest.raises(bounded_g1b.BoundedG1BError) as caught:
+                bounded_g1b.operation_paths(kind, dict(
+                    q, repair_sha256={p: {} for p in replacement}))
+            assert caught.value.reason_code == "bounded_g4_exact_time_changed_paths"
+
+
+
+def _exact_time_loader_fixture(monkeypatch, stage):
+    """Exercise the production loader with pinned ordinary files and literal Git stubs."""
+    root = Path(__file__).resolve().parents[1]
+    scope = json.loads((root / bounded_g1b.G4_STAGE1_SUCCESSOR_SCOPE).read_bytes())
+    bounded_g1b.validate_g4_exact_time_scope(scope)
+    target = Path("C:/synthetic-exact-time-target")
+    source = Path("C:/synthetic-exact-time-source")
+    product_root = Path("C:/Users/there/EMR4-tools/selected-bureau-exact-time-candidate-v1")
+    before_files = {
+        "app/services/reception_one_proposal_runtime.py": (
+            Path("C:/Users/there/EMR4-tools/g4-selected-bureau-apply02/app/services/reception_one_proposal_runtime.py"),
+            27603),
+        "app/routers/appointments.py": (
+            Path("C:/Users/there/EMR4-tools/stage1-mock-voice-database-work-v1/attempt-4/case/app/routers/appointments.py"),
+            380498),
+    }
+    after_lengths = {"app/services/reception_one_proposal_runtime.py": 28549,
+                     "app/routers/appointments.py": 381168}
+    before_product = {}
+    after_product = {}
+    for path in sorted(bounded_g1b.G4_EXACT_TIME_PRODUCT):
+        before_product[path] = before_files[path][0].read_bytes()
+        after_product[path] = (product_root / path).read_bytes()
+        assert len(before_product[path]) == before_files[path][1]
+        assert len(after_product[path]) == after_lengths[path]
+        assert hashlib.sha256(before_product[path]).hexdigest() == bounded_g1b.G4_EXACT_TIME_BEFORE_SHA[path]
+        assert hashlib.sha256(after_product[path]).hexdigest() == bounded_g1b.G4_EXACT_TIME_PRODUCT_SHA[path]
+
+    evidence = {}
+    for path, digest in (
+        (bounded_g1b.G4_EXACT_TIME_VECTOR, bounded_g1b.G4_EXACT_TIME_VECTOR_SHA),
+        (bounded_g1b.G4_EXACT_TIME_SOURCE_REVIEW, bounded_g1b.G4_EXACT_TIME_SOURCE_REVIEW_SHA),
+    ):
+        raw = path.read_bytes()
+        assert hashlib.sha256(raw).hexdigest() == digest
+        evidence[path] = raw
+    vector = json.loads(evidence[bounded_g1b.G4_EXACT_TIME_VECTOR])
+    selected = (bounded_g1b.G4_EXACT_TIME_CONTROL if stage == "enable"
+                else bounded_g1b.G4_EXACT_TIME_PRODUCT)
+    inputs = (bounded_g1b.CONFIGURATION_PATHS |
+              {bounded_g1b.STATE, bounded_g1b.GATES, bounded_g1b.OVERLAY,
+               bounded_g1b.AGENTS, bounded_g1b.G4_STAGE1_INTERACTIVE_SCOPE,
+               bounded_g1b.G4_STAGE1_SUCCESSOR_SCOPE,
+               bounded_g1b.G4_STAGE1_SUCCESSOR_TEST, bounded_g1b.G4_CI_WORKFLOW} |
+              bounded_g1b.SOURCE_PATHS | bounded_g1b.CONTROLLER_PATHS |
+              (bounded_g1b.G4_EXACT_TIME_PRODUCT if stage == "apply" else set()))
+    payload = {path: b"synthetic-v10-payload:" + path.encode("utf-8") for path in inputs}
+    for path in ("orchestration_harness/bounded_g1b.py",
+                 "orchestration_harness/raisa_policy.py",
+                 "orchestration/harness_settings/programme_recovery.yaml",
+                 bounded_g1b.G4_STAGE1_SUCCESSOR_TEST):
+        payload[path] = (root / path).read_bytes()
+        assert hashlib.sha256(payload[path]).hexdigest() == scope["control_sha256"][path]
+    payload[bounded_g1b.G4_STAGE1_SUCCESSOR_SCOPE] = bounded_g1b._canonical(scope) + b"\n"
+    if stage == "apply":
+        payload.update(after_product)
+    predecessor = bounded_g1b._canonical(_bureau_v9_scope()) + b"\n"
+    assert hashlib.sha256(predecessor).hexdigest() == scope["predecessor_scope"]["sha256"]
+    base_commit = (bounded_g1b.G4_EXACT_TIME_BASE["commit"] if stage == "enable"
+                   else "b" * 40)
+    base_tree = (bounded_g1b.G4_EXACT_TIME_BASE["tree"] if stage == "enable"
+                 else "c" * 40)
+    committed = dict(payload)
+    if stage == "enable":
+        for path in selected:
+            committed[path] = (predecessor if path == bounded_g1b.G4_STAGE1_SUCCESSOR_SCOPE
+                               else b"synthetic-v10-before:" + path.encode("utf-8"))
+    else:
+        committed.update(before_product)
+    q = {
+        "schema_version": bounded_g1b.G4_EXACT_TIME_SCHEMA,
+        "operation_id": "exact-time-synthetic-" + stage,
+        "operation_kind": ("enable_g4_stage1_successor" if stage == "enable"
+                           else "implement_g4_stage1_successor"),
+        "stage": stage, "phase": "development",
+        "base_commit": base_commit, "base_tree": base_tree,
+        "expected_head": base_commit, "expected_index_tree": base_tree,
+        "candidate_tree": "d" * 40,
+        "source_sha256": copy.deepcopy(scope["source_sha256"]),
+        "payload_sha256": {path: hashlib.sha256(raw).hexdigest()
+                           for path, raw in payload.items()},
+        "repair_sha256": {
+            path: {"before_sha256": hashlib.sha256(committed[path]).hexdigest(),
+                   "after_sha256": hashlib.sha256(payload[path]).hexdigest()}
+            for path in selected},
+        "source_review": {}, "activation_acceptance": None,
+        "product_vector": scope["product_vector"],
+        "mapping_review": scope["mapping_review"],
+    }
+    activation_path = (bounded_g1b.G4_EXACT_TIME_ROOT / "entry-admission-v1" /
+                       "independent-enable-push-effect-review-v1.json")
+    activation = None
+    if stage == "apply":
+        activation = {
+            "status": "PASS", "verdict": "PASS_G4_STAGE1_EXACT_TIME_CONTROL_PUBLICATION_EFFECT",
+            "reviewer_agent": "/root/independent-enable-reviewer",
+            "independent": True, "implementation_authorship": False,
+            "blocking_findings": [], "stage": "enable", "phase": "push",
+            "base": bounded_g1b.G4_EXACT_TIME_BASE["commit"],
+            "commit": base_commit, "candidate_tree": base_tree,
+            "control_activation_accepted": True,
+            "same_attempt_remote_readback_verified": True,
+            "protected_refs_unchanged": True,
+            "whole_inverse_verified_same_attempt": True,
+            "published_ref": bounded_g1b.G4_STAGE1_INTERACTIVE_BACKEND_REF,
+        }
+        raw = json.dumps(activation, sort_keys=True).encode("utf-8")
+        q["activation_acceptance"] = {
+            "path": activation_path.as_posix(),
+            "sha256": hashlib.sha256(raw).hexdigest()}
+        evidence[activation_path] = raw
+    subject_path = (bounded_g1b.G4_EXACT_TIME_ROOT / "entry-admission-v1" /
+                    ("independent-" + stage + "-development-subject-review-v1.json"))
+    review = {
+        "schema": "emr4.g4_operation_review.v1", "status": "PASS",
+        "verdict": "PASS_G4_STAGE1_EXACT_TIME_EXACT_ADMISSION_SUBJECT",
+        "subject_sha256": bounded_g1b.g4_exact_time_review_subject(q),
+        "stage": stage, "phase": "development",
+        "independent": True, "implementation_authorship": False,
+        "blocking_findings": [], "reviewer_agent": "/root/independent-subject-reviewer",
+    }
+    raw = json.dumps(review, sort_keys=True).encode("utf-8")
+    q["source_review"] = {"path": subject_path.as_posix(),
+                          "sha256": hashlib.sha256(raw).hexdigest()}
+    evidence[subject_path] = raw
+
+    def read(path, digest):
+        if path in evidence:
+            raw = evidence[path]
+            assert hashlib.sha256(raw).hexdigest() == digest
+            return raw
+        for root_path in (target, source, Path(vector["owned_candidate_root"])):
+            if path.is_relative_to(root_path):
+                relative = path.relative_to(root_path).as_posix()
+                if root_path == source and relative in bounded_g1b.SOURCE_PATHS | bounded_g1b.CONTROLLER_PATHS:
+                    assert digest == q["source_sha256"][relative]
+                    return (payload[relative] if stage == "enable" and relative in selected
+                            else committed[relative])
+                if root_path == target:
+                    assert digest == q["payload_sha256"][relative]
+                    assert hashlib.sha256(payload[relative]).hexdigest() == digest
+                    return payload[relative]
+                assert relative in after_product
+                assert digest == bounded_g1b.G4_EXACT_TIME_PRODUCT_SHA[relative]
+                return after_product[relative]
+        raise AssertionError("unexpected synthetic read")
+
+    def fake_git_bytes(_target, *args):
+        if args == ("cat-file", "blob", bounded_g1b.G4_EXACT_TIME_BASE["commit"] +
+                    ":" + bounded_g1b.G4_STAGE1_SUCCESSOR_SCOPE):
+            return predecessor
+        if args[:3] == ("ls-tree", "-z", base_commit):
+            assert args[3] == "--" and args[4] in selected
+            return b"100644 blob present\x00"
+        assert args[:2] == ("cat-file", "blob")
+        commit, relative = args[2].split(":", 1)
+        if commit == bounded_g1b.G4_EXACT_TIME_BASE["commit"] and relative in (
+                bounded_g1b.STATE, bounded_g1b.GATES, bounded_g1b.OVERLAY,
+                bounded_g1b.AGENTS):
+            return committed[relative]
+        assert commit == base_commit and relative in committed
+        return committed[relative]
+
+    def fake_git(_target, *args):
+        if args == ("rev-parse", bounded_g1b.G4_EXACT_TIME_BASE["commit"] + "^{tree}"):
+            return bounded_g1b.G4_EXACT_TIME_BASE["tree"]
+        assert args == ("cat-file", "commit", base_commit)
+        return ("tree " + base_tree + "\nparent " +
+                bounded_g1b.G4_EXACT_TIME_BASE["commit"] + "\n\nsynthetic")
+
+    monkeypatch.setattr(bounded_g1b.trusted_git, "run_git_bytes", fake_git_bytes)
+    monkeypatch.setattr(bounded_g1b.trusted_git, "run_git", fake_git)
+    monkeypatch.setattr(bounded_g1b.trusted_git, "attest_target_index",
+                        lambda *_args, **_kwargs: {"synthetic": True})
+
+    def load(selected_q):
+        return bounded_g1b._load_g4_exact_time_inputs(
+            None, target, source, bounded_g1b.G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT,
+            Path("C:/synthetic-exact-time-scratch"), selected_q, read, {})
+    return q, load, evidence, subject_path, activation_path
+
+
+@pytest.mark.parametrize("stage", ["enable", "apply"])
+def test_exact_time_loader_valid_baseline_and_targeted_rejections(monkeypatch, stage):
+    q, load, evidence, subject_path, activation_path = _exact_time_loader_fixture(
+        monkeypatch, stage)
+    loaded = load(q)
+    assert loaded.binding == q
+    assert loaded.evidence["scope"]["schema_version"] == bounded_g1b.G4_EXACT_TIME_SCOPE_SCHEMA
+    assert loaded.evidence["review"]["subject_sha256"] == bounded_g1b.g4_exact_time_review_subject(q)
+
+    def rejected(changed, reason):
+        with pytest.raises(bounded_g1b.BoundedG1BError) as caught:
+            load(changed)
+        assert caught.value.reason_code == reason
+
+    changed = copy.deepcopy(q)
+    changed["phase"] = "runtime"
+    rejected(changed, "bounded_g4_exact_time_binding_version")
+    changed = copy.deepcopy(q)
+    changed["repair_sha256"]["app/other.py"] = {"before_sha256": "0" * 64,
+                                                     "after_sha256": "1" * 64}
+    rejected(changed, "bounded_g4_exact_time_changed_paths")
+    changed = copy.deepcopy(q)
+    changed["source_sha256"]["app/other.py"] = "0" * 64
+    rejected(changed, "bounded_g4_exact_time_sources")
+    changed = copy.deepcopy(q)
+    changed["source_sha256"]["orchestration_harness/bounded_g1b.py"] = "0" * 64
+    rejected(changed, "bounded_g4_exact_time_scope_sources")
+    changed = copy.deepcopy(q)
+    del changed["payload_sha256"][bounded_g1b.STATE]
+    rejected(changed, "bounded_g4_exact_time_payload_paths")
+    changed = copy.deepcopy(q)
+    changed["payload_sha256"]["app/other.py"] = "0" * 64
+    rejected(changed, "bounded_g4_exact_time_payload_paths")
+    changed = copy.deepcopy(q)
+    first_repair = sorted(changed["repair_sha256"])[0]
+    changed["repair_sha256"][first_repair] = {}
+    rejected(changed, "bounded_g4_exact_time_change_pair")
+    changed = copy.deepcopy(q)
+    changed["repair_sha256"][first_repair]["after_sha256"] = "0" * 64
+    rejected(changed, "bounded_g4_exact_time_change_preimage")
+    changed = copy.deepcopy(q)
+    changed["candidate_tree"] = "e" * 40
+    rejected(changed, "bounded_g4_exact_time_independent_subject")
+    review = json.loads(evidence[subject_path])
+    review["phase"] = "pre-push"
+    evidence[subject_path] = json.dumps(review, sort_keys=True).encode("utf-8")
+    changed = copy.deepcopy(q)
+    changed["source_review"]["sha256"] = hashlib.sha256(evidence[subject_path]).hexdigest()
+    rejected(changed, "bounded_g4_exact_time_independent_subject")
+    review["phase"] = "development"
+    review["independent"] = False
+    evidence[subject_path] = json.dumps(review, sort_keys=True).encode("utf-8")
+    changed = copy.deepcopy(q)
+    changed["source_review"]["sha256"] = hashlib.sha256(evidence[subject_path]).hexdigest()
+    rejected(changed, "bounded_g4_exact_time_independent_subject")
+    if stage == "enable":
+        changed = copy.deepcopy(q)
+        changed["base_commit"] = "0" * 40
+        rejected(changed, "bounded_g4_exact_time_enable_base")
+    else:
+        changed = copy.deepcopy(q)
+        changed["activation_acceptance"] = None
+        rejected(changed, "bounded_g4_exact_time_activation_row")
+        activation = json.loads(evidence[activation_path])
+        activation["same_attempt_remote_readback_verified"] = False
+        evidence[activation_path] = json.dumps(activation, sort_keys=True).encode("utf-8")
+        changed = copy.deepcopy(q)
+        changed["activation_acceptance"]["sha256"] = hashlib.sha256(
+            evidence[activation_path]).hexdigest()
+        rejected(changed, "bounded_g4_exact_time_activation_acceptance")
 
 
 def test_selected_bureau_v9_scope_exact_nine_and_rejects_widening():
