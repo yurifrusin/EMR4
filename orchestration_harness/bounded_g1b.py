@@ -3431,6 +3431,8 @@ def operation_paths(kind: str, binding: dict | None = None) -> frozenset[str]:
         return _g4_ci_paths(binding)
     if kind in G4_STAGE1_SUCCESSOR_KINDS and _is_g4_receipt_binding(binding):
         return _g4_receipt_paths(kind, binding)
+    if kind in G4_STAGE1_SUCCESSOR_KINDS and _is_g4_account_bootstrap_binding(binding):
+        return _g4_account_bootstrap_paths(kind, binding)
     if kind in G4_STAGE1_SUCCESSOR_KINDS and _is_g4_correlation_binding_binding(binding):
         return _g4_correlation_binding_paths(kind, binding)
     if kind in G4_STAGE1_SUCCESSOR_KINDS and _is_g4_status_contract_binding(binding):
@@ -3492,6 +3494,10 @@ def _operation(kind: str, binding: dict | None = None) -> dict:
                 "gate": "G4", "limits": G4_CI_LIMITS}
     if kind in G4_STAGE1_SUCCESSOR_KINDS and _is_g4_receipt_binding(binding):
         return {"paths": paths, "g4_receipt_source": True,
+                "profile": raisa_policy.G4_STAGE1_SUCCESSOR_PROFILE,
+                "gate": "G4", "limits": G4_STAGE1_SUCCESSOR_LIMITS}
+    if kind in G4_STAGE1_SUCCESSOR_KINDS and _is_g4_account_bootstrap_binding(binding):
+        return {"paths": paths, "g4_account_bootstrap_source": True,
                 "profile": raisa_policy.G4_STAGE1_SUCCESSOR_PROFILE,
                 "gate": "G4", "limits": G4_STAGE1_SUCCESSOR_LIMITS}
     if kind in G4_STAGE1_SUCCESSOR_KINDS and _is_g4_correlation_binding_binding(binding):
@@ -6424,6 +6430,9 @@ def load_bounded_g1b_inputs(context: BoundedG1BContext) -> BoundedG1BInputs:
     if binding.get("operation_kind") in G4_STAGE1_SUCCESSOR_KINDS and _is_g4_receipt_binding(binding):
         return _load_g4_receipt_inputs(
             context, target, source, evidence_root, scratch, binding, read, snapshots)
+    if binding.get("operation_kind") in G4_STAGE1_SUCCESSOR_KINDS and _is_g4_account_bootstrap_binding(binding):
+        return _load_g4_account_bootstrap_inputs(
+            context, target, source, evidence_root, scratch, binding, read, snapshots)
     if binding.get("operation_kind") in G4_STAGE1_SUCCESSOR_KINDS and _is_g4_correlation_binding_binding(binding):
         return _load_g4_correlation_binding_inputs(
             context, target, source, evidence_root, scratch, binding, read, snapshots)
@@ -6625,6 +6634,8 @@ def _validate_loaded_policy(inputs: BoundedG1BInputs) -> tuple[dict[str, bytes],
         return _validate_g4_ci_loaded_policy(inputs)
     if operation.get("g4_receipt_source"):
         return _validate_g4_receipt_loaded_policy(inputs)
+    if operation.get("g4_account_bootstrap_source"):
+        return _validate_g4_account_bootstrap_loaded_policy(inputs)
     if operation.get("g4_correlation_binding_source"):
         return _validate_g4_correlation_binding_loaded_policy(inputs)
     if operation.get("g4_status_contract_source"):
@@ -12584,6 +12595,306 @@ def _validate_g4_receipt_loaded_policy(inputs):
         raise BoundedG1BError(error.reason_code) from error
     selected = (G4_RECEIPT_CONTROL if inputs.binding["stage"] == "enable"
                 else G4_RECEIPT_PRODUCT)
+    return {path: inputs.payloads[path] for path in selected}, configuration
+
+G4_ACCOUNT_BOOTSTRAP_SCHEMA = "ariadne.g4_stage1_local_mock_account_bootstrap_operation_binding.v1"
+G4_ACCOUNT_BOOTSTRAP_SCOPE_SCHEMA = "ariadne.g4_stage1_successor_entry_scope.v14"
+G4_ACCOUNT_BOOTSTRAP_BASE = {"commit": "f7a5a790bce6ff23decd06af60108a980bee3089", "tree": "aed9e3032a517a99b611f1262a858f641364a585"}
+G4_ACCOUNT_BOOTSTRAP_ROOT = G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT / "local-mock-account-bootstrap-successor-v2"
+G4_ACCOUNT_BOOTSTRAP_VECTOR = Path("C:/Users/there/EMR4-tools/local-mock-account-bootstrap-candidate-v1/source-vector-v1.json")
+G4_ACCOUNT_BOOTSTRAP_VECTOR_SHA = "f2312b35a4187a9fe835f9fb3dac91d7938652d3048866ca0e2d8fad61186620"
+G4_ACCOUNT_BOOTSTRAP_SOURCE_REVIEW = Path("C:/Users/there/EMR4-tools/local-mock-account-bootstrap-candidate-v1/independent-bootstrap-source-review-v1.json")
+G4_ACCOUNT_BOOTSTRAP_SOURCE_REVIEW_SHA = "f9e6c014104ca3d3a7150a732136b4a2f3ffc677ff2557e49816401e1f482cb9"
+G4_ACCOUNT_BOOTSTRAP_CONTROL = frozenset({G4_AUDIT_CODE, G4_STAGE1_SUCCESSOR_SCOPE,
+                                        G4_STAGE1_SUCCESSOR_TEST})
+G4_ACCOUNT_BOOTSTRAP_BEFORE_SHA = {'alembic/versions/c8d9e0f1a2b3_add_account_membership_bridge.py': None, 'alembic/versions/d9e0f1a2b3c4_add_account_bootstrap_access.py': None, 'app/dependencies.py': '70574af69c73664a9f8ebda15b749bc5b5b25fe291a55be1f080096146bf47bc', 'app/models/__init__.py': '297ba61caa0152b36ea4f47e0e3585d16aeb36e3aeb07bba8fd06c70ba0f41c5', 'app/models/account_membership.py': None, 'app/routers/auth.py': '40f661c4950519fe24425e9a38a385d70e50d15a8849d97df34d20e60ce4408a', 'app/schemas/auth.py': '955011259787d360ff62fcb69e98f5a281c1daeb218d6fa704a348118325aeca', 'app/services/account_access.py': None, 'app/services/auth_service.py': 'c7380e744bc42be006b34546769b76eb3b8f010b8602513a64f3865c76c1f33c', 'tests/test_account_bootstrap.py': None, 'tests/test_account_membership_persistence.py': None}
+G4_ACCOUNT_BOOTSTRAP_PRODUCT_SHA = {'alembic/versions/c8d9e0f1a2b3_add_account_membership_bridge.py': 'f64ccbc9d05070e1cf0dc84fa145f27229245aef96bd9bd75a2433de51e0f73e', 'alembic/versions/d9e0f1a2b3c4_add_account_bootstrap_access.py': '06663906d285ea147062cbadc665ccc9511906bca7bc320f8b73984808095cbc', 'app/dependencies.py': '0e315c88b5231bdefa768d4e7c7708dae056ead1d9902270c747b3b519fa0b46', 'app/models/__init__.py': '29ad2b2034b016630d2157940d829fffb294f23c1ec2fb246f87a653d81268f2', 'app/models/account_membership.py': '81bdc94dd58b806591807d662180c240351afc910e3e18dba0911703915c9502', 'app/routers/auth.py': 'f5e2a87e9fca99758fec6b69a9a64dc43257fb0a41285815eed29701af3eb893', 'app/schemas/auth.py': '5815412abf75515ed9cb9089042404587cb54f5e7bdc87047864ddfdd7936234', 'app/services/account_access.py': '7c3efc21b9e437481a09bd935c87aaacd97de4f73c9c811a8430a8a7ae3c7d17', 'app/services/auth_service.py': '402f57c68a3f3a2c55c0215f9e746ae956c4c5f57bb9ab553dacecc8f9e6cb5d', 'tests/test_account_bootstrap.py': '7ac93a512dae14aa5d693b924c9e69f1351c6d9549b0673281e5f55546eaffb8', 'tests/test_account_membership_persistence.py': '5ced8b36fecd3a964a90efcf3d4f40a33fbe8b86a2307bd24dbd6326cb9fd506'}
+G4_ACCOUNT_BOOTSTRAP_PRODUCT_BYTES = {'alembic/versions/c8d9e0f1a2b3_add_account_membership_bridge.py': 7155, 'alembic/versions/d9e0f1a2b3c4_add_account_bootstrap_access.py': 23018, 'app/dependencies.py': 3146, 'app/models/__init__.py': 3161, 'app/models/account_membership.py': 2892, 'app/routers/auth.py': 4721, 'app/schemas/auth.py': 1025, 'app/services/account_access.py': 4596, 'app/services/auth_service.py': 4135, 'tests/test_account_bootstrap.py': 9873, 'tests/test_account_membership_persistence.py': 6347}
+G4_ACCOUNT_BOOTSTRAP_PRODUCT = frozenset(G4_ACCOUNT_BOOTSTRAP_PRODUCT_SHA)
+G4_ACCOUNT_BOOTSTRAP_BINDING_KEYS = G4_BUREAU_BINDING_KEYS
+G4_ACCOUNT_BOOTSTRAP_SCOPE_KEYS = G4_BUREAU_SCOPE_KEYS
+
+
+def _validate_g4_account_bootstrap_vector(vector):
+    rows = vector.get("rows")
+    _need(vector.get("schema") == "local-mock-account-bootstrap-coupled-source-vector-v1"
+          and vector.get("accepted_parent_commit") == "ee33ed7fe61b702acc013b89b03dc2dc1aa11dd9"
+          and vector.get("accepted_parent_tree") == "39663edc3b87aee5980e4b0212446e365aa183ae"
+          and type(rows) is list and len(rows) == 11
+          and all(type(row) is dict and type(row.get("relative_path")) is str for row in rows)
+          and len({row["relative_path"] for row in rows}) == 11
+          and {row["relative_path"]: row.get("before_sha256") for row in rows} == G4_ACCOUNT_BOOTSTRAP_BEFORE_SHA
+          and {row["relative_path"]: row.get("after_sha256") for row in rows} == G4_ACCOUNT_BOOTSTRAP_PRODUCT_SHA
+          and {row["relative_path"]: row.get("after_bytes") for row in rows} == G4_ACCOUNT_BOOTSTRAP_PRODUCT_BYTES
+          and all(type(row.get("after_bytes")) is int
+              and row.get("after_path") == (G4_ACCOUNT_BOOTSTRAP_VECTOR.parent / "after" / row["relative_path"]).as_posix()
+              for row in rows), "bounded_g4_account_bootstrap_vector")
+    return rows
+
+
+
+def _is_g4_account_bootstrap_binding(binding):
+    return type(binding) is dict and binding.get("schema_version") == G4_ACCOUNT_BOOTSTRAP_SCHEMA
+
+
+def _g4_account_bootstrap_paths(kind, binding):
+    _need(kind in G4_STAGE1_SUCCESSOR_KINDS
+          and _is_g4_account_bootstrap_binding(binding)
+          and binding.get("operation_kind") == kind
+          and binding.get("stage") in {"enable", "apply"}
+          and ((kind == "enable_g4_stage1_successor") == (binding["stage"] == "enable"))
+          and type(binding.get("repair_sha256")) is dict,
+          "bounded_g4_account_bootstrap_binding_kind")
+    paths = G4_ACCOUNT_BOOTSTRAP_CONTROL if binding["stage"] == "enable" else G4_ACCOUNT_BOOTSTRAP_PRODUCT
+    _need(set(binding["repair_sha256"]) == paths,
+          "bounded_g4_account_bootstrap_changed_paths")
+    return paths
+
+
+def g4_account_bootstrap_review_subject(q):
+    return _sha(_canonical({key: q[key] for key in (
+        "schema_version", "operation_id", "operation_kind", "stage", "phase",
+        "base_commit", "base_tree", "expected_head", "expected_index_tree",
+        "candidate_tree", "source_sha256", "payload_sha256", "repair_sha256",
+        "activation_acceptance", "product_vector", "mapping_review")}))
+
+
+def validate_g4_account_bootstrap_scope(scope):
+    _keys(scope, G4_ACCOUNT_BOOTSTRAP_SCOPE_KEYS, "bounded_g4_account_bootstrap_scope_schema")
+    _need(scope["schema_version"] == G4_ACCOUNT_BOOTSTRAP_SCOPE_SCHEMA
+          and scope["selected_base"] == G4_ACCOUNT_BOOTSTRAP_BASE
+          and _g4_audit_timestamp(scope["recorded_at"])
+          and scope["active_profile"] == raisa_policy.G4_STAGE1_SUCCESSOR_PROFILE
+          and scope["allowed_task_kind"] == "g4_stage1_local_successor"
+          and scope["allowed_paths"] == sorted(G4_ACCOUNT_BOOTSTRAP_PRODUCT)
+          and scope["allowed_effects"] == sorted(EFFECTS | {"product_behavior_change"})
+          and scope["runtime_binding_required"] is True
+          and scope["admission_grants_runtime_authority"] is False
+          and scope["voice_activation"] is False
+          and scope["excluded_effects"] == [
+              "unreviewed_application_or_database_runtime",
+              "unreviewed_browser_or_microphone_runtime",
+              "unreviewed_voice_child_or_network_egress", "provider_invocation",
+              "real_data_access", "protected_ref_movement", "deployment",
+              "public_listener"]
+          and scope["product_sha256"] == G4_ACCOUNT_BOOTSTRAP_PRODUCT_SHA
+          and scope["product_vector"] == {
+              "path": G4_ACCOUNT_BOOTSTRAP_VECTOR.as_posix(),
+              "sha256": G4_ACCOUNT_BOOTSTRAP_VECTOR_SHA}
+          and scope["mapping_review"] == {
+              "path": G4_ACCOUNT_BOOTSTRAP_SOURCE_REVIEW.as_posix(),
+              "sha256": G4_ACCOUNT_BOOTSTRAP_SOURCE_REVIEW_SHA}
+          and scope["predecessor_scope"] == {
+              "sha256": "5b2460fafa34d66f160277e527a9779a815cb69e6fb06e656d87629f71c710de"},
+          "bounded_g4_account_bootstrap_scope_boundary")
+    sources = _digest_map(scope["source_sha256"], SOURCE_PATHS | CONTROLLER_PATHS,
+                          "bounded_g4_account_bootstrap_sources")
+    control = _digest_map(scope["control_sha256"],
+                          G4_ACCOUNT_BOOTSTRAP_CONTROL - {G4_STAGE1_SUCCESSOR_SCOPE},
+                          "bounded_g4_account_bootstrap_control_sources")
+    _need(sources[G4_AUDIT_CODE] == control[G4_AUDIT_CODE],
+          "bounded_g4_account_bootstrap_source_vector")
+    return sources
+
+
+def _g4_account_bootstrap_review(read, row, evidence_root, subject, stage, phase):
+    _keys(row, {"path", "sha256"}, "bounded_g4_account_bootstrap_review_row")
+    path = G4_ACCOUNT_BOOTSTRAP_ROOT / "entry-admission-v1" / (
+        "independent-" + stage + "-" + phase + "-subject-review-v1.json")
+    _need(Path(row["path"]) == path and path.is_relative_to(evidence_root),
+          "bounded_g4_account_bootstrap_review_path")
+    review = _json(read(path, row["sha256"]))
+    _need(review.get("schema") == "emr4.g4_operation_review.v1"
+          and review.get("status") == "PASS"
+          and review.get("verdict") == "PASS_G4_STAGE1_ACCOUNT_BOOTSTRAP_EXACT_ADMISSION_SUBJECT"
+          and review.get("subject_sha256") == subject
+          and review.get("independent") is True
+          and review.get("implementation_authorship") is False
+          and review.get("blocking_findings") == []
+          and type(review.get("reviewer_agent")) is str
+          and review["reviewer_agent"] not in {"", "/root", "/root/account_entry_control_author"}
+          and review.get("stage") == stage and review.get("phase") == phase,
+          "bounded_g4_account_bootstrap_independent_subject")
+    return review
+
+
+def _load_g4_account_bootstrap_inputs(context, target, source, evidence_root, scratch,
+                               q, read, snapshots):
+    _keys(q, G4_ACCOUNT_BOOTSTRAP_BINDING_KEYS, "bounded_g4_account_bootstrap_binding_schema")
+    _need(_is_g4_account_bootstrap_binding(q)
+          and q["phase"] in {"development", "pre-push", "post-push"}
+          and type(q["operation_id"]) is str
+          and re.fullmatch(r"[a-z0-9][a-z0-9-]{1,79}", q["operation_id"]),
+          "bounded_g4_account_bootstrap_binding_version")
+    for key in ("base_commit", "base_tree", "expected_head",
+                "expected_index_tree", "candidate_tree"):
+        _need(type(q[key]) is str and re.fullmatch(r"[0-9a-f]{40}", q[key]),
+              "bounded_g4_account_bootstrap_git_identity")
+    paths = _g4_account_bootstrap_paths(q["operation_kind"], q)
+    _need(q["product_vector"] == {
+              "path": G4_ACCOUNT_BOOTSTRAP_VECTOR.as_posix(),
+              "sha256": G4_ACCOUNT_BOOTSTRAP_VECTOR_SHA}
+          and q["mapping_review"] == {
+              "path": G4_ACCOUNT_BOOTSTRAP_SOURCE_REVIEW.as_posix(),
+              "sha256": G4_ACCOUNT_BOOTSTRAP_SOURCE_REVIEW_SHA},
+          "bounded_g4_account_bootstrap_product_pins")
+    vector = _json(read(G4_ACCOUNT_BOOTSTRAP_VECTOR, G4_ACCOUNT_BOOTSTRAP_VECTOR_SHA))
+    _validate_g4_account_bootstrap_vector(vector)
+    mapping = _json(read(G4_ACCOUNT_BOOTSTRAP_SOURCE_REVIEW, G4_ACCOUNT_BOOTSTRAP_SOURCE_REVIEW_SHA))
+    _need(mapping.get("schema") == "emr4.local_mock_account_bootstrap_source_review.v1"
+          and mapping.get("status") == "PASS_INERT_COUPLED_SOURCE_WITH_EXECUTION_PREREQUISITES"
+          and mapping.get("verdict") == "PASS_STATIC_SOURCE_FOR_NARROW_ADMISSION_PREPARATION_ONLY"
+          and mapping.get("source_vector_sha256") == G4_ACCOUNT_BOOTSTRAP_VECTOR_SHA
+          and mapping.get("accepted_parent_commit") == "ee33ed7fe61b702acc013b89b03dc2dc1aa11dd9"
+          and mapping.get("accepted_parent_tree") == "39663edc3b87aee5980e4b0212446e365aa183ae"
+          and mapping.get("independent") is True
+          and mapping.get("implementation_authorship") is False
+          and mapping.get("blocking_source_findings") == []
+          and type(mapping.get("reviewer_agent")) is str
+          and mapping["reviewer_agent"] not in {"", "/root", "/root/account_entry_control_author",
+              "/root/onboarding_persistence_candidate_61"},
+          "bounded_g4_account_bootstrap_independent_source")
+    _need(_sha(trusted_git.run_git_bytes(target, "cat-file", "blob",
+          G4_ACCOUNT_BOOTSTRAP_BASE["commit"] + ":" + G4_STAGE1_SUCCESSOR_SCOPE))
+          == "5b2460fafa34d66f160277e527a9779a815cb69e6fb06e656d87629f71c710de"
+          and trusted_git.run_git(target, "rev-parse",
+              G4_ACCOUNT_BOOTSTRAP_BASE["commit"] + "^{tree}") == G4_ACCOUNT_BOOTSTRAP_BASE["tree"],
+          "bounded_g4_account_bootstrap_predecessor")
+    if q["stage"] == "enable":
+        _need(q["base_commit"] == G4_ACCOUNT_BOOTSTRAP_BASE["commit"]
+              and q["base_tree"] == G4_ACCOUNT_BOOTSTRAP_BASE["tree"]
+              and q["activation_acceptance"] is None,
+              "bounded_g4_account_bootstrap_enable_base")
+    else:
+        _keys(q["activation_acceptance"], {"path", "sha256"},
+              "bounded_g4_account_bootstrap_activation_row")
+        activation_path = G4_ACCOUNT_BOOTSTRAP_ROOT / "entry-admission-v1/independent-enable-push-effect-review-v1.json"
+        _need(Path(q["activation_acceptance"]["path"]) == activation_path,
+              "bounded_g4_account_bootstrap_activation_path")
+        activation = _json(read(activation_path, q["activation_acceptance"]["sha256"]))
+        _need(activation.get("status") == "PASS"
+              and activation.get("verdict") == "PASS_G4_STAGE1_ACCOUNT_BOOTSTRAP_CONTROL_PUBLICATION_EFFECT"
+              and type(activation.get("reviewer_agent")) is str
+              and activation["reviewer_agent"] not in {"", "/root", "/root/account_entry_control_author"}
+              and activation.get("independent") is True
+              and activation.get("implementation_authorship") is False
+              and activation.get("blocking_findings") == []
+              and activation.get("stage") == "enable"
+              and activation.get("phase") == "push"
+              and activation.get("base") == G4_ACCOUNT_BOOTSTRAP_BASE["commit"]
+              and activation.get("commit") == q["base_commit"]
+              and activation.get("candidate_tree") == q["base_tree"]
+              and activation.get("control_activation_accepted") is True
+              and activation.get("same_attempt_remote_readback_verified") is True
+              and activation.get("protected_refs_unchanged") is True
+              and activation.get("whole_inverse_verified_same_attempt") is True
+              and activation.get("published_ref") == G4_STAGE1_INTERACTIVE_BACKEND_REF,
+              "bounded_g4_account_bootstrap_activation_acceptance")
+        headers = trusted_git.run_git(target, "cat-file", "commit",
+                                      q["base_commit"]).split("\n\n", 1)[0].splitlines()
+        _need([h for h in headers if h.startswith("parent ")]
+              == ["parent " + G4_ACCOUNT_BOOTSTRAP_BASE["commit"]]
+              and [h for h in headers if h.startswith("tree ")]
+              == ["tree " + q["base_tree"]],
+              "bounded_g4_account_bootstrap_activation_parent")
+    sources = _digest_map(q["source_sha256"], SOURCE_PATHS | CONTROLLER_PATHS,
+                          "bounded_g4_account_bootstrap_sources")
+    inputs = (CONFIGURATION_PATHS | {STATE, GATES, OVERLAY, AGENTS,
+              G4_STAGE1_INTERACTIVE_SCOPE, G4_STAGE1_SUCCESSOR_SCOPE,
+              G4_STAGE1_SUCCESSOR_TEST, G4_CI_WORKFLOW}
+              | SOURCE_PATHS | CONTROLLER_PATHS
+              | (G4_ACCOUNT_BOOTSTRAP_PRODUCT if q["stage"] == "apply" else set()))
+    pins = _digest_map(q["payload_sha256"], inputs,
+                       "bounded_g4_account_bootstrap_payload_paths")
+    payloads = {path: read(target / path, digest) for path, digest in sorted(pins.items())}
+    scope = _json(payloads[G4_STAGE1_SUCCESSOR_SCOPE])
+    validate_g4_account_bootstrap_scope(scope)
+    _need(scope["source_sha256"] == sources
+          and scope["product_vector"] == q["product_vector"]
+          and scope["mapping_review"] == q["mapping_review"]
+          and payloads[G4_STAGE1_SUCCESSOR_SCOPE] == _canonical(scope) + b"\n"
+          and all(_sha(payloads[p]) == d for p, d in scope["control_sha256"].items()),
+          "bounded_g4_account_bootstrap_scope_sources")
+    for path, digest in sources.items():
+        candidate = read(source / path, digest)
+        if q["stage"] == "enable" and path in G4_ACCOUNT_BOOTSTRAP_CONTROL:
+            _need(candidate == payloads[path], "bounded_g4_account_bootstrap_control_candidate")
+        else:
+            _need(candidate == trusted_git.run_git_bytes(
+                target, "cat-file", "blob", q["base_commit"] + ":" + path),
+                "bounded_g4_account_bootstrap_installed_source")
+    for path, pair in q["repair_sha256"].items():
+        _keys(pair, {"before_sha256", "after_sha256"},
+              "bounded_g4_account_bootstrap_change_pair")
+        committed = trusted_git.run_git_bytes(target, "ls-tree", "-z",
+                                               q["base_commit"], "--", path)
+        previous = (_sha(trusted_git.run_git_bytes(target, "cat-file", "blob",
+                    q["base_commit"] + ":" + path)) if committed else None)
+        expected = pins[path] if q["stage"] == "enable" else G4_ACCOUNT_BOOTSTRAP_PRODUCT_SHA[path]
+        _need(pair == {"before_sha256": previous, "after_sha256": expected}
+              and previous != expected and _sha(payloads[path]) == expected,
+              "bounded_g4_account_bootstrap_change_preimage")
+        if q["stage"] == "apply":
+            row = next(x for x in vector["rows"] if x["relative_path"] == path)
+            _need(previous == row["before_sha256"]
+                  and payloads[path] == read(
+                      Path(row["after_path"]), expected)
+                  and payloads[path] == read(source / path, expected)
+                  and len(payloads[path]) == row["after_bytes"],
+                  "bounded_g4_account_bootstrap_product_source")
+    for path in inputs - paths:
+        _need(trusted_git.run_git_bytes(target, "cat-file", "blob",
+              q["base_commit"] + ":" + path) == payloads[path],
+              "bounded_g4_account_bootstrap_unowned_change")
+    review = _g4_account_bootstrap_review(read, q["source_review"], evidence_root,
+                                   g4_account_bootstrap_review_subject(q),
+                                   q["stage"], q["phase"])
+    attested = inputs - paths if q["phase"] == "development" else inputs
+    observation = trusted_git.attest_target_index(
+        target, attested_paths=tuple(sorted(attested)),
+        expected_head=q["expected_head"], expected_index_tree=q["expected_index_tree"],
+        scratch_parent=scratch)
+    if q["phase"] == "development":
+        _need(q["expected_head"] == q["base_commit"]
+              and q["expected_index_tree"] in {q["base_tree"], q["candidate_tree"]},
+              "bounded_g4_account_bootstrap_development_binding")
+    else:
+        headers = trusted_git.run_git(target, "cat-file", "commit",
+                                      q["expected_head"]).split("\n\n", 1)[0].splitlines()
+        _need([h for h in headers if h.startswith("parent ")]
+              == ["parent " + q["base_commit"]]
+              and [h for h in headers if h.startswith("tree ")]
+              == ["tree " + q["candidate_tree"]]
+              and q["expected_index_tree"] == q["candidate_tree"],
+              "bounded_g4_account_bootstrap_committed_binding")
+    for path, snapshot in snapshots.items():
+        _need(trusted_git._read_regular_snapshot(path, maximum_bytes=2 * 1024 * 1024)
+              == snapshot, "bounded_g4_account_bootstrap_snapshot_drift")
+    before = {path: trusted_git.run_git_bytes(target, "cat-file", "blob",
+              G4_ACCOUNT_BOOTSTRAP_BASE["commit"] + ":" + path)
+              for path in (STATE, GATES, OVERLAY, AGENTS)}
+    _need(all(payloads[p] == before[p] for p in (STATE, GATES, AGENTS)),
+          "bounded_g4_account_bootstrap_state_unchanged")
+    return BoundedG1BInputs(q, before, payloads,
+        {"scope": scope, "vector": vector, "mapping": mapping, "review": review},
+        observation)
+
+
+def _validate_g4_account_bootstrap_loaded_policy(inputs):
+    scope = inputs.evidence["scope"]
+    validate_g4_account_bootstrap_scope(scope)
+    try:
+        configuration = raisa_policy.validate_recovery_configuration(
+            documents={Path(path).name: inputs.payloads[path]
+                       for path in CONFIGURATION_PATHS},
+            expected_sha256={Path(path).name: inputs.binding["payload_sha256"][path]
+                             for path in CONFIGURATION_PATHS},
+            agents_text=inputs.payloads[AGENTS].decode("utf-8"),
+            state=_json(inputs.payloads[STATE]))
+    except (raisa_policy.RaisaPolicyError, configuration_core.ConfigurationError) as error:
+        raise BoundedG1BError(error.reason_code) from error
+    selected = (G4_ACCOUNT_BOOTSTRAP_CONTROL if inputs.binding["stage"] == "enable"
+                else G4_ACCOUNT_BOOTSTRAP_PRODUCT)
     return {path: inputs.payloads[path] for path in selected}, configuration
 
 # A separate G4 source-entry operation. The active successor profile and its v7

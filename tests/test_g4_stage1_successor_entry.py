@@ -3199,8 +3199,7 @@ def test_correlation_binding_subject_reviews_bind_each_phase_and_independence(mo
 
 
 def test_receipt_successor_is_two_receipt_paths_and_requires_acceptance(monkeypatch):
-    scope_path = Path(__file__).resolve().parents[1] / bounded_g1b.G4_STAGE1_SUCCESSOR_SCOPE
-    scope = json.loads(scope_path.read_bytes())
+    scope = _account_coexistence_preserved_receipt_v13_scope()
     bounded_g1b.validate_g4_receipt_scope(scope)
     assert scope["allowed_paths"] == sorted(bounded_g1b.G4_RECEIPT_PRODUCT)
     assert set(scope["allowed_paths"]) == {
@@ -3261,7 +3260,7 @@ def test_receipt_subject_keeps_exact_sixteen_fields_and_excludes_review():
 
 
 def test_receipt_full_policy_passes_all_configuration_documents_and_errors(monkeypatch):
-    scope = json.loads((Path(__file__).resolve().parents[1] / bounded_g1b.G4_STAGE1_SUCCESSOR_SCOPE).read_bytes())
+    scope = _account_coexistence_preserved_receipt_v13_scope()
     payloads = {p: b"literal-document" for p in bounded_g1b.CONFIGURATION_PATHS}
     payloads[bounded_g1b.AGENTS] = b"literal-agents"
     payloads[bounded_g1b.STATE] = b'{"synthetic":true}'
@@ -3289,4 +3288,163 @@ def test_receipt_full_policy_passes_all_configuration_documents_and_errors(monke
         bounded_g1b._validate_g4_receipt_loaded_policy(inputs)
     assert caught.value.reason_code == "receipt_configuration_rejected"
 
+
+
+
+def _account_coexistence_preserved_receipt_v13_scope():
+    """Exact accepted H01 V13 fixture; active Account scope is V14."""
+    return json.loads('{"active_profile":"G4_STAGE1_LOCAL_SUCCESSOR","admission_grants_runtime_authority":false,"allowed_effects":["control_plane_edit","product_behavior_change","repository_read","task_branch_commit","task_branch_push"],"allowed_paths":["app/services/patient_request_service.py","tests/test_patient_request_submission_receipt.py"],"allowed_task_kind":"g4_stage1_local_successor","control_sha256":{"orchestration_harness/bounded_g1b.py":"c13087ba56251d912e8b15b5f5a2745bbf07375c48370370d975946c4293a2d2","tests/test_g4_stage1_successor_entry.py":"69f5500cac1f921f33c0087b3126cc71ec25c5d0c046effc1da4cd69bf5022cf"},"excluded_effects":["unreviewed_application_or_database_runtime","unreviewed_browser_or_microphone_runtime","unreviewed_voice_child_or_network_egress","provider_invocation","real_data_access","protected_ref_movement","deployment","public_listener"],"mapping_review":{"path":"C:/Users/there/EMR4-tools/selected-patient-request-receipt-correction-v1/independent-source-review-v1.json","sha256":"f56a9d73abf7befb38a9af3c8e056bc69806210d0608dad79101e791d41e5aae"},"predecessor_scope":{"sha256":"1e9f0f901c9522cc044bc7eb05b0cff74fe517777ff8b71376552c2f9bec22d5"},"product_sha256":{"app/services/patient_request_service.py":"e65428f02ba15feeeca0f71dcefc256eded58e4c837d906e3d63b96cb8f90484","tests/test_patient_request_submission_receipt.py":"460c2825481f47c25dbe29375c0c7a05a89a351a9cd9af8e60c3286e371e13bf"},"product_vector":{"path":"C:/Users/there/EMR4-tools/selected-patient-request-receipt-correction-v1/source-vector-v1.json","sha256":"33d28d881069dab7b6a66f1eb46a600a94409df8a9563fd9ed79022a7a21b895"},"recorded_at":"2026-10-27T00:00:00+00:00","runtime_binding_required":true,"schema_version":"ariadne.g4_stage1_successor_entry_scope.v13","selected_base":{"commit":"7232b35ed1fb9d47df26b286865ab8bb93710955","tree":"390171d8791ef2e294138d74adf821563536eb81"},"source_sha256":{"orchestration_harness/bounded_g1b.py":"c13087ba56251d912e8b15b5f5a2745bbf07375c48370370d975946c4293a2d2","orchestration_harness/configuration_core.py":"f7ba7a80eb0a590f9fb71b864e6c1f9f43241d9f7d70a38da67a9243fea208e5","orchestration_harness/pinned_programme_gatekeeper.py":"c1fea9a2849068ed8e87dbe1e7cec1cc7e762fa2bc8876fc32bbda80d226cf39","orchestration_harness/programme_admission.py":"ac816a8a79b2d8222fa357777c075950927e86cf30c8a5b25ffd08a474052181","orchestration_harness/raisa_policy.py":"2dabec173bf7e39629e7036cac2d13c777e52649cea744a1fec778b5e9b9332e","orchestration_harness/trusted_git.py":"4a856bffe2b68d7c7e1875152629c9024a32679b59d9b1ed8301c368d41ff527","scripts/raisa_ariadne_recovery_preflight.py":"edfd37b30673b8544d309b532c95b3fd7c20ff592880a8a0235dfde6cfc8e7e4","tests/test_bounded_g1b.py":"bb1be86ca39232fea30c1ea84cdfb114428d57be0f8f67bf7e86daab0ba73bc5"},"voice_activation":false}\n')
+
+
+def test_account_bootstrap_scope_and_source_vector_are_exact():
+    root = Path(__file__).resolve().parents[1]
+    scope = json.loads((root / bounded_g1b.G4_STAGE1_SUCCESSOR_SCOPE).read_bytes())
+    bounded_g1b.validate_g4_account_bootstrap_scope(scope)
+    assert len(scope["allowed_paths"]) == 11
+    assert len(scope["source_sha256"]) == 8
+    assert scope["predecessor_scope"]["sha256"] == "5b2460fafa34d66f160277e527a9779a815cb69e6fb06e656d87629f71c710de"
+    vector_raw = bounded_g1b.G4_ACCOUNT_BOOTSTRAP_VECTOR.read_bytes()
+    assert hashlib.sha256(vector_raw).hexdigest() == bounded_g1b.G4_ACCOUNT_BOOTSTRAP_VECTOR_SHA
+    vector = json.loads(vector_raw)
+    bounded_g1b._validate_g4_account_bootstrap_vector(vector)
+    assert sum(row["before_sha256"] is None for row in vector["rows"]) == 6
+    for key, value in (
+        ("allowed_paths", scope["allowed_paths"] + ["app/other.py"]),
+        ("runtime_binding_required", False),
+        ("admission_grants_runtime_authority", True),
+        ("voice_activation", True),
+        ("predecessor_scope", {"sha256": "0" * 64}),
+        ("selected_base", {"commit": vector["accepted_parent_commit"], "tree": vector["accepted_parent_tree"]}),
+    ):
+        changed = copy.deepcopy(scope)
+        changed[key] = value
+        with pytest.raises(bounded_g1b.BoundedG1BError) as caught:
+            bounded_g1b.validate_g4_account_bootstrap_scope(changed)
+        assert caught.value.reason_code == "bounded_g4_account_bootstrap_scope_boundary"
+    for key, value in (("after_path", "C:/unowned.py"), ("after_bytes", True),
+                       ("before_sha256", "0" * 64), ("after_sha256", "0" * 64)):
+        changed = copy.deepcopy(vector)
+        changed["rows"][0][key] = value
+        with pytest.raises(bounded_g1b.BoundedG1BError) as caught:
+            bounded_g1b._validate_g4_account_bootstrap_vector(changed)
+        assert caught.value.reason_code == "bounded_g4_account_bootstrap_vector"
+    changed = copy.deepcopy(vector)
+    changed["rows"][-1] = copy.deepcopy(changed["rows"][0])
+    with pytest.raises(bounded_g1b.BoundedG1BError) as caught:
+        bounded_g1b._validate_g4_account_bootstrap_vector(changed)
+    assert caught.value.reason_code == "bounded_g4_account_bootstrap_vector"
+
+
+@pytest.mark.parametrize("stage", ["enable", "apply"])
+def test_account_bootstrap_dispatch_is_exact_and_subject_preserves_abi(stage):
+    kind = "enable_g4_stage1_successor" if stage == "enable" else "implement_g4_stage1_successor"
+    paths = bounded_g1b.G4_ACCOUNT_BOOTSTRAP_CONTROL if stage == "enable" else bounded_g1b.G4_ACCOUNT_BOOTSTRAP_PRODUCT
+    q = {key: None for key in bounded_g1b.G4_ACCOUNT_BOOTSTRAP_BINDING_KEYS}
+    q.update(schema_version=bounded_g1b.G4_ACCOUNT_BOOTSTRAP_SCHEMA,
+             operation_kind=kind, stage=stage,
+             repair_sha256={path: {} for path in paths})
+    assert len(q) == 17
+    assert bounded_g1b.operation_paths(kind, q) == paths
+    operation = bounded_g1b._operation(kind, q)
+    assert operation["g4_account_bootstrap_source"] is True
+    assert operation["paths"] == paths
+    assert "g4_correlation_binding_source" not in operation
+    subject = bounded_g1b.g4_account_bootstrap_review_subject(q)
+    q["source_review"] = {"ignored_for_subject": True}
+    assert bounded_g1b.g4_account_bootstrap_review_subject(q) == subject
+    for key in set(q) - {"source_review"}:
+        changed = copy.deepcopy(q)
+        changed[key] = "changed-subject-field"
+        assert bounded_g1b.g4_account_bootstrap_review_subject(changed) != subject
+    for replacement in (set(paths) | {"app/other.py"}, set(paths) - {next(iter(paths))}):
+        with pytest.raises(bounded_g1b.BoundedG1BError) as caught:
+            bounded_g1b.operation_paths(kind, dict(q, repair_sha256={p: {} for p in replacement}))
+        assert caught.value.reason_code == "bounded_g4_account_bootstrap_changed_paths"
+
+
+def test_account_bootstrap_loaded_policy_dispatch_stays_source_specific(monkeypatch):
+    q = {"schema_version": bounded_g1b.G4_ACCOUNT_BOOTSTRAP_SCHEMA,
+         "operation_kind": "enable_g4_stage1_successor", "stage": "enable",
+         "repair_sha256": {p: {} for p in bounded_g1b.G4_ACCOUNT_BOOTSTRAP_CONTROL}}
+    sentinel = ({"account-source-only": b"inert"}, None)
+    monkeypatch.setattr(bounded_g1b, "_validate_g4_account_bootstrap_loaded_policy", lambda inputs: sentinel)
+    inputs = bounded_g1b.BoundedG1BInputs(q, {}, {}, {}, {})
+    assert bounded_g1b._validate_loaded_policy(inputs) == sentinel
+
+
+def test_account_receipt_correlation_coexistence_routes_do_not_cross(monkeypatch):
+    families = (
+        ("account_bootstrap", bounded_g1b.G4_ACCOUNT_BOOTSTRAP_SCHEMA,
+         bounded_g1b.G4_ACCOUNT_BOOTSTRAP_CONTROL, bounded_g1b.G4_ACCOUNT_BOOTSTRAP_PRODUCT,
+         "_validate_g4_account_bootstrap_loaded_policy"),
+        ("receipt", bounded_g1b.G4_RECEIPT_SCHEMA,
+         bounded_g1b.G4_RECEIPT_CONTROL, bounded_g1b.G4_RECEIPT_PRODUCT,
+         "_validate_g4_receipt_loaded_policy"),
+        ("correlation_binding", bounded_g1b.G4_CORRELATION_BINDING_SCHEMA,
+         bounded_g1b.G4_CORRELATION_BINDING_CONTROL, bounded_g1b.G4_CORRELATION_BINDING_PRODUCT,
+         "_validate_g4_correlation_binding_loaded_policy"),
+    )
+    assert len({item[1] for item in families}) == 3
+    assert all(not (set(left[3]) & set(right[3]))
+               for index,left in enumerate(families) for right in families[index+1:])
+    calls = []
+    sentinels = {name: ({name: b"source-only-routing"}, None) for name,*_ in families}
+    for name,_,_,_,helper in families:
+        def route(inputs, family=name):
+            calls.append(family)
+            return sentinels[family]
+        monkeypatch.setattr(bounded_g1b, helper, route)
+    expected_calls = []
+    for name,schema,control,product,_ in families:
+        for stage,kind,paths in (("enable","enable_g4_stage1_successor",control),
+                                 ("apply","implement_g4_stage1_successor",product)):
+            q = {key: None for key in bounded_g1b.G4_ACCOUNT_BOOTSTRAP_BINDING_KEYS}
+            q.update(schema_version=schema, operation_kind=kind, stage=stage,
+                     repair_sha256={path:{} for path in paths})
+            assert len(q) == 17
+            operation = bounded_g1b._operation(kind,q)
+            assert bounded_g1b.operation_paths(kind,q) == paths
+            assert operation["paths"] == paths
+            assert operation["g4_"+name+"_source"] is True
+            assert all("g4_"+other+"_source" not in operation
+                       for other, *_ in families if other != name)
+            inputs = bounded_g1b.BoundedG1BInputs(q, {}, {}, {}, {})
+            assert bounded_g1b._validate_loaded_policy(inputs) is sentinels[name]
+            expected_calls.append(name)
+        for other,_,_,other_product,_ in families:
+            if other == name:
+                continue
+            crossed = dict(q,repair_sha256={path:{} for path in other_product})
+            with pytest.raises(bounded_g1b.BoundedG1BError) as caught:
+                bounded_g1b.operation_paths("implement_g4_stage1_successor",crossed)
+            assert caught.value.reason_code == "bounded_g4_"+name+"_changed_paths"
+    assert calls == expected_calls
+
+
+def test_account_v14_keeps_receipt_v13_and_correlation_v12_scopes_separate():
+    root = Path(__file__).resolve().parents[1]
+    account = json.loads((root/bounded_g1b.G4_STAGE1_SUCCESSOR_SCOPE).read_bytes())
+    receipt = _account_coexistence_preserved_receipt_v13_scope()
+    correlation = _receipt_predecessor_v12_scope()
+    cases = ((account,bounded_g1b.validate_g4_account_bootstrap_scope,"account_bootstrap",14),
+             (receipt,bounded_g1b.validate_g4_receipt_scope,"receipt",13),
+             (correlation,bounded_g1b.validate_g4_correlation_binding_scope,"correlation_binding",12))
+    for scope,validate,name,version in cases:
+        validate(scope)
+        assert scope["schema_version"] == "ariadne.g4_stage1_successor_entry_scope.v"+str(version)
+        assert len(scope["source_sha256"]) == 8
+        assert scope["runtime_binding_required"] is True
+        assert scope["admission_grants_runtime_authority"] is False
+        assert scope["voice_activation"] is False
+        for other,_,_,_ in cases:
+            if other is scope:
+                continue
+            with pytest.raises(bounded_g1b.BoundedG1BError) as caught:
+                validate(other)
+            assert caught.value.reason_code == "bounded_g4_"+name+"_scope_boundary"
+    assert account["predecessor_scope"] == {
+        "sha256":"5b2460fafa34d66f160277e527a9779a815cb69e6fb06e656d87629f71c710de"}
+    assert account["product_vector"] != receipt["product_vector"] != correlation["product_vector"]
+    assert account["allowed_effects"] == receipt["allowed_effects"] == correlation["allowed_effects"]
+    assert account["excluded_effects"] == receipt["excluded_effects"] == correlation["excluded_effects"]
 
