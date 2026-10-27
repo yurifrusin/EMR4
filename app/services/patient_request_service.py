@@ -137,12 +137,13 @@ def submit_request(db: Session, row: PatientBookingRequest, raw: dict, key: str)
     row.submitted_at = datetime.now(timezone.utc)
     row.submission_key_digest = key_hash
     row.submission_body_digest = body_hash
-    row.submission_receipt = {
+    receipt = {
         "request_id": str(row.id), "state": "submitted",
         "request_version": row.request_version, "message": "Request received for staff review.",
     }
+    row.submission_receipt = receipt
     db.commit()
-    return row.submission_receipt
+    return receipt
 
 
 def patient_readback(db: Session, row: PatientBookingRequest) -> dict:
