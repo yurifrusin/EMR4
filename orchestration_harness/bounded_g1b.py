@@ -3418,11 +3418,13 @@ def operation_effects(kind: str) -> frozenset[str]:
         return G2_COMPLETENESS_EFFECTS
     if kind == "repair_g2_ci_selection":
         return G2_CI_EFFECTS
-    return frozenset({"repository_read"}) if kind == "assess_g1e" else EFFECTS
+    return frozenset({"repository_read"}) if kind in {"assess_g1e", G4_HUMAN_ADMIT_KIND} else EFFECTS
 
 
 def operation_paths(kind: str, binding: dict | None = None) -> frozenset[str]:
     _need(type(kind) is str and kind in OPERATION_PATHS, "bounded_g1b_operation_kind")
+    if kind == G4_HUMAN_ADMIT_KIND or _is_g4_human_binding(binding):
+        return _g4_human_paths(kind, binding)
     if kind == G4_GOAL_ENTRY_KIND:
         return _g4_goal_entry_paths(binding)
     if kind == G4_COMPASS_ENTRY_KIND:
@@ -3480,6 +3482,10 @@ def operation_paths(kind: str, binding: dict | None = None) -> frozenset[str]:
 
 def _operation(kind: str, binding: dict | None = None) -> dict:
     paths = operation_paths(kind, binding)
+    if _is_g4_human_binding(binding):
+        return {"paths": paths, "g4_human_external_source": True,
+                "profile": raisa_policy.G4_STAGE1_SUCCESSOR_PROFILE,
+                "gate": "G4", "limits": G4_HUMAN_LIMITS}
     if kind == G4_GOAL_ENTRY_KIND:
         return {"paths": paths, "g4_goal_entry_source": True,
                 "profile": raisa_policy.G4_STAGE1_SUCCESSOR_PROFILE,
@@ -6409,6 +6415,9 @@ def load_bounded_g1b_inputs(context: BoundedG1BContext) -> BoundedG1BInputs:
         return snapshot[1]
 
     binding = _json(read(binding_path, context.expected_binding_sha256))
+    if binding.get("operation_kind") == G4_HUMAN_ADMIT_KIND or _is_g4_human_binding(binding):
+        return _load_g4_human_inputs(
+            context, target, source, evidence_root, scratch, binding, read, snapshots)
     if binding.get("operation_kind") == G4_GOAL_ENTRY_KIND:
         if binding.get("stage") == "publish":
             large_input_caps = G4_GOAL_EFFECT_LARGE_INPUT_CAPS
@@ -6626,6 +6635,8 @@ def load_bounded_g1b_inputs(context: BoundedG1BContext) -> BoundedG1BInputs:
 
 def _validate_loaded_policy(inputs: BoundedG1BInputs) -> tuple[dict[str, bytes], configuration_core.ValidatedConfiguration | None]:
     operation = _operation(inputs.binding["operation_kind"], inputs.binding)
+    if operation.get("g4_human_external_source"):
+        return _validate_g4_human_loaded_policy(inputs)
     if operation.get("g4_goal_entry_source"):
         return _validate_g4_goal_entry_loaded_policy(inputs)
     if operation.get("g4_compass_entry_source"):
@@ -6739,6 +6750,7 @@ def evaluate_bounded_g1b_operation(*, context: BoundedG1BContext | None, manifes
         _need(manifest["schema_version"] == REQUEST_VERSION, "bounded_g1b_manifest_version")
         inputs = load_bounded_g1b_inputs(context)
         q = inputs.binding
+        _g4_human_require_entrypoint(q, entrypoint, phase)
         _need(q["phase"] == phase, "bounded_g1b_phase_disagreement")
         expected = {"schema_version": REQUEST_VERSION, "operation_id": q["operation_id"],
                     "operation_kind": q["operation_kind"], "binding_sha256": context.expected_binding_sha256,
@@ -14588,3 +14600,362 @@ def require_g4_compass_goal_update_effect(*, context: BoundedG1BContext,
             "pointer replacement last; exact under-lock recheck required",
             "generic Clockwork tick and providers remain closed"),
         current_gate="G4", active_profile=raisa_policy.G4_STAGE1_SUCCESSOR_PROFILE)
+
+# Exact external H21/Bureau source admission. No runtime or product mutation.
+G4_HUMAN_SCHEMA = "ariadne.g4_stage1_human_external_source_operation_binding.v1"
+G4_HUMAN_SCOPE_SCHEMA = "ariadne.g4_stage1_successor_entry_scope.v15"
+G4_HUMAN_ADMIT_KIND = "admit_g4_stage1_human_external_source"
+G4_HUMAN_BASE = {"commit": "e2eb4a0c002e49f2cc811fae161898569c3b103c",
+                 "tree": "4238eeff55dcab867ad2458c3dbf07429267dcaa"}
+G4_HUMAN_CONTROL = frozenset({G4_AUDIT_CODE, G4_STAGE1_SUCCESSOR_SCOPE,
+                             G4_STAGE1_SUCCESSOR_TEST})
+G4_HUMAN_PREIMAGES = {
+    G4_AUDIT_CODE: "cdd42a8b17e6d350f67406a953bf4fe41a8ede75978161b6a5b76118bb91a9cb",
+    G4_STAGE1_SUCCESSOR_SCOPE: "7ba23bb91e05bd39b29b40b923ee0d79f68a1194761a9dd933baabb75a123fc7",
+    G4_STAGE1_SUCCESSOR_TEST: "58830214930438c9c7a408d96a1659962b09d04f5f0cd9612f87b7e25a2542b3"}
+G4_HUMAN_ROOT = G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT / "human-bureau-external-source-successor-v1"
+G4_HUMAN_EXTERNAL_ROOT = Path("C:/Users/there/EMR4-tools/selected-bureau-human-account11-join-preparation-v2")
+G4_HUMAN_VECTOR = G4_HUMAN_EXTERNAL_ROOT / "source-vector-v1.json"
+G4_HUMAN_VECTOR_SHA = "a03a27b006e715089251051ac0c89497f49cb78ddfd5c1fb40a0133394b81437"
+G4_HUMAN_PREPARATION_REVIEW = G4_HUMAN_EXTERNAL_ROOT / "independent-human-account11-join-source-review-v1.json"
+G4_HUMAN_PREPARATION_REVIEW_SHA = "aaf9008f302fff80ae2f65b7b3eeaeb311528b78957a5011289b32102b2e0f94"
+G4_HUMAN_CURRENT_PUBLICATION = Path("C:/Users/there/EMR4-tools/local-mock-account-bootstrap-apply-publication-preparation-v1/independent-apply-push-effect-review-v1.json")
+G4_HUMAN_CURRENT_PUBLICATION_SHA = "03d46e8e5e60ff6882c39118954c4e512fa3fa4b933ffb18a2cc800a921e8353"
+G4_HUMAN_PREPARATION_SUBJECT = {'source_vector': {'path': 'C:/Users/there/EMR4-tools/selected-bureau-human-account11-join-preparation-v2/source-vector-v1.json', 'bytes': 19106, 'sha256': 'a03a27b006e715089251051ac0c89497f49cb78ddfd5c1fb40a0133394b81437'}, 'handoff': {'path': 'C:/Users/there/EMR4-tools/selected-bureau-human-account11-join-preparation-v2/HANDOFF.md', 'bytes': 6353, 'sha256': 'bfb87956b63025fe29488acfaf97ead3daf40fada0e588ad3438037ef946fc22'}, 'prospective_abi': {'path': 'C:/Users/there/EMR4-tools/selected-bureau-human-account11-join-preparation-v2/prospective-input-abi-v1.json', 'bytes': 14947, 'sha256': 'bbde671c11fadf7ec1adb94ae22bb3af63930ebe2058f089d95e26bc08e07383'}, 'transformations': {'path': 'C:/Users/there/EMR4-tools/selected-bureau-human-account11-join-preparation-v2/exact-transformations-v1.json', 'bytes': 94432, 'sha256': '7c4c45c9f7d1089eb879487e2076845b2bc9353c54a12c8d2a57100a03e3ab9f'}, 'source_data_readback': {'path': 'C:/Users/there/EMR4-tools/selected-bureau-human-account11-join-preparation-v2/source-data-readback-v1.json', 'bytes': 3442, 'sha256': 'a01f07e7f7badb1c97d33db58c13429c43562a44270f87a8927b501a33b6b2bf'}, 'site_handoff': {'path': 'C:/Users/there/EMR4-tools/selected-bureau-human-account11-join-preparation-v2/after/site-source-handoff.json', 'bytes': 2596, 'sha256': 'a8472d0363eb7310c4a95bd54956f117ecd94fa4712a5b512b9d0d6efdead566'}, 'backend_source_rows': {'path': 'C:/Users/there/EMR4-tools/selected-bureau-human-account11-join-preparation-v2/backend-source-rows-v1.json', 'bytes': 48653, 'sha256': '2c3af77769af59d1712a6073a8406f905b95c93419694da909c93766491a551c'}, 'accepted_product_publication_result': {'path': 'C:/Users/there/EMR4-tools/g4-account-bootstrap-coexistence-apply01-publication/phase-push/result.json', 'bytes': 7776, 'sha256': '06d5d5569b8802a57bb1bbda70a149ddb5d1a6a7b6a74610541a56ab1152ff97'}, 'accepted_product_publication_review': {'path': 'C:/Users/there/EMR4-tools/local-mock-account-bootstrap-apply-publication-preparation-v1/independent-apply-push-effect-review-v1.json', 'bytes': 27712, 'sha256': '03d46e8e5e60ff6882c39118954c4e512fa3fa4b933ffb18a2cc800a921e8353'}}
+G4_HUMAN_BINDING_KEYS = G4_BUREAU_BINDING_KEYS
+G4_HUMAN_SCOPE_KEYS = G4_BUREAU_SCOPE_KEYS
+G4_HUMAN_LIMITS = (
+    "exact frozen inert ten-actor/fifteen-site/H01 backend154 source preparation only",
+    "no product delta; source admission grants no runtime or activation",
+    "future bounded synthetic human class:86400website/87300backend/2clips/256calls",
+    "fresh readiness only after operational preflight; no old readiness or text voice0 grant",
+    "Account11 source join accepted; human activation and bound executable successor remain required",
+    "no provider, real data, protected evidence, public exposure, deployment or protected refs")
+OPERATION_PATHS[G4_HUMAN_ADMIT_KIND] = frozenset()
+
+
+def _is_g4_human_binding(binding):
+    return type(binding) is dict and binding.get("schema_version") == G4_HUMAN_SCHEMA
+
+
+def _g4_human_paths(kind, binding):
+    _need(_is_g4_human_binding(binding) and binding.get("operation_kind") == kind
+          and binding.get("stage") in {"enable", "admit"}
+          and ((binding["stage"] == "enable" and kind == "enable_g4_stage1_successor")
+               or (binding["stage"] == "admit" and kind == G4_HUMAN_ADMIT_KIND))
+          and type(binding.get("repair_sha256")) is dict,
+          "bounded_g4_human_binding_kind")
+    paths = G4_HUMAN_CONTROL if binding["stage"] == "enable" else frozenset()
+    _need(set(binding["repair_sha256"]) == paths, "bounded_g4_human_changed_paths")
+    return paths
+
+
+def g4_human_review_subject(q):
+    return _sha(_canonical({key: q[key] for key in (
+        "schema_version", "operation_id", "operation_kind", "stage", "phase",
+        "base_commit", "base_tree", "expected_head", "expected_index_tree",
+        "candidate_tree", "source_sha256", "payload_sha256", "repair_sha256",
+        "activation_acceptance", "product_vector", "mapping_review")}))
+
+
+def _g4_human_require_entrypoint(q, entrypoint, phase):
+    if _is_g4_human_binding(q) and q.get("stage") == "admit":
+        _need(q.get("operation_kind") == G4_HUMAN_ADMIT_KIND
+              and entrypoint == "recovery_preflight" and phase == "development",
+              "bounded_g4_human_admit_entrypoint")
+
+
+def validate_g4_human_scope(scope):
+    _keys(scope, G4_HUMAN_SCOPE_KEYS, "bounded_g4_human_scope_schema")
+    _need(scope["schema_version"] == G4_HUMAN_SCOPE_SCHEMA
+          and scope["selected_base"] == G4_HUMAN_BASE
+          and _g4_audit_timestamp(scope["recorded_at"])
+          and scope["active_profile"] == raisa_policy.G4_STAGE1_SUCCESSOR_PROFILE
+          and scope["allowed_task_kind"] == "g4_stage1_local_successor"
+          and scope["allowed_paths"] == [] and scope["product_sha256"] == {}
+          and scope["allowed_effects"] == sorted(EFFECTS)
+          and scope["runtime_binding_required"] is True
+          and scope["admission_grants_runtime_authority"] is False
+          and scope["voice_activation"] is False
+          and scope["excluded_effects"] == [
+              "unreviewed_application_or_database_runtime",
+              "unreviewed_browser_or_microphone_runtime",
+              "unreviewed_voice_child_or_network_egress", "provider_invocation",
+              "real_data_access", "protected_ref_movement", "deployment", "public_listener"]
+          and scope["product_vector"] == {"path": G4_HUMAN_VECTOR.as_posix(),
+                                         "sha256": G4_HUMAN_VECTOR_SHA}
+          and scope["mapping_review"] == {"path": G4_HUMAN_PREPARATION_REVIEW.as_posix(),
+                                         "sha256": G4_HUMAN_PREPARATION_REVIEW_SHA}
+          and scope["predecessor_scope"] == {
+              "sha256": G4_HUMAN_PREIMAGES[G4_STAGE1_SUCCESSOR_SCOPE]},
+          "bounded_g4_human_scope_boundary")
+    sources = _digest_map(scope["source_sha256"], SOURCE_PATHS | CONTROLLER_PATHS,
+                          "bounded_g4_human_sources")
+    control = _digest_map(scope["control_sha256"],
+                          G4_HUMAN_CONTROL - {G4_STAGE1_SUCCESSOR_SCOPE},
+                          "bounded_g4_human_control_sources")
+    _need(sources[G4_AUDIT_CODE] == control[G4_AUDIT_CODE],
+          "bounded_g4_human_source_vector")
+    return sources
+
+
+def _g4_human_external_inputs(read, q):
+    _need(q["product_vector"] == {"path": G4_HUMAN_VECTOR.as_posix(),
+                                  "sha256": G4_HUMAN_VECTOR_SHA}
+          and q["mapping_review"] == {"path": G4_HUMAN_PREPARATION_REVIEW.as_posix(),
+                                     "sha256": G4_HUMAN_PREPARATION_REVIEW_SHA},
+          "bounded_g4_human_external_pins")
+    vector = _json(read(G4_HUMAN_VECTOR, G4_HUMAN_VECTOR_SHA))
+    _need(vector.get("schema") == "emr4.human_account11_source_vector.v1"
+          and vector.get("status") == "INERT_SOURCE_ONLY_PENDING_INDEPENDENT_REVIEW"
+          and type(vector.get("actors")) is list and len(vector["actors"]) == 10
+          and type(vector.get("site")) is list and len(vector["site"]) == 15,
+          "bounded_g4_human_external_vector")
+    rows = [item["after"] for item in vector["actors"]]
+    rows += [item["after"] for item in vector["site"]]
+    rows += [vector["site_handoff"], vector["backend_rows"]]
+    _need(len({r["path"] for r in rows}) == 27,
+          "bounded_g4_human_external_unique")
+    for row in rows:
+        _keys(row, {"path", "bytes", "sha256"}, "bounded_g4_human_external_row")
+        path = Path(row["path"])
+        _need(path.is_absolute() and ".." not in path.parts
+              and path.is_relative_to(G4_HUMAN_EXTERNAL_ROOT)
+              and type(row["bytes"]) is int and 0 < row["bytes"] <= 2 * 1024 * 1024
+              and len(read(path, row["sha256"])) == row["bytes"],
+              "bounded_g4_human_external_source")
+    backend_raw = read(Path(vector["backend_rows"]["path"]),
+                       vector["backend_rows"]["sha256"])
+    _need(type(backend_raw) is bytes and len(backend_raw) <= 2 * 1024 * 1024,
+          "bounded_g1b_payload_size")
+    backend = json.loads(backend_raw, object_pairs_hook=_pairs, parse_constant=_constant)
+    _canonical(backend)
+    _need(type(backend) is list and len(backend) == 154
+          and len({r["relative_path"] for r in backend}) == 154
+          and next(r for r in backend if r["relative_path"] ==
+                   "app/services/patient_request_service.py")["sha256"] ==
+              "e65428f02ba15feeeca0f71dcefc256eded58e4c837d906e3d63b96cb8f90484",
+          "bounded_g4_human_backend_rows")
+    # Fixed vector/table digest authenticates these exact ordinary source paths.
+    # These are reads, not imports, and never establish runtime availability.
+    for row in backend:
+        _need(type(row.get("bytes")) is int and 0 <= row["bytes"] <= 2 * 1024 * 1024
+              and len(read(Path(row["source_path"]), row["sha256"])) == row["bytes"],
+              "bounded_g4_human_backend_source")
+    speech = G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT / "stage1-speech-component-v1/backend"
+    read(speech / "component_recognizer.py",
+         "e070e17db283fbaea376b2a3b17f6ca629e3bff8ae86423d4071b515c17fa1ea")
+    read(speech / "wav_validation.py",
+         "a9b82211411a1c06d2d40c22e3c52dbde803e8eb66301792b8ed04a73a027a4b")
+    mapping = _json(read(G4_HUMAN_PREPARATION_REVIEW, G4_HUMAN_PREPARATION_REVIEW_SHA))
+    _need(mapping.get("schema") == "emr4.selected_bureau_human_source_review.v2"
+          and mapping.get("status") == "PASS_INERT_SOURCE_PREPARATION_WITH_ACTIVATION_PREREQUISITES"
+          and mapping.get("verdict") == "PASS_CURRENT_BUREAU_HUMAN_SOURCE_PREPARATION_ONLY"
+          and mapping.get("reviewer_agent") == "/root/native_report_transfer_review"
+          and mapping.get("independent") is True
+          and mapping.get("implementation_authorship") is False
+          and mapping.get("blocking_findings") == []
+          and mapping.get("source_preparation_accepted") is True
+          and mapping.get("activation_accepted") is False
+          and mapping.get("runtime_accepted") is False
+          and mapping.get("execution_authority") is False
+          and mapping.get("subject", {}).get("source_vector") == {
+              "path": G4_HUMAN_VECTOR.as_posix(), "bytes": 19106,
+              "sha256": G4_HUMAN_VECTOR_SHA},
+          "bounded_g4_human_preparation_provenance")
+    _need(mapping.get("subject") == G4_HUMAN_PREPARATION_SUBJECT
+          and type(mapping.get("actor_inverse_evidence")) is list
+          and len(mapping["actor_inverse_evidence"]) == 10
+          and all(item.get("relative_path") == actor["relative_path"]
+                  and item.get("before") == actor["before"]
+                  and item.get("after") == actor["after"]
+                  and item.get("full_byte_inverse_verified") is True
+                  for item, actor in zip(mapping["actor_inverse_evidence"], vector["actors"])),
+          "bounded_g4_human_preparation_provenance")
+    # Genuine fixed review subject also binds the coupled inverse/site/ABI and
+    # accepted Account publication metadata; none is a runtime acceptance.
+    for row in G4_HUMAN_PREPARATION_SUBJECT.values():
+        _keys(row,{"path","bytes","sha256"},"bounded_g4_human_preparation_subject_row")
+        _need(len(read(Path(row["path"]),row["sha256"])) == row["bytes"],
+              "bounded_g4_human_preparation_subject_source")
+    return vector, mapping
+
+
+def _g4_human_current_publication(read):
+    review = _json(read(G4_HUMAN_CURRENT_PUBLICATION, G4_HUMAN_CURRENT_PUBLICATION_SHA))
+    protected = "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    ref = G4_STAGE1_INTERACTIVE_BACKEND_REF
+    _need(review.get("schema") == "emr4.g4_local_mock_account_bootstrap_apply_publication_effect_review.v1"
+          and review.get("status") == "PASS"
+          and review.get("verdict") == "PASS_G4_ACCOUNT_BOOTSTRAP_APPLY_PUSH_EFFECT"
+          and review.get("reviewer_agent") == "/root/native_report_transfer_review"
+          and review.get("independent") is True
+          and review.get("implementation_authorship") is False
+          and review.get("blocking_findings") == []
+          and review.get("product_publication_accepted") is True
+          and review.get("stage") == "apply" and review.get("phase") == "push"
+          and review.get("commit") == review.get("published_commit") == G4_HUMAN_BASE["commit"]
+          and review.get("tree") == review.get("candidate_tree") == G4_HUMAN_BASE["tree"]
+          and review.get("base") == "8381c8c2042d4442098391d3a1b1c30969422162"
+          and review.get("base_tree") == "382ad38610e5bda58db8df0c9351f5c09d8523db"
+          and review.get("result") == G4_HUMAN_PREPARATION_SUBJECT["accepted_product_publication_result"]
+          and review.get("result_sha256") == "06d5d5569b8802a57bb1bbda70a149ddb5d1a6a7b6a74610541a56ab1152ff97"
+          and review.get("published_ref") == ref
+          and review.get("published_url") == G4_STAGE1_INTERACTIVE_BACKEND_URL
+          and review.get("same_attempt_remote_readback_verified") is True
+          and review.get("protected_refs_unchanged") is True
+          and review.get("whole_inverse_verified_same_attempt") is True
+          and review.get("remote_before") == {ref:"8381c8c2042d4442098391d3a1b1c30969422162",
+              "refs/heads/master":protected, "refs/heads/handoff/current":protected}
+          and review.get("remote_after") == {ref:G4_HUMAN_BASE["commit"],
+              "refs/heads/master":protected, "refs/heads/handoff/current":protected},
+          "bounded_g4_human_current_publication")
+    return review
+
+
+def _g4_human_subject_review(read, row, evidence_root, subject, stage, phase):
+    _keys(row, {"path", "sha256"}, "bounded_g4_human_review_row")
+    path = G4_HUMAN_ROOT / "entry-admission-v1" / (
+        "independent-" + stage + "-" + phase + "-subject-review-v1.json")
+    _need(Path(row["path"]) == path and path.is_relative_to(evidence_root),
+          "bounded_g4_human_review_path")
+    review = _json(read(path, row["sha256"]))
+    _need(review.get("schema") == "emr4.g4_operation_review.v1"
+          and review.get("status") == "PASS"
+          and review.get("verdict") == "PASS_G4_STAGE1_HUMAN_EXTERNAL_EXACT_ADMISSION_SUBJECT"
+          and review.get("subject_sha256") == subject
+          and review.get("independent") is True
+          and review.get("implementation_authorship") is False
+          and review.get("blocking_findings") == []
+          and type(review.get("reviewer_agent")) is str
+          and review["reviewer_agent"] not in {"", "/root", "/root/human_bureau_join_source_author", "/root/human_account11_topology_join_author"}
+          and review.get("stage") == stage and review.get("phase") == phase,
+          "bounded_g4_human_independent_subject")
+    return review
+
+
+def _load_g4_human_inputs(context, target, source, evidence_root, scratch,
+                          q, read, snapshots):
+    _keys(q, G4_HUMAN_BINDING_KEYS, "bounded_g4_human_binding_schema")
+    _need(_is_g4_human_binding(q)
+          and q["phase"] in {"development", "pre-push", "post-push"}
+          and type(q["operation_id"]) is str
+          and re.fullmatch(r"[a-z0-9][a-z0-9-]{1,79}", q["operation_id"]),
+          "bounded_g4_human_binding_version")
+    for key in ("base_commit", "base_tree", "expected_head", "expected_index_tree", "candidate_tree"):
+        _need(type(q[key]) is str and re.fullmatch(r"[0-9a-f]{40}", q[key]),
+              "bounded_g4_human_git_identity")
+    paths = _g4_human_paths(q["operation_kind"], q)
+    if q["stage"] == "admit":
+        _need(q["phase"] == "development" and q["repair_sha256"] == {}
+              and q["candidate_tree"] == q["base_tree"]
+              and q["expected_head"] == q["base_commit"]
+              and q["expected_index_tree"] == q["base_tree"],
+              "bounded_g4_human_admit_no_delta")
+    vector, mapping = _g4_human_external_inputs(read, q)
+    publication = _g4_human_current_publication(read)
+    _need(_sha(trusted_git.run_git_bytes(target, "cat-file", "blob",
+              G4_HUMAN_BASE["commit"] + ":" + G4_STAGE1_SUCCESSOR_SCOPE)) ==
+              G4_HUMAN_PREIMAGES[G4_STAGE1_SUCCESSOR_SCOPE]
+          and trusted_git.run_git(target, "rev-parse", G4_HUMAN_BASE["commit"] + "^{tree}") ==
+              G4_HUMAN_BASE["tree"], "bounded_g4_human_predecessor")
+    if q["stage"] == "enable":
+        _need(q["base_commit"] == G4_HUMAN_BASE["commit"]
+              and q["base_tree"] == G4_HUMAN_BASE["tree"]
+              and q["activation_acceptance"] is None, "bounded_g4_human_enable_base")
+    else:
+        _keys(q["activation_acceptance"], {"path", "sha256"}, "bounded_g4_human_activation_row")
+        path = G4_HUMAN_ROOT / "entry-admission-v1/independent-enable-push-effect-review-v1.json"
+        _need(Path(q["activation_acceptance"]["path"]) == path
+              and path.is_relative_to(evidence_root), "bounded_g4_human_activation_path")
+        activation = _json(read(path, q["activation_acceptance"]["sha256"]))
+        _need(activation.get("schema") == "emr4.g4_operation_review.v1"
+              and activation.get("status") == "PASS"
+              and activation.get("verdict") == "PASS_G4_STAGE1_HUMAN_EXTERNAL_CONTROL_PUBLICATION_EFFECT"
+              and type(activation.get("reviewer_agent")) is str
+              and activation["reviewer_agent"] not in {"", "/root", "/root/human_bureau_join_source_author", "/root/human_account11_topology_join_author"}
+              and activation.get("independent") is True
+              and activation.get("implementation_authorship") is False
+              and activation.get("blocking_findings") == []
+              and activation.get("stage") == "enable" and activation.get("phase") == "push"
+              and activation.get("base") == G4_HUMAN_BASE["commit"]
+              and activation.get("commit") == q["base_commit"]
+              and activation.get("candidate_tree") == q["base_tree"]
+              and activation.get("control_activation_accepted") is True
+              and activation.get("same_attempt_remote_readback_verified") is True
+              and activation.get("protected_refs_unchanged") is True
+              and activation.get("whole_inverse_verified_same_attempt") is True
+              and activation.get("published_ref") == G4_STAGE1_INTERACTIVE_BACKEND_REF,
+              "bounded_g4_human_activation_acceptance")
+        headers = trusted_git.run_git(target, "cat-file", "commit", q["base_commit"]).split("\n\n", 1)[0].splitlines()
+        _need([h for h in headers if h.startswith("parent ")] == ["parent " + G4_HUMAN_BASE["commit"]]
+              and [h for h in headers if h.startswith("tree ")] == ["tree " + q["base_tree"]],
+              "bounded_g4_human_activation_parent")
+    sources = _digest_map(q["source_sha256"], SOURCE_PATHS | CONTROLLER_PATHS,
+                          "bounded_g4_human_sources")
+    inputs = CONFIGURATION_PATHS | {STATE, GATES, OVERLAY, AGENTS,
+        G4_STAGE1_INTERACTIVE_SCOPE, G4_STAGE1_SUCCESSOR_SCOPE,
+        G4_STAGE1_SUCCESSOR_TEST, G4_CI_WORKFLOW} | SOURCE_PATHS | CONTROLLER_PATHS
+    pins = _digest_map(q["payload_sha256"], inputs, "bounded_g4_human_payload_paths")
+    payloads = {p:read(target / p, d) for p,d in sorted(pins.items())}
+    scope = _json(payloads[G4_STAGE1_SUCCESSOR_SCOPE])
+    validate_g4_human_scope(scope)
+    _need(scope["source_sha256"] == sources
+          and scope["product_vector"] == q["product_vector"]
+          and scope["mapping_review"] == q["mapping_review"]
+          and payloads[G4_STAGE1_SUCCESSOR_SCOPE] == _canonical(scope) + b"\n"
+          and all(_sha(payloads[p]) == d for p,d in scope["control_sha256"].items()),
+          "bounded_g4_human_scope_sources")
+    for p,d in sources.items():
+        candidate = read(source / p, d)
+        if q["stage"] == "enable" and p in G4_HUMAN_CONTROL:
+            _need(candidate == payloads[p], "bounded_g4_human_control_candidate")
+        else:
+            _need(candidate == trusted_git.run_git_bytes(target, "cat-file", "blob", q["base_commit"] + ":" + p),
+                  "bounded_g4_human_installed_source")
+    for p,pair in q["repair_sha256"].items():
+        _keys(pair, {"before_sha256", "after_sha256"}, "bounded_g4_human_change_pair")
+        previous = _sha(trusted_git.run_git_bytes(target, "cat-file", "blob", q["base_commit"] + ":" + p))
+        _need(previous == G4_HUMAN_PREIMAGES[p]
+              and pair == {"before_sha256":previous, "after_sha256":pins[p]}
+              and previous != pins[p], "bounded_g4_human_change_preimage")
+    for p in inputs - paths:
+        _need(trusted_git.run_git_bytes(target, "cat-file", "blob", q["base_commit"] + ":" + p) == payloads[p],
+              "bounded_g4_human_unowned_change")
+    review = _g4_human_subject_review(read, q["source_review"], evidence_root,
+                                     g4_human_review_subject(q), q["stage"], q["phase"])
+    attested = inputs - paths if q["phase"] == "development" else inputs
+    observation = trusted_git.attest_target_index(target, attested_paths=tuple(sorted(attested)),
+        expected_head=q["expected_head"], expected_index_tree=q["expected_index_tree"], scratch_parent=scratch)
+    if q["phase"] == "development":
+        _need(q["expected_head"] == q["base_commit"]
+              and q["expected_index_tree"] in {q["base_tree"],q["candidate_tree"]},
+              "bounded_g4_human_development_binding")
+    else:
+        headers = trusted_git.run_git(target, "cat-file", "commit", q["expected_head"]).split("\n\n",1)[0].splitlines()
+        _need([h for h in headers if h.startswith("parent ")] == ["parent " + q["base_commit"]]
+              and [h for h in headers if h.startswith("tree ")] == ["tree " + q["candidate_tree"]]
+              and q["expected_index_tree"] == q["candidate_tree"],
+              "bounded_g4_human_committed_binding")
+    for p,snapshot in snapshots.items():
+        _need(trusted_git._read_regular_snapshot(p, maximum_bytes=2*1024*1024) == snapshot,
+              "bounded_g4_human_snapshot_drift")
+    before = {p:trusted_git.run_git_bytes(target,"cat-file","blob",G4_HUMAN_BASE["commit"]+":"+p)
+              for p in (STATE,GATES,OVERLAY,AGENTS)}
+    _need(all(payloads[p] == before[p] for p in (STATE,GATES,OVERLAY,AGENTS)),
+          "bounded_g4_human_state_unchanged")
+    return BoundedG1BInputs(q,before,payloads,
+        {"scope":scope,"vector":vector,"mapping":mapping,"publication":publication,"review":review},observation)
+
+
+def _validate_g4_human_loaded_policy(inputs):
+    validate_g4_human_scope(inputs.evidence["scope"])
+    try:
+        configuration = raisa_policy.validate_recovery_configuration(
+            documents={Path(p).name:inputs.payloads[p] for p in CONFIGURATION_PATHS},
+            expected_sha256={Path(p).name:inputs.binding["payload_sha256"][p] for p in CONFIGURATION_PATHS},
+            agents_text=inputs.payloads[AGENTS].decode("utf-8"),state=_json(inputs.payloads[STATE]))
+    except (raisa_policy.RaisaPolicyError, configuration_core.ConfigurationError) as error:
+        raise BoundedG1BError(error.reason_code) from error
+    paths = G4_HUMAN_CONTROL if inputs.binding["stage"] == "enable" else frozenset()
+    return {p:inputs.payloads[p] for p in paths},configuration

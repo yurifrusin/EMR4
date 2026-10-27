@@ -3298,7 +3298,7 @@ def _account_coexistence_preserved_receipt_v13_scope():
 
 def test_account_bootstrap_scope_and_source_vector_are_exact():
     root = Path(__file__).resolve().parents[1]
-    scope = json.loads((root / bounded_g1b.G4_STAGE1_SUCCESSOR_SCOPE).read_bytes())
+    scope = _human_preserved_account_v14_scope()
     bounded_g1b.validate_g4_account_bootstrap_scope(scope)
     assert len(scope["allowed_paths"]) == 11
     assert len(scope["source_sha256"]) == 8
@@ -3423,7 +3423,7 @@ def test_account_receipt_correlation_coexistence_routes_do_not_cross(monkeypatch
 
 def test_account_v14_keeps_receipt_v13_and_correlation_v12_scopes_separate():
     root = Path(__file__).resolve().parents[1]
-    account = json.loads((root/bounded_g1b.G4_STAGE1_SUCCESSOR_SCOPE).read_bytes())
+    account = _human_preserved_account_v14_scope()
     receipt = _account_coexistence_preserved_receipt_v13_scope()
     correlation = _receipt_predecessor_v12_scope()
     cases = ((account,bounded_g1b.validate_g4_account_bootstrap_scope,"account_bootstrap",14),
@@ -3448,3 +3448,392 @@ def test_account_v14_keeps_receipt_v13_and_correlation_v12_scopes_separate():
     assert account["allowed_effects"] == receipt["allowed_effects"] == correlation["allowed_effects"]
     assert account["excluded_effects"] == receipt["excluded_effects"] == correlation["excluded_effects"]
 
+
+
+def _human_preserved_account_v14_scope():
+    """Preserved exact accepted Account14 fixture; active human scope is source-only15."""
+    return json.loads('{"active_profile":"G4_STAGE1_LOCAL_SUCCESSOR","admission_grants_runtime_authority":false,"allowed_effects":["control_plane_edit","product_behavior_change","repository_read","task_branch_commit","task_branch_push"],"allowed_paths":["alembic/versions/c8d9e0f1a2b3_add_account_membership_bridge.py","alembic/versions/d9e0f1a2b3c4_add_account_bootstrap_access.py","app/dependencies.py","app/models/__init__.py","app/models/account_membership.py","app/routers/auth.py","app/schemas/auth.py","app/services/account_access.py","app/services/auth_service.py","tests/test_account_bootstrap.py","tests/test_account_membership_persistence.py"],"allowed_task_kind":"g4_stage1_local_successor","control_sha256":{"orchestration_harness/bounded_g1b.py":"cdd42a8b17e6d350f67406a953bf4fe41a8ede75978161b6a5b76118bb91a9cb","tests/test_g4_stage1_successor_entry.py":"58830214930438c9c7a408d96a1659962b09d04f5f0cd9612f87b7e25a2542b3"},"excluded_effects":["unreviewed_application_or_database_runtime","unreviewed_browser_or_microphone_runtime","unreviewed_voice_child_or_network_egress","provider_invocation","real_data_access","protected_ref_movement","deployment","public_listener"],"mapping_review":{"path":"C:/Users/there/EMR4-tools/local-mock-account-bootstrap-candidate-v1/independent-bootstrap-source-review-v1.json","sha256":"f9e6c014104ca3d3a7150a732136b4a2f3ffc677ff2557e49816401e1f482cb9"},"predecessor_scope":{"sha256":"5b2460fafa34d66f160277e527a9779a815cb69e6fb06e656d87629f71c710de"},"product_sha256":{"alembic/versions/c8d9e0f1a2b3_add_account_membership_bridge.py":"f64ccbc9d05070e1cf0dc84fa145f27229245aef96bd9bd75a2433de51e0f73e","alembic/versions/d9e0f1a2b3c4_add_account_bootstrap_access.py":"06663906d285ea147062cbadc665ccc9511906bca7bc320f8b73984808095cbc","app/dependencies.py":"0e315c88b5231bdefa768d4e7c7708dae056ead1d9902270c747b3b519fa0b46","app/models/__init__.py":"29ad2b2034b016630d2157940d829fffb294f23c1ec2fb246f87a653d81268f2","app/models/account_membership.py":"81bdc94dd58b806591807d662180c240351afc910e3e18dba0911703915c9502","app/routers/auth.py":"f5e2a87e9fca99758fec6b69a9a64dc43257fb0a41285815eed29701af3eb893","app/schemas/auth.py":"5815412abf75515ed9cb9089042404587cb54f5e7bdc87047864ddfdd7936234","app/services/account_access.py":"7c3efc21b9e437481a09bd935c87aaacd97de4f73c9c811a8430a8a7ae3c7d17","app/services/auth_service.py":"402f57c68a3f3a2c55c0215f9e746ae956c4c5f57bb9ab553dacecc8f9e6cb5d","tests/test_account_bootstrap.py":"7ac93a512dae14aa5d693b924c9e69f1351c6d9549b0673281e5f55546eaffb8","tests/test_account_membership_persistence.py":"5ced8b36fecd3a964a90efcf3d4f40a33fbe8b86a2307bd24dbd6326cb9fd506"},"product_vector":{"path":"C:/Users/there/EMR4-tools/local-mock-account-bootstrap-candidate-v1/source-vector-v1.json","sha256":"f2312b35a4187a9fe835f9fb3dac91d7938652d3048866ca0e2d8fad61186620"},"recorded_at":"2026-10-27T00:00:00+00:00","runtime_binding_required":true,"schema_version":"ariadne.g4_stage1_successor_entry_scope.v14","selected_base":{"commit":"f7a5a790bce6ff23decd06af60108a980bee3089","tree":"aed9e3032a517a99b611f1262a858f641364a585"},"source_sha256":{"orchestration_harness/bounded_g1b.py":"cdd42a8b17e6d350f67406a953bf4fe41a8ede75978161b6a5b76118bb91a9cb","orchestration_harness/configuration_core.py":"f7ba7a80eb0a590f9fb71b864e6c1f9f43241d9f7d70a38da67a9243fea208e5","orchestration_harness/pinned_programme_gatekeeper.py":"c1fea9a2849068ed8e87dbe1e7cec1cc7e762fa2bc8876fc32bbda80d226cf39","orchestration_harness/programme_admission.py":"ac816a8a79b2d8222fa357777c075950927e86cf30c8a5b25ffd08a474052181","orchestration_harness/raisa_policy.py":"2dabec173bf7e39629e7036cac2d13c777e52649cea744a1fec778b5e9b9332e","orchestration_harness/trusted_git.py":"4a856bffe2b68d7c7e1875152629c9024a32679b59d9b1ed8301c368d41ff527","scripts/raisa_ariadne_recovery_preflight.py":"edfd37b30673b8544d309b532c95b3fd7c20ff592880a8a0235dfde6cfc8e7e4","tests/test_bounded_g1b.py":"bb1be86ca39232fea30c1ea84cdfb114428d57be0f8f67bf7e86daab0ba73bc5"},"voice_activation":false}\n')
+
+
+def _human_scope():
+    root = Path(__file__).resolve().parents[1]
+    return json.loads((root / bounded_g1b.G4_STAGE1_SUCCESSOR_SCOPE).read_bytes())
+
+
+def _human_q(stage="enable", phase="development"):
+    q = {key:None for key in bounded_g1b.G4_HUMAN_BINDING_KEYS}
+    paths = bounded_g1b.G4_HUMAN_CONTROL if stage == "enable" else frozenset()
+    q.update(schema_version=bounded_g1b.G4_HUMAN_SCHEMA, operation_id="human-source-unit",
+             operation_kind="enable_g4_stage1_successor" if stage == "enable" else bounded_g1b.G4_HUMAN_ADMIT_KIND,
+             stage=stage, phase=phase, repair_sha256={p:{} for p in paths},
+             base_commit=bounded_g1b.G4_HUMAN_BASE["commit"],
+             expected_head=bounded_g1b.G4_HUMAN_BASE["commit"],
+             base_tree=bounded_g1b.G4_HUMAN_BASE["tree"],
+             candidate_tree=bounded_g1b.G4_HUMAN_BASE["tree"],
+             expected_index_tree=bounded_g1b.G4_HUMAN_BASE["tree"])
+    return q
+
+
+def test_human_external_scope_does_not_activate_voice_or_admit_product():
+    scope = _human_scope()
+    bounded_g1b.validate_g4_human_scope(scope)
+    assert len(scope["source_sha256"]) == 8
+    assert scope["allowed_paths"] == [] and scope["product_sha256"] == {}
+    for key,value in (("voice_activation",True),("runtime_binding_required",False),
+                      ("admission_grants_runtime_authority",True),
+                      ("allowed_paths",["app/services/auth_service.py"]),
+                      ("product_sha256",{"app/services/auth_service.py":"0"*64}),
+                      ("allowed_effects",scope["allowed_effects"]+["provider_invocation"]),
+                      ("selected_base",bounded_g1b.G4_ACCOUNT_BOOTSTRAP_BASE),
+                      ("predecessor_scope",{"sha256":"0"*64}),
+                      ("mapping_review",{"path":"C:/synthetic/fake-review.json","sha256":"0"*64})):
+        changed = copy.deepcopy(scope);changed[key]=value
+        with pytest.raises(bounded_g1b.BoundedG1BError) as caught:
+            bounded_g1b.validate_g4_human_scope(changed)
+        assert caught.value.reason_code == "bounded_g4_human_scope_boundary"
+
+
+@pytest.mark.parametrize("stage",["enable","admit"])
+def test_human_external_op17_subject16_and_exact_dispatch(stage):
+    q = _human_q(stage)
+    assert len(q) == 17
+    expected = bounded_g1b.G4_HUMAN_CONTROL if stage == "enable" else frozenset()
+    assert bounded_g1b.operation_paths(q["operation_kind"],q) == expected
+    assert bounded_g1b._operation(q["operation_kind"],q)["g4_human_external_source"] is True
+    subject = bounded_g1b.g4_human_review_subject(q)
+    q["source_review"]={"outside_subject":True}
+    assert bounded_g1b.g4_human_review_subject(q) == subject
+    for key in set(q)-{"source_review"}:
+        changed=copy.deepcopy(q);changed[key]="changed"
+        assert bounded_g1b.g4_human_review_subject(changed) != subject
+    with pytest.raises(bounded_g1b.BoundedG1BError) as caught:
+        bounded_g1b.operation_paths(q["operation_kind"],dict(q,repair_sha256={"app/unowned.py":{}}))
+    assert caught.value.reason_code == "bounded_g4_human_changed_paths"
+    if stage == "admit":
+        assert bounded_g1b.operation_effects(q["operation_kind"]) == {"repository_read"}
+
+
+@pytest.mark.parametrize("entrypoint,phase",[("task_branch_commit","development"),
+    ("task_branch_push","pre-push"),("task_branch_push","post-push"),
+    ("recovery_preflight","pre-push"),("recovery_preflight","post-push")])
+def test_human_external_zero_delta_cannot_be_commit_or_push(entrypoint,phase):
+    with pytest.raises(bounded_g1b.BoundedG1BError) as caught:
+        bounded_g1b._g4_human_require_entrypoint(_human_q("admit"),entrypoint,phase)
+    assert caught.value.reason_code == "bounded_g4_human_admit_entrypoint"
+    bounded_g1b._g4_human_require_entrypoint(_human_q("enable"),entrypoint,phase)
+    bounded_g1b._g4_human_require_entrypoint({"schema_version":bounded_g1b.G4_ACCOUNT_BOOTSTRAP_SCHEMA},entrypoint,phase)
+
+
+@pytest.mark.parametrize("key,value,reason",[
+    ("phase","pre-push","bounded_g4_human_admit_no_delta"),
+    ("phase","post-push","bounded_g4_human_admit_no_delta"),
+    ("candidate_tree","a"*40,"bounded_g4_human_admit_no_delta"),
+    ("expected_head","a"*40,"bounded_g4_human_admit_no_delta"),
+    ("expected_index_tree","a"*40,"bounded_g4_human_admit_no_delta"),
+    ("repair_sha256",{"app/unowned.py":{}},"bounded_g4_human_changed_paths")])
+def test_human_admit_rejects_delta_before_external_read(key,value,reason):
+    q=_human_q("admit");q[key]=value
+    def forbidden(*args):pytest.fail("invalid admission reached an input/effect seam")
+    with pytest.raises(bounded_g1b.BoundedG1BError) as caught:
+        bounded_g1b._load_g4_human_inputs(None,Path("C:/synthetic-target"),
+            Path("C:/synthetic-source"),Path("C:/synthetic-evidence"),
+            Path("C:/synthetic-scratch"),q,forbidden,{})
+    assert caught.value.reason_code == reason
+
+
+def test_human_subject_review_requires_new_independent_exact_subject():
+    evidence=bounded_g1b.G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT
+    path=bounded_g1b.G4_HUMAN_ROOT/"entry-admission-v1/independent-admit-development-subject-review-v1.json"
+    subject="a"*64
+    review={"schema":"emr4.g4_operation_review.v1","status":"PASS",
+        "verdict":"PASS_G4_STAGE1_HUMAN_EXTERNAL_EXACT_ADMISSION_SUBJECT",
+        "subject_sha256":subject,"independent":True,"implementation_authorship":False,
+        "blocking_findings":[],"reviewer_agent":"/root/independent-synthetic-reviewer",
+        "stage":"admit","phase":"development"}
+    def call(value,row=None):
+        return bounded_g1b._g4_human_subject_review(
+            lambda p,d:json.dumps(value).encode(),row or {"path":path.as_posix(),"sha256":"b"*64},
+            evidence,subject,"admit","development")
+    assert call(review)==review
+    for key,value in (("subject_sha256","0"*64),("independent",False),
+                      ("implementation_authorship",True),("blocking_findings",["block"]),
+                      ("reviewer_agent","/root/human_bureau_join_source_author"),
+                      ("reviewer_agent","/root/human_account11_topology_join_author"),
+                      ("phase","pre-push"),("stage","enable"),
+                      ("verdict","PASS_CURRENT_BUREAU_HUMAN_SOURCE_PREPARATION_ONLY")):
+        changed=copy.deepcopy(review);changed[key]=value
+        with pytest.raises(bounded_g1b.BoundedG1BError) as caught:call(changed)
+        assert caught.value.reason_code == "bounded_g4_human_independent_subject"
+    with pytest.raises(bounded_g1b.BoundedG1BError) as caught:
+        call(review,{"path":(path.parent/"wrong.json").as_posix(),"sha256":"b"*64})
+    assert caught.value.reason_code == "bounded_g4_human_review_path"
+
+
+def test_human_account_receipt_bureau_dispatches_stay_separate(monkeypatch):
+    families=[("human_external",bounded_g1b.G4_HUMAN_SCHEMA,"admit",bounded_g1b.G4_HUMAN_ADMIT_KIND,
+               frozenset(),"_validate_g4_human_loaded_policy"),
+              ("account_bootstrap",bounded_g1b.G4_ACCOUNT_BOOTSTRAP_SCHEMA,"apply","implement_g4_stage1_successor",
+               bounded_g1b.G4_ACCOUNT_BOOTSTRAP_PRODUCT,"_validate_g4_account_bootstrap_loaded_policy"),
+              ("receipt",bounded_g1b.G4_RECEIPT_SCHEMA,"apply","implement_g4_stage1_successor",
+               bounded_g1b.G4_RECEIPT_PRODUCT,"_validate_g4_receipt_loaded_policy"),
+              ("correlation_binding",bounded_g1b.G4_CORRELATION_BINDING_SCHEMA,"apply","implement_g4_stage1_successor",
+               bounded_g1b.G4_CORRELATION_BINDING_PRODUCT,"_validate_g4_correlation_binding_loaded_policy")]
+    calls=[]
+    for name,schema,stage,kind,paths,helper in families:
+        sentinel=({name:b"routing-only"},None)
+        def route(inputs,family=name,result=sentinel):calls.append(family);return result
+        monkeypatch.setattr(bounded_g1b,helper,route)
+        q=_human_q();q.update(schema_version=schema,stage=stage,operation_kind=kind,
+                              repair_sha256={p:{} for p in paths})
+        assert bounded_g1b.operation_paths(kind,q)==paths
+        result=bounded_g1b._validate_loaded_policy(bounded_g1b.BoundedG1BInputs(q,{},{},{},{}))
+        assert result is sentinel
+        if name != "human_external":
+            with pytest.raises(bounded_g1b.BoundedG1BError):
+                bounded_g1b.operation_paths(kind,dict(q,repair_sha256={}))
+    assert calls==[f[0] for f in families]
+
+
+def test_human_loaded_policy_keeps_real_ten_document_validator(monkeypatch):
+    scope=_human_scope();pins={p:"d"*64 for p in bounded_g1b.CONFIGURATION_PATHS}
+    payloads={p:("document:"+p).encode() for p in pins}
+    payloads.update({bounded_g1b.AGENTS:b"literal-agents",bounded_g1b.STATE:b'{"synthetic":true}'})
+    marker=object();calls=[]
+    def validate(**kwargs):calls.append(kwargs);return marker
+    monkeypatch.setattr(bounded_g1b.raisa_policy,"validate_recovery_configuration",validate)
+    assert len(pins)==10
+    for stage,paths in (("enable",bounded_g1b.G4_HUMAN_CONTROL),("admit",frozenset())):
+        p=dict(payloads);p.update({key:b"owned-candidate" for key in paths})
+        inputs=bounded_g1b.BoundedG1BInputs({"stage":stage,"payload_sha256":pins},{},p,{"scope":scope},{})
+        result,configuration=bounded_g1b._validate_g4_human_loaded_policy(inputs)
+        assert set(result)==paths and configuration is marker
+        assert calls[-1]=={"documents":{Path(k).name:payloads[k] for k in pins},
+            "expected_sha256":{Path(k).name:pins[k] for k in pins},
+            "agents_text":"literal-agents","state":{"synthetic":True}}
+    def reject(**kwargs):raise bounded_g1b.raisa_policy.RaisaPolicyError("human-config-rejected")
+    monkeypatch.setattr(bounded_g1b.raisa_policy,"validate_recovery_configuration",reject)
+    with pytest.raises(bounded_g1b.BoundedG1BError) as caught:
+        bounded_g1b._validate_g4_human_loaded_policy(inputs)
+    assert caught.value.reason_code=="human-config-rejected"
+
+
+def test_human_current_publication_is_exact_independent_effect_not_boolean():
+    raw=bounded_g1b.G4_HUMAN_CURRENT_PUBLICATION.read_bytes()
+    assert hashlib.sha256(raw).hexdigest()==bounded_g1b.G4_HUMAN_CURRENT_PUBLICATION_SHA
+    original=json.loads(raw)
+    assert bounded_g1b._g4_human_current_publication(lambda p,d:raw)==original
+    for key,value in (("commit","0"*40),("candidate_tree","0"*40),
+        ("independent",False),("implementation_authorship",True),("blocking_findings",["blocked"]),
+        ("product_publication_accepted",False),("same_attempt_remote_readback_verified",False),
+        ("whole_inverse_verified_same_attempt",False),("protected_refs_unchanged",False),
+        ("result_sha256","0"*64),("published_ref","refs/heads/other"),
+        ("published_url","https://example.invalid/"),
+        ("reviewer_agent","/root/human_bureau_join_source_author")):
+        changed=copy.deepcopy(original);changed[key]=value
+        with pytest.raises(bounded_g1b.BoundedG1BError) as caught:
+            bounded_g1b._g4_human_current_publication(lambda p,d:json.dumps(changed).encode())
+        assert caught.value.reason_code=="bounded_g4_human_current_publication"
+
+
+def _human_loader_fixture(monkeypatch,stage="enable",phase="development"):
+    """Controlled source-flow fixture: Git/index/external source checks substituted.
+
+    This exercises this real loader, not actual native policy/Git/runtime. It
+    does not read/retest154 accepted backend bodies or unchanged speech code.
+    """
+    root=Path(__file__).resolve().parents[1]
+    candidate=root.parent
+    target=Path("C:/synthetic-human-target");source=Path("C:/synthetic-human-source")
+    evidence=bounded_g1b.G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT
+    scope=_human_scope()
+    paths=(bounded_g1b.CONFIGURATION_PATHS | {bounded_g1b.STATE,bounded_g1b.GATES,
+        bounded_g1b.OVERLAY,bounded_g1b.AGENTS,bounded_g1b.G4_STAGE1_INTERACTIVE_SCOPE,
+        bounded_g1b.G4_STAGE1_SUCCESSOR_SCOPE,bounded_g1b.G4_STAGE1_SUCCESSOR_TEST,
+        bounded_g1b.G4_CI_WORKFLOW} | bounded_g1b.SOURCE_PATHS | bounded_g1b.CONTROLLER_PATHS)
+    before={p:("accepted:"+p).encode() for p in paths}
+    for p in bounded_g1b.G4_HUMAN_CONTROL:
+        before[p]=(candidate/"before"/p).read_bytes()
+    after={p:before[p] for p in paths}
+    for p in bounded_g1b.G4_HUMAN_CONTROL-{bounded_g1b.G4_STAGE1_SUCCESSOR_SCOPE}:
+        after[p]=(root/p).read_bytes()
+    scope["source_sha256"]={p:hashlib.sha256(after[p]).hexdigest()
+        for p in bounded_g1b.SOURCE_PATHS|bounded_g1b.CONTROLLER_PATHS}
+    scope["control_sha256"]={p:hashlib.sha256(after[p]).hexdigest()
+        for p in bounded_g1b.G4_HUMAN_CONTROL-{bounded_g1b.G4_STAGE1_SUCCESSOR_SCOPE}}
+    after[bounded_g1b.G4_STAGE1_SUCCESSOR_SCOPE]=bounded_g1b._canonical(scope)+b"\n"
+    q=_human_q(stage,phase)
+    q.update(source_sha256=scope["source_sha256"],
+        payload_sha256={p:hashlib.sha256(raw).hexdigest() for p,raw in after.items()},
+        product_vector=scope["product_vector"],mapping_review=scope["mapping_review"])
+    if stage=="enable":
+        q["candidate_tree"]="a"*40
+        q["repair_sha256"]={p:{"before_sha256":bounded_g1b.G4_HUMAN_PREIMAGES[p],
+            "after_sha256":q["payload_sha256"][p]} for p in bounded_g1b.G4_HUMAN_CONTROL}
+        if phase!="development":
+            q.update(expected_head="e"*40,expected_index_tree=q["candidate_tree"])
+    else:
+        q.update(base_commit="b"*40,base_tree="c"*40,candidate_tree="c"*40,
+                 expected_head="b"*40,expected_index_tree="c"*40)
+        activation=bounded_g1b.G4_HUMAN_ROOT/"entry-admission-v1/independent-enable-push-effect-review-v1.json"
+        q["activation_acceptance"]={"path":activation.as_posix(),"sha256":"f"*64}
+    subject_path=bounded_g1b.G4_HUMAN_ROOT/"entry-admission-v1"/(
+        "independent-"+stage+"-"+phase+"-subject-review-v1.json")
+    q["source_review"]={"path":subject_path.as_posix(),"sha256":"d"*64}
+    def read(p,d):
+        if p==subject_path:
+            return json.dumps({"schema":"emr4.g4_operation_review.v1","status":"PASS",
+                "verdict":"PASS_G4_STAGE1_HUMAN_EXTERNAL_EXACT_ADMISSION_SUBJECT",
+                "subject_sha256":bounded_g1b.g4_human_review_subject(q),"independent":True,
+                "implementation_authorship":False,"blocking_findings":[],
+                "reviewer_agent":"/root/synthetic-independent-reviewer","stage":stage,"phase":phase}).encode()
+        if stage=="admit" and p==Path(q["activation_acceptance"]["path"]):
+            return json.dumps({"schema":"emr4.g4_operation_review.v1","status":"PASS",
+                "verdict":"PASS_G4_STAGE1_HUMAN_EXTERNAL_CONTROL_PUBLICATION_EFFECT",
+                "reviewer_agent":"/root/synthetic-independent-reviewer","independent":True,
+                "implementation_authorship":False,"blocking_findings":[],"stage":"enable","phase":"push",
+                "base":bounded_g1b.G4_HUMAN_BASE["commit"],"commit":q["base_commit"],
+                "candidate_tree":q["base_tree"],"control_activation_accepted":True,
+                "same_attempt_remote_readback_verified":True,"protected_refs_unchanged":True,
+                "whole_inverse_verified_same_attempt":True,"published_ref":bounded_g1b.G4_STAGE1_INTERACTIVE_BACKEND_REF}).encode()
+        relative=p.relative_to(target if p.is_relative_to(target) else source).as_posix()
+        raw=after[relative]
+        if hashlib.sha256(raw).hexdigest()!=d:
+            raise bounded_g1b.BoundedG1BError("bounded_g1b_input_digest_changed")
+        return raw
+    calls=[]
+    def git_bytes(_target,*args):
+        assert args[:2]==("cat-file","blob")
+        commit,relative=args[2].split(":",1)
+        return before[relative] if commit==bounded_g1b.G4_HUMAN_BASE["commit"] else after[relative]
+    def git(_target,*args):
+        if args[0]=="rev-parse":return bounded_g1b.G4_HUMAN_BASE["tree"]
+        assert args[:2]==("cat-file","commit")
+        parent=bounded_g1b.G4_HUMAN_BASE["commit"] if stage=="admit" else q["base_commit"]
+        tree=q["base_tree"] if stage=="admit" else q["candidate_tree"]
+        return "tree "+tree+"\nparent "+parent+"\n\nsynthetic\n"
+    def attest(_target,**kwargs):calls.append(kwargs);return {"observation_sha256":"sha256:"+"0"*64}
+    monkeypatch.setattr(bounded_g1b.trusted_git,"run_git_bytes",git_bytes)
+    monkeypatch.setattr(bounded_g1b.trusted_git,"run_git",git)
+    monkeypatch.setattr(bounded_g1b.trusted_git,"attest_target_index",attest)
+    monkeypatch.setattr(bounded_g1b,"_g4_human_external_inputs",lambda _read,_q:({"inert":True},{"preparation_only":True}))
+    monkeypatch.setattr(bounded_g1b,"_g4_human_current_publication",lambda _read:{"synthetic_control_flow":True})
+    def run():
+        return bounded_g1b._load_g4_human_inputs(None,target,source,evidence,
+            Path("C:/synthetic-human-scratch"),q,read,{})
+    return run,q,after,before,calls,paths
+
+
+@pytest.mark.parametrize("stage,phase",[("enable","development"),("enable","pre-push"),
+    ("enable","post-push"),("admit","development")])
+def test_human_loader_retains_core25_source8_and_phase_index_attestation(monkeypatch,stage,phase):
+    run,q,after,before,calls,paths=_human_loader_fixture(monkeypatch,stage,phase)
+    inputs=run()
+    assert inputs.binding is q and len(q["source_sha256"])==8 and len(paths)==25
+    assert set(inputs.payloads)==paths and inputs.payloads==after
+    owned=bounded_g1b.G4_HUMAN_CONTROL if stage=="enable" else frozenset()
+    attested=paths-owned if phase=="development" else paths
+    assert calls==[{"attested_paths":tuple(sorted(attested)),"expected_head":q["expected_head"],
+        "expected_index_tree":q["expected_index_tree"],"scratch_parent":Path("C:/synthetic-human-scratch")}]
+
+
+@pytest.mark.parametrize("mode,reason",[("before","bounded_g4_human_change_preimage"),
+    ("unowned","bounded_g4_human_unowned_change"),
+    ("payload_extra","bounded_g4_human_payload_paths"),
+    ("source_missing","bounded_g4_human_sources")])
+def test_human_loader_rejects_preimage_unowned_and_closure_drift(monkeypatch,mode,reason):
+    run,q,after,before,calls,paths=_human_loader_fixture(monkeypatch)
+    if mode=="before":before[bounded_g1b.G4_AUDIT_CODE]=b"changed-current-controller"
+    elif mode=="unowned":before[bounded_g1b.G4_CI_WORKFLOW]=b"different-committed-workflow"
+    elif mode=="payload_extra":q["payload_sha256"]["app/unowned.py"]="0"*64
+    else:del q["source_sha256"][bounded_g1b.G4_AUDIT_CODE]
+    with pytest.raises(bounded_g1b.BoundedG1BError) as caught:run()
+    assert caught.value.reason_code==reason
+    assert calls==[]
+
+
+@pytest.mark.parametrize("binding",[None,{},
+    {"schema_version":"ariadne.g4_stage1_local_mock_account_bootstrap_operation_binding.v1",
+     "operation_kind":"admit_g4_stage1_human_external_source","stage":"admit","repair_sha256":{}}])
+def test_human_empty_paths_exception_requires_its_exact_family(binding):
+    with pytest.raises(bounded_g1b.BoundedG1BError) as caught:
+        bounded_g1b.operation_paths(bounded_g1b.G4_HUMAN_ADMIT_KIND,binding)
+    assert caught.value.reason_code=="bounded_g4_human_binding_kind"
+
+
+@pytest.mark.parametrize("mutation,reason",[("none",None),
+    ("outside","bounded_g4_human_external_source"),
+    ("runtime_review","bounded_g4_human_preparation_provenance"),
+    ("duplicate","bounded_g4_human_external_unique"),
+    ("old_schema","bounded_g4_human_external_vector"),
+    ("unaccepted","bounded_g4_human_preparation_provenance"),
+    ("nested_after","bounded_g4_human_preparation_provenance")])
+def test_human_external_reader_retains_exact_paths_and_inert_provenance(mutation,reason):
+    # Only actual ordinary metadata is read. Source bodies are deliberate length
+    # substitutions, so this is not a new source hash/native/package acceptance.
+    vector=json.loads(bounded_g1b.G4_HUMAN_VECTOR.read_bytes())
+    table=json.loads(Path(vector["backend_rows"]["path"]).read_bytes())
+    review=json.loads(bounded_g1b.G4_HUMAN_PREPARATION_REVIEW.read_bytes())
+    if mutation=="outside":vector["actors"][0]["after"]["path"]="C:/synthetic-unowned/actor.py"
+    if mutation=="duplicate":vector["actors"][1]["after"]=copy.deepcopy(vector["actors"][0]["after"])
+    if mutation=="runtime_review":review["runtime_accepted"]=True
+    if mutation=="old_schema":vector["schema"]="emr4.selected_bureau_human_source_vector.v2"
+    if mutation=="unaccepted":review["source_preparation_accepted"]=False
+    if mutation=="nested_after":review["actor_inverse_evidence"][0]["after"]["sha256"]="0"*64
+    metadata={bounded_g1b.G4_HUMAN_VECTOR:(json.dumps(vector,indent=2)+"\n").encode(),
+        bounded_g1b.G4_HUMAN_PREPARATION_REVIEW:json.dumps(review).encode(),
+        Path(vector["backend_rows"]["path"]):json.dumps(table).encode()}
+    # The real fixed metadata rows are read as data only; all actor/backend
+    # bodies remain explicit length substitutions in this source-flow test.
+    for row in bounded_g1b.G4_HUMAN_PREPARATION_SUBJECT.values():
+        path=Path(row["path"])
+        if path not in metadata:metadata[path]=path.read_bytes()
+    rows=[a["after"] for a in vector["actors"]]+[s["after"] for s in vector["site"]]+[vector["site_handoff"],vector["backend_rows"]]
+    lengths={Path(r["path"]):r["bytes"] for r in rows}
+    lengths.update({Path(r["source_path"]):r["bytes"] for r in table})
+    seen=[]
+    def read(path,digest):
+        seen.append(path)
+        if path in metadata:
+            if path==Path(vector["backend_rows"]["path"]):
+                # The exact serialized frozen table length is retained.
+                return Path(path).read_bytes()
+            return metadata[path]
+        if path in lengths:return b"x"*lengths[path]
+        assert path.name in {"component_recognizer.py","wav_validation.py"}
+        return b"source-length-substitution"
+    q=_human_q();q.update(product_vector={"path":bounded_g1b.G4_HUMAN_VECTOR.as_posix(),"sha256":bounded_g1b.G4_HUMAN_VECTOR_SHA},
+        mapping_review={"path":bounded_g1b.G4_HUMAN_PREPARATION_REVIEW.as_posix(),"sha256":bounded_g1b.G4_HUMAN_PREPARATION_REVIEW_SHA})
+    if reason is None:
+        result=bounded_g1b._g4_human_external_inputs(read,q)
+        assert result==(vector,review)
+        assert all(Path(r["source_path"]) in seen for r in table)
+        assert any(p.name=="component_recognizer.py" for p in seen)
+        assert any(p.name=="wav_validation.py" for p in seen)
+    else:
+        with pytest.raises(bounded_g1b.BoundedG1BError) as caught:
+            bounded_g1b._g4_human_external_inputs(read,q)
+        assert caught.value.reason_code==reason
+
+
+def test_human_account11_metadata_joins_exact_current_base_and_nested_actor_pins():
+    vector=json.loads(bounded_g1b.G4_HUMAN_VECTOR.read_bytes())
+    review=json.loads(bounded_g1b.G4_HUMAN_PREPARATION_REVIEW.read_bytes())
+    table=json.loads(Path(vector["backend_rows"]["path"]).read_bytes())
+    assert len(table)==154
+    assert vector["actual_base_binding"]["commit"]==bounded_g1b.G4_HUMAN_BASE["commit"]
+    assert vector["actual_base_binding"]["tree"]==bounded_g1b.G4_HUMAN_BASE["tree"]
+    assert review["subject"]==bounded_g1b.G4_HUMAN_PREPARATION_SUBJECT
+    assert all(item["before"]==actor["before"] and item["after"]==actor["after"]
+               for item,actor in zip(review["actor_inverse_evidence"],vector["actors"]))
+    assert all(not row["relative_path"].startswith("tests/") for row in table)
+
+
+@pytest.mark.parametrize("key,value",[("schema","emr4.g4_local_mock_account_bootstrap_enable_publication_effect_review.v1"),
+    ("stage","enable"),("base","0"*40),("base_tree","0"*40),
+    ("published_commit","0"*40),("result",{"path":"C:/fake/result.json","bytes":7776,"sha256":"0"*64})])
+def test_human_current_account_apply_publication_rejects_prior_family_or_unjoined_result(key,value):
+    review=json.loads(bounded_g1b.G4_HUMAN_CURRENT_PUBLICATION.read_bytes())
+    review[key]=value
+    with pytest.raises(bounded_g1b.BoundedG1BError) as caught:
+        bounded_g1b._g4_human_current_publication(lambda p,d:json.dumps(review).encode())
+    assert caught.value.reason_code=="bounded_g4_human_current_publication"
