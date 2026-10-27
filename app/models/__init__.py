@@ -1,4 +1,5 @@
 from app.models.base import Base
+from app.models.account_membership import Account, PracticeMembership, PracticeMembershipRole
 from app.models.tenancy import Practice, PracticeLocation, User, Practitioner
 from app.models.patients import Patient
 from app.models.patient_requests import PatientBookingRequest
@@ -40,6 +41,7 @@ from app.models.application_identity_oidc_attempt import (
 
 __all__ = [
     "Base",
+    "Account", "PracticeMembership", "PracticeMembershipRole",
     "Practice", "PracticeLocation", "User", "Practitioner",
     "Patient",
     "PatientBookingRequest",
