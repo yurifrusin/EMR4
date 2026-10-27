@@ -3431,6 +3431,8 @@ def operation_paths(kind: str, binding: dict | None = None) -> frozenset[str]:
         return _g4_compass_entry_paths(binding)
     if kind == G4_CI_KIND:
         return _g4_ci_paths(binding)
+    if kind in G4_STAGE1_SUCCESSOR_KINDS and _is_g4_invitation_binding(binding):
+        return _g4_invitation_paths(kind, binding)
     if kind in G4_STAGE1_SUCCESSOR_KINDS and _is_g4_receipt_binding(binding):
         return _g4_receipt_paths(kind, binding)
     if kind in G4_STAGE1_SUCCESSOR_KINDS and _is_g4_account_bootstrap_binding(binding):
@@ -3498,6 +3500,10 @@ def _operation(kind: str, binding: dict | None = None) -> dict:
         return {"paths": paths, "g4_ci_maintenance": True,
                 "profile": raisa_policy.G4_STAGE1_SUCCESSOR_PROFILE,
                 "gate": "G4", "limits": G4_CI_LIMITS}
+    if kind in G4_STAGE1_SUCCESSOR_KINDS and _is_g4_invitation_binding(binding):
+        return {"paths": paths, "g4_invitation_source": True,
+                "profile": raisa_policy.G4_STAGE1_SUCCESSOR_PROFILE,
+                "gate": "G4", "limits": G4_STAGE1_SUCCESSOR_LIMITS}
     if kind in G4_STAGE1_SUCCESSOR_KINDS and _is_g4_receipt_binding(binding):
         return {"paths": paths, "g4_receipt_source": True,
                 "profile": raisa_policy.G4_STAGE1_SUCCESSOR_PROFILE,
@@ -6436,6 +6442,9 @@ def load_bounded_g1b_inputs(context: BoundedG1BContext) -> BoundedG1BInputs:
     if binding.get("operation_kind") == G4_CI_KIND:
         return _load_g4_ci_inputs(
             context, target, source, evidence_root, scratch, binding, read, snapshots)
+    if binding.get("operation_kind") in G4_STAGE1_SUCCESSOR_KINDS and _is_g4_invitation_binding(binding):
+        return _load_g4_invitation_inputs(
+            context, target, source, evidence_root, scratch, binding, read, snapshots)
     if binding.get("operation_kind") in G4_STAGE1_SUCCESSOR_KINDS and _is_g4_receipt_binding(binding):
         return _load_g4_receipt_inputs(
             context, target, source, evidence_root, scratch, binding, read, snapshots)
@@ -6643,6 +6652,8 @@ def _validate_loaded_policy(inputs: BoundedG1BInputs) -> tuple[dict[str, bytes],
         return _validate_g4_compass_entry_loaded_policy(inputs)
     if operation.get("g4_ci_maintenance"):
         return _validate_g4_ci_loaded_policy(inputs)
+    if operation.get("g4_invitation_source"):
+        return _validate_g4_invitation_loaded_policy(inputs)
     if operation.get("g4_receipt_source"):
         return _validate_g4_receipt_loaded_policy(inputs)
     if operation.get("g4_account_bootstrap_source"):
@@ -14959,3 +14970,390 @@ def _validate_g4_human_loaded_policy(inputs):
         raise BoundedG1BError(error.reason_code) from error
     paths = G4_HUMAN_CONTROL if inputs.binding["stage"] == "enable" else frozenset()
     return {p:inputs.payloads[p] for p in paths},configuration
+
+
+# Separate exact synthetic invitation family; no prior family is reclassified.
+G4_INVITATION_SCHEMA = "ariadne.g4_stage1_local_synthetic_invitation_operation_binding.v1"
+G4_INVITATION_SCOPE_SCHEMA = "ariadne.g4_stage1_successor_entry_scope.v16"
+G4_INVITATION_BASE = {"commit": "76356c9809c92e37d3b61989edac4390ce228510", "tree": "87845dd28aac966d99659e3870a35492d5e10391"}
+G4_INVITATION_ROOT = G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT / "local-synthetic-invitation-successor-v1"
+G4_INVITATION_VECTOR = Path('C:/Users/there/EMR4-tools/local-mock-invitation-source-preparation-v3/source-vector-v1.json')
+G4_INVITATION_VECTOR_SHA = '42df9616575ca748e8b35783c2e762a11069a8769eb60d75a321b9c412d1f899'
+G4_INVITATION_SOURCE_REVIEW = Path('C:/Users/there/EMR4-tools/local-mock-invitation-fixture-preparation-v2/independent-invitation-product-fixture-source-review-v2.json')
+G4_INVITATION_SOURCE_REVIEW_SHA = 'd4cd39474ab7b16be0b345ac8a9b8a58d269ea317b613b06d693a554cf0ba24c'
+G4_INVITATION_CONTROL = frozenset({G4_AUDIT_CODE, G4_STAGE1_SUCCESSOR_SCOPE,
+                                        G4_STAGE1_SUCCESSOR_TEST})
+G4_INVITATION_BEFORE_SHA = {'alembic/versions/e0f1a2b3c4d5_local_synthetic_staff_invitation.py': None, 'app/services/local_synthetic_invitation.py': None, 'tests/test_local_synthetic_invitation.py': None, 'capsule/provision-invitation-owner.sql': None}
+G4_INVITATION_PRODUCT_SHA = {'alembic/versions/e0f1a2b3c4d5_local_synthetic_staff_invitation.py': '0ec8cbc40f83bebcd6b59c58052ad1a6ffc3c43ab45f4db19057d18d0c085e48', 'app/services/local_synthetic_invitation.py': 'c801dc7213893b00760074b42fbc07c631ba865958206f99d1698b012421eb14', 'tests/test_local_synthetic_invitation.py': '7021877178295904c59dd808e0601d3d2f5421e2f34a9da76d35a16cc91de089', 'capsule/provision-invitation-owner.sql': '6df06bc06345cb3179d2f10758ff561765e1b85f3b9970bb8ed88a1a5746bb7c'}
+G4_INVITATION_PRODUCT_BYTES = {'alembic/versions/e0f1a2b3c4d5_local_synthetic_staff_invitation.py': 19310, 'app/services/local_synthetic_invitation.py': 7290, 'tests/test_local_synthetic_invitation.py': 20134, 'capsule/provision-invitation-owner.sql': 369}
+G4_INVITATION_PRODUCT = frozenset(G4_INVITATION_PRODUCT_SHA)
+G4_INVITATION_BINDING_KEYS = G4_BUREAU_BINDING_KEYS
+G4_INVITATION_SCOPE_KEYS = G4_BUREAU_SCOPE_KEYS
+
+
+def _validate_g4_invitation_vector(vector):
+    rows = vector.get("rows")
+    _need(vector.get("schema") == "emr4.local_synthetic_invitation_inert_source_vector.v3"
+          and type(rows) is list and len(rows) == 4
+          and all(type(r) is dict and type(r.get("relative_path")) is str for r in rows)
+          and {r.get("relative_path") for r in rows} == G4_INVITATION_PRODUCT
+          and len({r.get("relative_path") for r in rows}) == 4,
+          "bounded_g4_invitation_vector")
+    normalized=[]
+    for row in rows:
+        relative=row["relative_path"]
+        after=row.get("after")
+        _need(row.get("original_target_before_sha256") is None
+              and type(after) is dict and set(after)=={"path","bytes","sha256"}
+              and after["path"] == (G4_INVITATION_VECTOR.parent / "after" / relative).as_posix()
+              and type(after["bytes"]) is int and after["bytes"] == G4_INVITATION_PRODUCT_BYTES[relative]
+              and after["sha256"] == G4_INVITATION_PRODUCT_SHA[relative],
+              "bounded_g4_invitation_vector")
+        normalized.append({"relative_path":relative,"before_sha256":None,
+                           "after_path":after["path"],"after_bytes":after["bytes"],"after_sha256":after["sha256"]})
+    return normalized
+
+
+def _is_g4_invitation_binding(binding):
+    return type(binding) is dict and binding.get("schema_version") == G4_INVITATION_SCHEMA
+
+
+def _g4_invitation_paths(kind, binding):
+    _need(kind in G4_STAGE1_SUCCESSOR_KINDS
+          and _is_g4_invitation_binding(binding)
+          and binding.get("operation_kind") == kind
+          and binding.get("stage") in {"enable", "apply"}
+          and ((kind == "enable_g4_stage1_successor") == (binding["stage"] == "enable"))
+          and type(binding.get("repair_sha256")) is dict,
+          "bounded_g4_invitation_binding_kind")
+    paths = G4_INVITATION_CONTROL if binding["stage"] == "enable" else G4_INVITATION_PRODUCT
+    _need(set(binding["repair_sha256"]) == paths,
+          "bounded_g4_invitation_changed_paths")
+    return paths
+
+
+def g4_invitation_review_subject(q):
+    return _sha(_canonical({key: q[key] for key in (
+        "schema_version", "operation_id", "operation_kind", "stage", "phase",
+        "base_commit", "base_tree", "expected_head", "expected_index_tree",
+        "candidate_tree", "source_sha256", "payload_sha256", "repair_sha256",
+        "activation_acceptance", "product_vector", "mapping_review")}))
+
+
+def validate_g4_invitation_scope(scope):
+    _keys(scope, G4_INVITATION_SCOPE_KEYS, "bounded_g4_invitation_scope_schema")
+    _need(scope["schema_version"] == G4_INVITATION_SCOPE_SCHEMA
+          and scope["selected_base"] == G4_INVITATION_BASE
+          and _g4_audit_timestamp(scope["recorded_at"])
+          and scope["active_profile"] == raisa_policy.G4_STAGE1_SUCCESSOR_PROFILE
+          and scope["allowed_task_kind"] == "g4_stage1_local_successor"
+          and scope["allowed_paths"] == sorted(G4_INVITATION_PRODUCT)
+          and scope["allowed_effects"] == sorted(EFFECTS | {"product_behavior_change"})
+          and scope["runtime_binding_required"] is True
+          and scope["admission_grants_runtime_authority"] is False
+          and scope["voice_activation"] is False
+          and scope["excluded_effects"] == [
+              "unreviewed_application_or_database_runtime",
+              "unreviewed_browser_or_microphone_runtime",
+              "unreviewed_voice_child_or_network_egress", "provider_invocation",
+              "real_data_access", "protected_ref_movement", "deployment",
+              "public_listener"]
+          and scope["product_sha256"] == G4_INVITATION_PRODUCT_SHA
+          and scope["product_vector"] == {
+              "path": G4_INVITATION_VECTOR.as_posix(),
+              "sha256": G4_INVITATION_VECTOR_SHA}
+          and scope["mapping_review"] == {
+              "path": G4_INVITATION_SOURCE_REVIEW.as_posix(),
+              "sha256": G4_INVITATION_SOURCE_REVIEW_SHA}
+          and scope["predecessor_scope"] == {
+              "sha256": "d049c0b8691bc76900fd8d009416be94a2d6b821428155f8da3db76d1d15368a"},
+          "bounded_g4_invitation_scope_boundary")
+    sources = _digest_map(scope["source_sha256"], SOURCE_PATHS | CONTROLLER_PATHS,
+                          "bounded_g4_invitation_sources")
+    control = _digest_map(scope["control_sha256"],
+                          G4_INVITATION_CONTROL - {G4_STAGE1_SUCCESSOR_SCOPE},
+                          "bounded_g4_invitation_control_sources")
+    _need(sources[G4_AUDIT_CODE] == control[G4_AUDIT_CODE],
+          "bounded_g4_invitation_source_vector")
+    return sources
+
+
+def _g4_invitation_review(read, row, evidence_root, subject, stage, phase):
+    _keys(row, {"path", "sha256"}, "bounded_g4_invitation_review_row")
+    path = G4_INVITATION_ROOT / "entry-admission-v1" / (
+        "independent-" + stage + "-" + phase + "-subject-review-v1.json")
+    _need(Path(row["path"]) == path and path.is_relative_to(evidence_root),
+          "bounded_g4_invitation_review_path")
+    review = _json(read(path, row["sha256"]))
+    _need(review.get("schema") == "emr4.g4_operation_review.v1"
+          and review.get("status") == "PASS"
+          and review.get("verdict") == "PASS_G4_STAGE1_LOCAL_SYNTHETIC_INVITATION_EXACT_ADMISSION_SUBJECT"
+          and review.get("subject_sha256") == subject
+          and review.get("independent") is True
+          and review.get("implementation_authorship") is False
+          and review.get("blocking_findings") == []
+          and type(review.get("reviewer_agent")) is str
+          and review["reviewer_agent"] not in {"", "/root", "/root/human_account11_topology_join_author", "/root/invitation_control_repair_sol"}
+          and review.get("stage") == stage and review.get("phase") == phase,
+          "bounded_g4_invitation_independent_subject")
+    return review
+
+
+def _load_g4_invitation_inputs(context, target, source, evidence_root, scratch,
+                               q, read, snapshots):
+    _keys(q, G4_INVITATION_BINDING_KEYS, "bounded_g4_invitation_binding_schema")
+    _need(_is_g4_invitation_binding(q)
+          and q["phase"] in {"development", "pre-push", "post-push"}
+          and type(q["operation_id"]) is str
+          and re.fullmatch(r"[a-z0-9][a-z0-9-]{1,79}", q["operation_id"]),
+          "bounded_g4_invitation_binding_version")
+    for key in ("base_commit", "base_tree", "expected_head",
+                "expected_index_tree", "candidate_tree"):
+        _need(type(q[key]) is str and re.fullmatch(r"[0-9a-f]{40}", q[key]),
+              "bounded_g4_invitation_git_identity")
+    paths = _g4_invitation_paths(q["operation_kind"], q)
+    vector, mapping, rows = _g4_invitation_external_inputs(read, q)
+    fixture_source = _g4_invitation_fixture_source(read) if q["stage"] == "apply" else None
+    _need(_sha(trusted_git.run_git_bytes(target, "cat-file", "blob",
+          G4_INVITATION_BASE["commit"] + ":" + G4_STAGE1_SUCCESSOR_SCOPE))
+          == "d049c0b8691bc76900fd8d009416be94a2d6b821428155f8da3db76d1d15368a"
+          and trusted_git.run_git(target, "rev-parse",
+              G4_INVITATION_BASE["commit"] + "^{tree}") == G4_INVITATION_BASE["tree"],
+          "bounded_g4_invitation_predecessor")
+    if q["stage"] == "enable":
+        _need(q["base_commit"] == G4_INVITATION_BASE["commit"]
+              and q["base_tree"] == G4_INVITATION_BASE["tree"]
+              and q["activation_acceptance"] is None,
+              "bounded_g4_invitation_enable_base")
+    else:
+        _keys(q["activation_acceptance"], {"path", "sha256"},
+              "bounded_g4_invitation_activation_row")
+        activation_path = G4_INVITATION_ROOT / "entry-admission-v1/independent-enable-push-effect-review-v1.json"
+        _need(Path(q["activation_acceptance"]["path"]) == activation_path,
+              "bounded_g4_invitation_activation_path")
+        activation = _json(read(activation_path, q["activation_acceptance"]["sha256"]))
+        _need(activation.get("status") == "PASS"
+              and activation.get("verdict") == "PASS_G4_STAGE1_LOCAL_SYNTHETIC_INVITATION_CONTROL_PUBLICATION_EFFECT"
+              and type(activation.get("reviewer_agent")) is str
+              and activation["reviewer_agent"] not in {"", "/root", "/root/human_account11_topology_join_author", "/root/invitation_control_repair_sol"}
+              and activation.get("independent") is True
+              and activation.get("implementation_authorship") is False
+              and activation.get("blocking_findings") == []
+              and activation.get("stage") == "enable"
+              and activation.get("phase") == "push"
+              and activation.get("base") == G4_INVITATION_BASE["commit"]
+              and activation.get("commit") == q["base_commit"]
+              and activation.get("candidate_tree") == q["base_tree"]
+              and activation.get("control_activation_accepted") is True
+              and activation.get("same_attempt_remote_readback_verified") is True
+              and activation.get("protected_refs_unchanged") is True
+              and activation.get("whole_inverse_verified_same_attempt") is True
+              and activation.get("published_ref") == G4_STAGE1_INTERACTIVE_BACKEND_REF,
+              "bounded_g4_invitation_activation_acceptance")
+        headers = trusted_git.run_git(target, "cat-file", "commit",
+                                      q["base_commit"]).split("\n\n", 1)[0].splitlines()
+        _need([h for h in headers if h.startswith("parent ")]
+              == ["parent " + G4_INVITATION_BASE["commit"]]
+              and [h for h in headers if h.startswith("tree ")]
+              == ["tree " + q["base_tree"]],
+              "bounded_g4_invitation_activation_parent")
+    sources = _digest_map(q["source_sha256"], SOURCE_PATHS | CONTROLLER_PATHS,
+                          "bounded_g4_invitation_sources")
+    inputs = (CONFIGURATION_PATHS | {STATE, GATES, OVERLAY, AGENTS,
+              G4_STAGE1_INTERACTIVE_SCOPE, G4_STAGE1_SUCCESSOR_SCOPE,
+              G4_STAGE1_SUCCESSOR_TEST, G4_CI_WORKFLOW}
+              | SOURCE_PATHS | CONTROLLER_PATHS
+              | (G4_INVITATION_PRODUCT if q["stage"] == "apply" else set()))
+    pins = _digest_map(q["payload_sha256"], inputs,
+                       "bounded_g4_invitation_payload_paths")
+    payloads = {path: read(target / path, digest) for path, digest in sorted(pins.items())}
+    scope = _json(payloads[G4_STAGE1_SUCCESSOR_SCOPE])
+    validate_g4_invitation_scope(scope)
+    _need(scope["source_sha256"] == sources
+          and scope["product_vector"] == q["product_vector"]
+          and scope["mapping_review"] == q["mapping_review"]
+          and payloads[G4_STAGE1_SUCCESSOR_SCOPE] == _canonical(scope) + b"\n"
+          and all(_sha(payloads[p]) == d for p, d in scope["control_sha256"].items()),
+          "bounded_g4_invitation_scope_sources")
+    for path, digest in sources.items():
+        candidate = read(source / path, digest)
+        if q["stage"] == "enable" and path in G4_INVITATION_CONTROL:
+            _need(candidate == payloads[path], "bounded_g4_invitation_control_candidate")
+        else:
+            _need(candidate == trusted_git.run_git_bytes(
+                target, "cat-file", "blob", q["base_commit"] + ":" + path),
+                "bounded_g4_invitation_installed_source")
+    for path, pair in q["repair_sha256"].items():
+        _keys(pair, {"before_sha256", "after_sha256"},
+              "bounded_g4_invitation_change_pair")
+        committed = trusted_git.run_git_bytes(target, "ls-tree", "-z",
+                                               q["base_commit"], "--", path)
+        previous = (_sha(trusted_git.run_git_bytes(target, "cat-file", "blob",
+                    q["base_commit"] + ":" + path)) if committed else None)
+        expected = pins[path] if q["stage"] == "enable" else G4_INVITATION_PRODUCT_SHA[path]
+        _need(pair == {"before_sha256": previous, "after_sha256": expected}
+              and previous != expected and _sha(payloads[path]) == expected,
+              "bounded_g4_invitation_change_preimage")
+        if q["stage"] == "apply":
+            row = next(x for x in rows if x["relative_path"] == path)
+            _need(previous == row["before_sha256"]
+                  and payloads[path] == read(
+                      Path(row["after_path"]), expected)
+                  and payloads[path] == read(source / path, expected)
+                  and len(payloads[path]) == row["after_bytes"],
+                  "bounded_g4_invitation_product_source")
+    for path in inputs - paths:
+        _need(trusted_git.run_git_bytes(target, "cat-file", "blob",
+              q["base_commit"] + ":" + path) == payloads[path],
+              "bounded_g4_invitation_unowned_change")
+    review = _g4_invitation_review(read, q["source_review"], evidence_root,
+                                   g4_invitation_review_subject(q),
+                                   q["stage"], q["phase"])
+    attested = inputs - paths if q["phase"] == "development" else inputs
+    observation = trusted_git.attest_target_index(
+        target, attested_paths=tuple(sorted(attested)),
+        expected_head=q["expected_head"], expected_index_tree=q["expected_index_tree"],
+        scratch_parent=scratch)
+    if q["phase"] == "development":
+        _need(q["expected_head"] == q["base_commit"]
+              and q["expected_index_tree"] in {q["base_tree"], q["candidate_tree"]},
+              "bounded_g4_invitation_development_binding")
+    else:
+        headers = trusted_git.run_git(target, "cat-file", "commit",
+                                      q["expected_head"]).split("\n\n", 1)[0].splitlines()
+        _need([h for h in headers if h.startswith("parent ")]
+              == ["parent " + q["base_commit"]]
+              and [h for h in headers if h.startswith("tree ")]
+              == ["tree " + q["candidate_tree"]]
+              and q["expected_index_tree"] == q["candidate_tree"],
+              "bounded_g4_invitation_committed_binding")
+    for path, snapshot in snapshots.items():
+        _need(trusted_git._read_regular_snapshot(path, maximum_bytes=2 * 1024 * 1024)
+              == snapshot, "bounded_g4_invitation_snapshot_drift")
+    before = {path: trusted_git.run_git_bytes(target, "cat-file", "blob",
+              G4_INVITATION_BASE["commit"] + ":" + path)
+              for path in (STATE, GATES, OVERLAY, AGENTS)}
+    _need(all(payloads[p] == before[p] for p in (STATE, GATES, OVERLAY, AGENTS)),
+          "bounded_g4_invitation_state_unchanged")
+    return BoundedG1BInputs(q, before, payloads,
+        {"scope": scope, "vector": vector, "mapping": mapping,
+         "fixture_source": fixture_source, "review": review},
+        observation)
+
+
+def _validate_g4_invitation_loaded_policy(inputs):
+    scope = inputs.evidence["scope"]
+    validate_g4_invitation_scope(scope)
+    try:
+        configuration = raisa_policy.validate_recovery_configuration(
+            documents={Path(path).name: inputs.payloads[path]
+                       for path in CONFIGURATION_PATHS},
+            expected_sha256={Path(path).name: inputs.binding["payload_sha256"][path]
+                             for path in CONFIGURATION_PATHS},
+            agents_text=inputs.payloads[AGENTS].decode("utf-8"),
+            state=_json(inputs.payloads[STATE]))
+    except (raisa_policy.RaisaPolicyError, configuration_core.ConfigurationError) as error:
+        raise BoundedG1BError(error.reason_code) from error
+    selected = (G4_INVITATION_CONTROL if inputs.binding["stage"] == "enable"
+                else G4_INVITATION_PRODUCT)
+    return {path: inputs.payloads[path] for path in selected}, configuration
+
+
+
+# This artifact is source bytes only. Applying it never executes role/SQL commands.
+G4_INVITATION_CAPSULE_ARTIFACT = "capsule/provision-invitation-owner.sql"
+G4_INVITATION_REVIEW_SUBJECT = {'product_vector': {'path': 'C:/Users/there/EMR4-tools/local-mock-invitation-source-preparation-v3/source-vector-v1.json', 'bytes': 4236, 'sha256': '42df9616575ca748e8b35783c2e762a11069a8769eb60d75a321b9c412d1f899', 'transformations_sha256': 'b73dd884f6e546383c4dc91663c723265d80dd685dc06811c28adfb392edfa06', 'parent_review_sha256': '019406127b1668d165a0da0fc6508b9159b2a95eef95532960635443f8d11ba4', 'rows': [{'relative_path': 'alembic/versions/e0f1a2b3c4d5_local_synthetic_staff_invitation.py', 'original_target_before_sha256': None, 'v2_before': {'path': 'C:/Users/there/EMR4-tools/local-mock-invitation-source-preparation-v3/before/alembic/versions/e0f1a2b3c4d5_local_synthetic_staff_invitation.py', 'bytes': 19310, 'sha256': '0ec8cbc40f83bebcd6b59c58052ad1a6ffc3c43ab45f4db19057d18d0c085e48'}, 'after': {'path': 'C:/Users/there/EMR4-tools/local-mock-invitation-source-preparation-v3/after/alembic/versions/e0f1a2b3c4d5_local_synthetic_staff_invitation.py', 'bytes': 19310, 'sha256': '0ec8cbc40f83bebcd6b59c58052ad1a6ffc3c43ab45f4db19057d18d0c085e48'}, 'changed': False}, {'relative_path': 'app/services/local_synthetic_invitation.py', 'original_target_before_sha256': None, 'v2_before': {'path': 'C:/Users/there/EMR4-tools/local-mock-invitation-source-preparation-v3/before/app/services/local_synthetic_invitation.py', 'bytes': 7290, 'sha256': 'c801dc7213893b00760074b42fbc07c631ba865958206f99d1698b012421eb14'}, 'after': {'path': 'C:/Users/there/EMR4-tools/local-mock-invitation-source-preparation-v3/after/app/services/local_synthetic_invitation.py', 'bytes': 7290, 'sha256': 'c801dc7213893b00760074b42fbc07c631ba865958206f99d1698b012421eb14'}, 'changed': False}, {'relative_path': 'tests/test_local_synthetic_invitation.py', 'original_target_before_sha256': None, 'v2_before': {'path': 'C:/Users/there/EMR4-tools/local-mock-invitation-source-preparation-v3/before/tests/test_local_synthetic_invitation.py', 'bytes': 19040, 'sha256': '932f8edeebb67a3db2022e3735febc63f0f616234214795dcfc0200805a563bb'}, 'after': {'path': 'C:/Users/there/EMR4-tools/local-mock-invitation-source-preparation-v3/after/tests/test_local_synthetic_invitation.py', 'bytes': 20134, 'sha256': '7021877178295904c59dd808e0601d3d2f5421e2f34a9da76d35a16cc91de089'}, 'changed': True}, {'relative_path': 'capsule/provision-invitation-owner.sql', 'original_target_before_sha256': None, 'v2_before': {'path': 'C:/Users/there/EMR4-tools/local-mock-invitation-source-preparation-v3/before/capsule/provision-invitation-owner.sql', 'bytes': 369, 'sha256': '6df06bc06345cb3179d2f10758ff561765e1b85f3b9970bb8ed88a1a5746bb7c'}, 'after': {'path': 'C:/Users/there/EMR4-tools/local-mock-invitation-source-preparation-v3/after/capsule/provision-invitation-owner.sql', 'bytes': 369, 'sha256': '6df06bc06345cb3179d2f10758ff561765e1b85f3b9970bb8ed88a1a5746bb7c'}, 'changed': False}]}, 'fixture_vector': {'path': 'C:/Users/there/EMR4-tools/local-mock-invitation-fixture-preparation-v2/fixture-source-vector-v1.json', 'bytes': 10737, 'sha256': '03c1f6c6f9a7d1d8ca2116759cf74b0b0476ab8a2e870cacd4ee5098f0480638', 'transformations_sha256': 'b90540b0b65505e9b840800e03edf953ea79b1035924f5db68a7f0c04ebbcafb', 'parent_review_sha256': '29b5b7f7e1a5cc4be2f2322c019e7f7d94f68b55330e1aa88a7163c9141df158', 'rows': [{'owned_name': 'invitation_case_fixtures.py', 'v1_before': {'path': 'C:/Users/there/EMR4-tools/local-mock-invitation-fixture-preparation-v2/before/invitation_case_fixtures.py', 'bytes': 26049, 'sha256': 'f4953187adc6bdda94f3296fde8f7640c3784e1ac470d1c795f2e34167b4f09c'}, 'after': {'path': 'C:/Users/there/EMR4-tools/local-mock-invitation-fixture-preparation-v2/invitation_case_fixtures.py', 'bytes': 26046, 'sha256': 'c8b979806f116232c0984f8a44da765d2f39c9d29da0972f7e5e2068160fa7c0'}, 'changed': True, 'target_application': 'No actual target; new owned preparation artifact only'}, {'owned_name': 'fresh_invitation_schema.py', 'v1_before': {'path': 'C:/Users/there/EMR4-tools/local-mock-invitation-fixture-preparation-v2/before/fresh_invitation_schema.py', 'bytes': 2018, 'sha256': '9ff5ea7177f8fb4c6f5d4a4f61169d049f607c775f90c22d8cd886c148d6bbfd'}, 'after': {'path': 'C:/Users/there/EMR4-tools/local-mock-invitation-fixture-preparation-v2/fresh_invitation_schema.py', 'bytes': 2018, 'sha256': '9ff5ea7177f8fb4c6f5d4a4f61169d049f607c775f90c22d8cd886c148d6bbfd'}, 'changed': False, 'target_application': 'No actual target; new owned preparation artifact only'}, {'owned_name': 'provision-invitation-roles.sql', 'v1_before': {'path': 'C:/Users/there/EMR4-tools/local-mock-invitation-fixture-preparation-v2/before/provision-invitation-roles.sql', 'bytes': 1677, 'sha256': '1010aa22aae7c48022c872eb53223e00b40a00a0321a4c474e7f41ba96b80040'}, 'after': {'path': 'C:/Users/there/EMR4-tools/local-mock-invitation-fixture-preparation-v2/provision-invitation-roles.sql', 'bytes': 1677, 'sha256': '1010aa22aae7c48022c872eb53223e00b40a00a0321a4c474e7f41ba96b80040'}, 'changed': False, 'target_application': 'No actual target; new owned preparation artifact only'}, {'owned_name': 'invitation_backend_child.py', 'v1_before': {'path': 'C:/Users/there/EMR4-tools/local-mock-invitation-fixture-preparation-v2/before/invitation_backend_child.py', 'bytes': 38195, 'sha256': '98e9eb9e883d751ec534854d34e0b5cc801d1526f990ff5f8f1b6e48e0834783'}, 'after': {'path': 'C:/Users/there/EMR4-tools/local-mock-invitation-fixture-preparation-v2/invitation_backend_child.py', 'bytes': 38293, 'sha256': '5a57644a2041ad3eaff0a88e981baf771b6908fa364b5bdf0f181fa483366ff0'}, 'changed': True, 'target_application': 'No actual target; new owned preparation artifact only'}, {'owned_name': 'invitation_source_guard.py', 'v1_before': {'path': 'C:/Users/there/EMR4-tools/local-mock-invitation-fixture-preparation-v2/before/invitation_source_guard.py', 'bytes': 52268, 'sha256': '6e6470a846a78219738652fc65e8dab550ac0b59cbb6d13a9b3f285e9e6e1881'}, 'after': {'path': 'C:/Users/there/EMR4-tools/local-mock-invitation-fixture-preparation-v2/invitation_source_guard.py', 'bytes': 56106, 'sha256': '6aaa6491eb5aff205c89440a5f5ef260dd055ab8b5bfb4d1a89e2e69a6b70f49'}, 'changed': True, 'target_application': 'No actual target; new owned preparation artifact only'}, {'owned_name': 'invitation_child_entry.py', 'v1_before': {'path': 'C:/Users/there/EMR4-tools/local-mock-invitation-fixture-preparation-v2/before/invitation_child_entry.py', 'bytes': 10378, 'sha256': 'e92060069faf84e87532e8e52e8714eca80e7c18dc1cb0ea2538f1afb9fce243'}, 'after': {'path': 'C:/Users/there/EMR4-tools/local-mock-invitation-fixture-preparation-v2/invitation_child_entry.py', 'bytes': 10378, 'sha256': '4cef9bccf25aaa2dc8486ad212163dfe7f027f839964d554dfac425a7e93c026'}, 'changed': True, 'target_application': 'No actual target; new owned preparation artifact only'}, {'owned_name': 'exact-migration-order-v1.json', 'v1_before': {'path': 'C:/Users/there/EMR4-tools/local-mock-invitation-fixture-preparation-v2/before/exact-migration-order-v1.json', 'bytes': 9118, 'sha256': 'd46d4f68e91a91fd2a3e9d67efddced91bd74a6ce7d992127b12d71f1380e684'}, 'after': {'path': 'C:/Users/there/EMR4-tools/local-mock-invitation-fixture-preparation-v2/exact-migration-order-v1.json', 'bytes': 9118, 'sha256': 'd46d4f68e91a91fd2a3e9d67efddced91bd74a6ce7d992127b12d71f1380e684'}, 'changed': False, 'target_application': 'No actual target; new owned preparation artifact only'}, {'owned_name': 'source-binding-v1.json', 'v1_before': {'path': 'C:/Users/there/EMR4-tools/local-mock-invitation-fixture-preparation-v2/before/source-binding-v1.json', 'bytes': 37788, 'sha256': 'ebd777dfd8f6577f1976a2facbed61456ba7bcdedcf9eccca2eb555a3eb671b9'}, 'after': {'path': 'C:/Users/there/EMR4-tools/local-mock-invitation-fixture-preparation-v2/source-binding-v1.json', 'bytes': 37788, 'sha256': '7ee3e0e56f15809f5dccc2c243cecd26398041cedbdc6d0a183540ea654bef9d'}, 'changed': True, 'target_application': 'No actual target; new owned preparation artifact only'}, {'owned_name': 'source-rows-v1.json', 'v1_before': {'path': 'C:/Users/there/EMR4-tools/local-mock-invitation-fixture-preparation-v2/before/source-rows-v1.json', 'bytes': 53742, 'sha256': 'e1ff11a3d67750be83abbcff5197ec01acf56d2240963e9f0127b70b5d00a63e'}, 'after': {'path': 'C:/Users/there/EMR4-tools/local-mock-invitation-fixture-preparation-v2/source-rows-v1.json', 'bytes': 53742, 'sha256': '33fd105961c39e296cf04562077a409091acf64ac1f68f7e76d911ea7b7dbf28'}, 'changed': True, 'target_application': 'No actual target; new owned preparation artifact only'}, {'owned_name': 'closed-capsule-derivative-v1.json', 'v1_before': {'path': 'C:/Users/there/EMR4-tools/local-mock-invitation-fixture-preparation-v2/before/closed-capsule-derivative-v1.json', 'bytes': 4809, 'sha256': 'fa84ed6510a80e33394e2a4ec0e9597b4dd881554e092a57ab5406aca4040688'}, 'after': {'path': 'C:/Users/there/EMR4-tools/local-mock-invitation-fixture-preparation-v2/closed-capsule-derivative-v1.json', 'bytes': 5368, 'sha256': '95b4650a4ae712fcb329bc586de310c9e77f4b4e7bd0be4a7fb9e5b6d0cbb14c'}, 'changed': True, 'target_application': 'No actual target; new owned preparation artifact only'}, {'owned_name': 'input-freeze-v1.json', 'v1_before': {'path': 'C:/Users/there/EMR4-tools/local-mock-invitation-fixture-preparation-v2/before/input-freeze-v1.json', 'bytes': 4984, 'sha256': '9abd3365d69071ae072117566d65540e306dfec6bb17abec398884ad5ecb8445'}, 'after': {'path': 'C:/Users/there/EMR4-tools/local-mock-invitation-fixture-preparation-v2/input-freeze-v1.json', 'bytes': 1922, 'sha256': '32059aafbdae717b555c8e540736bee43795c5f4922323fe458520d80da85ccf'}, 'changed': True, 'target_application': 'No actual target; new owned preparation artifact only'}, {'owned_name': 'HANDOFF.md', 'v1_before': {'path': 'C:/Users/there/EMR4-tools/local-mock-invitation-fixture-preparation-v2/before/HANDOFF.md', 'bytes': 3947, 'sha256': 'dd2339208f144008a17bd5fe3a2c14cf095d6e1e77d6fe935a54868aa6e25b4e'}, 'after': {'path': 'C:/Users/there/EMR4-tools/local-mock-invitation-fixture-preparation-v2/HANDOFF.md', 'bytes': 3024, 'sha256': '448ec4a9779a07a064cb09a87c9a7153b23b4d6d5e763ff3ac2729b0de9993ee'}, 'changed': True, 'target_application': 'No actual target; new owned preparation artifact only'}]}, 'source_rows_sha256': '33fd105961c39e296cf04562077a409091acf64ac1f68f7e76d911ea7b7dbf28', 'source_binding_sha256': '7ee3e0e56f15809f5dccc2c243cecd26398041cedbdc6d0a183540ea654bef9d'}
+
+
+
+G4_INVITATION_FIXTURE_VECTOR = Path('C:/Users/there/EMR4-tools/local-mock-invitation-fixture-preparation-v2/fixture-source-vector-v1.json')
+G4_INVITATION_FIXTURE_VECTOR_SHA = '03c1f6c6f9a7d1d8ca2116759cf74b0b0476ab8a2e870cacd4ee5098f0480638'
+G4_INVITATION_PRODUCT_PROVENANCE = {'parent_vector': {'path': 'C:/Users/there/EMR4-tools/local-mock-invitation-source-preparation-v2/source-vector-v1.json', 'bytes': 5082, 'sha256': '6406d0c6367efd8e8ef4ea2d2089248b7e7434ed8f55c3acc357771f9820362d'}, 'parent_review': {'path': 'C:/Users/there/EMR4-tools/local-mock-invitation-source-preparation-v2/independent-invitation-source-review-v2.json', 'bytes': 5822, 'sha256': '019406127b1668d165a0da0fc6508b9159b2a95eef95532960635443f8d11ba4'}, 'transformations': {'path': 'C:/Users/there/EMR4-tools/local-mock-invitation-source-preparation-v3/exact-forward-inverse-v1.json', 'bytes': 169587, 'sha256': 'b73dd884f6e546383c4dc91663c723265d80dd685dc06811c28adfb392edfa06'}, 'handoff': {'path': 'C:/Users/there/EMR4-tools/local-mock-invitation-source-preparation-v3/HANDOFF.md', 'bytes': 1593, 'sha256': 'c2b9f784bea3b087a96b6ee852973d35b6369cb3922cc53bad84422614b228b3'}}
+G4_INVITATION_FIXTURE_PROVENANCE = {'parent_vector': {'path': 'C:/Users/there/EMR4-tools/local-mock-invitation-fixture-preparation-v1/fixture-source-vector-v1.json', 'bytes': 8247, 'sha256': '6ee149e6397939d828204870383b3df23bfc3088d8e012a8e3a9b6d6c91be52d'}, 'qualified_parent_review': {'path': 'C:/Users/there/EMR4-tools/local-mock-invitation-fixture-preparation-v1/independent-invitation-fixture-source-review-v1.json', 'bytes': 10214, 'sha256': '29b5b7f7e1a5cc4be2f2322c019e7f7d94f68b55330e1aa88a7163c9141df158'}, 'product_vector': {'path': 'C:/Users/there/EMR4-tools/local-mock-invitation-source-preparation-v3/source-vector-v1.json', 'bytes': 4236, 'sha256': '42df9616575ca748e8b35783c2e762a11069a8769eb60d75a321b9c412d1f899'}, 'inputs': {'path': 'C:/Users/there/EMR4-tools/local-mock-invitation-fixture-preparation-v2/input-freeze-v1.json', 'bytes': 1922, 'sha256': '32059aafbdae717b555c8e540736bee43795c5f4922323fe458520d80da85ccf'}, 'transformations': {'path': 'C:/Users/there/EMR4-tools/local-mock-invitation-fixture-preparation-v2/exact-forward-inverse-v1.json', 'bytes': 1168615, 'sha256': 'b90540b0b65505e9b840800e03edf953ea79b1035924f5db68a7f0c04ebbcafb'}}
+
+
+def _g4_invitation_source_review(read):
+    review = _json(read(G4_INVITATION_SOURCE_REVIEW, G4_INVITATION_SOURCE_REVIEW_SHA))
+    _need(review.get("schema") == "emr4.independent_invitation_product_fixture_source_review.v2"
+          and review.get("verdict") == "PASS_NARROW_INERT_PRODUCT_AND_FIXTURE_SOURCE"
+          and review.get("subject") == G4_INVITATION_REVIEW_SUBJECT
+          and review.get("independent") is True
+          and review.get("implementation_authorship") is False
+          and review.get("nested_delegation") is False
+          and review.get("product_source_accepted") is True
+          and review.get("implemented_fixture_writer_source_accepted") is True
+          and all(review.get(k) is False for k in ("admission_accepted", "execution_accepted",
+              "runtime_accepted", "publication_accepted", "effects_executed"))
+          and review.get("blocking_findings") == []
+          and type(review.get("reviewer")) is str
+          and review["reviewer"] not in {"", "/root", "/root/invitation_fixture_author_sol",
+              "/root/human_account11_topology_join_author", "/root/human_diag_binding_terra",
+              "/root/invitation_control_repair_sol"},
+          "bounded_g4_invitation_independent_source")
+    return review
+
+
+def _g4_invitation_external_inputs(read, q):
+    _need(q["product_vector"] == {
+              "path": G4_INVITATION_VECTOR.as_posix(), "sha256": G4_INVITATION_VECTOR_SHA}
+          and q["mapping_review"] == {
+              "path": G4_INVITATION_SOURCE_REVIEW.as_posix(), "sha256": G4_INVITATION_SOURCE_REVIEW_SHA},
+          "bounded_g4_invitation_product_pins")
+    raw = read(G4_INVITATION_VECTOR, G4_INVITATION_VECTOR_SHA)
+    vector = _json(raw)
+    rows = _validate_g4_invitation_vector(vector)
+    mapping = _g4_invitation_source_review(read)
+    subject = G4_INVITATION_REVIEW_SUBJECT["product_vector"]
+    _need(len(raw) == subject["bytes"]
+          and subject["path"] == G4_INVITATION_VECTOR.as_posix()
+          and subject["sha256"] == G4_INVITATION_VECTOR_SHA
+          and vector["rows"] == subject["rows"]
+          and all(vector.get(k) == value for k, value in G4_INVITATION_PRODUCT_PROVENANCE.items())
+          and vector.get("transformations", {}).get("sha256") == subject["transformations_sha256"]
+          and vector.get("parent_review", {}).get("sha256") == subject["parent_review_sha256"]
+          and all(vector.get(k) is False for k in (
+              "candidate_execution", "independent_acceptance", "runtime_authority", "admission_authority")),
+          "bounded_g4_invitation_source_provenance")
+    for row in rows:
+        body = read(Path(row["after_path"]), row["after_sha256"])
+        _need(len(body) == row["after_bytes"], "bounded_g4_invitation_source_bytes")
+    return vector, mapping, rows
+
+
+def _g4_invitation_fixture_source(read):
+    raw = read(G4_INVITATION_FIXTURE_VECTOR, G4_INVITATION_FIXTURE_VECTOR_SHA)
+    vector = _json(raw)
+    review = _g4_invitation_source_review(read)
+    subject = G4_INVITATION_REVIEW_SUBJECT["fixture_vector"]
+    _need(len(raw) == subject["bytes"]
+          and subject["path"] == G4_INVITATION_FIXTURE_VECTOR.as_posix()
+          and subject["sha256"] == G4_INVITATION_FIXTURE_VECTOR_SHA
+          and vector.get("schema") == "emr4.invitation_fixture_source_vector.v2"
+          and vector.get("status") == "INERT_SOURCE_ONLY_PENDING_INDEPENDENT_REVIEW"
+          and vector.get("author") == "/root/invitation_fixture_author_sol"
+          and vector.get("rows") == subject["rows"]
+          and type(vector.get("rows")) is list and len(vector["rows"]) == 12
+          and all(vector.get(k) == value for k, value in G4_INVITATION_FIXTURE_PROVENANCE.items())
+          and vector.get("transformations", {}).get("sha256") == subject["transformations_sha256"]
+          and vector.get("qualified_parent_review", {}).get("sha256") == subject["parent_review_sha256"]
+          and vector.get("product_vector") == {
+              "path": G4_INVITATION_VECTOR.as_posix(),
+              "bytes": G4_INVITATION_REVIEW_SUBJECT["product_vector"]["bytes"],
+              "sha256": G4_INVITATION_VECTOR_SHA}
+          and all(vector.get(k) is False for k in (
+              "candidate_parse_import_compile_tests", "sql_native_database_browser_network_effects",
+              "admission_accepted", "execution_accepted", "publication_accepted")),
+          "bounded_g4_invitation_fixture_vector")
+    bodies = {}
+    for row in vector["rows"]:
+        after = row["after"]
+        _need(Path(after["path"]) == G4_INVITATION_FIXTURE_VECTOR.parent / row["owned_name"]
+              and type(after["bytes"]) is int and after["bytes"] > 0,
+              "bounded_g4_invitation_fixture_source_path")
+        body = read(Path(after["path"]), after["sha256"])
+        _need(len(body) == after["bytes"], "bounded_g4_invitation_fixture_source_bytes")
+        bodies[row["owned_name"]] = body
+    _need(_sha(bodies["source-rows-v1.json"]) == G4_INVITATION_REVIEW_SUBJECT["source_rows_sha256"]
+          and _sha(bodies["source-binding-v1.json"]) == G4_INVITATION_REVIEW_SUBJECT["source_binding_sha256"],
+          "bounded_g4_invitation_fixture_closure_pins")
+    return {"vector": vector, "review": review}

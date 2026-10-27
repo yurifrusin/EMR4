@@ -3837,3 +3837,326 @@ def test_human_current_account_apply_publication_rejects_prior_family_or_unjoine
     with pytest.raises(bounded_g1b.BoundedG1BError) as caught:
         bounded_g1b._g4_human_current_publication(lambda p,d:json.dumps(review).encode())
     assert caught.value.reason_code=="bounded_g4_human_current_publication"
+# New exact invitation family; source tests only, not PostgreSQL/runtime proof.
+_INVITATION_AFTERIMAGES=Path("C:/Users/there/EMR4-tools/local-mock-invitation-enable-preparation-v2/after")
+
+
+def _invitation_scope():
+    return json.loads((_INVITATION_AFTERIMAGES/bounded_g1b.G4_STAGE1_SUCCESSOR_SCOPE).read_bytes())
+
+
+def _invitation_q(stage="enable"):
+    kind="enable_g4_stage1_successor" if stage=="enable" else "implement_g4_stage1_successor"
+    selected=bounded_g1b.G4_INVITATION_CONTROL if stage=="enable" else bounded_g1b.G4_INVITATION_PRODUCT
+    q={key:None for key in bounded_g1b.G4_INVITATION_BINDING_KEYS}
+    q.update(schema_version=bounded_g1b.G4_INVITATION_SCHEMA,operation_kind=kind,stage=stage,
+             repair_sha256={p:{} for p in selected},
+             product_vector={"path":bounded_g1b.G4_INVITATION_VECTOR.as_posix(),"sha256":bounded_g1b.G4_INVITATION_VECTOR_SHA},
+             mapping_review={"path":bounded_g1b.G4_INVITATION_SOURCE_REVIEW.as_posix(),"sha256":bounded_g1b.G4_INVITATION_SOURCE_REVIEW_SHA})
+    return q
+
+
+@pytest.mark.parametrize("stage",["enable","apply"])
+def test_invitation_dispatch_is_four_exact_product_paths_or_control3(stage):
+    q=_invitation_q(stage);selected=bounded_g1b.G4_INVITATION_CONTROL if stage=="enable" else bounded_g1b.G4_INVITATION_PRODUCT
+    assert len(q)==17 and len(selected)==(3 if stage=="enable" else 4)
+    assert bounded_g1b.operation_paths(q["operation_kind"],q)==selected
+    assert bounded_g1b._operation(q["operation_kind"],q)["g4_invitation_source"] is True
+    assert bounded_g1b.G4_INVITATION_CAPSULE_ARTIFACT in bounded_g1b.G4_INVITATION_PRODUCT
+    for wrong in (selected|{"app/unreviewed.py"},selected-{next(iter(selected))}):
+        with pytest.raises(bounded_g1b.BoundedG1BError) as err:
+            bounded_g1b.operation_paths(q["operation_kind"],dict(q,repair_sha256={p:{} for p in wrong}))
+        assert err.value.reason_code=="bounded_g4_invitation_changed_paths"
+
+
+def test_invitation_scope_preserves_base_and_runtime_authority_separation():
+    scope=_invitation_scope();bounded_g1b.validate_g4_invitation_scope(scope)
+    assert scope["selected_base"]=={"commit":"76356c9809c92e37d3b61989edac4390ce228510","tree":"87845dd28aac966d99659e3870a35492d5e10391"}
+    assert len(scope["allowed_paths"])==4
+    for key,value in (("allowed_paths",scope["allowed_paths"]+["app/extra.py"]),
+       ("runtime_binding_required",False),("admission_grants_runtime_authority",True),("voice_activation",True),
+       ("selected_base",bounded_g1b.G4_HUMAN_BASE),("product_vector",scope["mapping_review"])):
+        changed=copy.deepcopy(scope);changed[key]=value
+        with pytest.raises(bounded_g1b.BoundedG1BError) as err:bounded_g1b.validate_g4_invitation_scope(changed)
+        assert err.value.reason_code=="bounded_g4_invitation_scope_boundary"
+
+
+def test_invitation_vector_rejects_changed_extra_duplicate_or_outside_rows():
+    vector=json.loads(bounded_g1b.G4_INVITATION_VECTOR.read_bytes())
+    assert len(bounded_g1b._validate_g4_invitation_vector(vector))==4
+    for mode in ("extra","duplicate","outside","digest","size","prior"):
+        value=copy.deepcopy(vector)
+        if mode=="extra":value["rows"].append(copy.deepcopy(value["rows"][0]))
+        elif mode=="duplicate":value["rows"][-1]=copy.deepcopy(value["rows"][0])
+        elif mode=="outside":value["rows"][0]["after"]["path"]="C:/unreviewed.py"
+        elif mode=="digest":value["rows"][0]["after"]["sha256"]="0"*64
+        elif mode=="size":value["rows"][0]["after"]["bytes"]=True
+        else:value["rows"][0]["original_target_before_sha256"]="0"*64
+        with pytest.raises(bounded_g1b.BoundedG1BError) as err:bounded_g1b._validate_g4_invitation_vector(value)
+        assert err.value.reason_code=="bounded_g4_invitation_vector"
+
+
+def test_invitation_external_reader_consumes_actual_qualified_source_review():
+    q=_invitation_q();calls=[]
+    def read(path,digest):
+        raw=path.read_bytes();assert hashlib.sha256(raw).hexdigest()==digest;calls.append(path);return raw
+    vector,mapping,rows=bounded_g1b._g4_invitation_external_inputs(read,q)
+    assert len(rows)==4 and mapping["product_source_accepted"] is True and mapping["runtime_accepted"] is False
+    assert {Path(r["after_path"]) for r in rows}<=set(calls)
+    bad=dict(q,product_vector=dict(q["product_vector"],sha256="0"*64))
+    with pytest.raises(bounded_g1b.BoundedG1BError) as err:bounded_g1b._g4_invitation_external_inputs(read,bad)
+    assert err.value.reason_code=="bounded_g4_invitation_product_pins"
+
+
+@pytest.mark.parametrize("key,value",[("independent",False),("product_source_accepted",False),
+ ("implementation_authorship",True),("verdict","PASS_RUNTIME"),("runtime_accepted",True),
+ ("reviewer","/root/human_account11_topology_join_author"),("blocking_findings",["block"])])
+def test_invitation_rejects_unreviewed_or_mislabelled_source(key,value):
+    def read(path,digest):
+        raw=path.read_bytes()
+        if path==bounded_g1b.G4_INVITATION_SOURCE_REVIEW:
+            row=json.loads(raw);row[key]=value;return json.dumps(row).encode()
+        assert hashlib.sha256(raw).hexdigest()==digest;return raw
+    with pytest.raises(bounded_g1b.BoundedG1BError) as err:bounded_g1b._g4_invitation_external_inputs(read,_invitation_q())
+    assert err.value.reason_code=="bounded_g4_invitation_independent_source"
+
+
+def test_invitation_dispatch_and_subject_do_not_capture_old_families(monkeypatch):
+    q=_invitation_q();subject=bounded_g1b.g4_invitation_review_subject(q)
+    assert bounded_g1b.g4_invitation_review_subject(dict(q,source_review={"unissued":True}))==subject
+    assert bounded_g1b.g4_invitation_review_subject(dict(q,candidate_tree="changed"))!=subject
+    sentinel=({"new-invitation-only":b"source-routing"},None)
+    monkeypatch.setattr(bounded_g1b,"_validate_g4_invitation_loaded_policy",lambda inputs:sentinel)
+    assert bounded_g1b._validate_loaded_policy(bounded_g1b.BoundedG1BInputs(q,{},{},{},{})) is sentinel
+    account=dict(q,schema_version=bounded_g1b.G4_ACCOUNT_BOOTSTRAP_SCHEMA,stage="apply",operation_kind="implement_g4_stage1_successor",repair_sha256={p:{} for p in bounded_g1b.G4_ACCOUNT_BOOTSTRAP_PRODUCT})
+    assert bounded_g1b.operation_paths(account["operation_kind"],account)==bounded_g1b.G4_ACCOUNT_BOOTSTRAP_PRODUCT
+    human=dict(q,schema_version=bounded_g1b.G4_HUMAN_SCHEMA,stage="admit",operation_kind=bounded_g1b.G4_HUMAN_ADMIT_KIND,repair_sha256={})
+    assert bounded_g1b.operation_paths(human["operation_kind"],human)==frozenset()
+
+
+@pytest.mark.parametrize("key",sorted(bounded_g1b.G4_INVITATION_BINDING_KEYS-{"source_review"}))
+def test_invitation_subject_binds_every_canonical_field(key):
+    q=_invitation_q()
+    assert len(q)==17 and len(q)-1==16
+    assert bounded_g1b.g4_invitation_review_subject(dict(q,**{key:"changed"}))!=bounded_g1b.g4_invitation_review_subject(q)
+
+
+@pytest.mark.parametrize("mode,reason",[("missing","bounded_g4_invitation_vector"),
+    ("nested_review","bounded_g4_invitation_independent_source"),
+    ("parent","bounded_g4_invitation_source_provenance"),
+    ("short","bounded_g4_invitation_source_bytes")])
+def test_invitation_external_join_rejects_missing_or_unreviewed_provenance(mode,reason):
+    def read(path,digest):
+        raw=path.read_bytes()
+        if path==bounded_g1b.G4_INVITATION_VECTOR and mode in {"missing","parent"}:
+            item=json.loads(raw)
+            if mode=="missing":item["rows"].pop()
+            if mode=="parent":item["parent_vector"]["sha256"]="0"*64
+            return json.dumps(item).encode()
+        if path==bounded_g1b.G4_INVITATION_SOURCE_REVIEW and mode=="nested_review":
+            item=json.loads(raw);item["subject"]["product_vector"]["rows"][0]["after"]["sha256"]="0"*64
+            return json.dumps(item).encode()
+        if mode=="short" and path.name=="local_synthetic_invitation.py":return raw[:-1]
+        return raw
+    with pytest.raises(bounded_g1b.BoundedG1BError) as err:
+        bounded_g1b._g4_invitation_external_inputs(read,_invitation_q())
+    assert err.value.reason_code==reason
+
+
+@pytest.mark.parametrize("stage",["enable","apply"])
+def test_invitation_paths_reject_family_kind_and_stage_mismatch(stage):
+    q=_invitation_q(stage)
+    for changed in (dict(q,schema_version=bounded_g1b.G4_ACCOUNT_BOOTSTRAP_SCHEMA),
+                    dict(q,stage="admit"),dict(q,operation_kind=bounded_g1b.G4_HUMAN_ADMIT_KIND)):
+        with pytest.raises(bounded_g1b.BoundedG1BError) as err:
+            bounded_g1b._g4_invitation_paths(q["operation_kind"],changed)
+        assert err.value.reason_code=="bounded_g4_invitation_binding_kind"
+
+
+def _invitation_loader_fixture(monkeypatch,stage="enable",phase="development"):
+    """Synthetic control flow only; no Git, native admission, or runtime proof."""
+    target=Path("C:/synthetic-invitation-target");source=Path("C:/synthetic-invitation-source")
+    evidence=bounded_g1b.G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT
+    scope=_invitation_scope()
+    core=(bounded_g1b.CONFIGURATION_PATHS | {bounded_g1b.STATE,bounded_g1b.GATES,
+        bounded_g1b.OVERLAY,bounded_g1b.AGENTS,bounded_g1b.G4_STAGE1_INTERACTIVE_SCOPE,
+        bounded_g1b.G4_STAGE1_SUCCESSOR_SCOPE,bounded_g1b.G4_STAGE1_SUCCESSOR_TEST,
+        bounded_g1b.G4_CI_WORKFLOW} | bounded_g1b.SOURCE_PATHS | bounded_g1b.CONTROLLER_PATHS)
+    paths=core|(bounded_g1b.G4_INVITATION_PRODUCT if stage=="apply" else set())
+    prior={p:("accepted:"+p).encode() for p in core}
+    for p in bounded_g1b.G4_INVITATION_CONTROL:
+        prior[p]=(_INVITATION_AFTERIMAGES.parent/"before"/p).read_bytes()
+    after=dict(prior)
+    for p in bounded_g1b.G4_INVITATION_CONTROL-{bounded_g1b.G4_STAGE1_SUCCESSOR_SCOPE}:
+        after[p]=(_INVITATION_AFTERIMAGES/p).read_bytes()
+    vector=json.loads(bounded_g1b.G4_INVITATION_VECTOR.read_bytes())
+    rows=bounded_g1b._validate_g4_invitation_vector(vector)
+    product={r["relative_path"]:Path(r["after_path"]).read_bytes() for r in rows}
+    if stage=="apply":after.update(product)
+    scope["source_sha256"]={p:hashlib.sha256(after[p]).hexdigest()
+        for p in bounded_g1b.SOURCE_PATHS|bounded_g1b.CONTROLLER_PATHS}
+    scope["control_sha256"]={p:hashlib.sha256(after[p]).hexdigest()
+        for p in bounded_g1b.G4_INVITATION_CONTROL-{bounded_g1b.G4_STAGE1_SUCCESSOR_SCOPE}}
+    after[bounded_g1b.G4_STAGE1_SUCCESSOR_SCOPE]=bounded_g1b._canonical(scope)+b"\n"
+    installed=prior if stage=="enable" else {p:after[p] for p in core}
+    q=_invitation_q(stage)
+    q.update(operation_id="synthetic-invitation-source",phase=phase,
+        base_commit=bounded_g1b.G4_INVITATION_BASE["commit"] if stage=="enable" else "b"*40,
+        base_tree=bounded_g1b.G4_INVITATION_BASE["tree"] if stage=="enable" else "c"*40,
+        candidate_tree="a"*40,source_sha256=scope["source_sha256"],
+        payload_sha256={p:hashlib.sha256(raw).hexdigest() for p,raw in after.items()})
+    q.update(expected_head=q["base_commit"] if phase=="development" else "e"*40,
+        expected_index_tree=q["base_tree"] if phase=="development" else q["candidate_tree"])
+    owned=bounded_g1b.G4_INVITATION_CONTROL if stage=="enable" else bounded_g1b.G4_INVITATION_PRODUCT
+    q["repair_sha256"]={p:{"before_sha256":hashlib.sha256(installed[p]).hexdigest() if p in installed else None,
+        "after_sha256":q["payload_sha256"][p]} for p in owned}
+    subject_path=bounded_g1b.G4_INVITATION_ROOT/"entry-admission-v1"/(
+        "independent-"+stage+"-"+phase+"-subject-review-v1.json")
+    q["source_review"]={"path":subject_path.as_posix(),"sha256":"d"*64}
+    activation_path=bounded_g1b.G4_INVITATION_ROOT/"entry-admission-v1/independent-enable-push-effect-review-v1.json"
+    if stage=="apply":q["activation_acceptance"]={"path":activation_path.as_posix(),"sha256":"f"*64}
+    review={"schema":"emr4.g4_operation_review.v1","status":"PASS",
+        "verdict":"PASS_G4_STAGE1_LOCAL_SYNTHETIC_INVITATION_EXACT_ADMISSION_SUBJECT",
+        "independent":True,"implementation_authorship":False,"blocking_findings":[],
+        "reviewer_agent":"/root/synthetic-independent-reviewer","stage":stage,"phase":phase}
+    activation={"status":"PASS","verdict":"PASS_G4_STAGE1_LOCAL_SYNTHETIC_INVITATION_CONTROL_PUBLICATION_EFFECT",
+        "reviewer_agent":"/root/synthetic-independent-reviewer","independent":True,
+        "implementation_authorship":False,"blocking_findings":[],"stage":"enable","phase":"push",
+        "base":bounded_g1b.G4_INVITATION_BASE["commit"],"commit":q["base_commit"],
+        "candidate_tree":q["base_tree"],"control_activation_accepted":True,
+        "same_attempt_remote_readback_verified":True,"protected_refs_unchanged":True,
+        "whole_inverse_verified_same_attempt":True,"published_ref":bounded_g1b.G4_STAGE1_INTERACTIVE_BACKEND_REF}
+    def read(p,d):
+        if p==subject_path:return json.dumps(dict(review,subject_sha256=bounded_g1b.g4_invitation_review_subject(q))).encode()
+        if p==activation_path:return json.dumps(activation).encode()
+        if p.is_relative_to(bounded_g1b.G4_INVITATION_VECTOR.parent/"after"):
+            return product[p.relative_to(bounded_g1b.G4_INVITATION_VECTOR.parent/"after").as_posix()]
+        relative=p.relative_to(target if p.is_relative_to(target) else source).as_posix()
+        raw=after[relative]
+        if hashlib.sha256(raw).hexdigest()!=d:raise bounded_g1b.BoundedG1BError("bounded_g1b_input_digest_changed")
+        return raw
+    def git_bytes(_target,*args):
+        if args[:2]==("ls-tree","-z"):return b"present" if args[-1] in installed else b""
+        assert args[:2]==("cat-file","blob")
+        commit,relative=args[2].split(":",1)
+        return prior[relative] if commit==bounded_g1b.G4_INVITATION_BASE["commit"] else installed[relative]
+    def git(_target,*args):
+        if args[0]=="rev-parse":return bounded_g1b.G4_INVITATION_BASE["tree"]
+        assert args[:2]==("cat-file","commit")
+        activation_commit=stage=="apply" and args[2]==q["base_commit"]
+        parent=bounded_g1b.G4_INVITATION_BASE["commit"] if activation_commit else q["base_commit"]
+        tree=q["base_tree"] if activation_commit else q["candidate_tree"]
+        return "tree "+tree+"\nparent "+parent+"\n\nsynthetic\n"
+    calls=[]
+    monkeypatch.setattr(bounded_g1b.trusted_git,"run_git_bytes",git_bytes)
+    monkeypatch.setattr(bounded_g1b.trusted_git,"run_git",git)
+    monkeypatch.setattr(bounded_g1b.trusted_git,"attest_target_index",lambda _target,**kwargs:calls.append(kwargs) or {})
+    monkeypatch.setattr(bounded_g1b,"_g4_invitation_external_inputs",lambda _read,_q:(vector,{"source_only":True},rows))
+    monkeypatch.setattr(bounded_g1b,"_g4_invitation_fixture_source",lambda _read:{"synthetic_implemented_fixture_source_join":True})
+    def run():
+        return bounded_g1b._load_g4_invitation_inputs(None,target,source,evidence,
+            Path("C:/synthetic-invitation-scratch"),q,read,{})
+    return run,q,after,installed,calls,paths,review,activation
+
+
+@pytest.mark.parametrize("stage,phase",[("enable","development"),("enable","pre-push"),
+    ("enable","post-push"),("apply","development"),("apply","pre-push"),("apply","post-push")])
+def test_invitation_loader_real_body_retains_core25_and_exact4(monkeypatch,stage,phase):
+    run,q,after,installed,calls,paths,review,activation=_invitation_loader_fixture(monkeypatch,stage,phase)
+    inputs=run()
+    assert inputs.binding is q and inputs.payloads==after and len(paths)==(25 if stage=="enable" else 29)
+    owned=bounded_g1b.G4_INVITATION_CONTROL if stage=="enable" else bounded_g1b.G4_INVITATION_PRODUCT
+    assert calls==[{"attested_paths":tuple(sorted(paths-owned if phase=="development" else paths)),
+        "expected_head":q["expected_head"],"expected_index_tree":q["expected_index_tree"],
+        "scratch_parent":Path("C:/synthetic-invitation-scratch")}]
+
+
+@pytest.mark.parametrize("mode,reason",[("base","bounded_g4_invitation_enable_base"),
+    ("before","bounded_g4_invitation_change_preimage"),("unowned","bounded_g4_invitation_unowned_change"),
+    ("payload_extra","bounded_g4_invitation_payload_paths"),("payload_missing","bounded_g4_invitation_payload_paths"),
+    ("source_missing","bounded_g4_invitation_sources"),("review","bounded_g4_invitation_independent_subject"),
+    ("review_path","bounded_g4_invitation_review_path")])
+def test_invitation_loader_rejects_bad_base_paths_preimage_and_unreviewed_subject(monkeypatch,mode,reason):
+    run,q,after,installed,calls,paths,review,activation=_invitation_loader_fixture(monkeypatch)
+    if mode=="base":q["base_commit"]="0"*40
+    elif mode=="before":installed[bounded_g1b.G4_AUDIT_CODE]=b"changed-controller"
+    elif mode=="unowned":installed[bounded_g1b.G4_CI_WORKFLOW]=b"changed-unowned-workflow"
+    elif mode=="payload_extra":q["payload_sha256"]["app/unreviewed.py"]="0"*64
+    elif mode=="payload_missing":del q["payload_sha256"][bounded_g1b.G4_CI_WORKFLOW]
+    elif mode=="source_missing":del q["source_sha256"][bounded_g1b.G4_AUDIT_CODE]
+    elif mode=="review":review["independent"]=False
+    else:q["source_review"]["path"]="C:/unreviewed/review.json"
+    with pytest.raises(bounded_g1b.BoundedG1BError) as err:run()
+    assert err.value.reason_code==reason and calls==[]
+
+
+def test_invitation_apply_requires_independent_enable_publication(monkeypatch):
+    run,q,after,installed,calls,paths,review,activation=_invitation_loader_fixture(monkeypatch,"apply")
+    activation["control_activation_accepted"]=False
+    with pytest.raises(bounded_g1b.BoundedG1BError) as err:run()
+    assert err.value.reason_code=="bounded_g4_invitation_activation_acceptance" and calls==[]
+
+
+@pytest.mark.parametrize("name,schema",[("HEADER","G4_HEADER_BINDING_SCHEMA"),
+    ("VOICE","G4_VOICE_BINDING_SCHEMA"),("HANDOFF","G4_HANDOFF_BINDING_SCHEMA"),
+    ("AUDIT","G4_AUDIT_BINDING_SCHEMA"),("INTENT","G4_INTENT_SCHEMA"),
+    ("BUREAU","G4_BUREAU_SCHEMA"),("BUREAU_V9","G4_BUREAU_V9_SCHEMA"),
+    ("EXACT_TIME","G4_EXACT_TIME_SCHEMA"),("STATUS_CONTRACT","G4_STATUS_CONTRACT_SCHEMA"),
+    ("CORRELATION_BINDING","G4_CORRELATION_BINDING_SCHEMA"),("RECEIPT","G4_RECEIPT_SCHEMA"),
+    ("ACCOUNT_BOOTSTRAP","G4_ACCOUNT_BOOTSTRAP_SCHEMA")])
+@pytest.mark.parametrize("stage",["enable","apply"])
+def test_invitation_predicate_allows_every_prior_successor_family_to_dispatch(name,schema,stage):
+    paths=getattr(bounded_g1b,"G4_"+name+("_CONTROL" if stage=="enable" else "_PRODUCT"))
+    q=dict(_invitation_q(stage),schema_version=getattr(bounded_g1b,schema),repair_sha256={p:{} for p in paths})
+    assert bounded_g1b._is_g4_invitation_binding(q) is False
+    assert bounded_g1b.operation_paths(q["operation_kind"],q)==paths
+    operation=bounded_g1b._operation(q["operation_kind"],q)
+    assert operation["paths"]==paths and "g4_invitation_source" not in operation
+
+
+def test_invitation_fixture_join_reads_actual_implemented_twelve_source_outputs():
+    seen=[]
+    def read(path,digest):
+        raw=path.read_bytes();assert hashlib.sha256(raw).hexdigest()==digest;seen.append(path);return raw
+    result=bounded_g1b._g4_invitation_fixture_source(read)
+    assert result["review"]["implemented_fixture_writer_source_accepted"] is True
+    assert result["review"]["runtime_accepted"] is False
+    rows=result["vector"]["rows"]
+    assert len(rows)==12 and all(Path(r["after"]["path"]) in seen for r in rows)
+    assert result["vector"]["product_vector"]["sha256"]==bounded_g1b.G4_INVITATION_VECTOR_SHA
+
+
+@pytest.mark.parametrize("mode,reason",[("missing","bounded_g4_invitation_fixture_vector"),
+    ("outside","bounded_g4_invitation_fixture_vector"),("unreviewed","bounded_g4_invitation_independent_source"),
+    ("nested","bounded_g4_invitation_independent_source"),("wrong_product","bounded_g4_invitation_fixture_vector"),
+    ("short_source","bounded_g4_invitation_fixture_source_bytes")])
+def test_invitation_fixture_join_rejects_missing_outside_unreviewed_or_unjoined_source(mode,reason):
+    # Reader deliberately substitutes metadata, exercising validators rather
+    # than claiming a hash acceptance for the mutated synthetic document.
+    def read(path,digest):
+        raw=path.read_bytes()
+        if path==bounded_g1b.G4_INVITATION_FIXTURE_VECTOR and mode in {"missing","outside","wrong_product"}:
+            item=json.loads(raw)
+            if mode=="missing":item["rows"].pop()
+            elif mode=="outside":item["rows"][0]["after"]["path"]="C:/unreviewed/fixture.py"
+            else:item["product_vector"]["sha256"]="0"*64
+            return json.dumps(item).encode()
+        if path==bounded_g1b.G4_INVITATION_SOURCE_REVIEW and mode in {"unreviewed","nested"}:
+            item=json.loads(raw)
+            if mode=="unreviewed":item["implemented_fixture_writer_source_accepted"]=False
+            else:item["subject"]["fixture_vector"]["rows"][0]["after"]["sha256"]="0"*64
+            return json.dumps(item).encode()
+        if mode=="short_source" and path.name=="invitation_case_fixtures.py":return raw[:-1]
+        assert hashlib.sha256(raw).hexdigest()==digest
+        return raw
+    with pytest.raises(bounded_g1b.BoundedG1BError) as err:bounded_g1b._g4_invitation_fixture_source(read)
+    assert err.value.reason_code==reason
+
+
+def test_invitation_loader_calls_implemented_source_join_for_apply_only(monkeypatch):
+    calls=[]
+    for stage in ("enable","apply"):
+        run,q,after,installed,attest,paths,review,activation=_invitation_loader_fixture(monkeypatch,stage)
+        monkeypatch.setattr(bounded_g1b,"_g4_invitation_fixture_source",lambda read:calls.append(stage) or {"source_only":True})
+        run()
+    assert calls==["apply"]
