@@ -21,7 +21,7 @@ project = namespace["project_bureau_move"]
 
 def fixture():
     current = {"ref": "synthetic-appointment", "state_version": 4, "date": "2026-10-27",
-               "start_local": "14:00", "duration_minutes": 30, "status": "booked",
+               "start_local": "14:00", "duration_minutes": 30, "status": "Booked",
                "patient_label": "Alex Chen", "practitioner_label": "Mira Rao"}
     slot = {"appointment_date": "2026-10-28", "start_time_local": "14:00:00",
             "duration_minutes": 30, "warning_codes": []}
@@ -75,6 +75,17 @@ class BureauProjectionTests(unittest.TestCase):
         self.assertEqual(project(reply, current, "synthetic-correlation"),
                          {"target_date": "2026-10-28", "target_start_local": "14:00"})
 
+    def test_domain_and_bureau_status_vocabulary_is_exact(self):
+        for wrong in ("booked", "BOOKED", " Booked", "Cancelled", None, True, []):
+            with self.subTest(current_status=wrong):
+                current, reply = fixture()
+                current["status"] = wrong
+                self.assertIsNone(project(reply, current, "synthetic-correlation"))
+        for wrong in ("Booked", "BOOKED", " booked", "cancelled", None, True, []):
+            with self.subTest(bureau_status=wrong):
+                current, reply = fixture()
+                reply["selected_appointment"]["status"] = wrong
+                self.assertIsNone(project(reply, current, "synthetic-correlation"))
     def test_rejected_or_wrong_authority_replies_release_no_fields(self):
         changes = [
             lambda r: r.update(result="clarification_required"),

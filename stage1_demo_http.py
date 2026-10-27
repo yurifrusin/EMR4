@@ -662,10 +662,10 @@ def project_bureau_move(reply: Any, current: dict[str, Any],
             or review.get("context_revision") != revision):
         return None
     selected = reply.get("selected_appointment")
-    if (type(selected) is not dict or current.get("status") != "booked"
+    if (type(selected) is not dict or current.get("status") != "Booked"
             or selected.get("appointment_date") != current.get("date")
             or local_minute(selected.get("start_time_local")) != current.get("start_local")
-            or selected.get("status") != current.get("status")
+            or selected.get("status") != "booked"
             or type(selected.get("duration_minutes")) is not int
             or selected["duration_minutes"] != current.get("duration_minutes")):
         return None
