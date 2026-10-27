@@ -2475,9 +2475,15 @@ def test_selected_bureau_v9_apply_requires_exact_enable_effect(monkeypatch):
 
 
 
+def _status_contract_scope():
+    """Frozen accepted V11 scope; active V12 does not rewrite its history."""
+    raw = Path("C:/Users/there/EMR4-tools/selected-bureau-correlation-binding-entry-candidate-v1/before/orchestration/programme/g4-stage1-successor-entry-scope.json").read_bytes()
+    assert hashlib.sha256(raw).hexdigest() == "302e4a5ae9df0cee9e783fc19793975bf7e362fa5095b23686b19b92b466e1d5"
+    return json.loads(raw)
+
+
 def test_status_contract_successor_is_two_status_paths_and_requires_acceptance(monkeypatch):
-    scope_path = Path(__file__).resolve().parents[1] / bounded_g1b.G4_STAGE1_SUCCESSOR_SCOPE
-    scope = json.loads(scope_path.read_bytes())
+    scope = _status_contract_scope()
     bounded_g1b.validate_g4_status_contract_scope(scope)
     assert scope["allowed_paths"] == sorted(bounded_g1b.G4_STATUS_CONTRACT_PRODUCT)
     assert set(scope["allowed_paths"]) == {
@@ -2522,7 +2528,7 @@ def test_status_contract_successor_is_two_status_paths_and_requires_acceptance(m
 
 def _status_contract_loader_fixture(monkeypatch, stage):
     """Exercise the production loader with pinned ordinary files and literal Git stubs."""
-    root = Path(__file__).resolve().parents[1]
+    root = Path("C:/Users/there/EMR4-tools/g4-status-contract-apply01-source")
     scope = json.loads((root / bounded_g1b.G4_STAGE1_SUCCESSOR_SCOPE).read_bytes())
     bounded_g1b.validate_g4_status_contract_scope(scope)
     target = Path("C:/synthetic-status-contract-target")
@@ -2818,3 +2824,370 @@ def test_status_contract_subject_reviews_bind_each_phase_and_independence(monkey
             with pytest.raises(bounded_g1b.BoundedG1BError) as caught:
                 check(dict(review, **{key: value}))
             assert caught.value.reason_code == "bounded_g4_status_contract_independent_subject"
+
+
+def test_correlation_binding_successor_is_four_binding_paths_and_requires_acceptance(monkeypatch):
+    scope_path = Path(__file__).resolve().parents[1] / bounded_g1b.G4_STAGE1_SUCCESSOR_SCOPE
+    scope = json.loads(scope_path.read_bytes())
+    bounded_g1b.validate_g4_correlation_binding_scope(scope)
+    assert scope["allowed_paths"] == sorted(bounded_g1b.G4_CORRELATION_BINDING_PRODUCT)
+    assert set(scope["allowed_paths"]) == {
+        "stage1_demo_http.py", "tests/test_stage1_bureau_projection.py",
+        "app/routers/appointments.py", "app/schemas/appointments.py",
+    }
+    assert scope["selected_base"] == bounded_g1b.G4_CORRELATION_BINDING_BASE
+    assert scope["admission_grants_runtime_authority"] is False
+    for changed_field, changed_value in (
+        ("selected_base", {"commit": "0" * 40, "tree": "0" * 40}),
+        ("allowed_paths", scope["allowed_paths"] + ["app/other.py"]),
+        ("product_sha256", {**scope["product_sha256"],
+                            "stage1_demo_http.py": "0" * 64}),
+        ("mapping_review", None),
+        ("runtime_binding_required", False),
+        ("admission_grants_runtime_authority", True),
+        ("voice_activation", True),
+        ("allowed_effects", scope["allowed_effects"] + ["provider_invocation"]),
+        ("predecessor_scope", {"sha256": "0" * 64}),
+    ):
+        changed = copy.deepcopy(scope)
+        changed[changed_field] = changed_value
+        with pytest.raises(bounded_g1b.BoundedG1BError) as caught:
+            bounded_g1b.validate_g4_correlation_binding_scope(changed)
+        assert caught.value.reason_code == "bounded_g4_correlation_binding_scope_boundary"
+
+    for stage, kind, paths in (
+        ("enable", "enable_g4_stage1_successor", bounded_g1b.G4_CORRELATION_BINDING_CONTROL),
+        ("apply", "implement_g4_stage1_successor", bounded_g1b.G4_CORRELATION_BINDING_PRODUCT),
+    ):
+        q = {"schema_version": bounded_g1b.G4_CORRELATION_BINDING_SCHEMA,
+             "operation_kind": kind, "stage": stage,
+             "repair_sha256": {p: {} for p in paths}}
+        assert bounded_g1b.operation_paths(kind, q) == paths
+        operation = bounded_g1b._operation(kind, q)
+        assert operation["g4_correlation_binding_source"] is True
+        assert operation["paths"] == paths
+        assert operation["profile"] == bounded_g1b.raisa_policy.G4_STAGE1_SUCCESSOR_PROFILE
+        for replacement in (set(paths) | {"app/other.py"}, set(paths) - {next(iter(paths))}):
+            with pytest.raises(bounded_g1b.BoundedG1BError) as caught:
+                bounded_g1b.operation_paths(kind, dict(
+                    q, repair_sha256={p: {} for p in replacement}))
+            assert caught.value.reason_code == "bounded_g4_correlation_binding_changed_paths"
+
+
+
+def _correlation_binding_loader_fixture(monkeypatch, stage):
+    """Exercise the production loader with pinned ordinary files and literal Git stubs."""
+    root = Path(__file__).resolve().parents[1]
+    scope = json.loads((root / bounded_g1b.G4_STAGE1_SUCCESSOR_SCOPE).read_bytes())
+    bounded_g1b.validate_g4_correlation_binding_scope(scope)
+    target = Path("C:/synthetic-correlation-binding-target")
+    source = Path("C:/synthetic-correlation-binding-source")
+    product_root = Path("C:/Users/there/EMR4-tools/selected-bureau-correlation-binding-product-candidate-v2/after")
+    before_files = {
+        "stage1_demo_http.py": (Path("C:/Users/there/EMR4-tools/selected-bureau-correlation-binding-product-candidate-v2/before/stage1_demo_http.py"), 102636),
+        "tests/test_stage1_bureau_projection.py": (Path("C:/Users/there/EMR4-tools/selected-bureau-correlation-binding-product-candidate-v2/before/tests/test_stage1_bureau_projection.py"), 6950),
+        "app/routers/appointments.py": (Path("C:/Users/there/EMR4-tools/selected-bureau-correlation-binding-product-candidate-v2/before/app/routers/appointments.py"), 381168),
+        "app/schemas/appointments.py": (Path("C:/Users/there/EMR4-tools/selected-bureau-correlation-binding-product-candidate-v2/before/app/schemas/appointments.py"), 67758),
+    }
+    after_lengths = {
+        "stage1_demo_http.py": 103141,
+        "tests/test_stage1_bureau_projection.py": 15590,
+        "app/routers/appointments.py": 381555,
+        "app/schemas/appointments.py": 67919,
+    }
+    before_product = {}
+    after_product = {}
+    for path in sorted(bounded_g1b.G4_CORRELATION_BINDING_PRODUCT):
+        before_product[path] = before_files[path][0].read_bytes()
+        after_product[path] = (product_root / path).read_bytes()
+        assert len(before_product[path]) == before_files[path][1]
+        assert len(after_product[path]) == after_lengths[path]
+        assert hashlib.sha256(before_product[path]).hexdigest() == bounded_g1b.G4_CORRELATION_BINDING_BEFORE_SHA[path]
+        assert hashlib.sha256(after_product[path]).hexdigest() == bounded_g1b.G4_CORRELATION_BINDING_PRODUCT_SHA[path]
+
+    evidence = {}
+    for path, digest in (
+        (bounded_g1b.G4_CORRELATION_BINDING_VECTOR, bounded_g1b.G4_CORRELATION_BINDING_VECTOR_SHA),
+        (bounded_g1b.G4_CORRELATION_BINDING_SOURCE_REVIEW, bounded_g1b.G4_CORRELATION_BINDING_SOURCE_REVIEW_SHA),
+    ):
+        raw = path.read_bytes()
+        assert hashlib.sha256(raw).hexdigest() == digest
+        evidence[path] = raw
+    vector = json.loads(evidence[bounded_g1b.G4_CORRELATION_BINDING_VECTOR])
+    selected = (bounded_g1b.G4_CORRELATION_BINDING_CONTROL if stage == "enable"
+                else bounded_g1b.G4_CORRELATION_BINDING_PRODUCT)
+    inputs = (bounded_g1b.CONFIGURATION_PATHS |
+              {bounded_g1b.STATE, bounded_g1b.GATES, bounded_g1b.OVERLAY,
+               bounded_g1b.AGENTS, bounded_g1b.G4_STAGE1_INTERACTIVE_SCOPE,
+               bounded_g1b.G4_STAGE1_SUCCESSOR_SCOPE,
+               bounded_g1b.G4_STAGE1_SUCCESSOR_TEST, bounded_g1b.G4_CI_WORKFLOW} |
+              bounded_g1b.SOURCE_PATHS | bounded_g1b.CONTROLLER_PATHS |
+              (bounded_g1b.G4_CORRELATION_BINDING_PRODUCT if stage == "apply" else set()))
+    payload = {path: b"synthetic-v12-payload:" + path.encode("utf-8") for path in inputs}
+    for path in sorted(bounded_g1b.SOURCE_PATHS | bounded_g1b.CONTROLLER_PATHS):
+        payload[path] = (root / path).read_bytes()
+        assert hashlib.sha256(payload[path]).hexdigest() == scope["source_sha256"][path]
+    payload[bounded_g1b.OVERLAY] = (root / bounded_g1b.OVERLAY).read_bytes()
+    payload[bounded_g1b.G4_STAGE1_SUCCESSOR_TEST] = (root / bounded_g1b.G4_STAGE1_SUCCESSOR_TEST).read_bytes()
+    assert hashlib.sha256(payload[bounded_g1b.G4_STAGE1_SUCCESSOR_TEST]).hexdigest() == scope["control_sha256"][bounded_g1b.G4_STAGE1_SUCCESSOR_TEST]
+    payload[bounded_g1b.G4_STAGE1_SUCCESSOR_SCOPE] = bounded_g1b._canonical(scope) + b"\n"
+    if stage == "apply":
+        payload.update(after_product)
+    predecessor = bounded_g1b._canonical(_status_contract_scope()) + b"\n"
+    assert hashlib.sha256(predecessor).hexdigest() == scope["predecessor_scope"]["sha256"]
+    base_commit = (bounded_g1b.G4_CORRELATION_BINDING_BASE["commit"] if stage == "enable"
+                   else "b" * 40)
+    base_tree = (bounded_g1b.G4_CORRELATION_BINDING_BASE["tree"] if stage == "enable"
+                 else "c" * 40)
+    committed = dict(payload)
+    if stage == "enable":
+        for path in selected:
+            committed[path] = (predecessor if path == bounded_g1b.G4_STAGE1_SUCCESSOR_SCOPE
+                               else b"synthetic-v12-before:" + path.encode("utf-8"))
+    else:
+        committed.update(before_product)
+    q = {
+        "schema_version": bounded_g1b.G4_CORRELATION_BINDING_SCHEMA,
+        "operation_id": "correlation-binding-synthetic-" + stage,
+        "operation_kind": ("enable_g4_stage1_successor" if stage == "enable"
+                           else "implement_g4_stage1_successor"),
+        "stage": stage, "phase": "development",
+        "base_commit": base_commit, "base_tree": base_tree,
+        "expected_head": base_commit, "expected_index_tree": base_tree,
+        "candidate_tree": "d" * 40,
+        "source_sha256": copy.deepcopy(scope["source_sha256"]),
+        "payload_sha256": {path: hashlib.sha256(raw).hexdigest()
+                           for path, raw in payload.items()},
+        "repair_sha256": {
+            path: {"before_sha256": hashlib.sha256(committed[path]).hexdigest(),
+                   "after_sha256": hashlib.sha256(payload[path]).hexdigest()}
+            for path in selected},
+        "source_review": {}, "activation_acceptance": None,
+        "product_vector": scope["product_vector"],
+        "mapping_review": scope["mapping_review"],
+    }
+    activation_path = (bounded_g1b.G4_CORRELATION_BINDING_ROOT / "entry-admission-v1" /
+                       "independent-enable-push-effect-review-v1.json")
+    activation = None
+    if stage == "apply":
+        activation = {
+            "status": "PASS", "verdict": "PASS_G4_STAGE1_CORRELATION_BINDING_CONTROL_PUBLICATION_EFFECT",
+            "reviewer_agent": "/root/independent-enable-reviewer",
+            "independent": True, "implementation_authorship": False,
+            "blocking_findings": [], "stage": "enable", "phase": "push",
+            "base": bounded_g1b.G4_CORRELATION_BINDING_BASE["commit"],
+            "commit": base_commit, "candidate_tree": base_tree,
+            "control_activation_accepted": True,
+            "same_attempt_remote_readback_verified": True,
+            "protected_refs_unchanged": True,
+            "whole_inverse_verified_same_attempt": True,
+            "published_ref": bounded_g1b.G4_STAGE1_INTERACTIVE_BACKEND_REF,
+        }
+        raw = json.dumps(activation, sort_keys=True).encode("utf-8")
+        q["activation_acceptance"] = {
+            "path": activation_path.as_posix(),
+            "sha256": hashlib.sha256(raw).hexdigest()}
+        evidence[activation_path] = raw
+    subject_path = (bounded_g1b.G4_CORRELATION_BINDING_ROOT / "entry-admission-v1" /
+                    ("independent-" + stage + "-development-subject-review-v1.json"))
+    review = {
+        "schema": "emr4.g4_operation_review.v1", "status": "PASS",
+        "verdict": "PASS_G4_STAGE1_CORRELATION_BINDING_EXACT_ADMISSION_SUBJECT",
+        "subject_sha256": bounded_g1b.g4_correlation_binding_review_subject(q),
+        "stage": stage, "phase": "development",
+        "independent": True, "implementation_authorship": False,
+        "blocking_findings": [], "reviewer_agent": "/root/independent-subject-reviewer",
+    }
+    raw = json.dumps(review, sort_keys=True).encode("utf-8")
+    q["source_review"] = {"path": subject_path.as_posix(),
+                          "sha256": hashlib.sha256(raw).hexdigest()}
+    evidence[subject_path] = raw
+
+    def read(path, digest):
+        if path in evidence:
+            raw = evidence[path]
+            assert hashlib.sha256(raw).hexdigest() == digest
+            return raw
+        for root_path in (target, source, product_root):
+            if path.is_relative_to(root_path):
+                relative = path.relative_to(root_path).as_posix()
+                if root_path == source and relative in bounded_g1b.SOURCE_PATHS | bounded_g1b.CONTROLLER_PATHS:
+                    assert digest == q["source_sha256"][relative]
+                    raw = (payload[relative] if stage == "enable" and relative in selected
+                           else committed[relative])
+                    assert hashlib.sha256(raw).hexdigest() == digest
+                    return raw
+                if root_path == target:
+                    assert digest == q["payload_sha256"][relative]
+                    assert hashlib.sha256(payload[relative]).hexdigest() == digest
+                    return payload[relative]
+                assert relative in after_product
+                assert digest == bounded_g1b.G4_CORRELATION_BINDING_PRODUCT_SHA[relative]
+                return after_product[relative]
+        raise AssertionError("unexpected synthetic read")
+
+    def fake_git_bytes(_target, *args):
+        if args == ("cat-file", "blob", bounded_g1b.G4_CORRELATION_BINDING_BASE["commit"] +
+                    ":" + bounded_g1b.G4_STAGE1_SUCCESSOR_SCOPE):
+            return predecessor
+        if args[:3] == ("ls-tree", "-z", base_commit):
+            assert args[3] == "--" and args[4] in selected
+            return b"100644 blob present\x00"
+        assert args[:2] == ("cat-file", "blob")
+        commit, relative = args[2].split(":", 1)
+        if commit == bounded_g1b.G4_CORRELATION_BINDING_BASE["commit"] and relative in (
+                bounded_g1b.STATE, bounded_g1b.GATES, bounded_g1b.OVERLAY,
+                bounded_g1b.AGENTS):
+            return committed[relative]
+        assert commit == base_commit and relative in committed
+        return committed[relative]
+
+    def fake_git(_target, *args):
+        if args == ("rev-parse", bounded_g1b.G4_CORRELATION_BINDING_BASE["commit"] + "^{tree}"):
+            return bounded_g1b.G4_CORRELATION_BINDING_BASE["tree"]
+        assert args == ("cat-file", "commit", base_commit)
+        return ("tree " + base_tree + "\nparent " +
+                bounded_g1b.G4_CORRELATION_BINDING_BASE["commit"] + "\n\nsynthetic")
+
+    monkeypatch.setattr(bounded_g1b.trusted_git, "run_git_bytes", fake_git_bytes)
+    monkeypatch.setattr(bounded_g1b.trusted_git, "run_git", fake_git)
+    monkeypatch.setattr(bounded_g1b.trusted_git, "attest_target_index",
+                        lambda *_args, **_kwargs: {"synthetic": True})
+
+    def load(selected_q):
+        return bounded_g1b._load_g4_correlation_binding_inputs(
+            None, target, source, bounded_g1b.G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT,
+            Path("C:/synthetic-correlation-binding-scratch"), selected_q, read, {})
+    return q, load, evidence, subject_path, activation_path
+
+
+@pytest.mark.parametrize("stage", ["enable", "apply"])
+def test_correlation_binding_loader_valid_baseline_and_targeted_rejections(monkeypatch, stage):
+    q, load, evidence, subject_path, activation_path = _correlation_binding_loader_fixture(
+        monkeypatch, stage)
+    loaded = load(q)
+    assert loaded.binding == q
+    assert loaded.evidence["scope"]["schema_version"] == bounded_g1b.G4_CORRELATION_BINDING_SCOPE_SCHEMA
+    assert loaded.evidence["review"]["subject_sha256"] == bounded_g1b.g4_correlation_binding_review_subject(q)
+    policy_calls = []
+    sentinel = ({"exact-correlation-branch": b"source-only"}, None)
+
+    def selected_policy(inputs):
+        policy_calls.append(inputs)
+        return sentinel
+
+    monkeypatch.setattr(bounded_g1b, "_validate_g4_correlation_binding_loaded_policy", selected_policy)
+    assert bounded_g1b._validate_loaded_policy(loaded) == sentinel
+    assert policy_calls == [loaded]
+
+    def rejected(changed, reason):
+        with pytest.raises(bounded_g1b.BoundedG1BError) as caught:
+            load(changed)
+        assert caught.value.reason_code == reason
+
+    changed = copy.deepcopy(q)
+    changed["phase"] = "runtime"
+    rejected(changed, "bounded_g4_correlation_binding_binding_version")
+    changed = copy.deepcopy(q)
+    changed["product_vector"]["sha256"] = "0" * 64
+    rejected(changed, "bounded_g4_correlation_binding_product_pins")
+    changed = copy.deepcopy(q)
+    changed["mapping_review"]["sha256"] = "0" * 64
+    rejected(changed, "bounded_g4_correlation_binding_product_pins")
+    changed = copy.deepcopy(q)
+    changed["repair_sha256"]["app/other.py"] = {"before_sha256": "0" * 64,
+                                                     "after_sha256": "1" * 64}
+    rejected(changed, "bounded_g4_correlation_binding_changed_paths")
+    changed = copy.deepcopy(q)
+    changed["source_sha256"]["app/other.py"] = "0" * 64
+    rejected(changed, "bounded_g4_correlation_binding_sources")
+    changed = copy.deepcopy(q)
+    changed["source_sha256"]["orchestration_harness/bounded_g1b.py"] = "0" * 64
+    rejected(changed, "bounded_g4_correlation_binding_scope_sources")
+    changed = copy.deepcopy(q)
+    del changed["payload_sha256"][bounded_g1b.STATE]
+    rejected(changed, "bounded_g4_correlation_binding_payload_paths")
+    changed = copy.deepcopy(q)
+    changed["payload_sha256"]["app/other.py"] = "0" * 64
+    rejected(changed, "bounded_g4_correlation_binding_payload_paths")
+    changed = copy.deepcopy(q)
+    first_repair = sorted(changed["repair_sha256"])[0]
+    changed["repair_sha256"][first_repair] = {}
+    rejected(changed, "bounded_g4_correlation_binding_change_pair")
+    changed = copy.deepcopy(q)
+    changed["repair_sha256"][first_repair]["after_sha256"] = "0" * 64
+    rejected(changed, "bounded_g4_correlation_binding_change_preimage")
+    changed = copy.deepcopy(q)
+    changed["candidate_tree"] = "e" * 40
+    rejected(changed, "bounded_g4_correlation_binding_independent_subject")
+    review = json.loads(evidence[subject_path])
+    review["phase"] = "pre-push"
+    evidence[subject_path] = json.dumps(review, sort_keys=True).encode("utf-8")
+    changed = copy.deepcopy(q)
+    changed["source_review"]["sha256"] = hashlib.sha256(evidence[subject_path]).hexdigest()
+    rejected(changed, "bounded_g4_correlation_binding_independent_subject")
+    review["phase"] = "development"
+    review["independent"] = False
+    evidence[subject_path] = json.dumps(review, sort_keys=True).encode("utf-8")
+    changed = copy.deepcopy(q)
+    changed["source_review"]["sha256"] = hashlib.sha256(evidence[subject_path]).hexdigest()
+    rejected(changed, "bounded_g4_correlation_binding_independent_subject")
+    if stage == "enable":
+        changed = copy.deepcopy(q)
+        changed["base_commit"] = "0" * 40
+        rejected(changed, "bounded_g4_correlation_binding_enable_base")
+    else:
+        changed = copy.deepcopy(q)
+        changed["activation_acceptance"] = None
+        rejected(changed, "bounded_g4_correlation_binding_activation_row")
+        activation = json.loads(evidence[activation_path])
+        activation["same_attempt_remote_readback_verified"] = False
+        evidence[activation_path] = json.dumps(activation, sort_keys=True).encode("utf-8")
+        changed = copy.deepcopy(q)
+        changed["activation_acceptance"]["sha256"] = hashlib.sha256(
+            evidence[activation_path]).hexdigest()
+        rejected(changed, "bounded_g4_correlation_binding_activation_acceptance")
+
+
+
+@pytest.mark.parametrize("stage", ["enable", "apply"])
+def test_correlation_binding_subject_reviews_bind_each_phase_and_independence(monkeypatch, stage):
+    q, _load, _evidence, _subject, _activation = _correlation_binding_loader_fixture(monkeypatch, stage)
+    for phase in ("development", "pre-push", "post-push"):
+        subject_q = copy.deepcopy(q)
+        subject_q["phase"] = phase
+        subject = bounded_g1b.g4_correlation_binding_review_subject(subject_q)
+        path = (bounded_g1b.G4_CORRELATION_BINDING_ROOT / "entry-admission-v1" /
+                ("independent-" + stage + "-" + phase + "-subject-review-v1.json"))
+        review = {
+            "schema": "emr4.g4_operation_review.v1", "status": "PASS",
+            "verdict": "PASS_G4_STAGE1_CORRELATION_BINDING_EXACT_ADMISSION_SUBJECT",
+            "subject_sha256": subject, "stage": stage, "phase": phase,
+            "independent": True, "implementation_authorship": False,
+            "blocking_findings": [], "reviewer_agent": "/root/independent-subject-reviewer",
+        }
+
+        def check(document):
+            raw = bounded_g1b._canonical(document)
+            row = {"path": path.as_posix(), "sha256": hashlib.sha256(raw).hexdigest()}
+
+            def read(expected_path, digest):
+                assert expected_path == path
+                assert hashlib.sha256(raw).hexdigest() == digest
+                return raw
+
+            return bounded_g1b._g4_correlation_binding_review(
+                read, row, bounded_g1b.G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT,
+                subject, stage, phase)
+
+        assert check(review) == review
+        for key, value in (
+            ("phase", "runtime"), ("subject_sha256", "0" * 64),
+            ("independent", False), ("implementation_authorship", True),
+            ("reviewer_agent", "/root"),
+            ("reviewer_agent", "/root/interpret_diagnostic_author_61"),
+            ("blocking_findings", ["unresolved"]),
+        ):
+            with pytest.raises(bounded_g1b.BoundedG1BError) as caught:
+                check(dict(review, **{key: value}))
+            assert caught.value.reason_code == "bounded_g4_correlation_binding_independent_subject"
