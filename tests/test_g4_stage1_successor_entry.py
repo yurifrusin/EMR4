@@ -1830,9 +1830,15 @@ def _bureau_v9_scope():
     return json.loads(raw)
 
 
+def _exact_time_scope():
+    """Frozen accepted V10 scope; active V11 does not rewrite its history."""
+    raw = base64.b64decode("eyJhY3RpdmVfcHJvZmlsZSI6Ikc0X1NUQUdFMV9MT0NBTF9TVUNDRVNTT1IiLCJhZG1pc3Npb25fZ3JhbnRzX3J1bnRpbWVfYXV0aG9yaXR5IjpmYWxzZSwiYWxsb3dlZF9lZmZlY3RzIjpbImNvbnRyb2xfcGxhbmVfZWRpdCIsInByb2R1Y3RfYmVoYXZpb3JfY2hhbmdlIiwicmVwb3NpdG9yeV9yZWFkIiwidGFza19icmFuY2hfY29tbWl0IiwidGFza19icmFuY2hfcHVzaCJdLCJhbGxvd2VkX3BhdGhzIjpbImFwcC9yb3V0ZXJzL2FwcG9pbnRtZW50cy5weSIsImFwcC9zZXJ2aWNlcy9yZWNlcHRpb25fb25lX3Byb3Bvc2FsX3J1bnRpbWUucHkiXSwiYWxsb3dlZF90YXNrX2tpbmQiOiJnNF9zdGFnZTFfbG9jYWxfc3VjY2Vzc29yIiwiY29udHJvbF9zaGEyNTYiOnsib3JjaGVzdHJhdGlvbi9oYXJuZXNzX3NldHRpbmdzL3Byb2dyYW1tZV9yZWNvdmVyeS55YW1sIjoiNDY0OTFkMGU4N2FkOGM1NTcwYjVmZWZmYWM3NjRjZmI2OGEyZmQyNWIxODgxODkxZDM0NTRmYWQxNzk1OTExMiIsIm9yY2hlc3RyYXRpb25faGFybmVzcy9ib3VuZGVkX2cxYi5weSI6ImRhNjlhNzY2OTBmYmRmZDg4ODQ3MTAwMWQyNGExY2U1NmM1YzY2YWUwNTk4MzZhYzc4NTAyMDg4YWU1NTVkMjYiLCJvcmNoZXN0cmF0aW9uX2hhcm5lc3MvcmFpc2FfcG9saWN5LnB5IjoiMmRhYmVjMTczYmY3ZTM5NjI5ZTcwMzZjYWMyZDEzYzc3N2U1MjY0OWNlYTc0NGExZmVjNzc4YjVlOWI5MzMyZSIsInRlc3RzL3Rlc3RfZzRfc3RhZ2UxX3N1Y2Nlc3Nvcl9lbnRyeS5weSI6ImY1Y2U1MDQ1MmExMjg3YTRjNjQ4MDRkMjM1Njc2MWM3ODZmOTVhMDM4NzIyOTA3OTg0ZDkwYzQ2MWUyZDc1OTAifSwiZXhjbHVkZWRfZWZmZWN0cyI6WyJ1bnJldmlld2VkX2FwcGxpY2F0aW9uX29yX2RhdGFiYXNlX3J1bnRpbWUiLCJ1bnJldmlld2VkX2Jyb3dzZXJfb3JfbWljcm9waG9uZV9ydW50aW1lIiwidW5yZXZpZXdlZF92b2ljZV9jaGlsZF9vcl9uZXR3b3JrX2VncmVzcyIsInByb3ZpZGVyX2ludm9jYXRpb24iLCJyZWFsX2RhdGFfYWNjZXNzIiwicHJvdGVjdGVkX3JlZl9tb3ZlbWVudCIsImRlcGxveW1lbnQiLCJwdWJsaWNfbGlzdGVuZXIiXSwibWFwcGluZ19yZXZpZXciOnsicGF0aCI6IkM6L1VzZXJzL3RoZXJlL0VNUjQtdG9vbHMvc2VsZWN0ZWQtYnVyZWF1LWV4YWN0LXRpbWUtY2FuZGlkYXRlLXYxL2luZGVwZW5kZW50LWV4YWN0LXRpbWUtc291cmNlLXJldmlldy12MS5qc29uIiwic2hhMjU2IjoiNDAwYzU0YzJlMmE1YzliNjI4MzBjMTI2ZWEyOWQ1N2M4MGE4MGFlYWM5ZTgwYWQzMWUzNDA5MjFkM2VhNDkwZiJ9LCJwcmVkZWNlc3Nvcl9zY29wZSI6eyJzaGEyNTYiOiIwMTcwZWRjMmZjYmVjMTg0OTI1NmMwYzhkMDM2YWEwNzljMWQ1Yjk2ZGZiMDVmMDMzNDlhZWM1YmEyNTg4YTdkIn0sInByb2R1Y3Rfc2hhMjU2Ijp7ImFwcC9yb3V0ZXJzL2FwcG9pbnRtZW50cy5weSI6ImMyMzk4ODk3YjUxMmYzZDVhYjA5YWQwMzk3MWIzMzQzMjQ5MWM1MmVjY2M2ZDc1ZTczNTNlY2I3ZDBhNmExN2EiLCJhcHAvc2VydmljZXMvcmVjZXB0aW9uX29uZV9wcm9wb3NhbF9ydW50aW1lLnB5IjoiNGUxZjA2MDdhYmFjZmJlZjFkZDU5OThkMTRkYjI4M2ZhYmRkOGQ0ZWU3MDkwNWYzMDgxOWQxZTVhZGY4Y2E2NyJ9LCJwcm9kdWN0X3ZlY3RvciI6eyJwYXRoIjoiQzovVXNlcnMvdGhlcmUvRU1SNC10b29scy9zZWxlY3RlZC1idXJlYXUtZXhhY3QtdGltZS1jYW5kaWRhdGUtdjEvc291cmNlLXZlY3Rvci12MS5qc29uIiwic2hhMjU2IjoiNzJiNGI2NjIwOWE5YzYyNWU2NWI5Y2YyY2JiOGI4NDdiYjRiMjg0MzRjNzIwYjAwMjI3MDBlNTg0Zjc3Y2ExOSJ9LCJyZWNvcmRlZF9hdCI6IjIwMjYtMTAtMjZUMDA6MDA6MDArMDA6MDAiLCJydW50aW1lX2JpbmRpbmdfcmVxdWlyZWQiOnRydWUsInNjaGVtYV92ZXJzaW9uIjoiYXJpYWRuZS5nNF9zdGFnZTFfc3VjY2Vzc29yX2VudHJ5X3Njb3BlLnYxMCIsInNlbGVjdGVkX2Jhc2UiOnsiY29tbWl0IjoiNzM0NjBkODJmMDE4ZTQ0MWJkYzFmZDZmNTBiMjU5YjNkYzU4ZmNiZiIsInRyZWUiOiI2NmIxZGVmODU0ODkyOWQ4MzFiYmJhMDUxM2MyNzk5NGYyMGQyMTA4In0sInNvdXJjZV9zaGEyNTYiOnsib3JjaGVzdHJhdGlvbl9oYXJuZXNzL2JvdW5kZWRfZzFiLnB5IjoiZGE2OWE3NjY5MGZiZGZkODg4NDcxMDAxZDI0YTFjZTU2YzVjNjZhZTA1OTgzNmFjNzg1MDIwODhhZTU1NWQyNiIsIm9yY2hlc3RyYXRpb25faGFybmVzcy9jb25maWd1cmF0aW9uX2NvcmUucHkiOiJmN2JhN2E4MGViMGE1OTBmOWZiNzFiODY0ZTZjMWY5ZjQzMjQxZDlmN2Q3MGEzOGRhNjdhOTI0M2ZlYTIwOGU1Iiwib3JjaGVzdHJhdGlvbl9oYXJuZXNzL3Bpbm5lZF9wcm9ncmFtbWVfZ2F0ZWtlZXBlci5weSI6ImMxZmVhOWEyODQ5MDY4ZWQ4ZTg3ZGJlMWU3Y2VjMWNjN2U3NjJmYTJiYzg4NzZmYzMyYmJkYTgwZDIyNmNmMzkiLCJvcmNoZXN0cmF0aW9uX2hhcm5lc3MvcHJvZ3JhbW1lX2FkbWlzc2lvbi5weSI6ImFjODE2YThhNzliMmQ4MjIyZmEzNTc3NzdjMDc1OTUwOTI3ZTg2Y2YzMGM4YTViMjVmZmQwOGE0NzQwNTIxODEiLCJvcmNoZXN0cmF0aW9uX2hhcm5lc3MvcmFpc2FfcG9saWN5LnB5IjoiMmRhYmVjMTczYmY3ZTM5NjI5ZTcwMzZjYWMyZDEzYzc3N2U1MjY0OWNlYTc0NGExZmVjNzc4YjVlOWI5MzMyZSIsIm9yY2hlc3RyYXRpb25faGFybmVzcy90cnVzdGVkX2dpdC5weSI6IjRhODU2YmZmZTJiNjhkN2M3ZTE4NzUxNTI2MjljOTAyNGEzMjY3OWI1OWQ5YjFlZDgzMDFjMzY4ZDQxZmY1MjciLCJzY3JpcHRzL3JhaXNhX2FyaWFkbmVfcmVjb3ZlcnlfcHJlZmxpZ2h0LnB5IjoiZWRmZDM3YjMwNjczYjg1NDRkMzA5YjUzMmM5NWIzZmQ3YzIwZmY1OTI4ODBhOGEwMjM1ZGZkZTZjZmM4ZTdlNCIsInRlc3RzL3Rlc3RfYm91bmRlZF9nMWIucHkiOiJiYjFiZTg2Y2EzOTIzMmZlYTMwYzFlYTg0Y2RmYjExNDQyOGQ1N2JlMGY4ZjY3YmY3ZTg2ZGFhYjBiYTczYmM1In0sInZvaWNlX2FjdGl2YXRpb24iOmZhbHNlfQo=")
+    assert hashlib.sha256(raw).hexdigest() == "9ccdcf5836ffad8897fca684e3767d082a80eeb88f15b9133364c0e32c0d5a9e"
+    return json.loads(raw)
+
+
 def test_exact_time_successor_is_two_existing_paths_and_requires_acceptance(monkeypatch):
-    scope_path = Path(__file__).resolve().parents[1] / bounded_g1b.G4_STAGE1_SUCCESSOR_SCOPE
-    scope = json.loads(scope_path.read_bytes())
+    scope = _exact_time_scope()
     bounded_g1b.validate_g4_exact_time_scope(scope)
     assert scope["allowed_paths"] == sorted(bounded_g1b.G4_EXACT_TIME_PRODUCT)
     assert set(scope["allowed_paths"]) == {
@@ -1872,7 +1878,7 @@ def test_exact_time_successor_is_two_existing_paths_and_requires_acceptance(monk
 
 def _exact_time_loader_fixture(monkeypatch, stage):
     """Exercise the production loader with pinned ordinary files and literal Git stubs."""
-    root = Path(__file__).resolve().parents[1]
+    root = Path("C:/Users/there/EMR4-tools/selected-bureau-exact-time-entry-candidate-v2")
     scope = json.loads((root / bounded_g1b.G4_STAGE1_SUCCESSOR_SCOPE).read_bytes())
     bounded_g1b.validate_g4_exact_time_scope(scope)
     target = Path("C:/synthetic-exact-time-target")
@@ -2467,3 +2473,348 @@ def test_selected_bureau_v9_apply_requires_exact_enable_effect(monkeypatch):
         assert reached_product_inputs == []
 
 
+
+
+def test_status_contract_successor_is_two_status_paths_and_requires_acceptance(monkeypatch):
+    scope_path = Path(__file__).resolve().parents[1] / bounded_g1b.G4_STAGE1_SUCCESSOR_SCOPE
+    scope = json.loads(scope_path.read_bytes())
+    bounded_g1b.validate_g4_status_contract_scope(scope)
+    assert scope["allowed_paths"] == sorted(bounded_g1b.G4_STATUS_CONTRACT_PRODUCT)
+    assert set(scope["allowed_paths"]) == {
+        "stage1_demo_http.py",
+        "tests/test_stage1_bureau_projection.py",
+    }
+    assert scope["selected_base"] == bounded_g1b.G4_STATUS_CONTRACT_BASE
+    assert scope["admission_grants_runtime_authority"] is False
+    for changed_field, changed_value in (
+        ("selected_base", {"commit": "0" * 40, "tree": "0" * 40}),
+        ("allowed_paths", scope["allowed_paths"] + ["app/other.py"]),
+        ("product_sha256", {**scope["product_sha256"],
+                            "stage1_demo_http.py": "0" * 64}),
+        ("mapping_review", None),
+        ("runtime_binding_required", False),
+        ("admission_grants_runtime_authority", True),
+        ("voice_activation", True),
+        ("allowed_effects", scope["allowed_effects"] + ["provider_invocation"]),
+        ("predecessor_scope", {"sha256": "0" * 64}),
+    ):
+        changed = copy.deepcopy(scope)
+        changed[changed_field] = changed_value
+        with pytest.raises(bounded_g1b.BoundedG1BError) as caught:
+            bounded_g1b.validate_g4_status_contract_scope(changed)
+        assert caught.value.reason_code == "bounded_g4_status_contract_scope_boundary"
+
+    for stage, kind, paths in (
+        ("enable", "enable_g4_stage1_successor", bounded_g1b.G4_STATUS_CONTRACT_CONTROL),
+        ("apply", "implement_g4_stage1_successor", bounded_g1b.G4_STATUS_CONTRACT_PRODUCT),
+    ):
+        q = {"schema_version": bounded_g1b.G4_STATUS_CONTRACT_SCHEMA,
+             "operation_kind": kind, "stage": stage,
+             "repair_sha256": {p: {} for p in paths}}
+        assert bounded_g1b.operation_paths(kind, q) == paths
+        for replacement in (set(paths) | {"app/other.py"}, set(paths) - {next(iter(paths))}):
+            with pytest.raises(bounded_g1b.BoundedG1BError) as caught:
+                bounded_g1b.operation_paths(kind, dict(
+                    q, repair_sha256={p: {} for p in replacement}))
+            assert caught.value.reason_code == "bounded_g4_status_contract_changed_paths"
+
+
+
+def _status_contract_loader_fixture(monkeypatch, stage):
+    """Exercise the production loader with pinned ordinary files and literal Git stubs."""
+    root = Path(__file__).resolve().parents[1]
+    scope = json.loads((root / bounded_g1b.G4_STAGE1_SUCCESSOR_SCOPE).read_bytes())
+    bounded_g1b.validate_g4_status_contract_scope(scope)
+    target = Path("C:/synthetic-status-contract-target")
+    source = Path("C:/synthetic-status-contract-source")
+    product_root = Path("C:/Users/there/EMR4-tools/selected-bureau-status-contract-candidate-v1/after")
+    before_files = {
+        "stage1_demo_http.py": (
+            Path("C:/Users/there/EMR4-tools/selected-bureau-status-contract-candidate-v1/before/stage1_demo_http.py"),
+            102649),
+        "tests/test_stage1_bureau_projection.py": (
+            Path("C:/Users/there/EMR4-tools/selected-bureau-status-contract-candidate-v1/committed-before/tests/test_stage1_bureau_projection.py"),
+            6254),
+    }
+    after_lengths = {"stage1_demo_http.py": 102636,
+                     "tests/test_stage1_bureau_projection.py": 6950}
+    before_product = {}
+    after_product = {}
+    for path in sorted(bounded_g1b.G4_STATUS_CONTRACT_PRODUCT):
+        before_product[path] = before_files[path][0].read_bytes()
+        after_product[path] = (product_root / path).read_bytes()
+        assert len(before_product[path]) == before_files[path][1]
+        assert len(after_product[path]) == after_lengths[path]
+        assert hashlib.sha256(before_product[path]).hexdigest() == bounded_g1b.G4_STATUS_CONTRACT_BEFORE_SHA[path]
+        assert hashlib.sha256(after_product[path]).hexdigest() == bounded_g1b.G4_STATUS_CONTRACT_PRODUCT_SHA[path]
+
+    evidence = {}
+    for path, digest in (
+        (bounded_g1b.G4_STATUS_CONTRACT_VECTOR, bounded_g1b.G4_STATUS_CONTRACT_VECTOR_SHA),
+        (bounded_g1b.G4_STATUS_CONTRACT_SOURCE_REVIEW, bounded_g1b.G4_STATUS_CONTRACT_SOURCE_REVIEW_SHA),
+    ):
+        raw = path.read_bytes()
+        assert hashlib.sha256(raw).hexdigest() == digest
+        evidence[path] = raw
+    vector = json.loads(evidence[bounded_g1b.G4_STATUS_CONTRACT_VECTOR])
+    selected = (bounded_g1b.G4_STATUS_CONTRACT_CONTROL if stage == "enable"
+                else bounded_g1b.G4_STATUS_CONTRACT_PRODUCT)
+    inputs = (bounded_g1b.CONFIGURATION_PATHS |
+              {bounded_g1b.STATE, bounded_g1b.GATES, bounded_g1b.OVERLAY,
+               bounded_g1b.AGENTS, bounded_g1b.G4_STAGE1_INTERACTIVE_SCOPE,
+               bounded_g1b.G4_STAGE1_SUCCESSOR_SCOPE,
+               bounded_g1b.G4_STAGE1_SUCCESSOR_TEST, bounded_g1b.G4_CI_WORKFLOW} |
+              bounded_g1b.SOURCE_PATHS | bounded_g1b.CONTROLLER_PATHS |
+              (bounded_g1b.G4_STATUS_CONTRACT_PRODUCT if stage == "apply" else set()))
+    payload = {path: b"synthetic-v11-payload:" + path.encode("utf-8") for path in inputs}
+    for path in sorted(bounded_g1b.SOURCE_PATHS | bounded_g1b.CONTROLLER_PATHS):
+        payload[path] = (root / path).read_bytes()
+        assert hashlib.sha256(payload[path]).hexdigest() == scope["source_sha256"][path]
+    payload[bounded_g1b.OVERLAY] = (root / bounded_g1b.OVERLAY).read_bytes()
+    payload[bounded_g1b.G4_STAGE1_SUCCESSOR_TEST] = (root / bounded_g1b.G4_STAGE1_SUCCESSOR_TEST).read_bytes()
+    assert hashlib.sha256(payload[bounded_g1b.G4_STAGE1_SUCCESSOR_TEST]).hexdigest() == scope["control_sha256"][bounded_g1b.G4_STAGE1_SUCCESSOR_TEST]
+    payload[bounded_g1b.G4_STAGE1_SUCCESSOR_SCOPE] = bounded_g1b._canonical(scope) + b"\n"
+    if stage == "apply":
+        payload.update(after_product)
+    predecessor = bounded_g1b._canonical(_exact_time_scope()) + b"\n"
+    assert hashlib.sha256(predecessor).hexdigest() == scope["predecessor_scope"]["sha256"]
+    base_commit = (bounded_g1b.G4_STATUS_CONTRACT_BASE["commit"] if stage == "enable"
+                   else "b" * 40)
+    base_tree = (bounded_g1b.G4_STATUS_CONTRACT_BASE["tree"] if stage == "enable"
+                 else "c" * 40)
+    committed = dict(payload)
+    if stage == "enable":
+        for path in selected:
+            committed[path] = (predecessor if path == bounded_g1b.G4_STAGE1_SUCCESSOR_SCOPE
+                               else b"synthetic-v11-before:" + path.encode("utf-8"))
+    else:
+        committed.update(before_product)
+    q = {
+        "schema_version": bounded_g1b.G4_STATUS_CONTRACT_SCHEMA,
+        "operation_id": "status-contract-synthetic-" + stage,
+        "operation_kind": ("enable_g4_stage1_successor" if stage == "enable"
+                           else "implement_g4_stage1_successor"),
+        "stage": stage, "phase": "development",
+        "base_commit": base_commit, "base_tree": base_tree,
+        "expected_head": base_commit, "expected_index_tree": base_tree,
+        "candidate_tree": "d" * 40,
+        "source_sha256": copy.deepcopy(scope["source_sha256"]),
+        "payload_sha256": {path: hashlib.sha256(raw).hexdigest()
+                           for path, raw in payload.items()},
+        "repair_sha256": {
+            path: {"before_sha256": hashlib.sha256(committed[path]).hexdigest(),
+                   "after_sha256": hashlib.sha256(payload[path]).hexdigest()}
+            for path in selected},
+        "source_review": {}, "activation_acceptance": None,
+        "product_vector": scope["product_vector"],
+        "mapping_review": scope["mapping_review"],
+    }
+    activation_path = (bounded_g1b.G4_STATUS_CONTRACT_ROOT / "entry-admission-v1" /
+                       "independent-enable-push-effect-review-v1.json")
+    activation = None
+    if stage == "apply":
+        activation = {
+            "status": "PASS", "verdict": "PASS_G4_STAGE1_STATUS_CONTRACT_CONTROL_PUBLICATION_EFFECT",
+            "reviewer_agent": "/root/independent-enable-reviewer",
+            "independent": True, "implementation_authorship": False,
+            "blocking_findings": [], "stage": "enable", "phase": "push",
+            "base": bounded_g1b.G4_STATUS_CONTRACT_BASE["commit"],
+            "commit": base_commit, "candidate_tree": base_tree,
+            "control_activation_accepted": True,
+            "same_attempt_remote_readback_verified": True,
+            "protected_refs_unchanged": True,
+            "whole_inverse_verified_same_attempt": True,
+            "published_ref": bounded_g1b.G4_STAGE1_INTERACTIVE_BACKEND_REF,
+        }
+        raw = json.dumps(activation, sort_keys=True).encode("utf-8")
+        q["activation_acceptance"] = {
+            "path": activation_path.as_posix(),
+            "sha256": hashlib.sha256(raw).hexdigest()}
+        evidence[activation_path] = raw
+    subject_path = (bounded_g1b.G4_STATUS_CONTRACT_ROOT / "entry-admission-v1" /
+                    ("independent-" + stage + "-development-subject-review-v1.json"))
+    review = {
+        "schema": "emr4.g4_operation_review.v1", "status": "PASS",
+        "verdict": "PASS_G4_STAGE1_STATUS_CONTRACT_EXACT_ADMISSION_SUBJECT",
+        "subject_sha256": bounded_g1b.g4_status_contract_review_subject(q),
+        "stage": stage, "phase": "development",
+        "independent": True, "implementation_authorship": False,
+        "blocking_findings": [], "reviewer_agent": "/root/independent-subject-reviewer",
+    }
+    raw = json.dumps(review, sort_keys=True).encode("utf-8")
+    q["source_review"] = {"path": subject_path.as_posix(),
+                          "sha256": hashlib.sha256(raw).hexdigest()}
+    evidence[subject_path] = raw
+
+    def read(path, digest):
+        if path in evidence:
+            raw = evidence[path]
+            assert hashlib.sha256(raw).hexdigest() == digest
+            return raw
+        for root_path in (target, source, Path(vector["owned_candidate_root"])):
+            if path.is_relative_to(root_path):
+                relative = path.relative_to(root_path).as_posix()
+                if root_path == source and relative in bounded_g1b.SOURCE_PATHS | bounded_g1b.CONTROLLER_PATHS:
+                    assert digest == q["source_sha256"][relative]
+                    raw = (payload[relative] if stage == "enable" and relative in selected
+                           else committed[relative])
+                    assert hashlib.sha256(raw).hexdigest() == digest
+                    return raw
+                if root_path == target:
+                    assert digest == q["payload_sha256"][relative]
+                    assert hashlib.sha256(payload[relative]).hexdigest() == digest
+                    return payload[relative]
+                assert relative in after_product
+                assert digest == bounded_g1b.G4_STATUS_CONTRACT_PRODUCT_SHA[relative]
+                return after_product[relative]
+        raise AssertionError("unexpected synthetic read")
+
+    def fake_git_bytes(_target, *args):
+        if args == ("cat-file", "blob", bounded_g1b.G4_STATUS_CONTRACT_BASE["commit"] +
+                    ":" + bounded_g1b.G4_STAGE1_SUCCESSOR_SCOPE):
+            return predecessor
+        if args[:3] == ("ls-tree", "-z", base_commit):
+            assert args[3] == "--" and args[4] in selected
+            return b"100644 blob present\x00"
+        assert args[:2] == ("cat-file", "blob")
+        commit, relative = args[2].split(":", 1)
+        if commit == bounded_g1b.G4_STATUS_CONTRACT_BASE["commit"] and relative in (
+                bounded_g1b.STATE, bounded_g1b.GATES, bounded_g1b.OVERLAY,
+                bounded_g1b.AGENTS):
+            return committed[relative]
+        assert commit == base_commit and relative in committed
+        return committed[relative]
+
+    def fake_git(_target, *args):
+        if args == ("rev-parse", bounded_g1b.G4_STATUS_CONTRACT_BASE["commit"] + "^{tree}"):
+            return bounded_g1b.G4_STATUS_CONTRACT_BASE["tree"]
+        assert args == ("cat-file", "commit", base_commit)
+        return ("tree " + base_tree + "\nparent " +
+                bounded_g1b.G4_STATUS_CONTRACT_BASE["commit"] + "\n\nsynthetic")
+
+    monkeypatch.setattr(bounded_g1b.trusted_git, "run_git_bytes", fake_git_bytes)
+    monkeypatch.setattr(bounded_g1b.trusted_git, "run_git", fake_git)
+    monkeypatch.setattr(bounded_g1b.trusted_git, "attest_target_index",
+                        lambda *_args, **_kwargs: {"synthetic": True})
+
+    def load(selected_q):
+        return bounded_g1b._load_g4_status_contract_inputs(
+            None, target, source, bounded_g1b.G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT,
+            Path("C:/synthetic-status-contract-scratch"), selected_q, read, {})
+    return q, load, evidence, subject_path, activation_path
+
+
+@pytest.mark.parametrize("stage", ["enable", "apply"])
+def test_status_contract_loader_valid_baseline_and_targeted_rejections(monkeypatch, stage):
+    q, load, evidence, subject_path, activation_path = _status_contract_loader_fixture(
+        monkeypatch, stage)
+    loaded = load(q)
+    assert loaded.binding == q
+    assert loaded.evidence["scope"]["schema_version"] == bounded_g1b.G4_STATUS_CONTRACT_SCOPE_SCHEMA
+    assert loaded.evidence["review"]["subject_sha256"] == bounded_g1b.g4_status_contract_review_subject(q)
+
+    def rejected(changed, reason):
+        with pytest.raises(bounded_g1b.BoundedG1BError) as caught:
+            load(changed)
+        assert caught.value.reason_code == reason
+
+    changed = copy.deepcopy(q)
+    changed["phase"] = "runtime"
+    rejected(changed, "bounded_g4_status_contract_binding_version")
+    changed = copy.deepcopy(q)
+    changed["repair_sha256"]["app/other.py"] = {"before_sha256": "0" * 64,
+                                                     "after_sha256": "1" * 64}
+    rejected(changed, "bounded_g4_status_contract_changed_paths")
+    changed = copy.deepcopy(q)
+    changed["source_sha256"]["app/other.py"] = "0" * 64
+    rejected(changed, "bounded_g4_status_contract_sources")
+    changed = copy.deepcopy(q)
+    changed["source_sha256"]["orchestration_harness/bounded_g1b.py"] = "0" * 64
+    rejected(changed, "bounded_g4_status_contract_scope_sources")
+    changed = copy.deepcopy(q)
+    del changed["payload_sha256"][bounded_g1b.STATE]
+    rejected(changed, "bounded_g4_status_contract_payload_paths")
+    changed = copy.deepcopy(q)
+    changed["payload_sha256"]["app/other.py"] = "0" * 64
+    rejected(changed, "bounded_g4_status_contract_payload_paths")
+    changed = copy.deepcopy(q)
+    first_repair = sorted(changed["repair_sha256"])[0]
+    changed["repair_sha256"][first_repair] = {}
+    rejected(changed, "bounded_g4_status_contract_change_pair")
+    changed = copy.deepcopy(q)
+    changed["repair_sha256"][first_repair]["after_sha256"] = "0" * 64
+    rejected(changed, "bounded_g4_status_contract_change_preimage")
+    changed = copy.deepcopy(q)
+    changed["candidate_tree"] = "e" * 40
+    rejected(changed, "bounded_g4_status_contract_independent_subject")
+    review = json.loads(evidence[subject_path])
+    review["phase"] = "pre-push"
+    evidence[subject_path] = json.dumps(review, sort_keys=True).encode("utf-8")
+    changed = copy.deepcopy(q)
+    changed["source_review"]["sha256"] = hashlib.sha256(evidence[subject_path]).hexdigest()
+    rejected(changed, "bounded_g4_status_contract_independent_subject")
+    review["phase"] = "development"
+    review["independent"] = False
+    evidence[subject_path] = json.dumps(review, sort_keys=True).encode("utf-8")
+    changed = copy.deepcopy(q)
+    changed["source_review"]["sha256"] = hashlib.sha256(evidence[subject_path]).hexdigest()
+    rejected(changed, "bounded_g4_status_contract_independent_subject")
+    if stage == "enable":
+        changed = copy.deepcopy(q)
+        changed["base_commit"] = "0" * 40
+        rejected(changed, "bounded_g4_status_contract_enable_base")
+    else:
+        changed = copy.deepcopy(q)
+        changed["activation_acceptance"] = None
+        rejected(changed, "bounded_g4_status_contract_activation_row")
+        activation = json.loads(evidence[activation_path])
+        activation["same_attempt_remote_readback_verified"] = False
+        evidence[activation_path] = json.dumps(activation, sort_keys=True).encode("utf-8")
+        changed = copy.deepcopy(q)
+        changed["activation_acceptance"]["sha256"] = hashlib.sha256(
+            evidence[activation_path]).hexdigest()
+        rejected(changed, "bounded_g4_status_contract_activation_acceptance")
+
+
+
+@pytest.mark.parametrize("stage", ["enable", "apply"])
+def test_status_contract_subject_reviews_bind_each_phase_and_independence(monkeypatch, stage):
+    q, _load, _evidence, _subject, _activation = _status_contract_loader_fixture(monkeypatch, stage)
+    for phase in ("development", "pre-push", "post-push"):
+        subject_q = copy.deepcopy(q)
+        subject_q["phase"] = phase
+        subject = bounded_g1b.g4_status_contract_review_subject(subject_q)
+        path = (bounded_g1b.G4_STATUS_CONTRACT_ROOT / "entry-admission-v1" /
+                ("independent-" + stage + "-" + phase + "-subject-review-v1.json"))
+        review = {
+            "schema": "emr4.g4_operation_review.v1", "status": "PASS",
+            "verdict": "PASS_G4_STAGE1_STATUS_CONTRACT_EXACT_ADMISSION_SUBJECT",
+            "subject_sha256": subject, "stage": stage, "phase": phase,
+            "independent": True, "implementation_authorship": False,
+            "blocking_findings": [], "reviewer_agent": "/root/independent-subject-reviewer",
+        }
+
+        def check(document):
+            raw = bounded_g1b._canonical(document)
+            row = {"path": path.as_posix(), "sha256": hashlib.sha256(raw).hexdigest()}
+
+            def read(expected_path, digest):
+                assert expected_path == path
+                assert hashlib.sha256(raw).hexdigest() == digest
+                return raw
+
+            return bounded_g1b._g4_status_contract_review(
+                read, row, bounded_g1b.G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT,
+                subject, stage, phase)
+
+        assert check(review) == review
+        for key, value in (
+            ("phase", "runtime"), ("subject_sha256", "0" * 64),
+            ("independent", False), ("implementation_authorship", True),
+            ("reviewer_agent", "/root"),
+            ("reviewer_agent", "/root/status_contract_entry_author"),
+            ("blocking_findings", ["unresolved"]),
+        ):
+            with pytest.raises(bounded_g1b.BoundedG1BError) as caught:
+                check(dict(review, **{key: value}))
+            assert caught.value.reason_code == "bounded_g4_status_contract_independent_subject"

@@ -3429,6 +3429,8 @@ def operation_paths(kind: str, binding: dict | None = None) -> frozenset[str]:
         return _g4_compass_entry_paths(binding)
     if kind == G4_CI_KIND:
         return _g4_ci_paths(binding)
+    if kind in G4_STAGE1_SUCCESSOR_KINDS and _is_g4_status_contract_binding(binding):
+        return _g4_status_contract_paths(kind, binding)
     if kind in G4_STAGE1_SUCCESSOR_KINDS and _is_g4_exact_time_binding(binding):
         return _g4_exact_time_paths(kind, binding)
     if kind in G4_STAGE1_SUCCESSOR_KINDS and _is_g4_bureau_v9_binding(binding):
@@ -3484,6 +3486,10 @@ def _operation(kind: str, binding: dict | None = None) -> dict:
         return {"paths": paths, "g4_ci_maintenance": True,
                 "profile": raisa_policy.G4_STAGE1_SUCCESSOR_PROFILE,
                 "gate": "G4", "limits": G4_CI_LIMITS}
+    if kind in G4_STAGE1_SUCCESSOR_KINDS and _is_g4_status_contract_binding(binding):
+        return {"paths": paths, "g4_status_contract_source": True,
+                "profile": raisa_policy.G4_STAGE1_SUCCESSOR_PROFILE,
+                "gate": "G4", "limits": G4_STAGE1_SUCCESSOR_LIMITS}
     if kind in G4_STAGE1_SUCCESSOR_KINDS and _is_g4_exact_time_binding(binding):
         return {"paths": paths, "g4_exact_time_source": True,
                 "profile": raisa_policy.G4_STAGE1_SUCCESSOR_PROFILE,
@@ -6403,6 +6409,9 @@ def load_bounded_g1b_inputs(context: BoundedG1BContext) -> BoundedG1BInputs:
     if binding.get("operation_kind") == G4_CI_KIND:
         return _load_g4_ci_inputs(
             context, target, source, evidence_root, scratch, binding, read, snapshots)
+    if binding.get("operation_kind") in G4_STAGE1_SUCCESSOR_KINDS and _is_g4_status_contract_binding(binding):
+        return _load_g4_status_contract_inputs(
+            context, target, source, evidence_root, scratch, binding, read, snapshots)
     if binding.get("operation_kind") in G4_STAGE1_SUCCESSOR_KINDS and _is_g4_exact_time_binding(binding):
         return _load_g4_exact_time_inputs(
             context, target, source, evidence_root, scratch, binding, read, snapshots)
@@ -6596,6 +6605,8 @@ def _validate_loaded_policy(inputs: BoundedG1BInputs) -> tuple[dict[str, bytes],
         return _validate_g4_compass_entry_loaded_policy(inputs)
     if operation.get("g4_ci_maintenance"):
         return _validate_g4_ci_loaded_policy(inputs)
+    if operation.get("g4_status_contract_source"):
+        return _validate_g4_status_contract_loaded_policy(inputs)
     if operation.get("g4_exact_time_source"):
         return _validate_g4_exact_time_loaded_policy(inputs)
     if operation.get("g4_selected_bureau_v9_source"):
@@ -11660,6 +11671,306 @@ def _validate_g4_exact_time_loaded_policy(inputs):
         raise BoundedG1BError(error.reason_code) from error
     selected = (G4_EXACT_TIME_CONTROL if inputs.binding["stage"] == "enable"
                 else G4_EXACT_TIME_PRODUCT)
+    return {path: inputs.payloads[path] for path in selected}, configuration
+
+# Exact HTTP and matching regression-test Booked/booked successor; preserve all accepted V10 helpers.
+G4_STATUS_CONTRACT_SCHEMA = "ariadne.g4_stage1_selected_bureau_status_contract_operation_binding.v1"
+G4_STATUS_CONTRACT_SCOPE_SCHEMA = "ariadne.g4_stage1_successor_entry_scope.v11"
+G4_STATUS_CONTRACT_BASE = {
+    "commit": "163fa88e51b30ecfcfe71e8d173874242c96ede5",
+    "tree": "43f4e993ee75480aeb222d02ed664753c1e732d5",
+}
+G4_STATUS_CONTRACT_ROOT = G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT / "selected-context-bureau-status-contract-successor-v1"
+G4_STATUS_CONTRACT_VECTOR = Path("C:/Users/there/EMR4-tools/selected-bureau-status-contract-entry-candidate-v1/source-vector-v2.json")
+G4_STATUS_CONTRACT_VECTOR_SHA = "ef68d967334dc7f84e3a87946c70b8c8241e8566403419ed477674ff4c4b638d"
+G4_STATUS_CONTRACT_SOURCE_REVIEW = Path("C:/Users/there/EMR4-tools/selected-bureau-status-contract-candidate-v1/independent-product-mapping-review-v2.json")
+G4_STATUS_CONTRACT_SOURCE_REVIEW_SHA = "ac9b293158e54d5bbe3e82f4910651cdd9198c68d67128bb35b2346eabb257bc"
+G4_STATUS_CONTRACT_CONTROL = frozenset({G4_AUDIT_CODE, G4_STAGE1_SUCCESSOR_SCOPE,
+                                        G4_STAGE1_SUCCESSOR_TEST})
+G4_STATUS_CONTRACT_BEFORE_SHA = {
+    "stage1_demo_http.py": "c594c1c0bfac72c63934b64c76d3f767ad9f5e1f1c3508eb5ad2d236de9b0528",
+    "tests/test_stage1_bureau_projection.py": "dd9e44ecf02b3c276a33c325dd4d99639efb47fca08f5388afcfe38835e01493",
+}
+G4_STATUS_CONTRACT_PRODUCT_SHA = {
+    "stage1_demo_http.py": "6b51137c0267ed7aa5f250b4bf1bc41912b3ed35274fc4c02bdc547931a93f38",
+    "tests/test_stage1_bureau_projection.py": "675c3ee410eac963a387211e61404543cd9a3cf7dfa10820db2c154d7aed7817",
+}
+G4_STATUS_CONTRACT_PRODUCT = frozenset(G4_STATUS_CONTRACT_PRODUCT_SHA)
+G4_STATUS_CONTRACT_BINDING_KEYS = G4_BUREAU_BINDING_KEYS
+G4_STATUS_CONTRACT_SCOPE_KEYS = G4_BUREAU_SCOPE_KEYS
+
+
+def _is_g4_status_contract_binding(binding):
+    return type(binding) is dict and binding.get("schema_version") == G4_STATUS_CONTRACT_SCHEMA
+
+
+def _g4_status_contract_paths(kind, binding):
+    _need(kind in G4_STAGE1_SUCCESSOR_KINDS
+          and _is_g4_status_contract_binding(binding)
+          and binding.get("operation_kind") == kind
+          and binding.get("stage") in {"enable", "apply"}
+          and ((kind == "enable_g4_stage1_successor") == (binding["stage"] == "enable"))
+          and type(binding.get("repair_sha256")) is dict,
+          "bounded_g4_status_contract_binding_kind")
+    paths = G4_STATUS_CONTRACT_CONTROL if binding["stage"] == "enable" else G4_STATUS_CONTRACT_PRODUCT
+    _need(set(binding["repair_sha256"]) == paths,
+          "bounded_g4_status_contract_changed_paths")
+    return paths
+
+
+def g4_status_contract_review_subject(q):
+    return _sha(_canonical({key: q[key] for key in (
+        "schema_version", "operation_id", "operation_kind", "stage", "phase",
+        "base_commit", "base_tree", "expected_head", "expected_index_tree",
+        "candidate_tree", "source_sha256", "payload_sha256", "repair_sha256",
+        "activation_acceptance", "product_vector", "mapping_review")}))
+
+
+def validate_g4_status_contract_scope(scope):
+    _keys(scope, G4_STATUS_CONTRACT_SCOPE_KEYS, "bounded_g4_status_contract_scope_schema")
+    _need(scope["schema_version"] == G4_STATUS_CONTRACT_SCOPE_SCHEMA
+          and scope["selected_base"] == G4_STATUS_CONTRACT_BASE
+          and _g4_audit_timestamp(scope["recorded_at"])
+          and scope["active_profile"] == raisa_policy.G4_STAGE1_SUCCESSOR_PROFILE
+          and scope["allowed_task_kind"] == "g4_stage1_local_successor"
+          and scope["allowed_paths"] == sorted(G4_STATUS_CONTRACT_PRODUCT)
+          and scope["allowed_effects"] == sorted(EFFECTS | {"product_behavior_change"})
+          and scope["runtime_binding_required"] is True
+          and scope["admission_grants_runtime_authority"] is False
+          and scope["voice_activation"] is False
+          and scope["excluded_effects"] == [
+              "unreviewed_application_or_database_runtime",
+              "unreviewed_browser_or_microphone_runtime",
+              "unreviewed_voice_child_or_network_egress", "provider_invocation",
+              "real_data_access", "protected_ref_movement", "deployment",
+              "public_listener"]
+          and scope["product_sha256"] == G4_STATUS_CONTRACT_PRODUCT_SHA
+          and scope["product_vector"] == {
+              "path": G4_STATUS_CONTRACT_VECTOR.as_posix(),
+              "sha256": G4_STATUS_CONTRACT_VECTOR_SHA}
+          and scope["mapping_review"] == {
+              "path": G4_STATUS_CONTRACT_SOURCE_REVIEW.as_posix(),
+              "sha256": G4_STATUS_CONTRACT_SOURCE_REVIEW_SHA}
+          and scope["predecessor_scope"] == {
+              "sha256": "9ccdcf5836ffad8897fca684e3767d082a80eeb88f15b9133364c0e32c0d5a9e"},
+          "bounded_g4_status_contract_scope_boundary")
+    sources = _digest_map(scope["source_sha256"], SOURCE_PATHS | CONTROLLER_PATHS,
+                          "bounded_g4_status_contract_sources")
+    control = _digest_map(scope["control_sha256"],
+                          G4_STATUS_CONTRACT_CONTROL - {G4_STAGE1_SUCCESSOR_SCOPE},
+                          "bounded_g4_status_contract_control_sources")
+    _need(sources[G4_AUDIT_CODE] == control[G4_AUDIT_CODE],
+          "bounded_g4_status_contract_source_vector")
+    return sources
+
+
+def _g4_status_contract_review(read, row, evidence_root, subject, stage, phase):
+    _keys(row, {"path", "sha256"}, "bounded_g4_status_contract_review_row")
+    path = G4_STATUS_CONTRACT_ROOT / "entry-admission-v1" / (
+        "independent-" + stage + "-" + phase + "-subject-review-v1.json")
+    _need(Path(row["path"]) == path and path.is_relative_to(evidence_root),
+          "bounded_g4_status_contract_review_path")
+    review = _json(read(path, row["sha256"]))
+    _need(review.get("schema") == "emr4.g4_operation_review.v1"
+          and review.get("status") == "PASS"
+          and review.get("verdict") == "PASS_G4_STAGE1_STATUS_CONTRACT_EXACT_ADMISSION_SUBJECT"
+          and review.get("subject_sha256") == subject
+          and review.get("independent") is True
+          and review.get("implementation_authorship") is False
+          and review.get("blocking_findings") == []
+          and type(review.get("reviewer_agent")) is str
+          and review["reviewer_agent"] not in {"", "/root", "/root/status_contract_entry_author"}
+          and review.get("stage") == stage and review.get("phase") == phase,
+          "bounded_g4_status_contract_independent_subject")
+    return review
+
+
+def _load_g4_status_contract_inputs(context, target, source, evidence_root, scratch,
+                               q, read, snapshots):
+    _keys(q, G4_STATUS_CONTRACT_BINDING_KEYS, "bounded_g4_status_contract_binding_schema")
+    _need(_is_g4_status_contract_binding(q)
+          and q["phase"] in {"development", "pre-push", "post-push"}
+          and type(q["operation_id"]) is str
+          and re.fullmatch(r"[a-z0-9][a-z0-9-]{1,79}", q["operation_id"]),
+          "bounded_g4_status_contract_binding_version")
+    for key in ("base_commit", "base_tree", "expected_head",
+                "expected_index_tree", "candidate_tree"):
+        _need(type(q[key]) is str and re.fullmatch(r"[0-9a-f]{40}", q[key]),
+              "bounded_g4_status_contract_git_identity")
+    paths = _g4_status_contract_paths(q["operation_kind"], q)
+    _need(q["product_vector"] == {
+              "path": G4_STATUS_CONTRACT_VECTOR.as_posix(),
+              "sha256": G4_STATUS_CONTRACT_VECTOR_SHA}
+          and q["mapping_review"] == {
+              "path": G4_STATUS_CONTRACT_SOURCE_REVIEW.as_posix(),
+              "sha256": G4_STATUS_CONTRACT_SOURCE_REVIEW_SHA},
+          "bounded_g4_status_contract_product_pins")
+    vector = _json(read(G4_STATUS_CONTRACT_VECTOR, G4_STATUS_CONTRACT_VECTOR_SHA))
+    _need(vector.get("schema") == "selected-bureau-status-contract-source-vector-v2"
+          and {key: vector.get("base_" + key) for key in ("commit", "tree")}
+              == G4_STATUS_CONTRACT_BASE
+          and len(vector.get("product_files", [])) == 2
+          and {row["relative_path"]: row["before_sha256"]
+               for row in vector["product_files"]} == G4_STATUS_CONTRACT_BEFORE_SHA
+          and {row["relative_path"]: row["after_sha256"]
+               for row in vector["product_files"]} == G4_STATUS_CONTRACT_PRODUCT_SHA,
+          "bounded_g4_status_contract_vector")
+    mapping = _json(read(G4_STATUS_CONTRACT_SOURCE_REVIEW, G4_STATUS_CONTRACT_SOURCE_REVIEW_SHA))
+    _need(mapping.get("schema") == "emr4.selected_bureau_status_contract_mapping_review.v1"
+          and mapping.get("status") == "PASS"
+          and mapping.get("verdict") == "PASS_EXACT_TWO_PATH_PRODUCT_MAPPING"
+          and mapping.get("base_commit") == G4_STATUS_CONTRACT_BASE["commit"]
+          and mapping.get("base_tree") == G4_STATUS_CONTRACT_BASE["tree"]
+          and mapping.get("product_vector_sha256") == G4_STATUS_CONTRACT_VECTOR_SHA
+          and mapping.get("before_sha256") == G4_STATUS_CONTRACT_BEFORE_SHA
+          and mapping.get("after_sha256") == G4_STATUS_CONTRACT_PRODUCT_SHA
+          and mapping.get("source_review_sha256") == "fba62a3cedd56f0b696003beb3dc5504912661c79bb3e50d0870db77659f691d"
+          and mapping.get("independent") is True
+          and mapping.get("implementation_authorship") is False
+          and mapping.get("blocking_findings") == []
+          and type(mapping.get("reviewer_agent")) is str
+          and mapping["reviewer_agent"] not in {"", "/root", "/root/status_contract_entry_author"},
+          "bounded_g4_status_contract_independent_source")
+    _need(_sha(trusted_git.run_git_bytes(target, "cat-file", "blob",
+          G4_STATUS_CONTRACT_BASE["commit"] + ":" + G4_STAGE1_SUCCESSOR_SCOPE))
+          == "9ccdcf5836ffad8897fca684e3767d082a80eeb88f15b9133364c0e32c0d5a9e"
+          and trusted_git.run_git(target, "rev-parse",
+              G4_STATUS_CONTRACT_BASE["commit"] + "^{tree}") == G4_STATUS_CONTRACT_BASE["tree"],
+          "bounded_g4_status_contract_predecessor")
+    if q["stage"] == "enable":
+        _need(q["base_commit"] == G4_STATUS_CONTRACT_BASE["commit"]
+              and q["base_tree"] == G4_STATUS_CONTRACT_BASE["tree"]
+              and q["activation_acceptance"] is None,
+              "bounded_g4_status_contract_enable_base")
+    else:
+        _keys(q["activation_acceptance"], {"path", "sha256"},
+              "bounded_g4_status_contract_activation_row")
+        activation_path = G4_STATUS_CONTRACT_ROOT / "entry-admission-v1/independent-enable-push-effect-review-v1.json"
+        _need(Path(q["activation_acceptance"]["path"]) == activation_path,
+              "bounded_g4_status_contract_activation_path")
+        activation = _json(read(activation_path, q["activation_acceptance"]["sha256"]))
+        _need(activation.get("status") == "PASS"
+              and activation.get("verdict") == "PASS_G4_STAGE1_STATUS_CONTRACT_CONTROL_PUBLICATION_EFFECT"
+              and type(activation.get("reviewer_agent")) is str
+              and activation["reviewer_agent"] not in {"", "/root", "/root/status_contract_entry_author"}
+              and activation.get("independent") is True
+              and activation.get("implementation_authorship") is False
+              and activation.get("blocking_findings") == []
+              and activation.get("stage") == "enable"
+              and activation.get("phase") == "push"
+              and activation.get("base") == G4_STATUS_CONTRACT_BASE["commit"]
+              and activation.get("commit") == q["base_commit"]
+              and activation.get("candidate_tree") == q["base_tree"]
+              and activation.get("control_activation_accepted") is True
+              and activation.get("same_attempt_remote_readback_verified") is True
+              and activation.get("protected_refs_unchanged") is True
+              and activation.get("whole_inverse_verified_same_attempt") is True
+              and activation.get("published_ref") == G4_STAGE1_INTERACTIVE_BACKEND_REF,
+              "bounded_g4_status_contract_activation_acceptance")
+        headers = trusted_git.run_git(target, "cat-file", "commit",
+                                      q["base_commit"]).split("\n\n", 1)[0].splitlines()
+        _need([h for h in headers if h.startswith("parent ")]
+              == ["parent " + G4_STATUS_CONTRACT_BASE["commit"]]
+              and [h for h in headers if h.startswith("tree ")]
+              == ["tree " + q["base_tree"]],
+              "bounded_g4_status_contract_activation_parent")
+    sources = _digest_map(q["source_sha256"], SOURCE_PATHS | CONTROLLER_PATHS,
+                          "bounded_g4_status_contract_sources")
+    inputs = (CONFIGURATION_PATHS | {STATE, GATES, OVERLAY, AGENTS,
+              G4_STAGE1_INTERACTIVE_SCOPE, G4_STAGE1_SUCCESSOR_SCOPE,
+              G4_STAGE1_SUCCESSOR_TEST, G4_CI_WORKFLOW}
+              | SOURCE_PATHS | CONTROLLER_PATHS
+              | (G4_STATUS_CONTRACT_PRODUCT if q["stage"] == "apply" else set()))
+    pins = _digest_map(q["payload_sha256"], inputs,
+                       "bounded_g4_status_contract_payload_paths")
+    payloads = {path: read(target / path, digest) for path, digest in sorted(pins.items())}
+    scope = _json(payloads[G4_STAGE1_SUCCESSOR_SCOPE])
+    validate_g4_status_contract_scope(scope)
+    _need(scope["source_sha256"] == sources
+          and scope["product_vector"] == q["product_vector"]
+          and scope["mapping_review"] == q["mapping_review"]
+          and payloads[G4_STAGE1_SUCCESSOR_SCOPE] == _canonical(scope) + b"\n"
+          and all(_sha(payloads[p]) == d for p, d in scope["control_sha256"].items()),
+          "bounded_g4_status_contract_scope_sources")
+    for path, digest in sources.items():
+        candidate = read(source / path, digest)
+        if q["stage"] == "enable" and path in G4_STATUS_CONTRACT_CONTROL:
+            _need(candidate == payloads[path], "bounded_g4_status_contract_control_candidate")
+        else:
+            _need(candidate == trusted_git.run_git_bytes(
+                target, "cat-file", "blob", q["base_commit"] + ":" + path),
+                "bounded_g4_status_contract_installed_source")
+    for path, pair in q["repair_sha256"].items():
+        _keys(pair, {"before_sha256", "after_sha256"},
+              "bounded_g4_status_contract_change_pair")
+        committed = trusted_git.run_git_bytes(target, "ls-tree", "-z",
+                                               q["base_commit"], "--", path)
+        previous = (_sha(trusted_git.run_git_bytes(target, "cat-file", "blob",
+                    q["base_commit"] + ":" + path)) if committed else None)
+        expected = pins[path] if q["stage"] == "enable" else G4_STATUS_CONTRACT_PRODUCT_SHA[path]
+        _need(pair == {"before_sha256": previous, "after_sha256": expected}
+              and previous != expected and _sha(payloads[path]) == expected,
+              "bounded_g4_status_contract_change_preimage")
+        if q["stage"] == "apply":
+            row = next(x for x in vector["product_files"] if x["relative_path"] == path)
+            _need(previous == row["before_sha256"]
+                  and payloads[path] == read(
+                      Path(vector["owned_candidate_root"]) / path, expected)
+                  and payloads[path] == read(source / path, expected),
+                  "bounded_g4_status_contract_product_source")
+    for path in inputs - paths:
+        _need(trusted_git.run_git_bytes(target, "cat-file", "blob",
+              q["base_commit"] + ":" + path) == payloads[path],
+              "bounded_g4_status_contract_unowned_change")
+    review = _g4_status_contract_review(read, q["source_review"], evidence_root,
+                                   g4_status_contract_review_subject(q),
+                                   q["stage"], q["phase"])
+    attested = inputs - paths if q["phase"] == "development" else inputs
+    observation = trusted_git.attest_target_index(
+        target, attested_paths=tuple(sorted(attested)),
+        expected_head=q["expected_head"], expected_index_tree=q["expected_index_tree"],
+        scratch_parent=scratch)
+    if q["phase"] == "development":
+        _need(q["expected_head"] == q["base_commit"]
+              and q["expected_index_tree"] in {q["base_tree"], q["candidate_tree"]},
+              "bounded_g4_status_contract_development_binding")
+    else:
+        headers = trusted_git.run_git(target, "cat-file", "commit",
+                                      q["expected_head"]).split("\n\n", 1)[0].splitlines()
+        _need([h for h in headers if h.startswith("parent ")]
+              == ["parent " + q["base_commit"]]
+              and [h for h in headers if h.startswith("tree ")]
+              == ["tree " + q["candidate_tree"]]
+              and q["expected_index_tree"] == q["candidate_tree"],
+              "bounded_g4_status_contract_committed_binding")
+    for path, snapshot in snapshots.items():
+        _need(trusted_git._read_regular_snapshot(path, maximum_bytes=2 * 1024 * 1024)
+              == snapshot, "bounded_g4_status_contract_snapshot_drift")
+    before = {path: trusted_git.run_git_bytes(target, "cat-file", "blob",
+              G4_STATUS_CONTRACT_BASE["commit"] + ":" + path)
+              for path in (STATE, GATES, OVERLAY, AGENTS)}
+    _need(all(payloads[p] == before[p] for p in (STATE, GATES, AGENTS)),
+          "bounded_g4_status_contract_state_unchanged")
+    return BoundedG1BInputs(q, before, payloads,
+        {"scope": scope, "vector": vector, "mapping": mapping, "review": review},
+        observation)
+
+
+def _validate_g4_status_contract_loaded_policy(inputs):
+    scope = inputs.evidence["scope"]
+    validate_g4_status_contract_scope(scope)
+    try:
+        configuration = raisa_policy.validate_recovery_configuration(
+            documents={Path(path).name: inputs.payloads[path]
+                       for path in CONFIGURATION_PATHS},
+            expected_sha256={Path(path).name: inputs.binding["payload_sha256"][path]
+                             for path in CONFIGURATION_PATHS},
+            agents_text=inputs.payloads[AGENTS].decode("utf-8"),
+            state=_json(inputs.payloads[STATE]))
+    except (raisa_policy.RaisaPolicyError, configuration_core.ConfigurationError) as error:
+        raise BoundedG1BError(error.reason_code) from error
+    selected = (G4_STATUS_CONTRACT_CONTROL if inputs.binding["stage"] == "enable"
+                else G4_STATUS_CONTRACT_PRODUCT)
     return {path: inputs.payloads[path] for path in selected}, configuration
 
 # A separate G4 source-entry operation. The active successor profile and its v7
