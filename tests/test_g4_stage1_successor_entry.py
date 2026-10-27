@@ -2826,9 +2826,13 @@ def test_status_contract_subject_reviews_bind_each_phase_and_independence(monkey
             assert caught.value.reason_code == "bounded_g4_status_contract_independent_subject"
 
 
+def _receipt_predecessor_v12_scope():
+    # Accepted V12 fixture stays literal when current scope advances to V13.
+    return json.loads('{"active_profile":"G4_STAGE1_LOCAL_SUCCESSOR","admission_grants_runtime_authority":false,"allowed_effects":["control_plane_edit","product_behavior_change","repository_read","task_branch_commit","task_branch_push"],"allowed_paths":["app/routers/appointments.py","app/schemas/appointments.py","stage1_demo_http.py","tests/test_stage1_bureau_projection.py"],"allowed_task_kind":"g4_stage1_local_successor","control_sha256":{"orchestration_harness/bounded_g1b.py":"c7d30a2cdb352b2065d014770d93e2e6538e470dada20567411ce62f267a733f","tests/test_g4_stage1_successor_entry.py":"1da7077984f0e7581f8485d87a45c8781443f88f4ad5e3ca458d49aa113e1484"},"excluded_effects":["unreviewed_application_or_database_runtime","unreviewed_browser_or_microphone_runtime","unreviewed_voice_child_or_network_egress","provider_invocation","real_data_access","protected_ref_movement","deployment","public_listener"],"mapping_review":{"path":"C:/Users/there/EMR4-tools/selected-bureau-correlation-binding-product-candidate-v2/independent-source-review-v2.json","sha256":"cbd927ee21017892926b16fce6029004a0e0f68fda80d5e8559904217407a3fb"},"predecessor_scope":{"sha256":"302e4a5ae9df0cee9e783fc19793975bf7e362fa5095b23686b19b92b466e1d5"},"product_sha256":{"app/routers/appointments.py":"09f919ce3ece03970de6e4ce6a555a0cff4271dca5c52c9834ed7f040d26fdcc","app/schemas/appointments.py":"05f324de7c7c01254e666c754b44631652e794ff9a3a45c87d5106478725d5a0","stage1_demo_http.py":"bc621dc44fc341e9e8ab26c6c705013f9874695d8cd407dc09f79f58250644c6","tests/test_stage1_bureau_projection.py":"0e4962a55fc807a509eeaae344776ad7876f55a44090ee557ad790a0a2e76190"},"product_vector":{"path":"C:/Users/there/EMR4-tools/selected-bureau-correlation-binding-product-candidate-v2/source-vector-v2.json","sha256":"d642264e4601a3af9d50f0131731f764d112b473b82ac74f9c535e1f6c2fc9df"},"recorded_at":"2026-10-27T00:00:00+00:00","runtime_binding_required":true,"schema_version":"ariadne.g4_stage1_successor_entry_scope.v12","selected_base":{"commit":"ee33ed7fe61b702acc013b89b03dc2dc1aa11dd9","tree":"39663edc3b87aee5980e4b0212446e365aa183ae"},"source_sha256":{"orchestration_harness/bounded_g1b.py":"c7d30a2cdb352b2065d014770d93e2e6538e470dada20567411ce62f267a733f","orchestration_harness/configuration_core.py":"f7ba7a80eb0a590f9fb71b864e6c1f9f43241d9f7d70a38da67a9243fea208e5","orchestration_harness/pinned_programme_gatekeeper.py":"c1fea9a2849068ed8e87dbe1e7cec1cc7e762fa2bc8876fc32bbda80d226cf39","orchestration_harness/programme_admission.py":"ac816a8a79b2d8222fa357777c075950927e86cf30c8a5b25ffd08a474052181","orchestration_harness/raisa_policy.py":"2dabec173bf7e39629e7036cac2d13c777e52649cea744a1fec778b5e9b9332e","orchestration_harness/trusted_git.py":"4a856bffe2b68d7c7e1875152629c9024a32679b59d9b1ed8301c368d41ff527","scripts/raisa_ariadne_recovery_preflight.py":"edfd37b30673b8544d309b532c95b3fd7c20ff592880a8a0235dfde6cfc8e7e4","tests/test_bounded_g1b.py":"bb1be86ca39232fea30c1ea84cdfb114428d57be0f8f67bf7e86daab0ba73bc5"},"voice_activation":false}\n')
+
+
 def test_correlation_binding_successor_is_four_binding_paths_and_requires_acceptance(monkeypatch):
-    scope_path = Path(__file__).resolve().parents[1] / bounded_g1b.G4_STAGE1_SUCCESSOR_SCOPE
-    scope = json.loads(scope_path.read_bytes())
+    scope = _receipt_predecessor_v12_scope()
     bounded_g1b.validate_g4_correlation_binding_scope(scope)
     assert scope["allowed_paths"] == sorted(bounded_g1b.G4_CORRELATION_BINDING_PRODUCT)
     assert set(scope["allowed_paths"]) == {
@@ -2878,7 +2882,7 @@ def test_correlation_binding_successor_is_four_binding_paths_and_requires_accept
 def _correlation_binding_loader_fixture(monkeypatch, stage):
     """Exercise the production loader with pinned ordinary files and literal Git stubs."""
     root = Path(__file__).resolve().parents[1]
-    scope = json.loads((root / bounded_g1b.G4_STAGE1_SUCCESSOR_SCOPE).read_bytes())
+    scope = _receipt_predecessor_v12_scope()
     bounded_g1b.validate_g4_correlation_binding_scope(scope)
     target = Path("C:/synthetic-correlation-binding-target")
     source = Path("C:/synthetic-correlation-binding-source")
@@ -2925,10 +2929,11 @@ def _correlation_binding_loader_fixture(monkeypatch, stage):
               (bounded_g1b.G4_CORRELATION_BINDING_PRODUCT if stage == "apply" else set()))
     payload = {path: b"synthetic-v12-payload:" + path.encode("utf-8") for path in inputs}
     for path in sorted(bounded_g1b.SOURCE_PATHS | bounded_g1b.CONTROLLER_PATHS):
-        payload[path] = (root / path).read_bytes()
+        historical_root = Path('C:/Users/there/EMR4-tools/selected-patient-request-receipt-correction-v1/entry-control-preparation-v1/before') if path == bounded_g1b.G4_AUDIT_CODE else root
+        payload[path] = (historical_root / path).read_bytes()
         assert hashlib.sha256(payload[path]).hexdigest() == scope["source_sha256"][path]
     payload[bounded_g1b.OVERLAY] = (root / bounded_g1b.OVERLAY).read_bytes()
-    payload[bounded_g1b.G4_STAGE1_SUCCESSOR_TEST] = (root / bounded_g1b.G4_STAGE1_SUCCESSOR_TEST).read_bytes()
+    payload[bounded_g1b.G4_STAGE1_SUCCESSOR_TEST] = (Path('C:/Users/there/EMR4-tools/selected-patient-request-receipt-correction-v1/entry-control-preparation-v1/before') / bounded_g1b.G4_STAGE1_SUCCESSOR_TEST).read_bytes()
     assert hashlib.sha256(payload[bounded_g1b.G4_STAGE1_SUCCESSOR_TEST]).hexdigest() == scope["control_sha256"][bounded_g1b.G4_STAGE1_SUCCESSOR_TEST]
     payload[bounded_g1b.G4_STAGE1_SUCCESSOR_SCOPE] = bounded_g1b._canonical(scope) + b"\n"
     if stage == "apply":
@@ -3191,3 +3196,97 @@ def test_correlation_binding_subject_reviews_bind_each_phase_and_independence(mo
             with pytest.raises(bounded_g1b.BoundedG1BError) as caught:
                 check(dict(review, **{key: value}))
             assert caught.value.reason_code == "bounded_g4_correlation_binding_independent_subject"
+
+
+def test_receipt_successor_is_two_receipt_paths_and_requires_acceptance(monkeypatch):
+    scope_path = Path(__file__).resolve().parents[1] / bounded_g1b.G4_STAGE1_SUCCESSOR_SCOPE
+    scope = json.loads(scope_path.read_bytes())
+    bounded_g1b.validate_g4_receipt_scope(scope)
+    assert scope["allowed_paths"] == sorted(bounded_g1b.G4_RECEIPT_PRODUCT)
+    assert set(scope["allowed_paths"]) == {
+        "app/services/patient_request_service.py", "tests/test_patient_request_submission_receipt.py",
+    }
+    assert scope["selected_base"] == bounded_g1b.G4_RECEIPT_BASE
+    assert scope["admission_grants_runtime_authority"] is False
+    for changed_field, changed_value in (
+        ("selected_base", {"commit": "0" * 40, "tree": "0" * 40}),
+        ("allowed_paths", scope["allowed_paths"] + ["app/other.py"]),
+        ("product_sha256", {**scope["product_sha256"],
+                            "app/services/patient_request_service.py": "0" * 64}),
+        ("mapping_review", None),
+        ("runtime_binding_required", False),
+        ("admission_grants_runtime_authority", True),
+        ("voice_activation", True),
+        ("allowed_effects", scope["allowed_effects"] + ["provider_invocation"]),
+        ("predecessor_scope", {"sha256": "0" * 64}),
+    ):
+        changed = copy.deepcopy(scope)
+        changed[changed_field] = changed_value
+        with pytest.raises(bounded_g1b.BoundedG1BError) as caught:
+            bounded_g1b.validate_g4_receipt_scope(changed)
+        assert caught.value.reason_code == "bounded_g4_receipt_scope_boundary"
+
+    for stage, kind, paths in (
+        ("enable", "enable_g4_stage1_successor", bounded_g1b.G4_RECEIPT_CONTROL),
+        ("apply", "implement_g4_stage1_successor", bounded_g1b.G4_RECEIPT_PRODUCT),
+    ):
+        q = {"schema_version": bounded_g1b.G4_RECEIPT_SCHEMA,
+             "operation_kind": kind, "stage": stage,
+             "repair_sha256": {p: {} for p in paths}}
+        assert bounded_g1b.operation_paths(kind, q) == paths
+        operation = bounded_g1b._operation(kind, q)
+        assert operation["g4_receipt_source"] is True
+        assert operation["paths"] == paths
+        assert operation["profile"] == bounded_g1b.raisa_policy.G4_STAGE1_SUCCESSOR_PROFILE
+        for replacement in (set(paths) | {"app/other.py"}, set(paths) - {next(iter(paths))}):
+            with pytest.raises(bounded_g1b.BoundedG1BError) as caught:
+                bounded_g1b.operation_paths(kind, dict(
+                    q, repair_sha256={p: {} for p in replacement}))
+            assert caught.value.reason_code == "bounded_g4_receipt_changed_paths"
+
+
+
+def test_receipt_subject_keeps_exact_sixteen_fields_and_excludes_review():
+    keys = bounded_g1b.G4_RECEIPT_BINDING_KEYS
+    assert len(keys) == 17 and keys == bounded_g1b.G4_BUREAU_BINDING_KEYS
+    q = {key: {"marker": key} for key in keys}
+    first = bounded_g1b.g4_receipt_review_subject(q)
+    changed = copy.deepcopy(q)
+    changed["source_review"] = {"different": True}
+    assert bounded_g1b.g4_receipt_review_subject(changed) == first
+    for key in keys - {"source_review"}:
+        changed = copy.deepcopy(q)
+        changed[key] = {"different": True}
+        assert bounded_g1b.g4_receipt_review_subject(changed) != first
+
+
+def test_receipt_full_policy_passes_all_configuration_documents_and_errors(monkeypatch):
+    scope = json.loads((Path(__file__).resolve().parents[1] / bounded_g1b.G4_STAGE1_SUCCESSOR_SCOPE).read_bytes())
+    payloads = {p: b"literal-document" for p in bounded_g1b.CONFIGURATION_PATHS}
+    payloads[bounded_g1b.AGENTS] = b"literal-agents"
+    payloads[bounded_g1b.STATE] = b'{"synthetic":true}'
+    pins = {p: hashlib.sha256(raw).hexdigest() for p, raw in payloads.items()}
+    calls = []
+    marker = object()
+    def validate(**kwargs):
+        calls.append(kwargs)
+        return marker
+    monkeypatch.setattr(bounded_g1b.raisa_policy, "validate_recovery_configuration", validate)
+    for stage, paths in (("enable", bounded_g1b.G4_RECEIPT_CONTROL), ("apply", bounded_g1b.G4_RECEIPT_PRODUCT)):
+        selected = dict(payloads)
+        selected.update({p: b"selected" for p in paths})
+        inputs = bounded_g1b.BoundedG1BInputs({"stage": stage, "payload_sha256": pins}, {}, selected, {"scope": scope}, {})
+        result, configuration = bounded_g1b._validate_g4_receipt_loaded_policy(inputs)
+        assert set(result) == paths and configuration is marker
+        assert calls[-1] == {
+            "documents": {Path(p).name: payloads[p] for p in bounded_g1b.CONFIGURATION_PATHS},
+            "expected_sha256": {Path(p).name: pins[p] for p in bounded_g1b.CONFIGURATION_PATHS},
+            "agents_text": "literal-agents", "state": {"synthetic": True}}
+    def fail(**kwargs):
+        raise bounded_g1b.raisa_policy.RaisaPolicyError("receipt_configuration_rejected")
+    monkeypatch.setattr(bounded_g1b.raisa_policy, "validate_recovery_configuration", fail)
+    with pytest.raises(bounded_g1b.BoundedG1BError) as caught:
+        bounded_g1b._validate_g4_receipt_loaded_policy(inputs)
+    assert caught.value.reason_code == "receipt_configuration_rejected"
+
+
