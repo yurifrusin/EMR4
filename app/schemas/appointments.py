@@ -1505,6 +1505,10 @@ class ReceptionOneProductContextProposalOut(BaseModel):
     summary: str = Field(min_length=1, max_length=500)
     request_id: str = Field(min_length=3, max_length=100)
     correlation_id: str = Field(min_length=3, max_length=100)
+    request_correlation_sha256: Optional[str] = Field(
+        default=None, strict=True, min_length=64, max_length=64,
+        pattern=r"^[0-9a-f]{64}$",
+    )
     context_revision: int = Field(ge=1)
     data_class: Literal["authored_synthetic"] = "authored_synthetic"
     patient_handle: Optional[str] = Field(default=None, max_length=100)

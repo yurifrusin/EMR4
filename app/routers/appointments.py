@@ -6938,7 +6938,7 @@ def compose_reception_one_product_context_proposal(
         if execution is not None and review["disposition"] == "admit"
         else None
     )
-    return build_reviewed_proposal_result(
+    result = build_reviewed_proposal_result(
         frame=frame,
         displays=displays,
         normalized_plan=normalized_plan,
@@ -6949,6 +6949,13 @@ def compose_reception_one_product_context_proposal(
         provider_calls=provider_calls,
         runtime_audit_ref=runtime_audit_ref,
     )
+    # Bind this trusted response to the current request without exposing its nonce
+    # or changing the Bureau's request-scoped opaque correlation handle.
+    payload = result.model_dump()
+    payload["request_correlation_sha256"] = hashlib.sha256(
+        body.correlation_id.encode("utf-8")
+    ).hexdigest()
+    return ReceptionOneProductContextProposalOut.model_validate(payload)
 
 
 @router.post("/proposals/slot-search", response_model=SlotSearchProposalOut)

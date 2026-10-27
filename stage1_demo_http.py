@@ -636,8 +636,17 @@ def project_bureau_move(reply: Any, current: dict[str, Any],
     if type(reply) is not dict or any(reply.get(key) != value for key, value in {
             "contract_version": "reception.one.product-context-proposal.v1",
             "result": "proposal_ready", "planner_mode": "deterministic",
-            "data_class": "authored_synthetic", "correlation_id": correlation_id,
+            "data_class": "authored_synthetic",
             "operation_id": "proposeAppointmentUpdate"}.items()):
+        return None
+    opaque_correlation = reply.get("correlation_id")
+    request_digest = reply.get("request_correlation_sha256")
+    if (type(opaque_correlation) is not str
+            or re.fullmatch(r"synthetic-correlation-[0-9a-f]{20}", opaque_correlation) is None
+            or type(request_digest) is not str
+            or re.fullmatch(r"[0-9a-f]{64}", request_digest) is None
+            or type(correlation_id) is not str
+            or request_digest != hashlib.sha256(correlation_id.encode("utf-8")).hexdigest()):
         return None
     if (any(reply.get(key) is not True for key in (
                 "safe", "requires_confirmation", "proposal_only", "database_reads_performed"))
