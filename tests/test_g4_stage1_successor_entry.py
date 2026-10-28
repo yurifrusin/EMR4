@@ -7,6 +7,266 @@ from pathlib import Path
 import pytest
 from orchestration_harness import bounded_g1b, raisa_policy
 
+# Schema20 additions are source-only test preparation. These exercise the exact
+# selected controller predicates; synthetic Git observations below do not prove
+# native admission, application behaviour or an execution authorization.
+def _seeded_scope():
+    return json.loads((Path(__file__).resolve().parents[1] /
+        bounded_g1b.G4_STAGE1_SUCCESSOR_SCOPE).read_bytes())
+
+
+def _seeded_q(stage="enable", phase="development"):
+    b=bounded_g1b;scope=_seeded_scope()
+    base=b.G4_SEEDED_LOGIN_BASE if stage=="enable" else {"commit":"b"*40,"tree":"c"*40}
+    candidate=base["tree"] if stage=="admit" else "a"*40
+    owned=b.G4_SEEDED_LOGIN_CONTROL if stage=="enable" else b.G4_SEEDED_LOGIN_PRODUCT if stage=="apply" else ()
+    return {"schema_version":b.G4_SEEDED_LOGIN_SCHEMA,"operation_id":"seeded-source-test",
+        "operation_kind":b.G4_SEEDED_LOGIN_ADMIT_KIND if stage=="admit" else
+            "enable_g4_stage1_successor" if stage=="enable" else "implement_g4_stage1_successor",
+        "stage":stage,"phase":phase,"base_commit":base["commit"],"base_tree":base["tree"],
+        "expected_head":base["commit"] if phase=="development" else "e"*40,
+        "expected_index_tree":base["tree"] if phase=="development" else candidate,
+        "candidate_tree":candidate,"source_sha256":scope["source_sha256"],"payload_sha256":{},
+        "repair_sha256":{p:{} for p in owned},"source_review":{},
+        "activation_acceptance":None if stage=="enable" else {"path":(
+            b.G4_SEEDED_LOGIN_ROOT/"entry-admission-v1/independent-enable-push-effect-review-v1.json").as_posix(),"sha256":"f"*64},
+        "product_vector":scope["product_vector"],"mapping_review":scope["mapping_review"]}
+
+
+def _seeded_read(path,digest):
+    raw=path.read_bytes()
+    assert hashlib.sha256(raw).hexdigest()==digest
+    return raw
+
+
+def test_seeded_scope_exact_six_and_prior_schema19_dispatch():
+    b=bounded_g1b;scope=_seeded_scope()
+    b.validate_g4_seeded_login_scope(scope)
+    for stage in ("enable","admit","apply"):
+        q=_seeded_q(stage)
+        expected=b.G4_SEEDED_LOGIN_CONTROL if stage=="enable" else b.G4_SEEDED_LOGIN_PRODUCT if stage=="apply" else frozenset()
+        assert b.operation_paths(q["operation_kind"],q)==expected
+    old={"schema_version":b.G4_ACCOUNT_HTTP_SCHEMA,"stage":"admit",
+        "operation_kind":b.G4_ACCOUNT_HTTP_ADMIT_KIND,"repair_sha256":{}}
+    assert b.operation_paths(old["operation_kind"],old)==frozenset()
+    assert b._operation(old["operation_kind"],old)["g4_account_http_external_source"] is True
+    assert b.G4_ACCOUNT_HTTP_SCOPE_SCHEMA=="ariadne.g4_stage1_successor_entry_scope.v19"
+    assert not b._is_g4_seeded_login_binding(old)
+    for schema,expected in ((b.G4_BUREAU_V9_SCHEMA,b.G4_BUREAU_V9_PRODUCT),
+                            (b.G4_ACCOUNT_BOOTSTRAP_SCHEMA,b.G4_ACCOUNT_BOOTSTRAP_PRODUCT)):
+        prior={"schema_version":schema,"stage":"apply","operation_kind":"implement_g4_stage1_successor",
+               "repair_sha256":{p:{} for p in expected}}
+        assert b.operation_paths(prior["operation_kind"],prior)==expected
+
+
+@pytest.mark.parametrize("mutation",["extra","base","predecessor","review","runtime","product"])
+def test_seeded_scope_rejects_widening_or_wrong_baseline(mutation):
+    b=bounded_g1b;scope=_seeded_scope()
+    if mutation=="extra":scope["allowed_paths"].append("app/unowned.py")
+    if mutation=="base":scope["selected_base"]["commit"]="0"*40
+    if mutation=="predecessor":scope["predecessor_scope"]["sha256"]="0"*64
+    if mutation=="review":scope["mapping_review"]["sha256"]="0"*64
+    if mutation=="runtime":scope["admission_grants_runtime_authority"]=True
+    if mutation=="product":scope["product_sha256"]["app/dependencies.py"]="0"*64
+    with pytest.raises(b.BoundedG1BError) as err:b.validate_g4_seeded_login_scope(scope)
+    assert err.value.reason_code=="bounded_g4_seeded_login_scope_boundary"
+
+
+@pytest.mark.parametrize("mutation,reason",[(None,None),("extra","bounded_g4_seeded_login_external_vector"),
+    ("duplicate","bounded_g4_seeded_login_external_vector"),("namespace","bounded_g4_seeded_login_external_vector"),
+    ("file","bounded_g4_seeded_login_external_vector"),("maps","bounded_g4_seeded_login_source_maps"),
+    ("map_duplicate","bounded_g4_seeded_login_source_maps"),("review_pin","bounded_g4_seeded_login_external_pins"),
+    ("review_authorship","bounded_g4_seeded_login_independent_source")])
+def test_seeded_external_exact_subject_and_separate_maps(mutation,reason):
+    b=bounded_g1b;q=_seeded_q("admit")
+    if mutation=="review_pin":q["mapping_review"]["sha256"]="0"*64
+    def read(path,digest):
+        raw=_seeded_read(path,digest)
+        # Substitute one JSON field AFTER independently checking its pinned
+        # ordinary baseline, to isolate the named controller predicate.
+        if path==b.G4_SEEDED_LOGIN_VECTOR and mutation in {"extra","duplicate","namespace","file"}:
+            value=json.loads(raw)
+            if mutation=="extra":value["files"].append(copy.deepcopy(value["files"][0]))
+            if mutation=="duplicate":value["files"][1]=copy.deepcopy(value["files"][0])
+            if mutation=="namespace":value["files"][0]["namespace"]="SITE"
+            if mutation=="file":value["files"][0]["after"]["path"]="C:/unowned.py"
+            return json.dumps(value).encode()
+        if path==b.G4_SEEDED_LOGIN_MAPS and mutation in {"maps","map_duplicate"}:
+            value=json.loads(raw)
+            if mutation=="maps":value["backend_count"]=156
+            else:value["site_rows"][1]=copy.deepcopy(value["site_rows"][0])
+            return json.dumps(value).encode()
+        if path==b.G4_SEEDED_LOGIN_PREPARATION_REVIEW and mutation=="review_authorship":
+            value=json.loads(raw);value["reviewer"]["implementation_authored"]=True
+            return json.dumps(value).encode()
+        return raw
+    if reason:
+        with pytest.raises(b.BoundedG1BError) as err:b._g4_seeded_login_external_inputs(read,q)
+        assert err.value.reason_code==reason
+    else:
+        vector,review=b._g4_seeded_login_external_inputs(read,q)
+        assert len(vector["files"])==15 and review["execution_authorized"] is False
+
+
+@pytest.mark.parametrize("entrypoint,phase",[("recovery_preflight","development"),
+    ("task_branch_commit","development"),("task_branch_push","pre-push"),("recovery_preflight","post-push")])
+def test_seeded_admit_entrypoint_cannot_publish_or_execute(entrypoint,phase):
+    b=bounded_g1b;q=_seeded_q("admit")
+    if (entrypoint,phase)==("recovery_preflight","development"):
+        b._g4_seeded_login_require_entrypoint(q,entrypoint,phase)
+        assert b.operation_effects(q["operation_kind"])==frozenset({"repository_read"})
+        assert "admission grants no runtime" in " ".join(b.G4_SEEDED_LOGIN_LIMITS)
+    else:
+        with pytest.raises(b.BoundedG1BError) as err:b._g4_seeded_login_require_entrypoint(q,entrypoint,phase)
+        assert err.value.reason_code=="bounded_g4_seeded_login_admit_entrypoint"
+
+
+def _seeded_loader_fixture(monkeypatch,stage,phase):
+    b=bounded_g1b;root=Path(__file__).resolve().parents[1];packet=root.parent
+    target=Path("C:/synthetic-seeded-target");source=Path("C:/synthetic-seeded-source")
+    paths=(b.CONFIGURATION_PATHS|{b.STATE,b.GATES,b.OVERLAY,b.AGENTS,b.G4_STAGE1_INTERACTIVE_SCOPE,
+        b.G4_STAGE1_SUCCESSOR_SCOPE,b.G4_STAGE1_SUCCESSOR_TEST,b.G4_CI_WORKFLOW}|b.SOURCE_PATHS|b.CONTROLLER_PATHS)
+    original={p:("accepted:"+p).encode() for p in paths}
+    for p in b.G4_SEEDED_LOGIN_CONTROL:original[p]=(packet/"before"/p).read_bytes()
+    installed=dict(original)
+    for p in b.G4_SEEDED_LOGIN_CONTROL:installed[p]=(root/p).read_bytes()
+    after=dict(installed)
+    if stage=="apply":
+        paths|=b.G4_SEEDED_LOGIN_PRODUCT
+        for p,logical in b.G4_SEEDED_LOGIN_PRODUCT_LOGICAL.items():
+            row=b.G4_SEEDED_LOGIN_EXTERNAL_ROWS[logical][1]
+            after[p]=_seeded_read(Path(row["path"]),row["sha256"])
+        vector=json.loads(_seeded_read(b.G4_SEEDED_LOGIN_VECTOR,b.G4_SEEDED_LOGIN_VECTOR_SHA))
+        for p,logical in b.G4_SEEDED_LOGIN_PRODUCT_LOGICAL.items():
+            if b.G4_SEEDED_LOGIN_BEFORE_SHA[p] is None:continue
+            entry=next(r for r in vector["files"] if r["logical_path"]==logical)
+            row=entry["before"] if entry["namespace"]=="BACKEND" else entry["original_baseline"]
+            old_path=Path(row.get("source_path",row.get("path")))
+            installed[p]=_seeded_read(old_path,b.G4_SEEDED_LOGIN_BEFORE_SHA[p])
+    # Bind the deliberately synthetic ordinary controls to the actual candidate
+    # controller/test bytes, without invoking the whole-policy/config loader.
+    scope=_seeded_scope()
+    scope["source_sha256"]={p:hashlib.sha256(after[p]).hexdigest() for p in b.SOURCE_PATHS|b.CONTROLLER_PATHS}
+    scope["control_sha256"]={p:hashlib.sha256(after[p]).hexdigest()
+        for p in b.G4_SEEDED_LOGIN_CONTROL-{b.G4_STAGE1_SUCCESSOR_SCOPE}}
+    after[b.G4_STAGE1_SUCCESSOR_SCOPE]=b._canonical(scope)+b"\n"
+    if stage!="enable":installed[b.G4_STAGE1_SUCCESSOR_SCOPE]=after[b.G4_STAGE1_SUCCESSOR_SCOPE]
+    q=_seeded_q(stage,phase)
+    q["source_sha256"]={p:hashlib.sha256(after[p]).hexdigest() for p in b.SOURCE_PATHS|b.CONTROLLER_PATHS}
+    q["payload_sha256"]={p:hashlib.sha256(after[p]).hexdigest() for p in paths}
+    owned=b._g4_seeded_login_paths(q["operation_kind"],q)
+    for p in owned:
+        before=b.G4_SEEDED_LOGIN_PREIMAGES[p] if stage=="enable" else b.G4_SEEDED_LOGIN_BEFORE_SHA[p]
+        q["repair_sha256"][p]={"before_sha256":before,"after_sha256":q["payload_sha256"][p]}
+    subject=b.G4_SEEDED_LOGIN_ROOT/"entry-admission-v1"/("independent-"+stage+"-"+phase+"-subject-review-v1.json")
+    q["source_review"]={"path":subject.as_posix(),"sha256":"d"*64}
+    external={Path(b.G4_SEEDED_LOGIN_EXTERNAL_ROWS[logical][1]["path"]):
+        (p,b.G4_SEEDED_LOGIN_PRODUCT_SHA[p],b.G4_SEEDED_LOGIN_PRODUCT_BYTES[p])
+        for p,logical in b.G4_SEEDED_LOGIN_PRODUCT_LOGICAL.items()}
+    assert len(external)==6 and {row[0] for row in external.values()}==b.G4_SEEDED_LOGIN_PRODUCT
+    external_seen=set()
+    def read(path,digest):
+        if path==subject:
+            return json.dumps({"schema":"emr4.g4_operation_review.v1","status":"PASS",
+                "verdict":"PASS_G4_STAGE1_SEEDED_LOGIN_EXACT_ADMISSION_SUBJECT","subject_sha256":b.g4_seeded_login_review_subject(q),
+                "independent":True,"implementation_authorship":False,"blocking_findings":[],
+                "reviewer_agent":"/root/synthetic-independent-reviewer","stage":stage,"phase":phase}).encode()
+        if stage!="enable" and path==Path(q["activation_acceptance"]["path"]):
+            return json.dumps({"schema":"emr4.g4_operation_review.v1","status":"PASS",
+                "verdict":"PASS_G4_STAGE1_SEEDED_LOGIN_CONTROL_PUBLICATION_EFFECT","independent":True,
+                "implementation_authorship":False,"blocking_findings":[],"reviewer_agent":"/root/synthetic-independent-reviewer",
+                "stage":"enable","phase":"push","base":b.G4_SEEDED_LOGIN_BASE["commit"],"commit":q["base_commit"],
+                "candidate_tree":q["base_tree"],"control_activation_accepted":True,"same_attempt_remote_readback_verified":True,
+                "protected_refs_unchanged":True,"whole_inverse_verified_same_attempt":True,"published_ref":b.G4_STAGE1_INTERACTIVE_BACKEND_REF}).encode()
+        if path in external:
+            relative,expected,size=external[path]
+            assert stage=="apply" and digest==expected
+            raw=after[relative]
+            assert len(raw)==size and hashlib.sha256(raw).hexdigest()==expected
+            external_seen.add(relative)
+            return raw
+        assert path.is_relative_to(target) or path.is_relative_to(source), "unbound synthetic read"
+        relative=path.relative_to(target if path.is_relative_to(target) else source).as_posix()
+        raw=after[relative]
+        assert hashlib.sha256(raw).hexdigest()==digest
+        return raw
+    read.external_seen=external_seen
+    def git_bytes(_target,*args):
+        if args[0]=="ls-tree":return b"tracked" if args[-1] in (original if stage=="enable" else installed) else b""
+        assert args[:2]==("cat-file","blob")
+        commit,p=args[2].split(":",1)
+        return (original if commit==b.G4_SEEDED_LOGIN_BASE["commit"] else installed)[p]
+    def git(_target,*args):
+        if args[0]=="rev-parse":return b.G4_SEEDED_LOGIN_BASE["tree"]
+        parent=b.G4_SEEDED_LOGIN_BASE["commit"] if args[2]==q["base_commit"] and stage!="enable" else q["base_commit"]
+        tree=q["base_tree"] if args[2]==q["base_commit"] and stage!="enable" else q["candidate_tree"]
+        return "tree "+tree+"\nparent "+parent+"\n\nsynthetic\n"
+    observations=[]
+    monkeypatch.setattr(b.trusted_git,"run_git_bytes",git_bytes)
+    monkeypatch.setattr(b.trusted_git,"run_git",git)
+    monkeypatch.setattr(b.trusted_git,"attest_target_index",lambda *a,**k:observations.append(k) or {"observation_sha256":"sha256:"+"0"*64})
+    monkeypatch.setattr(b,"_g4_seeded_login_external_inputs",lambda *a:({"synthetic_source_join":True},{}))
+    def run(reader=read):return b._load_g4_seeded_login_inputs(None,target,source,b.G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT,
+        Path("C:/synthetic-seeded-scratch"),q,reader,{})
+    return run,q,read,observations
+
+
+@pytest.mark.parametrize("stage,phase",[("enable","development"),("enable","pre-push"),
+    ("admit","development"),("apply","development"),("apply","pre-push"),("apply","post-push")])
+def test_seeded_loader_exact_stages_reach_selected_index_predicate(monkeypatch,stage,phase):
+    run,q,read,observations=_seeded_loader_fixture(monkeypatch,stage,phase)
+    result=run()
+    assert result.binding is q and len(observations)==1
+    assert read.external_seen==(bounded_g1b.G4_SEEDED_LOGIN_PRODUCT if stage=="apply" else set())
+    assert set(q["repair_sha256"])==(bounded_g1b.G4_SEEDED_LOGIN_CONTROL if stage=="enable" else
+        bounded_g1b.G4_SEEDED_LOGIN_PRODUCT if stage=="apply" else set())
+    assert bounded_g1b._operation(q["operation_kind"],q)["g4_seeded_login_source"] is True
+
+
+@pytest.mark.parametrize("phase,delta",[("development",True),("pre-push",False)])
+def test_seeded_admit_loader_rejects_delta_and_publication_phase(monkeypatch,phase,delta):
+    b=bounded_g1b;run,q,read,observations=_seeded_loader_fixture(monkeypatch,"admit",phase)
+    if delta:q["candidate_tree"]="a"*40
+    with pytest.raises(b.BoundedG1BError) as err:run()
+    assert err.value.reason_code=="bounded_g4_seeded_login_admit_no_delta" and observations==[]
+
+
+def test_seeded_admit_report_has_no_runtime_authority(monkeypatch):
+    b=bounded_g1b;q=_seeded_q("admit")
+    inputs=b.BoundedG1BInputs(q,{},{},{},{"observation_sha256":"sha256:"+"0"*64})
+    context=b.BoundedG1BContext(target_root=Path("C:/synthetic-seeded-target"),
+        source_root=Path("C:/synthetic-seeded-source"),evidence_root=b.G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT,
+        binding_path=Path("C:/synthetic-seeded-binding.json"),expected_binding_sha256="0"*64,
+        scratch_root=Path("C:/synthetic-seeded-scratch"))
+    monkeypatch.setattr(b,"load_bounded_g1b_inputs",lambda context:inputs)
+    monkeypatch.setattr(b,"_validate_g4_seeded_login_loaded_policy",lambda inputs:({},None))
+    manifest=b.build_bounded_g1b_manifest(context)
+    report=b.bounded_g1b_report(context=context,manifest=manifest,entrypoint="recovery_preflight",phase="development")
+    assert manifest["allowed_paths"]==[] and manifest["intended_side_effect_classes"]==["repository_read"]
+    assert report["policy_eligible"] is True and report["execution_authorized"] is False
+    assert report["feature_work_eligible"] is False
+
+
+@pytest.mark.parametrize("mode,reason",[("extra","bounded_g4_seeded_login_changed_paths"),
+    ("preimage","bounded_g4_seeded_login_change_preimage"),("activation","bounded_g4_seeded_login_activation_acceptance"),
+    ("subject","bounded_g4_seeded_login_independent_subject"),("stage_review","bounded_g4_seeded_login_independent_subject")])
+def test_seeded_apply_cannot_reuse_admit_or_wrong_product_acceptance(monkeypatch,mode,reason):
+    b=bounded_g1b;run,q,read,observations=_seeded_loader_fixture(monkeypatch,"apply","development")
+    if mode=="extra":q["repair_sha256"]["backend_child_text_v1.py"]={}
+    if mode=="preimage":q["repair_sha256"]["static/demo/stage1-interactive.html"]["before_sha256"]=None
+    def changed(path,digest):
+        raw=read(path,digest)
+        if path.name=="independent-enable-push-effect-review-v1.json" and mode=="activation":
+            value=json.loads(raw);value["control_activation_accepted"]=False;return json.dumps(value).encode()
+        if path.name=="independent-apply-development-subject-review-v1.json" and mode in {"subject","stage_review"}:
+            value=json.loads(raw)
+            if mode=="subject":value["subject_sha256"]="0"*64
+            else:value["stage"]="admit"
+            return json.dumps(value).encode()
+        return raw
+    with pytest.raises(b.BoundedG1BError) as err:run(changed)
+    assert err.value.reason_code==reason and observations==[]
+
 BASE = Path("C:/Users/there/EMR4-tools/g4-stage1-interactive-product-actual-v1")
 PUBLICATION = Path("C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/demo-led-stage1-20261012-v2/stage1-interactive-product-publication-source-v2/independent-stage1-interactive-product-push-effect-review-v2.json")
 HISTORICAL_AFTERIMAGES = Path("C:/Users/there/EMR4-tools/g4-stage1-successor-control-actual-v2")
