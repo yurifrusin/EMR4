@@ -4160,3 +4160,289 @@ def test_invitation_loader_calls_implemented_source_join_for_apply_only(monkeypa
         monkeypatch.setattr(bounded_g1b,"_g4_invitation_fixture_source",lambda read:calls.append(stage) or {"source_only":True})
         run()
     assert calls==["apply"]
+
+
+# Account HTTP external source successor: four focused source tests. Unrun here.
+def _account_http_scope():
+    return json.loads((Path(__file__).resolve().parents[1] /
+                       bounded_g1b.G4_STAGE1_SUCCESSOR_SCOPE).read_bytes())
+
+
+def _account_http_q(stage="enable", phase="development"):
+    q = {key: None for key in bounded_g1b.G4_ACCOUNT_HTTP_BINDING_KEYS}
+    paths = bounded_g1b.G4_ACCOUNT_HTTP_CONTROL if stage == "enable" else frozenset()
+    q.update(schema_version=bounded_g1b.G4_ACCOUNT_HTTP_SCHEMA,
+        operation_id="account-http-source-unit", stage=stage, phase=phase,
+        operation_kind="enable_g4_stage1_successor" if stage == "enable" else bounded_g1b.G4_ACCOUNT_HTTP_ADMIT_KIND,
+        repair_sha256={p: {} for p in paths},
+        base_commit=bounded_g1b.G4_ACCOUNT_HTTP_BASE["commit"],
+        expected_head=bounded_g1b.G4_ACCOUNT_HTTP_BASE["commit"],
+        base_tree=bounded_g1b.G4_ACCOUNT_HTTP_BASE["tree"],
+        candidate_tree=bounded_g1b.G4_ACCOUNT_HTTP_BASE["tree"],
+        expected_index_tree=bounded_g1b.G4_ACCOUNT_HTTP_BASE["tree"])
+    return q
+
+
+def test_account_http_source_scope_dispatch_and_prior_families(monkeypatch):
+    scope = _account_http_scope()
+    bounded_g1b.validate_g4_account_http_scope(scope)
+    assert scope["allowed_paths"] == [] and scope["product_sha256"] == {}
+    for key, value in (("runtime_binding_required", False),
+                       ("admission_grants_runtime_authority", True), ("voice_activation", True),
+                       ("allowed_paths", ["app/routers/auth.py"]),
+                       ("allowed_effects", scope["allowed_effects"] + ["product_behavior_change"]),
+                       ("selected_base", bounded_g1b.G4_HUMAN_BASE),
+                       ("product_vector", {"path": "C:/unowned.json", "sha256": "0" * 64}),
+                       ("predecessor_scope", {"sha256": "0" * 64})):
+        changed = copy.deepcopy(scope); changed[key] = value
+        with pytest.raises(bounded_g1b.BoundedG1BError) as err:
+            bounded_g1b.validate_g4_account_http_scope(changed)
+        assert err.value.reason_code == "bounded_g4_account_http_scope_boundary"
+    for stage in ("enable", "admit"):
+        q = _account_http_q(stage)
+        paths = bounded_g1b.G4_ACCOUNT_HTTP_CONTROL if stage == "enable" else frozenset()
+        assert bounded_g1b.operation_paths(q["operation_kind"], q) == paths
+        assert bounded_g1b._operation(q["operation_kind"], q)["g4_account_http_external_source"] is True
+        subject = bounded_g1b.g4_account_http_review_subject(q)
+        assert bounded_g1b.g4_account_http_review_subject(dict(q, source_review={"unissued": True})) == subject
+        for key in set(q) - {"source_review"}:
+            assert bounded_g1b.g4_account_http_review_subject(dict(q, **{key: "changed"})) != subject
+        for changed in (dict(q, repair_sha256={"app/unowned.py": {}}),
+                        dict(q, stage="apply"), dict(q, operation_kind="implement_g4_stage1_successor")):
+            with pytest.raises(bounded_g1b.BoundedG1BError):
+                bounded_g1b.operation_paths(q["operation_kind"], changed)
+    q = _account_http_q("admit")
+    assert bounded_g1b.operation_effects(q["operation_kind"]) == {"repository_read"}
+    sentinel = ({}, None)
+    monkeypatch.setattr(bounded_g1b, "_validate_g4_account_http_loaded_policy", lambda inputs: sentinel)
+    assert bounded_g1b._validate_loaded_policy(bounded_g1b.BoundedG1BInputs(q, {}, {}, {}, {})) is sentinel
+    for schema, stage, kind, paths in (
+        (bounded_g1b.G4_HUMAN_SCHEMA, "admit", bounded_g1b.G4_HUMAN_ADMIT_KIND, frozenset()),
+        (bounded_g1b.G4_ACCOUNT_BOOTSTRAP_SCHEMA, "apply", "implement_g4_stage1_successor", bounded_g1b.G4_ACCOUNT_BOOTSTRAP_PRODUCT),
+        (bounded_g1b.G4_INVITATION_SCHEMA, "apply", "implement_g4_stage1_successor", bounded_g1b.G4_INVITATION_PRODUCT)):
+        prior = dict(q, schema_version=schema, stage=stage, operation_kind=kind,
+                     repair_sha256={p: {} for p in paths})
+        assert not bounded_g1b._is_g4_account_http_binding(prior)
+        assert bounded_g1b.operation_paths(kind, prior) == paths
+        assert "g4_account_http_external_source" not in bounded_g1b._operation(kind, prior)
+
+
+@pytest.mark.parametrize("mode", ["valid", "vector_path", "vector_hash", "row_path", "row_hash",
+    "row_missing", "duplicate", "short", "review", "review_subject", "publication", "publication_source"])
+def test_account_http_external_subject_and_accepted_publication_are_exact(mode):
+    # Only these literal ordinary sources are read; provenance backend is not read.
+    allowed = {bounded_g1b.G4_ACCOUNT_HTTP_VECTOR, bounded_g1b.G4_ACCOUNT_HTTP_PREPARATION_REVIEW,
+               bounded_g1b.G4_ACCOUNT_HTTP_FOCUSED_REVIEW, bounded_g1b.G4_ACCOUNT_HTTP_CURRENT_PUBLICATION}
+    allowed |= {Path(row["path"]) for row in bounded_g1b.G4_ACCOUNT_HTTP_EXTERNAL_VECTOR["rows"]}
+    q = _account_http_q()
+    q.update(product_vector={"path": bounded_g1b.G4_ACCOUNT_HTTP_VECTOR.as_posix(), "sha256": bounded_g1b.G4_ACCOUNT_HTTP_VECTOR_SHA},
+        mapping_review={"path": bounded_g1b.G4_ACCOUNT_HTTP_PREPARATION_REVIEW.as_posix(), "sha256": bounded_g1b.G4_ACCOUNT_HTTP_PREPARATION_REVIEW_SHA})
+    calls = []
+    def read(path, digest):
+        assert path in allowed
+        calls.append(path)
+        raw = path.read_bytes()
+        assert hashlib.sha256(raw).hexdigest() == digest
+        if path == bounded_g1b.G4_ACCOUNT_HTTP_VECTOR and mode in {"row_path", "row_hash", "row_missing", "duplicate"}:
+            value = json.loads(raw)
+            if mode == "row_path": value["rows"][0]["path"] = "C:/unowned.py"
+            if mode == "row_hash": value["rows"][0]["sha256"] = "0" * 64
+            if mode == "row_missing": value["rows"].pop()
+            if mode == "duplicate": value["rows"][1] = value["rows"][0]
+            return json.dumps(value).encode()
+        if mode == "short" and path == Path(bounded_g1b.G4_ACCOUNT_HTTP_EXTERNAL_VECTOR["rows"][0]["path"]):
+            return raw[:-1]
+        if path == bounded_g1b.G4_ACCOUNT_HTTP_FOCUSED_REVIEW and mode in {"review", "review_subject"}:
+            value = json.loads(raw)
+            value["independent" if mode == "review" else "fixture_sha256"] = False if mode == "review" else "0" * 64
+            return json.dumps(value).encode()
+        if path == bounded_g1b.G4_ACCOUNT_HTTP_CURRENT_PUBLICATION and mode in {"publication", "publication_source"}:
+            value = json.loads(raw)
+            if mode == "publication": value["commit"] = "0" * 40
+            else: value["source_identity"]["files"][bounded_g1b.G4_AUDIT_CODE] = "0" * 64
+            return json.dumps(value).encode()
+        return raw
+    if mode == "vector_path": q["product_vector"]["path"] = "C:/unowned.json"
+    if mode == "vector_hash": q["product_vector"]["sha256"] = "0" * 64
+    if mode == "valid":
+        vector, reviews = bounded_g1b._g4_account_http_external_inputs(read, q)
+        assert len(vector["rows"]) == 3 and set(reviews) == {"helper", "focused"}
+        assert bounded_g1b._g4_account_http_current_publication(read)["commit"] == bounded_g1b.G4_ACCOUNT_HTTP_BASE["commit"]
+        assert set(calls) == allowed
+    else:
+        reason = ("bounded_g4_account_http_external_pins" if mode.startswith("vector_") else
+                  "bounded_g4_account_http_external_vector" if mode in {"row_path", "row_hash", "row_missing", "duplicate"} else
+                  "bounded_g4_account_http_external_source" if mode == "short" else
+                  "bounded_g4_account_http_current_publication" if mode.startswith("publication") else
+                  "bounded_g4_account_http_preparation_provenance")
+        with pytest.raises(bounded_g1b.BoundedG1BError) as err:
+            bounded_g1b._g4_account_http_external_inputs(read, q)
+            bounded_g1b._g4_account_http_current_publication(read)
+        assert err.value.reason_code == reason
+
+
+def test_account_http_admit_is_preflight_only_and_reports_no_execution(monkeypatch):
+    q = _account_http_q("admit")
+    q["source_sha256"] = {}; q["payload_sha256"] = {}
+    inputs = bounded_g1b.BoundedG1BInputs(q, {}, {}, {}, {"observation_sha256": "sha256:" + "0" * 64})
+    context = bounded_g1b.BoundedG1BContext(
+        target_root=Path("C:/synthetic-account-http-target"), source_root=Path("C:/synthetic-account-http-source"),
+        evidence_root=bounded_g1b.G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT,
+        binding_path=Path("C:/synthetic-account-http-binding.json"), expected_binding_sha256="0" * 64,
+        scratch_root=Path("C:/synthetic-account-http-scratch"))
+    monkeypatch.setattr(bounded_g1b, "load_bounded_g1b_inputs", lambda context: inputs)
+    monkeypatch.setattr(bounded_g1b, "_validate_g4_account_http_loaded_policy", lambda inputs: ({}, None))
+    manifest = bounded_g1b.build_bounded_g1b_manifest(context)
+    assert manifest["allowed_paths"] == [] and manifest["intended_side_effect_classes"] == ["repository_read"]
+    report = bounded_g1b.bounded_g1b_report(context=context, manifest=manifest, entrypoint="recovery_preflight", phase="development")
+    assert report["policy_eligible"] is True
+    assert report["execution_authorized"] is False and report["feature_work_eligible"] is False
+    for entrypoint, phase in (("task_branch_commit", "development"), ("task_branch_push", "pre-push"),
+                              ("task_branch_push", "post-push"), ("recovery_preflight", "pre-push")):
+        decision = bounded_g1b.evaluate_bounded_g1b_operation(context=context, manifest=manifest, entrypoint=entrypoint, phase=phase)
+        assert not decision.policy_admitted and decision.reason_codes == ("bounded_g4_account_http_admit_entrypoint",)
+    changed = dict(manifest, intended_side_effect_classes=["repository_read", "task_branch_commit"])
+    decision = bounded_g1b.evaluate_bounded_g1b_operation(context=context, manifest=changed, entrypoint="recovery_preflight", phase="development")
+    assert decision.reason_codes == ("bounded_g1b_manifest_binding_mismatch",)
+
+def _account_http_loader_fixture(monkeypatch,stage="enable",phase="development"):
+    """Controlled source-flow fixture: Git/index/external source checks substituted.
+
+    This exercises the real loader with substituted Git/index/provenance seams. It
+    does not import the HTTP helper or require native HTTP runtime closure.
+    """
+    root=Path(__file__).resolve().parents[1]
+    candidate=root.parent
+    target=Path("C:/synthetic-account-http-target");source=Path("C:/synthetic-account-http-source")
+    evidence=bounded_g1b.G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT
+    scope=_account_http_scope()
+    paths=(bounded_g1b.CONFIGURATION_PATHS | {bounded_g1b.STATE,bounded_g1b.GATES,
+        bounded_g1b.OVERLAY,bounded_g1b.AGENTS,bounded_g1b.G4_STAGE1_INTERACTIVE_SCOPE,
+        bounded_g1b.G4_STAGE1_SUCCESSOR_SCOPE,bounded_g1b.G4_STAGE1_SUCCESSOR_TEST,
+        bounded_g1b.G4_CI_WORKFLOW} | bounded_g1b.SOURCE_PATHS | bounded_g1b.CONTROLLER_PATHS)
+    before={p:("accepted:"+p).encode() for p in paths}
+    for p in bounded_g1b.G4_ACCOUNT_HTTP_CONTROL:
+        before[p]=(candidate/"before"/p).read_bytes()
+    after={p:before[p] for p in paths}
+    for p in bounded_g1b.G4_ACCOUNT_HTTP_CONTROL-{bounded_g1b.G4_STAGE1_SUCCESSOR_SCOPE}:
+        after[p]=(root/p).read_bytes()
+    scope["source_sha256"]={p:hashlib.sha256(after[p]).hexdigest()
+        for p in bounded_g1b.SOURCE_PATHS|bounded_g1b.CONTROLLER_PATHS}
+    scope["control_sha256"]={p:hashlib.sha256(after[p]).hexdigest()
+        for p in bounded_g1b.G4_ACCOUNT_HTTP_CONTROL-{bounded_g1b.G4_STAGE1_SUCCESSOR_SCOPE}}
+    after[bounded_g1b.G4_STAGE1_SUCCESSOR_SCOPE]=bounded_g1b._canonical(scope)+b"\n"
+    q=_account_http_q(stage,phase)
+    q.update(source_sha256=scope["source_sha256"],
+        payload_sha256={p:hashlib.sha256(raw).hexdigest() for p,raw in after.items()},
+        product_vector=scope["product_vector"],mapping_review=scope["mapping_review"])
+    if stage=="enable":
+        q["candidate_tree"]="a"*40
+        q["repair_sha256"]={p:{"before_sha256":bounded_g1b.G4_ACCOUNT_HTTP_PREIMAGES[p],
+            "after_sha256":q["payload_sha256"][p]} for p in bounded_g1b.G4_ACCOUNT_HTTP_CONTROL}
+        if phase!="development":
+            q.update(expected_head="e"*40,expected_index_tree=q["candidate_tree"])
+    else:
+        q.update(base_commit="b"*40,base_tree="c"*40,candidate_tree="c"*40,
+                 expected_head="b"*40,expected_index_tree="c"*40)
+        activation=bounded_g1b.G4_ACCOUNT_HTTP_ROOT/"entry-admission-v1/independent-enable-push-effect-review-v1.json"
+        q["activation_acceptance"]={"path":activation.as_posix(),"sha256":"f"*64}
+    subject_path=bounded_g1b.G4_ACCOUNT_HTTP_ROOT/"entry-admission-v1"/(
+        "independent-"+stage+"-"+phase+"-subject-review-v1.json")
+    q["source_review"]={"path":subject_path.as_posix(),"sha256":"d"*64}
+    def read(p,d):
+        if p==subject_path:
+            return json.dumps({"schema":"emr4.g4_operation_review.v1","status":"PASS",
+                "verdict":"PASS_G4_STAGE1_ACCOUNT_HTTP_EXTERNAL_EXACT_ADMISSION_SUBJECT",
+                "subject_sha256":bounded_g1b.g4_account_http_review_subject(q),"independent":True,
+                "implementation_authorship":False,"blocking_findings":[],
+                "reviewer_agent":"/root/synthetic-independent-reviewer","stage":stage,"phase":phase}).encode()
+        if stage=="admit" and p==Path(q["activation_acceptance"]["path"]):
+            return json.dumps({"schema":"emr4.g4_operation_review.v1","status":"PASS",
+                "verdict":"PASS_G4_STAGE1_ACCOUNT_HTTP_EXTERNAL_CONTROL_PUBLICATION_EFFECT",
+                "reviewer_agent":"/root/synthetic-independent-reviewer","independent":True,
+                "implementation_authorship":False,"blocking_findings":[],"stage":"enable","phase":"push",
+                "base":bounded_g1b.G4_ACCOUNT_HTTP_BASE["commit"],"commit":q["base_commit"],
+                "candidate_tree":q["base_tree"],"control_activation_accepted":True,
+                "same_attempt_remote_readback_verified":True,"protected_refs_unchanged":True,
+                "whole_inverse_verified_same_attempt":True,"published_ref":bounded_g1b.G4_STAGE1_INTERACTIVE_BACKEND_REF}).encode()
+        relative=p.relative_to(target if p.is_relative_to(target) else source).as_posix()
+        raw=after[relative]
+        if hashlib.sha256(raw).hexdigest()!=d:
+            raise bounded_g1b.BoundedG1BError("bounded_g1b_input_digest_changed")
+        return raw
+    calls=[]
+    def git_bytes(_target,*args):
+        assert args[:2]==("cat-file","blob")
+        commit,relative=args[2].split(":",1)
+        return before[relative] if commit==bounded_g1b.G4_ACCOUNT_HTTP_BASE["commit"] else after[relative]
+    def git(_target,*args):
+        if args[0]=="rev-parse":return bounded_g1b.G4_ACCOUNT_HTTP_BASE["tree"]
+        assert args[:2]==("cat-file","commit")
+        parent=bounded_g1b.G4_ACCOUNT_HTTP_BASE["commit"] if stage=="admit" else q["base_commit"]
+        tree=q["base_tree"] if stage=="admit" else q["candidate_tree"]
+        return "tree "+tree+"\nparent "+parent+"\n\nsynthetic\n"
+    def attest(_target,**kwargs):calls.append(kwargs);return {"observation_sha256":"sha256:"+"0"*64}
+    monkeypatch.setattr(bounded_g1b.trusted_git,"run_git_bytes",git_bytes)
+    monkeypatch.setattr(bounded_g1b.trusted_git,"run_git",git)
+    monkeypatch.setattr(bounded_g1b.trusted_git,"attest_target_index",attest)
+    monkeypatch.setattr(bounded_g1b,"_g4_account_http_external_inputs",lambda _read,_q:({"inert":True},{"preparation_only":True}))
+    monkeypatch.setattr(bounded_g1b,"_g4_account_http_current_publication",lambda _read:{"synthetic_control_flow":True})
+    def run():
+        return bounded_g1b._load_g4_account_http_inputs(None,target,source,evidence,
+            Path("C:/synthetic-account-http-scratch"),q,read,{})
+    return run,q,after,before,calls,paths,read,git
+
+
+@pytest.mark.parametrize("stage,phase,mode,reason", [
+    ("enable", "development", "valid", None), ("enable", "pre-push", "valid", None),
+    ("enable", "post-push", "valid", None), ("admit", "development", "valid", None),
+    ("enable", "development", "before", "bounded_g4_account_http_change_preimage"),
+    ("enable", "development", "unowned", "bounded_g4_account_http_unowned_change"),
+    ("enable", "development", "source_missing", "bounded_g4_account_http_sources"),
+    ("enable", "development", "payload_extra", "bounded_g4_account_http_payload_paths"),
+    ("enable", "development", "subject", "bounded_g4_account_http_independent_subject"),
+    ("admit", "development", "activation", "bounded_g4_account_http_activation_acceptance"),
+    ("admit", "development", "parent", "bounded_g4_account_http_activation_parent"),
+    ("admit", "development", "delta", "bounded_g4_account_http_admit_no_delta"),
+    ("admit", "pre-push", "valid", "bounded_g4_account_http_admit_no_delta"),
+    ("enable", "post-push", "index", "bounded_g4_account_http_committed_binding")])
+def test_account_http_loader_retains_activation_source_phase_and_index_checks(monkeypatch, stage, phase, mode, reason):
+    run, q, after, before, calls, paths, read, git = _account_http_loader_fixture(monkeypatch, stage, phase)
+    if mode == "before": before[bounded_g1b.G4_AUDIT_CODE] = b"changed-controller"
+    if mode == "unowned": before[bounded_g1b.G4_CI_WORKFLOW] = b"unowned-change"
+    if mode == "source_missing": del q["source_sha256"][bounded_g1b.G4_AUDIT_CODE]
+    if mode == "payload_extra": q["payload_sha256"]["app/unowned.py"] = "0" * 64
+    if mode == "index": q["expected_index_tree"] = "f" * 40
+    if mode == "delta": q["candidate_tree"] = "f" * 40
+    if mode == "parent":
+        def wrong_parent(target, *args):
+            raw = git(target, *args)
+            return raw.replace("parent " + bounded_g1b.G4_ACCOUNT_HTTP_BASE["commit"], "parent " + "0" * 40)
+        monkeypatch.setattr(bounded_g1b.trusted_git, "run_git", wrong_parent)
+    if mode in {"subject", "activation"}:
+        # Preserve the real loader and mutate a single reviewed acceptance field.
+        def changed_read(path, digest):
+            raw = read(path, digest)
+            if path.name == ("independent-" + stage + "-" + phase + "-subject-review-v1.json") and mode == "subject":
+                value = json.loads(raw); value["subject_sha256"] = "0" * 64
+                return json.dumps(value).encode()
+            if path.name == "independent-enable-push-effect-review-v1.json" and mode == "activation":
+                value = json.loads(raw); value["implementation_authorship"] = True
+                return json.dumps(value).encode()
+            return raw
+        def run():
+            return bounded_g1b._load_g4_account_http_inputs(None, Path("C:/synthetic-account-http-target"),
+                Path("C:/synthetic-account-http-source"), bounded_g1b.G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT,
+                Path("C:/synthetic-account-http-scratch"), q, changed_read, {})
+    if reason is not None:
+        with pytest.raises(bounded_g1b.BoundedG1BError) as err: run()
+        assert err.value.reason_code == reason
+        if mode != "index": assert calls == []
+    else:
+        inputs = run()
+        assert inputs.binding is q and len(q["source_sha256"]) == 8 and len(paths) == 25
+        assert inputs.payloads == after
+        owned = bounded_g1b.G4_ACCOUNT_HTTP_CONTROL if stage == "enable" else frozenset()
+        attested = paths - owned if phase == "development" else paths
+        assert calls == [{"attested_paths": tuple(sorted(attested)), "expected_head": q["expected_head"],
+            "expected_index_tree": q["expected_index_tree"], "scratch_parent": Path("C:/synthetic-account-http-scratch")}]

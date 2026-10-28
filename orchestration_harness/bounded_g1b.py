@@ -3418,11 +3418,13 @@ def operation_effects(kind: str) -> frozenset[str]:
         return G2_COMPLETENESS_EFFECTS
     if kind == "repair_g2_ci_selection":
         return G2_CI_EFFECTS
-    return frozenset({"repository_read"}) if kind in {"assess_g1e", G4_HUMAN_ADMIT_KIND} else EFFECTS
+    return frozenset({"repository_read"}) if kind in {"assess_g1e", G4_HUMAN_ADMIT_KIND, G4_ACCOUNT_HTTP_ADMIT_KIND} else EFFECTS
 
 
 def operation_paths(kind: str, binding: dict | None = None) -> frozenset[str]:
     _need(type(kind) is str and kind in OPERATION_PATHS, "bounded_g1b_operation_kind")
+    if kind == G4_ACCOUNT_HTTP_ADMIT_KIND or _is_g4_account_http_binding(binding):
+        return _g4_account_http_paths(kind, binding)
     if kind == G4_HUMAN_ADMIT_KIND or _is_g4_human_binding(binding):
         return _g4_human_paths(kind, binding)
     if kind == G4_GOAL_ENTRY_KIND:
@@ -3484,6 +3486,10 @@ def operation_paths(kind: str, binding: dict | None = None) -> frozenset[str]:
 
 def _operation(kind: str, binding: dict | None = None) -> dict:
     paths = operation_paths(kind, binding)
+    if _is_g4_account_http_binding(binding):
+        return {"paths": paths, "g4_account_http_external_source": True,
+                "profile": raisa_policy.G4_STAGE1_SUCCESSOR_PROFILE,
+                "gate": "G4", "limits": G4_ACCOUNT_HTTP_LIMITS}
     if _is_g4_human_binding(binding):
         return {"paths": paths, "g4_human_external_source": True,
                 "profile": raisa_policy.G4_STAGE1_SUCCESSOR_PROFILE,
@@ -6421,6 +6427,9 @@ def load_bounded_g1b_inputs(context: BoundedG1BContext) -> BoundedG1BInputs:
         return snapshot[1]
 
     binding = _json(read(binding_path, context.expected_binding_sha256))
+    if binding.get("operation_kind") == G4_ACCOUNT_HTTP_ADMIT_KIND or _is_g4_account_http_binding(binding):
+        return _load_g4_account_http_inputs(
+            context, target, source, evidence_root, scratch, binding, read, snapshots)
     if binding.get("operation_kind") == G4_HUMAN_ADMIT_KIND or _is_g4_human_binding(binding):
         return _load_g4_human_inputs(
             context, target, source, evidence_root, scratch, binding, read, snapshots)
@@ -6644,6 +6653,8 @@ def load_bounded_g1b_inputs(context: BoundedG1BContext) -> BoundedG1BInputs:
 
 def _validate_loaded_policy(inputs: BoundedG1BInputs) -> tuple[dict[str, bytes], configuration_core.ValidatedConfiguration | None]:
     operation = _operation(inputs.binding["operation_kind"], inputs.binding)
+    if operation.get("g4_account_http_external_source"):
+        return _validate_g4_account_http_loaded_policy(inputs)
     if operation.get("g4_human_external_source"):
         return _validate_g4_human_loaded_policy(inputs)
     if operation.get("g4_goal_entry_source"):
@@ -6761,6 +6772,7 @@ def evaluate_bounded_g1b_operation(*, context: BoundedG1BContext | None, manifes
         _need(manifest["schema_version"] == REQUEST_VERSION, "bounded_g1b_manifest_version")
         inputs = load_bounded_g1b_inputs(context)
         q = inputs.binding
+        _g4_account_http_require_entrypoint(q, entrypoint, phase)
         _g4_human_require_entrypoint(q, entrypoint, phase)
         _need(q["phase"] == phase, "bounded_g1b_phase_disagreement")
         expected = {"schema_version": REQUEST_VERSION, "operation_id": q["operation_id"],
@@ -15357,3 +15369,327 @@ def _g4_invitation_fixture_source(read):
           and _sha(bodies["source-binding-v1.json"]) == G4_INVITATION_REVIEW_SUBJECT["source_binding_sha256"],
           "bounded_g4_invitation_fixture_closure_pins")
     return {"vector": vector, "review": review}
+
+
+# Exact Account HTTP factory external source-only admission. No native execution.
+G4_ACCOUNT_HTTP_SCHEMA = "ariadne.g4_stage1_account_http_external_source_operation_binding.v1"
+G4_ACCOUNT_HTTP_SCOPE_SCHEMA = "ariadne.g4_stage1_successor_entry_scope.v17"
+G4_ACCOUNT_HTTP_ADMIT_KIND = "admit_g4_stage1_account_http_external_source"
+G4_ACCOUNT_HTTP_BASE = {"commit": "aded011fcd605f83b9b1b8362b8f90c7d6d4102a",
+                        "tree": "5f07d731fe2d8a6e055c29bf778d76c2c9f9d0f4"}
+G4_ACCOUNT_HTTP_CONTROL = frozenset({G4_AUDIT_CODE, G4_STAGE1_SUCCESSOR_SCOPE,
+                                    G4_STAGE1_SUCCESSOR_TEST})
+G4_ACCOUNT_HTTP_PREIMAGES = {
+    G4_AUDIT_CODE: "4f1ac96610a60183940fdf07d84bb31abbf8a1cd2d8503bb9a003db3c4ad2367",
+    G4_STAGE1_SUCCESSOR_SCOPE: "f96ed3bec7613b214fd6e7ec6293afb6db79055aa3425c51d5a25c2f6d77e033",
+    G4_STAGE1_SUCCESSOR_TEST: "1845ca1954ef7786d3690ff91cd3d20edc181f3012b3576f1b00d48cd8c9bd4d"}
+G4_ACCOUNT_HTTP_ROOT = G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT / "account-http-factory-external-source-successor-v1"
+G4_ACCOUNT_HTTP_EXTERNAL_ROOT = Path("C:/Users/there/EMR4-tools/local-mock-owner-staff-login-source-preparation-v1/account-http-factory-candidate-v2")
+G4_ACCOUNT_HTTP_VECTOR = G4_ACCOUNT_HTTP_EXTERNAL_ROOT / "admission-preparation/source-only-successor-v1/external-source-vector-v1.json"
+G4_ACCOUNT_HTTP_VECTOR_SHA = "c552cc58bba1d2d7fa728ff8ee6121d6c3f877a939625687dd3fbbb7d1a4dca3"
+G4_ACCOUNT_HTTP_PREPARATION_REVIEW = G4_ACCOUNT_HTTP_EXTERNAL_ROOT / "independent-account-http-factory-source-review-v2.json"
+G4_ACCOUNT_HTTP_PREPARATION_REVIEW_SHA = "21a6a182ce1bf90bbc23622d9f9fa508e0692986e48ae28e489c20827a32d65e"
+G4_ACCOUNT_HTTP_FOCUSED_REVIEW = G4_ACCOUNT_HTTP_EXTERNAL_ROOT / "admission-preparation/focused-verification-v2/independent-focused-http-source-review-v2.json"
+G4_ACCOUNT_HTTP_FOCUSED_REVIEW_SHA = "f39dcaa416ecc70edd684c557cb828b052de91c522033042da2d64cdf15b993a"
+G4_ACCOUNT_HTTP_CURRENT_PUBLICATION = Path("C:/Users/there/EMR4-tools/local-mock-invitation-apply-publication-preparation-v1/independent-apply-push-effect-review-v1.json")
+G4_ACCOUNT_HTTP_CURRENT_PUBLICATION_SHA = "2d701ca275245acccd836785c193a2235b0d47867dc1996e67257f906bf24adc"
+G4_ACCOUNT_HTTP_BINDING_KEYS = G4_BUREAU_BINDING_KEYS
+G4_ACCOUNT_HTTP_SCOPE_KEYS = G4_BUREAU_SCOPE_KEYS
+G4_ACCOUNT_HTTP_LIMITS = (
+    "exact frozen three-file Account HTTP helper/test/fixture source only",
+    "control enable changes exactly three controls; source admit is zero-delta repository_read",
+    "runtime_binding_required true; admission grants no execution authority",
+    "native HTTP package/import/executable/database/guard/cleanup qualification remains separate",
+    "no provider, real data, protected evidence, public exposure, deployment or protected refs")
+OPERATION_PATHS[G4_ACCOUNT_HTTP_ADMIT_KIND] = frozenset()
+
+G4_ACCOUNT_HTTP_EXTERNAL_VECTOR = json.loads('''{"schema":"emr4.account_http_factory_external_source_vector.v1","status":"FROZEN_REVIEWED_SOURCE_ONLY","rows":[{"path":"C:/Users/there/EMR4-tools/local-mock-owner-staff-login-source-preparation-v1/account-http-factory-candidate-v2/after/stage1_account_http_adapter.py","bytes":4032,"sha256":"34e0dae2d0b8115247003f2a09dbae04b291cb2af5d101754ea5419e13efec20"},{"path":"C:/Users/there/EMR4-tools/local-mock-owner-staff-login-source-preparation-v1/account-http-factory-candidate-v2/admission-preparation/focused-verification-v2/test_factory_http.py","bytes":5006,"sha256":"9ec0e20556cb9eb4b930e8c40abac85648a65539a72cb2cc7d57eeccec44cfab"},{"path":"C:/Users/there/EMR4-tools/local-mock-owner-staff-login-source-preparation-v1/account-http-factory-candidate-v2/admission-preparation/focused-verification-v2/factory_http_fixture.py","bytes":4571,"sha256":"c3580a5a539c999daa93a55dfc9ebe20906025b6cd3d24c10a35b024a47d4dfb"}],"reviews":[{"path":"C:/Users/there/EMR4-tools/local-mock-owner-staff-login-source-preparation-v1/account-http-factory-candidate-v2/independent-account-http-factory-source-review-v2.json","sha256":"21a6a182ce1bf90bbc23622d9f9fa508e0692986e48ae28e489c20827a32d65e"},{"path":"C:/Users/there/EMR4-tools/local-mock-owner-staff-login-source-preparation-v1/account-http-factory-candidate-v2/admission-preparation/focused-verification-v2/independent-focused-http-source-review-v2.json","sha256":"f39dcaa416ecc70edd684c557cb828b052de91c522033042da2d64cdf15b993a"}],"ordinary_provenance":{"backend_binding":"C:/Users/there/EMR4-tools/selected-bureau-account11-text-ui-preparation-v1/bindings/attempt-16/launch-binding.json","sha256":"8ef684a14460816be7e7095441f800ac5bb6de85c56a6be46d4a3dbf40791d78","qualification":"Existing 154 ordinary backend rows as provenance; not part of this three-file subject or a closed HTTP import set."},"execution_authorized":false,"qualification":"No package/import/executable/DB/guard/cleanup runtime qualification; those remain separate. No admission or test executed."}''')
+
+
+def _is_g4_account_http_binding(binding):
+    return type(binding) is dict and binding.get("schema_version") == G4_ACCOUNT_HTTP_SCHEMA
+
+
+def _g4_account_http_paths(kind, binding):
+    _need(_is_g4_account_http_binding(binding) and binding.get("operation_kind") == kind
+          and binding.get("stage") in {"enable", "admit"}
+          and ((binding["stage"] == "enable" and kind == "enable_g4_stage1_successor")
+               or (binding["stage"] == "admit" and kind == G4_ACCOUNT_HTTP_ADMIT_KIND))
+          and type(binding.get("repair_sha256")) is dict,
+          "bounded_g4_account_http_binding_kind")
+    paths = G4_ACCOUNT_HTTP_CONTROL if binding["stage"] == "enable" else frozenset()
+    _need(set(binding["repair_sha256"]) == paths, "bounded_g4_account_http_changed_paths")
+    return paths
+
+
+def g4_account_http_review_subject(q):
+    return _sha(_canonical({key: q[key] for key in (
+        "schema_version", "operation_id", "operation_kind", "stage", "phase",
+        "base_commit", "base_tree", "expected_head", "expected_index_tree",
+        "candidate_tree", "source_sha256", "payload_sha256", "repair_sha256",
+        "activation_acceptance", "product_vector", "mapping_review")}))
+
+
+def _g4_account_http_require_entrypoint(q, entrypoint, phase):
+    if _is_g4_account_http_binding(q) and q.get("stage") == "admit":
+        _need(q.get("operation_kind") == G4_ACCOUNT_HTTP_ADMIT_KIND
+              and entrypoint == "recovery_preflight" and phase == "development",
+              "bounded_g4_account_http_admit_entrypoint")
+
+
+def validate_g4_account_http_scope(scope):
+    _keys(scope, G4_ACCOUNT_HTTP_SCOPE_KEYS, "bounded_g4_account_http_scope_schema")
+    _need(scope["schema_version"] == G4_ACCOUNT_HTTP_SCOPE_SCHEMA
+          and scope["selected_base"] == G4_ACCOUNT_HTTP_BASE
+          and _g4_audit_timestamp(scope["recorded_at"])
+          and scope["active_profile"] == raisa_policy.G4_STAGE1_SUCCESSOR_PROFILE
+          and scope["allowed_task_kind"] == "g4_stage1_local_successor"
+          and scope["allowed_paths"] == [] and scope["product_sha256"] == {}
+          and scope["allowed_effects"] == sorted(EFFECTS)
+          and scope["runtime_binding_required"] is True
+          and scope["admission_grants_runtime_authority"] is False
+          and scope["voice_activation"] is False
+          and scope["excluded_effects"] == [
+              "unreviewed_application_or_database_runtime",
+              "unreviewed_browser_or_microphone_runtime",
+              "unreviewed_voice_child_or_network_egress", "provider_invocation",
+              "real_data_access", "protected_ref_movement", "deployment", "public_listener"]
+          and scope["product_vector"] == {"path": G4_ACCOUNT_HTTP_VECTOR.as_posix(),
+                                         "sha256": G4_ACCOUNT_HTTP_VECTOR_SHA}
+          and scope["mapping_review"] == {"path": G4_ACCOUNT_HTTP_PREPARATION_REVIEW.as_posix(),
+                                         "sha256": G4_ACCOUNT_HTTP_PREPARATION_REVIEW_SHA}
+          and scope["predecessor_scope"] == {
+              "sha256": G4_ACCOUNT_HTTP_PREIMAGES[G4_STAGE1_SUCCESSOR_SCOPE]},
+          "bounded_g4_account_http_scope_boundary")
+    sources = _digest_map(scope["source_sha256"], SOURCE_PATHS | CONTROLLER_PATHS,
+                          "bounded_g4_account_http_sources")
+    control = _digest_map(scope["control_sha256"],
+                          G4_ACCOUNT_HTTP_CONTROL - {G4_STAGE1_SUCCESSOR_SCOPE},
+                          "bounded_g4_account_http_control_sources")
+    _need(sources[G4_AUDIT_CODE] == control[G4_AUDIT_CODE],
+          "bounded_g4_account_http_source_vector")
+    return sources
+
+
+def _g4_account_http_external_inputs(read, q):
+    _need(q["product_vector"] == {"path": G4_ACCOUNT_HTTP_VECTOR.as_posix(),
+                                  "sha256": G4_ACCOUNT_HTTP_VECTOR_SHA}
+          and q["mapping_review"] == {"path": G4_ACCOUNT_HTTP_PREPARATION_REVIEW.as_posix(),
+                                     "sha256": G4_ACCOUNT_HTTP_PREPARATION_REVIEW_SHA},
+          "bounded_g4_account_http_external_pins")
+    vector = _json(read(G4_ACCOUNT_HTTP_VECTOR, G4_ACCOUNT_HTTP_VECTOR_SHA))
+    # Literal frozen subject, including both reviews and provenance qualification.
+    # The backend binding is provenance only and is never read or imported here.
+    _need(vector == G4_ACCOUNT_HTTP_EXTERNAL_VECTOR,
+          "bounded_g4_account_http_external_vector")
+    for row in vector["rows"]:
+        _keys(row, {"path", "bytes", "sha256"}, "bounded_g4_account_http_external_row")
+        path = Path(row["path"])
+        _need(path.is_absolute() and ".." not in path.parts
+              and path.is_relative_to(G4_ACCOUNT_HTTP_EXTERNAL_ROOT)
+              and type(row["bytes"]) is int and 0 < row["bytes"] <= 2 * 1024 * 1024
+              and len(read(path, row["sha256"])) == row["bytes"],
+              "bounded_g4_account_http_external_source")
+    mapping = _json(read(G4_ACCOUNT_HTTP_PREPARATION_REVIEW,
+                         G4_ACCOUNT_HTTP_PREPARATION_REVIEW_SHA))
+    focused = _json(read(G4_ACCOUNT_HTTP_FOCUSED_REVIEW,
+                         G4_ACCOUNT_HTTP_FOCUSED_REVIEW_SHA))
+    for review, schema in ((mapping, "emr4.account_http_factory_source_review.v2"),
+                           (focused, "emr4.account_factory_focused_http_source_review.v2")):
+        _need(review.get("schema") == schema and review.get("status") == "PASS_SOURCE_ONLY"
+              and review.get("reviewer_agent") == "/root/compass_observer_v2_independent_review"
+              and review.get("independent") is True
+              and review.get("implementation_authorship") is False
+              and review.get("blocking_findings") == [],
+              "bounded_g4_account_http_preparation_provenance")
+    _need(mapping.get("candidate_sha256") == vector["rows"][0]["sha256"]
+          and focused.get("test_sha256") == vector["rows"][1]["sha256"]
+          and focused.get("fixture_sha256") == vector["rows"][2]["sha256"],
+          "bounded_g4_account_http_preparation_provenance")
+    return vector, {"helper": mapping, "focused": focused}
+
+
+def _g4_account_http_current_publication(read):
+    review = _json(read(G4_ACCOUNT_HTTP_CURRENT_PUBLICATION,
+                         G4_ACCOUNT_HTTP_CURRENT_PUBLICATION_SHA))
+    protected = "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    ref = G4_STAGE1_INTERACTIVE_BACKEND_REF
+    _need(review.get("schema") == "emr4.g4_local_mock_invitation_apply_publication_effect_review.v1"
+          and review.get("status") == "PASS"
+          and review.get("verdict") == "PASS_G4_LOCAL_MOCK_INVITATION_APPLY_PUSH_EFFECT"
+          and review.get("reviewer_agent") == "/root/account_apply_phase_review_terra"
+          and review.get("independent") is True
+          and review.get("implementation_authorship") is False
+          and review.get("blocking_findings") == []
+          and review.get("source_publication_accepted") is True
+          and review.get("product_runtime_accepted") is False
+          and review.get("stage") == "apply" and review.get("phase") == "push"
+          and review.get("commit") == G4_ACCOUNT_HTTP_BASE["commit"]
+          and review.get("candidate_tree") == G4_ACCOUNT_HTTP_BASE["tree"]
+          and review.get("base") == "013d3634ef1bd92cef66c5750266887b26b64124"
+          and review.get("base_tree") == "c68efdc33ee4164a7abaf4d40dc619cb4d01754a"
+          and review.get("result_sha256") == "fca7867ceb7d74489bc7fbf4636931c186f89daf9df02e6817dc0651e601d7a1"
+          and review.get("evidence", {}).get("result") == {
+              "path": "C:/Users/there/EMR4-tools/g4-local-mock-invitation-apply01-publication/phase-push/result.json",
+              "bytes": 10302, "sha256": "fca7867ceb7d74489bc7fbf4636931c186f89daf9df02e6817dc0651e601d7a1"}
+          and all(review.get("source_identity", {}).get("files", {}).get(p) == d
+                  for p, d in G4_ACCOUNT_HTTP_PREIMAGES.items())
+          and review.get("published_ref") == ref
+          and review.get("same_attempt_remote_readback_verified") is True
+          and review.get("protected_refs_unchanged") is True
+          and review.get("whole_inverse_verified_same_attempt") is True
+          and review.get("remote_before") == {ref: "013d3634ef1bd92cef66c5750266887b26b64124",
+              "refs/heads/master": protected, "refs/heads/handoff/current": protected}
+          and review.get("remote_after") == {ref: G4_ACCOUNT_HTTP_BASE["commit"],
+              "refs/heads/master": protected, "refs/heads/handoff/current": protected},
+          "bounded_g4_account_http_current_publication")
+    return review
+
+def _g4_account_http_subject_review(read, row, evidence_root, subject, stage, phase):
+    _keys(row, {"path", "sha256"}, "bounded_g4_account_http_review_row")
+    path = G4_ACCOUNT_HTTP_ROOT / "entry-admission-v1" / (
+        "independent-" + stage + "-" + phase + "-subject-review-v1.json")
+    _need(Path(row["path"]) == path and path.is_relative_to(evidence_root),
+          "bounded_g4_account_http_review_path")
+    review = _json(read(path, row["sha256"]))
+    _need(review.get("schema") == "emr4.g4_operation_review.v1"
+          and review.get("status") == "PASS"
+          and review.get("verdict") == "PASS_G4_STAGE1_ACCOUNT_HTTP_EXTERNAL_EXACT_ADMISSION_SUBJECT"
+          and review.get("subject_sha256") == subject
+          and review.get("independent") is True
+          and review.get("implementation_authorship") is False
+          and review.get("blocking_findings") == []
+          and type(review.get("reviewer_agent")) is str
+          and review["reviewer_agent"] not in {"", "/root", "/root/account_factory_controller_successor"}
+          and review.get("stage") == stage and review.get("phase") == phase,
+          "bounded_g4_account_http_independent_subject")
+    return review
+
+
+def _load_g4_account_http_inputs(context, target, source, evidence_root, scratch,
+                          q, read, snapshots):
+    _keys(q, G4_ACCOUNT_HTTP_BINDING_KEYS, "bounded_g4_account_http_binding_schema")
+    _need(_is_g4_account_http_binding(q)
+          and q["phase"] in {"development", "pre-push", "post-push"}
+          and type(q["operation_id"]) is str
+          and re.fullmatch(r"[a-z0-9][a-z0-9-]{1,79}", q["operation_id"]),
+          "bounded_g4_account_http_binding_version")
+    for key in ("base_commit", "base_tree", "expected_head", "expected_index_tree", "candidate_tree"):
+        _need(type(q[key]) is str and re.fullmatch(r"[0-9a-f]{40}", q[key]),
+              "bounded_g4_account_http_git_identity")
+    paths = _g4_account_http_paths(q["operation_kind"], q)
+    if q["stage"] == "admit":
+        _need(q["phase"] == "development" and q["repair_sha256"] == {}
+              and q["candidate_tree"] == q["base_tree"]
+              and q["expected_head"] == q["base_commit"]
+              and q["expected_index_tree"] == q["base_tree"],
+              "bounded_g4_account_http_admit_no_delta")
+    vector, mapping = _g4_account_http_external_inputs(read, q)
+    publication = _g4_account_http_current_publication(read)
+    _need(_sha(trusted_git.run_git_bytes(target, "cat-file", "blob",
+              G4_ACCOUNT_HTTP_BASE["commit"] + ":" + G4_STAGE1_SUCCESSOR_SCOPE)) ==
+              G4_ACCOUNT_HTTP_PREIMAGES[G4_STAGE1_SUCCESSOR_SCOPE]
+          and trusted_git.run_git(target, "rev-parse", G4_ACCOUNT_HTTP_BASE["commit"] + "^{tree}") ==
+              G4_ACCOUNT_HTTP_BASE["tree"], "bounded_g4_account_http_predecessor")
+    if q["stage"] == "enable":
+        _need(q["base_commit"] == G4_ACCOUNT_HTTP_BASE["commit"]
+              and q["base_tree"] == G4_ACCOUNT_HTTP_BASE["tree"]
+              and q["activation_acceptance"] is None, "bounded_g4_account_http_enable_base")
+    else:
+        _keys(q["activation_acceptance"], {"path", "sha256"}, "bounded_g4_account_http_activation_row")
+        path = G4_ACCOUNT_HTTP_ROOT / "entry-admission-v1/independent-enable-push-effect-review-v1.json"
+        _need(Path(q["activation_acceptance"]["path"]) == path
+              and path.is_relative_to(evidence_root), "bounded_g4_account_http_activation_path")
+        activation = _json(read(path, q["activation_acceptance"]["sha256"]))
+        _need(activation.get("schema") == "emr4.g4_operation_review.v1"
+              and activation.get("status") == "PASS"
+              and activation.get("verdict") == "PASS_G4_STAGE1_ACCOUNT_HTTP_EXTERNAL_CONTROL_PUBLICATION_EFFECT"
+              and type(activation.get("reviewer_agent")) is str
+              and activation["reviewer_agent"] not in {"", "/root", "/root/account_factory_controller_successor"}
+              and activation.get("independent") is True
+              and activation.get("implementation_authorship") is False
+              and activation.get("blocking_findings") == []
+              and activation.get("stage") == "enable" and activation.get("phase") == "push"
+              and activation.get("base") == G4_ACCOUNT_HTTP_BASE["commit"]
+              and activation.get("commit") == q["base_commit"]
+              and activation.get("candidate_tree") == q["base_tree"]
+              and activation.get("control_activation_accepted") is True
+              and activation.get("same_attempt_remote_readback_verified") is True
+              and activation.get("protected_refs_unchanged") is True
+              and activation.get("whole_inverse_verified_same_attempt") is True
+              and activation.get("published_ref") == G4_STAGE1_INTERACTIVE_BACKEND_REF,
+              "bounded_g4_account_http_activation_acceptance")
+        headers = trusted_git.run_git(target, "cat-file", "commit", q["base_commit"]).split("\n\n", 1)[0].splitlines()
+        _need([h for h in headers if h.startswith("parent ")] == ["parent " + G4_ACCOUNT_HTTP_BASE["commit"]]
+              and [h for h in headers if h.startswith("tree ")] == ["tree " + q["base_tree"]],
+              "bounded_g4_account_http_activation_parent")
+    sources = _digest_map(q["source_sha256"], SOURCE_PATHS | CONTROLLER_PATHS,
+                          "bounded_g4_account_http_sources")
+    inputs = CONFIGURATION_PATHS | {STATE, GATES, OVERLAY, AGENTS,
+        G4_STAGE1_INTERACTIVE_SCOPE, G4_STAGE1_SUCCESSOR_SCOPE,
+        G4_STAGE1_SUCCESSOR_TEST, G4_CI_WORKFLOW} | SOURCE_PATHS | CONTROLLER_PATHS
+    pins = _digest_map(q["payload_sha256"], inputs, "bounded_g4_account_http_payload_paths")
+    payloads = {p:read(target / p, d) for p,d in sorted(pins.items())}
+    scope = _json(payloads[G4_STAGE1_SUCCESSOR_SCOPE])
+    validate_g4_account_http_scope(scope)
+    _need(scope["source_sha256"] == sources
+          and scope["product_vector"] == q["product_vector"]
+          and scope["mapping_review"] == q["mapping_review"]
+          and payloads[G4_STAGE1_SUCCESSOR_SCOPE] == _canonical(scope) + b"\n"
+          and all(_sha(payloads[p]) == d for p,d in scope["control_sha256"].items()),
+          "bounded_g4_account_http_scope_sources")
+    for p,d in sources.items():
+        candidate = read(source / p, d)
+        if q["stage"] == "enable" and p in G4_ACCOUNT_HTTP_CONTROL:
+            _need(candidate == payloads[p], "bounded_g4_account_http_control_candidate")
+        else:
+            _need(candidate == trusted_git.run_git_bytes(target, "cat-file", "blob", q["base_commit"] + ":" + p),
+                  "bounded_g4_account_http_installed_source")
+    for p,pair in q["repair_sha256"].items():
+        _keys(pair, {"before_sha256", "after_sha256"}, "bounded_g4_account_http_change_pair")
+        previous = _sha(trusted_git.run_git_bytes(target, "cat-file", "blob", q["base_commit"] + ":" + p))
+        _need(previous == G4_ACCOUNT_HTTP_PREIMAGES[p]
+              and pair == {"before_sha256":previous, "after_sha256":pins[p]}
+              and previous != pins[p], "bounded_g4_account_http_change_preimage")
+    for p in inputs - paths:
+        _need(trusted_git.run_git_bytes(target, "cat-file", "blob", q["base_commit"] + ":" + p) == payloads[p],
+              "bounded_g4_account_http_unowned_change")
+    review = _g4_account_http_subject_review(read, q["source_review"], evidence_root,
+                                     g4_account_http_review_subject(q), q["stage"], q["phase"])
+    attested = inputs - paths if q["phase"] == "development" else inputs
+    observation = trusted_git.attest_target_index(target, attested_paths=tuple(sorted(attested)),
+        expected_head=q["expected_head"], expected_index_tree=q["expected_index_tree"], scratch_parent=scratch)
+    if q["phase"] == "development":
+        _need(q["expected_head"] == q["base_commit"]
+              and q["expected_index_tree"] in {q["base_tree"],q["candidate_tree"]},
+              "bounded_g4_account_http_development_binding")
+    else:
+        headers = trusted_git.run_git(target, "cat-file", "commit", q["expected_head"]).split("\n\n",1)[0].splitlines()
+        _need([h for h in headers if h.startswith("parent ")] == ["parent " + q["base_commit"]]
+              and [h for h in headers if h.startswith("tree ")] == ["tree " + q["candidate_tree"]]
+              and q["expected_index_tree"] == q["candidate_tree"],
+              "bounded_g4_account_http_committed_binding")
+    for p,snapshot in snapshots.items():
+        _need(trusted_git._read_regular_snapshot(p, maximum_bytes=2*1024*1024) == snapshot,
+              "bounded_g4_account_http_snapshot_drift")
+    before = {p:trusted_git.run_git_bytes(target,"cat-file","blob",G4_ACCOUNT_HTTP_BASE["commit"]+":"+p)
+              for p in (STATE,GATES,OVERLAY,AGENTS)}
+    _need(all(payloads[p] == before[p] for p in (STATE,GATES,OVERLAY,AGENTS)),
+          "bounded_g4_account_http_state_unchanged")
+    return BoundedG1BInputs(q,before,payloads,
+        {"scope":scope,"vector":vector,"mapping":mapping,"publication":publication,"review":review},observation)
+
+
+def _validate_g4_account_http_loaded_policy(inputs):
+    validate_g4_account_http_scope(inputs.evidence["scope"])
+    try:
+        configuration = raisa_policy.validate_recovery_configuration(
+            documents={Path(p).name:inputs.payloads[p] for p in CONFIGURATION_PATHS},
+            expected_sha256={Path(p).name:inputs.binding["payload_sha256"][p] for p in CONFIGURATION_PATHS},
+            agents_text=inputs.payloads[AGENTS].decode("utf-8"),state=_json(inputs.payloads[STATE]))
+    except (raisa_policy.RaisaPolicyError, configuration_core.ConfigurationError) as error:
+        raise BoundedG1BError(error.reason_code) from error
+    paths = G4_ACCOUNT_HTTP_CONTROL if inputs.binding["stage"] == "enable" else frozenset()
+    return {p:inputs.payloads[p] for p in paths},configuration
+
+
