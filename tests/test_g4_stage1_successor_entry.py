@@ -4187,7 +4187,8 @@ def test_account_http_source_scope_dispatch_and_prior_families(monkeypatch):
     scope = _account_http_scope()
     bounded_g1b.validate_g4_account_http_scope(scope)
     assert scope["allowed_paths"] == [] and scope["product_sha256"] == {}
-    for key, value in (("runtime_binding_required", False),
+    for key, value in (("schema_version", "ariadne.g4_stage1_successor_entry_scope.v17"),
+                       ("runtime_binding_required", False),
                        ("admission_grants_runtime_authority", True), ("voice_activation", True),
                        ("allowed_paths", ["app/routers/auth.py"]),
                        ("allowed_effects", scope["allowed_effects"] + ["product_behavior_change"]),
@@ -4211,6 +4212,11 @@ def test_account_http_source_scope_dispatch_and_prior_families(monkeypatch):
                         dict(q, stage="apply"), dict(q, operation_kind="implement_g4_stage1_successor")):
             with pytest.raises(bounded_g1b.BoundedG1BError):
                 bounded_g1b.operation_paths(q["operation_kind"], changed)
+        old = dict(q, schema_version="ariadne.g4_stage1_account_http_external_source_operation_binding.v1")
+        assert not bounded_g1b._is_g4_account_http_binding(old)
+        with pytest.raises(bounded_g1b.BoundedG1BError) as err:
+            bounded_g1b._g4_account_http_paths(q["operation_kind"], old)
+        assert err.value.reason_code == "bounded_g4_account_http_binding_kind"
     q = _account_http_q("admit")
     assert bounded_g1b.operation_effects(q["operation_kind"]) == {"repository_read"}
     sentinel = ({}, None)
@@ -4228,11 +4234,14 @@ def test_account_http_source_scope_dispatch_and_prior_families(monkeypatch):
 
 
 @pytest.mark.parametrize("mode", ["valid", "vector_path", "vector_hash", "row_path", "row_hash",
-    "row_missing", "duplicate", "short", "review", "review_subject", "publication", "publication_source"])
+    "row_missing", "duplicate", "short", "review", "review_subject", "publication", "publication_source",
+    "old_vector", "prior_review", "reviewer", "authorship", "publication_schema", "publication_base",
+    "publication_tree", "publication_result", "publication_ref", "publication_readback", "publication_inverse"])
 def test_account_http_external_subject_and_accepted_publication_are_exact(mode):
     # Only these literal ordinary sources are read; provenance backend is not read.
     allowed = {bounded_g1b.G4_ACCOUNT_HTTP_VECTOR, bounded_g1b.G4_ACCOUNT_HTTP_PREPARATION_REVIEW,
-               bounded_g1b.G4_ACCOUNT_HTTP_FOCUSED_REVIEW, bounded_g1b.G4_ACCOUNT_HTTP_CURRENT_PUBLICATION}
+               bounded_g1b.G4_ACCOUNT_HTTP_FOCUSED_REVIEW, bounded_g1b.G4_ACCOUNT_HTTP_CURRENT_PUBLICATION,
+               bounded_g1b.G4_ACCOUNT_HTTP_CURRENT_ACTIVATION}
     allowed |= {Path(row["path"]) for row in bounded_g1b.G4_ACCOUNT_HTTP_EXTERNAL_VECTOR["rows"]}
     q = _account_http_q()
     q.update(product_vector={"path": bounded_g1b.G4_ACCOUNT_HTTP_VECTOR.as_posix(), "sha256": bounded_g1b.G4_ACCOUNT_HTTP_VECTOR_SHA},
@@ -4246,31 +4255,55 @@ def test_account_http_external_subject_and_accepted_publication_are_exact(mode):
         if path == bounded_g1b.G4_ACCOUNT_HTTP_VECTOR and mode in {"row_path", "row_hash", "row_missing", "duplicate"}:
             value = json.loads(raw)
             if mode == "row_path": value["rows"][0]["path"] = "C:/unowned.py"
-            if mode == "row_hash": value["rows"][0]["sha256"] = "0" * 64
+            if mode == "row_hash": value["rows"][1]["sha256"] = "9ec0e20556cb9eb4b930e8c40abac85648a65539a72cb2cc7d57eeccec44cfab"
             if mode == "row_missing": value["rows"].pop()
             if mode == "duplicate": value["rows"][1] = value["rows"][0]
             return json.dumps(value).encode()
         if mode == "short" and path == Path(bounded_g1b.G4_ACCOUNT_HTTP_EXTERNAL_VECTOR["rows"][0]["path"]):
             return raw[:-1]
-        if path == bounded_g1b.G4_ACCOUNT_HTTP_FOCUSED_REVIEW and mode in {"review", "review_subject"}:
+        if path == bounded_g1b.G4_ACCOUNT_HTTP_FOCUSED_REVIEW and mode in {
+                "review", "review_subject", "prior_review", "reviewer", "authorship"}:
             value = json.loads(raw)
-            value["independent" if mode == "review" else "fixture_sha256"] = False if mode == "review" else "0" * 64
+            key, changed = {
+                "review": ("independent", False), "review_subject": ("fixture_sha256", "0" * 64),
+                "prior_review": ("prior_review_sha256", "0" * 64),
+                "reviewer": ("reviewer_agent", "/root/unreviewed"),
+                "authorship": ("implementation_authorship", True)}[mode]
+            value[key] = changed
             return json.dumps(value).encode()
-        if path == bounded_g1b.G4_ACCOUNT_HTTP_CURRENT_PUBLICATION and mode in {"publication", "publication_source"}:
+        if path == bounded_g1b.G4_ACCOUNT_HTTP_CURRENT_PUBLICATION and mode in {
+                "publication", "publication_source", "publication_schema", "publication_base", "publication_tree"}:
             value = json.loads(raw)
-            if mode == "publication": value["commit"] = "0" * 40
-            else: value["source_identity"]["files"][bounded_g1b.G4_AUDIT_CODE] = "0" * 64
+            if mode == "publication_source":
+                value["source_identity"]["files"][bounded_g1b.G4_AUDIT_CODE] = "0" * 64
+            else:
+                key, changed = {"publication": ("commit", "0" * 40),
+                    "publication_schema": ("schema", "emr4.g4_local_mock_invitation_apply_publication_effect_review.v1"),
+                    "publication_base": ("base", "0" * 40),
+                    "publication_tree": ("candidate_tree", "0" * 40)}[mode]
+                value[key] = changed
+            return json.dumps(value).encode()
+        if path == bounded_g1b.G4_ACCOUNT_HTTP_CURRENT_ACTIVATION and mode in {
+                "publication_result", "publication_ref", "publication_readback", "publication_inverse"}:
+            value = json.loads(raw)
+            if mode == "publication_result": value["result"]["sha256"] = "0" * 64
+            if mode == "publication_ref": value["published_ref"] = "refs/heads/master"
+            if mode == "publication_readback": value["same_attempt_remote_readback_verified"] = False
+            if mode == "publication_inverse": value["whole_inverse_verified_same_attempt"] = False
             return json.dumps(value).encode()
         return raw
     if mode == "vector_path": q["product_vector"]["path"] = "C:/unowned.json"
     if mode == "vector_hash": q["product_vector"]["sha256"] = "0" * 64
+    if mode == "old_vector": q["product_vector"] = {
+        "path": bounded_g1b.G4_ACCOUNT_HTTP_EXTERNAL_ROOT.as_posix() + "/admission-preparation/source-only-successor-v1/external-source-vector-v1.json",
+        "sha256": "c552cc58bba1d2d7fa728ff8ee6121d6c3f877a939625687dd3fbbb7d1a4dca3"}
     if mode == "valid":
         vector, reviews = bounded_g1b._g4_account_http_external_inputs(read, q)
         assert len(vector["rows"]) == 3 and set(reviews) == {"helper", "focused"}
         assert bounded_g1b._g4_account_http_current_publication(read)["commit"] == bounded_g1b.G4_ACCOUNT_HTTP_BASE["commit"]
         assert set(calls) == allowed
     else:
-        reason = ("bounded_g4_account_http_external_pins" if mode.startswith("vector_") else
+        reason = ("bounded_g4_account_http_external_pins" if mode.startswith("vector_") or mode == "old_vector" else
                   "bounded_g4_account_http_external_vector" if mode in {"row_path", "row_hash", "row_missing", "duplicate"} else
                   "bounded_g4_account_http_external_source" if mode == "short" else
                   "bounded_g4_account_http_current_publication" if mode.startswith("publication") else
@@ -4402,6 +4435,7 @@ def _account_http_loader_fixture(monkeypatch,stage="enable",phase="development")
     ("enable", "development", "payload_extra", "bounded_g4_account_http_payload_paths"),
     ("enable", "development", "subject", "bounded_g4_account_http_independent_subject"),
     ("admit", "development", "activation", "bounded_g4_account_http_activation_acceptance"),
+    ("admit", "development", "old_activation", "bounded_g4_account_http_activation_acceptance"),
     ("admit", "development", "parent", "bounded_g4_account_http_activation_parent"),
     ("admit", "development", "delta", "bounded_g4_account_http_admit_no_delta"),
     ("admit", "pre-push", "valid", "bounded_g4_account_http_admit_no_delta"),
@@ -4419,10 +4453,12 @@ def test_account_http_loader_retains_activation_source_phase_and_index_checks(mo
             raw = git(target, *args)
             return raw.replace("parent " + bounded_g1b.G4_ACCOUNT_HTTP_BASE["commit"], "parent " + "0" * 40)
         monkeypatch.setattr(bounded_g1b.trusted_git, "run_git", wrong_parent)
-    if mode in {"subject", "activation"}:
+    if mode in {"subject", "activation", "old_activation"}:
         # Preserve the real loader and mutate a single reviewed acceptance field.
         def changed_read(path, digest):
             raw = read(path, digest)
+            if mode == "old_activation" and path.name == "independent-enable-push-effect-review-v1.json":
+                return bounded_g1b.G4_ACCOUNT_HTTP_CURRENT_ACTIVATION.read_bytes()
             if path.name == ("independent-" + stage + "-" + phase + "-subject-review-v1.json") and mode == "subject":
                 value = json.loads(raw); value["subject_sha256"] = "0" * 64
                 return json.dumps(value).encode()

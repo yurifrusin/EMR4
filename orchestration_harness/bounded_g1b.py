@@ -15372,27 +15372,29 @@ def _g4_invitation_fixture_source(read):
 
 
 # Exact Account HTTP factory external source-only admission. No native execution.
-G4_ACCOUNT_HTTP_SCHEMA = "ariadne.g4_stage1_account_http_external_source_operation_binding.v1"
-G4_ACCOUNT_HTTP_SCOPE_SCHEMA = "ariadne.g4_stage1_successor_entry_scope.v17"
+G4_ACCOUNT_HTTP_SCHEMA = "ariadne.g4_stage1_account_http_external_source_operation_binding.v2"
+G4_ACCOUNT_HTTP_SCOPE_SCHEMA = "ariadne.g4_stage1_successor_entry_scope.v18"
 G4_ACCOUNT_HTTP_ADMIT_KIND = "admit_g4_stage1_account_http_external_source"
-G4_ACCOUNT_HTTP_BASE = {"commit": "aded011fcd605f83b9b1b8362b8f90c7d6d4102a",
-                        "tree": "5f07d731fe2d8a6e055c29bf778d76c2c9f9d0f4"}
+G4_ACCOUNT_HTTP_BASE = {"commit": "becc78d067a520c724eb5a5348d4a90fa07d18b8",
+                        "tree": "1dc3d78a4c3d17716ce48662c700d2c97bd4232a"}
 G4_ACCOUNT_HTTP_CONTROL = frozenset({G4_AUDIT_CODE, G4_STAGE1_SUCCESSOR_SCOPE,
                                     G4_STAGE1_SUCCESSOR_TEST})
 G4_ACCOUNT_HTTP_PREIMAGES = {
-    G4_AUDIT_CODE: "4f1ac96610a60183940fdf07d84bb31abbf8a1cd2d8503bb9a003db3c4ad2367",
-    G4_STAGE1_SUCCESSOR_SCOPE: "f96ed3bec7613b214fd6e7ec6293afb6db79055aa3425c51d5a25c2f6d77e033",
-    G4_STAGE1_SUCCESSOR_TEST: "1845ca1954ef7786d3690ff91cd3d20edc181f3012b3576f1b00d48cd8c9bd4d"}
-G4_ACCOUNT_HTTP_ROOT = G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT / "account-http-factory-external-source-successor-v1"
+    G4_AUDIT_CODE: "549bef9e543428e44f0ae74be187b91cca3c423b75f97ca48d4427955ce511b4",
+    G4_STAGE1_SUCCESSOR_SCOPE: "f51bf005c81151cdce7c82e4518c8babe7de8e6bea74c01301677aa47f495ce6",
+    G4_STAGE1_SUCCESSOR_TEST: "578eac7e08ff16ae056fd4ae60b593adebdce49bc18b1c18052684061a10de6b"}
+G4_ACCOUNT_HTTP_ROOT = G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT / "account-http-factory-corrected-test-external-source-successor-v1"
 G4_ACCOUNT_HTTP_EXTERNAL_ROOT = Path("C:/Users/there/EMR4-tools/local-mock-owner-staff-login-source-preparation-v1/account-http-factory-candidate-v2")
-G4_ACCOUNT_HTTP_VECTOR = G4_ACCOUNT_HTTP_EXTERNAL_ROOT / "admission-preparation/source-only-successor-v1/external-source-vector-v1.json"
-G4_ACCOUNT_HTTP_VECTOR_SHA = "c552cc58bba1d2d7fa728ff8ee6121d6c3f877a939625687dd3fbbb7d1a4dca3"
+G4_ACCOUNT_HTTP_VECTOR = Path("C:/Users/there/EMR4-tools/local-mock-owner-staff-login-source-preparation-v1/account-http-factory-candidate-v2/admission-preparation/source-only-successor-v1/control-candidate-v1/corrected-test-control-successor-v1/external-source-vector-v2.json")
+G4_ACCOUNT_HTTP_VECTOR_SHA = "a558337e74a02880b5201ec29ece96365b1aaad5cf3e85da1a6cac21e0f5a7ed"
 G4_ACCOUNT_HTTP_PREPARATION_REVIEW = G4_ACCOUNT_HTTP_EXTERNAL_ROOT / "independent-account-http-factory-source-review-v2.json"
 G4_ACCOUNT_HTTP_PREPARATION_REVIEW_SHA = "21a6a182ce1bf90bbc23622d9f9fa508e0692986e48ae28e489c20827a32d65e"
-G4_ACCOUNT_HTTP_FOCUSED_REVIEW = G4_ACCOUNT_HTTP_EXTERNAL_ROOT / "admission-preparation/focused-verification-v2/independent-focused-http-source-review-v2.json"
-G4_ACCOUNT_HTTP_FOCUSED_REVIEW_SHA = "f39dcaa416ecc70edd684c557cb828b052de91c522033042da2d64cdf15b993a"
-G4_ACCOUNT_HTTP_CURRENT_PUBLICATION = Path("C:/Users/there/EMR4-tools/local-mock-invitation-apply-publication-preparation-v1/independent-apply-push-effect-review-v1.json")
-G4_ACCOUNT_HTTP_CURRENT_PUBLICATION_SHA = "2d701ca275245acccd836785c193a2235b0d47867dc1996e67257f906bf24adc"
+G4_ACCOUNT_HTTP_FOCUSED_REVIEW = G4_ACCOUNT_HTTP_EXTERNAL_ROOT / "admission-preparation/focused-verification-v3/independent-focused-http-source-review-v3.json"
+G4_ACCOUNT_HTTP_FOCUSED_REVIEW_SHA = "643cca0195161f898391e597dd2a47fb2956e75316fd3311083ca7043d4875e6"
+G4_ACCOUNT_HTTP_CURRENT_PUBLICATION = Path("C:/Users/there/EMR4-tools/local-mock-owner-staff-login-source-preparation-v1/account-http-factory-candidate-v2/admission-preparation/source-only-successor-v1/control-candidate-v1/publication-preparation-v1/independent-enable-push-effect-review-v2.json")
+G4_ACCOUNT_HTTP_CURRENT_PUBLICATION_SHA = "6e733b66d30b4223a7d4339fe32d2938539bf37e55b3128f787ba2b770414f0d"
+G4_ACCOUNT_HTTP_CURRENT_ACTIVATION = Path("C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/demo-led-stage1-20261012-v2/account-http-factory-external-source-successor-v1/entry-admission-v1/independent-enable-push-effect-review-v1.json")
+G4_ACCOUNT_HTTP_CURRENT_ACTIVATION_SHA = "2d1449da1d7a5f3ec9de4a5b89286cad6f4ce376fa5c12cd20f2d913c984e9bc"
 G4_ACCOUNT_HTTP_BINDING_KEYS = G4_BUREAU_BINDING_KEYS
 G4_ACCOUNT_HTTP_SCOPE_KEYS = G4_BUREAU_SCOPE_KEYS
 G4_ACCOUNT_HTTP_LIMITS = (
@@ -15403,7 +15405,7 @@ G4_ACCOUNT_HTTP_LIMITS = (
     "no provider, real data, protected evidence, public exposure, deployment or protected refs")
 OPERATION_PATHS[G4_ACCOUNT_HTTP_ADMIT_KIND] = frozenset()
 
-G4_ACCOUNT_HTTP_EXTERNAL_VECTOR = json.loads('''{"schema":"emr4.account_http_factory_external_source_vector.v1","status":"FROZEN_REVIEWED_SOURCE_ONLY","rows":[{"path":"C:/Users/there/EMR4-tools/local-mock-owner-staff-login-source-preparation-v1/account-http-factory-candidate-v2/after/stage1_account_http_adapter.py","bytes":4032,"sha256":"34e0dae2d0b8115247003f2a09dbae04b291cb2af5d101754ea5419e13efec20"},{"path":"C:/Users/there/EMR4-tools/local-mock-owner-staff-login-source-preparation-v1/account-http-factory-candidate-v2/admission-preparation/focused-verification-v2/test_factory_http.py","bytes":5006,"sha256":"9ec0e20556cb9eb4b930e8c40abac85648a65539a72cb2cc7d57eeccec44cfab"},{"path":"C:/Users/there/EMR4-tools/local-mock-owner-staff-login-source-preparation-v1/account-http-factory-candidate-v2/admission-preparation/focused-verification-v2/factory_http_fixture.py","bytes":4571,"sha256":"c3580a5a539c999daa93a55dfc9ebe20906025b6cd3d24c10a35b024a47d4dfb"}],"reviews":[{"path":"C:/Users/there/EMR4-tools/local-mock-owner-staff-login-source-preparation-v1/account-http-factory-candidate-v2/independent-account-http-factory-source-review-v2.json","sha256":"21a6a182ce1bf90bbc23622d9f9fa508e0692986e48ae28e489c20827a32d65e"},{"path":"C:/Users/there/EMR4-tools/local-mock-owner-staff-login-source-preparation-v1/account-http-factory-candidate-v2/admission-preparation/focused-verification-v2/independent-focused-http-source-review-v2.json","sha256":"f39dcaa416ecc70edd684c557cb828b052de91c522033042da2d64cdf15b993a"}],"ordinary_provenance":{"backend_binding":"C:/Users/there/EMR4-tools/selected-bureau-account11-text-ui-preparation-v1/bindings/attempt-16/launch-binding.json","sha256":"8ef684a14460816be7e7095441f800ac5bb6de85c56a6be46d4a3dbf40791d78","qualification":"Existing 154 ordinary backend rows as provenance; not part of this three-file subject or a closed HTTP import set."},"execution_authorized":false,"qualification":"No package/import/executable/DB/guard/cleanup runtime qualification; those remain separate. No admission or test executed."}''')
+G4_ACCOUNT_HTTP_EXTERNAL_VECTOR = json.loads('''{"schema":"emr4.account_http_factory_external_source_vector.v2","status":"FROZEN_REVIEWED_SOURCE_ONLY","rows":[{"path":"C:/Users/there/EMR4-tools/local-mock-owner-staff-login-source-preparation-v1/account-http-factory-candidate-v2/after/stage1_account_http_adapter.py","bytes":4032,"sha256":"34e0dae2d0b8115247003f2a09dbae04b291cb2af5d101754ea5419e13efec20"},{"path":"C:/Users/there/EMR4-tools/local-mock-owner-staff-login-source-preparation-v1/account-http-factory-candidate-v2/admission-preparation/focused-verification-v3/test_factory_http.py","bytes":5283,"sha256":"ee1b4b65ecab93ab8c1f1bd0faad59fcad850c810e977b1ffbceeb3ce176b4cc"},{"path":"C:/Users/there/EMR4-tools/local-mock-owner-staff-login-source-preparation-v1/account-http-factory-candidate-v2/admission-preparation/focused-verification-v2/factory_http_fixture.py","bytes":4571,"sha256":"c3580a5a539c999daa93a55dfc9ebe20906025b6cd3d24c10a35b024a47d4dfb"}],"reviews":[{"path":"C:/Users/there/EMR4-tools/local-mock-owner-staff-login-source-preparation-v1/account-http-factory-candidate-v2/independent-account-http-factory-source-review-v2.json","sha256":"21a6a182ce1bf90bbc23622d9f9fa508e0692986e48ae28e489c20827a32d65e"},{"path":"C:/Users/there/EMR4-tools/local-mock-owner-staff-login-source-preparation-v1/account-http-factory-candidate-v2/admission-preparation/focused-verification-v3/independent-focused-http-source-review-v3.json","sha256":"643cca0195161f898391e597dd2a47fb2956e75316fd3311083ca7043d4875e6"}],"ordinary_provenance":{"backend_binding":"C:/Users/there/EMR4-tools/selected-bureau-account11-text-ui-preparation-v1/bindings/attempt-16/launch-binding.json","sha256":"8ef684a14460816be7e7095441f800ac5bb6de85c56a6be46d4a3dbf40791d78","qualification":"Existing 154 ordinary backend rows as provenance; not part of this three-file subject or a closed HTTP import set."},"execution_authorized":false,"qualification":"No package/import/executable/DB/guard/cleanup runtime qualification; those remain separate. No admission or test executed.","predecessor_vector":{"path":"C:/Users/there/EMR4-tools/local-mock-owner-staff-login-source-preparation-v1/account-http-factory-candidate-v2/admission-preparation/source-only-successor-v1/external-source-vector-v1.json","sha256":"c552cc58bba1d2d7fa728ff8ee6121d6c3f877a939625687dd3fbbb7d1a4dca3"}}''')
 
 
 def _is_g4_account_http_binding(binding):
@@ -15504,46 +15506,69 @@ def _g4_account_http_external_inputs(read, q):
               "bounded_g4_account_http_preparation_provenance")
     _need(mapping.get("candidate_sha256") == vector["rows"][0]["sha256"]
           and focused.get("test_sha256") == vector["rows"][1]["sha256"]
-          and focused.get("fixture_sha256") == vector["rows"][2]["sha256"],
+          and focused.get("fixture_sha256") == vector["rows"][2]["sha256"]
+          and focused.get("prior_review_sha256") == "f39dcaa416ecc70edd684c557cb828b052de91c522033042da2d64cdf15b993a",
           "bounded_g4_account_http_preparation_provenance")
     return vector, {"helper": mapping, "focused": focused}
 
 
 def _g4_account_http_current_publication(read):
+    # Reuse the accepted Account publication; these are not fresh effect observations.
     review = _json(read(G4_ACCOUNT_HTTP_CURRENT_PUBLICATION,
                          G4_ACCOUNT_HTTP_CURRENT_PUBLICATION_SHA))
+    activation = _json(read(G4_ACCOUNT_HTTP_CURRENT_ACTIVATION,
+                             G4_ACCOUNT_HTTP_CURRENT_ACTIVATION_SHA))
     protected = "2e34bdad732fdab32fbf778280b3d3c70d66d602"
     ref = G4_STAGE1_INTERACTIVE_BACKEND_REF
-    _need(review.get("schema") == "emr4.g4_local_mock_invitation_apply_publication_effect_review.v1"
-          and review.get("status") == "PASS"
-          and review.get("verdict") == "PASS_G4_LOCAL_MOCK_INVITATION_APPLY_PUSH_EFFECT"
-          and review.get("reviewer_agent") == "/root/account_apply_phase_review_terra"
+    parent = "aded011fcd605f83b9b1b8362b8f90c7d6d4102a"
+    parent_tree = "5f07d731fe2d8a6e055c29bf778d76c2c9f9d0f4"
+    result = {"path": "C:/Users/there/EMR4-tools/g4-account-http-external-enable01-publication/phase-push02/result.json",
+              "sha256": "11162fcd9d763110e6d903695ee52cc2ea4854a42eb7131e5e0cdad8fc567ef2"}
+    _need(review.get("schema") == "emr4.g4_account_http_external_enable_publication_effect_review.v1"
+          and review.get("verdict") == "PASS_G4_ACCOUNT_HTTP_EXTERNAL_ENABLE_PUSH_EFFECT"
+          and review.get("reviewer_agent") == "/root/compass_observer_v2_independent_review"
           and review.get("independent") is True
           and review.get("implementation_authorship") is False
           and review.get("blocking_findings") == []
-          and review.get("source_publication_accepted") is True
-          and review.get("product_runtime_accepted") is False
-          and review.get("stage") == "apply" and review.get("phase") == "push"
+          and review.get("control_activation_accepted") is True
+          and review.get("stage") == "enable" and review.get("phase") == "push"
+          and review.get("operation_id") == "g4-account-http-external-enable01"
+          and review.get("attempt_id") == "g4-account-http-external-enable01-push02"
           and review.get("commit") == G4_ACCOUNT_HTTP_BASE["commit"]
           and review.get("candidate_tree") == G4_ACCOUNT_HTTP_BASE["tree"]
-          and review.get("base") == "013d3634ef1bd92cef66c5750266887b26b64124"
-          and review.get("base_tree") == "c68efdc33ee4164a7abaf4d40dc619cb4d01754a"
-          and review.get("result_sha256") == "fca7867ceb7d74489bc7fbf4636931c186f89daf9df02e6817dc0651e601d7a1"
-          and review.get("evidence", {}).get("result") == {
-              "path": "C:/Users/there/EMR4-tools/g4-local-mock-invitation-apply01-publication/phase-push/result.json",
-              "bytes": 10302, "sha256": "fca7867ceb7d74489bc7fbf4636931c186f89daf9df02e6817dc0651e601d7a1"}
+          and review.get("tree") == G4_ACCOUNT_HTTP_BASE["tree"]
+          and review.get("base") == parent and review.get("base_tree") == parent_tree
+          and review.get("result_sha256") == result["sha256"]
           and all(review.get("source_identity", {}).get("files", {}).get(p) == d
                   for p, d in G4_ACCOUNT_HTTP_PREIMAGES.items())
-          and review.get("published_ref") == ref
           and review.get("same_attempt_remote_readback_verified") is True
           and review.get("protected_refs_unchanged") is True
           and review.get("whole_inverse_verified_same_attempt") is True
-          and review.get("remote_before") == {ref: "013d3634ef1bd92cef66c5750266887b26b64124",
+          and review.get("remote_before") == {ref: parent,
               "refs/heads/master": protected, "refs/heads/handoff/current": protected}
           and review.get("remote_after") == {ref: G4_ACCOUNT_HTTP_BASE["commit"],
-              "refs/heads/master": protected, "refs/heads/handoff/current": protected},
+              "refs/heads/master": protected, "refs/heads/handoff/current": protected}
+          and activation.get("schema") == "emr4.g4_operation_review.v1"
+          and activation.get("status") == "PASS"
+          and activation.get("verdict") == "PASS_G4_STAGE1_ACCOUNT_HTTP_EXTERNAL_CONTROL_PUBLICATION_EFFECT"
+          and activation.get("independent") is True
+          and activation.get("implementation_authorship") is False
+          and all(activation.get(k) is True for k in (
+              "control_activation_accepted", "same_attempt_remote_readback_verified",
+              "protected_refs_unchanged", "whole_inverse_verified_same_attempt"))
+          and activation.get("published_ref") == ref
+          and activation.get("result") == result
+          and activation.get("effect_review") == {
+              "path": G4_ACCOUNT_HTTP_CURRENT_PUBLICATION.as_posix(),
+              "sha256": G4_ACCOUNT_HTTP_CURRENT_PUBLICATION_SHA}
+          and all(activation.get(k) == review.get(k) for k in (
+              "base", "commit", "candidate_tree", "stage", "phase", "reviewer_agent",
+              "independent", "implementation_authorship", "blocking_findings",
+              "control_activation_accepted", "same_attempt_remote_readback_verified",
+              "protected_refs_unchanged", "whole_inverse_verified_same_attempt")),
           "bounded_g4_account_http_current_publication")
     return review
+
 
 def _g4_account_http_subject_review(read, row, evidence_root, subject, stage, phase):
     _keys(row, {"path", "sha256"}, "bounded_g4_account_http_review_row")
@@ -15560,7 +15585,8 @@ def _g4_account_http_subject_review(read, row, evidence_root, subject, stage, ph
           and review.get("implementation_authorship") is False
           and review.get("blocking_findings") == []
           and type(review.get("reviewer_agent")) is str
-          and review["reviewer_agent"] not in {"", "/root", "/root/account_factory_controller_successor"}
+          and review["reviewer_agent"] not in {"", "/root", "/root/account_factory_controller_successor",
+              "/root/account_corrected_source_control_author"}
           and review.get("stage") == stage and review.get("phase") == phase,
           "bounded_g4_account_http_independent_subject")
     return review
@@ -15605,7 +15631,8 @@ def _load_g4_account_http_inputs(context, target, source, evidence_root, scratch
               and activation.get("status") == "PASS"
               and activation.get("verdict") == "PASS_G4_STAGE1_ACCOUNT_HTTP_EXTERNAL_CONTROL_PUBLICATION_EFFECT"
               and type(activation.get("reviewer_agent")) is str
-              and activation["reviewer_agent"] not in {"", "/root", "/root/account_factory_controller_successor"}
+              and activation["reviewer_agent"] not in {"", "/root", "/root/account_factory_controller_successor",
+              "/root/account_corrected_source_control_author"}
               and activation.get("independent") is True
               and activation.get("implementation_authorship") is False
               and activation.get("blocking_findings") == []
