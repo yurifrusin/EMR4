@@ -4187,7 +4187,7 @@ def test_account_http_source_scope_dispatch_and_prior_families(monkeypatch):
     scope = _account_http_scope()
     bounded_g1b.validate_g4_account_http_scope(scope)
     assert scope["allowed_paths"] == [] and scope["product_sha256"] == {}
-    for key, value in (("schema_version", "ariadne.g4_stage1_successor_entry_scope.v17"),
+    for key, value in (("schema_version", "ariadne.g4_stage1_successor_entry_scope.v18"),
                        ("runtime_binding_required", False),
                        ("admission_grants_runtime_authority", True), ("voice_activation", True),
                        ("allowed_paths", ["app/routers/auth.py"]),
@@ -4212,7 +4212,7 @@ def test_account_http_source_scope_dispatch_and_prior_families(monkeypatch):
                         dict(q, stage="apply"), dict(q, operation_kind="implement_g4_stage1_successor")):
             with pytest.raises(bounded_g1b.BoundedG1BError):
                 bounded_g1b.operation_paths(q["operation_kind"], changed)
-        old = dict(q, schema_version="ariadne.g4_stage1_account_http_external_source_operation_binding.v1")
+        old = dict(q, schema_version="ariadne.g4_stage1_account_http_external_source_operation_binding.v2")
         assert not bounded_g1b._is_g4_account_http_binding(old)
         with pytest.raises(bounded_g1b.BoundedG1BError) as err:
             bounded_g1b._g4_account_http_paths(q["operation_kind"], old)
@@ -4236,12 +4236,14 @@ def test_account_http_source_scope_dispatch_and_prior_families(monkeypatch):
 @pytest.mark.parametrize("mode", ["valid", "vector_path", "vector_hash", "row_path", "row_hash",
     "row_missing", "duplicate", "short", "review", "review_subject", "publication", "publication_source",
     "old_vector", "prior_review", "reviewer", "authorship", "publication_schema", "publication_base",
-    "publication_tree", "publication_result", "publication_ref", "publication_readback", "publication_inverse"])
+    "publication_tree", "publication_result", "publication_ref", "publication_readback", "publication_inverse",
+    "dependency_review", "dependency_subject", "dependency_author", "dependency_row",
+    "publication_not_accepted", "publication_activation_confusion"])
 def test_account_http_external_subject_and_accepted_publication_are_exact(mode):
     # Only these literal ordinary sources are read; provenance backend is not read.
     allowed = {bounded_g1b.G4_ACCOUNT_HTTP_VECTOR, bounded_g1b.G4_ACCOUNT_HTTP_PREPARATION_REVIEW,
                bounded_g1b.G4_ACCOUNT_HTTP_FOCUSED_REVIEW, bounded_g1b.G4_ACCOUNT_HTTP_CURRENT_PUBLICATION,
-               bounded_g1b.G4_ACCOUNT_HTTP_CURRENT_ACTIVATION}
+               bounded_g1b.G4_ACCOUNT_HTTP_CURRENT_ACTIVATION, bounded_g1b.G4_ACCOUNT_HTTP_DEPENDENCY_REVIEW}
     allowed |= {Path(row["path"]) for row in bounded_g1b.G4_ACCOUNT_HTTP_EXTERNAL_VECTOR["rows"]}
     q = _account_http_q()
     q.update(product_vector={"path": bounded_g1b.G4_ACCOUNT_HTTP_VECTOR.as_posix(), "sha256": bounded_g1b.G4_ACCOUNT_HTTP_VECTOR_SHA},
@@ -4252,11 +4254,12 @@ def test_account_http_external_subject_and_accepted_publication_are_exact(mode):
         calls.append(path)
         raw = path.read_bytes()
         assert hashlib.sha256(raw).hexdigest() == digest
-        if path == bounded_g1b.G4_ACCOUNT_HTTP_VECTOR and mode in {"row_path", "row_hash", "row_missing", "duplicate"}:
+        if path == bounded_g1b.G4_ACCOUNT_HTTP_VECTOR and mode in {"row_path", "row_hash", "row_missing", "duplicate", "dependency_row"}:
             value = json.loads(raw)
             if mode == "row_path": value["rows"][0]["path"] = "C:/unowned.py"
             if mode == "row_hash": value["rows"][1]["sha256"] = "9ec0e20556cb9eb4b930e8c40abac85648a65539a72cb2cc7d57eeccec44cfab"
             if mode == "row_missing": value["rows"].pop()
+            if mode == "dependency_row": value["rows"][3]["sha256"] = "0" * 64
             if mode == "duplicate": value["rows"][1] = value["rows"][0]
             return json.dumps(value).encode()
         if mode == "short" and path == Path(bounded_g1b.G4_ACCOUNT_HTTP_EXTERNAL_VECTOR["rows"][0]["path"]):
@@ -4271,8 +4274,16 @@ def test_account_http_external_subject_and_accepted_publication_are_exact(mode):
                 "authorship": ("implementation_authorship", True)}[mode]
             value[key] = changed
             return json.dumps(value).encode()
+        if path == bounded_g1b.G4_ACCOUNT_HTTP_DEPENDENCY_REVIEW and mode in {
+                "dependency_review", "dependency_subject", "dependency_author"}:
+            value = json.loads(raw)
+            if mode == "dependency_review": value["independent"] = False
+            if mode == "dependency_subject": value["product"]["sha256"] = "0" * 64
+            if mode == "dependency_author": value["implementation_authorship"] = True
+            return json.dumps(value).encode()
         if path == bounded_g1b.G4_ACCOUNT_HTTP_CURRENT_PUBLICATION and mode in {
-                "publication", "publication_source", "publication_schema", "publication_base", "publication_tree"}:
+                "publication", "publication_source", "publication_schema", "publication_base", "publication_tree",
+                "publication_not_accepted", "publication_activation_confusion"}:
             value = json.loads(raw)
             if mode == "publication_source":
                 value["source_identity"]["files"][bounded_g1b.G4_AUDIT_CODE] = "0" * 64
@@ -4280,7 +4291,9 @@ def test_account_http_external_subject_and_accepted_publication_are_exact(mode):
                 key, changed = {"publication": ("commit", "0" * 40),
                     "publication_schema": ("schema", "emr4.g4_local_mock_invitation_apply_publication_effect_review.v1"),
                     "publication_base": ("base", "0" * 40),
-                    "publication_tree": ("candidate_tree", "0" * 40)}[mode]
+                    "publication_tree": ("candidate_tree", "0" * 40),
+                    "publication_not_accepted": ("publication_accepted", False),
+                    "publication_activation_confusion": ("activation_accepted", True)}[mode]
                 value[key] = changed
             return json.dumps(value).encode()
         if path == bounded_g1b.G4_ACCOUNT_HTTP_CURRENT_ACTIVATION and mode in {
@@ -4295,18 +4308,19 @@ def test_account_http_external_subject_and_accepted_publication_are_exact(mode):
     if mode == "vector_path": q["product_vector"]["path"] = "C:/unowned.json"
     if mode == "vector_hash": q["product_vector"]["sha256"] = "0" * 64
     if mode == "old_vector": q["product_vector"] = {
-        "path": bounded_g1b.G4_ACCOUNT_HTTP_EXTERNAL_ROOT.as_posix() + "/admission-preparation/source-only-successor-v1/external-source-vector-v1.json",
-        "sha256": "c552cc58bba1d2d7fa728ff8ee6121d6c3f877a939625687dd3fbbb7d1a4dca3"}
+        "path": 'C:/Users/there/EMR4-tools/local-mock-owner-staff-login-source-preparation-v1/account-http-factory-candidate-v2/admission-preparation/source-only-successor-v1/control-candidate-v1/corrected-test-control-successor-v1/external-source-vector-v2.json',
+        "sha256": "a558337e74a02880b5201ec29ece96365b1aaad5cf3e85da1a6cac21e0f5a7ed"}
     if mode == "valid":
         vector, reviews = bounded_g1b._g4_account_http_external_inputs(read, q)
-        assert len(vector["rows"]) == 3 and set(reviews) == {"helper", "focused"}
+        assert len(vector["rows"]) == 4 and set(reviews) == {"helper", "focused", "dependency"}
         assert bounded_g1b._g4_account_http_current_publication(read)["commit"] == bounded_g1b.G4_ACCOUNT_HTTP_BASE["commit"]
         assert set(calls) == allowed
     else:
         reason = ("bounded_g4_account_http_external_pins" if mode.startswith("vector_") or mode == "old_vector" else
-                  "bounded_g4_account_http_external_vector" if mode in {"row_path", "row_hash", "row_missing", "duplicate"} else
+                  "bounded_g4_account_http_external_vector" if mode in {"row_path", "row_hash", "row_missing", "duplicate", "dependency_row"} else
                   "bounded_g4_account_http_external_source" if mode == "short" else
                   "bounded_g4_account_http_current_publication" if mode.startswith("publication") else
+                  "bounded_g4_account_http_dependency_provenance" if mode.startswith("dependency_") else
                   "bounded_g4_account_http_preparation_provenance")
         with pytest.raises(bounded_g1b.BoundedG1BError) as err:
             bounded_g1b._g4_account_http_external_inputs(read, q)
