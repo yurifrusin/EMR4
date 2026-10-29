@@ -3418,11 +3418,13 @@ def operation_effects(kind: str) -> frozenset[str]:
         return G2_COMPLETENESS_EFFECTS
     if kind == "repair_g2_ci_selection":
         return G2_CI_EFFECTS
-    return frozenset({"repository_read"}) if kind in {"assess_g1e", G4_HUMAN_ADMIT_KIND, G4_ACCOUNT_HTTP_ADMIT_KIND, G4_SEEDED_LOGIN_ADMIT_KIND} else EFFECTS
+    return frozenset({"repository_read"}) if kind in {"assess_g1e", G4_HUMAN_ADMIT_KIND, G4_ACCOUNT_HTTP_ADMIT_KIND, G4_SEEDED_LOGIN_ADMIT_KIND, G4_OWNER_BOOTSTRAP_ADMIT_KIND} else EFFECTS
 
 
 def operation_paths(kind: str, binding: dict | None = None) -> frozenset[str]:
     _need(type(kind) is str and kind in OPERATION_PATHS, "bounded_g1b_operation_kind")
+    if kind == G4_OWNER_BOOTSTRAP_ADMIT_KIND or _is_g4_owner_bootstrap_binding(binding):
+        return _g4_owner_bootstrap_paths(kind, binding)
     if kind == G4_SEEDED_LOGIN_ADMIT_KIND or _is_g4_seeded_login_binding(binding):
         return _g4_seeded_login_paths(kind, binding)
     if kind == G4_ACCOUNT_HTTP_ADMIT_KIND or _is_g4_account_http_binding(binding):
@@ -3488,6 +3490,10 @@ def operation_paths(kind: str, binding: dict | None = None) -> frozenset[str]:
 
 def _operation(kind: str, binding: dict | None = None) -> dict:
     paths = operation_paths(kind, binding)
+    if _is_g4_owner_bootstrap_binding(binding):
+        return {"paths": paths, "g4_owner_bootstrap_source": True,
+                "profile": raisa_policy.G4_STAGE1_SUCCESSOR_PROFILE,
+                "gate": "G4", "limits": G4_OWNER_BOOTSTRAP_LIMITS}
     if _is_g4_seeded_login_binding(binding):
         return {"paths": paths, "g4_seeded_login_source": True,
                 "profile": raisa_policy.G4_STAGE1_SUCCESSOR_PROFILE,
@@ -6433,6 +6439,9 @@ def load_bounded_g1b_inputs(context: BoundedG1BContext) -> BoundedG1BInputs:
         return snapshot[1]
 
     binding = _json(read(binding_path, context.expected_binding_sha256))
+    if binding.get("operation_kind") == G4_OWNER_BOOTSTRAP_ADMIT_KIND or _is_g4_owner_bootstrap_binding(binding):
+        return _load_g4_owner_bootstrap_inputs(
+            context, target, source, evidence_root, scratch, binding, read, snapshots)
     if binding.get("operation_kind") == G4_SEEDED_LOGIN_ADMIT_KIND or _is_g4_seeded_login_binding(binding):
         return _load_g4_seeded_login_inputs(
             context, target, source, evidence_root, scratch, binding, read, snapshots)
@@ -6662,6 +6671,8 @@ def load_bounded_g1b_inputs(context: BoundedG1BContext) -> BoundedG1BInputs:
 
 def _validate_loaded_policy(inputs: BoundedG1BInputs) -> tuple[dict[str, bytes], configuration_core.ValidatedConfiguration | None]:
     operation = _operation(inputs.binding["operation_kind"], inputs.binding)
+    if operation.get("g4_owner_bootstrap_source"):
+        return _validate_g4_owner_bootstrap_loaded_policy(inputs)
     if operation.get("g4_seeded_login_source"):
         return _validate_g4_seeded_login_loaded_policy(inputs)
     if operation.get("g4_account_http_external_source"):
@@ -6783,6 +6794,7 @@ def evaluate_bounded_g1b_operation(*, context: BoundedG1BContext | None, manifes
         _need(manifest["schema_version"] == REQUEST_VERSION, "bounded_g1b_manifest_version")
         inputs = load_bounded_g1b_inputs(context)
         q = inputs.binding
+        _g4_owner_bootstrap_require_entrypoint(q, entrypoint, phase)
         _g4_seeded_login_require_entrypoint(q, entrypoint, phase)
         _g4_account_http_require_entrypoint(q, entrypoint, phase)
         _g4_human_require_entrypoint(q, entrypoint, phase)
@@ -16104,4 +16116,334 @@ def _validate_g4_seeded_login_loaded_policy(inputs):
     except (raisa_policy.RaisaPolicyError, configuration_core.ConfigurationError) as error:
         raise BoundedG1BError(error.reason_code) from error
     paths = _g4_seeded_login_paths(inputs.binding["operation_kind"],inputs.binding)
+    return {p:inputs.payloads[p] for p in paths},configuration
+
+
+G4_OWNER_BOOTSTRAP_SCHEMA = "ariadne.g4_stage1_owner_bootstrap_operation_binding.v1"
+G4_OWNER_BOOTSTRAP_SCOPE_SCHEMA = "ariadne.g4_stage1_successor_entry_scope.v21"
+G4_OWNER_BOOTSTRAP_ADMIT_KIND = "admit_g4_stage1_owner_bootstrap_external_source"
+G4_OWNER_BOOTSTRAP_BASE = {"commit":"8abfac8273663ba8734d2cb6ee3c75ad8e7c88fe",
+                       "tree":"bfdb30afb7e6be4b3c748a31c8b01420bc064150"}
+G4_OWNER_BOOTSTRAP_CONTROL = G4_ACCOUNT_HTTP_CONTROL
+G4_OWNER_BOOTSTRAP_PREIMAGES = {
+    G4_AUDIT_CODE:"03a7d4097b842ab0f6cb647432b32877b4a17d6b844b45a744420550ba851fae",
+    G4_STAGE1_SUCCESSOR_SCOPE:"53c1824377865422fa7340fd1ab2fddc65d9ac47ab5c0e5889e4d213a2d48df9",
+    G4_STAGE1_SUCCESSOR_TEST:"5f76d887541964c019be2bd574c4b4fea01d950109866504bcf6924d7b15effc"}
+G4_OWNER_BOOTSTRAP_ROOT = G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT / "owner-bootstrap-successor-v1"
+G4_OWNER_BOOTSTRAP_EXTERNAL_ROOT = Path("C:/Users/there/EMR4-tools/owner-bootstrap-admission-successor-preparation-v1")
+G4_OWNER_BOOTSTRAP_VECTOR = G4_OWNER_BOOTSTRAP_EXTERNAL_ROOT / "source-vector.json"
+G4_OWNER_BOOTSTRAP_VECTOR_SHA = "7b516647543b134be3d6ac2dee50fbf25131e89d61badba8264af6eae736baa7"
+G4_OWNER_BOOTSTRAP_PREPARATION_REVIEW = G4_OWNER_BOOTSTRAP_EXTERNAL_ROOT / "independent-owner-bootstrap-join-source-review-v1.json"
+G4_OWNER_BOOTSTRAP_PREPARATION_REVIEW_SHA = "99778d6b38ce54e6d9f7068d8eadb38cf4a607dc7e2c5c541a4f5992dbc73d72"
+G4_OWNER_BOOTSTRAP_MAPS = G4_OWNER_BOOTSTRAP_EXTERNAL_ROOT / "source-maps.json"
+G4_OWNER_BOOTSTRAP_MAPS_SHA = "6c729d611c270a61a1d26e9ecd3a2d6fb68c5ca2f8fbe07fdef719a8c753cfd4"
+G4_OWNER_BOOTSTRAP_BINDING_KEYS = G4_BUREAU_BINDING_KEYS
+G4_OWNER_BOOTSTRAP_SCOPE_KEYS = G4_BUREAU_SCOPE_KEYS
+G4_OWNER_BOOTSTRAP_PRODUCT_SHA = {"stage1_account_http_adapter.py":"03a22a0ef86eda1303fc1c9d43e3e4e2e79036a33e364dd35d62d4f3526d6a45"}
+G4_OWNER_BOOTSTRAP_PRODUCT_BYTES = {"stage1_account_http_adapter.py":4564}
+G4_OWNER_BOOTSTRAP_BEFORE_SHA = {"stage1_account_http_adapter.py":"34e0dae2d0b8115247003f2a09dbae04b291cb2af5d101754ea5419e13efec20"}
+G4_OWNER_BOOTSTRAP_PRODUCT = frozenset(G4_OWNER_BOOTSTRAP_PRODUCT_SHA)
+# Only these two literal backend rows change namespace during materialization.
+G4_OWNER_BOOTSTRAP_PRODUCT_LOGICAL = {p: ("backend/"+p if p in {
+    "stage1_account_http_adapter.py","app/dependencies.py"} else p)
+    for p in G4_OWNER_BOOTSTRAP_PRODUCT}
+G4_OWNER_BOOTSTRAP_LIMITS = (
+    "exact fifteen joined external sources: execution9 and repository product6",
+    "enable exactly three controls; ADMIT zero repository delta and preflight only",
+    "APPLY exactly one pinned product path after separate control publication and subject review",
+    "SITE16 and BACKEND155 are separate reused import maps, not extra APPLY files",
+    "admission grants no runtime; separate finite app/database/browser/private binding required",
+    "no provider, real data, protected evidence, public exposure, deployment or protected refs")
+OPERATION_PATHS[G4_OWNER_BOOTSTRAP_ADMIT_KIND] = frozenset()
+
+
+def _is_g4_owner_bootstrap_binding(binding):
+    return type(binding) is dict and binding.get("schema_version") == G4_OWNER_BOOTSTRAP_SCHEMA
+
+
+def _g4_owner_bootstrap_paths(kind, binding):
+    _need(_is_g4_owner_bootstrap_binding(binding) and binding.get("operation_kind") == kind
+          and (binding.get("stage"),kind) in {
+              ("enable","enable_g4_stage1_successor"),
+              ("admit",G4_OWNER_BOOTSTRAP_ADMIT_KIND),
+              ("apply","implement_g4_stage1_successor")}
+          and type(binding.get("repair_sha256")) is dict,
+          "bounded_g4_owner_bootstrap_binding_kind")
+    paths = (G4_OWNER_BOOTSTRAP_CONTROL if binding["stage"] == "enable" else
+             G4_OWNER_BOOTSTRAP_PRODUCT if binding["stage"] == "apply" else frozenset())
+    _need(set(binding["repair_sha256"]) == paths, "bounded_g4_owner_bootstrap_changed_paths")
+    return paths
+
+
+def g4_owner_bootstrap_review_subject(q):
+    return _sha(_canonical({key:q[key] for key in (
+        "schema_version","operation_id","operation_kind","stage","phase",
+        "base_commit","base_tree","expected_head","expected_index_tree",
+        "candidate_tree","source_sha256","payload_sha256","repair_sha256",
+        "activation_acceptance","product_vector","mapping_review")}))
+
+
+def _g4_owner_bootstrap_require_entrypoint(q, entrypoint, phase):
+    if _is_g4_owner_bootstrap_binding(q) and q.get("stage") == "admit":
+        _need(q.get("operation_kind") == G4_OWNER_BOOTSTRAP_ADMIT_KIND
+              and entrypoint == "recovery_preflight" and phase == "development",
+              "bounded_g4_owner_bootstrap_admit_entrypoint")
+
+
+def _g4_owner_bootstrap_external_inputs(read, q):
+    _need(q["product_vector"] == {"path":G4_OWNER_BOOTSTRAP_VECTOR.as_posix(),"sha256":G4_OWNER_BOOTSTRAP_VECTOR_SHA}
+          and q["mapping_review"] == {"path":G4_OWNER_BOOTSTRAP_PREPARATION_REVIEW.as_posix(),
+                                     "sha256":G4_OWNER_BOOTSTRAP_PREPARATION_REVIEW_SHA},
+          "bounded_g4_owner_bootstrap_external_pins")
+    vector = _json(read(G4_OWNER_BOOTSTRAP_VECTOR,G4_OWNER_BOOTSTRAP_VECTOR_SHA))
+    rows = vector.get("files")
+    _need(vector.get("schema") == "emr4.seeded_login_coherent_integration_inert_source_vector.v1"
+          and vector.get("execution_performed") is False
+          and vector.get("product_modified") is False
+          and type(rows) is list and len(rows) == 15
+          and all(type(row) is dict and type(row.get("logical_path")) is str for row in rows)
+          and len({row["logical_path"] for row in rows}) == 15
+          and {row["logical_path"]:(row.get("namespace"),row.get("after")) for row in rows}
+              == G4_OWNER_BOOTSTRAP_EXTERNAL_ROWS,
+          "bounded_g4_owner_bootstrap_external_vector")
+    for row in rows:
+        after = row["after"]
+        _keys(after,{"path","bytes","sha256"},"bounded_g4_owner_bootstrap_external_row")
+        _need(type(after["bytes"]) is int and len(read(Path(after["path"]),after["sha256"])) == after["bytes"],
+              "bounded_g4_owner_bootstrap_external_source")
+    maps = _json(read(G4_OWNER_BOOTSTRAP_MAPS,G4_OWNER_BOOTSTRAP_MAPS_SHA))
+    _need(vector.get("source_maps") == {"path":G4_OWNER_BOOTSTRAP_MAPS.as_posix(),"bytes":57473,
+              "sha256":G4_OWNER_BOOTSTRAP_MAPS_SHA,"backend_count":155,"site_count":16,"execution_source_count":9}
+          and maps.get("schema") == "emr4.seeded_login_coherent_source_maps.v1"
+          and maps.get("backend_count") == 155 and maps.get("site_count") == 16
+          and type(maps.get("backend_rows")) is list and len(maps["backend_rows"]) == 155
+          and type(maps.get("site_rows")) is list and len(maps["site_rows"]) == 16
+          and len({r["relative_path"] for r in maps["backend_rows"]}) == 155
+          and len({r["relative_path"] for r in maps["site_rows"]}) == 16,
+          "bounded_g4_owner_bootstrap_source_maps")
+    for path,logical in G4_OWNER_BOOTSTRAP_PRODUCT_LOGICAL.items():
+        namespace,after = G4_OWNER_BOOTSTRAP_EXTERNAL_ROWS[logical]
+        selected = maps["backend_rows"] if namespace == "BACKEND" else maps["site_rows"]
+        _need(next((r for r in selected if r["relative_path"] == path),None) == {
+            "source_path":after["path"],"relative_path":path,"bytes":G4_OWNER_BOOTSTRAP_PRODUCT_BYTES[path],
+            "sha256":G4_OWNER_BOOTSTRAP_PRODUCT_SHA[path]}, "bounded_g4_owner_bootstrap_source_maps")
+    review = _json(read(G4_OWNER_BOOTSTRAP_PREPARATION_REVIEW,G4_OWNER_BOOTSTRAP_PREPARATION_REVIEW_SHA))
+    _need(review.get("schema") == "emr4.owner_bootstrap_coherent_integration_independent_source_review.v1"
+          and review.get("verdict") == "PASS_SOURCE_ONLY"
+          and review.get("independent_source_acceptance") is True
+          and review.get("execution_authorized") is False
+          and review.get("findings") == [] and review.get("blocking_findings") == []
+          and review.get("reviewer",{}).get("task") == "/root/owner_bootstrap_join_source_review_terra"
+          and review["reviewer"].get("implementation_authored") is False
+          and review.get("candidate_vector") == {"path":G4_OWNER_BOOTSTRAP_VECTOR.as_posix(),
+              "bytes":19821,"sha256":G4_OWNER_BOOTSTRAP_VECTOR_SHA}
+          and review.get("source_maps") == {"path":G4_OWNER_BOOTSTRAP_MAPS.as_posix(),"bytes":57473,
+              "sha256":G4_OWNER_BOOTSTRAP_MAPS_SHA,"site_count":16,"backend_count":155,"execution_source_count":9},
+          "bounded_g4_owner_bootstrap_independent_source")
+    return vector,review
+
+
+def validate_g4_owner_bootstrap_scope(scope):
+    _keys(scope,G4_OWNER_BOOTSTRAP_SCOPE_KEYS,"bounded_g4_owner_bootstrap_scope_schema")
+    _need(scope["schema_version"] == G4_OWNER_BOOTSTRAP_SCOPE_SCHEMA
+          and scope["selected_base"] == G4_OWNER_BOOTSTRAP_BASE
+          and _g4_audit_timestamp(scope["recorded_at"])
+          and scope["active_profile"] == raisa_policy.G4_STAGE1_SUCCESSOR_PROFILE
+          and scope["allowed_task_kind"] == "g4_stage1_local_successor"
+          and scope["allowed_paths"] == sorted(G4_OWNER_BOOTSTRAP_PRODUCT)
+          and scope["product_sha256"] == G4_OWNER_BOOTSTRAP_PRODUCT_SHA
+          and scope["allowed_effects"] == sorted(EFFECTS | {"product_behavior_change"})
+          and scope["runtime_binding_required"] is True
+          and scope["admission_grants_runtime_authority"] is False
+          and scope["voice_activation"] is False
+          and scope["excluded_effects"] == ["unreviewed_application_or_database_runtime",
+              "unreviewed_browser_or_microphone_runtime","unreviewed_voice_child_or_network_egress",
+              "provider_invocation","real_data_access","protected_ref_movement","deployment","public_listener"]
+          and scope["product_vector"] == {"path":G4_OWNER_BOOTSTRAP_VECTOR.as_posix(),"sha256":G4_OWNER_BOOTSTRAP_VECTOR_SHA}
+          and scope["mapping_review"] == {"path":G4_OWNER_BOOTSTRAP_PREPARATION_REVIEW.as_posix(),
+              "sha256":G4_OWNER_BOOTSTRAP_PREPARATION_REVIEW_SHA}
+          and scope["predecessor_scope"] == {"sha256":G4_OWNER_BOOTSTRAP_PREIMAGES[G4_STAGE1_SUCCESSOR_SCOPE]},
+          "bounded_g4_owner_bootstrap_scope_boundary")
+    sources = _digest_map(scope["source_sha256"],SOURCE_PATHS | CONTROLLER_PATHS,"bounded_g4_owner_bootstrap_sources")
+    control = _digest_map(scope["control_sha256"],G4_OWNER_BOOTSTRAP_CONTROL - {G4_STAGE1_SUCCESSOR_SCOPE},
+                          "bounded_g4_owner_bootstrap_control_sources")
+    _need(sources[G4_AUDIT_CODE] == control[G4_AUDIT_CODE],"bounded_g4_owner_bootstrap_source_vector")
+    return sources
+
+
+def _g4_owner_bootstrap_subject_review(read,row,evidence_root,subject,stage,phase):
+    _keys(row,{"path","sha256"},"bounded_g4_owner_bootstrap_review_row")
+    path = G4_OWNER_BOOTSTRAP_ROOT / "entry-admission-v1" / ("independent-"+stage+"-"+phase+"-subject-review-v1.json")
+    _need(Path(row["path"]) == path and path.is_relative_to(evidence_root),"bounded_g4_owner_bootstrap_review_path")
+    review = _json(read(path,row["sha256"]))
+    _need(review.get("schema") == "emr4.g4_operation_review.v1" and review.get("status") == "PASS"
+          and review.get("verdict") == "PASS_G4_STAGE1_OWNER_BOOTSTRAP_EXACT_ADMISSION_SUBJECT"
+          and review.get("subject_sha256") == subject
+          and review.get("independent") is True and review.get("implementation_authorship") is False
+          and review.get("blocking_findings") == []
+          and type(review.get("reviewer_agent")) is str
+          and review["reviewer_agent"] not in {"","/root","/root/owner_bootstrap_author"}
+          and review.get("stage") == stage and review.get("phase") == phase,
+          "bounded_g4_owner_bootstrap_independent_subject")
+    return review
+
+
+G4_OWNER_BOOTSTRAP_EXTERNAL_ROWS = {
+    'launch_text_ui_once_v1.py':('EXECUTION',{'path':'C:/Users/there/EMR4-tools/local-mock-owner-staff-login-source-preparation-v1/seeded-login-coherent-integration-candidate-v1/after/launch_text_ui_once_v1.py','bytes':71471,'sha256':'15a03be359de7d062a542f6be39866508407729af35576fbc0543bfd7c6416ca'}),
+    'backend_supervisor_text_v1.py':('EXECUTION',{'path':'C:/Users/there/EMR4-tools/local-mock-owner-staff-login-source-preparation-v1/seeded-login-coherent-integration-candidate-v1/after/backend_supervisor_text_v1.py','bytes':42309,'sha256':'924327144465d5c064870575be8ce73b85f44b5ba401374d54b3e769086ddec9'}),
+    'serve_backend_text_v1.py':('EXECUTION',{'path':'C:/Users/there/EMR4-tools/local-mock-owner-staff-login-source-preparation-v1/seeded-login-coherent-integration-candidate-v1/after/serve_backend_text_v1.py','bytes':35617,'sha256':'935eedae29f2f5b32926232c0aafa2f57a61f0dd5363ad9ccef2d0f8fd8d097b'}),
+    'backend_child_text_v1.py':('EXECUTION',{'path':'C:/Users/there/EMR4-tools/local-mock-owner-staff-login-source-preparation-v1/seeded-login-coherent-integration-candidate-v1/after/backend_child_text_v1.py','bytes':86221,'sha256':'44b88e684c60c85ca0009149a5ed83f511b3a3a370d4cb57b1df2cb6634ef8df'}),
+    'text_role_v1.py':('EXECUTION',{'path':'C:/Users/there/EMR4-tools/local-mock-owner-staff-login-source-preparation-v1/seeded-login-coherent-integration-candidate-v1/after/text_role_v1.py','bytes':32865,'sha256':'ea4b9e5027d754bd765327f39da039313aa0c4f1888c0a4be972235c67a80d24'}),
+    'browser_text_ui_v1.cjs':('EXECUTION',{'path':'C:/Users/there/EMR4-tools/local-mock-owner-staff-login-source-preparation-v1/seeded-login-coherent-integration-candidate-v1/after/browser_text_ui_v1.cjs','bytes':27569,'sha256':'3f2b709d063aa1c370855b1a17e9170fa308e5acfa10455ed9f380d98f471570'}),
+    'backend_outer_text_v1.py':('EXECUTION',{'path':'C:/Users/there/EMR4-tools/local-mock-owner-staff-login-source-preparation-v1/seeded-login-coherent-integration-candidate-v1/after/backend_outer_text_v1.py','bytes':17921,'sha256':'a3e5517218c2f04c4f864b47d13e5ecbe6052761c11d09de1f1887a8e8247678'}),
+    'backend_exec_transport_text_v1.py':('EXECUTION',{'path':'C:/Users/there/EMR4-tools/local-mock-owner-staff-login-source-preparation-v1/seeded-login-coherent-integration-candidate-v1/after/backend_exec_transport_text_v1.py','bytes':27738,'sha256':'eaa0e88457c66269c871f3d9d67ec989ff013e7b2d00a2fa47bbe78fa8286b22'}),
+    'backend_exec_child_text_v1.py':('EXECUTION',{'path':'C:/Users/there/EMR4-tools/local-mock-owner-staff-login-source-preparation-v1/seeded-login-coherent-integration-candidate-v1/after/backend_exec_child_text_v1.py','bytes':12294,'sha256':'870c271b3b3f32fe2e942cc05012cd101b1ec6c4da7117684dfe336d4e5e7a4d'}),
+    'stage1_demo_http.py':('SITE',{'path':'C:/Users/there/EMR4-tools/local-mock-owner-staff-login-source-preparation-v1/seeded-login-coherent-integration-candidate-v1/after/stage1_demo_http.py','bytes':108210,'sha256':'78bbe3f3f0825b4eead20524157b418d9a4d7da9451f417f70c6b1c1f6b21f85'}),
+    'stage1_seeded_login.py':('SITE',{'path':'C:/Users/there/EMR4-tools/local-mock-owner-staff-login-source-preparation-v1/seeded-login-coherent-integration-candidate-v1/after/stage1_seeded_login.py','bytes':15877,'sha256':'daa1b81598504c3e082f9046b65467a6aa3b5aac1b77eff1123f0e4ed3224da0'}),
+    'static/demo/stage1-interactive.html':('SITE',{'path':'C:/Users/there/EMR4-tools/local-mock-owner-staff-login-source-preparation-v1/seeded-login-coherent-integration-candidate-v1/after/static/demo/stage1-interactive.html','bytes':13184,'sha256':'d5e52c5028761b921ebe35dc0b57d3516c082e5f9ce0e6f3b58db146d338ecfd'}),
+    'static/demo/stage1-interactive.js':('SITE',{'path':'C:/Users/there/EMR4-tools/local-mock-owner-staff-login-source-preparation-v1/seeded-login-coherent-integration-candidate-v1/after/static/demo/stage1-interactive.js','bytes':53330,'sha256':'e5797924121d05961d47fb946142c7378e5a6411667bd7914ce59b44e8308e05'}),
+    'backend/stage1_account_http_adapter.py':('BACKEND',{'path':'C:/Users/there/EMR4-tools/local-mock-owner-practice-bootstrap-source-v1/stage1_account_http_adapter.py','bytes':4564,'sha256':'03a22a0ef86eda1303fc1c9d43e3e4e2e79036a33e364dd35d62d4f3526d6a45'}),
+    'backend/app/dependencies.py':('BACKEND',{'path':'C:/Users/there/EMR4-tools/local-mock-owner-staff-login-source-preparation-v1/seeded-login-coherent-integration-candidate-v1/after/backend/app/dependencies.py','bytes':3371,'sha256':'334c5233ebb398721670f2ae79215574b8a5a7f84bfe8a5a0171b3e4897a1aa6'}),
+}
+
+def _load_g4_owner_bootstrap_inputs(context, target, source, evidence_root, scratch,
+                          q, read, snapshots):
+    _keys(q, G4_OWNER_BOOTSTRAP_BINDING_KEYS, "bounded_g4_owner_bootstrap_binding_schema")
+    _need(_is_g4_owner_bootstrap_binding(q)
+          and q["phase"] in {"development", "pre-push", "post-push"}
+          and type(q["operation_id"]) is str
+          and re.fullmatch(r"[a-z0-9][a-z0-9-]{1,79}", q["operation_id"]),
+          "bounded_g4_owner_bootstrap_binding_version")
+    for key in ("base_commit", "base_tree", "expected_head", "expected_index_tree", "candidate_tree"):
+        _need(type(q[key]) is str and re.fullmatch(r"[0-9a-f]{40}", q[key]),
+              "bounded_g4_owner_bootstrap_git_identity")
+    paths = _g4_owner_bootstrap_paths(q["operation_kind"], q)
+    if q["stage"] == "admit":
+        _need(q["phase"] == "development" and q["repair_sha256"] == {}
+              and q["candidate_tree"] == q["base_tree"]
+              and q["expected_head"] == q["base_commit"]
+              and q["expected_index_tree"] == q["base_tree"],
+              "bounded_g4_owner_bootstrap_admit_no_delta")
+    vector, mapping = _g4_owner_bootstrap_external_inputs(read, q)
+    _need(_sha(trusted_git.run_git_bytes(target, "cat-file", "blob",
+              G4_OWNER_BOOTSTRAP_BASE["commit"] + ":" + G4_STAGE1_SUCCESSOR_SCOPE)) ==
+              G4_OWNER_BOOTSTRAP_PREIMAGES[G4_STAGE1_SUCCESSOR_SCOPE]
+          and trusted_git.run_git(target, "rev-parse", G4_OWNER_BOOTSTRAP_BASE["commit"] + "^{tree}") ==
+              G4_OWNER_BOOTSTRAP_BASE["tree"], "bounded_g4_owner_bootstrap_predecessor")
+    if q["stage"] == "enable":
+        _need(q["base_commit"] == G4_OWNER_BOOTSTRAP_BASE["commit"]
+              and q["base_tree"] == G4_OWNER_BOOTSTRAP_BASE["tree"]
+              and q["activation_acceptance"] is None, "bounded_g4_owner_bootstrap_enable_base")
+    else:
+        _keys(q["activation_acceptance"], {"path", "sha256"}, "bounded_g4_owner_bootstrap_activation_row")
+        path = G4_OWNER_BOOTSTRAP_ROOT / "entry-admission-v1/independent-enable-push-effect-review-v1.json"
+        _need(Path(q["activation_acceptance"]["path"]) == path
+              and path.is_relative_to(evidence_root), "bounded_g4_owner_bootstrap_activation_path")
+        activation = _json(read(path, q["activation_acceptance"]["sha256"]))
+        _need(activation.get("schema") == "emr4.g4_operation_review.v1"
+              and activation.get("status") == "PASS"
+              and activation.get("verdict") == "PASS_G4_STAGE1_OWNER_BOOTSTRAP_CONTROL_PUBLICATION_EFFECT"
+              and type(activation.get("reviewer_agent")) is str
+              and activation["reviewer_agent"] not in {"", "/root", "/root/owner_bootstrap_author"}
+              and activation.get("independent") is True
+              and activation.get("implementation_authorship") is False
+              and activation.get("blocking_findings") == []
+              and activation.get("stage") == "enable" and activation.get("phase") == "push"
+              and activation.get("base") == G4_OWNER_BOOTSTRAP_BASE["commit"]
+              and activation.get("commit") == q["base_commit"]
+              and activation.get("candidate_tree") == q["base_tree"]
+              and activation.get("control_activation_accepted") is True
+              and activation.get("same_attempt_remote_readback_verified") is True
+              and activation.get("protected_refs_unchanged") is True
+              and activation.get("whole_inverse_verified_same_attempt") is True
+              and activation.get("published_ref") == G4_STAGE1_INTERACTIVE_BACKEND_REF,
+              "bounded_g4_owner_bootstrap_activation_acceptance")
+        headers = trusted_git.run_git(target, "cat-file", "commit", q["base_commit"]).split("\n\n", 1)[0].splitlines()
+        _need([h for h in headers if h.startswith("parent ")] == ["parent " + G4_OWNER_BOOTSTRAP_BASE["commit"]]
+              and [h for h in headers if h.startswith("tree ")] == ["tree " + q["base_tree"]],
+              "bounded_g4_owner_bootstrap_activation_parent")
+    sources = _digest_map(q["source_sha256"], SOURCE_PATHS | CONTROLLER_PATHS,
+                          "bounded_g4_owner_bootstrap_sources")
+    inputs = CONFIGURATION_PATHS | {STATE, GATES, OVERLAY, AGENTS,
+        G4_STAGE1_INTERACTIVE_SCOPE, G4_STAGE1_SUCCESSOR_SCOPE,
+        G4_STAGE1_SUCCESSOR_TEST, G4_CI_WORKFLOW} | SOURCE_PATHS | CONTROLLER_PATHS
+    if q["stage"] == "apply":
+        inputs |= G4_OWNER_BOOTSTRAP_PRODUCT
+    pins = _digest_map(q["payload_sha256"], inputs, "bounded_g4_owner_bootstrap_payload_paths")
+    payloads = {p:read(target / p, d) for p,d in sorted(pins.items())}
+    scope = _json(payloads[G4_STAGE1_SUCCESSOR_SCOPE])
+    validate_g4_owner_bootstrap_scope(scope)
+    _need(scope["source_sha256"] == sources
+          and scope["product_vector"] == q["product_vector"]
+          and scope["mapping_review"] == q["mapping_review"]
+          and payloads[G4_STAGE1_SUCCESSOR_SCOPE] == _canonical(scope) + b"\n"
+          and all(_sha(payloads[p]) == d for p,d in scope["control_sha256"].items()),
+          "bounded_g4_owner_bootstrap_scope_sources")
+    for p,d in sources.items():
+        candidate = read(source / p, d)
+        if q["stage"] == "enable" and p in G4_OWNER_BOOTSTRAP_CONTROL:
+            _need(candidate == payloads[p], "bounded_g4_owner_bootstrap_control_candidate")
+        else:
+            _need(candidate == trusted_git.run_git_bytes(target, "cat-file", "blob", q["base_commit"] + ":" + p),
+                  "bounded_g4_owner_bootstrap_installed_source")
+    for p,pair in q["repair_sha256"].items():
+        _keys(pair, {"before_sha256", "after_sha256"}, "bounded_g4_owner_bootstrap_change_pair")
+        # HEAD tree membership defines new versus existing; a missing physical
+        # selective-checkout file is never mistaken for an untracked new path.
+        committed = trusted_git.run_git_bytes(target,"ls-tree","-z",q["base_commit"],"--",p)
+        previous = (_sha(trusted_git.run_git_bytes(target,"cat-file","blob",q["base_commit"]+":"+p))
+                    if committed else None)
+        expected_before = (G4_OWNER_BOOTSTRAP_PREIMAGES[p] if q["stage"] == "enable"
+                           else G4_OWNER_BOOTSTRAP_BEFORE_SHA[p])
+        expected = pins[p] if q["stage"] == "enable" else G4_OWNER_BOOTSTRAP_PRODUCT_SHA[p]
+        _need(previous == expected_before and pair == {"before_sha256":previous,"after_sha256":expected}
+              and previous != expected and _sha(payloads[p]) == expected,
+              "bounded_g4_owner_bootstrap_change_preimage")
+        if q["stage"] == "apply":
+            _,row = G4_OWNER_BOOTSTRAP_EXTERNAL_ROWS[G4_OWNER_BOOTSTRAP_PRODUCT_LOGICAL[p]]
+            _need(payloads[p] == read(Path(row["path"]),expected)
+                  and payloads[p] == read(source/p,expected)
+                  and len(payloads[p]) == G4_OWNER_BOOTSTRAP_PRODUCT_BYTES[p],
+                  "bounded_g4_owner_bootstrap_product_source")
+    for p in inputs - paths:
+        _need(trusted_git.run_git_bytes(target, "cat-file", "blob", q["base_commit"] + ":" + p) == payloads[p],
+              "bounded_g4_owner_bootstrap_unowned_change")
+    review = _g4_owner_bootstrap_subject_review(read, q["source_review"], evidence_root,
+                                     g4_owner_bootstrap_review_subject(q), q["stage"], q["phase"])
+    attested = inputs - paths if q["phase"] == "development" else inputs
+    observation = trusted_git.attest_target_index(target, attested_paths=tuple(sorted(attested)),
+        expected_head=q["expected_head"], expected_index_tree=q["expected_index_tree"], scratch_parent=scratch)
+    if q["phase"] == "development":
+        _need(q["expected_head"] == q["base_commit"]
+              and q["expected_index_tree"] in {q["base_tree"],q["candidate_tree"]},
+              "bounded_g4_owner_bootstrap_development_binding")
+    else:
+        headers = trusted_git.run_git(target, "cat-file", "commit", q["expected_head"]).split("\n\n",1)[0].splitlines()
+        _need([h for h in headers if h.startswith("parent ")] == ["parent " + q["base_commit"]]
+              and [h for h in headers if h.startswith("tree ")] == ["tree " + q["candidate_tree"]]
+              and q["expected_index_tree"] == q["candidate_tree"],
+              "bounded_g4_owner_bootstrap_committed_binding")
+    for p,snapshot in snapshots.items():
+        _need(trusted_git._read_regular_snapshot(p, maximum_bytes=2*1024*1024) == snapshot,
+              "bounded_g4_owner_bootstrap_snapshot_drift")
+    before = {p:trusted_git.run_git_bytes(target,"cat-file","blob",G4_OWNER_BOOTSTRAP_BASE["commit"]+":"+p)
+              for p in (STATE,GATES,OVERLAY,AGENTS)}
+    _need(all(payloads[p] == before[p] for p in (STATE,GATES,OVERLAY,AGENTS)),
+          "bounded_g4_owner_bootstrap_state_unchanged")
+    return BoundedG1BInputs(q,before,payloads,
+        {"scope":scope,"vector":vector,"mapping":mapping,"review":review},observation)
+
+
+
+
+def _validate_g4_owner_bootstrap_loaded_policy(inputs):
+    validate_g4_owner_bootstrap_scope(inputs.evidence["scope"])
+    try:
+        configuration = raisa_policy.validate_recovery_configuration(
+            documents={Path(p).name:inputs.payloads[p] for p in CONFIGURATION_PATHS},
+            expected_sha256={Path(p).name:inputs.binding["payload_sha256"][p] for p in CONFIGURATION_PATHS},
+            agents_text=inputs.payloads[AGENTS].decode("utf-8"),state=_json(inputs.payloads[STATE]))
+    except (raisa_policy.RaisaPolicyError, configuration_core.ConfigurationError) as error:
+        raise BoundedG1BError(error.reason_code) from error
+    paths = _g4_owner_bootstrap_paths(inputs.binding["operation_kind"],inputs.binding)
     return {p:inputs.payloads[p] for p in paths},configuration
