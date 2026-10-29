@@ -2,7 +2,7 @@ from collections.abc import Callable
 
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
-from sqlalchemy.orm import Session, sessionmaker
+from sqlalchemy.orm import Session, sessionmaker, load_only
 from sqlalchemy import text, func
 from app.database import SessionLocal
 from app.services.auth_service import verify_token
@@ -45,6 +45,9 @@ def get_current_user(
     # verifier-free exact-ID function is the only global Account access here.
     user = (
         db.query(User)
+        .options(load_only(User.id, User.practice_id, User.email, User.role,
+                           User.practitioner_id, User.is_active,
+                           User.authority_generation, User.created_at))
         .join(PracticeMembership, (
             (PracticeMembership.legacy_user_id == User.id) &
             (PracticeMembership.practice_id == User.practice_id)

@@ -8,7 +8,7 @@ public role/bootstrap endpoint. No application modules are imported here.
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 import asyncio
@@ -33,6 +33,7 @@ from stage1_demo_voice import (MAX_WAV_BYTES, VoiceInputRejected, VoiceRecogniti
                                run_local_recognizer, target_for_persona,
                                validate_wav)
 from stage1_mock_org_bridge import StaffMockBinding, StaffMockDenied
+from stage1_seeded_login import SeededLoginBinding, SeededLoginController
 
 
 BASE = "/api/v1/appointments"
@@ -774,6 +775,8 @@ class DemoConfig:
     # transport; no browser request can select or replace this callable.
     backend_exec_exchange: Callable[..., Awaitable[httpx.Response]] | None = field(
         default=None, repr=False)
+    # Trusted startup only; absent or enabled=False preserves the accepted path.
+    seeded_login: SeededLoginBinding | None = field(default=None, repr=False)
 
 
 @dataclass(repr=False)
@@ -787,6 +790,7 @@ class _Session:
     proposal: dict[str, Any] | None = None
     uncertain: dict[str, Any] | None = None
     voice_nonce: str = field(default_factory=lambda: secrets.token_urlsafe(24), repr=False)
+    account_selected: bool = False
 
 
 class DemoIssuer:
@@ -932,6 +936,9 @@ class DemoIssuer:
         session = self._sessions.get(token or "")
         if session is None or datetime.now(timezone.utc) >= session.expires_at:
             raise HTTPException(status_code=404, detail="DEMO_SESSION_UNAVAILABLE")
+        if (self.config.seeded_login is not None and self.config.seeded_login.enabled is True
+                and session.binding.persona == "staff" and not session.account_selected):
+            raise HTTPException(status_code=403, detail="DEMO_SESSION_UNAVAILABLE")
         if (session.binding.persona == "staff" and
                 self.config.staff_human_window_ends_at is not None and
                 datetime.now(timezone.utc) >= self.config.staff_human_window_ends_at):
@@ -1001,7 +1008,75 @@ def create_stage1_demo_app(config: DemoConfig) -> tuple[FastAPI, DemoIssuer]:
 
     def no_store(data: Any, code: int = 200) -> JSONResponse:
         return JSONResponse(data, status_code=code,
-            headers={"Cache-Control": "no-store", "X-Content-Type-Options": "nosniff"})
+            headers={"Cache-Control": "no-store", "Pragma": "no-cache", "X-Content-Type-Options": "nosniff"})
+
+    login = None
+    if config.seeded_login is not None and config.seeded_login.enabled is True:
+        if config.staff_mock_auth is None:
+            raise ValueError("SEEDED_LOGIN_MOCK_BINDING_REQUIRED")
+        staff_seed = next(s for s in config.seeds if s.persona == "staff")
+        if (config.practice_id != "10000000-0000-4000-8000-000000000001"
+                or staff_seed.staff_user_id != "20000000-0000-4000-8000-000000000002"):
+            raise ValueError("SEEDED_LOGIN_FIXTURE_INVALID")
+        template = next(s for s in issuer._sessions.values() if s.binding.persona == "staff")
+
+        def make_login_staff(key, bearer, expires, csrf):
+            # Exact identity correlation is completed by the Account controller
+            # before this callback. Independent mock authority is still required.
+            fixed = config.staff_mock_auth
+            mock_token, mock_expiry = fixed.issue_current()
+            fixed.require(practice_id=config.practice_id, staff_user_id=staff_seed.staff_user_id,
+                          scope="demo:use", token=mock_token)
+            fixed.require(practice_id=config.practice_id, staff_user_id=staff_seed.staff_user_id,
+                          scope="proposal:create", token=mock_token)
+            binding = replace(template.binding, session_id=secrets.token_urlsafe(24), csrf=csrf)
+            session = _Session(binding, bearer, staff_seed.seeded_appointment_id, expires,
+                staff_mock_token=mock_token, staff_mock_expires_at=mock_expiry,
+                account_selected=True)
+            issuer.require_staff(session)
+            issuer._sessions[key] = session
+            return session
+
+        login = SeededLoginController(config.seeded_login,
+            human_end=config.staff_human_window_ends_at, practice_id=config.practice_id,
+            make_staff=make_login_staff, drop_staff=lambda key: issuer._sessions.pop(key, None))
+        app.state.seeded_login_origin = config.listener_origin
+
+    @app.api_route("/demo/stage1/account/{action}", methods=["GET", "POST"])
+    async def account_route(request: Request, action: str):
+        try:
+            local(request)
+        except HTTPException:
+            return no_store({"detail": "Sign-in unavailable."}, 404)
+        if login is None:
+            if action == "state" and request.method == "GET" and not request.url.query:
+                return no_store({"enabled": False})
+            return no_store({"detail": "Sign-in unavailable."}, 404)
+        return await login.handle(request, action)
+
+    @app.middleware("http")
+    async def account_response_policy(request: Request, call_next):
+        # Current backend identity also gates non-command staff routes, including
+        # interpretation and mock continuation. No owner reaches those routes.
+        path = request.url.path
+        account_route_path = path.startswith("/demo/stage1/account/")
+        static_path = path == "/demo/stage1/" or path in {
+            "/demo/stage1/" + name for name in ("stage1-interactive.html",
+                "stage1-interactive.js", "stage1-interactive.css", "stage1-diary-view.js",
+                "stage1-local-voice.js")}
+        if login is not None and not account_route_path and not static_path:
+            try:
+                local(request)
+                session = issuer.cookie_session_for(request)
+                if session.binding.persona == "staff":
+                    await login.require_staff(session)
+            except Exception:
+                return no_store({"detail": "Current sign-in unavailable."}, 403)
+        response = await call_next(request)
+        if login is not None or account_route_path:
+            response.headers["Cache-Control"] = "no-store"
+            response.headers["Pragma"] = "no-cache"
+        return response
 
     async def _backend_exchange(method: str, path: str, *, headers: dict[str, str],
                                 body=None, params=None) -> httpx.Response:
@@ -1030,6 +1105,14 @@ def create_stage1_demo_app(config: DemoConfig) -> tuple[FastAPI, DemoIssuer]:
         else:
             scope = "proposal:create" if method == "POST" else "demo:use"
             issuer.require_staff(session, scope)
+            if login is not None:
+                try:
+                    await login.require_staff(session)
+                except Exception:
+                    raise HTTPException(status_code=403, detail="STAFF_UNAVAILABLE") from None
+                # Account /me awaited above; independent mock authority may
+                # have expired/revoked during it. Recheck before dispatch.
+                issuer.require_staff(session, scope)
             if not session.staff_bearer:
                 raise HTTPException(status_code=403, detail="STAFF_UNAVAILABLE")
             headers["Authorization"] = "Bearer " + session.staff_bearer
@@ -1038,8 +1121,10 @@ def create_stage1_demo_app(config: DemoConfig) -> tuple[FastAPI, DemoIssuer]:
         response = await _backend_exchange(method, path, headers=headers, body=body)
         if not patient:
             try:
+                if login is not None:
+                    await login.require_staff(session)
                 issuer.require_staff(session, scope)
-            except HTTPException:
+            except Exception:
                 raise _StaffMockChangedAfterDispatch() from None
         if response.status_code >= 400:
             # A current-authority refusal is definitive, never a lost reply.
@@ -1307,13 +1392,17 @@ def create_stage1_demo_app(config: DemoConfig) -> tuple[FastAPI, DemoIssuer]:
 
     @app.get("/demo/stage1/")
     async def page(request: Request):
-        local(request); issuer.session_for(request)
+        local(request)
+        if login is None:
+            issuer.session_for(request)
         return FileResponse(UI_VIEW / "stage1-interactive.html",
                             headers={"Cache-Control": "no-store"})
 
     @app.get("/demo/stage1/{asset}")
     async def asset(request: Request, asset: str):
-        local(request); issuer.session_for(request)
+        local(request)
+        if login is None:
+            issuer.session_for(request)
         paths = {
             "stage1-interactive.css": UI_VIEW / "stage1-interactive.css",
             "stage1-interactive.js": UI_CONTROLLER / "stage1-interactive.js",

@@ -677,7 +677,8 @@ $("continue-demo").addEventListener("click", async () => {
 for (const id of ["request-date", "request-earliest", "request-latest", "patient-words"]) $(id).addEventListener("input", () => invalidateIntent("request"));
 for (const id of ["move-date", "move-time", "move-words"]) $(id).addEventListener("input", () => invalidateIntent("move"));
 
-try {
+async function startWorkspace() {
+ try {
   const response = await fetch("/demo/stage1/session", { credentials: "same-origin", cache: "no-store", redirect: "error" });
   if (!response.ok) throw new Error("The local demo session is unavailable.");
   const session = await response.json();
@@ -694,7 +695,8 @@ try {
     show("mock-identity", true);
     armAuthPrompt();
   }
-  text("role", session.persona === "patient" ? "Alex · patient request" : "Reception One · staff");
+  text("role", session.persona === "patient" ? "Alex · patient request" :
+    accountIdentity ? `${accountIdentity.practice_name} · ${accountIdentity.role}` : "Reception One · staff");
   text("title", session.persona === "patient" ? "When would you like to come in?" : "How can I help with your appointments?");
   text("intro", session.persona === "patient" ? "Tell Reception One when you prefer to come. A request does not reserve a time." : "Review the current request and appointment, then choose what you want to do.");
   text("clock", `Practice clock when this page loaded: ${session.demo_clock} · Practice timezone: ${session.zone}`);
@@ -710,4 +712,112 @@ try {
   });
   renderMapping("request");renderMapping("move");
   await refresh();
-} catch (error) { status(error.message); }
+ } catch (error) { status(error.message); }
+}
+
+// Account tokens and passwords never become UI state or browser storage.
+let accountCsrf = null;
+let accountIdentity = null; // Display only; never used to authorise an action.
+let accountBusy = false;
+let accountStarted = false;
+function accountBusyState(busy) {
+  accountBusy = busy;
+  $("account-panel").querySelectorAll("button,input,select").forEach(node => { node.disabled = busy; });
+  $("account-logout").disabled=busy;
+}
+function accountWorkspace(visible) {
+  show("account-panel", !visible);
+  $("focus-workspace").hidden = !visible;
+  document.querySelector(".workspace-heading").hidden = !visible;
+  document.querySelector(".feedback").hidden = !visible;
+  if(!visible){show("view-switch",false);show("view-prompt",false);}
+}
+function presentAccount(value) {
+  if(!value || value.enabled!==true || typeof value.csrf!=="string" ||
+      !["login","choose","selected"].includes(value.phase))throw new Error("Sign-in is unavailable. Please reload this page.");
+  accountCsrf=value.csrf;
+  accountIdentity=value.phase==="selected" ? value.identity : null;
+  accountWorkspace(false);
+  show("account-login",value.phase==="login");
+  show("account-selection",value.phase==="choose");
+  show("account-identity",value.phase==="selected");
+  show("account-logout",value.phase!=="login");
+  show("account-continue",value.phase==="selected" && value.bureau_available===true);
+  $("account-password").value="";
+  $("account-username").value="";
+  const choices=$("account-membership");
+  choices.replaceChildren(new Option("Choose a practice", ""));
+  if(value.phase==="choose"){
+    if(!Array.isArray(value.memberships) || !value.memberships.length)throw new Error("No practice is available. Please sign in again.");
+    for(const row of value.memberships){
+      if(typeof row.membership_id!=="string" || typeof row.practice_name!=="string" || typeof row.role!=="string")throw new Error("Practice choices are unavailable.");
+      choices.append(new Option(`${row.practice_name} · ${row.role}`,row.membership_id));
+    }
+    text("account-status","Choose your practice, then confirm it.");
+    choices.focus();
+  }else if(value.phase==="selected"){
+    const identity=value.identity;
+    if(!identity || typeof identity.email!=="string" || typeof identity.role!=="string" || typeof identity.practice_name!=="string")throw new Error("Your current practice could not be checked.");
+    text("account-identity",`${identity.email} · ${identity.practice_name} · ${identity.role}`);
+    text("role",`${identity.practice_name} · ${identity.role}`);
+    text("account-status",value.bureau_available===true ? "Your practice is ready. Continue when you’re ready." : "You’re signed in. Your practice identity is shown below.");
+  }else{
+    text("account-identity","");text("role","Sign in");
+    text("account-status","Sign in to your fictional practice.");
+  }
+}
+async function accountRequest(action, body) {
+  if(accountBusy)return;
+  accountBusyState(true);
+  try{
+    const response=await fetch(`/demo/stage1/account/${action}`,{
+      method:"POST",credentials:"same-origin",cache:"no-store",redirect:"error",
+      headers:{"Content-Type":"application/json","X-CSRF-Token":accountCsrf||""},body:JSON.stringify(body)});
+    if(!response.ok)throw new Error("Sign-in could not be completed. Please sign in again.");
+    const value=await response.json();
+    presentAccount(value);
+  }catch(_){
+    accountCsrf=null;
+    accountIdentity=null;
+    text("account-status","Sign-in could not be completed. Reload this page to sign in again.");
+    show("account-login",false);show("account-selection",false);
+    show("account-identity",false);show("account-continue",false);show("account-logout",false);
+    text("account-identity","");
+  }finally{
+    if(body && Object.hasOwn(body,"password"))body.password="";
+    $("account-password").value="";
+    accountBusyState(false);
+  }
+}
+$("account-login").addEventListener("submit",async event=>{
+  event.preventDefault();
+  if(accountBusy)return;
+  const username=$("account-username").value,password=$("account-password").value;
+  $("account-password").value="";
+  await accountRequest("login",{username,password});
+});
+$("account-selection").addEventListener("submit",async event=>{
+  event.preventDefault();
+  const membership_id=$("account-membership").value;
+  if(membership_id)await accountRequest("select",{membership_id});
+});
+$("account-logout").addEventListener("click",async()=>{
+  if(accountBusy || state.busy)return;
+  await accountRequest("logout",{});
+  // Drop all appointment projections and pending UI work with this page.
+  window.location.reload();
+});
+$("account-continue").addEventListener("click",async()=>{
+  if(accountBusy || accountStarted)return;
+  accountStarted=true;accountBusyState(true);
+  accountWorkspace(true);
+  await startWorkspace();
+  accountBusyState(false);
+});
+try{
+  const response=await fetch("/demo/stage1/account/state",{credentials:"same-origin",cache:"no-store",redirect:"error"});
+  if(!response.ok)throw new Error("Sign-in is unavailable. Reload this page to try again.");
+  const value=await response.json();
+  if(value?.enabled===false)await startWorkspace();
+  else presentAccount(value);
+}catch(_){status("The local session is unavailable. Reload this page to try again.");}
