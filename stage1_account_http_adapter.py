@@ -10,7 +10,8 @@ from sqlalchemy.pool import NullPool
 
 
 def build_account_appointments_app(*, enabled=False, auth_engine=None,
-                                   expected_database=None, expected_port=None):
+                                   expected_database=None, expected_port=None,
+                                   local_bootstrap_enabled=False):
     """Compose the existing narrow app, optionally exposing four Account routes.
 
     Only a trusted isolated harness may supply these arguments. Never populate
@@ -19,6 +20,11 @@ def build_account_appointments_app(*, enabled=False, auth_engine=None,
     it after serving; this helper never assumes ownership or closes it.
     """
     from stage1_runtime_adapter import build_narrow_appointments_app
+
+    if type(local_bootstrap_enabled) is not bool:
+        raise ValueError("invalid bootstrap flag")
+    if local_bootstrap_enabled and enabled is not True:
+        raise ValueError("bootstrap requires account composition")
 
     if enabled is not True:
         if enabled is not False or auth_engine is not None or expected_database is not None or expected_port is not None:
@@ -49,6 +55,9 @@ def build_account_appointments_app(*, enabled=False, auth_engine=None,
         ("POST", "/api/v1/auth/select-membership"),
         ("GET", "/api/v1/auth/me"),
     }
+    if local_bootstrap_enabled:
+        allowed.update({("POST", "/api/v1/auth/register"),
+                        ("POST", "/api/v1/auth/practices")})
     # Validate whole paths and complete method sets before copying anything.
     from fastapi import APIRouter
     from fastapi.routing import APIRoute
@@ -78,4 +87,6 @@ def build_account_appointments_app(*, enabled=False, auth_engine=None,
     app.include_router(subset)
     app.state.account_auth_session_factory = sessionmaker(
         bind=auth_engine, autocommit=False, autoflush=False)
+    if local_bootstrap_enabled:
+        app.state.local_account_bootstrap_enabled = True
     return app
