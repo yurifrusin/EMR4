@@ -3423,7 +3423,7 @@ def operation_effects(kind: str) -> frozenset[str]:
 
 def operation_paths(kind: str, binding: dict | None = None) -> frozenset[str]:
     _need(type(kind) is str and kind in OPERATION_PATHS, "bounded_g1b_operation_kind")
-    if kind == G4_OWNER_BOOTSTRAP_ADMIT_KIND or _is_g4_owner_bootstrap_binding(binding):
+    if kind == G4_OWNER_BOOTSTRAP_ADMIT_KIND or _routes_g4_owner_bootstrap_binding(binding):
         return _g4_owner_bootstrap_paths(kind, binding)
     if kind == G4_SEEDED_LOGIN_ADMIT_KIND or _is_g4_seeded_login_binding(binding):
         return _g4_seeded_login_paths(kind, binding)
@@ -3493,7 +3493,7 @@ def _operation(kind: str, binding: dict | None = None) -> dict:
     if _is_g4_owner_bootstrap_binding(binding):
         return {"paths": paths, "g4_owner_bootstrap_source": True,
                 "profile": raisa_policy.G4_STAGE1_SUCCESSOR_PROFILE,
-                "gate": "G4", "limits": G4_OWNER_BOOTSTRAP_LIMITS}
+                "gate": "G4", "limits": _g4_owner_bootstrap_descriptor(binding["schema_version"])["limits"]}
     if _is_g4_seeded_login_binding(binding):
         return {"paths": paths, "g4_seeded_login_source": True,
                 "profile": raisa_policy.G4_STAGE1_SUCCESSOR_PROFILE,
@@ -6439,7 +6439,7 @@ def load_bounded_g1b_inputs(context: BoundedG1BContext) -> BoundedG1BInputs:
         return snapshot[1]
 
     binding = _json(read(binding_path, context.expected_binding_sha256))
-    if binding.get("operation_kind") == G4_OWNER_BOOTSTRAP_ADMIT_KIND or _is_g4_owner_bootstrap_binding(binding):
+    if binding.get("operation_kind") == G4_OWNER_BOOTSTRAP_ADMIT_KIND or _routes_g4_owner_bootstrap_binding(binding):
         return _load_g4_owner_bootstrap_inputs(
             context, target, source, evidence_root, scratch, binding, read, snapshots)
     if binding.get("operation_kind") == G4_SEEDED_LOGIN_ADMIT_KIND or _is_g4_seeded_login_binding(binding):
@@ -16157,8 +16157,115 @@ G4_OWNER_BOOTSTRAP_LIMITS = (
 OPERATION_PATHS[G4_OWNER_BOOTSTRAP_ADMIT_KIND] = frozenset()
 
 
+
+# Closed successor within the existing owner-bootstrap operation family. This
+# descriptor grants no runtime and never selects a version by a fallback pin.
+G4_OWNER_STAFF_INVITATION_SCHEMA = "ariadne.g4_stage1_owner_bootstrap_operation_binding.v2"
+G4_OWNER_STAFF_INVITATION_SCOPE_SCHEMA = "ariadne.g4_stage1_successor_entry_scope.v22"
+G4_OWNER_STAFF_INVITATION_BASE = {"commit":"6d5f561aa9d243e6100b0de858e8285084c99b0f",
+                                  "tree":"9755ab593cd52fee8e85f5429d7c8fe787c0d58b"}
+G4_OWNER_STAFF_INVITATION_PREIMAGES = {
+    G4_AUDIT_CODE:"7060712bacc394f31adb7fe29985baa3e0fac0be28df0da2ee67f0b88da94527",
+    G4_STAGE1_SUCCESSOR_SCOPE:"ea3b6a0ffb422288558a256a78c387be72f937d4a713d75aa09e0b95ddefa634",
+    G4_STAGE1_SUCCESSOR_TEST:"fe9990f52b4d695ff7c01bc52704d29984a054b916919ad94f8e5fa5542dd584"}
+G4_OWNER_STAFF_INVITATION_ROOT = G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT / "owner-staff-invitation-successor-v1"
+G4_OWNER_STAFF_INVITATION_EXTERNAL = Path("C:/Users/there/EMR4-tools/local-mock-owner-staff-invitation-bridge-source-v1/v2")
+G4_OWNER_STAFF_INVITATION_ROWS = {
+    "factory":{"path":(G4_OWNER_STAFF_INVITATION_EXTERNAL/"stage1_account_http_adapter.py").as_posix(),
+               "bytes":14042,"sha256":"8e58f1efc4c2108805778785df49a6c7cfc6530244316a9eae0205854e206f83"},
+    "tests":{"path":(G4_OWNER_STAFF_INVITATION_EXTERNAL/"test_invitation_bridge_v3.py").as_posix(),
+             "bytes":14496,"sha256":"e3f08afd8bff86972ae79558aced8632bdc6c5bca0a8a18ab4dd9f9d4e0b92cd"},
+    "vector":{"path":(G4_OWNER_STAFF_INVITATION_EXTERNAL/"source-vector-v3.json").as_posix(),
+              "bytes":1785,"sha256":"739b7f257062d56c261a21c3bbe55b45ba70741542d0502510fd127d44e9ae28"},
+    "review":{"path":(G4_OWNER_STAFF_INVITATION_EXTERNAL/"independent-source-review-v2.json").as_posix(),
+              "bytes":11846,"sha256":"153e626e709cb76b38f097d9b0f50b4c53c866607cb10d355110a0b91a023f7e"}}
+G4_OWNER_STAFF_INVITATION_LIMITS = (
+    "exact reviewed default-off synthetic owner to one Receptionist HTTP bridge source only",
+    "enable exactly three controls; ADMIT zero repository delta and preflight only",
+    "APPLY exactly one pinned factory path after separate control publication and subject review",
+    "runtime closure and private fixture setup remain separately reviewed, not a source admission count",
+    "admission grants no runtime; separate finite app/database/private binding required",
+    "no provider, real data, protected evidence, public exposure, deployment or protected refs")
+
+
+def _g4_owner_bootstrap_descriptor(schema, *, scope=False):
+    if schema == (G4_OWNER_BOOTSTRAP_SCOPE_SCHEMA if scope else G4_OWNER_BOOTSTRAP_SCHEMA):
+        return {"version":21,"scope_schema":G4_OWNER_BOOTSTRAP_SCOPE_SCHEMA,
+            "base":G4_OWNER_BOOTSTRAP_BASE,"preimages":G4_OWNER_BOOTSTRAP_PREIMAGES,
+            "root":G4_OWNER_BOOTSTRAP_ROOT,"product_sha":G4_OWNER_BOOTSTRAP_PRODUCT_SHA,
+            "product_bytes":G4_OWNER_BOOTSTRAP_PRODUCT_BYTES,"before_sha":G4_OWNER_BOOTSTRAP_BEFORE_SHA,
+            "vector":{"path":G4_OWNER_BOOTSTRAP_VECTOR.as_posix(),"sha256":G4_OWNER_BOOTSTRAP_VECTOR_SHA},
+            "mapping":{"path":G4_OWNER_BOOTSTRAP_PREPARATION_REVIEW.as_posix(),"sha256":G4_OWNER_BOOTSTRAP_PREPARATION_REVIEW_SHA},
+            "product_rows":{p:G4_OWNER_BOOTSTRAP_EXTERNAL_ROWS[logical][1] for p,logical in G4_OWNER_BOOTSTRAP_PRODUCT_LOGICAL.items()},
+            "excluded_reviewers":{"","/root","/root/owner_bootstrap_author"},"limits":G4_OWNER_BOOTSTRAP_LIMITS}
+    _need(schema == (G4_OWNER_STAFF_INVITATION_SCOPE_SCHEMA if scope else G4_OWNER_STAFF_INVITATION_SCHEMA),
+          "bounded_g4_owner_bootstrap_descriptor_schema")
+    rows=G4_OWNER_STAFF_INVITATION_ROWS
+    return {"version":22,"scope_schema":G4_OWNER_STAFF_INVITATION_SCOPE_SCHEMA,
+        "base":G4_OWNER_STAFF_INVITATION_BASE,"preimages":G4_OWNER_STAFF_INVITATION_PREIMAGES,
+        "root":G4_OWNER_STAFF_INVITATION_ROOT,"product_sha":{"stage1_account_http_adapter.py":rows["factory"]["sha256"]},
+        "product_bytes":{"stage1_account_http_adapter.py":rows["factory"]["bytes"]},
+        "before_sha":{"stage1_account_http_adapter.py":"03a22a0ef86eda1303fc1c9d43e3e4e2e79036a33e364dd35d62d4f3526d6a45"},
+        "vector":{k:rows["vector"][k] for k in ("path","sha256")},
+        "mapping":{k:rows["review"][k] for k in ("path","sha256")},
+        "product_rows":{"stage1_account_http_adapter.py":rows["factory"]},
+        "excluded_reviewers":{"","/root","/root/owner_bootstrap_author","/root/owner_signup_guard_successor_sol"},
+        "limits":G4_OWNER_STAFF_INVITATION_LIMITS}
+
+
+def _routes_g4_owner_bootstrap_binding(binding):
+    # Unknown versions of this family refuse in its own parser, never fall back
+    # into an older general enable/apply dispatcher.
+    return (type(binding) is dict and type(binding.get("schema_version")) is str
+            and binding["schema_version"].startswith("ariadne.g4_stage1_owner_bootstrap_operation_binding."))
+
+
+def _g4_owner_staff_invitation_external_inputs(read, q):
+    rows=G4_OWNER_STAFF_INVITATION_ROWS
+    d=_g4_owner_bootstrap_descriptor(q.get("schema_version"))
+    _need(d["version"]==22 and q["product_vector"]==d["vector"] and q["mapping_review"]==d["mapping"],
+          "bounded_g4_owner_bootstrap_external_pins")
+    loaded={}
+    for key,row in rows.items():
+        _keys(row,{"path","bytes","sha256"},"bounded_g4_owner_bootstrap_external_row")
+        raw=read(Path(row["path"]),row["sha256"])
+        _need(type(row["bytes"]) is int and len(raw)==row["bytes"],"bounded_g4_owner_bootstrap_external_source")
+        loaded[key]=raw
+    vector=_json(loaded["vector"])
+    _need(vector.get("schema")=="emr4.local_synthetic_invitation_http_bridge_source.v3"
+          and vector.get("status")=="SOURCE_ONLY_PENDING_COMBINED_INDEPENDENT_REVIEW"
+          and vector.get("factory")==rows["factory"] and vector.get("tests")==rows["tests"]
+          and vector.get("product_source_changed") is False
+          and type(vector.get("test_methods_authored")) is int and vector["test_methods_authored"]==9
+          and all(vector.get(key) is False for key in
+              ("tests_executed","candidate_imported","grant_issued","checkpoint_changed")),
+          "bounded_g4_owner_bootstrap_external_vector")
+    review=_json(loaded["review"])
+    _need(review.get("schema")=="emr4.local_synthetic_invitation_bridge_independent_source_review.v1"
+          and review.get("verdict")=="PASS_CORRECTED_LOCAL_SYNTHETIC_INVITATION_BRIDGE_SOURCE_ONLY"
+          and review.get("status")=="PASS_SOURCE_ONLY_PENDING_FOCUSED_VERIFICATION_SCOPE_AND_RUNTIME_BINDING"
+          and review.get("scope")=="local_mock_owner_to_single_receptionist_invitation_bridge"
+          and review.get("independent") is True and review.get("implementation_authorship") is False
+          and review.get("reviewer_agent")=="/root/owner_bootstrap_enable_operator_review_sol"
+          and review["reviewer_agent"] not in d["excluded_reviewers"]
+          and review.get("blocking_findings")==[]
+          and all(review.get(key) is True for key in
+              ("source_accepted","source_implementation_accepted","tests_source_accepted","test_source_accepted"))
+          and all(review.get(key) is False for key in
+              ("tests_executed","runtime_admitted","runtime_accepted","publication_accepted"))
+          and review.get("source_vector")==rows["vector"]
+          and review.get("candidate")==rows["factory"] and review.get("tests")==rows["tests"]
+          and review.get("owned_product_paths")==["stage1_account_http_adapter.py"]
+          and review.get("current_product_base",{}).get("commit")==d["base"]["commit"]
+          and type(review["current_product_base"].get("factory_bytes")) is int
+          and review["current_product_base"]["factory_bytes"]==4564
+          and review["current_product_base"].get("factory_sha256")==d["before_sha"]["stage1_account_http_adapter.py"],
+          "bounded_g4_owner_bootstrap_independent_source")
+    return vector,review
+
+
 def _is_g4_owner_bootstrap_binding(binding):
-    return type(binding) is dict and binding.get("schema_version") == G4_OWNER_BOOTSTRAP_SCHEMA
+    return type(binding) is dict and binding.get("schema_version") in (G4_OWNER_BOOTSTRAP_SCHEMA, G4_OWNER_STAFF_INVITATION_SCHEMA)
 
 
 def _g4_owner_bootstrap_paths(kind, binding):
@@ -16184,13 +16291,16 @@ def g4_owner_bootstrap_review_subject(q):
 
 
 def _g4_owner_bootstrap_require_entrypoint(q, entrypoint, phase):
-    if _is_g4_owner_bootstrap_binding(q) and q.get("stage") == "admit":
-        _need(q.get("operation_kind") == G4_OWNER_BOOTSTRAP_ADMIT_KIND
+    if _routes_g4_owner_bootstrap_binding(q) and q.get("stage") == "admit":
+        _need(_is_g4_owner_bootstrap_binding(q) and q.get("operation_kind") == G4_OWNER_BOOTSTRAP_ADMIT_KIND
               and entrypoint == "recovery_preflight" and phase == "development",
               "bounded_g4_owner_bootstrap_admit_entrypoint")
 
 
 def _g4_owner_bootstrap_external_inputs(read, q):
+    d=_g4_owner_bootstrap_descriptor(q.get("schema_version"))
+    if d["version"]==22:
+        return _g4_owner_staff_invitation_external_inputs(read,q)
     _need(q["product_vector"] == {"path":G4_OWNER_BOOTSTRAP_VECTOR.as_posix(),"sha256":G4_OWNER_BOOTSTRAP_VECTOR_SHA}
           and q["mapping_review"] == {"path":G4_OWNER_BOOTSTRAP_PREPARATION_REVIEW.as_posix(),
                                      "sha256":G4_OWNER_BOOTSTRAP_PREPARATION_REVIEW_SHA},
@@ -16245,13 +16355,14 @@ def _g4_owner_bootstrap_external_inputs(read, q):
 
 def validate_g4_owner_bootstrap_scope(scope):
     _keys(scope,G4_OWNER_BOOTSTRAP_SCOPE_KEYS,"bounded_g4_owner_bootstrap_scope_schema")
-    _need(scope["schema_version"] == G4_OWNER_BOOTSTRAP_SCOPE_SCHEMA
-          and scope["selected_base"] == G4_OWNER_BOOTSTRAP_BASE
+    d=_g4_owner_bootstrap_descriptor(scope["schema_version"],scope=True)
+    _need(scope["schema_version"] == d["scope_schema"]
+          and scope["selected_base"] == d["base"]
           and _g4_audit_timestamp(scope["recorded_at"])
           and scope["active_profile"] == raisa_policy.G4_STAGE1_SUCCESSOR_PROFILE
           and scope["allowed_task_kind"] == "g4_stage1_local_successor"
           and scope["allowed_paths"] == sorted(G4_OWNER_BOOTSTRAP_PRODUCT)
-          and scope["product_sha256"] == G4_OWNER_BOOTSTRAP_PRODUCT_SHA
+          and scope["product_sha256"] == d["product_sha"]
           and scope["allowed_effects"] == sorted(EFFECTS | {"product_behavior_change"})
           and scope["runtime_binding_required"] is True
           and scope["admission_grants_runtime_authority"] is False
@@ -16259,10 +16370,9 @@ def validate_g4_owner_bootstrap_scope(scope):
           and scope["excluded_effects"] == ["unreviewed_application_or_database_runtime",
               "unreviewed_browser_or_microphone_runtime","unreviewed_voice_child_or_network_egress",
               "provider_invocation","real_data_access","protected_ref_movement","deployment","public_listener"]
-          and scope["product_vector"] == {"path":G4_OWNER_BOOTSTRAP_VECTOR.as_posix(),"sha256":G4_OWNER_BOOTSTRAP_VECTOR_SHA}
-          and scope["mapping_review"] == {"path":G4_OWNER_BOOTSTRAP_PREPARATION_REVIEW.as_posix(),
-              "sha256":G4_OWNER_BOOTSTRAP_PREPARATION_REVIEW_SHA}
-          and scope["predecessor_scope"] == {"sha256":G4_OWNER_BOOTSTRAP_PREIMAGES[G4_STAGE1_SUCCESSOR_SCOPE]},
+          and scope["product_vector"] == d["vector"]
+          and scope["mapping_review"] == d["mapping"]
+          and scope["predecessor_scope"] == {"sha256":d["preimages"][G4_STAGE1_SUCCESSOR_SCOPE]},
           "bounded_g4_owner_bootstrap_scope_boundary")
     sources = _digest_map(scope["source_sha256"],SOURCE_PATHS | CONTROLLER_PATHS,"bounded_g4_owner_bootstrap_sources")
     control = _digest_map(scope["control_sha256"],G4_OWNER_BOOTSTRAP_CONTROL - {G4_STAGE1_SUCCESSOR_SCOPE},
@@ -16271,9 +16381,10 @@ def validate_g4_owner_bootstrap_scope(scope):
     return sources
 
 
-def _g4_owner_bootstrap_subject_review(read,row,evidence_root,subject,stage,phase):
+def _g4_owner_bootstrap_subject_review(read,row,evidence_root,subject,stage,phase, schema=G4_OWNER_BOOTSTRAP_SCHEMA):
+    d=_g4_owner_bootstrap_descriptor(schema)
     _keys(row,{"path","sha256"},"bounded_g4_owner_bootstrap_review_row")
-    path = G4_OWNER_BOOTSTRAP_ROOT / "entry-admission-v1" / ("independent-"+stage+"-"+phase+"-subject-review-v1.json")
+    path = d["root"] / "entry-admission-v1" / ("independent-"+stage+"-"+phase+"-subject-review-v1.json")
     _need(Path(row["path"]) == path and path.is_relative_to(evidence_root),"bounded_g4_owner_bootstrap_review_path")
     review = _json(read(path,row["sha256"]))
     _need(review.get("schema") == "emr4.g4_operation_review.v1" and review.get("status") == "PASS"
@@ -16282,7 +16393,7 @@ def _g4_owner_bootstrap_subject_review(read,row,evidence_root,subject,stage,phas
           and review.get("independent") is True and review.get("implementation_authorship") is False
           and review.get("blocking_findings") == []
           and type(review.get("reviewer_agent")) is str
-          and review["reviewer_agent"] not in {"","/root","/root/owner_bootstrap_author"}
+          and review["reviewer_agent"] not in d["excluded_reviewers"]
           and review.get("stage") == stage and review.get("phase") == phase,
           "bounded_g4_owner_bootstrap_independent_subject")
     return review
@@ -16317,6 +16428,7 @@ def _load_g4_owner_bootstrap_inputs(context, target, source, evidence_root, scra
     for key in ("base_commit", "base_tree", "expected_head", "expected_index_tree", "candidate_tree"):
         _need(type(q[key]) is str and re.fullmatch(r"[0-9a-f]{40}", q[key]),
               "bounded_g4_owner_bootstrap_git_identity")
+    descriptor=_g4_owner_bootstrap_descriptor(q["schema_version"])
     paths = _g4_owner_bootstrap_paths(q["operation_kind"], q)
     if q["stage"] == "admit":
         _need(q["phase"] == "development" and q["repair_sha256"] == {}
@@ -16326,17 +16438,17 @@ def _load_g4_owner_bootstrap_inputs(context, target, source, evidence_root, scra
               "bounded_g4_owner_bootstrap_admit_no_delta")
     vector, mapping = _g4_owner_bootstrap_external_inputs(read, q)
     _need(_sha(trusted_git.run_git_bytes(target, "cat-file", "blob",
-              G4_OWNER_BOOTSTRAP_BASE["commit"] + ":" + G4_STAGE1_SUCCESSOR_SCOPE)) ==
-              G4_OWNER_BOOTSTRAP_PREIMAGES[G4_STAGE1_SUCCESSOR_SCOPE]
-          and trusted_git.run_git(target, "rev-parse", G4_OWNER_BOOTSTRAP_BASE["commit"] + "^{tree}") ==
-              G4_OWNER_BOOTSTRAP_BASE["tree"], "bounded_g4_owner_bootstrap_predecessor")
+              descriptor["base"]["commit"] + ":" + G4_STAGE1_SUCCESSOR_SCOPE)) ==
+              descriptor["preimages"][G4_STAGE1_SUCCESSOR_SCOPE]
+          and trusted_git.run_git(target, "rev-parse", descriptor["base"]["commit"] + "^{tree}") ==
+              descriptor["base"]["tree"], "bounded_g4_owner_bootstrap_predecessor")
     if q["stage"] == "enable":
-        _need(q["base_commit"] == G4_OWNER_BOOTSTRAP_BASE["commit"]
-              and q["base_tree"] == G4_OWNER_BOOTSTRAP_BASE["tree"]
+        _need(q["base_commit"] == descriptor["base"]["commit"]
+              and q["base_tree"] == descriptor["base"]["tree"]
               and q["activation_acceptance"] is None, "bounded_g4_owner_bootstrap_enable_base")
     else:
         _keys(q["activation_acceptance"], {"path", "sha256"}, "bounded_g4_owner_bootstrap_activation_row")
-        path = G4_OWNER_BOOTSTRAP_ROOT / "entry-admission-v1/independent-enable-push-effect-review-v1.json"
+        path = descriptor["root"] / "entry-admission-v1/independent-enable-push-effect-review-v1.json"
         _need(Path(q["activation_acceptance"]["path"]) == path
               and path.is_relative_to(evidence_root), "bounded_g4_owner_bootstrap_activation_path")
         activation = _json(read(path, q["activation_acceptance"]["sha256"]))
@@ -16344,12 +16456,12 @@ def _load_g4_owner_bootstrap_inputs(context, target, source, evidence_root, scra
               and activation.get("status") == "PASS"
               and activation.get("verdict") == "PASS_G4_STAGE1_OWNER_BOOTSTRAP_CONTROL_PUBLICATION_EFFECT"
               and type(activation.get("reviewer_agent")) is str
-              and activation["reviewer_agent"] not in {"", "/root", "/root/owner_bootstrap_author"}
+              and activation["reviewer_agent"] not in descriptor["excluded_reviewers"]
               and activation.get("independent") is True
               and activation.get("implementation_authorship") is False
               and activation.get("blocking_findings") == []
               and activation.get("stage") == "enable" and activation.get("phase") == "push"
-              and activation.get("base") == G4_OWNER_BOOTSTRAP_BASE["commit"]
+              and activation.get("base") == descriptor["base"]["commit"]
               and activation.get("commit") == q["base_commit"]
               and activation.get("candidate_tree") == q["base_tree"]
               and activation.get("control_activation_accepted") is True
@@ -16359,7 +16471,7 @@ def _load_g4_owner_bootstrap_inputs(context, target, source, evidence_root, scra
               and activation.get("published_ref") == G4_STAGE1_INTERACTIVE_BACKEND_REF,
               "bounded_g4_owner_bootstrap_activation_acceptance")
         headers = trusted_git.run_git(target, "cat-file", "commit", q["base_commit"]).split("\n\n", 1)[0].splitlines()
-        _need([h for h in headers if h.startswith("parent ")] == ["parent " + G4_OWNER_BOOTSTRAP_BASE["commit"]]
+        _need([h for h in headers if h.startswith("parent ")] == ["parent " + descriptor["base"]["commit"]]
               and [h for h in headers if h.startswith("tree ")] == ["tree " + q["base_tree"]],
               "bounded_g4_owner_bootstrap_activation_parent")
     sources = _digest_map(q["source_sha256"], SOURCE_PATHS | CONTROLLER_PATHS,
@@ -16372,6 +16484,7 @@ def _load_g4_owner_bootstrap_inputs(context, target, source, evidence_root, scra
     pins = _digest_map(q["payload_sha256"], inputs, "bounded_g4_owner_bootstrap_payload_paths")
     payloads = {p:read(target / p, d) for p,d in sorted(pins.items())}
     scope = _json(payloads[G4_STAGE1_SUCCESSOR_SCOPE])
+    _need(scope.get("schema_version")==descriptor["scope_schema"],"bounded_g4_owner_bootstrap_scope_sources")
     validate_g4_owner_bootstrap_scope(scope)
     _need(scope["source_sha256"] == sources
           and scope["product_vector"] == q["product_vector"]
@@ -16393,23 +16506,23 @@ def _load_g4_owner_bootstrap_inputs(context, target, source, evidence_root, scra
         committed = trusted_git.run_git_bytes(target,"ls-tree","-z",q["base_commit"],"--",p)
         previous = (_sha(trusted_git.run_git_bytes(target,"cat-file","blob",q["base_commit"]+":"+p))
                     if committed else None)
-        expected_before = (G4_OWNER_BOOTSTRAP_PREIMAGES[p] if q["stage"] == "enable"
-                           else G4_OWNER_BOOTSTRAP_BEFORE_SHA[p])
-        expected = pins[p] if q["stage"] == "enable" else G4_OWNER_BOOTSTRAP_PRODUCT_SHA[p]
+        expected_before = (descriptor["preimages"][p] if q["stage"] == "enable"
+                           else descriptor["before_sha"][p])
+        expected = pins[p] if q["stage"] == "enable" else descriptor["product_sha"][p]
         _need(previous == expected_before and pair == {"before_sha256":previous,"after_sha256":expected}
               and previous != expected and _sha(payloads[p]) == expected,
               "bounded_g4_owner_bootstrap_change_preimage")
         if q["stage"] == "apply":
-            _,row = G4_OWNER_BOOTSTRAP_EXTERNAL_ROWS[G4_OWNER_BOOTSTRAP_PRODUCT_LOGICAL[p]]
+            row = descriptor["product_rows"][p]
             _need(payloads[p] == read(Path(row["path"]),expected)
                   and payloads[p] == read(source/p,expected)
-                  and len(payloads[p]) == G4_OWNER_BOOTSTRAP_PRODUCT_BYTES[p],
+                  and len(payloads[p]) == descriptor["product_bytes"][p],
                   "bounded_g4_owner_bootstrap_product_source")
     for p in inputs - paths:
         _need(trusted_git.run_git_bytes(target, "cat-file", "blob", q["base_commit"] + ":" + p) == payloads[p],
               "bounded_g4_owner_bootstrap_unowned_change")
     review = _g4_owner_bootstrap_subject_review(read, q["source_review"], evidence_root,
-                                     g4_owner_bootstrap_review_subject(q), q["stage"], q["phase"])
+                                     g4_owner_bootstrap_review_subject(q), q["stage"], q["phase"], q["schema_version"])
     attested = inputs - paths if q["phase"] == "development" else inputs
     observation = trusted_git.attest_target_index(target, attested_paths=tuple(sorted(attested)),
         expected_head=q["expected_head"], expected_index_tree=q["expected_index_tree"], scratch_parent=scratch)
@@ -16426,7 +16539,7 @@ def _load_g4_owner_bootstrap_inputs(context, target, source, evidence_root, scra
     for p,snapshot in snapshots.items():
         _need(trusted_git._read_regular_snapshot(p, maximum_bytes=2*1024*1024) == snapshot,
               "bounded_g4_owner_bootstrap_snapshot_drift")
-    before = {p:trusted_git.run_git_bytes(target,"cat-file","blob",G4_OWNER_BOOTSTRAP_BASE["commit"]+":"+p)
+    before = {p:trusted_git.run_git_bytes(target,"cat-file","blob",descriptor["base"]["commit"]+":"+p)
               for p in (STATE,GATES,OVERLAY,AGENTS)}
     _need(all(payloads[p] == before[p] for p in (STATE,GATES,OVERLAY,AGENTS)),
           "bounded_g4_owner_bootstrap_state_unchanged")

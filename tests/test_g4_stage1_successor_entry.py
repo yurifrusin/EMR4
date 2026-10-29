@@ -4788,16 +4788,19 @@ def test_account_http_loader_retains_activation_source_phase_and_index_checks(mo
 # selected controller predicates; synthetic Git observations below do not prove
 # native admission, application behaviour or an execution authorization.
 def _owner_bootstrap_scope():
-    return json.loads((Path(__file__).resolve().parents[1] /
-        bounded_g1b.G4_STAGE1_SUCCESSOR_SCOPE).read_bytes())
+    # Preserve the exact v21 fixture after the candidate scope advances to v22.
+    return json.loads(_owner_staff_predecessor_control(bounded_g1b.G4_STAGE1_SUCCESSOR_SCOPE))
 
 
-def _owner_bootstrap_q(stage="enable", phase="development"):
-    b=bounded_g1b;scope=_owner_bootstrap_scope()
-    base=b.G4_OWNER_BOOTSTRAP_BASE if stage=="enable" else {"commit":"b"*40,"tree":"c"*40}
+def _owner_bootstrap_q(stage="enable", phase="development", binding_schema=None):
+    b=bounded_g1b
+    schema=b.G4_OWNER_BOOTSTRAP_SCHEMA if binding_schema is None else binding_schema
+    d=b._g4_owner_bootstrap_descriptor(schema)
+    scope=_owner_bootstrap_scope() if d["version"]==21 else _owner_staff_scope()
+    base=d["base"] if stage=="enable" else {"commit":"b"*40,"tree":"c"*40}
     candidate=base["tree"] if stage=="admit" else "a"*40
     owned=b.G4_OWNER_BOOTSTRAP_CONTROL if stage=="enable" else b.G4_OWNER_BOOTSTRAP_PRODUCT if stage=="apply" else ()
-    return {"schema_version":b.G4_OWNER_BOOTSTRAP_SCHEMA,"operation_id":"owner-bootstrap-source-test",
+    return {"schema_version":schema,"operation_id":"owner-bootstrap-source-test",
         "operation_kind":b.G4_OWNER_BOOTSTRAP_ADMIT_KIND if stage=="admit" else
             "enable_g4_stage1_successor" if stage=="enable" else "implement_g4_stage1_successor",
         "stage":stage,"phase":phase,"base_commit":base["commit"],"base_tree":base["tree"],
@@ -4806,7 +4809,7 @@ def _owner_bootstrap_q(stage="enable", phase="development"):
         "candidate_tree":candidate,"source_sha256":scope["source_sha256"],"payload_sha256":{},
         "repair_sha256":{p:{} for p in owned},"source_review":{},
         "activation_acceptance":None if stage=="enable" else {"path":(
-            b.G4_OWNER_BOOTSTRAP_ROOT/"entry-admission-v1/independent-enable-push-effect-review-v1.json").as_posix(),"sha256":"f"*64},
+            d["root"]/"entry-admission-v1/independent-enable-push-effect-review-v1.json").as_posix(),"sha256":"f"*64},
         "product_vector":scope["product_vector"],"mapping_review":scope["mapping_review"]}
 
 
@@ -4898,48 +4901,54 @@ def test_owner_bootstrap_admit_entrypoint_cannot_publish_or_execute(entrypoint,p
         assert err.value.reason_code=="bounded_g4_owner_bootstrap_admit_entrypoint"
 
 
-def _owner_bootstrap_loader_fixture(monkeypatch,stage,phase):
+def _owner_bootstrap_loader_fixture(monkeypatch,stage,phase,binding_schema=None):
     b=bounded_g1b;root=Path(__file__).resolve().parents[1]
+    schema=b.G4_OWNER_BOOTSTRAP_SCHEMA if binding_schema is None else binding_schema
+    d=b._g4_owner_bootstrap_descriptor(schema)
     target=Path("C:/synthetic-seeded-target");source=Path("C:/synthetic-seeded-source")
     paths=(b.CONFIGURATION_PATHS|{b.STATE,b.GATES,b.OVERLAY,b.AGENTS,b.G4_STAGE1_INTERACTIVE_SCOPE,
         b.G4_STAGE1_SUCCESSOR_SCOPE,b.G4_STAGE1_SUCCESSOR_TEST,b.G4_CI_WORKFLOW}|b.SOURCE_PATHS|b.CONTROLLER_PATHS)
     original={p:("accepted:"+p).encode() for p in paths}
-    for p in b.G4_OWNER_BOOTSTRAP_CONTROL:original[p]=_pinned_predecessor_control(p)
+    for p in b.G4_OWNER_BOOTSTRAP_CONTROL:original[p]=_pinned_predecessor_control(p) if d["version"]==21 else _owner_staff_predecessor_control(p)
     installed=dict(original)
     for p in b.G4_OWNER_BOOTSTRAP_CONTROL:installed[p]=(root/p).read_bytes()
     after=dict(installed)
-    if stage=="apply":
+    if stage=="apply" and d["version"]==22:
         paths|=b.G4_OWNER_BOOTSTRAP_PRODUCT
-        for p,logical in b.G4_OWNER_BOOTSTRAP_PRODUCT_LOGICAL.items():
-            row=b.G4_OWNER_BOOTSTRAP_EXTERNAL_ROWS[logical][1]
-            after[p]=_owner_bootstrap_read(Path(row["path"]),row["sha256"])
-        vector=json.loads(_owner_bootstrap_read(b.G4_OWNER_BOOTSTRAP_VECTOR,b.G4_OWNER_BOOTSTRAP_VECTOR_SHA))
-        for p,logical in b.G4_OWNER_BOOTSTRAP_PRODUCT_LOGICAL.items():
-            if b.G4_OWNER_BOOTSTRAP_BEFORE_SHA[p] is None:continue
-            entry=next(r for r in vector["files"] if r["logical_path"]==logical)
-            row=entry["accepted_input"]
-            old_path=Path(row.get("source_path",row.get("path")))
-            installed[p]=_owner_bootstrap_read(old_path,b.G4_OWNER_BOOTSTRAP_BEFORE_SHA[p])
+        p="stage1_account_http_adapter.py";r=d["product_rows"][p]
+        after[p]=_owner_bootstrap_read(Path(r["path"]),r["sha256"])
+        installed[p]=_owner_bootstrap_read(Path("C:/Users/there/EMR4-tools/local-mock-owner-practice-bootstrap-source-v1/stage1_account_http_adapter.py"),d["before_sha"][p])
+    elif stage=="apply":
+            paths|=b.G4_OWNER_BOOTSTRAP_PRODUCT
+            for p,logical in b.G4_OWNER_BOOTSTRAP_PRODUCT_LOGICAL.items():
+                row=b.G4_OWNER_BOOTSTRAP_EXTERNAL_ROWS[logical][1]
+                after[p]=_owner_bootstrap_read(Path(row["path"]),row["sha256"])
+            vector=json.loads(_owner_bootstrap_read(b.G4_OWNER_BOOTSTRAP_VECTOR,b.G4_OWNER_BOOTSTRAP_VECTOR_SHA))
+            for p,logical in b.G4_OWNER_BOOTSTRAP_PRODUCT_LOGICAL.items():
+                if d["before_sha"][p] is None:continue
+                entry=next(r for r in vector["files"] if r["logical_path"]==logical)
+                row=entry["accepted_input"]
+                old_path=Path(row.get("source_path",row.get("path")))
+                installed[p]=_owner_bootstrap_read(old_path,d["before_sha"][p])
     # Bind the deliberately synthetic ordinary controls to the actual candidate
     # controller/test bytes, without invoking the whole-policy/config loader.
-    scope=_owner_bootstrap_scope()
+    scope=_owner_bootstrap_scope() if d["version"]==21 else _owner_staff_scope()
     scope["source_sha256"]={p:hashlib.sha256(after[p]).hexdigest() for p in b.SOURCE_PATHS|b.CONTROLLER_PATHS}
     scope["control_sha256"]={p:hashlib.sha256(after[p]).hexdigest()
         for p in b.G4_OWNER_BOOTSTRAP_CONTROL-{b.G4_STAGE1_SUCCESSOR_SCOPE}}
     after[b.G4_STAGE1_SUCCESSOR_SCOPE]=b._canonical(scope)+b"\n"
     if stage!="enable":installed[b.G4_STAGE1_SUCCESSOR_SCOPE]=after[b.G4_STAGE1_SUCCESSOR_SCOPE]
-    q=_owner_bootstrap_q(stage,phase)
+    q=_owner_bootstrap_q(stage,phase,binding_schema=schema)
     q["source_sha256"]={p:hashlib.sha256(after[p]).hexdigest() for p in b.SOURCE_PATHS|b.CONTROLLER_PATHS}
     q["payload_sha256"]={p:hashlib.sha256(after[p]).hexdigest() for p in paths}
     owned=b._g4_owner_bootstrap_paths(q["operation_kind"],q)
     for p in owned:
-        before=b.G4_OWNER_BOOTSTRAP_PREIMAGES[p] if stage=="enable" else b.G4_OWNER_BOOTSTRAP_BEFORE_SHA[p]
+        before=d["preimages"][p] if stage=="enable" else d["before_sha"][p]
         q["repair_sha256"][p]={"before_sha256":before,"after_sha256":q["payload_sha256"][p]}
-    subject=b.G4_OWNER_BOOTSTRAP_ROOT/"entry-admission-v1"/("independent-"+stage+"-"+phase+"-subject-review-v1.json")
+    subject=d["root"]/"entry-admission-v1"/("independent-"+stage+"-"+phase+"-subject-review-v1.json")
     q["source_review"]={"path":subject.as_posix(),"sha256":"d"*64}
-    external={Path(b.G4_OWNER_BOOTSTRAP_EXTERNAL_ROWS[logical][1]["path"]):
-        (p,b.G4_OWNER_BOOTSTRAP_PRODUCT_SHA[p],b.G4_OWNER_BOOTSTRAP_PRODUCT_BYTES[p])
-        for p,logical in b.G4_OWNER_BOOTSTRAP_PRODUCT_LOGICAL.items()}
+    external={Path(row["path"]):(p,d["product_sha"][p],d["product_bytes"][p])
+        for p,row in d["product_rows"].items()}
     assert len(external)==1 and {row[0] for row in external.values()}==b.G4_OWNER_BOOTSTRAP_PRODUCT
     external_seen=set()
     def read(path,digest):
@@ -4952,16 +4961,18 @@ def _owner_bootstrap_loader_fixture(monkeypatch,stage,phase):
             return json.dumps({"schema":"emr4.g4_operation_review.v1","status":"PASS",
                 "verdict":"PASS_G4_STAGE1_OWNER_BOOTSTRAP_CONTROL_PUBLICATION_EFFECT","independent":True,
                 "implementation_authorship":False,"blocking_findings":[],"reviewer_agent":"/root/synthetic-independent-reviewer",
-                "stage":"enable","phase":"push","base":b.G4_OWNER_BOOTSTRAP_BASE["commit"],"commit":q["base_commit"],
+                "stage":"enable","phase":"push","base":d["base"]["commit"],"commit":q["base_commit"],
                 "candidate_tree":q["base_tree"],"control_activation_accepted":True,"same_attempt_remote_readback_verified":True,
                 "protected_refs_unchanged":True,"whole_inverse_verified_same_attempt":True,"published_ref":b.G4_STAGE1_INTERACTIVE_BACKEND_REF}).encode()
         if path in external:
             relative,expected,size=external[path]
-            assert stage=="apply" and digest==expected
-            raw=after[relative]
+            assert (stage=="apply" or d["version"]==22) and digest==expected
+            raw=after[relative] if stage=="apply" else _owner_bootstrap_read(path,digest)
             assert len(raw)==size and hashlib.sha256(raw).hexdigest()==expected
             external_seen.add(relative)
             return raw
+        if d["version"]==22 and path in {Path(r["path"]) for k,r in b.G4_OWNER_STAFF_INVITATION_ROWS.items() if k!="factory"}:
+            return _owner_bootstrap_read(path,digest)
         assert path.is_relative_to(target) or path.is_relative_to(source), "unbound synthetic read"
         relative=path.relative_to(target if path.is_relative_to(target) else source).as_posix()
         raw=after[relative]
@@ -4972,17 +4983,18 @@ def _owner_bootstrap_loader_fixture(monkeypatch,stage,phase):
         if args[0]=="ls-tree":return b"tracked" if args[-1] in (original if stage=="enable" else installed) else b""
         assert args[:2]==("cat-file","blob")
         commit,p=args[2].split(":",1)
-        return (original if commit==b.G4_OWNER_BOOTSTRAP_BASE["commit"] else installed)[p]
+        return (original if commit==d["base"]["commit"] else installed)[p]
     def git(_target,*args):
-        if args[0]=="rev-parse":return b.G4_OWNER_BOOTSTRAP_BASE["tree"]
-        parent=b.G4_OWNER_BOOTSTRAP_BASE["commit"] if args[2]==q["base_commit"] and stage!="enable" else q["base_commit"]
+        if args[0]=="rev-parse":return d["base"]["tree"]
+        parent=d["base"]["commit"] if args[2]==q["base_commit"] and stage!="enable" else q["base_commit"]
         tree=q["base_tree"] if args[2]==q["base_commit"] and stage!="enable" else q["candidate_tree"]
         return "tree "+tree+"\nparent "+parent+"\n\nsynthetic\n"
     observations=[]
     monkeypatch.setattr(b.trusted_git,"run_git_bytes",git_bytes)
     monkeypatch.setattr(b.trusted_git,"run_git",git)
     monkeypatch.setattr(b.trusted_git,"attest_target_index",lambda *a,**k:observations.append(k) or {"observation_sha256":"sha256:"+"0"*64})
-    monkeypatch.setattr(b,"_g4_owner_bootstrap_external_inputs",lambda *a:({"synthetic_source_join":True},{}))
+    if d["version"]==21:
+        monkeypatch.setattr(b,"_g4_owner_bootstrap_external_inputs",lambda *a:({"synthetic_source_join":True},{}))
     def run(reader=read):return b._load_g4_owner_bootstrap_inputs(None,target,source,b.G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT,
         Path("C:/synthetic-seeded-scratch"),q,reader,{})
     return run,q,read,observations
@@ -5101,3 +5113,192 @@ def test_owner_bootstrap_scope_excludes_runtime_and_provider_effects():
     with pytest.raises(b.BoundedG1BError) as err:
         b.validate_g4_owner_bootstrap_scope(scope)
     assert err.value.reason_code == "bounded_g4_owner_bootstrap_scope_boundary"
+
+
+# V22 source-only tests. Real selected file/hash reads are separated from
+# deliberately synthetic Git/index/review frames; neither is live admission.
+def _owner_staff_scope():
+    return json.loads((Path(__file__).resolve().parents[1] /
+                       bounded_g1b.G4_STAGE1_SUCCESSOR_SCOPE).read_bytes())
+
+
+def _owner_staff_predecessor_control(path):
+    root=Path("C:/Users/there/EMR4-tools/owner-bootstrap-apply01-source")
+    raw=(root/path).read_bytes()
+    assert hashlib.sha256(raw).hexdigest()==bounded_g1b.G4_OWNER_STAFF_INVITATION_PREIMAGES[path]
+    return raw
+
+
+@pytest.mark.parametrize("schema", ["legacy", "invitation"])
+@pytest.mark.parametrize("stage", ["enable", "admit", "apply"])
+def test_owner_staff_closed_family_dispatch_preserves_legacy(schema,stage):
+    b=bounded_g1b
+    version=b.G4_OWNER_BOOTSTRAP_SCHEMA if schema=="legacy" else b.G4_OWNER_STAFF_INVITATION_SCHEMA
+    q=_owner_bootstrap_q(stage,binding_schema=version)
+    expected=b.G4_ACCOUNT_HTTP_CONTROL if stage=="enable" else b.G4_OWNER_BOOTSTRAP_PRODUCT if stage=="apply" else frozenset()
+    assert b.operation_paths(q["operation_kind"],q)==expected
+    operation=b._operation(q["operation_kind"],q)
+    assert operation["profile"]==b.raisa_policy.G4_STAGE1_SUCCESSOR_PROFILE
+    assert operation["g4_owner_bootstrap_source"] is True
+    assert "admission grants no runtime" in " ".join(operation["limits"])
+    assert b.G4_OWNER_BOOTSTRAP_SCHEMA=="ariadne.g4_stage1_owner_bootstrap_operation_binding.v1"
+    assert b.G4_OWNER_BOOTSTRAP_SCOPE_SCHEMA=="ariadne.g4_stage1_successor_entry_scope.v21"
+    assert b.G4_OWNER_BOOTSTRAP_PRODUCT_SHA["stage1_account_http_adapter.py"]=="03a22a0ef86eda1303fc1c9d43e3e4e2e79036a33e364dd35d62d4f3526d6a45"
+    if stage=="admit":assert b.operation_effects(q["operation_kind"])==frozenset({"repository_read"})
+
+
+@pytest.mark.parametrize("mode", ["unknown", "cross_kind", "cross_vector", "cross_scope"])
+def test_owner_staff_schema_kind_and_subject_never_fall_back(mode):
+    b=bounded_g1b;q=_owner_bootstrap_q("admit",binding_schema=b.G4_OWNER_STAFF_INVITATION_SCHEMA)
+    if mode=="unknown":q["schema_version"]="ariadne.g4_stage1_owner_bootstrap_operation_binding.v999"
+    if mode=="cross_kind":q["operation_kind"]=b.G4_SEEDED_LOGIN_ADMIT_KIND
+    if mode in {"unknown","cross_kind"}:
+        with pytest.raises(b.BoundedG1BError) as err:b.operation_paths(q["operation_kind"],q)
+        assert err.value.reason_code=="bounded_g4_owner_bootstrap_binding_kind"
+    elif mode=="cross_vector":
+        q["product_vector"]={"path":b.G4_OWNER_BOOTSTRAP_VECTOR.as_posix(),"sha256":b.G4_OWNER_BOOTSTRAP_VECTOR_SHA}
+        with pytest.raises(b.BoundedG1BError) as err:b._g4_owner_bootstrap_external_inputs(_owner_bootstrap_read,q)
+        assert err.value.reason_code=="bounded_g4_owner_bootstrap_external_pins"
+    else:
+        scope=_owner_staff_scope();scope["schema_version"]=b.G4_OWNER_BOOTSTRAP_SCOPE_SCHEMA
+        with pytest.raises(b.BoundedG1BError) as err:b.validate_g4_owner_bootstrap_scope(scope)
+        assert err.value.reason_code=="bounded_g4_owner_bootstrap_scope_boundary"
+
+
+@pytest.mark.parametrize("mutation", [None,"factory","vector","review","base","predecessor","runtime","unowned","source_control","provider"])
+def test_owner_staff_scope_exact_or_refuses_named_widening(mutation):
+    b=bounded_g1b;s=_owner_staff_scope()
+    if mutation=="factory":s["product_sha256"]["stage1_account_http_adapter.py"]="0"*64
+    if mutation=="vector":s["product_vector"]["sha256"]="0"*64
+    if mutation=="review":s["mapping_review"]["sha256"]="0"*64
+    if mutation=="base":s["selected_base"]["commit"]="0"*40
+    if mutation=="predecessor":s["predecessor_scope"]["sha256"]="0"*64
+    if mutation=="runtime":s["admission_grants_runtime_authority"]=True
+    if mutation=="unowned":s["allowed_paths"].append("app/unowned.py")
+    if mutation=="source_control":s["control_sha256"][b.G4_AUDIT_CODE]="0"*64
+    if mutation=="provider":s["allowed_effects"].append("provider_invocation")
+    if mutation:
+        with pytest.raises(b.BoundedG1BError) as err:b.validate_g4_owner_bootstrap_scope(s)
+        assert err.value.reason_code==("bounded_g4_owner_bootstrap_source_vector" if mutation=="source_control" else "bounded_g4_owner_bootstrap_scope_boundary")
+    else:
+        assert b.validate_g4_owner_bootstrap_scope(s)==s["source_sha256"]
+        assert s["allowed_paths"]==["stage1_account_http_adapter.py"]
+        assert s["runtime_binding_required"] is True and s["admission_grants_runtime_authority"] is False
+
+
+@pytest.mark.parametrize("mutation,reason", [(None,None),
+    ("factory","bounded_g4_owner_bootstrap_external_vector"),
+    ("test","bounded_g4_owner_bootstrap_external_vector"),
+    ("bytes","bounded_g4_owner_bootstrap_external_source"),
+    ("base","bounded_g4_owner_bootstrap_independent_source"),
+    ("preimage","bounded_g4_owner_bootstrap_independent_source"),
+    ("review_source","bounded_g4_owner_bootstrap_independent_source"),
+    ("author","bounded_g4_owner_bootstrap_independent_source"),
+    ("root","bounded_g4_owner_bootstrap_independent_source"),
+    ("authorship","bounded_g4_owner_bootstrap_independent_source"),
+    ("runtime","bounded_g4_owner_bootstrap_independent_source")])
+def test_owner_staff_minimum_four_external_pins_and_actual_acceptance(mutation,reason):
+    b=bounded_g1b;q=_owner_bootstrap_q("admit",binding_schema=b.G4_OWNER_STAFF_INVITATION_SCHEMA)
+    rows=b.G4_OWNER_STAFF_INVITATION_ROWS;seen=[]
+    def read(path,digest):
+        raw=_owner_bootstrap_read(path,digest);seen.append(path)
+        if mutation=="bytes" and path==Path(rows["factory"]["path"]):return raw+b"\n"
+        value=None
+        if path==Path(rows["vector"]["path"]) and mutation in {"factory","test"}:
+            value=json.loads(raw);value["factory" if mutation=="factory" else "tests"]["sha256"]="0"*64
+        if path==Path(rows["review"]["path"]) and mutation in {"base","preimage","review_source","author","root","authorship","runtime"}:
+            value=json.loads(raw)
+            if mutation=="base":value["current_product_base"]["commit"]="0"*40
+            if mutation=="preimage":value["current_product_base"]["factory_sha256"]="0"*64
+            if mutation=="review_source":value["source_accepted"]=False
+            if mutation=="author":value["reviewer_agent"]="/root/owner_signup_guard_successor_sol"
+            if mutation=="root":value["reviewer_agent"]="/root"
+            if mutation=="authorship":value["implementation_authorship"]=True
+            if mutation=="runtime":value["runtime_admitted"]=True
+        if value is not None:
+            # Deliberately substitute after real baseline pin verification, keep
+            # byte count to isolate semantic predicate rather than size failure.
+            changed=json.dumps(value,separators=(",",":")).encode()
+            assert len(changed)<=len(raw)
+            return changed+b" "*(len(raw)-len(changed))
+        return raw
+    if reason:
+        with pytest.raises(b.BoundedG1BError) as err:b._g4_owner_bootstrap_external_inputs(read,q)
+        assert err.value.reason_code==reason
+    else:
+        vector,review=b._g4_owner_bootstrap_external_inputs(read,q)
+        assert vector["factory"]==rows["factory"] and review["source_accepted"] is True
+        assert set(seen)=={Path(r["path"]) for r in rows.values()} and len(seen)==4
+
+
+@pytest.mark.parametrize("stage,phase", [("enable","development"),("enable","pre-push"),
+    ("admit","development"),("apply","development"),("apply","pre-push"),("apply","post-push")])
+def test_owner_staff_full_loader_preserves_existing_stage_boundaries(monkeypatch,stage,phase):
+    b=bounded_g1b
+    run,q,read,observations=_owner_bootstrap_loader_fixture(monkeypatch,stage,phase,b.G4_OWNER_STAFF_INVITATION_SCHEMA)
+    loaded=run()
+    assert loaded.binding is q and len(observations)==1
+    assert loaded.evidence["mapping"]["source_accepted"] is True
+    assert read.external_seen==b.G4_OWNER_BOOTSTRAP_PRODUCT
+    assert set(q["repair_sha256"])==(b.G4_ACCOUNT_HTTP_CONTROL if stage=="enable" else b.G4_OWNER_BOOTSTRAP_PRODUCT if stage=="apply" else set())
+
+
+@pytest.mark.parametrize("mode,reason", [
+    ("enable_base","bounded_g4_owner_bootstrap_enable_base"),
+    ("preimage","bounded_g4_owner_bootstrap_change_preimage"),
+    ("parent","bounded_g4_owner_bootstrap_activation_parent"),
+    ("author","bounded_g4_owner_bootstrap_activation_acceptance"),
+    ("protected","bounded_g4_owner_bootstrap_activation_acceptance"),
+    ("control_acceptance","bounded_g4_owner_bootstrap_activation_acceptance"),
+    ("unowned","bounded_g4_owner_bootstrap_unowned_change"),
+    ("subject_author","bounded_g4_owner_bootstrap_independent_subject")])
+def test_owner_staff_loader_rejects_base_preimage_publication_and_unowned_drift(monkeypatch,mode,reason):
+    b=bounded_g1b;stage="enable" if mode=="enable_base" else "apply"
+    run,q,read,observations=_owner_bootstrap_loader_fixture(monkeypatch,stage,"development",b.G4_OWNER_STAFF_INVITATION_SCHEMA)
+    if mode=="enable_base":q["base_commit"]="0"*40
+    if mode=="preimage":q["repair_sha256"]["stage1_account_http_adapter.py"]["before_sha256"]="0"*64
+    original_git=b.trusted_git.run_git;original_bytes=b.trusted_git.run_git_bytes
+    if mode=="parent":
+        def git(target,*args):
+            value=original_git(target,*args)
+            return value.replace("parent "+b.G4_OWNER_STAFF_INVITATION_BASE["commit"],"parent "+"0"*40) if args[:2]==("cat-file","commit") else value
+        monkeypatch.setattr(b.trusted_git,"run_git",git)
+    if mode=="unowned":
+        def git_bytes(target,*args):
+            raw=original_bytes(target,*args)
+            return raw+b"unowned" if args[:2]==("cat-file","blob") and args[2]==q["base_commit"]+":"+b.AGENTS else raw
+        monkeypatch.setattr(b.trusted_git,"run_git_bytes",git_bytes)
+    def changed(path,digest):
+        raw=read(path,digest)
+        if path.name=="independent-enable-push-effect-review-v1.json" and mode in {"author","protected","control_acceptance"}:
+            v=json.loads(raw)
+            if mode=="author":v["reviewer_agent"]="/root/owner_signup_guard_successor_sol"
+            if mode=="protected":v["protected_refs_unchanged"]=False
+            if mode=="control_acceptance":v["control_activation_accepted"]=False
+            return json.dumps(v).encode()
+        if path.name=="independent-apply-development-subject-review-v1.json" and mode=="subject_author":
+            v=json.loads(raw);v["reviewer_agent"]="/root/owner_signup_guard_successor_sol";return json.dumps(v).encode()
+        return raw
+    with pytest.raises(b.BoundedG1BError) as err:run(changed)
+    assert err.value.reason_code==reason and observations==[]
+
+
+@pytest.mark.parametrize("mode", ["delta","phase"])
+def test_owner_staff_admit_zero_delta_before_any_index_observation(monkeypatch,mode):
+    b=bounded_g1b
+    run,q,read,observations=_owner_bootstrap_loader_fixture(monkeypatch,"admit","development",b.G4_OWNER_STAFF_INVITATION_SCHEMA)
+    if mode=="delta":q["candidate_tree"]="a"*40
+    else:q["phase"]="pre-push"
+    with pytest.raises(b.BoundedG1BError) as err:run()
+    assert err.value.reason_code=="bounded_g4_owner_bootstrap_admit_no_delta" and observations==[]
+
+
+@pytest.mark.parametrize("entrypoint,phase", [("recovery_preflight","development"),
+    ("task_branch_commit","development"),("task_branch_push","pre-push"),("recovery_preflight","post-push")])
+def test_owner_staff_admit_requires_preflight_only(entrypoint,phase):
+    b=bounded_g1b;q=_owner_bootstrap_q("admit",binding_schema=b.G4_OWNER_STAFF_INVITATION_SCHEMA)
+    if (entrypoint,phase)==("recovery_preflight","development"):
+        b._g4_owner_bootstrap_require_entrypoint(q,entrypoint,phase)
+    else:
+        with pytest.raises(b.BoundedG1BError) as err:b._g4_owner_bootstrap_require_entrypoint(q,entrypoint,phase)
+        assert err.value.reason_code=="bounded_g4_owner_bootstrap_admit_entrypoint"
