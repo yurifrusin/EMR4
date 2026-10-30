@@ -10,6 +10,9 @@ import json
 import re
 import sys
 from datetime import datetime, timezone
+from datetime import date
+from dataclasses import dataclass
+from types import MappingProxyType
 from pathlib import Path
 from typing import Any
 
@@ -34,6 +37,7 @@ SCHEMA_PATHS = {
     "catalog": ARTIFACT_DIR / "operator-catalog.schema.json",
     "input": ARTIFACT_DIR / "input-frame.schema.json",
     "plan": ARTIFACT_DIR / "plan-draft.schema.json",
+    "packet": ARTIFACT_DIR / "plan-draft.schema.json",
     "review": ARTIFACT_DIR / "plan-review.schema.json",
     "execution": ARTIFACT_DIR / "execution-result.schema.json",
 }
@@ -43,6 +47,7 @@ SEMANTIC_TYPES = {
     "appointment_date": "date",
     "earliest_time": "time",
     "latest_time": "time",
+    "target_start_local": "time",
     "duration_minutes": "integer",
     "intended_action": "action",
 }
@@ -67,6 +72,7 @@ PROPOSAL_OPERATIONS = {
 }
 SELECTED_PROPOSAL_FAMILIES = {
     "prepare_move_proposal": "move",
+    "prepare_point_move_proposal": "move",
     "prepare_resize_proposal": "resize",
     "prepare_cancel_proposal": "cancel",
     "prepare_status_proposal": "status_change",
@@ -114,6 +120,14 @@ def canonical_sha256(value: Any) -> str:
 
 
 def schema_error_paths(value: Any, schema: dict[str, Any]) -> list[str]:
+    if schema.get("$id") == "https://emr4.invalid/schemas/reception-one-bureau-plan-draft-dispatch.v1.json":
+        # Closed discriminator also preserves legacy per-field error paths.
+        version = value.get("contract_version") if isinstance(value, dict) else None
+        branch = {"reception.one.bureau.plan-draft.v1": "legacyPlan",
+                  "reception.one.bureau.plan-draft.model-first.v1": "modelFirstPlan",
+                  "reception.one.bureau.plan-draft.model-first.point.v2": "pointModelPlan"}.get(version)
+        if branch is not None:
+            schema = {**schema["$defs"][branch], "$defs": schema["$defs"]}
     validator = Draft202012Validator(schema, format_checker=FormatChecker())
     paths = []
     for error in validator.iter_errors(value):
@@ -128,7 +142,12 @@ def schema_error_paths(value: Any, schema: dict[str, Any]) -> list[str]:
 
 
 def validate_schema(value: Any, schema_name: str) -> None:
-    failures = schema_error_paths(value, load_json(SCHEMA_PATHS[schema_name]))
+    schema = load_json(SCHEMA_PATHS[schema_name])
+    if schema_name == "packet":
+        # Lookup only: adding this definition never admits a packet as a plan.
+        branch = "semanticPacketV3" if isinstance(value, dict) and value.get("packet_schema") == POINT_PACKET_VERSION else "semanticPacket"
+        schema = {"$schema": schema["$schema"], "$ref": "#/$defs/" + branch, "$defs": schema["$defs"]}
+    failures = schema_error_paths(value, schema)
     if failures:
         raise ValueError(f"{schema_name} schema failed at {failures}")
 
@@ -162,6 +181,227 @@ def expand_case(cases_document: dict[str, Any], case: dict[str, Any]) -> dict[st
 
 def extraction_for(frame: dict[str, Any]) -> SemanticExtraction:
     return extract_semantics(frame["utterances"], frame["reference_date"])
+
+
+LEGACY_PLAN_VERSION = "reception.one.bureau.plan-draft.v1"
+MODEL_PLAN_VERSION = "reception.one.bureau.plan-draft.model-first.v1"
+POINT_PLAN_VERSION = "reception.one.bureau.plan-draft.model-first.point.v2"
+POINT_PACKET_VERSION = "emr4.bureau_model_semantic_packet.v3"
+POINT_CONSTRUCTOR_VERSION = "emr4.bureau_model_semantic_constructor.point.v3"
+
+
+@dataclass(frozen=True)
+class ValidatedModelIntent:
+    """Untrusted proposed meaning, structurally bound to one immutable frame.
+
+    Valid evidence proves origin, not that a proposed meaning is correct.
+    Calendar dates and HH:MM values are practice-local; no zone is inferred.
+    """
+    intended_action: str
+    normalized_values: Any
+
+
+def validated_model_intent(frame: dict[str, Any], plan: dict[str, Any]) -> ValidatedModelIntent:
+    """Validate the closed model contract without regex semantic extraction."""
+    validate_schema(plan, "plan")
+    if plan.get("contract_version") not in {MODEL_PLAN_VERSION, POINT_PLAN_VERSION}:
+        raise ValueError("model contract required")
+    intent = plan["interpretation"]
+    if (intent["frame_sha256"] != canonical_sha256(frame)
+            or type(intent["context_revision"]) is not int
+            or intent["context_revision"] != frame["context_revision"]
+            or intent["reference_date"] != frame["reference_date"]):
+        raise ValueError("model frame binding refused")
+    reference = intent["reference_date"]
+    if date.fromisoformat(reference).isoformat() != reference:
+        raise ValueError("model reference date refused")
+    # JSON Schema accepts integer-valued floats; this boundary intentionally does not.
+    for value in (plan["context_revision"], plan["attempt"], plan["revision_limit"],
+                  frame["context_revision"]):
+        if type(value) is not int:
+            raise ValueError("strict integer required")
+    candidates = intent["candidates"]
+    by_id = {item["id"]: item for item in candidates}
+    if len(by_id) != len(candidates):
+        raise ValueError("duplicate model candidate")
+    positions = {}
+    for item in candidates:
+        evidence = item["evidence"]
+        index, start, end = (evidence[key] for key in ("utterance_index", "start", "end"))
+        if (any(type(value) is not int for value in (index, start, end))
+                or not 0 <= index < len(frame["utterances"])):
+            raise ValueError("model evidence bounds refused")
+        utterance = frame["utterances"][index]
+        if not 0 <= start < end <= len(utterance) or utterance[start:end] != evidence["text"]:
+            raise ValueError("model evidence substring refused")
+        positions[item["id"]] = (index, end, start)
+        field, value = item["field"], item["value"]
+        if field == "duration_minutes":
+            valid = type(value) is int and 5 <= value <= 180
+        elif field == "appointment_date":
+            valid = isinstance(value, str) and bool(re.fullmatch(r"\d{4}-\d{2}-\d{2}", value))
+            valid = valid and date.fromisoformat(value).isoformat() == value
+        elif field in {"earliest_time", "latest_time", "target_start_local"}:
+            valid = isinstance(value, str) and bool(re.fullmatch(r"(?:[01]\d|2[0-3]):[0-5]\d", value))
+        else:
+            valid = field == "intended_action" and value in {
+                "create", "move", "resize", "cancel", "status_change", "squeeze_in_assessment", "clarification"
+            }
+        if not valid:
+            raise ValueError("model candidate value refused")
+    selected = intent["selected"]
+    fields = {item["field"] for item in candidates}
+    if set(selected) != fields or "intended_action" not in selected:
+        raise ValueError("model candidate choice incomplete")
+    values = {}
+    for field, winner_id in selected.items():
+        if winner_id not in by_id or by_id[winner_id]["field"] != field:
+            raise ValueError("model candidate choice refused")
+        reached = set()
+        pending = [winner_id]
+        while pending:
+            current = pending.pop()
+            if current in reached:
+                continue
+            reached.add(current)
+            item = by_id[current]
+            for prior in item["supersedes"]:
+                if (prior not in by_id or by_id[prior]["field"] != field
+                        or positions[prior] >= positions[current]):
+                    raise ValueError("model supersession refused")
+                pending.append(prior)
+        if reached != {item["id"] for item in candidates if item["field"] == field}:
+            raise ValueError("competing model candidates unresolved")
+        values[field] = by_id[winner_id]["value"]
+    if values["intended_action"] != plan["goal"]:
+        raise ValueError("model goal disagrees with chosen action")
+    if ("earliest_time" in values and "latest_time" in values
+            and values["earliest_time"] > values["latest_time"]):
+        raise ValueError("model local time window refused")
+    return ValidatedModelIntent(values["intended_action"], MappingProxyType(values))
+
+
+def selected_model_patient(frame: dict[str, Any]) -> str | None:
+    """Only this fixed selected-row link is exposed, never dotted traversal."""
+    context = frame["context"]
+    selected = context.get("selected_appointment")
+    if not isinstance(selected, dict):
+        return None
+    patients = [row for row in context["patients"] if row["id"] == selected["patient_ref"]]
+    practitioners = [row for row in context["practitioners"] if row["id"] == selected["practitioner_ref"]]
+    if len(patients) != 1 or len(practitioners) != 1:
+        return None
+    return patients[0]["id"]
+
+
+def model_plan_consistent(frame: dict[str, Any], plan: dict[str, Any], intent: ValidatedModelIntent | None) -> bool:
+    if intent is None or plan.get("planner_class") != "untrusted_model_candidate":
+        return False
+    steps = plan.get("steps", [])
+    if plan.get("contract_version") == POINT_PLAN_VERSION:
+        selected = frame["context"].get("selected_appointment")
+        if (not isinstance(selected, dict)
+                or type(selected.get("duration_minutes")) is not int
+                or not 1 <= selected["duration_minutes"] <= 480):
+            return False
+    if plan["goal"] == "clarification":
+        return len(steps) == 1 and steps[0].get("operator") == "request_clarification"
+    family_steps = [step for step in steps if step.get("operator") in SELECTED_PROPOSAL_FAMILIES]
+    reads = [step for step in steps if step.get("operator") == "read_selected_appointment"]
+    if plan["goal"] in SELECTED_PROPOSAL_FAMILIES.values() or family_steps or reads:
+        if (len(family_steps) != 1 or steps[-1] is not family_steps[0]
+                or SELECTED_PROPOSAL_FAMILIES[family_steps[0]["operator"]] != intent.intended_action
+                or not reads or selected_model_patient(frame) is None):
+            return False
+        return all(step.get("args") == {
+            "appointment": {"kind": "context_ref", "field": "selected_appointment"},
+            "patient": {"kind": "context_ref", "field": "selected_appointment.patient_ref"},
+        } for step in reads)
+    # Other existing catalog operations retain signature/grounding/effect checks.
+    final_operators = {"create": "prepare_create_proposal", "squeeze_in_assessment": "assess_squeeze_in_options"}
+    return bool(steps) and steps[-1].get("operator") == final_operators.get(plan["goal"])
+
+
+def model_dataflow_mismatches(plan: dict[str, Any], intent: ValidatedModelIntent) -> list[str]:
+    """Closed catalog binding rules, not a second language interpreter.
+
+    Chosen proposal values must actually govern the corresponding dataflow.
+    Move deliberately preserves the selected row's practitioner and duration;
+    those cannot simultaneously be presented as changed interpretation fields.
+    """
+    point = plan.get("contract_version") == POINT_PLAN_VERSION
+    fields_by_goal = {
+        "move": {"intended_action", "appointment_date", "earliest_time", "latest_time"},
+        "resize": {"intended_action", "duration_minutes"},
+        "cancel": {"intended_action"}, "status_change": {"intended_action"},
+        "clarification": {"intended_action"},
+        "create": {"intended_action", "appointment_date", "earliest_time", "latest_time", "duration_minutes"},
+        "squeeze_in_assessment": {"intended_action", "appointment_date", "duration_minutes"},
+    }
+    if point:
+        fields_by_goal["move"] = {"intended_action", "appointment_date", "target_start_local"}
+    mismatches = []
+    if point and (plan["goal"] != "move" or [step["operator"] for step in plan["steps"]] != ["read_selected_appointment", "prepare_point_move_proposal"]):
+        mismatches.append("$.steps")
+    if set(intent.normalized_values) != fields_by_goal[plan["goal"]]:
+        mismatches.append("$.interpretation.selected")
+    prior = {}
+
+    def semantic(binding, field):
+        if field not in intent.normalized_values:
+            return False
+        if binding == {"kind": "semantic_ref", "field": field}:
+            return True
+        # The existing date operator may pass the SAME chosen local date on.
+        source = source_step(binding, "resolve_date_expression", "date") if field == "appointment_date" else None
+        return source is not None and source["args"].get("date") == {"kind": "semantic_ref", "field": field}
+
+    def source_step(binding, operator, output):
+        if not isinstance(binding, dict) or set(binding) != {"kind", "step_id", "output"}:
+            return None
+        source = prior.get(binding["step_id"])
+        return source if (binding["kind"] == "step_output" and binding["output"] == output
+                          and source is not None and source["operator"] == operator) else None
+
+    for index, step in enumerate(plan["steps"]):
+        operator, args = step["operator"], step["args"]
+        prefix = f"$.steps[{index}].args"
+
+        def require_binding(name, valid):
+            if not valid:
+                mismatches.append(prefix + "." + name)
+
+        if operator in {"resolve_date_expression", "read_practitioner_schedule"}:
+            require_binding("date", semantic(args.get("date"), "appointment_date"))
+        if operator == "search_available_slots":
+            for name, field in (("date", "appointment_date"), ("earliest_time", "earliest_time"),
+                                ("latest_time", "latest_time")):
+                require_binding(name, semantic(args.get(name), field))
+            if plan["goal"] == "move":
+                require_binding("practitioner", source_step(args.get("practitioner"), "read_selected_appointment", "practitioner") is not None)
+                require_binding("duration_minutes", source_step(args.get("duration_minutes"), "read_selected_appointment", "duration_minutes") is not None)
+            else:
+                require_binding("duration_minutes", semantic(args.get("duration_minutes"), "duration_minutes"))
+        if operator in {"prepare_resize_proposal", "prepare_create_proposal", "assess_squeeze_in_options"}:
+            require_binding("duration_minutes", semantic(args.get("duration_minutes"), "duration_minutes"))
+        if operator in SELECTED_PROPOSAL_FAMILIES:
+            require_binding("appointment", args.get("appointment") == {"kind": "context_ref", "field": "selected_appointment"}
+                            or source_step(args.get("appointment"), "read_selected_appointment", "appointment") is not None)
+        if operator == "prepare_point_move_proposal":
+            require_binding("appointment", source_step(args.get("appointment"), "read_selected_appointment", "appointment") is not None)
+            require_binding("date", args.get("date") == {"kind": "semantic_ref", "field": "appointment_date"})
+            require_binding("target_start_local", args.get("target_start_local") == {"kind": "semantic_ref", "field": "target_start_local"})
+            if not point:
+                mismatches.append(prefix)
+        if operator in {"prepare_move_proposal", "prepare_create_proposal"}:
+            search = source_step(args.get("candidates"), "search_available_slots", "candidates")
+            require_binding("candidates", search is not None)
+            if operator == "prepare_create_proposal" and search is not None:
+                require_binding("practitioner", args.get("practitioner") == search["args"].get("practitioner"))
+        if operator == "assess_squeeze_in_options":
+            require_binding("schedule", source_step(args.get("schedule"), "read_practitioner_schedule", "schedule") is not None)
+        prior[step["id"]] = step
+    return sorted(set(mismatches))
 
 
 _SELECTED_MOVE_WORDS = re.compile(
@@ -263,9 +503,11 @@ def selected_move_subject(frame: dict[str, Any], extraction: SemanticExtraction)
 
 
 def semantic_value(
-    extraction: SemanticExtraction,
+    extraction: SemanticExtraction | ValidatedModelIntent | None,
     field: str,
 ) -> Any:
+    if extraction is None:
+        return None
     if field == "intended_action":
         return extraction.intended_action
     return extraction.normalized_values.get(field)
@@ -328,7 +570,7 @@ def base_plan(
 ) -> dict[str, Any]:
     return {
         "contract_version": "reception.one.bureau.plan-draft.v1",
-        "catalog_version": "reception-one-bureau-catalog-1",
+        "catalog_version": load_json(CATALOG_PATH)["catalog_version"],
         "request_id": frame["request_id"],
         "practice_ref": frame["practice_ref"],
         "correlation_id": frame["correlation_id"],
@@ -672,7 +914,7 @@ def binding_type_and_value(
     binding: Any,
     *,
     frame: dict[str, Any],
-    extraction: SemanticExtraction,
+    extraction: SemanticExtraction | ValidatedModelIntent | None,
     prior_types: dict[str, dict[str, str]],
     prior_values: dict[str, dict[str, Any]] | None = None,
 ) -> tuple[str | None, Any, bool, str | None]:
@@ -690,6 +932,9 @@ def binding_type_and_value(
         return value_type, value, grounded, None if grounded else "ungrounded_binding"
     if kind == "context_ref":
         field = binding.get("field")
+        if field == "selected_appointment.patient_ref":
+            value = selected_model_patient(frame) if isinstance(extraction, ValidatedModelIntent) else None
+            return "patient_ref", value, value is not None, None if value is not None else "ungrounded_binding"
         value_type = CONTEXT_TYPES.get(field)
         value = frame["context"].get(field) if isinstance(field, str) else None
         grounded = value_type is not None and value is not None
@@ -744,16 +989,29 @@ def proofread_plan(
     plan_schema_paths = schema_error_paths(
         normalized, load_json(SCHEMA_PATHS["plan"])
     )
-    extraction = extraction_for(frame)
+    legacy_mode = normalized.get("contract_version") == LEGACY_PLAN_VERSION
+    model_mode = normalized.get("contract_version") in {MODEL_PLAN_VERSION, POINT_PLAN_VERSION}
+    model_invalid = False
+    if legacy_mode:
+        extraction = extraction_for(frame)
+    else:
+        # No unknown-version or invalid-model fallback into legacy extraction.
+        extraction = None
+        try:
+            extraction = validated_model_intent(frame, normalized)
+        except (KeyError, TypeError, ValueError):
+            model_invalid = True
     violations: list[dict[str, str]] = []
     checks = {name: True for name in CHECK_NAMES}
 
-    if input_schema_paths or plan_schema_paths:
+    if input_schema_paths or plan_schema_paths or model_invalid:
         checks["schema_exact"] = False
         violations.extend(
             _violation(path, "schema_invalid")
             for path in [*input_schema_paths, *plan_schema_paths]
         )
+        if model_invalid:
+            violations.append(_violation("$.interpretation", "schema_invalid"))
 
     checks["scope_bound"] = all(
         normalized.get(field) == frame.get(field)
@@ -883,107 +1141,122 @@ def proofread_plan(
         if _forbidden_plan_surface(normalized):
             violations.append(_violation("$.steps", "forbidden_operator"))
 
-    planner_class = normalized.get("planner_class")
-    if planner_class == "deterministic_semantic_adapter":
-        expected_goal = ACTION_GOALS.get(extraction.intended_action or "")
-        checks["semantic_action_consistent"] = (
-            not extraction.requires_clarification
-            and expected_goal is not None
-            and normalized.get("goal") == expected_goal
-            and extraction.authority_claim == "read"
-            and extraction.claims_action_completed is False
-        )
+    point_operator = any(isinstance(step, dict) and step.get("operator") == "prepare_point_move_proposal" for step in step_list)
+    if point_operator and normalized.get("contract_version") != POINT_PLAN_VERSION:
+        checks["semantic_action_consistent"] = False
+        violations.append(_violation("$.steps", "selected_operation_mismatch"))
+    if normalized.get("contract_version") == POINT_PLAN_VERSION and repairs:
+        violations.append(_violation("$.steps", "semantic_action_mismatch"))
+    if not legacy_mode:
+        checks["semantic_action_consistent"] = model_mode and model_plan_consistent(frame, normalized, extraction)
         if not checks["semantic_action_consistent"]:
-            code = (
-                "clarification_required"
-                if extraction.requires_clarification
-                else "semantic_action_mismatch"
-            )
-            violations.append(_violation("$.goal", code))
+            violations.append(_violation("$.goal", "selected_operation_mismatch"))
+        if isinstance(extraction, ValidatedModelIntent):
+            for path in model_dataflow_mismatches(normalized, extraction):
+                checks["semantic_action_consistent"] = False
+                violations.append(_violation(path, "semantic_action_mismatch"))
     else:
-        checks["semantic_action_consistent"] = (
-            planner_class == "untrusted_model_candidate"
-            and extraction.authority_claim != "refuse"
-            and extraction.claims_action_completed is False
-        )
-        if not checks["semantic_action_consistent"]:
-            violations.append(_violation("$.goal", "semantic_action_mismatch"))
+        planner_class = normalized.get("planner_class")
+        if planner_class == "deterministic_semantic_adapter":
+            expected_goal = ACTION_GOALS.get(extraction.intended_action or "")
+            checks["semantic_action_consistent"] = (
+                not extraction.requires_clarification
+                and expected_goal is not None
+                and normalized.get("goal") == expected_goal
+                and extraction.authority_claim == "read"
+                and extraction.claims_action_completed is False
+            )
+            if not checks["semantic_action_consistent"]:
+                code = (
+                    "clarification_required"
+                    if extraction.requires_clarification
+                    else "semantic_action_mismatch"
+                )
+                violations.append(_violation("$.goal", code))
+        else:
+            checks["semantic_action_consistent"] = (
+                planner_class == "untrusted_model_candidate"
+                and extraction.authority_claim != "refuse"
+                and extraction.claims_action_completed is False
+            )
+            if not checks["semantic_action_consistent"]:
+                violations.append(_violation("$.goal", "semantic_action_mismatch"))
 
-    move_steps = any(
-        isinstance(step, dict) and step.get("operator") == "prepare_move_proposal"
-        for step in step_list
-    )
-    if normalized.get("goal") == "move" or move_steps:
-        subject = selected_move_subject(frame, extraction)
+        move_steps = any(
+            isinstance(step, dict) and step.get("operator") == "prepare_move_proposal"
+            for step in step_list
+        )
+        if normalized.get("goal") == "move" or move_steps:
+            subject = selected_move_subject(frame, extraction)
+            selected_reads = [
+                step for step in step_list
+                if isinstance(step, dict) and step.get("operator") == "read_selected_appointment"
+            ]
+            patient_arg_matches_mode = all(
+                isinstance(step.get("args"), dict)
+                and ("patient" in step["args"]) == (subject == "named")
+                for step in selected_reads
+            )
+            if (
+                subject is None
+                or move_steps != (normalized.get("goal") == "move")
+                or not patient_arg_matches_mode
+                or not selected_reads
+            ):
+                checks["semantic_action_consistent"] = False
+                clarification_step = (
+                    planner_class == "deterministic_semantic_adapter"
+                    and len(step_list) == 1
+                    and isinstance(step_list[0], dict)
+                    and step_list[0].get("operator") == "request_clarification"
+                )
+                if clarification_step:
+                    violations.append(_violation("$.goal", "clarification_required"))
+                else:
+                    if subject is None or not patient_arg_matches_mode or not selected_reads:
+                        violations.append(_violation("$.goal", "selected_identity_conflict"))
+                    if move_steps != (normalized.get("goal") == "move"):
+                        violations.append(_violation("$.goal", "selected_operation_mismatch"))
+
+        selected_family_steps = [
+            step for step in step_list
+            if isinstance(step, dict) and step.get("operator") in SELECTED_PROPOSAL_FAMILIES
+        ]
         selected_reads = [
             step for step in step_list
             if isinstance(step, dict) and step.get("operator") == "read_selected_appointment"
         ]
-        patient_arg_matches_mode = all(
-            isinstance(step.get("args"), dict)
-            and ("patient" in step["args"]) == (subject == "named")
-            for step in selected_reads
+        selected_context_binding = any(
+            isinstance(binding, dict)
+            and binding.get("kind") == "context_ref"
+            and binding.get("field") == "selected_appointment"
+            for step in step_list if isinstance(step, dict)
+            for binding in (
+                step.get("args") if isinstance(step.get("args"), dict) else {}
+            ).values()
         )
-        if (
-            subject is None
-            or move_steps != (normalized.get("goal") == "move")
-            or not patient_arg_matches_mode
-            or not selected_reads
-        ):
-            checks["semantic_action_consistent"] = False
-            clarification_step = (
-                planner_class == "deterministic_semantic_adapter"
-                and len(step_list) == 1
-                and isinstance(step_list[0], dict)
-                and step_list[0].get("operator") == "request_clarification"
+        if selected_family_steps or selected_reads or selected_context_binding:
+            family = (
+                SELECTED_PROPOSAL_FAMILIES[selected_family_steps[0]["operator"]]
+                if len(selected_family_steps) == 1 else None
             )
-            if clarification_step:
-                violations.append(_violation("$.goal", "clarification_required"))
-            else:
-                if subject is None or not patient_arg_matches_mode or not selected_reads:
-                    violations.append(_violation("$.goal", "selected_identity_conflict"))
-                if move_steps != (normalized.get("goal") == "move"):
-                    violations.append(_violation("$.goal", "selected_operation_mismatch"))
-
-    selected_family_steps = [
-        step for step in step_list
-        if isinstance(step, dict) and step.get("operator") in SELECTED_PROPOSAL_FAMILIES
-    ]
-    selected_reads = [
-        step for step in step_list
-        if isinstance(step, dict) and step.get("operator") == "read_selected_appointment"
-    ]
-    selected_context_binding = any(
-        isinstance(binding, dict)
-        and binding.get("kind") == "context_ref"
-        and binding.get("field") == "selected_appointment"
-        for step in step_list if isinstance(step, dict)
-        for binding in (
-            step.get("args") if isinstance(step.get("args"), dict) else {}
-        ).values()
-    )
-    if selected_family_steps or selected_reads or selected_context_binding:
-        family = (
-            SELECTED_PROPOSAL_FAMILIES[selected_family_steps[0]["operator"]]
-            if len(selected_family_steps) == 1 else None
-        )
-        selected_family_consistent = (
-            family is not None
-            and step_list[-1] is selected_family_steps[0]
-            and normalized.get("goal") == family == extraction.intended_action
-            and extraction.authority_claim == "read"
-            and not extraction.requires_clarification
-            and not extraction.action_negated
-            and bool(selected_reads)
-            and all(
-                isinstance(step.get("args"), dict)
-                and ("patient" in step["args"] or family == "move")
-                for step in selected_reads
+            selected_family_consistent = (
+                family is not None
+                and step_list[-1] is selected_family_steps[0]
+                and normalized.get("goal") == family == extraction.intended_action
+                and extraction.authority_claim == "read"
+                and not extraction.requires_clarification
+                and not extraction.action_negated
+                and bool(selected_reads)
+                and all(
+                    isinstance(step.get("args"), dict)
+                    and ("patient" in step["args"] or family == "move")
+                    for step in selected_reads
+                )
             )
-        )
-        if not selected_family_consistent:
-            checks["semantic_action_consistent"] = False
-            violations.append(_violation("$.goal", "selected_operation_mismatch"))
+            if not selected_family_consistent:
+                checks["semantic_action_consistent"] = False
+                violations.append(_violation("$.goal", "selected_operation_mismatch"))
 
     authority = frame.get("authority", {})
     checks["authority_boundary_closed"] = authority == {
@@ -1003,7 +1276,7 @@ def proofread_plan(
     violation_codes = {item["code"] for item in violations}
     attempt = normalized.get("attempt")
     revision_limit = normalized.get("revision_limit")
-    attempt_valid = isinstance(attempt, int) and isinstance(revision_limit, int)
+    attempt_valid = type(attempt) is int and type(revision_limit) is int
     revisionable_codes = {
         "schema_invalid",
         "signature_mismatch",
@@ -1061,7 +1334,7 @@ def proofread_plan(
     review = {
         "contract_version": "reception.one.bureau.plan-review.v1",
         "request_id": frame["request_id"],
-        "attempt": attempt if isinstance(attempt, int) and attempt in {1, 2} else 1,
+        "attempt": attempt if type(attempt) is int and attempt in {1, 2} else 1,
         "reviewed_context_revision": frame["context_revision"],
         "normalized_plan_sha256": canonical_sha256(normalized),
         "disposition": disposition,
@@ -1083,7 +1356,7 @@ def _binding_runtime_value(
     binding: dict[str, Any],
     *,
     frame: dict[str, Any],
-    extraction: SemanticExtraction,
+    extraction: SemanticExtraction | ValidatedModelIntent | None,
     prior_types: dict[str, dict[str, str]],
     prior_values: dict[str, dict[str, Any]],
 ) -> Any:
@@ -1253,6 +1526,19 @@ def execute_operator(
                 duration_minutes=args["duration_minutes"],
             )
         }
+    if operator_id == "prepare_point_move_proposal":
+        appointment = args["appointment"]
+        duration = appointment["duration_minutes"]
+        if type(duration) is not int or not 1 <= duration <= 480:
+            raise ValueError("point selected duration refused")
+        proposal = _proposal(
+            "move", operation_id="proposeAppointmentUpdate",
+            patient_ref=appointment["patient_ref"],
+            practitioner_ref=appointment["practitioner_ref"],
+            appointment_ref=appointment["id"], duration_minutes=duration,
+        )
+        proposal.update(target_date=args["date"], target_start_local=args["target_start_local"])
+        return {"proposal": proposal}
     if operator_id == "prepare_move_proposal":
         appointment = args["appointment"]
         return {
@@ -1317,6 +1603,8 @@ def execute_plan(
     frame: dict[str, Any],
     normalized_plan: dict[str, Any],
     review: dict[str, Any],
+    *,
+    now: datetime | None = None,
 ) -> dict[str, Any]:
     validate_schema(review, "review")
     if review["disposition"] != "admit" or review["execution_authorized"] is not True:
@@ -1328,7 +1616,21 @@ def execute_plan(
         raise ValueError("context revision changed before execution")
 
     operators = operator_map(load_json(CATALOG_PATH))
-    extraction = extraction_for(frame)
+    if normalized_plan.get("contract_version") == LEGACY_PLAN_VERSION:
+        extraction = extraction_for(frame)
+    elif normalized_plan.get("contract_version") in {MODEL_PLAN_VERSION, POINT_PLAN_VERSION}:
+        if now is None:
+            raise ValueError("model-first execution requires explicit trusted clock")
+        # Recheck same candidates/evidence/frame, expiry, signatures and effects.
+        current_review, current_plan = proofread_plan(frame, normalized_plan, now=now)
+        compared_fields = set(current_review) - {"safe_repairs"}
+        if (current_review["disposition"] != "admit"
+                or any(current_review[key] != review[key] for key in compared_fields)
+                or canonical_sha256(current_plan) != plan_hash):
+            raise ValueError("model-first review no longer current")
+        extraction = validated_model_intent(frame, normalized_plan)
+    else:
+        raise ValueError("unknown plan contract")
     prior_types: dict[str, dict[str, str]] = {}
     prior_values: dict[str, dict[str, Any]] = {}
     trace: list[dict[str, str]] = []
@@ -1386,6 +1688,8 @@ def execute_plan(
         ],
         "boundary": copy.deepcopy(BOUNDARY),
     }
+    if "target_start_local" in final_output:
+        result["released_field_paths"].extend(["$.final_output.target_date", "$.final_output.target_start_local"])
     validate_schema(result, "execution")
     return result
 
@@ -1575,6 +1879,223 @@ def build_evidence() -> dict[str, Any]:
             "production, deployment or release",
         ],
     }
+
+
+SEMANTIC_PACKET_VERSION = "emr4.bureau_model_semantic_packet.v2"
+SEMANTIC_CONSTRUCTOR_VERSION = "emr4.bureau_model_semantic_constructor.four-routes.v2"
+
+# This finite structural table is the independently reviewed four-route subset.
+# Tokens describe typed links only; no utterance text selects a route or value.
+_SEMANTIC_PACKET_ROUTES = {
+    "clarification": (
+        ("step-01-request-clarification", "request_clarification", {}),
+    ),
+    "move": (
+        ("step-01-read-selected-appointment", "read_selected_appointment", {
+            "appointment": ("target", "appointment"),
+            "patient": ("target", "patient_for_selected_appointment"),
+        }),
+        ("step-02-search-available-slots", "search_available_slots", {
+            "practitioner": ("output", "step-01-read-selected-appointment", "practitioner"),
+            "date": ("semantic", "appointment_date"),
+            "earliest_time": ("semantic", "earliest_time"),
+            "latest_time": ("semantic", "latest_time"),
+            "duration_minutes": ("output", "step-01-read-selected-appointment", "duration_minutes"),
+        }),
+        ("step-03-prepare-move-proposal", "prepare_move_proposal", {
+            "appointment": ("output", "step-01-read-selected-appointment", "appointment"),
+            "candidates": ("output", "step-02-search-available-slots", "candidates"),
+        }),
+    ),
+    "resize": (
+        ("step-01-read-selected-appointment", "read_selected_appointment", {
+            "appointment": ("target", "appointment"),
+            "patient": ("target", "patient_for_selected_appointment"),
+        }),
+        ("step-02-prepare-resize-proposal", "prepare_resize_proposal", {
+            "appointment": ("output", "step-01-read-selected-appointment", "appointment"),
+            "duration_minutes": ("semantic", "duration_minutes"),
+        }),
+    ),
+    "cancel": (
+        ("step-01-read-selected-appointment", "read_selected_appointment", {
+            "appointment": ("target", "appointment"),
+            "patient": ("target", "patient_for_selected_appointment"),
+        }),
+        ("step-02-prepare-cancel-proposal", "prepare_cancel_proposal", {
+            "appointment": ("output", "step-01-read-selected-appointment", "appointment"),
+        }),
+    ),
+}
+
+
+_POINT_PACKET_ROUTE = (
+    ("step-01-read-selected-appointment", "read_selected_appointment", {
+        "appointment": ("target", "appointment"),
+        "patient": ("target", "patient_for_selected_appointment"),
+    }),
+    ("step-02-prepare-point-move-proposal", "prepare_point_move_proposal", {
+        "appointment": ("output", "step-01-read-selected-appointment", "appointment"),
+        "date": ("semantic", "appointment_date"),
+        "target_start_local": ("semantic", "target_start_local"),
+    }),
+)
+
+
+class SemanticPacketRefusal(ValueError):
+    """Fixed refusal code with provenance and any unchanged proofreader result.
+
+    No untrusted model text, raw response or candidate plan is exposed on failure.
+    The caller owns private retention; this pure helper persists nothing.
+    """
+    def __init__(self, code, provenance, review=None):
+        super().__init__(code)
+        self.provenance = copy.deepcopy(provenance)
+        self.review = copy.deepcopy(review)
+
+
+def compile_model_semantic_packet(
+    frame: dict[str, Any], raw_response: bytes, *, case_id: str, now: datetime,
+) -> dict[str, Any]:
+    """Build one untrusted typed plan, then require the unchanged proofreader.
+
+    Packet checks establish syntax/provenance/explicit selection. Clarification
+    validates every original candidate before projecting only action bindings;
+    this validation grants no admission. Whole-plan proofreader admission is
+    still required. This function does not execute operators, confirm,
+    display text, infer meaning, repair packets or retry.
+    """
+    provenance = {
+        "raw_response_sha256": None, "packet_sha256": None, "frame_sha256": None,
+        "context_revision": None, "packet_schema_version": SEMANTIC_PACKET_VERSION,
+        "constructor_version": SEMANTIC_CONSTRUCTOR_VERSION, "compiled_plan_sha256": None,
+    }
+    if type(raw_response) is not bytes:
+        raise SemanticPacketRefusal("packet_bytes_required", provenance)
+    provenance["raw_response_sha256"] = hashlib.sha256(raw_response).hexdigest()
+    # A private detached snapshot avoids mutating the caller's frame.
+    frame = copy.deepcopy(frame)
+    try:
+        validate_schema(frame, "input")
+    except (TypeError, ValueError):
+        raise SemanticPacketRefusal("packet_frame_shape_refused", provenance) from None
+    provenance["frame_sha256"] = canonical_sha256(frame)
+    provenance["context_revision"] = frame["context_revision"]
+
+    def unique_pairs(rows):
+        result = {}
+        for key, value in rows:
+            if key in result:
+                raise ValueError("duplicate packet key")
+            result[key] = value
+        return result
+
+    def reject_constant(_):
+        raise ValueError("nonfinite packet number")
+
+    try:
+        packet = json.loads(raw_response.decode("utf-8"), object_pairs_hook=unique_pairs,
+                            parse_constant=reject_constant)
+        # Require UTF-8 encodability too: escaped lone surrogates are not an
+        # alternate transport for text that cannot be canonically hashed.
+        provenance["packet_sha256"] = canonical_sha256(packet)
+    except (UnicodeError, TypeError, ValueError, RecursionError):
+        raise SemanticPacketRefusal("packet_json_refused", provenance) from None
+    try:
+        validate_schema(packet, "packet")
+    except (TypeError, ValueError):
+        raise SemanticPacketRefusal("packet_shape_refused", provenance) from None
+    if type(case_id) is not str or not case_id or packet["case_id"] != case_id:
+        raise SemanticPacketRefusal("packet_case_refused", provenance)
+    point = packet["packet_schema"] == POINT_PACKET_VERSION
+    if point:
+        provenance["packet_schema_version"] = POINT_PACKET_VERSION
+        provenance["constructor_version"] = POINT_CONSTRUCTOR_VERSION
+    interpretation = packet["interpretation"]
+    if (interpretation["frame_sha256"] != provenance["frame_sha256"]
+            or type(interpretation["context_revision"]) is not int
+            or type(frame["context_revision"]) is not int
+            or interpretation["context_revision"] != frame["context_revision"]
+            or interpretation["reference_date"] != frame["reference_date"]):
+        raise SemanticPacketRefusal("packet_frame_binding_refused", provenance)
+    candidates = interpretation["candidates"]
+    by_id = {item["id"]: item for item in candidates}
+    selected = interpretation["selected"]
+    if (len(by_id) != len(candidates)
+            or set(selected) != {item["field"] for item in candidates}
+            or any(identifier not in by_id or by_id[identifier]["field"] != field
+                   for field, identifier in selected.items())):
+        raise SemanticPacketRefusal("packet_selection_refused", provenance)
+    # Resolve the selected action ID to its VALUE; never use the ID as goal.
+    goal = by_id[selected["intended_action"]]["value"]
+    if goal not in _SEMANTIC_PACKET_ROUTES:
+        raise SemanticPacketRefusal("packet_action_unsupported", provenance)
+    targets = packet["target_bindings"]
+    expected_targets = {} if goal == "clarification" else {
+        "appointment": {"kind": "context_ref", "field": "selected_appointment"},
+        "patient_for_selected_appointment": {
+            "kind": "context_ref", "field": "selected_appointment.patient_ref"},
+    }
+    if targets != expected_targets:
+        raise SemanticPacketRefusal("packet_target_roles_refused", provenance)
+    # Do not guess or pre-resolve identity here. The unchanged proofreader
+    # requires exactly one actual patient and practitioner for the selected row.
+    plan = base_plan(frame, planner_class="untrusted_model_candidate", goal=goal)
+    plan["contract_version"] = POINT_PLAN_VERSION if point else MODEL_PLAN_VERSION
+    plan["interpretation"] = copy.deepcopy(interpretation)
+    if point and (goal != "move" or set(selected) != {"intended_action", "appointment_date", "target_start_local"}):
+        raise SemanticPacketRefusal("packet_point_fields_refused", provenance)
+    route = _POINT_PACKET_ROUTE if point else _SEMANTIC_PACKET_ROUTES[goal]
+    for identifier, operator, tokens in route:
+        args = {}
+        for name, token in tokens.items():
+            if token[0] == "target":
+                args[name] = copy.deepcopy(targets[token[1]])
+            elif token[0] == "semantic":
+                args[name] = semantic_binding(token[1])
+            else:
+                args[name] = step_binding(token[1], token[2])
+        plan["steps"].append({"id": identifier, "operator": operator, "args": args})
+    if goal == "clarification":
+        # Validate the COMPLETE original interpretation before omitting unused
+        # fields from the action-only clarification plan. Never drop malformed
+        # evidence, invalid values or unresolved supersession to obtain a pass.
+        try:
+            validated_model_intent(frame, plan)
+        except (TypeError, ValueError):
+            raise SemanticPacketRefusal("packet_interpretation_refused", provenance) from None
+        plan["interpretation"]["candidates"] = [
+            copy.deepcopy(item) for item in candidates
+            if item["field"] == "intended_action"
+        ]
+        plan["interpretation"]["selected"] = {
+            "intended_action": selected["intended_action"]
+        }
+    provenance["compiled_plan_sha256"] = canonical_sha256(plan)
+    # The existing whole-plan path validates exact evidence, strict values,
+    # supersession, complete goal-specific fields, identities, catalog signatures,
+    # previous-output links, freshness, scope and proposal-only authority.
+    review, normalized = proofread_plan(frame, plan, now=now)
+    if review["disposition"] != "admit":
+        raise SemanticPacketRefusal("packet_plan_refused", provenance, review)
+    if review["safe_repairs"] or normalized != plan:
+        raise SemanticPacketRefusal("packet_plan_repair_refused", provenance, review)
+    # The sidecar remains separate and explicitly untrusted, without any display
+    # or execution wiring. All four hashes bind it to this exact construction.
+    sidecar = {"untrusted_text": packet.get("untrusted_text"),
+               "display_authorized": False, "provenance": copy.deepcopy(provenance)}
+    return {"plan": normalized, "review": review, "provenance": provenance,
+            "untrusted_text_sidecar": sidecar,
+            # Original selection coverage and evidence remain bound to the raw
+            # packet hash, separately from the admitted plan. No prose wiring,
+            # identity resolution, display or execution authority is added.
+            "packet_interpretation_sidecar": {
+                "interpretation": copy.deepcopy(interpretation),
+                "display_authorized": False,
+                "provenance": copy.deepcopy(provenance),
+            },
+            "execution_performed": False, "confirmation_performed": False}
+
 
 
 def main() -> int:

@@ -57,12 +57,19 @@
       }
     },
     "final_output": {
-      "$ref": "#/$defs/finalOutput"
+      "oneOf": [
+        {
+          "$ref": "#/$defs/finalOutput"
+        },
+        {
+          "$ref": "#/$defs/pointMoveFinalOutput"
+        }
+      ]
     },
     "released_field_paths": {
       "type": "array",
       "minItems": 1,
-      "maxItems": 12,
+      "maxItems": 14,
       "uniqueItems": true,
       "items": {
         "type": "string",
@@ -238,6 +245,78 @@
         },
         "write_performed": {
           "const": false
+        }
+      }
+    },
+    "pointMoveFinalOutput": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "proposal_family",
+        "api_spine_operation_id",
+        "patient_ref",
+        "practitioner_ref",
+        "appointment_ref",
+        "candidate_slot_ids",
+        "duration_minutes",
+        "status",
+        "warning_codes",
+        "requires_human_confirmation",
+        "write_performed",
+        "target_date",
+        "target_start_local"
+      ],
+      "properties": {
+        "kind": {
+          "const": "proposal_candidate"
+        },
+        "proposal_family": {
+          "const": "move"
+        },
+        "api_spine_operation_id": {
+          "const": "proposeAppointmentUpdate"
+        },
+        "patient_ref": {
+          "$ref": "#/$defs/syntheticRef"
+        },
+        "practitioner_ref": {
+          "$ref": "#/$defs/syntheticRef"
+        },
+        "appointment_ref": {
+          "$ref": "#/$defs/syntheticRef"
+        },
+        "candidate_slot_ids": {
+          "type": "array",
+          "maxItems": 0
+        },
+        "duration_minutes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 480
+        },
+        "status": {
+          "type": "null"
+        },
+        "warning_codes": {
+          "type": "array",
+          "const": [
+            "staff_confirmation_required"
+          ]
+        },
+        "requires_human_confirmation": {
+          "const": true
+        },
+        "write_performed": {
+          "const": false
+        },
+        "target_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "target_start_local": {
+          "type": "string",
+          "pattern": "^(?:[01][0-9]|2[0-3]):[0-5][0-9]$"
         }
       }
     }

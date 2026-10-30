@@ -1,6 +1,6 @@
 {
   "schema_version": "reception.one.bureau.operator-catalog.v1",
-  "catalog_version": "reception-one-bureau-catalog-1",
+  "catalog_version": "reception-one-bureau-catalog-point-2",
   "effect_classes": [
     "pure",
     "authorised_read",
@@ -365,6 +365,36 @@
       ],
       "api_spine_operation_id": null,
       "human_confirmation_required": false
+    },
+    {
+      "id": "prepare_point_move_proposal",
+      "effect": "proposal_only",
+      "inputs": [
+        {
+          "name": "appointment",
+          "type": "appointment_ref",
+          "required": true
+        },
+        {
+          "name": "date",
+          "type": "date",
+          "required": true
+        },
+        {
+          "name": "target_start_local",
+          "type": "time",
+          "required": true
+        }
+      ],
+      "outputs": [
+        {
+          "name": "proposal",
+          "type": "proposal_candidate",
+          "required": true
+        }
+      ],
+      "api_spine_operation_id": "proposeAppointmentUpdate",
+      "human_confirmation_required": true
     }
   ]
 }

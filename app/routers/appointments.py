@@ -1790,6 +1790,10 @@ def _reception_one_adapter_review(
     selected_appointment_id: uuid.UUID | None,
     db: Session,
     current_user: User,
+    normalized_plan: dict[str, Any] | None = None,
+    review: dict[str, Any] | None = None,
+    selected_source_capture: Any = None,
+    semantic_provenance: dict[str, Any] | None = None,
 ) -> ReceptionOneProductContextAdapterReviewOut | None:
     """Revalidate one admitted plan through named proposal-only adapters.
 
@@ -1801,6 +1805,42 @@ def _reception_one_adapter_review(
     final_output = execution["final_output"]
     family = final_output.get("proposal_family")
     idempotency_prefix = f"reception-one-{frame['request_id']}"
+    if family == "move" and ("target_start_local" in final_output or "target_date" in final_output):
+        from app.services.reception_one_proposal_runtime import point_move_envelope
+
+        try:
+            user = _move_reception_user(db, current_user)
+            envelope = point_move_envelope(
+                frame=frame, normalized_plan=normalized_plan, review=review,
+                execution=execution, provenance=semantic_provenance,
+                capture=selected_source_capture, tenant_id=user.practice_id,
+                actor_id=user.id, selected_appointment_id=selected_appointment_id,
+                now=datetime.now(timezone.utc),
+            )
+            # Current server version/status/scope/DST/guards are rechecked by
+            # the existing endpoint; the observed version is never refreshed.
+            proposal = propose_seeded_move_time(
+                appointment_id=selected_appointment_id,
+                body=AppointmentMoveTimeIntentIn.model_validate(envelope),
+                idempotency_key=f"{idempotency_prefix}-point-move",
+                db=db, current_user=user,
+            )
+        except (ValueError, TypeError, KeyError, AttributeError, HTTPException):
+            return ReceptionOneProductContextAdapterReviewOut(
+                adapter_kind="update_proposal", safe=False,
+                summary="The exact move proposal failed its current source review.",
+                block_codes=["point_move_review_refused"], freshness_verified=False,
+            )
+        # Release only existing findings, never proposal capabilities/payloads.
+        return ReceptionOneProductContextAdapterReviewOut(
+            adapter_kind="update_proposal", safe=proposal.safe,
+            summary=("Prepared an exact time move for staff review. No appointment has changed."
+                     if proposal.safe else "The current move-proposal check blocked this move."),
+            warning_codes=sorted(issue.code for issue in proposal.warnings),
+            block_codes=sorted(issue.code for issue in proposal.blocks),
+            candidate_count=1,
+            freshness_verified=bool(proposal.safe and proposal.update_proposal_freshness_id),
+        )
     if family == "move":
         if selected_appointment_id is None:
             return ReceptionOneProductContextAdapterReviewOut(
@@ -6877,6 +6917,16 @@ def compose_reception_one_product_context_proposal(
         if slot_search is not None
         else None
     )
+    # Existing pre-model slot preparation is separate unused context for a
+    # point proposal. The explicit point branch needs no slots or interval.
+    selected_source_capture: list = []
+    observed_at = datetime.now(timezone.utc)
+    try:
+        trusted_point_zone = (_move_practice_timezone(db, current_user.practice_id).key
+                              if body.selected_appointment_id is not None else None)
+    except HTTPException:
+        # Unavailable point-only context must not change older route behavior.
+        trusted_point_zone = None
     frame, displays, _ = build_product_context_frame(
         db,
         practice_id=current_user.practice_id,
@@ -6887,9 +6937,14 @@ def compose_reception_one_product_context_proposal(
         selected_appointment_id=body.selected_appointment_id,
         observed_at=observed_at,
         handle_key=handle_key,
+        selected_source_capture=selected_source_capture,
+        trusted_actor_id=current_user.id,
+        trusted_role=("reception" if current_user.role == UserRole.Receptionist else None),
+        trusted_practice_timezone=trusted_point_zone,
     )
     provider_calls = 0
     runtime_audit_ref = None
+    semantic_provenance = None
     if body.planner_mode == "deterministic":
         review, normalized_plan, execution = proofread_provider_blocked_plan(
             frame=frame,
@@ -6927,6 +6982,9 @@ def compose_reception_one_product_context_proposal(
         )
         provider_calls = planner_result.provider_calls
         runtime_audit_ref = planner_result.runtime_audit_ref
+        # Existing planner contracts are unchanged. A future explicit point
+        # constructor must carry its provenance; absence always refuses point.
+        semantic_provenance = getattr(planner_result, "semantic_provenance", None)
     adapter_review = (
         _reception_one_adapter_review(
             execution=execution,
@@ -6934,6 +6992,10 @@ def compose_reception_one_product_context_proposal(
             selected_appointment_id=body.selected_appointment_id,
             db=db,
             current_user=current_user,
+            normalized_plan=normalized_plan,
+            review=review,
+            selected_source_capture=(selected_source_capture[0] if len(selected_source_capture) == 1 else None),
+            semantic_provenance=semantic_provenance,
         )
         if execution is not None and review["disposition"] == "admit"
         else None

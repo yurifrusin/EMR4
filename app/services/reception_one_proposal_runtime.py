@@ -8,6 +8,7 @@ the accepted typed-plan proofreader and executor remain proposal-only.
 from __future__ import annotations
 
 from datetime import date, datetime, time, timedelta, timezone
+from dataclasses import dataclass
 import hashlib
 import hmac
 import re
@@ -278,6 +279,7 @@ def _read_selected_appointment(
     patients: list[dict[str, Any]],
     practitioners: list[dict[str, Any]],
     allow_unmentioned_parties: bool,
+    source_capture: list | None = None,
 ) -> dict[str, Any]:
     appointment = (
         db.query(Appointment)
@@ -343,6 +345,22 @@ def _read_selected_appointment(
         handle_key=handle_key,
     )
     handle_map[appointment_handle] = appointment.id
+    if source_capture is not None:
+        # Actual row facts; never use the public frame duration default or HMAC.
+        source_capture.append({
+            "captured_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+            "source_revision": appointment.appointment_state_version,
+            "selected_appointment_id": str(appointment.id),
+            "selected_state_version": appointment.appointment_state_version,
+            "selected_status": appointment.status.value,
+            "selected_date": appointment.appointment_date.isoformat(),
+            "selected_start_local": appointment.start_time_local.strftime("%H:%M"),
+            "patient_id": str(appointment.patient_id) if appointment.patient_id else None,
+            "practitioner_id": str(appointment.practitioner_id),
+            "appointment_type_id": str(appointment.appointment_type_id) if appointment.appointment_type_id else None,
+            "location_id": str(appointment.location_id) if appointment.location_id else None,
+            "duration_minutes": appointment.duration_minutes,
+        })
     return {
         "id": appointment_handle,
         "patient_ref": patient_ref,
@@ -356,6 +374,89 @@ def _read_selected_appointment(
     }
 
 
+
+@dataclass(frozen=True)
+class SelectedMoveSource:
+    """Request-local server-only observation; never part of the model frame."""
+    frame_sha256: str
+    request_id: str
+    selected_handle: str
+    context_items: tuple
+
+
+def point_move_envelope(*, frame, normalized_plan, review, execution,
+                        provenance, capture, tenant_id, actor_id,
+                        selected_appointment_id, now):
+    """Revalidate the closed final-frame/plan/output/observed-source join."""
+    from scripts import reception_one_bureau_typed_plan_protocol as typed_plan
+    from app.services.appointment_lifecycle import validate_move_intent
+
+    if (type(capture) is not SelectedMoveSource or now.tzinfo is None
+            or not all(isinstance(value, dict) for value in (normalized_plan, review, execution))):
+        raise ReceptionOneRuntimeError("point_source_capture_required")
+    frame_hash = typed_plan.canonical_sha256(frame)
+    plan_hash = typed_plan.canonical_sha256(normalized_plan)
+    if (capture.frame_sha256 != frame_hash or capture.request_id != frame["request_id"]
+            or not isinstance(provenance, dict)
+            or set(provenance) != {"raw_response_sha256", "packet_sha256", "frame_sha256",
+                                   "context_revision", "packet_schema_version",
+                                   "constructor_version", "compiled_plan_sha256"}
+            or provenance.get("frame_sha256") != frame_hash
+            or provenance.get("compiled_plan_sha256") != plan_hash
+            or provenance.get("context_revision") != frame["context_revision"]
+            or provenance.get("packet_schema_version") != typed_plan.POINT_PACKET_VERSION
+            or provenance.get("constructor_version") != typed_plan.POINT_CONSTRUCTOR_VERSION
+            or any(not isinstance(provenance.get(key), str)
+                   or not re.fullmatch(r"[0-9a-f]{64}", provenance[key])
+                   for key in ("raw_response_sha256", "packet_sha256"))
+            or normalized_plan.get("contract_version") != typed_plan.POINT_PLAN_VERSION
+            or review.get("safe_repairs")):
+        raise ReceptionOneRuntimeError("point_execution_join_refused")
+    expected = typed_plan.execute_plan(frame, normalized_plan, review, now=now)
+    # Full pure executions retain their exact receipt; the existing planner
+    # projection carries only final_output. Both require exact deterministic data.
+    if (set(execution) not in ({"final_output"}, set(expected))
+            or execution["final_output"] != expected["final_output"]
+            or (set(execution) == set(expected) and execution != expected)):
+        raise ReceptionOneRuntimeError("point_execution_output_refused")
+    output = expected["final_output"]
+    selected = frame["context"]["selected_appointment"]
+    context = dict(capture.context_items)
+    if (len(context) != len(capture.context_items)
+            or selected is None or selected["id"] != capture.selected_handle
+            or output["appointment_ref"] != capture.selected_handle
+            or output["patient_ref"] != selected["patient_ref"]
+            or output["practitioner_ref"] != selected["practitioner_ref"]
+            or context.get("tenant_id") != str(tenant_id)
+            or context.get("actor_id") != str(actor_id)
+            or context.get("selected_appointment_id") != str(selected_appointment_id)
+            or type(context.get("duration_minutes")) is not int
+            or type(selected["duration_minutes"]) is not int
+            or type(output["duration_minutes"]) is not int
+            or not 1 <= context["duration_minutes"] <= 480
+            or context["duration_minutes"] != selected["duration_minutes"]
+            or context["duration_minutes"] != output["duration_minutes"]
+            or context.get("source_revision") != context.get("selected_state_version")
+            or selected["date"] != context.get("selected_date")
+            or selected["start_time"] != context.get("selected_start_local")):
+        raise ReceptionOneRuntimeError("point_source_identity_refused")
+    # Preserve original captured_at. Only the dispatch clock advances.
+    context["as_of"] = now.strftime("%Y-%m-%dT%H:%M:%SZ")
+    envelope = {
+        "schema_version": "appointment.move_time_intent.v1",
+        "tenant_id": context["tenant_id"], "actor_id": context["actor_id"],
+        "role": context["role"],
+        "source_appointment_id": context["selected_appointment_id"],
+        "source_state_version": context["selected_state_version"],
+        "source_revision": context["source_revision"],
+        "target_date": output["target_date"],
+        "target_start_local": output["target_start_local"],
+        "authority": "proposal_only",
+    }
+    validate_move_intent(envelope, context)
+    return envelope
+
+
 def build_product_context_frame(
     db: Session,
     *,
@@ -367,6 +468,10 @@ def build_product_context_frame(
     selected_appointment_id: uuid.UUID | None = None,
     observed_at: datetime | None = None,
     handle_key: bytes | None = None,
+    selected_source_capture: list | None = None,
+    trusted_actor_id: uuid.UUID | None = None,
+    trusted_role: str | None = None,
+    trusted_practice_timezone: str | None = None,
 ) -> tuple[dict[str, Any], dict[str, str], dict[str, uuid.UUID]]:
     from scripts import reception_one_bureau_typed_plan_protocol as typed_plan
 
@@ -414,6 +519,7 @@ def build_product_context_frame(
         handle_key=effective_handle_key,
         handle_map=handle_map,
     )
+    observed_source: list = []
     selected_appointment = (
         _read_selected_appointment(
             db,
@@ -424,6 +530,7 @@ def build_product_context_frame(
             patients=patients,
             practitioners=practitioners,
             allow_unmentioned_parties=extraction.intended_action == "move",
+            source_capture=observed_source if selected_source_capture is not None else None,
         )
         if selected_appointment_id is not None
         else None
@@ -523,6 +630,21 @@ def build_product_context_frame(
         },
     }
     typed_plan.validate_schema(frame, "input")
+    if selected_source_capture is not None and selected_appointment is not None:
+        if selected_source_capture or len(observed_source) != 1:
+            raise ReceptionOneRuntimeError("point_capture_not_empty")
+        context = dict(observed_source[0])
+        context.update(
+            tenant_id=str(practice_id), actor_id=str(trusted_actor_id),
+            role=trusted_role, move_capability="appointments.move.propose",
+            practice_timezone=trusted_practice_timezone,
+            as_of=context["captured_at"],
+        )
+        selected_source_capture.append(SelectedMoveSource(
+            frame_sha256=typed_plan.canonical_sha256(frame),
+            request_id=frame["request_id"], selected_handle=selected_appointment["id"],
+            context_items=tuple(sorted(context.items())),
+        ))
     displays = {
         **{item["id"]: item["display"] for item in patients},
         **{item["id"]: item["display"] for item in practitioners},
@@ -674,7 +796,10 @@ def build_reviewed_proposal_result(
     )
     proposed_date = None
     proposed_time = None
-    if family == "move" and candidate_slots:
+    if family == "move" and "target_start_local" in final_output:
+        proposed_date = date.fromisoformat(final_output["target_date"])
+        proposed_time = time.fromisoformat(final_output["target_start_local"])
+    elif family == "move" and candidate_slots:
         proposed_date = candidate_slots[0].appointment_date
         proposed_time = candidate_slots[0].start_time_local
     proposed_duration = (
