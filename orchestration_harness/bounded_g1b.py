@@ -16286,6 +16286,9 @@ G4_POINT_MOVE_FIVE_ROOT = G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT / "bureau-point-move
 
 
 def _g4_owner_bootstrap_descriptor(schema, *, scope=False):
+    if schema == (G4_MODEL_REPLY_SCOPE_SCHEMA if scope else G4_MODEL_REPLY_SCHEMA):
+        _need(not G4_MODEL_REPLY_TEMPLATE_INERT, "bounded_g4_model_reply_source_inert")
+        return G4_MODEL_REPLY_DESCRIPTOR
     if schema == (G4_POINT_MOVE_FIVE_SCOPE_SCHEMA if scope else G4_POINT_MOVE_FIVE_SCHEMA):
         return {"version":24,"scope_schema":G4_POINT_MOVE_FIVE_SCOPE_SCHEMA,
             "base":G4_POINT_MOVE_BASE,"preimages":G4_POINT_MOVE_PREIMAGES,
@@ -16380,7 +16383,7 @@ def _g4_owner_staff_invitation_external_inputs(read, q):
 
 
 def _is_g4_owner_bootstrap_binding(binding):
-    return type(binding) is dict and binding.get("schema_version") in (G4_OWNER_BOOTSTRAP_SCHEMA, G4_OWNER_STAFF_INVITATION_SCHEMA, G4_POINT_MOVE_SCHEMA, G4_POINT_MOVE_FIVE_SCHEMA)
+    return type(binding) is dict and binding.get("schema_version") in (G4_OWNER_BOOTSTRAP_SCHEMA, G4_OWNER_STAFF_INVITATION_SCHEMA, G4_POINT_MOVE_SCHEMA, G4_POINT_MOVE_FIVE_SCHEMA, G4_MODEL_REPLY_SCHEMA)
 
 
 def _g4_owner_bootstrap_paths(kind, binding):
@@ -16415,6 +16418,8 @@ def _g4_owner_bootstrap_require_entrypoint(q, entrypoint, phase):
 
 def _g4_owner_bootstrap_external_inputs(read, q):
     d=_g4_owner_bootstrap_descriptor(q.get("schema_version"))
+    if d["version"] == 25:
+        return _g4_model_reply_external_inputs(read, q)
     if d["version"] in {23,24}:
         return _g4_point_move_external_inputs(read,q)
     if d["version"]==22:
@@ -16660,11 +16665,13 @@ def _load_g4_owner_bootstrap_inputs(context, target, source, evidence_root, scra
               "bounded_g4_owner_bootstrap_snapshot_drift")
     before = {p:trusted_git.run_git_bytes(target,"cat-file","blob",descriptor["base"]["commit"]+":"+p)
               for p in (STATE,GATES,OVERLAY,AGENTS)}
-    unchanged = (STATE,GATES,AGENTS) if descriptor["version"] == 24 else (STATE,GATES,OVERLAY,AGENTS)
+    unchanged = (STATE,GATES,AGENTS) if descriptor["version"] in {24,25} else (STATE,GATES,OVERLAY,AGENTS)
     _need(all(payloads[p] == before[p] for p in unchanged),
           "bounded_g4_owner_bootstrap_state_unchanged")
     if descriptor["version"] == 24:
         _validate_g4_point_move_overlay_transition(before[OVERLAY], payloads[OVERLAY])
+    elif descriptor["version"] == 25:
+        _validate_g4_model_reply_overlay_transition(before[OVERLAY], payloads[OVERLAY])
     return BoundedG1BInputs(q,before,payloads,
         {"scope":scope,"vector":vector,"mapping":mapping,"review":review},observation)
 
@@ -16682,3 +16689,64 @@ def _validate_g4_owner_bootstrap_loaded_policy(inputs):
         raise BoundedG1BError(error.reason_code) from error
     paths = _g4_owner_bootstrap_paths(inputs.binding["operation_kind"],inputs.binding)
     return {p:inputs.payloads[p] for p in paths},configuration
+
+
+# Exact carrier successor: source-only derivative. No activation/runtime authority.
+G4_MODEL_REPLY_TEMPLATE_INERT = False
+G4_MODEL_REPLY_SCHEMA = "ariadne.g4_stage1_owner_bootstrap_operation_binding.v5"
+G4_MODEL_REPLY_SCOPE_SCHEMA = "ariadne.g4_stage1_successor_entry_scope.v25"
+G4_MODEL_REPLY_ROOT = G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT / "bureau-model-reply-carrier-successor-v1"
+G4_MODEL_REPLY_VECTOR = json.loads('{"path":"C:/Users/there/EMR4-tools/bureau-model-reply-carrier-source-preparation-v2/source-vector-v2.json","bytes":7394,"sha256":"2c1e707493cb85a855e97c250705cc589d6ffeb25bd989cf0f589f1ab8fc3301"}')
+G4_MODEL_REPLY_REVIEW = json.loads('{"path":"C:/Users/there/EMR4-tools/bureau-model-reply-carrier-source-preparation-v2/independent-carrier-source-review-v2.json","bytes":2556,"sha256":"290ec3bc0840f1517c997eb163e25c977a36e805cb56f62f2014d6f65db79231"}')
+G4_MODEL_REPLY_PRODUCT_ROWS = json.loads('{"app/services/reception_one_isolated_vertex_planner.py":{"path":"C:/Users/there/EMR4-tools/bureau-model-reply-carrier-source-preparation-v2/candidate/app/services/reception_one_isolated_vertex_planner.py","bytes":23182,"sha256":"45a28b40611508910fd338f775644ff4863fd0ff84609040cb697d157a09b2d8"},"tests/test_reception_one_point_move_bridge_contract.py":{"path":"C:/Users/there/EMR4-tools/bureau-model-reply-carrier-source-preparation-v2/candidate/tests/test_reception_one_point_move_bridge_contract.py","bytes":26271,"sha256":"685c621c3079659d1a1afae7f3d668d3421935892623878ca8262f89fb662f12"}}')
+G4_MODEL_REPLY_DESCRIPTOR = {
+    "version":25,"scope_schema":G4_MODEL_REPLY_SCOPE_SCHEMA,
+    "base":json.loads('{"commit":"e5161568ba692e4c181194d338f5ae5b8983bd4e","tree":"ed7bc1c5295eb911b9a3baeafd73d9edc7cca0d2"}'),"preimages":json.loads('{"orchestration_harness/bounded_g1b.py":"aa339b609772083e8b777e94adc44ad9f6f58535a735b24890c01f2813dd1507","orchestration_harness/raisa_policy.py":"5b1874f03236598782f0ecfc9978d59f29e1ce50cf7b4f6923a79c758fa41b8f","orchestration/programme/g4-stage1-successor-entry-scope.json":"be62b21c139dfa2f03751d3bbe7d11dd6cf314696cbcb6df538f1bb77a0a0586","tests/test_g4_stage1_successor_entry.py":"9f9e18feae2d4ec292f21972a97361609f653d1c3dd7f43d506c832b2b62a575","orchestration/harness_settings/programme_recovery.yaml":"729dc7f008e9c52d58cfabace753a58c0b9d1a60d6e1fc1b0637d15211759395"}'),
+    "root":G4_MODEL_REPLY_ROOT,
+    "product_sha":{p:r["sha256"] for p,r in G4_MODEL_REPLY_PRODUCT_ROWS.items()},
+    "product_bytes":{p:r["bytes"] for p,r in G4_MODEL_REPLY_PRODUCT_ROWS.items()},
+    "before_sha":json.loads('{"app/services/reception_one_isolated_vertex_planner.py":"525cf851818031799bd43ce737575711943b2fa231e7627739504ef6b31ef956","tests/test_reception_one_point_move_bridge_contract.py":"2144e877fa8b260496fa88d0dfe056b7693b57084e6857679a66d61c23be274a"}'),
+    "vector":{k:G4_MODEL_REPLY_VECTOR[k] for k in ("path","sha256")},
+    "mapping":{k:G4_MODEL_REPLY_REVIEW[k] for k in ("path","sha256")},
+    "product_rows":G4_MODEL_REPLY_PRODUCT_ROWS,"control":G4_POINT_MOVE_CONTROL,
+    "excluded_reviewers":{"","/root","/root/point_product_commit_source_sol"},
+    "limits":("exact2 changed carrier/test paths; other published product preserved",
+              "enable exactly5 existing controls; ADMIT preflight development no delta",
+              "separate reviewed APPLY and publication; no runtime authority from admission",
+              "contract-only carrier; provider OFF and live receive ABI unverified"),
+}
+
+
+def _g4_model_reply_external_inputs(read, q):
+    _need(q["product_vector"] == G4_MODEL_REPLY_DESCRIPTOR["vector"]
+          and q["mapping_review"] == G4_MODEL_REPLY_DESCRIPTOR["mapping"],
+          "bounded_g4_model_reply_external_pins")
+    def exact(row):
+        _keys(row,{"path","bytes","sha256"},"bounded_g4_model_reply_external_row")
+        raw=read(Path(row["path"]),row["sha256"])
+        _need(len(raw)==row["bytes"] and _sha(raw)==row["sha256"],
+              "bounded_g4_model_reply_external_source")
+        return raw
+    vector=_json(exact(G4_MODEL_REPLY_VECTOR))
+    review=_json(exact(G4_MODEL_REPLY_REVIEW))
+    _need(vector == json.loads('{"status":"STOPPED_SOURCE_ONLY_MODEL_REPLY_CARRIER_REVISION2_PENDING_INDEPENDENT_REVIEW","author":"/root/point_product_commit_source_sol","allocation":"GPT-6.1 Sol / medium retained; no nested delegation","base_commit":"e5161568ba692e4c181194d338f5ae5b8983bd4e","base_tree":"ed7bc1c5295eb911b9a3baeafd73d9edc7cca0d2","prior_v1_vector":{"path":"C:/Users/there/EMR4-tools/bureau-model-reply-carrier-source-preparation-v1/source-vector-v1.json","bytes":6906,"sha256":"0e4b79e71ef5ac1d17420ccbaf9fa501da634bda516b36d5ef1d45fcfd4795e5"},"prior_v1_revision_required":{"path":"C:/Users/there/EMR4-tools/bureau-model-reply-carrier-source-preparation-v1/independent-carrier-source-review-v1.json","bytes":3228,"sha256":"1efa4bf91c1d39ad3eb8d40a7dfdf00bddee3bbe78037fe6398bce4077e14b4b"},"inputs":[{"path":"C:/Users/there/EMR4-tools/bureau-point-move-joined-source-map-preparation-v1/source-maps.json","bytes":57468,"sha256":"94011b940dc0e813cb0567f62d59e214f519b307f52372692d109aeb446e371a"},{"path":"C:/Users/there/EMR4-tools/selected-bureau-backend-db-work-v1/attempt-3/case/app/services/reception_one_isolated_vertex_planner.py","bytes":16467,"sha256":"525cf851818031799bd43ce737575711943b2fa231e7627739504ef6b31ef956"},{"path":"C:/Users/there/EMR4-tools/point-move-product-apply01-source/tests/test_reception_one_point_move_bridge_contract.py","bytes":19254,"sha256":"2144e877fa8b260496fa88d0dfe056b7693b57084e6857679a66d61c23be274a"},{"path":"C:/Users/there/EMR4-tools/bureau-point-move-source-v2/candidate/app/routers/appointments.py","bytes":385252,"sha256":"4e70368009e93ba30f9e7ff12e42cbfdf5ec5a2a9683ed53956154511439ead9"},{"path":"C:/Users/there/EMR4-tools/bureau-point-move-source-v2/candidate/app/services/reception_one_proposal_runtime.py","bytes":35855,"sha256":"87b33b18a2a3e0772afdc6efe9fe5588ae9f01948aa14355bdc203384df8eebc"},{"path":"C:/Users/there/EMR4-tools/bureau-point-move-source-v2/candidate/scripts/reception_one_bureau_typed_plan_protocol.py","bytes":88933,"sha256":"85d8f2cbe63d8a5898cedf63f25f87d43fafd92666e95078f36fb46743facc2b"}],"candidate_afterimages":[{"relative_path":"app/services/reception_one_isolated_vertex_planner.py","path":"C:/Users/there/EMR4-tools/bureau-model-reply-carrier-source-preparation-v2/candidate/app/services/reception_one_isolated_vertex_planner.py","bytes":23182,"sha256":"45a28b40611508910fd338f775644ff4863fd0ff84609040cb697d157a09b2d8"},{"relative_path":"tests/test_reception_one_point_move_bridge_contract.py","path":"C:/Users/there/EMR4-tools/bureau-model-reply-carrier-source-preparation-v2/candidate/tests/test_reception_one_point_move_bridge_contract.py","bytes":26271,"sha256":"685c621c3079659d1a1afae7f3d668d3421935892623878ca8262f89fb662f12"}],"outputs":[{"path":"C:/Users/there/EMR4-tools/bureau-model-reply-carrier-source-preparation-v2/acceptance-and-testing-plan-v2.json","bytes":1759,"sha256":"d05ca1ba67efd7292d7af9f52eb185c8706e004fa581fb192d60b2fceeb04163"},{"path":"C:/Users/there/EMR4-tools/bureau-model-reply-carrier-source-preparation-v2/admission-and-handoff-v1.json","bytes":1670,"sha256":"9e70869fdf9b5d05e35e0654e2c4c7af1c3951ff9a38d6c12543a634fe628946"},{"path":"C:/Users/there/EMR4-tools/bureau-model-reply-carrier-source-preparation-v2/before/app/services/reception_one_isolated_vertex_planner.py","bytes":22558,"sha256":"f5dd545846caa3d4fd284bd500fbcd313a6c4dbf07707da619c16ef1883dc222"},{"path":"C:/Users/there/EMR4-tools/bureau-model-reply-carrier-source-preparation-v2/before/tests/test_reception_one_point_move_bridge_contract.py","bytes":24893,"sha256":"95e3b40cf17eda342509a67ea6ee94e07ce046c6069ae84a692db49a528746cd"},{"path":"C:/Users/there/EMR4-tools/bureau-model-reply-carrier-source-preparation-v2/candidate/app/services/reception_one_isolated_vertex_planner.py","bytes":23182,"sha256":"45a28b40611508910fd338f775644ff4863fd0ff84609040cb697d157a09b2d8"},{"path":"C:/Users/there/EMR4-tools/bureau-model-reply-carrier-source-preparation-v2/candidate/tests/test_reception_one_point_move_bridge_contract.py","bytes":26271,"sha256":"685c621c3079659d1a1afae7f3d668d3421935892623878ca8262f89fb662f12"},{"path":"C:/Users/there/EMR4-tools/bureau-model-reply-carrier-source-preparation-v2/classification-and-transport-boundary-v1.json","bytes":988,"sha256":"479e8b8c835c4c2f5d33c2f75b934c596bcb63bfca78a4a52879f16ce6253fb5"},{"path":"C:/Users/there/EMR4-tools/bureau-model-reply-carrier-source-preparation-v2/delta/app/services/reception_one_isolated_vertex_planner.py.patch","bytes":5229,"sha256":"77ba5999dbe1f422f53bb178b21889c1decbe396ae17716fb443013f2fb0d58d"},{"path":"C:/Users/there/EMR4-tools/bureau-model-reply-carrier-source-preparation-v2/delta/tests/test_reception_one_point_move_bridge_contract.py.patch","bytes":1964,"sha256":"dbc041fdc93e4e22442edff780642a5f6d84d440772df22592a108b9a2b71264"},{"path":"C:/Users/there/EMR4-tools/bureau-model-reply-carrier-source-preparation-v2/HANDOFF.md","bytes":1546,"sha256":"1e915c8132fc3d17c9a13a26d04d52e8dc7708ec01aea1a58d4450cb9241d54b"},{"path":"C:/Users/there/EMR4-tools/bureau-model-reply-carrier-source-preparation-v2/inverse/app/services/reception_one_isolated_vertex_planner.py","bytes":22558,"sha256":"f5dd545846caa3d4fd284bd500fbcd313a6c4dbf07707da619c16ef1883dc222"},{"path":"C:/Users/there/EMR4-tools/bureau-model-reply-carrier-source-preparation-v2/inverse/tests/test_reception_one_point_move_bridge_contract.py","bytes":24893,"sha256":"95e3b40cf17eda342509a67ea6ee94e07ce046c6069ae84a692db49a528746cd"},{"path":"C:/Users/there/EMR4-tools/bureau-model-reply-carrier-source-preparation-v2/inverse-delta/app/services/reception_one_isolated_vertex_planner.py.patch","bytes":5223,"sha256":"4a6438c24df1293e48c3215a44e720ee5272244c0374292a167f759fa6c7e5b3"},{"path":"C:/Users/there/EMR4-tools/bureau-model-reply-carrier-source-preparation-v2/inverse-delta/tests/test_reception_one_point_move_bridge_contract.py.patch","bytes":1964,"sha256":"806263382f700e51e0741e2fb846fbfcb5e2e24de245239e90a3eb473ea75cc9"},{"path":"C:/Users/there/EMR4-tools/bureau-model-reply-carrier-source-preparation-v2/static-source-audit-v2.json","bytes":1836,"sha256":"abc4ba384e81beda118e7b5a19ebed026c457fc0156a26b161674d531b7f31be"}],"execution_authorized":false,"provider_calls":0,"candidate_tests_executed":false,"live_transport_or_model_loop_proven":false,"qualification":"Exact provenance replay repair only; all15 original functions unchanged. Internal consistency not transport authentication. Source-only tests, future admission/integration required."}'),
+          "bounded_g4_model_reply_external_vector")
+    _need(review == json.loads('{"schema":"emr4.independent_model_reply_carrier_source_review.v1","verdict":"PASS_SOURCE_ONLY","independent":true,"implementation_authorship":false,"reviewer_agent":"/root/invitation_asgi04_source_review_terra","source_vector":{"bytes":7394,"sha256":"2c1e707493cb85a855e97c250705cc589d6ffeb25bd989cf0f589f1ab8fc3301"},"candidate_planner_sha256":"45a28b40611508910fd338f775644ff4863fd0ff84609040cb697d157a09b2d8","candidate_test_sha256":"685c621c3079659d1a1afae7f3d668d3421935892623878ca8262f89fb662f12","prior_revision_review_sha256":"1efa4bf91c1d39ad3eb8d40a7dfdf00bddee3bbe78037fe6398bce4077e14b4b","blocking_findings":[],"observations":["All 25 declared prior, input, afterimage and output descriptors matched their declared bytes and SHA-256. Fifteen predecessor module-level planner functions remain statically unchanged.","At consumption the property decodes the retained canonical server frame and calls the existing compiler with retained exact message bytes, request ID and received time. It compares complete recomputed provenance, frame identity and canonical bytes, point schema, plan, review and pure deterministic final output; failures in the handled validation path become fixed sanitized errors. The previous packet-hash-only and paired invalid raw/hash substitutions are covered by newly authored test cases.","The existing compiler hashes raw bytes before decoding and retains whole-plan proofreader admission without repair. The point envelope separately checks the final frame and captured selected appointment, version, duration and deterministic proposal output. No write or confirmation is authorized by the carrier."],"qualifications":["This establishes source-level internal consistency, not authentication against arbitrary in-process substitution or a live provider response. The carrier is contract-only and unwired; transport ABI and the live receive boundary remain unverified.","Source test cases are unexecuted. The two historical dynamic modules remain unsettled and unopened. The current v24 exact nine-path scope does not admit the changed planner; an appropriate separately reviewed scope successor and applicable finite execution binding remain necessary.","No candidate import, compile, evaluation, test, app, database, browser, provider, Git or network operation was performed. Prior v1 REVISION_REQUIRED remains unchanged."],"source_accepted":true,"runtime_accepted":false,"execution_authorized":false}'),
+          "bounded_g4_model_reply_independent_source")
+    for row in G4_MODEL_REPLY_PRODUCT_ROWS.values():
+        exact(row)
+    return vector,review
+
+
+def _validate_g4_model_reply_overlay_transition(before, after):
+    _need(_sha(before)=='729dc7f008e9c52d58cfabace753a58c0b9d1a60d6e1fc1b0637d15211759395' and _sha(after)=='04108304f2824e04620ee3fa62318fbea4856032a25a46a633ab930a89afcbcd',
+          "bounded_g4_model_reply_overlay_transition")
+    anchor=b"  G4_STAGE1_LOCAL_SUCCESSOR:\n"
+    marker=b"    autonomous_task_selection: false\n"
+    _need(before.count(anchor)==1,"bounded_g4_model_reply_overlay_transition")
+    start=before.index(anchor)
+    end=before.index(b"scope_policy:\n",start)
+    profile=before[start:end]
+    _need(profile.count(marker)==1 and b'    - app/services/reception_one_isolated_vertex_planner.py\n' not in profile
+          and after==before[:start]+profile.replace(marker,b'    - app/services/reception_one_isolated_vertex_planner.py\n'+marker,1)+before[end:],
+          "bounded_g4_model_reply_overlay_transition")

@@ -5619,7 +5619,9 @@ def _point_coherence_policy_inputs(mutation):
 
 
 @pytest.mark.parametrize("mutation",["legacy30","exact35","extra","missing","effect","eligibility","state_eligibility"])
-def test_point_real_configuration_requires_exact35_and_closed_authority(mutation):
+def test_point_real_configuration_requires_exact35_and_closed_authority(mutation, monkeypatch):
+    # Historical v24 fixture retains exact35, not the new v25 profile.
+    monkeypatch.setattr(raisa_policy,"G4_STAGE1_SUCCESSOR_PRODUCT_PATHS",_MODEL_REPLY_PREDECESSOR_PATHS)
     b=bounded_g1b;inputs=_point_coherence_policy_inputs(mutation)
     if mutation!="exact35":
         with pytest.raises(b.BoundedG1BError) as err:b._validate_g4_owner_bootstrap_loaded_policy(inputs)
@@ -5769,7 +5771,9 @@ def test_point_v4_scope_rejects_old_generation_with_five_control_hashes():
     assert err.value.reason_code=="bounded_g4_owner_bootstrap_control_sources"
 
 
-def test_point_v4_real_configuration_dispatch_has_exact_five_owned_controls():
+def test_point_v4_real_configuration_dispatch_has_exact_five_owned_controls(monkeypatch):
+    # Historical v24 fixture retains exact35, not the new v25 profile.
+    monkeypatch.setattr(raisa_policy,"G4_STAGE1_SUCCESSOR_PRODUCT_PATHS",_MODEL_REPLY_PREDECESSOR_PATHS)
     b=bounded_g1b;inputs=_point_coherence_policy_inputs("exact35")
     assert inputs.binding["schema_version"]==b.G4_POINT_MOVE_FIVE_SCHEMA
     assert inputs.evidence["scope"]["schema_version"]==b.G4_POINT_MOVE_FIVE_SCOPE_SCHEMA
@@ -5777,3 +5781,72 @@ def test_point_v4_real_configuration_dispatch_has_exact_five_owned_controls():
     assert set(owned)==b.G4_POINT_MOVE_CONTROL and len(owned)==5
     documents={name:json.loads(raw) for name,raw in validated.documents}
     assert documents["programme_recovery.yaml"]["profiles"][raisa_policy.G4_STAGE1_SUCCESSOR_PROFILE]==raisa_policy.g4_stage1_successor_profile()
+
+
+# Source-only successor test fixtures: no actual controller/Git/runtime evidence.
+_MODEL_REPLY_PREDECESSOR_PATHS = tuple(p for p in raisa_policy.G4_STAGE1_SUCCESSOR_PRODUCT_PATHS if p != 'app/services/reception_one_isolated_vertex_planner.py')
+_MODEL_REPLY_CANDIDATE = Path('C:/Users/there/EMR4-tools/bureau-model-reply-carrier-enable-preparation-v1/sol-candidate-v1/candidate')
+
+
+def _model_reply_unlatch(monkeypatch):
+    # Explicit fixture substitution only; operative source stays INERT.
+    monkeypatch.setattr(bounded_g1b,"G4_MODEL_REPLY_TEMPLATE_INERT",False)
+
+
+def test_model_reply_successor_inert_and_old_descriptor_preserved(monkeypatch):
+    b=bounded_g1b
+    monkeypatch.setattr(b,"G4_MODEL_REPLY_TEMPLATE_INERT",True)
+    with pytest.raises(b.BoundedG1BError) as err:b._g4_owner_bootstrap_descriptor(b.G4_MODEL_REPLY_SCHEMA)
+    assert err.value.reason_code=="bounded_g4_model_reply_source_inert"
+    assert b._g4_owner_bootstrap_descriptor(b.G4_POINT_MOVE_FIVE_SCHEMA)["version"]==24
+    _model_reply_unlatch(monkeypatch);d=b._g4_owner_bootstrap_descriptor(b.G4_MODEL_REPLY_SCHEMA)
+    assert d["version"]==25 and len(d["product_sha"])==2 and len(d["control"])==5
+    assert set(d["product_sha"])==set(['app/services/reception_one_isolated_vertex_planner.py', 'tests/test_reception_one_point_move_bridge_contract.py'])
+    assert d["preimages"][b.G4_STAGE1_SUCCESSOR_SCOPE]=='be62b21c139dfa2f03751d3bbe7d11dd6cf314696cbcb6df538f1bb77a0a0586'
+    assert d["before_sha"]['app/services/reception_one_isolated_vertex_planner.py']=='525cf851818031799bd43ce737575711943b2fa231e7627739504ef6b31ef956'
+    assert d["root"]!=b._g4_owner_bootstrap_descriptor(b.G4_POINT_MOVE_FIVE_SCHEMA)["root"]
+    assert len(_MODEL_REPLY_PREDECESSOR_PATHS)==35
+
+
+@pytest.mark.parametrize("stage",["enable","admit","apply"])
+def test_model_reply_exact_stage_ownership_and_extra_path_refusal(monkeypatch,stage):
+    b=bounded_g1b;_model_reply_unlatch(monkeypatch);d=b._g4_owner_bootstrap_descriptor(b.G4_MODEL_REPLY_SCHEMA)
+    kind={"enable":"enable_g4_stage1_successor","admit":b.G4_OWNER_BOOTSTRAP_ADMIT_KIND,"apply":"implement_g4_stage1_successor"}[stage]
+    paths=d["control"] if stage=="enable" else set(d["product_sha"]) if stage=="apply" else set()
+    q={"schema_version":b.G4_MODEL_REPLY_SCHEMA,"stage":stage,"operation_kind":kind,"repair_sha256":dict.fromkeys(paths,{})}
+    assert b._g4_owner_bootstrap_paths(kind,q)==paths
+    q["repair_sha256"]["app/extra.py"]={}
+    with pytest.raises(b.BoundedG1BError):b._g4_owner_bootstrap_paths(kind,q)
+
+
+def test_model_reply_scope_profile36_and_runtime_closures(monkeypatch):
+    b=bounded_g1b;_model_reply_unlatch(monkeypatch)
+    scope=json.loads((_MODEL_REPLY_CANDIDATE/b.G4_STAGE1_SUCCESSOR_SCOPE).read_bytes())
+    assert b.validate_g4_owner_bootstrap_scope(scope)==scope["source_sha256"]
+    assert len(raisa_policy.G4_STAGE1_SUCCESSOR_PRODUCT_PATHS)==36
+    assert 'app/services/reception_one_isolated_vertex_planner.py' in raisa_policy.G4_STAGE1_SUCCESSOR_PRODUCT_PATHS
+    assert scope["runtime_binding_required"] is True and scope["admission_grants_runtime_authority"] is False
+    assert scope["voice_activation"] is False and "provider_invocation" in scope["excluded_effects"]
+    for field,value in [("allowed_paths",scope["allowed_paths"]+["app/extra.py"]),("voice_activation",True),("runtime_binding_required",False),("admission_grants_runtime_authority",True)]:
+        changed=copy.deepcopy(scope);changed[field]=value
+        with pytest.raises(b.BoundedG1BError):b.validate_g4_owner_bootstrap_scope(changed)
+
+
+def test_model_reply_external_source_and_review_byte_substitution_refuse(monkeypatch):
+    b=bounded_g1b;_model_reply_unlatch(monkeypatch);d=b._g4_owner_bootstrap_descriptor(b.G4_MODEL_REPLY_SCHEMA)
+    q={"product_vector":d["vector"],"mapping_review":d["mapping"]}
+    def read(path,digest):
+        raw=path.read_bytes();assert hashlib.sha256(raw).hexdigest()==digest;return raw
+    vector,review=b._g4_model_reply_external_inputs(read,q)
+    assert review["source_accepted"] is True and review["execution_authorized"] is False
+    assert review["blocking_findings"]==[] and len(vector["candidate_afterimages"])==2
+    def changed(path,digest):
+        raw=read(path,digest)
+        return raw+b" " if path==Path(b.G4_MODEL_REPLY_REVIEW["path"]) else raw
+    with pytest.raises(b.BoundedG1BError):b._g4_model_reply_external_inputs(changed,q)
+
+
+def test_model_reply_overlay_exact_append_and_extra_change_refusal():
+    b=bounded_g1b;before=Path('C:/Users/there/EMR4-tools/point-move-product-apply01-source/orchestration/harness_settings/programme_recovery.yaml').read_bytes();after=(_MODEL_REPLY_CANDIDATE/b.OVERLAY).read_bytes()
+    b._validate_g4_model_reply_overlay_transition(before,after)
+    with pytest.raises(b.BoundedG1BError):b._validate_g4_model_reply_overlay_transition(before,after+b"\n")

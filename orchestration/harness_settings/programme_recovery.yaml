@@ -1732,6 +1732,7 @@ profiles:
     - tests/test_reception_one_bureau_model_first_contract.py
     - tests/test_reception_one_point_move_bridge_contract.py
     - orchestration/continuity/reception-one-bureau-typed-plan-protocol/operator-catalog.schema.json
+    - app/services/reception_one_isolated_vertex_planner.py
     autonomous_task_selection: false
     feature_work_eligible: false
     product_work_eligible: false
