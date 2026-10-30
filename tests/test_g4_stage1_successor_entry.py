@@ -5118,8 +5118,11 @@ def test_owner_bootstrap_scope_excludes_runtime_and_provider_effects():
 # V22 source-only tests. Real selected file/hash reads are separated from
 # deliberately synthetic Git/index/review frames; neither is live admission.
 def _owner_staff_scope():
-    return json.loads((Path(__file__).resolve().parents[1] /
-                       bounded_g1b.G4_STAGE1_SUCCESSOR_SCOPE).read_bytes())
+    # Keep schema22 tests on their actual accepted fixture after scope advances.
+    path=Path("C:/Users/there/EMR4-tools/owner-staff-invitation-apply01-source")/bounded_g1b.G4_STAGE1_SUCCESSOR_SCOPE
+    raw=path.read_bytes()
+    assert hashlib.sha256(raw).hexdigest()=="ae103d71b20acb2233a7b3958ab08c57c4ea30d0b03a3ae48e930d4bc77b4edd"
+    return json.loads(raw)
 
 
 def _owner_staff_predecessor_control(path):
@@ -5302,3 +5305,475 @@ def test_owner_staff_admit_requires_preflight_only(entrypoint,phase):
     else:
         with pytest.raises(b.BoundedG1BError) as err:b._g4_owner_bootstrap_require_entrypoint(q,entrypoint,phase)
         assert err.value.reason_code=="bounded_g4_owner_bootstrap_admit_entrypoint"
+
+
+# Point admission tests are source preparation only, separate from point product
+# tests. Substituted reads below isolate authority predicates; they are not an
+# opaque-index/native-publication or application execution proof.
+_POINT_ADMISSION_CANDIDATE = Path("C:/Users/there/EMR4-tools/bureau-point-move-config-coherence-source-v2/candidate")
+
+_POINT_COHERENCE_REAL_ROOT = Path('C:/Users/there/EMR4-tools/point-move-enable01-source')
+_POINT_COHERENCE_REAL_ROWS = {'orchestration/programme/current-state.json': {'bytes': 47962, 'sha256': 'f32ea528d9efab7e45df9d4ce4770dc9094483641d332ebee052ec436634388b'}, 'orchestration/harness_settings/autonomous_continuation.yaml': {'bytes': 8277, 'sha256': '0a205c109383ed64c6c87435b259bbdd5a1989f834de6f505385bbf6c52bbd0d'}, 'orchestration/harness_settings/cost_controls.yaml': {'bytes': 1274, 'sha256': '9ed7844a22dfafa33c064cb1c26ca62779cc08f2195b93c3c7f436417cb0473f'}, 'orchestration/harness_settings/deepseek_cost_calibration.yaml': {'bytes': 1449, 'sha256': 'd84c35cb0aeea0e5a47f91845b6c5775b1af1ff489ba777a3ce33ea1c386f307'}, 'orchestration/harness_settings/direction_collaboration.yaml': {'bytes': 1450, 'sha256': 'd54f0e6719b42b3cb641406cd35d138437726f344a6d22636226a119353e6bf9'}, 'orchestration/harness_settings/evidence_led_workflow.yaml': {'bytes': 3931, 'sha256': '1e07de52436019029751bdc82547693a9cc2ed5182e856b3b7b96c9f5cfded8b'}, 'orchestration/harness_settings/operating_model.yaml': {'bytes': 7190, 'sha256': '0181a3b007f800cc7b610d8f16a9ac551daf7345da15232e464f40dda1e3ca6f'}, 'orchestration/harness_settings/programme_recovery.yaml': {'bytes': 78022, 'sha256': '46491d0e87ad8c5570b5feffac764cfb68a2fd25b1881891d3454fad17959112'}, 'orchestration/harness_settings/project.yaml': {'bytes': 1469, 'sha256': 'a3835edf35116088ef1808e2590c0b7ab837171ab40457b51f96f8519a235f84'}, 'orchestration/harness_settings/security_review_protocol.yaml': {'bytes': 2848, 'sha256': '861e5f577b98e8e3928333d28b8fade24d7e214f0cd666961f665fbce153dc70'}, 'orchestration/harness_settings/verifier_execution_policy.yaml': {'bytes': 6315, 'sha256': '92721606167a0bcb6b65d40e62061d9aaba25b2e57e72d9a2ee0445d51d5258d'}, 'AGENTS.md': {'bytes': 33600, 'sha256': 'f2c078d3877ac8a7659a614a049021df6d211d7a61934be927268f56b4b36a62'}, 'orchestration/programme/gates.yaml': {'bytes': 21258, 'sha256': '16206eaa4ee6af4785d9c2bff9e68c9e277da88eda714fc85b5227394d03228d'}}
+
+
+def _point_scope():
+    return json.loads((_POINT_ADMISSION_CANDIDATE / bounded_g1b.G4_STAGE1_SUCCESSOR_SCOPE).read_bytes())
+
+
+def _point_q(stage="enable"):
+    b=bounded_g1b;scope=_point_scope()
+    owned=b.G4_POINT_MOVE_CONTROL if stage=="enable" else frozenset(b.G4_POINT_MOVE_PRODUCT_SHA) if stage=="apply" else frozenset()
+    return {"schema_version":b.G4_POINT_MOVE_FIVE_SCHEMA,"operation_id":"point-source-test",
+        "operation_kind":b.G4_OWNER_BOOTSTRAP_ADMIT_KIND if stage=="admit" else
+            "enable_g4_stage1_successor" if stage=="enable" else "implement_g4_stage1_successor",
+        "stage":stage,"phase":"development","base_commit":b.G4_POINT_MOVE_BASE["commit"],
+        "base_tree":b.G4_POINT_MOVE_BASE["tree"],"expected_head":b.G4_POINT_MOVE_BASE["commit"],
+        "expected_index_tree":b.G4_POINT_MOVE_BASE["tree"],"candidate_tree":b.G4_POINT_MOVE_BASE["tree"],
+        "source_sha256":scope["source_sha256"],"payload_sha256":{},
+        "repair_sha256":{p:{} for p in owned},"source_review":{},"activation_acceptance":None,
+        "product_vector":scope["product_vector"],"mapping_review":scope["mapping_review"]}
+
+
+def test_point_descriptor_exact_paths_and_old_version_populations_remain_closed():
+    b=bounded_g1b
+    expected={"scripts/reception_one_bureau_typed_plan_protocol.py",
+        "orchestration/continuity/reception-one-bureau-typed-plan-protocol/plan-draft.schema.json",
+        "orchestration/continuity/reception-one-bureau-typed-plan-protocol/operator-catalog.json",
+        "orchestration/continuity/reception-one-bureau-typed-plan-protocol/execution-result.schema.json",
+        "tests/test_reception_one_bureau_model_first_contract.py",
+        "app/services/reception_one_proposal_runtime.py","app/routers/appointments.py",
+        "tests/test_reception_one_point_move_bridge_contract.py",
+        "orchestration/continuity/reception-one-bureau-typed-plan-protocol/operator-catalog.schema.json"}
+    assert set(b.G4_POINT_MOVE_PRODUCT_SHA)==expected
+    assert b.G4_POINT_MOVE_BEFORE_SHA["tests/test_reception_one_bureau_model_first_contract.py"] is None
+    assert b.G4_POINT_MOVE_BEFORE_SHA["tests/test_reception_one_point_move_bridge_contract.py"] is None
+    assert expected.issubset(raisa_policy.G4_STAGE1_SUCCESSOR_PRODUCT_PATHS)
+    for schema in (b.G4_OWNER_BOOTSTRAP_SCHEMA,b.G4_OWNER_STAFF_INVITATION_SCHEMA):
+        assert set(b._g4_owner_bootstrap_descriptor(schema)["product_sha"])=={"stage1_account_http_adapter.py"}
+    assert b._g4_owner_bootstrap_paths("enable_g4_stage1_successor",_point_q())==b.G4_POINT_MOVE_CONTROL
+    assert b._g4_owner_bootstrap_paths("implement_g4_stage1_successor",_point_q("apply"))==expected
+    assert b._g4_owner_bootstrap_paths(b.G4_OWNER_BOOTSTRAP_ADMIT_KIND,_point_q("admit"))==set()
+    q=_point_q();q["schema_version"]="ariadne.g4_stage1_owner_bootstrap_operation_binding.v99"
+    with pytest.raises(b.BoundedG1BError):b._g4_owner_bootstrap_paths(q["operation_kind"],q)
+    q=_point_q("apply");q["repair_sha256"]["stage1_account_http_adapter.py"]={}
+    with pytest.raises(b.BoundedG1BError):b._g4_owner_bootstrap_paths(q["operation_kind"],q)
+
+
+@pytest.mark.parametrize("field,value",[("runtime_binding_required",False),
+    ("admission_grants_runtime_authority",True),("voice_activation",True),
+    ("allowed_task_kind","feature_implementation"),("selected_base",{"commit":"0"*40,"tree":"0"*40}),
+    ("allowed_paths",["stage1_account_http_adapter.py"])])
+def test_point_scope_keeps_gate_task_runtime_base_and_population_closed(field,value):
+    b=bounded_g1b;scope=_point_scope();assert b.validate_g4_owner_bootstrap_scope(scope)==scope["source_sha256"]
+    scope[field]=value
+    with pytest.raises(b.BoundedG1BError):b.validate_g4_owner_bootstrap_scope(scope)
+
+
+@pytest.mark.parametrize("mutation,reason",[(None,None),("lineage","bounded_g4_point_move_external_vector"),
+    ("rows","bounded_g4_point_move_original_vector"),("authorship","bounded_g4_point_move_independent_source"),
+    ("runtime","bounded_g4_point_move_independent_source"),("bytes","bounded_g4_point_move_external_source")])
+def test_point_external_authority_joins_reject_substituted_lineage_and_acceptance(mutation,reason):
+    b=bounded_g1b;q=_point_q();seen=[]
+    def read(path,digest):
+        raw=path.read_bytes();assert hashlib.sha256(raw).hexdigest()==digest;seen.append(path)
+        value=json.loads(raw) if path.suffix==".json" else None
+        if path==Path(b.G4_POINT_MOVE_VECTOR["path"]) and mutation=="lineage":value["published_base"]["commit"]="0"*40
+        elif path.name=="source-vector.json" and mutation=="rows":value["rows"][0]["before_sha256"]="0"*64
+        elif path==Path(b.G4_POINT_MOVE_MAPPING["path"]) and mutation in {"authorship","runtime"}:
+            value["independent_of_implementation" if mutation=="authorship" else "runtime_accepted"] = mutation=="runtime"
+        elif mutation=="bytes" and path==Path(b.G4_POINT_MOVE_PRODUCT_ROWS["app/routers/appointments.py"]["path"]):return raw+b"changed"
+        else:return raw
+        return json.dumps(value).encode()
+    if reason:
+        with pytest.raises(b.BoundedG1BError) as err:b._g4_owner_bootstrap_external_inputs(read,q)
+        assert err.value.reason_code==reason
+    else:
+        vector,review=b._g4_owner_bootstrap_external_inputs(read,q)
+        assert len(vector["rows"])==9 and review["source_candidate_accepted"] is True
+        assert len(seen)==12
+
+
+@pytest.mark.parametrize("entrypoint,phase",[("task_branch_commit","development"),
+    ("task_branch_push","pre-push"),("recovery_preflight","post-push")])
+def test_point_admit_retains_preflight_development_only(entrypoint,phase):
+    b=bounded_g1b;q=_point_q("admit")
+    b._g4_owner_bootstrap_require_entrypoint(q,"recovery_preflight","development")
+    with pytest.raises(b.BoundedG1BError) as err:b._g4_owner_bootstrap_require_entrypoint(q,entrypoint,phase)
+    assert err.value.reason_code=="bounded_g4_owner_bootstrap_admit_entrypoint"
+
+
+def test_point_subject_covers_plan_sources_population_and_phase():
+    b=bounded_g1b;q=_point_q();original=b.g4_owner_bootstrap_review_subject(q)
+    for field,value in [("phase","pre-push"),("candidate_tree","a"*40),
+        ("mapping_review",{"path":"other","sha256":"0"*64}),
+        ("source_sha256",{}),("repair_sha256",{})]:
+        changed=copy.deepcopy(q);changed[field]=value
+        assert b.g4_owner_bootstrap_review_subject(changed)!=original
+
+
+# Revised nine-path full-loader fixture. All Git/index and phase-review effects
+# are explicit inert substitutes. Passing these tests would establish only the
+# actual loader's predicates over this substituted state, never native Git,
+# controller publication, a lease or point/backend runtime acceptance.
+def _point_loader_fixture(monkeypatch, stage="enable", phase="development"):
+    b=bounded_g1b;d=b._g4_owner_bootstrap_descriptor(b.G4_POINT_MOVE_FIVE_SCHEMA)
+    target=Path("C:/synthetic-point-target");source=Path("C:/synthetic-point-source")
+    paths=(b.CONFIGURATION_PATHS|{b.STATE,b.GATES,b.OVERLAY,b.AGENTS,b.G4_STAGE1_INTERACTIVE_SCOPE,
+        b.G4_STAGE1_SUCCESSOR_SCOPE,b.G4_STAGE1_SUCCESSOR_TEST,b.G4_CI_WORKFLOW}|b.SOURCE_PATHS|b.CONTROLLER_PATHS)
+    original={p:("accepted:"+p).encode() for p in paths}
+    predecessor=Path("C:/Users/there/EMR4-tools/owner-staff-invitation-apply01-source")
+    for p in d["control"]:
+        raw=(predecessor/p).read_bytes();assert hashlib.sha256(raw).hexdigest()==d["preimages"][p]
+        original[p]=raw
+    installed=dict(original);after=dict(original)
+    for p in d["control"]:after[p]=(_POINT_ADMISSION_CANDIDATE/p).read_bytes()
+    if stage!="enable":
+        for p in d["control"]:installed[p]=after[p]
+    vector=json.loads(Path(d["vector"]["path"]).read_bytes())
+    if stage=="apply":
+        paths|=frozenset(d["product_sha"])
+        for row in vector["rows"]:
+            p=row["relative_path"];before=row["published_before"]
+            if not before["absent"]:
+                raw=Path(before["path"]).read_bytes();assert hashlib.sha256(raw).hexdigest()==d["before_sha"][p]
+                installed[p]=raw
+            after[p]=Path(row["after"]["path"]).read_bytes()
+    scope=_point_scope()
+    scope["source_sha256"]={p:hashlib.sha256(after[p]).hexdigest() for p in b.SOURCE_PATHS|b.CONTROLLER_PATHS}
+    scope["control_sha256"]={p:hashlib.sha256(after[p]).hexdigest() for p in d["control"]-{b.G4_STAGE1_SUCCESSOR_SCOPE}}
+    after[b.G4_STAGE1_SUCCESSOR_SCOPE]=b._canonical(scope)+b"\n"
+    if stage!="enable":installed[b.G4_STAGE1_SUCCESSOR_SCOPE]=after[b.G4_STAGE1_SUCCESSOR_SCOPE]
+    q=_point_q(stage);q["phase"]=phase
+    if stage!="enable":q.update(base_commit="b"*40,base_tree="c"*40)
+    q["candidate_tree"]=q["base_tree"] if stage=="admit" else "a"*40
+    q["expected_head"]=q["base_commit"] if phase=="development" else "e"*40
+    q["expected_index_tree"]=q["base_tree"] if phase=="development" else q["candidate_tree"]
+    q["source_sha256"]=scope["source_sha256"]
+    q["payload_sha256"]={p:hashlib.sha256(after[p]).hexdigest() for p in paths}
+    owned=b._g4_owner_bootstrap_paths(q["operation_kind"],q)
+    q["repair_sha256"]={p:{"before_sha256":d["preimages"][p] if stage=="enable" else d["before_sha"][p],
+        "after_sha256":q["payload_sha256"][p]} for p in owned}
+    subject=d["root"]/"entry-admission-v1"/("independent-"+stage+"-"+phase+"-subject-review-v1.json")
+    q["source_review"]={"path":subject.as_posix(),"sha256":"d"*64}
+    if stage!="enable":q["activation_acceptance"]={"path":(d["root"]/
+        "entry-admission-v1/independent-enable-push-effect-review-v1.json").as_posix(),"sha256":"f"*64}
+    external={Path(r["path"]):p for p,r in d["product_rows"].items()}
+    seen=set()
+    def read(path,digest):
+        if path==subject:
+            return json.dumps({"schema":"emr4.g4_operation_review.v1","status":"PASS",
+                "verdict":"PASS_G4_STAGE1_OWNER_BOOTSTRAP_EXACT_ADMISSION_SUBJECT",
+                "subject_sha256":b.g4_owner_bootstrap_review_subject(q),"independent":True,
+                "implementation_authorship":False,"blocking_findings":[],
+                "reviewer_agent":"/root/synthetic-independent-point-reviewer","stage":stage,"phase":phase}).encode()
+        if stage!="enable" and q["activation_acceptance"] is not None and path==Path(q["activation_acceptance"]["path"]):
+            return json.dumps({"schema":"emr4.g4_operation_review.v1","status":"PASS",
+                "verdict":"PASS_G4_STAGE1_OWNER_BOOTSTRAP_CONTROL_PUBLICATION_EFFECT",
+                "independent":True,"implementation_authorship":False,"blocking_findings":[],
+                "reviewer_agent":"/root/synthetic-independent-point-reviewer","stage":"enable","phase":"push",
+                "base":d["base"]["commit"],"commit":q["base_commit"],"candidate_tree":q["base_tree"],
+                "control_activation_accepted":True,"same_attempt_remote_readback_verified":True,
+                "protected_refs_unchanged":True,"whole_inverse_verified_same_attempt":True,
+                "published_ref":b.G4_STAGE1_INTERACTIVE_BACKEND_REF}).encode()
+        if not path.is_relative_to(target) and not path.is_relative_to(source):
+            raw=path.read_bytes();assert hashlib.sha256(raw).hexdigest()==digest
+            if path in external:seen.add(external[path])
+            return raw
+        relative=path.relative_to(target if path.is_relative_to(target) else source).as_posix()
+        raw=after[relative];assert hashlib.sha256(raw).hexdigest()==digest
+        return raw
+    def git_bytes(_target,*args):
+        if args[0]=="ls-tree":return b"tracked" if args[-1] in (original if stage=="enable" else installed) else b""
+        assert args[:2]==("cat-file","blob")
+        commit,p=args[2].split(":",1)
+        return (original if commit==d["base"]["commit"] else installed)[p]
+    def git(_target,*args):
+        if args[0]=="rev-parse":return d["base"]["tree"]
+        parent=d["base"]["commit"] if args[2]==q["base_commit"] and stage!="enable" else q["base_commit"]
+        tree=q["base_tree"] if args[2]==q["base_commit"] and stage!="enable" else q["candidate_tree"]
+        return "tree "+tree+"\nparent "+parent+"\n\nsynthetic\n"
+    observations=[]
+    monkeypatch.setattr(b.trusted_git,"run_git_bytes",git_bytes)
+    monkeypatch.setattr(b.trusted_git,"run_git",git)
+    monkeypatch.setattr(b.trusted_git,"attest_target_index",lambda *a,**k:observations.append(k) or {"observation_sha256":"sha256:"+"0"*64})
+    def run(reader=read):return b._load_g4_owner_bootstrap_inputs(None,target,source,
+        b.G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT,Path("C:/synthetic-point-scratch"),q,reader,{})
+    read.external_seen=seen
+    return run,q,read,observations
+
+
+@pytest.mark.parametrize("stage,phase",[("enable","development"),("enable","pre-push"),
+    ("enable","post-push"),("admit","development"),("apply","development"),
+    ("apply","pre-push"),("apply","post-push")])
+def test_point_full_loader_exact_nine_path_candidate_with_synthetic_observations(monkeypatch,stage,phase):
+    b=bounded_g1b;run,q,read,observations=_point_loader_fixture(monkeypatch,stage,phase)
+    loaded=run()
+    assert loaded.binding is q and len(observations)==1
+    assert loaded.evidence["mapping"]["source_candidate_accepted"] is True
+    assert read.external_seen==set(b.G4_POINT_MOVE_PRODUCT_SHA)
+    assert observations[0]["expected_head"]==q["expected_head"]
+    assert set(q["repair_sha256"])==(b.G4_POINT_MOVE_CONTROL if stage=="enable" else
+        set(b.G4_POINT_MOVE_PRODUCT_SHA) if stage=="apply" else set())
+
+
+@pytest.mark.parametrize("mutation,reason",[("extra","bounded_g4_owner_bootstrap_changed_paths"),
+    ("missing","bounded_g4_owner_bootstrap_changed_paths"),("case","bounded_g4_owner_bootstrap_changed_paths"),
+    ("unknown_field","bounded_g4_owner_bootstrap_binding_schema"),
+    ("unknown_version","bounded_g4_owner_bootstrap_binding_version"),
+    ("null_payload","bounded_g4_owner_bootstrap_payload_paths"),
+    ("null_candidate","bounded_g4_owner_bootstrap_git_identity"),
+    ("preimage","bounded_g4_owner_bootstrap_change_preimage"),
+    ("head","bounded_g4_owner_bootstrap_development_binding"),
+    ("index","bounded_g4_owner_bootstrap_development_binding"),
+    ("admit_delta","bounded_g4_owner_bootstrap_admit_no_delta"),
+    ("admit_phase","bounded_g4_owner_bootstrap_admit_no_delta")])
+def test_point_full_loader_rejects_population_draft_preimage_and_phase_mismatch(monkeypatch,mutation,reason):
+    b=bounded_g1b;stage="admit" if mutation.startswith("admit_") else "apply"
+    run,q,read,observations=_point_loader_fixture(monkeypatch,stage)
+    if mutation=="extra":q["repair_sha256"]["extra.py"]={}
+    if mutation=="missing":q["repair_sha256"].pop("app/routers/appointments.py")
+    if mutation=="case":q["repair_sha256"]["APP/routers/appointments.py"]=q["repair_sha256"].pop("app/routers/appointments.py")
+    if mutation=="unknown_field":q["unbound_field"]=True
+    if mutation=="unknown_version":q["schema_version"]="ariadne.g4_stage1_owner_bootstrap_operation_binding.v99"
+    if mutation=="null_payload":q["payload_sha256"]=None
+    if mutation=="null_candidate":q["candidate_tree"]=None
+    if mutation=="preimage":q["repair_sha256"]["app/routers/appointments.py"]["before_sha256"]="0"*64
+    if mutation=="head":q["expected_head"]="0"*40
+    if mutation=="index":q["expected_index_tree"]="0"*40
+    if mutation=="admit_delta":q["candidate_tree"]="a"*40
+    if mutation=="admit_phase":q["phase"]="pre-push"
+    with pytest.raises(b.BoundedG1BError) as err:run()
+    assert err.value.reason_code==reason
+
+
+@pytest.mark.parametrize("mutation,reason",[("subject_author","bounded_g4_owner_bootstrap_independent_subject"),
+    ("subject_stale","bounded_g4_owner_bootstrap_independent_subject"),
+    ("activation_author","bounded_g4_owner_bootstrap_activation_acceptance"),
+    ("activation_wrong","bounded_g4_owner_bootstrap_activation_acceptance"),
+    ("activation_missing","bounded_g4_owner_bootstrap_activation_row"),
+    ("activation_parent","bounded_g4_owner_bootstrap_activation_parent"),
+    ("source_bytes","bounded_g4_owner_bootstrap_installed_source"),
+    ("unowned","bounded_g4_owner_bootstrap_unowned_change"),
+    ("test_membership","bounded_g4_owner_bootstrap_change_preimage")])
+def test_point_full_loader_preserves_source_subject_activation_and_committed_membership(monkeypatch,mutation,reason):
+    b=bounded_g1b;run,q,read,observations=_point_loader_fixture(monkeypatch,"apply")
+    if mutation=="activation_missing":q["activation_acceptance"]=None
+    original_bytes=b.trusted_git.run_git_bytes;original_git=b.trusted_git.run_git
+    def git_bytes(target,*args):
+        if mutation=="test_membership" and args[0]=="ls-tree" and args[-1]=="tests/test_reception_one_bureau_model_first_contract.py":return b"tracked"
+        if mutation=="test_membership" and args[:2]==("cat-file","blob") and args[2].endswith(":tests/test_reception_one_bureau_model_first_contract.py"):return b"unexpected committed test"
+        raw=original_bytes(target,*args)
+        if mutation=="source_bytes" and args[:2]==("cat-file","blob") and args[2]==q["base_commit"]+":"+b.G4_AUDIT_CODE:return raw+b"changed"
+        if mutation=="unowned" and args[:2]==("cat-file","blob") and args[2]==q["base_commit"]+":"+b.AGENTS:return raw+b"changed"
+        return raw
+    def git(target,*args):
+        raw=original_git(target,*args)
+        if mutation=="activation_parent" and args[:2]==("cat-file","commit") and args[2]==q["base_commit"]:return raw.replace("parent "+b.G4_POINT_MOVE_BASE["commit"],"parent "+"0"*40)
+        return raw
+    monkeypatch.setattr(b.trusted_git,"run_git_bytes",git_bytes);monkeypatch.setattr(b.trusted_git,"run_git",git)
+    def changed(path,digest):
+        raw=read(path,digest)
+        if path.name.startswith("independent-apply-") and mutation in {"subject_author","subject_stale"}:
+            value=json.loads(raw)
+            value["reviewer_agent" if mutation=="subject_author" else "subject_sha256"]="/root/invitation_product_publication_source_review_sol" if mutation=="subject_author" else "0"*64
+            return json.dumps(value).encode()
+        if path.name=="independent-enable-push-effect-review-v1.json" and mutation in {"activation_author","activation_wrong"}:
+            value=json.loads(raw)
+            if mutation=="activation_author":value["reviewer_agent"]="/root/invitation_product_publication_source_review_sol"
+            else:value["protected_refs_unchanged"]=False
+            return json.dumps(value).encode()
+        return raw
+    with pytest.raises(b.BoundedG1BError) as err:run(changed)
+    assert err.value.reason_code==reason
+
+
+# Real semantic configuration boundary, with ordinary pinned documents only.
+# Git/index/phase receipts in _point_loader_fixture remain explicit substitutes.
+def _point_coherence_real_documents():
+    values={}
+    for p,row in _POINT_COHERENCE_REAL_ROWS.items():
+        raw=(_POINT_COHERENCE_REAL_ROOT/p).read_bytes()
+        assert len(raw)==row["bytes"] and hashlib.sha256(raw).hexdigest()==row["sha256"]
+        values[p]=raw
+    assert set(bounded_g1b.CONFIGURATION_PATHS).issubset(values)
+    return values
+
+
+def _point_coherence_policy_inputs(mutation):
+    b=bounded_g1b;payloads=_point_coherence_real_documents()
+    for p in b.G4_POINT_MOVE_CONTROL:payloads[p]=(_POINT_ADMISSION_CANDIDATE/p).read_bytes()
+    if mutation=="legacy30":payloads[b.OVERLAY]=(_POINT_COHERENCE_REAL_ROOT/b.OVERLAY).read_bytes()
+    if mutation in {"extra","missing","effect","eligibility"}:
+        raw=payloads[b.OVERLAY];start=raw.index(b"  G4_STAGE1_LOCAL_SUCCESSOR:\n")
+        end=raw.index(b"scope_policy:\n",start);profile=raw[start:end]
+        if mutation=="extra":profile=profile.replace(b"    autonomous_task_selection: false\n",b"    - extra/unowned.py\n    autonomous_task_selection: false\n",1)
+        if mutation=="missing":profile=profile.replace(b"    - orchestration/continuity/reception-one-bureau-typed-plan-protocol/operator-catalog.schema.json\n",b"",1)
+        if mutation=="effect":profile=profile.replace(b"    - task_branch_push\n",b"",1)
+        if mutation=="eligibility":profile=profile.replace(b"    provider_calls_eligible: false\n",b"    provider_calls_eligible: true\n",1)
+        assert profile!=raw[start:end];payloads[b.OVERLAY]=raw[:start]+profile+raw[end:]
+    if mutation=="state_eligibility":
+        state=json.loads(payloads[b.STATE]);state["feature_work_eligible"]=True
+        payloads[b.STATE]=json.dumps(state).encode()
+    q=_point_q();q["payload_sha256"]={p:hashlib.sha256(raw).hexdigest() for p,raw in payloads.items()}
+    return b.BoundedG1BInputs(q,{},payloads,{"scope":_point_scope()}, {})
+
+
+@pytest.mark.parametrize("mutation",["legacy30","exact35","extra","missing","effect","eligibility","state_eligibility"])
+def test_point_real_configuration_requires_exact35_and_closed_authority(mutation):
+    b=bounded_g1b;inputs=_point_coherence_policy_inputs(mutation)
+    if mutation!="exact35":
+        with pytest.raises(b.BoundedG1BError) as err:b._validate_g4_owner_bootstrap_loaded_policy(inputs)
+        assert err.value.reason_code=="configuration_g4_stage1_successor_profile_invalid"
+    else:
+        owned,validated=b._validate_g4_owner_bootstrap_loaded_policy(inputs)
+        assert set(owned)==b.G4_POINT_MOVE_CONTROL and len(owned)==5
+        documents={name:json.loads(raw) for name,raw in validated.documents}
+        profile=documents["programme_recovery.yaml"]["profiles"][raisa_policy.G4_STAGE1_SUCCESSOR_PROFILE]
+        assert profile==raisa_policy.g4_stage1_successor_profile()
+        assert profile["allowed_paths"]==list(raisa_policy.G4_STAGE1_SUCCESSOR_PRODUCT_PATHS)
+        assert len(profile["allowed_paths"])==35
+        assert json.loads(inputs.payloads[b.STATE])["feature_work_eligible"] is False
+        assert profile["provider_calls_eligible"] is False and profile["protected_ref_movement_eligible"] is False
+
+
+@pytest.mark.parametrize("mutation",["exact","predecessor","missing","extra","effect"])
+def test_point_overlay_transition_is_one_exact_append(mutation):
+    b=bounded_g1b;before=(_POINT_COHERENCE_REAL_ROOT/b.OVERLAY).read_bytes()
+    after=(_POINT_ADMISSION_CANDIDATE/b.OVERLAY).read_bytes()
+    if mutation=="predecessor":before+=b"# drift\n"
+    if mutation=="missing":after=after.replace(b.G4_POINT_MOVE_OVERLAY_APPEND,b"",1)
+    if mutation=="extra":after+=b"# extra\n"
+    if mutation=="effect":after=after.replace(b"    provider_calls_eligible: false\n",b"    provider_calls_eligible: true\n",1)
+    if mutation=="exact":assert b._validate_g4_point_move_overlay_transition(before,after) is None
+    else:
+        with pytest.raises(b.BoundedG1BError) as err:b._validate_g4_point_move_overlay_transition(before,after)
+        assert err.value.reason_code=="bounded_g4_point_move_overlay_transition"
+
+
+@pytest.mark.parametrize("stage,mutation,reason",[
+    ("enable","missing","bounded_g4_owner_bootstrap_changed_paths"),
+    ("enable","extra","bounded_g4_owner_bootstrap_changed_paths"),
+    ("enable","preimage","bounded_g4_owner_bootstrap_change_preimage"),
+    ("admit","delta","bounded_g4_owner_bootstrap_changed_paths"),
+    ("apply","delta","bounded_g4_owner_bootstrap_changed_paths"),
+    ("admit","installed","bounded_g4_owner_bootstrap_unowned_change"),
+    ("apply","installed","bounded_g4_owner_bootstrap_unowned_change"),
+    ("enable","unknown_family","bounded_g4_owner_bootstrap_binding_version")])
+def test_point_fifth_control_stage_ownership_and_installed_preservation(monkeypatch,stage,mutation,reason):
+    b=bounded_g1b;run,q,read,observations=_point_loader_fixture(monkeypatch,stage)
+    if mutation=="missing":q["repair_sha256"].pop(b.OVERLAY)
+    if mutation in {"extra","delta"}:q["repair_sha256"][b.OVERLAY if mutation=="delta" else "extra/unowned.py"]={}
+    if mutation=="preimage":q["repair_sha256"][b.OVERLAY]["before_sha256"]="0"*64
+    if mutation=="unknown_family":q["schema_version"]="ariadne.g4_stage1_owner_bootstrap_operation_binding.v99"
+    original=b.trusted_git.run_git_bytes
+    def changed(target,*args):
+        value=original(target,*args)
+        if mutation=="installed" and args[:2]==("cat-file","blob") and args[2]==q["base_commit"]+":"+b.OVERLAY:return value+b"# installed drift\n"
+        return value
+    monkeypatch.setattr(b.trusted_git,"run_git_bytes",changed)
+    with pytest.raises(b.BoundedG1BError) as err:run()
+    assert err.value.reason_code==reason
+    assert observations==[]
+
+
+# Known v4/v24 generation isolates new subjects from consumed v3 canonical paths.
+# All authority records here are explicit inert unit fixtures, never receipts.
+def test_point_v4_descriptor_preserves_frozen_populations_and_roots():
+    b=bounded_g1b;old=b._g4_owner_bootstrap_descriptor(b.G4_POINT_MOVE_SCHEMA)
+    new=b._g4_owner_bootstrap_descriptor(b.G4_POINT_MOVE_FIVE_SCHEMA)
+    assert old["version"]==23 and new["version"]==24
+    assert old["scope_schema"]=="ariadne.g4_stage1_successor_entry_scope.v23"
+    assert new["scope_schema"]=="ariadne.g4_stage1_successor_entry_scope.v24"
+    assert old["control"]==b.G4_POINT_MOVE_V3_CONTROL and len(old["control"])==4
+    assert new["control"]==old["control"]|{b.OVERLAY} and len(new["control"])==5
+    assert old["preimages"]==b.G4_POINT_MOVE_V3_PREIMAGES and b.OVERLAY not in old["preimages"]
+    assert new["preimages"][b.OVERLAY]==b.G4_POINT_MOVE_OVERLAY_BEFORE_SHA
+    assert old["root"]==b.G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT/"bureau-point-move-successor-v1"
+    assert new["root"]==b.G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT/"bureau-point-move-five-control-successor-v1"
+    assert old["root"]!=new["root"] and old["product_sha"]==new["product_sha"]
+    for schema in (b.G4_OWNER_BOOTSTRAP_SCHEMA,b.G4_OWNER_STAFF_INVITATION_SCHEMA):
+        d=b._g4_owner_bootstrap_descriptor(schema)
+        assert len(d.get("control",b.G4_OWNER_BOOTSTRAP_CONTROL))==3
+        assert set(d["product_sha"])=={"stage1_account_http_adapter.py"}
+    for schema,controls in [(b.G4_POINT_MOVE_SCHEMA,old["control"]),(b.G4_POINT_MOVE_FIVE_SCHEMA,new["control"])]:
+        for stage in ("enable","admit","apply"):
+            q=_point_q(stage);q["schema_version"]=schema
+            expected=controls if stage=="enable" else set(new["product_sha"]) if stage=="apply" else set()
+            q["repair_sha256"]={p:{} for p in expected}
+            assert b._g4_owner_bootstrap_paths(q["operation_kind"],q)==expected
+
+
+def _point_v4_subject_fixture(stage,phase):
+    b=bounded_g1b;d=b._g4_owner_bootstrap_descriptor(b.G4_POINT_MOVE_FIVE_SCHEMA)
+    expected=d["root"]/"entry-admission-v1"/("independent-"+stage+"-"+phase+"-subject-review-v1.json")
+    value={"schema":"emr4.g4_operation_review.v1","status":"PASS",
+        "verdict":"PASS_G4_STAGE1_OWNER_BOOTSTRAP_EXACT_ADMISSION_SUBJECT",
+        "subject_sha256":"a"*64,"independent":True,"implementation_authorship":False,
+        "blocking_findings":[],"reviewer_agent":"/root/synthetic-independent-point-reviewer",
+        "stage":stage,"phase":phase}
+    seen=[]
+    def read(path,digest):
+        assert path==expected and digest=="b"*64
+        seen.append(path);return json.dumps(value).encode()
+    row={"path":expected.as_posix(),"sha256":"b"*64}
+    def run():return b._g4_owner_bootstrap_subject_review(read,row,b.G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT,
+        "a"*64,stage,phase,b.G4_POINT_MOVE_FIVE_SCHEMA)
+    return run,row,value,seen,expected
+
+
+@pytest.mark.parametrize("stage,phase",[("enable","development"),("enable","pre-push"),
+    ("enable","post-push"),("admit","development"),("apply","development"),
+    ("apply","pre-push"),("apply","post-push")])
+def test_point_v4_canonical_phase_paths_are_distinct_without_writes(stage,phase):
+    b=bounded_g1b;run,row,value,seen,expected=_point_v4_subject_fixture(stage,phase)
+    assert run()==value and seen==[expected]
+    old=b._g4_owner_bootstrap_descriptor(b.G4_POINT_MOVE_SCHEMA)["root"]/"entry-admission-v1"/expected.name
+    assert old!=expected and expected.is_relative_to(b.G4_POINT_MOVE_FIVE_ROOT)
+    # The consumer only reads the fixed canonical path; this fixture performs no save/write.
+
+
+@pytest.mark.parametrize("mutation,reason",[("old_path","bounded_g4_owner_bootstrap_review_path"),
+    ("arbitrary_path","bounded_g4_owner_bootstrap_review_path"),
+    ("old_subject","bounded_g4_owner_bootstrap_independent_subject"),
+    ("stage","bounded_g4_owner_bootstrap_independent_subject"),
+    ("phase","bounded_g4_owner_bootstrap_independent_subject")])
+def test_point_v4_rejects_old_subject_and_arbitrary_phase_paths(mutation,reason):
+    b=bounded_g1b;run,row,value,seen,expected=_point_v4_subject_fixture("enable","development")
+    if mutation=="old_path":row["path"]=(b.G4_POINT_MOVE_V3_ROOT/"entry-admission-v1"/expected.name).as_posix()
+    if mutation=="arbitrary_path":row["path"]=(expected.parent/"arbitrary-review.json").as_posix()
+    if mutation=="old_subject":value["subject_sha256"]="208a6484af44ed9fe75ef8c46f6ad13435480b5aaf6ccae3e3e16d234042e373"
+    if mutation=="stage":value["stage"]="apply"
+    if mutation=="phase":value["phase"]="pre-push"
+    with pytest.raises(b.BoundedG1BError) as err:run()
+    assert err.value.reason_code==reason
+    assert seen==([] if mutation.endswith("path") else [expected])
+
+
+@pytest.mark.parametrize("mutation,reason",[("v3_five","bounded_g4_owner_bootstrap_changed_paths"),
+    ("unknown_version","bounded_g4_owner_bootstrap_binding_version"),
+    ("path_override","bounded_g4_owner_bootstrap_binding_schema")])
+def test_point_v4_loader_rejects_generation_mixing_and_path_override(monkeypatch,mutation,reason):
+    b=bounded_g1b;run,q,read,observations=_point_loader_fixture(monkeypatch,"enable")
+    if mutation=="v3_five":q["schema_version"]=b.G4_POINT_MOVE_SCHEMA
+    if mutation=="unknown_version":q["schema_version"]="ariadne.g4_stage1_owner_bootstrap_operation_binding.v99"
+    if mutation=="path_override":q["subject_review_path"]="arbitrary-review.json"
+    with pytest.raises(b.BoundedG1BError) as err:run()
+    assert err.value.reason_code==reason and observations==[]
+
+
+def test_point_v4_scope_rejects_old_generation_with_five_control_hashes():
+    b=bounded_g1b;scope=_point_scope()
+    assert b.validate_g4_owner_bootstrap_scope(scope)==scope["source_sha256"]
+    scope["schema_version"]=b.G4_POINT_MOVE_SCOPE_SCHEMA
+    with pytest.raises(b.BoundedG1BError) as err:b.validate_g4_owner_bootstrap_scope(scope)
+    assert err.value.reason_code=="bounded_g4_owner_bootstrap_control_sources"
+
+
+def test_point_v4_real_configuration_dispatch_has_exact_five_owned_controls():
+    b=bounded_g1b;inputs=_point_coherence_policy_inputs("exact35")
+    assert inputs.binding["schema_version"]==b.G4_POINT_MOVE_FIVE_SCHEMA
+    assert inputs.evidence["scope"]["schema_version"]==b.G4_POINT_MOVE_FIVE_SCOPE_SCHEMA
+    owned,validated=b._validate_g4_owner_bootstrap_loaded_policy(inputs)
+    assert set(owned)==b.G4_POINT_MOVE_CONTROL and len(owned)==5
+    documents={name:json.loads(raw) for name,raw in validated.documents}
+    assert documents["programme_recovery.yaml"]["profiles"][raisa_policy.G4_STAGE1_SUCCESSOR_PROFILE]==raisa_policy.g4_stage1_successor_profile()
