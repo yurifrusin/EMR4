@@ -9,7 +9,8 @@ product proposal adapter.
 from __future__ import annotations
 
 from contextlib import contextmanager
-from dataclasses import dataclass
+import copy
+from dataclasses import dataclass, field
 from datetime import datetime
 import hashlib
 import json
@@ -54,6 +55,22 @@ class IsolatedVertexPlannerError(RuntimeError):
 
 
 @dataclass(frozen=True)
+class _ModelReplyReceipt:
+    """Request-local server memory, never an HTTP/model-input or log record.
+
+    raw_response is the received model-message bytes, not a rendering of a plan.
+    frame_bytes is a separate snapshot of the final trusted server frame.
+    No transport authenticity is established by this private value type.
+    """
+    raw_response: bytes = field(repr=False)
+    frame_bytes: bytes = field(repr=False)
+    request_id: str = field(repr=False)
+    context_revision: int
+    provenance_items: tuple
+    received_at: datetime
+
+
+@dataclass(frozen=True)
 class IsolatedVertexPlannerResult:
     final_output: dict[str, Any] | None
     review: dict[str, Any]
@@ -62,6 +79,57 @@ class IsolatedVertexPlannerResult:
     runtime_audit_ref: str
     terminal_status: str
     receptionist_response: str | None = None
+    _model_reply_receipt: _ModelReplyReceipt | None = field(
+        default=None, repr=False, compare=False,
+    )
+
+    @property
+    def semantic_provenance(self) -> dict[str, Any] | None:
+        """Recompile exact retained message bytes at server-owned consumption.
+
+        This checks consistency, not transport authenticity or protection from
+        arbitrary in-process attackers. The unchanged point envelope still
+        rechecks selected-source/freshness/write boundaries at dispatch time.
+        """
+        receipt = self._model_reply_receipt
+        if receipt is None:
+            return None  # The unchanged historical transport produces no receipt.
+        if type(receipt) is not _ModelReplyReceipt:
+            raise IsolatedVertexPlannerError("isolated_model_reply_join_invalid")
+        from scripts import reception_one_bureau_typed_plan_protocol as typed_plan
+
+        try:
+            if (type(receipt.raw_response) is not bytes
+                    or type(receipt.frame_bytes) is not bytes
+                    or not isinstance(receipt.received_at, datetime)
+                    or receipt.received_at.tzinfo is None):
+                raise ValueError("receipt shape")
+            # Decode only our retained server-frame snapshot. Model-message
+            # parsing and normalization belong solely to the existing compiler.
+            frame = json.loads(receipt.frame_bytes.decode("utf-8"))
+            rebuilt = typed_plan.compile_model_semantic_packet(
+                frame, receipt.raw_response, case_id=receipt.request_id,
+                now=receipt.received_at,
+            )
+            provenance = dict(receipt.provenance_items)
+            if (len(receipt.provenance_items) != len(provenance)
+                    or provenance != rebuilt["provenance"]
+                    or frame["request_id"] != receipt.request_id
+                    or frame["context_revision"] != receipt.context_revision
+                    or receipt.frame_bytes != typed_plan.canonical_json(frame).encode("utf-8")
+                    or rebuilt["provenance"]["packet_schema_version"] != typed_plan.POINT_PACKET_VERSION
+                    or rebuilt["plan"]["contract_version"] != typed_plan.POINT_PLAN_VERSION
+                    or rebuilt["plan"] != self.normalized_plan
+                    or rebuilt["review"] != self.review):
+                raise ValueError("compiler join")
+            execution = typed_plan.execute_plan(
+                frame, rebuilt["plan"], rebuilt["review"], now=receipt.received_at,
+            )
+            if execution["final_output"] != self.final_output:
+                raise ValueError("proposal join")
+        except (KeyError, TypeError, ValueError, RecursionError, OSError):
+            raise IsolatedVertexPlannerError("isolated_model_reply_join_invalid") from None
+        return copy.deepcopy(rebuilt["provenance"])
 
 
 def _load_object(path: Path) -> dict[str, Any]:
@@ -475,3 +543,65 @@ def run_isolated_vertex_planner(
         terminal_status=str(dialogue.get("terminal_status")),
         receptionist_response=receptionist_response,
     )
+
+
+def compile_received_model_reply(
+    *, frame: dict[str, Any], raw_response: bytes,
+    frame_observed_at: datetime, received_at: datetime,
+) -> IsolatedVertexPlannerResult:
+    """Pure contract boundary for a future server-owned message receiver.
+
+    UNWIRED: this function performs no model/HTTP/provider call and is not a
+    replacement or fallback for the old runtime. Its caller must eventually be
+    the reviewed transport at the actual message receive boundary. Until that
+    ABI is established, results are contract/mock evidence only, with zero
+    observed provider calls. No client endpoint accepts raw_response here.
+
+    The final route-built frame must be the one sent to the model. Preserve
+    exact received bytes; derive case_id from the server request, never a model
+    claim. The existing compiler/proofreader owns all interpretation and plan
+    construction. The existing point envelope later joins trusted selected-row
+    identity/version/duration, and staff confirmation remains mandatory.
+    """
+    if (type(frame) is not dict or type(raw_response) is not bytes
+            or not isinstance(frame_observed_at, datetime)
+            or not isinstance(received_at, datetime)
+            or frame_observed_at.tzinfo is None or received_at.tzinfo is None):
+        raise IsolatedVertexPlannerError("isolated_model_reply_boundary_invalid")
+    snapshot = copy.deepcopy(frame)
+    _validate_frame(snapshot, frame_observed_at)
+    from scripts import reception_one_bureau_typed_plan_protocol as typed_plan
+
+    try:
+        built = typed_plan.compile_model_semantic_packet(
+            snapshot, raw_response, case_id=snapshot["request_id"], now=received_at,
+        )
+        # This new carrier prepares only the already supported selected point
+        # move. Other families keep their existing route; no operator expansion.
+        if (built["provenance"]["packet_schema_version"] != typed_plan.POINT_PACKET_VERSION
+                or built["plan"]["contract_version"] != typed_plan.POINT_PLAN_VERSION):
+            raise ValueError("point packet required")
+        execution = typed_plan.execute_plan(
+            snapshot, built["plan"], built["review"], now=received_at,
+        )
+        receipt = _ModelReplyReceipt(
+            raw_response=raw_response,
+            frame_bytes=typed_plan.canonical_json(snapshot).encode("utf-8"),
+            request_id=snapshot["request_id"],
+            context_revision=snapshot["context_revision"],
+            provenance_items=tuple(sorted(built["provenance"].items())),
+            received_at=received_at,
+        )
+        result = IsolatedVertexPlannerResult(
+            final_output=copy.deepcopy(execution["final_output"]),
+            review=copy.deepcopy(built["review"]),
+            normalized_plan=copy.deepcopy(built["plan"]),
+            provider_calls=0,
+            runtime_audit_ref="contract-only-unwired",
+            terminal_status="contract_only_proposal",
+            _model_reply_receipt=receipt,
+        )
+        result.semantic_provenance  # Fail closed before any proposal is returned.
+        return result
+    except (KeyError, TypeError, ValueError):
+        raise IsolatedVertexPlannerError("isolated_model_reply_refused") from None

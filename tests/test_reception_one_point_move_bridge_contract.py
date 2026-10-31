@@ -285,5 +285,116 @@ class PointJoinTests(unittest.TestCase):
         self.assertFalse(result.safe); endpoint.assert_not_called()
 
 
+
+
+class ModelReplyCarrierContractTests(unittest.TestCase):
+    """Unexecuted authored-synthetic receive-boundary sources, not live proof."""
+    def received(self, row=None, packet=None, *, raw=None, now=NOW):
+        from app.services import reception_one_isolated_vertex_planner as planner
+        row = point_frame() if row is None else row
+        packet = point_packet(row) if packet is None else packet
+        packet = copy.deepcopy(packet)
+        packet["case_id"] = row["request_id"]
+        raw = (b" \n" + protocol.canonical_json(packet).encode("utf-8") + b"\n ") if raw is None else raw
+        result = planner.compile_received_model_reply(
+            frame=row, raw_response=raw,
+            frame_observed_at=datetime.fromisoformat(row["observed_at"].replace("Z", "+00:00")),
+            received_at=now,
+        )
+        return row, raw, result
+
+    def test_actual_received_bytes_hash_not_reserialized_plan_or_packet(self):
+        import hashlib
+        row, raw, result = self.received()
+        provenance = result.semantic_provenance
+        self.assertEqual(provenance["raw_response_sha256"], hashlib.sha256(raw).hexdigest())
+        self.assertNotEqual(provenance["raw_response_sha256"], provenance["packet_sha256"])
+        self.assertEqual(provenance["frame_sha256"], protocol.canonical_sha256(row))
+        self.assertEqual(provenance["compiled_plan_sha256"], protocol.canonical_sha256(result.normalized_plan))
+        self.assertEqual(result.provider_calls, 0)
+        self.assertEqual(result.runtime_audit_ref, "contract-only-unwired")
+        self.assertNotIn(raw.decode(), repr(result))
+        output = result.final_output
+        self.assertEqual((output["appointment_ref"], output["target_date"], output["target_start_local"], output["duration_minutes"]),
+                         (row["context"]["selected_appointment"]["id"], "2026-11-05", "15:00", 30))
+        self.assertTrue(output["requires_human_confirmation"])
+        self.assertFalse(output["write_performed"])
+        envelope = runtime.point_move_envelope(
+            frame=row, normalized_plan=result.normalized_plan, review=result.review,
+            execution={"final_output": output}, provenance=provenance, capture=capture(row),
+            tenant_id=TENANT, actor_id=ACTOR, selected_appointment_id=APPOINTMENT, now=NOW,
+        )
+        self.assertEqual(envelope["authority"], "proposal_only")
+
+    def test_reply_frame_context_case_extra_operator_and_refusal_fail_closed(self):
+        from app.services import reception_one_isolated_vertex_planner as planner
+        for mutation in (lambda p: p["interpretation"].update(frame_sha256="0" * 64),
+                         lambda p: p["interpretation"].update(context_revision=8),
+                         lambda p: p.update(steps=[{"operator": "confirm_appointment"}]),
+                         lambda p: p.update(case_id="synthetic-other-request")):
+            row = point_frame(); packet = point_packet(row); packet["case_id"] = row["request_id"]; mutation(packet)
+            raw = protocol.canonical_json(packet).encode("utf-8")
+            with self.assertRaises(planner.IsolatedVertexPlannerError): self.received(row, raw=raw)
+        for raw in (b'not-json', b'{"refusal":"no"}', b'{"case_id":1,"case_id":2}', bytearray(b'{}')):
+            with self.assertRaises(planner.IsolatedVertexPlannerError): self.received(raw=raw)
+        with self.assertRaises(planner.IsolatedVertexPlannerError): self.received(now=NOW + timedelta(minutes=5))
+
+    def test_consumed_receipt_raw_hash_and_plan_tampering_refuse(self):
+        from dataclasses import replace
+        from app.services import reception_one_isolated_vertex_planner as planner
+        _, raw, result = self.received()
+        changed = replace(result, _model_reply_receipt=replace(result._model_reply_receipt, raw_response=raw + b" "))
+        with self.assertRaises(planner.IsolatedVertexPlannerError): _ = changed.semantic_provenance
+        changed = copy.deepcopy(result); changed.normalized_plan["context_revision"] += 1
+        with self.assertRaises(planner.IsolatedVertexPlannerError): _ = changed.semantic_provenance
+        provenance = result.semantic_provenance; provenance["raw_response_sha256"] = "0" * 64
+        self.assertNotEqual(result.semantic_provenance["raw_response_sha256"], provenance["raw_response_sha256"])
+
+    def test_packet_hash_only_and_paired_raw_hash_replacement_refuse(self):
+        import hashlib
+        from dataclasses import replace
+        from app.services import reception_one_isolated_vertex_planner as planner
+        _, _, result = self.received()
+        receipt = result._model_reply_receipt
+        packet_only = dict(receipt.provenance_items)
+        packet_only["packet_sha256"] = "0" * 64
+        changed = replace(result, _model_reply_receipt=replace(
+            receipt, provenance_items=tuple(sorted(packet_only.items())),
+        ))
+        with self.assertRaisesRegex(planner.IsolatedVertexPlannerError, "^isolated_model_reply_join_invalid$"):
+            _ = changed.semantic_provenance
+        # Paired bytes + matching raw hash bypassed v1's hash-only check. The
+        # existing compiler must now reject this substituted nonpacket response.
+        replacement_raw = b'{}'
+        paired = dict(receipt.provenance_items)
+        paired["raw_response_sha256"] = hashlib.sha256(replacement_raw).hexdigest()
+        changed = replace(result, _model_reply_receipt=replace(
+            receipt, raw_response=replacement_raw,
+            provenance_items=tuple(sorted(paired.items())),
+        ))
+        with self.assertRaisesRegex(planner.IsolatedVertexPlannerError, "^isolated_model_reply_join_invalid$"):
+            _ = changed.semantic_provenance
+
+    def test_selected_source_version_duration_and_final_frame_still_refuse(self):
+        row, _, result = self.received()
+        for context in ({**captured_context(), "selected_state_version": 13},
+                        {**captured_context(), "duration_minutes": 45}):
+            with self.assertRaises(runtime.ReceptionOneRuntimeError):
+                runtime.point_move_envelope(
+                    frame=row, normalized_plan=result.normalized_plan, review=result.review,
+                    execution={"final_output": result.final_output}, provenance=result.semantic_provenance,
+                    capture=capture(row, context), tenant_id=TENANT, actor_id=ACTOR,
+                    selected_appointment_id=APPOINTMENT, now=NOW,
+                )
+        changed = copy.deepcopy(row); changed["context_revision"] += 1
+        with self.assertRaises(runtime.ReceptionOneRuntimeError):
+            runtime.point_move_envelope(
+                frame=changed, normalized_plan=result.normalized_plan, review=result.review,
+                execution={"final_output": result.final_output}, provenance=result.semantic_provenance,
+                capture=capture(row), tenant_id=TENANT, actor_id=ACTOR,
+                selected_appointment_id=APPOINTMENT, now=NOW,
+            )
+
+
 if __name__ == "__main__":
     unittest.main()
