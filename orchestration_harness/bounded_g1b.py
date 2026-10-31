@@ -16286,6 +16286,9 @@ G4_POINT_MOVE_FIVE_ROOT = G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT / "bureau-point-move
 
 
 def _g4_owner_bootstrap_descriptor(schema, *, scope=False):
+    if schema == (G4_MODEL_REPLY_RENEWAL_SCOPE_SCHEMA if scope else G4_MODEL_REPLY_RENEWAL_SCHEMA):
+        _need(not G4_MODEL_REPLY_TEMPLATE_INERT, "bounded_g4_model_reply_source_inert")
+        return G4_MODEL_REPLY_RENEWAL_DESCRIPTOR
     if schema == (G4_MODEL_REPLY_SCOPE_SCHEMA if scope else G4_MODEL_REPLY_SCHEMA):
         _need(not G4_MODEL_REPLY_TEMPLATE_INERT, "bounded_g4_model_reply_source_inert")
         return G4_MODEL_REPLY_DESCRIPTOR
@@ -16383,7 +16386,7 @@ def _g4_owner_staff_invitation_external_inputs(read, q):
 
 
 def _is_g4_owner_bootstrap_binding(binding):
-    return type(binding) is dict and binding.get("schema_version") in (G4_OWNER_BOOTSTRAP_SCHEMA, G4_OWNER_STAFF_INVITATION_SCHEMA, G4_POINT_MOVE_SCHEMA, G4_POINT_MOVE_FIVE_SCHEMA, G4_MODEL_REPLY_SCHEMA)
+    return type(binding) is dict and binding.get("schema_version") in (G4_OWNER_BOOTSTRAP_SCHEMA, G4_OWNER_STAFF_INVITATION_SCHEMA, G4_POINT_MOVE_SCHEMA, G4_POINT_MOVE_FIVE_SCHEMA, G4_MODEL_REPLY_SCHEMA, G4_MODEL_REPLY_RENEWAL_SCHEMA)
 
 
 def _g4_owner_bootstrap_paths(kind, binding):
@@ -16418,7 +16421,7 @@ def _g4_owner_bootstrap_require_entrypoint(q, entrypoint, phase):
 
 def _g4_owner_bootstrap_external_inputs(read, q):
     d=_g4_owner_bootstrap_descriptor(q.get("schema_version"))
-    if d["version"] == 25:
+    if d["version"] in {25,26}:
         return _g4_model_reply_external_inputs(read, q)
     if d["version"] in {23,24}:
         return _g4_point_move_external_inputs(read,q)
@@ -16750,3 +16753,30 @@ def _validate_g4_model_reply_overlay_transition(before, after):
     _need(profile.count(marker)==1 and b'    - app/services/reception_one_isolated_vertex_planner.py\n' not in profile
           and after==before[:start]+profile.replace(marker,b'    - app/services/reception_one_isolated_vertex_planner.py\n'+marker,1)+before[end:],
           "bounded_g4_model_reply_overlay_transition")
+
+
+# Same product scope, renewed control lineage and canonical namespace.
+# Original stage/phase v1 leaf rules remain the sole canonical path mechanism.
+G4_MODEL_REPLY_RENEWAL_SCHEMA = "ariadne.g4_stage1_owner_bootstrap_operation_binding.v6"
+G4_MODEL_REPLY_RENEWAL_SCOPE_SCHEMA = "ariadne.g4_stage1_successor_entry_scope.v26"
+G4_MODEL_REPLY_RENEWAL_ROOT = G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT / "bureau-model-reply-carrier-successor-v2"
+G4_MODEL_REPLY_RENEWAL_CONTROL = frozenset({
+    "orchestration_harness/bounded_g1b.py", G4_STAGE1_SUCCESSOR_SCOPE,
+    "tests/test_g4_stage1_successor_entry.py"})
+G4_MODEL_REPLY_RENEWAL_DESCRIPTOR = {
+    **G4_MODEL_REPLY_DESCRIPTOR,
+    "version":26, "scope_schema":G4_MODEL_REPLY_RENEWAL_SCOPE_SCHEMA,
+    "base":{"commit":"96cf522f4f16c9700658ba87479b66a96390d34d",
+            "tree":"27dadcb5f3354e32cc8115f8a2523b3d072400aa"},
+    "preimages":{
+        "orchestration_harness/bounded_g1b.py":"4ac3592a80974b6aea867acf292cb136db92e1bd0003e970e047a5625ef13a71",
+        G4_STAGE1_SUCCESSOR_SCOPE:"00fd3749558d89dff2817df4a8246759520c0ca81c7a96ba1030c19d2e6cc54a",
+        "tests/test_g4_stage1_successor_entry.py":"e3a471a1b4bec4fd8fb31850fe9353313d52968754a7ba81844813e45a5bb864"},
+    "root":G4_MODEL_REPLY_RENEWAL_ROOT, "control":G4_MODEL_REPLY_RENEWAL_CONTROL,
+    "excluded_reviewers":G4_MODEL_REPLY_DESCRIPTOR["excluded_reviewers"] |
+        {"/root/publication_initialization_diagnostic_repair_sol_medium"},
+    "limits":("exact2 unchanged carrier/test products; inherited product support preserved",
+              "enable exactly3 current controls; ADMIT development no delta",
+              "ENABLE/ADMIT payload25; APPLY payload27 with exact2 repairs",
+              "separate reviewed publication; no runtime authority from admission"),
+}

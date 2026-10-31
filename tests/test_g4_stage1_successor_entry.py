@@ -5850,3 +5850,194 @@ def test_model_reply_overlay_exact_append_and_extra_change_refusal():
     b=bounded_g1b;before=Path('C:/Users/there/EMR4-tools/point-move-product-apply01-source/orchestration/harness_settings/programme_recovery.yaml').read_bytes();after=(_MODEL_REPLY_CANDIDATE/b.OVERLAY).read_bytes()
     b._validate_g4_model_reply_overlay_transition(before,after)
     with pytest.raises(b.BoundedG1BError):b._validate_g4_model_reply_overlay_transition(before,after+b"\n")
+
+
+# Renewal-only synthetic source cases. No native/Git/runtime observation is claimed.
+_CARRIER_RENEWAL_CANDIDATE = Path('C:/Users/there/EMR4-tools/bureau-carrier-controller-successor-source-v1/candidate')
+_CARRIER_RENEWAL_EXTRA_SUPPORT = (
+    'app/routers/appointments.py', 'app/services/reception_one_proposal_runtime.py',
+    'orchestration/continuity/reception-one-bureau-typed-plan-protocol/execution-result.schema.json',
+    'orchestration/continuity/reception-one-bureau-typed-plan-protocol/operator-catalog.json',
+    'orchestration/continuity/reception-one-bureau-typed-plan-protocol/operator-catalog.schema.json',
+    'orchestration/continuity/reception-one-bureau-typed-plan-protocol/plan-draft.schema.json',
+    'scripts/reception_one_bureau_typed_plan_protocol.py',
+    'tests/test_reception_one_bureau_model_first_contract.py')
+
+
+def _carrier_renewal_descriptor(monkeypatch):
+    _model_reply_unlatch(monkeypatch)
+    return bounded_g1b._g4_owner_bootstrap_descriptor(bounded_g1b.G4_MODEL_REPLY_RENEWAL_SCHEMA)
+
+
+def test_carrier_renewal_descriptor_continuity_and_old_behavior(monkeypatch):
+    b=bounded_g1b; d=_carrier_renewal_descriptor(monkeypatch)
+    old=b._g4_owner_bootstrap_descriptor(b.G4_MODEL_REPLY_SCHEMA)
+    assert old is b.G4_MODEL_REPLY_DESCRIPTOR and old['version']==25
+    assert old['base']['commit']=='e5161568ba692e4c181194d338f5ae5b8983bd4e'
+    assert old['root'].name=='bureau-model-reply-carrier-successor-v1' and len(old['control'])==5
+    assert d['version']==26 and d['base']=={
+        'commit':'96cf522f4f16c9700658ba87479b66a96390d34d',
+        'tree':'27dadcb5f3354e32cc8115f8a2523b3d072400aa'}
+    assert d['root'].name=='bureau-model-reply-carrier-successor-v2' and d['root']!=old['root']
+    assert d['product_sha']==old['product_sha'] and d['before_sha']==old['before_sha']
+    assert d['vector']==old['vector'] and d['mapping']==old['mapping']
+    assert set(d['preimages'])==d['control']=={
+        'orchestration_harness/bounded_g1b.py',b.G4_STAGE1_SUCCESSOR_SCOPE,
+        'tests/test_g4_stage1_successor_entry.py'}
+    assert b._g4_owner_bootstrap_descriptor(b.G4_POINT_MOVE_FIVE_SCHEMA)['version']==24
+
+
+@pytest.mark.parametrize('stage',['enable','admit','apply'])
+def test_carrier_renewal_exact_stage_ownership(monkeypatch,stage):
+    b=bounded_g1b;d=_carrier_renewal_descriptor(monkeypatch)
+    kind={'enable':'enable_g4_stage1_successor','admit':b.G4_OWNER_BOOTSTRAP_ADMIT_KIND,
+          'apply':'implement_g4_stage1_successor'}[stage]
+    paths=d['control'] if stage=='enable' else set(d['product_sha']) if stage=='apply' else set()
+    q={'schema_version':b.G4_MODEL_REPLY_RENEWAL_SCHEMA,'operation_kind':kind,'stage':stage,
+       'repair_sha256':dict.fromkeys(paths,{})}
+    assert b._g4_owner_bootstrap_paths(kind,q)==paths
+    q['repair_sha256'][b.OVERLAY]={}
+    with pytest.raises(b.BoundedG1BError) as err:b._g4_owner_bootstrap_paths(kind,q)
+    assert err.value.reason_code=='bounded_g4_owner_bootstrap_changed_paths'
+
+
+def test_carrier_renewal_scope_continuity_and_closures(monkeypatch):
+    b=bounded_g1b;d=_carrier_renewal_descriptor(monkeypatch)
+    scope=json.loads((_CARRIER_RENEWAL_CANDIDATE/b.G4_STAGE1_SUCCESSOR_SCOPE).read_bytes())
+    assert b.validate_g4_owner_bootstrap_scope(scope)==scope['source_sha256']
+    assert scope['schema_version']==d['scope_schema'] and scope['selected_base']==d['base']
+    assert scope['predecessor_scope']=={'sha256':'00fd3749558d89dff2817df4a8246759520c0ca81c7a96ba1030c19d2e6cc54a'}
+    assert set(scope['control_sha256'])==d['control']-{b.G4_STAGE1_SUCCESSOR_SCOPE}
+    assert scope['runtime_binding_required'] is True and scope['admission_grants_runtime_authority'] is False
+    assert scope['voice_activation'] is False and set(scope['allowed_paths'])==set(d['product_sha'])
+    for field,value in [('allowed_paths',scope['allowed_paths']+['app/extra.py']),('voice_activation',True)]:
+        changed=copy.deepcopy(scope);changed[field]=value
+        with pytest.raises(b.BoundedG1BError):b.validate_g4_owner_bootstrap_scope(changed)
+
+
+def _carrier_renewal_review(b,d,stage,phase,subject):
+    path=d['root']/'entry-admission-v1'/('independent-'+stage+'-'+phase+'-subject-review-v1.json')
+    review={'schema':'emr4.g4_operation_review.v1','status':'PASS',
+        'verdict':'PASS_G4_STAGE1_OWNER_BOOTSTRAP_EXACT_ADMISSION_SUBJECT',
+        'subject_sha256':subject,'reviewer_agent':'/synthetic/independent-review-fixture',
+        'independent':True,'implementation_authorship':False,'blocking_findings':[],
+        'stage':stage,'phase':phase}
+    raw=b._canonical(review);return path,review,raw,{'path':str(path),'sha256':b._sha(raw)}
+
+
+@pytest.mark.parametrize('stage,phase',[
+    ('enable','development'),('enable','pre-push'),('enable','post-push'),
+    ('admit','development'),('apply','development'),('apply','pre-push'),('apply','post-push')])
+def test_carrier_renewal_original_leaf_names_in_new_root(monkeypatch,stage,phase):
+    b=bounded_g1b;d=_carrier_renewal_descriptor(monkeypatch);subject='a'*64
+    path,review,raw,row=_carrier_renewal_review(b,d,stage,phase,subject)
+    def read(actual,digest):
+        assert actual==path and digest==b._sha(raw);return raw
+    assert b._g4_owner_bootstrap_subject_review(read,row,b.G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT,
+        subject,stage,phase,b.G4_MODEL_REPLY_RENEWAL_SCHEMA)==review
+
+
+@pytest.mark.parametrize('wrong',['old-root','revision2'])
+def test_carrier_renewal_wrong_review_path_rejected(monkeypatch,wrong):
+    b=bounded_g1b;d=_carrier_renewal_descriptor(monkeypatch)
+    path,review,raw,row=_carrier_renewal_review(b,d,'apply','development','a'*64)
+    row['path']=str(b.G4_MODEL_REPLY_ROOT/'entry-admission-v1'/path.name) if wrong=='old-root' else str(path.with_name(path.name.replace('-v1.json','-v2.json')))
+    def read(*args):raise AssertionError('wrong review path must refuse before read')
+    with pytest.raises(b.BoundedG1BError) as err:b._g4_owner_bootstrap_subject_review(
+        read,row,b.G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT,'a'*64,'apply','development',b.G4_MODEL_REPLY_RENEWAL_SCHEMA)
+    assert err.value.reason_code=='bounded_g4_owner_bootstrap_review_path'
+
+
+@pytest.mark.parametrize('field,value',[('schema','wrong'),('independent',False),
+    ('stage','enable'),('phase','pre-push'),('subject_sha256','b'*64)])
+def test_carrier_renewal_false_subject_review_rejected(monkeypatch,field,value):
+    b=bounded_g1b;d=_carrier_renewal_descriptor(monkeypatch)
+    path,review,raw,row=_carrier_renewal_review(b,d,'apply','development','a'*64)
+    review[field]=value;raw=b._canonical(review);row['sha256']=b._sha(raw)
+    def read(actual,digest):assert actual==path and digest==b._sha(raw);return raw
+    with pytest.raises(b.BoundedG1BError) as err:b._g4_owner_bootstrap_subject_review(
+        read,row,b.G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT,'a'*64,'apply','development',b.G4_MODEL_REPLY_RENEWAL_SCHEMA)
+    assert err.value.reason_code=='bounded_g4_owner_bootstrap_independent_subject'
+
+
+class _CarrierRenewalPayloadAccepted(Exception):
+    pass
+
+
+def _carrier_renewal_loader_gate(monkeypatch,tmp_path,stage,mutation=None,wrong_parent=False,old_activation_root=False):
+    # Exercise the actual loader up to its first payload read. All Git/activation
+    # facts below are explicit synthetic substitutions, not integrated evidence.
+    b=bounded_g1b;d=_carrier_renewal_descriptor(monkeypatch)
+    inputs=b.CONFIGURATION_PATHS|{b.STATE,b.GATES,b.OVERLAY,b.AGENTS,b.G4_STAGE1_INTERACTIVE_SCOPE,
+        b.G4_STAGE1_SUCCESSOR_SCOPE,b.G4_STAGE1_SUCCESSOR_TEST,b.G4_CI_WORKFLOW}|b.SOURCE_PATHS|b.CONTROLLER_PATHS
+    if stage=='apply':inputs|=frozenset(d['product_sha'])
+    assert len(inputs)==(27 if stage=='apply' else 25)
+    payload=dict.fromkeys(inputs,'a'*64)
+    if mutation=='extras':payload.update(dict.fromkeys(_CARRIER_RENEWAL_EXTRA_SUPPORT,'a'*64));assert len(payload)==35
+    elif mutation=='missing':payload.pop(b.AGENTS)
+    elif mutation=='malformed':payload[b.AGENTS]='invalid'
+    target=tmp_path/'target';source=tmp_path/'source';scratch=tmp_path/'scratch'
+    base=d['base']['commit'] if stage=='enable' else 'b'*40
+    tree=d['base']['tree'] if stage=='enable' else 'c'*40
+    candidate=tree if stage=='admit' else 'd'*40
+    changes=d['control'] if stage=='enable' else d['product_sha'] if stage=='apply' else {}
+    q={'schema_version':b.G4_MODEL_REPLY_RENEWAL_SCHEMA,'operation_id':'synthetic-carrier-renewal',
+       'operation_kind':{'enable':'enable_g4_stage1_successor','admit':b.G4_OWNER_BOOTSTRAP_ADMIT_KIND,
+                         'apply':'implement_g4_stage1_successor'}[stage],
+       'stage':stage,'phase':'development','base_commit':base,'base_tree':tree,'expected_head':base,
+       'expected_index_tree':candidate,'candidate_tree':candidate,
+       'source_sha256':dict.fromkeys(b.SOURCE_PATHS|b.CONTROLLER_PATHS,'a'*64),
+       'payload_sha256':payload,'repair_sha256':dict.fromkeys(changes,{}),
+       'source_review':{'path':'unused-before-payload-gate','sha256':'a'*64},
+       'activation_acceptance':None,'product_vector':d['vector'],'mapping_review':d['mapping']}
+    activation=d['root']/'entry-admission-v1'/'independent-enable-push-effect-review-v1.json'
+    record={'schema':'emr4.g4_operation_review.v1','status':'PASS',
+        'verdict':'PASS_G4_STAGE1_OWNER_BOOTSTRAP_CONTROL_PUBLICATION_EFFECT',
+        'reviewer_agent':'/synthetic/independent-review-fixture','independent':True,
+        'implementation_authorship':False,'blocking_findings':[],'stage':'enable','phase':'push',
+        'base':d['base']['commit'],'commit':base,'candidate_tree':tree,'control_activation_accepted':True,
+        'same_attempt_remote_readback_verified':True,'protected_refs_unchanged':True,
+        'whole_inverse_verified_same_attempt':True,'published_ref':b.G4_STAGE1_INTERACTIVE_BACKEND_REF}
+    raw=b._canonical(record)
+    if stage!='enable':q['activation_acceptance']={'path':str(activation),'sha256':b._sha(raw)}
+    if old_activation_root:q['activation_acceptance']['path']=str(b.G4_MODEL_REPLY_ROOT/'entry-admission-v1'/activation.name)
+    before=Path('C:/Users/there/EMR4-tools/carrier-enable01-source')/b.G4_STAGE1_SUCCESSOR_SCOPE
+    previous=before.read_bytes();assert b._sha(previous)==d['preimages'][b.G4_STAGE1_SUCCESSOR_SCOPE]
+    def git_bytes(actual,*args):
+        assert actual==target and args==('cat-file','blob',d['base']['commit']+':'+b.G4_STAGE1_SUCCESSOR_SCOPE)
+        return previous
+    def git(actual,*args):
+        assert actual==target
+        if args==('rev-parse',d['base']['commit']+'^{tree}'):return d['base']['tree']
+        assert args==('cat-file','commit',base)
+        parent='e'*40 if wrong_parent else d['base']['commit']
+        return 'tree '+tree+'\nparent '+parent+'\n\nsynthetic only'
+    def read(path,digest):
+        if path==activation:assert digest==b._sha(raw);return raw
+        assert path.is_relative_to(target) and path.relative_to(target).as_posix() in inputs
+        raise _CarrierRenewalPayloadAccepted()
+    monkeypatch.setattr(b,'_g4_owner_bootstrap_external_inputs',lambda read,q:({},{}))
+    monkeypatch.setattr(b.trusted_git,'run_git_bytes',git_bytes);monkeypatch.setattr(b.trusted_git,'run_git',git)
+    return b._load_g4_owner_bootstrap_inputs(None,target,source,b.G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT,
+        scratch,q,read,{})
+
+
+@pytest.mark.parametrize('stage',['enable','admit','apply'])
+def test_carrier_renewal_loader_exact_payload_gate(monkeypatch,tmp_path,stage):
+    with pytest.raises(_CarrierRenewalPayloadAccepted):_carrier_renewal_loader_gate(monkeypatch,tmp_path,stage)
+
+
+@pytest.mark.parametrize('mutation',['extras','missing','malformed'])
+def test_carrier_renewal_loader_payload_rejection(monkeypatch,tmp_path,mutation):
+    with pytest.raises(bounded_g1b.BoundedG1BError) as err:_carrier_renewal_loader_gate(monkeypatch,tmp_path,'apply',mutation)
+    assert err.value.reason_code=='bounded_g4_owner_bootstrap_payload_paths'
+
+
+def test_carrier_renewal_activation_sole_parent_refusal(monkeypatch,tmp_path):
+    with pytest.raises(bounded_g1b.BoundedG1BError) as err:_carrier_renewal_loader_gate(monkeypatch,tmp_path,'apply',wrong_parent=True)
+    assert err.value.reason_code=='bounded_g4_owner_bootstrap_activation_parent'
+
+
+def test_carrier_renewal_old_activation_root_refusal(monkeypatch,tmp_path):
+    with pytest.raises(bounded_g1b.BoundedG1BError) as err:_carrier_renewal_loader_gate(monkeypatch,tmp_path,'apply',old_activation_root=True)
+    assert err.value.reason_code=='bounded_g4_owner_bootstrap_activation_path'
