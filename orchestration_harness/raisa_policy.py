@@ -1773,6 +1773,10 @@ G4_STAGE1_SUCCESSOR_PRODUCT_PATHS = (
     "tests/test_reception_one_point_move_bridge_contract.py",
     "orchestration/continuity/reception-one-bureau-typed-plan-protocol/operator-catalog.schema.json",
     "app/services/reception_one_isolated_vertex_planner.py",
+    "orchestration/continuity/reception-one-bureau-typed-plan-protocol/input-frame.schema.json",
+    "app/schemas/appointments.py",
+    "app/schemas/patient_requests.py",
+    "tests/test_reception_one_request_booking_bridge_contract.py",
 )
 
 
