@@ -9,7 +9,7 @@ import hashlib
 import json
 import re
 import sys
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 from datetime import date
 from dataclasses import dataclass
 from types import MappingProxyType
@@ -125,7 +125,8 @@ def schema_error_paths(value: Any, schema: dict[str, Any]) -> list[str]:
         version = value.get("contract_version") if isinstance(value, dict) else None
         branch = {"reception.one.bureau.plan-draft.v1": "legacyPlan",
                   "reception.one.bureau.plan-draft.model-first.v1": "modelFirstPlan",
-                  "reception.one.bureau.plan-draft.model-first.point.v2": "pointModelPlan"}.get(version)
+                  "reception.one.bureau.plan-draft.model-first.point.v2": "pointModelPlan",
+                  "reception.one.bureau.plan-draft.model-first.request-booking.v1": "requestBookingPlan"}.get(version)
         if branch is not None:
             schema = {**schema["$defs"][branch], "$defs": schema["$defs"]}
     validator = Draft202012Validator(schema, format_checker=FormatChecker())
@@ -145,7 +146,8 @@ def validate_schema(value: Any, schema_name: str) -> None:
     schema = load_json(SCHEMA_PATHS[schema_name])
     if schema_name == "packet":
         # Lookup only: adding this definition never admits a packet as a plan.
-        branch = "semanticPacketV3" if isinstance(value, dict) and value.get("packet_schema") == POINT_PACKET_VERSION else "semanticPacket"
+        branch = ("requestBookingPacket" if isinstance(value, dict) and value.get("packet_schema") == REQUEST_BOOKING_PACKET_VERSION else
+                  "semanticPacketV3" if isinstance(value, dict) and value.get("packet_schema") == POINT_PACKET_VERSION else "semanticPacket")
         schema = {"$schema": schema["$schema"], "$ref": "#/$defs/" + branch, "$defs": schema["$defs"]}
     failures = schema_error_paths(value, schema)
     if failures:
@@ -188,6 +190,30 @@ MODEL_PLAN_VERSION = "reception.one.bureau.plan-draft.model-first.v1"
 POINT_PLAN_VERSION = "reception.one.bureau.plan-draft.model-first.point.v2"
 POINT_PACKET_VERSION = "emr4.bureau_model_semantic_packet.v3"
 POINT_CONSTRUCTOR_VERSION = "emr4.bureau_model_semantic_constructor.point.v3"
+REQUEST_BOOKING_PACKET_VERSION = "emr4.bureau_model_semantic_packet.request-booking.v1"
+REQUEST_BOOKING_PLAN_VERSION = "reception.one.bureau.plan-draft.model-first.request-booking.v1"
+REQUEST_BOOKING_CONSTRUCTOR_VERSION = "emr4.bureau_model_semantic_constructor.request-booking.v1"
+REQUEST_BOOKING_INPUT_VERSION = "reception.one.bureau.plan-input.request-booking.v1"
+
+
+def request_booking_steps(goal: str) -> list[dict[str, Any]]:
+    """Only two existing catalogue operators, bound to the trusted request."""
+    if goal == "clarification":
+        return [{"id": "step-01-request-clarification", "operator": "request_clarification", "args": {}}]
+    if goal != "create":
+        raise ValueError("request booking action refused")
+    def source(field):
+        return {"kind": "context_ref", "field": "selected_request." + field}
+    return [
+        {"id": "step-01-request-search", "operator": "search_available_slots", "args": {
+            "practitioner": source("practitioner_ref"), "date": source("appointment_date"),
+            "earliest_time": source("earliest_time"), "latest_time": source("latest_start_time"),
+            "duration_minutes": source("duration_minutes")}},
+        {"id": "step-02-request-create", "operator": "prepare_create_proposal", "args": {
+            "patient": source("patient_ref"), "practitioner": source("practitioner_ref"),
+            "duration_minutes": source("duration_minutes"),
+            "candidates": {"kind": "step_output", "step_id": "step-01-request-search", "output": "candidates"}}},
+    ]
 
 
 @dataclass(frozen=True)
@@ -204,8 +230,11 @@ class ValidatedModelIntent:
 def validated_model_intent(frame: dict[str, Any], plan: dict[str, Any]) -> ValidatedModelIntent:
     """Validate the closed model contract without regex semantic extraction."""
     validate_schema(plan, "plan")
-    if plan.get("contract_version") not in {MODEL_PLAN_VERSION, POINT_PLAN_VERSION}:
+    if plan.get("contract_version") not in {MODEL_PLAN_VERSION, POINT_PLAN_VERSION, REQUEST_BOOKING_PLAN_VERSION}:
         raise ValueError("model contract required")
+    if ((frame.get("contract_version") == REQUEST_BOOKING_INPUT_VERSION)
+            != (plan.get("contract_version") == REQUEST_BOOKING_PLAN_VERSION)):
+        raise ValueError("request booking family mismatch")
     intent = plan["interpretation"]
     if (intent["frame_sha256"] != canonical_sha256(frame)
             or type(intent["context_revision"]) is not int
@@ -273,6 +302,23 @@ def validated_model_intent(frame: dict[str, Any], plan: dict[str, Any]) -> Valid
         if reached != {item["id"] for item in candidates if item["field"] == field}:
             raise ValueError("competing model candidates unresolved")
         values[field] = by_id[winner_id]["value"]
+    if plan.get("contract_version") == REQUEST_BOOKING_PLAN_VERSION:
+        request = frame["context"].get("selected_request")
+        if (frame.get("contract_version") != REQUEST_BOOKING_INPUT_VERSION
+                or not isinstance(request, dict) or request.get("state") != "submitted"
+                or type(request.get("request_version")) is not int
+                or request["request_version"] < 1
+                or set(values) != {"intended_action"}
+                or values["intended_action"] not in {"create", "clarification"}
+                or type(request.get("duration_minutes")) is not int
+                or not 5 <= request["duration_minutes"] <= 180
+                or request["patient_ref"] not in {x["id"] for x in frame["context"]["patients"]}
+                or request["practitioner_ref"] not in {x["id"] for x in frame["context"]["practitioners"]}):
+            raise ValueError("request booking context refused")
+        observed = datetime.fromisoformat(frame["observed_at"].replace("Z", "+00:00"))
+        expiry = datetime.fromisoformat(frame["expires_at"].replace("Z", "+00:00"))
+        if observed.tzinfo is None or expiry - observed != timedelta(seconds=120):
+            raise ValueError("request booking lifetime refused")
     if values["intended_action"] != plan["goal"]:
         raise ValueError("model goal disagrees with chosen action")
     if ("earliest_time" in values and "latest_time" in values
@@ -298,6 +344,8 @@ def model_plan_consistent(frame: dict[str, Any], plan: dict[str, Any], intent: V
     if intent is None or plan.get("planner_class") != "untrusted_model_candidate":
         return False
     steps = plan.get("steps", [])
+    if plan.get("contract_version") == REQUEST_BOOKING_PLAN_VERSION:
+        return steps == request_booking_steps(intent.intended_action)
     if plan.get("contract_version") == POINT_PLAN_VERSION:
         selected = frame["context"].get("selected_appointment")
         if (not isinstance(selected, dict)
@@ -329,6 +377,9 @@ def model_dataflow_mismatches(plan: dict[str, Any], intent: ValidatedModelIntent
     Move deliberately preserves the selected row's practitioner and duration;
     those cannot simultaneously be presented as changed interpretation fields.
     """
+    if plan.get("contract_version") == REQUEST_BOOKING_PLAN_VERSION:
+        return ([] if set(intent.normalized_values) == {"intended_action"}
+                and plan["steps"] == request_booking_steps(intent.intended_action) else ["$.steps"])
     point = plan.get("contract_version") == POINT_PLAN_VERSION
     fields_by_goal = {
         "move": {"intended_action", "appointment_date", "earliest_time", "latest_time"},
@@ -932,6 +983,17 @@ def binding_type_and_value(
         return value_type, value, grounded, None if grounded else "ungrounded_binding"
     if kind == "context_ref":
         field = binding.get("field")
+        request_types = {"patient_ref": "patient_ref", "practitioner_ref": "practitioner_ref",
+                         "appointment_date": "date", "earliest_time": "time",
+                         "latest_start_time": "time", "duration_minutes": "integer"}
+        if isinstance(field, str) and field.startswith("selected_request."):
+            leaf = field[len("selected_request."):]
+            request = frame["context"].get("selected_request", {})
+            value = request.get(leaf)
+            valid = (frame.get("contract_version") == REQUEST_BOOKING_INPUT_VERSION
+                     and isinstance(extraction, ValidatedModelIntent)
+                     and leaf in request_types and value is not None)
+            return request_types.get(leaf), value, valid, None if valid else "ungrounded_binding"
         if field == "selected_appointment.patient_ref":
             value = selected_model_patient(frame) if isinstance(extraction, ValidatedModelIntent) else None
             return "patient_ref", value, value is not None, None if value is not None else "ungrounded_binding"
@@ -990,7 +1052,7 @@ def proofread_plan(
         normalized, load_json(SCHEMA_PATHS["plan"])
     )
     legacy_mode = normalized.get("contract_version") == LEGACY_PLAN_VERSION
-    model_mode = normalized.get("contract_version") in {MODEL_PLAN_VERSION, POINT_PLAN_VERSION}
+    model_mode = normalized.get("contract_version") in {MODEL_PLAN_VERSION, POINT_PLAN_VERSION, REQUEST_BOOKING_PLAN_VERSION}
     model_invalid = False
     if legacy_mode:
         extraction = extraction_for(frame)
@@ -1012,6 +1074,10 @@ def proofread_plan(
         )
         if model_invalid:
             violations.append(_violation("$.interpretation", "schema_invalid"))
+    if (frame.get("contract_version") == REQUEST_BOOKING_INPUT_VERSION
+            and normalized.get("contract_version") != REQUEST_BOOKING_PLAN_VERSION):
+        checks["schema_exact"] = False
+        violations.append(_violation("$.contract_version", "schema_invalid"))
 
     checks["scope_bound"] = all(
         normalized.get(field) == frame.get(field)
@@ -1146,6 +1212,8 @@ def proofread_plan(
         checks["semantic_action_consistent"] = False
         violations.append(_violation("$.steps", "selected_operation_mismatch"))
     if normalized.get("contract_version") == POINT_PLAN_VERSION and repairs:
+        violations.append(_violation("$.steps", "semantic_action_mismatch"))
+    if normalized.get("contract_version") == REQUEST_BOOKING_PLAN_VERSION and repairs:
         violations.append(_violation("$.steps", "semantic_action_mismatch"))
     if not legacy_mode:
         checks["semantic_action_consistent"] = model_mode and model_plan_consistent(frame, normalized, extraction)
@@ -1618,7 +1686,7 @@ def execute_plan(
     operators = operator_map(load_json(CATALOG_PATH))
     if normalized_plan.get("contract_version") == LEGACY_PLAN_VERSION:
         extraction = extraction_for(frame)
-    elif normalized_plan.get("contract_version") in {MODEL_PLAN_VERSION, POINT_PLAN_VERSION}:
+    elif normalized_plan.get("contract_version") in {MODEL_PLAN_VERSION, POINT_PLAN_VERSION, REQUEST_BOOKING_PLAN_VERSION}:
         if now is None:
             raise ValueError("model-first execution requires explicit trusted clock")
         # Recheck same candidates/evidence/frame, expiry, signatures and effects.
@@ -2008,6 +2076,10 @@ def compile_model_semantic_packet(
     if type(case_id) is not str or not case_id or packet["case_id"] != case_id:
         raise SemanticPacketRefusal("packet_case_refused", provenance)
     point = packet["packet_schema"] == POINT_PACKET_VERSION
+    booking = packet["packet_schema"] == REQUEST_BOOKING_PACKET_VERSION
+    if booking:
+        provenance["packet_schema_version"] = REQUEST_BOOKING_PACKET_VERSION
+        provenance["constructor_version"] = REQUEST_BOOKING_CONSTRUCTOR_VERSION
     if point:
         provenance["packet_schema_version"] = POINT_PACKET_VERSION
         provenance["constructor_version"] = POINT_CONSTRUCTOR_VERSION
@@ -2028,7 +2100,7 @@ def compile_model_semantic_packet(
         raise SemanticPacketRefusal("packet_selection_refused", provenance)
     # Resolve the selected action ID to its VALUE; never use the ID as goal.
     goal = by_id[selected["intended_action"]]["value"]
-    if goal not in _SEMANTIC_PACKET_ROUTES:
+    if (goal not in {"create", "clarification"} if booking else goal not in _SEMANTIC_PACKET_ROUTES):
         raise SemanticPacketRefusal("packet_action_unsupported", provenance)
     targets = packet["target_bindings"]
     expected_targets = {} if goal == "clarification" else {
@@ -2036,16 +2108,22 @@ def compile_model_semantic_packet(
         "patient_for_selected_appointment": {
             "kind": "context_ref", "field": "selected_appointment.patient_ref"},
     }
+    if booking:
+        expected_targets = {} if goal == "clarification" else {
+            "selected_request": {"kind": "context_ref", "field": "selected_request"}}
     if targets != expected_targets:
         raise SemanticPacketRefusal("packet_target_roles_refused", provenance)
     # Do not guess or pre-resolve identity here. The unchanged proofreader
     # requires exactly one actual patient and practitioner for the selected row.
     plan = base_plan(frame, planner_class="untrusted_model_candidate", goal=goal)
-    plan["contract_version"] = POINT_PLAN_VERSION if point else MODEL_PLAN_VERSION
+    plan["contract_version"] = REQUEST_BOOKING_PLAN_VERSION if booking else POINT_PLAN_VERSION if point else MODEL_PLAN_VERSION
     plan["interpretation"] = copy.deepcopy(interpretation)
     if point and (goal != "move" or set(selected) != {"intended_action", "appointment_date", "target_start_local"}):
         raise SemanticPacketRefusal("packet_point_fields_refused", provenance)
-    route = _POINT_PACKET_ROUTE if point else _SEMANTIC_PACKET_ROUTES[goal]
+    if booking and (set(selected) != {"intended_action"}
+                    or any(item["field"] != "intended_action" for item in candidates)):
+        raise SemanticPacketRefusal("packet_request_fields_refused", provenance)
+    route = () if booking else _POINT_PACKET_ROUTE if point else _SEMANTIC_PACKET_ROUTES[goal]
     for identifier, operator, tokens in route:
         args = {}
         for name, token in tokens.items():
@@ -2056,6 +2134,8 @@ def compile_model_semantic_packet(
             else:
                 args[name] = step_binding(token[1], token[2])
         plan["steps"].append({"id": identifier, "operator": operator, "args": args})
+    if booking:
+        plan["steps"] = request_booking_steps(goal)
     if goal == "clarification":
         # Validate the COMPLETE original interpretation before omitting unused
         # fields from the action-only clarification plan. Never drop malformed

@@ -8,7 +8,7 @@ the accepted typed-plan proofreader and executor remain proposal-only.
 from __future__ import annotations
 
 from datetime import date, datetime, time, timedelta, timezone
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 import hashlib
 import hmac
 import re
@@ -911,6 +911,128 @@ def proofread_provider_blocked_plan(
     if review["disposition"] == "admit":
         execution = typed_plan.execute_plan(frame, normalized_plan, review)
     return review, normalized_plan, execution
+
+
+@dataclass(frozen=True)
+class SelectedRequestSource:
+    """Private server mapping; never a model or browser request contract."""
+    frame_sha256: str
+    request_id: str
+    binding_items: tuple
+    slot_items: tuple
+
+
+@dataclass(frozen=True)
+class PreparedRequestBooking:
+    """Immutable private checked result; not an HTTP confirmation payload."""
+    source: SelectedRequestSource
+    frame_bytes: bytes
+    public_bytes: bytes
+    candidate_ids: tuple
+    installed_at: datetime
+    raw_response: bytes = field(repr=False)
+    provenance_bytes: bytes = field(repr=False)
+    normalized_plan_bytes: bytes = field(repr=False)
+    review_bytes: bytes = field(repr=False)
+    final_output_bytes: bytes = field(repr=False)
+
+
+def build_request_booking_frame(*, instruction, reference_date, correlation_id,
+                                observed_at, binding, patient_display,
+                                practitioner_display, slot_proposal, handle_key):
+    """Assemble one final request frame from an already authorised DB capture.
+
+    The router owns the full-duration/preference/availability intersection.
+    This function does not scan instruction text for identity or call a model.
+    """
+    from scripts import reception_one_bureau_typed_plan_protocol as protocol
+    if (type(instruction) is not str or not 1 <= len(instruction.strip()) <= 512
+            or observed_at.tzinfo is None or type(handle_key) is not bytes
+            or len(handle_key) < 32 or binding.get("state") != "submitted"
+            or type(binding.get("request_version")) is not int
+            or type(binding.get("duration_minutes")) is not int
+            or not 5 <= binding["duration_minutes"] <= 180):
+        raise ReceptionOneRuntimeError("request_booking_capture_invalid")
+    handles = {kind: _opaque_handle(kind, binding[field], handle_key=handle_key)
+               for kind, field in (("request", "request_id"), ("patient", "patient_id"),
+                                   ("practitioner", "practitioner_id"))}
+    slots = _slot_context(slot_proposal, practitioner_handle=handles["practitioner"], handle_key=handle_key)
+    selected = {"request_ref": handles["request"], "request_version": binding["request_version"],
+                "state": "submitted", "patient_ref": handles["patient"],
+                "practitioner_ref": handles["practitioner"],
+                "appointment_date": binding["preference_date"],
+                "earliest_time": binding["earliest_local"],
+                "latest_start_time": max((s["start_time"] for s in slots), default=binding["earliest_local"]),
+                "duration_minutes": binding["duration_minutes"], "timezone": binding["practice_timezone"]}
+    context = {"patients": [{"id": handles["patient"], "display": patient_display, "aliases": []}],
+               "practitioners": [{"id": handles["practitioner"], "display": practitioner_display, "aliases": []}],
+               "selected_appointment": None, "appointments": [], "candidate_slots": slots,
+               "selected_request": selected,
+               "squeeze_policy": {"id": "synthetic-policy-squeeze-review", "assessment_enabled": False,
+                                  "allow_move_existing": False, "allow_overbook": False, "requires_human_review": True},
+               "default_duration_minutes": binding["duration_minutes"], "allowed_statuses": ["arrived", "completed", "dna"]}
+    frame = {"contract_version": protocol.REQUEST_BOOKING_INPUT_VERSION,
+             "request_id": _opaque_handle("request", correlation_id + ":" + observed_at.isoformat(), handle_key=handle_key),
+             "practice_ref": _opaque_handle("practice", binding["practice_id"], handle_key=handle_key),
+             "correlation_id": _opaque_handle("correlation", correlation_id, handle_key=handle_key),
+             "context_revision": max(1, int(hmac.new(handle_key, protocol.canonical_json(context).encode("utf-8"), hashlib.sha256).hexdigest()[:8], 16)),
+             "observed_at": observed_at.isoformat().replace("+00:00", "Z"),
+             "expires_at": (observed_at + timedelta(seconds=120)).isoformat().replace("+00:00", "Z"),
+             "data_class": "authored_synthetic", "utterances": [instruction], "reference_date": reference_date.isoformat(),
+             "context": context, "authority": {"effect_ceiling": "proposal_only", "appointment_write_authority": False,
+             "confirmation_authority": False, "provider_execution": False, "network_access": False,
+             "database_access": False, "product_delivery": False}}
+    if len(protocol.canonical_json(frame).encode("utf-8")) > 65536:
+        raise ReceptionOneRuntimeError("request_booking_frame_too_large")
+    protocol.validate_schema(frame, "input")
+    displays = {handles["patient"]: patient_display, handles["practitioner"]: practitioner_display}
+    source = SelectedRequestSource(protocol.canonical_sha256(frame), frame["request_id"],
+                                   tuple(sorted(binding.items())),
+                                   tuple((s["id"], protocol.canonical_json(s)) for s in slots))
+    return frame, displays, source
+
+
+def request_booking_envelope(*, frame, source, planner_result, now):
+    """Check the exact retained raw receipt, proofread plan and final projection.
+
+    No identity/window/duration is selected from model prose. First installation
+    must occur inside the original frame lifetime; subsequent human review uses
+    the separately retained original booking offer, never a refreshed frame.
+    """
+    from scripts import reception_one_bureau_typed_plan_protocol as protocol
+    if type(source) is not SelectedRequestSource:
+        raise ReceptionOneRuntimeError("request_booking_source_invalid")
+    provenance = planner_result.semantic_provenance
+    review, normalized = protocol.proofread_plan(frame, planner_result.normalized_plan, now=now)
+    execution = protocol.execute_plan(frame, normalized, review, now=now)
+    if (source.frame_sha256 != protocol.canonical_sha256(frame) or source.request_id != frame["request_id"]
+            or frame["contract_version"] != protocol.REQUEST_BOOKING_INPUT_VERSION
+            or normalized["contract_version"] != protocol.REQUEST_BOOKING_PLAN_VERSION
+            or not isinstance(provenance, dict)
+            or provenance.get("packet_schema_version") != protocol.REQUEST_BOOKING_PACKET_VERSION
+            or provenance.get("constructor_version") != protocol.REQUEST_BOOKING_CONSTRUCTOR_VERSION
+            or provenance.get("frame_sha256") != source.frame_sha256
+            or provenance.get("compiled_plan_sha256") != protocol.canonical_sha256(normalized)
+            or provenance.get("context_revision") != frame["context_revision"]
+            or planner_result.provider_calls != 0 or review["disposition"] != "admit"
+            or review["safe_repairs"] or normalized != planner_result.normalized_plan
+            or review != planner_result.review or execution["final_output"] != planner_result.final_output
+            or tuple((s["id"], protocol.canonical_json(s)) for s in frame["context"]["candidate_slots"]) != source.slot_items):
+        raise ReceptionOneRuntimeError("request_booking_model_join_invalid")
+    final = execution["final_output"]
+    selected = frame["context"]["selected_request"]
+    if normalized["goal"] == "clarification":
+        if final["proposal_family"] != "clarification" or final["write_performed"] is not False:
+            raise ReceptionOneRuntimeError("request_booking_clarification_invalid")
+        return final
+    if (final["proposal_family"] != "create" or final["api_spine_operation_id"] != "proposeAppointmentCreate"
+            or final["patient_ref"] != selected["patient_ref"] or final["practitioner_ref"] != selected["practitioner_ref"]
+            or type(final["duration_minutes"]) is not int or final["duration_minutes"] != selected["duration_minutes"]
+            or final["write_performed"] is not False or final["requires_human_confirmation"] is not True
+            or not final["candidate_slot_ids"]
+            or not set(final["candidate_slot_ids"]).issubset(dict(source.slot_items))):
+        raise ReceptionOneRuntimeError("request_booking_proposal_invalid")
+    return final
 
 
 def compose_provider_blocked_proposal(

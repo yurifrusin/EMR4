@@ -1439,7 +1439,18 @@ class ReceptionOneProductContextRequestIn(BaseModel):
     correlation_id: str = Field(min_length=3, max_length=100)
     data_class: Literal["authored_synthetic"] = "authored_synthetic"
     selected_appointment_id: Optional[uuid.UUID] = None
+    selected_request_id: Optional[uuid.UUID] = None
+    selected_request_version: Optional[int] = Field(default=None, strict=True, ge=1)
     planner_mode: Literal["deterministic", "isolated_vertex"] = "deterministic"
+
+    @model_validator(mode="after")
+    def request_target_is_explicit(self):
+        if self.selected_request_id is not None:
+            if self.selected_appointment_id is not None or self.selected_request_version is None:
+                raise ValueError("request and appointment targets are mutually exclusive")
+        elif self.selected_request_version is not None:
+            raise ValueError("request version requires selected request")
+        return self
 
 
 class ReceptionOneProductContextReviewOut(BaseModel):
@@ -1477,6 +1488,7 @@ class ReceptionOneProductContextAdapterReviewOut(BaseModel):
         "update_proposal",
         "delete_proposal",
         "squeeze_in_assessment",
+        "request_create_proposal",
     ]
     performed: Literal[True] = True
     safe: bool

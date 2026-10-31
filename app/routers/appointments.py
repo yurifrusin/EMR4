@@ -33,7 +33,7 @@ from app.models.patients import Patient
 from app.models.patient_requests import PatientBookingRequest
 from app.schemas.patient_requests import (
     PatientRequestSubmissionIn, PatientRequestVersionIn, PatientRequestOption,
-    PatientRequestReadback, StaffRequestProposalIn, StaffRequestReadback,
+    PatientRequestReadback, StaffRequestProposalIn, StaffRequestReadback, StaffRequestBookingWitness,
 )
 from app.services.patient_request_service import (
     require_patient_request, request_options, submit_request, patient_readback,
@@ -42,7 +42,7 @@ from app.models.tenancy import User, UserRole, Practitioner, Practice, PracticeL
 from app.models.appointments import (
     Appointment, AppointmentType, AppointmentStatus,
     PractitionerSchedule, ScheduleOverride,
-    AppointmentAuditLog, AppointmentAuditAction,
+    AppointmentAuditLog, AppointmentAuditAction, AppointmentCommandIdempotency,
 )
 from app.models.diary import DiaryBreak, DiaryColumn, DiaryTemplate, WaitingArea, Room, DiaryRoster
 from app.schemas.appointments import (
@@ -204,10 +204,13 @@ from app.services.reception_one_proposal_runtime import (
     build_slot_search_input,
     practice_is_allowlisted,
     proofread_provider_blocked_plan,
+    build_request_booking_frame, request_booking_envelope,
+    PreparedRequestBooking,
 )
 from app.services.reception_one_isolated_vertex_planner import (
     IsolatedVertexPlannerError,
     run_isolated_vertex_planner,
+    compile_received_model_reply,
 )
 
 router = APIRouter(prefix="/api/v1/appointments", tags=["appointments"])
@@ -1345,12 +1348,54 @@ def staff_request_read_route(
     _request_loopback(request)
     actor = _request_receptionist(db, current_user)
     row = _staff_request_row(db, request_id, actor.practice_id)
+    witness = None
+    if row.state == "booked" and row.booked_command_id is not None and row.booked_appointment_id is not None:
+        # Fresh authenticated observation, not reconstruction of a response body.
+        joined = db.query(
+            PatientBookingRequest.id.label("request_id"),
+            PatientBookingRequest.request_version,
+            AppointmentCommandIdempotency.id.label("command_id"),
+            AppointmentCommandIdempotency.response_status_code,
+            Appointment.id.label("appointment_id"), Appointment.appointment_state_version,
+        ).select_from(PatientBookingRequest).join(
+            AppointmentCommandIdempotency, AppointmentCommandIdempotency.id == PatientBookingRequest.booked_command_id,
+        ).join(
+            Appointment, Appointment.id == AppointmentCommandIdempotency.target_appointment_id,
+        ).filter(
+            PatientBookingRequest.id == row.id,
+            PatientBookingRequest.practice_id == actor.practice_id,
+            PatientBookingRequest.state == "booked",
+            PatientBookingRequest.request_version == row.request_version,
+            PatientBookingRequest.booked_appointment_id == Appointment.id,
+            PatientBookingRequest.patient_id == Appointment.patient_id,
+            AppointmentCommandIdempotency.id == row.booked_command_id,
+            AppointmentCommandIdempotency.practice_id == actor.practice_id,
+            AppointmentCommandIdempotency.state == "completed",
+            AppointmentCommandIdempotency.result_kind == "confirmed_write",
+            AppointmentCommandIdempotency.operation_id == _STAFF_CREATE_CONFIRM_OPERATION_ID,
+            AppointmentCommandIdempotency.route_family == _STAFF_CREATE_CONFIRM_ROUTE_FAMILY,
+            AppointmentCommandIdempotency.audit_log_id.isnot(None),
+            Appointment.practice_id == actor.practice_id,
+            Appointment.id == row.booked_appointment_id,
+            Appointment.patient_id == row.patient_id,
+        ).one_or_none()
+        if (joined is not None and type(joined.response_status_code) is int
+                and 200 <= joined.response_status_code < 300
+                and type(joined.appointment_state_version) is int
+                and joined.appointment_state_version >= 1 and type(joined.request_version) is int):
+            witness = StaffRequestBookingWitness(
+                request_id=joined.request_id, request_version=joined.request_version,
+                booked_command_id=joined.command_id, booked_appointment_id=joined.appointment_id,
+                appointment_state_version=joined.appointment_state_version,
+                command_response_status_code=joined.response_status_code,
+            )
     return StaffRequestReadback(
         request_id=row.id, patient_id=row.patient_id, state=row.state,
         request_version=row.request_version, preference_date=row.preference_date,
         earliest_local=row.earliest_local, latest_local=row.latest_local,
         practice_timezone=row.practice_timezone,
         booked_appointment_id=row.booked_appointment_id,
+        booking_witness=witness,
     )
 
 
@@ -1359,6 +1404,10 @@ def staff_request_create_proposal_route(
     request_id: uuid.UUID, body: StaffRequestProposalIn, request: Request,
     db: Session = Depends(get_db), current_user: User = Depends(get_current_user),
 ):
+    return _staff_request_create_proposal(request_id, body, request, db, current_user)
+
+
+def _staff_request_create_proposal(request_id, body, request, db, current_user, *, captured_offer=None):
     _request_loopback(request)
     actor = _request_receptionist(db, current_user)
     row = _staff_request_row(db, request_id, actor.practice_id)
@@ -1403,6 +1452,13 @@ def staff_request_create_proposal_route(
         "offer_expires_at": min(now + timedelta(minutes=5), row.capability_expires_at).isoformat(),
         "staff_actor_id": str(actor.id), "authority_generation": actor.authority_generation,
     }
+    if captured_offer is not None:
+        captured, expiry = captured_offer
+        if (captured.tzinfo is None or expiry.tzinfo is None or captured > now
+                or not now < expiry <= min(captured + timedelta(minutes=5), row.capability_expires_at)):
+            raise HTTPException(status_code=409, detail={"code": "REQUEST_BOOKING_OFFER_EXPIRED"})
+        marker["captured_at"] = captured.isoformat()
+        marker["offer_expires_at"] = expiry.isoformat()
     proposal.patient_request_binding = marker
     signed_payload = _staff_create_signed_confirmation_payload(
         practice_id=actor.practice_id, staff_user_id=actor.id,
@@ -6879,6 +6935,14 @@ def compose_reception_one_product_context_proposal(
         settings.reception_one_product_context_synthetic_practice_ids,
     ):
         raise HTTPException(status_code=403, detail="Practice not admitted")
+    if body.selected_request_id is not None:
+        # A future reviewed host receiver may read ONE already installed result.
+        # No model/raw packet is accepted over this public API and no dispatch,
+        # capture, interpretation, signing or provider fallback happens here.
+        if _REQUEST_BOOKING_PREPARED_READER is None:
+            raise HTTPException(status_code=409, detail={"code": "REQUEST_BOOKING_RECEIVER_UNBOUND"})
+        prepared = _REQUEST_BOOKING_PREPARED_READER(body, current_user)
+        return _project_request_booking(prepared, body, db, current_user)
     if (
         body.planner_mode == "isolated_vertex"
         and not settings.reception_one_product_context_vertex_planner_enabled
@@ -9499,3 +9563,191 @@ def select_no_slot_suggestion(
         warnings=[],
         blocks=[],
     )
+
+# Request-booking successor: private backend preparation seams only.
+# No installed host receiver, public raw-packet endpoint or native dispatcher.
+_REQUEST_BOOKING_PREPARED_READER = None
+
+
+def _request_booking_binding(row, actor):
+    return {"request_id": str(row.id), "request_version": row.request_version,
+            "state": row.state, "practice_id": str(row.practice_id),
+            "patient_id": str(row.patient_id), "practitioner_id": str(row.practitioner_id),
+            "appointment_type_id": str(row.appointment_type_id) if row.appointment_type_id else None,
+            "location_id": str(row.location_id) if row.location_id else None,
+            "duration_minutes": row.duration_minutes,
+            "preference_date": row.preference_date.isoformat() if row.preference_date else None,
+            "earliest_local": row.earliest_local.strftime("%H:%M") if row.earliest_local else None,
+            "latest_local": row.latest_local.isoformat() if row.latest_local else None,
+            "practice_timezone": row.practice_timezone,
+            "capability_expires_at": row.capability_expires_at.isoformat(),
+            "actor_id": str(actor.id), "authority_generation": actor.authority_generation}
+
+
+def _request_booking_current(source, db, current_user):
+    from scripts import reception_one_bureau_typed_plan_protocol as protocol
+    from app.services.reception_one_proposal_runtime import SelectedRequestSource
+    if type(source) is not SelectedRequestSource:
+        raise HTTPException(status_code=409, detail={"code": "REQUEST_BOOKING_SOURCE_INVALID"})
+    saved = dict(source.binding_items)
+    actor = _request_receptionist(db, current_user)
+    row = _staff_request_row(db, uuid.UUID(saved["request_id"]), actor.practice_id)
+    current = _request_booking_binding(row, actor)
+    if (any(saved.get(k) != v or type(saved.get(k)) is not type(v) for k, v in current.items())
+            or row.state != "submitted" or datetime.now(timezone.utc) >= row.capability_expires_at):
+        raise HTTPException(status_code=409, detail={"code": "REQUEST_BOOKING_SOURCE_CHANGED"})
+    return row, actor, saved
+
+
+def capture_request_booking_context(body, request, db, current_user):
+    """One authorised final capture. Future private receiver owns retention.
+
+    This does not dispatch a worker or keep a DB session across authoring. The
+    later host successor must finish its FIRST installation within this same
+    120-second frame. Existing point capture/confirmation code is not reused.
+    """
+    _request_loopback(request)
+    if (not settings.reception_one_product_context_runtime_enabled
+            or settings.environment.lower() != "dev"
+            or not practice_is_allowlisted(current_user.practice_id,
+                settings.reception_one_product_context_synthetic_practice_ids)
+            or body.selected_request_id is None or body.selected_request_version is None
+            or body.selected_appointment_id is not None):
+        raise HTTPException(status_code=403, detail={"code": "REQUEST_BOOKING_NOT_ADMITTED"})
+    actor = _request_receptionist(db, current_user)
+    row = _staff_request_row(db, body.selected_request_id, actor.practice_id)
+    observed = datetime.now(timezone.utc)
+    if (row.state != "submitted" or type(row.request_version) is not int
+            or type(body.selected_request_version) is not int
+            or row.request_version != body.selected_request_version
+            or observed >= row.capability_expires_at or row.preference_date is None
+            or row.earliest_local is None or row.latest_local is None
+            or row.earliest_local.second != 0 or row.earliest_local.microsecond != 0
+            or row.latest_local.second != 0 or row.latest_local.microsecond != 0
+            or type(row.duration_minutes) is not int or not 5 <= row.duration_minutes <= 180):
+        raise HTTPException(status_code=409, detail={"code": "REQUEST_BOOKING_SOURCE_INVALID"})
+    patient = db.query(Patient).filter(Patient.id == row.patient_id,
+        Patient.practice_id == actor.practice_id).populate_existing().one_or_none()
+    if patient is None:
+        raise HTTPException(status_code=409, detail={"code": "REQUEST_BOOKING_SOURCE_INVALID"})
+    practitioner = db.query(Practitioner).filter(
+        Practitioner.id == row.practitioner_id, Practitioner.practice_id == actor.practice_id,
+        Practitioner.is_active.is_(True),
+    ).populate_existing().one_or_none()
+    if practitioner is None:
+        raise HTTPException(status_code=409, detail={"code": "REQUEST_BOOKING_SOURCE_INVALID"})
+    zone = ZoneInfo(row.practice_timezone)
+    candidates = []
+    # Preference suggestions are NOT availability. Intersect with the existing
+    # exact-time search AND full-duration preference helper (at most seven).
+    options = request_options(row, observed)
+    if len(options) > 7:
+        raise HTTPException(status_code=409, detail={"code": "REQUEST_BOOKING_OPTIONS_INVALID"})
+    for option in options:
+        day = date_type.fromisoformat(option["date"])
+        clock = time.fromisoformat(option["local_time"])
+        instant = _strict_move_instant(day, clock, zone)
+        if not _request_option_within_preference(row, instant, row.duration_minutes, day):
+            continue
+        search = _build_slot_search_proposal(SlotSearchProposalIn(
+            practitioner_id=row.practitioner_id, patient_id=row.patient_id,
+            appointment_type_id=row.appointment_type_id, location_id=row.location_id,
+            date_from=day, date_to=day, duration_minutes=row.duration_minutes,
+            earliest_time=clock, latest_time=clock, temporal_relation="exact", limit=1,
+        ), db, actor.practice_id)
+        if search.safe:
+            for candidate in search.candidates:
+                if (candidate.appointment_date == day and candidate.start_time_local == clock
+                        and candidate.start_time == instant and candidate.duration_minutes == row.duration_minutes
+                        and _request_option_within_preference(row, candidate.start_time, row.duration_minutes, day)):
+                    candidates.append(candidate)
+    if len(candidates) > 7 or len({c.start_time for c in candidates}) != len(candidates):
+        raise HTTPException(status_code=409, detail={"code": "REQUEST_BOOKING_OPTIONS_INVALID"})
+    binding = _request_booking_binding(row, actor)
+    binding.update(captured_at=observed.isoformat(),
+        offer_expires_at=min(observed + timedelta(minutes=5), row.capability_expires_at).isoformat(),
+        instruction=body.instruction, reference_date=body.reference_date.isoformat(),
+        correlation_id=body.correlation_id)
+    proposal = SlotSearchProposalOut(safe=True, autonomy_tier="execute_with_report",
+        summary="Authoritative bounded request options; no slot is reserved.",
+        resolved_duration_minutes=row.duration_minutes, candidates=candidates)
+    return build_request_booking_frame(instruction=body.instruction, reference_date=body.reference_date,
+        correlation_id=body.correlation_id, observed_at=observed, binding=binding,
+        patient_display=f"{patient.first_name} {patient.last_name}".strip(),
+        practitioner_display=f"Dr {practitioner.first_name} {practitioner.last_name}".strip(),
+        slot_proposal=proposal, handle_key=secrets.token_bytes(32))
+
+
+def finish_request_booking_reply(*, frame, displays, source, raw_response, db, current_user):
+    """Private exact-byte receive/first backend installation, no model call."""
+    from scripts import reception_one_bureau_typed_plan_protocol as protocol
+    _request_booking_current(source, db, current_user)
+    now = datetime.now(timezone.utc)
+    observed = datetime.fromisoformat(frame["observed_at"].replace("Z", "+00:00"))
+    result = compile_received_model_reply(frame=frame, raw_response=raw_response,
+                                        frame_observed_at=observed, received_at=now)
+    final = request_booking_envelope(frame=frame, source=source, planner_result=result, now=now)
+    _request_booking_current(source, db, current_user)
+    # Recheck original deadline after all pure work, before releasing a result.
+    installed = datetime.now(timezone.utc)
+    expiry = datetime.fromisoformat(frame["expires_at"].replace("Z", "+00:00"))
+    if not observed <= installed < expiry or expiry - observed != timedelta(seconds=120):
+        raise HTTPException(status_code=409, detail={"code": "REQUEST_BOOKING_CAPTURE_EXPIRED"})
+    public = build_reviewed_proposal_result(frame=frame, displays=displays,
+        normalized_plan=result.normalized_plan, review=result.review,
+        execution={"final_output": final}, planner_mode="isolated_vertex",
+        provider_calls=0, runtime_audit_ref="private-request-booking-received-reply")
+    payload = public.model_dump(mode="json")
+    payload["request_correlation_sha256"] = hashlib.sha256(dict(source.binding_items)["correlation_id"].encode()).hexdigest()
+    return PreparedRequestBooking(source, protocol.canonical_json(frame).encode("utf-8"),
+        protocol.canonical_json(payload).encode("utf-8"), tuple(final["candidate_slot_ids"]), installed,
+        raw_response, protocol.canonical_json(result.semantic_provenance).encode("utf-8"),
+        protocol.canonical_json(result.normalized_plan).encode("utf-8"),
+        protocol.canonical_json(result.review).encode("utf-8"), protocol.canonical_json(final).encode("utf-8"))
+
+
+def _project_request_booking(prepared, body, db, current_user):
+    if type(prepared) is not PreparedRequestBooking:
+        raise HTTPException(status_code=409, detail={"code": "REQUEST_BOOKING_PREPARED_UNAVAILABLE"})
+    row, actor, saved = _request_booking_current(prepared.source, db, current_user)
+    frame = json.loads(prepared.frame_bytes)
+    now = datetime.now(timezone.utc)
+    observed = datetime.fromisoformat(frame["observed_at"].replace("Z", "+00:00"))
+    expires = datetime.fromisoformat(frame["expires_at"].replace("Z", "+00:00"))
+    offer_expires = datetime.fromisoformat(saved["offer_expires_at"])
+    if (body.selected_request_id != row.id or body.selected_request_version != row.request_version
+            or body.instruction != saved["instruction"] or body.reference_date.isoformat() != saved["reference_date"]
+            or body.correlation_id != saved["correlation_id"] or body.selected_appointment_id is not None
+            or expires - observed != timedelta(seconds=120)
+            or not observed <= prepared.installed_at < expires
+            or not prepared.installed_at <= now < offer_expires):
+        raise HTTPException(status_code=409, detail={"code": "REQUEST_BOOKING_PREPARED_UNAVAILABLE"})
+    return ReceptionOneProductContextProposalOut.model_validate(json.loads(prepared.public_bytes))
+
+
+def prepare_request_booking_selection(prepared, slot_handle, request, db, current_user):
+    """Private staff selection adapter: reuse the existing signed create route.
+
+    No confirmation or DB write. The host must retain the SAME prepared result,
+    explicit selection and signed payload. It cannot refresh a frame/offer here.
+    """
+    if type(prepared) is not PreparedRequestBooking or slot_handle not in prepared.candidate_ids:
+        raise HTTPException(status_code=409, detail={"code": "REQUEST_BOOKING_SELECTION_INVALID"})
+    row, actor, saved = _request_booking_current(prepared.source, db, current_user)
+    if datetime.now(timezone.utc) >= datetime.fromisoformat(saved["offer_expires_at"]):
+        raise HTTPException(status_code=409, detail={"code": "REQUEST_BOOKING_OFFER_EXPIRED"})
+    slot = json.loads(dict(prepared.source.slot_items)[slot_handle])
+    proposal = _staff_request_create_proposal(row.id,
+        StaffRequestProposalIn(request_version=row.request_version,
+            selected={"date": slot["date"], "local_time": slot["start_time"], "zone": row.practice_timezone}),
+        request, db, actor, captured_offer=(datetime.fromisoformat(saved["captured_at"]), datetime.fromisoformat(saved["offer_expires_at"])))
+    if not proposal.safe:
+        return proposal
+    marker = proposal.patient_request_binding
+    if (not isinstance(marker, dict) or marker.get("purpose") != "stage1.patient_request.staff_create.v1"
+            or marker.get("request_id") != saved["request_id"] or marker.get("request_version") != saved["request_version"]
+            or proposal.command is None or proposal.command.patient_id != row.patient_id
+            or proposal.command.practitioner_id != row.practitioner_id
+            or proposal.command.duration_minutes != row.duration_minutes):
+        raise HTTPException(status_code=409, detail={"code": "REQUEST_BOOKING_SIGNED_PROPOSAL_INVALID"})
+    return proposal

@@ -117,8 +117,10 @@ class IsolatedVertexPlannerResult:
                     or frame["request_id"] != receipt.request_id
                     or frame["context_revision"] != receipt.context_revision
                     or receipt.frame_bytes != typed_plan.canonical_json(frame).encode("utf-8")
-                    or rebuilt["provenance"]["packet_schema_version"] != typed_plan.POINT_PACKET_VERSION
-                    or rebuilt["plan"]["contract_version"] != typed_plan.POINT_PLAN_VERSION
+                    or (rebuilt["provenance"]["packet_schema_version"], rebuilt["plan"]["contract_version"]) != (
+                        (typed_plan.REQUEST_BOOKING_PACKET_VERSION, typed_plan.REQUEST_BOOKING_PLAN_VERSION)
+                        if frame.get("contract_version") == typed_plan.REQUEST_BOOKING_INPUT_VERSION else
+                        (typed_plan.POINT_PACKET_VERSION, typed_plan.POINT_PLAN_VERSION))
                     or rebuilt["plan"] != self.normalized_plan
                     or rebuilt["review"] != self.review):
                 raise ValueError("compiler join")
@@ -569,6 +571,9 @@ def compile_received_model_reply(
             or frame_observed_at.tzinfo is None or received_at.tzinfo is None):
         raise IsolatedVertexPlannerError("isolated_model_reply_boundary_invalid")
     snapshot = copy.deepcopy(frame)
+    if (snapshot.get("contract_version") == "reception.one.bureau.plan-input.request-booking.v1"
+            and not 1 <= len(raw_response) <= 32768):
+        raise IsolatedVertexPlannerError("isolated_model_reply_boundary_invalid")
     _validate_frame(snapshot, frame_observed_at)
     from scripts import reception_one_bureau_typed_plan_protocol as typed_plan
 
@@ -576,11 +581,13 @@ def compile_received_model_reply(
         built = typed_plan.compile_model_semantic_packet(
             snapshot, raw_response, case_id=snapshot["request_id"], now=received_at,
         )
-        # This new carrier prepares only the already supported selected point
-        # move. Other families keep their existing route; no operator expansion.
-        if (built["provenance"]["packet_schema_version"] != typed_plan.POINT_PACKET_VERSION
-                or built["plan"]["contract_version"] != typed_plan.POINT_PLAN_VERSION):
-            raise ValueError("point packet required")
+        # Closed discriminator: the accepted point branch or the new grounded
+        # request-booking branch. Neither admits another catalogue family.
+        if (built["provenance"]["packet_schema_version"], built["plan"]["contract_version"]) != (
+                (typed_plan.REQUEST_BOOKING_PACKET_VERSION, typed_plan.REQUEST_BOOKING_PLAN_VERSION)
+                if snapshot.get("contract_version") == typed_plan.REQUEST_BOOKING_INPUT_VERSION else
+                (typed_plan.POINT_PACKET_VERSION, typed_plan.POINT_PLAN_VERSION)):
+            raise ValueError("packet family required")
         execution = typed_plan.execute_plan(
             snapshot, built["plan"], built["review"], now=received_at,
         )
