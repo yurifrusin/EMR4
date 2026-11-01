@@ -6439,3 +6439,304 @@ def test_request_booking_refinements_prior_activation_and_wrong_parent_refusal(m
         monkeypatch,tmp_path,"apply",wrong_parent=case=="parent",old_activation_root=case=="activation_root")
     assert err.value.reason_code==("bounded_g4_owner_bootstrap_activation_parent" if case=="parent"
                                    else "bounded_g4_owner_bootstrap_activation_path")
+
+# Patient successor source tests. Git/activation substitutions below are synthetic,
+# isolated fixture facts, never actual admission, publication or runtime evidence.
+_PATIENT_CREATION_CANDIDATE = Path("C:/Users/there/EMR4-tools/patient-creation-admission-source-preparation-v1/controller-operative-source-v1/after")
+_PATIENT_CREATION_PREDECESSOR = Path("C:/Users/there/EMR4-tools/request-booking-refinements-product-apply01-target")
+_PATIENT_CREATION_PATHS = (
+    "app/schemas/patient_registration.py",
+    "app/services/patient_registration.py",
+    "app/routers/patient_registration.py",
+    "alembic/versions/f1a2b3c4d5e6_local_synthetic_patient_registration.py",
+    "stage1_patient_http_adapter.py",
+    "tests/test_local_synthetic_patient_registration_contract.py",
+)
+
+
+def _patient_creation_descriptor(monkeypatch):
+    monkeypatch.setattr(bounded_g1b,"G4_PATIENT_CREATION_TEMPLATE_INERT",False)
+    return bounded_g1b._g4_owner_bootstrap_descriptor(bounded_g1b.G4_PATIENT_CREATION_SCHEMA)
+
+
+def test_patient_creation_cold_registry_and_historical_continuity(monkeypatch):
+    b=bounded_g1b
+    assert b.G4_PATIENT_CREATION_TEMPLATE_INERT is False
+    assert b._g4_owner_bootstrap_descriptor(b.G4_PATIENT_CREATION_SCHEMA) is b.G4_PATIENT_CREATION_DESCRIPTOR
+    assert b._g4_owner_bootstrap_descriptor(b.G4_PATIENT_CREATION_SCOPE_SCHEMA,scope=True) is b.G4_PATIENT_CREATION_DESCRIPTOR
+    monkeypatch.setattr(b,"G4_PATIENT_CREATION_TEMPLATE_INERT",True)
+    assert b.G4_PATIENT_CREATION_TEMPLATE_INERT is True
+    def forbidden_read(*args):raise AssertionError("cold family must refuse before any external read")
+    with pytest.raises(b.BoundedG1BError) as err:b._g4_owner_bootstrap_external_inputs(
+        forbidden_read,{"schema_version":b.G4_PATIENT_CREATION_SCHEMA})
+    assert err.value.reason_code=="bounded_g4_patient_creation_source_inert"
+    for schema,scope in [(b.G4_PATIENT_CREATION_SCHEMA,False),(b.G4_PATIENT_CREATION_SCOPE_SCHEMA,True)]:
+        with pytest.raises(b.BoundedG1BError) as err:b._g4_owner_bootstrap_descriptor(schema,scope=scope)
+        assert err.value.reason_code=="bounded_g4_patient_creation_source_inert"
+    d=_patient_creation_descriptor(monkeypatch)
+    assert b._g4_owner_bootstrap_descriptor(b.G4_PATIENT_CREATION_SCOPE_SCHEMA,scope=True) is d
+    assert d is b.G4_PATIENT_CREATION_DESCRIPTOR and d["version"]==29
+    assert b.G4_REQUEST_BOOKING_REFINEMENTS_TEMPLATE_INERT is False
+    assert b.G4_REQUEST_BOOKING_TEMPLATE_INERT is False
+    assert b._g4_owner_bootstrap_descriptor(b.G4_REQUEST_BOOKING_REFINEMENTS_SCHEMA) is b.G4_REQUEST_BOOKING_REFINEMENTS_DESCRIPTOR
+    assert b._g4_owner_bootstrap_descriptor(b.G4_REQUEST_BOOKING_SCHEMA) is b.G4_REQUEST_BOOKING_DESCRIPTOR
+    assert d["root"]==b.G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT/"local-synthetic-patient-creation-v1"
+    assert d["base"]=={"commit":"34391056f41b7d9ba11a587f62606f1261db25e1","tree":"32abe763323c0713678a2f927dbc0d409e3fa67b"}
+    assert b.G4_REQUEST_BOOKING_REFINEMENTS_VECTOR["sha256"]=="fc7e24e57dc96213468f2059c5d7f01fa269276d37644a345e49c6e3eb225a9d"
+    assert b.G4_REQUEST_BOOKING_REFINEMENTS_REVIEW["sha256"]=="0480ff5e4d76b591a5223bfa993c567dd863858d95ca6e62638c5ea078d0b3ae"
+    assert len(b.G4_REQUEST_BOOKING_REFINEMENTS_PRODUCT_PATHS)==9
+    assert set(d["product_sha"]).isdisjoint(b.G4_REQUEST_BOOKING_REFINEMENTS_PRODUCT_PATHS)
+
+
+@pytest.mark.parametrize("stage",["enable","admit","apply"])
+def test_patient_creation_exact_three_zero_six_ownership(monkeypatch,stage):
+    b=bounded_g1b;d=_patient_creation_descriptor(monkeypatch)
+    kind={"enable":"enable_g4_stage1_successor","admit":b.G4_OWNER_BOOTSTRAP_ADMIT_KIND,"apply":"implement_g4_stage1_successor"}[stage]
+    paths=d["control"] if stage=="enable" else frozenset(d["product_sha"]) if stage=="apply" else frozenset()
+    q={"schema_version":b.G4_PATIENT_CREATION_SCHEMA,"operation_kind":kind,"stage":stage,"repair_sha256":dict.fromkeys(paths,{})}
+    assert b._g4_owner_bootstrap_paths(kind,q)==paths
+    assert len(paths)=={"enable":3,"admit":0,"apply":6}[stage]
+    q["repair_sha256"]["app/routers/appointments.py"]={}
+    with pytest.raises(b.BoundedG1BError) as err:b._g4_owner_bootstrap_paths(kind,q)
+    assert err.value.reason_code=="bounded_g4_owner_bootstrap_changed_paths"
+
+
+@pytest.mark.parametrize("mutation",["missing_product","extra_product","wrong_control","wrong_row","wrong_size"])
+def test_patient_creation_descriptor_mutation_restores_identity(monkeypatch,mutation):
+    b=bounded_g1b;d=_patient_creation_descriptor(monkeypatch)
+    q={"schema_version":b.G4_PATIENT_CREATION_SCHEMA,"operation_kind":"implement_g4_stage1_successor","stage":"apply",
+       "repair_sha256":dict.fromkeys(_PATIENT_CREATION_PATHS,{})}
+    assert b._g4_owner_bootstrap_paths(q["operation_kind"],q)==frozenset(_PATIENT_CREATION_PATHS)
+    if mutation=="missing_product":monkeypatch.setitem(d,"product_sha",{p:h for p,h in d["product_sha"].items() if p!=_PATIENT_CREATION_PATHS[0]})
+    elif mutation=="extra_product":monkeypatch.setitem(d,"product_sha",{**d["product_sha"],"app/unowned.py":"a"*64})
+    elif mutation=="wrong_control":monkeypatch.setitem(d,"control",d["control"]|{b.OVERLAY})
+    elif mutation=="wrong_row":monkeypatch.setitem(d,"product_rows",{**d["product_rows"],_PATIENT_CREATION_PATHS[0]:{}})
+    else:monkeypatch.setitem(d,"product_bytes",{**d["product_bytes"],_PATIENT_CREATION_PATHS[0]:1})
+    with pytest.raises(b.BoundedG1BError) as err:b._g4_owner_bootstrap_paths(q["operation_kind"],q)
+    assert err.value.reason_code=="bounded_g4_patient_creation_path_boundary"
+
+
+@pytest.mark.parametrize("path",_PATIENT_CREATION_PATHS)
+def test_patient_creation_each_descriptor_preimage_must_be_null(monkeypatch,path):
+    b=bounded_g1b;d=_patient_creation_descriptor(monkeypatch)
+    q={"schema_version":b.G4_PATIENT_CREATION_SCHEMA,"operation_kind":"implement_g4_stage1_successor","stage":"apply",
+       "repair_sha256":dict.fromkeys(_PATIENT_CREATION_PATHS,{})}
+    assert b._g4_owner_bootstrap_paths(q["operation_kind"],q)==frozenset(_PATIENT_CREATION_PATHS)
+    assert d["before_sha"]==dict.fromkeys(_PATIENT_CREATION_PATHS)
+    monkeypatch.setitem(d,"before_sha",{**d["before_sha"],path:"a"*64})
+    with pytest.raises(b.BoundedG1BError) as err:b._g4_owner_bootstrap_paths(q["operation_kind"],q)
+    assert err.value.reason_code=="bounded_g4_patient_creation_path_boundary"
+
+
+def test_patient_creation_scope_six_source8_profile40_closures(monkeypatch):
+    b=bounded_g1b;d=_patient_creation_descriptor(monkeypatch)
+    scope=json.loads((_PATIENT_CREATION_CANDIDATE/b.G4_STAGE1_SUCCESSOR_SCOPE).read_bytes())
+    assert b.validate_g4_owner_bootstrap_scope(scope)==scope["source_sha256"]
+    assert scope["schema_version"]==d["scope_schema"] and scope["selected_base"]==d["base"]
+    assert len(scope["allowed_paths"])==6 and set(scope["allowed_paths"])==set(_PATIENT_CREATION_PATHS)
+    assert len(scope["source_sha256"])==8 and len(raisa_policy.G4_STAGE1_SUCCESSOR_PRODUCT_PATHS)==40
+    assert tuple(raisa_policy.G4_STAGE1_SUCCESSOR_PRODUCT_PATHS)==_REQUEST_BOOKING_PREDECESSOR_PATHS+b.G4_REQUEST_BOOKING_PROFILE_APPEND
+    assert scope["predecessor_scope"]=={"sha256":"d5f4262b766635c849b74910b4ff36eae4b18838de2e34b6fa47b76f59d7e52d"}
+    assert scope["runtime_binding_required"] is True and scope["admission_grants_runtime_authority"] is False
+    assert scope["voice_activation"] is False and "provider_invocation" in scope["excluded_effects"]
+    for field,value in [("allowed_paths",scope["allowed_paths"]+["app/routers/appointments.py"]),
+                        ("voice_activation",True),("runtime_binding_required",False),("admission_grants_runtime_authority",True)]:
+        changed=copy.deepcopy(scope);changed[field]=value
+        with pytest.raises(b.BoundedG1BError) as err:b.validate_g4_owner_bootstrap_scope(changed)
+        assert err.value.reason_code=="bounded_g4_owner_bootstrap_scope_boundary"
+
+
+def _patient_creation_external_read(path,digest):
+    raw=path.read_bytes();assert hashlib.sha256(raw).hexdigest()==digest;return raw
+
+
+def test_patient_creation_actual_whole_vector_mapping_and_twelve_reads(monkeypatch):
+    b=bounded_g1b;d=_patient_creation_descriptor(monkeypatch);seen=[]
+    def read(path,digest):seen.append(path);return _patient_creation_external_read(path,digest)
+    vector,review=b._g4_owner_bootstrap_external_inputs(read,{"schema_version":b.G4_PATIENT_CREATION_SCHEMA,
+        "product_vector":d["vector"],"mapping_review":d["mapping"]})
+    assert len(seen)==12 and len(set(seen))==12
+    assert len(vector["product_rows"])==6 and all(row["before"] is None for row in vector["product_rows"])
+    assert review["authority"]["source_only_accepted"] is True and review["authority"]["source_mapping_accepted"] is True
+    assert review["authority"]["runtime_accepted"] is False and review["authority"]["execution_authorized"] is False
+    assert review["reviewer_agent"] not in d["excluded_reviewers"]
+    assert "/root/refinements_v2_controller_review" in d["excluded_reviewers"]
+    assert set(review["reviewed_subject"]["author_exclusions"])<d["excluded_reviewers"]
+
+
+@pytest.mark.parametrize("selected",["vector","review","handoff","preimage","migration","plan"]+list(_PATIENT_CREATION_PATHS))
+def test_patient_creation_each_external_byte_tamper_refuses(monkeypatch,selected):
+    b=bounded_g1b;d=_patient_creation_descriptor(monkeypatch)
+    q={"product_vector":d["vector"],"mapping_review":d["mapping"]}
+    assert b._g4_patient_creation_external_inputs(_patient_creation_external_read,q)[0]==b.G4_PATIENT_CREATION_EXPECTED_VECTOR
+    row=b.G4_PATIENT_CREATION_VECTOR if selected=="vector" else b.G4_PATIENT_CREATION_REVIEW if selected=="review" else b.G4_PATIENT_CREATION_EXTERNAL_ROWS[selected] if selected in b.G4_PATIENT_CREATION_EXTERNAL_ROWS else d["product_rows"][selected]
+    def read(path,digest):
+        raw=path.read_bytes();return raw+b" " if path==Path(row["path"]) else raw
+    with pytest.raises(b.BoundedG1BError) as err:b._g4_patient_creation_external_inputs(read,q)
+    assert err.value.reason_code=="bounded_g4_patient_creation_external_source"
+
+
+def test_patient_creation_unknown_family_fails_closed_and_subject_excludes_review():
+    b=bounded_g1b
+    q={key:None for key in b.G4_OWNER_BOOTSTRAP_BINDING_KEYS}
+    q.update(schema_version=b.G4_PATIENT_CREATION_SCHEMA+"-unknown",operation_kind="implement_g4_stage1_successor",stage="apply",repair_sha256={})
+    assert b._routes_g4_owner_bootstrap_binding(q) is True and b._is_g4_owner_bootstrap_binding(q) is False
+    with pytest.raises(b.BoundedG1BError) as err:b._g4_owner_bootstrap_paths(q["operation_kind"],q)
+    assert err.value.reason_code=="bounded_g4_owner_bootstrap_binding_kind"
+    q["schema_version"]=b.G4_PATIENT_CREATION_SCHEMA
+    subject=b.g4_owner_bootstrap_review_subject(q)
+    q["source_review"]={"path":"synthetic-only","sha256":"a"*64}
+    assert b.g4_owner_bootstrap_review_subject(q)==subject
+    assert len(q)==17 and len(set(q)-{"source_review"})==16
+    q["product_vector"]={"path":"different","sha256":"b"*64}
+    assert b.g4_owner_bootstrap_review_subject(q)!=subject
+
+
+def _patient_creation_loader_gate(monkeypatch,tmp_path,stage,mutation=None,wrong_parent=False,old_activation_root=False):
+    b=bounded_g1b;d=_patient_creation_descriptor(monkeypatch)
+    inputs=b.CONFIGURATION_PATHS|{b.STATE,b.GATES,b.OVERLAY,b.AGENTS,b.G4_STAGE1_INTERACTIVE_SCOPE,
+        b.G4_STAGE1_SUCCESSOR_SCOPE,b.G4_STAGE1_SUCCESSOR_TEST,b.G4_CI_WORKFLOW}|b.SOURCE_PATHS|b.CONTROLLER_PATHS
+    if stage=="apply":inputs|=frozenset(d["product_sha"])
+    assert len(inputs)==(31 if stage=="apply" else 25)
+    payload=dict.fromkeys(inputs,"a"*64)
+    if mutation=="extras":payload["app/unowned.py"]="a"*64
+    elif mutation=="missing":payload.pop(b.AGENTS)
+    elif mutation=="malformed":payload[b.GATES]="invalid"
+    target=tmp_path/"target";source=tmp_path/"source";scratch=tmp_path/"scratch"
+    base=d["base"]["commit"] if stage=="enable" else "b"*40
+    tree=d["base"]["tree"] if stage=="enable" else "c"*40
+    candidate=tree if stage=="admit" else "d"*40
+    changes=d["control"] if stage=="enable" else frozenset(d["product_sha"]) if stage=="apply" else {}
+    q={"schema_version":b.G4_PATIENT_CREATION_SCHEMA,"operation_id":"synthetic-patient-creation",
+       "operation_kind":{"enable":"enable_g4_stage1_successor","admit":b.G4_OWNER_BOOTSTRAP_ADMIT_KIND,"apply":"implement_g4_stage1_successor"}[stage],
+       "stage":stage,"phase":"development","base_commit":base,"base_tree":tree,"expected_head":base,
+       "expected_index_tree":candidate,"candidate_tree":candidate,
+       "source_sha256":dict.fromkeys(b.SOURCE_PATHS|b.CONTROLLER_PATHS,"a"*64),"payload_sha256":payload,
+       "repair_sha256":dict.fromkeys(changes,{}),"source_review":{"path":"unused-before-payload-gate","sha256":"a"*64},
+       "activation_acceptance":None,"product_vector":d["vector"],"mapping_review":d["mapping"]}
+    activation=d["root"]/"entry-admission-v1/independent-enable-push-effect-review-v1.json"
+    record={"schema":"emr4.g4_operation_review.v1","status":"PASS","verdict":"PASS_G4_STAGE1_OWNER_BOOTSTRAP_CONTROL_PUBLICATION_EFFECT",
+        "reviewer_agent":"/synthetic/independent-review-fixture","independent":True,"implementation_authorship":False,
+        "blocking_findings":[],"stage":"enable","phase":"push","base":d["base"]["commit"],"commit":base,
+        "candidate_tree":tree,"control_activation_accepted":True,"same_attempt_remote_readback_verified":True,
+        "protected_refs_unchanged":True,"whole_inverse_verified_same_attempt":True,"published_ref":b.G4_STAGE1_INTERACTIVE_BACKEND_REF}
+    raw=b._canonical(record)
+    if stage!="enable":q["activation_acceptance"]={"path":str(activation),"sha256":b._sha(raw)}
+    if old_activation_root:q["activation_acceptance"]["path"]=str(b.G4_REQUEST_BOOKING_REFINEMENTS_ROOT/"entry-admission-v1"/activation.name)
+    previous=(_PATIENT_CREATION_PREDECESSOR/b.G4_STAGE1_SUCCESSOR_SCOPE).read_bytes()
+    assert b._sha(previous)==d["preimages"][b.G4_STAGE1_SUCCESSOR_SCOPE]
+    def git_bytes(actual,*args):
+        assert actual==target and args==("cat-file","blob",d["base"]["commit"]+":"+b.G4_STAGE1_SUCCESSOR_SCOPE)
+        return previous
+    def git(actual,*args):
+        assert actual==target
+        if args==("rev-parse",d["base"]["commit"]+"^{tree}"):return d["base"]["tree"]
+        assert args==("cat-file","commit",base)
+        return "tree "+tree+"\nparent "+("e"*40 if wrong_parent else d["base"]["commit"])+"\n\nsynthetic only"
+    def read(path,digest):
+        if path==activation:assert digest==b._sha(raw);return raw
+        assert path.is_relative_to(target) and path.relative_to(target).as_posix() in inputs
+        raise _CarrierRenewalPayloadAccepted()
+    monkeypatch.setattr(b,"_g4_owner_bootstrap_external_inputs",lambda read,q:({},{}))
+    monkeypatch.setattr(b.trusted_git,"run_git_bytes",git_bytes);monkeypatch.setattr(b.trusted_git,"run_git",git)
+    return b._load_g4_owner_bootstrap_inputs(None,target,source,b.G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT,scratch,q,read,{})
+
+
+@pytest.mark.parametrize("stage",["enable","admit","apply"])
+def test_patient_creation_loader_payload25_or31_baseline(monkeypatch,tmp_path,stage):
+    with pytest.raises(_CarrierRenewalPayloadAccepted):_patient_creation_loader_gate(monkeypatch,tmp_path,stage)
+
+
+@pytest.mark.parametrize("mutation",["extras","missing","malformed"])
+def test_patient_creation_loader_payload_gate_refuses(monkeypatch,tmp_path,mutation):
+    with pytest.raises(_CarrierRenewalPayloadAccepted):_patient_creation_loader_gate(monkeypatch,tmp_path,"apply")
+    with pytest.raises(bounded_g1b.BoundedG1BError) as err:_patient_creation_loader_gate(monkeypatch,tmp_path,"apply",mutation)
+    assert err.value.reason_code=="bounded_g4_owner_bootstrap_payload_paths"
+
+
+@pytest.mark.parametrize("case",["parent","activation_root"])
+def test_patient_creation_activation_requires_new_namespace_and_parent(monkeypatch,tmp_path,case):
+    with pytest.raises(_CarrierRenewalPayloadAccepted):_patient_creation_loader_gate(monkeypatch,tmp_path,"apply")
+    with pytest.raises(bounded_g1b.BoundedG1BError) as err:_patient_creation_loader_gate(
+        monkeypatch,tmp_path,"apply",wrong_parent=case=="parent",old_activation_root=case=="activation_root")
+    assert err.value.reason_code==("bounded_g4_owner_bootstrap_activation_parent" if case=="parent" else "bounded_g4_owner_bootstrap_activation_path")
+
+
+def _patient_creation_full_apply_fixture(monkeypatch,tmp_path,unexpected=None,policy_mutation=None):
+    # Real loader code, literal source bytes, wholly synthetic installed Git facts.
+    # Subject-review/index functions are substituted after ownership checks; no
+    # actual controller, Git, index, activation or publication is invoked.
+    b=bounded_g1b;d=_patient_creation_descriptor(monkeypatch)
+    inherited=b.CONFIGURATION_PATHS|{b.STATE,b.GATES,b.OVERLAY,b.AGENTS,b.G4_STAGE1_INTERACTIVE_SCOPE,
+        b.G4_STAGE1_SUCCESSOR_SCOPE,b.G4_STAGE1_SUCCESSOR_TEST,b.G4_CI_WORKFLOW}|b.SOURCE_PATHS|b.CONTROLLER_PATHS
+    assert len(inherited)==25
+    payloads={p:((_PATIENT_CREATION_CANDIDATE if p in d["control"] else _PATIENT_CREATION_PREDECESSOR)/p).read_bytes() for p in inherited}
+    original_policy={p:payloads[p] for p in (b.STATE,b.GATES,b.OVERLAY,b.AGENTS)}
+    if policy_mutation:payloads[policy_mutation]+=b" "
+    payloads.update({p:Path(row["path"]).read_bytes() for p,row in d["product_rows"].items()})
+    scope=json.loads(payloads[b.G4_STAGE1_SUCCESSOR_SCOPE]);pins={p:b._sha(raw) for p,raw in payloads.items()}
+    assert len(payloads)==31 and set(scope["source_sha256"])==b.SOURCE_PATHS|b.CONTROLLER_PATHS
+    target=tmp_path/"target";source=tmp_path/"source";base="b"*40;tree="c"*40;candidate="d"*40
+    activation=d["root"]/"entry-admission-v1/independent-enable-push-effect-review-v1.json"
+    record={"schema":"emr4.g4_operation_review.v1","status":"PASS","verdict":"PASS_G4_STAGE1_OWNER_BOOTSTRAP_CONTROL_PUBLICATION_EFFECT",
+        "reviewer_agent":"/synthetic/independent-review-fixture","independent":True,"implementation_authorship":False,"blocking_findings":[],
+        "stage":"enable","phase":"push","base":d["base"]["commit"],"commit":base,"candidate_tree":tree,
+        "control_activation_accepted":True,"same_attempt_remote_readback_verified":True,"protected_refs_unchanged":True,
+        "whole_inverse_verified_same_attempt":True,"published_ref":b.G4_STAGE1_INTERACTIVE_BACKEND_REF}
+    activation_raw=b._canonical(record)
+    q={"schema_version":b.G4_PATIENT_CREATION_SCHEMA,"operation_id":"synthetic-patient-full-apply",
+        "operation_kind":"implement_g4_stage1_successor","stage":"apply","phase":"development","base_commit":base,"base_tree":tree,
+        "expected_head":base,"expected_index_tree":candidate,"candidate_tree":candidate,"source_sha256":scope["source_sha256"],
+        "payload_sha256":pins,"repair_sha256":{p:{"before_sha256":None,"after_sha256":h} for p,h in d["product_sha"].items()},
+        "source_review":{"path":"synthetic-only-substitution","sha256":"a"*64},
+        "activation_acceptance":{"path":str(activation),"sha256":b._sha(activation_raw)},"product_vector":d["vector"],"mapping_review":d["mapping"]}
+    previous=(_PATIENT_CREATION_PREDECESSOR/b.G4_STAGE1_SUCCESSOR_SCOPE).read_bytes()
+    def read(path,digest):
+        if path==activation:raw=activation_raw
+        elif path.is_relative_to(target):raw=payloads[path.relative_to(target).as_posix()]
+        elif path.is_relative_to(source):raw=payloads[path.relative_to(source).as_posix()]
+        else:
+            matches=[p for p,row in d["product_rows"].items() if Path(row["path"])==path]
+            assert len(matches)==1;raw=payloads[matches[0]]
+        assert b._sha(raw)==digest;return raw
+    def git_bytes(actual,*args):
+        assert actual==target
+        if args==("cat-file","blob",d["base"]["commit"]+":"+b.G4_STAGE1_SUCCESSOR_SCOPE):return previous
+        if args[:2]==("ls-tree","-z"):
+            assert len(args)==5 and args[2]==base and args[3]=="--" and args[4] in d["product_sha"]
+            return b"100644 blob synthetic\x00" if args[4]==unexpected else b""
+        assert args[:2]==("cat-file","blob") and len(args)==3
+        commit,path=args[2].split(":",1)
+        if commit==base:return b"unexpected committed preimage" if path==unexpected else payloads[path]
+        assert commit==d["base"]["commit"] and path in original_policy
+        return original_policy[path]
+    def git(actual,*args):
+        assert actual==target
+        if args==("rev-parse",d["base"]["commit"]+"^{tree}"):return d["base"]["tree"]
+        assert args==("cat-file","commit",base)
+        return "tree "+tree+"\nparent "+d["base"]["commit"]+"\n\nsynthetic only"
+    monkeypatch.setattr(b,"_g4_owner_bootstrap_external_inputs",lambda read,q:({},{}))
+    monkeypatch.setattr(b,"_g4_owner_bootstrap_subject_review",lambda *args:{"synthetic":True})
+    monkeypatch.setattr(b.trusted_git,"run_git_bytes",git_bytes);monkeypatch.setattr(b.trusted_git,"run_git",git)
+    monkeypatch.setattr(b.trusted_git,"attest_target_index",lambda *args,**kwargs:{"synthetic":True})
+    return b._load_g4_owner_bootstrap_inputs(None,target,source,b.G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT,tmp_path/"scratch",q,read,{})
+
+
+def test_patient_creation_full_apply_null_preimages_valid_synthetic_baseline(monkeypatch,tmp_path):
+    loaded=_patient_creation_full_apply_fixture(monkeypatch,tmp_path)
+    assert len(loaded.payloads)==31 and len(loaded.binding["repair_sha256"])==6
+    assert all(pair["before_sha256"] is None for pair in loaded.binding["repair_sha256"].values())
+
+
+@pytest.mark.parametrize("path",_PATIENT_CREATION_PATHS)
+def test_patient_creation_each_unexpected_committed_addition_refuses(monkeypatch,tmp_path,path):
+    _patient_creation_full_apply_fixture(monkeypatch,tmp_path)
+    with pytest.raises(bounded_g1b.BoundedG1BError) as err:_patient_creation_full_apply_fixture(monkeypatch,tmp_path,unexpected=path)
+    assert err.value.reason_code=="bounded_g4_owner_bootstrap_change_preimage"
+
+
+@pytest.mark.parametrize("path",[bounded_g1b.STATE,bounded_g1b.GATES,bounded_g1b.OVERLAY,bounded_g1b.AGENTS])
+def test_patient_creation_policy_bytes_have_no_transition_exception(monkeypatch,tmp_path,path):
+    _patient_creation_full_apply_fixture(monkeypatch,tmp_path)
+    with pytest.raises(bounded_g1b.BoundedG1BError) as err:_patient_creation_full_apply_fixture(monkeypatch,tmp_path,policy_mutation=path)
+    assert err.value.reason_code=="bounded_g4_owner_bootstrap_state_unchanged"
