@@ -6223,3 +6223,219 @@ def test_request_booking_prior_activation_and_wrong_parent_refusal(monkeypatch,t
         monkeypatch,tmp_path,"apply",wrong_parent=case=="parent",old_activation_root=case=="activation_root")
     assert err.value.reason_code==("bounded_g4_owner_bootstrap_activation_parent" if case=="parent"
                                    else "bounded_g4_owner_bootstrap_activation_path")
+
+
+# Cold v28 successor source tests. No runtime or admission authority is implied.
+_REQUEST_BOOKING_REFINEMENTS_CANDIDATE = Path("C:/Users/there/EMR4-tools/request-booking-refinements-v2-admission-source-preparation-v1/controller-operative-source-v1/after")
+
+
+def _request_booking_refinements_descriptor(monkeypatch):
+    monkeypatch.setattr(bounded_g1b,"G4_REQUEST_BOOKING_REFINEMENTS_TEMPLATE_INERT",False)
+    return bounded_g1b._g4_owner_bootstrap_descriptor(bounded_g1b.G4_REQUEST_BOOKING_REFINEMENTS_SCHEMA)
+
+
+def test_request_booking_refinements_default_cold_and_historical_descriptors(monkeypatch):
+    b=bounded_g1b
+    assert b.G4_REQUEST_BOOKING_REFINEMENTS_TEMPLATE_INERT is False
+    assert b._g4_owner_bootstrap_descriptor(b.G4_REQUEST_BOOKING_REFINEMENTS_SCHEMA) is b.G4_REQUEST_BOOKING_REFINEMENTS_DESCRIPTOR
+    assert b._g4_owner_bootstrap_descriptor(b.G4_REQUEST_BOOKING_REFINEMENTS_SCOPE_SCHEMA,scope=True) is b.G4_REQUEST_BOOKING_REFINEMENTS_DESCRIPTOR
+    monkeypatch.setattr(b,"G4_REQUEST_BOOKING_REFINEMENTS_TEMPLATE_INERT",True)
+    assert b.G4_REQUEST_BOOKING_REFINEMENTS_TEMPLATE_INERT is True
+    for schema,scope in [(b.G4_REQUEST_BOOKING_REFINEMENTS_SCHEMA,False),
+                         (b.G4_REQUEST_BOOKING_REFINEMENTS_SCOPE_SCHEMA,True)]:
+        with pytest.raises(b.BoundedG1BError) as err:b._g4_owner_bootstrap_descriptor(schema,scope=scope)
+        assert err.value.reason_code=="bounded_g4_request_booking_refinements_source_inert"
+    assert b.G4_REQUEST_BOOKING_TEMPLATE_INERT is False
+    assert b._g4_owner_bootstrap_descriptor(b.G4_REQUEST_BOOKING_SCHEMA) is b.G4_REQUEST_BOOKING_DESCRIPTOR
+    assert b._g4_owner_bootstrap_descriptor(b.G4_MODEL_REPLY_RENEWAL_SCHEMA) is b.G4_MODEL_REPLY_RENEWAL_DESCRIPTOR
+    d=_request_booking_refinements_descriptor(monkeypatch)
+    assert d is b.G4_REQUEST_BOOKING_REFINEMENTS_DESCRIPTOR
+    assert d["version"]==28 and d["root"]!=b.G4_REQUEST_BOOKING_ROOT
+    assert d["base"]=={"commit":"93d671f01a9d25edb6ef28ec4767c4efbae63c61","tree":"c9fecc813950f1d72a4ec699a7e54a7b5f26e8cb"}
+
+
+def test_request_booking_refinements_constants_preserve_old_scope():
+    b=bounded_g1b
+    assert b.G4_REQUEST_BOOKING_REFINEMENTS_TEMPLATE_INERT is False
+    assert b.G4_REQUEST_BOOKING_REFINEMENTS_ROOT==b.G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT/"bureau-request-booking-refinements-v2"
+    assert b.G4_REQUEST_BOOKING_REFINEMENTS_ROOT!=b.G4_REQUEST_BOOKING_ROOT
+    assert len(b.G4_REQUEST_BOOKING_REFINEMENTS_PRODUCT_PATHS)==9
+    assert len(b.G4_REQUEST_BOOKING_REFINEMENTS_APPLY_PATHS)==6
+    assert len(b.G4_REQUEST_BOOKING_REFINEMENTS_CONTROL)==3
+    assert b.G4_REQUEST_BOOKING_REFINEMENTS_APPLY_PATHS < b.G4_REQUEST_BOOKING_REFINEMENTS_PRODUCT_PATHS
+    assert b.G4_REQUEST_BOOKING_REFINEMENTS_PRODUCT_PATHS-b.G4_REQUEST_BOOKING_REFINEMENTS_APPLY_PATHS=={
+        "app/routers/appointments.py","app/schemas/appointments.py","app/schemas/patient_requests.py"}
+    assert b.G4_REQUEST_BOOKING_TEMPLATE_INERT is False
+    assert b._g4_owner_bootstrap_descriptor(b.G4_REQUEST_BOOKING_SCHEMA) is b.G4_REQUEST_BOOKING_DESCRIPTOR
+
+
+@pytest.mark.parametrize("stage",["enable","admit","apply"])
+def test_request_booking_refinements_exact_changed_subset(monkeypatch,stage):
+    b=bounded_g1b;d=_request_booking_refinements_descriptor(monkeypatch)
+    kind={"enable":"enable_g4_stage1_successor","admit":b.G4_OWNER_BOOTSTRAP_ADMIT_KIND,
+          "apply":"implement_g4_stage1_successor"}[stage]
+    paths=d["control"] if stage=="enable" else d["apply_paths"] if stage=="apply" else frozenset()
+    q={"schema_version":b.G4_REQUEST_BOOKING_REFINEMENTS_SCHEMA,"operation_kind":kind,"stage":stage,
+       "repair_sha256":dict.fromkeys(paths,{})}
+    assert b._g4_owner_bootstrap_paths(kind,q)==paths
+    assert len(paths)=={"enable":3,"admit":0,"apply":6}[stage]
+    q["repair_sha256"]["app/unowned.py"]={}
+    with pytest.raises(b.BoundedG1BError) as err:b._g4_owner_bootstrap_paths(kind,q)
+    assert err.value.reason_code=="bounded_g4_owner_bootstrap_changed_paths"
+
+
+@pytest.mark.parametrize("path",["app/routers/appointments.py","app/schemas/appointments.py","app/schemas/patient_requests.py"])
+def test_request_booking_refinements_unchanged_product_cannot_be_repair(monkeypatch,path):
+    b=bounded_g1b;d=_request_booking_refinements_descriptor(monkeypatch)
+    q={"schema_version":b.G4_REQUEST_BOOKING_REFINEMENTS_SCHEMA,"operation_kind":"implement_g4_stage1_successor",
+       "stage":"apply","repair_sha256":dict.fromkeys(d["apply_paths"]|{path},{})}
+    with pytest.raises(b.BoundedG1BError) as err:b._g4_owner_bootstrap_paths(q["operation_kind"],q)
+    assert err.value.reason_code=="bounded_g4_owner_bootstrap_changed_paths"
+
+
+@pytest.mark.parametrize("mutation",["missing_apply","extra_apply","missing_product","extra_product","wrong_control"])
+def test_request_booking_refinements_descriptor_boundary_refuses(monkeypatch,mutation):
+    b=bounded_g1b;d=_request_booking_refinements_descriptor(monkeypatch)
+    q={"schema_version":b.G4_REQUEST_BOOKING_REFINEMENTS_SCHEMA,"operation_kind":"implement_g4_stage1_successor",
+       "stage":"apply","repair_sha256":dict.fromkeys(b.G4_REQUEST_BOOKING_REFINEMENTS_APPLY_PATHS,{})}
+    # Establish this case's valid baseline before changing one descriptor field.
+    assert b._g4_owner_bootstrap_paths(q["operation_kind"],q)==b.G4_REQUEST_BOOKING_REFINEMENTS_APPLY_PATHS
+    if mutation=="missing_apply":monkeypatch.setitem(d,"apply_paths",d["apply_paths"]-{"scripts/reception_one_bureau_typed_plan_protocol.py"})
+    elif mutation=="extra_apply":monkeypatch.setitem(d,"apply_paths",d["apply_paths"]|{"app/routers/appointments.py"})
+    elif mutation=="missing_product":monkeypatch.setitem(d,"product_sha",{p:h for p,h in d["product_sha"].items() if p!="app/routers/appointments.py"})
+    elif mutation=="extra_product":monkeypatch.setitem(d,"product_sha",{**d["product_sha"],"app/unowned.py":"a"*64})
+    else:monkeypatch.setitem(d,"control",d["control"]|{b.OVERLAY})
+    with pytest.raises(b.BoundedG1BError) as err:b._g4_owner_bootstrap_paths(q["operation_kind"],q)
+    assert err.value.reason_code=="bounded_g4_request_booking_refinements_path_boundary"
+
+
+
+def test_request_booking_refinements_scope_same_nine_profile40_and_closures(monkeypatch):
+    b=bounded_g1b;d=_request_booking_refinements_descriptor(monkeypatch)
+    scope=json.loads((_REQUEST_BOOKING_REFINEMENTS_CANDIDATE/b.G4_STAGE1_SUCCESSOR_SCOPE).read_bytes())
+    assert b.validate_g4_owner_bootstrap_scope(scope)==scope["source_sha256"]
+    assert scope["schema_version"]==d["scope_schema"] and scope["selected_base"]==d["base"]
+    assert scope["predecessor_scope"]=={"sha256":"8d58d57ef078bf12a784718337badbc6d33102c0d850122559b89bfe8e692889"}
+    assert set(scope["control_sha256"])==d["control"]-{b.G4_STAGE1_SUCCESSOR_SCOPE}
+    assert len(scope["allowed_paths"])==9 and len(scope["product_sha256"])==9
+    assert len(raisa_policy.G4_STAGE1_SUCCESSOR_PRODUCT_PATHS)==40
+    assert tuple(raisa_policy.G4_STAGE1_SUCCESSOR_PRODUCT_PATHS)==_REQUEST_BOOKING_PREDECESSOR_PATHS+b.G4_REQUEST_BOOKING_PROFILE_APPEND
+    assert scope["runtime_binding_required"] is True and scope["admission_grants_runtime_authority"] is False
+    assert scope["voice_activation"] is False and "provider_invocation" in scope["excluded_effects"]
+    assert d["product_sha"]["app/routers/appointments.py"]=="2c7589b0b1508dbb16f084ed0f0234b24535698365fc8152dc447973af728497"
+    assert set(d["apply_paths"])=={p for p in d["product_sha"] if d["before_sha"][p]!=d["product_sha"][p]}
+    for field,value in [("allowed_paths",scope["allowed_paths"]+["app/unowned.py"]),
+                        ("voice_activation",True),("runtime_binding_required",False),
+                        ("admission_grants_runtime_authority",True)]:
+        changed=copy.deepcopy(scope);changed[field]=value
+        with pytest.raises(b.BoundedG1BError):b.validate_g4_owner_bootstrap_scope(changed)
+
+
+
+def test_request_booking_refinements_external_whole_nine_and_review(monkeypatch):
+    b=bounded_g1b;d=_request_booking_refinements_descriptor(monkeypatch)
+    q={"schema_version":b.G4_REQUEST_BOOKING_REFINEMENTS_SCHEMA,"product_vector":d["vector"],"mapping_review":d["mapping"]}
+    seen=[]
+    def read(path,digest):
+        raw=path.read_bytes();assert hashlib.sha256(raw).hexdigest()==digest;seen.append(path);return raw
+    vector,review=b._g4_owner_bootstrap_external_inputs(read,q)
+    assert len(seen)==11 and len(vector["product_rows"])==9
+    assert vector["counts"]=={"product":9,"changed":6,"unchanged":3}
+    assert review["authority"]["backend_source_only_accepted"] is True
+    assert review["authority"]["execution_authorized"] is False
+    assert review["reviewer_agent"] not in d["excluded_reviewers"]
+    for p in b.G4_REQUEST_BOOKING_REFINEMENTS_PRODUCT_PATHS-b.G4_REQUEST_BOOKING_REFINEMENTS_APPLY_PATHS:
+        assert Path(d["product_rows"][p]["path"]) in seen
+
+
+@pytest.mark.parametrize("selected",["vector","review"]+sorted([
+    "app/routers/appointments.py","app/schemas/appointments.py","app/schemas/patient_requests.py",
+    "app/services/reception_one_isolated_vertex_planner.py","app/services/reception_one_proposal_runtime.py",
+    "orchestration/continuity/reception-one-bureau-typed-plan-protocol/input-frame.schema.json",
+    "orchestration/continuity/reception-one-bureau-typed-plan-protocol/plan-draft.schema.json",
+    "scripts/reception_one_bureau_typed_plan_protocol.py","tests/test_reception_one_request_booking_bridge_contract.py"]))
+def test_request_booking_refinements_external_each_byte_substitution_refuses(monkeypatch,selected):
+    b=bounded_g1b;d=_request_booking_refinements_descriptor(monkeypatch)
+    row=b.G4_REQUEST_BOOKING_REFINEMENTS_VECTOR if selected=="vector" else b.G4_REQUEST_BOOKING_REFINEMENTS_REVIEW if selected=="review" else d["product_rows"][selected]
+    def read(path,digest):
+        raw=path.read_bytes();return raw+b" " if path==Path(row["path"]) else raw
+    with pytest.raises(b.BoundedG1BError) as err:b._g4_request_booking_refinements_external_inputs(
+        read,{"product_vector":d["vector"],"mapping_review":d["mapping"]})
+    assert err.value.reason_code=="bounded_g4_request_booking_refinements_external_source"
+
+
+def _request_booking_refinements_loader_gate(monkeypatch,tmp_path,stage,mutation=None,wrong_parent=False,old_activation_root=False):
+    # Exercise the actual loader up to its first payload read. All Git/activation
+    # facts below are explicit synthetic substitutions, not integrated evidence.
+    b=bounded_g1b;d=_request_booking_refinements_descriptor(monkeypatch)
+    inputs=b.CONFIGURATION_PATHS|{b.STATE,b.GATES,b.OVERLAY,b.AGENTS,b.G4_STAGE1_INTERACTIVE_SCOPE,
+        b.G4_STAGE1_SUCCESSOR_SCOPE,b.G4_STAGE1_SUCCESSOR_TEST,b.G4_CI_WORKFLOW}|b.SOURCE_PATHS|b.CONTROLLER_PATHS
+    if stage=='apply':inputs|=frozenset(d['product_sha'])
+    assert len(inputs)==(34 if stage=='apply' else 25)
+    payload=dict.fromkeys(inputs,'a'*64)
+    if mutation=='extras':payload['app/unowned.py']='a'*64
+    elif mutation=='missing':payload.pop(b.AGENTS)
+    elif mutation=='malformed':payload[b.AGENTS]='invalid'
+    target=tmp_path/'target';source=tmp_path/'source';scratch=tmp_path/'scratch'
+    base=d['base']['commit'] if stage=='enable' else 'b'*40
+    tree=d['base']['tree'] if stage=='enable' else 'c'*40
+    candidate=tree if stage=='admit' else 'd'*40
+    changes=d['control'] if stage=='enable' else d['apply_paths'] if stage=='apply' else {}
+    q={'schema_version':b.G4_REQUEST_BOOKING_REFINEMENTS_SCHEMA,'operation_id':'synthetic-request-booking-refinements',
+       'operation_kind':{'enable':'enable_g4_stage1_successor','admit':b.G4_OWNER_BOOTSTRAP_ADMIT_KIND,
+                         'apply':'implement_g4_stage1_successor'}[stage],
+       'stage':stage,'phase':'development','base_commit':base,'base_tree':tree,'expected_head':base,
+       'expected_index_tree':candidate,'candidate_tree':candidate,
+       'source_sha256':dict.fromkeys(b.SOURCE_PATHS|b.CONTROLLER_PATHS,'a'*64),
+       'payload_sha256':payload,'repair_sha256':dict.fromkeys(changes,{}),
+       'source_review':{'path':'unused-before-payload-gate','sha256':'a'*64},
+       'activation_acceptance':None,'product_vector':d['vector'],'mapping_review':d['mapping']}
+    activation=d['root']/'entry-admission-v1'/'independent-enable-push-effect-review-v1.json'
+    record={'schema':'emr4.g4_operation_review.v1','status':'PASS',
+        'verdict':'PASS_G4_STAGE1_OWNER_BOOTSTRAP_CONTROL_PUBLICATION_EFFECT',
+        'reviewer_agent':'/synthetic/independent-review-fixture','independent':True,
+        'implementation_authorship':False,'blocking_findings':[],'stage':'enable','phase':'push',
+        'base':d['base']['commit'],'commit':base,'candidate_tree':tree,'control_activation_accepted':True,
+        'same_attempt_remote_readback_verified':True,'protected_refs_unchanged':True,
+        'whole_inverse_verified_same_attempt':True,'published_ref':b.G4_STAGE1_INTERACTIVE_BACKEND_REF}
+    raw=b._canonical(record)
+    if stage!='enable':q['activation_acceptance']={'path':str(activation),'sha256':b._sha(raw)}
+    if old_activation_root:q['activation_acceptance']['path']=str(b.G4_REQUEST_BOOKING_ROOT/'entry-admission-v1'/activation.name)
+    before=Path('C:/Users/there/EMR4-tools/request-booking-product-apply01-source')/b.G4_STAGE1_SUCCESSOR_SCOPE
+    previous=before.read_bytes();assert b._sha(previous)==d['preimages'][b.G4_STAGE1_SUCCESSOR_SCOPE]
+    def git_bytes(actual,*args):
+        assert actual==target and args==('cat-file','blob',d['base']['commit']+':'+b.G4_STAGE1_SUCCESSOR_SCOPE)
+        return previous
+    def git(actual,*args):
+        assert actual==target
+        if args==('rev-parse',d['base']['commit']+'^{tree}'):return d['base']['tree']
+        assert args==('cat-file','commit',base)
+        parent='e'*40 if wrong_parent else d['base']['commit']
+        return 'tree '+tree+'\nparent '+parent+'\n\nsynthetic only'
+    def read(path,digest):
+        if path==activation:assert digest==b._sha(raw);return raw
+        assert path.is_relative_to(target) and path.relative_to(target).as_posix() in inputs
+        raise _CarrierRenewalPayloadAccepted()
+    monkeypatch.setattr(b,'_g4_owner_bootstrap_external_inputs',lambda read,q:({},{}))
+    monkeypatch.setattr(b.trusted_git,'run_git_bytes',git_bytes);monkeypatch.setattr(b.trusted_git,'run_git',git)
+    return b._load_g4_owner_bootstrap_inputs(None,target,source,b.G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT,
+        scratch,q,read,{})
+
+
+@pytest.mark.parametrize("stage",["enable","admit","apply"])
+def test_request_booking_refinements_loader_exact_payload_gate(monkeypatch,tmp_path,stage):
+    with pytest.raises(_CarrierRenewalPayloadAccepted):_request_booking_refinements_loader_gate(monkeypatch,tmp_path,stage)
+
+
+@pytest.mark.parametrize("mutation",["extras","missing","malformed"])
+def test_request_booking_refinements_loader_unowned_missing_and_malformed_payload_refusal(monkeypatch,tmp_path,mutation):
+    with pytest.raises(bounded_g1b.BoundedG1BError) as err:_request_booking_refinements_loader_gate(monkeypatch,tmp_path,"apply",mutation)
+    assert err.value.reason_code=="bounded_g4_owner_bootstrap_payload_paths"
+
+
+@pytest.mark.parametrize("case",["parent","activation_root"])
+def test_request_booking_refinements_prior_activation_and_wrong_parent_refusal(monkeypatch,tmp_path,case):
+    with pytest.raises(bounded_g1b.BoundedG1BError) as err:_request_booking_refinements_loader_gate(
+        monkeypatch,tmp_path,"apply",wrong_parent=case=="parent",old_activation_root=case=="activation_root")
+    assert err.value.reason_code==("bounded_g4_owner_bootstrap_activation_parent" if case=="parent"
+                                   else "bounded_g4_owner_bootstrap_activation_path")
