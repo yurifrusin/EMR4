@@ -1134,8 +1134,24 @@
           ],
           "properties": {
             "intended_action": {
-              "type": "string",
-              "pattern": "^candidate-[a-z0-9][a-z0-9-]{0,39}$"
+              "pattern": "^candidate-[a-z0-9][a-z0-9-]{0,39}$",
+              "type": "string"
+            },
+            "appointment_date": {
+              "pattern": "^candidate-[a-z0-9][a-z0-9-]{0,39}$",
+              "type": "string"
+            },
+            "earliest_time": {
+              "pattern": "^candidate-[a-z0-9][a-z0-9-]{0,39}$",
+              "type": "string"
+            },
+            "latest_time": {
+              "pattern": "^candidate-[a-z0-9][a-z0-9-]{0,39}$",
+              "type": "string"
+            },
+            "duration_minutes": {
+              "pattern": "^candidate-[a-z0-9][a-z0-9-]{0,39}$",
+              "type": "string"
             }
           }
         }
@@ -1157,14 +1173,15 @@
           "pattern": "^candidate-[a-z0-9][a-z0-9-]{0,39}$"
         },
         "field": {
-          "const": "intended_action"
-        },
-        "value": {
           "enum": [
-            "create",
-            "clarification"
+            "intended_action",
+            "appointment_date",
+            "earliest_time",
+            "latest_time",
+            "duration_minutes"
           ]
         },
+        "value": {},
         "evidence": {
           "$ref": "#/$defs/modelEvidence"
         },
@@ -1192,11 +1209,6 @@
               "value": {
                 "enum": [
                   "create",
-                  "move",
-                  "resize",
-                  "cancel",
-                  "status_change",
-                  "squeeze_in_assessment",
                   "clarification"
                 ]
               }
@@ -1306,6 +1318,9 @@
         },
         {
           "$ref": "#/$defs/stepBinding"
+        },
+        {
+          "$ref": "#/$defs/requestBookingSemanticBinding"
         }
       ]
     },
@@ -1357,7 +1372,7 @@
       ],
       "properties": {
         "contract_version": {
-          "const": "reception.one.bureau.plan-draft.model-first.request-booking.v1"
+          "const": "reception.one.bureau.plan-draft.model-first.request-booking.v2"
         },
         "catalog_version": {
           "enum": [
@@ -1422,7 +1437,7 @@
       ],
       "properties": {
         "packet_schema": {
-          "const": "emr4.bureau_model_semantic_packet.request-booking.v1"
+          "const": "emr4.bureau_model_semantic_packet.request-booking.v2"
         },
         "case_id": {
           "type": "string",
@@ -1455,6 +1470,27 @@
         },
         "untrusted_text": {
           "type": "string"
+        }
+      }
+    },
+    "requestBookingSemanticBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "field"
+      ],
+      "properties": {
+        "kind": {
+          "const": "semantic_ref"
+        },
+        "field": {
+          "enum": [
+            "appointment_date",
+            "earliest_time",
+            "latest_time",
+            "duration_minutes"
+          ]
         }
       }
     }

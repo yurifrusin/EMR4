@@ -571,7 +571,7 @@ def compile_received_model_reply(
             or frame_observed_at.tzinfo is None or received_at.tzinfo is None):
         raise IsolatedVertexPlannerError("isolated_model_reply_boundary_invalid")
     snapshot = copy.deepcopy(frame)
-    if (snapshot.get("contract_version") == "reception.one.bureau.plan-input.request-booking.v1"
+    if (snapshot.get("contract_version") == "reception.one.bureau.plan-input.request-booking.v2"
             and not 1 <= len(raw_response) <= 32768):
         raise IsolatedVertexPlannerError("isolated_model_reply_boundary_invalid")
     _validate_frame(snapshot, frame_observed_at)

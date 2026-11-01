@@ -943,7 +943,9 @@ def build_request_booking_frame(*, instruction, reference_date, correlation_id,
     """Assemble one final request frame from an already authorised DB capture.
 
     The router owns the full-duration/preference/availability intersection.
-    This function does not scan instruction text for identity or call a model.
+    The v2 frame permits model refinements only inside that captured set; it
+    does not scan instruction text for identity or call a model. Optional
+    evidence fields cannot prove that the model noticed every stated detail.
     """
     from scripts import reception_one_bureau_typed_plan_protocol as protocol
     if (type(instruction) is not str or not 1 <= len(instruction.strip()) <= 512
@@ -1021,15 +1023,19 @@ def request_booking_envelope(*, frame, source, planner_result, now):
         raise ReceptionOneRuntimeError("request_booking_model_join_invalid")
     final = execution["final_output"]
     selected = frame["context"]["selected_request"]
-    if normalized["goal"] == "clarification":
-        if final["proposal_family"] != "clarification" or final["write_performed"] is not False:
+    intent = protocol.validated_model_intent(frame, normalized)
+    eligible = protocol.request_booking_candidate_slots(frame, intent.normalized_values)
+    if normalized["goal"] == "clarification" or not eligible:
+        # A valid create interpretation with no matching captured option has a
+        # derived clarification disposition. Never rewrite its goal/evidence.
+        if final != protocol.request_booking_clarification(frame, intent):
             raise ReceptionOneRuntimeError("request_booking_clarification_invalid")
         return final
     if (final["proposal_family"] != "create" or final["api_spine_operation_id"] != "proposeAppointmentCreate"
             or final["patient_ref"] != selected["patient_ref"] or final["practitioner_ref"] != selected["practitioner_ref"]
             or type(final["duration_minutes"]) is not int or final["duration_minutes"] != selected["duration_minutes"]
             or final["write_performed"] is not False or final["requires_human_confirmation"] is not True
-            or not final["candidate_slot_ids"]
+            or final["candidate_slot_ids"] != [slot["id"] for slot in eligible]
             or not set(final["candidate_slot_ids"]).issubset(dict(source.slot_items))):
         raise ReceptionOneRuntimeError("request_booking_proposal_invalid")
     return final

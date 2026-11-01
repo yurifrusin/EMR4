@@ -488,7 +488,7 @@
       ],
       "properties": {
         "contract_version": {
-          "const": "reception.one.bureau.plan-input.request-booking.v1"
+          "const": "reception.one.bureau.plan-input.request-booking.v2"
         },
         "request_id": {
           "$ref": "#/$defs/syntheticRef"
