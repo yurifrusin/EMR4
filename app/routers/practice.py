@@ -1,9 +1,11 @@
-from fastapi import APIRouter, Depends, Query
+from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
+
+from fastapi import APIRouter, Depends, HTTPException, Query, Request, Response
 from sqlalchemy.orm import Session
 
 from app.dependencies import get_current_user, get_db
-from app.models.tenancy import User
-from app.schemas.practice import PractitionerOut
+from app.models.tenancy import Practice, User
+from app.schemas.practice import PracticeContextOut, PractitionerOut
 from app.services.practice.practitioner_directory_read import (
     list_practitioner_directory,
 )
@@ -26,3 +28,24 @@ def get_practitioners(
         limit=limit,
         offset=offset,
     )
+
+@router.get("/context", response_model=PracticeContextOut)
+def get_practice_context(
+    request: Request,
+    response: Response,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    response.headers["Cache-Control"] = "no-store"
+    if request.url.query:
+        raise HTTPException(status_code=400, detail="Practice context unavailable", headers={"Cache-Control": "no-store"})
+    row = db.query(Practice.id, Practice.timezone).filter(
+        Practice.id == current_user.practice_id
+    ).one_or_none()
+    if row is None or type(row.timezone) is not str or not row.timezone or row.timezone != row.timezone.strip():
+        raise HTTPException(status_code=503, detail="Practice context unavailable", headers={"Cache-Control": "no-store"})
+    try:
+        ZoneInfo(row.timezone)
+    except (ZoneInfoNotFoundError, ValueError):
+        raise HTTPException(status_code=503, detail="Practice context unavailable", headers={"Cache-Control": "no-store"}) from None
+    return PracticeContextOut(practice_id=row.id, timezone=row.timezone)

@@ -15,3 +15,7 @@ class PractitionerOut(BaseModel):
     roleLabel: Optional[str] = None
     active: bool
     defaultLocation: Optional[PractitionerDefaultLocationOut] = None
+
+class PracticeContextOut(BaseModel):
+    practice_id: uuid.UUID
+    timezone: str
