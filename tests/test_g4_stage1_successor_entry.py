@@ -6740,3 +6740,305 @@ def test_patient_creation_policy_bytes_have_no_transition_exception(monkeypatch,
     _patient_creation_full_apply_fixture(monkeypatch,tmp_path)
     with pytest.raises(bounded_g1b.BoundedG1BError) as err:_patient_creation_full_apply_fixture(monkeypatch,tmp_path,policy_mutation=path)
     assert err.value.reason_code=="bounded_g4_owner_bootstrap_state_unchanged"
+
+
+# A0 successor tests are SOURCE ONLY until separately admitted finite execution.
+# Synthetic Git/review/index facts below exercise the shared loader ownership
+# boundary; they are never actual Git, activation, publication or endpoint proof.
+_PRACTICE_READ_CONTEXT_CANDIDATE = Path("C:/Users/there/EMR4-tools/new-practice-read-context-source-preparation-v1/admission-successor-v1/after")
+_PRACTICE_READ_CONTEXT_PREDECESSOR = Path("C:/Users/there/EMR4-tools/patient-creation-product-apply01-source")
+
+
+def _practice_read_context_descriptor(monkeypatch):
+    monkeypatch.setattr(bounded_g1b,"G4_PRACTICE_READ_CONTEXT_TEMPLATE_INERT",False)
+    return bounded_g1b._g4_owner_bootstrap_descriptor(bounded_g1b.G4_PRACTICE_READ_CONTEXT_SCHEMA)
+
+
+def test_practice_read_context_cold_registry_preserves_prior_families(monkeypatch):
+    b=bounded_g1b
+    assert b.G4_PRACTICE_READ_CONTEXT_TEMPLATE_INERT is True
+    def forbidden_read(*args):raise AssertionError("inert source must refuse before external reads")
+    for schema,scope in [(b.G4_PRACTICE_READ_CONTEXT_SCHEMA,False),(b.G4_PRACTICE_READ_CONTEXT_SCOPE_SCHEMA,True)]:
+        with pytest.raises(b.BoundedG1BError) as err:b._g4_owner_bootstrap_descriptor(schema,scope=scope)
+        assert err.value.reason_code=="bounded_g4_practice_read_context_source_inert"
+    with pytest.raises(b.BoundedG1BError) as err:b._g4_owner_bootstrap_external_inputs(
+        forbidden_read,{"schema_version":b.G4_PRACTICE_READ_CONTEXT_SCHEMA})
+    assert err.value.reason_code=="bounded_g4_practice_read_context_source_inert"
+    for schema,descriptor in [(b.G4_PATIENT_CREATION_SCHEMA,b.G4_PATIENT_CREATION_DESCRIPTOR),
+                              (b.G4_REQUEST_BOOKING_REFINEMENTS_SCHEMA,b.G4_REQUEST_BOOKING_REFINEMENTS_DESCRIPTOR),
+                              (b.G4_REQUEST_BOOKING_SCHEMA,b.G4_REQUEST_BOOKING_DESCRIPTOR)]:
+        assert b._g4_owner_bootstrap_descriptor(schema) is descriptor
+    assert b.G4_PATIENT_CREATION_TEMPLATE_INERT is False
+    assert b.G4_PATIENT_CREATION_VECTOR["sha256"]=="697851b1f4ebf2963c3bc8b30e434c8d1918ec2d62a5bc9c0cb0cea8ebb21918"
+    d=_practice_read_context_descriptor(monkeypatch)
+    assert d["version"]==30 and b._g4_owner_bootstrap_descriptor(b.G4_PRACTICE_READ_CONTEXT_SCOPE_SCHEMA,scope=True) is d
+    assert d["base"]=={"commit":"867fd227387e2fd9369baa9be67f6b926e0029d4","tree":"d79f77afafcb79b4b36189c6432db175ddc4bdc6"}
+    assert d["root"]==b.G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT/"new-practice-read-context-v1"
+
+
+@pytest.mark.parametrize("stage",["enable","admit","apply"])
+def test_practice_read_context_three_zero_two_owned_four_selected(monkeypatch,stage):
+    b=bounded_g1b;d=_practice_read_context_descriptor(monkeypatch)
+    kind={"enable":"enable_g4_stage1_successor","admit":b.G4_OWNER_BOOTSTRAP_ADMIT_KIND,"apply":"implement_g4_stage1_successor"}[stage]
+    paths=d["control"] if stage=="enable" else d["apply_paths"] if stage=="apply" else frozenset()
+    q={"schema_version":b.G4_PRACTICE_READ_CONTEXT_SCHEMA,"operation_kind":kind,"stage":stage,"repair_sha256":dict.fromkeys(paths,{})}
+    assert b._g4_owner_bootstrap_paths(kind,q)==paths and len(paths)=={"enable":3,"admit":0,"apply":2}[stage]
+    assert len(d["product_sha"])==4 and d["apply_paths"]=={"app/routers/practice.py","app/schemas/practice.py"}
+    assert set(d["product_sha"])-d["apply_paths"]==b.G4_PRACTICE_READ_CONTEXT_UNCHANGED_PATHS
+    q["repair_sha256"]["app/services/practice/practitioner_directory_read.py"]={}
+    with pytest.raises(b.BoundedG1BError) as err:b._g4_owner_bootstrap_paths(kind,q)
+    assert err.value.reason_code=="bounded_g4_owner_bootstrap_changed_paths"
+
+
+@pytest.mark.parametrize("mutation",["missing_product","extra_product","wrong_control","wrong_row","wrong_size","null_before","wrong_before","widen_apply","wrong_base"])
+def test_practice_read_context_descriptor_rejects_changed_boundary(monkeypatch,mutation):
+    b=bounded_g1b;d=_practice_read_context_descriptor(monkeypatch);path="app/routers/practice.py"
+    q={"schema_version":b.G4_PRACTICE_READ_CONTEXT_SCHEMA,"operation_kind":"implement_g4_stage1_successor","stage":"apply","repair_sha256":dict.fromkeys(d["apply_paths"],{})}
+    assert b._g4_owner_bootstrap_paths(q["operation_kind"],q)==d["apply_paths"]
+    if mutation=="missing_product":monkeypatch.setitem(d,"product_sha",{p:h for p,h in d["product_sha"].items() if p!=path})
+    elif mutation=="extra_product":monkeypatch.setitem(d,"product_sha",{**d["product_sha"],"app/unowned.py":"a"*64})
+    elif mutation=="wrong_control":monkeypatch.setitem(d,"control",d["control"]|{b.OVERLAY})
+    elif mutation=="wrong_row":monkeypatch.setitem(d,"product_rows",{**d["product_rows"],path:{}})
+    elif mutation=="wrong_size":monkeypatch.setitem(d,"product_bytes",{**d["product_bytes"],path:1})
+    elif mutation in {"null_before","wrong_before"}:monkeypatch.setitem(d,"before_sha",{**d["before_sha"],path:None if mutation=="null_before" else "a"*64})
+    elif mutation=="widen_apply":monkeypatch.setitem(d,"apply_paths",d["apply_paths"]|b.G4_PRACTICE_READ_CONTEXT_UNCHANGED_PATHS)
+    else:monkeypatch.setitem(d,"base",{**d["base"],"commit":"a"*40})
+    with pytest.raises(b.BoundedG1BError) as err:b._g4_owner_bootstrap_paths(q["operation_kind"],q)
+    assert err.value.reason_code=="bounded_g4_practice_read_context_path_boundary"
+
+
+def test_practice_read_context_scope_selects_four_without_runtime_or_profile_widening(monkeypatch):
+    b=bounded_g1b;d=_practice_read_context_descriptor(monkeypatch)
+    scope=json.loads((_PRACTICE_READ_CONTEXT_CANDIDATE/b.G4_STAGE1_SUCCESSOR_SCOPE).read_bytes())
+    assert b.validate_g4_owner_bootstrap_scope(scope)==scope["source_sha256"]
+    assert scope["allowed_paths"]==sorted(d["product_sha"]) and len(scope["allowed_paths"])==4
+    assert len(scope["source_sha256"])==8 and len(raisa_policy.G4_STAGE1_SUCCESSOR_PRODUCT_PATHS)==40
+    assert tuple(raisa_policy.G4_STAGE1_SUCCESSOR_PRODUCT_PATHS)==_REQUEST_BOOKING_PREDECESSOR_PATHS+b.G4_REQUEST_BOOKING_PROFILE_APPEND
+    assert scope["predecessor_scope"]=={"sha256":"870fb41e04659e827b9769f2bc553f114328c25cc74d8572b7e9b8529bc4cfb0"}
+    assert scope["runtime_binding_required"] is True and scope["admission_grants_runtime_authority"] is False and scope["voice_activation"] is False
+    for field,value in [("allowed_paths",sorted(d["apply_paths"])),("voice_activation",True),
+                        ("runtime_binding_required",False),("admission_grants_runtime_authority",True)]:
+        changed=copy.deepcopy(scope);changed[field]=value
+        with pytest.raises(b.BoundedG1BError) as err:b.validate_g4_owner_bootstrap_scope(changed)
+        assert err.value.reason_code=="bounded_g4_owner_bootstrap_scope_boundary"
+
+
+def _practice_read_context_external_read(path,digest):
+    raw=path.read_bytes();assert hashlib.sha256(raw).hexdigest()==digest;return raw
+
+
+def test_practice_read_context_genuine_mapping_four_existing_two_modify(monkeypatch):
+    b=bounded_g1b;d=_practice_read_context_descriptor(monkeypatch);seen=[]
+    def read(path,digest):seen.append(path);return _practice_read_context_external_read(path,digest)
+    vector,review=b._g4_owner_bootstrap_external_inputs(read,{"schema_version":b.G4_PRACTICE_READ_CONTEXT_SCHEMA,"product_vector":d["vector"],"mapping_review":d["mapping"]})
+    assert vector==b.G4_PRACTICE_READ_CONTEXT_EXPECTED_VECTOR and review==b.G4_PRACTICE_READ_CONTEXT_EXPECTED_REVIEW
+    assert len(seen)==7 and len(set(seen))==7
+    assert sum(row["changed"] for row in vector["product_rows"])==2
+    assert all(type(row["before"]) is dict and len(row["before"]["git_blob"])==40 for row in vector["product_rows"])
+    assert [row["operation"] for row in vector["product_rows"]]==["MODIFY","MODIFY","UNCHANGED","UNCHANGED"]
+    assert review["authority"]["source_mapping_accepted"] is True and review["authority"]["execution_authorized"] is False
+
+
+@pytest.mark.parametrize("selected",["vector","review","derivation","app/routers/practice.py","app/schemas/practice.py",
+                                      "app/services/practice/__init__.py","app/services/practice/practitioner_directory_read.py"])
+def test_practice_read_context_each_external_byte_tamper_refuses(monkeypatch,selected):
+    b=bounded_g1b;d=_practice_read_context_descriptor(monkeypatch)
+    q={"product_vector":d["vector"],"mapping_review":d["mapping"]}
+    assert b._g4_practice_read_context_external_inputs(_practice_read_context_external_read,q)[0]==b.G4_PRACTICE_READ_CONTEXT_EXPECTED_VECTOR
+    row=(b.G4_PRACTICE_READ_CONTEXT_VECTOR if selected=="vector" else b.G4_PRACTICE_READ_CONTEXT_REVIEW if selected=="review"
+         else b.G4_PRACTICE_READ_CONTEXT_DERIVATION if selected=="derivation" else d["product_rows"][selected])
+    def read(path,digest):
+        raw=path.read_bytes();return raw+b" " if path==Path(row["path"]) else raw
+    with pytest.raises(b.BoundedG1BError) as err:b._g4_practice_read_context_external_inputs(read,q)
+    assert err.value.reason_code=="bounded_g4_practice_read_context_external_source"
+
+
+@pytest.mark.parametrize("mutation",["author_reviewer","not_independent","authorship","findings","subject_base","subject_rows",
+                                      "runtime_authority","product_acceptance","mapping_missing","dependency_missing"])
+def test_practice_read_context_review_semantics_are_required_beyond_hash(monkeypatch,mutation):
+    b=bounded_g1b;d=_practice_read_context_descriptor(monkeypatch)
+    review=copy.deepcopy(b.G4_PRACTICE_READ_CONTEXT_EXPECTED_REVIEW)
+    if mutation=="author_reviewer":review["reviewer_agent"]="/root/joined_binding_constructor"
+    elif mutation=="not_independent":review["independent"]=False
+    elif mutation=="authorship":review["implementation_authorship"]=True
+    elif mutation=="findings":review["blocking_findings"]=["synthetic finding"]
+    elif mutation=="subject_base":review["reviewed_subject"]["base_commit"]="a"*40
+    elif mutation=="subject_rows":review["reviewed_subject"]["product_rows"]=review["reviewed_subject"]["product_rows"][:2]
+    elif mutation=="runtime_authority":review["authority"]["execution_authorized"]=True
+    elif mutation=="product_acceptance":review["authority"]["product_accepted"]=True
+    elif mutation=="mapping_missing":review["mechanical_mapping"]["all_four_existing_preimages_bound"]=False
+    else:review["mechanical_mapping"]["unchanged_selected_dependencies_preserved"]=False
+    raw=b._canonical(review);row={**b.G4_PRACTICE_READ_CONTEXT_REVIEW,"bytes":len(raw),"sha256":b._sha(raw)}
+    monkeypatch.setattr(b,"G4_PRACTICE_READ_CONTEXT_EXPECTED_REVIEW",review)
+    monkeypatch.setattr(b,"G4_PRACTICE_READ_CONTEXT_REVIEW",row)
+    monkeypatch.setitem(d,"mapping",{k:row[k] for k in ("path","sha256")})
+    def read(path,digest):
+        if path==Path(row["path"]):assert digest==row["sha256"];return raw
+        return _practice_read_context_external_read(path,digest)
+    with pytest.raises(b.BoundedG1BError) as err:b._g4_practice_read_context_external_inputs(read,{"product_vector":d["vector"],"mapping_review":d["mapping"]})
+    assert err.value.reason_code=="bounded_g4_practice_read_context_independent_source"
+
+
+def test_practice_read_context_unknown_family_and_subject_binding():
+    b=bounded_g1b;q={key:None for key in b.G4_OWNER_BOOTSTRAP_BINDING_KEYS}
+    q.update(schema_version=b.G4_PRACTICE_READ_CONTEXT_SCHEMA+"-unknown",operation_kind="implement_g4_stage1_successor",stage="apply",repair_sha256={})
+    assert b._routes_g4_owner_bootstrap_binding(q) is True and b._is_g4_owner_bootstrap_binding(q) is False
+    with pytest.raises(b.BoundedG1BError) as err:b._g4_owner_bootstrap_paths(q["operation_kind"],q)
+    assert err.value.reason_code=="bounded_g4_owner_bootstrap_binding_kind"
+    q["schema_version"]=b.G4_PRACTICE_READ_CONTEXT_SCHEMA;subject=b.g4_owner_bootstrap_review_subject(q)
+    q["source_review"]={"path":"synthetic-only","sha256":"a"*64}
+    assert b.g4_owner_bootstrap_review_subject(q)==subject and len(q)==17
+    q["product_vector"]={"path":"different","sha256":"b"*64}
+    assert b.g4_owner_bootstrap_review_subject(q)!=subject
+
+
+def _practice_read_context_synthetic_loader(monkeypatch,tmp_path,stage="apply",mutation=None):
+    # Real loader, exact owned control/source afterimages, reconstructed before
+    # products and synthetic inherited payload/Git facts. Configuration policy,
+    # a real repository/index and actual activation/publication are not tested.
+    b=bounded_g1b;d=_practice_read_context_descriptor(monkeypatch)
+    inherited=b.CONFIGURATION_PATHS|{b.STATE,b.GATES,b.OVERLAY,b.AGENTS,b.G4_STAGE1_INTERACTIVE_SCOPE,
+        b.G4_STAGE1_SUCCESSOR_SCOPE,b.G4_STAGE1_SUCCESSOR_TEST,b.G4_CI_WORKFLOW}|b.SOURCE_PATHS|b.CONTROLLER_PATHS
+    assert len(inherited)==25
+    payloads={p:("synthetic inherited payload "+p).encode() for p in inherited}
+    for p in d["control"]:payloads[p]=(_PRACTICE_READ_CONTEXT_CANDIDATE/p).read_bytes()
+    original_policy={p:payloads[p] for p in (b.STATE,b.GATES,b.OVERLAY,b.AGENTS)}
+    scope=json.loads(payloads[b.G4_STAGE1_SUCCESSOR_SCOPE])
+    scope["source_sha256"]={p:b._sha(payloads[p]) for p in b.SOURCE_PATHS|b.CONTROLLER_PATHS}
+    payloads[b.G4_STAGE1_SUCCESSOR_SCOPE]=b._canonical(scope)+b"\n"
+    after={p:Path(row["path"]).read_bytes() for p,row in d["product_rows"].items()}
+    before=dict(after);derivation=json.loads(Path(b.G4_PRACTICE_READ_CONTEXT_DERIVATION["path"]).read_bytes())["derivation"]
+    raw=after["app/routers/practice.py"].decode();tail=derivation["router_appended"]
+    assert raw.endswith(tail);raw=raw[:-len(tail)]
+    for edit in reversed(derivation["router_replacements"]):
+        assert raw.count(edit["after"])==1;raw=raw.replace(edit["after"],edit["before"],1)
+    before["app/routers/practice.py"]=raw.encode()
+    raw=after["app/schemas/practice.py"].decode();tail=derivation["schema_appended"]
+    assert raw.endswith(tail);before["app/schemas/practice.py"]=raw[:-len(tail)].encode()
+    assert all(b._sha(before[p])==d["before_sha"][p] for p in d["product_sha"])
+    if stage=="apply":payloads.update(after)
+    if mutation in {"state","gates","overlay","agents"}:
+        selected={"state":b.STATE,"gates":b.GATES,"overlay":b.OVERLAY,"agents":b.AGENTS}[mutation];payloads[selected]+=b" "
+    if mutation=="dependency_drift":payloads["app/services/practice/practitioner_directory_read.py"]+=b" "
+    pins={p:b._sha(raw) for p,raw in payloads.items()}
+    if mutation=="payload_missing":pins.pop(b.AGENTS)
+    elif mutation=="payload_extra":pins["app/unowned.py"]="a"*64
+    elif mutation=="payload_malformed":pins[b.GATES]="invalid"
+    target=tmp_path/"target";source=tmp_path/"source"
+    base=d["base"]["commit"] if stage=="enable" else "b"*40
+    tree=d["base"]["tree"] if stage=="enable" else "c"*40
+    candidate=tree if stage=="admit" else "d"*40
+    paths=d["control"] if stage=="enable" else d["apply_paths"] if stage=="apply" else frozenset()
+    q={"schema_version":b.G4_PRACTICE_READ_CONTEXT_SCHEMA,"operation_id":"synthetic-practice-context-"+stage,
+       "operation_kind":{"enable":"enable_g4_stage1_successor","admit":b.G4_OWNER_BOOTSTRAP_ADMIT_KIND,"apply":"implement_g4_stage1_successor"}[stage],
+       "stage":stage,"phase":"development","base_commit":base,"base_tree":tree,"expected_head":base,
+       "expected_index_tree":candidate,"candidate_tree":candidate,"source_sha256":scope["source_sha256"],
+       "payload_sha256":pins,"repair_sha256":{p:{"before_sha256":d["preimages"][p] if stage=="enable" else d["before_sha"][p],
+       "after_sha256":pins[p]} for p in paths},"source_review":{"path":"synthetic-only","sha256":"a"*64},
+       "activation_acceptance":None,"product_vector":d["vector"],"mapping_review":d["mapping"]}
+    if mutation=="null_pair":q["repair_sha256"]["app/routers/practice.py"]["before_sha256"]=None
+    if mutation=="admit_delta":q["candidate_tree"]="d"*40
+    activation=d["root"]/"entry-admission-v1/independent-enable-push-effect-review-v1.json"
+    record={"schema":"emr4.g4_operation_review.v1","status":"PASS","verdict":"PASS_G4_STAGE1_OWNER_BOOTSTRAP_CONTROL_PUBLICATION_EFFECT",
+        "reviewer_agent":"/synthetic/independent-review-fixture","independent":True,"implementation_authorship":False,"blocking_findings":[],
+        "stage":"enable","phase":"push","base":d["base"]["commit"],"commit":base,"candidate_tree":tree,
+        "control_activation_accepted":True,"same_attempt_remote_readback_verified":True,"protected_refs_unchanged":True,
+        "whole_inverse_verified_same_attempt":True,"published_ref":b.G4_STAGE1_INTERACTIVE_BACKEND_REF}
+    activation_raw=b._canonical(record)
+    if stage!="enable":q["activation_acceptance"]={"path":activation.as_posix(),"sha256":b._sha(activation_raw)}
+    if mutation=="old_activation_root":q["activation_acceptance"]["path"]=(b.G4_PATIENT_CREATION_ROOT/"entry-admission-v1"/activation.name).as_posix()
+    previous=(_PRACTICE_READ_CONTEXT_PREDECESSOR/b.G4_STAGE1_SUCCESSOR_SCOPE).read_bytes()
+    assert b._sha(previous)==d["preimages"][b.G4_STAGE1_SUCCESSOR_SCOPE]
+    def read(path,digest):
+        if path==activation:raw=activation_raw
+        elif path.is_relative_to(target):raw=payloads[path.relative_to(target).as_posix()]
+        elif path.is_relative_to(source):raw=payloads[path.relative_to(source).as_posix()]
+        else:
+            matches=[p for p,row in d["product_rows"].items() if Path(row["path"])==path]
+            assert len(matches)==1;raw=after[matches[0]]
+        assert b._sha(raw)==digest;return raw
+    def git_bytes(actual,*args):
+        assert actual==target
+        if args==("cat-file","blob",d["base"]["commit"]+":"+b.G4_STAGE1_SUCCESSOR_SCOPE):return previous
+        if args[:2]==("ls-tree","-z"):
+            assert len(args)==5 and args[2]==base and args[3]=="--" and args[4] in paths
+            return b"" if mutation=="committed_missing" else b"100644 blob synthetic\x00"
+        assert args[:2]==("cat-file","blob") and len(args)==3
+        commit,path=args[2].split(":",1)
+        if commit==base:
+            if path in before:return before[path]+(b" " if mutation=="wrong_committed_before" and path=="app/routers/practice.py" else b"")
+            return payloads[path]
+        assert commit==d["base"]["commit"] and path in original_policy;return original_policy[path]
+    def git(actual,*args):
+        assert actual==target
+        if args==("rev-parse",d["base"]["commit"]+"^{tree}"):return d["base"]["tree"]
+        assert args==("cat-file","commit",base)
+        return "tree "+tree+"\nparent "+("e"*40 if mutation=="wrong_parent" else d["base"]["commit"])+"\n\nsynthetic only"
+    monkeypatch.setattr(b,"_g4_owner_bootstrap_external_inputs",lambda read,q:({},{}))
+    monkeypatch.setattr(b,"_g4_owner_bootstrap_subject_review",lambda *args:{"synthetic":True})
+    monkeypatch.setattr(b.trusted_git,"run_git_bytes",git_bytes);monkeypatch.setattr(b.trusted_git,"run_git",git)
+    monkeypatch.setattr(b.trusted_git,"attest_target_index",lambda *args,**kwargs:{"synthetic":True})
+    if stage=="enable":
+        # Stop before control-preimage checks: this fixture's seven inherited
+        # source bytes are synthetic, so it cannot prove a genuine ENABLE.
+        class PayloadGateReached(Exception):pass
+        original_read=read
+        def read(path,digest):
+            if path.is_relative_to(target):raise PayloadGateReached()
+            return original_read(path,digest)
+        with pytest.raises(PayloadGateReached):
+            b._load_g4_owner_bootstrap_inputs(None,target,source,b.G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT,tmp_path/"scratch",q,read,{})
+        return None
+    return b._load_g4_owner_bootstrap_inputs(None,target,source,b.G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT,tmp_path/"scratch",q,read,{})
+
+
+@pytest.mark.parametrize("stage",["enable","admit","apply"])
+def test_practice_read_context_loader25_or29_and_zero_delta_baselines(monkeypatch,tmp_path,stage):
+    loaded=_practice_read_context_synthetic_loader(monkeypatch,tmp_path,stage)
+    if stage!="enable":
+        assert len(loaded.payloads)==(29 if stage=="apply" else 25)
+        assert len(loaded.binding["repair_sha256"])==(2 if stage=="apply" else 0)
+
+
+@pytest.mark.parametrize("mutation,reason",[
+    ("payload_missing","bounded_g4_owner_bootstrap_payload_paths"),
+    ("payload_extra","bounded_g4_owner_bootstrap_payload_paths"),
+    ("payload_malformed","bounded_g4_owner_bootstrap_payload_paths"),
+    ("null_pair","bounded_g4_owner_bootstrap_change_preimage"),
+    ("committed_missing","bounded_g4_owner_bootstrap_change_preimage"),
+    ("wrong_committed_before","bounded_g4_owner_bootstrap_change_preimage"),
+    ("dependency_drift","bounded_g4_practice_read_context_selected_payload"),
+    ("old_activation_root","bounded_g4_owner_bootstrap_activation_path"),
+    ("wrong_parent","bounded_g4_owner_bootstrap_activation_parent"),
+    ("state","bounded_g4_owner_bootstrap_state_unchanged"),
+    ("gates","bounded_g4_owner_bootstrap_state_unchanged"),
+    ("overlay","bounded_g4_owner_bootstrap_state_unchanged"),
+    ("agents","bounded_g4_owner_bootstrap_state_unchanged")])
+def test_practice_read_context_loader_refuses_boundary_drift(monkeypatch,tmp_path,mutation,reason):
+    assert len(_practice_read_context_synthetic_loader(monkeypatch,tmp_path).binding["repair_sha256"])==2
+    with pytest.raises(bounded_g1b.BoundedG1BError) as err:_practice_read_context_synthetic_loader(monkeypatch,tmp_path,mutation=mutation)
+    assert err.value.reason_code==reason
+
+
+def test_practice_read_context_admit_refuses_nonzero_candidate(monkeypatch,tmp_path):
+    assert _practice_read_context_synthetic_loader(monkeypatch,tmp_path,"admit").binding["repair_sha256"]=={}
+    with pytest.raises(bounded_g1b.BoundedG1BError) as err:_practice_read_context_synthetic_loader(monkeypatch,tmp_path,"admit","admit_delta")
+    assert err.value.reason_code=="bounded_g4_owner_bootstrap_admit_no_delta"
+
+
+# Operative A0 registration baseline only. Keep the cold appendix above unchanged;
+# a separately reviewed finite extraction selects only this new method.
+def test_practice_read_context_operative_registration_and_scope_baseline():
+    b=bounded_g1b
+    assert b.G4_PRACTICE_READ_CONTEXT_TEMPLATE_INERT is False
+    descriptor=b._g4_owner_bootstrap_descriptor(b.G4_PRACTICE_READ_CONTEXT_SCHEMA)
+    assert descriptor is b.G4_PRACTICE_READ_CONTEXT_DESCRIPTOR
+    assert b._g4_owner_bootstrap_descriptor(b.G4_PRACTICE_READ_CONTEXT_SCOPE_SCHEMA,scope=True) is descriptor
+    candidate=Path("C:/Users/there/EMR4-tools/new-practice-read-context-source-preparation-v1/operative-candidate-v1/after")
+    raw=(candidate/b.G4_STAGE1_SUCCESSOR_SCOPE).read_bytes()
+    scope=json.loads(raw)
+    assert b.validate_g4_owner_bootstrap_scope(scope)==scope["source_sha256"]
+    assert raw==b._canonical(scope)+b"\n"
+    for path in ("orchestration_harness/bounded_g1b.py",b.G4_STAGE1_SUCCESSOR_TEST):
+        assert scope["control_sha256"][path]==hashlib.sha256((candidate/path).read_bytes()).hexdigest()
+    assert scope["source_sha256"]["orchestration_harness/bounded_g1b.py"]==scope["control_sha256"]["orchestration_harness/bounded_g1b.py"]

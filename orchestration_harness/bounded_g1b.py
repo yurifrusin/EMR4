@@ -16286,6 +16286,9 @@ G4_POINT_MOVE_FIVE_ROOT = G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT / "bureau-point-move
 
 
 def _g4_owner_bootstrap_descriptor(schema, *, scope=False):
+    if schema == (G4_PRACTICE_READ_CONTEXT_SCOPE_SCHEMA if scope else G4_PRACTICE_READ_CONTEXT_SCHEMA):
+        _need(not G4_PRACTICE_READ_CONTEXT_TEMPLATE_INERT, "bounded_g4_practice_read_context_source_inert")
+        return G4_PRACTICE_READ_CONTEXT_DESCRIPTOR
     if schema == (G4_PATIENT_CREATION_SCOPE_SCHEMA if scope else G4_PATIENT_CREATION_SCHEMA):
         _need(not G4_PATIENT_CREATION_TEMPLATE_INERT, "bounded_g4_patient_creation_source_inert")
         return G4_PATIENT_CREATION_DESCRIPTOR
@@ -16395,7 +16398,7 @@ def _g4_owner_staff_invitation_external_inputs(read, q):
 
 
 def _is_g4_owner_bootstrap_binding(binding):
-    return type(binding) is dict and binding.get("schema_version") in (G4_OWNER_BOOTSTRAP_SCHEMA, G4_OWNER_STAFF_INVITATION_SCHEMA, G4_POINT_MOVE_SCHEMA, G4_POINT_MOVE_FIVE_SCHEMA, G4_MODEL_REPLY_SCHEMA, G4_MODEL_REPLY_RENEWAL_SCHEMA, G4_REQUEST_BOOKING_SCHEMA, G4_REQUEST_BOOKING_REFINEMENTS_SCHEMA, G4_PATIENT_CREATION_SCHEMA)
+    return type(binding) is dict and binding.get("schema_version") in (G4_OWNER_BOOTSTRAP_SCHEMA, G4_OWNER_STAFF_INVITATION_SCHEMA, G4_POINT_MOVE_SCHEMA, G4_POINT_MOVE_FIVE_SCHEMA, G4_MODEL_REPLY_SCHEMA, G4_MODEL_REPLY_RENEWAL_SCHEMA, G4_REQUEST_BOOKING_SCHEMA, G4_REQUEST_BOOKING_REFINEMENTS_SCHEMA, G4_PATIENT_CREATION_SCHEMA, G4_PRACTICE_READ_CONTEXT_SCHEMA)
 
 
 def _g4_owner_bootstrap_paths(kind, binding):
@@ -16414,6 +16417,17 @@ def _g4_owner_bootstrap_paths(kind, binding):
               and descriptor["product_bytes"] == {p:r["bytes"] for p,r in G4_PATIENT_CREATION_PRODUCT_ROWS.items()}
               and descriptor["before_sha"] == dict.fromkeys(G4_PATIENT_CREATION_PRODUCT_PATHS),
               "bounded_g4_patient_creation_path_boundary")
+    if descriptor["version"] == 30:
+        _need(descriptor["control"] == G4_PRACTICE_READ_CONTEXT_CONTROL
+              and descriptor["base"] == G4_PRACTICE_READ_CONTEXT_BASE
+              and descriptor["product_rows"] == G4_PRACTICE_READ_CONTEXT_PRODUCT_ROWS
+              and descriptor["product_sha"] == {p:r["sha256"] for p,r in G4_PRACTICE_READ_CONTEXT_PRODUCT_ROWS.items()}
+              and descriptor["product_bytes"] == {p:r["bytes"] for p,r in G4_PRACTICE_READ_CONTEXT_PRODUCT_ROWS.items()}
+              and descriptor["before_sha"] == {p:r["sha256"] for p,r in G4_PRACTICE_READ_CONTEXT_BEFORE_ROWS.items()}
+              and descriptor["apply_paths"] == G4_PRACTICE_READ_CONTEXT_APPLY_PATHS
+              and frozenset(descriptor["product_sha"]) == G4_PRACTICE_READ_CONTEXT_APPLY_PATHS | G4_PRACTICE_READ_CONTEXT_UNCHANGED_PATHS,
+              "bounded_g4_practice_read_context_path_boundary")
+    # v30 similarly selects four existing sources and changes only router/schema.
     # v28 keeps the complete nine-product source boundary while applying only
     # its exact six changed canonical products. Historical descriptors retain
     # their original all-product repair rule.
@@ -16423,7 +16437,7 @@ def _g4_owner_bootstrap_paths(kind, binding):
               and descriptor["control"] == G4_REQUEST_BOOKING_REFINEMENTS_CONTROL,
               "bounded_g4_request_booking_refinements_path_boundary")
     paths = (descriptor.get("control", G4_OWNER_BOOTSTRAP_CONTROL) if binding["stage"] == "enable" else
-             descriptor["apply_paths"] if binding["stage"] == "apply" and descriptor["version"] == 28 else
+             descriptor["apply_paths"] if binding["stage"] == "apply" and descriptor["version"] in {28,30} else
              frozenset(descriptor["product_sha"]) if binding["stage"] == "apply" else frozenset())
     _need(set(binding["repair_sha256"]) == paths, "bounded_g4_owner_bootstrap_changed_paths")
     return paths
@@ -16446,6 +16460,8 @@ def _g4_owner_bootstrap_require_entrypoint(q, entrypoint, phase):
 
 def _g4_owner_bootstrap_external_inputs(read, q):
     d=_g4_owner_bootstrap_descriptor(q.get("schema_version"))
+    if d["version"] == 30:
+        return _g4_practice_read_context_external_inputs(read, q)
     if d["version"] == 29:
         return _g4_patient_creation_external_inputs(read, q)
     if d["version"] == 28:
@@ -16650,6 +16666,11 @@ def _load_g4_owner_bootstrap_inputs(context, target, source, evidence_root, scra
           and payloads[G4_STAGE1_SUCCESSOR_SCOPE] == _canonical(scope) + b"\n"
           and all(_sha(payloads[p]) == d for p,d in scope["control_sha256"].items()),
           "bounded_g4_owner_bootstrap_scope_sources")
+    if descriptor["version"] == 30 and q["stage"] == "apply":
+        _need(all(_sha(payloads[p]) == descriptor["product_sha"][p]
+                  and len(payloads[p]) == descriptor["product_bytes"][p]
+                  for p in descriptor["product_sha"]),
+              "bounded_g4_practice_read_context_selected_payload")
     for p,d in sources.items():
         candidate = read(source / p, d)
         if q["stage"] == "enable" and p in descriptor.get("control", G4_OWNER_BOOTSTRAP_CONTROL):
@@ -17051,5 +17072,118 @@ def _g4_patient_creation_external_inputs(read, q):
                   for row in vector["product_rows"]),
           "bounded_g4_patient_creation_six_additions")
     for row in G4_PATIENT_CREATION_PRODUCT_ROWS.values():
+        exact(row)
+    return vector,review
+
+
+# A0 current-practice read context. Inert source derivative; no admission/runtime grant.
+G4_PRACTICE_READ_CONTEXT_TEMPLATE_INERT = False
+G4_PRACTICE_READ_CONTEXT_SCHEMA = "ariadne.g4_stage1_owner_bootstrap_operation_binding.v10"
+G4_PRACTICE_READ_CONTEXT_SCOPE_SCHEMA = "ariadne.g4_stage1_successor_entry_scope.v30"
+G4_PRACTICE_READ_CONTEXT_ROOT = G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT / "new-practice-read-context-v1"
+G4_PRACTICE_READ_CONTEXT_CONTROL = G4_MODEL_REPLY_RENEWAL_CONTROL
+G4_PRACTICE_READ_CONTEXT_BASE = {
+    "commit":"867fd227387e2fd9369baa9be67f6b926e0029d4",
+    "tree":"d79f77afafcb79b4b36189c6432db175ddc4bdc6"}
+G4_PRACTICE_READ_CONTEXT_VECTOR = {"path":"C:/Users/there/EMR4-tools/new-practice-read-context-source-preparation-v1/product-admission-v1/product-vector-v1.json","bytes":3477,"sha256":"b4a83a40ead86947f8137c26684be6d2c54c5b096806067e13d671d31b24f0be"}
+G4_PRACTICE_READ_CONTEXT_REVIEW = {"path":"C:/Users/there/EMR4-tools/new-practice-read-context-source-preparation-v1/product-admission-v1/independent-source-mapping-review-v1.json","bytes":9783,"sha256":"dea832a7d0972301c6ce6670e96d54645386237fc3fe9e87655277c7b816be7f"}
+G4_PRACTICE_READ_CONTEXT_EXPECTED_VECTOR = json.loads("{\r\n  \"schema\": \"emr4.new_practice_read_context.product_source_vector.v1\",\r\n  \"status\": \"SOURCE_ONLY_UNADMITTED_NOT_EXECUTED\",\r\n  \"operative\": false,\r\n  \"authority\": false,\r\n  \"base_commit\": \"867fd227387e2fd9369baa9be67f6b926e0029d4\",\r\n  \"base_tree\": \"d79f77afafcb79b4b36189c6432db175ddc4bdc6\",\r\n  \"derivation_vector\": {\r\n    \"path\": \"C:/Users/there/EMR4-tools/new-practice-read-context-source-preparation-v1/backend-candidate-v1/source-vector-v1.json\",\r\n    \"bytes\": 5977,\r\n    \"sha256\": \"3b1fab21e6b04ad23630423a166793a0c49a765cbf7b7b5449d88a1d52b148df\"\r\n  },\r\n  \"product_delta_paths\": [\r\n    \"app/routers/practice.py\",\r\n    \"app/schemas/practice.py\"\r\n  ],\r\n  \"selected_unchanged_dependency_paths\": [\r\n    \"app/services/practice/__init__.py\",\r\n    \"app/services/practice/practitioner_directory_read.py\"\r\n  ],\r\n  \"author_exclusions\": [\r\n    \"/root\",\r\n    \"/root/joined_binding_constructor\",\r\n    \"/root/practice_context_admission_successor\"\r\n  ],\r\n  \"product_rows\": [\r\n    {\r\n      \"relative_path\": \"app/routers/practice.py\",\r\n      \"operation\": \"MODIFY\",\r\n      \"changed\": true,\r\n      \"before\": {\r\n        \"bytes\": 875,\r\n        \"sha256\": \"86cb87244b353132bad76d2a8f890691d712aba52ba748eba53e64f64eb2c658\",\r\n        \"git_blob\": \"4b46ac523bc0f9d609f0c318431df1f63a287064\"\r\n      },\r\n      \"after\": {\r\n        \"path\": \"C:/Users/there/EMR4-tools/new-practice-read-context-source-preparation-v1/backend-candidate-v1/after/app/routers/practice.py\",\r\n        \"bytes\": 2071,\r\n        \"sha256\": \"cc4eb2e3f681f490ba5c148b03fc05e4e048a1a00d7a5c33d17f8a47de4c5826\"\r\n      }\r\n    },\r\n    {\r\n      \"relative_path\": \"app/schemas/practice.py\",\r\n      \"operation\": \"MODIFY\",\r\n      \"changed\": true,\r\n      \"before\": {\r\n        \"bytes\": 352,\r\n        \"sha256\": \"e2baa8bf6a878bf7f09779c4e2045dc8a52dcb6498f114b36a6ed93bfa61e570\",\r\n        \"git_blob\": \"5a301065ae01420190f57cfbec5b00a7b2e350f9\"\r\n      },\r\n      \"after\": {\r\n        \"path\": \"C:/Users/there/EMR4-tools/new-practice-read-context-source-preparation-v1/backend-candidate-v1/after/app/schemas/practice.py\",\r\n        \"bytes\": 434,\r\n        \"sha256\": \"c2566eb12d532c190d04b5e5ca309a4f3fd4d8cfd63a962d86798c11d30ffc3b\"\r\n      }\r\n    },\r\n    {\r\n      \"relative_path\": \"app/services/practice/__init__.py\",\r\n      \"operation\": \"UNCHANGED\",\r\n      \"changed\": false,\r\n      \"before\": {\r\n        \"bytes\": 37,\r\n        \"sha256\": \"c59c32278b280ad22d31cf8d8e3e840b841cbe918f981ac2f035c88804237802\",\r\n        \"git_blob\": \"b674e5becb685ebb064a95a84d737587ecee87da\"\r\n      },\r\n      \"after\": {\r\n        \"path\": \"C:/Users/there/EMR4-tools/new-practice-read-context-source-preparation-v1/backend-candidate-v1/after/app/services/practice/__init__.py\",\r\n        \"bytes\": 37,\r\n        \"sha256\": \"c59c32278b280ad22d31cf8d8e3e840b841cbe918f981ac2f035c88804237802\"\r\n      }\r\n    },\r\n    {\r\n      \"relative_path\": \"app/services/practice/practitioner_directory_read.py\",\r\n      \"operation\": \"UNCHANGED\",\r\n      \"changed\": false,\r\n      \"before\": {\r\n        \"bytes\": 2492,\r\n        \"sha256\": \"1cbfb2cedf7f634ba9f8bad409b2e1bc42c46778447801bffefbe0c2ed378d65\",\r\n        \"git_blob\": \"ecf76d1482bddc5dd6514561ab3e3911b803ae31\"\r\n      },\r\n      \"after\": {\r\n        \"path\": \"C:/Users/there/EMR4-tools/new-practice-read-context-source-preparation-v1/backend-candidate-v1/after/app/services/practice/practitioner_directory_read.py\",\r\n        \"bytes\": 2492,\r\n        \"sha256\": \"1cbfb2cedf7f634ba9f8bad409b2e1bc42c46778447801bffefbe0c2ed378d65\"\r\n      }\r\n    }\r\n  ]\r\n}")
+G4_PRACTICE_READ_CONTEXT_EXPECTED_REVIEW = json.loads("{\r\n  \"schema\": \"emr4.new_practice_read_context.independent_source_mapping_review.v1\",\r\n  \"status\": \"PASS\",\r\n  \"verdict\": \"PASS_SOURCE_ONLY\",\r\n  \"independent\": true,\r\n  \"implementation_authorship\": false,\r\n  \"reviewer_agent\": \"/root/practice_context_mapping_review\",\r\n  \"reviewed_at_utc\": \"2026-11-02T11:46:13.4834905Z\",\r\n  \"blocking_findings\": [],\r\n  \"reviewed_subject\": {\r\n    \"source_vector\": {\r\n      \"path\": \"C:/Users/there/EMR4-tools/new-practice-read-context-source-preparation-v1/product-admission-v1/product-vector-v1.json\",\r\n      \"bytes\": 3477,\r\n      \"sha256\": \"b4a83a40ead86947f8137c26684be6d2c54c5b096806067e13d671d31b24f0be\"\r\n    },\r\n    \"base_commit\": \"867fd227387e2fd9369baa9be67f6b926e0029d4\",\r\n    \"base_tree\": \"d79f77afafcb79b4b36189c6432db175ddc4bdc6\",\r\n    \"product_rows\": [\r\n      {\r\n        \"relative_path\": \"app/routers/practice.py\",\r\n        \"operation\": \"MODIFY\",\r\n        \"changed\": true,\r\n        \"before\": {\r\n          \"bytes\": 875,\r\n          \"sha256\": \"86cb87244b353132bad76d2a8f890691d712aba52ba748eba53e64f64eb2c658\",\r\n          \"git_blob\": \"4b46ac523bc0f9d609f0c318431df1f63a287064\"\r\n        },\r\n        \"after\": {\r\n          \"path\": \"C:/Users/there/EMR4-tools/new-practice-read-context-source-preparation-v1/backend-candidate-v1/after/app/routers/practice.py\",\r\n          \"bytes\": 2071,\r\n          \"sha256\": \"cc4eb2e3f681f490ba5c148b03fc05e4e048a1a00d7a5c33d17f8a47de4c5826\"\r\n        }\r\n      },\r\n      {\r\n        \"relative_path\": \"app/schemas/practice.py\",\r\n        \"operation\": \"MODIFY\",\r\n        \"changed\": true,\r\n        \"before\": {\r\n          \"bytes\": 352,\r\n          \"sha256\": \"e2baa8bf6a878bf7f09779c4e2045dc8a52dcb6498f114b36a6ed93bfa61e570\",\r\n          \"git_blob\": \"5a301065ae01420190f57cfbec5b00a7b2e350f9\"\r\n        },\r\n        \"after\": {\r\n          \"path\": \"C:/Users/there/EMR4-tools/new-practice-read-context-source-preparation-v1/backend-candidate-v1/after/app/schemas/practice.py\",\r\n          \"bytes\": 434,\r\n          \"sha256\": \"c2566eb12d532c190d04b5e5ca309a4f3fd4d8cfd63a962d86798c11d30ffc3b\"\r\n        }\r\n      },\r\n      {\r\n        \"relative_path\": \"app/services/practice/__init__.py\",\r\n        \"operation\": \"UNCHANGED\",\r\n        \"changed\": false,\r\n        \"before\": {\r\n          \"bytes\": 37,\r\n          \"sha256\": \"c59c32278b280ad22d31cf8d8e3e840b841cbe918f981ac2f035c88804237802\",\r\n          \"git_blob\": \"b674e5becb685ebb064a95a84d737587ecee87da\"\r\n        },\r\n        \"after\": {\r\n          \"path\": \"C:/Users/there/EMR4-tools/new-practice-read-context-source-preparation-v1/backend-candidate-v1/after/app/services/practice/__init__.py\",\r\n          \"bytes\": 37,\r\n          \"sha256\": \"c59c32278b280ad22d31cf8d8e3e840b841cbe918f981ac2f035c88804237802\"\r\n        }\r\n      },\r\n      {\r\n        \"relative_path\": \"app/services/practice/practitioner_directory_read.py\",\r\n        \"operation\": \"UNCHANGED\",\r\n        \"changed\": false,\r\n        \"before\": {\r\n          \"bytes\": 2492,\r\n          \"sha256\": \"1cbfb2cedf7f634ba9f8bad409b2e1bc42c46778447801bffefbe0c2ed378d65\",\r\n          \"git_blob\": \"ecf76d1482bddc5dd6514561ab3e3911b803ae31\"\r\n        },\r\n        \"after\": {\r\n          \"path\": \"C:/Users/there/EMR4-tools/new-practice-read-context-source-preparation-v1/backend-candidate-v1/after/app/services/practice/practitioner_directory_read.py\",\r\n          \"bytes\": 2492,\r\n          \"sha256\": \"1cbfb2cedf7f634ba9f8bad409b2e1bc42c46778447801bffefbe0c2ed378d65\"\r\n        }\r\n      }\r\n    ],\r\n    \"author_exclusions\": [\r\n      \"/root\",\r\n      \"/root/joined_binding_constructor\",\r\n      \"/root/practice_context_admission_successor\"\r\n    ]\r\n  },\r\n  \"authority\": {\r\n    \"source_only_accepted\": true,\r\n    \"source_mapping_accepted\": true,\r\n    \"product_accepted\": false,\r\n    \"admission_accepted\": false,\r\n    \"execution_authorized\": false,\r\n    \"runtime_accepted\": false,\r\n    \"publication_accepted\": false,\r\n    \"role_provisioning_authorized\": false,\r\n    \"new_gate_or_framework\": false\r\n  },\r\n  \"mechanical_mapping\": {\r\n    \"whole_vector_bound\": true,\r\n    \"all_four_afterimages_verified\": true,\r\n    \"all_four_existing_preimages_bound\": true,\r\n    \"exact_two_modify_delta_bound\": true,\r\n    \"unchanged_selected_dependencies_preserved\": true,\r\n    \"exact_base_bound\": true,\r\n    \"author_exclusions_bound\": true,\r\n    \"source_mapping_acceptance\": true\r\n  },\r\n  \"rehydration\": {\r\n    \"role\": \"Independent worker; neither Host A nor Host B; no implementation authorship.\",\r\n    \"instructions_read\": \"C:/Users/there/EMR4/AGENTS.md\",\r\n    \"checkpoint\": {\r\n      \"path\": \"C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/coordinator-checkpoint.json\",\r\n      \"sha256\": \"8e6e2c7fde8d65e1d3e9afcc49e7390039159134ff793bac1075dcdb3ee0a63b\"\r\n    },\r\n    \"critical_operation_active\": false,\r\n    \"native_operation_in_flight\": false,\r\n    \"native_operation_status\": \"CLOSED_CONSUMED_COMPONENT_PASS_AND_NORMAL_OWNED_CLOSURE_ACCEPTED\",\r\n    \"scope\": \"A0 product source mapping only; no A1 or B0 review.\"\r\n  },\r\n  \"observations\": [\r\n    \"Canonical product vector and derivation vector raw byte lengths and SHA-256 values match the assigned pins. Four unique product rows map one-to-one to derivation rows. Author exclusions are the exact sorted vector list, and this reviewer is excluded from implementation authorship.\",\r\n    \"Independently read the four literal C:/Users/there/EMR4/app preimages and the four named inert afterimages. Every before/after byte length and SHA-256 matches its product and derivation row.\",\r\n    \"Independently computed SHA-1 over ASCII blob header, decimal raw-byte length, NUL and each raw preimage. Values match all four product-vector Git blob IDs: 4b46ac523bc0f9d609f0c318431df1f63a287064, 5a301065ae01420190f57cfbec5b00a7b2e350f9, b674e5becb685ebb064a95a84d737587ecee87da, ecf76d1482bddc5dd6514561ab3e3911b803ae31.\",\r\n    \"Router has exactly the three unique documented import replacements and appended context route; schema has exactly the appended PracticeContextOut. Reversing those literal edits restores each complete preimage byte-for-byte. The two service afterimages equal their complete preimages byte-for-byte. Product delta is exactly two MODIFY paths, with two unchanged selected dependency inputs; no ADD operation is justified.\",\r\n    \"Source inspection confirms GET /api/v1/practice/context uses existing get_current_user and get_db, accepts no practice selector, rejects nonempty query with 400, selects only Practice.id and Practice.timezone for current_user.practice_id, denies missing/malformed/unresolvable zone with 503 and no fallback, and returns only practice_id and the stored timezone. Success and route-generated explicit refusals set Cache-Control no-store. No writes or identity changes appear in the delta.\",\r\n    \"Existing practitioner directory route and service remain unchanged: tenant filter, active practitioner selection, same-practice active default-location join, bounded HTTP pagination and Admin/PracticeOwner restriction for inactive directory reads are preserved.\",\r\n    \"Selected dependencies source and tenancy source match assigned pins. Their names and columns are compatible with this narrow source seam; selected current-user source checks current tenant/user/membership/account/role/generation state. This is a source compatibility observation, not actual mounted dependency proof.\"\r\n  ],\r\n  \"evidence\": {\r\n    \"derivation_vector\": {\r\n      \"path\": \"C:/Users/there/EMR4-tools/new-practice-read-context-source-preparation-v1/backend-candidate-v1/source-vector-v1.json\",\r\n      \"bytes\": 5977,\r\n      \"sha256\": \"3b1fab21e6b04ad23630423a166793a0c49a765cbf7b7b5449d88a1d52b148df\"\r\n    },\r\n    \"selected_dependencies\": {\r\n      \"path\": \"C:/Users/there/EMR4-tools/local-mock-owner-staff-login-source-preparation-v1/seeded-login-coherent-integration-candidate-v1/after/backend/app/dependencies.py\",\r\n      \"bytes\": 3371,\r\n      \"sha256\": \"334c5233ebb398721670f2ae79215574b8a5a7f84bfe8a5a0171b3e4897a1aa6\"\r\n    },\r\n    \"selected_tenancy\": {\r\n      \"path\": \"C:/Users/there/EMR4-tools/selected-bureau-backend-db-work-v1/attempt-3/case/app/models/tenancy.py\",\r\n      \"bytes\": 6119,\r\n      \"sha256\": \"e411c816565bdddfbb25beca62439c5bba7a44a90e348cd7e9f4296a65fb65e2\"\r\n    }\r\n  },\r\n  \"qualifications\": [\r\n    \"The immutable commit/tree-to-path/blob association is reused from the coordinator assignment and matching checkpoint selected_path_observation ad462a/9f9efc; this reviewer independently checked the literal preimage bytes against the recorded blob identities, without running Git or inspecting a target worktree. No current HEAD, ref, remote lease or sparse snapshot absence claim is made.\",\r\n    \"PASS_SOURCE_ONLY accepts only the exact canonical source mapping and narrow source delta. It does not grant source-admission, application, integration, publication, execution or runtime authority. Any separately authored controller/scope/test successor requires its own independent review and enforced admission.\",\r\n    \"No imports, compilation, AST evaluation, tests, application, database, browser, tzdata resolution, route mounting, dependency override inspection, negative auth integration or runtime effects were performed. Actual IANA availability, returned temporal correctness and mounted tenant/auth behavior remain unproven.\",\r\n    \"ZoneInfo resolvability is not a canonical-name, offset, day-boundary or ambiguity proof. Current route scope is authenticated tenant context, not Receptionist-specific; A1 must separately enforce selected invited Receptionist and lifecycle requirements. No role or resource provisioning is authorized.\",\r\n    \"No-store is explicit for route success and the explicit route refusals; this review does not claim a new cache guarantee for dependency-generated failures or unexpected database/response failures.\"\r\n  ]\r\n}\r\n")
+G4_PRACTICE_READ_CONTEXT_DERIVATION = {
+    "path":"C:/Users/there/EMR4-tools/new-practice-read-context-source-preparation-v1/backend-candidate-v1/source-vector-v1.json",
+    "bytes":5977,"sha256":"3b1fab21e6b04ad23630423a166793a0c49a765cbf7b7b5449d88a1d52b148df"}
+G4_PRACTICE_READ_CONTEXT_PRODUCT_ROWS = {
+    row["relative_path"]:row["after"] for row in G4_PRACTICE_READ_CONTEXT_EXPECTED_VECTOR["product_rows"]}
+G4_PRACTICE_READ_CONTEXT_BEFORE_ROWS = {
+    row["relative_path"]:row["before"] for row in G4_PRACTICE_READ_CONTEXT_EXPECTED_VECTOR["product_rows"]}
+G4_PRACTICE_READ_CONTEXT_PRODUCT_PATHS = frozenset(G4_PRACTICE_READ_CONTEXT_PRODUCT_ROWS)
+G4_PRACTICE_READ_CONTEXT_APPLY_PATHS = frozenset({
+    "app/routers/practice.py","app/schemas/practice.py"})
+G4_PRACTICE_READ_CONTEXT_UNCHANGED_PATHS = frozenset({
+    "app/services/practice/__init__.py","app/services/practice/practitioner_directory_read.py"})
+G4_PRACTICE_READ_CONTEXT_AUTHORS = frozenset({
+    "/root","/root/joined_binding_constructor","/root/practice_context_admission_successor"})
+G4_PRACTICE_READ_CONTEXT_DESCRIPTOR = {
+    "version":30,"scope_schema":G4_PRACTICE_READ_CONTEXT_SCOPE_SCHEMA,
+    "base":G4_PRACTICE_READ_CONTEXT_BASE,
+    "root":G4_PRACTICE_READ_CONTEXT_ROOT,"control":G4_PRACTICE_READ_CONTEXT_CONTROL,
+    "apply_paths":G4_PRACTICE_READ_CONTEXT_APPLY_PATHS,
+    "product_rows":G4_PRACTICE_READ_CONTEXT_PRODUCT_ROWS,
+    "product_sha":{p:r["sha256"] for p,r in G4_PRACTICE_READ_CONTEXT_PRODUCT_ROWS.items()},
+    "product_bytes":{p:r["bytes"] for p,r in G4_PRACTICE_READ_CONTEXT_PRODUCT_ROWS.items()},
+    "before_sha":{p:r["sha256"] for p,r in G4_PRACTICE_READ_CONTEXT_BEFORE_ROWS.items()},
+    "preimages":{
+        "orchestration_harness/bounded_g1b.py":"bb7c7df38836c9d3ff958b1ee0ce722cf1c653bd7a27fafc23c6e6b2065435bf",
+        "tests/test_g4_stage1_successor_entry.py":"088660f74b7c3d9310b4d40f0c5277c17be8c28717c418335bf63c62cdc8c09f",
+        "orchestration/programme/g4-stage1-successor-entry-scope.json":"870fb41e04659e827b9769f2bc553f114328c25cc74d8572b7e9b8529bc4cfb0"},
+    "vector":{k:G4_PRACTICE_READ_CONTEXT_VECTOR[k] for k in ("path","sha256")},
+    "mapping":({k:G4_PRACTICE_READ_CONTEXT_REVIEW[k] for k in ("path","sha256")}
+               if G4_PRACTICE_READ_CONTEXT_REVIEW is not None else None),
+    "excluded_reviewers":set(G4_PRACTICE_READ_CONTEXT_AUTHORS)|{""},
+    "limits":("ENABLE exactly3 existing controls; ADMIT development zero delta; APPLY exactly2 MODIFY",
+        "all4 existing committed preimages pinned; unchanged2 services selected without ADD or write authority",
+        "sole867fd parent and new namespace; historical descriptors and consumed evidence unchanged",
+        "source8/profile40/state/gates/overlay/AGENTS unchanged; no mount/role/provider/runtime authority"),
+}
+
+
+def _g4_practice_read_context_external_inputs(read, q):
+    d=_g4_owner_bootstrap_descriptor(G4_PRACTICE_READ_CONTEXT_SCHEMA)
+    _need(type(G4_PRACTICE_READ_CONTEXT_REVIEW) is dict
+          and type(G4_PRACTICE_READ_CONTEXT_EXPECTED_REVIEW) is dict,
+          "bounded_g4_practice_read_context_mapping_unbound")
+    _need(q["product_vector"]==d["vector"] and q["mapping_review"]==d["mapping"],
+          "bounded_g4_practice_read_context_external_pins")
+    def exact(row):
+        _keys(row,{"path","bytes","sha256"},"bounded_g4_practice_read_context_external_row")
+        _need(type(row["path"]) is str and type(row["bytes"]) is int and row["bytes"]>0
+              and type(row["sha256"]) is str and re.fullmatch(r"[0-9a-f]{64}",row["sha256"]),
+              "bounded_g4_practice_read_context_external_row")
+        raw=read(Path(row["path"]),row["sha256"])
+        _need(len(raw)==row["bytes"] and _sha(raw)==row["sha256"],
+              "bounded_g4_practice_read_context_external_source")
+        return raw
+    vector=_json(exact(G4_PRACTICE_READ_CONTEXT_VECTOR))
+    review=_json(exact(G4_PRACTICE_READ_CONTEXT_REVIEW))
+    _need(vector==G4_PRACTICE_READ_CONTEXT_EXPECTED_VECTOR
+          and vector["schema"]=="emr4.new_practice_read_context.product_source_vector.v1"
+          and vector["status"]=="SOURCE_ONLY_UNADMITTED_NOT_EXECUTED"
+          and vector["operative"] is False and vector["authority"] is False
+          and vector["base_commit"]==d["base"]["commit"] and vector["base_tree"]==d["base"]["tree"]
+          and vector["derivation_vector"]==G4_PRACTICE_READ_CONTEXT_DERIVATION
+          and vector["product_delta_paths"]==sorted(G4_PRACTICE_READ_CONTEXT_APPLY_PATHS)
+          and vector["selected_unchanged_dependency_paths"]==sorted(G4_PRACTICE_READ_CONTEXT_UNCHANGED_PATHS)
+          and vector["author_exclusions"]==sorted(G4_PRACTICE_READ_CONTEXT_AUTHORS),
+          "bounded_g4_practice_read_context_external_vector")
+    _need(review==G4_PRACTICE_READ_CONTEXT_EXPECTED_REVIEW
+          and review["schema"]=="emr4.new_practice_read_context.independent_source_mapping_review.v1"
+          and review["status"]=="PASS" and review["verdict"]=="PASS_SOURCE_ONLY"
+          and type(review["reviewer_agent"]) is str and review["reviewer_agent"] not in d["excluded_reviewers"]
+          and review["independent"] is True and review["implementation_authorship"] is False
+          and review["blocking_findings"]==[]
+          and review["reviewed_subject"]=={
+              "source_vector":G4_PRACTICE_READ_CONTEXT_VECTOR,
+              "base_commit":d["base"]["commit"],"base_tree":d["base"]["tree"],
+              "product_rows":vector["product_rows"],"author_exclusions":sorted(G4_PRACTICE_READ_CONTEXT_AUTHORS)}
+          and all(review["authority"][k] is True for k in ("source_only_accepted","source_mapping_accepted"))
+          and all(review["authority"][k] is False for k in (
+              "product_accepted","admission_accepted","execution_authorized","runtime_accepted",
+              "publication_accepted","role_provisioning_authorized","new_gate_or_framework"))
+          and all(review["mechanical_mapping"][k] is True for k in (
+              "whole_vector_bound","all_four_afterimages_verified","all_four_existing_preimages_bound",
+              "exact_two_modify_delta_bound","unchanged_selected_dependencies_preserved","exact_base_bound",
+              "author_exclusions_bound","source_mapping_acceptance")),
+          "bounded_g4_practice_read_context_independent_source")
+    rows=vector["product_rows"]
+    _need(len(rows)==4 and [row["relative_path"] for row in rows]==sorted(G4_PRACTICE_READ_CONTEXT_PRODUCT_PATHS)
+          and all(row["before"]==G4_PRACTICE_READ_CONTEXT_BEFORE_ROWS[row["relative_path"]]
+              and row["after"]==G4_PRACTICE_READ_CONTEXT_PRODUCT_ROWS[row["relative_path"]]
+              and row["changed"] is (row["relative_path"] in G4_PRACTICE_READ_CONTEXT_APPLY_PATHS)
+              and row["operation"]==("MODIFY" if row["changed"] else "UNCHANGED")
+              and (row["before"]["sha256"]!=row["after"]["sha256"]) is row["changed"]
+              for row in rows),
+          "bounded_g4_practice_read_context_exact_two_modify")
+    exact(G4_PRACTICE_READ_CONTEXT_DERIVATION)
+    for row in G4_PRACTICE_READ_CONTEXT_PRODUCT_ROWS.values():
         exact(row)
     return vector,review
