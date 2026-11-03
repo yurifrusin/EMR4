@@ -7042,3 +7042,368 @@ def test_practice_read_context_operative_registration_and_scope_baseline():
     for path in ("orchestration_harness/bounded_g1b.py",b.G4_STAGE1_SUCCESSOR_TEST):
         assert scope["control_sha256"][path]==hashlib.sha256((candidate/path).read_bytes()).hexdigest()
     assert scope["source_sha256"]["orchestration_harness/bounded_g1b.py"]==scope["control_sha256"]["orchestration_harness/bounded_g1b.py"]
+
+
+# B0 exact-five v31/v11 SOURCE-only appendix. No historical test is rewritten.
+_SELECTED_STAFF_BUREAU_CANDIDATE = Path("C:/Users/there/EMR4-tools/selected-staff-bureau-controller-source-preparation-v1/after")
+_SELECTED_STAFF_BUREAU_PREDECESSOR = Path("C:/Users/there/EMR4-tools/practice-read-context-product-apply01-source")
+
+
+def _selected_staff_bureau_descriptor(monkeypatch):
+    monkeypatch.setattr(bounded_g1b,"G4_SELECTED_STAFF_BUREAU_TEMPLATE_INERT",False)
+    return bounded_g1b._g4_owner_bootstrap_descriptor(bounded_g1b.G4_SELECTED_STAFF_BUREAU_SCHEMA)
+
+
+def _selected_staff_bureau_external_read(path,digest):
+    raw=path.read_bytes();assert hashlib.sha256(raw).hexdigest()==digest;return raw
+
+
+def test_selected_staff_bureau_cold_registry_and_prior_families(monkeypatch):
+    b=bounded_g1b
+    assert b.G4_SELECTED_STAFF_BUREAU_TEMPLATE_INERT is True
+    def forbidden_read(*args):raise AssertionError("inert source must refuse before external reads")
+    for schema,scope in [(b.G4_SELECTED_STAFF_BUREAU_SCHEMA,False),(b.G4_SELECTED_STAFF_BUREAU_SCOPE_SCHEMA,True)]:
+        with pytest.raises(b.BoundedG1BError) as err:b._g4_owner_bootstrap_descriptor(schema,scope=scope)
+        assert err.value.reason_code=="bounded_g4_selected_staff_bureau_source_inert"
+    with pytest.raises(b.BoundedG1BError) as err:b._g4_owner_bootstrap_external_inputs(
+        forbidden_read,{"schema_version":b.G4_SELECTED_STAFF_BUREAU_SCHEMA})
+    assert err.value.reason_code=="bounded_g4_selected_staff_bureau_source_inert"
+    for schema,descriptor in [(b.G4_PRACTICE_READ_CONTEXT_SCHEMA,b.G4_PRACTICE_READ_CONTEXT_DESCRIPTOR),
+                             (b.G4_PATIENT_CREATION_SCHEMA,b.G4_PATIENT_CREATION_DESCRIPTOR),
+                             (b.G4_REQUEST_BOOKING_REFINEMENTS_SCHEMA,b.G4_REQUEST_BOOKING_REFINEMENTS_DESCRIPTOR),
+                             (b.G4_REQUEST_BOOKING_SCHEMA,b.G4_REQUEST_BOOKING_DESCRIPTOR)]:
+        assert b._g4_owner_bootstrap_descriptor(schema) is descriptor
+    assert b.G4_PRACTICE_READ_CONTEXT_TEMPLATE_INERT is False
+    assert b.G4_PRACTICE_READ_CONTEXT_SCHEMA=="ariadne.g4_stage1_owner_bootstrap_operation_binding.v10"
+    d=_selected_staff_bureau_descriptor(monkeypatch)
+    assert d["version"]==31 and b._g4_owner_bootstrap_descriptor(b.G4_SELECTED_STAFF_BUREAU_SCOPE_SCHEMA,scope=True) is d
+    assert b.G4_SELECTED_STAFF_BUREAU_SCHEMA=="ariadne.g4_stage1_owner_bootstrap_operation_binding.v11"
+    assert d["base"]=={"commit":"025614ab4f9acb44bc23a7da8077dabc543c8be2","tree":"359d75a8e71f442137df6408f3d96b99b358fd57"}
+    assert d["root"]==b.G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT/"selected-staff-bureau-v1"
+
+
+@pytest.mark.parametrize("stage",["enable","admit","apply"])
+def test_selected_staff_bureau_three_zero_five_owned(monkeypatch,stage):
+    b=bounded_g1b;d=_selected_staff_bureau_descriptor(monkeypatch)
+    kind={"enable":"enable_g4_stage1_successor","admit":b.G4_OWNER_BOOTSTRAP_ADMIT_KIND,"apply":"implement_g4_stage1_successor"}[stage]
+    paths=d["control"] if stage=="enable" else d["apply_paths"] if stage=="apply" else frozenset()
+    q={"schema_version":b.G4_SELECTED_STAFF_BUREAU_SCHEMA,"operation_kind":kind,"stage":stage,"repair_sha256":dict.fromkeys(paths,{})}
+    assert b._g4_owner_bootstrap_paths(kind,q)==paths
+    assert len(paths)=={"enable":3,"admit":0,"apply":5}[stage] and len(d["product_sha"])==5
+    assert d["apply_paths"]==b.G4_SELECTED_STAFF_BUREAU_PRODUCT_PATHS
+    q["repair_sha256"]["app/routers/practice.py"]={}
+    with pytest.raises(b.BoundedG1BError) as err:b._g4_owner_bootstrap_paths(kind,q)
+    assert err.value.reason_code=="bounded_g4_owner_bootstrap_changed_paths"
+
+
+@pytest.mark.parametrize("mutation",["missing_product","extra_product","wrong_control","wrong_row","wrong_size",
+    "null_before","wrong_before","narrow_apply","wrong_base","old_root","wrong_predecessor","omit_controller_author"])
+def test_selected_staff_bureau_descriptor_refuses_boundary_drift(monkeypatch,mutation):
+    b=bounded_g1b;d=_selected_staff_bureau_descriptor(monkeypatch);path="app/services/reception_one_proposal_runtime.py"
+    q={"schema_version":b.G4_SELECTED_STAFF_BUREAU_SCHEMA,"operation_kind":"implement_g4_stage1_successor",
+       "stage":"apply","repair_sha256":dict.fromkeys(d["apply_paths"],{})}
+    assert b._g4_owner_bootstrap_paths(q["operation_kind"],q)==d["apply_paths"]
+    if mutation=="missing_product":monkeypatch.setitem(d,"product_sha",{p:h for p,h in d["product_sha"].items() if p!=path})
+    elif mutation=="extra_product":monkeypatch.setitem(d,"product_sha",{**d["product_sha"],"app/unowned.py":"a"*64})
+    elif mutation=="wrong_control":monkeypatch.setitem(d,"control",d["control"]|{b.OVERLAY})
+    elif mutation=="wrong_row":monkeypatch.setitem(d,"product_rows",{**d["product_rows"],path:{}})
+    elif mutation=="wrong_size":monkeypatch.setitem(d,"product_bytes",{**d["product_bytes"],path:1})
+    elif mutation in {"null_before","wrong_before"}:monkeypatch.setitem(d,"before_sha",{**d["before_sha"],path:None if mutation=="null_before" else "a"*64})
+    elif mutation=="narrow_apply":monkeypatch.setitem(d,"apply_paths",d["apply_paths"]-{path})
+    elif mutation=="wrong_base":monkeypatch.setitem(d,"base",{**d["base"],"commit":"a"*40})
+    elif mutation=="old_root":monkeypatch.setitem(d,"root",b.G4_PRACTICE_READ_CONTEXT_ROOT)
+    elif mutation=="wrong_predecessor":monkeypatch.setitem(d,"preimages",{**d["preimages"],b.G4_STAGE1_SUCCESSOR_SCOPE:"a"*64})
+    else:monkeypatch.setitem(d,"excluded_reviewers",set(b.G4_SELECTED_STAFF_BUREAU_PRODUCT_AUTHORS)|{""})
+    with pytest.raises(b.BoundedG1BError) as err:b._g4_owner_bootstrap_paths(q["operation_kind"],q)
+    assert err.value.reason_code=="bounded_g4_selected_staff_bureau_path_boundary"
+
+
+def test_selected_staff_bureau_scope_keeps_runtime_and_profile_closed(monkeypatch):
+    b=bounded_g1b;d=_selected_staff_bureau_descriptor(monkeypatch)
+    raw=(_SELECTED_STAFF_BUREAU_CANDIDATE/b.G4_STAGE1_SUCCESSOR_SCOPE).read_bytes();scope=json.loads(raw)
+    assert raw==b._canonical(scope)+b"\n"
+    assert b.validate_g4_owner_bootstrap_scope(scope)==scope["source_sha256"]
+    assert scope["allowed_paths"]==sorted(d["product_sha"]) and len(scope["allowed_paths"])==5
+    assert len(scope["source_sha256"])==8 and len(raisa_policy.G4_STAGE1_SUCCESSOR_PRODUCT_PATHS)==40
+    assert tuple(raisa_policy.G4_STAGE1_SUCCESSOR_PRODUCT_PATHS)==_REQUEST_BOOKING_PREDECESSOR_PATHS+b.G4_REQUEST_BOOKING_PROFILE_APPEND
+    assert scope["predecessor_scope"]=={"sha256":"19d5b869f4a7fc2f9c253ad8ad13ec7110ab149fc61e04c95cac53799af09fa0"}
+    assert scope["runtime_binding_required"] is True and scope["admission_grants_runtime_authority"] is False and scope["voice_activation"] is False
+    for path in ("orchestration_harness/bounded_g1b.py",b.G4_STAGE1_SUCCESSOR_TEST):
+        assert scope["control_sha256"][path]==hashlib.sha256((_SELECTED_STAFF_BUREAU_CANDIDATE/path).read_bytes()).hexdigest()
+    assert scope["source_sha256"]["orchestration_harness/bounded_g1b.py"]==scope["control_sha256"]["orchestration_harness/bounded_g1b.py"]
+    for field,value in [("allowed_paths",scope["allowed_paths"][:-1]),("voice_activation",True),
+                        ("runtime_binding_required",False),("admission_grants_runtime_authority",True),
+                        ("selected_base",b.G4_PRACTICE_READ_CONTEXT_BASE)]:
+        changed=copy.deepcopy(scope);changed[field]=value
+        with pytest.raises(b.BoundedG1BError) as err:b.validate_g4_owner_bootstrap_scope(changed)
+        assert err.value.reason_code=="bounded_g4_owner_bootstrap_scope_boundary"
+
+
+def test_selected_staff_bureau_genuine_mapping_order_and_role_boundary(monkeypatch):
+    b=bounded_g1b;d=_selected_staff_bureau_descriptor(monkeypatch);seen=[]
+    def read(path,digest):seen.append(path);return _selected_staff_bureau_external_read(path,digest)
+    vector,review=b._g4_owner_bootstrap_external_inputs(read,{"schema_version":b.G4_SELECTED_STAFF_BUREAU_SCHEMA,
+        "product_vector":d["vector"],"mapping_review":d["mapping"]})
+    assert vector==b.G4_SELECTED_STAFF_BUREAU_EXPECTED_VECTOR and review==b.G4_SELECTED_STAFF_BUREAU_EXPECTED_REVIEW
+    assert len(seen)==8 and len(set(seen))==8
+    assert vector["product_delta_paths"]==b.G4_SELECTED_STAFF_BUREAU_ORDERED_PATHS
+    assert vector["product_delta_paths"]!=sorted(vector["product_delta_paths"])
+    assert set(vector["product_delta_paths"])==d["apply_paths"] and len(set(vector["product_delta_paths"]))==5
+    assert all(row["changed"] is True and row["operation"]=="MODIFY" and row["before"]["sha256"]!=row["after"]["sha256"] for row in vector["product_rows"])
+    assert review["reviewer_agent"]==b.G4_SELECTED_STAFF_BUREAU_CONTROLLER_AUTHOR
+    assert review["reviewer_agent"] not in b.G4_SELECTED_STAFF_BUREAU_PRODUCT_AUTHORS
+    assert review["reviewer_agent"] in d["excluded_reviewers"]
+    assert review["authority"]["source_mapping_accepted"] is True and review["authority"]["admission_accepted"] is False
+
+
+@pytest.mark.parametrize("selected",["vector","review","derivation"]+["orchestration/continuity/reception-one-bureau-typed-plan-protocol/input-frame.schema.json","orchestration/continuity/reception-one-bureau-typed-plan-protocol/plan-draft.schema.json","scripts/reception_one_bureau_typed_plan_protocol.py","app/services/reception_one_isolated_vertex_planner.py","app/services/reception_one_proposal_runtime.py"])
+def test_selected_staff_bureau_each_external_byte_tamper_refuses(monkeypatch,selected):
+    b=bounded_g1b;d=_selected_staff_bureau_descriptor(monkeypatch)
+    q={"product_vector":d["vector"],"mapping_review":d["mapping"]}
+    assert b._g4_selected_staff_bureau_external_inputs(_selected_staff_bureau_external_read,q)[0]==b.G4_SELECTED_STAFF_BUREAU_EXPECTED_VECTOR
+    row=(b.G4_SELECTED_STAFF_BUREAU_VECTOR if selected=="vector" else b.G4_SELECTED_STAFF_BUREAU_REVIEW if selected=="review"
+         else b.G4_SELECTED_STAFF_BUREAU_DERIVATION if selected=="derivation" else d["product_rows"][selected])
+    def read(path,digest):
+        raw=path.read_bytes();return raw+b" " if path==Path(row["path"]) else raw
+    with pytest.raises(b.BoundedG1BError) as err:b._g4_selected_staff_bureau_external_inputs(read,q)
+    assert err.value.reason_code=="bounded_g4_selected_staff_bureau_external_source"
+
+
+@pytest.mark.parametrize("mutation",["author_reviewer","not_independent","authorship","findings","subject_base","subject_rows",
+    "runtime_authority","product_admission","preimages_unverified","mapping_changed_current_controls"])
+def test_selected_staff_bureau_mapping_semantics_required_beyond_repin(monkeypatch,mutation):
+    b=bounded_g1b;d=_selected_staff_bureau_descriptor(monkeypatch);review=copy.deepcopy(b.G4_SELECTED_STAFF_BUREAU_EXPECTED_REVIEW)
+    if mutation=="author_reviewer":review["reviewer_agent"]="/root/joined_host_resume"
+    elif mutation=="not_independent":review["independent"]=False
+    elif mutation=="authorship":review["implementation_authorship"]=True
+    elif mutation=="findings":review["blocking_findings"]=["synthetic finding"]
+    elif mutation=="subject_base":review["reviewed_subject"]["base_commit"]="a"*40
+    elif mutation=="subject_rows":review["reviewed_subject"]["product_rows"]=review["reviewed_subject"]["product_rows"][:-1]
+    elif mutation=="runtime_authority":review["authority"]["execution_authorized"]=True
+    elif mutation=="product_admission":review["authority"]["product_admission_accepted"]=True
+    elif mutation=="preimages_unverified":review["mechanical_mapping"]["all_five_nonnull_preimages_bound"]=False
+    else:review["mechanical_mapping"]["current_v30_controls_or_four_practice_paths_changed"]=True
+    raw=b._canonical(review);row={**b.G4_SELECTED_STAFF_BUREAU_REVIEW,"bytes":len(raw),"sha256":b._sha(raw)}
+    monkeypatch.setattr(b,"G4_SELECTED_STAFF_BUREAU_EXPECTED_REVIEW",review)
+    monkeypatch.setattr(b,"G4_SELECTED_STAFF_BUREAU_REVIEW",row)
+    monkeypatch.setitem(d,"mapping",{k:row[k] for k in ("path","sha256")})
+    def read(path,digest):
+        if path==Path(row["path"]):assert digest==row["sha256"];return raw
+        return _selected_staff_bureau_external_read(path,digest)
+    with pytest.raises(b.BoundedG1BError) as err:b._g4_selected_staff_bureau_external_inputs(read,{"product_vector":d["vector"],"mapping_review":d["mapping"]})
+    assert err.value.reason_code=="bounded_g4_selected_staff_bureau_independent_source"
+
+
+@pytest.mark.parametrize("mutation",["sorted_order","duplicate","missing","extra"])
+def test_selected_staff_bureau_exact_order_and_unique_five_survive_repin(monkeypatch,mutation):
+    b=bounded_g1b;d=_selected_staff_bureau_descriptor(monkeypatch);vector=copy.deepcopy(b.G4_SELECTED_STAFF_BUREAU_EXPECTED_VECTOR)
+    if mutation=="sorted_order":vector["product_delta_paths"]=sorted(vector["product_delta_paths"])
+    elif mutation=="duplicate":vector["product_delta_paths"][-1]=vector["product_delta_paths"][0]
+    elif mutation=="missing":vector["product_delta_paths"].pop()
+    else:vector["product_delta_paths"].append("app/routers/practice.py")
+    raw=b._canonical(vector);row={**b.G4_SELECTED_STAFF_BUREAU_VECTOR,"bytes":len(raw),"sha256":b._sha(raw)}
+    monkeypatch.setattr(b,"G4_SELECTED_STAFF_BUREAU_EXPECTED_VECTOR",vector)
+    monkeypatch.setattr(b,"G4_SELECTED_STAFF_BUREAU_VECTOR",row)
+    monkeypatch.setitem(d,"vector",{k:row[k] for k in ("path","sha256")})
+    def read(path,digest):
+        if path==Path(row["path"]):assert digest==row["sha256"];return raw
+        return _selected_staff_bureau_external_read(path,digest)
+    with pytest.raises(b.BoundedG1BError) as err:b._g4_selected_staff_bureau_external_inputs(read,{"product_vector":d["vector"],"mapping_review":d["mapping"]})
+    assert err.value.reason_code=="bounded_g4_selected_staff_bureau_external_vector"
+
+
+@pytest.mark.parametrize("reviewer",["/root","/root/joined_host_resume","/root/practice_enable_publisher_independent_review"])
+def test_selected_staff_bureau_future_subject_excludes_product_and_controller_authors(monkeypatch,reviewer):
+    b=bounded_g1b;d=_selected_staff_bureau_descriptor(monkeypatch);subject="a"*64
+    path=d["root"]/"entry-admission-v1/independent-apply-development-subject-review-v1.json"
+    record={"schema":"emr4.g4_operation_review.v1","status":"PASS",
+        "verdict":"PASS_G4_STAGE1_OWNER_BOOTSTRAP_EXACT_ADMISSION_SUBJECT","subject_sha256":subject,
+        "independent":True,"implementation_authorship":False,"blocking_findings":[],
+        "reviewer_agent":"/synthetic/independent-review-fixture","stage":"apply","phase":"development"}
+    def invoke(record):
+        raw=b._canonical(record);row={"path":path.as_posix(),"sha256":b._sha(raw)}
+        def read(actual,digest):assert actual==path and digest==b._sha(raw);return raw
+        return b._g4_owner_bootstrap_subject_review(read,row,b.G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT,subject,"apply","development",b.G4_SELECTED_STAFF_BUREAU_SCHEMA)
+    assert invoke(record)==record
+    record["reviewer_agent"]=reviewer
+    with pytest.raises(b.BoundedG1BError) as err:invoke(record)
+    assert err.value.reason_code=="bounded_g4_owner_bootstrap_independent_subject"
+
+
+def test_selected_staff_bureau_unknown_family_and_canonical16_binding():
+    b=bounded_g1b;q={key:None for key in b.G4_OWNER_BOOTSTRAP_BINDING_KEYS}
+    q.update(schema_version=b.G4_SELECTED_STAFF_BUREAU_SCHEMA+"-unknown",operation_kind="implement_g4_stage1_successor",stage="apply",repair_sha256={})
+    assert b._routes_g4_owner_bootstrap_binding(q) is True and b._is_g4_owner_bootstrap_binding(q) is False
+    with pytest.raises(b.BoundedG1BError) as err:b._g4_owner_bootstrap_paths(q["operation_kind"],q)
+    assert err.value.reason_code=="bounded_g4_owner_bootstrap_binding_kind"
+    q["schema_version"]=b.G4_SELECTED_STAFF_BUREAU_SCHEMA;subject=b.g4_owner_bootstrap_review_subject(q)
+    q["source_review"]={"path":"synthetic-only","sha256":"a"*64}
+    assert b.g4_owner_bootstrap_review_subject(q)==subject and len(q)==17
+    q["mapping_review"]={"path":"different","sha256":"b"*64}
+    assert b.g4_owner_bootstrap_review_subject(q)!=subject
+
+
+def _selected_staff_bureau_synthetic_loader(monkeypatch,tmp_path,stage="apply",mutation=None,phase="development"):
+    # Real loader with exact selected control/product bytes, but synthetic
+    # inherited policy, Git/index, activation and semantic-review facts.
+    # No actual Git, admission, publication, runtime or configuration proof.
+    b=bounded_g1b;d=_selected_staff_bureau_descriptor(monkeypatch)
+    inherited=b.CONFIGURATION_PATHS|{b.STATE,b.GATES,b.OVERLAY,b.AGENTS,b.G4_STAGE1_INTERACTIVE_SCOPE,
+        b.G4_STAGE1_SUCCESSOR_SCOPE,b.G4_STAGE1_SUCCESSOR_TEST,b.G4_CI_WORKFLOW}|b.SOURCE_PATHS|b.CONTROLLER_PATHS
+    assert len(inherited)==25
+    payloads={p:("synthetic inherited payload "+p).encode() for p in inherited}
+    for p in d["control"]:payloads[p]=(_SELECTED_STAFF_BUREAU_CANDIDATE/p).read_bytes()
+    original_policy={p:payloads[p] for p in (b.STATE,b.GATES,b.OVERLAY,b.AGENTS)}
+    scope=json.loads(payloads[b.G4_STAGE1_SUCCESSOR_SCOPE])
+    scope["source_sha256"]={p:b._sha(payloads[p]) for p in b.SOURCE_PATHS|b.CONTROLLER_PATHS}
+    payloads[b.G4_STAGE1_SUCCESSOR_SCOPE]=b._canonical(scope)+b"\n"
+    after={p:Path(row["path"]).read_bytes() for p,row in d["product_rows"].items()}
+    before={p:Path(row["path"]).read_bytes() for p,row in b.G4_SELECTED_STAFF_BUREAU_BEFORE_ROWS.items()}
+    assert all(b._sha(before[p])==d["before_sha"][p] for p in d["product_sha"])
+    if stage=="apply":payloads.update(after)
+    if mutation in {"state","gates","overlay","agents"}:
+        selected={"state":b.STATE,"gates":b.GATES,"overlay":b.OVERLAY,"agents":b.AGENTS}[mutation];payloads[selected]+=b" "
+    if mutation=="product_drift":payloads["app/services/reception_one_proposal_runtime.py"]+=b" "
+    pins={p:b._sha(raw) for p,raw in payloads.items()}
+    if mutation=="payload_missing":pins.pop(b.AGENTS)
+    elif mutation=="payload_extra":pins["app/unowned.py"]="a"*64
+    elif mutation=="payload_malformed":pins[b.GATES]="invalid"
+    target=tmp_path/"target";source=tmp_path/"source"
+    base=d["base"]["commit"] if stage=="enable" else "b"*40
+    tree=d["base"]["tree"] if stage=="enable" else "c"*40
+    candidate=tree if stage=="admit" else "d"*40
+    paths=d["control"] if stage=="enable" else d["apply_paths"] if stage=="apply" else frozenset()
+    expected_head=base if phase=="development" else "f"*40
+    q={"schema_version":b.G4_SELECTED_STAFF_BUREAU_SCHEMA,"operation_id":"synthetic-selected-staff-bureau-"+stage,
+       "operation_kind":{"enable":"enable_g4_stage1_successor","admit":b.G4_OWNER_BOOTSTRAP_ADMIT_KIND,"apply":"implement_g4_stage1_successor"}[stage],
+       "stage":stage,"phase":phase,"base_commit":base,"base_tree":tree,"expected_head":expected_head,
+       "expected_index_tree":candidate,"candidate_tree":candidate,"source_sha256":scope["source_sha256"],
+       "payload_sha256":pins,"repair_sha256":{p:{"before_sha256":d["preimages"][p] if stage=="enable" else d["before_sha"][p],
+       "after_sha256":pins[p]} for p in paths},"source_review":{"path":"synthetic-only","sha256":"a"*64},
+       "activation_acceptance":None,"product_vector":d["vector"],"mapping_review":d["mapping"]}
+    if mutation=="null_pair":q["repair_sha256"]["app/services/reception_one_proposal_runtime.py"]["before_sha256"]=None
+    if mutation=="admit_delta":q["candidate_tree"]="d"*40
+    if mutation=="phase_index":q["expected_index_tree"]="e"*40
+    activation=d["root"]/"entry-admission-v1/independent-enable-push-effect-review-v1.json"
+    record={"schema":"emr4.g4_operation_review.v1","status":"PASS","verdict":"PASS_G4_STAGE1_OWNER_BOOTSTRAP_CONTROL_PUBLICATION_EFFECT",
+        "reviewer_agent":"/synthetic/independent-review-fixture","independent":True,"implementation_authorship":False,"blocking_findings":[],
+        "stage":"enable","phase":"push","base":d["base"]["commit"],"commit":base,"candidate_tree":tree,
+        "control_activation_accepted":True,"same_attempt_remote_readback_verified":True,"protected_refs_unchanged":True,
+        "whole_inverse_verified_same_attempt":True,"published_ref":b.G4_STAGE1_INTERACTIVE_BACKEND_REF}
+    if mutation=="activation_controller_author":record["reviewer_agent"]=b.G4_SELECTED_STAFF_BUREAU_CONTROLLER_AUTHOR
+    activation_raw=b._canonical(record)
+    if stage!="enable":q["activation_acceptance"]={"path":activation.as_posix(),"sha256":b._sha(activation_raw)}
+    if mutation=="old_activation_root":q["activation_acceptance"]["path"]=(b.G4_PRACTICE_READ_CONTEXT_ROOT/"entry-admission-v1"/activation.name).as_posix()
+    previous=(_SELECTED_STAFF_BUREAU_PREDECESSOR/b.G4_STAGE1_SUCCESSOR_SCOPE).read_bytes()
+    assert b._sha(previous)==d["preimages"][b.G4_STAGE1_SUCCESSOR_SCOPE]
+    def read(path,digest):
+        if path==activation:raw=activation_raw
+        elif path.is_relative_to(target):raw=payloads[path.relative_to(target).as_posix()]
+        elif path.is_relative_to(source):raw=payloads[path.relative_to(source).as_posix()]
+        else:
+            matches=[p for p,row in d["product_rows"].items() if Path(row["path"])==path]
+            assert len(matches)==1;raw=after[matches[0]]
+        assert b._sha(raw)==digest;return raw
+    def git_bytes(actual,*args):
+        assert actual==target
+        if args==("cat-file","blob",d["base"]["commit"]+":"+b.G4_STAGE1_SUCCESSOR_SCOPE):return previous
+        if args[:2]==("ls-tree","-z"):
+            assert len(args)==5 and args[2]==base and args[3]=="--" and args[4] in paths
+            return b"" if mutation=="committed_missing" else b"100644 blob synthetic\x00"
+        assert args[:2]==("cat-file","blob") and len(args)==3
+        commit,path=args[2].split(":",1)
+        if commit==base:
+            if path in before:return before[path]+(b" " if mutation=="wrong_committed_before" and path=="app/services/reception_one_proposal_runtime.py" else b"")
+            return payloads[path]
+        assert commit==d["base"]["commit"] and path in original_policy;return original_policy[path]
+    def git(actual,*args):
+        assert actual==target
+        if args==("rev-parse",d["base"]["commit"]+"^{tree}"):return d["base"]["tree"]
+        if args==("cat-file","commit",base):
+            return "tree "+tree+"\nparent "+("e"*40 if mutation=="wrong_parent" else d["base"]["commit"])+"\n\nsynthetic only"
+        assert phase!="development" and args==("cat-file","commit",expected_head)
+        return "tree "+("e"*40 if mutation=="phase_tree" else candidate)+"\nparent "+("e"*40 if mutation=="phase_parent" else base)+"\n\nsynthetic phase only"
+    monkeypatch.setattr(b,"_g4_owner_bootstrap_external_inputs",lambda read,q:({},{}))
+    monkeypatch.setattr(b,"_g4_owner_bootstrap_subject_review",lambda *args:{"synthetic":True})
+    monkeypatch.setattr(b.trusted_git,"run_git_bytes",git_bytes);monkeypatch.setattr(b.trusted_git,"run_git",git)
+    monkeypatch.setattr(b.trusted_git,"attest_target_index",lambda *args,**kwargs:{"synthetic":True})
+    if stage=="enable":
+        # Stop before control-preimage checks: this fixture's seven inherited
+        # source bytes are synthetic, so it cannot prove a genuine ENABLE.
+        class PayloadGateReached(Exception):pass
+        original_read=read
+        def read(path,digest):
+            if path.is_relative_to(target):raise PayloadGateReached()
+            return original_read(path,digest)
+        with pytest.raises(PayloadGateReached):
+            b._load_g4_owner_bootstrap_inputs(None,target,source,b.G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT,tmp_path/"scratch",q,read,{})
+        return None
+    return b._load_g4_owner_bootstrap_inputs(None,target,source,b.G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT,tmp_path/"scratch",q,read,{})
+
+
+@pytest.mark.parametrize("stage",["enable","admit","apply"])
+def test_selected_staff_bureau_loader25_or30_and_zero_delta_baseline(monkeypatch,tmp_path,stage):
+    loaded=_selected_staff_bureau_synthetic_loader(monkeypatch,tmp_path,stage)
+    if stage!="enable":
+        assert len(loaded.payloads)==(30 if stage=="apply" else 25)
+        assert len(loaded.binding["repair_sha256"])==(5 if stage=="apply" else 0)
+
+
+@pytest.mark.parametrize("mutation,reason",[
+    ("payload_missing","bounded_g4_owner_bootstrap_payload_paths"),
+    ("payload_extra","bounded_g4_owner_bootstrap_payload_paths"),
+    ("payload_malformed","bounded_g4_owner_bootstrap_payload_paths"),
+    ("null_pair","bounded_g4_owner_bootstrap_change_preimage"),
+    ("committed_missing","bounded_g4_owner_bootstrap_change_preimage"),
+    ("wrong_committed_before","bounded_g4_owner_bootstrap_change_preimage"),
+    ("product_drift","bounded_g4_selected_staff_bureau_selected_payload"),
+    ("old_activation_root","bounded_g4_owner_bootstrap_activation_path"),
+    ("activation_controller_author","bounded_g4_owner_bootstrap_activation_acceptance"),
+    ("wrong_parent","bounded_g4_owner_bootstrap_activation_parent"),
+    ("state","bounded_g4_owner_bootstrap_state_unchanged"),
+    ("gates","bounded_g4_owner_bootstrap_state_unchanged"),
+    ("overlay","bounded_g4_owner_bootstrap_state_unchanged"),
+    ("agents","bounded_g4_owner_bootstrap_state_unchanged")])
+def test_selected_staff_bureau_loader_refuses_boundary_drift(monkeypatch,tmp_path,mutation,reason):
+    assert len(_selected_staff_bureau_synthetic_loader(monkeypatch,tmp_path).binding["repair_sha256"])==5
+    with pytest.raises(bounded_g1b.BoundedG1BError) as err:_selected_staff_bureau_synthetic_loader(monkeypatch,tmp_path,mutation=mutation)
+    assert err.value.reason_code==reason
+
+
+def test_selected_staff_bureau_admit_refuses_nonzero_candidate(monkeypatch,tmp_path):
+    assert _selected_staff_bureau_synthetic_loader(monkeypatch,tmp_path,"admit").binding["repair_sha256"]=={}
+    with pytest.raises(bounded_g1b.BoundedG1BError) as err:_selected_staff_bureau_synthetic_loader(monkeypatch,tmp_path,"admit","admit_delta")
+    assert err.value.reason_code=="bounded_g4_owner_bootstrap_admit_no_delta"
+
+
+@pytest.mark.parametrize("phase",["pre-push","post-push"])
+def test_selected_staff_bureau_phase_commit_parent_tree_and_index_binding(monkeypatch,tmp_path,phase):
+    loaded=_selected_staff_bureau_synthetic_loader(monkeypatch,tmp_path,phase=phase)
+    assert loaded.binding["phase"]==phase and loaded.binding["expected_head"]=="f"*40
+    for mutation in ("phase_parent","phase_tree","phase_index"):
+        with pytest.raises(bounded_g1b.BoundedG1BError) as err:
+            _selected_staff_bureau_synthetic_loader(monkeypatch,tmp_path,mutation=mutation,phase=phase)
+        assert err.value.reason_code=="bounded_g4_owner_bootstrap_committed_binding"
+
+
+# Operative B0 registration baseline only. Preserve the fourteen cold methods.
+# A later existing finite extraction selects only this method, without monkeypatch.
+def test_selected_staff_bureau_operative_registration_and_scope_baseline():
+    b=bounded_g1b
+    assert b.G4_SELECTED_STAFF_BUREAU_TEMPLATE_INERT is False
+    descriptor=b._g4_owner_bootstrap_descriptor(b.G4_SELECTED_STAFF_BUREAU_SCHEMA)
+    assert descriptor is b.G4_SELECTED_STAFF_BUREAU_DESCRIPTOR
+    assert b._g4_owner_bootstrap_descriptor(b.G4_SELECTED_STAFF_BUREAU_SCOPE_SCHEMA,scope=True) is descriptor
+    assert descriptor["version"]==31
+    assert descriptor["base"]=={"commit":"025614ab4f9acb44bc23a7da8077dabc543c8be2","tree":"359d75a8e71f442137df6408f3d96b99b358fd57"}
+    candidate=Path("C:/Users/there/EMR4-tools/selected-staff-bureau-control-enable-source-preparation-v1/after")
+    raw=(candidate/b.G4_STAGE1_SUCCESSOR_SCOPE).read_bytes()
+    scope=json.loads(raw)
+    assert b.validate_g4_owner_bootstrap_scope(scope)==scope["source_sha256"]
+    assert raw==b._canonical(scope)+b"\n"
+    assert len(scope["source_sha256"])==8 and len(scope["allowed_paths"])==5
+    assert set(scope["allowed_paths"])==descriptor["apply_paths"]==b.G4_SELECTED_STAFF_BUREAU_PRODUCT_PATHS
+    assert scope["runtime_binding_required"] is True and scope["admission_grants_runtime_authority"] is False and scope["voice_activation"] is False
+    for path in ("orchestration_harness/bounded_g1b.py",b.G4_STAGE1_SUCCESSOR_TEST):
+        assert scope["control_sha256"][path]==hashlib.sha256((candidate/path).read_bytes()).hexdigest()
+    assert scope["source_sha256"]["orchestration_harness/bounded_g1b.py"]==scope["control_sha256"]["orchestration_harness/bounded_g1b.py"]
