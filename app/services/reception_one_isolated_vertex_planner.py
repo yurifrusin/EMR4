@@ -118,6 +118,8 @@ class IsolatedVertexPlannerResult:
                     or frame["context_revision"] != receipt.context_revision
                     or receipt.frame_bytes != typed_plan.canonical_json(frame).encode("utf-8")
                     or (rebuilt["provenance"]["packet_schema_version"], rebuilt["plan"]["contract_version"]) != (
+                        (typed_plan.STAFF_BOOKING_PACKET_VERSION, typed_plan.STAFF_BOOKING_PLAN_VERSION)
+                        if frame.get("contract_version") == typed_plan.STAFF_BOOKING_INPUT_VERSION else
                         (typed_plan.REQUEST_BOOKING_PACKET_VERSION, typed_plan.REQUEST_BOOKING_PLAN_VERSION)
                         if frame.get("contract_version") == typed_plan.REQUEST_BOOKING_INPUT_VERSION else
                         (typed_plan.POINT_PACKET_VERSION, typed_plan.POINT_PLAN_VERSION))
@@ -373,6 +375,9 @@ def run_isolated_vertex_planner(
 ) -> IsolatedVertexPlannerResult:
     """Run one exact v6.8 runtime dialogue with no fallback."""
 
+    if (type(frame) is dict
+            and frame.get("contract_version") == "reception.one.bureau.plan-input.staff-booking.v1"):
+        raise IsolatedVertexPlannerError("isolated_staff_booking_unwired")
     _validate_frame(frame, observed_at)
     authority = _resolve_control_path(
         authority_path,
@@ -571,7 +576,8 @@ def compile_received_model_reply(
             or frame_observed_at.tzinfo is None or received_at.tzinfo is None):
         raise IsolatedVertexPlannerError("isolated_model_reply_boundary_invalid")
     snapshot = copy.deepcopy(frame)
-    if (snapshot.get("contract_version") == "reception.one.bureau.plan-input.request-booking.v2"
+    if (snapshot.get("contract_version") in {"reception.one.bureau.plan-input.request-booking.v2",
+                                               "reception.one.bureau.plan-input.staff-booking.v1"}
             and not 1 <= len(raw_response) <= 32768):
         raise IsolatedVertexPlannerError("isolated_model_reply_boundary_invalid")
     _validate_frame(snapshot, frame_observed_at)
@@ -581,9 +587,11 @@ def compile_received_model_reply(
         built = typed_plan.compile_model_semantic_packet(
             snapshot, raw_response, case_id=snapshot["request_id"], now=received_at,
         )
-        # Closed discriminator: the accepted point branch or the new grounded
-        # request-booking branch. Neither admits another catalogue family.
+        # Closed discriminators preserve point/request and add only the unwired
+        # explicit staff-booking family. This pure helper grants no admission.
         if (built["provenance"]["packet_schema_version"], built["plan"]["contract_version"]) != (
+                (typed_plan.STAFF_BOOKING_PACKET_VERSION, typed_plan.STAFF_BOOKING_PLAN_VERSION)
+                if snapshot.get("contract_version") == typed_plan.STAFF_BOOKING_INPUT_VERSION else
                 (typed_plan.REQUEST_BOOKING_PACKET_VERSION, typed_plan.REQUEST_BOOKING_PLAN_VERSION)
                 if snapshot.get("contract_version") == typed_plan.REQUEST_BOOKING_INPUT_VERSION else
                 (typed_plan.POINT_PACKET_VERSION, typed_plan.POINT_PLAN_VERSION)):

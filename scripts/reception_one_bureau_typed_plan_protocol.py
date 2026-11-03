@@ -126,7 +126,8 @@ def schema_error_paths(value: Any, schema: dict[str, Any]) -> list[str]:
         branch = {"reception.one.bureau.plan-draft.v1": "legacyPlan",
                   "reception.one.bureau.plan-draft.model-first.v1": "modelFirstPlan",
                   "reception.one.bureau.plan-draft.model-first.point.v2": "pointModelPlan",
-                  "reception.one.bureau.plan-draft.model-first.request-booking.v2": "requestBookingPlan"}.get(version)
+                  "reception.one.bureau.plan-draft.model-first.request-booking.v2": "requestBookingPlan",
+                   "reception.one.bureau.plan-draft.model-first.staff-booking.v1": "staffBookingPlan"}.get(version)
         if branch is not None:
             schema = {**schema["$defs"][branch], "$defs": schema["$defs"]}
     validator = Draft202012Validator(schema, format_checker=FormatChecker())
@@ -146,7 +147,8 @@ def validate_schema(value: Any, schema_name: str) -> None:
     schema = load_json(SCHEMA_PATHS[schema_name])
     if schema_name == "packet":
         # Lookup only: adding this definition never admits a packet as a plan.
-        branch = ("requestBookingPacket" if isinstance(value, dict) and value.get("packet_schema") == REQUEST_BOOKING_PACKET_VERSION else
+        branch = ("staffBookingPacket" if isinstance(value, dict) and value.get("packet_schema") == STAFF_BOOKING_PACKET_VERSION else
+                  "requestBookingPacket" if isinstance(value, dict) and value.get("packet_schema") == REQUEST_BOOKING_PACKET_VERSION else
                   "semanticPacketV3" if isinstance(value, dict) and value.get("packet_schema") == POINT_PACKET_VERSION else "semanticPacket")
         schema = {"$schema": schema["$schema"], "$ref": "#/$defs/" + branch, "$defs": schema["$defs"]}
     failures = schema_error_paths(value, schema)
@@ -254,6 +256,88 @@ def request_booking_clarification(frame, intent):
                      extra_warnings=["no_reservation"] if not slots else [])
 
 
+STAFF_BOOKING_PACKET_VERSION = "emr4.bureau_model_semantic_packet.staff-booking.v1"
+STAFF_BOOKING_PLAN_VERSION = "reception.one.bureau.plan-draft.model-first.staff-booking.v1"
+STAFF_BOOKING_CONSTRUCTOR_VERSION = "emr4.bureau_model_semantic_constructor.staff-booking.v1"
+STAFF_BOOKING_INPUT_VERSION = "reception.one.bureau.plan-input.staff-booking.v1"
+STAFF_BOOKING_FIELDS = REQUEST_BOOKING_FIELDS
+
+
+def _staff_booking_selection(frame):
+    """Validate explicit capture facts, not authentication or user intent."""
+    if frame.get("contract_version") != STAFF_BOOKING_INPUT_VERSION:
+        raise ValueError("staff booking family refused")
+    context = frame["context"]
+    selected = context["selected_booking"]
+    if (len(context["patients"]) != 1 or len(context["practitioners"]) != 1
+            or context["patients"][0]["id"] != selected["patient_ref"]
+            or context["practitioners"][0]["id"] != selected["practitioner_ref"]
+            or context["selected_appointment"] is not None or context["appointments"]
+            or type(selected["duration_minutes"]) is not int
+            or not 5 <= selected["duration_minutes"] <= 180
+            or selected["earliest_time"] > selected["latest_start_time"]):
+        raise ValueError("staff booking selection refused")
+    observed = datetime.fromisoformat(frame["observed_at"].replace("Z", "+00:00"))
+    expiry = datetime.fromisoformat(frame["expires_at"].replace("Z", "+00:00"))
+    if observed.tzinfo is None or expiry - observed != timedelta(seconds=120):
+        raise ValueError("staff booking lifetime refused")
+    slots = context["candidate_slots"]
+    if (len(slots) > 8 or len({slot["id"] for slot in slots}) != len(slots)
+            or len({(slot["date"], slot["start_time"], slot["duration_minutes"]) for slot in slots}) != len(slots)):
+        raise ValueError("staff booking candidates refused")
+    for slot in slots:
+        if (slot["classification"] != "available"
+                or slot["practitioner_ref"] != selected["practitioner_ref"]
+                or slot["date"] != selected["appointment_date"]
+                or type(slot["duration_minutes"]) is not int
+                or slot["duration_minutes"] != selected["duration_minutes"]
+                or not selected["earliest_time"] <= slot["start_time"] <= selected["latest_start_time"]):
+            raise ValueError("staff booking candidate scope refused")
+    return selected
+
+
+def staff_booking_steps(goal, fields):
+    """Refine visible selected context; never manufacture a submitted request."""
+    if goal == "clarification":
+        return [{"id": "step-01-staff-clarification", "operator": "request_clarification", "args": {}}]
+    if goal != "create":
+        raise ValueError("staff booking action refused")
+    def source(field):
+        return {"kind": "context_ref", "field": "selected_booking." + field}
+    def refinement(field, fallback=None):
+        return semantic_binding(field) if field in fields else source(fallback or field)
+    return [
+        {"id": "step-01-staff-search", "operator": "search_available_slots", "args": {
+            "practitioner": source("practitioner_ref"), "date": refinement("appointment_date"),
+            "earliest_time": refinement("earliest_time"), "latest_time": refinement("latest_time", "latest_start_time"),
+            "duration_minutes": refinement("duration_minutes")}},
+        {"id": "step-02-staff-create", "operator": "prepare_create_proposal", "args": {
+            "patient": source("patient_ref"), "practitioner": source("practitioner_ref"),
+            "duration_minutes": refinement("duration_minutes"),
+            "candidates": step_binding("step-01-staff-search", "candidates")}},
+    ]
+
+
+def staff_booking_candidate_slots(frame, values):
+    """Only intersect this capture. Outside it requires a new read or clarification."""
+    selected = _staff_booking_selection(frame)
+    day = values.get("appointment_date", selected["appointment_date"])
+    duration = values.get("duration_minutes", selected["duration_minutes"])
+    earliest = max(selected["earliest_time"], values.get("earliest_time", selected["earliest_time"]))
+    latest = min(selected["latest_start_time"], values.get("latest_time", selected["latest_start_time"]))
+    if day != selected["appointment_date"] or duration != selected["duration_minutes"]:
+        return []
+    return sorted((slot for slot in frame["context"]["candidate_slots"]
+                   if earliest <= slot["start_time"] <= latest),
+                  key=lambda slot: (slot["date"], slot["start_time"], slot["id"]))
+
+
+def staff_booking_clarification(frame, intent):
+    slots = staff_booking_candidate_slots(frame, intent.normalized_values)
+    return _proposal("clarification", operation_id=None,
+                     extra_warnings=["no_reservation"] if not slots else [])
+
+
 @dataclass(frozen=True)
 class ValidatedModelIntent:
     """Untrusted proposed meaning, structurally bound to one immutable frame.
@@ -268,11 +352,14 @@ class ValidatedModelIntent:
 def validated_model_intent(frame: dict[str, Any], plan: dict[str, Any]) -> ValidatedModelIntent:
     """Validate the closed model contract without regex semantic extraction."""
     validate_schema(plan, "plan")
-    if plan.get("contract_version") not in {MODEL_PLAN_VERSION, POINT_PLAN_VERSION, REQUEST_BOOKING_PLAN_VERSION}:
+    if plan.get("contract_version") not in {MODEL_PLAN_VERSION, POINT_PLAN_VERSION, REQUEST_BOOKING_PLAN_VERSION, STAFF_BOOKING_PLAN_VERSION}:
         raise ValueError("model contract required")
     if ((frame.get("contract_version") == REQUEST_BOOKING_INPUT_VERSION)
             != (plan.get("contract_version") == REQUEST_BOOKING_PLAN_VERSION)):
         raise ValueError("request booking family mismatch")
+    if ((frame.get("contract_version") == STAFF_BOOKING_INPUT_VERSION)
+            != (plan.get("contract_version") == STAFF_BOOKING_PLAN_VERSION)):
+        raise ValueError("staff booking family mismatch")
     intent = plan["interpretation"]
     if (intent["frame_sha256"] != canonical_sha256(frame)
             or type(intent["context_revision"]) is not int
@@ -357,6 +444,11 @@ def validated_model_intent(frame: dict[str, Any], plan: dict[str, Any]) -> Valid
         expiry = datetime.fromisoformat(frame["expires_at"].replace("Z", "+00:00"))
         if observed.tzinfo is None or expiry - observed != timedelta(seconds=120):
             raise ValueError("request booking lifetime refused")
+    if plan.get("contract_version") == STAFF_BOOKING_PLAN_VERSION:
+        _staff_booking_selection(frame)
+        if (not set(values).issubset(STAFF_BOOKING_FIELDS)
+                or values["intended_action"] not in {"create", "clarification"}):
+            raise ValueError("staff booking interpretation refused")
     if values["intended_action"] != plan["goal"]:
         raise ValueError("model goal disagrees with chosen action")
     if ("earliest_time" in values and "latest_time" in values
@@ -382,6 +474,8 @@ def model_plan_consistent(frame: dict[str, Any], plan: dict[str, Any], intent: V
     if intent is None or plan.get("planner_class") != "untrusted_model_candidate":
         return False
     steps = plan.get("steps", [])
+    if plan.get("contract_version") == STAFF_BOOKING_PLAN_VERSION:
+        return steps == staff_booking_steps(intent.intended_action, intent.normalized_values)
     if plan.get("contract_version") == REQUEST_BOOKING_PLAN_VERSION:
         return steps == request_booking_steps(intent.intended_action, intent.normalized_values)
     if plan.get("contract_version") == POINT_PLAN_VERSION:
@@ -415,6 +509,11 @@ def model_dataflow_mismatches(plan: dict[str, Any], intent: ValidatedModelIntent
     Move deliberately preserves the selected row's practitioner and duration;
     those cannot simultaneously be presented as changed interpretation fields.
     """
+    if plan.get("contract_version") == STAFF_BOOKING_PLAN_VERSION:
+        return ([] if "intended_action" in intent.normalized_values
+                and set(intent.normalized_values).issubset(STAFF_BOOKING_FIELDS)
+                and plan["steps"] == staff_booking_steps(intent.intended_action, intent.normalized_values)
+                else ["$.steps"])
     if plan.get("contract_version") == REQUEST_BOOKING_PLAN_VERSION:
         return ([] if "intended_action" in intent.normalized_values
                 and set(intent.normalized_values).issubset(REQUEST_BOOKING_FIELDS)
@@ -1026,6 +1125,14 @@ def binding_type_and_value(
         request_types = {"patient_ref": "patient_ref", "practitioner_ref": "practitioner_ref",
                          "appointment_date": "date", "earliest_time": "time",
                          "latest_start_time": "time", "duration_minutes": "integer"}
+        if isinstance(field, str) and field.startswith("selected_booking."):
+            leaf = field[len("selected_booking."):]
+            selected = frame["context"].get("selected_booking", {})
+            value = selected.get(leaf)
+            valid = (frame.get("contract_version") == STAFF_BOOKING_INPUT_VERSION
+                     and isinstance(extraction, ValidatedModelIntent)
+                     and leaf in request_types and value is not None)
+            return request_types.get(leaf), value, valid, None if valid else "ungrounded_binding"
         if isinstance(field, str) and field.startswith("selected_request."):
             leaf = field[len("selected_request."):]
             request = frame["context"].get("selected_request", {})
@@ -1092,7 +1199,7 @@ def proofread_plan(
         normalized, load_json(SCHEMA_PATHS["plan"])
     )
     legacy_mode = normalized.get("contract_version") == LEGACY_PLAN_VERSION
-    model_mode = normalized.get("contract_version") in {MODEL_PLAN_VERSION, POINT_PLAN_VERSION, REQUEST_BOOKING_PLAN_VERSION}
+    model_mode = normalized.get("contract_version") in {MODEL_PLAN_VERSION, POINT_PLAN_VERSION, REQUEST_BOOKING_PLAN_VERSION, STAFF_BOOKING_PLAN_VERSION}
     model_invalid = False
     if legacy_mode:
         extraction = extraction_for(frame)
@@ -1116,6 +1223,11 @@ def proofread_plan(
             violations.append(_violation("$.interpretation", "schema_invalid"))
     if (frame.get("contract_version") == REQUEST_BOOKING_INPUT_VERSION
             and normalized.get("contract_version") != REQUEST_BOOKING_PLAN_VERSION):
+        checks["schema_exact"] = False
+        violations.append(_violation("$.contract_version", "schema_invalid"))
+
+    if (frame.get("contract_version") == STAFF_BOOKING_INPUT_VERSION
+            and normalized.get("contract_version") != STAFF_BOOKING_PLAN_VERSION):
         checks["schema_exact"] = False
         violations.append(_violation("$.contract_version", "schema_invalid"))
 
@@ -1254,6 +1366,8 @@ def proofread_plan(
     if normalized.get("contract_version") == POINT_PLAN_VERSION and repairs:
         violations.append(_violation("$.steps", "semantic_action_mismatch"))
     if normalized.get("contract_version") == REQUEST_BOOKING_PLAN_VERSION and repairs:
+        violations.append(_violation("$.steps", "semantic_action_mismatch"))
+    if normalized.get("contract_version") == STAFF_BOOKING_PLAN_VERSION and repairs:
         violations.append(_violation("$.steps", "semantic_action_mismatch"))
     if not legacy_mode:
         checks["semantic_action_consistent"] = model_mode and model_plan_consistent(frame, normalized, extraction)
@@ -1584,6 +1698,13 @@ def execute_operator(
             }
         }
     if operator_id == "search_available_slots":
+        if frame.get("contract_version") == STAFF_BOOKING_INPUT_VERSION:
+            selected = _staff_booking_selection(frame)
+            if args["practitioner"] != selected["practitioner_ref"]:
+                raise ValueError("staff booking practitioner refused")
+            return {"candidates": staff_booking_candidate_slots(frame, {
+                "appointment_date": args["date"], "earliest_time": args["earliest_time"],
+                "latest_time": args["latest_time"], "duration_minutes": args["duration_minutes"]})}
         if frame.get("contract_version") == REQUEST_BOOKING_INPUT_VERSION:
             # Empty is a typed no-offer input to this family's proposal step.
             # Other catalogue families retain their existing no-slot refusal.
@@ -1643,7 +1764,7 @@ def execute_operator(
                 practitioner_ref=args["practitioner"],
                 candidate_slots=args["candidates"],
                 duration_minutes=args["duration_minutes"],
-                preserve_candidate_order=frame.get("contract_version") == REQUEST_BOOKING_INPUT_VERSION,
+                preserve_candidate_order=frame.get("contract_version") in {REQUEST_BOOKING_INPUT_VERSION, STAFF_BOOKING_INPUT_VERSION},
             )
         }
     if operator_id == "prepare_point_move_proposal":
@@ -1738,7 +1859,7 @@ def execute_plan(
     operators = operator_map(load_json(CATALOG_PATH))
     if normalized_plan.get("contract_version") == LEGACY_PLAN_VERSION:
         extraction = extraction_for(frame)
-    elif normalized_plan.get("contract_version") in {MODEL_PLAN_VERSION, POINT_PLAN_VERSION, REQUEST_BOOKING_PLAN_VERSION}:
+    elif normalized_plan.get("contract_version") in {MODEL_PLAN_VERSION, POINT_PLAN_VERSION, REQUEST_BOOKING_PLAN_VERSION, STAFF_BOOKING_PLAN_VERSION}:
         if now is None:
             raise ValueError("model-first execution requires explicit trusted clock")
         # Recheck same candidates/evidence/frame, expiry, signatures and effects.
@@ -1790,6 +1911,10 @@ def execute_plan(
         # Keep catalogue outputs typed and the reviewed create plan unchanged.
         # Only this release boundary derives no-offer as existing clarification.
         final_output = request_booking_clarification(frame, extraction)
+    if (normalized_plan.get("contract_version") == STAFF_BOOKING_PLAN_VERSION
+            and (normalized_plan["goal"] == "clarification"
+                 or not staff_booking_candidate_slots(frame, extraction.normalized_values))):
+        final_output = staff_booking_clarification(frame, extraction)
     result = {
         "contract_version": "reception.one.bureau.execution-result.v1",
         "request_id": frame["request_id"],
@@ -2099,6 +2224,9 @@ def compile_model_semantic_packet(
     if type(raw_response) is not bytes:
         raise SemanticPacketRefusal("packet_bytes_required", provenance)
     provenance["raw_response_sha256"] = hashlib.sha256(raw_response).hexdigest()
+    if (type(frame) is dict and frame.get("contract_version") == STAFF_BOOKING_INPUT_VERSION
+            and not 1 <= len(raw_response) <= 32768):
+        raise SemanticPacketRefusal("packet_staff_bytes_refused", provenance)
     # A private detached snapshot avoids mutating the caller's frame.
     frame = copy.deepcopy(frame)
     try:
@@ -2135,6 +2263,12 @@ def compile_model_semantic_packet(
         raise SemanticPacketRefusal("packet_case_refused", provenance)
     point = packet["packet_schema"] == POINT_PACKET_VERSION
     booking = packet["packet_schema"] == REQUEST_BOOKING_PACKET_VERSION
+    staff = packet["packet_schema"] == STAFF_BOOKING_PACKET_VERSION
+    if staff != (frame.get("contract_version") == STAFF_BOOKING_INPUT_VERSION):
+        raise SemanticPacketRefusal("packet_staff_family_refused", provenance)
+    if staff:
+        provenance["packet_schema_version"] = STAFF_BOOKING_PACKET_VERSION
+        provenance["constructor_version"] = STAFF_BOOKING_CONSTRUCTOR_VERSION
     if booking:
         provenance["packet_schema_version"] = REQUEST_BOOKING_PACKET_VERSION
         provenance["constructor_version"] = REQUEST_BOOKING_CONSTRUCTOR_VERSION
@@ -2158,7 +2292,7 @@ def compile_model_semantic_packet(
         raise SemanticPacketRefusal("packet_selection_refused", provenance)
     # Resolve the selected action ID to its VALUE; never use the ID as goal.
     goal = by_id[selected["intended_action"]]["value"]
-    if (goal not in {"create", "clarification"} if booking else goal not in _SEMANTIC_PACKET_ROUTES):
+    if (goal not in {"create", "clarification"} if booking or staff else goal not in _SEMANTIC_PACKET_ROUTES):
         raise SemanticPacketRefusal("packet_action_unsupported", provenance)
     targets = packet["target_bindings"]
     expected_targets = {} if goal == "clarification" else {
@@ -2169,12 +2303,15 @@ def compile_model_semantic_packet(
     if booking:
         expected_targets = {} if goal == "clarification" else {
             "selected_request": {"kind": "context_ref", "field": "selected_request"}}
+    if staff:
+        expected_targets = {} if goal == "clarification" else {
+            "selected_booking": {"kind": "context_ref", "field": "selected_booking"}}
     if targets != expected_targets:
         raise SemanticPacketRefusal("packet_target_roles_refused", provenance)
     # Do not guess or pre-resolve identity here. The unchanged proofreader
     # requires exactly one actual patient and practitioner for the selected row.
     plan = base_plan(frame, planner_class="untrusted_model_candidate", goal=goal)
-    plan["contract_version"] = REQUEST_BOOKING_PLAN_VERSION if booking else POINT_PLAN_VERSION if point else MODEL_PLAN_VERSION
+    plan["contract_version"] = STAFF_BOOKING_PLAN_VERSION if staff else REQUEST_BOOKING_PLAN_VERSION if booking else POINT_PLAN_VERSION if point else MODEL_PLAN_VERSION
     plan["interpretation"] = copy.deepcopy(interpretation)
     if point and (goal != "move" or set(selected) != {"intended_action", "appointment_date", "target_start_local"}):
         raise SemanticPacketRefusal("packet_point_fields_refused", provenance)
@@ -2182,7 +2319,11 @@ def compile_model_semantic_packet(
                     or not set(selected).issubset(REQUEST_BOOKING_FIELDS)
                     or any(item["field"] not in REQUEST_BOOKING_FIELDS for item in candidates)):
         raise SemanticPacketRefusal("packet_request_fields_refused", provenance)
-    route = () if booking else _POINT_PACKET_ROUTE if point else _SEMANTIC_PACKET_ROUTES[goal]
+    if staff and ("intended_action" not in selected
+                  or not set(selected).issubset(STAFF_BOOKING_FIELDS)
+                  or any(item["field"] not in STAFF_BOOKING_FIELDS for item in candidates)):
+        raise SemanticPacketRefusal("packet_staff_fields_refused", provenance)
+    route = () if booking or staff else _POINT_PACKET_ROUTE if point else _SEMANTIC_PACKET_ROUTES[goal]
     for identifier, operator, tokens in route:
         args = {}
         for name, token in tokens.items():
@@ -2195,7 +2336,9 @@ def compile_model_semantic_packet(
         plan["steps"].append({"id": identifier, "operator": operator, "args": args})
     if booking:
         plan["steps"] = request_booking_steps(goal, selected)
-    if goal == "clarification" and not booking:
+    if staff:
+        plan["steps"] = staff_booking_steps(goal, selected)
+    if goal == "clarification" and not (booking or staff):
         # Validate the COMPLETE original interpretation before omitting unused
         # fields from the action-only clarification plan. Never drop malformed
         # evidence, invalid values or unresolved supersession to obtain a pass.

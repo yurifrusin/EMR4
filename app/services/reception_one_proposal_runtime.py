@@ -11,6 +11,7 @@ from datetime import date, datetime, time, timedelta, timezone
 from dataclasses import dataclass, field
 import hashlib
 import hmac
+import json
 import re
 import secrets
 from typing import Any
@@ -1038,6 +1039,209 @@ def request_booking_envelope(*, frame, source, planner_result, now):
             or final["candidate_slot_ids"] != [slot["id"] for slot in eligible]
             or not set(final["candidate_slot_ids"]).issubset(dict(source.slot_items))):
         raise ReceptionOneRuntimeError("request_booking_proposal_invalid")
+    return final
+
+
+@dataclass(frozen=True)
+class SelectedStaffBookingSource:
+    """Private immutable capture facts, not authentication or an API capability.
+
+    UNWIRED: a future reviewed caller must validate current selected membership,
+    role/generation, tenant patient/resources and availability before construction,
+    then revalidate them at receive/selection/dispatch. An A read snapshot alone
+    grants none of that authority. These values prove only the retained data join.
+    """
+    frame_sha256: str
+    request_id: str
+    binding_items: tuple
+    slot_items: tuple
+    interval_items: tuple
+
+
+def build_staff_booking_frame(*, instruction, reference_date, correlation_id,
+                              observed_at, binding, patient_display,
+                              practitioner_display, slot_proposal, handle_key):
+    """Pure explicit-context constructor; no DB, name discovery, model or write.
+
+    The selected date/window/duration must be visible intentional UI context.
+    They are not inferred user meaning. Outside this capture needs a fresh
+    bounded read/context or clarification. reference_date may be the admitted
+    clinic-local demo date; observed_at/expiry remain trusted real UTC.
+    The caller supplies an actually validated stored IANA zone and same-zone
+    candidate instants. This constructor does not authenticate those assertions.
+    """
+    from scripts import reception_one_bureau_typed_plan_protocol as protocol
+    required = {"account_id", "membership_id", "actor_id", "practice_id",
+                "authority_generation", "role", "patient_id", "practitioner_id",
+                "appointment_type_id", "location_id", "practice_timezone",
+                "appointment_date", "earliest_time", "latest_start_time", "duration_minutes"}
+    if (type(binding) is not dict or set(binding) != required
+            or type(instruction) is not str or not 1 <= len(instruction) <= 512
+            or not instruction.strip() or type(correlation_id) is not str
+            or not 3 <= len(correlation_id) <= 100 or type(reference_date) is not date
+            or not isinstance(observed_at, datetime) or observed_at.tzinfo is None
+            or observed_at.utcoffset() != timedelta(0)
+            or type(handle_key) is not bytes or len(handle_key) < 32
+            or type(binding["authority_generation"]) is not int
+            or binding["authority_generation"] < 1
+            or type(binding["duration_minutes"]) is not int
+            or not 5 <= binding["duration_minutes"] <= 180):
+        raise ReceptionOneRuntimeError("staff_booking_capture_invalid")
+    for field in ("account_id", "membership_id", "actor_id", "practice_id",
+                  "patient_id", "practitioner_id", "appointment_type_id", "location_id"):
+        value = binding[field]
+        if value is None and field in {"appointment_type_id", "location_id"}:
+            continue
+        try:
+            valid = type(value) is str and str(uuid.UUID(value)) == value
+        except ValueError:
+            valid = False
+        if not valid:
+            raise ReceptionOneRuntimeError("staff_booking_identity_invalid")
+    if (type(binding["role"]) is not str or not 1 <= len(binding["role"]) <= 40
+            or type(binding["practice_timezone"]) is not str
+            or not 1 <= len(binding["practice_timezone"]) <= 100
+            or not re.fullmatch(r"[A-Za-z0-9_+-]+(?:/[A-Za-z0-9_+-]+)*", binding["practice_timezone"])
+            or type(binding["appointment_date"]) is not str):
+        raise ReceptionOneRuntimeError("staff_booking_context_invalid")
+    try:
+        valid_date = date.fromisoformat(binding["appointment_date"]).isoformat() == binding["appointment_date"]
+    except ValueError:
+        valid_date = False
+    if not valid_date:
+        raise ReceptionOneRuntimeError("staff_booking_context_invalid")
+    for field in ("earliest_time", "latest_start_time"):
+        if (type(binding[field]) is not str
+                or not re.fullmatch(r"(?:[01]\d|2[0-3]):[0-5]\d", binding[field])):
+            raise ReceptionOneRuntimeError("staff_booking_window_invalid")
+    if binding["earliest_time"] > binding["latest_start_time"]:
+        raise ReceptionOneRuntimeError("staff_booking_window_invalid")
+    for display in (patient_display, practitioner_display):
+        if type(display) is not str or not 1 <= len(display) <= 80:
+            raise ReceptionOneRuntimeError("staff_booking_display_invalid")
+    if (not isinstance(slot_proposal, SlotSearchProposalOut) or slot_proposal.safe is not True
+            or len(slot_proposal.candidates) > MAX_CANDIDATE_SLOTS):
+        raise ReceptionOneRuntimeError("staff_booking_availability_invalid")
+    handles = {kind: _opaque_handle(kind, binding[field], handle_key=handle_key)
+               for kind, field in (("patient", "patient_id"), ("practitioner", "practitioner_id"))}
+    slots = _slot_context(slot_proposal, practitioner_handle=handles["practitioner"], handle_key=handle_key)
+    intervals = []
+    for slot, candidate in zip(slots, slot_proposal.candidates):
+        if (not isinstance(candidate.start_time, datetime) or candidate.start_time.tzinfo is None
+                or candidate.start_time_local.second != 0 or candidate.start_time_local.microsecond != 0
+                or type(candidate.duration_minutes) is not int
+                or candidate.duration_minutes != binding["duration_minutes"]
+                or candidate.appointment_date.isoformat() != binding["appointment_date"]
+                or not binding["earliest_time"] <= slot["start_time"] <= binding["latest_start_time"]):
+            raise ReceptionOneRuntimeError("staff_booking_interval_invalid")
+        intervals.append((slot["id"], protocol.canonical_json({
+            "appointment_date": slot["date"], "start_time_local": slot["start_time"],
+            "start_time": candidate.start_time.astimezone(timezone.utc).isoformat().replace("+00:00", "Z"),
+            "duration_minutes": slot["duration_minutes"]})))
+    if len({item[1] for item in intervals}) != len(intervals):
+        raise ReceptionOneRuntimeError("staff_booking_interval_duplicate")
+    selected = {"patient_ref": handles["patient"], "practitioner_ref": handles["practitioner"],
+                "appointment_date": binding["appointment_date"], "earliest_time": binding["earliest_time"],
+                "latest_start_time": binding["latest_start_time"], "duration_minutes": binding["duration_minutes"],
+                "timezone": binding["practice_timezone"]}
+    context = {"patients": [{"id": handles["patient"], "display": patient_display, "aliases": []}],
+               "practitioners": [{"id": handles["practitioner"], "display": practitioner_display, "aliases": []}],
+               "selected_appointment": None, "appointments": [], "candidate_slots": slots,
+               "selected_booking": selected,
+               "squeeze_policy": {"id": "synthetic-policy-staff-booking", "assessment_enabled": False,
+                                  "allow_move_existing": False, "allow_overbook": False, "requires_human_review": True},
+               "default_duration_minutes": binding["duration_minutes"], "allowed_statuses": ["arrived", "completed", "dna"]}
+    frame = {"contract_version": protocol.STAFF_BOOKING_INPUT_VERSION,
+             "request_id": _opaque_handle("request", correlation_id + ":" + observed_at.isoformat(), handle_key=handle_key),
+             "practice_ref": _opaque_handle("practice", binding["practice_id"], handle_key=handle_key),
+             "correlation_id": _opaque_handle("correlation", correlation_id, handle_key=handle_key),
+             "context_revision": max(1, int(hmac.new(handle_key, protocol.canonical_json(context).encode("utf-8"), hashlib.sha256).hexdigest()[:8], 16)),
+             "observed_at": observed_at.isoformat().replace("+00:00", "Z"),
+             "expires_at": (observed_at + timedelta(seconds=120)).isoformat().replace("+00:00", "Z"),
+             "data_class": "authored_synthetic", "utterances": [instruction], "reference_date": reference_date.isoformat(),
+             "context": context, "authority": {"effect_ceiling": "proposal_only", "appointment_write_authority": False,
+             "confirmation_authority": False, "provider_execution": False, "network_access": False,
+             "database_access": False, "product_delivery": False}}
+    if len(protocol.canonical_json(frame).encode("utf-8")) > 65536:
+        raise ReceptionOneRuntimeError("staff_booking_frame_too_large")
+    protocol.validate_schema(frame, "input")
+    protocol.staff_booking_candidate_slots(frame, {})
+    saved = dict(binding)
+    saved.update(patient_ref=handles["patient"], practitioner_ref=handles["practitioner"],
+                 captured_at=frame["observed_at"], expires_at=frame["expires_at"])
+    source = SelectedStaffBookingSource(protocol.canonical_sha256(frame), frame["request_id"],
+        tuple(sorted(saved.items())), tuple((slot["id"], protocol.canonical_json(slot)) for slot in slots),
+        tuple(intervals))
+    return frame, {handles["patient"]: patient_display, handles["practitioner"]: practitioner_display}, source
+
+
+def staff_booking_envelope(*, frame, source, planner_result, now):
+    """Pure exact-byte proofread release; UNWIRED to callers/signing/transport.
+
+    No auth/current-membership/DB/availability recheck is performed here.
+    A future caller owns those checks and one-use lifecycle, then maps a unique
+    eligible slot automatically to the existing server-signed proposal for display
+    (one confirmation). Multiple unresolved slots require choice/clarification.
+    Nothing here signs, selects on a person's behalf, confirms or writes.
+    """
+    from app.services.reception_one_isolated_vertex_planner import IsolatedVertexPlannerResult
+    from scripts import reception_one_bureau_typed_plan_protocol as protocol
+    if (type(source) is not SelectedStaffBookingSource
+            or type(planner_result) is not IsolatedVertexPlannerResult or not isinstance(now, datetime)
+            or now.tzinfo is None or now.utcoffset() != timedelta(0)):
+        raise ReceptionOneRuntimeError("staff_booking_source_invalid")
+    saved = dict(source.binding_items)
+    intervals = dict(source.interval_items)
+    if (len(saved) != len(source.binding_items) or len(intervals) != len(source.interval_items)
+            or source.frame_sha256 != protocol.canonical_sha256(frame) or source.request_id != frame["request_id"]
+            or frame["contract_version"] != protocol.STAFF_BOOKING_INPUT_VERSION
+            or saved.get("patient_ref") != frame["context"]["selected_booking"]["patient_ref"]
+            or saved.get("practitioner_ref") != frame["context"]["selected_booking"]["practitioner_ref"]
+            or saved.get("captured_at") != frame["observed_at"] or saved.get("expires_at") != frame["expires_at"]
+            or tuple((slot["id"], protocol.canonical_json(slot)) for slot in frame["context"]["candidate_slots"]) != source.slot_items
+            or set(intervals) != {slot["id"] for slot in frame["context"]["candidate_slots"]}):
+        raise ReceptionOneRuntimeError("staff_booking_source_changed")
+    selected = frame["context"]["selected_booking"]
+    if any(saved.get(private) != selected[public] for private, public in (
+            ("appointment_date", "appointment_date"), ("earliest_time", "earliest_time"),
+            ("latest_start_time", "latest_start_time"), ("duration_minutes", "duration_minutes"),
+            ("practice_timezone", "timezone"))):
+        raise ReceptionOneRuntimeError("staff_booking_source_changed")
+    for slot in frame["context"]["candidate_slots"]:
+        interval = json.loads(intervals[slot["id"]])
+        if (set(interval) != {"appointment_date", "start_time_local", "start_time", "duration_minutes"}
+                or interval["appointment_date"] != slot["date"] or interval["start_time_local"] != slot["start_time"]
+                or type(interval["duration_minutes"]) is not int or interval["duration_minutes"] != slot["duration_minutes"]):
+            raise ReceptionOneRuntimeError("staff_booking_interval_changed")
+    provenance = planner_result.semantic_provenance
+    review, normalized = protocol.proofread_plan(frame, planner_result.normalized_plan, now=now)
+    execution = protocol.execute_plan(frame, normalized, review, now=now)
+    if (normalized["contract_version"] != protocol.STAFF_BOOKING_PLAN_VERSION
+            or not isinstance(provenance, dict)
+            or provenance.get("packet_schema_version") != protocol.STAFF_BOOKING_PACKET_VERSION
+            or provenance.get("constructor_version") != protocol.STAFF_BOOKING_CONSTRUCTOR_VERSION
+            or provenance.get("frame_sha256") != source.frame_sha256
+            or provenance.get("compiled_plan_sha256") != protocol.canonical_sha256(normalized)
+            or provenance.get("context_revision") != frame["context_revision"]
+            or type(planner_result.provider_calls) is not int or planner_result.provider_calls != 0
+            or review["disposition"] != "admit" or review["safe_repairs"]
+            or normalized != planner_result.normalized_plan or review != planner_result.review
+            or execution["final_output"] != planner_result.final_output):
+        raise ReceptionOneRuntimeError("staff_booking_model_join_invalid")
+    final = execution["final_output"]
+    selected = frame["context"]["selected_booking"]
+    intent = protocol.validated_model_intent(frame, normalized)
+    eligible = protocol.staff_booking_candidate_slots(frame, intent.normalized_values)
+    if normalized["goal"] == "clarification" or not eligible:
+        if final != protocol.staff_booking_clarification(frame, intent):
+            raise ReceptionOneRuntimeError("staff_booking_clarification_invalid")
+        return final
+    if (final["proposal_family"] != "create" or final["api_spine_operation_id"] != "proposeAppointmentCreate"
+            or final["patient_ref"] != selected["patient_ref"] or final["practitioner_ref"] != selected["practitioner_ref"]
+            or type(final["duration_minutes"]) is not int or final["duration_minutes"] != selected["duration_minutes"]
+            or final["candidate_slot_ids"] != [slot["id"] for slot in eligible]
+            or final["write_performed"] is not False or final["requires_human_confirmation"] is not True):
+        raise ReceptionOneRuntimeError("staff_booking_proposal_invalid")
     return final
 
 

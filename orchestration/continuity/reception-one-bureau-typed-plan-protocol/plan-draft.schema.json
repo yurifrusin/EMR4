@@ -14,6 +14,9 @@
     },
     {
       "$ref": "#/$defs/requestBookingPlan"
+    },
+    {
+      "$ref": "#/$defs/staffBookingPlan"
     }
   ],
   "$defs": {
@@ -1474,6 +1477,405 @@
       }
     },
     "requestBookingSemanticBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "field"
+      ],
+      "properties": {
+        "kind": {
+          "const": "semantic_ref"
+        },
+        "field": {
+          "enum": [
+            "appointment_date",
+            "earliest_time",
+            "latest_time",
+            "duration_minutes"
+          ]
+        }
+      }
+    },
+    "staffBookingCandidate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "field",
+        "value",
+        "evidence",
+        "supersedes"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^candidate-[a-z0-9][a-z0-9-]{0,39}$"
+        },
+        "field": {
+          "enum": [
+            "intended_action",
+            "appointment_date",
+            "earliest_time",
+            "latest_time",
+            "duration_minutes"
+          ]
+        },
+        "value": {},
+        "evidence": {
+          "$ref": "#/$defs/modelEvidence"
+        },
+        "supersedes": {
+          "type": "array",
+          "maxItems": 11,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^candidate-[a-z0-9][a-z0-9-]{0,39}$"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "field": {
+                "const": "intended_action"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "enum": [
+                  "create",
+                  "clarification"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "field": {
+                "const": "appointment_date"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "type": "string",
+                "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
+                "format": "date"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "field": {
+                "const": "earliest_time"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "type": "string",
+                "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]$"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "field": {
+                "const": "latest_time"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "type": "string",
+                "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]$"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "field": {
+                "const": "duration_minutes"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "type": "integer",
+                "minimum": 5,
+                "maximum": 180
+              }
+            }
+          }
+        }
+      ]
+    },
+    "staffBookingInterpretation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "frame_sha256",
+        "context_revision",
+        "reference_date",
+        "candidates",
+        "selected"
+      ],
+      "properties": {
+        "frame_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "context_revision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "reference_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "candidates": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 12,
+          "items": {
+            "$ref": "#/$defs/staffBookingCandidate"
+          }
+        },
+        "selected": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "intended_action"
+          ],
+          "properties": {
+            "intended_action": {
+              "pattern": "^candidate-[a-z0-9][a-z0-9-]{0,39}$",
+              "type": "string"
+            },
+            "appointment_date": {
+              "pattern": "^candidate-[a-z0-9][a-z0-9-]{0,39}$",
+              "type": "string"
+            },
+            "earliest_time": {
+              "pattern": "^candidate-[a-z0-9][a-z0-9-]{0,39}$",
+              "type": "string"
+            },
+            "latest_time": {
+              "pattern": "^candidate-[a-z0-9][a-z0-9-]{0,39}$",
+              "type": "string"
+            },
+            "duration_minutes": {
+              "pattern": "^candidate-[a-z0-9][a-z0-9-]{0,39}$",
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "staffBookingContextBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "field"
+      ],
+      "properties": {
+        "kind": {
+          "const": "context_ref"
+        },
+        "field": {
+          "enum": [
+            "selected_booking",
+            "selected_booking.patient_ref",
+            "selected_booking.practitioner_ref",
+            "selected_booking.appointment_date",
+            "selected_booking.earliest_time",
+            "selected_booking.latest_start_time",
+            "selected_booking.duration_minutes"
+          ]
+        }
+      }
+    },
+    "staffBookingBinding": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/staffBookingContextBinding"
+        },
+        {
+          "$ref": "#/$defs/stepBinding"
+        },
+        {
+          "$ref": "#/$defs/staffBookingSemanticBinding"
+        }
+      ]
+    },
+    "staffBookingStep": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "operator",
+        "args"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/stepId"
+        },
+        "operator": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]{0,63}$"
+        },
+        "args": {
+          "type": "object",
+          "maxProperties": 8,
+          "propertyNames": {
+            "pattern": "^[a-z][a-z0-9_]{0,63}$"
+          },
+          "additionalProperties": {
+            "$ref": "#/$defs/staffBookingBinding"
+          }
+        }
+      }
+    },
+    "staffBookingPlan": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "contract_version",
+        "catalog_version",
+        "request_id",
+        "practice_ref",
+        "correlation_id",
+        "context_revision",
+        "attempt",
+        "revision_limit",
+        "planner_class",
+        "goal",
+        "effect_ceiling",
+        "steps",
+        "interpretation"
+      ],
+      "properties": {
+        "contract_version": {
+          "const": "reception.one.bureau.plan-draft.model-first.staff-booking.v1"
+        },
+        "catalog_version": {
+          "enum": [
+            "reception-one-bureau-catalog-1",
+            "reception-one-bureau-catalog-point-2"
+          ]
+        },
+        "request_id": {
+          "$ref": "#/$defs/syntheticRef"
+        },
+        "practice_ref": {
+          "$ref": "#/$defs/syntheticRef"
+        },
+        "correlation_id": {
+          "$ref": "#/$defs/syntheticRef"
+        },
+        "context_revision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "attempt": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 2
+        },
+        "revision_limit": {
+          "const": 2
+        },
+        "planner_class": {
+          "const": "untrusted_model_candidate"
+        },
+        "goal": {
+          "enum": [
+            "create",
+            "clarification"
+          ]
+        },
+        "effect_ceiling": {
+          "const": "proposal_only"
+        },
+        "steps": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 2,
+          "items": {
+            "$ref": "#/$defs/staffBookingStep"
+          }
+        },
+        "interpretation": {
+          "$ref": "#/$defs/staffBookingInterpretation"
+        }
+      }
+    },
+    "staffBookingPacket": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "packet_schema",
+        "case_id",
+        "interpretation",
+        "target_bindings"
+      ],
+      "properties": {
+        "packet_schema": {
+          "const": "emr4.bureau_model_semantic_packet.staff-booking.v1"
+        },
+        "case_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "interpretation": {
+          "$ref": "#/$defs/staffBookingInterpretation"
+        },
+        "target_bindings": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "selected_booking": {
+              "properties": {
+                "field": {
+                  "const": "selected_booking"
+                },
+                "kind": {
+                  "const": "context_ref"
+                }
+              },
+              "required": [
+                "kind",
+                "field"
+              ],
+              "type": "object",
+              "additionalProperties": false
+            }
+          }
+        },
+        "untrusted_text": {
+          "type": "string"
+        }
+      }
+    },
+    "staffBookingSemanticBinding": {
       "type": "object",
       "additionalProperties": false,
       "required": [
