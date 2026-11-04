@@ -7407,3 +7407,264 @@ def test_selected_staff_bureau_operative_registration_and_scope_baseline():
     for path in ("orchestration_harness/bounded_g1b.py",b.G4_STAGE1_SUCCESSOR_TEST):
         assert scope["control_sha256"][path]==hashlib.sha256((candidate/path).read_bytes()).hexdigest()
     assert scope["source_sha256"]["orchestration_harness/bounded_g1b.py"]==scope["control_sha256"]["orchestration_harness/bounded_g1b.py"]
+
+
+# Practitioner CREATE v12/v32 focused source appendix; not executed by preparation.
+_PRACTITIONER_CREATE_CANDIDATE=Path("C:/Users/there/EMR4-tools/practitioner-create-admission-source-preparation-v1/after")
+_PRACTITIONER_CREATE_PREDECESSOR=_PRACTITIONER_CREATE_CANDIDATE.parent/"before"
+
+
+def _practitioner_create_descriptor():
+    return bounded_g1b._g4_owner_bootstrap_descriptor(bounded_g1b.G4_PRACTITIONER_CREATE_SCHEMA)
+
+
+def _practitioner_create_read(path,digest):
+    raw=path.read_bytes();assert hashlib.sha256(raw).hexdigest()==digest;return raw
+
+
+def test_practitioner_create_registry_preserves_old_families_and_cold_refusal(monkeypatch):
+    b=bounded_g1b;d=_practitioner_create_descriptor()
+    assert b.G4_PRACTITIONER_CREATE_TEMPLATE_INERT is False and d["version"]==32
+    assert b._g4_owner_bootstrap_descriptor(b.G4_PRACTITIONER_CREATE_SCOPE_SCHEMA,scope=True) is d
+    assert d["base"]=={"commit":"1213624bc8e63f340331c0cac111356a37307e66","tree":"bdd105fec3193009e9b79e1b4dd5474a7423a10a"}
+    for schema,old in [(b.G4_SELECTED_STAFF_BUREAU_SCHEMA,b.G4_SELECTED_STAFF_BUREAU_DESCRIPTOR),
+                       (b.G4_PRACTICE_READ_CONTEXT_SCHEMA,b.G4_PRACTICE_READ_CONTEXT_DESCRIPTOR),
+                       (b.G4_PATIENT_CREATION_SCHEMA,b.G4_PATIENT_CREATION_DESCRIPTOR)]:
+        assert b._g4_owner_bootstrap_descriptor(schema) is old
+    assert b.G4_SELECTED_STAFF_BUREAU_BASE["commit"]=="025614ab4f9acb44bc23a7da8077dabc543c8be2"
+    monkeypatch.setattr(b,"G4_PRACTITIONER_CREATE_TEMPLATE_INERT",True)
+    def forbidden(*args):raise AssertionError("must refuse before external reads")
+    with pytest.raises(b.BoundedG1BError) as err:b._g4_owner_bootstrap_external_inputs(forbidden,{"schema_version":b.G4_PRACTITIONER_CREATE_SCHEMA})
+    assert err.value.reason_code=="bounded_g4_practitioner_create_source_inert"
+
+
+@pytest.mark.parametrize("stage",["enable","admit","apply"])
+def test_practitioner_create_three_zero_four_ownership(stage):
+    b=bounded_g1b;d=_practitioner_create_descriptor()
+    kind={"enable":"enable_g4_stage1_successor","admit":b.G4_OWNER_BOOTSTRAP_ADMIT_KIND,"apply":"implement_g4_stage1_successor"}[stage]
+    paths=d["control"] if stage=="enable" else d["apply_paths"] if stage=="apply" else frozenset()
+    q={"schema_version":b.G4_PRACTITIONER_CREATE_SCHEMA,"operation_kind":kind,"stage":stage,"repair_sha256":dict.fromkeys(paths,{})}
+    assert b.operation_paths(kind,q)==paths and len(paths)=={"enable":3,"admit":0,"apply":4}[stage]
+    q["repair_sha256"]["app/services/reception_one_proposal_runtime.py"]={}
+    with pytest.raises(b.BoundedG1BError) as err:b.operation_paths(kind,q)
+    assert err.value.reason_code=="bounded_g4_owner_bootstrap_changed_paths"
+
+
+@pytest.mark.parametrize("mutation",["base","control","before","after","size","rows","apply","predecessor","reviewers"])
+def test_practitioner_create_descriptor_drift_refuses(monkeypatch,mutation):
+    b=bounded_g1b;d=_practitioner_create_descriptor();p="app/routers/practice.py"
+    field,value={"base":("base",b.G4_SELECTED_STAFF_BUREAU_BASE),"control":("control",d["control"]|{b.AGENTS}),
+        "before":("before_sha",{**d["before_sha"],p:None}),"after":("product_sha",{**d["product_sha"],p:"a"*64}),
+        "size":("product_bytes",{**d["product_bytes"],p:1}),"rows":("product_rows",{**d["product_rows"],p:{}}),
+        "apply":("apply_paths",d["apply_paths"]-{p}),"predecessor":("preimages",{**d["preimages"],b.G4_STAGE1_SUCCESSOR_SCOPE:"a"*64}),
+        "reviewers":("excluded_reviewers",set(b.G4_PRACTITIONER_CREATE_PRODUCT_AUTHORS)|{""})}[mutation]
+    monkeypatch.setitem(d,field,value)
+    q={"schema_version":b.G4_PRACTITIONER_CREATE_SCHEMA,"operation_kind":"implement_g4_stage1_successor","stage":"apply","repair_sha256":dict.fromkeys(b.G4_PRACTITIONER_CREATE_PRODUCT_PATHS,{})}
+    with pytest.raises(b.BoundedG1BError) as err:b.operation_paths(q["operation_kind"],q)
+    assert err.value.reason_code=="bounded_g4_practitioner_create_path_boundary"
+
+
+def test_practitioner_create_genuine_mapping_and_separate_base_association():
+    b=bounded_g1b;d=_practitioner_create_descriptor();seen=[]
+    def read(path,digest):seen.append(path);return _practitioner_create_read(path,digest)
+    vector,review=b._g4_owner_bootstrap_external_inputs(read,{"schema_version":b.G4_PRACTITIONER_CREATE_SCHEMA,"product_vector":d["vector"],"mapping_review":d["mapping"]})
+    assert vector==b.G4_PRACTITIONER_CREATE_EXPECTED_VECTOR and review==b.G4_PRACTITIONER_CREATE_EXPECTED_REVIEW
+    assert len(seen)==len(set(seen))==12 and sum(v is None for v in d["before_sha"].values())==3
+    assert review["implementation_authorship"]["reviewer_is_implementation_author"] is False
+    assert review["reviewer_agent"] in d["excluded_reviewers"]
+    assert review["authority"]["source_only_accepted"] is True and review["authority"]["execution_authorized"] is False
+
+
+@pytest.mark.parametrize("selected",["VECTOR","REVIEW","CONTRACT","PREPARATION","PUBLICATION","router_before","router_inverse","router_source"]+list(bounded_g1b.G4_PRACTITIONER_CREATE_ORDERED_PATHS))
+def test_practitioner_create_each_raw_source_tamper_refuses(selected):
+    b=bounded_g1b;d=_practitioner_create_descriptor();r=b.G4_PRACTITIONER_CREATE_EXPECTED_VECTOR["files"][2]
+    if selected=="router_before":row=r["before"]
+    elif selected=="router_inverse":row=r["inverse"]["raw"]
+    elif selected=="router_source":row={"path":r["selected_preimage"]["source_path"]}
+    elif selected in d["product_rows"]:row=d["product_rows"][selected]
+    else:row=getattr(b,"G4_PRACTITIONER_CREATE_"+selected)
+    def read(path,digest):
+        raw=path.read_bytes();return raw+b" " if path==Path(row["path"]) else raw
+    with pytest.raises(b.BoundedG1BError) as err:b._g4_practitioner_create_external_inputs(read,{"product_vector":d["vector"],"mapping_review":d["mapping"]})
+    assert err.value.reason_code=="bounded_g4_practitioner_create_external_source"
+
+
+@pytest.mark.parametrize("mutation",["independent","author","authorship","findings","subject","runtime","admission","missing_authority","blobs"])
+def test_practitioner_create_review_semantics_survive_repin(monkeypatch,mutation):
+    b=bounded_g1b;d=_practitioner_create_descriptor();r=copy.deepcopy(b.G4_PRACTITIONER_CREATE_EXPECTED_REVIEW)
+    if mutation=="independent":r["independent"]=False
+    elif mutation=="author":r["reviewer_agent"]="/root/practitioner_create_stopped_candidate_sol_xhigh"
+    elif mutation=="authorship":r["implementation_authorship"]["reviewer_is_implementation_author"]=True
+    elif mutation=="findings":r["blocking_findings"]=["synthetic"]
+    elif mutation=="subject":r["reviewed_subject"]["candidate_vector"]["sha256"]="a"*64
+    elif mutation=="runtime":r["authority"]["execution_authorized"]=True
+    elif mutation=="admission":r["authority"]["admission_authorized"]=True
+    elif mutation=="missing_authority":r["authority"].pop("execution_authorized")
+    else:r["independent_blob_observations"]["all_four_afterimage_pins_match"]=False
+    raw=b._canonical(r);row={**b.G4_PRACTITIONER_CREATE_REVIEW,"bytes":len(raw),"sha256":b._sha(raw)}
+    monkeypatch.setattr(b,"G4_PRACTITIONER_CREATE_EXPECTED_REVIEW",r);monkeypatch.setattr(b,"G4_PRACTITIONER_CREATE_REVIEW",row)
+    monkeypatch.setitem(d,"mapping",{k:row[k] for k in ("path","sha256")})
+    def read(path,digest):
+        if path==Path(row["path"]):return raw
+        return _practitioner_create_read(path,digest)
+    with pytest.raises(b.BoundedG1BError) as err:b._g4_practitioner_create_external_inputs(read,{"product_vector":d["vector"],"mapping_review":d["mapping"]})
+    assert err.value.reason_code=="bounded_g4_practitioner_create_independent_source"
+
+
+def test_practitioner_create_unknown_version_and_admit_entrypoint_refuse():
+    b=bounded_g1b;q={"schema_version":b.G4_PRACTITIONER_CREATE_SCHEMA+"-unknown","operation_kind":"implement_g4_stage1_successor","stage":"apply","repair_sha256":{}}
+    assert b._routes_g4_owner_bootstrap_binding(q) and not b._is_g4_owner_bootstrap_binding(q)
+    with pytest.raises(b.BoundedG1BError) as err:b.operation_paths(q["operation_kind"],q)
+    assert err.value.reason_code=="bounded_g4_owner_bootstrap_binding_kind"
+    q.update(schema_version=b.G4_PRACTITIONER_CREATE_SCHEMA,operation_kind=b.G4_OWNER_BOOTSTRAP_ADMIT_KIND,stage="admit")
+    for entrypoint,phase in [("publication","development"),("recovery_preflight","pre-push")]:
+        with pytest.raises(b.BoundedG1BError) as err:b._g4_owner_bootstrap_require_entrypoint(q,entrypoint,phase)
+        assert err.value.reason_code=="bounded_g4_owner_bootstrap_admit_entrypoint"
+
+
+def test_practitioner_create_scope_control_pins_and_runtime_closure():
+    b=bounded_g1b;d=_practitioner_create_descriptor();raw=(_PRACTITIONER_CREATE_CANDIDATE/b.G4_STAGE1_SUCCESSOR_SCOPE).read_bytes();scope=json.loads(raw)
+    assert raw==b._canonical(scope)+b"\n" and b.validate_g4_owner_bootstrap_scope(scope)==scope["source_sha256"]
+    assert scope["allowed_paths"]==sorted(d["product_sha"]) and len(scope["allowed_paths"])==4
+    assert len(scope["source_sha256"])==8 and len(raisa_policy.G4_STAGE1_SUCCESSOR_PRODUCT_PATHS)==40
+    assert scope["runtime_binding_required"] is True and scope["admission_grants_runtime_authority"] is False and scope["voice_activation"] is False
+    assert scope["predecessor_scope"]=={"sha256":"b54c5a9fd3d6cb5127d8e86e1d45531066e686e40c0720b933faddb20f87690a"}
+    for p in ("orchestration_harness/bounded_g1b.py",b.G4_STAGE1_SUCCESSOR_TEST):
+        assert scope["control_sha256"][p]==hashlib.sha256((_PRACTITIONER_CREATE_CANDIDATE/p).read_bytes()).hexdigest()
+    for field,value in [("admission_grants_runtime_authority",True),("voice_activation",True),("selected_base",b.G4_SELECTED_STAFF_BUREAU_BASE)]:
+        changed=copy.deepcopy(scope);changed[field]=value
+        with pytest.raises(b.BoundedG1BError) as err:b.validate_g4_owner_bootstrap_scope(changed)
+        assert err.value.reason_code=="bounded_g4_owner_bootstrap_scope_boundary"
+
+
+@pytest.mark.parametrize("reviewer",["/root","/root/practitioner_create_stopped_candidate_sol_xhigh","/root/practitioner_create_candidate_independent_sol_xhigh"])
+def test_practitioner_create_future_subject_excludes_authors(reviewer):
+    b=bounded_g1b;d=_practitioner_create_descriptor();subject="a"*64
+    path=d["root"]/"entry-admission-v1/independent-apply-development-subject-review-v1.json"
+    record={"schema":"emr4.g4_operation_review.v1","status":"PASS","verdict":"PASS_G4_STAGE1_OWNER_BOOTSTRAP_EXACT_ADMISSION_SUBJECT",
+        "subject_sha256":subject,"independent":True,"implementation_authorship":False,"blocking_findings":[],
+        "reviewer_agent":"/synthetic/independent-fixture","stage":"apply","phase":"development"}
+    def invoke():
+        raw=b._canonical(record);row={"path":path.as_posix(),"sha256":b._sha(raw)}
+        def read(actual,digest):assert actual==path and digest==b._sha(raw);return raw
+        return b._g4_owner_bootstrap_subject_review(read,row,b.G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT,subject,"apply","development",b.G4_PRACTITIONER_CREATE_SCHEMA)
+    assert invoke()==record
+    record["reviewer_agent"]=reviewer
+    with pytest.raises(b.BoundedG1BError) as err:invoke()
+    assert err.value.reason_code=="bounded_g4_owner_bootstrap_independent_subject"
+
+
+def _practitioner_create_synthetic_loader(monkeypatch,tmp_path,stage="apply",mutation=None,phase="development"):
+    # Real shared loader and exact candidate controls/products; substituted
+    # inherited policy, Git/index, activation and subject review. No actual Git
+    # or admission/runtime/publication is proved by this source fixture.
+    b=bounded_g1b;d=_practitioner_create_descriptor()
+    inherited=b.CONFIGURATION_PATHS|{b.STATE,b.GATES,b.OVERLAY,b.AGENTS,b.G4_STAGE1_INTERACTIVE_SCOPE,
+        b.G4_STAGE1_SUCCESSOR_SCOPE,b.G4_STAGE1_SUCCESSOR_TEST,b.G4_CI_WORKFLOW}|b.SOURCE_PATHS|b.CONTROLLER_PATHS
+    payloads={p:("synthetic inherited "+p).encode() for p in inherited}
+    for p in d["control"]:payloads[p]=(_PRACTITIONER_CREATE_CANDIDATE/p).read_bytes()
+    policy={p:payloads[p] for p in (b.STATE,b.GATES,b.OVERLAY,b.AGENTS)}
+    scope=json.loads(payloads[b.G4_STAGE1_SUCCESSOR_SCOPE]);scope["source_sha256"]={p:b._sha(payloads[p]) for p in b.SOURCE_PATHS|b.CONTROLLER_PATHS}
+    payloads[b.G4_STAGE1_SUCCESSOR_SCOPE]=b._canonical(scope)+b"\n"
+    after={p:Path(row["path"]).read_bytes() for p,row in d["product_rows"].items()}
+    original={p:(_PRACTITIONER_CREATE_PREDECESSOR/p).read_bytes() for p in d["control"]}
+    route="app/routers/practice.py"
+    router_before=Path(b.G4_PRACTITIONER_CREATE_EXPECTED_VECTOR["files"][2]["before"]["path"]).read_bytes()
+    if stage=="apply":payloads.update(after)
+    if mutation in {"state","gates","overlay","agents"}:
+        key={"state":b.STATE,"gates":b.GATES,"overlay":b.OVERLAY,"agents":b.AGENTS}[mutation];payloads[key]+=b" "
+    if mutation=="product_drift":payloads[route]+=b" "
+    pins={p:b._sha(raw) for p,raw in payloads.items()}
+    target=tmp_path/"target";source=tmp_path/"source"
+    base=d["base"]["commit"] if stage=="enable" else "b"*40
+    tree=d["base"]["tree"] if stage=="enable" else "c"*40
+    candidate=tree if stage=="admit" else "d"*40
+    paths=d["control"] if stage=="enable" else d["apply_paths"] if stage=="apply" else frozenset()
+    head=base if phase=="development" else "f"*40
+    q={"schema_version":b.G4_PRACTITIONER_CREATE_SCHEMA,"operation_id":"synthetic-practitioner-create-"+stage,
+        "operation_kind":{"enable":"enable_g4_stage1_successor","admit":b.G4_OWNER_BOOTSTRAP_ADMIT_KIND,"apply":"implement_g4_stage1_successor"}[stage],
+        "stage":stage,"phase":phase,"base_commit":base,"base_tree":tree,"expected_head":head,"expected_index_tree":candidate,
+        "candidate_tree":candidate,"source_sha256":scope["source_sha256"],"payload_sha256":pins,
+        "repair_sha256":{p:{"before_sha256":d["preimages"][p] if stage=="enable" else d["before_sha"][p],"after_sha256":pins[p]} for p in paths},
+        "source_review":{"path":"synthetic-only","sha256":"a"*64},"activation_acceptance":None,
+        "product_vector":d["vector"],"mapping_review":d["mapping"]}
+    if mutation=="null_router_pair":q["repair_sha256"][route]["before_sha256"]=None
+    if mutation=="admit_delta":q["candidate_tree"]="d"*40
+    if mutation=="phase_index":q["expected_index_tree"]="e"*40
+    activation=d["root"]/"entry-admission-v1/independent-enable-push-effect-review-v1.json"
+    record={"schema":"emr4.g4_operation_review.v1","status":"PASS","verdict":"PASS_G4_STAGE1_OWNER_BOOTSTRAP_CONTROL_PUBLICATION_EFFECT",
+        "reviewer_agent":"/synthetic/independent-fixture","independent":True,"implementation_authorship":False,"blocking_findings":[],
+        "stage":"enable","phase":"push","base":d["base"]["commit"],"commit":base,"candidate_tree":tree,
+        "control_activation_accepted":True,"same_attempt_remote_readback_verified":True,"protected_refs_unchanged":True,
+        "whole_inverse_verified_same_attempt":True,"published_ref":b.G4_STAGE1_INTERACTIVE_BACKEND_REF}
+    if mutation=="activation_author":record["reviewer_agent"]=b.G4_PRACTITIONER_CREATE_CONTROLLER_AUTHOR
+    activation_raw=b._canonical(record)
+    if stage!="enable":q["activation_acceptance"]={"path":activation.as_posix(),"sha256":b._sha(activation_raw)}
+    if mutation=="old_activation_root":q["activation_acceptance"]["path"]=(b.G4_SELECTED_STAFF_BUREAU_ROOT/"entry-admission-v1"/activation.name).as_posix()
+    def read(path,digest):
+        if path==activation:raw=activation_raw
+        elif path.is_relative_to(target):raw=payloads[path.relative_to(target).as_posix()]
+        elif path.is_relative_to(source):raw=payloads[path.relative_to(source).as_posix()]
+        else:
+            matches=[p for p,row in d["product_rows"].items() if Path(row["path"])==path]
+            assert len(matches)==1;raw=after[matches[0]]
+        assert b._sha(raw)==digest;return raw
+    def git_bytes(actual,*args):
+        assert actual==target
+        if args==("cat-file","blob",d["base"]["commit"]+":"+b.G4_STAGE1_SUCCESSOR_SCOPE):return original[b.G4_STAGE1_SUCCESSOR_SCOPE]
+        if args[:2]==("ls-tree","-z"):
+            assert len(args)==5 and args[2]==base and args[3]=="--" and args[4] in paths
+            p=args[4];present=stage=="enable" or p==route or mutation=="unexpected_add" and p==b.G4_PRACTITIONER_CREATE_ORDERED_PATHS[0]
+            return b"100644 blob synthetic\x00" if present and not (mutation=="missing_router" and p==route) else b""
+        assert args[:2]==("cat-file","blob") and len(args)==3
+        commit,p=args[2].split(":",1)
+        if commit==base:
+            if stage=="enable" and p in original:return original[p]
+            if p==route:return router_before+(b" " if mutation=="wrong_router" else b"")
+            return payloads[p]
+        assert commit==d["base"]["commit"] and p in policy;return policy[p]
+    def git(actual,*args):
+        assert actual==target
+        if args==("rev-parse",d["base"]["commit"]+"^{tree}"):return d["base"]["tree"]
+        if args==("cat-file","commit",base):return "tree "+tree+"\nparent "+("e"*40 if mutation=="wrong_parent" else d["base"]["commit"])+"\n\nsynthetic only"
+        assert phase!="development" and args==("cat-file","commit",head)
+        return "tree "+("e"*40 if mutation=="phase_tree" else candidate)+"\nparent "+("e"*40 if mutation=="phase_parent" else base)+"\n\nsynthetic phase"
+    monkeypatch.setattr(b,"_g4_owner_bootstrap_external_inputs",lambda *args:({},{}))
+    monkeypatch.setattr(b,"_g4_owner_bootstrap_subject_review",lambda *args:{"synthetic":True})
+    monkeypatch.setattr(b.trusted_git,"run_git_bytes",git_bytes);monkeypatch.setattr(b.trusted_git,"run_git",git)
+    monkeypatch.setattr(b.trusted_git,"attest_target_index",lambda *args,**kwargs:{"synthetic":True})
+    return b._load_g4_owner_bootstrap_inputs(None,target,source,b.G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT,tmp_path/"scratch",q,read,{})
+
+
+@pytest.mark.parametrize("stage",["enable","admit","apply"])
+def test_practitioner_create_shared_loader_mixed_preimage_baselines(monkeypatch,tmp_path,stage):
+    loaded=_practitioner_create_synthetic_loader(monkeypatch,tmp_path,stage)
+    assert len(loaded.payloads)==(29 if stage=="apply" else 25)
+    assert len(loaded.binding["repair_sha256"])=={"enable":3,"admit":0,"apply":4}[stage]
+    if stage=="apply":assert sum(p["before_sha256"] is None for p in loaded.binding["repair_sha256"].values())==3
+
+
+@pytest.mark.parametrize("mutation,reason",[("unexpected_add","bounded_g4_owner_bootstrap_change_preimage"),
+    ("missing_router","bounded_g4_owner_bootstrap_change_preimage"),("wrong_router","bounded_g4_owner_bootstrap_change_preimage"),
+    ("null_router_pair","bounded_g4_owner_bootstrap_change_preimage"),("product_drift","bounded_g4_owner_bootstrap_change_preimage"),
+    ("old_activation_root","bounded_g4_owner_bootstrap_activation_path"),("activation_author","bounded_g4_owner_bootstrap_activation_acceptance"),
+    ("wrong_parent","bounded_g4_owner_bootstrap_activation_parent"),("state","bounded_g4_owner_bootstrap_state_unchanged"),
+    ("gates","bounded_g4_owner_bootstrap_state_unchanged"),("overlay","bounded_g4_owner_bootstrap_state_unchanged"),("agents","bounded_g4_owner_bootstrap_state_unchanged")])
+def test_practitioner_create_shared_loader_named_refusals(monkeypatch,tmp_path,mutation,reason):
+    _practitioner_create_synthetic_loader(monkeypatch,tmp_path)
+    with pytest.raises(bounded_g1b.BoundedG1BError) as err:_practitioner_create_synthetic_loader(monkeypatch,tmp_path,mutation=mutation)
+    assert err.value.reason_code==reason
+
+
+def test_practitioner_create_shared_loader_admit_has_zero_delta(monkeypatch,tmp_path):
+    assert _practitioner_create_synthetic_loader(monkeypatch,tmp_path,"admit").binding["repair_sha256"]=={}
+    with pytest.raises(bounded_g1b.BoundedG1BError) as err:_practitioner_create_synthetic_loader(monkeypatch,tmp_path,"admit","admit_delta")
+    assert err.value.reason_code=="bounded_g4_owner_bootstrap_admit_no_delta"
+
+
+@pytest.mark.parametrize("phase",["pre-push","post-push"])
+def test_practitioner_create_shared_loader_phase_parent_tree_index(monkeypatch,tmp_path,phase):
+    assert _practitioner_create_synthetic_loader(monkeypatch,tmp_path,phase=phase).binding["phase"]==phase
+    for mutation in ("phase_parent","phase_tree","phase_index"):
+        with pytest.raises(bounded_g1b.BoundedG1BError) as err:_practitioner_create_synthetic_loader(monkeypatch,tmp_path,mutation=mutation,phase=phase)
+        assert err.value.reason_code=="bounded_g4_owner_bootstrap_committed_binding"
