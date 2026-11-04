@@ -49,3 +49,85 @@ def get_practice_context(
     except (ZoneInfoNotFoundError, ValueError):
         raise HTTPException(status_code=503, detail="Practice context unavailable", headers={"Cache-Control": "no-store"}) from None
     return PracticeContextOut(practice_id=row.id, timezone=row.timezone)
+
+# STOPPED source candidate. The trusted tenant service factory and existing
+# installation/session/CSRF host join are separate admission dependencies.
+from uuid import UUID
+
+from app.dependencies import oauth2_scheme
+from app.schemas.practitioner_create_command import (
+    ConfirmPractitionerCreate, PreparePractitionerCreate,
+    PractitionerCreateReceipt, PractitionerCreateRecovery,
+    PreparePractitionerCreateResult,
+)
+from app.services.practice.practitioner_create_command import (
+    PractitionerCreateError, PractitionerCreateService,
+)
+
+
+def _practitioner_create_service(request: Request):
+    service = getattr(request.app.state, "practitioner_create_service", None)
+    if type(service) is not PractitionerCreateService:
+        raise HTTPException(status_code=503, detail="PRACTITIONER_CREATE_UNAVAILABLE",
+                            headers={"Cache-Control": "no-store"})
+    return service
+
+
+def _create_request(request: Request, response: Response):
+    response.headers["Cache-Control"] = "no-store"
+    if request.url.query:
+        raise HTTPException(status_code=400, detail="PRACTITIONER_CREATE_INVALID",
+                            headers={"Cache-Control": "no-store"})
+
+
+def _create_error(error: PractitionerCreateError):
+    return HTTPException(status_code=error.status_code, detail=error.code,
+                         headers={"Cache-Control": "no-store"})
+
+
+@router.post("/practitioners/create/proposals", response_model=PreparePractitionerCreateResult,
+             operation_id="preparePractitionerCreate")
+def prepare_practitioner_create(
+    body: PreparePractitionerCreate,
+    request: Request,
+    response: Response,
+    token: str = Depends(oauth2_scheme),
+    service: PractitionerCreateService = Depends(_practitioner_create_service),
+):
+    _create_request(request, response)
+    try:
+        return service.prepare(token, body)
+    except PractitionerCreateError as error:
+        raise _create_error(error) from None
+
+
+@router.post("/practitioners/create/confirm", response_model=PractitionerCreateReceipt,
+             operation_id="confirmPractitionerCreate")
+def confirm_practitioner_create(
+    body: ConfirmPractitionerCreate,
+    request: Request,
+    response: Response,
+    token: str = Depends(oauth2_scheme),
+    service: PractitionerCreateService = Depends(_practitioner_create_service),
+):
+    _create_request(request, response)
+    try:
+        return service.confirm(token, body)
+    except PractitionerCreateError as error:
+        raise _create_error(error) from None
+
+
+@router.get("/practitioners/create/receipts/{command_key}", response_model=PractitionerCreateRecovery,
+            operation_id="readPractitionerCreateReceipt")
+def read_practitioner_create_receipt(
+    command_key: UUID,
+    request: Request,
+    response: Response,
+    token: str = Depends(oauth2_scheme),
+    service: PractitionerCreateService = Depends(_practitioner_create_service),
+):
+    _create_request(request, response)
+    try:
+        return service.receipt(token, command_key)
+    except PractitionerCreateError as error:
+        raise _create_error(error) from None
