@@ -7668,3 +7668,362 @@ def test_practitioner_create_shared_loader_phase_parent_tree_index(monkeypatch,t
     for mutation in ("phase_parent","phase_tree","phase_index"):
         with pytest.raises(bounded_g1b.BoundedG1BError) as err:_practitioner_create_synthetic_loader(monkeypatch,tmp_path,mutation=mutation,phase=phase)
         assert err.value.reason_code=="bounded_g4_owner_bootstrap_committed_binding"
+
+
+# Correct-target SOURCE22 tests; fixtures grant no admission/runtime authority.
+_CURRENT_SITE_CANDIDATE = Path("C:/Users/there/EMR4-tools/reception-one-current-site-baseline-admission-source-preparation-v1/candidate-v2")
+
+
+def _current_site_descriptor():
+    return bounded_g1b._g4_owner_bootstrap_descriptor(bounded_g1b.G4_CURRENT_SITE_BASELINE_SCHEMA)
+
+
+def _current_site_binding():
+    b = bounded_g1b
+    d = _current_site_descriptor()
+    return {"schema_version": b.G4_CURRENT_SITE_BASELINE_SCHEMA,
+            "product_vector": d["vector"], "mapping_review": d["mapping"]}
+
+
+def test_current_site_registry_cold_unknown_and_v32_preserved(monkeypatch):
+    b = bounded_g1b
+    d = _current_site_descriptor()
+    assert b.G4_CURRENT_SITE_BASELINE_TEMPLATE_INERT is False
+    assert d is b.G4_CURRENT_SITE_BASELINE_DESCRIPTOR and d["version"] == 33
+    assert b._g4_owner_bootstrap_descriptor(b.G4_CURRENT_SITE_BASELINE_SCOPE_SCHEMA, scope=True) is d
+    assert d["base"] == {"commit": "fd41e1b63113e9dd6ef9bf9409a3a7e36ee52cd5", "tree": "04b5c0ddc28a53a7933e04fadd479d4e9c87da73"}
+    assert b._g4_owner_bootstrap_descriptor(b.G4_PRACTITIONER_CREATE_SCHEMA) is b.G4_PRACTITIONER_CREATE_DESCRIPTOR
+    assert b.G4_PRACTITIONER_CREATE_DESCRIPTOR["version"] == 32
+    def forbidden(*args):
+        raise AssertionError("cold or unknown version reached external read")
+    monkeypatch.setattr(b, "G4_CURRENT_SITE_BASELINE_TEMPLATE_INERT", True)
+    with pytest.raises(b.BoundedG1BError) as err:
+        b._g4_owner_bootstrap_external_inputs(forbidden, _current_site_binding())
+    assert err.value.reason_code == "bounded_g4_current_site_baseline_source_inert"
+    q = {"schema_version": b.G4_CURRENT_SITE_BASELINE_SCHEMA + "-unknown", "operation_kind": "implement_g4_stage1_successor", "stage": "apply", "repair_sha256": {}}
+    assert b._routes_g4_owner_bootstrap_binding(q) and not b._is_g4_owner_bootstrap_binding(q)
+    with pytest.raises(b.BoundedG1BError) as err:
+        b.operation_paths(q["operation_kind"], q)
+    assert err.value.reason_code == "bounded_g4_owner_bootstrap_binding_kind"
+
+
+@pytest.mark.parametrize("stage", ["enable", "admit", "apply"])
+def test_current_site_stage_paths_and_admission_entrypoint(stage):
+    b = bounded_g1b
+    d = _current_site_descriptor()
+    kind = {"enable": "enable_g4_stage1_successor", "admit": b.G4_OWNER_BOOTSTRAP_ADMIT_KIND, "apply": "implement_g4_stage1_successor"}[stage]
+    paths = d["control"] if stage == "enable" else d["apply_paths"] if stage == "apply" else frozenset()
+    q = {"schema_version": b.G4_CURRENT_SITE_BASELINE_SCHEMA, "operation_kind": kind, "stage": stage, "repair_sha256": dict.fromkeys(paths, {})}
+    assert b.operation_paths(kind, q) == paths
+    assert len(paths) == {"enable": 3, "admit": 0, "apply": 20}[stage]
+    assert d["apply_paths"] == b.G4_CURRENT_SITE_BASELINE_PRODUCT_PATHS == frozenset(b.G4_CURRENT_SITE_BASELINE_ORDERED_PATHS)
+    if stage == "admit":
+        b._g4_owner_bootstrap_require_entrypoint(q, "recovery_preflight", "development")
+        for entrypoint, phase in [("publication", "development"), ("recovery_preflight", "pre-push"), ("recovery_preflight", "post-push")]:
+            with pytest.raises(b.BoundedG1BError) as err:
+                b._g4_owner_bootstrap_require_entrypoint(q, entrypoint, phase)
+            assert err.value.reason_code == "bounded_g4_owner_bootstrap_admit_entrypoint"
+
+
+def test_current_site_genuine_external_inputs_and_no_canonical_aliases():
+    b = bounded_g1b
+    d = _current_site_descriptor()
+    seen = []
+    def read(path, digest):
+        seen.append(path)
+        assert path not in {Path(r["path"]) for r in b.G4_CURRENT_SITE_BASELINE_ORIGINAL_BEFORE_ROWS.values()}
+        return _practitioner_create_read(path, digest)
+    result = b._g4_owner_bootstrap_external_inputs(read, _current_site_binding())
+    assert len(result) == 2
+    assert result[1]["reviewer"] == "/root/response_witness_verifier_repair_terra"
+    assert result[1]["reviewer"] in d["excluded_reviewers"]
+    assert set(b.G4_CURRENT_SITE_BASELINE_TEST_AUTHORS) == {"/root/response_witness_verifier_repair_terra"}
+    assert len(seen) == len(set(seen)) == 31
+    assert len(d["apply_paths"]) == 20 and sum(v is None for v in d["before_sha"].values()) == 16
+    assert set(b.G4_CURRENT_SITE_BASELINE_BEFORE_ROWS) == set(b.G4_CURRENT_SITE_BASELINE_ORIGINAL_BEFORE_ROWS)
+    assert len(b.G4_CURRENT_SITE_BASELINE_BEFORE_ROWS) == 4
+    assert len(b.G4_CURRENT_SITE_BASELINE_EXTERNAL_ROWS) == 3
+
+
+@pytest.mark.parametrize("selected", ["VECTOR", "REVIEW", "SOURCE_COPY_INVERSE", "CONTRACT"]
+                         + [("product", p) for p in bounded_g1b.G4_CURRENT_SITE_BASELINE_ORDERED_PATHS]
+                         + [("before", p) for p in sorted(bounded_g1b.G4_CURRENT_SITE_BASELINE_BEFORE_ROWS)]
+                         + [("external", p) for p in sorted(bounded_g1b.G4_CURRENT_SITE_BASELINE_EXTERNAL_ROWS)])
+def test_current_site_each_of_31_immutable_sources_rejects_tamper(selected):
+    b = bounded_g1b
+    if isinstance(selected, tuple):
+        kind, name = selected
+        rows = {"product": b.G4_CURRENT_SITE_BASELINE_PRODUCT_ROWS,
+                "before": b.G4_CURRENT_SITE_BASELINE_BEFORE_ROWS,
+                "external": b.G4_CURRENT_SITE_BASELINE_EXTERNAL_ROWS}[kind]
+        row = rows[name]
+    else:
+        row = getattr(b, "G4_CURRENT_SITE_BASELINE_" + selected)
+    attacked = Path(row["path"])
+    seen = []
+    def read(path, digest):
+        seen.append(path)
+        raw = _practitioner_create_read(path, digest)
+        return raw + b" " if path == attacked else raw
+    with pytest.raises(b.BoundedG1BError) as err:
+        b._g4_owner_bootstrap_external_inputs(read, _current_site_binding())
+    assert attacked in seen
+    assert err.value.reason_code == "bounded_g4_current_site_baseline_external_source"
+
+
+@pytest.mark.parametrize("mutation,reason", [
+    ("missing_payload", "bounded_g4_current_site_baseline_restoration_bijection"),
+    ("swapped_payload", "bounded_g4_current_site_baseline_restoration_bijection"),
+    ("original_path", "bounded_g4_current_site_baseline_restoration_bijection"),
+    ("wrong_payload_path", "bounded_g4_current_site_baseline_restoration_bijection"),
+    ("wrong_payload_size", "bounded_g4_current_site_baseline_restoration_bijection"),
+    ("wrong_payload_hash", "bounded_g4_current_site_baseline_restoration_bijection"),
+    ("wrong_target", "bounded_g4_current_site_baseline_contract"),
+    ("wrong_base", "bounded_g4_current_site_baseline_contract"),
+    ("external_promoted", "bounded_g4_current_site_baseline_contract"),
+])
+def test_current_site_contract_semantics_survive_repin(monkeypatch, mutation, reason):
+    b = bounded_g1b
+    subject = copy.deepcopy(b.G4_CURRENT_SITE_BASELINE_EXPECTED_SUBJECT)
+    restorations = subject["restoration_payloads"]
+    assert len(restorations) == 4 and restorations[0]["payload"] != restorations[1]["payload"]
+    if mutation == "missing_payload": restorations.pop()
+    elif mutation == "swapped_payload": restorations[0]["payload"], restorations[1]["payload"] = restorations[1]["payload"], restorations[0]["payload"]
+    elif mutation == "original_path": restorations[0]["original_canonical_path"] += ".other"
+    elif mutation == "wrong_payload_path": restorations[0]["payload"]["path"] = restorations[0]["original_canonical_path"]
+    elif mutation == "wrong_payload_size": restorations[0]["payload"]["bytes"] += 1
+    elif mutation == "wrong_payload_hash": restorations[0]["payload"]["sha256"] = "a" * 64
+    elif mutation == "wrong_target": subject["canonical_mapping_target"] += "-other"
+    elif mutation == "wrong_base": subject["selected_base"]["commit"] = "a" * 40
+    else: subject["ordered_owned_paths"].append("stage1_patient_transport.py")
+    raw = b._canonical(subject)
+    row = {**b.G4_CURRENT_SITE_BASELINE_CONTRACT, "bytes": len(raw), "sha256": b._sha(raw)}
+    monkeypatch.setattr(b, "G4_CURRENT_SITE_BASELINE_EXPECTED_SUBJECT", subject)
+    monkeypatch.setattr(b, "G4_CURRENT_SITE_BASELINE_CONTRACT", row)
+    def read(path, digest):
+        if path == Path(row["path"]):
+            assert digest == row["sha256"]
+            return raw
+        return _practitioner_create_read(path, digest)
+    with pytest.raises(b.BoundedG1BError) as err:
+        b._g4_owner_bootstrap_external_inputs(read, _current_site_binding())
+    assert err.value.reason_code == reason
+
+
+@pytest.mark.parametrize("mutation", ["author", "independent", "blocker", "runtime", "admission", "missing_authority"])
+def test_current_site_real_review_semantics_survive_repin(monkeypatch, mutation):
+    b = bounded_g1b
+    d = _current_site_descriptor()
+    review = copy.deepcopy(b.G4_CURRENT_SITE_BASELINE_EXPECTED_REVIEW)
+    if mutation == "author": review["reviewer"] = b.G4_CURRENT_SITE_BASELINE_CONTROLLER_AUTHOR
+    elif mutation == "independent": review["independent_of_source_author"] = False
+    elif mutation == "blocker": review["blockers"] = ["synthetic"]
+    elif mutation == "runtime": review["authority"]["runtime"] = True
+    elif mutation == "admission": review["authority"]["admission"] = True
+    else: review["authority"].pop("runtime")
+    raw = b._canonical(review)
+    row = {**b.G4_CURRENT_SITE_BASELINE_REVIEW, "bytes": len(raw), "sha256": b._sha(raw)}
+    monkeypatch.setattr(b, "G4_CURRENT_SITE_BASELINE_EXPECTED_REVIEW", review)
+    monkeypatch.setattr(b, "G4_CURRENT_SITE_BASELINE_REVIEW", row)
+    monkeypatch.setitem(d, "mapping", {k: row[k] for k in ("path", "sha256")})
+    def read(path, digest):
+        if path == Path(row["path"]):
+            assert digest == row["sha256"]
+            return raw
+        return _practitioner_create_read(path, digest)
+    with pytest.raises(b.BoundedG1BError) as err:
+        b._g4_owner_bootstrap_external_inputs(read, _current_site_binding())
+    assert err.value.reason_code == "bounded_g4_current_site_baseline_independent_source"
+
+
+@pytest.mark.parametrize("mutation", ["base", "control", "owned", "before", "after", "size", "predecessor", "reviewers"])
+def test_current_site_descriptor_drift_refuses(monkeypatch, mutation):
+    b = bounded_g1b
+    d = _current_site_descriptor()
+    path = next(p for p, value in d["before_sha"].items() if value is not None)
+    changes = {
+        "base": ("base", b.G4_PRACTITIONER_CREATE_DESCRIPTOR["base"]),
+        "control": ("control", d["control"] | {b.AGENTS}),
+        "owned": ("apply_paths", d["apply_paths"] - {path}),
+        "before": ("before_sha", {**d["before_sha"], path: None}),
+        "after": ("product_sha", {**d["product_sha"], path: "a" * 64}),
+        "size": ("product_bytes", {**d["product_bytes"], path: 1}),
+        "predecessor": ("preimages", {**d["preimages"], b.G4_STAGE1_SUCCESSOR_SCOPE: "a" * 64}),
+        "reviewers": ("excluded_reviewers", set(b.G4_CURRENT_SITE_BASELINE_PRODUCT_AUTHORS) | {""}),
+    }
+    field, value = changes[mutation]
+    monkeypatch.setitem(d, field, value)
+    q = {"schema_version": b.G4_CURRENT_SITE_BASELINE_SCHEMA, "operation_kind": "implement_g4_stage1_successor", "stage": "apply", "repair_sha256": dict.fromkeys(b.G4_CURRENT_SITE_BASELINE_PRODUCT_PATHS, {})}
+    with pytest.raises(b.BoundedG1BError) as err:
+        b.operation_paths(q["operation_kind"], q)
+    assert err.value.reason_code == "bounded_g4_current_site_baseline_path_boundary"
+
+
+@pytest.mark.parametrize("mutation,reason", [
+    ("wrong_target", "bounded_g4_current_site_baseline_product_mapping"),
+    ("wrong_before", "bounded_g4_current_site_baseline_product_mapping"),
+    ("external_promoted", "bounded_g4_current_site_baseline_role_ownership"),
+])
+def test_current_site_vector_semantics_survive_repin(monkeypatch, mutation, reason):
+    b = bounded_g1b
+    d = _current_site_descriptor()
+    vector = json.loads(Path(b.G4_CURRENT_SITE_BASELINE_VECTOR["path"]).read_bytes())
+    owned = next(r for r in vector["source_rows"] if r["canonical_preimage"] and r["canonical_preimage"]["state"] == "PRESENT_REPLACE")
+    external = next(r for r in vector["source_rows"] if r["category"] == "external_synthetic_composition_input")
+    if mutation == "wrong_target": owned["canonical_target"] += ".other"
+    elif mutation == "wrong_before": owned["canonical_preimage"]["sha256"] = "a" * 64
+    else: external["category"] = "proposed_canonical_baseline_source"
+    raw = b._canonical(vector)
+    row = {**b.G4_CURRENT_SITE_BASELINE_VECTOR, "bytes": len(raw), "sha256": b._sha(raw)}
+    monkeypatch.setattr(b, "G4_CURRENT_SITE_BASELINE_SOURCE_ROWS", copy.deepcopy(vector["source_rows"]))
+    monkeypatch.setattr(b, "G4_CURRENT_SITE_BASELINE_VECTOR", row)
+    monkeypatch.setitem(d, "vector", {k: row[k] for k in ("path", "sha256")})
+    def read(path, digest):
+        if path == Path(row["path"]):
+            assert digest == row["sha256"]
+            return raw
+        return _practitioner_create_read(path, digest)
+    with pytest.raises(b.BoundedG1BError) as err:
+        b._g4_owner_bootstrap_external_inputs(read, _current_site_binding())
+    assert err.value.reason_code == reason
+
+
+def _current_site_synthetic_loader(monkeypatch, tmp_path, stage, mutation=None):
+    # Real shared loader + immutable31 dispatcher; Git/index, inherited policy,
+    # activation and operation-source review are synthetic substitutions.
+    b = bounded_g1b
+    d = _current_site_descriptor()
+    inherited = b.CONFIGURATION_PATHS | {b.STATE, b.GATES, b.OVERLAY, b.AGENTS, b.G4_STAGE1_INTERACTIVE_SCOPE,
+        b.G4_STAGE1_SUCCESSOR_SCOPE, b.G4_STAGE1_SUCCESSOR_TEST, b.G4_CI_WORKFLOW} | b.SOURCE_PATHS | b.CONTROLLER_PATHS
+    payloads = {p: ("synthetic inherited " + p).encode() for p in inherited}
+    for p in d["control"]:
+        payloads[p] = (_CURRENT_SITE_CANDIDATE / "after" / p).read_bytes()
+    policy = {p: payloads[p] for p in (b.STATE, b.GATES, b.OVERLAY, b.AGENTS)}
+    scope = json.loads(payloads[b.G4_STAGE1_SUCCESSOR_SCOPE])
+    scope["source_sha256"] = {p: b._sha(payloads[p]) for p in b.SOURCE_PATHS | b.CONTROLLER_PATHS}
+    payloads[b.G4_STAGE1_SUCCESSOR_SCOPE] = b._canonical(scope) + b"\n"
+    after = {p: Path(row["path"]).read_bytes() for p, row in d["product_rows"].items()}
+    controls_before = {p: (_CURRENT_SITE_CANDIDATE / "before" / "control" / p).read_bytes() for p in d["control"]}
+    before = {p: Path(row["path"]).read_bytes() for p, row in b.G4_CURRENT_SITE_BASELINE_BEFORE_ROWS.items()}
+    assert len(before) == 4 and all(b._sha(raw) == d["before_sha"][p] for p, raw in before.items())
+    if stage == "apply": payloads.update(after)
+    if mutation == "after_drift": payloads[next(iter(after))] += b" "
+    pins = {p: b._sha(raw) for p, raw in payloads.items()}
+    target, source = tmp_path / "target", tmp_path / "source"
+    base = d["base"]["commit"] if stage == "enable" else "b" * 40
+    tree = d["base"]["tree"] if stage == "enable" else "c" * 40
+    candidate = tree if stage == "admit" else "d" * 40
+    paths = d["control"] if stage == "enable" else d["apply_paths"] if stage == "apply" else frozenset()
+    kind = {"enable": "enable_g4_stage1_successor", "admit": b.G4_OWNER_BOOTSTRAP_ADMIT_KIND, "apply": "implement_g4_stage1_successor"}[stage]
+    q = {"schema_version": b.G4_CURRENT_SITE_BASELINE_SCHEMA, "operation_id": "synthetic-current-site-" + stage,
+        "operation_kind": kind, "stage": stage, "phase": "development", "base_commit": base, "base_tree": tree,
+        "expected_head": base, "expected_index_tree": candidate, "candidate_tree": candidate,
+        "source_sha256": scope["source_sha256"], "payload_sha256": pins,
+        "repair_sha256": {p: {"before_sha256": d["preimages"][p] if stage == "enable" else d["before_sha"][p], "after_sha256": pins[p]} for p in paths},
+        "source_review": {"path": "synthetic-only", "sha256": "a" * 64}, "activation_acceptance": None,
+        "product_vector": d["vector"], "mapping_review": d["mapping"]}
+    if mutation == "null_replace": q["repair_sha256"][next(iter(before))]["before_sha256"] = None
+    activation = d["root"] / "entry-admission-v1/independent-enable-push-effect-review-v1.json"
+    record = {"schema": "emr4.g4_operation_review.v1", "status": "PASS", "verdict": "PASS_G4_STAGE1_OWNER_BOOTSTRAP_CONTROL_PUBLICATION_EFFECT",
+        "reviewer_agent": "/synthetic/independent-fixture", "independent": True, "implementation_authorship": False, "blocking_findings": [],
+        "stage": "enable", "phase": "push", "base": d["base"]["commit"], "commit": base, "candidate_tree": tree,
+        "control_activation_accepted": True, "same_attempt_remote_readback_verified": True, "protected_refs_unchanged": True,
+        "whole_inverse_verified_same_attempt": True, "published_ref": b.G4_STAGE1_INTERACTIVE_BACKEND_REF}
+    activation_raw = b._canonical(record)
+    if stage != "enable": q["activation_acceptance"] = {"path": activation.as_posix(), "sha256": b._sha(activation_raw)}
+    forbidden = {Path(row["path"]) for row in b.G4_CURRENT_SITE_BASELINE_ORIGINAL_BEFORE_ROWS.values()}
+    external_reads = []
+    def read(path, digest):
+        assert path not in forbidden, "mutable canonical alias read"
+        if path == activation: raw = activation_raw
+        elif path.is_relative_to(target): raw = payloads[path.relative_to(target).as_posix()]
+        elif path.is_relative_to(source): raw = payloads[path.relative_to(source).as_posix()]
+        else:
+            external_reads.append(path)
+            return _practitioner_create_read(path, digest)
+        assert b._sha(raw) == digest
+        return raw
+    def git_bytes(actual, *args):
+        assert actual == target
+        if args == ("cat-file", "blob", d["base"]["commit"] + ":" + b.G4_STAGE1_SUCCESSOR_SCOPE): return controls_before[b.G4_STAGE1_SUCCESSOR_SCOPE]
+        if args[:2] == ("ls-tree", "-z"):
+            assert len(args) == 5 and args[2] == base and args[3] == "--" and args[4] in paths
+            p = args[4]
+            present = stage == "enable" or p in before
+            if mutation == "unexpected_add" and p in d["apply_paths"] - set(before): present = True
+            if mutation == "missing_replace" and p in before: present = False
+            return b"100644 blob synthetic\x00" if present else b""
+        assert args[:2] == ("cat-file", "blob") and len(args) == 3
+        commit, p = args[2].split(":", 1)
+        if commit == base:
+            if stage == "enable" and p in controls_before: return controls_before[p]
+            if p in before: return before[p] + (b" " if mutation == "wrong_before" else b"")
+            return payloads[p]
+        assert commit == d["base"]["commit"] and p in policy
+        return policy[p]
+    def git(actual, *args):
+        assert actual == target
+        if args == ("rev-parse", d["base"]["commit"] + "^{tree}"): return d["base"]["tree"]
+        assert args == ("cat-file", "commit", base)
+        return "tree " + tree + "\nparent " + d["base"]["commit"] + "\n\nsynthetic only"
+    monkeypatch.setattr(b, "_g4_owner_bootstrap_subject_review", lambda *args: {"synthetic": True})
+    monkeypatch.setattr(b.trusted_git, "run_git_bytes", git_bytes)
+    monkeypatch.setattr(b.trusted_git, "run_git", git)
+    monkeypatch.setattr(b.trusted_git, "attest_target_index", lambda *args, **kwargs: {"synthetic": True})
+    loaded = b._load_g4_owner_bootstrap_inputs(None, target, source, b.G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT, tmp_path / "scratch", q, read, {})
+    assert len(set(external_reads)) == 31
+    assert len(external_reads) == 31 + (20 if stage == "apply" else 0)
+    return loaded
+
+
+@pytest.mark.parametrize("stage", ["enable", "admit", "apply"])
+def test_current_site_shared_loader_synthetic_mixed_baseline(monkeypatch, tmp_path, stage):
+    loaded = _current_site_synthetic_loader(monkeypatch, tmp_path, stage)
+    assert len(loaded.binding["repair_sha256"]) == {"enable": 3, "admit": 0, "apply": 20}[stage]
+    if stage == "apply":
+        assert sum(x["before_sha256"] is None for x in loaded.binding["repair_sha256"].values()) == 16
+
+
+@pytest.mark.parametrize("mutation", ["unexpected_add", "missing_replace", "wrong_before", "null_replace", "after_drift"])
+def test_current_site_shared_loader_synthetic_named_preimage_refusal(monkeypatch, tmp_path, mutation):
+    _current_site_synthetic_loader(monkeypatch, tmp_path, "apply")
+    with pytest.raises(bounded_g1b.BoundedG1BError) as err:
+        _current_site_synthetic_loader(monkeypatch, tmp_path, "apply", mutation)
+    assert err.value.reason_code == "bounded_g4_owner_bootstrap_change_preimage"
+
+
+@pytest.mark.parametrize("reviewer", [
+    "/root/post_create_read_scope_sol_xhigh",
+    "/root/response_witness_verifier_repair_terra",
+    "/root", "", "/synthetic/independent-fixture",
+])
+def test_current_site_combined_subject_review_independence(reviewer):
+    # Real combined-admission review predicate; historical SOURCE22 mapping
+    # reviewer acceptance is separately exercised by genuine_external_inputs.
+    b = bounded_g1b
+    d = _current_site_descriptor()
+    authors = {"/root/post_create_read_scope_sol_xhigh",
+               "/root/response_witness_verifier_repair_terra", "/root", ""}
+    assert d["excluded_reviewers"] == authors
+    stage, phase, subject = "admit", "development", "a" * 64
+    path = d["root"] / "entry-admission-v1" / "independent-admit-development-subject-review-v1.json"
+    review = {"schema": "emr4.g4_operation_review.v1", "status": "PASS",
+        "verdict": "PASS_G4_STAGE1_OWNER_BOOTSTRAP_EXACT_ADMISSION_SUBJECT",
+        "subject_sha256": subject, "independent": True, "implementation_authorship": False,
+        "blocking_findings": [], "reviewer_agent": reviewer, "stage": stage, "phase": phase}
+    raw = b._canonical(review)
+    row = {"path": path.as_posix(), "sha256": b._sha(raw)}
+    seen = []
+    def read(actual, digest):
+        seen.append(actual)
+        assert actual == path and digest == b._sha(raw)
+        return raw
+    if reviewer in authors:
+        with pytest.raises(b.BoundedG1BError) as err:
+            b._g4_owner_bootstrap_subject_review(read, row, b.G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT,
+                subject, stage, phase, b.G4_CURRENT_SITE_BASELINE_SCHEMA)
+        assert err.value.reason_code == "bounded_g4_owner_bootstrap_independent_subject"
+    else:
+        assert b._g4_owner_bootstrap_subject_review(read, row, b.G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT,
+            subject, stage, phase, b.G4_CURRENT_SITE_BASELINE_SCHEMA) == review
+    assert seen == [path]
