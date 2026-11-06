@@ -100,8 +100,43 @@ def _window(start: Any, end: Any, zone_name: Any) -> tuple[date, date, timezone]
     return first, last, PRACTICE_TZ
 
 
-def list_path(date_from: str, date_to: str, practice_timezone: str) -> str:
+def _selected_midnight(day: date, zone):
+    """Require one real instant for each selected-practice local midnight."""
+    wall = datetime.combine(day, time.min)
+    instants = set()
+    for fold in (0, 1):
+        instant = wall.replace(tzinfo=zone, fold=fold).astimezone(timezone.utc)
+        if instant.astimezone(zone).replace(tzinfo=None) == wall:
+            instants.add(instant)
+    if len(instants) != 1:
+        _reject()
+    return next(iter(instants)).astimezone(zone)
+
+
+def _selected_window(start: Any, end: Any, zone_name: Any):
+    from zoneinfo import ZoneInfo
+    first, last = _day(start), _day(end)
+    if (not 1 <= (last - first).days <= MAX_DAYS
+            or type(zone_name) is not str
+            or zone_name not in ("Australia/Brisbane", "Australia/Sydney")):
+        _reject()
+    zone = ZoneInfo(zone_name)
+    _selected_midnight(first, zone)
+    _selected_midnight(last, zone)
+    return first, last, zone
+
+
+def list_path(date_from: str, date_to: str, practice_timezone: str, *,
+              selected_iana: bool = False) -> str:
     """Build the exact reviewed exclusive-end query for at most seven local days."""
+    if type(selected_iana) is not bool:
+        _reject()
+    if selected_iana:
+        first, last, zone = _selected_window(date_from, date_to, practice_timezone)
+        return "/api/v1/appointments?" + urlencode({
+            "date_from": _selected_midnight(first, zone).isoformat(timespec="seconds"),
+            "date_to": _selected_midnight(last, zone).isoformat(timespec="seconds"),
+        })
     first, last, zone = _window(date_from, date_to, practice_timezone)
     begin = datetime.combine(first, time.min, zone)
     finish = datetime.combine(last, time.min, zone)
@@ -200,6 +235,7 @@ def render_staff_diary_read(
     tenant_id: str, actor_id: str, authenticated_role: str,
     date_from: str, date_to: str, practice_timezone: str,
     captured_at: str, as_of: str, fallback: bool = False,
+    selected_iana: bool = False,
 ) -> dict[str, Any]:
     """Validate a whole authenticated GET result, then render normal/fallback.
 
@@ -212,7 +248,10 @@ def render_staff_diary_read(
         if authenticated_role != "Receptionist":
             _reject()
         tenant_id, actor_id = _uuid(tenant_id), _uuid(actor_id)
-        first, last, zone = _window(date_from, date_to, practice_timezone)
+        if type(selected_iana) is not bool:
+            _reject()
+        first, last, zone = (_selected_window(date_from, date_to, practice_timezone)
+                             if selected_iana else _window(date_from, date_to, practice_timezone))
         if (type(body) is not bytes or len(body) > MAX_REPLY_BYTES
                 or status_code != 200 or type(content_type) is not str
                 or not content_type.lower().startswith("application/json")):

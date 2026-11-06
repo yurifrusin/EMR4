@@ -28,6 +28,9 @@ SHA256 = re.compile(r"[0-9a-f]{64}\Z")
 RUNTIME_ROOT = Path("C:/Users/there/EMR4-tools/stage1-offline-voice-runtime-v1")
 PYTHON_PATH = RUNTIME_ROOT / "venv/Scripts/python.exe"
 MODEL_ROOT = Path("C:/Users/there/EMR4-tools/stage1-offline-voice-model-v1/vosk-model-small-en-us-0.15")
+SPEECH_COMPONENT_SOURCE = Path("C:/Users/there/EMR4-migration/20260911-v1/current-control-repair-20260912-v1/demo-led-stage1-20261012-v2/stage1-speech-component-v1/backend/component_recognizer.py")
+SPEECH_COMPONENT_SOURCE_SHA256 = "e070e17db283fbaea376b2a3b17f6ca629e3bff8ae86423d4071b515c17fa1ea"
+SPEECH_COMPONENT_WORK_ROOT = Path("C:/Users/there/EMR4-tools/stage1-speech-component-work-v1")
 PYTHON_SHA256 = "6285074735b3738a051bccbe944679268cf9b988832b4cfd1090752eb082f7e2"
 PYVENV_CFG_SHA256 = "1af62a1b27a98ba36095ca9c2998d983eaf0c9abb735a9cd9123075e886a3581"
 INSTALL_RESULT_SHA256 = "b2ad3b03931755d94fe832e719e1b5371bbb8c22b2cc00e549ebe6e881391854"
@@ -223,6 +226,86 @@ class ContainedVoiceRuntimeBinding:
             return False
 
 
+_SPEECH_COMPONENT_ISSUER = object()
+
+
+class _TrustedSpeechComponentCapability:
+    """Installed only after external exact Q/R/grant and owner-root checks.
+
+    This process-local marker does not authenticate its installer. The reviewed
+    launcher must own finite effects and verify the current scope on each call.
+    """
+
+    __slots__ = ("scope_current", "_issuer")
+
+    def __init__(self, scope_current, issuer):
+        if issuer is not _SPEECH_COMPONENT_ISSUER or not callable(scope_current):
+            raise VoiceRecognitionUnavailable("VOICE_RUNTIME_UNQUALIFIED")
+        self.scope_current = scope_current
+        self._issuer = issuer
+
+
+def _from_reviewed_speech_component_entry(runner_module: ModuleType,
+                                           recognizer: object,
+                                           scope_current,
+                                           *, attempt_id: str,
+                                           binding_sha256: str,
+                                           grant_sha256: str,
+                                           docker_sha256: str):
+    """Trusted launcher seam, never HTTP or self-admission.
+
+    The caller must verify exact source, Q/R, finite grant, Docker/capsule,
+    fresh SC attempt work root, and descendant cleanup before constructing it.
+    """
+    capability = _TrustedSpeechComponentCapability(
+        scope_current, _SPEECH_COMPONENT_ISSUER)
+    return SpeechComponentVoiceBinding(runner_module, recognizer, attempt_id,
+        binding_sha256, grant_sha256, docker_sha256, capability)
+
+
+@dataclass(frozen=True, repr=False)
+class SpeechComponentVoiceBinding:
+    runner_module: ModuleType
+    recognizer: object = field(repr=False)
+    attempt_id: str
+    binding_sha256: str
+    grant_sha256: str
+    docker_sha256: str
+    _capability: _TrustedSpeechComponentCapability | None = field(default=None,
+        repr=False)
+
+    def ready(self, persona: str) -> bool:
+        capability = self._capability
+        if (persona not in {"patient", "staff"}
+                or type(capability) is not _TrustedSpeechComponentCapability
+                or capability._issuer is not _SPEECH_COMPONENT_ISSUER
+                or type(self.attempt_id) is not str
+                or re.fullmatch(r"attempt-[1-9][0-9]*", self.attempt_id) is None
+                or len(self.attempt_id) > 64
+                or any(type(value) is not str or SHA256.fullmatch(value) is None
+                       for value in (self.binding_sha256, self.grant_sha256,
+                                     self.docker_sha256))):
+            return False
+        try:
+            module = self.runner_module
+            recognizer = self.recognizer
+            return (type(module) is ModuleType
+                and Path(module.__file__) == SPEECH_COMPONENT_SOURCE
+                and _matches(SPEECH_COMPONENT_SOURCE, SPEECH_COMPONENT_SOURCE_SHA256)
+                and module.WORK_ROOT == SPEECH_COMPONENT_WORK_ROOT
+                and type(recognizer) is module.ContainedRecognizer
+                and recognizer.work_root == SPEECH_COMPONENT_WORK_ROOT / self.attempt_id
+                and recognizer.attempt_id == self.attempt_id
+                and recognizer.binding_sha256 == self.binding_sha256
+                and recognizer.docker_sha256 == self.docker_sha256
+                and recognizer._failed is False
+                and type(recognizer._next) is int and 1 <= recognizer._next <= 2
+                and capability.scope_current(persona, self.binding_sha256,
+                    self.grant_sha256, self.attempt_id) is True)
+        except (AttributeError, OSError, TypeError, ValueError, RuntimeError):
+            return False
+
+
 def target_for_persona(persona: str) -> str | None:
     return {"patient": "patient-words", "staff": "move-words"}.get(persona)
 
@@ -244,9 +327,22 @@ def validate_wav(raw: bytes) -> None:
 
 
 def run_local_recognizer(raw: bytes,
-                         binding: VoiceRuntimeBinding | ContainedVoiceRuntimeBinding,
+                         binding: VoiceRuntimeBinding | ContainedVoiceRuntimeBinding | SpeechComponentVoiceBinding,
                          persona: str | None = None) -> str:
     validate_wav(raw)
+    if type(binding) is SpeechComponentVoiceBinding:
+        if not isinstance(persona, str) or not binding.ready(persona):
+            raise VoiceRecognitionUnavailable("VOICE_RUNTIME_UNQUALIFIED")
+        try:
+            # The reviewed SC recognizer owns durable two-clip consumption,
+            # network-none child execution and exact container cleanup.
+            transcript = binding.recognizer(raw)
+        except (AttributeError, OSError, TypeError, ValueError, RuntimeError) as exc:
+            raise VoiceRecognitionUnavailable("VOICE_RECOGNITION_UNAVAILABLE") from exc
+        if (type(transcript) is not str or len(transcript) > 500
+                or any(ord(char) < 32 or ord(char) == 127 for char in transcript)):
+            raise VoiceRecognitionUnavailable("VOICE_RESULT_UNAVAILABLE")
+        return transcript.strip()
     if isinstance(binding, ContainedVoiceRuntimeBinding):
         selected = binding.slot(persona) if isinstance(persona, str) else None
         if selected is None or not binding.ready(persona) or not selected[1].claim():

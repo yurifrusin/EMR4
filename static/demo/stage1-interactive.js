@@ -4,6 +4,7 @@ import { initLocalVoice, initSpokenReply, createManualIntentHandoff } from "./st
 import { initDiaryView } from "./stage1-diary-view.js";
 const $ = id => document.getElementById(id);
 const state = { session: null, request: null, appointment: null, offer: null,
+  bookingPrepared: null, bookingReview: null,
   create: null, move: null, pendingKey: null, requestUncertain: false, generation: 0,
   proposalGeneration: 0, busy: false, staffUncertain: false, requestReview: null, moveReview: null };
 const text = (id, value) => { $(id).textContent = value == null ? "" : String(value); };
@@ -100,7 +101,7 @@ async function suggestFromWords(kind) {
     if(generation!==interpretationGeneration[kind] || before!==JSON.stringify(intentSnapshot(kind)) ||
         (localVoice && !localVoice.isIdle()))return;
     if(!result || result.schema!=="emr4.stage1_word_interpretation.v1" || result.kind!==kind ||
-        result.method!==(kind==="move"?"BUREAU_DETERMINISTIC":"DETERMINISTIC_LOCAL") ||
+        result.method!==(kind==="move"?"BUREAU_SYNTHETIC_MODEL_REPLY":"DETERMINISTIC_LOCAL") ||
         !["PROPOSED","CLARIFICATION"].includes(result.status) ||
         !Array.isArray(result.missing) || !result.fields || typeof result.fields!=="object" || Array.isArray(result.fields))
       throw new Error("The suggested details could not be verified. Clarify the note or use structured details.");
@@ -111,6 +112,19 @@ async function suggestFromWords(kind) {
       status(result.message==="DATE_NOT_CURRENTLY_OFFERED"
         ?"That date is not currently offered. Check the offered dates, clarify your words, and suggest again. No details were adopted."
         :"Please clarify the note with one date and an exact time or a bounded preferred window. No details were adopted.");return;
+    }
+    if(kind==="move"){
+      const carrier=result.synthetic_carrier;
+      if(!carrier || carrier.producer!=="authored_synthetic_model_shaped_reply" ||
+          carrier.provider_calls!==0 ||
+          typeof carrier.raw_response_sha256!=="string" || !/^[a-f0-9]{64}$/.test(carrier.raw_response_sha256) ||
+          typeof carrier.compiled_plan_sha256!=="string" || !/^[a-f0-9]{64}$/.test(carrier.compiled_plan_sha256) ||
+          carrier.raw_response_sha256===carrier.compiled_plan_sha256 ||
+          carrier.planner_source_sha256!=="45a28b40611508910fd338f775644ff4863fd0ff84609040cb697d157a09b2d8" ||
+          !Number.isSafeInteger(carrier.context_revision) || carrier.context_revision<1 ||
+          !Number.isSafeInteger(carrier.source_state_version) || carrier.source_state_version!==selected.appointment_version ||
+          !Number.isSafeInteger(carrier.duration_minutes) || carrier.duration_minutes!==state.appointment?.duration_minutes)
+        throw new Error("The synthetic proposal provenance changed. Refresh and prepare the change again.");
     }
     const keys=kind==="request"?["date","earliest_local","latest_local"]:["target_date","target_start_local"];
     const fields=result.fields,date=fields[kind==="request"?"date":"target_date"];
@@ -364,6 +378,7 @@ $("reliability-lab").addEventListener("toggle", async () => {
   } catch (_) { text("reliability-lab-content", "Report unavailable. No evaluation was started."); }
 });
 function clearPending() {
+  state.bookingReview=null;
   spoken?.stop();
   state.proposalGeneration++;
   state.create = state.move = state.offer = state.moveReview = null;
@@ -399,23 +414,64 @@ function displayRequest(request, original, options = [], uncertain = false) {
   if (state.requestUncertain) show("request-review-box", false);
   renderMapping("request");
 }
+function checkedPreparedBooking(value,request) {
+  const exact=(v,keys)=>v && typeof v==="object" && !Array.isArray(v) &&
+    Object.keys(v).sort().join("|")===keys.slice().sort().join("|");
+  if(!exact(value,["schema","prepared_options_ref","request_version","intent","result",
+      "requires_human_choice","requires_confirmation","write_performed","options"]) ||
+      value.schema!=="emr4.request_booking_prepared_options.v1" ||
+      typeof value.prepared_options_ref!=="string" || !/^[A-Za-z0-9_-]{32}$/.test(value.prepared_options_ref) ||
+      value.intent!=="request_booking" || !["proposal_ready","clarification_required"].includes(value.result) ||
+      value.requires_human_choice!==true || value.requires_confirmation!==true || value.write_performed!==false ||
+      !Number.isSafeInteger(value.request_version) || value.request_version!==request.request_version ||
+      request.state!=="submitted" || !Array.isArray(value.options) || value.options.length>7 ||
+      value.result==="proposal_ready" && value.options.length===0)
+    throw new Error("Prepared request options unavailable. Refresh current facts.");
+  const seen=new Set();
+  for(const o of value.options) {
+    if(!exact(o,["date","local_time","zone"]) || !/^\d{4}-\d{2}-\d{2}$/.test(o.date) ||
+        !/^(?:[01]\d|2[0-3]):[0-5]\d$/.test(o.local_time) ||
+        typeof o.zone!=="string" || !o.zone || seen.has(JSON.stringify(o)))
+      throw new Error("Prepared request options unavailable.");
+    seen.add(JSON.stringify(o));
+  }
+  return value;
+}
 function displayStaff(data) {
   if (!data || !data.request) { text("staff-request", "Request unavailable."); return; }
+  const requestKeys=new Set(["request_id","patient_id","state","request_version","preference_date",
+    "earliest_local","latest_local","practice_timezone","booked_appointment_id","booked_start_time",
+    "booked_status","historical_request_result"]);
+  if(Object.keys(data.request).some(k=>!requestKeys.has(k)))
+    throw new Error("Private request data refused.");
   state.request = data.request;
   state.appointment = data.appointment || null;
+  if(Object.hasOwn(data,"prepared_request_booking")) {
+    state.bookingPrepared=data.prepared_request_booking==null ? null :
+      checkedPreparedBooking(data.prepared_request_booking,data.request);
+    if(state.bookingPrepared && JSON.stringify(data.options)!==JSON.stringify(state.bookingPrepared.options))
+      throw new Error("Prepared options changed.");
+  } else state.bookingPrepared=null;
+  if(data.uncertain===true || data.request.state!=="submitted")state.bookingPrepared=null;
+
   if(data.uncertain===true)state.staffUncertain=true;
   else if(data.uncertain===false)state.staffUncertain=false;
   invalidateIntent("move");
   const r = data.request;
+  const clarificationNeeded = !state.staffUncertain && state.bookingPrepared?.result === "clarification_required";
   $("staff-request").hidden=r.state==="booked";
   facts($("staff-request"), [
     ["Request", r.state],
     ["Preference", r.preference_date && r.earliest_local && r.latest_local
-      ? `${r.preference_date}, ${r.earliest_local}–${r.latest_local} ${r.practice_timezone}` : "Not submitted"]]);
+      ? `${r.preference_date}, ${r.earliest_local}–${r.latest_local} ${r.practice_timezone}` : "Not submitted"],
+    ...(clarificationNeeded ? [["Next step", "Clarification is required. No booking is prepared."]] : [])]);
   facts($("staff-request-details"), [
     ["Source", "Synthetic patient web text"],
     ["Identity", "Fictional demo session; no real patient identity"],
     ["Request version", r.request_version],
+    ...(state.bookingPrepared ? [["Prepared intent","Book this existing request"],
+      ["Next step",state.bookingPrepared.options.length ? "Choose a time, then confirm separately." :
+        "Clarification is required. No booking is prepared."]] : []),
     ["Original booking result", data.original_booking?.source === "completed_create_command_result"
       ? dateTime(data.original_booking.date, data.original_booking.start_local, data.original_booking.zone)
       : "Unavailable in this demo session"],
@@ -436,11 +492,57 @@ function displayStaff(data) {
     const button = document.createElement("button"); button.type = "button"; button.textContent = "Review this time";
     button.addEventListener("click", () => reviewCreate(option)); row.append(label, button); offers.append(row);
   }
-  if (!data.options?.length && r.state === "submitted") text("staff-outcome", "No current option is available. Offer an alternative through the reviewed backend flow.");
+  const noOptionMessage = "No current option is available. Offer an alternative through the reviewed backend flow.";
+  const clarificationMessage = "Clarification is required. No booking is prepared.";
+  if ([noOptionMessage, clarificationMessage].includes($("staff-outcome").textContent))
+    text("staff-outcome", "");
+  if (!state.staffUncertain && !data.options?.length && r.state === "submitted")
+    text("staff-outcome", clarificationNeeded ? clarificationMessage : noOptionMessage);
   document.dispatchEvent(new CustomEvent("raisa:staff-facts", {detail:{
     request_state:r.state,appointment_ref:appt?.ref||null,
     appointment_version:appt?.state_version??null}}));
 }
+function consumePreparedMove(value) {
+  const exact=(v,keys)=>v && typeof v==="object" && !Array.isArray(v) &&
+    Object.keys(v).sort().join("|")===keys.slice().sort().join("|");
+  const hash=v=>typeof v==="string" && /^[a-f0-9]{64}$/.test(v);
+  if(!exact(value,["schema","prepared_review_ref","review","provenance"]) ||
+      value.schema!=="emr4.current_point_v3_prepared_move_review.v1" ||
+      typeof value.prepared_review_ref!=="string" || !/^[A-Za-z0-9_-]{32}$/.test(value.prepared_review_ref))
+    throw new Error("Prepared move unavailable. Refresh current facts.");
+  const r=value.review,p=value.provenance,a=state.appointment;
+  if(!exact(r,["appointment_ref","source_state_version","source_date","source_start_local","target_date",
+      "target_start_local","duration_minutes","requires_confirmation","autonomy_tier","warnings","blocks"]) ||
+      !exact(p,["method","request_id","context_revision","frame_sha256","raw_sha256","compiled_plan_sha256",
+      "planner_source_sha256","schema_sha256"]) || !a || a.status!=="Booked" ||
+      r.appointment_ref!==a.ref || !Number.isSafeInteger(r.source_state_version) || r.source_state_version!==a.state_version ||
+      r.source_date!==a.date || r.source_start_local!==a.start_local ||
+      !Number.isSafeInteger(r.duration_minutes) || r.duration_minutes!==a.duration_minutes ||
+      r.requires_confirmation!==true || r.autonomy_tier!=="proposal" || !Array.isArray(r.blocks) || r.blocks.length ||
+      !Array.isArray(r.warnings) || !r.warnings.includes("staff_confirmation_required") ||
+      r.warnings.some(w=>!["staff_confirmation_required","no_reservation"].includes(w)) ||
+      new Set(r.warnings).size!==r.warnings.length || !/^\d{4}-\d{2}-\d{2}$/.test(r.target_date) ||
+      !/^(?:[01]\d|2[0-3]):[0-5]\d$/.test(r.target_start_local) ||
+      p.method!=="BUREAU_SYNTHETIC_MODEL_REPLY" || typeof p.request_id!=="string" || !p.request_id ||
+      !Number.isSafeInteger(p.context_revision) || p.context_revision<1 ||
+      ![p.frame_sha256,p.raw_sha256,p.compiled_plan_sha256].every(hash) || p.raw_sha256===p.compiled_plan_sha256 ||
+      p.planner_source_sha256!=="45a28b40611508910fd338f775644ff4863fd0ff84609040cb697d157a09b2d8" ||
+      p.schema_sha256!=="05f324de7c7c01254e666c754b44631652e794ff9a3a45c87d5106478725d5a0")
+    throw new Error("Prepared move provenance or appointment changed. Refresh current facts.");
+  // Adopt the existing checked review; no interpretation or proposal request.
+  $("move-words").value="";
+  $("move-date").value=r.target_date;$("move-time").value=r.target_start_local;
+  interpretedNotes.move=JSON.stringify(intentSnapshot("move"));
+  state.move=value.prepared_review_ref;
+  state.moveReview={snapshot:JSON.stringify(intentSnapshot("move")),generation:interpretationGeneration.move,
+    proposalGeneration:state.proposalGeneration};
+  facts($("move-summary"),[["Instruction","Prepared synthetic point move"],
+    ["Before",dateTime(a.date,a.start_local,a.zone)],["After",dateTime(r.target_date,r.target_start_local,a.zone)]]);
+  const unchanged=document.createElement("p");unchanged.className="helper";
+  unchanged.textContent=`Unchanged: ${a.patient_label} · ${a.practitioner_label} · ${a.type_label} · ${a.duration_minutes} minutes · ${a.location_label}. Review this time before choosing Confirm move. The proposed time is not held.`;
+  $("move-summary").append(unchanged);show("move-review",true);
+}
+
 async function refresh() {
   if (state.session?.persona === "patient" && state.busy) {
     status("Wait for the current submission result before refreshing.");
@@ -453,7 +555,11 @@ async function refresh() {
     const result = await api("read", "refresh", null);
     if (generation !== state.generation) return;
     if (state.session.persona === "patient") displayRequest(result.request, result.original_booking, result.options, result.uncertain);
-    else displayStaff(result);
+    else {
+      displayStaff(result);
+      if(result.prepared_move_review!=null && !state.staffUncertain && !state.busy)
+        consumePreparedMove(result.prepared_move_review);
+    }
     // A staff confirmation keeps its original key until this caller verifies
     // the matching appointment readback below. Other definitive reads clear it.
     if (result.uncertain === false && !(state.session.persona==="staff" && state.busy))
@@ -520,6 +626,10 @@ async function submitRequest() {
 }
 async function reviewCreate(option) {
   if(state.staffUncertain || state.busy){status("Check the original action before preparing another booking.");return;}
+  const prepared=state.bookingPrepared;
+  if(prepared && !prepared.options.some(o=>JSON.stringify(o)===JSON.stringify(option))) {
+    status("This prepared option changed. Refresh current facts.");return;
+  }
   clearPending(); status("Checking this time against current request and availability…");
   const proposalGeneration=state.proposalGeneration,requestVersion=state.request?.request_version;
   try {
@@ -527,12 +637,24 @@ async function reviewCreate(option) {
     if(proposalGeneration!==state.proposalGeneration || state.request?.request_version!==requestVersion)return;
     if (!result.safe || !result.proposal_ref) throw new Error("This option is unavailable. Refresh current facts.");
     state.create = result.proposal_ref;
+    state.bookingReview=prepared ? {optionsRef:prepared.prepared_options_ref,
+      requestVersion:prepared.request_version,option:{...option},proposalRef:result.proposal_ref,
+      generation:state.generation,proposalGeneration:state.proposalGeneration} : null;
     text("create-summary", `Create a follow-up for ${result.patient_label} with ${result.practitioner_label} on ${dateTime(option.date, option.local_time, option.zone)}. This is a fresh proposal, not a booking.`);
     show("create-review", true); $("create-confirm").focus(); status("Review the proposed booking before confirmation.");
   } catch (error) { status(error.message); }
 }
 async function confirmCreate() {
   if (!state.create || state.busy) return;
+  const bookingReview=state.bookingReview;
+  if(bookingReview && (!state.bookingPrepared ||
+      state.bookingPrepared.prepared_options_ref!==bookingReview.optionsRef ||
+      state.bookingPrepared.request_version!==bookingReview.requestVersion ||
+      state.request?.request_version!==bookingReview.requestVersion ||
+      state.create!==bookingReview.proposalRef || state.generation!==bookingReview.generation ||
+      state.proposalGeneration!==bookingReview.proposalGeneration)) {
+    clearPending();status("The prepared request changed. Refresh before confirming.");return;
+  }
   if(state.staffUncertain){status("Check the original action before confirming another booking.");return;}
   state.busy = true; const key = state.pendingKey || uuid(); state.pendingKey = key;
   status("Confirming booking and checking committed readback…");
@@ -540,12 +662,29 @@ async function confirmCreate() {
     const result = await api("write", "confirm_create", { proposal_ref: state.create }, key);
     clearPending();
     if (result.outcome !== "committed" || !result.appointment) throw new Error("No verified booking readback.");
+    if(bookingReview) {
+      const r=result.command_receipt;
+      if(!r || Object.keys(r).sort().join("|")!==["schema","request_version","appointment_ref",
+          "appointment_state_version","database_readback_verified"].sort().join("|") ||
+          r.schema!=="emr4.request_booking_verified_outcome.v1" ||
+          r.request_version!==bookingReview.requestVersion+1 ||
+          r.appointment_ref!==result.appointment.ref || r.database_readback_verified!==true ||
+          r.appointment_state_version!==result.appointment.state_version)
+        throw new Error("Original request booking outcome is unverified.");
+    }
     const current = await refresh();
     if (!current?.appointment || !current.appointment.zone ||
         current.appointment.ref !== result.appointment.ref ||
         current.appointment.date !== result.appointment.date ||
         current.appointment.start_local !== result.appointment.start_local)
       throw new Error("Booking readback did not match the command result.");
+    if(bookingReview && (current.request?.state!=="booked" ||
+        current.request.request_version!==bookingReview.requestVersion+1 ||
+        current.request.booked_appointment_id!==result.appointment.ref ||
+        current.appointment.state_version!==result.command_receipt.appointment_state_version ||
+        current.appointment.date!==bookingReview.option.date ||
+        current.appointment.start_local!==bookingReview.option.local_time))
+      throw new Error("Request version or new appointment readback did not match.");
     state.pendingKey = null;
     const message = `Booking confirmed for ${dateTime(current.appointment.date, current.appointment.start_local, current.appointment.zone)}. You can still view the original request.`;
     status(message); spoken?.offer(message);
@@ -719,13 +858,143 @@ async function startWorkspace() {
 let accountCsrf = null;
 let accountIdentity = null; // Display only; never used to authorise an action.
 let accountBusy = false;
+let restorePractitionerAfterAccountBusy = null;
 let accountStarted = false;
+const patientRecords = initPatientRecords();
+let selectedDiaryView=null, selectedDiaryContext=null, selectedDiarySignature=null;
+let selectedDiaryEpoch=0, selectedTaskFocus=null, selectedDiaryOpen=false;
+document.addEventListener("focusin",event=>{
+  if($("patient-records").contains(event.target))selectedTaskFocus=event.target;
+});
+// Presentation only: these snapshots never authorise an account or practice action.
+const ownerPresentation = (() => {
+  const details=$("owner-details"), summary=$("owner-details-summary");
+  let account=null, complete=false, busy=false, accountPending=false, attention=null, ownerStatus="";
+  let compactHandled=false;
+  function canCompact() { return complete && account!==null && !busy && !accountPending && attention===null; }
+  function render() {
+    const context=$("owner-current-practice");
+    context.hidden=account===null;
+    context.textContent=account ? `${account.practice_name} · ${account.role}` : "";
+    summary.textContent=complete && account ? "Practice setup details" : "Practice setup";
+    if(attention!==null){
+      $("owner-onboarding").hidden=false;
+      $("owner-status").textContent=attention;
+    }else if(ownerStatus){$("owner-status").textContent=ownerStatus;}
+    if(!canCompact()){
+      details.open=true;
+    }else if(!compactHandled && !details.contains(document.activeElement)){
+      compactHandled=true;
+      details.open=false;
+    }
+  }
+  summary.addEventListener("click",event=>{
+    if(!canCompact()){event.preventDefault();details.open=true;}
+    else compactHandled=true;
+  });
+  details.addEventListener("focusout",()=>queueMicrotask(render));
+  return {
+    account(value) {
+      const identity=value?.identity;
+      const selected=value?.enabled===true && value.phase==="selected"
+        && identity?.role==="Receptionist" && typeof identity.email==="string"
+        && typeof identity.practice_name==="string"
+        && value.invitation?.phase!=="review";
+      const next=selected ? {key:JSON.stringify([identity.email,identity.practice_name,
+        value.staff_booking_context?.practice_id ?? null]),
+        practice_name:identity.practice_name,role:identity.role} : null;
+      if(next?.key!==account?.key)compactHandled=false;
+      account=next;
+      render();
+    },
+    owner(value) {
+      complete=value.phase==="verified" && value.invitation?.issued===true
+        && value.invitation.can_issue===false;
+      ownerStatus=$("owner-status").textContent;
+      render();
+    },
+    busy(value) { busy=value;render(); },
+    accountBusy(value) { accountPending=value;render(); },
+    attention(message, actionUncertain=false) {
+      if(attention===null || actionUncertain)attention=message;
+      render();
+    },
+    confirmed() { attention=null;render(); }
+  };
+})();
+
+function configureSelectedDiary(value) {
+  ownerPresentation.account(value);
+  const meta=value?.staff_booking_context, identity=value?.identity;
+  const available=value?.selected_diary_available===true && value.phase==="selected"
+    && identity?.role==="Receptionist" && typeof value.csrf==="string"
+    && typeof meta?.practice_id==="string" && typeof meta.date==="string";
+  const signature=available ? JSON.stringify([value.csrf,identity.email,identity.practice_name,
+    meta.practice_id,meta.date,meta.duration_minutes]) : null;
+  if(signature!==selectedDiarySignature){
+    selectedDiaryEpoch++;selectedDiaryView?.deactivate();selectedDiarySignature=signature;
+    selectedTaskFocus=null;
+  }
+  selectedDiaryContext=available ? Object.freeze({generation:selectedDiaryEpoch,
+    practice_id:meta.practice_id,date:meta.date}) : null;
+  if(!available){
+    if(selectedDiaryView){show("view-switch",false);show("view-prompt",false);
+      document.querySelector(".workspace-heading").hidden=true;}
+    return;
+  }
+  if(!selectedDiaryView)selectedDiaryView=initDiaryView({
+    selectedContext:()=>selectedDiaryContext,
+    taskVisibility:(visible,restoreFocus=true)=>{
+      selectedDiaryOpen=!visible;patientRecords.setWorkspace(!visible);
+      if(visible && restoreFocus){
+        const target=selectedTaskFocus;
+        if(target?.isConnected && !target.disabled && !$("patient-records").hidden)target.focus();
+        else $("focus-view").focus();
+      }
+    },
+    load:async()=>{
+      const epoch=selectedDiaryEpoch, token=accountCsrf;
+      const current=()=>selectedDiaryContext!==null && selectedDiaryEpoch===epoch && accountCsrf===token;
+      if(!current() || !token)throw Error("Diary unavailable");
+      const response=await fetch("/demo/stage1/selected-account-diary/read",{
+        method:"POST",credentials:"same-origin",cache:"no-store",redirect:"error",
+        headers:{"Content-Type":"application/json","X-CSRF-Token":token},body:"{}"});
+      if(!current() || !response.ok || !response.body)throw Error("Diary unavailable");
+      const reader=response.body.getReader(),chunks=[];let size=0;
+      while(true){
+        const part=await reader.read();
+        if(!current()){await reader.cancel();throw Error("Diary unavailable");}
+        if(part.done)break;
+        size+=part.value.byteLength;
+        if(size>262144){await reader.cancel();throw Error("Diary unavailable");}
+        chunks.push(part.value);
+      }
+      const bytes=new Uint8Array(size);let offset=0;
+      for(const chunk of chunks){bytes.set(chunk,offset);offset+=chunk.byteLength;}
+      if(!current())throw Error("Diary unavailable");
+      return JSON.parse(new TextDecoder("utf-8",{fatal:true}).decode(bytes));
+    }});
+  document.querySelector(".workspace-heading").hidden=false;
+  patientRecords.setWorkspace(selectedDiaryOpen);
+  $("focus-workspace").hidden=true;
+  show("view-switch",true);show("view-prompt",true);
+  text("title","Your appointments");
+  text("intro","Keep your current task, or read appointments starting in the next seven days.");
+  text("grid-view","Next seven days");
+  text("diary-heading","Appointments starting in the next seven days");
+}
+
 function accountBusyState(busy) {
   accountBusy = busy;
-  $("account-panel").querySelectorAll("button,input,select").forEach(node => { node.disabled = busy; });
+  ownerPresentation.accountBusy(busy);
+  $("account-panel").querySelectorAll("button,input,select").forEach(node => {
+    if (!node.closest("#owner-practitioner-box")) node.disabled = busy;
+  });
   $("account-logout").disabled=busy;
+  if (restorePractitionerAfterAccountBusy) restorePractitionerAfterAccountBusy();
 }
 function accountWorkspace(visible) {
+  patientRecords.setWorkspace(visible);
   show("account-panel", !visible);
   $("focus-workspace").hidden = !visible;
   document.querySelector(".workspace-heading").hidden = !visible;
@@ -735,6 +1004,12 @@ function accountWorkspace(visible) {
 function presentAccount(value) {
   if(!value || value.enabled!==true || typeof value.csrf!=="string" ||
       !["login","choose","selected"].includes(value.phase))throw new Error("Sign-in is unavailable. Please reload this page.");
+  show("account-invitation-refresh",value.phase==="selected" && Object.hasOwn(value,"invitation"));
+  const invitation=value.invitation;
+  show("account-invitation",invitation?.phase==="review" && invitation.can_accept===true);
+  $("account-invitation-confirm").checked=false;
+  if(invitation?.phase==="review")text("account-invitation-review",`${invitation.practice_name} · Receptionist · Existing synthetic receptionist`);
+  patientRecords.setAccount(value);
   accountCsrf=value.csrf;
   accountIdentity=value.phase==="selected" ? value.identity : null;
   accountWorkspace(false);
@@ -765,11 +1040,13 @@ function presentAccount(value) {
     text("account-identity","");text("role","Sign in");
     text("account-status","Sign in to your fictional practice.");
   }
+  configureSelectedDiary(value);
 }
 async function accountRequest(action, body) {
   if(accountBusy)return;
   accountBusyState(true);
   try{
+    patientRecords.setAccount(null);configureSelectedDiary(null);
     const response=await fetch(`/demo/stage1/account/${action}`,{
       method:"POST",credentials:"same-origin",cache:"no-store",redirect:"error",
       headers:{"Content-Type":"application/json","X-CSRF-Token":accountCsrf||""},body:JSON.stringify(body)});
@@ -778,7 +1055,7 @@ async function accountRequest(action, body) {
     presentAccount(value);
   }catch(_){
     accountCsrf=null;
-    accountIdentity=null;
+    accountIdentity=null;configureSelectedDiary(null);
     text("account-status","Sign-in could not be completed. Reload this page to sign in again.");
     show("account-login",false);show("account-selection",false);
     show("account-identity",false);show("account-continue",false);show("account-logout",false);
@@ -801,6 +1078,17 @@ $("account-selection").addEventListener("submit",async event=>{
   const membership_id=$("account-membership").value;
   if(membership_id)await accountRequest("select",{membership_id});
 });
+$("account-invitation-refresh").addEventListener("click",async()=>{
+  if(accountBusy)return;
+  accountBusyState(true);
+  try{const r=await fetch("/demo/stage1/account/state",{credentials:"same-origin",cache:"no-store",redirect:"error"});
+    if(!r.ok)throw new Error();presentAccount(await r.json());}
+  catch(_){patientRecords.setAccount(null);configureSelectedDiary(null);text("account-status","The invitation could not be checked. Sign in again.");}
+  finally{accountBusyState(false);}
+});
+$("account-invitation-form").addEventListener("submit",async event=>{
+  event.preventDefault();if($("account-invitation-confirm").checked)await accountRequest("accept-invitation",{confirmed:true});
+});
 $("account-logout").addEventListener("click",async()=>{
   if(accountBusy || state.busy)return;
   await accountRequest("logout",{});
@@ -821,3 +1109,815 @@ try{
   if(value?.enabled===false)await startWorkspace();
   else presentAccount(value);
 }catch(_){status("The local session is unavailable. Reload this page to try again.");}
+
+// Optional local owner setup; tokens remain server-side and no Bureau session is issued.
+(async () => {
+  let csrf = null, busy = false;
+  const el = id => document.getElementById(id);
+  // STOPPED SOURCE ONLY. Removing either client/server barrier requires later
+  // exact reviewed source adoption and finite bindings, never a DOM toggle.
+  let ownerViewEpoch = 0;
+  const practitioner = (() => {
+    const stopped = false;
+    const p = name => el("owner-practitioner-" + name);
+    const uuid = v => typeof v === "string" && /^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/.test(v);
+    const closed = (v, keys) => v !== null && typeof v === "object" && !Array.isArray(v)
+      && Object.keys(v).length === keys.length && keys.every(k => Object.hasOwn(v,k));
+    const decimal = (v, zero=false) => typeof v === "string"
+      && (zero && v==="0" || /^[1-9][0-9]{0,18}$/.test(v))
+      && (v.length<19 || v.length===19 && v<="9223372036854775807");
+    const digest = v => typeof v==="string" && /^[0-9a-f]{64}$/.test(v);
+    const scalarText = (v, minimum=0) => {
+      if(typeof v!=="string")return false;
+      let count=0;
+      for(const char of v){const cp=char.codePointAt(0);if(cp>=0xD800 && cp<=0xDFFF)return false;count++;}
+      return count>=minimum && count<=100;
+    };
+    // Exact W1 only for input advice. Send original text; review normalized
+    // server-returned fields. No browser digest or authority is manufactured.
+    const w1 = new Set(Array.from("\u0009\u000a\u000b\u000c\u000d\u001c\u001d\u001e\u001f\u0020\u0085\u00a0\u1680\u2000\u2001\u2002\u2003\u2004\u2005\u2006\u2007\u2008\u2009\u200a\u2028\u2029\u202f\u205f\u3000"));
+    function advice(v, optional=false){
+      const chars=Array.from(v);while(chars.length && w1.has(chars[0]))chars.shift();
+      while(chars.length && w1.has(chars[chars.length-1]))chars.pop();
+      const text=chars.join("");
+      return optional && text==="" || scalarText(text,1) && !/[\u0000-\u001f\u007f]/.test(text);
+    }
+    const bodyShape = v => closed(v,["first_name","last_name","specialty","distinct_resource"])
+      && scalarText(v.first_name,1) && scalarText(v.last_name,1)
+      && (v.specialty===null || scalarText(v.specialty,1)) && typeof v.distinct_resource==="boolean";
+    const scopeShape = v => closed(v,["practice_id"]) && uuid(v.practice_id);
+    let scope=null, identity=null, known=false, epoch=0, pending=false;
+    let draft=null, predecessor=null, unresolved=null, requestPrepare=null, refusedPredecessor=null;
+    let expiresTimer=null;
+    function status(message){p("status").textContent=message;}
+    function clearReview(){
+      draft=null;p("review").hidden=true;p("matches").replaceChildren();
+      p("confirm").disabled=true;clearTimeout(expiresTimer);expiresTimer=null;
+    }
+    function invalidateOwner(dropRefusedPredecessor=false){
+      if(dropRefusedPredecessor)refusedPredecessor=null;
+      epoch++;scope=null;identity=null;predecessor=null;clearReview();
+      // Preserve only original unresolved key/fingerprint and namespace for
+      // recovery, not a confirmable draft or a token. Nothing enters storage.
+      restore();
+    }
+    function edit(){
+      epoch++;clearReview();
+      status(unresolved ? "A previous result is uncertain. Check its creation reference before starting another creation."
+        : "Details changed. Check details again before creating.");
+      restore();
+    }
+    function restore(){
+      const visible=!stopped && known;
+      p("box").hidden=!visible;
+      const available=visible && scope!==null && !busy && !accountBusy && !pending;
+      p("form").querySelectorAll("input,button").forEach(n=>n.disabled=!available || unresolved!==null);
+      if(available && unresolved?.kind==="prepare" && requestPrepare
+          && unresolved.practice===scope && unresolved.email===identity?.email)p("prepare").disabled=false;
+      p("prepare").textContent=unresolved?.kind==="prepare" ? "Check prepared details" : "Check details";
+      p("confirm").disabled=!available || unresolved!==null || !draft || !draft.can_confirm
+        || !(Date.now()<Date.parse(draft.expires_at));
+      p("refresh").disabled=!visible || busy || accountBusy || pending;
+      p("reference").disabled=!available;
+      p("recover").disabled=!available || !uuid(p("reference").value);
+      if(pending || unresolved)p("box").open=true;
+    }
+    function presentOwner(value){
+      clearReview();predecessor=null;epoch++;
+      known=!stopped && Object.hasOwn(value,"practitioner_create_scope");
+      scope=null;identity=null;
+      const v=value.practitioner_create_scope;
+      if(known && value.phase==="verified" && scopeShape(v) && typeof value.identity?.email==="string"
+          && typeof value.identity.practice_name==="string" && value.identity.role==="PracticeOwner"){
+        scope=v.practice_id;
+        identity=Object.freeze({email:value.identity.email,practice_name:value.identity.practice_name});
+        p("practice").textContent=identity.practice_name;
+      }else{
+        p("practice").textContent="";
+        if(known && v!==null && v!==undefined && !scopeShape(v))throw Error("unavailable");
+      }
+      // A typed known-uncommitted result may retain only a nonconfirmable
+      // predecessor. Restore it only after fresh owner state matches the exact
+      // CSRF/scope/display-identity tag; the server still requires its private
+      // native predecessor and fresh authority. No evidence is carried here.
+      if(refusedPredecessor && scope===refusedPredecessor.practice && csrf===refusedPredecessor.csrf
+          && identity?.email===refusedPredecessor.email && identity.practice_name===refusedPredecessor.practice_name){
+        predecessor=refusedPredecessor.value;
+      }
+      refusedPredecessor=null;
+      if(unresolved){
+        p("reference").value=unresolved.key;
+        p("recovery").open=true;
+        status("The earlier creation still needs its result checked under the same owner account and practice.");
+      }
+      restore();
+    }
+    function snapshot(){
+      if(stopped || scope===null || !identity || !csrf)throw Error("unavailable");
+      const e=epoch, token=csrf, practice=scope, owner=identity;
+      return {practice,owner,token,current:()=>epoch===e && csrf===token && scope===practice && identity===owner};
+    }
+    async function decode(response,current){
+      if(!current() || !response.body || response.headers.get("Content-Type")?.split(";")[0]!=="application/json")throw Error("unavailable");
+      const reader=response.body.getReader(), chunks=[];let size=0;
+      while(true){
+        const part=await reader.read();
+        if(!current()){await reader.cancel();throw Error("stale");}
+        if(part.done)break;
+        size+=part.value.byteLength;
+        if(size>32768){await reader.cancel();throw Error("unavailable");}
+        chunks.push(part.value);
+      }
+      if(!current())throw Error("stale");
+      const bytes=new Uint8Array(size);let offset=0;
+      for(const part of chunks){bytes.set(part,offset);offset+=part.byteLength;}
+      const value=JSON.parse(new TextDecoder("utf-8",{fatal:true}).decode(bytes));
+      if(!current())throw Error("stale");
+      return value;
+    }
+    function draftShape(d,key){
+      if(!closed(d,["command_key","command_id","create_intent_id","draft_revision","body","body_digest",
+          "matching_context_digest","expires_at","sample_count","sample_label","requires_distinct_resource_decision",
+          "match_total","advisory_matches","can_confirm"]) || d.command_key!==key
+          || !uuid(d.command_id) || !uuid(d.create_intent_id) || !decimal(d.draft_revision)
+          || !bodyShape(d.body) || !digest(d.body_digest) || !digest(d.matching_context_digest)
+          || !decimal(d.match_total,true) || !Number.isInteger(d.sample_count)
+          || d.sample_count<0 || d.sample_count>10 || !Array.isArray(d.advisory_matches)
+          || d.advisory_matches.length!==d.sample_count
+          || d.sample_label!=="Showing "+d.sample_count+" of "+d.match_total
+          || typeof d.requires_distinct_resource_decision!=="boolean" || typeof d.can_confirm!=="boolean"
+          || typeof d.expires_at!=="string" || !/^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{6}Z$/.test(d.expires_at)
+          || !Number.isFinite(Date.parse(d.expires_at)))return false;
+      const moreThanTen=d.match_total.length>2 || d.match_total.length===2 && d.match_total>"10";
+      if(moreThanTen ? d.sample_count!==10 : String(d.sample_count)!==d.match_total)return false;
+      if(d.requires_distinct_resource_decision!==(d.match_total!=="0" && !d.body.distinct_resource)
+          || d.requires_distinct_resource_decision && d.can_confirm)return false;
+      return d.advisory_matches.every(row=>closed(row,["first_name","last_name","specialty","is_active"])
+        && scalarText(row.first_name) && scalarText(row.last_name)
+        && (row.specialty===null || scalarText(row.specialty)) && (row.is_active===null || typeof row.is_active==="boolean"));
+    }
+    function receiptShape(r,key){
+      return closed(r,["command_key","command_id","create_intent_id","draft_revision","body_digest","matching_context_digest","committed_at"])
+        && r.command_key===key && uuid(r.command_id) && uuid(r.create_intent_id) && decimal(r.draft_revision)
+        && digest(r.body_digest) && digest(r.matching_context_digest) && typeof r.committed_at==="string"
+        && r.committed_at.length<=64 && /(?:Z|\+00:00)$/.test(r.committed_at) && Number.isFinite(Date.parse(r.committed_at));
+    }
+    function factsShape(f){
+      return closed(f,["first_name","last_name","specialty","is_active","aggregate_version"])
+        && scalarText(f.first_name) && scalarText(f.last_name) && (f.specialty===null || scalarText(f.specialty))
+        && (f.is_active===null || typeof f.is_active==="boolean")
+        && typeof f.aggregate_version==="string" && /^-?(?:0|[1-9][0-9]{0,18})$/.test(f.aggregate_version);
+    }
+    function renderDraft(d){
+      draft=Object.freeze(d);
+      predecessor=Object.freeze({command_id:d.command_id,create_intent_id:d.create_intent_id,draft_revision:d.draft_revision});
+      p("summary").textContent=identity.practice_name+" · "+d.body.first_name+" "+d.body.last_name
+        +(d.body.specialty===null ? "" : " · "+d.body.specialty);
+      p("count").textContent=d.sample_label+". Name matches may include inactive resources; the sample may omit further matches.";
+      p("matches").replaceChildren();
+      for(const row of d.advisory_matches){
+        const li=document.createElement("li");
+        li.textContent=row.first_name+" "+row.last_name+(row.specialty===null ? "" : " · "+row.specialty)
+          +" · "+(row.is_active===null ? "Active status unavailable" : row.is_active ? "Active" : "Inactive");
+        p("matches").append(li);
+      }
+      p("distinct-label").hidden=d.match_total==="0";
+      p("expiry").textContent="Review expires at "+d.expires_at+" (UTC).";
+      p("review").hidden=false;p("box").open=true;
+      status(d.requires_distinct_resource_decision
+        ? "Review the name matches. To add a separate scheduling resource, acknowledge them and check details again."
+        : "Check the exact practice and details, then choose Create practitioner.");
+      clearTimeout(expiresTimer);
+      expiresTimer=setTimeout(()=>{if(draft===d || draft?.command_key===d.command_key)restore();},
+        Math.max(0,Math.min(2147483647,Date.parse(d.expires_at)-Date.now()+1)));
+      p("review-title").focus();
+    }
+    function committed(value,key){
+      if(!receiptShape(value.receipt,key) || !Object.hasOwn(value,"readback"))throw Error("unavailable");
+      const rb=value.readback;
+      if(rb!==null && (!closed(rb,["status","expected","current"]) || !factsShape(rb.expected)
+          || !["matches_created","diverged","missing"].includes(rb.status)
+          || (rb.status==="missing" ? rb.current!==null : !factsShape(rb.current))))throw Error("unavailable");
+      unresolved=null;requestPrepare=null;predecessor=null;clearReview();
+      p("reference").value=key;p("recovery").open=true;
+      const copy=rb===null ? "Created. Check creation result to read its current details."
+        : rb.status==="matches_created" ? "Created, and the current details match the saved creation."
+        : rb.status==="diverged" ? "Created. Its current details have changed; this is still a completed creation."
+        : "Created. The resource is now missing from current truth; do not create a replacement to resolve this result.";
+      status(copy);
+      if(rb){
+        const facts=rb.current || rb.expected;
+        p("summary").textContent=identity.practice_name+" · "+facts.first_name+" "+facts.last_name
+          +(facts.specialty===null ? "" : " · "+facts.specialty);
+        p("review").hidden=false;
+      }
+    }
+    async function request(action,body,context){
+      const r=await fetch("/demo/stage1/owner/practitioners/"+action,{
+        method:"POST",credentials:"same-origin",cache:"no-store",redirect:"error",
+        headers:{"Content-Type":"application/json","X-CSRF-Token":context.token},body:JSON.stringify(body)});
+      if(!context.current())throw Error("stale");
+      const value=await decode(r,context.current);
+      if(!context.current())throw Error("stale");
+      if(!r.ok){
+        const codes=["PRACTITIONER_CREATE_INVALID","PRACTITIONER_COMMAND_KEY_INVALID","PRACTITIONER_CONFIRMATION_INVALID",
+          "PRACTITIONER_AUTHENTICATION_REQUIRED","PRACTITIONER_CREATE_DENIED","PRACTITIONER_CREATE_CONFLICT"];
+        if(action!=="receipt" && closed(value,["state","code","detail"]) && value.state==="refused" && codes.includes(value.code)){
+          const retained=predecessor;
+          unresolved=null;requestPrepare=null;invalidateOwner(true);
+          if(retained)refusedPredecessor=Object.freeze({value:retained,practice:context.practice,
+            csrf:context.token,email:context.owner.email,practice_name:context.owner.practice_name});
+          ownerPresentation.attention("Creation was refused. Check the owner account, then explicitly review fresh details.");
+          return null;
+        }
+        throw Error("uncertain");
+      }
+      if(!scopeShape(value.practitioner_create_scope) || value.practitioner_create_scope.practice_id!==context.practice)throw Error("unavailable");
+      return value;
+    }
+    async function perform(action,body){
+      if(busy || pending)return;
+      const context=snapshot();
+      pending=true;restore();ownerPresentation.busy(true);
+      try{
+        const value=await request(action,body,context);
+        if(value===null)return;
+        if(!context.current())throw Error("stale");
+        if(action==="prepare" && value.state==="prepared"){
+          if(!closed(value,["state","draft","practitioner_create_scope"]) || !draftShape(value.draft,body.command_key))throw Error("unavailable");
+          unresolved=null;requestPrepare=null;renderDraft(value.draft);
+        }else if(value.state==="committed" && closed(value,["state","receipt","readback","practitioner_create_scope"])){
+          committed(value,body.command_key);
+        }else throw Error("unavailable");
+      }catch(_){
+        const wasCurrent=context.current();
+        clearReview();
+        // Even an error before a reply may follow a committed dispatch. Do not
+        // allocate a replacement key, resend a write, or erase the original key.
+        if(wasCurrent){
+          invalidateOwner(true); // An ambiguous outcome retains only its recovery key.
+          status("The result is uncertain. Check the owner account, then check this same creation reference; do not submit another creation.");
+          p("reference").value=body.command_key;p("recovery").open=true;
+        }
+      }finally{
+        pending=false;ownerPresentation.busy(false);restore();
+      }
+    }
+    p("form").addEventListener("submit",async event=>{
+      event.preventDefault();
+      if(stopped || busy || pending || scope===null)return;
+      if(unresolved){
+        if(unresolved.kind==="prepare" && requestPrepare && unresolved.practice===scope && unresolved.email===identity?.email)
+          await perform("prepare",requestPrepare); // Explicit identical-key prepare check only; never confirm retry.
+        return;
+      }
+      const body={first_name:p("first").value,last_name:p("last").value,
+        specialty:p("specialty").value,distinct_resource:p("distinct").checked};
+      if(!advice(body.first_name) || !advice(body.last_name) || !advice(body.specialty,true)){
+        status("Use names and an optional specialty of at most 100 Unicode characters, without control characters.");return;
+      }
+      // Explicit form submit prepares only. Each edited revision gets one key;
+      // exact predecessor decimal text is echoed unchanged, never Number().
+      const key=crypto.randomUUID(), prior=predecessor;
+      requestPrepare={command_key:key,body,new_intent:prior===null,
+        create_intent_id:prior?.create_intent_id ?? null,supersedes_command_id:prior?.command_id ?? null,
+        supersedes_revision:prior?.draft_revision ?? null};
+      const context=snapshot();
+      unresolved={key,practice:context.practice,email:context.owner.email,kind:"prepare"};
+      clearReview();
+      await perform("prepare",requestPrepare);
+    });
+    p("confirm").addEventListener("click",async()=>{
+      if(stopped || busy || pending || !draft || p("confirm").disabled || unresolved)return;
+      const d=draft, context=snapshot();
+      const body={command_key:d.command_key,command_id:d.command_id,create_intent_id:d.create_intent_id,
+        draft_revision:d.draft_revision,body_digest:d.body_digest,matching_context_digest:d.matching_context_digest,confirmed:true};
+      unresolved={key:d.command_key,practice:context.practice,email:context.owner.email,kind:"confirm"};
+      clearReview(); // One explicit click consumes the local confirmable view.
+      await perform("confirm",body);
+    });
+    p("recovery-form").addEventListener("submit",async event=>{
+      event.preventDefault();
+      if(stopped || busy || pending || scope===null || !uuid(p("reference").value))return;
+      const key=p("reference").value,context=snapshot();
+      if(unresolved && (unresolved.key!==key || unresolved.practice!==context.practice || unresolved.email!==context.owner.email)){
+        status("Use the original creation reference and the same owner account and practice.");return;
+      }
+      unresolved=unresolved || {key,practice:context.practice,email:context.owner.email,kind:"receipt"};
+      clearReview();await perform("receipt",{command_key:key});
+    });
+    p("refresh").addEventListener("click",async()=>{if(!busy && !pending)try{await state();}catch(_){invalidateOwner();}});
+    p("reference").addEventListener("input",restore);
+    for(const id of ["first","last","specialty","distinct"])p(id).addEventListener("input",edit);
+    p("box").addEventListener("toggle",()=>{if(!p("box").open && (pending || unresolved))p("box").open=true;});
+    restore();
+    return {invalidateOwner,presentOwner,restore,decode,blocked:()=>pending};
+  })();
+  restorePractitionerAfterAccountBusy = practitioner.restore;
+  function showOwner(value) {
+    if (!value || value.enabled !== true || typeof value.csrf !== "string" ||
+        !["credentials", "pending", "inspect", "verified"].includes(value.phase)) throw new Error("unavailable");
+    const invitation=value.invitation;
+    el("owner-invitation").hidden=!(Object.hasOwn(value,"invitation") && value.phase==="verified");
+    el("owner-invitation-form").hidden=invitation?.can_issue!==true;
+    el("owner-invitation-confirm").checked=false;
+    if(invitation)el("owner-invitation-review").textContent=invitation.issued
+      ? "Invitation sent. The receptionist must review and accept it, then choose this practice."
+      : `${invitation.practice_name} · Receptionist · Existing synthetic receptionist. Check setup after the receptionist signs in.`;
+    csrf = value.csrf;
+    el("owner-onboarding").hidden = false;
+    el("owner-credentials").hidden = value.phase !== "credentials";
+    el("owner-create").hidden = value.phase !== "pending";
+    el("owner-inspect").hidden = value.phase !== "inspect";
+    el("owner-identity").hidden = value.phase !== "verified";
+    el("owner-status").textContent = ({credentials:"Create an account or sign in if registration may already have completed.",
+      pending:"Confirm your first practice before creating it.", inspect:"Creation may have completed. Inspect the current account; do not submit another creation.",
+      verified:"Owner account and practice verified. Administration handoff is ready."})[value.phase];
+    if (value.phase === "verified") {
+      const i = value.identity;
+      if (!i || typeof i.email !== "string" || typeof i.practice_name !== "string" || i.role !== "PracticeOwner") throw new Error("unavailable");
+      el("owner-identity").textContent = `${i.email} · ${i.practice_name} · ${i.role}`;
+    }
+    practitioner.presentOwner(value);
+    ownerPresentation.owner(value);
+  }
+  async function state() {
+    const epoch=++ownerViewEpoch, token=csrf;
+    practitioner.invalidateOwner();
+    const current=()=>ownerViewEpoch===epoch && csrf===token;
+    try{
+      const r = await fetch("/demo/stage1/owner/state", {credentials:"same-origin", cache:"no-store", redirect:"error"});
+      if (!current() || !r.ok) throw new Error("unavailable");
+      const v = await practitioner.decode(r,current);
+      if(!current())throw new Error("stale");
+      if (v.enabled === false) return;
+      showOwner(v);
+    }catch(error){if(current())practitioner.invalidateOwner();throw error;}
+  }
+  async function post(action, body) {
+    if (busy || practitioner.blocked()) return;
+    const epoch=++ownerViewEpoch, token=csrf;
+    practitioner.invalidateOwner(true);
+    const current=()=>ownerViewEpoch===epoch && csrf===token;
+    busy = true;
+    ownerPresentation.busy(true);
+    el("owner-onboarding").querySelectorAll("button,input").forEach(n => n.disabled = true);
+    try {
+      const r = await fetch(`/demo/stage1/owner/${action}`, {method:"POST", credentials:"same-origin", cache:"no-store", redirect:"error",
+        headers:{"Content-Type":"application/json", "X-CSRF-Token":token || ""}, body:JSON.stringify(body)});
+      if (!current() || !r.ok) throw new Error("unavailable");
+      const value=await practitioner.decode(r,current);
+      if(!current())throw new Error("stale");
+      showOwner(value);
+      ownerPresentation.confirmed();
+    } catch (_) {
+      practitioner.invalidateOwner();
+      ownerPresentation.attention("The action could not be confirmed. Sign in or inspect the current account before continuing.",true);
+      try { await state(); } catch (_) { /* Keep the uncertain action visible. */ }
+    } finally {
+      if (Object.hasOwn(body,"password")) body.password = "";
+      el("owner-password").value = "";
+      el("owner-onboarding").querySelectorAll("button,input").forEach(n => n.disabled = false);
+      busy = false;
+      practitioner.restore(); // Restore derived CREATE state after the generic finalizer.
+      ownerPresentation.busy(false);
+    }
+  }
+  el("owner-credentials").addEventListener("submit", async e => {
+    e.preventDefault();
+    const action = e.submitter?.value;
+    if (!["register", "signin"].includes(action)) return;
+    const body = {email:el("owner-email").value, password:el("owner-password").value};
+    el("owner-password").value = "";
+    await post(action, body);
+  });
+  el("owner-create").addEventListener("submit", async e => {
+    e.preventDefault();
+    if (el("owner-confirm").checked) await post("create", {name:el("owner-name").value, confirmed:true});
+  });
+  el("owner-inspect").addEventListener("click", () => post("inspect", {}));
+  el("owner-invitation-refresh").addEventListener("click",async()=>{if(!busy)try{await state();}catch(_){ownerPresentation.attention("Invitation setup is not available.");}});
+  el("owner-invitation-form").addEventListener("submit",async e=>{e.preventDefault();if(el("owner-invitation-confirm").checked)await post("invite",{confirmed:true});});
+  try { await state(); } catch (_) { /* Default-off and unavailable stay hidden. */ }
+})();
+
+// Patient projections are separate from the fixed appointment/Bureau target.
+function initPatientRecords() {
+  const panel = document.getElementById("patient-records");
+  const el = id => document.getElementById("patient-record-" + id);
+  let csrf = null, generation = 0, busy = false, available = false, inAppointments = false;
+  let draft = null, predecessor = null, pendingPrepare = null, pendingKey = null, uncertain = false, selected = null;
+  let prepareAttempts = 0;
+  let bookingMeta = null, bookingEpoch = 0, bookingIdentity = null;
+  let selectedBookingEnabled = false, bookingView = null, bookingSent = false, bookingUncertain = false;
+  function clearBooking() {
+    bookingView = null;
+    el('booking-result').replaceChildren(); el('booking-progress').textContent = bookingSent
+      ? 'The earlier booking result still needs checking. Do not send it again.' : '';
+  }
+  function bookingControls() {
+    el('booking-context').textContent = bookingMeta
+      ? 'Avery Shaw · ' + bookingMeta.date + ' · 14:00–17:00 (last start 16:30) · 30 minutes. No appointment type or location selected.'
+      : '';
+    el('booking-box').hidden = !(selectedBookingEnabled && bookingMeta && selected
+      && selected.practice_id === bookingMeta.practice_id);
+    el('booking-words').disabled = busy || bookingSent;
+    el('booking-manual').disabled = el('booking-suggest').disabled = busy || bookingSent;
+    el('booking-refresh').hidden = !bookingView || bookingSent;
+    el('booking-readback').hidden = !bookingView?.receipt || bookingView.state === 'confirmed';
+    el('booking-refresh').disabled = el('booking-readback').disabled = busy;
+  }
+  function renderBooking(view) {
+    if (!view || typeof view !== 'object' || !uuid(view.patient?.id) || view.patient.id !== selected?.id
+      || view.patient.practice_id !== selected?.practice_id || !uuid(view.practitioner?.id)
+      || view.date !== bookingMeta?.date || view.duration_minutes !== bookingMeta?.duration_minutes
+      || !safeText(view.timezone,128) || !Array.isArray(view.choices) || view.choices.length > 8
+      || !['awaiting_reply','choice','clarification','review','expired','uncertain','confirmed'].includes(view.state))
+      throw new Error('BOOKING_REPLY_UNAVAILABLE');
+    const priorBookingState=bookingView?.state;
+    bookingView = view;
+    const result = el('booking-result'); result.replaceChildren();
+    const line = text => { const p=document.createElement('p'); p.textContent=text; result.append(p); };
+    line(label(view.patient) + ' · ' + view.practitioner.displayName + ' · ' + view.date
+      + ' · ' + view.duration_minutes + ' minutes · ' + view.timezone);
+    const expired = !Number.isFinite(Date.parse(view.expires_at)) || Date.now() >= Date.parse(view.expires_at);
+    if (view.state === 'choice' && !expired && !bookingSent) {
+      for (const choice of view.choices) {
+        if (!safeText(choice.slot_ref,100) || !/^(?:[01][0-9]|2[0-3]):[0-5][0-9]$/.test(choice.start_time_local))
+          throw new Error('BOOKING_REPLY_UNAVAILABLE');
+        const button=document.createElement('button'); button.type='button'; button.className='quiet';
+        button.textContent=choice.start_time_local; button.disabled=busy;
+        button.addEventListener('click',()=>bookingAction('select',{slot_ref:choice.slot_ref})); result.append(button);
+      }
+    }
+    if (view.state === 'review' && !expired && !bookingSent) {
+      const review=view.review, command=review?.command;
+      if (!review || !safeText(review.proposal_ref,100) || review.requires_confirmation !== true
+        || !Array.isArray(review.warnings) || review.warnings.length || !command
+        || command.patient_id !== selected.id || command.practitioner_id !== view.practitioner.id
+        || command.appointment_date !== view.date || command.duration_minutes !== view.duration_minutes)
+        throw new Error('BOOKING_REVIEW_UNAVAILABLE');
+      line('Review: ' + command.appointment_date + ' at ' + command.start_time_local.slice(0,5)
+        + ', ' + command.duration_minutes + ' minutes. ' + review.summary);
+      const confirm=document.createElement('button'); confirm.type='button'; confirm.textContent='Confirm this appointment';
+      confirm.disabled=busy; confirm.addEventListener('click',()=>bookingAction('confirm',{proposal_ref:review.proposal_ref}));
+      result.append(confirm);
+    }
+    if (view.state === 'confirmed' && view.receipt && view.readback) {
+      bookingUncertain=false;
+      line('Appointment saved and checked: ' + view.receipt.appointment_date + ' at '
+        + view.receipt.start_time_local.slice(0,5) + '.');
+    }
+    el('booking-progress').textContent = view.state === 'confirmed' ? 'Saved appointment verified.'
+      : bookingSent || view.state === 'uncertain' ? 'The result is unresolved. Do not send the booking again.'
+      : expired || view.state === 'expired' ? 'This request expired. No confirmation was sent.'
+      : view.state === 'awaiting_reply' ? 'Request captured. A suggestion is not available yet; you can choose a time yourself.'
+      : view.state === 'clarification' ? 'No eligible time is offered for this request. Make a fresh request or check the selected context; no appointment has been confirmed.'
+      : view.state === 'choice' ? 'Choose the time you mean.' : 'Check the details, then confirm once.';
+    bookingControls();
+    if(view.state==='confirmed' && view.receipt && view.readback && priorBookingState!=='confirmed')
+      document.dispatchEvent(new CustomEvent('raisa:selected-staff-facts'));
+  }
+  async function bookingAction(action, body) {
+    if (busy || !csrf || !selectedBookingEnabled || !selected || !bookingMeta
+      || bookingSent && !['readback'].includes(action)) return;
+    const epoch=generation, person={...selected}, meta={...bookingMeta}, token=csrf;
+    const current=()=>epoch===generation && token===csrf && selected?.id===person.id
+      && selected?.practice_id===person.practice_id && JSON.stringify(bookingMeta)===JSON.stringify(meta);
+    if (action==='confirm') { bookingSent=true; bookingUncertain=true; }
+    busy=true; controls(); bookingControls();
+    try {
+      const response=await fetch('/demo/stage1/selected-staff-booking/'+action,{
+        method:'POST',credentials:'same-origin',cache:'no-store',redirect:'error',
+        headers:{'Content-Type':'application/json','X-CSRF-Token':token},body:JSON.stringify(body)});
+      if (!current()) return;
+      if (!response.body) throw new Error('BOOKING_REPLY_UNAVAILABLE');
+      const reader=response.body.getReader(), chunks=[]; let size=0;
+      while (true) {
+        const part=await reader.read(); if (!current()) { await reader.cancel(); return; }
+        if(part.done)break; size+=part.value.byteLength;
+        if(size>16384){await reader.cancel();throw new Error('BOOKING_REPLY_UNAVAILABLE');} chunks.push(part.value);
+      }
+      const bytes=new Uint8Array(size);let offset=0;for(const chunk of chunks){bytes.set(chunk,offset);offset+=chunk.byteLength;}
+      if (!response.ok) throw new Error('BOOKING_UNAVAILABLE');
+      const view=JSON.parse(new TextDecoder('utf-8',{fatal:true}).decode(bytes));
+      if (current()) renderBooking(view);
+    } catch (_) {
+      if (current()) {
+        el('booking-result').replaceChildren();
+        el('booking-progress').textContent = bookingSent
+          ? 'The booking result is unresolved. Do not resend. Check your sign-in; a new confirmation is not permitted.'
+          : 'Booking could not be prepared. Check your sign-in and selected patient.';
+      }
+    } finally { busy=false; controls(); bookingControls(); }
+  }
+  function captureBooking(manual) {
+    if(!selected || !bookingMeta)return;
+    bookingAction('capture',{patient_id:selected.id,date:bookingMeta.date,duration_minutes:bookingMeta.duration_minutes,
+      instruction:el('booking-words').value.trim() || 'Book this selected patient on the shown date with the shown practitioner.',manual});
+  }
+  el('booking-manual').addEventListener('click',()=>captureBooking(true));
+  el('booking-suggest').addEventListener('click',()=>captureBooking(false));
+  el('booking-refresh').addEventListener('click',()=>bookingAction('status',{}));
+  el('booking-readback').addEventListener('click',()=>bookingAction('readback',{}));
+
+  const uuid = value => typeof value === "string" && /^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/.test(value);
+  const say = value => { el("status").textContent = value; };
+  function controls() {
+    panel.querySelectorAll("button,input").forEach(node => { node.disabled = busy; });
+    bookingControls();
+    el("times-box").hidden = !(bookingMeta && selected && selected.practice_id === bookingMeta.practice_id);
+    el("times").disabled = busy || uncertain || !bookingMeta || !selected || selected.practice_id !== bookingMeta.practice_id;
+    el("prepare").disabled = busy || uncertain;
+    el("prepare").textContent = pendingPrepare ? "Check prepared registration" : "Check registration";
+    el("confirm").disabled = busy || uncertain || !draft?.can_confirm;
+    el("recover").hidden = !uncertain;
+    el("recover").disabled = busy || !csrf;
+    el("registration").querySelectorAll("input").forEach(node => { node.disabled = busy || uncertain || !!pendingPrepare; });
+  }
+  function clearProjection(keepRecovery = false) {
+    clearTimes(); clearBooking();
+    const retainedKey = keepRecovery && uncertain && uuid(pendingKey) ? pendingKey : null;
+    generation += 1;
+    draft = predecessor = pendingPrepare = pendingKey = selected = null; uncertain = false; prepareAttempts = 0;
+    pendingKey = retainedKey; uncertain = retainedKey !== null;
+    el("results").replaceChildren();
+    el("selected").textContent = ""; el("selected").hidden = true;
+    el("review").hidden = true; el("summary").textContent = "";
+    el("matches").replaceChildren(); el("distinct-label").hidden = true;
+    el("search").reset(); el("registration").reset();
+    el("registration-box").open = false;
+    say(""); controls();
+  }
+  async function call(action, body, epoch) {
+    if (epoch !== generation) throw new Error("CONTEXT_CHANGED");
+    const response = await fetch("/demo/stage1/patient/" + action, {
+      method: "POST", credentials: "same-origin", cache: "no-store", redirect: "error",
+      headers: {"Content-Type": "application/json", "X-CSRF-Token": csrf || ""},
+      body: JSON.stringify(body)
+    });
+    if (epoch !== generation) throw new Error("CONTEXT_CHANGED");
+    const text = await response.text();
+    if (epoch !== generation || text.length > 16384) throw new Error("REPLY_UNAVAILABLE");
+    if (!response.ok) {
+      const error = new Error("REPLY_UNAVAILABLE"); error.status = response.status; throw error;
+    }
+    const value = JSON.parse(text);
+    if (!value || !Object.hasOwn(value, "result")) throw new Error("REPLY_UNAVAILABLE");
+    return value.result;
+  }
+  function patient(row) {
+    if (!row || !uuid(row.id) || !uuid(row.practice_id) ||
+        typeof row.first_name !== "string" || typeof row.last_name !== "string" ||
+        typeof row.date_of_birth !== "string") throw new Error("PATIENT_UNAVAILABLE");
+    return row;
+  }
+  function label(row) { return row.first_name + " " + row.last_name + " · " + row.date_of_birth; }
+  const keys = (value, names) => value !== null && typeof value === "object" && !Array.isArray(value) &&
+    Object.keys(value).length === names.length && names.every(key => Object.hasOwn(value, key));
+  const safeText = (value, max) => typeof value === "string" && value.length > 0 && value.length <= max &&
+    value === value.trim() && !/[\u0000-\u001f\u007f]/.test(value);
+  function day(value) {
+    if (typeof value !== "string" || !/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/.test(value)) return false;
+    const [y,m,d] = value.split("-").map(Number), leap = y % 4 === 0 && (y % 100 !== 0 || y % 400 === 0);
+    return y >= 1 && m >= 1 && m <= 12 && d >= 1 && d <= [31,leap?29:28,31,30,31,30,31,31,30,31,30,31][m-1];
+  }
+  function clearTimes() {
+    bookingEpoch += 1; el("times-result").replaceChildren(); el("times-status").textContent = "";
+  }
+  function metadata(value) {
+    if (!keys(value,["practice_id","date","duration_minutes"]) || !uuid(value.practice_id) || !day(value.date) ||
+        !Number.isInteger(value.duration_minutes) || value.duration_minutes < 1 || value.duration_minutes > 180) return null;
+    return {practice_id:value.practice_id,date:value.date,duration_minutes:value.duration_minutes};
+  }
+  function validateTimes(value, person, meta) {
+    if (!keys(value,["state","patient","practitioner","practice_id","timezone","date","duration_minutes","slots"]) ||
+        value.state !== "ready" || value.practice_id !== meta.practice_id || value.date !== meta.date ||
+        value.duration_minutes !== meta.duration_minutes || !safeText(value.timezone,128) ||
+        !keys(value.patient,["id","practice_id","first_name","last_name","date_of_birth"]) ||
+        value.patient.id !== person.id || value.patient.practice_id !== person.practice_id ||
+        value.patient.first_name !== person.first_name || value.patient.last_name !== person.last_name ||
+        value.patient.date_of_birth !== person.date_of_birth || !day(value.patient.date_of_birth) ||
+        !safeText(value.patient.first_name,100) || !safeText(value.patient.last_name,100)) throw new Error("TIMES_UNAVAILABLE");
+    const p=value.practitioner;
+    if (!keys(p,["id","displayName","roleLabel","active","defaultLocation"]) || !uuid(p.id) ||
+        !safeText(p.displayName,201) || !(p.roleLabel === null || safeText(p.roleLabel,100)) ||
+        p.active !== true || p.defaultLocation !== null || !Array.isArray(value.slots) ||
+        value.slots.length < 1 || value.slots.length > 32) throw new Error("TIMES_UNAVAILABLE");
+    let previous = -1; const available = [];
+    for (const slot of value.slots) {
+      if (!keys(slot,["start_time","end_time","available"]) || typeof slot.available !== "boolean") throw new Error("TIMES_UNAVAILABLE");
+      const parse = s => {
+        if (typeof s !== "string" || !/^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}$/.test(s) || s.slice(0,10) !== meta.date) throw new Error("TIMES_UNAVAILABLE");
+        const h=Number(s.slice(11,13)), m=Number(s.slice(14,16)), sec=Number(s.slice(17,19));
+        if (h > 23 || m > 59 || sec > 59) throw new Error("TIMES_UNAVAILABLE");
+        return h*3600+m*60+sec;
+      };
+      const start=parse(slot.start_time), end=parse(slot.end_time);
+      if (start < previous || end <= start || end-start !== meta.duration_minutes*60) throw new Error("TIMES_UNAVAILABLE");
+      previous=end; if (slot.available) available.push(slot.start_time.slice(11,16));
+    }
+    return {name:p.displayName,zone:value.timezone,times:available};
+  }
+  el("times").addEventListener("click", () => perform(async epoch => {
+    if (!selected || !bookingMeta || selected.practice_id !== bookingMeta.practice_id) return;
+    const tick=bookingEpoch, person={...selected}, meta={...bookingMeta}, token=csrf;
+    const current = () => epoch === generation && tick === bookingEpoch && csrf === token &&
+      selected && selected.id === person.id && selected.practice_id === person.practice_id &&
+      selected.first_name === person.first_name && selected.last_name === person.last_name &&
+      selected.date_of_birth === person.date_of_birth &&
+      bookingMeta && JSON.stringify(bookingMeta) === JSON.stringify(meta);
+    el("times-status").textContent="Checking times…";
+    try {
+      const response=await fetch("/demo/stage1/staff-booking/context",{method:"POST",credentials:"same-origin",
+        cache:"no-store",redirect:"error",headers:{"Content-Type":"application/json","X-CSRF-Token":token},
+        body:JSON.stringify({patient_id:person.id,date:meta.date,duration_minutes:meta.duration_minutes})});
+      if (!current()) return;
+      if (!response.ok) { const error=new Error("TIMES_UNAVAILABLE"); error.status=response.status; throw error; }
+      if (!response.body) throw new Error("TIMES_UNAVAILABLE");
+      const reader=response.body.getReader(), chunks=[]; let size=0;
+      while (true) {
+        const part=await reader.read(); if (!current()) { await reader.cancel(); return; }
+        if (part.done) break; size+=part.value.byteLength;
+        if (size > 32768) { await reader.cancel(); throw new Error("TIMES_UNAVAILABLE"); }
+        chunks.push(part.value);
+      }
+      if (!current()) return;
+      const bytes=new Uint8Array(size); let offset=0;
+      for (const chunk of chunks) { bytes.set(chunk,offset); offset+=chunk.byteLength; }
+      const view=validateTimes(JSON.parse(new TextDecoder("utf-8",{fatal:true}).decode(bytes)),person,meta);
+      if (!current()) return;
+      const heading=document.createElement("p"); heading.textContent=`${view.name} · ${meta.date} · ${meta.duration_minutes} minutes · ${view.zone}`;
+      el("times-result").append(heading);
+      if (view.times.length) { const list=document.createElement("ul"); for(const time of view.times) { const item=document.createElement("li"); item.textContent=time; list.append(item); } el("times-result").append(list); }
+      else { const message=document.createElement("p"); message.textContent="No available times for this day."; el("times-result").append(message); }
+      el("times-status").textContent="Times checked. Booking is a separate action.";
+    } catch(error) {
+      if (!current()) return;
+      clearTimes(); if ([401,403].includes(error.status)) throw error;
+      el("times-status").textContent="Times could not be checked. Please try again or check your sign-in.";
+    }
+  }));
+  function showSelected(row, verb) {
+    clearTimes(); clearBooking();
+    selected = patient(row);
+    controls();
+    el("selected").textContent = verb + " " + label(selected);
+    el("selected").hidden = false;
+    say("Patient record checked. Appointment booking is a separate action.");
+    // No event, DemoConfig mutation or implicit booking-patient handoff.
+  }
+  async function receiptRead(key, epoch) {
+    const receipt = await call("receipt", {command_key: key}, epoch);
+    if (epoch !== generation) throw new Error("CONTEXT_CHANGED");
+    if (receipt.command_key !== key || !uuid(receipt.patient_id) || !uuid(receipt.practice_id)) throw new Error("RECEIPT_UNAVAILABLE");
+    const row = patient(await call("read", {patient_id: receipt.patient_id}, epoch));
+    if (epoch !== generation) throw new Error("CONTEXT_CHANGED");
+    if (row.id !== receipt.patient_id || row.practice_id !== receipt.practice_id) throw new Error("READBACK_CHANGED");
+    uncertain = false; draft = predecessor = null; pendingKey = null;
+    el("review").hidden = true; el("registration").reset();
+    showSelected(row, "Registered:");
+  }
+  async function perform(operation) {
+    if (busy || !csrf) return;
+    clearTimes();
+    busy = true; controls();
+    const epoch = generation;
+    try { await operation(epoch); }
+    catch (error) {
+      if (epoch === generation) clearTimes();
+      if (epoch === generation && [401, 403].includes(error.status)) {
+        const unknown = uncertain;
+        clearProjection(unknown); csrf = null; available = false; panel.hidden = true;
+        document.getElementById("account-status").textContent = unknown
+          ? "Sign in again and inspect the patient record. The registration result is still unverified."
+          : "Your practice access needs checking. Sign in again before continuing.";
+      } else if (epoch === generation && [400, 422].includes(error.status) && !uncertain &&
+          pendingPrepare && error.prepareKey === pendingPrepare.command_key && prepareAttempts === 1) {
+        // These statuses are reserved by the bridge for no-dispatch validation.
+        pendingPrepare = null; prepareAttempts = 0; draft = null; el("review").hidden = true;
+        say("Check the patient details and try again.");
+      } else if (epoch === generation) say(uncertain
+        ? "The result needs checking. Check this registration before starting another."
+        : pendingPrepare ? "No registration has been confirmed. Check the prepared details again."
+        : "Patient details could not be checked. Check your sign-in and try again.");
+    }
+    finally { busy = false; controls(); }
+  }
+  el("search").addEventListener("submit", event => {
+    event.preventDefault();
+    perform(async epoch => {
+      const q = el("query").value.trim(), dob = el("dob").value;
+      if (!q && !dob) { say("Enter a name or date of birth."); return; }
+      if (q && q.length < 2) { say("Enter at least two characters of the patient name."); return; }
+      const body = {limit: 10}; if (q) body.q = q; if (dob) body.date_of_birth = dob;
+      clearTimes(); el("results").replaceChildren(); selected = null; el("selected").hidden = true; controls();
+      const rows = await call("search", body, epoch);
+      if (epoch !== generation) throw new Error("CONTEXT_CHANGED");
+      if (!Array.isArray(rows) || rows.length > 20) throw new Error("RESULTS_UNAVAILABLE");
+      for (const item of rows) {
+        const row = patient(item), li = document.createElement("li"), button = document.createElement("button");
+        button.type = "button"; button.className = "quiet"; button.textContent = label(row);
+        button.addEventListener("click", () => perform(async current => {
+          clearTimes();
+          const fresh = patient(await call("read", {patient_id: row.id}, current));
+          if (current !== generation) throw new Error("CONTEXT_CHANGED");
+          if (fresh.id !== row.id || fresh.practice_id !== row.practice_id) throw new Error("READBACK_CHANGED");
+          showSelected(fresh, "Selected:");
+        }));
+        li.append(button); el("results").append(li);
+      }
+      say(rows.length ? "Choose the person you mean." : "No matching patient found.");
+    });
+  });
+  el("registration").addEventListener("input", () => {
+    clearTimes();
+    if (uncertain || busy || pendingPrepare) return;
+    draft = null; el("review").hidden = true; controls();
+  });
+  el("registration").addEventListener("submit", event => {
+    event.preventDefault();
+    if (uncertain) return;
+    perform(async epoch => {
+      if (!pendingPrepare) {
+        prepareAttempts = 0;
+        const prior = predecessor;
+        const first = el("first").value.trim(), last = el("last").value.trim(), birth = el("birth").value;
+        if (![first, last].every(name => name.length >= 1 && name.length <= 100 && !/[\u0000-\u001f\u007f]/.test(name)) ||
+            !/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/.test(birth) || birth > new Date().toISOString().slice(0, 10)) {
+          say("Enter a first name, last name and valid date of birth."); return;
+        }
+        pendingPrepare = {command_key: crypto.randomUUID(), new_registration: !prior,
+          registration_intent_id: prior?.registration_intent_id || null,
+          supersedes_command_id: prior?.command_id || null, supersedes_revision: prior?.draft_revision || null,
+          body: {first_name: first, last_name: last, date_of_birth: birth, distinct_person: el("distinct").checked}};
+      }
+      const body = pendingPrepare, key = body.command_key;
+      draft = null; el("review").hidden = true;
+      prepareAttempts += 1;
+      let result;
+      try { result = await call("prepare", body, epoch); }
+      catch (error) { error.prepareKey = key; throw error; }
+      if (epoch !== generation) throw new Error("CONTEXT_CHANGED");
+      if (result.state === "committed") {
+        pendingPrepare = null; prepareAttempts = 0;
+        pendingKey = key; uncertain = true;
+        await receiptRead(key, epoch); return;
+      }
+      if (result.state !== "prepared" || result.command_key !== key || !uuid(result.command_id) ||
+          !uuid(result.registration_intent_id) || !Number.isInteger(result.draft_revision) ||
+          typeof result.body_digest !== "string" || !/^[0-9a-f]{64}$/.test(result.body_digest) ||
+          !result.body || typeof result.can_confirm !== "boolean") throw new Error("DRAFT_UNAVAILABLE");
+      draft = predecessor = result;
+      if (!Array.isArray(result.advisory_matches) || result.advisory_matches.length > 20) throw new Error("MATCHES_UNAVAILABLE");
+      el("matches").replaceChildren();
+      for (const item of result.advisory_matches) {
+        const li = document.createElement("li"); li.textContent = label(patient(item)); el("matches").append(li);
+      }
+      el("distinct-label").hidden = !result.requires_distinct_person_decision && !result.advisory_matches.length;
+      el("summary").textContent = result.body.first_name + " " + result.body.last_name + " · " + result.body.date_of_birth;
+      el("review").hidden = false;
+      pendingPrepare = null; prepareAttempts = 0;
+      el("review-title").focus();
+      say(result.requires_distinct_person_decision
+        ? "A similar record exists. Check the person before confirming a distinct registration."
+        : "Check these details, then confirm registration.");
+    });
+  });
+  el("confirm").addEventListener("click", () => {
+    if (!draft?.can_confirm || uncertain) return;
+    const shown = draft;
+    perform(async epoch => {
+      pendingKey = shown.command_key; uncertain = true; controls();
+      try {
+        await call("confirm", {command_key: shown.command_key, command_id: shown.command_id,
+          draft_revision: shown.draft_revision, body_digest: shown.body_digest, confirmed: true}, epoch);
+      } catch (error) {
+        if (epoch !== generation || [401, 403].includes(error.status)) throw error;
+        // Exactly one read follows an uncertain reply; never retry the write.
+      }
+      if (epoch !== generation) throw new Error("CONTEXT_CHANGED");
+      await receiptRead(shown.command_key, epoch);
+    });
+  });
+  el("recover").addEventListener("click", () => {
+    if (uncertain && pendingKey) perform(epoch => receiptRead(pendingKey, epoch));
+  });
+  return {setAccount(value) {
+    available = value?.phase === "selected" && value.patient_available === true &&
+      typeof value.csrf === "string" && ["Receptionist", "PracticeOwner"].includes(value.identity?.role);
+    const next = available ? value.csrf : null;
+    const identity = value?.identity;
+    const nextIdentity = available && value.phase === "selected" && identity?.role === "Receptionist" &&
+      safeText(identity.email,254) && safeText(identity.practice_name,255)
+      ? JSON.stringify([value.phase,identity.email,identity.role,identity.practice_name]) : null;
+    const nextMeta = nextIdentity !== null ? metadata(value.staff_booking_context) : null;
+    if (JSON.stringify(nextMeta) !== JSON.stringify(bookingMeta)) clearTimes();
+    if (next !== csrf || nextIdentity !== bookingIdentity) clearProjection(uncertain);
+    bookingMeta = nextMeta; bookingIdentity = nextIdentity;
+    selectedBookingEnabled = value?.selected_staff_booking_available === true && nextMeta !== null;
+    csrf = next; panel.hidden = !available || inAppointments; controls();
+  }, setWorkspace(visible) {
+    inAppointments = visible; panel.hidden = !available || inAppointments;
+  }};
+}

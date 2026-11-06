@@ -32,11 +32,132 @@
           <p class="helper">Confirm the practice you want to use.</p>
           <button type="submit">Confirm practice</button>
         </form>
-        <div id="account-identity" class="request-context" hidden></div>
+        <section id="owner-onboarding" hidden aria-labelledby="owner-title">
+          <p id="owner-current-practice" class="request-context" hidden></p>
+          <details id="owner-details" open>
+            <summary id="owner-details-summary">Practice setup</summary>
+          <h2 id="owner-title">Set up a fictional practice</h2>
+          <p id="owner-status" role="status" aria-live="polite"></p>
+          <form id="owner-credentials" autocomplete="off">
+            <label for="owner-email">Email<input id="owner-email" type="email" maxlength="254" required></label>
+            <label for="owner-password">Password<input id="owner-password" type="password" autocomplete="new-password" required></label>
+            <button type="submit" name="action" value="register">Create account</button>
+            <button type="submit" name="action" value="signin">Sign in to an existing account</button>
+          </form>
+          <form id="owner-create" hidden>
+            <label for="owner-name">Practice name<input id="owner-name" maxlength="255" required></label>
+            <label><input id="owner-confirm" type="checkbox" required> I confirm creation of this practice.</label>
+            <button type="submit">Create practice</button>
+          </form>
+          <button type="button" id="owner-inspect" hidden>Inspect current account</button>
+          <p id="owner-identity" hidden></p>
+          <section id="owner-invitation" hidden aria-labelledby="owner-invitation-title">
+            <h3 id="owner-invitation-title">Invite the synthetic receptionist</h3>
+            <p id="owner-invitation-review" role="status"></p>
+            <button id="owner-invitation-refresh" type="button">Check invitation setup</button>
+            <form id="owner-invitation-form" hidden>
+              <label><input id="owner-invitation-confirm" type="checkbox" required> I confirm this receptionist invitation.</label>
+              <button type="submit">Send invitation</button>
+            </form>
+          </section>
+          </details>
+          <!-- STOPPED/default-off source: hidden until a later exact reviewed binding. -->
+          <details id="owner-practitioner-box" class="disclosure" hidden>
+            <summary>Add practitioner</summary>
+            <p class="helper">Adds a practitioner to your practice; sign-in access and appointment times are set up separately.</p>
+            <p id="owner-practitioner-practice" class="request-context"></p>
+            <form id="owner-practitioner-form" autocomplete="off">
+              <div class="fields">
+                <label for="owner-practitioner-first">First name<input id="owner-practitioner-first" required disabled></label>
+                <label for="owner-practitioner-last">Last name<input id="owner-practitioner-last" required disabled></label>
+                <label for="owner-practitioner-specialty">Specialty display label (optional)<input id="owner-practitioner-specialty" disabled></label>
+              </div>
+              <label id="owner-practitioner-distinct-label" hidden><input id="owner-practitioner-distinct" type="checkbox" disabled> I want a separate scheduling resource despite the name matches, including any matches not shown.</label>
+              <button id="owner-practitioner-prepare" type="submit" disabled>Check details</button>
+            </form>
+            <section id="owner-practitioner-review" class="proposal" hidden aria-labelledby="owner-practitioner-review-title">
+              <h3 id="owner-practitioner-review-title" tabindex="-1">Create this practitioner?</h3>
+              <p id="owner-practitioner-summary" class="proposal-summary"></p>
+              <p id="owner-practitioner-count" class="helper"></p>
+              <ul id="owner-practitioner-matches" aria-label="Practitioners with matching names"></ul>
+              <p id="owner-practitioner-expiry" class="helper"></p>
+              <button id="owner-practitioner-confirm" type="button" disabled>Create practitioner</button>
+            </section>
+            <p id="owner-practitioner-status" role="status" aria-live="polite"></p>
+            <button id="owner-practitioner-refresh" class="quiet" type="button" disabled>Check owner account</button>
+            <details id="owner-practitioner-recovery" class="disclosure">
+              <summary>Check an earlier creation</summary>
+              <form id="owner-practitioner-recovery-form" autocomplete="off">
+                <label for="owner-practitioner-reference">Creation reference<input id="owner-practitioner-reference" maxlength="36" spellcheck="false" disabled></label>
+                <button id="owner-practitioner-recover" class="quiet" type="submit" disabled>Check creation result</button>
+              </form>
+            </details>
+          </details>
+        </section>        <div id="account-identity" class="request-context" hidden></div>
+        <button id="account-invitation-refresh" type="button" hidden>Check for invitation</button>
+        <section id="account-invitation" hidden aria-labelledby="account-invitation-title">
+          <h3 id="account-invitation-title">Review your practice invitation</h3>
+          <p id="account-invitation-review" role="status"></p>
+          <form id="account-invitation-form">
+            <label><input id="account-invitation-confirm" type="checkbox" required> I confirm joining this practice as Receptionist.</label>
+            <button type="submit">Accept invitation</button>
+          </form>
+        </section>
         <div class="actions">
           <button id="account-continue" type="button" hidden>Continue to appointments</button>
         </div>
       </section>
+      <section id="patient-records" class="task" hidden aria-labelledby="patient-record-title">
+        <div class="task-heading"><h2 id="patient-record-title">Who can I help with?</h2></div>
+        <form id="patient-record-search" autocomplete="off">
+          <div class="fields">
+            <label for="patient-record-query">Patient name<input id="patient-record-query" type="search" minlength="2" maxlength="100"></label>
+            <label for="patient-record-dob">Date of birth<input id="patient-record-dob" type="date"></label>
+          </div>
+          <button type="submit">Find patient</button>
+        </form>
+        <p id="patient-record-status" class="helper" role="status" aria-live="polite"></p>
+        <ul id="patient-record-results" aria-label="Matching patients"></ul>
+        <p id="patient-record-selected" class="request-context" hidden></p>
+        <section id="patient-record-times-box" class="request-context" hidden aria-label="Available times">
+          <button id="patient-record-times" type="button" class="quiet">See times</button>
+          <p id="patient-record-times-status" class="helper" role="status" aria-live="polite"></p>
+          <div id="patient-record-times-result"></div>
+        </section>
+        <section id="patient-record-booking-box" class="request-context" hidden aria-labelledby="patient-record-booking-title">
+          <h3 id="patient-record-booking-title">Book this patient</h3>
+          <p id="patient-record-booking-context"></p>
+          <label for="patient-record-booking-words">What time would help?
+            <textarea id="patient-record-booking-words" rows="2" maxlength="512" placeholder="For example, around half past two."></textarea>
+          </label>
+          <button id="patient-record-booking-suggest" type="button" class="quiet">Suggest a time</button>
+          <button id="patient-record-booking-manual" type="button" class="quiet">Choose a time myself</button>
+          <p id="patient-record-booking-progress" role="status" aria-live="polite"></p>
+          <div id="patient-record-booking-result"></div>
+          <button id="patient-record-booking-refresh" type="button" class="quiet" hidden>Refresh suggestion</button>
+          <button id="patient-record-booking-readback" type="button" class="quiet" hidden>Verify saved appointment</button>
+        </section>
+        <details id="patient-record-registration-box" class="disclosure">
+          <summary>Register a new patient</summary>
+          <form id="patient-record-registration" autocomplete="off">
+            <div class="fields">
+              <label for="patient-record-first">First name<input id="patient-record-first" maxlength="100" required></label>
+              <label for="patient-record-last">Last name<input id="patient-record-last" maxlength="100" required></label>
+              <label for="patient-record-birth">Date of birth<input id="patient-record-birth" type="date" required></label>
+            </div>
+            <label id="patient-record-distinct-label" hidden><input id="patient-record-distinct" type="checkbox"> This is a different person from the matching records shown.</label>
+            <button id="patient-record-prepare" type="submit">Check registration</button>
+          </form>
+          <section id="patient-record-review" class="proposal" hidden aria-labelledby="patient-record-review-title">
+            <h3 id="patient-record-review-title" tabindex="-1">Register this person?</h3>
+            <p id="patient-record-summary" class="proposal-summary"></p>
+            <ul id="patient-record-matches" aria-label="Similar patient records"></ul>
+            <button id="patient-record-confirm" type="button" disabled>Confirm registration</button>
+          </section>
+        </details>
+        <button id="patient-record-recover" type="button" class="quiet" hidden>Check registration result</button>
+      </section>
+
       <div class="workspace-heading">
         <div><h1 id="title">Your appointment workspace</h1><p id="intro" class="intro">Checking your session…</p></div>
         <div class="view-switch" id="view-switch" hidden aria-label="Appointment views">

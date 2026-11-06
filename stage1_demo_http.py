@@ -12,6 +12,9 @@ from dataclasses import dataclass, field, replace
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 import asyncio
+import base64
+import time
+from copy import deepcopy
 import hashlib
 import json
 import math
@@ -34,6 +37,8 @@ from stage1_demo_voice import (MAX_WAV_BYTES, VoiceInputRejected, VoiceRecogniti
                                validate_wav)
 from stage1_mock_org_bridge import StaffMockBinding, StaffMockDenied
 from stage1_seeded_login import SeededLoginBinding, SeededLoginController
+from stage1_owner_onboarding import OwnerBinding, OwnerController
+from stage1_patient_browser import PatientBrowserBinding, PatientBrowserBridge
 
 
 BASE = "/api/v1/appointments"
@@ -711,6 +716,98 @@ def project_bureau_move(reply: Any, current: dict[str, Any],
         return None
     return {"target_date": target_date, "target_start_local": target_time}
 
+def project_synthetic_bureau_point_move(reply: Any, current: dict[str, Any],
+                        correlation_id: str) -> dict[str, str] | None:
+    """Project one clean Bureau option into editable fields, without authority.
+
+    Multiple options need an explicit choice; the Bureau's first-slot summary
+    is not such a choice. Rejected reply content is never returned to the UI.
+    The later move proposal still rechecks the original appointment/version.
+    Bureau display labels are never used as identity evidence or rendered;
+    the screen keeps the current server-verified appointment's identity.
+    """
+    if type(reply) is not dict or any(reply.get(key) != value for key, value in {
+            "contract_version": "reception.one.product-context-proposal.v1",
+            "result": "proposal_ready", "planner_mode": "isolated_vertex",
+            "data_class": "authored_synthetic",
+            "operation_id": "proposeAppointmentUpdate"}.items()):
+        return None
+    opaque_correlation = reply.get("correlation_id")
+    request_digest = reply.get("request_correlation_sha256")
+    if (type(opaque_correlation) is not str
+            or re.fullmatch(r"synthetic-correlation-[0-9a-f]{20}", opaque_correlation) is None
+            or type(request_digest) is not str
+            or re.fullmatch(r"[0-9a-f]{64}", request_digest) is None
+            or type(correlation_id) is not str
+            or request_digest != hashlib.sha256(correlation_id.encode("utf-8")).hexdigest()):
+        return None
+    if (any(reply.get(key) is not True for key in (
+                "safe", "requires_confirmation", "proposal_only", "database_reads_performed"))
+            or any(reply.get(key) is not False for key in (
+                "write_performed", "confirmation_performed", "model_database_access",
+                "legacy_interpreter_gate_changed"))
+            or type(reply.get("provider_calls")) is not int or reply["provider_calls"] != 0):
+        return None
+    notices = reply.get("warning_codes")
+    # A point move has an explicitly bound selected appointment and no slot list.
+    # Only interval/slot proposals require a separate staff slot selection.
+    required_notices = {"staff_confirmation_required"}
+    if (type(notices) is not list or len(notices) > 20
+            or any(type(code) is not str for code in notices)
+            or len(set(notices)) != len(notices)
+            or not required_notices <= set(notices)
+            or not set(notices) <= required_notices | {"no_reservation"}):
+        return None
+    review = reply.get("review")
+    revision = reply.get("context_revision")
+    if (type(revision) is not int or revision < 1 or type(review) is not dict
+            or review.get("disposition") != "admit"
+            or type(review.get("context_revision")) is not int
+            or review.get("context_revision") != revision):
+        return None
+    # This is synthetic receiver evidence, never a provider/model inference claim.
+    audit = reply.get("runtime_audit_ref")
+    if (type(audit) is not str or re.fullmatch(r"synthetic-rawreply-sha256:[0-9a-f]{64}", audit) is None
+            or type(review.get("plan_hash")) is not str
+            or re.fullmatch(r"[0-9a-f]{64}", review["plan_hash"]) is None):
+        return None
+    selected = reply.get("selected_appointment")
+    if (type(selected) is not dict or current.get("status") != "Booked"
+            or selected.get("appointment_date") != current.get("date")
+            or local_minute(selected.get("start_time_local")) != current.get("start_local")
+            or selected.get("status") != "booked"
+            or type(selected.get("duration_minutes")) is not int
+            or selected["duration_minutes"] != current.get("duration_minutes")):
+        return None
+    slots = reply.get("candidate_slots")
+    adapter = reply.get("adapter_review")
+    if (type(slots) is not list or slots != []
+            or type(adapter) is not dict or adapter.get("adapter_kind") != "update_proposal"
+            or any(adapter.get(key) is not True for key in (
+                "performed", "safe", "freshness_verified"))
+            or any(adapter.get(key) is not False for key in (
+                "confirmation_evidence_released", "write_performed"))
+            or adapter.get("warning_codes") not in ([], ["no_reservation"])
+            or adapter.get("block_codes") != []
+            or type(adapter.get("candidate_count")) is not int
+            or adapter["candidate_count"] != 1):
+        return None
+    # Explicit point proposals carry no interval/candidate-slot representation.
+    target_date = reply.get("proposed_appointment_date")
+    target_time = local_minute(reply.get("proposed_start_time_local"))
+    duration = reply.get("proposed_duration_minutes")
+    try:
+        if type(target_date) is not str or date.fromisoformat(target_date).isoformat() != target_date:
+            return None
+    except ValueError:
+        return None
+    if (not target_time or type(duration) is not int or not 5 <= duration <= 180
+            or duration != current.get("duration_minutes")
+):
+        return None
+    return {"target_date": target_date, "target_start_local": target_time}
+
+
 
 @dataclass(frozen=True, repr=False)
 class DemoSeed:
@@ -720,6 +817,13 @@ class DemoSeed:
     staff_bearer: str | None = None
     staff_user_id: str | None = None
     seeded_appointment_id: str | None = None
+
+
+@dataclass(frozen=True, repr=False)
+class SelectedAccountDiaryBinding:
+    """Trusted optional read transport; current identity is checked per request."""
+    exchange: Callable[..., Awaitable[httpx.Response]]
+    enabled: bool = False
 
 
 @dataclass(frozen=True, repr=False)
@@ -777,6 +881,17 @@ class DemoConfig:
         default=None, repr=False)
     # Trusted startup only; absent or enabled=False preserves the accepted path.
     seeded_login: SeededLoginBinding | None = field(default=None, repr=False)
+    owner_onboarding: OwnerBinding | None = field(default=None, repr=False)
+    # STOPPED prospective source: trusted optional binding, no request selection.
+    practitioner_create: Any = field(default=None, repr=False)
+    patient_browser: PatientBrowserBinding | None = field(default=None, repr=False)
+    staff_booking_context: Any = field(default=None, repr=False)
+    selected_account_diary: SelectedAccountDiaryBinding | None = field(default=None, repr=False)
+    staff_booking_context_late_enabled: bool = False
+    selected_staff_booking_late_enabled: bool = False
+    selected_staff_native: dict[str, Any] | None = field(default=None, repr=False)
+    async_current_point: dict[str, Any] | None = field(default=None, repr=False)
+    async_request_booking: dict[str, Any] | None = field(default=None, repr=False)
 
 
 @dataclass(repr=False)
@@ -872,6 +987,9 @@ class DemoIssuer:
             self.lab_view = {**self.lab_view,
                 "schema": "emr4.stage1_reliability_lab_view.v3",
                 "progress": progress}
+        self.async_prepared_event = asyncio.Event()
+        self.async_capture_event = asyncio.Event()
+        self.async_capture_ready: dict[str, Any] | None = None
         self._sessions: dict[str, _Session] = {}
         self._initial_booking: dict[str, dict[str, str]] = {}
         # Fixed staff journey only. These flags are set after existing typed
@@ -1006,8 +1124,24 @@ def create_stage1_demo_app(config: DemoConfig) -> tuple[FastAPI, DemoIssuer]:
                 config.listener_origin.removeprefix("http://")):
             raise HTTPException(status_code=404, detail="DEMO_UNAVAILABLE")
 
+    def public_request(value):
+        if type(value) is not dict:
+            return value
+        allowed={"request_id","patient_id","state","request_version","preference_date","earliest_local",
+            "latest_local","practice_timezone","booked_appointment_id","booked_start_time","booked_status",
+            "historical_request_result"}
+        return {k:v for k,v in value.items() if k in allowed and (v is None or type(v) in (str,int,bool))}
+
+    def public_request_containers(value):
+        if type(value) is list:
+            return [public_request_containers(v) for v in value]
+        if type(value) is dict:
+            return {k:(public_request(v) if k=="request" else public_request_containers(v))
+                for k,v in value.items() if k!="booking_witness"}
+        return value
+
     def no_store(data: Any, code: int = 200) -> JSONResponse:
-        return JSONResponse(data, status_code=code,
+        return JSONResponse(public_request_containers(data), status_code=code,
             headers={"Cache-Control": "no-store", "Pragma": "no-cache", "X-Content-Type-Options": "nosniff"})
 
     login = None
@@ -1052,19 +1186,398 @@ def create_stage1_demo_app(config: DemoConfig) -> tuple[FastAPI, DemoIssuer]:
             if action == "state" and request.method == "GET" and not request.url.query:
                 return no_store({"enabled": False})
             return no_store({"detail": "Sign-in unavailable."}, 404)
-        return await login.handle(request, action)
+        response = await login.handle(request, action)
+        if patient_bridge is not None and response.status_code == 200:
+            # Availability is a projection only. Each patient action independently
+            # rechecks the same selected account through its dedicated bridge.
+            payload = json.loads(response.body)
+            payload["patient_available"] = payload.get("phase") == "selected"
+            payload["selected_staff_booking_available"] = (selected_staff_controller is not None
+                and payload.get("phase") == "selected")
+            if staff_booking_bridge is not None:
+                binding = staff_booking_bridge.binding
+                payload["staff_booking_context"] = ({"practice_id": binding.practice_id,
+                    "date": binding.fixture_day.isoformat(), "duration_minutes": binding.duration_minutes}
+                    if payload.get("phase") == "selected" else None)
+            if selected_diary is not None:
+                payload["selected_diary_available"] = (staff_booking_bridge is not None
+                    and payload.get("phase") == "selected"
+                    and type(payload.get("identity")) is dict
+                    and payload["identity"].get("role") == "Receptionist")
+            response.body = json.dumps(payload, ensure_ascii=False,
+                separators=(",", ":"), allow_nan=False).encode("utf-8")
+            response.headers["content-length"] = str(len(response.body))
+        return response
+
+    owner = None
+    if config.owner_onboarding is not None and config.owner_onboarding.enabled is True:
+        if login is None:
+            raise ValueError("OWNER_REQUIRES_SEEDED_LOGIN")
+        owner = OwnerController(config.owner_onboarding, origin=config.listener_origin,
+                                human_end=config.staff_human_window_ends_at)
+
+    if ((config.owner_onboarding is not None and config.owner_onboarding.invitation_join_enabled)
+            or (config.seeded_login is not None and config.seeded_login.invitation_join_enabled)):
+        if (owner is None or login is None or not config.owner_onboarding.invitation_join_enabled
+                or not config.seeded_login.invitation_join_enabled):
+            raise ValueError("INVITATION_JOIN_BINDING_INVALID")
+        login.invitation_owner = owner
+
+
+    practitioner_create_bridge = None
+    if config.practitioner_create is not None:
+        from stage1_practitioner_create_browser import (
+            PractitionerCreateBridge, validate_optional_binding)
+        if validate_optional_binding(config.practitioner_create):
+            if owner is None:
+                raise ValueError("PRACTITIONER_CREATE_REQUIRES_CURRENT_OWNER")
+            # The candidate's literal STOPPED barrier rejects this construction.
+            # Future reviewed enablement also requires exact callbacks and scope.
+            practitioner_create_bridge = PractitionerCreateBridge(owner, config.practitioner_create)
+
+    patient_bridge = None
+    if config.patient_browser is not None and config.patient_browser.enabled is True:
+        if login is None:
+            raise ValueError("PATIENT_BROWSER_REQUIRES_CURRENT_LOGIN")
+        patient_bridge = PatientBrowserBridge(login, config.patient_browser)
+
+    selected_staff_native_owner = None
+    if config.selected_staff_native is not None:
+        if (config.selected_staff_booking_late_enabled is not True
+                or config.async_current_point is not None or config.async_request_booking is not None):
+            raise ValueError('SELECTED_NATIVE_FAMILIES_MUTUALLY_EXCLUSIVE')
+        from stage1_selected_staff_booking import SelectedStaffNativeOwner
+        from stage1_seeded_login import _Denied as SelectedNativeDenied, _Unavailable as SelectedNativeUnavailable
+        selected_staff_native_owner = SelectedStaffNativeOwner(config.selected_staff_native)
+        app.state.selected_staff_native_owner = selected_staff_native_owner
+    selected_staff_controller = None
+    selected_staff_install_state = 'pending' if config.selected_staff_booking_late_enabled is True else 'disabled'
+    if (type(config.selected_staff_booking_late_enabled) is not bool
+            or config.selected_staff_booking_late_enabled and not config.staff_booking_context_late_enabled):
+        raise ValueError("SELECTED_STAFF_BOOKING_LATE_BINDING_INVALID")
+    selected_diary = config.selected_account_diary
+    if selected_diary is not None:
+        if (type(selected_diary) is not SelectedAccountDiaryBinding
+                or type(selected_diary.enabled) is not bool or not callable(selected_diary.exchange)):
+            raise ValueError("SELECTED_DIARY_BINDING_INVALID")
+        if not selected_diary.enabled:
+            selected_diary = None
+        elif (config.selected_staff_booking_late_enabled is not True
+                or config.staff_booking_context_late_enabled is not True or login is None):
+            raise ValueError("SELECTED_DIARY_REQUIRES_CURRENT_SELECTED_ACCOUNT")
+    staff_booking_bridge = None
+    late_staff_context = config.staff_booking_context_late_enabled
+    if (type(late_staff_context) is not bool
+            or late_staff_context and (config.staff_booking_context is not None
+                or login is None or patient_bridge is None or owner is None
+                or not config.owner_onboarding.invitation_join_enabled
+                or not config.seeded_login.invitation_join_enabled)):
+        raise ValueError("STAFF_BOOKING_CONTEXT_LATE_BINDING_INVALID")
+    staff_booking_install_state = 'pending' if late_staff_context else 'disabled'
+    if config.staff_booking_context is not None and config.staff_booking_context.enabled is True:
+        if login is None or patient_bridge is None:
+            raise ValueError("STAFF_BOOKING_CONTEXT_REQUIRES_PATIENT_AND_LOGIN")
+        from stage1_staff_booking_context import StaffBookingContextBridge
+        staff_booking_bridge = StaffBookingContextBridge(login, config.staff_booking_context)
+
+    if late_staff_context:
+        from stage1_staff_booking_context import StaffBookingContextBinding, StaffBookingContextBridge
+
+        def install_staff_booking_context(binding, *, current):
+            # Trusted in-process callback only. No HTTP route or app-state
+            # descriptor registry; resource provenance never grants user authority.
+            nonlocal staff_booking_bridge, staff_booking_install_state
+            if staff_booking_install_state != 'pending':
+                raise ValueError("STAFF_BOOKING_CONTEXT_INSTALL_CONSUMED")
+            staff_booking_install_state = 'attempted'
+            try:
+                if (type(binding) is not StaffBookingContextBinding or binding.enabled is not True
+                        or binding.practice_id == config.practice_id
+                        or binding.practitioner_id != '30000000-0000-4000-8000-000000000002'
+                        or type(binding.duration_minutes) is not int or binding.duration_minutes != 30
+                        or type(binding.max_slots) is not int or binding.max_slots != 6
+                        or not callable(current) or current() is not True):
+                    raise ValueError("STAFF_BOOKING_CONTEXT_INSTALL_INVALID")
+                prepared = StaffBookingContextBridge(login, binding)
+                if current() is not True:
+                    raise ValueError("STAFF_BOOKING_CONTEXT_INSTALL_CURRENT_LOST")
+                # No await separates the final current predicate and publication.
+                staff_booking_bridge = prepared
+                staff_booking_install_state = 'ready'
+            except BaseException:
+                staff_booking_install_state = 'failed'
+                raise
+
+        app.state.install_staff_booking_context = install_staff_booking_context
+
+    def staff_context_diagnostic_snapshot():
+        bridge = staff_booking_bridge
+        if bridge is None:
+            return {'sample':'BEFORE_SERVER_DRAIN','state':'UNAVAILABLE',
+                'stage':'UNAVAILABLE','callback':'NONE','callback_status':'UNAVAILABLE','refusal_class':None}
+        return bridge.refusal_diagnostic_snapshot()
+
+    app.state.staff_context_diagnostic_snapshot = staff_context_diagnostic_snapshot
+
+    if config.selected_staff_booking_late_enabled:
+        from stage1_selected_staff_booking import SelectedStaffBookingBinding, SelectedStaffBookingController
+        def install_selected_staff_booking(binding, *, current):
+            nonlocal selected_staff_controller, selected_staff_install_state
+            if selected_staff_install_state != 'pending':
+                raise ValueError('SELECTED_STAFF_INSTALL_CONSUMED')
+            selected_staff_install_state = 'attempted'
+            try:
+                if (staff_booking_bridge is None or type(binding) is not SelectedStaffBookingBinding
+                        or binding.enabled is not True or binding.practice_id != staff_booking_bridge.binding.practice_id
+                        or binding.fixture_day != staff_booking_bridge.binding.fixture_day
+                        or not callable(current) or current() is not True):
+                    raise ValueError('SELECTED_STAFF_INSTALL_INVALID')
+                prepared = SelectedStaffBookingController(login, binding)
+                if selected_staff_native_owner is not None:
+                    selected_staff_native_owner.bind(prepared, current=current)
+                if current() is not True:
+                    raise ValueError('SELECTED_STAFF_INSTALL_CURRENT_LOST')
+                selected_staff_controller = prepared
+                app.state.take_staff_booking_capture_v1 = prepared.take_staff_booking_capture_v1
+                app.state.receive_staff_booking_reply_v1 = prepared.receive_staff_booking_reply_v1
+                selected_staff_install_state = 'ready'
+            except BaseException:
+                selected_staff_install_state = 'failed'
+                raise
+        app.state.install_selected_staff_booking = install_selected_staff_booking
+
+    @app.post('/_stage1/selected-staff-native-v1', include_in_schema=False)
+    async def selected_staff_native_handoff(request: Request):
+        if selected_staff_native_owner is None:
+            return no_store({'detail':'Selected native handoff unavailable.'}, 404)
+        try:
+            local(request)
+            return await selected_staff_native_owner.handle_private(request, origin=config.listener_origin)
+        except (SelectedNativeDenied, SelectedNativeUnavailable, ValueError, TypeError, KeyError, UnicodeError):
+            return no_store({'detail':'Selected native handoff unavailable.'}, 403)
+
+    async def close_private_account_controllers():
+        nonlocal staff_booking_bridge, staff_booking_install_state, selected_staff_controller, selected_staff_install_state
+        selected_staff_install_state = 'closed'
+        selected_installed, selected_staff_controller = selected_staff_controller, None
+        staff_booking_install_state = 'closed'
+        installed, staff_booking_bridge = staff_booking_bridge, None
+        failures = []
+        for controller in (practitioner_create_bridge,selected_staff_native_owner,selected_installed,installed,patient_bridge,owner,login):
+            if controller is not None:
+                try:
+                    await controller.close()
+                except BaseException:
+                    failures.append(True)
+        if failures:
+            raise RuntimeError('PRIVATE_ACCOUNT_CONTROLLER_CLEANUP_UNPROVEN')
+    if (practitioner_create_bridge is not None or staff_booking_bridge is not None or patient_bridge is not None or (config.owner_onboarding is not None and config.owner_onboarding.private_owner_current is not None)
+            or (config.seeded_login is not None and config.seeded_login.private_recipient_current is not None)):
+        app.state.close_private_account_controllers = close_private_account_controllers
+
+    @app.api_route("/demo/stage1/owner/{action}", methods=["GET", "POST"])
+    async def owner_route(request: Request, action: str):
+        try:
+            local(request)
+        except HTTPException:
+            return no_store({"detail": "Onboarding unavailable."}, 404)
+        if owner is None:
+            if action == "state" and request.method == "GET" and not request.url.query:
+                return no_store({"enabled": False})
+            return no_store({"detail": "Onboarding unavailable."}, 404)
+        return await owner.handle(request, action)
+
+    # No CREATE route or public scope is installed with absent/disabled callbacks.
+    practitioner_create_paths = frozenset()
+    if practitioner_create_bridge is not None:
+        practitioner_create_paths = frozenset("/demo/stage1/owner/practitioners/" + action
+            for action in ("prepare", "confirm", "receipt"))
+        if any(getattr(route, "path", "") in practitioner_create_paths for route in app.routes):
+            raise ValueError("PRACTITIONER_CREATE_ROUTE_COLLISION")
+        def make_practitioner_create_route(action):
+            async def route(request: Request):
+                try:
+                    local(request)
+                except HTTPException:
+                    return no_store({"detail": "Practitioner creation unavailable."}, 404)
+                return await practitioner_create_bridge.handle(request, action)
+            return route
+        for create_action in ("prepare", "confirm", "receipt"):
+            app.add_api_route("/demo/stage1/owner/practitioners/" + create_action,
+                make_practitioner_create_route(create_action), methods=["POST"],
+                name="owner_practitioner_create_" + create_action)
+
+    # Patient access uses the validated selected-account context, independently
+    # of the fixed Bureau staff/mock capability and its fixed booking patient.
+    patient_browser_paths = frozenset(
+        "/demo/stage1/patient/" + action
+        for action in ("search", "read", "prepare", "confirm", "receipt"))
+
+    def make_patient_browser_route(action):
+        async def patient_browser_route(request: Request):
+            try:
+                local(request)
+            except HTTPException:
+                return no_store({"detail": "Patient workspace unavailable."}, 404)
+            if patient_bridge is None:
+                return no_store({"detail": "Patient workspace unavailable."}, 404)
+            return await patient_bridge.handle(request, action)
+        return patient_browser_route
+
+    for patient_action in ("search", "read", "prepare", "confirm", "receipt"):
+        app.add_api_route("/demo/stage1/patient/" + patient_action,
+            make_patient_browser_route(patient_action), methods=["POST"],
+            name="patient_browser_" + patient_action)
+
+    @app.post("/demo/stage1/staff-booking/context")
+    async def staff_booking_context_route(request: Request):
+        try:
+            local(request)
+        except HTTPException:
+            return no_store({"detail": "Booking context unavailable."}, 404)
+        if staff_booking_bridge is None:
+            return no_store({"detail": "Booking context unavailable."}, 404)
+        return await staff_booking_bridge.handle(request)
+
+    @app.post("/demo/stage1/selected-account-diary/read")
+    async def selected_account_diary_read(request: Request):
+        from stage1_seeded_login import COOKIE as account_cookie, _Denied, _Unavailable
+        try:
+            local(request)
+        except HTTPException:
+            return no_store(diary_unavailable(), 404)
+        if selected_diary is None or login is None or staff_booking_bridge is None:
+            return no_store(diary_unavailable(), 404)
+        key = request.cookies.get(account_cookie, "")
+        value = login.sessions.get(key)
+        bridge = staff_booking_bridge
+        try:
+            if (value is None or request.url.query
+                    or request.headers.get("authorization") is not None
+                    or request.headers.get("origin") != config.listener_origin
+                    or request.headers.get("content-type") != "application/json"
+                    or not secrets.compare_digest(request.headers.get("x-csrf-token", ""), value.csrf)):
+                raise _Denied()
+            async with value.lock:
+                login._require_current(key, value)
+                tenant, selected, staff, csrf = value.tenant, value.selected, value.staff_session, value.csrf
+                if not tenant or type(selected) is not dict:
+                    raise _Denied()
+                selected_copy = dict(selected)
+                binding = bridge.binding
+                def same():
+                    login._require_current(key, value)
+                    if (bridge is not staff_booking_bridge or bridge._closed
+                            or value.tenant != tenant or value.selected is not selected
+                            or value.selected != selected_copy or value.staff_session is not staff
+                            or value.csrf != csrf):
+                        raise _Denied()
+                same()
+                chunks, size = [], 0
+                async for chunk in request.stream():
+                    size += len(chunk)
+                    if size > 2:
+                        raise _Denied()
+                    chunks.append(chunk)
+                same()
+                if b"".join(chunks) != b"{}":
+                    raise _Denied()
+                role = await login._current(value, key=key, expected=value)
+                same()
+                authority = value.patient_current_authority
+                if (role != "InvitedReceptionist" or type(authority) is not dict
+                        or set(authority) != {"account_id","membership_id","user_id","practice_id","role","authority_generation"}
+                        or authority["practice_id"] != binding.practice_id
+                        or selected_copy.get("practice_id") != binding.practice_id
+                        or selected_copy.get("membership_id") != authority["membership_id"]
+                        or selected_copy.get("role") != authority["role"]
+                        or authority["role"] != "Receptionist"
+                        or type(authority["authority_generation"]) is not int
+                        or authority["authority_generation"] < 1):
+                    raise _Denied()
+                authority = dict(authority)
+                async def current_authority():
+                    same()
+                    current_role = await login._current(value, key=key, expected=value)
+                    same()
+                    if current_role != role or value.patient_current_authority != authority:
+                        raise _Denied()
+                def local_current():
+                    try:
+                        same()
+                        return value.patient_current_authority == authority
+                    except (_Denied, _Unavailable):
+                        return False
+                context = await login._call(binding.practice_context, tenant_bearer=tenant)
+                same()
+                await current_authority()
+                if (type(context) is not dict or set(context) != {"practice_id","timezone"}
+                        or context["practice_id"] != authority["practice_id"]
+                        or context["timezone"] not in ("Australia/Brisbane","Australia/Sydney")):
+                    raise _Denied()
+                first, last = binding.fixture_day, binding.fixture_day + timedelta(days=7)
+                response = await selected_diary.exchange(tenant_bearer=tenant,
+                    date_from=first.isoformat(), date_to=last.isoformat(),
+                    practice_timezone=context["timezone"], current=local_current)
+                captured_at = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+                same()
+                if not local_current():
+                    raise _Denied()
+                context_after = await login._call(binding.practice_context, tenant_bearer=tenant)
+                same()
+                if (not local_current() or type(context_after) is not dict
+                        or set(context_after) != {"practice_id","timezone"}
+                        or context_after["practice_id"] != context["practice_id"]
+                        or context_after["timezone"] != context["timezone"]):
+                    raise _Denied()
+                await current_authority()
+                result = render_staff_diary_read(response.content, status_code=response.status_code,
+                    content_type=response.headers.get("content-type", ""),
+                    tenant_id=authority["practice_id"], actor_id=authority["user_id"],
+                    authenticated_role=authority["role"], date_from=first.isoformat(), date_to=last.isoformat(),
+                    practice_timezone=context["timezone"], captured_at=captured_at,
+                    as_of=datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"), selected_iana=True)
+                if not local_current():
+                    raise _Denied()
+                return no_store(result)
+        except (_Denied, _Unavailable, ValueError, TypeError, KeyError, OverflowError,
+                httpx.TimeoutException, httpx.TransportError):
+            return no_store(diary_unavailable())
+
+    selected_staff_paths = frozenset('/demo/stage1/selected-staff-booking/' + action
+        for action in ('capture','status','select','confirm','readback'))
+    def selected_staff_route(action):
+        async def route(request: Request):
+            try:
+                local(request)
+            except HTTPException:
+                return no_store({'detail':'Selected booking unavailable.'}, 404)
+            if selected_staff_controller is None:
+                return no_store({'detail':'Selected booking unavailable.'}, 404)
+            return await selected_staff_controller.handle(request, action)
+        return route
+    for selected_action in ('capture','status','select','confirm','readback'):
+        app.add_api_route('/demo/stage1/selected-staff-booking/' + selected_action,
+            selected_staff_route(selected_action), methods=['POST'], name='selected_staff_' + selected_action)
 
     @app.middleware("http")
     async def account_response_policy(request: Request, call_next):
         # Current backend identity also gates non-command staff routes, including
         # interpretation and mock continuation. No owner reaches those routes.
         path = request.url.path
-        account_route_path = path.startswith("/demo/stage1/account/")
+        account_route_path = (path.startswith("/demo/stage1/account/")
+            or path.startswith("/demo/stage1/owner/"))
+        practitioner_create_path = request.method == "POST" and path in practitioner_create_paths
+        patient_route_path = request.method == "POST" and path in patient_browser_paths
+        staff_booking_context_path = (request.method == "POST"
+            and path == "/demo/stage1/staff-booking/context") or (request.method == "POST" and path in selected_staff_paths)
+        selected_diary_path = request.method == "POST" and path == "/demo/stage1/selected-account-diary/read"
         static_path = path == "/demo/stage1/" or path in {
             "/demo/stage1/" + name for name in ("stage1-interactive.html",
                 "stage1-interactive.js", "stage1-interactive.css", "stage1-diary-view.js",
                 "stage1-local-voice.js")}
-        if login is not None and not account_route_path and not static_path:
+        if (login is not None and not account_route_path and not practitioner_create_path and not patient_route_path and not staff_booking_context_path and not selected_diary_path and not static_path
+                and path not in {"/_stage1/current-point-v3", "/_stage1/request-booking-v1", "/_stage1/selected-staff-native-v1"}):
             try:
                 local(request)
                 session = issuer.cookie_session_for(request)
@@ -1073,7 +1586,7 @@ def create_stage1_demo_app(config: DemoConfig) -> tuple[FastAPI, DemoIssuer]:
             except Exception:
                 return no_store({"detail": "Current sign-in unavailable."}, 403)
         response = await call_next(request)
-        if login is not None or account_route_path:
+        if login is not None or account_route_path or practitioner_create_path or patient_route_path or staff_booking_context_path or selected_diary_path:
             response.headers["Cache-Control"] = "no-store"
             response.headers["Pragma"] = "no-cache"
         return response
@@ -1141,6 +1654,939 @@ def create_stage1_demo_app(config: DemoConfig) -> tuple[FastAPI, DemoIssuer]:
         except ValueError:
             raise HTTPException(status_code=503, detail="BACKEND_READBACK_UNAVAILABLE") from None
 
+    # Private, one-attempt handoff. No browser route or callable authoring service.
+    async_binding = deepcopy(config.async_current_point)
+    async_lock = asyncio.Lock()
+    async_slot: dict[str, Any] = {}
+    if async_binding is not None:
+        if (type(async_binding) is not dict or set(async_binding) != {
+                "attempt_id", "implementation_generation", "policy_digest", "capability",
+                "frame_source_sha256", "schema_sha256", "authoring_manifest"}
+                or config.backend_exec_exchange is None
+                or any(type(async_binding[k]) is not str or not async_binding[k]
+                       for k in ("attempt_id", "implementation_generation", "capability"))
+                or any(type(async_binding[k]) is not str or re.fullmatch(r"[a-f0-9]{64}", async_binding[k]) is None
+                       for k in ("policy_digest", "frame_source_sha256", "schema_sha256"))
+                or async_binding["frame_source_sha256"] != "45a28b40611508910fd338f775644ff4863fd0ff84609040cb697d157a09b2d8"
+                or async_binding["schema_sha256"] != "05f324de7c7c01254e666c754b44631652e794ff9a3a45c87d5106478725d5a0"
+                or type(async_binding["authoring_manifest"]) is not dict):
+            raise ValueError("ASYNC_BINDING_INVALID")
+
+    booking_binding = deepcopy(config.async_request_booking)
+    if booking_binding is not None:
+        if (type(booking_binding) is not dict or set(booking_binding) != {
+                "attempt_id", "implementation_generation", "policy_digest", "capability",
+                "frame_source_sha256", "schema_sha256", "authoring_manifest"}
+                or config.backend_exec_exchange is None
+                or any(type(booking_binding[k]) is not str or not booking_binding[k]
+                       for k in ("attempt_id", "implementation_generation", "capability"))
+                or any(type(booking_binding[k]) is not str or re.fullmatch(r"[a-f0-9]{64}", booking_binding[k]) is None
+                       for k in ("policy_digest", "frame_source_sha256", "schema_sha256"))
+                or booking_binding["frame_source_sha256"] != "208c228402ae75bae14b2d3f56afb98887ffd8895a64e68e4e7331447da82b55"
+                or booking_binding["schema_sha256"] != "51eb3efc935c3fa408a85ed2a6beca9bda9c54ad148e7de62db7a68ba6d4b934"
+                or type(booking_binding["authoring_manifest"]) is not dict):
+            raise ValueError("ASYNC_BINDING_INVALID")
+
+    if async_binding is not None and booking_binding is not None:
+        raise ValueError("HANDOFF_FAMILIES_MUTUALLY_EXCLUSIVE")
+
+    def async_fail() -> None:
+        raise HTTPException(status_code=409, detail="ASYNC_HANDOFF_UNAVAILABLE")
+
+    def canonical(value: Any) -> bytes:
+        return json.dumps(value, sort_keys=True, separators=(",", ":"),
+                          ensure_ascii=False, allow_nan=False).encode("utf-8")
+
+    def stamp(value: Any) -> datetime:
+        if type(value) is not str:
+            async_fail()
+        try:
+            parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
+            if parsed.tzinfo is None or parsed.utcoffset() != timedelta(0):
+                async_fail()
+            return parsed
+        except ValueError:
+            async_fail()
+
+
+    def capture_live() -> bool:
+        return (async_slot.get("terminal") is None and async_slot.get("cancel_state") is None
+                and bool(async_slot.get("capture"))
+                and time.monotonic() < async_slot["mono_end"]
+                and datetime.now(timezone.utc) < async_slot["wall_end"])
+
+    async def render_input(q: dict[str, Any], work: Path, renderer: Callable) -> dict[str, Any]:
+        # Trusted in-process API only: no route, attestation boolean or raw-client
+        # liveness assertion. Authority refresh is outside the slot lock.
+        session = await async_staff()
+        async with async_lock:
+            capture = deepcopy(issuer.async_capture_ready)
+            bound_sha = None
+
+            def assert_live(expected: dict[str, Any]) -> None:
+                cap = async_slot.get("capture")
+                if (async_binding is None or type(expected) is not dict or type(cap) is not dict
+                        or canonical(expected) != canonical(cap)
+                        or canonical(expected) != canonical(capture)
+                        or canonical(issuer.async_capture_ready) != canonical(cap)
+                        or async_slot.get("session") is not session
+                        or async_slot.get("session_id") != session.binding.session_id
+                        or not any(s is session for s in issuer._sessions.values())
+                        or datetime.now(timezone.utc) >= session.expires_at
+                        or async_slot.get("input_sha256") != bound_sha
+                        or async_slot.get("installed") is not None
+                        or session.proposal is not None or session.uncertain is not None
+                        or not capture_live()):
+                    raise ValueError("ASYNC_HOST_CAPTURE_NOT_LIVE")
+                # Local issuer policy/current generation is rechecked inside
+                # the lock; no await, network or DB operation occurs here.
+                issuer.require_staff(session, "proposal:create")
+
+            assert_live(capture)
+            descriptor, content = renderer(q, deepcopy(capture), work, assert_live)
+            # These are the existing two bounded outputs, staged under fixed
+            # names. No capture-ready file is visible until final atomic rename.
+            path = work / "model-input.current-point-v3.json"
+            ready = work / "capture-ready.json"
+            pending_input = work / "model-input.current-point-v3.json.pending"
+            pending_ready = work / "capture-ready.json.pending"
+            ready_bytes = canonical(descriptor)
+            if (type(content) is not bytes or not 0 < len(content) <= 131072
+                    or len(ready_bytes) > 16384
+                    or descriptor["input"] != {"path":path.as_posix(), "bytes":len(content),
+                                               "sha256":hashlib.sha256(content).hexdigest()}
+                    or any(p.exists() for p in (path, ready, pending_input, pending_ready))):
+                raise ValueError("ASYNC_INPUT_PUBLICATION_INVALID")
+            created = []
+            published = False
+            try:
+                for target, raw in ((pending_input, content), (pending_ready, ready_bytes)):
+                    with target.open("xb") as stream:
+                        created.append(target)
+                        stream.write(raw)
+                assert_live(capture)
+                pending_input.rename(path)
+                created.remove(pending_input)
+                created.append(path)
+                assert_live(capture)
+                bound_sha = descriptor["input"]["sha256"]
+                async_slot["input_sha256"] = bound_sha
+                # Check again at publication with exactly our own SHA binding.
+                # No await can interleave cancel/supersede before the rename.
+                assert_live(capture)
+                pending_ready.rename(ready)
+                created.remove(pending_ready)
+                published = True
+                return descriptor
+            finally:
+                if not published:
+                    if async_slot.get("input_sha256") == bound_sha:
+                        async_slot.pop("input_sha256", None)
+                    for target in reversed(created):
+                        target.unlink()
+    async def render_booking_input(q: dict[str, Any], work: Path, renderer: Callable) -> dict[str, Any]:
+        # Trusted in-process API only: no route, attestation boolean or raw-client
+        # liveness assertion. Authority refresh is outside the slot lock.
+        session = await async_staff()
+        async with async_lock:
+            capture = deepcopy(issuer.async_capture_ready)
+            bound_sha = None
+
+            def assert_live(expected: dict[str, Any]) -> None:
+                cap = async_slot.get("capture")
+                if (booking_binding is None or type(expected) is not dict or type(cap) is not dict
+                        or canonical(expected) != canonical(cap)
+                        or canonical(expected) != canonical(capture)
+                        or canonical(issuer.async_capture_ready) != canonical(cap)
+                        or async_slot.get("session") is not session
+                        or async_slot.get("session_id") != session.binding.session_id
+                        or not any(s is session for s in issuer._sessions.values())
+                        or datetime.now(timezone.utc) >= session.expires_at
+                        or async_slot.get("input_sha256") != bound_sha
+                        or async_slot.get("installed") is not None
+                        or session.proposal is not None or session.uncertain is not None
+                        or not capture_live()):
+                    raise ValueError("ASYNC_HOST_CAPTURE_NOT_LIVE")
+                # Local issuer policy/current generation is rechecked inside
+                # the lock; no await, network or DB operation occurs here.
+                issuer.require_staff(session, "proposal:create")
+
+            assert_live(capture)
+            descriptor, content = renderer(q, deepcopy(capture), work, assert_live)
+            # These are the existing two bounded outputs, staged under fixed
+            # names. No capture-ready file is visible until final atomic rename.
+            path = work / "model-input.request-booking-v1.json"
+            ready = work / "capture-ready.request-booking.json"
+            pending_input = work / "model-input.request-booking-v1.json.pending"
+            pending_ready = work / "capture-ready.request-booking.json.pending"
+            ready_bytes = canonical(descriptor)
+            if (type(content) is not bytes or not 0 < len(content) <= 131072
+                    or len(ready_bytes) > 16384
+                    or descriptor["input"] != {"path":path.as_posix(), "bytes":len(content),
+                                               "sha256":hashlib.sha256(content).hexdigest()}
+                    or any(p.exists() for p in (path, ready, pending_input, pending_ready))):
+                raise ValueError("ASYNC_INPUT_PUBLICATION_INVALID")
+            created = []
+            published = False
+            try:
+                for target, raw in ((pending_input, content), (pending_ready, ready_bytes)):
+                    with target.open("xb") as stream:
+                        created.append(target)
+                        stream.write(raw)
+                assert_live(capture)
+                pending_input.rename(path)
+                created.remove(pending_input)
+                created.append(path)
+                assert_live(capture)
+                bound_sha = descriptor["input"]["sha256"]
+                async_slot["input_sha256"] = bound_sha
+                # Check again at publication with exactly our own SHA binding.
+                # No await can interleave cancel/supersede before the rename.
+                assert_live(capture)
+                pending_ready.rename(ready)
+                created.remove(pending_ready)
+                published = True
+                return descriptor
+            finally:
+                if not published:
+                    if async_slot.get("input_sha256") == bound_sha:
+                        async_slot.pop("input_sha256", None)
+                    for target in reversed(created):
+                        target.unlink()
+    issuer.async_render_input = render_booking_input if booking_binding is not None else render_input
+
+    async def async_staff() -> _Session:
+        session = async_slot.get("session")
+        if session is None:
+            # The unselected seed template remains available to construct a
+            # selected Account session; it cannot authorize a booking capture.
+            # Preserve the original non-login path and reject ambiguous selected
+            # sessions rather than inferring a browser or choosing a person.
+            if login is not None:
+                current_time = datetime.now(timezone.utc)
+                candidates = [s for s in issuer._sessions.values()
+                    if s.binding.persona == "staff" and s.account_selected is True
+                    and current_time < s.expires_at]
+            else:
+                candidates = [s for s in issuer._sessions.values() if s.binding.persona == "staff"]
+            if len(candidates) != 1:
+                async_fail()
+            session = candidates[0]
+        if (async_slot.get("session_id", session.binding.session_id) != session.binding.session_id
+                or not any(s is session for s in issuer._sessions.values())
+                or datetime.now(timezone.utc) >= session.expires_at):
+            async_fail()
+        issuer.require_staff(session, "proposal:create")
+        if login is not None:
+            await login.require_staff(session)
+            issuer.require_staff(session, "proposal:create")
+        return session
+
+    async def private_backend(body: dict[str, Any], session: _Session) -> dict[str, Any]:
+        # Absolute fixed private path; reuse the SAME finite serialized exchange.
+        response = await config.backend_exec_exchange("POST", "/_stage1/current-point-v3",
+            headers={"Authorization": "Bearer " + session.staff_bearer,
+                     "X-Current-Point-Capability": async_binding["capability"],
+                     "Cache-Control": "no-store"}, body=body, params=None)
+        if response.status_code != 200 or len(response.content) > 262144:
+            async_fail()
+        def unique(pairs):
+            result = {}
+            for k, v in pairs:
+                if k in result:
+                    async_fail()
+                result[k] = v
+            return result
+        try:
+            value = json.loads(response.content, object_pairs_hook=unique,
+                               parse_constant=lambda _: async_fail())
+        except (ValueError, UnicodeError):
+            async_fail()
+        if type(value) is not dict:
+            async_fail()
+        await async_staff()
+        return value
+
+    async def private_booking_backend(body: dict[str, Any], session: _Session) -> dict[str, Any]:
+        # Absolute fixed private path; reuse the SAME finite serialized exchange.
+        response = await config.backend_exec_exchange("POST", "/_stage1/request-booking-v1",
+            headers={"Authorization": "Bearer " + session.staff_bearer,
+                     "X-Request-Booking-Capability": booking_binding["capability"],
+                     "Cache-Control": "no-store"}, body=body, params=None)
+        if response.status_code != 200 or len(response.content) > 262144:
+            async_fail()
+        def unique(pairs):
+            result = {}
+            for k, v in pairs:
+                if k in result:
+                    async_fail()
+                result[k] = v
+            return result
+        try:
+            value = json.loads(response.content, object_pairs_hook=unique,
+                               parse_constant=lambda _: async_fail())
+        except (ValueError, UnicodeError):
+            async_fail()
+        if type(value) is not dict:
+            async_fail()
+        await async_staff()
+        return value
+
+    def valid_authoring(body: dict[str, Any]) -> bool:
+        manifest, p = async_binding["authoring_manifest"], body["authoring_provenance"]
+        return (set(manifest) == {"dispatch_id", "worker_role", "input_template_sha256", "response_filename", "max_raw_bytes"}
+            and type(p) is dict and set(p) == {"dispatch_id", "input_sha256", "output_path", "output_bytes", "output_sha256"}
+            and p["dispatch_id"] == manifest["dispatch_id"] and bool(async_slot.get("input_sha256"))
+            and p["input_sha256"] == async_slot["input_sha256"]
+            and type(p["output_path"]) is str and Path(p["output_path"]).name == manifest["response_filename"]
+            and type(manifest["max_raw_bytes"]) is int and 0 < body["raw_bytes"] <= manifest["max_raw_bytes"] <= 32768
+            and type(p["output_bytes"]) is int and p["output_bytes"] == body["raw_bytes"]
+            and p["output_sha256"] == body["raw_sha256"]
+            and (not async_slot.get("receive_claimed") or
+                 hashlib.sha256(canonical(p)).hexdigest() == async_slot.get("authoring_sha256")))
+
+    def valid_booking_authoring(body: dict[str, Any]) -> bool:
+        manifest, p = booking_binding["authoring_manifest"], body["authoring_provenance"]
+        return (set(manifest) == {"dispatch_id", "worker_role", "input_template_sha256", "response_filename", "max_raw_bytes"}
+            and type(p) is dict and set(p) == {"dispatch_id", "input_sha256", "output_path", "output_bytes", "output_sha256"}
+            and p["dispatch_id"] == manifest["dispatch_id"] and bool(async_slot.get("input_sha256"))
+            and p["input_sha256"] == async_slot["input_sha256"]
+            and type(p["output_path"]) is str and Path(p["output_path"]).name == manifest["response_filename"]
+            and type(manifest["max_raw_bytes"]) is int and 0 < body["raw_bytes"] <= manifest["max_raw_bytes"] <= 32768
+            and type(p["output_bytes"]) is int and p["output_bytes"] == body["raw_bytes"]
+            and p["output_sha256"] == body["raw_sha256"]
+            and (not async_slot.get("receive_claimed") or
+                 hashlib.sha256(canonical(p)).hexdigest() == async_slot.get("authoring_sha256")))
+
+    def checked_delivery(reply: dict[str, Any], current: dict[str, Any]) -> dict[str, Any]:
+        cap = async_slot["capture"]
+        d = reply.get("prepared_delivery")
+        keys = {"schema", "attempt_id", "implementation_generation", "policy_digest", "capture_id",
+                "frame_sha256", "server_binding_sha256", "request_id", "context_revision", "raw_sha256",
+                "compiled_plan_sha256", "authoring_provenance_sha256", "release_id", "released_at",
+                "capture_expires_at", "review", "provenance", "confirmation_payload",
+                "backend_proposal_captured_at", "backend_proposal_expires_at"}
+        if (set(reply) != {"capture_id", "state", "raw_sha256", "compiled_plan_sha256", "release_id",
+                          "release_sha256", "fixed_reason_code", "prepared_delivery"}
+                or reply.get("state") != "RELEASED" or type(d) is not dict or set(d) != keys):
+            async_fail()
+        if (any(type(d[k]) is not str or re.fullmatch(r"[a-f0-9]{64}", d[k]) is None for k in
+                ("policy_digest", "frame_sha256", "server_binding_sha256", "raw_sha256",
+                 "compiled_plan_sha256", "authoring_provenance_sha256"))
+                or type(d["context_revision"]) is not int or d["context_revision"] < 1
+                or any(type(d[k]) is not str or not 0 < len(d[k]) <= 256 for k in
+                       ("attempt_id", "implementation_generation", "capture_id", "request_id", "release_id"))):
+            async_fail()
+        raw = canonical(d)
+        if len(raw) > 65536 or hashlib.sha256(raw).hexdigest() != reply["release_sha256"]:
+            async_fail()
+        for key in ("attempt_id", "implementation_generation", "policy_digest"):
+            if d[key] != async_binding[key]:
+                async_fail()
+        for key in ("capture_id", "frame_sha256", "server_binding_sha256", "request_id", "context_revision"):
+            if d[key] != cap[key]:
+                async_fail()
+        if (d["schema"] != "emr4.current_point_v3_prepared_delivery.v1"
+                or d["capture_expires_at"] != cap["expires_at"]
+                or any(d[k] != reply[k] for k in ("capture_id", "raw_sha256", "compiled_plan_sha256", "release_id"))
+                or d["raw_sha256"] != async_slot.get("raw_sha256")
+                or d["authoring_provenance_sha256"] != async_slot.get("authoring_sha256")
+                or stamp(d["released_at"]) > stamp(cap["expires_at"])
+                or stamp(d["released_at"]) < stamp(cap["observed_at"])):
+            async_fail()
+        review, prov, payload = d["review"], d["provenance"], d["confirmation_payload"]
+        if (type(review) is not dict or set(review) != {"appointment_ref", "source_state_version",
+                "source_date", "source_start_local", "target_date", "target_start_local", "duration_minutes",
+                "requires_confirmation", "autonomy_tier", "warnings", "blocks"}
+                or type(prov) is not dict or set(prov) != {"method", "request_id", "context_revision",
+                "frame_sha256", "raw_sha256", "compiled_plan_sha256", "planner_source_sha256", "schema_sha256"}
+                or type(payload) is not dict or set(payload) != {"confirmed", "update_proposal",
+                "confirmed_warnings", "update_proposal_freshness_id", "signed_confirmation_evidence",
+                "signed_confirmation_evidence_required"}):
+            async_fail()
+        if (type(current) is not dict or current.get("status") != "Booked"
+                or type(review["source_state_version"]) is not int
+                or type(review["duration_minutes"]) is not int
+                or any(review[k] != current[v] for k, v in {
+                    "appointment_ref":"ref", "source_state_version":"state_version", "source_date":"date",
+                    "source_start_local":"start_local", "duration_minutes":"duration_minutes"}.items())
+                or review["requires_confirmation"] is not True or review["autonomy_tier"] != "proposal"
+                or review["blocks"] != [] or type(review["warnings"]) is not list
+                or any(type(w) is not str for w in review["warnings"])
+                or set(review["warnings"]) not in ({"staff_confirmation_required"},
+                                                    {"staff_confirmation_required", "no_reservation"})
+                or len(review["warnings"]) != len(set(review["warnings"]))):
+            async_fail()
+        try:
+            if date.fromisoformat(review["target_date"]).isoformat() != review["target_date"]:
+                async_fail()
+        except (ValueError, TypeError):
+            async_fail()
+        if (local_minute(review["target_start_local"]) != review["target_start_local"]
+                or type(prov["context_revision"]) is not int
+                or prov["method"] != "BUREAU_SYNTHETIC_MODEL_REPLY"
+                or prov["planner_source_sha256"] != async_binding["frame_source_sha256"]
+                or prov["schema_sha256"] != async_binding["schema_sha256"]
+                or any(prov[k] != d[k] for k in ("request_id", "context_revision", "frame_sha256",
+                                               "raw_sha256", "compiled_plan_sha256"))
+                or payload["confirmed"] is not False or payload["signed_confirmation_evidence_required"] is not True
+                or type(payload["update_proposal"]) is not dict
+                or type(payload["signed_confirmation_evidence"]) is not dict
+                or not payload["signed_confirmation_evidence"]):
+            async_fail()
+        evidence = payload["update_proposal"]
+        binding, command = evidence.get("move_binding"), evidence.get("command")
+        if (set(evidence) != {"intent", "safe", "requires_confirmation", "autonomy_tier", "summary", "command",
+                "warnings", "blocks", "conflict", "breaks_overlap", "patient_identity", "move_binding"}
+                or evidence.get("intent") != "update_appointment" or evidence.get("safe") is not True
+                or evidence.get("requires_confirmation") is not True or evidence.get("autonomy_tier") != "proposal"
+                or evidence.get("blocks") != [] or type(binding) is not dict or set(binding) != {
+                    "schema_version", "tenant_id", "actor_id", "role", "appointment_id", "source_state_version",
+                    "source_revision", "authority_generation", "practice_timezone", "captured_at", "expires_at",
+                    "target_date", "target_start_local", "target_start_time"}
+                or type(command) is not dict or set(command) != {"appointment_id", "patient_id", "patient_name_provisional",
+                    "practitioner_id", "appointment_type_id", "location_id", "appointment_date", "start_time_local",
+                    "start_time", "duration_minutes", "reason", "notes"}):
+            async_fail()
+        session = async_slot["session"]
+        if (binding["schema_version"] != "appointment.move_signed_binding.v1"
+                or binding["tenant_id"] != config.practice_id or binding["actor_id"] != session.binding.staff_user_id
+                or binding["role"] != "reception" or binding["practice_timezone"] != config.timezone
+                or any(type(binding[k]) is not int or binding[k] < 1 for k in
+                       ("source_state_version", "source_revision", "authority_generation"))
+                or binding["source_state_version"] != review["source_state_version"]
+                or binding["source_revision"] != review["source_state_version"]
+                or binding["appointment_id"] != review["appointment_ref"]
+                or binding["target_date"] != review["target_date"]
+                or local_minute(binding["target_start_local"]) != review["target_start_local"]
+                or binding["captured_at"] != d["backend_proposal_captured_at"]
+                or binding["expires_at"] != d["backend_proposal_expires_at"]
+                or command["appointment_id"] != review["appointment_ref"]
+                or command["appointment_date"] != review["target_date"]
+                or local_minute(command["start_time_local"]) != review["target_start_local"]
+                or command["start_time"] != binding["target_start_time"]
+                or type(command["duration_minutes"]) is not int or command["duration_minutes"] != review["duration_minutes"]
+                or command["patient_id"] != config.patient_id or command["practitioner_id"] != config.practitioner_id
+                or command["appointment_type_id"] != config.appointment_type_id or command["location_id"] != config.location_id
+                or type(payload["update_proposal_freshness_id"]) is not str or not payload["update_proposal_freshness_id"]
+                or type(payload["confirmed_warnings"]) is not list
+                or type(evidence["warnings"]) is not list
+                or any(type(w) is not dict or type(w.get("code")) is not str for w in evidence["warnings"])
+                or payload["confirmed_warnings"] != [w["code"] for w in evidence["warnings"]]):
+            async_fail()
+        if (stamp(d["backend_proposal_expires_at"]) - stamp(d["backend_proposal_captured_at"]) != timedelta(seconds=300)
+                or datetime.now(timezone.utc) >= stamp(d["backend_proposal_expires_at"])):
+            async_fail()
+        return deepcopy(d)
+
+    @app.post("/_stage1/current-point-v3")
+    async def async_handoff(request: Request):
+        local(request)
+        if (async_binding is None or request.url.query
+                or request.headers.get("origin") != config.listener_origin
+                or request.headers.get("content-type") != "application/json"
+                or not secrets.compare_digest(request.headers.get("x-current-point-capability", ""),
+                                              async_binding["capability"])):
+            raise HTTPException(status_code=404, detail="DEMO_UNAVAILABLE")
+        raw = bytearray()
+        async for chunk in request.stream():
+            raw.extend(chunk)
+            if len(raw) > 61440:
+                async_fail()
+        def unique(pairs):
+            result = {}
+            for key, value in pairs:
+                if key in result:
+                    async_fail()
+                result[key] = value
+            return result
+        try:
+            body = json.loads(raw, object_pairs_hook=unique, parse_constant=lambda _: async_fail())
+        except (ValueError, UnicodeError):
+            async_fail()
+        common = {"schema", "operation", "attempt_id", "implementation_generation", "policy_digest", "correlation_id"}
+        extra = {"capture":{"request"}, "receive":{"capture_id", "frame_sha256", "server_binding_sha256",
+                  "raw_bytes", "raw_sha256", "raw_utf8_base64", "authoring_provenance"},
+                 "status":{"capture_id", "frame_sha256"}, "cancel":{"capture_id", "frame_sha256", "reason"}}
+        if (type(body) is not dict or type(body.get("operation")) is not str or body["operation"] not in extra
+                or set(body) != common | extra[body["operation"]]
+                or body.get("schema") != "emr4.current_point_v3_private_handoff.v1"
+                or any(body[k] != async_binding[k] for k in ("attempt_id", "implementation_generation", "policy_digest"))
+                or type(body.get("correlation_id")) is not str or not 0 < len(body["correlation_id"]) <= 256):
+            async_fail()
+        operation = body["operation"]
+        session = await async_staff()
+        started_mono, started_wall = time.monotonic(), datetime.now(timezone.utc)
+        async with async_lock:
+            if operation == "capture":
+                if async_slot:
+                    async_fail()
+                async_slot.update(session=session, session_id=session.binding.session_id,
+                                  terminal=None, inflight=True)
+            else:
+                cap = async_slot.get("capture")
+                if (not cap or async_slot.get("terminal") is not None
+                        or any(body[k] != cap[k] for k in ("capture_id", "frame_sha256"))):
+                    async_fail()
+                if operation == "receive":
+                    if ((not capture_live() and not async_slot.get("installed"))
+                            or (async_slot.get("receive_claimed") and body["raw_sha256"] != async_slot.get("raw_sha256"))
+                            or body["server_binding_sha256"] != cap["server_binding_sha256"]
+                            or type(body["raw_bytes"]) is not int or not 0 < body["raw_bytes"] <= 32768
+                            or not async_binding["authoring_manifest"]
+                            or not valid_authoring(body)):
+                        async_fail()
+                    try:
+                        packet = base64.b64decode(body["raw_utf8_base64"], validate=True)
+                        packet.decode("utf-8", errors="strict")
+                    except (ValueError, UnicodeError, TypeError):
+                        async_fail()
+                    if len(packet) != body["raw_bytes"] or hashlib.sha256(packet).hexdigest() != body["raw_sha256"]:
+                        async_fail()
+                    async_slot.update(receive_claimed=True, raw_sha256=body["raw_sha256"],
+                        authoring_sha256=hashlib.sha256(canonical(body["authoring_provenance"])).hexdigest())
+                if operation == "status":
+                    if async_slot.get("status_claimed"):
+                        async_fail()
+                    async_slot["status_claimed"] = True
+                if operation == "cancel":
+                    if body["reason"] not in {"cancelled", "superseded"}:
+                        async_fail()
+                    if async_slot.get("cancel_state") is not None:
+                        async_fail()
+                    # Withdraw visibility/opportunity locally, not command truth.
+                    # Retain immutable installation and original pending key/body.
+                    async_slot["cancel_state"] = "PENDING"
+        try:
+            reply = await private_backend(body, session)
+        except (Exception, asyncio.CancelledError) as exc:
+            if operation == "cancel":
+                async with async_lock:
+                    async_slot["cancel_state"] = "UNCERTAIN"
+                # No resend, rollback or pre-claim-cancel assertion follows.
+                if not isinstance(exc, asyncio.CancelledError):
+                    raise HTTPException(status_code=503, detail="COMMAND_OUTCOME_UNCERTAIN") from None
+            raise
+        if operation == "capture":
+            if (set(reply) != {"capture_id", "frame_utf8_base64", "frame_bytes", "frame_sha256", "request_id",
+                              "context_revision", "observed_at", "expires_at", "server_binding_sha256", "state"}
+                    or reply["state"] != "CAPTURED" or type(reply["context_revision"]) is not int
+                    or reply["context_revision"] < 1 or type(reply["frame_bytes"]) is not int
+                    or not 0 < reply["frame_bytes"] <= 65536
+                    or stamp(reply["expires_at"]) - stamp(reply["observed_at"]) != timedelta(seconds=120)):
+                async_fail()
+            if (any(type(reply[k]) is not str or re.fullmatch(r"[a-f0-9]{64}", reply[k]) is None
+                    for k in ("frame_sha256", "server_binding_sha256"))
+                    or any(type(reply[k]) is not str or not 0 < len(reply[k]) <= 256
+                           for k in ("capture_id", "request_id"))):
+                async_fail()
+            try:
+                frame = base64.b64decode(reply["frame_utf8_base64"], validate=True)
+                frame.decode("utf-8", errors="strict")
+            except (ValueError, UnicodeError, TypeError):
+                async_fail()
+            if len(frame) != reply["frame_bytes"] or hashlib.sha256(frame).hexdigest() != reply["frame_sha256"]:
+                async_fail()
+            async with async_lock:
+                async_slot.update(capture=deepcopy(reply), mono_end=started_mono + 120,
+                                  wall_end=min(started_wall + timedelta(seconds=120), stamp(reply["expires_at"])))
+                if not capture_live():
+                    async_fail()
+                issuer.async_capture_ready = deepcopy(reply)
+                issuer.async_capture_event.set()
+            return no_store(reply)
+        if operation == "cancel":
+            try:
+                if (set(reply) != {"capture_id", "state", "raw_sha256", "compiled_plan_sha256", "release_id",
+                                  "release_sha256", "fixed_reason_code", "prepared_delivery"}
+                        or reply["capture_id"] != body["capture_id"]
+                        or reply["raw_sha256"] != async_slot.get("raw_sha256")):
+                    async_fail()
+                async with async_lock:
+                    if (async_slot.get("session") is not session
+                            or async_slot.get("session_id") != session.binding.session_id
+                            or not any(s is session for s in issuer._sessions.values())):
+                        async_fail()
+                    if reply["state"] == body["reason"].upper():
+                        if (reply["fixed_reason_code"] != "ATTEMPT_CANCELLED"
+                                or any(reply[k] is not None for k in ("compiled_plan_sha256", "release_id",
+                                                                    "release_sha256", "prepared_delivery"))):
+                            async_fail()
+                        async_slot["terminal"] = reply["state"]
+                        async_slot["cancel_state"] = reply["state"]
+                    elif reply["state"] == "CLAIMED":
+                        installed = async_slot.get("installed")
+                        delivery = reply["prepared_delivery"]
+                        if (reply["fixed_reason_code"] != "COMMAND_OUTCOME_UNCERTAIN"
+                                or installed is None or type(delivery) is not dict
+                                or canonical(delivery) != canonical(installed["delivery"])
+                                or reply["release_sha256"] != installed["release_sha256"]
+                                or hashlib.sha256(canonical(delivery)).hexdigest() != reply["release_sha256"]
+                                or reply["release_id"] != delivery["release_id"]
+                                or reply["compiled_plan_sha256"] != delivery["compiled_plan_sha256"]):
+                            async_fail()
+                        async_slot["cancel_state"] = "CLAIMED"
+                    else:
+                        async_fail()
+                    # Preserve exact installed reference/payload and original
+                    # pending command key/body. Return only backend disposition.
+                return no_store(reply)
+            except Exception:
+                async with async_lock:
+                    async_slot["cancel_state"] = "UNCERTAIN"
+                raise HTTPException(status_code=503, detail="COMMAND_OUTCOME_UNCERTAIN") from None
+        if reply.get("prepared_delivery") is None:
+            if (set(reply) != {"capture_id", "state", "raw_sha256", "compiled_plan_sha256", "release_id",
+                              "release_sha256", "fixed_reason_code", "prepared_delivery"}
+                    or reply["capture_id"] != async_slot["capture"]["capture_id"]
+                    or reply["state"] not in {"CAPTURED", "VERIFYING", "REJECTED", "CANCELLED", "SUPERSEDED", "EXPIRED", "CLOSED"}
+                    or reply["release_id"] is not None or reply["release_sha256"] is not None):
+                async_fail()
+            if reply["state"] in {"REJECTED", "CANCELLED", "SUPERSEDED", "EXPIRED", "CLOSED"}:
+                async with async_lock:
+                    async_slot["terminal"] = reply["state"]
+                    # Terminal projection state never erases claimed-command evidence.
+            return no_store(reply)
+        fresh = await refreshed(session)
+        d = checked_delivery(reply, fresh.get("appointment"))
+        await async_staff()
+        async with async_lock:
+            if async_slot.get("terminal") is not None or async_slot.get("cancel_state") is not None:
+                async_fail()
+            installed = async_slot.get("installed")
+            if installed is not None:
+                if installed["release_sha256"] != reply["release_sha256"] or session.proposal is not installed["proposal"]:
+                    async_fail()
+                if datetime.now(timezone.utc) >= installed["proposal"]["expires"]:
+                    async_fail()
+            else:
+                if not capture_live() or session.proposal is not None or session.uncertain is not None:
+                    async_fail()
+                now = datetime.now(timezone.utc)
+                proposal = {"family":"move", "ref":secrets.token_urlsafe(24), "payload":d["confirmation_payload"],
+                    "appointment_id":d["review"]["appointment_ref"],
+                    "source_state_version":d["review"]["source_state_version"],
+                    "expires":now + timedelta(minutes=4)}
+                async_slot["installed"] = {"release_sha256":reply["release_sha256"], "delivery":d,
+                    "proposal":proposal, "installed_at":now}
+                session.proposal = proposal
+                issuer.async_prepared_event.set()
+        return no_store(reply)
+
+    def prepared_projection(session: _Session, snapshot: dict[str, Any]) -> dict[str, Any] | None:
+        installed = async_slot.get("installed")
+        if (async_binding is None or installed is None or async_slot.get("terminal") is not None
+                or async_slot.get("cancel_state") is not None
+                or async_slot.get("session") is not session or session.uncertain is not None
+                or session.proposal is not installed["proposal"]
+                or datetime.now(timezone.utc) >= installed["proposal"]["expires"]):
+            return None
+        d, current = installed["delivery"], snapshot.get("appointment")
+        r = d["review"]
+        if (not current or any(r[k] != current[v] for k, v in {"appointment_ref":"ref",
+                "source_state_version":"state_version", "source_date":"date", "source_start_local":"start_local",
+                "duration_minutes":"duration_minutes"}.items())):
+            return None
+        return {"schema":"emr4.current_point_v3_prepared_move_review.v1",
+                "prepared_review_ref":installed["proposal"]["ref"], "review":deepcopy(r),
+                "provenance":deepcopy(d["provenance"])}
+
+
+    def booking_live(session):
+        installed=async_slot.get("installed")
+        return (booking_binding is not None and installed is not None
+            and async_slot.get("session") is session and async_slot.get("session_id")==session.binding.session_id
+            and any(s is session for s in issuer._sessions.values()) and datetime.now(timezone.utc)<session.expires_at
+            and async_slot.get("terminal") is None and async_slot.get("cancel_state") is None
+            and datetime.now(timezone.utc)<installed["review_end"]
+            and time.monotonic()<installed["mono_review_end"])
+
+    def checked_booking_delivery(reply,current):
+        cap=async_slot["capture"];d=reply.get("prepared_delivery")
+        keys={"schema","attempt_id","implementation_generation","policy_digest","capture_id","frame_sha256",
+            "server_binding_sha256","request_id","context_revision","raw_sha256","compiled_plan_sha256",
+            "authoring_provenance_sha256","release_id","released_at","capture_expires_at","selected_request_id",
+            "selected_request_version","intent","result","options","original_captured_at","original_offer_expires_at",
+            "write_performed","requires_human_choice","requires_confirmation"}
+        if (set(reply)!={"capture_id","state","raw_sha256","compiled_plan_sha256","release_id",
+            "release_sha256","fixed_reason_code","prepared_delivery"}
+            or reply["state"] not in {"RELEASED","SELECTED"} or type(d) is not dict or set(d)!=keys
+            or d["schema"]!="emr4.request_booking_prepared_delivery.v1"
+            or len(canonical(d))>65536 or hashlib.sha256(canonical(d)).hexdigest()!=reply["release_sha256"]
+            or d["intent"]!="request_booking" or d["result"] not in {"proposal_ready","clarification_required"}
+            or d["write_performed"] is not False or d["requires_human_choice"] is not True
+            or d["requires_confirmation"] is not True):
+            async_fail()
+        if (any(type(d[k]) is not str or re.fullmatch(r"[a-f0-9]{64}",d[k]) is None for k in
+            ("policy_digest","frame_sha256","server_binding_sha256","raw_sha256","compiled_plan_sha256","authoring_provenance_sha256"))
+            or type(d["context_revision"]) is not int or d["context_revision"]<1
+            or any(type(d[k]) is not str or not 0<len(d[k])<=256 for k in
+                ("attempt_id","implementation_generation","capture_id","request_id","release_id"))):
+            async_fail()
+        if (any(d[k]!=booking_binding[k] for k in ("attempt_id","implementation_generation","policy_digest"))
+            or any(d[k]!=cap[k] for k in ("capture_id","frame_sha256","server_binding_sha256","request_id","context_revision"))
+            or any(d[k]!=reply[k] for k in ("capture_id","raw_sha256","compiled_plan_sha256","release_id"))
+            or d["raw_sha256"]!=async_slot.get("raw_sha256")
+            or d["authoring_provenance_sha256"]!=async_slot.get("authoring_sha256")
+            or d["capture_expires_at"]!=cap["expires_at"]
+            or not stamp(cap["observed_at"])<=stamp(d["released_at"])<stamp(cap["expires_at"])
+            or d["original_captured_at"]!=stamp(cap["observed_at"]).isoformat()
+            or not stamp(d["original_captured_at"])<stamp(d["original_offer_expires_at"])<=stamp(d["original_captured_at"])+timedelta(minutes=5)
+            or datetime.now(timezone.utc)>=stamp(d["original_offer_expires_at"])
+            or current.get("request_id")!=d["selected_request_id"] or current.get("state")!="submitted"
+            or type(d["selected_request_version"]) is not int
+            or current.get("request_version")!=d["selected_request_version"]
+            or d["selected_request_id"]!=async_slot["session"].binding.request_id):
+            async_fail()
+        if (type(d["options"]) is not list or len(d["options"])>7
+            or d["result"]=="proposal_ready" and not d["options"]):
+            async_fail()
+        seen=set()
+        for option in d["options"]:
+            if (type(option) is not dict or set(option)!={"slot_handle","date","local_time","zone"}
+                or type(option["slot_handle"]) is not str or not 1<=len(option["slot_handle"])<=128
+                or option["slot_handle"] in seen or option["zone"]!=config.timezone
+                or not re.fullmatch(r"\d{4}-\d{2}-\d{2}",option["date"])
+                or not re.fullmatch(r"(?:[01]\d|2[0-3]):[0-5]\d",option["local_time"])):
+                async_fail()
+            seen.add(option["slot_handle"])
+        return deepcopy(d)
+
+    def prepared_booking_projection(session,snapshot):
+        if not booking_live(session) or session.uncertain is not None:
+            return None
+        installed=async_slot["installed"];d=installed["delivery"];r=snapshot["request"]
+        if (r.get("request_id")!=d["selected_request_id"] or r.get("request_version")!=d["selected_request_version"]
+            or r.get("state")!="submitted"):
+            return None
+        return {"schema":"emr4.request_booking_prepared_options.v1","prepared_options_ref":installed["options_ref"],
+            "request_version":d["selected_request_version"],"intent":"request_booking","result":d["result"],
+            "requires_human_choice":True,"requires_confirmation":True,"write_performed":False,
+            "options":[{k:o[k] for k in ("date","local_time","zone")} for o in d["options"]]}
+
+    async def select_prepared_booking(session,body):
+        if (set(body)!={"request_version","selected"} or type(body["selected"]) is not dict
+            or set(body["selected"])!={"date","local_time","zone"} or not booking_live(session)):
+            async_fail()
+        installed=async_slot["installed"];d=installed["delivery"]
+        if body["request_version"]!=d["selected_request_version"]:async_fail()
+        matches=[o for o in d["options"] if all(o[k]==body["selected"][k] for k in ("date","local_time","zone"))]
+        if len(matches)!=1:async_fail()
+        handle=matches[0]["slot_handle"]
+        async with async_lock:
+            if not booking_live(session) or session.uncertain is not None:async_fail()
+            if installed.get("selection") is not None:
+                if installed["selection"]!=handle or session.proposal is not installed["proposal"]:async_fail()
+                return {"safe":True,"proposal_ref":installed["proposal"]["ref"],
+                    "patient_label":config.patient_label,"practitioner_label":config.practitioner_label}
+            if installed.get("selecting") or session.proposal is not None:async_fail()
+            installed["selecting"]=True
+        cap=async_slot["capture"]
+        request={"schema":"emr4.request_booking_private_handoff.v1","operation":"select",
+            **{k:booking_binding[k] for k in ("attempt_id","implementation_generation","policy_digest")},
+            "correlation_id":async_slot["correlation_id"],"capture_id":cap["capture_id"],
+            "frame_sha256":cap["frame_sha256"],"slot_handle":handle}
+        proposal=await private_booking_backend(request,session)
+        payload=proposal.get("confirm_payload");marker=proposal.get("patient_request_binding")
+        command=proposal.get("command")
+        if (proposal.get("safe") is not True or type(payload) is not dict or set(payload)!={
+            "confirmed","create_proposal","confirmed_warnings","create_proposal_freshness_id",
+            "signed_confirmation_evidence","signed_confirmation_evidence_required"}
+            or payload["confirmed"] is not False or payload["signed_confirmation_evidence_required"] is not True
+            or type(payload["signed_confirmation_evidence"]) is not dict or not payload["signed_confirmation_evidence"]
+            or type(marker) is not dict or marker.get("purpose")!="stage1.patient_request.staff_create.v1"
+            or marker.get("request_id")!=session.binding.request_id or marker.get("request_version")!=d["selected_request_version"]
+            or marker.get("practice_id")!=config.practice_id or marker.get("staff_actor_id")!=session.binding.staff_user_id
+            or marker.get("captured_at")!=d["original_captured_at"]
+            or marker.get("offer_expires_at")!=d["original_offer_expires_at"]
+            or marker.get("selected_date")!=body["selected"]["date"]
+            or marker.get("selected_local_time")!=body["selected"]["local_time"]
+            or marker.get("selected_zone")!=body["selected"]["zone"]
+            or type(command) is not dict or command.get("patient_id")!=config.patient_id
+            or command.get("practitioner_id")!=config.practitioner_id
+            or command.get("appointment_date")!=body["selected"]["date"]
+            or local_minute(command.get("start_time_local"))!=body["selected"]["local_time"]
+            or payload["create_proposal"].get("patient_request_binding")!=marker
+            or payload["create_proposal"].get("command")!=command):
+            async_fail()
+        async with async_lock:
+            if not booking_live(session) or session.proposal is not None or session.uncertain is not None:async_fail()
+            retained={"family":"create","ref":secrets.token_urlsafe(24),"payload":deepcopy(payload),
+                "request_version":d["selected_request_version"],"expires":installed["review_end"],
+                "booking_selection":handle}
+            installed.update(selection=handle,proposal=retained,selecting=False)
+            session.proposal=retained
+        return {"safe":True,"proposal_ref":retained["ref"],
+            "patient_label":config.patient_label,"practitioner_label":config.practitioner_label}
+
+    @app.post("/_stage1/request-booking-v1")
+    async def booking_handoff(request: Request):
+        local(request)
+        if (booking_binding is None or request.url.query
+                or request.headers.get("origin") != config.listener_origin
+                or request.headers.get("content-type") != "application/json"
+                or not secrets.compare_digest(request.headers.get("x-request-booking-capability", ""),
+                                              booking_binding["capability"])):
+            raise HTTPException(status_code=404, detail="DEMO_UNAVAILABLE")
+        raw = bytearray()
+        async for chunk in request.stream():
+            raw.extend(chunk)
+            if len(raw) > 61440:
+                async_fail()
+        def unique(pairs):
+            result = {}
+            for key, value in pairs:
+                if key in result:
+                    async_fail()
+                result[key] = value
+            return result
+        try:
+            body = json.loads(raw, object_pairs_hook=unique, parse_constant=lambda _: async_fail())
+        except (ValueError, UnicodeError):
+            async_fail()
+        common = {"schema", "operation", "attempt_id", "implementation_generation", "policy_digest", "correlation_id"}
+        extra = {"capture":{"request"}, "receive":{"capture_id", "frame_sha256", "server_binding_sha256",
+                  "raw_bytes", "raw_sha256", "raw_utf8_base64", "authoring_provenance"},
+                 "status":{"capture_id", "frame_sha256"}, "cancel":{"capture_id", "frame_sha256", "reason"}}
+        if (type(body) is not dict or type(body.get("operation")) is not str or body["operation"] not in extra
+                or set(body) != common | extra[body["operation"]]
+                or body.get("schema") != "emr4.request_booking_private_handoff.v1"
+                or any(body[k] != booking_binding[k] for k in ("attempt_id", "implementation_generation", "policy_digest"))
+                or type(body.get("correlation_id")) is not str or not 0 < len(body["correlation_id"]) <= 256):
+            async_fail()
+        operation = body["operation"]
+        session = await async_staff()
+        started_mono, started_wall = time.monotonic(), datetime.now(timezone.utc)
+        if operation=="capture":
+            requested=body["request"]
+            if (type(requested) is not dict or requested.get("selected_appointment_id") is not None
+                or requested.get("selected_request_id")!=session.binding.request_id
+                or type(requested.get("selected_request_version")) is not int
+                or requested["selected_request_version"]<1):
+                async_fail()
+        async with async_lock:
+            if operation == "capture":
+                if async_slot:
+                    async_fail()
+                async_slot.update(session=session, session_id=session.binding.session_id,
+                                  terminal=None, inflight=True, correlation_id=body["correlation_id"])
+            else:
+                cap = async_slot.get("capture")
+                if (not cap or async_slot.get("terminal") is not None
+                        or any(body[k] != cap[k] for k in ("capture_id", "frame_sha256"))):
+                    async_fail()
+                if operation == "receive":
+                    if ((not capture_live() and not async_slot.get("installed"))
+                            or (async_slot.get("receive_claimed") and body["raw_sha256"] != async_slot.get("raw_sha256"))
+                            or body["server_binding_sha256"] != cap["server_binding_sha256"]
+                            or type(body["raw_bytes"]) is not int or not 0 < body["raw_bytes"] <= 32768
+                            or not booking_binding["authoring_manifest"]
+                            or not valid_booking_authoring(body)):
+                        async_fail()
+                    try:
+                        packet = base64.b64decode(body["raw_utf8_base64"], validate=True)
+                        packet.decode("utf-8", errors="strict")
+                    except (ValueError, UnicodeError, TypeError):
+                        async_fail()
+                    if len(packet) != body["raw_bytes"] or hashlib.sha256(packet).hexdigest() != body["raw_sha256"]:
+                        async_fail()
+                    async_slot.update(receive_claimed=True, raw_sha256=body["raw_sha256"],
+                        authoring_sha256=hashlib.sha256(canonical(body["authoring_provenance"])).hexdigest())
+                if operation == "status":
+                    if async_slot.get("status_claimed"):
+                        async_fail()
+                    async_slot["status_claimed"] = True
+                if operation == "cancel":
+                    if session.uncertain is not None:
+                        async_slot["cancel_state"]="UNCERTAIN"
+                        raise HTTPException(status_code=503,detail="COMMAND_OUTCOME_UNCERTAIN")
+                    if body["reason"] not in {"cancelled", "superseded"}:
+                        async_fail()
+                    if async_slot.get("cancel_state") is not None:
+                        async_fail()
+                    # Withdraw visibility/opportunity locally, not command truth.
+                    # Retain immutable installation and original pending key/body.
+                    async_slot["cancel_state"] = "PENDING"
+        try:
+            reply = await private_booking_backend(body, session)
+        except (Exception, asyncio.CancelledError) as exc:
+            if operation == "cancel":
+                async with async_lock:
+                    async_slot["cancel_state"] = "UNCERTAIN"
+                # No resend, rollback or pre-claim-cancel assertion follows.
+                if not isinstance(exc, asyncio.CancelledError):
+                    raise HTTPException(status_code=503, detail="COMMAND_OUTCOME_UNCERTAIN") from None
+            raise
+        if operation == "capture":
+            if (set(reply) != {"capture_id", "frame_utf8_base64", "frame_bytes", "frame_sha256", "request_id",
+                              "context_revision", "observed_at", "expires_at", "server_binding_sha256", "state"}
+                    or reply["state"] != "CAPTURED" or type(reply["context_revision"]) is not int
+                    or reply["context_revision"] < 1 or type(reply["frame_bytes"]) is not int
+                    or not 0 < reply["frame_bytes"] <= 65536
+                    or stamp(reply["expires_at"]) - stamp(reply["observed_at"]) != timedelta(seconds=120)):
+                async_fail()
+            if (any(type(reply[k]) is not str or re.fullmatch(r"[a-f0-9]{64}", reply[k]) is None
+                    for k in ("frame_sha256", "server_binding_sha256"))
+                    or any(type(reply[k]) is not str or not 0 < len(reply[k]) <= 256
+                           for k in ("capture_id", "request_id"))):
+                async_fail()
+            try:
+                frame = base64.b64decode(reply["frame_utf8_base64"], validate=True)
+                frame.decode("utf-8", errors="strict")
+            except (ValueError, UnicodeError, TypeError):
+                async_fail()
+            if len(frame) != reply["frame_bytes"] or hashlib.sha256(frame).hexdigest() != reply["frame_sha256"]:
+                async_fail()
+            async with async_lock:
+                async_slot.update(capture=deepcopy(reply), mono_end=started_mono + 120,
+                                  wall_end=min(started_wall + timedelta(seconds=120), stamp(reply["expires_at"])))
+                if not capture_live():
+                    async_fail()
+                issuer.async_capture_ready = deepcopy(reply)
+                issuer.async_capture_event.set()
+            return no_store(reply)
+        if operation=="cancel":
+            if (reply.get("state")!=body["reason"].upper() or reply.get("fixed_reason_code")!="ATTEMPT_CANCELLED"
+                or reply.get("prepared_delivery") is not None or reply.get("capture_id")!=body["capture_id"]):
+                async_slot["cancel_state"]="UNCERTAIN";async_fail()
+            async with async_lock:
+                async_slot["terminal"]=reply["state"];async_slot["cancel_state"]=reply["state"]
+                if session.uncertain is None:session.proposal=None
+            return no_store(reply)
+        if reply.get("prepared_delivery") is None:
+            if (set(reply) != {"capture_id", "state", "raw_sha256", "compiled_plan_sha256", "release_id",
+                              "release_sha256", "fixed_reason_code", "prepared_delivery"}
+                    or reply["capture_id"] != async_slot["capture"]["capture_id"]
+                    or reply["state"] not in {"CAPTURED", "VERIFYING", "REJECTED", "CANCELLED", "SUPERSEDED", "EXPIRED", "CLOSED"}
+                    or reply["release_id"] is not None or reply["release_sha256"] is not None):
+                async_fail()
+            if reply["state"] in {"REJECTED", "CANCELLED", "SUPERSEDED", "EXPIRED", "CLOSED"}:
+                async with async_lock:
+                    async_slot["terminal"] = reply["state"]
+                    # Terminal projection state never erases claimed-command evidence.
+            return no_store(reply)
+        fresh=await refreshed(session)
+        d=checked_booking_delivery(reply,fresh["request"])
+        await async_staff()
+        async with async_lock:
+            if async_slot.get("terminal") is not None or async_slot.get("cancel_state") is not None:async_fail()
+            installed=async_slot.get("installed")
+            if installed is not None:
+                if installed["release_sha256"]!=reply["release_sha256"] or canonical(installed["delivery"])!=canonical(d):
+                    async_fail()
+                if not booking_live(session):async_fail()
+            else:
+                if not capture_live() or session.proposal is not None or session.uncertain is not None:async_fail()
+                now=datetime.now(timezone.utc)
+                deadline=min(now+timedelta(minutes=4),stamp(d["original_offer_expires_at"]))
+                if now>=deadline:async_fail()
+                async_slot["installed"]={"release_sha256":reply["release_sha256"],"delivery":d,
+                    "installed_at":now,"review_end":deadline,
+                    "mono_review_end":time.monotonic()+min(240,(deadline-now).total_seconds()),
+                    "options_ref":secrets.token_urlsafe(24),"proposal":None,"selection":None}
+                issuer.async_prepared_event.set()
+        return no_store(reply)
+
     async def patient_read(session: _Session) -> dict[str, Any]:
         return await backend("GET", f"/patient-requests/{session.binding.request_id}", session, patient=True)
 
@@ -1202,7 +2648,7 @@ def create_stage1_demo_app(config: DemoConfig) -> tuple[FastAPI, DemoIssuer]:
             return {"request": request, "options": options, "original_booking": original}
         request = await staff_request(session)
         options: list[dict[str, Any]] = []
-        if request.get("state") == "submitted":
+        if request.get("state") == "submitted" and booking_binding is None:
             issuer.require_staff(session)
             capability = config.request_capabilities.get(session.binding.request_id)
             if not capability:
@@ -1221,7 +2667,7 @@ def create_stage1_demo_app(config: DemoConfig) -> tuple[FastAPI, DemoIssuer]:
         captured = issuer._initial_booking.get(session.binding.request_id)
         original = captured if (request.get("state") == "booked" and captured and
             captured["appointment_id"] == request.get("booked_appointment_id")) else None
-        return {"request": request, "options": options, "appointment": current,
+        return {"request": public_request(request), "options": options, "appointment": current,
                 "original_booking": original}
 
     async def record_initial_create(session: _Session, result: dict[str, Any]) -> dict[str, Any]:
@@ -1269,6 +2715,33 @@ def create_stage1_demo_app(config: DemoConfig) -> tuple[FastAPI, DemoIssuer]:
                  not isinstance(receipt.get("session_id"), str)) or
                 not correlation_valid or not audit_valid or not verified):
             raise HTTPException(status_code=409, detail="REQUEST_COMMAND_LINK_MISMATCH")
+        if booking_binding is not None:
+            installed=async_slot.get("installed")
+            d=installed["delivery"] if installed else None
+            witness=linked_request.get("booking_witness")
+            if (d is None or type(witness) is not dict or set(witness)!={
+                "schema_version","request_id","request_version","booked_command_id","booked_appointment_id",
+                "appointment_state_version","command_state","command_result_kind","command_response_status_code"}
+                or witness["schema_version"]!="emr4.staff_request_booking_witness.v1"
+                or witness["request_id"]!=session.binding.request_id
+                or witness["request_version"]!=d["selected_request_version"]+1
+                or type(witness["request_version"]) is not int
+                or linked_request.get("request_version")!=witness["request_version"]
+                or witness["booked_command_id"]!=receipt["correlation_id"]
+                or witness["booked_appointment_id"]!=result_id
+                or witness["appointment_state_version"]!=current["state_version"]
+                or type(witness["appointment_state_version"]) is not int
+                or witness["command_state"]!="completed" or witness["command_result_kind"]!="confirmed_write"
+                or type(witness["command_response_status_code"]) is not int
+                or not 200<=witness["command_response_status_code"]<300
+                or result.get("intent")!="confirm_create_appointment" or result.get("autonomy_tier")!="confirmed_write"
+                or result.get("requires_confirmation") is not False or result.get("blocks")!=[]
+                or result["appointment"].get("appointment_state_version")!=current["state_version"]):
+                raise HTTPException(status_code=409,detail="REQUEST_BOOKING_WITNESS_MISMATCH")
+            installed["original_receipt"]=deepcopy(receipt)
+            installed["verified_outcome"]={"schema":"emr4.request_booking_verified_outcome.v1",
+                "request_version":witness["request_version"],"appointment_ref":result_id,
+                "appointment_state_version":current["state_version"],"database_readback_verified":True}
         issuer._initial_booking[session.binding.request_id] = {
             "appointment_id": result_id, "date": current["date"],
             "start_local": current["start_local"], "zone": current["zone"],
@@ -1444,6 +2917,8 @@ def create_stage1_demo_app(config: DemoConfig) -> tuple[FastAPI, DemoIssuer]:
         if type(body) is not dict:
             raise HTTPException(status_code=400, detail="INTENT_BODY_INVALID")
         if body.get("kind") == "move":
+            if async_binding is not None:
+                async_fail()
             if (session.binding.persona != "staff" or set(body) != {
                     "kind", "words", "appointment_ref", "source_state_version"}
                     or type(body["words"]) is not str or not body["words"].strip()
@@ -1466,18 +2941,27 @@ def create_stage1_demo_app(config: DemoConfig) -> tuple[FastAPI, DemoIssuer]:
                           "surface_id": "diary-main", "correlation_id": correlation_id,
                           "data_class": "authored_synthetic",
                           "selected_appointment_id": current["ref"],
-                          "planner_mode": "deterministic"})
+                          "planner_mode": "isolated_vertex"})
             except _StaffMockChangedAfterDispatch:
                 raise HTTPException(status_code=403, detail="MOCK_STAFF_SESSION_EXPIRED") from None
             issuer.session_for(request)
             issuer.require_staff(session, "proposal:create")
-            fields = project_bureau_move(reply, current, correlation_id)
+            fields = project_synthetic_bureau_point_move(reply, current, correlation_id)
             return no_store({"schema": "emr4.stage1_word_interpretation.v1", "kind": "move",
-                "method": "BUREAU_DETERMINISTIC", "status": "PROPOSED" if fields else "CLARIFICATION",
+                "method": "BUREAU_SYNTHETIC_MODEL_REPLY", "status": "PROPOSED" if fields else "CLARIFICATION",
                 "fields": fields or {}, "missing": [] if fields else ["target_date", "target_start_local"],
                 "selection": {"appointment_ref": current["ref"],
                               "source_state_version": current["state_version"]},
-                "message": "BUREAU_REVIEWED_MOVE" if fields else "CLARIFY_SELECTED_MOVE"})
+                "synthetic_carrier": ({"producer": "authored_synthetic_model_shaped_reply",
+                    "provider_calls": reply["provider_calls"],
+                    "raw_response_sha256": reply["runtime_audit_ref"].split(":", 1)[1],
+                    "compiled_plan_sha256": reply["review"]["plan_hash"],
+                    "context_revision": reply["context_revision"],
+                    "source_state_version": current["state_version"],
+                    "duration_minutes": current["duration_minutes"],
+                    "planner_source_sha256": "45a28b40611508910fd338f775644ff4863fd0ff84609040cb697d157a09b2d8"}
+                    if fields else None),
+                "message": "SYNTHETIC_CARRIER_REVIEWED_MOVE" if fields else "CLARIFY_SELECTED_MOVE"})
         if set(body) != {"kind", "words"} or body.get("kind") != "request":
             raise HTTPException(status_code=400, detail="INTENT_BODY_INVALID")
         try:
@@ -1586,7 +3070,14 @@ def create_stage1_demo_app(config: DemoConfig) -> tuple[FastAPI, DemoIssuer]:
                 "reconcile"}:
             issuer.require_staff(session, "proposal:create")
         if action == "refresh":
-            return no_store({**(await refreshed(session)), "uncertain": session.uncertain is not None})
+            snapshot = await refreshed(session)
+            result = {**snapshot, "uncertain": session.uncertain is not None}
+            if async_binding is not None:
+                result["prepared_move_review"] = prepared_projection(session, snapshot)
+            if booking_binding is not None:
+                result["prepared_request_booking"]=prepared_booking_projection(session,snapshot)
+                result["options"]=(result["prepared_request_booking"] or {}).get("options",[])
+            return no_store(result)
         if action == "diary":
             # Fixed synthetic Receptionist only. Startup verifies this user's
             # bearer role and seeds the same active user in the owned database.
@@ -1714,6 +3205,12 @@ def create_stage1_demo_app(config: DemoConfig) -> tuple[FastAPI, DemoIssuer]:
             response = no_store(snapshot)
             session.uncertain = None
             return response
+        if booking_binding is not None and action=="propose_move":
+            async_fail()
+        if booking_binding is not None and action=="propose_create":
+            return no_store(await select_prepared_booking(session,body))
+        if async_binding is not None and action in {"propose_move", "propose_create"}:
+            async_fail()
         if action == "propose_create":
             if set(body) != {"request_version", "selected"}:
                 raise HTTPException(status_code=400, detail="CREATE_BODY_INVALID")
@@ -1756,12 +3253,28 @@ def create_stage1_demo_app(config: DemoConfig) -> tuple[FastAPI, DemoIssuer]:
                     or body["proposal_ref"] != proposal["ref"]
                     or datetime.now(timezone.utc) >= proposal["expires"]):
                 raise HTTPException(status_code=409, detail="PROPOSAL_STALE")
+            if (async_binding is not None and async_slot.get("installed") is not None
+                    and (async_slot.get("terminal") is not None or async_slot.get("cancel_state") is not None or
+                         session.proposal is not async_slot["installed"]["proposal"])):
+                async_fail()
+            if booking_binding is not None:
+                installed=async_slot.get("installed")
+                if (not booking_live(session) or family!="create" or installed["proposal"] is not proposal
+                    or installed["selection"]!=proposal.get("booking_selection")):
+                    async_fail()
             # The signed payload is backend-authored. Only the deliberate human
             # confirmation flag changes; all domain checks occur in backend.
             payload = {**proposal["payload"], "confirmed": True}
             route = "/proposals/create/confirm" if family == "create" else "/proposals/update/confirm"
             pending = {"family": family, "key": key, "payload": payload,
                 "appointment_id": proposal.get("appointment_id")}
+            if (async_binding is not None or booking_binding is not None) and async_slot.get("installed") is not None:
+                # Retain before first await: cancellation may race dispatch,
+                # and only this original key/body can reconcile a claimed command.
+                if (async_slot.get("session") is not session
+                        or async_slot.get("session_id") != session.binding.session_id):
+                    async_fail()
+                session.uncertain = pending
             try:
                 result = await backend("POST", route, session, body=payload, key=key)
             except (httpx.TimeoutException, httpx.TransportError):
@@ -1793,10 +3306,41 @@ def create_stage1_demo_app(config: DemoConfig) -> tuple[FastAPI, DemoIssuer]:
                   issuer._initial_booking.get(session.binding.request_id, {}).get(
                       "appointment_id") == result_id):
                 issuer._live_outcomes["move_confirmed_verified"] = True
-            response = no_store({"outcome": "committed", "appointment": current})
+            command_receipt = None
+            if family=="create" and booking_binding is not None:
+                command_receipt=deepcopy(async_slot["installed"]["verified_outcome"])
+            if family == "move":
+                if (result.get("intent") != "confirm_update_appointment"
+                        or result.get("requires_confirmation") is not False
+                        or result.get("autonomy_tier") != "confirmed_write"
+                        or result.get("blocks") != []
+                        or type(result["appointment"].get("appointment_state_version")) is not int
+                        or result["appointment"]["appointment_state_version"] != current["state_version"]):
+                    raise HTTPException(status_code=409, detail="MOVE_COMMAND_RECEIPT_MISMATCH")
+                command_receipt = {"intent": result["intent"],
+                    "autonomy_tier": result["autonomy_tier"],
+                    "appointment_ref": result_id, "state_version": current["state_version"],
+                    "database_readback_verified": True}
+            response = no_store({"outcome": "committed", "appointment": current,
+                                 "command_receipt": command_receipt})
             session.uncertain = None
             session.proposal = None
             return response
         raise HTTPException(status_code=404, detail="ACTION_UNAVAILABLE")
 
+    @app.on_event("shutdown")
+    async def clear_async_handoff() -> None:
+        if async_binding is not None or booking_binding is not None:
+            session = async_slot.get("session")
+            installed = async_slot.get("installed")
+            if session is not None and installed is not None and session.proposal is installed["proposal"]:
+                session.proposal = None
+            async_slot.clear()
+            if async_binding is not None:async_binding.clear()
+            if booking_binding is not None:booking_binding.clear()
+            issuer.async_capture_ready = None
+            issuer.async_capture_event.clear()
+            issuer.async_prepared_event.clear()
+
+    issuer.async_close_handoff = clear_async_handoff
     return app, issuer
