@@ -8500,3 +8500,185 @@ def test_committed_site_strict_regular_nul_membership_boundary(raw):
     with pytest.raises(bounded_g1b.BoundedG1BError) as err:
         _committed_site_parse_membership(raw)
     assert err.value.reason_code == "bounded_g4_current_site_committed_baseline_observed_membership_format"
+
+
+# Location family source checks. These exercise policy and immutable ordinary
+# source joins only; they do not run the app, database, browser or real Git.
+_LOCATION_CREATE_CANDIDATE = Path("C:/Users/there/EMR4-tools/practice-location-create-successor-control-source-v1")
+
+
+def _location_create_descriptor():
+    b=bounded_g1b
+    return b._g4_owner_bootstrap_descriptor(b.G4_PRACTICE_LOCATION_CREATE_SCHEMA)
+
+
+def _location_create_binding():
+    b=bounded_g1b; d=_location_create_descriptor()
+    return {"schema_version":b.G4_PRACTICE_LOCATION_CREATE_SCHEMA,
+            "product_vector":d["vector"],"mapping_review":d["mapping"]}
+
+
+def test_location_create_registry_and_unknown_version_preserve_old_families():
+    b=bounded_g1b; d=_location_create_descriptor()
+    assert d is b.G4_PRACTICE_LOCATION_CREATE_DESCRIPTOR and d["version"]==35
+    assert b._g4_owner_bootstrap_descriptor(b.G4_PRACTICE_LOCATION_CREATE_SCOPE_SCHEMA,scope=True) is d
+    assert b._g4_owner_bootstrap_descriptor(b.G4_CURRENT_SITE_COMMITTED_BASELINE_SCHEMA) is b.G4_CURRENT_SITE_COMMITTED_BASELINE_DESCRIPTOR
+    assert b.G4_CURRENT_SITE_COMMITTED_BASELINE_DESCRIPTOR["version"]==34
+    q={"schema_version":b.G4_PRACTICE_LOCATION_CREATE_SCHEMA+"-unknown",
+       "operation_kind":"implement_g4_stage1_successor","stage":"apply","repair_sha256":{}}
+    assert b._routes_g4_owner_bootstrap_binding(q) and not b._is_g4_owner_bootstrap_binding(q)
+    with pytest.raises(b.BoundedG1BError) as err:
+        b.operation_paths(q["operation_kind"],q)
+    assert err.value.reason_code=="bounded_g4_owner_bootstrap_binding_kind"
+
+
+@pytest.mark.parametrize("stage",["enable","admit","apply"])
+def test_location_create_exact_phase_owned_paths(stage):
+    b=bounded_g1b; d=_location_create_descriptor()
+    kind={"enable":"enable_g4_stage1_successor","admit":b.G4_OWNER_BOOTSTRAP_ADMIT_KIND,
+          "apply":"implement_g4_stage1_successor"}[stage]
+    paths=d["control"] if stage=="enable" else d["apply_paths"] if stage=="apply" else frozenset()
+    q={"schema_version":b.G4_PRACTICE_LOCATION_CREATE_SCHEMA,"operation_kind":kind,
+       "stage":stage,"repair_sha256":dict.fromkeys(paths,{})}
+    assert b.operation_paths(kind,q)==paths
+    assert d["apply_paths"]==b.G4_PRACTICE_LOCATION_CREATE_PRODUCT_PATHS
+    assert d["apply_paths"]==b.G4_PRACTICE_LOCATION_CREATE_ADD_PATHS|b.G4_PRACTICE_LOCATION_CREATE_REPLACE_PATHS
+    if stage=="admit":
+        b._g4_owner_bootstrap_require_entrypoint(q,"recovery_preflight","development")
+        with pytest.raises(b.BoundedG1BError) as err:
+            b._g4_owner_bootstrap_require_entrypoint(q,"publication","development")
+        assert err.value.reason_code=="bounded_g4_owner_bootstrap_admit_entrypoint"
+    if paths:
+        q["repair_sha256"].pop(sorted(paths)[0])
+        with pytest.raises(b.BoundedG1BError) as err:
+            b.operation_paths(kind,q)
+        assert err.value.reason_code=="bounded_g4_owner_bootstrap_changed_paths"
+
+
+@pytest.mark.parametrize("mutation",[None,"runtime","voice","outside_product"])
+def test_location_create_scope_keeps_runtime_closed(mutation):
+    b=bounded_g1b
+    scope=json.loads((_LOCATION_CREATE_CANDIDATE/"after"/b.G4_STAGE1_SUCCESSOR_SCOPE).read_bytes())
+    if mutation is None:
+        assert b.validate_g4_owner_bootstrap_scope(scope)==scope["source_sha256"]
+        assert scope["admission_grants_runtime_authority"] is False
+        return
+    if mutation=="runtime": scope["admission_grants_runtime_authority"]=True
+    elif mutation=="voice": scope["voice_activation"]=True
+    else: scope["allowed_paths"].append("app/services/clinical_authority.py")
+    with pytest.raises(b.BoundedG1BError) as err:
+        b.validate_g4_owner_bootstrap_scope(scope)
+    assert err.value.reason_code=="bounded_g4_owner_bootstrap_scope_boundary"
+
+
+def test_location_create_genuine_two_vector_and_source_joins():
+    b=bounded_g1b; d=_location_create_descriptor()
+    ui,review=b._g4_owner_bootstrap_external_inputs(_practitioner_create_read,_location_create_binding())
+    assert ui==b.G4_PRACTICE_LOCATION_CREATE_EXPECTED_UI_VECTOR
+    assert review==b.G4_PRACTICE_LOCATION_CREATE_EXPECTED_UI_REVIEW
+    assert set(d["before_sha"])==set(d["product_sha"])
+    assert {p for p,v in d["before_sha"].items() if v is None}==b.G4_PRACTICE_LOCATION_CREATE_ADD_PATHS
+    assert d["product_rows"]["stage1_practice_location_browser.py"]["path"].endswith("/revision-v2/after/site/stage1_practice_location_browser.py")
+
+
+@pytest.mark.parametrize("which",["BACKEND","UI"])
+@pytest.mark.parametrize("mutation",["author","independent","blocker","runtime","admission","missing_authority"])
+def test_location_create_review_semantics_reject_even_after_repin(monkeypatch,which,mutation):
+    b=bounded_g1b; d=_location_create_descriptor()
+    expected_name="G4_PRACTICE_LOCATION_CREATE_EXPECTED_"+which+"_REVIEW"
+    row_name="G4_PRACTICE_LOCATION_CREATE_"+which+"_REVIEW"
+    review=copy.deepcopy(getattr(b,expected_name))
+    if mutation=="author": review["reviewer_agent"]="/root/enable_preparer_actual_semantic_review_sol_xhigh"
+    elif mutation=="independent": review["independent"]=False
+    elif mutation=="blocker": review["blocking_findings"]=["synthetic"]
+    elif mutation=="runtime": review["authority"]["runtime_authorized"]=True
+    elif mutation=="admission": review["authority"]["admission_transition_authorized"]=True
+    else: review["authority"].pop("runtime_authorized")
+    raw=b._canonical(review); row={**getattr(b,row_name),"bytes":len(raw),"sha256":b._sha(raw)}
+    monkeypatch.setattr(b,expected_name,review); monkeypatch.setattr(b,row_name,row)
+    # Repin the active opinion descriptor/cache and its UI dependency. The
+    # semantic authority predicate must reject before later provenance joins.
+    if which=="UI": monkeypatch.setitem(d,"mapping",{k:row[k] for k in ("path","sha256")})
+    else:
+        ui=copy.deepcopy(b.G4_PRACTICE_LOCATION_CREATE_EXPECTED_UI_VECTOR)
+        ui["backend_dependency"]["independent_source_mapping_review"]=row
+        ui_raw=b._canonical(ui); ui_row={**b.G4_PRACTICE_LOCATION_CREATE_UI_VECTOR,"bytes":len(ui_raw),"sha256":b._sha(ui_raw)}
+        monkeypatch.setattr(b,"G4_PRACTICE_LOCATION_CREATE_EXPECTED_UI_VECTOR",ui)
+        monkeypatch.setattr(b,"G4_PRACTICE_LOCATION_CREATE_UI_VECTOR",ui_row)
+        monkeypatch.setitem(d,"vector",{k:ui_row[k] for k in ("path","sha256")})
+    def read(path,digest):
+        if path==Path(row["path"]): assert digest==row["sha256"]; return raw
+        if which=="BACKEND" and path==Path(ui_row["path"]): assert digest==ui_row["sha256"]; return ui_raw
+        return _practitioner_create_read(path,digest)
+    with pytest.raises(b.BoundedG1BError) as err:
+        b._g4_owner_bootstrap_external_inputs(read,_location_create_binding())
+    assert err.value.reason_code=="bounded_g4_practice_location_create_independent_source"
+
+
+@pytest.mark.parametrize("selected",["BACKEND_VECTOR","BACKEND_REVIEW","UI_VECTOR","UI_REVIEW","BACKEND_INVERSE","UI_INVERSE"]
+    +[("after",p) for p in sorted(bounded_g1b.G4_PRACTICE_LOCATION_CREATE_PRODUCT_PATHS)]
+    +[("before",p) for p in sorted(bounded_g1b.G4_PRACTICE_LOCATION_CREATE_BEFORE_ROWS)])
+def test_location_create_each_immutable_source_rejects_tamper(selected):
+    b=bounded_g1b
+    if type(selected) is tuple:
+        kind,p=selected; row=(b.G4_PRACTICE_LOCATION_CREATE_PRODUCT_ROWS if kind=="after" else b.G4_PRACTICE_LOCATION_CREATE_BEFORE_ROWS)[p]
+    else: row=getattr(b,"G4_PRACTICE_LOCATION_CREATE_"+selected)
+    def read(path,digest):
+        raw=_practitioner_create_read(path,digest)
+        return raw+b" " if path==Path(row["path"]) else raw
+    with pytest.raises(b.BoundedG1BError) as err:
+        b._g4_owner_bootstrap_external_inputs(read,_location_create_binding())
+    assert err.value.reason_code=="bounded_g4_practice_location_create_external_source"
+
+
+@pytest.mark.parametrize("reviewer",["/root","/root/current_site_enable_adaptation_sol_xhigh","/root/enable_preparer_actual_semantic_review_sol_xhigh","/synthetic/independent-reviewer"])
+def test_location_create_subject_judgment_excludes_implementation_authors(reviewer):
+    b=bounded_g1b; d=_location_create_descriptor(); subject="a"*64
+    path=d["root"]/"entry-admission-v1/independent-apply-development-subject-review-v1.json"
+    review={"schema":"emr4.g4_operation_review.v1","status":"PASS",
+      "verdict":"PASS_G4_STAGE1_OWNER_BOOTSTRAP_EXACT_ADMISSION_SUBJECT","subject_sha256":subject,
+      "independent":True,"implementation_authorship":False,"blocking_findings":[],
+      "reviewer_agent":reviewer,"stage":"apply","phase":"development"}
+    raw=b._canonical(review); row={"path":path.as_posix(),"sha256":b._sha(raw)}
+    def read(actual,digest): assert actual==path and digest==b._sha(raw); return raw
+    if reviewer in d["excluded_reviewers"]:
+        with pytest.raises(b.BoundedG1BError) as err:
+            b._g4_owner_bootstrap_subject_review(read,row,b.G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT,subject,"apply","development",b.G4_PRACTICE_LOCATION_CREATE_SCHEMA)
+        assert err.value.reason_code=="bounded_g4_owner_bootstrap_independent_subject"
+    else:
+        assert b._g4_owner_bootstrap_subject_review(read,row,b.G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT,subject,"apply","development",b.G4_PRACTICE_LOCATION_CREATE_SCHEMA)==review
+
+
+@pytest.mark.parametrize("mutation",["base","control","owned","before","after","size","predecessor","reviewers"])
+def test_location_create_descriptor_drift_refuses(monkeypatch,mutation):
+    b=bounded_g1b; d=_location_create_descriptor(); p=sorted(b.G4_PRACTICE_LOCATION_CREATE_REPLACE_PATHS)[0]
+    changes={"base":("base",b.G4_CURRENT_SITE_COMMITTED_BASELINE_BASE),
+      "control":("control",d["control"]|{b.AGENTS}),"owned":("apply_paths",d["apply_paths"]-{p}),
+      "before":("before_sha",{**d["before_sha"],p:None}),"after":("product_sha",{**d["product_sha"],p:"a"*64}),
+      "size":("product_bytes",{**d["product_bytes"],p:1}),
+      "predecessor":("preimages",{**d["preimages"],b.G4_STAGE1_SUCCESSOR_SCOPE:"a"*64}),
+      "reviewers":("excluded_reviewers",{""})}
+    field,value=changes[mutation];monkeypatch.setitem(d,field,value)
+    q={"schema_version":b.G4_PRACTICE_LOCATION_CREATE_SCHEMA,"operation_kind":"implement_g4_stage1_successor",
+       "stage":"apply","repair_sha256":dict.fromkeys(b.G4_PRACTICE_LOCATION_CREATE_PRODUCT_PATHS,{})}
+    with pytest.raises(b.BoundedG1BError) as err:
+        b.operation_paths(q["operation_kind"],q)
+    assert err.value.reason_code=="bounded_g4_practice_location_create_path_boundary"
+
+
+@pytest.mark.parametrize("mutation",["promoted_history","wrong_before","omitted_product"])
+def test_location_create_ui_mapping_rejects_semantic_repin(monkeypatch,mutation):
+    b=bounded_g1b;d=_location_create_descriptor();ui=copy.deepcopy(b.G4_PRACTICE_LOCATION_CREATE_EXPECTED_UI_VECTOR)
+    if mutation=="promoted_history": ui["changes"][0]["after"]={**ui["changes"][0]["after"],"path":ui["source_root"]+"/after/site/stage1_practice_location_browser.py"}
+    elif mutation=="wrong_before": ui["changes"][1]["before"]=None
+    else: ui["changes"].pop()
+    raw=b._canonical(ui);row={**b.G4_PRACTICE_LOCATION_CREATE_UI_VECTOR,"bytes":len(raw),"sha256":b._sha(raw)}
+    monkeypatch.setattr(b,"G4_PRACTICE_LOCATION_CREATE_EXPECTED_UI_VECTOR",ui)
+    monkeypatch.setattr(b,"G4_PRACTICE_LOCATION_CREATE_UI_VECTOR",row)
+    monkeypatch.setitem(d,"vector",{k:row[k] for k in ("path","sha256")})
+    def read(path,digest):
+        if path==Path(row["path"]): assert digest==row["sha256"];return raw
+        return _practitioner_create_read(path,digest)
+    with pytest.raises(b.BoundedG1BError) as err:
+        b._g4_owner_bootstrap_external_inputs(read,_location_create_binding())
+    assert err.value.reason_code=="bounded_g4_practice_location_create_product_mapping"
