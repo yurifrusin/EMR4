@@ -8027,3 +8027,476 @@ def test_current_site_combined_subject_review_independence(reviewer):
         assert b._g4_owner_bootstrap_subject_review(read, row, b.G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT,
             subject, stage, phase, b.G4_CURRENT_SITE_BASELINE_SCHEMA) == review
     assert seen == [path]
+
+
+# Committed-preimage successor focused SOURCE cases; no execution claimed.
+_COMMITTED_SITE_CANDIDATE = Path("C:/Users/there/EMR4-tools/reception-one-current-site-baseline-committed-preimages-source-v2")
+
+
+def _committed_site_descriptor():
+    return bounded_g1b._g4_owner_bootstrap_descriptor(bounded_g1b.G4_CURRENT_SITE_COMMITTED_BASELINE_SCHEMA)
+
+
+def _committed_site_binding():
+    b = bounded_g1b
+    d = _committed_site_descriptor()
+    return {"schema_version": b.G4_CURRENT_SITE_COMMITTED_BASELINE_SCHEMA,
+            "product_vector": d["vector"], "mapping_review": d["mapping"]}
+
+
+def test_committed_site_registry_cold_unknown_and_v32_preserved(monkeypatch):
+    b = bounded_g1b
+    d = _committed_site_descriptor()
+    assert b.G4_CURRENT_SITE_COMMITTED_BASELINE_TEMPLATE_INERT is False
+    assert d is b.G4_CURRENT_SITE_COMMITTED_BASELINE_DESCRIPTOR and d["version"] == 34
+    assert b._g4_owner_bootstrap_descriptor(b.G4_CURRENT_SITE_COMMITTED_BASELINE_SCOPE_SCHEMA, scope=True) is d
+    assert d["base"] == {"commit": "8e618e7ae5993992c3a024d2bd80cb9ecb073dc2", "tree": "4e1269047fb83328be32f5ea73d05f0308496728"}
+    assert b.G4_CURRENT_SITE_COMMITTED_BASELINE_MAPPING_BASE == {"commit": "fd41e1b63113e9dd6ef9bf9409a3a7e36ee52cd5", "tree": "04b5c0ddc28a53a7933e04fadd479d4e9c87da73"}
+    assert b._g4_owner_bootstrap_descriptor(b.G4_PRACTITIONER_CREATE_SCHEMA) is b.G4_PRACTITIONER_CREATE_DESCRIPTOR
+    assert b.G4_PRACTITIONER_CREATE_DESCRIPTOR["version"] == 32
+    assert b._g4_owner_bootstrap_descriptor(b.G4_CURRENT_SITE_BASELINE_SCHEMA) is b.G4_CURRENT_SITE_BASELINE_DESCRIPTOR
+    assert b.G4_CURRENT_SITE_BASELINE_DESCRIPTOR["version"] == 33
+    def forbidden(*args):
+        raise AssertionError("cold or unknown version reached external read")
+    monkeypatch.setattr(b, "G4_CURRENT_SITE_COMMITTED_BASELINE_TEMPLATE_INERT", True)
+    with pytest.raises(b.BoundedG1BError) as err:
+        b._g4_owner_bootstrap_external_inputs(forbidden, _committed_site_binding())
+    assert err.value.reason_code == "bounded_g4_current_site_committed_baseline_source_inert"
+    q = {"schema_version": b.G4_CURRENT_SITE_COMMITTED_BASELINE_SCHEMA + "-unknown", "operation_kind": "implement_g4_stage1_successor", "stage": "apply", "repair_sha256": {}}
+    assert b._routes_g4_owner_bootstrap_binding(q) and not b._is_g4_owner_bootstrap_binding(q)
+    with pytest.raises(b.BoundedG1BError) as err:
+        b.operation_paths(q["operation_kind"], q)
+    assert err.value.reason_code == "bounded_g4_owner_bootstrap_binding_kind"
+
+
+@pytest.mark.parametrize("stage", ["enable", "admit", "apply"])
+def test_committed_site_stage_paths_and_admission_entrypoint(stage):
+    b = bounded_g1b
+    d = _committed_site_descriptor()
+    kind = {"enable": "enable_g4_stage1_successor", "admit": b.G4_OWNER_BOOTSTRAP_ADMIT_KIND, "apply": "implement_g4_stage1_successor"}[stage]
+    paths = d["control"] if stage == "enable" else d["apply_paths"] if stage == "apply" else frozenset()
+    q = {"schema_version": b.G4_CURRENT_SITE_COMMITTED_BASELINE_SCHEMA, "operation_kind": kind, "stage": stage, "repair_sha256": dict.fromkeys(paths, {})}
+    assert b.operation_paths(kind, q) == paths
+    assert len(paths) == {"enable": 3, "admit": 0, "apply": 16}[stage]
+    assert d["apply_paths"] == b.G4_CURRENT_SITE_COMMITTED_BASELINE_APPLY_PATHS
+    assert b.G4_CURRENT_SITE_COMMITTED_BASELINE_PRODUCT_PATHS == frozenset(b.G4_CURRENT_SITE_COMMITTED_BASELINE_ORDERED_PATHS)
+    assert b.G4_CURRENT_SITE_COMMITTED_BASELINE_PRODUCT_PATHS == d["apply_paths"] | b.G4_CURRENT_SITE_COMMITTED_BASELINE_UNCHANGED_PATHS
+    assert len(b.G4_CURRENT_SITE_COMMITTED_BASELINE_UNCHANGED_PATHS) == 4
+    assert not d["apply_paths"] & b.G4_CURRENT_SITE_COMMITTED_BASELINE_UNCHANGED_PATHS
+    if stage == "admit":
+        b._g4_owner_bootstrap_require_entrypoint(q, "recovery_preflight", "development")
+        for entrypoint, phase in [("publication", "development"), ("recovery_preflight", "pre-push"), ("recovery_preflight", "post-push")]:
+            with pytest.raises(b.BoundedG1BError) as err:
+                b._g4_owner_bootstrap_require_entrypoint(q, entrypoint, phase)
+            assert err.value.reason_code == "bounded_g4_owner_bootstrap_admit_entrypoint"
+
+
+def test_committed_site_genuine_external_inputs_and_no_canonical_aliases():
+    b = bounded_g1b
+    d = _committed_site_descriptor()
+    seen = []
+    def read(path, digest):
+        seen.append(path)
+        assert path not in {Path(r["path"]) for r in b.G4_CURRENT_SITE_COMMITTED_BASELINE_ORIGINAL_BEFORE_ROWS.values()}
+        return _practitioner_create_read(path, digest)
+    result = b._g4_owner_bootstrap_external_inputs(read, _committed_site_binding())
+    assert len(result) == 2
+    assert result[1]["reviewer"] == "/root/response_witness_verifier_repair_terra"
+    assert result[1]["reviewer"] in d["excluded_reviewers"]
+    assert set(b.G4_CURRENT_SITE_COMMITTED_BASELINE_TEST_AUTHORS) == {"/root/response_witness_verifier_repair_terra","/root/enable_preparer_actual_semantic_review_sol_xhigh"}
+    assert len(seen) == 39 and len(set(seen)) == 35
+    assert len(d["apply_paths"]) == 16 and sum(v is None for v in d["before_sha"].values()) == 8
+    assert len(b.G4_CURRENT_SITE_COMMITTED_BASELINE_BEFORE_ROWS) == 12
+    assert len(b.G4_CURRENT_SITE_COMMITTED_BASELINE_ORIGINAL_BEFORE_ROWS) == 4
+    assert all(d["before_sha"][p] == d["product_sha"][p] for p in b.G4_CURRENT_SITE_COMMITTED_BASELINE_UNCHANGED_PATHS)
+    assert len(b.G4_CURRENT_SITE_COMMITTED_BASELINE_EXTERNAL_ROWS) == 3
+
+
+@pytest.mark.parametrize("selected", ["VECTOR", "REVIEW", "SOURCE_COPY_INVERSE", "CONTRACT"]
+                         + [("product", p) for p in bounded_g1b.G4_CURRENT_SITE_COMMITTED_BASELINE_ORDERED_PATHS]
+                         + [("before", p) for p in sorted(bounded_g1b.G4_CURRENT_SITE_COMMITTED_BASELINE_BEFORE_ROWS)]
+                         + [("external", p) for p in sorted(bounded_g1b.G4_CURRENT_SITE_COMMITTED_BASELINE_EXTERNAL_ROWS)])
+def test_committed_site_each_declared_immutable_source_rejects_tamper(selected):
+    b = bounded_g1b
+    if isinstance(selected, tuple):
+        kind, name = selected
+        rows = {"product": b.G4_CURRENT_SITE_COMMITTED_BASELINE_PRODUCT_ROWS,
+                "before": b.G4_CURRENT_SITE_COMMITTED_BASELINE_BEFORE_ROWS,
+                "external": b.G4_CURRENT_SITE_COMMITTED_BASELINE_EXTERNAL_ROWS}[kind]
+        row = rows[name]
+    else:
+        row = getattr(b, "G4_CURRENT_SITE_COMMITTED_BASELINE_" + selected)
+    attacked = Path(row["path"])
+    seen = []
+    def read(path, digest):
+        seen.append(path)
+        raw = _practitioner_create_read(path, digest)
+        return raw + b" " if path == attacked else raw
+    with pytest.raises(b.BoundedG1BError) as err:
+        b._g4_owner_bootstrap_external_inputs(read, _committed_site_binding())
+    assert attacked in seen
+    assert err.value.reason_code == "bounded_g4_current_site_committed_baseline_external_source"
+
+
+@pytest.mark.parametrize("mutation,reason", [
+    ("missing_payload", "bounded_g4_current_site_committed_baseline_restoration_bijection"),
+    ("swapped_payload", "bounded_g4_current_site_committed_baseline_restoration_bijection"),
+    ("original_path", "bounded_g4_current_site_committed_baseline_restoration_bijection"),
+    ("wrong_payload_path", "bounded_g4_current_site_committed_baseline_restoration_bijection"),
+    ("wrong_payload_size", "bounded_g4_current_site_committed_baseline_restoration_bijection"),
+    ("wrong_payload_hash", "bounded_g4_current_site_committed_baseline_restoration_bijection"),
+    ("wrong_target", "bounded_g4_current_site_committed_baseline_contract"),
+    ("wrong_base", "bounded_g4_current_site_committed_baseline_contract"),
+    ("external_promoted", "bounded_g4_current_site_committed_baseline_contract"),
+])
+def test_committed_site_contract_semantics_survive_repin(monkeypatch, mutation, reason):
+    b = bounded_g1b
+    subject = copy.deepcopy(b.G4_CURRENT_SITE_COMMITTED_BASELINE_EXPECTED_SUBJECT)
+    restorations = subject["restoration_payloads"]
+    assert len(restorations) == 12 and restorations[0]["payload"] != restorations[1]["payload"]
+    if mutation == "missing_payload": restorations.pop()
+    elif mutation == "swapped_payload": restorations[0]["payload"], restorations[1]["payload"] = restorations[1]["payload"], restorations[0]["payload"]
+    elif mutation == "original_path": restorations[0]["original_canonical_path"] += ".other"
+    elif mutation == "wrong_payload_path": restorations[0]["payload"]["path"] = restorations[0]["original_canonical_path"]
+    elif mutation == "wrong_payload_size": restorations[0]["payload"]["bytes"] += 1
+    elif mutation == "wrong_payload_hash": restorations[0]["payload"]["sha256"] = "a" * 64
+    elif mutation == "wrong_target": subject["canonical_mapping_target"] += "-other"
+    elif mutation == "wrong_base": subject["selected_base"]["commit"] = "a" * 40
+    else: subject["ordered_owned_paths"].append("stage1_patient_transport.py")
+    raw = b._canonical(subject)
+    row = {**b.G4_CURRENT_SITE_COMMITTED_BASELINE_CONTRACT, "bytes": len(raw), "sha256": b._sha(raw)}
+    monkeypatch.setattr(b, "G4_CURRENT_SITE_COMMITTED_BASELINE_EXPECTED_SUBJECT", subject)
+    monkeypatch.setattr(b, "G4_CURRENT_SITE_COMMITTED_BASELINE_CONTRACT", row)
+    def read(path, digest):
+        if path == Path(row["path"]):
+            assert digest == row["sha256"]
+            return raw
+        return _practitioner_create_read(path, digest)
+    with pytest.raises(b.BoundedG1BError) as err:
+        b._g4_owner_bootstrap_external_inputs(read, _committed_site_binding())
+    assert err.value.reason_code == reason
+
+
+@pytest.mark.parametrize("mutation", ["author", "independent", "blocker", "runtime", "admission", "missing_authority"])
+def test_committed_site_real_review_semantics_survive_repin(monkeypatch, mutation):
+    b = bounded_g1b
+    d = _committed_site_descriptor()
+    review = copy.deepcopy(b.G4_CURRENT_SITE_COMMITTED_BASELINE_EXPECTED_REVIEW)
+    if mutation == "author": review["reviewer"] = b.G4_CURRENT_SITE_COMMITTED_BASELINE_CONTROLLER_AUTHOR
+    elif mutation == "independent": review["independent_of_source_author"] = False
+    elif mutation == "blocker": review["blockers"] = ["synthetic"]
+    elif mutation == "runtime": review["authority"]["runtime"] = True
+    elif mutation == "admission": review["authority"]["admission"] = True
+    else: review["authority"].pop("runtime")
+    raw = b._canonical(review)
+    row = {**b.G4_CURRENT_SITE_COMMITTED_BASELINE_REVIEW, "bytes": len(raw), "sha256": b._sha(raw)}
+    monkeypatch.setattr(b, "G4_CURRENT_SITE_COMMITTED_BASELINE_EXPECTED_REVIEW", review)
+    monkeypatch.setattr(b, "G4_CURRENT_SITE_COMMITTED_BASELINE_REVIEW", row)
+    monkeypatch.setitem(d, "mapping", {k: row[k] for k in ("path", "sha256")})
+    def read(path, digest):
+        if path == Path(row["path"]):
+            assert digest == row["sha256"]
+            return raw
+        return _practitioner_create_read(path, digest)
+    with pytest.raises(b.BoundedG1BError) as err:
+        b._g4_owner_bootstrap_external_inputs(read, _committed_site_binding())
+    assert err.value.reason_code == "bounded_g4_current_site_committed_baseline_independent_source"
+
+
+@pytest.mark.parametrize("mutation", ["base", "control", "owned", "before", "after", "size", "predecessor", "reviewers"])
+def test_committed_site_descriptor_drift_refuses(monkeypatch, mutation):
+    b = bounded_g1b
+    d = _committed_site_descriptor()
+    path = sorted(b.G4_CURRENT_SITE_COMMITTED_BASELINE_REPLACE_PATHS)[0]
+    changes = {
+        "base": ("base", b.G4_PRACTITIONER_CREATE_DESCRIPTOR["base"]),
+        "control": ("control", d["control"] | {b.AGENTS}),
+        "owned": ("apply_paths", d["apply_paths"] - {path}),
+        "before": ("before_sha", {**d["before_sha"], path: None}),
+        "after": ("product_sha", {**d["product_sha"], path: "a" * 64}),
+        "size": ("product_bytes", {**d["product_bytes"], path: 1}),
+        "predecessor": ("preimages", {**d["preimages"], b.G4_STAGE1_SUCCESSOR_SCOPE: "a" * 64}),
+        "reviewers": ("excluded_reviewers", set(b.G4_CURRENT_SITE_COMMITTED_BASELINE_PRODUCT_AUTHORS) | {""}),
+    }
+    field, value = changes[mutation]
+    monkeypatch.setitem(d, field, value)
+    q = {"schema_version": b.G4_CURRENT_SITE_COMMITTED_BASELINE_SCHEMA, "operation_kind": "implement_g4_stage1_successor", "stage": "apply", "repair_sha256": dict.fromkeys(b.G4_CURRENT_SITE_COMMITTED_BASELINE_APPLY_PATHS, {})}
+    with pytest.raises(b.BoundedG1BError) as err:
+        b.operation_paths(q["operation_kind"], q)
+    assert err.value.reason_code == "bounded_g4_current_site_committed_baseline_path_boundary"
+
+
+@pytest.mark.parametrize("mutation,reason", [
+    ("wrong_target", "bounded_g4_current_site_committed_baseline_product_mapping"),
+    ("wrong_before", "bounded_g4_current_site_committed_baseline_product_mapping"),
+    ("external_promoted", "bounded_g4_current_site_committed_baseline_role_ownership"),
+])
+def test_committed_site_vector_semantics_survive_repin(monkeypatch, mutation, reason):
+    b = bounded_g1b
+    d = _committed_site_descriptor()
+    vector = json.loads(Path(b.G4_CURRENT_SITE_COMMITTED_BASELINE_VECTOR["path"]).read_bytes())
+    owned = next(r for r in vector["source_rows"] if r["canonical_preimage"] and r["canonical_preimage"]["state"] == "PRESENT_REPLACE")
+    external = next(r for r in vector["source_rows"] if r["category"] == "external_synthetic_composition_input")
+    if mutation == "wrong_target": owned["canonical_target"] += ".other"
+    elif mutation == "wrong_before": owned["canonical_preimage"]["sha256"] = "a" * 64
+    else: external["category"] = "proposed_canonical_baseline_source"
+    raw = b._canonical(vector)
+    row = {**b.G4_CURRENT_SITE_COMMITTED_BASELINE_VECTOR, "bytes": len(raw), "sha256": b._sha(raw)}
+    monkeypatch.setattr(b, "G4_CURRENT_SITE_COMMITTED_BASELINE_SOURCE_ROWS", copy.deepcopy(vector["source_rows"]))
+    monkeypatch.setattr(b, "G4_CURRENT_SITE_COMMITTED_BASELINE_VECTOR", row)
+    monkeypatch.setitem(d, "vector", {k: row[k] for k in ("path", "sha256")})
+    def read(path, digest):
+        if path == Path(row["path"]):
+            assert digest == row["sha256"]
+            return raw
+        return _practitioner_create_read(path, digest)
+    with pytest.raises(b.BoundedG1BError) as err:
+        b._g4_owner_bootstrap_external_inputs(read, _committed_site_binding())
+    assert err.value.reason_code == reason
+
+
+
+_COMMITTED_SITE_MEMBERSHIP_RAW = bytes.fromhex("31303036343420626c6f622038393163666531613830613634376433666164613336376231623538316530333234326632306464097374616765315f64656d6f5f616461707465725f636f72652e70790031303036343420626c6f622062336161626162363539386532303231386430366539343166393434353164383264643661373132097374616765315f64656d6f5f687474702e70790031303036343420626c6f622032633966326662363838396364633130323930663135353338316139343239336236616666356366097374616765315f64656d6f5f696e74656e742e70790031303036343420626c6f622063656663333537353739356234373561343662656666353638353564353234356264313364643565097374616765315f64656d6f5f766f6963652e70790031303036343420626c6f622032323538306565303537626231393233633030383361306464326164653931666537366639666138097374616765315f64696172795f726f7574655f67756172642e70790031303036343420626c6f622034646637656439383737626338306531346261333638356132326262383062353264303663633635097374616765315f7365656465645f6c6f67696e2e70790031303036343420626c6f622062626334313464393730666337386462623136376233376634363136356631346239333638396166097374616765315f73746166665f64696172795f726561642e70790031303036343420626c6f622037653137323264353732626235373134643666373332633663326662323734616334363437613633097374617469632f64656d6f2f7374616765312d64696172792d766965772e6a730031303036343420626c6f622037343162356236393761383262333536613538393063363538303836393964626536623064343931097374617469632f64656d6f2f7374616765312d696e7465726163746976652e6373730031303036343420626c6f622034396638653638616433333261613361343962633131356136323339353831653961623833656133097374617469632f64656d6f2f7374616765312d696e7465726163746976652e68746d6c0031303036343420626c6f622061333364386262633262333865363631323562613263373561666366396563623433343735326438097374617469632f64656d6f2f7374616765312d696e7465726163746976652e6a730031303036343420626c6f622035366661623236356361353833363133666335613934623565303134623333333362393363346130097374617469632f64656d6f2f7374616765312d6c6f63616c2d766f6963652e6a7300")
+_COMMITTED_SITE_OBSERVED_PRESENT = frozenset(["stage1_demo_adapter_core.py","stage1_demo_http.py","stage1_demo_intent.py","stage1_demo_voice.py","stage1_diary_route_guard.py","stage1_seeded_login.py","stage1_staff_diary_read.py","static/demo/stage1-diary-view.js","static/demo/stage1-interactive.css","static/demo/stage1-interactive.html","static/demo/stage1-interactive.js","static/demo/stage1-local-voice.js"])
+_COMMITTED_SITE_OBSERVED_ABSENT = frozenset(["local_jwt.py","mock_auth.py","stage1_mock_org_bridge.py","stage1_owner_onboarding.py","stage1_patient_browser.py","stage1_practitioner_create_browser.py","stage1_selected_staff_booking.py","stage1_staff_booking_context.py"])
+
+
+def _committed_site_parse_membership(raw):
+    b = bounded_g1b
+    b._need(type(raw) is bytes and raw.endswith(b"\x00"), "bounded_g4_current_site_committed_baseline_observed_membership_format")
+    rows = {}
+    for record in raw.split(b"\x00")[:-1]:
+        match = b.re.fullmatch(rb"100644 blob ([0-9a-f]{40})\t([A-Za-z0-9_.-]+(?:/[A-Za-z0-9_.-]+)*)", record)
+        b._need(match is not None, "bounded_g4_current_site_committed_baseline_observed_membership_format")
+        name = match.group(2).decode("ascii")
+        b._need(name not in rows and name in b.G4_CURRENT_SITE_COMMITTED_BASELINE_PRODUCT_PATHS,
+                "bounded_g4_current_site_committed_baseline_observed_membership_format")
+        rows[name] = (match.group(1).decode("ascii"), record + b"\x00")
+    return rows
+
+
+def _committed_site_observed_membership(before):
+    b = bounded_g1b
+    b._need(len(_COMMITTED_SITE_MEMBERSHIP_RAW) == 977
+            and b._sha(_COMMITTED_SITE_MEMBERSHIP_RAW) == "9f24cb8a14ef2320c26b31c62246a30bd83c8180334c7520dc7d6a1eb50c8355",
+            "bounded_g4_current_site_committed_baseline_observed_membership")
+    rows = _committed_site_parse_membership(_COMMITTED_SITE_MEMBERSHIP_RAW)
+    b._need(frozenset(rows) == _COMMITTED_SITE_OBSERVED_PRESENT
+            and b.G4_CURRENT_SITE_COMMITTED_BASELINE_PRODUCT_PATHS - frozenset(rows) == _COMMITTED_SITE_OBSERVED_ABSENT
+            and set(before) == set(rows), "bounded_g4_current_site_committed_baseline_observed_membership")
+    for name,(oid,record) in rows.items():
+        raw = before[name]
+        actual = hashlib.sha1(b"blob " + str(len(raw)).encode("ascii") + b"\x00" + raw).hexdigest()
+        b._need(actual == oid, "bounded_g4_current_site_committed_baseline_observed_blob_oid")
+    return rows
+
+
+def _committed_site_synthetic_loader(monkeypatch, tmp_path, stage, mutation=None):
+    # Real shared loader;39 logical raw rows/35 unique pins. Retained977-byte Git membership is literal; index, inherited policy,
+    # activation and operation-source review are synthetic substitutions.
+    b = bounded_g1b
+    d = _committed_site_descriptor()
+    inherited = b.CONFIGURATION_PATHS | {b.STATE, b.GATES, b.OVERLAY, b.AGENTS, b.G4_STAGE1_INTERACTIVE_SCOPE,
+        b.G4_STAGE1_SUCCESSOR_SCOPE, b.G4_STAGE1_SUCCESSOR_TEST, b.G4_CI_WORKFLOW} | b.SOURCE_PATHS | b.CONTROLLER_PATHS
+    payloads = {p: ("synthetic inherited " + p).encode() for p in inherited}
+    for p in d["control"]:
+        payloads[p] = (_COMMITTED_SITE_CANDIDATE / "after" / p).read_bytes()
+    policy = {p: payloads[p] for p in (b.STATE, b.GATES, b.OVERLAY, b.AGENTS)}
+    scope = json.loads(payloads[b.G4_STAGE1_SUCCESSOR_SCOPE])
+    scope["source_sha256"] = {p: b._sha(payloads[p]) for p in b.SOURCE_PATHS | b.CONTROLLER_PATHS}
+    payloads[b.G4_STAGE1_SUCCESSOR_SCOPE] = b._canonical(scope) + b"\n"
+    after = {p: Path(row["path"]).read_bytes() for p, row in d["product_rows"].items()}
+    controls_before = {row["logical_path"]: Path(row["payload"]["path"]).read_bytes() for row in b.G4_CURRENT_SITE_COMMITTED_BASELINE_CONTROL_BEFORE_ROWS}
+    assert all(b._sha(raw) == d["preimages"][p] for p,raw in controls_before.items())
+    before = {p: Path(row["path"]).read_bytes() for p, row in b.G4_CURRENT_SITE_COMMITTED_BASELINE_BEFORE_ROWS.items()}
+    assert len(before) == 12 and all(b._sha(raw) == d["before_sha"][p] for p, raw in before.items())
+    observed_rows = _committed_site_observed_membership(before)
+    if stage == "apply": payloads.update(after)
+    base_payloads = dict(payloads)
+    if mutation == "after_drift": payloads[sorted(b.G4_CURRENT_SITE_COMMITTED_BASELINE_UNCHANGED_PATHS)[0]] += b" "
+    if mutation == "changed_payload": payloads[sorted(d["apply_paths"])[0]] += b" "
+    if mutation == "inherited_payload": payloads[b.G4_CI_WORKFLOW] += b" "
+    pins = {p: b._sha(raw) for p, raw in payloads.items()}
+    target, source = tmp_path / "target", tmp_path / "source"
+    base = d["base"]["commit"] if stage == "enable" else "b" * 40
+    tree = d["base"]["tree"] if stage == "enable" else "c" * 40
+    candidate = tree if stage == "admit" else "d" * 40
+    paths = d["control"] if stage == "enable" else d["apply_paths"] if stage == "apply" else frozenset()
+    kind = {"enable": "enable_g4_stage1_successor", "admit": b.G4_OWNER_BOOTSTRAP_ADMIT_KIND, "apply": "implement_g4_stage1_successor"}[stage]
+    q = {"schema_version": b.G4_CURRENT_SITE_COMMITTED_BASELINE_SCHEMA, "operation_id": "synthetic-current-site-" + stage,
+        "operation_kind": kind, "stage": stage, "phase": "development", "base_commit": base, "base_tree": tree,
+        "expected_head": base, "expected_index_tree": candidate, "candidate_tree": candidate,
+        "source_sha256": scope["source_sha256"], "payload_sha256": pins,
+        "repair_sha256": {p: {"before_sha256": d["preimages"][p] if stage == "enable" else d["before_sha"][p], "after_sha256": pins[p]} for p in paths},
+        "source_review": {"path": "synthetic-only", "sha256": "a" * 64}, "activation_acceptance": None,
+        "product_vector": d["vector"], "mapping_review": d["mapping"]}
+    if mutation == "null_replace": q["repair_sha256"][next(iter(before))]["before_sha256"] = None
+    if mutation == "wrong_supplied_before": q["repair_sha256"][sorted(b.G4_CURRENT_SITE_COMMITTED_BASELINE_REPLACE_PATHS)[0]]["before_sha256"] = "a" * 64
+    if mutation == "missing_changed_key": q["repair_sha256"].pop(sorted(d["apply_paths"])[0])
+    if mutation == "unowned_key": q["repair_sha256"]["unowned.py"] = {"before_sha256": None, "after_sha256": "a" * 64}
+    if mutation == "unchanged_as_repair":
+        p = sorted(b.G4_CURRENT_SITE_COMMITTED_BASELINE_UNCHANGED_PATHS)[0]
+        q["repair_sha256"][p] = {"before_sha256": d["before_sha"][p], "after_sha256": d["product_sha"][p]}
+    if mutation == "extra_payload_key": q["payload_sha256"]["unowned.py"] = "a" * 64
+    if mutation == "repinned_recategorization":
+        changed = sorted(b.G4_CURRENT_SITE_COMMITTED_BASELINE_REPLACE_PATHS)[0]
+        unchanged = sorted(b.G4_CURRENT_SITE_COMMITTED_BASELINE_UNCHANGED_PATHS)[0]
+        swapped = (d["apply_paths"] - {changed}) | {unchanged}
+        mutated = {**d, "apply_paths": swapped}
+        monkeypatch.setattr(b, "G4_CURRENT_SITE_COMMITTED_BASELINE_DESCRIPTOR", mutated)
+        q["repair_sha256"].pop(changed)
+        q["repair_sha256"][unchanged] = {"before_sha256": d["before_sha"][unchanged], "after_sha256": d["product_sha"][unchanged]}
+    activation = d["root"] / "entry-admission-v1/independent-enable-push-effect-review-v1.json"
+    record = {"schema": "emr4.g4_operation_review.v1", "status": "PASS", "verdict": "PASS_G4_STAGE1_OWNER_BOOTSTRAP_CONTROL_PUBLICATION_EFFECT",
+        "reviewer_agent": "/synthetic/independent-fixture", "independent": True, "implementation_authorship": False, "blocking_findings": [],
+        "stage": "enable", "phase": "push", "base": d["base"]["commit"], "commit": base, "candidate_tree": tree,
+        "control_activation_accepted": True, "same_attempt_remote_readback_verified": True, "protected_refs_unchanged": True,
+        "whole_inverse_verified_same_attempt": True, "published_ref": b.G4_STAGE1_INTERACTIVE_BACKEND_REF}
+    activation_raw = b._canonical(record)
+    if stage != "enable": q["activation_acceptance"] = {"path": activation.as_posix(), "sha256": b._sha(activation_raw)}
+    forbidden = {Path(row["path"]) for row in b.G4_CURRENT_SITE_COMMITTED_BASELINE_ORIGINAL_BEFORE_ROWS.values()}
+    external_reads = []
+    def read(path, digest):
+        assert path not in forbidden, "mutable canonical alias read"
+        if path == activation: raw = activation_raw
+        elif path.is_relative_to(target): raw = payloads[path.relative_to(target).as_posix()]
+        elif path.is_relative_to(source): raw = payloads[path.relative_to(source).as_posix()]
+        else:
+            external_reads.append(path)
+            return _practitioner_create_read(path, digest)
+        assert b._sha(raw) == digest
+        return raw
+    def git_bytes(actual, *args):
+        assert actual == target
+        if args == ("cat-file", "blob", d["base"]["commit"] + ":" + b.G4_STAGE1_SUCCESSOR_SCOPE): return controls_before[b.G4_STAGE1_SUCCESSOR_SCOPE]
+        if args[:2] == ("ls-tree", "-z"):
+            assert len(args) == 5 and args[2] == base and args[3] == "--" and args[4] in paths
+            p = args[4]
+            if stage == "enable": return b"100644 blob synthetic\x00"
+            if mutation == "unexpected_add" and p in _COMMITTED_SITE_OBSERVED_ABSENT:
+                return b"100644 blob " + b"a" * 40 + b"\t" + p.encode("ascii") + b"\x00"
+            if mutation == "missing_replace" and p in _COMMITTED_SITE_OBSERVED_PRESENT: return b""
+            return observed_rows[p][1] if p in observed_rows else b""
+        assert args[:2] == ("cat-file", "blob") and len(args) == 3
+        commit, p = args[2].split(":", 1)
+        if commit == base:
+            if stage == "enable" and p in controls_before: return controls_before[p]
+            if p in before: return before[p] + (b" " if mutation == "wrong_before" else b"")
+            return base_payloads[p]
+        assert commit == d["base"]["commit"] and p in policy
+        return policy[p]
+    def git(actual, *args):
+        assert actual == target
+        if args == ("rev-parse", d["base"]["commit"] + "^{tree}"): return d["base"]["tree"]
+        assert args == ("cat-file", "commit", base)
+        return "tree " + tree + "\nparent " + d["base"]["commit"] + "\n\nsynthetic only"
+    monkeypatch.setattr(b, "_g4_owner_bootstrap_subject_review", lambda *args: {"synthetic": True})
+    monkeypatch.setattr(b.trusted_git, "run_git_bytes", git_bytes)
+    monkeypatch.setattr(b.trusted_git, "run_git", git)
+    selected_index_calls = []
+    def selected_index(actual, **kwargs):
+        assert actual == target
+        selected_index_calls.append(kwargs)
+        return {"synthetic": True}
+    monkeypatch.setattr(b.trusted_git, "attest_target_index", selected_index)
+    loaded = b._load_g4_owner_bootstrap_inputs(None, target, source, b.G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT, tmp_path / "scratch", q, read, {})
+    assert len(selected_index_calls) == 1
+    assert set(selected_index_calls[0]["attested_paths"]) == set(payloads) - set(paths)
+    if stage == "apply":
+        assert b.G4_CURRENT_SITE_COMMITTED_BASELINE_UNCHANGED_PATHS <= set(selected_index_calls[0]["attested_paths"])
+        assert len(q["payload_sha256"]) == 45 and len(q["source_sha256"]) == 8
+    assert len(set(external_reads)) == 35
+    assert len(external_reads) == 39 + (16 if stage == "apply" else 0)
+    return loaded
+
+
+@pytest.mark.parametrize("stage", ["enable", "admit", "apply"])
+def test_committed_site_shared_loader_synthetic_mixed_baseline(monkeypatch, tmp_path, stage):
+    loaded = _committed_site_synthetic_loader(monkeypatch, tmp_path, stage)
+    assert len(loaded.binding["repair_sha256"]) == {"enable": 3, "admit": 0, "apply": 16}[stage]
+    if stage == "apply":
+        assert sum(x["before_sha256"] is None for x in loaded.binding["repair_sha256"].values()) == 8
+
+
+@pytest.mark.parametrize("mutation", ["unexpected_add", "missing_replace", "wrong_before", "null_replace", "after_drift"])
+def test_committed_site_shared_loader_synthetic_named_preimage_refusal(monkeypatch, tmp_path, mutation):
+    _committed_site_synthetic_loader(monkeypatch, tmp_path, "apply")
+    with pytest.raises(bounded_g1b.BoundedG1BError) as err:
+        _committed_site_synthetic_loader(monkeypatch, tmp_path, "apply", mutation)
+    assert err.value.reason_code == ("bounded_g4_current_site_committed_baseline_selected_payload" if mutation == "after_drift" else "bounded_g4_owner_bootstrap_change_preimage")
+
+
+@pytest.mark.parametrize("reviewer", [
+    "/root/post_create_read_scope_sol_xhigh",
+    "/root/response_witness_verifier_repair_terra",
+    "/root/enable_preparer_actual_semantic_review_sol_xhigh",
+    "/root", "", "/synthetic/independent-fixture",
+])
+def test_committed_site_combined_subject_review_independence(reviewer):
+    # Real combined-admission review predicate; historical SOURCE22 mapping
+    # reviewer acceptance is separately exercised by genuine_external_inputs.
+    b = bounded_g1b
+    d = _committed_site_descriptor()
+    authors = {"/root/post_create_read_scope_sol_xhigh",
+               "/root/response_witness_verifier_repair_terra",
+               "/root/enable_preparer_actual_semantic_review_sol_xhigh", "/root", ""}
+    assert d["excluded_reviewers"] == authors
+    stage, phase, subject = "admit", "development", "a" * 64
+    path = d["root"] / "entry-admission-v1" / "independent-admit-development-subject-review-v1.json"
+    review = {"schema": "emr4.g4_operation_review.v1", "status": "PASS",
+        "verdict": "PASS_G4_STAGE1_OWNER_BOOTSTRAP_EXACT_ADMISSION_SUBJECT",
+        "subject_sha256": subject, "independent": True, "implementation_authorship": False,
+        "blocking_findings": [], "reviewer_agent": reviewer, "stage": stage, "phase": phase}
+    raw = b._canonical(review)
+    row = {"path": path.as_posix(), "sha256": b._sha(raw)}
+    seen = []
+    def read(actual, digest):
+        seen.append(actual)
+        assert actual == path and digest == b._sha(raw)
+        return raw
+    if reviewer in authors:
+        with pytest.raises(b.BoundedG1BError) as err:
+            b._g4_owner_bootstrap_subject_review(read, row, b.G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT,
+                subject, stage, phase, b.G4_CURRENT_SITE_COMMITTED_BASELINE_SCHEMA)
+        assert err.value.reason_code == "bounded_g4_owner_bootstrap_independent_subject"
+    else:
+        assert b._g4_owner_bootstrap_subject_review(read, row, b.G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT,
+            subject, stage, phase, b.G4_CURRENT_SITE_COMMITTED_BASELINE_SCHEMA) == review
+    assert seen == [path]
+
+
+@pytest.mark.parametrize("mutation,reason", [
+    ("missing_changed_key", "bounded_g4_owner_bootstrap_changed_paths"),
+    ("unowned_key", "bounded_g4_owner_bootstrap_changed_paths"),
+    ("unchanged_as_repair", "bounded_g4_owner_bootstrap_changed_paths"),
+    ("repinned_recategorization", "bounded_g4_current_site_committed_baseline_path_boundary"),
+    ("changed_payload", "bounded_g4_current_site_committed_baseline_selected_payload"),
+    ("inherited_payload", "bounded_g4_owner_bootstrap_unowned_change"),
+    ("extra_payload_key", "bounded_g4_owner_bootstrap_payload_paths"),
+    ("wrong_supplied_before", "bounded_g4_owner_bootstrap_change_preimage"),
+])
+def test_committed_site_named_owned_changed_and_payload_refusals(monkeypatch, tmp_path, mutation, reason):
+    _committed_site_synthetic_loader(monkeypatch, tmp_path, "apply")
+    with pytest.raises(bounded_g1b.BoundedG1BError) as err:
+        _committed_site_synthetic_loader(monkeypatch, tmp_path, "apply", mutation)
+    assert err.value.reason_code == reason
+
+
+def test_committed_site_raw_oid_mismatch_refuses_observer_join():
+    b = bounded_g1b
+    before = {p: Path(row["path"]).read_bytes() for p,row in b.G4_CURRENT_SITE_COMMITTED_BASELINE_BEFORE_ROWS.items()}
+    _committed_site_observed_membership(before)
+    before["stage1_demo_voice.py"] += b" "
+    with pytest.raises(b.BoundedG1BError) as err:
+        _committed_site_observed_membership(before)
+    assert err.value.reason_code == "bounded_g4_current_site_committed_baseline_observed_blob_oid"
+
+
+@pytest.mark.parametrize("raw", [
+    b"100755 blob " + b"a" * 40 + b"\tstage1_demo_voice.py\x00",
+    b"100644 blob " + b"a" * 40 + b"\tstage1_demo_voice.py",
+])
+def test_committed_site_strict_regular_nul_membership_boundary(raw):
+    with pytest.raises(bounded_g1b.BoundedG1BError) as err:
+        _committed_site_parse_membership(raw)
+    assert err.value.reason_code == "bounded_g4_current_site_committed_baseline_observed_membership_format"
