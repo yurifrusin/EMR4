@@ -131,3 +131,81 @@ def read_practitioner_create_receipt(
         return service.receipt(token, command_key)
     except PractitionerCreateError as error:
         raise _create_error(error) from None
+
+# STOPPED location-only source extension; no service factory is installed here.
+from app.schemas.practice_location_command import (
+    ConfirmPracticeLocationCreate, PreparePracticeLocationCreate,
+    PracticeLocationCreateReceipt, PracticeLocationCreateRecovery,
+    PreparePracticeLocationCreateResult,
+)
+from app.services.practice.practice_location_command import (
+    PracticeLocationCreateError, PracticeLocationCreateService,
+)
+
+
+def _practice_location_create_service(request: Request):
+    service = getattr(request.app.state, "practice_location_create_service", None)
+    if type(service) is not PracticeLocationCreateService:
+        raise HTTPException(status_code=503, detail="PRACTICE_LOCATION_CREATE_UNAVAILABLE",
+                            headers={"Cache-Control": "no-store"})
+    return service
+
+
+def _location_create_request(request: Request, response: Response):
+    response.headers["Cache-Control"] = "no-store"
+    if request.url.query:
+        raise HTTPException(status_code=400, detail="PRACTICE_LOCATION_CREATE_INVALID",
+                            headers={"Cache-Control": "no-store"})
+
+
+def _location_create_error(error: PracticeLocationCreateError):
+    return HTTPException(status_code=error.status_code, detail=error.code,
+                         headers={"Cache-Control": "no-store"})
+
+
+@router.post("/locations/create/proposals", response_model=PreparePracticeLocationCreateResult,
+             operation_id="preparePracticeLocationCreate")
+def prepare_practice_location_create(
+    body: PreparePracticeLocationCreate,
+    request: Request,
+    response: Response,
+    token: str = Depends(oauth2_scheme),
+    service: PracticeLocationCreateService = Depends(_practice_location_create_service),
+):
+    _location_create_request(request, response)
+    try:
+        return service.prepare(token, body)
+    except PracticeLocationCreateError as error:
+        raise _location_create_error(error) from None
+
+
+@router.post("/locations/create/confirm", response_model=PracticeLocationCreateReceipt,
+             operation_id="confirmPracticeLocationCreate")
+def confirm_practice_location_create(
+    body: ConfirmPracticeLocationCreate,
+    request: Request,
+    response: Response,
+    token: str = Depends(oauth2_scheme),
+    service: PracticeLocationCreateService = Depends(_practice_location_create_service),
+):
+    _location_create_request(request, response)
+    try:
+        return service.confirm(token, body)
+    except PracticeLocationCreateError as error:
+        raise _location_create_error(error) from None
+
+
+@router.get("/locations/create/receipts/{command_key}", response_model=PracticeLocationCreateRecovery,
+            operation_id="readPracticeLocationCreateReceipt")
+def read_practice_location_create_receipt(
+    command_key: UUID,
+    request: Request,
+    response: Response,
+    token: str = Depends(oauth2_scheme),
+    service: PracticeLocationCreateService = Depends(_practice_location_create_service),
+):
+    _location_create_request(request, response)
+    try:
+        return service.receipt(token, command_key)
+    except PracticeLocationCreateError as error:
+        raise _location_create_error(error) from None

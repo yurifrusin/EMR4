@@ -988,7 +988,7 @@ function accountBusyState(busy) {
   accountBusy = busy;
   ownerPresentation.accountBusy(busy);
   $("account-panel").querySelectorAll("button,input,select").forEach(node => {
-    if (!node.closest("#owner-practitioner-box")) node.disabled = busy;
+    if (!node.closest("#owner-practitioner-box,#owner-location-box")) node.disabled = busy;
   });
   $("account-logout").disabled=busy;
   if (restorePractitionerAfterAccountBusy) restorePractitionerAfterAccountBusy();
@@ -1117,6 +1117,7 @@ try{
   // STOPPED SOURCE ONLY. Removing either client/server barrier requires later
   // exact reviewed source adoption and finite bindings, never a DOM toggle.
   let ownerViewEpoch = 0;
+  let practiceLocation = null;
   const practitioner = (() => {
     const stopped = false;
     const p = name => el("owner-practitioner-" + name);
@@ -1170,14 +1171,14 @@ try{
     function restore(){
       const visible=!stopped && known;
       p("box").hidden=!visible;
-      const available=visible && scope!==null && !busy && !accountBusy && !pending;
+      const available=visible && scope!==null && !busy && !accountBusy && !pending && !practiceLocation?.blocked();
       p("form").querySelectorAll("input,button").forEach(n=>n.disabled=!available || unresolved!==null);
       if(available && unresolved?.kind==="prepare" && requestPrepare
           && unresolved.practice===scope && unresolved.email===identity?.email)p("prepare").disabled=false;
       p("prepare").textContent=unresolved?.kind==="prepare" ? "Check prepared details" : "Check details";
       p("confirm").disabled=!available || unresolved!==null || !draft || !draft.can_confirm
         || !(Date.now()<Date.parse(draft.expires_at));
-      p("refresh").disabled=!visible || busy || accountBusy || pending;
+      p("refresh").disabled=!visible || busy || accountBusy || pending || practiceLocation?.blocked();
       p("reference").disabled=!available;
       p("recover").disabled=!available || !uuid(p("reference").value);
       if(pending || unresolved)p("box").open=true;
@@ -1336,9 +1337,9 @@ try{
       return value;
     }
     async function perform(action,body){
-      if(busy || pending)return;
+      if(busy || accountBusy || pending || practiceLocation?.blocked())return;
       const context=snapshot();
-      pending=true;restore();ownerPresentation.busy(true);
+      pending=true;restore();practiceLocation?.restore();ownerPresentation.busy(true);
       try{
         const value=await request(action,body,context);
         if(value===null)return;
@@ -1360,12 +1361,12 @@ try{
           p("reference").value=body.command_key;p("recovery").open=true;
         }
       }finally{
-        pending=false;ownerPresentation.busy(false);restore();
+        pending=false;ownerPresentation.busy(false);restore();practiceLocation?.restore();
       }
     }
     p("form").addEventListener("submit",async event=>{
       event.preventDefault();
-      if(stopped || busy || pending || scope===null)return;
+      if(stopped || busy || accountBusy || pending || practiceLocation?.blocked() || scope===null)return;
       if(unresolved){
         if(unresolved.kind==="prepare" && requestPrepare && unresolved.practice===scope && unresolved.email===identity?.email)
           await perform("prepare",requestPrepare); // Explicit identical-key prepare check only; never confirm retry.
@@ -1388,7 +1389,7 @@ try{
       await perform("prepare",requestPrepare);
     });
     p("confirm").addEventListener("click",async()=>{
-      if(stopped || busy || pending || !draft || p("confirm").disabled || unresolved)return;
+      if(stopped || busy || accountBusy || pending || practiceLocation?.blocked() || !draft || p("confirm").disabled || unresolved)return;
       const d=draft, context=snapshot();
       const body={command_key:d.command_key,command_id:d.command_id,create_intent_id:d.create_intent_id,
         draft_revision:d.draft_revision,body_digest:d.body_digest,matching_context_digest:d.matching_context_digest,confirmed:true};
@@ -1398,7 +1399,7 @@ try{
     });
     p("recovery-form").addEventListener("submit",async event=>{
       event.preventDefault();
-      if(stopped || busy || pending || scope===null || !uuid(p("reference").value))return;
+      if(stopped || busy || accountBusy || pending || practiceLocation?.blocked() || scope===null || !uuid(p("reference").value))return;
       const key=p("reference").value,context=snapshot();
       if(unresolved && (unresolved.key!==key || unresolved.practice!==context.practice || unresolved.email!==context.owner.email)){
         status("Use the original creation reference and the same owner account and practice.");return;
@@ -1406,14 +1407,275 @@ try{
       unresolved=unresolved || {key,practice:context.practice,email:context.owner.email,kind:"receipt"};
       clearReview();await perform("receipt",{command_key:key});
     });
-    p("refresh").addEventListener("click",async()=>{if(!busy && !pending)try{await state();}catch(_){invalidateOwner();}});
+    p("refresh").addEventListener("click",async()=>{if(!busy && !accountBusy && !pending && !practiceLocation?.blocked())try{await state();}catch(_){invalidateOwner();}});
     p("reference").addEventListener("input",restore);
     for(const id of ["first","last","specialty","distinct"])p(id).addEventListener("input",edit);
     p("box").addEventListener("toggle",()=>{if(!p("box").open && (pending || unresolved))p("box").open=true;});
     restore();
     return {invalidateOwner,presentOwner,restore,decode,blocked:()=>pending};
   })();
-  restorePractitionerAfterAccountBusy = practitioner.restore;
+  practiceLocation = (() => {
+    const p = name => el("owner-location-" + name);
+    const uuid = v => typeof v === "string" && /^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/.test(v);
+    const closed = (v, keys) => v !== null && typeof v === "object" && !Array.isArray(v)
+      && Object.keys(v).length === keys.length && keys.every(k => Object.hasOwn(v,k));
+    const decimal = v => typeof v === "string" && /^[1-9][0-9]{0,18}$/.test(v)
+      && (v.length<19 || v.length===19 && v<="9223372036854775807");
+    const digest = v => typeof v === "string" && /^[0-9a-f]{64}$/.test(v);
+    const scalarText = (v, minimum=0) => {
+      if(typeof v!=="string")return false;
+      let count=0;
+      for(const char of v){const cp=char.codePointAt(0);if(cp>=0xD800 && cp<=0xDFFF)return false;count++;}
+      return count>=minimum && count<=255;
+    };
+    const w1 = new Set(Array.from("\u0009\u000a\u000b\u000c\u000d\u001c\u001d\u001e\u001f\u0020\u0085\u00a0\u1680\u2000\u2001\u2002\u2003\u2004\u2005\u2006\u2007\u2008\u2009\u200a\u2028\u2029\u202f\u205f\u3000"));
+    function advice(value){
+      if(typeof value!=="string")return false;
+      const chars=Array.from(value);while(chars.length && w1.has(chars[0]))chars.shift();
+      while(chars.length && w1.has(chars[chars.length-1]))chars.pop();
+      const trimmed=chars.join("");
+      return scalarText(trimmed,1) && !/[\u0000-\u001f\u007f]/.test(trimmed);
+    }
+    const nameShape = v => scalarText(v,1) && advice(v)
+      && !w1.has(Array.from(v)[0]) && !w1.has(Array.from(v).at(-1));
+    const bodyShape = v => closed(v,["name"]) && nameShape(v.name);
+    const scopeShape = v => closed(v,["practice_id"]) && uuid(v.practice_id);
+    const instant = v => typeof v==="string"
+      && /^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{6}Z$/.test(v)
+      && Number.isFinite(Date.parse(v));
+    let scope=null, identity=null, known=false, epoch=0, pending=false;
+    let draft=null, predecessor=null, unresolved=null, requestPrepare=null, refusedPredecessor=null;
+    let expiresTimer=null;
+    function status(message){p("status").textContent=message;}
+    function clearReview(){
+      draft=null;p("review").hidden=true;p("confirm").disabled=true;
+      clearTimeout(expiresTimer);expiresTimer=null;
+    }
+    function invalidateOwner(dropRefusedPredecessor=false){
+      if(dropRefusedPredecessor)refusedPredecessor=null;
+      epoch++;scope=null;identity=null;predecessor=null;clearReview();
+      p("created").hidden=true;p("created").textContent="";
+      // Preserve only the unresolved key and original namespace, never evidence.
+      restore();
+    }
+    function edit(){
+      epoch++;clearReview();p("created").hidden=true;
+      status(unresolved ? "A previous result is uncertain. Check its creation reference before starting another creation."
+        : "Details changed. Check details again before creating.");
+      restore();
+    }
+    function restore(){
+      const visible=known;
+      p("box").hidden=!visible;
+      const available=visible && scope!==null && !busy && !accountBusy && !pending && !practitioner.blocked();
+      p("form").querySelectorAll("input,button").forEach(n=>n.disabled=!available || unresolved!==null);
+      if(available && unresolved?.kind==="prepare" && requestPrepare
+          && unresolved.practice===scope && unresolved.email===identity?.email)p("prepare").disabled=false;
+      p("prepare").textContent=unresolved?.kind==="prepare" ? "Check prepared details" : "Check details";
+      p("confirm").disabled=!available || unresolved!==null || !draft || !draft.can_confirm
+        || !(Date.now()<Date.parse(draft.expires_at));
+      p("refresh").disabled=!visible || busy || accountBusy || pending || practitioner.blocked();
+      p("reference").disabled=!available;
+      p("recover").disabled=!available || !uuid(p("reference").value);
+      if(pending || unresolved)p("box").open=true;
+    }
+    function presentOwner(value){
+      clearReview();predecessor=null;epoch++;
+      p("created").hidden=true;p("created").textContent="";
+      known=Object.hasOwn(value,"practice_location_create_scope");
+      scope=null;identity=null;
+      const projected=value.practice_location_create_scope;
+      if(known && value.phase==="verified" && scopeShape(projected) && typeof value.identity?.email==="string"
+          && typeof value.identity.practice_name==="string" && value.identity.role==="PracticeOwner"){
+        scope=projected.practice_id;
+        identity=Object.freeze({email:value.identity.email,practice_name:value.identity.practice_name});
+        p("practice").textContent=identity.practice_name;
+      }else{
+        p("practice").textContent="";
+        if(known && projected!==null && projected!==undefined && !scopeShape(projected))throw Error("unavailable");
+      }
+      if(refusedPredecessor && scope===refusedPredecessor.practice && csrf===refusedPredecessor.csrf
+          && identity?.email===refusedPredecessor.email && identity.practice_name===refusedPredecessor.practice_name){
+        predecessor=refusedPredecessor.value;
+      }
+      refusedPredecessor=null;
+      if(unresolved){
+        p("reference").value=unresolved.key;p("recovery").open=true;
+        status("The earlier creation needs its result checked under the same owner account and practice.");
+      }
+      restore();
+    }
+    function snapshot(){
+      if(scope===null || !identity || !csrf)throw Error("unavailable");
+      const e=epoch, token=csrf, practice=scope, owner=identity;
+      return {practice,owner,token,current:()=>epoch===e && csrf===token && scope===practice && identity===owner};
+    }
+    async function decode(response,current){
+      if(!current() || !response.body || response.headers.get("Content-Type")?.split(";")[0]!=="application/json")throw Error("unavailable");
+      const reader=response.body.getReader(),chunks=[];let size=0;
+      while(true){
+        const part=await reader.read();
+        if(!current()){await reader.cancel();throw Error("stale");}
+        if(part.done)break;
+        size+=part.value.byteLength;
+        if(size>32768){await reader.cancel();throw Error("unavailable");}
+        chunks.push(part.value);
+      }
+      if(!current())throw Error("stale");
+      const bytes=new Uint8Array(size);let offset=0;
+      for(const part of chunks){bytes.set(part,offset);offset+=part.byteLength;}
+      const value=JSON.parse(new TextDecoder("utf-8",{fatal:true}).decode(bytes));
+      if(!current())throw Error("stale");
+      return value;
+    }
+    function draftShape(value,key){
+      return closed(value,["command_key","command_id","create_intent_id","body","body_digest","expires_at","draft_revision","can_confirm"])
+        && value.command_key===key && uuid(value.command_id) && uuid(value.create_intent_id)
+        && decimal(value.draft_revision) && bodyShape(value.body) && digest(value.body_digest)
+        && instant(value.expires_at) && typeof value.can_confirm==="boolean";
+    }
+    function receiptShape(value,key,practice){
+      return closed(value,["command_key","command_id","create_intent_id","draft_revision","practice_id","location_id","body_digest","committed_at"])
+        && value.command_key===key && uuid(value.command_id) && uuid(value.create_intent_id)
+        && decimal(value.draft_revision) && value.practice_id===practice && uuid(value.practice_id)
+        && uuid(value.location_id) && digest(value.body_digest) && instant(value.committed_at);
+    }
+    function readbackShape(value,receipt){
+      if(!closed(value,["status","expected","current"]) || !["matches_created","diverged","missing"].includes(value.status)
+          || !closed(value.expected,["name","is_active"]) || !nameShape(value.expected.name)
+          || value.expected.is_active!==true)return false;
+      if(value.status==="missing")return value.current===null;
+      const current=value.current;
+      if(!closed(current,["id","practice_id","name","is_active"]) || current.id!==receipt.location_id
+          || current.practice_id!==receipt.practice_id || !scalarText(current.name)
+          || !(current.is_active===null || typeof current.is_active==="boolean"))return false;
+      const matches=current.name===value.expected.name && current.is_active===true;
+      return value.status==="matches_created" ? matches : !matches;
+    }
+    function renderDraft(value){
+      draft=Object.freeze(value);
+      predecessor=Object.freeze({command_id:value.command_id,create_intent_id:value.create_intent_id,draft_revision:value.draft_revision});
+      p("summary").textContent=identity.practice_name+" · "+value.body.name;
+      p("expiry").textContent="Review expires at "+value.expires_at+" (UTC).";
+      p("review").hidden=false;p("box").open=true;
+      p("reference").value=value.command_key;p("recovery").open=true;
+      status("Check the exact practice and location name, then choose Create location.");
+      clearTimeout(expiresTimer);
+      expiresTimer=setTimeout(()=>{if(draft?.command_key===value.command_key)restore();},
+        Math.max(0,Math.min(2147483647,Date.parse(value.expires_at)-Date.now()+1)));
+      p("review-title").focus();
+    }
+    function committed(value,key,context){
+      if(!receiptShape(value.receipt,key,context.practice) || !Object.hasOwn(value,"readback")
+          || value.readback!==null && !readbackShape(value.readback,value.receipt))throw Error("unavailable");
+      unresolved=null;requestPrepare=null;predecessor=null;clearReview();
+      p("reference").value=key;p("recovery").open=true;
+      p("created").textContent="Location reference: "+value.receipt.location_id+" · Practice: "+value.receipt.practice_id;
+      p("created").hidden=false;
+      const current=value.readback;
+      status(current===null ? "Location created. Check creation result to read its current details."
+        : current.status==="matches_created" ? "Location created, and the current details match the saved creation."
+        : current.status==="diverged" ? "Location created. Its current details have changed; the original creation is complete."
+        : "Location created. It is now missing from current truth; do not create a replacement to resolve this result.");
+      if(current){
+        p("summary").textContent=identity.practice_name+" · "+(current.current || current.expected).name;
+        p("expiry").textContent="";p("review").hidden=false;
+      }
+    }
+    async function request(action,body,context){
+      const response=await fetch("/demo/stage1/owner/locations/"+action,{
+        method:"POST",credentials:"same-origin",cache:"no-store",redirect:"error",
+        headers:{"Content-Type":"application/json","X-CSRF-Token":context.token},body:JSON.stringify(body)});
+      if(!context.current())throw Error("stale");
+      const value=await decode(response,context.current);
+      if(!context.current())throw Error("stale");
+      if(!response.ok){
+        const codes=["PRACTICE_LOCATION_CREATE_INVALID","PRACTICE_LOCATION_COMMAND_KEY_INVALID","PRACTICE_LOCATION_CONFIRMATION_INVALID",
+          "PRACTICE_LOCATION_AUTHENTICATION_REQUIRED","PRACTICE_LOCATION_CREATE_DENIED","PRACTICE_LOCATION_CREATE_CONFLICT"];
+        if(action!=="receipt" && closed(value,["state","code","detail"]) && value.state==="refused" && codes.includes(value.code)){
+          const retained=predecessor;
+          unresolved=null;requestPrepare=null;invalidateOwner(true);
+          if(retained)refusedPredecessor=Object.freeze({value:retained,practice:context.practice,
+            csrf:context.token,email:context.owner.email,practice_name:context.owner.practice_name});
+          ownerPresentation.attention("Location creation was refused. Check the owner account, then explicitly review fresh details.");
+          return null;
+        }
+        // Any denied, malformed or uncertain response leaves the original key
+        // unresolved; there is no automatic confirm or replacement-key retry.
+        throw Error("uncertain");
+      }
+      if(!scopeShape(value.practice_location_create_scope) || value.practice_location_create_scope.practice_id!==context.practice)throw Error("unavailable");
+      return value;
+    }
+    async function perform(action,body){
+      if(busy || accountBusy || pending || practitioner.blocked())return;
+      const context=snapshot();
+      pending=true;accountBusyState(true);practitioner.restore();restore();ownerPresentation.busy(true);
+      try{
+        const value=await request(action,body,context);
+        if(value===null)return;
+        if(!context.current())throw Error("stale");
+        if(action==="prepare" && value.state==="prepared"){
+          if(!closed(value,["state","draft","practice_location_create_scope"]) || !draftShape(value.draft,body.command_key))throw Error("unavailable");
+          unresolved=null;requestPrepare=null;renderDraft(value.draft);
+        }else if(value.state==="committed" && closed(value,["state","receipt","readback","practice_location_create_scope"])){
+          committed(value,body.command_key,context);
+        }else throw Error("unavailable");
+      }catch(_){
+        const wasCurrent=context.current();clearReview();
+        if(wasCurrent){
+          invalidateOwner(true);
+          status("The result is uncertain. Check the owner account, then check this same creation reference; do not submit another creation.");
+          p("reference").value=body.command_key;p("recovery").open=true;
+        }
+      }finally{
+        pending=false;ownerPresentation.busy(false);accountBusyState(false);practitioner.restore();restore();
+      }
+    }
+    p("form").addEventListener("submit",async event=>{
+      event.preventDefault();
+      if(busy || accountBusy || pending || practitioner.blocked() || scope===null)return;
+      if(unresolved){
+        if(unresolved.kind==="prepare" && requestPrepare && unresolved.practice===scope && unresolved.email===identity?.email)
+          await perform("prepare",requestPrepare); // Explicit same-key prepared-details check only.
+        return;
+      }
+      const body={name:p("name").value};
+      if(!advice(body.name)){status("Use a location name of up to 255 characters, without control characters.");return;}
+      const key=crypto.randomUUID(),prior=predecessor;
+      requestPrepare={command_key:key,body,new_intent:prior===null,
+        create_intent_id:prior?.create_intent_id ?? null,supersedes_command_id:prior?.command_id ?? null,
+        supersedes_revision:prior?.draft_revision ?? null};
+      const context=snapshot();
+      unresolved={key,practice:context.practice,email:context.owner.email,kind:"prepare"};
+      p("created").hidden=true;clearReview();await perform("prepare",requestPrepare);
+    });
+    p("confirm").addEventListener("click",async()=>{
+      if(busy || accountBusy || pending || practitioner.blocked() || !draft || p("confirm").disabled || unresolved)return;
+      const value=draft,context=snapshot();
+      const body={command_key:value.command_key,command_id:value.command_id,create_intent_id:value.create_intent_id,
+        draft_revision:value.draft_revision,body_digest:value.body_digest,confirmed:true};
+      unresolved={key:value.command_key,practice:context.practice,email:context.owner.email,kind:"confirm"};
+      clearReview();await perform("confirm",body); // Explicit click consumes the only confirmable view.
+    });
+    p("recovery-form").addEventListener("submit",async event=>{
+      event.preventDefault();
+      if(busy || accountBusy || pending || practitioner.blocked() || scope===null || !uuid(p("reference").value))return;
+      const key=p("reference").value,context=snapshot();
+      if(unresolved && (unresolved.key!==key || unresolved.practice!==context.practice || unresolved.email!==context.owner.email)){
+        status("Use the original creation reference and the same owner account and practice.");return;
+      }
+      unresolved=unresolved || {key,practice:context.practice,email:context.owner.email,kind:"receipt"};
+      clearReview();await perform("receipt",{command_key:key});
+    });
+    p("refresh").addEventListener("click",async()=>{if(!busy && !accountBusy && !pending && !practitioner.blocked())try{await state();}catch(_){invalidateOwner();}});
+    p("reference").addEventListener("input",restore);
+    p("name").addEventListener("input",edit);
+    p("box").addEventListener("toggle",()=>{if(!p("box").open && (pending || unresolved))p("box").open=true;});
+    restore();
+    return {invalidateOwner,presentOwner,restore,blocked:()=>pending};
+  })();
+  restorePractitionerAfterAccountBusy = () => {practitioner.restore();practiceLocation.restore();};
   function showOwner(value) {
     if (!value || value.enabled !== true || typeof value.csrf !== "string" ||
         !["credentials", "pending", "inspect", "verified"].includes(value.phase)) throw new Error("unavailable");
@@ -1439,11 +1701,12 @@ try{
       el("owner-identity").textContent = `${i.email} · ${i.practice_name} · ${i.role}`;
     }
     practitioner.presentOwner(value);
+    practiceLocation.presentOwner(value);
     ownerPresentation.owner(value);
   }
   async function state() {
     const epoch=++ownerViewEpoch, token=csrf;
-    practitioner.invalidateOwner();
+    practitioner.invalidateOwner();practiceLocation.invalidateOwner();
     const current=()=>ownerViewEpoch===epoch && csrf===token;
     try{
       const r = await fetch("/demo/stage1/owner/state", {credentials:"same-origin", cache:"no-store", redirect:"error"});
@@ -1452,12 +1715,12 @@ try{
       if(!current())throw new Error("stale");
       if (v.enabled === false) return;
       showOwner(v);
-    }catch(error){if(current())practitioner.invalidateOwner();throw error;}
+    }catch(error){if(current()){practitioner.invalidateOwner();practiceLocation.invalidateOwner();}throw error;}
   }
   async function post(action, body) {
-    if (busy || practitioner.blocked()) return;
+    if (busy || practitioner.blocked() || practiceLocation.blocked()) return;
     const epoch=++ownerViewEpoch, token=csrf;
-    practitioner.invalidateOwner(true);
+    practitioner.invalidateOwner(true);practiceLocation.invalidateOwner(true);
     const current=()=>ownerViewEpoch===epoch && csrf===token;
     busy = true;
     ownerPresentation.busy(true);
@@ -1471,7 +1734,7 @@ try{
       showOwner(value);
       ownerPresentation.confirmed();
     } catch (_) {
-      practitioner.invalidateOwner();
+      practitioner.invalidateOwner();practiceLocation.invalidateOwner();
       ownerPresentation.attention("The action could not be confirmed. Sign in or inspect the current account before continuing.",true);
       try { await state(); } catch (_) { /* Keep the uncertain action visible. */ }
     } finally {
@@ -1479,7 +1742,7 @@ try{
       el("owner-password").value = "";
       el("owner-onboarding").querySelectorAll("button,input").forEach(n => n.disabled = false);
       busy = false;
-      practitioner.restore(); // Restore derived CREATE state after the generic finalizer.
+      practitioner.restore();practiceLocation.restore(); // Derive both CREATE states after the generic finalizer.
       ownerPresentation.busy(false);
     }
   }

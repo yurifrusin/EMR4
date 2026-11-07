@@ -74,6 +74,7 @@ class OwnerController:
                 (not binding.invitation_join_enabled and (binding.invitation_issue is not None or binding.invitation_ready is not None))):
             raise ValueError("OWNER_INVITATION_BINDING_INVALID")
         self._practitioner_create = None  # Optional same-owner bridge; absent preserves old response.
+        self._practice_location_create = None  # Independent optional location-only bridge.
         self._invitation_owner = None
         self._closed = False
         self.binding, self.origin = binding, origin
@@ -341,7 +342,8 @@ class OwnerController:
                         await self._verified(value, value.tenant, rows)
                         self._current(key, value)
                 else: raise _Denied()
-                if (self._practitioner_create is None and value.phase == 'verified'
+                if (self._practitioner_create is None and self._practice_location_create is None
+                        and value.phase == 'verified'
                         and self.binding.private_owner_current is not None):
                     self._current(key,value)
                     # _verified accepted this same tenant token through current
@@ -368,6 +370,10 @@ class OwnerController:
                     scope = await self._practitioner_create.owner_scope(key, value)
                     self._current(key, value)
                     create_projection = {"practitioner_create_scope": scope}
+                if self._practice_location_create is not None:
+                    location_scope = await self._practice_location_create.owner_scope(key, value)
+                    self._current(key, value)
+                    create_projection["practice_location_create_scope"] = location_scope
                 response = _reply({"enabled": True, "csrf": value.csrf, "phase": value.phase,
                     **create_projection,
                     "identity": value.identity if value.phase == "verified" else None,

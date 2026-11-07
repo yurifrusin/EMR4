@@ -93,6 +93,32 @@
               </form>
             </details>
           </details>
+          <!-- STOPPED/default-off location source; later exact adoption is separate. -->
+          <details id="owner-location-box" class="disclosure" hidden>
+            <summary>Add location</summary>
+            <p class="helper">Add a location to this practice. Appointment availability is set up separately.</p>
+            <p id="owner-location-practice" class="request-context"></p>
+            <form id="owner-location-form" autocomplete="off">
+              <label for="owner-location-name">Location name<input id="owner-location-name" required disabled></label>
+              <button id="owner-location-prepare" type="submit" disabled>Check details</button>
+            </form>
+            <section id="owner-location-review" class="proposal" hidden aria-labelledby="owner-location-review-title">
+              <h3 id="owner-location-review-title" tabindex="-1">Create this location?</h3>
+              <p id="owner-location-summary" class="proposal-summary"></p>
+              <p id="owner-location-expiry" class="helper"></p>
+              <button id="owner-location-confirm" type="button" disabled>Create location</button>
+            </section>
+            <p id="owner-location-status" role="status" aria-live="polite"></p>
+            <p id="owner-location-created" class="helper" hidden></p>
+            <button id="owner-location-refresh" class="quiet" type="button" disabled>Check owner account</button>
+            <details id="owner-location-recovery" class="disclosure">
+              <summary>Check an earlier creation</summary>
+              <form id="owner-location-recovery-form" autocomplete="off">
+                <label for="owner-location-reference">Creation reference<input id="owner-location-reference" maxlength="36" spellcheck="false" disabled></label>
+                <button id="owner-location-recover" class="quiet" type="submit" disabled>Check creation result</button>
+              </form>
+            </details>
+          </details>
         </section>        <div id="account-identity" class="request-context" hidden></div>
         <button id="account-invitation-refresh" type="button" hidden>Check for invitation</button>
         <section id="account-invitation" hidden aria-labelledby="account-invitation-title">

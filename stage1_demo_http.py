@@ -884,6 +884,7 @@ class DemoConfig:
     owner_onboarding: OwnerBinding | None = field(default=None, repr=False)
     # STOPPED prospective source: trusted optional binding, no request selection.
     practitioner_create: Any = field(default=None, repr=False)
+    practice_location_create: Any = field(default=None, repr=False)
     patient_browser: PatientBrowserBinding | None = field(default=None, repr=False)
     staff_booking_context: Any = field(default=None, repr=False)
     selected_account_diary: SelectedAccountDiaryBinding | None = field(default=None, repr=False)
@@ -1235,6 +1236,16 @@ def create_stage1_demo_app(config: DemoConfig) -> tuple[FastAPI, DemoIssuer]:
             # Future reviewed enablement also requires exact callbacks and scope.
             practitioner_create_bridge = PractitionerCreateBridge(owner, config.practitioner_create)
 
+    practice_location_create_bridge = None
+    if config.practice_location_create is not None:
+        from stage1_practice_location_browser import (
+            PracticeLocationCreateBridge, validate_optional_binding as validate_location_binding)
+        if validate_location_binding(config.practice_location_create):
+            if owner is None:
+                raise ValueError("PRACTICE_LOCATION_CREATE_REQUIRES_CURRENT_OWNER")
+            # The new bridge remains stopped until separately reviewed adoption.
+            practice_location_create_bridge = PracticeLocationCreateBridge(owner, config.practice_location_create)
+
     patient_bridge = None
     if config.patient_browser is not None and config.patient_browser.enabled is True:
         if login is None:
@@ -1363,7 +1374,7 @@ def create_stage1_demo_app(config: DemoConfig) -> tuple[FastAPI, DemoIssuer]:
         staff_booking_install_state = 'closed'
         installed, staff_booking_bridge = staff_booking_bridge, None
         failures = []
-        for controller in (practitioner_create_bridge,selected_staff_native_owner,selected_installed,installed,patient_bridge,owner,login):
+        for controller in (practice_location_create_bridge,practitioner_create_bridge,selected_staff_native_owner,selected_installed,installed,patient_bridge,owner,login):
             if controller is not None:
                 try:
                     await controller.close()
@@ -1371,7 +1382,7 @@ def create_stage1_demo_app(config: DemoConfig) -> tuple[FastAPI, DemoIssuer]:
                     failures.append(True)
         if failures:
             raise RuntimeError('PRIVATE_ACCOUNT_CONTROLLER_CLEANUP_UNPROVEN')
-    if (practitioner_create_bridge is not None or staff_booking_bridge is not None or patient_bridge is not None or (config.owner_onboarding is not None and config.owner_onboarding.private_owner_current is not None)
+    if (practice_location_create_bridge is not None or practitioner_create_bridge is not None or staff_booking_bridge is not None or patient_bridge is not None or (config.owner_onboarding is not None and config.owner_onboarding.private_owner_current is not None)
             or (config.seeded_login is not None and config.seeded_login.private_recipient_current is not None)):
         app.state.close_private_account_controllers = close_private_account_controllers
 
@@ -1406,6 +1417,26 @@ def create_stage1_demo_app(config: DemoConfig) -> tuple[FastAPI, DemoIssuer]:
             app.add_api_route("/demo/stage1/owner/practitioners/" + create_action,
                 make_practitioner_create_route(create_action), methods=["POST"],
                 name="owner_practitioner_create_" + create_action)
+
+    # Absent/disabled location binding installs neither a route nor owner scope.
+    practice_location_create_paths = frozenset()
+    if practice_location_create_bridge is not None:
+        practice_location_create_paths = frozenset("/demo/stage1/owner/locations/" + action
+            for action in ("prepare", "confirm", "receipt"))
+        if any(getattr(route, "path", "") in practice_location_create_paths for route in app.routes):
+            raise ValueError("PRACTICE_LOCATION_CREATE_ROUTE_COLLISION")
+        def make_practice_location_create_route(action):
+            async def route(request: Request):
+                try:
+                    local(request)
+                except HTTPException:
+                    return no_store({"detail": "Location creation unavailable."}, 404)
+                return await practice_location_create_bridge.handle(request, action)
+            return route
+        for location_action in ("prepare", "confirm", "receipt"):
+            app.add_api_route("/demo/stage1/owner/locations/" + location_action,
+                make_practice_location_create_route(location_action), methods=["POST"],
+                name="owner_practice_location_create_" + location_action)
 
     # Patient access uses the validated selected-account context, independently
     # of the fixed Bureau staff/mock capability and its fixed booking patient.
