@@ -8682,3 +8682,298 @@ def test_location_create_ui_mapping_rejects_semantic_repin(monkeypatch,mutation)
     with pytest.raises(b.BoundedG1BError) as err:
         b._g4_owner_bootstrap_external_inputs(read,_location_create_binding())
     assert err.value.reason_code=="bounded_g4_practice_location_create_product_mapping"
+
+
+# Weekly working-hours control source tests. No application/database/browser or
+# real Git is involved. Shared-loader tests substitute inherited policy/Git and
+# independent receipts; they do not prove actual admission or publication.
+_WEEKLY_WINDOW_CONTROL = Path("C:/Users/there/EMR4-tools/practitioner-first-weekly-window-control-stopped-source-v1/after")
+_WEEKLY_WINDOW_CONTROL_BEFORE = _WEEKLY_WINDOW_CONTROL.parent / "before"
+
+
+def _weekly_window_descriptor():
+    return bounded_g1b._g4_owner_bootstrap_descriptor(bounded_g1b.G4_FIRST_WEEKLY_WINDOW_SCHEMA)
+
+
+def _weekly_window_binding():
+    b=bounded_g1b; d=_weekly_window_descriptor()
+    return {"schema_version":b.G4_FIRST_WEEKLY_WINDOW_SCHEMA,
+            "product_vector":d["vector"],"mapping_review":d["mapping"]}
+
+
+def test_weekly_window_registry_preserves_v35_and_refuses_unknown_family_version():
+    b=bounded_g1b; d=_weekly_window_descriptor()
+    assert d is b.G4_FIRST_WEEKLY_WINDOW_DESCRIPTOR and d["version"]==36
+    assert b._g4_owner_bootstrap_descriptor(b.G4_FIRST_WEEKLY_WINDOW_SCOPE_SCHEMA,scope=True) is d
+    assert b._g4_owner_bootstrap_descriptor(b.G4_PRACTICE_LOCATION_CREATE_SCHEMA) is b.G4_PRACTICE_LOCATION_CREATE_DESCRIPTOR
+    assert b.G4_PRACTICE_LOCATION_CREATE_DESCRIPTOR["version"]==35
+    assert b._g4_owner_bootstrap_descriptor(b.G4_CURRENT_SITE_COMMITTED_BASELINE_SCHEMA) is b.G4_CURRENT_SITE_COMMITTED_BASELINE_DESCRIPTOR
+    q={"schema_version":b.G4_FIRST_WEEKLY_WINDOW_SCHEMA+"-unknown","stage":"apply",
+       "operation_kind":"implement_g4_stage1_successor","repair_sha256":{}}
+    assert b._routes_g4_owner_bootstrap_binding(q) and not b._is_g4_owner_bootstrap_binding(q)
+    with pytest.raises(b.BoundedG1BError) as err:b.operation_paths(q["operation_kind"],q)
+    assert err.value.reason_code=="bounded_g4_owner_bootstrap_binding_kind"
+
+
+@pytest.mark.parametrize("stage",["enable","admit","apply"])
+def test_weekly_window_exact_phase_owned_paths(stage):
+    b=bounded_g1b; d=_weekly_window_descriptor()
+    kind={"enable":"enable_g4_stage1_successor","admit":b.G4_OWNER_BOOTSTRAP_ADMIT_KIND,
+          "apply":"implement_g4_stage1_successor"}[stage]
+    paths=d["control"] if stage=="enable" else d["apply_paths"] if stage=="apply" else frozenset()
+    assert len(paths)=={"enable":3,"admit":0,"apply":8}[stage]
+    assert len(b.G4_FIRST_WEEKLY_WINDOW_ADD_PATHS)==len(b.G4_FIRST_WEEKLY_WINDOW_REPLACE_PATHS)==4
+    q={"schema_version":b.G4_FIRST_WEEKLY_WINDOW_SCHEMA,"operation_kind":kind,"stage":stage,
+       "repair_sha256":dict.fromkeys(paths,{})}
+    assert b.operation_paths(kind,q)==paths
+    if stage=="admit":
+        b._g4_owner_bootstrap_require_entrypoint(q,"recovery_preflight","development")
+        with pytest.raises(b.BoundedG1BError) as err:b._g4_owner_bootstrap_require_entrypoint(q,"publication","development")
+        assert err.value.reason_code=="bounded_g4_owner_bootstrap_admit_entrypoint"
+    q["repair_sha256"][b.AGENTS]={}
+    with pytest.raises(b.BoundedG1BError) as err:b.operation_paths(kind,q)
+    assert err.value.reason_code=="bounded_g4_owner_bootstrap_changed_paths"
+
+
+@pytest.mark.parametrize("mutation",[None,"runtime","voice","outside_product"])
+def test_weekly_window_scope_preserves_runtime_closures(mutation):
+    b=bounded_g1b
+    scope=json.loads((_WEEKLY_WINDOW_CONTROL/b.G4_STAGE1_SUCCESSOR_SCOPE).read_bytes())
+    if mutation is None:
+        assert b.validate_g4_owner_bootstrap_scope(scope)==scope["source_sha256"]
+        assert scope["admission_grants_runtime_authority"] is False
+        return
+    if mutation=="runtime":scope["admission_grants_runtime_authority"]=True
+    elif mutation=="voice":scope["voice_activation"]=True
+    else:scope["allowed_paths"].append("app/services/clinical_authority.py")
+    with pytest.raises(b.BoundedG1BError) as err:b.validate_g4_owner_bootstrap_scope(scope)
+    assert err.value.reason_code=="bounded_g4_owner_bootstrap_scope_boundary"
+
+
+def test_weekly_window_genuine_distinct_opinion_shapes_and_eight_source_joins():
+    b=bounded_g1b; d=_weekly_window_descriptor()
+    vector,review=b._g4_owner_bootstrap_external_inputs(_practitioner_create_read,_weekly_window_binding())
+    assert vector==b.G4_FIRST_WEEKLY_WINDOW_EXPECTED_DOCS["vector"]
+    assert review==b.G4_FIRST_WEEKLY_WINDOW_EXPECTED_DOCS["mapping"]
+    for key in ("core_review","ui_review"):
+        original=b.G4_FIRST_WEEKLY_WINDOW_EXPECTED_DOCS[key]
+        assert original["reviewer"]=="/root/native_source_actual_review_sol_xhigh"
+        assert "reviewer_agent" not in original and "schema" not in original
+    assert review["reviewer_agent"]=="/root/weekly_f4_profile_independent_review"
+    assert review["authority"]["runtime_authorized"] is False
+    assert {p for p,v in d["before_sha"].items() if v is None}==b.G4_FIRST_WEEKLY_WINDOW_ADD_PATHS
+    assert d["before_sha"]["app/routers/practice.py"]=="78af01953e1a67b1097bc03035f1f84aacb8fdf6baa02d1e50841cbab2343f20"
+
+
+def _weekly_window_repin_document(monkeypatch,key,document):
+    b=bounded_g1b; d=_weekly_window_descriptor()
+    raw=b._canonical(document); row={**b.G4_FIRST_WEEKLY_WINDOW_DOC_ROWS[key],"bytes":len(raw),"sha256":b._sha(raw)}
+    monkeypatch.setitem(b.G4_FIRST_WEEKLY_WINDOW_DOC_ROWS,key,row)
+    monkeypatch.setitem(b.G4_FIRST_WEEKLY_WINDOW_EXPECTED_DOCS,key,document)
+    if key in ("vector","mapping"):monkeypatch.setitem(d,key,{k:row[k] for k in ("path","sha256")})
+    def read(path,digest):
+        if path==Path(row["path"]):assert digest==row["sha256"];return raw
+        return _practitioner_create_read(path,digest)
+    return read
+
+
+@pytest.mark.parametrize("key",["core_review","ui_review","mapping"])
+@pytest.mark.parametrize("mutation",["author","independent","blocker","runtime","missing_runtime","reviewer_alias"])
+def test_weekly_window_semantic_review_refusals_survive_repin(monkeypatch,key,mutation):
+    b=bounded_g1b; review=copy.deepcopy(b.G4_FIRST_WEEKLY_WINDOW_EXPECTED_DOCS[key])
+    field="reviewer_agent" if key=="mapping" else "reviewer"
+    if mutation=="author":review[field]={"core_review":"/root/enable_preparer_actual_semantic_review_sol_xhigh",
+        "ui_review":"/root/location_v2_final_saver_review","mapping":"/root/native_source_actual_review_sol_xhigh"}[key]
+    elif mutation=="independent":review["independent"]=False
+    elif mutation=="blocker":review["blocking_findings"]=["synthetic"]
+    elif mutation=="reviewer_alias":review["reviewer" if field=="reviewer_agent" else "reviewer_agent"]=review.pop(field)
+    else:
+        authority=review["authority"] if key=="mapping" else review
+        if mutation=="runtime":authority["runtime_authorized"]=True
+        else:authority.pop("runtime_authorized")
+    read=_weekly_window_repin_document(monkeypatch,key,review)
+    with pytest.raises(b.BoundedG1BError) as err:b._g4_owner_bootstrap_external_inputs(read,_weekly_window_binding())
+    assert err.value.reason_code==("bounded_g4_first_weekly_window_independent_mapping" if key=="mapping"
+                                 else "bounded_g4_first_weekly_window_independent_source")
+
+
+@pytest.mark.parametrize("key",sorted(bounded_g1b.G4_FIRST_WEEKLY_WINDOW_DOC_ROWS)
+    +[("after",p) for p in sorted(bounded_g1b.G4_FIRST_WEEKLY_WINDOW_PRODUCT_PATHS)]
+    +[("before",p) for p in sorted(bounded_g1b.G4_FIRST_WEEKLY_WINDOW_BEFORE_ROWS)])
+def test_weekly_window_each_immutable_external_raw_rejects_tamper(key):
+    b=bounded_g1b
+    if type(key) is tuple:
+        kind,p=key;row=(b.G4_FIRST_WEEKLY_WINDOW_PRODUCT_ROWS if kind=="after" else b.G4_FIRST_WEEKLY_WINDOW_BEFORE_ROWS)[p]
+    else:row=b.G4_FIRST_WEEKLY_WINDOW_DOC_ROWS[key]
+    def read(path,digest):
+        raw=_practitioner_create_read(path,digest)
+        return raw+b" " if path==Path(row["path"]) else raw
+    with pytest.raises(b.BoundedG1BError) as err:b._g4_owner_bootstrap_external_inputs(read,_weekly_window_binding())
+    assert err.value.reason_code=="bounded_g4_first_weekly_window_external_source"
+
+
+@pytest.mark.parametrize("reviewer",["/root","/root/native_source_actual_review_sol_xhigh",
+    "/root/enable_preparer_actual_semantic_review_sol_xhigh","/root/location_v2_final_saver_review","/synthetic/independent-reviewer"])
+def test_weekly_window_operation_review_excludes_implementation_authors(reviewer):
+    b=bounded_g1b; d=_weekly_window_descriptor();subject="a"*64
+    path=d["root"]/"entry-admission-v1/independent-apply-development-subject-review-v1.json"
+    review={"schema":"emr4.g4_operation_review.v1","status":"PASS",
+        "verdict":"PASS_G4_STAGE1_OWNER_BOOTSTRAP_EXACT_ADMISSION_SUBJECT","subject_sha256":subject,
+        "independent":True,"implementation_authorship":False,"blocking_findings":[],"reviewer_agent":reviewer,
+        "stage":"apply","phase":"development"}
+    raw=b._canonical(review);row={"path":path.as_posix(),"sha256":b._sha(raw)}
+    def read(actual,digest):assert actual==path and digest==b._sha(raw);return raw
+    invoke=lambda:b._g4_owner_bootstrap_subject_review(read,row,b.G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT,
+        subject,"apply","development",b.G4_FIRST_WEEKLY_WINDOW_SCHEMA)
+    if reviewer in d["excluded_reviewers"]:
+        with pytest.raises(b.BoundedG1BError) as err:invoke()
+        assert err.value.reason_code=="bounded_g4_owner_bootstrap_independent_subject"
+    else:assert invoke()==review
+
+
+@pytest.mark.parametrize("mutation",["base","control","owned","before","after","size","predecessor","reviewers"])
+def test_weekly_window_descriptor_drift_is_rejected(monkeypatch,mutation):
+    b=bounded_g1b;d=_weekly_window_descriptor();p=sorted(b.G4_FIRST_WEEKLY_WINDOW_REPLACE_PATHS)[0]
+    changes={"base":("base",b.G4_PRACTICE_LOCATION_CREATE_BASE),"control":("control",d["control"]|{b.AGENTS}),
+        "owned":("apply_paths",d["apply_paths"]-{p}),"before":("before_sha",{**d["before_sha"],p:None}),
+        "after":("product_sha",{**d["product_sha"],p:"a"*64}),"size":("product_bytes",{**d["product_bytes"],p:1}),
+        "predecessor":("preimages",{**d["preimages"],b.G4_STAGE1_SUCCESSOR_SCOPE:"a"*64}),
+        "reviewers":("excluded_reviewers",{""})}
+    field,value=changes[mutation];monkeypatch.setitem(d,field,value)
+    q={"schema_version":b.G4_FIRST_WEEKLY_WINDOW_SCHEMA,"operation_kind":"implement_g4_stage1_successor",
+        "stage":"apply","repair_sha256":dict.fromkeys(b.G4_FIRST_WEEKLY_WINDOW_PRODUCT_PATHS,{})}
+    with pytest.raises(b.BoundedG1BError) as err:b.operation_paths(q["operation_kind"],q)
+    assert err.value.reason_code=="bounded_g4_first_weekly_window_path_boundary"
+
+
+@pytest.mark.parametrize("mutation",["promoted_history","wrong_before","omitted_product"])
+def test_weekly_window_canonical_mapping_rejects_semantic_repin(monkeypatch,mutation):
+    b=bounded_g1b;v=copy.deepcopy(b.G4_FIRST_WEEKLY_WINDOW_EXPECTED_DOCS["vector"])
+    if mutation=="promoted_history":
+        next(r for r in v["changes"] if r["relative_path"]=="stage1_first_weekly_window_browser.py")["after"]=            b.G4_FIRST_WEEKLY_WINDOW_EXPECTED_DOCS["ui_v1_negative"]["reviewed_sources"][0]
+    elif mutation=="wrong_before":next(r for r in v["changes"] if r["relative_path"]=="app/routers/practice.py")["before"]=None
+    else:v["changes"].pop()
+    read=_weekly_window_repin_document(monkeypatch,"vector",v)
+    with pytest.raises(b.BoundedG1BError) as err:b._g4_owner_bootstrap_external_inputs(read,_weekly_window_binding())
+    assert err.value.reason_code=="bounded_g4_first_weekly_window_product_mapping"
+
+
+def test_weekly_window_original_ui_negative_cannot_be_promoted(monkeypatch):
+    b=bounded_g1b;v=copy.deepcopy(b.G4_FIRST_WEEKLY_WINDOW_EXPECTED_DOCS["ui_v1_negative"])
+    v.update(status="PASS_SOURCE_ONLY",source_accepted=True,blocking_findings=[])
+    read=_weekly_window_repin_document(monkeypatch,"ui_v1_negative",v)
+    with pytest.raises(b.BoundedG1BError) as err:b._g4_owner_bootstrap_external_inputs(read,_weekly_window_binding())
+    assert err.value.reason_code=="bounded_g4_first_weekly_window_rejected_history"
+
+
+def _weekly_window_synthetic_loader(monkeypatch,tmp_path,stage="apply",mutation=None,phase="development"):
+    b=bounded_g1b;d=_weekly_window_descriptor()
+    inherited=b.CONFIGURATION_PATHS|{b.STATE,b.GATES,b.OVERLAY,b.AGENTS,b.G4_STAGE1_INTERACTIVE_SCOPE,
+        b.G4_STAGE1_SUCCESSOR_SCOPE,b.G4_STAGE1_SUCCESSOR_TEST,b.G4_CI_WORKFLOW}|b.SOURCE_PATHS|b.CONTROLLER_PATHS
+    payloads={p:("synthetic inherited "+p).encode() for p in inherited}
+    for p in d["control"]:payloads[p]=(_WEEKLY_WINDOW_CONTROL/p).read_bytes()
+    policy={p:payloads[p] for p in (b.STATE,b.GATES,b.OVERLAY,b.AGENTS)}
+    scope=json.loads(payloads[b.G4_STAGE1_SUCCESSOR_SCOPE]);scope["source_sha256"]={p:b._sha(payloads[p]) for p in b.SOURCE_PATHS|b.CONTROLLER_PATHS}
+    payloads[b.G4_STAGE1_SUCCESSOR_SCOPE]=b._canonical(scope)+b"\n"
+    after={p:Path(row["path"]).read_bytes() for p,row in d["product_rows"].items()}
+    original={p:(_WEEKLY_WINDOW_CONTROL_BEFORE/p).read_bytes() for p in d["control"]}
+    product_before={p:Path(row["path"]).read_bytes() for p,row in b.G4_FIRST_WEEKLY_WINDOW_BEFORE_ROWS.items()}
+    existing="app/routers/practice.py";addition=sorted(b.G4_FIRST_WEEKLY_WINDOW_ADD_PATHS)[0]
+    if stage=="apply":payloads.update(after)
+    if mutation in {"state","gates","overlay","agents"}:
+        p={"state":b.STATE,"gates":b.GATES,"overlay":b.OVERLAY,"agents":b.AGENTS}[mutation];payloads[p]+=b" "
+    if mutation=="product_drift":payloads[existing]+=b" "
+    pins={p:b._sha(raw) for p,raw in payloads.items()}
+    target=tmp_path/"target";source=tmp_path/"source"
+    base=d["base"]["commit"] if stage=="enable" else "b"*40
+    tree=d["base"]["tree"] if stage=="enable" else "c"*40
+    candidate=tree if stage=="admit" else "d"*40
+    paths=d["control"] if stage=="enable" else d["apply_paths"] if stage=="apply" else frozenset()
+    head=base if phase=="development" else "f"*40
+    q={"schema_version":b.G4_FIRST_WEEKLY_WINDOW_SCHEMA,"operation_id":"synthetic-weekly-window-"+stage,
+        "operation_kind":{"enable":"enable_g4_stage1_successor","admit":b.G4_OWNER_BOOTSTRAP_ADMIT_KIND,"apply":"implement_g4_stage1_successor"}[stage],
+        "stage":stage,"phase":phase,"base_commit":base,"base_tree":tree,"expected_head":head,"expected_index_tree":candidate,
+        "candidate_tree":candidate,"source_sha256":scope["source_sha256"],"payload_sha256":pins,
+        "repair_sha256":{p:{"before_sha256":d["preimages"][p] if stage=="enable" else d["before_sha"][p],"after_sha256":pins[p]} for p in paths},
+        "source_review":{"path":"synthetic-only","sha256":"a"*64},"activation_acceptance":None,
+        "product_vector":d["vector"],"mapping_review":d["mapping"]}
+    if mutation=="null_existing_pair":q["repair_sha256"][existing]["before_sha256"]=None
+    if mutation=="admit_delta":q["candidate_tree"]="d"*40
+    if mutation=="phase_index":q["expected_index_tree"]="e"*40
+    activation=d["root"]/"entry-admission-v1/independent-enable-push-effect-review-v1.json"
+    record={"schema":"emr4.g4_operation_review.v1","status":"PASS","verdict":"PASS_G4_STAGE1_OWNER_BOOTSTRAP_CONTROL_PUBLICATION_EFFECT",
+        "reviewer_agent":"/synthetic/independent-fixture","independent":True,"implementation_authorship":False,"blocking_findings":[],
+        "stage":"enable","phase":"push","base":d["base"]["commit"],"commit":base,"candidate_tree":tree,
+        "control_activation_accepted":True,"same_attempt_remote_readback_verified":True,"protected_refs_unchanged":True,
+        "whole_inverse_verified_same_attempt":True,"published_ref":b.G4_STAGE1_INTERACTIVE_BACKEND_REF}
+    if mutation=="activation_author":record["reviewer_agent"]="/root/native_source_actual_review_sol_xhigh"
+    activation_raw=b._canonical(record)
+    if stage!="enable":q["activation_acceptance"]={"path":activation.as_posix(),"sha256":b._sha(activation_raw)}
+    if mutation=="old_activation_root":q["activation_acceptance"]["path"]=(b.G4_PRACTICE_LOCATION_CREATE_ROOT/"entry-admission-v1"/activation.name).as_posix()
+    def read(path,digest):
+        if path==activation:raw=activation_raw
+        elif path.is_relative_to(target):raw=payloads[path.relative_to(target).as_posix()]
+        elif path.is_relative_to(source):raw=payloads[path.relative_to(source).as_posix()]
+        else:
+            matches=[p for p,row in d["product_rows"].items() if Path(row["path"])==path]
+            assert len(matches)==1;raw=after[matches[0]]
+        assert b._sha(raw)==digest;return raw
+    def git_bytes(actual,*args):
+        assert actual==target
+        if args==("cat-file","blob",d["base"]["commit"]+":"+b.G4_STAGE1_SUCCESSOR_SCOPE):return original[b.G4_STAGE1_SUCCESSOR_SCOPE]
+        if args[:2]==("ls-tree","-z"):
+            assert len(args)==5 and args[2]==base and args[3]=="--" and args[4] in paths
+            p=args[4];present=stage=="enable" or p in product_before or mutation=="unexpected_add" and p==addition
+            return b"100644 blob synthetic\x00" if present and not (mutation=="missing_existing" and p==existing) else b""
+        assert args[:2]==("cat-file","blob") and len(args)==3
+        commit,p=args[2].split(":",1)
+        if commit==base:
+            if stage=="enable" and p in original:return original[p]
+            if p in product_before:return product_before[p]+(b" " if mutation=="wrong_existing" and p==existing else b"")
+            return payloads[p]
+        assert commit==d["base"]["commit"] and p in policy;return policy[p]
+    def git(actual,*args):
+        assert actual==target
+        if args==("rev-parse",d["base"]["commit"]+"^{tree}"):return d["base"]["tree"]
+        if args==("cat-file","commit",base):return "tree "+tree+"\nparent "+("e"*40 if mutation=="wrong_parent" else d["base"]["commit"])+"\n\nsynthetic only"
+        assert phase!="development" and args==("cat-file","commit",head)
+        return "tree "+("e"*40 if mutation=="phase_tree" else candidate)+"\nparent "+("e"*40 if mutation=="phase_parent" else base)+"\n\nsynthetic phase"
+    monkeypatch.setattr(b,"_g4_owner_bootstrap_external_inputs",lambda *args:({},{}))
+    monkeypatch.setattr(b,"_g4_owner_bootstrap_subject_review",lambda *args:{"synthetic":True})
+    monkeypatch.setattr(b.trusted_git,"run_git_bytes",git_bytes);monkeypatch.setattr(b.trusted_git,"run_git",git)
+    monkeypatch.setattr(b.trusted_git,"attest_target_index",lambda *args,**kwargs:{"synthetic":True})
+    return b._load_g4_owner_bootstrap_inputs(None,target,source,b.G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT,tmp_path/"scratch",q,read,{})
+
+
+@pytest.mark.parametrize("stage",["enable","admit","apply"])
+def test_weekly_window_shared_loader_four_existing_four_absent(monkeypatch,tmp_path,stage):
+    loaded=_weekly_window_synthetic_loader(monkeypatch,tmp_path,stage)
+    assert len(loaded.binding["repair_sha256"])=={"enable":3,"admit":0,"apply":8}[stage]
+    if stage=="apply":
+        assert sum(p["before_sha256"] is None for p in loaded.binding["repair_sha256"].values())==4
+        assert sum(p["before_sha256"] is not None for p in loaded.binding["repair_sha256"].values())==4
+
+
+@pytest.mark.parametrize("mutation,reason",[("unexpected_add","bounded_g4_owner_bootstrap_change_preimage"),
+    ("missing_existing","bounded_g4_owner_bootstrap_change_preimage"),("wrong_existing","bounded_g4_owner_bootstrap_change_preimage"),
+    ("null_existing_pair","bounded_g4_owner_bootstrap_change_preimage"),("product_drift","bounded_g4_owner_bootstrap_change_preimage"),
+    ("old_activation_root","bounded_g4_owner_bootstrap_activation_path"),("activation_author","bounded_g4_owner_bootstrap_activation_acceptance"),
+    ("wrong_parent","bounded_g4_owner_bootstrap_activation_parent"),("state","bounded_g4_owner_bootstrap_state_unchanged"),
+    ("gates","bounded_g4_owner_bootstrap_state_unchanged"),("overlay","bounded_g4_owner_bootstrap_state_unchanged"),("agents","bounded_g4_owner_bootstrap_state_unchanged")])
+def test_weekly_window_shared_loader_named_refusals(monkeypatch,tmp_path,mutation,reason):
+    with pytest.raises(bounded_g1b.BoundedG1BError) as err:_weekly_window_synthetic_loader(monkeypatch,tmp_path,mutation=mutation)
+    assert err.value.reason_code==reason
+
+
+def test_weekly_window_shared_loader_admit_zero_delta(monkeypatch,tmp_path):
+    assert _weekly_window_synthetic_loader(monkeypatch,tmp_path,"admit").binding["repair_sha256"]=={}
+    with pytest.raises(bounded_g1b.BoundedG1BError) as err:_weekly_window_synthetic_loader(monkeypatch,tmp_path,"admit","admit_delta")
+    assert err.value.reason_code=="bounded_g4_owner_bootstrap_admit_no_delta"
+
+
+@pytest.mark.parametrize("phase",["pre-push","post-push"])
+def test_weekly_window_shared_loader_phase_parent_tree_index(monkeypatch,tmp_path,phase):
+    assert _weekly_window_synthetic_loader(monkeypatch,tmp_path,phase=phase).binding["phase"]==phase
+    for mutation in ("phase_parent","phase_tree","phase_index"):
+        with pytest.raises(bounded_g1b.BoundedG1BError) as err:_weekly_window_synthetic_loader(monkeypatch,tmp_path,mutation=mutation,phase=phase)
+        assert err.value.reason_code=="bounded_g4_owner_bootstrap_committed_binding"
