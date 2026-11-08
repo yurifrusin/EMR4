@@ -988,7 +988,7 @@ function accountBusyState(busy) {
   accountBusy = busy;
   ownerPresentation.accountBusy(busy);
   $("account-panel").querySelectorAll("button,input,select").forEach(node => {
-    if (!node.closest("#owner-practitioner-box,#owner-location-box")) node.disabled = busy;
+    if (!node.closest("#owner-practitioner-box,#owner-location-box,#owner-weekly-box")) node.disabled = busy;
   });
   $("account-logout").disabled=busy;
   if (restorePractitionerAfterAccountBusy) restorePractitionerAfterAccountBusy();
@@ -1118,6 +1118,12 @@ try{
   // exact reviewed source adoption and finite bindings, never a DOM toggle.
   let ownerViewEpoch = 0;
   let practiceLocation = null;
+  let firstWeekly = null, firstWeeklyFeatureEnabled = false;
+  const weeklyCreateRefs = {practitioner:null,location:null};
+  function rememberWeeklyCreate(kind,key,practice,email){
+    const next=Object.freeze({key,ownerTag:JSON.stringify([email,practice])});
+    if(JSON.stringify(weeklyCreateRefs[kind])!==JSON.stringify(next)){weeklyCreateRefs[kind]=next;firstWeekly?.refsChanged();}
+  }
   const practitioner = (() => {
     const stopped = false;
     const p = name => el("owner-practitioner-" + name);
@@ -1171,14 +1177,14 @@ try{
     function restore(){
       const visible=!stopped && known;
       p("box").hidden=!visible;
-      const available=visible && scope!==null && !busy && !accountBusy && !pending && !practiceLocation?.blocked();
+      const available=visible && scope!==null && !busy && !accountBusy && !pending && !(practiceLocation?.blocked() || firstWeekly?.blocked());
       p("form").querySelectorAll("input,button").forEach(n=>n.disabled=!available || unresolved!==null);
       if(available && unresolved?.kind==="prepare" && requestPrepare
           && unresolved.practice===scope && unresolved.email===identity?.email)p("prepare").disabled=false;
       p("prepare").textContent=unresolved?.kind==="prepare" ? "Check prepared details" : "Check details";
       p("confirm").disabled=!available || unresolved!==null || !draft || !draft.can_confirm
         || !(Date.now()<Date.parse(draft.expires_at));
-      p("refresh").disabled=!visible || busy || accountBusy || pending || practiceLocation?.blocked();
+      p("refresh").disabled=!visible || busy || accountBusy || pending || (practiceLocation?.blocked() || firstWeekly?.blocked());
       p("reference").disabled=!available;
       p("recover").disabled=!available || !uuid(p("reference").value);
       if(pending || unresolved)p("box").open=true;
@@ -1299,6 +1305,7 @@ try{
       if(rb!==null && (!closed(rb,["status","expected","current"]) || !factsShape(rb.expected)
           || !["matches_created","diverged","missing"].includes(rb.status)
           || (rb.status==="missing" ? rb.current!==null : !factsShape(rb.current))))throw Error("unavailable");
+      rememberWeeklyCreate("practitioner",key,scope,identity.email);
       unresolved=null;requestPrepare=null;predecessor=null;clearReview();
       p("reference").value=key;p("recovery").open=true;
       const copy=rb===null ? "Created. Check creation result to read its current details."
@@ -1337,7 +1344,7 @@ try{
       return value;
     }
     async function perform(action,body){
-      if(busy || accountBusy || pending || practiceLocation?.blocked())return;
+      if(busy || accountBusy || pending || (practiceLocation?.blocked() || firstWeekly?.blocked()))return;
       const context=snapshot();
       pending=true;restore();practiceLocation?.restore();ownerPresentation.busy(true);
       try{
@@ -1366,7 +1373,7 @@ try{
     }
     p("form").addEventListener("submit",async event=>{
       event.preventDefault();
-      if(stopped || busy || accountBusy || pending || practiceLocation?.blocked() || scope===null)return;
+      if(stopped || busy || accountBusy || pending || (practiceLocation?.blocked() || firstWeekly?.blocked()) || scope===null)return;
       if(unresolved){
         if(unresolved.kind==="prepare" && requestPrepare && unresolved.practice===scope && unresolved.email===identity?.email)
           await perform("prepare",requestPrepare); // Explicit identical-key prepare check only; never confirm retry.
@@ -1389,7 +1396,7 @@ try{
       await perform("prepare",requestPrepare);
     });
     p("confirm").addEventListener("click",async()=>{
-      if(stopped || busy || accountBusy || pending || practiceLocation?.blocked() || !draft || p("confirm").disabled || unresolved)return;
+      if(stopped || busy || accountBusy || pending || (practiceLocation?.blocked() || firstWeekly?.blocked()) || !draft || p("confirm").disabled || unresolved)return;
       const d=draft, context=snapshot();
       const body={command_key:d.command_key,command_id:d.command_id,create_intent_id:d.create_intent_id,
         draft_revision:d.draft_revision,body_digest:d.body_digest,matching_context_digest:d.matching_context_digest,confirmed:true};
@@ -1399,7 +1406,7 @@ try{
     });
     p("recovery-form").addEventListener("submit",async event=>{
       event.preventDefault();
-      if(stopped || busy || accountBusy || pending || practiceLocation?.blocked() || scope===null || !uuid(p("reference").value))return;
+      if(stopped || busy || accountBusy || pending || (practiceLocation?.blocked() || firstWeekly?.blocked()) || scope===null || !uuid(p("reference").value))return;
       const key=p("reference").value,context=snapshot();
       if(unresolved && (unresolved.key!==key || unresolved.practice!==context.practice || unresolved.email!==context.owner.email)){
         status("Use the original creation reference and the same owner account and practice.");return;
@@ -1407,7 +1414,7 @@ try{
       unresolved=unresolved || {key,practice:context.practice,email:context.owner.email,kind:"receipt"};
       clearReview();await perform("receipt",{command_key:key});
     });
-    p("refresh").addEventListener("click",async()=>{if(!busy && !accountBusy && !pending && !practiceLocation?.blocked())try{await state();}catch(_){invalidateOwner();}});
+    p("refresh").addEventListener("click",async()=>{if(!busy && !accountBusy && !pending && !(practiceLocation?.blocked() || firstWeekly?.blocked()))try{await state();}catch(_){invalidateOwner();}});
     p("reference").addEventListener("input",restore);
     for(const id of ["first","last","specialty","distinct"])p(id).addEventListener("input",edit);
     p("box").addEventListener("toggle",()=>{if(!p("box").open && (pending || unresolved))p("box").open=true;});
@@ -1467,14 +1474,14 @@ try{
     function restore(){
       const visible=known;
       p("box").hidden=!visible;
-      const available=visible && scope!==null && !busy && !accountBusy && !pending && !practitioner.blocked();
+      const available=visible && scope!==null && !busy && !accountBusy && !pending && !(practitioner.blocked() || firstWeekly?.blocked());
       p("form").querySelectorAll("input,button").forEach(n=>n.disabled=!available || unresolved!==null);
       if(available && unresolved?.kind==="prepare" && requestPrepare
           && unresolved.practice===scope && unresolved.email===identity?.email)p("prepare").disabled=false;
       p("prepare").textContent=unresolved?.kind==="prepare" ? "Check prepared details" : "Check details";
       p("confirm").disabled=!available || unresolved!==null || !draft || !draft.can_confirm
         || !(Date.now()<Date.parse(draft.expires_at));
-      p("refresh").disabled=!visible || busy || accountBusy || pending || practitioner.blocked();
+      p("refresh").disabled=!visible || busy || accountBusy || pending || (practitioner.blocked() || firstWeekly?.blocked());
       p("reference").disabled=!available;
       p("recover").disabled=!available || !uuid(p("reference").value);
       if(pending || unresolved)p("box").open=true;
@@ -1568,6 +1575,7 @@ try{
     function committed(value,key,context){
       if(!receiptShape(value.receipt,key,context.practice) || !Object.hasOwn(value,"readback")
           || value.readback!==null && !readbackShape(value.readback,value.receipt))throw Error("unavailable");
+      rememberWeeklyCreate("location",key,context.practice,context.owner.email);
       unresolved=null;requestPrepare=null;predecessor=null;clearReview();
       p("reference").value=key;p("recovery").open=true;
       p("created").textContent="Location reference: "+value.receipt.location_id+" · Practice: "+value.receipt.practice_id;
@@ -1608,7 +1616,7 @@ try{
       return value;
     }
     async function perform(action,body){
-      if(busy || accountBusy || pending || practitioner.blocked())return;
+      if(busy || accountBusy || pending || (practitioner.blocked() || firstWeekly?.blocked()))return;
       const context=snapshot();
       pending=true;accountBusyState(true);practitioner.restore();restore();ownerPresentation.busy(true);
       try{
@@ -1634,7 +1642,7 @@ try{
     }
     p("form").addEventListener("submit",async event=>{
       event.preventDefault();
-      if(busy || accountBusy || pending || practitioner.blocked() || scope===null)return;
+      if(busy || accountBusy || pending || (practitioner.blocked() || firstWeekly?.blocked()) || scope===null)return;
       if(unresolved){
         if(unresolved.kind==="prepare" && requestPrepare && unresolved.practice===scope && unresolved.email===identity?.email)
           await perform("prepare",requestPrepare); // Explicit same-key prepared-details check only.
@@ -1651,7 +1659,7 @@ try{
       p("created").hidden=true;clearReview();await perform("prepare",requestPrepare);
     });
     p("confirm").addEventListener("click",async()=>{
-      if(busy || accountBusy || pending || practitioner.blocked() || !draft || p("confirm").disabled || unresolved)return;
+      if(busy || accountBusy || pending || (practitioner.blocked() || firstWeekly?.blocked()) || !draft || p("confirm").disabled || unresolved)return;
       const value=draft,context=snapshot();
       const body={command_key:value.command_key,command_id:value.command_id,create_intent_id:value.create_intent_id,
         draft_revision:value.draft_revision,body_digest:value.body_digest,confirmed:true};
@@ -1660,7 +1668,7 @@ try{
     });
     p("recovery-form").addEventListener("submit",async event=>{
       event.preventDefault();
-      if(busy || accountBusy || pending || practitioner.blocked() || scope===null || !uuid(p("reference").value))return;
+      if(busy || accountBusy || pending || (practitioner.blocked() || firstWeekly?.blocked()) || scope===null || !uuid(p("reference").value))return;
       const key=p("reference").value,context=snapshot();
       if(unresolved && (unresolved.key!==key || unresolved.practice!==context.practice || unresolved.email!==context.owner.email)){
         status("Use the original creation reference and the same owner account and practice.");return;
@@ -1668,14 +1676,200 @@ try{
       unresolved=unresolved || {key,practice:context.practice,email:context.owner.email,kind:"receipt"};
       clearReview();await perform("receipt",{command_key:key});
     });
-    p("refresh").addEventListener("click",async()=>{if(!busy && !accountBusy && !pending && !practitioner.blocked())try{await state();}catch(_){invalidateOwner();}});
+    p("refresh").addEventListener("click",async()=>{if(!busy && !accountBusy && !pending && !(practitioner.blocked() || firstWeekly?.blocked()))try{await state();}catch(_){invalidateOwner();}});
     p("reference").addEventListener("input",restore);
     p("name").addEventListener("input",edit);
     p("box").addEventListener("toggle",()=>{if(!p("box").open && (pending || unresolved))p("box").open=true;});
     restore();
     return {invalidateOwner,presentOwner,restore,blocked:()=>pending};
   })();
-  restorePractitionerAfterAccountBusy = () => {practitioner.restore();practiceLocation.restore();};
+  firstWeekly = (() => {
+    const p = name => el("owner-weekly-" + name);
+    const closed = (v, keys) => v !== null && typeof v === "object" && !Array.isArray(v)
+      && Object.keys(v).length === keys.length && keys.every(k => Object.hasOwn(v,k));
+    const uuid = v => typeof v === "string" && /^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/.test(v);
+    const digest = v => typeof v === "string" && /^[0-9a-f]{64}$/.test(v);
+    const zone = v => typeof v === "string" && /^[A-Za-z0-9._+/-]{1,50}$/.test(v);
+    const instant = v => typeof v === "string" && /^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{6}Z$/.test(v)
+      && Number.isFinite(Date.parse(v));
+    const fields = v => closed(v,["weekday","start_time","end_time","slot_duration_minutes"])
+      && Number.isInteger(v.weekday) && v.weekday>=0 && v.weekday<=6
+      && [v.start_time,v.end_time].every(s=>typeof s==="string" && /^(?:[01][0-9]|2[0-3]):[0-5][0-9]$/.test(s))
+      && v.start_time<v.end_time && Number.isInteger(v.slot_duration_minutes)
+      && v.slot_duration_minutes>=1 && v.slot_duration_minutes<=1440
+      && v.slot_duration_minutes<=minutes(v.end_time)-minutes(v.start_time);
+    const minutes = s => Number(s.slice(0,2))*60+Number(s.slice(3));
+    const days=["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"];
+    let identity=null, ownerTag=null, enabled=false, pending=false, epoch=0;
+    let context=null, draft=null, unresolved=null, timer=null, openLoadTag=null;
+    const status = message => {p("status").textContent=message;};
+    function clearReview(){draft=null;p("review").hidden=true;p("confirm").disabled=true;clearTimeout(timer);timer=null;}
+    function invalidate(dropOwner=true){epoch++;if(dropOwner)identity=null;context=null;clearReview();p("context").textContent="Load details for the practitioner and location you created.";restore();}
+    function refs(){
+      const a=weeklyCreateRefs.practitioner,b=weeklyCreateRefs.location;
+      return identity && a && b && a.ownerTag===ownerTag && b.ownerTag===ownerTag
+        ? {practitioner_create_command_key:a.key,location_create_command_key:b.key} : null;
+    }
+    function available(){return enabled && identity!==null && !busy && !accountBusy && !pending
+      && !practitioner.blocked() && !practiceLocation.blocked();}
+    function restore(){
+      p("box").hidden=!(enabled && identity!==null);
+      const ready=available(), selectors=refs();
+      p("load").disabled=!ready || !selectors || unresolved!==null;
+      p("form").querySelectorAll("input,select,button").forEach(n=>n.disabled=!ready || !context || unresolved!==null);
+      p("confirm").disabled=!ready || !draft || unresolved!==null || !draft.can_confirm || !(Date.now()<Date.parse(draft.expires_at));
+      p("reference").disabled=!ready;
+      p("recover").disabled=!ready || !uuid(p("reference").value);
+      if(unresolved || pending)p("box").open=true;
+    }
+    function presentOwner(value){
+      invalidate();
+      const scope=value?.practitioner_create_scope;
+      const next=value?.phase==="verified" && value.identity?.role==="PracticeOwner"
+        && typeof value.identity.email==="string" && typeof value.identity.practice_name==="string"
+        && closed(scope,["practice_id"]) && uuid(scope.practice_id)
+        ? Object.freeze({email:value.identity.email,practice:scope.practice_id,name:value.identity.practice_name}) : null;
+      const nextTag=next ? JSON.stringify([next.email,next.practice]) : null;
+      if(ownerTag!==nextTag){
+        weeklyCreateRefs.practitioner=null;weeklyCreateRefs.location=null;openLoadTag=null;
+        p("current").textContent="";p("status").textContent="";p("summary").textContent="";p("expiry").textContent="";
+        p("context").textContent="";p("reference").value="";p("recovery").open=false;
+      }
+      identity=next;ownerTag=nextTag;enabled=firstWeeklyFeatureEnabled;
+      p("practice").textContent=next ? next.name : "Check the current owner account.";
+      if(unresolved?.tag===nextTag){p("reference").value=unresolved.key;p("recovery").open=true;status("Check the original working-hours reference under the same owner and practice.");}
+      else if(unresolved){status("Return to the original owner account to check the earlier save.");}
+      restore();
+    }
+    function snapshot(){
+      if(!available() && !pending || !identity || !csrf)throw Error("unavailable");
+      const e=epoch,token=csrf,tag=ownerTag;
+      return {token,tag,current:()=>epoch===e && csrf===token && ownerTag===tag && identity!==null};
+    }
+    async function request(action,body,view){
+      const response=await fetch("/demo/stage1/owner/first-weekly-window/"+action,{
+        method:"POST",credentials:"same-origin",cache:"no-store",redirect:"error",
+        headers:{"Content-Type":"application/json","X-CSRF-Token":view.token},body:JSON.stringify(body)});
+      if(!view.current())throw Error("stale");
+      const value=await practitioner.decode(response,view.current);
+      if(!view.current() || !response.ok)throw Error("unavailable");
+      return value;
+    }
+    function receiptShape(v,key){
+      return closed(v,["command_key","command_id","schedule_id","body_digest","context_digest","committed_at"])
+        && v.command_key===key && uuid(v.command_id) && uuid(v.schedule_id)
+        && digest(v.body_digest) && digest(v.context_digest) && typeof v.committed_at==="string"
+        && v.committed_at.length<=64 && /(?:Z|\+00:00)$/.test(v.committed_at) && Number.isFinite(Date.parse(v.committed_at));
+    }
+    function committed(value,key){
+      if(!closed(value,["state","receipt","readback"]) || value.state!=="committed" || !receiptShape(value.receipt,key))throw Error("unavailable");
+      const rb=value.readback;
+      if(rb!==null){
+        if(!closed(rb,["status","expected","current"]) || !["matches_created","diverged","missing"].includes(rb.status)
+            || !closed(rb.expected,["weekday","start_time","end_time","slot_duration_minutes","practice_timezone"])
+            || !fields({weekday:rb.expected.weekday,start_time:rb.expected.start_time,end_time:rb.expected.end_time,
+              slot_duration_minutes:rb.expected.slot_duration_minutes}) || !zone(rb.expected.practice_timezone))throw Error("unavailable");
+        const c=rb.current;
+        if(rb.status==="missing" ? c!==null : !closed(c,["weekday","start_time","end_time","slot_duration_minutes",
+            "practice_timezone","practitioner_active","location_active"]))throw Error("unavailable");
+        if(c!==null && (!Number.isInteger(c.weekday) || c.weekday<0 || c.weekday>6
+            || [c.start_time,c.end_time].some(s=>typeof s!=="string" || !/^(?:[01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](?:\.[0-9]{1,6})?$/.test(s))
+            || !(c.slot_duration_minutes===null || Number.isInteger(c.slot_duration_minutes) && c.slot_duration_minutes>=1 && c.slot_duration_minutes<=1440)
+            || !(c.practice_timezone===null || typeof c.practice_timezone==="string" && c.practice_timezone.length<=50)
+            || [c.practitioner_active,c.location_active].some(v=>v!==null && typeof v!=="boolean")))throw Error("unavailable");
+        if(c!==null){
+          p("current").textContent="Current: "+days[c.weekday]+" · "+c.start_time+"–"+c.end_time+" · "
+            +(c.slot_duration_minutes===null ? "Appointment spacing unavailable" : c.slot_duration_minutes+" minute spacing")+" · "
+            +(c.practice_timezone===null ? "Timezone unavailable" : c.practice_timezone)
+            +" · Practitioner active: "+String(c.practitioner_active)+" · Location active: "+String(c.location_active);
+        }else p("current").textContent="No current window was found.";
+      }else p("current").textContent="Current details have not been read yet.";
+      unresolved=null;context=null;clearReview();p("reference").value=key;p("recovery").open=true;
+      status(rb===null ? "Weekly window saved. Check its result to read current details."
+        : rb.status==="matches_created" ? "Working hours saved; the current details match."
+        : rb.status==="diverged" ? "The save completed. Current details have changed; review them without creating a replacement."
+        : "The save completed. Its window is now missing; do not create a replacement to resolve this result.");
+    }
+    async function perform(action,body,{focusContext=false}={}){
+      if(!available())return;
+      const view=snapshot();let focusAfterRestore=null;
+      pending=true;restore();practitioner.restore();practiceLocation.restore();ownerPresentation.busy(true);
+      try{
+        const value=await request(action,body,view);
+        if(!view.current())throw Error("stale");
+        if(action==="context"){
+          if(!closed(value,["state","context_ref","practice_timezone","practitioner_create_command_key","location_create_command_key"])
+              || value.state!=="context_ready" || !digest(value.context_ref) || !zone(value.practice_timezone)
+              || value.practitioner_create_command_key!==body.practitioner_create_command_key
+              || value.location_create_command_key!==body.location_create_command_key)throw Error("unavailable");
+          context=Object.freeze(value);
+          p("context").textContent="Practitioner just created · Location just created · "+value.practice_timezone;
+          status("Set working hours for the practitioner and location you created.");
+          if(focusContext)focusAfterRestore=p("weekday");
+        }else if(value.state==="prepared"){
+          const d=value.draft;
+          if(action!=="prepare" || !closed(value,["state","draft"])
+              || !closed(d,["command_key","command_id","body","practice_timezone","body_digest","context_digest","expires_at","can_confirm"])
+              || d.command_key!==body.command_key || !uuid(d.command_id) || !fields(d.body)
+              || !Object.keys(body.body).every(k=>typeof d.body[k]===typeof body.body[k] && d.body[k]===body.body[k]) || d.practice_timezone!==context?.practice_timezone
+              || !digest(d.body_digest) || !digest(d.context_digest) || !instant(d.expires_at) || typeof d.can_confirm!=="boolean")throw Error("unavailable");
+          unresolved=null;draft=Object.freeze(d);p("reference").value=d.command_key;
+          p("summary").textContent=identity.name+" · "+days[d.body.weekday]+" · "+d.body.start_time+"–"+d.body.end_time
+            +" · "+d.body.slot_duration_minutes+" minute spacing · "+d.practice_timezone;
+          p("expiry").textContent="Review expires at "+d.expires_at+" (UTC).";
+          p("review").hidden=false;p("review-title").focus();
+          timer=setTimeout(()=>{if(draft===d){clearReview();status("Review expired. Check fresh details before saving.");restore();}},
+            Math.max(0,Math.min(2147483647,Date.parse(d.expires_at)-Date.now()+1)));
+          status("Review these working hours, then choose Save weekly window.");
+        }else committed(value,body.command_key);
+      }catch(_){
+        const current=view.current();invalidate();
+        if(current)status(action==="context" ? "Current resources are unavailable. Check the owner account and created resource results."
+          : "The result is uncertain. Check this original reference; do not start another save.");
+      }finally{
+        pending=false;ownerPresentation.busy(false);restore();practitioner.restore();practiceLocation.restore();
+        if(view.current() && focusAfterRestore && !focusAfterRestore.disabled)focusAfterRestore.focus();
+      }
+    }
+    function loadContext(focusContext=false){
+      const v=refs();if(available() && v && !unresolved){invalidate(false);perform("context",v,{focusContext});}
+    }
+    p("load").addEventListener("click",()=>loadContext(true));
+    p("form").addEventListener("submit",event=>{
+      event.preventDefault();if(!available() || !context || unresolved || p("weekday").value==="")return;
+      const body={weekday:Number(p("weekday").value),start_time:p("start").value,end_time:p("end").value,
+        slot_duration_minutes:Number(p("grid").value)};
+      if(!fields(body)){status("Choose an end time after the start and an appointment spacing that fits.");return;}
+      const key=crypto.randomUUID();unresolved={key,tag:ownerTag};clearReview();
+      p("reference").value=key;p("recovery").open=true;
+      perform("prepare",{command_key:key,context_ref:context.context_ref,body});
+    });
+    p("confirm").addEventListener("click",()=>{
+      if(!available() || !draft || unresolved || p("confirm").disabled)return;
+      const d=draft;unresolved={key:d.command_key,tag:ownerTag};clearReview();
+      perform("confirm",{command_key:d.command_key,command_id:d.command_id,body_digest:d.body_digest,context_digest:d.context_digest,confirmed:true});
+    });
+    p("recovery-form").addEventListener("submit",event=>{
+      event.preventDefault();if(!available() || !uuid(p("reference").value))return;
+      const key=p("reference").value;
+      if(unresolved && (unresolved.key!==key || unresolved.tag!==ownerTag)){status("Use the same original reference and owner practice.");return;}
+      unresolved=unresolved || {key,tag:ownerTag};clearReview();perform("receipt",{command_key:key});
+    });
+    p("form").querySelectorAll("input,select").forEach(n=>n.addEventListener("input",()=>{
+      clearReview();status(unresolved ? "Check the original result before any new save." : "Details changed. Check details again before saving.");restore();
+    }));
+    p("reference").addEventListener("input",restore);
+    p("box").addEventListener("toggle",()=>{
+      if(!p("box").open){openLoadTag=null;if(pending || unresolved)p("box").open=true;return;}
+      const selected=refs(), tag=selected ? JSON.stringify([ownerTag,selected]) : null;
+      if(available() && selected && !pending && !unresolved && !context && tag!==openLoadTag){
+        openLoadTag=tag;loadContext(false); // One read-only attempt per opening/selection; no polling or write.
+      }
+    });
+    restore();
+    return {presentOwner,invalidate,restore,blocked:()=>pending,refsChanged:()=>{invalidate(false);status("Resource references changed. Check their current facts again.");}};
+  })();
+  restorePractitionerAfterAccountBusy = () => {practitioner.restore();practiceLocation.restore();firstWeekly.restore();};
   function showOwner(value) {
     if (!value || value.enabled !== true || typeof value.csrf !== "string" ||
         !["credentials", "pending", "inspect", "verified"].includes(value.phase)) throw new Error("unavailable");
@@ -1702,25 +1896,27 @@ try{
     }
     practitioner.presentOwner(value);
     practiceLocation.presentOwner(value);
+    firstWeekly.presentOwner(value);
     ownerPresentation.owner(value);
   }
   async function state() {
     const epoch=++ownerViewEpoch, token=csrf;
-    practitioner.invalidateOwner();practiceLocation.invalidateOwner();
+    practitioner.invalidateOwner();practiceLocation.invalidateOwner();firstWeekly.invalidate();
     const current=()=>ownerViewEpoch===epoch && csrf===token;
     try{
       const r = await fetch("/demo/stage1/owner/state", {credentials:"same-origin", cache:"no-store", redirect:"error"});
       if (!current() || !r.ok) throw new Error("unavailable");
       const v = await practitioner.decode(r,current);
       if(!current())throw new Error("stale");
-      if (v.enabled === false) return;
+      firstWeeklyFeatureEnabled=r.headers.get("X-Stage1-First-Weekly-Window")==="enabled";
+      if (v.enabled === false) {firstWeekly.invalidate();return;}
       showOwner(v);
     }catch(error){if(current()){practitioner.invalidateOwner();practiceLocation.invalidateOwner();}throw error;}
   }
   async function post(action, body) {
-    if (busy || practitioner.blocked() || practiceLocation.blocked()) return;
+    if (busy || (practitioner.blocked() || firstWeekly?.blocked()) || practiceLocation.blocked() || firstWeekly?.blocked()) return;
     const epoch=++ownerViewEpoch, token=csrf;
-    practitioner.invalidateOwner(true);practiceLocation.invalidateOwner(true);
+    practitioner.invalidateOwner(true);practiceLocation.invalidateOwner(true);firstWeekly.invalidate();
     const current=()=>ownerViewEpoch===epoch && csrf===token;
     busy = true;
     ownerPresentation.busy(true);
@@ -1731,10 +1927,11 @@ try{
       if (!current() || !r.ok) throw new Error("unavailable");
       const value=await practitioner.decode(r,current);
       if(!current())throw new Error("stale");
+      firstWeeklyFeatureEnabled=r.headers.get("X-Stage1-First-Weekly-Window")==="enabled";
       showOwner(value);
       ownerPresentation.confirmed();
     } catch (_) {
-      practitioner.invalidateOwner();practiceLocation.invalidateOwner();
+      practitioner.invalidateOwner();practiceLocation.invalidateOwner();firstWeekly.invalidate();
       ownerPresentation.attention("The action could not be confirmed. Sign in or inspect the current account before continuing.",true);
       try { await state(); } catch (_) { /* Keep the uncertain action visible. */ }
     } finally {
@@ -1742,7 +1939,7 @@ try{
       el("owner-password").value = "";
       el("owner-onboarding").querySelectorAll("button,input").forEach(n => n.disabled = false);
       busy = false;
-      practitioner.restore();practiceLocation.restore(); // Derive both CREATE states after the generic finalizer.
+      practitioner.restore();practiceLocation.restore();firstWeekly.restore(); // Derive typed controls after the generic finalizer.
       ownerPresentation.busy(false);
     }
   }

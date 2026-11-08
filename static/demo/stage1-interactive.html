@@ -119,6 +119,40 @@
               </form>
             </details>
           </details>
+          <!-- STOPPED/default-off first-window source; no calendar or bookability claim. -->
+          <details id="owner-weekly-box" class="disclosure" hidden>
+            <summary>Working hours</summary>
+            <p class="helper">Set working hours for the practitioner and location you created.</p>
+            <p id="owner-weekly-practice" class="request-context"></p>
+            <p id="owner-weekly-context" class="helper">Open this section to load details for the practitioner and location you created.</p>
+            <button id="owner-weekly-load" class="quiet" type="button" disabled>Refresh details</button>
+            <form id="owner-weekly-form" autocomplete="off">
+              <div class="fields">
+                <label for="owner-weekly-weekday">Day<select id="owner-weekly-weekday" required disabled>
+                  <option value="">Choose a day</option><option value="0">Monday</option><option value="1">Tuesday</option>
+                  <option value="2">Wednesday</option><option value="3">Thursday</option><option value="4">Friday</option>
+                  <option value="5">Saturday</option><option value="6">Sunday</option>
+                </select></label>
+                <label for="owner-weekly-start">Start time<input id="owner-weekly-start" type="time" step="60" required disabled></label>
+                <label for="owner-weekly-end">End time<input id="owner-weekly-end" type="time" step="60" required disabled></label>
+                <label for="owner-weekly-grid">Start appointments every (minutes)<input id="owner-weekly-grid" type="number" min="1" max="1440" step="1" required disabled></label>
+              </div>
+              <button id="owner-weekly-prepare" type="submit" disabled>Check details</button>
+            </form>
+            <section id="owner-weekly-review" class="proposal" hidden aria-labelledby="owner-weekly-review-title">
+              <h3 id="owner-weekly-review-title" tabindex="-1">Save this weekly window?</h3>
+              <p id="owner-weekly-summary" class="proposal-summary"></p><p id="owner-weekly-expiry" class="helper"></p>
+              <button id="owner-weekly-confirm" type="button" disabled>Save weekly window</button>
+            </section>
+            <p id="owner-weekly-status" role="status" aria-live="polite"></p>
+            <p id="owner-weekly-current" class="helper"></p>
+            <details id="owner-weekly-recovery" class="disclosure"><summary>Check an earlier save</summary>
+              <form id="owner-weekly-recovery-form" autocomplete="off">
+                <label for="owner-weekly-reference">Working-hours reference<input id="owner-weekly-reference" maxlength="36" spellcheck="false" disabled></label>
+                <button id="owner-weekly-recover" class="quiet" type="submit" disabled>Check saved result</button>
+              </form>
+            </details>
+          </details>
         </section>        <div id="account-identity" class="request-context" hidden></div>
         <button id="account-invitation-refresh" type="button" hidden>Check for invitation</button>
         <section id="account-invitation" hidden aria-labelledby="account-invitation-title">

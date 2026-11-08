@@ -209,3 +209,95 @@ def read_practice_location_create_receipt(
         return service.receipt(token, command_key)
     except PracticeLocationCreateError as error:
         raise _location_create_error(error) from None
+
+
+# STOPPED/default-off FIRST weekly-window extension. No service is installed here.
+from app.schemas.practitioner_first_weekly_window_command import (
+    ConfirmFirstWeeklyWindow, FirstWeeklyWindowReceipt, FirstWeeklyWindowRecovery,
+    PrepareFirstWeeklyWindow, PrepareFirstWeeklyWindowResult,
+)
+from app.services.practice.practitioner_first_weekly_window_command import (
+    FirstWeeklyWindowError, FirstWeeklyWindowService,
+)
+
+
+def _first_weekly_window_service(request: Request):
+    service = getattr(request.app.state, "practitioner_first_weekly_window_service", None)
+    if type(service) is not FirstWeeklyWindowService:
+        raise HTTPException(status_code=503, detail="FIRST_WEEKLY_WINDOW_UNAVAILABLE",
+                            headers={"Cache-Control": "no-store"})
+    return service
+
+
+def _first_weekly_window_request(request: Request, response: Response):
+    response.headers["Cache-Control"] = "no-store"
+    if request.url.query:
+        raise HTTPException(status_code=400, detail="FIRST_WEEKLY_WINDOW_INVALID",
+                            headers={"Cache-Control": "no-store"})
+
+
+def _first_weekly_window_error(error: FirstWeeklyWindowError):
+    return HTTPException(status_code=error.status_code, detail=error.code,
+                         headers={"Cache-Control": "no-store"})
+
+
+@router.post("/practitioners/first-weekly-window/proposals", response_model=PrepareFirstWeeklyWindowResult,
+             operation_id="preparePractitionerFirstWeeklyWindow")
+def prepare_practitioner_first_weekly_window(
+    body: PrepareFirstWeeklyWindow, request: Request, response: Response,
+    token: str = Depends(oauth2_scheme),
+    service: FirstWeeklyWindowService = Depends(_first_weekly_window_service),
+):
+    _first_weekly_window_request(request, response)
+    try:
+        return service.prepare(token, body)
+    except FirstWeeklyWindowError as error:
+        raise _first_weekly_window_error(error) from None
+
+
+@router.post("/practitioners/first-weekly-window/confirm", response_model=FirstWeeklyWindowReceipt,
+             operation_id="confirmPractitionerFirstWeeklyWindow")
+def confirm_practitioner_first_weekly_window(
+    body: ConfirmFirstWeeklyWindow, request: Request, response: Response,
+    token: str = Depends(oauth2_scheme),
+    service: FirstWeeklyWindowService = Depends(_first_weekly_window_service),
+):
+    _first_weekly_window_request(request, response)
+    try:
+        return service.confirm(token, body)
+    except FirstWeeklyWindowError as error:
+        raise _first_weekly_window_error(error) from None
+
+
+@router.get("/practitioners/first-weekly-window/receipts/{command_key}", response_model=FirstWeeklyWindowRecovery,
+            operation_id="readPractitionerFirstWeeklyWindowReceipt")
+def read_practitioner_first_weekly_window_receipt(
+    command_key: UUID, request: Request, response: Response,
+    token: str = Depends(oauth2_scheme),
+    service: FirstWeeklyWindowService = Depends(_first_weekly_window_service),
+):
+    _first_weekly_window_request(request, response)
+    try:
+        return service.receipt(token, command_key)
+    except FirstWeeklyWindowError as error:
+        raise _first_weekly_window_error(error) from None
+
+
+# Fresh owner-bound projection only; never confirmation or capacity authority.
+from app.schemas.practitioner_first_weekly_window_command import (
+    FirstWeeklyWindowContext, FirstWeeklyWindowContextRequest,
+)
+
+
+@router.post("/practitioners/first-weekly-window/context", response_model=FirstWeeklyWindowContext,
+             operation_id="readPractitionerFirstWeeklyWindowContext")
+def read_practitioner_first_weekly_window_context(
+    body: FirstWeeklyWindowContextRequest, request: Request, response: Response,
+    token: str = Depends(oauth2_scheme),
+    service: FirstWeeklyWindowService = Depends(_first_weekly_window_service),
+):
+    _first_weekly_window_request(request, response)
+    try:
+        return service.context(token, body)
+    except FirstWeeklyWindowError as error:
+        raise _first_weekly_window_error(error) from None

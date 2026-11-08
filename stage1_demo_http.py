@@ -885,6 +885,8 @@ class DemoConfig:
     # STOPPED prospective source: trusted optional binding, no request selection.
     practitioner_create: Any = field(default=None, repr=False)
     practice_location_create: Any = field(default=None, repr=False)
+    first_weekly_window_enabled: bool = False
+    first_weekly_window: Any = field(default=None, repr=False)
     patient_browser: PatientBrowserBinding | None = field(default=None, repr=False)
     staff_booking_context: Any = field(default=None, repr=False)
     selected_account_diary: SelectedAccountDiaryBinding | None = field(default=None, repr=False)
@@ -1246,6 +1248,19 @@ def create_stage1_demo_app(config: DemoConfig) -> tuple[FastAPI, DemoIssuer]:
             # The new bridge remains stopped until separately reviewed adoption.
             practice_location_create_bridge = PracticeLocationCreateBridge(owner, config.practice_location_create)
 
+    first_weekly_window_bridge = None
+    if type(config.first_weekly_window_enabled) is not bool:
+        raise ValueError("FIRST_WEEKLY_WINDOW_FLAG_INVALID")
+    if config.first_weekly_window_enabled or config.first_weekly_window is not None:
+        from stage1_first_weekly_window_browser import (FirstWeeklyWindowBridge, validate_optional_binding as validate_weekly_binding)
+        weekly_binding_enabled = validate_weekly_binding(config.first_weekly_window)
+        if config.first_weekly_window_enabled != weekly_binding_enabled:
+            raise ValueError("FIRST_WEEKLY_WINDOW_FLAG_BINDING_MISMATCH")
+        if weekly_binding_enabled:
+            if owner is None:
+                raise ValueError("FIRST_WEEKLY_WINDOW_REQUIRES_CURRENT_OWNER")
+            first_weekly_window_bridge = FirstWeeklyWindowBridge(owner, config.first_weekly_window)
+
     patient_bridge = None
     if config.patient_browser is not None and config.patient_browser.enabled is True:
         if login is None:
@@ -1374,7 +1389,7 @@ def create_stage1_demo_app(config: DemoConfig) -> tuple[FastAPI, DemoIssuer]:
         staff_booking_install_state = 'closed'
         installed, staff_booking_bridge = staff_booking_bridge, None
         failures = []
-        for controller in (practice_location_create_bridge,practitioner_create_bridge,selected_staff_native_owner,selected_installed,installed,patient_bridge,owner,login):
+        for controller in (first_weekly_window_bridge,practice_location_create_bridge,practitioner_create_bridge,selected_staff_native_owner,selected_installed,installed,patient_bridge,owner,login):
             if controller is not None:
                 try:
                     await controller.close()
@@ -1382,7 +1397,7 @@ def create_stage1_demo_app(config: DemoConfig) -> tuple[FastAPI, DemoIssuer]:
                     failures.append(True)
         if failures:
             raise RuntimeError('PRIVATE_ACCOUNT_CONTROLLER_CLEANUP_UNPROVEN')
-    if (practice_location_create_bridge is not None or practitioner_create_bridge is not None or staff_booking_bridge is not None or patient_bridge is not None or (config.owner_onboarding is not None and config.owner_onboarding.private_owner_current is not None)
+    if (first_weekly_window_bridge is not None or practice_location_create_bridge is not None or practitioner_create_bridge is not None or staff_booking_bridge is not None or patient_bridge is not None or (config.owner_onboarding is not None and config.owner_onboarding.private_owner_current is not None)
             or (config.seeded_login is not None and config.seeded_login.private_recipient_current is not None)):
         app.state.close_private_account_controllers = close_private_account_controllers
 
@@ -1396,7 +1411,10 @@ def create_stage1_demo_app(config: DemoConfig) -> tuple[FastAPI, DemoIssuer]:
             if action == "state" and request.method == "GET" and not request.url.query:
                 return no_store({"enabled": False})
             return no_store({"detail": "Onboarding unavailable."}, 404)
-        return await owner.handle(request, action)
+        response = await owner.handle(request, action)
+        if first_weekly_window_bridge is not None and response.status_code == 200:
+            response.headers["X-Stage1-First-Weekly-Window"] = "enabled"  # Presentation only; never authority.
+        return response
 
     # No CREATE route or public scope is installed with absent/disabled callbacks.
     practitioner_create_paths = frozenset()
@@ -1437,6 +1455,25 @@ def create_stage1_demo_app(config: DemoConfig) -> tuple[FastAPI, DemoIssuer]:
             app.add_api_route("/demo/stage1/owner/locations/" + location_action,
                 make_practice_location_create_route(location_action), methods=["POST"],
                 name="owner_practice_location_create_" + location_action)
+
+    # Default-off, fixed owner routes; no caller-selected backend path or authority.
+    if first_weekly_window_bridge is not None:
+        weekly_paths = frozenset("/demo/stage1/owner/first-weekly-window/" + action
+            for action in ("context", "prepare", "confirm", "receipt"))
+        if any(getattr(route, "path", "") in weekly_paths for route in app.routes):
+            raise ValueError("FIRST_WEEKLY_WINDOW_ROUTE_COLLISION")
+        def make_first_weekly_window_route(action):
+            async def route(request: Request):
+                try:
+                    local(request)
+                except HTTPException:
+                    return no_store({"detail": "Working hours unavailable."}, 404)
+                return await first_weekly_window_bridge.handle(request, action)
+            return route
+        for weekly_action in ("context", "prepare", "confirm", "receipt"):
+            app.add_api_route("/demo/stage1/owner/first-weekly-window/" + weekly_action,
+                make_first_weekly_window_route(weekly_action), methods=["POST"],
+                name="owner_first_weekly_window_" + weekly_action)
 
     # Patient access uses the validated selected-account context, independently
     # of the fixed Bureau staff/mock capability and its fixed booking patient.
