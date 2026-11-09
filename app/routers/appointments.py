@@ -1034,6 +1034,173 @@ def _audit_actor_display(user: Optional[User]) -> tuple[str, Optional[str]]:
     return "Unknown", role
 
 
+class _AppointmentCapacityRefusal(HTTPException):
+    def __init__(self, reason: Literal[
+        "context_unavailable", "invalid_timezone", "ambiguous_calendar",
+        "malformed_calendar", "invalid_local_boundary", "no_current_window",
+        "outside_current_window",
+    ]):
+        super().__init__(
+            status_code=status.HTTP_409_CONFLICT,
+            detail={
+                "code": "appointment_capacity_unavailable",
+                "message": (
+                    "This appointment does not fit the practitioner's current working hours."
+                    if reason == "outside_current_window"
+                    else "Current working hours could not be verified for this appointment."
+                ),
+                "reason": reason,
+            },
+        )
+
+
+def _appointment_capacity_zone(timezone_name: Any) -> ZoneInfo:
+    if not isinstance(timezone_name, str) or not timezone_name:
+        raise _AppointmentCapacityRefusal("invalid_timezone")
+    try:
+        return ZoneInfo(timezone_name)
+    except (ZoneInfoNotFoundError, ValueError):
+        raise _AppointmentCapacityRefusal("invalid_timezone") from None
+
+
+def _read_appointment_capacity_zone(db: Session, practice_id: uuid.UUID) -> ZoneInfo:
+    timezone_name = db.query(Practice.timezone).filter(Practice.id == practice_id).scalar()
+    return _appointment_capacity_zone(timezone_name)
+
+
+def _lock_appointment_capacity_context(
+    db: Session, practice_id: uuid.UUID, practitioner_id: uuid.UUID,
+) -> ZoneInfo:
+    # Match the current weekly writer's practice -> practitioner anchor order.
+    # key_share=True without read=True renders PostgreSQL NO KEY UPDATE.
+    # It is compatible with FK KEY SHARE from earlier command-claim inserts,
+    # but still conflicts with F4 FOR UPDATE and concurrent capacity writers.
+    # These locks remain in the caller's transaction through its existing commit.
+    with db.no_autoflush:
+        practice = db.query(Practice).filter(Practice.id == practice_id).populate_existing().with_for_update(key_share=True).one_or_none()
+        if practice is None:
+            raise _AppointmentCapacityRefusal("context_unavailable")
+        practitioner = db.query(Practitioner).filter(
+            Practitioner.id == practitioner_id,
+            Practitioner.practice_id == practice_id,
+        ).populate_existing().with_for_update(key_share=True).one_or_none()
+        if practitioner is None or practitioner.is_active is not True:
+            raise _AppointmentCapacityRefusal("context_unavailable")
+        return _appointment_capacity_zone(practice.timezone)
+
+
+def _appointment_capacity_wall_instant(wall: datetime, practice_tz: ZoneInfo) -> datetime:
+    # A calendar/projection boundary must denote one real instant, never a gap or fold.
+    instants = set()
+    try:
+        for fold in (0, 1):
+            instant = wall.replace(tzinfo=practice_tz, fold=fold).astimezone(timezone.utc)
+            if instant.astimezone(practice_tz).replace(tzinfo=None) == wall:
+                instants.add(instant)
+    except (OverflowError, ValueError):
+        raise _AppointmentCapacityRefusal("invalid_local_boundary") from None
+    if len(instants) != 1:
+        raise _AppointmentCapacityRefusal("invalid_local_boundary")
+    return instants.pop()
+
+
+def _appointment_capacity_window(
+    target_date: date_type, day_schedule: tuple[time, time, int], practice_tz: ZoneInfo,
+) -> tuple[datetime, datetime]:
+    start_t, end_t, grid = day_schedule
+    if (
+        not isinstance(start_t, time) or not isinstance(end_t, time)
+        or start_t.tzinfo is not None or end_t.tzinfo is not None
+        or start_t >= end_t or type(grid) is not int or grid <= 0
+    ):
+        raise _AppointmentCapacityRefusal("malformed_calendar")
+    try:
+        timedelta(minutes=grid)
+    except OverflowError:
+        raise _AppointmentCapacityRefusal("malformed_calendar") from None
+    start_utc = _appointment_capacity_wall_instant(datetime.combine(target_date, start_t), practice_tz)
+    end_utc = _appointment_capacity_wall_instant(datetime.combine(target_date, end_t), practice_tz)
+    if end_utc <= start_utc:
+        raise _AppointmentCapacityRefusal("malformed_calendar")
+    return start_utc, end_utc
+
+
+def _appointment_capacity_starts(
+    target_date: date_type, day_schedule: tuple[time, time, int],
+) -> list[datetime]:
+    start_t, end_t, grid = day_schedule
+    day_start = datetime.combine(target_date, start_t)
+    day_end = datetime.combine(target_date, end_t)
+    step = timedelta(minutes=grid)
+    # A positive whole-minute grid in one day yields finitely many starts.
+    return [day_start + index * step for index in range((day_end - day_start) // step + 1)]
+
+
+def _appointment_capacity_interval(
+    target_date: date_type,
+    start_time_local: time,
+    duration_minutes: int,
+    day_schedule: tuple[time, time, int],
+    practice_tz: ZoneInfo,
+    canonical_start: Optional[datetime] = None,
+) -> Optional[tuple[datetime, datetime]]:
+    window_start, window_end = _appointment_capacity_window(target_date, day_schedule, practice_tz)
+    start_t, end_t, grid = day_schedule
+    if type(duration_minutes) is not int or duration_minutes <= 0:
+        raise _AppointmentCapacityRefusal("malformed_calendar")
+    if not isinstance(start_time_local, time) or start_time_local.tzinfo is not None:
+        raise _AppointmentCapacityRefusal("invalid_local_boundary")
+    start_wall = datetime.combine(target_date, start_time_local)
+    window_wall = datetime.combine(target_date, start_t)
+    if (
+        start_time_local < start_t or start_time_local >= end_t
+        or (start_wall - window_wall) % timedelta(minutes=grid) != timedelta(0)
+    ):
+        return None
+    if canonical_start is None:
+        start_utc = _appointment_capacity_wall_instant(start_wall, practice_tz)
+    else:
+        # Preserve the existing canonicalizer's naive/fold mapping and signed instant.
+        if (
+            not isinstance(canonical_start, datetime)
+            or canonical_start.tzinfo is None or canonical_start.utcoffset() is None
+        ):
+            raise _AppointmentCapacityRefusal("invalid_local_boundary")
+        start_utc = canonical_start.astimezone(timezone.utc)
+        if start_utc.astimezone(practice_tz).replace(tzinfo=None) != start_wall:
+            return None
+    try:
+        end_utc = start_utc + timedelta(minutes=duration_minutes)
+    except OverflowError:
+        raise _AppointmentCapacityRefusal("malformed_calendar") from None
+    if start_utc < window_start or end_utc > window_end:
+        return None
+    if canonical_start is None:
+        end_wall = end_utc.astimezone(practice_tz).replace(tzinfo=None)
+        if _appointment_capacity_wall_instant(end_wall, practice_tz) != end_utc:
+            raise _AppointmentCapacityRefusal("invalid_local_boundary")
+    return start_utc, end_utc
+
+
+def _require_appointment_capacity(
+    db: Session, practice_id: uuid.UUID, practitioner_id: uuid.UUID,
+    location_id: Optional[uuid.UUID], appointment_date: date_type,
+    start_time_local: time, duration_minutes: int, start_time: datetime,
+    practice_tz: ZoneInfo,
+) -> None:
+    day_schedule = _resolve_day_schedule(
+        db, practitioner_id, appointment_date,
+        practice_id=practice_id, location_id=location_id, practice_tz=practice_tz,
+    )
+    if day_schedule is None:
+        raise _AppointmentCapacityRefusal("no_current_window")
+    if _appointment_capacity_interval(
+        appointment_date, start_time_local, duration_minutes, day_schedule,
+        practice_tz, canonical_start=start_time,
+    ) is None:
+        raise _AppointmentCapacityRefusal("outside_current_window")
+
+
 def _create_appointment_from_body(
     body: AppointmentCreate,
     db: Session,
@@ -1046,7 +1213,7 @@ def _create_appointment_from_body(
 ) -> AppointmentOut:
     practice_id = current_user.practice_id
     booked_by = current_user.id
-    practice_tz = _practice_zoneinfo(db, practice_id)
+    practice_tz = _lock_appointment_capacity_context(db, practice_id, body.practitioner_id)
     values, appointment_date, start_time_local, start_time = _canonical_create_values(body, practice_tz)
 
     temporal_kind = _evaluate_raw_mutation_temporal_guard(
@@ -1071,6 +1238,10 @@ def _create_appointment_from_body(
     _ensure_practitioner(body.practitioner_id, practice_id, db)
     _ensure_appointment_type(body.appointment_type_id, practice_id, db)
     _ensure_location(body.location_id, practice_id, db)
+    _require_appointment_capacity(
+        db, practice_id, body.practitioner_id, body.location_id,
+        appointment_date, start_time_local, values["duration_minutes"], start_time, practice_tz,
+    )
     _raise_if_conflict(
         db,
         practice_id,
@@ -2297,6 +2468,13 @@ def confirm_create_proposal_route(
             audit_evidence=audit_evidence,
             command_id=decision.record.id,
             commit=False,
+        )
+    except _AppointmentCapacityRefusal as exc:
+        db.rollback()
+        return _block_create_confirmation(
+            [_confirm_create_block("appointment_capacity_unavailable", exc.detail["message"])],
+            warnings=[*create_proposal.warnings, *revalidated.warnings],
+            audit_evidence=audit_evidence,
         )
     except HTTPException as exc:
         if exc.status_code != 409 or not isinstance(exc.detail, dict) or exc.detail.get("code") != "appointment_conflict":
@@ -6644,31 +6822,59 @@ def _resolve_day_schedule(
     db: Session,
     practitioner_id: uuid.UUID,
     target_date: date_type,
+    *,
+    practice_id: uuid.UUID,
+    location_id: Optional[uuid.UUID],
+    practice_tz: ZoneInfo,
 ) -> Optional[tuple[time, time, int]]:
-    """Return (start_time, end_time, slot_minutes) for practitioner on target_date.
+    """Resolve one current tenant/location baseline and at most one daily override.
 
-    Returns None when the practitioner has no schedule or an unavailability override.
+    A lone legacy NULL-location baseline remains practitioner-wide. An explicit
+    location never falls through to another location; duplicate eligible rows
+    are ambiguous rather than an instruction to pick the first or widest row.
     """
-    override = db.query(ScheduleOverride).filter(
-        ScheduleOverride.practitioner_id == practitioner_id,
+    location_filter = PractitionerSchedule.location_id.is_(None)
+    if location_id is not None:
+        location_filter = or_(location_filter, PractitionerSchedule.location_id == location_id)
+    schedules = db.query(PractitionerSchedule).join(
+        Practitioner, Practitioner.id == PractitionerSchedule.practitioner_id,
+    ).filter(
+        Practitioner.id == practitioner_id,
+        Practitioner.practice_id == practice_id,
+        Practitioner.is_active == True,
+        PractitionerSchedule.day_of_week == target_date.weekday(),
+        location_filter,
+    ).populate_existing().order_by(PractitionerSchedule.id).limit(2).all()
+    overrides = db.query(ScheduleOverride).join(
+        Practitioner, Practitioner.id == ScheduleOverride.practitioner_id,
+    ).filter(
+        Practitioner.id == practitioner_id,
+        Practitioner.practice_id == practice_id,
+        Practitioner.is_active == True,
         ScheduleOverride.date == target_date,
-    ).first()
-
-    if override and override.is_unavailable:
+    ).populate_existing().order_by(ScheduleOverride.id).limit(2).all()
+    if len(schedules) > 1 or len(overrides) > 1:
+        raise _AppointmentCapacityRefusal("ambiguous_calendar")
+    if not schedules:
+        # An override may modify a weekly baseline; it cannot create one.
         return None
-
-    day_of_week = target_date.weekday()
-    schedule = db.query(PractitionerSchedule).filter(
-        PractitionerSchedule.practitioner_id == practitioner_id,
-        PractitionerSchedule.day_of_week == day_of_week,
-    ).first()
-
-    if not schedule:
-        return None
-
-    start_t = override.override_start if (override and override.override_start) else schedule.start_time
-    end_t = override.override_end if (override and override.override_end) else schedule.end_time
-    return start_t, end_t, schedule.slot_duration_minutes
+    schedule = schedules[0]
+    baseline = (schedule.start_time, schedule.end_time, schedule.slot_duration_minutes)
+    _appointment_capacity_window(target_date, baseline, practice_tz)
+    override = overrides[0] if overrides else None
+    if override is not None:
+        if type(override.is_unavailable) is not bool or any(
+            value is not None and (not isinstance(value, time) or value.tzinfo is not None)
+            for value in (override.override_start, override.override_end)
+        ):
+            raise _AppointmentCapacityRefusal("malformed_calendar")
+        if override.is_unavailable:
+            return None
+    start_t = override.override_start if override is not None and override.override_start is not None else schedule.start_time
+    end_t = override.override_end if override is not None and override.override_end is not None else schedule.end_time
+    resolved = (start_t, end_t, schedule.slot_duration_minutes)
+    _appointment_capacity_window(target_date, resolved, practice_tz)
+    return resolved
 
 
 @router.get("/slots/{practitioner_id}", response_model=list[ScheduleSlot])
@@ -6677,27 +6883,29 @@ def get_available_slots(
     date: datetime = Query(..., description="Date to check (ISO datetime, time is ignored)"),
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
+    location_id: Optional[uuid.UUID] = None,
 ):
-    """Return all time slots for a practitioner on a given date, with availability flag."""
+    """Project slots for an explicit location, or legacy NULL-location hours only."""
     practitioner = db.query(Practitioner).filter(
         Practitioner.id == practitioner_id,
         Practitioner.practice_id == current_user.practice_id,
     ).first()
     if not practitioner:
         raise HTTPException(status_code=404, detail="Practitioner not found")
+    _ensure_location(location_id, current_user.practice_id, db)
 
-    practice_tz = _practice_zoneinfo(db, current_user.practice_id)
+    practice_tz = _read_appointment_capacity_zone(db, current_user.practice_id)
     target_date = _as_practice_local(date, practice_tz).date()
-
-    day_schedule = _resolve_day_schedule(db, practitioner_id, target_date)
+    day_schedule = _resolve_day_schedule(
+        db, practitioner_id, target_date,
+        practice_id=current_user.practice_id, location_id=location_id, practice_tz=practice_tz,
+    )
     if day_schedule is None:
         return []
 
-    start_t, end_t, slot_mins = day_schedule
-    day_start = datetime.combine(target_date, start_t)
-    day_end = datetime.combine(target_date, end_t)
-
-    # Existing appointments that day
+    slot_mins = day_schedule[2]
+    # This existing date-filtered projection is advisory; final creation checks
+    # the current UTC conflict query and database exclusion across locations.
     booked = db.query(Appointment).filter(
         Appointment.practice_id == current_user.practice_id,
         Appointment.practitioner_id == practitioner_id,
@@ -6706,23 +6914,24 @@ def get_available_slots(
     ).all()
 
     slots = []
-    current = day_start
-    while current + timedelta(minutes=slot_mins) <= day_end:
+    for current in _appointment_capacity_starts(target_date, day_schedule):
+        interval = _appointment_capacity_interval(
+            target_date, current.time(), slot_mins, day_schedule, practice_tz,
+        )
+        if interval is None:
+            continue
+        start_utc, end_utc = interval
         available = not any(
-            _overlaps(
-                current,
-                slot_mins,
-                _local_datetime(appt.appointment_date, appt.start_time_local),
-                appt.duration_minutes or 0,
-            )
+            _as_practice_local(appt.start_time, practice_tz).astimezone(timezone.utc) < end_utc
+            and _as_practice_local(appt.start_time, practice_tz).astimezone(timezone.utc)
+                + timedelta(minutes=appt.duration_minutes) > start_utc
             for appt in booked
         )
         slots.append(ScheduleSlot(
             start_time=current,
-            end_time=current + timedelta(minutes=slot_mins),
+            end_time=end_utc.astimezone(practice_tz).replace(tzinfo=None),
             available=available,
         ))
-        current += timedelta(minutes=slot_mins)
 
     return slots
 
@@ -6790,34 +6999,36 @@ def _build_slot_search_proposal(
             blocks=blocks,
         )
 
-    practice_tz = _practice_zoneinfo(db, practice_id)
+    practice_tz = _read_appointment_capacity_zone(db, practice_id)
     candidates: list[SlotCandidate] = []
     unscheduled_dates: list[date_type] = []
     current_date = body.date_from
 
     while current_date <= effective_to and len(candidates) < body.limit:
-        day_schedule = _resolve_day_schedule(db, body.practitioner_id, current_date)
+        day_schedule = _resolve_day_schedule(
+            db, body.practitioner_id, current_date,
+            practice_id=practice_id, location_id=body.location_id, practice_tz=practice_tz,
+        )
         if day_schedule is None:
             unscheduled_dates.append(current_date)
             current_date += timedelta(days=1)
             continue
 
-        sched_start, sched_end, slot_mins = day_schedule
-        day_start = datetime.combine(current_date, sched_start)
-        day_end = datetime.combine(current_date, sched_end)
-
-        slot_start = day_start
-        while slot_start + timedelta(minutes=resolved_duration) <= day_end:
+        for slot_start in _appointment_capacity_starts(current_date, day_schedule):
             slot_time_local = slot_start.time()
+            interval = _appointment_capacity_interval(
+                current_date, slot_time_local, resolved_duration, day_schedule, practice_tz,
+            )
+            if interval is None:
+                continue
+            start_utc, end_utc = interval
 
             # Apply optional time-of-day window
             if exact_time:
                 if slot_time_local != body.earliest_time:
-                    slot_start += timedelta(minutes=slot_mins)
                     continue
             else:
                 if body.earliest_time is not None and slot_time_local < body.earliest_time:
-                    slot_start += timedelta(minutes=slot_mins)
                     continue
                 if body.latest_time is not None and slot_time_local >= body.latest_time:
                     break
@@ -6830,6 +7041,7 @@ def _build_slot_search_proposal(
                 slot_time_local,
                 resolved_duration,
                 location_id=body.location_id,
+                start_time=start_utc,
             )
 
             if conflict is None:
@@ -6852,10 +7064,6 @@ def _build_slot_search_proposal(
                     for label in break_labels
                 ]
 
-                slot_end_local = slot_start + timedelta(minutes=resolved_duration)
-                start_utc = _utc_from_local(current_date, slot_time_local, practice_tz)
-                end_utc = start_utc + timedelta(minutes=resolved_duration)
-
                 candidates.append(SlotCandidate(
                     appointment_date=current_date,
                     start_time=start_utc,
@@ -6867,8 +7075,6 @@ def _build_slot_search_proposal(
 
                 if len(candidates) >= body.limit:
                     break
-
-            slot_start += timedelta(minutes=slot_mins)
 
         current_date += timedelta(days=1)
 
@@ -9435,6 +9641,13 @@ def confirm_bernie_create_proposal(
             command_id=decision.record.id,
             bernie_session_id=confirmation_session_id,
             commit=False,
+        )
+    except _AppointmentCapacityRefusal as exc:
+        db.rollback()
+        return _block_bernie_create_confirmation(
+            [_confirm_create_block("appointment_capacity_unavailable", exc.detail["message"])],
+            warnings=[*selection.warnings, *revalidated.warnings],
+            audit_evidence=audit_evidence,
         )
     except HTTPException as exc:
         if exc.status_code != 409 or not isinstance(exc.detail, dict) or exc.detail.get("code") != "appointment_conflict":
