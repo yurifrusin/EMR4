@@ -16286,6 +16286,8 @@ G4_POINT_MOVE_FIVE_ROOT = G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT / "bureau-point-move
 
 
 def _g4_owner_bootstrap_descriptor(schema, *, scope=False):
+    if schema == (G4_APPOINTMENT_CREATE_CAPACITY_SCOPE_SCHEMA if scope else G4_APPOINTMENT_CREATE_CAPACITY_SCHEMA):
+        return G4_APPOINTMENT_CREATE_CAPACITY_DESCRIPTOR
     if schema == (G4_FIRST_WEEKLY_WINDOW_SCOPE_SCHEMA if scope else G4_FIRST_WEEKLY_WINDOW_SCHEMA):
         return G4_FIRST_WEEKLY_WINDOW_DESCRIPTOR
     if schema == (G4_PRACTICE_LOCATION_CREATE_SCOPE_SCHEMA if scope else G4_PRACTICE_LOCATION_CREATE_SCHEMA):
@@ -16414,6 +16416,8 @@ def _g4_owner_staff_invitation_external_inputs(read, q):
 
 
 def _is_g4_owner_bootstrap_binding(binding):
+    if type(binding) is dict and binding.get("schema_version")==G4_APPOINTMENT_CREATE_CAPACITY_SCHEMA:
+        return True
     if type(binding) is dict and binding.get("schema_version")==G4_FIRST_WEEKLY_WINDOW_SCHEMA:
         return True
     if type(binding) is dict and binding.get("schema_version")==G4_PRACTICE_LOCATION_CREATE_SCHEMA:
@@ -16434,6 +16438,26 @@ def _g4_owner_bootstrap_paths(kind, binding):
           and type(binding.get("repair_sha256")) is dict,
           "bounded_g4_owner_bootstrap_binding_kind")
     descriptor = _g4_owner_bootstrap_descriptor(binding["schema_version"])
+    if descriptor["version"] == 37:
+        _need(descriptor["base"]==G4_APPOINTMENT_CREATE_CAPACITY_BASE
+              and descriptor["root"]==G4_APPOINTMENT_CREATE_CAPACITY_ROOT
+              and descriptor["control"]==G4_APPOINTMENT_CREATE_CAPACITY_CONTROL
+              and descriptor["preimages"]==G4_APPOINTMENT_CREATE_CAPACITY_PREIMAGES
+              and descriptor["product_rows"]==G4_APPOINTMENT_CREATE_CAPACITY_PRODUCT_ROWS
+              and descriptor["product_sha"]=={p:r["sha256"] for p,r in G4_APPOINTMENT_CREATE_CAPACITY_PRODUCT_ROWS.items()}
+              and descriptor["product_bytes"]=={p:r["bytes"] for p,r in G4_APPOINTMENT_CREATE_CAPACITY_PRODUCT_ROWS.items()}
+              and descriptor["before_sha"]==G4_APPOINTMENT_CREATE_CAPACITY_BEFORE_SHA
+              and descriptor["apply_paths"]==G4_APPOINTMENT_CREATE_CAPACITY_PRODUCT_PATHS
+              and frozenset(descriptor["product_sha"])==G4_APPOINTMENT_CREATE_CAPACITY_PRODUCT_PATHS
+              and G4_APPOINTMENT_CREATE_CAPACITY_PRODUCT_PATHS==G4_APPOINTMENT_CREATE_CAPACITY_ADD_PATHS|G4_APPOINTMENT_CREATE_CAPACITY_REPLACE_PATHS
+              and not G4_APPOINTMENT_CREATE_CAPACITY_ADD_PATHS&G4_APPOINTMENT_CREATE_CAPACITY_REPLACE_PATHS
+              and len(G4_APPOINTMENT_CREATE_CAPACITY_ADD_PATHS)==len(G4_APPOINTMENT_CREATE_CAPACITY_REPLACE_PATHS)==1
+              and frozenset(p for p,v in descriptor["before_sha"].items() if v is None)==G4_APPOINTMENT_CREATE_CAPACITY_ADD_PATHS
+              and all(descriptor["before_sha"][p]!=descriptor["product_sha"][p] for p in G4_APPOINTMENT_CREATE_CAPACITY_PRODUCT_PATHS)
+              and descriptor["vector"]=={k:G4_APPOINTMENT_CREATE_CAPACITY_DOC_ROWS["vector"][k] for k in ("path","sha256")}
+              and descriptor["mapping"]=={k:G4_APPOINTMENT_CREATE_CAPACITY_DOC_ROWS["mapping"][k] for k in ("path","sha256")}
+              and descriptor["excluded_reviewers"]==G4_APPOINTMENT_CREATE_CAPACITY_EXCLUDED_REVIEWERS,
+              "bounded_g4_appointment_create_capacity_path_boundary")
     if descriptor["version"] == 36:
         _need(descriptor["base"]==G4_FIRST_WEEKLY_WINDOW_BASE
               and descriptor["root"]==G4_FIRST_WEEKLY_WINDOW_ROOT
@@ -16584,6 +16608,8 @@ def _g4_owner_bootstrap_require_entrypoint(q, entrypoint, phase):
 
 def _g4_owner_bootstrap_external_inputs(read, q):
     d=_g4_owner_bootstrap_descriptor(q.get("schema_version"))
+    if d["version"] == 37:
+        return _g4_appointment_create_capacity_external_inputs(read, q)
     if d["version"] == 36:
         return _g4_first_weekly_window_external_inputs(read, q)
     if d["version"] == 35:
@@ -18353,4 +18379,167 @@ def _g4_first_weekly_window_external_inputs(read, q):
           and mapping["reused_opinions"]["ui_v2"]["review"]==G4_FIRST_WEEKLY_WINDOW_DOC_ROWS["ui_review"]
           and mapping["reused_opinions"]["prior_ui_v1_negative_preserved"]==G4_FIRST_WEEKLY_WINDOW_DOC_ROWS["ui_v1_negative"],
           "bounded_g4_first_weekly_window_independent_mapping")
+    return vector,mapping
+
+
+# Exact two-product CREATE-capacity successor. Historical v16/v36 stays intact.
+G4_APPOINTMENT_CREATE_CAPACITY_SCHEMA = "ariadne.g4_stage1_owner_bootstrap_operation_binding.v17"
+G4_APPOINTMENT_CREATE_CAPACITY_SCOPE_SCHEMA = "ariadne.g4_stage1_successor_entry_scope.v37"
+G4_APPOINTMENT_CREATE_CAPACITY_ROOT = G4_STAGE1_SUCCESSOR_EVIDENCE_ROOT / "appointment-create-capacity-v1"
+G4_APPOINTMENT_CREATE_CAPACITY_BASE = json.loads("{\"commit\":\"0b3e1597057c10391a00afb5d0309614899067db\",\"tree\":\"538de30d9992b2e863fbf30f0f86f56a83efb9da\"}")
+G4_APPOINTMENT_CREATE_CAPACITY_TARGET = json.loads("\"C:/Users/there/EMR4-tools/practitioner-first-weekly-window-product-prepare01-target\"")
+G4_APPOINTMENT_CREATE_CAPACITY_AUTHORITY_ROOT = json.loads("\"C:/Users/there/EMR4-tools/g4-stage1-ci-maintenance-workflow-actual-v1\"")
+G4_APPOINTMENT_CREATE_CAPACITY_CONTROL = frozenset(json.loads("[\"orchestration/programme/g4-stage1-successor-entry-scope.json\",\"orchestration_harness/bounded_g1b.py\",\"tests/test_g4_stage1_successor_entry.py\"]"))
+G4_APPOINTMENT_CREATE_CAPACITY_PREIMAGES = json.loads("{\"orchestration_harness/bounded_g1b.py\":\"701825935500a1a90f7f480d842b9bf114a1be02fb2b731ec3f2156318254d85\",\"tests/test_g4_stage1_successor_entry.py\":\"c15f033c03ef92b27c85e7fd84078397b94ff4e3c163d63f28fd1df1ba9b61f9\",\"orchestration/programme/g4-stage1-successor-entry-scope.json\":\"6968e7347eeb996a8dbe7c62d7fcc26fde3b2155aafa0109b749635c1683987b\"}")
+G4_APPOINTMENT_CREATE_CAPACITY_ORDERED_PATHS = tuple(json.loads("[\"app/routers/appointments.py\",\"tests/test_appointment_create_capacity.py\"]"))
+G4_APPOINTMENT_CREATE_CAPACITY_PRODUCT_PATHS = frozenset(G4_APPOINTMENT_CREATE_CAPACITY_ORDERED_PATHS)
+G4_APPOINTMENT_CREATE_CAPACITY_ADD_PATHS = frozenset(json.loads("[\"tests/test_appointment_create_capacity.py\"]"))
+G4_APPOINTMENT_CREATE_CAPACITY_REPLACE_PATHS = frozenset(json.loads("[\"app/routers/appointments.py\"]"))
+G4_APPOINTMENT_CREATE_CAPACITY_PRODUCT_ROWS = json.loads("{\"app/routers/appointments.py\":{\"path\":\"C:/Users/there/EMR4-tools/practitioner-created-resource-bookability-source-preparation-v1/appointments-create-capacity.SOURCE-v2.py\",\"bytes\":422644,\"sha256\":\"18aa3ac5c39a59ec10acc7437854932c6dfb315dcce69e7cc12bee3ce3db8760\"},\"tests/test_appointment_create_capacity.py\":{\"path\":\"C:/Users/there/EMR4-tools/practitioner-created-resource-bookability-source-preparation-v1/test_appointment_create_capacity.SOURCE-v1.py\",\"bytes\":12431,\"sha256\":\"9eb04e1f8733dfbff6adf134682b3dc2828beb5dd5077355f7c203a6008a27e5\"}}")
+G4_APPOINTMENT_CREATE_CAPACITY_BEFORE_ROWS = json.loads("{\"app/routers/appointments.py\":{\"path\":\"C:/Users/there/EMR4-tools/practitioner-first-weekly-window-control-enable01-source/app/routers/appointments.py\",\"bytes\":411851,\"sha256\":\"2c7589b0b1508dbb16f084ed0f0234b24535698365fc8152dc447973af728497\"}}")
+G4_APPOINTMENT_CREATE_CAPACITY_BEFORE_SHA = json.loads("{\"app/routers/appointments.py\":\"2c7589b0b1508dbb16f084ed0f0234b24535698365fc8152dc447973af728497\",\"tests/test_appointment_create_capacity.py\":null}")
+G4_APPOINTMENT_CREATE_CAPACITY_DOC_ROWS = json.loads("{\"vector\":{\"path\":\"C:/Users/there/EMR4-tools/appointment-create-capacity-control-stopped-source-v1/product-source-vector.SOURCE-v1.json\",\"bytes\":6170,\"sha256\":\"a33914019ebf1ce7354a6ddb094629f1c1577320b148e1484a3a8150b3018ff3\"},\"inverse\":{\"path\":\"C:/Users/there/EMR4-tools/appointment-create-capacity-control-stopped-source-v1/product-source-inverse.SOURCE-v1.json\",\"bytes\":2129,\"sha256\":\"6f80deafd9374f1d094862a5998bda8fe467c317463434939d90f77a777333fd\"},\"hunks\":{\"path\":\"C:/Users/there/EMR4-tools/practitioner-created-resource-bookability-source-preparation-v1/appointments-create-capacity-hunks.SOURCE-v2.json\",\"bytes\":47010,\"sha256\":\"8a2e0511a9268218725b9020b6e8afbde5395248570f8b0fb1beff65fedabdbf\"},\"mapping\":{\"path\":\"C:/Users/there/EMR4-tools/appointment-create-capacity-control-stopped-source-v1/independent-product-source-mapping-review.SOURCE-v1.json\",\"bytes\":3604,\"sha256\":\"bc52ed32423051e51079a4b9c4f55930500a42e7ef5c8e45bb14847fa7d4e151\"}}")
+G4_APPOINTMENT_CREATE_CAPACITY_EXPECTED_DOCS = json.loads("{\"vector\":{\"schema_version\":\"emr4.appointment_create_capacity.product_source_vector.v1\",\"status\":\"STOPPED_INERT_SOURCE_CANDIDATE\",\"source_only\":true,\"source_accepted\":false,\"execution_authorized\":false,\"product_writes_authorized\":false,\"author_agent\":\"/root/enable_preparer_actual_semantic_review_sol_xhigh\",\"selected_base\":{\"commit\":\"0b3e1597057c10391a00afb5d0309614899067db\",\"tree\":\"538de30d9992b2e863fbf30f0f86f56a83efb9da\"},\"canonical_mapping_target\":\"C:/Users/there/EMR4-tools/practitioner-first-weekly-window-product-prepare01-target\",\"state_and_gates_authority_root\":\"C:/Users/there/EMR4-tools/g4-stage1-ci-maintenance-workflow-actual-v1\",\"ordered_owned_paths\":[\"app/routers/appointments.py\",\"tests/test_appointment_create_capacity.py\"],\"changes\":[{\"relative_path\":\"app/routers/appointments.py\",\"canonical_path\":\"C:/Users/there/EMR4-tools/practitioner-first-weekly-window-product-prepare01-target/app/routers/appointments.py\",\"operation\":\"REPLACE\",\"selected_preimage\":{\"path\":\"C:/Users/there/EMR4-tools/practitioner-first-weekly-window-product-prepare01-target/app/routers/appointments.py\",\"bytes\":411851,\"sha256\":\"2c7589b0b1508dbb16f084ed0f0234b24535698365fc8152dc447973af728497\"},\"before\":{\"path\":\"C:/Users/there/EMR4-tools/practitioner-first-weekly-window-control-enable01-source/app/routers/appointments.py\",\"bytes\":411851,\"sha256\":\"2c7589b0b1508dbb16f084ed0f0234b24535698365fc8152dc447973af728497\"},\"after\":{\"path\":\"C:/Users/there/EMR4-tools/practitioner-created-resource-bookability-source-preparation-v1/appointments-create-capacity.SOURCE-v2.py\",\"bytes\":422644,\"sha256\":\"18aa3ac5c39a59ec10acc7437854932c6dfb315dcce69e7cc12bee3ce3db8760\"},\"author_agent\":\"/root/enable_preparer_actual_semantic_review_sol_xhigh\"},{\"relative_path\":\"tests/test_appointment_create_capacity.py\",\"canonical_path\":\"C:/Users/there/EMR4-tools/practitioner-first-weekly-window-product-prepare01-target/tests/test_appointment_create_capacity.py\",\"operation\":\"ADD\",\"selected_preimage\":null,\"before\":null,\"after\":{\"path\":\"C:/Users/there/EMR4-tools/practitioner-created-resource-bookability-source-preparation-v1/test_appointment_create_capacity.SOURCE-v1.py\",\"bytes\":12431,\"sha256\":\"9eb04e1f8733dfbff6adf134682b3dc2828beb5dd5077355f7c203a6008a27e5\"},\"author_agent\":\"/root/weekly_f4_profile_independent_review\"}],\"raw_inverse\":{\"path\":\"C:/Users/there/EMR4-tools/appointment-create-capacity-control-stopped-source-v1/product-source-inverse.SOURCE-v1.json\",\"bytes\":2129,\"sha256\":\"6f80deafd9374f1d094862a5998bda8fe467c317463434939d90f77a777333fd\"},\"source_inputs\":[{\"path\":\"C:/Users/there/EMR4-tools/practitioner-created-resource-bookability-source-preparation-v1/appointments-create-capacity-hunks.SOURCE-v2.json\",\"bytes\":47010,\"sha256\":\"8a2e0511a9268218725b9020b6e8afbde5395248570f8b0fb1beff65fedabdbf\"}],\"committed_membership\":{\"selected_base\":{\"commit\":\"0b3e1597057c10391a00afb5d0309614899067db\",\"tree\":\"538de30d9992b2e863fbf30f0f86f56a83efb9da\"},\"selected_paths\":[\"app/routers/appointments.py\",\"tests/test_appointment_create_capacity.py\",\"orchestration_harness/bounded_g1b.py\",\"orchestration/programme/g4-stage1-successor-entry-scope.json\",\"tests/test_g4_stage1_successor_entry.py\"],\"stdout\":{\"bytes\":378,\"sha256\":\"81873d926fb3393801402e7c4e14ef72da3ee52bd36af4f9cf5b64a0f86762af\",\"raw_hex\":\"31303036343420626c6f622035646230343135373230663437303530633862663335393965366530346437313863383935663963096170702f726f75746572732f6170706f696e746d656e74732e70790031303036343420626c6f622064613930613330323234646161373464386534343832616261626339643433303664343336366637096f726368657374726174696f6e2f70726f6772616d6d652f67342d7374616765312d737563636573736f722d656e7472792d73636f70652e6a736f6e0031303036343420626c6f622038346161316234366566356634343464363236353637623233646634303531656134383234363262096f726368657374726174696f6e5f6861726e6573732f626f756e6465645f6731622e70790031303036343420626c6f6220633236656362383064353034356134356530386165306530363938613465616333383636383432620974657374732f746573745f67345f7374616765315f737563636573736f725f656e7472792e707900\"},\"records\":[{\"relative_path\":\"app/routers/appointments.py\",\"git_blob_oid\":\"5db0415720f47050c8bf3599e6e04d718c895f9c\"},{\"relative_path\":\"orchestration/programme/g4-stage1-successor-entry-scope.json\",\"git_blob_oid\":\"da90a30224daa74d8e4482ababc9d4306d4366f7\"},{\"relative_path\":\"orchestration_harness/bounded_g1b.py\",\"git_blob_oid\":\"84aa1b46ef5f444d626567b23df4051ea482462b\"},{\"relative_path\":\"tests/test_g4_stage1_successor_entry.py\",\"git_blob_oid\":\"c26ecb80d5045a45e08ae0e0698a4eac3866842b\"}],\"absent_paths\":[\"tests/test_appointment_create_capacity.py\"],\"qualification\":\"One actual selected immutable-commit membership observation with root acceptance and independent accepted readback. The original stdout is preserved; no observation/opinion file is invented. Not a current HEAD/index/ref lease or permission for effects.\"},\"claim_limits\":[\"Exactly the three existing shared CREATE callers and location-specific slot projections; no general move/update/revocation or production calendar-writer certification.\",\"Existing v16/v36 first-weekly-window baseline remains unchanged; it is not replayed as eight new APPLY paths.\",\"The seven selected math methods were accepted separately with limited scope; no SQL dialect, DB concurrency, rollback/replay or actual CREATE integration proof is represented by this source vector.\",\"No app/DB/browser/provider/runtime/admission/publication authority is inferred.\"]},\"inverse\":{\"schema_version\":\"emr4.appointment_create_capacity.raw_inverse.v1\",\"source_only\":true,\"execution_authorized\":false,\"selected_base\":{\"commit\":\"0b3e1597057c10391a00afb5d0309614899067db\",\"tree\":\"538de30d9992b2e863fbf30f0f86f56a83efb9da\"},\"changes\":[{\"relative_path\":\"app/routers/appointments.py\",\"operation\":\"REPLACE\",\"before\":{\"path\":\"C:/Users/there/EMR4-tools/practitioner-first-weekly-window-control-enable01-source/app/routers/appointments.py\",\"bytes\":411851,\"sha256\":\"2c7589b0b1508dbb16f084ed0f0234b24535698365fc8152dc447973af728497\"},\"after\":{\"path\":\"C:/Users/there/EMR4-tools/practitioner-created-resource-bookability-source-preparation-v1/appointments-create-capacity.SOURCE-v2.py\",\"bytes\":422644,\"sha256\":\"18aa3ac5c39a59ec10acc7437854932c6dfb315dcce69e7cc12bee3ce3db8760\"},\"literal_recipe\":{\"path\":\"C:/Users/there/EMR4-tools/practitioner-created-resource-bookability-source-preparation-v1/appointments-create-capacity-hunks.SOURCE-v2.json\",\"bytes\":47010,\"sha256\":\"8a2e0511a9268218725b9020b6e8afbde5395248570f8b0fb1beff65fedabdbf\"},\"groups\":15,\"occurrences\":15,\"whole_forward_inverse_equal\":true,\"unchanged_gap_bytes\":405473},{\"relative_path\":\"tests/test_appointment_create_capacity.py\",\"operation\":\"ADD\",\"before\":null,\"after\":{\"path\":\"C:/Users/there/EMR4-tools/practitioner-created-resource-bookability-source-preparation-v1/test_appointment_create_capacity.SOURCE-v1.py\",\"bytes\":12431,\"sha256\":\"9eb04e1f8733dfbff6adf134682b3dc2828beb5dd5077355f7c203a6008a27e5\"},\"inverse_disposition\":\"Restore the committed selected-path absence only for this exact new file; this document authorizes no delete or other filesystem effect.\"}],\"qualification\":\"Raw source inverse metadata only. Product application/recovery, parser/test/DB/runtime/Git/authority remain closed pending their separate exact bindings.\"},\"mapping\":{\"schema_version\":\"emr4.appointment_create_capacity.independent_source_mapping_review.v1\",\"status\":\"PASS_SOURCE_ONLY\",\"verdict\":\"PASS_CANONICAL2_SOURCE_MAPPING_ONLY_QUALIFIED\",\"reviewer_agent\":\"/root/weekly_control_source_independent_review\",\"independent\":true,\"implementation_authorship\":false,\"blocking_findings\":[],\"source_only\":true,\"source_mapping_accepted\":true,\"reviewed_vector\":{\"path\":\"C:/Users/there/EMR4-tools/appointment-create-capacity-control-stopped-source-v1/product-source-vector.SOURCE-v1.json\",\"bytes\":6170,\"sha256\":\"a33914019ebf1ce7354a6ddb094629f1c1577320b148e1484a3a8150b3018ff3\"},\"raw_inverse\":{\"path\":\"C:/Users/there/EMR4-tools/appointment-create-capacity-control-stopped-source-v1/product-source-inverse.SOURCE-v1.json\",\"bytes\":2129,\"sha256\":\"6f80deafd9374f1d094862a5998bda8fe467c317463434939d90f77a777333fd\"},\"source_base\":{\"commit\":\"0b3e1597057c10391a00afb5d0309614899067db\",\"tree\":\"538de30d9992b2e863fbf30f0f86f56a83efb9da\"},\"canonical_mapping_target\":\"C:/Users/there/EMR4-tools/practitioner-first-weekly-window-product-prepare01-target\",\"reviewed_sources\":[{\"relative_path\":\"app/routers/appointments.py\",\"operation\":\"REPLACE\",\"bytes\":422644,\"sha256\":\"18aa3ac5c39a59ec10acc7437854932c6dfb315dcce69e7cc12bee3ce3db8760\"},{\"relative_path\":\"tests/test_appointment_create_capacity.py\",\"operation\":\"ADD\",\"bytes\":12431,\"sha256\":\"9eb04e1f8733dfbff6adf134682b3dc2828beb5dd5077355f7c203a6008a27e5\"}],\"authority\":{\"independent_source_mapping_accepted\":true,\"source_only\":true,\"product_accepted\":false,\"controller_accepted\":false,\"admission_accepted\":false,\"publication_accepted\":false,\"provisioning_accepted\":false,\"runtime_accepted\":false,\"product_writes_authorized\":false,\"controller_writes_authorized\":false,\"admission_transition_authorized\":false,\"publication_authorized\":false,\"provisioning_authorized\":false,\"execution_authorized\":false,\"runtime_authorized\":false},\"review_basis\":{\"literal_recipe\":{\"path\":\"C:/Users/there/EMR4-tools/practitioner-created-resource-bookability-source-preparation-v1/appointments-create-capacity-hunks.SOURCE-v2.json\",\"bytes\":47010,\"sha256\":\"8a2e0511a9268218725b9020b6e8afbde5395248570f8b0fb1beff65fedabdbf\"},\"physical_hunks\":15,\"whole_forward_inverse_equal\":true,\"unchanged_gap_bytes\":405473,\"actual_canonical_router_preimage_equal\":true,\"committed_membership_stdout\":{\"bytes\":378,\"sha256\":\"81873d926fb3393801402e7c4e14ef72da3ee52bd36af4f9cf5b64a0f86762af\"},\"accepted_math_original_result\":{\"attempt_id\":\"appointment-create-capacity-selected-math01\",\"bytes\":2172,\"sha256\":\"2f1123becbe5b4c0b62753f2697da8fa9bdfa7e89b99b13e6a2b92a663d68613\",\"test_methods_passed\":7},\"accepted_membership_original_result\":{\"attempt_id\":\"appointment-create-capacity-selected-committed-membership01\",\"bytes\":1001,\"sha256\":\"5ddbad0c9c64414a5e6b72429a1ceb293a5a2319aefa67a2dff97fa627d3d3db\"}},\"qualifications\":[\"Source mapping only. The original stopped SOURCE records remain unchanged; this opinion grants no product, controller, admission, publication, provisioning, execution or runtime authority.\",\"The test ADD is established at the bound immutable commit. No current HEAD/index/ref lease or live-worktree absence is claimed; future effects retain their applicable exact checks.\",\"Seven math methods exercised six selected definitions with HTTP/status doubles. SQL dialect, real DB concurrency, different-key claim/F4 serialization, rollback/replay and actual CREATE integration remain unverified.\",\"Actual-created-resource UI/bookability binding remains pending. No M1, general move/update/revocation, global calendar-writer or complete availability claim is made.\"]}}")
+G4_APPOINTMENT_CREATE_CAPACITY_MEMBERSHIP_PATHS = tuple(json.loads("[\"app/routers/appointments.py\",\"tests/test_appointment_create_capacity.py\",\"orchestration_harness/bounded_g1b.py\",\"orchestration/programme/g4-stage1-successor-entry-scope.json\",\"tests/test_g4_stage1_successor_entry.py\"]"))
+G4_APPOINTMENT_CREATE_CAPACITY_MEMBERSHIP_OIDS = json.loads("{\"app/routers/appointments.py\":\"5db0415720f47050c8bf3599e6e04d718c895f9c\",\"orchestration/programme/g4-stage1-successor-entry-scope.json\":\"da90a30224daa74d8e4482ababc9d4306d4366f7\",\"orchestration_harness/bounded_g1b.py\":\"84aa1b46ef5f444d626567b23df4051ea482462b\",\"tests/test_g4_stage1_successor_entry.py\":\"c26ecb80d5045a45e08ae0e0698a4eac3866842b\"}")
+G4_APPOINTMENT_CREATE_CAPACITY_MEMBERSHIP_RAW = bytes.fromhex("31303036343420626c6f622035646230343135373230663437303530633862663335393965366530346437313863383935663963096170702f726f75746572732f6170706f696e746d656e74732e70790031303036343420626c6f622064613930613330323234646161373464386534343832616261626339643433303664343336366637096f726368657374726174696f6e2f70726f6772616d6d652f67342d7374616765312d737563636573736f722d656e7472792d73636f70652e6a736f6e0031303036343420626c6f622038346161316234366566356634343464363236353637623233646634303531656134383234363262096f726368657374726174696f6e5f6861726e6573732f626f756e6465645f6731622e70790031303036343420626c6f6220633236656362383064353034356134356530386165306530363938613465616333383636383432620974657374732f746573745f67345f7374616765315f737563636573736f725f656e7472792e707900")
+G4_APPOINTMENT_CREATE_CAPACITY_EXCLUDED_REVIEWERS = frozenset(json.loads("[\"\",\"/root\",\"/root/enable_preparer_actual_semantic_review_sol_xhigh\",\"/root/weekly_f4_profile_independent_review\"]"))
+G4_APPOINTMENT_CREATE_CAPACITY_DESCRIPTOR = {
+    "version":37,"scope_schema":G4_APPOINTMENT_CREATE_CAPACITY_SCOPE_SCHEMA,
+    "base":G4_APPOINTMENT_CREATE_CAPACITY_BASE,"root":G4_APPOINTMENT_CREATE_CAPACITY_ROOT,
+    "control":G4_APPOINTMENT_CREATE_CAPACITY_CONTROL,"preimages":G4_APPOINTMENT_CREATE_CAPACITY_PREIMAGES,
+    "apply_paths":G4_APPOINTMENT_CREATE_CAPACITY_PRODUCT_PATHS,"product_rows":G4_APPOINTMENT_CREATE_CAPACITY_PRODUCT_ROWS,
+    "product_sha":{p:r["sha256"] for p,r in G4_APPOINTMENT_CREATE_CAPACITY_PRODUCT_ROWS.items()},
+    "product_bytes":{p:r["bytes"] for p,r in G4_APPOINTMENT_CREATE_CAPACITY_PRODUCT_ROWS.items()},
+    "before_sha":G4_APPOINTMENT_CREATE_CAPACITY_BEFORE_SHA,
+    "vector":{k:G4_APPOINTMENT_CREATE_CAPACITY_DOC_ROWS["vector"][k] for k in ("path","sha256")},
+    "mapping":{k:G4_APPOINTMENT_CREATE_CAPACITY_DOC_ROWS["mapping"][k] for k in ("path","sha256")},
+    "excluded_reviewers":G4_APPOINTMENT_CREATE_CAPACITY_EXCLUDED_REVIEWERS,
+    "limits":("ENABLE exactly3 existing controls; ADMIT zero delta; APPLY exactly2 products:1ADD1REPLACE",
+        "accepted 0b3e/538de provenance and selected membership are not a fresh HEAD/index/ref lease",
+        "CREATE capacity and location slot projections only; preserved weekly v16/v36 is not replayed",
+        "seven selected math methods do not prove SQL/DB/claim/F4/replay or actual created-resource bookability",
+        "source mapping grants no product, runtime, provider, publication, provisioning or protected effect authority"),
+}
+
+
+def _g4_appointment_create_capacity_external_inputs(read, q):
+    d=_g4_owner_bootstrap_descriptor(q.get("schema_version"))
+    _need(d["version"]==37 and q["product_vector"]==d["vector"] and q["mapping_review"]==d["mapping"],
+          "bounded_g4_appointment_create_capacity_external_pins")
+    rows=list(G4_APPOINTMENT_CREATE_CAPACITY_DOC_ROWS.items())
+    rows += [("before:"+p,r) for p,r in sorted(G4_APPOINTMENT_CREATE_CAPACITY_BEFORE_ROWS.items())]
+    rows += [("after:"+p,r) for p,r in sorted(d["product_rows"].items())]
+    _need(set(G4_APPOINTMENT_CREATE_CAPACITY_DOC_ROWS)=={"vector","inverse","hunks","mapping"}
+          and len({r["path"] for _,r in rows})==len(rows),
+          "bounded_g4_appointment_create_capacity_external_closure")
+    loaded={}
+    for key,row in rows:
+        _keys(row,{"path","bytes","sha256"},"bounded_g4_appointment_create_capacity_external_row")
+        _need(type(row["path"]) is str and Path(row["path"]).is_absolute()
+              and type(row["bytes"]) is int and row["bytes"]>0
+              and type(row["sha256"]) is str and re.fullmatch(r"[0-9a-f]{64}",row["sha256"]),
+              "bounded_g4_appointment_create_capacity_external_row")
+        raw=read(Path(row["path"]),row["sha256"])
+        _need(type(raw) is bytes and len(raw)==row["bytes"] and _sha(raw)==row["sha256"],
+              "bounded_g4_appointment_create_capacity_external_source")
+        loaded[key]=raw
+    docs={key:_json(loaded[key]) for key in G4_APPOINTMENT_CREATE_CAPACITY_DOC_ROWS}
+    vector=docs["vector"]; inverse=docs["inverse"]; hunks=docs["hunks"]; mapping=docs["mapping"]
+    _need(all(docs[key]==G4_APPOINTMENT_CREATE_CAPACITY_EXPECTED_DOCS[key] for key in ("vector","inverse"))
+          and vector.get("schema_version")=="emr4.appointment_create_capacity.product_source_vector.v1"
+          and vector.get("status")=="STOPPED_INERT_SOURCE_CANDIDATE"
+          and vector.get("source_only") is True and vector.get("source_accepted") is False
+          and vector.get("execution_authorized") is False and vector.get("product_writes_authorized") is False
+          and vector["selected_base"]==d["base"]
+          and vector["canonical_mapping_target"]==G4_APPOINTMENT_CREATE_CAPACITY_TARGET
+          and vector["state_and_gates_authority_root"]==G4_APPOINTMENT_CREATE_CAPACITY_AUTHORITY_ROOT
+          and tuple(vector["ordered_owned_paths"])==G4_APPOINTMENT_CREATE_CAPACITY_ORDERED_PATHS
+          and tuple(r["relative_path"] for r in vector["changes"])==G4_APPOINTMENT_CREATE_CAPACITY_ORDERED_PATHS
+          and vector["source_inputs"]==[G4_APPOINTMENT_CREATE_CAPACITY_DOC_ROWS["hunks"]]
+          and vector["raw_inverse"]==G4_APPOINTMENT_CREATE_CAPACITY_DOC_ROWS["inverse"],
+          "bounded_g4_appointment_create_capacity_external_vector")
+    for row in vector["changes"]:
+        p=row["relative_path"]; before=G4_APPOINTMENT_CREATE_CAPACITY_BEFORE_ROWS.get(p)
+        _need(row["canonical_path"]==G4_APPOINTMENT_CREATE_CAPACITY_TARGET+"/"+p
+              and row["after"]==d["product_rows"][p] and row["before"]==before
+              and row["operation"]==("ADD" if p in G4_APPOINTMENT_CREATE_CAPACITY_ADD_PATHS else "REPLACE")
+              and row["selected_preimage"]==(None if before is None else {
+                  "path":G4_APPOINTMENT_CREATE_CAPACITY_TARGET+"/"+p,
+                  "bytes":before["bytes"],"sha256":before["sha256"]}),
+              "bounded_g4_appointment_create_capacity_product_mapping")
+    membership=vector["committed_membership"]
+    raw_membership=bytes.fromhex(membership["stdout"]["raw_hex"])
+    _need(membership["selected_base"]==d["base"]
+          and tuple(membership["selected_paths"])==G4_APPOINTMENT_CREATE_CAPACITY_MEMBERSHIP_PATHS
+          and raw_membership==G4_APPOINTMENT_CREATE_CAPACITY_MEMBERSHIP_RAW
+          and len(raw_membership)==membership["stdout"]["bytes"]
+          and _sha(raw_membership)==membership["stdout"]["sha256"]
+          and raw_membership.endswith(b"\0"),
+          "bounded_g4_appointment_create_capacity_committed_membership")
+    observed={}
+    for record in raw_membership.split(b"\0")[:-1]:
+        match=re.fullmatch(rb"100644 blob ([0-9a-f]{40})\t([A-Za-z0-9_.-]+(?:/[A-Za-z0-9_.-]+)*)",record)
+        _need(match is not None,"bounded_g4_appointment_create_capacity_committed_membership")
+        p=match.group(2).decode("ascii")
+        _need(p in G4_APPOINTMENT_CREATE_CAPACITY_MEMBERSHIP_PATHS and p not in observed,
+              "bounded_g4_appointment_create_capacity_committed_membership")
+        observed[p]=match.group(1).decode("ascii")
+    _need(observed==G4_APPOINTMENT_CREATE_CAPACITY_MEMBERSHIP_OIDS
+          and membership["records"]==[{"relative_path":p,"git_blob_oid":oid} for p,oid in observed.items()]
+          and set(G4_APPOINTMENT_CREATE_CAPACITY_MEMBERSHIP_PATHS)-set(observed)==G4_APPOINTMENT_CREATE_CAPACITY_ADD_PATHS
+          and membership["absent_paths"]==sorted(G4_APPOINTMENT_CREATE_CAPACITY_ADD_PATHS),
+          "bounded_g4_appointment_create_capacity_committed_membership")
+    p="app/routers/appointments.py"; before=loaded["before:"+p]; after=loaded["after:"+p]
+    _need(hashlib.sha1(b"blob "+str(len(before)).encode("ascii")+b"\0"+before).hexdigest()==observed[p],
+          "bounded_g4_appointment_create_capacity_committed_blob")
+    _need(inverse.get("schema_version")=="emr4.appointment_create_capacity.raw_inverse.v1"
+          and inverse.get("source_only") is True and inverse.get("execution_authorized") is False
+          and inverse["selected_base"]==d["base"]
+          and inverse["changes"][0]["before"]==G4_APPOINTMENT_CREATE_CAPACITY_BEFORE_ROWS[p]
+          and inverse["changes"][0]["after"]==d["product_rows"][p]
+          and inverse["changes"][0]["literal_recipe"]==G4_APPOINTMENT_CREATE_CAPACITY_DOC_ROWS["hunks"]
+          and inverse["changes"][1]["operation"]=="ADD" and inverse["changes"][1]["before"] is None
+          and inverse["changes"][1]["after"]==d["product_rows"]["tests/test_appointment_create_capacity.py"],
+          "bounded_g4_appointment_create_capacity_product_mapping")
+    _need(hunks.get("source_only") is True and hunks.get("source_accepted") is False
+          and hunks.get("product_applied") is False and hunks.get("target_parsed_or_executed") is False
+          and hunks["base"]["path"]==G4_APPOINTMENT_CREATE_CAPACITY_BEFORE_ROWS[p]["path"]
+          and hunks["base"]["bytes"]==len(before) and hunks["base"]["sha256"]==_sha(before)
+          and hunks["after"]=={"relative_path":p,"bytes":len(after),"sha256":_sha(after)}
+          and type(hunks["literal_hunks"]) is list and len(hunks["literal_hunks"])==15,
+          "bounded_g4_appointment_create_capacity_raw_inverse")
+    current=before; pairs=[]
+    for edit in hunks["literal_hunks"]:
+        old=edit["before"].encode("utf-8"); new=edit["after"].encode("utf-8")
+        _need(type(edit["occurrences"]) is int and edit["occurrences"]==1
+              and old and new and current.count(old)==1,
+              "bounded_g4_appointment_create_capacity_raw_inverse")
+        current=current.replace(old,new); pairs.append((old,new))
+    _need(current==after,"bounded_g4_appointment_create_capacity_raw_inverse")
+    for old,new in reversed(pairs):
+        _need(current.count(new)==1,"bounded_g4_appointment_create_capacity_raw_inverse")
+        current=current.replace(new,old)
+    _need(current==before,"bounded_g4_appointment_create_capacity_raw_inverse")
+    authority=mapping.get("authority",{})
+    _need(mapping==G4_APPOINTMENT_CREATE_CAPACITY_EXPECTED_DOCS["mapping"]
+          and mapping.get("schema_version")=="emr4.appointment_create_capacity.independent_source_mapping_review.v1"
+          and mapping.get("status")=="PASS_SOURCE_ONLY"
+          and mapping.get("verdict")=="PASS_CANONICAL2_SOURCE_MAPPING_ONLY_QUALIFIED"
+          and mapping.get("independent") is True and mapping.get("implementation_authorship") is False
+          and type(mapping.get("reviewer_agent")) is str and mapping["reviewer_agent"] not in d["excluded_reviewers"]
+          and mapping.get("source_only") is True and mapping.get("source_mapping_accepted") is True
+          and mapping.get("blocking_findings")==[]
+          and mapping.get("reviewed_vector")==G4_APPOINTMENT_CREATE_CAPACITY_DOC_ROWS["vector"]
+          and mapping.get("raw_inverse")==G4_APPOINTMENT_CREATE_CAPACITY_DOC_ROWS["inverse"]
+          and mapping.get("source_base")==d["base"]
+          and mapping.get("canonical_mapping_target")==G4_APPOINTMENT_CREATE_CAPACITY_TARGET
+          and mapping.get("reviewed_sources")==[{"relative_path":r["relative_path"],"operation":r["operation"],
+              "bytes":r["after"]["bytes"],"sha256":r["after"]["sha256"]} for r in vector["changes"]]
+          and authority.get("independent_source_mapping_accepted") is True and authority.get("source_only") is True
+          and all(authority.get(key) is False for key in ("product_accepted","controller_accepted","admission_accepted",
+              "publication_accepted","provisioning_accepted","runtime_accepted","product_writes_authorized",
+              "controller_writes_authorized","admission_transition_authorized","publication_authorized",
+              "provisioning_authorized","execution_authorized","runtime_authorized")),
+          "bounded_g4_appointment_create_capacity_independent_mapping")
     return vector,mapping
